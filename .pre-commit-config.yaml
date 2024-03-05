@@ -52,6 +52,7 @@ repos:
         description: "Mypy is an optional static type checker for Python."
         args:
           ["--strict", "--ignore-missing-imports", "--allow-untyped-decorators"]
+        exclude: "tests"
         stages:
           - "push"
 
@@ -65,5 +66,6 @@ repos:
         language_version: python3
         types: [python]
         require_serial: true
+        exclude: "tests"
         stages:
           - "push"
