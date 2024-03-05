@@ -1,4 +1,4 @@
-name: Python CI
+name: CICD
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
 
     strategy:
