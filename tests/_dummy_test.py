@@ -1,4 +1,4 @@
-from wws._dummy import dummy_function
+from woningwaardering._dummy import dummy_function
 
 
 def test_dummy_function():
