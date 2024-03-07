@@ -71,14 +71,14 @@ Elke testfunctie in deze class moet starten met `test`, gevolgd door de naam van
 
 Stel dat de functionaliteiten van `woningwaardering/stelsels/zelfstandig/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py` getest moeten worden, dan is het pad naar het bijbehorende testbestand `tests/stelsels/zelfstandig/oppervlakte_van_vertrekken/test_oppervlakte_van_vertrekken.py`.
 In `test_oppervlakte_van_vertrekken.py` worden testfuncties en/of testobjecten geschreven met bijbehorende naamconventies.
-Hieronder is de functienaamconventie weergegeven voor het testen van een losse functie:
+Hieronder is de functienaamconventie en python code weergegeven voor het testen van een losse functie:
 
 ```python
 def test_losse_functie() -> None:
     assert losse_functie() == True
 ```
 
-Als er een class getest wordt, zoals class `OppervlakteVanVertrekken`, dan is de test-class opzet als volgt:
+Als er een class getest wordt, bijvoorbeeld `OppervlakteVanVertrekken`, dan is de test-class opzet als volgt:
 
 ```python
 class TestOppervlakteVanVertrekken:
