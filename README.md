@@ -30,8 +30,17 @@ Op basis van de peildatum wordt voor de bovenste beleids regel gekozen omdat die
 ![Voorbeeld modulare oppervlakte van vertrekken](./docs/afbeeldingen/oppervlakte_van_vertrekken.png)
 
 ### Refenrentie Data
-Onder refenrentie worden variabelen of tabellen verstaand die nodig zijn in het bereken van van een groep score.
-De referentie data  
+Onder referentie data worden constanten, variabelen en tabellen verstaand die nodig zijn in het berekenen van een score.
+In de package wordt csv gebruikt als bestandtype voor het opslaan van referentie data.
+De keuze op csv is gevallen omdat referentie data soms bestaat uit meerdere data rijen.
+Daarnaast, in de package wordt een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variable te selecteren.
+Hierdoor heeft een variabele altijd een peildatum nodig en zal deze ook geregistreed moeten worden.
+Het gevolg hiervan is dat er altijd een peildatum kolom onstaat in het csv bestand.
+Aan te raden is voor vscode gebruikers om de extentie Excel Viewer van GrapeCity te downloaden.
+Doormiddel van deze extentie kunnen csv-bestanden als tabel weergegeven worden in vscode.
+Hieronder is een voorbeeld tabel te zien zoals deze met excel viewer in vscode wordt weergegeven.
+
+![Excel Viewer](./docs/afbeeldingen/excel_viewer.png)
 
 ## Contributing
 ### Setup
