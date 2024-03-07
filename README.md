@@ -1,51 +1,93 @@
-# woningwaardering
+# Woningwaardering
 
-De `woningwaardering` package is een opensource package met daarin functionaliteiten voor het berekenen van een woningwaardering op basis van het gepubliceerde woningwaarderingstelsel door de Nederlandse huurcomissie.
+De `woningwaardering`-package is een opensource-pakket met functionaliteiten voor het berekenen van een woningwaardering op basis van het gepubliceerde woningwaarderingstelsel door de Nederlandse Huurcommissie.
 Dit project is een initiatief van Woonstad Rotterdam.
 
 ## Implementatie Beleidsboek Huurcommissie
-Voor het berekenen van een woningwaardering worden de [beleidsboeken van de Nederlande Huurcommisie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) voor de waarderingstelsels voor zelfstandige en onzelfstandige woningen gevolgd.
-De beleidsboeken van de huurcommissie Nederland volgen Nederlandse wet en regelgeving zoals beschreven in [Artikel 14 van het "Besluit huurprijzen woonruimte"](https://wetten.overheid.nl/BWBR0003237/2024-01-01#Artikel14).
+Voor het berekenen van een woningwaardering worden de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) voor de waarderingstelsels voor zelfstandige en onzelfstandige woningen gevolgd.
+De beleidsboeken van de Huurcommissie Nederland volgen Nederlandse wet- en regelgeving zoals beschreven in [Artikel 14 van het "Besluit huurprijzen woonruimte"](https://wetten.overheid.nl/BWBR0003237/2024-01-01#Artikel14).
 
-Om berekening te maken met betrekking tot een woningwaardering wordt het gepubliceerde beleid vertaald naar python code. 
-Een woningwaardering wordt gemaakt op basis van woning elementen.
-De groepen waarop gescored wordt, zijn vastgelegd in het [woningwaarderingstelgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP) op www.coraveraonline.nl.
-Deze worden aangehouden in de opzet van de `woningwaardering` package.
-Voor elke groep wordt een apart python object gemaakt met de een naam die overeenkomt met [woningwaarderingstelgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
-Elk groep-object zal mee veranderen met nieuw gepubliceerde wet en regelgeving, welke opgenomen is in de [beleidsboeken van de Nederlande Huurcommisie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken).
+Om berekeningen te maken met betrekking tot een woningwaardering wordt het gepubliceerde beleid vertaald naar Python-code. 
+Een woningwaardering wordt gemaakt op basis van woningelementen.
+De stelselgroepen waarop gescoord wordt, zijn vastgelegd in het [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP) op www.coraveraonline.nl.
+Deze worden aangehouden in de opzet van de `woningwaardering`-package.
+Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
+Elk stelselgroep-object zal mee veranderen met nieuw gepubliceerde wet- en regelgeving, die is opgenomen in de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken).
 
-### CORA Naamconventie groep-object
-elk beleids onderdeel eigen class -> naming
+## Opzet woningwaardering
+### Repository-structuur
+ 
+De repository-structuur is ingedeeld volgens de [referentiedata van stelselgroepen van de VERA-standaard](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP); eerst de stelsels (bijvoorbeeld *zelfstandig*, *onzelfstandig*) en vervolgens de stelselgroepen (bijvoorbeeld *Energieprestatie*, *Wasgelegenheid*).
+Referentiedata:WONINGWAARDERINGSTELSELGROEP - CORA VERA online, Woningcorporatie Referentiearchitectuur. 
+In de folders van de stelselgroepen bevindt zich de code voor het berekenen van de punten per stelselgroep.
 
-## Opzet woningwaardering package
-Het design van de `woningwaardering` package is zo gekozen dat groep-objecten en bijbehorende regels modular zijn.
-Dit houdt in dat regels in een groep-object vervangbaar en inwisselbaar zijn met als resultaat dat op basis van de geven input de woningwaardering berekend wordt met de juiste set aan groep-objecten en bijbehorende regels.
-Ook wanneer een wet verandert met ingang op een bepaalde datum.
-De `woningwaardering` package selecteert op basis van een peildatum de juiste set aan regels die voglens de Nederlandse wet gelden voor de desbetreffende peildatum.
-Hieronder is het modulaire prinicipe op basis van een peildatum schematisch weergegeven voor de het groep-object `OppervlakteVanVertrekken`.
-Voor de duidelijkheid, onderstaand voorbeeld is niet gebaseerd op een echte verandering in het beleidshandboek.
-Onderstaand voorbeeld laat zien hoe de berekening van de `OppervlakteVanVertrekken` afhangt van de peildatum.
-Op basis van de peildatum wordt voor de bovenste beleids regel gekozen omdat die berekening geldig is voor de gegeven peildatum.
+### Design
+Het design van de `woningwaardering`-package is zo gekozen dat stelselgroep-objecten en bijbehorende regels modulair zijn.
+Dit houdt in dat regels in een stelselgroep-object vervangbaar en inwisselbaar zijn, met als resultaat dat op basis van de gegeven input de woningwaardering berekend wordt met de juiste set aan stelselgroep-objecten en bijbehorende regels.
+Ook wanneer een wet verandert met ingang op een bepaalde datum zorgt de modulariteit ervoor dat de juiste regels worden gebruikt voor de stelselgroep.
+De `woningwaardering`-package selecteert op basis van een peildatum de juiste set aan regels die volgens de Nederlandse wet gelden voor de desbetreffende peildatum.
+Hieronder is het modulaire principe op basis van een peildatum schematisch weergegeven voor het stelselgroep-object `OppervlakteVanVertrekken`.
+Voor de duidelijkheid: Onderstaand voorbeeld is niet gebaseerd op een echte verandering in het beleidshandboek.
+Het voorbeeld laat zien hoe de berekening van de `OppervlakteVanVertrekken` afhangt van de peildatum.
+Op basis van de peildatum wordt voor de bovenste beleidsregel gekozen omdat die berekening geldig is voor de opgegeven peildatum.
 
-![Voorbeeld modulare oppervlakte van vertrekken](./docs/afbeeldingen/oppervlakte_van_vertrekken.png)
+![Voorbeeld modulaire oppervlakte van vertrekken](./docs/afbeeldingen/oppervlakte_van_vertrekken.png)
 
-### Refenrentie Data
-Onder referentie data worden constanten, variabelen en tabellen verstaand die nodig zijn in het berekenen van een score.
-In de package wordt csv gebruikt als bestandtype voor het opslaan van referentie data.
-De keuze op csv is gevallen omdat referentie data soms bestaat uit meerdere data rijen.
-Daarnaast, in de package wordt een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variable te selecteren.
-Hierdoor heeft een variabele altijd een peildatum nodig en zal deze ook geregistreed moeten worden.
-Het gevolg hiervan is dat er altijd een peildatum kolom onstaat in het csv bestand.
-Aan te raden is voor vscode gebruikers om de extentie Excel Viewer van GrapeCity te downloaden.
-Doormiddel van deze extentie kunnen csv-bestanden als tabel weergegeven worden in vscode.
-Hieronder is een voorbeeld tabel te zien zoals deze met excel viewer in vscode wordt weergegeven.
+### Referentie Data
+Onder referentiedata worden constanten, variabelen en tabellen verstaan die nodig zijn in het berekenen van een score.
+In de package wordt CSV gebruikt als bestandstype voor het opslaan van referentiedata.
+De keuze voor CSV is gevallen omdat referentiedata soms bestaat uit meerdere datarijen.
+Daarnaast wordt in de package een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele te selecteren.
+Hierdoor heeft een variabele altijd een peildatum nodig en zal deze ook geregistreerd moeten worden.
+Het gevolg hiervan is dat er altijd een peildatumkolom ontstaat in het CSV-bestand.
+Aan te raden is voor VSCode-gebruikers om de extensie Excel Viewer van GrapeCity te downloaden.
+Met behulp van deze extensie kunnen CSV-bestanden als tabel weergegeven worden in VSCode.
+Hieronder is een voorbeeldtabel te zien zoals deze met Excel Viewer in VSCode wordt weergegeven.
 
 ![Excel Viewer](./docs/afbeeldingen/excel_viewer.png)
 
 ## Contributing
+
 ### Setup
-Hoe kan je contributen
+Hoe je kunt bijdragen aan deze package \<to do\>
 
 ### Testing
-framework: pytest
-test naam conventies
+Voor het testen van code wordt het [pytest framework](https://docs.pytest.org/en/8.0.x/index.html) gebruikt. Meer informatie is te vinden over het framework.
+Passende tests worden altijd met de nieuw geschreven code opgeleverd.
+Er zijn verschillende "test-scopes" te bedenken, zoals het testen van details en specifieke functies.
+Daarnaast is het testen van een hele keten of stelselgroep-object ook vereist.
+Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
+
+#### Conventies voor Tests
+Tests worden toegevoegd aan de `tests`-folder in de root van de repository.
+Voor de structuur in de `tests`-folder wordt dezelfde structuur aangehouden als die in de `woningwaardering`-folder.
+De naam van het bestand waarin de tests staan geschreven is `test_<file_name>.py`.
+Wanneer er een class getest wordt, wordt er een `class Test<class_naam>` aangemaakt met daarin testfuncties.
+Elke testfunctie in deze class moet starten met `test`, gevolgd door de naam van de functie die getest wordt uit de desbetreffende class, bijvoorbeeld `def test_<functie_naam>()`.
+`test` is voor pytest een indicator om de functie te herkennen als een testfunctie.
+
+Stel dat de functionaliteiten van `woningwaardering/stelsels/zelfstandig/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py` getest moeten worden, dan is het pad naar het bijbehorende testbestand `tests/stelsels/zelfstandig/oppervlakte_van_vertrekken/test_oppervlakte_van_vertrekken.py`.
+In `test_oppervlakte_van_vertrekken.py` worden testfuncties en/of testobjecten geschreven met bijbehorende naamconventies.
+Hieronder is de functienaamconventie weergegeven voor het testen van een losse functie:
+
+```python
+def test_losse_functie() -> None:
+    assert losse_functie() == True
+```
+
+Als er een class getest wordt, zoals class `TestOppervlakteVanVertrekken`, dan is de opzet als volgt:
+
+```python
+class TestOppervlakteVanVertrekken:
+
+    @classmethod
+    def setup_class(cls):
+        # initieer de class
+        cls.test_object = OppervlakteVanVertrekken()
+
+    def test_functie_een(self):
+        assert self.test_object.functie_een() == 1
+
+    def test_functie_twee(self):
+        assert self.test_object.functie_twee() == 2
+```
