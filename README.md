@@ -35,16 +35,19 @@ Op basis van de peildatum wordt voor de bovenste beleidsregel gekozen omdat die 
 
 ### Referentie Data
 Onder referentiedata worden constanten, variabelen en tabellen verstaan die nodig zijn in het berekenen van een score.
-In de package wordt CSV gebruikt als bestandstype voor het opslaan van referentiedata.
-De keuze voor CSV is gevallen omdat referentiedata soms bestaat uit meerdere datarijen.
-Daarnaast wordt in de package een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele te selecteren.
-Hierdoor heeft een variabele altijd een peildatum nodig en zal deze ook geregistreerd moeten worden.
-Het gevolg hiervan is dat er altijd een peildatumkolom ontstaat in het CSV-bestand.
-Aan te raden is voor VSCode-gebruikers om de extensie Excel Viewer van GrapeCity te downloaden.
+In de `woningwaardering` package wordt CSV gebruikt als bestandstype voor het opslaan van referentiedata.
+De keuze is op CSV gevallen omdat referentiedata soms bestaat uit meerdere datarijen waardoor dit vaak minder leesbaar wordt wanneer dit bijvoorbeeld in json of yaml wordt opgeslagen.
+Voor VSCode-gebruikers is de extensie Excel Viewer van GrapeCity aan te raden.
 Met behulp van deze extensie kunnen CSV-bestanden als tabel weergegeven worden in VSCode.
 Hieronder is een voorbeeldtabel te zien zoals deze met Excel Viewer in VSCode wordt weergegeven.
 
 ![Excel Viewer](./docs/afbeeldingen/excel_viewer.png)
+
+Daarnaast wordt in de `woningwaardering`-package een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele of uit een tabel te selecteren.
+Hierdoor heeft een variabele altijd een peildatum nodig en zal deze ook geregistreerd moeten worden.
+Het gevolg hiervan is dat er altijd een peildatumkolom ontstaat in het CSV-bestand.
+Door gebruik van CSV bestanden, wordt het selecteren van de juiste rij of waarde doormiddel van een peildatum vergemakkelijkt.
+
 
 ## Contributing
 
