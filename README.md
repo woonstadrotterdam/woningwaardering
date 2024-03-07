@@ -75,7 +75,7 @@ def test_losse_functie() -> None:
     assert losse_functie() == True
 ```
 
-Als er een class getest wordt, zoals class `TestOppervlakteVanVertrekken`, dan is de opzet als volgt:
+Als er een class getest wordt, zoals class `OppervlakteVanVertrekken`, dan is de test-class opzet als volgt:
 
 ```python
 class TestOppervlakteVanVertrekken:
