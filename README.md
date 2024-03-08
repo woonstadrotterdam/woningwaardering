@@ -97,3 +97,4 @@ class TestOppervlakteVanVertrekken:
     def test_functie_twee(self):
         assert self.test_object.functie_twee() == 2
 ```
+
