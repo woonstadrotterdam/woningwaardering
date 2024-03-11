@@ -6,10 +6,11 @@ Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ont
 Voor vragen kunt u contact opnemen met de Product Owner van Team Microservices [Wouter Kolbeek](mailto:wouter.kolbeek@woonstadrotterdam.nl) of één van de maintainers van deze repo.
 
 ## Implementatie Beleidsboek Huurcommissie
+
 Voor het berekenen van een woningwaardering worden de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) voor de waarderingstelsels voor zelfstandige en onzelfstandige woningen gevolgd.
 De beleidsboeken van de Huurcommissie Nederland volgen Nederlandse wet- en regelgeving zoals beschreven in [Artikel 14 van het "Besluit huurprijzen woonruimte"](https://wetten.overheid.nl/BWBR0003237/2024-01-01#Artikel14).
 
-Om berekeningen te maken met betrekking tot een woningwaardering wordt het gepubliceerde beleid vertaald naar Python-code. 
+Om berekeningen te maken met betrekking tot een woningwaardering wordt het gepubliceerde beleid vertaald naar Python-code.
 Een woningwaardering wordt gemaakt op basis van woningelementen.
 De stelselgroepen waarop gescoord wordt, zijn vastgelegd in het [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP) op www.coraveraonline.nl.
 Deze worden aangehouden in de opzet van de `woningwaardering`-package.
@@ -17,13 +18,15 @@ Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die ov
 Elk stelselgroep-object zal mee veranderen met nieuw gepubliceerde wet- en regelgeving, die is opgenomen in de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken).
 
 ## Opzet woningwaardering
+
 ### Repository-structuur
- 
-De repository-structuur is ingedeeld volgens de [referentiedata van stelselgroepen van de VERA-standaard](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP); eerst de stelsels (bijvoorbeeld *zelfstandig*, *onzelfstandig*) en vervolgens de stelselgroepen (bijvoorbeeld *Energieprestatie*, *Wasgelegenheid*).
-Referentiedata:WONINGWAARDERINGSTELSELGROEP - CORA VERA online, Woningcorporatie Referentiearchitectuur. 
+
+De repository-structuur is ingedeeld volgens de [referentiedata van stelselgroepen van de VERA-standaard](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP); eerst de stelsels (bijvoorbeeld _zelfstandig_, _onzelfstandig_) en vervolgens de stelselgroepen (bijvoorbeeld _Energieprestatie_, _Wasgelegenheid_).
+Referentiedata:WONINGWAARDERINGSTELSELGROEP - CORA VERA online, Woningcorporatie Referentiearchitectuur.
 In de folders van de stelselgroepen bevindt zich de code voor het berekenen van de punten per stelselgroep.
 
 ### Design
+
 Het design van de `woningwaardering`-package is zo gekozen dat stelselgroep-objecten en bijbehorende regels modulair zijn.
 Dit houdt in dat regels in een stelselgroep-object vervangbaar en inwisselbaar zijn, met als resultaat dat op basis van de gegeven input de woningwaardering berekend wordt met de juiste set aan stelselgroep-objecten en bijbehorende regels.
 Ook wanneer een wet verandert met ingang op een bepaalde datum zorgt de modulariteit ervoor dat de juiste regels worden gebruikt voor de stelselgroep.
@@ -36,6 +39,7 @@ Op basis van de peildatum wordt voor de bovenste beleidsregel gekozen omdat die 
 ![Voorbeeld modulaire oppervlakte van vertrekken](./docs/afbeeldingen/oppervlakte_van_vertrekken.png)
 
 ### Referentie Data
+
 Onder referentiedata worden constanten, variabelen en tabellen verstaan die nodig zijn in het berekenen van een score.
 In de `woningwaardering` package wordt CSV gebruikt als bestandstype voor het opslaan van referentiedata.
 De keuze is op CSV gevallen omdat referentiedata soms bestaat uit meerdere datarijen waardoor dit vaak minder leesbaar wordt wanneer dit bijvoorbeeld in json of yaml wordt opgeslagen.
@@ -50,13 +54,14 @@ Hierdoor heeft een variabele altijd een peildatum nodig en zal deze ook geregist
 Het gevolg hiervan is dat er altijd een peildatumkolom ontstaat in het CSV-bestand.
 Door gebruik van CSV bestanden, wordt het selecteren van de juiste rij of waarde doormiddel van een peildatum vergemakkelijkt.
 
-
 ## Contributing
 
 ### Setup
+
 Hoe je kunt bijdragen aan deze package \<to do\>
 
 ### Testing
+
 Voor het testen van code wordt het [pytest framework](https://docs.pytest.org/en/8.0.x/index.html) gebruikt. Meer informatie is te vinden over het framework.
 Passende tests worden altijd met de nieuw geschreven code opgeleverd.
 Er zijn verschillende "test-scopes" te bedenken, zoals het testen van details en specifieke functies.
@@ -64,6 +69,7 @@ Daarnaast is het testen van een hele keten of stelselgroep-object ook vereist.
 Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
 #### Conventies voor Tests
+
 Tests worden toegevoegd aan de `tests`-folder in de root van de repository.
 Voor de structuur in de `tests`-folder wordt dezelfde structuur aangehouden als die in de `woningwaardering`-folder.
 De naam van het bestand waarin de tests staan geschreven is `test_<file_name>.py`.
@@ -96,4 +102,3 @@ class TestOppervlakteVanVertrekken:
     def test_functie_twee(self):
         assert self.test_object.functie_twee() == 2
 ```
-
