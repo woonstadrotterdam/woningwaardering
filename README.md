@@ -22,14 +22,13 @@ Elk stelselgroep-object zal mee veranderen met nieuw gepubliceerde wet- en regel
 ### Repository-structuur
 
 De repository-structuur is ingedeeld volgens de [referentiedata van stelselgroepen van de VERA-standaard](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP); eerst de stelsels (bijvoorbeeld _zelfstandig_, _onzelfstandig_) en vervolgens de stelselgroepen (bijvoorbeeld _Energieprestatie_, _Wasgelegenheid_).
-Referentiedata:WONINGWAARDERINGSTELSELGROEP - CORA VERA online, Woningcorporatie Referentiearchitectuur.
 In de folders van de stelselgroepen bevindt zich de code voor het berekenen van de punten per stelselgroep.
 
 ### Design
 
 Het design van de `woningwaardering`-package is zo gekozen dat stelselgroep-objecten en bijbehorende regels modulair zijn.
 Dit houdt in dat regels in een stelselgroep-object vervangbaar en inwisselbaar zijn, met als resultaat dat op basis van de gegeven input de woningwaardering berekend wordt met de juiste set aan stelselgroep-objecten en bijbehorende regels.
-Ook wanneer een wet verandert met ingang op een bepaalde datum zorgt de modulariteit ervoor dat de juiste regels worden gebruikt voor de stelselgroep.
+Ook wanneer een wet verandert met ingang van een bepaalde datum zorgt de modulariteit ervoor dat de juiste regels worden gebruikt voor de stelselgroep.
 De `woningwaardering`-package selecteert op basis van een peildatum de juiste set aan regels die volgens de Nederlandse wet gelden voor de desbetreffende peildatum.
 Hieronder is het modulaire principe op basis van een peildatum schematisch weergegeven voor het stelselgroep-object `OppervlakteVanVertrekken`.
 Voor de duidelijkheid: Onderstaand voorbeeld is niet gebaseerd op een echte verandering in het beleidshandboek.
@@ -38,7 +37,7 @@ Op basis van de peildatum wordt voor de bovenste beleidsregel gekozen omdat die 
 
 ![Voorbeeld modulaire oppervlakte van vertrekken](./docs/afbeeldingen/oppervlakte_van_vertrekken.png)
 
-### Referentie Data
+### Referentiedata
 
 Onder referentiedata worden constanten, variabelen en tabellen verstaan die nodig zijn in het berekenen van een score.
 In de `woningwaardering` package wordt CSV gebruikt als bestandstype voor het opslaan van referentiedata.
