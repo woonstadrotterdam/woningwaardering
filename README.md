@@ -20,6 +20,7 @@ Elk stelselgroep-object zal mee veranderen met nieuw gepubliceerde wet- en regel
 ## Opzet woningwaardering
 
 ### Repository-structuur
+
 De repository-structuur is ingedeeld volgens de [referentiedata van stelselgroepen van de VERA-standaard](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP); eerst de stelsels (bijvoorbeeld _zelfstandig_, _onzelfstandig_) en vervolgens de stelselgroepen (bijvoorbeeld _Energieprestatie_, _Wasgelegenheid_).
 Referentiedata:WONINGWAARDERINGSTELSELGROEP - CORA VERA online, Woningcorporatie Referentiearchitectuur.
 In de folders van de stelselgroepen bevindt zich de code voor het berekenen van de punten per stelselgroep.
