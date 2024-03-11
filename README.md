@@ -61,6 +61,7 @@ Door gebruik van CSV bestanden, wordt het selecteren van de juiste rij of waarde
 Hoe je kunt bijdragen aan deze package \<to do\>
 
 ### Testing
+
 Voor het testen van code wordt het [pytest framework](https://docs.pytest.org/en/8.0.x/index.html) gebruikt. Meer informatie is te vinden over het framework.
 Passende tests worden altijd met de nieuw geschreven code opgeleverd.
 Er zijn verschillende "test-scopes" te bedenken, zoals het testen van details en specifieke functies.
