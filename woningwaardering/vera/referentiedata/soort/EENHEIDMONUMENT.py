@@ -1,0 +1,79 @@
+
+from enum import Enum
+from woningwaardering.vera.bvg.models import Referentiedata
+
+
+class EENHEIDMONUMENT:
+
+    beschermd_dorpsgezicht = Referentiedata(
+        code="DOR",
+        naam="Beschermd dorpsgezicht",
+    )
+    # beschermd_dorpsgezicht = ("DOR", "Beschermd dorpsgezicht")
+    """
+    Bij ontwikkelingen binnen een stads- of dorpsgezicht moet rekening gehouden met de
+    cultuurhistorische waarde. Elk beschermd gebied heeft hiervoor een eigen
+    bestemmingsplan. Vergeleken met een gewoon bestemmingsplan is het gedetailleerder en
+    gelden er strengere regels, zowel voor de bebouwde als voor de onbebouwde ruimte.
+    Bovendien is voor een aantal bouwactiviteiten een vergunning nodig.
+    """
+
+    gemeentelijk_monument = Referentiedata(
+        code="GEM",
+        naam="Gemeentelijk monument",
+    )
+    # gemeentelijk_monument = ("GEM", "Gemeentelijk monument")
+    """
+    Een gemeente kan besluiten een bijzonder pand op de gemeentelijke monumentenlijst te
+    zetten. Dit gebeurt als een pand geen nationale betekenis heeft, maar wel van
+    plaatselijk of regionaal belang is.
+    """
+
+    provinciaal_monument = Referentiedata(
+        code="PRO",
+        naam="Provinciaal monument",
+    )
+    # provinciaal_monument = ("PRO", "Provinciaal monument")
+    """
+    Niet alleen panden, maar ook dijken, grenspalen en gemeente-overschrijdende objecten
+    kunnen deel uitmaken van een provinciale monumentenlijst. De lijst wordt
+    samengesteld door de Provinciale Staten van de provincie. Als een pand op de lijst
+    staat, betekent het dat het pand bescherming geniet vanuit de provincie. Bovendien
+    dient de lijst als basis voor eventuele subsidietoezeggingen. Noord-Holland en
+    Drenthe zijn de enige provincies die provinciale monumenten hebben aangewezen.
+    """
+
+    rijksmonument = Referentiedata(
+        code="RIJ",
+        naam="Rijksmonument",
+    )
+    # rijksmonument = ("RIJ", "Rijksmonument")
+    """
+    Rijksmonumenten zijn gebouwen of andere objecten die om hun nationale
+    cultuurhistorische waarde door de rijksoverheid zijn aangewezen als beschermd
+    monument.
+    """
+
+    beschermd_stadsgezicht = Referentiedata(
+        code="STA",
+        naam="Beschermd stadsgezicht",
+    )
+    # beschermd_stadsgezicht = ("STA", "Beschermd stadsgezicht")
+    """
+    Bij ontwikkelingen binnen een stads- of dorpsgezicht moet rekening gehouden met de
+    cultuurhistorische waarde. Elk beschermd gebied heeft hiervoor een eigen
+    bestemmingsplan. Vergeleken met een gewoon bestemmingsplan is het gedetailleerder en
+    gelden er strengere regels, zowel voor de bebouwde als voor de onbebouwde ruimte.
+    Bovendien is voor een aantal bouwactiviteiten een vergunning nodig.
+    """
+
+    werelderfgoed = Referentiedata(
+        code="WER",
+        naam="Werelderfgoed",
+    )
+    # werelderfgoed = ("WER", "Werelderfgoed")
+    """
+    Werelderfgoederen zijn culturele of natuurlijke monumenten die mondiaal gezien
+    uitzonderlijk en onvervangbaar zijn. Alleen als een monument is ingeschreven op de
+    Werelderfgoedlijst van UNESCO mag het de titel Werelderfgoed dragen.
+    """

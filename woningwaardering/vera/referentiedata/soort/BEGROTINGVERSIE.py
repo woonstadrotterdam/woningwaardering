@@ -1,0 +1,34 @@
+
+from enum import Enum
+from woningwaardering.vera.bvg.models import Referentiedata
+
+
+class BEGROTINGVERSIE:
+
+    actueel_budget = Referentiedata(
+        code="ACB",
+        naam="Actueel budget",
+    )
+    # actueel_budget = ("ACB", "Actueel budget")
+    """
+    Som van mutatie en oorspronkelijk budget van een budgetregel voor een jaar of
+    periode.
+    """
+
+    mutatie_budget = Referentiedata(
+        code="MUB",
+        naam="Mutatie budget",
+    )
+    # mutatie_budget = ("MUB", "Mutatie budget")
+    """
+    Gewijzigd bedrag van een budgetregel voor een jaar of periode.
+    """
+
+    oorspronkelijk_budget = Referentiedata(
+        code="OOB",
+        naam="Oorspronkelijk budget",
+    )
+    # oorspronkelijk_budget = ("OOB", "Oorspronkelijk budget")
+    """
+    Oorspronkelijk bedrag van een budgetregel voor een jaar of een periode.
+    """

@@ -1,0 +1,55 @@
+
+from enum import Enum
+from woningwaardering.vera.bvg.models import Referentiedata
+
+
+class AFREKENWIJZESOORT:
+
+    afkoop = Referentiedata(
+        code="AFK",
+        naam="Afkoop",
+    )
+    # afkoop = ("AFK", "Afkoop")
+    """
+    De onderhoudsorder wordt niet afgerekend omdat dit type onderhoud is afgekocht op
+    totaalniveau
+    """
+
+    garantie = Referentiedata(
+        code="GAR",
+        naam="Garantie",
+    )
+    # garantie = ("GAR", "Garantie")
+    """
+    De onderhoudsorder wordt niet afgerekend omdat de werkzaamheden onder garantie
+    vallen
+    """
+
+    nacalculatie_eenheidsprijzen = Referentiedata(
+        code="NCE",
+        naam="Nacalculatie eenheidsprijzen",
+    )
+    # nacalculatie_eenheidsprijzen = ("NCE", "Nacalculatie eenheidsprijzen")
+    """
+    De onderhoudsorder wordt afgerekend op basis van aantal eenheden x eenheidsrpijs.
+    Bij bestedingsoort kan hier gebruik gemaakt worden van de soort Vaste taakprijs
+    """
+
+    nacalculatie_regie = Referentiedata(
+        code="NCR",
+        naam="Nacalculatie regie",
+    )
+    # nacalculatie_regie = ("NCR", "Nacalculatie regie")
+    """
+    De onderhoudsorder wordt afgerekend op basis van de werkelijke bestedingen
+    (arbeidstijd, reistijd, materiaal)
+    """
+
+    vaste_prijs = Referentiedata(
+        code="VPR",
+        naam="Vaste prijs",
+    )
+    # vaste_prijs = ("VPR", "Vaste prijs")
+    """
+    De onderhoudsorder wordt afgerekend op basis van een vaste (totaal-)prijs
+    """

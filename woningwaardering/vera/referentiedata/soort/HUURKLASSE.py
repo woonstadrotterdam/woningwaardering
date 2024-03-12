@@ -1,0 +1,46 @@
+
+from enum import Enum
+from woningwaardering.vera.bvg.models import Referentiedata
+
+
+class HUURKLASSE:
+
+    betaalbaar = Referentiedata(
+        code="BET",
+        naam="Betaalbaar",
+    )
+    # betaalbaar = ("BET", "Betaalbaar")
+    """
+    Eenheid waarvan de netto huur (kale huur) per maand op of boven de
+    kwaliteitskortingsgrens en onder de aftoppingsgrens (hoog) ligt.
+    """
+
+    boven_huurtoeslaggrens = Referentiedata(
+        code="BOV",
+        naam="Boven huurtoeslaggrens",
+    )
+    # boven_huurtoeslaggrens = ("BOV", "Boven huurtoeslaggrens")
+    """
+    Eenheid waarvan de netto huur (kale huur) per maand op of boven de huurtoeslaggrens
+    (liberalisatiegrens) ligt.
+    """
+
+    duur = Referentiedata(
+        code="DUU",
+        naam="Duur",
+    )
+    # duur = ("DUU", "Duur")
+    """
+    Eenheid waarvan de netto huur (kale huur) per maand op of boven de aftoppingsgrens
+    (hoog) en onder de huurtoeslaggrens ligt.
+    """
+
+    goedkoop = Referentiedata(
+        code="GOE",
+        naam="Goedkoop",
+    )
+    # goedkoop = ("GOE", "Goedkoop")
+    """
+    Eenheid waarvan de netto huur (kale huur) per maand onder de kwaliteitskortingsgrens
+    ligt.
+    """

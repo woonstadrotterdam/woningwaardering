@@ -1,0 +1,6 @@
+
+from woningwaardering.vera.referentiedata.soort import VRAGENLIJSTREGELHERKOMST
+
+
+class Kwaliteit:
+    VRAGENLIJSTREGELHERKOMST = VRAGENLIJSTREGELHERKOMST.VRAGENLIJSTREGELHERKOMST
