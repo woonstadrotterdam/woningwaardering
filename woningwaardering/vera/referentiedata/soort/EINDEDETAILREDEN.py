@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class EINDEDETAILREDEN:
-
     faillissement = Referentiedata(
         code="FAI",
         naam="Faillissement",
     )
-    # faillissement = ("FAI", "Faillissement")
     """
     Een overeenkomst is beëindigd wegens faillissement
     """
@@ -18,7 +14,6 @@ class EINDEDETAILREDEN:
         code="NOO",
         naam="Noorderzon",
     )
-    # noorderzon = ("NOO", "Noorderzon")
     """
     Een overeenkomst is beëindigd omdat de huurder(s) met de noorderzon is (zijn)
     vertrokken
@@ -28,7 +23,6 @@ class EINDEDETAILREDEN:
         code="ONT",
         naam="Ontruiming",
     )
-    # ontruiming = ("ONT", "Ontruiming")
     """
     Een overeenkomst is beëindigd omdat de woning is ontruimd
     """
@@ -37,7 +31,6 @@ class EINDEDETAILREDEN:
         code="OVE",
         naam="Overlijden",
     )
-    # overlijden = ("OVE", "Overlijden")
     """
     Een overeenkomst is beëindigd wegens overlijden
     """
@@ -46,7 +39,6 @@ class EINDEDETAILREDEN:
         code="REG",
         naam="Regulier",
     )
-    # regulier = ("REG", "Regulier")
     """
     Er is geen bijzondere aanleiding voor het beëindigen van een overeenkomst, of de
     reden is niet bekend.
@@ -56,7 +48,6 @@ class EINDEDETAILREDEN:
         code="TER",
         naam="Terugkoop",
     )
-    # terugkoop = ("TER", "Terugkoop")
     """
     Een overeenkomst is beëindigd wegens terugkoop
     """
@@ -65,7 +56,6 @@ class EINDEDETAILREDEN:
         code="VER",
         naam="Verkoop",
     )
-    # verkoop = ("VER", "Verkoop")
     """
     Een overeenkomst is beëindigd wegens verkoop
     """
@@ -74,7 +64,6 @@ class EINDEDETAILREDEN:
         code="WIJ",
         naam="Wijziging tenaamstelling",
     )
-    # wijziging_tenaamstelling = ("WIJ", "Wijziging tenaamstelling")
     """
     Een overeenkomst is beëindigd omdat de tenaamstelling is gewijzigd (en is vervangen
     door een nieuwe overeenkomst)
@@ -84,7 +73,6 @@ class EINDEDETAILREDEN:
         code="WON",
         naam="Woningruil",
     )
-    # woningruil = ("WON", "Woningruil")
     """
     Een overeenkomst is beëindigd wegens woningruil
     """

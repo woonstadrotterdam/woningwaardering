@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class AANBIEDINGSTATUS:
-
     aangeboden = Referentiedata(
         code="AAN",
         naam="Aangeboden",
     )
-    # aangeboden = ("AAN", "Aangeboden")
     """
     Er is aanbieding gedaan aan een of meer kandidaten.
     """
@@ -18,7 +14,6 @@ class AANBIEDINGSTATUS:
         code="GEW",
         naam="Geweigerd",
     )
-    # geweigerd = ("GEW", "Geweigerd")
     """
     Een kandidaat heeft een verstrekte aanbieding afgewezen.
     """
@@ -27,7 +22,6 @@ class AANBIEDINGSTATUS:
         code="ING",
         naam="Ingetrokken",
     )
-    # ingetrokken = ("ING", "Ingetrokken")
     """
     Een aan een kandidaat verstrekte aanbieding is ingetrokken.
     """
@@ -36,7 +30,6 @@ class AANBIEDINGSTATUS:
         code="TOE",
         naam="Toegewezen",
     )
-    # toegewezen = ("TOE", "Toegewezen")
     """
     Een eenheid is toegewezen aan een kandidaat.
     """

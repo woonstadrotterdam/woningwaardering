@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class RELATIESTATUS:
-
     actief = Referentiedata(
         code="ACT",
         naam="Actief",
     )
-    # actief = ("ACT", "Actief")
     """
     De relatie is een actieve relatie
     """
@@ -18,7 +14,6 @@ class RELATIESTATUS:
         code="INA",
         naam="Inactief",
     )
-    # inactief = ("INA", "Inactief")
     """
     De relatie is niet (meer) actief
     """
@@ -27,7 +22,6 @@ class RELATIESTATUS:
         code="SLA",
         naam="Slapend",
     )
-    # slapend = ("SLA", "Slapend")
     """
     De relatie betreft een VvE (rechtspersoon) die een slapende status heeft
     """

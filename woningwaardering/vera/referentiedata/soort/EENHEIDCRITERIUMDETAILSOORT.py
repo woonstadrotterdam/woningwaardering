@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class EENHEIDCRITERIUMDETAILSOORT:
-
     beroep = Referentiedata(
         code="BER",
         naam="Beroep",
     )
-    # beroep = ("BER", "Beroep")
     """
     Urgentie wegens een bijzonder beroep in de regio onderwijs, zorg of politie
     """
@@ -18,7 +14,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="DAK",
         naam="(Bijna) dakloos",
     )
-    # dakloos = ("DAK", "(Bijna) dakloos")
     """
     dakloos / calamiteit /brand onbewoonbaar / uitzetting / terugkeer uit buitenland
     """
@@ -27,7 +22,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="DOE",
         naam="Doelgroep",
     )
-    # doelgroep = ("DOE", "Doelgroep")
     """
     Behoren tot een doelgroep. Bijv. gezin, student, senioren etc.
     """
@@ -36,7 +30,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="DUP",
         naam="Gedupeerd",
     )
-    # gedupeerd = ("DUP", "Gedupeerd")
     """
     Urgentie wegens dupering van woningzoekende bij woningaanbieding
     """
@@ -45,7 +38,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="ECO",
         naam="Economisch",
     )
-    # economisch = ("ECO", "Economisch")
     """
     Economische binding
     """
@@ -54,7 +46,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="EXD",
         naam="ex-gedetineerd",
     )
-    # ex_gedetineerd = ("EXD", "ex-gedetineerd")
     """
     Urgentie wegens het vrijkomen uit detentie
     """
@@ -63,7 +54,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="FIN",
         naam="Financieel",
     )
-    # financieel = ("FIN", "Financieel")
     """
     Urgentie wegens financiele problemen
     """
@@ -72,7 +62,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="GEL",
         naam="Gelijkvloers",
     )
-    # gelijkvloers = ("GEL", "Gelijkvloers")
     """
     Indicatie voor een gelijkvloerse woning
     """
@@ -81,7 +70,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="GEW",
         naam="Geweld bedreiging / overlast",
     )
-    # geweld_bedreiging_of_overlast = ("GEW", "Geweld bedreiging / overlast")
     """
     Urgentie wegens overlast uit de omgeving of bedreiging.
     """
@@ -90,7 +78,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="HUI",
         naam="Herhuisvesting",
     )
-    # herhuisvesting = ("HUI", "Herhuisvesting")
     """
     Urgentie wegens (langdurige) renovatie, nieuwbouw of sloop
     """
@@ -99,7 +86,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="KRN",
         naam="Kern",
     )
-    # kern = ("KRN", "Kern")
     """
     Kernbinding
     """
@@ -108,7 +94,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="MAA",
         naam="Maatschappelijk",
     )
-    # maatschappelijk = ("MAA", "Maatschappelijk")
     """
     Maatschappelijke binding
     """
@@ -117,7 +102,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="MAN",
         naam="Mantelzorg",
     )
-    # mantelzorg = ("MAN", "Mantelzorg")
     """
     Urgentie wegens het ontvangen of geven van mantelzorg
     """
@@ -126,7 +110,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="MED",
         naam="Medisch",
     )
-    # medisch = ("MED", "Medisch")
     """
     Urgentie voor een aangepaste woning op medische gronden
     """
@@ -135,7 +118,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="REG",
         naam="Regio",
     )
-    # regio = ("REG", "Regio")
     """
     Regionale of regio binding
     """
@@ -144,7 +126,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="REL",
         naam="Relationeel",
     )
-    # relationeel = ("REL", "Relationeel")
     """
     Echtscheiding / verbroken relatie / gezinsproblemen /zwangerschap
     """
@@ -153,7 +134,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="ROL",
         naam="Rollatorgeschikt",
     )
-    # rollatorgeschikt = ("ROL", "Rollatorgeschikt")
     """
     Indicatie voor een rollatorgeschikte woning
     """
@@ -162,7 +142,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="RST",
         naam="Rolstoelgeschikt",
     )
-    # rolstoelgeschikt = ("RST", "Rolstoelgeschikt")
     """
     Indicatie voor een rolstoelgeschikte woning
     """
@@ -171,7 +150,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="SER",
         naam="Servicewoning",
     )
-    # servicewoning = ("SER", "Servicewoning")
     """
     Woningen bij een zorginstelling of verpleegcentrum.
     """
@@ -180,7 +158,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="SOC",
         naam="Sociaal",
     )
-    # sociaal = ("SOC", "Sociaal")
     """
     De woonsituatie is levensontwrichtend of levensbedreigend voor een of meer
     gezinsleden.
@@ -190,7 +167,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="STA",
         naam="Statushouder",
     )
-    # statushouder = ("STA", "Statushouder")
     """
     Urgentie wegens het verkrijgen van een verblijfsstatus
     """
@@ -199,7 +175,6 @@ class EENHEIDCRITERIUMDETAILSOORT:
         code="UIT",
         naam="Uitstroom maatschappelijke instelling",
     )
-    # uitstroom_maatschappelijke_instelling = ("UIT", "Uitstroom maatschappelijke instelling")
     """
     Urgentie wegens het uitstromen bij een maatschappelijke instelling
     """

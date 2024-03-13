@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class RELATIEROLSOORT:
-
     aankopende_makelaar = Referentiedata(
         code="AMA",
         naam="Aankopende makelaar",
     )
-    # aankopende_makelaar = ("AMA", "Aankopende makelaar")
     """
     Makelaar die namens de aankopende partij optreedt
     """
@@ -18,7 +14,6 @@ class RELATIEROLSOORT:
         code="AMB",
         naam="Ambulante begeleider",
     )
-    # ambulante_begeleider = ("AMB", "Ambulante begeleider")
     """
     De ambulant begeleider helpt mensen om regie te voeren over hun eigen leven en zo
     veel mogelijk zelfstandig te functioneren.
@@ -28,7 +23,6 @@ class RELATIEROLSOORT:
         code="ASS",
         naam="Assetmanager",
     )
-    # assetmanager = ("ASS", "Assetmanager")
     """
     De assetmanager voor het betreffende vastgoed
     """
@@ -37,7 +31,6 @@ class RELATIEROLSOORT:
         code="BED",
         naam="Behandelaar",
     )
-    # behandelaar = ("BED", "Behandelaar")
     """
     De behandelaar (van een specifieke actie, zaak of taak). Dit is meestal een
     medewerker van de corporatie maar kan ook een externe behandelaar zijn
@@ -47,7 +40,6 @@ class RELATIEROLSOORT:
         code="BEH",
         naam="Beheerder",
     )
-    # beheerder = ("BEH", "Beheerder")
     """
     De beheerder van een eenheid of cluster
     """
@@ -56,7 +48,6 @@ class RELATIEROLSOORT:
         code="BET",
         naam="Betaler",
     )
-    # betaler = ("BET", "Betaler")
     """
     Betaler, vooral van belang als de betaler een andere relatie is dan de huurder of
     contractant. Iemand anders betaalt dan namens de huurder, vanaf een eigen
@@ -67,7 +58,6 @@ class RELATIEROLSOORT:
         code="BEW",
         naam="Bewoner",
     )
-    # bewoner = ("BEW", "Bewoner")
     """
     Persoon die volgens het GBA een verblijfseenheid/woning stelselmatig bewoont (CORA).
     Als de bewoner ook de huurder is, dan ook ook Huurder worden gebruikt.Zie ook
@@ -78,7 +68,6 @@ class RELATIEROLSOORT:
         code="BSL",
         naam="Bestuurslid",
     )
-    # bestuurslid = ("BSL", "Bestuurslid")
     """
     Iemand die deel uitmaakt van een bestuur, bijvoorbeeld van een VvE of
     bewonersvereniging, en daarin de rol van Algemeen bestuurslid heeft. Voor
@@ -90,7 +79,6 @@ class RELATIEROLSOORT:
         code="BUD",
         naam="Budgetcoach",
     )
-    # budgetcoach = ("BUD", "Budgetcoach")
     """
     Synoniem: budgetbeheerder. De relatie is budgetcoach van een andere relatie zonder
     rechterlijke beschikking en voert financieel beheer voor deze relatie uit. Voor het
@@ -102,7 +90,6 @@ class RELATIEROLSOORT:
         code="BWI",
         naam="Bewindvoerder",
     )
-    # bewindvoerder = ("BWI", "Bewindvoerder")
     """
     De relatie is bewindvoerder van een andere relatie, bijvoorbeeld in het kader van de
     WSNP (Huurder Jansen staat onder bewindvoering van meneer Karelse). De bewindvoerder
@@ -114,7 +101,6 @@ class RELATIEROLSOORT:
         code="COL",
         naam="Wooncoöperatie-lid",
     )
-    # wooncooperatie_lid = ("COL", "Wooncoöperatie-lid")
     """
     Lid van een wooncoöperatie. Niet te verwarren met de relatierolsoort Wooncoöperatie
     (rechtspersoon). Let op dat voor bestuursleden afzonderlijke relatierolsoorten
@@ -125,7 +111,6 @@ class RELATIEROLSOORT:
         code="COO",
         naam="Wooncoöperatie",
     )
-    # wooncooperatie = ("COO", "Wooncoöperatie")
     """
     Een wooncoöperatie is een vereniging waarvan de leden tevens eigenaren zijn en die
     voorziet in bepaalde materiële behoefte van de deelnemers.De wooncoöperatie is de
@@ -134,7 +119,7 @@ class RELATIEROLSOORT:
     wooncoöperatie deel uit van de Woningwet: Groepen met interesse kunnen ondersteuning
     krijgen bij het opstellen van een plan en dat indienen bij hun corporatie. Er zijn
     daarnaast steeds meer groepen die zelf een stuk grond willen bebouwen en de woningen
-    aan hun leden willen verhure (CORA). Niet te verwarren met de relatierolsoort
+    aan hun leden willen verhure (CORA).  Niet te verwarren met de relatierolsoort
     Wooncoöperatie-lid
     """
 
@@ -142,7 +127,6 @@ class RELATIEROLSOORT:
         code="CPE",
         naam="Contactpersoon",
     )
-    # contactpersoon = ("CPE", "Contactpersoon")
     """
     Een contactpersoon is een natuurlijke persoon die één of meer relaties, eenheden, of
     clusters vertegenwoordigt
@@ -152,9 +136,8 @@ class RELATIEROLSOORT:
         code="DEU",
         naam="Deurwaarder",
     )
-    # deurwaarder = ("DEU", "Deurwaarder")
     """
-    De relatie is de deurwaarder van een andere relatie. (Huurder Jansen heeft een
+    De relatie is de deurwaarder van een andere relatie.  (Huurder Jansen heeft een
     huurschuld en wordt extern geincasseerd door deurwaarder Karelse)
     """
 
@@ -162,7 +145,6 @@ class RELATIEROLSOORT:
         code="EIG",
         naam="Eigenaar",
     )
-    # eigenaar = ("EIG", "Eigenaar")
     """
     Een eigenaar van vastgoed kan een VVE-lid zijn indien het eigendom een
     appartementsrecht betreft. Indien sprake is van bloot eigendom, dan is de eigenaar
@@ -175,7 +157,6 @@ class RELATIEROLSOORT:
         code="ERF",
         naam="Erfpachter",
     )
-    # erfpachter = ("ERF", "Erfpachter")
     """
     De erfpachter is de persoon of organisatie die eigenaar is van het object waarop de
     erfpacht rust. De erfpachter betaalt de canon. Erfpacht is overdraagbaar en gaat
@@ -186,7 +167,6 @@ class RELATIEROLSOORT:
         code="FIA",
         naam="Fiatteur",
     )
-    # fiatteur = ("FIA", "Fiatteur")
     """
     De medewerker die verantwoordelijk is voor het goedkeuren van een financiële
     activiteit
@@ -196,7 +176,6 @@ class RELATIEROLSOORT:
         code="GAR",
         naam="Garantiegever",
     )
-    # garantiegever = ("GAR", "Garantiegever")
     """
     De garantiegever bij een lening
     """
@@ -205,7 +184,6 @@ class RELATIEROLSOORT:
         code="GEB",
         naam="Gebruiker",
     )
-    # gebruiker = ("GEB", "Gebruiker")
     """
     Persoon die een eenheid gebruikt, maar niet zozeer bewoont. Vooral van toepassing
     bij niet-woongelegenheden, zoals BOG en MOG. Als de gebruiker ook de huurder is, dan
@@ -216,7 +194,6 @@ class RELATIEROLSOORT:
         code="GEL",
         naam="Geldnemer",
     )
-    # geldnemer = ("GEL", "Geldnemer")
     """
     De geldnemer van de lening
     """
@@ -225,7 +202,6 @@ class RELATIEROLSOORT:
         code="HME",
         naam="Huismeester",
     )
-    # huismeester = ("HME", "Huismeester")
     """
     De huismeester voor het betreffende vastgoed
     """
@@ -234,7 +210,6 @@ class RELATIEROLSOORT:
         code="HUU",
         naam="Huurder",
     )
-    # huurder = ("HUU", "Huurder")
     """
     De huurder is een de (rechts)persoon die met de woningcorporatie een
     huurovereenkomst heeft gesloten en daarmee het exclusief gebruiksrecht heeft
@@ -246,7 +221,6 @@ class RELATIEROLSOORT:
         code="INS",
         naam="Inspecteur",
     )
-    # inspecteur = ("INS", "Inspecteur")
     """
     Medewerker die de inspectie uitvoert
     """
@@ -255,7 +229,6 @@ class RELATIEROLSOORT:
         code="KOP",
         naam="Koper",
     )
-    # koper = ("KOP", "Koper")
     """
     De koper verkrijgt het bloot eigendom van de opstal (evt. in combinatie met het
     bloot eigendom of het pachtrecht van het onderliggende perceel respectievelijk het
@@ -270,7 +243,6 @@ class RELATIEROLSOORT:
         code="LEV",
         naam="Leverancier",
     )
-    # leverancier = ("LEV", "Leverancier")
     """
     Een leverancier is een relatie die diensten of goederen levert, zou kunnen gaan
     leveren of heeft geleverd aan de woningcorporatie (CORA)
@@ -280,7 +252,6 @@ class RELATIEROLSOORT:
         code="MBW",
         naam="Medebewoner",
     )
-    # medebewoner = ("MBW", "Medebewoner")
     """
     Kinderen of volwassenen die met de hoofdbewoner of hoofdaanvrager een huishouden
     (willen) vormen.
@@ -290,7 +261,6 @@ class RELATIEROLSOORT:
         code="MDH",
         naam="Medehuurder",
     )
-    # medehuurder = ("MDH", "Medehuurder")
     """
     Op de huurovereenkomst vermelde medehuurder
     """
@@ -299,7 +269,6 @@ class RELATIEROLSOORT:
         code="MDW",
         naam="Medewerker",
     )
-    # medewerker = ("MDW", "Medewerker")
     """
     Werknemers ingehuurd of in vaste dienst van een woningcorporatie (CORA)
     """
@@ -308,7 +277,6 @@ class RELATIEROLSOORT:
         code="MED",
         naam="Mede aanvrager",
     )
-    # mede_aanvrager = ("MED", "Mede aanvrager")
     """
     Een woningzoekende die samen met een andere woningzoekende (de (hoofd)aanvrager) een
     woning (of ander vastgoed)zoekt.
@@ -318,7 +286,6 @@ class RELATIEROLSOORT:
         code="MEL",
         naam="Melder",
     )
-    # melder = ("MEL", "Melder")
     """
     De melder van een verzoek of incident. Vaak de initiator van een (werk-)proces.
     """
@@ -327,7 +294,6 @@ class RELATIEROLSOORT:
         code="NOT",
         naam="Notaris",
     )
-    # notaris = ("NOT", "Notaris")
     """
     Notaris die een koop-/verkooptransactie formeel bekrachtigt
     """
@@ -336,7 +302,6 @@ class RELATIEROLSOORT:
         code="OPD",
         naam="Opdrachtgever",
     )
-    # opdrachtgever = ("OPD", "Opdrachtgever")
     """
     Opdrachtgevende partij
     """
@@ -345,7 +310,6 @@ class RELATIEROLSOORT:
         code="OPN",
         naam="Opdrachtnemer",
     )
-    # opdrachtnemer = ("OPN", "Opdrachtnemer")
     """
     Opdrachtnemende partij
     """
@@ -354,7 +318,6 @@ class RELATIEROLSOORT:
         code="OPZ",
         naam="Opzichter",
     )
-    # opzichter = ("OPZ", "Opzichter")
     """
     De opzichter voor het betreffende vastgoed
     """
@@ -363,13 +326,11 @@ class RELATIEROLSOORT:
         code="OWI",
         naam="Onderwijsinstelling",
     )
-    # onderwijsinstelling = ("OWI", "Onderwijsinstelling")
 
     penningmeester = Referentiedata(
         code="PEN",
         naam="Penningmeester",
     )
-    # penningmeester = ("PEN", "Penningmeester")
     """
     Iemand die deel uitmaakt van een bestuur, bijvoorbeeld van een VvE of
     bewonersvereniging, en daarin de rol van Penningmeester heeft
@@ -379,7 +340,6 @@ class RELATIEROLSOORT:
         code="PRO",
         naam="Prospect",
     )
-    # prospect = ("PRO", "Prospect")
     """
     Een prospect is een relatie die belangstelling heeft om een dienst of product van de
     woningcorporatie af te nemen. Gebruik eventueel Woningzoekende om meer concreet te
@@ -390,7 +350,6 @@ class RELATIEROLSOORT:
         code="SEC",
         naam="Secretaris",
     )
-    # secretaris = ("SEC", "Secretaris")
     """
     Iemand die deel uitmaakt van een bestuur, bijvoorbeeld van een VvE of
     bewonersvereniging, en daarin de rol van Secretaris heeft
@@ -400,7 +359,6 @@ class RELATIEROLSOORT:
         code="VER",
         naam="Verkoper",
     )
-    # verkoper = ("VER", "Verkoper")
     """
     Verkopende partij
     """
@@ -409,7 +367,6 @@ class RELATIEROLSOORT:
         code="VMA",
         naam="Verkopende makelaar",
     )
-    # verkopende_makelaar = ("VMA", "Verkopende makelaar")
     """
     Makelaar die namens de verkopende partij optreedt
     """
@@ -418,7 +375,6 @@ class RELATIEROLSOORT:
         code="VOO",
         naam="Voorzitter",
     )
-    # voorzitter = ("VOO", "Voorzitter")
     """
     Iemand die deel uitmaakt van een bestuur, bijvoorbeeld van een VvE of
     bewonersvereniging, en daarin de rol van Voorzitter heeft
@@ -428,7 +384,6 @@ class RELATIEROLSOORT:
         code="VVE",
         naam="Vereniging van Eigenaren",
     )
-    # vereniging_van_eigenaren = ("VVE", "Vereniging van Eigenaren")
     """
     Dit is de vereniging die is ontstaan na een (onder)splitsing en als vereniging
     verantwoordelijk is voor het beheer van de collectieve delen van het vastgoed zoals
@@ -441,11 +396,10 @@ class RELATIEROLSOORT:
         code="VVL",
         naam="VvE-lid",
     )
-    # vve_lid = ("VVL", "VvE-lid")
     """
     Een eigenaar van een appartementsrecht is vanuit die hoedanigheid altijd lid van de
     rechtspersoon VvE. Een VvE-lid kan een natuurlijk persoon of een rechtspersoon zijn.
-    (CORA). Niet te verwarren met de relatierolsoort VvE (rechtspersoon). Let op dat
+     (CORA). Niet te verwarren met de relatierolsoort VvE (rechtspersoon). Let op dat
     voor bestuursleden afzonderlijke relatierolsoorten beschikbaar zijn: Bestuurslid,
     Voorzitter, Penningmeester, Secretaris.
     """
@@ -454,7 +408,6 @@ class RELATIEROLSOORT:
         code="WON",
         naam="Woningzoekende",
     )
-    # woningzoekende = ("WON", "Woningzoekende")
     """
     Een woningzoekende is een persoon die zich heeft gemeld/ingeschreven met de intentie
     (met het nog te vormen) huishouden te verhuizen naar een andere woning en daarvoor
@@ -467,7 +420,6 @@ class RELATIEROLSOORT:
         code="WOO",
         naam="Woonconsulent",
     )
-    # woonconsulent = ("WOO", "Woonconsulent")
     """
     De woonconsulent voor het betreffende vastgoed
     """
@@ -476,7 +428,6 @@ class RELATIEROLSOORT:
         code="ZEK",
         naam="Zekerheidsnemer",
     )
-    # zekerheidsnemer = ("ZEK", "Zekerheidsnemer")
     """
     De relatie aan wie de zekerheid op de eenheid is verleend bij een eventuele
     zekerheidsverpanding

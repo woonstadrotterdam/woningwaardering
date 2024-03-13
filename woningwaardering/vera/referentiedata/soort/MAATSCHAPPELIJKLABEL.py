@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class MAATSCHAPPELIJKLABEL:
-
     daeb = Referentiedata(
         code="DAE",
         naam="DAEB",
     )
-    # daeb = ("DAE", "DAEB")
     """
     Als attribuut van klasse Eenheid: Geeft aan dat de eenheid tot de DAEB-tak behoort.
     Als attribuut van klasse Huurovereenkomst: Geeft aan dat de verhuring als zijnde
@@ -22,7 +18,6 @@ class MAATSCHAPPELIJKLABEL:
         code="GNDV",
         naam="Geconsolideerde NIET-DAEB verbinding",
     )
-    # geconsolideerde_niet_daeb_verbinding = ("GNDV", "Geconsolideerde NIET-DAEB verbinding")
     """
     Als attribuut van de klasse FinancieelBedrijf: Geeft aan of het bedrijf een
     consolidatiebedrijf is, waarbinnen NIET-DAEB activiteiten worden verricht.
@@ -32,7 +27,6 @@ class MAATSCHAPPELIJKLABEL:
         code="NDA",
         naam="NIET-DAEB",
     )
-    # niet_daeb = ("NDA", "NIET-DAEB")
     """
     Als attribuut van klasse Eenheid: Geeft aan dat de eenheid tot de niet-DAEB-tak
     behoort. Als attribuut van klasse Huurovereenkomst: Geeft aan dat de verhuring als

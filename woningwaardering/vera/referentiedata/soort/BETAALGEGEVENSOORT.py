@@ -1,17 +1,13 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class BETAALGEGEVENSOORT:
-
     bankrekening = Referentiedata(
         code="BAN",
         naam="Bankrekening",
     )
-    # bankrekening = ("BAN", "Bankrekening")
     """
-    Het betaalgegeven van een relatie, behorende bij een overeenkomst, is een
+    Het betaalgegeven van een relatie, behorende bij een overeenkomst,  is een
     bankrekening.
     """
 
@@ -19,9 +15,8 @@ class BETAALGEGEVENSOORT:
         code="CRE",
         naam="Creditcard",
     )
-    # creditcard = ("CRE", "Creditcard")
     """
-    Het betaalgegeven van een relatie, behorende bij een overeenkomst, is een credit
+    Het betaalgegeven van een relatie, behorende bij een overeenkomst,  is een credit
     card.
     """
 
@@ -29,9 +24,8 @@ class BETAALGEGEVENSOORT:
         code="PAY",
         naam="Paypal account",
     )
-    # paypal_account = ("PAY", "Paypal account")
     """
-    Het betaalgegeven van een relatie, behorende bij een overeenkomst, is een paypal
+    Het betaalgegeven van een relatie, behorende bij een overeenkomst,  is een paypal
     account.
     """
 
@@ -39,8 +33,7 @@ class BETAALGEGEVENSOORT:
         code="TRA",
         naam="TransferMate",
     )
-    # transfermate = ("TRA", "TransferMate")
     """
-    Het betaalgegeven van een relatie, behorende bij een overeenkomst, is een
+    Het betaalgegeven van een relatie, behorende bij een overeenkomst,  is een
     TransferMate account.
     """

@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class BOEKINGDETAILSOORT:
-
     aanmaning = Referentiedata(
         code="AAN",
         naam="Aanmaning",
     )
-    # aanmaning = ("AAN", "Aanmaning")
     """
     Boeking voor het verzoek tot betalen aan een huurder of debiteur van een of meer
     openstaande achterstallige vorderingen, dan wel de ontvangst naar aanleiding
@@ -20,7 +16,6 @@ class BOEKINGDETAILSOORT:
         code="AFB",
         naam="Afboeking",
     )
-    # afboeking = ("AFB", "Afboeking")
     """
     Boeking voor afboeken van het totale saldo van een openstaande vordering.
     """
@@ -29,9 +24,8 @@ class BOEKINGDETAILSOORT:
         code="BAN",
         naam="Bank",
     )
-    # bank = ("BAN", "Bank")
     """
-    Boeking voor een ontvangst of uitbetaling die via een bankrekening is ontvangen of
+    Boeking voor  een ontvangst of uitbetaling die via een bankrekening is ontvangen of
     uitgevoerd.
     """
 
@@ -39,7 +33,6 @@ class BOEKINGDETAILSOORT:
         code="BET",
         naam="Betalingsregeling",
     )
-    # betalingsregeling = ("BET", "Betalingsregeling")
     """
     Boeking die het totaalbedrag van een betaalafspraak vertegenwoordigt, die is gemaakt
     voor een of meer openstaande vorderingen.
@@ -49,7 +42,6 @@ class BOEKINGDETAILSOORT:
         code="BOR",
         naam="Borg",
     )
-    # borg = ("BOR", "Borg")
     """
     Boeking van een door een huurder aan een verhuurder te betalen bedrag als onderpand
     ter dekking voor mogelijke kosten voor toekomstig herstel van schade dan wel de
@@ -60,7 +52,6 @@ class BOEKINGDETAILSOORT:
         code="BRT",
         naam="Betalingsregelingtermijn",
     )
-    # betalingsregelingtermijn = ("BRT", "Betalingsregelingtermijn")
     """
     Boeking van een periodiek te ontvangen of ontvangen betaling naar aanleiding van een
     met een huurder of debiteur afgesproken betalingsregeling.
@@ -70,7 +61,6 @@ class BOEKINGDETAILSOORT:
         code="CRE",
         naam="Creditnota",
     )
-    # creditnota = ("CRE", "Creditnota")
     """
     Boeking voor het geheel of gedeeltelijk corrigeren van een debiteurenfactuur.
     """
@@ -79,7 +69,6 @@ class BOEKINGDETAILSOORT:
         code="EIN",
         naam="Eindafrekening",
     )
-    # eindafrekening = ("EIN", "Eindafrekening")
     """
     Boeking voor een verzamelnota van alle openstaande vorderingen en schulden van een
     vertrekkende huurder, dan wel de ontvangst of uitbetaling naar aanleiding daarvan.
@@ -89,7 +78,6 @@ class BOEKINGDETAILSOORT:
         code="EVN",
         naam="Eerste verhuurnota",
     )
-    # eerste_verhuurnota = ("EVN", "Eerste verhuurnota")
     """
     Boeking voor een verzamelnota van de eerste maandhuur en eventueel bijkomende kosten
     voor een nieuwe huurder, dan wel de ontvangst naar aanleiding daarvan.
@@ -99,7 +87,6 @@ class BOEKINGDETAILSOORT:
         code="FAC",
         naam="Factuur",
     )
-    # factuur = ("FAC", "Factuur")
     """
     Boeking van een vordering voor een geleverde dienst of product door een corporatie
     anders dan de verhuur van een eenheid of object, dan wel een ontvangst naar
@@ -110,7 +97,6 @@ class BOEKINGDETAILSOORT:
         code="PRO",
         naam="Prolongatie",
     )
-    # prolongatie = ("PRO", "Prolongatie")
     """
     Boeking van een vordering of ontvangst naar aanleiding van de maandelijkse
     huurprolongatie.
@@ -120,7 +106,6 @@ class BOEKINGDETAILSOORT:
         code="STO",
         naam="Storno",
     )
-    # storno = ("STO", "Storno")
     """
     Boeking van de terugboeking van een uitgevoerde incasso, op verzoek van een huurder
     of doordat deze niet kan worden uitgevoerd door de bank.
@@ -130,7 +115,6 @@ class BOEKINGDETAILSOORT:
         code="TER",
         naam="Terugbetaling",
     )
-    # terugbetaling = ("TER", "Terugbetaling")
     """
     Boeking van de betaling aan een huurder of derde van een teveel of ten onrechte
     betaald bedrag.
@@ -140,7 +124,6 @@ class BOEKINGDETAILSOORT:
         code="VOU",
         naam="Voucher",
     )
-    # voucher = ("VOU", "Voucher")
     """
     Boeking van toename of afname van een saldo binnen een spaarsysteem, die huurders
     kunnen inwisselen bij de corporatie of soms ook bij ondernemers in de buurt.

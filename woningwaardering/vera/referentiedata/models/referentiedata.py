@@ -4,7 +4,6 @@ from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class ReferentiedataEnum(Referentiedata, Enum):
-
     def __eq__(self, other):
         print(self)
         print(other)

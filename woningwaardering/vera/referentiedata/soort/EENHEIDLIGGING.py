@@ -1,90 +1,73 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class EENHEIDLIGGING:
-
     buiten_bebouwde_kom = Referentiedata(
         code="BBK",
         naam="Buiten bebouwde kom",
     )
-    # buiten_bebouwde_kom = ("BBK", "Buiten bebouwde kom")
 
     beschutte_ligging = Referentiedata(
         code="BES",
         naam="Beschutte ligging",
     )
-    # beschutte_ligging = ("BES", "Beschutte ligging")
 
     in_bosrijke_omgeving = Referentiedata(
         code="BOS",
         naam="In bosrijke omgeving",
     )
-    # in_bosrijke_omgeving = ("BOS", "In bosrijke omgeving")
 
     aan_bosrand = Referentiedata(
         code="BRA",
         naam="Aan bosrand",
     )
-    # aan_bosrand = ("BRA", "Aan bosrand")
 
     in_centrum = Referentiedata(
         code="CEN",
         naam="In centrum",
     )
-    # in_centrum = ("CEN", "In centrum")
 
     aan_drukke_weg = Referentiedata(
         code="DRU",
         naam="Aan drukke weg",
     )
-    # aan_drukke_weg = ("DRU", "Aan drukke weg")
 
     landelijk_gelegen = Referentiedata(
         code="LAN",
         naam="Landelijk gelegen",
     )
-    # landelijk_gelegen = ("LAN", "Landelijk gelegen")
 
     open_ligging = Referentiedata(
         code="OPE",
         naam="Open ligging",
     )
-    # open_ligging = ("OPE", "Open ligging")
 
     aan_park = Referentiedata(
         code="PAR",
         naam="Aan park",
     )
-    # aan_park = ("PAR", "Aan park")
 
     aan_rustige_weg = Referentiedata(
         code="RUS",
         naam="Aan rustige weg",
     )
-    # aan_rustige_weg = ("RUS", "Aan rustige weg")
 
     aan_vaarwater = Referentiedata(
         code="VAA",
         naam="Aan vaarwater",
     )
-    # aan_vaarwater = ("VAA", "Aan vaarwater")
 
     vrij_uitzicht = Referentiedata(
         code="VRI",
         naam="Vrij uitzicht",
     )
-    # vrij_uitzicht = ("VRI", "Vrij uitzicht")
 
     aan_water = Referentiedata(
         code="WAT",
         naam="Aan water",
     )
-    # aan_water = ("WAT", "Aan water")
 
     in_woonwijk = Referentiedata(
         code="WOO",
         naam="In woonwijk",
     )
-    # in_woonwijk = ("WOO", "In woonwijk")

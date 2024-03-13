@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class PUBLICATIESTATUS:
-
     in_aanbieding = Referentiedata(
         code="AAN",
         naam="In aanbieding",
     )
-    # in_aanbieding = ("AAN", "In aanbieding")
     """
     Het gepubliceerde vastgoed is in aanbieding.
     """
@@ -18,7 +14,6 @@ class PUBLICATIESTATUS:
         code="AFG",
         naam="Afgerond",
     )
-    # afgerond = ("AFG", "Afgerond")
     """
     De publicatie van het vastgoed is afgerond.
     """
@@ -27,7 +22,6 @@ class PUBLICATIESTATUS:
         code="GEP",
         naam="Gepubliceerd",
     )
-    # gepubliceerd = ("GEP", "Gepubliceerd")
     """
     Het beschikbaar vastgoed is gepubliceerd.
     """
@@ -36,7 +30,6 @@ class PUBLICATIESTATUS:
         code="GER",
         naam="Gereed voor publicatie",
     )
-    # gereed_voor_publicatie = ("GER", "Gereed voor publicatie")
     """
     De publicatie van beschikbaar vastgoed is gereed voor publicatie.
     """
@@ -45,7 +38,6 @@ class PUBLICATIESTATUS:
         code="ING",
         naam="Ingetrokken",
     )
-    # ingetrokken = ("ING", "Ingetrokken")
     """
     De publicatie van het vastgoed is ingetrokken.
     """
@@ -54,7 +46,6 @@ class PUBLICATIESTATUS:
         code="VOO",
         naam="In voorbereiding",
     )
-    # in_voorbereiding = ("VOO", "In voorbereiding")
     """
     De publicatie van beschikbaar vastgoed is in voorbereiding.
     """

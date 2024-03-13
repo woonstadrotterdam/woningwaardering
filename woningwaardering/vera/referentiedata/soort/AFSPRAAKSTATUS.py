@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class AFSPRAAKSTATUS:
-
     aangevraagd = Referentiedata(
         code="AAN",
         naam="Aangevraagd",
     )
-    # aangevraagd = ("AAN", "Aangevraagd")
     """
     De afspraak is nog niet gepland, maar wel aangevraagd. Daarbij kan eventueel een
     voorkeur bloktijd zijn opgegeven.
@@ -19,7 +15,6 @@ class AFSPRAAKSTATUS:
         code="AFG",
         naam="Afgerond",
     )
-    # afgerond = ("AFG", "Afgerond")
     """
     De afspraak heeft plaatsgevonden.
     """
@@ -28,7 +23,6 @@ class AFSPRAAKSTATUS:
         code="ANN",
         naam="Geannuleerd",
     )
-    # geannuleerd = ("ANN", "Geannuleerd")
     """
     De afspraak is geannuleerd.
     """
@@ -37,7 +31,6 @@ class AFSPRAAKSTATUS:
         code="GEP",
         naam="Gepland",
     )
-    # gepland = ("GEP", "Gepland")
     """
     De afspraak is gepland. Hierbij zal doorgaans ook een medewerker zijn toegewezen.
     """

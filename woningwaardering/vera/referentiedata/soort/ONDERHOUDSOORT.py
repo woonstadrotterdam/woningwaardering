@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class ONDERHOUDSOORT:
-
     inspectie = Referentiedata(
         code="INS",
         naam="Inspectie",
     )
-    # inspectie = ("INS", "Inspectie")
     """
     Opdracht tot het uitvoeren van inspectie-/inventarisatie-werkzaamheden om vast te
     stellen óf en zo ja welke onderhoudswerkzaamheden moeten worden uitgevoerd. Dit kan
@@ -21,7 +17,6 @@ class ONDERHOUDSOORT:
         code="MUT",
         naam="Mutatie",
     )
-    # mutatie = ("MUT", "Mutatie")
     """
     Opdracht tot het uitvoeren van onderhoudswerkzaamheden naar aanleiding van een
     verhuurmutatie.
@@ -31,7 +26,6 @@ class ONDERHOUDSOORT:
         code="PLN",
         naam="Planmatig",
     )
-    # planmatig = ("PLN", "Planmatig")
     """
     Opdracht tot het uitvoeren van onderhoudswerkzaamheden naar aanleiding van een
     goedgekeurd MJO-budget
@@ -41,7 +35,6 @@ class ONDERHOUDSOORT:
         code="PRJ",
         naam="Projectmatig",
     )
-    # projectmatig = ("PRJ", "Projectmatig")
     """
     Opdracht tot het uitvoeren van onderhoudswerkzaamheden naar aanleiding van een
     investeringsproject zoals verduurzaming, renovatie, etc.
@@ -51,7 +44,6 @@ class ONDERHOUDSOORT:
         code="REP",
         naam="Reparatie",
     )
-    # reparatie = ("REP", "Reparatie")
     """
     Opdracht tot het uitvoeren van reparatiewerkzaamheden naar aanleiding van een
     geconstateerd defect
@@ -61,7 +53,6 @@ class ONDERHOUDSOORT:
         code="WMO",
         naam="WMO Aanpassing",
     )
-    # wmo_aanpassing = ("WMO", "WMO Aanpassing")
     """
     Bij benodigde aanpassing van de woning bij de zittende huurder (door ouderdom,
     invaliditeit aanbrengen van WMO-aanpassing)
@@ -71,7 +62,6 @@ class ONDERHOUDSOORT:
         code="WOV",
         naam="Woningverbetering",
     )
-    # woningverbetering = ("WOV", "Woningverbetering")
     """
     Bij aanpassing op verzoek van de huurder voor verbetering van het woongenot.
     Voorbeeld is het voortijdig vervangen van de wc-pot door een luxe uiitvoering

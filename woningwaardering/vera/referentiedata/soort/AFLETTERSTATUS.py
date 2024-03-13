@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class AFLETTERSTATUS:
-
     deels_afgeletterd = Referentiedata(
         code="DEE",
         naam="Deels afgeletterd",
     )
-    # deels_afgeletterd = ("DEE", "Deels afgeletterd")
     """
     Boeking is deels afgeletterd tegen andere boekingen. Voor vorderingen houdt dit in
     dat er betalingen zijn gedaan maar dat er nog een openstaand saldo is. Voor
@@ -21,7 +17,6 @@ class AFLETTERSTATUS:
         code="NIE",
         naam="Niet afgeletterd",
     )
-    # niet_afgeletterd = ("NIE", "Niet afgeletterd")
     """
     Boeking is (nog) niet afgeletterd tegen andere boekingen. Voor vorderingen houdt dit
     in dat deze nog volledig open staat. Voor ontvangsten betekent dit dat deze nog niet
@@ -32,7 +27,6 @@ class AFLETTERSTATUS:
         code="VOL",
         naam="Volledig afgeletterd",
     )
-    # volledig_afgeletterd = ("VOL", "Volledig afgeletterd")
     """
     Boeking is volledig afgeletterd tegen andere boekingen. Voor vorderingen houdt dit
     in dat er geen openstaand saldo meer is. Voor ontvangsten betekent dit dat de

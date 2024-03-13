@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class CONTACTGEGEVENSTATUS:
-
     aangemaakt = Referentiedata(
         code="AAN",
         naam="Aangemaakt",
     )
-    # aangemaakt = ("AAN", "Aangemaakt")
     """
     Het contactgegeven is aangemaakt.
     """
@@ -18,7 +14,6 @@ class CONTACTGEGEVENSTATUS:
         code="GEV",
         naam="Gevalideerd",
     )
-    # gevalideerd = ("GEV", "Gevalideerd")
     """
     Het contactgeggeven is gevalideerd via een mail, sms etc.
     """
@@ -27,7 +22,6 @@ class CONTACTGEGEVENSTATUS:
         code="ONG",
         naam="Ongeldig",
     )
-    # ongeldig = ("ONG", "Ongeldig")
     """
     Het contactgegeven is niet (meer) geldig.
     """

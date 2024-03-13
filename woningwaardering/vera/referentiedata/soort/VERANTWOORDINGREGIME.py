@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class VERANTWOORDINGREGIME:
-
     administratieve_scheiding = Referentiedata(
         code="ADM",
         naam="Administratieve scheiding",
     )
-    # administratieve_scheiding = ("ADM", "Administratieve scheiding")
     """
     De DAEB- en niet-DAEB activiteiten van de coporatie worden administratief van elkaar
     gescheiden
@@ -19,7 +15,6 @@ class VERANTWOORDINGREGIME:
         code="HYB",
         naam="Hybride",
     )
-    # hybride = ("HYB", "Hybride")
     """
     Een scheiding is hybride indien er bezit wordt overgeheveld van de TI naar een
     dochtervennootschap, terwijl ook niet-DAEB bezit achterblijft in de TI.
@@ -29,7 +24,6 @@ class VERANTWOORDINGREGIME:
         code="JUR",
         naam="Juridische scheiding",
     )
-    # juridische_scheiding = ("JUR", "Juridische scheiding")
     """
     De DAEB- en niet-DAEB activiteiten van de corporatie zijn in aparte juridische
     entiteiten ondergebracht, elk met een eigen financiële administratie
@@ -39,7 +33,6 @@ class VERANTWOORDINGREGIME:
         code="VER",
         naam="Verlicht regime",
     )
-    # verlicht_regime = ("VER", "Verlicht regime")
     """
     De corporatie voldoet aan de voorwaarden waaronder geen gescheiden administraties
     voor DAEB- en niet-DAEB activiteiten gevoerd hoeven te worden.

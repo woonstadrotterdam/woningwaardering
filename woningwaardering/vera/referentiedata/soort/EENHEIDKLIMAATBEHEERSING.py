@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class EENHEIDKLIMAATBEHEERSING:
-
     airco = Referentiedata(
         code="AIR",
         naam="Airco",
     )
-    # airco = ("AIR", "Airco")
     """
     Een airconditioner (airco) is een apparaat dat de luchttemperatuur en vochtigheid in
     een ruimte regelt voor comfortabele omstandigheden. Het werkt door warme lucht uit
@@ -22,7 +18,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="BLO",
         naam="Blokverwarming",
     )
-    # blokverwarming = ("BLO", "Blokverwarming")
     """
     Blokverwarming is een centraal verwarmingssysteem dat wordt gebruikt in gebouwen met
     meerdere woningen. In plaats van individuele cv-ketels hebben alle woningen een
@@ -35,7 +30,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="CEV",
         naam="Centrale verwarming",
     )
-    # centrale_verwarming = ("CEV", "Centrale verwarming")
     """
     Centrale verwarming is een systeem waarbij warmte wordt geproduceerd op één centrale
     locatie, meestal een ketel, en vervolgens via leidingen naar verschillende ruimtes
@@ -49,7 +43,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="GAS",
         naam="Gaskachels",
     )
-    # gaskachels = ("GAS", "Gaskachels")
     """
     Een gaskachel is een verwarmingstoestel dat werkt op aardgas of propaan. Het bevat
     een brander die gas verbrandt om warmte te produceren, waardoor de
@@ -60,7 +53,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="HKA",
         naam="Houtkachel",
     )
-    # houtkachel = ("HKA", "Houtkachel")
     """
     Een houtkachel is een verwarmingstoestel dat brandt op hout als brandstof. Het heeft
     een vuurhaard waarin hout wordt verbrand om warmte te genereren, waardoor een ruimte
@@ -71,7 +63,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="MUU",
         naam="Muurverwarming",
     )
-    # muurverwarming = ("MUU", "Muurverwarming")
     """
     Muurverwarming is een verwarmingssysteem waarbij warmte wordt gegenereerd door
     leidingen die in de muren zijn ingebed. Warm water stroomt door deze leidingen,
@@ -82,7 +73,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="MVE",
         naam="Mechanische ventilatie",
     )
-    # mechanische_ventilatie = ("MVE", "Mechanische ventilatie")
     """
     Mechanische ventilatie is een systeem dat wordt gebruikt om verse lucht in gebouwen
     te brengen en vervuilde lucht af te voeren. Het maakt gebruik van ventilatoren om
@@ -94,7 +84,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="OHA",
         naam="Open haard",
     )
-    # open_haard = ("OHA", "Open haard")
     """
     Een open haard is een vuurplaats in een huis met een opening waarin hout of andere
     brandbare materialen worden verbrand. Het biedt warmte, sfeer en soms ook
@@ -105,7 +94,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="STV",
         naam="Stadsverwarming",
     )
-    # stadsverwarming = ("STV", "Stadsverwarming")
     """
     Stadsverwarming is een systeem waarbij warmte wordt geproduceerd op één centrale
     locatie, meestal een energiecentrale, en vervolgens via een netwerk van leidingen
@@ -118,7 +106,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="VLV",
         naam="Vloerverwarming",
     )
-    # vloerverwarming = ("VLV", "Vloerverwarming")
     """
     Vloerverwarming is een verwarmingssysteem waarbij warmte wordt afgegeven via
     leidingen onder de vloer. Warm water stroomt door deze leidingen, waardoor de vloer
@@ -129,7 +116,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="VOL",
         naam="Volledig Elektrisch",
     )
-    # volledig_elektrisch = ("VOL", "Volledig Elektrisch")
     """
     Volledig elektrische klimaatbeheersing
     """
@@ -138,7 +124,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="WAC",
         naam="Warmtepomp CV",
     )
-    # warmtepomp_cv = ("WAC", "Warmtepomp CV")
     """
     Warmtepomp i.c.m. CV-ketel voor verwarming en warm water. Ook wel een hybride
     waterpomp genoemd. Dit kan zowel individueel als collectief georganiseerd zijn.
@@ -148,7 +133,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="WAR",
         naam="Warmtepomp",
     )
-    # warmtepomp = ("WAR", "Warmtepomp")
     """
     Volledig elektrische warmtepomp voor verwarming en warm water. Dit kan zowel
     individueel als collectief georganiseerd zijn.
@@ -158,7 +142,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="WKO",
         naam="Warmte- koudeopslaginstallatie",
     )
-    # warmte_koudeopslaginstallatie = ("WKO", "Warmte- koudeopslaginstallatie")
     """
     Een warmte-koudeopslaginstallatie (WKO) is een duurzaam verwarmingssysteem dat
     warmte in de zomer uit een gebouw haalt en opslaat in de grond, om het in de winter
@@ -170,7 +153,6 @@ class EENHEIDKLIMAATBEHEERSING:
         code="WTW",
         naam="Warmteterugwinsysteem",
     )
-    # warmteterugwinsysteem = ("WTW", "Warmteterugwinsysteem")
     """
     Een warmteterugwinsysteem (WTW) is een installatie die de warmte uit afgevoerde
     lucht recupereert en gebruikt om de binnenkomende verse lucht te verwarmen, waardoor

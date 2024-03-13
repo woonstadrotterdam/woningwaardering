@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class PUNTENMUTATIESOORT:
-
     intrekken_toewijzing = Referentiedata(
         code="ITO",
         naam="Intrekken toewijzing",
     )
-    # intrekken_toewijzing = ("ITO", "Intrekken toewijzing")
     """
     Intrekken toewijzing van de eenheid.
     """
@@ -18,7 +14,6 @@ class PUNTENMUTATIESOORT:
         code="PAS",
         naam="Puntenafbouw situatiepunten",
     )
-    # puntenafbouw_situatiepunten = ("PAS", "Puntenafbouw situatiepunten")
     """
     Puntenafbouw situatiepunten
     """
@@ -27,7 +22,6 @@ class PUNTENMUTATIESOORT:
         code="PAT",
         naam="Puntenafbouw startpunten",
     )
-    # puntenafbouw_startpunten = ("PAT", "Puntenafbouw startpunten")
     """
     Puntenafbouw startpunten
     """
@@ -36,7 +30,6 @@ class PUNTENMUTATIESOORT:
         code="PAZ",
         naam="Puntenafbouw zoekpunten",
     )
-    # puntenafbouw_zoekpunten = ("PAZ", "Puntenafbouw zoekpunten")
     """
     Puntenafbouw zoekpunten
     """
@@ -45,7 +38,6 @@ class PUNTENMUTATIESOORT:
         code="PSI",
         naam="Puntenopbouw situatiepunten",
     )
-    # puntenopbouw_situatiepunten = ("PSI", "Puntenopbouw situatiepunten")
     """
     Puntenopbouw situatiepunten
     """
@@ -54,7 +46,6 @@ class PUNTENMUTATIESOORT:
         code="PST",
         naam="Puntenopbouw startpunten",
     )
-    # puntenopbouw_startpunten = ("PST", "Puntenopbouw startpunten")
     """
     Puntenopbouw startpunten
     """
@@ -63,7 +54,6 @@ class PUNTENMUTATIESOORT:
         code="PZO",
         naam="Puntenopbouw zoekpunten",
     )
-    # puntenopbouw_zoekpunten = ("PZO", "Puntenopbouw zoekpunten")
     """
     Puntenopbouw zoekpunten
     """
@@ -72,7 +62,6 @@ class PUNTENMUTATIESOORT:
         code="SMI",
         naam="Milde sanctie",
     )
-    # milde_sanctie = ("SMI", "Milde sanctie")
     """
     Milde sanctie
     """
@@ -81,7 +70,6 @@ class PUNTENMUTATIESOORT:
         code="SNS",
         naam="No-show sanctie",
     )
-    # no_show_sanctie = ("SNS", "No-show sanctie")
     """
     No-show sanctie
     """
@@ -90,7 +78,6 @@ class PUNTENMUTATIESOORT:
         code="SZW",
         naam="Zware sanctie",
     )
-    # zware_sanctie = ("SZW", "Zware sanctie")
     """
     Zware sanctie
     """
@@ -99,7 +86,6 @@ class PUNTENMUTATIESOORT:
         code="TSM",
         naam="Terugdraaien milde sanctie",
     )
-    # terugdraaien_milde_sanctie = ("TSM", "Terugdraaien milde sanctie")
     """
     Terugdraaien milde sanctie
     """
@@ -108,7 +94,6 @@ class PUNTENMUTATIESOORT:
         code="TSN",
         naam="Terugdraaien no-show sanctie",
     )
-    # terugdraaien_no_show_sanctie = ("TSN", "Terugdraaien no-show sanctie")
     """
     Terugdraaien no-show sanctie
     """
@@ -117,7 +102,6 @@ class PUNTENMUTATIESOORT:
         code="TSZ",
         naam="Terugdraaien zware sanctie",
     )
-    # terugdraaien_zware_sanctie = ("TSZ", "Terugdraaien zware sanctie")
     """
     Terugdraaien zware sanctie
     """

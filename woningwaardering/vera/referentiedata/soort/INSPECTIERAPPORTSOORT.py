@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class INSPECTIERAPPORTSOORT:
-
     eindinspectierapport = Referentiedata(
         code="EIN",
         naam="Eindinspectierapport",
     )
-    # eindinspectierapport = ("EIN", "Eindinspectierapport")
     """
     Rapport naar aanleiding van een eindinspectie
     """
@@ -18,7 +14,6 @@ class INSPECTIERAPPORTSOORT:
         code="REP",
         naam="Reparatieinspectierapport",
     )
-    # reparatieinspectierapport = ("REP", "Reparatieinspectierapport")
     """
     Inspectierapport naar aanleiding van een onduidelijk reparatieverzoek
     """
@@ -27,7 +22,6 @@ class INSPECTIERAPPORTSOORT:
         code="STE",
         naam="Steekproefinspectierapport",
     )
-    # steekproefinspectierapport = ("STE", "Steekproefinspectierapport")
     """
     Inspectierapport naar aanleiding van een uitgevoerde steekproef door een
     inspecteur/opzichter.
@@ -37,7 +31,6 @@ class INSPECTIERAPPORTSOORT:
         code="VOO",
         naam="Voorinspectierapport",
     )
-    # voorinspectierapport = ("VOO", "Voorinspectierapport")
     """
     Rapport naar aanleiding van een voor- of tusseninspectie
     """

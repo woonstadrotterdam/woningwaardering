@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class AUTHENTIEKGEGEVENBRON:
-
     klantcontact = Referentiedata(
         code="KLA",
         naam="Klantcontact",
     )
-    # klantcontact = ("KLA", "Klantcontact")
     """
     Gegevens zijn aangeleverd via de balie of klantcontactcentrum.
     """
@@ -18,7 +14,6 @@ class AUTHENTIEKGEGEVENBRON:
         code="BSN",
         naam="BvBSN",
     )
-    # bvbsn = ("BSN", "BvBSN")
     """
     Gegevens zijn gedeeld vanuit de basisvoorziening burgerservicenummer
     """
@@ -27,7 +22,6 @@ class AUTHENTIEKGEGEVENBRON:
         code="DUO",
         naam="Dienst uitvoering onderwijs",
     )
-    # dienst_uitvoering_onderwijs = ("DUO", "Dienst uitvoering onderwijs")
     """
     Gegevens zijn gedeeld vanuit DUO.
     """
@@ -36,7 +30,6 @@ class AUTHENTIEKGEGEVENBRON:
         code="IRF",
         naam="Inkomensregistratieformulier",
     )
-    # inkomensregistratieformulier = ("IRF", "Inkomensregistratieformulier")
     """
     Gegevens zijn gedeeld vanuit het Inkomensregistratieformulier.
     """
@@ -45,7 +38,6 @@ class AUTHENTIEKGEGEVENBRON:
         code="MIJ",
         naam="Mijn Overheid",
     )
-    # mijn_overheid = ("MIJ", "Mijn Overheid")
     """
     Gegevens zijn gedeeld vanuit Mijn Overheid.
     """
@@ -54,7 +46,6 @@ class AUTHENTIEKGEGEVENBRON:
         code="QII",
         naam="Qii",
     )
-    # qii = ("QII", "Qii")
     """
     Gegevens zijn gedeeld vanuit Qii.
     """
@@ -63,7 +54,6 @@ class AUTHENTIEKGEGEVENBRON:
         code="UWV",
         naam="UWV",
     )
-    # uwv = ("UWV", "UWV")
     """
     Gegevens zijn gedeeld vanuit UWV.
     """

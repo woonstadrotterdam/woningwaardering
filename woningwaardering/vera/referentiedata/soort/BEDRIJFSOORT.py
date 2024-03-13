@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class BEDRIJFSOORT:
-
     bouwbedrijf = Referentiedata(
         code="BOU",
         naam="Bouwbedrijf",
     )
-    # bouwbedrijf = ("BOU", "Bouwbedrijf")
     """
     Financieel bedrijf dat zich bezighoudt met bouwactiviteiten.
     """
@@ -18,7 +14,6 @@ class BEDRIJFSOORT:
         code="MON",
         naam="Monumenten",
     )
-    # monumenten = ("MON", "Monumenten")
     """
     Financieel bedrijf dat zich bezighoudt met beheeractiviteiten van panden met een
     monumenten status.
@@ -28,7 +23,6 @@ class BEDRIJFSOORT:
         code="OND",
         naam="Onderhoudsbedrijf",
     )
-    # onderhoudsbedrijf = ("OND", "Onderhoudsbedrijf")
     """
     Financieel bedrijf dat zich bezighoudt met onderhoudsactiviteiten.
     """
@@ -37,7 +31,6 @@ class BEDRIJFSOORT:
         code="PRO",
         naam="Projectontwikkeling",
     )
-    # projectontwikkeling = ("PRO", "Projectontwikkeling")
     """
     Financieel bedrijf dat zich bezighoudt met projectontwikkeling.
     """
@@ -46,7 +39,6 @@ class BEDRIJFSOORT:
         code="SER",
         naam="Servicebedrijf",
     )
-    # servicebedrijf = ("SER", "Servicebedrijf")
     """
     Financieel bedrijf dat zich bezighoudt met het verlenen van diensten.
     """
@@ -55,7 +47,6 @@ class BEDRIJFSOORT:
         code="TI",
         naam="Toegelaten instelling",
     )
-    # toegelaten_instelling = ("TI", "Toegelaten instelling")
     """
     Financieel bedrijf dat door de Autoriteit woningcorporaties (Aw) is toegelaten als
     toegelaten instelling volgens de Woningwet.
@@ -65,7 +56,6 @@ class BEDRIJFSOORT:
         code="VVE",
         naam="Vereniging van Eigenaren",
     )
-    # vereniging_van_eigenaren = ("VVE", "Vereniging van Eigenaren")
     """
     Vereniging van Eigenaren van een cluster van eenheden binnen het bezit van een
     corporatie, die is opgericht nadat een corporatie een of meer eenheden binnen de
@@ -76,7 +66,6 @@ class BEDRIJFSOORT:
         code="WOM",
         naam="Wijkontwikkelingsmaatschappij",
     )
-    # wijkontwikkelingsmaatschappij = ("WOM", "Wijkontwikkelingsmaatschappij")
     """
     Financieel bedrijf die de regie van projectontwikkeling, uitvoering en beheer van
     woningen in een wijk op zich neemt, omdat de complexiteit van een gebied te groot is
@@ -87,7 +76,6 @@ class BEDRIJFSOORT:
         code="WWA",
         naam="Woonwagenzaken",
     )
-    # woonwagenzaken = ("WWA", "Woonwagenzaken")
     """
     Financieel bedrijf dat zich bezighoudt met beheeractiviteiten van woonwagens en
     standplaatsen.

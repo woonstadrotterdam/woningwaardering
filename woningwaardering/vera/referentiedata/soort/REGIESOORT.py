@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class REGIESOORT:
-
     bouwteam = Referentiedata(
         code="BOU",
         naam="Bouwteam",
     )
-    # bouwteam = ("BOU", "Bouwteam")
     """
     De aannemende partij wordt al tijdens de ontwerpfase bij het project betrokken. Deze
     aanpak zorgt ervoor dat uitvoerende expertise reeds in een vroeg stadium van het
@@ -24,7 +20,6 @@ class REGIESOORT:
         code="TRA",
         naam="Traditioneel",
     )
-    # traditioneel = ("TRA", "Traditioneel")
     """
     Bij traditionele bouworganisatievormen zijn ontwerp en uitvoering gescheiden. De
     opdrachtgever heeft zowel met de ontwerper als de met de aannemer een aparte
@@ -37,7 +32,6 @@ class REGIESOORT:
         code="TUR",
         naam="Turnkey",
     )
-    # turnkey = ("TUR", "Turnkey")
     """
     Bij Turn-Key bouwprojecten is de opdrachtgever meestal alleen betrokken bij het
     opstellen van het Programma van Eisen. Het PvE wordt vervolgens overgedragen aan één

@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class OVEREENKOMSTDETAILSOORT:
-
     bepaalde_tijd = Referentiedata(
         code="BEP",
         naam="Bepaalde tijd",
     )
-    # bepaalde_tijd = ("BEP", "Bepaalde tijd")
     """
     Arbeidsovereenkomst voor bepaalde tijd.
     """
@@ -18,7 +14,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="BOG",
         naam="Bedrijfsonroerendgoed",
     )
-    # bedrijfsonroerendgoed = ("BOG", "Bedrijfsonroerendgoed")
     """
     Verhuur van vastgoed voor zakelijke doeleinden.
     """
@@ -27,18 +22,16 @@ class OVEREENKOMSTDETAILSOORT:
         code="CAM",
         naam="Campuscontract",
     )
-    # campuscontract = ("CAM", "Campuscontract")
     """
     Een campuscontract is een huurovereenkomst die direct is gekoppeld aan een
-    inschrijving bij een onderwijsinstelling. Bij beindiging inschrijving eindigt ook de
-    overeenkomst.
+    inschrijving bij een onderwijsinstelling. Bij beeindiging inschrijving eindigt ook
+    de overeenkomst.
     """
 
     flexcontract = Referentiedata(
         code="FLE",
         naam="Flexcontract",
     )
-    # flexcontract = ("FLE", "Flexcontract")
     """
     Huurovereenkomst voor een flexwoning: de einddatum van de omgevingsvergunning die
     voor de woning is afgegeven is een opzeggrond voor de huurovereenkomst (artikel
@@ -49,7 +42,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="JON",
         naam="Jongerencontract",
     )
-    # jongerencontract = ("JON", "Jongerencontract")
     """
     Jongeren tussen 18 en 28 jaar kunnen een huurcontract voor vijf jaar krijgen voor
     een geschikte woning voor jongeren.
@@ -59,7 +51,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="KGA",
         naam="Koopgarant",
     )
-    # koopgarant = ("KGA", "Koopgarant")
     """
     Verkoop van een woning tegen lagere prijs dan de marktwaarde en de garantie dat de
     corporatie of ontwikkelaar de woning binnen 3 maanden zal terugkopen indien gewenst.
@@ -69,7 +60,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="MGE",
         naam="MGE constructie",
     )
-    # mge_constructie = ("MGE", "MGE constructie")
     """
     Verkoop met Maatschappelijk Gebonden Eigendom.
     """
@@ -78,7 +68,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="NIE",
         naam="Nieuwsbrief",
     )
-    # nieuwsbrief = ("NIE", "Nieuwsbrief")
     """
     Nieuwsbrief voor marketing doeleinden.
     """
@@ -87,7 +76,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="NUL",
         naam="Nul-uren contract",
     )
-    # nul_uren_contract = ("NUL", "Nul-uren contract")
     """
     Nul-uren arbeidsovereenkomst
     """
@@ -96,7 +84,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="OBE",
         naam="Onbepaalde tijd",
     )
-    # onbepaalde_tijd = ("OBE", "Onbepaalde tijd")
     """
     Arbeidsovereenkomst voor onbepaalde tijd
     """
@@ -105,7 +92,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="ONB",
         naam="Onbepaalde tijd contract",
     )
-    # onbepaalde_tijd_contract = ("ONB", "Onbepaalde tijd contract")
     """
     Regulier huurcontract zonder einddatum.
     """
@@ -114,7 +100,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="PER",
         naam="Persoonlijke woonkrant",
     )
-    # persoonlijke_woonkrant = ("PER", "Persoonlijke woonkrant")
     """
     Nieuwsbrief met gepersonificeerd aanbod. (Digizine)
     """
@@ -123,7 +108,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="PRO",
         naam="Nieuwbouwinformatie",
     )
-    # nieuwbouwinformatie = ("PRO", "Nieuwbouwinformatie")
     """
     Abonnement of nieuwsbrief met informatie over nieuwbouw projecten en/of vastgoed
     ontwikkelingen.
@@ -133,7 +117,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="SHS",
         naam="ShortStay",
     )
-    # shortstay = ("SHS", "ShortStay")
     """
     Short stay is het tijdelijk wonen in een zelfstandige woning voor een periode van
     tenminste zeven nachten en maximaal zes maanden
@@ -143,7 +126,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="TIJ",
         naam="Tijdelijk contract",
     )
-    # tijdelijk_contract = ("TIJ", "Tijdelijk contract")
     """
     Huurcontract voor bepaalde tijd.
     """
@@ -152,7 +134,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="TWO",
         naam="Te Woon / Vrije keuze",
     )
-    # te_woon_of_vrije_keuze = ("TWO", "Te Woon / Vrije keuze")
     """
     De woning is zowel te huur als te koop.
     """
@@ -161,7 +142,6 @@ class OVEREENKOMSTDETAILSOORT:
         code="UIT",
         naam="Is onderdeel uitpondproject",
     )
-    # is_onderdeel_uitpondproject = ("UIT", "Is onderdeel uitpondproject")
     """
     Verkoop van voormalige huurwoning aan de voormalige huurder of een nieuwe eigenaar.
     """

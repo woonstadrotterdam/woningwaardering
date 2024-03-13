@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class EENHEIDPRIJSCONDITIE:
-
     exclusief_servicekosten = Referentiedata(
         code="ESE",
         naam="Exclusief servicekosten",
     )
-    # exclusief_servicekosten = ("ESE", "Exclusief servicekosten")
     """
     De vraagprijs is exclusief servicekosten.
     """
@@ -18,7 +14,6 @@ class EENHEIDPRIJSCONDITIE:
         code="ISE",
         naam="Inclusief servicekosten",
     )
-    # inclusief_servicekosten = ("ISE", "Inclusief servicekosten")
     """
     De vraagprijs is inclusief servicekosten.
     """
@@ -27,7 +22,6 @@ class EENHEIDPRIJSCONDITIE:
         code="IST",
         naam="Inclusief stookkosten",
     )
-    # inclusief_stookkosten = ("IST", "Inclusief stookkosten")
     """
     De vraagprijs is inclusief kosten (voorschot) voor de verwarming van het vastgoed.
     """
@@ -36,7 +30,6 @@ class EENHEIDPRIJSCONDITIE:
         code="KKO",
         naam="Kosten Koper",
     )
-    # kosten_koper = ("KKO", "Kosten Koper")
     """
     De vraagprijs is op basis van kosten koper. De kosten met betrekking tot de
     onroerend goed overdracht zijn voor de koper.
@@ -46,7 +39,6 @@ class EENHEIDPRIJSCONDITIE:
         code="VON",
         naam="Vrij op naam",
     )
-    # vrij_op_naam = ("VON", "Vrij op naam")
     """
     De kosten voor de overdracht van de woning zijn voor rekening van de verkoper. Het
     betreft hier de BTW of overdrachtsbelasting, de kadastrale kosten en de

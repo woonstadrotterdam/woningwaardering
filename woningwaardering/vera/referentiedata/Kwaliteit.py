@@ -1,5 +1,6 @@
-
-from woningwaardering.vera.referentiedata.soort import VRAGENLIJSTREGELHERKOMST
+from woningwaardering.vera.referentiedata.soort import (
+    VRAGENLIJSTREGELHERKOMST,
+)
 
 
 class Kwaliteit:

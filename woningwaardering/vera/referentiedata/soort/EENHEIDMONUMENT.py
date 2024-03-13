@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class EENHEIDMONUMENT:
-
     beschermd_dorpsgezicht = Referentiedata(
         code="DOR",
         naam="Beschermd dorpsgezicht",
     )
-    # beschermd_dorpsgezicht = ("DOR", "Beschermd dorpsgezicht")
     """
     Bij ontwikkelingen binnen een stads- of dorpsgezicht moet rekening gehouden met de
     cultuurhistorische waarde. Elk beschermd gebied heeft hiervoor een eigen
@@ -22,7 +18,6 @@ class EENHEIDMONUMENT:
         code="GEM",
         naam="Gemeentelijk monument",
     )
-    # gemeentelijk_monument = ("GEM", "Gemeentelijk monument")
     """
     Een gemeente kan besluiten een bijzonder pand op de gemeentelijke monumentenlijst te
     zetten. Dit gebeurt als een pand geen nationale betekenis heeft, maar wel van
@@ -33,7 +28,6 @@ class EENHEIDMONUMENT:
         code="PRO",
         naam="Provinciaal monument",
     )
-    # provinciaal_monument = ("PRO", "Provinciaal monument")
     """
     Niet alleen panden, maar ook dijken, grenspalen en gemeente-overschrijdende objecten
     kunnen deel uitmaken van een provinciale monumentenlijst. De lijst wordt
@@ -47,7 +41,6 @@ class EENHEIDMONUMENT:
         code="RIJ",
         naam="Rijksmonument",
     )
-    # rijksmonument = ("RIJ", "Rijksmonument")
     """
     Rijksmonumenten zijn gebouwen of andere objecten die om hun nationale
     cultuurhistorische waarde door de rijksoverheid zijn aangewezen als beschermd
@@ -58,7 +51,6 @@ class EENHEIDMONUMENT:
         code="STA",
         naam="Beschermd stadsgezicht",
     )
-    # beschermd_stadsgezicht = ("STA", "Beschermd stadsgezicht")
     """
     Bij ontwikkelingen binnen een stads- of dorpsgezicht moet rekening gehouden met de
     cultuurhistorische waarde. Elk beschermd gebied heeft hiervoor een eigen
@@ -71,7 +63,6 @@ class EENHEIDMONUMENT:
         code="WER",
         naam="Werelderfgoed",
     )
-    # werelderfgoed = ("WER", "Werelderfgoed")
     """
     Werelderfgoederen zijn culturele of natuurlijke monumenten die mondiaal gezien
     uitzonderlijk en onvervangbaar zijn. Alleen als een monument is ingeschreven op de

@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class EENHEIDSOORT:
-
     bedrijfsruimte = Referentiedata(
         code="BED",
         naam="Bedrijfsruimte",
     )
-    # bedrijfsruimte = ("BED", "Bedrijfsruimte")
     """
     Bedrijfsruimte en winkels
     """
@@ -18,7 +14,6 @@ class EENHEIDSOORT:
         code="INT",
         naam="Intramuraal zorgvastgoed",
     )
-    # intramuraal_zorgvastgoed = ("INT", "Intramuraal zorgvastgoed")
     """
     Bij intramuraal zorgvastgoed wordt de bewoners van het gebouw een integraal pakket
     van zorg met verblijf geboden (op grond van Wet Langdurige Zorg (WLZ) of
@@ -32,10 +27,9 @@ class EENHEIDSOORT:
         code="MOG",
         naam="Maatschappelijk vastgoed",
     )
-    # maatschappelijk_vastgoed = ("MOG", "Maatschappelijk vastgoed")
     """
     Gebouwen met een maatschappelijke gebruiksbestemming zoals bedoeld in artikel 49 van
-    de Woningwet. Ook wel Maatschappelijk Onroerend goed (MOG). Voorbeelden zijn
+    de Woningwet. Ook wel Maatschappelijk Onroerend goed (MOG).  Voorbeelden zijn
     buurtcentra, scholen en bibliotheken.
     """
 
@@ -43,7 +37,6 @@ class EENHEIDSOORT:
         code="OVE",
         naam="Overig",
     )
-    # overig = ("OVE", "Overig")
     """
     Restcategorie voor ligplaatsen, bergingen, bouwkavels, plantsoenen etc.
     """
@@ -52,7 +45,6 @@ class EENHEIDSOORT:
         code="PAR",
         naam="Parkeergelegenheid",
     )
-    # parkeergelegenheid = ("PAR", "Parkeergelegenheid")
     """
     Parkeergelegenheden, Garage, parkeerplaatsen individueel of collectief
     """
@@ -61,7 +53,6 @@ class EENHEIDSOORT:
         code="REC",
         naam="Recreatiebestemming",
     )
-    # recreatiebestemming = ("REC", "Recreatiebestemming")
     """
     Vastgoed voor recreatief gebruik (lokale regelgeving) zoals Recreatiewoningen
     """
@@ -70,7 +61,6 @@ class EENHEIDSOORT:
         code="WOO",
         naam="Woonruimte",
     )
-    # woonruimte = ("WOO", "Woonruimte")
     """
-    Synoniemen zijn onder andere: wooneenheden, woongelegenheden (Handboek MVS)
+    Synoniemen zijn onder andere: wooneenheden,  woongelegenheden (Handboek MVS)
     """

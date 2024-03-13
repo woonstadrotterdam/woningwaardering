@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class PROJECTSOORT:
-
     grondexploitatie = Referentiedata(
         code="GRX",
         naam="Grondexploitatie",
     )
-    # grondexploitatie = ("GRX", "Grondexploitatie")
     """
     Een project dat tot doel heeft een stuk grond te exploiteren, van het moment van
     verwerving tot het moment van ontwikkeling of verkoop. Aan de basis van een
@@ -25,7 +21,6 @@ class PROJECTSOORT:
         code="MOD",
         naam="Modulaire bouw",
     )
-    # modulaire_bouw = ("MOD", "Modulaire bouw")
     """
     Bouwtechniek waarbij modules worden gekoppeld of gestapeld om een gebouw te creëren.
     De modules worden gebruiksklaar in een fabriek geproduceerd en worden met behulp van
@@ -37,7 +32,6 @@ class PROJECTSOORT:
         code="NIU",
         naam="Nieuwbouw",
     )
-    # nieuwbouw = ("NIU", "Nieuwbouw")
     """
     Project waarbij een of meer eenheden aan de voorraad worden toegevoegd door
     nieuwbouw, zonder dat daarvoor op het(/de)zelde perce(e)l(en) eerst een of meer
@@ -48,7 +42,6 @@ class PROJECTSOORT:
         code="REB",
         naam="Renovatie bewoond",
     )
-    # renovatie_bewoond = ("REB", "Renovatie bewoond")
     """
     Renovatieproject waarbij (een deel van) de bewoners in hun woning blijven.Er is
     sprake van een renovatie (of: ‘ingrijpende verbouwing’) als een onroerende zaak
@@ -64,7 +57,6 @@ class PROJECTSOORT:
         code="REO",
         naam="Renovatie onbewoond",
     )
-    # renovatie_onbewoond = ("REO", "Renovatie onbewoond")
     """
     Renovatieproject waarbij alle bewoners (tijdelijk) hun woningen verlaten.Er is
     sprake van een renovatie (of: ‘ingrijpende verbouwing’) als een onroerende zaak
@@ -80,7 +72,6 @@ class PROJECTSOORT:
         code="SLN",
         naam="Sloop- en Nieuwbouw",
     )
-    # sloop_en_nieuwbouw = ("SLN", "Sloop- en Nieuwbouw")
     """
     Project waarbij een of meer eenheden aan de voorraad worden onttrokken door sloop,
     waarna een of meer nieuwe eenheden aan de voorraad worden toegevoegd door nieuwbouw
@@ -91,7 +82,6 @@ class PROJECTSOORT:
         code="SLO",
         naam="Sloop",
     )
-    # sloop = ("SLO", "Sloop")
     """
     Project waarbij een of meer eenheden aan de voorraad worden onttrokken door sloop,
     zonder dat daar nieuwbouw op het(/de)zelde perce(e)l(en) tegenover staat
@@ -101,7 +91,6 @@ class PROJECTSOORT:
         code="TRA",
         naam="Transformatie",
     )
-    # transformatie = ("TRA", "Transformatie")
     """
     Een transformatieproject beoogt “het hergebruik van bestaande panden waarbij
     hetgebruik van het pand (deels) wordt omgezet van een niet-woonfunctie naar een

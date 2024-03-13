@@ -1,21 +1,16 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class CREDITEURSTATUS:
-
     actief = Referentiedata(
         code="ACT",
         naam="Actief",
     )
-    # actief = ("ACT", "Actief")
 
     alleen_voor_betalen = Referentiedata(
         code="BET",
         naam="Alleen voor betalen",
     )
-    # alleen_voor_betalen = ("BET", "Alleen voor betalen")
     """
     Korting
     """
@@ -24,7 +19,6 @@ class CREDITEURSTATUS:
         code="GEB",
         naam="Geblokkeerd",
     )
-    # geblokkeerd = ("GEB", "Geblokkeerd")
     """
     Toeslag
     """
@@ -33,4 +27,3 @@ class CREDITEURSTATUS:
         code="VRL",
         naam="Voorlopig",
     )
-    # voorlopig = ("VRL", "Voorlopig")

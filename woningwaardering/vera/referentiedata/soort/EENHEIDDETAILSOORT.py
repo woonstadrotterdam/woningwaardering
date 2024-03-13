@@ -1,21 +1,16 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class EENHEIDDETAILSOORT:
-
     antenne_opstelplaats = Referentiedata(
         code="ANT",
         naam="Antenne-opstelplaats",
     )
-    # antenne_opstelplaats = ("ANT", "Antenne-opstelplaats")
 
     atelierruimte = Referentiedata(
         code="ATE",
         naam="Atelierruimte",
     )
-    # atelierruimte = ("ATE", "Atelierruimte")
     """
     Een atelier is een werkplaats, in het bijzonder die van een beeldend kunstenaar.
     """
@@ -24,7 +19,6 @@ class EENHEIDDETAILSOORT:
         code="BAS",
         naam="Basisschool",
     )
-    # basisschool = ("BAS", "Basisschool")
     """
     Basisschool conform: art. 49 lid 2a
     """
@@ -33,7 +27,6 @@ class EENHEIDDETAILSOORT:
         code="BEN",
         naam="Benedenwoning",
     )
-    # benedenwoning = ("BEN", "Benedenwoning")
     """
     Een benedenwoning is een etagewoning of flatwoning op de begane grond met een
     voordeur die op straat uitkomt. De benedenwoning bestaat uit één of meerdere
@@ -44,7 +37,6 @@ class EENHEIDDETAILSOORT:
         code="BER",
         naam="Berging",
     )
-    # berging = ("BER", "Berging")
     """
     Een berging is een bergruimte of bijgebouw met een algemene bergfunctie op een apart
     perceel of met een eigen adres, vaak in een aaneengesloten rij met andere berghokken
@@ -55,7 +47,6 @@ class EENHEIDDETAILSOORT:
         code="BIB",
         naam="Bibliotheek",
     )
-    # bibliotheek = ("BIB", "Bibliotheek")
     """
     Dorps- of wijkbibliotheek
     """
@@ -64,7 +55,6 @@ class EENHEIDDETAILSOORT:
         code="BIJ",
         naam="Bijeenkomstruimte",
     )
-    # bijeenkomstruimte = ("BIJ", "Bijeenkomstruimte")
     """
     Ruimte voor het samenkomen van personen voor kunst, cultuur, godsdienst,
     communicatie, het verstrekken van consumpties voor het gebruik ter plaatse of het
@@ -76,7 +66,6 @@ class EENHEIDDETAILSOORT:
         code="BOU",
         naam="Bouwkavel",
     )
-    # bouwkavel = ("BOU", "Bouwkavel")
     """
     Een aaneengesloten terreinoppervlak, waarop krachtens het bestemmingsplan een
     zelfstandige, bij elkaar behorende bebouwing is toegestaan.
@@ -86,7 +75,6 @@ class EENHEIDDETAILSOORT:
         code="BOV",
         naam="Bovenwoning",
     )
-    # bovenwoning = ("BOV", "Bovenwoning")
     """
     Een bovenwoning is een etagewoning of flatwoning op een etage die bereikbaar is via
     een binnentrap met een mogelijk gemeenschappelijke voordeur die op straat uitkomt of
@@ -99,7 +87,6 @@ class EENHEIDDETAILSOORT:
         code="BRE",
         naam="Brede school",
     )
-    # brede_school = ("BRE", "Brede school")
     """
     Brede school met bijv. peuterzaal, kinderopvang, voor-, tussen- en naschoolse
     opvang, buurtsporthal, en -complex (zogeheten multifunctionele accommodaties)
@@ -109,7 +96,6 @@ class EENHEIDDETAILSOORT:
         code="BUU",
         naam="Buurthuis",
     )
-    # buurthuis = ("BUU", "Buurthuis")
     """
     Openbaar gebouw in een woonkern dat dienst doet als centrum voor maatschappelijk
     werk in en voor de buurt
@@ -119,7 +105,6 @@ class EENHEIDDETAILSOORT:
         code="CJG",
         naam="Centrum voor Jeugd en Gezin",
     )
-    # centrum_voor_jeugd_en_gezin = ("CJG", "Centrum voor Jeugd en Gezin")
     """
     Centrum voor jeugd en gezin conform: art. 49 lid 2a
     """
@@ -128,7 +113,6 @@ class EENHEIDDETAILSOORT:
         code="COR",
         naam="Corridorflat",
     )
-    # corridorflat = ("COR", "Corridorflat")
     """
     Een corridorflat is een flatwoning waarbij de voordeur uitkomt op een centraal
     binnen de bouwmassa per etage gelegen loopgang dan wel op een centrale hal op de
@@ -139,7 +123,6 @@ class EENHEIDDETAILSOORT:
         code="CUL",
         naam="Cultuur ruimte",
     )
-    # cultuur_ruimte = ("CUL", "Cultuur ruimte")
     """
     Ruimten voor kleinschalige culturele activiteiten
     """
@@ -148,7 +131,6 @@ class EENHEIDDETAILSOORT:
         code="DAG",
         naam="Dagbestedingsruimte",
     )
-    # dagbestedingsruimte = ("DAG", "Dagbestedingsruimte")
     """
     Ruimte voor dagbesteding van gehandicapten of ouderen, incl. enige
     zorginfrastructuur, die inpandig in een woonzorggebouw zijn gelegen
@@ -158,7 +140,6 @@ class EENHEIDDETAILSOORT:
         code="EIN",
         naam="Eindwoning",
     )
-    # eindwoning = ("EIN", "Eindwoning")
     """
     Een eindwoning is een eengezinswoning die grenst aan een aanliggende woning. De
     eindwoning ligt op het begin of einde van de reeks woningen en heeft geen (extra)
@@ -170,7 +151,6 @@ class EENHEIDDETAILSOORT:
         code="EPK",
         naam="Erfpachtkavel",
     )
-    # erfpachtkavel = ("EPK", "Erfpachtkavel")
     """
     Kavels die gepacht zijn danwel verpacht worden
     """
@@ -179,13 +159,11 @@ class EENHEIDDETAILSOORT:
         code="FIE",
         naam="Fietsparkeerplaats/stalling",
     )
-    # fietsparkeerplaats_of_stalling = ("FIE", "Fietsparkeerplaats/stalling")
 
     galerijflat = Referentiedata(
         code="GAL",
         naam="Galerijflat",
     )
-    # galerijflat = ("GAL", "Galerijflat")
     """
     Een galerijflat is een flatwoning waarbij de voordeur uitkomt op een aan de
     buitenkant gelegen loopgang. Een galerijflat heeft meerdere bouwlagen met woningen
@@ -196,7 +174,6 @@ class EENHEIDDETAILSOORT:
         code="GAR",
         naam="Garage",
     )
-    # garage = ("GAR", "Garage")
     """
     Een garage is een overdekte stallingruimte bestemd en geschikt voor motorvoertuigen
     op meer dan twee wielen.
@@ -206,7 +183,6 @@ class EENHEIDDETAILSOORT:
         code="GEM",
         naam="Gemeenschapscentrum",
     )
-    # gemeenschapscentrum = ("GEM", "Gemeenschapscentrum")
     """
     Culturele infrastructuur door de gemeente beheerd met het oog op
     cultuurparticipatie, gemeenschapsvorming en cultuurspreiding ten behoeve van de
@@ -217,7 +193,6 @@ class EENHEIDDETAILSOORT:
         code="GTW",
         naam="Geschakelde Twee-onder-een-kapwoning",
     )
-    # geschakelde_twee_onder_een_kapwoning = ("GTW", "Geschakelde Twee-onder-een-kapwoning")
     """
     Een geschakelde 2-onder-1-kapwoning is een 2-onder-1-kapwoning waarbij de muren van
     aanbouwen gedeeltelijk aan (aanbouwen van) andere woningen grenzen. Ook wanneer de
@@ -230,7 +205,6 @@ class EENHEIDDETAILSOORT:
         code="GWO",
         naam="Geschakelde woning",
     )
-    # geschakelde_woning = ("GWO", "Geschakelde woning")
     """
     Een geschakelde woning is een eengezinswoning waarbij de muren of muren van
     aanbouwen gedeeltelijk aan (aanbouwen van) andere woningen grenzen. (Voor
@@ -241,7 +215,6 @@ class EENHEIDDETAILSOORT:
         code="HAL",
         naam="Half vrijstaande woning",
     )
-    # half_vrijstaande_woning = ("HAL", "Half vrijstaande woning")
     """
     Een halfvrijstaande woning is een eengezinswoning waarvan het hoofdgebouw verbonden
     is met het hoofdgebouw van één ander object dat geen woning is: óf waarvan het
@@ -254,7 +227,6 @@ class EENHEIDDETAILSOORT:
         code="HER",
         naam="Herenhuis",
     )
-    # herenhuis = ("HER", "Herenhuis")
     """
     Een herenhuis is een relatief grote eengezinswoning gesitueerd binnen de bebouwde
     kom, met een nadrukkelijke architectonische uitstraling in het straatbeeld via een
@@ -267,7 +239,6 @@ class EENHEIDDETAILSOORT:
         code="HOE",
         naam="Hoekwoning",
     )
-    # hoekwoning = ("HOE", "Hoekwoning")
     """
     Een hoekwoning is een eengezinswoning die grenst aan een aanliggende woning. De
     hoekwoning ligt op het begin of einde van de reeks woningen en heeft (extra) bij de
@@ -279,13 +250,11 @@ class EENHEIDDETAILSOORT:
         code="HOR",
         naam="Horeca",
     )
-    # horeca = ("HOR", "Horeca")
 
     hospice = Referentiedata(
         code="HOS",
         naam="Hospice",
     )
-    # hospice = ("HOS", "Hospice")
     """
     Woongelegenheid voor personen die niet meer kunnen genezen.
     """
@@ -294,7 +263,6 @@ class EENHEIDDETAILSOORT:
         code="JON",
         naam="Jongerencentrum",
     )
-    # jongerencentrum = ("JON", "Jongerencentrum")
     """
     Jongerencentrum, mits zonder horecavoorziening
     """
@@ -303,7 +271,6 @@ class EENHEIDDETAILSOORT:
         code="KAM",
         naam="Kamer",
     )
-    # kamer = ("KAM", "Kamer")
     """
     Onzelfstandige woonruimte. Een kamer heeft geen eigen toegang of deelt de keuken of
     toilet met de bewoners van andere woningen/kamers.
@@ -313,7 +280,6 @@ class EENHEIDDETAILSOORT:
         code="KAN",
         naam="Kantoorruimte",
     )
-    # kantoorruimte = ("KAN", "Kantoorruimte")
     """
     Kantoorruimte, vallend onder Bedrijfsmatig vastgoed. Let op: gebruik voor
     kantoorruimte van een toegelaten instelling eenheiddetailssoort KTI.
@@ -323,7 +289,6 @@ class EENHEIDDETAILSOORT:
         code="KIN",
         naam="Kinderopvanglocatie",
     )
-    # kinderopvanglocatie = ("KIN", "Kinderopvanglocatie")
     """
     Hieronder vallen kinderdagverblijven, peuterspeelzalen, buitenschoolse of
     24-uursopvang (Bouwbesluit 2012)
@@ -333,7 +298,6 @@ class EENHEIDDETAILSOORT:
         code="KTI",
         naam="Kantoorruimte van toegelaten instelling",
     )
-    # kantoorruimte_van_toegelaten_instelling = ("KTI", "Kantoorruimte van toegelaten instelling")
     """
     Kantoorruimte van toegelaten instelling, als zodanig vallend onder Maatschappelijk
     vastgoed (MOG).
@@ -343,7 +307,6 @@ class EENHEIDDETAILSOORT:
         code="LGI",
         naam="Lichamelijk beperkten instelling",
     )
-    # lichamelijk_beperkten_instelling = ("LGI", "Lichamelijk beperkten instelling")
     """
     Instelling voor mensen met een lichamelijke beperking.
     """
@@ -352,7 +315,6 @@ class EENHEIDDETAILSOORT:
         code="LIG",
         naam="Ligplaats",
     )
-    # ligplaats = ("LIG", "Ligplaats")
     """
     Een ligplaats is een formeel door de gemeente als zodanig aangewezen plaats in het
     water, al dan niet aangevuld met een op de oever aanwezig terrein of een gedeelte
@@ -364,7 +326,6 @@ class EENHEIDDETAILSOORT:
         code="LVG",
         naam="Lichamelijk en geestelijk beperkten instelling",
     )
-    # lichamelijk_en_geestelijk_beperkten_instelling = ("LVG", "Lichamelijk en geestelijk beperkten instelling")
     """
     Instelling voor mensen met een lichamelijke en/of verstandelijke beperking.
     """
@@ -373,7 +334,6 @@ class EENHEIDDETAILSOORT:
         code="MAA",
         naam="Maatschappelijk werkruimte wijk-/buurtgericht",
     )
-    # maatschappelijk_werkruimte_wijk_of_buurtgericht = ("MAA", "Maatschappelijk werkruimte wijk-/buurtgericht")
     """
     Ruimte voor op de buurt of wijk gericht maatschappelijk werk door stichtingen of
     verenigingen
@@ -383,7 +343,6 @@ class EENHEIDDETAILSOORT:
         code="MAI",
         naam="Maisonette",
     )
-    # maisonette = ("MAI", "Maisonette")
     """
     Een maisonnette is een specifiek type flatwoning waarbij de woning zelf twee of meer
     bouwlagen heeft. De voordeur komt uit op een gemeenschappelijke loopgang, op een
@@ -395,7 +354,6 @@ class EENHEIDDETAILSOORT:
         code="MUL",
         naam="Multifunctionele centrum",
     )
-    # multifunctionele_centrum = ("MUL", "Multifunctionele centrum")
     """
     Multifunctionele centrum voor maatschappelijke dienstverlening
     """
@@ -404,7 +362,6 @@ class EENHEIDDETAILSOORT:
         code="MWR",
         naam="Maatschappelijk werkruimte niet-wijk- of buurtgericht",
     )
-    # maatschappelijk_werkruimte_niet_wijk_of_buurtgericht = ("MWR", "Maatschappelijk werkruimte niet-wijk- of buurtgericht")
     """
     Ruimten voor niet op de buurt of wijk gericht maatschappelijk werk door stichtingen
     of verenigingen
@@ -414,7 +371,6 @@ class EENHEIDDETAILSOORT:
         code="OPV",
         naam="Opvangcentrum",
     )
-    # opvangcentrum = ("OPV", "Opvangcentrum")
     """
     Opvangcentrum (blijf-van-mijn-lijfhuizen, dag- en nachtopvang voor dak- en
     thuislozen en verslaafden)
@@ -424,7 +380,6 @@ class EENHEIDDETAILSOORT:
         code="PAM",
         naam="Parkeerplaats motor",
     )
-    # parkeerplaats_motor = ("PAM", "Parkeerplaats motor")
     """
     Een parkeerplaats die dienstbaar is aan wonen, waarbij de parkeerplaats een
     zelfstandig object is. Een parkeerplaats in een publieke parkeergarage (abonnement
@@ -435,13 +390,11 @@ class EENHEIDDETAILSOORT:
         code="PAO",
         naam="Parkeerplaats overdekt",
     )
-    # parkeerplaats_overdekt = ("PAO", "Parkeerplaats overdekt")
 
     parkeerplaats_auto = Referentiedata(
         code="PAR",
         naam="Parkeerplaats auto",
     )
-    # parkeerplaats_auto = ("PAR", "Parkeerplaats auto")
     """
     Een parkeerplaats die dienstbaar is aan wonen, waarbij de parkeerplaats een
     zelfstandig object is. Een parkeerplaats in een publieke parkeergarage (abonnement
@@ -452,7 +405,6 @@ class EENHEIDDETAILSOORT:
         code="POF",
         naam="Portiekflat",
     )
-    # portiekflat = ("POF", "Portiekflat")
     """
     Een portiekflat is een flatwoning waarbij de voordeur uitkomt op een
     gemeenschappelijk afsluitbaar trappenhuis, een centrale hal of een gesloten portiek.
@@ -463,7 +415,6 @@ class EENHEIDDETAILSOORT:
         code="POW",
         naam="Portiekwoning",
     )
-    # portiekwoning = ("POW", "Portiekwoning")
     """
     Een portiekwoning is een etagewoning waarbij de voordeur uitkomt in een open
     portiek. Een portiek is een toegangsportaal gelegen achter de voorgevel van een
@@ -476,7 +427,6 @@ class EENHEIDDETAILSOORT:
         code="PRA",
         naam="Praktijkruimte",
     )
-    # praktijkruimte = ("PRA", "Praktijkruimte")
     """
     Een praktijkruimte of therapieruimte bestaat minimaal uit een wachtruimte (met
     toilet) en behandelkamer.
@@ -486,7 +436,6 @@ class EENHEIDDETAILSOORT:
         code="PRW",
         naam="Praktijkwoning",
     )
-    # praktijkwoning = ("PRW", "Praktijkwoning")
     """
     Een woning waarvan een deel bestemd en in gebruik is voor het uitoefenen van een
     beroep aan huis (tandarts, huisarts, fysio, atelier, e.d.).
@@ -496,7 +445,6 @@ class EENHEIDDETAILSOORT:
         code="PZI",
         naam="Psychische zorginstelling",
     )
-    # psychische_zorginstelling = ("PZI", "Psychische zorginstelling")
     """
     Instelling voor psychische zorg
     """
@@ -505,7 +453,6 @@ class EENHEIDDETAILSOORT:
         code="REC",
         naam="Recreatiewoning",
     )
-    # recreatiewoning = ("REC", "Recreatiewoning")
     """
     Woning met een recreatiebestemming en niet bedoeld voor permanente bewoning.
     """
@@ -514,7 +461,6 @@ class EENHEIDDETAILSOORT:
         code="REZ",
         naam="Recreatiezaal",
     )
-    # recreatiezaal = ("REZ", "Recreatiezaal")
     """
     Ruimte bestemd voor ontmoeting, recreatie en informeel amusement, binnen een
     wooncomplex.
@@ -524,7 +470,6 @@ class EENHEIDDETAILSOORT:
         code="SCH",
         naam="Schoolgebouw",
     )
-    # schoolgebouw = ("SCH", "Schoolgebouw")
     """
     Vmbo-mbo-scholen, vwo-scholen, schoolgebouwen voor speciaal onderwijs.
     """
@@ -533,13 +478,11 @@ class EENHEIDDETAILSOORT:
         code="SCO",
         naam="Scootmobielplek",
     )
-    # scootmobielplek = ("SCO", "Scootmobielplek")
 
     steunpunt = Referentiedata(
         code="STP",
         naam="Steunpunt",
     )
-    # steunpunt = ("STP", "Steunpunt")
     """
     Steunpunten voor schuldsanering en budgetbeheeradvies voor huishoudens in financiële
     problemen
@@ -549,7 +492,6 @@ class EENHEIDDETAILSOORT:
         code="TIJ",
         naam="Tijdelijke woning",
     )
-    # tijdelijke_woning = ("TIJ", "Tijdelijke woning")
     """
     Een tijdelijke woning is een woning met een tijdelijke instandhoudingstermijn (van
     meestal 10 jaar). Voorbeelden van tijdelijke woningen zijn containerwoningen,
@@ -560,7 +502,6 @@ class EENHEIDDETAILSOORT:
         code="TIN",
         naam="Tiny house",
     )
-    # tiny_house = ("TIN", "Tiny house")
     """
     Een tiny house is een kleine volwaardige (vrijstaande) woningen van maximaal 50 m2
     vloeroppervlak met een zo klein mogelijke ecologische voetafdruk. ze staan op een
@@ -571,7 +512,6 @@ class EENHEIDDETAILSOORT:
         code="TUS",
         naam="Tussenwoning",
     )
-    # tussenwoning = ("TUS", "Tussenwoning")
     """
     Een tussenwoning is een eengezinswoning waarbij de tussenmuren aan andere panden
     grenzen en waarbij de woningen ten opzichte van elkaar in een gelijk vlak of lijn
@@ -584,7 +524,6 @@ class EENHEIDDETAILSOORT:
         code="TWE",
         naam="Twee-onder-een-kapwoning",
     )
-    # twee_onder_een_kapwoning = ("TWE", "Twee-onder-een-kapwoning")
     """
     Een 2-onder-1-kapwoning is een eengezinswoning waarvan het hoofdgebouw is verbonden
     met het hoofdgebouw van één andere gelijksoortige en gelijkvormige woning (niet
@@ -598,7 +537,6 @@ class EENHEIDDETAILSOORT:
         code="VEI",
         naam="Veiligheidshuis",
     )
-    # veiligheidshuis = ("VEI", "Veiligheidshuis")
     """
     Een veiligheidshuis is een fysieke locatie waar verschillende instellingen in een
     regio of gemeente in Nederland samenwerken aan het terugdringen van overlast,
@@ -609,7 +547,6 @@ class EENHEIDDETAILSOORT:
         code="VGI",
         naam="Verstandelijk gehandicapten instelling",
     )
-    # verstandelijk_gehandicapten_instelling = ("VGI", "Verstandelijk gehandicapten instelling")
     """
     Instelling voor mensen met een verstandelijke beperking.
     """
@@ -618,7 +555,6 @@ class EENHEIDDETAILSOORT:
         code="VOL",
         naam="Volkstuin",
     )
-    # volkstuin = ("VOL", "Volkstuin")
     """
     Gehuurd stukje grond waarop je planten, groenten en fruit kunt laten groeien
     """
@@ -627,7 +563,6 @@ class EENHEIDDETAILSOORT:
         code="VPL",
         naam="Verpleeghuis",
     )
-    # verpleeghuis = ("VPL", "Verpleeghuis")
     """
     Een verpleeghuis is een instelling waar mensen met gezondheidsproblemen kunnen
     verblijven die (meer) zorg en medische begeleiding nodig hebben die ze thuis of in
@@ -638,7 +573,6 @@ class EENHEIDDETAILSOORT:
         code="VRI",
         naam="Vrijstaande woning",
     )
-    # vrijstaande_woning = ("VRI", "Vrijstaande woning")
     """
     Een vrijstaande woning is een eengezinswoning die los staat van (eventueel)
     aanwezige andere objecten. (Voor marktwaarde bepaling: EGW-eengezinswoning)
@@ -648,7 +582,6 @@ class EENHEIDDETAILSOORT:
         code="VZO",
         naam="Verzorgingshuis",
     )
-    # verzorgingshuis = ("VZO", "Verzorgingshuis")
     """
     Een verzorgingshuis biedt uitgebreide zorg, ondersteuning en een beschutte
     woonomgeving, als u door ouderdom of ziekte niet meer zelfstandig kunt wonen, ook
@@ -659,7 +592,6 @@ class EENHEIDDETAILSOORT:
         code="WAT",
         naam="Waterwoning",
     )
-    # waterwoning = ("WAT", "Waterwoning")
     """
     Een waterwoning is een woning voorzien van een draagconstructie met een groot
     drijfvermogen en verbonden met in de grond verankerde geleiders waardoor de woning
@@ -671,7 +603,6 @@ class EENHEIDDETAILSOORT:
         code="WEL",
         naam="Welzijnswerkruimte wijk-/buurtgericht",
     )
-    # welzijnswerkruimte_wijk_of_buurtgericht = ("WEL", "Welzijnswerkruimte wijk-/buurtgericht")
     """
     Ruimte voor op de buurt of wijk gerichte activiteiten op het gebied van welzijnswerk
     door stichtingen of verenigingen
@@ -681,7 +612,6 @@ class EENHEIDDETAILSOORT:
         code="WER",
         naam="Centrum voor werk",
     )
-    # centrum_voor_werk = ("WER", "Centrum voor werk")
     """
     Centrum voor werk(gelegenheid) en/of bevordering van bedrijvigheid in de wijk
     """
@@ -690,19 +620,16 @@ class EENHEIDDETAILSOORT:
         code="WIJ",
         naam="Wijksportvoorziening",
     )
-    # wijksportvoorziening = ("WIJ", "Wijksportvoorziening")
 
     winkelruimte = Referentiedata(
         code="WIR",
         naam="Winkelruimte",
     )
-    # winkelruimte = ("WIR", "Winkelruimte")
 
     woonboot = Referentiedata(
         code="WOB",
         naam="Woonboot",
     )
-    # woonboot = ("WOB", "Woonboot")
     """
     Een woonboot is een verblijfsobject dat bestemd is voor permanente danwel
     recreatieve bewoning en dat op of in het water is gelegen, met vaste ligplaats met
@@ -713,7 +640,6 @@ class EENHEIDDETAILSOORT:
         code="WOW",
         naam="Woonwagen",
     )
-    # woonwagen = ("WOW", "Woonwagen")
     """
     Een woonwagen respectievelijk stacaravan is een voor permanente respectievelijk
     recreatieve bewoning bestemd verblijfsobject dat is geplaatst op een standplaats en
@@ -727,7 +653,6 @@ class EENHEIDDETAILSOORT:
         code="WWI",
         naam="Woon-/Winkelpand",
     )
-    # woon_of_winkelpand = ("WWI", "Woon-/Winkelpand")
     """
     Een gebouw in de zin van art. 7:290 BW met een binnen de contouren van de
     buitenmuren van het gebouw een al dan niet zelfstandige woonruimte. De
@@ -742,7 +667,6 @@ class EENHEIDDETAILSOORT:
         code="WWP",
         naam="Woonwagenstandplaats",
     )
-    # woonwagenstandplaats = ("WWP", "Woonwagenstandplaats")
     """
     Een standplaats is een formeel door de gemeente als zodanig aangewezen terrein of
     een gedeelte daarvan, dat bestemd is voor het permanent plaatsen van een niet direct
@@ -756,7 +680,6 @@ class EENHEIDDETAILSOORT:
         code="WWR",
         naam="Welzijnswerkruimte niet-wijk- of buurtgericht",
     )
-    # welzijnswerkruimte_niet_wijk_of_buurtgericht = ("WWR", "Welzijnswerkruimte niet-wijk- of buurtgericht")
     """
     Ruimten voor niet op de buurt of wijk gerichte activiteiten op het gebied van
     welzijnswerk door stichtingen of verenigingen
@@ -766,13 +689,11 @@ class EENHEIDDETAILSOORT:
         code="ZIE",
         naam="Ziekenhuis",
     )
-    # ziekenhuis = ("ZIE", "Ziekenhuis")
 
     zorgsteunpunt = Referentiedata(
         code="ZST",
         naam="Zorgsteunpunt",
     )
-    # zorgsteunpunt = ("ZST", "Zorgsteunpunt")
     """
     Zorgsteunpunten die inpandig in een woonzorggebouw zijn gevestigd
     """

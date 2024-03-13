@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class EENHEIDCRITERIUMTOEPASSING:
-
     selectie = Referentiedata(
         code="SEL",
         naam="Selectie",
     )
-    # selectie = ("SEL", "Selectie")
     """
     Selectiecriteria die worden gebruikt om de passendheid van een woningzoekende voor
     de eenheid te bepalen.
@@ -19,7 +15,6 @@ class EENHEIDCRITERIUMTOEPASSING:
         code="SOR",
         naam="Sortering",
     )
-    # sortering = ("SOR", "Sortering")
     """
     Sorteercriteria die worden gebruikt om de positie van een woningzoekende voor de
     eenheid te bepalen.

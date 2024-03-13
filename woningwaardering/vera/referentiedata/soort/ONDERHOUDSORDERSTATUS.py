@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class ONDERHOUDSORDERSTATUS:
-
     afgehandeld = Referentiedata(
         code="AFG",
         naam="Afgehandeld",
     )
-    # afgehandeld = ("AFG", "Afgehandeld")
     """
     De order is volledig technisch en financieel afgehandeld
     """
@@ -18,9 +14,8 @@ class ONDERHOUDSORDERSTATUS:
         code="FIN",
         naam="Financieel afwikkelen",
     )
-    # financieel_afwikkelen = ("FIN", "Financieel afwikkelen")
     """
-    De order is technisch beoordeeld en akkoord voor financiele afwikkeling. Op dat
+    De order is technisch beoordeeld  en akkoord voor financiele afwikkeling. Op dat
     moment kan een eventueel externe onderhoudspartner de facturatie verzorgen van de
     onderhoudsorder
     """
@@ -29,7 +24,6 @@ class ONDERHOUDSORDERSTATUS:
         code="GEA",
         naam="Geannuleerd",
     )
-    # geannuleerd = ("GEA", "Geannuleerd")
     """
     De order is geannuleerd
     """
@@ -38,7 +32,6 @@ class ONDERHOUDSORDERSTATUS:
         code="GUN",
         naam="Order gegund",
     )
-    # order_gegund = ("GUN", "Order gegund")
     """
     De order is verstrekt aan de uitvoerende partij
     """
@@ -47,7 +40,6 @@ class ONDERHOUDSORDERSTATUS:
         code="INB",
         naam="In behandeling",
     )
-    # in_behandeling = ("INB", "In behandeling")
     """
     De order is opgepakt door de uitvoerende partij (vakgroep of externe
     onderhoudspartner) nadat deze gepland is. Deze status kan ook gebruikt worden als
@@ -59,7 +51,6 @@ class ONDERHOUDSORDERSTATUS:
         code="OFF",
         naam="Offertetraject",
     )
-    # offertetraject = ("OFF", "Offertetraject")
     """
     Voor de order loopt een offertetraject bij 1 of meerdere partijen voordat gestart
     wordt met de uitvoering van de werkzaamheden.
@@ -69,7 +60,6 @@ class ONDERHOUDSORDERSTATUS:
         code="PLN",
         naam="Order gepland",
     )
-    # order_gepland = ("PLN", "Order gepland")
     """
     De order is gepland door de uitvoerende partij
     """
@@ -78,7 +68,6 @@ class ONDERHOUDSORDERSTATUS:
         code="REG",
         naam="Geregistreerd",
     )
-    # geregistreerd = ("REG", "Geregistreerd")
     """
     De onderhoudsorder is slechts geregistreerd/vastgelegd
     """
@@ -87,7 +76,6 @@ class ONDERHOUDSORDERSTATUS:
         code="STE",
         naam="Order in steekproef",
     )
-    # order_in_steekproef = ("STE", "Order in steekproef")
     """
     De order is na uitvoering van de werkzaamheden in de steekproef gevallen en moet
     worden beoordeeld door de corporatie
@@ -97,7 +85,6 @@ class ONDERHOUDSORDERSTATUS:
         code="TEC",
         naam="Technisch gereed",
     )
-    # technisch_gereed = ("TEC", "Technisch gereed")
     """
     De order is technisch gereed en de uitvoering kan inhoudelijk beoordeeld worden
     """
@@ -106,7 +93,6 @@ class ONDERHOUDSORDERSTATUS:
         code="WOG",
         naam="Wacht op goedkeuring",
     )
-    # wacht_op_goedkeuring = ("WOG", "Wacht op goedkeuring")
     """
     Order wordt voordat deze gegund kan worden intern eerst beoordeeld.
     """

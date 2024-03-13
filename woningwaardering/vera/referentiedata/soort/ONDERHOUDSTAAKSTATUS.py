@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class ONDERHOUDSTAAKSTATUS:
-
     concept_of_aangemaakt = Referentiedata(
         code="CON",
-        naam="Concept / aangemaakt",
+        naam="Concept  / aangemaakt",
     )
-    # concept_of_aangemaakt = ("CON", "Concept / aangemaakt")
     """
     De taak in concept / aangemaakt
     """
@@ -18,7 +14,6 @@ class ONDERHOUDSTAAKSTATUS:
         code="GEP",
         naam="Gepland",
     )
-    # gepland = ("GEP", "Gepland")
     """
     Voor de taak is een afspraak gepland
     """
@@ -27,7 +22,6 @@ class ONDERHOUDSTAAKSTATUS:
         code="GER",
         naam="Gereed",
     )
-    # gereed = ("GER", "Gereed")
     """
     De taak is gereed gemeld door de vakman
     """
@@ -36,7 +30,6 @@ class ONDERHOUDSTAAKSTATUS:
         code="GES",
         naam="Gesloten",
     )
-    # gesloten = ("GES", "Gesloten")
     """
     De taak is administratief afgesloten
     """
@@ -45,7 +38,6 @@ class ONDERHOUDSTAAKSTATUS:
         code="OND",
         naam="Onderbroken",
     )
-    # onderbroken = ("OND", "Onderbroken")
     """
     De taak is onderbroken door de vakman omdat hij niet verder kan met de uitvoering.
     Een reden kan zijn dat de vakman niet de juiste discipline heeft of dat er materiaal
@@ -56,7 +48,6 @@ class ONDERHOUDSTAAKSTATUS:
         code="PAU",
         naam="Gepauzeerd",
     )
-    # gepauzeerd = ("PAU", "Gepauzeerd")
     """
     De vakman heeft de uitvoering van de taak voor korte tijd gepauzeerd, bijvoorbeeld
     voor een lunchbreak
@@ -66,7 +57,6 @@ class ONDERHOUDSTAAKSTATUS:
         code="REI",
         naam="Onderweg",
     )
-    # onderweg = ("REI", "Onderweg")
     """
     De vakman is onderweg naar de onderhoudslocatie voor de uitvoering van de taak
     """
@@ -75,7 +65,6 @@ class ONDERHOUDSTAAKSTATUS:
         code="UIT",
         naam="In uitvoering",
     )
-    # in_uitvoering = ("UIT", "In uitvoering")
     """
     De vakman is bezig met de uitvoering van de taak.
     """
@@ -84,7 +73,6 @@ class ONDERHOUDSTAAKSTATUS:
         code="UWT",
         naam="Uitwerktijd",
     )
-    # uitwerktijd = ("UWT", "Uitwerktijd")
     """
     De vakman is gereed met de uitvoering van de taak en zit in de uitwerktijd. Wordt
     gebruikt bij bijvoorbeeld het opruimen van het gereedschap in de bus na de

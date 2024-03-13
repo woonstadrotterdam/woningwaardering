@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class PUBLICATIEDETAILSTATUS:
-
     woning_krijgt_andere_bestemming = Referentiedata(
         code="BES",
         naam="Woning krijgt andere bestemming",
     )
-    # woning_krijgt_andere_bestemming = ("BES", "Woning krijgt andere bestemming")
     """
     Woning krijgt andere bestemming.
     """
@@ -18,7 +14,6 @@ class PUBLICATIEDETAILSTATUS:
         code="GTW",
         naam="Geen toewijzing",
     )
-    # geen_toewijzing = ("GTW", "Geen toewijzing")
     """
     Geen toewijzing
     """
@@ -27,7 +22,6 @@ class PUBLICATIEDETAILSTATUS:
         code="HAN",
         naam="Woning wordt handmatig bemiddeld",
     )
-    # woning_wordt_handmatig_bemiddeld = ("HAN", "Woning wordt handmatig bemiddeld")
     """
     Woning wordt handmatig bemiddeld.
     """
@@ -36,7 +30,6 @@ class PUBLICATIEDETAILSTATUS:
         code="HUU",
         naam="Verhuurd onder voorbehoud",
     )
-    # verhuurd_onder_voorbehoud = ("HUU", "Verhuurd onder voorbehoud")
     """
     Verhuurd onder voorbehoud
     """
@@ -45,7 +38,6 @@ class PUBLICATIEDETAILSTATUS:
         code="ING",
         naam="Huuropzegging is ingetrokken",
     )
-    # huuropzegging_is_ingetrokken = ("ING", "Huuropzegging is ingetrokken")
     """
     Huuropzegging is ingetrokken.
     """
@@ -54,7 +46,6 @@ class PUBLICATIEDETAILSTATUS:
         code="KOO",
         naam="Verkocht onder voorbehoud",
     )
-    # verkocht_onder_voorbehoud = ("KOO", "Verkocht onder voorbehoud")
     """
     Verkocht onder voorbehoud
     """
@@ -63,7 +54,6 @@ class PUBLICATIEDETAILSTATUS:
         code="OND",
         naam="Onder bod",
     )
-    # onder_bod = ("OND", "Onder bod")
     """
     Onder bod
     """
@@ -72,7 +62,6 @@ class PUBLICATIEDETAILSTATUS:
         code="ONJ",
         naam="Publicatie met onjuiste gegevens",
     )
-    # publicatie_met_onjuiste_gegevens = ("ONJ", "Publicatie met onjuiste gegevens")
     """
     Publicatie met onjuiste gegevens.
     """
@@ -81,7 +70,6 @@ class PUBLICATIEDETAILSTATUS:
         code="OOP",
         naam="Onder optie",
     )
-    # onder_optie = ("OOP", "Onder optie")
     """
     Onder optie
     """
@@ -90,7 +78,6 @@ class PUBLICATIEDETAILSTATUS:
         code="REN",
         naam="Woning wordt gerenoveerd",
     )
-    # woning_wordt_gerenoveerd = ("REN", "Woning wordt gerenoveerd")
     """
     Woning wordt gerenoveerd.
     """
@@ -99,7 +86,6 @@ class PUBLICATIEDETAILSTATUS:
         code="TOE",
         naam="Toegewezen",
     )
-    # toegewezen = ("TOE", "Toegewezen")
     """
     Toegewezen
     """
@@ -108,7 +94,6 @@ class PUBLICATIEDETAILSTATUS:
         code="UIT",
         naam="Woning gaat uit exploitatie",
     )
-    # woning_gaat_uit_exploitatie = ("UIT", "Woning gaat uit exploitatie")
     """
     Woning gaat uit exploitatie.
     """

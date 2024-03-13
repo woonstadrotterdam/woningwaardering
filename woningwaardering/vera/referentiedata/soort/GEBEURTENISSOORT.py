@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class GEBEURTENISSOORT:
-
     begin_situatiepunten = Referentiedata(
         code="BSI",
         naam="Begin situatiepunten",
     )
-    # begin_situatiepunten = ("BSI", "Begin situatiepunten")
     """
     Begin situatiepunten
     """
@@ -18,7 +14,6 @@ class GEBEURTENISSOORT:
         code="BST",
         naam="Begin startpunten",
     )
-    # begin_startpunten = ("BST", "Begin startpunten")
     """
     Begin startpunten
     """
@@ -27,7 +22,6 @@ class GEBEURTENISSOORT:
         code="GEW",
         naam="Gewijzigde inschrijving",
     )
-    # gewijzigde_inschrijving = ("GEW", "Gewijzigde inschrijving")
     """
     Gewijzigde inschrijving
     """
@@ -36,7 +30,6 @@ class GEBEURTENISSOORT:
         code="GSA",
         naam="Gewijzigde startpunten",
     )
-    # gewijzigde_startpunten = ("GSA", "Gewijzigde startpunten")
     """
     Gewijzigde startpunten
     """
@@ -45,7 +38,6 @@ class GEBEURTENISSOORT:
         code="GSI",
         naam="Gewijzigde situatiepunten",
     )
-    # gewijzigde_situatiepunten = ("GSI", "Gewijzigde situatiepunten")
     """
     Gewijzigde situatiepunten
     """
@@ -54,7 +46,6 @@ class GEBEURTENISSOORT:
         code="INS",
         naam="Intrekken no-show",
     )
-    # intrekken_no_show = ("INS", "Intrekken no-show")
     """
     Intrekken gebeurtenis niet aanwezig op bevestigde bezichtiging (No-show)
     """
@@ -63,7 +54,6 @@ class GEBEURTENISSOORT:
         code="IRE",
         naam="Intrekken reactie",
     )
-    # intrekken_reactie = ("IRE", "Intrekken reactie")
     """
     Intrekken reactie met puntenopbouw
     """
@@ -72,7 +62,6 @@ class GEBEURTENISSOORT:
         code="ITO",
         naam="Intrekken toewijzing",
     )
-    # intrekken_toewijzing = ("ITO", "Intrekken toewijzing")
     """
     Intrekken toewijzing van de eenheid.
     """
@@ -81,7 +70,6 @@ class GEBEURTENISSOORT:
         code="IWH",
         naam="Intrekken weigering als hoogste acceptant",
     )
-    # intrekken_weigering_als_hoogste_acceptant = ("IWH", "Intrekken weigering als hoogste acceptant")
     """
     Intrekken weigering als hoogste acceptant
     """
@@ -90,7 +78,6 @@ class GEBEURTENISSOORT:
         code="IWN",
         naam="Intrekken weigering niet als hoogste acceptant",
     )
-    # intrekken_weigering_niet_als_hoogste_acceptant = ("IWN", "Intrekken weigering niet als hoogste acceptant")
     """
     Intrekken weigering niet als hoogste acceptant
     """
@@ -99,7 +86,6 @@ class GEBEURTENISSOORT:
         code="NIE",
         naam="Nieuwe inschrijving",
     )
-    # nieuwe_inschrijving = ("NIE", "Nieuwe inschrijving")
     """
     Nieuwe inschrijving
     """
@@ -108,7 +94,6 @@ class GEBEURTENISSOORT:
         code="NOS",
         naam="No-show",
     )
-    # no_show = ("NOS", "No-show")
     """
     Niet aanwezig op bevestigde bezichtiging
     """
@@ -117,7 +102,6 @@ class GEBEURTENISSOORT:
         code="REA",
         naam="Reactie",
     )
-    # reactie = ("REA", "Reactie")
     """
     Reactie met puntenopbouw
     """
@@ -126,7 +110,6 @@ class GEBEURTENISSOORT:
         code="TOE",
         naam="Toewijzing",
     )
-    # toewijzing = ("TOE", "Toewijzing")
     """
     Toewijzing
     """
@@ -135,7 +118,6 @@ class GEBEURTENISSOORT:
         code="WEI",
         naam="Weigering als hoogste acceptant",
     )
-    # weigering_als_hoogste_acceptant = ("WEI", "Weigering als hoogste acceptant")
     """
     Weigering als hoogste acceptant
     """
@@ -144,7 +126,6 @@ class GEBEURTENISSOORT:
         code="WEN",
         naam="Weigering niet als hoogste acceptant",
     )
-    # weigering_niet_als_hoogste_acceptant = ("WEN", "Weigering niet als hoogste acceptant")
     """
     Weigering niet als hoogste acceptant
     """

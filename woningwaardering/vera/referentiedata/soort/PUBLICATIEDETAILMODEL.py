@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class PUBLICATIEDETAILMODEL:
-
     leefstijl = Referentiedata(
         code="LEE",
         naam="Leefstijl",
     )
-    # leefstijl = ("LEE", "Leefstijl")
     """
     Eenheden in kwetsbare buurten waarbij leefstijl een belangrijke factor speelt.
     """
@@ -18,7 +14,6 @@ class PUBLICATIEDETAILMODEL:
         code="LOT",
         naam="Loting",
     )
-    # loting = ("LOT", "Loting")
     """
     Binnen het aanbodmodel wordt geloot nadat eerst een selectie heeft plaatsgevonden.
     """
@@ -27,7 +22,6 @@ class PUBLICATIEDETAILMODEL:
         code="OMK",
         naam="Omklapcontract",
     )
-    # omklapcontract = ("OMK", "Omklapcontract")
     """
     Ccontract dat de eerste periode, bijv. een jaar, op naam van een zorgaanbieder of
     begeleidende instantie staat, die de woning doorverhuurt aan een kandidaat die moet
@@ -39,7 +33,6 @@ class PUBLICATIEDETAILMODEL:
         code="SNE",
         naam="Snelzoek",
     )
-    # snelzoek = ("SNE", "Snelzoek")
     """
     Eenheden voor huishoudens die snel een woning nodig hebben en daar geen eisen aan
     stellen.

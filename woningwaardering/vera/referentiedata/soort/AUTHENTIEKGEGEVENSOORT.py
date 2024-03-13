@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class AUTHENTIEKGEGEVENSOORT:
-
     actueel_inkomen = Referentiedata(
         code="AIN",
         naam="Actueel inkomen",
     )
-    # actueel_inkomen = ("AIN", "Actueel inkomen")
     """
     Actueel inkomen voor als iemands inkomenssituatie is veranderd.
     """
@@ -18,7 +14,6 @@ class AUTHENTIEKGEGEVENSOORT:
         code="DID",
         naam="Digitale identiteit",
     )
-    # digitale_identiteit = ("DID", "Digitale identiteit")
     """
     Versleuteld BSN nummer.
     """
@@ -27,7 +22,6 @@ class AUTHENTIEKGEGEVENSOORT:
         code="GIN",
         naam="Geregistreerd inkomen",
     )
-    # geregistreerd_inkomen = ("GIN", "Geregistreerd inkomen")
     """
     Geregistreerde inkomen.
     """
@@ -36,7 +30,6 @@ class AUTHENTIEKGEGEVENSOORT:
         code="HUI",
         naam="Huidhoudsamenstelling",
     )
-    # huidhoudsamenstelling = ("HUI", "Huidhoudsamenstelling")
     """
     Huidhoudsamenstelling uit BRP.
     """
@@ -45,7 +38,6 @@ class AUTHENTIEKGEGEVENSOORT:
         code="NAW",
         naam="Naam Adres Woonplaats",
     )
-    # naam_adres_woonplaats = ("NAW", "Naam Adres Woonplaats")
     """
     NAW gegevens van een natuurlijke persoon.
     """
@@ -54,7 +46,6 @@ class AUTHENTIEKGEGEVENSOORT:
         code="OPL",
         naam="Opleiding",
     )
-    # opleiding = ("OPL", "Opleiding")
     """
     Opleiding en studennummer.
     """
@@ -63,7 +54,6 @@ class AUTHENTIEKGEGEVENSOORT:
         code="WER",
         naam="Werkgevers",
     )
-    # werkgevers = ("WER", "Werkgevers")
     """
     Actuele werkgevers.
     """
@@ -72,7 +62,6 @@ class AUTHENTIEKGEGEVENSOORT:
         code="WOO",
         naam="Woongeschiedenis",
     )
-    # woongeschiedenis = ("WOO", "Woongeschiedenis")
     """
     De woongeschiedenis voor het bepalen in welke gemeenten men wanneer heeft gewoond.
     """

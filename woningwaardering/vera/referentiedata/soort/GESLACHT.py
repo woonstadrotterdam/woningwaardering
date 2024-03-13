@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class GESLACHT:
-
     mannelijk = Referentiedata(
         code="M",
         naam="Mannelijk",
     )
-    # mannelijk = ("M", "Mannelijk")
     """
     Mannelijk geslacht
     """
@@ -18,7 +14,6 @@ class GESLACHT:
         code="N",
         naam="Neutraal",
     )
-    # neutraal = ("N", "Neutraal")
     """
     Gender-neutraal
     """
@@ -27,7 +22,6 @@ class GESLACHT:
         code="V",
         naam="Vrouwelijk",
     )
-    # vrouwelijk = ("V", "Vrouwelijk")
     """
     Vrouwelijk geslacht
     """

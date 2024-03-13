@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class RECLAMATIESTATUS:
-
     afgewezen = Referentiedata(
         code="AFG",
         naam="Afgewezen",
     )
-    # afgewezen = ("AFG", "Afgewezen")
     """
     De reclamatie is afgewezen door commissie.
     """
@@ -18,7 +14,6 @@ class RECLAMATIESTATUS:
         code="BER",
         naam="In beroep",
     )
-    # in_beroep = ("BER", "In beroep")
     """
     De reclamatie is in beroep gegaan door de woningzoekende.
     """
@@ -27,7 +22,6 @@ class RECLAMATIESTATUS:
         code="INB",
         naam="In behandeling",
     )
-    # in_behandeling = ("INB", "In behandeling")
     """
     De reclamatie is in behandeling genomen door de commissie.
     """
@@ -36,7 +30,6 @@ class RECLAMATIESTATUS:
         code="ING",
         naam="Ingediend",
     )
-    # ingediend = ("ING", "Ingediend")
     """
     De reclamatie is ingediend door de woningzoekende.
     """
@@ -45,7 +38,6 @@ class RECLAMATIESTATUS:
         code="TOE",
         naam="Toegekend",
     )
-    # toegekend = ("TOE", "Toegekend")
     """
     De reclamatie is toegekend door de comissie.
     """

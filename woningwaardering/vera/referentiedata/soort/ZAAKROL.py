@@ -1,21 +1,16 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class ZAAKROL:
-
     adviseur = Referentiedata(
         code="ADV",
         naam="Adviseur",
     )
-    # adviseur = ("ADV", "Adviseur")
 
     behandelaar = Referentiedata(
         code="BEH",
         naam="Behandelaar",
     )
-    # behandelaar = ("BEH", "Behandelaar")
     """
     De medewerker die de zaak in behandeling heeft
     """
@@ -24,7 +19,6 @@ class ZAAKROL:
         code="BEK",
         naam="Beklaagde",
     )
-    # beklaagde = ("BEK", "Beklaagde")
     """
     De betrokkene binnen de zaak waarover geklaagd wordt bij een (sociale) klacht
     """
@@ -33,31 +27,26 @@ class ZAAKROL:
         code="BEL",
         naam="Belanghebbende",
     )
-    # belanghebbende = ("BEL", "Belanghebbende")
 
     beslisser = Referentiedata(
         code="BES",
         naam="Beslisser",
     )
-    # beslisser = ("BES", "Beslisser")
 
     initiator = Referentiedata(
         code="INI",
         naam="Initiator",
     )
-    # initiator = ("INI", "Initiator")
 
     klantcontacter = Referentiedata(
         code="KLA",
         naam="Klantcontacter",
     )
-    # klantcontacter = ("KLA", "Klantcontacter")
 
     klager = Referentiedata(
         code="KLG",
         naam="Klager",
     )
-    # klager = ("KLG", "Klager")
     """
     De betrokkene binnen de zaak die een klacht heeft ingediend
     """
@@ -66,7 +55,6 @@ class ZAAKROL:
         code="MEL",
         naam="Melder",
     )
-    # melder = ("MEL", "Melder")
     """
     De melder van de zaak
     """
@@ -75,7 +63,6 @@ class ZAAKROL:
         code="OVE",
         naam="Overige betrokkene",
     )
-    # overige_betrokkene = ("OVE", "Overige betrokkene")
     """
     Overige betrokkene binnen de zaak zoals instanties als bijvoorbeeld politie,
     gemeente, sociale dienst, etc.
@@ -85,4 +72,3 @@ class ZAAKROL:
         code="ZAA",
         naam="Zaakcoördinator",
     )
-    # zaakcoordinator = ("ZAA", "Zaakcoördinator")

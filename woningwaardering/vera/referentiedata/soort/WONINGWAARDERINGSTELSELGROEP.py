@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class WONINGWAARDERINGSTELSELGROEP:
-
     bijzondere_voorzieningen = Referentiedata(
         code="BIJ",
         naam="Bijzondere voorzieningen",
     )
-    # bijzondere_voorzieningen = ("BIJ", "Bijzondere voorzieningen")
     """
     De groep criteria die betrekking heeft op de aanwezigheid van bijzondere
     voorzieningen, uitsluitend van toepassing bij zorgwoningen (Beleidsboek
@@ -20,7 +16,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="BMO",
         naam="Beschermd monument",
     )
-    # beschermd_monument = ("BMO", "Beschermd monument")
     """
     De extra punten die worden toegekend als de woonruimte bestaat uit of deel uitmaakt
     van een rijksmonument (Beleidsboek Waarderingsstelsel onzelfstandige woonruimte)
@@ -30,7 +25,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="BMZ",
         naam="Beschermd monument",
     )
-    # beschermd_monument = ("BMZ", "Beschermd monument")
     """
     De extra punten die worden toegekend als de woonruimte bestaat uit of deel uitmaakt
     van een rijksmonument (Beleidsboek Waarderingsstelsel zelfstandige woonruimte)
@@ -40,7 +34,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="BWN",
         naam="Berging",
     )
-    # berging = ("BWN", "Berging")
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op de aanwezigheid
     van een berging (Puntentelling: woonwagen/standplaats: Huurcommissie)
@@ -50,7 +43,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="ENE",
         naam="Energieprestatie",
     )
-    # energieprestatie = ("ENE", "Energieprestatie")
     """
     De groep criteria die betrekking heeft op de energieprestaties (Beleidsboek
     Waarderingsstelsel zelfstandige woonruimte)
@@ -60,7 +52,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="EOS",
         naam="Extra punten woonoppervlakte standplaats",
     )
-    # extra_punten_woonoppervlakte_standplaats = ("EOS", "Extra punten woonoppervlakte standplaats")
     """
     Standplaats: De groep criteria die betrekking heeft op de woonoppervlakte als die
     meer dan 200m2 bedraagt (Puntentelling: woonwagen/standplaats: Huurcommissie)
@@ -70,7 +61,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="GEH",
         naam="Woonvoorzieningen voor gehandicapten",
     )
-    # woonvoorzieningen_voor_gehandicapten = ("GEH", "Woonvoorzieningen voor gehandicapten")
     """
     De groep criteria die betrekking heeft op ingrepen die zijn gedaan ten behoeve van
     een gehandicapte (Beleidsboek Waarderingsstelsel zelfstandige woonruimte)
@@ -80,7 +70,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="GST",
         naam="Voorzieningen gehandicapten standplaats",
     )
-    # voorzieningen_gehandicapten_standplaats = ("GST", "Voorzieningen gehandicapten standplaats")
     """
     Standplaats: De groep criteria die betrekking heeft op (gedeeltelijk) vanuit de WMO
     gesubsidieerde voorzieningen voor gehandicapten (Puntentelling:
@@ -91,7 +80,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="GWN",
         naam="Voorzieningen gehandicapten niet-standaardwoonwagen",
     )
-    # voorzieningen_gehandicapten_niet_standaardwoonwagen = ("GWN", "Voorzieningen gehandicapten niet-standaardwoonwagen")
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op (gedeeltelijk)
     vanuit de WMO gesubsidieerde voorzieningen voor gehandicapten (Puntentelling:
@@ -102,7 +90,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="GWS",
         naam="Voorzieningen gehandicapten standaardwoonwagen",
     )
-    # voorzieningen_gehandicapten_standaardwoonwagen = ("GWS", "Voorzieningen gehandicapten standaardwoonwagen")
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op (gedeeltelijk) vanuit
     de WMO gesubsidieerde voorzieningen voor gehandicapten (Puntentelling:
@@ -113,7 +100,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="KEU",
         naam="Keuken",
     )
-    # keuken = ("KEU", "Keuken")
     """
     De groep criteria die betrekking heeft op de keuken (Beleidsboek Waarderingsstelsel
     zelfstandige woonruimte)
@@ -123,7 +109,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="KOO",
         naam="Kookgelegenheid",
     )
-    # kookgelegenheid = ("KOO", "Kookgelegenheid")
     """
     De groep criteria die betrekking heeft op de kookgelegenheid (Beleidsboek
     Waarderingsstelsel onzelfstandige woonruimte)
@@ -133,17 +118,15 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="KST",
         naam="Extra kwaliteit keuken en sanitair standplaats",
     )
-    # extra_kwaliteit_keuken_en_sanitair_standplaats = ("KST", "Extra kwaliteit keuken en sanitair standplaats")
     """
     Standplaats: De groep criteria die betrekking heeft op extra kwaliteit van keuken en
-    sanitair (Puntentelling: woonwagen/standplaats: Huurcommissie)
+    sanitair  (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
     kwaliteitsfactoren = Referentiedata(
         code="KWA",
         naam="Kwaliteitsfactoren",
     )
-    # kwaliteitsfactoren = ("KWA", "Kwaliteitsfactoren")
     """
     De groep criteria die betrekking heeft op aanvullende kwaliteitsfactoren
     (Beleidsboek Waarderingsstelsel onzelfstandige woonruimte)
@@ -153,27 +136,24 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="KWN",
         naam="Keuken en sanitair niet-standaardwoonwagen",
     )
-    # keuken_en_sanitair_niet_standaardwoonwagen = ("KWN", "Keuken en sanitair niet-standaardwoonwagen")
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op keuken en
-    sanitair (Puntentelling: woonwagen/standplaats: Huurcommissie)
+    sanitair  (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
     extra_kwaliteit_keuken_en_sanitair_standaardwoonwagen = Referentiedata(
         code="KWS",
         naam="Extra kwaliteit keuken en sanitair standaardwoonwagen",
     )
-    # extra_kwaliteit_keuken_en_sanitair_standaardwoonwagen = ("KWS", "Extra kwaliteit keuken en sanitair standaardwoonwagen")
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op extra kwaliteit van
-    keuken en sanitair (Puntentelling: woonwagen/standplaats: Huurcommissie)
+    keuken en sanitair  (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
     minpunten_woonomgeving_standplaats = Referentiedata(
         code="MWS",
         naam="Minpunten woonomgeving standplaats",
     )
-    # minpunten_woonomgeving_standplaats = ("MWS", "Minpunten woonomgeving standplaats")
     """
     Standplaats: De groep criteria die betrekking heeft op hinderlijke situaties in de
     woonomgeving (Puntentelling: woonwagen/standplaats: Huurcommissie)
@@ -183,7 +163,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="OOZ",
         naam="Oppervlakte van overige ruimten",
     )
-    # oppervlakte_van_overige_ruimten = ("OOZ", "Oppervlakte van overige ruimten")
     """
     Tot deze ruimten worden gerekend: bijkeukens, bergingen, wasruimten, schuren,
     garages, zolders en kelders (Beleidsboek Waarderingsstelsel zelfstandige woonruimte)
@@ -193,7 +172,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="OPO",
         naam="Oppervlakte onzelfstandige woonruimte",
     )
-    # oppervlakte_onzelfstandige_woonruimte = ("OPO", "Oppervlakte onzelfstandige woonruimte")
     """
     De groep criteria die betrekking heeft op de oppervlakte van kamers en keukens, en
     van verwarmde gemeenschappelijke verblijfsruimten (Beleidsboek Waarderingsstelsel
@@ -204,7 +182,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="OST",
         naam="Oppervlakte standplaats",
     )
-    # oppervlakte_standplaats = ("OST", "Oppervlakte standplaats")
     """
     Standplaats: De groep criteria die betrekking heeft op de oppervlakte
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
@@ -214,7 +191,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="OVZ",
         naam="Oppervlakte van vertrekken",
     )
-    # oppervlakte_van_vertrekken = ("OVZ", "Oppervlakte van vertrekken")
     """
     Onder vertrekken worden verstaan: woonkamer, andere kamers, keuken, badkamer en
     doucheruimte (Beleidsboek Waarderingsstelsel zelfstandige woonruimte)
@@ -224,7 +200,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="OWN",
         naam="Oppervlakte niet-standaardwoonwagen",
     )
-    # oppervlakte_niet_standaardwoonwagen = ("OWN", "Oppervlakte niet-standaardwoonwagen")
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op de oppervlakte
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
@@ -234,7 +209,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="OWS",
         naam="Oppervlakte standaardwoonwagen",
     )
-    # oppervlakte_standaardwoonwagen = ("OWS", "Oppervlakte standaardwoonwagen")
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op de oppervlakte
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
@@ -244,7 +218,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="PRI",
         naam="Privé-buitenruimten",
     )
-    # prive_buitenruimten = ("PRI", "Privé-buitenruimten")
     """
     Privé-buitenruimten zijn tot de woning behorende buitenruimten, waarvan de bewoners
     van de desbetreffende woning krachtens de huurovereenkomst het exclusieve
@@ -256,7 +229,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="REN",
         naam="Renovatie",
     )
-    # renovatie = ("REN", "Renovatie")
     """
     De groep criteria die betrekking heeft op renovatie van de woonruimte (Beleidsboek
     Waarderingsstelsel zelfstandige woonruimte)
@@ -266,7 +238,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="SAN",
         naam="Sanitair",
     )
-    # sanitair = ("SAN", "Sanitair")
     """
     De groep criteria die betrekking heeft op het sanitair (Beleidsboek
     Waarderingsstelsel zelfstandige woonruimte)
@@ -276,7 +247,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="TOI",
         naam="Toilet",
     )
-    # toilet = ("TOI", "Toilet")
     """
     De groep criteria die betrekking heeft op de w.c. (Beleidsboek Waarderingsstelsel
     onzelfstandige woonruimte)
@@ -286,7 +256,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="VON",
         naam="Verwarmingsmogelijkheden",
     )
-    # verwarmingsmogelijkheden = ("VON", "Verwarmingsmogelijkheden")
     """
     De groep criteria die betrekking heeft op de verwarmingsmogelijkheden (Beleidsboek
     Waarderingsstelsel onzelfstandige woonruimte)
@@ -296,7 +265,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="VST",
         naam="Verwarming standplaats",
     )
-    # verwarming_standplaats = ("VST", "Verwarming standplaats")
     """
     Standplaats: De groep criteria die betrekking heeft op de verwarming (Puntentelling:
     woonwagen/standplaats: Huurcommissie)
@@ -306,7 +274,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="VWN",
         naam="Verwarming niet-standaardwoonwagen",
     )
-    # verwarming_niet_standaardwoonwagen = ("VWN", "Verwarming niet-standaardwoonwagen")
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op de verwarming
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
@@ -316,7 +283,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="VWS",
         naam="Verwarming standaardwoonwagen",
     )
-    # verwarming_standaardwoonwagen = ("VWS", "Verwarming standaardwoonwagen")
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op de verwarming
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
@@ -326,7 +292,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="VZE",
         naam="Verwarming",
     )
-    # verwarming = ("VZE", "Verwarming")
     """
     Vertrekken, die met punten als vertrek zijn gewaardeerd, en die verwarmd zijn. Open
     keukens, of vertrekken die met een schuifwand met elkaar in verbinding staan, worden
@@ -338,7 +303,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="WAS",
         naam="Wasgelegenheid",
     )
-    # wasgelegenheid = ("WAS", "Wasgelegenheid")
     """
     De groep criteria die betrekking heeft op douche, bad en wastafel (Beleidsboek
     Waarderingsstelsel onzelfstandige woonruimte)
@@ -348,7 +312,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="WOZ",
         naam="Punten voor de WOZ-waarde",
     )
-    # punten_voor_de_woz_waarde = ("WOZ", "Punten voor de WOZ-waarde")
     """
     De groep criteria die betrekking heeft op de vastgestelde WOZ-waarde (Beleidsboek
     Waarderingsstelsel zelfstandige woonruimte)
@@ -358,7 +321,6 @@ class WONINGWAARDERINGSTELSELGROEP:
         code="WST",
         naam="Woonomgeving standplaats",
     )
-    # woonomgeving_standplaats = ("WST", "Woonomgeving standplaats")
     """
     Standplaats: De groep criteria die betrekking heeft op de woonomgeving
     (Puntentelling: woonwagen/standplaats: Huurcommissie)

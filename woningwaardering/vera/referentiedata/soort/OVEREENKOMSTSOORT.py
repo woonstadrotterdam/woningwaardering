@@ -1,15 +1,11 @@
-
-from enum import Enum
 from woningwaardering.vera.bvg.models import Referentiedata
 
 
 class OVEREENKOMSTSOORT:
-
     arbeid = Referentiedata(
         code="ARB",
         naam="Arbeid",
     )
-    # arbeid = ("ARB", "Arbeid")
     """
     Arbeidsovereenkomst
     """
@@ -18,7 +14,6 @@ class OVEREENKOMSTSOORT:
         code="BET",
         naam="Betalerovereenkomst",
     )
-    # betalerovereenkomst = ("BET", "Betalerovereenkomst")
     """
     Overeenkomst waarin afspraken zijn vastgelegd met een afwijkende betaler voor een
     andere (huur-)overeenkomst
@@ -28,7 +23,6 @@ class OVEREENKOMSTSOORT:
         code="HUU",
         naam="Huurovereenkomst",
     )
-    # huurovereenkomst = ("HUU", "Huurovereenkomst")
     """
     Overeenkomst met betrekking tot het huren van roerend of onroerend goed.
     """
@@ -37,7 +31,6 @@ class OVEREENKOMSTSOORT:
         code="INH",
         naam="Inhuur",
     )
-    # inhuur = ("INH", "Inhuur")
     """
     Inhuurovereenkomst
     """
@@ -46,7 +39,6 @@ class OVEREENKOMSTSOORT:
         code="INS",
         naam="Inschrijving",
     )
-    # inschrijving = ("INS", "Inschrijving")
     """
     Overeenkomst met betrekking tot de registratie van een woningzoekende in een
     woonruimteverdeel gebied.
@@ -56,7 +48,6 @@ class OVEREENKOMSTSOORT:
         code="KOO",
         naam="Koopovereenkomst",
     )
-    # koopovereenkomst = ("KOO", "Koopovereenkomst")
     """
     Overeenkomst met betrekking tot het kopen van roerend of onroerend goed.
     """
@@ -65,7 +56,6 @@ class OVEREENKOMSTSOORT:
         code="LEA",
         naam="Lease",
     )
-    # lease = ("LEA", "Lease")
     """
     Leaseovereenkomst
     """
@@ -74,7 +64,6 @@ class OVEREENKOMSTSOORT:
         code="OND",
         naam="Onderhoudsovereenkomst",
     )
-    # onderhoudsovereenkomst = ("OND", "Onderhoudsovereenkomst")
     """
     Overeenkomst met betrekking tot het onderhouden of beheren van roerend of onroerend
     goed.
@@ -84,7 +73,6 @@ class OVEREENKOMSTSOORT:
         code="SER",
         naam="Serviceovereenkomst",
     )
-    # serviceovereenkomst = ("SER", "Serviceovereenkomst")
     """
     Overeenkomst met betrekking tot (aanvullende) dienstverlening zoals glazenwassen,
     reparaties, groenverzorging. Ook de verschillende vormen van inschrijvingen of

@@ -1,5 +1,8 @@
-
-from woningwaardering.vera.referentiedata.soort import AFWEZIGHEIDSOORT, MEDEWERKERROL, MEDEWERKERSOORT
+from woningwaardering.vera.referentiedata.soort import (
+    AFWEZIGHEIDSOORT,
+    MEDEWERKERROL,
+    MEDEWERKERSOORT,
+)
 
 
 class Organisatie:
