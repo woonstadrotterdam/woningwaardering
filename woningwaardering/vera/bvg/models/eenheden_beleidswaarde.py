@@ -18,91 +18,188 @@ import pprint
 import re  # noqa: F401
 import json
 
-
-from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from woningwaardering.vera.bvg.models.eenheden_marktwaarde import EenhedenMarktwaarde
+from typing import Set
+from typing_extensions import Self
+
 
 class EenhedenBeleidswaarde(BaseModel):
     """
     EenhedenBeleidswaarde
-    """
-    id: Optional[StrictStr] = Field(None, description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.")
-    id_extern: Optional[StrictStr] = Field(None, alias="idExtern", description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.")
-    id_gegevensbeheerder: Optional[StrictStr] = Field(None, alias="idGegevensbeheerder", description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.")
-    id_organisatie: Optional[StrictStr] = Field(None, alias="idOrganisatie", description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.")
-    id_administratie: Optional[StrictStr] = Field(None, alias="idAdministratie", description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.")
-    code: Optional[StrictStr] = Field(None, description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)")
-    achterstallig_onderhoud: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="achterstalligOnderhoud", description="Bedrag aan achterstallig onderhoud dat als correctie is toegepast.")
-    afkoop_erfpacht: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="afkoopErfpacht", description="Het bedrag aan afkoop erfpacht dat als correctie is toegepast.")
-    beheer_afslag: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="beheerAfslag", description="Beheer (beheer): eventuele extra beheeruitgaven die gepaard gaan met de sociale doelgroep.")
-    beheerskosten: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Beheerkosten op het moment van waarderen zoals toegepast in de beleidswaardeberekening.")
-    beschikbaarheid_afslag: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="beschikbaarheidAfslag", description="Beschikbaarheid (doorexploiteren): in stand houden van een sociale portefeuille.")
-    betaalbaarheid_afslag: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="betaalbaarheidAfslag", description="Betaalbaarheid (huur): in stand houden van sociale huurprijzen passend bij de doelgroep.")
-    kwaliteit_afslag: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="kwaliteitAfslag", description="Kwaliteit (onderhoud): eventuele extra onderhoudsuitgaven voor het op lange termijn in stand houden van de portefeuille.")
-    marktwaarde: Optional[EenhedenMarktwaarde] = Field(None, description="De verwijzing naar de marktwaarde die ten grondslag ligt aan deze beleidswaarde.")
-    onderhoudskosten: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Onderhoudskosten op het moment van waarderen zoals toegepast in de beleidswaardeberekening.")
-    streefhuur: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Actuele streefhuur op het moment van waarderen zoals toegepast in de beleidswaardeberekening.")
-    waarde: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="De beleidswaarde van de eenheid waarde die rekening houdt met het beleid van de corporatie. Marktwaarde minus de afslagen voor beschikbaarheid, betaalbaarheid, kwaliteit en beheer, vormt de beleidswaarde (bron beleidswaarde WSW). Let op: het verslagjaar waarvoor de beleidswaarde is bepaald is het verslagjaar van de marktwaarde die de grondslag vormt van de beleidswaarde.")
-    __properties = ["id", "idExtern", "idGegevensbeheerder", "idOrganisatie", "idAdministratie", "code", "achterstalligOnderhoud", "afkoopErfpacht", "beheerAfslag", "beheerskosten", "beschikbaarheidAfslag", "betaalbaarheidAfslag", "kwaliteitAfslag", "marktwaarde", "onderhoudskosten", "streefhuur", "waarde"]
+    """  # noqa: E501
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.",
+    )
+    id_extern: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.",
+        alias="idExtern",
+    )
+    id_gegevensbeheerder: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.",
+        alias="idGegevensbeheerder",
+    )
+    id_organisatie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.",
+        alias="idOrganisatie",
+    )
+    id_administratie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.",
+        alias="idAdministratie",
+    )
+    code: Optional[StrictStr] = Field(
+        default=None,
+        description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)",
+    )
+    achterstallig_onderhoud: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Bedrag aan achterstallig onderhoud dat als correctie is toegepast.",
+        alias="achterstalligOnderhoud",
+    )
+    afkoop_erfpacht: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Het bedrag aan afkoop erfpacht dat als correctie is toegepast.",
+        alias="afkoopErfpacht",
+    )
+    beheer_afslag: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Beheer (beheer): eventuele extra beheeruitgaven die gepaard gaan met de sociale doelgroep.",
+        alias="beheerAfslag",
+    )
+    beheerskosten: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Beheerkosten op het moment van waarderen zoals toegepast in de beleidswaardeberekening.",
+    )
+    beschikbaarheid_afslag: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Beschikbaarheid (doorexploiteren): in stand houden van een sociale portefeuille.",
+        alias="beschikbaarheidAfslag",
+    )
+    betaalbaarheid_afslag: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Betaalbaarheid (huur): in stand houden van sociale huurprijzen passend bij de doelgroep.",
+        alias="betaalbaarheidAfslag",
+    )
+    kwaliteit_afslag: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Kwaliteit (onderhoud): eventuele extra onderhoudsuitgaven voor het op lange termijn in stand houden van de portefeuille.",
+        alias="kwaliteitAfslag",
+    )
+    marktwaarde: Optional[EenhedenMarktwaarde] = Field(
+        default=None,
+        description="De verwijzing naar de marktwaarde die ten grondslag ligt aan deze beleidswaarde.",
+    )
+    onderhoudskosten: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Onderhoudskosten op het moment van waarderen zoals toegepast in de beleidswaardeberekening.",
+    )
+    streefhuur: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Actuele streefhuur op het moment van waarderen zoals toegepast in de beleidswaardeberekening.",
+    )
+    waarde: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="De beleidswaarde van de eenheid waarde die rekening houdt met het beleid van de corporatie. Marktwaarde minus de afslagen voor beschikbaarheid, betaalbaarheid, kwaliteit en beheer, vormt de beleidswaarde (bron beleidswaarde WSW). Let op: het verslagjaar waarvoor de beleidswaarde is bepaald is het verslagjaar van de marktwaarde die de grondslag vormt van de beleidswaarde.",
+    )
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "idExtern",
+        "idGegevensbeheerder",
+        "idOrganisatie",
+        "idAdministratie",
+        "code",
+        "achterstalligOnderhoud",
+        "afkoopErfpacht",
+        "beheerAfslag",
+        "beheerskosten",
+        "beschikbaarheidAfslag",
+        "betaalbaarheidAfslag",
+        "kwaliteitAfslag",
+        "marktwaarde",
+        "onderhoudskosten",
+        "streefhuur",
+        "waarde",
+    ]
+
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> EenhedenBeleidswaarde:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of EenhedenBeleidswaarde from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
         # override the default output from pydantic by calling `to_dict()` of marktwaarde
         if self.marktwaarde:
-            _dict['marktwaarde'] = self.marktwaarde.to_dict()
+            _dict["marktwaarde"] = self.marktwaarde.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> EenhedenBeleidswaarde:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of EenhedenBeleidswaarde from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return EenhedenBeleidswaarde.parse_obj(obj)
+            return cls.model_validate(obj)
 
-        _obj = EenhedenBeleidswaarde.parse_obj({
-            "id": obj.get("id"),
-            "id_extern": obj.get("idExtern"),
-            "id_gegevensbeheerder": obj.get("idGegevensbeheerder"),
-            "id_organisatie": obj.get("idOrganisatie"),
-            "id_administratie": obj.get("idAdministratie"),
-            "code": obj.get("code"),
-            "achterstallig_onderhoud": obj.get("achterstalligOnderhoud"),
-            "afkoop_erfpacht": obj.get("afkoopErfpacht"),
-            "beheer_afslag": obj.get("beheerAfslag"),
-            "beheerskosten": obj.get("beheerskosten"),
-            "beschikbaarheid_afslag": obj.get("beschikbaarheidAfslag"),
-            "betaalbaarheid_afslag": obj.get("betaalbaarheidAfslag"),
-            "kwaliteit_afslag": obj.get("kwaliteitAfslag"),
-            "marktwaarde": EenhedenMarktwaarde.from_dict(obj.get("marktwaarde")) if obj.get("marktwaarde") is not None else None,
-            "onderhoudskosten": obj.get("onderhoudskosten"),
-            "streefhuur": obj.get("streefhuur"),
-            "waarde": obj.get("waarde")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "idExtern": obj.get("idExtern"),
+                "idGegevensbeheerder": obj.get("idGegevensbeheerder"),
+                "idOrganisatie": obj.get("idOrganisatie"),
+                "idAdministratie": obj.get("idAdministratie"),
+                "code": obj.get("code"),
+                "achterstalligOnderhoud": obj.get("achterstalligOnderhoud"),
+                "afkoopErfpacht": obj.get("afkoopErfpacht"),
+                "beheerAfslag": obj.get("beheerAfslag"),
+                "beheerskosten": obj.get("beheerskosten"),
+                "beschikbaarheidAfslag": obj.get("beschikbaarheidAfslag"),
+                "betaalbaarheidAfslag": obj.get("betaalbaarheidAfslag"),
+                "kwaliteitAfslag": obj.get("kwaliteitAfslag"),
+                "marktwaarde": EenhedenMarktwaarde.from_dict(obj["marktwaarde"])
+                if obj.get("marktwaarde") is not None
+                else None,
+                "onderhoudskosten": obj.get("onderhoudskosten"),
+                "streefhuur": obj.get("streefhuur"),
+                "waarde": obj.get("waarde"),
+            }
+        )
         return _obj
-
-

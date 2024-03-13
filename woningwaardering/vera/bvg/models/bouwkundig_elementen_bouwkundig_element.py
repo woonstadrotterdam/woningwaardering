@@ -19,180 +19,387 @@ import re  # noqa: F401
 import json
 
 from datetime import date, datetime
-from typing import List, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
-from woningwaardering.vera.bvg.models.bouwkundig_elementen_bouwdeel import BouwkundigElementenBouwdeel
-from woningwaardering.vera.bvg.models.bouwkundig_elementen_garantie import BouwkundigElementenGarantie
-from woningwaardering.vera.bvg.models.bouwkundig_elementen_relatie import BouwkundigElementenRelatie
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictFloat,
+    StrictInt,
+    StrictStr,
+)
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from woningwaardering.vera.bvg.models.bouwkundig_elementen_bouwdeel import (
+    BouwkundigElementenBouwdeel,
+)
+from woningwaardering.vera.bvg.models.bouwkundig_elementen_garantie import (
+    BouwkundigElementenGarantie,
+)
+from woningwaardering.vera.bvg.models.bouwkundig_elementen_relatie import (
+    BouwkundigElementenRelatie,
+)
 from woningwaardering.vera.bvg.models.cluster_sleutels import ClusterSleutels
 from woningwaardering.vera.bvg.models.eenheid_sleutels import EenheidSleutels
 from woningwaardering.vera.bvg.models.overeenkomst_sleutels import OvereenkomstSleutels
 from woningwaardering.vera.bvg.models.referentiedata import Referentiedata
+from typing import Set
+from typing_extensions import Self
+
 
 class BouwkundigElementenBouwkundigElement(BaseModel):
     """
     BouwkundigElementenBouwkundigElement
-    """
-    id: Optional[StrictStr] = Field(None, description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.")
-    id_extern: Optional[StrictStr] = Field(None, alias="idExtern", description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.")
-    id_gegevensbeheerder: Optional[StrictStr] = Field(None, alias="idGegevensbeheerder", description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.")
-    id_organisatie: Optional[StrictStr] = Field(None, alias="idOrganisatie", description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.")
-    id_administratie: Optional[StrictStr] = Field(None, alias="idAdministratie", description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.")
-    code: Optional[StrictStr] = Field(None, description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)")
-    naam: Optional[StrictStr] = Field(None, description="De naam van het bouwkundig element.")
-    omschrijving: Optional[StrictStr] = Field(None, description="De omschrijving van het bouwkundig element.")
-    serienummer: Optional[StrictStr] = Field(None, description="Serienummer van het bouwkundige element.")
-    soort: Optional[Referentiedata] = Field(None, description="Het soort bouwkundig element. Referentiedatasoort BOUWKUNDIGELEMENTSOORT.")
-    detail_soort: Optional[Referentiedata] = Field(None, alias="detailSoort", description="Het detailsoort bouwkundig element. Referentiedatasoort BOUWKUNDIGELEMENTDETAILSOORT.")
-    begindatum: Optional[date] = Field(None, description="De begindatum van het bouwkundige element.")
-    einddatum: Optional[date] = Field(None, description="De einddatum het bouwkundige element")
-    plaatsingdatum: Optional[datetime] = Field(None, description="De datum waarop het bouwkundig element is aangebracht.")
-    bouwdeel: Optional[BouwkundigElementenBouwdeel] = Field(None, description="Het bouwdeel behorend bij het bouwkundig element.")
-    brandwerendheid: Optional[Referentiedata] = Field(None, description="Aedes ILS - De brandwerendheidscore van het element vlg de NEN-EN 13501 classificering, indien van toepassing voor het specifieke element. Relatie met IFC codering (FireRating) Referentiedatasoort BRANDWERENDHEIDSCORE.")
-    breedte: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Aedes ILS - Breedte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.")
-    cluster: Optional[ClusterSleutels] = Field(None, description="Het cluster waarbinnen het bouwkundig element valt.")
-    constructief: Optional[StrictBool] = Field(None, description="Aedes ILS - Geeft aan of het bouwkundig element onderdeel is van de constructie van de eenheid.")
-    diameter: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Aedes ILS - Diameter van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.")
-    diepte: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Aedes ILS - Diepte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.")
-    dikte: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Aedes ILS - Dikte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.")
-    eenheid: Optional[EenheidSleutels] = Field(None, description="De eenheid waarbinnen het bouwkundig element valt.")
-    exterieur: Optional[StrictBool] = Field(None, description="Aedes ILS - Geeft aan of het bouwkundig element onderdeel is van het exterieur van de betreffende eenheid.")
-    garanties: Optional[conlist(BouwkundigElementenGarantie)] = Field(None, description="De garanties behorend bij het bouwkundig element.")
-    hoogte: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Aedes ILS - Hoogte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.")
-    inhoud: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Aedes ILS - Inhoud van het bouwkundig element in kubieke meter, indien van toepassing voor het specifieke element.")
-    lengte: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Aedes ILS - Lengte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.")
-    locatie: Optional[Referentiedata] = Field(None, description="De locatie waar het bouwkundig element zich bevindt. Bijvoorbeeld huiskamer of toilet. Referentiedatasoort DEFECTLOCATIE.")
-    materiaal_detailsoort: Optional[Referentiedata] = Field(None, alias="materiaalDetailsoort", description="Aedes ILS - het detailsoort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALDETAILSOORT.")
-    materiaal_soort: Optional[Referentiedata] = Field(None, alias="materiaalSoort", description="Aedes ILS - het soort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALSOORT.")
-    oppervlakte: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Aedes ILS - Oppervlakte van het bouwkundig element in vierkante meters, indien van toepassing voor het specifieke element.")
-    overeenkomsten: Optional[conlist(OvereenkomstSleutels)] = Field(None, description="De onderhoudsovereenkomsten die voor het bouwkundigelement gelden.")
-    plaatsing: Optional[Referentiedata] = Field(None, description="Op welke wijze het bouwkundig element is aangebracht. Bijv. bij de bouw, renovatie, onderhoud of door huurder. Referentiedatasoort BOUWKUNDIGELEMENTPLAATSING.")
-    relaties: Optional[conlist(BouwkundigElementenRelatie)] = Field(None, description="Bijv. de eigenaar of beheerder van het bouwkundig element, bijvoorbeeld de corporatie, een instelling, particulier of een VvE in een gemengd (verkoop/verhuur) gebouw.")
-    __properties = ["id", "idExtern", "idGegevensbeheerder", "idOrganisatie", "idAdministratie", "code", "naam", "omschrijving", "serienummer", "soort", "detailSoort", "begindatum", "einddatum", "plaatsingdatum", "bouwdeel", "brandwerendheid", "breedte", "cluster", "constructief", "diameter", "diepte", "dikte", "eenheid", "exterieur", "garanties", "hoogte", "inhoud", "lengte", "locatie", "materiaalDetailsoort", "materiaalSoort", "oppervlakte", "overeenkomsten", "plaatsing", "relaties"]
+    """  # noqa: E501
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.",
+    )
+    id_extern: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.",
+        alias="idExtern",
+    )
+    id_gegevensbeheerder: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.",
+        alias="idGegevensbeheerder",
+    )
+    id_organisatie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.",
+        alias="idOrganisatie",
+    )
+    id_administratie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.",
+        alias="idAdministratie",
+    )
+    code: Optional[StrictStr] = Field(
+        default=None,
+        description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)",
+    )
+    naam: Optional[StrictStr] = Field(
+        default=None, description="De naam van het bouwkundig element."
+    )
+    omschrijving: Optional[StrictStr] = Field(
+        default=None, description="De omschrijving van het bouwkundig element."
+    )
+    serienummer: Optional[StrictStr] = Field(
+        default=None, description="Serienummer van het bouwkundige element."
+    )
+    soort: Optional[Referentiedata] = Field(
+        default=None,
+        description="Het soort bouwkundig element. Referentiedatasoort BOUWKUNDIGELEMENTSOORT.",
+    )
+    detail_soort: Optional[Referentiedata] = Field(
+        default=None,
+        description="Het detailsoort bouwkundig element. Referentiedatasoort BOUWKUNDIGELEMENTDETAILSOORT.",
+        alias="detailSoort",
+    )
+    begindatum: Optional[date] = Field(
+        default=None, description="De begindatum van het bouwkundige element."
+    )
+    einddatum: Optional[date] = Field(
+        default=None, description="De einddatum het bouwkundige element"
+    )
+    plaatsingdatum: Optional[datetime] = Field(
+        default=None,
+        description="De datum waarop het bouwkundig element is aangebracht.",
+    )
+    bouwdeel: Optional[BouwkundigElementenBouwdeel] = Field(
+        default=None, description="Het bouwdeel behorend bij het bouwkundig element."
+    )
+    brandwerendheid: Optional[Referentiedata] = Field(
+        default=None,
+        description="Aedes ILS - De brandwerendheidscore van het element vlg de NEN-EN 13501 classificering, indien van toepassing voor het specifieke element. Relatie met IFC codering (FireRating) Referentiedatasoort BRANDWERENDHEIDSCORE.",
+    )
+    breedte: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Aedes ILS - Breedte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.",
+    )
+    cluster: Optional[ClusterSleutels] = Field(
+        default=None, description="Het cluster waarbinnen het bouwkundig element valt."
+    )
+    constructief: Optional[StrictBool] = Field(
+        default=None,
+        description="Aedes ILS - Geeft aan of het bouwkundig element onderdeel is van de constructie van de eenheid.",
+    )
+    diameter: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Aedes ILS - Diameter van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.",
+    )
+    diepte: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Aedes ILS - Diepte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.",
+    )
+    dikte: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Aedes ILS - Dikte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.",
+    )
+    eenheid: Optional[EenheidSleutels] = Field(
+        default=None, description="De eenheid waarbinnen het bouwkundig element valt."
+    )
+    exterieur: Optional[StrictBool] = Field(
+        default=None,
+        description="Aedes ILS - Geeft aan of het bouwkundig element onderdeel is van het exterieur van de betreffende eenheid.",
+    )
+    garanties: Optional[List[BouwkundigElementenGarantie]] = Field(
+        default=None, description="De garanties behorend bij het bouwkundig element."
+    )
+    hoogte: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Aedes ILS - Hoogte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.",
+    )
+    inhoud: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Aedes ILS - Inhoud van het bouwkundig element in kubieke meter, indien van toepassing voor het specifieke element.",
+    )
+    lengte: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Aedes ILS - Lengte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.",
+    )
+    locatie: Optional[Referentiedata] = Field(
+        default=None,
+        description="De locatie waar het bouwkundig element zich bevindt. Bijvoorbeeld huiskamer of toilet. Referentiedatasoort DEFECTLOCATIE.",
+    )
+    materiaal_detailsoort: Optional[Referentiedata] = Field(
+        default=None,
+        description="Aedes ILS - het detailsoort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALDETAILSOORT.",
+        alias="materiaalDetailsoort",
+    )
+    materiaal_soort: Optional[Referentiedata] = Field(
+        default=None,
+        description="Aedes ILS - het soort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALSOORT.",
+        alias="materiaalSoort",
+    )
+    oppervlakte: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Aedes ILS - Oppervlakte van het bouwkundig element in vierkante meters, indien van toepassing voor het specifieke element.",
+    )
+    overeenkomsten: Optional[List[OvereenkomstSleutels]] = Field(
+        default=None,
+        description="De onderhoudsovereenkomsten die voor het bouwkundigelement gelden.",
+    )
+    plaatsing: Optional[Referentiedata] = Field(
+        default=None,
+        description="Op welke wijze het bouwkundig element is aangebracht. Bijv. bij de bouw, renovatie, onderhoud of door huurder. Referentiedatasoort BOUWKUNDIGELEMENTPLAATSING.",
+    )
+    relaties: Optional[List[BouwkundigElementenRelatie]] = Field(
+        default=None,
+        description="Bijv. de eigenaar of beheerder van het bouwkundig element, bijvoorbeeld de corporatie, een instelling, particulier of een VvE in een gemengd (verkoop/verhuur) gebouw.",
+    )
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "idExtern",
+        "idGegevensbeheerder",
+        "idOrganisatie",
+        "idAdministratie",
+        "code",
+        "naam",
+        "omschrijving",
+        "serienummer",
+        "soort",
+        "detailSoort",
+        "begindatum",
+        "einddatum",
+        "plaatsingdatum",
+        "bouwdeel",
+        "brandwerendheid",
+        "breedte",
+        "cluster",
+        "constructief",
+        "diameter",
+        "diepte",
+        "dikte",
+        "eenheid",
+        "exterieur",
+        "garanties",
+        "hoogte",
+        "inhoud",
+        "lengte",
+        "locatie",
+        "materiaalDetailsoort",
+        "materiaalSoort",
+        "oppervlakte",
+        "overeenkomsten",
+        "plaatsing",
+        "relaties",
+    ]
+
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> BouwkundigElementenBouwkundigElement:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of BouwkundigElementenBouwkundigElement from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
         # override the default output from pydantic by calling `to_dict()` of soort
         if self.soort:
-            _dict['soort'] = self.soort.to_dict()
+            _dict["soort"] = self.soort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of detail_soort
         if self.detail_soort:
-            _dict['detailSoort'] = self.detail_soort.to_dict()
+            _dict["detailSoort"] = self.detail_soort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of bouwdeel
         if self.bouwdeel:
-            _dict['bouwdeel'] = self.bouwdeel.to_dict()
+            _dict["bouwdeel"] = self.bouwdeel.to_dict()
         # override the default output from pydantic by calling `to_dict()` of brandwerendheid
         if self.brandwerendheid:
-            _dict['brandwerendheid'] = self.brandwerendheid.to_dict()
+            _dict["brandwerendheid"] = self.brandwerendheid.to_dict()
         # override the default output from pydantic by calling `to_dict()` of cluster
         if self.cluster:
-            _dict['cluster'] = self.cluster.to_dict()
+            _dict["cluster"] = self.cluster.to_dict()
         # override the default output from pydantic by calling `to_dict()` of eenheid
         if self.eenheid:
-            _dict['eenheid'] = self.eenheid.to_dict()
+            _dict["eenheid"] = self.eenheid.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in garanties (list)
         _items = []
         if self.garanties:
             for _item in self.garanties:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['garanties'] = _items
+            _dict["garanties"] = _items
         # override the default output from pydantic by calling `to_dict()` of locatie
         if self.locatie:
-            _dict['locatie'] = self.locatie.to_dict()
+            _dict["locatie"] = self.locatie.to_dict()
         # override the default output from pydantic by calling `to_dict()` of materiaal_detailsoort
         if self.materiaal_detailsoort:
-            _dict['materiaalDetailsoort'] = self.materiaal_detailsoort.to_dict()
+            _dict["materiaalDetailsoort"] = self.materiaal_detailsoort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of materiaal_soort
         if self.materiaal_soort:
-            _dict['materiaalSoort'] = self.materiaal_soort.to_dict()
+            _dict["materiaalSoort"] = self.materiaal_soort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in overeenkomsten (list)
         _items = []
         if self.overeenkomsten:
             for _item in self.overeenkomsten:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['overeenkomsten'] = _items
+            _dict["overeenkomsten"] = _items
         # override the default output from pydantic by calling `to_dict()` of plaatsing
         if self.plaatsing:
-            _dict['plaatsing'] = self.plaatsing.to_dict()
+            _dict["plaatsing"] = self.plaatsing.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in relaties (list)
         _items = []
         if self.relaties:
             for _item in self.relaties:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['relaties'] = _items
+            _dict["relaties"] = _items
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> BouwkundigElementenBouwkundigElement:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of BouwkundigElementenBouwkundigElement from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return BouwkundigElementenBouwkundigElement.parse_obj(obj)
+            return cls.model_validate(obj)
 
-        _obj = BouwkundigElementenBouwkundigElement.parse_obj({
-            "id": obj.get("id"),
-            "id_extern": obj.get("idExtern"),
-            "id_gegevensbeheerder": obj.get("idGegevensbeheerder"),
-            "id_organisatie": obj.get("idOrganisatie"),
-            "id_administratie": obj.get("idAdministratie"),
-            "code": obj.get("code"),
-            "naam": obj.get("naam"),
-            "omschrijving": obj.get("omschrijving"),
-            "serienummer": obj.get("serienummer"),
-            "soort": Referentiedata.from_dict(obj.get("soort")) if obj.get("soort") is not None else None,
-            "detail_soort": Referentiedata.from_dict(obj.get("detailSoort")) if obj.get("detailSoort") is not None else None,
-            "begindatum": obj.get("begindatum"),
-            "einddatum": obj.get("einddatum"),
-            "plaatsingdatum": obj.get("plaatsingdatum"),
-            "bouwdeel": BouwkundigElementenBouwdeel.from_dict(obj.get("bouwdeel")) if obj.get("bouwdeel") is not None else None,
-            "brandwerendheid": Referentiedata.from_dict(obj.get("brandwerendheid")) if obj.get("brandwerendheid") is not None else None,
-            "breedte": obj.get("breedte"),
-            "cluster": ClusterSleutels.from_dict(obj.get("cluster")) if obj.get("cluster") is not None else None,
-            "constructief": obj.get("constructief"),
-            "diameter": obj.get("diameter"),
-            "diepte": obj.get("diepte"),
-            "dikte": obj.get("dikte"),
-            "eenheid": EenheidSleutels.from_dict(obj.get("eenheid")) if obj.get("eenheid") is not None else None,
-            "exterieur": obj.get("exterieur"),
-            "garanties": [BouwkundigElementenGarantie.from_dict(_item) for _item in obj.get("garanties")] if obj.get("garanties") is not None else None,
-            "hoogte": obj.get("hoogte"),
-            "inhoud": obj.get("inhoud"),
-            "lengte": obj.get("lengte"),
-            "locatie": Referentiedata.from_dict(obj.get("locatie")) if obj.get("locatie") is not None else None,
-            "materiaal_detailsoort": Referentiedata.from_dict(obj.get("materiaalDetailsoort")) if obj.get("materiaalDetailsoort") is not None else None,
-            "materiaal_soort": Referentiedata.from_dict(obj.get("materiaalSoort")) if obj.get("materiaalSoort") is not None else None,
-            "oppervlakte": obj.get("oppervlakte"),
-            "overeenkomsten": [OvereenkomstSleutels.from_dict(_item) for _item in obj.get("overeenkomsten")] if obj.get("overeenkomsten") is not None else None,
-            "plaatsing": Referentiedata.from_dict(obj.get("plaatsing")) if obj.get("plaatsing") is not None else None,
-            "relaties": [BouwkundigElementenRelatie.from_dict(_item) for _item in obj.get("relaties")] if obj.get("relaties") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "idExtern": obj.get("idExtern"),
+                "idGegevensbeheerder": obj.get("idGegevensbeheerder"),
+                "idOrganisatie": obj.get("idOrganisatie"),
+                "idAdministratie": obj.get("idAdministratie"),
+                "code": obj.get("code"),
+                "naam": obj.get("naam"),
+                "omschrijving": obj.get("omschrijving"),
+                "serienummer": obj.get("serienummer"),
+                "soort": Referentiedata.from_dict(obj["soort"])
+                if obj.get("soort") is not None
+                else None,
+                "detailSoort": Referentiedata.from_dict(obj["detailSoort"])
+                if obj.get("detailSoort") is not None
+                else None,
+                "begindatum": obj.get("begindatum"),
+                "einddatum": obj.get("einddatum"),
+                "plaatsingdatum": obj.get("plaatsingdatum"),
+                "bouwdeel": BouwkundigElementenBouwdeel.from_dict(obj["bouwdeel"])
+                if obj.get("bouwdeel") is not None
+                else None,
+                "brandwerendheid": Referentiedata.from_dict(obj["brandwerendheid"])
+                if obj.get("brandwerendheid") is not None
+                else None,
+                "breedte": obj.get("breedte"),
+                "cluster": ClusterSleutels.from_dict(obj["cluster"])
+                if obj.get("cluster") is not None
+                else None,
+                "constructief": obj.get("constructief"),
+                "diameter": obj.get("diameter"),
+                "diepte": obj.get("diepte"),
+                "dikte": obj.get("dikte"),
+                "eenheid": EenheidSleutels.from_dict(obj["eenheid"])
+                if obj.get("eenheid") is not None
+                else None,
+                "exterieur": obj.get("exterieur"),
+                "garanties": [
+                    BouwkundigElementenGarantie.from_dict(_item)
+                    for _item in obj["garanties"]
+                ]
+                if obj.get("garanties") is not None
+                else None,
+                "hoogte": obj.get("hoogte"),
+                "inhoud": obj.get("inhoud"),
+                "lengte": obj.get("lengte"),
+                "locatie": Referentiedata.from_dict(obj["locatie"])
+                if obj.get("locatie") is not None
+                else None,
+                "materiaalDetailsoort": Referentiedata.from_dict(
+                    obj["materiaalDetailsoort"]
+                )
+                if obj.get("materiaalDetailsoort") is not None
+                else None,
+                "materiaalSoort": Referentiedata.from_dict(obj["materiaalSoort"])
+                if obj.get("materiaalSoort") is not None
+                else None,
+                "oppervlakte": obj.get("oppervlakte"),
+                "overeenkomsten": [
+                    OvereenkomstSleutels.from_dict(_item)
+                    for _item in obj["overeenkomsten"]
+                ]
+                if obj.get("overeenkomsten") is not None
+                else None,
+                "plaatsing": Referentiedata.from_dict(obj["plaatsing"])
+                if obj.get("plaatsing") is not None
+                else None,
+                "relaties": [
+                    BouwkundigElementenRelatie.from_dict(_item)
+                    for _item in obj["relaties"]
+                ]
+                if obj.get("relaties") is not None
+                else None,
+            }
+        )
         return _obj
-
-

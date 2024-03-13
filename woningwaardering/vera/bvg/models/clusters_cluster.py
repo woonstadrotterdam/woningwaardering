@@ -19,146 +19,277 @@ import re  # noqa: F401
 import json
 
 from datetime import date
-from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from woningwaardering.vera.bvg.models.cluster_sleutels import ClusterSleutels
 from woningwaardering.vera.bvg.models.clusters_eenheid import ClustersEenheid
 from woningwaardering.vera.bvg.models.clusters_geometrie import ClustersGeometrie
 from woningwaardering.vera.bvg.models.clusters_relatie import ClustersRelatie
-from woningwaardering.vera.bvg.models.collectief_object_sleutels import CollectiefObjectSleutels
-from woningwaardering.vera.bvg.models.conditiemeting_sleutels import ConditiemetingSleutels
+from woningwaardering.vera.bvg.models.collectief_object_sleutels import (
+    CollectiefObjectSleutels,
+)
+from woningwaardering.vera.bvg.models.conditiemeting_sleutels import (
+    ConditiemetingSleutels,
+)
 from woningwaardering.vera.bvg.models.garantie_sleutels import GarantieSleutels
 from woningwaardering.vera.bvg.models.overeenkomst_sleutels import OvereenkomstSleutels
 from woningwaardering.vera.bvg.models.referentiedata import Referentiedata
+from typing import Set
+from typing_extensions import Self
+
 
 class ClustersCluster(BaseModel):
     """
     ClustersCluster
-    """
-    id: Optional[StrictStr] = Field(None, description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.")
-    id_extern: Optional[StrictStr] = Field(None, alias="idExtern", description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.")
-    id_gegevensbeheerder: Optional[StrictStr] = Field(None, alias="idGegevensbeheerder", description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.")
-    id_organisatie: Optional[StrictStr] = Field(None, alias="idOrganisatie", description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.")
-    id_administratie: Optional[StrictStr] = Field(None, alias="idAdministratie", description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.")
-    code: Optional[StrictStr] = Field(None, description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)")
-    soort: Optional[Referentiedata] = Field(None, description="Het soort cluster. Bijvoorbeeld, nieuwbouwcluster, onderhoudscluster, financieel cluster. Referentiedatasoort CLUSTERSOORT.")
-    naam: Optional[StrictStr] = Field(None, description="De naam van de cluster.")
-    omschrijving: Optional[StrictStr] = Field(None, description="De omschrijving van de cluster.")
-    bovenliggende_cluster: Optional[ClusterSleutels] = Field(None, alias="bovenliggendeCluster", description="Het bovenliggende / overkoepelende cluster waar dit cluster eventueel onderdeel van is.")
-    begindatum: Optional[date] = Field(None, description="De begindatum van de cluster.")
-    einddatum: Optional[date] = Field(None, description="De einddatum van de cluster.")
-    collectieve_objecten: Optional[conlist(CollectiefObjectSleutels)] = Field(None, alias="collectieveObjecten", description="De collectieve objecten behorend bij de cluster.")
-    conditiemeting: Optional[ConditiemetingSleutels] = Field(None, description="Aan een cluster kunnen meerdere conditiescores conform de NEN 2767 gekoppeld worden (per tijdvak).")
-    eenheden: Optional[conlist(ClustersEenheid)] = Field(None, description="De eenheden behorend bij de cluster.")
-    garanties: Optional[conlist(GarantieSleutels)] = Field(None, description="De garanties behorend bij de cluster.")
-    geometrie: Optional[ClustersGeometrie] = Field(None, description="De geometrie van de cluster.")
-    overeenkomsten: Optional[conlist(OvereenkomstSleutels)] = Field(None, description="De onderhoudsovereenkomsten die voor het cluster gelden.")
-    relaties: Optional[conlist(ClustersRelatie)] = Field(None, description="De relaties die een speciale rol spelen voor het cluster bijvoorbeeld een Vereniging van eigenaren, een onderhoudsbedrijf, projectleider etc.")
-    __properties = ["id", "idExtern", "idGegevensbeheerder", "idOrganisatie", "idAdministratie", "code", "soort", "naam", "omschrijving", "bovenliggendeCluster", "begindatum", "einddatum", "collectieveObjecten", "conditiemeting", "eenheden", "garanties", "geometrie", "overeenkomsten", "relaties"]
+    """  # noqa: E501
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.",
+    )
+    id_extern: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.",
+        alias="idExtern",
+    )
+    id_gegevensbeheerder: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.",
+        alias="idGegevensbeheerder",
+    )
+    id_organisatie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.",
+        alias="idOrganisatie",
+    )
+    id_administratie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.",
+        alias="idAdministratie",
+    )
+    code: Optional[StrictStr] = Field(
+        default=None,
+        description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)",
+    )
+    soort: Optional[Referentiedata] = Field(
+        default=None,
+        description="Het soort cluster. Bijvoorbeeld, nieuwbouwcluster, onderhoudscluster, financieel cluster. Referentiedatasoort CLUSTERSOORT.",
+    )
+    naam: Optional[StrictStr] = Field(
+        default=None, description="De naam van de cluster."
+    )
+    omschrijving: Optional[StrictStr] = Field(
+        default=None, description="De omschrijving van de cluster."
+    )
+    bovenliggende_cluster: Optional[ClusterSleutels] = Field(
+        default=None,
+        description="Het bovenliggende / overkoepelende cluster waar dit cluster eventueel onderdeel van is.",
+        alias="bovenliggendeCluster",
+    )
+    begindatum: Optional[date] = Field(
+        default=None, description="De begindatum van de cluster."
+    )
+    einddatum: Optional[date] = Field(
+        default=None, description="De einddatum van de cluster."
+    )
+    collectieve_objecten: Optional[List[CollectiefObjectSleutels]] = Field(
+        default=None,
+        description="De collectieve objecten behorend bij de cluster.",
+        alias="collectieveObjecten",
+    )
+    conditiemeting: Optional[ConditiemetingSleutels] = Field(
+        default=None,
+        description="Aan een cluster kunnen meerdere conditiescores conform de NEN 2767 gekoppeld worden (per tijdvak).",
+    )
+    eenheden: Optional[List[ClustersEenheid]] = Field(
+        default=None, description="De eenheden behorend bij de cluster."
+    )
+    garanties: Optional[List[GarantieSleutels]] = Field(
+        default=None, description="De garanties behorend bij de cluster."
+    )
+    geometrie: Optional[ClustersGeometrie] = Field(
+        default=None, description="De geometrie van de cluster."
+    )
+    overeenkomsten: Optional[List[OvereenkomstSleutels]] = Field(
+        default=None,
+        description="De onderhoudsovereenkomsten die voor het cluster gelden.",
+    )
+    relaties: Optional[List[ClustersRelatie]] = Field(
+        default=None,
+        description="De relaties die een speciale rol spelen voor het cluster bijvoorbeeld een Vereniging van eigenaren, een onderhoudsbedrijf, projectleider etc.",
+    )
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "idExtern",
+        "idGegevensbeheerder",
+        "idOrganisatie",
+        "idAdministratie",
+        "code",
+        "soort",
+        "naam",
+        "omschrijving",
+        "bovenliggendeCluster",
+        "begindatum",
+        "einddatum",
+        "collectieveObjecten",
+        "conditiemeting",
+        "eenheden",
+        "garanties",
+        "geometrie",
+        "overeenkomsten",
+        "relaties",
+    ]
+
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ClustersCluster:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of ClustersCluster from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
         # override the default output from pydantic by calling `to_dict()` of soort
         if self.soort:
-            _dict['soort'] = self.soort.to_dict()
+            _dict["soort"] = self.soort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of bovenliggende_cluster
         if self.bovenliggende_cluster:
-            _dict['bovenliggendeCluster'] = self.bovenliggende_cluster.to_dict()
+            _dict["bovenliggendeCluster"] = self.bovenliggende_cluster.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in collectieve_objecten (list)
         _items = []
         if self.collectieve_objecten:
             for _item in self.collectieve_objecten:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['collectieveObjecten'] = _items
+            _dict["collectieveObjecten"] = _items
         # override the default output from pydantic by calling `to_dict()` of conditiemeting
         if self.conditiemeting:
-            _dict['conditiemeting'] = self.conditiemeting.to_dict()
+            _dict["conditiemeting"] = self.conditiemeting.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in eenheden (list)
         _items = []
         if self.eenheden:
             for _item in self.eenheden:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['eenheden'] = _items
+            _dict["eenheden"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in garanties (list)
         _items = []
         if self.garanties:
             for _item in self.garanties:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['garanties'] = _items
+            _dict["garanties"] = _items
         # override the default output from pydantic by calling `to_dict()` of geometrie
         if self.geometrie:
-            _dict['geometrie'] = self.geometrie.to_dict()
+            _dict["geometrie"] = self.geometrie.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in overeenkomsten (list)
         _items = []
         if self.overeenkomsten:
             for _item in self.overeenkomsten:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['overeenkomsten'] = _items
+            _dict["overeenkomsten"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in relaties (list)
         _items = []
         if self.relaties:
             for _item in self.relaties:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['relaties'] = _items
+            _dict["relaties"] = _items
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ClustersCluster:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of ClustersCluster from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ClustersCluster.parse_obj(obj)
+            return cls.model_validate(obj)
 
-        _obj = ClustersCluster.parse_obj({
-            "id": obj.get("id"),
-            "id_extern": obj.get("idExtern"),
-            "id_gegevensbeheerder": obj.get("idGegevensbeheerder"),
-            "id_organisatie": obj.get("idOrganisatie"),
-            "id_administratie": obj.get("idAdministratie"),
-            "code": obj.get("code"),
-            "soort": Referentiedata.from_dict(obj.get("soort")) if obj.get("soort") is not None else None,
-            "naam": obj.get("naam"),
-            "omschrijving": obj.get("omschrijving"),
-            "bovenliggende_cluster": ClusterSleutels.from_dict(obj.get("bovenliggendeCluster")) if obj.get("bovenliggendeCluster") is not None else None,
-            "begindatum": obj.get("begindatum"),
-            "einddatum": obj.get("einddatum"),
-            "collectieve_objecten": [CollectiefObjectSleutels.from_dict(_item) for _item in obj.get("collectieveObjecten")] if obj.get("collectieveObjecten") is not None else None,
-            "conditiemeting": ConditiemetingSleutels.from_dict(obj.get("conditiemeting")) if obj.get("conditiemeting") is not None else None,
-            "eenheden": [ClustersEenheid.from_dict(_item) for _item in obj.get("eenheden")] if obj.get("eenheden") is not None else None,
-            "garanties": [GarantieSleutels.from_dict(_item) for _item in obj.get("garanties")] if obj.get("garanties") is not None else None,
-            "geometrie": ClustersGeometrie.from_dict(obj.get("geometrie")) if obj.get("geometrie") is not None else None,
-            "overeenkomsten": [OvereenkomstSleutels.from_dict(_item) for _item in obj.get("overeenkomsten")] if obj.get("overeenkomsten") is not None else None,
-            "relaties": [ClustersRelatie.from_dict(_item) for _item in obj.get("relaties")] if obj.get("relaties") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "idExtern": obj.get("idExtern"),
+                "idGegevensbeheerder": obj.get("idGegevensbeheerder"),
+                "idOrganisatie": obj.get("idOrganisatie"),
+                "idAdministratie": obj.get("idAdministratie"),
+                "code": obj.get("code"),
+                "soort": Referentiedata.from_dict(obj["soort"])
+                if obj.get("soort") is not None
+                else None,
+                "naam": obj.get("naam"),
+                "omschrijving": obj.get("omschrijving"),
+                "bovenliggendeCluster": ClusterSleutels.from_dict(
+                    obj["bovenliggendeCluster"]
+                )
+                if obj.get("bovenliggendeCluster") is not None
+                else None,
+                "begindatum": obj.get("begindatum"),
+                "einddatum": obj.get("einddatum"),
+                "collectieveObjecten": [
+                    CollectiefObjectSleutels.from_dict(_item)
+                    for _item in obj["collectieveObjecten"]
+                ]
+                if obj.get("collectieveObjecten") is not None
+                else None,
+                "conditiemeting": ConditiemetingSleutels.from_dict(
+                    obj["conditiemeting"]
+                )
+                if obj.get("conditiemeting") is not None
+                else None,
+                "eenheden": [
+                    ClustersEenheid.from_dict(_item) for _item in obj["eenheden"]
+                ]
+                if obj.get("eenheden") is not None
+                else None,
+                "garanties": [
+                    GarantieSleutels.from_dict(_item) for _item in obj["garanties"]
+                ]
+                if obj.get("garanties") is not None
+                else None,
+                "geometrie": ClustersGeometrie.from_dict(obj["geometrie"])
+                if obj.get("geometrie") is not None
+                else None,
+                "overeenkomsten": [
+                    OvereenkomstSleutels.from_dict(_item)
+                    for _item in obj["overeenkomsten"]
+                ]
+                if obj.get("overeenkomsten") is not None
+                else None,
+                "relaties": [
+                    ClustersRelatie.from_dict(_item) for _item in obj["relaties"]
+                ]
+                if obj.get("relaties") is not None
+                else None,
+            }
+        )
         return _obj
-
-

@@ -19,182 +19,394 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import List, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictBytes, StrictFloat, StrictInt, StrictStr, conlist
-from woningwaardering.vera.bvg.models.informatieobject_sleutels import InformatieobjectSleutels
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictBytes,
+    StrictFloat,
+    StrictInt,
+    StrictStr,
+)
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from woningwaardering.vera.bvg.models.informatieobject_sleutels import (
+    InformatieobjectSleutels,
+)
 from woningwaardering.vera.bvg.models.referentiedata import Referentiedata
 from woningwaardering.vera.bvg.models.relatie_sleutels import RelatieSleutels
 from woningwaardering.vera.bvg.models.zaakobject_sleutels import ZaakobjectSleutels
+from typing import Set
+from typing_extensions import Self
+
 
 class Informatieobject(BaseModel):
     """
     Informatieobject
-    """
-    id: Optional[StrictStr] = Field(None, description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.")
-    id_extern: Optional[StrictStr] = Field(None, alias="idExtern", description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.")
-    id_gegevensbeheerder: Optional[StrictStr] = Field(None, alias="idGegevensbeheerder", description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.")
-    id_organisatie: Optional[StrictStr] = Field(None, alias="idOrganisatie", description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.")
-    id_administratie: Optional[StrictStr] = Field(None, alias="idAdministratie", description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.")
-    code: Optional[StrictStr] = Field(None, description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)")
-    soort: Optional[Referentiedata] = Field(None, description="Specificatie van het documenttype. Bijvoorbeeld verslag, rapport etc. Referentiedatasoort INFORMATIEOBJECTSOORT.")
-    detail_soort: Optional[Referentiedata] = Field(None, alias="detailSoort", description="Detail specificatie van het documenttype. Bijvoorbeeld notulen, adviesrapport etc. Referentiedatasoort INFORMATIEOBJECTDETAILSOORT.")
-    onderwerp: Optional[Referentiedata] = Field(None, description="Onderwerp van het informatieobject. Referentiedatasoort INFORMATIEOBJECTONDERWERP.")
-    subonderwerp: Optional[Referentiedata] = Field(None, description="Subonderwerp van het informatieobject. Referentiedatasoort INFORMATIEOBJECTSUBONDERWERP.")
-    titel: Optional[StrictStr] = Field(None, description="Titel van het informatieobject.")
-    beschrijving: Optional[StrictStr] = Field(None, description="Beschrijving van het informatieobject. Dit kan ook de (volledige) inhoud zijn van een memo of notitie.")
-    status: Optional[Referentiedata] = Field(None, description="De fase waarin het informatieobject zich vanuit het perspectief van archivering bevindt. Referentiedatasoort INFORMATIEOBJECTSTATUS.")
-    detail_status: Optional[Referentiedata] = Field(None, alias="detailStatus", description="Detaillering van de fase waarin het informatieobject zich vanuit het perspectief van archivering bevindt. Referentiedatasoort INFORMATIEOBJECTDETAILSTATUS.")
-    registratiedatum: Optional[datetime] = Field(None, description="Registratiedatum van het informatieobject.")
-    ontvangstdatum: Optional[datetime] = Field(None, description="Ontvangstdatum van het informatieobject.")
-    publicatiedatum: Optional[datetime] = Field(None, description="Publicatiedatum of verzenddatum van het informatieobject.")
-    archief_actiedatum: Optional[datetime] = Field(None, alias="archiefActiedatum", description="De datum waarop het gearchiveerde informatieobject vernietigd moet worden dan wel overgebracht moet worden naar een archiefbewaarplaats.")
-    archiefnominatie: Optional[Referentiedata] = Field(None, description="Aanduiding of het informatieobject blijvend bewaard of na een bepaalde termijn vernietigd moet worden. Referentiedatasoort ARCHIEFNOMINATIE.")
-    auteur: Optional[StrictStr] = Field(None, description="De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creëren van de inhoud van het informatieobject.")
-    bestand: Optional[Union[StrictBytes, StrictStr]] = Field(None, description="De binaire representatie van het informatieobject.")
-    bestandsgrootte: Optional[StrictInt] = Field(None, description="Omvang van het bestand in bytes.")
-    bestandslocatie: Optional[StrictStr] = Field(None, description="Een link (URI) naar de binaire representatie van het informatieobject.")
-    bestandsnaam: Optional[StrictStr] = Field(None, description="De naam van het fysieke bestand waarin de inhoud van het informatieobject is vastgelegd.")
-    bijlagen: Optional[conlist(InformatieobjectSleutels)] = Field(None, description="De bijlagen behorend bij het informatieobject.")
-    externe_publicatie: Optional[StrictBool] = Field(None, alias="externePublicatie", description="Aanduiding of dit informatieobject extern gepubliceerd dient te worden.")
-    externe_publicatietekst: Optional[StrictStr] = Field(None, alias="externePublicatietekst", description="Tekstuele omschrijving ten behoeve van externe publicatie van dit informatieobject.")
-    formaat: Optional[Referentiedata] = Field(None, description="Het digitale formaat (IANA media type) van het informatieobject.  Bijv. code:png naam:image/png. Referentiedatasoort INFORMATIEOBJECTFORMAAT.")
-    gebruiksrechten: Optional[StrictStr] = Field(None, description="Informatie omtrent rechten die geassocieerd zijn met het informatieobject zoals intellectueel eigendom.")
-    is_bijlage_van: Optional[InformatieobjectSleutels] = Field(None, alias="isBijlageVan", description="Geeft aan dat het informatieobject een bijlage is van een ander informatieobject.")
-    objecten: Optional[conlist(ZaakobjectSleutels)] = Field(None, description="De gegevensobjecten die bij de zaak horen. Kan iedere klasse uit ons model zijn. Bijv. Overeenkomst, Onderhoudsverzoek etc.")
-    relaties: Optional[conlist(RelatieSleutels)] = Field(None, description="Het dossier is gekoppeld aan/heeft betrekking op relatie(s). Bijvoorbeeld huurdersdossier of mutatiedossier.")
-    taal: Optional[Referentiedata] = Field(None, description="De taal waarin het informatieobject is opgesteld. Referentiedatasoort TAAL.")
-    verantwoordelijke_organisatie: Optional[StrictStr] = Field(None, alias="verantwoordelijkeOrganisatie", description="Het RSIN (Rechtspersonen en Samenwerkingsverbanden Informatienummer) van de organisatie die verantwoordelijk is voor het informatieobject.")
-    versie: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Het versienummer van het informatieobject.")
-    vertrouwelijkheid: Optional[Referentiedata] = Field(None, description="De classificatie van het vertrouwelijkheidsniveau van het informatieobject. Referentiedatasoort VERTROUWELIJKHEID.")
-    __properties = ["id", "idExtern", "idGegevensbeheerder", "idOrganisatie", "idAdministratie", "code", "soort", "detailSoort", "onderwerp", "subonderwerp", "titel", "beschrijving", "status", "detailStatus", "registratiedatum", "ontvangstdatum", "publicatiedatum", "archiefActiedatum", "archiefnominatie", "auteur", "bestand", "bestandsgrootte", "bestandslocatie", "bestandsnaam", "bijlagen", "externePublicatie", "externePublicatietekst", "formaat", "gebruiksrechten", "isBijlageVan", "objecten", "relaties", "taal", "verantwoordelijkeOrganisatie", "versie", "vertrouwelijkheid"]
+    """  # noqa: E501
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.",
+    )
+    id_extern: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.",
+        alias="idExtern",
+    )
+    id_gegevensbeheerder: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.",
+        alias="idGegevensbeheerder",
+    )
+    id_organisatie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.",
+        alias="idOrganisatie",
+    )
+    id_administratie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.",
+        alias="idAdministratie",
+    )
+    code: Optional[StrictStr] = Field(
+        default=None,
+        description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)",
+    )
+    soort: Optional[Referentiedata] = Field(
+        default=None,
+        description="Specificatie van het documenttype. Bijvoorbeeld verslag, rapport etc. Referentiedatasoort INFORMATIEOBJECTSOORT.",
+    )
+    detail_soort: Optional[Referentiedata] = Field(
+        default=None,
+        description="Detail specificatie van het documenttype. Bijvoorbeeld notulen, adviesrapport etc. Referentiedatasoort INFORMATIEOBJECTDETAILSOORT.",
+        alias="detailSoort",
+    )
+    onderwerp: Optional[Referentiedata] = Field(
+        default=None,
+        description="Onderwerp van het informatieobject. Referentiedatasoort INFORMATIEOBJECTONDERWERP.",
+    )
+    subonderwerp: Optional[Referentiedata] = Field(
+        default=None,
+        description="Subonderwerp van het informatieobject. Referentiedatasoort INFORMATIEOBJECTSUBONDERWERP.",
+    )
+    titel: Optional[StrictStr] = Field(
+        default=None, description="Titel van het informatieobject."
+    )
+    beschrijving: Optional[StrictStr] = Field(
+        default=None,
+        description="Beschrijving van het informatieobject. Dit kan ook de (volledige) inhoud zijn van een memo of notitie.",
+    )
+    status: Optional[Referentiedata] = Field(
+        default=None,
+        description="De fase waarin het informatieobject zich vanuit het perspectief van archivering bevindt. Referentiedatasoort INFORMATIEOBJECTSTATUS.",
+    )
+    detail_status: Optional[Referentiedata] = Field(
+        default=None,
+        description="Detaillering van de fase waarin het informatieobject zich vanuit het perspectief van archivering bevindt. Referentiedatasoort INFORMATIEOBJECTDETAILSTATUS.",
+        alias="detailStatus",
+    )
+    registratiedatum: Optional[datetime] = Field(
+        default=None, description="Registratiedatum van het informatieobject."
+    )
+    ontvangstdatum: Optional[datetime] = Field(
+        default=None, description="Ontvangstdatum van het informatieobject."
+    )
+    publicatiedatum: Optional[datetime] = Field(
+        default=None,
+        description="Publicatiedatum of verzenddatum van het informatieobject.",
+    )
+    archief_actiedatum: Optional[datetime] = Field(
+        default=None,
+        description="De datum waarop het gearchiveerde informatieobject vernietigd moet worden dan wel overgebracht moet worden naar een archiefbewaarplaats.",
+        alias="archiefActiedatum",
+    )
+    archiefnominatie: Optional[Referentiedata] = Field(
+        default=None,
+        description="Aanduiding of het informatieobject blijvend bewaard of na een bepaalde termijn vernietigd moet worden. Referentiedatasoort ARCHIEFNOMINATIE.",
+    )
+    auteur: Optional[StrictStr] = Field(
+        default=None,
+        description="De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creëren van de inhoud van het informatieobject.",
+    )
+    bestand: Optional[Union[StrictBytes, StrictStr]] = Field(
+        default=None, description="De binaire representatie van het informatieobject."
+    )
+    bestandsgrootte: Optional[StrictInt] = Field(
+        default=None, description="Omvang van het bestand in bytes."
+    )
+    bestandslocatie: Optional[StrictStr] = Field(
+        default=None,
+        description="Een link (URI) naar de binaire representatie van het informatieobject.",
+    )
+    bestandsnaam: Optional[StrictStr] = Field(
+        default=None,
+        description="De naam van het fysieke bestand waarin de inhoud van het informatieobject is vastgelegd.",
+    )
+    bijlagen: Optional[List[InformatieobjectSleutels]] = Field(
+        default=None, description="De bijlagen behorend bij het informatieobject."
+    )
+    externe_publicatie: Optional[StrictBool] = Field(
+        default=None,
+        description="Aanduiding of dit informatieobject extern gepubliceerd dient te worden.",
+        alias="externePublicatie",
+    )
+    externe_publicatietekst: Optional[StrictStr] = Field(
+        default=None,
+        description="Tekstuele omschrijving ten behoeve van externe publicatie van dit informatieobject.",
+        alias="externePublicatietekst",
+    )
+    formaat: Optional[Referentiedata] = Field(
+        default=None,
+        description="Het digitale formaat (IANA media type) van het informatieobject.  Bijv. code:png naam:image/png. Referentiedatasoort INFORMATIEOBJECTFORMAAT.",
+    )
+    gebruiksrechten: Optional[StrictStr] = Field(
+        default=None,
+        description="Informatie omtrent rechten die geassocieerd zijn met het informatieobject zoals intellectueel eigendom.",
+    )
+    is_bijlage_van: Optional[InformatieobjectSleutels] = Field(
+        default=None,
+        description="Geeft aan dat het informatieobject een bijlage is van een ander informatieobject.",
+        alias="isBijlageVan",
+    )
+    objecten: Optional[List[ZaakobjectSleutels]] = Field(
+        default=None,
+        description="De gegevensobjecten die bij de zaak horen. Kan iedere klasse uit ons model zijn. Bijv. Overeenkomst, Onderhoudsverzoek etc.",
+    )
+    relaties: Optional[List[RelatieSleutels]] = Field(
+        default=None,
+        description="Het dossier is gekoppeld aan/heeft betrekking op relatie(s). Bijvoorbeeld huurdersdossier of mutatiedossier.",
+    )
+    taal: Optional[Referentiedata] = Field(
+        default=None,
+        description="De taal waarin het informatieobject is opgesteld. Referentiedatasoort TAAL.",
+    )
+    verantwoordelijke_organisatie: Optional[StrictStr] = Field(
+        default=None,
+        description="Het RSIN (Rechtspersonen en Samenwerkingsverbanden Informatienummer) van de organisatie die verantwoordelijk is voor het informatieobject.",
+        alias="verantwoordelijkeOrganisatie",
+    )
+    versie: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Het versienummer van het informatieobject."
+    )
+    vertrouwelijkheid: Optional[Referentiedata] = Field(
+        default=None,
+        description="De classificatie van het vertrouwelijkheidsniveau van het informatieobject. Referentiedatasoort VERTROUWELIJKHEID.",
+    )
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "idExtern",
+        "idGegevensbeheerder",
+        "idOrganisatie",
+        "idAdministratie",
+        "code",
+        "soort",
+        "detailSoort",
+        "onderwerp",
+        "subonderwerp",
+        "titel",
+        "beschrijving",
+        "status",
+        "detailStatus",
+        "registratiedatum",
+        "ontvangstdatum",
+        "publicatiedatum",
+        "archiefActiedatum",
+        "archiefnominatie",
+        "auteur",
+        "bestand",
+        "bestandsgrootte",
+        "bestandslocatie",
+        "bestandsnaam",
+        "bijlagen",
+        "externePublicatie",
+        "externePublicatietekst",
+        "formaat",
+        "gebruiksrechten",
+        "isBijlageVan",
+        "objecten",
+        "relaties",
+        "taal",
+        "verantwoordelijkeOrganisatie",
+        "versie",
+        "vertrouwelijkheid",
+    ]
+
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Informatieobject:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Informatieobject from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
         # override the default output from pydantic by calling `to_dict()` of soort
         if self.soort:
-            _dict['soort'] = self.soort.to_dict()
+            _dict["soort"] = self.soort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of detail_soort
         if self.detail_soort:
-            _dict['detailSoort'] = self.detail_soort.to_dict()
+            _dict["detailSoort"] = self.detail_soort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of onderwerp
         if self.onderwerp:
-            _dict['onderwerp'] = self.onderwerp.to_dict()
+            _dict["onderwerp"] = self.onderwerp.to_dict()
         # override the default output from pydantic by calling `to_dict()` of subonderwerp
         if self.subonderwerp:
-            _dict['subonderwerp'] = self.subonderwerp.to_dict()
+            _dict["subonderwerp"] = self.subonderwerp.to_dict()
         # override the default output from pydantic by calling `to_dict()` of status
         if self.status:
-            _dict['status'] = self.status.to_dict()
+            _dict["status"] = self.status.to_dict()
         # override the default output from pydantic by calling `to_dict()` of detail_status
         if self.detail_status:
-            _dict['detailStatus'] = self.detail_status.to_dict()
+            _dict["detailStatus"] = self.detail_status.to_dict()
         # override the default output from pydantic by calling `to_dict()` of archiefnominatie
         if self.archiefnominatie:
-            _dict['archiefnominatie'] = self.archiefnominatie.to_dict()
+            _dict["archiefnominatie"] = self.archiefnominatie.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in bijlagen (list)
         _items = []
         if self.bijlagen:
             for _item in self.bijlagen:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['bijlagen'] = _items
+            _dict["bijlagen"] = _items
         # override the default output from pydantic by calling `to_dict()` of formaat
         if self.formaat:
-            _dict['formaat'] = self.formaat.to_dict()
+            _dict["formaat"] = self.formaat.to_dict()
         # override the default output from pydantic by calling `to_dict()` of is_bijlage_van
         if self.is_bijlage_van:
-            _dict['isBijlageVan'] = self.is_bijlage_van.to_dict()
+            _dict["isBijlageVan"] = self.is_bijlage_van.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in objecten (list)
         _items = []
         if self.objecten:
             for _item in self.objecten:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['objecten'] = _items
+            _dict["objecten"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in relaties (list)
         _items = []
         if self.relaties:
             for _item in self.relaties:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['relaties'] = _items
+            _dict["relaties"] = _items
         # override the default output from pydantic by calling `to_dict()` of taal
         if self.taal:
-            _dict['taal'] = self.taal.to_dict()
+            _dict["taal"] = self.taal.to_dict()
         # override the default output from pydantic by calling `to_dict()` of vertrouwelijkheid
         if self.vertrouwelijkheid:
-            _dict['vertrouwelijkheid'] = self.vertrouwelijkheid.to_dict()
+            _dict["vertrouwelijkheid"] = self.vertrouwelijkheid.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Informatieobject:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Informatieobject from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return Informatieobject.parse_obj(obj)
+            return cls.model_validate(obj)
 
-        _obj = Informatieobject.parse_obj({
-            "id": obj.get("id"),
-            "id_extern": obj.get("idExtern"),
-            "id_gegevensbeheerder": obj.get("idGegevensbeheerder"),
-            "id_organisatie": obj.get("idOrganisatie"),
-            "id_administratie": obj.get("idAdministratie"),
-            "code": obj.get("code"),
-            "soort": Referentiedata.from_dict(obj.get("soort")) if obj.get("soort") is not None else None,
-            "detail_soort": Referentiedata.from_dict(obj.get("detailSoort")) if obj.get("detailSoort") is not None else None,
-            "onderwerp": Referentiedata.from_dict(obj.get("onderwerp")) if obj.get("onderwerp") is not None else None,
-            "subonderwerp": Referentiedata.from_dict(obj.get("subonderwerp")) if obj.get("subonderwerp") is not None else None,
-            "titel": obj.get("titel"),
-            "beschrijving": obj.get("beschrijving"),
-            "status": Referentiedata.from_dict(obj.get("status")) if obj.get("status") is not None else None,
-            "detail_status": Referentiedata.from_dict(obj.get("detailStatus")) if obj.get("detailStatus") is not None else None,
-            "registratiedatum": obj.get("registratiedatum"),
-            "ontvangstdatum": obj.get("ontvangstdatum"),
-            "publicatiedatum": obj.get("publicatiedatum"),
-            "archief_actiedatum": obj.get("archiefActiedatum"),
-            "archiefnominatie": Referentiedata.from_dict(obj.get("archiefnominatie")) if obj.get("archiefnominatie") is not None else None,
-            "auteur": obj.get("auteur"),
-            "bestand": obj.get("bestand"),
-            "bestandsgrootte": obj.get("bestandsgrootte"),
-            "bestandslocatie": obj.get("bestandslocatie"),
-            "bestandsnaam": obj.get("bestandsnaam"),
-            "bijlagen": [InformatieobjectSleutels.from_dict(_item) for _item in obj.get("bijlagen")] if obj.get("bijlagen") is not None else None,
-            "externe_publicatie": obj.get("externePublicatie"),
-            "externe_publicatietekst": obj.get("externePublicatietekst"),
-            "formaat": Referentiedata.from_dict(obj.get("formaat")) if obj.get("formaat") is not None else None,
-            "gebruiksrechten": obj.get("gebruiksrechten"),
-            "is_bijlage_van": InformatieobjectSleutels.from_dict(obj.get("isBijlageVan")) if obj.get("isBijlageVan") is not None else None,
-            "objecten": [ZaakobjectSleutels.from_dict(_item) for _item in obj.get("objecten")] if obj.get("objecten") is not None else None,
-            "relaties": [RelatieSleutels.from_dict(_item) for _item in obj.get("relaties")] if obj.get("relaties") is not None else None,
-            "taal": Referentiedata.from_dict(obj.get("taal")) if obj.get("taal") is not None else None,
-            "verantwoordelijke_organisatie": obj.get("verantwoordelijkeOrganisatie"),
-            "versie": obj.get("versie"),
-            "vertrouwelijkheid": Referentiedata.from_dict(obj.get("vertrouwelijkheid")) if obj.get("vertrouwelijkheid") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "idExtern": obj.get("idExtern"),
+                "idGegevensbeheerder": obj.get("idGegevensbeheerder"),
+                "idOrganisatie": obj.get("idOrganisatie"),
+                "idAdministratie": obj.get("idAdministratie"),
+                "code": obj.get("code"),
+                "soort": Referentiedata.from_dict(obj["soort"])
+                if obj.get("soort") is not None
+                else None,
+                "detailSoort": Referentiedata.from_dict(obj["detailSoort"])
+                if obj.get("detailSoort") is not None
+                else None,
+                "onderwerp": Referentiedata.from_dict(obj["onderwerp"])
+                if obj.get("onderwerp") is not None
+                else None,
+                "subonderwerp": Referentiedata.from_dict(obj["subonderwerp"])
+                if obj.get("subonderwerp") is not None
+                else None,
+                "titel": obj.get("titel"),
+                "beschrijving": obj.get("beschrijving"),
+                "status": Referentiedata.from_dict(obj["status"])
+                if obj.get("status") is not None
+                else None,
+                "detailStatus": Referentiedata.from_dict(obj["detailStatus"])
+                if obj.get("detailStatus") is not None
+                else None,
+                "registratiedatum": obj.get("registratiedatum"),
+                "ontvangstdatum": obj.get("ontvangstdatum"),
+                "publicatiedatum": obj.get("publicatiedatum"),
+                "archiefActiedatum": obj.get("archiefActiedatum"),
+                "archiefnominatie": Referentiedata.from_dict(obj["archiefnominatie"])
+                if obj.get("archiefnominatie") is not None
+                else None,
+                "auteur": obj.get("auteur"),
+                "bestand": obj.get("bestand"),
+                "bestandsgrootte": obj.get("bestandsgrootte"),
+                "bestandslocatie": obj.get("bestandslocatie"),
+                "bestandsnaam": obj.get("bestandsnaam"),
+                "bijlagen": [
+                    InformatieobjectSleutels.from_dict(_item)
+                    for _item in obj["bijlagen"]
+                ]
+                if obj.get("bijlagen") is not None
+                else None,
+                "externePublicatie": obj.get("externePublicatie"),
+                "externePublicatietekst": obj.get("externePublicatietekst"),
+                "formaat": Referentiedata.from_dict(obj["formaat"])
+                if obj.get("formaat") is not None
+                else None,
+                "gebruiksrechten": obj.get("gebruiksrechten"),
+                "isBijlageVan": InformatieobjectSleutels.from_dict(obj["isBijlageVan"])
+                if obj.get("isBijlageVan") is not None
+                else None,
+                "objecten": [
+                    ZaakobjectSleutels.from_dict(_item) for _item in obj["objecten"]
+                ]
+                if obj.get("objecten") is not None
+                else None,
+                "relaties": [
+                    RelatieSleutels.from_dict(_item) for _item in obj["relaties"]
+                ]
+                if obj.get("relaties") is not None
+                else None,
+                "taal": Referentiedata.from_dict(obj["taal"])
+                if obj.get("taal") is not None
+                else None,
+                "verantwoordelijkeOrganisatie": obj.get("verantwoordelijkeOrganisatie"),
+                "versie": obj.get("versie"),
+                "vertrouwelijkheid": Referentiedata.from_dict(obj["vertrouwelijkheid"])
+                if obj.get("vertrouwelijkheid") is not None
+                else None,
+            }
+        )
         return _obj
-
-

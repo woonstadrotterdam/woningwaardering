@@ -18,84 +18,155 @@ import pprint
 import re  # noqa: F401
 import json
 
-
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from woningwaardering.vera.bvg.models.referentiedata import Referentiedata
-from woningwaardering.vera.bvg.models.woningwaardering_criterium_sleutels import WoningwaarderingCriteriumSleutels
+from woningwaardering.vera.bvg.models.woningwaardering_criterium_sleutels import (
+    WoningwaarderingCriteriumSleutels,
+)
+from typing import Set
+from typing_extensions import Self
+
 
 class WoningwaarderingResultatenWoningwaarderingCriterium(BaseModel):
     """
     WoningwaarderingResultatenWoningwaarderingCriterium
-    """
-    id: Optional[StrictStr] = Field(None, description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.")
-    id_extern: Optional[StrictStr] = Field(None, alias="idExtern", description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.")
-    id_gegevensbeheerder: Optional[StrictStr] = Field(None, alias="idGegevensbeheerder", description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.")
-    id_organisatie: Optional[StrictStr] = Field(None, alias="idOrganisatie", description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.")
-    id_administratie: Optional[StrictStr] = Field(None, alias="idAdministratie", description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.")
-    code: Optional[StrictStr] = Field(None, description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)")
-    naam: Optional[StrictStr] = Field(None, description="De naam van het woningwaardering element.")
-    bovenliggende_criterium: Optional[WoningwaarderingCriteriumSleutels] = Field(None, alias="bovenliggendeCriterium", description="Het bovenliggende criterium waarvan het vriterium onderdeel van uit maakt. Via deze constructie kunnen optellingen van punten worden vastgelegd.")
-    meeteenheid: Optional[Referentiedata] = Field(None, description="De meeteenheid waarmee het criterium wordt aangeduid. Referentiedatasoort MEETEENHEID.")
-    stelsel: Optional[Referentiedata] = Field(None, description="Het woningwaardering stelsel bevat een apart puntensystemen voor de eenheidssoorten zelfstandige woningen, kamers, woonwagens en woonwagenstandplaatsen. Dit attribuut geeft het toe te passen puntensysteem aan. Referentiedatasoort WONINGWAARDERINGSTELSEL.")
-    __properties = ["id", "idExtern", "idGegevensbeheerder", "idOrganisatie", "idAdministratie", "code", "naam", "bovenliggendeCriterium", "meeteenheid", "stelsel"]
+    """  # noqa: E501
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.",
+    )
+    id_extern: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.",
+        alias="idExtern",
+    )
+    id_gegevensbeheerder: Optional[StrictStr] = Field(
+        default=None,
+        description="De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.",
+        alias="idGegevensbeheerder",
+    )
+    id_organisatie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.",
+        alias="idOrganisatie",
+    )
+    id_administratie: Optional[StrictStr] = Field(
+        default=None,
+        description="Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.",
+        alias="idAdministratie",
+    )
+    code: Optional[StrictStr] = Field(
+        default=None,
+        description="De unieke code (Bijvoorbeeld om te tonen of te zoeken)",
+    )
+    naam: Optional[StrictStr] = Field(
+        default=None, description="De naam van het woningwaardering element."
+    )
+    bovenliggende_criterium: Optional[WoningwaarderingCriteriumSleutels] = Field(
+        default=None,
+        description="Het bovenliggende criterium waarvan het vriterium onderdeel van uit maakt. Via deze constructie kunnen optellingen van punten worden vastgelegd.",
+        alias="bovenliggendeCriterium",
+    )
+    meeteenheid: Optional[Referentiedata] = Field(
+        default=None,
+        description="De meeteenheid waarmee het criterium wordt aangeduid. Referentiedatasoort MEETEENHEID.",
+    )
+    stelsel: Optional[Referentiedata] = Field(
+        default=None,
+        description="Het woningwaardering stelsel bevat een apart puntensystemen voor de eenheidssoorten zelfstandige woningen, kamers, woonwagens en woonwagenstandplaatsen. Dit attribuut geeft het toe te passen puntensysteem aan. Referentiedatasoort WONINGWAARDERINGSTELSEL.",
+    )
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "idExtern",
+        "idGegevensbeheerder",
+        "idOrganisatie",
+        "idAdministratie",
+        "code",
+        "naam",
+        "bovenliggendeCriterium",
+        "meeteenheid",
+        "stelsel",
+    ]
+
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> WoningwaarderingResultatenWoningwaarderingCriterium:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of WoningwaarderingResultatenWoningwaarderingCriterium from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
         # override the default output from pydantic by calling `to_dict()` of bovenliggende_criterium
         if self.bovenliggende_criterium:
-            _dict['bovenliggendeCriterium'] = self.bovenliggende_criterium.to_dict()
+            _dict["bovenliggendeCriterium"] = self.bovenliggende_criterium.to_dict()
         # override the default output from pydantic by calling `to_dict()` of meeteenheid
         if self.meeteenheid:
-            _dict['meeteenheid'] = self.meeteenheid.to_dict()
+            _dict["meeteenheid"] = self.meeteenheid.to_dict()
         # override the default output from pydantic by calling `to_dict()` of stelsel
         if self.stelsel:
-            _dict['stelsel'] = self.stelsel.to_dict()
+            _dict["stelsel"] = self.stelsel.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> WoningwaarderingResultatenWoningwaarderingCriterium:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of WoningwaarderingResultatenWoningwaarderingCriterium from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return WoningwaarderingResultatenWoningwaarderingCriterium.parse_obj(obj)
+            return cls.model_validate(obj)
 
-        _obj = WoningwaarderingResultatenWoningwaarderingCriterium.parse_obj({
-            "id": obj.get("id"),
-            "id_extern": obj.get("idExtern"),
-            "id_gegevensbeheerder": obj.get("idGegevensbeheerder"),
-            "id_organisatie": obj.get("idOrganisatie"),
-            "id_administratie": obj.get("idAdministratie"),
-            "code": obj.get("code"),
-            "naam": obj.get("naam"),
-            "bovenliggende_criterium": WoningwaarderingCriteriumSleutels.from_dict(obj.get("bovenliggendeCriterium")) if obj.get("bovenliggendeCriterium") is not None else None,
-            "meeteenheid": Referentiedata.from_dict(obj.get("meeteenheid")) if obj.get("meeteenheid") is not None else None,
-            "stelsel": Referentiedata.from_dict(obj.get("stelsel")) if obj.get("stelsel") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "idExtern": obj.get("idExtern"),
+                "idGegevensbeheerder": obj.get("idGegevensbeheerder"),
+                "idOrganisatie": obj.get("idOrganisatie"),
+                "idAdministratie": obj.get("idAdministratie"),
+                "code": obj.get("code"),
+                "naam": obj.get("naam"),
+                "bovenliggendeCriterium": WoningwaarderingCriteriumSleutels.from_dict(
+                    obj["bovenliggendeCriterium"]
+                )
+                if obj.get("bovenliggendeCriterium") is not None
+                else None,
+                "meeteenheid": Referentiedata.from_dict(obj["meeteenheid"])
+                if obj.get("meeteenheid") is not None
+                else None,
+                "stelsel": Referentiedata.from_dict(obj["stelsel"])
+                if obj.get("stelsel") is not None
+                else None,
+            }
+        )
         return _obj
-
-

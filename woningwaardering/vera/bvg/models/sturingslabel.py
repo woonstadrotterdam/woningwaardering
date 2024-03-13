@@ -19,70 +19,104 @@ import re  # noqa: F401
 import json
 
 from datetime import date
-from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from woningwaardering.vera.bvg.models.referentiedata import Referentiedata
+from typing import Set
+from typing_extensions import Self
+
 
 class Sturingslabel(BaseModel):
     """
     Sturingslabel
-    """
-    soort: Optional[Referentiedata] = Field(None, description="De categorie of groepering van het label. Bijv. dVI samenstelling bezit etc. Referentiedatasoort STURINGSLABELSOORT.")
-    label: Optional[Referentiedata] = Field(None, description="Het label dat is bepaald op basis van de bijbehorende definitie. Bijv. Zelfstandige huurwoning. Referentiedatasoort STURINGSLABEL.")
-    datum: Optional[date] = Field(None, description="Datum en tijdstip waarop het label is bepaald.")
-    bron: Optional[Referentiedata] = Field(None, description="De bron van de definitie van het label. Bijv. dVI 2014, CORA etc. Referentiedatasoort STURINGSLABELBRON.")
-    __properties = ["soort", "label", "datum", "bron"]
+    """  # noqa: E501
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    soort: Optional[Referentiedata] = Field(
+        default=None,
+        description="De categorie of groepering van het label. Bijv. dVI samenstelling bezit etc. Referentiedatasoort STURINGSLABELSOORT.",
+    )
+    label: Optional[Referentiedata] = Field(
+        default=None,
+        description="Het label dat is bepaald op basis van de bijbehorende definitie. Bijv. Zelfstandige huurwoning. Referentiedatasoort STURINGSLABEL.",
+    )
+    datum: Optional[date] = Field(
+        default=None, description="Datum en tijdstip waarop het label is bepaald."
+    )
+    bron: Optional[Referentiedata] = Field(
+        default=None,
+        description="De bron van de definitie van het label. Bijv. dVI 2014, CORA etc. Referentiedatasoort STURINGSLABELBRON.",
+    )
+    __properties: ClassVar[List[str]] = ["soort", "label", "datum", "bron"]
+
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Sturingslabel:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Sturingslabel from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
         # override the default output from pydantic by calling `to_dict()` of soort
         if self.soort:
-            _dict['soort'] = self.soort.to_dict()
+            _dict["soort"] = self.soort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of label
         if self.label:
-            _dict['label'] = self.label.to_dict()
+            _dict["label"] = self.label.to_dict()
         # override the default output from pydantic by calling `to_dict()` of bron
         if self.bron:
-            _dict['bron'] = self.bron.to_dict()
+            _dict["bron"] = self.bron.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Sturingslabel:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Sturingslabel from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return Sturingslabel.parse_obj(obj)
+            return cls.model_validate(obj)
 
-        _obj = Sturingslabel.parse_obj({
-            "soort": Referentiedata.from_dict(obj.get("soort")) if obj.get("soort") is not None else None,
-            "label": Referentiedata.from_dict(obj.get("label")) if obj.get("label") is not None else None,
-            "datum": obj.get("datum"),
-            "bron": Referentiedata.from_dict(obj.get("bron")) if obj.get("bron") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "soort": Referentiedata.from_dict(obj["soort"])
+                if obj.get("soort") is not None
+                else None,
+                "label": Referentiedata.from_dict(obj["label"])
+                if obj.get("label") is not None
+                else None,
+                "datum": obj.get("datum"),
+                "bron": Referentiedata.from_dict(obj["bron"])
+                if obj.get("bron") is not None
+                else None,
+            }
+        )
         return _obj
-
-
