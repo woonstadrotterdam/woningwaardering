@@ -52,21 +52,21 @@ grouped_data = [(k, list(g)) for k, g in groupby(active_data, key=itemgetter("so
 environment = Environment(autoescape=True)
 
 
-def regex_replace(s, find, replace):
+def regex_replace(s, find, replace) -> str:
     return re.sub(find, replace, s)
 
 
 environment.filters["regex_replace"] = regex_replace
 
 
-def split_long_line(s):
+def split_long_line(s) -> str:
     return re.sub(r"(.{1,84})(\s|$)", r"\1\n    ", s).rstrip()
 
 
 environment.filters["split_long_line"] = split_long_line
 
 
-def remove_accents(s):
+def remove_accents(s) -> str:
     return unidecode.unidecode(s)
 
 

@@ -10,7 +10,7 @@ ref2 = referentiedata.Dossier.AUTHENTIEKGEGEVENBRON.inkomensregistratieformulier
 print(ref1 == ref2)
 
 
-def dummy_function() -> bool:
+def dummy_function() -> None:
     eenheid = EenhedenEenheid()
     eenheid.ruimten = [
         EenhedenRuimte(
