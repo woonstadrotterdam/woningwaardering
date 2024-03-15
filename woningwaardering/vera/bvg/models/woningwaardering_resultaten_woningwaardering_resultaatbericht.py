@@ -171,36 +171,36 @@ class WoningwaarderingResultatenWoningwaarderingResultaatbericht(BaseModel):
         if self.eenheid:
             _dict["eenheid"] = self.eenheid.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in groepen (list)
-        _items = []
+        _groepen_items = []
         if self.groepen:
-            for _item in self.groepen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["groepen"] = _items
+            for _groepen_item in self.groepen:
+                if _groepen_item:
+                    _groepen_items.append(_groepen_item.to_dict())
+            _dict["groepen"] = _groepen_items
         # override the default output from pydantic by calling `to_dict()` of stelsel
         if self.stelsel:
             _dict["stelsel"] = self.stelsel.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in extra_attributen (list)
-        _items = []
+        _extra_attributen_items = []
         if self.extra_attributen:
-            for _item in self.extra_attributen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["extra-attributen"] = _items
+            for _extra_attributen_item in self.extra_attributen:
+                if _extra_attributen_item:
+                    _extra_attributen_items.append(_extra_attributen_item.to_dict())
+            _dict["extra-attributen"] = _extra_attributen_items
         # override the default output from pydantic by calling `to_dict()` of each item in informatieobjecten (list)
-        _items = []
+        _informatieobjecten_items = []
         if self.informatieobjecten:
-            for _item in self.informatieobjecten:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["informatieobjecten"] = _items
+            for _informatieobjecten_item in self.informatieobjecten:
+                if _informatieobjecten_item:
+                    _informatieobjecten_items.append(_informatieobjecten_item.to_dict())
+            _dict["informatieobjecten"] = _informatieobjecten_items
         # override the default output from pydantic by calling `to_dict()` of each item in sturingslabels (list)
-        _items = []
+        _sturingslabels_items = []
         if self.sturingslabels:
-            for _item in self.sturingslabels:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["sturingslabels"] = _items
+            for _sturingslabels_item in self.sturingslabels:
+                if _sturingslabels_item:
+                    _sturingslabels_items.append(_sturingslabels_item.to_dict())
+            _dict["sturingslabels"] = _sturingslabels_items
         return _dict
 
     @classmethod

@@ -184,46 +184,48 @@ class ClustersCluster(BaseModel):
         if self.bovenliggende_cluster:
             _dict["bovenliggendeCluster"] = self.bovenliggende_cluster.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in collectieve_objecten (list)
-        _items = []
+        _collectieve_objecten_items = []
         if self.collectieve_objecten:
-            for _item in self.collectieve_objecten:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["collectieveObjecten"] = _items
+            for _collectieve_objecten_item in self.collectieve_objecten:
+                if _collectieve_objecten_item:
+                    _collectieve_objecten_items.append(
+                        _collectieve_objecten_item.to_dict()
+                    )
+            _dict["collectieveObjecten"] = _collectieve_objecten_items
         # override the default output from pydantic by calling `to_dict()` of conditiemeting
         if self.conditiemeting:
             _dict["conditiemeting"] = self.conditiemeting.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in eenheden (list)
-        _items = []
+        _eenheden_items = []
         if self.eenheden:
-            for _item in self.eenheden:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["eenheden"] = _items
+            for _eenheden_item in self.eenheden:
+                if _eenheden_item:
+                    _eenheden_items.append(_eenheden_item.to_dict())
+            _dict["eenheden"] = _eenheden_items
         # override the default output from pydantic by calling `to_dict()` of each item in garanties (list)
-        _items = []
+        _garanties_items = []
         if self.garanties:
-            for _item in self.garanties:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["garanties"] = _items
+            for _garanties_item in self.garanties:
+                if _garanties_item:
+                    _garanties_items.append(_garanties_item.to_dict())
+            _dict["garanties"] = _garanties_items
         # override the default output from pydantic by calling `to_dict()` of geometrie
         if self.geometrie:
             _dict["geometrie"] = self.geometrie.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in overeenkomsten (list)
-        _items = []
+        _overeenkomsten_items = []
         if self.overeenkomsten:
-            for _item in self.overeenkomsten:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["overeenkomsten"] = _items
+            for _overeenkomsten_item in self.overeenkomsten:
+                if _overeenkomsten_item:
+                    _overeenkomsten_items.append(_overeenkomsten_item.to_dict())
+            _dict["overeenkomsten"] = _overeenkomsten_items
         # override the default output from pydantic by calling `to_dict()` of each item in relaties (list)
-        _items = []
+        _relaties_items = []
         if self.relaties:
-            for _item in self.relaties:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["relaties"] = _items
+            for _relaties_item in self.relaties:
+                if _relaties_item:
+                    _relaties_items.append(_relaties_item.to_dict())
+            _dict["relaties"] = _relaties_items
         return _dict
 
     @classmethod

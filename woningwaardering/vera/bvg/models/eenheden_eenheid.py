@@ -501,12 +501,12 @@ class EenhedenEenheid(BaseModel):
                 "adresseerbaarObjectBasisregistratie"
             ] = self.adresseerbaar_object_basisregistratie.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in beleidswaarde (list)
-        _items = []
+        _beleidswaarde_items = []
         if self.beleidswaarde:
-            for _item in self.beleidswaarde:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["beleidswaarde"] = _items
+            for _beleidswaarde_item in self.beleidswaarde:
+                if _beleidswaarde_item:
+                    _beleidswaarde_items.append(_beleidswaarde_item.to_dict())
+            _dict["beleidswaarde"] = _beleidswaarde_items
         # override the default output from pydantic by calling `to_dict()` of bestemming
         if self.bestemming:
             _dict["bestemming"] = self.bestemming.to_dict()
@@ -514,128 +514,132 @@ class EenhedenEenheid(BaseModel):
         if self.bovenliggende_eenheid:
             _dict["bovenliggendeEenheid"] = self.bovenliggende_eenheid.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in clusters (list)
-        _items = []
+        _clusters_items = []
         if self.clusters:
-            for _item in self.clusters:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["clusters"] = _items
+            for _clusters_item in self.clusters:
+                if _clusters_item:
+                    _clusters_items.append(_clusters_item.to_dict())
+            _dict["clusters"] = _clusters_items
         # override the default output from pydantic by calling `to_dict()` of each item in collectieve_objecten (list)
-        _items = []
+        _collectieve_objecten_items = []
         if self.collectieve_objecten:
-            for _item in self.collectieve_objecten:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["collectieveObjecten"] = _items
+            for _collectieve_objecten_item in self.collectieve_objecten:
+                if _collectieve_objecten_item:
+                    _collectieve_objecten_items.append(
+                        _collectieve_objecten_item.to_dict()
+                    )
+            _dict["collectieveObjecten"] = _collectieve_objecten_items
         # override the default output from pydantic by calling `to_dict()` of each item in criteria (list)
-        _items = []
+        _criteria_items = []
         if self.criteria:
-            for _item in self.criteria:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["Criteria"] = _items
+            for _criteria_item in self.criteria:
+                if _criteria_item:
+                    _criteria_items.append(_criteria_item.to_dict())
+            _dict["Criteria"] = _criteria_items
         # override the default output from pydantic by calling `to_dict()` of doelgroep
         if self.doelgroep:
             _dict["doelgroep"] = self.doelgroep.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in energieprestaties (list)
-        _items = []
+        _energieprestaties_items = []
         if self.energieprestaties:
-            for _item in self.energieprestaties:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["energieprestaties"] = _items
+            for _energieprestaties_item in self.energieprestaties:
+                if _energieprestaties_item:
+                    _energieprestaties_items.append(_energieprestaties_item.to_dict())
+            _dict["energieprestaties"] = _energieprestaties_items
         # override the default output from pydantic by calling `to_dict()` of each item in energievoorzieningen (list)
-        _items = []
+        _energievoorzieningen_items = []
         if self.energievoorzieningen:
-            for _item in self.energievoorzieningen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["energievoorzieningen"] = _items
+            for _energievoorzieningen_item in self.energievoorzieningen:
+                if _energievoorzieningen_item:
+                    _energievoorzieningen_items.append(
+                        _energievoorzieningen_item.to_dict()
+                    )
+            _dict["energievoorzieningen"] = _energievoorzieningen_items
         # override the default output from pydantic by calling `to_dict()` of in_exploitatie_reden
         if self.in_exploitatie_reden:
             _dict["inExploitatieReden"] = self.in_exploitatie_reden.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in interieur (list)
-        _items = []
+        _interieur_items = []
         if self.interieur:
-            for _item in self.interieur:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["interieur"] = _items
+            for _interieur_item in self.interieur:
+                if _interieur_item:
+                    _interieur_items.append(_interieur_item.to_dict())
+            _dict["interieur"] = _interieur_items
         # override the default output from pydantic by calling `to_dict()` of each item in isolatie (list)
-        _items = []
+        _isolatie_items = []
         if self.isolatie:
-            for _item in self.isolatie:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["isolatie"] = _items
+            for _isolatie_item in self.isolatie:
+                if _isolatie_item:
+                    _isolatie_items.append(_isolatie_item.to_dict())
+            _dict["isolatie"] = _isolatie_items
         # override the default output from pydantic by calling `to_dict()` of each item in klimaatbeheersing (list)
-        _items = []
+        _klimaatbeheersing_items = []
         if self.klimaatbeheersing:
-            for _item in self.klimaatbeheersing:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["klimaatbeheersing"] = _items
+            for _klimaatbeheersing_item in self.klimaatbeheersing:
+                if _klimaatbeheersing_item:
+                    _klimaatbeheersing_items.append(_klimaatbeheersing_item.to_dict())
+            _dict["klimaatbeheersing"] = _klimaatbeheersing_items
         # override the default output from pydantic by calling `to_dict()` of kwaliteitsniveau
         if self.kwaliteitsniveau:
             _dict["kwaliteitsniveau"] = self.kwaliteitsniveau.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in ligging (list)
-        _items = []
+        _ligging_items = []
         if self.ligging:
-            for _item in self.ligging:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["ligging"] = _items
+            for _ligging_item in self.ligging:
+                if _ligging_item:
+                    _ligging_items.append(_ligging_item.to_dict())
+            _dict["ligging"] = _ligging_items
         # override the default output from pydantic by calling `to_dict()` of maatschappelijk_label
         if self.maatschappelijk_label:
             _dict["maatschappelijkLabel"] = self.maatschappelijk_label.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in monumenten (list)
-        _items = []
+        _monumenten_items = []
         if self.monumenten:
-            for _item in self.monumenten:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["monumenten"] = _items
+            for _monumenten_item in self.monumenten:
+                if _monumenten_item:
+                    _monumenten_items.append(_monumenten_item.to_dict())
+            _dict["monumenten"] = _monumenten_items
         # override the default output from pydantic by calling `to_dict()` of onderhoudslabel
         if self.onderhoudslabel:
             _dict["onderhoudslabel"] = self.onderhoudslabel.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in panden (list)
-        _items = []
+        _panden_items = []
         if self.panden:
-            for _item in self.panden:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["panden"] = _items
+            for _panden_item in self.panden:
+                if _panden_item:
+                    _panden_items.append(_panden_item.to_dict())
+            _dict["panden"] = _panden_items
         # override the default output from pydantic by calling `to_dict()` of each item in prijscomponenten (list)
-        _items = []
+        _prijscomponenten_items = []
         if self.prijscomponenten:
-            for _item in self.prijscomponenten:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["prijscomponenten"] = _items
+            for _prijscomponenten_item in self.prijscomponenten:
+                if _prijscomponenten_item:
+                    _prijscomponenten_items.append(_prijscomponenten_item.to_dict())
+            _dict["prijscomponenten"] = _prijscomponenten_items
         # override the default output from pydantic by calling `to_dict()` of rayon
         if self.rayon:
             _dict["rayon"] = self.rayon.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in relaties (list)
-        _items = []
+        _relaties_items = []
         if self.relaties:
-            for _item in self.relaties:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["relaties"] = _items
+            for _relaties_item in self.relaties:
+                if _relaties_item:
+                    _relaties_items.append(_relaties_item.to_dict())
+            _dict["relaties"] = _relaties_items
         # override the default output from pydantic by calling `to_dict()` of each item in ruimten (list)
-        _items = []
+        _ruimten_items = []
         if self.ruimten:
-            for _item in self.ruimten:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["ruimten"] = _items
+            for _ruimten_item in self.ruimten:
+                if _ruimten_item:
+                    _ruimten_items.append(_ruimten_item.to_dict())
+            _dict["ruimten"] = _ruimten_items
         # override the default output from pydantic by calling `to_dict()` of each item in sanitair (list)
-        _items = []
+        _sanitair_items = []
         if self.sanitair:
-            for _item in self.sanitair:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["sanitair"] = _items
+            for _sanitair_item in self.sanitair:
+                if _sanitair_item:
+                    _sanitair_items.append(_sanitair_item.to_dict())
+            _dict["sanitair"] = _sanitair_items
         # override the default output from pydantic by calling `to_dict()` of toegankelijkheidslabel
         if self.toegankelijkheidslabel:
             _dict["toegankelijkheidslabel"] = self.toegankelijkheidslabel.to_dict()
@@ -652,12 +656,12 @@ class EenhedenEenheid(BaseModel):
         if self.woonvorm:
             _dict["woonvorm"] = self.woonvorm.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in woz_eenheden (list)
-        _items = []
+        _woz_eenheden_items = []
         if self.woz_eenheden:
-            for _item in self.woz_eenheden:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["wozEenheden"] = _items
+            for _woz_eenheden_item in self.woz_eenheden:
+                if _woz_eenheden_item:
+                    _woz_eenheden_items.append(_woz_eenheden_item.to_dict())
+            _dict["wozEenheden"] = _woz_eenheden_items
         return _dict
 
     @classmethod

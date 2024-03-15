@@ -152,12 +152,12 @@ class WoningwaarderingResultatenWoningwaarderingResultaat(BaseModel):
         if self.eenheid:
             _dict["eenheid"] = self.eenheid.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in groepen (list)
-        _items = []
+        _groepen_items = []
         if self.groepen:
-            for _item in self.groepen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["groepen"] = _items
+            for _groepen_item in self.groepen:
+                if _groepen_item:
+                    _groepen_items.append(_groepen_item.to_dict())
+            _dict["groepen"] = _groepen_items
         # override the default output from pydantic by calling `to_dict()` of stelsel
         if self.stelsel:
             _dict["stelsel"] = self.stelsel.to_dict()

@@ -128,12 +128,12 @@ class RelatieSleutels(BaseModel):
         if self.detail_soort:
             _dict["detailSoort"] = self.detail_soort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in rollen (list)
-        _items = []
+        _rollen_items = []
         if self.rollen:
-            for _item in self.rollen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["rollen"] = _items
+            for _rollen_item in self.rollen:
+                if _rollen_item:
+                    _rollen_items.append(_rollen_item.to_dict())
+            _dict["rollen"] = _rollen_items
         return _dict
 
     @classmethod

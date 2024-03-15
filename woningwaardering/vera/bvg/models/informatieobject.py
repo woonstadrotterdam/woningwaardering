@@ -291,12 +291,12 @@ class Informatieobject(BaseModel):
         if self.archiefnominatie:
             _dict["archiefnominatie"] = self.archiefnominatie.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in bijlagen (list)
-        _items = []
+        _bijlagen_items = []
         if self.bijlagen:
-            for _item in self.bijlagen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["bijlagen"] = _items
+            for _bijlagen_item in self.bijlagen:
+                if _bijlagen_item:
+                    _bijlagen_items.append(_bijlagen_item.to_dict())
+            _dict["bijlagen"] = _bijlagen_items
         # override the default output from pydantic by calling `to_dict()` of formaat
         if self.formaat:
             _dict["formaat"] = self.formaat.to_dict()
@@ -304,19 +304,19 @@ class Informatieobject(BaseModel):
         if self.is_bijlage_van:
             _dict["isBijlageVan"] = self.is_bijlage_van.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in objecten (list)
-        _items = []
+        _objecten_items = []
         if self.objecten:
-            for _item in self.objecten:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["objecten"] = _items
+            for _objecten_item in self.objecten:
+                if _objecten_item:
+                    _objecten_items.append(_objecten_item.to_dict())
+            _dict["objecten"] = _objecten_items
         # override the default output from pydantic by calling `to_dict()` of each item in relaties (list)
-        _items = []
+        _relaties_items = []
         if self.relaties:
-            for _item in self.relaties:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["relaties"] = _items
+            for _relaties_item in self.relaties:
+                if _relaties_item:
+                    _relaties_items.append(_relaties_item.to_dict())
+            _dict["relaties"] = _relaties_items
         # override the default output from pydantic by calling `to_dict()` of taal
         if self.taal:
             _dict["taal"] = self.taal.to_dict()

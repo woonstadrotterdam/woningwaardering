@@ -16,7 +16,7 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
 from typing import Any, List, Optional
 from woningwaardering.vera.bvg.models.clusters_natuurlijk_persoon import (
     ClustersNatuurlijkPersoon,
@@ -24,8 +24,7 @@ from woningwaardering.vera.bvg.models.clusters_natuurlijk_persoon import (
 from woningwaardering.vera.bvg.models.clusters_rechtspersoon import (
     ClustersRechtspersoon,
 )
-from typing import Union, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Dict, Set
 
 CLUSTERSRELATIE_ONE_OF_SCHEMAS = ["ClustersNatuurlijkPersoon", "ClustersRechtspersoon"]
 
@@ -42,16 +41,14 @@ class ClustersRelatie(BaseModel):
     actual_instance: Optional[
         Union[ClustersNatuurlijkPersoon, ClustersRechtspersoon]
     ] = None
-    one_of_schemas: List[str] = Field(
-        default=Literal["ClustersNatuurlijkPersoon", "ClustersRechtspersoon"]
-    )
+    one_of_schemas: Set[str] = {"ClustersNatuurlijkPersoon", "ClustersRechtspersoon"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         if args:
             if len(args) > 1:
                 raise ValueError(
@@ -66,8 +63,10 @@ class ClustersRelatie(BaseModel):
             super().__init__(**kwargs)
 
     @field_validator("actual_instance")
-    def actual_instance_must_validate_oneof(cls, v):
-        error_messages = []
+    def actual_instance_must_validate_oneof(
+        cls, v: Union[ClustersNatuurlijkPersoon, ClustersRechtspersoon]
+    ) -> Union[ClustersNatuurlijkPersoon, ClustersRechtspersoon]:
+        error_messages: List[str] = []
         match = 0
         # validate data type: ClustersNatuurlijkPersoon
         if not isinstance(v, ClustersNatuurlijkPersoon):
@@ -99,14 +98,14 @@ class ClustersRelatie(BaseModel):
             return v
 
     @classmethod
-    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> Self:
+    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> ClustersRelatie:
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> ClustersRelatie:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
-        error_messages = []
+        error_messages: List[str] = []
         match = 0
 
         # deserialize data into ClustersNatuurlijkPersoon

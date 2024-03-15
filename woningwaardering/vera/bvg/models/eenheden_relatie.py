@@ -16,7 +16,7 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
 from typing import Any, List, Optional
 from woningwaardering.vera.bvg.models.eenheden_natuurlijk_persoon import (
     EenhedenNatuurlijkPersoon,
@@ -24,8 +24,7 @@ from woningwaardering.vera.bvg.models.eenheden_natuurlijk_persoon import (
 from woningwaardering.vera.bvg.models.eenheden_rechtspersoon import (
     EenhedenRechtspersoon,
 )
-from typing import Union, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Dict, Set
 
 EENHEDENRELATIE_ONE_OF_SCHEMAS = ["EenhedenNatuurlijkPersoon", "EenhedenRechtspersoon"]
 
@@ -42,16 +41,14 @@ class EenhedenRelatie(BaseModel):
     actual_instance: Optional[
         Union[EenhedenNatuurlijkPersoon, EenhedenRechtspersoon]
     ] = None
-    one_of_schemas: List[str] = Field(
-        default=Literal["EenhedenNatuurlijkPersoon", "EenhedenRechtspersoon"]
-    )
+    one_of_schemas: Set[str] = {"EenhedenNatuurlijkPersoon", "EenhedenRechtspersoon"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         if args:
             if len(args) > 1:
                 raise ValueError(
@@ -66,8 +63,10 @@ class EenhedenRelatie(BaseModel):
             super().__init__(**kwargs)
 
     @field_validator("actual_instance")
-    def actual_instance_must_validate_oneof(cls, v):
-        error_messages = []
+    def actual_instance_must_validate_oneof(
+        cls, v: Union[EenhedenNatuurlijkPersoon, EenhedenRechtspersoon]
+    ) -> Union[EenhedenNatuurlijkPersoon, EenhedenRechtspersoon]:
+        error_messages: List[str] = []
         match = 0
         # validate data type: EenhedenNatuurlijkPersoon
         if not isinstance(v, EenhedenNatuurlijkPersoon):
@@ -99,14 +98,14 @@ class EenhedenRelatie(BaseModel):
             return v
 
     @classmethod
-    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> Self:
+    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> EenhedenRelatie:
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> EenhedenRelatie:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
-        error_messages = []
+        error_messages: List[str] = []
         match = 0
 
         # deserialize data into EenhedenNatuurlijkPersoon

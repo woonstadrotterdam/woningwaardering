@@ -20,14 +20,14 @@ classifiers = [
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.10"
 dependencies = [
-    "pydantic==1.*",
-    "types-requests==2.*",
+    "pydantic==2.*",
 ]
 [project.optional-dependencies]
 test = [
     "pre-commit==3.3.*",
     "ruff==0.3.*",
     "pytest==8.0.*",
+    "types-requests==2.*",
 ]
 dev = [
     "pre-commit==3.3.*",

@@ -16,14 +16,13 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
 from typing import Any, List, Optional
 from woningwaardering.vera.bvg.models.clusters_geometrie_basis import (
     ClustersGeometrieBasis,
 )
 from woningwaardering.vera.bvg.models.clusters_punt import ClustersPunt
-from typing import Union, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Dict, Set
 
 CLUSTERSGEOMETRIE_ONE_OF_SCHEMAS = ["ClustersGeometrieBasis", "ClustersPunt"]
 
@@ -38,16 +37,14 @@ class ClustersGeometrie(BaseModel):
     # data type: ClustersGeometrieBasis
     oneof_schema_2_validator: Optional[ClustersGeometrieBasis] = None
     actual_instance: Optional[Union[ClustersGeometrieBasis, ClustersPunt]] = None
-    one_of_schemas: List[str] = Field(
-        default=Literal["ClustersGeometrieBasis", "ClustersPunt"]
-    )
+    one_of_schemas: Set[str] = {"ClustersGeometrieBasis", "ClustersPunt"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         if args:
             if len(args) > 1:
                 raise ValueError(
@@ -62,8 +59,10 @@ class ClustersGeometrie(BaseModel):
             super().__init__(**kwargs)
 
     @field_validator("actual_instance")
-    def actual_instance_must_validate_oneof(cls, v):
-        error_messages = []
+    def actual_instance_must_validate_oneof(
+        cls, v: Union[ClustersGeometrieBasis, ClustersPunt]
+    ) -> Union[ClustersGeometrieBasis, ClustersPunt]:
+        error_messages: List[str] = []
         match = 0
         # validate data type: ClustersPunt
         if not isinstance(v, ClustersPunt):
@@ -95,14 +94,14 @@ class ClustersGeometrie(BaseModel):
             return v
 
     @classmethod
-    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> Self:
+    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> ClustersGeometrie:
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> ClustersGeometrie:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
-        error_messages = []
+        error_messages: List[str] = []
         match = 0
 
         # deserialize data into ClustersPunt

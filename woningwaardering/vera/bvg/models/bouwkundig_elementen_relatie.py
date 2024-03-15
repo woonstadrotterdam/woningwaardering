@@ -16,13 +16,12 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
 from typing import Any, List, Optional
 from woningwaardering.vera.bvg.models.bouwkundig_elementen_rechtspersoon import (
     BouwkundigElementenRechtspersoon,
 )
-from typing import Union, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Dict, Set
 
 BOUWKUNDIGELEMENTENRELATIE_ONE_OF_SCHEMAS = ["BouwkundigElementenRechtspersoon"]
 
@@ -35,16 +34,14 @@ class BouwkundigElementenRelatie(BaseModel):
     # data type: BouwkundigElementenRechtspersoon
     oneof_schema_1_validator: Optional[BouwkundigElementenRechtspersoon] = None
     actual_instance: Optional[Union[BouwkundigElementenRechtspersoon]] = None
-    one_of_schemas: List[str] = Field(
-        default=Literal["BouwkundigElementenRechtspersoon"]
-    )
+    one_of_schemas: Set[str] = {"BouwkundigElementenRechtspersoon"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         if args:
             if len(args) > 1:
                 raise ValueError(
@@ -59,8 +56,10 @@ class BouwkundigElementenRelatie(BaseModel):
             super().__init__(**kwargs)
 
     @field_validator("actual_instance")
-    def actual_instance_must_validate_oneof(cls, v):
-        error_messages = []
+    def actual_instance_must_validate_oneof(
+        cls, v: Union[BouwkundigElementenRechtspersoon]
+    ) -> Union[BouwkundigElementenRechtspersoon]:
+        error_messages: List[str] = []
         match = 0
         # validate data type: BouwkundigElementenRechtspersoon
         if not isinstance(v, BouwkundigElementenRechtspersoon):
@@ -85,14 +84,14 @@ class BouwkundigElementenRelatie(BaseModel):
             return v
 
     @classmethod
-    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> Self:
+    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> BouwkundigElementenRelatie:
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> BouwkundigElementenRelatie:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
-        error_messages = []
+        error_messages: List[str] = []
         match = 0
 
         # deserialize data into BouwkundigElementenRechtspersoon

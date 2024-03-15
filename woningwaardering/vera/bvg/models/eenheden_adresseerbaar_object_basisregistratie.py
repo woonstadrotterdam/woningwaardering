@@ -173,29 +173,31 @@ class EenhedenAdresseerbaarObjectBasisregistratie(BaseModel):
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in bag_gebruiksdoelen (list)
-        _items = []
+        _bag_gebruiksdoelen_items = []
         if self.bag_gebruiksdoelen:
-            for _item in self.bag_gebruiksdoelen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["bagGebruiksdoelen"] = _items
+            for _bag_gebruiksdoelen_item in self.bag_gebruiksdoelen:
+                if _bag_gebruiksdoelen_item:
+                    _bag_gebruiksdoelen_items.append(_bag_gebruiksdoelen_item.to_dict())
+            _dict["bagGebruiksdoelen"] = _bag_gebruiksdoelen_items
         # override the default output from pydantic by calling `to_dict()` of bag_hoofdadres
         if self.bag_hoofdadres:
             _dict["bagHoofdadres"] = self.bag_hoofdadres.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in bag_nevenadressen (list)
-        _items = []
+        _bag_nevenadressen_items = []
         if self.bag_nevenadressen:
-            for _item in self.bag_nevenadressen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["bagNevenadressen"] = _items
+            for _bag_nevenadressen_item in self.bag_nevenadressen:
+                if _bag_nevenadressen_item:
+                    _bag_nevenadressen_items.append(_bag_nevenadressen_item.to_dict())
+            _dict["bagNevenadressen"] = _bag_nevenadressen_items
         # override the default output from pydantic by calling `to_dict()` of each item in bag_panden_basisregistratie (list)
-        _items = []
+        _bag_panden_basisregistratie_items = []
         if self.bag_panden_basisregistratie:
-            for _item in self.bag_panden_basisregistratie:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["bagPandenBasisregistratie"] = _items
+            for _bag_panden_basisregistratie_item in self.bag_panden_basisregistratie:
+                if _bag_panden_basisregistratie_item:
+                    _bag_panden_basisregistratie_items.append(
+                        _bag_panden_basisregistratie_item.to_dict()
+                    )
+            _dict["bagPandenBasisregistratie"] = _bag_panden_basisregistratie_items
         # override the default output from pydantic by calling `to_dict()` of geometrie
         if self.geometrie:
             _dict["geometrie"] = self.geometrie.to_dict()

@@ -169,19 +169,19 @@ class ClustersNatuurlijkPersoon(BaseModel):
         if self.detail_soort:
             _dict["detailSoort"] = self.detail_soort.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in relaties (list)
-        _items = []
+        _relaties_items = []
         if self.relaties:
-            for _item in self.relaties:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["relaties"] = _items
+            for _relaties_item in self.relaties:
+                if _relaties_item:
+                    _relaties_items.append(_relaties_item.to_dict())
+            _dict["relaties"] = _relaties_items
         # override the default output from pydantic by calling `to_dict()` of each item in rollen (list)
-        _items = []
+        _rollen_items = []
         if self.rollen:
-            for _item in self.rollen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["rollen"] = _items
+            for _rollen_item in self.rollen:
+                if _rollen_item:
+                    _rollen_items.append(_rollen_item.to_dict())
+            _dict["rollen"] = _rollen_items
         return _dict
 
     @classmethod

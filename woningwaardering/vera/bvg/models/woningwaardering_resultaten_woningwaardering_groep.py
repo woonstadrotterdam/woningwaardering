@@ -143,12 +143,12 @@ class WoningwaarderingResultatenWoningwaarderingGroep(BaseModel):
         if self.criterium_groep:
             _dict["criteriumGroep"] = self.criterium_groep.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in woningwaarderingen (list)
-        _items = []
+        _woningwaarderingen_items = []
         if self.woningwaarderingen:
-            for _item in self.woningwaarderingen:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["woningwaarderingen"] = _items
+            for _woningwaarderingen_item in self.woningwaarderingen:
+                if _woningwaarderingen_item:
+                    _woningwaarderingen_items.append(_woningwaarderingen_item.to_dict())
+            _dict["woningwaarderingen"] = _woningwaarderingen_items
         return _dict
 
     @classmethod

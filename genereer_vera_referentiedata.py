@@ -1,6 +1,6 @@
 import csv
 import re
-from typing import Dict, Set
+from typing import Any, Callable, Dict, Set, Pattern, Match
 import unidecode
 from jinja2 import Environment
 from itertools import groupby
@@ -52,28 +52,30 @@ grouped_data = [(k, list(g)) for k, g in groupby(active_data, key=itemgetter("so
 environment = Environment(autoescape=True)
 
 
-def regex_replace(s, find, replace) -> str:
+def regex_replace(
+    s: str, find: str | Pattern[str], replace: str | Callable[[Match[str]], str]
+) -> str:
     return re.sub(find, replace, s)
 
 
 environment.filters["regex_replace"] = regex_replace
 
 
-def split_long_line(s) -> str:
+def split_long_line(s: str) -> str:
     return re.sub(r"(.{1,84})(\s|$)", r"\1\n    ", s).rstrip()
 
 
 environment.filters["split_long_line"] = split_long_line
 
 
-def remove_accents(s) -> str:
+def remove_accents(s: str) -> str:
     return unidecode.unidecode(s)
 
 
 environment.filters["remove_accents"] = remove_accents
 
 
-def normalize_variable_name(item):
+def normalize_variable_name(item: dict[str | Any, str | Any]) -> str:
     s = item["naam"]
     if "+" in s:
         s = item["code"]

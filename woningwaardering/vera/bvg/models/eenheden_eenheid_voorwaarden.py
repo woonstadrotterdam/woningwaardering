@@ -152,19 +152,19 @@ class EenhedenEenheidVoorwaarden(BaseModel):
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in selectiecriteria (list)
-        _items = []
+        _selectiecriteria_items = []
         if self.selectiecriteria:
-            for _item in self.selectiecriteria:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["selectiecriteria"] = _items
+            for _selectiecriteria_item in self.selectiecriteria:
+                if _selectiecriteria_item:
+                    _selectiecriteria_items.append(_selectiecriteria_item.to_dict())
+            _dict["selectiecriteria"] = _selectiecriteria_items
         # override the default output from pydantic by calling `to_dict()` of each item in voorrangscriteria (list)
-        _items = []
+        _voorrangscriteria_items = []
         if self.voorrangscriteria:
-            for _item in self.voorrangscriteria:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["voorrangscriteria"] = _items
+            for _voorrangscriteria_item in self.voorrangscriteria:
+                if _voorrangscriteria_item:
+                    _voorrangscriteria_items.append(_voorrangscriteria_item.to_dict())
+            _dict["voorrangscriteria"] = _voorrangscriteria_items
         return _dict
 
     @classmethod
