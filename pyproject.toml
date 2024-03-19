@@ -30,6 +30,7 @@ test = [
     "types-requests==2.*",
 ]
 dev = [
+    "datamodel-code-generator[http]==0.25.*",
     "pre-commit==3.3.*",
     "ruff==0.3.*",
     "pytest==8.0.*",

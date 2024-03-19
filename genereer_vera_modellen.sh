@@ -1,1 +1,0 @@
-openapi-generator generate --global-property models --global-property supportingFiles=__init__.py -g python -t .openapi-generator/custom-templates --package-name woningwaardering.vera.bvg -i https://raw.githubusercontent.com/Aedes-datastandaarden/vera-openapi/main/docs/Ketenprocessen/BVG.yaml

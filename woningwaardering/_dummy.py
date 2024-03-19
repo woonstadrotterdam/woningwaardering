@@ -1,24 +1,183 @@
-from vera import referentiedata
-from vera.bvg.models import EenhedenRuimte, EenhedenEenheid
-from vera.referentiedata.models import Referentiedata
-
-ref1 = Referentiedata(
-    code="IRF",
-    naam="Inkomensregistratieformuliers",
+from decimal import BasicContext, Decimal, setcontext
+from woningwaardering.vera.referentiedata.soort import (
+    Meeteenheid,
+    Ruimtedetailsoort,
+    Woningwaarderingstelsel,
+    Ruimtesoort,
+    Woningwaarderingstelselgroep,
 )
-ref2 = referentiedata.Dossier.AUTHENTIEKGEGEVENBRON.inkomensregistratieformulier
-print(ref1 == ref2)
+
+from vera.bvg.generated import (
+    EenhedenEenheid,
+    WoningwaarderingResultatenWoningwaardering,
+    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
+    WoningwaarderingResultatenWoningwaarderingCriterium,
+    WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
+)
+
+# Set context for all calculations to avoid rounding errors
+# See https://docs.python.org/3/library/decimal.html#rounding
+setcontext(BasicContext)
 
 
-def dummy_function() -> None:
-    eenheid = EenhedenEenheid()
-    eenheid.ruimten = [
-        EenhedenRuimte(
-            oppervlakte=25,
-            soort=referentiedata.Dossier.AUTHENTIEKGEGEVENBRON.inkomensregistratieformulier,
-        )
-    ]
-    print(eenheid.to_json())
+def bereken_vertrekken(
+    eenheid: EenhedenEenheid,
+    woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> WoningwaarderingResultatenWoningwaarderingGroep:
+    woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
+        criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
+            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+            stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+        ),
+        woningwaarderingen=[],
+    )
+
+    for ruimte in eenheid.ruimten:
+        if ruimte.soort == Ruimtesoort.vertrek:
+            if ruimte.detail_soort.code not in [
+                Ruimtedetailsoort.woonkamer.code,
+                Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+                Ruimtedetailsoort.keuken.code,
+                Ruimtedetailsoort.overig_vertrek.code,
+                Ruimtedetailsoort.badkamer.code,
+                Ruimtedetailsoort.badkamer_en_of_toilet.code,
+                Ruimtedetailsoort.doucheruimte.code,
+                Ruimtedetailsoort.zolder.code,
+                Ruimtedetailsoort.slaapkamer.code,
+            ]:
+                print(
+                    f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
+                )
+                continue
+
+            if ruimte.oppervlakte < 4:
+                print(
+                    f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter"
+                )
+                continue
+
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    Meeteenheid=Meeteenheid.vierkante_meter_m2,
+                    # stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+                    naam=ruimte.naam,
+                )
+            )
+
+            woningwaardering.aantal = round(Decimal(ruimte.oppervlakte), 2)
+
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+    punten = round(
+        sum(
+            Decimal(woningwaardering.aantal)
+            for woningwaardering in woningwaardering_groep.woningwaarderingen
+        ),
+        0,
+    ) * Decimal(1)
+
+    woningwaardering_groep.punten = punten
+    return woningwaardering_groep
 
 
-dummy_function()
+def bereken_overige_ruimten(
+    eenheid: EenhedenEenheid,
+    woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> WoningwaarderingResultatenWoningwaarderingGroep:
+    woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
+        criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
+            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+            stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+        ),
+        woningwaarderingen=[],
+    )
+
+    for ruimte in eenheid.ruimten:
+        if ruimte.soort == Ruimtesoort.overige_ruimtes:
+            if ruimte.detail_soort.code not in [
+                Ruimtedetailsoort.bijkeuken.code,
+                Ruimtedetailsoort.berging.code,
+                Ruimtedetailsoort.wasruimte.code,
+                Ruimtedetailsoort.garage.code,
+                Ruimtedetailsoort.zolder.code,
+                Ruimtedetailsoort.kelder.code,
+                Ruimtedetailsoort.parkeerplaats.code,
+                # Deze vertrekken kunnen als overige ruimte tellen
+                # wanneer ze niet aan bepaalde voorwaarden voldoen:
+                Ruimtedetailsoort.woonkamer.code,
+                Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+                Ruimtedetailsoort.keuken.code,
+                Ruimtedetailsoort.overig_vertrek.code,
+                Ruimtedetailsoort.badkamer.code,
+                Ruimtedetailsoort.badkamer_en_of_toilet.code,
+                Ruimtedetailsoort.doucheruimte.code,
+                Ruimtedetailsoort.zolder.code,
+                Ruimtedetailsoort.slaapkamer.code,
+            ]:
+                print(
+                    f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+                )
+                continue
+
+            if ruimte.oppervlakte < 2:
+                print(
+                    f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter"
+                )
+                continue
+
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    Meeteenheid=Meeteenheid.vierkante_meter_m2,
+                    # stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+                    naam=ruimte.naam,
+                )
+            )
+
+            woningwaardering.aantal = round(Decimal(ruimte.oppervlakte), 2)
+
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+    punten = round(
+        sum(
+            Decimal(woningwaardering.aantal)
+            for woningwaardering in woningwaardering_groep.woningwaarderingen
+        ),
+        0,
+    ) * Decimal(0.75)
+
+    woningwaardering_groep.punten = punten
+    return woningwaardering_groep
+
+
+f = open("./woningwaardering/41164000002.json", "r+")
+
+eenheid = EenhedenEenheid.model_validate_json(f.read())
+
+woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+    groepen=[]
+)
+
+woningwaardering_resultaat.groepen.append(
+    bereken_vertrekken(eenheid, woningwaardering_resultaat)
+)
+woningwaardering_resultaat.groepen.append(
+    bereken_overige_ruimten(eenheid, woningwaardering_resultaat)
+)
+
+woningwaardering_resultaat.punten = sum(
+    woningwaardering_groep.punten
+    for woningwaardering_groep in woningwaardering_resultaat.groepen
+)
+
+print(
+    woningwaardering_resultaat.model_dump_json(
+        by_alias=True, exclude_unset=True, indent=2
+    )
+)
