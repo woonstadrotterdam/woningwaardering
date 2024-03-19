@@ -1,4 +1,4 @@
-from decimal import BasicContext, Decimal, setcontext
+from decimal import ROUND_HALF_UP, BasicContext, Decimal, setcontext
 from woningwaardering.vera.referentiedata.soort import (
     Meeteenheid,
     Ruimtedetailsoort,
@@ -68,19 +68,20 @@ def bereken_vertrekken(
                 )
             )
 
-            woningwaardering.aantal = round(Decimal(ruimte.oppervlakte), 2)
+            woningwaardering.aantal = Decimal(ruimte.oppervlakte).quantize(
+                Decimal("0.01"), ROUND_HALF_UP
+            )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-    punten = round(
+    punten = Decimal(
         sum(
             Decimal(woningwaardering.aantal)
             for woningwaardering in woningwaardering_groep.woningwaarderingen
-        ),
-        0,
-    ) * Decimal(1)
+        )
+    ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
 
-    woningwaardering_groep.punten = punten
+    woningwaardering_groep.punten = float(punten)
     return woningwaardering_groep
 
 
@@ -140,19 +141,20 @@ def bereken_overige_ruimten(
                 )
             )
 
-            woningwaardering.aantal = round(Decimal(ruimte.oppervlakte), 2)
+            woningwaardering.aantal = Decimal(ruimte.oppervlakte).quantize(
+                Decimal("0.01"), ROUND_HALF_UP
+            )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-    punten = round(
+    punten = Decimal(
         sum(
             Decimal(woningwaardering.aantal)
             for woningwaardering in woningwaardering_groep.woningwaarderingen
-        ),
-        0,
-    ) * Decimal(0.75)
+        )
+    ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("0.75")
 
-    woningwaardering_groep.punten = punten
+    woningwaardering_groep.punten = float(punten)
     return woningwaardering_groep
 
 

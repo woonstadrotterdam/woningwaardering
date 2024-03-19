@@ -110,9 +110,7 @@ environment.filters["normalize_variable_name"] = normalize_variable_name
 
 # define your Jinja2 template for soort
 soort_template = environment.from_string(
-    # """from vera.bvg.models import Referentiedata
-    # """from vera.bvg.generated import Referentiedata
-    """from vera.referentiedata.models import Referentiedata
+    """from vera.bvg.generated import Referentiedata
 
 
 class {{ soort|remove_accents|title }}:

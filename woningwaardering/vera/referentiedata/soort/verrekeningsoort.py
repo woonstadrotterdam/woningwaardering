@@ -1,4 +1,4 @@
-from vera.referentiedata.models import Referentiedata
+from vera.bvg.generated import Referentiedata
 
 
 class Verrekeningsoort:
