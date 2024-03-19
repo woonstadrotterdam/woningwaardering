@@ -48,10 +48,11 @@ Hieronder is een voorbeeldtabel te zien zoals deze met Excel Viewer in VSCode wo
 
 ![Excel Viewer](./docs/afbeeldingen/excel_viewer.png)
 
-Daarnaast wordt in de `woningwaardering`-package een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele of uit een tabel te selecteren.
-Hierdoor heeft een variabele altijd een peildatum nodig en zal deze ook geregistreerd moeten worden.
-Het gevolg hiervan is dat er altijd een peildatumkolom ontstaat in het CSV-bestand.
 Door gebruik van CSV bestanden, wordt het selecteren van de juiste rij of waarde doormiddel van een peildatum vergemakkelijkt.
+In de `woningwaardering`-package wordt namelijk een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele uit een tabel te selecteren.
+Dit kan worden gedaan opbasis van een `Begindatum` en een `Einddatum`.
+Wanneer er geen `Begindatum` of `Einddatum` is gespecificeerd, dan is deze niet bekend.
+Mochten er daardoor meerdere rijen geldig zijn, dan gaat de `woningwaardering`-package uit van de bovenste rij als geldig voor de peildatum.
 
 ## Contributing
 
