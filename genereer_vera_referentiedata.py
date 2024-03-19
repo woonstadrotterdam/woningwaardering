@@ -1,7 +1,7 @@
-from collections import Counter
+from collections import Counter, defaultdict
 import csv
 import re
-from typing import Any, Callable, Dict, Set, Pattern, Match
+from typing import Any, Callable, Pattern, Match
 import unidecode
 from jinja2 import Environment
 from itertools import groupby
@@ -49,14 +49,16 @@ counts = Counter((item["soort"], item["naam"]) for item in active_data)
 for item in active_data:
     item["variabele"] = item["naam"]
     if counts[(item["soort"], item["naam"])] > 1:
-        print(item["soort"] + "." + item["code"])
+        print(
+            f"Dubbele soort/naam combinatie: {item['soort']}.{item['code']}: {item['naam']}"
+        )
         item["variabele"] += "_" + item["code"]
 
 # Create output directory if not exists
 if not os.path.exists(soort_folder):
     os.makedirs(soort_folder)
 
-# group items by 'soort'
+# Group items by 'soort'
 grouped_data = [(k, list(g)) for k, g in groupby(active_data, key=itemgetter("soort"))]
 
 environment = Environment(autoescape=True)
@@ -86,29 +88,33 @@ environment.filters["remove_accents"] = remove_accents
 
 
 def normalize_variable_name(item: dict[str | Any, str | Any]) -> str:
-    s = item["variabele"]
+    name = item["variabele"]
     if "+" in item["variabele"]:
-        s = item["code"]
+        name = item["code"]
 
-    s = re.sub(
-        r"^\(.*\)", "", s
+    name = re.sub(
+        r"^\(.*\)", "", name
     )  # remove parenthesized text at the beginning of the string
-    s = re.sub(r"[\(|\)]", "", s)  # remove other parentheses
-    s = unidecode.unidecode(s)  # remove accents
-    s = s.replace("/", " en of ")  # replace slashes with 'of'
-    s = re.sub(r"[^A-Za-z0-9]", "_", s)  # replace non-alphanumeric characters with _
-    s = re.sub(r"_+", "_", s)  # replace multiple underscores with a single underscore
-    s = s.strip("_")  # remove leading and trailing underscores
+    name = re.sub(r"[\(|\)]", "", name)  # remove other parentheses
+    name = unidecode.unidecode(name)  # remove accents
+    name = name.replace("/", " en of ")  # replace slashes with 'of'
+    name = re.sub(
+        r"[^A-Za-z0-9]", "_", name
+    )  # replace non-alphanumeric characters with _
+    name = re.sub(
+        r"_+", "_", name
+    )  # replace multiple underscores with a single underscore
+    name = name.strip("_")  # remove leading and trailing underscores
 
-    if s[0].isdigit():
-        s = f"{item['soort']}_{s}"  # add soort prefix if the first character is a digit
-    s = s.lower()  # convert to lowercase
-    return s
+    if name[0].isdigit():
+        name = f"{item['soort']}_{name}"  # add soort prefix if the first character is a digit
+    name = name.lower()  # convert to lowercase
+    return name
 
 
 environment.filters["normalize_variable_name"] = normalize_variable_name
 
-# define your Jinja2 template for soort
+# Define the Jinja2 template for soort_folder/<soort>.py
 soort_template = environment.from_string(
     """from vera.bvg.generated import Referentiedata
 
@@ -128,14 +134,14 @@ class {{ soort|remove_accents|title }}:
 """
 )
 
-# render the soort template with your grouped data and save to separate files
+# Render the soort_folder/<soort>.py template with the grouped data and save to separate files
 for soort, items in grouped_data:
     rendered_code = soort_template.render(soort=soort, items=items)
     with open(os.path.join(soort_folder, f"{soort.lower()}.py"), "w") as file:
         file.write(rendered_code)
 
-# define your Jinja2 template for soort/__init__.py
-soort_init_template = environment.from_string(
+# Define the Jinja2 template for soort_folder/__init__.py
+soort_folder_init_template = environment.from_string(
     """{%- for soort in grouped_data %}
 from .{{ soort[0]|remove_accents|lower }} import {{ soort[0]|remove_accents|title }}
 {%- endfor %}
@@ -150,14 +156,14 @@ __all__ = [
 """
 )
 
-# render the soort template with your grouped data
-rendered_code = soort_init_template.render(grouped_data=grouped_data)
+# render the soort_folder/__init__.py template with the grouped data
+rendered_code = soort_folder_init_template.render(grouped_data=grouped_data)
 with open(os.path.join(soort_folder, "__init__.py"), "w") as file:
     file.write(rendered_code)
 
 
-# define your Jinja2 template for __init__.py
-soort_init_template = environment.from_string(
+# define the Jinja2 template for output_folder/__init__.py
+output_folder_init_template = environment.from_string(
     """from .soort import (
 {%- for soort in grouped_data %}
     {{ soort[0]|remove_accents|title }},
@@ -174,23 +180,20 @@ __all__ = [
 """
 )
 
-# render the soort template with your grouped data
-rendered_code = soort_init_template.render(grouped_data=grouped_data)
+# Render the output_folder/__init__.py template with the grouped data
+rendered_code = output_folder_init_template.render(grouped_data=grouped_data)
 with open(os.path.join(output_folder, "__init__.py"), "w") as file:
     file.write(rendered_code)
 
 
-# create a mapping from domein to soorten
-domein_to_soorten: Dict[str, Set[str]] = {}
+# Create a mapping from domein to soorten
+domein_to_soorten = defaultdict(set)  # Use a defaultdict for faster lookup
 for item in active_data:
-    domeinen = item["informatiedomein"].split(", ")
-    for domein in domeinen:
-        if domein not in domein_to_soorten:
-            domein_to_soorten[domein] = set()
+    for domein in item["informatiedomein"].split(", "):
         domein_to_soorten[domein].add(item["soort"])
 
-# define your Jinja2 template for domein
-domein_template = environment.from_string(
+# Define the Jinja2 template for domein/__init__.py
+domein_folder_init_template = environment.from_string(
     """from woningwaardering.vera.referentiedata.soort import (
 {%- for soort in soorten %}
     {{ soort|title }},
@@ -207,10 +210,12 @@ __all__ = [
 """
 )
 
-# render the domein template with domeinen and soorten
+# Render the domein/__init__.py template with domeinen and soorten
 for domein, soorten in domein_to_soorten.items():
     domein_name = remove_accents(domein).lower()
-    rendered_code = domein_template.render(domein=domein, soorten=sorted(soorten))
+    rendered_code = domein_folder_init_template.render(
+        domein=domein, soorten=sorted(soorten)
+    )
 
     domein_folder = os.path.join(output_folder, domein_name)
     if not os.path.exists(domein_folder):
