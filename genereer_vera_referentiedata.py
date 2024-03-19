@@ -10,6 +10,7 @@ import os
 from zoneinfo import ZoneInfo
 import datetime
 import requests
+from loguru import logger
 
 output_folder = "woningwaardering/vera/referentiedata"
 soort_folder = os.path.join(output_folder, "soort")
@@ -49,10 +50,13 @@ counts = Counter((item["soort"], item["naam"]) for item in active_data)
 for item in active_data:
     item["variabele"] = item["naam"]
     if counts[(item["soort"], item["naam"])] > 1:
-        print(
-            f"Dubbele soort/naam combinatie: {item['soort']}.{item['code']}: {item['naam']}"
+        logger.warning(
+            f"Dubbele soort/naam combinatie: {item['soort']}.{item['code']} {item['naam']}"
         )
-        item["variabele"] += "_" + item["code"]
+        logger.info(
+            f"Variabele naam \"{item['variabele']}\" wordt vervangen door \"{item['variabele']} {item['code']}\""
+        )
+        item["variabele"] += " " + item["code"]
 
 # Create output directory if not exists
 if not os.path.exists(soort_folder):
