@@ -33,11 +33,7 @@ class Stelsel:
         except AttributeError:
             print(f"Class {class_name} not found in module {module_name}.")
 
-    def main(
-        self,
-        # eenheid: EenhedenEenheid,
-        # woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
+    def main(self) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """
         main
         """
