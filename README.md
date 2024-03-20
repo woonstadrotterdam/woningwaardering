@@ -58,9 +58,11 @@ In dit geval zal de `woningwaardering`-package een error geven die duidelijk maa
 
 ## Contributing
 
+\<to do\>
+
 ### Setup
 
-Hoe je kunt bijdragen aan deze package \<to do\>
+\<to do\>
 
 ### Testing
 
