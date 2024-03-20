@@ -49,7 +49,7 @@ Hieronder is een voorbeeldtabel te zien zoals deze met Excel Viewer in VSCode wo
 ![Excel Viewer](./docs/afbeeldingen/excel_viewer.png)
 
 Door gebruik van CSV bestanden, wordt het selecteren van de juiste rij of waarde doormiddel van een peildatum vergemakkelijkt.
-In de `woningwaardering`-package wordt namelijk een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele uit een tabel te selecteren.
+In de `woningwaardering`-package wordt een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele uit een tabel te selecteren.
 Dit kan worden gedaan opbasis van de `Begindatum` en de `Einddatum` kolommen in een CSV-bestand.
 Wanneer er geen `Begindatum` of `Einddatum` is gespecificeerd, dan is deze niet bekend.
 Mochten er daardoor meerdere rijen geldig zijn voor een peildatum, dan gaat de `woningwaardering`-package uit van de bovenste rij als geldig.
