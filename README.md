@@ -52,7 +52,9 @@ Door gebruik van CSV bestanden, wordt het selecteren van de juiste rij of waarde
 In de `woningwaardering`-package wordt een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele uit een tabel te selecteren.
 Dit kan worden gedaan opbasis van de `Begindatum` en de `Einddatum` kolommen in een CSV-bestand.
 Wanneer er geen `Begindatum` of `Einddatum` is gespecificeerd, dan is deze niet bekend.
-Mochten er daardoor meerdere rijen geldig zijn voor een peildatum, dan gaat de `woningwaardering`-package uit van de bovenste rij als geldig.
+Dit betekent niet dat er geen werkabre en geldige rij geselecteerd kan worden.
+Wel zou het kunnen dat er door het ontbreken van een `Begindatum` of `Einddatum` meerdere rijen geldig zijn voor een peildatum.
+In dit geval zal de `woningwaardering`-package een error geven die duidelijk maakt dat er geen geldige rij gekozen kan worden op basis van de peildatum.
 
 ## Contributing
 
