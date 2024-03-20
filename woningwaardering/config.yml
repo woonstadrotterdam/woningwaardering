@@ -1,0 +1,19 @@
+stelsels:
+  zelfstandig:
+    begindatum: null
+    einddatum: "31-12-9999"
+
+    stelselgroepen:
+      oppervlakte_van_vertrekken:
+        OppervlakteVanVertrekken2024:
+          begindatum: "01-01-2024"
+          einddatum: "31-12-9999"
+
+        OppervlakteVanVertrekken2023:
+          begindatum: "01-01-2023"
+          einddatum: "31-12-2023"
+
+      oppervlakte_van_overige_ruimten:
+        OppervlakteVanOverigeRuimten2024:
+          begindatum: "01-01-2024"
+          einddatum: "31-12-9999"

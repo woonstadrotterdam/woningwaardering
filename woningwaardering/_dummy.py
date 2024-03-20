@@ -7,7 +7,7 @@ from woningwaardering.vera.referentiedata.soort import (
     Woningwaarderingstelselgroep,
 )
 
-from vera.bvg.generated import (
+from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
