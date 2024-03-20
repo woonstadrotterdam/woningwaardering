@@ -1,4 +1,4 @@
-from vera.bvg.generated import Referentiedata
+from woningwaardering.vera.bvg.generated import Referentiedata
 
 
 class Ruimtesoort:

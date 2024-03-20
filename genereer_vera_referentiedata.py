@@ -120,7 +120,7 @@ environment.filters["normalize_variable_name"] = normalize_variable_name
 
 # Define the Jinja2 template for soort_folder/<soort>.py
 soort_template = environment.from_string(
-    """from vera.bvg.generated import Referentiedata
+    """from woningwaardering.vera.bvg.generated import Referentiedata
 
 
 class {{ soort|remove_accents|title }}:
