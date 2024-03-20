@@ -12,12 +12,10 @@ tasks:
           --output-model-type pydantic_v2.BaseModel \
           --input-file-type openapi \
           --use-standard-collections \
-          --use-union-operator \
-          --target-python-version 3.11 \
+          --target-python-version 3.10 \
           --use-schema-description \
           --snake-case-field \
           --disable-timestamp \
-          --enable-version-header \
           --enum-field-as-literal one \
           --use-double-quotes \
           --field-constraints \

@@ -29,12 +29,13 @@ def bereken_vertrekken(
         criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
             stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
-        ),
-        woningwaarderingen=[],
+        )
     )
 
-    for ruimte in eenheid.ruimten:
-        if ruimte.soort == Ruimtesoort.vertrek:
+    woningwaardering_groep.woningwaarderingen = []
+
+    for ruimte in eenheid.ruimten or []:
+        if ruimte.soort == Ruimtesoort.vertrek and ruimte.detail_soort is not None:
             if ruimte.detail_soort.code not in [
                 Ruimtedetailsoort.woonkamer.code,
                 Ruimtedetailsoort.woon_en_of_slaapkamer.code,
@@ -52,7 +53,7 @@ def bereken_vertrekken(
                 )
                 continue
 
-            if ruimte.oppervlakte < 4:
+            if ruimte.oppervlakte is not None and ruimte.oppervlakte < 4:
                 print(
                     f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter"
                 )
@@ -62,22 +63,24 @@ def bereken_vertrekken(
 
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    Meeteenheid=Meeteenheid.vierkante_meter_m2,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
                     # stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
                     naam=ruimte.naam,
                 )
             )
 
-            woningwaardering.aantal = Decimal(ruimte.oppervlakte).quantize(
-                Decimal("0.01"), ROUND_HALF_UP
-            )
+            if ruimte.oppervlakte is not None:
+                woningwaardering.aantal = float(
+                    Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
     punten = Decimal(
         sum(
             Decimal(woningwaardering.aantal)
-            for woningwaardering in woningwaardering_groep.woningwaarderingen
+            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+            if woningwaardering.aantal is not None
         )
     ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
 
@@ -94,11 +97,15 @@ def bereken_overige_ruimten(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
             stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
         ),
-        woningwaarderingen=[],
     )
 
-    for ruimte in eenheid.ruimten:
-        if ruimte.soort == Ruimtesoort.overige_ruimtes:
+    woningwaardering_groep.woningwaarderingen = []
+
+    for ruimte in eenheid.ruimten or []:
+        if (
+            ruimte.soort == Ruimtesoort.overige_ruimtes
+            and ruimte.detail_soort is not None
+        ):
             if ruimte.detail_soort.code not in [
                 Ruimtedetailsoort.bijkeuken.code,
                 Ruimtedetailsoort.berging.code,
@@ -125,7 +132,7 @@ def bereken_overige_ruimten(
                 )
                 continue
 
-            if ruimte.oppervlakte < 2:
+            if ruimte.oppervlakte is not None and ruimte.oppervlakte < 2:
                 print(
                     f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter"
                 )
@@ -135,22 +142,24 @@ def bereken_overige_ruimten(
 
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    Meeteenheid=Meeteenheid.vierkante_meter_m2,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
                     # stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
                     naam=ruimte.naam,
                 )
             )
 
-            woningwaardering.aantal = Decimal(ruimte.oppervlakte).quantize(
-                Decimal("0.01"), ROUND_HALF_UP
-            )
+            if ruimte.oppervlakte is not None:
+                woningwaardering.aantal = float(
+                    Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
     punten = Decimal(
         sum(
             Decimal(woningwaardering.aantal)
-            for woningwaardering in woningwaardering_groep.woningwaarderingen
+            for woningwaardering in (woningwaardering_groep.woningwaarderingen or [])
+            if woningwaardering.aantal is not None
         )
     ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("0.75")
 
@@ -162,9 +171,9 @@ f = open("./woningwaardering/41164000002.json", "r+")
 
 eenheid = EenhedenEenheid.model_validate_json(f.read())
 
-woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-    groepen=[]
-)
+woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+
+woningwaardering_resultaat.groepen = []
 
 woningwaardering_resultaat.groepen.append(
     bereken_vertrekken(eenheid, woningwaardering_resultaat)
@@ -175,7 +184,8 @@ woningwaardering_resultaat.groepen.append(
 
 woningwaardering_resultaat.punten = sum(
     woningwaardering_groep.punten
-    for woningwaardering_groep in woningwaardering_resultaat.groepen
+    for woningwaardering_groep in woningwaardering_resultaat.groepen or []
+    if woningwaardering_groep.punten is not None
 )
 
 print(
