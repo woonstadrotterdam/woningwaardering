@@ -1,4 +1,4 @@
-from typing import Dict
+from types import ModuleType
 import yaml
 import importlib
 
@@ -13,7 +13,7 @@ class Stelsel:
     def __init__(
         self,
         code: str,
-        config: Dict[str, dict],
+        config: dict[str, dict[str]],
         eenheid: EenhedenEenheid,
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
         peildatum: date = date.today(),
@@ -24,7 +24,7 @@ class Stelsel:
         self.eenheid: EenhedenEenheid = eenheid
         self.resultaat: WoningwaarderingResultatenWoningwaarderingResultaat = resultaat
 
-    def _import_versie(self, module_name: str, class_name: str):
+    def _import_versie(self, module_name: str, class_name: str) -> ModuleType:
         try:
             module = importlib.import_module(module_name)
             class_ = getattr(module, class_name)
