@@ -54,8 +54,6 @@ class Stelsel:
 
         for stelselgroep, versies in stelsel_config["stelselgroepen"].items():
             for versie, geldigheid in versies.items():  # type: ignore[attr-defined]
-                print(geldigheid.get("begindatum"))
-                print(type(geldigheid["begindatum"]))
                 begindatum: str = str(geldigheid["begindatum"])
                 einddatum: str = str(geldigheid["einddatum"])
                 if (
