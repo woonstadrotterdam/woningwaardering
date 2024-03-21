@@ -37,4 +37,6 @@ dev = [
     "pytest==8.0.*",
     "unidecode==1.*",
     "jinja2==3.*",
+    "types-pyyaml==6.*",
+    "PyYAML==6.*"
 ]
