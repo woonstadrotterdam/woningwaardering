@@ -35,18 +35,23 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroep):
             ),
         )
 
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
-            )
-        )
-
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
-            if ruimte.soort == Ruimtesoort.vertrek and ruimte.detail_soort is not None:
+            if (
+                ruimte.soort == Ruimtesoort.overige_ruimtes
+                and ruimte.detail_soort is not None
+            ):
                 if ruimte.detail_soort.code not in [
+                    Ruimtedetailsoort.bijkeuken.code,
+                    Ruimtedetailsoort.berging.code,
+                    Ruimtedetailsoort.wasruimte.code,
+                    Ruimtedetailsoort.garage.code,
+                    Ruimtedetailsoort.zolder.code,
+                    Ruimtedetailsoort.kelder.code,
+                    Ruimtedetailsoort.parkeerplaats.code,
+                    # Deze vertrekken kunnen als overige ruimte tellen
+                    # wanneer ze niet aan bepaalde voorwaarden voldoen:
                     Ruimtedetailsoort.woonkamer.code,
                     Ruimtedetailsoort.woon_en_of_slaapkamer.code,
                     Ruimtedetailsoort.woonkamer_en_of_keuken.code,
@@ -59,13 +64,13 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroep):
                     Ruimtedetailsoort.slaapkamer.code,
                 ]:
                     print(
-                        f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
+                        f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                     )
                     continue
 
-                if ruimte.oppervlakte is not None and ruimte.oppervlakte < 4:
+                if ruimte.oppervlakte is not None and ruimte.oppervlakte < 2:
                     print(
-                        f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter"
+                        f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter"
                     )
                     continue
 
@@ -91,10 +96,12 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroep):
         punten = Decimal(
             sum(
                 Decimal(woningwaardering.aantal)
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                for woningwaardering in (
+                    woningwaardering_groep.woningwaarderingen or []
+                )
                 if woningwaardering.aantal is not None
             )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
+        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("0.75")
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
