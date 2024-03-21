@@ -25,4 +25,4 @@ tasks:
   genereer-vera-referentiedata:
     desc: Genereer VERA referentiedata
     cmds:
-      - python genereer_vera_referentiedata.py
+      - python scripts/genereer_vera_referentiedata.py

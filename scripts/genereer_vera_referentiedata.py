@@ -144,12 +144,12 @@ for soort, items in grouped_data:
     with open(os.path.join(soort_folder, f"{soort.lower()}.py"), "w") as file:
         file.write(rendered_code)
 
-# Define the Jinja2 template for soort_folder/__init__.py
+# Define the Jinja2 template for soort/__init__.py
 soort_folder_init_template = environment.from_string(
-    """{%- for soort in grouped_data %}
+    """
+{%- for soort in grouped_data -%}
 from .{{ soort[0]|remove_accents|lower }} import {{ soort[0]|remove_accents|title }}
-{%- endfor %}
-
+{% endfor %}
 
 __all__ = [
 {%- for soort in grouped_data %}

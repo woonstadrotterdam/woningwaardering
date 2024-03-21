@@ -1,6 +1,7 @@
 # Woningwaardering
 
 ⌛️ **Work in Progress**
+
 Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk zal zijn om het puntensysteeem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij zo veel mogelijk uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) van de corporatiesector. Het doel is om tot een completere woningwaarderingsstelsel-berekening te komen dan die nu beschikbaar zijn via tools zoals bijvoorbeeld die van de [huurcommissie](https://www.huurcommissie.nl/huurders/sociale-huurwoning/maximale-huurprijs-berekenen).
 
 Voor vragen kunt u contact opnemen met de Product Owner van Team Microservices [Wouter Kolbeek](mailto:wouter.kolbeek@woonstadrotterdam.nl) of één van de maintainers van deze repo.
@@ -102,3 +103,35 @@ class TestOppervlakteVanVertrekken:
     def test_functie_twee(self):
         assert self.test_object.functie_twee() == 2
 ```
+
+### Datamodellen
+
+De datamodellen in de `woningwaardering` package zijn gebaseerd op de OpenAPI-specificatie van het [VERA BVG domein](https://aedes-datastandaarden.github.io/vera-openapi/Ketenprocessen/BVG.html).
+
+Wanneer je deze modellen wilt bijwerken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) is geïnstalleerd, en dat de dev dependencies zijn geinstalleerd:
+
+```
+pip install -e .[dev]
+```
+
+Vervolgens kan je met dit commando de modellen in deze repository bijwerken:
+
+```
+task genereer-vera-bvg-modellen
+```
+
+De classes voor deze modellen worden gegeneerd in `woningwaardering/vera/bvg/generated.py`
+
+### Referentiedata
+
+Naast de referentiedata specifiek voor deze package, maken we ook gebruik van de [VERA Referentiedata](https://github.com/Aedes-datastandaarden/vera-referentiedata).
+
+Wanneer je deze referentiedata wilt bijwerken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) is geïnstalleerd
+
+Vervolgens kan je met dit commando de referentiedata in deze repository bijwerken:
+
+```
+task genereer-vera-referentiedata
+```
+
+De referentiedata wordt gegenereerd in `woningwaardering/vera/referentiedata`
