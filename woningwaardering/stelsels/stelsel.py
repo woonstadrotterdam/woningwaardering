@@ -13,13 +13,15 @@ class Stelsel:
     def __init__(
         self,
         code: str,
-        config: dict[str, dict[str, dict[str, str]]],  # TODO: class maken voor config
+        config: dict[
+            str, dict[str, dict[str, dict[str]]]
+        ],  # TODO: class maken voor config
         eenheid: EenhedenEenheid,
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
         peildatum: date = date.today(),
     ) -> None:
         self.code: str = code
-        self.config: dict[str, dict[str, dict[str, str]]] = config
+        self.config: dict[str, dict[str, dict[str, dict[str]]]] = config
         self.peildatum: date = peildatum
         self.eenheid: EenhedenEenheid = eenheid
         self.resultaat: WoningwaarderingResultatenWoningwaarderingResultaat = resultaat
