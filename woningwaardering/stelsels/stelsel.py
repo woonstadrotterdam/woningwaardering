@@ -2,6 +2,7 @@ import yaml
 import importlib
 
 from datetime import date, datetime
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -23,7 +24,7 @@ class Stelsel:
         self.eenheid: EenhedenEenheid = eenheid
         self.resultaat: WoningwaarderingResultatenWoningwaarderingResultaat = resultaat
 
-    def _import_versie(self, module_name: str, class_name: str) -> callable:
+    def _import_versie(self, module_name: str, class_name: str) -> Stelselgroep:
         try:
             module = importlib.import_module(module_name)
             class_ = getattr(module, class_name)
