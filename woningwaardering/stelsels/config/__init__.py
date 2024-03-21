@@ -1,3 +1,3 @@
-from .stelselsconfig import Stelselsconfig
+# from .stelselsconfig import Stelselsconfig
 
-__all__ = ["Stelselsconfig"]
+# __all__ = ["Stelselsconfig"]

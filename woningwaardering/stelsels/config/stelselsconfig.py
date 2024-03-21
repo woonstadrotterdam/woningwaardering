@@ -26,7 +26,7 @@ class Stelselsconfig(BaseModel):
 
     @classmethod
     def load(
-        cls, path="woningwaardering/stelsels/config/stelselsconfig.yml"
+        cls, path: str = "woningwaardering/stelsels/config/stelselsconfig.yml"
     ) -> "Stelselsconfig":
         with open(path, "r") as file:
             config = yaml.safe_load(file)
