@@ -27,7 +27,7 @@ class Stelsel:
     def _import_versie(self, module_name: str, class_name: str) -> Stelselgroep:
         try:
             module = importlib.import_module(module_name)
-            class_ = getattr(module, class_name)
+            class_: Stelselgroep = getattr(module, class_name)
             return class_
         except ModuleNotFoundError:
             print(f"Module {module_name} not found.")
