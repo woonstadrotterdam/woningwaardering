@@ -19,7 +19,7 @@ class Stelsel:
         peildatum: date = date.today(),
     ) -> None:
         self.code: str = code
-        self.config: dict[str, dict[str, str]] = config
+        self.config: dict[str, dict[str, dict[str, str]]] = config
         self.peildatum: date = peildatum
         self.eenheid: EenhedenEenheid = eenheid
         self.resultaat: WoningwaarderingResultatenWoningwaarderingResultaat = resultaat
