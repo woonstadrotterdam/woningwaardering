@@ -4,8 +4,8 @@ from pydantic import BaseModel
 
 
 class VersieModel(BaseModel):
-    begindatum: None
-    einddatum: str
+    begindatum: Union[str, None]
+    einddatum: Union[str, None]
 
 
 class StelselgroepModel(BaseModel):
