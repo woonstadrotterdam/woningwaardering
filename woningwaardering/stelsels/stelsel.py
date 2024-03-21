@@ -53,7 +53,7 @@ class Stelsel:
         stelsel_config = self.config["stelsels"][self.code]
 
         for stelselgroep, versies in stelsel_config["stelselgroepen"].items():
-            for versie, geldigheid in versies.items():  # type: ignore[attr-defined, ]
+            for versie, geldigheid in versies.items():  # type: ignore[attr-defined]
                 print(geldigheid.get("begindatum"))
                 print(type(geldigheid["begindatum"]))
                 begindatum: str = str(geldigheid["begindatum"])
