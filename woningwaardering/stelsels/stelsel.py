@@ -13,7 +13,7 @@ class Stelsel:
     def __init__(
         self,
         code: str,
-        config: dict[str, dict[str, str]],
+        config: dict[str, dict[str, dict[str, str]]],  # TODO: class maken voor config
         eenheid: EenhedenEenheid,
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
         peildatum: date = date.today(),
