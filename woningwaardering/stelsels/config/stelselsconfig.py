@@ -3,31 +3,30 @@ from typing import Dict, List, Union
 from pydantic import BaseModel
 
 
-class VersieModel(BaseModel):
+class VersieConfig(BaseModel):
     begindatum: Union[str, None]
     einddatum: Union[str, None]
 
 
-class StelselgroepModel(BaseModel):
+class StelselgroepConfig(BaseModel):
     class_naam: str
     begindatum: Union[str, None]
     einddatum: Union[str, None]
-    versies: List[Dict[str, VersieModel]]
+    versies: List[Dict[str, VersieConfig]]
 
 
-class StelselsModel(BaseModel):
+class StelselConfig(BaseModel):
     begindatum: Union[str, None]
     einddatum: Union[str, None]
-    stelselgroepen: Dict[str, StelselgroepModel]
+    stelselgroepen: Dict[str, StelselgroepConfig]
 
 
-class Stelselsconfig(BaseModel):
-    stelsels: Dict[str, StelselsModel]
+class Config(BaseModel):
+    stelsel: Dict[str, StelselConfig]
 
     @classmethod
-    def load(
-        cls, path: str = "woningwaardering/stelsels/config/stelselsconfig.yml"
-    ) -> "Stelselsconfig":
+    def load(cls, stelsel: str = "zelfstandig") -> "Config":
+        path = f"woningwaardering/stelsels/config/{stelsel}.yml"
         with open(path, "r") as file:
             config = yaml.safe_load(file)
-        return cls(stelsels=config["stelsels"])
+        return cls(stelsel=config)
