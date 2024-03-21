@@ -8,14 +8,20 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 
+StelselEntry = dict[str, str]
+StelselgroepenEntry = dict[str, StelselEntry]
+ZelfstandigEntry = dict[str, StelselgroepenEntry]
+StelselsEntry = dict[str, ZelfstandigEntry]
+
 
 class Stelsel:
     def __init__(
         self,
         code: str,
-        config: dict[
-            str, dict[str, dict[str, dict[str, str]]]
-        ],  # TODO: class maken voor config
+        # config: dict[
+        #     str, dict[str, dict[str, dict[str, dict[str, str]]]]
+        # ],  # TODO: class maken voor config
+        config: StelselsEntry,
         eenheid: EenhedenEenheid,
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
         peildatum: date = date.today(),
@@ -47,11 +53,15 @@ class Stelsel:
         stelsel_config = self.config["stelsels"][self.code]
 
         for stelselgroep, versies in stelsel_config["stelselgroepen"].items():
-            for versie, geldigheid in versies.items():
+            for versie, geldigheid in versies.items():  # type: ignore[attr-defined, ]
+                print(geldigheid.get("begindatum"))
+                print(type(geldigheid["begindatum"]))
+                begindatum: str = str(geldigheid["begindatum"])
+                einddatum: str = str(geldigheid["einddatum"])
                 if (
-                    datetime.strptime(geldigheid["begindatum"], "%d-%m-%Y").date()
+                    datetime.strptime(begindatum, "%d-%m-%Y").date()
                     <= self.peildatum
-                    <= datetime.strptime(geldigheid["einddatum"], "%d-%m-%Y").date()
+                    <= datetime.strptime(einddatum, "%d-%m-%Y").date()
                 ):
                     stelselgroep_versie = self._import_versie(
                         f"woningwaardering.stelsels.{self.code}.{stelselgroep}",
