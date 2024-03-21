@@ -1,20 +1,22 @@
 from decimal import ROUND_HALF_UP, BasicContext, Decimal, setcontext
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.vera.referentiedata.soort import (
-    Meeteenheid,
-    Ruimtedetailsoort,
-    Woningwaarderingstelsel,
-    Ruimtesoort,
-    Woningwaarderingstelselgroep,
-)
 
+from loguru import logger
+
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingCriterium,
+    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
+)
+from woningwaardering.vera.referentiedata.soort import (
+    Meeteenheid,
+    Ruimtedetailsoort,
+    Ruimtesoort,
+    Woningwaarderingstelsel,
+    Woningwaarderingstelselgroep,
 )
 
 # Set context for all calculations to avoid rounding errors
@@ -63,13 +65,13 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroep):
                     Ruimtedetailsoort.zolder.code,
                     Ruimtedetailsoort.slaapkamer.code,
                 ]:
-                    print(
+                    logger.debug(
                         f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                     )
                     continue
 
                 if ruimte.oppervlakte is not None and ruimte.oppervlakte < 2:
-                    print(
+                    logger.debug(
                         f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter"
                     )
                     continue

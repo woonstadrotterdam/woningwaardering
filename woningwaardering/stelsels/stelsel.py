@@ -1,108 +1,106 @@
-import yaml
-import importlib
-
 from datetime import date, datetime
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
+
+from loguru import logger
+
+from woningwaardering.stelsels.config.config import Config
+from woningwaardering.stelsels.zelfstandig.oppervlakte_van_vertrekken.basis import (
+    OppervlakteVanVertrekken,
+)
+from woningwaardering.utils import import_stelselgroep_versie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 
-StelselEntry = dict[str, str]
-StelselgroepenEntry = dict[str, StelselEntry]
-ZelfstandigEntry = dict[str, StelselgroepenEntry]
-StelselsEntry = dict[str, ZelfstandigEntry]
-
 
 class Stelsel:
     def __init__(
         self,
-        code: str,
-        # config: dict[
-        #     str, dict[str, dict[str, dict[str, dict[str, str]]]]
-        # ],  # TODO: class maken voor config
-        config: StelselsEntry,
-        eenheid: EenhedenEenheid,
-        resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        stelsel: str,
         peildatum: date = date.today(),
     ) -> None:
-        self.code = code
-        self.config = config
+        self.stelsel = stelsel
         self.peildatum = peildatum
-        self.eenheid = eenheid
-        self.resultaat = resultaat
+        self.stelsel_config = Config.load(stelsel=self.stelsel).model_dump()["stelsel"][
+            self.stelsel
+        ]
 
-    def _import_versie(self, module_name: str, class_name: str) -> Stelselgroep:
-        try:
-            module = importlib.import_module(module_name)
-            class_: Stelselgroep = getattr(module, class_name)
-            return class_
-        except ModuleNotFoundError:
-            print(f"Module {module_name} not found.")
-            raise
-        except AttributeError:
-            print(f"Class {class_name} not found in module {module_name}.")
-            raise
-
-    def main(self) -> WoningwaarderingResultatenWoningwaarderingResultaat:
+    def bereken(
+        self,
+        eenheid: EenhedenEenheid,
+        resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """
         main
         """
-        self.resultaat.groepen = []
+        resultaat.groepen = []
 
-        stelsel_config = self.config["stelsels"][self.code]
+        for stelselgroep, stelselgroep_config in self.stelsel_config[
+            "stelselgroepen"
+        ].items():
+            for versie in stelselgroep_config["versies"]:  # type: ignore[attr-defined]
+                for versie_class_naam, geldigheid in versie.items():
+                    begindatum: str = str(geldigheid["begindatum"])
+                    einddatum: str = str(geldigheid["einddatum"])
+                    if (
+                        datetime.strptime(begindatum, "%d-%m-%Y").date()
+                        <= self.peildatum
+                        <= datetime.strptime(einddatum, "%d-%m-%Y").date()
+                    ):
+                        logger.debug(
+                            f"Stelselgroepversie '{versie_class_naam}' is geldig voor stelsel '{self.stelsel}' en stelselgroep '{stelselgroep}' met peildatum '{self.peildatum}'."
+                        )
+                        stelselgroep_versie = import_stelselgroep_versie(
+                            f"woningwaardering.stelsels.{self.stelsel}.{stelselgroep}",
+                            versie_class_naam,
+                        )
 
-        for stelselgroep, versies in stelsel_config["stelselgroepen"].items():
-            for versie, geldigheid in versies.items():  # type: ignore[attr-defined]
-                begindatum: str = str(geldigheid["begindatum"])
-                einddatum: str = str(geldigheid["einddatum"])
-                if (
-                    datetime.strptime(begindatum, "%d-%m-%Y").date()
-                    <= self.peildatum
-                    <= datetime.strptime(einddatum, "%d-%m-%Y").date()
-                ):
-                    stelselgroep_versie = self._import_versie(
-                        f"woningwaardering.stelsels.{self.code}.{stelselgroep}",
-                        versie,
-                    )
-
-                    self.resultaat.groepen.append(
+                    resultaat.groepen.append(
                         stelselgroep_versie.bereken(
-                            eenheid=self.eenheid,
-                            woningwaardering_resultaat=self.resultaat,
+                            eenheid=eenheid,
+                            woningwaardering_resultaat=resultaat,
                         )
                     )
 
-        return self.resultaat
+        return resultaat
 
 
-# moet de config aan pydantic model worden?
-with open("./woningwaardering/config.yml", "r") as file:
-    config = yaml.safe_load(file)
+# from woningwaardering.stelsels.zelfstandig_ import Zelfstandig
 
 f = open("./woningwaardering/41164000002.json", "r+")
-
 eenheid = EenhedenEenheid.model_validate_json(f.read())
 woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-# woningwaardering_resultaat.groepen = []
 
-zelfstandig = Stelsel(
-    code="zelfstandig",
-    config=config,
-    eenheid=eenheid,
-    resultaat=woningwaardering_resultaat,
-)
 
-woningwaardering_resultaat = zelfstandig.main()
+opp = OppervlakteVanVertrekken("01-02-2024")
+print(opp.bereken(eenheid, woningwaardering_resultaat))
 
-woningwaardering_resultaat.punten = sum(
-    woningwaardering_groep.punten
-    for woningwaardering_groep in woningwaardering_resultaat.groepen or []
-    if woningwaardering_groep.punten is not None
-)
+# moet de config aan pydantic model worden?
+# with open("./woningwaardering/config.yml", "r") as file:
+#     config = yaml.safe_load(file)
 
-print(
-    woningwaardering_resultaat.model_dump_json(
-        by_alias=True, exclude_unset=True, indent=2
-    )
-)
+# f = open("./woningwaardering/41164000002.json", "r+")
+
+
+# # woningwaardering_resultaat.groepen = []
+
+# zelfstandig = Stelsel(
+#     code="zelfstandig",
+#     config=config,
+#     eenheid=eenheid,
+#     resultaat=woningwaardering_resultaat,
+# )
+
+# woningwaardering_resultaat = zelfstandig.main()
+
+# woningwaardering_resultaat.punten = sum(
+#     woningwaardering_groep.punten
+#     for woningwaardering_groep in woningwaardering_resultaat.groepen or []
+#     if woningwaardering_groep.punten is not None
+# )
+
+# print(
+#     woningwaardering_resultaat.model_dump_json(
+#         by_alias=True, exclude_unset=True, indent=2
+#     )
+# )
