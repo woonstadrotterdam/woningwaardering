@@ -38,6 +38,8 @@ class Stelsel:
         """
         main
         """
+        self.resultaat.groepen = []
+
         stelsel_config = self.config["stelsels"][self.code]
 
         for stelselgroep, versies in stelsel_config["stelselgroepen"].items():
@@ -69,9 +71,8 @@ with open("./woningwaardering/config.yml", "r") as file:
 f = open("./woningwaardering/41164000002.json", "r+")
 
 eenheid = EenhedenEenheid.model_validate_json(f.read())
-woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-    groepen=[]
-)
+woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+# woningwaardering_resultaat.groepen = []
 
 zelfstandig = Stelsel(
     code="zelfstandig",
@@ -84,7 +85,8 @@ woningwaardering_resultaat = zelfstandig.main()
 
 woningwaardering_resultaat.punten = sum(
     woningwaardering_groep.punten
-    for woningwaardering_groep in woningwaardering_resultaat.groepen
+    for woningwaardering_groep in woningwaardering_resultaat.groepen or []
+    if woningwaardering_groep.punten is not None
 )
 
 print(

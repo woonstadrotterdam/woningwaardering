@@ -52,7 +52,7 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies:
-          [pydantic==2.*, types-requests==2.*, unidecode==1.*]
+          [pydantic==2.*, types-requests==2.*, unidecode==1.*, PyYAML==6.*]
         description: "Mypy is an optional static type checker for Python."
         args:
           ["--strict", "--ignore-missing-imports", "--allow-untyped-decorators"]

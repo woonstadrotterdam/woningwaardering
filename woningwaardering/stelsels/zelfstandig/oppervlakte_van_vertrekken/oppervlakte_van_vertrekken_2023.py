@@ -32,12 +32,13 @@ class OppervlakteVanVertrekken2023(Stelselgroep):
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
                 stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
                 stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
-            ),
-            woningwaarderingen=[],
+            )
         )
 
-        for ruimte in eenheid.ruimten:
-            if ruimte.soort == Ruimtesoort.vertrek:
+        woningwaardering_groep.woningwaarderingen = []
+
+        for ruimte in eenheid.ruimten or []:
+            if ruimte.soort == Ruimtesoort.vertrek and ruimte.detail_soort is not None:
                 if ruimte.detail_soort.code not in [
                     Ruimtedetailsoort.woonkamer.code,
                     Ruimtedetailsoort.woon_en_of_slaapkamer.code,
@@ -55,7 +56,7 @@ class OppervlakteVanVertrekken2023(Stelselgroep):
                     )
                     continue
 
-                if ruimte.oppervlakte < 4:
+                if ruimte.oppervlakte is not None and ruimte.oppervlakte < 4:
                     print(
                         f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter"
                     )
@@ -65,22 +66,26 @@ class OppervlakteVanVertrekken2023(Stelselgroep):
 
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
-                        Meeteenheid=Meeteenheid.vierkante_meter_m2,
+                        meeteenheid=Meeteenheid.vierkante_meter_m2,
                         # stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
                         naam=ruimte.naam,
                     )
                 )
 
-                woningwaardering.aantal = Decimal(ruimte.oppervlakte).quantize(
-                    Decimal("0.01"), ROUND_HALF_UP
-                )
+                if ruimte.oppervlakte is not None:
+                    woningwaardering.aantal = float(
+                        Decimal(ruimte.oppervlakte).quantize(
+                            Decimal("0.01"), ROUND_HALF_UP
+                        )
+                    )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         punten = Decimal(
             sum(
                 Decimal(woningwaardering.aantal)
-                for woningwaardering in woningwaardering_groep.woningwaarderingen
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.aantal is not None
             )
         ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
 
