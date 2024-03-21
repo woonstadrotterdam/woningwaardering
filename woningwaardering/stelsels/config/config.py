@@ -30,3 +30,8 @@ class Config(BaseModel):
         with open(path, "r") as file:
             config = yaml.safe_load(file)
         return cls(stelsel=config)
+
+    @staticmethod
+    def load_dict(stelsel: str = "zelfstandig") -> dict:
+        config = Config.load(stelsel=stelsel)
+        return config.model_dump()

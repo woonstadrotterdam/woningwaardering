@@ -1,14 +1,16 @@
+import pytest
 from pydantic import ValidationError
 
-from woningwaardering.stelsels.config.stelselsconfig import StelselsConfig
+from woningwaardering.stelsels import Config
 
 
-def test_stelselconfig() -> None:
+@pytest.mark.parametrize("stelsel", ["zelfstandig"])
+def test_stelselconfig(stelsel: str) -> None:
     """
     This function valdiates the Stelselsconfig.yml
     """
     try:
-        _ = StelselsConfig.load()
+        _ = Config.load(stelsel=stelsel)
     except ValidationError as e:
-        print(e)
+        print(e, f"Stelsel {stelsel} does not have a valid yml config")
         raise
