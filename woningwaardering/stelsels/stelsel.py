@@ -13,16 +13,18 @@ class Stelsel:
     def __init__(
         self,
         code: str,
-        config: dict[str, dict[str, dict[str, dict]]],  # TODO: class maken voor config
+        config: dict[
+            str, dict[str, dict[str, dict[str, str]]]
+        ],  # TODO: class maken voor config
         eenheid: EenhedenEenheid,
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
         peildatum: date = date.today(),
     ) -> None:
-        self.code: str = code
+        self.code = code
         self.config = config
-        self.peildatum: date = peildatum
-        self.eenheid: EenhedenEenheid = eenheid
-        self.resultaat: WoningwaarderingResultatenWoningwaarderingResultaat = resultaat
+        self.peildatum = peildatum
+        self.eenheid = eenheid
+        self.resultaat = resultaat
 
     def _import_versie(self, module_name: str, class_name: str) -> Stelselgroep:
         try:
