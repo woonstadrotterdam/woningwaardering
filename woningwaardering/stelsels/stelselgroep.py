@@ -14,3 +14,6 @@ class Stelselgroep(ABC):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         pass
+
+
+# Oppervnvertr.bereken(peildatum=, input=)
