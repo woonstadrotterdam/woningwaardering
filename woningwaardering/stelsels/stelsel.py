@@ -1,4 +1,3 @@
-from types import ModuleType
 import yaml
 import importlib
 
@@ -13,26 +12,28 @@ class Stelsel:
     def __init__(
         self,
         code: str,
-        config: dict[str, dict[str]],
+        config: dict[str, dict[str, str]],
         eenheid: EenhedenEenheid,
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
         peildatum: date = date.today(),
     ) -> None:
         self.code: str = code
-        self.config: dict = config
+        self.config: dict[str, dict[str, str]] = config
         self.peildatum: date = peildatum
         self.eenheid: EenhedenEenheid = eenheid
         self.resultaat: WoningwaarderingResultatenWoningwaarderingResultaat = resultaat
 
-    def _import_versie(self, module_name: str, class_name: str) -> ModuleType:
+    def _import_versie(self, module_name: str, class_name: str) -> callable:
         try:
             module = importlib.import_module(module_name)
             class_ = getattr(module, class_name)
             return class_
         except ModuleNotFoundError:
             print(f"Module {module_name} not found.")
+            raise
         except AttributeError:
             print(f"Class {class_name} not found in module {module_name}.")
+            raise
 
     def main(self) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """
