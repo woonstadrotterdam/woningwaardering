@@ -2592,11 +2592,11 @@ class WoningwaarderingResultatenWoningwaarderingGroep(BaseModel):
     punten: Optional[float] = Field(
         None, description="Het aantal woningwaarderingsstelsel punten dat is toegekend."
     )
-    woningwaarderingen: Optional[
-        list[WoningwaarderingResultatenWoningwaardering]
-    ] = Field(
-        None,
-        description="De woningwaarderingen behorend bij de woningwaardering groep.",
+    woningwaarderingen: Optional[list[WoningwaarderingResultatenWoningwaardering]] = (
+        Field(
+            None,
+            description="De woningwaarderingen behorend bij de woningwaardering groep.",
+        )
     )
 
 
