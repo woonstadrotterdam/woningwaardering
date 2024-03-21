@@ -1,3 +1,4 @@
+from typing import Dict
 import yaml
 import importlib
 
@@ -12,7 +13,7 @@ class Stelsel:
     def __init__(
         self,
         code: str,
-        config: dict,
+        config: Dict[str, dict],
         eenheid: EenhedenEenheid,
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
         peildatum: date = date.today(),
