@@ -60,7 +60,8 @@ repos:
             types-pyyaml==6.*,
           ]
         description: "Mypy is an optional static type checker for Python."
-        args: ["--ignore-missing-imports", "--allow-untyped-decorators"]
+        args:
+          ["--strict", "--ignore-missing-imports", "--allow-untyped-decorators"]
         exclude: "tests"
         stages:
           - "pre-push"
