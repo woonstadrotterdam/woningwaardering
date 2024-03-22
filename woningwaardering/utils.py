@@ -21,7 +21,7 @@ def import_class(module_path: str, class_naam: str) -> Any:
         ModuleNotFoundError: Als de module niet gevonden kan worden.
         AttributeError: Als de klasse niet gevonden kan worden in de module.
     """
-    logger.debug(f"Importeer stelselgroep versie: {module_path}.{class_naam}")
+    logger.debug(f"Importeer class '{class_naam}' uit '{module_path}'")
     try:
         module = importlib.import_module(module_path)
         class_ = getattr(module, class_naam)
