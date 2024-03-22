@@ -1,8 +1,13 @@
-import importlib
-from datetime import datetime
+from abc import ABC, abstractmethod
+from typing import Any
 
-import yaml
+from loguru import logger
 
+from woningwaardering.stelsels.config.config import Config
+from woningwaardering.utils import (
+    import_class,
+    is_geldig,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -10,59 +15,112 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 
+class StelselgroepVersie(ABC):
+    @staticmethod
+    @abstractmethod
+    def bereken(
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        pass
+
+
 class Stelselgroep:
     def __init__(
         self,
-        peildatum,
+        peildatum: str,
         stelsel: str,
-        module: str,
+        stelselgroep: str,
+        config: dict[str, Any] | None = None,
     ) -> None:
-        self.peildatum = datetime.strptime(peildatum, "%d-%m-%Y").date()
-        self.config = self._read_config()
+        """
+        Initialiseert een Stelselgroep.
+
+        Args:
+            peildatum (str): De peildatum in het formaat "dd-mm-jjjj".
+            stelsel (str): Het stelsel waartoe de stelselgroep behoort.
+            stelselgroep (str): De naam van de stelselgroep.
+            config (dict[str, Any] | None, optional): Een optionele configuratie. Defaults naar None.
+        """
+        self.peildatum = peildatum  # datetime.strptime(peildatum, "%d-%m-%Y").date()
         self.stelsel = stelsel
-        self.module = module
-        self.geldige_versie_class_naam = self._select_geldige_versie()
-        print(f"geldige_versie_class_naam: {self.geldige_versie_class_naam}")
-        self.geldige_versie = self._import_versie()
-
-    def _read_config(self) -> dict:
-        with open("./woningwaardering/config.yml", "r") as file:
-            return yaml.safe_load(file)
-
-    def _select_geldige_versie(self) -> None:
-        versies = self.config["stelsels"][self.stelsel]["stelselgroepen"][self.module][
-            "versies"
-        ]
-        print(f"versies: {versies}")
-        for versie in versies:
-            for versie_class_naam, geldigheid in versie.items():
-                begindatum: str = str(geldigheid["begindatum"])
-                einddatum: str = str(geldigheid["einddatum"])
-                if (
-                    datetime.strptime(begindatum, "%d-%m-%Y").date()
-                    <= self.peildatum
-                    <= datetime.strptime(einddatum, "%d-%m-%Y").date()
-                ):
-                    return versie_class_naam
-
-    def _import_versie(self):
-        module_path = f"woningwaardering.stelsels.{self.stelsel}.{self.module}"
-        try:
-            module = importlib.import_module(module_path)
-            class_: Stelselgroep = getattr(module, self.geldige_versie_class_naam)
-            return class_
-        except ModuleNotFoundError:
-            print(f"Module {module_path} not found.")
-            raise
-        except AttributeError:
-            print(
-                f"Class {self.geldige_versie_class_naam} not found in module {module_path}."
-            )
-            raise
+        self.stelselgroep = stelselgroep
+        if config is None:
+            config = Config.load(stelsel=self.stelsel).model_dump()
+        self.geldige_versie = select_geldige_stelselgroepversie(
+            self.peildatum, self.stelsel, self.stelselgroep, config
+        )
 
     def bereken(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        """
+        Bereken de woningwaardering voor een specifieke eenheid op stelselgroep-niveau.
+
+        Args:
+            eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): Het resultaat van de woningwaardering.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaarderingGroep: Het resultaat van de woningwaardering voor de gehele groep.
+        """
         return self.geldige_versie.bereken(eenheid, woningwaardering_resultaat)
+
+
+def select_geldige_stelselgroepversie(
+    peildatum: str,
+    stelsel: str,
+    stelselgroep: str,
+    config: dict[str, Any] | None = None,
+) -> StelselgroepVersie:
+    """
+    Selecteert de geldige stelselgroepversie op basis van de opgegeven peildatum, stelsel en stelselgroep.
+
+    Args:
+        peildatum (str): De peildatum in het formaat "dd-mm-jjjj".
+        stelsel (str): De naam van het stelsel.
+        stelselgroep (str): De naam van de stelselgroep.
+        config (dict[str, Any] | None, optional): De configuratie. Defaults to None.
+
+    Returns:
+        StelselgroepVersie: De geldige stelselgroepversie.
+
+    Raises:
+        ValueError: Als er geen geldige stelselgroepen zijn gevonden met de opgegeven peildatum.
+        ValueError: Als er meerdere geldige stelselgroepen zijn gevonden met de opgegeven peildatum.
+    """
+    if not config:
+        config = Config.load(stelsel=stelsel).model_dump()
+
+    geldige_stelselgroep_versies = []
+    stelselgroep_config = config["stelsel"][stelsel]["stelselgroepen"][stelselgroep]
+    if is_geldig(
+        stelselgroep_config["begindatum"],
+        stelselgroep_config["einddatum"],
+        peildatum,
+    ):
+        logger.debug(
+            f"{stelsel}: stelselgroep '{stelselgroep}' is geldig op peildatum {peildatum}."
+        )
+        for versie in stelselgroep_config["versies"]:
+            for versie_class_naam, geldigheid in versie.items():
+                if is_geldig(
+                    geldigheid["begindatum"], geldigheid["einddatum"], peildatum
+                ):
+                    stelselgroep_versie = import_class(
+                        f"woningwaardering.stelsels.{stelsel}.{stelselgroep}",
+                        versie_class_naam,
+                    )
+
+                    geldige_stelselgroep_versies.append(stelselgroep_versie())
+    if len(geldige_stelselgroep_versies) == 0:
+        raise ValueError(
+            f"{stelsel}: geen geldige stelselgroepen gevonden met peildatum {peildatum}."
+        )
+    if len(geldige_stelselgroep_versies) > 1:
+        raise ValueError(
+            f"{stelsel}: meerdere geldige stelselgroepen gevonden met peildatum {peildatum}: {geldige_stelselgroep_versies}."
+        )
+    return geldige_stelselgroep_versies[0]  # type: ignore[no-any-return]

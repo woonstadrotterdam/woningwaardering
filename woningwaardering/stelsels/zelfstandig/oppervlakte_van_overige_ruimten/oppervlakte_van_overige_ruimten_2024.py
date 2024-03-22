@@ -2,7 +2,7 @@ from decimal import ROUND_HALF_UP, BasicContext, Decimal, setcontext
 
 from loguru import logger
 
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.stelselgroep import StelselgroepVersie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -24,7 +24,7 @@ from woningwaardering.vera.referentiedata.soort import (
 setcontext(BasicContext)
 
 
-class OppervlakteVanOverigeRuimten2024(Stelselgroep):
+class OppervlakteVanOverigeRuimten2024(StelselgroepVersie):
     @staticmethod
     def bereken(
         eenheid: EenhedenEenheid,
@@ -107,3 +107,11 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroep):
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
+
+
+if __name__ == "__main__":
+    oor = OppervlakteVanOverigeRuimten2024()
+    f = open("./input_models/41164000002.json", "r+")
+    eenheid = EenhedenEenheid.model_validate_json(f.read())
+    woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    print(oor.bereken(eenheid, woningwaardering_resultaat))

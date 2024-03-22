@@ -1,5 +1,7 @@
-import yaml
 from typing import Dict, List, Union
+
+import yaml
+from loguru import logger
 from pydantic import BaseModel
 
 
@@ -27,6 +29,7 @@ class Config(BaseModel):
     @classmethod
     def load(cls, stelsel: str = "zelfstandig") -> "Config":
         path = f"woningwaardering/stelsels/config/{stelsel}.yml"
+        logger.debug(f"Config wordt ingeladen vanuit: {path}")
         with open(path, "r") as file:
             config = yaml.safe_load(file)
         return cls(stelsel=config)
