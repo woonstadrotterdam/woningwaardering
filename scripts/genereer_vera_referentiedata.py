@@ -14,7 +14,6 @@ from loguru import logger
 import textwrap
 
 output_folder = "woningwaardering/vera/referentiedata"
-soort_folder = os.path.join(output_folder, "soort")
 current_time = datetime.datetime.now(ZoneInfo("Europe/Amsterdam"))
 
 
@@ -60,8 +59,8 @@ for item in active_data:
         item["variabele"] += " " + item["code"]
 
 # Create output directory if not exists
-if not os.path.exists(soort_folder):
-    os.makedirs(soort_folder)
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
 
 # Group items by 'soort'
 grouped_data = [(k, list(g)) for k, g in groupby(active_data, key=itemgetter("soort"))]
@@ -143,7 +142,7 @@ class {{ soort|remove_accents|title }}:
 # Render the soort_folder/<soort>.py template with the grouped data and save to separate files
 for soort, items in grouped_data:
     rendered_code = soort_template.render(soort=soort, items=items)
-    with open(os.path.join(soort_folder, f"{soort.lower()}.py"), "w") as file:
+    with open(os.path.join(output_folder, f"{soort.lower()}.py"), "w") as file:
         file.write(rendered_code)
 
 # Define the Jinja2 template for soort/__init__.py
@@ -162,32 +161,8 @@ __all__ = [
 """
 )
 
-# render the soort_folder/__init__.py template with the grouped data
+# render the output_folder/__init__.py template with the grouped data
 rendered_code = soort_folder_init_template.render(grouped_data=grouped_data)
-with open(os.path.join(soort_folder, "__init__.py"), "w") as file:
-    file.write(rendered_code)
-
-
-# define the Jinja2 template for output_folder/__init__.py
-output_folder_init_template = environment.from_string(
-    """from .soort import (
-{%- for soort in grouped_data %}
-    {{ soort[0]|remove_accents|title }},
-{%- endfor %}
-)
-
-
-__all__ = [
-{%- for soort in grouped_data %}
-    "{{ soort[0]|remove_accents|title }}",
-{%- endfor %}
-]
-
-"""
-)
-
-# Render the output_folder/__init__.py template with the grouped data
-rendered_code = output_folder_init_template.render(grouped_data=grouped_data)
 with open(os.path.join(output_folder, "__init__.py"), "w") as file:
     file.write(rendered_code)
 
@@ -200,7 +175,7 @@ for item in active_data:
 
 # Define the Jinja2 template for domein/__init__.py
 domein_folder_init_template = environment.from_string(
-    """from woningwaardering.vera.referentiedata.soort import (
+    """from woningwaardering.vera.referentiedata import (
 {%- for soort in soorten %}
     {{ soort|title }},
 {%- endfor %}

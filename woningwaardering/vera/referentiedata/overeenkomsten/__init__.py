@@ -1,4 +1,4 @@
-from woningwaardering.vera.referentiedata.soort import (
+from woningwaardering.vera.referentiedata import (
     Btw,
     Eindedetailreden,
     Eindereden,
