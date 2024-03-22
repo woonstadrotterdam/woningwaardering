@@ -39,8 +39,8 @@ class Eenheiddetailsoort:
     )
     """
     Een berging is een bergruimte of bijgebouw met een algemene bergfunctie op een apart
-    perceel of met een eigen adres, vaak in een aaneengesloten rij met andere berghokken
-    of bijgebouwen.
+    perceel of met een eigen adres, vaak in een aaneengesloten rij met andere
+    berghokken of bijgebouwen.
     """
 
     bibliotheek = Referentiedata(
@@ -57,8 +57,8 @@ class Eenheiddetailsoort:
     )
     """
     Ruimte voor het samenkomen van personen voor kunst, cultuur, godsdienst,
-    communicatie, het verstrekken van consumpties voor het gebruik ter plaatse of het
-    aanschouwen van sport (bewerking van defintie Bouwbesluit). Let op: Voor
+    communicatie, het verstrekken van consumpties voor het gebruik ter plaatse of
+    het aanschouwen van sport (bewerking van defintie Bouwbesluit). Let op: Voor
     kinderopvang kan de eenheiddetailsoort Kinderopvanglocatie worden gebruikt.
     """
 
@@ -77,10 +77,11 @@ class Eenheiddetailsoort:
     )
     """
     Een bovenwoning is een etagewoning of flatwoning op een etage die bereikbaar is via
-    een binnentrap met een mogelijk gemeenschappelijke voordeur die op straat uitkomt of
-    een eigen voordeur heeft die niet in een portiek uitkomt. De bovenwoning bestaat uit
-    één of meerdere bouwlagen. De flat-bovenwoning (ook wel: repeterende bovenwoning) is
-    geen galerijflat. (Voor marktwaarde bepaling: MGW-meergezinswoning)
+    een binnentrap met een mogelijk gemeenschappelijke voordeur die op straat
+    uitkomt of een eigen voordeur heeft die niet in een portiek uitkomt. De
+    bovenwoning bestaat uit één of meerdere bouwlagen. De flat-bovenwoning (ook wel:
+    repeterende bovenwoning) is geen galerijflat. (Voor marktwaarde bepaling:
+    MGW-meergezinswoning)
     """
 
     brede_school = Referentiedata(
@@ -142,9 +143,9 @@ class Eenheiddetailsoort:
     )
     """
     Een eindwoning is een eengezinswoning die grenst aan een aanliggende woning. De
-    eindwoning ligt op het begin of einde van de reeks woningen en heeft geen (extra)
-    bij de woning behorende grond aan de zijkant van de woning. (Voor marktwaarde
-    bepaling: EGW-eengezinswoning)
+    eindwoning ligt op het begin of einde van de reeks woningen en heeft geen
+    (extra) bij de woning behorende grond aan de zijkant van de woning. (Voor
+    marktwaarde bepaling: EGW-eengezinswoning)
     """
 
     erfpachtkavel = Referentiedata(
@@ -166,8 +167,8 @@ class Eenheiddetailsoort:
     )
     """
     Een galerijflat is een flatwoning waarbij de voordeur uitkomt op een aan de
-    buitenkant gelegen loopgang. Een galerijflat heeft meerdere bouwlagen met woningen
-    boven elkaar. (Voor marktwaarde bepaling: MGW-meergezinswoning)
+    buitenkant gelegen loopgang. Een galerijflat heeft meerdere bouwlagen met
+    woningen boven elkaar. (Voor marktwaarde bepaling: MGW-meergezinswoning)
     """
 
     garage = Referentiedata(
@@ -195,9 +196,9 @@ class Eenheiddetailsoort:
     )
     """
     Een geschakelde 2-onder-1-kapwoning is een 2-onder-1-kapwoning waarbij de muren van
-    aanbouwen gedeeltelijk aan (aanbouwen van) andere woningen grenzen. Ook wanneer de
-    woningen elk een afzonderlijke dakconstructie hebben, vallen deze onder de definitie
-    van de geschakelde 2-onder-1-kapwoning. (Voor marktwaarde bepaling:
+    aanbouwen gedeeltelijk aan (aanbouwen van) andere woningen grenzen. Ook wanneer
+    de woningen elk een afzonderlijke dakconstructie hebben, vallen deze onder de
+    definitie van de geschakelde 2-onder-1-kapwoning. (Voor marktwaarde bepaling:
     EGW-eengezinswoning)
     """
 
@@ -218,9 +219,9 @@ class Eenheiddetailsoort:
     """
     Een halfvrijstaande woning is een eengezinswoning waarvan het hoofdgebouw verbonden
     is met het hoofdgebouw van één ander object dat geen woning is: óf waarvan het
-    hoofdgebouw verbonden is met het hoofdgebouw van één andere niet gelijksoortige en
-    -vormige woning (niet zijnde tussenwoning en niet zijnde een 2-onder-1-kapwoning).
-    (Voor marktwaarde bepaling: EGW-eengezinswoning)
+    hoofdgebouw verbonden is met het hoofdgebouw van één andere niet gelijksoortige
+    en -vormige woning (niet zijnde tussenwoning en niet zijnde een
+    2-onder-1-kapwoning). (Voor marktwaarde bepaling: EGW-eengezinswoning)
     """
 
     herenhuis = Referentiedata(
@@ -229,8 +230,8 @@ class Eenheiddetailsoort:
     )
     """
     Een herenhuis is een relatief grote eengezinswoning gesitueerd binnen de bebouwde
-    kom, met een nadrukkelijke architectonische uitstraling in het straatbeeld via een
-    opvallende (gevel)presentatie. Oorspronkelijk betrof het een statig, hoog en
+    kom, met een nadrukkelijke architectonische uitstraling in het straatbeeld via
+    een opvallende (gevel)presentatie. Oorspronkelijk betrof het een statig, hoog en
     tamelijk oud pand, maar tegenwoordig wordt hiermee ook de duurdere, kwalitatief
     beter uitgevoerde nieuwbouwwoning aangeduid.
     """
@@ -241,9 +242,9 @@ class Eenheiddetailsoort:
     )
     """
     Een hoekwoning is een eengezinswoning die grenst aan een aanliggende woning. De
-    hoekwoning ligt op het begin of einde van de reeks woningen en heeft (extra) bij de
-    woning behorende grond aan de zijkant van de woning. (Voor marktwaarde bepaling:
-    EGW-eengezinswoning)
+    hoekwoning ligt op het begin of einde van de reeks woningen en heeft (extra) bij
+    de woning behorende grond aan de zijkant van de woning. (Voor marktwaarde
+    bepaling: EGW-eengezinswoning)
     """
 
     horeca = Referentiedata(
@@ -317,9 +318,9 @@ class Eenheiddetailsoort:
     )
     """
     Een ligplaats is een formeel door de gemeente als zodanig aangewezen plaats in het
-    water, al dan niet aangevuld met een op de oever aanwezig terrein of een gedeelte
-    daarvan, dat bestemd is voor het permanent afmeren van een voor woon, bedrijfsmatige
-    of recreatieve doeleinden geschikt vaartuig.
+    water, al dan niet aangevuld met een op de oever aanwezig terrein of een
+    gedeelte daarvan, dat bestemd is voor het permanent afmeren van een voor woon,
+    bedrijfsmatige of recreatieve doeleinden geschikt vaartuig.
     """
 
     lichamelijk_en_geestelijk_beperkten_instelling = Referentiedata(
@@ -382,8 +383,8 @@ class Eenheiddetailsoort:
     )
     """
     Een parkeerplaats die dienstbaar is aan wonen, waarbij de parkeerplaats een
-    zelfstandig object is. Een parkeerplaats in een publieke parkeergarage (abonnement
-    e.d.) valt niet onder de definitie.
+    zelfstandig object is. Een parkeerplaats in een publieke parkeergarage
+    (abonnement e.d.) valt niet onder de definitie.
     """
 
     parkeerplaats_overdekt = Referentiedata(
@@ -397,8 +398,8 @@ class Eenheiddetailsoort:
     )
     """
     Een parkeerplaats die dienstbaar is aan wonen, waarbij de parkeerplaats een
-    zelfstandig object is. Een parkeerplaats in een publieke parkeergarage (abonnement
-    e.d.) valt niet onder de definitie.
+    zelfstandig object is. Een parkeerplaats in een publieke parkeergarage
+    (abonnement e.d.) valt niet onder de definitie.
     """
 
     portiekflat = Referentiedata(
@@ -407,8 +408,8 @@ class Eenheiddetailsoort:
     )
     """
     Een portiekflat is een flatwoning waarbij de voordeur uitkomt op een
-    gemeenschappelijk afsluitbaar trappenhuis, een centrale hal of een gesloten portiek.
-    (Voor marktwaarde bepaling: MGW-meergezinswoning)
+    gemeenschappelijk afsluitbaar trappenhuis, een centrale hal of een gesloten
+    portiek. (Voor marktwaarde bepaling: MGW-meergezinswoning)
     """
 
     portiekwoning = Referentiedata(
@@ -504,8 +505,8 @@ class Eenheiddetailsoort:
     )
     """
     Een tiny house is een kleine volwaardige (vrijstaande) woningen van maximaal 50 m2
-    vloeroppervlak met een zo klein mogelijke ecologische voetafdruk. ze staan op een
-    (tijdelijke) fundering of op wielen.
+    vloeroppervlak met een zo klein mogelijke ecologische voetafdruk. ze staan op
+    een (tijdelijke) fundering of op wielen.
     """
 
     tussenwoning = Referentiedata(
@@ -514,10 +515,10 @@ class Eenheiddetailsoort:
     )
     """
     Een tussenwoning is een eengezinswoning waarbij de tussenmuren aan andere panden
-    grenzen en waarbij de woningen ten opzichte van elkaar in een gelijk vlak of lijn
-    liggen. Ook de woning die de hoek vormt van een gesloten bouwblok (twee reeksen
-    woningen zijn verbonden met elkaar) is een tussenwoning. (Voor marktwaarde bepaling:
-    EGW-eengezinswoning)
+    grenzen en waarbij de woningen ten opzichte van elkaar in een gelijk vlak of
+    lijn liggen. Ook de woning die de hoek vormt van een gesloten bouwblok (twee
+    reeksen woningen zijn verbonden met elkaar) is een tussenwoning. (Voor
+    marktwaarde bepaling: EGW-eengezinswoning)
     """
 
     twee_onder_een_kapwoning = Referentiedata(
@@ -528,9 +529,10 @@ class Eenheiddetailsoort:
     Een 2-onder-1-kapwoning is een eengezinswoning waarvan het hoofdgebouw is verbonden
     met het hoofdgebouw van één andere gelijksoortige en gelijkvormige woning (niet
     zijnde een tussenwoning). Ook wanneer de woningen elk een afzonderlijke
-    dakconstructie hebben, vallen deze onder de definitie van de 2-onder-1-kapwoning. 2-
-    onder-1-kapwoningen worden ook wel aangeduid als “helft van een dubbel”, welk begrip
-    als synoniem gebruikt mag worden. (Voor marktwaarde bepaling: EGW-eengezinswoning).
+    dakconstructie hebben, vallen deze onder de definitie van de
+    2-onder-1-kapwoning. 2- onder-1-kapwoningen worden ook wel aangeduid als “helft
+    van een dubbel”, welk begrip als synoniem gebruikt mag worden. (Voor marktwaarde
+    bepaling: EGW-eengezinswoning).
     """
 
     veiligheidshuis = Referentiedata(
@@ -565,8 +567,8 @@ class Eenheiddetailsoort:
     )
     """
     Een verpleeghuis is een instelling waar mensen met gezondheidsproblemen kunnen
-    verblijven die (meer) zorg en medische begeleiding nodig hebben die ze thuis of in
-    het verzorgingshuis niet (voldoende) kunnen krijgen
+    verblijven die (meer) zorg en medische begeleiding nodig hebben die ze thuis of
+    in het verzorgingshuis niet (voldoende) kunnen krijgen
     """
 
     vrijstaande_woning = Referentiedata(
@@ -584,8 +586,8 @@ class Eenheiddetailsoort:
     )
     """
     Een verzorgingshuis biedt uitgebreide zorg, ondersteuning en een beschutte
-    woonomgeving, als u door ouderdom of ziekte niet meer zelfstandig kunt wonen, ook
-    niet met hulp van naasten, mantelzorg of thuiszorg.
+    woonomgeving, als u door ouderdom of ziekte niet meer zelfstandig kunt wonen,
+    ook niet met hulp van naasten, mantelzorg of thuiszorg.
     """
 
     waterwoning = Referentiedata(
@@ -594,9 +596,9 @@ class Eenheiddetailsoort:
     )
     """
     Een waterwoning is een woning voorzien van een draagconstructie met een groot
-    drijfvermogen en verbonden met in de grond verankerde geleiders waardoor de woning
-    afhankelijk van het waterniveau kan stijgen of dalen. (Voor marktwaarde bepaling:
-    EGW-eengezinswoning)
+    drijfvermogen en verbonden met in de grond verankerde geleiders waardoor de
+    woning afhankelijk van het waterniveau kan stijgen of dalen. (Voor marktwaarde
+    bepaling: EGW-eengezinswoning)
     """
 
     welzijnswerkruimte_wijk_en_of_buurtgericht = Referentiedata(
@@ -632,8 +634,8 @@ class Eenheiddetailsoort:
     )
     """
     Een woonboot is een verblijfsobject dat bestemd is voor permanente danwel
-    recreatieve bewoning en dat op of in het water is gelegen, met vaste ligplaats met
-    walaansluiting en niet direct geschikt om als vervoermiddel te gebruiken.
+    recreatieve bewoning en dat op of in het water is gelegen, met vaste ligplaats
+    met walaansluiting en niet direct geschikt om als vervoermiddel te gebruiken.
     """
 
     woonwagen = Referentiedata(
@@ -642,11 +644,11 @@ class Eenheiddetailsoort:
     )
     """
     Een woonwagen respectievelijk stacaravan is een voor permanente respectievelijk
-    recreatieve bewoning bestemd verblijfsobject dat is geplaatst op een standplaats en
-    in zijn geheel of in delen kan worden verplaatst, met uitzondering van wagens die
-    een eigen aandrijving hebben en wagens waarvoor voor het voortbewegen ervan over een
-    weg geen ontheffing ingevolge de Wegenverkeerswet en het Reglement verkeersregels en
-    verkeerstekens is vereist.
+    recreatieve bewoning bestemd verblijfsobject dat is geplaatst op een standplaats
+    en in zijn geheel of in delen kan worden verplaatst, met uitzondering van wagens
+    die een eigen aandrijving hebben en wagens waarvoor voor het voortbewegen ervan
+    over een weg geen ontheffing ingevolge de Wegenverkeerswet en het Reglement
+    verkeersregels en verkeerstekens is vereist.
     """
 
     woon_en_of_winkelpand = Referentiedata(
@@ -656,11 +658,12 @@ class Eenheiddetailsoort:
     """
     Een gebouw in de zin van art. 7:290 BW met een binnen de contouren van de
     buitenmuren van het gebouw een al dan niet zelfstandige woonruimte. De
-    bedrijfsruimte heeft doorgaans een maximale verhuurbaar vloeroppervlakte (vvo) van
-    circa 200 m2 en is bestemd voor of biedt de mogelijkheid tot detailhandel of een
-    daaraan vergelijkbare bestemming (kantoor, atelier, showroom e.d.). Verder is wonen
-    in een deel van het object toegestaan (veelal bewoond door de eigenaar of diens
-    personeel). De bedrijfs- en woonruimte zijn aan de binnenzijde onderling bereikbaar.
+    bedrijfsruimte heeft doorgaans een maximale verhuurbaar vloeroppervlakte (vvo)
+    van circa 200 m2 en is bestemd voor of biedt de mogelijkheid tot detailhandel of
+    een daaraan vergelijkbare bestemming (kantoor, atelier, showroom e.d.). Verder
+    is wonen in een deel van het object toegestaan (veelal bewoond door de eigenaar
+    of diens personeel). De bedrijfs- en woonruimte zijn aan de binnenzijde
+    onderling bereikbaar.
     """
 
     woonwagenstandplaats = Referentiedata(
@@ -669,11 +672,11 @@ class Eenheiddetailsoort:
     )
     """
     Een standplaats is een formeel door de gemeente als zodanig aangewezen terrein of
-    een gedeelte daarvan, dat bestemd is voor het permanent plaatsen van een niet direct
-    en duurzaam met de aarde verbonden en voor woon, bedrijfsmatige of recreatieve
-    doeleinden geschikte ruimte.Binnen de grenzen van een recreatieterrein kan ook
-    sprake zijn van uitsluitend een aanwijzing van de recreatieve standplaats door de
-    eigenaar van het terrein.
+    een gedeelte daarvan, dat bestemd is voor het permanent plaatsen van een niet
+    direct en duurzaam met de aarde verbonden en voor woon, bedrijfsmatige of
+    recreatieve doeleinden geschikte ruimte.Binnen de grenzen van een
+    recreatieterrein kan ook sprake zijn van uitsluitend een aanwijzing van de
+    recreatieve standplaats door de eigenaar van het terrein.
     """
 
     welzijnswerkruimte_niet_wijk_of_buurtgericht = Referentiedata(

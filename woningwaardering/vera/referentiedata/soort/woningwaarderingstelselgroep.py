@@ -165,7 +165,8 @@ class Woningwaarderingstelselgroep:
     )
     """
     Tot deze ruimten worden gerekend: bijkeukens, bergingen, wasruimten, schuren,
-    garages, zolders en kelders (Beleidsboek Waarderingsstelsel zelfstandige woonruimte)
+    garages, zolders en kelders (Beleidsboek Waarderingsstelsel zelfstandige
+    woonruimte)
     """
 
     oppervlakte_onzelfstandige_woonruimte = Referentiedata(
@@ -174,8 +175,8 @@ class Woningwaarderingstelselgroep:
     )
     """
     De groep criteria die betrekking heeft op de oppervlakte van kamers en keukens, en
-    van verwarmde gemeenschappelijke verblijfsruimten (Beleidsboek Waarderingsstelsel
-    onzelfstandige woonruimte)
+    van verwarmde gemeenschappelijke verblijfsruimten (Beleidsboek
+    Waarderingsstelsel onzelfstandige woonruimte)
     """
 
     oppervlakte_standplaats = Referentiedata(
@@ -221,8 +222,9 @@ class Woningwaarderingstelselgroep:
     """
     Privé-buitenruimten zijn tot de woning behorende buitenruimten, waarvan de bewoners
     van de desbetreffende woning krachtens de huurovereenkomst het exclusieve
-    gebruiksrecht hebben. Dit kunnen onder meer voor-, zij- of achtertuinen, balkons,
-    platjes of terrassen zijn (Beleidsboek Waarderingsstelsel zelfstandige woonruimte)
+    gebruiksrecht hebben. Dit kunnen onder meer voor-, zij- of achtertuinen,
+    balkons, platjes of terrassen zijn (Beleidsboek Waarderingsstelsel zelfstandige
+    woonruimte)
     """
 
     renovatie = Referentiedata(
@@ -294,9 +296,9 @@ class Woningwaarderingstelselgroep:
     )
     """
     Vertrekken, die met punten als vertrek zijn gewaardeerd, en die verwarmd zijn. Open
-    keukens, of vertrekken die met een schuifwand met elkaar in verbinding staan, worden
-    als afzonderlijk vertrek geteld (Beleidsboek Waarderingsstelsel zelfstandige
-    woonruimte)
+    keukens, of vertrekken die met een schuifwand met elkaar in verbinding staan,
+    worden als afzonderlijk vertrek geteld (Beleidsboek Waarderingsstelsel
+    zelfstandige woonruimte)
     """
 
     wasgelegenheid = Referentiedata(

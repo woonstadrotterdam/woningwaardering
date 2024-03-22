@@ -16,9 +16,9 @@ class Overeenkomststatus:
     )
     """
     De partijen hebben afgesproken dat de huurovereenkomst toch niet definitief gemaakt
-    wordt. Deze status kan alleen ontstaan wanneer de overeenkomst de status Voorlopig
-    of Goedgekeurd heeft. Wanneer een overeenkomst actief is zal deze opgezegd,
-    ontbonden of vernietigd moeten worden.
+    wordt. Deze status kan alleen ontstaan wanneer de overeenkomst de status
+    Voorlopig of Goedgekeurd heeft. Wanneer een overeenkomst actief is zal deze
+    opgezegd, ontbonden of vernietigd moeten worden.
     """
 
     goedgekeurd = Referentiedata(

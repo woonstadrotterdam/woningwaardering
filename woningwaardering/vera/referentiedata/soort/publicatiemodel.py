@@ -8,8 +8,8 @@ class Publicatiemodel:
     )
     """
     Vastgoed wordt aangeboden aan alle passende woningzoekenden. Deze kunnen vervolgens
-    hun interesse aangeven voor het vastgoed en na toepassen van de spelregels krijgt de
-    woningzoekende met de hoogste positie de eenheid aangeboden.
+    hun interesse aangeven voor het vastgoed en na toepassen van de spelregels
+    krijgt de woningzoekende met de hoogste positie de eenheid aangeboden.
     """
 
     distributiemodel = Referentiedata(
@@ -46,8 +46,8 @@ class Publicatiemodel:
     )
     """
     Woningzoekenden kunnen zichzelf op een wachtlijst zetten voor een cluster van
-    vastgoed. Zodra een eenheid vrijkomt krijgt de woningzoekende met de hoogste positie
-    de eenheid aangeboden.
+    vastgoed. Zodra een eenheid vrijkomt krijgt de woningzoekende met de hoogste
+    positie de eenheid aangeboden.
     """
 
     vrijesectormodel = Referentiedata(
@@ -56,8 +56,8 @@ class Publicatiemodel:
     )
     """
     Vastgoed wordt regelvrij aangeboden aan alle woningzoekenden. Deze kunnen vervolgens
-    hun interesse aangeven voor het vastgoed. Voor het betrekken van de woning kunnen
-    overigens wel degelijk eisen gesteld worden (bijv. minimaal inkomen.)
+    hun interesse aangeven voor het vastgoed. Voor het betrekken van de woning
+    kunnen overigens wel degelijk eisen gesteld worden (bijv. minimaal inkomen.)
     """
 
     woningruilmodel = Referentiedata(

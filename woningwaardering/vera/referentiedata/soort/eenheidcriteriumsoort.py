@@ -8,8 +8,8 @@ class Eenheidcriteriumsoort:
     )
     """
     Er is voorrang voor woningzoekenden met binding tot een bepaald gebied. Bijvoorbeeld
-    regionaal voor mensen die in het regionaal samenwerkingsverband wonen en/of werken,
-    lokaal voor mensen die in de gemeente wonen.
+    regionaal voor mensen die in het regionaal samenwerkingsverband wonen en/of
+    werken, lokaal voor mensen die in de gemeente wonen.
     """
 
     groep = Referentiedata(

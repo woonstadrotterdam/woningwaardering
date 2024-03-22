@@ -61,8 +61,8 @@ class Onderhoudspecialisme:
     )
     """
     Specialist die dakbedekking aanbrengt op platte en licht hellende daken.
-    Gespecialiseerd in het toepassen en verwerken van diverse materialen die gebruikt
-    worden om deze daken waterdicht en bestand te maken tegen verschillende
+    Gespecialiseerd in het toepassen en verwerken van diverse materialen die
+    gebruikt worden om deze daken waterdicht en bestand te maken tegen verschillende
     weersinvloeden
     """
 

@@ -24,8 +24,8 @@ class Overeenkomstdetailsoort:
     )
     """
     Een campuscontract is een huurovereenkomst die direct is gekoppeld aan een
-    inschrijving bij een onderwijsinstelling. Bij beeindiging inschrijving eindigt ook
-    de overeenkomst.
+    inschrijving bij een onderwijsinstelling. Bij beeindiging inschrijving eindigt
+    ook de overeenkomst.
     """
 
     flexcontract = Referentiedata(
@@ -53,7 +53,8 @@ class Overeenkomstdetailsoort:
     )
     """
     Verkoop van een woning tegen lagere prijs dan de marktwaarde en de garantie dat de
-    corporatie of ontwikkelaar de woning binnen 3 maanden zal terugkopen indien gewenst.
+    corporatie of ontwikkelaar de woning binnen 3 maanden zal terugkopen indien
+    gewenst.
     """
 
     mge_constructie = Referentiedata(

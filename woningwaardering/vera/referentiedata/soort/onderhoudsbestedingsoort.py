@@ -50,8 +50,8 @@ class Onderhoudsbestedingsoort:
     )
     """
     Uitwerktijd van de uitvoerende na uitvoering werk. Kan gebruikt worden voor de tijd
-    nadat de werkzaamheden door de uitvoerende zijn uitgevoerd en het moment waarop de
-    uitvoerende beschikbaar is voor een vervolgtaak
+    nadat de werkzaamheden door de uitvoerende zijn uitgevoerd en het moment waarop
+    de uitvoerende beschikbaar is voor een vervolgtaak
     """
 
     vaste_taakprijs = Referentiedata(
@@ -60,8 +60,8 @@ class Onderhoudsbestedingsoort:
     )
     """
     Besteding is een vaste taakprijs conform een eenheidsprijzenlijst/prijzenboek. Bij
-    een afrekenwijze Nacalculatie Eenheidsprijzen kan gebruik gemaakt worden van deze
-    soort om de verschillende taakprijzen op te voeren.
+    een afrekenwijze Nacalculatie Eenheidsprijzen kan gebruik gemaakt worden van
+    deze soort om de verschillende taakprijzen op te voeren.
     """
 
     werktijd = Referentiedata(

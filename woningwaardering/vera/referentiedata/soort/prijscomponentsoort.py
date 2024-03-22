@@ -51,8 +51,8 @@ class Prijscomponentsoort:
     """
     Prijscomponent voor een parkeergelegenheid als deze onlosmakelijk onderdeel uitmaakt
     van de huurovereenkomst voor een woongelegenheid. Let op: als de prijs voor
-    parkeergelegenheid onderdeel is van de netto huur gebruik dan componentsoort Netto
-    Huur in combinatie met een prijscomponentdetailsoort.
+    parkeergelegenheid onderdeel is van de netto huur gebruik dan componentsoort
+    Netto Huur in combinatie met een prijscomponentdetailsoort.
     """
 
     service = Referentiedata(

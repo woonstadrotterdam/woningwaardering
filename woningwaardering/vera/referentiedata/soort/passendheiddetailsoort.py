@@ -8,8 +8,8 @@ class Passendheiddetailsoort:
     )
     """
     Niet-passende toewijzing, noodzakelijk geacht omdat sprake is van een bijzondere
-    woonbehoefte waarvoor geen regulier passende woning beschikbaar is. Bijvoorbeeld een
-    zeer groot gezin of een bijzondere gezinssamenstelling.
+    woonbehoefte waarvoor geen regulier passende woning beschikbaar is. Bijvoorbeeld
+    een zeer groot gezin of een bijzondere gezinssamenstelling.
     """
 
     herstructurering = Referentiedata(

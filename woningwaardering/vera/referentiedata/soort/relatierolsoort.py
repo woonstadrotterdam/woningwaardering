@@ -51,7 +51,8 @@ class Relatierolsoort:
     """
     Betaler, vooral van belang als de betaler een andere relatie is dan de huurder of
     contractant. Iemand anders betaalt dan namens de huurder, vanaf een eigen
-    bankrekening. Zie ook Bewindvoerder (die vanaf de rekening van de huurder betaalt).
+    bankrekening. Zie ook Bewindvoerder (die vanaf de rekening van de huurder
+    betaalt).
     """
 
     bewoner = Referentiedata(
@@ -81,9 +82,9 @@ class Relatierolsoort:
     )
     """
     Synoniem: budgetbeheerder. De relatie is budgetcoach van een andere relatie zonder
-    rechterlijke beschikking en voert financieel beheer voor deze relatie uit. Voor het
-    financieel beheer wordt een aparte beheerrekening geopend waarvan betalingen voor de
-    vaste lasten worden uitgevoerd door budgetcoach.
+    rechterlijke beschikking en voert financieel beheer voor deze relatie uit. Voor
+    het financieel beheer wordt een aparte beheerrekening geopend waarvan betalingen
+    voor de vaste lasten worden uitgevoerd door budgetcoach.
     """
 
     bewindvoerder = Referentiedata(
@@ -92,9 +93,9 @@ class Relatierolsoort:
     )
     """
     De relatie is bewindvoerder van een andere relatie, bijvoorbeeld in het kader van de
-    WSNP (Huurder Jansen staat onder bewindvoering van meneer Karelse). De bewindvoerder
-    betaalt vanaf de bankrekening van de huurder. Zie ook Betaler (namens een huurder
-    betaalt, maar vanaf een eigen bankrekening)
+    WSNP (Huurder Jansen staat onder bewindvoering van meneer Karelse). De
+    bewindvoerder betaalt vanaf de bankrekening van de huurder. Zie ook Betaler
+    (namens een huurder betaalt, maar vanaf een eigen bankrekening)
     """
 
     wooncooperatie_lid = Referentiedata(
@@ -113,14 +114,14 @@ class Relatierolsoort:
     )
     """
     Een wooncoöperatie is een vereniging waarvan de leden tevens eigenaren zijn en die
-    voorziet in bepaalde materiële behoefte van de deelnemers.De wooncoöperatie is de
-    meest verregaande vorm van zelforganisatie waarin bewoners voor het onderhoud en
-    beheer van hun woningen zelf verantwoordelijk zijn. Sinds 1 juli 2015 maakt de
-    wooncoöperatie deel uit van de Woningwet: Groepen met interesse kunnen ondersteuning
-    krijgen bij het opstellen van een plan en dat indienen bij hun corporatie. Er zijn
-    daarnaast steeds meer groepen die zelf een stuk grond willen bebouwen en de woningen
-    aan hun leden willen verhure (CORA).  Niet te verwarren met de relatierolsoort
-    Wooncoöperatie-lid
+    voorziet in bepaalde materiële behoefte van de deelnemers.De wooncoöperatie is
+    de meest verregaande vorm van zelforganisatie waarin bewoners voor het onderhoud
+    en beheer van hun woningen zelf verantwoordelijk zijn. Sinds 1 juli 2015 maakt
+    de wooncoöperatie deel uit van de Woningwet: Groepen met interesse kunnen
+    ondersteuning krijgen bij het opstellen van een plan en dat indienen bij hun
+    corporatie. Er zijn daarnaast steeds meer groepen die zelf een stuk grond willen
+    bebouwen en de woningen aan hun leden willen verhure (CORA).  Niet te verwarren
+    met de relatierolsoort Wooncoöperatie-lid
     """
 
     contactpersoon = Referentiedata(
@@ -147,10 +148,10 @@ class Relatierolsoort:
     )
     """
     Een eigenaar van vastgoed kan een VVE-lid zijn indien het eigendom een
-    appartementsrecht betreft. Indien sprake is van bloot eigendom, dan is de eigenaar
-    geen VVE-lid. De eigenaar kan het appartementsrecht of bloot eigendom hebben gekocht
-    van de woningcorporatie (CORA). Bij een koop-/verkooptransactie heeft de eigenaar
-    tevens de rol van verkoper.
+    appartementsrecht betreft. Indien sprake is van bloot eigendom, dan is de
+    eigenaar geen VVE-lid. De eigenaar kan het appartementsrecht of bloot eigendom
+    hebben gekocht van de woningcorporatie (CORA). Bij een koop-/verkooptransactie
+    heeft de eigenaar tevens de rol van verkoper.
     """
 
     erfpachter = Referentiedata(
@@ -160,7 +161,8 @@ class Relatierolsoort:
     """
     De erfpachter is de persoon of organisatie die eigenaar is van het object waarop de
     erfpacht rust. De erfpachter betaalt de canon. Erfpacht is overdraagbaar en gaat
-    over met de verkoop van de woning, het appartement of ander onroerend goed (CORA)
+    over met de verkoop van de woning, het appartement of ander onroerend goed
+    (CORA)
     """
 
     fiatteur = Referentiedata(
@@ -186,8 +188,8 @@ class Relatierolsoort:
     )
     """
     Persoon die een eenheid gebruikt, maar niet zozeer bewoont. Vooral van toepassing
-    bij niet-woongelegenheden, zoals BOG en MOG. Als de gebruiker ook de huurder is, dan
-    ook ook Huurder worden gebruikt. Zie ook Bewoner.
+    bij niet-woongelegenheden, zoals BOG en MOG. Als de gebruiker ook de huurder is,
+    dan ook ook Huurder worden gebruikt. Zie ook Bewoner.
     """
 
     geldnemer = Referentiedata(
@@ -213,8 +215,8 @@ class Relatierolsoort:
     """
     De huurder is een de (rechts)persoon die met de woningcorporatie een
     huurovereenkomst heeft gesloten en daarmee het exclusief gebruiksrecht heeft
-    verkregen van het vastgoed dat aan de huurder wordt verhuurd en waarvoor de huurder
-    een netto huur betaald (CORA). Synoniem aan het begrip Hoofdhuurder
+    verkregen van het vastgoed dat aan de huurder wordt verhuurd en waarvoor de
+    huurder een netto huur betaald (CORA). Synoniem aan het begrip Hoofdhuurder
     """
 
     inspecteur = Referentiedata(
@@ -231,12 +233,12 @@ class Relatierolsoort:
     )
     """
     De koper verkrijgt het bloot eigendom van de opstal (evt. in combinatie met het
-    bloot eigendom of het pachtrecht van het onderliggende perceel respectievelijk het
-    appartementsrecht) en kan afhankelijk van de regeling op termijn verkoper zijn van
-    de opstal (met verzoek beeindiging van vigerende erfpachtregeling) of het
-    appartementsrecht. Koper wordt dus verkoper indien sprake is van het proces
-    terugkopen eenheid. (CORA). De verkoper is de eigenaar van de eenheid, op het moment
-    van verkoop
+    bloot eigendom of het pachtrecht van het onderliggende perceel respectievelijk
+    het appartementsrecht) en kan afhankelijk van de regeling op termijn verkoper
+    zijn van de opstal (met verzoek beeindiging van vigerende erfpachtregeling) of
+    het appartementsrecht. Koper wordt dus verkoper indien sprake is van het proces
+    terugkopen eenheid. (CORA). De verkoper is de eigenaar van de eenheid, op het
+    moment van verkoop
     """
 
     leverancier = Referentiedata(
@@ -342,8 +344,8 @@ class Relatierolsoort:
     )
     """
     Een prospect is een relatie die belangstelling heeft om een dienst of product van de
-    woningcorporatie af te nemen. Gebruik eventueel Woningzoekende om meer concreet te
-    zijn.
+    woningcorporatie af te nemen. Gebruik eventueel Woningzoekende om meer concreet
+    te zijn.
     """
 
     secretaris = Referentiedata(
@@ -386,10 +388,11 @@ class Relatierolsoort:
     )
     """
     Dit is de vereniging die is ontstaan na een (onder)splitsing en als vereniging
-    verantwoordelijk is voor het beheer van de collectieve delen van het vastgoed zoals
-    die in de splitsingsakte zijn beschreven. Een vereniging van Eigenaren kan weer zelf
-    lid zijn van een andere vereniging van Eigenaren indien sprake is van een hoofd- en
-    ondersplitsing (CORA).Niet te verwarren met de relatierolsoort VvE-lid
+    verantwoordelijk is voor het beheer van de collectieve delen van het vastgoed
+    zoals die in de splitsingsakte zijn beschreven. Een vereniging van Eigenaren kan
+    weer zelf lid zijn van een andere vereniging van Eigenaren indien sprake is van
+    een hoofd- en ondersplitsing (CORA).Niet te verwarren met de relatierolsoort
+    VvE-lid
     """
 
     vve_lid = Referentiedata(
@@ -398,10 +401,10 @@ class Relatierolsoort:
     )
     """
     Een eigenaar van een appartementsrecht is vanuit die hoedanigheid altijd lid van de
-    rechtspersoon VvE. Een VvE-lid kan een natuurlijk persoon of een rechtspersoon zijn.
-     (CORA). Niet te verwarren met de relatierolsoort VvE (rechtspersoon). Let op dat
-    voor bestuursleden afzonderlijke relatierolsoorten beschikbaar zijn: Bestuurslid,
-    Voorzitter, Penningmeester, Secretaris.
+    rechtspersoon VvE. Een VvE-lid kan een natuurlijk persoon of een rechtspersoon
+    zijn.  (CORA). Niet te verwarren met de relatierolsoort VvE (rechtspersoon). Let
+    op dat voor bestuursleden afzonderlijke relatierolsoorten beschikbaar zijn:
+    Bestuurslid, Voorzitter, Penningmeester, Secretaris.
     """
 
     woningzoekende = Referentiedata(
@@ -410,10 +413,10 @@ class Relatierolsoort:
     )
     """
     Een woningzoekende is een persoon die zich heeft gemeld/ingeschreven met de intentie
-    (met het nog te vormen) huishouden te verhuizen naar een andere woning en daarvoor
-    woonwensen kenbaar heeft gemaakt en graag in aanmerking komt voor passend vrijkomend
-    woningaanbod. Zodra de woningzoekende dient te betalen voor de inschrijving, is
-    sprake van een klantrelatie. Synoniem aan Hoofdaanvrager
+    (met het nog te vormen) huishouden te verhuizen naar een andere woning en
+    daarvoor woonwensen kenbaar heeft gemaakt en graag in aanmerking komt voor
+    passend vrijkomend woningaanbod. Zodra de woningzoekende dient te betalen voor
+    de inschrijving, is sprake van een klantrelatie. Synoniem aan Hoofdaanvrager
     """
 
     woonconsulent = Referentiedata(

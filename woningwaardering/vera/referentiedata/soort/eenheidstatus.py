@@ -28,8 +28,8 @@ class Eenheidstatus:
     )
     """
     De eenheid is (nog) niet in exploitatie omdat deze in ontwikkeling is. Gebruik
-    eventueel een detailstatus om aan te geven in welke fase van het ontwikkelingsproces
-    de eenheid zich bevindt
+    eventueel een detailstatus om aan te geven in welke fase van het
+    ontwikkelingsproces de eenheid zich bevindt
     """
 
     uit_exploitatie = Referentiedata(

@@ -17,8 +17,8 @@ class Eindereden:
     )
     """
     Een overeenkomst wordt of is beëindigd omdat een van de partijen deze opzegt. Dit is
-    alleen mogelijk bij bepaalde benoemde overeenkomsten, zoals een huurovereenkomst of
-    een arbeidsovereenkomst.
+    alleen mogelijk bij bepaalde benoemde overeenkomsten, zoals een huurovereenkomst
+    of een arbeidsovereenkomst.
     """
 
     vernietiging = Referentiedata(
@@ -27,6 +27,6 @@ class Eindereden:
     )
     """
     Een overeenkomst wordt of is beëindigd (eventueel met terugwerkende kracht) omdat
-    sprake is van een zogenaamd wilsgebrek (bedreiging, bedrog, dwaling, misbruik van
-    omstandigheden)
+    sprake is van een zogenaamd wilsgebrek (bedreiging, bedrog, dwaling, misbruik
+    van omstandigheden)
     """

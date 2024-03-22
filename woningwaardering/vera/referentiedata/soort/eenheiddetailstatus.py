@@ -51,10 +51,10 @@ class Eenheiddetailstatus:
     )
     """
     Frictieleegstand, ontstaan doordat er nog geen nieuwe huurder is gevonden, waarbij
-    geldt dat er sprake is van een niet-regulier toewijzingsproces of een niet-reguliere
-    beoogd huurder. Het betreft de leegstand vanaf het moment waarop de woning klaar is
-    voor verhuur (nadat eventueel mutatieonderhoud is afgerond) totdat de overeenkomst
-    met een nieuwe, niet-reguliere, huurder ingaat.
+    geldt dat er sprake is van een niet-regulier toewijzingsproces of een
+    niet-reguliere beoogd huurder. Het betreft de leegstand vanaf het moment waarop
+    de woning klaar is voor verhuur (nadat eventueel mutatieonderhoud is afgerond)
+    totdat de overeenkomst met een nieuwe, niet-reguliere, huurder ingaat.
     """
 
     nieuwbouw = Referentiedata(
@@ -71,10 +71,10 @@ class Eenheiddetailstatus:
     )
     """
     Frictieleegstand, ontstaan doordat er nog geen nieuwe huurder is gevonden, zonder
-    dat daar een speciale oorzaak voor is (het reguliere matching proces duurt langer
-    dan gewenst). Het betreft de leegstand vanaf het moment waarop de woning klaar is
-    voor verhuur (nadat eventueel mutatieonderhoud is afgerond) totdat de overeenkomst
-    met een nieuwe huurder ingaat.
+    dat daar een speciale oorzaak voor is (het reguliere matching proces duurt
+    langer dan gewenst). Het betreft de leegstand vanaf het moment waarop de woning
+    klaar is voor verhuur (nadat eventueel mutatieonderhoud is afgerond) totdat de
+    overeenkomst met een nieuwe huurder ingaat.
     """
 
     oplevering = Referentiedata(

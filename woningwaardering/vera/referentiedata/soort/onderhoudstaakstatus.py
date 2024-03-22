@@ -40,8 +40,8 @@ class Onderhoudstaakstatus:
     )
     """
     De taak is onderbroken door de vakman omdat hij niet verder kan met de uitvoering.
-    Een reden kan zijn dat de vakman niet de juiste discipline heeft of dat er materiaal
-    besteld moet worden
+    Een reden kan zijn dat de vakman niet de juiste discipline heeft of dat er
+    materiaal besteld moet worden
     """
 
     gepauzeerd = Referentiedata(

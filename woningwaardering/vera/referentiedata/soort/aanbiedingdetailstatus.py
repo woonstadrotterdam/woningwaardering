@@ -17,8 +17,8 @@ class Aanbiedingdetailstatus:
     )
     """
     Bij het verlenen van huisvestingsvergunningen wordt voorrang gegeven aan
-    woningzoekenden die voldoen aan in die verordening vastgelegde sociaal-economische
-    kenmerken. Conform Artikel 9 (WBMGP).
+    woningzoekenden die voldoen aan in die verordening vastgelegde
+    sociaal-economische kenmerken. Conform Artikel 9 (WBMGP).
     """
 
     buitenruimte_bevalt_niet = Referentiedata(
@@ -81,10 +81,10 @@ class Aanbiedingdetailstatus:
     )
     """
     De huisvestingsvergoeding is niet verleend door een gegrond vermoeden dat het
-    huisvesten van de personen van 16 jaar en ouder die zich in een woonruimte in dat
-    complex, die straat of dat gebied willen huisvesten, zal leiden tot een toename van
-    overlast of criminaliteit in dat complex, die straat of dat gebied. Conform artikel
-    10 (WBMGP).
+    huisvesten van de personen van 16 jaar en ouder die zich in een woonruimte in
+    dat complex, die straat of dat gebied willen huisvesten, zal leiden tot een
+    toename van overlast of criminaliteit in dat complex, die straat of dat gebied.
+    Conform artikel 10 (WBMGP).
     """
 
     huurprijs_te_hoog = Referentiedata(

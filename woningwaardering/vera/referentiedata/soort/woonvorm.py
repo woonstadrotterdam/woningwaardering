@@ -60,8 +60,8 @@ class Woonvorm:
     )
     """
     Senioren woningen met zorg (voorheen Wibo-wonen in beschermde omgeving) zijn bij
-    elkaar gelegen zelfstandige (aanleun)woningen met een dienstencentrum met allerlei
-    voorzieningen dichtbij.
+    elkaar gelegen zelfstandige (aanleun)woningen met een dienstencentrum met
+    allerlei voorzieningen dichtbij.
     """
 
     thomashuis = Referentiedata(

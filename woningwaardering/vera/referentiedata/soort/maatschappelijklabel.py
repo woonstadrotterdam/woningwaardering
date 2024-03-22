@@ -10,8 +10,8 @@ class Maatschappelijklabel:
     Als attribuut van klasse Eenheid: Geeft aan dat de eenheid tot de DAEB-tak behoort.
     Als attribuut van klasse Huurovereenkomst: Geeft aan dat de verhuring als zijnde
     DAEB verantwoord wordt. Dit is gelijk aan een gereguleerd huurovereenkomst. Als
-    attribuut van de klasse FinancieelBedrijf: Geeft aan of de bedrijfsactiviteiten als
-    DAEB verantwoord worden.
+    attribuut van de klasse FinancieelBedrijf: Geeft aan of de bedrijfsactiviteiten
+    als DAEB verantwoord worden.
     """
 
     geconsolideerde_niet_daeb_verbinding = Referentiedata(
@@ -29,8 +29,8 @@ class Maatschappelijklabel:
     )
     """
     Als attribuut van klasse Eenheid: Geeft aan dat de eenheid tot de niet-DAEB-tak
-    behoort. Als attribuut van klasse Huurovereenkomst: Geeft aan dat de verhuring als
-    zijnde niet-DAEB verantwoord wordt. Dit is gelijk aan een geliberaliseerde
+    behoort. Als attribuut van klasse Huurovereenkomst: Geeft aan dat de verhuring
+    als zijnde niet-DAEB verantwoord wordt. Dit is gelijk aan een geliberaliseerde
     huurovereenkomst. Als attribuut van de klasse FinancieelBedrijf: Geeft aan of de
     bedrijfsactiviteiten als NIET-DAEB verantwoord worden.
     """

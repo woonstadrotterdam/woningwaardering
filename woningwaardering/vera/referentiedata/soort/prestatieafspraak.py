@@ -8,6 +8,6 @@ class Prestatieafspraak:
     )
     """
     Inkomensafhankelijke huurverhoging boven normpercentage waarvoor gemeente,
-    corporatie en huurdersorganisatie hebben afgesproken dat zij de meeropbrengsten van
-    die hogere huurverhoging gebruiken voor investeringen.
+    corporatie en huurdersorganisatie hebben afgesproken dat zij de meeropbrengsten
+    van die hogere huurverhoging gebruiken voor investeringen.
     """

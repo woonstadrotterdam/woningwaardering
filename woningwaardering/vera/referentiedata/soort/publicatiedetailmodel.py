@@ -24,9 +24,9 @@ class Publicatiedetailmodel:
     )
     """
     Ccontract dat de eerste periode, bijv. een jaar, op naam van een zorgaanbieder of
-    begeleidende instantie staat, die de woning doorverhuurt aan een kandidaat die moet
-    leren zelfstandig te wonen: als dit goed uitpakt wordt het contract omgeklapt,
-    d.w.z. komt het op zijn eigen naam te staan.
+    begeleidende instantie staat, die de woning doorverhuurt aan een kandidaat die
+    moet leren zelfstandig te wonen: als dit goed uitpakt wordt het contract
+    omgeklapt, d.w.z. komt het op zijn eigen naam te staan.
     """
 
     snelzoek = Referentiedata(

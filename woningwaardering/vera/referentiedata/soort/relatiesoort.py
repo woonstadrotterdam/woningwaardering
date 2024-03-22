@@ -26,6 +26,6 @@ class Relatiesoort:
     """
     Een rechtspersoon is een juridische constructie waardoor een abstracte entiteit of
     organisatie op kan treden als een volwaardig en handelingsbekwaam persoon in het
-    rechtsverkeer behept met rechten en plichten zoals een natuurlijk persoon dat kan
-    doen.
+    rechtsverkeer behept met rechten en plichten zoals een natuurlijk persoon dat
+    kan doen.
     """

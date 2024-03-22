@@ -8,8 +8,8 @@ class Passendheidssoort:
     )
     """
     De toewijzing is niet-passend volgens de Woningwet (toewijzen betaalbare woning aan
-    huishoudens met huurtoeslag). Om een niet-passende toewijzing nader te verantwoorden
-    kan passendheiddetailsoort worden gebruikt.
+    huishoudens met huurtoeslag). Om een niet-passende toewijzing nader te
+    verantwoorden kan passendheiddetailsoort worden gebruikt.
     """
 
     passendheidtoets_niet_van_toepassing = Referentiedata(

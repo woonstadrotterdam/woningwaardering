@@ -71,7 +71,8 @@ class Boekingdetailsoort:
     )
     """
     Boeking voor een verzamelnota van alle openstaande vorderingen en schulden van een
-    vertrekkende huurder, dan wel de ontvangst of uitbetaling naar aanleiding daarvan.
+    vertrekkende huurder, dan wel de ontvangst of uitbetaling naar aanleiding
+    daarvan.
     """
 
     eerste_verhuurnota = Referentiedata(

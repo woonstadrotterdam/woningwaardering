@@ -8,9 +8,9 @@ class Onderhoudsoort:
     )
     """
     Opdracht tot het uitvoeren van inspectie-/inventarisatie-werkzaamheden om vast te
-    stellen óf en zo ja welke onderhoudswerkzaamheden moeten worden uitgevoerd. Dit kan
-    een inspectie zijn naar aanleiding van een onduidelijk reparatieverzoek of naar
-    aanleiding van een verhuurmutatie.
+    stellen óf en zo ja welke onderhoudswerkzaamheden moeten worden uitgevoerd. Dit
+    kan een inspectie zijn naar aanleiding van een onduidelijk reparatieverzoek of
+    naar aanleiding van een verhuurmutatie.
     """
 
     mutatie = Referentiedata(

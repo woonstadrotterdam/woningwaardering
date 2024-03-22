@@ -54,8 +54,8 @@ class Ruimtedetailsoort:
     )
     """
     Overige ruimte: grenzend aan de eigenlijke keuken die voor ondersteunende
-    huishoudelijke handelingen gebruikt wordt, zoals wassen, drogen en strijken, maar
-    ook voor het opbergen en bewaren van (etens)voorraden en schoonmaakspullen.
+    huishoudelijke handelingen gebruikt wordt, zoals wassen, drogen en strijken,
+    maar ook voor het opbergen en bewaren van (etens)voorraden en schoonmaakspullen.
     """
 
     carport = Referentiedata(
@@ -93,8 +93,8 @@ class Ruimtedetailsoort:
     )
     """
     Ruimte : is een betrekkelijk smalle en lange ruimte omgeven door muren en afgedekt
-    door een plafond of zoldering, in een gebouw, als verbinding van vertrekken waarvan
-    de deuren erop uitkomen.
+    door een plafond of zoldering, in een gebouw, als verbinding van vertrekken
+    waarvan de deuren erop uitkomen.
     """
 
     garage = Referentiedata(
@@ -331,11 +331,11 @@ class Ruimtedetailsoort:
     )
     """
     Overige ruimte: is de bovenste verdieping direct onder het dak van een gebouw met
-    een vaste trap zoals gedefinieerd voor het bepalen van de woningwaardering. De term
-    wordt vooral gebruikt bij gebouwen met een puntdak. De bovenste verdieping van een
-    gebouw met plat dak wordt meestal geen zolder genoemd. Een ruimte mag als vertrek
-    worden gezien indien deze een vast trap heeft, de vloer begaanbaar en het dak
-    beschoten is. Zolders zonder vaste trap leggen we niet vast als vertrek. Indien een
-    woning een zolder heeft met een vlizotrap kan dit in de advertentietekst worden
-    gemeld.
+    een vaste trap zoals gedefinieerd voor het bepalen van de woningwaardering. De
+    term wordt vooral gebruikt bij gebouwen met een puntdak. De bovenste verdieping
+    van een gebouw met plat dak wordt meestal geen zolder genoemd. Een ruimte mag
+    als vertrek worden gezien indien deze een vast trap heeft, de vloer begaanbaar
+    en het dak beschoten is. Zolders zonder vaste trap leggen we niet vast als
+    vertrek. Indien een woning een zolder heeft met een vlizotrap kan dit in de
+    advertentietekst worden gemeld.
     """

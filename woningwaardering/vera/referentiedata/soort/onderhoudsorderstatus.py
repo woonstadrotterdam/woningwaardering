@@ -16,8 +16,8 @@ class Onderhoudsorderstatus:
     )
     """
     De order is technisch beoordeeld  en akkoord voor financiele afwikkeling. Op dat
-    moment kan een eventueel externe onderhoudspartner de facturatie verzorgen van de
-    onderhoudsorder
+    moment kan een eventueel externe onderhoudspartner de facturatie verzorgen van
+    de onderhoudsorder
     """
 
     geannuleerd = Referentiedata(
@@ -42,9 +42,9 @@ class Onderhoudsorderstatus:
     )
     """
     De order is opgepakt door de uitvoerende partij (vakgroep of externe
-    onderhoudspartner) nadat deze gepland is. Deze status kan ook gebruikt worden als
-    algemene status voor het in behandeling hebben van de order door de uitvoerende
-    partij (geen differentiatie tussen gegeund, gepland, etc)
+    onderhoudspartner) nadat deze gepland is. Deze status kan ook gebruikt worden
+    als algemene status voor het in behandeling hebben van de order door de
+    uitvoerende partij (geen differentiatie tussen gegeund, gepland, etc)
     """
 
     offertetraject = Referentiedata(

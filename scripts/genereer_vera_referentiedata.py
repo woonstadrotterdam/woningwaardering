@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 import datetime
 import requests
 from loguru import logger
+import textwrap
 
 output_folder = "woningwaardering/vera/referentiedata"
 soort_folder = os.path.join(output_folder, "soort")
@@ -78,7 +79,8 @@ environment.filters["regex_replace"] = regex_replace
 
 
 def split_long_line(s: str) -> str:
-    return re.sub(r"(.{1,84})(\s|$)", r"\1\n    ", s).rstrip()
+    lines = textwrap.wrap(s, width=84, break_on_hyphens=False, subsequent_indent="    ")
+    return "\n".join(lines)
 
 
 environment.filters["split_long_line"] = split_long_line

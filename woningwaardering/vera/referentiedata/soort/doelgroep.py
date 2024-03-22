@@ -25,7 +25,8 @@ class Doelgroep:
     )
     """
     Huishouden zonder kinderen - Eén of meerdere volwassen personen (tot een bepaald
-    maximum leeftijd) die samen een huishouden vormen en (nog) geen kinderen verzorgen.
+    maximum leeftijd) die samen een huishouden vormen en (nog) geen kinderen
+    verzorgen.
     """
 
     jongeren = Referentiedata(

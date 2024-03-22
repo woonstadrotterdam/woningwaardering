@@ -19,8 +19,8 @@ class Eenheidsoort:
     van zorg met verblijf geboden (op grond van Wet Langdurige Zorg (WLZ) of
     Zorgverzekeringswet (ZVW) in een beschermde omgeving. De cliënten hebben géén
     huurcontract en er is dus geen sprake van toewijzing van woonruimte. Het kan
-    bijvoorbeeld gaan om een verpleeg- of verzorgingshuis, instelling voor gehandicapten
-    of instelling voor cliënten met langdurige psychische problemen.
+    bijvoorbeeld gaan om een verpleeg- of verzorgingshuis, instelling voor
+    gehandicapten of instelling voor cliënten met langdurige psychische problemen.
     """
 
     maatschappelijk_vastgoed = Referentiedata(

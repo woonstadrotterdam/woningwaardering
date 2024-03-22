@@ -9,11 +9,11 @@ class Regiesoort:
     """
     De aannemende partij wordt al tijdens de ontwerpfase bij het project betrokken. Deze
     aanpak zorgt ervoor dat uitvoerende expertise reeds in een vroeg stadium van het
-    bouwproject beschikbaar is: de aannemer heeft meer verantwoordelijkheid en draagt
-    actief bij aan het verfijnen van het ontwerp (bron:
+    bouwproject beschikbaar is: de aannemer heeft meer verantwoordelijkheid en
+    draagt actief bij aan het verfijnen van het ontwerp (bron:
     https://www.igg.nl/diensten/bouworganisatievormen/).Wordt ook wel een
-    twee-fasen-contract genoemd, omdat er sprake is van een bouwteamfase en daarna een
-    realisatiefase.
+    twee-fasen-contract genoemd, omdat er sprake is van een bouwteamfase en daarna
+    een realisatiefase.
     """
 
     traditioneel = Referentiedata(
@@ -34,8 +34,8 @@ class Regiesoort:
     )
     """
     Bij Turn-Key bouwprojecten is de opdrachtgever meestal alleen betrokken bij het
-    opstellen van het Programma van Eisen. Het PvE wordt vervolgens overgedragen aan één
-    opdrachtnemer die de verantwoordelijkheid krijgt voor het gehele resultaat en zorgt
-    dat alles conform de wensen van de opdrachtgever wordt opgeleverd (bron:
-    https://www.igg.nl/diensten/bouworganisatievormen/).
+    opstellen van het Programma van Eisen. Het PvE wordt vervolgens overgedragen aan
+    één opdrachtnemer die de verantwoordelijkheid krijgt voor het gehele resultaat
+    en zorgt dat alles conform de wensen van de opdrachtgever wordt opgeleverd
+    (bron: https://www.igg.nl/diensten/bouworganisatievormen/).
     """

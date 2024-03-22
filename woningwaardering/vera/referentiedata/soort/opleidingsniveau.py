@@ -66,8 +66,8 @@ class Opleidingsniveau:
     )
     """
     Iemand die door een geaccrediteerde instelling formeel erkend is als iemand die
-    uitzicht heeft op een promotie tot de academische graad van doctor.LET OP: In VERA
-    4.0 wordt code PRO vervangen door code PHD
+    uitzicht heeft op een promotie tot de academische graad van doctor.LET OP: In
+    VERA 4.0 wordt code PRO vervangen door code PHD
     """
 
     voorbereidend_middelbaar_beroeps_onderwijs = Referentiedata(

@@ -42,9 +42,9 @@ class Prijscomponentdetailsoort:
     )
     """
     De maandelijkse kosten voor reparaties en groot onderhoud aan dienstruimten en
-    recreatieruimten. Deze kosten komen meestal voor bij senioren- of bejaardenwoningen.
-    Het gaat niet om de inventaris, het schoonmaken van de ruimten of onderhoud aan de
-    tuin.
+    recreatieruimten. Deze kosten komen meestal voor bij senioren- of
+    bejaardenwoningen. Het gaat niet om de inventaris, het schoonmaken van de
+    ruimten of onderhoud aan de tuin.
     """
 
     electriciteit = Referentiedata(
@@ -213,8 +213,8 @@ class Prijscomponentdetailsoort:
     )
     """
     Component voor het matigen van de huurprijs op basis van toegekende huurtoeslag
-    conform de wettelijke regeling van vóór 2014. Dit component is alleen bedoeld voor
-    het uitwisselen van historische data
+    conform de wettelijke regeling van vóór 2014. Dit component is alleen bedoeld
+    voor het uitwisselen van historische data
     """
 
     mechanische_ventilatie = Referentiedata(
@@ -246,8 +246,8 @@ class Prijscomponentdetailsoort:
     )
     """
     Een overige netto huur component wordt bijvoorbeeld gebruikt om de extra huur na het
-    aanbrengen van (verduurzamings-) verbeteringen te onderscheiden van de basis kale
-    huur.
+    aanbrengen van (verduurzamings-) verbeteringen te onderscheiden van de basis
+    kale huur.
     """
 
     overige_kosten_gem_ruimten = Referentiedata(

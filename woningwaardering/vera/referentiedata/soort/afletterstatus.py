@@ -10,7 +10,8 @@ class Afletterstatus:
     Boeking is deels afgeletterd tegen andere boekingen. Voor vorderingen houdt dit in
     dat er betalingen zijn gedaan maar dat er nog een openstaand saldo is. Voor
     ontvangsten betekent dit dat een deel van de ontvangst is afgeletterd tegen een
-    vordering maar dat er nog saldo op de boeking staat die nog gekoppeld moet worden.
+    vordering maar dat er nog saldo op de boeking staat die nog gekoppeld moet
+    worden.
     """
 
     niet_afgeletterd = Referentiedata(
@@ -19,8 +20,8 @@ class Afletterstatus:
     )
     """
     Boeking is (nog) niet afgeletterd tegen andere boekingen. Voor vorderingen houdt dit
-    in dat deze nog volledig open staat. Voor ontvangsten betekent dit dat deze nog niet
-    gekoppeld is aan een vordering.
+    in dat deze nog volledig open staat. Voor ontvangsten betekent dit dat deze nog
+    niet gekoppeld is aan een vordering.
     """
 
     volledig_afgeletterd = Referentiedata(

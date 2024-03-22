@@ -8,10 +8,10 @@ class Eenheidklimaatbeheersing:
     )
     """
     Een airconditioner (airco) is een apparaat dat de luchttemperatuur en vochtigheid in
-    een ruimte regelt voor comfortabele omstandigheden. Het werkt door warme lucht uit
-    de ruimte te verwijderen, te koelen via een koelmiddel zoals freon, en vervolgens
-    gekoelde lucht terug te blazen om de gewenste temperatuur te handhaven. Dit kan
-    zowel individueel als collectief georganiseerd zijn.
+    een ruimte regelt voor comfortabele omstandigheden. Het werkt door warme lucht
+    uit de ruimte te verwijderen, te koelen via een koelmiddel zoals freon, en
+    vervolgens gekoelde lucht terug te blazen om de gewenste temperatuur te
+    handhaven. Dit kan zowel individueel als collectief georganiseerd zijn.
     """
 
     blokverwarming = Referentiedata(
@@ -32,11 +32,11 @@ class Eenheidklimaatbeheersing:
     )
     """
     Centrale verwarming is een systeem waarbij warmte wordt geproduceerd op één centrale
-    locatie, meestal een ketel, en vervolgens via leidingen naar verschillende ruimtes
-    in een gebouw wordt verspreid. Dit wordt vaak gedaan door radiatoren,
-    vloerverwarming of convectoren, waardoor een gelijkmatige warmteverdeling door het
-    hele gebouw wordt bereikt. Dit kan zowel individueel als collectief georganiseerd
-    zijn.
+    locatie, meestal een ketel, en vervolgens via leidingen naar verschillende
+    ruimtes in een gebouw wordt verspreid. Dit wordt vaak gedaan door radiatoren,
+    vloerverwarming of convectoren, waardoor een gelijkmatige warmteverdeling door
+    het hele gebouw wordt bereikt. Dit kan zowel individueel als collectief
+    georganiseerd zijn.
     """
 
     gaskachels = Referentiedata(
@@ -55,8 +55,8 @@ class Eenheidklimaatbeheersing:
     )
     """
     Een houtkachel is een verwarmingstoestel dat brandt op hout als brandstof. Het heeft
-    een vuurhaard waarin hout wordt verbrand om warmte te genereren, waardoor een ruimte
-    wordt verwarmd voor comfort.
+    een vuurhaard waarin hout wordt verbrand om warmte te genereren, waardoor een
+    ruimte wordt verwarmd voor comfort.
     """
 
     muurverwarming = Referentiedata(
@@ -75,9 +75,9 @@ class Eenheidklimaatbeheersing:
     )
     """
     Mechanische ventilatie is een systeem dat wordt gebruikt om verse lucht in gebouwen
-    te brengen en vervuilde lucht af te voeren. Het maakt gebruik van ventilatoren om
-    luchtstromen te creëren en te reguleren voor een gezond binnenklimaat. Dit kan zowel
-    individueel als collectief georganiseerd zijn.
+    te brengen en vervuilde lucht af te voeren. Het maakt gebruik van ventilatoren
+    om luchtstromen te creëren en te reguleren voor een gezond binnenklimaat. Dit
+    kan zowel individueel als collectief georganiseerd zijn.
     """
 
     open_haard = Referentiedata(
@@ -96,10 +96,10 @@ class Eenheidklimaatbeheersing:
     )
     """
     Stadsverwarming is een systeem waarbij warmte wordt geproduceerd op één centrale
-    locatie, meestal een energiecentrale, en vervolgens via een netwerk van leidingen
-    naar huizen en bedrijven in een stad wordt getransporteerd. De warmte wordt gebruikt
-    voor ruimteverwarming, tapwaterverwarming en soms ook voor industriële processen,
-    wat bijdraagt aan energie-efficiëntie.
+    locatie, meestal een energiecentrale, en vervolgens via een netwerk van
+    leidingen naar huizen en bedrijven in een stad wordt getransporteerd. De warmte
+    wordt gebruikt voor ruimteverwarming, tapwaterverwarming en soms ook voor
+    industriële processen, wat bijdraagt aan energie-efficiëntie.
     """
 
     vloerverwarming = Referentiedata(
@@ -108,8 +108,8 @@ class Eenheidklimaatbeheersing:
     )
     """
     Vloerverwarming is een verwarmingssysteem waarbij warmte wordt afgegeven via
-    leidingen onder de vloer. Warm water stroomt door deze leidingen, waardoor de vloer
-    wordt verwarmd en de warmte gelijkmatig wordt verspreid in de ruimte.
+    leidingen onder de vloer. Warm water stroomt door deze leidingen, waardoor de
+    vloer wordt verwarmd en de warmte gelijkmatig wordt verspreid in de ruimte.
     """
 
     volledig_elektrisch = Referentiedata(
@@ -144,9 +144,9 @@ class Eenheidklimaatbeheersing:
     )
     """
     Een warmte-koudeopslaginstallatie (WKO) is een duurzaam verwarmingssysteem dat
-    warmte in de zomer uit een gebouw haalt en opslaat in de grond, om het in de winter
-    weer te gebruiken voor verwarming. Er is altijd sprake een (bodem-)waterpomp Dit kan
-    zowel individueel als collectief georganiseerd zijn.
+    warmte in de zomer uit een gebouw haalt en opslaat in de grond, om het in de
+    winter weer te gebruiken voor verwarming. Er is altijd sprake een
+    (bodem-)waterpomp Dit kan zowel individueel als collectief georganiseerd zijn.
     """
 
     warmteterugwinsysteem = Referentiedata(
@@ -155,7 +155,7 @@ class Eenheidklimaatbeheersing:
     )
     """
     Een warmteterugwinsysteem (WTW) is een installatie die de warmte uit afgevoerde
-    lucht recupereert en gebruikt om de binnenkomende verse lucht te verwarmen, waardoor
-    energie wordt bespaard en het binnenklimaat wordt verbeterd. Dit kan zowel
-    individueel als collectief georganiseerd zijn.
+    lucht recupereert en gebruikt om de binnenkomende verse lucht te verwarmen,
+    waardoor energie wordt bespaard en het binnenklimaat wordt verbeterd. Dit kan
+    zowel individueel als collectief georganiseerd zijn.
     """

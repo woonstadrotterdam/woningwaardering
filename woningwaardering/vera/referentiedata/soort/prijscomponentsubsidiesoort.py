@@ -19,6 +19,7 @@ class Prijscomponentsubsidiesoort:
     Het prijscomponent komt in aanmerking voor subsidie en valt binnen de Wet op de
     huurtoeslag.  Gebruik eventueel PRIJSCOMPONENTDETAILSOORT om een nadere
     verbijzondering aan te duiden. De volgende prijscomponentdetailsoorten zijn
-    subsidiabel: SCH - Schoonmaak van gemeenschappelijke ruimten / ENE - Energie voor
-    gemeenschappelijke ruimten /  HUI - Huismeester / DIE - Dienst- en recreatieruimten
+    subsidiabel: SCH - Schoonmaak van gemeenschappelijke ruimten / ENE - Energie
+    voor gemeenschappelijke ruimten /  HUI - Huismeester / DIE - Dienst- en
+    recreatieruimten
     """

@@ -68,8 +68,8 @@ class Bedrijfsoort:
     )
     """
     Financieel bedrijf die de regie van projectontwikkeling, uitvoering en beheer van
-    woningen in een wijk op zich neemt, omdat de complexiteit van een gebied te groot is
-    voor één partij (bijvoorbeeld een woningcorporatie).
+    woningen in een wijk op zich neemt, omdat de complexiteit van een gebied te
+    groot is voor één partij (bijvoorbeeld een woningcorporatie).
     """
 
     woonwagenzaken = Referentiedata(
