@@ -8,9 +8,7 @@ tasks:
         datamodel-codegen \
           --url https://raw.githubusercontent.com/Aedes-datastandaarden/vera-openapi/main/docs/Ketenprocessen/BVG.yaml \
           --output woningwaardering/vera/bvg/generated.py \
-          --class-name vera.bvg.models \
           --output-model-type pydantic_v2.BaseModel \
-          --input-file-type openapi \
           --use-standard-collections \
           --target-python-version 3.10 \
           --use-schema-description \
