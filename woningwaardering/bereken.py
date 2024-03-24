@@ -45,7 +45,7 @@ def select_geldige_stelsels(peildatum: str) -> list[Stelsel]:
             peildatum,
         ):
             logger.debug(f"Stelsel '{stelsel}' is geldig op peildatum {peildatum}.")
-            stelsel = import_class(
+            stelsel: Stelsel = import_class(
                 f"woningwaardering.stelsels.{stelsel}.{stelsel}", stelsel.capitalize()
             )
             stelsels.append(stelsel(peildatum=peildatum))
