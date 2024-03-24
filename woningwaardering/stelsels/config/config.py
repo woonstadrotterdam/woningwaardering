@@ -1,6 +1,8 @@
+import yaml
+
+from loguru import logger
 from typing import Dict, List, Union
 from pydantic import BaseModel, ValidationError
-import yaml
 
 
 class StelselgroepVersieConfig(BaseModel):
@@ -29,18 +31,13 @@ class StelselConfig(BaseModel):
             with open(path, "r") as file:
                 config = yaml.safe_load(file)
             stelsel_config = cls(**config)
+            logger.info(f'Configuratie voor stelsel "{stelsel}" geladen.')
             return stelsel_config
+
         except ValidationError as e:
-            print(e, "Geen valide stelsel configuratie.")
+            logger.error(e, f"Geen valide stelsel configuratie in {path}.")
             raise
+
         except FileNotFoundError as e:
-            print(e, f"Config file {path} is niet gevonden.")
+            logger.error(e, f"Config file {path} is niet gevonden.")
             raise
-
-
-stelsel_config = StelselConfig.load()
-# print(stelsel_config)
-print(type(stelsel_config))
-print(stelsel_config.stelselgroepen)
-for stelselgroep, config in stelsel_config.stelselgroepen.items():
-    print(config.versies)

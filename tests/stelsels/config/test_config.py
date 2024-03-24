@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from woningwaardering.stelsels import Config
+from woningwaardering.stelsels.config import Config
 
 
 @pytest.mark.parametrize("stelsel", ["zelfstandig"])

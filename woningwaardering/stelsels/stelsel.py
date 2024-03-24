@@ -1,7 +1,7 @@
 from datetime import date
 from typing import Any
 
-from woningwaardering.stelsels.config.config import Config
+from woningwaardering.stelsels.config import StelselConfig
 from woningwaardering.stelsels.stelselgroep import (
     StelselgroepVersie,
     select_geldige_stelselgroepversie,
@@ -34,7 +34,7 @@ class Stelsel:
         self.peildatum = (
             peildatum.strftime("%d-%m-%Y") if isinstance(peildatum, date) else peildatum
         )
-        self.stelsel_config = Config.load(stelsel=self.stelsel).model_dump()
+        self.stelsel_config = StelselConfig.load(stelsel=self.stelsel).model_dump()
         self.geldige_stelselgroepversies = select_geldige_stelselgroepversies(
             self.peildatum,
             self.stelsel,
@@ -91,11 +91,10 @@ def select_geldige_stelselgroepversies(
         ValueError: Als er geen geldige stelselgroepen zijn gevonden.
     """
     if config is None:
-        config = Config.load(stelsel=stelsel).model_dump()
-    stelsel_config = config["stelsel"]
+        stelsel_config = StelselConfig.load(stelsel=stelsel).model_dump()
     if not is_geldig(
-        stelsel_config[stelsel]["begindatum"],
-        stelsel_config[stelsel]["einddatum"],
+        stelsel_config.begindatum,
+        stelsel_config.einddatum,
         peildatum,
     ):
         raise ValueError(

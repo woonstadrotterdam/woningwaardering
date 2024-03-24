@@ -3,7 +3,7 @@ from typing import Any
 
 from loguru import logger
 
-from woningwaardering.stelsels.config.config import Config
+from woningwaardering.stelsels.config import StelselConfig
 from woningwaardering.utils import (
     import_class,
     is_geldig,
@@ -46,7 +46,7 @@ class Stelselgroep:
         self.stelsel = stelsel
         self.stelselgroep = stelselgroep
         if config is None:
-            config = Config.load(stelsel=self.stelsel).model_dump()
+            config = StelselConfig.load(stelsel=self.stelsel).model_dump()
         self.geldige_versie = select_geldige_stelselgroepversie(
             self.peildatum, self.stelsel, self.stelselgroep, config
         )
@@ -92,7 +92,7 @@ def select_geldige_stelselgroepversie(
         ValueError: Als er meerdere geldige stelselgroepen zijn gevonden met de opgegeven peildatum.
     """
     if not config:
-        config = Config.load(stelsel=stelsel).model_dump()
+        config = StelselConfig.load(stelsel=stelsel).model_dump()
 
     geldige_stelselgroep_versies = []
     stelselgroep_config = config["stelsel"][stelsel]["stelselgroepen"][stelselgroep]

@@ -2,7 +2,7 @@ from datetime import date
 
 from loguru import logger
 
-from woningwaardering.stelsels.config.config import Config
+from woningwaardering.stelsels.config import StelselConfig
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.utils import import_class, is_geldig, vind_yaml_bestanden
 from woningwaardering.vera.bvg.generated import (
@@ -37,7 +37,7 @@ def select_geldige_stelsels(peildatum: str) -> list[Stelsel]:
     stelsels = []
     for stelsel_yaml in vind_yaml_bestanden("./woningwaardering/stelsels/config/"):
         stelsel = stelsel_yaml.split("/")[-1].split(".")[0]
-        stelsel_config = Config.load(stelsel=stelsel).model_dump()
+        stelsel_config = StelselConfig.load(stelsel=stelsel).model_dump()
 
         if is_geldig(
             stelsel_config["stelsel"][stelsel]["begindatum"],
