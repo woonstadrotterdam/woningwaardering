@@ -93,8 +93,8 @@ def select_geldige_stelselgroepversies(
     if config is None:
         stelsel_config = StelselConfig.load(stelsel=stelsel).model_dump()
     if not is_geldig(
-        stelsel_config.begindatum,
-        stelsel_config.einddatum,
+        stelsel_config["begindatum"],
+        stelsel_config["einddatum"],
         peildatum,
     ):
         raise ValueError(
