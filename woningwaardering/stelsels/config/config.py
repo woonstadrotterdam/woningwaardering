@@ -31,7 +31,7 @@ class StelselConfig(BaseModel):
             with open(path, "r") as file:
                 config = yaml.safe_load(file)
             stelsel_config = cls(**config)
-            logger.info(f'Configuratie voor stelsel "{stelsel}" geladen.')
+            logger.info(f"Configuratie voor stelsel '{stelsel}' geladen.")
             return stelsel_config
 
         except ValidationError as e:

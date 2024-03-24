@@ -45,10 +45,10 @@ def select_geldige_stelsels(peildatum: str) -> list[Stelsel]:
             peildatum,
         ):
             logger.debug(f"Stelsel '{stelsel}' is geldig op peildatum {peildatum}.")
-            stelsel: Stelsel = import_class(
+            stelsel_object: Stelsel = import_class(
                 f"woningwaardering.stelsels.{stelsel}.{stelsel}", stelsel.capitalize()
             )
-            stelsels.append(stelsel(peildatum=peildatum))
+            stelsels.append(stelsel_object(peildatum=peildatum))
     if len(stelsels) == 0:
         raise ValueError(f"Geen geldige stelsels gevonden voor peildatum {peildatum}.")
     return stelsels
