@@ -1,20 +1,22 @@
 from decimal import ROUND_HALF_UP, BasicContext, Decimal, setcontext
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.vera.referentiedata.soort import (
-    Meeteenheid,
-    Ruimtedetailsoort,
-    Woningwaarderingstelsel,
-    Ruimtesoort,
-    Woningwaarderingstelselgroep,
-)
 
+from loguru import logger
+
+from woningwaardering.stelsels.stelselgroep import StelselgroepVersie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingCriterium,
+    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
+)
+from woningwaardering.vera.referentiedata.soort import (
+    Meeteenheid,
+    Ruimtedetailsoort,
+    Ruimtesoort,
+    Woningwaarderingstelsel,
+    Woningwaarderingstelselgroep,
 )
 
 # Set context for all calculations to avoid rounding errors
@@ -22,7 +24,7 @@ from woningwaardering.vera.bvg.generated import (
 setcontext(BasicContext)
 
 
-class OppervlakteVanVertrekken2023(Stelselgroep):
+class OppervlakteVanVertrekken2023(StelselgroepVersie):
     @staticmethod
     def bereken(
         eenheid: EenhedenEenheid,
@@ -51,13 +53,13 @@ class OppervlakteVanVertrekken2023(Stelselgroep):
                     Ruimtedetailsoort.zolder.code,
                     Ruimtedetailsoort.slaapkamer.code,
                 ]:
-                    print(
+                    logger.debug(
                         f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
                     )
                     continue
 
                 if ruimte.oppervlakte is not None and ruimte.oppervlakte < 4:
-                    print(
+                    logger.debug(
                         f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter"
                     )
                     continue
@@ -91,3 +93,10 @@ class OppervlakteVanVertrekken2023(Stelselgroep):
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
+
+
+if __name__ == "__main__":
+    f = open("./input_models/41164000002.json", "r+")
+    eenheid = EenhedenEenheid.model_validate_json(f.read())
+    woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    print(OppervlakteVanVertrekken2023.bereken(eenheid, woningwaardering_resultaat))

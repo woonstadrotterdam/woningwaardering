@@ -1,6 +1,6 @@
-import yaml
 from typing import Dict, List, Union
 from pydantic import BaseModel, ValidationError
+import yaml
 
 
 class StelselgroepVersieConfig(BaseModel):
