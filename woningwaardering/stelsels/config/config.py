@@ -41,3 +41,7 @@ class StelselConfig(BaseModel):
         except FileNotFoundError as e:
             logger.error(e, f"Config file {path} is niet gevonden.")
             raise
+
+
+config = StelselConfig.load()
+print(config)
