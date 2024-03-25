@@ -19,7 +19,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 
 if __name__ == "__main__":
-    oor = OppervlakteVanOverigeRuimten(peildatum=date(2025, 1, 1))
+    oor = OppervlakteVanOverigeRuimten(
+        peildatum=datetime(2025, 1, 1, tzinfo=ZoneInfo("Europe/Amsterdam")).date()
+    )
     f = open("./input_models/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

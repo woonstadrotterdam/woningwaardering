@@ -19,7 +19,9 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 
 if __name__ == "__main__":
-    ovv = OppervlakteVanVertrekken(peildatum=date(2025, 1, 1))
+    ovv = OppervlakteVanVertrekken(
+        peildatum=datetime(2025, 1, 1, tzinfo=ZoneInfo("Europe/Amsterdam")).date()
+    )
     f = open("./input_modellen/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

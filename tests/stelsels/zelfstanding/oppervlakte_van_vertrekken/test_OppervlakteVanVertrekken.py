@@ -1,4 +1,5 @@
-from datetime import date
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from woningwaardering.stelsels.zelfstandig import (
     OppervlakteVanVertrekken,
 )
@@ -8,6 +9,8 @@ from woningwaardering.vera.bvg.generated import (
 
 
 def test_OppervlakteVanVertrekken(eenheid_inputmodel, woningwaardering_resultaat):
-    ovv = OppervlakteVanVertrekken(peildatum=date(2025, 1, 1))
+    ovv = OppervlakteVanVertrekken(
+        peildatum=datetime(2025, 1, 1, tzinfo=ZoneInfo("Europe/Amsterdam")).date()
+    )
     resultaat = ovv.bereken(eenheid_inputmodel, woningwaardering_resultaat)
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
