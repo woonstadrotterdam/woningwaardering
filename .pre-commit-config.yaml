@@ -81,3 +81,11 @@ repos:
         stages:
           - "pre-push"
           - "manual"
+  - repo: https://github.com/jsh9/pydoclint
+    rev: 0.4.1
+    hooks:
+      - id: pydoclint
+        args: [--style=google]
+        stages:
+          - "pre-push"
+          - "manual"
