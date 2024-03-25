@@ -44,7 +44,6 @@ class Stelsel:
 
         Parameters:
             eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
-            resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): Het resultaat van de woningwaardering.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
