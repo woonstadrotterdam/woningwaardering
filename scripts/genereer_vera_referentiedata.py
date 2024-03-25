@@ -1,20 +1,22 @@
 from collections import Counter, defaultdict
 import csv
 import re
+import time
 from typing import Any, Callable, Pattern, Match
 import unidecode
 from jinja2 import Environment
 from itertools import groupby
 from operator import itemgetter
 import os
-from zoneinfo import ZoneInfo
-import datetime
+from datetime import date, datetime
 import requests
 from loguru import logger
 import textwrap
 
+os.environ["TZ"] = "Europe/Amsterdam"
+time.tzset()
+
 output_folder = "woningwaardering/vera/referentiedata"
-current_time = datetime.datetime.now(ZoneInfo("Europe/Amsterdam"))
 
 
 # url = "https://vera-service.azurewebsites.net/api/referentiedata?Version=latest"
@@ -37,10 +39,7 @@ active_data = [
     item
     for item in source_data
     if (not item["einddatum"])
-    or (
-        datetime.datetime.strptime(item["einddatum"], "%d-%m-%Y").date()
-        >= current_time.date()
-    )
+    or (datetime.strptime(item["einddatum"], "%d-%m-%Y").date() >= date.today())
 ]
 
 # Count the occurrences of each combination of "soort" and "naam"

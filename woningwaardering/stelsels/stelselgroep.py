@@ -1,5 +1,4 @@
-from datetime import date, datetime
-from zoneinfo import ZoneInfo
+from datetime import date
 from loguru import logger
 
 from woningwaardering.stelsels.config import StelselConfig
@@ -29,10 +28,10 @@ class Stelselgroep:
         self,
         stelsel: str,
         stelselgroep: str,
-        peildatum: date = datetime.now(ZoneInfo("Europe/Amsterdam")).date(),
+        peildatum: date = date.today(),
         config: StelselConfig | None = None,
     ) -> None:
-        self.peildatum = peildatum  # datetime.strptime(peildatum, "%d-%m-%Y").date()
+        self.peildatum = peildatum
         self.stelsel = stelsel
         self.stelselgroep = stelselgroep
         if config is None:
@@ -61,7 +60,7 @@ class Stelselgroep:
     def select_geldige_stelselgroepversie(
         stelsel: str,
         stelselgroep: str,
-        peildatum: date = datetime.now(ZoneInfo("Europe/Amsterdam")).date(),
+        peildatum: date = date.today(),
         config: StelselConfig | None = None,
     ) -> StelselgroepVersie:
         """Selecteert de geldige stelselgroepversie op basis van de opgegeven peildatum, stelsel en stelselgroep.

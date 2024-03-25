@@ -1,5 +1,4 @@
-from datetime import datetime
-from zoneinfo import ZoneInfo
+from datetime import date
 import pytest
 
 from woningwaardering.stelsels.stelsel import Stelsel
@@ -10,7 +9,7 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
     "peildatum, stelsel, aantal_geldige_stelselgroepen",
     [
         (
-            datetime(2025, 1, 1, tzinfo=ZoneInfo("Europe/Amsterdam")).date(),
+            date(2025, 1, 1),
             "zelfstandig",
             2,
         )

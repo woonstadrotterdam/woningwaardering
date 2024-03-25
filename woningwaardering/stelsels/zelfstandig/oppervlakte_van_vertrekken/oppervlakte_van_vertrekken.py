@@ -1,5 +1,4 @@
-from datetime import date, datetime
-from zoneinfo import ZoneInfo
+from datetime import date
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -8,9 +7,7 @@ from woningwaardering.vera.bvg.generated import (
 
 
 class OppervlakteVanVertrekken(Stelselgroep):
-    def __init__(
-        self, peildatum: date = datetime.now(ZoneInfo("Europe/Amsterdam")).date()
-    ) -> None:
+    def __init__(self, peildatum: date = date.today()) -> None:
         super().__init__(
             peildatum=peildatum,
             stelsel="zelfstandig",
@@ -19,9 +16,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 
 if __name__ == "__main__":
-    ovv = OppervlakteVanVertrekken(
-        peildatum=datetime(2025, 1, 1, tzinfo=ZoneInfo("Europe/Amsterdam")).date()
-    )
+    ovv = OppervlakteVanVertrekken(peildatum=date(2025, 1, 1))
     f = open("./input_modellen/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

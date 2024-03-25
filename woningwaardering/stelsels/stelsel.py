@@ -1,6 +1,5 @@
-from datetime import date, datetime
+from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
-from zoneinfo import ZoneInfo
 
 from woningwaardering.stelsels.config import StelselConfig
 from woningwaardering.stelsels.stelselgroep import (
@@ -25,7 +24,7 @@ class Stelsel:
     def __init__(
         self,
         stelsel: str,
-        peildatum: date = datetime.now(ZoneInfo("Europe/Amsterdam")).date(),
+        peildatum: date = date.today(),
     ) -> None:
         self.stelsel = stelsel
         self.peildatum = peildatum

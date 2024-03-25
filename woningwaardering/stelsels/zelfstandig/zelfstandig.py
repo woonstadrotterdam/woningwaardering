@@ -1,5 +1,4 @@
-from datetime import date, datetime
-from zoneinfo import ZoneInfo
+from datetime import date
 
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.vera.bvg.generated import (
@@ -8,9 +7,7 @@ from woningwaardering.vera.bvg.generated import (
 
 
 class Zelfstandig(Stelsel):
-    def __init__(
-        self, peildatum: date = datetime.now(ZoneInfo("Europe/Amsterdam")).date()
-    ) -> None:
+    def __init__(self, peildatum: date = date.today()) -> None:
         super().__init__(
             stelsel="zelfstandig",
             peildatum=peildatum,
