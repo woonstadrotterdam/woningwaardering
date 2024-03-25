@@ -39,7 +39,6 @@ class Stelsel:
     def bereken(
         self,
         eenheid: EenhedenEenheid,
-        resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """Berekent de woningwaardering voor een stelsel.
 
@@ -50,6 +49,9 @@ class Stelsel:
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
         """
+
+        resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+
         resultaat.groepen = []
 
         for stelselgroep_versie in self.geldige_stelselgroepen:

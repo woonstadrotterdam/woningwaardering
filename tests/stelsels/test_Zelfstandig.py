@@ -4,8 +4,8 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 
-def test_Zelfstandig(eenheid_inputmodel, woningwaardering_resultaat):
+def test_Zelfstandig(eenheid_inputmodel):
     zelfstandig = Zelfstandig()
-    resultaat = zelfstandig.bereken(eenheid_inputmodel, woningwaardering_resultaat)
+    resultaat = zelfstandig.bereken(eenheid_inputmodel)
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingResultaat)
     assert resultaat.punten is not None
