@@ -11,7 +11,7 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
-from woningwaardering.vera.referentiedata.soort import (
+from woningwaardering.vera.referentiedata import (
     Meeteenheid,
     Ruimtedetailsoort,
     Ruimtesoort,

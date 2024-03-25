@@ -1,5 +1,5 @@
 from decimal import ROUND_HALF_UP, BasicContext, Decimal, setcontext
-from woningwaardering.vera.referentiedata.soort import (
+from woningwaardering.vera.referentiedata import (
     Meeteenheid,
     Ruimtedetailsoort,
     Woningwaarderingstelsel,
