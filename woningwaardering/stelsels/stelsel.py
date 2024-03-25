@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from decimal import ROUND_HALF_UP, Decimal
 from zoneinfo import ZoneInfo
 
 from woningwaardering.stelsels.config import StelselConfig
@@ -58,6 +59,26 @@ class Stelsel:
                     woningwaardering_resultaat=resultaat,
                 )
             )
+
+        # Eindsaldering
+        #
+        # Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij
+        # zorgwoningen geldende toeslag) afgerond op hele punten. Bij 0,5 punten of
+        # meer wordt afgerond naar boven op punten, bij minder dan 0,5 punten wordt
+        # afgerond naar beneden op hele punten.
+        #
+        # NB: Alle punten worden bij elkaar opgeteld inclusief de punten voor de
+        # gemeenschappelijke ruimten en voorzieningen waarna wordt afgerond.
+
+        resultaat.punten = float(
+            Decimal(
+                sum(
+                    woningwaardering_groep.punten
+                    for woningwaardering_groep in resultaat.groepen or []
+                    if woningwaardering_groep.punten is not None
+                )
+            ).quantize(Decimal("1"), ROUND_HALF_UP)
+        )
 
         return resultaat
 
