@@ -102,5 +102,5 @@ if __name__ == "__main__":
     print(
         OppervlakteVanVertrekken2024.bereken(
             eenheid, woningwaardering_resultaat
-        ).model_dump_json(indent=2)
+        ).model_dump_json(by_alias=True, indent=2, exclude_none=True)
     )
