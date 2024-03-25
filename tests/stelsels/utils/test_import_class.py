@@ -1,6 +1,6 @@
 import pytest
 
-from woningwaardering.utils import import_class
+from woningwaardering.stelsels.utils import import_class
 
 
 @pytest.mark.parametrize(

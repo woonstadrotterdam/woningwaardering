@@ -1,8 +1,8 @@
 import pytest
 
 from woningwaardering.stelsels.stelselgroep import (
+    Stelselgroep,
     StelselgroepVersie,
-    select_geldige_stelselgroepversie,
 )
 
 
@@ -11,7 +11,7 @@ from woningwaardering.stelsels.stelselgroep import (
     [("01-01-2025", "zelfstandig", "oppervlakte_van_vertrekken")],
 )
 def test_select_geldige_stelselgroepversie(peildatum, stelsel, stelselgroep):
-    geldige_stelselgroep = select_geldige_stelselgroepversie(
+    geldige_stelselgroep = Stelselgroep.select_geldige_stelselgroepversie(
         peildatum=peildatum, stelsel=stelsel, stelselgroep=stelselgroep
     )
     assert isinstance(

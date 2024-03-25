@@ -7,9 +7,7 @@ from woningwaardering.stelsels.config import StelselConfig
 
 @pytest.mark.parametrize("stelsel", ["zelfstandig"])
 def test_stelselconfig(stelsel: str) -> None:
-    """
-    This function valdiates the Stelselsconfig.yml
-    """
+    """This function valdiates the Stelselsconfig.yml"""
     try:
         _ = StelselConfig.load(stelsel=stelsel)
     except ValidationError as e:

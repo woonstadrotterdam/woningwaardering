@@ -1,4 +1,4 @@
-from woningwaardering.stelsels.zelfstandig.oppervlakte_van_vertrekken import (
+from woningwaardering.stelsels.zelfstandig import (
     OppervlakteVanVertrekken,
 )
 from woningwaardering.vera.bvg.generated import (

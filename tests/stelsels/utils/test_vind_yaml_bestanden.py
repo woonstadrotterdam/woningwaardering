@@ -1,4 +1,4 @@
-from woningwaardering.utils import vind_yaml_bestanden
+from woningwaardering.stelsels.utils import vind_yaml_bestanden
 
 
 def test_vind_yaml_bestanden():

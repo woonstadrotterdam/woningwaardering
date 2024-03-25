@@ -1,6 +1,6 @@
 import pytest
 
-from woningwaardering.utils import is_geldig
+from woningwaardering.stelsels.utils import is_geldig
 
 
 @pytest.mark.parametrize(

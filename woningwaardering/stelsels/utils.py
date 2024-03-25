@@ -61,7 +61,7 @@ def vind_yaml_bestanden(directory: str) -> list[str]:
         directory (str): De hoofddirectory waarin naar YAML-bestanden wordt gezocht.
 
     Returns:
-        list: Een lijst met paden naar de gevonden YAML-bestanden.
+        list[str]: Een lijst met paden naar de gevonden YAML-bestanden.
     """
     logger.debug(f"Zoek naar YAML-bestanden in: {directory}")
     yaml_files = []

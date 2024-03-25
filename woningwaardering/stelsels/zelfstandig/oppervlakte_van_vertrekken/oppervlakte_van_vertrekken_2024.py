@@ -2,7 +2,7 @@ from decimal import ROUND_HALF_UP, BasicContext, Decimal, setcontext
 
 from loguru import logger
 
-from woningwaardering.stelsels.stelselgroep import StelselgroepVersie
+from woningwaardering.stelsels.stelselgroepversie import StelselgroepVersie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
