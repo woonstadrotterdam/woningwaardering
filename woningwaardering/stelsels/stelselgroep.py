@@ -1,3 +1,5 @@
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 from loguru import logger
 
 from woningwaardering.stelsels.config import StelselConfig
@@ -17,17 +19,17 @@ class Stelselgroep:
     """Initialiseert een Stelselgroep.
 
     Args:
-        peildatum (str): De peildatum in het formaat "dd-mm-jjjj".
         stelsel (str): Het stelsel waartoe de stelselgroep behoort.
         stelselgroep (str): De naam van de stelselgroep.
+        peildatum (date, optional): De peildatum voor de waardering".
         config (StelselConfig | None, optional): Een optionele configuratie. Defaults naar None.
     """
 
     def __init__(
         self,
-        peildatum: str,
         stelsel: str,
         stelselgroep: str,
+        peildatum: date = datetime.now(ZoneInfo("Europe/Amsterdam")).date(),
         config: StelselConfig | None = None,
     ) -> None:
         self.peildatum = peildatum  # datetime.strptime(peildatum, "%d-%m-%Y").date()
@@ -36,7 +38,7 @@ class Stelselgroep:
         if config is None:
             config = StelselConfig.load(stelsel=self.stelsel)
         self.geldige_versie = self.select_geldige_stelselgroepversie(
-            self.peildatum, self.stelsel, self.stelselgroep, config
+            self.stelsel, self.stelselgroep, self.peildatum, config
         )
 
     def bereken(
@@ -57,17 +59,17 @@ class Stelselgroep:
 
     @staticmethod
     def select_geldige_stelselgroepversie(
-        peildatum: str,
         stelsel: str,
         stelselgroep: str,
+        peildatum: date = datetime.now(ZoneInfo("Europe/Amsterdam")).date(),
         config: StelselConfig | None = None,
     ) -> StelselgroepVersie:
         """Selecteert de geldige stelselgroepversie op basis van de opgegeven peildatum, stelsel en stelselgroep.
 
         Args:
-            peildatum (str): De peildatum in het formaat "dd-mm-jjjj".
             stelsel (str): De naam van het stelsel.
             stelselgroep (str): De naam van de stelselgroep.
+            peildatum (date): De peildatum voor de waardering.
             config (StelselConfig| None, optional): De configuratie. Defaults to None.
 
         Returns:

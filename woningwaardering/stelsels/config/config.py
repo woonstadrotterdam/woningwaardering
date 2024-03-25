@@ -1,5 +1,6 @@
 import yaml
 
+from datetime import date
 from loguru import logger
 from typing import Dict, List
 from pydantic import BaseModel, ValidationError
@@ -7,21 +8,21 @@ from pydantic import BaseModel, ValidationError
 
 class StelselgroepVersieConfig(BaseModel):
     class_naam: str
-    begindatum: str
-    einddatum: str
+    begindatum: date
+    einddatum: date
 
 
 class StelselgroepConfig(BaseModel):
     class_naam: str
-    begindatum: str
-    einddatum: str
+    begindatum: date
+    einddatum: date
     versies: List[StelselgroepVersieConfig]
 
 
 class StelselConfig(BaseModel):
     stelsel: str
-    begindatum: str
-    einddatum: str
+    begindatum: date
+    einddatum: date
     stelselgroepen: Dict[str, StelselgroepConfig]
 
     @classmethod

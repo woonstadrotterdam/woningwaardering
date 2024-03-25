@@ -1,3 +1,4 @@
+from datetime import datetime
 import pytest
 
 from woningwaardering.stelsels.utils import is_geldig
@@ -24,4 +25,11 @@ from woningwaardering.stelsels.utils import is_geldig
     ],
 )
 def test_is_geldig(begindatum, einddatum, peildatum, expected):
-    assert is_geldig(begindatum, einddatum, peildatum) == expected
+    assert (
+        is_geldig(
+            datetime.strptime(begindatum, "%d-%m-%Y").date(),
+            datetime.strptime(einddatum, "%d-%m-%Y").date(),
+            datetime.strptime(peildatum, "%d-%m-%Y").date(),
+        )
+        == expected
+    )

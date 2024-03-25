@@ -1,25 +1,25 @@
 stelsel: zelfstandig
-begindatum: 01-01-0001
-einddatum: 31-12-9999
+begindatum: !!timestamp 0001-01-01
+einddatum: !!timestamp 9999-12-31
 stelselgroepen:
   oppervlakte_van_vertrekken:
     class_naam: OppervlakteVanVertrekken
-    begindatum: 01-01-0001
-    einddatum: 31-12-9999
+    begindatum: !!timestamp 0001-01-01
+    einddatum: !!timestamp 9999-12-31
     versies:
       - class_naam: OppervlakteVanVertrekken2024
-        begindatum: 01-01-2024
-        einddatum: 31-12-9999
+        begindatum: !!timestamp 2024-01-01
+        einddatum: !!timestamp 9999-12-31
 
       - class_naam: OppervlakteVanVertrekken2023
-        begindatum: 01-01-0001
-        einddatum: 31-12-2023
+        begindatum: !!timestamp 0001-01-01
+        einddatum: !!timestamp 2023-12-31
 
   oppervlakte_van_overige_ruimten:
     class_naam: OppervlakteVanOverigeRuimten
-    begindatum: 01-01-0001
-    einddatum: 31-12-9999
+    begindatum: !!timestamp 0001-01-01
+    einddatum: !!timestamp 9999-12-31
     versies:
       - class_naam: OppervlakteVanOverigeRuimten2024
-        begindatum: 01-01-0001
-        einddatum: 31-12-9999
+        begindatum: !!timestamp 0001-01-01
+        einddatum: !!timestamp 9999-12-31

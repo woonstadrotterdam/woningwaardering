@@ -1,3 +1,4 @@
+from datetime import date
 import pytest
 
 from woningwaardering.stelsels.stelselgroep import (
@@ -8,7 +9,7 @@ from woningwaardering.stelsels.stelselgroep import (
 
 @pytest.mark.parametrize(
     "peildatum, stelsel, stelselgroep",
-    [("01-01-2025", "zelfstandig", "oppervlakte_van_vertrekken")],
+    [(date(2025, 1, 1), "zelfstandig", "oppervlakte_van_vertrekken")],
 )
 def test_select_geldige_stelselgroepversie(peildatum, stelsel, stelselgroep):
     geldige_stelselgroep = Stelselgroep.select_geldige_stelselgroepversie(

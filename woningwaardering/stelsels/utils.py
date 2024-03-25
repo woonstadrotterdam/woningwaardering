@@ -1,6 +1,6 @@
 import importlib
 import os
-from datetime import datetime
+from datetime import date
 from typing import Any
 
 from loguru import logger
@@ -37,23 +37,19 @@ def import_class(module_path: str, class_naam: str) -> Any:
     return class_
 
 
-def is_geldig(begindatum: str, einddatum: str, peildatum: str) -> bool:
+def is_geldig(begindatum: date, einddatum: date, peildatum: date) -> bool:
     """
     Controleert of de peildatum valt tussen de begindatum en einddatum.
 
     Parameters:
-        begindatum (str): De begindatum in het formaat "dd-mm-jjjj".
-        einddatum (str): De einddatum in het formaat "dd-mm-jjjj".
-        peildatum (str): De peildatum in het formaat "dd-mm-jjjj".
+        begindatum (date): De begindatum.
+        einddatum (date): De einddatum.
+        peildatum (date): De peildatum.
 
     Returns:
         bool: True als de peildatum tussen de begindatum en einddatum valt, anders False.
     """
-    return (
-        datetime.strptime(begindatum, "%d-%m-%Y").date()
-        <= datetime.strptime(peildatum, "%d-%m-%Y").date()
-        <= datetime.strptime(einddatum, "%d-%m-%Y").date()
-    )
+    return begindatum <= peildatum <= einddatum
 
 
 def vind_yaml_bestanden(directory: str) -> list[str]:

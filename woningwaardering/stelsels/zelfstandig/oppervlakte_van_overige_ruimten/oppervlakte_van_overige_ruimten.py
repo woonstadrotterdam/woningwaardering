@@ -1,3 +1,5 @@
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -6,16 +8,18 @@ from woningwaardering.vera.bvg.generated import (
 
 
 class OppervlakteVanOverigeRuimten(Stelselgroep):
-    def __init__(self, peildatum: str) -> None:
+    def __init__(
+        self, peildatum: date = datetime.now(ZoneInfo("Europe/Amsterdam")).date()
+    ) -> None:
         super().__init__(
-            peildatum,
+            peildatum=peildatum,
             stelsel="zelfstandig",
             stelselgroep="oppervlakte_van_overige_ruimten",
         )
 
 
 if __name__ == "__main__":
-    oor = OppervlakteVanOverigeRuimten(peildatum="01-01-2025")
+    oor = OppervlakteVanOverigeRuimten(peildatum=date(2025, 1, 1))
     f = open("./input_models/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

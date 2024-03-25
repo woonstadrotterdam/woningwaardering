@@ -1,4 +1,5 @@
-from datetime import date
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 
 from woningwaardering.stelsels.config import StelselConfig
 from woningwaardering.stelsels.stelselgroep import (
@@ -16,19 +17,17 @@ class Stelsel:
 
     Parameters:
         stelsel (str): De naam van het stelsel.
-        peildatum (date | str, optional): De peildatum in het formaat "dd-mm-jjjj".
+        peildatum (date, optional): De peildatum voor de waardering.
             Standaard is de huidige datum.
     """
 
     def __init__(
         self,
         stelsel: str,
-        peildatum: date | str = date.today(),
+        peildatum: date = datetime.now(ZoneInfo("Europe/Amsterdam")).date(),
     ) -> None:
         self.stelsel = stelsel
-        self.peildatum = (
-            peildatum.strftime("%d-%m-%Y") if isinstance(peildatum, date) else peildatum
-        )
+        self.peildatum = peildatum
         self.stelsel_config = StelselConfig.load(stelsel=self.stelsel)
         self.geldige_stelselgroepen = self.select_geldige_stelselgroepen(
             self.peildatum,
@@ -64,14 +63,14 @@ class Stelsel:
 
     @staticmethod
     def select_geldige_stelselgroepen(
-        peildatum: str,
+        peildatum: date,
         stelsel: str,
         config: StelselConfig | None = None,
     ) -> list[Stelselgroep]:
         """Selecteert de geldige stelselgroepen voor een peildatum en een stelsel.
 
         Parameters:
-            peildatum (str): De peildatum in het formaat "dd-mm-jjjj".
+            peildatum (date): De peildatum voor de waardering.
             stelsel (str): De naam van het stelsel.
             config (StelselConfig | None, optional): Het configuratiebestand voor het stelsel.
                 Standaard is None, wat betekent dat het configuratiebestand wordt geladen.
