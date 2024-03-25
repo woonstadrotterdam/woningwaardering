@@ -7,7 +7,7 @@ class Afspraakverzoeksoort:
         naam="Eindinspectie",
     )
     """
-    Verzoek voor het maken van een afspraak voor een voorinspectie naar aanleiding van
+    Verzoek voor het maken van een afspraak voor een eindinspectie naar aanleiding van
     de ontvangst van een huuropzegging.
     """
 
@@ -16,6 +16,6 @@ class Afspraakverzoeksoort:
         naam="Voorinspectie",
     )
     """
-    Verzoek voor het maken van een afspraak voor een eindinspectie naar aanleiding van
+    Verzoek voor het maken van een afspraak voor een voorinspectie naar aanleiding van
     de ontvangst van een huuropzegging.
     """

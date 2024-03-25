@@ -102,6 +102,11 @@ class Eenheidklimaatbeheersing:
     industriële processen, wat bijdraagt aan energie-efficiëntie.
     """
 
+    onverwarmd = Referentiedata(
+        code="ONV",
+        naam="Onverwarmd",
+    )
+
     vloerverwarming = Referentiedata(
         code="VLV",
         naam="Vloerverwarming",

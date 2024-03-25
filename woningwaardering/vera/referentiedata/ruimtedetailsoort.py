@@ -110,8 +110,8 @@ class Ruimtedetailsoort:
         naam="Gemeenschappelijke tuin",
     )
 
-    gemeenschappelijk_dakterras_gtu = Referentiedata(
-        code="GTU",
+    gemeenschappelijk_dakterras_gda = Referentiedata(
+        code="GDA",
         naam="Gemeenschappelijk dakterras",
     )
 
@@ -139,11 +139,6 @@ class Ruimtedetailsoort:
     """
     Vertrek of plaats in een gebouw waarin mensen hun voedsel bereiden of laten bereiden
     """
-
-    loggia_log = Referentiedata(
-        code="LOG",
-        naam="Loggia",
-    )
 
     overige_ruimte = Referentiedata(
         code="OBR",
@@ -317,7 +312,7 @@ class Ruimtedetailsoort:
     Buitenruimte: tuin gelegen aan de zijkant van een woning.
     """
 
-    loggia_log = Referentiedata(
+    loggia = Referentiedata(
         code="LOG",
         naam="Loggia",
     )
