@@ -68,10 +68,10 @@ def vind_yaml_bestanden(directory: str) -> list[str]:
     """
     logger.debug(f"Zoek naar YAML-bestanden in: {directory}")
     yaml_files = []
-    for root, dirs, files in os.walk(directory):
+    for root, _, files in os.walk(directory):
         for file in files:
             if file.endswith((".yaml", ".yml")):
                 yaml_files.append(os.path.join(root, file))
-    if len(yaml_files) == 0:
+    if not yaml_files:
         logger.error(f"Geen YAML-bestanden gevonden in: {directory}")
     return yaml_files

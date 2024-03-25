@@ -44,8 +44,3 @@ class StelselConfig(BaseModel):
 
         logger.info(f"Configuratie voor stelsel '{stelsel}' geladen.")
         return stelsel_config
-
-
-if __name__ == "__main__":
-    config = StelselConfig.load()
-    print(config)
