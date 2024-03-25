@@ -22,7 +22,7 @@ if __name__ == "__main__":
     oor = OppervlakteVanOverigeRuimten(
         peildatum=datetime(2025, 1, 1, tzinfo=ZoneInfo("Europe/Amsterdam")).date()
     )
-    f = open("./input_models/41164000002.json", "r+")
+    f = open("./input_modellen/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(oor.bereken(eenheid, woningwaardering_resultaat))

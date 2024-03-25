@@ -96,7 +96,7 @@ class OppervlakteVanVertrekken2024(StelselgroepVersie):
 
 
 if __name__ == "__main__":
-    f = open("./input_models/41164000002.json", "r+")
+    f = open("./input_modellen/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(OppervlakteVanVertrekken2024.bereken(eenheid, woningwaardering_resultaat))
