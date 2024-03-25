@@ -22,7 +22,13 @@ requires-python = ">=3.10"
 dependencies = [
     "pydantic==2.*",
     "loguru==0.7.*",
+    "types-pyyaml==6.*",
+    "PyYAML==6.*"
 ]
+
+[tool.setuptools.packages.find]
+include = ["woniningwaardering"]
+
 [project.optional-dependencies]
 test = [
     "pre-commit==3.3.*",

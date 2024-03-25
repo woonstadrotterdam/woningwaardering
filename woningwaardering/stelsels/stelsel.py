@@ -1,5 +1,4 @@
 from datetime import date
-from typing import Any
 
 from woningwaardering.stelsels.config import StelselConfig
 from woningwaardering.stelsels.stelselgroep import (
@@ -34,7 +33,7 @@ class Stelsel:
         self.peildatum = (
             peildatum.strftime("%d-%m-%Y") if isinstance(peildatum, date) else peildatum
         )
-        self.stelsel_config = StelselConfig.load(stelsel=self.stelsel).model_dump()
+        self.stelsel_config = StelselConfig.load(stelsel=self.stelsel)
         self.geldige_stelselgroepversies = select_geldige_stelselgroepversies(
             self.peildatum,
             self.stelsel,
@@ -72,7 +71,7 @@ class Stelsel:
 def select_geldige_stelselgroepversies(
     peildatum: str,
     stelsel: str,
-    config: dict[str, Any] | None = None,
+    config: StelselConfig | None = None,
 ) -> list[StelselgroepVersie]:
     """
     Selecteert de geldige stelselgroepversies voor een peildatum en een stelsel.
@@ -91,19 +90,18 @@ def select_geldige_stelselgroepversies(
         ValueError: Als er geen geldige stelselgroepen zijn gevonden.
     """
     if config is None:
-        stelsel_config = StelselConfig.load(stelsel=stelsel).model_dump()
+        config = StelselConfig.load(stelsel=stelsel)
     if not is_geldig(
-        stelsel_config["begindatum"],
-        stelsel_config["einddatum"],
+        config.begindatum,
+        config.einddatum,
         peildatum,
     ):
         raise ValueError(
-            f"Stelsel {stelsel} met begindatum {stelsel_config[stelsel]['begindatum']} en einddatum {stelsel_config[stelsel]['einddatum']} is niet geldig op peildatum {peildatum}."
+            f"Stelsel {stelsel} met begindatum {config.begindatum} en einddatum {config.einddatum} is niet geldig op peildatum {peildatum}."
         )
 
-    stelselgroepen = stelsel_config[stelsel]["stelselgroepen"]
     geldige_stelselgroepversies = []
-    for stelselgroep in stelselgroepen.keys():
+    for stelselgroep in config.stelselgroepen.keys():
         geldige_stelselgroepversies.append(
             select_geldige_stelselgroepversie(peildatum, stelsel, stelselgroep, config)
         )

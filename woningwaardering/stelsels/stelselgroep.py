@@ -46,7 +46,7 @@ class Stelselgroep:
         self.stelsel = stelsel
         self.stelselgroep = stelselgroep
         if config is None:
-            config = StelselConfig.load(stelsel=self.stelsel).model_dump()
+            config = StelselConfig.load(stelsel=self.stelsel)
         self.geldige_versie = select_geldige_stelselgroepversie(
             self.peildatum, self.stelsel, self.stelselgroep, config
         )
@@ -73,7 +73,7 @@ def select_geldige_stelselgroepversie(
     peildatum: str,
     stelsel: str,
     stelselgroep: str,
-    config: dict[str, Any] | None = None,
+    config: StelselConfig | None = None,
 ) -> StelselgroepVersie:
     """
     Selecteert de geldige stelselgroepversie op basis van de opgegeven peildatum, stelsel en stelselgroep.
@@ -92,29 +92,26 @@ def select_geldige_stelselgroepversie(
         ValueError: Als er meerdere geldige stelselgroepen zijn gevonden met de opgegeven peildatum.
     """
     if not config:
-        config = StelselConfig.load(stelsel=stelsel).model_dump()
+        config = StelselConfig.load(stelsel=stelsel)
 
     geldige_stelselgroep_versies = []
-    stelselgroep_config = config["stelsel"][stelsel]["stelselgroepen"][stelselgroep]
+    stelselgroep_config = config.stelselgroepen[stelselgroep]
     if is_geldig(
-        stelselgroep_config["begindatum"],
-        stelselgroep_config["einddatum"],
+        stelselgroep_config.begindatum,
+        stelselgroep_config.einddatum,
         peildatum,
     ):
         logger.debug(
             f"{stelsel}: stelselgroep '{stelselgroep}' is geldig op peildatum {peildatum}."
         )
-        for versie in stelselgroep_config["versies"]:
-            for versie_class_naam, geldigheid in versie.items():
-                if is_geldig(
-                    geldigheid["begindatum"], geldigheid["einddatum"], peildatum
-                ):
-                    stelselgroep_versie = import_class(
-                        f"woningwaardering.stelsels.{stelsel}.{stelselgroep}",
-                        versie_class_naam,
-                    )
+        for versie in stelselgroep_config.versies:
+            if is_geldig(versie.begindatum, versie.einddatum, peildatum):
+                stelselgroep_versie = import_class(
+                    f"woningwaardering.stelsels.{stelsel}.{stelselgroep}",
+                    versie.class_naam,
+                )
 
-                    geldige_stelselgroep_versies.append(stelselgroep_versie())
+                geldige_stelselgroep_versies.append(stelselgroep_versie())
     if len(geldige_stelselgroep_versies) == 0:
         raise ValueError(
             f"{stelsel}: geen geldige stelselgroepen gevonden met peildatum {peildatum}."

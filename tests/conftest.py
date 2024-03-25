@@ -10,7 +10,7 @@ from woningwaardering.vera.bvg.generated import (
 BASE_DIR = pathlib.Path(__file__).parent.parent
 
 
-@pytest.fixture(params=[str(p) for p in (BASE_DIR / "input_models").glob("*.json")])
+@pytest.fixture(params=[str(p) for p in (BASE_DIR / "input_modellen").glob("*.json")])
 def eenheid_inputmodel(request):
     file_path = request.param
     with open(file_path, "r+") as f:

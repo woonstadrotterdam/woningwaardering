@@ -6,7 +6,7 @@ from pydantic import BaseModel, ValidationError
 
 
 class StelselgroepVersieConfig(BaseModel):
-    versie: str
+    class_naam: str
     begindatum: Union[str, None]
     einddatum: Union[str, None]
 
@@ -44,4 +44,8 @@ class StelselConfig(BaseModel):
 
 
 config = StelselConfig.load()
-print(config)
+print(config.stelselgroepen["oppervlakte_van_vertrekken"])
+# config.stelselgroepen["oppervlakte_van_vertrekken"]
+# print(config.stelselgroepen["oppervlakte_van_vertrekken"].begindatum)
+# for i in config.stelselgroepen["oppervlakte_van_vertrekken"].versies:
+#     print(i)

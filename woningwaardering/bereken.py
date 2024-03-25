@@ -37,11 +37,11 @@ def select_geldige_stelsels(peildatum: str) -> list[Stelsel]:
     stelsels = []
     for stelsel_yaml in vind_yaml_bestanden("./woningwaardering/stelsels/config/"):
         stelsel = stelsel_yaml.split("/")[-1].split(".")[0]
-        stelsel_config = StelselConfig.load(stelsel=stelsel).model_dump()
+        stelsel_config = StelselConfig.load(stelsel=stelsel)
 
         if is_geldig(
-            stelsel_config["stelsel"][stelsel]["begindatum"],
-            stelsel_config["stelsel"][stelsel]["einddatum"],
+            stelsel_config.begindatum,
+            stelsel_config.einddatum,
             peildatum,
         ):
             logger.debug(f"Stelsel '{stelsel}' is geldig op peildatum {peildatum}.")
@@ -56,7 +56,7 @@ def select_geldige_stelsels(peildatum: str) -> list[Stelsel]:
 
 if __name__ == "__main__":
     wws = Woningwaardering()
-    f = open("./input_models/41164000002.json", "r+")
+    f = open("./input_modellen/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(wws.bereken(eenheid, woningwaardering_resultaat))
