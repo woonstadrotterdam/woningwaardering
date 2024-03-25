@@ -1,27 +1,27 @@
 import yaml
 
 from loguru import logger
-from typing import Dict, List, Union
+from typing import Dict, List
 from pydantic import BaseModel, ValidationError
 
 
 class StelselgroepVersieConfig(BaseModel):
     class_naam: str
-    begindatum: Union[str, None]
-    einddatum: Union[str, None]
+    begindatum: str
+    einddatum: str
 
 
 class StelselgroepConfig(BaseModel):
     class_naam: str
-    begindatum: Union[str, None]
-    einddatum: Union[str, None]
+    begindatum: str
+    einddatum: str
     versies: List[StelselgroepVersieConfig]
 
 
 class StelselConfig(BaseModel):
     stelsel: str
-    begindatum: Union[str, None]
-    einddatum: Union[str, None]
+    begindatum: str
+    einddatum: str
     stelselgroepen: Dict[str, StelselgroepConfig]
 
     @classmethod
