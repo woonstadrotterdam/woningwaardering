@@ -30,22 +30,22 @@ class StelselConfig(BaseModel):
             path = f"woningwaardering/stelsels/config/{stelsel}.yml"
             with open(path, "r") as file:
                 config = yaml.safe_load(file)
-            stelsel_config = cls(**config)
-            logger.info(f"Configuratie voor stelsel '{stelsel}' geladen.")
-            return stelsel_config
-
-        except ValidationError as e:
-            logger.error(e, f"Geen valide stelsel configuratie in {path}.")
-            raise
 
         except FileNotFoundError as e:
             logger.error(e, f"Config file {path} is niet gevonden.")
             raise
 
+        try:
+            stelsel_config = cls(**config)
 
-config = StelselConfig.load()
-print(config.stelselgroepen["oppervlakte_van_vertrekken"])
-# config.stelselgroepen["oppervlakte_van_vertrekken"]
-# print(config.stelselgroepen["oppervlakte_van_vertrekken"].begindatum)
-# for i in config.stelselgroepen["oppervlakte_van_vertrekken"].versies:
-#     print(i)
+        except ValidationError as e:
+            logger.error(e, f"Geen valide stelsel configuratie in {path}.")
+            raise
+
+        logger.info(f"Configuratie voor stelsel '{stelsel}' geladen.")
+        return stelsel_config
+
+
+if __name__ == "__main__":
+    config = StelselConfig.load()
+    print(config)

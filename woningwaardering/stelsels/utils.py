@@ -25,13 +25,16 @@ def import_class(module_path: str, class_naam: str) -> Any:
     try:
         module = importlib.import_module(module_path)
         class_ = getattr(module, class_naam)
-        return class_
-    except ModuleNotFoundError:
-        logger.error(f"Module {module_path} niet gevonden.")
+
+    except ModuleNotFoundError as e:
+        logger.error(e, f"Module {module_path} niet gevonden.")
         raise
-    except AttributeError:
-        logger.error(f"Class {class_naam} niet gevonden in: {module_path}.")
+
+    except AttributeError as e:
+        logger.error(e, f"Class {class_naam} niet gevonden in: {module_path}.")
         raise
+
+    return class_
 
 
 def is_geldig(begindatum: str, einddatum: str, peildatum: str) -> bool:
