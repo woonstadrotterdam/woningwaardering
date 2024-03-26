@@ -60,15 +60,12 @@ class Stelsel:
                 )
             )
 
-        # Eindsaldering
-        #
         # Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij
         # zorgwoningen geldende toeslag) afgerond op hele punten. Bij 0,5 punten of
-        # meer wordt afgerond naar boven op punten, bij minder dan 0,5 punten wordt
-        # afgerond naar beneden op hele punten.
+        # meer wordt afgerond naar boven op hele punten, bij minder dan 0,5 punten
+        # wordt afgerond naar beneden op hele punten.
         #
-        # NB: Alle punten worden bij elkaar opgeteld inclusief de punten voor de
-        # gemeenschappelijke ruimten en voorzieningen waarna wordt afgerond.
+        # https://wetten.overheid.nl/BWBR0003237/2024-01-01#BijlageI_DivisieA_Divisie_Divisie15
 
         resultaat.punten = float(
             Decimal(
