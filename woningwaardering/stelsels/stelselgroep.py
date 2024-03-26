@@ -43,7 +43,9 @@ class Stelselgroep:
     def bereken(
         self,
         eenheid: EenhedenEenheid,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         """Bereken de woningwaardering voor een specifieke eenheid op stelselgroep-niveau.
 
@@ -54,6 +56,7 @@ class Stelselgroep:
         Returns:
             WoningwaarderingResultatenWoningwaarderingGroep: Het resultaat van de woningwaardering voor de gehele groep.
         """
+
         return self.geldige_versie.bereken(eenheid, woningwaardering_resultaat)
 
     @staticmethod
