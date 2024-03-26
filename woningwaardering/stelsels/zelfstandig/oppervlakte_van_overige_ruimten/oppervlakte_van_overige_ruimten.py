@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -15,7 +15,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 
 if __name__ == "__main__":
-    oor = OppervlakteVanOverigeRuimten(peildatum=datetime(2025, 1, 1))
+    oor = OppervlakteVanOverigeRuimten(peildatum=date(2025, 1, 1))
     f = open("./input_modellen/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     print(
