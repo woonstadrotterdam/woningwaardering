@@ -53,15 +53,13 @@ class Stelsel:
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
 
-        resultaat.groepen = []
-
-        for stelselgroep_versie in self.geldige_stelselgroepen:
-            resultaat.groepen.append(
-                stelselgroep_versie.bereken(
-                    eenheid=eenheid,
-                    woningwaardering_resultaat=resultaat,
-                )
+        resultaat.groepen = [
+            stelselgroep_versie.bereken(
+                eenheid=eenheid,
+                woningwaardering_resultaat=resultaat,
             )
+            for stelselgroep_versie in self.geldige_stelselgroepen
+        ]
 
         # Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij
         # zorgwoningen geldende toeslag) afgerond op hele punten. Bij 0,5 punten of
@@ -114,16 +112,16 @@ class Stelsel:
                 f"Stelsel {stelsel.value.naam} met begindatum {config.begindatum} en einddatum {config.einddatum} is niet geldig op peildatum {peildatum}."
             )
 
-        geldige_stelselgroepen = []
-        for _, stelgroep_config in config.stelselgroepen.items():
-            stelselgroep_class = import_class(
-                f"woningwaardering.stelsels.{stelsel.name}",
-                stelgroep_config.class_naam,
-            )
+        geldige_stelselgroepen = [
+            import_class(
+                f"woningwaardering.stelsels.{stelsel.name}", stelgroep_config.class_naam
+            )(peildatum=peildatum)
+            for _, stelgroep_config in config.stelselgroepen.items()
+        ]
 
-            geldige_stelselgroepen.append(stelselgroep_class(peildatum=peildatum))
-        if geldige_stelselgroepen == []:
+        if not geldige_stelselgroepen:
             raise ValueError(
                 f"{stelsel.value.naam}: geen geldige stelselgroepen gevonden met peildatum {peildatum}."
             )
+
         return geldige_stelselgroepen

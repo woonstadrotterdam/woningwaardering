@@ -1,5 +1,4 @@
 from datetime import date
-from typing import Type
 from loguru import logger
 
 from woningwaardering.stelsels.config import StelselConfig
@@ -92,29 +91,18 @@ class Stelselgroep:
         if not config:
             config = StelselConfig.load(stelsel=stelsel)
 
-        geldige_stelselgroep_versies = list[Type[StelselgroepVersie]]()
         stelselgroep_config = config.stelselgroepen[stelselgroep.name]
-        if is_geldig(
-            stelselgroep_config.begindatum,
-            stelselgroep_config.einddatum,
-            peildatum,
-        ):
-            logger.debug(
-                f"{stelsel.value.naam}: stelselgroep '{stelselgroep}' is geldig op peildatum {peildatum}."
-            )
-            logger.debug(
-                f"{stelsel.value.naam}: versies: {stelselgroep_config.versies}"
-            )
-            for versie in stelselgroep_config.versies:
-                if is_geldig(versie.begindatum, versie.einddatum, peildatum):
-                    stelselgroep_versie: Type[StelselgroepVersie] = import_class(
-                        f"woningwaardering.stelsels.{stelsel.name}.{stelselgroep.name}",
-                        versie.class_naam,
-                    )
 
-                    geldige_stelselgroep_versies.append(stelselgroep_versie)
+        geldige_stelselgroep_versies = [
+            import_class(
+                f"woningwaardering.stelsels.{stelsel.name}.{stelselgroep.name}",
+                versie.class_naam,
+            )
+            for versie in stelselgroep_config.versies
+            if is_geldig(versie.begindatum, versie.einddatum, peildatum)
+        ]
 
-        if len(geldige_stelselgroep_versies) == 0:
+        if not geldige_stelselgroep_versies:
             raise ValueError(
                 f"{stelsel}: geen geldige stelselgroepen gevonden met peildatum {peildatum}."
             )
@@ -123,5 +111,10 @@ class Stelselgroep:
             raise ValueError(
                 f"{stelsel.value.naam}: meerdere geldige stelselgroepen gevonden met peildatum {peildatum}: {geldige_stelselgroep_versies}."
             )
+
+        logger.debug(
+            f"{stelsel.value.naam}: stelselgroep '{stelselgroep}' is geldig op peildatum {peildatum}."
+        )
+        logger.debug(f"{stelsel.value.naam}: versies: {stelselgroep_config.versies}")
 
         return geldige_stelselgroep_versies[0]()
