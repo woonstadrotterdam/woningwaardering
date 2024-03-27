@@ -10,7 +10,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
 

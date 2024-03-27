@@ -13,8 +13,9 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
+    Woningwaarderingstelselgroep,
 )
 
 
@@ -23,7 +24,7 @@ class Stelselgroep:
 
     Args:
         stelsel (Woningwaarderingstelsel): Het stelsel waartoe de stelselgroep behoort.
-        stelselgroep (str): De naam van de stelselgroep.
+        stelselgroep (Woningwaarderingstelselgroep): De naam van de stelselgroep.
         peildatum (date, optional): De peildatum voor de waardering".
         config (StelselConfig | None, optional): Een optionele configuratie. Defaults naar None.
     """
@@ -31,7 +32,7 @@ class Stelselgroep:
     def __init__(
         self,
         stelsel: Woningwaarderingstelsel,
-        stelselgroep: str,
+        stelselgroep: Woningwaarderingstelselgroep,
         peildatum: date = date.today(),
         config: StelselConfig | None = None,
     ) -> None:
@@ -69,7 +70,7 @@ class Stelselgroep:
     @staticmethod
     def select_geldige_stelselgroepversie(
         stelsel: Woningwaarderingstelsel,
-        stelselgroep: str,
+        stelselgroep: Woningwaarderingstelselgroep,
         peildatum: date = date.today(),
         config: StelselConfig | None = None,
     ) -> StelselgroepVersie:
@@ -77,7 +78,7 @@ class Stelselgroep:
 
         Args:
             stelsel (Woningwaarderingstelsel): Het stelsel waartoe de stelselgroep behoort.
-            stelselgroep (str): De naam van de stelselgroep.
+            stelselgroep (Woningwaarderingstelselgroep): De naam van de stelselgroep.
             peildatum (date): De peildatum voor de waardering.
             config (StelselConfig| None, optional): De configuratie. Defaults to None.
 
@@ -92,7 +93,7 @@ class Stelselgroep:
             config = StelselConfig.load(stelsel=stelsel)
 
         geldige_stelselgroep_versies = list[Type[StelselgroepVersie]]()
-        stelselgroep_config = config.stelselgroepen[stelselgroep]
+        stelselgroep_config = config.stelselgroepen[stelselgroep.name]
         if is_geldig(
             stelselgroep_config.begindatum,
             stelselgroep_config.einddatum,
@@ -107,7 +108,7 @@ class Stelselgroep:
             for versie in stelselgroep_config.versies:
                 if is_geldig(versie.begindatum, versie.einddatum, peildatum):
                     stelselgroep_versie: Type[StelselgroepVersie] = import_class(
-                        f"woningwaardering.stelsels.{stelsel.name}.{stelselgroep}",
+                        f"woningwaardering.stelsels.{stelsel.name}.{stelselgroep.name}",
                         versie.class_naam,
                     )
 

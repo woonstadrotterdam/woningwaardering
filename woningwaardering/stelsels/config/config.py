@@ -5,7 +5,7 @@ from loguru import logger
 from typing import Dict, List
 from pydantic import BaseModel, ValidationError
 
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
 

@@ -5,8 +5,9 @@ from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
     StelselgroepVersie,
 )
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
+    Woningwaarderingstelselgroep,
 )
 
 
@@ -16,7 +17,7 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
         (
             date(2025, 1, 1),
             Woningwaarderingstelsel.zelfstandige_woonruimten,
-            "oppervlakte_van_vertrekken",
+            Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
         )
     ],
 )

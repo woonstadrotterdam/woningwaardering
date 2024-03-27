@@ -3,7 +3,7 @@ import pytest
 
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
 

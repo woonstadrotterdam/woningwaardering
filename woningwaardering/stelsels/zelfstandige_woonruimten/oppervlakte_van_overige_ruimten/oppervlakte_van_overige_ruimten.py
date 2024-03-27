@@ -1,10 +1,11 @@
 from datetime import date
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
+    Woningwaarderingstelselgroep,
 )
 
 
@@ -13,7 +14,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         super().__init__(
             peildatum=peildatum,
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-            stelselgroep="oppervlakte_van_overige_ruimten",
+            stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
         )
 
 

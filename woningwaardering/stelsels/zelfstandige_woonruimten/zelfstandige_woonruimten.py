@@ -4,7 +4,7 @@ from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
 
