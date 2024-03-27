@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Passendheidssoort:
+class Passendheidssoort(Enum):
     niet_passend = Referentiedata(
         code="NIE",
         naam="Niet passend",
@@ -29,3 +30,11 @@ class Passendheidssoort:
     De toewijzing is passend volgens de Woningwet (toewijzen betaalbare woning aan
     huishoudens met huurtoeslag)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

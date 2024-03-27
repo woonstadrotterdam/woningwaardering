@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Leningdetailsoort:
+class Leningdetailsoort(Enum):
     collegiaal = Referentiedata(
         code="COL",
         naam="Collegiaal",
@@ -38,3 +39,11 @@ class Leningdetailsoort:
         code="OBL",
         naam="Obligatielening",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

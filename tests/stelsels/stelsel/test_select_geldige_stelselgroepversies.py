@@ -3,6 +3,9 @@ import pytest
 
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Woningwaarderingstelsel,
+)
 
 
 @pytest.mark.parametrize(
@@ -10,7 +13,7 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
     [
         (
             date(2025, 1, 1),
-            "zelfstandig",
+            Woningwaarderingstelsel.zelfstandige_woonruimten,
             2,
         )
     ],

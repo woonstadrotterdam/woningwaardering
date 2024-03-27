@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Onderhoudspecialisme:
+class Onderhoudspecialisme(Enum):
     specialist_alarminstallaties = Referentiedata(
         code="ALA",
         naam="Specialist Alarminstallaties",
@@ -294,3 +295,11 @@ class Onderhoudspecialisme:
     Binnen Ketenstandaard is hier op dit moment geen specifieke codering voor,
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

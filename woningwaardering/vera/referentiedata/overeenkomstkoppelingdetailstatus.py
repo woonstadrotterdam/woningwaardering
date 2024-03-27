@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Overeenkomstkoppelingdetailstatus:
+class Overeenkomstkoppelingdetailstatus(Enum):
     afgewezen_door_woningzoekende = Referentiedata(
         code="AFG",
         naam="Afgewezen door woningzoekende",
@@ -35,3 +36,11 @@ class Overeenkomstkoppelingdetailstatus:
     Koppeling is afgewezen omdat de naamgegevens van de woningzoekende in beide
     inschrijvingen niet overeenkomen.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

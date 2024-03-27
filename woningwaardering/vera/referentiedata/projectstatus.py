@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Projectstatus:
+class Projectstatus(Enum):
     actief = Referentiedata(
         code="ACT",
         naam="Actief",
@@ -17,3 +18,11 @@ class Projectstatus:
     """
     Het project is afgerond, en bevindt zich niet meer in een van de projectfasen
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

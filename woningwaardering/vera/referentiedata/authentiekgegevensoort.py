@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Authentiekgegevensoort:
+class Authentiekgegevensoort(Enum):
     actueel_inkomen = Referentiedata(
         code="AIN",
         naam="Actueel inkomen",
@@ -65,3 +66,11 @@ class Authentiekgegevensoort:
     """
     De woongeschiedenis voor het bepalen in welke gemeenten men wanneer heeft gewoond.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

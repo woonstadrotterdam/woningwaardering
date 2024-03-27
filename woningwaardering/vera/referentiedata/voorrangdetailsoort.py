@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Voorrangdetailsoort:
+class Voorrangdetailsoort(Enum):
     beroep = Referentiedata(
         code="BER",
         naam="Beroep",
@@ -170,3 +171,11 @@ class Voorrangdetailsoort:
     """
     Urgentie wegens het uitstromen bij een maatschappelijke instelling
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

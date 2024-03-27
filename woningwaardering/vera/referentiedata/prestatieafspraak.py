@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Prestatieafspraak:
+class Prestatieafspraak(Enum):
     huurverhoging_t_b_v_investering = Referentiedata(
         code="HUU",
         naam="Huurverhoging t.b.v. investering",
@@ -11,3 +12,11 @@ class Prestatieafspraak:
     corporatie en huurdersorganisatie hebben afgesproken dat zij de meeropbrengsten
     van die hogere huurverhoging gebruiken voor investeringen.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

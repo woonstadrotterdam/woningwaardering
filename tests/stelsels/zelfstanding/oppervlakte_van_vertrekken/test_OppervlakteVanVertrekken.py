@@ -1,5 +1,5 @@
 from datetime import date
-from woningwaardering.stelsels.zelfstandig import (
+from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanVertrekken,
 )
 from woningwaardering.vera.bvg.generated import (

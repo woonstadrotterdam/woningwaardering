@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Oppervlaktesoort:
+class Oppervlaktesoort(Enum):
     bruto_vloeroppervlakte = Referentiedata(
         code="BVO",
         naam="Bruto vloeroppervlakte",
@@ -64,3 +65,11 @@ class Oppervlaktesoort:
     De gebruiksoppervlakte van een eenheid(verblijfsobject) in gehele vierkante meters,
     gemeten conform NEN 2580.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

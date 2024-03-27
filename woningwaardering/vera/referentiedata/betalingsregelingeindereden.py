@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Betalingsregelingeindereden:
+class Betalingsregelingeindereden(Enum):
     afbetaald = Referentiedata(
         code="AFB",
         naam="Afbetaald",
@@ -34,3 +35,11 @@ class Betalingsregelingeindereden:
     De betalingsregeling is (voortijdig) beëindigd omdat de regeling niet voldoet in de
     specifieke situatie.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

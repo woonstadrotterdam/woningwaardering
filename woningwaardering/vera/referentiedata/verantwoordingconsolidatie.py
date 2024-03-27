@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Verantwoordingconsolidatie:
+class Verantwoordingconsolidatie(Enum):
     geconsolideerd = Referentiedata(
         code="CON",
         naam="Geconsolideerd",
@@ -18,3 +19,11 @@ class Verantwoordingconsolidatie:
     """
     Financiële verantwoording vindt plaats per financieel bedrijf afzonderlijk
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

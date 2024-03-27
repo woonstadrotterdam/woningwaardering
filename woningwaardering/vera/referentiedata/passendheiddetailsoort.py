@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Passendheiddetailsoort:
+class Passendheiddetailsoort(Enum):
     bijzondere_gezinssituatie = Referentiedata(
         code="BIJ",
         naam="Bijzondere gezinssituatie",
@@ -29,3 +30,11 @@ class Passendheiddetailsoort:
     oorzaak. Let op: voor herhuisvesting in verband met herstructurering gebruik
     passenheiddetailsoort &#39;Herstructurering&#39;
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

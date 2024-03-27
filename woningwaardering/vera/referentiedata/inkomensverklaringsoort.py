@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Inkomensverklaringsoort:
+class Inkomensverklaringsoort(Enum):
     ib60 = Referentiedata(
         code="IB6",
         naam="IB60",
@@ -31,3 +32,11 @@ class Inkomensverklaringsoort:
         code="UIT",
         naam="Uitkeringsspecificatie",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Conditiescore:
+class Conditiescore(Enum):
     uitstekende_conditie = Referentiedata(
         code="1",
         naam="Uitstekende conditie",
@@ -51,3 +52,11 @@ class Conditiescore:
     """
     Technisch rijp voor sloop. (Conditiescore 6 van NEN 2767)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

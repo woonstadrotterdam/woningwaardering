@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Publicatiemodel:
+class Publicatiemodel(Enum):
     aanbodmodel = Referentiedata(
         code="AAN",
         naam="Aanbodmodel",
@@ -67,3 +68,11 @@ class Publicatiemodel:
     """
     Woningzoekenden kunnen onderling eenheden ruilen.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

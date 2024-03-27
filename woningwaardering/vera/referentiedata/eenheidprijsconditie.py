@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Eenheidprijsconditie:
+class Eenheidprijsconditie(Enum):
     exclusief_servicekosten = Referentiedata(
         code="ESE",
         naam="Exclusief servicekosten",
@@ -44,3 +45,11 @@ class Eenheidprijsconditie:
     betreft hier de BTW of overdrachtsbelasting, de kadastrale kosten en de
     notariskosten voor de transportakte.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

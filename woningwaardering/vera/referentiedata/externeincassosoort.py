@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Externeincassosoort:
+class Externeincassosoort(Enum):
     deurwaarder = Referentiedata(
         code="DEU",
         naam="Deurwaarder",
@@ -11,3 +12,11 @@ class Externeincassosoort:
         code="INC",
         naam="Incassobureau",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

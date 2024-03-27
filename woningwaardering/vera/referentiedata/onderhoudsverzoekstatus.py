@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Onderhoudsverzoekstatus:
+class Onderhoudsverzoekstatus(Enum):
     afgehandeld = Referentiedata(
         code="AFG",
         naam="Afgehandeld",
@@ -63,3 +64,11 @@ class Onderhoudsverzoekstatus:
     Het onderhoudsverzoek is technisch afgehandeld en de uitvoering hiervan kan
     beoordeeld worden. Is het onderhoudsverzoek naar tevredenheid uitgevoerd?
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

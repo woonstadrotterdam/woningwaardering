@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Defectoorzaak:
+class Defectoorzaak(Enum):
     bewonersopdracht_en_of_gedrag = Referentiedata(
         code="BEW",
         naam="Bewonersopdracht/gedrag",
@@ -79,3 +80,11 @@ class Defectoorzaak:
     Defect is veroorzaakt door lekkage (van binnenuit) of overstroming (van buitenaf).
     (bijv. ondergelopen kelder).
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

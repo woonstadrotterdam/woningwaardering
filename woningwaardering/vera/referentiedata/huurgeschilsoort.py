@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Huurgeschilsoort:
+class Huurgeschilsoort(Enum):
     bezwaarschrift = Referentiedata(
         code="BEZ",
         naam="Bezwaarschrift",
@@ -42,3 +43,11 @@ class Huurgeschilsoort:
     """
     Huurgeschil met als aanleiding een dispuut over het woningwaarderingsresultaat
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

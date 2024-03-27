@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Authentiekgegevenstatus:
+class Authentiekgegevenstatus(Enum):
     gevalideerd = Referentiedata(
         code="GEV",
         naam="Gevalideerd",
@@ -17,3 +18,11 @@ class Authentiekgegevenstatus:
     """
     Gegevens zijn vervallen doordat deze zijn verlopen.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Eenheidligging:
+class Eenheidligging(Enum):
     buiten_bebouwde_kom = Referentiedata(
         code="BBK",
         naam="Buiten bebouwde kom",
@@ -71,3 +72,11 @@ class Eenheidligging:
         code="WOO",
         naam="In woonwijk",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

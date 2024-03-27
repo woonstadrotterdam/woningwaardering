@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Ruimtedetailsoort:
+class Ruimtedetailsoort(Enum):
     atrium_en_of_patio = Referentiedata(
         code="ATR",
         naam="Atrium / Patio",
@@ -334,3 +335,11 @@ class Ruimtedetailsoort:
     vertrek. Indien een woning een zolder heeft met een vlizotrap kan dit in de
     advertentietekst worden gemeld.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Debiteursoort:
+class Debiteursoort(Enum):
     debiteur_gemeente = Referentiedata(
         code="DGM",
         naam="Debiteur gemeente",
@@ -21,3 +22,11 @@ class Debiteursoort:
         code="OVE",
         naam="Overige debiteur",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

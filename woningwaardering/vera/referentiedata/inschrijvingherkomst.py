@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Inschrijvingherkomst:
+class Inschrijvingherkomst(Enum):
     heropend = Referentiedata(
         code="HER",
         naam="Heropend",
@@ -51,3 +52,11 @@ class Inschrijvingherkomst:
     """
     De inschrijving is aangemaakt door de woningzoekende.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

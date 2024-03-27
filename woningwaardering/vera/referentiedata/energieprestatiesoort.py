@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Energieprestatiesoort:
+class Energieprestatiesoort(Enum):
     compactheid = Referentiedata(
         code="COM",
         naam="Compactheid",
@@ -73,3 +74,11 @@ class Energieprestatiesoort:
     per jaar (kWh_th/m2/jr). Dit is één van de indicatoren die benodigd zijn voor
     het bepalen van de maximale energieprestatievergoeding (EPV).
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Eenheidmonument:
+class Eenheidmonument(Enum):
     beschermd_dorpsgezicht = Referentiedata(
         code="DOR",
         naam="Beschermd dorpsgezicht",
@@ -71,3 +72,11 @@ class Eenheidmonument:
     uitzonderlijk en onvervangbaar zijn. Alleen als een monument is ingeschreven op
     de Werelderfgoedlijst van UNESCO mag het de titel Werelderfgoed dragen.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

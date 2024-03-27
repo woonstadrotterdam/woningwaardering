@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Crediteursoort:
+class Crediteursoort(Enum):
     crediteur_gemeente = Referentiedata(
         code="CGM",
         naam="Crediteur gemeente",
@@ -73,3 +74,11 @@ class Crediteursoort:
     belangrijk onderdeel van het werkkapitaalbeheer van een bedrijf en een aspect
     van het crediteurenbeheer.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Verantwoordingregime:
+class Verantwoordingregime(Enum):
     administratieve_scheiding = Referentiedata(
         code="ADM",
         naam="Administratieve scheiding",
@@ -37,3 +38,11 @@ class Verantwoordingregime:
     De corporatie voldoet aan de voorwaarden waaronder geen gescheiden administraties
     voor DAEB- en niet-DAEB activiteiten gevoerd hoeven te worden.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

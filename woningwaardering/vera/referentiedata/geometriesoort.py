@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Geometriesoort:
+class Geometriesoort(Enum):
     omtrek = Referentiedata(
         code="OMT",
         naam="Omtrek",
@@ -17,3 +18,11 @@ class Geometriesoort:
     """
     De geocoördinaten van het middenpunt van een object
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

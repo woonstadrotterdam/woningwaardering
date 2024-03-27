@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Overeenkomstdetailsoort:
+class Overeenkomstdetailsoort(Enum):
     bepaalde_tijd = Referentiedata(
         code="BEP",
         naam="Bepaalde tijd",
@@ -146,3 +147,11 @@ class Overeenkomstdetailsoort:
     """
     Verkoop van voormalige huurwoning aan de voormalige huurder of een nieuwe eigenaar.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Aktesoort:
+class Aktesoort(Enum):
     notariele_akte = Referentiedata(
         code="NOT",
         naam="Notariële akte",
@@ -17,3 +18,11 @@ class Aktesoort:
     """
     Akte die door twee of meer partijen is vastgesteld (onderhands)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Maatschappelijklabel:
+class Maatschappelijklabel(Enum):
     daeb = Referentiedata(
         code="DAE",
         naam="DAEB",
@@ -34,3 +35,11 @@ class Maatschappelijklabel:
     huurovereenkomst. Als attribuut van de klasse FinancieelBedrijf: Geeft aan of de
     bedrijfsactiviteiten als NIET-DAEB verantwoord worden.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

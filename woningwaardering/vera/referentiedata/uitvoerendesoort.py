@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Uitvoerendesoort:
+class Uitvoerendesoort(Enum):
     leverancier = Referentiedata(
         code="LEV",
         naam="Leverancier",
@@ -17,3 +18,11 @@ class Uitvoerendesoort:
     """
     Uitvoering vindt plaats door een interne vakgroep / eigen dienst
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

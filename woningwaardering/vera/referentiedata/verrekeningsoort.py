@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Verrekeningsoort:
+class Verrekeningsoort(Enum):
     te_activeren = Referentiedata(
         code="ACT",
         naam="Te activeren",
@@ -17,3 +18,11 @@ class Verrekeningsoort:
     """
     Bij de verrekening wordt (een deel van) het bedrag verhaald op een derde partij
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

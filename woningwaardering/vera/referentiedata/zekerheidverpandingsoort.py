@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Zekerheidverpandingsoort:
+class Zekerheidverpandingsoort(Enum):
     hypotheek_en_pandrecht_huurpenningen = Referentiedata(
         code="HPH",
         naam="Hypotheek en pandrecht huurpenningen",
@@ -57,3 +58,11 @@ class Zekerheidverpandingsoort:
     """
     Pandrecht huurpenningen en positieve verklaring hypotheek
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

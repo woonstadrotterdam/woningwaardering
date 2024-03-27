@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Relatierolsoort:
+class Relatierolsoort(Enum):
     aankopende_makelaar = Referentiedata(
         code="AMA",
         naam="Aankopende makelaar",
@@ -435,3 +436,11 @@ class Relatierolsoort:
     De relatie aan wie de zekerheid op de eenheid is verleend bij een eventuele
     zekerheidsverpanding
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

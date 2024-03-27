@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Betalingsregelingstatus:
+class Betalingsregelingstatus(Enum):
     aangevraagd = Referentiedata(
         code="AAN",
         naam="Aangevraagd",
@@ -42,3 +43,11 @@ class Betalingsregelingstatus:
     Tussentijds bevroren betalingsregeling omdat het niet mogelijk is om te voldoen aan
     de regeling.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

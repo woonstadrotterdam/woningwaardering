@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Boekingstatus:
+class Boekingstatus(Enum):
     gefiatteerd = Referentiedata(
         code="FIA",
         naam="Gefiatteerd",
@@ -25,3 +26,11 @@ class Boekingstatus:
     """
     Boeking is niet definitief en kan worden gewijzigd of verwijderd.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

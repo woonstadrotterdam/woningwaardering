@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Onderhoudsbestedingsoort:
+class Onderhoudsbestedingsoort(Enum):
     materiaal = Referentiedata(
         code="MAT",
         naam="Materiaal",
@@ -72,3 +73,11 @@ class Onderhoudsbestedingsoort:
     Werktijd van de uitvoerende. Met name gebruikt bij afrekenwijze Nacalculatie om
     gewerkte uren door te belasten
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

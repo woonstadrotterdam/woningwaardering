@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Puntenmutatiesoort:
+class Puntenmutatiesoort(Enum):
     intrekken_toewijzing = Referentiedata(
         code="ITO",
         naam="Intrekken toewijzing",
@@ -105,3 +106,11 @@ class Puntenmutatiesoort:
     """
     Terugdraaien zware sanctie
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Inkoopfactuurstatus:
+class Inkoopfactuurstatus(Enum):
     afgewezen = Referentiedata(
         code="AFG",
         naam="Afgewezen",
@@ -97,3 +98,11 @@ class Inkoopfactuurstatus:
     """
     Er wordt gewacht op een creditfactuur.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

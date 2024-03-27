@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Betaalwijzedeelsoort:
+class Betaalwijzedeelsoort(Enum):
     maximaal_bedrag = Referentiedata(
         code="MAX",
         naam="Maximaal bedrag",
@@ -29,3 +30,11 @@ class Betaalwijzedeelsoort:
     Bijvoorbeeld de student die het restant van de huur betaalt na aftrek van de
     bijdrage van zijn/haar ouders.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

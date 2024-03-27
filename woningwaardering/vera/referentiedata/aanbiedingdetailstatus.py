@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Aanbiedingdetailstatus:
+class Aanbiedingdetailstatus(Enum):
     andere_woning_geaccepteerd = Referentiedata(
         code="AND",
         naam="Andere woning geaccepteerd",
@@ -199,3 +200,11 @@ class Aanbiedingdetailstatus:
     Een aanbieding is geweigerd, met als aangegeven reden dat de woonomgeving niet
     voldoet.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

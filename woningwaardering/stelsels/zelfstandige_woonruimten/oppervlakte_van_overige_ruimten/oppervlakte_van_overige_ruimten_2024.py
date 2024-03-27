@@ -28,12 +28,14 @@ class OppervlakteVanOverigeRuimten2024(StelselgroepVersie):
     @staticmethod
     def bereken(
         eenheid: EenhedenEenheid,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+                stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.value,
             ),
         )
 
@@ -41,7 +43,8 @@ class OppervlakteVanOverigeRuimten2024(StelselgroepVersie):
 
         for ruimte in eenheid.ruimten or []:
             if (
-                ruimte.soort == Ruimtesoort.overige_ruimtes
+                ruimte.soort is not None
+                and ruimte.soort.code == Ruimtesoort.overige_ruimtes.code
                 and ruimte.detail_soort is not None
             ):
                 if ruimte.detail_soort.code not in [
@@ -80,7 +83,7 @@ class OppervlakteVanOverigeRuimten2024(StelselgroepVersie):
 
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
-                        meeteenheid=Meeteenheid.vierkante_meter_m2,
+                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
                         # stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
                         naam=ruimte.naam,
                     )

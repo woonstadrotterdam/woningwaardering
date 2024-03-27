@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Ruimtesoort:
+class Ruimtesoort(Enum):
     buitenruimte = Referentiedata(
         code="BTR",
         naam="Buitenruimte",
@@ -37,3 +38,11 @@ class Ruimtesoort:
     Een vertrek is een ruimte die volgens de woningwaardering als vertrek wordt gezien
     (Beleidsboek waarderingsstelsel zelfstandige woonruimte)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

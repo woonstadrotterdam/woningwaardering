@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Onderhoudstaakdetailstatus:
+class Onderhoudstaakdetailstatus(Enum):
     klant_niet_aanwezig = Referentiedata(
         code="AFW",
         naam="Klant niet aanwezig",
@@ -49,3 +50,11 @@ class Onderhoudstaakdetailstatus:
     """
     De taak is onderbroken omdat er onvoldoende tijd voor de vakman is
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

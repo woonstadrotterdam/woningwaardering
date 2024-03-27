@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Factuursoort:
+class Factuursoort(Enum):
     credit_factuur_extern = Referentiedata(
         code="CEX",
         naam="Credit factuur extern",
@@ -33,3 +34,11 @@ class Factuursoort:
     """
     Debet factuur intern
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

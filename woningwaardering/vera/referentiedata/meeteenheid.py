@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Meeteenheid:
+class Meeteenheid(Enum):
     centimeter = Referentiedata(
         code="CM",
         naam="Centimeter",
@@ -72,3 +73,11 @@ class Meeteenheid:
     Aantal uitgedrukt in uren, bijvoorbeeld 2,5 uur werktijd. 15 minuten kan uitgedrukt
     worden in 0,25 uur
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

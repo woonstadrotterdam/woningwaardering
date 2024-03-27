@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Bouwkundigelementplaatsing:
+class Bouwkundigelementplaatsing(Enum):
     individuele_wmo_voorziening = Referentiedata(
         code="IWV",
         naam="Individuele WMO voorziening",
@@ -35,3 +36,11 @@ class Bouwkundigelementplaatsing:
     """
     Het bouwkundig element is aangebracht als zelf aangebrachte voorziening.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

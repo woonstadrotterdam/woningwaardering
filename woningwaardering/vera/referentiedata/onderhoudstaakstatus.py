@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Onderhoudstaakstatus:
+class Onderhoudstaakstatus(Enum):
     concept_en_of_aangemaakt = Referentiedata(
         code="CON",
         naam="Concept  / aangemaakt",
@@ -78,3 +79,11 @@ class Onderhoudstaakstatus:
     gebruikt bij bijvoorbeeld het opruimen van het gereedschap in de bus na de
     werkzaamheden.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

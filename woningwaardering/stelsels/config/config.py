@@ -5,6 +5,10 @@ from loguru import logger
 from typing import Dict, List
 from pydantic import BaseModel, ValidationError
 
+from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Woningwaarderingstelsel,
+)
+
 
 class StelselgroepVersieConfig(BaseModel):
     class_naam: str
@@ -26,14 +30,14 @@ class StelselConfig(BaseModel):
     stelselgroepen: Dict[str, StelselgroepConfig]
 
     @classmethod
-    def load(cls, stelsel: str = "zelfstandig") -> "StelselConfig":
+    def load(cls, stelsel: Woningwaarderingstelsel) -> "StelselConfig":
         try:
-            path = f"woningwaardering/stelsels/config/{stelsel}.yml"
+            path = f"woningwaardering/stelsels/config/{stelsel.name}.yml"
             with open(path, "r") as file:
                 config = yaml.safe_load(file)
 
-        except FileNotFoundError as e:
-            logger.error(e, f"Config file {path} is niet gevonden.")
+        except FileNotFoundError:
+            logger.error(f"Config file '{path}' is niet gevonden.")
             raise
 
         try:
@@ -43,5 +47,5 @@ class StelselConfig(BaseModel):
             logger.error(e, f"Geen valide stelsel configuratie in {path}.")
             raise
 
-        logger.info(f"Configuratie voor stelsel '{stelsel}' geladen.")
+        logger.info(f"Configuratie voor stelsel '{stelsel.value.naam}' geladen.")
         return stelsel_config

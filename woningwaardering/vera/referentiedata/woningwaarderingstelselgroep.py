@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Woningwaarderingstelselgroep:
+class Woningwaarderingstelselgroep(Enum):
     bijzondere_voorzieningen = Referentiedata(
         code="BIJ",
         naam="Bijzondere voorzieningen",
@@ -327,3 +328,11 @@ class Woningwaarderingstelselgroep:
     Standplaats: De groep criteria die betrekking heeft op de woonomgeving
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

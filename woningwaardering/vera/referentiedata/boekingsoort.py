@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Boekingsoort:
+class Boekingsoort(Enum):
     belastingen_en_premies_sv = Referentiedata(
         code="BEP",
         naam="Belastingen en premies SV",
@@ -87,3 +88,11 @@ class Boekingsoort:
     """
     Boeking van een te vorderen bedrag op een huurder of derde.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

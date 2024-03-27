@@ -5,6 +5,9 @@ from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
     StelselgroepVersie,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Woningwaarderingstelsel,
+)
 
 
 @pytest.mark.parametrize(
@@ -12,7 +15,7 @@ from woningwaardering.stelsels.stelselgroep import (
     [
         (
             date(2025, 1, 1),
-            "zelfstandig",
+            Woningwaarderingstelsel.zelfstandige_woonruimten,
             "oppervlakte_van_vertrekken",
         )
     ],
@@ -23,4 +26,4 @@ def test_select_geldige_stelselgroepversie(peildatum, stelsel, stelselgroep):
     )
     assert isinstance(
         geldige_stelselgroep, StelselgroepVersie
-    ), f"Stelselgroepversie '{geldige_stelselgroep}' is geen instance van StelselgroepVersie"
+    ), f"Stelselgroepversie '{geldige_stelselgroep}' is geen instance van StelselgroepVersie, {type(geldige_stelselgroep)}"

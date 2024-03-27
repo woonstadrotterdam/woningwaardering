@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Afwezigheidsoort:
+class Afwezigheidsoort(Enum):
     adoptieverlof = Referentiedata(
         code="ADO",
         naam="Adoptieverlof",
@@ -56,3 +57,11 @@ class Afwezigheidsoort:
         code="ZWA",
         naam="Zwangerschapsverlof",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

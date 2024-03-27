@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Redenontbinding:
+class Redenontbinding(Enum):
     niet_betaald = Referentiedata(
         code="BET",
         naam="Niet betaald",
@@ -18,3 +19,11 @@ class Redenontbinding:
     De overeenkomst wordt ontbonden omdat contractant tekortschiet in het nakomen van de
     afspraken.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

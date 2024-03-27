@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Woonvorm:
+class Woonvorm(Enum):
     adl_clusterwoning = Referentiedata(
         code="ADL",
         naam="ADL-clusterwoning",
@@ -72,3 +73,11 @@ class Woonvorm:
     Een Thomashuis is een kleinschalige woonvoorziening voor zes à acht mensen met een
     verstandelijke beperking
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Inspectierapportsoort:
+class Inspectierapportsoort(Enum):
     eindinspectierapport = Referentiedata(
         code="EIN",
         naam="Eindinspectierapport",
@@ -34,3 +35,11 @@ class Inspectierapportsoort:
     """
     Rapport naar aanleiding van een voor- of tusseninspectie
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Toegankelijkheidslabel:
+class Toegankelijkheidslabel(Enum):
     gelijkvloerse_woning = Referentiedata(
         code="GEL",
         naam="Gelijkvloerse woning",
@@ -53,3 +54,11 @@ class Toegankelijkheidslabel:
         code="ZON",
         naam="Woning zonder bijzondere toegankelijkheid",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

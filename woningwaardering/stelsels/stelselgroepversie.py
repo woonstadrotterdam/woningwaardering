@@ -12,6 +12,8 @@ class StelselgroepVersie(ABC):
     @abstractmethod
     def bereken(
         eenheid: EenhedenEenheid,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         pass

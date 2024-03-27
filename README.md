@@ -78,7 +78,7 @@ Wanneer er een class getest wordt, wordt er een `class Test<class_naam>` aangema
 Elke testfunctie in deze class moet starten met `test`, gevolgd door de naam van de functie die getest wordt uit de desbetreffende class, bijvoorbeeld `def test_<functie_naam>()`.
 `test` is voor pytest een indicator om de functie te herkennen als een testfunctie.
 
-Stel dat de functionaliteiten van `woningwaardering/stelsels/zelfstandig/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py` getest moeten worden, dan is het pad naar het bijbehorende testbestand `tests/stelsels/zelfstandig/oppervlakte_van_vertrekken/test_oppervlakte_van_vertrekken.py`.
+Stel dat de functionaliteiten van `woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py` getest moeten worden, dan is het pad naar het bijbehorende testbestand `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/test_oppervlakte_van_vertrekken.py`.
 In `test_oppervlakte_van_vertrekken.py` worden testfuncties en/of testobjecten geschreven met bijbehorende naamconventies.
 Hieronder is de functienaamconventie en python code weergegeven voor het testen van een losse functie:
 

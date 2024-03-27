@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Brandwerendheidscore:
+class Brandwerendheidscore(Enum):
     brandwerendheidscore_15_minuten = Referentiedata(
         code="15",
         naam="15 minuten",
@@ -81,3 +82,11 @@ class Brandwerendheidscore:
     """
     360 minuten brandwerendheid (Aedes ILS)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

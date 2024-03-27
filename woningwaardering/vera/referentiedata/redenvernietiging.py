@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Redenvernietiging:
+class Redenvernietiging(Enum):
     bedreiging = Referentiedata(
         code="DRE",
         naam="Bedreiging",
@@ -35,3 +36,11 @@ class Redenvernietiging:
     De overeenkomst is nietig aangezien deze tot stand is gekomen door misbruik van
     omstandigheden.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

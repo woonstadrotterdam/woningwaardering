@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Prijscomponentsubsidiesoort:
+class Prijscomponentsubsidiesoort(Enum):
     niet_subsidiabel_prijscomponent = Referentiedata(
         code="NSU",
         naam="Niet subsidiabel prijscomponent",
@@ -23,3 +24,11 @@ class Prijscomponentsubsidiesoort:
     voor gemeenschappelijke ruimten /  HUI - Huismeester / DIE - Dienst- en
     recreatieruimten
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

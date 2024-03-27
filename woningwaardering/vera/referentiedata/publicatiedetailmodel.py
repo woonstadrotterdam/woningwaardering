@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Publicatiedetailmodel:
+class Publicatiedetailmodel(Enum):
     leefstijl = Referentiedata(
         code="LEE",
         naam="Leefstijl",
@@ -37,3 +38,11 @@ class Publicatiedetailmodel:
     Eenheden voor huishoudens die snel een woning nodig hebben en daar geen eisen aan
     stellen.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

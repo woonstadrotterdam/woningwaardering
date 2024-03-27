@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Gebeurtenissoort:
+class Gebeurtenissoort(Enum):
     begin_situatiepunten = Referentiedata(
         code="BSI",
         naam="Begin situatiepunten",
@@ -129,3 +130,11 @@ class Gebeurtenissoort:
     """
     Weigering niet als hoogste acceptant
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

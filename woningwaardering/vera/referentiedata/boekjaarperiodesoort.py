@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Boekjaarperiodesoort:
+class Boekjaarperiodesoort(Enum):
     boekjaarperiodesoort_4_weken = Referentiedata(
         code="4WE",
         naam="4-weken",
@@ -57,3 +58,11 @@ class Boekjaarperiodesoort:
     """
     Deel van een kalenderjaar met een vaste duur van 3 aaneengesloten kalendermaanden.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

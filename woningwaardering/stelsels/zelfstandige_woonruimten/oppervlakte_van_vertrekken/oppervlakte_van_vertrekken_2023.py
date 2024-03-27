@@ -2,7 +2,7 @@ from decimal import ROUND_HALF_UP, BasicContext, Decimal, setcontext
 
 from loguru import logger
 
-from woningwaardering.stelsels.stelselgroepversie import StelselgroepVersie
+from woningwaardering.stelsels import StelselgroepVersie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -24,23 +24,29 @@ from woningwaardering.vera.referentiedata import (
 setcontext(BasicContext)
 
 
-class OppervlakteVanVertrekken2024(StelselgroepVersie):
+class OppervlakteVanVertrekken2023(StelselgroepVersie):
     @staticmethod
     def bereken(
         eenheid: EenhedenEenheid,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+                stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.value,
             )
         )
 
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
-            if ruimte.soort == Ruimtesoort.vertrek and ruimte.detail_soort is not None:
+            if (
+                ruimte.soort is not None
+                and ruimte.soort.code == Ruimtesoort.vertrek.code
+                and ruimte.detail_soort is not None
+            ):
                 if ruimte.detail_soort.code not in [
                     Ruimtedetailsoort.woonkamer.code,
                     Ruimtedetailsoort.woon_en_of_slaapkamer.code,
@@ -100,7 +106,7 @@ if __name__ == "__main__":
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(
-        OppervlakteVanVertrekken2024.bereken(
+        OppervlakteVanVertrekken2023.bereken(
             eenheid, woningwaardering_resultaat
         ).model_dump_json(by_alias=True, indent=2, exclude_none=True)
     )

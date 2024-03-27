@@ -10,20 +10,23 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Woningwaarderingstelsel,
+)
 
 
 class Stelsel:
     """Initialiseert een Stelsel object.
 
     Parameters:
-        stelsel (str): De naam van het stelsel.
+        stelsel (Woningwaarderingstelsel): Het stelsel dat wordt berekend.
         peildatum (date, optional): De peildatum voor de waardering.
             Standaard is de huidige datum.
     """
 
     def __init__(
         self,
-        stelsel: str,
+        stelsel: Woningwaarderingstelsel,
         peildatum: date = date.today(),
     ) -> None:
         self.stelsel = stelsel
@@ -82,14 +85,14 @@ class Stelsel:
     @staticmethod
     def select_geldige_stelselgroepen(
         peildatum: date,
-        stelsel: str,
+        stelsel: Woningwaarderingstelsel,
         config: StelselConfig | None = None,
     ) -> list[Stelselgroep]:
         """Selecteert de geldige stelselgroepen voor een peildatum en een stelsel.
 
         Parameters:
             peildatum (date): De peildatum voor de waardering.
-            stelsel (str): De naam van het stelsel.
+            stelsel (Woningwaarderingstelsel): Het stelsel dat wordt berekend.
             config (StelselConfig | None, optional): Het configuratiebestand voor het stelsel.
                 Standaard is None, wat betekent dat het configuratiebestand wordt geladen.
 
@@ -108,19 +111,19 @@ class Stelsel:
             peildatum,
         ):
             raise ValueError(
-                f"Stelsel {stelsel} met begindatum {config.begindatum} en einddatum {config.einddatum} is niet geldig op peildatum {peildatum}."
+                f"Stelsel {stelsel.value.naam} met begindatum {config.begindatum} en einddatum {config.einddatum} is niet geldig op peildatum {peildatum}."
             )
 
         geldige_stelselgroepen = []
         for _, stelgroep_config in config.stelselgroepen.items():
             stelselgroep_class = import_class(
-                f"woningwaardering.stelsels.{stelsel}",
+                f"woningwaardering.stelsels.{stelsel.name}",
                 stelgroep_config.class_naam,
             )
 
             geldige_stelselgroepen.append(stelselgroep_class(peildatum=peildatum))
         if geldige_stelselgroepen == []:
             raise ValueError(
-                f"{stelsel}: geen geldige stelselgroepen gevonden met peildatum {peildatum}."
+                f"{stelsel.value.naam}: geen geldige stelselgroepen gevonden met peildatum {peildatum}."
             )
         return geldige_stelselgroepen

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Afletterstatus:
+class Afletterstatus(Enum):
     deels_afgeletterd = Referentiedata(
         code="DEE",
         naam="Deels afgeletterd",
@@ -33,3 +34,11 @@ class Afletterstatus:
     in dat er geen openstaand saldo meer is. Voor ontvangsten betekent dit dat de
     ontvangst volledig is afgeletterd tegen vordering(en).
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Verbijzonderingsoort:
+class Verbijzonderingsoort(Enum):
     cluster = Referentiedata(
         code="CLS",
         naam="Cluster",
@@ -101,3 +102,11 @@ class Verbijzonderingsoort:
     Optionele verwijzing naar een vastgoedeenheid om een financieel feit nader te kunnen
     verbijzonderen
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

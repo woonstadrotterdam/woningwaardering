@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Energieprestatievergoedingsoort:
+class Energieprestatievergoedingsoort(Enum):
     epv_basis = Referentiedata(
         code="BAS",
         naam="EPV Basis",
@@ -23,3 +24,11 @@ class Energieprestatievergoedingsoort:
     levert voor het volledige gebouwgebonden deel én 530 kWh/jaar voor het
     gebruikersgebonden deel (MGW).
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

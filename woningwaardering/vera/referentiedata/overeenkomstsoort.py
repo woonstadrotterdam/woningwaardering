@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Overeenkomstsoort:
+class Overeenkomstsoort(Enum):
     arbeid = Referentiedata(
         code="ARB",
         naam="Arbeid",
@@ -78,3 +79,11 @@ class Overeenkomstsoort:
     reparaties, groenverzorging. Ook de verschillende vormen van inschrijvingen of
     abonnementen vallen onder de soort Service overeenkomst.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

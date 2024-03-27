@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Grootboekmutatieherkomst:
+class Grootboekmutatieherkomst(Enum):
     activa_administratie = Referentiedata(
         code="ACT",
         naam="Activa-administratie",
@@ -112,3 +113,11 @@ class Grootboekmutatieherkomst:
     """
     Overige (automatische) (correctie)boekingen
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

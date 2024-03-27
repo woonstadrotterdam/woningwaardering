@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Voorrangsoort:
+class Voorrangsoort(Enum):
     binding = Referentiedata(
         code="BIN",
         naam="Binding",
@@ -36,3 +37,11 @@ class Voorrangsoort:
     """
     Er is voorrang voor woningzoekenden met een urgentie.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

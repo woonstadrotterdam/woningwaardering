@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Publicatiestatus:
+class Publicatiestatus(Enum):
     in_aanbieding = Referentiedata(
         code="AAN",
         naam="In aanbieding",
@@ -49,3 +50,11 @@ class Publicatiestatus:
     """
     De publicatie van beschikbaar vastgoed is in voorbereiding.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

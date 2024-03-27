@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Organisatievorm:
+class Organisatievorm(Enum):
     buitenlandse_rechtsvorm = Referentiedata(
         code="BUI",
         naam="Buitenlandse rechtsvorm",
@@ -154,3 +155,11 @@ class Organisatievorm:
     """
     Vereniging van eigenaars (Handelsregisterwet: art 6, 1, b)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

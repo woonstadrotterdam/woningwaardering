@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Afspraakstatus:
+class Afspraakstatus(Enum):
     aangevraagd = Referentiedata(
         code="AAN",
         naam="Aangevraagd",
@@ -34,3 +35,11 @@ class Afspraakstatus:
     """
     De afspraak is gepland. Hierbij zal doorgaans ook een medewerker zijn toegewezen.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

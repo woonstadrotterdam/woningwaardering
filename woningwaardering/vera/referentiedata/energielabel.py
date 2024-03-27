@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Energielabel:
+class Energielabel(Enum):
     a = Referentiedata(
         code="A",
         naam="A",
@@ -56,3 +57,11 @@ class Energielabel:
         code="G",
         naam="G",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

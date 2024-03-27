@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Vertrouwelijkheid:
+class Vertrouwelijkheid(Enum):
     geheim = Referentiedata(
         code="GEH",
         naam="Geheim",
@@ -35,3 +36,11 @@ class Vertrouwelijkheid:
     Informatie is alleen toegankelijk voor een beperkte groep gebruikers  (bv:
     persoonsgegevens, financiële gegevens)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

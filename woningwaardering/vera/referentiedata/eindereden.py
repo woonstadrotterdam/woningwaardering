@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Eindereden:
+class Eindereden(Enum):
     ontbinding = Referentiedata(
         code="ONT",
         naam="Ontbinding",
@@ -30,3 +31,11 @@ class Eindereden:
     sprake is van een zogenaamd wilsgebrek (bedreiging, bedrog, dwaling, misbruik
     van omstandigheden)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

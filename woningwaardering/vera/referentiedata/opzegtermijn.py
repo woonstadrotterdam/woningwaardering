@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Opzegtermijn:
+class Opzegtermijn(Enum):
     opzegtermijn_12_maanden = Referentiedata(
         code="12M",
         naam="12 maanden",
@@ -57,3 +58,11 @@ class Opzegtermijn:
     """
     Voor de overeenkomst geldt een opzegtermijn van 6 maanden.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

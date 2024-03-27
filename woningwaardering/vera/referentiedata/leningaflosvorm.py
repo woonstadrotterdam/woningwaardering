@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Leningaflosvorm:
+class Leningaflosvorm(Enum):
     annuitair = Referentiedata(
         code="ANN",
         naam="Annuitair",
@@ -24,3 +25,11 @@ class Leningaflosvorm:
     Met deze vorm van lenen wordt een vast bedrag als aflossing betaald. Hierdoor wordt
     de totale lasten (rente + aflossing) steeds lager.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

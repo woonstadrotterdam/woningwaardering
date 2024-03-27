@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Huurgeschilstatus:
+class Huurgeschilstatus(Enum):
     afgewezen = Referentiedata(
         code="AFG",
         naam="Afgewezen",
@@ -25,3 +26,11 @@ class Huurgeschilstatus:
     """
     Het huurgeschil is toegekend, en daarmee tevens afgehandeld
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

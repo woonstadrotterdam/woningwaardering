@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Onderhoudsoort:
+class Onderhoudsoort(Enum):
     inspectie = Referentiedata(
         code="INS",
         naam="Inspectie",
@@ -66,3 +67,11 @@ class Onderhoudsoort:
     Bij aanpassing op verzoek van de huurder voor verbetering van het woongenot.
     Voorbeeld is het voortijdig vervangen van de wc-pot door een luxe uiitvoering
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

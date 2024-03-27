@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Betaalgegevensoort:
+class Betaalgegevensoort(Enum):
     bankrekening = Referentiedata(
         code="BAN",
         naam="Bankrekening",
@@ -37,3 +38,11 @@ class Betaalgegevensoort:
     Het betaalgegeven van een relatie, behorende bij een overeenkomst,  is een
     TransferMate account.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

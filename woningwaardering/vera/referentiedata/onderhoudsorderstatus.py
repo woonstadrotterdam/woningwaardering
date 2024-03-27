@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Onderhoudsorderstatus:
+class Onderhoudsorderstatus(Enum):
     afgehandeld = Referentiedata(
         code="AFG",
         naam="Afgehandeld",
@@ -96,3 +97,11 @@ class Onderhoudsorderstatus:
     """
     Order wordt voordat deze gegund kan worden intern eerst beoordeeld.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

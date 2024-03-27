@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Woningwaarderingstelsel:
+class Woningwaarderingstelsel(Enum):
     onzelfstandige_woonruimten = Referentiedata(
         code="ONZ",
         naam="Onzelfstandige woonruimten",
@@ -37,3 +38,11 @@ class Woningwaarderingstelsel:
     Het puntensysteem binnen het woningwaarderingstelsel dat van toepassing is voor
     zelfstandig woonruimten
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

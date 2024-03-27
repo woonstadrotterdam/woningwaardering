@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Provincie:
+class Provincie(Enum):
     drenthe = Referentiedata(
         code="DR",
         naam="Drenthe",
@@ -65,3 +66,11 @@ class Provincie:
         code="ZH",
         naam="Zuid-Holland",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

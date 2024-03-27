@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Bestemming:
+class Bestemming(Enum):
     huur = Referentiedata(
         code="HUU",
         naam="Huur",
@@ -25,3 +26,11 @@ class Bestemming:
     """
     Eenheid is bestemd voor sloop bij mutatie.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

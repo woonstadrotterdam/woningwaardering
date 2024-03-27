@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Publicatieintakevorm:
+class Publicatieintakevorm(Enum):
     cooptatie = Referentiedata(
         code="COO",
         naam="Coöptatie",
@@ -34,3 +35,11 @@ class Publicatieintakevorm:
     """
     Sociale spelregels bepalen welke woningzoekende de eenheid krijgt.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

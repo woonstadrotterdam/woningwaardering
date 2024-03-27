@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Eenheidisolatie:
+class Eenheidisolatie(Enum):
     dakisolatie = Referentiedata(
         code="DAK",
         naam="Dakisolatie",
@@ -39,3 +40,11 @@ class Eenheidisolatie:
         code="VOL",
         naam="Volledig geïsoleerd",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

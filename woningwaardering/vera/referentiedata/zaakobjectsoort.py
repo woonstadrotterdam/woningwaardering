@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Zaakobjectsoort:
+class Zaakobjectsoort(Enum):
     cluster = Referentiedata(
         code="CLU",
         naam="Cluster",
@@ -26,3 +27,11 @@ class Zaakobjectsoort:
         code="OVE",
         naam="Overeenkomst",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Overeenkomststatus:
+class Overeenkomststatus(Enum):
     beeindigd = Referentiedata(
         code="BEE",
         naam="Beeindigd",
@@ -85,3 +86,11 @@ class Overeenkomststatus:
     De overeenkomst is opgezegd door de huurder maar is nog wel actief en de opzegging
     is ook nog niet definitief gemaakt.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

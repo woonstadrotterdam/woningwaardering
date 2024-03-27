@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Inkoopopdrachtregelsoort:
+class Inkoopopdrachtregelsoort(Enum):
     initieel = Referentiedata(
         code="INI",
         naam="Initieel",
@@ -25,3 +26,11 @@ class Inkoopopdrachtregelsoort:
     """
     De inkoopopdrachtregel betreft minderwerk t.o.v. de initiële inkoopopdracht
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

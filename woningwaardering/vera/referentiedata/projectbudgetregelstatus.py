@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Projectbudgetregelstatus:
+class Projectbudgetregelstatus(Enum):
     aangevraagd = Referentiedata(
         code="AAN",
         naam="Aangevraagd",
@@ -36,3 +37,11 @@ class Projectbudgetregelstatus:
     """
     Projectbudgetregel betreft vrijgegeven budget
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

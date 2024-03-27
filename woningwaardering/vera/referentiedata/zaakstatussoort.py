@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Zaakstatussoort:
+class Zaakstatussoort(Enum):
     aangemaakt = Referentiedata(
         code="AAN",
         naam="Aangemaakt",
@@ -50,3 +51,11 @@ class Zaakstatussoort:
     """
     De zaak is in uitvoering
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

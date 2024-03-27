@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Zaakrol:
+class Zaakrol(Enum):
     adviseur = Referentiedata(
         code="ADV",
         naam="Adviseur",
@@ -72,3 +73,11 @@ class Zaakrol:
         code="ZAA",
         naam="Zaakcoördinator",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

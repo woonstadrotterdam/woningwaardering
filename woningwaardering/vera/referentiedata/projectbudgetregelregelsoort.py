@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Projectbudgetregelregelsoort:
+class Projectbudgetregelregelsoort(Enum):
     kostendetailregel = Referentiedata(
         code="KDT",
         naam="Kostendetailregel",
@@ -26,3 +27,11 @@ class Projectbudgetregelregelsoort:
     Projectbudgetregel is een optelling van één of meer onderliggende kosten- of
     opbrengstenregels binnen de stichtingskosten hiërarchie
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

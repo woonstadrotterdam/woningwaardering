@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Huurklasse:
+class Huurklasse(Enum):
     betaalbaar = Referentiedata(
         code="BET",
         naam="Betaalbaar",
@@ -37,3 +38,11 @@ class Huurklasse:
     Eenheid waarvan de netto huur (kale huur) per maand onder de kwaliteitskortingsgrens
     ligt.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

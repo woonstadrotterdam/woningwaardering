@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Energieprestatiestatus:
+class Energieprestatiestatus(Enum):
     definitief = Referentiedata(
         code="DEF",
         naam="Definitief",
@@ -19,3 +20,11 @@ class Energieprestatiestatus:
     Een voorlopige energieprestatie wordt ook wel &#39;pré-label&#39; genoemd en is een op basis
     van woningkenmerken afgeleide (theoretische) prestatie
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

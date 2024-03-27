@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Sanctiesoort:
+class Sanctiesoort(Enum):
     milde_sanctie = Referentiedata(
         code="MIL",
         naam="Milde sanctie",
@@ -25,3 +26,11 @@ class Sanctiesoort:
     """
     Zware sanctie, verlies van alle zoek-, situatie en zoekpunten
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

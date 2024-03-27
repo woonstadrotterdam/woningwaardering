@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Incassomoment:
+class Incassomoment(Enum):
     incassomoment_1e_dag_van_de_maand = Referentiedata(
         code="001",
         naam="1e dag van de maand",
@@ -258,3 +259,11 @@ class Incassomoment:
     Laatste dag van de maand, door de verwerkende partij (de bank) te bepalen op basis
     van de kalendermaand (28e, 29e, 30e of 31e dag van de maand)
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

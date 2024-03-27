@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Regiesoort:
+class Regiesoort(Enum):
     bouwteam = Referentiedata(
         code="BOU",
         naam="Bouwteam",
@@ -39,3 +40,11 @@ class Regiesoort:
     en zorgt dat alles conform de wensen van de opdrachtgever wordt opgeleverd
     (bron: https://www.igg.nl/diensten/bouworganisatievormen/).
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

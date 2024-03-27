@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Publicatiedetailstatus:
+class Publicatiedetailstatus(Enum):
     woning_krijgt_andere_bestemming = Referentiedata(
         code="BES",
         naam="Woning krijgt andere bestemming",
@@ -97,3 +98,11 @@ class Publicatiedetailstatus:
     """
     Woning gaat uit exploitatie.
     """
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

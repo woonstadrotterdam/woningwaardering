@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Defectlocatie:
+class Defectlocatie(Enum):
     airco_en_of_koelinstallatie = Referentiedata(
         code="AIR",
         naam="Airco/koelinstallatie",
@@ -194,3 +195,11 @@ class Defectlocatie:
         code="ZOL",
         naam="Zolder / vliering",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

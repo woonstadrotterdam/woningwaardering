@@ -6,9 +6,12 @@ from woningwaardering.stelsels.utils import import_class
 @pytest.mark.parametrize(
     "module_path, class_naam",
     [
-        ("woningwaardering.stelsels.zelfstandig.zelfstandig", "Zelfstandig"),
         (
-            "woningwaardering.stelsels.zelfstandig.oppervlakte_van_vertrekken",
+            "woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten",
+            "ZelfstandigeWoonruimten",
+        ),
+        (
+            "woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken",
             "OppervlakteVanVertrekken",
         ),
     ],

@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Materiaalsoort:
+class Materiaalsoort(Enum):
     beton = Referentiedata(
         code="BET",
         naam="Beton",
@@ -76,3 +77,11 @@ class Materiaalsoort:
         code="STE",
         naam="Steenachtig",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

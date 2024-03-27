@@ -1,7 +1,8 @@
+from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Onderhoudslabel:
+class Onderhoudslabel(Enum):
     basis_onderhoud = Referentiedata(
         code="BAS",
         naam="Basis onderhoud",
@@ -26,3 +27,11 @@ class Onderhoudslabel:
         code="WIN",
         naam="Wind en waterdicht houden",
     )
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam

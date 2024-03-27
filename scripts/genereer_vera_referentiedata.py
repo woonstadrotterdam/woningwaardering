@@ -120,10 +120,11 @@ environment.filters["normalize_variable_name"] = normalize_variable_name
 
 # Define the Jinja2 template for soort_folder/<soort>.py
 soort_template = environment.from_string(
-    """from woningwaardering.vera.bvg.generated import Referentiedata
+    """from enum import Enum
+from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class {{ soort|remove_accents|title }}:
+class {{ soort|remove_accents|title }}(Enum):
 {%- for item in items %}
     {{ item|normalize_variable_name }} = Referentiedata(
         code="{{ item['code'] }}",
@@ -135,6 +136,14 @@ class {{ soort|remove_accents|title }}:
     \"\"\"
     {%- endif %}
 {% endfor %}
+
+    @property
+    def code(self) -> str | None:
+        return self.value.code
+
+    @property
+    def naam(self) -> str | None:
+        return self.value.naam
 """
 )
 
