@@ -1,37 +1,44 @@
 import importlib
 import os
 from datetime import date
-from typing import Any
+from typing import Type, TypeVar
 
 from loguru import logger
 
+T = TypeVar("T")
 
-def import_class(module_path: str, class_naam: str) -> Any:
+
+def import_class(module_path: str, class_naam: str, class_type: Type[T]) -> Type[T]:
     """
     Importeert een klasse uit een module.
 
     Parameters:
         module_path (str): Het pad naar de module waarin de klasse zich bevindt.
         class_naam (str): De naam van de klasse die geïmporteerd moet worden.
+        class_type (Type[T]): Het verwachtte type van de klasse.
 
     Returns:
-        Any: De geïmporteerde klasse.
+        Type[T]: De geïmporteerde klasse.
 
     Raises:
         ModuleNotFoundError: Als de module niet gevonden kan worden.
-        AttributeError: Als de klasse niet gevonden kan worden in de module.
+        AttributeError: Als de klasse van het opgegeven type niet gevonden kan worden in de module.
     """
     logger.debug(f"Importeer class '{class_naam}' uit '{module_path}'")
     try:
         module = importlib.import_module(module_path)
-        class_ = getattr(module, class_naam)
+        class_: type = getattr(module, class_naam)
+        if not issubclass(class_, class_type):
+            raise TypeError(
+                f"Class '{class_.__qualname__}' in '{class_.__module__}' is niet van het type '{class_type.__qualname__}'."
+            )
 
     except ModuleNotFoundError as e:
-        logger.error(e, f"Module {module_path} niet gevonden.")
+        logger.error(f"Module {module_path} niet gevonden.", e)
         raise
 
     except AttributeError as e:
-        logger.error(e, f"Class {class_naam} niet gevonden in: {module_path}.")
+        logger.error(f"Class {class_naam} niet gevonden in: {module_path}.", e)
         raise
 
     return class_

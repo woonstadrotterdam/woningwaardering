@@ -1,4 +1,5 @@
 from datetime import date
+from typing import Type
 from loguru import logger
 
 from woningwaardering.stelsels.config import StelselConfig
@@ -94,10 +95,7 @@ class Stelselgroep:
         stelselgroep_config = config.stelselgroepen[stelselgroep.name]
 
         geldige_stelselgroep_versies = [
-            import_class(
-                f"woningwaardering.stelsels.{stelsel.name}.{stelselgroep.name}",
-                versie.class_naam,
-            )
+            versie
             for versie in stelselgroep_config.versies
             if is_geldig(versie.begindatum, versie.einddatum, peildatum)
         ]
@@ -117,4 +115,10 @@ class Stelselgroep:
         )
         logger.debug(f"{stelsel.value.naam}: versies: {stelselgroep_config.versies}")
 
-        return geldige_stelselgroep_versies[0]()
+        geldige_stelselgroep_versie_class: Type[StelselgroepVersie] = import_class(
+            f"woningwaardering.stelsels.{stelsel.name}.{stelselgroep.name}",
+            geldige_stelselgroep_versies[0].class_naam,
+            StelselgroepVersie,  # type: ignore[type-abstract] # https://github.com/python/mypy/issues/4717
+        )
+
+        return geldige_stelselgroep_versie_class()

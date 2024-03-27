@@ -114,8 +114,12 @@ class Stelsel:
 
         geldige_stelselgroepen = [
             import_class(
-                f"woningwaardering.stelsels.{stelsel.name}", stelgroep_config.class_naam
-            )(peildatum=peildatum)
+                f"woningwaardering.stelsels.{stelsel.name}",
+                stelgroep_config.class_naam,
+                Stelselgroep,
+            )(
+                peildatum=peildatum,
+            )
             for _, stelgroep_config in config.stelselgroepen.items()
         ]
 
