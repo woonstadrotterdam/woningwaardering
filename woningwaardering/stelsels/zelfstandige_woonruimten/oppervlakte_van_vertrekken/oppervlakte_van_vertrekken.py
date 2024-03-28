@@ -11,11 +11,9 @@ from woningwaardering.vera.referentiedata import (
 
 class OppervlakteVanVertrekken(Stelselgroep):
     def __init__(self, peildatum: date = date.today()) -> None:
-        super().__init__(
-            peildatum=peildatum,
-            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-            stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
-        )
+        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_vertrekken
+        super().__init__(peildatum=peildatum)
 
 
 if __name__ == "__main__":

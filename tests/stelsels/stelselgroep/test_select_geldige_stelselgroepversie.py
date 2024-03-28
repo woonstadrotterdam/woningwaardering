@@ -1,7 +1,7 @@
 from datetime import date
 import pytest
 
-from woningwaardering.stelsels.stelselgroep import (
+from woningwaardering.stelsels import (
     Stelselgroep,
     StelselgroepVersie,
 )
@@ -22,7 +22,7 @@ from woningwaardering.vera.referentiedata import (
     ],
 )
 def test_select_geldige_stelselgroepversie(peildatum, stelsel, stelselgroep):
-    geldige_stelselgroep = Stelselgroep.select_geldige_stelselgroepversie(
+    geldige_stelselgroep = Stelselgroep.select_stelselgroepversie(
         peildatum=peildatum, stelsel=stelsel, stelselgroep=stelselgroep
     )
     assert isinstance(

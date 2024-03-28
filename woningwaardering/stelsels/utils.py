@@ -27,7 +27,7 @@ def import_class(module_path: str, class_naam: str, class_type: Type[T]) -> Type
     logger.debug(f"Importeer class '{class_naam}' uit '{module_path}'")
     try:
         module = importlib.import_module(module_path)
-        class_: type = getattr(module, class_naam)
+        class_: Type[T] = getattr(module, class_naam)
         if not issubclass(class_, class_type):
             raise TypeError(
                 f"Class '{class_.__qualname__}' in '{class_.__module__}' is niet van het type '{class_type.__qualname__}'."
