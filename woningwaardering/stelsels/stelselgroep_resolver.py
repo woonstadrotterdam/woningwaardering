@@ -17,7 +17,7 @@ from woningwaardering.stelsels.utils import (
 )
 
 
-class AbstractStelselgroep(ABC):
+class StelselgroepResolver(ABC):
     def __init__(
         self,
         stelsel: Woningwaarderingstelsel,
@@ -30,10 +30,6 @@ class AbstractStelselgroep(ABC):
         self.geldig_versie = self.select_stelselgroepversie(
             stelsel, stelselgroep, peildatum
         )
-
-    stelsel: Woningwaarderingstelsel
-    stelselgroep: Woningwaarderingstelselgroep
-    geldig_versie: StelselgroepVersie
 
     @staticmethod
     def select_stelselgroepversie(

@@ -1,6 +1,12 @@
+from decimal import BasicContext, setcontext
 import os
 import time
 from loguru import logger
+
+
+# Set context for all calculations to avoid rounding errors
+# See https://docs.python.org/3/library/decimal.html#rounding
+setcontext(BasicContext)
 
 
 default_timezone = "Europe/Amsterdam"

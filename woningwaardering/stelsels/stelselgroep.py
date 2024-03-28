@@ -1,6 +1,6 @@
 from datetime import date
 
-from woningwaardering.stelsels.abstract_stelselgroep import AbstractStelselgroep
+from woningwaardering.stelsels.stelselgroep_resolver import StelselgroepResolver
 from woningwaardering.stelsels.config import StelselConfig
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -9,7 +9,7 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 
-class Stelselgroep(AbstractStelselgroep):
+class Stelselgroep(StelselgroepResolver):
     """Initialiseert een Stelselgroep.
 
     Args:

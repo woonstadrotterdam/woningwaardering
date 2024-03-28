@@ -1,4 +1,4 @@
-from decimal import ROUND_HALF_UP, BasicContext, Decimal, setcontext
+from decimal import ROUND_HALF_UP, Decimal
 
 from loguru import logger
 
@@ -18,10 +18,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-
-# Set context for all calculations to avoid rounding errors
-# See https://docs.python.org/3/library/decimal.html#rounding
-setcontext(BasicContext)
 
 
 class OppervlakteVanVertrekken2024(StelselgroepVersie):

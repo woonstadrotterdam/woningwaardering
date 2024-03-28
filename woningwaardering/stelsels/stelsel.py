@@ -112,7 +112,7 @@ class Stelsel:
                 f"Stelsel {stelsel.value.naam} met begindatum {config.begindatum} en einddatum {config.einddatum} is niet geldig op peildatum {peildatum}."
             )
 
-        geldige_stelselgroepen = [
+        geldige_stelselgroepen: list[Stelselgroep] = [
             import_class(
                 f"woningwaardering.stelsels.{stelsel.name}",
                 stelgroep_config.class_naam,
