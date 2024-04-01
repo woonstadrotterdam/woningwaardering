@@ -71,7 +71,6 @@ class OppervlakteVanVertrekken2023(StelselgroepVersie):
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
-                        # stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
                         naam=ruimte.naam,
                     )
                 )
