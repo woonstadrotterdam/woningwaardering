@@ -16,7 +16,7 @@ import textwrap
 os.environ["TZ"] = "Europe/Amsterdam"
 time.tzset()
 
-output_folder = "woningwaardering/vera/referentiedata"
+output_folder = os.path.join("woningwaardering", "vera", "referentiedata")
 
 
 # url = "https://vera-service.azurewebsites.net/api/referentiedata?Version=latest"
