@@ -3,7 +3,7 @@ import pytest
 
 from woningwaardering.stelsels import (
     Stelselgroep,
-    StelselgroepVersie,
+    Stelselgroepversie,
 )
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
@@ -26,5 +26,5 @@ def test_select_geldige_stelselgroepversie(peildatum, stelsel, stelselgroep):
         peildatum=peildatum, stelsel=stelsel, stelselgroep=stelselgroep
     )
     assert isinstance(
-        geldige_stelselgroep, StelselgroepVersie
+        geldige_stelselgroep, Stelselgroepversie
     ), f"Stelselgroepversie '{geldige_stelselgroep}' is geen instance van StelselgroepVersie, {type(geldige_stelselgroep)}"

@@ -1,7 +1,7 @@
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 
-from woningwaardering.stelsels.config import StelselConfig
+from woningwaardering.stelsels.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
 )
@@ -31,7 +31,7 @@ class Stelsel:
     ) -> None:
         self.stelsel = stelsel
         self.peildatum = peildatum
-        self.stelsel_config = StelselConfig.load(stelsel=self.stelsel)
+        self.stelsel_config = Stelselconfig.load(stelsel=self.stelsel)
         self.geldige_stelselgroepen = self.select_geldige_stelselgroepen(
             self.peildatum,
             self.stelsel,
@@ -84,14 +84,14 @@ class Stelsel:
     def select_geldige_stelselgroepen(
         peildatum: date,
         stelsel: Woningwaarderingstelsel,
-        config: StelselConfig | None = None,
+        config: Stelselconfig | None = None,
     ) -> list[Stelselgroep]:
         """Selecteert de geldige stelselgroepen voor een peildatum en een stelsel.
 
         Parameters:
             peildatum (date): De peildatum voor de waardering.
             stelsel (Woningwaarderingstelsel): Het stelsel dat wordt berekend.
-            config (StelselConfig | None, optional): Het configuratiebestand voor het stelsel.
+            config (Stelselconfig | None, optional): Het configuratiebestand voor het stelsel.
                 Standaard is None, wat betekent dat het configuratiebestand wordt geladen.
 
         Returns:
@@ -102,7 +102,7 @@ class Stelsel:
             ValueError: Als er geen geldige stelselgroepen zijn gevonden.
         """
         if config is None:
-            config = StelselConfig.load(stelsel=stelsel)
+            config = Stelselconfig.load(stelsel=stelsel)
         if not is_geldig(
             config.begindatum,
             config.einddatum,

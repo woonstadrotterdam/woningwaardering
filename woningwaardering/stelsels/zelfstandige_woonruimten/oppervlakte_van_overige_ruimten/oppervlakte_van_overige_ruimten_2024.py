@@ -2,7 +2,7 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels import StelselgroepVersie
+from woningwaardering.stelsels import Stelselgroepversie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -20,7 +20,7 @@ from woningwaardering.vera.referentiedata import (
 )
 
 
-class OppervlakteVanOverigeRuimten2024(StelselgroepVersie):
+class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
     @staticmethod
     def bereken(
         eenheid: EenhedenEenheid,

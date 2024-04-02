@@ -1,5 +1,5 @@
 from .stelsel import Stelsel
 from .stelselgroep import Stelselgroep
-from .stelselgroepversie import StelselgroepVersie
+from .stelselgroepversie import Stelselgroepversie
 
-__all__ = ["Stelselgroep", "StelselgroepVersie", "Stelsel"]
+__all__ = ["Stelselgroep", "Stelselgroepversie", "Stelsel"]

@@ -4,9 +4,9 @@ from typing import Type
 
 from loguru import logger
 
-from woningwaardering.stelsels.config import StelselConfig
+from woningwaardering.stelsels.config import Stelselconfig
 from .utils import import_class, is_geldig
-from .stelselgroepversie import StelselgroepVersie
+from .stelselgroepversie import Stelselgroepversie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -37,25 +37,25 @@ class _StelselgroepABC(ABC):
         stelsel: Woningwaarderingstelsel,
         stelselgroep: Woningwaarderingstelselgroep,
         peildatum: date = date.today(),
-        config: StelselConfig | None = None,
-    ) -> StelselgroepVersie:
+        config: Stelselconfig | None = None,
+    ) -> Stelselgroepversie:
         """Selecteert de geldige stelselgroepversie op basis van de opgegeven peildatum, stelsel en stelselgroep.
 
         Args:
             stelsel (Woningwaarderingstelsel): Het stelsel waartoe de stelselgroep behoort.
             stelselgroep (Woningwaarderingstelselgroep): De naam van de stelselgroep.
             peildatum (date): De peildatum voor de waardering.
-            config (StelselConfig| None, optional): De configuratie. Defaults to None.
+            config (Stelselconfig| None, optional): De configuratie. Defaults to None.
 
         Returns:
-            StelselgroepVersie: De geldige stelselgroepversie.
+            Stelselgroepversie: De geldige stelselgroepversie.
 
         Raises:
             ValueError: Als er geen geldige stelselgroepen zijn gevonden met de opgegeven peildatum.
             ValueError: Als er meerdere geldige stelselgroepen zijn gevonden met de opgegeven peildatum.
         """
         if not config:
-            config = StelselConfig.load(stelsel=stelsel)
+            config = Stelselconfig.load(stelsel=stelsel)
 
         stelselgroep_config = config.stelselgroepen[stelselgroep.name]
 
@@ -82,10 +82,10 @@ class _StelselgroepABC(ABC):
 
         geldige_stelselgroep_versie_config = geldige_stelselgroep_versie_configs[0]
 
-        stelselgroep_versie: Type[StelselgroepVersie] = import_class(
+        stelselgroep_versie: Type[Stelselgroepversie] = import_class(
             f"woningwaardering.stelsels.{stelsel.name}.{stelselgroep.name}",
             geldige_stelselgroep_versie_config.class_naam,
-            StelselgroepVersie,  # type: ignore[type-abstract] # https://github.com/python/mypy/issues/4717
+            Stelselgroepversie,  # type: ignore[type-abstract] # https://github.com/python/mypy/issues/4717
         )
 
         return stelselgroep_versie()
@@ -96,18 +96,18 @@ class Stelselgroep(_StelselgroepABC):
 
     Args:
         peildatum (date, optional): De peildatum voor de waardering".
-        config (StelselConfig | None, optional): Een optionele configuratie. Defaults naar None.
+        config (Stelselconfig | None, optional): Een optionele configuratie. Defaults naar None.
     """
 
     def __init__(
         self,
         peildatum: date = date.today(),
-        config: StelselConfig | None = None,
+        config: Stelselconfig | None = None,
     ) -> None:
         self.peildatum = peildatum
 
         if config is None:
-            config = StelselConfig.load(stelsel=self.stelsel)
+            config = Stelselconfig.load(stelsel=self.stelsel)
 
         self.geldige_versie = self.select_stelselgroepversie(
             self.stelsel, self.stelselgroep, self.peildatum, config

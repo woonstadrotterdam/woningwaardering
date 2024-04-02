@@ -10,27 +10,27 @@ from woningwaardering.vera.referentiedata import (
 )
 
 
-class StelselgroepVersieConfig(BaseModel):
+class Stelselgroepversieconfig(BaseModel):
     class_naam: str
     begindatum: date
     einddatum: date
 
 
-class StelselgroepConfig(BaseModel):
+class Stelselgroepconfig(BaseModel):
     class_naam: str
     begindatum: date
     einddatum: date
-    versies: List[StelselgroepVersieConfig]
+    versies: List[Stelselgroepversieconfig]
 
 
-class StelselConfig(BaseModel):
+class Stelselconfig(BaseModel):
     stelsel: str
     begindatum: date
     einddatum: date
-    stelselgroepen: Dict[str, StelselgroepConfig]
+    stelselgroepen: Dict[str, Stelselgroepconfig]
 
     @classmethod
-    def load(cls, stelsel: Woningwaarderingstelsel) -> "StelselConfig":
+    def load(cls, stelsel: Woningwaarderingstelsel) -> "Stelselconfig":
         try:
             path = f"woningwaardering/stelsels/config/{stelsel.name}.yml"
             with open(path, "r") as file:

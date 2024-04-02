@@ -7,7 +7,7 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 
-class StelselgroepVersie(ABC):
+class Stelselgroepversie(ABC):
     @staticmethod
     @abstractmethod
     def bereken(

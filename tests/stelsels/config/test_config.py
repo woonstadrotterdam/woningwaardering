@@ -2,7 +2,7 @@ import pytest
 from pydantic import ValidationError
 
 # from woningwaardering.stelsels.config.config import Stelselconfig
-from woningwaardering.stelsels.config import StelselConfig
+from woningwaardering.stelsels.config import Stelselconfig
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
@@ -12,7 +12,7 @@ from woningwaardering.vera.referentiedata import (
 def test_stelselconfig(stelsel: Woningwaarderingstelsel) -> None:
     """This function valdiates the Stelselsconfig.yml"""
     try:
-        _ = StelselConfig.load(stelsel=stelsel)
+        _ = Stelselconfig.load(stelsel=stelsel)
     except ValidationError as e:
         print(e, f"Stelsel {stelsel} does not have a valid yml config")
         raise
