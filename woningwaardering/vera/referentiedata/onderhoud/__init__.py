@@ -1,0 +1,38 @@
+from woningwaardering.vera.referentiedata import (
+    Afrekenwijzesoort,
+    Defectlocatie,
+    Defectoorzaak,
+    Defectsoort,
+    Defectstatus,
+    Inspectierapportsoort,
+    Inspectierapportstatus,
+    Onderhoudsbestedingsoort,
+    Onderhoudsoort,
+    Onderhoudsorderstatus,
+    Onderhoudspecialisme,
+    Onderhoudstaakdetailstatus,
+    Onderhoudstaakstatus,
+    Onderhoudsverzoekstatus,
+    Uitvoerendesoort,
+    Verrekeningsoort,
+)
+
+
+__all__ = [
+    "Afrekenwijzesoort",
+    "Defectlocatie",
+    "Defectoorzaak",
+    "Defectsoort",
+    "Defectstatus",
+    "Inspectierapportsoort",
+    "Inspectierapportstatus",
+    "Onderhoudsbestedingsoort",
+    "Onderhoudsoort",
+    "Onderhoudsorderstatus",
+    "Onderhoudspecialisme",
+    "Onderhoudstaakdetailstatus",
+    "Onderhoudstaakstatus",
+    "Onderhoudsverzoekstatus",
+    "Uitvoerendesoort",
+    "Verrekeningsoort",
+]

@@ -1,0 +1,686 @@
+{
+  "bouwjaar": 1924,
+  "ruimten": [
+    {
+      "id": "Space_108014554",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "Gang",
+      "inhoud": 7.85489,
+      "oppervlakte": 2.7369,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108017424",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.248368,
+      "oppervlakte": 0.225896,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006259",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 9.76781,
+      "oppervlakte": 4.25211,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108010630",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.652177,
+      "oppervlakte": 0.239771,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108014589",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 60.4048,
+      "oppervlakte": 21.047,
+      "verwarmd": true,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108014713",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "inhoud": 9.01742,
+      "oppervlakte": 3.14196,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108010812",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "inhoud": 8.91506,
+      "oppervlakte": 3.1391,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006247",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "Gang",
+      "inhoud": 12.3979,
+      "oppervlakte": 4.39642,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108010632",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 111.528,
+      "oppervlakte": 41.0028,
+      "verwarmd": true,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006222",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.662668,
+      "oppervlakte": 0.234989,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006229",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 57.4359,
+      "oppervlakte": 20.3673,
+      "verwarmd": true,
+      "gemeenschappelijk": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Aanrecht_108006231",
+          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYcF",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "extraAttributen": {
+            "lengteAanrecht": 2700,
+            "ifcSoort": "IfcFurniture"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Space_108006213",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "ENT",
+        "naam": "Entree"
+      },
+      "naam": "Entree",
+      "inhoud": 5.84899,
+      "oppervlakte": 1.28832,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006357",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin",
+      "inhoud": 172.377,
+      "oppervlakte": 49.1102,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108010631",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "OVL",
+        "naam": "Overloop"
+      },
+      "naam": "Overloop",
+      "inhoud": 7.63951,
+      "oppervlakte": 2.80864,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108017426",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "Gang",
+      "inhoud": 7.45195,
+      "oppervlakte": 3.32162,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108014563",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "gemeenschappelijk": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Douche_108014568",
+          "id_bimmodel": "1r9bfeurv43e$egF8LAwX0",
+          "naam": "Douche",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "DOU",
+            "naam": "Douche"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.SHOWER"
+          }
+        },
+        {
+          "id": "Bad_108014569",
+          "id_bimmodel": "1r9bfeurv43e$egF8LAwX1",
+          "naam": "Bad",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "BAD",
+            "naam": "Bad"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.BATH"
+          }
+        },
+        {
+          "id": "Wastafel_108014566",
+          "id_bimmodel": "1r9bfeurv43e$egF8LAwX2",
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.WASHHANDBASIN"
+          }
+        },
+        {
+          "id": "Wastafel_108014567",
+          "id_bimmodel": "1r9bfeurv43e$egF8LAwX3",
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.WASHHANDBASIN"
+          }
+        },
+        {
+          "id": "Closetcombinatie_108014565",
+          "id_bimmodel": "1r9bfeurv43e$egF8LAwX5",
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "TOI",
+            "naam": "Toilet"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.TOILETPAN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Space_108017433",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 31.6776,
+      "oppervlakte": 15.9766,
+      "verwarmd": true,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006242",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "naam": "Overige ruimte",
+      "inhoud": 28.8214,
+      "oppervlakte": 10.2203,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108017420",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 2.59129,
+      "oppervlakte": 2.20109,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006207",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "MET",
+        "naam": "Meterruimte"
+      },
+      "naam": "Meterruimte",
+      "inhoud": 1.48163,
+      "oppervlakte": 0.326351,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108014579",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.777043,
+      "oppervlakte": 0.270747,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006211",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 4.76483,
+      "oppervlakte": 2.77025,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108010629",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 6.41373,
+      "oppervlakte": 2.12375,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108017431",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 38.1247,
+      "oppervlakte": 19.1488,
+      "verwarmd": true,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006238",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "naam": "Overige ruimte",
+      "inhoud": 15.7891,
+      "oppervlakte": 7.11221,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108014593",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 45.3997,
+      "oppervlakte": 15.8187,
+      "verwarmd": true,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006223",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "inhoud": 3.78948,
+      "oppervlakte": 1.21857,
+      "verwarmd": false,
+      "gemeenschappelijk": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Fontein_108006225",
+          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYX0",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.SINK"
+          }
+        },
+        {
+          "id": "Closetcombinatie_108006224",
+          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYaD",
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "TOI",
+            "naam": "Toilet"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.TOILETPAN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Space_108014551",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 6.73124,
+      "oppervlakte": 2.12851,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108014580",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.766847,
+      "oppervlakte": 0.267194,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006467",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "DAK",
+        "naam": "Dakterras"
+      },
+      "naam": "Dakterras",
+      "inhoud": 49.6957,
+      "oppervlakte": 15.9281,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108006244",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 2.919,
+      "oppervlakte": 0.949606,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Space_108017427",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "inhoud": 14.4272,
+      "oppervlakte": 6.6504,
+      "verwarmd": false,
+      "gemeenschappelijk": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Ketel_108017429",
+          "id_bimmodel": "0pE4trfTv7JhZzTDEAn8o$",
+          "naam": "Ketel",
+          "soort": {
+            "code": "VER",
+            "naam": "Verwarming"
+          },
+          "detailSoort": {
+            "code": "VTO",
+            "naam": "Verwarmingstoestellen"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcBoiler"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Space_108017430",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.369015,
+      "oppervlakte": 0.27936,
+      "verwarmd": false,
+      "gemeenschappelijk": true
+    }
+  ]
+}
