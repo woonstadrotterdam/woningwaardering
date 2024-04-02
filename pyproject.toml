@@ -27,7 +27,7 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["woniningwaardering"]
+include = ["woningwaardering"]
 
 [project.optional-dependencies]
 test = [
