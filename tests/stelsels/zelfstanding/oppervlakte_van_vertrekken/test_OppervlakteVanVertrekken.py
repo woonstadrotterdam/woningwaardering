@@ -1,4 +1,5 @@
 from datetime import date
+
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanVertrekken,
 )

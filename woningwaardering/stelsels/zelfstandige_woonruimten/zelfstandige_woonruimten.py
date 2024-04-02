@@ -19,7 +19,7 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 if __name__ == "__main__":
     zel = ZelfstandigeWoonruimten()
-    f = open("./input_modellen/41164000002.json", "r+")
+    f = open("./data_modellen/input/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     print(
         zel.bereken(eenheid).model_dump_json(by_alias=True, indent=2, exclude_none=True)
