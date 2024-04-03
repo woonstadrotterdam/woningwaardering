@@ -32,14 +32,24 @@ def _min_2m_hoogte_50_procent_oppervlakte_badkamer_of_doucheruimte(
     Returns:
         bool: voldoet de ruimte aan de eis
     """
+    if (
+        ruimte.detail_soort is None
+        or ruimte.oppervlakte is None
+        or ruimte.detail_soort.code is None
+    ):
+        return False
+
     result = (
         ruimte.inhoud is None
-        or ruimte.detail_soort.code
-        in [
-            Ruimtedetailsoort.doucheruimte.code,
-            Ruimtedetailsoort.badkamer.code,
-        ]
-        or ruimte.inhoud >= ruimte.oppervlakte / 2 * 2
+        or (
+            ruimte.detail_soort is None
+            or ruimte.detail_soort.code
+            in [
+                Ruimtedetailsoort.doucheruimte.code,
+                Ruimtedetailsoort.badkamer.code,
+            ]
+        )
+        or (ruimte.oppervlakte is None or ruimte.inhoud >= ruimte.oppervlakte / 2 * 2)
     )
     if result is False:
         logger.warning(
@@ -57,6 +67,13 @@ def _min_2m10_hoogte_50_procent_oppervlakte(ruimte: EenhedenRuimte) -> bool:
     Returns:
         bool: voldoet de ruimte aan de eis
     """
+    if (
+        ruimte.oppervlakte is None
+        or ruimte.detail_soort is None
+        or ruimte.detail_soort.code is None
+    ):
+        return False
+
     result = (
         ruimte.inhoud is None
         or ruimte.inhoud >= ruimte.oppervlakte / 2 * 2.1
@@ -79,6 +96,13 @@ def _min_0komma64m2_badkamer_en_of_toilet(ruimte: EenhedenRuimte) -> bool:
     Returns:
         bool: voldoet de ruimte aan de eis
     """
+    if (
+        ruimte.oppervlakte is None
+        or ruimte.detail_soort is None
+        or ruimte.detail_soort.code is None
+    ):
+        return False
+
     result = (
         ruimte.detail_soort.code != Ruimtedetailsoort.badkamer_en_of_toilet.code
         or ruimte.oppervlakte >= 0.64
@@ -99,6 +123,13 @@ def _min_4m2_exclusief_keuken_en_badkamer_en_of_toilet(ruimte: EenhedenRuimte) -
     Returns:
         bool: voldoet de ruimte aan de eis
     """
+    if (
+        ruimte.oppervlakte is None
+        or ruimte.detail_soort is None
+        or ruimte.detail_soort.code is None
+    ):
+        return False
+
     result = ruimte.oppervlakte > 4 or ruimte.detail_soort.code in [
         Ruimtedetailsoort.keuken.code,
         Ruimtedetailsoort.badkamer_en_of_toilet.code,
@@ -130,6 +161,8 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         for ruimte in eenheid.ruimten or []:
             if (
                 ruimte.soort is not None
+                and ruimte.detail_soort is not None
+                and ruimte.detail_soort.code is not None
                 and (
                     ruimte.soort.code == Ruimtesoort.vertrek.code
                     or ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code
