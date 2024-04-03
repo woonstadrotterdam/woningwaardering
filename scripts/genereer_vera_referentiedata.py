@@ -60,6 +60,15 @@ for item in active_data:
 # Create output directory if not exists
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
+else:
+    # Recursively remove all files and folders in the output directory
+    for root, dirs, files in os.walk(output_folder, topdown=False):
+        for name in files:
+            logger.debug(f"Verwijder bestand: {os.path.join(root, name)}")
+            os.remove(os.path.join(root, name))
+        for name in dirs:
+            logger.debug(f"Verwijder map: {os.path.join(root, name)}")
+            os.rmdir(os.path.join(root, name))
 
 # Group items by 'soort'
 grouped_data = [(k, list(g)) for k, g in groupby(active_data, key=itemgetter("soort"))]
@@ -136,7 +145,6 @@ class {{ soort|remove_accents|title }}(Enum):
     \"\"\"
     {%- endif %}
 {% endfor %}
-
     @property
     def code(self) -> str | None:
         return self.value.code
@@ -144,6 +152,7 @@ class {{ soort|remove_accents|title }}(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
 """
 )
 
