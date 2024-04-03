@@ -9,5 +9,5 @@ class _EenhedenRuimteUitbreiding(BaseModel):
         default=None, alias="gedeeldMetAantalEenheden"
     )
     """
-    Het aantal eenheden waarmee deze ruimte wordt gedeeld
+    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging.
     """
