@@ -341,7 +341,7 @@ class Ruimtedetailsoort(Enum):
         naam="Overloop",
     )
     """
-    Gang op een bovenverdieping.
+    Verkeersruimte: Gang op een bovenverdieping.
     """
 
     entree = Referentiedata(
@@ -349,7 +349,7 @@ class Ruimtedetailsoort(Enum):
         naam="Entree",
     )
     """
-    Ingang van een gebouw.
+    Verkeersruimte: Ingang van een gebouw.
     """
 
     @property
