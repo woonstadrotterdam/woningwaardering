@@ -22,8 +22,7 @@ tasks:
           --field-constraints \
           --allow-population-by-field-name \
           --strict-nullable \
-          --use-title-as-name \
-          --additional-imports woningwaardering.vera.bvg.model_uitbreidingen.eenheden_ruimte._EenhedenRuimte
+          --use-title-as-name
       - python scripts/uitbreiden_vera_modellen.py
   genereer-vera-referentiedata:
     desc: Genereer VERA referentiedata

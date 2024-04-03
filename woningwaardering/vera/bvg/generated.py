@@ -7,8 +7,8 @@ from datetime import date
 from typing import Optional, Union
 
 from pydantic import AnyUrl, AwareDatetime, BaseModel, ConfigDict, Field, RootModel
-from woningwaardering.vera.bvg.model_uitbreidingen.eenheden_ruimte import (
-    _EenhedenRuimte,
+from woningwaardering.vera.bvg.model_uitbreidingen.eenheden_ruimte_uitbreiding import (
+    _EenhedenRuimteUitbreiding,
 )
 
 
@@ -1232,7 +1232,7 @@ class EenhedenRelatierol(BaseModel):
     """
 
 
-class EenhedenRuimte(_EenhedenRuimte):
+class EenhedenRuimte(_EenhedenRuimteUitbreiding):
     model_config = ConfigDict(
         populate_by_name=True,
     )
