@@ -1,0 +1,21 @@
+{
+  "bouwjaar": 1924,
+  "ruimten": [
+    {
+      "id": "Space_108014554",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAT",
+        "naam": "Badkamer/toilet"
+      },
+      "naam": "Badkamer/toilet",
+      "inhoud": 60.4048,
+      "oppervlakte": 0.64,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    }
+  ]
+}
