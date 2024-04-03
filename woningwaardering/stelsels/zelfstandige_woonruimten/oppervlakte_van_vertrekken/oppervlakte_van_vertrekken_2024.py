@@ -5,6 +5,7 @@ from loguru import logger
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -18,6 +19,95 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+
+
+def _min_2m_hoogte_50_procent_oppervlakte_badkamer_of_doucheruimte(
+    ruimte: EenhedenRuimte,
+) -> bool:
+    """De badkamer of doucheruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,00 m.
+
+    Args:
+        ruimte (EenhedenRuimte): een ruimte.
+
+    Returns:
+        bool: voldoet de ruimte aan de eis
+    """
+    result = (
+        ruimte.inhoud is None
+        or ruimte.detail_soort.code
+        in [
+            Ruimtedetailsoort.doucheruimte.code,
+            Ruimtedetailsoort.badkamer.code,
+        ]
+        or ruimte.inhoud >= ruimte.oppervlakte / 2 * 2
+    )
+    if result is False:
+        logger.warning(
+            f"{ruimte.naam} {ruimte.detail_soort.code} heeft een te lage plafondhoogte en krijgt daarom geen punten."
+        )
+    return result
+
+
+def _min_2m10_hoogte_50_procent_oppervlakte(ruimte: EenhedenRuimte) -> bool:
+    """De ruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,10 m.
+
+    Args:
+        ruimte (EenhedenRuimte): een ruimte.
+
+    Returns:
+        bool: voldoet de ruimte aan de eis
+    """
+    result = (
+        ruimte.inhoud is None
+        or ruimte.inhoud >= ruimte.oppervlakte / 2 * 2.1
+        or ruimte.detail_soort.code
+        in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
+    )
+    if result is False:
+        logger.warning(
+            f"{ruimte.naam} {ruimte.detail_soort.code} heeft een te lage plafondhoogte en krijgt daarom geen punten."
+        )
+    return result
+
+
+def _min_0komma64m2_badkamer_en_of_toilet(ruimte: EenhedenRuimte) -> bool:
+    """Voor gecombineerde bad-/doucheruimte met toilet geldt een minimale oppervlakte van 0,64 m².
+
+    Args:
+        ruimte (EenhedenRuimte): een ruimte.
+
+    Returns:
+        bool: voldoet de ruimte aan de eis
+    """
+    result = (
+        ruimte.detail_soort.code != Ruimtedetailsoort.badkamer_en_of_toilet.code
+        or ruimte.oppervlakte >= 0.64
+    )
+    if result is False:
+        logger.warning(
+            f"{ruimte.naam} {ruimte.detail_soort} is kleiner dan 0.64 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten."
+        )
+    return result
+
+
+def _min_4m2_exclusief_keuken_en_badkamer_en_of_toilet(ruimte: EenhedenRuimte) -> bool:
+    """Een ruimte moet minimaal 4m2 zijn om te tellen als vertrek. De eisen van minimaal 4m2 gelden niet voor de keuken en badkamer en/of toilet.
+
+    Args:
+        ruimte (EenhedenRuimte): een ruimte.
+
+    Returns:
+        bool: voldoet de ruimte aan de eis
+    """
+    result = ruimte.oppervlakte > 4 or ruimte.detail_soort.code in [
+        Ruimtedetailsoort.keuken.code,
+        Ruimtedetailsoort.badkamer_en_of_toilet.code,
+    ]
+    if result is False:
+        logger.warning(
+            f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten."
+        )
+    return result
 
 
 class OppervlakteVanVertrekken2024(Stelselgroepversie):
@@ -40,8 +130,12 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         for ruimte in eenheid.ruimten or []:
             if (
                 ruimte.soort is not None
-                and ruimte.soort.code == Ruimtesoort.vertrek.code
+                and (
+                    ruimte.soort.code == Ruimtesoort.vertrek.code
+                    or ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code
+                )
                 and ruimte.detail_soort is not None
+                and ruimte.oppervlakte is not None
             ):
                 if ruimte.detail_soort.code not in [
                     Ruimtedetailsoort.woonkamer.code,
@@ -55,15 +149,20 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                     Ruimtedetailsoort.zolder.code,
                     Ruimtedetailsoort.slaapkamer.code,
                 ]:
-                    logger.debug(
+                    logger.warning(
                         f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
                     )
                     continue
 
-                if ruimte.oppervlakte is not None and ruimte.oppervlakte < 4:
-                    logger.debug(
-                        f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter"
-                    )
+                if not _min_0komma64m2_badkamer_en_of_toilet(ruimte):
+                    continue
+                if not _min_4m2_exclusief_keuken_en_badkamer_en_of_toilet(ruimte):
+                    continue
+                if not _min_2m10_hoogte_50_procent_oppervlakte(ruimte):
+                    continue
+                if not _min_2m_hoogte_50_procent_oppervlakte_badkamer_of_doucheruimte(
+                    ruimte
+                ):
                     continue
 
                 woningwaardering = WoningwaarderingResultatenWoningwaardering()
@@ -97,7 +196,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
-    f = open("./data_modellen/input/41164000002.json", "r+")
+    f = open("./data_modellen/input/badkamer_en_of_toilet_tot_0.64.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(
