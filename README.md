@@ -141,6 +141,38 @@ task genereer-vera-bvg-modellen
 
 De classes voor deze modellen worden gegeneerd in `woningwaardering/vera/bvg/generated.py`
 
+#### Uitbreidingen op datamodellen
+
+Wanneer de VERA modellen niet toereikend zijn om de woningwaardering te berekenen, kan het VERA model uitgebreid worden.
+
+Maak hiervoor altijd eerst een issue aan in de [VERA OpenApi repository](https://github.com/Aedes-datastandaarden/vera-openapi).
+
+Maak vervolgens in de map [woningwaardering/vera/bvg/model_uitbreidingen](woningwaardering/vera/bvg/model_uitbreidingen) een class aan met de missende attributen. De naamgeving voor deze classes is: `_{classNaam}Uitbreiding`. Zorg ervoor dat er per class maximaal één uitbreidings class is.
+
+Zet in de class bij het toegevoegde attribuut een comment met een link naar het issue in de VERA OpenApi repository zodat duidelijk is waar de toevoeging voor dient, en we kunnen volgen of de aanpassing is doorgevoerd in de VERA modellen.
+
+Daarnaast neem je in de class een docstring op met uitleg over het gebruik en doel van de uitbreiding.
+
+Bijvoorbeeld: voor het uitbreiden van de class `EenhedenRuimte` maak je een class `_EenhedenRuimteUitbreiding` aan:
+
+```python
+from typing import Optional
+
+from pydantic import BaseModel, Field
+
+
+class _EenhedenRuimteUitbreiding(BaseModel):
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+    gedeeld_met_aantal_eenheden: Optional[int] = Field(
+        default=None, alias="gedeeldMetAantalEenheden"
+    )
+    """
+    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging.
+    """
+```
+
+De task `genereer-vera-bvg-modellen` zal deze classes gebruiken als base class voor de VERA class en zo de toegevoegde attributen beschikbaar maken.
+
 ### Referentiedata
 
 Naast de referentiedata specifiek voor deze package, maken we ook gebruik van de [VERA Referentiedata](https://github.com/Aedes-datastandaarden/vera-referentiedata).
