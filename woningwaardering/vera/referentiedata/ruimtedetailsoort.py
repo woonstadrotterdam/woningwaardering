@@ -336,6 +336,22 @@ class Ruimtedetailsoort(Enum):
     advertentietekst worden gemeld.
     """
 
+    overloop = Referentiedata(
+        code="OVL",
+        naam="Overloop",
+    )
+    """
+    Gang op een bovenverdieping.
+    """
+
+    entree = Referentiedata(
+        code="ENT",
+        naam="Entree",
+    )
+    """
+    Ingang van een gebouw.
+    """
+
     @property
     def code(self) -> str | None:
         return self.value.code

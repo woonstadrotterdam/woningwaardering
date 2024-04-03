@@ -1,0 +1,3 @@
+Soort;Code;Naam;Omschrijving;Begindatum;Einddatum;Parent;Informatiedomein
+RUIMTEDETAILSOORT;OVL;Overloop;Gang op een bovenverdieping.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
+RUIMTEDETAILSOORT;ENT;Entree;Ingang van een gebouw.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
