@@ -147,13 +147,13 @@ Wanneer de VERA modellen niet toereikend zijn om de woningwaardering te berekene
 
 Maak hiervoor altijd eerst een issue aan in de [VERA OpenApi repository](https://github.com/Aedes-datastandaarden/vera-openapi).
 
-Maak vervolgens in de map [woningwaardering/vera/bvg/model_uitbreidingen](woningwaardering/vera/bvg/model_uitbreidingen) een class aan met de missende attributen. De naamgeving voor deze classes is: `_{classNaam}Uitbreiding`. Zorg ervoor dat er per class maximaal één uitbreidings class is.
+Maak vervolgens in de map [woningwaardering/vera/bvg/model_uitbreidingen](woningwaardering/vera/bvg/model_uitbreidingen) een class aan met de missende attributen. De naamgeving voor deze classes is: `_{classNaam}`.
 
 Zet in de class bij het toegevoegde attribuut een comment met een link naar het issue in de VERA OpenApi repository zodat duidelijk is waar de toevoeging voor dient, en we kunnen volgen of de aanpassing is doorgevoerd in de VERA modellen.
 
 Daarnaast neem je in de class een docstring op met uitleg over het gebruik en doel van de uitbreiding.
 
-Bijvoorbeeld: voor het uitbreiden van de class `EenhedenRuimte` maak je een class `_EenhedenRuimteUitbreiding` aan:
+Bijvoorbeeld: voor het uitbreiden van de class `EenhedenRuimte` maak je een class `_EenhedenRuimte` aan:
 
 ```python
 from typing import Optional
@@ -161,7 +161,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 
-class _EenhedenRuimteUitbreiding(BaseModel):
+class _EenhedenRuimte(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
     gedeeld_met_aantal_eenheden: Optional[int] = Field(
         default=None, alias="gedeeldMetAantalEenheden"
@@ -171,7 +171,7 @@ class _EenhedenRuimteUitbreiding(BaseModel):
     """
 ```
 
-De task `genereer-vera-bvg-modellen` zal deze classes gebruiken als base class voor de VERA class en zo de toegevoegde attributen beschikbaar maken.
+De task `genereer-vera-bvg-modellen` zal de body van deze classes samenvoegen met de gelijknamige VERA class en zo de toegevoegde attributen beschikbaar maken.
 
 ### Referentiedata
 
