@@ -1,0 +1,85 @@
+{
+  "bouwjaar": 1924,
+  "ruimten": [
+    {
+      "id": "Space_108014554",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 2,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "id": "Space_108014554",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 2.2,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "id": "Space_108014554",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 3,
+      "oppervlakte": 3,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "id": "Space_108014554",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 4.4,
+      "oppervlakte": 4,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "id": "Space_108014554",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "DOU",
+        "naam": "Doucheruimte"
+      },
+      "naam": "Doucheruimte",
+      "inhoud": 4,
+      "oppervlakte": 4,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "bouwjaar": 1924,
+  "ruimten": [
+    {
+      "id": "Space_108014554",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "DOU",
+        "naam": "Doucheruimte"
+      },
+      "naam": "Doucheruimte",
+      "inhoud": 3,
+      "oppervlakte": 4,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "id": "Space_108014554",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAT",
+        "naam": "Badkamer/toilet"
+      },
+      "naam": "Badkamer/toilet",
+      "inhoud": 4,
+      "oppervlakte": 4,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    }
+  ]
+}

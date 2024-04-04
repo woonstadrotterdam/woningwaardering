@@ -109,8 +109,10 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
 if __name__ == "__main__":
     oor = OppervlakteVanOverigeRuimten2024()
-    f = open("./data_modellen/input/41164000002.json", "r+")
-    eenheid = EenhedenEenheid.model_validate_json(f.read())
+    with open(
+        "./data_modellen/input/zelfstandige_woonruimten/41164000002.json", "r+"
+    ) as f:
+        eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(
         oor.bereken(eenheid, woningwaardering_resultaat).model_dump_json(
