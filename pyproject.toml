@@ -44,5 +44,6 @@ dev = [
     "unidecode==1.*",
     "jinja2==3.*",
     "types-pyyaml==6.*",
-    "PyYAML==6.*"
+    "PyYAML==6.*",
+    "libcst==1.*"
 ]

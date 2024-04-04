@@ -1,5 +1,35 @@
+from typing import Dict
+from itertools import chain
+import libcst as cst
+from libcst.codemod import diff_code
 import os
-import re
+
+from loguru import logger
+
+
+class GatherClassesVisitor(cst.CSTVisitor):
+    def __init__(self) -> None:
+        self.classes: Dict[str, cst.ClassDef] = {}
+
+    def visit_ClassDef(self, node: cst.ClassDef) -> None:
+        self.classes[node.name.value.lstrip("_")] = node
+
+
+class MergeClassesVisitor(cst.CSTTransformer):
+    def __init__(self, classes: Dict[str, cst.ClassDef]) -> None:
+        self.classes: Dict[str, cst.ClassDef] = classes
+
+    def leave_ClassDef(
+        self, original_node: cst.ClassDef, updated_node: cst.ClassDef
+    ) -> cst.ClassDef:
+        uitbreiding_class = self.classes.get(original_node.name.value)
+        if uitbreiding_class:
+            logger.info(f"Class {original_node.name.value} uitbreiden")
+            updated_node = updated_node.with_deep_changes(
+                updated_node.body,
+                body=list(chain(updated_node.body.body, uitbreiding_class.body.body)),
+            )
+        return updated_node
 
 
 uitbreidingen_folder = os.path.join(
@@ -12,38 +42,32 @@ files = [
     if os.path.isfile(os.path.join(uitbreidingen_folder, f)) and f.endswith(".py")
 ]
 
-class_file_dict = {}
 for f in files:
-    with open(os.path.join(uitbreidingen_folder, f), "r") as file:
-        content = file.read()
-        matches = re.findall(r"class _(.*?)Uitbreiding(?=\(BaseModel\))", content)
-        for match in matches:
-            class_file_dict[match] = f.replace(".py", "")
+    with open(os.path.join(uitbreidingen_folder, f), "r") as uitbreidingen_file:
+        uitbreidingen_source = uitbreidingen_file.read()
+        uitbreidingen_module = cst.parse_module(uitbreidingen_source)
 
-generated_file_path = "woningwaardering/vera/bvg/generated.py"
+        uitbreidingen_visitor = GatherClassesVisitor()
+        uitbreidingen_classes = uitbreidingen_module.visit(uitbreidingen_visitor)
 
-with open(generated_file_path, "r") as file:
-    generated = file.read()
+        generated_file_path = "woningwaardering/vera/bvg/generated.py"
 
-for class_naam, file_naam in class_file_dict.items():
-    pattern = re.escape(class_naam) + r"\(BaseModel\)"
-    uitbreiding = "_" + class_naam + "Uitbreiding"
-    vervanging = class_naam + r"(" + uitbreiding + r")"
-    if re.search(pattern, generated):
-        generated = re.sub(pattern, vervanging, generated)
-    else:
-        raise ValueError(f"Class {class_naam} not found in generated.py")
+        with open(generated_file_path, "r") as generated_file:
+            generated_source = generated_file.read()
+            generated_module = cst.parse_module(generated_source)
+            generated_visitor = MergeClassesVisitor(
+                classes=uitbreidingen_visitor.classes
+            )
+            updated_module = generated_module.visit(generated_visitor)
 
-    import_statement = f"from woningwaardering.vera.bvg.model_uitbreidingen.{file_naam} import {uitbreiding}\n"
+            updated_source = updated_module.code
 
-    class_def = re.search(r"\n\nclass .*:", generated)
+            diff = diff_code(generated_source, updated_source, 3)
 
-    if class_def:
-        generated = (
-            generated[: class_def.start()]
-            + import_statement
-            + generated[class_def.start() :]
-        )
+            if diff is not None:
+                with open(generated_file_path, "w") as generated_file:
+                    generated_file.write(updated_source)
 
-with open(generated_file_path, "w") as file:
-    file.write(generated)
+            logger.info(
+                f"Uitbreiding {f} succesvol verwerkt en bijgewerkt in {generated_file_path}."
+            )
