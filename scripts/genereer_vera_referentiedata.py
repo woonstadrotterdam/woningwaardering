@@ -136,7 +136,6 @@ class {{ soort|remove_accents|title }}(Enum):
     \"\"\"
     {%- endif %}
 {% endfor %}
-
     @property
     def code(self) -> str | None:
         return self.value.code
@@ -144,6 +143,7 @@ class {{ soort|remove_accents|title }}(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
 """
 )
 
