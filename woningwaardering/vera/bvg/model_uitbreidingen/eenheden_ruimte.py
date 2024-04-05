@@ -1,5 +1,4 @@
 from typing import Optional
-
 from pydantic import BaseModel, Field
 
 from woningwaardering.vera.bvg.generated import EenhedenRuimte
