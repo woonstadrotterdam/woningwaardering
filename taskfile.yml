@@ -23,6 +23,7 @@ tasks:
           --allow-population-by-field-name \
           --strict-nullable \
           --use-title-as-name
+      - python scripts/uitbreiden_vera_modellen.py
   genereer-vera-referentiedata:
     desc: Genereer VERA referentiedata
     cmds:

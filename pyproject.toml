@@ -42,4 +42,7 @@ dev = [
     "datamodel-code-generator[http]==0.25.5",
     "unidecode==1.*",
     "jinja2==3.*",
+    "types-pyyaml==6.*",
+    "PyYAML==6.*",
+    "libcst==1.*"
 ]

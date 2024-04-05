@@ -85,11 +85,35 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                 )
 
                 if ruimte.oppervlakte is not None:
-                    woningwaardering.aantal = float(
-                        Decimal(ruimte.oppervlakte).quantize(
-                            Decimal("0.01"), ROUND_HALF_UP
+                    if (
+                        ruimte.gedeeld_met_aantal_eenheden is not None
+                        and ruimte.gedeeld_met_aantal_eenheden > 1
+                        and ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
+                    ):
+                        oppervlakte_per_eenheid = Decimal(
+                            ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
                         )
-                    )
+
+                        if oppervlakte_per_eenheid >= 2:
+                            woningwaardering.aantal = float(
+                                (
+                                    Decimal(ruimte.oppervlakte).quantize(
+                                        Decimal("1"), ROUND_HALF_UP
+                                    )
+                                    / Decimal(ruimte.gedeeld_met_aantal_eenheden)
+                                ).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                            )
+                        else:
+                            logger.debug(
+                                f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter per eenheid en komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+                            )
+                            continue
+                    else:
+                        woningwaardering.aantal = float(
+                            Decimal(ruimte.oppervlakte).quantize(
+                                Decimal("0.01"), ROUND_HALF_UP
+                            )
+                        )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 

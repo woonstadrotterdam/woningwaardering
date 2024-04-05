@@ -27,4 +27,4 @@ def test_select_geldige_stelselgroepversie(peildatum, stelsel, stelselgroep):
     )
     assert isinstance(
         geldige_stelselgroep, Stelselgroepversie
-    ), f"Stelselgroepversie '{geldige_stelselgroep}' is geen instance van StelselgroepVersie, {type(geldige_stelselgroep)}"
+    ), f"Stelselgroepversie '{geldige_stelselgroep}' is geen instance van Stelselgroepversie, {type(geldige_stelselgroep)}"

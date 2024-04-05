@@ -1,0 +1,338 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_29475563",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 4.02467,
+      "oppervlakte": 0.025811,
+      "verwarmd": false,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_29474431",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "HAL",
+        "naam": "Hal"
+      },
+      "naam": "Hal",
+      "inhoud": 2.60078,
+      "oppervlakte": 0.858344,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_31299076",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder",
+      "inhoud": 32.7376,
+      "oppervlakte": 10.2305,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29489751",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 29.0723,
+      "oppervlakte": 11.6289,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_29489753",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 5.49399,
+      "oppervlakte": 2.24108,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_29474433",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "inhoud": 4.02467,
+      "oppervlakte": 1.27409,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_29489749",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 19.0458,
+      "oppervlakte": 7.61833,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_29474434",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 53.8483,
+      "oppervlakte": 17.7717,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_29489754",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "OVL",
+        "naam": "Overloop"
+      },
+      "naam": "Overloop",
+      "inhoud": 9.17199,
+      "oppervlakte": 3.66757,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_29474435",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "ENT",
+        "naam": "Entree"
+      },
+      "naam": "Entree",
+      "inhoud": 4.51051,
+      "oppervlakte": 1.48862,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_29489752",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "WAS",
+        "naam": "Wasruimte"
+      },
+      "naam": "Wasruimte",
+      "inhoud": 7.15234,
+      "oppervlakte": 2.86093,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "Douche_29481807",
+          "id_bimmodel": "1sqFSUYmHCQRLb16gMYNuF",
+          "naam": "Douche",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "DOU",
+            "naam": "Douche"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.SHOWER"
+          }
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_29474432",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 3.78946,
+      "oppervlakte": 1.25065,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_29474430",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 38.5381,
+      "oppervlakte": 12.7166,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "Aanrecht_29467536",
+          "id_bimmodel": "1sqFSUYmHCQRLb16gMYNac",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2507
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_29489750",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 20.8602,
+      "oppervlakte": 8.34408,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_29474436",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "MET",
+        "naam": "Meterruimte"
+      },
+      "naam": "Meterruimte",
+      "inhoud": 0.524294,
+      "oppervlakte": 0.173034,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    }
+  ]
+}
