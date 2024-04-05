@@ -117,7 +117,7 @@ with open(generated_file_path, "r") as generated_file:
         for module, import_aliases in import_visitor.alias_mapping.items():
             for obj, asname in import_aliases:
                 if asname in generated_visitor.classes.keys():
-                    logger.warning(
+                    logger.info(
                         f"`from {module} import {obj} as {asname}` wordt niet toegevoegd. Een class met deze naam bestaat al."
                     )
                 else:
