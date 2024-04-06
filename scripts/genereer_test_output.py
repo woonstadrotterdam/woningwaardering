@@ -40,8 +40,12 @@ for input_file_path in input_file_paths:
             eenheid_input = EenhedenEenheid.model_validate_json(f.read())
 
             zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=PEILDATUM)
-
-            handler_id = logger.add(unverified_path.with_suffix(".log"))
+            logger.info(
+                f"Logs voor {input_file_path.name} worden opgenomen in {unverified_path.with_suffix('.log')}"
+            )
+            handler_id = logger.add(
+                unverified_path.with_suffix(".log"), level="TRACE", mode="w"
+            )
             woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid_input)
             logger.remove(handler_id)
             # write output model
@@ -49,6 +53,9 @@ for input_file_path in input_file_paths:
                 unverified_path,
                 "w+",
             ) as f:
+                logger.info(
+                    f"Resultaat voor {input_file_path.name} is opgenomen in {unverified_path}"
+                )
                 f.write(
                     woningwaardering_resultaat.model_dump_json(
                         by_alias=True, indent=2, exclude_none=True
