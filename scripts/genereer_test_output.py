@@ -1,6 +1,8 @@
 from datetime import datetime, date
 from pathlib import Path
 
+from loguru import logger
+
 from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
 )
@@ -27,8 +29,8 @@ for input_file_path in input_file_paths:
             / datetime.strftime(PEILDATUM, "%Y-%m-%d")
             / input_file_path.name
         )
-        unverified_path = output_file_path.parent / (
-            output_file_path.stem + ".unverified" + output_file_path.suffix
+        unverified_path = output_file_path.with_suffix(
+            ".unverified" + output_file_path.suffix
         )
 
         output_file_path.parent.mkdir(parents=True, exist_ok=True)
@@ -38,7 +40,10 @@ for input_file_path in input_file_paths:
             eenheid_input = EenhedenEenheid.model_validate_json(f.read())
 
             zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=PEILDATUM)
+
+            handler_id = logger.add(unverified_path.with_suffix(".log"))
             woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid_input)
+            logger.remove(handler_id)
             # write output model
             with open(
                 unverified_path,
