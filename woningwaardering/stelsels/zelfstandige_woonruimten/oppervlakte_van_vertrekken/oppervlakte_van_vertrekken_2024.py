@@ -187,6 +187,8 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
         result = ruimte.oppervlakte >= 4 or ruimte.detail_soort.code in [
             Ruimtedetailsoort.keuken.code,
             Ruimtedetailsoort.badkamer_en_of_toilet.code,
+            Ruimtedetailsoort.badkamer.code,
+            Ruimtedetailsoort.toiletruimte.code,
         ]
         if result is False:
             logger.warning(
