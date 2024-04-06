@@ -1292,6 +1292,13 @@ class EenhedenRuimte(BaseModel):
     """
     Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
+    bouwkundige_elementen: Optional[list[BouwkundigElementenBouwkundigElement]] = Field(
+        default=None, alias="bouwkundigeElementen"
+    )
+    """
+    De bouwkundige elementen gerelateerd aan deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering voor een zolder op basis van de aanwezigheid van een vlizotrap en de lengte van een aanrecht in een keuken.
+    """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/47
     toegangsruimten: Optional[list[EenhedenRuimte]] = Field(
         default=None, alias="toegangsruimten"
