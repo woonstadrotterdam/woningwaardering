@@ -109,8 +109,8 @@ from .leningdetailsoort import Leningdetailsoort
 from .leningsoort import Leningsoort
 from .maatschappelijklabel import Maatschappelijklabel
 from .machtigingsoort import Machtigingsoort
-from .materiaalsoort import Materiaalsoort
 from .materiaaldetailsoort import Materiaaldetailsoort
+from .materiaalsoort import Materiaalsoort
 from .medewerkerrol import Medewerkerrol
 from .medewerkersoort import Medewerkersoort
 from .meeteenheid import Meeteenheid
@@ -310,8 +310,8 @@ __all__ = [
     "Leningsoort",
     "Maatschappelijklabel",
     "Machtigingsoort",
-    "Materiaalsoort",
     "Materiaaldetailsoort",
+    "Materiaalsoort",
     "Medewerkerrol",
     "Medewerkersoort",
     "Meeteenheid",
