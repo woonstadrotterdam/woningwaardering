@@ -28,8 +28,24 @@
         "naam": "Badkamer/toilet"
       },
       "naam": "Badkamer/toilet",
-      "inhoud": 4,
-      "oppervlakte": 6,
+      "inhoud": 4.2,
+      "oppervlakte": 4,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "id": "Space_108014555",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAT",
+        "naam": "Badkamer/toilet"
+      },
+      "naam": "Badkamer/toilet",
+      "inhoud": 4.1,
+      "oppervlakte": 4,
       "verwarmd": true,
       "gemeenschappelijk": false
     }
