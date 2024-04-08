@@ -34,8 +34,8 @@ def assert_output_model(
         verwachte_resultaat = stelselgroep_output[0]
 
     diffresult = DeepDiff(
-        resultaat.model_dump(),
         verwachte_resultaat.model_dump(),
+        resultaat.model_dump(),
     )
     if diffresult:
         logger.error(diffresult.to_json(indent=2))

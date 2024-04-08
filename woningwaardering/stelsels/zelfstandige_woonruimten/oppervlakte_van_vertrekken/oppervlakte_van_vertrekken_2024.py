@@ -237,6 +237,23 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
+            if ruimte.oppervlakte is None:
+                logger.warning(f"Ruimte {ruimte} heeft geen oppervlakte")
+                continue
+            if ruimte.detail_soort is None:
+                logger.warning(f"Ruimte {ruimte} heeft geen detailsoort")
+                continue
+            if ruimte.detail_soort.code is None:
+                logger.warning(f"Ruimte {ruimte} heeft geen detailsoortcode")
+                continue
+
+            # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
+            if ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code:
+                ruimte.oppervlakte = float(Decimal(ruimte.oppervlakte) - Decimal("1"))
+                logger.debug(
+                    "Toilet in badkamer gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
+                )
+
             if ruimte_is_overige_ruimte(ruimte):
                 continue
 
@@ -249,10 +266,12 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                 )
             )
 
-            if ruimte.oppervlakte is not None:
-                woningwaardering.aantal = float(
-                    Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
-                )
+            woningwaardering.aantal = float(
+                Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
+            )
+            logger.debug(
+                f"{woningwaardering.aantal} punten voor {ruimte.naam} met een oppervlakte van {ruimte.oppervlakte}"
+            )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
@@ -269,11 +288,14 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
-    f = open("./tests/data/input/badkamer_en_of_toilet_boven_en_onder_0.64.json", "r+")
+    f = open(
+        "/Users/tomergabay/Documents/woonstad_rotterdam/code_projects/woningwaardering/tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/data/output/peildatum/2024-01-01/badkamer_en_of_toilet_boven_en_onder_0.64.json",
+        "r+",
+    )
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(
         OppervlakteVanVertrekken2024.bereken(
             eenheid, woningwaardering_resultaat
-        ).model_dump_json(by_alias=True, indent=2, exclude_none=True)
+        ).model_dump_json(by_alias=True, indent=2, exclude_none=False)
     )

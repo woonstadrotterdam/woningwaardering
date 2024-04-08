@@ -59,7 +59,7 @@
         "code": "BAT",
         "naam": "Badkamer/toilet"
       },
-      "naam": "Slaapkamer",
+      "naam": "Badkamer/toilet",
       "inhoud": 10,
       "oppervlakte": 2,
       "verwarmd": true,
