@@ -38,10 +38,19 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
+            if ruimte.oppervlakte is None:
+                logger.warning(f"Ruimte {ruimte} heeft geen oppervlakte")
+                continue
+            if ruimte.detail_soort is None:
+                logger.warning(f"Ruimte {ruimte} heeft geen detailsoort")
+                continue
+            if ruimte.detail_soort.code is None:
+                logger.warning(f"Ruimte {ruimte} heeft geen detailsoortcode")
+                continue
+
             if (
                 ruimte.soort is not None
                 and ruimte.soort.code == Ruimtesoort.overige_ruimtes.code
-                and ruimte.detail_soort is not None
             ):
                 if ruimte.detail_soort.code not in [
                     Ruimtedetailsoort.bijkeuken.code,
@@ -68,6 +77,43 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                         f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                     )
                     continue
+
+                # Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald
+                # en bij de oppervlakte van het betreffende vertrek opgeteld.
+                # Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een
+                # verkeersruimte, wordt niet gewaardeerd
+                if ruimte.detail_soort.code not in [
+                    Ruimtedetailsoort.hal.code,
+                    Ruimtedetailsoort.overloop.code,
+                    Ruimtedetailsoort.entree.code,
+                    Ruimtedetailsoort.gang.code,
+                ]:
+                    verbonden_kasten = [
+                        verbonden_ruimte
+                        for verbonden_ruimte in ruimte.verbonden_ruimten or []
+                        if verbonden_ruimte.detail_soort is not None
+                        and verbonden_ruimte.detail_soort.code
+                        == Ruimtedetailsoort.kast.code
+                        and verbonden_ruimte.oppervlakte is not None
+                        and verbonden_ruimte.oppervlakte < Decimal("2")
+                    ]
+
+                    ruimte.oppervlakte += sum(
+                        [
+                            verbonden_kast.oppervlakte
+                            for verbonden_kast in verbonden_kasten
+                            if verbonden_kast.oppervlakte is not None
+                        ]
+                    )
+
+                    if ruimte.inhoud is not None:
+                        ruimte.inhoud += sum(
+                            [
+                                verbonden_kast.inhoud
+                                for verbonden_kast in verbonden_kasten
+                                if verbonden_kast.inhoud is not None
+                            ]
+                        )
 
                 if ruimte.oppervlakte is not None and ruimte.oppervlakte < 2:
                     logger.debug(

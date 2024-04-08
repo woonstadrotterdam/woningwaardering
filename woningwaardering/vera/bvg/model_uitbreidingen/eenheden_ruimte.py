@@ -23,9 +23,9 @@ class _EenhedenRuimte(BaseModel):
     De bouwkundige elementen gerelateerd aan deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering voor een zolder op basis van de aanwezigheid van een vlizotrap en de lengte van een aanrecht in een keuken.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/47
-    toegangsruimten: Optional[list[EenhedenRuimte]] = Field(
-        default=None, alias="toegangsruimten"
+    verbonden_ruimten: Optional[list[EenhedenRuimte]] = Field(
+        default=None, alias="verbondenRuimten"
     )
     """
-    De ruimten die direct toegang geven tot deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte met ruimtedetailsoort kast.
+    De ruimten die in verbinding staan met deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering van kasten en verwarming van ruimten.
     """

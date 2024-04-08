@@ -254,6 +254,43 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                     "Toilet in badkamer gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
                 )
 
+            # Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald
+            # en bij de oppervlakte van het betreffende vertrek opgeteld.
+            # Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een
+            # verkeersruimte, wordt niet gewaardeerd
+            if ruimte.detail_soort.code not in [
+                Ruimtedetailsoort.hal.code,
+                Ruimtedetailsoort.overloop.code,
+                Ruimtedetailsoort.entree.code,
+                Ruimtedetailsoort.gang.code,
+            ]:
+                verbonden_kasten = [
+                    verbonden_ruimte
+                    for verbonden_ruimte in ruimte.verbonden_ruimten or []
+                    if verbonden_ruimte.detail_soort is not None
+                    and verbonden_ruimte.detail_soort.code
+                    == Ruimtedetailsoort.kast.code
+                    and verbonden_ruimte.oppervlakte is not None
+                    and verbonden_ruimte.oppervlakte < Decimal("2")
+                ]
+
+                ruimte.oppervlakte += sum(
+                    [
+                        verbonden_kast.oppervlakte
+                        for verbonden_kast in verbonden_kasten
+                        if verbonden_kast.oppervlakte is not None
+                    ]
+                )
+
+                if ruimte.inhoud is not None:
+                    ruimte.inhoud += sum(
+                        [
+                            verbonden_kast.inhoud
+                            for verbonden_kast in verbonden_kasten
+                            if verbonden_kast.inhoud is not None
+                        ]
+                    )
+
             if ruimte_is_overige_ruimte(ruimte):
                 continue
 
@@ -297,5 +334,5 @@ if __name__ == "__main__":
     print(
         OppervlakteVanVertrekken2024.bereken(
             eenheid, woningwaardering_resultaat
-        ).model_dump_json(by_alias=True, indent=2, exclude_none=False)
+        ).model_dump_json(by_alias=True, indent=2, exclude_none=True)
     )

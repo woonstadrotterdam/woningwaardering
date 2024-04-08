@@ -163,6 +163,86 @@
           "lengte": 2100
         }
       ],
+      "verbondenRuimten": [
+        {
+          "id": "Space_82123559",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 0.8008,
+          "oppervlakte": 0.308,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        },
+        {
+          "id": "Space_82123527",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "TEC",
+            "naam": "Technische ruimte"
+          },
+          "naam": "Technische ruimte",
+          "inhoud": 0.89856,
+          "oppervlakte": 0.3456,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwkundigeElementen": [
+            {
+              "id": "Ketel_82123536",
+              "id_bimmodel": "2k22N_pdTCYeGXB4k1S$ti",
+              "naam": "Ketel",
+              "soort": {
+                "code": "VER",
+                "naam": "Verwarming"
+              },
+              "detailSoort": {
+                "code": "VTO",
+                "naam": "Verwarmingstoestellen"
+              },
+              "extraAttributen": {
+                "ifcSoort": "IfcBoiler"
+              }
+            }
+          ],
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        },
+        {
+          "id": "Space_82123518",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 0.8112,
+          "oppervlakte": 0.312,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        }
+      ],
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
@@ -186,7 +266,29 @@
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_82123551",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 2.2256,
+          "oppervlakte": 0.856,
+          "verwarmd": false,
+          "afsluitbaar": true,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_82123455",
@@ -206,7 +308,49 @@
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_82123445",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 0.9295,
+          "oppervlakte": 0.3575,
+          "verwarmd": false,
+          "afsluitbaar": true,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        },
+        {
+          "id": "Space_82123507",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "MET",
+            "naam": "Meterruimte"
+          },
+          "naam": "Meterruimte",
+          "inhoud": 0.5733,
+          "oppervlakte": 0.2205,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_82123469",
