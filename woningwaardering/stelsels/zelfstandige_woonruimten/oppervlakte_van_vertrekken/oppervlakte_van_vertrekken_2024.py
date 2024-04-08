@@ -269,9 +269,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
-    f = open(
-        "./data_modellen/input/badkamer_en_of_toilet_boven_en_onder_0.64.json", "r+"
-    )
+    f = open("./tests/data/input/badkamer_en_of_toilet_boven_en_onder_0.64.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(

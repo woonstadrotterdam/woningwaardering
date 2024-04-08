@@ -16,7 +16,7 @@ current_file_path = Path(__file__).absolute().parent
 
 
 @pytest.fixture(
-    params=[str(p) for p in (current_file_path / "modellen/output").rglob("*.json")]
+    params=[str(p) for p in (current_file_path / "data/output").rglob("*.json")]
 )
 def specifieke_input_en_output_model(request):
     output_file_path = request.param

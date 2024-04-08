@@ -20,7 +20,7 @@ class ZelfstandigeWoonruimten(Stelsel):
 if __name__ == "__main__":
     zel = ZelfstandigeWoonruimten()
     f = open(
-        "./data_modellen/input/zelfstandige_woonruimten/41164000002.json",
+        "./tests/data/input/zelfstandige_woonruimten/41164000002.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(f.read())
