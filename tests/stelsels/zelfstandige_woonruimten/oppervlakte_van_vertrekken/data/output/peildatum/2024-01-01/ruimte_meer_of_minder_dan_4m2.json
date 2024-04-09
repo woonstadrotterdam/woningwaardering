@@ -11,12 +11,32 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 4.0,
+      "punten": 7.0,
       "woningwaarderingen": [
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
         {
           "aantal": 4.0,
           "criterium": {
-            "naam": "Doucheruimte",
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badkamer/toilet",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -40,5 +60,5 @@
       "woningwaarderingen": []
     }
   ],
-  "punten": 4.0
+  "punten": 7.0
 }

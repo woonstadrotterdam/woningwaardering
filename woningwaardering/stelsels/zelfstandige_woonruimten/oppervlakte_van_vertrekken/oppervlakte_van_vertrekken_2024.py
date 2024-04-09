@@ -133,7 +133,16 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
 
         result = (
             ruimte.inhoud is None
-            or ruimte.inhoud >= ruimte.oppervlakte / 2 * 2.1
+            or ruimte.inhoud
+            >= (
+                ruimte.oppervlakte
+                + int(
+                    ruimte.detail_soort.code
+                    == Ruimtedetailsoort.badkamer_en_of_toilet.code  # correctie voor eerder toegepast: "Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd."
+                )
+            )
+            / 2
+            * 2.1
             or ruimte.detail_soort.code
             in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
         )
@@ -271,6 +280,24 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
+            logger.debug(f"Processsing ruimte: {ruimte}")
+            if ruimte.oppervlakte is None:
+                logger.warning(f"Ruimte {ruimte} heeft geen oppervlakte")
+                continue
+            if ruimte.detail_soort is None:
+                logger.warning(f"Ruimte {ruimte} heeft geen detailsoort")
+                continue
+            if ruimte.detail_soort.code is None:
+                logger.warning(f"Ruimte {ruimte} heeft geen detailsoortcode")
+                continue
+
+            # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
+            if ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code:
+                ruimte.oppervlakte = float(Decimal(ruimte.oppervlakte) - Decimal("1"))
+                logger.debug(
+                    "Toilet in badkamer gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
+                )
+
             if ruimte_is_overige_ruimte(ruimte):
                 continue
 
@@ -283,10 +310,12 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                 )
             )
 
-            if ruimte.oppervlakte is not None:
-                woningwaardering.aantal = float(
-                    Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
-                )
+            woningwaardering.aantal = float(
+                Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
+            )
+            logger.debug(
+                f"{woningwaardering.aantal} punten voor {ruimte.naam} met een oppervlakte van {ruimte.oppervlakte}"
+            )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
@@ -309,5 +338,5 @@ if __name__ == "__main__":
     print(
         OppervlakteVanVertrekken2024.bereken(
             eenheid, woningwaardering_resultaat
-        ).model_dump_json(by_alias=True, indent=2, exclude_none=True)
+        ).model_dump_json(by_alias=True, indent=2, exclude_none=False)
     )

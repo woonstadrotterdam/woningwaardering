@@ -8,43 +8,11 @@
         "naam": "Vertrek"
       },
       "detailSoort": {
-        "code": "KEU",
-        "naam": "Keuken"
+        "code": "DOU",
+        "naam": "Doucheruimte"
       },
-      "naam": "Keuken",
-      "inhoud": 10,
-      "oppervlakte": 2,
-      "verwarmd": true,
-      "gemeenschappelijk": false
-    },
-    {
-      "id": "Space_108014554",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "SLA",
-        "naam": "Slaapkamer"
-      },
-      "naam": "Slaapkamer",
-      "inhoud": 10,
-      "oppervlakte": 3,
-      "verwarmd": true,
-      "gemeenschappelijk": false
-    },
-    {
-      "id": "Space_108014554",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "SLA",
-        "naam": "Slaapkamer"
-      },
-      "naam": "Slaapkamer",
-      "inhoud": 10,
+      "naam": "Doucheruimte",
+      "inhoud": 3,
       "oppervlakte": 4,
       "verwarmd": true,
       "gemeenschappelijk": false
@@ -59,9 +27,25 @@
         "code": "BAT",
         "naam": "Badkamer/toilet"
       },
-      "naam": "Slaapkamer",
-      "inhoud": 10,
-      "oppervlakte": 2,
+      "naam": "Badkamer/toilet",
+      "inhoud": 4.2,
+      "oppervlakte": 4,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "id": "Space_108014555",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAT",
+        "naam": "Badkamer/toilet"
+      },
+      "naam": "Badkamer/toilet",
+      "inhoud": 4.1,
+      "oppervlakte": 4,
       "verwarmd": true,
       "gemeenschappelijk": false
     }

@@ -20,7 +20,7 @@ class ZelfstandigeWoonruimten(Stelsel):
 if __name__ == "__main__":
     zel = ZelfstandigeWoonruimten()
     f = open(
-        "./data_modellen/input/zelfstandige_woonruimten/41164000002.json",
+        "/Users/tomergabay/Documents/woonstad_rotterdam/code_projects/woningwaardering/tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/data/output/peildatum/2024-01-01/badkamer_en_of_toilet_boven_en_onder_0.64.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(f.read())

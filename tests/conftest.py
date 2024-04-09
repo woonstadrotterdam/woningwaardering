@@ -10,8 +10,8 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 BASE_DIR = Path(__file__).parent.parent
-INPUT_DIR = BASE_DIR / "data_modellen/input"
-OUTPUT_DIR = BASE_DIR / "data_modellen/output"
+INPUT_DIR = BASE_DIR / "tests/data/input"
+OUTPUT_DIR = BASE_DIR / "tests/data/output"
 
 
 @pytest.fixture(
@@ -25,7 +25,11 @@ def zelfstandige_woonruimten_inputmodel(request):
 
 
 @pytest.fixture(
-    params=[str(p) for p in (OUTPUT_DIR / "zelfstandige_woonruimten").rglob("*.json")]
+    params=[
+        str(p)
+        for p in (OUTPUT_DIR / "zelfstandige_woonruimten").rglob("*.json")
+        if ".unverified" not in str(p)
+    ]
 )
 def zelfstandige_woonruimten_input_en_outputmodel(
     request,

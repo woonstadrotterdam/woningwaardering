@@ -8,12 +8,12 @@
         "naam": "Vertrek"
       },
       "detailSoort": {
-        "code": "DOU",
-        "naam": "Doucheruimte"
+        "code": "BAT",
+        "naam": "Badkamer/toilet"
       },
-      "naam": "Doucheruimte",
-      "inhoud": 3,
-      "oppervlakte": 4,
+      "naam": "Badkamer/toilet",
+      "inhoud": 60.4048,
+      "oppervlakte": 1.63,
       "verwarmd": true,
       "gemeenschappelijk": false
     },
@@ -28,8 +28,8 @@
         "naam": "Badkamer/toilet"
       },
       "naam": "Badkamer/toilet",
-      "inhoud": 4,
-      "oppervlakte": 4,
+      "inhoud": 60.4048,
+      "oppervlakte": 1.64,
       "verwarmd": true,
       "gemeenschappelijk": false
     }

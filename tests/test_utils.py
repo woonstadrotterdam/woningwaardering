@@ -34,8 +34,8 @@ def assert_output_model(
         verwachte_resultaat = stelselgroep_output[0]
 
     diffresult = DeepDiff(
-        resultaat.model_dump(),
         verwachte_resultaat.model_dump(),
+        resultaat.model_dump(),
     )
     if diffresult:
         logger.error(diffresult.to_json(indent=2))
@@ -47,7 +47,7 @@ def laad_specifiek_input_en_output_model(
     output_json_path: Path,
 ) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat, date]:
     file_name = output_json_path.name
-    input_path = module_path / f"modellen/input/{file_name}"
+    input_path = module_path / f"data/input/{file_name}"
     peildatum = re.search(r"\d{4}-\d{2}-\d{2}", str(output_json_path)).group(0)
     peildatum = datetime.strptime(peildatum, "%Y-%m-%d").date()
     with open(input_path, "r+") as f:

@@ -1,7 +1,9 @@
-from datetime import datetime, date
+import sys
+from datetime import date, datetime
 from pathlib import Path
 
 from loguru import logger
+from pydantic import ValidationError
 
 from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
@@ -10,11 +12,15 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
 
+# zet logger level to INFO
+logger.remove()
+stdout_id = logger.add(sys.stdout, level="INFO")
+
 jaar = datetime.now().year
 PEILDATUM = date(year=jaar, month=1, day=1)
 
-INPUT_DIR = Path("data_modellen/input")
-OUTPUT_DIR = Path("data_modellen/output")
+INPUT_DIR = Path("tests/data/input")
+OUTPUT_DIR = Path("tests/data/output")
 
 input_file_paths = (INPUT_DIR / "zelfstandige_woonruimten").rglob("*.json")
 
@@ -37,16 +43,20 @@ for input_file_path in input_file_paths:
 
         # get input model
         with open(input_file_path, "r+") as f:
-            eenheid_input = EenhedenEenheid.model_validate_json(f.read())
+            try:
+                eenheid_input = EenhedenEenheid.model_validate_json(f.read())
+            except ValidationError as e:
+                logger.error(f"Error in inputmodel van {input_file_path.name}: {e}")
+                continue
 
-            zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=PEILDATUM)
-            logger.info(
-                f"Logs voor {input_file_path.name} worden opgenomen in {unverified_path.with_suffix('.log')}"
-            )
             handler_id = logger.add(
                 unverified_path.with_suffix(".log"), level="TRACE", mode="w"
             )
+            # zet logger naar ERROR voor de stdout om niet alle logging in de terminal te zien van de berekeningen
+            logger.remove(stdout_id)
+            zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=PEILDATUM)
             woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid_input)
+            stdout_id = logger.add(sys.stdout, level="INFO")
             logger.remove(handler_id)
             # write output model
             with open(
@@ -54,7 +64,7 @@ for input_file_path in input_file_paths:
                 "w+",
             ) as f:
                 logger.info(
-                    f"Resultaat voor {input_file_path.name} is opgenomen in {unverified_path}"
+                    f"Resultaat voor {input_file_path.name} is opgenomen in {unverified_path}, inclusief logs in {unverified_path.with_suffix('.log')}"
                 )
                 f.write(
                     woningwaardering_resultaat.model_dump_json(
