@@ -97,7 +97,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                         and verbonden_ruimte.detail_soort.code
                         == Ruimtedetailsoort.kast.code
                         and verbonden_ruimte.oppervlakte is not None
-                        and verbonden_ruimte.oppervlakte < Decimal("2")
+                        and verbonden_ruimte.oppervlakte < 2.0
                     ]
 
                     aantal_verbonden_kasten = len(verbonden_kasten)
