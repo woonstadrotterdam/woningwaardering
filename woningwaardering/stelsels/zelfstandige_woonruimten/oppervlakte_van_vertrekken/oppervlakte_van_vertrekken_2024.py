@@ -130,7 +130,16 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
 
         result = (
             ruimte.inhoud is None
-            or ruimte.inhoud >= ruimte.oppervlakte / 2 * 2.1
+            or ruimte.inhoud
+            >= (
+                ruimte.oppervlakte
+                + int(
+                    ruimte.detail_soort.code
+                    == Ruimtedetailsoort.badkamer_en_of_toilet.code  # correctie voor eerder toegepast: "Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd."
+                )
+            )
+            / 2
+            * 2.1
             or ruimte.detail_soort.code
             in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
         )
@@ -237,6 +246,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
+            logger.debug(f"Processsing ruimte: {ruimte}")
             if ruimte.oppervlakte is None:
                 logger.warning(f"Ruimte {ruimte} heeft geen oppervlakte")
                 continue
