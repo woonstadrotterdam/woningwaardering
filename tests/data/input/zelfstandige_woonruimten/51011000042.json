@@ -118,7 +118,29 @@
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_82667359",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 1.07701,
+          "oppervlakte": 0.398891,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_82668207",
@@ -138,7 +160,29 @@
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_82667355",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 0.76208,
+          "oppervlakte": 0.282252,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_82668218",
@@ -158,7 +202,49 @@
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_82669037",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 0.74088,
+          "oppervlakte": 0.2744,
+          "verwarmd": false,
+          "afsluitbaar": true,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        },
+        {
+          "id": "Space_82669040",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 0.85536,
+          "oppervlakte": 0.3168,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_82666487",
@@ -251,7 +337,29 @@
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_82667362",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 2.01041,
+          "oppervlakte": 0.744596,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_82667005",
