@@ -200,7 +200,14 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
         return result
 
     def _zolder_heeft_vaste_trap(ruimte: EenhedenRuimte) -> bool:
-        """Een zolder telt alleen mee als vertrek als deze een vaste trap heeft."""
+        """Check of een zolder een vaste trap heeft.
+
+        Args:
+            ruimte (EenhedenRuimte): Het vertrek om te checken.
+
+        Returns:
+            bool: True als de zolder een vaste heeft, False otherwise.
+        """
         if ruimte.detail_soort is not None:
             if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
                 vaste_trap = [
@@ -215,6 +222,9 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
                         f"Geen vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor oppervlakte van vertrekken"
                     )
                     return False
+        logger.warning(
+            f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van vertrekken"
+        )
         return True
 
     if ruimte.soort is None or ruimte.detail_soort is None:
