@@ -39,13 +39,13 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.oppervlakte is None:
-                logger.warning(f"Ruimte {ruimte} heeft geen oppervlakte")
+                logger.warning(f"Ruimte {ruimte.id} heeft geen oppervlakte")
                 continue
             if ruimte.detail_soort is None:
-                logger.warning(f"Ruimte {ruimte} heeft geen detailsoort")
+                logger.warning(f"Ruimte {ruimte.id} heeft geen detailsoort")
                 continue
             if ruimte.detail_soort.code is None:
-                logger.warning(f"Ruimte {ruimte} heeft geen detailsoortcode")
+                logger.warning(f"Ruimte {ruimte.id} heeft geen detailsoortcode")
                 continue
 
             if (
