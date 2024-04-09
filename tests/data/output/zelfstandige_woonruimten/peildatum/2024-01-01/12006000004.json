@@ -26,7 +26,7 @@
         {
           "aantal": 10.18,
           "criterium": {
-            "naam": "Keuken",
+            "naam": "Keuken + 2 kasten",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -36,7 +36,7 @@
         {
           "aantal": 26.82,
           "criterium": {
-            "naam": "Woonkamer",
+            "naam": "Woonkamer + 1 kast",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"

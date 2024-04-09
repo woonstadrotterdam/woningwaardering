@@ -257,6 +257,8 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                 logger.warning(f"Ruimte {ruimte} heeft geen detailsoortcode")
                 continue
 
+            criterium_naam = ruimte.naam
+
             # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
             if ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code:
                 ruimte.oppervlakte = float(Decimal(ruimte.oppervlakte) - Decimal("1"))
@@ -284,22 +286,27 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                     and verbonden_ruimte.oppervlakte < Decimal("2")
                 ]
 
-                ruimte.oppervlakte += sum(
-                    [
-                        verbonden_kast.oppervlakte
-                        for verbonden_kast in verbonden_kasten
-                        if verbonden_kast.oppervlakte is not None
-                    ]
-                )
+                aantal_verbonden_kasten = len(verbonden_kasten)
 
-                if ruimte.inhoud is not None:
-                    ruimte.inhoud += sum(
+                if aantal_verbonden_kasten > 0:
+                    ruimte.oppervlakte += sum(
                         [
-                            verbonden_kast.inhoud
+                            verbonden_kast.oppervlakte
                             for verbonden_kast in verbonden_kasten
-                            if verbonden_kast.inhoud is not None
+                            if verbonden_kast.oppervlakte is not None
                         ]
                     )
+
+                    if ruimte.inhoud is not None:
+                        ruimte.inhoud += sum(
+                            [
+                                verbonden_kast.inhoud
+                                for verbonden_kast in verbonden_kasten
+                                if verbonden_kast.inhoud is not None
+                            ]
+                        )
+
+                    criterium_naam = f"{ruimte.naam} + {aantal_verbonden_kasten} {aantal_verbonden_kasten == 1 and 'kast' or 'kasten'}"
 
             if ruimte_is_overige_ruimte(ruimte):
                 continue
@@ -309,7 +316,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                    naam=ruimte.naam,
+                    naam=criterium_naam,
                 )
             )
 
