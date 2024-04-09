@@ -38,7 +38,29 @@
       "bouwlaag": {
         "nummer": "00",
         "omschrijving": "begane grond"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_57375634",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 2.37417,
+          "oppervlakte": 0.78615,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "00",
+            "omschrijving": "begane grond"
+          }
+        }
+      ]
     },
     {
       "id": "Space_57375636",
