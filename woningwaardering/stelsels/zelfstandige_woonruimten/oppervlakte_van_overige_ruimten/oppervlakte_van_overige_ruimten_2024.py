@@ -90,7 +90,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                     Ruimtedetailsoort.entree.code,
                     Ruimtedetailsoort.gang.code,
                 ]:
-                    verbonden_kasten = [
+                    ruimte_kasten = [
                         verbonden_ruimte
                         for verbonden_ruimte in ruimte.verbonden_ruimten or []
                         if verbonden_ruimte.detail_soort is not None
@@ -100,31 +100,31 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                         and verbonden_ruimte.oppervlakte < 2.0
                     ]
 
-                    aantal_verbonden_kasten = len(verbonden_kasten)
+                    aantal_ruimte_kasten = len(ruimte_kasten)
 
-                    if aantal_verbonden_kasten > 0:
+                    if aantal_ruimte_kasten > 0:
                         ruimte.oppervlakte += sum(
                             [
-                                verbonden_kast.oppervlakte
-                                for verbonden_kast in verbonden_kasten
-                                if verbonden_kast.oppervlakte is not None
+                                ruimte_kast.oppervlakte
+                                for ruimte_kast in ruimte_kasten
+                                if ruimte_kast.oppervlakte is not None
                             ]
                         )
 
                         if ruimte.inhoud is not None:
                             ruimte.inhoud += sum(
                                 [
-                                    verbonden_kast.inhoud
-                                    for verbonden_kast in verbonden_kasten
-                                    if verbonden_kast.inhoud is not None
+                                    ruimte_kast.inhoud
+                                    for ruimte_kast in ruimte_kasten
+                                    if ruimte_kast.inhoud is not None
                                 ]
                             )
 
                         logger.debug(
-                            f"De netto oppervlakte van {aantal_verbonden_kasten} verbonden {aantal_verbonden_kasten == 1 and 'kast' or 'kasten'} is opgeteld bij {ruimte.naam}"
+                            f"De netto oppervlakte van {aantal_ruimte_kasten} verbonden {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'} is opgeteld bij {ruimte.naam}"
                         )
 
-                        criterium_naam = f"{ruimte.naam} + {aantal_verbonden_kasten} {aantal_verbonden_kasten == 1 and 'kast' or 'kasten'}"
+                        criterium_naam = f"{ruimte.naam} + {aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'}"
 
                 if ruimte.oppervlakte is not None and ruimte.oppervlakte < 2:
                     logger.debug(
