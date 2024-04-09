@@ -328,7 +328,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                 Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
             )
             logger.debug(
-                f"{woningwaardering.aantal} punten voor {ruimte.naam} met een oppervlakte van {ruimte.oppervlakte}"
+                f"Oppervlakte voor {ruimte.naam} van {ruimte.oppervlakte} is afgerond naar {woningwaardering.aantal}"
             )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
