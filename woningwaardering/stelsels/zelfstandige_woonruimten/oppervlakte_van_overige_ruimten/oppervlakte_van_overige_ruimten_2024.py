@@ -120,6 +120,10 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                                 ]
                             )
 
+                        logger.debug(
+                            f"De netto oppervlakte van {aantal_verbonden_kasten} verbonden {aantal_verbonden_kasten == 1 and 'kast' or 'kasten'} is opgeteld bij {ruimte.naam}"
+                        )
+
                         criterium_naam = f"{ruimte.naam} + {aantal_verbonden_kasten} {aantal_verbonden_kasten == 1 and 'kast' or 'kasten'}"
 
                 if ruimte.oppervlakte is not None and ruimte.oppervlakte < 2:
