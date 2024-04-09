@@ -76,6 +76,37 @@
           }
         }
       ]
+    },
+    {
+      "id": "Space_3",
+      "soort": {
+        "code": "OVR",
+        "naam": "Ovr"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder overig met trap",
+      "inhoud": 10,
+      "oppervlakte": 1,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Trap_1",
+          "id_bimmodel": "test123",
+          "naam": "Trap",
+          "omschrijving": "Trap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "TRA",
+            "naam": "Trap"
+          }
+        }
+      ]
     }
   ]
 }
