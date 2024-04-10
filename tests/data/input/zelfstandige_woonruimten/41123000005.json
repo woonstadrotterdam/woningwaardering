@@ -37,7 +37,22 @@
       "bouwlaag": {
         "nummer": "02",
         "omschrijving": "tweede verdieping"
-      }
+      },
+      "bouwkundigeElementen": [
+        {
+          "id": "Trap_123",
+          "naam": "Trap",
+          "omschrijving": "(vaste) trap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "TRA",
+            "naam": "Trap"
+          }
+        }
+      ]
     },
     {
       "id": "Space_23702793",

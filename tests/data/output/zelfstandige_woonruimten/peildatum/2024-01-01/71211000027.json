@@ -86,10 +86,10 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 12.0,
+      "punten": 6.75,
       "woningwaarderingen": [
         {
-          "aantal": 11.07,
+          "aantal": 4.41,
           "criterium": {
             "naam": "Zolder",
             "meeteenheid": {
@@ -111,7 +111,7 @@
       ]
     }
   ],
-  "punten": 66.0,
+  "punten": 61.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

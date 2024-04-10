@@ -287,6 +287,19 @@
             "merkKetel": "Gashaard",
             "ifcSoort": "IfcBoiler"
           }
+        },
+        {
+          "id": "Trap_123",
+          "naam": "Vlizotrap",
+          "omschrijving": "(vaste) trap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
         }
       ],
       "bouwlaag": {
