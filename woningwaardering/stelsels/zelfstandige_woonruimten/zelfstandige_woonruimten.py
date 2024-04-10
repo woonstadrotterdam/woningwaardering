@@ -1,4 +1,5 @@
 from datetime import date
+from decimal import Decimal
 
 from prettytable import PrettyTable
 
@@ -66,13 +67,15 @@ if __name__ == "__main__":
                 [
                     woningwaardering_groep.criterium_groep.stelselgroep.naam,
                     "Subtotaal",
-                    sum(
-                        [
-                            woningwaardering.aantal
-                            for woningwaardering in woningwaardering_groep.woningwaarderingen
-                            or []
-                            if woningwaardering.aantal is not None
-                        ]
+                    float(
+                        sum(
+                            [
+                                Decimal(woningwaardering.aantal)
+                                for woningwaardering in woningwaardering_groep.woningwaarderingen
+                                or []
+                                if woningwaardering.aantal is not None
+                            ]
+                        )
                     ),
                     "",
                     woningwaardering_groep.punten,
