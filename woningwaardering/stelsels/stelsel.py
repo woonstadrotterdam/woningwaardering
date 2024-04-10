@@ -52,8 +52,7 @@ class Stelsel:
         """
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-
-        resultaat.stelsel = self.stelsel
+        resultaat.stelsel = self.stelsel.value
 
         resultaat.groepen = [
             stelselgroep_versie.bereken(

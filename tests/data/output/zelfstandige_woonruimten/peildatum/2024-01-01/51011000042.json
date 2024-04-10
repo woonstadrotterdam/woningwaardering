@@ -100,5 +100,9 @@
       "woningwaarderingen": []
     }
   ],
-  "punten": 60.0
+  "punten": 60.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
 }

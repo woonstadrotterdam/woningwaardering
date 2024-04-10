@@ -111,5 +111,9 @@
       ]
     }
   ],
-  "punten": 62.0
+  "punten": 62.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
 }
