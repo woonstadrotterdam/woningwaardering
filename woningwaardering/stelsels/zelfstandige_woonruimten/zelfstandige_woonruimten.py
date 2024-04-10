@@ -35,47 +35,60 @@ if __name__ == "__main__":
 
     table = PrettyTable()
     table.field_names = ["Groep", "Naam", "Aantal", "Meeteenheid", "Punten"]
-    table.align = "l"
+    table.align["Groep"] = "l"
+    table.align["Naam"] = "l"
     table.align["Aantal"] = "r"
+    table.align["Meeteenheid"] = "l"
     table.align["Punten"] = "r"
 
     for woningwaardering_groep in woningwaardering_resultaat.groepen or []:
         for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
+            if (
+                woningwaardering_groep.criterium_groep
+                and woningwaardering_groep.criterium_groep.stelselgroep
+                and woningwaardering.criterium
+                and woningwaardering.criterium.meeteenheid
+            ):
+                table.add_row(
+                    [
+                        woningwaardering_groep.criterium_groep.stelselgroep.naam,
+                        woningwaardering.criterium.naam,
+                        woningwaardering.aantal,
+                        woningwaardering.criterium.meeteenheid.naam,
+                        woningwaardering.punten or "",
+                    ]
+                )
+        if (
+            woningwaardering_groep.criterium_groep
+            and woningwaardering_groep.criterium_groep.stelselgroep
+        ):
             table.add_row(
                 [
                     woningwaardering_groep.criterium_groep.stelselgroep.naam,
-                    woningwaardering.criterium.naam,
-                    woningwaardering.aantal,
-                    woningwaardering.criterium.meeteenheid.naam,
-                    woningwaardering.punten or "",
-                ]
+                    "Subtotaal",
+                    sum(
+                        [
+                            woningwaardering.aantal
+                            for woningwaardering in woningwaardering_groep.woningwaarderingen
+                            or []
+                            if woningwaardering.aantal is not None
+                        ]
+                    ),
+                    "",
+                    woningwaardering_groep.punten,
+                ],
+                divider=True,
             )
+    if woningwaardering_resultaat.stelsel:
         table.add_row(
             [
-                woningwaardering_groep.criterium_groep.stelselgroep.naam,
-                "Subtotaal",
-                sum(
-                    [
-                        woningwaardering.aantal
-                        for woningwaardering in woningwaardering_groep.woningwaarderingen
-                        or []
-                        if woningwaardering.aantal is not None
-                    ]
-                ),
+                woningwaardering_resultaat.stelsel.naam,
+                "Totaal",
                 "",
-                woningwaardering_groep.punten,
+                "",
+                woningwaardering_resultaat.punten,
             ],
             divider=True,
         )
-    table.add_row(
-        [
-            woningwaardering_resultaat.stelsel.naam,
-            "Totaal",
-            "",
-            "",
-            woningwaardering_resultaat.punten,
-        ],
-        divider=True,
-    )
 
     print(table)
