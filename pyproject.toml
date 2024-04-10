@@ -23,7 +23,8 @@ dependencies = [
     "pydantic==2.*",
     "loguru==0.7.*",
     "types-pyyaml==6.*",
-    "PyYAML==6.*"
+    "PyYAML==6.*",
+    "prettytable==3.*"
 ]
 
 [tool.setuptools.packages.find]
