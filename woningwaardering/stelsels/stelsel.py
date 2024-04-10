@@ -53,6 +53,8 @@ class Stelsel:
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
 
+        resultaat.stelsel = self.stelsel
+
         resultaat.groepen = [
             stelselgroep_versie.bereken(
                 eenheid=eenheid,
