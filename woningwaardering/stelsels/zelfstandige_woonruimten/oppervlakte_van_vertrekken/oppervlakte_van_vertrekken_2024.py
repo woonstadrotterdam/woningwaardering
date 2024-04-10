@@ -14,6 +14,7 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Meeteenheid,
+    Ruimtesoort,
     Ruimtedetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -55,7 +56,11 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
             ruimte.detail_soort is None
             or ruimte.detail_soort.code is None
             or ruimte.detail_soort.naam is None
+            or ruimte.soort is None
         ):
+            return False
+
+        if ruimte.soort.code != Ruimtesoort.vertrek.code:
             return False
 
         result = ruimte.detail_soort.code in [
@@ -231,9 +236,9 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
                         f"Geen vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor oppervlakte van vertrekken"
                     )
                     return False
-        logger.warning(
-            f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van vertrekken"
-        )
+                logger.warning(
+                    f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van vertrekken"
+                )
         return True
 
     if ruimte.soort is None or ruimte.detail_soort is None:
