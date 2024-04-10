@@ -42,6 +42,8 @@ if __name__ == "__main__":
     table.align["Meeteenheid"] = "l"
     table.align["Punten"] = "r"
 
+    table.float_format = ".2"
+
     for woningwaardering_groep in woningwaardering_resultaat.groepen or []:
         for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
             if (
