@@ -18,6 +18,9 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
+    Bouwkundigelementdetailsoort,
+)
 
 
 def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
@@ -205,6 +208,34 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
             )
         return result
 
+    def _zolder_heeft_vaste_trap(ruimte: EenhedenRuimte) -> bool:
+        """Check of een zolder een vaste trap heeft.
+
+        Args:
+            ruimte (EenhedenRuimte): Het vertrek om te checken.
+
+        Returns:
+            bool: True als de zolder een vaste heeft, False otherwise.
+        """
+        if ruimte.detail_soort is not None:
+            if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
+                vaste_trap = [
+                    element.detail_soort
+                    for element in ruimte.bouwkundige_elementen or []
+                    if element.detail_soort
+                    and element.detail_soort.code
+                    == Bouwkundigelementdetailsoort.trap.code
+                ]
+                if not vaste_trap:
+                    logger.warning(
+                        f"Geen vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor oppervlakte van vertrekken"
+                    )
+                    return False
+        logger.warning(
+            f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van vertrekken"
+        )
+        return True
+
     if ruimte.soort is None or ruimte.detail_soort is None:
         logger.error(
             f"Ruimte {ruimte} heeft geen soort en/of detailsoort en kan daardoor niet meegerekend worden."
@@ -223,6 +254,9 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
         return True
 
     if not _min_4m2_exclusief_keuken_en_badkamer_en_of_toilet(ruimte):
+        return True
+
+    if not _zolder_heeft_vaste_trap(ruimte):
         return True
 
     return False
@@ -298,10 +332,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
-    f = open(
-        "/Users/tomergabay/Documents/woonstad_rotterdam/code_projects/woningwaardering/tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/data/output/peildatum/2024-01-01/badkamer_en_of_toilet_boven_en_onder_0.64.json",
-        "r+",
-    )
+    f = open("./data_modellen/input/zelfstandige_woonruimten/zolder_vertrek.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(
