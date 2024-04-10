@@ -231,9 +231,9 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
                         f"Geen vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor oppervlakte van vertrekken"
                     )
                     return False
-        logger.warning(
-            f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van vertrekken"
-        )
+                logger.warning(
+                    f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van vertrekken"
+                )
         return True
 
     if ruimte.soort is None or ruimte.detail_soort is None:
