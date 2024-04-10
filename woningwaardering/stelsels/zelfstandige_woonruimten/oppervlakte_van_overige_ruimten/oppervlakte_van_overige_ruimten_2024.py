@@ -66,10 +66,11 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
                 float(
                     Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
                     # Min 5 punten omdat de ruimte niet bereikt kan worden met een vast trap.
-                    # Let op: hier wordt de oppervlakte gecorrigeerd met de hoeveelheid punten per vierkante meter.
+                    # Let op, hier wordt de oppervlakte gecorrigeerd met de hoeveelheid punten per vierkante meter.
                     # Onze keuze is om hier al de vijf punten in mindering te brengen.
-                    # Het beleidsboek geeft aan dat de punten in mindering gebracht moeten worden op de punten berekend voor deze ruimte, maar ook dat punten pas berekend moeten worden wanneer de totale oppervlakte bekend is en afegerond is.
-                    # Door de afronding komt deze berekening niet helemaal juist, maar dit is de benadering waar wij nu voor kiezen.
+                    # Het beleidsboek geeft aan dat de punten in mindering gebracht moeten worden op de punten berekend voor deze ruimte,
+                    # maar ook dat punten pas berekend moeten worden wanneer de totale oppervlakte bekend is en afegerond is.
+                    # Door de afronding komt deze berekening niet helemaal juist uit, maar dit is de benadering waar wij nu voor kiezen.
                     - Decimal("5") / Decimal("0.75")
                 ),
             )
@@ -169,7 +170,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                             )
                             continue
 
-                    if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
+                    elif ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
                         oppervlakte_aantal = _oppervlakte_zolder_overige_ruimte(ruimte)
                         if oppervlakte_aantal > 0.0:
                             woningwaardering.aantal = oppervlakte_aantal
