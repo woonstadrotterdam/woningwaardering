@@ -11,22 +11,12 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 122.0,
+      "punten": 113.0,
       "woningwaarderingen": [
         {
           "aantal": 18.64,
           "criterium": {
             "naam": "Woonkamer",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 8.71,
-          "criterium": {
-            "naam": "Zolder",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -171,7 +161,7 @@
       ]
     }
   ],
-  "punten": 130.0,
+  "punten": 121.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
