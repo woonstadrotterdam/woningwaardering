@@ -20,7 +20,7 @@ class _EenhedenRuimte(BaseModel):
         default=None, alias="bouwkundigeElementen"
     )
     """
-    De bouwkundige elementen gerelateerd aan deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering voor een zolder op basis van de aanwezigheid van een vlizotrap en de lengte van een aanrecht in een keuken.
+    De bouwkundige elementen gerelateerd aan deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering voor een zolder op basis van de aanwezigheid van een trap en de lengte van een aanrecht in een keuken.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/47
     verbonden_ruimten: Optional[list[EenhedenRuimte]] = Field(
