@@ -2,7 +2,7 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels import Stelselgroepversie
+from woningwaardering.stelsels import Stelselgroepversie, utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -275,9 +275,15 @@ if __name__ == "__main__":
         "r+",
     ) as f:
         eenheid = EenhedenEenheid.model_validate_json(f.read())
-    woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+
+    woningwaardering_resultaat = oor.bereken(eenheid)
+
     print(
-        oor.bereken(eenheid, woningwaardering_resultaat).model_dump_json(
+        woningwaardering_resultaat.model_dump_json(
             by_alias=True, indent=2, exclude_none=True
         )
     )
+
+    tabel = utils.naar_tabel(woningwaardering_resultaat)
+
+    print(tabel)
