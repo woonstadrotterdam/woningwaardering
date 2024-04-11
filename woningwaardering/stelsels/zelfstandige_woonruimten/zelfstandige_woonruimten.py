@@ -1,9 +1,8 @@
 from datetime import date
-from decimal import Decimal
 
-from prettytable import PrettyTable
 
 from woningwaardering.stelsels.stelsel import Stelsel
+from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -34,66 +33,6 @@ if __name__ == "__main__":
         )
     )
 
-    table = PrettyTable()
-    table.field_names = ["Groep", "Naam", "Aantal", "Meeteenheid", "Punten"]
-    table.align["Groep"] = "l"
-    table.align["Naam"] = "l"
-    table.align["Aantal"] = "r"
-    table.align["Meeteenheid"] = "l"
-    table.align["Punten"] = "r"
-
-    table.float_format = ".2"
-
-    for woningwaardering_groep in woningwaardering_resultaat.groepen or []:
-        for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
-            if (
-                woningwaardering_groep.criterium_groep
-                and woningwaardering_groep.criterium_groep.stelselgroep
-                and woningwaardering.criterium
-                and woningwaardering.criterium.meeteenheid
-            ):
-                table.add_row(
-                    [
-                        woningwaardering_groep.criterium_groep.stelselgroep.naam,
-                        woningwaardering.criterium.naam,
-                        woningwaardering.aantal,
-                        woningwaardering.criterium.meeteenheid.naam,
-                        woningwaardering.punten or "",
-                    ]
-                )
-        if (
-            woningwaardering_groep.criterium_groep
-            and woningwaardering_groep.criterium_groep.stelselgroep
-        ):
-            table.add_row(
-                [
-                    woningwaardering_groep.criterium_groep.stelselgroep.naam,
-                    "Subtotaal",
-                    float(
-                        sum(
-                            [
-                                Decimal(woningwaardering.aantal)
-                                for woningwaardering in woningwaardering_groep.woningwaarderingen
-                                or []
-                                if woningwaardering.aantal is not None
-                            ]
-                        )
-                    ),
-                    "",
-                    woningwaardering_groep.punten,
-                ],
-                divider=True,
-            )
-    if woningwaardering_resultaat.stelsel:
-        table.add_row(
-            [
-                woningwaardering_resultaat.stelsel.naam,
-                "Totaal",
-                "",
-                "",
-                woningwaardering_resultaat.punten,
-            ],
-            divider=True,
-        )
+    table = utils.naar_tabel(woningwaardering_resultaat)
 
     print(table)
