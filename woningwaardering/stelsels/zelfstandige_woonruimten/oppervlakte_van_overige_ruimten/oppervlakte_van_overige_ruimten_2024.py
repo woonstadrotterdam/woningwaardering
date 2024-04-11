@@ -44,7 +44,7 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
 
         if trap:
             logger.debug(
-                f"Trap gevonden in {ruimte.naam} ({ruimte.id}):telt mee voor oppervlakte van overige ruimten"
+                f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van overige ruimten"
             )
             return float(
                 Decimal(str(ruimte.oppervlakte)).quantize(
@@ -251,6 +251,10 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                                 Decimal("0.01"), ROUND_HALF_UP
                             )
                         )
+
+                logger.debug(
+                    f"Oppervlakte voor {ruimte.naam} van {ruimte.oppervlakte} is afgerond naar {woningwaardering.aantal}"
+                )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
