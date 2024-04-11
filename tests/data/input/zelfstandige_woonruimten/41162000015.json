@@ -1,4 +1,5 @@
 {
+  "id": "41162000015",
   "ruimten": [
     {
       "id": "Space_23758614",
@@ -154,7 +155,29 @@
       "bouwlaag": {
         "nummer": "03",
         "omschrijving": "derde verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_23762444",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 1.42155,
+          "oppervlakte": 0.5265,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "03",
+            "omschrijving": "derde verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_23762447",
@@ -194,7 +217,29 @@
       "bouwlaag": {
         "nummer": "03",
         "omschrijving": "derde verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_23762447",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 1.0584,
+          "oppervlakte": 0.392,
+          "verwarmd": false,
+          "afsluitbaar": true,
+          "bouwlaag": {
+            "nummer": "03",
+            "omschrijving": "derde verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_23762460",
@@ -254,27 +299,29 @@
       "bouwlaag": {
         "nummer": "03",
         "omschrijving": "derde verdieping"
-      }
-    },
-    {
-      "id": "Space_23763327",
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
       },
-      "detailSoort": {
-        "code": "ZOL",
-        "naam": "Zolder"
-      },
-      "naam": "Zolder",
-      "inhoud": 214.346,
-      "oppervlakte": 137.977,
-      "verwarmd": false,
-      "afsluitbaar": false,
-      "bouwlaag": {
-        "nummer": "04",
-        "omschrijving": "vierde verdieping"
-      }
+      "verbondenRuimten": [
+        {
+          "id": "Space_23762445",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 1.0584,
+          "oppervlakte": 0.392,
+          "verwarmd": false,
+          "afsluitbaar": true,
+          "bouwlaag": {
+            "nummer": "03",
+            "omschrijving": "derde verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_23762420",
@@ -294,7 +341,29 @@
       "bouwlaag": {
         "nummer": "03",
         "omschrijving": "derde verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_23762443",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 1.11375,
+          "oppervlakte": 0.4125,
+          "verwarmd": false,
+          "afsluitbaar": true,
+          "bouwlaag": {
+            "nummer": "03",
+            "omschrijving": "derde verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_23762445",
@@ -411,7 +480,49 @@
       "bouwlaag": {
         "nummer": "03",
         "omschrijving": "derde verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_23762460",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 0.726556,
+          "oppervlakte": 0.269095,
+          "verwarmd": false,
+          "afsluitbaar": true,
+          "bouwlaag": {
+            "nummer": "03",
+            "omschrijving": "derde verdieping"
+          }
+        },
+        {
+          "id": "Space_23762455",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 1.08049,
+          "oppervlakte": 0.400183,
+          "verwarmd": false,
+          "afsluitbaar": true,
+          "bouwlaag": {
+            "nummer": "03",
+            "omschrijving": "derde verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_23762476",
@@ -525,7 +636,49 @@
       "bouwlaag": {
         "nummer": "03",
         "omschrijving": "derde verdieping"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_23762449",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 0.817212,
+          "oppervlakte": 0.302671,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "03",
+            "omschrijving": "derde verdieping"
+          }
+        },
+        {
+          "id": "Space_23762451",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 0.486,
+          "oppervlakte": 0.18,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "03",
+            "omschrijving": "derde verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_23762443",

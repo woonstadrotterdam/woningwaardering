@@ -11,10 +11,10 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 60.0,
+      "punten": 43.0,
       "woningwaarderingen": [
         {
-          "aantal": 3.58,
+          "aantal": 2.18,
           "criterium": {
             "naam": "Badruimte",
             "meeteenheid": {
@@ -24,9 +24,9 @@
           }
         },
         {
-          "aantal": 10.18,
+          "aantal": 12.1,
           "criterium": {
-            "naam": "Keuken + 2 kasten",
+            "naam": "Slaapkamer + 1 kast",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -34,7 +34,7 @@
           }
         },
         {
-          "aantal": 26.82,
+          "aantal": 16.65,
           "criterium": {
             "naam": "Woonkamer + 1 kast",
             "meeteenheid": {
@@ -44,9 +44,9 @@
           }
         },
         {
-          "aantal": 6.49,
+          "aantal": 4.84,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Keuken + 1 kast",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -54,9 +54,9 @@
           }
         },
         {
-          "aantal": 12.98,
+          "aantal": 6.84,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer + 2 kasten",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -80,7 +80,7 @@
       "woningwaarderingen": []
     }
   ],
-  "punten": 60.0,
+  "punten": 43.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

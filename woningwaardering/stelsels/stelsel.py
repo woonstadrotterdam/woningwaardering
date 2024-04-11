@@ -1,6 +1,7 @@
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 
+
 from woningwaardering.stelsels.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
@@ -52,6 +53,7 @@ class Stelsel:
         """
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+        resultaat.stelsel = self.stelsel.value
 
         resultaat.groepen = [
             stelselgroep_versie.bereken(

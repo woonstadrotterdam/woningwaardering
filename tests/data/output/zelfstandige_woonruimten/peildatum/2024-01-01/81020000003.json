@@ -11,10 +11,10 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 60.0,
+      "punten": 80.0,
       "woningwaarderingen": [
         {
-          "aantal": 3.58,
+          "aantal": 4.8,
           "criterium": {
             "naam": "Badruimte",
             "meeteenheid": {
@@ -24,27 +24,7 @@
           }
         },
         {
-          "aantal": 10.18,
-          "criterium": {
-            "naam": "Keuken + 2 kasten",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 26.82,
-          "criterium": {
-            "naam": "Woonkamer + 1 kast",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 6.49,
+          "aantal": 15.74,
           "criterium": {
             "naam": "Slaapkamer",
             "meeteenheid": {
@@ -54,7 +34,37 @@
           }
         },
         {
-          "aantal": 12.98,
+          "aantal": 5.92,
+          "criterium": {
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 15.15,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 26.54,
+          "criterium": {
+            "naam": "Woonkamer + 1 kast",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 12.23,
           "criterium": {
             "naam": "Slaapkamer",
             "meeteenheid": {
@@ -76,11 +86,22 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": []
+      "punten": 3.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 5.19,
+          "criterium": {
+            "naam": "Berging",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
     }
   ],
-  "punten": 60.0,
+  "punten": 84.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

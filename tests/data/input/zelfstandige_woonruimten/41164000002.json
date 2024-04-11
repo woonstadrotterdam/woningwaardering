@@ -1,4 +1,5 @@
 {
+  "id": "41164000002",
   "bouwjaar": 1904,
   "ruimten": [
     {
@@ -15,7 +16,10 @@
       "inhoud": 0.292631,
       "oppervlakte": 0.09415,
       "verwarmd": false,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
     },
     {
       "id": "Space_72314041",
@@ -31,7 +35,6 @@
       "inhoud": 3.3755,
       "oppervlakte": 1.075,
       "verwarmd": false,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
           "id": "Fontein_72314043",
@@ -48,7 +51,11 @@
             "ifcSoort": "IfcSanitaryTerminal"
           }
         }
-      ]
+      ],
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
     },
     {
       "id": "Space_72314048",
@@ -64,7 +71,6 @@
       "inhoud": 19.8961,
       "oppervlakte": 6.33392,
       "verwarmd": true,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
           "id": "Wastafel_72314051",
@@ -82,7 +88,11 @@
             "ifcSoort": "IfcSanitaryTerminal"
           }
         }
-      ]
+      ],
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
     },
     {
       "id": "Space_72314045",
@@ -98,7 +108,10 @@
       "inhoud": 0.471,
       "oppervlakte": 0.15,
       "verwarmd": false,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
     },
     {
       "id": "Space_72310934",
@@ -114,7 +127,10 @@
       "inhoud": 18.6093,
       "oppervlakte": 6.13986,
       "verwarmd": false,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
     },
     {
       "id": "Space_72310927",
@@ -130,7 +146,10 @@
       "inhoud": 0.553581,
       "oppervlakte": 0.1827,
       "verwarmd": false,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
     },
     {
       "id": "Space_72314017",
@@ -146,7 +165,31 @@
       "inhoud": 67.6429,
       "oppervlakte": 21.5423,
       "verwarmd": true,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_72314053",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 5.89255,
+          "oppervlakte": 1.87661,
+          "verwarmd": false,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_72315436",
@@ -162,7 +205,10 @@
       "inhoud": 46.5634,
       "oppervlakte": 22.6565,
       "verwarmd": true,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
     },
     {
       "id": "Space_72315619",
@@ -178,7 +224,10 @@
       "inhoud": 23.5144,
       "oppervlakte": 7.50062,
       "verwarmd": false,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
     },
     {
       "id": "Space_72315446",
@@ -194,7 +243,10 @@
       "inhoud": 8.44054,
       "oppervlakte": 3.30042,
       "verwarmd": false,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
     },
     {
       "id": "Space_72310936",
@@ -210,7 +262,6 @@
       "inhoud": 44.5958,
       "oppervlakte": 14.711,
       "verwarmd": true,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_72310942",
@@ -227,7 +278,11 @@
           },
           "lengte": 0
         }
-      ]
+      ],
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
     },
     {
       "id": "Space_72314015",
@@ -243,7 +298,10 @@
       "inhoud": 14.4234,
       "oppervlakte": 4.55107,
       "verwarmd": false,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
     },
     {
       "id": "Space_72314055",
@@ -259,13 +317,16 @@
       "inhoud": 5.88848,
       "oppervlakte": 1.87531,
       "verwarmd": false,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
     },
     {
       "id": "Space_72310944",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "OVR",
+        "naam": "Overige ruimtes"
       },
       "detailSoort": {
         "code": "TRH",
@@ -275,7 +336,10 @@
       "inhoud": 6.7148,
       "oppervlakte": 2.17164,
       "verwarmd": true,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
     },
     {
       "id": "Space_72315439",
@@ -291,7 +355,10 @@
       "inhoud": 39.9367,
       "oppervlakte": 17.6331,
       "verwarmd": true,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
     },
     {
       "id": "Space_72310929",
@@ -307,7 +374,10 @@
       "inhoud": 100.05,
       "oppervlakte": 32.9546,
       "verwarmd": true,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
     },
     {
       "id": "Space_72310920",
@@ -323,7 +393,6 @@
       "inhoud": 3.3067,
       "oppervlakte": 1.09025,
       "verwarmd": true,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
           "id": "Fontein_72310925",
@@ -356,7 +425,11 @@
             "ifcSoort": "IfcSanitaryTerminal"
           }
         }
-      ]
+      ],
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
     },
     {
       "id": "Space_72314030",
@@ -372,7 +445,31 @@
       "inhoud": 58.3377,
       "oppervlakte": 18.5789,
       "verwarmd": true,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_72314055",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 5.88848,
+          "oppervlakte": 1.87531,
+          "verwarmd": false,
+          "bouwlaag": {
+            "nummer": "01",
+            "omschrijving": "eerste verdieping"
+          }
+        }
+      ]
     },
     {
       "id": "Space_72315437",
@@ -388,7 +485,6 @@
       "inhoud": 9.64955,
       "oppervlakte": 4.30585,
       "verwarmd": false,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
           "id": "Wastafel_72315438",
@@ -406,7 +502,11 @@
             "ifcSoort": "IfcSanitaryTerminal"
           }
         }
-      ]
+      ],
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
     },
     {
       "id": "Space_72314053",
@@ -422,7 +522,10 @@
       "inhoud": 5.89255,
       "oppervlakte": 1.87661,
       "verwarmd": false,
-      "gemeenschappelijk": true
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
     }
   ]
 }

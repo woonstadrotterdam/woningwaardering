@@ -14,27 +14,7 @@
       "punten": 60.0,
       "woningwaarderingen": [
         {
-          "aantal": 3.58,
-          "criterium": {
-            "naam": "Badruimte",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 10.18,
-          "criterium": {
-            "naam": "Keuken + 2 kasten",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 26.82,
+          "aantal": 17.56,
           "criterium": {
             "naam": "Woonkamer + 1 kast",
             "meeteenheid": {
@@ -44,7 +24,27 @@
           }
         },
         {
-          "aantal": 6.49,
+          "aantal": 11.8,
+          "criterium": {
+            "naam": "Slaapkamer + 1 kast",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 6.99,
+          "criterium": {
+            "naam": "Slaapkamer + 2 kasten",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 8.15,
           "criterium": {
             "naam": "Slaapkamer",
             "meeteenheid": {
@@ -54,7 +54,27 @@
           }
         },
         {
-          "aantal": 12.98,
+          "aantal": 1.92,
+          "criterium": {
+            "naam": "Badruimte",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 7.06,
+          "criterium": {
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 6.92,
           "criterium": {
             "naam": "Slaapkamer",
             "meeteenheid": {

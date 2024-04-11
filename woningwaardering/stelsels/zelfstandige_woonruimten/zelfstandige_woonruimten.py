@@ -1,6 +1,8 @@
 from datetime import date
 
+
 from woningwaardering.stelsels.stelsel import Stelsel
+from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -20,10 +22,17 @@ class ZelfstandigeWoonruimten(Stelsel):
 if __name__ == "__main__":
     zel = ZelfstandigeWoonruimten()
     f = open(
-        "/Users/tomergabay/Documents/woonstad_rotterdam/code_projects/woningwaardering/tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/data/output/peildatum/2024-01-01/badkamer_en_of_toilet_boven_en_onder_0.64.json",
+        "./tests/data/input/zelfstandige_woonruimten/41123000005.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(f.read())
+    woningwaardering_resultaat = zel.bereken(eenheid)
     print(
-        zel.bereken(eenheid).model_dump_json(by_alias=True, indent=2, exclude_none=True)
+        woningwaardering_resultaat.model_dump_json(
+            by_alias=True, indent=2, exclude_none=True
+        )
     )
+
+    tabel = utils.naar_tabel(woningwaardering_resultaat)
+
+    print(tabel)

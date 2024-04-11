@@ -34,13 +34,26 @@ source_data.fieldnames = (
     else None
 )
 
+
+filename = "woningwaardering/vera/referentiedata_uitbreiding.csv"
+with open(filename, "r", encoding="utf-8") as file:
+    uitbreiding_data = csv.DictReader(file.readlines(), delimiter=";")
+    uitbreiding_data.fieldnames = (
+        [name.lower() for name in uitbreiding_data.fieldnames]
+        if uitbreiding_data.fieldnames
+        else None
+    )
+
 # Filter out items with a past einddatum
-active_data = [
-    item
-    for item in source_data
-    if (not item["einddatum"])
-    or (datetime.strptime(item["einddatum"], "%d-%m-%Y").date() >= date.today())
-]
+active_data = sorted(
+    [
+        item
+        for item in list(source_data) + list(uitbreiding_data)
+        if (not item["einddatum"])
+        or (datetime.strptime(item["einddatum"], "%d-%m-%Y").date() >= date.today())
+    ],
+    key=itemgetter("soort"),
+)
 
 # Count the occurrences of each combination of "soort" and "naam"
 counts = Counter((item["soort"], item["naam"]) for item in active_data)
@@ -60,6 +73,13 @@ for item in active_data:
 # Create output directory if not exists
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
+else:
+    # Recursively remove all files and folders in the output directory
+    for root, dirs, files in os.walk(output_folder, topdown=False):
+        for name in files:
+            os.remove(os.path.join(root, name))
+        for name in dirs:
+            os.rmdir(os.path.join(root, name))
 
 # Group items by 'soort'
 grouped_data = [(k, list(g)) for k, g in groupby(active_data, key=itemgetter("soort"))]

@@ -1,4 +1,5 @@
 {
+  "id": "71211000027",
   "ruimten": [
     {
       "id": "Space_57380186",
@@ -37,7 +38,29 @@
       "bouwlaag": {
         "nummer": "00",
         "omschrijving": "begane grond"
-      }
+      },
+      "verbondenRuimten": [
+        {
+          "id": "Space_57375634",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "inhoud": 2.37417,
+          "oppervlakte": 0.78615,
+          "verwarmd": false,
+          "afsluitbaar": false,
+          "bouwlaag": {
+            "nummer": "00",
+            "omschrijving": "begane grond"
+          }
+        }
+      ]
     },
     {
       "id": "Space_57375636",
@@ -263,6 +286,19 @@
             "soortKetel": "Gashaard",
             "merkKetel": "Gashaard",
             "ifcSoort": "IfcBoiler"
+          }
+        },
+        {
+          "id": "Trap_123",
+          "naam": "Vlizotrap",
+          "omschrijving": "(vaste) trap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
           }
         }
       ],

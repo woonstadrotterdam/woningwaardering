@@ -1,0 +1,4 @@
+Soort;Code;Naam;Omschrijving;Begindatum;Einddatum;Parent;Informatiedomein
+RUIMTEDETAILSOORT;OVL;Overloop;Verkeersruimte: (UITBREIDING) Gang op een bovenverdieping.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
+RUIMTEDETAILSOORT;ENT;Entree;Verkeersruimte: (UITBREIDING) Ingang van een gebouw.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
+RUIMTEDETAILSOORT;KAS;Kast;Overige ruimte: (UITBREIDING);8-4-2024;;RUIMTESOORT.OVR;Vastgoed

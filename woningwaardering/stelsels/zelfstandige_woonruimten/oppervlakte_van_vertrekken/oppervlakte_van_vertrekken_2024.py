@@ -285,16 +285,18 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
-            logger.debug(f"Processsing ruimte: {ruimte}")
+            logger.debug(f"Processsing ruimte: {ruimte.id}")
             if ruimte.oppervlakte is None:
-                logger.warning(f"Ruimte {ruimte} heeft geen oppervlakte")
+                logger.warning(f"Ruimte {ruimte.id} heeft geen oppervlakte")
                 continue
             if ruimte.detail_soort is None:
-                logger.warning(f"Ruimte {ruimte} heeft geen detailsoort")
+                logger.warning(f"Ruimte {ruimte.id} heeft geen detailsoort")
                 continue
             if ruimte.detail_soort.code is None:
-                logger.warning(f"Ruimte {ruimte} heeft geen detailsoortcode")
+                logger.warning(f"Ruimte {ruimte.id} heeft geen detailsoortcode")
                 continue
+
+            criterium_naam = ruimte.naam
 
             # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
             if ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code:
@@ -305,6 +307,56 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                     "Toilet in badkamer gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
                 )
 
+            # Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald
+            # en bij de oppervlakte van het betreffende vertrek opgeteld.
+            # Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een
+            # verkeersruimte, wordt niet gewaardeerd
+            if ruimte.detail_soort.code not in [
+                Ruimtedetailsoort.hal.code,
+                Ruimtedetailsoort.overloop.code,
+                Ruimtedetailsoort.entree.code,
+                Ruimtedetailsoort.gang.code,
+            ]:
+                ruimte_kasten = [
+                    verbonden_ruimte
+                    for verbonden_ruimte in ruimte.verbonden_ruimten or []
+                    if verbonden_ruimte.detail_soort is not None
+                    and verbonden_ruimte.detail_soort.code
+                    == Ruimtedetailsoort.kast.code
+                    and verbonden_ruimte.oppervlakte is not None
+                    and verbonden_ruimte.oppervlakte < 2.0
+                ]
+
+                aantal_ruimte_kasten = len(ruimte_kasten)
+
+                if aantal_ruimte_kasten > 0:
+                    ruimte.oppervlakte += float(
+                        sum(
+                            [
+                                Decimal(ruimte_kast.oppervlakte)
+                                for ruimte_kast in ruimte_kasten
+                                if ruimte_kast.oppervlakte is not None
+                            ]
+                        )
+                    )
+
+                    if ruimte.inhoud is not None:
+                        ruimte.inhoud += float(
+                            sum(
+                                [
+                                    Decimal(ruimte_kast.inhoud)
+                                    for ruimte_kast in ruimte_kasten
+                                    if ruimte_kast.inhoud is not None
+                                ]
+                            )
+                        )
+
+                    logger.debug(
+                        f"De netto oppervlakte van {aantal_ruimte_kasten} verbonden {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'} is opgeteld bij {ruimte.naam}"
+                    )
+
+                    criterium_naam = f"{ruimte.naam} + {aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'}"
+
             if ruimte_is_overige_ruimte(ruimte):
                 continue
 
@@ -313,7 +365,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                    naam=ruimte.naam,
+                    naam=criterium_naam,
                 )
             )
 
@@ -323,7 +375,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                 )
             )
             logger.debug(
-                f"{woningwaardering.aantal} punten voor {ruimte.naam} met een oppervlakte van {ruimte.oppervlakte}"
+                f"Oppervlakte voor {ruimte.naam} van {ruimte.oppervlakte} is afgerond naar {woningwaardering.aantal}"
             )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
@@ -341,11 +393,14 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
-    f = open("./data_modellen/input/zelfstandige_woonruimten/zolder_vertrek.json", "r+")
+    f = open(
+        "tests/data/input/zelfstandige_woonruimten/12006000004.json",
+        "r+",
+    )
     eenheid = EenhedenEenheid.model_validate_json(f.read())
     woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     print(
         OppervlakteVanVertrekken2024.bereken(
             eenheid, woningwaardering_resultaat
-        ).model_dump_json(by_alias=True, indent=2, exclude_none=False)
+        ).model_dump_json(by_alias=True, indent=2, exclude_none=True)
     )
