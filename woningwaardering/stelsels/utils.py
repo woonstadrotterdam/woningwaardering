@@ -8,6 +8,7 @@ from loguru import logger
 from prettytable import PrettyTable
 
 from woningwaardering.vera.bvg.generated import (
+    WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 
@@ -90,13 +91,16 @@ def vind_yaml_bestanden(directory: str) -> list[str]:
 
 
 def naar_tabel(
-    woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    woningwaardering_resultaat: (
+        WoningwaarderingResultatenWoningwaarderingResultaat
+        | WoningwaarderingResultatenWoningwaarderingGroep
+    ),
 ) -> PrettyTable:
     """
     Genereer een tabel met de details van een woningwaarderingresultaat.
 
     Parameters:
-        woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): Het object om de gegevens uit te halen
+        woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | WoningwaarderingResultatenWoningwaarderingGroep): Het object om de gegevens uit te halen
 
     Returns:
         PrettyTable: Een tabel met de gegevens van het woningwaarderingresultaat
@@ -111,7 +115,14 @@ def naar_tabel(
 
     table.float_format = ".2"
 
-    for woningwaardering_groep in woningwaardering_resultaat.groepen or []:
+    for woningwaardering_groep in (
+        woningwaardering_resultaat.groepen or []
+        if isinstance(
+            woningwaardering_resultaat,
+            WoningwaarderingResultatenWoningwaarderingResultaat,
+        )
+        else [woningwaardering_resultaat]
+    ):
         for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
             if (
                 woningwaardering_groep.criterium_groep
@@ -151,7 +162,13 @@ def naar_tabel(
                 ],
                 divider=True,
             )
-    if woningwaardering_resultaat.stelsel:
+    if (
+        isinstance(
+            woningwaardering_resultaat,
+            WoningwaarderingResultatenWoningwaarderingResultaat,
+        )
+        and woningwaardering_resultaat.stelsel
+    ):
         table.add_row(
             [
                 woningwaardering_resultaat.stelsel.naam,

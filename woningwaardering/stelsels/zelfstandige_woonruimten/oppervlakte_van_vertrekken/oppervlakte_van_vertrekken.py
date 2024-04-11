@@ -1,5 +1,6 @@
 from datetime import date
 
+from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -24,6 +25,14 @@ if __name__ == "__main__":
     ) as f:
         eenheid = EenhedenEenheid.model_validate_json(f.read())
 
+    woningwaardering_resultaat = ovv.bereken(eenheid)
+
     print(
-        ovv.bereken(eenheid).model_dump_json(by_alias=True, indent=2, exclude_none=True)
+        woningwaardering_resultaat.model_dump_json(
+            by_alias=True, indent=2, exclude_none=True
+        )
     )
+
+    tabel = utils.naar_tabel(woningwaardering_resultaat)
+
+    print(tabel)
