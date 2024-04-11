@@ -328,21 +328,25 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                 aantal_ruimte_kasten = len(ruimte_kasten)
 
                 if aantal_ruimte_kasten > 0:
-                    ruimte.oppervlakte += sum(
-                        [
-                            ruimte_kast.oppervlakte
-                            for ruimte_kast in ruimte_kasten
-                            if ruimte_kast.oppervlakte is not None
-                        ]
+                    ruimte.oppervlakte += float(
+                        sum(
+                            [
+                                Decimal(ruimte_kast.oppervlakte)
+                                for ruimte_kast in ruimte_kasten
+                                if ruimte_kast.oppervlakte is not None
+                            ]
+                        )
                     )
 
                     if ruimte.inhoud is not None:
-                        ruimte.inhoud += sum(
-                            [
-                                ruimte_kast.inhoud
-                                for ruimte_kast in ruimte_kasten
-                                if ruimte_kast.inhoud is not None
-                            ]
+                        ruimte.inhoud += float(
+                            sum(
+                                [
+                                    Decimal(ruimte_kast.inhoud)
+                                    for ruimte_kast in ruimte_kasten
+                                    if ruimte_kast.inhoud is not None
+                                ]
+                            )
                         )
 
                     logger.debug(
