@@ -33,6 +33,6 @@ if __name__ == "__main__":
         )
     )
 
-    table = utils.naar_tabel(woningwaardering_resultaat)
+    tabel = utils.naar_tabel(woningwaardering_resultaat)
 
-    print(table)
+    print(tabel)
