@@ -71,3 +71,4 @@ for input_file_path in input_file_paths:
                         by_alias=True, indent=2, exclude_none=True
                     )
                 )
+                f.write("\n")
