@@ -66,14 +66,21 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
             return max(
                 0.0,
                 float(
-                    (
-                        Decimal(str(ruimte.oppervlakte))
-                        # Min 5 punten omdat de ruimte niet bereikt kan worden met een vast trap.
-                        # Let op, hier wordt de oppervlakte gecorrigeerd met de hoeveelheid punten per vierkante meter.
-                        # Onze keuze is om hier al de vijf punten in mindering te brengen.
-                        # Het beleidsboek geeft aan dat de punten in mindering gebracht moeten worden op de punten berekend voor deze ruimte,
-                        # maar ook dat punten pas berekend moeten worden wanneer de totale oppervlakte bekend is en afegerond is.
-                        # Door de afronding komt deze berekening niet helemaal juist uit, maar dit is de benadering waar wij nu voor kiezen.
+                    Decimal(
+                        Decimal(str(ruimte.oppervlakte)).quantize(
+                            Decimal("0.01"), ROUND_HALF_UP
+                        )
+                        # Min 5 punten omdat de ruimte niet bereikt kan worden met een
+                        # vaste trap.
+                        # Let op, hier wordt de oppervlakte gecorrigeerd met de
+                        # hoeveelheid punten per vierkante meter. Onze keuze is om hier
+                        # al de vijf punten in mindering te brengen. Het beleidsboek
+                        # geeft aan dat de punten in mindering gebracht moeten worden
+                        # op de punten berekend voor deze ruimte, maar ook dat punten
+                        # pas berekend moeten worden wanneer de totale oppervlakte
+                        # bekend is en afegerond is.
+                        # Door de afronding komt deze berekening niet helemaal juist
+                        # uit, maar dit is de benadering waar wij nu voor kiezen.
                         - Decimal("5") / Decimal("0.75")
                     ).quantize(Decimal("0.01"), ROUND_HALF_UP)
                 ),
