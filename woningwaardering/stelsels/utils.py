@@ -172,7 +172,7 @@ def naar_tabel(
         table.add_row(
             [
                 woningwaardering_resultaat.stelsel.naam,
-                "Totaal",
+                "Afgerond totaal",
                 "",
                 "",
                 woningwaardering_resultaat.punten,
