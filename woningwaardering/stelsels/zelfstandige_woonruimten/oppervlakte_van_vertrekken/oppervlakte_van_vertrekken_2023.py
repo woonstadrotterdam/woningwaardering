@@ -77,7 +77,7 @@ class OppervlakteVanVertrekken2023(Stelselgroepversie):
 
                 if ruimte.oppervlakte is not None:
                     woningwaardering.aantal = float(
-                        Decimal(ruimte.oppervlakte).quantize(
+                        Decimal(str(ruimte.oppervlakte)).quantize(
                             Decimal("0.01"), ROUND_HALF_UP
                         )
                     )
@@ -86,7 +86,7 @@ class OppervlakteVanVertrekken2023(Stelselgroepversie):
 
         punten = Decimal(
             sum(
-                Decimal(woningwaardering.aantal)
+                Decimal(str(woningwaardering.aantal))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.aantal is not None
             )

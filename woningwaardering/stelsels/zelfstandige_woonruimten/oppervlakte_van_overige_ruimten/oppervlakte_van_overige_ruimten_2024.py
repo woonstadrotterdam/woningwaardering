@@ -47,7 +47,9 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
                 f"Trap gevonden in {ruimte.naam} ({ruimte.id}):telt mee voor oppervlakte van overige ruimten"
             )
             return float(
-                Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                Decimal(str(ruimte.oppervlakte)).quantize(
+                    Decimal("0.01"), ROUND_HALF_UP
+                )
             )
 
         vlizotrap = [
@@ -65,7 +67,7 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
                 0.0,
                 float(
                     (
-                        Decimal(ruimte.oppervlakte)
+                        Decimal(str(ruimte.oppervlakte))
                         # Min 5 punten omdat de ruimte niet bereikt kan worden met een vast trap.
                         # Let op, hier wordt de oppervlakte gecorrigeerd met de hoeveelheid punten per vierkante meter.
                         # Onze keuze is om hier al de vijf punten in mindering te brengen.
@@ -217,10 +219,10 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                         if oppervlakte_per_eenheid >= 2:
                             woningwaardering.aantal = float(
                                 (
-                                    Decimal(ruimte.oppervlakte).quantize(
+                                    Decimal(str(ruimte.oppervlakte)).quantize(
                                         Decimal("1"), ROUND_HALF_UP
                                     )
-                                    / Decimal(ruimte.gedeeld_met_aantal_eenheden)
+                                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
                                 ).quantize(Decimal("0.01"), ROUND_HALF_UP)
                             )
                         else:
@@ -238,7 +240,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
                     else:
                         woningwaardering.aantal = float(
-                            Decimal(ruimte.oppervlakte).quantize(
+                            Decimal(str(ruimte.oppervlakte)).quantize(
                                 Decimal("0.01"), ROUND_HALF_UP
                             )
                         )
@@ -247,7 +249,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
         punten = Decimal(
             sum(
-                Decimal(woningwaardering.aantal)
+                Decimal(str(woningwaardering.aantal))
                 for woningwaardering in (
                     woningwaardering_groep.woningwaarderingen or []
                 )

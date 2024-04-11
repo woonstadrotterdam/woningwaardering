@@ -300,7 +300,9 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
             # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
             if ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code:
-                ruimte.oppervlakte = float(Decimal(ruimte.oppervlakte) - Decimal("1"))
+                ruimte.oppervlakte = float(
+                    Decimal(str(ruimte.oppervlakte)) - Decimal("1")
+                )
                 logger.debug(
                     "Toilet in badkamer gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
                 )
@@ -368,7 +370,9 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
             )
 
             woningwaardering.aantal = float(
-                Decimal(ruimte.oppervlakte).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                Decimal(str(ruimte.oppervlakte)).quantize(
+                    Decimal("0.01"), ROUND_HALF_UP
+                )
             )
             logger.debug(
                 f"Oppervlakte voor {ruimte.naam} van {ruimte.oppervlakte} is afgerond naar {woningwaardering.aantal}"
@@ -378,7 +382,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
         punten = Decimal(
             sum(
-                Decimal(woningwaardering.aantal)
+                Decimal(str(woningwaardering.aantal))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.aantal is not None
             )
