@@ -142,9 +142,10 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
             or ruimte.inhoud
             >= (
                 ruimte.oppervlakte
-                + int(
-                    ruimte.detail_soort.code
-                    == Ruimtedetailsoort.badkamer_en_of_toilet.code  # correctie voor eerder toegepast: "Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd."
+                + float(
+                    OppervlakteVanVertrekken2024.badruimte_met_toilet(
+                        ruimte
+                    )  # correctie voor eerder toegepast: "Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd."
                 )
             )
             / 2
@@ -300,14 +301,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
             criterium_naam = ruimte.naam
 
             # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
-            if (
-                ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code
-                or any(
-                    bouwkundig_element.detail_soort.code
-                    == Bouwkundigelementdetailsoort.closetcombinatie.code
-                    for bouwkundig_element in ruimte.bouwkundige_elementen or []
-                )
-            ):
+            if OppervlakteVanVertrekken2024.badruimte_met_toilet(ruimte):
                 ruimte.oppervlakte = float(
                     Decimal(str(ruimte.oppervlakte)) - Decimal("1")
                 )
@@ -398,6 +392,23 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
+
+    @staticmethod
+    def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
+        if ruimte.detail_soort is None:
+            raise TypeError("ruimte.detail_soort is None")
+        return (
+            ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code
+        ) or (
+            ruimte.detail_soort.code
+            in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
+            and any(
+                bouwkundig_element.detail_soort is not None
+                and bouwkundig_element.detail_soort.code
+                == Bouwkundigelementdetailsoort.closetcombinatie.code
+                for bouwkundig_element in ruimte.bouwkundige_elementen or []
+            )
+        )
 
 
 if __name__ == "__main__":
