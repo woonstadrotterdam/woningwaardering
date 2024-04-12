@@ -183,6 +183,17 @@
             "merkKetel": "Stadsverwarming",
             "ifcSoort": "IfcBoiler"
           }
+        },
+        {
+          "naam": "Trap",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "TRA",
+            "naam": "Trap"
+          }
         }
       ]
     },
