@@ -300,7 +300,14 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
             criterium_naam = ruimte.naam
 
             # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
-            if ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code:
+            if (
+                ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code
+                or any(
+                    bouwkundig_element.detail_soort.code
+                    == Bouwkundigelementdetailsoort.closetcombinatie.code
+                    for bouwkundig_element in ruimte.bouwkundige_elementen or []
+                )
+            ):
                 ruimte.oppervlakte = float(
                     Decimal(str(ruimte.oppervlakte)) - Decimal("1")
                 )
