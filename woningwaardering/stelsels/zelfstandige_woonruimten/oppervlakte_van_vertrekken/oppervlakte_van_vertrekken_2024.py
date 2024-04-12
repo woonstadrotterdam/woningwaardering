@@ -397,6 +397,15 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
     def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
         if ruimte.detail_soort is None:
             raise TypeError("ruimte.detail_soort is None")
+        if any(
+            bouwkundig_element.detail_soort is not None
+            and bouwkundig_element.detail_soort.code
+            == Ruimtedetailsoort.toiletruimte.code
+            for bouwkundig_element in ruimte.bouwkundige_elementen or []
+        ):
+            logger.warning(
+                "Ruimtedetailsoort.toiletruimte gebruikt in plaats van Bouwkundigelementdetailsoort.closetcombinatie"
+            )
         return (
             ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code
         ) or (
@@ -405,7 +414,10 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
             and any(
                 bouwkundig_element.detail_soort is not None
                 and bouwkundig_element.detail_soort.code
-                == Bouwkundigelementdetailsoort.closetcombinatie.code
+                in [
+                    Bouwkundigelementdetailsoort.closetcombinatie.code,
+                    Ruimtedetailsoort.toiletruimte.code,  # Foutief, maar vaak gebruikt
+                ]
                 for bouwkundig_element in ruimte.bouwkundige_elementen or []
             )
         )
