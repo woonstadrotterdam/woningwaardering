@@ -11,10 +11,10 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 80.0,
+      "punten": 79.0,
       "woningwaarderingen": [
         {
-          "aantal": 4.8,
+          "aantal": 3.8,
           "criterium": {
             "naam": "Badruimte",
             "meeteenheid": {
@@ -101,7 +101,7 @@
       ]
     }
   ],
-  "punten": 84.0,
+  "punten": 83.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

@@ -11,7 +11,7 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 113.0,
+      "punten": 111.0,
       "woningwaarderingen": [
         {
           "aantal": 18.64,
@@ -84,7 +84,7 @@
           }
         },
         {
-          "aantal": 1.75,
+          "aantal": 0.75,
           "criterium": {
             "naam": "Badruimte",
             "meeteenheid": {
@@ -104,7 +104,7 @@
           }
         },
         {
-          "aantal": 1.89,
+          "aantal": 0.89,
           "criterium": {
             "naam": "Badruimte",
             "meeteenheid": {
@@ -161,7 +161,7 @@
       ]
     }
   ],
-  "punten": 121.0,
+  "punten": 119.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
