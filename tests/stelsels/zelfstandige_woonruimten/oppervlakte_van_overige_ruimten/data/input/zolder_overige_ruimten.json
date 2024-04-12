@@ -16,8 +16,6 @@
       "verwarmd": true,
       "bouwkundigeElementen": [
         {
-          "id": "Trap_123",
-          "id_bimmodel": "trap123",
           "naam": "Trap",
           "omschrijving": "(vaste) trap naar de zolder",
           "soort": {
@@ -62,8 +60,6 @@
       "verwarmd": true,
       "bouwkundigeElementen": [
         {
-          "id": "Vlizo_1",
-          "id_bimmodel": "test123",
           "naam": "Vlizotrap",
           "omschrijving": "Vlizo trap naar de zolder",
           "soort": {

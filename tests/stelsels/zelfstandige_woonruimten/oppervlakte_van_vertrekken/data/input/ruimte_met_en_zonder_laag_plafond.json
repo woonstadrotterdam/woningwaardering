@@ -2,7 +2,6 @@
   "bouwjaar": 1924,
   "ruimten": [
     {
-      "id": "Space_108014554",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -18,7 +17,6 @@
       "gemeenschappelijk": false
     },
     {
-      "id": "Space_108014554",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -34,7 +32,6 @@
       "gemeenschappelijk": false
     },
     {
-      "id": "Space_108014554",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -50,7 +47,6 @@
       "gemeenschappelijk": false
     },
     {
-      "id": "Space_108014554",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -66,7 +62,6 @@
       "gemeenschappelijk": false
     },
     {
-      "id": "Space_108014554",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
