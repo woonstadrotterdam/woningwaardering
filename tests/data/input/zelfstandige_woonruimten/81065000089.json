@@ -34,7 +34,6 @@
       "inhoud": 2.60078,
       "oppervlakte": 0.858344,
       "verwarmd": false,
-      "afsluitbaar": false,
       "bouwlaag": {
         "nummer": "00",
         "omschrijving": "begane grond"
@@ -54,7 +53,6 @@
       "inhoud": 32.7376,
       "oppervlakte": 10.2305,
       "verwarmd": false,
-      "afsluitbaar": false,
       "bouwlaag": {
         "nummer": "02",
         "omschrijving": "tweede verdieping"
@@ -74,7 +72,6 @@
       "inhoud": 29.0723,
       "oppervlakte": 11.6289,
       "verwarmd": true,
-      "afsluitbaar": false,
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
@@ -83,8 +80,8 @@
     {
       "id": "Space_29489753",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "OVR",
+        "naam": "Overige ruimtes"
       },
       "detailSoort": {
         "code": "TRH",
@@ -94,7 +91,6 @@
       "inhoud": 5.49399,
       "oppervlakte": 2.24108,
       "verwarmd": false,
-      "afsluitbaar": true,
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
@@ -114,7 +110,6 @@
       "inhoud": 4.02467,
       "oppervlakte": 1.27409,
       "verwarmd": false,
-      "afsluitbaar": false,
       "bouwlaag": {
         "nummer": "00",
         "omschrijving": "begane grond"
@@ -134,7 +129,6 @@
       "inhoud": 19.0458,
       "oppervlakte": 7.61833,
       "verwarmd": true,
-      "afsluitbaar": false,
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
@@ -154,7 +148,6 @@
       "inhoud": 53.8483,
       "oppervlakte": 17.7717,
       "verwarmd": true,
-      "afsluitbaar": true,
       "bouwlaag": {
         "nummer": "00",
         "omschrijving": "begane grond"
@@ -174,7 +167,6 @@
       "inhoud": 9.17199,
       "oppervlakte": 3.66757,
       "verwarmd": false,
-      "afsluitbaar": true,
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
@@ -194,7 +186,6 @@
       "inhoud": 4.51051,
       "oppervlakte": 1.48862,
       "verwarmd": false,
-      "afsluitbaar": false,
       "bouwlaag": {
         "nummer": "00",
         "omschrijving": "begane grond"
@@ -214,7 +205,6 @@
       "inhoud": 7.15234,
       "oppervlakte": 2.86093,
       "verwarmd": true,
-      "afsluitbaar": false,
       "bouwkundigeElementen": [
         {
           "id": "Douche_29481807",
@@ -241,8 +231,8 @@
     {
       "id": "Space_29474432",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "OVR",
+        "naam": "Overige ruimtes"
       },
       "detailSoort": {
         "code": "TRH",
@@ -252,7 +242,6 @@
       "inhoud": 3.78946,
       "oppervlakte": 1.25065,
       "verwarmd": false,
-      "afsluitbaar": true,
       "bouwlaag": {
         "nummer": "00",
         "omschrijving": "begane grond"
@@ -272,7 +261,6 @@
       "inhoud": 38.5381,
       "oppervlakte": 12.7166,
       "verwarmd": true,
-      "afsluitbaar": false,
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_29467536",
@@ -309,7 +297,6 @@
       "inhoud": 20.8602,
       "oppervlakte": 8.34408,
       "verwarmd": true,
-      "afsluitbaar": true,
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
