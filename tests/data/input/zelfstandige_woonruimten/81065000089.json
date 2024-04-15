@@ -56,7 +56,20 @@
       "bouwlaag": {
         "nummer": "02",
         "omschrijving": "tweede verdieping"
-      }
+      },
+      "bouwkundigeElementen": [
+        {
+          "naam": "Vlizotrap",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ]
     },
     {
       "id": "Space_29489751",
