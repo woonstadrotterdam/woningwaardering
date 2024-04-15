@@ -404,7 +404,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
             for bouwkundig_element in ruimte.bouwkundige_elementen or []
         ):
             logger.warning(
-                "Ruimtedetailsoort.toiletruimte gebruikt in plaats van Bouwkundigelementdetailsoort.closetcombinatie"
+                f"{Ruimtedetailsoort.toiletruimte} gebruikt in plaats van {Bouwkundigelementdetailsoort.closetcombinatie}"
             )
         return (
             ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code
