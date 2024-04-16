@@ -15,8 +15,8 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Meeteenheid,
-    Ruimtesoort,
     Ruimtedetailsoort,
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -33,6 +33,9 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
 
     Returns:
         bool: is de ruimte een overige ruimte.
+
+    Raises:
+        TypeError: als de ruimte geen soort en/of detailsoort(-code) en/of oppervlakte heeft.
     """
 
     def _vertrek_detailsoort(ruimte: EenhedenRuimte) -> bool:
@@ -52,14 +55,18 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
 
         Returns:
             bool: voldoet de ruimte aan het detailsoort om een vertrek te kunnen zijn.
+
+        Raises:
+            TypeError: als de ruimte geen soort en/of detailsoort(-code) heeft.
         """
         if (
             ruimte.detail_soort is None
             or ruimte.detail_soort.code is None
-            or ruimte.detail_soort.naam is None
             or ruimte.soort is None
         ):
-            return False
+            error_msg = f"{ruimte.id} heeft geen soort en/of detailsoort(-code)"
+            logger.error(error_msg)
+            raise TypeError(error_msg)
 
         if ruimte.soort.code != Ruimtesoort.vertrek.code:
             return False
@@ -78,7 +85,7 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
         ]
         if result is False:
             logger.warning(
-                f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
+                f"{ruimte.id} {ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
             )
         return result
 
@@ -92,13 +99,18 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
 
         Returns:
             bool: voldoet de ruimte aan de eis
+
+        Raises:
+            TypeError: als de ruimte geen detailsoort(-code) en/of oppervlakte heeft.
         """
         if (
             ruimte.detail_soort is None
             or ruimte.oppervlakte is None
             or ruimte.detail_soort.code is None
         ):
-            return False
+            error_msg = f"{ruimte.id} heeft geen detailsoort(-code) en/of oppervlakte"
+            logger.error(error_msg)
+            raise TypeError(error_msg)
 
         result = (
             ruimte.inhoud is None
@@ -117,7 +129,7 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
         )
         if result is False:
             logger.warning(
-                f"{ruimte.naam} {ruimte.detail_soort.code} heeft een te lage plafondhoogte en krijgt daarom geen punten."
+                f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort.code} heeft een te lage plafondhoogte en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
             )
         return result
 
@@ -129,13 +141,18 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
 
         Returns:
             bool: voldoet de ruimte aan de eis
+
+        Raises:
+            TypeError: als de ruimte geen detailsoort(-code) en/of oppervlakte heeft.
         """
         if (
             ruimte.oppervlakte is None
             or ruimte.detail_soort is None
             or ruimte.detail_soort.code is None
         ):
-            return False
+            error_msg = f"{ruimte.id} heeft geen detailsoort(-code) en/of oppervlakte"
+            logger.error(error_msg)
+            raise TypeError(error_msg)
 
         result = (
             ruimte.inhoud is None
@@ -155,7 +172,7 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
         )
         if result is False:
             logger.warning(
-                f"{ruimte.naam} {ruimte.detail_soort.code} heeft een te lage plafondhoogte en krijgt daarom geen punten."
+                f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort.code} heeft een te lage plafondhoogte en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
             )
         return result
 
@@ -167,13 +184,18 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
 
         Returns:
             bool: voldoet de ruimte aan de eis
+
+        Raises:
+            TypeError: als de ruimte geen detailsoort(-code) en/of oppervlakte heeft.
         """
         if (
             ruimte.oppervlakte is None
             or ruimte.detail_soort is None
             or ruimte.detail_soort.code is None
         ):
-            return False
+            error_msg = f"{ruimte.id} heeft geen detailsoort(-code) en/of oppervlakte"
+            logger.error(error_msg)
+            raise TypeError(error_msg)
 
         result = (
             ruimte.detail_soort.code != Ruimtedetailsoort.badkamer_en_of_toilet.code
@@ -181,7 +203,7 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
         )
         if result is False:
             logger.warning(
-                f"{ruimte.naam} {ruimte.detail_soort} is kleiner dan 0.64 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten."
+                f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort} is kleiner dan 0.64 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
             )
         return result
 
@@ -195,13 +217,18 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
 
         Returns:
             bool: voldoet de ruimte aan de eis
+
+        Raises:
+            TypeError: als de ruimte geen detailsoort(-code) en/of oppervlakte heeft.
         """
         if (
             ruimte.oppervlakte is None
             or ruimte.detail_soort is None
             or ruimte.detail_soort.code is None
         ):
-            return False
+            error_msg = f"{ruimte.id} heeft geen detailsoort(-code) en/of oppervlakte"
+            logger.error(error_msg)
+            raise TypeError(error_msg)
 
         result = ruimte.oppervlakte >= 4 or ruimte.detail_soort.code in [
             Ruimtedetailsoort.keuken.code,
@@ -211,7 +238,7 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
         ]
         if result is False:
             logger.warning(
-                f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten."
+                f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
             )
         return result
 
@@ -223,30 +250,36 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
 
         Returns:
             bool: True als de zolder een vaste heeft, False otherwise.
+
+        Raises:
+            TypeError: als de ruimte geen detailsoort heeft.
         """
-        if ruimte.detail_soort is not None:
-            if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-                vaste_trap = [
-                    element.detail_soort
-                    for element in ruimte.bouwkundige_elementen or []
-                    if element.detail_soort
-                    and element.detail_soort.code
-                    == Bouwkundigelementdetailsoort.trap.code
-                ]
-                if not vaste_trap:
-                    logger.warning(
-                        f"Geen vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor oppervlakte van vertrekken"
-                    )
-                    return False
+        if ruimte.detail_soort is None:
+            error_msg = f"{ruimte.id} heeft geen detailsoort"
+            logger.error(error_msg)
+            raise TypeError(error_msg)
+
+        if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
+            vaste_trap = [
+                element.detail_soort
+                for element in ruimte.bouwkundige_elementen or []
+                if element.detail_soort
+                and element.detail_soort.code == Bouwkundigelementdetailsoort.trap.code
+            ]
+            if not vaste_trap:
                 logger.warning(
-                    f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van vertrekken"
+                    f"Geen vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
                 )
+                return False
+            logger.warning(
+                f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
+            )
         return True
 
     if ruimte.soort is None or ruimte.detail_soort is None:
-        logger.error(
-            f"Ruimte {ruimte} heeft geen soort en/of detailsoort en kan daardoor niet meegerekend worden."
-        )
+        error_msg = f"Ruimte {ruimte.id} heeft geen soort en/of detailsoort en kan daardoor niet meegerekend worden onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
+        logger.error(error_msg)
+        raise TypeError(error_msg)
 
     if not _vertrek_detailsoort(ruimte):
         return True
@@ -289,14 +322,17 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         for ruimte in eenheid.ruimten or []:
             logger.debug(f"Processsing ruimte: {ruimte.id}")
             if ruimte.oppervlakte is None:
-                logger.warning(f"Ruimte {ruimte.id} heeft geen oppervlakte")
-                continue
+                error_msg = f"Ruimte {ruimte.id} heeft geen oppervlakte"
+                logger.error(error_msg)
+                raise TypeError(error_msg)
             if ruimte.detail_soort is None:
-                logger.warning(f"Ruimte {ruimte.id} heeft geen detailsoort")
-                continue
+                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoort"
+                logger.error(error_msg)
+                raise TypeError(error_msg)
             if ruimte.detail_soort.code is None:
-                logger.warning(f"Ruimte {ruimte.id} heeft geen detailsoortcode")
-                continue
+                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoortcode"
+                logger.error(error_msg)
+                raise TypeError(error_msg)
 
             criterium_naam = ruimte.naam
 
