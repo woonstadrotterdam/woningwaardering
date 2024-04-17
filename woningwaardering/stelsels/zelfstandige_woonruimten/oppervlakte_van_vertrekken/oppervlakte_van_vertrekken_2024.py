@@ -23,6 +23,7 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
     Bouwkundigelementdetailsoort,
 )
+from woningwaardering.vera.utils import badruimte_met_toilet
 
 
 def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
@@ -110,10 +111,7 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
             logger.error(error_msg)
             raise TypeError(error_msg)
 
-        result = (
-            ruimte.detail_soort.code != Ruimtedetailsoort.badkamer_en_of_toilet.code
-            or ruimte.oppervlakte >= 0.64
-        )
+        result = not badruimte_met_toilet(ruimte) or ruimte.oppervlakte >= 0.64
         if result is False:
             logger.warning(
                 f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort} is kleiner dan 0.64 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
@@ -148,6 +146,7 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
             Ruimtedetailsoort.badkamer_en_of_toilet.code,
             Ruimtedetailsoort.badkamer.code,
             Ruimtedetailsoort.toiletruimte.code,
+            Ruimtedetailsoort.doucheruimte.code,
         ]
         if result is False:
             logger.warning(
@@ -244,7 +243,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
             criterium_naam = ruimte.naam
 
             # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
-            if OppervlakteVanVertrekken2024.badruimte_met_toilet(ruimte):
+            if badruimte_met_toilet(ruimte):
                 ruimte.oppervlakte = float(
                     Decimal(str(ruimte.oppervlakte)) - Decimal("1")
                 )
@@ -335,35 +334,6 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
-
-    @staticmethod
-    def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
-        if ruimte.detail_soort is None:
-            raise TypeError("ruimte.detail_soort is None")
-        if any(
-            bouwkundig_element.detail_soort is not None
-            and bouwkundig_element.detail_soort.code
-            == Ruimtedetailsoort.toiletruimte.code
-            for bouwkundig_element in ruimte.bouwkundige_elementen or []
-        ):
-            logger.warning(
-                f"{Ruimtedetailsoort.toiletruimte} gebruikt in plaats van {Bouwkundigelementdetailsoort.closetcombinatie}"
-            )
-        return (
-            ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code
-        ) or (
-            ruimte.detail_soort.code
-            in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
-            and any(
-                bouwkundig_element.detail_soort is not None
-                and bouwkundig_element.detail_soort.code
-                in [
-                    Bouwkundigelementdetailsoort.closetcombinatie.code,
-                    Ruimtedetailsoort.toiletruimte.code,  # Foutief, maar vaak gebruikt
-                ]
-                for bouwkundig_element in ruimte.bouwkundige_elementen or []
-            )
-        )
 
 
 if __name__ == "__main__":
