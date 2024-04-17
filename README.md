@@ -43,11 +43,11 @@ Deze worden aangehouden in de opzet van de `woningwaardering`-package.
 Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
 Elk stelselgroep-object zal mee veranderen met nieuw gepubliceerde wet- en regelgeving, die is opgenomen in de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken).
 
-### 2024. Zelfstandige Woonruimten.
-
 In de onderstaande hoofdstukken gaan we de beleidsboeken bij langs om aan te geven welke regels we hebben kunnen implementeren in de package en welke regels we niet hebben kunnen implementeren. De regels die we niet hebben kunnen implementeren en de gebruiker van de package daarom zelf rekening mee moet houden zijn ~~doorgestreept~~.
 
 > Commentaar van de ontwikkelaars van deze package op het beleidsboek in dit soort blokken
+
+### 2024. Zelfstandige Woonruimten.
 
 #### _4.2 Oppervlakte van Vertrekken_
 
