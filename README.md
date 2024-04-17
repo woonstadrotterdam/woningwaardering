@@ -25,6 +25,7 @@ Een woningwaardering wordt gemaakt op basis van woningelementen.
 De stelselgroepen waarop gescoord wordt, zijn vastgelegd in het [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP) op www.coraveraonline.nl.
 Deze worden aangehouden in de opzet van de `woningwaardering`-package.
 Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
+
 Een stelselgroep-object zal een nieuwe versie krijgen wanneer nieuw gepubliceerde wet- en regelgeving, die is opgenomen in de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken), verschilt van de huidige berekening voor dat stelselgroep.
 
 ### Repository-structuur
