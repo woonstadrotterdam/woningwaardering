@@ -26,6 +26,8 @@ De stelselgroepen waarop gescoord wordt, zijn vastgelegd in het [woningwaarderin
 Deze worden aangehouden in de opzet van de `woningwaardering`-package.
 Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
 
+De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpetatie. Daarnaast kan voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens eht beleidsboek tot op de letter naukerig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elk stelselgroep is geïmplementeerd en welke keuzes daarin zijn gemaakt.
+
 Een stelselgroep-object zal een nieuwe versie krijgen wanneer nieuw gepubliceerde wet- en regelgeving, die is opgenomen in de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken), verschilt van de huidige berekening voor dat stelselgroep.
 
 ### Repository-structuur
@@ -72,6 +74,8 @@ In dit geval zal de `woningwaardering`-package een error geven die duidelijk maa
 Om de woningwaardering-package en de daarbij behorende developer dependencies te installeren, run onderstaand command:
 
 ```
+git clone https://github.com/WoonstadRotterdamTemp/woningwaardering.git
+cd woningwaardering
 pip install -e ".[dev]"
 ```
 
@@ -220,17 +224,9 @@ Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarm
 
 In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Deze kan bijvoorbeeld tot gevolg hebben dat er punten in mindering of punten extra gegeven kunnen worden. Zo ook bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee deze zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribute `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een [github issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/46) open om `bouwkundige_elementen` standaard in het VERA model toe te voegen.
 
-## 5. Stelselgroep implementaties, afwijkingen en interpetaties
+## DEPRECATED 5. Stelselgroep implementaties, afwijkingen en interpetaties
 
-De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpetatie. Daarnaast kan voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens eht beleidsboek tot op de letter naukerig te implementeren. In deze sectie documenteren en onderbouwen wij hoe elk stelselgroep is geïmplementeerd en welke keuzes daarin zijn gemaakt.
-
-### Oppervlakte van vertrekken
-
-#### 2024
-
-##### Zolder
-
-In het beleidsboek wordt er onderscheid gemaakt tussen een zolder vertrek met een vaste trap of zolder met een ander soort trap. Wanneer een zolder als vertek wordt aangemerkt moet deze te bereiken zijn via een vaste trap. Daarom wordt er voor een zolder gekeken of er een vaste trap in de `bouwkundige_elementen` zit. Als dit het geval is dat telt de gehele oppervlakte van de zolder mee voor de punten van Oppervlakte van Vertekken.
+De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpetatie. Daarnaast kan voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens eht beleidsboek tot op de letter naukerig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elk stelselgroep is geïmplementeerd en welke keuzes daarin zijn gemaakt.
 
 ### Oppervlakte van overige ruimten
 
