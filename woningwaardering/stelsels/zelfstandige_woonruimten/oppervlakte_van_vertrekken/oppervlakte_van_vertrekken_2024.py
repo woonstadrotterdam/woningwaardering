@@ -89,93 +89,6 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
             )
         return result
 
-    def _min_2m_hoogte_50_procent_oppervlakte_badkamer_of_doucheruimte(
-        ruimte: EenhedenRuimte,
-    ) -> bool:
-        """De badkamer of doucheruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,00 m.
-
-        Args:
-            ruimte (EenhedenRuimte): een ruimte.
-
-        Returns:
-            bool: voldoet de ruimte aan de eis
-
-        Raises:
-            TypeError: als de ruimte geen detailsoort(-code) en/of oppervlakte heeft.
-        """
-        if (
-            ruimte.detail_soort is None
-            or ruimte.oppervlakte is None
-            or ruimte.detail_soort.code is None
-        ):
-            error_msg = f"{ruimte.id} heeft geen detailsoort(-code) en/of oppervlakte"
-            logger.error(error_msg)
-            raise TypeError(error_msg)
-
-        result = (
-            ruimte.inhoud is None
-            or (
-                ruimte.detail_soort is None
-                or ruimte.detail_soort.code
-                in [
-                    Ruimtedetailsoort.doucheruimte.code,
-                    Ruimtedetailsoort.badkamer.code,
-                ]
-            )
-            or (
-                ruimte.oppervlakte is None
-                or ruimte.inhoud >= ruimte.oppervlakte / 2 * 2
-            )
-        )
-        if result is False:
-            logger.warning(
-                f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort.code} heeft een te lage plafondhoogte en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
-            )
-        return result
-
-    def _min_2m10_hoogte_50_procent_oppervlakte(ruimte: EenhedenRuimte) -> bool:
-        """De ruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,10 m.
-
-        Args:
-            ruimte (EenhedenRuimte): een ruimte.
-
-        Returns:
-            bool: voldoet de ruimte aan de eis
-
-        Raises:
-            TypeError: als de ruimte geen detailsoort(-code) en/of oppervlakte heeft.
-        """
-        if (
-            ruimte.oppervlakte is None
-            or ruimte.detail_soort is None
-            or ruimte.detail_soort.code is None
-        ):
-            error_msg = f"{ruimte.id} heeft geen detailsoort(-code) en/of oppervlakte"
-            logger.error(error_msg)
-            raise TypeError(error_msg)
-
-        result = (
-            ruimte.inhoud is None
-            or ruimte.inhoud
-            >= (
-                ruimte.oppervlakte
-                + float(
-                    OppervlakteVanVertrekken2024.badruimte_met_toilet(
-                        ruimte
-                    )  # correctie voor eerder toegepast: "Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd."
-                )
-            )
-            / 2
-            * 2.1
-            or ruimte.detail_soort.code
-            in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
-        )
-        if result is False:
-            logger.warning(
-                f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort.code} heeft een te lage plafondhoogte en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
-            )
-        return result
-
     def _min_0komma64m2_badkamer_en_of_toilet(ruimte: EenhedenRuimte) -> bool:
         """Voor gecombineerde bad-/doucheruimte met toilet geldt een minimale oppervlakte van 0,64 m².
 
@@ -282,12 +195,6 @@ def ruimte_is_overige_ruimte(ruimte: EenhedenRuimte) -> bool:
         raise TypeError(error_msg)
 
     if not _vertrek_detailsoort(ruimte):
-        return True
-
-    if not _min_2m_hoogte_50_procent_oppervlakte_badkamer_of_doucheruimte(ruimte):
-        return True
-
-    if not _min_2m10_hoogte_50_procent_oppervlakte(ruimte):
         return True
 
     if not _min_0komma64m2_badkamer_en_of_toilet(ruimte):
