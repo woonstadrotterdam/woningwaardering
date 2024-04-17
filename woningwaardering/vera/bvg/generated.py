@@ -3235,6 +3235,11 @@ class EenhedenEenheid(BaseModel):
     """
     De omschrijving van de zorgfaciliteit behorende bij de eenheid.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/54
+    klimaatbeheersingsoort: Optional[Referentiedata] = None
+    """
+    Het soort klimaatbeheersing. Bijvoorbeeld: individueel of collectief. Referentiedatasoort EENHEIDKLIMAATBEHEERSINGSOORT.
+    """
 
 
 class WoningwaarderingResultatenWoningwaarderingResultaatbericht(
