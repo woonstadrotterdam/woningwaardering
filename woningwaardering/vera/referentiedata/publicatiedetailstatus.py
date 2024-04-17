@@ -6,6 +6,10 @@ class Publicatiedetailstatus(Enum):
     woning_krijgt_andere_bestemming = Referentiedata(
         code="BES",
         naam="Woning krijgt andere bestemming",
+        parent=Referentiedata(
+            code="ING",
+            naam="Ingetrokken",
+        ),
     )
     """
     Woning krijgt andere bestemming.
@@ -14,6 +18,10 @@ class Publicatiedetailstatus(Enum):
     geen_toewijzing = Referentiedata(
         code="GTW",
         naam="Geen toewijzing",
+        parent=Referentiedata(
+            code="AFG",
+            naam="Afgerond",
+        ),
     )
     """
     Geen toewijzing
@@ -22,6 +30,10 @@ class Publicatiedetailstatus(Enum):
     woning_wordt_handmatig_bemiddeld = Referentiedata(
         code="HAN",
         naam="Woning wordt handmatig bemiddeld",
+        parent=Referentiedata(
+            code="ING",
+            naam="Ingetrokken",
+        ),
     )
     """
     Woning wordt handmatig bemiddeld.
@@ -30,6 +42,10 @@ class Publicatiedetailstatus(Enum):
     verhuurd_onder_voorbehoud = Referentiedata(
         code="HUU",
         naam="Verhuurd onder voorbehoud",
+        parent=Referentiedata(
+            code="GEP",
+            naam="Gepubliceerd",
+        ),
     )
     """
     Verhuurd onder voorbehoud
@@ -38,6 +54,10 @@ class Publicatiedetailstatus(Enum):
     huuropzegging_is_ingetrokken = Referentiedata(
         code="ING",
         naam="Huuropzegging is ingetrokken",
+        parent=Referentiedata(
+            code="ING",
+            naam="Ingetrokken",
+        ),
     )
     """
     Huuropzegging is ingetrokken.
@@ -46,6 +66,10 @@ class Publicatiedetailstatus(Enum):
     verkocht_onder_voorbehoud = Referentiedata(
         code="KOO",
         naam="Verkocht onder voorbehoud",
+        parent=Referentiedata(
+            code="GEP",
+            naam="Gepubliceerd",
+        ),
     )
     """
     Verkocht onder voorbehoud
@@ -54,6 +78,10 @@ class Publicatiedetailstatus(Enum):
     onder_bod = Referentiedata(
         code="OND",
         naam="Onder bod",
+        parent=Referentiedata(
+            code="GEP",
+            naam="Gepubliceerd",
+        ),
     )
     """
     Onder bod
@@ -62,6 +90,10 @@ class Publicatiedetailstatus(Enum):
     publicatie_met_onjuiste_gegevens = Referentiedata(
         code="ONJ",
         naam="Publicatie met onjuiste gegevens",
+        parent=Referentiedata(
+            code="ING",
+            naam="Ingetrokken",
+        ),
     )
     """
     Publicatie met onjuiste gegevens.
@@ -70,6 +102,10 @@ class Publicatiedetailstatus(Enum):
     onder_optie = Referentiedata(
         code="OOP",
         naam="Onder optie",
+        parent=Referentiedata(
+            code="GEP",
+            naam="Gepubliceerd",
+        ),
     )
     """
     Onder optie
@@ -78,6 +114,10 @@ class Publicatiedetailstatus(Enum):
     woning_wordt_gerenoveerd = Referentiedata(
         code="REN",
         naam="Woning wordt gerenoveerd",
+        parent=Referentiedata(
+            code="ING",
+            naam="Ingetrokken",
+        ),
     )
     """
     Woning wordt gerenoveerd.
@@ -86,6 +126,10 @@ class Publicatiedetailstatus(Enum):
     toegewezen = Referentiedata(
         code="TOE",
         naam="Toegewezen",
+        parent=Referentiedata(
+            code="AFG",
+            naam="Afgerond",
+        ),
     )
     """
     Toegewezen
@@ -94,6 +138,10 @@ class Publicatiedetailstatus(Enum):
     woning_gaat_uit_exploitatie = Referentiedata(
         code="UIT",
         naam="Woning gaat uit exploitatie",
+        parent=Referentiedata(
+            code="ING",
+            naam="Ingetrokken",
+        ),
     )
     """
     Woning gaat uit exploitatie.
@@ -106,3 +154,7 @@ class Publicatiedetailstatus(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent

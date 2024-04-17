@@ -6,6 +6,10 @@ class Kandidaatdetailstatus(Enum):
     aanbieding = Referentiedata(
         code="AAN",
         naam="Aanbieding",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aangeboden",
+        ),
     )
     """
     Kandidaat krijgt aanbieding.
@@ -14,6 +18,10 @@ class Kandidaatdetailstatus(Enum):
     bezichtiging = Referentiedata(
         code="BEZ",
         naam="Bezichtiging",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aangeboden",
+        ),
     )
     """
     Kandidaat mag bezichtigen.
@@ -22,6 +30,10 @@ class Kandidaatdetailstatus(Enum):
     documentcontrole = Referentiedata(
         code="DOC",
         naam="Documentcontrole",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aangeboden",
+        ),
     )
     """
     Kandidaat moet documenten laten controleren.
@@ -46,6 +58,10 @@ class Kandidaatdetailstatus(Enum):
     niet_gereageerd = Referentiedata(
         code="NRE",
         naam="Niet gereageerd",
+        parent=Referentiedata(
+            code="GEW",
+            naam="Geweigerd",
+        ),
     )
     """
     Kandidaat heeft te laat of niet gereageerd.
@@ -54,6 +70,10 @@ class Kandidaatdetailstatus(Enum):
     ongeschikt = Referentiedata(
         code="ONG",
         naam="Ongeschikt",
+        parent=Referentiedata(
+            code="AFG",
+            naam="Afgewezen",
+        ),
     )
     """
     Kandidaat niet geschikt voor omgeving.
@@ -62,6 +82,10 @@ class Kandidaatdetailstatus(Enum):
     gegevens_onjuist = Referentiedata(
         code="ONJ",
         naam="Gegevens onjuist",
+        parent=Referentiedata(
+            code="AFG",
+            naam="Afgewezen",
+        ),
     )
     """
     Kandidaat komt niet in aanmerking na controle gegevens.
@@ -70,6 +94,10 @@ class Kandidaatdetailstatus(Enum):
     overeenkomst_getekend = Referentiedata(
         code="OVE",
         naam="Overeenkomst getekend",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aangeboden",
+        ),
     )
     """
     Kandidaat heeft huur- of koopovereenkomst getekend.
@@ -86,6 +114,10 @@ class Kandidaatdetailstatus(Enum):
     peilen_belangstelling = Referentiedata(
         code="PEI",
         naam="Peilen belangstelling",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aangeboden",
+        ),
     )
     """
     Kandidaat wordt gevraagd of deze nog steeds belangstelling heeft.
@@ -94,6 +126,10 @@ class Kandidaatdetailstatus(Enum):
     weigering_aanbieding = Referentiedata(
         code="WEI",
         naam="Weigering aanbieding",
+        parent=Referentiedata(
+            code="GEW",
+            naam="Geweigerd",
+        ),
     )
     """
     Kandidaat weigert de aanbieding.
@@ -106,3 +142,7 @@ class Kandidaatdetailstatus(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent

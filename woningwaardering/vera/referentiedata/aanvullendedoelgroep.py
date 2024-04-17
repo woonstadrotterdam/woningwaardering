@@ -6,6 +6,10 @@ class Aanvullendedoelgroep(Enum):
     buitenlandse_studenten = Referentiedata(
         code="BSTU",
         naam="Buitenlandse studenten",
+        parent=Referentiedata(
+            code="STU",
+            naam="Studenten",
+        ),
     )
     """
     Woonruimte is bestemd voor en/of huurder is een uit het buitenland afkomstige
@@ -126,3 +130,7 @@ class Aanvullendedoelgroep(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent

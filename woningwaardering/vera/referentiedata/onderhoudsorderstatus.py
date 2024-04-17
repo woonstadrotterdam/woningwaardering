@@ -105,3 +105,7 @@ class Onderhoudsorderstatus(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent
