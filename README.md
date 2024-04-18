@@ -53,7 +53,7 @@ De reden van het niet implementeren van een regelonderdeel is vrijwel altijd dat
 Regels die wel zijn geimplementeerd zijn niet doorgestreept.
 Keuzes die zijn gemaakt en of interpetaties die zijn gedaan, worden in een gemarkeerd blok weergegeven zoals hieronder is gedaan.
 
-> Dit is een tekstblok waarmee commentaar van een developer wordt aangegeven.
+> Dit is een tekstblok waarmee commentaar van een developer wordt aangegeven in het beleidsboek.
 
 ### Repository-structuur
 
