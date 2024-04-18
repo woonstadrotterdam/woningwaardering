@@ -53,7 +53,7 @@ verderop).
 
 Voor gecombineerde bad-/doucheruimte met toilet geldt een minimale oppervlakte van 0,64 m².
 
-> In feite komt dit erop neer dat elke bad- of doucheruimte dat als vertrek is aangemerkt wordt meegeteld als vertrek voor deze Stelselgroep, tenzij de bad of doucheruimte een toilet bevat, of een `Badkamer/toilet` is, en de oppervlakte kleiner is dan 0,64 m² na aftrek van 1 m2 voor het hebben van een toilet (zie 5. in 4.2.2).
+> Elke Badkamer, Badkamer/toilet of Doucheruimte die als vertrek is aangemerkt wordt meegeteld als vertrek, tenzij onder aftrek van 1 m2 voor een in de ruimte geplaatst toilet de oppervlakte kleiner is dan 0,64 m². (Zie punt 5 in 4.2.2).
 
 **Zolderruimte**
 
