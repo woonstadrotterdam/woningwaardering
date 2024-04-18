@@ -341,7 +341,7 @@ class Ruimtedetailsoort(Enum):
         naam="Overloop",
     )
     """
-    Verkeersruimte: Gang op een bovenverdieping.
+    Verkeersruimte: (UITBREIDING) Gang op een bovenverdieping.
     """
 
     entree = Referentiedata(
@@ -349,7 +349,15 @@ class Ruimtedetailsoort(Enum):
         naam="Entree",
     )
     """
-    Verkeersruimte: Ingang van een gebouw.
+    Verkeersruimte: (UITBREIDING) Ingang van een gebouw.
+    """
+
+    kast = Referentiedata(
+        code="KAS",
+        naam="Kast",
+    )
+    """
+    Overige ruimte: (UITBREIDING)
     """
 
     @property

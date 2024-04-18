@@ -1,0 +1,326 @@
+{
+  "id": "85651000021",
+  "ruimten": [
+    {
+      "id": "Space_91559685",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 20.1183,
+      "oppervlakte": 8.0473,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Aanrecht_91559689",
+          "id_bimmodel": "1PTQBNsV95yxS0dUvmYEbn",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2100
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559747",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "inhoud": 15.366,
+      "oppervlakte": 4.9728,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559726",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "MET",
+        "naam": "Meterruimte"
+      },
+      "naam": "Meterruimte",
+      "inhoud": 1.01675,
+      "oppervlakte": 0.4067,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559694",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 14.456,
+      "oppervlakte": 5.7824,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "Douche_91559698",
+          "id_bimmodel": "1PTQBNsV95yxS0dUvmYEHa",
+          "naam": "Douche",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "DOU",
+            "naam": "Douche"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.SHOWER"
+          }
+        },
+        {
+          "id": "Wastafel_91559700",
+          "id_bimmodel": "1PTQBNsV95yxS0dUvmYEPi",
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.WASHHANDBASIN"
+          }
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559691",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 63.84,
+      "oppervlakte": 25.536,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559673",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 30.1395,
+      "oppervlakte": 12.0558,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559677",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 20.2835,
+      "oppervlakte": 8.1134,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559671",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "Gang",
+      "inhoud": 17.647,
+      "oppervlakte": 7.0588,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559710",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "inhoud": 2.79,
+      "oppervlakte": 1.116,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "Fontein_91559713",
+          "id_bimmodel": "1PTQBNsV95yxS0dUvmYEZS",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.SINK"
+          }
+        },
+        {
+          "id": "Closetcombinatie_91559712",
+          "id_bimmodel": "1PTQBNsV95yxS0dUvmYEVr",
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "TOI",
+            "naam": "Toilet"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.TOILETPAN"
+          }
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559722",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 1.395,
+      "oppervlakte": 0.558,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    },
+    {
+      "id": "Space_91559715",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TEC",
+        "naam": "Technische ruimte"
+      },
+      "naam": "Technische ruimte",
+      "inhoud": 1.095,
+      "oppervlakte": 0.438,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "Ketel_91559718",
+          "id_bimmodel": "2KjoDrW5z11h$HTxIUotl_",
+          "naam": "Ketel",
+          "soort": {
+            "code": "VER",
+            "naam": "Verwarming"
+          },
+          "detailSoort": {
+            "code": "VTO",
+            "naam": "Verwarmingstoestellen"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcBoiler"
+          }
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "03",
+        "omschrijving": "derde verdieping"
+      }
+    }
+  ]
+}

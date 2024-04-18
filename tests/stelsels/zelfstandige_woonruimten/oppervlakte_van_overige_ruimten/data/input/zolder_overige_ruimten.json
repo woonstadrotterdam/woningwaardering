@@ -1,0 +1,77 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige Ruimte"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder overige ruimte met trap",
+      "inhoud": 20,
+      "oppervlakte": 10,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Trap",
+          "omschrijving": "(vaste) trap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "TRA",
+            "naam": "Trap"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Space_2",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige Ruimte"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder overige ruimte zonder trap",
+      "inhoud": 20,
+      "oppervlakte": 10,
+      "verwarmd": true
+    },
+    {
+      "id": "Space_3",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige Ruimte"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder overige ruimte met vlizo trap",
+      "inhoud": 20,
+      "oppervlakte": 10,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Vlizotrap",
+          "omschrijving": "Vlizo trap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ]
+    }
+  ]
+}

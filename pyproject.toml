@@ -23,7 +23,8 @@ dependencies = [
     "pydantic==2.*",
     "loguru==0.7.*",
     "types-pyyaml==6.*",
-    "PyYAML==6.*"
+    "PyYAML==6.*",
+    "prettytable==3.*"
 ]
 
 [tool.setuptools.packages.find]
@@ -35,14 +36,15 @@ test = [
     "ruff==0.3.*",
     "pytest==8.0.*",
     "types-requests==2.*",
+    "deepdiff==6.7.*",
 ]
 dev = [
+    "woningwaardering[test]",
     "datamodel-code-generator[http]==0.25.5",
-    "pre-commit==3.3.*",
-    "ruff==0.3.*",
-    "pytest==8.0.*",
     "unidecode==1.*",
     "jinja2==3.*",
     "types-pyyaml==6.*",
-    "PyYAML==6.*"
+    "PyYAML==6.*",
+    "libcst==1.*",
+    "requests==2.31.*"
 ]

@@ -1,5 +1,6 @@
 from datetime import date
-from woningwaardering.stelsels import Stelselgroep
+
+from woningwaardering.stelsels import Stelselgroep, utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -19,9 +20,20 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 
 if __name__ == "__main__":
-    oor = OppervlakteVanOverigeRuimten(peildatum=date(2025, 1, 1))
-    f = open("./input_modellen/41164000002.json", "r+")
-    eenheid = EenhedenEenheid.model_validate_json(f.read())
-    print(
-        oor.bereken(eenheid).model_dump_json(by_alias=True, indent=2, exclude_none=True)
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(
+        peildatum=date(2025, 1, 1)
     )
+    file = open("./tests/data/input/zelfstandige_woonruimten/41164000002.json", "r+")
+    eenheid = EenhedenEenheid.model_validate_json(file.read())
+
+    woningwaardering_resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid)
+
+    print(
+        woningwaardering_resultaat.model_dump_json(
+            by_alias=True, indent=2, exclude_none=True
+        )
+    )
+
+    tabel = utils.naar_tabel(woningwaardering_resultaat)
+
+    print(tabel)

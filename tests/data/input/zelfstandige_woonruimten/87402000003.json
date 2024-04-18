@@ -1,0 +1,244 @@
+{
+  "id": "87402000003",
+  "ruimten": [
+    {
+      "id": "Space_29509928",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "inhoud": 3.03831,
+      "oppervlakte": 1.023,
+      "verwarmd": false,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29509931",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.462726,
+      "oppervlakte": 0.1558,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29509924",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 34.6035,
+      "oppervlakte": 11.651,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29509929",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 10.1871,
+      "oppervlakte": 3.122,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29509927",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "HAL",
+        "naam": "Hal"
+      },
+      "naam": "Hal",
+      "inhoud": 14.7984,
+      "oppervlakte": 4.98262,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29509930",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 1.34312,
+      "oppervlakte": 0.45223,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29509926",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 18.9296,
+      "oppervlakte": 6.3736,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29505993",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "inhoud": 16.6682,
+      "oppervlakte": 5.2477,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_56970674",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "inhoud": 16.6187,
+      "oppervlakte": 5.59552,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29509925",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 68.6041,
+      "oppervlakte": 23.099,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29509962",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.462726,
+      "oppervlakte": 0.21,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    },
+    {
+      "id": "Space_29509923",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 24.8054,
+      "oppervlakte": 8.352,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "02",
+        "omschrijving": "tweede verdieping"
+      }
+    }
+  ]
+}

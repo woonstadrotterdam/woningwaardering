@@ -1,0 +1,471 @@
+{
+  "id": "28018000044",
+  "ruimten": [
+    {
+      "id": "Space_20268173",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TEC",
+        "naam": "Technische ruimte"
+      },
+      "naam": "Technische ruimte",
+      "inhoud": 1.35706,
+      "oppervlakte": 0.5472,
+      "verwarmd": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "28018000044",
+          "id_bimmodel": "1xmjfA0hv60PDULXj2MRor",
+          "naam": "Ketel",
+          "omschrijving": "Remeha Avanta 28 C CW4",
+          "soort": {
+            "code": "VER",
+            "naam": "Verwarming"
+          },
+          "detailSoort": {
+            "code": "VTO",
+            "naam": "Verwarmingstoestellen"
+          },
+          "extraAttributen": {
+            "soortProductKetel": "Individueel",
+            "soortKetel": "Gesloten combi-ketel HR",
+            "merkKetel": "REMEHA",
+            "ifcSoort": "IfcBoiler"
+          }
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_20257693",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.368032,
+      "oppervlakte": 0.1484,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20256303",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BTB",
+        "naam": "Buitenberging"
+      },
+      "naam": "Buitenberging",
+      "inhoud": 0.697917,
+      "oppervlakte": 0.3864,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20269382",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 0.35712,
+      "oppervlakte": 0.144,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_20268161",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 24.8031,
+      "oppervlakte": 10.0013,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_20268170",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 5.1832,
+      "oppervlakte": 2.09,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_20256205",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "inhoud": 2.70816,
+      "oppervlakte": 1.092,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "Fontein_20256207",
+          "id_bimmodel": "1xmjfA0hv60PDULXj2MRpw",
+          "omschrijving": null,
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.SINK"
+          }
+        },
+        {
+          "id": "Closetcombinatie_20256206",
+          "id_bimmodel": "1xmjfA0hv60PDULXj2MRpv",
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "TOI",
+            "naam": "Toilet"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.TOILETPAN"
+          }
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20268171",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 17.4215,
+      "oppervlakte": 7.0248,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_20256208",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 18.9568,
+      "oppervlakte": 7.64387,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Aanrecht_20256210",
+          "id_bimmodel": "2K$lfEbArFBBKUjCVt_9da",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2210
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20256201",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 58.5826,
+      "oppervlakte": 23.622,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20256204",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "inhoud": 10.1625,
+      "oppervlakte": 4.0978,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20268166",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 12.8484,
+      "oppervlakte": 5.18079,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "Douche_20268169",
+          "id_bimmodel": "1xmjfA0hv60PDULXj2MRpq",
+          "naam": "Douche",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "DOU",
+            "naam": "Douche"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.SHOWER"
+          }
+        },
+        {
+          "id": "Wastafel_20268168",
+          "id_bimmodel": "1xmjfA0hv60PDULXj2MRpx",
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.WASHHANDBASIN"
+          }
+        }
+      ],
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_20256313",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "MET",
+        "naam": "Meterruimte"
+      },
+      "naam": "Meterruimte",
+      "inhoud": 0.5208,
+      "oppervlakte": 0.21,
+      "verwarmd": false,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20256213",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TRH",
+        "naam": "Trappenhuis"
+      },
+      "naam": "Trappenhuis",
+      "inhoud": 4.16435,
+      "oppervlakte": 1.67917,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20268165",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "OVL",
+        "naam": "Overloop"
+      },
+      "naam": "Overloop",
+      "inhoud": 12.1883,
+      "oppervlakte": 4.91463,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    },
+    {
+      "id": "Space_20257445",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin",
+      "inhoud": 82.1428,
+      "oppervlakte": 33.1229,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20256211",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "HAL",
+        "naam": "Hal"
+      },
+      "naam": "Hal",
+      "inhoud": 11.7857,
+      "oppervlakte": 4.75228,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Space_20268163",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 33.1034,
+      "oppervlakte": 13.3481,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwlaag": {
+        "nummer": "01",
+        "omschrijving": "eerste verdieping"
+      }
+    }
+  ]
+}
