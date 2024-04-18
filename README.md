@@ -8,14 +8,34 @@ Voor vragen kunt u contact opnemen met de Product Owner van Team Microservices [
 
 ## Inhoudsopgave
 
-1. [Opzet woningwaardering-package](#2-opzet-woningwaardering-package)
-2. [Contributing](#3-contributing)
-3. [Datamodel uitbreidingen](#4-datamodel-uitbreidingen)
-4. [Stelselgroep implementaties, afwijkingen en interpetaties](#5-stelselgroep-implementaties-afwijkingen-en-interpetaties)
+- [Woningwaardering](#woningwaardering)
+  - [Inhoudsopgave](#inhoudsopgave)
+  - [1. Opzet woningwaardering-package](#1-opzet-woningwaardering-package)
+    - [Implementatie beleidsboek huurcommissie](#implementatie-beleidsboek-huurcommissie)
+    - [Repository-structuur](#repository-structuur)
+    - [Design](#design)
+    - [Lookup tabellen](#lookup-tabellen)
+  - [3. Contributing](#3-contributing)
+    - [Setup](#setup)
+    - [Naamgeving van classes](#naamgeving-van-classes)
+      - [Stelsels](#stelsels)
+      - [Stelselgroepen](#stelselgroepen)
+      - [Stelselgroepversies](#stelselgroepversies)
+    - [Testing](#testing)
+      - [Conventies voor tests](#conventies-voor-tests)
+      - [Test modellen](#test-modellen)
+    - [Datamodellen](#datamodellen)
+      - [Datamodellen uitbreiden](#datamodellen-uitbreiden)
+    - [Referentiedata](#referentiedata)
+  - [4. Datamodel uitbreidingen](#4-datamodel-uitbreidingen)
+    - [Ruimtedetailsoort kast](#ruimtedetailsoort-kast)
+    - [Verbonden ruimten](#verbonden-ruimten)
+    - [Gedeeld met aantal eenheden](#gedeeld-met-aantal-eenheden)
+    - [Bouwkundige elementen](#bouwkundige-elementen)
 
 ## 1. Opzet woningwaardering-package
 
-### Beleidsboek Huurcommissie
+### Implementatie beleidsboek huurcommissie
 
 Voor het berekenen van een woningwaardering worden de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) voor de waarderingstelsels voor zelfstandige en onzelfstandige woningen gevolgd.
 De beleidsboeken van de Huurcommissie Nederland volgen Nederlandse wet- en regelgeving zoals beschreven in [Artikel 14 van het "Besluit huurprijzen woonruimte"](https://wetten.overheid.nl/BWBR0003237/2024-01-01#Artikel14).
@@ -25,10 +45,14 @@ Een woningwaardering wordt gemaakt op basis van woningelementen.
 De stelselgroepen waarop gescoord wordt, zijn vastgelegd in het [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP) op www.coraveraonline.nl.
 Deze worden aangehouden in de opzet van de `woningwaardering`-package.
 Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
-
-De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpetatie. Daarnaast kan voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens eht beleidsboek tot op de letter naukerig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elk stelselgroep is geïmplementeerd en welke keuzes daarin zijn gemaakt.
-
 Een stelselgroep-object zal een nieuwe versie krijgen wanneer nieuw gepubliceerde wet- en regelgeving, die is opgenomen in de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken), verschilt van de huidige berekening voor dat stelselgroep.
+
+De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpetatie. Daarnaast kan voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens eht beleidsboek tot op de letter naukerig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elk stelselgroep is geïmplementeerd en welke keuzes daarin zijn gemaakt per jaar.
+In deze documenten wordt bijgehouden welke onderdelen van het beleidsboek wel en niet zijn geïmplementeerd per stelselgroep. De gepubliceerde tekst uit het beleidsboek wordt gekopieerd en wanneer een onderdeel niet geïmplementeerd is zal dit worden aangegeven met ~~doorgestreepte tekst~~.
+Regels die wel zijn geimplementeerd zijn niet doorgestreept.
+Keuzes die zijn gemaakt en of interpetaties die zijn gedaan, worden in een gemarkeerd blok weergegeven zoals hieronder is gedaan.
+
+> Dit is een teskst blok waarmee commentaar van een developer wordt aangegeven.
 
 ### Repository-structuur
 
@@ -128,8 +152,8 @@ Als er een class getest wordt, bijvoorbeeld `OppervlakteVanVertrekken`, dan is d
 
 ```python
 
-def test_OppervlakteVanVertekken():
-    opp_v_v = OppervlakteVanVertekken()
+def test_OppervlakteVanVertrekken():
+    opp_v_v = OppervlakteVanVertrekken()
     assert self.opp_v_v.functie_een() == 1
     assert self.opp_v_v.functie_twee() == 2
 ```
@@ -206,7 +230,7 @@ De referentiedata wordt gegenereerd in `woningwaardering/vera/referentiedata`
 
 ## 4. Datamodel uitbreidingen
 
-Tijdens de ontwikkeling van deze package komen wij tegen dat de VERA modellen niet toerijkend zijn om de punten van het stelselgroep te berekenen. Daarom worden er soms uitbreidingen gemaakt op de VERA modellen wanneer nodig. In deze sectie onderbouwen en documenteren wij deze uitbreidingen. In de sectie Referentiedata wordt uitgelegd hoe het mogelijk is om nieuwe [Datamodellen uitbreiden](#datamodellen-uitbreiden) toe te voegen als contributor van dit project.
+Tijdens de ontwikkeling van de woningwaardering-package komen wij tegen dat de VERA modellen niet toerijkend zijn om de punten van het stelselgroep te berekenen. Daarom worden er soms uitbreidingen gemaakt op de VERA modellen wanneer nodig. In deze sectie onderbouwen en documenteren wij deze uitbreidingen. In de sectie Referentiedata wordt uitgelegd hoe het mogelijk is om nieuwe [Datamodellen uitbreiden](#datamodellen-uitbreiden) toe te voegen als contributor van dit project.
 
 ### Ruimtedetailsoort kast
 
@@ -223,23 +247,3 @@ Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarm
 ### Bouwkundige elementen
 
 In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Deze kan bijvoorbeeld tot gevolg hebben dat er punten in mindering of punten extra gegeven kunnen worden. Zo ook bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee deze zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribute `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een [github issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/46) open om `bouwkundige_elementen` standaard in het VERA model toe te voegen.
-
-## DEPRECATED 5. Stelselgroep implementaties, afwijkingen en interpetaties
-
-De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpetatie. Daarnaast kan voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens eht beleidsboek tot op de letter naukerig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elk stelselgroep is geïmplementeerd en welke keuzes daarin zijn gemaakt.
-
-### Oppervlakte van overige ruimten
-
-#### 2024
-
-##### Zolder
-
-Wanneer een zolder als overige ruimte wordt beschouwd, dient te worden gekeken in de `bouwkundige_elementen` of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten.
-Wanneer deze wel bereikbaar is, maar niet via een vaste trap, moeten er 5 punten in mindering worden gebracht omdat de ruimte niet bereikt kan worden met een vaste trap. In onze implementatie hebben wij er voor gekozen om te checken of er dan wel een vlizotrap aanwezig is in de `bouwkundige_elementen`, aangezien dit de enige andere soort trap in het VERA model is waarmee een zolder ruimte bereikt zou kunnen worden.
-Daarnaast is het onze keuze om de 5 punten in mindering te brengen door de oppervlakte van ze zolder te corrigeren. Het beleidsboek
-geeft aan dat de punten in mindering gebracht moeten worden
-op de punten berekend voor deze ruimte. Maar ook dat punten
-pas berekend moeten worden wanneer de totale oppervlakte van een eenheid bekend is en afgerond is.
-Dit is tegenstrijdig en daarom kiezen wij de implementatie die volgens ons het beleidsboek zo goed mogelijk benadert.
-Let op, door de afronding komt deze berekening niet helemaal juist
-uit, maar dit is de benadering waar wij nu voor kiezen.
