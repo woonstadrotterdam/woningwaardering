@@ -47,7 +47,7 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
 
         if trap:
             logger.debug(
-                f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van overige ruimten"
+                f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
             )
             return float(
                 Decimal(str(ruimte.oppervlakte)).quantize(
@@ -90,7 +90,7 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
             )
 
     logger.warning(
-        f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor oppervlakte van overige ruimten"
+        f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
     )
     return 0.0
 

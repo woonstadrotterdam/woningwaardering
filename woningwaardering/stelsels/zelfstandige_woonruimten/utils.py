@@ -172,11 +172,11 @@ def vertrek_telt_als_vertrek(ruimte: EenhedenRuimte) -> bool:
                 and element.detail_soort.code == Bouwkundigelementdetailsoort.trap.code
             ]
             if not vaste_trap:
-                logger.warning(
+                logger.debug(
                     f"Geen vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
                 )
                 return False
-            logger.warning(
+            logger.debug(
                 f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
             )
         return True
