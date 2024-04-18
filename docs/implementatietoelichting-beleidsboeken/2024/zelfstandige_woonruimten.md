@@ -1,4 +1,4 @@
-# 2024. Zelfstandige Woonruimten.
+# 2024. Zelfstandige Woonruimten
 
 ## 4.2 Oppervlakte van Vertrekken
 
