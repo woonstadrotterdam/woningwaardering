@@ -97,10 +97,11 @@ def vertrek_telt_als_vertrek(ruimte: EenhedenRuimte) -> bool:
             logger.error(error_msg)
             raise TypeError(error_msg)
 
-        if ruimte.detail_soort.code != Ruimtedetailsoort.badkamer_en_of_toilet.code:
+        if not badruimte_met_toilet(ruimte):
             return True
 
-        result = badruimte_met_toilet(ruimte) and ruimte.oppervlakte >= 0.64
+        result = ruimte.oppervlakte >= 0.64
+
         if result is False:
             logger.warning(
                 f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort} is kleiner dan 0.64 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
