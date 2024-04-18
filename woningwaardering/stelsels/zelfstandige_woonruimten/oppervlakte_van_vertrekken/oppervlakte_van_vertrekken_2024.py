@@ -5,7 +5,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
-    vertrek_telt_niet_als_vertrek_2024,
+    vertrek_telt_als_vertrek_2024,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -117,7 +117,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
                     criterium_naam = f"{ruimte.naam} + {aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'}"
 
-            if vertrek_telt_niet_als_vertrek_2024(ruimte):
+            if not vertrek_telt_als_vertrek_2024(ruimte):
                 continue
 
             woningwaardering = WoningwaarderingResultatenWoningwaardering()

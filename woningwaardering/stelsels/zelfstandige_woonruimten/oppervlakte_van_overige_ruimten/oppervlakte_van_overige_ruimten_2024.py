@@ -4,7 +4,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroepversie, utils
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
-    vertrek_telt_niet_als_vertrek_2024,
+    vertrek_telt_als_vertrek_2024,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -125,7 +125,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
             if ruimte.soort is not None and (
                 ruimte.soort.code == Ruimtesoort.overige_ruimtes.code
-                or vertrek_telt_niet_als_vertrek_2024(ruimte)
+                or not vertrek_telt_als_vertrek_2024(ruimte)
             ):
                 if ruimte.detail_soort.code not in [
                     Ruimtedetailsoort.bijkeuken.code,

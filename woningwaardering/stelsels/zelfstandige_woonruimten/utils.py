@@ -12,7 +12,7 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
 from woningwaardering.vera.utils import badruimte_met_toilet
 
 
-def vertrek_telt_niet_als_vertrek_2024(ruimte: EenhedenRuimte) -> bool:
+def vertrek_telt_als_vertrek_2024(ruimte: EenhedenRuimte) -> bool:
     """Check of een vertrek voldoet aan de voorwaarden om mee te tellen als vertrek onder de oppervlakte van vertrekken.
 
     Args:
@@ -97,7 +97,10 @@ def vertrek_telt_niet_als_vertrek_2024(ruimte: EenhedenRuimte) -> bool:
             logger.error(error_msg)
             raise TypeError(error_msg)
 
-        result = not badruimte_met_toilet(ruimte) or ruimte.oppervlakte >= 0.64
+        if ruimte.detail_soort.code != Ruimtedetailsoort.badkamer_en_of_toilet.code:
+            return True
+
+        result = badruimte_met_toilet(ruimte) and ruimte.oppervlakte >= 0.64
         if result is False:
             logger.warning(
                 f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort} is kleiner dan 0.64 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
@@ -127,13 +130,16 @@ def vertrek_telt_niet_als_vertrek_2024(ruimte: EenhedenRuimte) -> bool:
             logger.error(error_msg)
             raise TypeError(error_msg)
 
-        result = ruimte.oppervlakte >= 4 or ruimte.detail_soort.code in [
+        if ruimte.detail_soort.code in [
             Ruimtedetailsoort.keuken.code,
             Ruimtedetailsoort.badkamer_en_of_toilet.code,
             Ruimtedetailsoort.badkamer.code,
-            Ruimtedetailsoort.toiletruimte.code,
             Ruimtedetailsoort.doucheruimte.code,
-        ]
+        ]:
+            return True
+
+        result = ruimte.oppervlakte >= 4
+
         if result is False:
             logger.warning(
                 f"{ruimte.id} {ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 4 vierkante meter ({ruimte.oppervlakte}) en krijgt daarom geen punten onder {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
@@ -147,7 +153,7 @@ def vertrek_telt_niet_als_vertrek_2024(ruimte: EenhedenRuimte) -> bool:
             ruimte (EenhedenRuimte): Het vertrek om te checken.
 
         Returns:
-            bool: True als de zolder een vaste heeft, False otherwise.
+            bool: True als de zolder een vaste trap heeft, anders False.
 
         Raises:
             TypeError: als de ruimte geen detailsoort heeft.
@@ -180,15 +186,15 @@ def vertrek_telt_niet_als_vertrek_2024(ruimte: EenhedenRuimte) -> bool:
         raise TypeError(error_msg)
 
     if not _vertrek_detailsoort(ruimte):
-        return True
+        return False
 
     if not _min_0komma64m2_badkamer_en_of_toilet(ruimte):
-        return True
+        return False
 
     if not _min_4m2_exclusief_keuken_en_badkamer_en_of_toilet(ruimte):
-        return True
+        return False
 
     if not _zolder_heeft_vaste_trap(ruimte):
-        return True
+        return False
 
-    return False
+    return True
