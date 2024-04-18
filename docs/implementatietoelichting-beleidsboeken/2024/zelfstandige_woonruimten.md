@@ -134,9 +134,9 @@ De Huurcommissie licht dit als volgt toe:
 Afronding: eerst de oppervlakte per vertrek op 2 decimalen afronden en pas daarna de oppervlak-
 te van alle vertrekken salderen en afronden op hele vierkante meters.
 
-**Voorbeeld:**
-kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²
-keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²
+**Voorbeeld:**  
+kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²  
+keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²  
 Totaal : 26,73 m² Afronding op hele m² : 27 m².
 
 8. ~~Twee vertrekken die met elkaar in verbinding staan, worden in een bepaald geval als één
@@ -157,15 +157,16 @@ oppervlakte van de ruimte afgetrokken.~~
 3. ~~Meting van de oppervlakte vindt plaats van muur tot muur, op een hoogte van 1,50m boven
 de vloer. En ook inclusief de oppervlakte van de moederhaard, CV-ketel en boilerinstallatie.
 Maar niet: de oppervlakte die wordt ingenomen door schoorsteenkanalen, ventilatiekanalen of
-stand- of grondleidingen.
+stand- of grondleidingen.~~
 
-De Huurcommissie meet als er sprake is van een pui, vanaf de binnenzijde van die pui (het kozijn).
+~~De Huurcommissie meet als er sprake is van een pui, vanaf de binnenzijde van die pui (het kozijn).
 Ook een erker, die inwendig een vrije hoogte heeft van ten minste 1,50m, telt mee. De oppervlakte
 onder en/of boven een zogenaamde entresol (tussenverdieping) wordt meegerekend, indien de
-hoogte minstens 1,50m bedraagt.
+hoogte minstens 1,50m bedraagt.~~
 
-De Huurcommissie berekent de hoogte van 1,50 meter door te meten tot het dakbeschot, het
+~~De Huurcommissie berekent de hoogte van 1,50 meter door te meten tot het dakbeschot, het
 zichtbare dakvlak of plafond (gordingen en balken blijven buiten de meting).~~
+
 4. Ook de oppervlakte van alle tot de woning behorende losse en vaste kasten (kleiner dan 2m²)
 wordt meegerekend.
 
