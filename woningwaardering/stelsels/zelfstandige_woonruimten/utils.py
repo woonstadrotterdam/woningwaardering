@@ -12,7 +12,7 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
 from woningwaardering.vera.utils import badruimte_met_toilet
 
 
-def vertrek_telt_als_vertrek_2024(ruimte: EenhedenRuimte) -> bool:
+def vertrek_telt_als_vertrek(ruimte: EenhedenRuimte) -> bool:
     """Check of een vertrek voldoet aan de voorwaarden om mee te tellen als vertrek onder de oppervlakte van vertrekken.
 
     Args:
