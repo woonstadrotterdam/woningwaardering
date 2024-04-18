@@ -16,8 +16,8 @@ from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 def test_OppervlakteVanOverigeRuimten(
     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
 ):
-    ovr = OppervlakteVanOverigeRuimten()
-    resultaat = ovr.bereken(
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten()
+    resultaat = oppervlakte_van_overige_ruimten.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -29,8 +29,8 @@ def test_OppervlakteVanOverigeRuimten_output(
     eenheid_input, eenheid_output, peildatum = (
         zelfstandige_woonruimten_input_en_outputmodel
     )
-    ovr = OppervlakteVanOverigeRuimten(peildatum=peildatum)
-    resultaat = ovr.bereken(eenheid_input)
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
+    resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid_input)
 
     assert_output_model(
         resultaat,
@@ -57,8 +57,8 @@ def test_OppervlakteVanOverigeRuimten_specifiek_output(
     specifieke_input_en_output_model,
 ):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
-    ovr = OppervlakteVanOverigeRuimten(peildatum=peildatum)
-    resultaat = ovr.bereken(eenheid_input)
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
+    resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid_input)
 
     assert_output_model(
         resultaat,

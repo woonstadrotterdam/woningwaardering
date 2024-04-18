@@ -153,11 +153,11 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
-    f = open(
+    file = open(
         "tests/data/input/zelfstandige_woonruimten/12006000004.json",
         "r+",
     )
-    eenheid = EenhedenEenheid.model_validate_json(f.read())
+    eenheid = EenhedenEenheid.model_validate_json(file.read())
 
     woningwaardering_resultaat = OppervlakteVanVertrekken2024.bereken(eenheid)
 

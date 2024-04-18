@@ -19,13 +19,13 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 
 if __name__ == "__main__":
-    ovv = OppervlakteVanVertrekken(peildatum=date(2024, 1, 1))
+    oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=date(2024, 1, 1))
     with open(
         "./tests/data/input/zelfstandige_woonruimten/41164000002.json", "r+"
-    ) as f:
-        eenheid = EenhedenEenheid.model_validate_json(f.read())
+    ) as file:
+        eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = ovv.bereken(eenheid)
+    woningwaardering_resultaat = oppervlakte_van_vertrekken.bereken(eenheid)
 
     print(
         woningwaardering_resultaat.model_dump_json(
