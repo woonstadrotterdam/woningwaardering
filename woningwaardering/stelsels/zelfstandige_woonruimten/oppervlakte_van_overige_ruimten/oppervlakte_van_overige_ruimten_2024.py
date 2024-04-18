@@ -3,6 +3,9 @@ from decimal import ROUND_HALF_UP, Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroepversie, utils
+from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
+    vertrek_telt_als_vertrek,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -44,7 +47,7 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
 
         if trap:
             logger.debug(
-                f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van overige ruimten"
+                f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
             )
             return float(
                 Decimal(str(ruimte.oppervlakte)).quantize(
@@ -87,7 +90,7 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
             )
 
     logger.warning(
-        f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor oppervlakte van overige ruimten"
+        f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
     )
     return 0.0
 
@@ -110,19 +113,23 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
+            logger.debug(f"Processsing ruimte: {ruimte.id}")
             if ruimte.oppervlakte is None:
-                logger.warning(f"Ruimte {ruimte.id} heeft geen oppervlakte")
-                continue
+                error_msg = f"Ruimte {ruimte.id} heeft geen oppervlakte"
+                logger.error(error_msg)
+                raise TypeError(error_msg)
             if ruimte.detail_soort is None:
-                logger.warning(f"Ruimte {ruimte.id} heeft geen detailsoort")
-                continue
+                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoort"
+                logger.error(error_msg)
+                raise TypeError(error_msg)
             if ruimte.detail_soort.code is None:
-                logger.warning(f"Ruimte {ruimte.id} heeft geen detailsoortcode")
-                continue
+                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoortcode"
+                logger.error(error_msg)
+                raise TypeError(error_msg)
 
-            if (
-                ruimte.soort is not None
-                and ruimte.soort.code == Ruimtesoort.overige_ruimtes.code
+            if ruimte.soort is not None and (
+                ruimte.soort.code == Ruimtesoort.overige_ruimtes.code
+                or not vertrek_telt_als_vertrek(ruimte)
             ):
                 if ruimte.detail_soort.code not in [
                     Ruimtedetailsoort.bijkeuken.code,
@@ -273,14 +280,14 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
-    oor = OppervlakteVanOverigeRuimten2024()
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten2024()
     with open(
-        "tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_overige_ruimten/data/input/zolder_overige_ruimten.json",
+        "tests/data/input/zelfstandige_woonruimten/85651000021.json",
         "r+",
-    ) as f:
-        eenheid = EenhedenEenheid.model_validate_json(f.read())
+    ) as file:
+        eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = oor.bereken(eenheid)
+    woningwaardering_resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid)
 
     print(
         woningwaardering_resultaat.model_dump_json(

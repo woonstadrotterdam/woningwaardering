@@ -20,13 +20,13 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 
 if __name__ == "__main__":
-    zel = ZelfstandigeWoonruimten()
-    f = open(
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten()
+    file = open(
         "./tests/data/input/zelfstandige_woonruimten/41123000005.json",
         "r+",
     )
-    eenheid = EenhedenEenheid.model_validate_json(f.read())
-    woningwaardering_resultaat = zel.bereken(eenheid)
+    eenheid = EenhedenEenheid.model_validate_json(file.read())
+    woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid)
     print(
         woningwaardering_resultaat.model_dump_json(
             by_alias=True, indent=2, exclude_none=True

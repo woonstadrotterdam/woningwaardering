@@ -36,6 +36,7 @@ repos:
         description: "Replaces or checks mixed line ending."
       - id: trailing-whitespace
         description: "Trims trailing whitespace."
+        exclude: '\.md$'
       - id: debug-statements
         description: "Check for debugger imports and py37+ `breakpoint()` calls in Python."
         stages:

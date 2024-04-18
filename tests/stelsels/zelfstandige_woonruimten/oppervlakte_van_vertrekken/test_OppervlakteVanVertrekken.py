@@ -28,8 +28,8 @@ def specifieke_input_en_output_model(request):
 def test_OppervlakteVanVertrekken(
     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
 ):
-    ovz = OppervlakteVanVertrekken()
-    resultaat = ovz.bereken(
+    oppervlakte_van_vertrekken = OppervlakteVanVertrekken()
+    resultaat = oppervlakte_van_vertrekken.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -41,8 +41,8 @@ def test_OppervlakteVanVertrekken_output(
     eenheid_input, eenheid_output, peildatum = (
         zelfstandige_woonruimten_input_en_outputmodel
     )
-    ovz = OppervlakteVanVertrekken(peildatum=peildatum)
-    resultaat = ovz.bereken(eenheid_input)
+    oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
+    resultaat = oppervlakte_van_vertrekken.bereken(eenheid_input)
 
     assert_output_model(
         resultaat,
@@ -53,8 +53,8 @@ def test_OppervlakteVanVertrekken_output(
 
 def test_OppervlakteVanVetrekken_specifiek_output(specifieke_input_en_output_model):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
-    ovz = OppervlakteVanVertrekken(peildatum=peildatum)
-    resultaat = ovz.bereken(eenheid_input)
+    oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
+    resultaat = oppervlakte_van_vertrekken.bereken(eenheid_input)
 
     assert_output_model(
         resultaat,

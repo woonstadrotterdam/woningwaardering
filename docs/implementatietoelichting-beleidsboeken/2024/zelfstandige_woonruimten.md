@@ -1,4 +1,4 @@
-# 2024. Zelfstandige Woonruimten.
+# 2024. Zelfstandige Woonruimten
 
 ## 4.2 Oppervlakte van Vertrekken
 
@@ -48,12 +48,14 @@ Hiervan is alleen sprake als:
 - ~~De ruimte over ten minste 50% van de oppervlakte een vrije hoogte heeft van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).~~
 
 ~~Alleen als aan al deze eisen is voldaan, wordt de (oppervlakte van de) badkamer of doucheruimte
-meegeteld als “vertrek”.~~ Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte” (zie
-verderop).
+meegeteld als “vertrek”. Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte” (zie
+verderop).~~
+
+> Hoewel de VERA-standaard een onderscheid maakt tussen badkamer, doucheruimte en badkamer/toilet (badkamer met toilet) beschouwen wij ieder van deze ruimtes indien zij een toilet bevatten als een badkamer met toilet, conform hoe de huurcommissie omgaat met deze ruimtes.. Zie ook [dit Github issue](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/96).
 
 Voor gecombineerde bad-/doucheruimte met toilet geldt een minimale oppervlakte van 0,64 m².
 
-> In feite komt dit erop neer dat elke bad- of doucheruimte dat als vertrek is aangemerkt wordt meegeteld als vertrek voor deze Stelselgroep, tenzij de bad of doucheruimte een toilet bevat, of een `Badkamer/toilet` is, en de oppervlakte kleiner is dan 0,64 m² na aftrek van 1 m2 voor het hebben van een toilet (zie 5. in 4.2.2).
+> Elke Badkamer, Badkamer/toilet of Doucheruimte die als vertrek is aangemerkt wordt meegeteld als vertrek, tenzij onder aftrek van 1 m2 voor een in de ruimte geplaatst toilet de oppervlakte kleiner is dan 0,64 m². (Zie punt 5 in 4.2.2).
 
 **Zolderruimte**
 
@@ -134,9 +136,9 @@ De Huurcommissie licht dit als volgt toe:
 Afronding: eerst de oppervlakte per vertrek op 2 decimalen afronden en pas daarna de oppervlak-
 te van alle vertrekken salderen en afronden op hele vierkante meters.
 
-**Voorbeeld:**
-kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²
-keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²
+**Voorbeeld:**  
+kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²  
+keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²  
 Totaal : 26,73 m² Afronding op hele m² : 27 m².
 
 8. ~~Twee vertrekken die met elkaar in verbinding staan, worden in een bepaald geval als één
@@ -157,15 +159,16 @@ oppervlakte van de ruimte afgetrokken.~~
 3. ~~Meting van de oppervlakte vindt plaats van muur tot muur, op een hoogte van 1,50m boven
 de vloer. En ook inclusief de oppervlakte van de moederhaard, CV-ketel en boilerinstallatie.
 Maar niet: de oppervlakte die wordt ingenomen door schoorsteenkanalen, ventilatiekanalen of
-stand- of grondleidingen.
+stand- of grondleidingen.~~
 
-De Huurcommissie meet als er sprake is van een pui, vanaf de binnenzijde van die pui (het kozijn).
+~~De Huurcommissie meet als er sprake is van een pui, vanaf de binnenzijde van die pui (het kozijn).
 Ook een erker, die inwendig een vrije hoogte heeft van ten minste 1,50m, telt mee. De oppervlakte
 onder en/of boven een zogenaamde entresol (tussenverdieping) wordt meegerekend, indien de
-hoogte minstens 1,50m bedraagt.
+hoogte minstens 1,50m bedraagt.~~
 
-De Huurcommissie berekent de hoogte van 1,50 meter door te meten tot het dakbeschot, het
+~~De Huurcommissie berekent de hoogte van 1,50 meter door te meten tot het dakbeschot, het
 zichtbare dakvlak of plafond (gordingen en balken blijven buiten de meting).~~
+
 4. Ook de oppervlakte van alle tot de woning behorende losse en vaste kasten (kleiner dan 2m²)
 wordt meegerekend.
 
@@ -205,7 +208,7 @@ gedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopr
 vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en
 wordt dan gewaardeerd als overige ruimte.~~
 
->Wanneer een zolder als overige ruimte wordt beschouwd, dient te worden gekeken in de `bouwkundige_elementen` of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten.
+>Wanneer een zolder als overige ruimte wordt beschouwd, kijken we in de `bouwkundige_elementen` van de zolder of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten.
 Wanneer deze wel bereikbaar is, maar niet via een vaste trap, moeten er 5 punten in mindering worden gebracht omdat de ruimte niet bereikt kan worden met een vaste trap. In onze implementatie hebben wij er voor gekozen om te checken of er dan wel een vlizotrap aanwezig is in de `bouwkundige_elementen`, aangezien dit de enige andere soort trap in het VERA model is waarmee een zolder ruimte bereikt zou kunnen worden.
 Daarnaast is het onze keuze om de 5 punten in mindering te brengen door de oppervlakte van ze zolder te corrigeren. Het beleidsboek
 geeft aan dat de punten in mindering gebracht moeten worden
@@ -223,7 +226,7 @@ bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd.~~
 - ~~zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
 - ~~de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
 - de oppervlakte, na deling door het aantal woningen, per woning minstens 2m2 bedraagt.
-
+> Hiervoor is het `EenhedenRuimte` model uitgebreid met het attribuut `gedeeldMetAantalEenheden` (of `gedeeld_met_aantal_eenheden` voor de Python representatie). Om deze berekening correct uit te voeren dient deze waarde gevuld te zijn. Zonder deze waarde wordt de volledige oppervlakte van een ruimte meegeteld.
 De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte,
 afronden in m2, delen door het aantal woningen en waarderen als “overige ruimte”. Kasten <2m2
 en uitkomend in een verkeersruimte worden niet meegeteld.

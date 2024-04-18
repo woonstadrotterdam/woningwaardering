@@ -7,26 +7,37 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_
     OppervlakteVanOverigeRuimten,
 )
 
-# from woningwaardering.vera.bvg.generated import WoningwaarderingResultatenWoningwaarderingGroep
+from woningwaardering.vera.bvg.generated import (
+    WoningwaarderingResultatenWoningwaarderingGroep,
+)
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
-# def test_OppervlakteVanOverigeRuimten(eenheid_inputmodel, woningwaardering_resultaat):
-#     ovv = OppervlakteVanOverigeRuimten(peildatum="01-01-2024")
-#     resultaat = ovv.bereken(eenheid_inputmodel, woningwaardering_resultaat)
-#     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
+def test_OppervlakteVanOverigeRuimten(
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+):
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten()
+    resultaat = oppervlakte_van_overige_ruimten.bereken(
+        zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    )
+    assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-# def test_OppervlakteVanOverigeRuimten_output(eenheid_input_en_output):
-#     eenheid_input, eenheid_output, peildatum = eenheid_input_en_output
-#     ovv = OppervlakteVanOverigeRuimten(peildatum=peildatum)
-#     resultaat = ovv.bereken(eenheid_input)
+def test_OppervlakteVanOverigeRuimten_output(
+    zelfstandige_woonruimten_input_en_outputmodel,
+):
+    eenheid_input, eenheid_output, peildatum = (
+        zelfstandige_woonruimten_input_en_outputmodel
+    )
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
+    resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid_input)
 
-#     assert_output_model(
-#         resultaat,
-#         eenheid_output,
-#         Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
-#     )
+    assert_output_model(
+        resultaat,
+        eenheid_output,
+        Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+    )
+
 
 # Get the absolute path to the current file
 current_file_path = Path(__file__).absolute().parent
@@ -46,8 +57,8 @@ def test_OppervlakteVanOverigeRuimten_specifiek_output(
     specifieke_input_en_output_model,
 ):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
-    ovr = OppervlakteVanOverigeRuimten(peildatum=peildatum)
-    resultaat = ovr.bereken(eenheid_input)
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
+    resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid_input)
 
     assert_output_model(
         resultaat,
