@@ -224,7 +224,7 @@ bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd.~~
 - ~~zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
 - ~~de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
 - de oppervlakte, na deling door het aantal woningen, per woning minstens 2m2 bedraagt.
-
+> Hiervoor is het `EenhedenRuimte` model uitgebreid met het attribuut `gedeeldMetAantalEenheden` (of `gedeeld_met_aantal_eenheden` voor de Python representatie). Om deze berekening correct uit te voeren dient deze waarde gevuld te zijn. Zonder deze waarde wordt de volledige oppervlakte van een ruimte meegeteld.
 De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte,
 afronden in m2, delen door het aantal woningen en waarderen als “overige ruimte”. Kasten <2m2
 en uitkomend in een verkeersruimte worden niet meegeteld.
