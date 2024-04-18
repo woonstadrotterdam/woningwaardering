@@ -19,7 +19,7 @@ def vertrek_telt_als_vertrek(ruimte: EenhedenRuimte) -> bool:
         ruimte (EenhedenRuimte): een ruimte.
 
     Returns:
-        bool: is de ruimte een overige ruimte.
+        bool: True als de ruimte mee telt als vertrek voor oppervlakte van vertrekken, anders False.
 
     Raises:
         TypeError: als de ruimte geen soort en/of detailsoort(-code) en/of oppervlakte heeft.
