@@ -48,8 +48,8 @@ Hiervan is alleen sprake als:
 - ~~De ruimte over ten minste 50% van de oppervlakte een vrije hoogte heeft van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).~~
 
 ~~Alleen als aan al deze eisen is voldaan, wordt de (oppervlakte van de) badkamer of doucheruimte
-meegeteld als “vertrek”.~~ Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte” (zie
-verderop).
+meegeteld als “vertrek”. Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte” (zie
+verderop).~~
 
 Voor gecombineerde bad-/doucheruimte met toilet geldt een minimale oppervlakte van 0,64 m².
 
