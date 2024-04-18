@@ -3,6 +3,9 @@ from decimal import ROUND_HALF_UP, Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroepversie, utils
+from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
+    vertrek_telt_niet_als_vertrek_2024,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -120,9 +123,9 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                 logger.warning(f"Ruimte {ruimte.id} heeft geen detailsoortcode")
                 continue
 
-            if (
-                ruimte.soort is not None
-                and ruimte.soort.code == Ruimtesoort.overige_ruimtes.code
+            if ruimte.soort is not None and (
+                ruimte.soort.code == Ruimtesoort.overige_ruimtes.code
+                or vertrek_telt_niet_als_vertrek_2024(ruimte)
             ):
                 if ruimte.detail_soort.code not in [
                     Ruimtedetailsoort.bijkeuken.code,
@@ -275,7 +278,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 if __name__ == "__main__":
     oor = OppervlakteVanOverigeRuimten2024()
     with open(
-        "tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_overige_ruimten/data/input/zolder_overige_ruimten.json",
+        "tests/data/input/zelfstandige_woonruimten/85651000021.json",
         "r+",
     ) as f:
         eenheid = EenhedenEenheid.model_validate_json(f.read())
