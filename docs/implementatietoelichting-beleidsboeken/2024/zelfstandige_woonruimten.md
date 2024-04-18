@@ -6,8 +6,8 @@
 
 Het eerste onderdeel van de woningwaardering is de oppervlakte van vertrekken. Onder vertrek-
 ken worden woonkamer, andere kamers (hobbykamer, studeerkamer, slaapkamer en eetkamer),
-keuken, badkamer of doucheruimte verstaan. De waardering van vertrekken is 1 punt per m2
-.
+keuken, badkamer of doucheruimte verstaan. De waardering van vertrekken is 1 punt per m2.
+
 Geen vertrekken zijn: schuren, zolderberging, kelders, wasruimten, bijkeukens, garages en bergingen,
 gang, (speel)hal en zogenoemde verkeersruimten (bijvoorbeeld overlopen). De oppervlakte van
 deze ruimten tellen dus niet mee als vertrekken.
@@ -64,15 +64,15 @@ heeft als “vertrek” (dus woonkamer, andere kamers, badkamer of doucheruimte)
 aan de eisen die daarvoor gelden (zie hierboven), dan mag de zolderruimte meetellen als “vertrek”,
 mits deze ruimte bereikbaar is via een vaste trap ~~en het dak beschoten is~~.
 
-> In het beleidsboek wordt er onderscheid gemaakt tussen een zolder vertrek met een vaste trap of zolder met een ander soort trap. Wanneer een zolder als vertek wordt aangemerkt moet deze te bereiken zijn via een vaste trap. Daarom wordt er voor een zolder gekeken of er een vaste trap in de `bouwkundige_elementen` zit. Als dit het geval is dat telt de gehele oppervlakte van de zolder mee voor de punten van Oppervlakte van Vertekken.
+> In het beleidsboek wordt er onderscheid gemaakt tussen een zolder vertrek met een vaste trap of zolder met een ander soort trap. Wanneer een zolder als vertrek wordt aangemerkt moet deze te bereiken zijn via een vaste trap. Daarom wordt er voor een zolder gekeken of er een vaste trap in de `bouwkundige_elementen` zit. Als dit het geval is dan telt de gehele oppervlakte van de zolder mee voor de punten van Oppervlakte van Vertrekken.
 
 ### 4.2.2 Hoe wordt de oppervlakte van vertrekken gemeten?
 
 De wetgever heeft in de toelichting op het woningwaarderingsstelsel een aantal meetinstructies
 meegegeven:
 
-1. ~~Meting van de oppervlakte van vertrekken vindt plaats van muur tot muur, op een hoogte van
-   1,50 m boven de vloer~~, inclusief de oppervlakte van alle tot de woning behorende losse en
+1. Meting van de oppervlakte van vertrekken vindt plaats ~~van muur tot muur, op een hoogte van
+   1,50 m boven de vloer,~~ inclusief de oppervlakte van alle tot de woning behorende losse en
    vaste kasten (kleiner dan 2m²). ~~Deze meethoogte geldt ook als de oppervlakte afwijkt van die
    op vloerniveau.~~
 
@@ -194,8 +194,8 @@ ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is.~~
 7. ~~De oppervlakte die door een in ingeschoven toestand liggende inschuifbare of opvouwbare
 trap wordt ingenomen, wordt niet meegeteld.~~
 
-8. Betreft het een zolderberging dan wordt, naast de eis ~~van een begaanbare vloer, als voor-
-waarde gesteld, dat het dak beschoten is en~~ dat de zolderruimte via een tot de woning
+8. Betreft het een zolderberging dan wordt ~~, naast de eis van een begaanbare vloer,~~ als voor-
+waarde gesteld, ~~dat het dak beschoten is en~~ dat de zolderruimte via een tot de woning
 behorende trap bereikbaar is. Indien aan deze voorwaarden niet is voldaan, tellen zolderber-
 gingen bij de woningwaardering niet mee.
 
@@ -208,9 +208,9 @@ gedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopr
 vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en
 wordt dan gewaardeerd als overige ruimte.~~
 
->Wanneer een zolder als overige ruimte wordt beschouwd, kijken we in de `bouwkundige_elementen` van de zolder of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten.
+> Wanneer een zolder als overige ruimte wordt beschouwd, kijken we in de `bouwkundige_elementen` van de zolder of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten.
 Wanneer deze wel bereikbaar is, maar niet via een vaste trap, moeten er 5 punten in mindering worden gebracht omdat de ruimte niet bereikt kan worden met een vaste trap. In onze implementatie hebben wij er voor gekozen om te checken of er dan wel een vlizotrap aanwezig is in de `bouwkundige_elementen`, aangezien dit de enige andere soort trap in het VERA model is waarmee een zolder ruimte bereikt zou kunnen worden.
-Daarnaast is het onze keuze om de 5 punten in mindering te brengen door de oppervlakte van ze zolder te corrigeren. Het beleidsboek
+Daarnaast is het onze keuze om de 5 punten in mindering te brengen door de oppervlakte van de zolder te corrigeren. Het beleidsboek
 geeft aan dat de punten in mindering gebracht moeten worden
 op de punten berekend voor deze ruimte. Maar ook dat punten
 pas berekend moeten worden wanneer de totale oppervlakte van een eenheid bekend is en afgerond is.
@@ -226,7 +226,9 @@ bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd.~~
 - ~~zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
 - ~~de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
 - de oppervlakte, na deling door het aantal woningen, per woning minstens 2m2 bedraagt.
+
 > Hiervoor is het `EenhedenRuimte` model uitgebreid met het attribuut `gedeeldMetAantalEenheden` (of `gedeeld_met_aantal_eenheden` voor de Python representatie). Om deze berekening correct uit te voeren dient deze waarde gevuld te zijn. Zonder deze waarde wordt de volledige oppervlakte van een ruimte meegeteld.
+
 De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte,
 afronden in m2, delen door het aantal woningen en waarderen als “overige ruimte”. Kasten <2m2
 en uitkomend in een verkeersruimte worden niet meegeteld.
