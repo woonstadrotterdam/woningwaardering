@@ -206,7 +206,7 @@ gedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopr
 vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en
 wordt dan gewaardeerd als overige ruimte.~~
 
->Wanneer een zolder als overige ruimte wordt beschouwd, dient te worden gekeken in de `bouwkundige_elementen` of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten.
+>Wanneer een zolder als overige ruimte wordt beschouwd, kijken we in de `bouwkundige_elementen` van de zolder of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten.
 Wanneer deze wel bereikbaar is, maar niet via een vaste trap, moeten er 5 punten in mindering worden gebracht omdat de ruimte niet bereikt kan worden met een vaste trap. In onze implementatie hebben wij er voor gekozen om te checken of er dan wel een vlizotrap aanwezig is in de `bouwkundige_elementen`, aangezien dit de enige andere soort trap in het VERA model is waarmee een zolder ruimte bereikt zou kunnen worden.
 Daarnaast is het onze keuze om de 5 punten in mindering te brengen door de oppervlakte van ze zolder te corrigeren. Het beleidsboek
 geeft aan dat de punten in mindering gebracht moeten worden
