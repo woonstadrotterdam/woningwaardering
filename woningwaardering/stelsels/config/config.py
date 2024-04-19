@@ -12,21 +12,21 @@ from woningwaardering.vera.referentiedata import (
 
 class Stelselgroepversieconfig(BaseModel):
     class_naam: str
-    begindatum: date
-    einddatum: date
+    begindatum: date = date.min
+    einddatum: date = date.max
 
 
 class Stelselgroepconfig(BaseModel):
     class_naam: str
-    begindatum: date
-    einddatum: date
+    begindatum: date = date.min
+    einddatum: date = date.max
     versies: List[Stelselgroepversieconfig]
 
 
 class Stelselconfig(BaseModel):
     stelsel: str
-    begindatum: date
-    einddatum: date
+    begindatum: date = date.min
+    einddatum: date = date.max
     stelselgroepen: Dict[str, Stelselgroepconfig]
 
     @classmethod
