@@ -1,0 +1,38 @@
+from datetime import date
+
+
+from woningwaardering.stelsels.stelsel import Stelsel
+from woningwaardering.stelsels import utils
+from woningwaardering.vera.bvg.generated import (
+    EenhedenEenheid,
+)
+from woningwaardering.vera.referentiedata import (
+    Woningwaarderingstelsel,
+)
+
+
+class {{ className }}(Stelsel):
+    def __init__(self, peildatum: date = date.today()) -> None:
+        super().__init__(
+            stelsel={{ stelsel }},
+            peildatum=peildatum,
+        )
+
+
+if __name__ == "__main__":
+    {{ stelsel.name }} = {{ className }}()
+    file = open(
+        "./tests/data/input/generiek/37101000032.json",
+        "r+",
+    )
+    eenheid = EenhedenEenheid.model_validate_json(file.read())
+    woningwaardering_resultaat = {{ stelsel.name }}.bereken(eenheid)
+    print(
+        woningwaardering_resultaat.model_dump_json(
+            by_alias=True, indent=2, exclude_none=True
+        )
+    )
+
+    tabel = utils.naar_tabel(woningwaardering_resultaat)
+
+    print(tabel)

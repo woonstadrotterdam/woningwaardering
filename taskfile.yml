@@ -28,3 +28,7 @@ tasks:
     desc: Genereer VERA referentiedata
     cmds:
       - python scripts/genereer_vera_referentiedata.py
+  scaffold-woningwaarderinggroep:
+    desc: Genereer boilerplate code voor een woningwaarderinggroep
+    cmds:
+      - python scripts/scaffold_woningwaarderinggroep.py
