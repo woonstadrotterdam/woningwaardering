@@ -15,7 +15,7 @@ Voor vragen kunt u contact opnemen met de Product Owner van Team Microservices [
     - [Repository-structuur](#repository-structuur)
     - [Design](#design)
     - [Lookup tabellen](#lookup-tabellen)
-  - [3. Contributing](#3-contributing)
+  - [2. Contributing](#2-contributing)
     - [Setup](#setup)
     - [Naamgeving van classes](#naamgeving-van-classes)
       - [Stelsels](#stelsels)
@@ -27,7 +27,7 @@ Voor vragen kunt u contact opnemen met de Product Owner van Team Microservices [
     - [Datamodellen](#datamodellen)
       - [Datamodellen uitbreiden](#datamodellen-uitbreiden)
     - [Referentiedata](#referentiedata)
-  - [4. Datamodel uitbreidingen](#4-datamodel-uitbreidingen)
+  - [3. Datamodel uitbreidingen](#3-datamodel-uitbreidingen)
     - [Ruimtedetailsoort kast](#ruimtedetailsoort-kast)
     - [Verbonden ruimten](#verbonden-ruimten)
     - [Gedeeld met aantal eenheden](#gedeeld-met-aantal-eenheden)
@@ -92,7 +92,7 @@ Dit betekent niet dat er geen werkbare en geldige rij geselecteerd kan worden.
 Wel zou het kunnen dat er door het ontbreken van een `Begindatum` of `Einddatum` meerdere rijen geldig zijn voor een peildatum.
 In dit geval zal de `woningwaardering`-package een error geven die duidelijk maakt dat er geen geldige rij gekozen kan worden op basis van de peildatum voor het desbetreffende CSV-bestand.
 
-## 3. Contributing
+## 2. Contributing
 
 ### Setup
 
@@ -229,7 +229,7 @@ task genereer-vera-referentiedata
 
 De referentiedata wordt gegenereerd in `woningwaardering/vera/referentiedata`
 
-## 4. Datamodel uitbreidingen
+## 3. Datamodel uitbreidingen
 
 Tijdens de ontwikkeling van de woningwaardering-package komt het voor dat de VERA modellen niet toereikend zijn om de punten voor een stelselgroep te berekenen. Daarom kunnen er indien nodig uitbreidingen gemaakt worden op de VERA modellen. In deze sectie onderbouwen en documenteren wij deze uitbreidingen. In de sectie Referentiedata wordt uitgelegd hoe [uitbreidingen toe te voegen](#datamodellen-uitbreiden) als contributor van dit project.
 
