@@ -47,11 +47,11 @@ Deze worden aangehouden in de opzet van de `woningwaardering`-package.
 Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
 Een stelselgroep-object zal een nieuwe versie krijgen wanneer nieuw gepubliceerde wet- en regelgeving, die is opgenomen in de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken), verschilt van de huidige berekening voor dat stelselgroep.
 
-De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpetatie. Daarnaast kan voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens eht beleidsboek tot op de letter naukerig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elk stelselgroep is geïmplementeerd en welke keuzes daarin zijn gemaakt per jaar.
+De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de Nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpretatie. Daarnaast kan het voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens het beleidsboek tot op de letter nauwkeurig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elke stelselgroep is geïmplementeerd en welke keuzes daarin zijn gemaakt per jaar.
 In deze documenten wordt bijgehouden welke onderdelen van het beleidsboek wel en niet zijn geïmplementeerd per stelselgroep. De gepubliceerde tekst uit het beleidsboek wordt gekopieerd en wanneer een onderdeel niet in de code van de package is geïmplementeerd zal dit worden aangegeven met ~~doorgestreepte tekst~~.  
 De reden van het niet implementeren van een regelonderdeel is vrijwel altijd dat het technisch niet mogelijk is op basis het inputmodel van de VERA-standaard. Een voorbeeld hiervan is dat voor oppervlakte van vertrekken in 2024 de minimale breedte van een vertrek over de volle lengte 1.5m moet zijn. Omdat wij alleen de totale oppervlakte binnenkrijgen via het inputmodel kunnen wij dit onderdeel van de regel niet implementeren. **Dit betekent dat het aan de gebruiker is om met deze regel-onderdelen rekening te houden bij het eenheid-inputmodel.** Een deel van de deze regelonderdelen wordt al afgevangen indien het eenheid-inputmodel voldoet aan de NEN-norm.
 Regels die wel zijn geimplementeerd zijn niet doorgestreept.
-Keuzes die zijn gemaakt en of interpetaties die zijn gedaan, worden in een gemarkeerd blok weergegeven zoals hieronder is gedaan.
+Keuzes die zijn gemaakt en of interpretaties die zijn gedaan, worden in een gemarkeerd blok weergegeven zoals hieronder is gedaan.
 
 > Dit is een tekstblok waarmee commentaar van een developer wordt aangegeven in het beleidsboek.
 
@@ -75,7 +75,7 @@ Op basis van de peildatum wordt voor de bovenste beleidsregel gekozen omdat die 
 
 ### Lookup tabellen
 
-In lookup tabellen worden constanten en variabelen opgeslagen die nodig zijn in het berekenen van de punten voor een stelselgroep.
+In lookup tabellen worden constanten en variabelen opgeslagen die nodig zijn bij het berekenen van de punten voor een stelselgroep.
 In de `woningwaardering` package wordt CSV gebruikt als bestandstype voor het opslaan van een lookup tabel.
 De keuze is op CSV gevallen omdat lookup data soms bestaat uit meerdere datarijen waardoor dit vaak minder leesbaar wordt wanneer dit bijvoorbeeld in json of yaml wordt opgeslagen.
 Voor VSCode-gebruikers is de extensie Excel Viewer van GrapeCity aan te raden.
@@ -84,13 +84,13 @@ Hieronder is een voorbeeldtabel te zien zoals deze met Excel Viewer in VSCode wo
 
 ![Excel Viewer](./docs/afbeeldingen/excel_viewer.png)
 
-Door gebruik van CSV-bestanden, wordt het selecteren van de juiste rij of waarde doormiddel van een peildatum vergemakkelijkt.
+Door gebruik van CSV-bestanden, wordt het selecteren van de juiste rij of waarde door middel van een peildatum vergemakkelijkt.
 In de `woningwaardering`-package wordt een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele uit een tabel te selecteren.
-Dit kan worden gedaan opbasis van de `Begindatum` en de `Einddatum` kolommen in een CSV-bestand.
+Dit kan worden gedaan op basis van de `Begindatum` en de `Einddatum` kolommen in een CSV-bestand.
 Wanneer er geen `Begindatum` of `Einddatum` is gespecificeerd, dan is deze niet bekend.
-Dit betekent niet dat er geen werkabre en geldige rij geselecteerd kan worden.
+Dit betekent niet dat er geen werkbare en geldige rij geselecteerd kan worden.
 Wel zou het kunnen dat er door het ontbreken van een `Begindatum` of `Einddatum` meerdere rijen geldig zijn voor een peildatum.
-In dit geval zal de `woningwaardering`-package een error geven die duidelijk maakt dat er geen geldige rij gekozen kan worden op basis van de peildatum voor het desbtreffende CSV-bestand.
+In dit geval zal de `woningwaardering`-package een error geven die duidelijk maakt dat er geen geldige rij gekozen kan worden op basis van de peildatum voor het desbetreffende CSV-bestand.
 
 ## 3. Contributing
 
@@ -136,7 +136,7 @@ Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 Tests worden toegevoegd aan de `tests`-folder in de root van de repository.
 Voor de structuur in de `tests`-folder wordt dezelfde structuur aangehouden als die in de `woningwaardering`-folder.
 De naam van het bestand waarin de tests staan geschreven is `test_<file_name>.py`.
-Elke testfunctie in file begint met `test_`, gevolgd door de naam van de functie of class die getest wordt, bijvoorbeeld `def test_<functie_naam>()` of `def test_<ClassNaam>()`.
+Elke testfunctie begint met `test_`, gevolgd door de naam van de functie of class die getest wordt, bijvoorbeeld `def test_<functie_naam>()` of `def test_<ClassNaam>()`.
 Hierin wordt de naam de van de functie of class exact gevolgd.
 Voor pytest is `test_` een indicator om de functie te herkennen als een testfunctie.
 
@@ -161,15 +161,15 @@ def test_OppervlakteVanVertrekken():
 
 #### Test modellen
 
-Om de woningwaardeering-package zo naukeurig mogelijk te testen, zijn er eenheid modellen (in .json format) toegevoegd in `tests/data/input/...`. De modellen volgens vanzelfspreken de VERA standaard en diennen als een test inputs voor de geschreven tests. Omdat er gewerkt wordt met peildatums en de berekening van een stelselgroep per jaar kan veranderen worden de ouptut modellen per jaar opgeslagen. Zie bijvorbeeld de folder `tests/data/output/zelfstandige_woonruimten/peildatum/2024-01-01`. Deze bevat de output voor de input modellen met als peildatum 2024-01-01 of later. Op deze manier kunnen dezelfde input modellen in tests met verschillende peildata getest worden. De resulterende outputs zijn met de hand berekend om de kwaliteit van de tests te geranderen.
+Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er eenheidmodellen (in .json format) toegevoegd in `tests/data/input/...`. De modellen volgen de VERA standaard en dienen als een testinput voor de geschreven tests. Omdat er gewerkt wordt met peildata en de berekening van een stelselgroep per jaar kan veranderen worden de outputmodellen per jaar opgeslagen. Zie bijvoorbeeld de folder `tests/data/output/zelfstandige_woonruimten/peildatum/2024-01-01`. Deze bevat de output voor de inputmodellen met als peildatum 2024-01-01 of later. Op deze manier kunnen dezelfde inputmodellen in tests met verschillende peildata getest worden. De resulterende outputs zijn met de hand nagerekend om de kwaliteit van de tests te garanderen.
 
-Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/data/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifiek set van regels in oppervlakte_van_vertrekken.
+Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/data/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifieke set van regels in oppervlakte_van_vertrekken te testen.
 
 ### Datamodellen
 
 De datamodellen in de `woningwaardering` package zijn gebaseerd op de OpenAPI-specificatie van het [VERA BVG domein](https://aedes-datastandaarden.github.io/vera-openapi/Ketenprocessen/BVG.html).
 
-Wanneer je deze modellen wilt bijwerken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) is geïnstalleerd, en dat de dev dependencies zijn geïnstalleerd:
+Wanneer je deze modellen wilt bijwerken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) en de dev dependencies zijn geïnstalleerd:
 
 ```
 pip install -e ".[dev]"
@@ -217,9 +217,9 @@ De task `genereer-vera-bvg-modellen` zal de body van deze classes samenvoegen me
 
 ### Referentiedata
 
-Naast de referentiedata specifiek voor deze package, maken we ook gebruik van de [VERA Referentiedata](https://github.com/Aedes-datastandaarden/vera-referentiedata).
+We maken gebruik van de [VERA Referentiedata](https://github.com/Aedes-datastandaarden/vera-referentiedata).
 
-Wanneer je deze referentiedata wilt bijwerken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) is geïnstalleerd
+Wanneer je de referentiedata wilt bijwerken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) is geïnstalleerd
 
 Vervolgens kan je met dit commando de referentiedata in deze repository bijwerken:
 
@@ -231,7 +231,7 @@ De referentiedata wordt gegenereerd in `woningwaardering/vera/referentiedata`
 
 ## 4. Datamodel uitbreidingen
 
-Tijdens de ontwikkeling van de woningwaardering-package komen wij tegen dat de VERA modellen niet toerijkend zijn om de punten van het stelselgroep te berekenen. Daarom worden er soms uitbreidingen gemaakt op de VERA modellen wanneer nodig. In deze sectie onderbouwen en documenteren wij deze uitbreidingen. In de sectie Referentiedata wordt uitgelegd hoe het mogelijk is om nieuwe [Datamodellen uitbreiden](#datamodellen-uitbreiden) toe te voegen als contributor van dit project.
+Tijdens de ontwikkeling van de woningwaardering-package komt het voor dat de VERA modellen niet toereikend zijn om de punten voor een stelselgroep te berekenen. Daarom kunnen er indien nodig uitbreidingen gemaakt worden op de VERA modellen. In deze sectie onderbouwen en documenteren wij deze uitbreidingen. In de sectie Referentiedata wordt uitgelegd hoe [uitbreidingen toe te voegen](#datamodellen-uitbreiden) als contributor van dit project.
 
 ### Ruimtedetailsoort kast
 
@@ -247,4 +247,4 @@ Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarm
 
 ### Bouwkundige elementen
 
-In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Deze kan bijvoorbeeld tot gevolg hebben dat er punten in mindering of punten extra gegeven kunnen worden. Zo ook bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee deze zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribute `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een [github issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/46) open om `bouwkundige_elementen` standaard in het VERA model toe te voegen.
+In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Dit kan bijvoorbeeld tot gevolg hebben dat er punten in mindering worden gebracht, of punten extra gegeven worden. Bijvoorbeeld bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee de zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribuut `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een [github issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/46) open om `bouwkundige_elementen` standaard in het VERA model toe te voegen.
