@@ -7,10 +7,6 @@ stelselgroepen:
     versies:
       - class_naam: OppervlakteVanVertrekken2024
         begindatum: !!timestamp 2024-01-01
-      - class_naam: OppervlakteVanVertrekken2023
-        begindatum: !!timestamp 0001-01-01
-        einddatum: !!timestamp 2023-12-31
-
   oppervlakte_van_overige_ruimten:
     class_naam: OppervlakteVanOverigeRuimten
     begindatum: !!timestamp 2024-01-01
