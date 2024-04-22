@@ -9,7 +9,7 @@ class Afrekenwijzesoort(Enum):
     )
     """
     De onderhoudsorder wordt niet afgerekend omdat dit type onderhoud is afgekocht op
-    totaalniveau
+    totaalniveau.
     """
 
     garantie = Referentiedata(
@@ -54,3 +54,7 @@ class Afrekenwijzesoort(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent

@@ -87,6 +87,11 @@ class Referentiedata(BaseModel):
     """
     De te tonen waarde van het referentiedata item. Bijvoorbeeld Nederlandse.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/53
+    parent: Optional[Referentiedata] = Field(None, exclude=True)
+    """
+    De bovenliggende referentiedata in het geval er sprake is van een hierarchische relatie tussen referentiedata.
+    """
 
 
 class ClusterSleutels(BaseModel):
@@ -3229,6 +3234,11 @@ class EenhedenEenheid(BaseModel):
     )
     """
     De omschrijving van de zorgfaciliteit behorende bij de eenheid.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/54
+    klimaatbeheersingsoort: Optional[Referentiedata] = None
+    """
+    Het soort klimaatbeheersing. Bijvoorbeeld: individueel of collectief. Referentiedatasoort EENHEIDKLIMAATBEHEERSINGSOORT.
     """
 
 

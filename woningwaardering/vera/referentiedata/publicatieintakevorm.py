@@ -6,6 +6,10 @@ class Publicatieintakevorm(Enum):
     cooptatie = Referentiedata(
         code="COO",
         naam="Coöptatie",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aanbodmodel",
+        ),
     )
     """
     Medebewoners bepalen welke woningzoekende de eenheid krijgt.
@@ -14,6 +18,10 @@ class Publicatieintakevorm(Enum):
     intakegesprek = Referentiedata(
         code="INT",
         naam="Intakegesprek",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aanbodmodel",
+        ),
     )
     """
     Er vindt een intake gesprek plaats met de eigenaar van de woning.
@@ -22,6 +30,10 @@ class Publicatieintakevorm(Enum):
     motivatie = Referentiedata(
         code="MOT",
         naam="Motivatie",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aanbodmodel",
+        ),
     )
     """
     Toewijzing vindt plaats op basis van de beoordeling van een motivatiebrief of
@@ -31,6 +43,10 @@ class Publicatieintakevorm(Enum):
     sociale_spelregels = Referentiedata(
         code="SOC",
         naam="Sociale spelregels",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aanbodmodel",
+        ),
     )
     """
     Sociale spelregels bepalen welke woningzoekende de eenheid krijgt.
@@ -43,3 +59,7 @@ class Publicatieintakevorm(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent

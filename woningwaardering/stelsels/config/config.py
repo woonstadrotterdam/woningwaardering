@@ -12,21 +12,21 @@ from woningwaardering.vera.referentiedata import (
 
 class Stelselgroepversieconfig(BaseModel):
     class_naam: str
-    begindatum: date
-    einddatum: date
+    begindatum: date = date.min
+    einddatum: date = date.max
 
 
 class Stelselgroepconfig(BaseModel):
     class_naam: str
-    begindatum: date
-    einddatum: date
+    begindatum: date = date.min
+    einddatum: date = date.max
     versies: List[Stelselgroepversieconfig]
 
 
 class Stelselconfig(BaseModel):
     stelsel: str
-    begindatum: date
-    einddatum: date
+    begindatum: date = date.min
+    einddatum: date = date.max
     stelselgroepen: Dict[str, Stelselgroepconfig]
 
     @classmethod
@@ -44,8 +44,15 @@ class Stelselconfig(BaseModel):
             stelsel_config = cls(**config)
 
         except ValidationError as e:
-            logger.error(e, f"Geen valide stelsel configuratie in {path}.")
+            logger.error(f"Geen valide stelsel configuratie in {path}.", e)
             raise
 
         logger.info(f"Configuratie voor stelsel '{stelsel.value.naam}' geladen.")
         return stelsel_config
+
+    def save(self) -> None:
+        setattr(yaml.SafeDumper, "ignore_aliases", lambda *args: True)
+        stream = open(f"woningwaardering/stelsels/config/{self.stelsel}.yml", "w")
+        yaml.safe_dump(
+            self.model_dump(exclude_defaults=True), stream=stream, sort_keys=False
+        )

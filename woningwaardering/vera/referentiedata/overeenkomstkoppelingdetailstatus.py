@@ -6,6 +6,10 @@ class Overeenkomstkoppelingdetailstatus(Enum):
     afgewezen_door_woningzoekende = Referentiedata(
         code="AFG",
         naam="Afgewezen door woningzoekende",
+        parent=Referentiedata(
+            code="AFG",
+            naam="Afgewezen",
+        ),
     )
     """
     Woningzoekende heeft het verzoek tot koppelen afgewezen.
@@ -14,6 +18,10 @@ class Overeenkomstkoppelingdetailstatus(Enum):
     bevestigingstermijn_is_verstreken = Referentiedata(
         code="BEV",
         naam="Bevestigingstermijn is verstreken",
+        parent=Referentiedata(
+            code="AFG",
+            naam="Afgewezen",
+        ),
     )
     """
     Koppeling is afgewezen omdat de bevestigingstermijn is verstreken.
@@ -22,6 +30,10 @@ class Overeenkomstkoppelingdetailstatus(Enum):
     geboortedatum_komt_niet_overeen = Referentiedata(
         code="GEB",
         naam="Geboortedatum komt niet overeen",
+        parent=Referentiedata(
+            code="AFG",
+            naam="Afgewezen",
+        ),
     )
     """
     Koppeling is afgewezen omdat de geboortedatum van de woningzoekende in beide
@@ -31,6 +43,10 @@ class Overeenkomstkoppelingdetailstatus(Enum):
     naamgegevens_komen_niet_overeen = Referentiedata(
         code="NAA",
         naam="Naamgegevens komen niet overeen",
+        parent=Referentiedata(
+            code="AFG",
+            naam="Afgewezen",
+        ),
     )
     """
     Koppeling is afgewezen omdat de naamgegevens van de woningzoekende in beide
@@ -44,3 +60,7 @@ class Overeenkomstkoppelingdetailstatus(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent

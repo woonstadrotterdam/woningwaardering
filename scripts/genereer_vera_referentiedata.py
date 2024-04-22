@@ -58,6 +58,8 @@ active_data = sorted(
 # Count the occurrences of each combination of "soort" and "naam"
 counts = Counter((item["soort"], item["naam"]) for item in active_data)
 
+resolved_parents: dict[str, dict[str | Any, str | Any]] = dict()
+
 # Update the original list by suffixing duplicate names with the corresponding item code
 for item in active_data:
     item["variabele"] = item["naam"]
@@ -69,6 +71,27 @@ for item in active_data:
             f"Variabele naam \"{item['variabele']}\" wordt vervangen door \"{item['variabele']} {item['code']}\""
         )
         item["variabele"] += " " + item["code"]
+    if item["parent"] is not None and item["parent"] != "":
+        resolved_parent = resolved_parents.get(item["parent"])
+        if resolved_parent is None:
+            parent_soort = item["parent"].split(".")[0]
+            parent_code = item["parent"].split(".")[1]
+            parents = [
+                active_data_item
+                for active_data_item in active_data
+                if active_data_item["soort"] == parent_soort
+                and active_data_item["code"] == parent_code
+            ]
+            if parents is not None and len(parents) == 1:
+                resolved_parent = resolved_parents[item["parent"]] = parents[0]
+            else:
+                logger.debug(
+                    f"{len(parents)} parents gevonden voor {item['parent']}, verwachtte er 1"
+                )
+        if resolved_parent is not None:
+            item["parentcode"] = resolved_parent["code"]
+            item["parentnaam"] = resolved_parent["naam"]
+
 
 # Create output directory if not exists
 if not os.path.exists(output_folder):
@@ -149,6 +172,12 @@ class {{ soort|remove_accents|title }}(Enum):
     {{ item|normalize_variable_name }} = Referentiedata(
         code="{{ item['code'] }}",
         naam="{{ item['naam'] }}",
+        {%- if item['parent'] %}
+        parent=Referentiedata(
+            code="{{ item['parentcode'] }}",
+            naam="{{ item['parentnaam'] }}",
+        ),
+        {%- endif %}
     )
     {%- if item['omschrijving'] %}
     \"\"\"
@@ -163,6 +192,10 @@ class {{ soort|remove_accents|title }}(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent
 
 """
 )

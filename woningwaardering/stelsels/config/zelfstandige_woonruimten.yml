@@ -1,25 +1,21 @@
 stelsel: zelfstandige_woonruimten
-begindatum: !!timestamp 0001-01-01
-einddatum: !!timestamp 9999-12-31
+begindatum: 2024-01-01
 stelselgroepen:
   oppervlakte_van_vertrekken:
     class_naam: OppervlakteVanVertrekken
-    begindatum: !!timestamp 0001-01-01
-    einddatum: !!timestamp 9999-12-31
+    begindatum: 2024-01-01
     versies:
       - class_naam: OppervlakteVanVertrekken2024
-        begindatum: !!timestamp 2024-01-01
-        einddatum: !!timestamp 9999-12-31
-
-      - class_naam: OppervlakteVanVertrekken2023
-        begindatum: !!timestamp 0001-01-01
-        einddatum: !!timestamp 2023-12-31
-
+        begindatum: 2024-01-01
   oppervlakte_van_overige_ruimten:
     class_naam: OppervlakteVanOverigeRuimten
-    begindatum: !!timestamp 0001-01-01
-    einddatum: !!timestamp 9999-12-31
+    begindatum: 2024-01-01
     versies:
       - class_naam: OppervlakteVanOverigeRuimten2024
-        begindatum: !!timestamp 0001-01-01
-        einddatum: !!timestamp 9999-12-31
+        begindatum: 2024-01-01
+  # verwarming:
+  #   class_naam: Verwarming
+  #   begindatum: 2024-01-01
+  #   versies:
+  #     - class_naam: Verwarming2024
+  #       begindatum: 2024-01-01

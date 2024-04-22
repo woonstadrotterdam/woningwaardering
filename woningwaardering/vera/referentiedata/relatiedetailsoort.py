@@ -6,6 +6,10 @@ class Relatiedetailsoort(Enum):
     huishouden = Referentiedata(
         code="HUI",
         naam="Huishouden",
+        parent=Referentiedata(
+            code="GRO",
+            naam="Relatiegroep",
+        ),
     )
     """
     Een huishouden bestaat uit één of meer personen die op hetzelfde adres wonen en een
@@ -19,3 +23,7 @@ class Relatiedetailsoort(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent

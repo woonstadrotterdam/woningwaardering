@@ -51,7 +51,11 @@ def import_class(module_path: str, class_naam: str, class_type: Type[T]) -> Type
     return class_
 
 
-def is_geldig(begindatum: date, einddatum: date, peildatum: date) -> bool:
+def is_geldig(
+    begindatum: date = date.min,
+    einddatum: date = date.max,
+    peildatum: date = date.today(),
+) -> bool:
     """
     Controleert of de peildatum valt tussen de begindatum en einddatum.
 

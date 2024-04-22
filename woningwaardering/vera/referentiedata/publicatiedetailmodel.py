@@ -6,6 +6,10 @@ class Publicatiedetailmodel(Enum):
     leefstijl = Referentiedata(
         code="LEE",
         naam="Leefstijl",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aanbodmodel",
+        ),
     )
     """
     Eenheden in kwetsbare buurten waarbij leefstijl een belangrijke factor speelt.
@@ -14,6 +18,10 @@ class Publicatiedetailmodel(Enum):
     loting = Referentiedata(
         code="LOT",
         naam="Loting",
+        parent=Referentiedata(
+            code="AAN",
+            naam="Aanbodmodel",
+        ),
     )
     """
     Binnen het aanbodmodel wordt geloot nadat eerst een selectie heeft plaatsgevonden.
@@ -22,6 +30,10 @@ class Publicatiedetailmodel(Enum):
     omklapcontract = Referentiedata(
         code="OMK",
         naam="Omklapcontract",
+        parent=Referentiedata(
+            code="DIS",
+            naam="Distributiemodel",
+        ),
     )
     """
     Ccontract dat de eerste periode, bijv. een jaar, op naam van een zorgaanbieder of
@@ -33,6 +45,10 @@ class Publicatiedetailmodel(Enum):
     snelzoek = Referentiedata(
         code="SNE",
         naam="Snelzoek",
+        parent=Referentiedata(
+            code="LOT",
+            naam="Lotingmodel",
+        ),
     )
     """
     Eenheden voor huishoudens die snel een woning nodig hebben en daar geen eisen aan
@@ -46,3 +62,7 @@ class Publicatiedetailmodel(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent

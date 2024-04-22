@@ -6,6 +6,10 @@ class Eindedetailreden(Enum):
     faillissement = Referentiedata(
         code="FAI",
         naam="Faillissement",
+        parent=Referentiedata(
+            code="ONT",
+            naam="Ontbinding",
+        ),
     )
     """
     Een overeenkomst is beëindigd wegens faillissement
@@ -14,6 +18,10 @@ class Eindedetailreden(Enum):
     noorderzon = Referentiedata(
         code="NOO",
         naam="Noorderzon",
+        parent=Referentiedata(
+            code="ONT",
+            naam="Ontbinding",
+        ),
     )
     """
     Een overeenkomst is beëindigd omdat de huurder(s) met de noorderzon is (zijn)
@@ -23,6 +31,10 @@ class Eindedetailreden(Enum):
     ontruiming = Referentiedata(
         code="ONT",
         naam="Ontruiming",
+        parent=Referentiedata(
+            code="ONT",
+            naam="Ontbinding",
+        ),
     )
     """
     Een overeenkomst is beëindigd omdat de woning is ontruimd
@@ -31,6 +43,10 @@ class Eindedetailreden(Enum):
     overlijden = Referentiedata(
         code="OVE",
         naam="Overlijden",
+        parent=Referentiedata(
+            code="ONT",
+            naam="Ontbinding",
+        ),
     )
     """
     Een overeenkomst is beëindigd wegens overlijden
@@ -39,6 +55,10 @@ class Eindedetailreden(Enum):
     regulier = Referentiedata(
         code="REG",
         naam="Regulier",
+        parent=Referentiedata(
+            code="OPZ",
+            naam="Opzegging",
+        ),
     )
     """
     Er is geen bijzondere aanleiding voor het beëindigen van een overeenkomst, of de
@@ -48,6 +68,10 @@ class Eindedetailreden(Enum):
     terugkoop = Referentiedata(
         code="TER",
         naam="Terugkoop",
+        parent=Referentiedata(
+            code="OPZ",
+            naam="Opzegging",
+        ),
     )
     """
     Een overeenkomst is beëindigd wegens terugkoop
@@ -56,6 +80,10 @@ class Eindedetailreden(Enum):
     verkoop = Referentiedata(
         code="VER",
         naam="Verkoop",
+        parent=Referentiedata(
+            code="OPZ",
+            naam="Opzegging",
+        ),
     )
     """
     Een overeenkomst is beëindigd wegens verkoop
@@ -64,6 +92,10 @@ class Eindedetailreden(Enum):
     wijziging_tenaamstelling = Referentiedata(
         code="WIJ",
         naam="Wijziging tenaamstelling",
+        parent=Referentiedata(
+            code="OPZ",
+            naam="Opzegging",
+        ),
     )
     """
     Een overeenkomst is beëindigd omdat de tenaamstelling is gewijzigd (en is vervangen
@@ -73,6 +105,10 @@ class Eindedetailreden(Enum):
     woningruil = Referentiedata(
         code="WON",
         naam="Woningruil",
+        parent=Referentiedata(
+            code="OPZ",
+            naam="Opzegging",
+        ),
     )
     """
     Een overeenkomst is beëindigd wegens woningruil
@@ -85,3 +121,7 @@ class Eindedetailreden(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent

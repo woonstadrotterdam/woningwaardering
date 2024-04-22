@@ -18,6 +18,10 @@ class Eenheidklimaatbeheersing(Enum):
     blokverwarming = Referentiedata(
         code="BLO",
         naam="Blokverwarming",
+        parent=Referentiedata(
+            code="COL",
+            naam="Collectief",
+        ),
     )
     """
     Blokverwarming is een centraal verwarmingssysteem dat wordt gebruikt in gebouwen met
@@ -43,6 +47,10 @@ class Eenheidklimaatbeheersing(Enum):
     gaskachels = Referentiedata(
         code="GAS",
         naam="Gaskachels",
+        parent=Referentiedata(
+            code="IND",
+            naam="Individueel",
+        ),
     )
     """
     Een gaskachel is een verwarmingstoestel dat werkt op aardgas of propaan. Het bevat
@@ -53,6 +61,10 @@ class Eenheidklimaatbeheersing(Enum):
     houtkachel = Referentiedata(
         code="HKA",
         naam="Houtkachel",
+        parent=Referentiedata(
+            code="IND",
+            naam="Individueel",
+        ),
     )
     """
     Een houtkachel is een verwarmingstoestel dat brandt op hout als brandstof. Het heeft
@@ -63,6 +75,10 @@ class Eenheidklimaatbeheersing(Enum):
     muurverwarming = Referentiedata(
         code="MUU",
         naam="Muurverwarming",
+        parent=Referentiedata(
+            code="IND",
+            naam="Individueel",
+        ),
     )
     """
     Muurverwarming is een verwarmingssysteem waarbij warmte wordt gegenereerd door
@@ -84,6 +100,10 @@ class Eenheidklimaatbeheersing(Enum):
     open_haard = Referentiedata(
         code="OHA",
         naam="Open haard",
+        parent=Referentiedata(
+            code="COL",
+            naam="Collectief",
+        ),
     )
     """
     Een open haard is een vuurplaats in een huis met een opening waarin hout of andere
@@ -94,6 +114,10 @@ class Eenheidklimaatbeheersing(Enum):
     stadsverwarming = Referentiedata(
         code="STV",
         naam="Stadsverwarming",
+        parent=Referentiedata(
+            code="COL",
+            naam="Collectief",
+        ),
     )
     """
     Stadsverwarming is een systeem waarbij warmte wordt geproduceerd op één centrale
@@ -111,6 +135,10 @@ class Eenheidklimaatbeheersing(Enum):
     vloerverwarming = Referentiedata(
         code="VLV",
         naam="Vloerverwarming",
+        parent=Referentiedata(
+            code="IND",
+            naam="Individueel",
+        ),
     )
     """
     Vloerverwarming is een verwarmingssysteem waarbij warmte wordt afgegeven via
@@ -121,6 +149,10 @@ class Eenheidklimaatbeheersing(Enum):
     volledig_elektrisch = Referentiedata(
         code="VOL",
         naam="Volledig Elektrisch",
+        parent=Referentiedata(
+            code="IND",
+            naam="Individueel",
+        ),
     )
     """
     Volledig elektrische klimaatbeheersing
@@ -173,3 +205,7 @@ class Eenheidklimaatbeheersing(Enum):
     @property
     def naam(self) -> str | None:
         return self.value.naam
+
+    @property
+    def parent(self) -> Referentiedata | None:
+        return self.value.parent
