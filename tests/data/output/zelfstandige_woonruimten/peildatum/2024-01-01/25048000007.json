@@ -89,9 +89,60 @@
           }
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VZE",
+          "naam": "Verwarming"
+        }
+      },
+      "punten": 11.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Woonkamer"
+          }
+        },
+        {
+          "aantal": 1.5,
+          "criterium": {
+            "naam": "Entree"
+          }
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Slaapkamer"
+          }
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Badruimte"
+          }
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Slaapkamer"
+          }
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Keuken"
+          }
+        }
+      ]
     }
   ],
-  "punten": 65.0,
+  "punten": 76.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
