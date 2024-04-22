@@ -95,23 +95,12 @@ class Verwarming2024(Stelselgroepversie):
                     )
                     continue
 
-                # Kijk of de punten de maximum van 4.0 overschrijden
-                nieuw_totaal_punten_overige_ruimten = (
-                    totaal_punten_overige_ruimten + punten
-                )
                 # Als de punten de maximum van 4.0 overschrijden, dan wordt het aantal punten dat nog mag worden gegeven voor de ruimte aangepast
-                if nieuw_totaal_punten_overige_ruimten >= Decimal("4.0"):
+                if (totaal_punten_overige_ruimten + punten) >= Decimal("4.0"):
                     logger.debug(
                         f"De maximum punten voor {Ruimtesoort.overige_ruimtes.naam} zijn behaald: punten voor {ruimte.naam} worden gecorrigeerd."
                     )
-                    punten = Decimal(
-                        str(
-                            min(
-                                Decimal("4.0") - totaal_punten_overige_ruimten,
-                                punten,
-                            )
-                        )
-                    )
+                    punten = Decimal("4.0") - totaal_punten_overige_ruimten
 
                 totaal_punten_overige_ruimten += punten
                 logger.debug(
