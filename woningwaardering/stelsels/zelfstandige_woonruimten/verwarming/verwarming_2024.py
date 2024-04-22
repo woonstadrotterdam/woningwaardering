@@ -56,9 +56,13 @@ class Verwarming2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.soort is None:
-                logger.error(f"Ruimte {ruimte.id} {ruimte.naam} heeft geen soort.")
+                error_msg = f"Ruimte {ruimte.id} {ruimte.naam} heeft geen soort."
+                logger.error(error_msg)
+                raise TypeError(error_msg)
             if ruimte.soort is not None and ruimte.soort.code is None:
-                logger.error(f"Ruimtesoort {ruimte.id} {ruimte.naam} heeft geen code.")
+                error_msg = f"Ruimtesoort {ruimte.id} {ruimte.soort} heeft geen code."
+                logger.error(error_msg)
+                raise TypeError(error_msg)
             if not (
                 ruimte.soort is not None
                 and ruimte.soort.code is not None
@@ -158,7 +162,7 @@ class Verwarming2024(Stelselgroepversie):
 
 if __name__ == "__main__":
     file = open(
-        "tests/data/input/zelfstandige_woonruimten/12006000004.json",
+        "tests/data/input/zelfstandige_woonruimten/77795000000.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(file.read())
