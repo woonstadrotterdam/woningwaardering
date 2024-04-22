@@ -6,6 +6,7 @@ from loguru import logger
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -35,13 +36,15 @@ class Verwarming2024(Stelselgroepversie):
             )
         )
 
-        punten_per_ruimte = Verwarming2024.punten_per_ruimte(eenheid)
+        punten_per_ruimte = Verwarming2024.punten_per_ruimte(
+            eenheid.klimaatbeheersingsoort
+        )
 
         logger.debug(
-            f"Punten per vertrek: {punten_per_ruimte[Ruimtesoort.vertrek.code]}"
+            f"Punten per verwarmd vertrek: {punten_per_ruimte[Ruimtesoort.vertrek.code]}"
         )
         logger.debug(
-            f"Punten per overige ruimte: {punten_per_ruimte[Ruimtesoort.overige_ruimtes.code]}"
+            f"Punten per verwarmd overige ruimte: {punten_per_ruimte[Ruimtesoort.overige_ruimtes.code]}"
         )
 
         woningwaardering_groep.woningwaarderingen = []
@@ -65,8 +68,10 @@ class Verwarming2024(Stelselgroepversie):
         return woningwaardering_groep
 
     @staticmethod
-    def punten_per_ruimte(eenheid):
-        punten_mapping = {
+    def punten_per_ruimte(
+        klimaatbeheersingsoort: Referentiedata | None,
+    ) -> dict[str, float]:
+        punten_mapping: dict[str, dict[str, float]] = {
             Eenheidklimaatbeheersingsoort.individueel.code: {
                 Ruimtesoort.vertrek.code: 2,
                 Ruimtesoort.overige_ruimtes.code: 1.5,
@@ -77,11 +82,10 @@ class Verwarming2024(Stelselgroepversie):
             },
         }
 
-        klimaatbeheersingsoort = (
-            eenheid.klimaatbeheersingsoort.code
-            if eenheid.klimaatbeheersingsoort is not None
+        punten_per_ruimte = punten_mapping[
+            klimaatbeheersingsoort.code
+            if klimaatbeheersingsoort is not None
+            and klimaatbeheersingsoort.code is not None
             else Eenheidklimaatbeheersingsoort.individueel.code
-        )
-
-        punten_per_ruimte = punten_mapping[klimaatbeheersingsoort]
+        ]
         return punten_per_ruimte
