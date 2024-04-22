@@ -411,6 +411,23 @@ class Eenheiddetailsoort(Enum):
     kantoorruimte van een toegelaten instelling eenheiddetailssoort KTI.
     """
 
+    kangoeroewoning = Referentiedata(
+        code="KNG",
+        naam="Kangoeroewoning",
+        parent=Referentiedata(
+            code="WOO",
+            naam="Woonruimte",
+        ),
+    )
+    """
+    Een kangoeroewoning is een type huisvesting dat is ontworpen om twee of meer
+    generaties van een familie samen te laten wonen, maar wel met behoud van privacy
+    en onafhankelijkheid. In een kangoeroewoning heeft elke generatie of familie een
+    aparte woonruimte binnen hetzelfde huis, maar ze delen wel bepaalde
+    gemeenschappelijke ruimtes zoals de keuken, eetkamer, tuin, en soms zelfs een
+    woonkamer.
+    """
+
     kinderopvanglocatie = Referentiedata(
         code="KIN",
         naam="Kinderopvanglocatie",
@@ -1007,7 +1024,9 @@ class Eenheiddetailsoort(Enum):
     """
 
     @property
-    def code(self) -> str | None:
+    def code(self) -> str:
+        if self.value.code is None:
+            raise TypeError("De code van een Referentiedata object mag niet None zijn.")
         return self.value.code
 
     @property

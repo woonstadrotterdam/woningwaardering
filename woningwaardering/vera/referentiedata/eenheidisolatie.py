@@ -8,10 +8,13 @@ class Eenheidisolatie(Enum):
         naam="Dakisolatie",
     )
 
-    dubbel_glas = Referentiedata(
+    normaal_dubbelglas = Referentiedata(
         code="DGL",
-        naam="Dubbel glas",
+        naam="Normaal dubbelglas",
     )
+    """
+    Dubbel glas waarbij de spouw tussen de glasplaten is gevuld met droge lucht.
+    """
 
     eco_bouw = Referentiedata(
         code="ECO",
@@ -42,7 +45,9 @@ class Eenheidisolatie(Enum):
     )
 
     @property
-    def code(self) -> str | None:
+    def code(self) -> str:
+        if self.value.code is None:
+            raise TypeError("De code van een Referentiedata object mag niet None zijn.")
         return self.value.code
 
     @property
