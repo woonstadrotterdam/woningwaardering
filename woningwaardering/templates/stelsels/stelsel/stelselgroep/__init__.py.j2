@@ -7,5 +7,5 @@ __all__ = [
     "{{ stelselgroepconfig.class_naam }}",
 {%- for versie in stelselgroepconfig.versies %}
     "{{ versie.class_naam }}",
-{% endfor %}
+{% endfor -%}
 ]

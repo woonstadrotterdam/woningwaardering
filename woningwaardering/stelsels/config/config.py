@@ -50,8 +50,8 @@ class Stelselconfig(BaseModel):
         logger.info(f"Configuratie voor stelsel '{stelsel.value.naam}' geladen.")
         return stelsel_config
 
-    def save(self):
-        yaml.SafeDumper.ignore_aliases = lambda *args: True
+    def save(self) -> None:
+        setattr(yaml.SafeDumper, "ignore_aliases", lambda *args: True)
         stream = open(f"woningwaardering/stelsels/config/{self.stelsel}.yml", "w")
         yaml.safe_dump(
             self.model_dump(exclude_defaults=True), stream=stream, sort_keys=False
