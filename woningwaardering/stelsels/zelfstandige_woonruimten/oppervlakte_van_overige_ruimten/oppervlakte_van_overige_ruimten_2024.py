@@ -147,7 +147,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                     Ruimtedetailsoort.keuken.code,
                     Ruimtedetailsoort.overig_vertrek.code,
                     Ruimtedetailsoort.badkamer.code,
-                    Ruimtedetailsoort.badkamer_en_of_toilet.code,
+                    Ruimtedetailsoort.badkamer_met_toilet.code,
                     Ruimtedetailsoort.doucheruimte.code,
                     Ruimtedetailsoort.zolder.code,
                     Ruimtedetailsoort.slaapkamer.code,

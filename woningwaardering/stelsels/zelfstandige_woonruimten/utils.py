@@ -65,7 +65,7 @@ def vertrek_telt_als_vertrek(ruimte: EenhedenRuimte) -> bool:
             Ruimtedetailsoort.keuken.code,
             Ruimtedetailsoort.overig_vertrek.code,
             Ruimtedetailsoort.badkamer.code,
-            Ruimtedetailsoort.badkamer_en_of_toilet.code,
+            Ruimtedetailsoort.badkamer_met_toilet.code,
             Ruimtedetailsoort.doucheruimte.code,
             Ruimtedetailsoort.zolder.code,
             Ruimtedetailsoort.slaapkamer.code,
@@ -76,7 +76,7 @@ def vertrek_telt_als_vertrek(ruimte: EenhedenRuimte) -> bool:
             )
         return result
 
-    def _min_0komma64m2_badkamer_en_of_toilet(ruimte: EenhedenRuimte) -> bool:
+    def _min_0komma64m2_badkamer_met_toilet(ruimte: EenhedenRuimte) -> bool:
         """Voor gecombineerde bad-/doucheruimte met toilet geldt een minimale oppervlakte van 0,64 m².
 
         Args:
@@ -108,10 +108,10 @@ def vertrek_telt_als_vertrek(ruimte: EenhedenRuimte) -> bool:
             )
         return result
 
-    def _min_4m2_exclusief_keuken_en_badkamer_en_of_toilet(
+    def _min_4m2_exclusief_keuken_en_badkamer_met_toilet(
         ruimte: EenhedenRuimte,
     ) -> bool:
-        """Een ruimte moet minimaal 4m2 zijn om te tellen als vertrek. De eisen van minimaal 4m2 gelden niet voor de keuken en badkamer en/of toilet.
+        """Een ruimte moet minimaal 4m2 zijn om te tellen als vertrek. De eisen van minimaal 4m2 gelden niet voor de keuken en badkamer met toilet.
 
         Args:
             ruimte (EenhedenRuimte): een ruimte.
@@ -133,7 +133,7 @@ def vertrek_telt_als_vertrek(ruimte: EenhedenRuimte) -> bool:
 
         if ruimte.detail_soort.code in [
             Ruimtedetailsoort.keuken.code,
-            Ruimtedetailsoort.badkamer_en_of_toilet.code,
+            Ruimtedetailsoort.badkamer_met_toilet.code,
             Ruimtedetailsoort.badkamer.code,
             Ruimtedetailsoort.doucheruimte.code,
         ]:
@@ -189,10 +189,10 @@ def vertrek_telt_als_vertrek(ruimte: EenhedenRuimte) -> bool:
     if not _vertrek_detailsoort(ruimte):
         return False
 
-    if not _min_0komma64m2_badkamer_en_of_toilet(ruimte):
+    if not _min_0komma64m2_badkamer_met_toilet(ruimte):
         return False
 
-    if not _min_4m2_exclusief_keuken_en_badkamer_en_of_toilet(ruimte):
+    if not _min_4m2_exclusief_keuken_en_badkamer_met_toilet(ruimte):
         return False
 
     if not _zolder_heeft_vaste_trap(ruimte):

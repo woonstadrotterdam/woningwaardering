@@ -49,9 +49,9 @@ class Ruimtedetailsoort(Enum):
     Een balkon.
     """
 
-    badkamer_en_of_toilet = Referentiedata(
+    badkamer_met_toilet = Referentiedata(
         code="BAT",
-        naam="Badkamer/toilet",
+        naam="Badkamer met toilet",
         parent=Referentiedata(
             code="VTK",
             naam="Vertrek",
@@ -533,7 +533,9 @@ class Ruimtedetailsoort(Enum):
     """
 
     @property
-    def code(self) -> str | None:
+    def code(self) -> str:
+        if self.value.code is None:
+            raise TypeError("De code van een Referentiedata object mag niet None zijn.")
         return self.value.code
 
     @property

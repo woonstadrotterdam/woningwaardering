@@ -32,9 +32,7 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
         logger.warning(
             f"{Ruimtedetailsoort.toiletruimte} gebruikt in plaats van {Bouwkundigelementdetailsoort.closetcombinatie}"
         )
-    return (
-        ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_en_of_toilet.code
-    ) or (
+    return (ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_met_toilet.code) or (
         ruimte.detail_soort.code
         in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
         and any(
