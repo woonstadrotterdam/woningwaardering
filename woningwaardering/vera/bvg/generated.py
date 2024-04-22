@@ -1311,6 +1311,11 @@ class EenhedenRuimte(BaseModel):
     """
     De ruimten die in verbinding staan met deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering van kasten en verwarming van ruimten.
     """
+    # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
+    verwarmd: Optional[bool] = Field(default=None, alias="verwarmd")
+    """
+    Geeft aan of de ruimte verwarmd wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
+    """
 
 
 class EenhedenStadsdeel(BaseModel):
