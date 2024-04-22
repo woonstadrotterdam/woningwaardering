@@ -55,22 +55,22 @@ class Verwarming2024(Stelselgroepversie):
         totaal_punten_overige_ruimten = Decimal("0")
 
         for ruimte in eenheid.ruimten or []:
-            # TODO: checks of ruimte in aanmerking komt voor Verwarming
             if ruimte.soort is None:
-                logger.error(f"Ruimte {ruimte.id} heeft geen soort.")
+                logger.error(f"Ruimte {ruimte.id} {ruimte.naam} heeft geen soort.")
             if ruimte.soort is not None and ruimte.soort.code is None:
-                logger.error(f"Ruimtesoort {ruimte.id} heeft geen code.")
-            if (
+                logger.error(f"Ruimtesoort {ruimte.id} {ruimte.naam} heeft geen code.")
+            if not (
                 ruimte.soort is not None
                 and ruimte.soort.code is not None
                 and ruimte.soort.code
-                not in [
+                in [
                     Ruimtesoort.vertrek.code,
                     Ruimtesoort.overige_ruimtes.code,
                 ]
+                and ruimte.verwarmd
             ):
                 logger.debug(
-                    f"Ruimte {ruimte.id} komt niet in aanmerking voor punten voor Verwarming."
+                    f"Ruimte {ruimte.id} {ruimte.naam} komt niet in aanmerking voor punten voor Verwarming."
                 )
                 continue
 
@@ -91,25 +91,25 @@ class Verwarming2024(Stelselgroepversie):
 
                 if totaal_punten_overige_ruimten >= Decimal("4.0"):
                     logger.debug(
-                        f"De overige ruimten hebben bij elkaar {totaal_punten_overige_ruimten} punten behaald: {ruimte.naam} wordt niet meegeteld voor Verwarming."
+                        f"De overige ruimten hebben bij elkaar {totaal_punten_overige_ruimten} punten behaald: {ruimte.id} {ruimte.naam} wordt niet meegeteld voor Verwarming."
                     )
                     continue
 
                 # Als de punten de maximum van 4.0 overschrijden, dan wordt het aantal punten dat nog mag worden gegeven voor de ruimte aangepast
                 if (totaal_punten_overige_ruimten + punten) >= Decimal("4.0"):
                     logger.debug(
-                        f"De maximum punten voor {Ruimtesoort.overige_ruimtes.naam} zijn behaald: punten voor {ruimte.naam} worden gecorrigeerd."
+                        f"De maximum punten voor {Ruimtesoort.overige_ruimtes.naam} zijn behaald: punten voor {ruimte.id} {ruimte.naam} worden gecorrigeerd."
                     )
                     punten = Decimal("4.0") - totaal_punten_overige_ruimten
 
                 totaal_punten_overige_ruimten += punten
                 logger.debug(
-                    f"Ruimte {ruimte.naam} telt als verwarmde {Ruimtesoort.overige_ruimtes.naam} en krijgt {punten} punten."
+                    f"Ruimte {ruimte.id} {ruimte.naam} telt als verwarmde {Ruimtesoort.overige_ruimtes.naam} en krijgt {punten} punten."
                 )
 
             else:
                 logger.debug(
-                    f"Ruimte {ruimte.naam} telt als verwarmd {Ruimtesoort.vertrek.naam} en krijgt {punten} punten."
+                    f"Ruimte {ruimte.id} {ruimte.naam} telt als verwarmd {Ruimtesoort.vertrek.naam} en krijgt {punten} punten."
                 )
 
             woningwaardering_groep.woningwaarderingen.append(
