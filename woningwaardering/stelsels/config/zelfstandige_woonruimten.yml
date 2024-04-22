@@ -13,9 +13,9 @@ stelselgroepen:
     versies:
       - class_naam: OppervlakteVanOverigeRuimten2024
         begindatum: 2024-01-01
-  verwarming:
-    class_naam: Verwarming
-    begindatum: 2024-01-01
-    versies:
-      - class_naam: Verwarming2024
-        begindatum: 2024-01-01
+  # verwarming:
+  #   class_naam: Verwarming
+  #   begindatum: 2024-01-01
+  #   versies:
+  #     - class_naam: Verwarming2024
+  #       begindatum: 2024-01-01
