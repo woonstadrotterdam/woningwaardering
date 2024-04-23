@@ -11,12 +11,14 @@ from woningwaardering.vera.referentiedata import (
 
 
 class Stelselgroepversieconfig(BaseModel):
+    module: str
     class_naam: str
     begindatum: date = date.min
     einddatum: date = date.max
 
 
 class Stelselgroepconfig(BaseModel):
+    module: str
     class_naam: str
     begindatum: date = date.min
     einddatum: date = date.max

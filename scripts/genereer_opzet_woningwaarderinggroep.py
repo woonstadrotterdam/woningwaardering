@@ -1,6 +1,5 @@
 from datetime import date
 from pathlib import Path
-import re
 import string
 import inquirer  # noqa
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -17,13 +16,10 @@ from woningwaardering.vera.referentiedata import (
 )
 
 environment = Environment(
-    loader=PackageLoader("woningwaardering"), autoescape=select_autoescape()
+    loader=PackageLoader("woningwaardering"),
+    autoescape=select_autoescape(),
+    keep_trailing_newline=True,
 )
-
-
-environment.filters["stem"] = lambda name: re.sub(
-    "((?!^)(?<!_)[A-Z][a-z]+|(?<=[a-z])[A-Z])", r"_\1", name
-).lower()
 
 
 def validate_date(answers: dict[str, str], answer: str) -> bool:
@@ -119,9 +115,9 @@ if check_write(stelselgroep_file_path):
     stelselgroep_folder.mkdir(parents=True, exist_ok=True)
     stelselgroep_file_path.write_text(stelselgroep_result)
 
-stelselgroepversie_file_path = (
-    stelselgroep_folder / f"{stelselgroep}_{begindatum.year}.py"
-)
+stelselgroepversie_module = f"{stelselgroep}_{begindatum.year}"
+
+stelselgroepversie_file_path = stelselgroep_folder / f"{stelselgroepversie_module}.py"
 
 if check_write(stelselgroepversie_file_path):
     stelselgroepversie_template = environment.get_template(
@@ -148,7 +144,10 @@ stelselgroepconfig = stelselconfig.stelselgroepen.get(stelselgroep)
 
 if stelselgroepconfig is None:
     stelselgroepconfig = Stelselgroepconfig(
-        class_naam=stelselgroep_class_naam, begindatum=begindatum, versies=[]
+        module=stelselgroep,
+        class_naam=stelselgroep_class_naam,
+        begindatum=begindatum,
+        versies=[],
     )
     stelselconfig.stelselgroepen[stelselgroep] = stelselgroepconfig
 
@@ -172,6 +171,7 @@ stelselgroepversieconfig = (
 if stelselgroepversieconfig is None:
     stelselgroepconfig.versies.append(
         Stelselgroepversieconfig(
+            module=stelselgroepversie_module,
             class_naam=stelselgroepversie_class_naam,
             begindatum=begindatum,
         )
@@ -189,3 +189,11 @@ stelselgroep_init_result = stelselgroep_init_template.render(
 )
 
 (stelselgroep_folder / "__init__.py").write_text(stelselgroep_init_result)
+
+stelsel_init_template = environment.get_template("stelsels/stelsel/__init__.py.j2")
+
+stelsel_init_result = stelsel_init_template.render(
+    stelselgroepen=stelselconfig.stelselgroepen
+)
+
+(stelsel_folder / "__init__.py").write_text(stelsel_init_result)

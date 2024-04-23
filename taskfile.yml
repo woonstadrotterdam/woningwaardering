@@ -2,7 +2,7 @@ version: "3"
 
 tasks:
   genereer-vera-bvg-modellen:
-    desc: Generate VERA BVG modellen
+    desc: Genereer VERA BVG modellen
     cmds:
       - |
         datamodel-codegen \
@@ -28,7 +28,7 @@ tasks:
     desc: Genereer VERA referentiedata
     cmds:
       - python scripts/genereer_vera_referentiedata.py
-  scaffold-woningwaarderinggroep:
-    desc: Genereer boilerplate code voor een woningwaarderinggroep
+  genereer-opzet-woningwaarderinggroep:
+    desc: Genereer de opzet voor de code van een woningwaarderinggroep
     cmds:
-      - python scripts/scaffold_woningwaarderinggroep.py
+      - python scripts/genereer_opzet_woningwaarderinggroep.py
