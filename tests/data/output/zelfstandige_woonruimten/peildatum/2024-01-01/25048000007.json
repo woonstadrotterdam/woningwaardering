@@ -101,18 +101,12 @@
           "naam": "Verwarming"
         }
       },
-      "punten": 11.5,
+      "punten": 10.0,
       "woningwaarderingen": [
         {
           "aantal": 2.0,
           "criterium": {
             "naam": "Woonkamer"
-          }
-        },
-        {
-          "aantal": 1.5,
-          "criterium": {
-            "naam": "Entree"
           }
         },
         {
@@ -142,7 +136,7 @@
       ]
     }
   ],
-  "punten": 76.0,
+  "punten": 75.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

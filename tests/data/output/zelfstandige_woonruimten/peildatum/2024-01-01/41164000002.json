@@ -121,7 +121,7 @@
           "naam": "Verwarming"
         }
       },
-      "punten": 17.0,
+      "punten": 14.0,
       "woningwaarderingen": [
         {
           "aantal": 2.0,
@@ -148,12 +148,6 @@
           }
         },
         {
-          "aantal": 1.5,
-          "criterium": {
-            "naam": "Trappenhuis"
-          }
-        },
-        {
           "aantal": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
@@ -166,12 +160,6 @@
           }
         },
         {
-          "aantal": 1.5,
-          "criterium": {
-            "naam": "Toiletruimte"
-          }
-        },
-        {
           "aantal": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
@@ -180,7 +168,7 @@
       ]
     }
   ],
-  "punten": 158.0,
+  "punten": 155.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
