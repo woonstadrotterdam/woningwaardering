@@ -2,7 +2,7 @@ version: "3"
 
 tasks:
   genereer-vera-bvg-modellen:
-    desc: Generate VERA BVG modellen
+    desc: Genereer VERA BVG modellen
     cmds:
       - |
         datamodel-codegen \
