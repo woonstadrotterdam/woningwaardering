@@ -23,6 +23,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 
 
 class Verwarming2024(Stelselgroepversie):
@@ -55,26 +56,53 @@ class Verwarming2024(Stelselgroepversie):
         totaal_punten_overige_ruimten = Decimal("0")
 
         for ruimte in eenheid.ruimten or []:
+            logger.debug(f"Processsing ruimte: {ruimte.id}")
             if ruimte.soort is None:
-                error_msg = f"Ruimte {ruimte.id} {ruimte.naam} heeft geen soort."
+                error_msg = f"Ruimte {ruimte.id} heeft geen soort"
                 logger.error(error_msg)
                 raise TypeError(error_msg)
-            if ruimte.soort is not None and ruimte.soort.code is None:
-                error_msg = f"Ruimtesoort {ruimte.id} {ruimte.soort} heeft geen code."
+            if ruimte.soort.code is None:
+                error_msg = f"Ruimte {ruimte.id} heeft geen soortcode"
                 logger.error(error_msg)
                 raise TypeError(error_msg)
+            if ruimte.detail_soort is None:
+                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoort"
+                logger.error(error_msg)
+                raise TypeError(error_msg)
+            if ruimte.detail_soort.code is None:
+                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoortcode"
+                logger.error(error_msg)
+                raise TypeError(error_msg)
+
             if not (
-                ruimte.soort is not None
-                and ruimte.soort.code is not None
-                and ruimte.soort.code
+                ruimte.soort.code
+                in [Ruimtesoort.overige_ruimtes.code, Ruimtesoort.vertrek.code]
+                and ruimte.detail_soort.code
                 in [
-                    Ruimtesoort.vertrek.code,
-                    Ruimtesoort.overige_ruimtes.code,
+                    Ruimtedetailsoort.bijkeuken.code,
+                    Ruimtedetailsoort.berging.code,
+                    Ruimtedetailsoort.wasruimte.code,
+                    Ruimtedetailsoort.garage.code,
+                    Ruimtedetailsoort.zolder.code,
+                    Ruimtedetailsoort.kelder.code,
+                    Ruimtedetailsoort.parkeerplaats.code,
+                    # Deze vertrekken kunnen als overige ruimte tellen
+                    # wanneer ze niet aan bepaalde voorwaarden voldoen:
+                    Ruimtedetailsoort.woonkamer.code,
+                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                    Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+                    Ruimtedetailsoort.keuken.code,
+                    Ruimtedetailsoort.overig_vertrek.code,
+                    Ruimtedetailsoort.badkamer.code,
+                    Ruimtedetailsoort.badkamer_met_toilet.code,
+                    Ruimtedetailsoort.doucheruimte.code,
+                    Ruimtedetailsoort.zolder.code,
+                    Ruimtedetailsoort.slaapkamer.code,
                 ]
                 and ruimte.verwarmd
             ):
                 logger.debug(
-                    f"Ruimte {ruimte.id} {ruimte.naam} komt niet in aanmerking voor punten voor Verwarming."
+                    f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.verwarming.naam}"
                 )
                 continue
 
