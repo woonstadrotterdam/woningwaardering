@@ -1,11 +1,11 @@
-from .{{ stelselgroepconfig.class_naam | stem }} import {{ stelselgroepconfig.class_naam }}
-{%- for versie in stelselgroepconfig.versies %}
-from .{{ versie.class_naam | stem }} import {{ versie.class_naam }}
+from .{{ stelselgroepconfig.module }} import {{ stelselgroepconfig.class_naam }}
+{%- for versieconfig in stelselgroepconfig.versies %}
+from .{{ versieconfig.module }} import {{ versieconfig.class_naam }}
 {% endfor %}
 
 __all__ = [
     "{{ stelselgroepconfig.class_naam }}",
-{%- for versie in stelselgroepconfig.versies %}
-    "{{ versie.class_naam }}",
+{%- for versieconfig in stelselgroepconfig.versies %}
+    "{{ versieconfig.class_naam }}",
 {% endfor -%}
 ]
