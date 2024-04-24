@@ -138,10 +138,10 @@ class Verwarming2024(Stelselgroepversie):
         punten_mapping: dict[str, dict[str, float]] = {
             Eenheidklimaatbeheersingsoort.individueel.code: {
                 Ruimtesoort.vertrek.code: 2,
-                Ruimtesoort.overige_ruimtes.code: 1.5,
+                Ruimtesoort.overige_ruimtes.code: 1,
             },
             Eenheidklimaatbeheersingsoort.collectief.code: {
-                Ruimtesoort.vertrek.code: 1,
+                Ruimtesoort.vertrek.code: 1.5,
                 Ruimtesoort.overige_ruimtes.code: 0.75,
             },
         }
