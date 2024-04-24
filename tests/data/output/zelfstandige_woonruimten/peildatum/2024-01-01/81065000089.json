@@ -111,7 +111,7 @@
           "naam": "Verwarming"
         }
       },
-      "punten": 11.5,
+      "punten": 11.0,
       "woningwaarderingen": [
         {
           "aantal": 2.0,
@@ -132,7 +132,7 @@
           }
         },
         {
-          "aantal": 1.5,
+          "aantal": 1.0,
           "criterium": {
             "naam": "Wasruimte"
           }
