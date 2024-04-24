@@ -4,7 +4,8 @@ from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroepversie, utils
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
-    vertrek_telt_als_vertrek,
+    classificeer_ruimte,
+    voeg_oppervlakte_kasten_toe_aan_ruimte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -127,85 +128,10 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                 logger.error(error_msg)
                 raise TypeError(error_msg)
 
-            if ruimte.soort is not None and (
-                ruimte.soort.code == Ruimtesoort.overige_ruimtes.code
-                or not vertrek_telt_als_vertrek(ruimte)
-            ):
-                if ruimte.detail_soort.code not in [
-                    Ruimtedetailsoort.bijkeuken.code,
-                    Ruimtedetailsoort.berging.code,
-                    Ruimtedetailsoort.wasruimte.code,
-                    Ruimtedetailsoort.garage.code,
-                    Ruimtedetailsoort.zolder.code,
-                    Ruimtedetailsoort.kelder.code,
-                    Ruimtedetailsoort.parkeerplaats.code,
-                    # Deze vertrekken kunnen als overige ruimte tellen
-                    # wanneer ze niet aan bepaalde voorwaarden voldoen:
-                    Ruimtedetailsoort.woonkamer.code,
-                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-                    Ruimtedetailsoort.woonkamer_en_of_keuken.code,
-                    Ruimtedetailsoort.keuken.code,
-                    Ruimtedetailsoort.overig_vertrek.code,
-                    Ruimtedetailsoort.badkamer.code,
-                    Ruimtedetailsoort.badkamer_met_toilet.code,
-                    Ruimtedetailsoort.doucheruimte.code,
-                    Ruimtedetailsoort.zolder.code,
-                    Ruimtedetailsoort.slaapkamer.code,
-                ]:
-                    logger.debug(
-                        f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
-                    )
-                    continue
+            criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
-                criterium_naam = ruimte.naam
-
-                # Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald
-                # en bij de oppervlakte van het betreffende vertrek opgeteld.
-                # Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een
-                # verkeersruimte, wordt niet gewaardeerd
-                if ruimte.detail_soort.code not in [
-                    Ruimtedetailsoort.hal.code,
-                    Ruimtedetailsoort.overloop.code,
-                    Ruimtedetailsoort.entree.code,
-                    Ruimtedetailsoort.gang.code,
-                ]:
-                    ruimte_kasten = [
-                        verbonden_ruimte
-                        for verbonden_ruimte in ruimte.verbonden_ruimten or []
-                        if verbonden_ruimte.detail_soort is not None
-                        and verbonden_ruimte.detail_soort.code
-                        == Ruimtedetailsoort.kast.code
-                        and verbonden_ruimte.oppervlakte is not None
-                        and verbonden_ruimte.oppervlakte < 2.0
-                    ]
-
-                    aantal_ruimte_kasten = len(ruimte_kasten)
-
-                    if aantal_ruimte_kasten > 0:
-                        ruimte.oppervlakte += sum(
-                            [
-                                ruimte_kast.oppervlakte
-                                for ruimte_kast in ruimte_kasten
-                                if ruimte_kast.oppervlakte is not None
-                            ]
-                        )
-
-                        if ruimte.inhoud is not None:
-                            ruimte.inhoud += sum(
-                                [
-                                    ruimte_kast.inhoud
-                                    for ruimte_kast in ruimte_kasten
-                                    if ruimte_kast.inhoud is not None
-                                ]
-                            )
-
-                        logger.debug(
-                            f"De netto oppervlakte van {aantal_ruimte_kasten} verbonden {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'} is opgeteld bij {ruimte.naam}"
-                        )
-
-                        criterium_naam = f"{ruimte.naam} + {aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'}"
-
-                if ruimte.oppervlakte is not None and ruimte.oppervlakte < 2:
+            if classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimtes:
+                if ruimte.oppervlakte < 2:
                     logger.debug(
                         f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter"
                     )
@@ -220,44 +146,43 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                     )
                 )
 
-                if ruimte.oppervlakte is not None:
-                    if (
-                        ruimte.gedeeld_met_aantal_eenheden is not None
-                        and ruimte.gedeeld_met_aantal_eenheden > 1
-                        and ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
-                    ):
-                        oppervlakte_per_eenheid = Decimal(
-                            ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
-                        )
+                if (
+                    ruimte.gedeeld_met_aantal_eenheden is not None
+                    and ruimte.gedeeld_met_aantal_eenheden > 1
+                    and ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
+                ):
+                    oppervlakte_per_eenheid = Decimal(
+                        ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
+                    )
 
-                        if oppervlakte_per_eenheid >= 2:
-                            woningwaardering.aantal = float(
-                                (
-                                    Decimal(str(ruimte.oppervlakte)).quantize(
-                                        Decimal("1"), ROUND_HALF_UP
-                                    )
-                                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                                ).quantize(Decimal("0.01"), ROUND_HALF_UP)
-                            )
-                        else:
-                            logger.debug(
-                                f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter per eenheid en komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
-                            )
-                            continue
-
-                    elif ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-                        oppervlakte_aantal = _oppervlakte_zolder_overige_ruimte(ruimte)
-                        if oppervlakte_aantal > 0.0:
-                            woningwaardering.aantal = oppervlakte_aantal
-                        else:
-                            continue
-
-                    else:
+                    if oppervlakte_per_eenheid >= 2:
                         woningwaardering.aantal = float(
-                            Decimal(str(ruimte.oppervlakte)).quantize(
-                                Decimal("0.01"), ROUND_HALF_UP
-                            )
+                            (
+                                Decimal(str(ruimte.oppervlakte)).quantize(
+                                    Decimal("1"), ROUND_HALF_UP
+                                )
+                                / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
+                            ).quantize(Decimal("0.01"), ROUND_HALF_UP)
                         )
+                    else:
+                        logger.debug(
+                            f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter per eenheid en komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+                        )
+                        continue
+
+                elif ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
+                    oppervlakte_aantal = _oppervlakte_zolder_overige_ruimte(ruimte)
+                    if oppervlakte_aantal > 0.0:
+                        woningwaardering.aantal = oppervlakte_aantal
+                    else:
+                        continue
+
+                else:
+                    woningwaardering.aantal = float(
+                        Decimal(str(ruimte.oppervlakte)).quantize(
+                            Decimal("0.01"), ROUND_HALF_UP
+                        )
+                    )
 
                 logger.debug(
                     f"Oppervlakte voor {ruimte.naam} van {ruimte.oppervlakte} is afgerond naar {woningwaardering.aantal}"

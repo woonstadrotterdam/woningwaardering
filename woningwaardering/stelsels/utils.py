@@ -132,14 +132,15 @@ def naar_tabel(
                 woningwaardering_groep.criterium_groep
                 and woningwaardering_groep.criterium_groep.stelselgroep
                 and woningwaardering.criterium
-                and woningwaardering.criterium.meeteenheid
             ):
                 table.add_row(
                     [
                         woningwaardering_groep.criterium_groep.stelselgroep.naam,
                         woningwaardering.criterium.naam,
                         woningwaardering.aantal,
-                        woningwaardering.criterium.meeteenheid.naam,
+                        woningwaardering.criterium.meeteenheid.naam
+                        if woningwaardering.criterium.meeteenheid is not None
+                        else "",
                         woningwaardering.punten or "",
                     ]
                 )

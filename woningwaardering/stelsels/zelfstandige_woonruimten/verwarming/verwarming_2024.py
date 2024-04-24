@@ -6,7 +6,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
-    vertrek_telt_als_vertrek,
+    classificeer_ruimte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -23,7 +23,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 
 
 class Verwarming2024(Stelselgroepversie):
@@ -74,31 +73,14 @@ class Verwarming2024(Stelselgroepversie):
                 logger.error(error_msg)
                 raise TypeError(error_msg)
 
+            ruimtesoort = classificeer_ruimte(ruimte)
+
+            if ruimtesoort is None:
+                continue
+
             if not (
-                ruimte.soort.code
+                ruimtesoort.code
                 in [Ruimtesoort.overige_ruimtes.code, Ruimtesoort.vertrek.code]
-                and ruimte.detail_soort.code
-                in [
-                    Ruimtedetailsoort.bijkeuken.code,
-                    Ruimtedetailsoort.berging.code,
-                    Ruimtedetailsoort.wasruimte.code,
-                    Ruimtedetailsoort.garage.code,
-                    Ruimtedetailsoort.zolder.code,
-                    Ruimtedetailsoort.kelder.code,
-                    Ruimtedetailsoort.parkeerplaats.code,
-                    # Deze vertrekken kunnen als overige ruimte tellen
-                    # wanneer ze niet aan bepaalde voorwaarden voldoen:
-                    Ruimtedetailsoort.woonkamer.code,
-                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-                    Ruimtedetailsoort.woonkamer_en_of_keuken.code,
-                    Ruimtedetailsoort.keuken.code,
-                    Ruimtedetailsoort.overig_vertrek.code,
-                    Ruimtedetailsoort.badkamer.code,
-                    Ruimtedetailsoort.badkamer_met_toilet.code,
-                    Ruimtedetailsoort.doucheruimte.code,
-                    Ruimtedetailsoort.zolder.code,
-                    Ruimtedetailsoort.slaapkamer.code,
-                ]
                 and ruimte.verwarmd
             ):
                 logger.debug(
@@ -114,13 +96,9 @@ class Verwarming2024(Stelselgroepversie):
                 )
             )
 
-            punten = Decimal(str(punten_per_ruimte[Ruimtesoort.vertrek.code]))
+            punten = Decimal(str(punten_per_ruimte[ruimtesoort.code]))
 
-            if not vertrek_telt_als_vertrek(ruimte):
-                punten = Decimal(
-                    str(punten_per_ruimte[Ruimtesoort.overige_ruimtes.code])
-                )
-
+            if ruimtesoort == Ruimtesoort.overige_ruimtes:
                 if totaal_punten_overige_ruimten >= Decimal("4.0"):
                     logger.debug(
                         f"De overige ruimten hebben bij elkaar {totaal_punten_overige_ruimten} punten behaald: {ruimte.id} {ruimte.naam} wordt niet meegeteld voor Verwarming."

@@ -36,7 +36,6 @@ test = [
     "ruff==0.3.*",
     "pytest==8.0.*",
     "types-requests==2.*",
-    "deepdiff==6.7.*",
 ]
 dev = [
     "woningwaardering[test]",
