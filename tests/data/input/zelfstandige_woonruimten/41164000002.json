@@ -1,6 +1,10 @@
 {
   "id": "41164000002",
   "bouwjaar": 1904,
+  "klimaatbeheersingsoort": {
+    "code": "IND",
+    "naam": "Individueel"
+  },
   "ruimten": [
     {
       "id": "Space_72315445",

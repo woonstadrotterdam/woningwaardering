@@ -111,46 +111,46 @@
           "naam": "Verwarming"
         }
       },
-      "punten": 13.5,
+      "punten": 6.75,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
             "naam": "Slaapkamer"
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
             "naam": "Badruimte"
           }
         },
         {
-          "aantal": 1.5,
+          "aantal": 0.75,
           "criterium": {
             "naam": "Zolder"
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
             "naam": "Keuken"
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
             "naam": "Slaapkamer"
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
             "naam": "Woonkamer"
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
             "naam": "Slaapkamer"
           }
@@ -158,7 +158,7 @@
       ]
     }
   ],
-  "punten": 99.0,
+  "punten": 92.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

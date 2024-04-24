@@ -1,6 +1,10 @@
 {
   "id": "77795000000",
   "bouwjaar": 2011,
+  "klimaatbeheersingsoort": {
+    "code": "COL",
+    "naam": "Collectief"
+  },
   "ruimten": [
     {
       "id": "Space_9946634",
