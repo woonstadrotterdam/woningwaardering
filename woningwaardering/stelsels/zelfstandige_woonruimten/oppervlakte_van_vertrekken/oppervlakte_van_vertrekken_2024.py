@@ -44,18 +44,6 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             logger.debug(f"Processsing ruimte: {ruimte.id}")
-            if ruimte.oppervlakte is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen oppervlakte"
-                logger.error(error_msg)
-                raise TypeError(error_msg)
-            if ruimte.detail_soort is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoort"
-                logger.error(error_msg)
-                raise TypeError(error_msg)
-            if ruimte.detail_soort.code is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoortcode"
-                logger.error(error_msg)
-                raise TypeError(error_msg)
 
             # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
             if badruimte_met_toilet(ruimte):

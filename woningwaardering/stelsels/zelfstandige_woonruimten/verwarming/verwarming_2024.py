@@ -56,20 +56,9 @@ class Verwarming2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             logger.debug(f"Processsing ruimte: {ruimte.id}")
-            if ruimte.soort is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen soort"
-                logger.error(error_msg)
-                raise TypeError(error_msg)
-            if ruimte.soort.code is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen soortcode"
-                logger.error(error_msg)
-                raise TypeError(error_msg)
+
             if ruimte.detail_soort is None:
                 error_msg = f"Ruimte {ruimte.id} heeft geen detailsoort"
-                logger.error(error_msg)
-                raise TypeError(error_msg)
-            if ruimte.detail_soort.code is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoortcode"
                 logger.error(error_msg)
                 raise TypeError(error_msg)
 

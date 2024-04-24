@@ -123,10 +123,6 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                 error_msg = f"Ruimte {ruimte.id} heeft geen detailsoort"
                 logger.error(error_msg)
                 raise TypeError(error_msg)
-            if ruimte.detail_soort.code is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoortcode"
-                logger.error(error_msg)
-                raise TypeError(error_msg)
 
             criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
