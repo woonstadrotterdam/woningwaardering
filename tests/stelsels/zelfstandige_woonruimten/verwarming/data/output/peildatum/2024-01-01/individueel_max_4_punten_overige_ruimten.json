@@ -14,13 +14,13 @@
       "punten": 4.0,
       "woningwaarderingen": [
         {
-          "aantal": 1.5,
+          "aantal": 1.0,
           "criterium": {
             "naam": "Woonkamer1"
           }
         },
         {
-          "aantal": 1.5,
+          "aantal": 1.0,
           "criterium": {
             "naam": "Woonkamer2"
           }
@@ -29,6 +29,12 @@
           "aantal": 1.0,
           "criterium": {
             "naam": "Woonkamer3"
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Woonkamer4"
           }
         }
       ]

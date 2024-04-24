@@ -1,8 +1,8 @@
 {
   "id": "max4punten",
   "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
+    "code": "COL",
+    "naam": "Collectief"
   },
   "ruimten": [
     {
@@ -73,6 +73,63 @@
         "naam": "Woonkamer4"
       },
       "naam": "Woonkamer4",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "woonkamer5",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer5"
+      },
+      "naam": "Woonkamer5",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "woonkamer6",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer6"
+      },
+      "naam": "Woonkamer6",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "woonkamer7",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer7"
+      },
+      "naam": "Woonkamer7",
       "inhoud": 4,
       "oppervlakte": 2,
       "verwarmd": true,
