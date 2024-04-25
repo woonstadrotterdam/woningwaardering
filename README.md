@@ -266,3 +266,16 @@ Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarm
 ### Bouwkundige elementen
 
 In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Dit kan bijvoorbeeld tot gevolg hebben dat er punten in mindering worden gebracht, of punten extra gegeven worden. Bijvoorbeeld bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee de zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribuut `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een [github issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/46) open om `bouwkundige_elementen` standaard in het VERA model toe te voegen.
+
+### Eenheidklimaatbeheersingsoort
+
+Om te bepalen of de ruimten van een eenheid als individueel of collectief verwarmd gewaardeerd dienen te worden, mist de VERA standaard een veld voor de `Eenheidklimaatbeheersingsoort` referentiedata. Dit attribuut is toegevoegd aan `EenhedenEenheid`.  
+Om dit attribuut ook aan de VERA standaard toe te voegen is
+https://github.com/Aedes-datastandaarden/vera-openapi/issues/54 aangemaakt.
+
+### Verwarmd
+
+In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verwarmd is. Het attribuut `verwarmde_vertrekken_aantal` bestaat wel, maar dit bestaat op niveau van de eenheid en daarin bestaat geen onderscheid tussen vertrekken en overige ruimten. Dit is aangekaart in deze twee issues:
+
+- https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
+- https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
