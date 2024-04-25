@@ -1,6 +1,6 @@
 from loguru import logger
 
-from woningwaardering.vera.bvg.generated import EenhedenRuimte
+from woningwaardering.vera.bvg.generated import EenhedenRuimte, Referentiedata
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
@@ -24,24 +24,26 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
         error_msg = f"{ruimte.id}: ruimte.detail_soort is None"
         logger.error(error_msg)
         raise TypeError(error_msg)
-    if any(
-        bouwkundig_element.detail_soort is not None
-        and bouwkundig_element.detail_soort.code == Ruimtedetailsoort.toiletruimte.code
-        for bouwkundig_element in ruimte.bouwkundige_elementen or []
-    ):
-        logger.warning(
-            f"{Ruimtedetailsoort.toiletruimte} gebruikt in plaats van {Bouwkundigelementdetailsoort.closetcombinatie}"
-        )
     return (ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_met_toilet.code) or (
         ruimte.detail_soort.code
         in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
-        and any(
-            bouwkundig_element.detail_soort is not None
-            and bouwkundig_element.detail_soort.code
-            in [
-                Bouwkundigelementdetailsoort.closetcombinatie.code,
-                Ruimtedetailsoort.toiletruimte.code,  # Foutief, maar vaak gebruikt
-            ]
-            for bouwkundig_element in ruimte.bouwkundige_elementen or []
+        and heeft_bouwkundig_element(
+            ruimte, Bouwkundigelementdetailsoort.closetcombinatie.value
         )
+    )
+
+
+def heeft_bouwkundig_element(
+    ruimte: EenhedenRuimte, *bouwkundige_elementen: Referentiedata
+) -> bool:
+    ruimte_bouwkundige_elementen_codes = {
+        element.detail_soort.code
+        for element in ruimte.bouwkundige_elementen or []
+        if element.detail_soort is not None
+    }
+
+    bouwkundige_elementen_codes = {element.code for element in bouwkundige_elementen}
+
+    return any(
+        ruimte_bouwkundige_elementen_codes.intersection(bouwkundige_elementen_codes)
     )

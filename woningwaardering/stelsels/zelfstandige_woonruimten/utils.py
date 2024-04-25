@@ -7,7 +7,7 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
     Woningwaarderingstelsel,
 )
-from woningwaardering.vera.utils import badruimte_met_toilet
+from woningwaardering.vera.utils import badruimte_met_toilet, heeft_bouwkundig_element
 
 
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
@@ -78,17 +78,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             return None
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-        bouwkundige_elementen_codes = (
-            [
-                element.detail_soort.code
-                for element in ruimte.bouwkundige_elementen
-                if element.detail_soort is not None
-            ]
-            if ruimte.bouwkundige_elementen
-            else []
-        )
-
-        if Bouwkundigelementdetailsoort.trap.code in bouwkundige_elementen_codes:
+        if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap.value):
             logger.debug(
                 f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): wordt gewaardeerd als {ruimte.soort.naam}"
             )
@@ -101,7 +91,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
                 return Ruimtesoort.overige_ruimtes
             else:
                 return None
-        elif Bouwkundigelementdetailsoort.vlizotrap.code in bouwkundige_elementen_codes:
+        elif heeft_bouwkundig_element(
+            ruimte, Bouwkundigelementdetailsoort.vlizotrap.value
+        ):
             logger.debug(
                 f"Vlizo trap gevonden in {ruimte.naam} ({ruimte.id}): wordt gewaardeerd als {Ruimtesoort.overige_ruimtes}"
             )
