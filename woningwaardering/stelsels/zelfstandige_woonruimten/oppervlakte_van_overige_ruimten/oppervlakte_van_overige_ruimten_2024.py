@@ -114,7 +114,6 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
-            logger.debug(f"Processsing ruimte: {ruimte.id}")
             if ruimte.oppervlakte is None:
                 error_msg = f"Ruimte {ruimte.id} heeft geen oppervlakte"
                 logger.error(error_msg)
@@ -179,10 +178,6 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                             Decimal("0.01"), ROUND_HALF_UP
                         )
                     )
-
-                logger.debug(
-                    f"Oppervlakte voor {ruimte.naam} van {ruimte.oppervlakte} is afgerond naar {woningwaardering.aantal}"
-                )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 

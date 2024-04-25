@@ -43,8 +43,6 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
-            logger.debug(f"Processsing ruimte: {ruimte.id}")
-
             # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
             if badruimte_met_toilet(ruimte):
                 ruimte.oppervlakte = float(
@@ -70,9 +68,6 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                     Decimal(str(ruimte.oppervlakte)).quantize(
                         Decimal("0.01"), ROUND_HALF_UP
                     )
-                )
-                logger.debug(
-                    f"Oppervlakte voor {ruimte.naam} van {ruimte.oppervlakte} is afgerond naar {woningwaardering.aantal}"
                 )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
