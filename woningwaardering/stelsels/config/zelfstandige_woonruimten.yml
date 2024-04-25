@@ -17,11 +17,11 @@ stelselgroepen:
       - module: oppervlakte_van_overige_ruimten_2024
         class_naam: OppervlakteVanOverigeRuimten2024
         begindatum: 2024-01-01
-  # verwarming:
-  #   module: verwarming
-  #   class_naam: Verwarming
-  #   begindatum: 2024-01-01
-  #   versies:
-  #     - module: verwarming_2024
-  #       class_naam: Verwarming2024
-  #       begindatum: 2024-01-01
+  verwarming:
+    module: verwarming
+    class_naam: Verwarming
+    begindatum: 2024-01-01
+    versies:
+      - module: verwarming_2024
+        class_naam: Verwarming2024
+        begindatum: 2024-01-01

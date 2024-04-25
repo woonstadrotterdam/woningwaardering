@@ -1,0 +1,142 @@
+{
+  "id": "max4punten",
+  "klimaatbeheersingsoort": {
+    "code": "COL",
+    "naam": "Collectief"
+  },
+  "ruimten": [
+    {
+      "id": "Woonkamer1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer1"
+      },
+      "naam": "Woonkamer1",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Woonkamer2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer2"
+      },
+      "naam": "Woonkamer2",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Woonkamer3",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer3"
+      },
+      "naam": "Woonkamer3",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "woonkamer4",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer4"
+      },
+      "naam": "Woonkamer4",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "woonkamer5",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer5"
+      },
+      "naam": "Woonkamer5",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "woonkamer6",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer6"
+      },
+      "naam": "Woonkamer6",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "woonkamer7",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer7"
+      },
+      "naam": "Woonkamer7",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+fictieve eenheid met 4 verwarmde woonkamers die als overige ruimte worden gewaardeerd vanwege de kleine oppervlakte. Met deze file wordt getest of er maximaal 4 punten worden uitgedeeld voor de overige ruimtes. De klimaatbeheersingsoort is individueel.

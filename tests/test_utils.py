@@ -1,10 +1,11 @@
+import difflib
 import re
 from datetime import date, datetime
 from pathlib import Path
 
-from deepdiff import DeepDiff
 from loguru import logger
 
+from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -33,13 +34,19 @@ def assert_output_model(
         ), f"Geen stelselgroepresultaat gevonden gevonden voor: {stelselgroep.naam}"
         verwachte_resultaat = stelselgroep_output[0]
 
-    diffresult = DeepDiff(
-        verwachte_resultaat.model_dump(),
-        resultaat.model_dump(),
+    difflines = difflib.unified_diff(
+        fromfile="verwachte resultaat",
+        tofile="test output",
+        a=naar_tabel(verwachte_resultaat).get_string().split("\n"),
+        b=naar_tabel(resultaat).get_string().split("\n"),
+        lineterm="",
+        n=3,
     )
+    diffresult = "\n".join(difflines)
+
     if diffresult:
-        logger.error(diffresult.to_json(indent=2))
-        raise ValueError(f"Modellen zijn niet gelijk: {diffresult}")
+        logger.error(diffresult)
+        raise ValueError(f"Output is niet gelijk: {diffresult}")
 
 
 def laad_specifiek_input_en_output_model(

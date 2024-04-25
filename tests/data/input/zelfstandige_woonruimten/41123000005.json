@@ -1,5 +1,9 @@
 {
   "id": "41123000005",
+  "klimaatbeheersingsoort": {
+    "code": "IND",
+    "naam": "Individueel"
+  },
   "ruimten": [
     {
       "id": "Space_23702354",
