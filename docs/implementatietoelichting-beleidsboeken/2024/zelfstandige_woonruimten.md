@@ -295,4 +295,4 @@ Een open keuken wordt als afzonderlijk verwarmd vertrek beschouwd en krijgt dus 
 
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding tussen keukengedeelte en de rest van het vertrek aanwezig is.
 
-> Om een aanrecht in een woon- of slaapvertrek te waarderen als open keuken, dient de ruimte gespecificeerd te worden met detailsoortcode `WOK` voor Woonkamer/keuken, of er kan in de `bouwkundigeElementen` van een `Woonkamer`, `Slaapkamer` of `Woon-/slaapkamer` een bouwkundig element met detailsoortcode `AAN` voor aanrecht gespecificeerd worden.
+> Om een aanrecht in een woon- of slaapvertrek te waarderen als open keuken, moet de ruimte gespecificeerd worden met detailsoortcode `WOK` voor Woonkamer/keuken. Alternatief kan er in de bouwkundige elementen van een `Woonkamer`, `Slaapkamer` of `Woon-/slaapkamer` een bouwkundig element worden gespecificeerd met detailsoortcode `AAN` voor Aanrecht.

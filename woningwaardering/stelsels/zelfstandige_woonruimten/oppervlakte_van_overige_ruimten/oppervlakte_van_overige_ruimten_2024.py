@@ -41,7 +41,7 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
         float: De berekende oppervlakte voor de zolder.
     """
     if ruimte.detail_soort is not None and ruimte.oppervlakte is not None:
-        trap = heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap.value)
+        trap = heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap.code)
 
         if trap:
             logger.debug(
@@ -54,7 +54,7 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
             )
 
         vlizotrap = heeft_bouwkundig_element(
-            ruimte, Bouwkundigelementdetailsoort.vlizotrap.value
+            ruimte, Bouwkundigelementdetailsoort.vlizotrap.code
         )
 
         if vlizotrap:

@@ -20,9 +20,12 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Eenheidklimaatbeheersingsoort,
     Ruimtesoort,
+    Ruimtedetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
+    Bouwkundigelementdetailsoort,
 )
+from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class Verwarming2024(Stelselgroepversie):
@@ -117,6 +120,28 @@ class Verwarming2024(Stelselgroepversie):
                     aantal=punten,
                 )
             )
+
+            if (
+                ruimte.detail_soort.code
+                == Ruimtedetailsoort.woonkamer_en_of_keuken.code
+                or ruimte.detail_soort.code
+                in [
+                    Ruimtedetailsoort.woonkamer.code,
+                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                    Ruimtedetailsoort.slaapkamer.code,
+                ]
+                and heeft_bouwkundig_element(
+                    ruimte, Bouwkundigelementdetailsoort.aanrecht.code
+                )
+            ):
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam=f"Open keuken in {ruimte.naam}",
+                        ),
+                        aantal=punten,
+                    )
+                )
 
         punten = Decimal(
             sum(

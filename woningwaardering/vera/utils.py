@@ -1,6 +1,6 @@
 from loguru import logger
 
-from woningwaardering.vera.bvg.generated import EenhedenRuimte, Referentiedata
+from woningwaardering.vera.bvg.generated import EenhedenRuimte
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
@@ -28,20 +28,20 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
         ruimte.detail_soort.code
         in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
         and heeft_bouwkundig_element(
-            ruimte, Bouwkundigelementdetailsoort.closetcombinatie.value
+            ruimte, Bouwkundigelementdetailsoort.closetcombinatie.code
         )
     )
 
 
 def heeft_bouwkundig_element(
-    ruimte: EenhedenRuimte, *bouwkundige_elementen: Referentiedata
+    ruimte: EenhedenRuimte, *bouwkundige_elementen_codes: str
 ) -> bool:
     """
     Controleert of een ruimte een specifiek bouwkundig element bevat.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waarin gecontroleerd moet worden.
-        *bouwkundige_elementen (Referentiedata): De bouwkundige elementen waarop gecontroleerd moet worden.
+        *bouwkundige_elementen_codes (str): De codes van de bouwkundige elementen waarop gecontroleerd moet worden.
 
     Returns:
         bool: True als de ruimte een van de opgegeven bouwkundige elementen bevat, anders False.
@@ -52,8 +52,6 @@ def heeft_bouwkundig_element(
         if element.detail_soort is not None
     }
 
-    bouwkundige_elementen_codes = {element.code for element in bouwkundige_elementen}
-
     return any(
-        ruimte_bouwkundige_elementen_codes.intersection(bouwkundige_elementen_codes)
+        ruimte_bouwkundige_elementen_codes.intersection({*bouwkundige_elementen_codes})
     )

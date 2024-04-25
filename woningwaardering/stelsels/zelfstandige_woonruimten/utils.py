@@ -78,7 +78,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             return None
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-        if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap.value):
+        if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap.code):
             logger.debug(
                 f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): wordt gewaardeerd als {ruimte.soort.naam}"
             )
@@ -92,7 +92,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             else:
                 return None
         elif heeft_bouwkundig_element(
-            ruimte, Bouwkundigelementdetailsoort.vlizotrap.value
+            ruimte, Bouwkundigelementdetailsoort.vlizotrap.code
         ):
             logger.debug(
                 f"Vlizo trap gevonden in {ruimte.naam} ({ruimte.id}): wordt gewaardeerd als {Ruimtesoort.overige_ruimtes}"

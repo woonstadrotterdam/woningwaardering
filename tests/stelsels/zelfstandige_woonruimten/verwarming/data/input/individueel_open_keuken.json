@@ -1,0 +1,109 @@
+{
+  "id": "37101000032",
+  "bouwjaar": 1924,
+  "klimaatbeheersingsoort": {
+    "code": "IND",
+    "naam": "Individueel"
+  },
+  "ruimten": [
+    {
+      "id": "Space_108010632",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 111.528,
+      "oppervlakte": 41.0028,
+      "verwarmd": true,
+      "gemeenschappelijk": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Aanrecht_108006231",
+          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYcF",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2700
+        }
+      ]
+    },
+    {
+      "id": "Space_108006229",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 57.4359,
+      "oppervlakte": 20.3673,
+      "verwarmd": true,
+      "gemeenschappelijk": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Aanrecht_108006231",
+          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYcF",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2700
+        }
+      ]
+    },
+    {
+      "id": "Space_108017433",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 31.6776,
+      "oppervlakte": 15.9766,
+      "verwarmd": true,
+      "gemeenschappelijk": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Aanrecht_108006231",
+          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYcF",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2700
+        }
+      ]
+    }
+  ]
+}
