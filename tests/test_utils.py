@@ -2,8 +2,9 @@ import difflib
 import re
 from datetime import date, datetime
 from pathlib import Path
+from typing import Iterator
 
-from loguru import logger
+from pytest import fail
 
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
@@ -34,19 +35,21 @@ def assert_output_model(
         ), f"Geen stelselgroepresultaat gevonden gevonden voor: {stelselgroep.naam}"
         verwachte_resultaat = stelselgroep_output[0]
 
-    difflines = difflib.unified_diff(
-        fromfile="verwachte resultaat",
-        tofile="test output",
-        a=naar_tabel(verwachte_resultaat).get_string().split("\n"),
-        b=naar_tabel(resultaat).get_string().split("\n"),
-        lineterm="",
-        n=3,
-    )
-    diffresult = "\n".join(difflines)
+    difflines = [
+        *difflib.unified_diff(
+            fromfile="verwacht",
+            tofile="testresultaat",
+            a=naar_tabel(verwachte_resultaat).get_string().split("\n"),
+            b=naar_tabel(resultaat).get_string().split("\n"),
+            lineterm="",
+            n=3,
+        )
+    ]
 
-    if diffresult:
-        logger.error(diffresult)
-        raise ValueError(f"Output is niet gelijk: {diffresult}")
+    colored_diff = "\n".join(kleur_diff(difflines, use_loguru_colors=True))
+
+    if colored_diff != "":
+        fail(reason=f"Output komt niet overeen\n{colored_diff}", pytrace=False)
 
 
 def laad_specifiek_input_en_output_model(
@@ -55,8 +58,10 @@ def laad_specifiek_input_en_output_model(
 ) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat, date]:
     file_name = output_json_path.name
     input_path = module_path / f"data/input/{file_name}"
-    peildatum = re.search(r"\d{4}-\d{2}-\d{2}", str(output_json_path)).group(0)
-    peildatum = datetime.strptime(peildatum, "%Y-%m-%d").date()
+    peildatum_match = re.search(r"\d{4}-\d{2}-\d{2}", str(output_json_path))
+    if peildatum_match is None:
+        raise ValueError(f"Geen datum gevonden in bestandsnaam {file_name}")
+    peildatum = datetime.strptime(peildatum_match.group(0), "%Y-%m-%d").date()
     with open(input_path, "r+") as f:
         eenheid_input = EenhedenEenheid.model_validate_json(f.read())
 
@@ -68,3 +73,18 @@ def laad_specifiek_input_en_output_model(
         )
 
     return eenheid_input, eenheid_output, peildatum
+
+
+def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterator[str]:
+    green = "\x1b[92m"
+    red = "\x1b[91m"
+    reset = "\x1b[0m"
+
+    return (
+        (green + diff + reset)
+        if diff.startswith("+")
+        else (red + diff + reset)
+        if diff.startswith("-")
+        else diff
+        for diff in diffresult
+    )

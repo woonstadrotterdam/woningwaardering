@@ -55,8 +55,6 @@ class Verwarming2024(Stelselgroepversie):
         totaal_punten_overige_ruimten = Decimal("0")
 
         for ruimte in eenheid.ruimten or []:
-            logger.debug(f"Processsing ruimte: {ruimte.id}")
-
             if ruimte.detail_soort is None:
                 error_msg = f"Ruimte {ruimte.id} heeft geen detailsoort"
                 logger.error(error_msg)
