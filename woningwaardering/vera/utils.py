@@ -36,6 +36,16 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
 def heeft_bouwkundig_element(
     ruimte: EenhedenRuimte, *bouwkundige_elementen: Referentiedata
 ) -> bool:
+    """
+    Controleert of een ruimte een specifiek bouwkundig element bevat.
+
+    Args:
+        ruimte (EenhedenRuimte): De ruimte waarin gecontroleerd moet worden.
+        *bouwkundige_elementen (Referentiedata): De bouwkundige elementen waarop gecontroleerd moet worden.
+
+    Returns:
+        bool: True als de ruimte een van de opgegeven bouwkundige elementen bevat, anders False.
+    """
     ruimte_bouwkundige_elementen_codes = {
         element.detail_soort.code
         for element in ruimte.bouwkundige_elementen or []
