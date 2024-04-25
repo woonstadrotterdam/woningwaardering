@@ -348,7 +348,7 @@
             "naam": "Sanitaire voorziening"
           },
           "detailSoort": {
-            "code": "TOI",
+            "code": "CLO",
             "naam": "Toilet"
           },
           "extraAttributen": {
@@ -524,7 +524,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "TOI",
+        "code": "CLO",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",
@@ -557,7 +557,7 @@
             "naam": "Sanitaire voorziening"
           },
           "detailSoort": {
-            "code": "TOI",
+            "code": "CLO",
             "naam": "Toilet"
           },
           "extraAttributen": {
