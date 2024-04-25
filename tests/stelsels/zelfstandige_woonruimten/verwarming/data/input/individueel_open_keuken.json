@@ -1,13 +1,10 @@
 {
-  "id": "37101000032",
-  "bouwjaar": 1924,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
   },
   "ruimten": [
     {
-      "id": "Space_108010632",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -16,15 +13,12 @@
         "code": "WOO",
         "naam": "Woonkamer"
       },
-      "naam": "Woonkamer",
+      "naam": "Verwarmde woonkamer",
       "inhoud": 111.528,
       "oppervlakte": 41.0028,
       "verwarmd": true,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
-          "id": "Aanrecht_108006231",
-          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYcF",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -40,7 +34,6 @@
       ]
     },
     {
-      "id": "Space_108006229",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -49,15 +42,12 @@
         "code": "KEU",
         "naam": "Keuken"
       },
-      "naam": "Keuken",
+      "naam": "Verwarmde keuken",
       "inhoud": 57.4359,
       "oppervlakte": 20.3673,
       "verwarmd": true,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
-          "id": "Aanrecht_108006231",
-          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYcF",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -73,7 +63,6 @@
       ]
     },
     {
-      "id": "Space_108017433",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -82,15 +71,12 @@
         "code": "SLA",
         "naam": "Slaapkamer"
       },
-      "naam": "Slaapkamer",
+      "naam": "Verwarmde slaapkamer",
       "inhoud": 31.6776,
       "oppervlakte": 15.9766,
       "verwarmd": true,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
-          "id": "Aanrecht_108006231",
-          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYcF",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -104,6 +90,121 @@
           "lengte": 2700
         }
       ]
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOK",
+        "naam": "Woonkamer/keuken"
+      },
+      "naam": "Verwarmde woonkamer/keuken",
+      "inhoud": 111.528,
+      "oppervlakte": 41.0028,
+      "verwarmd": true
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Onverwarmde woonkamer",
+      "inhoud": 111.528,
+      "oppervlakte": 41.0028,
+      "verwarmd": false,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2700
+        }
+      ]
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Onverwarmde keuken",
+      "inhoud": 57.4359,
+      "oppervlakte": 20.3673,
+      "verwarmd": false,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2700
+        }
+      ]
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Onverwarmde slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 31.6776,
+      "oppervlakte": 15.9766,
+      "verwarmd": false,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2700
+        }
+      ]
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOK",
+        "naam": "Woonkamer/keuken"
+      },
+      "naam": "Onverwarmde woonkamer/keuken",
+      "inhoud": 111.528,
+      "oppervlakte": 41.0028,
+      "verwarmd": false
     }
   ]
 }

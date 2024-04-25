@@ -11,36 +11,54 @@
           "naam": "Verwarming"
         }
       },
-      "punten": 8.0,
+      "punten": 14.0,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
+          "aantal": 2,
           "criterium": {
-            "naam": "Woonkamer"
+            "naam": "Verwarmde woonkamer"
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 2,
           "criterium": {
-            "naam": "Open keuken"
+            "naam": "Open keuken in Verwarmde woonkamer"
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 2,
           "criterium": {
-            "naam": "Keuken"
+            "naam": "Verwarmde keuken"
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 2,
           "criterium": {
-            "naam": "Slaapkamer"
+            "naam": "Verwarmde slaapkamer"
+          }
+        },
+        {
+          "aantal": 2,
+          "criterium": {
+            "naam": "Open keuken in Verwarmde slaapkamer"
+          }
+        },
+        {
+          "aantal": 2,
+          "criterium": {
+            "naam": "Verwarmde woonkamer/keuken"
+          }
+        },
+        {
+          "aantal": 2,
+          "criterium": {
+            "naam": "Open keuken in Verwarmde woonkamer/keuken"
           }
         }
       ]
     }
   ],
-  "punten": 8.0,
+  "punten": 14.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

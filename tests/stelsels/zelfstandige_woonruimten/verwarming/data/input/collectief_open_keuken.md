@@ -1,0 +1,1 @@
+Fictieve eenheid met collectieve klimaatbeheersing. De eenheid heeft verwarmde en onverwarmde woonkamers, keukens, slaapkamers en woonkamers/keukens. Elke ruimte heeft specifieke eigenschappen, zoals oppervlakte en aanwezigheid van een aanrecht. Met deze eenheid wordt getest of open keukens correct worden gewaardeerd.
