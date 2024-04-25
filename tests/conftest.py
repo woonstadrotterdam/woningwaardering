@@ -38,8 +38,10 @@ def zelfstandige_woonruimten_input_en_outputmodel(
     file_name = Path(output_file_path).name
     input_file_path = INPUT_DIR / "zelfstandige_woonruimten" / file_name
     # Extract date from string
-    peildatum = re.search(r"\d{4}-\d{2}-\d{2}", output_file_path).group(0)
-    peildatum = datetime.strptime(peildatum, "%Y-%m-%d").date()
+    peildatum_match = re.search(r"\d{4}-\d{2}-\d{2}", str(output_file_path))
+    if peildatum_match is None:
+        raise ValueError(f"Geen datum gevonden in bestandsnaam {output_file_path}")
+    peildatum = datetime.strptime(peildatum_match.group(0), "%Y-%m-%d").date()
 
     # get input model
     with open(input_file_path, "r+") as f:
