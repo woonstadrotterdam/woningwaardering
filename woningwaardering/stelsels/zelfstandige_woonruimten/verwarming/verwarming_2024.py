@@ -59,8 +59,7 @@ class Verwarming2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.detail_soort is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoort"
-                logger.error(error_msg)
+                error_msg = f"ruimte {ruimte.id} heeft geen detailsoort"
                 raise TypeError(error_msg)
 
             ruimtesoort = classificeer_ruimte(ruimte)
@@ -179,6 +178,8 @@ class Verwarming2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
+    logger.enable("woningwaardering")
+
     file = open(
         "tests/data/input/zelfstandige_woonruimten/77795000000.json",
         "r+",

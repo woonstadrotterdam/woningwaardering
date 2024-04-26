@@ -1,5 +1,7 @@
 from datetime import date
 
+from loguru import logger
+
 
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels import utils
@@ -20,6 +22,8 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 
 if __name__ == "__main__":
+    logger.enable("woningwaardering")
+
     zelfstandige_woonruimten = ZelfstandigeWoonruimten()
     file = open(
         "./tests/data/input/zelfstandige_woonruimten/41123000005.json",

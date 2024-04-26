@@ -37,7 +37,7 @@ def import_class(module_path: str, class_naam: str, class_type: Type[T]) -> Type
         class_: Type[T] = getattr(module, class_naam)
         if not issubclass(class_, class_type):
             raise TypeError(
-                f"Class '{class_.__qualname__}' in '{class_.__module__}' is niet van het type '{class_type.__qualname__}'."
+                f"class '{class_.__qualname__}' in '{class_.__module__}' is niet van het type '{class_type.__qualname__}'"
             )
 
     except ModuleNotFoundError as e:

@@ -67,12 +67,12 @@ class _StelselgroepABC(ABC):
 
         if not geldige_stelselgroep_versie_configs:
             raise ValueError(
-                f"{stelsel}: geen geldige stelselgroep configuratie gevonden met peildatum {peildatum}."
+                f"geen geldige stelselgroep configuratie gevonden voor stelsel {stelsel} met peildatum {peildatum}"
             )
 
         if len(geldige_stelselgroep_versie_configs) > 1:
             raise ValueError(
-                f"{stelsel.value.naam}: meerdere geldige stelselgroep configuraties gevonden met peildatum {peildatum}: {geldige_stelselgroep_versie_configs}."
+                f"meerdere geldige stelselgroep configuraties gevonden voor {stelsel.value.naam} met peildatum {peildatum}: {geldige_stelselgroep_versie_configs}"
             )
 
         logger.debug(

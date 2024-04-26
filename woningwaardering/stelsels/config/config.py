@@ -45,8 +45,8 @@ class Stelselconfig(BaseModel):
         try:
             stelsel_config = cls(**config)
 
-        except ValidationError as e:
-            logger.error(f"Geen valide stelsel configuratie in {path}.", e)
+        except ValidationError:
+            logger.error(f"Configuratie in {path} is niet valide.")
             raise
 
         logger.info(f"Configuratie voor stelsel '{stelsel.value.naam}' geladen.")

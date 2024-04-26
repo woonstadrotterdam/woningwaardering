@@ -1,5 +1,3 @@
-from loguru import logger
-
 from woningwaardering.vera.bvg.generated import EenhedenRuimte
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
@@ -21,8 +19,7 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
         TypeError: Als de ruimte geen detailsoort heeft.
     """
     if ruimte.detail_soort is None:
-        error_msg = f"{ruimte.id}: ruimte.detail_soort is None"
-        logger.error(error_msg)
+        error_msg = f"ruimte.detail_soort is None voor {ruimte.id}"
         raise TypeError(error_msg)
     return (ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_met_toilet.code) or (
         ruimte.detail_soort.code
