@@ -14,37 +14,37 @@
       "punten": 4.0,
       "woningwaarderingen": [
         {
-          "aantal": 0.75,
+          "punten": 0.75,
           "criterium": {
             "naam": "Woonkamer1"
           }
         },
         {
-          "aantal": 0.75,
+          "punten": 0.75,
           "criterium": {
             "naam": "Woonkamer2"
           }
         },
         {
-          "aantal": 0.75,
+          "punten": 0.75,
           "criterium": {
             "naam": "Woonkamer3"
           }
         },
         {
-          "aantal": 0.75,
+          "punten": 0.75,
           "criterium": {
             "naam": "Woonkamer4"
           }
         },
         {
-          "aantal": 0.75,
+          "punten": 0.75,
           "criterium": {
             "naam": "Woonkamer5"
           }
         },
         {
-          "aantal": 0.25,
+          "punten": 0.25,
           "criterium": {
             "naam": "Woonkamer6"
           }

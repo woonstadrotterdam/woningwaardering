@@ -14,43 +14,43 @@
       "punten": 14.0,
       "woningwaarderingen": [
         {
-          "aantal": 2,
+          "punten": 2,
           "criterium": {
             "naam": "Verwarmde woonkamer"
           }
         },
         {
-          "aantal": 2,
+          "punten": 2,
           "criterium": {
             "naam": "Open keuken in Verwarmde woonkamer"
           }
         },
         {
-          "aantal": 2,
+          "punten": 2,
           "criterium": {
             "naam": "Verwarmde keuken"
           }
         },
         {
-          "aantal": 2,
+          "punten": 2,
           "criterium": {
             "naam": "Verwarmde slaapkamer"
           }
         },
         {
-          "aantal": 2,
+          "punten": 2,
           "criterium": {
             "naam": "Open keuken in Verwarmde slaapkamer"
           }
         },
         {
-          "aantal": 2,
+          "punten": 2,
           "criterium": {
             "naam": "Verwarmde woonkamer/keuken"
           }
         },
         {
-          "aantal": 2,
+          "punten": 2,
           "criterium": {
             "naam": "Open keuken in Verwarmde woonkamer/keuken"
           }

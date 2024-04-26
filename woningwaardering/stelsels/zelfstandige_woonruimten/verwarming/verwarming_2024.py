@@ -117,7 +117,7 @@ class Verwarming2024(Stelselgroepversie):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=ruimte.naam,
                     ),
-                    aantal=punten,
+                    punten=punten,
                 )
             )
 
@@ -139,15 +139,15 @@ class Verwarming2024(Stelselgroepversie):
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                             naam=f"Open keuken in {ruimte.naam}",
                         ),
-                        aantal=punten,
+                        punten=punten,
                     )
                 )
 
         punten = Decimal(
             sum(
-                Decimal(str(woningwaardering.aantal))
+                Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.aantal is not None
+                if woningwaardering.punten is not None
             )
         )
 
