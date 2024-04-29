@@ -1,5 +1,7 @@
 from datetime import date
 
+from loguru import logger
+
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -19,6 +21,8 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 
 if __name__ == "__main__":
+    logger.enable("woningwaardering")
+
     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=date(2024, 1, 1))
     with open(
         "./tests/data/input/zelfstandige_woonruimten/41164000002.json", "r+"

@@ -111,7 +111,7 @@ class Stelsel:
             peildatum,
         ):
             raise ValueError(
-                f"Stelsel {stelsel.value.naam} met begindatum {config.begindatum} en einddatum {config.einddatum} is niet geldig op peildatum {peildatum}."
+                f"stelsel {stelsel.value.naam} met begindatum {config.begindatum} en einddatum {config.einddatum} is niet geldig op peildatum {peildatum}."
             )
 
         geldige_stelselgroepen: list[Stelselgroep] = [
@@ -127,7 +127,7 @@ class Stelsel:
 
         if not geldige_stelselgroepen:
             raise ValueError(
-                f"{stelsel.value.naam}: geen geldige stelselgroepen gevonden met peildatum {peildatum}."
+                f"geen geldige stelselgroepen gevonden voor {stelsel.value.naam} met peildatum {peildatum}"
             )
 
         return geldige_stelselgroepen

@@ -85,6 +85,8 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
+    logger.enable("woningwaardering")
+
     file = open(
         "tests/data/input/zelfstandige_woonruimten/12006000004.json",
         "r+",

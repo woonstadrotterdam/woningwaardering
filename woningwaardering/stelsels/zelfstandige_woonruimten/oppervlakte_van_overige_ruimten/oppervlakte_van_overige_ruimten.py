@@ -1,5 +1,7 @@
 from datetime import date
 
+from loguru import logger
+
 from woningwaardering.stelsels import Stelselgroep, utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -20,6 +22,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 
 if __name__ == "__main__":
+    logger.enable("woningwaardering")
+
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(
         peildatum=date(2025, 1, 1)
     )

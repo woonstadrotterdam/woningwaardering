@@ -40,7 +40,7 @@ def zelfstandige_woonruimten_input_en_outputmodel(
     # Extract date from string
     peildatum_match = re.search(r"\d{4}-\d{2}-\d{2}", str(output_file_path))
     if peildatum_match is None:
-        raise ValueError(f"Geen datum gevonden in bestandsnaam {output_file_path}")
+        raise ValueError(f"geen datum gevonden in bestandsnaam {output_file_path}")
     peildatum = datetime.strptime(peildatum_match.group(0), "%Y-%m-%d").date()
 
     # get input model

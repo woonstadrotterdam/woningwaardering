@@ -12,6 +12,8 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
 
+logger.enable("woningwaardering")
+
 # zet logger level to INFO
 logger.remove()
 stdout_id = logger.add(sys.stdout, level="INFO")

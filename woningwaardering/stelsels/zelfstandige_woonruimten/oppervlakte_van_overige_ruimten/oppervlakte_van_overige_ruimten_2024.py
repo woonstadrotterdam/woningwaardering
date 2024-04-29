@@ -109,12 +109,10 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.oppervlakte is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen oppervlakte"
-                logger.error(error_msg)
+                error_msg = f"ruimte {ruimte.id} heeft geen oppervlakte"
                 raise TypeError(error_msg)
             if ruimte.detail_soort is None:
-                error_msg = f"Ruimte {ruimte.id} heeft geen detailsoort"
-                logger.error(error_msg)
+                error_msg = f"ruimte {ruimte.id} heeft geen detailsoort"
                 raise TypeError(error_msg)
 
             criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
@@ -190,6 +188,8 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
 
 if __name__ == "__main__":
+    logger.enable("woningwaardering")
+
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten2024()
     with open(
         "tests/data/input/zelfstandige_woonruimten/85651000021.json",
