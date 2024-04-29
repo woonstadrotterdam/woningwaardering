@@ -44,7 +44,7 @@ def heeft_bouwkundig_element(
         *bouwkundige_elementen_codes (str): De codes van de bouwkundige elementen waarop gecontroleerd moet worden.
 
     Returns:
-        bool: True als de ruimte een van de opgegeven bouwkundige elementen bevat, anders False.
+        bool: True als de ruimte één of meerdere van de opgegeven bouwkundige elementen bevat, anders False.
     """
     ruimte_bouwkundige_elementen_codes = {
         element.detail_soort.code
