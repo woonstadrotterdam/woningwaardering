@@ -24,24 +24,34 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
         error_msg = f"{ruimte.id}: ruimte.detail_soort is None"
         logger.error(error_msg)
         raise TypeError(error_msg)
-    if any(
-        bouwkundig_element.detail_soort is not None
-        and bouwkundig_element.detail_soort.code == Ruimtedetailsoort.toiletruimte.code
-        for bouwkundig_element in ruimte.bouwkundige_elementen or []
-    ):
-        logger.warning(
-            f"{Ruimtedetailsoort.toiletruimte} gebruikt in plaats van {Bouwkundigelementdetailsoort.closetcombinatie}"
-        )
     return (ruimte.detail_soort.code == Ruimtedetailsoort.badkamer_met_toilet.code) or (
         ruimte.detail_soort.code
         in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
-        and any(
-            bouwkundig_element.detail_soort is not None
-            and bouwkundig_element.detail_soort.code
-            in [
-                Bouwkundigelementdetailsoort.closetcombinatie.code,
-                Ruimtedetailsoort.toiletruimte.code,  # Foutief, maar vaak gebruikt
-            ]
-            for bouwkundig_element in ruimte.bouwkundige_elementen or []
+        and heeft_bouwkundig_element(
+            ruimte, Bouwkundigelementdetailsoort.closetcombinatie.code
         )
+    )
+
+
+def heeft_bouwkundig_element(
+    ruimte: EenhedenRuimte, *bouwkundige_elementen_codes: str
+) -> bool:
+    """
+    Controleert of een ruimte een specifiek bouwkundig element bevat.
+
+    Args:
+        ruimte (EenhedenRuimte): De ruimte waarin gecontroleerd moet worden.
+        *bouwkundige_elementen_codes (str): De codes van de bouwkundige elementen waarop gecontroleerd moet worden.
+
+    Returns:
+        bool: True als de ruimte één of meerdere van de opgegeven bouwkundige elementen bevat, anders False.
+    """
+    ruimte_bouwkundige_elementen_codes = {
+        element.detail_soort.code
+        for element in ruimte.bouwkundige_elementen or []
+        if element.detail_soort is not None
+    }
+
+    return any(
+        ruimte_bouwkundige_elementen_codes.intersection({*bouwkundige_elementen_codes})
     )

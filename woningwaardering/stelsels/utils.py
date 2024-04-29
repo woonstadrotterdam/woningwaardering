@@ -127,7 +127,9 @@ def naar_tabel(
         )
         else [woningwaardering_resultaat]
     ):
-        for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
+        woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
+        aantal_waarderingen = len(woningwaarderingen)
+        for index, woningwaardering in enumerate(woningwaarderingen):
             if (
                 woningwaardering_groep.criterium_groep
                 and woningwaardering_groep.criterium_groep.stelselgroep
@@ -137,12 +139,13 @@ def naar_tabel(
                     [
                         woningwaardering_groep.criterium_groep.stelselgroep.naam,
                         woningwaardering.criterium.naam,
-                        woningwaardering.aantal,
+                        woningwaardering.aantal or "",
                         woningwaardering.criterium.meeteenheid.naam
                         if woningwaardering.criterium.meeteenheid is not None
                         else "",
                         woningwaardering.punten or "",
-                    ]
+                    ],
+                    divider=index + 1 == aantal_waarderingen,
                 )
         if (
             woningwaardering_groep.criterium_groep
@@ -156,13 +159,22 @@ def naar_tabel(
                         sum(
                             [
                                 Decimal(woningwaardering.aantal)
-                                for woningwaardering in woningwaardering_groep.woningwaarderingen
-                                or []
+                                for woningwaardering in woningwaarderingen
                                 if woningwaardering.aantal is not None
                             ]
                         )
+                    )
+                    or "",
+                    ", ".join(
+                        list(
+                            {
+                                woningwaardering.criterium.meeteenheid.naam or ""
+                                for woningwaardering in woningwaarderingen
+                                if woningwaardering.criterium is not None
+                                and woningwaardering.criterium.meeteenheid is not None
+                            }
+                        )
                     ),
-                    "",
                     woningwaardering_groep.punten,
                 ],
                 divider=True,

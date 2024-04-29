@@ -2,7 +2,8 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels import Stelselgroepversie, utils
+from woningwaardering.stelsels import Stelselgroepversie
+from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
@@ -26,6 +27,7 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
     Bouwkundigelementdetailsoort,
 )
+from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
@@ -39,12 +41,7 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
         float: De berekende oppervlakte voor de zolder.
     """
     if ruimte.detail_soort is not None and ruimte.oppervlakte is not None:
-        trap = [
-            element.detail_soort
-            for element in ruimte.bouwkundige_elementen or []
-            if element.detail_soort
-            and element.detail_soort.code == Bouwkundigelementdetailsoort.trap.code
-        ]
+        trap = heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap.code)
 
         if trap:
             logger.debug(
@@ -56,12 +53,9 @@ def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
                 )
             )
 
-        vlizotrap = [
-            element.detail_soort
-            for element in ruimte.bouwkundige_elementen or []
-            if element.detail_soort
-            and element.detail_soort.code == Bouwkundigelementdetailsoort.vlizotrap.code
-        ]
+        vlizotrap = heeft_bouwkundig_element(
+            ruimte, Bouwkundigelementdetailsoort.vlizotrap.code
+        )
 
         if vlizotrap:
             logger.debug(
@@ -211,6 +205,6 @@ if __name__ == "__main__":
         )
     )
 
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+    tabel = naar_tabel(woningwaardering_resultaat)
 
     print(tabel)

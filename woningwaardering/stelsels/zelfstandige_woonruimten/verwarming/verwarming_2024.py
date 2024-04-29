@@ -20,9 +20,12 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Eenheidklimaatbeheersingsoort,
     Ruimtesoort,
+    Ruimtedetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
+    Bouwkundigelementdetailsoort,
 )
+from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class Verwarming2024(Stelselgroepversie):
@@ -114,15 +117,37 @@ class Verwarming2024(Stelselgroepversie):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=ruimte.naam,
                     ),
-                    aantal=punten,
+                    punten=punten,
                 )
             )
 
+            if (
+                ruimte.detail_soort.code
+                == Ruimtedetailsoort.woonkamer_en_of_keuken.code
+                or ruimte.detail_soort.code
+                in [
+                    Ruimtedetailsoort.woonkamer.code,
+                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                    Ruimtedetailsoort.slaapkamer.code,
+                ]
+                and heeft_bouwkundig_element(
+                    ruimte, Bouwkundigelementdetailsoort.aanrecht.code
+                )
+            ):
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam=f"Open keuken in {ruimte.naam}",
+                        ),
+                        punten=punten,
+                    )
+                )
+
         punten = Decimal(
             sum(
-                Decimal(str(woningwaardering.aantal))
+                Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.aantal is not None
+                if woningwaardering.punten is not None
             )
         )
 

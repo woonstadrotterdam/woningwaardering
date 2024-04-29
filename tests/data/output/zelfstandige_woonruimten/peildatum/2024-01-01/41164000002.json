@@ -124,43 +124,43 @@
       "punten": 14.0,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
+          "punten": 2.0,
           "criterium": {
             "naam": "Badruimte"
           }
         },
         {
-          "aantal": 2.0,
+          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
           }
         },
         {
-          "aantal": 2.0,
+          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
           }
         },
         {
-          "aantal": 2.0,
+          "punten": 2.0,
           "criterium": {
             "naam": "Keuken"
           }
         },
         {
-          "aantal": 2.0,
+          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
           }
         },
         {
-          "aantal": 2.0,
+          "punten": 2.0,
           "criterium": {
             "naam": "Woonkamer"
           }
         },
         {
-          "aantal": 2.0,
+          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
           }

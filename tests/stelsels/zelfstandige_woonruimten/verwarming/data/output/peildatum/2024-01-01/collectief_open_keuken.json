@@ -1,0 +1,66 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VZE",
+          "naam": "Verwarming"
+        }
+      },
+      "punten": 10.5,
+      "woningwaarderingen": [
+        {
+          "punten": 1.5,
+          "criterium": {
+            "naam": "Verwarmde woonkamer"
+          }
+        },
+        {
+          "punten": 1.5,
+          "criterium": {
+            "naam": "Open keuken in Verwarmde woonkamer"
+          }
+        },
+        {
+          "punten": 1.5,
+          "criterium": {
+            "naam": "Verwarmde keuken"
+          }
+        },
+        {
+          "punten": 1.5,
+          "criterium": {
+            "naam": "Verwarmde slaapkamer"
+          }
+        },
+        {
+          "punten": 1.5,
+          "criterium": {
+            "naam": "Open keuken in Verwarmde slaapkamer"
+          }
+        },
+        {
+          "punten": 1.5,
+          "criterium": {
+            "naam": "Verwarmde woonkamer/keuken"
+          }
+        },
+        {
+          "punten": 1.5,
+          "criterium": {
+            "naam": "Open keuken in Verwarmde woonkamer/keuken"
+          }
+        }
+      ]
+    }
+  ],
+  "punten": 10.5,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
+}
