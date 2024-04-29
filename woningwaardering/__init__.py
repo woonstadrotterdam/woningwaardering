@@ -31,6 +31,13 @@ def handle_unhandled_exception(
     exception_value: BaseException,
     exception_traceback: TracebackType | None,
 ) -> None:
+    """
+    Deze functie zorgt ervoor dat onverwachte uitzonderingen gelogged worden
+    en negeert daarbij uitzonderingen die ontstaan zijn door een KeyboardInterrupt.
+    Als de uitzondering van het type `KeyboardInterrupt` is, wordt de uitvoering
+    onderbroken zonder enige verdere actie.
+    Een voorbeeld van een `KeyboardInterrupt` is wanneer een gebruiker op Ctrl+C drukt.
+    """
     if issubclass(exception_type, KeyboardInterrupt):
         return
     logger.exception(exception_value)
