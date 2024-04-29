@@ -4,6 +4,19 @@
     "code": "COL",
     "naam": "Collectief"
   },
+  "adres": {
+    "straatnaam": "Putsebocht",
+    "huisnummer": "18",
+    "huisnummer_toevoeging": "b",
+    "postcode": "3073HK",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010400029477",
+    "bagIdentificatie": "0599010400029477"
+  },
   "ruimten": [
     {
       "id": "Space_57363513",

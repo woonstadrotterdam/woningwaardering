@@ -1,5 +1,18 @@
 {
   "id": "23003000050",
+  "adres": {
+    "straatnaam": "Vosmaerstraat",
+    "huisnummer": "54",
+    "huisnummer_toevoeging": "",
+    "postcode": "3027KM",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000090716",
+    "bagIdentificatie": "0599010000090716"
+  },
   "ruimten": [
     {
       "id": "Space_81977079",

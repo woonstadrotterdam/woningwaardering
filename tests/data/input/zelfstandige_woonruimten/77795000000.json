@@ -1,9 +1,22 @@
 {
   "id": "77795000000",
-  "bouwjaar": 2011,
   "klimaatbeheersingsoort": {
     "code": "COL",
     "naam": "Collectief"
+  },
+  "bouwjaar": 2011,
+  "adres": {
+    "straatnaam": "Sliedrechtstraat",
+    "huisnummer": "22",
+    "huisnummer_toevoeging": "",
+    "postcode": "3086JM",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010400005761",
+    "bagIdentificatie": "0599010400005761"
   },
   "ruimten": [
     {

@@ -4,6 +4,19 @@
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Frits Ruysstraat",
+    "huisnummer": "16",
+    "huisnummer_toevoeging": "d",
+    "postcode": "3061ME",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000302054",
+    "bagIdentificatie": "0599010000302054"
+  },
   "ruimten": [
     {
       "id": "Space_82953220",

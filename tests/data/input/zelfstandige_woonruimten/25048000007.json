@@ -4,6 +4,19 @@
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Rochussenstraat",
+    "huisnummer": "251",
+    "huisnummer_toevoeging": "c",
+    "postcode": "3021NW",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000349626",
+    "bagIdentificatie": "0599010000349626"
+  },
   "ruimten": [
     {
       "id": "Space_29446514",
