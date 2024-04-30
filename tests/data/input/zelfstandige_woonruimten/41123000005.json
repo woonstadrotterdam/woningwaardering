@@ -1,8 +1,22 @@
 {
   "id": "41123000005",
+  "bouwjaar": 1896,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
+  },
+  "adres": {
+    "straatnaam": "Plantageweg",
+    "huisnummer": "17",
+    "huisnummer_toevoeging": "",
+    "postcode": "3061PJ",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000295253",
+    "bagIdentificatie": "0599010000295253"
   },
   "ruimten": [
     {

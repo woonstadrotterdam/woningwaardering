@@ -5,6 +5,19 @@
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Aegidiusstraat",
+    "huisnummer": "122",
+    "huisnummer_toevoeging": "",
+    "postcode": "3061XR",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000316161",
+    "bagIdentificatie": "0599010000316161"
+  },
   "ruimten": [
     {
       "id": "Space_72315445",

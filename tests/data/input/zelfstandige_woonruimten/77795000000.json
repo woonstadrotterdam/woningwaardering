@@ -5,6 +5,19 @@
     "code": "COL",
     "naam": "Collectief"
   },
+  "adres": {
+    "straatnaam": "Sliedrechtstraat",
+    "huisnummer": "22",
+    "huisnummer_toevoeging": "",
+    "postcode": "3086JM",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010400005761",
+    "bagIdentificatie": "0599010400005761"
+  },
   "ruimten": [
     {
       "id": "Space_9946634",

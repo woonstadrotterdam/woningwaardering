@@ -1,8 +1,22 @@
 {
   "id": "51011000042",
+  "bouwjaar": 1952,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
+  },
+  "adres": {
+    "straatnaam": "Eskampstraat",
+    "huisnummer": "1",
+    "huisnummer_toevoeging": "b",
+    "postcode": "3042SJ",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000312130",
+    "bagIdentificatie": "0599010000312130"
   },
   "ruimten": [
     {

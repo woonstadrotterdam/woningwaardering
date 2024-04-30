@@ -1,6 +1,19 @@
 {
   "id": "37101000032",
   "bouwjaar": 1924,
+  "adres": {
+    "straatnaam": "Nieuwe Boezemstraat",
+    "huisnummer": "27",
+    "huisnummer_toevoeging": "",
+    "postcode": "3034PH",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000485697",
+    "bagIdentificatie": "0599010000485697"
+  },
   "ruimten": [
     {
       "id": "Space_108014554",

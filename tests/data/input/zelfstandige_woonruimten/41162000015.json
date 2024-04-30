@@ -1,8 +1,22 @@
 {
   "id": "41162000015",
+  "bouwjaar": 1949,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
+  },
+  "adres": {
+    "straatnaam": "Rubensstraat",
+    "huisnummer": "10",
+    "huisnummer_toevoeging": "c",
+    "postcode": "3061ZX",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000302221",
+    "bagIdentificatie": "0599010000302221"
   },
   "ruimten": [
     {

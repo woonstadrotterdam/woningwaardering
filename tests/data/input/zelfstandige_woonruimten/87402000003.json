@@ -1,8 +1,22 @@
 {
   "id": "87402000003",
+  "bouwjaar": 1898,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
+  },
+  "adres": {
+    "straatnaam": "Oranjeboomstraat",
+    "huisnummer": "355",
+    "huisnummer_toevoeging": "c",
+    "postcode": "3071SV",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000040514",
+    "bagIdentificatie": "0599010000040514"
   },
   "ruimten": [
     {

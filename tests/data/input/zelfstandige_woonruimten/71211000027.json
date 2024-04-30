@@ -1,8 +1,22 @@
 {
   "id": "71211000027",
+  "bouwjaar": 1919,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
+  },
+  "adres": {
+    "straatnaam": "Polslandstraat",
+    "huisnummer": "37",
+    "huisnummer_toevoeging": "",
+    "postcode": "3081TK",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000307252",
+    "bagIdentificatie": "0599010000307252"
   },
   "ruimten": [
     {
