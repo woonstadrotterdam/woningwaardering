@@ -128,6 +128,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
 
+    @staticmethod
     def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
         """
         Berekent de oppervlakte voor een zolder van een overige ruimte op basis van een EenhedenRuimte object.
