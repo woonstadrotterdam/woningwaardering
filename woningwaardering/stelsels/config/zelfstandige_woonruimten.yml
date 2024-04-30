@@ -25,3 +25,11 @@ stelselgroepen:
       - module: verwarming_2024
         class_naam: Verwarming2024
         begindatum: 2024-01-01
+  energieprestatie:
+    module: energieprestatie
+    class_naam: Energieprestatie
+    begindatum: 2024-01-01
+    versies:
+      - module: energieprestatie_2024
+        class_naam: Energieprestatie2024
+        begindatum: 2024-01-01
