@@ -1,6 +1,7 @@
 from decimal import Decimal
 import importlib
 import os
+import pandas as pd
 from datetime import date
 from typing import Type, TypeVar
 
@@ -198,3 +199,46 @@ def naar_tabel(
         )
 
     return table
+
+
+def geef_dataframe_waarde(df: pd.DataFrame, target_col: str, col_mapping: dict) -> str:
+    # TODO: kijk naar 'import operator' en 'get_truth' zodat je eventueel een mapping met operator kan meegeven
+    for column, value in col_mapping.items():
+        df = df[df[column] == value]
+
+    # Check op het resultaat
+    if df.empty:
+        raise ValueError(
+            f"Geen resultaat rij gevonden voor target_col {target_col} en col_mapping."
+        )
+    elif len(df) > 1:
+        raise ValueError(
+            f"Meerdere rijen gevonden voor gegeven {col_mapping}. Hoeveelheid gevonden rijen {len(df)}."
+        )
+
+    return df[target_col].values[0]
+
+
+def lees_csv_als_dataframe(file_path) -> pd.DataFrame:
+    return pd.read_csv(file_path, sep=",", encoding="utf-8")
+
+
+# def lees_csv_als_records(file_path) -> list[dict]:
+#     """
+#     Read a CSV file and return its contents as a list of dictionaries.
+
+#     Parameters:
+#     - file_path (str): The path to the CSV file to read.
+
+#     Returns:
+#     - list[dict]: A list of dictionaries where each dictionary represents a row in the CSV file,
+#       and the keys are the column headers.
+#     """
+#     data_list = []
+
+#     with open(file_path, mode='r', newline='', encoding='utf-8') as csv_file:
+#         csv_reader = csv.DictReader(csv_file)
+#         for row in csv_reader:
+#             data_list.append(row)
+
+#     return data_list
