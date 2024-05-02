@@ -1,9 +1,15 @@
 import datetime
+from decimal import Decimal
+import zoneinfo
 from loguru import logger
-import pandas as pd
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
-from woningwaardering.stelsels.utils import lees_csv_als_dataframe, naar_tabel
+from woningwaardering.stelsels.utils import (
+    dataframe_heeft_een_rij,
+    filter_dataframe_op_peildatum,
+    lees_csv_als_dataframe,
+    naar_tabel,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -17,11 +23,32 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+from woningwaardering.vera.referentiedata.energieprestatiestatus import (
+    Energieprestatiestatus,
+)
 
 LOOKUP_TABEL_FOLDER = "woningwaardering/stelsels/zelfstandige_woonruimten/energieprestatie/lookup_tabellen"
 
 
 class Energieprestatie2024(Stelselgroepversie):
+    lookup_mappping = {
+        "nieuw_0-25": lees_csv_als_dataframe(
+            f"{LOOKUP_TABEL_FOLDER}/nieuw_0-25m2_energielabel_punten.csv"
+        ),
+        "nieuw_25-40": lees_csv_als_dataframe(
+            f"{LOOKUP_TABEL_FOLDER}/nieuw_25-40m2_energielabel_punten.csv"
+        ),
+        "nieuw_40+": lees_csv_als_dataframe(
+            f"{LOOKUP_TABEL_FOLDER}/nieuw_40m2+_energielabel_punten.csv"
+        ),
+        "oud": lees_csv_als_dataframe(
+            f"{LOOKUP_TABEL_FOLDER}/oud_energielabel_punten.csv"
+        ),
+        "bouwjaar": lees_csv_als_dataframe(
+            f"{LOOKUP_TABEL_FOLDER}/bouwjaar_punten.csv"
+        ),
+    }
+
     @staticmethod
     def bereken(
         eenheid: EenhedenEenheid,
@@ -41,114 +68,155 @@ class Energieprestatie2024(Stelselgroepversie):
         # TODO:
         # oppervlakte? waar kom die vandaan?
         # eengezins of meergezinswoning?
-        oppervlakte = 20
+        oppervlakte = 40
 
         energieprestatie = (
             Energieprestatie2024._krijg_energieprestatie_met_geldig_label(eenheid)
         )
 
         if not (energieprestatie or eenheid.bouwjaar):
-            logger.debug(
-                f"Eenheid {eenheid.id} heeft geen geldig energielabel en geen bouwjaar en komt daarom niet in aanmerking voor {Woningwaarderingstelselgroep.energieprestatie.naam}"
+            logger.warning(
+                f"Eenheid {eenheid.id} heeft geen geldig energielabel en geen bouwjaar en komt daarom niet in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
             )
             return woningwaardering_groep
 
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=eenheid.id
+        woningwaardering = WoningwaarderingResultatenWoningwaardering()
+
+        if energieprestatie and energieprestatie.label and oppervlakte:
+            if (
+                energieprestatie.registratiedatum
+                and energieprestatie.registratiedatum
+                >= datetime.datetime(
+                    2021, 1, 1, tzinfo=zoneinfo.ZoneInfo("EUROPE/AMSTERDAM")
+                )
+            ):
+                critetium_naam = f"Energielabel {energieprestatie.label.naam} + oppervlakte {oppervlakte}m2"
+                woningwaardering.criterium = (
+                    WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam=critetium_naam,
+                    )
+                )
+                if oppervlakte < 25.0:
+                    lookup_key = "nieuw_0-25"
+
+                elif 25.0 <= oppervlakte < 40.0:
+                    lookup_key = "nieuw_25-40"
+
+                else:
+                    lookup_key = "nieuw_40+"
+
+            else:
+                critetium_naam = (
+                    f"Energielabel {energieprestatie.label.naam} (voor 2021-01-01)"
+                )
+                woningwaardering.criterium = (
+                    WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam=critetium_naam,
+                    )
+                )
+                lookup_key = "oud"
+
+            df = Energieprestatie2024.lookup_mappping[lookup_key].pipe(
+                filter_dataframe_op_peildatum, peildatum=datetime.date(2024, 1, 1)
+            )
+
+            filtered_df = df[(df["Label"] == energieprestatie.label.naam)]
+
+            if dataframe_heeft_een_rij(filtered_df):
+                punten = filtered_df["Eengezinswoning"].values[0]
+                logger.debug(
+                    f"Eenheid {eenheid.id} met {critetium_naam} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
+                )
+                woningwaardering.punten = float(punten)
+
+        elif eenheid.bouwjaar and not energieprestatie:
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=f"Eenheid met bouwjaar {eenheid.bouwjaar}",
                 )
             )
-        )
-
-        if energieprestatie:
-            df = Energieprestatie2024._laad_energieprestatie_lookup(
-                energieprestatie, oppervlakte
+            df = Energieprestatie2024.lookup_mappping["bouwjaar"].pipe(
+                filter_dataframe_op_peildatum, datetime.date(2024, 1, 1)
             )
-            print(energieprestatie)
-            df_punten_nieuw_energielabel = df[
-                (df["Label"] == energieprestatie.label.naam)
-            ]
-            print(df_punten_nieuw_energielabel)
-            punten = df_punten_nieuw_energielabel["Eengezinswoning"].values[0]
 
-            woningwaardering_groep.punten = float(punten)
-            return woningwaardering_groep
-
-        if eenheid.bouwjaar:
-            df = Energieprestatie2024._laad_energieprestatie_lookup()
             filtered_df = df[
                 ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
                 & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
             ]
+            if dataframe_heeft_een_rij(filtered_df):
+                punten = filtered_df["Eengezinswoning"].values[0]
 
-            Energieprestatie2024._dataframe_heeft_een_rij(filtered_df)
+                logger.debug(
+                    f"Eenheid {eenheid.id} met bouwjaar {eenheid.bouwjaar} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
+                )
+                woningwaardering.punten = float(punten)
 
-            punten = filtered_df["Eengezinswoning"].values[0]
-            woningwaardering_groep.punten = float(punten)
-            return woningwaardering_groep
+        woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+        punten_totaal = Decimal(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in (
+                    woningwaardering_groep.woningwaarderingen or []
+                )
+                if woningwaardering.punten is not None
+            )
+        )
+
+        woningwaardering_groep.punten = float(punten_totaal)
+        return woningwaardering_groep
 
     @staticmethod
     def _krijg_energieprestatie_met_geldig_label(
         eenheid: EenhedenEenheid,
     ) -> EenhedenEnergieprestatie | None:
+        """
+        Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
+
+        Args:
+            eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
+
+        Returns:
+            EenhedenEnergieprestatie | None: De eerste geldige energieprestatie met een energielabel en None Wanneer er geen geldige energieprestatie met label is gevonden.
+        """
         if eenheid.energieprestaties is not None:
-            # loop door energieprestatie en return de eerste geldige energieprestatie met label
             for energieprestatie in eenheid.energieprestaties:
                 if (
-                    (
-                        energieprestatie.begindatum is not None
-                        and energieprestatie.einddatum is not None
-                        and energieprestatie.label is not None
-                        and energieprestatie.registratiedatum is not None
+                    energieprestatie.registratiedatum is not None
+                    and (
+                        (
+                            energieprestatie.begindatum is not None
+                            and energieprestatie.einddatum is not None
+                            and energieprestatie.label is not None
+                            and energieprestatie.registratiedatum is not None
+                        )
+                        and (
+                            energieprestatie.begindatum
+                            < datetime.date.today()
+                            < energieprestatie.einddatum
+                        )
+                        or (
+                            energieprestatie.label is not None
+                            and energieprestatie.status is not None
+                            and energieprestatie.status.code
+                            == Energieprestatiestatus.definitief.code
+                        )
                     )
                     and (
-                        energieprestatie.begindatum
-                        < datetime.date.today()
-                        < energieprestatie.einddatum
-                    )
-                    and (
+                        # Check of de registratie niet ouder is dan 10 jaar
                         energieprestatie.registratiedatum
-                        > (datetime.date.today() - datetime.timedelta(weeks=520))
+                        > (
+                            (datetime.datetime.now()).astimezone(
+                                zoneinfo.ZoneInfo("EUROPE/AMSTERDAM")
+                            )
+                            - datetime.timedelta(weeks=520)
+                        )
                     )
                 ):
-                    logger.debug("Eenergieprestatie met geldig label gevonden")
+                    logger.debug("Energieprestatie met geldig label gevonden")
                     return energieprestatie
+
+        logger.debug("Geen geldige energieprestatie met label gevonden")
         return None
-
-    @staticmethod
-    def _laad_energieprestatie_lookup(
-        energieprestatie: datetime.date = None, oppervlakte: float = None
-    ) -> pd.DataFrame:
-        lookup_tabel = "bouwjaar_punten.csv"
-        if energieprestatie and oppervlakte:
-            if energieprestatie.begindatum >= datetime.date(2021, 1, 1):
-                if oppervlakte < 25.0:
-                    lookup_tabel = "nieuw_0-25m2_energielabel_punten.csv"
-                elif 25.0 <= oppervlakte < 40.0:
-                    lookup_tabel = "nieuw_25-40m2_energielabel_punten.csv"
-                else:
-                    lookup_tabel = "nieuw_40m2+_energielabel_punten.csv"
-            else:
-                lookup_tabel = "oud_energielabel_punten.csv"
-
-        logger.debug(f"Laad lookup tabel {lookup_tabel}")
-
-        # peildatum? -> selecteer alleen de geldige records voor die peildatum dan moet deze functie een nivea hoger
-        df = lees_csv_als_dataframe(f"{LOOKUP_TABEL_FOLDER}/{lookup_tabel}")
-        return df
-
-    @staticmethod
-    def _dataframe_heeft_een_rij(df: pd.DataFrame) -> None:
-        # TODO: nagaan of we error willen raisen of loggen.
-        if df.empty:
-            logger.error("Geen resultaat gevonden in de bouwjaar_punten lookup tabel.")
-            raise ValueError
-        if len(df) > 1:
-            logger.error(
-                "Meerdere resultaten gevonden in de bouwjaar_punten lookup tabel."
-            )
-            raise ValueError
 
 
 if __name__ == "__main__":
@@ -156,7 +224,7 @@ if __name__ == "__main__":
 
     energieprestatie = Energieprestatie2024()
     with open(
-        "tests/data/input/zelfstandige_woonruimten/12006000004.json",
+        "tests/data/input/zelfstandige_woonruimten/23003000050.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
@@ -172,3 +240,5 @@ if __name__ == "__main__":
     tabel = naar_tabel(woningwaardering_resultaat)
 
     print(tabel)
+
+    energieprestatie2 = Energieprestatie2024()
