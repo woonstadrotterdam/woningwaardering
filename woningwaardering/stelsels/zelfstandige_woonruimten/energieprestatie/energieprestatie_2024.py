@@ -66,9 +66,7 @@ class Energieprestatie2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         # TODO:
-        # oppervlakte? waar kom die vandaan?
         # eengezins of meergezinswoning?
-        oppervlakte = 40
 
         energieprestatie = (
             Energieprestatie2024._krijg_energieprestatie_met_geldig_label(eenheid)
@@ -82,7 +80,7 @@ class Energieprestatie2024(Stelselgroepversie):
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-        if energieprestatie and energieprestatie.label and oppervlakte:
+        if energieprestatie and energieprestatie.label and eenheid.gebruiksoppervlakte:
             if (
                 energieprestatie.registratiedatum
                 and energieprestatie.registratiedatum
@@ -90,16 +88,16 @@ class Energieprestatie2024(Stelselgroepversie):
                     2021, 1, 1, tzinfo=zoneinfo.ZoneInfo("EUROPE/AMSTERDAM")
                 )
             ):
-                critetium_naam = f"Energielabel {energieprestatie.label.naam} + oppervlakte {oppervlakte}m2"
+                critetium_naam = f"Energielabel {energieprestatie.label.naam} + oppervlakte {eenheid.gebruiksoppervlakte}m2"
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=critetium_naam,
                     )
                 )
-                if oppervlakte < 25.0:
+                if eenheid.gebruiksoppervlakte < 25.0:
                     lookup_key = "nieuw_0-25"
 
-                elif 25.0 <= oppervlakte < 40.0:
+                elif 25.0 <= eenheid.gebruiksoppervlakte < 40.0:
                     lookup_key = "nieuw_25-40"
 
                 else:
@@ -224,7 +222,7 @@ if __name__ == "__main__":
 
     energieprestatie = Energieprestatie2024()
     with open(
-        "tests/data/input/zelfstandige_woonruimten/23003000050.json",
+        "tests/data/input/zelfstandige_woonruimten/12006000004.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
