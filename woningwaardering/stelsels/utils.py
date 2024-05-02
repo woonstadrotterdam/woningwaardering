@@ -2,7 +2,7 @@ from decimal import Decimal
 import importlib
 import os
 import pandas as pd
-from datetime import date
+from datetime import date, datetime
 from typing import Type, TypeVar
 
 from loguru import logger
@@ -201,44 +201,73 @@ def naar_tabel(
     return table
 
 
-def geef_dataframe_waarde(df: pd.DataFrame, target_col: str, col_mapping: dict) -> str:
-    # TODO: kijk naar 'import operator' en 'get_truth' zodat je eventueel een mapping met operator kan meegeven
-    for column, value in col_mapping.items():
-        df = df[df[column] == value]
+def lees_csv_als_dataframe(file_path: str) -> pd.DataFrame:
+    """
+    Leest a CSV bestand en returnt een pandas DataFrame.
 
-    # Check op het resultaat
+    Parameters:
+        file_path (str): het pad naar het csv bestand
+
+    Returns:
+        pd.DataFrame: The contents of the CSV file as a DataFrame.
+    Raises:
+        ValueError: Als de file_path extentie niet CSV is.
+    """
+    if file_path.endswith(".csv"):
+        return pd.read_csv(file_path, sep=",", encoding="utf-8")
+    else:
+        raise ValueError(f"Bestandstype '{file_path.split('.')[-1]}' niet ondersteund.")
+
+
+def filter_dataframe_op_peildatum(df: pd.DataFrame, peildatum: date) -> pd.DataFrame:
+    """
+    Filtert een DataFrame op basis van een peildatum.
+    Het dataframe moet de kolommen 'Begindatum' en 'Einddatum' bevatten.
+
+    Args:
+        df (pd.DataFrame): Het DataFrame dat gefilterd moet worden.
+        peildatum (date): De peildatum waarop gefilterd moet worden.
+
+    Returns:
+        pd.DataFrame: Het gefilterde DataFrame.
+
+    Raises:
+        ValueError: Als de DataFrame geen 'Begindatum' en 'Einddatum' kolommen bevat.
+        ValueError: Als de filtering op peildatum geen records oplevert.
+    """
+    peildatum_datetime = datetime.combine(peildatum, datetime.min.time())
+
+    if "Begindatum" not in df.columns or "Einddatum" not in df.columns:
+        # TODO: loggen of error raisen? of allebei?
+        error_message = (
+            "The DataFrame must contain 'Begindatum' and 'Einddatum' columns."
+        )
+        logger.error(error_message)
+        raise ValueError(error_message)
+
+    df["Begindatum"] = pd.to_datetime(df["Begindatum"])
+    df["Einddatum"] = pd.to_datetime(df["Einddatum"])
+
+    mask = (df["Begindatum"] <= peildatum_datetime) & (
+        (df["Einddatum"] >= peildatum_datetime) | df["Einddatum"].isnull()
+    )
+    resultaat_df = df[mask]
+
+    if resultaat_df.empty:
+        error_message = "Peildatum levert geen records op."
+        logger.error(error_message)
+        raise ValueError(error_message)
+
+    return df[mask]
+
+
+def dataframe_heeft_een_rij(df: pd.DataFrame) -> None | bool:
+    # TODO: nagaan of we error willen raisen of loggen.
     if df.empty:
-        raise ValueError(
-            f"Geen resultaat rij gevonden voor target_col {target_col} en col_mapping."
-        )
-    elif len(df) > 1:
-        raise ValueError(
-            f"Meerdere rijen gevonden voor gegeven {col_mapping}. Hoeveelheid gevonden rijen {len(df)}."
-        )
+        logger.error("Geen resultaat gevonden in de bouwjaar_punten lookup tabel.")
+        raise ValueError
+    if len(df) > 1:
+        logger.error("Meerdere resultaten gevonden in de bouwjaar_punten lookup tabel.")
+        raise ValueError
 
-    return df[target_col].values[0]
-
-
-def lees_csv_als_dataframe(file_path) -> pd.DataFrame:
-    return pd.read_csv(file_path, sep=",", encoding="utf-8")
-
-
-# def lees_csv_als_records(file_path) -> list[dict]:
-#     """
-#     Read a CSV file and return its contents as a list of dictionaries.
-
-#     Parameters:
-#     - file_path (str): The path to the CSV file to read.
-
-#     Returns:
-#     - list[dict]: A list of dictionaries where each dictionary represents a row in the CSV file,
-#       and the keys are the column headers.
-#     """
-#     data_list = []
-
-#     with open(file_path, mode='r', newline='', encoding='utf-8') as csv_file:
-#         csv_reader = csv.DictReader(csv_file)
-#         for row in csv_reader:
-#             data_list.append(row)
-
-#     return data_list
+    return True
