@@ -18,6 +18,26 @@
     "id": "0599010000316161",
     "bagIdentificatie": "0599010000316161"
   },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2018-01-18",
+      "einddatum": "2028-01-18",
+      "registratiedatum": "2018-03-12T12:17:19+01:00",
+      "label": {
+        "code": "B",
+        "naam": "B"
+      },
+      "waarde": "1.36"
+    }
+  ],
   "gebruiksoppervlakte": 151,
   "ruimten": [
     {

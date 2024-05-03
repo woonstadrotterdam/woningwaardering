@@ -14,6 +14,26 @@
     "id": "0599010000090716",
     "bagIdentificatie": "0599010000090716"
   },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2017-02-23",
+      "einddatum": "2027-02-23",
+      "registratiedatum": "2017-02-23T09:55:37+01:00",
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "1.48"
+    }
+  ],
   "gebruiksoppervlakte": 72,
   "ruimten": [
     {

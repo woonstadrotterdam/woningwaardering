@@ -18,6 +18,26 @@
     "id": "0599010000302054",
     "bagIdentificatie": "0599010000302054"
   },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2019-09-19",
+      "einddatum": "2029-09-19",
+      "registratiedatum": "2020-01-31T12:13:24+01:00",
+      "label": {
+        "code": "E",
+        "naam": "E"
+      },
+      "waarde": "2.26"
+    }
+  ],
   "gebruiksoppervlakte": 53,
   "ruimten": [
     {
