@@ -88,10 +88,10 @@ class Energieprestatie2024(Stelselgroepversie):
                 and energieprestatie.registratiedatum
                 >= datetime.datetime(2021, 1, 1).astimezone()
             ):
-                critetium_naam = f"Energielabel {energieprestatie.label.naam} + oppervlakte {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
+                criterium_naam = f"Energielabel {energieprestatie.label.naam} + oppervlakte {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=critetium_naam,
+                        naam=criterium_naam,
                     )
                 )
                 if energieprestatie.gebruiksoppervlakte_thermische_zone < 25.0:
@@ -106,10 +106,10 @@ class Energieprestatie2024(Stelselgroepversie):
                     lookup_key = "nieuw_40+"
 
             else:
-                critetium_naam = f"Energielabel {energieprestatie.label.naam} (registratie voor 2021-01-01)"
+                criterium_naam = f"Energielabel {energieprestatie.label.naam} (registratie voor 2021-01-01)"
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=critetium_naam,
+                        naam=criterium_naam,
                     )
                 )
                 lookup_key = "oud"
@@ -123,7 +123,7 @@ class Energieprestatie2024(Stelselgroepversie):
             if dataframe_heeft_een_rij(filtered_df):
                 punten = filtered_df[eenheid.woningtype.naam].values[0]
                 logger.debug(
-                    f"Eenheid {eenheid.id} met {critetium_naam} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
+                    f"Eenheid {eenheid.id} met {criterium_naam} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
                 )
                 woningwaardering.punten = float(punten)
 
