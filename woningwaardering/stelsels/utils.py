@@ -149,7 +149,8 @@ def naar_tabel(
                     divider=index + 1 == aantal_waarderingen,
                 )
         if (
-            woningwaardering_groep.criterium_groep
+            aantal_waarderingen > 1
+            and woningwaardering_groep.criterium_groep
             and woningwaardering_groep.criterium_groep.stelselgroep
         ):
             table.add_row(
