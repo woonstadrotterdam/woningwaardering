@@ -10,3 +10,8 @@ class _EenhedenEenheid(BaseModel):
     """
     Het soort klimaatbeheersing. Bijvoorbeeld: individueel of collectief. Referentiedatasoort EENHEIDKLIMAATBEHEERSINGSOORT.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/57
+    woningtype: Optional[Referentiedata] = None
+    """
+    Het type woning: eengezinswoning of meergezinswoning. Referentiedatasoort WONINGTYPE.
+    """
