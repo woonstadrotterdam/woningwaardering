@@ -36,7 +36,8 @@
         "naam": "B"
       },
       "waarde": "173.08",
-      "gebruiksoppervlakteThermischeZone": 78.84
+      "gebruiksoppervlakteThermischeZone": 78.84,
+      "energieprestatievergoeding": false
     }
   ],
   "gebruiksoppervlakte": 82,

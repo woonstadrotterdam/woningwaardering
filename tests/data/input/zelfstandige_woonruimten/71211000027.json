@@ -39,7 +39,8 @@
         "code": "D",
         "naam": "D"
       },
-      "waarde": "1.85"
+      "waarde": "1.85",
+      "energieprestatievergoeding": false
     }
   ],
   "gebruiksoppervlakte": 53,

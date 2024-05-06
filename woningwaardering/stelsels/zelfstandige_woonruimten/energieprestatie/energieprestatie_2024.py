@@ -82,6 +82,10 @@ class Energieprestatie2024(Stelselgroepversie):
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
         if energieprestatie and energieprestatie.label:
+            if energieprestatie.energieprestatievergoeding is None:
+                raise TypeError(
+                    "Voor de berekening van de energieprestatie dient aangegeven te worden of er sprake is van een energieprestatievergoeding"
+                )
             if (
                 energieprestatie.gebruiksoppervlakte_thermische_zone
                 and energieprestatie.registratiedatum

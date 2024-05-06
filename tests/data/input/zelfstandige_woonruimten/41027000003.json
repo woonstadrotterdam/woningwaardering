@@ -39,7 +39,8 @@
         "code": "E",
         "naam": "E"
       },
-      "waarde": "2.26"
+      "waarde": "2.26",
+      "energieprestatievergoeding": false
     }
   ],
   "gebruiksoppervlakte": 53,
