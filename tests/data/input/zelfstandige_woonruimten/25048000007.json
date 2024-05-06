@@ -18,6 +18,27 @@
     "id": "0599010000349626",
     "bagIdentificatie": "0599010000349626"
   },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2019-07-03",
+      "einddatum": "2029-07-03",
+      "registratiedatum": "2019-12-03T16:44:12+01:00",
+      "label": {
+        "code": "B",
+        "naam": "B"
+      },
+      "waarde": "1.24"
+    }
+  ],
+  "gebruiksoppervlakte": 79,
   "ruimten": [
     {
       "id": "Space_29446514",

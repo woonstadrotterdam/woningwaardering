@@ -10,6 +10,31 @@
       "naam": "ROTTERDAM"
     }
   },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000310211",
+    "bagIdentificatie": "0599010000310211"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EP2",
+        "naam": "Primair energieverbruik - woningbouw"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2024-02-13",
+      "einddatum": "2034-02-13",
+      "registratiedatum": "2024-02-21T11:09:37+01:00",
+      "label": {
+        "code": "B",
+        "naam": "B"
+      },
+      "waarde": "173.08"
+    }
+  ],
+  "gebruiksoppervlakte": 82,
   "ruimten": [
     {
       "id": "Space_29475563",

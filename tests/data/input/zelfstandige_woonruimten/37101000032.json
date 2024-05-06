@@ -18,6 +18,27 @@
     "id": "0599010000485697",
     "bagIdentificatie": "0599010000485697"
   },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2019-02-25",
+      "einddatum": "2029-02-25",
+      "registratiedatum": "2019-02-26T14:51:38+01:00",
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "1.58"
+    }
+  ],
+  "gebruiksoppervlakte": 187,
   "ruimten": [
     {
       "id": "Space_108014554",
