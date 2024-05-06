@@ -18,6 +18,10 @@
     "id": "0599010000078889",
     "bagIdentificatie": "0599010000078889"
   },
+  "woningtype": {
+    "code": "MGW",
+    "naam": "Meergezinswoning"
+  },
   "energieprestaties": [],
   "gebruiksoppervlakte": 72,
   "ruimten": [

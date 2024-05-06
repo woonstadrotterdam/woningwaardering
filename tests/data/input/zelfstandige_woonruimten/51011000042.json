@@ -18,6 +18,10 @@
     "id": "0599010000312130",
     "bagIdentificatie": "0599010000312130"
   },
+  "woningtype": {
+    "code": "MGW",
+    "naam": "Meergezinswoning"
+  },
   "energieprestaties": [
     {
       "soort": {
