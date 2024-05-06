@@ -118,13 +118,13 @@ class Energieprestatie2024(Stelselgroepversie):
                 filter_dataframe_op_peildatum, peildatum=datetime.date(2024, 1, 1)
             )
 
-            waarderingsLabel = energieprestatie.label.naam
+            waarderings_label = energieprestatie.label.naam
 
-            if energieprestatie.energieprestatievergoeding and waarderingsLabel != "B":
-                waarderingsLabel = "B"
-                criterium_naam += f" > {waarderingsLabel} ivm EPV"
+            if energieprestatie.energieprestatievergoeding and waarderings_label != "B":
+                waarderings_label = "B"
+                criterium_naam += f" > {waarderings_label} ivm EPV"
 
-            filtered_df = df[(df["Label"] == waarderingsLabel)]
+            filtered_df = df[(df["Label"] == waarderings_label)]
 
             if dataframe_heeft_een_rij(filtered_df):
                 punten = filtered_df[eenheid.woningtype.naam].values[0]
