@@ -81,24 +81,27 @@ class Energieprestatie2024(Stelselgroepversie):
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-        if energieprestatie and energieprestatie.label and eenheid.gebruiksoppervlakte:
+        if energieprestatie and energieprestatie.label:
             if (
-                energieprestatie.registratiedatum
+                energieprestatie.gebruiksoppervlakte_thermische_zone
+                and energieprestatie.registratiedatum
                 and energieprestatie.registratiedatum
                 >= datetime.datetime(
                     2021, 1, 1, tzinfo=zoneinfo.ZoneInfo("EUROPE/AMSTERDAM")
                 )
             ):
-                critetium_naam = f"Energielabel {energieprestatie.label.naam} + oppervlakte {eenheid.gebruiksoppervlakte}m2"
+                critetium_naam = f"Energielabel {energieprestatie.label.naam} + oppervlakte {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=critetium_naam,
                     )
                 )
-                if eenheid.gebruiksoppervlakte < 25.0:
+                if energieprestatie.gebruiksoppervlakte_thermische_zone < 25.0:
                     lookup_key = "nieuw_0-25"
 
-                elif 25.0 <= eenheid.gebruiksoppervlakte < 40.0:
+                elif (
+                    25.0 <= energieprestatie.gebruiksoppervlakte_thermische_zone < 40.0
+                ):
                     lookup_key = "nieuw_25-40"
 
                 else:
