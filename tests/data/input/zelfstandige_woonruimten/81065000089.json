@@ -31,7 +31,8 @@
         "code": "B",
         "naam": "B"
       },
-      "waarde": "173.08"
+      "waarde": "173.08",
+      "gebruiksoppervlakteThermischeZone": 78.84
     }
   ],
   "gebruiksoppervlakte": 82,
