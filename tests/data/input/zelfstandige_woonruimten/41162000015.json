@@ -39,7 +39,8 @@
         "code": "C",
         "naam": "C"
       },
-      "waarde": "1.62"
+      "waarde": "1.62",
+      "energieprestatievergoeding": false
     }
   ],
   "gebruiksoppervlakte": 66,

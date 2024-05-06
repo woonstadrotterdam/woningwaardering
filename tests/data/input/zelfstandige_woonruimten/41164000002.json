@@ -39,7 +39,8 @@
         "code": "B",
         "naam": "B"
       },
-      "waarde": "1.36"
+      "waarde": "1.36",
+      "energieprestatievergoeding": false
     }
   ],
   "gebruiksoppervlakte": 151,
