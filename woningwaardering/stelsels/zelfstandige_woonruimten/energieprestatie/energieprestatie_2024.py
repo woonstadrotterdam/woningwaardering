@@ -88,7 +88,7 @@ class Energieprestatie2024(Stelselgroepversie):
                 and energieprestatie.registratiedatum
                 >= datetime.datetime(2021, 1, 1).astimezone()
             ):
-                criterium_naam = f"Energielabel {energieprestatie.label.naam} + oppervlakte {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
+                criterium_naam = f"{energieprestatie.label.naam} + {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=criterium_naam,
@@ -106,7 +106,7 @@ class Energieprestatie2024(Stelselgroepversie):
                     lookup_key = "nieuw_40+"
 
             else:
-                criterium_naam = f"Energielabel {energieprestatie.label.naam} (registratie voor 2021-01-01)"
+                criterium_naam = f"{energieprestatie.label.naam} (oud)"
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=criterium_naam,
@@ -129,14 +129,14 @@ class Energieprestatie2024(Stelselgroepversie):
             if dataframe_heeft_een_rij(filtered_df):
                 punten = filtered_df[eenheid.woningtype.naam].values[0]
                 logger.debug(
-                    f"Eenheid {eenheid.id} met {criterium_naam} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
+                    f"Eenheid {eenheid.id} met energielabel {criterium_naam} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
                 )
                 woningwaardering.punten = float(punten)
 
         elif eenheid.bouwjaar and not energieprestatie:
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"Eenheid met bouwjaar {eenheid.bouwjaar}",
+                    naam=eenheid.bouwjaar,
                 )
             )
             df = Energieprestatie2024.lookup_mappping["bouwjaar"].pipe(
