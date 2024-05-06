@@ -10,3 +10,8 @@ class EenhedenEnergieprestatie(BaseModel):
     """
     Gebruiksoppervlakte van de thermische zone, afgebakend volgens NTA 8800
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/59
+    energieprestatievergoeding: Optional[bool] = Field(default=None)
+    """
+    Geeft aan of er bij het verhuren een energieprestatievergoeding (EPV) is overeengekomen
+    """
