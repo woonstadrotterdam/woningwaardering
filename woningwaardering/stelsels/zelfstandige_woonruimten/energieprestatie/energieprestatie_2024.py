@@ -1,4 +1,5 @@
 import datetime
+from dateutil.relativedelta import relativedelta
 from decimal import Decimal
 from loguru import logger
 
@@ -203,7 +204,7 @@ class Energieprestatie2024(Stelselgroepversie):
                         energieprestatie.registratiedatum
                         > (
                             (datetime.datetime.now()).astimezone()
-                            - datetime.timedelta(weeks=520)
+                            - relativedelta(years=10)
                         )
                     )
                 ):
