@@ -311,7 +311,7 @@ veel sinds 1 januari 2015 verstrekte energie-indexen af, want de geldigheidsduur
 
 In [EP-online](https://www.ep-online.nl/) is te vinden wat de energieprestatie van een woning is.
 
-> In de tabellen ter ondersteuning van de tekst van het beleidsboek is er voor gekozen om de implementatie van regel **4.5.3 Afwijkingsbevoegdheid hogere energielabelklasse dan A++** al toe te voegen aan de tabellen.
+> In de tabellen ter ondersteuning van de tekst van het beleidsboek over de punten toekenning bij een nieuw energielabel is er voor gekozen om de implementatie van regel [4.5.3 Afwijkingsbevoegdheid hogere energielabelklasse dan A++](#453-afwijkingsbevoegdheid-hogere-energielabelklasse-dan-a) al toe te voegen aan de tabellen.
 
 ### 4.5.1 Puntentoekenning oud energielabel ~~en energie-index~~
 Bij een oud energielabel bepaalt de labelklasse (A t/m G) het aantal punten dat de verhuurder
@@ -323,8 +323,6 @@ Zie hieronder de puntentoekenning van de energieprestatie bij een oud energielab
 
 | (oude) Energielabel (afgegeven voor 1-1-2025)| Energie-index (afgegeven na 1-1-2025)| Eengezinswoning | Meergezinswoning |
 | ----- | ------------- | --------------- | ----------------- |
-| A++++ | 0-0.6         | 52             | 48               |
-| A+++  | 0-0.6         | 48             | 44               |
 | A++   | 0-0.6         | 44             | 40               |
 | A+    | 0.6-0.8       | 40             | 36               |
 | A     | 0.8-1.2       | 36             | 32               |
