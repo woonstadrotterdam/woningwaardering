@@ -65,16 +65,17 @@ class Energieprestatie2024(Stelselgroepversie):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        # TODO:
-        # eengezins of meergezinswoning?
-
         energieprestatie = (
             Energieprestatie2024._krijg_energieprestatie_met_geldig_label(eenheid)
         )
 
-        if not (energieprestatie or eenheid.bouwjaar):
+        if not (
+            eenheid.woningtype
+            and eenheid.woningtype.naam
+            and (energieprestatie or eenheid.bouwjaar)
+        ):
             logger.warning(
-                f"Eenheid {eenheid.id} heeft geen geldig energielabel en geen bouwjaar en komt daarom niet in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
+                f"Eenheid {eenheid.id} heeft geen woningtype en/of geldig energielabel en/of bouwjaar en komt daarom niet in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
             )
             return woningwaardering_groep
 
@@ -104,9 +105,7 @@ class Energieprestatie2024(Stelselgroepversie):
                     lookup_key = "nieuw_40+"
 
             else:
-                critetium_naam = (
-                    f"Energielabel {energieprestatie.label.naam} (voor 2021-01-01)"
-                )
+                critetium_naam = f"Energielabel {energieprestatie.label.naam} (registratie voor 2021-01-01)"
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=critetium_naam,
@@ -121,7 +120,7 @@ class Energieprestatie2024(Stelselgroepversie):
             filtered_df = df[(df["Label"] == energieprestatie.label.naam)]
 
             if dataframe_heeft_een_rij(filtered_df):
-                punten = filtered_df["Eengezinswoning"].values[0]
+                punten = filtered_df[eenheid.woningtype.naam].values[0]
                 logger.debug(
                     f"Eenheid {eenheid.id} met {critetium_naam} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
                 )
@@ -142,7 +141,7 @@ class Energieprestatie2024(Stelselgroepversie):
                 & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
             ]
             if dataframe_heeft_een_rij(filtered_df):
-                punten = filtered_df["Eengezinswoning"].values[0]
+                punten = filtered_df[eenheid.woningtype.naam].values[0]
 
                 logger.debug(
                     f"Eenheid {eenheid.id} met bouwjaar {eenheid.bouwjaar} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
