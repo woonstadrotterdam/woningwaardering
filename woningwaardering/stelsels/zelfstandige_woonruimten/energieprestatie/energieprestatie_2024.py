@@ -120,9 +120,9 @@ class Energieprestatie2024(Stelselgroepversie):
 
             waarderingsLabel = energieprestatie.label.naam
 
-            if energieprestatie.energieprestatievergoeding:
+            if energieprestatie.energieprestatievergoeding and waarderingsLabel != "B":
                 waarderingsLabel = "B"
-                criterium_naam += f" > label {waarderingsLabel} ivm EPV"
+                criterium_naam += f" > {waarderingsLabel} ivm EPV"
 
             filtered_df = df[(df["Label"] == waarderingsLabel)]
 
