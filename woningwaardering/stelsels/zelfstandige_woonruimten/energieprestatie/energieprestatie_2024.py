@@ -1,6 +1,5 @@
 import datetime
 from decimal import Decimal
-import zoneinfo
 from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
@@ -86,9 +85,7 @@ class Energieprestatie2024(Stelselgroepversie):
                 energieprestatie.gebruiksoppervlakte_thermische_zone
                 and energieprestatie.registratiedatum
                 and energieprestatie.registratiedatum
-                >= datetime.datetime(
-                    2021, 1, 1, tzinfo=zoneinfo.ZoneInfo("EUROPE/AMSTERDAM")
-                )
+                >= datetime.datetime(2021, 1, 1).astimezone()
             ):
                 critetium_naam = f"Energielabel {energieprestatie.label.naam} + oppervlakte {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
                 woningwaardering.criterium = (
@@ -205,9 +202,7 @@ class Energieprestatie2024(Stelselgroepversie):
                         # Check of de registratie niet ouder is dan 10 jaar
                         energieprestatie.registratiedatum
                         > (
-                            (datetime.datetime.now()).astimezone(
-                                zoneinfo.ZoneInfo("EUROPE/AMSTERDAM")
-                            )
+                            (datetime.datetime.now()).astimezone()
                             - datetime.timedelta(weeks=520)
                         )
                     )
