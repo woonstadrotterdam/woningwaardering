@@ -104,34 +104,55 @@
       "punten": 10.0,
       "woningwaarderingen": [
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Badruimte"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Keuken"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Woonkamer"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
-          }
+          },
+          "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Bouwjaar 1898"
+          },
+          "punten": 0.0
         }
       ]
     }

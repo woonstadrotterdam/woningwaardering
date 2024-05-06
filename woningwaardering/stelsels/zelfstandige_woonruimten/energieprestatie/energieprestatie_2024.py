@@ -140,7 +140,7 @@ class Energieprestatie2024(Stelselgroepversie):
         elif eenheid.bouwjaar and not energieprestatie:
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=eenheid.bouwjaar,
+                    naam=f"Bouwjaar {eenheid.bouwjaar}",
                 )
             )
             df = Energieprestatie2024.lookup_mappping["bouwjaar"].pipe(
