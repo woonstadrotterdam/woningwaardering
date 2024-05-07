@@ -94,11 +94,7 @@ class Energieprestatie2024(Stelselgroepversie):
                 >= datetime.datetime(2021, 1, 1).astimezone()
             ):
                 criterium_naam = f"{energieprestatie.label.naam} + {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
-                woningwaardering.criterium = (
-                    WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=criterium_naam,
-                    )
-                )
+
                 if energieprestatie.gebruiksoppervlakte_thermische_zone < 25.0:
                     lookup_key = "nieuw_0-25"
 
@@ -112,11 +108,6 @@ class Energieprestatie2024(Stelselgroepversie):
 
             else:
                 criterium_naam = f"{energieprestatie.label.naam} (oud)"
-                woningwaardering.criterium = (
-                    WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=criterium_naam,
-                    )
-                )
                 lookup_key = "oud"
 
             df = Energieprestatie2024.lookup_mappping[lookup_key].pipe(
@@ -124,6 +115,9 @@ class Energieprestatie2024(Stelselgroepversie):
             )
 
             waarderings_label = energieprestatie.label.naam
+
+            if energieprestatie.energieprestatievergoeding:
+                logger.debug("Energieprestatievergoeding gevonden.")
 
             if (
                 energieprestatie.energieprestatievergoeding
@@ -138,6 +132,11 @@ class Energieprestatie2024(Stelselgroepversie):
                 punten = filtered_df[eenheid.woningtype.naam].values[0]
                 logger.debug(
                     f"Eenheid {eenheid.id} met energielabel {criterium_naam} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
+                )
+                woningwaardering.criterium = (
+                    WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam=criterium_naam,
+                    )
                 )
                 woningwaardering.punten = float(punten)
 
@@ -234,7 +233,7 @@ if __name__ == "__main__":
 
     energieprestatie = Energieprestatie2024()
     with open(
-        "tests/stelsels/zelfstandige_woonruimten/energieprestatie/data/input/eenheid_epv_mgw.json",
+        "tests/stelsels/zelfstandige_woonruimten/energieprestatie/data/input/eenheid_epv_egw.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
