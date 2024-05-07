@@ -144,7 +144,9 @@ def naar_tabel(
                         woningwaardering.criterium.meeteenheid.naam
                         if woningwaardering.criterium.meeteenheid is not None
                         else "",
-                        woningwaardering.punten or "",
+                        woningwaardering.punten
+                        if woningwaardering.punten is not None
+                        else "",
                     ],
                     divider=index + 1 == aantal_waarderingen,
                 )
