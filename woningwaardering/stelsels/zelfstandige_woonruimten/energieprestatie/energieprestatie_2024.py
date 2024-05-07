@@ -246,5 +246,3 @@ if __name__ == "__main__":
     tabel = naar_tabel(woningwaardering_resultaat)
 
     print(tabel)
-
-    energieprestatie2 = Energieprestatie2024()
