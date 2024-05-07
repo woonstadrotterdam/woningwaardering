@@ -92,7 +92,7 @@ with open(generated_file_path, "r") as generated_file:
 
         for module in import_visitor.module_imports:
             if module in generated_visitor.classes.keys():
-                logger.warning(
+                logger.debug(
                     f"`import {module}` wordt niet toegevoegd. Een class met deze naam bestaat al."
                 )
             else:
@@ -104,7 +104,7 @@ with open(generated_file_path, "r") as generated_file:
         for module, objects in import_visitor.object_mapping.items():
             for obj in objects:
                 if obj in generated_visitor.classes.keys():
-                    logger.warning(
+                    logger.debug(
                         f"`from {module} import {obj}` wordt niet toegevoegd. Een class met deze naam bestaat al."
                     )
                 else:
@@ -117,7 +117,7 @@ with open(generated_file_path, "r") as generated_file:
         for module, import_aliases in import_visitor.alias_mapping.items():
             for obj, asname in import_aliases:
                 if asname in generated_visitor.classes.keys():
-                    logger.info(
+                    logger.debug(
                         f"`from {module} import {obj} as {asname}` wordt niet toegevoegd. Een class met deze naam bestaat al."
                     )
                 else:
