@@ -31,7 +31,7 @@ LOOKUP_TABEL_FOLDER = "woningwaardering/stelsels/zelfstandige_woonruimten/energi
 
 
 class Energieprestatie2024(Stelselgroepversie):
-    lookup_mappping = {
+    lookup_mapping = {
         "nieuw_0-25": lees_csv_als_dataframe(
             f"{LOOKUP_TABEL_FOLDER}/nieuw_0-25m2_energielabel_punten.csv"
         ),
@@ -118,7 +118,7 @@ class Energieprestatie2024(Stelselgroepversie):
                 )
                 lookup_key = "oud"
 
-            df = Energieprestatie2024.lookup_mappping[lookup_key].pipe(
+            df = Energieprestatie2024.lookup_mapping[lookup_key].pipe(
                 filter_dataframe_op_peildatum, peildatum=datetime.date(2024, 1, 1)
             )
 
@@ -143,7 +143,7 @@ class Energieprestatie2024(Stelselgroepversie):
                     naam=f"Bouwjaar {eenheid.bouwjaar}",
                 )
             )
-            df = Energieprestatie2024.lookup_mappping["bouwjaar"].pipe(
+            df = Energieprestatie2024.lookup_mapping["bouwjaar"].pipe(
                 filter_dataframe_op_peildatum, datetime.date(2024, 1, 1)
             )
 
