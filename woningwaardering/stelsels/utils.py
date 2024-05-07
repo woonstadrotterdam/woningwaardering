@@ -150,35 +150,37 @@ def naar_tabel(
                     ],
                     divider=index + 1 == aantal_waarderingen,
                 )
+
+        aantallen = [
+            Decimal(woningwaardering.aantal)
+            for woningwaardering in woningwaarderingen
+            if woningwaardering.aantal is not None
+        ]
+
+        subtotaal = float(sum(aantallen)) if aantallen else None
+
         if (
-            aantal_waarderingen > 1
+            (subtotaal is not None or aantal_waarderingen > 1)
             and woningwaardering_groep.criterium_groep
             and woningwaardering_groep.criterium_groep.stelselgroep
         ):
+            meeteenheid = ", ".join(
+                list(
+                    {
+                        woningwaardering.criterium.meeteenheid.naam or ""
+                        for woningwaardering in woningwaarderingen
+                        if woningwaardering.criterium is not None
+                        and woningwaardering.criterium.meeteenheid is not None
+                    }
+                )
+            )
+
             table.add_row(
                 [
                     woningwaardering_groep.criterium_groep.stelselgroep.naam,
                     "Subtotaal",
-                    float(
-                        sum(
-                            [
-                                Decimal(woningwaardering.aantal)
-                                for woningwaardering in woningwaarderingen
-                                if woningwaardering.aantal is not None
-                            ]
-                        )
-                    )
-                    or "",
-                    ", ".join(
-                        list(
-                            {
-                                woningwaardering.criterium.meeteenheid.naam or ""
-                                for woningwaardering in woningwaarderingen
-                                if woningwaardering.criterium is not None
-                                and woningwaardering.criterium.meeteenheid is not None
-                            }
-                        )
-                    ),
+                    subtotaal or "",
+                    meeteenheid,
                     woningwaardering_groep.punten,
                 ],
                 divider=True,
