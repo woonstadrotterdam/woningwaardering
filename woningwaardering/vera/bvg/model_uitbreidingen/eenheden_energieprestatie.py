@@ -2,7 +2,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 
-class EenhedenEnergieprestatie(BaseModel):
+class _EenhedenEnergieprestatie(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/58
     gebruiksoppervlakte_thermische_zone: Optional[float] = Field(
         default=None, alias="gebruiksoppervlakteThermischeZone"
