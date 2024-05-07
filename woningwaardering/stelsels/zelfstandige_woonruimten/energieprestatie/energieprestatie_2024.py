@@ -88,23 +88,29 @@ class Energieprestatie2024(Stelselgroepversie):
                     "Voor de berekening van de energieprestatie dient aangegeven te worden of er sprake is van een energieprestatievergoeding"
                 )
             if (
-                energieprestatie.gebruiksoppervlakte_thermische_zone
-                and energieprestatie.registratiedatum
+                energieprestatie.registratiedatum
                 and energieprestatie.registratiedatum
                 >= datetime.datetime(2021, 1, 1).astimezone()
             ):
-                criterium_naam = f"{energieprestatie.label.naam} + {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
-
-                if energieprestatie.gebruiksoppervlakte_thermische_zone < 25.0:
-                    lookup_key = "nieuw_0-25"
-
-                elif (
-                    25.0 <= energieprestatie.gebruiksoppervlakte_thermische_zone < 40.0
-                ):
-                    lookup_key = "nieuw_25-40"
-
+                if energieprestatie.gebruiksoppervlakte_thermische_zone is None:
+                    raise TypeError(
+                        "Voor de berekening van de energieprestatie met een nieuw energielabel dient de gebruiksoppervlakte van de thermischezone bekend te zijn."
+                    )
                 else:
-                    lookup_key = "nieuw_40+"
+                    criterium_naam = f"{energieprestatie.label.naam} + {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
+
+                    if energieprestatie.gebruiksoppervlakte_thermische_zone < 25.0:
+                        lookup_key = "nieuw_0-25"
+
+                    elif (
+                        25.0
+                        <= energieprestatie.gebruiksoppervlakte_thermische_zone
+                        < 40.0
+                    ):
+                        lookup_key = "nieuw_25-40"
+
+                    else:
+                        lookup_key = "nieuw_40+"
 
             else:
                 criterium_naam = f"{energieprestatie.label.naam} (oud)"
@@ -233,7 +239,7 @@ if __name__ == "__main__":
 
     energieprestatie = Energieprestatie2024()
     with open(
-        "tests/stelsels/zelfstandige_woonruimten/energieprestatie/data/input/eenheid_epv_egw.json",
+        "tests/stelsels/zelfstandige_woonruimten/energieprestatie/data/input/eenheid_A++++_egw.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
