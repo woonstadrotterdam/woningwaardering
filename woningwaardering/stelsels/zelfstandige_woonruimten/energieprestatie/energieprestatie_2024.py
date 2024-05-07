@@ -23,6 +23,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+from woningwaardering.vera.referentiedata.energielabel import Energielabel
 from woningwaardering.vera.referentiedata.energieprestatiestatus import (
     Energieprestatiestatus,
 )
@@ -124,8 +125,11 @@ class Energieprestatie2024(Stelselgroepversie):
 
             waarderings_label = energieprestatie.label.naam
 
-            if energieprestatie.energieprestatievergoeding and waarderings_label != "B":
-                waarderings_label = "B"
+            if (
+                energieprestatie.energieprestatievergoeding
+                and waarderings_label != Energielabel.b.naam
+            ):
+                waarderings_label = Energielabel.b.naam
                 criterium_naam += f" > {waarderings_label} ivm EPV"
 
             filtered_df = df[(df["Label"] == waarderings_label)]
@@ -230,7 +234,7 @@ if __name__ == "__main__":
 
     energieprestatie = Energieprestatie2024()
     with open(
-        "tests/data/input/zelfstandige_woonruimten/12006000004.json",
+        "tests/stelsels/zelfstandige_woonruimten/energieprestatie/data/input/eenheid_epv_mgw.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
