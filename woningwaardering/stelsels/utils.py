@@ -266,8 +266,7 @@ def filter_dataframe_op_peildatum(df: pd.DataFrame, peildatum: date) -> pd.DataF
     return df[mask]
 
 
-def dataframe_heeft_een_rij(df: pd.DataFrame) -> None | bool:
-    # TODO: nagaan of we error willen raisen of loggen.
+def dataframe_heeft_een_rij(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
         logger.error("Geen resultaat gevonden in de bouwjaar_punten lookup tabel.")
         raise ValueError
@@ -275,4 +274,4 @@ def dataframe_heeft_een_rij(df: pd.DataFrame) -> None | bool:
         logger.error("Meerdere resultaten gevonden in de bouwjaar_punten lookup tabel.")
         raise ValueError
 
-    return True
+    return df
