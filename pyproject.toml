@@ -34,7 +34,7 @@ Homepage = "https://github.com/WoonstadRotterdamTemp/woningwaardering"
 Issues = "https://github.com/WoonstadRotterdamTemp/woningwaardering/issues"
 
 [tool.setuptools.packages.find]
-include = ["woningwaardering"]
+include = ["woningwaardering*"]
 
 [project.optional-dependencies]
 test = [
