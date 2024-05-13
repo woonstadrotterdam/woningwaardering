@@ -5,7 +5,7 @@ from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import (
-    dataframe_heeft_een_rij,
+    check_dataframe_een_rij,
     filter_dataframe_op_peildatum,
     lees_csv_als_dataframe,
     naar_tabel,
@@ -156,7 +156,7 @@ class Energieprestatie2024(Stelselgroepversie):
             criterium_naam += f" > {waarderings_label} ivm EPV"
 
         filtered_df = df[(df["Label"] == waarderings_label)].pipe(
-            dataframe_heeft_een_rij
+            check_dataframe_een_rij
         )
 
         woningwaardering.criterium = (
@@ -181,7 +181,7 @@ class Energieprestatie2024(Stelselgroepversie):
         filtered_df = df[
             ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
             & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
-        ].pipe(dataframe_heeft_een_rij)
+        ].pipe(check_dataframe_een_rij)
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)

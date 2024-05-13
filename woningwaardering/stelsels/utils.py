@@ -266,12 +266,12 @@ def filter_dataframe_op_peildatum(df: pd.DataFrame, peildatum: date) -> pd.DataF
     return df[mask]
 
 
-def dataframe_heeft_een_rij(df: pd.DataFrame) -> pd.DataFrame:
+def check_dataframe_een_rij(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
-        logger.error("Geen resultaat gevonden in de bouwjaar_punten lookup tabel.")
+        logger.error("Dataframe is leeg")
         raise ValueError
     if len(df) > 1:
-        logger.error("Meerdere resultaten gevonden in de bouwjaar_punten lookup tabel.")
+        logger.error("Dataframe heeft meer dan één rij")
         raise ValueError
 
     return df
