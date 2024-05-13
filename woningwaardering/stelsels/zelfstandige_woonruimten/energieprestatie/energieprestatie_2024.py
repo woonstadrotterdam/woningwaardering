@@ -33,14 +33,14 @@ LOOKUP_TABEL_FOLDER = "woningwaardering/stelsels/zelfstandige_woonruimten/energi
 
 class Energieprestatie2024(Stelselgroepversie):
     lookup_mapping = {
-        "nieuw_0-25": lees_csv_als_dataframe(
-            f"{LOOKUP_TABEL_FOLDER}/nieuw_0-25m2_energielabel_punten.csv"
+        "oppervlakte_0-25": lees_csv_als_dataframe(
+            f"{LOOKUP_TABEL_FOLDER}/oppervlakte_0-25m2_energielabel_punten.csv"
         ),
-        "nieuw_25-40": lees_csv_als_dataframe(
-            f"{LOOKUP_TABEL_FOLDER}/nieuw_25-40m2_energielabel_punten.csv"
+        "oppervlakte_25-40": lees_csv_als_dataframe(
+            f"{LOOKUP_TABEL_FOLDER}/oppervlakte_25-40m2_energielabel_punten.csv"
         ),
-        "nieuw_40+": lees_csv_als_dataframe(
-            f"{LOOKUP_TABEL_FOLDER}/nieuw_40m2+_energielabel_punten.csv"
+        "oppervlakte_40+": lees_csv_als_dataframe(
+            f"{LOOKUP_TABEL_FOLDER}/oppervlakte_40m2+_energielabel_punten.csv"
         ),
         "oud": lees_csv_als_dataframe(
             f"{LOOKUP_TABEL_FOLDER}/oud_energielabel_punten.csv"
@@ -125,15 +125,15 @@ class Energieprestatie2024(Stelselgroepversie):
                 criterium_naam = f"{label} + {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
 
                 if energieprestatie.gebruiksoppervlakte_thermische_zone < 25.0:
-                    lookup_key = "nieuw_0-25"
+                    lookup_key = "oppervlakte_0-25"
 
                 elif (
                     25.0 <= energieprestatie.gebruiksoppervlakte_thermische_zone < 40.0
                 ):
-                    lookup_key = "nieuw_25-40"
+                    lookup_key = "oppervlakte_25-40"
 
                 else:
-                    lookup_key = "nieuw_40+"
+                    lookup_key = "oppervlakte_40+"
 
         else:
             criterium_naam = f"{label} (oud)"
@@ -162,7 +162,7 @@ class Energieprestatie2024(Stelselgroepversie):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
         )
-        woningwaardering.punten = filtered_df[woningtype].values[0]
+        woningwaardering.punten = float(filtered_df[woningtype].values[0])
 
         return woningwaardering
 
@@ -186,7 +186,7 @@ class Energieprestatie2024(Stelselgroepversie):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
         )
-        woningwaardering.punten = filtered_df[woningtype].values[0]
+        woningwaardering.punten = float(filtered_df[woningtype].values[0])
 
         return woningwaardering
 
