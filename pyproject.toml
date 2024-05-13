@@ -25,6 +25,7 @@ dependencies = [
     "types-pyyaml==6.*",
     "PyYAML==6.*",
     "prettytable==3.*"
+    "pandas==2.*",
 ]
 
 [tool.setuptools.packages.find]
