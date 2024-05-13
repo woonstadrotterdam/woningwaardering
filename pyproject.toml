@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "woningwaardering"
-version = "0.1.0"
+version = "0.1.0-a.1"
 description = "Berekent de punten van een woning op basis van het woningwaarderingsstelsel."
 authors = [
     { name = "Ben Verhees", email = "ben.verhees@woonstadrotterdam.nl" },
@@ -16,6 +16,8 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
 ]
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.10"
@@ -26,6 +28,10 @@ dependencies = [
     "PyYAML==6.*",
     "prettytable==3.*"
 ]
+
+[project.urls]
+Homepage = "https://github.com/WoonstadRotterdamTemp/woningwaardering"
+Issues = "https://github.com/WoonstadRotterdamTemp/woningwaardering/issues"
 
 [tool.setuptools.packages.find]
 include = ["woningwaardering"]
