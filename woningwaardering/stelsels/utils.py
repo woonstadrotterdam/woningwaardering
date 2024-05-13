@@ -231,14 +231,14 @@ def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFr
 
     Args:
         df (pd.DataFrame): Het DataFrame dat gefilterd moet worden.
-        datum_filter (date): De peildatum waarop gefilterd moet worden.
+        datum_filter (date): De datum waarop gefilterd moet worden.
 
     Returns:
         pd.DataFrame: Het gefilterde DataFrame.
 
     Raises:
         ValueError: Als de DataFrame geen 'Begindatum' en 'Einddatum' kolommen bevat.
-        ValueError: Als de filtering op peildatum geen records oplevert.
+        ValueError: Als de filtering op datum geen records oplevert.
     """
     datum_filter_datetime = datetime.combine(datum_filter, datetime.min.time())
 
