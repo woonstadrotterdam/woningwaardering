@@ -266,6 +266,19 @@ def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFr
 
 
 def check_dataframe_een_rij(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Check of het DataFrame leeg is end at het precies een rij bevat.
+
+    Args:
+        df (pd.DataFrame): Het DataFrame dat gecheckt moet worden.
+
+    Returns:
+        pd.DataFrame: Het DataFrame als het aan de voorwaarden voldoet.
+
+    Raises:
+        ValueError: Als het DataFrame leeg is.
+        ValueError: Als het DataFrame meer dan één rij bevat.
+    """
     if df.empty:
         logger.error("Dataframe is leeg")
         raise ValueError
