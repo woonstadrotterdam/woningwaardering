@@ -106,7 +106,8 @@ class Energieprestatie2024(Stelselgroepversie):
         energieprestatie: EenhedenEnergieprestatie,
         label: str,
         woningtype: str,
-    ) -> tuple[str, int]:
+        woningwaardering: WoningwaarderingResultatenWoningwaardering,
+    ) -> WoningwaarderingResultatenWoningwaardering:
         if energieprestatie.energieprestatievergoeding is None:
             raise TypeError(
                 "voor de berekening van de energieprestatie dient aangegeven te worden of er sprake is van een energieprestatievergoeding"
@@ -158,14 +159,19 @@ class Energieprestatie2024(Stelselgroepversie):
             dataframe_heeft_een_rij
         )
 
-        punten: int = filtered_df[woningtype].values[0]
+        woningwaardering.criterium = (
+            WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
+        )
+        woningwaardering.punten = filtered_df[woningtype].values[0]
 
-        return criterium_naam, punten
+        return woningwaardering
 
     @staticmethod
     def _bereken_punten_met_bouwjaar(
-        eenheid: EenhedenEenheid, woningtype: str
-    ) -> tuple[str, int]:
+        eenheid: EenhedenEenheid,
+        woningtype: str,
+        woningwaardering: WoningwaarderingResultatenWoningwaardering,
+    ) -> WoningwaarderingResultatenWoningwaardering:
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
         df = Energieprestatie2024.lookup_mapping["bouwjaar"].pipe(
@@ -177,9 +183,12 @@ class Energieprestatie2024(Stelselgroepversie):
             & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
         ].pipe(dataframe_heeft_een_rij)
 
-        punten: int = filtered_df[woningtype].values[0]
+        woningwaardering.criterium = (
+            WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
+        )
+        woningwaardering.punten = filtered_df[woningtype].values[0]
 
-        return criterium_naam, punten
+        return woningwaardering
 
     @staticmethod
     def bereken(
@@ -211,29 +220,25 @@ class Energieprestatie2024(Stelselgroepversie):
             )
             return woningwaardering_groep
 
+        woningwaardering = WoningwaarderingResultatenWoningwaardering()
+
         if energieprestatie and energieprestatie.label and energieprestatie.label.naam:
-            criterium_naam, punten = Energieprestatie2024._bereken_punten_met_label(
-                energieprestatie, energieprestatie.label.naam, eenheid.woningtype.naam
+            woningwaardering = Energieprestatie2024._bereken_punten_met_label(
+                energieprestatie,
+                energieprestatie.label.naam,
+                eenheid.woningtype.naam,
+                woningwaardering,
             )
 
         elif eenheid.bouwjaar and not energieprestatie:
-            criterium_naam, punten = Energieprestatie2024._bereken_punten_met_bouwjaar(
-                eenheid,
-                eenheid.woningtype.naam,
+            woningwaardering = Energieprestatie2024._bereken_punten_met_bouwjaar(
+                eenheid, eenheid.woningtype.naam, woningwaardering
             )
 
-        logger.debug(
-            f"Eenheid {eenheid.id} met {criterium_naam} krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
-        )
-
-        woningwaardering = WoningwaarderingResultatenWoningwaardering()
-
-        woningwaardering.criterium = (
-            WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=criterium_naam,
+        if woningwaardering.criterium:
+            logger.debug(
+                f"Eenheid {eenheid.id} met {woningwaardering.criterium.naam} krijgt {woningwaardering.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
             )
-        )
-        woningwaardering.punten = float(punten)
 
         woningwaardering_groep.woningwaarderingen.append(woningwaardering)
         punten_totaal = Decimal(
