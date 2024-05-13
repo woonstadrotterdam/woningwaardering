@@ -224,14 +224,14 @@ def lees_csv_als_dataframe(file_path: str) -> pd.DataFrame:
         raise ValueError(f"Bestandstype '{file_path.split('.')[-1]}' niet ondersteund.")
 
 
-def filter_dataframe_op_peildatum(df: pd.DataFrame, peildatum: date) -> pd.DataFrame:
+def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFrame:
     """
-    Filtert een DataFrame op basis van een peildatum.
+    Filtert een DataFrame op basis van een datum.
     Het dataframe moet de kolommen 'Begindatum' en 'Einddatum' bevatten.
 
     Args:
         df (pd.DataFrame): Het DataFrame dat gefilterd moet worden.
-        peildatum (date): De peildatum waarop gefilterd moet worden.
+        datum_filter (date): De peildatum waarop gefilterd moet worden.
 
     Returns:
         pd.DataFrame: Het gefilterde DataFrame.
@@ -240,10 +240,9 @@ def filter_dataframe_op_peildatum(df: pd.DataFrame, peildatum: date) -> pd.DataF
         ValueError: Als de DataFrame geen 'Begindatum' en 'Einddatum' kolommen bevat.
         ValueError: Als de filtering op peildatum geen records oplevert.
     """
-    peildatum_datetime = datetime.combine(peildatum, datetime.min.time())
+    datum_filter_datetime = datetime.combine(datum_filter, datetime.min.time())
 
     if "Begindatum" not in df.columns or "Einddatum" not in df.columns:
-        # TODO: loggen of error raisen? of allebei?
         error_message = (
             "The DataFrame must contain 'Begindatum' and 'Einddatum' columns."
         )
@@ -253,8 +252,8 @@ def filter_dataframe_op_peildatum(df: pd.DataFrame, peildatum: date) -> pd.DataF
     df["Begindatum"] = pd.to_datetime(df["Begindatum"])
     df["Einddatum"] = pd.to_datetime(df["Einddatum"])
 
-    mask = (df["Begindatum"] <= peildatum_datetime) & (
-        (df["Einddatum"] >= peildatum_datetime) | df["Einddatum"].isnull()
+    mask = (df["Begindatum"] <= datum_filter_datetime) & (
+        (df["Einddatum"] >= datum_filter_datetime) | df["Einddatum"].isnull()
     )
     resultaat_df = df[mask]
 

@@ -6,7 +6,7 @@ from loguru import logger
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import (
     check_dataframe_een_rij,
-    filter_dataframe_op_peildatum,
+    filter_dataframe_op_datum,
     lees_csv_als_dataframe,
     naar_tabel,
 )
@@ -140,7 +140,7 @@ class Energieprestatie2024(Stelselgroepversie):
             lookup_key = "oud"
 
         df = Energieprestatie2024.lookup_mapping[lookup_key].pipe(
-            filter_dataframe_op_peildatum, peildatum=datetime.date(2024, 1, 1)
+            filter_dataframe_op_datum, datum_filter=datetime.date(2024, 1, 1)
         )
 
         waarderings_label: str | None = label
@@ -175,7 +175,7 @@ class Energieprestatie2024(Stelselgroepversie):
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
         df = Energieprestatie2024.lookup_mapping["bouwjaar"].pipe(
-            filter_dataframe_op_peildatum, datetime.date(2024, 1, 1)
+            filter_dataframe_op_datum, datum_filter=datetime.date(2024, 1, 1)
         )
 
         filtered_df = df[
