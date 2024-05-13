@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "woningwaardering"
-version = "0.1.0-a.1"
+version = "0.1.0-a.2"
 description = "Berekent de punten van een woning op basis van het woningwaarderingsstelsel."
 authors = [
     { name = "Ben Verhees", email = "ben.verhees@woonstadrotterdam.nl" },
