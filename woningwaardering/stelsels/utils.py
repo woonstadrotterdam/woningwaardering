@@ -258,9 +258,7 @@ def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFr
     resultaat_df = df[mask]
 
     if resultaat_df.empty:
-        error_message = "Peildatum levert geen records op."
-        logger.error(error_message)
-        raise ValueError(error_message)
+        raise ValueError("Datum filter levert geen records op")
 
     return df[mask]
 
@@ -280,10 +278,8 @@ def check_dataframe_een_rij(df: pd.DataFrame) -> pd.DataFrame:
         ValueError: Als het DataFrame meer dan één rij bevat.
     """
     if df.empty:
-        logger.error("Dataframe is leeg")
-        raise ValueError
+        raise ValueError("Dataframe is leeg")
     if len(df) > 1:
-        logger.error("Dataframe heeft meer dan één rij")
-        raise ValueError
+        raise ValueError("Dataframe heeft meer dan één rij")
 
     return df
