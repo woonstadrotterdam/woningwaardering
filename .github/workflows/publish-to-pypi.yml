@@ -2,7 +2,7 @@ name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
 
 on:
   push:
-    branches: [main]
+    branches: [main, chore/publish-package]
 
 jobs:
   build:
