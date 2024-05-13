@@ -51,7 +51,7 @@ class Energieprestatie2024(Stelselgroepversie):
     }
 
     @staticmethod
-    def _krijg_energieprestatie_met_geldig_label(
+    def _energieprestatie_met_geldig_label(
         eenheid: EenhedenEenheid,
     ) -> EenhedenEnergieprestatie | None:
         """
@@ -206,8 +206,8 @@ class Energieprestatie2024(Stelselgroepversie):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        energieprestatie = (
-            Energieprestatie2024._krijg_energieprestatie_met_geldig_label(eenheid)
+        energieprestatie = Energieprestatie2024._energieprestatie_met_geldig_label(
+            eenheid
         )
 
         if not (
