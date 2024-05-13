@@ -1,12 +1,13 @@
 [build-system]
-requires = ["setuptools>=61.0.0", "wheel"]
+requires = ["setuptools>=61.0.0", "wheel", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "woningwaardering"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Berekent de punten van een woning op basis van het woningwaarderingsstelsel."
 authors = [
+    { name = "Woonstad Rotterdam", email = "info@woonstadrotterdam.nl"},
     { name = "Ben Verhees", email = "ben.verhees@woonstadrotterdam.nl" },
     { name = "Tiddo Loos", email = "tiddo.loos@woonstadrotterdam.nl" },
     { name = "Tomer Gabay", email = "tomer.gabay@woonstadrotterdam.nl" }
@@ -16,6 +17,8 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
 ]
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.10"
@@ -28,8 +31,15 @@ dependencies = [
     "pandas==2.*"
 ]
 
+[project.urls]
+Homepage = "https://github.com/WoonstadRotterdamTemp/woningwaardering"
+Issues = "https://github.com/WoonstadRotterdamTemp/woningwaardering/issues"
+
 [tool.setuptools.packages.find]
-include = ["woningwaardering"]
+include = ["woningwaardering*"]
+
+[tool.setuptools_scm]
+version_file = "woningwaardering/_version.py"
 
 [project.optional-dependencies]
 test = [
