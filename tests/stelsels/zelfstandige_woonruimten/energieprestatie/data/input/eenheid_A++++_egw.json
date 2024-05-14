@@ -21,8 +21,7 @@
   "energieprestaties": [
     {
       "soort": {
-        "code": "EI",
-        "naam": "Energie-index"
+        "code": "EP2"
       },
       "status": {
         "code": "DEF",

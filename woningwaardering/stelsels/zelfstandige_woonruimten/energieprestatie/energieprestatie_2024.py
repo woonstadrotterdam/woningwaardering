@@ -5,7 +5,7 @@ from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import (
-    check_dataframe_een_rij,
+    dataframe_met_een_rij,
     filter_dataframe_op_datum,
     lees_csv_als_dataframe,
     naar_tabel,
@@ -24,6 +24,9 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.referentiedata.energielabel import Energielabel
+from woningwaardering.vera.referentiedata.energieprestatiesoort import (
+    Energieprestatiesoort,
+)
 from woningwaardering.vera.referentiedata.energieprestatiestatus import (
     Energieprestatiestatus,
 )
@@ -67,20 +70,26 @@ class Energieprestatie2024(Stelselgroepversie):
             for energieprestatie in eenheid.energieprestaties:
                 if (
                     energieprestatie.registratiedatum is not None
+                    and energieprestatie.soort is not None
+                    and energieprestatie.soort.code is not None
+                    and (
+                        energieprestatie.soort.code
+                        == Energieprestatiesoort.energie_index.code
+                        or energieprestatie.soort.code
+                        == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
+                        or energieprestatie.soort.code
+                        == Energieprestatiesoort.voorlopig_energielabel.code  # Een voorloopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
+                    )
                     and (
                         (
                             energieprestatie.begindatum is not None
                             and energieprestatie.einddatum is not None
                             and energieprestatie.label is not None
-                            and energieprestatie.registratiedatum is not None
                         )
                         and (
                             energieprestatie.begindatum
                             < datetime.date.today()
                             < energieprestatie.einddatum
-                        )
-                        or (
-                            energieprestatie.label is not None
                             and energieprestatie.status is not None
                             and energieprestatie.status.code
                             == Energieprestatiestatus.definitief.code
@@ -104,6 +113,7 @@ class Energieprestatie2024(Stelselgroepversie):
     @staticmethod
     def _bereken_punten_met_label(
         energieprestatie: EenhedenEnergieprestatie,
+        energieprestatie_soort: str,
         label: str,
         woningtype: str,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
@@ -113,9 +123,8 @@ class Energieprestatie2024(Stelselgroepversie):
                 "voor de berekening van de energieprestatie dient aangegeven te worden of er sprake is van een energieprestatievergoeding"
             )
         if (
-            energieprestatie.registratiedatum
-            and energieprestatie.registratiedatum
-            >= datetime.datetime(2021, 1, 1).astimezone()
+            energieprestatie_soort
+            == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
         ):
             if energieprestatie.gebruiksoppervlakte_thermische_zone is None:
                 raise TypeError(
@@ -155,9 +164,7 @@ class Energieprestatie2024(Stelselgroepversie):
             waarderings_label = Energielabel.b.naam
             criterium_naam += f" > {waarderings_label} ivm EPV"
 
-        filtered_df = df[(df["Label"] == waarderings_label)].pipe(
-            check_dataframe_een_rij
-        )
+        filtered_df = df[(df["Label"] == waarderings_label)].pipe(dataframe_met_een_rij)
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
@@ -177,11 +184,10 @@ class Energieprestatie2024(Stelselgroepversie):
         df = Energieprestatie2024.lookup_mapping["bouwjaar"].pipe(
             filter_dataframe_op_datum, datum_filter=datetime.date(2024, 1, 1)
         )
-
         filtered_df = df[
             ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
             & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
-        ].pipe(check_dataframe_een_rij)
+        ].pipe(dataframe_met_een_rij)
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
@@ -222,9 +228,16 @@ class Energieprestatie2024(Stelselgroepversie):
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-        if energieprestatie and energieprestatie.label and energieprestatie.label.naam:
+        if (
+            energieprestatie
+            and energieprestatie.label
+            and energieprestatie.label.naam
+            and energieprestatie.soort
+            and energieprestatie.soort.code
+        ):
             woningwaardering = Energieprestatie2024._bereken_punten_met_label(
                 energieprestatie,
+                energieprestatie.soort.code,
                 energieprestatie.label.naam,
                 eenheid.woningtype.naam,
                 woningwaardering,

@@ -263,7 +263,7 @@ def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFr
     return df[mask]
 
 
-def check_dataframe_een_rij(df: pd.DataFrame) -> pd.DataFrame:
+def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
     """
     Check of het DataFrame leeg is end at het precies een rij bevat.
 
