@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61.0.0", "wheel"]
+requires = ["setuptools>=61.0.0", "wheel", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "woningwaardering"
-version = "0.1.0-a.4"
+dynamic = ["version"]
 description = "Berekent de punten van een woning op basis van het woningwaarderingsstelsel."
 authors = [
     { name = "Ben Verhees", email = "ben.verhees@woonstadrotterdam.nl" },
@@ -35,6 +35,9 @@ Issues = "https://github.com/WoonstadRotterdamTemp/woningwaardering/issues"
 
 [tool.setuptools.packages.find]
 include = ["woningwaardering*"]
+
+[tool.setuptools_scm]
+version_file = "woningwaardering/_version.py"
 
 [project.optional-dependencies]
 test = [

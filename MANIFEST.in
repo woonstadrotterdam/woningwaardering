@@ -1,2 +1,0 @@
-recursive-include woningwaardering/stelsels/config *.yml
-recursive-include woningwaardering/stelsels *.csv
