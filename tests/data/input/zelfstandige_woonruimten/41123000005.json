@@ -331,10 +331,7 @@
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "extraAttributen": {
-            "lengteAanrecht": 1875,
-            "ifcSoort": "IfcFurniture"
-          }
+          "lengte": 1875
         }
       ],
       "bouwlaag": {
