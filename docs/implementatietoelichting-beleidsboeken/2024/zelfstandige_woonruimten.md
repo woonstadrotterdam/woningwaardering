@@ -403,7 +403,7 @@ De hierboven vermelde tabellen met de puntentoekenning voor de labelklasse gaan 
 is mogelijk dat, bij een nieuw energielabel, een betere energielabelklasse dan A++ wordt afgegeven. Een energielabel voor de woonruimte kan tot maximaal A++++ gaan. De Huurcommissie
 heeft de bevoegdheid gekregen om af te wijken van de hierboven aangegeven puntenwaardering
 indien de energieprestatie hoort bij een betere energielabelklasse dan A++. Een dergelijke
-afwijking is uitsluitend mogelijk indien de gemaakte kosten om deze energieprestatie te bereijken,
+afwijking is uitsluitend mogelijk indien de gemaakte kosten om deze energieprestatie te bereiken,
 aanmerkelijk afwijken van hetgeen als gangbaar wordt beschouwd, of indien de energieprestatie
 aanmerkelijk beter is dan hetgeen als gangbaar bij een energielabelklasse A++ wordt beschouwd.
 De Huurcommissie vult deze bevoegdheid als volgt in. Indien sprake is van een A+++ label dan
