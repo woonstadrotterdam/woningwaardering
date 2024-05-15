@@ -68,6 +68,8 @@ class Energieprestatie2024(Stelselgroepversie):
                     energieprestatie.registratiedatum
                     and energieprestatie.soort
                     and energieprestatie.soort.code
+                    and energieprestatie.status
+                    and energieprestatie.status.code
                     and energieprestatie.begindatum
                     and energieprestatie.einddatum
                     and energieprestatie.label
@@ -83,7 +85,6 @@ class Energieprestatie2024(Stelselgroepversie):
                         energieprestatie.begindatum
                         < datetime.date.today()
                         < energieprestatie.einddatum
-                        and energieprestatie.status
                         and energieprestatie.status.code
                         == Energieprestatiestatus.definitief.code
                     )
