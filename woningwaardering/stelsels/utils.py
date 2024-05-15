@@ -268,7 +268,7 @@ def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFr
 
 def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Check of het DataFrame leeg is end at het precies een rij bevat.
+    Check of de dataframe exact één rij bevat.
 
     Args:
         df (pd.DataFrame): Het DataFrame dat gecheckt moet worden.
