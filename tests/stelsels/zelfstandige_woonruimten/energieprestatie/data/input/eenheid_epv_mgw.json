@@ -1,0 +1,29 @@
+{
+  "id": "23003000050",
+  "bouwjaar": 1921,
+  "woningtype": {
+    "code": "MGW",
+    "naam": "Meergezinswoning"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2017-02-23",
+      "einddatum": "2027-02-23",
+      "registratiedatum": "2017-02-23T09:55:37+01:00",
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "1.48",
+      "energieprestatievergoeding": true
+    }
+  ]
+}

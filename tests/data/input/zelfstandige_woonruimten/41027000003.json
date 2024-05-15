@@ -1,9 +1,49 @@
 {
   "id": "41027000003",
+  "bouwjaar": 1948,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Frits Ruysstraat",
+    "huisnummer": "16",
+    "huisnummer_toevoeging": "d",
+    "postcode": "3061ME",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000302054",
+    "bagIdentificatie": "0599010000302054"
+  },
+  "woningtype": {
+    "code": "MGW",
+    "naam": "Meergezinswoning"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2019-09-19",
+      "einddatum": "2029-09-19",
+      "registratiedatum": "2020-01-31T12:13:24+01:00",
+      "label": {
+        "code": "E",
+        "naam": "E"
+      },
+      "waarde": "2.26",
+      "energieprestatievergoeding": false
+    }
+  ],
+  "gebruiksoppervlakte": 53,
   "ruimten": [
     {
       "id": "Space_82953220",

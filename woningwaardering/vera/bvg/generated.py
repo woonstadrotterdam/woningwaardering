@@ -950,6 +950,18 @@ class EenhedenEnergieprestatie(BaseModel):
     """
     De door een adviseur gemeten waarde die hoort bij de energieprestatie. De energieprestatiesoort bepaalt wat deze waarde representeert. Bijvoorbeeld: Energie-index of EP2 (het energielabel  is daarvan dan afgeleid), compactheid of opgewekte duurzame energie. Bij een voorlopig energielabel is geen waarde van toepassing.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/58
+    gebruiksoppervlakte_thermische_zone: Optional[float] = Field(
+        default=None, alias="gebruiksoppervlakteThermischeZone"
+    )
+    """
+    Gebruiksoppervlakte van de thermische zone, afgebakend volgens NTA 8800
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/59
+    energieprestatievergoeding: Optional[bool] = Field(default=None)
+    """
+    Geeft aan of er bij het verhuren een energieprestatievergoeding (EPV) is overeengekomen
+    """
 
 
 class EenhedenGemeente(BaseModel):
@@ -3244,6 +3256,11 @@ class EenhedenEenheid(BaseModel):
     klimaatbeheersingsoort: Optional[Referentiedata] = None
     """
     Het soort klimaatbeheersing. Bijvoorbeeld: individueel of collectief. Referentiedatasoort EENHEIDKLIMAATBEHEERSINGSOORT.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/57
+    woningtype: Optional[Referentiedata] = None
+    """
+    Het type woning: eengezinswoning of meergezinswoning. Referentiedatasoort WONINGTYPE.
     """
 
 

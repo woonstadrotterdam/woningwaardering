@@ -5,6 +5,45 @@
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Aegidiusstraat",
+    "huisnummer": "122",
+    "huisnummer_toevoeging": "",
+    "postcode": "3061XR",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000316161",
+    "bagIdentificatie": "0599010000316161"
+  },
+  "woningtype": {
+    "code": "EGW",
+    "naam": "Eengezinswoning"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2018-01-18",
+      "einddatum": "2028-01-18",
+      "registratiedatum": "2018-03-12T12:17:19+01:00",
+      "label": {
+        "code": "B",
+        "naam": "B"
+      },
+      "waarde": "1.36",
+      "energieprestatievergoeding": false
+    }
+  ],
+  "gebruiksoppervlakte": 151,
   "ruimten": [
     {
       "id": "Space_72315445",

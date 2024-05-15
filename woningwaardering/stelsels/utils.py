@@ -1,7 +1,8 @@
 from decimal import Decimal
 import importlib
 import os
-from datetime import date
+import pandas as pd
+from datetime import date, datetime
 from typing import Type, TypeVar
 
 from loguru import logger
@@ -143,38 +144,43 @@ def naar_tabel(
                         woningwaardering.criterium.meeteenheid.naam
                         if woningwaardering.criterium.meeteenheid is not None
                         else "",
-                        woningwaardering.punten or "",
+                        woningwaardering.punten
+                        if woningwaardering.punten is not None
+                        else "",
                     ],
                     divider=index + 1 == aantal_waarderingen,
                 )
+
+        aantallen = [
+            Decimal(woningwaardering.aantal)
+            for woningwaardering in woningwaarderingen
+            if woningwaardering.aantal is not None
+        ]
+
+        subtotaal = float(sum(aantallen)) if aantallen else None
+
         if (
-            woningwaardering_groep.criterium_groep
+            (subtotaal is not None or aantal_waarderingen > 1)
+            and woningwaardering_groep.criterium_groep
             and woningwaardering_groep.criterium_groep.stelselgroep
         ):
+            meeteenheid = ", ".join(
+                list(
+                    {
+                        woningwaardering.criterium.meeteenheid.naam or ""
+                        for woningwaardering in woningwaarderingen
+                        if woningwaardering.criterium is not None
+                        and woningwaardering.criterium.meeteenheid is not None
+                    }
+                )
+            )
+
             table.add_row(
                 [
                     woningwaardering_groep.criterium_groep.stelselgroep.naam,
                     "Subtotaal",
-                    float(
-                        sum(
-                            [
-                                Decimal(woningwaardering.aantal)
-                                for woningwaardering in woningwaarderingen
-                                if woningwaardering.aantal is not None
-                            ]
-                        )
-                    )
-                    or "",
-                    ", ".join(
-                        list(
-                            {
-                                woningwaardering.criterium.meeteenheid.naam or ""
-                                for woningwaardering in woningwaarderingen
-                                if woningwaardering.criterium is not None
-                                and woningwaardering.criterium.meeteenheid is not None
-                            }
-                        )
-                    ),
+                    subtotaal or "",
+                    meeteenheid,
                     woningwaardering_groep.punten,
                 ],
                 divider=True,
@@ -198,3 +204,64 @@ def naar_tabel(
         )
 
     return table
+
+
+def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFrame:
+    """
+    Filtert een DataFrame op basis van een datum.
+    Het dataframe moet de kolommen 'Begindatum' en 'Einddatum' bevatten.
+
+    Args:
+        df (pd.DataFrame): Het DataFrame dat gefilterd moet worden.
+        datum_filter (date): De datum waarop gefilterd moet worden.
+
+    Returns:
+        pd.DataFrame: Het gefilterde DataFrame.
+
+    Raises:
+        ValueError: Als de DataFrame geen 'Begindatum' en 'Einddatum' kolommen bevat.
+        ValueError: Als de filtering op datum geen records oplevert.
+    """
+    datum_filter_datetime = datetime.combine(datum_filter, datetime.min.time())
+
+    if "Begindatum" not in df.columns or "Einddatum" not in df.columns:
+        error_message = (
+            "De DataFrame moet de kolommen 'Begindatum' en 'Einddatum' bevatten."
+        )
+        logger.error(error_message)
+        raise ValueError(error_message)
+
+    df["Begindatum"] = pd.to_datetime(df["Begindatum"])
+    df["Einddatum"] = pd.to_datetime(df["Einddatum"])
+
+    mask = (df["Begindatum"] <= datum_filter_datetime) & (
+        (df["Einddatum"] >= datum_filter_datetime) | df["Einddatum"].isnull()
+    )
+    resultaat_df = df[mask]
+
+    if resultaat_df.empty:
+        raise ValueError("Datum filter levert geen records op")
+
+    return df[mask]
+
+
+def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Check of de dataframe exact één rij bevat.
+
+    Args:
+        df (pd.DataFrame): Het DataFrame dat gecheckt moet worden.
+
+    Returns:
+        pd.DataFrame: Het DataFrame als het aan de voorwaarden voldoet.
+
+    Raises:
+        ValueError: Als het DataFrame leeg is.
+        ValueError: Als het DataFrame meer dan één rij bevat.
+    """
+    if df.empty:
+        raise ValueError("Dataframe is leeg")
+    if len(df) > 1:
+        raise ValueError("Dataframe heeft meer dan één rij")
+
+    return df

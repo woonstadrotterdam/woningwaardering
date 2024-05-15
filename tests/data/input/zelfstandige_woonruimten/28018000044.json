@@ -1,9 +1,29 @@
 {
   "id": "28018000044",
+  "bouwjaar": 1992,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Baardsestraat",
+    "huisnummer": "14",
+    "huisnummer_toevoeging": "",
+    "postcode": "3028RC",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000094913",
+    "bagIdentificatie": "0599010000094913"
+  },
+  "woningtype": {
+    "code": "EGW",
+    "naam": "Eengezinswoning"
+  },
+  "energieprestaties": [],
+  "gebruiksoppervlakte": 87,
   "ruimten": [
     {
       "id": "Space_20268173",

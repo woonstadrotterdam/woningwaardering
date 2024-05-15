@@ -1,6 +1,49 @@
 {
   "id": "37101000032",
   "bouwjaar": 1924,
+  "klimaatbeheersingsoort": {
+    "code": "IND",
+    "naam": "Individueel"
+  },
+  "adres": {
+    "straatnaam": "Nieuwe Boezemstraat",
+    "huisnummer": "27",
+    "huisnummer_toevoeging": "",
+    "postcode": "3034PH",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000485697",
+    "bagIdentificatie": "0599010000485697"
+  },
+  "woningtype": {
+    "code": "EGW",
+    "naam": "Eengezinswoning"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2019-02-25",
+      "einddatum": "2029-02-25",
+      "registratiedatum": "2019-02-26T14:51:38+01:00",
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "1.58",
+      "energieprestatievergoeding": false
+    }
+  ],
+  "gebruiksoppervlakte": 187,
   "ruimten": [
     {
       "id": "Space_108014554",

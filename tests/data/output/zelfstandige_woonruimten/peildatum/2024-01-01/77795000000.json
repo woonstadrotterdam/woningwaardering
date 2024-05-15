@@ -114,51 +114,72 @@
       "punten": 9.75,
       "woningwaarderingen": [
         {
-          "punten": 1.5,
           "criterium": {
             "naam": "Slaapkamer"
-          }
+          },
+          "punten": 1.5
         },
         {
-          "punten": 1.5,
           "criterium": {
             "naam": "Badruimte"
-          }
+          },
+          "punten": 1.5
         },
         {
-          "punten": 0.75,
           "criterium": {
             "naam": "Zolder"
-          }
+          },
+          "punten": 0.75
         },
         {
-          "punten": 1.5,
           "criterium": {
             "naam": "Keuken"
-          }
+          },
+          "punten": 1.5
         },
         {
-          "punten": 1.5,
           "criterium": {
             "naam": "Slaapkamer"
-          }
+          },
+          "punten": 1.5
         },
         {
-          "punten": 1.5,
           "criterium": {
             "naam": "Woonkamer"
-          }
+          },
+          "punten": 1.5
         },
         {
-          "punten": 1.5,
           "criterium": {
             "naam": "Slaapkamer"
-          }
+          },
+          "punten": 1.5
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 36.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "A (oud)"
+          },
+          "punten": 36.0
         }
       ]
     }
   ],
-  "punten": 95.0,
+  "punten": 131.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

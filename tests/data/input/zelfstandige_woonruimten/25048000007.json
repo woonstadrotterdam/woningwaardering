@@ -1,9 +1,49 @@
 {
   "id": "25048000007",
+  "bouwjaar": 1997,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Rochussenstraat",
+    "huisnummer": "251",
+    "huisnummer_toevoeging": "c",
+    "postcode": "3021NW",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000349626",
+    "bagIdentificatie": "0599010000349626"
+  },
+  "woningtype": {
+    "code": "MGW",
+    "naam": "Meergezinswoning"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2019-07-03",
+      "einddatum": "2029-07-03",
+      "registratiedatum": "2019-12-03T16:44:12+01:00",
+      "label": {
+        "code": "B",
+        "naam": "B"
+      },
+      "waarde": "1.24",
+      "energieprestatievergoeding": false
+    }
+  ],
+  "gebruiksoppervlakte": 79,
   "ruimten": [
     {
       "id": "Space_29446514",

@@ -30,66 +30,6 @@ from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
-def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
-    """
-    Berekent de oppervlakte voor een zolder van een overige ruimte op basis van een EenhedenRuimte object.
-
-    Args:
-        ruimte (EenhedenRuimte): Het EenhedenRuimte object dat een zolder type is.
-
-    Returns:
-        float: De berekende oppervlakte voor de zolder.
-    """
-    if ruimte.detail_soort is not None and ruimte.oppervlakte is not None:
-        trap = heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap.code)
-
-        if trap:
-            logger.debug(
-                f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
-            )
-            return float(
-                Decimal(str(ruimte.oppervlakte)).quantize(
-                    Decimal("0.01"), ROUND_HALF_UP
-                )
-            )
-
-        vlizotrap = heeft_bouwkundig_element(
-            ruimte, Bouwkundigelementdetailsoort.vlizotrap.code
-        )
-
-        if vlizotrap:
-            logger.debug(
-                f"Vlizotrap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van overige ruimten"
-            )
-            return max(
-                0.0,
-                float(
-                    Decimal(
-                        Decimal(str(ruimte.oppervlakte)).quantize(
-                            Decimal("0.01"), ROUND_HALF_UP
-                        )
-                        # Min 5 punten omdat de ruimte niet bereikt kan worden met een
-                        # vaste trap.
-                        # Let op, hier wordt de oppervlakte gecorrigeerd met de
-                        # hoeveelheid punten per vierkante meter. Onze keuze is om hier
-                        # al de vijf punten in mindering te brengen. Het beleidsboek
-                        # geeft aan dat de punten in mindering gebracht moeten worden
-                        # op de punten berekend voor deze ruimte, maar ook dat punten
-                        # pas berekend moeten worden wanneer de totale oppervlakte
-                        # bekend is en afegerond is.
-                        # Door de afronding komt deze berekening niet helemaal juist
-                        # uit, maar dit is de benadering waar wij nu voor kiezen.
-                        - Decimal("5") / Decimal("0.75")
-                    ).quantize(Decimal("0.01"), ROUND_HALF_UP)
-                ),
-            )
-
-    logger.warning(
-        f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
-    )
-    return 0.0
-
-
 class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
     @staticmethod
     def bereken(
@@ -158,7 +98,9 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                         continue
 
                 elif ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-                    oppervlakte_aantal = _oppervlakte_zolder_overige_ruimte(ruimte)
+                    oppervlakte_aantal = OppervlakteVanOverigeRuimten2024._oppervlakte_zolder_overige_ruimte(
+                        ruimte
+                    )
                     if oppervlakte_aantal > 0.0:
                         woningwaardering.aantal = oppervlakte_aantal
                     else:
@@ -185,6 +127,68 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
+
+    @staticmethod
+    def _oppervlakte_zolder_overige_ruimte(ruimte: EenhedenRuimte) -> float:
+        """
+        Berekent de oppervlakte voor een zolder van een overige ruimte op basis van een EenhedenRuimte object.
+
+        Args:
+            ruimte (EenhedenRuimte): Het EenhedenRuimte object dat een zolder type is.
+
+        Returns:
+            float: De berekende oppervlakte voor de zolder.
+        """
+        if ruimte.detail_soort is not None and ruimte.oppervlakte is not None:
+            trap = heeft_bouwkundig_element(
+                ruimte, Bouwkundigelementdetailsoort.trap.code
+            )
+
+            if trap:
+                logger.debug(
+                    f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+                )
+                return float(
+                    Decimal(str(ruimte.oppervlakte)).quantize(
+                        Decimal("0.01"), ROUND_HALF_UP
+                    )
+                )
+
+            vlizotrap = heeft_bouwkundig_element(
+                ruimte, Bouwkundigelementdetailsoort.vlizotrap.code
+            )
+
+            if vlizotrap:
+                logger.debug(
+                    f"Vlizotrap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van overige ruimten"
+                )
+                return max(
+                    0.0,
+                    float(
+                        Decimal(
+                            Decimal(str(ruimte.oppervlakte)).quantize(
+                                Decimal("0.01"), ROUND_HALF_UP
+                            )
+                            # Min 5 punten omdat de ruimte niet bereikt kan worden met een
+                            # vaste trap.
+                            # Let op, hier wordt de oppervlakte gecorrigeerd met de
+                            # hoeveelheid punten per vierkante meter. Onze keuze is om hier
+                            # al de vijf punten in mindering te brengen. Het beleidsboek
+                            # geeft aan dat de punten in mindering gebracht moeten worden
+                            # op de punten berekend voor deze ruimte, maar ook dat punten
+                            # pas berekend moeten worden wanneer de totale oppervlakte
+                            # bekend is en afegerond is.
+                            # Door de afronding komt deze berekening niet helemaal juist
+                            # uit, maar dit is de benadering waar wij nu voor kiezen.
+                            - Decimal("5") / Decimal("0.75")
+                        ).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                    ),
+                )
+
+        logger.warning(
+            f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+        )
+        return 0.0
 
 
 if __name__ == "__main__":
