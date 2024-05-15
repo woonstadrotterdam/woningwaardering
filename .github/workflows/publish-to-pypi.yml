@@ -36,7 +36,7 @@ jobs:
   publish-to-pypi:
     name: >-
       Publish to PyPI
-    if: github.ref_type == 'tag'
+    if: startsWith(github.event.ref, 'refs/tags') # only publish to PyPI on tag pushes
     needs:
       - build
     runs-on: ubuntu-latest
