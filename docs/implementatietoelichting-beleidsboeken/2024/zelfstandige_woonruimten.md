@@ -310,7 +310,7 @@ veel sinds 1 januari 2015 verstrekte energie-indexen af, want de geldigheidsduur
 
 In [EP-online](https://www.ep-online.nl/) is te vinden wat de energieprestatie van een woning is.
 
-> Uit ons eigen onderzoek op EP-online blijkt dat de registratiedatum van de energieprestatie niet altijd overeenkomt met de meetmethode die in de periode van registratie gehanteerd zou moeten zijn. Daarom is besloten om op basis van de meetmethode (`Energieprestatiesoort` in de referentiedata) te bepalen of een label als nieuw of oud wordt beschouwd. De registratiedatum wordt echter wel gebruikt om te bepalen of een label geldig is.
+> In de implemenatie is de combinatie `Energieprestatiesoort` met registratiedatum leidend om te beslissen welke lookup tabellen er worden gebruikt om na te gaan hoeveel punten er gegeven moeten worden voor het stelselgroep energieprestatie.
 
 > In de tabellen ter ondersteuning van de tekst van het beleidsboek over de punten toekenning bij een nieuw energielabel is er voor gekozen om de implementatie van regel [4.5.3 Afwijkingsbevoegdheid hogere energielabelklasse dan A++](#453-afwijkingsbevoegdheid-hogere-energielabelklasse-dan-a) al toe te voegen aan de tabellen.
 
