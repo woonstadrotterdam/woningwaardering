@@ -2,12 +2,12 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from decimal import Decimal
 from loguru import logger
+import pandas as pd
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import (
     dataframe_met_een_rij,
     filter_dataframe_op_datum,
-    lees_csv_als_dataframe,
     naar_tabel,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -31,28 +31,22 @@ from woningwaardering.vera.referentiedata.energieprestatiestatus import (
     Energieprestatiestatus,
 )
 
-LOOKUP_TABEL_FOLDER = (
-    "stelsels/zelfstandige_woonruimten/energieprestatie/lookup_tabellen"
-)
+LOOKUP_TABEL_FOLDER = "woningwaardering/stelsels/zelfstandige_woonruimten/energieprestatie/lookup_tabellen"
 
 
 class Energieprestatie2024(Stelselgroepversie):
     lookup_mapping = {
-        "oppervlakte_0-25": lees_csv_als_dataframe(
+        "oppervlakte_0-25": pd.read_csv(
             f"{LOOKUP_TABEL_FOLDER}/oppervlakte_0-25m2_energielabel_punten.csv"
         ),
-        "oppervlakte_25-40": lees_csv_als_dataframe(
+        "oppervlakte_25-40": pd.read_csv(
             f"{LOOKUP_TABEL_FOLDER}/oppervlakte_25-40m2_energielabel_punten.csv"
         ),
-        "oppervlakte_40+": lees_csv_als_dataframe(
+        "oppervlakte_40+": pd.read_csv(
             f"{LOOKUP_TABEL_FOLDER}/oppervlakte_40m2+_energielabel_punten.csv"
         ),
-        "oud": lees_csv_als_dataframe(
-            f"{LOOKUP_TABEL_FOLDER}/oud_energielabel_punten.csv"
-        ),
-        "bouwjaar": lees_csv_als_dataframe(
-            f"{LOOKUP_TABEL_FOLDER}/bouwjaar_punten.csv"
-        ),
+        "oud": pd.read_csv(f"{LOOKUP_TABEL_FOLDER}/oud_energielabel_punten.csv"),
+        "bouwjaar": pd.read_csv(f"{LOOKUP_TABEL_FOLDER}/bouwjaar_punten.csv"),
     }
 
     @staticmethod

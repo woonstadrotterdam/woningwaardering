@@ -1,6 +1,5 @@
 from decimal import Decimal
 import importlib
-from importlib.resources import files
 import os
 import pandas as pd
 from datetime import date, datetime
@@ -205,26 +204,6 @@ def naar_tabel(
         )
 
     return table
-
-
-def lees_csv_als_dataframe(file_path: str) -> pd.DataFrame:
-    """
-    Leest a CSV bestand en returnt een pandas DataFrame.
-
-    Parameters:
-        file_path (str): het pad naar het csv bestand
-
-    Returns:
-        pd.DataFrame: The contents of the CSV file as a DataFrame.
-    Raises:
-        ValueError: Als de file_path extentie niet CSV is.
-    """
-    if file_path.endswith(".csv"):
-        return pd.read_csv(
-            files("woningwaardering").joinpath(file_path), sep=",", encoding="utf-8"
-        )
-    else:
-        raise ValueError(f"Bestandstype '{file_path.split('.')[-1]}' niet ondersteund.")
 
 
 def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFrame:
