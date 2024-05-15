@@ -314,11 +314,13 @@ In [EP-online](https://www.ep-online.nl/) is te vinden wat de energieprestatie v
 
 > In de tabellen ter ondersteuning van de tekst van het beleidsboek over de punten toekenning bij een nieuw energielabel is er voor gekozen om de implementatie van regel [4.5.3 Afwijkingsbevoegdheid hogere energielabelklasse dan A++](#453-afwijkingsbevoegdheid-hogere-energielabelklasse-dan-a) al toe te voegen aan de tabellen.
 
-### 4.5.1 Puntentoekenning oud energielabel ~~en energie-index~~
+### 4.5.1 Puntentoekenning oud energielabel en energie-index
 Bij een oud energielabel bepaalt de labelklasse (A t/m G) het aantal punten dat de verhuurder
 mag doorrekenen in de maximale huur. Een energielabel dat is geregistreerd vóór 2015 en dat niet
 ouder is dan tien jaar, is nog bruikbaar.
 ~~Bij een energie-index is de indeling in letters vervangen door een cijfer. De energie-index wordt meegenomen indien in EP-online staat aangegeven dat de energie-index geldig is voor het woningwaarderingsstelsel.~~
+
+> De energie-index van een energieprestatie wordt niet gebruikt. In EP-Online hebben alle op energie-index gebaseerde energieprestaties ook een labelklasse. Deze labelklasse dient gebruikt te worden voor de waardering.
 
 Zie hieronder de puntentoekenning van de energieprestatie bij een oud energielabel en een energie-index.
 
