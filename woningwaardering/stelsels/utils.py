@@ -247,7 +247,7 @@ def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFr
 
     if "Begindatum" not in df.columns or "Einddatum" not in df.columns:
         error_message = (
-            "The DataFrame must contain 'Begindatum' and 'Einddatum' columns."
+            "De DataFrame moet de kolommen 'Begindatum' en 'Einddatum' bevatten."
         )
         logger.error(error_message)
         raise ValueError(error_message)
