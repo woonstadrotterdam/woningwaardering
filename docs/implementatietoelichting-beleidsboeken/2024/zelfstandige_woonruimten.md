@@ -306,8 +306,7 @@ drie manieren zin bepaald.
 lopen veel sinds 1 juli 2011 verstrekte energielabels af, want de geldigheidsduur is tien jaar.
 2. De energie-index: registratie op of na 1 januari 2015 tot 1 januari 2021. In 2025 en later lopen
 veel sinds 1 januari 2015 verstrekte energie-indexen af, want de geldigheidsduur is tien jaar.
-3. Het energielabel op basis van primair fossiel energiegebruik: registratie op of na 1 januari
-2021.
+3. Het energielabel op basis van primair fossiel energiegebruik: registratie op of na 1 januari 2021.
 
 In [EP-online](https://www.ep-online.nl/) is te vinden wat de energieprestatie van een woning is.
 
