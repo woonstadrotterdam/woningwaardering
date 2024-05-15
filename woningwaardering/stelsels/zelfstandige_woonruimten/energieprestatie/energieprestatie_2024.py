@@ -118,6 +118,9 @@ class Energieprestatie2024(Stelselgroepversie):
         if (
             energieprestatie_soort
             == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
+            and energieprestatie.registratiedatum
+            and energieprestatie.registratiedatum
+            >= datetime.datetime(2021, 1, 1).astimezone()
         ):
             if energieprestatie.gebruiksoppervlakte_thermische_zone is None:
                 raise TypeError(
