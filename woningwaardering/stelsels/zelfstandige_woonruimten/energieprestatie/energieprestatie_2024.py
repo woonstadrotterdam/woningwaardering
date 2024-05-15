@@ -65,9 +65,12 @@ class Energieprestatie2024(Stelselgroepversie):
         if eenheid.energieprestaties is not None:
             for energieprestatie in eenheid.energieprestaties:
                 if (
-                    energieprestatie.registratiedatum is not None
-                    and energieprestatie.soort is not None
-                    and energieprestatie.soort.code is not None
+                    energieprestatie.registratiedatum
+                    and energieprestatie.soort
+                    and energieprestatie.soort.code
+                    and energieprestatie.begindatum
+                    and energieprestatie.einddatum
+                    and energieprestatie.label
                     and (
                         energieprestatie.soort.code
                         == Energieprestatiesoort.energie_index.code
@@ -77,19 +80,12 @@ class Energieprestatie2024(Stelselgroepversie):
                         == Energieprestatiesoort.voorlopig_energielabel.code  # Een voorloopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
                     )
                     and (
-                        (
-                            energieprestatie.begindatum is not None
-                            and energieprestatie.einddatum is not None
-                            and energieprestatie.label is not None
-                        )
-                        and (
-                            energieprestatie.begindatum
-                            < datetime.date.today()
-                            < energieprestatie.einddatum
-                            and energieprestatie.status is not None
-                            and energieprestatie.status.code
-                            == Energieprestatiestatus.definitief.code
-                        )
+                        energieprestatie.begindatum
+                        < datetime.date.today()
+                        < energieprestatie.einddatum
+                        and energieprestatie.status
+                        and energieprestatie.status.code
+                        == Energieprestatiestatus.definitief.code
                     )
                     and (
                         # Check of de registratie niet ouder is dan 10 jaar
