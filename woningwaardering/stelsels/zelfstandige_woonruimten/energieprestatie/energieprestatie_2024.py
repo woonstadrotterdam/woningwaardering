@@ -31,7 +31,9 @@ from woningwaardering.vera.referentiedata.energieprestatiestatus import (
     Energieprestatiestatus,
 )
 
-LOOKUP_TABEL_FOLDER = "woningwaardering/stelsels/zelfstandige_woonruimten/energieprestatie/lookup_tabellen"
+LOOKUP_TABEL_FOLDER = (
+    "stelsels/zelfstandige_woonruimten/energieprestatie/lookup_tabellen"
+)
 
 
 class Energieprestatie2024(Stelselgroepversie):

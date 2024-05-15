@@ -1,5 +1,6 @@
 from decimal import Decimal
 import importlib
+from importlib.resources import files
 import os
 import pandas as pd
 from datetime import date, datetime
@@ -219,7 +220,9 @@ def lees_csv_als_dataframe(file_path: str) -> pd.DataFrame:
         ValueError: Als de file_path extentie niet CSV is.
     """
     if file_path.endswith(".csv"):
-        return pd.read_csv(file_path, sep=",", encoding="utf-8")
+        return pd.read_csv(
+            files("woningwaardering").joinpath(file_path), sep=",", encoding="utf-8"
+        )
     else:
         raise ValueError(f"Bestandstype '{file_path.split('.')[-1]}' niet ondersteund.")
 
