@@ -174,75 +174,96 @@
       "punten": 22.0,
       "woningwaarderingen": [
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Woonkamer"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Badruimte"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Keuken"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Keuken"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Badruimte"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Woonkamer"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Badruimte"
-          }
+          },
+          "punten": 2.0
         },
         {
-          "punten": 2.0,
           "criterium": {
             "naam": "Slaapkamer"
-          }
+          },
+          "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 32.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "B (oud)"
+          },
+          "punten": 32.0
         }
       ]
     }
   ],
-  "punten": 141.0,
+  "punten": 173.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

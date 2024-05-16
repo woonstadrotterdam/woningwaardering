@@ -2,4 +2,9 @@ Soort;Code;Naam;Omschrijving;Begindatum;Einddatum;Parent;Informatiedomein
 RUIMTEDETAILSOORT;OVL;Overloop;Verkeersruimte: (UITBREIDING) Gang op een bovenverdieping.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
 RUIMTEDETAILSOORT;ENT;Entree;Verkeersruimte: (UITBREIDING) Ingang van een gebouw.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
 RUIMTEDETAILSOORT;KAS;Kast;Overige ruimte: (UITBREIDING);8-4-2024;;RUIMTESOORT.OVR;Vastgoed
+<<<<<<< HEAD
 MEETEENHEID;MLM;Millimeter;De meeteenheid millimeter (UITBREIDING);14-04-2024;;;
+=======
+WONINGTYPE;EGW;Eengezinswoning;Een woning die tevens een geheel pand vormt.;6-5-2024;;EENHEIDSOORT.WOO;Vastgoed
+WONINGTYPE;MGW;Meergezinswoning;Een woning die samen met andere woonruimten c.q. bedrijfsruimten een geheel pand vormt.;6-5-2024;;EENHEIDSOORT.WOO;Vastgoed
+>>>>>>> origin/main

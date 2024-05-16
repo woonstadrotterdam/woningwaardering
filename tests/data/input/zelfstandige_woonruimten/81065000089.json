@@ -1,5 +1,46 @@
 {
   "id": "81065000089",
+  "bouwjaar": 1921,
+  "adres": {
+    "straatnaam": "Oostendamstraat",
+    "huisnummer": "145",
+    "huisnummer_toevoeging": "",
+    "postcode": "3073NE",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000310211",
+    "bagIdentificatie": "0599010000310211"
+  },
+  "woningtype": {
+    "code": "EGW",
+    "naam": "Eengezinswoning"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EP2",
+        "naam": "Primair energieverbruik - woningbouw"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2024-02-13",
+      "einddatum": "2034-02-13",
+      "registratiedatum": "2024-02-21T11:09:37+01:00",
+      "label": {
+        "code": "B",
+        "naam": "B"
+      },
+      "waarde": "173.08",
+      "gebruiksoppervlakteThermischeZone": 78.84,
+      "energieprestatievergoeding": false
+    }
+  ],
+  "gebruiksoppervlakte": 82,
   "ruimten": [
     {
       "id": "Space_29475563",

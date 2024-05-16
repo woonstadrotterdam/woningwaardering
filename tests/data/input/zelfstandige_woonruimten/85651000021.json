@@ -1,9 +1,29 @@
 {
   "id": "85651000021",
+  "bouwjaar": 1897,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Atjehstraat",
+    "huisnummer": "47",
+    "huisnummer_toevoeging": "d",
+    "postcode": "3072ZB",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000078889",
+    "bagIdentificatie": "0599010000078889"
+  },
+  "woningtype": {
+    "code": "MGW",
+    "naam": "Meergezinswoning"
+  },
+  "energieprestaties": [],
+  "gebruiksoppervlakte": 72,
   "ruimten": [
     {
       "id": "Space_91559685",

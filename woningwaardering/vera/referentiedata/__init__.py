@@ -186,6 +186,7 @@ from .vertrouwelijkheid import Vertrouwelijkheid
 from .voorrangdetailsoort import Voorrangdetailsoort
 from .voorrangsoort import Voorrangsoort
 from .vragenlijstregelherkomst import Vragenlijstregelherkomst
+from .woningtype import Woningtype
 from .woningwaarderingstelsel import Woningwaarderingstelsel
 from .woningwaarderingstelselgroep import Woningwaarderingstelselgroep
 from .woonsituatiesoort import Woonsituatiesoort
@@ -387,6 +388,7 @@ __all__ = [
     "Voorrangdetailsoort",
     "Voorrangsoort",
     "Vragenlijstregelherkomst",
+    "Woningtype",
     "Woningwaarderingstelsel",
     "Woningwaarderingstelselgroep",
     "Woonsituatiesoort",

@@ -1,9 +1,49 @@
 {
   "id": "41123000005",
+  "bouwjaar": 1896,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Plantageweg",
+    "huisnummer": "17",
+    "huisnummer_toevoeging": "",
+    "postcode": "3061PJ",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000295253",
+    "bagIdentificatie": "0599010000295253"
+  },
+  "woningtype": {
+    "code": "EGW",
+    "naam": "Eengezinswoning"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2019-05-13",
+      "einddatum": "2029-05-13",
+      "registratiedatum": "2019-11-21T10:55:31+01:00",
+      "label": {
+        "code": "B",
+        "naam": "B"
+      },
+      "waarde": "1.39",
+      "energieprestatievergoeding": false
+    }
+  ],
+  "gebruiksoppervlakte": 170,
   "ruimten": [
     {
       "id": "Space_23702354",

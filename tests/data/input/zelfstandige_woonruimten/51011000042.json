@@ -1,9 +1,49 @@
 {
   "id": "51011000042",
+  "bouwjaar": 1952,
   "klimaatbeheersingsoort": {
     "code": "IND",
     "naam": "Individueel"
   },
+  "adres": {
+    "straatnaam": "Eskampstraat",
+    "huisnummer": "1",
+    "huisnummer_toevoeging": "b",
+    "postcode": "3042SJ",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000312130",
+    "bagIdentificatie": "0599010000312130"
+  },
+  "woningtype": {
+    "code": "MGW",
+    "naam": "Meergezinswoning"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2018-11-14",
+      "einddatum": "2028-11-14",
+      "registratiedatum": "2019-03-28T13:39:08+01:00",
+      "label": {
+        "code": "A",
+        "naam": "A"
+      },
+      "waarde": "1.09",
+      "energieprestatievergoeding": false
+    }
+  ],
+  "gebruiksoppervlakte": 74,
   "ruimten": [
     {
       "id": "Space_82668586",
