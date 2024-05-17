@@ -1,5 +1,6 @@
 import yaml
 
+from importlib.resources import files
 from datetime import date
 from loguru import logger
 from typing import Dict, List
@@ -34,9 +35,14 @@ class Stelselconfig(BaseModel):
     @classmethod
     def load(cls, stelsel: Woningwaarderingstelsel) -> "Stelselconfig":
         try:
-            path = f"woningwaardering/stelsels/config/{stelsel.name}.yml"
-            with open(path, "r") as file:
-                config = yaml.safe_load(file)
+            path = files("woningwaardering.stelsels.config").joinpath(
+                f"{stelsel.name}.yml"
+            )
+            config = yaml.safe_load(path.read_text())
+
+        except ModuleNotFoundError:
+            logger.error(f"Config file '{path}' is niet gevonden.")
+            raise
 
         except FileNotFoundError:
             logger.error(f"Config file '{path}' is niet gevonden.")
