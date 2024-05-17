@@ -1,7 +1,6 @@
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 
-
 from woningwaardering.stelsels.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
@@ -113,7 +112,7 @@ class Stelsel:
             raise ValueError(
                 f"stelsel {stelsel.value.naam} met begindatum {config.begindatum} en einddatum {config.einddatum} is niet geldig op peildatum {peildatum}."
             )
-
+        print(f"{stelsel.name = }")
         geldige_stelselgroepen: list[Stelselgroep] = [
             import_class(
                 f"woningwaardering.stelsels.{stelsel.name}",
