@@ -108,6 +108,7 @@ jobs:
           '${{ github.ref_name }}'
           --repo '${{ github.repository }}'
           --generate-notes
+          --notes-start-tag $(gh release view --repo '${{ github.repository }}' --jq .tagName --json tagName)
       - name: Upload artifact signatures to GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
