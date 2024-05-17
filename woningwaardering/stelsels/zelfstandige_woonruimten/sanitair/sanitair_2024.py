@@ -1,9 +1,12 @@
 from collections import defaultdict
 from decimal import ROUND_HALF_UP, Decimal
 
+from loguru import logger
+
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -15,10 +18,41 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
+from woningwaardering.vera.utils import (
+    aantal_bouwkundige_elementen,
+    heeft_bouwkundig_element,
+)
 
 
 class Sanitair2024(Stelselgroepversie):
+    @staticmethod
+    def _punten_voor_bouwkundig_element_detailsoort(
+        dict_: dict[str, dict[str, Decimal]],
+        ruimte: EenhedenRuimte,
+        element: Bouwkundigelementdetailsoort,
+        punten_per_element: float,
+    ) -> dict[str, dict[str, Decimal]]:
+        """
+        Berekent de punten voor een specifiek type bouwkundig element detail.
+
+        Args:
+            dict_: Een dictionary met de punten en het aantal elementen voor elk detailsoort.
+            ruimte: Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
+            element: Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
+            punten_per_element: Het aantal punten dat aan elk element wordt toegekend.
+
+        Returns:
+            Een dictionary met de bijgewerkte punten en het aantal elementen voor elk detailsoort.
+        """
+
+        aantal = aantal_bouwkundige_elementen(ruimte, element.code)
+        if aantal > 0:
+            logger.debug(f"Aantal '{element.naam}' in {ruimte.naam}: {aantal}")
+            dict_[element.naam]["punten"] += Decimal(punten_per_element) * aantal
+            dict_[element.naam]["aantal"] += aantal
+
+        return dict_
+
     @staticmethod
     def bereken(
         eenheid: EenhedenEenheid,
@@ -37,39 +71,20 @@ class Sanitair2024(Stelselgroepversie):
         totals = defaultdict(lambda: {"punten": Decimal("0"), "aantal": 0})
 
         for ruimte in eenheid.ruimten or []:
-            if heeft_bouwkundig_element(
-                ruimte, Bouwkundigelementdetailsoort.closetcombinatie.code
-            ):
-                totals[Bouwkundigelementdetailsoort.closetcombinatie.naam][
-                    "punten"
-                ] += Decimal("3")
-                totals[Bouwkundigelementdetailsoort.closetcombinatie.naam][
-                    "aantal"
-                ] += 1
+            # closetcombinatie
 
-            if heeft_bouwkundig_element(
-                ruimte, Bouwkundigelementdetailsoort.wastafel.code
-            ):
-                totals[Bouwkundigelementdetailsoort.wastafel.naam]["punten"] += Decimal(
-                    "1"
-                )
-                totals[Bouwkundigelementdetailsoort.wastafel.naam]["aantal"] += 1
-
-            if heeft_bouwkundig_element(
-                ruimte, Bouwkundigelementdetailsoort.bidet.code
-            ):
-                totals[Bouwkundigelementdetailsoort.bidet.naam]["punten"] += Decimal(
-                    "1"
-                )
-                totals[Bouwkundigelementdetailsoort.bidet.naam]["aantal"] += 1
-
-            if heeft_bouwkundig_element(
-                ruimte, Bouwkundigelementdetailsoort.lavet.code
-            ):
-                totals[Bouwkundigelementdetailsoort.lavet.naam]["punten"] += Decimal(
-                    "1"
-                )
-                totals[Bouwkundigelementdetailsoort.lavet.naam]["aantal"] += 1
+            totals = Sanitair2024._punten_voor_bouwkundig_element_detailsoort(
+                totals, ruimte, Bouwkundigelementdetailsoort.closetcombinatie, 3
+            )
+            totals = Sanitair2024._punten_voor_bouwkundig_element_detailsoort(
+                totals, ruimte, Bouwkundigelementdetailsoort.wastafel, 1
+            )
+            totals = Sanitair2024._punten_voor_bouwkundig_element_detailsoort(
+                totals, ruimte, Bouwkundigelementdetailsoort.bidet, 1
+            )
+            totals = Sanitair2024._punten_voor_bouwkundig_element_detailsoort(
+                totals, ruimte, Bouwkundigelementdetailsoort.lavet, 1
+            )
 
             # code voor bad en douche, of bad-douche in zelfde ruimte
             bad_aanwezig = heeft_bouwkundig_element(

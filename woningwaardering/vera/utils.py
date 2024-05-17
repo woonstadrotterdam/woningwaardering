@@ -52,3 +52,27 @@ def heeft_bouwkundig_element(
     return any(
         ruimte_bouwkundige_elementen_codes.intersection({*bouwkundige_elementen_codes})
     )
+
+
+def aantal_bouwkundige_elementen(
+    ruimte: EenhedenRuimte, bouwkundige_elementen_code: str
+) -> int:
+    """
+    Telt het aantal bouwkundige elementen in een ruimte dat overeenkomt met het opgegeven bouwkundige element.
+
+    Args:
+        ruimte (EenhedenRuimte): De ruimte waarin geteld moet worden.
+        bouwkundige_elementen_code (str): De code van het bouwkundige element waarop geteld moet worden.
+
+    Returns:
+        int: Het aantal bouwkundige elementen in de ruimte dat overeenkomt met de opgegeven bouwkundige elementen.
+    """
+
+    return len(
+        [
+            element
+            for element in ruimte.bouwkundige_elementen or []
+            if element.detail_soort is not None
+            and element.detail_soort.code in bouwkundige_elementen_code
+        ]
+    )
