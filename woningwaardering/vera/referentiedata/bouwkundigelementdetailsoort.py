@@ -1176,6 +1176,30 @@ class Bouwkundigelementdetailsoort(Enum):
         ),
     )
 
+    bidet = Referentiedata(
+        code="BID",
+        naam="Bidet",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    Een bidet (UITBREIDING).
+    """
+
+    lavet = Referentiedata(
+        code="LAV",
+        naam="Lavet",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    Een Lavet (UITBREIDING).
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:
