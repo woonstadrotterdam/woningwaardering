@@ -36,13 +36,13 @@ class Sanitair2024(Stelselgroepversie):
         Berekent de punten voor een specifiek type bouwkundig element detail.
 
         Args:
-            dict_: Een dictionary met de punten en het aantal elementen voor elk detailsoort.
-            ruimte: Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
-            element: Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
-            punten_per_element: Het aantal punten dat aan elk element wordt toegekend.
+            dict_ (dict[str, dict[str, Decimal]]): Een dictionary met de punten en het aantal elementen voor elk detailsoort.
+            ruimte (EenhedenRuimte): Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
+            element (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
+            punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
 
         Returns:
-            Een dictionary met de bijgewerkte punten en het aantal elementen voor elk detailsoort.
+            dict[str, dict[str, Decimal]]: Een dictionary met de bijgewerkte punten en het aantal elementen voor elk detailsoort.
         """
 
         aantal = aantal_bouwkundige_elementen(ruimte, element.code)
