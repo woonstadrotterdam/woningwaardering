@@ -1,4 +1,4 @@
-from typing import List
+from typing import Iterator
 from woningwaardering.vera.bvg.generated import EenhedenRuimte
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
@@ -31,7 +31,7 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
     )
 
 
-def get_bouwkundige_elementen_codes(ruimte: EenhedenRuimte) -> List[str]:
+def get_bouwkundige_elementen_codes(ruimte: EenhedenRuimte) -> Iterator[str]:
     """
     Gets the list of codes for bouwkundige elementen in the ruimte.
 
@@ -39,13 +39,13 @@ def get_bouwkundige_elementen_codes(ruimte: EenhedenRuimte) -> List[str]:
         ruimte (EenhedenRuimte): The ruimte to check.
 
     Returns:
-        List[str]: The set of codes for bouwkundige elementen in the ruimte.
+        Iterator[str]: The iterator of codes for bouwkundige elementen in the ruimte.
     """
-    return [
+    return (
         element.detail_soort.code
         for element in ruimte.bouwkundige_elementen or []
         if element.detail_soort is not None and element.detail_soort.code is not None
-    ]
+    )
 
 
 def heeft_bouwkundig_element(
@@ -61,10 +61,12 @@ def heeft_bouwkundig_element(
     Returns:
         bool: True als de ruimte één of meerdere van de opgegeven bouwkundige elementen bevat, anders False.
     """
-    ruimte_bouwkundige_elementen_codes = set(get_bouwkundige_elementen_codes(ruimte))
+    ruimte_bouwkundige_elementen_codes = get_bouwkundige_elementen_codes(ruimte)
 
     return any(
-        ruimte_bouwkundige_elementen_codes.intersection({*bouwkundige_elementen_codes})
+        set(bouwkundige_elementen_codes).intersection(
+            ruimte_bouwkundige_elementen_codes
+        )
     )
 
 
@@ -84,9 +86,9 @@ def aantal_bouwkundige_elementen(
     ruimte_bouwkundige_elementen_codes = get_bouwkundige_elementen_codes(ruimte)
 
     return len(
-        [
+        list(
             code
             for code in ruimte_bouwkundige_elementen_codes
             if code in bouwkundige_elementen_codes
-        ]
+        )
     )

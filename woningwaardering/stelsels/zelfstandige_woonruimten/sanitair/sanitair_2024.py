@@ -40,8 +40,6 @@ class Sanitair2024(Stelselgroepversie):
             ruimte (EenhedenRuimte): Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
             elementdetailsoort (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
-        Raises:
-            TypeError: Wanneer een woningwaardering geen criterium heeft
         """
         aantal = aantal_bouwkundige_elementen(ruimte, elementdetailsoort.code)
         if aantal > 0:
@@ -49,19 +47,17 @@ class Sanitair2024(Stelselgroepversie):
                 f"Aantal '{elementdetailsoort.naam}' in {ruimte.naam}: {aantal}"
             )
 
-            for woningwaardering in woningwaarderingen:
-                if woningwaardering.criterium is None:
-                    raise TypeError("Woningwaardering criterium is None")
-                if woningwaardering.criterium.naam == elementdetailsoort.naam:
-                    if woningwaardering.punten is None:
-                        woningwaardering.punten = 0.0
-                    logger.debug(f"{woningwaardering.punten = }")
-                    woningwaardering.punten += punten_per_element * aantal
-                    if woningwaardering.aantal is None:
-                        woningwaardering.aantal = 0.0
-                    woningwaardering.aantal += aantal
-                    break
-            else:
+            woningwaardering = next(
+                (
+                    woningwaardering
+                    for woningwaardering in woningwaarderingen
+                    if woningwaardering.criterium is not None
+                    and woningwaardering.criterium.naam == elementdetailsoort.naam
+                ),
+                None,
+            )
+
+            if woningwaardering is None:
                 woningwaardering = WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=elementdetailsoort.naam
@@ -70,6 +66,11 @@ class Sanitair2024(Stelselgroepversie):
                     aantal=aantal,
                 )
                 woningwaarderingen.append(woningwaardering)
+            else:
+                woningwaardering.punten = (
+                    woningwaardering.punten or 0.0
+                ) + punten_per_element * aantal
+                woningwaardering.aantal = (woningwaardering.aantal or 0.0) + aantal
 
     @staticmethod
     def bereken(
