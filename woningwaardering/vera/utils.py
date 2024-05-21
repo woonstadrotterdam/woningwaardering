@@ -73,6 +73,7 @@ def aantal_bouwkundige_elementen(
             element
             for element in ruimte.bouwkundige_elementen or []
             if element.detail_soort is not None
+            and element.detail_soort.code is not None
             and element.detail_soort.code in bouwkundige_elementen_code
         ]
     )
