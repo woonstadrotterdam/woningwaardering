@@ -1,5 +1,5 @@
-from collections import defaultdict
 from decimal import ROUND_HALF_UP, Decimal
+from typing import List
 
 from loguru import logger
 
@@ -26,32 +26,46 @@ from woningwaardering.vera.utils import (
 
 class Sanitair2024(Stelselgroepversie):
     @staticmethod
-    def _punten_voor_bouwkundig_element_detailsoort(
-        dict_: dict[str, dict[str, Decimal]],
+    def _waardeer_bouwkundig_element_detailsoort(
+        woningwaarderingen: List[WoningwaarderingResultatenWoningwaardering],
         ruimte: EenhedenRuimte,
         element: Bouwkundigelementdetailsoort,
         punten_per_element: float,
-    ) -> dict[str, dict[str, Decimal]]:
+    ) -> None:
         """
         Berekent de punten voor een specifiek type bouwkundig element detail.
 
         Args:
-            dict_ (dict[str, dict[str, Decimal]]): Een dictionary met de punten en het aantal elementen voor elk detailsoort.
+            woningwaarderingen (List[WoningwaarderingResultatenWoningwaardering]): Een list met woningwaarderingen.
             ruimte (EenhedenRuimte): Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
             element (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
-
-        Returns:
-            dict[str, dict[str, Decimal]]: Een dictionary met de bijgewerkte punten en het aantal elementen voor elk detailsoort.
         """
-
         aantal = aantal_bouwkundige_elementen(ruimte, element.code)
         if aantal > 0:
             logger.debug(f"Aantal '{element.naam}' in {ruimte.naam}: {aantal}")
-            dict_[element.naam]["punten"] += Decimal(punten_per_element) * aantal
-            dict_[element.naam]["aantal"] += aantal
 
-        return dict_
+            for woningwaardering in woningwaarderingen:
+                if woningwaardering.criterium is None:
+                    raise TypeError("Woningwaardering criterium is None")
+                if woningwaardering.criterium.naam == element.naam:
+                    if woningwaardering.punten is None:
+                        woningwaardering.punten = 0.0
+                    logger.debug(f"{woningwaardering.punten = }")
+                    woningwaardering.punten += punten_per_element * aantal
+                    if woningwaardering.aantal is None:
+                        woningwaardering.aantal = 0.0
+                    woningwaardering.aantal += aantal
+                    break
+            else:
+                woningwaardering = WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam=element.naam
+                    ),
+                    punten=Decimal(punten_per_element) * aantal,
+                    aantal=aantal,
+                )
+                woningwaarderingen.append(woningwaardering)
 
     @staticmethod
     def bereken(
@@ -68,22 +82,31 @@ class Sanitair2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.woningwaarderingen = []
-        totals = defaultdict(lambda: {"punten": Decimal("0"), "aantal": 0})
 
         for ruimte in eenheid.ruimten or []:
-            # closetcombinatie
-
-            totals = Sanitair2024._punten_voor_bouwkundig_element_detailsoort(
-                totals, ruimte, Bouwkundigelementdetailsoort.closetcombinatie, 3
+            Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+                woningwaardering_groep.woningwaarderingen,
+                ruimte,
+                Bouwkundigelementdetailsoort.closetcombinatie,
+                3,
             )
-            totals = Sanitair2024._punten_voor_bouwkundig_element_detailsoort(
-                totals, ruimte, Bouwkundigelementdetailsoort.wastafel, 1
+            Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+                woningwaardering_groep.woningwaarderingen,
+                ruimte,
+                Bouwkundigelementdetailsoort.wastafel,
+                1,
             )
-            totals = Sanitair2024._punten_voor_bouwkundig_element_detailsoort(
-                totals, ruimte, Bouwkundigelementdetailsoort.bidet, 1
+            Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+                woningwaardering_groep.woningwaarderingen,
+                ruimte,
+                Bouwkundigelementdetailsoort.bidet,
+                1,
             )
-            totals = Sanitair2024._punten_voor_bouwkundig_element_detailsoort(
-                totals, ruimte, Bouwkundigelementdetailsoort.lavet, 1
+            Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+                woningwaardering_groep.woningwaarderingen,
+                ruimte,
+                Bouwkundigelementdetailsoort.lavet,
+                1,
             )
 
             # code voor bad en douche, of bad-douche in zelfde ruimte
@@ -94,33 +117,31 @@ class Sanitair2024(Stelselgroepversie):
                 ruimte, Bouwkundigelementdetailsoort.douche.code
             )
             if bad_aanwezig and douche_aanwezig:
-                totals[
-                    f"{Bouwkundigelementdetailsoort.bad.naam} en {Bouwkundigelementdetailsoort.douche.naam} in zelfde ruimte"
-                ]["punten"] += Decimal("7")
-                totals[
-                    f"{Bouwkundigelementdetailsoort.bad.naam} en {Bouwkundigelementdetailsoort.douche.naam} in zelfde ruimte"
-                ]["aantal"] += 1
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam=f"{Bouwkundigelementdetailsoort.bad.naam} en {Bouwkundigelementdetailsoort.douche.naam} in zelfde ruimte"
+                        ),
+                        punten=Decimal("7"),
+                        aantal=1,
+                    )
+                )
 
             elif bad_aanwezig:
-                totals[Bouwkundigelementdetailsoort.bad.naam]["punten"] += Decimal("6")
-                totals[Bouwkundigelementdetailsoort.bad.naam]["aantal"] += 1
+                Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+                    woningwaardering_groep.woningwaarderingen,
+                    ruimte,
+                    Bouwkundigelementdetailsoort.bad,
+                    6,
+                )
 
             elif douche_aanwezig:
-                totals[Bouwkundigelementdetailsoort.douche.naam]["punten"] += Decimal(
-                    "4"
+                Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+                    woningwaardering_groep.woningwaarderingen,
+                    ruimte,
+                    Bouwkundigelementdetailsoort.douche,
+                    4,
                 )
-                totals[Bouwkundigelementdetailsoort.douche.naam]["aantal"] += 1
-
-        for naam, waarden in totals.items():
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=naam
-                    ),
-                    punten=waarden["punten"],
-                    aantal=waarden["aantal"],
-                )
-            )
 
         punten = Decimal(
             sum(
