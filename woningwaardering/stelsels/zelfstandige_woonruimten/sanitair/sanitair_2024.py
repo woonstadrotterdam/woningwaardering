@@ -40,6 +40,8 @@ class Sanitair2024(Stelselgroepversie):
             ruimte (EenhedenRuimte): Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
             element (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
+        Raises:
+            TypeError: Wanneer een woningwaardering geen criterium heeft
         """
         aantal = aantal_bouwkundige_elementen(ruimte, element.code)
         if aantal > 0:
