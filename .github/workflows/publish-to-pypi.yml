@@ -1,5 +1,5 @@
 name: Publish Python distribution
-
+run-name: Publish release ${{ github.ref_name }}
 on:
   push:
     tags:
@@ -107,7 +107,9 @@ jobs:
           gh release create
           '${{ github.ref_name }}'
           --repo '${{ github.repository }}'
+          ${{ (contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc')) && '--prerelease' || ''}}
           --generate-notes
+          --notes-start-tag $(gh release view --repo '${{ github.repository }}' --jq .tagName --json tagName)
       - name: Upload artifact signatures to GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
