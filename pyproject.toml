@@ -32,8 +32,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/WoonstadRotterdamTemp/woningwaardering"
-Issues = "https://github.com/WoonstadRotterdamTemp/woningwaardering/issues"
+Homepage = "https://github.com/woonstadrotterdam/woningwaardering"
+Issues = "https://github.com/woonstadrotterdam/woningwaardering/issues"
 
 [tool.setuptools.packages.find]
 include = ["woningwaardering*"]

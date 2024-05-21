@@ -99,7 +99,7 @@ In dit geval zal de `woningwaardering`-package een error geven die duidelijk maa
 Om de woningwaardering-package en de daarbij behorende developer dependencies te installeren, run onderstaand command:
 
 ```
-git clone https://github.com/WoonstadRotterdamTemp/woningwaardering.git
+git clone https://github.com/woonstadrotterdam/woningwaardering.git
 cd woningwaardering
 pip install -e ".[dev]"
 ```
