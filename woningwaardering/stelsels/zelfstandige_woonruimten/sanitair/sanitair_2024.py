@@ -29,7 +29,7 @@ class Sanitair2024(Stelselgroepversie):
     def _waardeer_bouwkundig_element_detailsoort(
         woningwaarderingen: List[WoningwaarderingResultatenWoningwaardering],
         ruimte: EenhedenRuimte,
-        element: Bouwkundigelementdetailsoort,
+        elementdetailsoort: Bouwkundigelementdetailsoort,
         punten_per_element: float,
     ) -> None:
         """
@@ -38,19 +38,21 @@ class Sanitair2024(Stelselgroepversie):
         Args:
             woningwaarderingen (List[WoningwaarderingResultatenWoningwaardering]): Een list met woningwaarderingen.
             ruimte (EenhedenRuimte): Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
-            element (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
+            elementdetailsoort (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
         Raises:
             TypeError: Wanneer een woningwaardering geen criterium heeft
         """
-        aantal = aantal_bouwkundige_elementen(ruimte, element.code)
+        aantal = aantal_bouwkundige_elementen(ruimte, elementdetailsoort.code)
         if aantal > 0:
-            logger.debug(f"Aantal '{element.naam}' in {ruimte.naam}: {aantal}")
+            logger.debug(
+                f"Aantal '{elementdetailsoort.naam}' in {ruimte.naam}: {aantal}"
+            )
 
             for woningwaardering in woningwaarderingen:
                 if woningwaardering.criterium is None:
                     raise TypeError("Woningwaardering criterium is None")
-                if woningwaardering.criterium.naam == element.naam:
+                if woningwaardering.criterium.naam == elementdetailsoort.naam:
                     if woningwaardering.punten is None:
                         woningwaardering.punten = 0.0
                     logger.debug(f"{woningwaardering.punten = }")
@@ -62,7 +64,7 @@ class Sanitair2024(Stelselgroepversie):
             else:
                 woningwaardering = WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=element.naam
+                        naam=elementdetailsoort.naam
                     ),
                     punten=Decimal(punten_per_element) * aantal,
                     aantal=aantal,

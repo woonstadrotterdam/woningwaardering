@@ -1,3 +1,4 @@
+from typing import List
 from woningwaardering.vera.bvg.generated import EenhedenRuimte
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
@@ -30,6 +31,23 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
     )
 
 
+def get_bouwkundige_elementen_codes(ruimte: EenhedenRuimte) -> List[str]:
+    """
+    Gets the list of codes for bouwkundige elementen in the ruimte.
+
+    Args:
+        ruimte (EenhedenRuimte): The ruimte to check.
+
+    Returns:
+        List[str]: The set of codes for bouwkundige elementen in the ruimte.
+    """
+    return [
+        element.detail_soort.code
+        for element in ruimte.bouwkundige_elementen or []
+        if element.detail_soort is not None and element.detail_soort.code is not None
+    ]
+
+
 def heeft_bouwkundig_element(
     ruimte: EenhedenRuimte, *bouwkundige_elementen_codes: str
 ) -> bool:
@@ -43,11 +61,7 @@ def heeft_bouwkundig_element(
     Returns:
         bool: True als de ruimte één of meerdere van de opgegeven bouwkundige elementen bevat, anders False.
     """
-    ruimte_bouwkundige_elementen_codes = {
-        element.detail_soort.code
-        for element in ruimte.bouwkundige_elementen or []
-        if element.detail_soort is not None
-    }
+    ruimte_bouwkundige_elementen_codes = set(get_bouwkundige_elementen_codes(ruimte))
 
     return any(
         ruimte_bouwkundige_elementen_codes.intersection({*bouwkundige_elementen_codes})
@@ -55,25 +69,24 @@ def heeft_bouwkundig_element(
 
 
 def aantal_bouwkundige_elementen(
-    ruimte: EenhedenRuimte, bouwkundige_elementen_code: str
+    ruimte: EenhedenRuimte, *bouwkundige_elementen_codes: str
 ) -> int:
     """
     Telt het aantal bouwkundige elementen in een ruimte dat overeenkomt met het opgegeven bouwkundige element.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waarin geteld moet worden.
-        bouwkundige_elementen_code (str): De code van het bouwkundige element waarop geteld moet worden.
+        *bouwkundige_elementen_codes (str): De codes van de bouwkundige elementen die geteld moeten worden.
 
     Returns:
         int: Het aantal bouwkundige elementen in de ruimte dat overeenkomt met de opgegeven bouwkundige elementen.
     """
+    ruimte_bouwkundige_elementen_codes = get_bouwkundige_elementen_codes(ruimte)
 
     return len(
         [
-            element
-            for element in ruimte.bouwkundige_elementen or []
-            if element.detail_soort is not None
-            and element.detail_soort.code is not None
-            and element.detail_soort.code in bouwkundige_elementen_code
+            code
+            for code in ruimte_bouwkundige_elementen_codes
+            if code in bouwkundige_elementen_codes
         ]
     )
