@@ -61,16 +61,14 @@ class Sanitair2024(Stelselgroepversie):
                 woningwaardering = WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=elementdetailsoort.naam
-                    ),
-                    punten=Decimal(punten_per_element) * aantal,
-                    aantal=aantal,
+                    )
                 )
                 woningwaarderingen.append(woningwaardering)
-            else:
-                woningwaardering.punten = (
-                    woningwaardering.punten or 0.0
-                ) + punten_per_element * aantal
-                woningwaardering.aantal = (woningwaardering.aantal or 0.0) + aantal
+
+            woningwaardering.punten = (
+                woningwaardering.punten or 0.0
+            ) + punten_per_element * aantal
+            woningwaardering.aantal = (woningwaardering.aantal or 0.0) + aantal
 
     @staticmethod
     def bereken(
