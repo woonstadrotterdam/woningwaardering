@@ -1,0 +1,191 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
+        }
+      },
+      "punten": 54.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 15.89,
+          "criterium": {
+            "naam": "Woonkamer + 1 kast",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.63,
+          "criterium": {
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 9.08,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 4.73,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 8.72,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 4.94,
+          "criterium": {
+            "naam": "Badruimte",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 6.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 4.4,
+          "criterium": {
+            "naam": "Zolder",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 5.05,
+          "criterium": {
+            "naam": "Berging",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VZE",
+          "naam": "Verwarming"
+        }
+      },
+      "punten": 12.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Woonkamer"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Keuken"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte"
+          },
+          "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 14.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "D (oud)"
+          },
+          "punten": 14.0
+        }
+      ]
+    }
+  ],
+  "punten": 87.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
+}

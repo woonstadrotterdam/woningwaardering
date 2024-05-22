@@ -1,0 +1,187 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
+        }
+      },
+      "punten": 65.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 9.6,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 4.71,
+          "criterium": {
+            "naam": "Badruimte",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 9.37,
+          "criterium": {
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 13.41,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 21.84,
+          "criterium": {
+            "naam": "Woonkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 6.06,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 20.25,
+      "woningwaarderingen": [
+        {
+          "aantal": 26.96,
+          "criterium": {
+            "naam": "Zolder",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VZE",
+          "naam": "Verwarming"
+        }
+      },
+      "punten": 9.75,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte"
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "naam": "Zolder"
+          },
+          "punten": 0.75
+        },
+        {
+          "criterium": {
+            "naam": "Keuken"
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "naam": "Woonkamer"
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 1.5
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 36.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "A (oud)"
+          },
+          "punten": 36.0
+        }
+      ]
+    }
+  ],
+  "punten": 131.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
+}
