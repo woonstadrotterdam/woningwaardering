@@ -59,14 +59,13 @@ def heeft_bouwkundig_element(
         *bouwkundige_elementen_codes (str): De codes van de bouwkundige elementen waarop gecontroleerd moet worden.
 
     Returns:
-        bool: True als de ruimte één of meerdere van de opgegeven bouwkundige elementen bevat, anders False.
+        bool: True als de ruimte alle opgegeven bouwkundige elementen bevat, anders False.
     """
-    ruimte_bouwkundige_elementen_codes = get_bouwkundige_elementen_codes(ruimte)
+    ruimte_bouwkundige_elementen_codes = list(get_bouwkundige_elementen_codes(ruimte))
 
-    return any(
-        set(bouwkundige_elementen_codes).intersection(
-            ruimte_bouwkundige_elementen_codes
-        )
+    return all(
+        code in ruimte_bouwkundige_elementen_codes
+        for code in bouwkundige_elementen_codes
     )
 
 
