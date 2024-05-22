@@ -497,7 +497,14 @@ voorzien van een (hand)douche, dan wordt het douchegarnituur niet afzonderlijk g
 Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangebracht, geldt een
 waardering van zeven punten.  
 
-> Het is ambigu hoeveel punten er zouden moeten worden toegekend indien een badruimte meer dan één douche bevat en een bad. I.v.m. de onwaarschijnlijkheid van het voortkomen van deze situatie is er gekozen om deze situatie niet te ondersteunen in de implementatie. Indien er een bad en een douche in dezelfde ruimte aanwezig zijn worden er 7 punten toegekend, onafhankelijk van het aantal douches en baden.
+> Het is ambigu hoeveel punten er zouden moeten worden toegekend indien een badruimte meer dan één douche bevat en één bad of vice versa. I.v.m. de onwaarschijnlijkheid van het voortkomen van deze situatie is er gekozen om deze situatie niet te ondersteunen in de implementatie. Indien er een bad en een douche in dezelfde ruimte aanwezig zijn worden er 7 punten toegekend per combinatie van bad en douche.  
+>
+> Ofterwijl:
+>
+> - één bad en één douche in dezelfde ruimte: 7 punten  
+> - één bad en twee douches in dezelfde ruimte: 7 punten
+> - twee baden en één douche in dezelfde ruimte: 7 punten
+> - twee baden en twee douches in dezelfde ruimte: 14 punten
 
 ~~**Voorzieningen in een bad- en doucheruimte**~~  
 ~~Indien sprake is van sanitaire voorzieningen in een bad- of doucheruimte*, dan worden alleen
