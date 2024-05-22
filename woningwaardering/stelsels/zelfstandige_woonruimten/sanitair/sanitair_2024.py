@@ -39,6 +39,7 @@ class Sanitair2024(Stelselgroepversie):
             ruimte (EenhedenRuimte): Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
             *elementdetailsoort (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
+
         Returns:
             bool: True wanneer er punten gewaardeerd zijn
         """
@@ -77,6 +78,7 @@ class Sanitair2024(Stelselgroepversie):
             woningwaardering.punten = (
                 woningwaardering.punten or 0.0
             ) + punten_per_element * aantal
+
             woningwaardering.aantal = (woningwaardering.aantal or 0.0) + aantal
 
             return True
