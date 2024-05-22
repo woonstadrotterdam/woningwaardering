@@ -70,24 +70,25 @@ def heeft_bouwkundig_element(
 
 
 def aantal_bouwkundige_elementen(
-    ruimte: EenhedenRuimte, *bouwkundige_elementen_codes: str
+    ruimte: EenhedenRuimte, *bouwkundigelementdetailsoort: Bouwkundigelementdetailsoort
 ) -> int:
     """
     Telt het aantal bouwkundige elementen in een ruimte dat overeenkomt met het opgegeven bouwkundige element.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waarin geteld moet worden.
-        *bouwkundige_elementen_codes (str): De codes van de bouwkundige elementen die geteld moeten worden.
+        *bouwkundigelementdetailsoort (Bouwkundigelementdetailsoort): De bouwkundige elementen die geteld moeten worden.
 
     Returns:
         int: Het aantal bouwkundige elementen in de ruimte dat overeenkomt met de opgegeven bouwkundige elementen.
     """
-    ruimte_bouwkundige_elementen_codes = get_bouwkundige_elementen_codes(ruimte)
+    ruimte_bouwkundige_elementen_codes = list(get_bouwkundige_elementen_codes(ruimte))
 
     return len(
         list(
             code
             for code in ruimte_bouwkundige_elementen_codes
-            if code in bouwkundige_elementen_codes
+            if code
+            in (detailsoort.code for detailsoort in bouwkundigelementdetailsoort)
         )
     )

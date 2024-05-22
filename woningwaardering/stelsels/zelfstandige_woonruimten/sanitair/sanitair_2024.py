@@ -41,7 +41,7 @@ class Sanitair2024(Stelselgroepversie):
             elementdetailsoort (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
         """
-        aantal = aantal_bouwkundige_elementen(ruimte, elementdetailsoort.code)
+        aantal = aantal_bouwkundige_elementen(ruimte, elementdetailsoort)
         if aantal > 0:
             logger.debug(
                 f"Aantal '{elementdetailsoort.naam}' in {ruimte.naam}: {aantal}"
