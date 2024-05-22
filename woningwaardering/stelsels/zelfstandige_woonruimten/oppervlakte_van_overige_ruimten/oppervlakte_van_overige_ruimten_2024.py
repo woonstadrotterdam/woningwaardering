@@ -140,9 +140,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
             float: De berekende oppervlakte voor de zolder.
         """
         if ruimte.detail_soort is not None and ruimte.oppervlakte is not None:
-            trap = heeft_bouwkundig_element(
-                ruimte, Bouwkundigelementdetailsoort.trap.code
-            )
+            trap = heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
 
             if trap:
                 logger.debug(
@@ -155,7 +153,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                 )
 
             vlizotrap = heeft_bouwkundig_element(
-                ruimte, Bouwkundigelementdetailsoort.vlizotrap.code
+                ruimte, Bouwkundigelementdetailsoort.vlizotrap
             )
 
             if vlizotrap:

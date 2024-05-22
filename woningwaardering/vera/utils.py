@@ -26,7 +26,7 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
         ruimte.detail_soort.code
         in [Ruimtedetailsoort.doucheruimte.code, Ruimtedetailsoort.badkamer.code]
         and heeft_bouwkundig_element(
-            ruimte, Bouwkundigelementdetailsoort.closetcombinatie.code
+            ruimte, Bouwkundigelementdetailsoort.closetcombinatie
         )
     )
 
@@ -49,14 +49,14 @@ def get_bouwkundige_elementen_codes(ruimte: EenhedenRuimte) -> Iterator[str]:
 
 
 def heeft_bouwkundig_element(
-    ruimte: EenhedenRuimte, *bouwkundige_elementen_codes: str
+    ruimte: EenhedenRuimte, *bouwkundigelementdetailsoort: Bouwkundigelementdetailsoort
 ) -> bool:
     """
     Controleert of een ruimte een specifiek bouwkundig element bevat.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waarin gecontroleerd moet worden.
-        *bouwkundige_elementen_codes (str): De codes van de bouwkundige elementen waarop gecontroleerd moet worden.
+        *bouwkundigelementdetailsoort (Bouwkundigelementdetailsoort): De bouwkundige elementen waarop gecontroleerd moet worden.
 
     Returns:
         bool: True als de ruimte alle opgegeven bouwkundige elementen bevat, anders False.
@@ -64,8 +64,8 @@ def heeft_bouwkundig_element(
     ruimte_bouwkundige_elementen_codes = list(get_bouwkundige_elementen_codes(ruimte))
 
     return all(
-        code in ruimte_bouwkundige_elementen_codes
-        for code in bouwkundige_elementen_codes
+        elementdetailsoort.code in ruimte_bouwkundige_elementen_codes
+        for elementdetailsoort in bouwkundigelementdetailsoort
     )
 
 

@@ -113,13 +113,13 @@ class Sanitair2024(Stelselgroepversie):
             )
 
             # code voor bad en douche, of bad-douche in zelfde ruimte
-            bad_aanwezig = heeft_bouwkundig_element(
-                ruimte, Bouwkundigelementdetailsoort.bad.code
+            bad_en_douche = heeft_bouwkundig_element(
+                ruimte,
+                Bouwkundigelementdetailsoort.bad,
+                Bouwkundigelementdetailsoort.douche,
             )
-            douche_aanwezig = heeft_bouwkundig_element(
-                ruimte, Bouwkundigelementdetailsoort.douche.code
-            )
-            if bad_aanwezig and douche_aanwezig:
+
+            if bad_en_douche:
                 woningwaardering_groep.woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -130,7 +130,7 @@ class Sanitair2024(Stelselgroepversie):
                     )
                 )
 
-            elif bad_aanwezig:
+            else:
                 Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
@@ -138,7 +138,6 @@ class Sanitair2024(Stelselgroepversie):
                     6,
                 )
 
-            elif douche_aanwezig:
                 Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
