@@ -88,10 +88,12 @@ stelsels_folder = Path("woningwaardering") / "stelsels"
 stelsel_folder = stelsels_folder / stelsel
 stelsel_file_path = stelsel_folder / f"{stelsel}.py"
 
+stelsel_class_naam = string.capwords(woningwaarderingstelsel.name, "_").replace("_", "")
+
 if check_write(stelsel_file_path):
     stelsel_template = environment.get_template("stelsels/stelsel/stelsel.py.j2")
     stelsel_result = stelsel_template.render(
-        className=string.capwords(woningwaarderingstelsel.name, "_").replace("_", ""),
+        className=stelsel_class_naam,
         stelsel=woningwaarderingstelsel,
     )
     stelsel_folder.mkdir(parents=True, exist_ok=True)
@@ -193,7 +195,7 @@ stelselgroep_init_result = stelselgroep_init_template.render(
 stelsel_init_template = environment.get_template("stelsels/stelsel/__init__.py.j2")
 
 stelsel_init_result = stelsel_init_template.render(
-    stelselgroepen=stelselconfig.stelselgroepen
+    className=stelsel_class_naam, stelselconfig=stelselconfig
 )
 
 (stelsel_folder / "__init__.py").write_text(stelsel_init_result)

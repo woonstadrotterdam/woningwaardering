@@ -5,7 +5,7 @@ from pathlib import Path
 from loguru import logger
 from pydantic import ValidationError
 
-from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
+from woningwaardering.stelsels.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
 )
 from woningwaardering.vera.bvg.generated import (
