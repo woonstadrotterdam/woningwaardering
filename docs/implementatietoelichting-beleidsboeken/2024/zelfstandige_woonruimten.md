@@ -499,7 +499,7 @@ waardering van zeven punten.
 
 > Het is ambigu hoeveel punten er zouden moeten worden toegekend indien een badruimte meer dan één douche bevat en één bad of vice versa. I.v.m. de onwaarschijnlijkheid van het voortkomen van deze situatie is er gekozen om deze situatie niet te ondersteunen in de implementatie. Indien er een bad en een douche in dezelfde ruimte aanwezig zijn worden er 7 punten toegekend per combinatie van bad en douche.  
 >
-> Ofterwijl:
+> Oftewel:
 >
 > - één bad en één douche in dezelfde ruimte: 7 punten  
 > - één bad en twee douches in dezelfde ruimte: 7 punten
