@@ -20,7 +20,6 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.utils import (
     aantal_bouwkundige_elementen,
-    heeft_bouwkundig_element,
 )
 
 
@@ -29,9 +28,9 @@ class Sanitair2024(Stelselgroepversie):
     def _waardeer_bouwkundig_element_detailsoort(
         woningwaarderingen: List[WoningwaarderingResultatenWoningwaardering],
         ruimte: EenhedenRuimte,
-        elementdetailsoort: Bouwkundigelementdetailsoort,
         punten_per_element: float,
-    ) -> None:
+        *elementdetailsoort: Bouwkundigelementdetailsoort,
+    ) -> bool:
         """
         Berekent de punten voor een specifiek type bouwkundig element detail.
 
@@ -41,18 +40,26 @@ class Sanitair2024(Stelselgroepversie):
             elementdetailsoort (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
         """
-        aantal = aantal_bouwkundige_elementen(ruimte, elementdetailsoort)
+        aantal = aantal_bouwkundige_elementen(ruimte, *elementdetailsoort)
         if aantal > 0:
-            logger.debug(
-                f"Aantal '{elementdetailsoort.naam}' in {ruimte.naam}: {aantal}"
+            soorten = " en ".join(
+                detailsoort.naam
+                for detailsoort in elementdetailsoort
+                if detailsoort.naam is not None
             )
+
+            logger.debug(f"Aantal '{soorten}' in {ruimte.naam}: {aantal}")
+
+            naam = soorten
+            if len(elementdetailsoort) > 1:
+                naam += " in zelfde ruimte"
 
             woningwaardering = next(
                 (
                     woningwaardering
                     for woningwaardering in woningwaarderingen
                     if woningwaardering.criterium is not None
-                    and woningwaardering.criterium.naam == elementdetailsoort.naam
+                    and woningwaardering.criterium.naam == naam
                 ),
                 None,
             )
@@ -60,7 +67,7 @@ class Sanitair2024(Stelselgroepversie):
             if woningwaardering is None:
                 woningwaardering = WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=elementdetailsoort.naam
+                        naam=naam
                     )
                 )
                 woningwaarderingen.append(woningwaardering)
@@ -69,6 +76,10 @@ class Sanitair2024(Stelselgroepversie):
                 woningwaardering.punten or 0.0
             ) + punten_per_element * aantal
             woningwaardering.aantal = (woningwaardering.aantal or 0.0) + aantal
+
+            return True
+        else:
+            return False
 
     @staticmethod
     def bereken(
@@ -90,59 +101,47 @@ class Sanitair2024(Stelselgroepversie):
             Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
-                Bouwkundigelementdetailsoort.closetcombinatie,
                 3,
+                Bouwkundigelementdetailsoort.closetcombinatie,
             )
             Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
+                1,
                 Bouwkundigelementdetailsoort.wastafel,
-                1,
             )
             Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
+                1,
                 Bouwkundigelementdetailsoort.bidet,
-                1,
             )
             Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
-                Bouwkundigelementdetailsoort.lavet,
                 1,
+                Bouwkundigelementdetailsoort.lavet,
             )
 
-            # code voor bad en douche, of bad-douche in zelfde ruimte
-            bad_en_douche = heeft_bouwkundig_element(
+            if not Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+                woningwaardering_groep.woningwaarderingen,
                 ruimte,
+                7,
                 Bouwkundigelementdetailsoort.bad,
                 Bouwkundigelementdetailsoort.douche,
-            )
-
-            if bad_en_douche:
-                woningwaardering_groep.woningwaarderingen.append(
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{Bouwkundigelementdetailsoort.bad.naam} en {Bouwkundigelementdetailsoort.douche.naam} in zelfde ruimte"
-                        ),
-                        punten=Decimal("7"),
-                        aantal=1,
-                    )
-                )
-
-            else:
+            ):
                 Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
-                    Bouwkundigelementdetailsoort.bad,
                     6,
+                    Bouwkundigelementdetailsoort.bad,
                 )
 
                 Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
-                    Bouwkundigelementdetailsoort.douche,
                     4,
+                    Bouwkundigelementdetailsoort.douche,
                 )
 
         punten = Decimal(

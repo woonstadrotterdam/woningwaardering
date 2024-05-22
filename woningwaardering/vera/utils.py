@@ -73,7 +73,7 @@ def aantal_bouwkundige_elementen(
     ruimte: EenhedenRuimte, *bouwkundigelementdetailsoort: Bouwkundigelementdetailsoort
 ) -> int:
     """
-    Telt het aantal bouwkundige elementen in een ruimte dat overeenkomt met het opgegeven bouwkundige element.
+    Telt (de combinatie van) het aantal bouwkundige elementen in een ruimte dat overeenkomt met het opgegeven bouwkundige element.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waarin geteld moet worden.
@@ -82,6 +82,12 @@ def aantal_bouwkundige_elementen(
     Returns:
         int: Het aantal bouwkundige elementen in de ruimte dat overeenkomt met de opgegeven bouwkundige elementen.
     """
+    if len(bouwkundigelementdetailsoort) > 1:
+        return min(
+            aantal_bouwkundige_elementen(ruimte, detailsoort)
+            for detailsoort in bouwkundigelementdetailsoort
+        )
+
     ruimte_bouwkundige_elementen_codes = list(get_bouwkundige_elementen_codes(ruimte))
 
     return len(
