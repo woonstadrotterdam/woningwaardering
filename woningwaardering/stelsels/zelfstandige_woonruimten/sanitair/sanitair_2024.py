@@ -37,8 +37,8 @@ class Sanitair2024(Stelselgroepversie):
         Args:
             woningwaarderingen (List[WoningwaarderingResultatenWoningwaardering]): Een list met woningwaarderingen.
             ruimte (EenhedenRuimte): Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
-            *elementdetailsoort (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
+            *elementdetailsoort (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
         Returns:
             bool: True wanneer er punten gewaardeerd zijn
         """
