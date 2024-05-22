@@ -1,4 +1,4 @@
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 from typing import List
 
 from loguru import logger
@@ -152,7 +152,7 @@ class Sanitair2024(Stelselgroepversie):
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.punten is not None
             )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
+        )
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
