@@ -8,7 +8,7 @@ from woningwaardering.stelsels.utils import import_class
     "module_path, class_naam, class_type",
     [
         (
-            "woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten",
+            "woningwaardering.stelsels.zelfstandige_woonruimten",
             "ZelfstandigeWoonruimten",
             Stelsel,
         ),
