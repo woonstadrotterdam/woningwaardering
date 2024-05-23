@@ -33,13 +33,13 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
 
 def get_bouwkundige_elementen_codes(ruimte: EenhedenRuimte) -> Iterator[str]:
     """
-    Gets the list of codes for bouwkundige elementen in the ruimte.
+    Haalt de lijst met codes van bouwkundige elementen in de ruimte op.
 
     Args:
-        ruimte (EenhedenRuimte): The ruimte to check.
+        ruimte (EenhedenRuimte): Een ruimte met bouwkundige elementen
 
     Returns:
-        Iterator[str]: The iterator of codes for bouwkundige elementen in the ruimte.
+        Iterator[str]: Een iterator van de codes van de bouwkundige elementen.
     """
     return (
         element.detail_soort.code
