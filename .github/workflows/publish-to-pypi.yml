@@ -90,6 +90,8 @@ jobs:
 
     steps:
       - name: Get latest release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         id: latest-release
         run: |
           latestTagName=$(gh release view --jq .tagName --json tagName)
