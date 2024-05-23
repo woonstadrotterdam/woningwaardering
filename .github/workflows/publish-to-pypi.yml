@@ -94,10 +94,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         id: latest-release
         run: |
-          latestTagName=$(gh release view --jq .tagName --json tagName)
+          latestTagName=$(gh release view --repo '${{ github.repository }}' --jq .tagName --json tagName)
           if [ "$latestTagName" == "" ]; then
             echo "getting prerelease"
-            latestTagName=$(gh release list -L1 --json tagName --jq .[].tagName)
+            latestTagName=$(gh release list -L1 --repo '${{ github.repository }}' --json tagName --jq .[].tagName)
           fi
           echo "LATEST_TAG_NAME=$latestTagName" >> "$GITHUB_OUTPUT"
       - name: Download all the dists
