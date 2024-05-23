@@ -90,6 +90,7 @@ jobs:
 
     steps:
       - name: Get latest release
+        shell: bash {0}
         env:
           GITHUB_TOKEN: ${{ github.token }}
         id: latest-release
