@@ -1,4 +1,5 @@
 from datetime import date
+
 import pytest
 
 from woningwaardering.stelsels.stelsel import Stelsel
@@ -14,7 +15,7 @@ from woningwaardering.vera.referentiedata import (
         (
             date(2025, 1, 1),
             Woningwaarderingstelsel.zelfstandige_woonruimten,
-            4,
+            5,
         )
     ],
 )

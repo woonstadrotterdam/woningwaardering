@@ -130,7 +130,7 @@ class Verwarming2024(Stelselgroepversie):
                     Ruimtedetailsoort.slaapkamer.code,
                 ]
                 and heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.aanrecht.code
+                    ruimte, Bouwkundigelementdetailsoort.aanrecht
                 )
             ):
                 woningwaardering_groep.woningwaarderingen.append(

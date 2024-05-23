@@ -1,0 +1,19 @@
+{
+  "ruimten": [
+    {
+      "bouwkundigeElementen": [
+        {
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "LAV",
+            "naam": "Lavet"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -33,3 +33,11 @@ stelselgroepen:
       - module: energieprestatie_2024
         class_naam: Energieprestatie2024
         begindatum: 2024-01-01
+  sanitair:
+    module: sanitair
+    class_naam: Sanitair
+    begindatum: 2024-01-01
+    versies:
+      - module: sanitair_2024
+        class_naam: Sanitair2024
+        begindatum: 2024-01-01
