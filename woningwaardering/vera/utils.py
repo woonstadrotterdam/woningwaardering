@@ -61,7 +61,7 @@ def heeft_bouwkundig_element(
     Returns:
         bool: True als de ruimte alle opgegeven bouwkundige elementen bevat, anders False.
     """
-    ruimte_bouwkundige_elementen_codes = list(get_bouwkundige_elementen_codes(ruimte))
+    ruimte_bouwkundige_elementen_codes = get_bouwkundige_elementen_codes(ruimte)
 
     return all(
         elementdetailsoort.code in ruimte_bouwkundige_elementen_codes
@@ -88,7 +88,7 @@ def aantal_bouwkundige_elementen(
             for detailsoort in bouwkundigelementdetailsoort
         )
 
-    ruimte_bouwkundige_elementen_codes = list(get_bouwkundige_elementen_codes(ruimte))
+    ruimte_bouwkundige_elementen_codes = get_bouwkundige_elementen_codes(ruimte)
 
     return len(
         list(
