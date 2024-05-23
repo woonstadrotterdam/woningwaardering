@@ -122,7 +122,7 @@ jobs:
           --repo '${{ github.repository }}'
           ${{ (contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc')) && '--prerelease' || ''}}
           --generate-notes
-          --notes-start-tag $TAG_NAME
+          --notes-start-tag $LATEST_TAG_NAME
       - name: Upload artifact signatures to GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
