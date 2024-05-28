@@ -447,52 +447,41 @@ Voor woningen die zelf (gedeeltelijk) in hun energieverbruik voorzien, door bijv
 > Hiervoor is het `EenhedenEnergieprestatie` model uitgebreid met het attribuut `energieprestatievergoeding`. Dit attribuut dient gevuld te zijn met een boolean die aangeeft of er bij het verhuren een energieprestatievergoeding (EPV) is overeengekomen.
 
 ## 4.6 Keuken
-Het woningwaarderingsstelsel kent aan een zelfstandige woonruimte punten toe voor het
-onderdeel keukeninstallatie. Het woningwaarderingsstelsel geeft dus, naast punten voor de
-oppervlakte van de keuken (zijnde een vertrek, zie hiervoor onder 4.2.1) ook punten voor de
-keukeninstallatie. Er zijn door de wetgever wel eisen gesteld om aan zo’n keukeninstallatie punten
-te mogen toekennen. En ook heeft de wetgever bepaald aan de hand waarvan je tot puntentoekenning komt.
-Hieronder wordt uiteengezet aan welke eisen moet zijn voldaan om punten aan een keukeninstallatie toe te kennen en op welke manier je de punten moet berekenen (4.6.1). Ook wordt besproken wanneer er extra kwaliteitspunten worden toegekend, welke keukenvoorzieningen daarvoor in
-aanmerking komen (4.6.2).
+
+Het woningwaarderingsstelsel kent aan een zelfstandige woonruimte punten toe voor het onderdeel keukeninstallatie. Het woningwaarderingsstelsel geeft dus, naast punten voor de oppervlakte van de keuken (zijnde een vertrek, zie hiervoor onder [4.2.1](#421-wat-zijn-vertrekken)) ook punten voor de keukeninstallatie. Er zijn door de wetgever wel eisen gesteld om aan zo’n keukeninstallatie punten te mogen toekennen. En ook heeft de wetgever bepaald aan de hand waarvan je tot puntentoekenning komt. Hieronder wordt uiteengezet aan welke eisen moet zijn voldaan om punten aan een keukeninstallatie toe te kennen en op welke manier je de punten moet berekenen ([4.6.1](#461-voorzieningen-keuken)). Ook wordt besproken wanneer er extra kwaliteitspunten worden toegekend, welke keukenvoorzieningen daarvoor in aanmerking komen ([4.6.2](#462-voorzieningen-die-extra-kwaliteitspunten-opleveren)).
 
 ### 4.6.1 Voorzieningen keuken
-Het woningwaarderingsstelsel geeft, naast punten voor de oppervlakte van het vertrek, ook
-punten voor de keukeninstallatie van zo’n vertrek.
-Keukeninstallatie?
-Om punten vanwege de keukeninstallatie toe te kennen, moet het wel gaan om een inrichting van
-het vertrek dat als keukeninstallatie moet worden beschouwd.
-Daarvoor is in ieder geval vereist dat er een aanrecht aanwezig is. Zonder aanrecht spreken we
-niet van een keukeninstallatie. Aanvullend geldt nog dat de keuken voorzien moet zijn van een
-aan- en afvoer van water. Verder moet de keuken tenminste één aansluitpunt voor koken op gas
-of elektriciteit hebben. En het aanrecht moet zijn voorzien van minimaal twee onderkasten (met
-laden, deuren of schuiven).
-In geval aan deze eisen niet wordt voldaan, is er geen sprake van een keukeninstallatie in de zin van het woningwaarderingsstelsel en worden er dus geen punten voor keukeninstallatie gerekend, ongeacht de lengte van het aanrecht (zie hierna). Ook kom je dan niet toe aan extra punten
-vanwege de kwaliteit van de voorzieningen als bedoeld in paragraaf 4.6.2.
 
-#### **Punten: lengte van het aanrecht**
+Het woningwaarderingsstelsel geeft, naast punten voor de oppervlakte van het vertrek, ook punten voor de keukeninstallatie van zo’n vertrek.
+
+**Keukeninstallatie?**  
+Om punten vanwege de keukeninstallatie toe te kennen, moet het wel gaan om een inrichting van het vertrek dat als keukeninstallatie moet worden beschouwd. Daarvoor is in ieder geval vereist dat er een aanrecht aanwezig is. Zonder aanrecht spreken we niet van een keukeninstallatie. Aanvullend geldt nog dat de keuken voorzien moet zijn van een aan- en afvoer van water. Verder moet de keuken tenminste één aansluitpunt voor koken op gas of elektriciteit hebben. En het aanrecht moet zijn voorzien van minimaal twee onderkasten (met
+laden, deuren of schuiven).  
+
+In geval aan deze eisen niet wordt voldaan, is er geen sprake van een keukeninstallatie in de zin van het woningwaarderingsstelsel en worden er dus geen punten voor keukeninstallatie gerekend, ongeacht de lengte van het aanrecht (zie hierna). Ook kom je dan niet toe aan extra punten
+vanwege de kwaliteit van de voorzieningen als bedoeld in paragraaf [4.6.2](#462-voorzieningen-die-extra-kwaliteitspunten-opleveren).
+
+#### Punten: lengte van het aanrecht
+
 Uitgangspunt voor de waardering van de keukeninstallatie is de lengte van het aanrecht:
+
 - Is de lengte van het aanrecht minder dan 1 meter, dan worden er geen punten toegekend.
 - Is de lengte van het aanrecht tussen de 1 en 2 meter, dan worden er 4 punten toegekend.
 - Is de lengte van het aanrecht 2 meter of langer, dan worden er 7 punten toegekend.
 
-De lengte van het aanrecht moet over midden van het bovenblad worden gemeten. Daarbij
-moeten de ingebouwde spoelbakken worden meegeteld. Ingebouwde kookplaten worden niet
-meegeteld.
-Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 meter, voldoet dus niet aan
-de eis van 1 meter en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel.
-Een aanrecht zonder onderkasten wordt gewaardeerd als een wastafel.
-Indien een aanrechtblad langer is dan de aanwezige onderkasten met de bedoeling dat er onder
-het langere gedeelte van het aanrechtblad een losstaande koelkast, vaatwasser, wasmachine e.d.,
-kan worden geplaatst, dan wordt dit gedeelte van het aanrechtblad mee gemeten mits er onder
-het blad aansluitmogelijkheden aanwezig zijn voor genoemde apparatuur.
+De lengte van het aanrecht moet over midden van het bovenblad worden gemeten. Daarbij moeten de ingebouwde spoelbakken worden meegeteld. Ingebouwde kookplaten worden niet meegeteld.  
+
+Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 meter, voldoet dus niet aan de eis van 1 meter en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel. Een aanrecht zonder onderkasten wordt gewaardeerd als een wastafel.  
+
+Indien een aanrechtblad langer is dan de aanwezige onderkasten met de bedoeling dat er onder het langere gedeelte van het aanrechtblad een losstaande koelkast, vaatwasser, wasmachine e.d., kan worden geplaatst, dan wordt dit gedeelte van het aanrechtblad mee gemeten mits er onder het blad aansluitmogelijkheden aanwezig zijn voor genoemde apparatuur.  
+
 Een ingebouwde (onroerende) koelkast, vaatwasser en/of oven beschouwen we als onderkast,
 mits daarnaast voldoende vervangende (andere) kastruimte aanwezig is.
 
-Indien er sprake is van onderbouwapparatuur (roerend), dan kan dit niet in de plaats van een
-onderkast worden gesteld en dient er voldoende vervangende (andere) kastruimte aanwezig te
-zijn. Een kastruimte in de vorm van een plank kan niet als zodanig worden aangemerkt.
+Indien er sprake is van onderbouwapparatuur (roerend), dan kan dit niet in de plaats van een onderkast worden gesteld en dient er voldoende vervangende (andere) kastruimte aanwezig te zijn. Een kastruimte in de vorm van een plank kan niet als zodanig worden aangemerkt.
 
 ### ~~4.6.2 Voorzieningen die extra kwaliteitspunten opleveren~~
+
 > Er is gekozen om de extra kwaliteitspunten niet te implementeren aangezien veel elemeten niet gemodelleerd zijn in het huidige VERA model.
 
 ~~Het woningwaarderingsstelsel kent de mogelijkheid om extra kwaliteitspunten te rekenen in geval de afwerking van de keuken daartoe aanleiding geeft. De extra kwaliteitspunten zijn een gestandaardiseerde invulling van de bevoegdheid van de Huurcommissie om investeringen ten behoeve van extra kwaliteit met extra punten te waarderen, tot maximaal het aantal punten dat reeds op grond van de aanrechtlengte is bepaald.~~
@@ -617,25 +606,24 @@ Indien in de bad- of doucheruimte een toilet is geplaatst wordt dit toilet volle
 drie punten.~~
 
 ### ~~4.7.2	 Voorzieningen die extra kwaliteitspunten opleveren~~
+
 > Er is gekozen om de extra kwaliteitspunten niet te implementeren aangezien veel elemeten niet gemodelleerd zijn in het huidige VERA model.
 
 ~~Extra kwaliteitspunten kunnen worden toegekend indien het sanitair en/of de afwerking van de bad- of doucheruimte een kwaliteitsniveau heeft dat, op het moment van de woningwaardering[^25], het gangbare kwaliteitsniveau van sociale huurwoningen overschrijdt. Met het gangbare kwaliteitsniveau bedoelt de Huurcommissie het kwaliteit-/uitrustingsniveau van nieuwe socialehuurwoningen (niet ouder dan vijf jaar). In dit verband In dit verband heeft de bad- en/of doucheruimte van een nieuwe sociale huurwoning de volgende kenmerken:~~
+
 - ~~een waterdichte vloerafwerking;~~
 - ~~betegeling rondom tot resp. 1,50 m hoogte voor badruimte en 1,80 m voor doucheruimte;~~
 - ~~en wastafel inclusief mengkraan met spiegel en planchet én;~~
 - ~~een douche of bad met aansluitpunten voor warm en koud water en voorzien van douchegarnituur.~~
 
-[^24]: De Huurcommissie verstaat onder een bad-/doucheruimte een (afzonderlijke) ruimte met een vrije hoogte van ten
-minste 2 meter, gemeten vanaf de vloer tot aan het zichtbare plafond. Daarin dient tenminste aanwezig te zijn een
-wastafel of een douche of een bad. Voor een gecombineerde bad-/douche- en toiletruimte geldt, vanwege de
-oppervlakte-eis voor toilet- ruimten, een minimale oppervlakte van 0,64 m2 . Indien een douche- of badruimte,
-eventueel gecombineerd met een toilet, niet een vrije hoogte heeft van 2,00 m, dan wordt de ruimte gewaardeerd
-als overige ruimte.
+[^24]: De Huurcommissie verstaat onder een bad-/doucheruimte een (afzonderlijke) ruimte met een vrije hoogte van ten minste 2 meter, gemeten vanaf de vloer tot aan het zichtbare plafond. Daarin dient tenminste aanwezig te zijn een wastafel of een douche of een bad. Voor een gecombineerde bad-/douche- en toiletruimte geldt, vanwege de oppervlakteeis voor toilet- ruimten, een minimale oppervlakte van 0,64 m2 . Indien een douche- of badruimte, eventueel gecombineerd met een toilet, niet een vrije hoogte heeft van 2,00 m, dan wordt de ruimte gewaardeerd als overige ruimte.  
+
 ~~[^25]: Zie hoofdstuk 3 van dit beleidsboek voor de peildatum per procedure ten aanzien van de woningwaardering.~~
 
 ~~Er kunnen extra kwaliteitspunten worden toegekend tot maximaal het aantal punten dat reeds voor de douche en/of bad is bepaald. Anders gezegd: maximaal een verdubbeling van de toegekende kwaliteitspunten voor douche en/of bad kan plaatsvinden.~~
 
 #### ~~Voorzieningen die extra kwaliteitspunten opleveren~~
+
 ~~De Huurcommissie heeft een aantal voorzieningen aangewezen die extra kwaliteitspunten opleveren, aangezien hiermee het kwaliteitsniveau van het sanitair en/of de afwerking van de bad- of doucheruimte het gangbare bij sociale huurwoningen overstijgt. De onderhoudstoestand van de desbetreffende voorziening of apparatuur is niet relevant of extra kwaliteitspunten worden toegekend.~~
 
 | Voorziening                                               | Aantal punten           |
