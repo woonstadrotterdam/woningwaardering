@@ -319,3 +319,14 @@ In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verw
 
 - https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
 - https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
+
+### Tuin
+
+In de huidige referentiedata zijn er vier verschillende soorten tuinen in de vorm van een privé buitenruimte:
+
+- achtertuin
+- tuin_rondom
+- voortuin
+- zijtuin
+
+Dit leidt enigszins tot onnodige complexiteit in de context van bijvoorbeeld de woningwaardering, omdat elke vorm van een privétuin gelijkwaardig wordt gewaardeerd en bij modellering van eenheden tuinen niet op dit detailniveau worden gemodelleerd volgens de Aedes ILS. Hierom hebben wij de referentiedata uitgebreid met een nieuwe, generieke tuinsoort: `tuin`. Zie ook [dit issue](https://github.com/woonstadrotterdam/woningwaardering/pull/43/checks).
