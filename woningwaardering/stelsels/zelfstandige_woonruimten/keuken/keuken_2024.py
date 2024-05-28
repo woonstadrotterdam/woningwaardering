@@ -40,54 +40,51 @@ class Keuken2024(Stelselgroepversie):
         )
         woningwaardering_groep.woningwaarderingen = []
 
-        keuken_gevonden = False
+        # TODO: heeft_bouwkundig element implementeren (PR Tomer)
+        keukens = [
+            ruimte
+            for ruimte in eenheid.ruimten or []
+            if ruimte.bouwkundige_elementen
+            and ruimte.detail_soort
+            and ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code
+            and ruimte.bouwkundige_elementen
+            for bouwkundig_element in ruimte.bouwkundige_elementen
+            if bouwkundig_element.detail_soort
+            and bouwkundig_element.detail_soort.code
+            == Bouwkundigelementdetailsoort.aanrecht.code
+            and bouwkundig_element.lengte
+        ]
 
-        for ruimte in eenheid.ruimten or []:
-            if not (
-                ruimte.detail_soort
-                and ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code
-                and ruimte.bouwkundige_elementen
-            ):
-                continue
-
-            for bouwkundig_element in ruimte.bouwkundige_elementen:
-                if (
-                    bouwkundig_element.detail_soort
-                    and bouwkundig_element.detail_soort.code
-                    and bouwkundig_element.detail_soort.code
-                    == Bouwkundigelementdetailsoort.aanrecht.code
-                    and bouwkundig_element.lengte
-                ):
+        if keukens:
+            for keuken in keukens:
+                for aanrecht in keuken.bouwkundige_elementen or []:
                     logger.debug(
-                        f"Ruimte {ruimte.id} is een keuken met aanrecht en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                        f"Ruimte {keuken.id} is een keuken met aanrecht en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
                     )
+                    if aanrecht.lengte:
+                        if aanrecht.lengte < 1000:
+                            punten = 0.0
+                        if aanrecht.lengte >= 2000:
+                            punten = 7.0
+                        else:
+                            punten = 4.0
 
-                    if not keuken_gevonden:
-                        keuken_gevonden = True
-
-                    if bouwkundig_element.lengte < 1000:
-                        punten = 0.0
-                    if bouwkundig_element.lengte >= 2000:
-                        punten = 7.0
-                    else:
-                        punten = 4.0
-
-                    logger.debug(
-                        f"Ruimte {ruimte.id} is een keuken met aanrecht lengte {bouwkundig_element.lengte} millimeter en krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
-                    )
-
-                    woningwaardering_groep.woningwaarderingen.append(
-                        WoningwaarderingResultatenWoningwaardering(
-                            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam="Lengte aanrecht",
-                                meeteenheid=Meeteenheid.millimeter.value,
-                            ),
-                            aantal=bouwkundig_element.lengte,
-                            punten=punten,
+                        logger.debug(
+                            f"Ruimte {keuken.id} is een keuken met aanrecht lengte {aanrecht.lengte} millimeter en krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
                         )
-                    )
 
-        if not keuken_gevonden:
+                        woningwaardering_groep.woningwaarderingen.append(
+                            WoningwaarderingResultatenWoningwaardering(
+                                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                                    naam="Lengte aanrecht",
+                                    meeteenheid=Meeteenheid.millimeter.value,
+                                ),
+                                aantal=aanrecht.lengte,
+                                punten=punten,
+                            )
+                        )
+
+        else:
             logger.warning(
                 f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Geen keuken met aanrecht gevonden voor eenheid {eenheid.id}"
             )
