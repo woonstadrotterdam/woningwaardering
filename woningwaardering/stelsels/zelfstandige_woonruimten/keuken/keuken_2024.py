@@ -22,7 +22,6 @@ from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class Keuken2024(Stelselgroepversie):
@@ -49,7 +48,9 @@ class Keuken2024(Stelselgroepversie):
             and ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code
             and ruimte.bouwkundige_elementen
             for bouwkundig_element in ruimte.bouwkundige_elementen
-            if bouwkundig_element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code
+            if bouwkundig_element.detail_soort
+            and bouwkundig_element.detail_soort.code
+            == Bouwkundigelementdetailsoort.aanrecht.code
             and bouwkundig_element.lengte
         ]
 
@@ -62,7 +63,7 @@ class Keuken2024(Stelselgroepversie):
                     if aanrecht.lengte:
                         if aanrecht.lengte < 1000:
                             punten = 0.0
-                        if aanrecht.lengte >= 2000:
+                        elif aanrecht.lengte >= 2000:
                             punten = 7.0
                         else:
                             punten = 4.0
@@ -102,7 +103,7 @@ if __name__ == "__main__":
     logger.enable("woningwaardering")
 
     file = open(
-        "tests/data/input/zelfstandige_woonruimten/12006000004.json",
+        "tests/stelsels/zelfstandige_woonruimten/keuken/data/input/aanrecht_zonder_lengte.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(file.read())

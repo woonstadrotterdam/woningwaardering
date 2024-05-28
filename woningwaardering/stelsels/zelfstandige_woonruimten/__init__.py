@@ -13,5 +13,5 @@ __all__ = [
     "Verwarming",
     "Energieprestatie",
     "Sanitair",
-    "Keuken"
+    "Keuken",
 ]
