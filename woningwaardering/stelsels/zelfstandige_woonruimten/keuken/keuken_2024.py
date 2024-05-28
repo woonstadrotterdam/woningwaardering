@@ -22,6 +22,7 @@ from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
+from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class Keuken2024(Stelselgroepversie):
@@ -40,7 +41,6 @@ class Keuken2024(Stelselgroepversie):
         )
         woningwaardering_groep.woningwaarderingen = []
 
-        # TODO: heeft_bouwkundig element implementeren (PR Tomer)
         keukens = [
             ruimte
             for ruimte in eenheid.ruimten or []
@@ -49,9 +49,7 @@ class Keuken2024(Stelselgroepversie):
             and ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code
             and ruimte.bouwkundige_elementen
             for bouwkundig_element in ruimte.bouwkundige_elementen
-            if bouwkundig_element.detail_soort
-            and bouwkundig_element.detail_soort.code
-            == Bouwkundigelementdetailsoort.aanrecht.code
+            if bouwkundig_element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code
             and bouwkundig_element.lengte
         ]
 
@@ -86,7 +84,7 @@ class Keuken2024(Stelselgroepversie):
 
         else:
             logger.warning(
-                f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Geen keuken met aanrecht gevonden voor eenheid {eenheid.id}"
+                f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Geen keuken, aanrecht of aanrecht lengte gevonden voor eenheid {eenheid.id}"
             )
 
         totaal_punten = Decimal(
