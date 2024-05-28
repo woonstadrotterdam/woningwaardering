@@ -147,11 +147,35 @@ Totaal : 26,73 m² Afronding op hele m² : 27 m².
    Het moet hierbij gaan om een niet afsluitbare opening, die doorloopt tot aan de vloer. De muur
    wordt gemeten in het vertrek, waarin de tussenwand het smalst is.~~
 
+## 4.3 Oppervlakte van overige ruimten
+
+### 4.3.1 Wat zijn overige ruimten?
+
+“Overige ruimten” die voor een puntenwaardering in aanmerking komen zijn:  
+
+a. bijkeukens  
+b. bergingen  
+c. wasruimte  
+d. schuren  
+e. garages  
+f. zolderbergingen  
+g. kelders  
+~~h. parkeerplaats (zie paragraaf 4.9.6)~~
+
+> parkeerplaats wordt geïmplementeerd bij het implementeren aan 4.9 (privé-buitenruimten).
+
+Deze ruimten tellen alleen mee als de oppervlakte van een ruimte afzonderlijk gelijk is aan of groter dan twee vierkante meter, ~~voor zover de plafondhoogte ten minste 1,50 meter is boven de vloer.~~  
+
+Verkeersruimten zoals hallen, gangen, en overlopen worden sowieso niet afzonderlijk gewaardeerd, dus krijgen geen punten op basis van dit onderdeel van het woningwaarderingsstelsel.
+
+Tot bergingen worden de volgende ruimten gerekend: vaste kasten, bergingen in, achter, voor, dan wel onder de woning, bergingen onder de kap van etagewoningen, bergingen in flatgebouwen en dergelijke, mits deze een afzonderlijke ruimte vormen.
 
 ### 4.3.2 Hoe wordt de oppervlakte van overige ruimte gemeten?
+
 De wetgever heeft een aantal eisen en meetinstructies meegegeven:
+
 1. ~~De ruimten worden slechts als “overige oppervlakte” gewaardeerd, als de vloer begaanbaar is.~~
-   
+
 2. ~~Van de overige ruimten wordt de gehele oppervlakte gemeten, dus zonder aftrek van loop- of
 verkeersruimte. De oppervlakte van een trapgat wordt wel in mindering gebracht. De oppervlakte die een uitschuifbare of opvouwbare trap in gesloten toestand inneemt, wordt van de
 oppervlakte van de ruimte afgetrokken.~~
