@@ -41,3 +41,11 @@ stelselgroepen:
       - module: sanitair_2024
         class_naam: Sanitair2024
         begindatum: 2024-01-01
+  prive_buitenruimten:
+    module: prive_buitenruimten
+    class_naam: PriveBuitenruimten
+    begindatum: 2024-01-01
+    versies:
+      - module: prive_buitenruimten_2024
+        class_naam: PriveBuitenruimten2024
+        begindatum: 2024-01-01
