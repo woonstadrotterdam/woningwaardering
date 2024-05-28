@@ -16,8 +16,7 @@ wettelijke begrippen. Dat wordt hierna beschreven.
 
 **Woonkamer of andere kamer**
 
-Een woonkamer of een andere kamer is dus een vertrek in de zin van het
-woningwaarderingsstelsel.
+Een woonkamer of een andere kamer is dus een vertrek in de zin van het woningwaarderingsstelsel.
 
 Hiervan is alleen sprake als:
 
@@ -26,14 +25,11 @@ Hiervan is alleen sprake als:
 - ~~En de daglichttoetreding, de ventilatiemogelijkheid en het aantal elektrische lichtpunten in overeenstemming zijn met de geldende verkeersopvattingen.~~
 - De ruimte een oppervlakte heeft van minimaal 4 m2.
 - ~~De ruimte over de volle lengte ten minste 1,50 m breed is.~~
-- ~~De ruimte over ten minste 50% van de oppervlakte een vrije hoogte heeft van 2.10 m (gemeten
-  vanaf de vloer tot het zichtbare plafond).~~
+- ~~De ruimte over ten minste 50% van de oppervlakte een vrije hoogte heeft van 2.10 m (gemeten vanaf de vloer tot het zichtbare plafond).~~
 
-Alleen als aan al deze eisen is voldaan, wordt de (oppervlakte van de) woonruimte of andere
-kamer meegeteld als “vertrek”. Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte”
-(zie paragraaf 4.3.).
-Uitzondering hierop geldt voor de keuken: de eisen van minimaal 4 m2 en ~~minimaal 1,50 m
-breedte~~ gelden niet voor de keuken en verzetten zich er dus niet tegen om een keuken als “vertrek” aan te merken en overeenkomstig te waarderen.
+Alleen als aan al deze eisen is voldaan, wordt de (oppervlakte van de) woonruimte of andere kamer meegeteld als “vertrek”. Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte”
+(zie [paragraaf 4.3](#43-oppervlakte-van-overige-ruimten).).  
+Uitzondering hierop geldt voor de keuken: de eisen van minimaal 4 m2 en ~~minimaal 1,50 m breedte~~ gelden niet voor de keuken en verzetten zich er dus niet tegen om een keuken als “vertrek” aan te merken en overeenkomstig te waarderen.
 
 **Badkamer of doucheruimte**
 
@@ -43,26 +39,21 @@ Hiervan is alleen sprake als:
 
 - ~~De vloer begaanbaar is.~~
 - ~~De muren en wanden uit vast materiaal bestaan.~~
-- ~~En de ventilatiemogelijkheid en het aantal elektrische lichtpunten in overeenstemming zijn met
-  de geldende verkeersopvattingen.~~
+- ~~En de ventilatiemogelijkheid en het aantal elektrische lichtpunten in overeenstemming zijn met de geldende verkeersopvattingen.~~
 - ~~De ruimte over ten minste 50% van de oppervlakte een vrije hoogte heeft van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).~~
 
 ~~Alleen als aan al deze eisen is voldaan, wordt de (oppervlakte van de) badkamer of doucheruimte
-meegeteld als “vertrek”. Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte” (zie
-verderop).~~
+meegeteld als “vertrek”. Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte” (zie verderop).~~
 
 > Hoewel de VERA-standaard een onderscheid maakt tussen badkamer, doucheruimte en badkamer/toilet (badkamer met toilet) beschouwen wij ieder van deze ruimtes indien zij een toilet bevatten als een badkamer met toilet, conform hoe de huurcommissie omgaat met deze ruimtes.. Zie ook [dit Github issue](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/96).
 
 Voor gecombineerde bad-/doucheruimte met toilet geldt een minimale oppervlakte van 0,64 m².
 
-> Elke Badkamer, Badkamer/toilet of Doucheruimte die als vertrek is aangemerkt wordt meegeteld als vertrek, tenzij onder aftrek van 1 m2 voor een in de ruimte geplaatst toilet de oppervlakte kleiner is dan 0,64 m². (Zie punt 5 in 4.2.2).
+> Elke Badkamer, Badkamer/toilet of Doucheruimte die als vertrek is aangemerkt wordt meegeteld als vertrek, tenzij onder aftrek van 1 m2 voor een in de ruimte geplaatst toilet de oppervlakte kleiner is dan 0,64 m². (Zie punt 5 in [4.2.2](#422-hoe-wordt-de-oppervlakte-van-vertrekken-gemeten)).
 
 **Zolderruimte**
 
-Zolderruimten zijn in het algemeen “overige ruimte”. Echter, in geval een zolderruimte een functie
-heeft als “vertrek” (dus woonkamer, andere kamers, badkamer of doucheruimte), en ook voldoet
-aan de eisen die daarvoor gelden (zie hierboven), dan mag de zolderruimte meetellen als “vertrek”,
-mits deze ruimte bereikbaar is via een vaste trap ~~en het dak beschoten is~~.
+Zolderruimten zijn in het algemeen “overige ruimte”. Echter, in geval een zolderruimte een functie heeft als “vertrek” (dus woonkamer, andere kamers, badkamer of doucheruimte), en ook voldoet aan de eisen die daarvoor gelden (zie hierboven), dan mag de zolderruimte meetellen als “vertrek”, mits deze ruimte bereikbaar is via een vaste trap ~~en het dak beschoten is~~.
 
 > In het beleidsboek wordt er onderscheid gemaakt tussen een zolder vertrek met een vaste trap of zolder met een ander soort trap. Wanneer een zolder als vertrek wordt aangemerkt moet deze te bereiken zijn via een vaste trap. Daarom wordt er voor een zolder gekeken of er een vaste trap in de `bouwkundige_elementen` zit. Als dit het geval is dan telt de gehele oppervlakte van de zolder mee voor de punten van Oppervlakte van Vertrekken.
 
@@ -71,81 +62,48 @@ mits deze ruimte bereikbaar is via een vaste trap ~~en het dak beschoten is~~.
 De wetgever heeft in de toelichting op het woningwaarderingsstelsel een aantal meetinstructies
 meegegeven:
 
-1. Meting van de oppervlakte van vertrekken vindt plaats ~~van muur tot muur, op een hoogte van
-   1,50 m boven de vloer,~~ inclusief de oppervlakte van alle tot de woning behorende losse en
-   vaste kasten (kleiner dan 2m²). ~~Deze meethoogte geldt ook als de oppervlakte afwijkt van die
-   op vloerniveau.~~
+1. Meting van de oppervlakte van vertrekken vindt plaats ~~van muur tot muur, op een hoogte van 1,50 m boven de vloer,~~ inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten (kleiner dan 2m²). ~~Deze meethoogte geldt ook als de oppervlakte afwijkt van die op vloerniveau.~~
 
 De Huurcommissie hanteert hierbij de volgende uitgangspunten.
 
-~~Als er sprake is van een pui wordt de binnenzijde van die pui (het kozijn) genomen. Een erker
-wordt meegerekend indien deze inwendig een vrije hoogte heeft van ten minste 1,50 m. Indien er
-sprake is van een zgn. entresol (tussenverdieping) dan dient de oppervlakte onder en/of boven
-deze entresol te worden meegerekend, indien de vrije hoogte ten minste 1,50m bedraagt.~~ Voor
-het meten van vertrekken die met elkaar in open verbinding staan, zie verderop.
-“Alle tot de woning behorende losse en vaste kasten” lees de Huurcommissie als: “alle tot de
-vertrekken behorende kasten”. De plaats van de deur van de kast bepaalt bij welk vertrek de kast
-behoort. Dus een kast die in een vertrek uitkomt wordt, ongeacht de afmeting, bij dat vertrek
-geteld. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
+~~Als er sprake is van een pui wordt de binnenzijde van die pui (het kozijn) genomen. Een erker wordt meegerekend indien deze inwendig een vrije hoogte heeft van ten minste 1,50 m. Indien er sprake is van een zgn. entresol (tussenverdieping) dan dient de oppervlakte onder en/of boven deze entresol te worden meegerekend, indien de vrije hoogte ten minste 1,50m bedraagt.~~ Voor
+het meten van vertrekken die met elkaar in open verbinding staan, zie verderop.  
+“Alle tot de woning behorende losse en vaste kasten” lees de Huurcommissie als: “alle tot de vertrekken behorende kasten”. De plaats van de deur van de kast bepaalt bij welk vertrek de kast behoort. Dus een kast die in een vertrek uitkomt wordt, ongeacht de afmeting, bij dat vertrek geteld. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
 
-- Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald en bij de oppervlakte
-  van het betreffende vertrek opgeteld;
-- Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een verkeersruimte, wordt niet
-  gewaardeerd;
-- Losse kasten zijn niet van belang bij het meten. De oppervlakte van het vertrek wordt bepaald,
-  incl. de oppervlakte die wordt ingenomen door een losse kast;
+- Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald en bij de oppervlakte van het betreffende vertrek opgeteld;
+- Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een verkeersruimte, wordt niet gewaardeerd;
+- Losse kasten zijn niet van belang bij het meten. De oppervlakte van het vertrek wordt bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast;
 
 > Binnen het woningwaarderingsstelsel mag onder bepaalde voorwaarden de oppervlakte van vaste kasten worden opgeteld bij de ruimte waar de deur van de kast zich bevindt. Als hier bij het inmeten geen rekening mee gehouden is, kan het attribuut `verbonden_ruimten` gebruikt worden om de met een ruimte verbonden vaste kasten mee te laten nemen in de waardering. Hiervoor is de VERA referentiedata binnen deze repository uitgebreid met ruimtedetailsoort Kast, code KAS.
 
-2. ~~Als oppervlakte van een vertrek met een (ten dele) hellend of verlaagd plafond geldt dat
-   alleen het gedeelte waarboven het plafond ten minste 1,50m hoog is wordt meegeteld bij de
-   berekening van de oppervlakte.~~
+2. ~~Als oppervlakte van een vertrek met een (ten dele hellend of verlaagd plafond geldt dat alleen het gedeelte waarboven het plafond ten minste 1,50m hoog is wordt meegeteld bij de berekening van de oppervlakte.~~
 
-~~De Huurcommissie eist in geval van een (ten dele) hellend plafond dat de 1,50m-hoogte loopt tot
-het dakbeschot of tot het zichtbare dakvlak of plafond. Met gordingen en balken wordt bij de
-meting geen rekening gehouden.~~
+~~De Huurcommissie eist in geval van een (ten dele) hellend plafond dat de 1,50m-hoogte loopt tot het dakbeschot of tot het zichtbare dakvlak of plafond. Met gordingen en balken wordt bij de meting geen rekening gehouden.~~
 
-3. ~~De vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak,
-   moederhaard, c.v.-ketel en boilerinstallatie, wordt meegeteld.~~
+3. ~~De vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak, moederhaard, c.v.-ketel en boilerinstallatie, wordt meegeteld.~~
 
-~~De Huurcommissie gaat hier als volgt mee om. Indien zich in een vertrek, of in een kast in een
-vertrek, een gas- en/of elektrameter bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek
-van 30 x 60 cm (minimale afmeting meterkast bestaande bouw).
-De vloeroppervlakte onder radiatoren wordt meegeteld.~~
+~~De Huurcommissie gaat hier als volgt mee om. Indien zich in een vertrek, of in een kast in een vertrek, een gas- en/of elektrameter bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek van 30 x 60 cm (minimale afmeting meterkast bestaande bouw). De vloeroppervlakte onder radiatoren wordt meegeteld.~~
 
-4. ~~De oppervlakte die wordt ingenomen door schoorsteenkanalen, ventilatiekanalen of stand- of
-   grondleidingen (tenzij horizontale leidingen, zie hierna) wordt niet meegeteld.~~
+4. ~~De oppervlakte die wordt ingenomen door schoorsteenkanalen, ventilatiekanalen of stand- of grondleidingen (tenzij horizontale leidingen, zie hierna) wordt niet meegeteld.~~
 
-~~Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de
-oppervlakte op 1,50m-hoogte bepalend. De oppervlakte die wordt ingenomen door standleidin-
-gen (verticale leidingen) wordt niet meegeteld.
-De oppervlakte die wordt ingenomen door grondleidingen (horizontale leidingen), wordt wel
-meegeteld.~~
+~~Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50m-hoogte bepalend. De oppervlakte die wordt ingenomen door standleidingen (verticale leidingen) wordt niet meegeteld. De oppervlakte die wordt ingenomen door grondleidingen (horizontale leidingen), wordt wel meegeteld.~~
 
-5. Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die
-   ruimte met één vierkante meter verminderd.
+5. Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met één vierkante meter verminderd.
 
-6. ~~Van de oppervlakte onder een open dan wel gesloten vaste trap geldt dat gedeelte waar de
-   ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is.~~
+6. ~~Van de oppervlakte onder een open dan wel gesloten vaste trap geldt dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is.~~
 
-7. Afronding van de oppervlakte op hele vierkante meters vindt plaats na saldering van de
-   oppervlakte van alle vertrekken; bij 0,5m² of meer wordt afgerond naar boven, bij minder dan
-   0,5m² naar beneden. Waardering in punten vindt na saldering en afronding plaats.
+7. Afronding van de oppervlakte op hele vierkante meters vindt plaats na saldering van de oppervlakte van alle vertrekken; bij 0,5m² of meer wordt afgerond naar boven, bij minder dan 0,5m² naar beneden. Waardering in punten vindt na saldering en afronding plaats.
 
-De Huurcommissie licht dit als volgt toe:
-Afronding: eerst de oppervlakte per vertrek op 2 decimalen afronden en pas daarna de oppervlak-
-te van alle vertrekken salderen en afronden op hele vierkante meters.
+De Huurcommissie licht dit als volgt toe:  
+
+Afronding: eerst de oppervlakte per vertrek op 2 decimalen afronden en pas daarna de oppervlakte van alle vertrekken salderen en afronden op hele vierkante meters.
 
 **Voorbeeld:**  
-kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²  
-keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²  
-Totaal : 26,73 m² Afronding op hele m² : 27 m².
+_kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²_  
+_keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²_  
+_Totaal : 26,73 m² Afronding op hele m² : 27 m²._
 
-8. ~~Twee vertrekken die met elkaar in verbinding staan, worden in een bepaald geval als één
-   vertrek gewaardeerd. Dit is het geval als zich tussen die twee vertrekken een opening bevindt,
-   die breder is dan 50% van de muur, waarin deze opening zich bevindt (zie schets hieronder).
-   Het moet hierbij gaan om een niet afsluitbare opening, die doorloopt tot aan de vloer. De muur
-   wordt gemeten in het vertrek, waarin de tussenwand het smalst is.~~
+8. ~~Twee vertrekken die met elkaar in verbinding staan, worden in een bepaald geval als één vertrek gewaardeerd. Dit is het geval als zich tussen die twee vertrekken een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt (zie schets hieronder). Het moet hierbij gaan om een niet afsluitbare opening, die doorloopt tot aan de vloer. De muur wordt gemeten in het vertrek, waarin de tussenwand het smalst is.~~
 
 ## 4.3 Oppervlakte van overige ruimten
 
@@ -176,61 +134,35 @@ De wetgever heeft een aantal eisen en meetinstructies meegegeven:
 
 1. ~~De ruimten worden slechts als “overige oppervlakte” gewaardeerd, als de vloer begaanbaar is.~~
 
-2. ~~Van de overige ruimten wordt de gehele oppervlakte gemeten, dus zonder aftrek van loop- of
-verkeersruimte. De oppervlakte van een trapgat wordt wel in mindering gebracht. De oppervlakte die een uitschuifbare of opvouwbare trap in gesloten toestand inneemt, wordt van de
-oppervlakte van de ruimte afgetrokken.~~
+2. ~~Van de overige ruimten wordt de gehele oppervlakte gemeten, dus zonder aftrek van loop- of verkeersruimte. De oppervlakte van een trapgat wordt wel in mindering gebracht. De oppervlakte die een uitschuifbare of opvouwbare trap in gesloten toestand inneemt, wordt van de oppervlakte van de ruimte afgetrokken.~~
 
-3. ~~Meting van de oppervlakte vindt plaats van muur tot muur, op een hoogte van 1,50m boven
-de vloer. En ook inclusief de oppervlakte van de moederhaard, CV-ketel en boilerinstallatie.
-Maar niet: de oppervlakte die wordt ingenomen door schoorsteenkanalen, ventilatiekanalen of
-stand- of grondleidingen.~~
+3. ~~Meting van de oppervlakte vindt plaats van muur tot muur, op een hoogte van 1,50m boven de vloer. En ook inclusief de oppervlakte van de moederhaard, CV-ketel en boilerinstallatie. Maar niet: de oppervlakte die wordt ingenomen door schoorsteenkanalen, ventilatiekanalen of stand- of grondleidingen.~~
 
-~~De Huurcommissie meet als er sprake is van een pui, vanaf de binnenzijde van die pui (het kozijn).
-Ook een erker, die inwendig een vrije hoogte heeft van ten minste 1,50m, telt mee. De oppervlakte
-onder en/of boven een zogenaamde entresol (tussenverdieping) wordt meegerekend, indien de
-hoogte minstens 1,50m bedraagt.~~
+~~De Huurcommissie meet als er sprake is van een pui, vanaf de binnenzijde van die pui (het kozijn). Ook een erker, die inwendig een vrije hoogte heeft van ten minste 1,50m, telt mee. De oppervlakte onder en/of boven een zogenaamde entresol (tussenverdieping) wordt meegerekend, indien de hoogte minstens 1,50m bedraagt.~~
 
-~~De Huurcommissie berekent de hoogte van 1,50 meter door te meten tot het dakbeschot, het
-zichtbare dakvlak of plafond (gordingen en balken blijven buiten de meting).~~
+~~De Huurcommissie berekent de hoogte van 1,50 meter door te meten tot het dakbeschot, het zichtbare dakvlak of plafond (gordingen en balken blijven buiten de meting).~~
 
-4. Ook de oppervlakte van alle tot de woning behorende losse en vaste kasten (kleiner dan 2m²)
-wordt meegerekend.
+4. Ook de oppervlakte van alle tot de woning behorende losse en vaste kasten (kleiner dan 2m²) wordt meegerekend.
 
-Losse kasten zijn niet van belang bij het meten. De oppervlakte van de overige ruimte wordt
-bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast.
-Van vaste kasten (kleiner dan 2m²) die uitkomen in een wel gewaardeerde overige ruimte wordt
-de netto oppervlakte bepaald en bij de oppervlakte opgeteld.
-Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een verkeersruimte, wordt niet
-gewaardeerd.
+Losse kasten zijn niet van belang bij het meten. De oppervlakte van de overige ruimte wordt bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast.  
+Van vaste kasten (kleiner dan 2m²) die uitkomen in een wel gewaardeerde overige ruimte wordt de netto oppervlakte bepaald en bij de oppervlakte opgeteld.  
+Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een verkeersruimte, wordt niet gewaardeerd.
 
-~~Indien zich in een overige ruimte, of een kast in een overige ruimte, een gas- en/of elektrameter
-bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek van 30 x 60 cm (minimale afmeting
-meterkast bestaande bouw).~~
+~~Indien zich in een overige ruimte, of een kast in een overige ruimte, een gas- en/of elektrameter bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek van 30 x 60 cm (minimale afmeting meterkast bestaande bouw).~~
 
 5. ~~De Huurcommissie telt de vloeroppervlakte onder radiatoren ook mee.~~  
 
-~~Voor een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen)
-vindt de Huurcommissie de oppervlakte op 1,50m-hoogte bepalend.~~
+~~Voor een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) vindt de Huurcommissie de oppervlakte op 1,50m-hoogte bepalend.~~
 
-6. ~~Van de oppervlakte onder een vaste (open of gesloten) trap, telt mee dat gedeelte waar de
-ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is.~~
+6. ~~Van de oppervlakte onder een vaste (open of gesloten) trap, telt mee dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is.~~
 
-7. ~~De oppervlakte die door een in ingeschoven toestand liggende inschuifbare of opvouwbare
-trap wordt ingenomen, wordt niet meegeteld.~~
+7. ~~De oppervlakte die door een in ingeschoven toestand liggende inschuifbare of opvouwbare trap wordt ingenomen, wordt niet meegeteld.~~
 
-8. Betreft het een zolderberging dan wordt ~~, naast de eis van een begaanbare vloer,~~ als voor-
-waarde gesteld, ~~dat het dak beschoten is en~~ dat de zolderruimte via een tot de woning
-behorende trap bereikbaar is. Indien aan deze voorwaarden niet is voldaan, tellen zolderber-
-gingen bij de woningwaardering niet mee.
+8. Betreft het een zolderberging dan wordt ~~, naast de eis van een begaanbare vloer,~~ als voorwaarde gesteld, ~~dat het dak beschoten is en~~ dat de zolderruimte via een tot de woning behorende trap bereikbaar is. Indien aan deze voorwaarden niet is voldaan, tellen zolderber gingen bij de woningwaardering niet mee.
 
-Indien geen vaste trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-zolderruimte met 5 verminderd, doch niet met meer punten dan voor de oppervlakte van de
-zolderruimten wordt gegeven.
+Indien geen vaste trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de zolderruimte met 5 verminderd, doch niet met meer punten dan voor de oppervlakte van de zolderruimten wordt gegeven.
 
-~~Is er op de zolderverdieping ook nog een vertrek aanwezig dat alleen bereikbaar is via het zolder-
-gedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopruimte om het
-vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en
-wordt dan gewaardeerd als overige ruimte.~~
+~~Is er op de zolderverdieping ook nog een vertrek aanwezig dat alleen bereikbaar is via het zoldergedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopruimte om het vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en wordt dan gewaardeerd als overige ruimte.~~
 
 > Wanneer een zolder als overige ruimte wordt beschouwd, kijken we in de `bouwkundige_elementen` van de zolder of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten.
 Wanneer deze wel bereikbaar is, maar niet via een vaste trap, moeten er 5 punten in mindering worden gebracht omdat de ruimte niet bereikt kan worden met een vaste trap. In onze implementatie hebben wij er voor gekozen om te checken of er dan wel een vlizotrap aanwezig is in de `bouwkundige_elementen`, aangezien dit de enige andere soort trap in het VERA model is waarmee een zolder ruimte bereikt zou kunnen worden.
@@ -242,11 +174,10 @@ Dit is tegenstrijdig en daarom kiezen wij de implementatie die volgens ons het b
 Let op, door de afronding komt deze berekening niet helemaal juist
 uit, maar dit is de benadering waar wij nu voor kiezen.
 
-9. Een overloop is een verkeersruimte en wordt dus niet gewaardeerd. ~~Als er met aftrek van de
-verkeersruimte en trap voldoende ruimte overblijft en deze (zolder)overloop kennelijk ook
-bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd.~~
+9. Een overloop is een verkeersruimte en wordt dus niet gewaardeerd. ~~Als er met aftrek van de verkeersruimte en trap voldoende ruimte overblijft en deze (zolder)overloop kennelijk ook bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd.~~
 
 10. Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
+
 - ~~zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
 - ~~de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
 - de oppervlakte, na deling door het aantal woningen, per woning minstens 2m2 bedraagt.
@@ -257,11 +188,9 @@ De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale
 afronden in m2, delen door het aantal woningen en waarderen als “overige ruimte”. Kasten <2m2
 en uitkomend in een verkeersruimte worden niet meegeteld.
 
-11.  Afronding van de oppervlakte op hele vierkante meters vindt plaats na saldering van de
-oppervlakte van alle afzonderlijke ruimten; bij 0,5m² of meer wordt afgerond naar boven, bij
-minder dan 0,5m² naar beneden. Waardering in punten vindt na saldering en afronding plaats.
+1. Afronding van de oppervlakte op hele vierkante meters vindt plaats na saldering van de oppervlakte van alle afzonderlijke ruimten; bij 0,5m² of meer wordt afgerond naar boven, bij minder dan 0,5m² naar beneden. Waardering in punten vindt na saldering en afronding plaats.
 
-De Huurcommissie licht dit als volgt toe:
+De Huurcommissie licht dit als volgt toe:  
 Afronding: eerst de oppervlakte per overige ruimte op 2 decimalen afronden en pas daarna de
 oppervlakte van alle overige ruimten salderen en afronden op hele vierkante meters.
 
