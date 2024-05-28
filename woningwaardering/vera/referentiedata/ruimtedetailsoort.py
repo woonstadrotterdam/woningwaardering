@@ -532,6 +532,18 @@ class Ruimtedetailsoort(Enum):
     Overige ruimte: (UITBREIDING)
     """
 
+    tuin = Referentiedata(
+        code="TUI",
+        naam="Tuin",
+        parent=Referentiedata(
+            code="BTR",
+            naam="Buitenruimte",
+        ),
+    )
+    """
+    Buitenruimte: (UITBREIDING) voor- zij- achter- of rondomtuin, mits privé.
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:
