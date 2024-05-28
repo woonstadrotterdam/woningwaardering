@@ -144,9 +144,45 @@
           "punten": 5.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 9.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Wastafel"
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Douche"
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Closetcombinatie"
+          },
+          "punten": 3.0
+        }
+      ]
     }
   ],
-  "punten": 75.0,
+  "punten": 84.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

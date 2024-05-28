@@ -1,7 +1,6 @@
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 
-
 from woningwaardering.stelsels.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,

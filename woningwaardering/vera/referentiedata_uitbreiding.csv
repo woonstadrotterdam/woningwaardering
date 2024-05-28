@@ -4,4 +4,6 @@ RUIMTEDETAILSOORT;ENT;Entree;Verkeersruimte: (UITBREIDING) Ingang van een gebouw
 RUIMTEDETAILSOORT;KAS;Kast;Overige ruimte: (UITBREIDING);8-4-2024;;RUIMTESOORT.OVR;Vastgoed
 WONINGTYPE;EGW;Eengezinswoning;Een woning die tevens een geheel pand vormt.;6-5-2024;;EENHEIDSOORT.WOO;Vastgoed
 WONINGTYPE;MGW;Meergezinswoning;Een woning die samen met andere woonruimten c.q. bedrijfsruimten een geheel pand vormt.;6-5-2024;;EENHEIDSOORT.WOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;BID;Bidet;Een bidet (UITBREIDING).;17-5-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;LAV;Lavet;Een Lavet (UITBREIDING).;17-5-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
 MEETEENHEID;MLM;Millimeter;De meeteenheid millimeter (UITBREIDING);14-04-2024;;;

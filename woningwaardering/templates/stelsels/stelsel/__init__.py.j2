@@ -1,9 +1,11 @@
-{%- for stelselgroep, stelselgroepconfig in stelselgroepen.items() -%}
+from .{{stelselconfig.stelsel}} import {{ className }}
+{% for stelselgroep, stelselgroepconfig in stelselconfig.stelselgroepen.items() -%}
 from .{{ stelselgroepconfig.module }} import {{ stelselgroepconfig.class_naam }}
 {% endfor %}
 
 __all__ = [
-{%- for stelselgroep, stelselgroepconfig in stelselgroepen.items() %}
+    "{{ className }}",
+{%- for stelselgroep, stelselgroepconfig in stelselconfig.stelselgroepen.items() %}
     "{{ stelselgroepconfig.class_naam }}",
 {%- endfor %}
 ]

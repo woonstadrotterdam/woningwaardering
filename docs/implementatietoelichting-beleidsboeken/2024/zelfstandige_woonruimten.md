@@ -445,3 +445,89 @@ De puntentelling is in geval het bouwjaar geldt als volgt:
 Voor woningen die zelf (gedeeltelijk) in hun energieverbruik voorzien, door bijvoorbeeld zonnepanelen, kan bij het verhuren een energieprestatievergoeding (EPV) worden afgesproken. De woning zal dan moeten voldoen aan de eisen voor een EPV. Als dit het geval is dan is het aantal punten op basis van het puntenstelsel voor energieprestatie lager. Om te voorkomen dat in de gevallen waarin een energieprestatievergoeding is overeengekomen, de opwekking van energie voor de huurder tevens wordt verdisconteerd in de huurprijs, wordt voor deze woningen een correctiefactor toegepast op het aantal punten voor de energieprestatie. In die gevallen wordt de energieprestatie gewaardeerd met een aantal punten gelijk aan de waardering voor een Energie-Index 1,2 < EI ≤ 1,4 (of Energielabel B), met 32 punten voor een ééngezinswoning en 28 punten voor meergezins- en duplexwoningen.
 
 > Hiervoor is het `EenhedenEnergieprestatie` model uitgebreid met het attribuut `energieprestatievergoeding`. Dit attribuut dient gevuld te zijn met een boolean die aangeeft of er bij het verhuren een energieprestatievergoeding (EPV) is overeengekomen.
+
+## 4.7 Sanitair
+Het woningwaarderingsstelsel kent aan een zelfstandige woonruimte punten toe voor het
+onderdeel sanitair. De waardering van het sanitair wordt bepaald op grond van de aanwezigheid
+van bepaalde voorzieningen binnen de woning. Hieronder wordt uiteengezet aan welke sanitaire
+voorzieningen punten worden toegekend en hoeveel punten die voorzieningen krijgen. Ook wordt
+besproken wanneer er extra kwaliteitspunten worden toegekend aan deze sanitaire
+voorzieningen.
+### 4.7.1 Sanitaire voorzieningen
+Het woningwaarderingsstelsel geeft punten aan de sanitaire voorzieningen toilet, wastafel, bad
+en douche. De puntentoekenning is als volgt:
+| Voorziening | Punten |
+| -------- | -------- |
+| toilet   | 3   |
+| wastafel  | 1  |
+| bidet    | 1  |
+| lavet*   | 1  |
+| douche   | 4  |
+| bad      | 6  |
+| bad en douche | 7  |
+
+> De punten hierboven in de tabel zijn het aantal punten dat wordt toegekend aan de sanitaire voorziening. De gedetailleerde voorwaarden die hieronder volgen in het beleidsboek worden niet getoetst in de implementatie. Het is aan de gebruiker om alleen voorzieningen op te geven die voldoen aan de voorwaarden.
+
+~~_*Een lavet wordt met vier punten gewaardeerd, als deze is voorzien van aansluitpunten voor warm en koud
+water én van douchegarnituur._~~
+
+**Toilet**  
+Drie punten worden toegekend aan een toilet ~~met waterspoeling als het toilet is geplaatst in een
+daartoe bestemde ruimte en als het toilet binnen het woongebouw is gelegen. Wanneer sprake is
+van een toilet dat buiten de woning maar binnen het woongebouw is gelegen, dan geldt dat het
+toilet in de waardering wordt meegenomen als het gebruik van het toilet door derden is uit te
+sluiten.~~  
+
+**Wastafel**  
+Wastafels worden met één punt gewaardeerd. ~~Als wastafels worden alle bakken geteld voor
+wassen en spoelen die op de waterleiding én op het huisriool zijn aangesloten. Een dergelijke bak
+wordt niet als wastafel gewaardeerd indien boven de bak een douche is aangebracht. Een bad en
+spoelbakken in een keukenaanrecht worden niet als wastafels gewaardeerd.
+Als wastafel waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in
+aanmerking komt, waarvan de aanrechtlengte korter is dan één meter.~~
+
+**Bad en douche**  
+Douches worden gewaardeerd met vier punten. ~~Als douche wordt meegeteld iedere door de
+verhuurder aangebrachte installatie voor het nemen van een stortbad. Hieronder valt eveneens
+een zogenaamde douchecabine, die voldoet aan bovengenoemde voorwaarden, als de douchecabine
+in een vertrek (anders dan bad- of doucheruimte) of overige ruimte is geplaatst. De oppervlakte van dat vertrek of van die overige ruimte wordt in dat geval niet verminderd met de door de
+douchecabine ingenomen oppervlakte.~~
+Aan baden worden zes punten toegekend, ~~ongeacht de lengte van het bad. Indien een bad is
+voorzien van een (hand)douche, dan wordt het douchegarnituur niet afzonderlijk geteld.~~
+Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangebracht, geldt een
+waardering van zeven punten.  
+
+> Het is ambigu hoeveel punten er zouden moeten worden toegekend indien een badruimte meer dan één douche bevat en één bad of vice versa. I.v.m. de onwaarschijnlijkheid van het voortkomen van deze situatie is er gekozen om deze situatie niet te ondersteunen in de implementatie. Indien er een bad en een douche in dezelfde ruimte aanwezig zijn worden er 7 punten toegekend per combinatie van bad en douche.  
+>
+> Oftewel:
+>
+> - één bad en één douche in dezelfde ruimte: 7 punten  
+> - één bad en twee douches in dezelfde ruimte: 7 punten
+> - twee baden en één douche in dezelfde ruimte: 7 punten
+> - twee baden en twee douches in dezelfde ruimte: 14 punten
+
+~~**Voorzieningen in een bad- en doucheruimte**~~  
+~~Indien sprake is van sanitaire voorzieningen in een bad- of doucheruimte*, dan worden alleen
+punten toegekend aan die voorzieningen indien de bad -of doucheruimte voldoet aan drie
+voorwaarden.
+Ten eerste moet de wand- en vloerafwerking van de bad- of douchruimte voldoende waterdicht
+zijn. Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel
+gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien. Ten tweede moet
+de bad- en doucheruimte zijn voorzien van aansluitingspunten voor warm en koud water. Met
+aansluitingspunten voor warm en koud water wordt niet een warmwater apparaat bedoeld. Als
+sprake is van een geiser of boiler dan hoeven deze niet door de verhuurder te zijn verstrekt. Ten
+derde moet het bad of de douche zijn voorzien van douchegarnituur. Met douchegarnituur bedoelt
+de Huurcommissie een warm- en koudwaterkraan of een mengkraan.
+Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van
+zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een
+zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1
+punt voor wastafel én 4 of 6 punten voor douche of lavet, respectievelijk bad.
+Indien in de bad- of doucheruimte een toilet is geplaatst wordt dit toilet volledig gewaardeerd met
+drie punten.~~
+
+~~_*De Huurcommissie verstaat onder een bad-/doucheruimte een (afzonderlijke) ruimte met een vrije hoogte van ten
+minste 2 meter, gemeten vanaf de vloer tot aan het zichtbare plafond. Daarin dient tenminste aanwezig te zijn een
+wastafel of een douche of een bad. Voor een gecombineerde bad-/douche- en toiletruimte geldt, vanwege de
+oppervlakte-eis voor toilet- ruimten, een minimale oppervlakte van 0,64 m2 . Indien een douche- of badruimte,
+eventueel gecombineerd met een toilet, niet een vrije hoogte heeft van 2,00 m, dan wordt de ruimte gewaardeerd
+als overige ruimte._~~

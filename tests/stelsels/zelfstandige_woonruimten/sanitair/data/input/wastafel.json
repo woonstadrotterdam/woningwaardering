@@ -1,0 +1,19 @@
+{
+  "ruimten": [
+    {
+      "bouwkundigeElementen": [
+        {
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          }
+        }
+      ]
+    }
+  ]
+}
