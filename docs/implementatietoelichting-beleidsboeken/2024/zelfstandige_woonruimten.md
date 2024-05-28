@@ -162,7 +162,7 @@ f. zolderbergingen
 g. kelders  
 ~~h. parkeerplaats (zie paragraaf 4.9.6)~~
 
-> parkeerplaats wordt geïmplementeerd bij het implementeren aan 4.9 (privé-buitenruimten).
+> parkeerplaats wordt geïmplementeerd bij het implementeren van 4.9 (privé-buitenruimten).
 
 Deze ruimten tellen alleen mee als de oppervlakte van een ruimte afzonderlijk gelijk is aan of groter dan twee vierkante meter, ~~voor zover de plafondhoogte ten minste 1,50 meter is boven de vloer.~~  
 
