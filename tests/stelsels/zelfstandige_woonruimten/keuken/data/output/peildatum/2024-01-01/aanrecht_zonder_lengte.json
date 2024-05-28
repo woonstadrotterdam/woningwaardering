@@ -1,18 +1,18 @@
 {
   "groepen": [
-{
-    "criteriumGroep": {
-      "stelsel": {
-        "code": "ZEL",
-        "naam": "Zelfstandige woonruimten"
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
       },
-      "stelselgroep": {
-        "code": "KEU",
-        "naam": "Keuken"
-      }
-    },
-    "punten": 0.0,
-    "woningwaarderingen": []
-  }
-]
+      "punten": 0.0,
+      "woningwaarderingen": []
+    }
+  ]
 }
