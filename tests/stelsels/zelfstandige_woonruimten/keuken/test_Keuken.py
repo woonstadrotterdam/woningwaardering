@@ -49,11 +49,11 @@ def test_Keuken_output(
     )
 
 
-def test_OppervlakteVanVetrekken_specifiek_output(specifieke_input_en_output_model):
+def test_Keuken_specifiek_output(specifieke_input_en_output_model):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
     keuken = Keuken(peildatum=peildatum)
     resultaat = keuken.bereken(eenheid_input)
-
+    print(resultaat)
     assert_output_model(
         resultaat,
         eenheid_output,
