@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from test_utils import assert_output_model, laad_specifiek_input_en_output_model
 
-from woningwaardering.stelsels.zelfstandige_woonruimten.verwarming.verwarming import (
+from woningwaardering.stelsels.zelfstandige_woonruimten.verwarming import (
     Verwarming,
 )
 from woningwaardering.vera.bvg.generated import (
