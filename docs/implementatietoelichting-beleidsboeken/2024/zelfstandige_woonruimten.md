@@ -255,10 +255,9 @@ Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuke
 Een (groot) deel van het totale puntenaantal wordt bepaald door de energieprestatie van de
 woonruimte. Sinds 2011 speelt het energielabel een rol in het puntenstelsel, waarbi een energielabel of energie-index maximaal 10 jaar geldig is. De energieprestatie kan sinds 1 januari 2021 op
 drie manieren zin bepaald.
-1. Een oud energielabel: registratie heeft plaatsgevonden vóór 1 januari 2015. In 2021 en later
-lopen veel sinds 1 juli 2011 verstrekte energielabels af, want de geldigheidsduur is tien jaar.
-2. De energie-index: registratie op of na 1 januari 2015 tot 1 januari 2021. In 2025 en later lopen
-veel sinds 1 januari 2015 verstrekte energie-indexen af, want de geldigheidsduur is tien jaar.
+
+1. Een oud energielabel: registratie heeft plaatsgevonden vóór 1 januari 2015. In 2021 en later lopen veel sinds 1 juli 2011 verstrekte energielabels af, want de geldigheidsduur is tien jaar.
+2. De energie-index: registratie op of na 1 januari 2015 tot 1 januari 2021. In 2025 en later lopen veel sinds 1 januari 2015 verstrekte energie-indexen af, want de geldigheidsduur is tien jaar.
 3. Het energielabel op basis van primair fossiel energiegebruik: registratie op of na 1 januari 2021.
 
 In [EP-online](https://www.ep-online.nl/) is te vinden wat de energieprestatie van een woning is.
@@ -268,9 +267,7 @@ In [EP-online](https://www.ep-online.nl/) is te vinden wat de energieprestatie v
 > In de tabellen ter ondersteuning van de tekst van het beleidsboek over de punten toekenning bij een nieuw energielabel is er voor gekozen om de implementatie van regel [4.5.3 Afwijkingsbevoegdheid hogere energielabelklasse dan A++](#453-afwijkingsbevoegdheid-hogere-energielabelklasse-dan-a) al toe te voegen aan de tabellen.
 
 ### 4.5.1 Puntentoekenning oud energielabel en energie-index
-Bij een oud energielabel bepaalt de labelklasse (A t/m G) het aantal punten dat de verhuurder
-mag doorrekenen in de maximale huur. Een energielabel dat is geregistreerd vóór 2015 en dat niet
-ouder is dan tien jaar, is nog bruikbaar.
+Bij een oud energielabel bepaalt de labelklasse (A t/m G) het aantal punten dat de verhuurder mag doorrekenen in de maximale huur. Een energielabel dat is geregistreerd vóór 2015 en dat niet ouder is dan tien jaar, is nog bruikbaar.
 ~~Bij een energie-index is de indeling in letters vervangen door een cijfer. De energie-index wordt meegenomen indien in EP-online staat aangegeven dat de energie-index geldig is voor het woningwaarderingsstelsel.~~
 
 > De energie-index van een energieprestatie wordt niet gebruikt. In EP-Online hebben alle op energie-index gebaseerde energieprestaties ook een labelklasse. Deze labelklasse dient gebruikt te worden voor de waardering.
@@ -291,13 +288,9 @@ Zie hieronder de puntentoekenning van de energieprestatie bij een oud energielab
 
 ### 4.5.2 Puntentoekenning nieuw energielabel
 
-Per 1 januari 2021 geldt een nieuwe manier om de energieprestatie van een woonruimte te
-bepalen met een vernieuwd energielabel.
-Hierbij wordt gewerkt met een bepalingsmethode (NTA 8800) die een nieuwe indicator heeft voor de energieprestatie (in kWh/m2 per jaar).
-De uitkomst van de bepalingsmethode (NTA 8800) wordt gereduceerd tot een energielabel (van A++ tot G).
-Dit label wordt herleid tot punten voor het waarderingsstelsel.
-Aangezien de nieuwe bepalingsmethode tot structurele onderwaardering van de energieprestatie van kleine woningen leidt, wordt er in het kader van het nieuwe energielabel gewerkt met drie klassen met WWS-punten voor de energieprestatie.
-Dit is afhankelijk van de woninggrootte:
+Per 1 januari 2021 geldt een nieuwe manier om de energieprestatie van een woonruimte te bepalen met een vernieuwd energielabel. Hierbij wordt gewerkt met een bepalingsmethode (NTA 8800) die een nieuwe indicator heeft voor de energieprestatie (in kWh/m2 per jaar). De uitkomst van de bepalingsmethode (NTA 8800) wordt gereduceerd tot een energielabel (van A++ tot G). Dit label wordt herleid tot punten voor het waarderingsstelsel.  
+
+Aangezien de nieuwe bepalingsmethode tot structurele onderwaardering van de energieprestatie van kleine woningen leidt, wordt er in het kader van het nieuwe energielabel gewerkt met drie klassen met WWS-punten voor de energieprestatie. Dit is afhankelijk van de woninggrootte:
 - \< 25 m2
 - \> 25 m2 en < 40 m2
 - \> 40 m2
@@ -353,27 +346,16 @@ Voor woningen met een oppervlakte < 25m2 geldt het volgende puntenaantal:
 | G     | 0               | 0                 |
 
 ### 4.5.3 Afwijkingsbevoegdheid hogere energielabelklasse dan A++
-De hierboven vermelde tabellen met de puntentoekenning voor de labelklasse gaan tot A++. Het
-is mogelijk dat, bij een nieuw energielabel, een betere energielabelklasse dan A++ wordt afgegeven. Een energielabel voor de woonruimte kan tot maximaal A++++ gaan. De Huurcommissie
-heeft de bevoegdheid gekregen om af te wijken van de hierboven aangegeven puntenwaardering
-indien de energieprestatie hoort bij een betere energielabelklasse dan A++. Een dergelijke
-afwijking is uitsluitend mogelijk indien de gemaakte kosten om deze energieprestatie te bereiken,
-aanmerkelijk afwijken van hetgeen als gangbaar wordt beschouwd, of indien de energieprestatie
-aanmerkelijk beter is dan hetgeen als gangbaar bij een energielabelklasse A++ wordt beschouwd.
-De Huurcommissie vult deze bevoegdheid als volgt in. Indien sprake is van een A+++ label dan
-kent de Huurcommissie, 4 extra punten toe, boven op de punten die aan het label A++ worden
-toegekend. Indien sprake is van een A++++ label dan wordt 8 extra punten toegekend, boven op
-de punten die worden gegeven voor een label A++. 
+
+De hierboven vermelde tabellen met de puntentoekenning voor de labelklasse gaan tot A++. Het is mogelijk dat, bij een nieuw energielabel, een betere energielabelklasse dan A++ wordt afgegeven. Een energielabel voor de woonruimte kan tot maximaal A++++ gaan. De Huurcommissie heeft de bevoegdheid gekregen om af te wijken van de hierboven aangegeven puntenwaardering indien de energieprestatie hoort bij een betere energielabelklasse dan A++. Een dergelijke afwijking is uitsluitend mogelijk indien de gemaakte kosten om deze energieprestatie te bereiken, aanmerkelijk afwijken van hetgeen als gangbaar wordt beschouwd, of indien de energieprestatie aanmerkelijk beter is dan hetgeen als gangbaar bij een energielabelklasse A++ wordt beschouwd.  
+
+De Huurcommissie vult deze bevoegdheid als volgt in. Indien sprake is van een A+++ label dan kent de Huurcommissie, 4 extra punten toe, boven op de punten die aan het label A++ worden toegekend. Indien sprake is van een A++++ label dan wordt 8 extra punten toegekend, boven op de punten die worden gegeven voor een label A++. 
 
 ### 4.5.4 Bouwjaar bepalend bij geen geldig energielabel of Energie-Index
 
-Indien de energieprestatie van een woonruimte (in de vorm van een energielabel of een energieindex) niet tijdig is vastgesteld, of als de geldigheidsduur van het energielabel is verstreken, dan
-bepaalt het bouwjaar van de woning het aantal WWS-punten. Een (geldig) energielabel of EnergieIndex wordt door de Huurcommissie in de puntentelling betrokken als deze tijdig beschikbaar is om
-daarmee rekening te houden in de uitspraak. In geval de opnamedatum van het energielabel of de
-Energie-Index is gelegen na de relevante peildatum, geldt hierbij als voorwaarde dat de feitelijke
-toestand (wat energieprestatie betreft) op opnamedatum niet verschilt van de feitelijke toestand op
-de desbetreffende peildatum. Alleen als er geen verschil is zal de Huurcommissie het energielabel of
-Energie-Index bij de woningwaardering betrekken. De bewislast ligt bij de verhuurder.
+Indien de energieprestatie van een woonruimte (in de vorm van een energielabel of een energieindex) niet tijdig is vastgesteld, of als de geldigheidsduur van het energielabel is verstreken, dan bepaalt het bouwjaar van de woning het aantal WWS-punten. Een (geldig) energielabel of EnergieIndex wordt door de Huurcommissie in de puntentelling betrokken als deze tijdig beschikbaar is om
+daarmee rekening te houden in de uitspraak. In geval de opnamedatum van het energielabel of de Energie-Index is gelegen na de relevante peildatum, geldt hierbij als voorwaarde dat de feitelijke toestand (wat energieprestatie betreft) op opnamedatum niet verschilt van de feitelijke toestand op de desbetreffende peildatum. Alleen als er geen verschil is zal de Huurcommissie het energielabel of Energie-Index bij de woningwaardering betrekken. De bewislast ligt bij de verhuurder.  
+
 De puntentelling is in geval het bouwjaar geldt als volgt: 
 
 | Bouwjaar     | Eengezinswoning | Meergezinswoning |
