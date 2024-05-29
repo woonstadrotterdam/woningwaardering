@@ -32,3 +32,7 @@ tasks:
     desc: Genereer de opzet voor de code van een woningwaarderinggroep
     cmds:
       - python scripts/genereer_opzet_woningwaarderinggroep.py
+  genereer-test-output:
+    desc: Genereer test output
+    cmds:
+      - python scripts/genereer_test_output.py

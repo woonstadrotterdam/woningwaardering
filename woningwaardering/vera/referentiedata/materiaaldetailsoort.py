@@ -1498,8 +1498,8 @@ class Materiaaldetailsoort(Enum):
         code="PTA",
         naam="Plantaardige-Vezel",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1507,8 +1507,8 @@ class Materiaaldetailsoort(Enum):
         code="BAM",
         naam="Bamboe",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1516,8 +1516,8 @@ class Materiaaldetailsoort(Enum):
         code="HEN",
         naam="Hennep",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1525,8 +1525,8 @@ class Materiaaldetailsoort(Enum):
         code="JUT",
         naam="Jute",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1534,8 +1534,8 @@ class Materiaaldetailsoort(Enum):
         code="KAT",
         naam="Katoen",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1543,8 +1543,8 @@ class Materiaaldetailsoort(Enum):
         code="KUR",
         naam="Kurk",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1552,8 +1552,8 @@ class Materiaaldetailsoort(Enum):
         code="MAI",
         naam="Mais",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1561,8 +1561,8 @@ class Materiaaldetailsoort(Enum):
         code="PAP",
         naam="Papier",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1570,8 +1570,8 @@ class Materiaaldetailsoort(Enum):
         code="RIE",
         naam="Riet",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1579,8 +1579,8 @@ class Materiaaldetailsoort(Enum):
         code="STR",
         naam="Stro",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1588,8 +1588,8 @@ class Materiaaldetailsoort(Enum):
         code="VEG",
         naam="Vegetatie",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1597,8 +1597,8 @@ class Materiaaldetailsoort(Enum):
         code="VIL",
         naam="Vilt",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1606,8 +1606,8 @@ class Materiaaldetailsoort(Enum):
         code="VLA",
         naam="Vlas",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1615,8 +1615,8 @@ class Materiaaldetailsoort(Enum):
         code="WOL",
         naam="Wol",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 
@@ -1624,8 +1624,8 @@ class Materiaaldetailsoort(Enum):
         code="HRU",
         naam="Hard-Rubber",
         parent=Referentiedata(
-            code="",
-            naam="",
+            code="ORG",
+            naam="Organisch",
         ),
     )
 

@@ -63,6 +63,11 @@ class Materiaalsoort(Enum):
         naam="Ntb",
     )
 
+    organisch = Referentiedata(
+        code="ORG",
+        naam="Organisch",
+    )
+
     rubber = Referentiedata(
         code="RUB",
         naam="Rubber",
