@@ -474,8 +474,7 @@ Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 meter, voldoe
 
 Indien een aanrechtblad langer is dan de aanwezige onderkasten met de bedoeling dat er onder het langere gedeelte van het aanrechtblad een losstaande koelkast, vaatwasser, wasmachine e.d., kan worden geplaatst, dan wordt dit gedeelte van het aanrechtblad mee gemeten mits er onder het blad aansluitmogelijkheden aanwezig zijn voor genoemde apparatuur.  
 
-Een ingebouwde (onroerende) koelkast, vaatwasser en/of oven beschouwen we als onderkast,
-mits daarnaast voldoende vervangende (andere) kastruimte aanwezig is.
+Een ingebouwde (onroerende) koelkast, vaatwasser en/of oven beschouwen we als onderkast, mits daarnaast voldoende vervangende (andere) kastruimte aanwezig is.
 
 Indien er sprake is van onderbouwapparatuur (roerend), dan kan dit niet in de plaats van een onderkast worden gesteld en dient er voldoende vervangende (andere) kastruimte aanwezig te zijn. Een kastruimte in de vorm van een plank kan niet als zodanig worden aangemerkt.
 
