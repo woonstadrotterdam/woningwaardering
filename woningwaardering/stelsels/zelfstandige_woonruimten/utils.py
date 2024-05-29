@@ -25,6 +25,7 @@ def is_buitenruimte(ruimte: EenhedenRuimte) -> bool:
         != Ruimtedetailsoort.gemeenschappelijk_dakterras_gak.code  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/108
     ):  # todo: en diepte, breedte en vrije hoogte > 1.5m
         return True
+    return False
 
 
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:

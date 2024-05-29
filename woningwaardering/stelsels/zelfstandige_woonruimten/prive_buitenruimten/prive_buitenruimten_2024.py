@@ -11,7 +11,6 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Ruimtedetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -36,7 +35,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
 
         woningwaardering_groep.woningwaarderingen = []
         for ruimte in eenheid.ruimten or []:
-            if is_buitenruimte(ruimte) == Ruimtedetailsoort.buitenruimte:
+            if is_buitenruimte(ruimte):
                 m2_prive_buitenruimten += Decimal(str(ruimte.oppervlakte))
 
         woningwaardering_groep.woningwaarderingen.append(
