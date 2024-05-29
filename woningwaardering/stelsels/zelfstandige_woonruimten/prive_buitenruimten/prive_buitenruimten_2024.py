@@ -101,7 +101,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.aantal is not None
             )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
+        )
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
