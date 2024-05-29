@@ -43,14 +43,16 @@ class Keuken2024(Stelselgroepversie):
         keukens = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if ruimte.bouwkundige_elementen
-            and ruimte.detail_soort
+            # check of een ruimte een keuken is
+            if ruimte.detail_soort
             and ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code
+            # check of een keuken een aanrecht heeft
             and ruimte.bouwkundige_elementen
             for bouwkundig_element in ruimte.bouwkundige_elementen
             if bouwkundig_element.detail_soort
             and bouwkundig_element.detail_soort.code
             == Bouwkundigelementdetailsoort.aanrecht.code
+            # check of een aanrecht een lengte heeft
             and bouwkundig_element.lengte
         ]
 
