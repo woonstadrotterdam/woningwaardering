@@ -92,7 +92,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
                 logger.info(
-                    f"prive-buitenruimte {ruimte.id} met oppervlakte {ruimte.oppervlakte} krijgt {woningwaardering.punten} punten voor steleselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.value}"
+                    f"Prive-buitenruimte {ruimte.id} met oppervlakte {ruimte.oppervlakte} krijgt {woningwaardering.punten} punten voor steleselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.value}"
                 )
 
         punten = Decimal(
