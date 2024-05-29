@@ -559,6 +559,19 @@ class Ruimtedetailsoort(Enum):
     parkeerplaats
     """
 
+    parkeerruimte = Referentiedata(
+        code="PRR",
+        naam="Parkeerruimte",
+        parent=Referentiedata(
+            code="BTR",
+            naam="Buitenruimte",
+        ),
+    )
+    """
+    Buitenruimte: (UITBREIDING) Een afsluitbare gemeenschappelijke parkeerruimte, zonder
+    dak, en zonder privé plek.
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:
