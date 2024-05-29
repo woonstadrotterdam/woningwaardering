@@ -351,8 +351,7 @@ De Huurcommissie vult deze bevoegdheid als volgt in. Indien sprake is van een A+
 
 ### 4.5.4 Bouwjaar bepalend bij geen geldig energielabel of Energie-Index
 
-Indien de energieprestatie van een woonruimte (in de vorm van een energielabel of een energieindex) niet tijdig is vastgesteld, of als de geldigheidsduur van het energielabel is verstreken, dan bepaalt het bouwjaar van de woning het aantal WWS-punten. Een (geldig) energielabel of EnergieIndex wordt door de Huurcommissie in de puntentelling betrokken als deze tijdig beschikbaar is om
-daarmee rekening te houden in de uitspraak. In geval de opnamedatum van het energielabel of de Energie-Index is gelegen na de relevante peildatum, geldt hierbij als voorwaarde dat de feitelijke toestand (wat energieprestatie betreft) op opnamedatum niet verschilt van de feitelijke toestand op de desbetreffende peildatum. Alleen als er geen verschil is zal de Huurcommissie het energielabel of Energie-Index bij de woningwaardering betrekken. De bewislast ligt bij de verhuurder.  
+Indien de energieprestatie van een woonruimte (in de vorm van een energielabel of een energieindex) niet tijdig is vastgesteld, of als de geldigheidsduur van het energielabel is verstreken, dan bepaalt het bouwjaar van de woning het aantal WWS-punten. Een (geldig) energielabel of EnergieIndex wordt door de Huurcommissie in de puntentelling betrokken als deze tijdig beschikbaar is om daarmee rekening te houden in de uitspraak. In geval de opnamedatum van het energielabel of de Energie-Index is gelegen na de relevante peildatum, geldt hierbij als voorwaarde dat de feitelijke toestand (wat energieprestatie betreft) op opnamedatum niet verschilt van de feitelijke toestand op de desbetreffende peildatum. Alleen als er geen verschil is zal de Huurcommissie het energielabel of Energie-Index bij de woningwaardering betrekken. De bewislast ligt bij de verhuurder.  
 
 De puntentelling is in geval het bouwjaar geldt als volgt: 
 
