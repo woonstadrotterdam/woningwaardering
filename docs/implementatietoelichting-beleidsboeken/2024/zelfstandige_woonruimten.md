@@ -4,18 +4,13 @@
 
 ### 4.2.1 Wat zijn vertrekken?
 
-Het eerste onderdeel van de woningwaardering is de oppervlakte van vertrekken. Onder vertrek-
-ken worden woonkamer, andere kamers (hobbykamer, studeerkamer, slaapkamer en eetkamer),
-keuken, badkamer of doucheruimte verstaan. De waardering van vertrekken is 1 punt per m2.
+Het eerste onderdeel van de woningwaardering is de oppervlakte van vertrekken. Onder vertrekken worden woonkamer, andere kamers (hobbykamer, studeerkamer, slaapkamer en eetkamer), keuken, badkamer of doucheruimte verstaan. De waardering van vertrekken is 1 punt per m2.
 
-Geen vertrekken zijn: schuren, zolderberging, kelders, wasruimten, bijkeukens, garages en bergingen,
-gang, (speel)hal en zogenoemde verkeersruimten (bijvoorbeeld overlopen). De oppervlakte van
-deze ruimten tellen dus niet mee als vertrekken.
-De Huurcommissie geeft op een aantal punten nadere invulling aan de hierboven genoemde
-wettelijke begrippen. Dat wordt hierna beschreven.
+Geen vertrekken zijn: schuren, zolderberging, kelders, wasruimten, bijkeukens, garages en bergingen, gang, (speel)hal en zogenoemde verkeersruimten (bijvoorbeeld overlopen). De oppervlakte van deze ruimten tellen dus niet mee als vertrekken.  
 
-**Woonkamer of andere kamer**
+De Huurcommissie geeft op een aantal punten nadere invulling aan de hierboven genoemde wettelijke begrippen. Dat wordt hierna beschreven.
 
+**Woonkamer of andere kamer**  
 Een woonkamer of een andere kamer is dus een vertrek in de zin van het woningwaarderingsstelsel.
 
 Hiervan is alleen sprake als:
@@ -30,8 +25,7 @@ Hiervan is alleen sprake als:
 Alleen als aan al deze eisen is voldaan, wordt de (oppervlakte van de) woonruimte of andere kamer meegeteld als “vertrek”. Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte” (zie [paragraaf 4.3](#43-oppervlakte-van-overige-ruimten).).  
 Uitzondering hierop geldt voor de keuken: de eisen van minimaal 4 m2 en ~~minimaal 1,50 m breedte~~ gelden niet voor de keuken en verzetten zich er dus niet tegen om een keuken als “vertrek” aan te merken en overeenkomstig te waarderen.
 
-**Badkamer of doucheruimte**
-
+**Badkamer of doucheruimte**  
 Een badkamer of doucheruimte is dus een vertrek in de zin van het woningwaarderingsstelsel.
 
 Hiervan is alleen sprake als:
@@ -41,8 +35,7 @@ Hiervan is alleen sprake als:
 - ~~En de ventilatiemogelijkheid en het aantal elektrische lichtpunten in overeenstemming zijn met de geldende verkeersopvattingen.~~
 - ~~De ruimte over ten minste 50% van de oppervlakte een vrije hoogte heeft van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).~~
 
-~~Alleen als aan al deze eisen is voldaan, wordt de (oppervlakte van de) badkamer of doucheruimte
-meegeteld als “vertrek”. Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte” (zie verderop).~~
+~~Alleen als aan al deze eisen is voldaan, wordt de (oppervlakte van de) badkamer of doucheruimte meegeteld als “vertrek”. Zo niet, dan wordt de oppervlakte meegeteld als “overige ruimte” (zie verderop).~~
 
 > Hoewel de VERA-standaard een onderscheid maakt tussen badkamer, doucheruimte en badkamer/toilet (badkamer met toilet) beschouwen wij ieder van deze ruimtes indien zij een toilet bevatten als een badkamer met toilet, conform hoe de huurcommissie omgaat met deze ruimtes.. Zie ook [dit Github issue](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/96).
 
@@ -50,16 +43,14 @@ Voor gecombineerde bad-/doucheruimte met toilet geldt een minimale oppervlakte v
 
 > Elke Badkamer, Badkamer/toilet of Doucheruimte die als vertrek is aangemerkt wordt meegeteld als vertrek, tenzij onder aftrek van 1 m2 voor een in de ruimte geplaatst toilet de oppervlakte kleiner is dan 0,64 m². (Zie punt 5 in [4.2.2](#422-hoe-wordt-de-oppervlakte-van-vertrekken-gemeten)).
 
-**Zolderruimte**
-
+**Zolderruimte**  
 Zolderruimten zijn in het algemeen “overige ruimte”. Echter, in geval een zolderruimte een functie heeft als “vertrek” (dus woonkamer, andere kamers, badkamer of doucheruimte), en ook voldoet aan de eisen die daarvoor gelden (zie hierboven), dan mag de zolderruimte meetellen als “vertrek”, mits deze ruimte bereikbaar is via een vaste trap ~~en het dak beschoten is~~.
 
 > In het beleidsboek wordt er onderscheid gemaakt tussen een zolder vertrek met een vaste trap of zolder met een ander soort trap. Wanneer een zolder als vertrek wordt aangemerkt moet deze te bereiken zijn via een vaste trap. Daarom wordt er voor een zolder gekeken of er een vaste trap in de `bouwkundige_elementen` zit. Als dit het geval is dan telt de gehele oppervlakte van de zolder mee voor de punten van Oppervlakte van Vertrekken.
 
 ### 4.2.2 Hoe wordt de oppervlakte van vertrekken gemeten?
 
-De wetgever heeft in de toelichting op het woningwaarderingsstelsel een aantal meetinstructies
-meegegeven:
+De wetgever heeft in de toelichting op het woningwaarderingsstelsel een aantal meetinstructies meegegeven:
 
 1. Meting van de oppervlakte van vertrekken vindt plaats ~~van muur tot muur, op een hoogte van 1,50 m boven de vloer,~~ inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten (kleiner dan 2m²). ~~Deze meethoogte geldt ook als de oppervlakte afwijkt van die op vloerniveau.~~
 
@@ -96,7 +87,7 @@ De Huurcommissie licht dit als volgt toe:
 
 Afronding: eerst de oppervlakte per vertrek op 2 decimalen afronden en pas daarna de oppervlakte van alle vertrekken salderen en afronden op hele vierkante meters.
 
-**Voorbeeld:**  
+**_Voorbeeld:_**  
 _kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²_  
 _keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²_  
 _Totaal : 26,73 m² Afronding op hele m² : 27 m²._
@@ -162,15 +153,7 @@ Indien geen vaste trap aanwezig is, wordt het aantal punten van de vloeroppervla
 
 ~~Is er op de zolderverdieping ook nog een vertrek aanwezig dat alleen bereikbaar is via het zoldergedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopruimte om het vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en wordt dan gewaardeerd als overige ruimte.~~
 
-> Wanneer een zolder als overige ruimte wordt beschouwd, kijken we in de `bouwkundige_elementen` van de zolder of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten.
-Wanneer deze wel bereikbaar is, maar niet via een vaste trap, moeten er 5 punten in mindering worden gebracht omdat de ruimte niet bereikt kan worden met een vaste trap. In onze implementatie hebben wij er voor gekozen om te checken of er dan wel een vlizotrap aanwezig is in de `bouwkundige_elementen`, aangezien dit de enige andere soort trap in het VERA model is waarmee een zolder ruimte bereikt zou kunnen worden.
-Daarnaast is het onze keuze om de 5 punten in mindering te brengen door de oppervlakte van de zolder te corrigeren. Het beleidsboek
-geeft aan dat de punten in mindering gebracht moeten worden
-op de punten berekend voor deze ruimte. Maar ook dat punten
-pas berekend moeten worden wanneer de totale oppervlakte van een eenheid bekend is en afgerond is.
-Dit is tegenstrijdig en daarom kiezen wij de implementatie die volgens ons het beleidsboek zo goed mogelijk benadert.
-Let op, door de afronding komt deze berekening niet helemaal juist
-uit, maar dit is de benadering waar wij nu voor kiezen.
+> Wanneer een zolder als overige ruimte wordt beschouwd, kijken we in de `bouwkundige_elementen` van de zolder of de zolder bereikbaar is via een trap. Wanneer deze bereikbaar is via een vaste trap telt de volledige oppervlakte mee voor de punten berekening van Oppervlakte van Overige ruimten. Wanneer deze wel bereikbaar is, maar niet via een vaste trap, moeten er 5 punten in mindering worden gebracht omdat de ruimte niet bereikt kan worden met een vaste trap. In onze implementatie hebben wij er voor gekozen om te checken of er dan wel een vlizotrap aanwezig is in de `bouwkundige_elementen`, aangezien dit de enige andere soort trap in het VERA model is waarmee een zolder ruimte bereikt zou kunnen worden. Daarnaast is het onze keuze om de 5 punten in mindering te brengen door de oppervlakte van de zolder te corrigeren. Het beleidsboek geeft aan dat de punten in mindering gebracht moeten worden op de punten berekend voor deze ruimte. Maar ook dat punten pas berekend moeten worden wanneer de totale oppervlakte van een eenheid bekend is en afgerond is. Dit is tegenstrijdig en daarom kiezen wij de implementatie die volgens ons het beleidsboek zo goed mogelijk benadert. Let op, door de afronding komt deze berekening niet helemaal juist uit, maar dit is de benadering waar wij nu voor kiezen.
 
 9. Een overloop is een verkeersruimte en wordt dus niet gewaardeerd. ~~Als er met aftrek van de verkeersruimte en trap voldoende ruimte overblijft en deze (zolder)overloop kennelijk ook bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd.~~
 
@@ -182,20 +165,17 @@ uit, maar dit is de benadering waar wij nu voor kiezen.
 
 > Hiervoor is het `EenhedenRuimte` model uitgebreid met het attribuut `gedeeldMetAantalEenheden` of `gedeeld_met_aantal_eenheden` voor de Python representatie. Om deze berekening correct uit te voeren dient deze waarde gevuld te zijn. Zonder deze waarde wordt de volledige oppervlakte van een ruimte meegeteld.
 
-De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte,
-afronden in m2, delen door het aantal woningen en waarderen als “overige ruimte”. Kasten <2m2
-en uitkomend in een verkeersruimte worden niet meegeteld.
+De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte, afronden in m2, delen door het aantal woningen en waarderen als “overige ruimte”. Kasten <2m2 en uitkomend in een verkeersruimte worden niet meegeteld.
 
 1. Afronding van de oppervlakte op hele vierkante meters vindt plaats na saldering van de oppervlakte van alle afzonderlijke ruimten; bij 0,5m² of meer wordt afgerond naar boven, bij minder dan 0,5m² naar beneden. Waardering in punten vindt na saldering en afronding plaats.
 
 De Huurcommissie licht dit als volgt toe:  
-Afronding: eerst de oppervlakte per overige ruimte op 2 decimalen afronden en pas daarna de
-oppervlakte van alle overige ruimten salderen en afronden op hele vierkante meters.
+Afronding: eerst de oppervlakte per overige ruimte op 2 decimalen afronden en pas daarna de oppervlakte van alle overige ruimten salderen en afronden op hele vierkante meters.
 
-**Voorbeeld:**  
-Garage : lengte 3,16m x breedte 6,12m = 19,3392 m², afgerond : 19,34 m²  
-Bijkeuken: lengte 2,11m x breedte 2,87m = 6,0557 m², afgerond : 6,06 m²  
-Totaal : 25,40 m² Afronding op hele m² : 25 m².  
+**_Voorbeeld:_**  
+_Garage : lengte 3,16m x breedte 6,12m = 19,3392 m², afgerond : 19,34 m²_  
+_Bijkeuken: lengte 2,11m x breedte 2,87m = 6,0557 m², afgerond : 6,06 m²_  
+_Totaal : 25,40 m² Afronding op hele m² : 25 m²._  
 
 ## 4.4 Verwarming
 
@@ -250,9 +230,7 @@ Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuke
 
 ## 4.5 Energieprestatie
 
-Een (groot) deel van het totale puntenaantal wordt bepaald door de energieprestatie van de
-woonruimte. Sinds 2011 speelt het energielabel een rol in het puntenstelsel, waarbi een energielabel of energie-index maximaal 10 jaar geldig is. De energieprestatie kan sinds 1 januari 2021 op
-drie manieren zin bepaald.
+Een (groot) deel van het totale puntenaantal wordt bepaald door de energieprestatie van de woonruimte. Sinds 2011 speelt het energielabel een rol in het puntenstelsel, waarbi een energielabel of energie-index maximaal 10 jaar geldig is. De energieprestatie kan sinds 1 januari 2021 op drie manieren zin bepaald.
 
 1. Een oud energielabel: registratie heeft plaatsgevonden vóór 1 januari 2015. In 2021 en later lopen veel sinds 1 juli 2011 verstrekte energielabels af, want de geldigheidsduur is tien jaar.
 2. De energie-index: registratie op of na 1 januari 2015 tot 1 januari 2021. In 2025 en later lopen veel sinds 1 januari 2015 verstrekte energie-indexen af, want de geldigheidsduur is tien jaar.
@@ -265,8 +243,8 @@ In [EP-online](https://www.ep-online.nl/) is te vinden wat de energieprestatie v
 > In de tabellen ter ondersteuning van de tekst van het beleidsboek over de punten toekenning bij een nieuw energielabel is er voor gekozen om de implementatie van regel [4.5.3 Afwijkingsbevoegdheid hogere energielabelklasse dan A++](#453-afwijkingsbevoegdheid-hogere-energielabelklasse-dan-a) al toe te voegen aan de tabellen.
 
 ### 4.5.1 Puntentoekenning oud energielabel en energie-index
-Bij een oud energielabel bepaalt de labelklasse (A t/m G) het aantal punten dat de verhuurder mag doorrekenen in de maximale huur. Een energielabel dat is geregistreerd vóór 2015 en dat niet ouder is dan tien jaar, is nog bruikbaar.
-~~Bij een energie-index is de indeling in letters vervangen door een cijfer. De energie-index wordt meegenomen indien in EP-online staat aangegeven dat de energie-index geldig is voor het woningwaarderingsstelsel.~~
+
+Bij een oud energielabel bepaalt de labelklasse (A t/m G) het aantal punten dat de verhuurder mag doorrekenen in de maximale huur. Een energielabel dat is geregistreerd vóór 2015 en dat niet ouder is dan tien jaar, is nog bruikbaar. ~~Bij een energie-index is de indeling in letters vervangen door een cijfer. De energie-index wordt meegenomen indien in EP-online staat aangegeven dat de energie-index geldig is voor het woningwaarderingsstelsel.~~
 
 > De energie-index van een energieprestatie wordt niet gebruikt. In EP-Online hebben alle op energie-index gebaseerde energieprestaties ook een labelklasse. Deze labelklasse dient gebruikt te worden voor de waardering.
 
@@ -367,6 +345,7 @@ De puntentelling is in geval het bouwjaar geldt als volgt:
 | 1976 en ouder | 0               | 0                |
 
 ### ~~4.5.5 Gerede twijfel energielabel~~
+
 ~~Als huurder twijfelt aan de juistheid van het toepasselijke energielabel dan heeft de Huurcommissie de bevoegdheid om een ‘eigen oordeel’ uit te spreken bij gerede twijfel van het energielabel. Een Huurcommissie eigen oordeel (HEO) kan worden uitgesproken indien de huurder met bewijsstukken gemotiveerd aantoont dat sprake is van een verkeerd energielabel/energie-index en dat het gewijzigde energielabel/energie-index van invloed is op de huurprijs. Indien de Huurcommissie tot een eigen oordeel wil komen dan laat de Huurcommissie onderzoeken wat de energieprestatie van de woning is.~~
 
 ~~Het eigen oordeel is uitsluitend in de voorliggende zaak van kracht, wordt niet geregistreerd in het register van de Rijksdienst voor Ondernemend Nederland en komt te vervallen na ontbinding van de huurovereenkomst.~~
@@ -374,6 +353,7 @@ De puntentelling is in geval het bouwjaar geldt als volgt:
 > Wanneer een eigen oordeel van kracht is, en de waardering daarop gebaseerd moet worden, dient de gewijzigde energieprestatie opgegeven te worden in plaats van de geregistreerde energieprestatie.
 
 ### 4.5.6 Energieprestatievergoeding
+
 Voor woningen die zelf (gedeeltelijk) in hun energieverbruik voorzien, door bijvoorbeeld zonnepanelen, kan bij het verhuren een energieprestatievergoeding (EPV) worden afgesproken. De woning zal dan moeten voldoen aan de eisen voor een EPV. Als dit het geval is dan is het aantal punten op basis van het puntenstelsel voor energieprestatie lager. Om te voorkomen dat in de gevallen waarin een energieprestatievergoeding is overeengekomen, de opwekking van energie voor de huurder tevens wordt verdisconteerd in de huurprijs, wordt voor deze woningen een correctiefactor toegepast op het aantal punten voor de energieprestatie. In die gevallen wordt de energieprestatie gewaardeerd met een aantal punten gelijk aan de waardering voor een Energie-Index 1,2 < EI ≤ 1,4 (of Energielabel B), met 32 punten voor een ééngezinswoning en 28 punten voor meergezins- en duplexwoningen.
 
 > Hiervoor is het `EenhedenEnergieprestatie` model uitgebreid met het attribuut `energieprestatievergoeding`. Dit attribuut dient gevuld te zijn met een boolean die aangeeft of er bij het verhuren een energieprestatievergoeding (EPV) is overeengekomen.
@@ -397,8 +377,7 @@ Het woningwaarderingsstelsel geeft punten aan de sanitaire voorzieningen toilet,
 
 > De punten hierboven in de tabel zijn het aantal punten dat wordt toegekend aan de sanitaire voorziening. De gedetailleerde voorwaarden die hieronder volgen in het beleidsboek worden niet getoetst in de implementatie. Het is aan de gebruiker om alleen voorzieningen op te geven die voldoen aan de voorwaarden.
 
-~~_*Een lavet wordt met vier punten gewaardeerd, als deze is voorzien van aansluitpunten voor warm en koud
-water én van douchegarnituur._~~
+~~_*Een lavet wordt met vier punten gewaardeerd, als deze is voorzien van aansluitpunten voor warm en koud water én van douchegarnituur._~~
 
 **Toilet**  
 Drie punten worden toegekend aan een toilet ~~met waterspoeling als het toilet is geplaatst in een daartoe bestemde ruimte en als het toilet binnen het woongebouw is gelegen. Wanneer sprake is van een toilet dat buiten de woning maar binnen het woongebouw is gelegen, dan geldt dat het toilet in de waardering wordt meegenomen als het gebruik van het toilet door derden is uit te sluiten.~~  
@@ -406,16 +385,14 @@ Drie punten worden toegekend aan een toilet ~~met waterspoeling als het toilet i
 **Wastafel**  
 Wastafels worden met één punt gewaardeerd. ~~Als wastafels worden alle bakken geteld voor wassen en spoelen die op de waterleiding én op het huisriool zijn aangesloten. Een dergelijke bak wordt niet als wastafel gewaardeerd indien boven de bak een douche is aangebracht. Een bad en spoelbakken in een keukenaanrecht worden niet als wastafels gewaardeerd.~~ 
 
-~~Als wastafel waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in
-aanmerking komt, waarvan de aanrechtlengte korter is dan één meter.~~
+~~Als wastafel waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter is dan één meter.~~
 
 **Bad en douche**  
 Douches worden gewaardeerd met vier punten. ~~Als douche wordt meegeteld iedere door de verhuurder aangebrachte installatie voor het nemen van een stortbad. Hieronder valt eveneens een zogenaamde douchecabine, die voldoet aan bovengenoemde voorwaarden, als de douchecabine in een vertrek (anders dan bad- of doucheruimte) of overige ruimte is geplaatst. De oppervlakte van dat vertrek of van die overige ruimte wordt in dat geval niet verminderd met de door de douchecabine ingenomen oppervlakte.~~  
 
 Aan baden worden zes punten toegekend, ~~ongeacht de lengte van het bad. Indien een bad is voorzien van een (hand)douche, dan wordt het douchegarnituur niet afzonderlijk geteld.~~  
 
-Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangebracht, geldt een
-waardering van zeven punten.  
+Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangebracht, geldt een waardering van zeven punten.  
 
 > Het is ambigu hoeveel punten er zouden moeten worden toegekend indien een badruimte meer dan één douche bevat en één bad of vice versa. I.v.m. de onwaarschijnlijkheid van het voortkomen van deze situatie is er gekozen om deze situatie niet te ondersteunen in de implementatie. Indien er een bad en een douche in dezelfde ruimte aanwezig zijn worden er 7 punten toegekend per combinatie van bad en douche.  
 >
