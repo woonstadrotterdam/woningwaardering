@@ -43,16 +43,24 @@ class Keuken2024(Stelselgroepversie):
         keukens = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            # check of een ruimte een keuken is
+            # check of een ruimte behoort tot te ruimtesoorten die in aanmerking komen voor de stelselgroep keuken
             if ruimte.detail_soort
-            and ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code
-            # check of een keuken een aanrecht heeft
+            and (
+                ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code
+                or ruimte.detail_soort.code
+                == Ruimtedetailsoort.woonkamer_en_of_keuken.code
+                or ruimte.detail_soort.code == Ruimtedetailsoort.woonkamer.code
+                or ruimte.detail_soort.code
+                == Ruimtedetailsoort.woon_en_of_slaapkamer.code
+                or ruimte.detail_soort.code == Ruimtedetailsoort.slaapkamer.code
+            )
+            # check of de ruimte een aanrecht heeft
             and ruimte.bouwkundige_elementen
             for bouwkundig_element in ruimte.bouwkundige_elementen
             if bouwkundig_element.detail_soort
             and bouwkundig_element.detail_soort.code
             == Bouwkundigelementdetailsoort.aanrecht.code
-            # check of een aanrecht een lengte heeft
+            # check of het aanrecht een lengte heeft
             and bouwkundig_element.lengte
         ]
 
@@ -105,7 +113,7 @@ if __name__ == "__main__":
     logger.enable("woningwaardering")
 
     file = open(
-        "tests/stelsels/zelfstandige_woonruimten/keuken/data/input/aanrecht_zonder_lengte.json",
+        "tests/stelsels/zelfstandige_woonruimten/keuken/data/input/woon_slaap_met_aanrecht.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(file.read())
