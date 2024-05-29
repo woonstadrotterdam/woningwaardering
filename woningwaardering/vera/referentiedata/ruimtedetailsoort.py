@@ -568,8 +568,21 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-    Buitenruimte: (UITBREIDING) Een afsluitbare gemeenschappelijke parkeerruimte, zonder
+    Buitenruimte: (UITBREIDING) een afsluitbare gemeenschappelijke parkeerruimte, zonder
     dak, en zonder privé plek.
+    """
+
+    parkeerruimte_prive = Referentiedata(
+        code="PRP",
+        naam="Parkeerruimte privé",
+        parent=Referentiedata(
+            code="BTR",
+            naam="Buitenruimte",
+        ),
+    )
+    """
+    Buitenruimte: (UITBREIDING) een afsluitbare gemeenschappelijke parkeerruimte, zonder
+    dak, met privé plek.
     """
 
     @property
