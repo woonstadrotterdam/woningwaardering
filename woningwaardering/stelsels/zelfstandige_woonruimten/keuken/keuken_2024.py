@@ -87,7 +87,7 @@ class Keuken2024(Stelselgroepversie):
 
         else:
             logger.warning(
-                f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Geen keuken, aanrecht of aanrecht lengte gevonden voor eenheid {eenheid.id}"
+                f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Geen keuken, aanrecht of aanrechtlengte gevonden voor eenheid {eenheid.id}"
             )
 
         totaal_punten = Decimal(
