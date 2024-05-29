@@ -20,7 +20,9 @@ def is_buitenruimte(ruimte: EenhedenRuimte) -> bool:
         raise TypeError(error_msg)
 
     if (
-        ruimte.soort.code == Ruimtesoort.buitenruimte.code
+        (ruimte.soort.code == Ruimtesoort.buitenruimte.code)
+        and ruimte.detail_soort.code
+        != Ruimtedetailsoort.gemeenschappelijk_dakterras_gak.code  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/108
     ):  # todo: en diepte, breedte en vrije hoogte > 1.5m
         return True
 
