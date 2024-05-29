@@ -544,9 +544,9 @@ class Ruimtedetailsoort(Enum):
     Buitenruimte: (UITBREIDING) voor- zij- achter- of rondomtuin, mits privé.
     """
 
-    open_parkeerkelder = Referentiedata(
+    open_parkeergarage = Referentiedata(
         code="OPA",
-        naam="Open parkeerkelder",
+        naam="Open parkeergarage",
         parent=Referentiedata(
             code="BTR",
             naam="Buitenruimte",
