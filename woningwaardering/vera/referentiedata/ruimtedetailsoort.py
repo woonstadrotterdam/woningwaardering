@@ -585,6 +585,20 @@ class Ruimtedetailsoort(Enum):
     dak, met privé plek.
     """
 
+    garage_prive = Referentiedata(
+        code="GAP",
+        naam="Garage privé",
+        parent=Referentiedata(
+            code="OVR",
+            naam="Overige ruimtes",
+        ),
+    )
+    """
+    Overige ruimte: (UITBREIDING) een gesloten parkeergarage (bijvoorbeeld in de
+    onderbouw van een appartementencomplex) met een specifiek tot de woning
+    behorende, afgebakende parkeerplaats
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:
