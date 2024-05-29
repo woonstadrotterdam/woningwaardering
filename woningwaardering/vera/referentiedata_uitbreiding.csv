@@ -7,3 +7,4 @@ WONINGTYPE;MGW;Meergezinswoning;Een woning die samen met andere woonruimten c.q.
 BOUWKUNDIGELEMENTDETAILSOORT;BID;Bidet;Een bidet (UITBREIDING).;17-5-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
 BOUWKUNDIGELEMENTDETAILSOORT;LAV;Lavet;Een Lavet (UITBREIDING).;17-5-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
 RUIMTEDETAILSOORT;TUI;Tuin;Buitenruimte: (UITBREIDING) voor- zij- achter- of rondomtuin, mits privé.;28-5-2024;;RUIMTESOORT.BTR;Vastgoed
+RUIMTEDETAILSOORT;OPA;Open parkeerkelder;Buitenruimte: (UITBREIDING)  een tot het complex behorende open parkeergarage (een open ruimte, dus geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen) met voor elke woning een al dan niet specifiek toegewezen parkeerplaats;29-5-2024;;RUIMTESOORT.BTR;Vastgoed

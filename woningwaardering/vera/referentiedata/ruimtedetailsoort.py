@@ -544,6 +544,21 @@ class Ruimtedetailsoort(Enum):
     Buitenruimte: (UITBREIDING) voor- zij- achter- of rondomtuin, mits privé.
     """
 
+    open_parkeerkelder = Referentiedata(
+        code="OPA",
+        naam="Open parkeerkelder",
+        parent=Referentiedata(
+            code="BTR",
+            naam="Buitenruimte",
+        ),
+    )
+    """
+    Buitenruimte: (UITBREIDING)  een tot het complex behorende open parkeergarage (een
+    open ruimte, dus geen wanden maar wel een dak, bijvoorbeeld onder een complex
+    appartementen) met voor elke woning een al dan niet specifiek toegewezen
+    parkeerplaats
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:
