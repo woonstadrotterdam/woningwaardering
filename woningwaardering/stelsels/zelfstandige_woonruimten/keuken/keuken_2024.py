@@ -54,10 +54,11 @@ class Keuken2024(Stelselgroepversie):
                 Ruimtedetailsoort.slaapkamer.code,
             ]:
                 continue
+
             if ruimte.bouwkundige_elementen:
                 for bouwkundig_element in ruimte.bouwkundige_elementen:
                     if not bouwkundig_element.detail_soort:
-                        logger.warning(
+                        logger.debug(
                             f"Bouwkundig element in ruimte {ruimte.id} heeft geen detail_soort."
                         )
                         continue
@@ -69,12 +70,12 @@ class Keuken2024(Stelselgroepversie):
                         keukens.add(ruimte.id)
                         if not bouwkundig_element.lengte:
                             logger.warning(
-                                f"Aanrecht in ruimte {ruimte.id} heeft geen lengte."
+                                f"{Bouwkundigelementdetailsoort.aanrecht.naam} {bouwkundig_element.id} in ruimte {ruimte.id} heeft geen lengte en kan daardoor niet gewaardeerd worden."
                             )
                             continue
 
                         logger.debug(
-                            f"Ruimte {ruimte.id} is een keuken met aanrecht en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                            f"Ruimte {ruimte.id} is een keuken met {Bouwkundigelementdetailsoort.aanrecht.naam} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
                         )
                         if bouwkundig_element.lengte:
                             if bouwkundig_element.lengte < 1000:
@@ -84,7 +85,7 @@ class Keuken2024(Stelselgroepversie):
                             else:
                                 punten = 4.0
 
-                            logger.debug(
+                            logger.info(
                                 f"Ruimte {ruimte.id} is een keuken met aanrecht lengte {bouwkundig_element.lengte} millimeter en krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
                             )
 
@@ -110,7 +111,7 @@ class Keuken2024(Stelselgroepversie):
                         continue
 
         if not keukens:
-            logger.warning("Geen keukens gevonden.")
+            logger.warning(f"Geen keuken(s) gevonden in eenheid {eenheid.id}.")
             return woningwaardering_groep
 
         totaal_punten = Decimal(
