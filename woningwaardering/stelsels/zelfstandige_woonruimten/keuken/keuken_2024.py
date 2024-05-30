@@ -83,11 +83,8 @@ class Keuken2024(Stelselgroepversie):
 
         if ruimten_met_aanrecht:
             ruimten_met_aanrecht_lengte = [
-                ruimte
-                for ruimte in ruimten_met_aanrecht
-                if ruimte.bouwkundige_elementen
-                # Check of de aanrechten een lengte hebben
-                for aanrecht in ruimte.bouwkundige_elementen
+                (ruimte, aanrecht)
+                for (ruimte, aanrecht) in ruimten_met_aanrecht
                 if aanrecht.lengte
             ]
 
