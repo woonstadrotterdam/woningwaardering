@@ -109,6 +109,10 @@ class Keuken2024(Stelselgroepversie):
                         )
                         continue
 
+        if not keukens:
+            logger.warning("Geen keukens gevonden.")
+            return woningwaardering_groep
+
         totaal_punten = Decimal(
             sum(
                 Decimal(str(woningwaardering.punten))
