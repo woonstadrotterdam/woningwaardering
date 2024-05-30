@@ -76,26 +76,38 @@ class Keuken2024(Stelselgroepversie):
         ]
 
         if not ruimten_met_aanrecht:
-            logger.warning(
-                f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Geen ruimte met een {Bouwkundigelementdetailsoort.aanrecht.naam} gevonden voor eenheid {eenheid.id}"
-            )
+            for ruimte in geldige_ruimtes:
+                logger.warning(
+                    f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: ruimte {ruimte.id} heeft geen {Bouwkundigelementdetailsoort.aanrecht.naam} in eenheid {eenheid.id}"
+                )
             return woningwaardering_groep
 
-        if ruimten_met_aanrecht:
-            ruimten_met_aanrecht_lengte = [
-                (ruimte, aanrecht)
-                for (ruimte, aanrecht) in ruimten_met_aanrecht
-                if aanrecht.lengte
-            ]
+        ruimten_met_aanrecht_lengte = [
+            (ruimte, aanrecht)
+            for ruimte, aanrecht in ruimten_met_aanrecht
+            if aanrecht.lengte
+        ]
+
+        # Mochten er geldige ruimten met aanrecht zijn, maar ook ruimten zijn met een aanrecht maar zonder lengte, dan geven we een waarschuwing
+        missende_aanrechtelengten = [
+            item
+            for item in ruimten_met_aanrecht
+            if item not in ruimten_met_aanrecht_lengte
+        ]
+        if missende_aanrechtelengten:
+            for ruimte, _ in missende_aanrechtelengten:
+                logger.warning(
+                    f"Ruimte {ruimte.id} met {Bouwkundigelementdetailsoort.aanrecht.naam} heeft geen aanrechtlengte"
+                )
 
         if not ruimten_met_aanrecht_lengte:
             logger.warning(
-                f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Ruimte met een {Bouwkundigelementdetailsoort.aanrecht.naam} heeft geen  {Bouwkundigelementdetailsoort.aanrecht.naam}lengte voor eenheid {eenheid.id}"
+                f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Geldig ruimte met aanrecht heeft geen aanrechtlengte in eenheid {eenheid.id}."
             )
             return woningwaardering_groep
 
-        for (ruimte, aanrecht) in ruimten_met_aanrecht_lengte:
-            logger.debug(
+        for ruimte, aanrecht in ruimten_met_aanrecht_lengte:
+            logger.info(
                 f"Ruimte {ruimte.id} is een {ruimte.detail_soort} met een {Bouwkundigelementdetailsoort.aanrecht.naam} van {aanrecht.lengte} {Meeteenheid.millimeter.value} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
             )
             if aanrecht.lengte:
