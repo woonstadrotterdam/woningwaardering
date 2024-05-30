@@ -65,7 +65,7 @@ class Keuken2024(Stelselgroepversie):
             return woningwaardering_groep
 
         ruimten_met_aanrecht = [
-            ruimte
+            (ruimte, bouwkundig_element)
             for ruimte in geldige_ruimtes
             # check of de ruimte een aanrecht heeft
             if ruimte.bouwkundige_elementen
