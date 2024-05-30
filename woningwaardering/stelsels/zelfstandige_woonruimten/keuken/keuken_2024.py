@@ -97,33 +97,32 @@ class Keuken2024(Stelselgroepversie):
             )
             return woningwaardering_groep
 
-        for ruimte in ruimten_met_aanrecht_lengte:
-            for aanrecht in ruimte.bouwkundige_elementen or []:
-                logger.debug(
-                    f"Ruimte {ruimte.id} is een {ruimte.detail_soort} met een {Bouwkundigelementdetailsoort.aanrecht.naam} van {aanrecht.lengte} {Meeteenheid.millimeter.value} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+        for (ruimte, aanrecht) in ruimten_met_aanrecht_lengte:
+            logger.debug(
+                f"Ruimte {ruimte.id} is een {ruimte.detail_soort} met een {Bouwkundigelementdetailsoort.aanrecht.naam} van {aanrecht.lengte} {Meeteenheid.millimeter.value} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+            )
+            if aanrecht.lengte:
+                if aanrecht.lengte < 1000:
+                    punten = 0.0
+                elif aanrecht.lengte >= 2000:
+                    punten = 7.0
+                else:
+                    punten = 4.0
+
+                logger.info(
+                    f"Ruimte {ruimte.naam} met aanrecht lengte {aanrecht.lengte} millimeter krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
                 )
-                if aanrecht.lengte:
-                    if aanrecht.lengte < 1000:
-                        punten = 0.0
-                    elif aanrecht.lengte >= 2000:
-                        punten = 7.0
-                    else:
-                        punten = 4.0
 
-                    logger.info(
-                        f"Ruimte {ruimte.naam} met aanrecht lengte {aanrecht.lengte} millimeter krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam="Lengte aanrecht",
+                            meeteenheid=Meeteenheid.millimeter.value,
+                        ),
+                        aantal=aanrecht.lengte,
+                        punten=punten,
                     )
-
-                    woningwaardering_groep.woningwaarderingen.append(
-                        WoningwaarderingResultatenWoningwaardering(
-                            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam="Lengte aanrecht",
-                                meeteenheid=Meeteenheid.millimeter.value,
-                            ),
-                            aantal=aanrecht.lengte,
-                            punten=punten,
-                        )
-                    )
+                )
 
         totaal_punten = Decimal(
             sum(
