@@ -46,13 +46,14 @@ class Keuken2024(Stelselgroepversie):
             # check of een ruimte behoort tot te ruimtesoorten die in aanmerking komen voor de stelselgroep keuken
             if ruimte.detail_soort
             and (
-                ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code
-                or ruimte.detail_soort.code
-                == Ruimtedetailsoort.woonkamer_en_of_keuken.code
-                or ruimte.detail_soort.code == Ruimtedetailsoort.woonkamer.code
-                or ruimte.detail_soort.code
-                == Ruimtedetailsoort.woon_en_of_slaapkamer.code
-                or ruimte.detail_soort.code == Ruimtedetailsoort.slaapkamer.code
+                ruimte.detail_soort.code
+                in [
+                    Ruimtedetailsoort.keuken.code,
+                    Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+                    Ruimtedetailsoort.woonkamer.code,
+                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                    Ruimtedetailsoort.slaapkamer.code,
+                ]
             )
         ]
 
