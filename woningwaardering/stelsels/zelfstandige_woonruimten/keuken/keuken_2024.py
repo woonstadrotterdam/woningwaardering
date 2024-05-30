@@ -99,7 +99,7 @@ class Keuken2024(Stelselgroepversie):
                                 )
                             )
 
-                    elif ruimte.detail_soort in [
+                    elif ruimte.detail_soort.code in [
                         Ruimtedetailsoort.keuken.code,
                         Ruimtedetailsoort.woonkamer_en_of_keuken.code,
                     ]:
