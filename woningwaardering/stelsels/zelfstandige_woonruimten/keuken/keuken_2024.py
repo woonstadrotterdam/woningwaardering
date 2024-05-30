@@ -2,7 +2,6 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from loguru import logger
 
-
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
@@ -40,98 +39,79 @@ class Keuken2024(Stelselgroepversie):
         )
         woningwaardering_groep.woningwaarderingen = []
 
-        geldige_ruimtes = [
-            ruimte
-            for ruimte in eenheid.ruimten or []
-            # check of een ruimte behoort tot te ruimtesoorten die in aanmerking komen voor de stelselgroep keuken
-            if ruimte.detail_soort
-            and (
-                ruimte.detail_soort.code
-                in [
-                    Ruimtedetailsoort.keuken.code,
-                    Ruimtedetailsoort.woonkamer_en_of_keuken.code,
-                    Ruimtedetailsoort.woonkamer.code,
-                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-                    Ruimtedetailsoort.slaapkamer.code,
-                ]
-            )
-        ]
+        keukens = set()
 
-        if not geldige_ruimtes:
-            logger.warning(
-                f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Geen geldige ruimte detailsoort gevonden in eenheid {eenheid.id}."
-                f"Geldige ruimtedetailsoorten: {Ruimtedetailsoort.keuken.naam}, {Ruimtedetailsoort.woonkamer_en_of_keuken.naam}, {Ruimtedetailsoort.woonkamer.naam}, {Ruimtedetailsoort.woon_en_of_slaapkamer.naam} {Ruimtedetailsoort.slaapkamer.naam}."
-            )
+        for ruimte in eenheid.ruimten or []:
+            if not ruimte.detail_soort:
+                logger.warning(f"Ruimte {ruimte.id} heeft geen detail_soort.")
+                continue
+
+            if ruimte.detail_soort.code not in [
+                Ruimtedetailsoort.keuken.code,
+                Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+                Ruimtedetailsoort.woonkamer.code,
+                Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                Ruimtedetailsoort.slaapkamer.code,
+            ]:
+                continue
+            if ruimte.bouwkundige_elementen:
+                for bouwkundig_element in ruimte.bouwkundige_elementen:
+                    if not bouwkundig_element.detail_soort:
+                        logger.warning(
+                            f"Bouwkundig element in ruimte {ruimte.id} heeft geen detail_soort."
+                        )
+                        continue
+
+                    if (
+                        bouwkundig_element.detail_soort.code
+                        == Bouwkundigelementdetailsoort.aanrecht.code
+                    ):
+                        keukens.add(ruimte.id)
+                        if not bouwkundig_element.lengte:
+                            logger.warning(
+                                f"Aanrecht in ruimte {ruimte.id} heeft geen lengte."
+                            )
+                            continue
+
+                        logger.debug(
+                            f"Ruimte {ruimte.id} is een keuken met aanrecht en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                        )
+                        if bouwkundig_element.lengte:
+                            if bouwkundig_element.lengte < 1000:
+                                punten = 0.0
+                            elif bouwkundig_element.lengte >= 2000:
+                                punten = 7.0
+                            else:
+                                punten = 4.0
+
+                            logger.debug(
+                                f"Ruimte {ruimte.id} is een keuken met aanrecht lengte {bouwkundig_element.lengte} millimeter en krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                            )
+
+                            woningwaardering_groep.woningwaarderingen.append(
+                                WoningwaarderingResultatenWoningwaardering(
+                                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                                        naam="Lengte aanrecht",
+                                        meeteenheid=Meeteenheid.millimeter.value,
+                                    ),
+                                    aantal=bouwkundig_element.lengte,
+                                    punten=punten,
+                                )
+                            )
+
+                    elif ruimte.detail_soort.code in [
+                        Ruimtedetailsoort.keuken.code,
+                        Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+                    ]:
+                        keukens.add(ruimte.id)
+                        logger.warning(
+                            f"Ruimte {ruimte.id} is een (open) keuken zonder aanrecht."
+                        )
+                        continue
+
+        if not keukens:
+            logger.warning("Geen keukens gevonden.")
             return woningwaardering_groep
-
-        ruimten_met_aanrecht = [
-            (ruimte, bouwkundig_element)
-            for ruimte in geldige_ruimtes
-            # check of de ruimte een aanrecht heeft
-            if ruimte.bouwkundige_elementen
-            for bouwkundig_element in ruimte.bouwkundige_elementen
-            if bouwkundig_element.detail_soort
-            and bouwkundig_element.detail_soort.code
-            == Bouwkundigelementdetailsoort.aanrecht.code
-        ]
-
-        if not ruimten_met_aanrecht:
-            for ruimte in geldige_ruimtes:
-                logger.warning(
-                    f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: ruimte {ruimte.id} heeft geen {Bouwkundigelementdetailsoort.aanrecht.naam} in eenheid {eenheid.id}"
-                )
-            return woningwaardering_groep
-
-        ruimten_met_aanrecht_lengte = [
-            (ruimte, aanrecht)
-            for ruimte, aanrecht in ruimten_met_aanrecht
-            if aanrecht.lengte
-        ]
-
-        # Mochten er geldige ruimten met aanrecht zijn, maar ook ruimten zijn met een aanrecht maar zonder lengte, dan geven we een waarschuwing
-        missende_aanrechtelengten = [
-            item
-            for item in ruimten_met_aanrecht
-            if item not in ruimten_met_aanrecht_lengte
-        ]
-        if missende_aanrechtelengten:
-            for ruimte, _ in missende_aanrechtelengten:
-                logger.warning(
-                    f"Ruimte {ruimte.id} met {Bouwkundigelementdetailsoort.aanrecht.naam} heeft geen aanrechtlengte"
-                )
-
-        if not ruimten_met_aanrecht_lengte:
-            logger.warning(
-                f"Kan geen punten geven voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}: Geldig ruimte met aanrecht heeft geen aanrechtlengte in eenheid {eenheid.id}."
-            )
-            return woningwaardering_groep
-
-        for ruimte, aanrecht in ruimten_met_aanrecht_lengte:
-            logger.info(
-                f"Ruimte {ruimte.id} is een {ruimte.detail_soort} met een {Bouwkundigelementdetailsoort.aanrecht.naam} van {aanrecht.lengte} {Meeteenheid.millimeter.value} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
-            )
-            if aanrecht.lengte:
-                if aanrecht.lengte < 1000:
-                    punten = 0.0
-                elif aanrecht.lengte >= 2000:
-                    punten = 7.0
-                else:
-                    punten = 4.0
-
-                logger.info(
-                    f"Ruimte {ruimte.naam} met aanrecht lengte {aanrecht.lengte} millimeter krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
-                )
-
-                woningwaardering_groep.woningwaarderingen.append(
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Lengte aanrecht",
-                            meeteenheid=Meeteenheid.millimeter.value,
-                        ),
-                        aantal=aanrecht.lengte,
-                        punten=punten,
-                    )
-                )
 
         totaal_punten = Decimal(
             sum(
