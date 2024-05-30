@@ -121,6 +121,7 @@ class Keuken2024(Stelselgroepversie):
             )
         ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
         woningwaardering_groep.punten = float(totaal_punten)
+
         return woningwaardering_groep
 
 
