@@ -104,6 +104,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
+          set +e
           creatingPrerelease=${{ (contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc')) }}
           echo "getting latest stable release"
           latestTagName=$(gh release view --repo '${{ github.repository }}' --jq .tagName --json tagName)
