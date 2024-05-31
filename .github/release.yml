@@ -1,0 +1,23 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release-notes
+  categories:
+    - title: Breaking Changes 🛠
+      labels:
+        - Semver-Major
+        - breaking-change
+    - title: Nieuwe Features 🎉
+      labels:
+        - Semver-Minor
+        - enhancement
+    - title: Bugfixes
+      labels:
+        - Semver-Patch
+        - bug
+    - title: Documentatie
+      labels:
+        - documentation
+    - title: Overige wijzigingen
+      labels:
+        - "*"
