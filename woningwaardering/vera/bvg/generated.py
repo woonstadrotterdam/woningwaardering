@@ -860,7 +860,9 @@ class EenhedenEenheidVoorwaarden(BaseModel):
     """
     De maximumleeftijd waaraan de bewoner moet voldoen om in aanmerking te komen voor de eenheid.
     """
-    maximunleeftijd: Optional[int] = None
+    maximunleeftijd: Optional[int] = Field(
+        default=None, json_schema_extra={"deprecated": True}
+    )
     """
     De maximumleeftijd waaraan de bewoner moet voldoen om in aanmerking te komen voor de eenheid. OBSOLETE
     """
@@ -938,7 +940,7 @@ class EenhedenEnergieprestatie(BaseModel):
     """
     De datum waarop de energieprestatie is geregistreerd bij de Rijksoverheid. Als sprake is van een voorlopige energieprestatie is geen registratiedatum bekend.
     """
-    index: Optional[float] = None
+    index: Optional[float] = Field(default=None, json_schema_extra={"deprecated": True})
     """
     De energieprestatie index van de eenheid. OBSOLETE
     """
