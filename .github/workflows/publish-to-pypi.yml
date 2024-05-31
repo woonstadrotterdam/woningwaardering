@@ -106,10 +106,17 @@ jobs:
         run: |
           set +e
           creatingPrerelease=${{ (contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc')) }}
+
           echo "getting latest stable release"
           latestTagName=$(gh release view --repo '${{ github.repository }}' --jq .tagName --json tagName)
-          noStableReleases="$latestTagName" == ""
-          if [ $creatingPrerelease or $noStableReleases ]; then
+
+          # Determine if there are stable releases
+          stableReleasesFound=false
+          if [[ -n "$latestTagName" ]]; then
+            stableReleasesFound=true
+          fi
+
+          if [[ "$creatingPrerelease" == true ]] || [[ "$stableReleasesFound" == false ]]; then
             echo "getting latest release"
             latestTagName=$(gh release list -L1 --repo '${{ github.repository }}' --json tagName --jq .[].tagName)
           fi
