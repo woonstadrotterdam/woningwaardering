@@ -100,6 +100,19 @@ jobs:
           inputs: >-
             ./dist/*.tar.gz
             ./dist/*.whl
+      - name: Determine latest Release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          creatingPrerelease=${{ (contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc')) }}
+          echo "getting latest stable release"
+          latestTagName=$(gh release view --repo '${{ github.repository }}' --jq .tagName --json tagName)
+          noStableReleases="$latestTagName" == ""
+          if [ $creatingPrerelease or $noStableReleases ]; then
+            echo "getting latest release"
+            latestTagName=$(gh release list -L1 --repo '${{ github.repository }}' --json tagName --jq .[].tagName)
+          fi
+          echo "LATEST_TAG_NAME=$latestTagName" >> "$GITHUB_ENV"
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -109,7 +122,7 @@ jobs:
           --repo '${{ github.repository }}'
           ${{ (contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc')) && '--prerelease' || ''}}
           --generate-notes
-          --notes-start-tag $(gh release view --repo '${{ github.repository }}' --jq .tagName --json tagName)
+          ${{ env.LATEST_TAG_NAME != '' && '--notes-start-tag $LATEST_TAG_NAME' || ''}}
       - name: Upload artifact signatures to GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
