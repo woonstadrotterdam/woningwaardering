@@ -14,14 +14,10 @@ tasks:
           --use-default-kwarg \
           --target-python-version 3.10 \
           --use-field-description \
-          --use-schema-description \
           --snake-case-field \
           --disable-timestamp \
-          --enum-field-as-literal one \
           --use-double-quotes \
-          --field-constraints \
           --allow-population-by-field-name \
-          --strict-nullable \
           --use-title-as-name
       - python scripts/uitbreiden_vera_modellen.py
   genereer-vera-referentiedata:
