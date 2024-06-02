@@ -3,7 +3,7 @@ changelog:
     labels:
       - ignore-for-release-notes
   categories:
-    - title: Breaking Changes 🛠
+    - title: Breaking Changes 💥
       labels:
         - Semver-Major
         - breaking-change
@@ -11,13 +11,13 @@ changelog:
       labels:
         - Semver-Minor
         - enhancement
-    - title: Bugfixes
+    - title: Bugfixes 🐛
       labels:
         - Semver-Patch
         - bug
-    - title: Documentatie
+    - title: Documentatie 📚
       labels:
         - documentation
-    - title: Overige wijzigingen
+    - title: Overige wijzigingen ✨
       labels:
         - "*"
