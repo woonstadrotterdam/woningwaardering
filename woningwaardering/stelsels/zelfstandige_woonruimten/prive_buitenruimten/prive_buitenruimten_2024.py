@@ -58,8 +58,6 @@ class PriveBuitenruimten2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         if eenheid.ruimten:
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-
             buitenruimten = [
                 ruimte
                 for ruimte in eenheid.ruimten
@@ -70,65 +68,70 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                 logger.debug(
                     f"{len(buitenruimten)} buitenruimt(en) gevonden in eenheid {eenheid.id}"
                 )
-                for ruimte in buitenruimten:
+
+                for buitenruimte in buitenruimten:
                     # TODO: vera modellen ondersteunen dit nog niet
                     # if PriveBuitenruimten2024._buitenruimte_heeft_geldige_afmetingen(ruimte):
                     #     logger.debug(
                     #         f"Prive-buitenruimte {ruimte.id} met oppervlakte {ruimte.oppervlakte} gevonden in eenheid {eenheid.id}"
                     #     )
 
+                    woningwaardering = WoningwaarderingResultatenWoningwaardering()
+
                     if (
-                        ruimte.code == Ruimtedetailsoort.carport.code
-                        or ruimte.code
+                        buitenruimte.code == Ruimtedetailsoort.carport.code
+                        or buitenruimte.code
                         == Ruimtedetailsoort.open_parkergarage_niet_specifieke_plek.code
-                        or ruimte.code
+                        or buitenruimte.code
                         == Ruimtedetailsoort.open_parkeergarage_specifieke_plek.code
                     ):
                         woningwaardering = PriveBuitenruimten2024._bereken_carport(
-                            ruimte, woningwaardering
+                            buitenruimte, woningwaardering
                         )
 
                     if (
-                        ruimte.code
+                        buitenruimte.code
                         == Ruimtedetailsoort.parkeergarage_niet_specifieke_plek.code
                     ):
                         woningwaardering = PriveBuitenruimten2024._bereken_parkeergarage_niet_specifieke_plek(
-                            ruimte, woningwaardering
+                            buitenruimte, woningwaardering
                         )
 
                     if (
-                        ruimte.code
+                        buitenruimte.code
                         == Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code
                     ):
                         woningwaardering = PriveBuitenruimten2024._bereken_gemeenschappelijke_parkeerruimte_niet_specifieke_plek(
-                            ruimte, woningwaardering
+                            buitenruimte, woningwaardering
                         )
 
                     if (
-                        ruimte.code
+                        buitenruimte.code
                         == Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_specifieke_plek.code
                     ):
                         woningwaardering = PriveBuitenruimten2024._bereken_gemeenschappelijke_parkeerruimte_specifieke_plek(
-                            ruimte, woningwaardering
+                            buitenruimte, woningwaardering
                         )
 
                     else:
                         woningwaardering = PriveBuitenruimten2024._bereken_buitenruimte(
-                            ruimte, woningwaardering
+                            buitenruimte, woningwaardering
                         )
 
                     logger.info(
-                        f"{ruimte.id} {ruimte.naam} krijgt {woningwaardering.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                        f"{buitenruimte.id} {buitenruimte.naam} krijgt {woningwaardering.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
                     )
 
                     woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
             else:
-                # punten aftrek wanneer er geen enkele buitenruimte is
+                woningwaardering = WoningwaarderingResultatenWoningwaardering()
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Geen buitenruimte"
                     )
                 )
+                # Punten aftrek wanneer er geen enkele buitenruimte is
                 woningwaardering.punten = -5.0
 
                 logger.warning(
@@ -275,7 +278,7 @@ if __name__ == "__main__":
 
     prive_buitenruimte = PriveBuitenruimten2024()
     with open(
-        "tests/data/input/zelfstandige_woonruimten/12006000004.json",
+        "tests/data/input/zelfstandige_woonruimten/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
