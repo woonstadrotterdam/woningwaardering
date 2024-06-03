@@ -513,52 +513,58 @@ als overige ruimte._~~
 
 ## 4.9 Privé-buitenruimten
 
-Voor privé-buitenruimten worden aan de woning punten toegekend indien de privé-buitenruimte een diepte, breedte en vrije hoogte heeft van 1,50 m of meer.  
+Voor privé-buitenruimten worden aan de woning punten toegekend ~~indien de privé-buitenruimte een diepte, breedte en vrije hoogte heeft van 1,50 m of meer~~.
+
+> Alle buitenruimten die ter waardering worden doorgegeven dienen conform de eisen te zijn gemodelleerd. 
 
 ### 4.9.1 Definitie privé-buitenruimte
 
-Er is sprake van een privé-buitenruimte indien de buitenruimte behoort tot de woning, waarvan de huurder van de desbetreffende woning volgens de huurovereenkomst het exclusieve gebruiksrecht heeft. Met exclusief gebruiksrecht van privé-buitenruimte wordt bedoeld dat uitsluitend de huurder het recht heeft om te bepalen welk gebruik hij maakt van de privé-buitenruimten die tot de woning behoren. Hieronder wordt ook verstaan een gebruiksrecht dat toekomt aan een
-collectief van huurders, maar waarbij het gebruiksrecht in feite exclusief voor de huurder is omdat de huurder het gebruik door derden kan weren.  
+~~Er is sprake van een privé-buitenruimte indien de buitenruimte behoort tot de woning, waarvan de huurder van de desbetreffende woning volgens de huurovereenkomst het exclusieve gebruiksrecht heeft. Met exclusief gebruiksrecht van privé-buitenruimte wordt bedoeld dat uitsluitend de huurder het recht heeft om te bepalen welk gebruik hij maakt van de privé-buitenruimten die tot de woning behoren. Hieronder wordt ook verstaan een gebruiksrecht dat toekomt aan een collectief van huurders, maar waarbij het gebruiksrecht in feite exclusief voor de huurder is omdat de huurder het gebruik door derden kan weren.~~
 
-Voor-, zij- of achtertuinen, balkons, platjes, terrassen en parkeervoorzieningen kunnen als privé-buitenruimte worden aangemerkt. Franse balkons worden niet als privé-buitenruimten beschouwd. Een Frans balkon is een opening in de gevel met naar binnen draaiende deuren, voorzien van een balustrade direct tegen het kozijn of de gevel.  
+Voor-, zij- of achtertuinen, balkons, platjes, terrassen en parkeervoorzieningen kunnen als privé-buitenruimte worden aangemerkt. Franse balkons worden niet als privé-buitenruimten beschouwd. Een Frans balkon is een opening in de gevel met naar binnen draaiende deuren, voorzien van een balustrade direct tegen het kozijn of de gevel.
 
-Als sprake is van een procedure toetsing aanvangshuurprijs dan geldt dat de privé-buitenruimte bij de aanvang van de huurovereenkomst aanwezig moet zijn. Indien de privé-buitenruimte is ontstaan ná de aanvang van de huur dan wordt de ruimte niet aangemerkt als privé-buitenruimte en dus niet
-met punten gewaardeerd.
+~~Als sprake is van een procedure toetsing aanvangshuurprijs dan geldt dat de privé-buitenruimte bij de aanvang van de huurovereenkomst aanwezig moet zijn. Indien de privé-buitenruimte is ontstaan ná de aanvang van de huur dan wordt de ruimte niet aangemerkt als privé-buitenruimte en dus niet met punten gewaardeerd.~~
+
+> Buitenruimten die niet aan bovenstaande doorgehaalde eisen voldoen, dienen niet doorgegeven te worden. De woningwaardering package controleert deze eisen niet.
 
 ### 4.9.2 Aftrekpunten bij geen privé-buitenruimte
 
 Als de woning in het geheel geen privé-buitenruimte heeft, wordt een aftrek toegepast van 5 punten.
 
-Bij aftrekpunten moet een onderscheid worden gemaakt tussen het aanwezig zijn van een privé-buitenruimte en wanneer een privé-buitenruimte gewaardeerd wordt met punten. De aftrek wordt uitsluitend toegepast wanneer geen sprake is van een privé-buitenruimte zoals in paragraaf 4.9.1 is
-weergegeven. De voorwaarden dat de privé-buitenruimte een diepte, breedte en vrije hoogte van 1,50 m moet hebben, die gelden om met punten gewaardeerd te kunnen worden, zijn niet relevant bij de vraag of aftrekpunten moeten worden toegepast.  
+Bij aftrekpunten moet een onderscheid worden gemaakt tussen het aanwezig zijn van een privé-buitenruimten wanneer een privé-buitenruimte gewaardeerd wordt met punten. De aftrek wordt uitsluitend toegepast wanneer geen sprake is van een privé-buitenruimte zoals in paragraaf 4.9.1 is weergegeven. De voorwaarden dat de privé-buitenruimte een diepte, breedte en vrije hoogte van 1,50 m moet hebben, die gelden om met punten gewaardeerd te kunnen worden, zijn niet relevant bij de vraag of aftrekpunten moeten worden toegepast.
 
-**_Voorbeeld:_**  
-_Als uitsluitend een balkon, smaller dan 1,50 m aanwezig is, dan wordt de aftrek van 5 punten niet toegepast, omdat in dat geval het balkon (geen Frans balkon) wel als privé-buitenruimte wordt gezien. De afmetingen van de prive-buitenruimte zijn bij de vraag of er aftrek van punten moet worden toegepast dus niet relevant. Enkel relevant is of er een privé-buitenruimte aanwezig is, ongeacht de afmetingen._  
+**Voorbeeld:**  
+_Als uitsluitend een balkon, smaller dan 1,50 m aanwezig is, dan wordt de aftrek van 5 punten niet toegepast, omdat in dat geval het balkon (geen Frans balkon) wel als privé-buitenruimte wordt gezien. De afmetingen van de prive-buitenruimte zijn bij de vraag of er aftrek van punten moet worden toegepast dus niet relevant. Enkel relevant is of er een privé-buitenruimte aanwezig is, ongeacht de afmetingen._
 
 ### 4.9.3 Hoe wordt de oppervlakte van privé-buitenruimten gemeten?
 
-Een privé-buitenruimte wordt alleen met punten gewaardeerd indien de privé-buitenruimte een diepte, breedte en vrije hoogte heeft van 1,50 m of meer. Van deze buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor-, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terug liggende deel van de gevel. De oppervlakte, die wordt ingenomen door een balkonkast (minder dan 2 m2) of kolenhok e.d., wordt bij de oppervlakte van de desbetreffende privé-buitenruimte meegerekend.  
+Een privé-buitenruimte wordt alleen met punten gewaardeerd indien de privé-buitenruimte een diepte, breedte ~~en vrije hoogte~~ heeft van 1,50 m of meer. ~~Van deze buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terug liggende deel van de gevel. De oppervlakte, die wordt ingenomen door een balkonkast (minder dan 2 m2) of kolenhok e.d., wordt bij de oppervlakte van de desbetreffende privé-buitenruimte meegerekend.~~
 
-**_Voorbeeld:_**  
-_Er is sprake van een achtertuin waarboven een balkon uitsteekt. Tussen de onderzijde van het balkon en de achtertuin, heeft de tuin een vrije hoogte van 1,50 m of meer. Hierdoor wordt de tuin doorgemeten tot aan de gevel (inclusief de ruimte onder het balkon). Is de vrije hoogte onder het balkon lager dan 1,50 m, dan wordt de tuin daaronder niet doorgemeten._
+~~**Voorbeeld:**~~
+
+~~_Er is sprake van een achtertuin waarboven een balkon uitsteekt. Tussen de onderzijde van het balkon en de achtertuin, heeft de tuin een vrije hoogte van 1,50 m of meer. Hierdoor wordt de tuin doorgemeten tot aan de gevel (inclusief de ruimte onder het balkon). Is de vrije hoogte onder het balkon lager dan 1,50 m, dan wordt de tuin daaronder niet doorgemeten._~~
+
+> Er wordt vanuit gegaan dat buitenruimten conform deze eisen zijn gemeten. De woningwaardering package controleert deze eisen niet. Aan het Eenheden-Ruimte model wordt een breedte en diepte attribuut toegevoegd. Deze gebruiken we in de bepaling of een buitenruimte in aanmerking komt voor waardering.
 
 ### 4.9.4 Balkons en dakterrassen
 
-De Huurcommissie hanteert aanvullende voorwaarden voor balkons en dakterrassen om voor punten in aanmerking te komen.  
+~~De Huurcommissie hanteert aanvullende voorwaarden voor balkons en dakterrassen om voor punten in aanmerking te komen.~~
 
-Balkons en dakterrassen krijgen alleen punten indien zijn:  
+Balkons en dakterrassen krijgen alleen punten indien zij:
 
-- zijn voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;
-- rondom zijn voorzien van een balustrade;
-- via een deur* toegankelijk zijn én;
-- een diepte, breedte en vrije hoogte hebben van 1,50 m of meer.
+- ~~zijn voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;~~  
+- ~~rondom zijn voorzien van een balustrade;~~  
+- ~~via een deur* toegankelijk zijn én;~~  
+- een diepte, breedte ~~en vrije hoogte~~ hebben van 1,50 m of meer.~~  
 
-_*Indien de balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als privé-buitenruimte te worden gebruikt, dan worden deze met punten gewaardeerd._  
+~~_*Indien de balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als privé-buitenruimte te worden gebruikt, dan worden deze met punten gewaardeerd._~~
+
+> Er wordt vanuit gegaan dat alleen balkons en dakterassen die aan bovenstaande doorgehaalde voorwaarden voldoen worden doorgegeven. Deze voorwaarden worden niet door de woningwaardering package gecontroleerd.
 
 ### 4.9.5 Puntentoekenning privé-buitenruimten
 
-Het woningwaarderingsstelsel geeft punten aan de privé-buitenruimten op basis van oppervlak-
-ten. De puntentoekenning is als volgt.
+Het woningwaarderingsstelsel geeft punten aan de privé-buitenruimten op basis van oppervlakten. De puntentoekenning is als volgt.
+
 | Oppervlakte (m2) | Punten |
 |-----------------|--------|
 | tot 25          | 2      |
@@ -576,9 +582,11 @@ Indien sprake is van meerdere privé-buitenruimten dan wordt voor de berekening 
 
 ### 4.9.6 Parkeervoorziening
 
-Er kunnen punten voor een parkeervoorziening worden toegekend als deze als onroerende aanhorigheid gekwalificeerd kan worden. Hiervan is sprake indien de parkeervoorziening naar haar aard onlosmakelijk verbonden is met de woonruimte of omdat de parkeervoorziening volgens de huurovereenkomst deel uitmaakt van de gehuurde woning. Indien in de huurovereenkomst is afgesproken dat de parkeervoorziening tot de onroerende zaak behoort, dan geldt de eis dat de woonruimte en parkeerplaats verhuurd moeten zijn zonder dat ze van elkaar contractueel te scheiden zijn.  
+~~Er kunnen punten voor een parkeervoorziening worden toegekend als deze als onroerende aanhorigheid gekwalificeerd kan worden. Hiervan is sprake indien de parkeervoorziening naar haar aard onlosmakelijk verbonden is met de woonruimte of omdat de parkeervoorziening volgens de huurovereenkomst deel uitmaakt van de gehuurde woning. Indien in de huurovereenkomst is afgesproken dat de parkeervoorziening tot de onroerende zaak behoort, dan geldt de eis dat de woonruimte en parkeerplaats verhuurd moeten zijn zonder dat ze van elkaar contractueel te scheiden zijn.~~  
 
-Als de huurovereenkomst een huurder recht geeft op medegebruik van een gemeenschappelijk parkeerterrein dan geldt dat in beginsel sprake is van een onroerende aanhorigheid. Als het gaat om voorzieningen die voor eenieder toegankelijk zijn én niet exclusief bedoeld zijn voor de woningen in het wooncomplex (bijvoorbeeld een openbaar parkeerterrein dat niet bij het woon-complex hoort), dan maken deze voorzieningen geen onderdeel uit van de gehuurde woonruimte.  
+~~Als de huurovereenkomst een huurder recht geeft op medegebruik van een gemeenschappelijk parkeerterrein dan geldt dat in beginsel sprake is van een onroerende aanhorigheid. Als het gaat om voorzieningen die voor eenieder toegankelijk zijn én niet exclusief bedoeld zijn voor de woningen in het wooncomplex (bijvoorbeeld een openbaar parkeerterrein dat niet bij het woon-complex hoort), dan maken deze voorzieningen geen onderdeel uit van de gehuurde woonruimte.~~  
+
+> Er wordt vanuit gegaan dat alleen parkeervoorzieningen die aan bovenstaande doorgehaalde voorwaarden voldoen worden doorgegeven. Deze voorwaarden worden niet door de woningwaardering package gecontroleerd.
 
 Bij een parkeervoorziening kunnen verschillende situaties voorkomen die door de Huurcommissie op verschillende manieren worden gewaardeerd.  
 
@@ -586,18 +594,34 @@ Bij een parkeervoorziening kunnen verschillende situaties voorkomen die door de 
 
 De oppervlakte van deze afgebakende parkeerplaats wordt als ‘overige ruimte’ gewaardeerd onder ‘garage’. Zie paragraaf 4.3 inzake overige ruimte.  
 
+> Bovenstaande parkeervoorziening dient doorgegeven te worden met ruimtedetailsoort:
+> - `PSP`: "Parkeergarage specifieke plek"
+
 2. _Er is sprake van een gesloten parkeergarage met voor elke woning een, al dan niet afgebakende, parkeerplaats (alle betrokken huurders moeten op elk moment van de dag kunnen parkeren)._  
 
 De oppervlakte van deze afgebakende parkeerplaats wordt als ‘overige ruimte’ gewaardeerd onder ‘garage’. Zie paragraaf 4.3 inzake overige ruimte. Bij een niet specifiek tot de woning behorende parkeerplaats wordt uitgegaan van een fictieve oppervlakte van 12 m2.  
+
+> Bovenstaande parkeervoorziening dient doorgegeven te worden met ruimtedetailsoort:
+> - `PNS`: "Parkeergarage niet specifieke plek"
 
 3. _Er is sprake van een tot het complex behorende open parkeergarage (een open ruimte, dus geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen) met voor elke woning een al dan niet specifiek toegewezen parkeerplaats._  
 
 Een dergelijke parkeervoorziening wordt vergeleken met een carport en als zodanig onder ‘privé-buitenruimte’ gewaardeerd met 2 punten.  
 
+> Bovenstaande parkeervoorziening dient doorgegeven te worden met een van deze ruimtedetailsoorten:
+> - `OPS`: "Open parkeergarage specifieke plek"
+> - `OPN`: "Open parkergarage niet specifieke plek".
+
 4. _Er is sprake van een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en zonder privé plek._
 
 In deze situatie wordt de parkeerruimte gewaardeerd als buitenruimte. Dit houdt in dat maximaal 15 punten op basis van de oppervlakte van de ruimte kan worden gegeven gedeeld door het aantal wooneenheden.  
 
+> Bovenstaande parkeervoorziening dient doorgegeven te worden met ruimtedetailsoort:
+> - `GPN`: Gemeenschappelijke parkeerruimte niet specifieke plek
+
 5. _Er is sprake van een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, met privé plek._  
 
 Een dergelijke parkeervoorziening wordt vergeleken met een carport en als zodanig onder ‘privé-buitenruimte’ gewaardeerd met 2 punten.
+
+> Bovenstaande parkeervoorziening dient doorgegeven te worden met ruimtedetailsoort:
+> - `GPS`: Gemeenschappelijke parkeerruimte specifieke plek
