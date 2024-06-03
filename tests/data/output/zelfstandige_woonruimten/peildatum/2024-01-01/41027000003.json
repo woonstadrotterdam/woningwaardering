@@ -180,9 +180,35 @@
           "punten": 3.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 4.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1833.0,
+          "criterium": {
+            "naam": "Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MLM",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 4.0
+        }
+      ]
     }
   ],
-  "punten": 67.0,
+  "punten": 71.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

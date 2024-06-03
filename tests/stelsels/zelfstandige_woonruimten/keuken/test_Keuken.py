@@ -3,8 +3,8 @@ from pathlib import Path
 import pytest
 from test_utils import assert_output_model, laad_specifiek_input_en_output_model
 
-from woningwaardering.stelsels.zelfstandige_woonruimten.verwarming import (
-    Verwarming,
+from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import (
+    Keuken,
 )
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -25,37 +25,37 @@ def specifieke_input_en_output_model(request):
     )
 
 
-def test_Verwarming(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat):
-    verwarming = Verwarming()
-    resultaat = verwarming.bereken(
+def test_Keuken(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat):
+    keuken = Keuken()
+    resultaat = keuken.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-def test_Verwarming_output(
+def test_Keuken_output(
     zelfstandige_woonruimten_input_en_outputmodel,
 ):
     eenheid_input, eenheid_output, peildatum = (
         zelfstandige_woonruimten_input_en_outputmodel
     )
-    verwarming = Verwarming(peildatum=peildatum)
-    resultaat = verwarming.bereken(eenheid_input)
+    keuken = Keuken(peildatum=peildatum)
+    resultaat = keuken.bereken(eenheid_input)
 
     assert_output_model(
         resultaat,
         eenheid_output,
-        Woningwaarderingstelselgroep.verwarming,
+        Woningwaarderingstelselgroep.keuken,
     )
 
 
-def test_OppervlakteVanVetrekken_specifiek_output(specifieke_input_en_output_model):
+def test_Keuken_specifiek_output(specifieke_input_en_output_model):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
-    verwarming = Verwarming(peildatum=peildatum)
-    resultaat = verwarming.bereken(eenheid_input)
-
+    keuken = Keuken(peildatum=peildatum)
+    resultaat = keuken.bereken(eenheid_input)
+    print(resultaat)
     assert_output_model(
         resultaat,
         eenheid_output,
-        Woningwaarderingstelselgroep.verwarming,
+        Woningwaarderingstelselgroep.keuken,
     )

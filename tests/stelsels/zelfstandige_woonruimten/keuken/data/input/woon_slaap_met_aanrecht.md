@@ -1,0 +1,1 @@
+Deze json bevat een eenheid met een woonkamer, een woonkamer_en_of_keuken, een woon_en_of_slaapkamer en twee slaapkamers. Allemaal hebben ze een aanrecht behalve een van de slaapkamers. De slaapkamer zonder aanrecht telt als enige niet mee voor het stelselgroep Keuken.

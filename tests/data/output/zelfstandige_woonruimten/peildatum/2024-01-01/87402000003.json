@@ -169,6 +169,20 @@
       },
       "punten": 0.0,
       "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
     }
   ],
   "punten": 67.0,
