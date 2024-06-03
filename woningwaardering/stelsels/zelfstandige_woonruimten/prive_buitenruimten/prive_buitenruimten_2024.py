@@ -6,12 +6,12 @@ from loguru import logger
 import pandas as pd
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import is_buitenruimte
 from woningwaardering.stelsels.utils import (
     dataframe_met_een_rij,
     filter_dataframe_op_datum,
     naar_tabel,
 )
+from woningwaardering.stelsels.zelfstandige_woonruimten.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -27,6 +27,7 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
+from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/zelfstandige_woonruimten/prive_buitenruimten/lookup_tabellen"
@@ -60,7 +61,9 @@ class PriveBuitenruimten2024(Stelselgroepversie):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
             buitenruimten = [
-                ruimte for ruimte in eenheid.ruimten if is_buitenruimte(ruimte)
+                ruimte
+                for ruimte in eenheid.ruimten
+                if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
             ]
 
             if buitenruimten:
