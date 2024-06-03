@@ -1,0 +1,152 @@
+{
+  "id": "woon_slaap_met_aanrecht",
+  "ruimten": [
+    {
+      "id": "WOK",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek WOK"
+      },
+      "detailSoort": {
+        "code": "WOK",
+        "naam": "Woonkamer/keuken"
+      },
+      "naam": "Woonkamer/keuken",
+      "inhoud": 24.8469,
+      "oppervlakte": 9.5565,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2000
+        }
+      ]
+    },
+    {
+      "id": "Woonkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 24.8469,
+      "oppervlakte": 9.5565,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1000
+        }
+      ]
+    },
+    {
+      "id": "Woon-/slaapkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WSL",
+        "naam": "Woon-/slaapkamer"
+      },
+      "naam": "Woon-/slaapkamer",
+      "inhoud": 24.8469,
+      "oppervlakte": 9.5565,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2000
+        }
+      ]
+    },
+    {
+      "id": "Slaapkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 24.8469,
+      "oppervlakte": 9.5565,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1000
+        }
+      ]
+    },
+    {
+      "id": "slaapkamer zonder aanrecht",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer zonder aanrecht",
+      "inhoud": 24.8469,
+      "oppervlakte": 9.5565,
+      "bouwkundigeElementen": []
+    }
+  ]
+}

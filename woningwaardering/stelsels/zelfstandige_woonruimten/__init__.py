@@ -6,6 +6,7 @@ from .energieprestatie import Energieprestatie
 from .sanitair import Sanitair
 from .prive_buitenruimten import PriveBuitenruimten
 
+from .keuken import Keuken
 
 __all__ = [
     "ZelfstandigeWoonruimten",
@@ -15,4 +16,5 @@ __all__ = [
     "Energieprestatie",
     "Sanitair",
     "PriveBuitenruimten",
+    "Keuken",
 ]

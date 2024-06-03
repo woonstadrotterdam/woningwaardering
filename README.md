@@ -313,6 +313,10 @@ Om te bepalen of de ruimten van een eenheid als individueel of collectief verwar
 Om dit attribuut ook aan de VERA standaard toe te voegen is
 https://github.com/Aedes-datastandaarden/vera-openapi/issues/54 aangemaakt.
 
+### Bidet en Lavet
+
+In het beleidshandboek van de huurcomissie voor het woningwaardeeringstelsel wordt voor zowel een bidet als een lavet één punt toegekend. In de huidige referentiedata ontbreken deze twee type `bouwkundigelementdetailsoort`. Zie [dit issue](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/104).
+
 ### Verwarmd
 
 In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verwarmd is. Het attribuut `verwarmde_vertrekken_aantal` bestaat wel, maar dit bestaat op niveau van de eenheid en daarin bestaat geen onderscheid tussen vertrekken en overige ruimten. Dit is aangekaart in deze twee issues:

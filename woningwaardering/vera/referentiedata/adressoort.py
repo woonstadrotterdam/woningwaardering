@@ -8,7 +8,7 @@ class Adressoort(Enum):
         naam="Buitenlands adres",
     )
     """
-    Een buitenlands adres
+    Een buitenlands adres.
     """
 
     eenheid_adres = Referentiedata(

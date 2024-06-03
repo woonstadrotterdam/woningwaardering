@@ -74,6 +74,14 @@ class Meeteenheid(Enum):
     worden in 0,25 uur
     """
 
+    millimeter = Referentiedata(
+        code="MLM",
+        naam="Millimeter",
+    )
+    """
+    De meeteenheid millimeter (UITBREIDING)
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:
