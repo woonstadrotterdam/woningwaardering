@@ -397,9 +397,9 @@ Indien er sprake is van onderbouwapparatuur (roerend), dan kan dit niet in de pl
 ~~Het woningwaarderingsstelsel kent de mogelijkheid om extra kwaliteitspunten te rekenen in geval de afwerking van de keuken daartoe aanleiding geeft. De extra kwaliteitspunten zijn een gestandaardiseerde invulling van de bevoegdheid van de Huurcommissie om investeringen ten behoeve van extra kwaliteit met extra punten te waarderen, tot maximaal het aantal punten dat reeds op grond van de aanrechtlengte is bepaald.~~
 
 ~~De Huurcommissie kent extra kwaliteitspunten toe als de keukenuitrusting uitstijgt boven het minimale niveau, te weten:~~
-~~- een aanrechtblad met een lengte van minimaal 1 m (lengte incl. spoelbakken, exclusief afzuig installaties en inbouwkookplaten (tenzij 2-pits));~~
-~~- én 2 kasten (onder of boven of staande);~~
-~~- én wandtegelwerk of andersoortige waterdichte afwerking boven het aanrechtblad en in de kookhoek vanaf de vloer tot een hoogte van minimaal 1,5 m.~~
+- ~~een aanrechtblad met een lengte van minimaal 1 m (lengte incl. spoelbakken, exclusief afzuig installaties en inbouwkookplaten (tenzij 2-pits));~~
+- ~~én 2 kasten (onder of boven of staande);~~
+- ~~én wandtegelwerk of andersoortige waterdichte afwerking boven het aanrechtblad en in de kookhoek vanaf de vloer tot een hoogte van minimaal 1,5 m.~~
 
 ~~Indien de keukenuitrusting en/of -afwerking boven het minimale niveau uitstijgt, is de waardering als volgt. Hierna wordt de voorziening genoemd met aansluitend het aantal extra punten.~~
 
@@ -482,34 +482,19 @@ Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangeb
 > - twee baden en twee douches in dezelfde ruimte: 14 punten
 
 ~~**Voorzieningen in een bad- en doucheruimte**~~  
-~~Indien sprake is van sanitaire voorzieningen in een bad- of doucheruimte*, dan worden alleen
-punten toegekend aan die voorzieningen indien de bad -of doucheruimte voldoet aan drie
-voorwaarden.
-Ten eerste moet de wand- en vloerafwerking van de bad- of douchruimte voldoende waterdicht
-zijn. Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel
-gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien. Ten tweede moet
-de bad- en doucheruimte zijn voorzien van aansluitingspunten voor warm en koud water. Met
-aansluitingspunten voor warm en koud water wordt niet een warmwater apparaat bedoeld. Als
-sprake is van een geiser of boiler dan hoeven deze niet door de verhuurder te zijn verstrekt. Ten
-derde moet het bad of de douche zijn voorzien van douchegarnituur. Met douchegarnituur bedoelt
-de Huurcommissie een warm- en koudwaterkraan of een mengkraan.
-Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van
-zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een
-zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1
-punt voor wastafel én 4 of 6 punten voor douche of lavet, respectievelijk bad.
-Indien in de bad- of doucheruimte een toilet is geplaatst wordt dit toilet volledig gewaardeerd met
-drie punten.~~
+~~Indien sprake is van sanitaire voorzieningen in een bad- of doucheruimte[^1], dan worden alleen punten toegekend aan die voorzieningen indien de bad- of doucheruimte voldoet aan drie voorwaarden.~~
 
-~~_*De Huurcommissie verstaat onder een bad-/doucheruimte een (afzonderlijke) ruimte met een vrije hoogte van ten
-minste 2 meter, gemeten vanaf de vloer tot aan het zichtbare plafond. Daarin dient tenminste aanwezig te zijn een
-wastafel of een douche of een bad. Voor een gecombineerde bad-/douche- en toiletruimte geldt, vanwege de
-oppervlakte-eis voor toilet- ruimten, een minimale oppervlakte van 0,64 m2 . Indien een douche- of badruimte,
-eventueel gecombineerd met een toilet, niet een vrije hoogte heeft van 2,00 m, dan wordt de ruimte gewaardeerd
-als overige ruimte._~~
+~~Ten eerste moet de wand- en vloerafwerking van de bad- of douchruimte voldoende waterdicht zijn. Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien. Ten tweede moet de bad- en doucheruimte zijn voorzien van aansluitingspunten voor warm en koud water. Met aansluitingspunten voor warm en koud water wordt niet een warmwater apparaat bedoeld. Als sprake is van een geiser of boiler dan hoeven deze niet door de verhuurder te zijn verstrekt. Ten derde moet het bad of de douche zijn voorzien van douchegarnituur. Met douchegarnituur bedoelt de Huurcommissie een warm- en koudwaterkraan of een mengkraan.~~
+
+~~Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of lavet, respectievelijk bad.~~
+
+~~Indien in de bad- of doucheruimte een toilet is geplaatst wordt dit toilet volledig gewaardeerd met drie punten.~~
+
+[^1]: ~~_De Huurcommissie verstaat onder een bad-/doucheruimte een (afzonderlijke) ruimte met een vrije hoogte van ten minste 2 meter, gemeten vanaf de vloer tot aan het zichtbare plafond. Daarin dient tenminste aanwezig te zijn een wastafel of een douche of een bad. Voor een gecombineerde bad-/douche- en toiletruimte geldt, vanwege de oppervlakte-eis voor toilet- ruimten, een minimale oppervlakte van 0,64 m2. Indien een douche- of badruimte, eventueel gecombineerd met een toilet, niet een vrije hoogte heeft van 2,00 m, dan wordt de ruimte gewaardeerd als overige ruimte._~~
 
 ## 4.8 Woonvoorzieningen voor gehandicapten
 
->Nog niet geïmplementeerd.
+> Nog niet geïmplementeerd.
 
 ## 4.9 Privé-buitenruimten
 
