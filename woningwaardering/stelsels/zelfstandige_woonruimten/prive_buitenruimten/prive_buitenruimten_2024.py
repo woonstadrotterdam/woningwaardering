@@ -5,8 +5,8 @@ from importlib.resources import files
 from loguru import logger
 import pandas as pd
 
-
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
+from woningwaardering.stelsels.zelfstandige_woonruimten.utils import is_buitenruimte
 from woningwaardering.stelsels.utils import (
     dataframe_met_een_rij,
     filter_dataframe_op_datum,
@@ -52,7 +52,12 @@ class PriveBuitenruimten2024(Stelselgroepversie):
             )
         )
 
+        m2_prive_buitenruimten = Decimal("0")
+
         woningwaardering_groep.woningwaarderingen = []
+        for ruimte in eenheid.ruimten or []:
+            if is_buitenruimte(ruimte):
+                m2_prive_buitenruimten += Decimal(str(ruimte.oppervlakte))
 
         if eenheid.ruimten:
             for ruimte in eenheid.ruimten:

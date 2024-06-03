@@ -10,6 +10,24 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.utils import badruimte_met_toilet, heeft_bouwkundig_element
 
 
+def is_buitenruimte(ruimte: EenhedenRuimte) -> bool:
+    if ruimte.soort is None or ruimte.soort.code is None:
+        error_msg = f"ruimte {ruimte.id} heeft geen soort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        raise TypeError(error_msg)
+
+    if ruimte.detail_soort is None:
+        error_msg = f"ruimte {ruimte.id} heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        raise TypeError(error_msg)
+
+    if (
+        (ruimte.soort.code == Ruimtesoort.buitenruimte.code)
+        and ruimte.detail_soort.code
+        != Ruimtedetailsoort.gemeenschappelijk_dakterras_gak.code  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/108
+    ):  # todo: en diepte, breedte en vrije hoogte > 1.5m
+        return True
+    return False
+
+
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel voor zelfstandige woonruimten.
@@ -36,6 +54,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         error_msg = f"ruimte {ruimte.id} heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
         raise TypeError(error_msg)
 
+    if ruimte.soort.code == Ruimtesoort.buitenruimte.code:
+        return Ruimtesoort.buitenruimte
+
     if ruimte.detail_soort.code in [
         Ruimtedetailsoort.woonkamer.code,
         Ruimtedetailsoort.woon_en_of_slaapkamer.code,
@@ -47,9 +68,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             return Ruimtesoort.vertrek
         elif ruimte.oppervlakte >= 2:
             return Ruimtesoort.overige_ruimtes
-
-    if ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code:
-        return Ruimtesoort.vertrek
 
     if ruimte.detail_soort.code in [
         Ruimtedetailsoort.badkamer_met_toilet.code,

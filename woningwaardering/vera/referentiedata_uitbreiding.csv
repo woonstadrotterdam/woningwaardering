@@ -6,5 +6,11 @@ WONINGTYPE;EGW;Eengezinswoning;Een woning die tevens een geheel pand vormt.;6-5-
 WONINGTYPE;MGW;Meergezinswoning;Een woning die samen met andere woonruimten c.q. bedrijfsruimten een geheel pand vormt.;6-5-2024;;EENHEIDSOORT.WOO;Vastgoed
 BOUWKUNDIGELEMENTDETAILSOORT;BID;Bidet;Een bidet (UITBREIDING).;17-5-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
 BOUWKUNDIGELEMENTDETAILSOORT;LAV;Lavet;Een Lavet (UITBREIDING).;17-5-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
-RUIMTEDETAILSOORT;TUI;Tuin;Buitenruimte: (UITBREIDING) voor- zij- achter- of rondomtuin, mits privé.;28-5-2024;;RUIMTESOORT.BTR;Vastgoed
 MEETEENHEID;MLM;Millimeter;De meeteenheid millimeter (UITBREIDING);14-04-2024;;;
+RUIMTEDETAILSOORT;TUI;Tuin;Buitenruimte: (UITBREIDING) voor- zij- achter- of rondomtuin, mits privé.;28-5-2024;;RUIMTESOORT.BTR;Vastgoed
+RUIMTEDETAILSOORT;PSP;Parkeergarage specifieke plek;Overige ruimte: (UITBREIDING) een gesloten parkeergarage (bijvoorbeeld in de onderbouw van een  appartementencomplex) met een specifiek tot de woning behorende, afgebakende parkeerplaats.;30-5-2024;;RUIMTESOORT.OVR;Vastgoed
+RUIMTEDETAILSOORT;PNS;Parkeergarage niet specifieke plek; Overige ruimte: (UITBREIDING) een gesloten parkeergarage met voor elke woning een,al dan  niet afgebakende, parkeerplaats (alle betrokken huurders moeten  op elk moment van de dag kunnen parkeren).;30-5-2024;;RUIMTESOORT.OVR;Vastgoed
+RUIMTEDETAILSOORT;OPS;Open parkeergarage specifieke plek; Buitenruimte: (UITBREIDING)  een tot het complex behorende open parkeergarage (een open ruimte,  dus geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen) met voor elke woning een specifiek toegewezen parkeerplaats.;30-5-204;;RUIMTESOORT.BTR;Vastgoed
+RUIMTEDETAILSOORT;OPN;Open parkergarage niet specifieke plek; Buitenruimte: (UITBREIDING)  een tot het complex behorende open parkeergarage (een open ruimte,  dus geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen) zonder specifieke parkeerplaats.;30-5-2024;;RUIMTESOORT.BTR;Vastgoed
+RUIMTEDETAILSOORT;GPN;Gemeenschappelijke parkeerruimte niet specifieke plek; Buitenruimte: (UITBREIDING) een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en zonder privé plek. Al dan niet evenveel parkeerplekken als eenheden.;30-5-2024;;RUIMTESOORT.BTR;Vastgoed
+RUIMTEDETAILSOORT;GPS;Gemeenschappelijke parkeerruimte specifieke plek; Buitenruimte: (UITBREIDING) een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, met privé plek.;30-5-2024;;RUIMTESOORT.BTR;Vastgoed

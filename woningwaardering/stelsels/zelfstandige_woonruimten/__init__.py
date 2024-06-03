@@ -1,12 +1,11 @@
-from .zelfstandige_woonruimten import ZelfstandigeWoonruimten
-from .oppervlakte_van_vertrekken import OppervlakteVanVertrekken
-from .oppervlakte_van_overige_ruimten import OppervlakteVanOverigeRuimten
-from .verwarming import Verwarming
 from .energieprestatie import Energieprestatie
+from .keuken import Keuken
+from .oppervlakte_van_overige_ruimten import OppervlakteVanOverigeRuimten
+from .oppervlakte_van_vertrekken import OppervlakteVanVertrekken
+from .verwarming import Verwarming
 from .sanitair import Sanitair
 from .prive_buitenruimten import PriveBuitenruimten
-
-from .keuken import Keuken
+from .zelfstandige_woonruimten import ZelfstandigeWoonruimten
 
 __all__ = [
     "ZelfstandigeWoonruimten",
@@ -15,6 +14,6 @@ __all__ = [
     "Verwarming",
     "Energieprestatie",
     "Sanitair",
-    "PriveBuitenruimten",
     "Keuken",
+    "PriveBuitenruimten",
 ]

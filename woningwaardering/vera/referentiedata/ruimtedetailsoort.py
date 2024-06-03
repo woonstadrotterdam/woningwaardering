@@ -544,6 +544,89 @@ class Ruimtedetailsoort(Enum):
     Buitenruimte: (UITBREIDING) voor- zij- achter- of rondomtuin, mits privé.
     """
 
+    parkeergarage_specifieke_plek = Referentiedata(
+        code="PSP",
+        naam="Parkeergarage specifieke plek",
+        parent=Referentiedata(
+            code="OVR",
+            naam="Overige ruimtes",
+        ),
+    )
+    """
+    Overige ruimte: (UITBREIDING) een gesloten parkeergarage (bijvoorbeeld in de
+    onderbouw van een  appartementencomplex) met een specifiek tot de woning
+    behorende, afgebakende parkeerplaats.
+    """
+
+    parkeergarage_niet_specifieke_plek = Referentiedata(
+        code="PNS",
+        naam="Parkeergarage niet specifieke plek",
+        parent=Referentiedata(
+            code="OVR",
+            naam="Overige ruimtes",
+        ),
+    )
+    """
+     Overige ruimte: (UITBREIDING) een gesloten parkeergarage met voor elke woning
+    een,al dan  niet afgebakende, parkeerplaats (alle betrokken huurders moeten  op
+    elk moment van de dag kunnen parkeren).
+    """
+
+    open_parkeergarage_specifieke_plek = Referentiedata(
+        code="OPS",
+        naam="Open parkeergarage specifieke plek",
+        parent=Referentiedata(
+            code="BTR",
+            naam="Buitenruimte",
+        ),
+    )
+    """
+     Buitenruimte: (UITBREIDING)  een tot het complex behorende open parkeergarage (een
+    open ruimte,  dus geen wanden maar wel een dak, bijvoorbeeld onder een complex
+    appartementen) met voor elke woning een specifiek toegewezen parkeerplaats.
+    """
+
+    open_parkergarage_niet_specifieke_plek = Referentiedata(
+        code="OPN",
+        naam="Open parkergarage niet specifieke plek",
+        parent=Referentiedata(
+            code="BTR",
+            naam="Buitenruimte",
+        ),
+    )
+    """
+     Buitenruimte: (UITBREIDING)  een tot het complex behorende open parkeergarage (een
+    open ruimte,  dus geen wanden maar wel een dak, bijvoorbeeld onder een complex
+    appartementen) zonder specifieke parkeerplaats.
+    """
+
+    gemeenschappelijke_parkeerruimte_niet_specifieke_plek = Referentiedata(
+        code="GPN",
+        naam="Gemeenschappelijke parkeerruimte niet specifieke plek",
+        parent=Referentiedata(
+            code="BTR",
+            naam="Buitenruimte",
+        ),
+    )
+    """
+     Buitenruimte: (UITBREIDING) een afsluitbare gemeenschappelijke parkeerruimte,
+    zonder dak, en zonder privé plek. Al dan niet evenveel parkeerplekken als
+    eenheden.
+    """
+
+    gemeenschappelijke_parkeerruimte_specifieke_plek = Referentiedata(
+        code="GPS",
+        naam="Gemeenschappelijke parkeerruimte specifieke plek",
+        parent=Referentiedata(
+            code="BTR",
+            naam="Buitenruimte",
+        ),
+    )
+    """
+     Buitenruimte: (UITBREIDING) een afsluitbare gemeenschappelijke parkeerruimte,
+    zonder dak, met privé plek.
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:
