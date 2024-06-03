@@ -586,9 +586,9 @@ class Ruimtedetailsoort(Enum):
     appartementen) met voor elke woning een specifiek toegewezen parkeerplaats.
     """
 
-    open_parkergarage_niet_specifieke_plek = Referentiedata(
+    open_parkeergarage_niet_specifieke_plek = Referentiedata(
         code="OPN",
-        naam="Open parkergarage niet specifieke plek",
+        naam="Open parkeergarage niet specifieke plek",
         parent=Referentiedata(
             code="BTR",
             naam="Buitenruimte",

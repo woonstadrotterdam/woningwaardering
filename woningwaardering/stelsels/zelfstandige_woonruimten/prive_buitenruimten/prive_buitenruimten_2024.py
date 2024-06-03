@@ -81,7 +81,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                     if (
                         buitenruimte.code == Ruimtedetailsoort.carport.code
                         or buitenruimte.code
-                        == Ruimtedetailsoort.open_parkergarage_niet_specifieke_plek.code
+                        == Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek.code
                         or buitenruimte.code
                         == Ruimtedetailsoort.open_parkeergarage_specifieke_plek.code
                     ):
