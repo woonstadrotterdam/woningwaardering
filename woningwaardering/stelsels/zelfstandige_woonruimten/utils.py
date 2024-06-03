@@ -44,7 +44,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             Ruimtedetailsoort.gemeenschappelijk_dakterras_gda.code,  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/108
             Ruimtedetailsoort.schuur.code,  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/92
         ]
-    ):  # todo: en diepte, breedte en vrije hoogte > 1.5m
+    ):
         return Ruimtesoort.buitenruimte
 
     if ruimte.detail_soort.code in [
