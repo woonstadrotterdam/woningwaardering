@@ -597,7 +597,7 @@ class Ruimtedetailsoort(Enum):
     """
      Buitenruimte: (UITBREIDING)  een tot het complex behorende open parkeergarage (een
     open ruimte,  dus geen wanden maar wel een dak, bijvoorbeeld onder een complex
-    appartementen) met voor elke woning een specifiek toegewezen parkeerplaats.
+    appartementen) zonder specifieke parkeerplaats.
     """
 
     gemeenschappelijke_parkeerruimte_niet_specifieke_plek = Referentiedata(
