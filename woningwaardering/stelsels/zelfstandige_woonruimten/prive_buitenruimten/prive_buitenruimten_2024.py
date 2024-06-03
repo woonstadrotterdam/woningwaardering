@@ -1,7 +1,7 @@
 from decimal import ROUND_HALF_UP, Decimal
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import is_buitenruimte
+from woningwaardering.stelsels.zelfstandige_woonruimten.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -11,6 +11,7 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -35,7 +36,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
 
         woningwaardering_groep.woningwaarderingen = []
         for ruimte in eenheid.ruimten or []:
-            if is_buitenruimte(ruimte):
+            if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte:
                 m2_prive_buitenruimten += Decimal(str(ruimte.oppervlakte))
 
         woningwaardering_groep.woningwaarderingen.append(
