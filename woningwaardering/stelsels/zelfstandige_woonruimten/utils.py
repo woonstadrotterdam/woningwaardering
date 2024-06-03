@@ -69,6 +69,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         elif ruimte.oppervlakte >= 2:
             return Ruimtesoort.overige_ruimtes
 
+    if ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code:
+        return Ruimtesoort.vertrek
+
     if ruimte.detail_soort.code in [
         Ruimtedetailsoort.badkamer_met_toilet.code,
         Ruimtedetailsoort.badkamer.code,
