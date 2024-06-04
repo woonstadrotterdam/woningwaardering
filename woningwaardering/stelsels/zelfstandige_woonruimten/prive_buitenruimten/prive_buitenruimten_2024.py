@@ -124,6 +124,8 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                 f"Geen buitenruimte gevonden in eenheid {eenheid.id}: 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
             )
 
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
         punten = float(
             sum(
                 Decimal(str(woningwaardering.punten))
@@ -136,6 +138,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
             sum(
                 Decimal(str(woningwaardering.aantal))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.aantal is not None
             )
         )
 
