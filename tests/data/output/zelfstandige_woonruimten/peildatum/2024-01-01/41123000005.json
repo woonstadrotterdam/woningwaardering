@@ -86,7 +86,7 @@
         {
           "aantal": 0.75,
           "criterium": {
-            "naam": "Badruimte",
+            "naam": "Badruimte (1m2 verminderd ivm toilet)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -106,7 +106,7 @@
         {
           "aantal": 0.89,
           "criterium": {
-            "naam": "Badruimte",
+            "naam": "Badruimte (1m2 verminderd ivm toilet)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
