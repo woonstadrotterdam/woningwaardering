@@ -138,6 +138,9 @@
       "naam": "Balkon",
       "inhoud": 9.01742,
       "oppervlakte": 3.14196,
+      "lengte": 1.15,
+      "breedte": 2.8,
+      "hoogte": 3.17,
       "verwarmd": false,
       "gemeenschappelijk": true
     },
@@ -154,6 +157,9 @@
       "naam": "Balkon",
       "inhoud": 8.91506,
       "oppervlakte": 3.1391,
+      "lengte": 1.15,
+      "breedte": 2.8,
+      "hoogte": 3.17,
       "verwarmd": false,
       "gemeenschappelijk": true
     },
@@ -267,6 +273,8 @@
       "naam": "Tuin",
       "inhoud": 172.377,
       "oppervlakte": 49.1102,
+      "lengte": 10.82,
+      "breedte": 5.29,
       "verwarmd": false,
       "gemeenschappelijk": true
     },
@@ -419,8 +427,8 @@
     {
       "id": "Space_108006242",
       "soort": {
-        "code": "BTR",
-        "naam": "Buitenruimte"
+        "code": "OVR",
+        "naam": "Overige ruimtes"
       },
       "detailSoort": {
         "code": "OVR",
@@ -531,8 +539,8 @@
     {
       "id": "Space_108006238",
       "soort": {
-        "code": "BTR",
-        "naam": "Buitenruimte"
+        "code": "OVR",
+        "naam": "Overige ruimtes"
       },
       "detailSoort": {
         "code": "OVR",
@@ -653,6 +661,8 @@
       },
       "naam": "Dakterras",
       "inhoud": 49.6957,
+      "lengte": 3.26,
+      "breedte": 5.02,
       "oppervlakte": 15.9281,
       "verwarmd": false,
       "gemeenschappelijk": true
