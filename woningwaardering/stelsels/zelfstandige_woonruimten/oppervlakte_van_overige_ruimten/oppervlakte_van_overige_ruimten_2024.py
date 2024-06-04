@@ -106,6 +106,14 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                     else:
                         continue
 
+                elif (
+                    ruimte.detail_soort.code
+                    == Ruimtedetailsoort.parkeergarage_niet_specifieke_plek.code
+                ):
+                    # Bij een niet specifiek tot de woning behorende parkeerplaats
+                    # wordt uitgegaan van een fictieve oppervlakte van 12 m2.
+                    woningwaardering.aantal = 12
+
                 else:
                     woningwaardering.aantal = float(
                         Decimal(str(ruimte.oppervlakte)).quantize(

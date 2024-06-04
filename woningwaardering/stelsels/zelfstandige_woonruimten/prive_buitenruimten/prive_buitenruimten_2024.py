@@ -1,5 +1,5 @@
 import datetime
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from importlib.resources import files
 
 from loguru import logger
@@ -57,88 +57,82 @@ class PriveBuitenruimten2024(Stelselgroepversie):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        if eenheid.ruimten:
-            buitenruimten = [
-                ruimte
-                for ruimte in eenheid.ruimten
-                if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            ]
+        buitenruimten = [
+            ruimte
+            for ruimte in eenheid.ruimten or []
+            if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
+        ]
 
-            if buitenruimten:
-                logger.debug(
-                    f"{len(buitenruimten)} buitenruimt(en) gevonden in eenheid {eenheid.id}"
-                )
+        if buitenruimten:
+            logger.debug(
+                f"{len(buitenruimten)} buitenruimt(en) gevonden in eenheid {eenheid.id}"
+            )
 
-                for buitenruimte in buitenruimten:
-                    # TODO: vera modellen ondersteunen dit nog niet
-                    # if PriveBuitenruimten2024._buitenruimte_heeft_geldige_afmetingen(ruimte):
-                    #     logger.debug(
-                    #         f"Prive-buitenruimte {ruimte.id} met oppervlakte {ruimte.oppervlakte} gevonden in eenheid {eenheid.id}"
-                    #     )
-
-                    woningwaardering = WoningwaarderingResultatenWoningwaardering()
-
-                    if (
-                        buitenruimte.code == Ruimtedetailsoort.carport.code
-                        or buitenruimte.code
-                        == Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek.code
-                        or buitenruimte.code
-                        == Ruimtedetailsoort.open_parkeergarage_specifieke_plek.code
-                    ):
-                        woningwaardering = PriveBuitenruimten2024._bereken_carport(
-                            buitenruimte, woningwaardering
-                        )
-
-                    if (
-                        buitenruimte.code
-                        == Ruimtedetailsoort.parkeergarage_niet_specifieke_plek.code
-                    ):
-                        woningwaardering = PriveBuitenruimten2024._bereken_parkeergarage_niet_specifieke_plek(
-                            buitenruimte, woningwaardering
-                        )
-
-                    if (
-                        buitenruimte.code
-                        == Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code
-                    ):
-                        woningwaardering = PriveBuitenruimten2024._bereken_gemeenschappelijke_parkeerruimte_niet_specifieke_plek(
-                            buitenruimte, woningwaardering
-                        )
-
-                    if (
-                        buitenruimte.code
-                        == Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_specifieke_plek.code
-                    ):
-                        woningwaardering = PriveBuitenruimten2024._bereken_gemeenschappelijke_parkeerruimte_specifieke_plek(
-                            buitenruimte, woningwaardering
-                        )
-
-                    else:
-                        woningwaardering = PriveBuitenruimten2024._bereken_buitenruimte(
-                            buitenruimte, woningwaardering
-                        )
-
-                    logger.info(
-                        f"{buitenruimte.id} {buitenruimte.naam} krijgt {woningwaardering.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+            for buitenruimte in buitenruimten:
+                if not PriveBuitenruimten2024._buitenruimte_heeft_geldige_afmetingen(
+                    buitenruimte
+                ):
+                    logger.debug(
+                        f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} komt niet in aanmerking voor waardering onder {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
                     )
+                    continue
 
-                    woningwaardering_groep.woningwaarderingen.append(woningwaardering)
-
-            else:
                 woningwaardering = WoningwaarderingResultatenWoningwaardering()
-                woningwaardering.criterium = (
-                    WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Geen buitenruimte"
+
+                if buitenruimte.code in [
+                    Ruimtedetailsoort.carport.code,
+                    Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek.code,
+                    Ruimtedetailsoort.open_parkeergarage_specifieke_plek.code,
+                    Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_specifieke_plek.code,
+                ]:
+                    woningwaardering = PriveBuitenruimten2024._bereken_carport(
+                        buitenruimte, woningwaardering
                     )
-                )
-                # Punten aftrek wanneer er geen enkele buitenruimte is
-                woningwaardering.punten = -5.0
 
-                logger.warning(
-                    f"Geen buitenruimte gevonden in eenheid {eenheid.id}: 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                if (
+                    buitenruimte.code
+                    == Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code
+                ):
+                    woningwaardering = (
+                        PriveBuitenruimten2024._bereken_gedeelde_buitenruimte(
+                            buitenruimte, woningwaardering
+                        )
+                    )
+
+                else:
+                    woningwaardering = PriveBuitenruimten2024._bereken_buitenruimte(
+                        buitenruimte, woningwaardering
+                    )
+
+                logger.info(
+                    f"{buitenruimte.id} {buitenruimte.naam} wordt voor {woningwaardering.aantal} m2 meegerekend voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
                 )
 
-        punten = Decimal(
+                woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+        else:
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Geen buitenruimte"
+                )
+            )
+            # Punten aftrek wanneer er geen enkele buitenruimte is
+            woningwaardering.punten = -5.0
+
+            logger.warning(
+                f"Geen buitenruimte gevonden in eenheid {eenheid.id}: 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+            )
+
+        aantal = float(
+            sum(
+                Decimal(str(woningwaardering.aantal))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.aantal is not None
+            )
+        )
+
+        punten = PriveBuitenruimten2024._bereken_punten_met_oppervlakte(aantal) + float(
             sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
@@ -148,12 +142,6 @@ class PriveBuitenruimten2024(Stelselgroepversie):
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
-
-    # @staticmethod
-    # def _buitenruimte_heeft_geldige_grootte(ruimte) -> bool:
-    #     if ruimte.diepte > 1.5 and ruimte.breedte > 1.5 and ruimte.hoogte > 1.50:
-    #         return True
-    #     return False
 
     @staticmethod
     def _bereken_punten_met_oppervlakte(oppervlakte: float) -> float:
@@ -181,13 +169,33 @@ class PriveBuitenruimten2024(Stelselgroepversie):
         return float(filtered_df["Punten"].values[0])
 
     @staticmethod
+    def _buitenruimte_heeft_geldige_afmetingen(ruimte: EenhedenRuimte) -> bool:
+        missende_attributen = [
+            attr for attr in ["lengte", "breedte"] if getattr(ruimte, attr) is None
+        ]
+
+        if missende_attributen:
+            error_message = (
+                f"Ruimte {ruimte.naam} {ruimte.id} heeft geen "
+                + " en ".join(missende_attributen)
+            )
+            raise ValueError(error_message)
+        return (
+            (ruimte.lengte or 0) >= 1.5
+            and (ruimte.breedte or 0) >= 1.5
+            # Hoogte mag None zijn, bijvoorbeeld bij een tuin
+            # waarvan de vrije hoogte oneindig is
+            and (ruimte.hoogte is None or ruimte.hoogte >= 1.5)
+        )
+
+    @staticmethod
     def _bereken_carport(
         ruimte: EenhedenRuimte,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"{ruimte.naam} (max 2 punten)",
+                naam=f"{ruimte.naam}",
             )
         )
         woningwaardering.punten = 2.0
@@ -195,61 +203,30 @@ class PriveBuitenruimten2024(Stelselgroepversie):
         return woningwaardering
 
     @staticmethod
-    def _bereken_parkeergarage_niet_specifieke_plek(
+    def _bereken_gedeelde_buitenruimte(
         ruimte: EenhedenRuimte,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
-        FIXED_OPPERVLAKTE = 12.0
-        woningwaardering.criterium = (
-            WoningwaarderingResultatenWoningwaarderingCriterium(
-                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                naam=f"{ruimte.naam} (vaste oppervlakte {FIXED_OPPERVLAKTE}m2)",
-            )
-        )
-        woningwaardering.aantal = ruimte.oppervlakte
-        woningwaardering.punten = (
-            PriveBuitenruimten2024._bereken_punten_met_oppervlakte(FIXED_OPPERVLAKTE)
-        )
-
-        return woningwaardering
-
-    @staticmethod
-    def _bereken_gemeenschappelijke_parkeerruimte_niet_specifieke_plek(
-        ruimte: EenhedenRuimte,
-        woningwaardering: WoningwaarderingResultatenWoningwaardering,
-    ) -> WoningwaarderingResultatenWoningwaardering:
+        gedeeld_met_aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
         oppervlakte = float(
-            Decimal(str(ruimte.oppervlakte))
-            / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
+            Decimal(str(ruimte.oppervlakte)) / Decimal(str(gedeeld_met_aantal_eenheden))
         )
+
+        criterium_naam = f"{ruimte.naam}"
+        if (gedeeld_met_aantal_eenheden) > 1:
+            criterium_naam += f" (gedeeld met {gedeeld_met_aantal_eenheden})"
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"{ruimte.naam} (max 15 punten)",
+                naam=criterium_naam,
                 meeteenheid=Meeteenheid.vierkante_meter_m2.value,
             )
         )
-        woningwaardering.aantal = oppervlakte
 
-        oppervlakte_punten = PriveBuitenruimten2024._bereken_punten_met_oppervlakte(
-            oppervlakte
+        woningwaardering.aantal = float(
+            Decimal(str(oppervlakte)).quantize(Decimal("0.01"), ROUND_HALF_UP)
         )
-        punten = min(oppervlakte_punten, 15.0)
-        woningwaardering.punten = punten
 
-        return woningwaardering
-
-    @staticmethod
-    def _bereken_gemeenschappelijke_parkeerruimte_specifieke_plek(
-        ruimte: EenhedenRuimte,
-        woningwaardering: WoningwaarderingResultatenWoningwaardering,
-    ) -> WoningwaarderingResultatenWoningwaardering:
-        woningwaardering.criterium = (
-            WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"{ruimte.naam} (max 2 punten)",
-            )
-        )
-        woningwaardering.punten = 2.0
         return woningwaardering
 
     @staticmethod
@@ -263,13 +240,10 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                 naam=ruimte.naam,
             )
         )
-        woningwaardering.aantal = ruimte.oppervlakte
-        if ruimte.oppervlakte:
-            woningwaardering.punten = (
-                PriveBuitenruimten2024._bereken_punten_met_oppervlakte(
-                    ruimte.oppervlakte
-                )
-            )
+        woningwaardering.aantal = float(
+            Decimal(str(ruimte.oppervlakte)).quantize(Decimal("0.01"), ROUND_HALF_UP)
+        )
+
         return woningwaardering
 
 
