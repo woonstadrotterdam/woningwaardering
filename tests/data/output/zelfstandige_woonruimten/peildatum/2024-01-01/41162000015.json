@@ -243,6 +243,20 @@
           "punten": 7.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PRI",
+          "naam": "Privé-buitenruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
     }
   ],
   "punten": 105.0,

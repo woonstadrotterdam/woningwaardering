@@ -89,12 +89,12 @@
     {
       "id": "Space_20256303",
       "soort": {
-        "code": "BTR",
-        "naam": "Buitenruimte"
+        "code": "OVR",
+        "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "BTB",
-        "naam": "Buitenberging"
+        "code": "BER",
+        "naam": "Berging"
       },
       "naam": "Buitenberging",
       "inhoud": 0.697917,
@@ -444,6 +444,9 @@
       "naam": "Tuin",
       "inhoud": 82.1428,
       "oppervlakte": 33.1229,
+      "breedte": 6.78,
+      "lengte": 6.67,
+      "hoogte": 2.48,
       "verwarmd": false,
       "afsluitbaar": false,
       "bouwlaag": {

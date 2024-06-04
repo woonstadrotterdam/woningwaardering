@@ -203,6 +203,9 @@
       "naam": "Tuin",
       "inhoud": 156.194,
       "oppervlakte": 53.5828,
+      "breedte": 5.07,
+      "lengte": 11.74,
+      "hoogte": 2.915,
       "verwarmd": false,
       "bouwlaag": {
         "nummer": "00",

@@ -233,9 +233,34 @@
           "punten": 4.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PRI",
+          "naam": "Privé-buitenruimten"
+        }
+      },
+      "punten": 6.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 53.58,
+          "criterium": {
+            "naam": "Tuin",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
     }
   ],
-  "punten": 144.0,
+  "punten": 150.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

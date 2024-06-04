@@ -86,8 +86,18 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 20.25,
+      "punten": 25.5,
       "woningwaarderingen": [
+        {
+          "aantal": 6.54,
+          "criterium": {
+            "naam": "Buitenberging",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
         {
           "aantal": 26.96,
           "criterium": {
@@ -239,9 +249,34 @@
           "punten": 7.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PRI",
+          "naam": "Privé-buitenruimten"
+        }
+      },
+      "punten": 6.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 54.65,
+          "criterium": {
+            "naam": "Tuin",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
     }
   ],
-  "punten": 150.0,
+  "punten": 161.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

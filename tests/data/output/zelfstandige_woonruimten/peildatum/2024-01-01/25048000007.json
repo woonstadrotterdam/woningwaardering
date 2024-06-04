@@ -181,11 +181,35 @@
           "naam": "Keuken"
         }
       },
-      "punten": 0.0,
       "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PRI",
+          "naam": "Privé-buitenruimten"
+        }
+      },
+      "punten": 2.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 4.62,
+          "criterium": {
+            "naam": "Balkon",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
     }
   ],
-  "punten": 103.0,
+  "punten": 105.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

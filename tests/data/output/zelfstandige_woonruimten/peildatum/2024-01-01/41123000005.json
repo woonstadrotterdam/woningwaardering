@@ -323,9 +323,44 @@
           "punten": 4.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PRI",
+          "naam": "Privé-buitenruimten"
+        }
+      },
+      "punten": 4.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 4.46,
+          "criterium": {
+            "naam": "Dakterras",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 30.65,
+          "criterium": {
+            "naam": "Tuin",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
     }
   ],
-  "punten": 197.0,
+  "punten": 201.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"

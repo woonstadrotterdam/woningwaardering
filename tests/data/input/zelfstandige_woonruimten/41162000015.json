@@ -308,8 +308,8 @@
     {
       "id": "Space_23758556",
       "soort": {
-        "code": "BTR",
-        "naam": "Buitenruimte"
+        "code": "OVR",
+        "naam": "Overige ruimtes"
       },
       "detailSoort": {
         "code": "OVR",
@@ -442,6 +442,9 @@
       "naam": "Balkon",
       "inhoud": 7.22007,
       "oppervlakte": 2.8144,
+      "breedte": 2.31,
+      "lengte": 1.22,
+      "hoogte": 2.7,
       "verwarmd": false,
       "afsluitbaar": false,
       "bouwlaag": {
@@ -482,6 +485,9 @@
       "naam": "Balkon",
       "inhoud": 14.0287,
       "oppervlakte": 5.1958,
+      "breedte": 6.26,
+      "lengte": 0.83,
+      "hoogte": 2.7,
       "verwarmd": false,
       "afsluitbaar": false,
       "bouwlaag": {

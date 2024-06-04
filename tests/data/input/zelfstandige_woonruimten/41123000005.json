@@ -189,6 +189,9 @@
       "naam": "Dakterras",
       "inhoud": 14.6212,
       "oppervlakte": 4.4577,
+      "breedte": 2.41,
+      "lengte": 1.86,
+      "hoogte": 3.28,
       "verwarmd": false,
       "bouwlaag": {
         "nummer": "01",
@@ -431,6 +434,9 @@
       "naam": "Tuin",
       "inhoud": 74.7335,
       "oppervlakte": 30.6486,
+      "breedte": 4.79,
+      "lengte": 7.59,
+      "hoogte": 2.438,
       "verwarmd": false,
       "bouwlaag": {
         "nummer": "00",
