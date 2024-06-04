@@ -6,7 +6,7 @@ WONINGTYPE;EGW;Eengezinswoning;Een woning die tevens een geheel pand vormt.;6-5-
 WONINGTYPE;MGW;Meergezinswoning;Een woning die samen met andere woonruimten c.q. bedrijfsruimten een geheel pand vormt.;6-5-2024;;EENHEIDSOORT.WOO;Vastgoed
 BOUWKUNDIGELEMENTDETAILSOORT;BID;Bidet;Een bidet (UITBREIDING).;17-5-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
 BOUWKUNDIGELEMENTDETAILSOORT;LAV;Lavet;Een Lavet (UITBREIDING).;17-5-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
-MEETEENHEID;MLM;Millimeter;De meeteenheid millimeter (UITBREIDING);14-04-2024;;;
+MEETEENHEID;MLM;Millimeter;De meeteenheid millimeter (UITBREIDING);14-04-2024;;;Vastgoed
 RUIMTEDETAILSOORT;TUI;Tuin;Buitenruimte: (UITBREIDING) voor- zij- achter- of rondomtuin, mits privé.;28-5-2024;;RUIMTESOORT.BTR;Vastgoed
 RUIMTEDETAILSOORT;PSP;Parkeergarage specifieke plek;Overige ruimte: (UITBREIDING) een gesloten parkeergarage (bijvoorbeeld in de onderbouw van een  appartementencomplex) met een specifiek tot de woning behorende, afgebakende parkeerplaats.;30-5-2024;;RUIMTESOORT.OVR;Vastgoed
 RUIMTEDETAILSOORT;PNS;Parkeergarage niet specifieke plek; Overige ruimte: (UITBREIDING) een gesloten parkeergarage met voor elke woning een,al dan  niet afgebakende, parkeerplaats (alle betrokken huurders moeten  op elk moment van de dag kunnen parkeren).;30-5-2024;;RUIMTESOORT.OVR;Vastgoed

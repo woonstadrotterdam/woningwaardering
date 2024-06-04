@@ -18,6 +18,18 @@ class Woonvorm(Enum):
         naam="Begeleid wonen",
     )
 
+    geclusterde_woonvorm = Referentiedata(
+        code="GEC",
+        naam="Geclusterde woonvorm",
+    )
+    """
+    Deze woning is een zelfstandige wooneenheid binnen een gebouw dat voldoet aan
+    specifieke criteria voor geclusterde woonvormen. Dit omvat minimaal 12
+    zelfstandige wooneenheden voor bewoners van 55 jaar en ouder, met een aanwezige
+    ontmoetingsruimte in het gebouw of grenzend aan het gebouw. Deze woningen
+    voldoen aan de uitgangspunten voor nultredenwoningen.
+    """
+
     groepswonen = Referentiedata(
         code="GRO",
         naam="Groepswonen",
@@ -72,6 +84,21 @@ class Woonvorm(Enum):
     """
     Een Thomashuis is een kleinschalige woonvoorziening voor zes à acht mensen met een
     verstandelijke beperking
+    """
+
+    zorggeschikte_woning = Referentiedata(
+        code="ZWO",
+        naam="Zorggeschikte woning",
+    )
+    """
+    Woning die voldoet aan de criteria van Geclusterde woonvorm, maar met aanvullende
+    voorzieningen om de woning beter geschikt te maken voor mensen met een beperking
+    of voor zorgverlening. Bij nieuwbouw en getransformeerde woningen moet de
+    woonvorm en woning rolstoelgeschikt zijn en bij verbouw moet de woonvorm
+    rolstoelgeschikt zijn en de woning minimaal rollator-geschikt. Daarnaast moet de
+    entree van de woning minimaal 90 centimeter breed zijn, moeten alle deuren
+    automatisch kunnen openen en moeten woningen die niet op de begane grond zijn,
+    bereikbaar zijn met een rolstoeltoegankelijke personenlift.
     """
 
     @property
