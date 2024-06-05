@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from test_utils import assert_output_model, laad_specifiek_input_en_output_model
+from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
 
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import (
     Keuken,
@@ -15,9 +15,7 @@ from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 current_file_path = Path(__file__).absolute().parent
 
 
-@pytest.fixture(
-    params=[str(p) for p in (current_file_path / "data/output").rglob("*.json")]
-)
+@pytest.fixture(params=[str(p) for p in (current_file_path / "output").rglob("*.json")])
 def specifieke_input_en_output_model(request):
     output_file_path = request.param
     return laad_specifiek_input_en_output_model(

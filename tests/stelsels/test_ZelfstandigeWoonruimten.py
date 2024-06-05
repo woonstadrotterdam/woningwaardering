@@ -1,4 +1,4 @@
-from test_utils import assert_output_model
+from tests.test_utils import assert_output_model
 
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
