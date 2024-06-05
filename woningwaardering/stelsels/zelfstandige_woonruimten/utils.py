@@ -78,7 +78,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtedetailsoort.wasruimte.code,
         Ruimtedetailsoort.garage.code,
         Ruimtedetailsoort.kelder.code,
-        Ruimtedetailsoort.parkeerplaats.code,
         Ruimtedetailsoort.parkeergarage_specifieke_plek.code,
         Ruimtedetailsoort.parkeergarage_niet_specifieke_plek.code,
     ]:
