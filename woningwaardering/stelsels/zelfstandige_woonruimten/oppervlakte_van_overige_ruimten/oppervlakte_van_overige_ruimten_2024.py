@@ -112,7 +112,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                 ):
                     # Bij een niet specifiek tot de woning behorende parkeerplaats
                     # wordt uitgegaan van een fictieve oppervlakte van 12 m2.
-                    woningwaardering.aantal = 12
+                    woningwaardering.aantal = 12.0
 
                 else:
                     woningwaardering.aantal = float(
