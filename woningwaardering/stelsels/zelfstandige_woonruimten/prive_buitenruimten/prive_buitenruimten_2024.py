@@ -69,6 +69,10 @@ class PriveBuitenruimten2024(Stelselgroepversie):
             )
 
             for buitenruimte in buitenruimten:
+                if buitenruimte.detail_soort is None:
+                    raise ValueError(
+                        f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} heeft geen detailsoort"
+                    )
                 if not PriveBuitenruimten2024._buitenruimte_heeft_geldige_afmetingen(
                     buitenruimte
                 ):
@@ -79,7 +83,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
 
                 woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-                if buitenruimte.code in [
+                if buitenruimte.detail_soort.code in [
                     Ruimtedetailsoort.carport.code,
                     Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek.code,
                     Ruimtedetailsoort.open_parkeergarage_specifieke_plek.code,
@@ -89,7 +93,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                         buitenruimte, woningwaardering
                     )
                 elif (
-                    buitenruimte.code
+                    buitenruimte.detail_soort.code
                     == Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code
                 ):
                     woningwaardering = (
