@@ -221,13 +221,9 @@ class PriveBuitenruimten2024(Stelselgroepversie):
             Decimal(str(ruimte.oppervlakte)) / Decimal(str(gedeeld_met_aantal_eenheden))
         )
 
-        criterium_naam = f"{ruimte.naam}"
-        if (gedeeld_met_aantal_eenheden) > 1:
-            criterium_naam += f" (gedeeld met {gedeeld_met_aantal_eenheden})"
-
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=criterium_naam,
+                naam=f"{ruimte.naam}",
                 meeteenheid=Meeteenheid.vierkante_meter_m2.value,
             )
         )
