@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.bvg.model_uitbreidingen.eenheden_oppervlakte import (
-    EenhedenOppervlakte,
+    _EenhedenOppervlakte as EenhedenOppervlakte,
 )
 
 

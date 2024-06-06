@@ -4,7 +4,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class EenhedenOppervlakte(BaseModel):
+class _EenhedenOppervlakte(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )

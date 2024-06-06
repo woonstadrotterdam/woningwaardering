@@ -49,11 +49,18 @@ class MergeClassesVisitor(cst.CSTTransformer):
         original_node: cst.Module,
         updated_node: cst.Module,
     ) -> cst.Module:
+        new_body = list(updated_node.body)
+
         for key, uitbreiding_classes in self.classes.items():
-            updated_node = updated_node.with_deep_changes(
-                updated_node, body=list(chain(updated_node.body, uitbreiding_classes))
-            )
-        return updated_node
+            for uitbreiding_class in uitbreiding_classes:
+                # Remove the leading underscore from the class name
+                class_name_without_prefix = uitbreiding_class.name.value.lstrip("_")
+                updated_class_def = uitbreiding_class.with_changes(
+                    name=cst.Name(class_name_without_prefix)
+                )
+                new_body.append(updated_class_def)
+
+        return updated_node.with_changes(body=new_body)
 
 
 uitbreidingen_folder = os.path.join(
