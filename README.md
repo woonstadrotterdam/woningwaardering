@@ -333,4 +333,14 @@ In de huidige referentiedata zijn er vier verschillende soorten tuinen in de vor
 - voortuin
 - zijtuin
 
-Dit leidt enigszins tot onnodige complexiteit in de context van bijvoorbeeld de woningwaardering, omdat elke vorm van een privétuin gelijkwaardig wordt gewaardeerd en bij modellering van eenheden tuinen niet op dit detailniveau worden gemodelleerd volgens de Aedes ILS. Hierom hebben wij de referentiedata uitgebreid met een nieuwe, generieke tuinsoort: `tuin`. Zie ook [dit issue](https://github.com/woonstadrotterdam/woningwaardering/pull/43/checks).
+Dit leidt enigszins tot onnodige complexiteit in de context van bijvoorbeeld de woningwaardering, omdat elke vorm van een privétuin gelijkwaardig wordt gewaardeerd en bij modellering van eenheden tuinen niet op dit detailniveau worden gemodelleerd volgens de Aedes ILS. Hierom hebben wij de referentiedata uitgebreid met een nieuwe, generieke tuinsoort: `tuin`. Zie ook [dit issue](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/107).
+
+### Afmetingen Ruimte
+
+Voor de waardering van buitenruimten dienen de afmetingen van ruimtes doorgegeven te worden. Hiervoor zijn de volgende attributen op Eenheden-Ruimte toegevoegd:
+
+- lengte: de maximale lengte van de ruimte gemeten in meters.
+- breedte: de maximale breedte van de ruimte gemeten in meters.
+- hoogte: de maximale vrije hoogte van de ruimte gemeten in meters.
+
+Zie ook [dit issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/63).
