@@ -18,6 +18,7 @@ class _EenhedenEenheid(BaseModel):
     """
     Het type woning: eengezinswoning of meergezinswoning. Referentiedatasoort WONINGTYPE.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/61
     oppervlakten: Optional[list[EenhedenOppervlakte]] = Field(
         default=None, alias="verbondenRuimten"
     )

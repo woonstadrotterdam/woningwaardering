@@ -15,8 +15,13 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "A++++ + 72.0m2"
+            "naam": "A++++",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
+          "aantal": 72.0,
           "punten": 52.0
         }
       ]

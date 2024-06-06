@@ -5,6 +5,7 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 
 
 class _EenhedenOppervlakte(BaseModel):
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/61
     model_config = ConfigDict(
         populate_by_name=True,
     )

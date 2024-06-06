@@ -952,13 +952,6 @@ class EenhedenEnergieprestatie(BaseModel):
     """
     De door een adviseur gemeten waarde die hoort bij de energieprestatie. De energieprestatiesoort bepaalt wat deze waarde representeert. Bijvoorbeeld: Energie-index of EP2 (het energielabel  is daarvan dan afgeleid), compactheid of opgewekte duurzame energie. Bij een voorlopig energielabel is geen waarde van toepassing.
     """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/58
-    gebruiksoppervlakte_thermische_zone: Optional[float] = Field(
-        default=None, alias="gebruiksoppervlakteThermischeZone"
-    )
-    """
-    Gebruiksoppervlakte van de thermische zone, afgebakend volgens NTA 8800
-    """
 
 
 class EenhedenGemeente(BaseModel):
@@ -3259,6 +3252,7 @@ class EenhedenEenheid(BaseModel):
     """
     Het type woning: eengezinswoning of meergezinswoning. Referentiedatasoort WONINGTYPE.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/61
     oppervlakten: Optional[list[EenhedenOppervlakte]] = Field(
         default=None, alias="verbondenRuimten"
     )
@@ -3510,6 +3504,7 @@ class BouwkundigElementenBouwkundigElementbericht(
 
 
 class EenhedenOppervlakte(BaseModel):
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/61
     model_config = ConfigDict(
         populate_by_name=True,
     )

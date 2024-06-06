@@ -166,8 +166,13 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "B + 78.84m2"
+            "naam": "B",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
+          "aantal": 78.84,
           "punten": 32.0
         }
       ]
