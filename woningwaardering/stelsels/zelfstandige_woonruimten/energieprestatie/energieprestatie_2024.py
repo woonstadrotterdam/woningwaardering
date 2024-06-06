@@ -14,6 +14,7 @@ from woningwaardering.stelsels.utils import (
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
+    EenhedenPrijscomponent,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -21,15 +22,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Energielabel,
+    Energieprestatiesoort,
+    Energieprestatiestatus,
+    Prijscomponentdetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
-)
-from woningwaardering.vera.referentiedata.energielabel import Energielabel
-from woningwaardering.vera.referentiedata.energieprestatiesoort import (
-    Energieprestatiesoort,
-)
-from woningwaardering.vera.referentiedata.energieprestatiestatus import (
-    Energieprestatiestatus,
 )
 
 LOOKUP_TABEL_FOLDER = (
@@ -127,11 +125,8 @@ class Energieprestatie2024(Stelselgroepversie):
         label: str,
         woningtype: str,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
+        energieprestatievergoeding: EenhedenPrijscomponent | None,
     ) -> WoningwaarderingResultatenWoningwaardering:
-        if energieprestatie.energieprestatievergoeding is None:
-            raise TypeError(
-                "voor de berekening van de energieprestatie dient aangegeven te worden of er sprake is van een energieprestatievergoeding"
-            )
         if (
             energieprestatie_soort
             == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
@@ -167,13 +162,10 @@ class Energieprestatie2024(Stelselgroepversie):
 
         waarderings_label: str | None = label
 
-        if energieprestatie.energieprestatievergoeding:
+        if energieprestatievergoeding:
             logger.debug("Energieprestatievergoeding gevonden.")
 
-        if (
-            energieprestatie.energieprestatievergoeding
-            and waarderings_label != Energielabel.b.naam
-        ):
+        if energieprestatievergoeding and waarderings_label != Energielabel.b.naam:
             waarderings_label = Energielabel.b.naam
             criterium_naam += f" > {waarderings_label} ivm EPV"
 
@@ -239,6 +231,25 @@ class Energieprestatie2024(Stelselgroepversie):
             )
             return woningwaardering_groep
 
+        energieprestatievergoeding = next(
+            (
+                prijscomponent
+                for prijscomponent in eenheid.prijscomponenten or []
+                if prijscomponent.detail_soort is not None
+                and prijscomponent.detail_soort.code
+                == Prijscomponentdetailsoort.energieprestatievergoeding.code
+                and (
+                    prijscomponent.begindatum is None
+                    or prijscomponent.begindatum <= self.peildatum
+                )
+                and (
+                    prijscomponent.einddatum is None
+                    or prijscomponent.einddatum > self.peildatum
+                )
+            ),
+            None,
+        )
+
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
         if (
@@ -254,6 +265,7 @@ class Energieprestatie2024(Stelselgroepversie):
                 energieprestatie.label.naam,
                 eenheid.woningtype.naam,
                 woningwaardering,
+                energieprestatievergoeding,
             )
 
         elif eenheid.bouwjaar and not energieprestatie:
