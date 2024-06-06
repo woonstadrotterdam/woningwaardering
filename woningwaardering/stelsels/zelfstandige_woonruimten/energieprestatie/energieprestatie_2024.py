@@ -209,8 +209,8 @@ class Energieprestatie2024(Stelselgroepversie):
 
         return woningwaardering
 
-    @staticmethod
     def bereken(
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
