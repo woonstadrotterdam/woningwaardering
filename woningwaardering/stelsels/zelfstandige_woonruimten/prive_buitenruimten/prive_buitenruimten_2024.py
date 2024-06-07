@@ -145,11 +145,18 @@ class PriveBuitenruimten2024(Stelselgroepversie):
         )
 
         if aantal > 0:
-            punten = punten + PriveBuitenruimten2024._bereken_punten_met_oppervlakte(
-                aantal
-            )
+            punten += PriveBuitenruimten2024._bereken_punten_met_oppervlakte(aantal)
 
         woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            (
+                f"Eenheid {eenheid.id} wordt gewaardeerd met "
+                f"{woningwaardering_groep.punten} punten "
+                f"voor stelselgroep "
+                f"{Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+            )
+        )
         return woningwaardering_groep
 
     @staticmethod
