@@ -264,7 +264,7 @@ if __name__ == "__main__":
 
     prive_buitenruimte = PriveBuitenruimten2024()
     with open(
-        "tests/data/input/zelfstandige_woonruimten/37101000032.json",
+        "tests/data/zelfstandige_woonruimten/input/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

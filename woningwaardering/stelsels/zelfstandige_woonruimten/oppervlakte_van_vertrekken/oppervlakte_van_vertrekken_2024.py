@@ -89,7 +89,7 @@ if __name__ == "__main__":
     logger.enable("woningwaardering")
 
     file = open(
-        "tests/data/input/zelfstandige_woonruimten/12006000004.json",
+        "tests/data/zelfstandige_woonruimten/input/12006000004.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(file.read())

@@ -27,7 +27,7 @@ if __name__ == "__main__":
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(
         peildatum=date(2025, 1, 1)
     )
-    file = open("./tests/data/input/zelfstandige_woonruimten/41164000002.json", "r+")
+    file = open("tests/data/input/zelfstandige_woonruimten/41164000002.json", "r+")
     eenheid = EenhedenEenheid.model_validate_json(file.read())
 
     woningwaardering_resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid)

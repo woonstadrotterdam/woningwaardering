@@ -202,7 +202,7 @@ if __name__ == "__main__":
 
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten2024()
     with open(
-        "tests/data/input/zelfstandige_woonruimten/85651000021.json",
+        "tests/data/generiek/input/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
