@@ -48,5 +48,6 @@ class _EenhedenRuimte(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/63
     hoogte: Optional[float] = None
     """
-    De maximale vrije hoogte van de ruimte gemeten in meters.
+    De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan None zijn,
+    bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
     """

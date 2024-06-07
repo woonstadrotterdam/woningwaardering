@@ -1338,12 +1338,13 @@ class EenhedenRuimte(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/63
     lengte: Optional[float] = None
     """
-    De lengte van de ruimte gemeten in meters.
+    De maximale lengte van de ruimte gemeten in meters.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/63
     hoogte: Optional[float] = None
     """
-    De hoogte van de ruimte gemeten in meters.
+    De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan None zijn,
+    bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
     """
 
 
