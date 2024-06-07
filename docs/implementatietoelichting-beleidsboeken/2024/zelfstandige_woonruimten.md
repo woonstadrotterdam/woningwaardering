@@ -735,3 +735,20 @@ Daarnaast wordt in nog twee andere gevallen de cap op de WOZ niet toegepast. In 
 
 In onderstaande stroomschema staat weergegeven wanneer de cap op de WOZ wordt toegepast.
 
+```mermaid
+flowchart TB;
+A[Heeft de woning in totaal meer
+dan 142 punten volgens het
+waarderingsstelsel?]
+A --> |Ja| B[Is het aandeel
+WOZ-punten meer dan 33%?]
+B -->|Ja| D[Is er geen sprake van
+een nieuwbouwwoning <40 m²
+gelegen in Corop-gebied
+Amsterdam en Utrecht]
+A --> |Nee| C
+B --> |Nee| C
+D --> |Nee| C
+D -->|Ja| E[Maximering WOZ-aandeel 33%]
+C[Geen maximering WOZ-aandeel]
+```
