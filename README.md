@@ -341,7 +341,7 @@ Voor de waardering van buitenruimten dienen de afmetingen van ruimtes doorgegeve
 
 - `lengte`: de maximale lengte van de ruimte gemeten in meters.
 - `breedte`: de maximale breedte van de ruimte gemeten in meters.
-- `hoogte`: de maximale vrije hoogte van de ruimte gemeten in meters.
+- `hoogte`: De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan `None` zijn, bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
 
 Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/63.
 
