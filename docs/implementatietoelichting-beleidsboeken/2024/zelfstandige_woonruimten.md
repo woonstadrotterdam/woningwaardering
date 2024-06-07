@@ -608,3 +608,130 @@ Een dergelijke parkeervoorziening wordt vergeleken met een carport en als zodani
 
 > Bovenstaande parkeervoorziening dient doorgegeven te worden met ruimtedetailsoort:
 > - `GPS`: Gemeenschappelijke parkeerruimte specifieke plek
+
+## 4.10 Punten voor de WOZ-waarde
+
+Een groot deel van het totale puntenaantal wordt bepaald door de punten die een woonruimte krijgt voor de WOZ-waarde van het gehuurde. WOZ staat voor Wet waardering onroerende zaken. De WOZ-waarde geeft de geschatte marktwaarde van de woning weer zoals volgt uit de Wet waardering onroerende zaken. Deze waarde wordt in principe ieder kalenderjaar door de gemeente vastgesteld, die in de WOZ-beschikking van de desbetreffende woning wordt weergegeven. De waardepeildatum van de WOZ-waarde ligt op 1 januari van het voorafgaande kalenderjaar. Ter illustratie: de WOZ-waarde in de WOZ-beschikking van 2023 heeft een waardepeildatum van 1 januari 2022.  Indien de huurder bezwaar maakt bij de gemeente tegen de WOZ-beschikking, die een rol speelt bij een procedure bij de Huurcommissie, dan kan de Huurcommissie de zaak aanhouden totdat daarop een beslissing is geweest.
+
+### 4.10.1 Berekening punten voor de WOZ-waarde
+
+Op basis van de WOZ-waarde vindt een berekening plaats die een puntenaantal oplevert voor het puntenstelsel. Hiervoor worden kengetallen gebruikt die ieder jaar opnieuw worden vastgesteld door de minister. Deze kengetallen van de afgelopen drie jaar staan in tabel 4.10.1 hieronder weergegeven.
+
+De berekening voor het puntenaantal op basis van de WOZ-waarde bestaat uit twee onderdelen.
+
+- Onderdeel I: 1 punt wordt gegeven voor iedere € 14.146 (vanaf 1 juli 2023) van de laatstelijk vastgestelde WOZ-waarde.
+- Onderdeel II: 1 punt wordt gegeven voor iedere € 222 (vanaf 1 juli 2023) van de WOZ-waarde per m2 van de vertrekken en overige ruimten van de woning.
+
+De punten van de twee onderdelen worden bij elkaar opgeteld. Dit levert een puntenaantal op voor het onderdeel WOZ-waarde. De totale waardering in punten vindt na saldering en afronding plaats. Bij 0,5 punten of meer wordt afgerond naar boven en bij minder dan 0,5 naar beneden.
+
+_**Rekenvoorbeeld:**_
+
+_De WOZ-waarde van een woning is (met de WOZ-beschikking 2023) voor het kalenderjaar 2022 vastgesteld op € 200.000 en de oppervlakte van de vertrekken en overige ruimten van de woning is 60 m2_
+
+- _Onderdeel I: € 200.000 / € 14.146 = 14,14 punten_
+
+- _Onderdeel II: € 200.000 / 60 (m2) / € 222 = 15,02 punten_
+
+Het totale puntenaantal is 14,14 + 15,02 = 29,16. Na afronding is het puntenaantal 29 punten.
+
+_In dit rekenvoorbeeld zijn de kengetallen gebruikt die per 1 juli 2023 gelden, zie tabel 4.10.1._
+
+### 4.10.2 Nieuwbouwwoningen en woningen gelegen in COROP-gebied
+
+Om de bouw van huurwoningen in het middenhuursegment te bevorderen heeft de wetgever bepaald dat voor nieuwbouwwoningen opgeleverd in kalenderjaar 2015-2019 en kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht een andere berekening geldt. Deze berekening leidt tot een hoger aantal punten voor het onderdeel WOZ-waarde.
+
+**Nieuwbouwwoningen**
+
+Indien de bouwkundige oplevering van de woning heeft plaatsgevonden in de jaren 2015-2019 en die woning voor de onderdelen 1 t/m 8 en 12 van het woningwaarderingsstelsel minimaal 110 punten heeft behaald dan worden, voor het aantal punten voor de WOZ-waarde, minimaal 40 punten toegekend. Dit heeft als gevolg dat het puntenaantal van de woning boven de liberalisatiegrens uitkomt.
+
+Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2019 en/of de woning behaalt niet de 110 punten op basis van de overige onderdelen van het puntenstelsel dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.
+
+**Woningen gelegen in COROP-gebied (2018-2022)**
+
+Indien de bouwkundige oplevering van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de Corop-gebieden Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 222 (per 1 juli 2023). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 222 gebruikt maar € 94 (per 1 juli 2023).
+
+Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2022 of de woning is groter dan 40 m2 of de woning is niet gelegen in de Corop-gebieden Amsterdam en Utrecht, dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.
+
+In bijlage 3 van dit beleidsboek staan de gemeenten opgesomd die zijn gelegen in de Coropgebieden Amsterdam en Utrecht.
+
+_**Rekenvoorbeeld:**_
+
+_De WOZ-waarde van een woning in Amsterdam is voor het kalenderjaar 2022 vastgesteld op € 200.000 en de oppervlakte van de vertrekken en overige ruimten van de woning is 35 m2._
+
+- _Onderdeel I: € 200.000 / € 14.146 = 14,14 punten_
+- _Onderdeel II: € 200.000 / 35 (m2) / € 94 = 60,79 punten_
+
+_Het totale puntenaantal is 14,14 + 58,91 = 74,93. Na afronding is het puntenaantal 75 punten. In dit rekenvoorbeeld zijn de kengetallen gebruikt die per 1 juli 2023 gelden, zie tabel 4.10.1._
+
+**Tabel 4.10.1 Kengetallen WOZ**
+
+| Jaar            | Onderdeel I | Onderdeel II | Corop-gebieden |
+| --------------- | ----------- | ------------ | -------------- |
+| 1 juli 2020     | € 10.289    | € 160        | € 68           |
+| Per 1 juli 2021 | € 11.041    | € 172        | € 73           |
+| Per 1 juli 2022 | € 12.090    | € 189        | € 80           |
+| Per 1 juli 2023 | € 14.146    | € 222        | € 94           |
+
+### 4.10.3 Hoogniveau renovatie
+
+De specifieke berekeningsmethodiek, die geldt voor nieuwbouwwoningen (2015-2019) en kleine woningen (<40 m2) gelegen in COROP-gebieden Amsterdam en Utrecht, is ook van toepassing indien in de eerdergenoemde kalenderjaren sprake is van hoogniveau renovatie. Hiermee wordt bedoeld ingrijpende gerenoveerde woningen die wat betreft de energieprestatie voldoen aan de eisen van artikel 5.2 van het Bouwbesluit 2012 die gelden voor nieuwbouwwoningen. Hieruit volgt dat sprake is van hoogniveau renovatie indien voor de woning een energielabel A+++ of A++++ is afgegeven (na 1 januari 2021). Indien sprake is van verbouw in de jaren 2015-2021 dan is sprake van hoogniveau renovatie als het Energie-Index van de woning lager is dan 0,4. Indien de verbeteringen niet hebben geleid tot een energieprestatie op nieuwbouwniveau, dan is er geen sprake van hoog niveau renovatie. In die gevallen mogen er voor de renovatie of transformatie punten worden berekend op basis van de investering, conform de berekening als omschreven in paragraaf (4.11) over het onderdeel renovatie.
+
+4.10.4 Minimum WOZ-waarde
+
+Een bijzondere regeling is door de wetgever voorzien voor specifieke woningen van specifieke verhuurders, zoals ‘containerwoningen’ die zijn bestemd voor studentenhuisvesting. In die gevallen wordt een minimum WOZ-waarde gehanteerd indien de WOZ-waarde lager is dan deze minimumwaarde. Deze waarde bedraagt per 1 juli 2023 € 71.602. Zie de tabel hieronder voor de minimumwaarde van de afgelopen drie jaar.
+
+**Tabel 4.10.2**
+
+| Jaar             | Minimumwaarde |
+| ---------------- | ------------- |
+| Per 1 juli 2020  | € 52.085      |
+| Per 1 juli 2021  | € 55.888      |
+| Per 1 juli 2022  | € 61.198      |
+| Per 1 juli 2023  | € 71.602      |
+
+### 4.10.5 Gebouwd eigendom in aanbouw
+
+Indien de WOZ-waarde betrekking heeft op een ‘gebouwd eigendom in aanbouw’, als bedoeld in artikel 17 lid 4 Wet WOZ, dan wordt voor de puntentoekenning uitgegaan van de waarde van de woning als ware de bouw is voltooid. De WOZ-beschikking zal het voortgangspercentage vermelden. De Huurcommissie heeft dan tot taak de WOZ-waarde gerelateerd aan de voortgang van de aanbouw om te rekenen naar de waarde “als ware de bouw voltooid”, dus naar 100%.
+
+Onder een ‘gebouwd eigendom in aanbouw’ wordt verstaan een onroerende zaak of gedeelte daarvan waarvoor een omgevingsvergunning is verleend en die door bouw nog niet geschikt is voor gebruik overeenkomstig haar beoogde bestemming. Het gaat hier om de situatie waarbij nieuwbouw/verbouw is begonnen na 1 januari van een lopend jaar en die niet is afgerond voor 1 januari van het daaropvolgende jaar.
+
+Hiervan is bijvoorbeeld sprake als, in het kader van de WOZ-beschikking 2022 dat als peildatum 1 januari 2021 heeft, de werkzaamheden aan het gehuurde zijn aangevangen na 1 januari 2021 en zijn voltooid ná 1 januari 2022, De WOZ-beschikking 2023, dat als peildatum 1 januari 2022 heeft, zal in dat geval niet de waarde weergeven “als ware de bouw voltooid”. In dat geval kan de woning worden aangemerkt als een ‘een gebouwd eigendom in aanbouw’ als bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.
+
+### 4.10.6 Geen WOZ-beschikking voorhanden
+
+Het kan voor komen dat geen WOZ-waarde van het gehuurde beschikbaar is. Hierbij kan het gaan om verschillende situaties.
+
+a. Het kan gaan om een nieuwbouwwoning of een woning die is ontstaan door transformatie van bijvoorbeeld een kantoor naar woningen. In deze situatie gaat het om nieuwbouw/verbouw die is begonnen na 1 januari van een lopend jaar en die is afgerond voor 1 januari van het daaropvolgende jaar. In die gevallen is geen WOZ-beschikking voor de woning afgegeven, ook niet voor de woning in aanbouw als bedoeld in artikel 17 lid 4 van de wet WOZ.
+
+In deze situatie houdt de Huurcommissie de zaak aan totdat de WOZ-beschikking van het volgend kalenderjaar wordt afgegeven. Deze WOZ-beschikking zal niet de WOZ-waarde bevatten die de Huurcommissie nodig heeft in verband met de peildatum van het desbetreffende verzoek. Dit betekent dat de waarde in de WOZ-beschikking moet worden bepaald door middel van terugindexatie. Op de website van de Waarderingskamer is de waardeontwikkeling voor woningen per gemeente beschikbaar die gebruikt wordt voor de terug indexatie: https://www.waarderingskamer.nl/ .
+
+_**Voorbeeld:**_
+
+_De ingangsdatum van de huurovereenkomst is 1 juli 2021. De Huurcommissie heeft daarom de WOZ-beschikking 2021 nodig (die als waardepeildatum 1 januari 2020 heeft). Als die beschikking 2021 er niet is, dan wacht de Huurcommissie de WOZ-beschikking 2022 af. De waarde in deze WOZ-beschikking 2022 geeft de waarde per peildatum 1 januari 2021. Dit betekent dat de Huurcommissie de waarde uit de WOZ-beschikking 2022 (met waardepeildatum 1 januari 2021) door middel van terugindexatie bepaalt naar de waardepeildatum 1 januari 2020._
+
+_Stel dat de woning is gelegen in Amsterdam en de WOZ-waarde is volgens de WOZ-beschikking 2022 € 250.000. De gemiddelde waardestijging van de woningen voor het jaar 2020 (waardepeildatum 2021 t.o.v. 2020) in Amsterdam is volgens de website van de Waarderingskamer 3.8%. De volgende berekening wordt dan gemaakt om tot de WOZ-waarde met waardepeildatum 2020 te komen:_
+
+_250.000/103,8 * 100 = € 240.848,00 (afgerond op tientallen)._
+
+a. Het kan gaan om gesplitste woningen, die formeel niet gesplitst zijn. Er is dan (vaak) wel een WOZ-waarde voor het geheel (bij feitelijke splitsing) maar dus niet voor het woonobject in kwestie. Of om woningen die feitelijk samengevoegd zijn tot één woonruimte, waarbij er wel een WOZ-waarde is voor de afzonderlijke woonruimten, maar dus niet voor het woonobject in kwestie.
+
+In deze situatie neemt de Huurcommissie de WOZ-waarde voor het ongesplitste (in geval van feitelijke splitsing) woonobject of de WOZ-waarden voor de afzonderlijke woonruimten (in geval van feitelijke samenvoeging) als basis ter bepaling. In de situatie van feitelijke splitsing wordt de WOZ-waarde van het ongesplitste object gedeeld door de oppervlaktes van de vertrekken en overige ruimten. In de situatie van feitelijke samenvoeging wordt de WOZ-waarde van het samengevoegde object bepaald door de oppervlaktes van de vertrekken en overige ruimten van de desbetreffende woonruimtes bij elkaar op te tellen
+
+_**Voorbeeld:**_
+
+_Het totale woonobject is (zonder vergunning) gesplitst in vier gelijkwaardige studio’s en de WOZ-waarde van het object is € 550.000 met een totale gebruiksoppervlakte van 180 m2. De oppervlakte van de vertrekken en overige ruimten van de desbetreffende studio is, volgens de meting van de onderzoeker, 45 m2. De WOZ-waarde van deze studio is dan volgens de Huurcommissie in dit geval 45/180 x € 550.000 = € 137.500._
+
+Alleen als een partij een alternatieve manier voor WOZ-waarde bepaling heeft overgelegd, die overtuigend tot een betere waardebepaling leidt, is er aanleiding om de WOZ-waarde volgens die alternatieve manier over te nemen.
+
+c. Een derde situatie is de volgende. Er is een WOZ-waarde voor het woonobject in kwestie, maar niet met de juiste waardepeildatum. Bijvoorbeeld: er is wel een WOZ-waarde voor het kalenderjaar 2022, maar de Huurcommissie heeft nodig de WOZ-waarde voor kalenderjaar 2021 omdat de peildatum Huurcommissie 2021 is (bijvoorbeeld vanwege ingangsdatum huurovereenkomst in 2021). In zo’n geval zal de Huurcommissie de bekende WOZ-waarde door middel van terugindexatie omrekenen naar een WOZ-waarde peildatum met behulp van de informatie op de website van de Waarderingskamer over prijsontwikkeling per jaar per gemeente.
+
+### 4.10.7 Maximering WOZ-punten tot maximaal 33%
+
+Per 1 mei 2022 is het aandeel van de WOZ-waarde in de puntenwaardering gemaximeerd. Hierbij geldt dat maximaal 33% van het totale puntenaantal van een woning bepaald mag worden door de WOZ-waarde van de woning. Dit wordt ook wel de ‘cap op de WOZ’ genoemd. Deze regeling is van toepassing voor zowel nieuwe als bestaande huurcontracten. In de vrije sector is deze regeling alleen relevant wanneer de aanvangshuurprijs wordt getoetst door de huurder.
+
+Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 142 punten en voor kleine nieuwbouwwoningen34 (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022.
+
+Daarnaast wordt in nog twee andere gevallen de cap op de WOZ niet toegepast. In het geval dat de minimumwaarde is toegepast vindt namelijk ook geen aftopping plaats aangezien de WOZ-waarde niet meer dan 33% zal bedragen. Het tweede geval gaat het om nieuwbouwwoningen gebouwd in de jaren 2015-2019 waarvoor minimaal 110 punten zijn behaald voor de onderdelen 1 tot en met 8 en 12 van het woningwaarderingsstelsel. Ook in dat geval wordt de cap op de WOZ niet toegepast. In deze situatie wordt minimaal 40 punten voor het onderdeel WOZ-waarde toegekend en dit komt overeen met 26,6%, waardoor geen aftopping plaatsvindt. Deze gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde rekenkundig, in deze gevallen, nooit meer dan 33% kan bedragen. Daarom zijn ze niet opgenomen in onderstaand schema.
+
+In onderstaande stroomschema staat weergegeven wanneer de cap op de WOZ wordt toegepast.
+
