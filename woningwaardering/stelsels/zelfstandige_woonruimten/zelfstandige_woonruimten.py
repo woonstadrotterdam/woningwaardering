@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten()
     file = open(
-        "./tests/data/input/generiek/37101000032.json",
+        "tests/data/generiek/input/37101000032.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(file.read())

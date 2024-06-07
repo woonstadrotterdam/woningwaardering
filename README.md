@@ -301,11 +301,11 @@ Het attribuut `verbonden_ruimten` bevat de ruimten die in verbinding staan met d
 
 ### Gedeeld met aantal eenheden
 
-Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarmee een bepaalde ruimte wordt gedeeld. Dit attribuut wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging. `gedeeld_met_aantal_eenheden` heeft als type `Optional[int]`. Er staat een [github issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/44) open voor deze aanvulling op het VERA model.
+Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarmee een bepaalde ruimte wordt gedeeld. Dit attribuut wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging. `gedeeld_met_aantal_eenheden` heeft als type `Optional[int]`. Er staat een github issue open voor deze aanvulling op het VERA model: https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
 
 ### Bouwkundige elementen
 
-In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Dit kan bijvoorbeeld tot gevolg hebben dat er punten in mindering worden gebracht, of punten extra gegeven worden. Bijvoorbeeld bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee de zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribuut `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een [github issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/46) open om `bouwkundige_elementen` standaard in het VERA model toe te voegen.
+In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Dit kan bijvoorbeeld tot gevolg hebben dat er punten in mindering worden gebracht, of punten extra gegeven worden. Bijvoorbeeld bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee de zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribuut `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een github issue open om `bouwkundige_elementen` standaard in het VERA model toe te voegen: https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
 
 ### Eenheidklimaatbeheersingsoort
 
@@ -315,7 +315,7 @@ https://github.com/Aedes-datastandaarden/vera-openapi/issues/54 aangemaakt.
 
 ### Bidet en Lavet
 
-In het beleidshandboek van de huurcomissie voor het woningwaardeeringstelsel wordt voor zowel een bidet als een lavet één punt toegekend. In de huidige referentiedata ontbreken deze twee type `bouwkundigelementdetailsoort`. Zie [dit issue](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/104).
+In het beleidshandboek van de huurcomissie voor het woningwaardeeringstelsel wordt voor zowel een bidet als een lavet één punt toegekend. In de huidige referentiedata ontbreken deze twee type `bouwkundigelementdetailsoort`. Zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/104.
 
 ### Verwarmd
 
@@ -323,3 +323,36 @@ In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verw
 
 - https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
 - https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
+
+### Tuin
+
+In de huidige referentiedata zijn er vier verschillende soorten tuinen in de vorm van een privé buitenruimte:
+
+- achtertuin
+- tuin rondom
+- voortuin
+- zijtuin
+
+Dit leidt enigszins tot onnodige complexiteit in de context van bijvoorbeeld de woningwaardering, omdat elke vorm van een privétuin gelijkwaardig wordt gewaardeerd en bij modellering van eenheden tuinen niet op dit detailniveau worden gemodelleerd volgens de Aedes ILS. Hierom hebben wij de referentiedata uitgebreid met een nieuwe, generieke tuinsoort: `tuin`. Zie ook https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/107.
+
+### Afmetingen Ruimte
+
+Voor de waardering van buitenruimten dienen de afmetingen van ruimtes doorgegeven te worden. Hiervoor zijn de volgende attributen op Eenheden-Ruimte toegevoegd:
+
+- `lengte`: de maximale lengte van de ruimte gemeten in meters.
+- `breedte`: de maximale breedte van de ruimte gemeten in meters.
+- `hoogte`: De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan `None` zijn, bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
+
+Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/63.
+
+### Parkeervoorzieningen
+
+Om parkeerzoorzieningen correct te kunnen waarderen als onderdeel van Privé-buitenruimten missen er in de VERA referentiedata een aantal soorten parkeervoorziening. Hiervoor is de referentiedata voor ruimtedetailsoort aangevuld met:
+
+- `PNS`: Parkeergarage niet specifieke plek
+- `OPS`: Open parkeergarage specifieke plek
+- `OPN`: Open parkeergarage niet specifieke plek
+- `GPN`: Gemeenschappelijke parkeerruimte niet specifieke plek
+- `GPS`: Gemeenschappelijke parkeerruimte specifieke plek
+
+Zie ook https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110.

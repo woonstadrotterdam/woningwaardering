@@ -43,16 +43,17 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
+            criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
+
             # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
             if badruimte_met_toilet(ruimte):
                 ruimte.oppervlakte = float(
                     Decimal(str(ruimte.oppervlakte)) - Decimal("1")
                 )
+                criterium_naam += " (1m2 verminderd ivm toilet)"
                 logger.debug(
                     "Toilet in badkamer gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
                 )
-
-            criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
                 woningwaardering = WoningwaarderingResultatenWoningwaardering()
@@ -88,7 +89,7 @@ if __name__ == "__main__":
     logger.enable("woningwaardering")
 
     file = open(
-        "tests/data/input/zelfstandige_woonruimten/12006000004.json",
+        "tests/data/zelfstandige_woonruimten/input/12006000004.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(file.read())

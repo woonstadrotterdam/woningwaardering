@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=date(2024, 1, 1))
     with open(
-        "./tests/data/input/zelfstandige_woonruimten/41164000002.json", "r+"
+        "tests/data/zelfstandige_woonruimten/input/41164000002.json", "r+"
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
