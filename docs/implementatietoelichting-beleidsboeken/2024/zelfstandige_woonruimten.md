@@ -498,9 +498,7 @@ Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangeb
 
 ## 4.9 Privé-buitenruimten
 
-Voor privé-buitenruimten worden aan de woning punten toegekend ~~indien de privé-buitenruimte een diepte, breedte en vrije hoogte heeft van 1,50 m of meer~~.
-
-> Alle buitenruimten die ter waardering worden doorgegeven dienen conform de eisen te zijn gemodelleerd. 
+Voor privé-buitenruimten worden aan de woning punten toegekend indien de privé-buitenruimte een diepte, breedte en vrije hoogte heeft van 1,50 m of meer.
 
 ### 4.9.1 Definitie privé-buitenruimte
 
@@ -523,11 +521,11 @@ _Als uitsluitend een balkon, smaller dan 1,50 m aanwezig is, dan wordt de aftrek
 
 ### 4.9.3 Hoe wordt de oppervlakte van privé-buitenruimten gemeten?
 
-Een privé-buitenruimte wordt alleen met punten gewaardeerd indien de privé-buitenruimte een diepte, breedte ~~en vrije hoogte~~ heeft van 1,50 m of meer. ~~Van deze buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terug liggende deel van de gevel. De oppervlakte, die wordt ingenomen door een balkonkast (minder dan 2 m2) of kolenhok e.d., wordt bij de oppervlakte van de desbetreffende privé-buitenruimte meegerekend.~~
+Een privé-buitenruimte wordt alleen met punten gewaardeerd indien de privé-buitenruimte een diepte, breedte en vrije hoogte heeft van 1,50 m of meer. ~~Van deze buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terug liggende deel van de gevel. De oppervlakte, die wordt ingenomen door een balkonkast (minder dan 2 m2) of kolenhok e.d., wordt bij de oppervlakte van de desbetreffende privé-buitenruimte meegerekend.~~
 
 ~~**Voorbeeld:**~~
 
-~~_Er is sprake van een achtertuin waarboven een balkon uitsteekt. Tussen de onderzijde van het balkon en de achtertuin, heeft de tuin een vrije hoogte van 1,50 m of meer. Hierdoor wordt de tuin doorgemeten tot aan de gevel (inclusief de ruimte onder het balkon). Is de vrije hoogte onder het balkon lager dan 1,50 m, dan wordt de tuin daaronder niet doorgemeten._~~
+_~~Er is sprake van een achtertuin waarboven een balkon uitsteekt. Tussen de onderzijde van het balkon en de achtertuin, heeft de tuin een vrije hoogte van 1,50 m of meer. Hierdoor wordt de tuin doorgemeten tot aan de gevel (inclusief de ruimte onder het balkon). Is de vrije hoogte onder het balkon lager dan 1,50 m, dan wordt de tuin daaronder niet doorgemeten.~~_
 
 > Er wordt vanuit gegaan dat buitenruimten conform deze eisen zijn gemeten. De woningwaardering package controleert deze eisen niet. Aan het Eenheden-Ruimte model wordt een lengte, breedte en vrije hoogte attribuut toegevoegd. Deze gebruiken we in de bepaling of een buitenruimte in aanmerking komt voor waardering.
 
@@ -540,7 +538,7 @@ Balkons en dakterrassen krijgen alleen punten indien zij:
 - ~~zijn voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;~~  
 - ~~rondom zijn voorzien van een balustrade;~~  
 - ~~via een deur* toegankelijk zijn én;~~  
-- een diepte, breedte ~~en vrije hoogte~~ hebben van 1,50 m of meer.~~  
+- een diepte, breedte en vrije hoogte hebben van 1,50 m of meer.
 
 ~~_*Indien de balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als privé-buitenruimte te worden gebruikt, dan worden deze met punten gewaardeerd._~~
 
