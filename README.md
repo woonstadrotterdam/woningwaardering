@@ -359,4 +359,4 @@ Zie ook https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110.
 
 ### Oppervlakten
 
-In de VERA VHE modellen bestaat een `oppervlakten` attribuut op `EenhedenEenheid`. Dit attribuut is nog niet beschikbaar in de door ons gebruikte VERA BVG modellen. Dit attribuut en de bijbehorende class `EenhedenOppervlakte` is toegevoegd in afwachting van een update in de VERA standaard. Zie [dit issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/61).
+In de VERA VHE modellen bestaat een `oppervlakten` attribuut op `EenhedenEenheid`. Dit attribuut is nog niet beschikbaar in de door ons gebruikte VERA BVG modellen. Dit attribuut en de bijbehorende class `EenhedenOppervlakte` is toegevoegd in afwachting van een update in de VERA standaard. Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/61.
