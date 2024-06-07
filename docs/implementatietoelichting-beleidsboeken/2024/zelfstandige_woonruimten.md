@@ -595,7 +595,7 @@ Een dergelijke parkeervoorziening wordt vergeleken met een carport en als zodani
 
 > Bovenstaande parkeervoorziening dient doorgegeven te worden met een van deze ruimtedetailsoorten:
 > - `OPS`: "Open parkeergarage specifieke plek"
-> - `OPN`: "Open parkergarage niet specifieke plek".
+> - `OPN`: "Open parkeergarage niet specifieke plek".
 
 4. _Er is sprake van een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en zonder privé plek._
 
