@@ -131,7 +131,7 @@ if __name__ == "__main__":
 
     keuken2024 = Keuken2024()
     file = open(
-        "tests/stelsels/zelfstandige_woonruimten/keuken/data/input/aanrecht_zonder_lengte.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_zonder_lengte.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(file.read())

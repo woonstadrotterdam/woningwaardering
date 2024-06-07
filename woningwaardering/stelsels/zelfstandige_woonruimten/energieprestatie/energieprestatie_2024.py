@@ -311,7 +311,7 @@ if __name__ == "__main__":
 
     energieprestatie = Energieprestatie2024()
     with open(
-        "tests/stelsels/zelfstandige_woonruimten/energieprestatie/data/input/eenheid_A++++_egw.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/energieprestatie/input/eenheid_A++++_egw.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
