@@ -1,0 +1,43 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PRI",
+          "naam": "Privé-buitenruimten"
+        }
+      },
+      "punten": 8.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Carport"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Open parkeergarage niet specifieke plek"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Open parkeergarage specifieke plek"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Gemeenschappelijke parkeerruimte specifieke plek"
+          },
+          "punten": 2.0
+        }
+      ]
+    }
+  ]
+}

@@ -24,7 +24,7 @@ if __name__ == "__main__":
     logger.enable("woningwaardering")
 
     sanitair = Sanitair()
-    with open("./tests/data/input/generiek/37101000032.json", "r+") as file:
+    with open("tests/data/generiek/input/37101000032.json", "r+") as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
     woningwaardering_resultaat = sanitair.bereken(eenheid)

@@ -1,0 +1,64 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport",
+      "oppervlakte": 15,
+      "lengte": 3,
+      "breedte": 5,
+      "hoogte": 3.17
+    },
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "OPN",
+        "naam": "Open parkeergarage niet specifieke plek"
+      },
+      "naam": "Open parkeergarage niet specifieke plek",
+      "oppervlakte": 15,
+      "lengte": 3,
+      "breedte": 5,
+      "hoogte": 3.17
+    },
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "OPS",
+        "naam": "Open parkeergarage specifieke plek"
+      },
+      "naam": "Open parkeergarage specifieke plek",
+      "oppervlakte": 15,
+      "lengte": 3,
+      "breedte": 5,
+      "hoogte": 3.17
+    },
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "GPS",
+        "naam": "Gemeenschappelijke parkeerruimte specifieke plek"
+      },
+      "naam": "Gemeenschappelijke parkeerruimte specifieke plek",
+      "oppervlakte": 15,
+      "lengte": 3,
+      "breedte": 5,
+      "hoogte": 3.17
+    }
+  ]
+}
