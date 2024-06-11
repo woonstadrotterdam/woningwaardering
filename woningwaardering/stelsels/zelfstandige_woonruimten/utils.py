@@ -80,7 +80,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtedetailsoort.kelder.code,
         Ruimtedetailsoort.parkeergarage_specifieke_plek.code,
         Ruimtedetailsoort.parkeergarage_niet_specifieke_plek.code,
-        # Ruimtedetailsoort.schuur.code # niet mogelijk want schuur en schacht zelfde code zie: # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/116
+        # Ruimtedetailsoort.schuur.code # niet mogelijk want schuur en schacht zelfde code zie: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/116 en https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/92
     ] or (
         ruimte.detail_soort.naam
         and ruimte.detail_soort.naam == Ruimtedetailsoort.schuur.naam
