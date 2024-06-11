@@ -61,15 +61,22 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         else:
             return Ruimtesoort.vertrek
 
-    if ruimte.detail_soort.code in [
-        Ruimtedetailsoort.bijkeuken.code,
-        Ruimtedetailsoort.berging.code,
-        Ruimtedetailsoort.wasruimte.code,
-        Ruimtedetailsoort.garage.code,
-        Ruimtedetailsoort.kelder.code,
-        Ruimtedetailsoort.parkeerplaats.code,
-        # Ruimtedetailsoort.schuur.code # niet mogelijk want schuur en schacht zelfde code zie: # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/116
-    ]:
+    if (
+        ruimte.detail_soort.code
+        in [
+            Ruimtedetailsoort.bijkeuken.code,
+            Ruimtedetailsoort.berging.code,
+            Ruimtedetailsoort.wasruimte.code,
+            Ruimtedetailsoort.garage.code,
+            Ruimtedetailsoort.kelder.code,
+            Ruimtedetailsoort.parkeerplaats.code,
+            # Ruimtedetailsoort.schuur.code # niet mogelijk want schuur en schacht zelfde code zie: # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/116
+        ]
+        or (
+            ruimte.detail_soort.naam
+            and ruimte.detail_soort.naam == Ruimtedetailsoort.schuur.naam
+        )  # zie hierboven i.v.m. limitaties schuur.code
+    ):
         if ruimte.oppervlakte >= 2:
             return Ruimtesoort.overige_ruimtes
         else:
