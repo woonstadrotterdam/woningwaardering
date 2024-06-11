@@ -57,7 +57,7 @@ def laad_specifiek_input_en_output_model(
     output_json_path: Path,
 ) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat, date]:
     file_name = output_json_path.name
-    input_path = module_path / f"data/input/{file_name}"
+    input_path = module_path / f"input/{file_name}"
     peildatum_match = re.search(r"\d{4}-\d{2}-\d{2}", str(output_json_path))
     if peildatum_match is None:
         raise ValueError(f"geen datum gevonden in bestandsnaam {file_name}")

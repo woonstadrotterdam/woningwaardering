@@ -39,6 +39,14 @@ class Oppervlaktesoort(Enum):
     vierkante meters, gemeten conform NEN 2580.
     """
 
+    gebruiksoppervlakte_thermische_zone = Referentiedata(
+        code="GTZ",
+        naam="Gebruiksoppervlakte thermische zone",
+    )
+    """
+    Gebruiksoppervlakte van de thermische zone, afgebakend volgens NTA 8800
+    """
+
     netto_vloeroppervlakte = Referentiedata(
         code="NVO",
         naam="Netto vloeroppervlakte",

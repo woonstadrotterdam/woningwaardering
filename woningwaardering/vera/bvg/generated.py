@@ -1330,6 +1330,22 @@ class EenhedenRuimte(BaseModel):
     """
     Geeft aan of de ruimte verwarmd wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/63
+    breedte: Optional[float] = None
+    """
+    De maximale breedte van de ruimte gemeten in meters.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/63
+    lengte: Optional[float] = None
+    """
+    De maximale lengte van de ruimte gemeten in meters.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/63
+    hoogte: Optional[float] = None
+    """
+    De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan None zijn,
+    bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
+    """
 
 
 class EenhedenStadsdeel(BaseModel):

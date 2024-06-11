@@ -106,6 +106,14 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                     else:
                         continue
 
+                elif (
+                    ruimte.detail_soort.code
+                    == Ruimtedetailsoort.parkeergarage_niet_specifieke_plek.code
+                ):
+                    # Bij een niet specifiek tot de woning behorende parkeerplaats
+                    # wordt uitgegaan van een fictieve oppervlakte van 12 m2.
+                    woningwaardering.aantal = 12.0
+
                 else:
                     woningwaardering.aantal = float(
                         Decimal(str(ruimte.oppervlakte)).quantize(
@@ -194,7 +202,7 @@ if __name__ == "__main__":
 
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten2024()
     with open(
-        "tests/data/input/zelfstandige_woonruimten/85651000021.json",
+        "tests/data/generiek/input/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
