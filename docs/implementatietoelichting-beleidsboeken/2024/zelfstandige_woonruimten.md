@@ -103,13 +103,13 @@ _Totaal : 26,73 m² Afronding op hele m² : 27 m²._
 a. bijkeukens  
 b. bergingen  
 c. wasruimte  
-d. ~~schuren~~  
+~~d. schuren~~  
 e. garages  
 f. zolderbergingen  
 g. kelders  
 h. parkeerplaats (zie paragraaf 4.9.6)
 
-> In de VERA-referentiedata heeft schuur en schacht dezelfde detailsoortcode. Hierdoor is het niet mogelijk om schuur als overige ruimte te waarden, omdat schacht niet als overige ruimte wordt gewaardeerd. Bovendien is schuur geen ruimtedetailsoort in de Aedes ILS. Geef daarom een schuur aan als berging in het input-model.
+> In de VERA-referentiedata heeft schuur en schacht dezelfde detailsoortcode. Hierdoor is het niet mogelijk om schuur als overige ruimte te waarden op basis van de code, omdat schacht niet als overige ruimte wordt gewaardeerd. Om dit probleem tijdelijk te ondervangen is het wel mogelijk om op basis van `ruimtedetailsoort.naam` schuur als overige ruimte te waarderen. Echter, het is belangrijk om te melden dat schuur bijvoorbeeld ook geen ruimtedetailsoort is in de Aedes ILS. Daarom is het aanbevolen om een schuur aan te geven als een berging in het input-model.
 
 Deze ruimten tellen alleen mee als de oppervlakte van een ruimte afzonderlijk gelijk is aan of groter dan twee vierkante meter, ~~voor zover de plafondhoogte ten minste 1,50 meter is boven de vloer.~~  
 
