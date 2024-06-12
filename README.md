@@ -1,3 +1,9 @@
+![](https://img.shields.io/pypi/pyversions/woningwaardering)
+![Build Status](https://github.com/woonstadrotterdam/woningwaardering/actions/workflows/cicd.yml/badge.svg)
+[![Version](https://img.shields.io/pypi/v/woningwaardering)](https://pypi.org/project/woningwaardering/)
+![](https://img.shields.io/github/license/woonstadrotterdam/woningwaardering)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
 # Woningwaardering
 
 ⌛️ **Work in Progress**
