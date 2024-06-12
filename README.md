@@ -3,8 +3,6 @@
 [![Version](https://img.shields.io/pypi/v/woningwaardering)](https://pypi.org/project/woningwaardering/)
 ![](https://img.shields.io/github/license/woonstadrotterdam/woningwaardering)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Downloads](https://pepy.tech/badge/woningwaardering)](https://pepy.tech/project/woningwaardering)
-[![Downloads](https://pepy.tech/badge/woningwaardering/month)](https://pepy.tech/project/woningwaardering)
 
 # Woningwaardering
 
