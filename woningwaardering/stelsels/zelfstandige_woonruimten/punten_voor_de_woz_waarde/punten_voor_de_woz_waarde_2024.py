@@ -83,8 +83,8 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         Berekent de minimum punten voor steselgroep WOZ-waarde.
 
         Args:
-            eenheid (EenhedenEenheid): De eenheid waarvoor de punten worden berekend.
-            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten
+            bouwjaar (int | None): Het bouwjaar van de eenheid.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
             float: De minimum punten voor stelselgroep WOZ-waarde.
