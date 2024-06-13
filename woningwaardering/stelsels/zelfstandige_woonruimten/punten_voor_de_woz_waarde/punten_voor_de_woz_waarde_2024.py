@@ -34,6 +34,30 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             )
         )
 
+        woz_waarde = self.bepaal_woz_waarde(eenheid)
+
+        woningwaardering_groep.woningwaarderingen = []
+        woningwaardering_groep.woningwaarderingen.append(
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Onderdeel I"
+                ),
+                punten=woz_waarde / 14146.0,
+            )
+        )
+
+        punten = Decimal(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+            )
+        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
+
+        woningwaardering_groep.punten = float(punten)
+        return woningwaardering_groep
+
+    def bepaal_woz_waarde(self, eenheid: EenhedenEenheid) -> float:
         woz_waardepeildatum = date(self.peildatum.year - 1, 1, 1)
 
         woz_eenheid = next(
@@ -50,28 +74,8 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 f"Geen WOZ-waarde gevonden met waardepeildatum: {woz_waardepeildatum}"
             )
 
-        woz_waarde = woz_eenheid.vastgestelde_waarde
-
         logger.info(
-            f"WOZ-waarde gevonden met waardepeildatum {woz_waardepeildatum}: {woz_waarde}"
+            f"WOZ-waarde gevonden met waardepeildatum {woz_waardepeildatum}: {woz_eenheid.vastgestelde_waarde}"
         )
 
-        woningwaardering_groep.woningwaarderingen = []
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="NotImplemented"
-                )
-            )
-        )
-
-        punten = Decimal(
-            sum(
-                Decimal(str(woningwaardering.aantal))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.aantal is not None
-            )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
-
-        woningwaardering_groep.punten = float(punten)
-        return woningwaardering_groep
+        return woz_eenheid.vastgestelde_waarde
