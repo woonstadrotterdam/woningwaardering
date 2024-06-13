@@ -54,7 +54,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             raise ValueError("Geen woningwaardering resultaat gevonden")
 
         if not eenheid.bouwjaar:
-            logger.warning(f"Geen bouwjaar gevonden voor eenheid {eenheid.id}")
+            raise ValueError(f"Geen bouwjaar gevonden voor eenheid {eenheid.id}")
 
         minimum_punten = self._bereken_minimum_punten(
             eenheid.bouwjaar, woningwaardering_resultaat
@@ -70,6 +70,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         ).pipe(filter_dataframe_op_datum, self.peildatum)
 
         woningwaardering_groep.woningwaarderingen = []
+
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -108,12 +109,17 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 f"Kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is"
             )
 
+        factor_onderdeel_II = df_woz_factor["Onderdeel II"]
+
+        if 2015 <= eenheid.bouwjaar <= 2019:
+            factor_onderdeel_II = df_woz_factor["Onderdeel II Nieuwbouw/COROP"]
+
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel II"
                 ),
-                punten=woz_waarde / oppervlakte / df_woz_factor["Onderdeel II"],
+                punten=woz_waarde / oppervlakte / factor_onderdeel_II,
             )
         )
 
