@@ -1,11 +1,19 @@
 from decimal import ROUND_HALF_UP, Decimal
 from datetime import date
+from itertools import chain
 
 from loguru import logger
 
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
+
 from woningwaardering.stelsels.utils import naar_tabel
+
+from woningwaardering.stelsels.zelfstandige_woonruimten import (
+    OppervlakteVanVertrekken,
+    OppervlakteVanOverigeRuimten,
+)
+
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -55,6 +63,49 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 punten=woz_waarde / 14146.0,
             )
         )
+        if woningwaardering_resultaat is None:
+            raise ValueError("woningwaardering_resultaat is None")
+
+        oppervlakte_stelsel_groepen = [
+            groep
+            for groep in (woningwaardering_resultaat.groepen or [])
+            if (
+                groep.criterium_groep is not None
+                and groep.criterium_groep.stelselgroep is not None
+                and groep.criterium_groep.stelselgroep.code
+                in [
+                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
+                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
+                ]
+            )
+        ] or [
+            OppervlakteVanVertrekken(peildatum=self.peildatum).bereken(eenheid),
+            OppervlakteVanOverigeRuimten(peildatum=self.peildatum).bereken(eenheid),
+        ]
+
+        waarderingen = chain.from_iterable(
+            groep.woningwaarderingen or [] for groep in oppervlakte_stelsel_groepen
+        )
+
+        oppervlakte = sum(
+            waardering.aantal
+            for waardering in waarderingen
+            if waardering.aantal is not None
+        )
+
+        if oppervlakte == 0:
+            raise ValueError(
+                f"Kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is"
+            )
+
+        woningwaardering_groep.woningwaarderingen.append(
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Onderdeel II"
+                ),
+                punten=woz_waarde / oppervlakte / 222.0,
+            )
+        )
 
         punten = max(
             minimum_punten,
@@ -67,7 +118,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                         if woningwaardering.punten is not None
                     )
                 ).quantize(Decimal("1"), ROUND_HALF_UP)
-                * Decimal("1")
             ),
         )
 
