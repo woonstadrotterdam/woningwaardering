@@ -4,6 +4,15 @@
     "code": "EGW",
     "naam": "Eengezinswoning"
   },
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "72.0"
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {
@@ -20,7 +29,6 @@
         "code": "A++++",
         "naam": "A++++"
       },
-      "gebruiksoppervlakte_thermische_zone": 72,
       "waarde": "1.48"
     }
   ]

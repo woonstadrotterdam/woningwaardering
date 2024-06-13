@@ -35,7 +35,7 @@ class MergeClassesVisitor(cst.CSTTransformer):
     def leave_ClassDef(
         self, original_node: cst.ClassDef, updated_node: cst.ClassDef
     ) -> cst.ClassDef:
-        uitbreiding_classes = self.classes.get(original_node.name.value)
+        uitbreiding_classes = self.classes.pop(original_node.name.value, None)
         for uitbreiding_class in uitbreiding_classes or []:
             logger.debug(f"Class {original_node.name.value} uitbreiden")
             updated_node = updated_node.with_deep_changes(
@@ -43,6 +43,24 @@ class MergeClassesVisitor(cst.CSTTransformer):
                 body=list(chain(updated_node.body.body, uitbreiding_class.body.body)),
             )
         return updated_node
+
+    def leave_Module(
+        self,
+        original_node: cst.Module,
+        updated_node: cst.Module,
+    ) -> cst.Module:
+        new_body = list(updated_node.body)
+
+        for key, uitbreiding_classes in self.classes.items():
+            for uitbreiding_class in uitbreiding_classes:
+                # Remove the leading underscore from the class name
+                class_name_without_prefix = uitbreiding_class.name.value.lstrip("_")
+                updated_class_def = uitbreiding_class.with_changes(
+                    name=cst.Name(class_name_without_prefix)
+                )
+                new_body.append(updated_class_def)
+
+        return updated_node.with_changes(body=new_body)
 
 
 uitbreidingen_folder = os.path.join(

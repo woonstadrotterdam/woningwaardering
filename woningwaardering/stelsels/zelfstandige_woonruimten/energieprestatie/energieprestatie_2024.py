@@ -1,4 +1,4 @@
-import datetime
+from datetime import date, datetime, time
 from importlib.resources import files
 from dateutil.relativedelta import relativedelta
 from decimal import Decimal
@@ -14,7 +14,6 @@ from woningwaardering.stelsels.utils import (
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
-    EenhedenPrijscomponent,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -25,6 +24,8 @@ from woningwaardering.vera.referentiedata import (
     Energielabel,
     Energieprestatiesoort,
     Energieprestatiestatus,
+    Meeteenheid,
+    Oppervlaktesoort,
     Prijscomponentdetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -64,8 +65,8 @@ class Energieprestatie2024(Stelselgroepversie):
         ),
     }
 
-    @staticmethod
     def _energieprestatie_met_geldig_label(
+        self,
         eenheid: EenhedenEenheid,
     ) -> EenhedenEnergieprestatie | None:
         """
@@ -94,11 +95,11 @@ class Energieprestatie2024(Stelselgroepversie):
                         or energieprestatie.soort.code
                         == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
                         or energieprestatie.soort.code
-                        == Energieprestatiesoort.voorlopig_energielabel.code  # Een voorloopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
+                        == Energieprestatiesoort.voorlopig_energielabel.code  # Een voorlopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
                     )
                     and (
                         energieprestatie.begindatum
-                        < datetime.date.today()
+                        < self.peildatum
                         < energieprestatie.einddatum
                         and energieprestatie.status.code
                         == Energieprestatiestatus.definitief.code
@@ -107,7 +108,7 @@ class Energieprestatie2024(Stelselgroepversie):
                         # Check of de registratie niet ouder is dan 10 jaar
                         energieprestatie.registratiedatum
                         > (
-                            (datetime.datetime.now()).astimezone()
+                            datetime.combine(self.peildatum, time.min).astimezone()
                             - relativedelta(years=10)
                         )
                     )
@@ -118,62 +119,95 @@ class Energieprestatie2024(Stelselgroepversie):
         logger.debug("Geen geldige energieprestatie met label gevonden")
         return None
 
-    @staticmethod
     def _bereken_punten_met_label(
+        self,
+        eenheid: EenhedenEenheid,
         energieprestatie: EenhedenEnergieprestatie,
         energieprestatie_soort: str,
         label: str,
         woningtype: str,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
-        energieprestatievergoeding: EenhedenPrijscomponent | None,
     ) -> WoningwaarderingResultatenWoningwaardering:
+        woningwaardering.criterium = (
+            WoningwaarderingResultatenWoningwaarderingCriterium()
+        )
+
         if (
             energieprestatie_soort
             == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
             and energieprestatie.registratiedatum
-            and energieprestatie.registratiedatum
-            >= datetime.datetime(2021, 1, 1).astimezone()
+            and energieprestatie.registratiedatum >= datetime(2021, 1, 1).astimezone()
         ):
-            if energieprestatie.gebruiksoppervlakte_thermische_zone is None:
+            gebruiksoppervlakte_thermische_zone = next(
+                (
+                    float(oppervlakte.waarde)
+                    for oppervlakte in eenheid.oppervlakten or []
+                    if oppervlakte.soort is not None
+                    and oppervlakte.soort.code
+                    == Oppervlaktesoort.gebruiksoppervlakte_thermische_zone.code
+                    and oppervlakte.waarde is not None
+                ),
+                None,
+            )
+
+            if gebruiksoppervlakte_thermische_zone is None:
                 raise TypeError(
                     "voor de berekening van de energieprestatie met een nieuw energielabel dient de gebruiksoppervlakte van de thermische zone bekend te zijn"
                 )
             else:
-                criterium_naam = f"{label} + {energieprestatie.gebruiksoppervlakte_thermische_zone}m2"
+                woningwaardering.criterium.naam = label
+                woningwaardering.criterium.meeteenheid = (
+                    Meeteenheid.vierkante_meter_m2.value
+                )
+                woningwaardering.aantal = gebruiksoppervlakte_thermische_zone
 
-                if energieprestatie.gebruiksoppervlakte_thermische_zone < 25.0:
+                if gebruiksoppervlakte_thermische_zone < 25.0:
                     lookup_key = "oppervlakte_0-25"
 
-                elif (
-                    25.0 <= energieprestatie.gebruiksoppervlakte_thermische_zone < 40.0
-                ):
+                elif 25.0 <= gebruiksoppervlakte_thermische_zone < 40.0:
                     lookup_key = "oppervlakte_25-40"
 
                 else:
                     lookup_key = "oppervlakte_40+"
 
         else:
-            criterium_naam = f"{label} (oud)"
+            woningwaardering.criterium.naam = f"{label} (oud)"
             lookup_key = "oud"
 
         df = Energieprestatie2024.lookup_mapping[lookup_key].pipe(
-            filter_dataframe_op_datum, datum_filter=datetime.date(2024, 1, 1)
+            filter_dataframe_op_datum, datum_filter=date(2024, 1, 1)
         )
 
         waarderings_label: str | None = label
+
+        energieprestatievergoeding = next(
+            (
+                prijscomponent
+                for prijscomponent in eenheid.prijscomponenten or []
+                if prijscomponent.detail_soort is not None
+                and prijscomponent.detail_soort.code
+                == Prijscomponentdetailsoort.energieprestatievergoeding.code
+                and (
+                    prijscomponent.begindatum is None
+                    or prijscomponent.begindatum <= self.peildatum
+                )
+                and (
+                    prijscomponent.einddatum is None
+                    or prijscomponent.einddatum > self.peildatum
+                )
+            ),
+            None,
+        )
 
         if energieprestatievergoeding:
             logger.debug("Energieprestatievergoeding gevonden.")
 
         if energieprestatievergoeding and waarderings_label != Energielabel.b.naam:
             waarderings_label = Energielabel.b.naam
-            criterium_naam += f" > {waarderings_label} ivm EPV"
+            woningwaardering.criterium.naam += f" > {waarderings_label} ivm EPV"
 
         filtered_df = df[(df["Label"] == waarderings_label)].pipe(dataframe_met_een_rij)
 
-        woningwaardering.criterium = (
-            WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
-        )
         woningwaardering.punten = float(filtered_df[woningtype].values[0])
 
         return woningwaardering
@@ -187,7 +221,7 @@ class Energieprestatie2024(Stelselgroepversie):
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
         df = Energieprestatie2024.lookup_mapping["bouwjaar"].pipe(
-            filter_dataframe_op_datum, datum_filter=datetime.date(2024, 1, 1)
+            filter_dataframe_op_datum, datum_filter=date(2024, 1, 1)
         )
         filtered_df = df[
             ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
@@ -217,9 +251,7 @@ class Energieprestatie2024(Stelselgroepversie):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        energieprestatie = Energieprestatie2024._energieprestatie_met_geldig_label(
-            eenheid
-        )
+        energieprestatie = self._energieprestatie_met_geldig_label(eenheid)
 
         if not (
             eenheid.woningtype
@@ -231,25 +263,6 @@ class Energieprestatie2024(Stelselgroepversie):
             )
             return woningwaardering_groep
 
-        energieprestatievergoeding = next(
-            (
-                prijscomponent
-                for prijscomponent in eenheid.prijscomponenten or []
-                if prijscomponent.detail_soort is not None
-                and prijscomponent.detail_soort.code
-                == Prijscomponentdetailsoort.energieprestatievergoeding.code
-                and (
-                    prijscomponent.begindatum is None
-                    or prijscomponent.begindatum <= self.peildatum
-                )
-                and (
-                    prijscomponent.einddatum is None
-                    or prijscomponent.einddatum > self.peildatum
-                )
-            ),
-            None,
-        )
-
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
         if (
@@ -259,13 +272,13 @@ class Energieprestatie2024(Stelselgroepversie):
             and energieprestatie.soort
             and energieprestatie.soort.code
         ):
-            woningwaardering = Energieprestatie2024._bereken_punten_met_label(
+            woningwaardering = self._bereken_punten_met_label(
+                eenheid,
                 energieprestatie,
                 energieprestatie.soort.code,
                 energieprestatie.label.naam,
                 eenheid.woningtype.naam,
                 woningwaardering,
-                energieprestatievergoeding,
             )
 
         elif eenheid.bouwjaar and not energieprestatie:
