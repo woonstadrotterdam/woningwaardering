@@ -31,8 +31,8 @@ from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
-    @staticmethod
     def bereken(
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
