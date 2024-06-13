@@ -1,5 +1,4 @@
 {
-  "id": "23003000050",
   "bouwjaar": 1921,
   "woningtype": {
     "code": "EGW",
@@ -22,8 +21,7 @@
         "naam": "A++++"
       },
       "gebruiksoppervlakte_thermische_zone": 72,
-      "waarde": "1.48",
-      "energieprestatievergoeding": false
+      "waarde": "1.48"
     }
   ]
 }

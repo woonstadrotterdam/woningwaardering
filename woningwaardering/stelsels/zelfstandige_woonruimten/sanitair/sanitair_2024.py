@@ -85,8 +85,8 @@ class Sanitair2024(Stelselgroepversie):
         else:
             return False
 
-    @staticmethod
     def bereken(
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
