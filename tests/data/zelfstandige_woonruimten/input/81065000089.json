@@ -41,11 +41,19 @@
         "code": "B",
         "naam": "B"
       },
-      "waarde": "173.08",
-      "gebruiksoppervlakteThermischeZone": 78.84
+      "waarde": "173.08"
     }
   ],
   "gebruiksoppervlakte": 82,
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "78.84"
+    }
+  ],
   "ruimten": [
     {
       "id": "Space_29475563",

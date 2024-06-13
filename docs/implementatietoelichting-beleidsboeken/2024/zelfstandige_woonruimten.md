@@ -103,13 +103,13 @@ _Totaal : 26,73 m² Afronding op hele m² : 27 m²._
 a. bijkeukens  
 b. bergingen  
 c. wasruimte  
-d. schuren  
+d. schuren*  
 e. garages  
 f. zolderbergingen  
 g. kelders  
-~~h. parkeerplaats (zie paragraaf 4.9.6)~~
+h. parkeerplaats (zie paragraaf 4.9.6)
 
-> parkeerplaats wordt geïmplementeerd bij het implementeren van 4.9 (privé-buitenruimten).
+> *In de VERA-referentiedata wordt de code SCH gebruikt als detailsoortcode voor schuur. In de Aedes ILS (zie dit isssue: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/92) bestaat echter geen definitie voor schuur. Door sommige op de Aedes ILS gebaseerde implementaties wordt de code SCH al gebruikt voor schacht. Hierdoor ontstaat een conflict bij het waarderen van overige ruimtes omdat een schacht niet als overige ruimte mag worden gewaardeerd. Om dit probleem te ondervangen is het wel mogelijk om op basis van `ruimtedetailsoort.naam` schuur als overige ruimte te waarderen. Echter is het aanbevolen om een schuur aan te geven als een berging in het input-model. Zie ook: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/116.
 
 Deze ruimten tellen alleen mee als de oppervlakte van een ruimte afzonderlijk gelijk is aan of groter dan twee vierkante meter, ~~voor zover de plafondhoogte ten minste 1,50 meter is boven de vloer.~~  
 
@@ -272,7 +272,7 @@ Aangezien de nieuwe bepalingsmethode tot structurele onderwaardering van de ener
 - \> 25 m2 en < 40 m2
 - \> 40 m2
 
-> De hier gehanteerde woninggrootte wordt op een andere wijze bepaald dan de gebruiksoppervlakte. Hiervoor is het `EenhedenEnergieprestatie` model uitgebreid met het attribuut `gebruiksoppervlakteThermischeZone` of `gebruiksoppervlakte_thermische_zone` voor de Python representatie. In dit attribuut dient de gebruiksoppervlakte van de thermische zone die gebruikt is bij de registratie van de energieprestatie opgegeven worden.
+> De hier gehanteerde woninggrootte wordt op een andere wijze bepaald dan de gebruiksoppervlakte. Hiervoor dient de gebruiksoppervlakte van de thermische zone die gebruikt is bij de registratie van de energieprestatie opgegeven te worden als EenhedenOppervlakte met code `GTZ` in de `oppervlakten` van een eenheid.
 
 Voor woningen met een oppervlakte  >= 40 m2 geldt het volgende puntenaantal:
 

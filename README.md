@@ -8,9 +8,11 @@
 
 ⌛️ **Work in Progress**
 
-Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk zal zijn om het puntensysteeem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij zo veel mogelijk uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) van de corporatiesector. Het doel is om tot een completere woningwaarderingsstelsel-berekening te komen dan die nu beschikbaar zijn via tools zoals bijvoorbeeld die van de [huurcommissie](https://www.huurcommissie.nl/huurders/sociale-huurwoning/maximale-huurprijs-berekenen).
+![](https://progress-bar.dev/70/?title=zelfstandige_woonruimten&width=120)
 
-Voor vragen kunt u contact opnemen met de Product Owner van Team Microservices [Wouter Kolbeek](mailto:wouter.kolbeek@woonstadrotterdam.nl) of één van de maintainers van deze repo.
+Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk zal zijn om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij zo veel mogelijk uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) van de corporatiesector. Het doel is om tot een completere woningwaarderingsstelsel-berekening te komen dan die nu beschikbaar zijn via tools zoals bijvoorbeeld die van de [huurcommissie](https://www.huurcommissie.nl/huurders/sociale-huurwoning/maximale-huurprijs-berekenen).
+
+Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team Microservices [Tomer Gabay](mailto:tomer.gabay@woonstadrotterdam.nl) of één van de andere maintainers van deze repo.
 
 ## Inhoudsopgave
 
@@ -362,3 +364,7 @@ Om parkeerzoorzieningen correct te kunnen waarderen als onderdeel van Privé-bui
 - `GPS`: Gemeenschappelijke parkeerruimte specifieke plek
 
 Zie ook https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110.
+
+### Oppervlakten
+
+In de VERA VHE modellen bestaat een `oppervlakten` attribuut op `EenhedenEenheid`. Dit attribuut is nog niet beschikbaar in de door ons gebruikte VERA BVG modellen. Dit attribuut en de bijbehorende class `EenhedenOppervlakte` is toegevoegd in afwachting van een update in de VERA standaard. Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/61.
