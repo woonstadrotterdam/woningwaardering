@@ -1,3 +1,9 @@
+![](https://img.shields.io/pypi/pyversions/woningwaardering)
+![Build Status](https://github.com/woonstadrotterdam/woningwaardering/actions/workflows/cicd.yml/badge.svg)
+[![Version](https://img.shields.io/pypi/v/woningwaardering)](https://pypi.org/project/woningwaardering/)
+![](https://img.shields.io/github/license/woonstadrotterdam/woningwaardering)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
 # Woningwaardering
 
 ⌛️ **Work in Progress**
@@ -71,7 +77,7 @@ Voor de duidelijkheid: Onderstaand voorbeeld is niet gebaseerd op een echte vera
 Het voorbeeld laat zien hoe de berekening van de `OppervlakteVanVertrekken` afhangt van de peildatum.
 Op basis van de peildatum wordt voor de bovenste beleidsregel gekozen omdat die berekening geldig is voor de opgegeven peildatum.
 
-![Voorbeeld modulaire oppervlakte van vertrekken](./docs/afbeeldingen/oppervlakte_van_vertrekken.png)
+![Voorbeeld modulaire oppervlakte van vertrekken](https://github.com/woonstadrotterdam/woningwaardering/blob/main/docs/afbeeldingen/oppervlakte_van_vertrekken.png?raw=true)
 
 ### Lookup tabellen
 
@@ -82,7 +88,7 @@ Voor VSCode-gebruikers is de extensie Excel Viewer van GrapeCity aan te raden.
 Met behulp van deze extensie kunnen CSV-bestanden als tabel weergegeven worden in VSCode.
 Hieronder is een voorbeeldtabel te zien zoals deze met Excel Viewer in VSCode wordt weergegeven.
 
-![Excel Viewer](./docs/afbeeldingen/excel_viewer.png)
+![Excel Viewer](https://github.com/woonstadrotterdam/woningwaardering/blob/main/docs/afbeeldingen/excel_viewer.png?raw=true)
 
 Door gebruik van CSV-bestanden, wordt het selecteren van de juiste rij of waarde door middel van een peildatum vergemakkelijkt.
 In de `woningwaardering`-package wordt een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele uit een tabel te selecteren.
