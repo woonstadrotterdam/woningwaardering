@@ -52,7 +52,11 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         minimum_punten = self._bereken_minimum_punten(
             eenheid.bouwjaar, woningwaardering_resultaat
         )
+
         woz_waarde = self.bepaal_woz_waarde(eenheid)
+
+        if woz_waarde is None:
+            raise ValueError("Geen WOZ-waarde gevonden")
 
         woningwaardering_groep.woningwaarderingen = []
         woningwaardering_groep.woningwaarderingen.append(
@@ -63,8 +67,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 punten=woz_waarde / 14146.0,
             )
         )
-        if woningwaardering_resultaat is None:
-            raise ValueError("woningwaardering_resultaat is None")
 
         oppervlakte_stelsel_groepen = [
             groep
@@ -83,14 +85,11 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             OppervlakteVanOverigeRuimten(peildatum=self.peildatum).bereken(eenheid),
         ]
 
-        waarderingen = chain.from_iterable(
-            groep.woningwaarderingen or [] for groep in oppervlakte_stelsel_groepen
-        )
-
         oppervlakte = sum(
-            waardering.aantal
-            for waardering in waarderingen
-            if waardering.aantal is not None
+            waardering.aantal or 0
+            for waardering in chain.from_iterable(
+                groep.woningwaarderingen or [] for groep in oppervlakte_stelsel_groepen
+            )
         )
 
         if oppervlakte == 0:
@@ -173,7 +172,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         return minimum_punten
 
-    def bepaal_woz_waarde(self, eenheid: EenhedenEenheid) -> float:
+    def bepaal_woz_waarde(self, eenheid: EenhedenEenheid) -> float | None:
         woz_waardepeildatum = date(self.peildatum.year - 1, 1, 1)
 
         woz_eenheid = next(
@@ -185,14 +184,8 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             None,
         )
 
-        if woz_eenheid is None or woz_eenheid.vastgestelde_waarde is None:
-            raise ValueError(
-                f"Geen WOZ-waarde gevonden met waardepeildatum: {woz_waardepeildatum}"
-            )
-
-        logger.info(
-            f"WOZ-waarde gevonden met waardepeildatum {woz_waardepeildatum}: {woz_eenheid.vastgestelde_waarde}"
-        )
+        if woz_eenheid is None:
+            return None
 
         return woz_eenheid.vastgestelde_waarde
 
