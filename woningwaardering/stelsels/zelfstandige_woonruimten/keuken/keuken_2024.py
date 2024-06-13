@@ -24,8 +24,8 @@ from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetails
 
 
 class Keuken2024(Stelselgroepversie):
-    @staticmethod
     def bereken(
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
@@ -129,13 +129,14 @@ class Keuken2024(Stelselgroepversie):
 if __name__ == "__main__":
     logger.enable("woningwaardering")
 
+    keuken2024 = Keuken2024()
     file = open(
         "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_zonder_lengte.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = Keuken2024.bereken(eenheid)
+    woningwaardering_resultaat = keuken2024.bereken(eenheid)
 
     print(
         woningwaardering_resultaat.model_dump_json(
