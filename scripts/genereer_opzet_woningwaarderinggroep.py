@@ -4,6 +4,7 @@ import string
 import inquirer  # noqa
 from jinja2 import Environment, PackageLoader, select_autoescape
 from loguru import logger
+from more_itertools import first
 
 from woningwaardering.stelsels.config.config import (
     Stelselconfig,
@@ -158,7 +159,7 @@ stelselgroepversie_class_naam = f"{stelselgroep_class_naam}{begindatum.year}"
 stelselgroepconfig.versies = stelselgroepconfig.versies or []
 
 stelselgroepversieconfig = (
-    next(
+    first(
         (
             versie
             for versie in stelselgroepconfig.versies

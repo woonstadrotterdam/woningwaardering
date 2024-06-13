@@ -3,6 +3,7 @@ from importlib.resources import files
 from dateutil.relativedelta import relativedelta
 from decimal import Decimal
 from loguru import logger
+from more_itertools import first
 import pandas as pd
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
@@ -138,7 +139,7 @@ class Energieprestatie2024(Stelselgroepversie):
             and energieprestatie.registratiedatum
             and energieprestatie.registratiedatum >= datetime(2021, 1, 1).astimezone()
         ):
-            gebruiksoppervlakte_thermische_zone = next(
+            gebruiksoppervlakte_thermische_zone = first(
                 (
                     float(oppervlakte.waarde)
                     for oppervlakte in eenheid.oppervlakten or []
@@ -180,7 +181,7 @@ class Energieprestatie2024(Stelselgroepversie):
 
         waarderings_label: str | None = label
 
-        energieprestatievergoeding = next(
+        energieprestatievergoeding = first(
             (
                 prijscomponent
                 for prijscomponent in eenheid.prijscomponenten or []
