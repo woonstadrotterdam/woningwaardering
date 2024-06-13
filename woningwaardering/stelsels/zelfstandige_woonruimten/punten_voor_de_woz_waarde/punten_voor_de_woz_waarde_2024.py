@@ -80,29 +80,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             )
         )
 
-        oppervlakte_stelsel_groepen = [
-            groep
-            for groep in (woningwaardering_resultaat.groepen or [])
-            if (
-                groep.criterium_groep is not None
-                and groep.criterium_groep.stelselgroep is not None
-                and groep.criterium_groep.stelselgroep.code
-                in [
-                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
-                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
-                ]
-            )
-        ] or [
-            OppervlakteVanVertrekken(peildatum=self.peildatum).bereken(eenheid),
-            OppervlakteVanOverigeRuimten(peildatum=self.peildatum).bereken(eenheid),
-        ]
-
-        oppervlakte = sum(
-            waardering.aantal or 0
-            for waardering in chain.from_iterable(
-                groep.woningwaarderingen or [] for groep in oppervlakte_stelsel_groepen
-            )
-        )
+        oppervlakte = self.bepaal_oppervlakte(eenheid, woningwaardering_resultaat)
 
         if oppervlakte == 0:
             raise ValueError(
@@ -139,6 +117,42 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         woningwaardering_groep.punten = punten
         return woningwaardering_groep
+
+    def bepaal_oppervlakte(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    ) -> float:
+        oppervlakte_stelsel_groepen = [
+            groep
+            for groep in (woningwaardering_resultaat.groepen or [])
+            if (
+                groep.criterium_groep is not None
+                and groep.criterium_groep.stelselgroep is not None
+                and groep.criterium_groep.stelselgroep.code
+                in [
+                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
+                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
+                ]
+            )
+        ] or [
+            OppervlakteVanVertrekken(peildatum=self.peildatum).bereken(eenheid),
+            OppervlakteVanOverigeRuimten(peildatum=self.peildatum).bereken(eenheid),
+        ]
+
+        oppervlakte = sum(
+            (
+                waardering.aantal
+                for waardering in chain.from_iterable(
+                    groep.woningwaarderingen or []
+                    for groep in oppervlakte_stelsel_groepen
+                )
+                if waardering.aantal is not None
+            ),
+            start=0.0,
+        )
+
+        return oppervlakte
 
     def _bereken_minimum_punten(
         self,
