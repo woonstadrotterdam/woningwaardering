@@ -1,14 +1,16 @@
 from decimal import ROUND_HALF_UP, Decimal
 from datetime import date
+from importlib.resources import files
 from itertools import chain
 
 from loguru import logger
 from more_itertools import first
+import pandas as pd
 
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import filter_dataframe_op_datum, naar_tabel
 
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanVertrekken,
@@ -26,6 +28,10 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
+)
+
+LOOKUP_TABEL_FOLDER = (
+    "stelsels/zelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen"
 )
 
 
@@ -59,13 +65,17 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         if woz_waarde is None:
             raise ValueError("Geen WOZ-waarde gevonden")
 
+        df_woz_factor = pd.read_csv(
+            files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/woz_factor.csv")
+        ).pipe(filter_dataframe_op_datum, self.peildatum)
+
         woningwaardering_groep.woningwaarderingen = []
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel I"
                 ),
-                punten=woz_waarde / 14146.0,
+                punten=woz_waarde / df_woz_factor["Onderdeel I"],
             )
         )
 
@@ -103,7 +113,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel II"
                 ),
-                punten=woz_waarde / oppervlakte / 222.0,
+                punten=woz_waarde / oppervlakte / df_woz_factor["Onderdeel II"],
             )
         )
 
