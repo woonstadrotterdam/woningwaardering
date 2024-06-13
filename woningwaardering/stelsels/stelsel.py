@@ -54,13 +54,10 @@ class Stelsel:
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
         resultaat.stelsel = self.stelsel.value
 
-        resultaat.groepen = [
-            stelselgroep_versie.bereken(
-                eenheid=eenheid,
-                woningwaardering_resultaat=resultaat,
-            )
-            for stelselgroep_versie in self.geldige_stelselgroepen
-        ]
+        resultaat.groepen = []
+
+        for stelselgroep_versie in self.geldige_stelselgroepen:
+            resultaat.groepen.append(stelselgroep_versie.bereken(eenheid, resultaat))
 
         # Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij
         # zorgwoningen geldende toeslag) afgerond op hele punten. Bij 0,5 punten of
