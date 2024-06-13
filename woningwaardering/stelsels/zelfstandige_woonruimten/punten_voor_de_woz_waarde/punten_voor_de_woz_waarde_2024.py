@@ -1,4 +1,7 @@
 from decimal import ROUND_HALF_UP, Decimal
+from datetime import date
+
+from loguru import logger
 
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
@@ -17,8 +20,8 @@ from woningwaardering.vera.referentiedata import (
 
 
 class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
-    @staticmethod
     def bereken(
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
@@ -29,6 +32,28 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
                 stelselgroep=Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.value,
             )
+        )
+
+        woz_waardepeildatum = date(self.peildatum.year - 1, 1, 1)
+
+        woz_eenheid = next(
+            (
+                woz_eenheid
+                for woz_eenheid in eenheid.woz_eenheden or []
+                if woz_eenheid.waardepeildatum == woz_waardepeildatum
+            ),
+            None,
+        )
+
+        if woz_eenheid is None or woz_eenheid.vastgestelde_waarde is None:
+            raise ValueError(
+                f"Geen WOZ-waarde gevonden met waardepeildatum: {woz_waardepeildatum}"
+            )
+
+        woz_waarde = woz_eenheid.vastgestelde_waarde
+
+        logger.info(
+            f"WOZ-waarde gevonden met waardepeildatum {woz_waardepeildatum}: {woz_waarde}"
         )
 
         woningwaardering_groep.woningwaarderingen = []

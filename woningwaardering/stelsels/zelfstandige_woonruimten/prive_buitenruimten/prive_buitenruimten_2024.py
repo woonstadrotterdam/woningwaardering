@@ -41,8 +41,8 @@ class PriveBuitenruimten2024(Stelselgroepversie):
         )
     ).pipe(filter_dataframe_op_datum, datetime.date(2024, 1, 1))
 
+    @staticmethod
     def bereken(
-        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
