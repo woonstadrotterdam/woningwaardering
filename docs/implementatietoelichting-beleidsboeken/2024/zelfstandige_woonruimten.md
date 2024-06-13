@@ -272,7 +272,7 @@ Aangezien de nieuwe bepalingsmethode tot structurele onderwaardering van de ener
 - \> 25 m2 en < 40 m2
 - \> 40 m2
 
-> De hier gehanteerde woninggrootte wordt op een andere wijze bepaald dan de gebruiksoppervlakte. Hiervoor is het `EenhedenEnergieprestatie` model uitgebreid met het attribuut `gebruiksoppervlakteThermischeZone` of `gebruiksoppervlakte_thermische_zone` voor de Python representatie. In dit attribuut dient de gebruiksoppervlakte van de thermische zone die gebruikt is bij de registratie van de energieprestatie opgegeven worden.
+> De hier gehanteerde woninggrootte wordt op een andere wijze bepaald dan de gebruiksoppervlakte. Hiervoor dient de gebruiksoppervlakte van de thermische zone die gebruikt is bij de registratie van de energieprestatie opgegeven te worden als EenhedenOppervlakte met code `GTZ` in de `oppervlakten` van een eenheid.
 
 Voor woningen met een oppervlakte  >= 40 m2 geldt het volgende puntenaantal:
 
