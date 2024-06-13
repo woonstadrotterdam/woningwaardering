@@ -3275,6 +3275,9 @@ class EenhedenEenheid(BaseModel):
     """
     Het type woning: eengezinswoning of meergezinswoning. Referentiedatasoort WONINGTYPE.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/64
+    renovatiejaar: Optional[Referentiedata] = None
+    "Het jaar waarin de renovatie van de woning is afgerond."
 
 
 class WoningwaarderingResultatenWoningwaarderingResultaatbericht(
