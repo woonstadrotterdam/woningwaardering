@@ -3550,3 +3550,17 @@ class EenhedenOppervlakte(BaseModel):
     """
     De waarde van de oppervlakte in vierkante meters (m2)
     """
+
+
+class EenhedenRenovatie(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    omschrijving: Optional[str] = None
+    """
+    De omschrijving van de renovatie(s) behorend bij de eenheid.
+    """
+    datum: Optional[date] = None
+    """
+    De datum dat het object is gerenoveerd.
+    """
