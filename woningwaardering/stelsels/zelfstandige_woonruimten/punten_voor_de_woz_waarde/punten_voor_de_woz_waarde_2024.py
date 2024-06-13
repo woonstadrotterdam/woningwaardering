@@ -35,8 +35,14 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             )
         )
 
+        if not woningwaardering_resultaat:
+            raise ValueError("Geen woningwaardering resultaat gevonden")
+
+        if not eenheid.bouwjaar:
+            logger.warning(f"Geen bouwjaar gevonden voor eenheid {eenheid.id}")
+
         minimum_punten = self._bereken_minimum_punten(
-            eenheid, woningwaardering_resultaat
+            eenheid.bouwjaar, woningwaardering_resultaat
         )
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
@@ -70,7 +76,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
     def _bereken_minimum_punten(
         self,
-        eenheid: EenhedenEenheid,
+        bouwjaar: int | None,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> float:
         """
@@ -78,6 +84,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         Args:
             eenheid (EenhedenEenheid): De eenheid waarvoor de punten worden berekend.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten
 
         Returns:
             float: De minimum punten voor stelselgroep WOZ-waarde.
@@ -85,32 +92,31 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         minimum_punten = 0
 
-        if 2015 <= eenheid.bouwjaar <= 2019:
-            punten_critische_stelselgroepen = (
-                Decimal(
-                    sum(
-                        Decimal(str(groep.punten))
-                        for groep in woningwaardering_resultaat.groepen
-                        if groep.criterium_groep.stelselgroep.code
-                        in [
-                            Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
-                            Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
-                            Woningwaarderingstelselgroep.verwarming.code,
-                            Woningwaarderingstelselgroep.energieprestatie.code,
-                            Woningwaarderingstelselgroep.keuken.code,
-                            Woningwaarderingstelselgroep.sanitair.code,
-                            Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,
-                            Woningwaarderingstelselgroep.prive_buitenruimten.code,
-                            Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
-                        ]
-                        if groep.punten is not None
-                    )
-                ).quantize(Decimal("1"), ROUND_HALF_UP)
-                * Decimal("1")
-            )
+        if bouwjaar:
+            if 2015 <= bouwjaar <= 2019:
+                punten_critische_stelselgroepen = sum(
+                    groep.punten or 0
+                    for groep in woningwaardering_resultaat.groepen or []
+                    if groep.punten
+                    and groep.criterium_groep
+                    and groep.criterium_groep.stelselgroep
+                    and groep.criterium_groep.stelselgroep.code
+                    and groep.criterium_groep.stelselgroep.code
+                    in [
+                        Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
+                        Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
+                        Woningwaarderingstelselgroep.verwarming.code,
+                        Woningwaarderingstelselgroep.energieprestatie.code,
+                        Woningwaarderingstelselgroep.keuken.code,
+                        Woningwaarderingstelselgroep.sanitair.code,
+                        Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,
+                        Woningwaarderingstelselgroep.prive_buitenruimten.code,
+                        Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
+                    ]
+                )
 
-            if punten_critische_stelselgroepen >= 110:
-                minimum_punten = 40
+                if punten_critische_stelselgroepen >= 110:
+                    minimum_punten = 40
 
         return minimum_punten
 
