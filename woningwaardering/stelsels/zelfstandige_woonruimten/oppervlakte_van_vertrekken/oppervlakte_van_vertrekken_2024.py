@@ -26,8 +26,8 @@ from woningwaardering.vera.utils import badruimte_met_toilet
 
 
 class OppervlakteVanVertrekken2024(Stelselgroepversie):
-    @staticmethod
     def bereken(
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
@@ -88,13 +88,14 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
 if __name__ == "__main__":
     logger.enable("woningwaardering")
 
+    oppervlakteVanVertrekken2024 = OppervlakteVanVertrekken2024()
     file = open(
         "tests/data/zelfstandige_woonruimten/input/12006000004.json",
         "r+",
     )
     eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = OppervlakteVanVertrekken2024.bereken(eenheid)
+    woningwaardering_resultaat = oppervlakteVanVertrekken2024.bereken(eenheid)
 
     print(
         woningwaardering_resultaat.model_dump_json(
