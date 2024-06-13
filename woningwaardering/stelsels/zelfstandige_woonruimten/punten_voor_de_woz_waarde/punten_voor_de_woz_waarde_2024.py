@@ -117,6 +117,9 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
                 if punten_critische_stelselgroepen >= 110:
                     minimum_punten = 40
+                    logger.info(
+                        f"Minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    )
 
         return minimum_punten
 
