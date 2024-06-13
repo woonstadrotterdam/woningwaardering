@@ -89,9 +89,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         factor_onderdeel_II = df_woz_factor["Onderdeel II"]
 
-        if 2015 <= eenheid.bouwjaar <= 2019:
-            factor_onderdeel_II = df_woz_factor["Onderdeel II Nieuwbouw/COROP"]
-
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
