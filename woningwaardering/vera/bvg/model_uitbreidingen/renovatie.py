@@ -9,7 +9,7 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 
-class _Renovatie(BaseModel):
+class EenhedenRenovatie(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
