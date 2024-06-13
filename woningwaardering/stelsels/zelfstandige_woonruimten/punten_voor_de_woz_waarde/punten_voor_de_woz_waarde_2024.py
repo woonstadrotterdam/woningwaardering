@@ -1,4 +1,5 @@
 from decimal import ROUND_HALF_UP, Decimal
+from datetime import date
 
 from loguru import logger
 
@@ -37,13 +38,15 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         minimum_punten = self._bereken_minimum_punten(
             eenheid, woningwaardering_resultaat
         )
+        woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         woningwaardering_groep.woningwaarderingen = []
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="NotImplemented"
-                )
+                    naam="Onderdeel I"
+                ),
+                punten=woz_waarde / 14146.0,
             )
         )
 
@@ -110,6 +113,29 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 minimum_punten = 40
 
         return minimum_punten
+
+    def bepaal_woz_waarde(self, eenheid: EenhedenEenheid) -> float:
+        woz_waardepeildatum = date(self.peildatum.year - 1, 1, 1)
+
+        woz_eenheid = next(
+            (
+                woz_eenheid
+                for woz_eenheid in eenheid.woz_eenheden or []
+                if woz_eenheid.waardepeildatum == woz_waardepeildatum
+            ),
+            None,
+        )
+
+        if woz_eenheid is None or woz_eenheid.vastgestelde_waarde is None:
+            raise ValueError(
+                f"Geen WOZ-waarde gevonden met waardepeildatum: {woz_waardepeildatum}"
+            )
+
+        logger.info(
+            f"WOZ-waarde gevonden met waardepeildatum {woz_waardepeildatum}: {woz_eenheid.vastgestelde_waarde}"
+        )
+
+        return woz_eenheid.vastgestelde_waarde
 
 
 if __name__ == "__main__":

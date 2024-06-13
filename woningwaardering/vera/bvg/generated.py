@@ -952,13 +952,6 @@ class EenhedenEnergieprestatie(BaseModel):
     """
     De door een adviseur gemeten waarde die hoort bij de energieprestatie. De energieprestatiesoort bepaalt wat deze waarde representeert. Bijvoorbeeld: Energie-index of EP2 (het energielabel  is daarvan dan afgeleid), compactheid of opgewekte duurzame energie. Bij een voorlopig energielabel is geen waarde van toepassing.
     """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/58
-    gebruiksoppervlakte_thermische_zone: Optional[float] = Field(
-        default=None, alias="gebruiksoppervlakteThermischeZone"
-    )
-    """
-    Gebruiksoppervlakte van de thermische zone, afgebakend volgens NTA 8800
-    """
 
 
 class EenhedenGemeente(BaseModel):
@@ -3275,9 +3268,13 @@ class EenhedenEenheid(BaseModel):
     """
     Het type woning: eengezinswoning of meergezinswoning. Referentiedatasoort WONINGTYPE.
     """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/64
-    renovatiejaar: Optional[Referentiedata] = None
-    "Het jaar waarin de renovatie van de woning is afgerond."
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/61
+    oppervlakten: Optional[list[EenhedenOppervlakte]] = Field(
+        default=None, alias="verbondenRuimten"
+    )
+    """
+    De verschillende oppervlakten die gedefinieerd zijn (bijv. vanuit de NEN) voor een eenheid. Bijv. het gebruiksoppervlak (GO) of functioneel nuttig oppervlak (FNO).
+    """
 
 
 class WoningwaarderingResultatenWoningwaarderingResultaatbericht(
@@ -3520,3 +3517,50 @@ class BouwkundigElementenBouwkundigElementbericht(
     model_config = ConfigDict(
         populate_by_name=True,
     )
+
+
+class EenhedenOppervlakte(BaseModel):
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/61
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    id: Optional[str] = None
+    """
+    De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
+    """
+    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    """
+    De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
+    """
+    id_gegevensbeheerder: Optional[str] = Field(
+        default=None, alias="idGegevensbeheerder"
+    )
+    """
+    De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
+    """
+    code: Optional[str] = None
+    """
+    De unieke code (Bijvoorbeeld om te tonen of te zoeken)
+    """
+    soort: Optional[Referentiedata] = None
+    """
+    Het soort oppervlakte. Bijv. GO (Gebruiksoppervlakte) of BVO (Brutovloeroppervlak) Referentiedatasoort OPPERVLAKTESOORT.
+    """
+    waarde: Optional[str] = None
+    """
+    De waarde van de oppervlakte in vierkante meters (m2)
+    """
+
+
+class EenhedenRenovatie(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    omschrijving: Optional[str] = None
+    """
+    De omschrijving van de renovatie(s) behorend bij de eenheid.
+    """
+    datum: Optional[date] = None
+    """
+    De datum dat het object is gerenoveerd.
+    """

@@ -1,8 +1,10 @@
 from typing import Optional
-
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.bvg.model_uitbreidingen.eenheden_oppervlakte import (
+    _EenhedenOppervlakte as EenhedenOppervlakte,
+)
 
 
 class _EenhedenEenheid(BaseModel):
@@ -16,6 +18,10 @@ class _EenhedenEenheid(BaseModel):
     """
     Het type woning: eengezinswoning of meergezinswoning. Referentiedatasoort WONINGTYPE.
     """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/64
-    renovatiejaar: Optional[Referentiedata] = None
-    "Het jaar waarin de renovatie van de woning is afgerond."
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/61
+    oppervlakten: Optional[list[EenhedenOppervlakte]] = Field(
+        default=None, alias="verbondenRuimten"
+    )
+    """
+    De verschillende oppervlakten die gedefinieerd zijn (bijv. vanuit de NEN) voor een eenheid. Bijv. het gebruiksoppervlak (GO) of functioneel nuttig oppervlak (FNO).
+    """
