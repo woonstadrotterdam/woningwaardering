@@ -63,7 +63,10 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
-            raise ValueError("Geen WOZ-waarde gevonden")
+            woz_waarde = 0
+            logger.warning("Geen WOZ-waarde gevonden")
+
+        woz_waarde = self.minimum_woz_waarde(woz_waarde)
 
         df_woz_factor = pd.read_csv(
             files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/woz_factor.csv")
@@ -71,12 +74,14 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         woningwaardering_groep.woningwaarderingen = []
 
+        factor_onderdeel_I = df_woz_factor["Onderdeel I"].item()
+
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel I"
                 ),
-                punten=woz_waarde / df_woz_factor["Onderdeel I"],
+                punten=woz_waarde / factor_onderdeel_I,
             )
         )
 
@@ -87,7 +92,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 f"Kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is"
             )
 
-        factor_onderdeel_II = df_woz_factor["Onderdeel II"]
+        factor_onderdeel_II = df_woz_factor["Onderdeel II"].astype(float).item()
 
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
@@ -114,6 +119,22 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         woningwaardering_groep.punten = punten
         return woningwaardering_groep
+
+    def minimum_woz_waarde(self, woz_waarde: float) -> float:
+        df_minimum_woz_waarde = pd.read_csv(
+            files("woningwaardering").joinpath(
+                f"{LOOKUP_TABEL_FOLDER}/minimum_woz_waarde.csv"
+            )
+        ).pipe(filter_dataframe_op_datum, self.peildatum)
+
+        minimum_woz_waarde = df_minimum_woz_waarde["Minimumwaarde"].astype(float).item()
+
+        if woz_waarde < minimum_woz_waarde:
+            logger.info(
+                f"WOZ-waarde {woz_waarde} is kleiner dan minimum {minimum_woz_waarde}, minimum wordt gebruikt"
+            )
+            woz_waarde = minimum_woz_waarde
+        return woz_waarde
 
     def bepaal_oppervlakte(
         self,
