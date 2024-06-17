@@ -6,20 +6,15 @@ from itertools import chain
 import pandas as pd
 from loguru import logger
 
+from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import (
     energieprestatie_met_geldig_label,
     filter_dataframe_op_datum,
     naar_tabel,
 )
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    Energieprestatie,
-    Keuken,
-    OppervlakteVanOverigeRuimten,
-    OppervlakteVanVertrekken,
-    PriveBuitenruimten,
-    Sanitair,
-    Verwarming,
+from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
+    PuntenVoorDeWozWaarde,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -347,14 +342,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         self, eenheid: EenhedenEenheid
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """
-        Berekent de woningwaardering resultaten voor de eenheid voor de stelselgroepen:
-            - Oppervlakte van vertrekken
-            - Oppervlakte van overige ruimten
-            - Energieprestatie
-            - Keuken
-            - Sanitair
-            - Prive buitenruimten
-            - Verwarming
+        Berekent de woningwaardering resultaten voor de eenheid voor alle stelselgroepen behalve stelselgroep WOZ-waarde.
 
         Args:
             eenheid (EenhedenEenheid): de eenheid waarvoor de woningwaardering wordt berekend.
@@ -370,20 +358,22 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             Woningwaarderingstelsel.zelfstandige_woonruimten.value
         )
         woningwaardering_resultaat.groepen = []
-        for steleselgroep in [
-            OppervlakteVanVertrekken,
-            OppervlakteVanOverigeRuimten,
-            Energieprestatie,
-            Keuken,
-            Sanitair,
-            PriveBuitenruimten,
-            Verwarming,
-        ]:
-            groep = steleselgroep(peildatum=self.peildatum).bereken(
+
+        geldige_stelselgroepen = Stelsel.select_geldige_stelselgroepen(
+            self.peildatum, Woningwaarderingstelsel.zelfstandige_woonruimten
+        )
+
+        woz_stelselgroep = PuntenVoorDeWozWaarde().stelselgroep
+
+        for stelselgroep in geldige_stelselgroepen:
+            if stelselgroep.stelselgroep == woz_stelselgroep:
+                continue
+
+            woningwaardering_groep = stelselgroep.bereken(
                 eenheid, woningwaardering_resultaat
             )
-            woningwaardering_resultaat.groepen.append(groep)
-
+            woningwaardering_resultaat.groepen.append(woningwaardering_groep)
+        print(woningwaardering_resultaat)
         return woningwaardering_resultaat
 
     def hoogniveau_renovatie(self, eenheid: EenhedenEenheid) -> bool:
