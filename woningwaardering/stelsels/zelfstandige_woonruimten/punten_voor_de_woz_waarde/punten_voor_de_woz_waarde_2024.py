@@ -320,9 +320,11 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         bouwjaar = eenheid.bouwjaar
 
-        if (bouwjaar and 2015 <= bouwjaar <= 2019) or self.hoogniveau_renovatie(
-            eenheid
-        ):
+        hoogniveau_renovatie = self.hoogniveau_renovatie(eenheid)
+        if hoogniveau_renovatie:
+            logger.debug("Hoogniveau renovatie geconstateerd.")
+
+        if (bouwjaar and 2015 <= bouwjaar <= 2019) or hoogniveau_renovatie:
             punten_critische_stelselgroepen = sum(
                 groep.punten or 0
                 for groep in woningwaardering_resultaat.groepen or []
@@ -489,7 +491,7 @@ if __name__ == "__main__":
 
     woz = PuntenVoorDeWozWaarde2024()
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/punten_voor_de_woz_waade/input/nieuwbouw.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/punten_voor_de_woz_waade/input/hoogniveau_renovatie_waarde.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
