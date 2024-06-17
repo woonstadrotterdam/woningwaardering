@@ -297,7 +297,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                     Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
                 ]
             )
-                print(punten_critische_stelselgroepen)
+            print(punten_critische_stelselgroepen)
             if punten_critische_stelselgroepen >= 110:
                 minimum_punten = 40
                 logger.info(
