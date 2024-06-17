@@ -109,7 +109,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             )
         )
 
-        punten = self._tel_punten(woningwaardering_groep)
+        punten = self._som_punten(woningwaardering_groep)
 
         minimum_punten = self._bereken_minimum_punten(
             eenheid.bouwjaar, woningwaardering_resultaat
@@ -119,21 +119,21 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"Nieuwbouw min. {minimum_punten} punten"
+                        naam=f"Nieuwbouw: minimum {minimum_punten} punten"
                     ),
                     punten=minimum_punten - punten,
                 )
             )
-            punten = self._tel_punten(woningwaardering_groep)
+            punten = self._som_punten(woningwaardering_groep)
 
         logger.info(
-            f"Stelgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam} krijgt {punten} punten"
+            f"Stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam} krijgt {punten} punten"
         )
 
         woningwaardering_groep.punten = punten
         return woningwaardering_groep
 
-    def _tel_punten(
+    def _som_punten(
         self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
     ) -> float:
         return float(
