@@ -4,7 +4,6 @@ from importlib.resources import files
 from itertools import chain
 
 from loguru import logger
-from more_itertools import first
 import pandas as pd
 
 
@@ -224,16 +223,19 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
     def bepaal_woz_waarde(self, eenheid: EenhedenEenheid) -> float | None:
         woz_waardepeildatum = date(self.peildatum.year - 1, 1, 1)
 
-        woz_waarde: float | None = first(
+        woz_eenheid = next(
             (
-                woz_eenheid.vastgestelde_waarde
+                woz_eenheid
                 for woz_eenheid in eenheid.woz_eenheden or []
                 if woz_eenheid.waardepeildatum == woz_waardepeildatum
             ),
             None,
         )
 
-        return woz_waarde
+        if woz_eenheid is None:
+            return None
+
+        return woz_eenheid.vastgestelde_waarde
 
 
 if __name__ == "__main__":

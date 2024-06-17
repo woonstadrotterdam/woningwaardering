@@ -2,7 +2,6 @@ from decimal import Decimal
 from typing import List
 
 from loguru import logger
-from more_itertools import first
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.vera.bvg.generated import (
@@ -58,7 +57,7 @@ class Sanitair2024(Stelselgroepversie):
             if len(elementdetailsoort) > 1:
                 naam += " in zelfde ruimte"
 
-            woningwaardering = first(
+            woningwaardering = next(
                 (
                     woningwaardering
                     for woningwaardering in woningwaarderingen
