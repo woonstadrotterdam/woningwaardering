@@ -3275,6 +3275,11 @@ class EenhedenEenheid(BaseModel):
     """
     De verschillende oppervlakten die gedefinieerd zijn (bijv. vanuit de NEN) voor een eenheid. Bijv. het gebruiksoppervlak (GO) of functioneel nuttig oppervlak (FNO).
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/64
+    renovatie: Optional[EenhedenRenovatie] = None
+    """
+    De details van de laatste renovatie van de eenheid
+    """
 
 
 class WoningwaarderingResultatenWoningwaarderingResultaatbericht(
