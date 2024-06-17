@@ -216,6 +216,16 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
     def _som_woz_punten(
         self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
     ) -> float:
+        """
+        Berekent de som van de punten voor de stelselgroep WOZ-waarde.
+
+        Args:
+            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): De woningwaardering groep voor de stelselgroep WOZ-waarde.
+
+        Returns:
+            float: De som van de punten voor de stelselgroep WOZ-waarde.
+        """
+
         return float(
             sum(
                 Decimal(str(woningwaardering.punten))
@@ -225,6 +235,15 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         )
 
     def minimum_woz_waarde(self, woz_waarde: float) -> float:
+        """
+        Bepaalt de minimum WOZ-waarde.
+
+        Args:
+            woz_waarde (float): De WOZ-waarde.
+
+        Returns:
+            float: De minimum WOZ-waarde.
+        """
         df_minimum_woz_waarde = pd.read_csv(
             files("woningwaardering").joinpath(
                 f"{LOOKUP_TABEL_FOLDER}/minimum_woz_waarde.csv"
@@ -244,6 +263,15 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         self,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> float:
+        """
+        Geeft de totale oppervlakte van de stelselgroepen oppervlakte van vertrekken en oppervlakte van overige ruimten.
+
+        Args:
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten object.
+
+        Returns:
+            float: De totale oppervlakte van de stelselgroepen oppervlakte van vertrekken en oppervlakte van overige ruimten.
+        """
         oppervlakte_stelsel_groepen = [
             groep
             for groep in (woningwaardering_resultaat.groepen or [])
@@ -325,6 +353,15 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         return minimum_punten
 
     def bepaal_woz_waarde(self, eenheid: EenhedenEenheid) -> float | None:
+        """
+        bepaalt de WOZ-waarde voor de eenheid.
+
+        Args:
+            eenheid (EenhedenEenheid): de eenheid waarvoor de WOZ-waarde wordt bepaald.
+
+        Returns:
+            float | None: de WOZ-waarde.
+        """
         woz_waardepeildatum = date(self.peildatum.year - 1, 1, 1)
 
         woz_waarde = next(
@@ -373,7 +410,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 eenheid, woningwaardering_resultaat
             )
             woningwaardering_resultaat.groepen.append(woningwaardering_groep)
-        print(woningwaardering_resultaat)
+
         return woningwaardering_resultaat
 
     def hoogniveau_renovatie(self, eenheid: EenhedenEenheid) -> bool:
