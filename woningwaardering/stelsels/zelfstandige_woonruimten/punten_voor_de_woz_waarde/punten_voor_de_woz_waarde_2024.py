@@ -55,6 +55,8 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             )
         )
 
+        woningwaardering_groep.woningwaarderingen = []
+
         if not woningwaardering_resultaat:
             logger.warning(
                 "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
@@ -78,8 +80,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/woz_factor.csv")
         ).pipe(filter_dataframe_op_datum, self.peildatum)
 
-        woningwaardering_groep.woningwaarderingen = []
-
         factor_onderdeel_I = df_woz_factor["Onderdeel I"].item()
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -91,7 +91,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             )
         )
 
-        oppervlakte = self.bepaal_oppervlakte(eenheid, woningwaardering_resultaat)
+        oppervlakte = self.bepaal_oppervlakte(woningwaardering_resultaat)
 
         if oppervlakte == 0:
             raise ValueError(
@@ -119,9 +119,22 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"Nieuwbouw: minimum {minimum_punten} punten"
+                        naam=f"Nieuwbouw: min. {minimum_punten} punten"
                     ),
                     punten=minimum_punten - punten,
+                )
+            )
+            punten = self._som_punten(woningwaardering_groep)
+
+        correctie_punten = self._cap_punten(float(punten), woningwaardering_resultaat)
+
+        if correctie_punten < 0.0:
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Max. 33% van totaal"
+                    ),
+                    punten=correctie_punten,
                 )
             )
             punten = self._som_punten(woningwaardering_groep)
@@ -132,6 +145,55 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         woningwaardering_groep.punten = punten
         return woningwaardering_groep
+
+    def _cap_punten(
+        self,
+        punten: float,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    ) -> float:
+        """
+        Berekent de capping voor de stelselgroep WOZ-waarde. De punten voor WOZ mag maximaal 33.33% van het totaal aantal punten.
+
+        Args:
+            punten (float): Het aantal punten voor de stelselgroep WOZ-waarde.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
+
+        Returns:
+            float: De correctiepunten voor de stelselgroep WOZ-waarde.
+        """
+
+        totaal_punten = sum(
+            groep.punten or 0
+            for groep in woningwaardering_resultaat.groepen or []
+            if groep.punten
+            and groep.criterium_groep
+            and groep.criterium_groep.stelselgroep
+            and groep.criterium_groep.stelselgroep.code
+            and groep.criterium_groep.stelselgroep.code
+            in [
+                Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
+                Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
+                Woningwaarderingstelselgroep.verwarming.code,
+                Woningwaarderingstelselgroep.energieprestatie.code,
+                Woningwaarderingstelselgroep.keuken.code,
+                Woningwaarderingstelselgroep.sanitair.code,
+                Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,
+                Woningwaarderingstelselgroep.prive_buitenruimten.code,
+                Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
+            ]
+        )
+
+        print(totaal_punten)
+
+        cap_punten = Decimal(str(totaal_punten)) / Decimal("3")
+
+        print(cap_punten)
+
+        if cap_punten >= Decimal(str(punten)):
+            return 0.0
+
+        else:
+            return float(cap_punten - Decimal(str(punten)))
 
     def _som_punten(
         self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
@@ -162,7 +224,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
     def bepaal_oppervlakte(
         self,
-        eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> float:
         oppervlakte_stelsel_groepen = [
@@ -236,7 +297,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                     Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
                 ]
             )
-
+                print(punten_critische_stelselgroepen)
             if punten_critische_stelselgroepen >= 110:
                 minimum_punten = 40
                 logger.info(
@@ -262,6 +323,23 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
     def _bereken_woningwaarderingresultaat(
         self, eenheid: EenhedenEenheid
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
+        """
+        Berekent de woningwaardering resultaten voor de eenheid voor de stelselgroepen:
+            - Oppervlakte van vertrekken
+            - Oppervlakte van overige ruimten
+            - Energieprestatie
+            - Keuken
+            - Sanitair
+            - Prive buitenruimten
+            - Verwarming
+
+        Args:
+            eenheid (EenhedenEenheid): de eenheid waarvoor de woningwaardering wordt berekend.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaarderingResultaat: de woningwaardering resultaten.
+        """
+
         woningwaardering_resultaat = (
             WoningwaarderingResultatenWoningwaarderingResultaat()
         )
