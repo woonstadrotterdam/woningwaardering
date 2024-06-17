@@ -13,13 +13,13 @@ from woningwaardering.stelsels.utils import (
     naar_tabel,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    OppervlakteVanOverigeRuimten,
     Energieprestatie,
     Keuken,
-    Sanitair,
-    PriveBuitenruimten,
-    Verwarming,
+    OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
+    PriveBuitenruimten,
+    Sanitair,
+    Verwarming,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -111,8 +111,8 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         punten = self._som_punten(woningwaardering_groep)
 
-        minimum_punten = self._bereken_minimum_punten(
-            eenheid.bouwjaar, woningwaardering_resultaat
+        minimum_punten = self._bereken_minimum_punten_nieuwbouw(
+            eenheid, woningwaardering_resultaat
         )
 
         if punten < minimum_punten:
@@ -193,16 +193,16 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         return oppervlakte
 
-    def _bereken_minimum_punten(
+    def _bereken_minimum_punten_nieuwbouw(
         self,
-        bouwjaar: int | None,
+        eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> float:
         """
-        Berekent de minimum punten voor steselgroep WOZ-waarde.
+        Berekent de minimum punten voor steselgroep WOZ-waarde bij nieuwbouw of hoogniveau renovatie.
 
         Args:
-            bouwjaar (int | None): Het bouwjaar van de eenheid.
+            eenheid (EenhedenEenheid): De eenheid.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
@@ -211,34 +211,37 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         minimum_punten = 0
 
-        if bouwjaar:
-            if 2015 <= bouwjaar <= 2019:
-                punten_critische_stelselgroepen = sum(
-                    groep.punten or 0
-                    for groep in woningwaardering_resultaat.groepen or []
-                    if groep.punten
-                    and groep.criterium_groep
-                    and groep.criterium_groep.stelselgroep
-                    and groep.criterium_groep.stelselgroep.code
-                    and groep.criterium_groep.stelselgroep.code
-                    in [
-                        Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
-                        Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
-                        Woningwaarderingstelselgroep.verwarming.code,
-                        Woningwaarderingstelselgroep.energieprestatie.code,
-                        Woningwaarderingstelselgroep.keuken.code,
-                        Woningwaarderingstelselgroep.sanitair.code,
-                        Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,
-                        Woningwaarderingstelselgroep.prive_buitenruimten.code,
-                        Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
-                    ]
-                )
+        bouwjaar = eenheid.bouwjaar
 
-                if punten_critische_stelselgroepen >= 110:
-                    minimum_punten = 40
-                    logger.info(
-                        f"Minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
-                    )
+        if (bouwjaar and 2015 <= bouwjaar <= 2019) or self.hoogniveau_renovatie(
+            eenheid
+        ):
+            punten_critische_stelselgroepen = sum(
+                groep.punten or 0
+                for groep in woningwaardering_resultaat.groepen or []
+                if groep.punten
+                and groep.criterium_groep
+                and groep.criterium_groep.stelselgroep
+                and groep.criterium_groep.stelselgroep.code
+                and groep.criterium_groep.stelselgroep.code
+                in [
+                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
+                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
+                    Woningwaarderingstelselgroep.verwarming.code,
+                    Woningwaarderingstelselgroep.energieprestatie.code,
+                    Woningwaarderingstelselgroep.keuken.code,
+                    Woningwaarderingstelselgroep.sanitair.code,
+                    Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,
+                    Woningwaarderingstelselgroep.prive_buitenruimten.code,
+                    Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
+                ]
+            )
+
+            if punten_critische_stelselgroepen >= 110:
+                minimum_punten = 40
+                logger.info(
+                    f"Minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                )
 
         return minimum_punten
 
