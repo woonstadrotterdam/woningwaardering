@@ -24,8 +24,12 @@
   },
   "woz_eenheden": [
     {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 618000
+    },
+    {
       "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 225000.0
+      "vastgesteldeWaarde": 643000
     }
   ],
   "energieprestaties": [
