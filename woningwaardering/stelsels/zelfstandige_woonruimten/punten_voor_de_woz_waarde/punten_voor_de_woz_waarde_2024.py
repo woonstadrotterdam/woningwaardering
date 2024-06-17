@@ -1,23 +1,24 @@
-from decimal import ROUND_HALF_UP, Decimal
 from datetime import date
+from decimal import ROUND_HALF_UP, Decimal
 from importlib.resources import files
 from itertools import chain
 
-from loguru import logger
 import pandas as pd
-
+from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
-
-from woningwaardering.stelsels.utils import filter_dataframe_op_datum, naar_tabel
-
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    OppervlakteVanVertrekken,
-    OppervlakteVanOverigeRuimten,
+from woningwaardering.stelsels.utils import (
+    energieprestatie_met_geldig_label,
+    filter_dataframe_op_datum,
+    naar_tabel,
 )
-
+from woningwaardering.stelsels.zelfstandige_woonruimten import (
+    OppervlakteVanOverigeRuimten,
+    OppervlakteVanVertrekken,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenEnergieprestatie,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -233,6 +234,70 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         )
 
         return woz_waarde
+
+    def hoogniveau_renovatie(self, eenheid: EenhedenEenheid) -> bool:
+        """
+        Bepaalt of de eenheid een hoogniveau renovatie heeft gehad.
+
+        Args:
+            eenheid (EenhedenEenheid): De eenheid.
+
+        Returns:
+            bool: True als de eenheid een hoogniveau renovatie heeft gehad, anders False.
+
+        Raises:
+            ValueError: Bij ontbrekende informatie die tot een onjuiste beoordeling kan leiden.
+        """
+        if not eenheid.renovatie:
+            return False
+
+        if not eenheid.renovatie.datum:
+            raise ValueError("Een renovatie zonder renovatiedatum gevonden")
+
+        # De specifieke berekeningsmethodiek, die geldt voor nieuwbouwwoningen (2015-2019) (...)  is ook van toepassing
+        # indien in de eerdergenoemde kalenderjaren sprake is van hoogniveau renovatie. (...) Hieruit volgt dat sprake is
+        # van hoogniveau renovatie indien voor de woning een energielabel A+++ of A++++ is afgegeven (na 1 januari 2021).
+
+        if eenheid.renovatie.datum < date(2015, 1, 1):
+            return False
+
+        energieprestatie: EenhedenEnergieprestatie | None = (
+            energieprestatie_met_geldig_label(self.peildatum, eenheid)
+        )
+
+        if not energieprestatie:
+            return False
+
+        if not energieprestatie.begindatum:
+            raise ValueError("Een energieprestatie zonder begindatum gevonden")
+
+        if not energieprestatie.label:
+            raise ValueError("Een energieprestatie zonder label gevonden")
+
+        if eenheid.renovatie.datum < date(2020, 1, 1):
+            if (
+                energieprestatie.begindatum >= date(2021, 1, 1)
+                and energieprestatie.label.naam
+                and energieprestatie.label.naam in (["A+++", "A++++"])
+            ):
+                return True
+
+        # Indien sprake is van verbouw in de jaren 2015-2021 dan is sprake van hoogniveau renovatie als het Energie-Index van de woning lager is dan 0,4.
+        if eenheid.renovatie.datum < date(2022, 1, 1):
+            if not energieprestatie.waarde:
+                raise ValueError(
+                    "Een energieprestatie zonder waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021"
+                )
+            try:
+                energieprestatie_waarde = float(energieprestatie.waarde)
+            except ValueError:
+                raise ValueError(
+                    f"Een energieprestatie met een waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021 dat niet kan worden omgezet in een getal: {energieprestatie.waarde}"
+                )
+            if energieprestatie_waarde < 0.4:
+                return True
+
+        return False
 
 
 if __name__ == "__main__":

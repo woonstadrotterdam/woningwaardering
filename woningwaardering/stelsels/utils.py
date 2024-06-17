@@ -1,16 +1,23 @@
-from decimal import Decimal
 import importlib
 import os
-import pandas as pd
-from datetime import date, datetime
+from datetime import date, datetime, time
+from decimal import Decimal
 from typing import Type, TypeVar
 
+import pandas as pd
+from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
 
 from woningwaardering.vera.bvg.generated import (
+    EenhedenEenheid,
+    EenhedenEnergieprestatie,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
+)
+from woningwaardering.vera.referentiedata import (
+    Energieprestatiesoort,
+    Energieprestatiestatus,
 )
 
 T = TypeVar("T")
@@ -265,3 +272,57 @@ def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
         raise ValueError("Dataframe heeft meer dan één rij")
 
     return df
+
+
+def energieprestatie_met_geldig_label(
+    peildatum: date,
+    eenheid: EenhedenEenheid,
+) -> EenhedenEnergieprestatie | None:
+    """
+    Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
+
+    Args:
+        peildatum (date): De peildatum waarop de energieprestatie geldig moet zijn.
+        eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
+
+    Returns:
+        EenhedenEnergieprestatie | None: De eerste geldige energieprestatie met een energielabel en None Wanneer er geen geldige energieprestatie met label is gevonden.
+    """
+    if eenheid.energieprestaties is not None:
+        for energieprestatie in eenheid.energieprestaties:
+            if (
+                energieprestatie.registratiedatum
+                and energieprestatie.soort
+                and energieprestatie.soort.code
+                and energieprestatie.status
+                and energieprestatie.status.code
+                and energieprestatie.begindatum
+                and energieprestatie.einddatum
+                and energieprestatie.label
+                and (
+                    energieprestatie.soort.code
+                    == Energieprestatiesoort.energie_index.code
+                    or energieprestatie.soort.code
+                    == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
+                    or energieprestatie.soort.code
+                    == Energieprestatiesoort.voorlopig_energielabel.code  # Een voorlopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
+                )
+                and (
+                    energieprestatie.begindatum < peildatum < energieprestatie.einddatum
+                    and energieprestatie.status.code
+                    == Energieprestatiestatus.definitief.code
+                )
+                and (
+                    # Check of de registratie niet ouder is dan 10 jaar
+                    energieprestatie.registratiedatum
+                    > (
+                        datetime.combine(peildatum, time.min).astimezone()
+                        - relativedelta(years=10)
+                    )
+                )
+            ):
+                logger.debug("Energieprestatie met geldig label gevonden")
+                return energieprestatie
+
+    logger.debug("Geen geldige energieprestatie met label gevonden")
+    return None
