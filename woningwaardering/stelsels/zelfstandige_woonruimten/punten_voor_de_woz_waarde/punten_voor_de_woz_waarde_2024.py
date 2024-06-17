@@ -1,5 +1,5 @@
 from datetime import date
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 from importlib.resources import files
 from itertools import chain
 
@@ -14,6 +14,11 @@ from woningwaardering.stelsels.utils import (
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanOverigeRuimten,
+    Energieprestatie,
+    Keuken,
+    Sanitair,
+    PriveBuitenruimten,
+    Verwarming,
     OppervlakteVanVertrekken,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -51,14 +56,15 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         )
 
         if not woningwaardering_resultaat:
-            raise ValueError("Geen woningwaardering resultaat gevonden")
+            logger.warning(
+                "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
+            )
+            woningwaardering_resultaat = self._bereken_woningwaarderingresultaat(
+                eenheid
+            )
 
         if not eenheid.bouwjaar:
             raise ValueError(f"Geen bouwjaar gevonden voor eenheid {eenheid.id}")
-
-        minimum_punten = self._bereken_minimum_punten(
-            eenheid.bouwjaar, woningwaardering_resultaat
-        )
 
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
@@ -103,22 +109,40 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             )
         )
 
-        punten = max(
-            minimum_punten,
-            float(
-                Decimal(
-                    sum(
-                        Decimal(str(woningwaardering.punten))
-                        for woningwaardering in woningwaardering_groep.woningwaarderingen
-                        or []
-                        if woningwaardering.punten is not None
-                    )
-                ).quantize(Decimal("1"), ROUND_HALF_UP)
-            ),
+        punten = self._tel_punten(woningwaardering_groep)
+
+        minimum_punten = self._bereken_minimum_punten(
+            eenheid.bouwjaar, woningwaardering_resultaat
+        )
+
+        if punten < minimum_punten:
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam=f"Nieuwbouw min. {minimum_punten} punten"
+                    ),
+                    punten=minimum_punten - punten,
+                )
+            )
+            punten = self._tel_punten(woningwaardering_groep)
+
+        logger.info(
+            f"Stelgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam} krijgt {punten} punten"
         )
 
         woningwaardering_groep.punten = punten
         return woningwaardering_groep
+
+    def _tel_punten(
+        self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
+    ) -> float:
+        return float(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+            )
+        )
 
     def minimum_woz_waarde(self, woz_waarde: float) -> float:
         df_minimum_woz_waarde = pd.read_csv(
@@ -153,9 +177,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                     Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
                 ]
             )
-        ] or [
-            OppervlakteVanVertrekken(peildatum=self.peildatum).bereken(eenheid),
-            OppervlakteVanOverigeRuimten(peildatum=self.peildatum).bereken(eenheid),
         ]
 
         oppervlakte = sum(
@@ -235,6 +256,32 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         return woz_waarde
 
+    def _bereken_woningwaarderingresultaat(
+        self, eenheid: EenhedenEenheid
+    ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
+        woningwaardering_resultaat = (
+            WoningwaarderingResultatenWoningwaarderingResultaat()
+        )
+        woningwaardering_resultaat.stelsel = (
+            Woningwaarderingstelsel.zelfstandige_woonruimten.value
+        )
+        woningwaardering_resultaat.groepen = []
+        for steleselgroep in [
+            OppervlakteVanVertrekken,
+            OppervlakteVanOverigeRuimten,
+            Energieprestatie,
+            Keuken,
+            Sanitair,
+            PriveBuitenruimten,
+            Verwarming,
+        ]:
+            groep = steleselgroep(peildatum=self.peildatum).bereken(
+                eenheid, woningwaardering_resultaat
+            )
+            woningwaardering_resultaat.groepen.append(groep)
+
+        return woningwaardering_resultaat
+
     def hoogniveau_renovatie(self, eenheid: EenhedenEenheid) -> bool:
         """
         Bepaalt of de eenheid een hoogniveau renovatie heeft gehad.
@@ -305,7 +352,7 @@ if __name__ == "__main__":
 
     woz = PuntenVoorDeWozWaarde2024()
     with open(
-        "tests/data/zelfstandige_woonruimten/input/37101000032.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/punten_voor_de_woz_waade/input/nieuwbouw.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
