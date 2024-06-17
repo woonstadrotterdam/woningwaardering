@@ -16,3 +16,5 @@ class _EenhedenRenovatie(BaseModel):
     """
     De datum dat het object is gerenoveerd.
     """
+    investeringsbedrag: Optional[float] = None
+    "Het bedrag in euro's wat is geïnvesteerd in de renovatie."
