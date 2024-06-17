@@ -109,26 +109,68 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             )
         )
 
-        punten = self._som_punten(woningwaardering_groep)
+        woningwaardering_groep = self._corrigeer_woz_punten(
+            eenheid, woningwaardering_groep, woningwaardering_resultaat
+        )
+
+        logger.info(
+            f"Stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam} krijgt {woningwaardering_groep.punten} punten"
+        )
+
+        return woningwaardering_groep
+
+    def _corrigeer_woz_punten(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        """
+        Controleert of de punten voor de stelselgroep WOZ-waarde voldoen aan de minumum punten en de maximum hoeveelheid punten.
+        Een correctie vindt plaats wanneer:
+            - Een nieuwbouwwoning niet het minimum aantal punten heeft.
+            - De punten voor WOZ-waarde meer dan 33.33% van het totaal aantal punten bedraagt en geen nieuwbouwwoning is.
+
+        Args:
+            eenheid (EenhedenEenheid): De eenheid.
+            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): De woningwaardering groep.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaarderingGroep: De woningwaardering groep met eventuele correcties.
+        """
+
+        huidige_punten = self._som_woz_punten(woningwaardering_groep)
 
         minimum_punten = self._bereken_minimum_punten_nieuwbouw(
             eenheid, woningwaardering_resultaat
         )
 
-        if punten < minimum_punten:
+        if (
+            huidige_punten < minimum_punten
+            and woningwaardering_groep.woningwaarderingen is not None
+        ):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=f"Nieuwbouw: min. {minimum_punten} punten"
                     ),
-                    punten=minimum_punten - punten,
+                    punten=minimum_punten - huidige_punten,
                 )
             )
-            punten = self._som_punten(woningwaardering_groep)
+            punten = self._som_woz_punten(woningwaardering_groep)
+            woningwaardering_groep.punten = punten
+            return woningwaardering_groep
 
-        correctie_punten = self._cap_punten(float(punten), woningwaardering_resultaat)
+        correctie_punten = self._cap_punten(
+            float(huidige_punten), woningwaardering_resultaat
+        )
 
-        if correctie_punten < 0.0:
+        if (
+            correctie_punten < 0.0
+            and minimum_punten == 0.0
+            and woningwaardering_groep.woningwaarderingen is not None
+        ):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -137,13 +179,10 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                     punten=correctie_punten,
                 )
             )
-            punten = self._som_punten(woningwaardering_groep)
+            punten = self._som_woz_punten(woningwaardering_groep)
+            woningwaardering_groep.punten = punten
+            return woningwaardering_groep
 
-        logger.info(
-            f"Stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam} krijgt {punten} punten"
-        )
-
-        woningwaardering_groep.punten = punten
         return woningwaardering_groep
 
     def _cap_punten(
@@ -162,32 +201,16 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             float: De correctiepunten voor de stelselgroep WOZ-waarde.
         """
 
-        totaal_punten = sum(
-            groep.punten or 0
-            for groep in woningwaardering_resultaat.groepen or []
-            if groep.punten
-            and groep.criterium_groep
-            and groep.criterium_groep.stelselgroep
-            and groep.criterium_groep.stelselgroep.code
-            and groep.criterium_groep.stelselgroep.code
-            in [
-                Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
-                Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
-                Woningwaarderingstelselgroep.verwarming.code,
-                Woningwaarderingstelselgroep.energieprestatie.code,
-                Woningwaarderingstelselgroep.keuken.code,
-                Woningwaarderingstelselgroep.sanitair.code,
-                Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,
-                Woningwaarderingstelselgroep.prive_buitenruimten.code,
-                Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
-            ]
+        totaal_punten = (
+            sum(
+                groep.punten or 0
+                for groep in woningwaardering_resultaat.groepen or []
+                if groep.punten
+            )
+            + punten
         )
 
-        print(totaal_punten)
-
         cap_punten = Decimal(str(totaal_punten)) / Decimal("3")
-
-        print(cap_punten)
 
         if cap_punten >= Decimal(str(punten)):
             return 0.0
@@ -195,7 +218,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         else:
             return float(cap_punten - Decimal(str(punten)))
 
-    def _som_punten(
+    def _som_woz_punten(
         self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
     ) -> float:
         return float(
@@ -297,7 +320,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                     Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
                 ]
             )
-            print(punten_critische_stelselgroepen)
+
             if punten_critische_stelselgroepen >= 110:
                 minimum_punten = 40
                 logger.info(
