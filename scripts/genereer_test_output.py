@@ -21,19 +21,18 @@ stdout_id = logger.add(sys.stdout, level="INFO")
 jaar = datetime.now().year
 PEILDATUM = date(year=jaar, month=1, day=1)
 
-INPUT_DIR = Path("tests/data/input")
-OUTPUT_DIR = Path("tests/data/output")
+DATA_DIR = Path("tests/data")
 
-input_file_paths = (INPUT_DIR / "zelfstandige_woonruimten").rglob("*.json")
+input_file_paths = (DATA_DIR / "zelfstandige_woonruimten/input").rglob("*.json")
 
 
-output_file_paths = list((OUTPUT_DIR / "zelfstandige_woonruimten").rglob("*.json"))
+output_file_paths = list((DATA_DIR / "zelfstandige_woonruimten/output").rglob("*.json"))
 
 for input_file_path in input_file_paths:
     if input_file_path.name not in [x.name for x in output_file_paths]:
         output_file_path = (
-            OUTPUT_DIR
-            / "zelfstandige_woonruimten/peildatum"
+            DATA_DIR
+            / "zelfstandige_woonruimten/peildatum/output"
             / datetime.strftime(PEILDATUM, "%Y-%m-%d")
             / input_file_path.name
         )
