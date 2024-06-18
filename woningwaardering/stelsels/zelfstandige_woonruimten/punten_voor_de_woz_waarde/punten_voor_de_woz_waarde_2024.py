@@ -1,5 +1,5 @@
 from datetime import date
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from importlib.resources import files
 from itertools import chain
 
@@ -108,6 +108,9 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             eenheid, woningwaardering_groep, woningwaardering_resultaat
         )
 
+        punten = self._som_woz_punten(woningwaardering_groep)
+        woningwaardering_groep.punten = punten
+
         logger.info(
             f"Stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam} krijgt {woningwaardering_groep.punten} punten"
         )
@@ -153,8 +156,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                     punten=minimum_punten - huidige_punten,
                 )
             )
-            punten = self._som_woz_punten(woningwaardering_groep)
-            woningwaardering_groep.punten = punten
             return woningwaardering_groep
 
         correctie_punten = self._cap_punten(huidige_punten, woningwaardering_resultaat)
@@ -172,8 +173,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                     punten=correctie_punten,
                 )
             )
-            punten = self._som_woz_punten(woningwaardering_groep)
-            woningwaardering_groep.punten = punten
             return woningwaardering_groep
 
         return woningwaardering_groep
@@ -223,11 +222,14 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         """
 
         return float(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            )
+            Decimal(
+                sum(
+                    Decimal(str(woningwaardering.punten))
+                    for woningwaardering in woningwaardering_groep.woningwaarderingen
+                    or []
+                    if woningwaardering.punten is not None
+                )
+            ).quantize(Decimal("1"), ROUND_HALF_UP)
         )
 
     def minimum_woz_waarde(self, woz_waarde: float) -> float:
