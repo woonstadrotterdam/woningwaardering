@@ -165,6 +165,7 @@
       "punten": 32.0,
       "woningwaarderingen": [
         {
+          "aantal": 78.84,
           "criterium": {
             "naam": "B",
             "meeteenheid": {
@@ -172,7 +173,6 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "aantal": 78.84,
           "punten": 32.0
         }
       ]
@@ -245,9 +245,36 @@
           "punten": -5.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "punten": 10.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Onderdeel I"
+          },
+          "punten": 5.06
+        },
+        {
+          "criterium": {
+            "naam": "Onderdeel II"
+          },
+          "punten": 5.0
+        }
+      ]
     }
   ],
-  "punten": 112.0,
+  "punten": 122.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
