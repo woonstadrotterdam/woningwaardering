@@ -181,20 +181,20 @@ if __name__ == "__main__":
     logger.enable("woningwaardering")
 
     verwarming2024 = Verwarming2024()
-    file = open(
+    with open(
         "tests/data/zelfstandige_woonruimten/input/77795000000.json",
         "r+",
-    )
-    eenheid = EenhedenEenheid.model_validate_json(file.read())
+    ) as file:
+        eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = verwarming2024.bereken(eenheid)
+        woningwaardering_resultaat = verwarming2024.bereken(eenheid)
 
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
+        print(
+            woningwaardering_resultaat.model_dump_json(
+                by_alias=True, indent=2, exclude_none=True
+            )
         )
-    )
 
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+        tabel = utils.naar_tabel(woningwaardering_resultaat)
 
-    print(tabel)
+        print(tabel)

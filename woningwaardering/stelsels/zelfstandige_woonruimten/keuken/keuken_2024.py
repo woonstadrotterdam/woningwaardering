@@ -130,20 +130,20 @@ if __name__ == "__main__":
     logger.enable("woningwaardering")
 
     keuken2024 = Keuken2024()
-    file = open(
+    with open(
         "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_zonder_lengte.json",
         "r+",
-    )
-    eenheid = EenhedenEenheid.model_validate_json(file.read())
+    ) as file:
+        eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = keuken2024.bereken(eenheid)
+        woningwaardering_resultaat = keuken2024.bereken(eenheid)
 
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
+        print(
+            woningwaardering_resultaat.model_dump_json(
+                by_alias=True, indent=2, exclude_none=True
+            )
         )
-    )
 
-    tabel = naar_tabel(woningwaardering_resultaat)
+        tabel = naar_tabel(woningwaardering_resultaat)
 
-    print(tabel)
+        print(tabel)
