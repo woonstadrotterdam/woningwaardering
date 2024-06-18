@@ -82,7 +82,11 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel I"
                 ),
-                punten=woz_waarde / factor_onderdeel_I,
+                punten=float(
+                    Decimal(woz_waarde / factor_onderdeel_I).quantize(
+                        Decimal(".01"), rounding=ROUND_HALF_UP
+                    )
+                ),
             )
         )
 
@@ -100,7 +104,11 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel II"
                 ),
-                punten=woz_waarde / oppervlakte / factor_onderdeel_II,
+                punten=float(
+                    Decimal(woz_waarde / oppervlakte / factor_onderdeel_II).quantize(
+                        Decimal(".01"), rounding=ROUND_HALF_UP
+                    )
+                ),
             )
         )
 
