@@ -1,4 +1,5 @@
 import importlib
+import keyword
 import os
 from datetime import date, datetime, time
 from decimal import Decimal
@@ -36,10 +37,22 @@ def import_class(module_path: str, class_naam: str, class_type: Type[T]) -> Type
         Type[T]: De geïmporteerde klasse.
 
     Raises:
+        ValueError: Als de class naam of module path ongeldige tekens of een keyword bevat.
         ModuleNotFoundError: Als de module niet gevonden kan worden.
         AttributeError: Als de klasse van het opgegeven type niet gevonden kan worden in de module.
     """
+    if not class_naam.isidentifier() or keyword.iskeyword(class_naam):
+        raise ValueError("Class naam bevat ongeldige tekens of is een keyword.")
+
+    module_path_parts = module_path.split(".")
+
+    if any(
+        not part.isidentifier() or keyword.iskeyword(part) for part in module_path_parts
+    ):
+        raise ValueError("Module path bevat ongeldige tekens of keywords.")
+
     logger.debug(f"Importeer class '{class_naam}' uit '{module_path}'")
+
     try:
         module = importlib.import_module(module_path)
         class_: Type[T] = getattr(module, class_naam)
