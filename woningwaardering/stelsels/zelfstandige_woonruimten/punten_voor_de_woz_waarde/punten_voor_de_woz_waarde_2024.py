@@ -142,7 +142,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         )
 
         if (
-            huidige_punten < minimum_punten
+            0.0 < huidige_punten < minimum_punten
             and woningwaardering_groep.woningwaarderingen is not None
         ):
             woningwaardering_groep.woningwaarderingen.append(
@@ -157,9 +157,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             woningwaardering_groep.punten = punten
             return woningwaardering_groep
 
-        correctie_punten = self._cap_punten(
-            float(huidige_punten), woningwaardering_resultaat
-        )
+        correctie_punten = self._cap_punten(huidige_punten, woningwaardering_resultaat)
 
         if (
             correctie_punten < 0.0
@@ -204,7 +202,8 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         cap_punten = totaal_punten / Decimal("3")
 
-        if cap_punten >= Decimal(str(punten)):
+        # cap niet wanneer punten onder de cap grens zitten of totaal punten lager is dan 142
+        if cap_punten >= Decimal(str(punten)) or totaal_punten < Decimal("142"):
             return 0.0
 
         else:
@@ -313,7 +312,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             float: De minimum punten voor stelselgroep WOZ-waarde.
         """
 
-        minimum_punten = 0
+        minimum_punten = 0.0
 
         bouwjaar = eenheid.bouwjaar
 
@@ -323,7 +322,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         if (bouwjaar and 2015 <= bouwjaar <= 2019) or hoogniveau_renovatie:
             punten_critische_stelselgroepen = sum(
-                groep.punten or 0
+                groep.punten or 0.0
                 for groep in woningwaardering_resultaat.groepen or []
                 if groep.punten
                 and groep.criterium_groep
