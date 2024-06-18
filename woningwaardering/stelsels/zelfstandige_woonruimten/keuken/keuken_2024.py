@@ -111,7 +111,9 @@ class Keuken2024(Stelselgroepversie):
                         continue
 
         if not keukens:
-            logger.warning(f"Geen keuken(s) gevonden in eenheid {eenheid.id}.")
+            logger.warning(
+                f"Geen keuken met aanrecht gevonden in eenheid {eenheid.id}."
+            )
             return woningwaardering_groep
 
         totaal_punten = Decimal(
