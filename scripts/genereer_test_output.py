@@ -32,7 +32,7 @@ for input_file_path in input_file_paths:
     if input_file_path.name not in [x.name for x in output_file_paths]:
         output_file_path = (
             DATA_DIR
-            / "zelfstandige_woonruimten/peildatum/output"
+            / "zelfstandige_woonruimten/output/peildatum"
             / datetime.strftime(PEILDATUM, "%Y-%m-%d")
             / input_file_path.name
         )
