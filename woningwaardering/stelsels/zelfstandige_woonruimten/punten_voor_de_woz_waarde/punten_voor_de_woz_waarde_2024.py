@@ -196,16 +196,13 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             float: De correctiepunten voor de stelselgroep WOZ-waarde.
         """
 
-        totaal_punten = (
-            sum(
-                groep.punten or 0
-                for groep in woningwaardering_resultaat.groepen or []
-                if groep.punten
-            )
-            + punten
-        )
+        totaal_punten = sum(
+            Decimal(str(groep.punten)) or Decimal("0")
+            for groep in woningwaardering_resultaat.groepen or []
+            if groep.punten
+        ) + Decimal(str(punten))
 
-        cap_punten = Decimal(str(totaal_punten)) / Decimal("3")
+        cap_punten = totaal_punten / Decimal("3")
 
         if cap_punten >= Decimal(str(punten)):
             return 0.0
