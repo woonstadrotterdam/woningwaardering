@@ -1,5 +1,8 @@
 from typing import Iterator
-from woningwaardering.vera.bvg.generated import EenhedenRuimte
+from woningwaardering.vera.bvg.generated import (
+    EenhedenRuimte,
+    BouwkundigElementenBouwkundigElement,
+)
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
@@ -28,6 +31,29 @@ def badruimte_met_toilet(ruimte: EenhedenRuimte) -> bool:
         and heeft_bouwkundig_element(
             ruimte, Bouwkundigelementdetailsoort.closetcombinatie
         )
+    )
+
+
+def get_bouwkundige_elementen(
+    ruimte: EenhedenRuimte, *bouwkundigelementdetailsoort: Bouwkundigelementdetailsoort
+) -> Iterator[BouwkundigElementenBouwkundigElement]:
+    """
+    Haalt de lijst met bouwkundige elementen met de gegeven detailsoorten in de ruimte op.
+
+    Args:
+        ruimte (EenhedenRuimte): Een ruimte met bouwkundige elementen
+        *bouwkundigelementdetailsoort (Bouwkundigelementdetailsoort): De soort bouwkundige elementen die opgehaald moeten worden.
+
+    Returns:
+        Iterator[BouwkundigElementenBouwkundigElement]: Een iterator van bouwkundige elementen.
+    """
+    return (
+        element
+        for element in ruimte.bouwkundige_elementen or []
+        if element.detail_soort is not None
+        and element.detail_soort.code is not None
+        and element.detail_soort.code
+        in (detailsoort.code for detailsoort in bouwkundigelementdetailsoort)
     )
 
 
