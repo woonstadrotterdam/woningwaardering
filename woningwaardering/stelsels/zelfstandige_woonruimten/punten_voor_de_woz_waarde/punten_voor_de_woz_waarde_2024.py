@@ -52,7 +52,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        if not woningwaardering_resultaat:
+        if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
             logger.warning(
                 "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
             )
@@ -117,7 +117,9 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         )
 
         punten = self._som_woz_punten(woningwaardering_groep)
-        woningwaardering_groep.punten = punten
+        woningwaardering_groep.punten = float(
+            Decimal(str(punten)).quantize(Decimal("1"), ROUND_HALF_UP)
+        )
 
         logger.info(
             f"Stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam} krijgt {woningwaardering_groep.punten} punten"
@@ -207,7 +209,9 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             if groep.punten
         ) + Decimal(str(punten))
 
-        cap_punten = totaal_punten / Decimal("3")
+        cap_punten = (totaal_punten / Decimal("3")).quantize(
+            Decimal(".01"), rounding=ROUND_HALF_UP
+        )
 
         # cap niet wanneer punten onder de cap grens zitten of totaal punten lager is dan 142
         if cap_punten >= Decimal(str(punten)) or totaal_punten < Decimal("142"):
@@ -237,7 +241,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                     or []
                     if woningwaardering.punten is not None
                 )
-            ).quantize(Decimal("1"), ROUND_HALF_UP)
+            )
         )
 
     def minimum_woz_waarde(self, woz_waarde: float) -> float:
