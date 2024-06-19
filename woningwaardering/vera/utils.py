@@ -57,9 +57,7 @@ def get_bouwkundige_elementen(
     )
 
 
-def get_bouwkundige_elementen_codes(
-    ruimte: EenhedenRuimte,
-) -> Iterator[str]:
+def get_bouwkundige_elementen_codes(ruimte: EenhedenRuimte) -> Iterator[str]:
     """
     Haalt de lijst met codes van bouwkundige elementen in de ruimte op.
 
