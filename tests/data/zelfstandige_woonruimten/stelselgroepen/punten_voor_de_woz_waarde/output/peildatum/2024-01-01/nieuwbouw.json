@@ -17,19 +17,19 @@
           "criterium": {
             "naam": "Onderdeel I"
           },
-          "punten": 5.061642867241623
+          "punten": 5.06
         },
         {
           "criterium": {
             "naam": "Onderdeel II"
           },
-          "punten": 5.371049650816512
+          "punten": 5.37
         },
         {
           "criterium": {
-            "naam": "Nieuwbouw: minimum 40 punten"
+            "naam": "Nieuwbouw: min. 40 punten"
           },
-          "punten": 29.5673075
+          "punten": 29.57
         }
       ]
     }
