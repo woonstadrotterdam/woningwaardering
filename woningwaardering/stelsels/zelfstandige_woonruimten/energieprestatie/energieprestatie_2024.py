@@ -252,7 +252,7 @@ class Energieprestatie2024(Stelselgroepversie):
         return woningwaardering_groep
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     energieprestatie = Energieprestatie2024()

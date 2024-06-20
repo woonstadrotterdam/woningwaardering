@@ -85,7 +85,7 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         return woningwaardering_groep
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     oppervlakteVanVertrekken2024 = OppervlakteVanVertrekken2024()

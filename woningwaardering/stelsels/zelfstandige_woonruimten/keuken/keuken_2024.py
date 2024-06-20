@@ -122,7 +122,7 @@ class Keuken2024(Stelselgroepversie):
         return woningwaardering_groep
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     keuken2024 = Keuken2024()

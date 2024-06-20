@@ -21,7 +21,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         )
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(

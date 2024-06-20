@@ -20,7 +20,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         super().__init__(peildatum=peildatum)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     punten_voor_de_woz_waarde = PuntenVoorDeWozWaarde()

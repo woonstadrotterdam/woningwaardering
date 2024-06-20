@@ -177,7 +177,7 @@ class Verwarming2024(Stelselgroepversie):
         return punten_per_ruimte
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     verwarming2024 = Verwarming2024()

@@ -496,7 +496,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         return False
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     woz = PuntenVoorDeWozWaarde2024()
