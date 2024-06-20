@@ -47,6 +47,7 @@ addopts = "--cov=woningwaardering --cov-report term --cov-report lcov:lcov.info"
 [tool.coverage.run]
 omit = [
     # omit generated code
+    "woningwaardering/_version.py",
     "woningwaardering/vera/*",
     ]
 
