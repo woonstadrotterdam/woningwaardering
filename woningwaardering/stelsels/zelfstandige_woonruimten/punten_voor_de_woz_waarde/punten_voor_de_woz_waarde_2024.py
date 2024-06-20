@@ -454,7 +454,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         # indien in de eerdergenoemde kalenderjaren sprake is van hoogniveau renovatie. (...) Hieruit volgt dat sprake is
         # van hoogniveau renovatie indien voor de woning een energielabel A+++ of A++++ is afgegeven (na 1 januari 2021).
 
-        if eenheid.renovatie.datum < date(2015, 1, 1):
+        if eenheid.renovatie.datum.year < 2015:
             return False
 
         energieprestatie: EenhedenEnergieprestatie | None = (
@@ -470,7 +470,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
         if not energieprestatie.label:
             raise ValueError("Een energieprestatie zonder label gevonden")
 
-        if eenheid.renovatie.datum < date(2020, 1, 1):
+        if eenheid.renovatie.datum.year <= 2019:
             if (
                 energieprestatie.begindatum >= date(2021, 1, 1)
                 and energieprestatie.label.naam
@@ -479,7 +479,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
                 return True
 
         # Indien sprake is van verbouw in de jaren 2015-2021 dan is sprake van hoogniveau renovatie als het Energie-Index van de woning lager is dan 0,4.
-        if eenheid.renovatie.datum < date(2022, 1, 1):
+        if eenheid.renovatie.datum.year <= 2021:
             if not energieprestatie.waarde:
                 raise ValueError(
                     "Een energieprestatie zonder waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021"
