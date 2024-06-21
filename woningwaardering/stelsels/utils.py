@@ -1,11 +1,11 @@
-from decimal import Decimal
 import importlib
 import os
-import pandas as pd
 from datetime import date, datetime
+from decimal import ROUND_HALF_UP, Decimal
 from typing import Type, TypeVar
 
 from loguru import logger
+import pandas as pd
 from prettytable import PrettyTable
 
 from woningwaardering.vera.bvg.generated import (
@@ -201,6 +201,46 @@ def naar_tabel(
                 woningwaardering_resultaat.punten,
             ],
             divider=True,
+        )
+
+        if woningwaardering_resultaat.maximale_huur is None:
+            return table
+
+        table.add_row(
+            [
+                "",
+                "Maximale huur",
+                woningwaardering_resultaat.maximale_huur,
+                "EUR",
+                "",
+            ],
+        )
+
+        if woningwaardering_resultaat.opslagpercentage is None:
+            return table
+
+        maximale_huur = Decimal(str(woningwaardering_resultaat.maximale_huur))
+        huuropslag = (
+            maximale_huur * Decimal(str(woningwaardering_resultaat.opslagpercentage))
+        ).quantize(Decimal("0.01"), ROUND_HALF_UP)
+        table.add_row(
+            [
+                "",
+                f"Opslagpercentage {woningwaardering_resultaat.opslagpercentage:.0%}",
+                huuropslag,
+                "EUR",
+                "",
+            ],
+            divider=True,
+        )
+        table.add_row(
+            [
+                "",
+                "Totaal maximale huur",
+                maximale_huur + huuropslag,
+                "EUR",
+                "",
+            ],
         )
 
     return table

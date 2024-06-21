@@ -1,11 +1,18 @@
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
+from importlib.resources import files
+
+import pandas as pd
 
 from woningwaardering.stelsels.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
 )
-from woningwaardering.stelsels.utils import import_class, is_geldig
+from woningwaardering.stelsels.utils import (
+    filter_dataframe_op_datum,
+    import_class,
+    is_geldig,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -37,6 +44,11 @@ class Stelsel:
             self.stelsel,
             self.stelsel_config,
         )
+        self.df_maximale_huur = pd.read_csv(
+            files("woningwaardering").joinpath(
+                f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"
+            )
+        ).pipe(filter_dataframe_op_datum, peildatum)
 
     def bereken(
         self,
@@ -79,7 +91,43 @@ class Stelsel:
             ).quantize(Decimal("1"), ROUND_HALF_UP)
         )
 
+        maximale_huur = self.bereken_maximale_huur(resultaat)
+
+        resultaat.maximale_huur = float(maximale_huur)
+
         return resultaat
+
+    def bereken_maximale_huur(
+        self, resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
+    ) -> Decimal:
+        punten = Decimal(str(resultaat.punten))
+
+        df_maximale_huur = self.df_maximale_huur
+
+        begrensde_punten = min(
+            max(punten, df_maximale_huur["Punten"].min()),
+            df_maximale_huur["Punten"].max(),
+        )
+
+        maximale_huur = Decimal(
+            df_maximale_huur[df_maximale_huur["Punten"] == begrensde_punten][
+                "Bedrag"
+            ].item()
+        )
+
+        hoogste_twee = df_maximale_huur.nlargest(2, "Punten")
+        hoogste_punten = hoogste_twee.iloc[0]["Punten"]
+        hoogste_bedrag = Decimal(hoogste_twee.iloc[0]["Bedrag"])
+        een_na_hoogste_bedrag = Decimal(hoogste_twee.iloc[1]["Bedrag"])
+
+        bedrag_verschil = hoogste_bedrag - een_na_hoogste_bedrag
+
+        punten_boven_hoogste = max(punten - hoogste_punten, Decimal(0))
+        aanvullende_waarde = punten_boven_hoogste * bedrag_verschil
+
+        maximale_huur += aanvullende_waarde
+
+        return maximale_huur
 
     @staticmethod
     def select_geldige_stelselgroepen(
