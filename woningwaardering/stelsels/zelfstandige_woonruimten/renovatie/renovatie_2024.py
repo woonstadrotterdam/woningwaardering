@@ -42,30 +42,38 @@ class Renovatie2024(Stelselgroepversie):
                 logger.info("Renovatiedatum mist")
                 return woningwaardering_groep
 
+            # Volgens het woningwaarderingsstelsel kan aan een woning punten voor
+            # renovatie worden toegekend. Om voor punten voor dit onderdeel in
+            # aanmerking te komen, dient er voor de renovatie een investering te zijn
+            # gedaan van minimaal € 10.000.
             if (eenheid.renovatie.investeringsbedrag or 0) < 10000:
                 logger.info(
                     f"Investering van renovatie in {eenheid.renovatie.datum.year} is te laag."
                 )
                 return woningwaardering_groep
 
+            # Deze punten kunnen worden doorberekend vanaf het jaar waarin de
+            # renovatie is gerealiseerd en gedurende de vijf daaropvolgende
+            # kalenderjaren. Dus in totaal maximaal zes jaar. De Huurcommissie kent
+            # renovatiepunten toe indien de renovatie heeft plaatsgevonden en is
+            # gereedgekomen op of ná 1 oktober 2016.
             if (
                 eenheid.renovatie.datum >= date(2016, 10, 1)
                 and eenheid.renovatie.datum.year <= self.peildatum.year
                 and eenheid.renovatie.datum.year + 5 >= self.peildatum.year
             ):
+                # Er worden geen renovatiepunten toegekend indien een zogenoemde
+                # hoogniveau renovatie heeft plaatsgevonden in de jaren 2015-2019 die
+                # op grond van rubriek 9.2 van het woningwaarderingsstelsel heeft
+                # geleid tot minima`al 40 punten voor de WOZ-waarde.
                 if (
                     2015 <= eenheid.renovatie.datum.year <= 2019
                     and PuntenVoorDeWozWaarde2024.hoogniveau_renovatie(
                         eenheid, self.peildatum
                     )
                 ):
-                    # 4.11.1 Hoogniveau renovatie in 2015-2019
-                    # Er worden geen renovatiepunten toegekend indien een zogenoemde
-                    # hoogniveau renovatie heeft plaatsgevonden in de jaren 2015-2019 die
-                    # op grond van rubriek 9.2 van het woningwaarderingsstelsel heeft
-                    # geleid tot minimaal 40 punten voor de WOZ-waarde.
                     logger.debug(
-                        f"Hoogniveau renovatie in 2015-2019 komt niet in aanmerking voor waardering onder {Woningwaarderingstelselgroep.renovatie.naam}"
+                        f"Hoogniveau renovatie in 2015-2019 komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                     )
                     return woningwaardering_groep
 
@@ -75,6 +83,8 @@ class Renovatie2024(Stelselgroepversie):
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                             naam=f"Renovatie {eenheid.renovatie.datum.year}"
                         ),
+                        # Per geïnvesteerd bedrag van € 1.000 wordt met 0,2 punt
+                        # gewaardeerd.
                         punten=Decimal(str(eenheid.renovatie.investeringsbedrag))
                         / 1000
                         * Decimal("0.2"),
@@ -82,7 +92,7 @@ class Renovatie2024(Stelselgroepversie):
                 )
             else:
                 logger.info(
-                    f"Renovatie met datum {eenheid.renovatie.datum} komt niet in aanmerking voor waardering."
+                    f"Renovatie met datum {eenheid.renovatie.datum} komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                 )
                 return woningwaardering_groep
 
