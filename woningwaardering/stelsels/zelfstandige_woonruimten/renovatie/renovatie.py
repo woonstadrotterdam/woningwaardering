@@ -24,9 +24,7 @@ if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     renovatie = Renovatie()
-    with open(
-        "tests/data/generiek/input/37101000032.json", "r+"
-    ) as file:
+    with open("tests/data/generiek/input/37101000032.json", "r+") as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
         woningwaardering_resultaat = renovatie.bereken(eenheid)

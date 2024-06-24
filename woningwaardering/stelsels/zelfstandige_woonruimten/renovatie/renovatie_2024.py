@@ -1,6 +1,5 @@
 from decimal import ROUND_HALF_UP, Decimal
 
-from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.vera.bvg.generated import (
@@ -33,11 +32,13 @@ class Renovatie2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.woningwaarderingen = []
-        woningwaardering_groep.woningwaarderingen.append(WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="NotImplemented"
+        woningwaardering_groep.woningwaarderingen.append(
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="NotImplemented"
+                )
             )
-        ))
+        )
 
         punten = Decimal(
             sum(
