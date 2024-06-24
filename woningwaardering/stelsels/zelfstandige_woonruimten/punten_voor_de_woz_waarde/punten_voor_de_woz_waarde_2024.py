@@ -330,7 +330,9 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         bouwjaar = eenheid.bouwjaar
 
-        hoogniveau_renovatie = self.hoogniveau_renovatie(eenheid)
+        hoogniveau_renovatie = PuntenVoorDeWozWaarde2024.hoogniveau_renovatie(
+            eenheid, self.peildatum
+        )
         if hoogniveau_renovatie:
             logger.debug("Hoogniveau renovatie geconstateerd.")
 
@@ -425,12 +427,14 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         return woningwaardering_resultaat
 
-    def hoogniveau_renovatie(self, eenheid: EenhedenEenheid) -> bool:
+    @staticmethod
+    def hoogniveau_renovatie(eenheid: EenhedenEenheid, peildatum: date) -> bool:
         """
         Bepaalt of de eenheid een hoogniveau renovatie heeft gehad.
 
         Args:
             eenheid (EenhedenEenheid): De eenheid.
+            peildatum (date): De peildatum van de Woningwaardering.
 
         Returns:
             bool: True als de eenheid een hoogniveau renovatie heeft gehad, anders False.
@@ -458,7 +462,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             return False
 
         energieprestatie: EenhedenEnergieprestatie | None = (
-            energieprestatie_met_geldig_label(self.peildatum, eenheid)
+            energieprestatie_met_geldig_label(peildatum, eenheid)
         )
 
         if not energieprestatie:
