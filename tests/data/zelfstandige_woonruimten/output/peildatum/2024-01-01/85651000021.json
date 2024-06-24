@@ -222,6 +222,7 @@
       "woningwaarderingen": []
     }
   ],
+  "maximaleHuur": 495.28,
   "punten": 86.0,
   "stelsel": {
     "code": "ZEL",

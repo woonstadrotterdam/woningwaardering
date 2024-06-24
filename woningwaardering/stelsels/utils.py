@@ -1,11 +1,11 @@
-from decimal import Decimal
 import importlib
 import os
-import pandas as pd
 from datetime import date, datetime
+from decimal import Decimal
 from typing import Type, TypeVar
 
 from loguru import logger
+import pandas as pd
 from prettytable import PrettyTable
 
 from woningwaardering.vera.bvg.generated import (
@@ -111,13 +111,20 @@ def naar_tabel(
         PrettyTable: Een tabel met de gegevens van het woningwaarderingresultaat
     """
     table = PrettyTable()
-    table.field_names = ["Groep", "Naam", "Aantal", "Meeteenheid", "Punten"]
+    table.field_names = [
+        "Groep",
+        "Naam",
+        "Aantal",
+        "Meeteenheid",
+        "Punten",
+        "Opslag",
+    ]
     table.align["Groep"] = "l"
     table.align["Naam"] = "l"
     table.align["Aantal"] = "r"
     table.align["Meeteenheid"] = "l"
     table.align["Punten"] = "r"
-
+    table.align["Opslag"] = "r"
     table.float_format = ".2"
 
     for woningwaardering_groep in (
@@ -146,6 +153,9 @@ def naar_tabel(
                         else "",
                         woningwaardering.punten
                         if woningwaardering.punten is not None
+                        else "",
+                        f"{woningwaardering.opslagpercentage:.0%}"
+                        if woningwaardering.opslagpercentage is not None
                         else "",
                     ],
                     divider=index + 1 == aantal_waarderingen,
@@ -182,6 +192,9 @@ def naar_tabel(
                     subtotaal or "",
                     meeteenheid,
                     woningwaardering_groep.punten,
+                    f"{woningwaardering_groep.opslagpercentage:.0%}"
+                    if woningwaardering_groep.opslagpercentage is not None
+                    else "",
                 ],
                 divider=True,
             )
@@ -199,9 +212,48 @@ def naar_tabel(
                 "",
                 "",
                 woningwaardering_resultaat.punten,
+                f"{woningwaardering_resultaat.opslagpercentage:.0%}"
+                if woningwaardering_resultaat.opslagpercentage is not None
+                else "",
             ],
             divider=True,
         )
+
+        if woningwaardering_resultaat.maximale_huur is None:
+            return table
+
+        table.add_row(
+            [
+                "",
+                "Maximale huur",
+                woningwaardering_resultaat.maximale_huur,
+                "EUR",
+                "",
+                "",
+            ],
+        )
+        if woningwaardering_resultaat.opslagpercentage is not None:
+            table.add_row(
+                [
+                    "",
+                    f"Huurprijsopslag {woningwaardering_resultaat.opslagpercentage:.0%}",
+                    woningwaardering_resultaat.huurprijsopslag,
+                    "EUR",
+                    "",
+                    "",
+                ],
+                divider=True,
+            )
+            table.add_row(
+                [
+                    "",
+                    "Maximale huur inclusief opslag",
+                    woningwaardering_resultaat.maximale_huur_inclusief_opslag,
+                    "EUR",
+                    "",
+                    "",
+                ],
+            )
 
     return table
 
