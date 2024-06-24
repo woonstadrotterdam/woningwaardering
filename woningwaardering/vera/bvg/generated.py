@@ -2659,6 +2659,11 @@ class WoningwaarderingResultatenWoningwaardering(BaseModel):
     """
     Bevat een niet numerieke waarde van de woningwaardering.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
+    opslagpercentage: Optional[float] = None
+    """
+    Het huurprijsopslagpercentage dat is toegekend.
+    """
 
 
 class WoningwaarderingResultatenWoningwaarderingGroep(BaseModel):
@@ -2714,6 +2719,11 @@ class WoningwaarderingResultatenWoningwaarderingGroep(BaseModel):
     )
     """
     De woningwaarderingen behorend bij de woningwaardering groep.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
+    opslagpercentage: Optional[float] = None
+    """
+    Het huurprijsopslagpercentage dat is toegekend.
     """
 
 
@@ -2778,6 +2788,18 @@ class WoningwaarderingResultatenWoningwaarderingResultaat(BaseModel):
     stelsel: Optional[Referentiedata] = None
     """
     Het woningwaardering stelsel geeft aan welk puntensysteem voor de eenheid van toepassing is: het puntensysteem voor zelfstandige woonruimten, het puntensysteem voor onzelfstandige woonruimten, of het puntensysteem voor woonwagens en standplaatsen. Referentiedatasoort WONINGWAARDERINGSTELSEL.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
+    huurprijsopslag: Optional[float] = None
+    """
+    De huurprijsopslag in euro's die boven de maximale huurprijs mag worden gerekend.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
+    maximale_huur_inclusief_opslag: Optional[float] = Field(
+        default=None, alias="maximaleHuurInclusiefOpslag"
+    )
+    """
+    De maximale huurprijs inclusief de huurprijsopslag.
     """
 
 
