@@ -91,9 +91,29 @@ class Stelsel:
             ).quantize(Decimal("1"), ROUND_HALF_UP)
         )
 
+        resultaat.opslagpercentage = (
+            sum(
+                woningwaardering_groep.opslagpercentage
+                for woningwaardering_groep in resultaat.groepen or []
+                if woningwaardering_groep.opslagpercentage is not None
+            )
+            or None
+        )
+
         maximale_huur = self.bereken_maximale_huur(resultaat)
 
         resultaat.maximale_huur = float(maximale_huur)
+
+        if resultaat.opslagpercentage is not None:
+            resultaat.huurprijsopslag = float(
+                (maximale_huur * Decimal(str(resultaat.opslagpercentage))).quantize(
+                    Decimal("0.01"), ROUND_HALF_UP
+                )
+            )
+
+        resultaat.maximale_huur_inclusief_opslag = float(
+            maximale_huur + Decimal(str(resultaat.huurprijsopslag or 0))
+        )
 
         return resultaat
 

@@ -1,7 +1,7 @@
 import importlib
 import os
 from datetime import date, datetime
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 from typing import Type, TypeVar
 
 from loguru import logger
@@ -215,33 +215,26 @@ def naar_tabel(
                 "",
             ],
         )
-
-        if woningwaardering_resultaat.opslagpercentage is None:
-            return table
-
-        maximale_huur = Decimal(str(woningwaardering_resultaat.maximale_huur))
-        huuropslag = (
-            maximale_huur * Decimal(str(woningwaardering_resultaat.opslagpercentage))
-        ).quantize(Decimal("0.01"), ROUND_HALF_UP)
-        table.add_row(
-            [
-                "",
-                f"Opslagpercentage {woningwaardering_resultaat.opslagpercentage:.0%}",
-                huuropslag,
-                "EUR",
-                "",
-            ],
-            divider=True,
-        )
-        table.add_row(
-            [
-                "",
-                "Totaal maximale huur",
-                maximale_huur + huuropslag,
-                "EUR",
-                "",
-            ],
-        )
+        if woningwaardering_resultaat.opslagpercentage is not None:
+            table.add_row(
+                [
+                    "",
+                    f"Opslagpercentage {woningwaardering_resultaat.opslagpercentage:.0%}",
+                    woningwaardering_resultaat.huurprijsopslag,
+                    "EUR",
+                    "",
+                ],
+                divider=True,
+            )
+            table.add_row(
+                [
+                    "",
+                    "Totaal maximale huur",
+                    woningwaardering_resultaat.maximale_huur_inclusief_opslag,
+                    "EUR",
+                    "",
+                ],
+            )
 
     return table
 
