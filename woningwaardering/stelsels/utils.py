@@ -8,7 +8,6 @@ from typing import Type, TypeVar
 import pandas as pd
 from dateutil.relativedelta import relativedelta
 from loguru import logger
-import pandas as pd
 from prettytable import PrettyTable
 
 from woningwaardering.vera.bvg.generated import (

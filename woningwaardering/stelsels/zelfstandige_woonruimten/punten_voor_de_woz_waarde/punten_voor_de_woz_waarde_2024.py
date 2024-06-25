@@ -439,7 +439,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             ValueError: Bij ontbrekende informatie die tot een onjuiste beoordeling kan leiden.
         """
 
-
         if not eenheid.renovatie:
             return False
 
