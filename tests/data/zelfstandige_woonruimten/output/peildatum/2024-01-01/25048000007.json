@@ -181,6 +181,7 @@
           "naam": "Keuken"
         }
       },
+      "punten": 0.0,
       "woningwaarderingen": []
     },
     {
@@ -236,6 +237,7 @@
       ]
     }
   ],
+  "maximaleHuur": 614.53,
   "punten": 147.0,
   "stelsel": {
     "code": "ZEL",
