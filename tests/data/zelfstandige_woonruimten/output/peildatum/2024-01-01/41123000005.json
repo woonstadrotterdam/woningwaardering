@@ -14,6 +14,26 @@
       "punten": 111.0,
       "woningwaarderingen": [
         {
+          "aantal": 5.38,
+          "criterium": {
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 0.89,
+          "criterium": {
+            "naam": "Badruimte (1m2 verminderd ivm toilet)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
           "aantal": 18.64,
           "criterium": {
             "naam": "Woonkamer",
@@ -24,37 +44,7 @@
           }
         },
         {
-          "aantal": 12.19,
-          "criterium": {
-            "naam": "Slaapkamer",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
           "aantal": 17.26,
-          "criterium": {
-            "naam": "Slaapkamer",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 6.8,
-          "criterium": {
-            "naam": "Badruimte",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 10.24,
           "criterium": {
             "naam": "Slaapkamer",
             "meeteenheid": {
@@ -74,9 +64,9 @@
           }
         },
         {
-          "aantal": 5.38,
+          "aantal": 23.73,
           "criterium": {
-            "naam": "Keuken",
+            "naam": "Woonkamer",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -94,9 +84,9 @@
           }
         },
         {
-          "aantal": 23.73,
+          "aantal": 6.8,
           "criterium": {
-            "naam": "Woonkamer",
+            "naam": "Badruimte",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -104,9 +94,19 @@
           }
         },
         {
-          "aantal": 0.89,
+          "aantal": 12.19,
           "criterium": {
-            "naam": "Badruimte (1m2 verminderd ivm toilet)",
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.24,
+          "criterium": {
+            "naam": "Slaapkamer",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -175,42 +175,6 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Woonkamer"
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "naam": "Slaapkamer"
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "naam": "Slaapkamer"
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "naam": "Badruimte"
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "naam": "Slaapkamer"
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "naam": "Keuken"
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
             "naam": "Keuken"
           },
           "punten": 2.0
@@ -229,7 +193,43 @@
         },
         {
           "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Keuken"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Woonkamer"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
             "naam": "Badruimte"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
           },
           "punten": 2.0
         },
@@ -278,6 +278,13 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "naam": "Closetcombinatie"
+          },
+          "punten": 6.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
             "naam": "Wastafel"
           },
           "punten": 2.0
@@ -288,13 +295,6 @@
             "naam": "Douche"
           },
           "punten": 12.0
-        },
-        {
-          "aantal": 2.0,
-          "criterium": {
-            "naam": "Closetcombinatie"
-          },
-          "punten": 6.0
         }
       ]
     },
@@ -312,7 +312,7 @@
       "punten": 8.0,
       "woningwaarderingen": [
         {
-          "aantal": 1875.0,
+          "aantal": 1920.0,
           "criterium": {
             "naam": "Lengte aanrecht",
             "meeteenheid": {
@@ -323,7 +323,7 @@
           "punten": 4.0
         },
         {
-          "aantal": 1920.0,
+          "aantal": 1875.0,
           "criterium": {
             "naam": "Lengte aanrecht",
             "meeteenheid": {
@@ -349,9 +349,9 @@
       "punten": 4.0,
       "woningwaarderingen": [
         {
-          "aantal": 4.46,
+          "aantal": 30.65,
           "criterium": {
-            "naam": "Dakterras",
+            "naam": "Tuin",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -359,9 +359,9 @@
           }
         },
         {
-          "aantal": 30.65,
+          "aantal": 4.46,
           "criterium": {
-            "naam": "Tuin",
+            "naam": "Dakterras",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -376,5 +376,6 @@
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
-  }
+  },
+  "maximaleHuurInclusiefOpslag": 1242.42
 }
