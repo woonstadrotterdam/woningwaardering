@@ -21,36 +21,6 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "PSP",
-        "naam": "Parkeergarage specifieke plek"
-      },
-      "naam": "Parkeergarage specifieke plek",
-      "oppervlakte": 15,
-      "lengte": 3,
-      "breedte": 5,
-      "hoogte": 3.17
-    },
-    {
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
-      },
-      "detailSoort": {
-        "code": "PNS",
-        "naam": "Parkeergarage niet specifieke plek"
-      },
-      "naam": "Parkeergarage niet specifieke plek",
-      "oppervlakte": 15,
-      "lengte": 3,
-      "breedte": 5,
-      "hoogte": 3.17
-    },
-    {
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
-      },
-      "detailSoort": {
         "code": "GAR",
         "naam": "Garage"
       },

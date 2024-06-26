@@ -107,7 +107,7 @@ d. schuren*
 e. garages  
 f. zolderbergingen  
 g. kelders  
-h. parkeerplaats (zie paragraaf 4.9.6)
+~h. parkeerplaats (zie paragraaf 4.9.6)~
 
 > *In de VERA-referentiedata wordt de code SCH gebruikt als detailsoortcode voor schuur. In de Aedes ILS (zie dit isssue: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/92) bestaat echter geen definitie voor schuur. Door sommige op de Aedes ILS gebaseerde implementaties wordt de code SCH al gebruikt voor schacht. Hierdoor ontstaat een conflict bij het waarderen van overige ruimtes omdat een schacht niet als overige ruimte mag worden gewaardeerd. Om dit probleem te ondervangen is het wel mogelijk om op basis van `ruimtedetailsoort.naam` schuur als overige ruimte te waarderen. Echter is het aanbevolen om een schuur aan te geven als een berging in het input-model. Zie ook: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/116.
 
@@ -563,51 +563,37 @@ Het woningwaarderingsstelsel geeft punten aan de privé-buitenruimten op basis v
 
 Indien sprake is van meerdere privé-buitenruimten dan wordt voor de berekening eerst de oppervlakte per privé-buitenruimte (op twee decimalen) afgerond en pas daarna wordt de oppervlakte van alle privé-buitenruimten bij elkaar opgeteld. Het puntenaantal voor deze ruimten op basis van oppervlakten kan oplopen tot maximaal 15 punten (exclusief carport).
 
-### 4.9.6 Parkeervoorziening
+### ~~4.9.6 Parkeervoorziening~~
+
+> De complexiteit van parkeervoorzieningen is in deze versie van het beleidsboek te groot. Zie: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110. Er is gekozen om de hierondergenoemde parkeervoorzieningen niet te ondersteunen in de implementatie.
 
 ~~Er kunnen punten voor een parkeervoorziening worden toegekend als deze als onroerende aanhorigheid gekwalificeerd kan worden. Hiervan is sprake indien de parkeervoorziening naar haar aard onlosmakelijk verbonden is met de woonruimte of omdat de parkeervoorziening volgens de huurovereenkomst deel uitmaakt van de gehuurde woning. Indien in de huurovereenkomst is afgesproken dat de parkeervoorziening tot de onroerende zaak behoort, dan geldt de eis dat de woonruimte en parkeerplaats verhuurd moeten zijn zonder dat ze van elkaar contractueel te scheiden zijn.~~  
 
 ~~Als de huurovereenkomst een huurder recht geeft op medegebruik van een gemeenschappelijk parkeerterrein dan geldt dat in beginsel sprake is van een onroerende aanhorigheid. Als het gaat om voorzieningen die voor eenieder toegankelijk zijn én niet exclusief bedoeld zijn voor de woningen in het wooncomplex (bijvoorbeeld een openbaar parkeerterrein dat niet bij het woon-complex hoort), dan maken deze voorzieningen geen onderdeel uit van de gehuurde woonruimte.~~  
 
-> Er wordt vanuit gegaan dat alleen parkeervoorzieningen die aan bovenstaande doorgehaalde voorwaarden voldoen worden doorgegeven. Deze voorwaarden worden niet door de woningwaardering package gecontroleerd.
+> ~~Er wordt vanuit gegaan dat alleen parkeervoorzieningen die aan bovenstaande doorgehaalde voorwaarden voldoen worden doorgegeven. Deze voorwaarden worden niet door de woningwaardering package gecontroleerd.~~
 
-Bij een parkeervoorziening kunnen verschillende situaties voorkomen die door de Huurcommissie op verschillende manieren worden gewaardeerd.  
+~~Bij een parkeervoorziening kunnen verschillende situaties voorkomen die door de Huurcommissie op verschillende manieren worden gewaardeerd.~~  
 
-1. _Er is sprake van een gesloten parkeergarage (bijvoorbeeld in de onderbouw van een appartementencomplex) met een specifiek tot de woning behorende, afgebakende parkeerplaats._  
+~~1. _Er is sprake van een gesloten parkeergarage (bijvoorbeeld in de onderbouw van een appartementencomplex) met een specifiek tot de woning behorende, afgebakende parkeerplaats._~~  
 
-De oppervlakte van deze afgebakende parkeerplaats wordt als ‘overige ruimte’ gewaardeerd onder ‘garage’. Zie paragraaf 4.3 inzake overige ruimte.  
+~~De oppervlakte van deze afgebakende parkeerplaats wordt als ‘overige ruimte’ gewaardeerd onder ‘garage’. Zie paragraaf 4.3 inzake overige ruimte.~~  
 
-> Bovenstaande parkeervoorziening dient doorgegeven te worden met ruimtedetailsoort:
-> - `PSP`: "Parkeergarage specifieke plek"
+~~1. _Er is sprake van een gesloten parkeergarage met voor elke woning een, al dan niet afgebakende, parkeerplaats (alle betrokken huurders moeten op elk moment van de dag kunnen parkeren)._~~  
 
-2. _Er is sprake van een gesloten parkeergarage met voor elke woning een, al dan niet afgebakende, parkeerplaats (alle betrokken huurders moeten op elk moment van de dag kunnen parkeren)._  
+~~De oppervlakte van deze afgebakende parkeerplaats wordt als ‘overige ruimte’ gewaardeerd onder ‘garage’. Zie paragraaf 4.3 inzake overige ruimte. Bij een niet specifiek tot de woning behorende parkeerplaats wordt uitgegaan van een fictieve oppervlakte van 12 m2.~~
 
-De oppervlakte van deze afgebakende parkeerplaats wordt als ‘overige ruimte’ gewaardeerd onder ‘garage’. Zie paragraaf 4.3 inzake overige ruimte. Bij een niet specifiek tot de woning behorende parkeerplaats wordt uitgegaan van een fictieve oppervlakte van 12 m2.  
+~~3. _Er is sprake van een tot het complex behorende open parkeergarage (een open ruimte, dus geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen) met voor elke woning een al dan niet specifiek toegewezen parkeerplaats._~~  
 
-> Bovenstaande parkeervoorziening dient doorgegeven te worden met ruimtedetailsoort:
-> - `PNS`: "Parkeergarage niet specifieke plek"
+~~Een dergelijke parkeervoorziening wordt vergeleken met een carport en als zodanig onder ‘privé-buitenruimte’ gewaardeerd met 2 punten.~~ 
 
-3. _Er is sprake van een tot het complex behorende open parkeergarage (een open ruimte, dus geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen) met voor elke woning een al dan niet specifiek toegewezen parkeerplaats._  
+~~4. _Er is sprake van een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en zonder privé plek._~~
 
-Een dergelijke parkeervoorziening wordt vergeleken met een carport en als zodanig onder ‘privé-buitenruimte’ gewaardeerd met 2 punten.  
+~~In deze situatie wordt de parkeerruimte gewaardeerd als buitenruimte. Dit houdt in dat maximaal 15 punten op basis van de oppervlakte van de ruimte kan worden gegeven gedeeld door het aantal wooneenheden.~~ 
 
-> Bovenstaande parkeervoorziening dient doorgegeven te worden met een van deze ruimtedetailsoorten:
-> - `OPS`: "Open parkeergarage specifieke plek"
-> - `OPN`: "Open parkeergarage niet specifieke plek".
+~~5. _Er is sprake van een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, met privé plek._~~
 
-4. _Er is sprake van een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en zonder privé plek._
-
-In deze situatie wordt de parkeerruimte gewaardeerd als buitenruimte. Dit houdt in dat maximaal 15 punten op basis van de oppervlakte van de ruimte kan worden gegeven gedeeld door het aantal wooneenheden.  
-
-> Bovenstaande parkeervoorziening dient doorgegeven te worden met ruimtedetailsoort:
-> - `GPN`: Gemeenschappelijke parkeerruimte niet specifieke plek
-
-5. _Er is sprake van een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, met privé plek._  
-
-Een dergelijke parkeervoorziening wordt vergeleken met een carport en als zodanig onder ‘privé-buitenruimte’ gewaardeerd met 2 punten.
-
-> Bovenstaande parkeervoorziening dient doorgegeven te worden met ruimtedetailsoort:
-> - `GPS`: Gemeenschappelijke parkeerruimte specifieke plek
+~~Een dergelijke parkeervoorziening wordt vergeleken met een carport en als zodanig onder ‘privé-buitenruimte’ gewaardeerd met 2 punten.~~
 
 ## 4.10 Punten voor de WOZ-waarde
 

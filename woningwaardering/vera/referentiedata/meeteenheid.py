@@ -44,6 +44,14 @@ class Meeteenheid(Enum):
         naam="Kubieke meter, m3",
     )
 
+    millimeter = Referentiedata(
+        code="MIL",
+        naam="Millimeter",
+    )
+    """
+    Aantal uitgedrukt in millimeters
+    """
+
     minuten = Referentiedata(
         code="MIN",
         naam="Minuten",
@@ -72,14 +80,6 @@ class Meeteenheid(Enum):
     """
     Aantal uitgedrukt in uren, bijvoorbeeld 2,5 uur werktijd. 15 minuten kan uitgedrukt
     worden in 0,25 uur
-    """
-
-    millimeter = Referentiedata(
-        code="MLM",
-        naam="Millimeter",
-    )
-    """
-    De meeteenheid millimeter (UITBREIDING)
     """
 
     @property
