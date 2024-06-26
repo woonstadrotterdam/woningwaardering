@@ -181,6 +181,7 @@
           "naam": "Keuken"
         }
       },
+      "punten": 0.0,
       "woningwaarderingen": []
     },
     {
@@ -236,9 +237,11 @@
       ]
     }
   ],
+  "maximaleHuur": 878.27,
   "punten": 147.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
-  }
+  },
+  "maximaleHuurInclusiefOpslag": 878.27
 }

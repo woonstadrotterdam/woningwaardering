@@ -443,11 +443,6 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
             ValueError: Bij ontbrekende informatie die tot een onjuiste beoordeling kan leiden.
         """
 
-        # todo: Indien de verbeteringen niet hebben geleid tot een energieprestatie op nieuwbouwniveau, dan is
-        # er geen sprake van hoog niveau renovatie. In die gevallen mogen er voor de renovatie of transformatie
-        # punten worden berekend op basis van de investering, conform de berekening als omschreven in paragraaf (4.11)
-        # over het onderdeel renovatie.
-
         if not eenheid.renovatie:
             return False
 
