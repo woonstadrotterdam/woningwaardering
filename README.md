@@ -197,6 +197,11 @@ Er zijn verschillende "test-scopes" te bedenken, zoals het testen van details en
 Daarnaast is het testen van een hele keten of stelselgroep-object ook vereist.
 Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
+#### Test coverage rapport
+
+Na het uitvoeren van `pytest` wordt er een code coverage report getoond. Hierin is per file te zien welk percentage van de code in de files getest is.
+Daarnaast wordt de code coverage ook naar een file `lcov.info` geschreven. Die kan gebruikt worden in VSCode om de coverage weer te geven met een plugin zoals "Coverage Gutters".
+
 #### Conventies voor tests
 
 Tests worden toegevoegd aan de `tests`-folder in de root van de repository.
@@ -227,9 +232,9 @@ def test_OppervlakteVanVertrekken():
 
 #### Test modellen
 
-Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er eenheidmodellen (in .json format) toegevoegd in `tests/data/input/...`. De modellen volgen de VERA standaard en dienen als een testinput voor de geschreven tests. Omdat er gewerkt wordt met peildata en de berekening van een stelselgroep per jaar kan veranderen worden de outputmodellen per jaar opgeslagen. Zie bijvoorbeeld de folder `tests/data/output/zelfstandige_woonruimten/peildatum/2024-01-01`. Deze bevat de output voor de inputmodellen met als peildatum 2024-01-01 of later. Op deze manier kunnen dezelfde inputmodellen in tests met verschillende peildata getest worden. De resulterende outputs zijn met de hand nagerekend om de kwaliteit van de tests te garanderen.
+Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er eenheidmodellen (in .json format) toegevoegd in `tests/data/...`. De modellen volgen de VERA standaard en dienen als een testinput voor de geschreven tests. Omdat er gewerkt wordt met peildata en de berekening van een stelselgroep per jaar kan veranderen worden de outputmodellen per jaar opgeslagen. Zie bijvoorbeeld de folder `tests/data/zelfstandige_woonruimten/output/peildatum/2024-01-01`. Deze bevat de output voor de inputmodellen met als peildatum 2024-01-01 of later. Op deze manier kunnen dezelfde inputmodellen in tests met verschillende peildata getest worden. De resulterende outputs zijn met de hand nagerekend om de kwaliteit van de tests te garanderen.
 
-Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/data/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifieke set van regels in oppervlakte_van_vertrekken te testen.
+Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/data/zelfstandige_woonruimten/stelselgroepen/oppervlakte_van_vertrekken/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifieke set van regels in oppervlakte_van_vertrekken te testen.
 
 ### Datamodellen
 

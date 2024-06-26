@@ -1,6 +1,7 @@
 from collections import Counter, defaultdict
 import csv
 import re
+import shutil
 import time
 from typing import Any, Callable, Pattern, Match
 import unidecode
@@ -92,17 +93,10 @@ for item in active_data:
             item["parentcode"] = resolved_parent["code"]
             item["parentnaam"] = resolved_parent["naam"]
 
+if os.path.exists(output_folder):
+    shutil.rmtree(output_folder)
 
-# Create output directory if not exists
-if not os.path.exists(output_folder):
-    os.makedirs(output_folder)
-else:
-    # Recursively remove all files and folders in the output directory
-    for root, dirs, files in os.walk(output_folder, topdown=False):
-        for name in files:
-            os.remove(os.path.join(root, name))
-        for name in dirs:
-            os.rmdir(os.path.join(root, name))
+os.makedirs(output_folder)
 
 # Group items by 'soort'
 grouped_data = [(k, list(g)) for k, g in groupby(active_data, key=itemgetter("soort"))]

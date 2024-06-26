@@ -85,24 +85,24 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
         return woningwaardering_groep
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     oppervlakteVanVertrekken2024 = OppervlakteVanVertrekken2024()
-    file = open(
+    with open(
         "tests/data/zelfstandige_woonruimten/input/12006000004.json",
         "r+",
-    )
-    eenheid = EenhedenEenheid.model_validate_json(file.read())
+    ) as file:
+        eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = oppervlakteVanVertrekken2024.bereken(eenheid)
+        woningwaardering_resultaat = oppervlakteVanVertrekken2024.bereken(eenheid)
 
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
+        print(
+            woningwaardering_resultaat.model_dump_json(
+                by_alias=True, indent=2, exclude_none=True
+            )
         )
-    )
 
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+        tabel = utils.naar_tabel(woningwaardering_resultaat)
 
-    print(tabel)
+        print(tabel)

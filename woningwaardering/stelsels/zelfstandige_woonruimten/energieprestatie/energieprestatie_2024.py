@@ -1,13 +1,14 @@
-from datetime import date, datetime, time
-from importlib.resources import files
-from dateutil.relativedelta import relativedelta
+from datetime import date, datetime
 from decimal import Decimal
-from loguru import logger
+from importlib.resources import files
+
 import pandas as pd
+from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import (
     dataframe_met_een_rij,
+    energieprestatie_met_geldig_label,
     filter_dataframe_op_datum,
     naar_tabel,
 )
@@ -23,7 +24,6 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Energielabel,
     Energieprestatiesoort,
-    Energieprestatiestatus,
     Meeteenheid,
     Oppervlaktesoort,
     Prijscomponentdetailsoort,
@@ -64,60 +64,6 @@ class Energieprestatie2024(Stelselgroepversie):
             )
         ),
     }
-
-    def _energieprestatie_met_geldig_label(
-        self,
-        eenheid: EenhedenEenheid,
-    ) -> EenhedenEnergieprestatie | None:
-        """
-        Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
-
-        Args:
-            eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
-
-        Returns:
-            EenhedenEnergieprestatie | None: De eerste geldige energieprestatie met een energielabel en None Wanneer er geen geldige energieprestatie met label is gevonden.
-        """
-        if eenheid.energieprestaties is not None:
-            for energieprestatie in eenheid.energieprestaties:
-                if (
-                    energieprestatie.registratiedatum
-                    and energieprestatie.soort
-                    and energieprestatie.soort.code
-                    and energieprestatie.status
-                    and energieprestatie.status.code
-                    and energieprestatie.begindatum
-                    and energieprestatie.einddatum
-                    and energieprestatie.label
-                    and (
-                        energieprestatie.soort.code
-                        == Energieprestatiesoort.energie_index.code
-                        or energieprestatie.soort.code
-                        == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
-                        or energieprestatie.soort.code
-                        == Energieprestatiesoort.voorlopig_energielabel.code  # Een voorlopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
-                    )
-                    and (
-                        energieprestatie.begindatum
-                        < self.peildatum
-                        < energieprestatie.einddatum
-                        and energieprestatie.status.code
-                        == Energieprestatiestatus.definitief.code
-                    )
-                    and (
-                        # Check of de registratie niet ouder is dan 10 jaar
-                        energieprestatie.registratiedatum
-                        > (
-                            datetime.combine(self.peildatum, time.min).astimezone()
-                            - relativedelta(years=10)
-                        )
-                    )
-                ):
-                    logger.debug("Energieprestatie met geldig label gevonden")
-                    return energieprestatie
-
-        logger.debug("Geen geldige energieprestatie met label gevonden")
-        return None
 
     def _bereken_punten_met_label(
         self,
@@ -251,7 +197,7 @@ class Energieprestatie2024(Stelselgroepversie):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        energieprestatie = self._energieprestatie_met_geldig_label(eenheid)
+        energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
         if not (
             eenheid.woningtype
@@ -306,7 +252,7 @@ class Energieprestatie2024(Stelselgroepversie):
         return woningwaardering_groep
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     energieprestatie = Energieprestatie2024()

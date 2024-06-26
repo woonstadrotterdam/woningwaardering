@@ -57,3 +57,11 @@ stelselgroepen:
       - module: prive_buitenruimten_2024
         class_naam: PriveBuitenruimten2024
         begindatum: 2024-01-01
+  punten_voor_de_woz_waarde:
+    module: punten_voor_de_woz_waarde
+    class_naam: PuntenVoorDeWozWaarde
+    begindatum: 2024-01-01
+    versies:
+      - module: punten_voor_de_woz_waarde_2024
+        class_naam: PuntenVoorDeWozWaarde2024
+        begindatum: 2024-01-01

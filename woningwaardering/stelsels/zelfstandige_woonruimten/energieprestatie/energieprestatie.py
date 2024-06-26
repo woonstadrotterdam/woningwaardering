@@ -20,7 +20,7 @@ class Energieprestatie(Stelselgroep):
         super().__init__(peildatum=peildatum)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     energieprestatie = Energieprestatie()

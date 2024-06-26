@@ -259,7 +259,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
         return woningwaardering
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     prive_buitenruimte = PriveBuitenruimten2024()
