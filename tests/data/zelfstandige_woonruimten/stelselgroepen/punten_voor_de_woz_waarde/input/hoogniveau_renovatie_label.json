@@ -3,7 +3,8 @@
   "bouwjaar": 2016,
   "renovatie": {
     "omschrijving": "hoogniveau renovatie",
-    "datum": "2019-01-01"
+    "datum": "2019-01-01",
+    "investeringsbedrag": 10000
   },
   "klimaatbeheersingsoort": {
     "code": "IND",

@@ -13,9 +13,9 @@ from woningwaardering.vera.referentiedata import (
     "peildatum, stelsel, aantal_geldige_stelselgroepen",
     [
         (
-            date(2025, 1, 1),
+            date(2024, 1, 1),
             Woningwaarderingstelsel.zelfstandige_woonruimten,
-            8,
+            9,
         )
     ],
 )
