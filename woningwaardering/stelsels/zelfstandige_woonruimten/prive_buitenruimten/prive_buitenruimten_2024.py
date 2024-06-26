@@ -85,21 +85,9 @@ class PriveBuitenruimten2024(Stelselgroepversie):
 
                 if buitenruimte.detail_soort.code in [
                     Ruimtedetailsoort.carport.code,
-                    Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek.code,
-                    Ruimtedetailsoort.open_parkeergarage_specifieke_plek.code,
-                    Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_specifieke_plek.code,
                 ]:
                     woningwaardering = PriveBuitenruimten2024._bereken_carport(
                         buitenruimte, woningwaardering
-                    )
-                elif (
-                    buitenruimte.detail_soort.code
-                    == Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code
-                ):
-                    woningwaardering = (
-                        PriveBuitenruimten2024._bereken_gedeelde_buitenruimte(
-                            buitenruimte, woningwaardering
-                        )
                     )
                 else:
                     woningwaardering = PriveBuitenruimten2024._bereken_buitenruimte(
