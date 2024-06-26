@@ -69,7 +69,9 @@ stelselgroepen:
     module: renovatie
     class_naam: Renovatie
     begindatum: 2024-01-01
+    einddatum: 2024-06-30
     versies:
       - module: renovatie_2024
         class_naam: Renovatie2024
         begindatum: 2024-01-01
+        einddatum: 2024-06-30
