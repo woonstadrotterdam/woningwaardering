@@ -7,6 +7,7 @@ from .sanitair import Sanitair
 from .keuken import Keuken
 from .prive_buitenruimten import PriveBuitenruimten
 from .punten_voor_de_woz_waarde import PuntenVoorDeWozWaarde
+from .renovatie import Renovatie
 
 
 __all__ = [
@@ -19,4 +20,5 @@ __all__ = [
     "Keuken",
     "PriveBuitenruimten",
     "PuntenVoorDeWozWaarde",
+    "Renovatie",
 ]

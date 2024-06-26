@@ -756,3 +756,31 @@ D --> |Nee| C
 D -->|Ja| E[Maximering WOZ-aandeel 33%]
 C[Geen maximering WOZ-aandeel]
 ```
+
+## 4.11 Punten bij renovatie
+
+Volgens het woningwaarderingsstelsel kan aan een woning punten voor renovatie worden toegekend. Om voor punten voor dit onderdeel in aanmerking te komen, dient er voor de renovatie een investering te zijn gedaan van minimaal € 10.000. Per geïnvesteerd bedrag van € 1.000 wordt met 0,2 punt gewaardeerd. Deze punten kunnen worden doorberekend vanaf het jaar waarin de renovatie is gerealiseerd en gedurende de vijf daaropvolgende kalenderjaren. Dus in totaal maximaal zes jaar. De Huurcommissie kent renovatiepunten toe indien de renovatie heeft plaatsgevonden en is gereedgekomen op of ná 1 oktober 2016.
+
+_**Voorbeeld:**_
+
+_In februari 2022 heeft in een woning een renovatie plaatsgevonden van € 15.000. Deze investering ligt derhalve boven het drempelbedrag van € 10.000. De investering levert 3 punten op voor het waarderingsstelsel: 15.000 / 1000 * 0,2 = 3. Deze punten mogen bij het puntenaantal in de jaren 2022, 2023, 2024, 2025, 2026 en 2027 worden opgeteld._
+
+> Om een renovatie te waarderen, dien je de details van de renovatie door te geven onder het attribuut `renovatie` van een eenheid.
+>- `datum`: Specificeer de datum waarop de renovatie is gereedgekomen.
+>- `investeringsbedrag`: Specificeer het deel van de investering dat is toegekend aan de renovatie van deze eenheid.
+
+### 4.11.1 Hoogniveau renovatie in 2015-2019
+
+Er worden geen renovatiepunten toegekend indien een zogenoemde hoogniveau renovatie heeft plaatsgevonden in de jaren 2015-2019 die op grond van rubriek 9.2 van het woningwaarderingsstelsel heeft geleid tot minimaal 40 punten voor de WOZ-waarde[^1]. Met hoogniveau renovatie worden ingrijpende gerenoveerde woningen bedoeld die wat betreft de energieprestatie voldoen aan de eisen van artikel 5.2 van het Bouwbesluit 2012 die golden voor nieuwbouwwoningen in de jaren 2015-2019. Hieruit volgt dat sprake is van hoogniveau renovatie in de jaren 2015-2019 als het Energie-Index van de woning lager is dan 0,4.
+
+[^1]: Zie paragraaf 4.10.1.
+
+### 4.11.2 Wat verstaat de Huurcommissie onder renovatie?
+
+Onder renovatie wordt verstaan een investering van minimaal € 10.000. Onder dit begrip valt ook een transformatie van een winkelruimte of kantoorruimte naar een woonruimte, indien de investeringen voor de desbetreffende woonruimte meer zijn geweest dan het drempelbedrag van € 10.000.
+
+### ~~4.11.3 Aanleveren facturen renovatiewerkzaamheden~~
+
+~~Het is aan de verhuurder om aan te tonen dat de renovatie heeft plaatsgevonden en de daarop betrekkende investering. Om voor renovatiepunten in aanmerking te komen, dient de verhuurder facturen aan te leveren die zien op de desbetreffende renovatiewerkzaamheden en -investeringen.~~
+
+> In de woningwaarderingpackage wordt geen controle op facturen gedaan.

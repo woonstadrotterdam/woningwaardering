@@ -2,7 +2,8 @@
   "bouwjaar": 1912,
   "renovatie": {
     "omschrijving": "hoogniveau renovatie",
-    "datum": "2022-01-01"
+    "datum": "2022-01-01",
+    "investeringsbedrag": 10000
   },
   "klimaatbeheersingsoort": {
     "code": "IND",

@@ -18,8 +18,8 @@ from woningwaardering.vera.referentiedata import (
 
 
 class {{ className }}(Stelselgroepversie):
-    @staticmethod
     def bereken(
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None

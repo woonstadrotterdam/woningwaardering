@@ -284,6 +284,19 @@
           "punten": 4.95
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "REN",
+          "naam": "Renovatie"
+        }
+      },
+      "punten": 0.0
     }
   ],
   "maximaleHuur": 677.36,
