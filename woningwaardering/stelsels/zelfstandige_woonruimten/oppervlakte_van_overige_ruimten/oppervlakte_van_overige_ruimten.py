@@ -25,7 +25,7 @@ if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(
-        peildatum=date(2025, 1, 1)
+        peildatum=date(2024, 1, 1)
     )
     with open(
         "tests/data/input/zelfstandige_woonruimten/41164000002.json", "r+"
