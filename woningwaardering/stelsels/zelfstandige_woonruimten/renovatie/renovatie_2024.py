@@ -39,14 +39,16 @@ class Renovatie2024(Stelselgroepversie):
 
         if eenheid.renovatie is not None:
             if eenheid.renovatie.datum is None:
-                logger.info("Renovatiedatum mist")
-                return woningwaardering_groep
+                raise ValueError("Renovatiedatum mist")
+
+            if eenheid.renovatie.investeringsbedrag is None:
+                raise ValueError("Investeringsbedrag mist")
 
             # Volgens het woningwaarderingsstelsel kan aan een woning punten voor
             # renovatie worden toegekend. Om voor punten voor dit onderdeel in
             # aanmerking te komen, dient er voor de renovatie een investering te zijn
             # gedaan van minimaal € 10.000.
-            if (eenheid.renovatie.investeringsbedrag or 0) < 10000:
+            if eenheid.renovatie.investeringsbedrag < 10000:
                 logger.info(
                     f"Investering van renovatie in {eenheid.renovatie.datum.year} is te laag."
                 )
