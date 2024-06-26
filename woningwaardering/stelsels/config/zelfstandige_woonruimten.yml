@@ -75,3 +75,11 @@ stelselgroepen:
         class_naam: Renovatie2024
         begindatum: 2024-01-01
         einddatum: 2024-06-30
+  beschermd_monument_bmz:
+    module: beschermd_monument_bmz
+    class_naam: BeschermdMonumentBmz
+    begindatum: 2024-01-01
+    versies:
+      - module: beschermd_monument_bmz_2024
+        class_naam: BeschermdMonumentBmz2024
+        begindatum: 2024-01-01
