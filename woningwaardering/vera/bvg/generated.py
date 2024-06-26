@@ -3297,6 +3297,11 @@ class EenhedenEenheid(BaseModel):
     """
     De verschillende oppervlakten die gedefinieerd zijn (bijv. vanuit de NEN) voor een eenheid. Bijv. het gebruiksoppervlak (GO) of functioneel nuttig oppervlak (FNO).
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/64
+    renovatie: Optional[EenhedenRenovatie] = None
+    """
+    De details van de laatste renovatie van de eenheid
+    """
 
 
 class WoningwaarderingResultatenWoningwaarderingResultaatbericht(
@@ -3572,3 +3577,19 @@ class EenhedenOppervlakte(BaseModel):
     """
     De waarde van de oppervlakte in vierkante meters (m2)
     """
+
+
+class EenhedenRenovatie(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    omschrijving: Optional[str] = None
+    """
+    De omschrijving van de renovatie(s) behorend bij de eenheid.
+    """
+    datum: Optional[date] = None
+    """
+    De datum dat het object is gerenoveerd.
+    """
+    investeringsbedrag: Optional[float] = None
+    "Het bedrag in euro's wat is geïnvesteerd in de renovatie."

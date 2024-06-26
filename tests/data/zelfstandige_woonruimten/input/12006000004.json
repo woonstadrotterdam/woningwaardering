@@ -20,6 +20,16 @@
     "code": "MGW",
     "naam": "Meergezinswoning"
   },
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 297000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 309000
+    }
+  ],
   "energieprestaties": [],
   "gebruiksoppervlakte": 71,
   "ruimten": [

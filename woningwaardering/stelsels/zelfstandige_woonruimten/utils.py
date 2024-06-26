@@ -1,6 +1,8 @@
 from loguru import logger
 
-from woningwaardering.vera.bvg.generated import EenhedenRuimte
+from woningwaardering.vera.bvg.generated import (
+    EenhedenRuimte,
+)
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,

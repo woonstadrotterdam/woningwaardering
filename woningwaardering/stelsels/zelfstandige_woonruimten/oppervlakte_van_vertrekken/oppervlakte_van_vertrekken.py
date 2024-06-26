@@ -20,7 +20,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         super().__init__(peildatum=peildatum)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=date(2024, 1, 1))
