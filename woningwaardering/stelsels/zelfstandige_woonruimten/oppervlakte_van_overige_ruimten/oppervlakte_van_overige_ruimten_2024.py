@@ -80,16 +80,16 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
                 if gedeelde_ruimte:
                     oppervlakte_per_eenheid = Decimal(
-                        ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
+                        ruimte.oppervlakte / (ruimte.gedeeld_met_aantal_eenheden or 1)
                     )
 
                     if (
                         (
-                            ruimte.detail_soort == Ruimtedetailsoort.berging
+                            ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
                             and oppervlakte_per_eenheid
                             >= 2  # Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als (...) de oppervlakte, na deling door het aantal woningen, per woning minstens 2m2 bedraagt.
                         )
-                        or ruimte.detail_soort != Ruimtedetailsoort.berging
+                        or ruimte.detail_soort.code != Ruimtedetailsoort.berging.code
                     ):  # bij niet-bergingen staat geen specifieke eis in de regelgeving m.b.t. oppervlakte na deling door aantal woningen.
                         woningwaardering.aantal = float(
                             (

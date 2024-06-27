@@ -83,7 +83,7 @@ class Sanitair2024(Stelselgroepversie):
                 )
                 woningwaarderingen.append(woningwaardering)
 
-            woningwaardering.punten = (
+            woningwaardering.punten = float(
                 Decimal(
                     str(
                         woningwaardering.punten
@@ -92,15 +92,17 @@ class Sanitair2024(Stelselgroepversie):
                         * aantal
                         / (gedeeld_met_aantal_eenheden or 1)
                     )
-                )
-            ).quantize(Decimal("0.01"))
+                ).quantize(Decimal("0.01"))
+            )
 
-            woningwaardering.aantal = Decimal(
-                str(
-                    (woningwaardering.aantal or 0.0)
-                    + aantal / (gedeeld_met_aantal_eenheden or 1)
-                )
-            ).quantize(Decimal("0.01"))
+            woningwaardering.aantal = float(
+                Decimal(
+                    str(
+                        (woningwaardering.aantal or 0.0)
+                        + aantal / (gedeeld_met_aantal_eenheden or 1)
+                    )
+                ).quantize(Decimal("0.01"))
+            )
 
             return True
         else:
