@@ -46,6 +46,10 @@ class Sanitair2024(Stelselgroepversie):
             bool: True wanneer er punten gewaardeerd zijn
         """
         aantal = aantal_bouwkundige_elementen(ruimte, *elementdetailsoort)
+        gedeelde_ruimte = (
+            ruimte.gedeeld_met_aantal_eenheden
+            and ruimte.gedeeld_met_aantal_eenheden >= 2
+        )
         if aantal > 0:
             soorten = " en ".join(
                 detailsoort.naam
@@ -73,15 +77,30 @@ class Sanitair2024(Stelselgroepversie):
                 woningwaardering = WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=naam
+                        if not gedeelde_ruimte
+                        else f"{naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                     )
                 )
                 woningwaarderingen.append(woningwaardering)
 
             woningwaardering.punten = (
-                woningwaardering.punten or 0.0
-            ) + punten_per_element * aantal / (gedeeld_met_aantal_eenheden or 1)
+                Decimal(
+                    str(
+                        woningwaardering.punten
+                        or 0.0
+                        + punten_per_element
+                        * aantal
+                        / (gedeeld_met_aantal_eenheden or 1)
+                    )
+                )
+            ).quantize(Decimal("0.01"))
 
-            woningwaardering.aantal = (woningwaardering.aantal or 0.0) + aantal
+            woningwaardering.aantal = Decimal(
+                str(
+                    (woningwaardering.aantal or 0.0)
+                    + aantal / (gedeeld_met_aantal_eenheden or 1)
+                )
+            ).quantize(Decimal("0.01"))
 
             return True
         else:
