@@ -58,18 +58,39 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
                 woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-                woningwaardering.criterium = (
-                    WoningwaarderingResultatenWoningwaarderingCriterium(
-                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                        naam=criterium_naam,
+                if (
+                    not ruimte.gedeeld_met_aantal_eenheden
+                    or ruimte.gedeeld_met_aantal_eenheden <= 1
+                ):
+                    woningwaardering.criterium = (
+                        WoningwaarderingResultatenWoningwaarderingCriterium(
+                            meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                            naam=criterium_naam,
+                        )
                     )
-                )
 
-                woningwaardering.aantal = float(
-                    Decimal(str(ruimte.oppervlakte)).quantize(
-                        Decimal("0.01"), ROUND_HALF_UP
+                    woningwaardering.aantal = float(
+                        Decimal(str(ruimte.oppervlakte)).quantize(
+                            Decimal("0.01"), ROUND_HALF_UP
+                        )
                     )
-                )
+                elif (
+                    ruimte.gedeeld_met_aantal_eenheden
+                    and ruimte.gedeeld_met_aantal_eenheden >= 2
+                ):
+                    woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                        naam=f"{criterium_naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
+                    )
+
+                    woningwaardering.aantal = float(
+                        (
+                            Decimal(str(ruimte.oppervlakte)).quantize(
+                                Decimal("1"), ROUND_HALF_UP
+                            )
+                            / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
+                        ).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                    )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
