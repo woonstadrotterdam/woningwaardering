@@ -55,6 +55,11 @@ class Keuken2024(Stelselgroepversie):
                 Ruimtedetailsoort.slaapkamer.code,
             ]:
                 continue
+
+            gedeelde_ruimte = (
+                ruimte.gedeeld_met_aantal_eenheden
+                and ruimte.gedeeld_met_aantal_eenheden >= 2
+            )
             keukens.add(ruimte.id)
 
             aanrechten = list(
@@ -96,11 +101,20 @@ class Keuken2024(Stelselgroepversie):
                     woningwaardering_groep.woningwaarderingen.append(
                         WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam="Lengte aanrecht",
+                                naam="Lengte aanrecht"
+                                if not gedeelde_ruimte
+                                else f"Lengte aanrecht (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                                 meeteenheid=Meeteenheid.millimeter.value,
                             ),
-                            aantal=aanrecht.lengte,
-                            punten=punten,
+                            aantal=Decimal(
+                                str(
+                                    aanrecht.lengte / ruimte.gedeeld_met_aantal_eenheden
+                                    or 1
+                                )
+                            ).quantize(Decimal("0.01"), ROUND_HALF_UP),
+                            punten=Decimal(
+                                str(punten / (ruimte.gedeeld_met_aantal_eenheden or 1))
+                            ).quantize(Decimal("0.1"), ROUND_HALF_UP),
                         )
                     )
 
