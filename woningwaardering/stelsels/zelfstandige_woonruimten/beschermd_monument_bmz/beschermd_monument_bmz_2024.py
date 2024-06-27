@@ -1,7 +1,11 @@
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
+
+from loguru import logger
 
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
+from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
+from .beschermd_monument_bmz import BeschermdMonumentBmz
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -32,21 +36,52 @@ class BeschermdMonumentBmz2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.woningwaarderingen = []
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="NotImplemented"
+
+        if eenheid.monumenten is None:
+            logger.info(
+                "eenheid.monumenten is None. De api van cultureelerfgoed wordt geraadpleegd."
+            )
+
+            eenheid.monumenten = []
+
+            if (
+                eenheid.adresseerbaar_object_basisregistratie is not None
+                and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+                is not None
+            ):
+                logger.info(
+                    f"bagid: {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie}"
+                )
+                BeschermdMonumentBmz.is_rijksmonument("0363010000857245")
+                is_rijksmonument = BeschermdMonumentBmz.is_rijksmonument(
+                    eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+                )
+                logger.info(
+                    f"Eenheid {eenheid.id} is {'een' if is_rijksmonument else 'geen'} rijksmonument."
+                )
+                if is_rijksmonument:
+                    eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+
+        if any(
+            monument.code == Eenheidmonument.rijksmonument.code
+            for monument in eenheid.monumenten
+        ):
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam=Eenheidmonument.rijksmonument.naam,
+                    ),
+                    punten=50.0,
                 )
             )
-        )
 
         punten = Decimal(
             sum(
-                Decimal(str(woningwaardering.aantal))
+                Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.aantal is not None
+                if woningwaardering.punten is not None
             )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
+        )
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
