@@ -106,12 +106,7 @@ class Keuken2024(Stelselgroepversie):
                                 else f"Lengte aanrecht (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                                 meeteenheid=Meeteenheid.millimeter.value,
                             ),
-                            aantal=Decimal(
-                                str(
-                                    aanrecht.lengte / ruimte.gedeeld_met_aantal_eenheden
-                                    or 1
-                                )
-                            ).quantize(Decimal("0.01"), ROUND_HALF_UP),
+                            aantal=aanrecht.lengte,
                             punten=Decimal(
                                 str(punten / (ruimte.gedeeld_met_aantal_eenheden or 1))
                             ).quantize(Decimal("0.1"), ROUND_HALF_UP),

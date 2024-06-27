@@ -78,7 +78,7 @@ class Sanitair2024(Stelselgroepversie):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=naam
                         if not gedeelde_ruimte
-                        else f"{naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
+                        else f"{naam} ({aantal}, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                     )
                 )
                 woningwaarderingen.append(woningwaardering)

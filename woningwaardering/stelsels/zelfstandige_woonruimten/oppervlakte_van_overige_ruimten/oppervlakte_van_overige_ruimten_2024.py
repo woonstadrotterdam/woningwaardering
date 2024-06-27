@@ -75,7 +75,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                     meeteenheid=Meeteenheid.vierkante_meter_m2.value,
                     naam=criterium_naam
                     if not gedeelde_ruimte
-                    else f"{criterium_naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
+                    else f"{criterium_naam} ({ruimte.oppervlakte}m2, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                 )
 
                 if gedeelde_ruimte:

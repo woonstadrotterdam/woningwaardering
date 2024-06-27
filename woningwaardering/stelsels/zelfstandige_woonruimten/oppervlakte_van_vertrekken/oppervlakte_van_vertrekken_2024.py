@@ -80,13 +80,13 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                 ):
                     woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                         meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                        naam=f"{criterium_naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
+                        naam=f"{criterium_naam} ({ruimte.oppervlakte}m2, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                     )
 
                     woningwaardering.aantal = float(
                         (
                             Decimal(str(ruimte.oppervlakte)).quantize(
-                                Decimal("1"), ROUND_HALF_UP
+                                Decimal("0.01"), ROUND_HALF_UP
                             )
                             / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
                         ).quantize(Decimal("0.01"), ROUND_HALF_UP)
