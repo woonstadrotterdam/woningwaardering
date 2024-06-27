@@ -66,17 +66,19 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 
                 woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-                woningwaardering.criterium = (
-                    WoningwaarderingResultatenWoningwaarderingCriterium(
-                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                        naam=criterium_naam,
-                    )
+                gedeelde_ruimte = (
+                    ruimte.gedeeld_met_aantal_eenheden
+                    and ruimte.gedeeld_met_aantal_eenheden >= 2
                 )
 
-                if (
-                    ruimte.gedeeld_met_aantal_eenheden is not None
-                    and ruimte.gedeeld_met_aantal_eenheden >= 2
-                ):
+                woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                    naam=criterium_naam
+                    if not gedeelde_ruimte
+                    else f"{criterium_naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
+                )
+
+                if gedeelde_ruimte:
                     oppervlakte_per_eenheid = Decimal(
                         ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
                     )
