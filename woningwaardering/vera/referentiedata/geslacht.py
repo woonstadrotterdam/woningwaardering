@@ -11,13 +11,12 @@ class Geslacht(Enum):
     Mannelijk geslacht
     """
 
-    genderneutraal = Referentiedata(
-        code="X",
-        naam="Genderneutraal",
+    onbekend = Referentiedata(
+        code="O",
+        naam="Onbekend",
     )
     """
-    X is de term die zowel door de Nederlandse overheid als officieel door veel andere
-    landen wordt gebruikt om gender-neutraal te duiden.
+    Manier om genderneutraal aan te duiden of wanneer geslacht niet ter zake doet.
     """
 
     vrouwelijk = Referentiedata(
