@@ -20,7 +20,7 @@ from woningwaardering.vera.referentiedata import (
 )
 
 
-class BeschermdMonumentBmz2024(Stelselgroepversie):
+class BeschermdMonumentBmzJul2024(Stelselgroepversie):
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -68,17 +68,17 @@ class BeschermdMonumentBmz2024(Stelselgroepversie):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=Eenheidmonument.rijksmonument.naam,
                     ),
-                    punten=50.0,
+                    opslagpercentage=0.3,
                 )
             )
 
-        punten = Decimal(
+        opslagpercentage = Decimal(
             sum(
-                Decimal(str(woningwaardering.punten))
+                Decimal(str(woningwaardering.opslagpercentage))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
+                if woningwaardering.opslagpercentage is not None
             )
         )
 
-        woningwaardering_groep.punten = float(punten)
+        woningwaardering_groep.opslagpercentage = float(opslagpercentage)
         return woningwaardering_groep
