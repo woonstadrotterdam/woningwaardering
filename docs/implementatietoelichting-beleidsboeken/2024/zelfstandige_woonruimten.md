@@ -795,16 +795,16 @@ Indien een woonruimte bestaat uit of deel uitmaakt van een rijksmonument, als be
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de Rijksmonumenten: http://monumentenregister.cultureelerfgoed.nl/.
 
-### 4.13.2 Woning gelegen in beschermd stads- en dorpsgezicht
+### ~~4.13.2 Woning gelegen in beschermd stads- en dorpsgezicht~~
 
-Voor woningen, niet zijnde Rijksmonument, binnen beschermd stads- of dorpsgezicht geldt geen toeslag van 50 punten. Wel geldt een 15% hogere maximale huurprijs indien:
+~~Voor woningen, niet zijnde Rijksmonument, binnen beschermd stads- of dorpsgezicht geldt geen toeslag van 50 punten. Wel geldt een 15% hogere maximale huurprijs indien:~~
 
-- a. die woonruimte behoort tot een beschermd stads- en dorpsgezicht als bedoeld in artikel 1, onder g, van de Monumentenwet 1988,  
-- b. die woonruimte is gebouwd voor 1945, en  
-- c. door de verhuurder noodzakelijkerwijs gelden zijn besteed voor de instandhouding van de monumentale waarde van die woonruimte.
+- ~~a. die woonruimte behoort tot een beschermd stads- en dorpsgezicht als bedoeld in artikel 1, onder g, van de Monumentenwet 1988,~~  
+- ~~b. die woonruimte is gebouwd voor 1945, en~~  
+- ~~c. door de verhuurder noodzakelijkerwijs gelden zijn besteed voor de instandhouding van de monumentale waarde van die woonruimte.~~
 
-Een woning gebouwd voor 1945 en gelegen in een Rijksbeschermd stads- en dorpsgezicht kan dus, als aan bepaalde voorwaarden is voldaan, een toeslag van 15% op de maximale huurprijsgrens krijgen.
+~~Een woning gebouwd voor 1945 en gelegen in een Rijksbeschermd stads- en dorpsgezicht kan dus, als aan bepaalde voorwaarden is voldaan, een toeslag van 15% op de maximale huurprijsgrens krijgen.~~
 
-De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief beleid. Dit betekent dat het aan de verhuurder is om aan te tonen dat de woonruimte is gelegen binnen een beschermd stads- en dorpsgezicht en/of hier deel van uitmaakt. Er dient te worden aangetoond datBeleidsboek in een recent verleden en noodzakelijkerwijs investeringen zijn gedaan voor instandhouding van de monumentale waarde. De verhuurder dient middels facturen aan te tonen dat investeringen zijn gedaan op de beeldbepalende elementen én geen sprake is van noodzakelijke vervanging/ onderhoud of reguliere onderhoudswerkzaamheden. Alleen in die gevallen kan de commissie besluiten om de volgens waarderingsstelsel berekende maximale huurprijs, met 15% te verhogen. De beoordeling kan per situatie verschillen.
+~~De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief beleid. Dit betekent dat het aan de verhuurder is om aan te tonen dat de woonruimte is gelegen binnen een beschermd stads- en dorpsgezicht en/of hier deel van uitmaakt. Er dient te worden aangetoond datBeleidsboek in een recent verleden en noodzakelijkerwijs investeringen zijn gedaan voor instandhouding van de monumentale waarde. De verhuurder dient middels facturen aan te tonen dat investeringen zijn gedaan op de beeldbepalende elementen én geen sprake is van noodzakelijke vervanging/ onderhoud of reguliere onderhoudswerkzaamheden. Alleen in die gevallen kan de commissie besluiten om de volgens waarderingsstelsel berekende maximale huurprijs, met 15% te verhogen. De beoordeling kan per situatie verschillen.~~
 
-De berekende maximale huurprijs incl. 15% toeslag resulteert in de wettelijk maximale huurprijs. Indien de investeringen niet aantoonbaar zijn, dan wordt de 15% toeslag niet berekend.
+~~De berekende maximale huurprijs incl. 15% toeslag resulteert in de wettelijk maximale huurprijs. Indien de investeringen niet aantoonbaar zijn, dan wordt de 15% toeslag niet berekend.~~
