@@ -103,6 +103,7 @@ from .inspectierapportsoort import Inspectierapportsoort
 from .inspectierapportstatus import Inspectierapportstatus
 from .kandidaatdetailstatus import Kandidaatdetailstatus
 from .kandidaatstatus import Kandidaatstatus
+from .kwaliteitsmetingverzoeksoort import Kwaliteitsmetingverzoeksoort
 from .kwaliteitsniveau import Kwaliteitsniveau
 from .leningaflosvorm import Leningaflosvorm
 from .leningdetailsoort import Leningdetailsoort
@@ -186,6 +187,7 @@ from .vertrouwelijkheid import Vertrouwelijkheid
 from .voorrangdetailsoort import Voorrangdetailsoort
 from .voorrangsoort import Voorrangsoort
 from .vragenlijstregelherkomst import Vragenlijstregelherkomst
+from .vragenlijstregelonderwerpsoort import Vragenlijstregelonderwerpsoort
 from .woningtype import Woningtype
 from .woningwaarderingstelsel import Woningwaarderingstelsel
 from .woningwaarderingstelselgroep import Woningwaarderingstelselgroep
@@ -305,6 +307,7 @@ __all__ = [
     "Inspectierapportstatus",
     "Kandidaatdetailstatus",
     "Kandidaatstatus",
+    "Kwaliteitsmetingverzoeksoort",
     "Kwaliteitsniveau",
     "Leningaflosvorm",
     "Leningdetailsoort",
@@ -388,6 +391,7 @@ __all__ = [
     "Voorrangdetailsoort",
     "Voorrangsoort",
     "Vragenlijstregelherkomst",
+    "Vragenlijstregelonderwerpsoort",
     "Woningtype",
     "Woningwaarderingstelsel",
     "Woningwaarderingstelselgroep",
