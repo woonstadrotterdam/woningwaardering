@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import List
+from typing import List, Optional
 
 from loguru import logger
 
@@ -29,6 +29,7 @@ class Sanitair2024(Stelselgroepversie):
         woningwaarderingen: List[WoningwaarderingResultatenWoningwaardering],
         ruimte: EenhedenRuimte,
         punten_per_element: float,
+        gedeeld_met_aantal_eenheden: Optional[int] = None,
         *elementdetailsoort: Bouwkundigelementdetailsoort,
     ) -> bool:
         """
@@ -38,6 +39,7 @@ class Sanitair2024(Stelselgroepversie):
             woningwaarderingen (List[WoningwaarderingResultatenWoningwaardering]): Een list met woningwaarderingen.
             ruimte (EenhedenRuimte): Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
+            gedeeld_met_aantal_eenheden (Optional[int]): Het aantal eenheden waarmee de ruimte waarin de bouwkundig element zich bevindt gedeeld wordt. Defaults to None.
             *elementdetailsoort (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
 
         Returns:
@@ -77,7 +79,7 @@ class Sanitair2024(Stelselgroepversie):
 
             woningwaardering.punten = (
                 woningwaardering.punten or 0.0
-            ) + punten_per_element * aantal
+            ) + punten_per_element * aantal / (gedeeld_met_aantal_eenheden or 1)
 
             woningwaardering.aantal = (woningwaardering.aantal or 0.0) + aantal
 
@@ -106,24 +108,28 @@ class Sanitair2024(Stelselgroepversie):
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 3,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.closetcombinatie,
             )
             Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 1,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.wastafel,
             )
             Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 1,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.bidet,
             )
             Sanitair2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 1,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.lavet,
             )
 
@@ -131,6 +137,7 @@ class Sanitair2024(Stelselgroepversie):
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 7,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.bad,
                 Bouwkundigelementdetailsoort.douche,
             ):
@@ -138,6 +145,7 @@ class Sanitair2024(Stelselgroepversie):
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
                     6,
+                    ruimte.gedeeld_met_aantal_eenheden,
                     Bouwkundigelementdetailsoort.bad,
                 )
 
@@ -145,6 +153,7 @@ class Sanitair2024(Stelselgroepversie):
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
                     4,
+                    ruimte.gedeeld_met_aantal_eenheden,
                     Bouwkundigelementdetailsoort.douche,
                 )
 
