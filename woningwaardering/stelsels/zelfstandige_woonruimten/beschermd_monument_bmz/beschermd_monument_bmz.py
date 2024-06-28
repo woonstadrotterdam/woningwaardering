@@ -10,6 +10,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
 from woningwaardering.vera.referentiedata import (
+    Eenheidmonument,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -43,6 +44,29 @@ class BeschermdMonumentBmz(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.beschermd_monument_bmz
         super().__init__(peildatum=peildatum)
+
+    @staticmethod
+    def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
+        eenheid.monumenten = eenheid.monumenten or []
+
+        if (
+            eenheid.adresseerbaar_object_basisregistratie is not None
+            and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+            is not None
+        ):
+            BeschermdMonumentBmz.is_rijksmonument(
+                eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+            )
+            is_rijksmonument = BeschermdMonumentBmz.is_rijksmonument(
+                eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+            )
+            logger.info(
+                f"Eenheid {eenheid.id} met verblijfsobjectIdentificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie} is {'een' if is_rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+            )
+            if is_rijksmonument:
+                eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+
+        return eenheid
 
     @staticmethod
     def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool:
