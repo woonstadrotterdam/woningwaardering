@@ -42,26 +42,11 @@ class BeschermdMonumentBmzJul2024(Stelselgroepversie):
                 f"Monumenten is None voor eenheid {eenheid.id}. De api van cultureelerfgoed wordt geraadpleegd."
             )
 
-            eenheid.monumenten = []
-
-            if (
-                eenheid.adresseerbaar_object_basisregistratie is not None
-                and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
-                is not None
-            ):
-                BeschermdMonumentBmz.is_rijksmonument("0363010000857245")
-                is_rijksmonument = BeschermdMonumentBmz.is_rijksmonument(
-                    eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
-                )
-                logger.info(
-                    f"Eenheid {eenheid.id} met verblijfsobjectIdentificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie} is {'een' if is_rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
-                )
-                if is_rijksmonument:
-                    eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+            BeschermdMonumentBmz.update_eenheid_monumenten(eenheid)
 
         if any(
             monument.code == Eenheidmonument.rijksmonument.code
-            for monument in eenheid.monumenten
+            for monument in eenheid.monumenten or []
         ):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
