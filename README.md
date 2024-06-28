@@ -337,17 +337,6 @@ In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verw
 - https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
 - https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
 
-### Tuin
-
-In de huidige referentiedata zijn er vier verschillende soorten tuinen in de vorm van een privé buitenruimte:
-
-- achtertuin
-- tuin rondom
-- voortuin
-- zijtuin
-
-Dit leidt enigszins tot onnodige complexiteit in de context van bijvoorbeeld de woningwaardering, omdat elke vorm van een privétuin gelijkwaardig wordt gewaardeerd en bij modellering van eenheden tuinen niet op dit detailniveau worden gemodelleerd volgens de Aedes ILS. Hierom hebben wij de referentiedata uitgebreid met een nieuwe, generieke tuinsoort: `tuin`. Zie ook https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/107.
-
 ### Afmetingen Ruimte
 
 Voor de waardering van buitenruimten dienen de afmetingen van ruimtes doorgegeven te worden. Hiervoor zijn de volgende attributen op Eenheden-Ruimte toegevoegd:
@@ -357,18 +346,6 @@ Voor de waardering van buitenruimten dienen de afmetingen van ruimtes doorgegeve
 - `hoogte`: De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan `None` zijn, bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
 
 Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/63.
-
-### Parkeervoorzieningen
-
-Om parkeerzoorzieningen correct te kunnen waarderen als onderdeel van Privé-buitenruimten missen er in de VERA referentiedata een aantal soorten parkeervoorziening. Hiervoor is de referentiedata voor ruimtedetailsoort aangevuld met:
-
-- `PNS`: Parkeergarage niet specifieke plek
-- `OPS`: Open parkeergarage specifieke plek
-- `OPN`: Open parkeergarage niet specifieke plek
-- `GPN`: Gemeenschappelijke parkeerruimte niet specifieke plek
-- `GPS`: Gemeenschappelijke parkeerruimte specifieke plek
-
-Zie ook https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110.
 
 ### Oppervlakten
 
