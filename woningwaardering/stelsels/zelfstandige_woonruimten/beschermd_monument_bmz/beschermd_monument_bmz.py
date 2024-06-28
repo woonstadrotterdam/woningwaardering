@@ -26,8 +26,8 @@ query_template = """
 ASK
 WHERE {{
     SERVICE <{endpoint}> {{
-        ?monument a ceo:Rijksmonument ;
-            ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
+        ?monument a ceo:Rijksmonument .
+        ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
         ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
         ?bagRelatie ceo:verblijfsobjectIdentificatie ?verblijfsobjectIdentificatie .
     }}
