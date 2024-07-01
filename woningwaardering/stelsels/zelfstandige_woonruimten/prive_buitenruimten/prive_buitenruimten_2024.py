@@ -2,8 +2,8 @@ import datetime
 from decimal import ROUND_HALF_UP, Decimal
 from importlib.resources import files
 
-from loguru import logger
 import pandas as pd
+from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import (
@@ -96,6 +96,13 @@ class PriveBuitenruimten2024(Stelselgroepversie):
 
                 logger.info(
                     f"{buitenruimte.id} {buitenruimte.naam} wordt voor {woningwaardering.aantal} m2 meegerekend voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                )
+
+                # corrigeer buitenruimte voor wanneer deze gedeeld wordt met andere eenheden
+                woningwaardering = (
+                    PriveBuitenruimten2024._bereken_gedeelde_buitenruimte(
+                        buitenruimte, woningwaardering
+                    )
                 )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
@@ -212,20 +219,23 @@ class PriveBuitenruimten2024(Stelselgroepversie):
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
         gedeeld_met_aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-        oppervlakte = float(
-            Decimal(str(ruimte.oppervlakte)) / Decimal(str(gedeeld_met_aantal_eenheden))
-        )
+        if gedeeld_met_aantal_eenheden >= 2:
+            # eigenlijk moet oppervlakte niet gedeeld worden door het aantal eenheden, maar de punten.
+            # i.v.m. complexiteit daarvan is er voor gekozen om toch de oppervlakte te delen omdat in de meeste gevallen
+            # dit een redelijke benadering is.
+            oppervlakte = float(
+                Decimal(str(ruimte.oppervlakte))
+                / Decimal(str(gedeeld_met_aantal_eenheden))
+            )
 
-        woningwaardering.criterium = (
-            WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"{ruimte.naam}",
+            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam=f"{ruimte.naam} ({ruimte.oppervlakte}m2, gedeeld met {gedeeld_met_aantal_eenheden})",
                 meeteenheid=Meeteenheid.vierkante_meter_m2.value,
             )
-        )
 
-        woningwaardering.aantal = float(
-            Decimal(str(oppervlakte)).quantize(Decimal("0.01"), ROUND_HALF_UP)
-        )
+            woningwaardering.aantal = float(
+                Decimal(str(oppervlakte)).quantize(Decimal("0.01"), ROUND_HALF_UP)
+            )
 
         return woningwaardering
 
