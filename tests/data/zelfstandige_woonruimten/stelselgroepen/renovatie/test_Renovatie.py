@@ -1,3 +1,4 @@
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -24,7 +25,7 @@ def specifieke_input_en_output_model(request):
 
 
 def test_Renovatie(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat):
-    renovatie = Renovatie()
+    renovatie = Renovatie(date(2024, 1, 1))
     resultaat = renovatie.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
