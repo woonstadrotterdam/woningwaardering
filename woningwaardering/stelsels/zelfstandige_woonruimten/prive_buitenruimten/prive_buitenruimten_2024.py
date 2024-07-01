@@ -71,7 +71,8 @@ class PriveBuitenruimten2024(Stelselgroepversie):
             for buitenruimte in buitenruimten:
                 if (
                     buitenruimte.soort
-                    == Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen
+                    and buitenruimte.soort.code
+                    == Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen.code
                     and (
                         buitenruimte.gedeeld_met_aantal_eenheden is None
                         or buitenruimte.gedeeld_met_aantal_eenheden < 2
