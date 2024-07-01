@@ -69,6 +69,17 @@ class PriveBuitenruimten2024(Stelselgroepversie):
             )
 
             for buitenruimte in buitenruimten:
+                if (
+                    buitenruimte.soort
+                    == Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen
+                    and (
+                        buitenruimte.gedeeld_met_aantal_eenheden is None
+                        or buitenruimte.gedeeld_met_aantal_eenheden < 2
+                    )
+                ):
+                    raise ValueError(
+                        f"{buitenruimte.naam} {buitenruimte.id} is een gemeenschappelijke ruimte en moet gedeeld worden met minimaal 2 eenheden, maar gedeeldMetAantalEenheden={buitenruimte.gedeeld_met_aantal_eenheden}"
+                    )
                 if buitenruimte.detail_soort is None:
                     raise ValueError(
                         f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} heeft geen detailsoort"
