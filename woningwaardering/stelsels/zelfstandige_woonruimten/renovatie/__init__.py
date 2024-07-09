@@ -1,8 +1,8 @@
 from .renovatie import Renovatie
-from .renovatie_2024 import Renovatie2024
+from .renovatie_jan_2024 import RenovatieJan2024
 
 
 __all__ = [
     "Renovatie",
-    "Renovatie2024",
+    "RenovatieJan2024",
 ]
