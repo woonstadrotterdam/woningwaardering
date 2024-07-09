@@ -23,7 +23,7 @@ from woningwaardering.vera.utils import (
 )
 
 
-class Sanitair2024(Stelselgroepversie):
+class SanitairJan2024(Stelselgroepversie):
     @staticmethod
     def _waardeer_bouwkundig_element_detailsoort(
         woningwaarderingen: List[WoningwaarderingResultatenWoningwaardering],
@@ -102,46 +102,46 @@ class Sanitair2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
-            Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+            SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 3,
                 Bouwkundigelementdetailsoort.closetcombinatie,
             )
-            Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+            SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 1,
                 Bouwkundigelementdetailsoort.wastafel,
             )
-            Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+            SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 1,
                 Bouwkundigelementdetailsoort.bidet,
             )
-            Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+            SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 1,
                 Bouwkundigelementdetailsoort.lavet,
             )
 
-            if not Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+            if not SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 7,
                 Bouwkundigelementdetailsoort.bad,
                 Bouwkundigelementdetailsoort.douche,
             ):
-                Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+                SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
                     6,
                     Bouwkundigelementdetailsoort.bad,
                 )
 
-                Sanitair2024._waardeer_bouwkundig_element_detailsoort(
+                SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
                     4,

@@ -6,7 +6,7 @@ from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde import (
-    PuntenVoorDeWozWaarde2024,
+    PuntenVoorDeWozWaardeJan2024,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -22,7 +22,7 @@ from woningwaardering.vera.referentiedata import (
 )
 
 
-class Renovatie2024(Stelselgroepversie):
+class RenovatieJan2024(Stelselgroepversie):
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -70,7 +70,7 @@ class Renovatie2024(Stelselgroepversie):
                 # geleid tot minima`al 40 punten voor de WOZ-waarde.
                 if (
                     2015 <= eenheid.renovatie.datum.year <= 2019
-                    and PuntenVoorDeWozWaarde2024.hoogniveau_renovatie(
+                    and PuntenVoorDeWozWaardeJan2024.hoogniveau_renovatie(
                         eenheid, self.peildatum
                     )
                 ):

@@ -36,7 +36,7 @@ LOOKUP_TABEL_FOLDER = (
 )
 
 
-class Energieprestatie2024(Stelselgroepversie):
+class EnergieprestatieJan2024(Stelselgroepversie):
     lookup_mapping = {
         "oppervlakte_0-25": pd.read_csv(
             files("woningwaardering").joinpath(
@@ -120,7 +120,7 @@ class Energieprestatie2024(Stelselgroepversie):
             woningwaardering.criterium.naam = f"{label} (oud)"
             lookup_key = "oud"
 
-        df = Energieprestatie2024.lookup_mapping[lookup_key].pipe(
+        df = EnergieprestatieJan2024.lookup_mapping[lookup_key].pipe(
             filter_dataframe_op_datum, datum_filter=date(2024, 1, 1)
         )
 
@@ -166,7 +166,7 @@ class Energieprestatie2024(Stelselgroepversie):
     ) -> WoningwaarderingResultatenWoningwaardering:
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
-        df = Energieprestatie2024.lookup_mapping["bouwjaar"].pipe(
+        df = EnergieprestatieJan2024.lookup_mapping["bouwjaar"].pipe(
             filter_dataframe_op_datum, datum_filter=date(2024, 1, 1)
         )
         filtered_df = df[
@@ -228,7 +228,7 @@ class Energieprestatie2024(Stelselgroepversie):
             )
 
         elif eenheid.bouwjaar and not energieprestatie:
-            woningwaardering = Energieprestatie2024._bereken_punten_met_bouwjaar(
+            woningwaardering = EnergieprestatieJan2024._bereken_punten_met_bouwjaar(
                 eenheid, eenheid.woningtype.naam, woningwaardering
             )
 
@@ -255,7 +255,7 @@ class Energieprestatie2024(Stelselgroepversie):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    energieprestatie = Energieprestatie2024()
+    energieprestatie = EnergieprestatieJan2024()
     with open(
         "tests/data/zelfstandige_woonruimten/stelselgroepen/energieprestatie/input/eenheid_A++++_egw.json",
         "r+",

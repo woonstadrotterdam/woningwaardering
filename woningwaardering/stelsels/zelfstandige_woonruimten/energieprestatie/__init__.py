@@ -1,8 +1,8 @@
 from .energieprestatie import Energieprestatie
-from .energieprestatie_2024 import Energieprestatie2024
+from .energieprestatie_jan_2024 import EnergieprestatieJan2024
 
 
 __all__ = [
     "Energieprestatie",
-    "Energieprestatie2024",
+    "EnergieprestatieJan2024",
 ]
