@@ -51,9 +51,51 @@ class BeschermdMonumentBmzJul2024(Stelselgroepversie):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=Eenheidmonument.rijksmonument.naam,
+                        naam="Rijksmonument",
                     ),
-                    opslagpercentage=0.3,
+                    opslagpercentage=0.35,
+                )
+            )
+
+        if any(
+            monument.code
+            in [
+                Eenheidmonument.gemeentelijk_monument.code,
+                Eenheidmonument.provinciaal_monument.code,
+            ]
+            for monument in eenheid.monumenten or []
+        ):
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Gemeentelijk of provinciaal monument",
+                    ),
+                    opslagpercentage=0.15,
+                )
+            )
+
+        if any(
+            monument.code
+            in [
+                Eenheidmonument.beschermd_dorpsgezicht.code,
+                Eenheidmonument.beschermd_stadsgezicht.code,
+            ]
+            for monument in eenheid.monumenten or []
+        ) and not any(
+            monument.code
+            in [
+                Eenheidmonument.gemeentelijk_monument.code,
+                Eenheidmonument.provinciaal_monument.code,
+                Eenheidmonument.rijksmonument.code,
+            ]
+            for monument in eenheid.monumenten or []
+        ):
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Beschermd stads- of dorpsgezicht",
+                    ),
+                    opslagpercentage=0.05,
                 )
             )
 

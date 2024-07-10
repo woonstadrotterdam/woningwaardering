@@ -14,12 +14,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Rijksmonument"
+            "naam": "Beschermd stads- of dorpsgezicht"
           },
-          "opslagpercentage": 0.35
+          "opslagpercentage": 0.05
         }
       ],
-      "opslagpercentage": 0.35
+      "opslagpercentage": 0.05
     }
   ]
 }

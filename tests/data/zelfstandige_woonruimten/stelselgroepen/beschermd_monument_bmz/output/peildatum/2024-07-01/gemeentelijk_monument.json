@@ -14,12 +14,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Rijksmonument"
+            "naam": "Gemeentelijk of provinciaal monument"
           },
-          "opslagpercentage": 0.35
+          "opslagpercentage": 0.15
         }
       ],
-      "opslagpercentage": 0.35
+      "opslagpercentage": 0.15
     }
   ]
 }
