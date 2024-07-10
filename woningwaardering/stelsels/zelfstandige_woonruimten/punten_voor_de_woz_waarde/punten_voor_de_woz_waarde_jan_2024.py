@@ -66,8 +66,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
-            logger.warning("Geen WOZ-waarde gevonden")
-            woz_waarde = 0
+            raise Warning(f"Geen WOZ-waarde gevonden voor eenheid {eenheid.id}")
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
 

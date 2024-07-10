@@ -44,10 +44,9 @@ class KeukenJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if not ruimte.detail_soort:
-                logger.warning(
+                raise Warning(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail_soort."
                 )
-                continue
 
             if ruimte.detail_soort.code not in [
                 Ruimtedetailsoort.keuken.code,
@@ -71,17 +70,16 @@ class KeukenJan2024(Stelselgroepversie):
                 Ruimtedetailsoort.keuken.code,
                 Ruimtedetailsoort.woonkamer_en_of_keuken.code,
             ]:
-                logger.warning(
+                raise Warning(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) is een (open) keuken zonder aanrecht."
                 )
                 continue
 
             for aanrecht in aanrechten:
                 if not aanrecht.lengte:
-                    logger.warning(
+                    raise Warning(
                         f"{Bouwkundigelementdetailsoort.aanrecht.naam} {aanrecht.id} in ruimte {ruimte.id} heeft geen lengte en kan daardoor niet gewaardeerd worden."
                     )
-                    continue
 
                 if aanrecht.lengte:
                     if aanrecht.lengte < 1000:
@@ -107,10 +105,9 @@ class KeukenJan2024(Stelselgroepversie):
                     )
 
         if not keukens:
-            logger.warning(
-                f"Geen keuken met aanrecht gevonden: Eenheid {eenheid.id} komt niet in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+            raise Warning(
+                f"Geen keuken met aanrecht gevonden: Eenheid {eenheid.id} kan neit gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
             )
-            return woningwaardering_groep
 
         totaal_punten = Decimal(
             sum(

@@ -1,7 +1,5 @@
 from datetime import date
-
 from loguru import logger
-import woningwaardering
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
@@ -22,9 +20,9 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
-    woningwaardering.configureer_logger(
-        config=woningwaardering.LoggerConfig(level="INFO", warning_critical=False)
-    )
+    # woningwaardering.configureer_logger(
+    #     config=woningwaardering.LoggerConfig(level="INFO", warning_critical=True)
+    # )
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten()
     with open(
