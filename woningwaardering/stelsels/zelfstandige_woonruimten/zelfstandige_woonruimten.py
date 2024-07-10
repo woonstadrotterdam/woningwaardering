@@ -21,8 +21,10 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    woningwaardering.configureer_logger(config={"level": "WARNING-CRITICAL"})
     logger.enable("woningwaardering")
+    woningwaardering.configureer_logger(
+        config=woningwaardering.LoggerConfig(level="INFO", warning_critical=False)
+    )
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten()
     with open(

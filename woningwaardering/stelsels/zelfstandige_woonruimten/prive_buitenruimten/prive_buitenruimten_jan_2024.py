@@ -77,7 +77,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                     buitenruimte
                 ):
                     logger.info(
-                        f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} komt niet in aanmerking voor waardering onder {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                        f"Buitenruimte {buitenruimte.naam} ({buitenruimte.id}) komt niet in aanmerking voor waardering onder {Woningwaarderingstelselgroep.prive_buitenruimten.naam} op basis van afmeting criteria"
                     )
                     continue
 
@@ -95,7 +95,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                     )
 
                 logger.info(
-                    f"{buitenruimte.id} {buitenruimte.naam} wordt voor {woningwaardering.aantal} m2 meegerekend voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                    f"Buitenruimte {buitenruimte.naam} ({buitenruimte.id}) wordt voor {woningwaardering.aantal} m2 meegerekend voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
                 )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
@@ -176,7 +176,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
 
         if missende_attributen:
             error_message = (
-                f"Ruimte {ruimte.naam} {ruimte.id} heeft geen "
+                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen "
                 + " en ".join(missende_attributen)
             )
             raise ValueError(error_message)

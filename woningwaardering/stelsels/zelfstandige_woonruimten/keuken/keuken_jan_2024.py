@@ -44,7 +44,9 @@ class KeukenJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if not ruimte.detail_soort:
-                logger.warning(f"Ruimte {ruimte.id} heeft geen detail_soort.")
+                logger.warning(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail_soort."
+                )
                 continue
 
             if ruimte.detail_soort.code not in [
@@ -63,14 +65,14 @@ class KeukenJan2024(Stelselgroepversie):
 
             if any(aanrechten):
                 logger.info(
-                    f"Ruimte {ruimte.id} is een keuken met {Bouwkundigelementdetailsoort.aanrecht.naam} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met {Bouwkundigelementdetailsoort.aanrecht.naam} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
                 )
             elif ruimte.detail_soort.code in [
                 Ruimtedetailsoort.keuken.code,
                 Ruimtedetailsoort.woonkamer_en_of_keuken.code,
             ]:
                 logger.warning(
-                    f"Ruimte {ruimte.id} is een (open) keuken zonder aanrecht."
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een (open) keuken zonder aanrecht."
                 )
                 continue
 
@@ -90,7 +92,7 @@ class KeukenJan2024(Stelselgroepversie):
                         punten = 4.0
 
                     logger.info(
-                        f"Ruimte {ruimte.id} is een keuken met een aanrecht met lengte {aanrecht.lengte} millimeter en krijgt {punten}."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met een aanrecht met lengte {aanrecht.lengte} millimeter en krijgt {punten}."
                     )
 
                     woningwaardering_groep.woningwaarderingen.append(
