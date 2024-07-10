@@ -4,7 +4,7 @@ import sys
 import time
 from types import TracebackType
 from typing import Literal
-from loguru import logger
+from loguru import logger, Message
 from pydantic import BaseModel
 
 
@@ -68,7 +68,7 @@ def configureer_logger(config: LoggerConfig = LoggerConfig()) -> None:
     # Zet een handler die WarningCriticalException raised bij een warning
     if config.warning_critical:
 
-        def critical_handler(message):
+        def critical_handler(message: Message) -> None:
             # try:
             raise CriticalWarningException(
                 f"CriticalWarningException: {message.record['message']}"
