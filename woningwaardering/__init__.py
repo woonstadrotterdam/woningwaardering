@@ -3,10 +3,7 @@ import os
 import sys
 import time
 from types import TracebackType
-from typing import Literal
-from loguru import logger, Message
-from pydantic import BaseModel
-
+from loguru import logger
 
 logger.disable("woningwaardering")
 
@@ -48,37 +45,3 @@ def handle_unhandled_exception(
 
 
 sys.excepthook = handle_unhandled_exception
-
-
-class CriticalWarningException(Exception):
-    pass
-
-
-class LoggerConfig(BaseModel):
-    level: Literal["DEBUG", "INFO", "WARNING"] = "INFO"
-    warning_critical: bool = False
-
-
-def configureer_logger(config: LoggerConfig = LoggerConfig()) -> None:
-    # remove bestaande logger
-    logger.remove()
-
-    logger.add(sys.stderr, level=config.level)
-
-    # Zet een handler die WarningCriticalException raised bij een warning
-    if config.warning_critical:
-
-        def critical_handler(message: Message) -> None:
-            # try:
-            raise CriticalWarningException(
-                f"CriticalWarningException: {message.record['message']}"
-            )
-            # except
-
-        logger.add(critical_handler, level="WARNING", catch=False)
-
-
-logger.enable("woningwaardering")
-configureer_logger(LoggerConfig(level="INFO", warning_critical=False))
-
-__all__ = ["configureer_logger", "LoggerConfig", "CriticalWarningException", "logger"]
