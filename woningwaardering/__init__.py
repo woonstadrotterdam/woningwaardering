@@ -23,7 +23,7 @@ if timezone is None:
     os.environ["TZ"] = default_timezone
     time.tzset()
 else:
-    logger.debug(f"Tijdzone ingesteld via environment variable: {timezone}")
+    logger.info(f'Tijdzone ingesteld via environment variable "TZ": {timezone}')
 
 
 def handle_unhandled_exception(
