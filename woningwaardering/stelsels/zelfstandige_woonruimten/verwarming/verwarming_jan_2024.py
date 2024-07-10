@@ -28,7 +28,7 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
-class Verwarming2024(Stelselgroepversie):
+class VerwarmingJan2024(Stelselgroepversie):
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -43,7 +43,7 @@ class Verwarming2024(Stelselgroepversie):
             )
         )
 
-        punten_per_ruimte = Verwarming2024.punten_per_ruimte(
+        punten_per_ruimte = VerwarmingJan2024.punten_per_ruimte(
             eenheid.klimaatbeheersingsoort
         )
 
@@ -180,14 +180,14 @@ class Verwarming2024(Stelselgroepversie):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    verwarming2024 = Verwarming2024()
+    verwarmingJan2024 = VerwarmingJan2024()
     with open(
         "tests/data/zelfstandige_woonruimten/input/77795000000.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-        woningwaardering_resultaat = verwarming2024.bereken(eenheid)
+        woningwaardering_resultaat = verwarmingJan2024.bereken(eenheid)
 
         print(
             woningwaardering_resultaat.model_dump_json(

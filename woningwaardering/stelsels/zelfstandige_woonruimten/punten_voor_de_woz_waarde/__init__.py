@@ -1,8 +1,8 @@
 from .punten_voor_de_woz_waarde import PuntenVoorDeWozWaarde
-from .punten_voor_de_woz_waarde_2024 import PuntenVoorDeWozWaarde2024
+from .punten_voor_de_woz_waarde_jan_2024 import PuntenVoorDeWozWaardeJan2024
 
 
 __all__ = [
     "PuntenVoorDeWozWaarde",
-    "PuntenVoorDeWozWaarde2024",
+    "PuntenVoorDeWozWaardeJan2024",
 ]

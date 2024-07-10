@@ -34,7 +34,7 @@ LOOKUP_TABEL_FOLDER = (
 )
 
 
-class PriveBuitenruimten2024(Stelselgroepversie):
+class PriveBuitenruimtenJan2024(Stelselgroepversie):
     df_oppervlakte_punten = pd.read_csv(
         files("woningwaardering").joinpath(
             f"{LOOKUP_TABEL_FOLDER}/oppervlakte_punten.csv"
@@ -73,7 +73,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                     raise ValueError(
                         f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} heeft geen detailsoort"
                     )
-                if not PriveBuitenruimten2024._buitenruimte_heeft_geldige_afmetingen(
+                if not PriveBuitenruimtenJan2024._buitenruimte_heeft_geldige_afmetingen(
                     buitenruimte
                 ):
                     logger.debug(
@@ -86,11 +86,11 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                 if buitenruimte.detail_soort.code in [
                     Ruimtedetailsoort.carport.code,
                 ]:
-                    woningwaardering = PriveBuitenruimten2024._bereken_carport(
+                    woningwaardering = PriveBuitenruimtenJan2024._bereken_carport(
                         buitenruimte, woningwaardering
                     )
                 else:
-                    woningwaardering = PriveBuitenruimten2024._bereken_buitenruimte(
+                    woningwaardering = PriveBuitenruimtenJan2024._bereken_buitenruimte(
                         buitenruimte, woningwaardering
                     )
 
@@ -133,7 +133,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
         )
 
         if aantal > 0:
-            punten += PriveBuitenruimten2024._bereken_punten_met_oppervlakte(aantal)
+            punten += PriveBuitenruimtenJan2024._bereken_punten_met_oppervlakte(aantal)
 
         woningwaardering_groep.punten = float(punten)
 
@@ -149,22 +149,22 @@ class PriveBuitenruimten2024(Stelselgroepversie):
 
     @staticmethod
     def _bereken_punten_met_oppervlakte(oppervlakte: float) -> float:
-        filtered_df = PriveBuitenruimten2024.df_oppervlakte_punten[
+        filtered_df = PriveBuitenruimtenJan2024.df_oppervlakte_punten[
             (
                 (
-                    PriveBuitenruimten2024.df_oppervlakte_punten["OppervlakteMin"]
+                    PriveBuitenruimtenJan2024.df_oppervlakte_punten["OppervlakteMin"]
                     <= oppervlakte
                 )
-                | PriveBuitenruimten2024.df_oppervlakte_punten[
+                | PriveBuitenruimtenJan2024.df_oppervlakte_punten[
                     "OppervlakteMin"
                 ].isnull()
             )
             & (
                 (
-                    PriveBuitenruimten2024.df_oppervlakte_punten["OppervlakteMax"]
+                    PriveBuitenruimtenJan2024.df_oppervlakte_punten["OppervlakteMax"]
                     >= oppervlakte
                 )
-                | PriveBuitenruimten2024.df_oppervlakte_punten[
+                | PriveBuitenruimtenJan2024.df_oppervlakte_punten[
                     "OppervlakteMax"
                 ].isnull()
             )
@@ -250,7 +250,7 @@ class PriveBuitenruimten2024(Stelselgroepversie):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    prive_buitenruimte = PriveBuitenruimten2024()
+    prive_buitenruimte = PriveBuitenruimtenJan2024()
     with open(
         "tests/data/zelfstandige_woonruimten/input/37101000032.json",
         "r+",
