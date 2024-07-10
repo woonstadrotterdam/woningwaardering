@@ -53,7 +53,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
-            logger.warning(
+            logger.info(
                 "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
             )
             woningwaardering_resultaat = self._bereken_woningwaarderingresultaat(
@@ -66,8 +66,8 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
-            woz_waarde = 0
             logger.warning("Geen WOZ-waarde gevonden")
+            woz_waarde = 0
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
 
@@ -122,7 +122,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         )
 
         logger.info(
-            f"Stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam} krijgt {woningwaardering_groep.punten} punten"
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
         )
 
         return woningwaardering_groep

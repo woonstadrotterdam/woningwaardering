@@ -50,7 +50,7 @@ class RenovatieJan2024(Stelselgroepversie):
             # gedaan van minimaal € 10.000.
             if eenheid.renovatie.investeringsbedrag < 10000:
                 logger.info(
-                    f"Investering van renovatie in {eenheid.renovatie.datum.year} is te laag."
+                    f"De Investering van renovatie in {eenheid.renovatie.datum.year} is te laag en komt niet aanmekring voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                 )
                 return woningwaardering_groep
 
@@ -74,7 +74,7 @@ class RenovatieJan2024(Stelselgroepversie):
                         eenheid, self.peildatum
                     )
                 ):
-                    logger.debug(
+                    logger.info(
                         f"Hoogniveau renovatie in 2015-2019 komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                     )
                     return woningwaardering_groep
@@ -107,4 +107,8 @@ class RenovatieJan2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}"
+        )
         return woningwaardering_groep

@@ -101,7 +101,7 @@ def vind_yaml_bestanden(directory: str) -> list[str]:
     Returns:
         list[str]: Een lijst met paden naar de gevonden YAML-bestanden.
     """
-    logger.debug(f"Zoek naar YAML-bestanden in: {directory}")
+    logger.info(f"Zoek naar YAML-bestanden in: {directory}")
 
     yaml_files = [
         os.path.join(root, file)
@@ -386,8 +386,9 @@ def energieprestatie_met_geldig_label(
                     )
                 )
             ):
-                logger.debug("Energieprestatie met geldig label gevonden")
+                logger.info("Energieprestatie met geldig label gevonden")
+                logger.debug(f"Energieprestatie: {energieprestatie}")
                 return energieprestatie
 
-    logger.debug("Geen geldige energieprestatie met label gevonden")
+    logger.info("Geen geldige energieprestatie met label gevonden")
     return None

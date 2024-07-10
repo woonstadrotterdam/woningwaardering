@@ -92,7 +92,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
         if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap):
-            logger.debug(
+            logger.info(
                 f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): wordt gewaardeerd als {ruimte.soort.naam}"
             )
             if (
@@ -105,7 +105,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             else:
                 return None
         elif heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap):
-            logger.debug(
+            logger.info(
                 f"Vlizo trap gevonden in {ruimte.naam} ({ruimte.id}): wordt gewaardeerd als {Ruimtesoort.overige_ruimtes}"
             )
             if ruimte.oppervlakte >= 2:
@@ -113,7 +113,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             else:
                 return None
 
-        logger.debug(
+        logger.info(
             f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): wordt niet gewaardeerd binnen {Woningwaarderingstelsel.zelfstandige_woonruimten}"
         )
     return None
@@ -181,7 +181,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
                     ]
                 )
 
-            logger.debug(
+            logger.info(
                 f"De netto oppervlakte van {aantal_ruimte_kasten} verbonden {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'} is opgeteld bij {ruimte.naam}"
             )
 

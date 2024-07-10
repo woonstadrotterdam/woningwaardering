@@ -146,7 +146,7 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         )
 
         if energieprestatievergoeding:
-            logger.debug("Energieprestatievergoeding gevonden.")
+            logger.info("Energieprestatievergoeding gevonden.")
 
         if energieprestatievergoeding and waarderings_label != Energielabel.b.naam:
             waarderings_label = Energielabel.b.naam
@@ -205,7 +205,7 @@ class EnergieprestatieJan2024(Stelselgroepversie):
             and (energieprestatie or eenheid.bouwjaar)
         ):
             logger.warning(
-                f"Eenheid {eenheid.id} heeft geen woningtype en/of geldig energielabel en/of bouwjaar en komt daarom niet in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
+                f"Eenheid {eenheid.id} heeft geen woningtype en/of geldig energielabel en/of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
             )
             return woningwaardering_groep
 
@@ -233,8 +233,8 @@ class EnergieprestatieJan2024(Stelselgroepversie):
             )
 
         if woningwaardering.criterium:
-            logger.debug(
-                f"Eenheid {eenheid.id} met {woningwaardering.criterium.naam} krijgt {woningwaardering.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
+            logger.info(
+                f"{woningwaardering.criterium.naam} krijgt {woningwaardering.punten} punten."
             )
 
         woningwaardering_groep.woningwaarderingen.append(woningwaardering)
@@ -249,6 +249,11 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.punten = float(punten_totaal)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
+        )
+
         return woningwaardering_groep
 
 

@@ -59,8 +59,9 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
             if classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimtes:
                 if ruimte.oppervlakte < 2:
-                    logger.debug(
-                        f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter"
+                    logger.debug(f"ruimte.oppervlakte = {ruimte.oppervlakte} m2")
+                    logger.info(
+                        f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 m2 en telt daarom niet mee voor overige ruimtes."
                     )
                     continue
 
@@ -92,8 +93,8 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
                             ).quantize(Decimal("0.01"), ROUND_HALF_UP)
                         )
                     else:
-                        logger.debug(
-                            f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter per eenheid en komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+                        logger.info(
+                            f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 m2 per eenheid en komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                         )
                         continue
 
@@ -126,6 +127,11 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
         ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("0.75")
 
         woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+        )
+
         return woningwaardering_groep
 
     @staticmethod
@@ -143,7 +149,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
             trap = heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
 
             if trap:
-                logger.debug(
+                logger.info(
                     f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                 )
                 return float(
@@ -157,7 +163,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
             )
 
             if vlizotrap:
-                logger.debug(
+                logger.info(
                     f"Vlizotrap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van overige ruimten"
                 )
                 return max(
@@ -183,7 +189,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
                     ),
                 )
 
-        logger.warning(
+        logger.info(
             f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
         )
         return 0.0

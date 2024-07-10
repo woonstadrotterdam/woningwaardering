@@ -59,8 +59,7 @@ class VerwarmingJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.detail_soort is None:
-                error_msg = f"ruimte {ruimte.id} heeft geen detailsoort"
-                raise TypeError(error_msg)
+                raise TypeError(f"ruimte {ruimte.id} heeft geen detailsoort")
 
             ruimtesoort = classificeer_ruimte(ruimte)
 
@@ -72,8 +71,8 @@ class VerwarmingJan2024(Stelselgroepversie):
                 in [Ruimtesoort.overige_ruimtes.code, Ruimtesoort.vertrek.code]
                 and ruimte.verwarmd
             ):
-                logger.debug(
-                    f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.verwarming.naam}"
+                logger.info(
+                    f"{ruimte.detail_soort.naam} {ruimte.detail_soort.code} komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.verwarming.naam}"
                 )
                 continue
 
@@ -89,25 +88,25 @@ class VerwarmingJan2024(Stelselgroepversie):
 
             if ruimtesoort == Ruimtesoort.overige_ruimtes:
                 if totaal_punten_overige_ruimten >= Decimal("4.0"):
-                    logger.debug(
+                    logger.info(
                         f"De overige ruimten hebben bij elkaar {totaal_punten_overige_ruimten} punten behaald: {ruimte.id} {ruimte.naam} wordt niet meegeteld voor Verwarming."
                     )
                     continue
 
                 # Als de punten de maximum van 4.0 overschrijden, dan wordt het aantal punten dat nog mag worden gegeven voor de ruimte aangepast
                 if (totaal_punten_overige_ruimten + punten) >= Decimal("4.0"):
-                    logger.debug(
+                    logger.info(
                         f"De maximum punten voor {Ruimtesoort.overige_ruimtes.naam} zijn behaald: punten voor {ruimte.id} {ruimte.naam} worden gecorrigeerd."
                     )
                     punten = Decimal("4.0") - totaal_punten_overige_ruimten
 
                 totaal_punten_overige_ruimten += punten
-                logger.debug(
+                logger.info(
                     f"Ruimte {ruimte.id} {ruimte.naam} telt als verwarmde {Ruimtesoort.overige_ruimtes.naam} en krijgt {punten} punten."
                 )
 
             else:
-                logger.debug(
+                logger.info(
                     f"Ruimte {ruimte.id} {ruimte.naam} telt als verwarmd {Ruimtesoort.vertrek.naam} en krijgt {punten} punten."
                 )
 
@@ -151,6 +150,11 @@ class VerwarmingJan2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.verwarming.naam}"
+        )
+
         return woningwaardering_groep
 
     @staticmethod

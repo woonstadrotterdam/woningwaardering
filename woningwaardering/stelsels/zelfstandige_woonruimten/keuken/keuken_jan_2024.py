@@ -62,7 +62,7 @@ class KeukenJan2024(Stelselgroepversie):
             )
 
             if any(aanrechten):
-                logger.debug(
+                logger.info(
                     f"Ruimte {ruimte.id} is een keuken met {Bouwkundigelementdetailsoort.aanrecht.naam} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
                 )
             elif ruimte.detail_soort.code in [
@@ -90,7 +90,7 @@ class KeukenJan2024(Stelselgroepversie):
                         punten = 4.0
 
                     logger.info(
-                        f"Ruimte {ruimte.id} is een keuken met een aanrecht met lengte {aanrecht.lengte} millimeter en krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                        f"Ruimte {ruimte.id} is een keuken met een aanrecht met lengte {aanrecht.lengte} millimeter en krijgt {punten}."
                     )
 
                     woningwaardering_groep.woningwaarderingen.append(
@@ -106,7 +106,7 @@ class KeukenJan2024(Stelselgroepversie):
 
         if not keukens:
             logger.warning(
-                f"Geen keuken met aanrecht gevonden in eenheid {eenheid.id}."
+                f"Geen keuken met aanrecht gevonden: Eenheid {eenheid.id} komt niet in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
             )
             return woningwaardering_groep
 
@@ -118,6 +118,10 @@ class KeukenJan2024(Stelselgroepversie):
             )
         ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
         woningwaardering_groep.punten = float(totaal_punten)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+        )
 
         return woningwaardering_groep
 

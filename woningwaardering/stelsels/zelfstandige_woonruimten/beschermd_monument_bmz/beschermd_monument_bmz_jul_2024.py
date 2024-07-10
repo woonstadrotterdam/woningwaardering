@@ -38,7 +38,7 @@ class BeschermdMonumentBmzJul2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         if eenheid.monumenten is None:
-            logger.info(
+            logger.warning(
                 f"Monumenten is None voor eenheid {eenheid.id}. De api van cultureelerfgoed wordt geraadpleegd."
             )
 
@@ -66,4 +66,9 @@ class BeschermdMonumentBmzJul2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.opslagpercentage = float(opslagpercentage)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.opslagpercentage}% voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
+        )
+
         return woningwaardering_groep

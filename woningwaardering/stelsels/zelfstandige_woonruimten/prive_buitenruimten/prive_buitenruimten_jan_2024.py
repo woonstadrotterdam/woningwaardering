@@ -76,7 +76,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                 if not PriveBuitenruimtenJan2024._buitenruimte_heeft_geldige_afmetingen(
                     buitenruimte
                 ):
-                    logger.debug(
+                    logger.info(
                         f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} komt niet in aanmerking voor waardering onder {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
                     )
                     continue
@@ -110,7 +110,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
             # Punten aftrek wanneer er geen enkele buitenruimte is
             woningwaardering.punten = -5.0
 
-            logger.warning(
+            logger.info(
                 f"Geen buitenruimte gevonden in eenheid {eenheid.id}: 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
             )
 
@@ -138,13 +138,9 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            (
-                f"Eenheid {eenheid.id} wordt gewaardeerd met "
-                f"{woningwaardering_groep.punten} punten "
-                f"voor stelselgroep "
-                f"{Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
-            )
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
         )
+
         return woningwaardering_groep
 
     @staticmethod
