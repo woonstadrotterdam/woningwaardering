@@ -1,9 +1,9 @@
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroepversie
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_tabel, round_half_up
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
@@ -75,7 +75,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                     meeteenheid=Meeteenheid.vierkante_meter_m2.value,
                     naam=criterium_naam
                     if not gedeelde_ruimte
-                    else f"{criterium_naam} ({ruimte.oppervlakte}m2, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
+                    else f"{criterium_naam} (~{round_half_up(ruimte.oppervlakte, precision=2)}m2, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                 )
 
                 if gedeelde_ruimte:
@@ -91,14 +91,15 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                         )
                         or ruimte.detail_soort.code != Ruimtedetailsoort.berging.code
                     ):  # bij niet-bergingen staat geen specifieke eis in de regelgeving m.b.t. oppervlakte na deling door aantal woningen.
-                        woningwaardering.aantal = float(
-                            (
-                                Decimal(str(ruimte.oppervlakte)).quantize(
-                                    Decimal("1"), ROUND_HALF_UP
-                                )
+                        woningwaardering.aantal = round_half_up(
+                            float(
+                                round_half_up(ruimte.oppervlakte, 0, Decimal)
                                 / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                            ).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                            ),
+                            precision=2,
+                            type_=float,
                         )
+
                     else:
                         logger.debug(
                             f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter per eenheid en komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
@@ -115,23 +116,22 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                         continue
 
                 else:
-                    woningwaardering.aantal = float(
-                        Decimal(str(ruimte.oppervlakte)).quantize(
-                            Decimal("0.01"), ROUND_HALF_UP
-                        )
+                    woningwaardering.aantal = round_half_up(
+                        ruimte.oppervlakte, precision=2, type_=float
                     )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = Decimal(
+        punten = round_half_up(
             sum(
                 Decimal(str(woningwaardering.aantal))
                 for woningwaardering in (
                     woningwaardering_groep.woningwaarderingen or []
                 )
                 if woningwaardering.aantal is not None
-            )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("0.75")
+            ),
+            precision=0,
+        ) * Decimal("0.75")
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
@@ -154,11 +154,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                 logger.debug(
                     f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                 )
-                return float(
-                    Decimal(str(ruimte.oppervlakte)).quantize(
-                        Decimal("0.01"), ROUND_HALF_UP
-                    )
-                )
+                return round_half_up(ruimte.oppervlakte, precision=2, type_=float)
 
             vlizotrap = heeft_bouwkundig_element(
                 ruimte, Bouwkundigelementdetailsoort.vlizotrap
@@ -170,11 +166,9 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                 )
                 return max(
                     0.0,
-                    float(
+                    round_half_up(
                         Decimal(
-                            Decimal(str(ruimte.oppervlakte)).quantize(
-                                Decimal("0.01"), ROUND_HALF_UP
-                            )
+                            round_half_up(ruimte.oppervlakte, precision=2)
                             # Min 5 punten omdat de ruimte niet bereikt kan worden met een
                             # vaste trap.
                             # Let op, hier wordt de oppervlakte gecorrigeerd met de
@@ -187,7 +181,9 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                             # Door de afronding komt deze berekening niet helemaal juist
                             # uit, maar dit is de benadering waar wij nu voor kiezen.
                             - Decimal("5") / Decimal("0.75")
-                        ).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                        ),
+                        precision=2,
+                        type_=float,
                     ),
                 )
 
@@ -202,7 +198,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten2024()
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/oppervlakte_van_overige_ruimten/input/gedeelde_overige_ruimten_te_klein.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
