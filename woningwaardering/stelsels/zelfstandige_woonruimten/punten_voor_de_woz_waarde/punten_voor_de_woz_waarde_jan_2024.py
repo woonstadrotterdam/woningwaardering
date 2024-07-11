@@ -67,7 +67,10 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
-            warnings.warn(f"Geen WOZ-waarde gevonden voor eenheid {eenheid.id}")
+            warnings.warn(
+                f"Geen WOZ-waarde gevonden voor eenheid {eenheid.id}", UserWarning
+            )
+            return woningwaardering_groep
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
 
@@ -134,7 +137,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         """
-        Controleert of de punten voor de stelselgroep WOZ-waarde voldoen aan de minumum punten en de maximum hoeveelheid punten.
+        Controleert of de punten voor de stelselgroep WOZ-waarde voldoen aan de minimum punten en de maximum hoeveelheid punten.
         Een correctie vindt plaats wanneer:
             - Een nieuwbouwwoning niet het minimum aantal punten heeft.
             - De punten voor WOZ-waarde meer dan 33.33% van het totaal aantal punten bedraagt en geen nieuwbouwwoning is.

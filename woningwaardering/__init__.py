@@ -56,6 +56,21 @@ def set_warning_filter(
     warnings.simplefilter(filter, category=category)
 
 
+# Set the warning filter to raise errors for UserWarning
 set_warning_filter()
 
-__all__ = ["set_warning_filter"]
+
+def warning_handler(message, category, filename, lineno, file, line) -> None:
+    warning_message = f"{category.__name__}: {message}"
+    try:
+        logger.opt(depth=2, exception=None).warning(warning_message)
+    except TypeError:
+        print(f"{filename}:{lineno} - {category.__name__}: {message} - {file}:{line}")
+    finally:
+        # Ensure the warning also goes to sys.stderr
+        print(warning_message, file=sys.stderr)
+
+
+warnings.showwarning = warning_handler
+
+__all__ = ["set_warning_filter", "warnings"]

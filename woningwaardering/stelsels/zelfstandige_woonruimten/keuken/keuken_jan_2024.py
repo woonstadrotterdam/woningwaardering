@@ -2,6 +2,7 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from loguru import logger
 import warnings
+import woningwaardering
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
@@ -44,7 +45,7 @@ class KeukenJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if not ruimte.detail_soort:
-                warnings.warn(
+                raise Warning(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail_soort."
                 )
 
@@ -71,14 +72,16 @@ class KeukenJan2024(Stelselgroepversie):
                 Ruimtedetailsoort.woonkamer_en_of_keuken.code,
             ]:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een (open) keuken zonder aanrecht."
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een (open) keuken zonder aanrecht.",
+                    UserWarning,
                 )
                 continue
 
             for aanrecht in aanrechten:
                 if not aanrecht.lengte:
                     warnings.warn(
-                        f"{Bouwkundigelementdetailsoort.aanrecht.naam} {aanrecht.id} in ruimte {ruimte.id} heeft geen lengte en kan daardoor niet gewaardeerd worden."
+                        f"{Bouwkundigelementdetailsoort.aanrecht.naam} {aanrecht.id} in ruimte {ruimte.id} heeft geen lengte en kan daardoor niet gewaardeerd worden.",
+                        UserWarning,
                     )
 
                 if aanrecht.lengte:
@@ -105,8 +108,8 @@ class KeukenJan2024(Stelselgroepversie):
                     )
 
         if not keukens:
-            warnings.warn(
-                f"Geen keuken met aanrecht gevonden: Eenheid {eenheid.id} kan neit gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+            raise Warning(
+                f"Geen keuken met aanrecht gevonden: Eenheid {eenheid.id} kan niet gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
             )
 
         totaal_punten = Decimal(
@@ -127,6 +130,8 @@ class KeukenJan2024(Stelselgroepversie):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
+
+    woningwaardering.set_warning_filter("error", UserWarning)
 
     keukenJan2024 = KeukenJan2024()
     with open(
