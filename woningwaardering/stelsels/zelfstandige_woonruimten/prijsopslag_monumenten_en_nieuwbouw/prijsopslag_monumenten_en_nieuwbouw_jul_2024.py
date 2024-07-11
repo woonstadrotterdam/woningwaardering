@@ -6,6 +6,9 @@ from loguru import logger
 from woningwaardering.stelsels import Stelsel
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import update_eenheid_monumenten
+from woningwaardering.stelsels.zelfstandige_woonruimten import (
+    PrijsopslagMonumentenEnNieuwbouw,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -100,28 +103,35 @@ class PrijsopslagMonumentenEnNieuwbouwJul2024(Stelselgroepversie):
                 )
             )
 
-        puntentotaal = (
-            woningwaardering_resultaat is not None
-            and Stelsel.bereken_puntentotaal(woningwaardering_resultaat)
-            or None
-        )
-
         if (
-            puntentotaal is not None
-            and 144 <= puntentotaal <= 186
-            and eenheid.begin_bouwdatum is not None
+            eenheid.begin_bouwdatum is not None
             and eenheid.begin_bouwdatum < date(2028, 1, 1)
             and eenheid.in_exploitatiedatum is not None
             and eenheid.in_exploitatiedatum > date(2024, 7, 1)
         ):
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Nieuwbouw",
-                    ),
-                    opslagpercentage=0.1,
+            if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
+                logger.warning(
+                    "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
                 )
+                woningwaardering_resultaat = self._bereken_woningwaarderingresultaat(
+                    eenheid
+                )
+
+            puntentotaal = (
+                woningwaardering_resultaat is not None
+                and Stelsel.bereken_puntentotaal(woningwaardering_resultaat)
+                or None
             )
+
+            if puntentotaal is not None and 144 <= puntentotaal <= 186:
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam="Nieuwbouw",
+                        ),
+                        opslagpercentage=0.1,
+                    )
+                )
 
         opslagpercentage = Decimal(
             sum(
@@ -133,3 +143,46 @@ class PrijsopslagMonumentenEnNieuwbouwJul2024(Stelselgroepversie):
 
         woningwaardering_groep.opslagpercentage = float(opslagpercentage)
         return woningwaardering_groep
+
+    def _bereken_woningwaarderingresultaat(
+        self, eenheid: EenhedenEenheid
+    ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
+        """
+        Berekent de woningwaardering resultaten voor de eenheid voor alle stelselgroepen behalve stelselgroep Prijsopslag monumenten en nieuwbouw.
+
+        Args:
+            eenheid (EenhedenEenheid): de eenheid waarvoor de woningwaardering wordt berekend.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaarderingResultaat: de woningwaardering resultaten.
+        """
+
+        woningwaardering_resultaat = (
+            WoningwaarderingResultatenWoningwaarderingResultaat()
+        )
+        woningwaardering_resultaat.stelsel = (
+            Woningwaarderingstelsel.zelfstandige_woonruimten.value
+        )
+        woningwaardering_resultaat.groepen = []
+
+        geldige_stelselgroepen = Stelsel.select_geldige_stelselgroepen(
+            self.peildatum, Woningwaarderingstelsel.zelfstandige_woonruimten
+        )
+
+        prijsopslag_monumenten_en_nieuwbouw_stelselgroep = (
+            PrijsopslagMonumentenEnNieuwbouw().stelselgroep
+        )
+
+        for stelselgroep in geldige_stelselgroepen:
+            if (
+                stelselgroep.stelselgroep
+                == prijsopslag_monumenten_en_nieuwbouw_stelselgroep
+            ):
+                continue
+
+            woningwaardering_groep = stelselgroep.bereken(
+                eenheid, woningwaardering_resultaat
+            )
+            woningwaardering_resultaat.groepen.append(woningwaardering_groep)
+
+        return woningwaardering_resultaat
