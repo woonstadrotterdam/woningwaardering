@@ -3,7 +3,7 @@ import os
 import sys
 import time
 from types import TracebackType
-from typing import Literal
+from typing import Literal, TextIO
 import warnings
 from loguru import logger
 
@@ -60,15 +60,23 @@ def set_warning_filter(
 set_warning_filter()
 
 
-def warning_handler(message, category, filename, lineno, file, line) -> None:
+def warning_handler(
+    message: Warning | str,
+    category: type[Warning],
+    filename: str,
+    lineno: int,
+    file: TextIO | None = None,
+    line: str | None = None,
+) -> None:
     warning_message = f"{category.__name__}: {message}"
     try:
         logger.opt(depth=2, exception=None).warning(warning_message)
     except TypeError:
+        # Fallback als logger.warning de message niet accepteert
         print(f"{filename}:{lineno} - {category.__name__}: {message} - {file}:{line}")
     finally:
-        # Ensure the warning also goes to sys.stderr
-        print(warning_message, file=sys.stderr)
+        # Stuur warning ook naar sys.stderr
+        print(f"{filename}:{lineno} - {warning_message}", file=sys.stderr)
 
 
 warnings.showwarning = warning_handler
