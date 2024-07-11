@@ -781,7 +781,7 @@ Gemeenschappelijke vertrekken, overige ruimten, of voorzieningen (verwarming, ke
 
 > Indien bij een vertrek of overig ruimte er sprake is van een gemeenschappelijke ruimte, dient het attribuut `gedeeldMetAantalEenheden` te worden ingevuld. Wanneer `gedeeldMetAantalEenheden` groter is dan 1 wordt het vertrek of de overige ruimte als gemeenschappelijke ruimte gezien. Het oppervlak van de ruimte wordt dan gedeeld door het aantal eenheden.
 
-- Alle voorzieningen (verwarming, keuken/pantry uitrusting, sanitair, etc.) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel en vervolgens verdeeld over het aantal wooneenheden.
+- Alle voorzieningen (~~verwarming~~, keuken/pantry uitrusting, sanitair, etc.) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel en vervolgens verdeeld over het aantal wooneenheden.
 
 > Idien bij een voorziening er sprake is van een gemeenschappelijke voorziening, dient het attribuut `gedeeldMetAantalEenheden` te worden ingevuld bij de ruimte waarin zich de voorziening bevindt. Wanneer `gedeeldMetAantalEenheden` groter is dan 1 wordt de voorziening als gemeenschappelijke voorziening gezien.
 
