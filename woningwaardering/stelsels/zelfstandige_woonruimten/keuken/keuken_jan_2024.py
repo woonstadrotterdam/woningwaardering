@@ -24,7 +24,7 @@ from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetails
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
-class Keuken2024(Stelselgroepversie):
+class KeukenJan2024(Stelselgroepversie):
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -136,14 +136,14 @@ class Keuken2024(Stelselgroepversie):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    keuken2024 = Keuken2024()
+    keukenJan2024 = KeukenJan2024()
     with open(
         "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_zonder_lengte.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-        woningwaardering_resultaat = keuken2024.bereken(eenheid)
+        woningwaardering_resultaat = keukenJan2024.bereken(eenheid)
 
         print(
             woningwaardering_resultaat.model_dump_json(

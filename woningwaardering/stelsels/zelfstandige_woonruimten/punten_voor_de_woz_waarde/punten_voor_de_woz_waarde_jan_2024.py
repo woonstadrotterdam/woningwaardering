@@ -36,7 +36,7 @@ LOOKUP_TABEL_FOLDER = (
 )
 
 
-class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
+class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -326,7 +326,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 
         bouwjaar = eenheid.bouwjaar
 
-        hoogniveau_renovatie = PuntenVoorDeWozWaarde2024.hoogniveau_renovatie(
+        hoogniveau_renovatie = PuntenVoorDeWozWaardeJan2024.hoogniveau_renovatie(
             eenheid, self.peildatum
         )
         if hoogniveau_renovatie:
@@ -494,7 +494,7 @@ class PuntenVoorDeWozWaarde2024(Stelselgroepversie):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    woz = PuntenVoorDeWozWaarde2024()
+    woz = PuntenVoorDeWozWaardeJan2024()
     with open(
         "tests/data/zelfstandige_woonruimten/stelselgroepen/punten_voor_de_woz_waade/input/hoogniveau_renovatie_waarde.json",
         "r+",

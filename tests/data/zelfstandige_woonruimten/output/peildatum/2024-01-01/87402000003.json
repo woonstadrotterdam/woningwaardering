@@ -237,6 +237,20 @@
         }
       },
       "punten": 0.0
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BMZ",
+          "naam": "Beschermd monument"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
     }
   ],
   "maximaleHuur": 532.92,

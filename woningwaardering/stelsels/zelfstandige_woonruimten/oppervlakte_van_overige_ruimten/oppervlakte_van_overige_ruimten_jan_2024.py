@@ -30,7 +30,7 @@ from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
-class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
+class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -106,7 +106,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
                         continue
 
                 elif ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-                    oppervlakte_aantal = OppervlakteVanOverigeRuimten2024._oppervlakte_zolder_overige_ruimte(
+                    oppervlakte_aantal = OppervlakteVanOverigeRuimtenJan2024._oppervlakte_zolder_overige_ruimte(
                         ruimte
                     )
                     if oppervlakte_aantal > 0.0:
@@ -196,7 +196,7 @@ class OppervlakteVanOverigeRuimten2024(Stelselgroepversie):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten2024()
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimtenJan2024()
     with open(
         "tests/data/generiek/input/37101000032.json",
         "r+",
