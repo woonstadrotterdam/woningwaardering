@@ -10,6 +10,9 @@ from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
 
+from rdflib import Graph, Literal, Namespace
+from rdflib.plugins.sparql import prepareQuery
+
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -17,6 +20,7 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Eenheidmonument,
     Energieprestatiesoort,
     Energieprestatiestatus,
 )
@@ -339,6 +343,29 @@ def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+CEO = Namespace("https://linkeddata.cultureelerfgoed.nl/def/ceo#")
+BAG = Namespace("http://bag.basisregistraties.overheid.nl/bag/id/")
+
+endpoint = "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
+
+
+query_template = """
+ASK
+WHERE {{
+    SERVICE <{endpoint}> {{
+        ?monument a ceo:Rijksmonument .
+        ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
+        ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
+        ?bagRelatie ceo:verblijfsobjectIdentificatie ?verblijfsobjectIdentificatie .
+    }}
+}}
+"""
+
+rijksmonumenten_query = prepareQuery(
+    query_template.format(endpoint=endpoint), initNs={"ceo": CEO, "bag": BAG}
+)
+
+
 def energieprestatie_met_geldig_label(
     peildatum: date,
     eenheid: EenhedenEenheid,
@@ -391,3 +418,44 @@ def energieprestatie_met_geldig_label(
 
     logger.debug("Geen geldige energieprestatie met label gevonden")
     return None
+
+
+def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool:
+    if not str.isnumeric(verblijfsobjectIdentificatie):
+        raise ValueError("VerblijfsobjectIdentificatie moet numeriek zijn")
+
+    graph = Graph()
+
+    result = graph.query(
+        rijksmonumenten_query,
+        initBindings={
+            "verblijfsobjectIdentificatie": Literal(verblijfsobjectIdentificatie),
+        },
+    )
+
+    if result is None or result.askAnswer is None:
+        return False
+    else:
+        return result.askAnswer
+
+
+def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
+    eenheid.monumenten = eenheid.monumenten or []
+
+    if (
+        eenheid.adresseerbaar_object_basisregistratie is not None
+        and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie is not None
+    ):
+        is_rijksmonument(
+            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+        )
+        rijksmonument = is_rijksmonument(
+            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+        )
+        logger.info(
+            f"Eenheid {eenheid.id} met verblijfsobjectIdentificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie} is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+        )
+        if rijksmonument:
+            eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+
+    return eenheid

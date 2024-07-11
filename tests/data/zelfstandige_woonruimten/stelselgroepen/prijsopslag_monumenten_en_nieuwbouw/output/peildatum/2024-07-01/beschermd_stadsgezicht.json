@@ -7,19 +7,19 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "BMZ",
-          "naam": "Beschermd monument"
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
         }
       },
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Gemeentelijk of provinciaal monument"
+            "naam": "Beschermd stads- of dorpsgezicht"
           },
-          "opslagpercentage": 0.15
+          "opslagpercentage": 0.05
         }
       ],
-      "opslagpercentage": 0.15
+      "opslagpercentage": 0.05
     }
   ]
 }

@@ -2,10 +2,8 @@ from decimal import Decimal
 
 from loguru import logger
 
-
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
-from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
-from .beschermd_monument_bmz import BeschermdMonumentBmz
+from woningwaardering.stelsels.utils import update_eenheid_monumenten
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -15,12 +13,13 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Eenheidmonument,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
 
 
-class BeschermdMonumentBmzJul2024(Stelselgroepversie):
+class PrijsopslagMonumentenEnNieuwbouwJul2024(Stelselgroepversie):
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -31,7 +30,7 @@ class BeschermdMonumentBmzJul2024(Stelselgroepversie):
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
                 stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.beschermd_monument_bmz.value,
+                stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw.value,
             )
         )
 
@@ -42,7 +41,7 @@ class BeschermdMonumentBmzJul2024(Stelselgroepversie):
                 f"Monumenten is None voor eenheid {eenheid.id}. De api van cultureelerfgoed wordt geraadpleegd."
             )
 
-            BeschermdMonumentBmz.update_eenheid_monumenten(eenheid)
+            update_eenheid_monumenten(eenheid)
 
         if any(
             monument.code == Eenheidmonument.rijksmonument.code
