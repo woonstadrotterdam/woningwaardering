@@ -23,7 +23,7 @@ class ZelfstandigeWoonruimten(Stelsel):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten()
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 1, 1))
     with open(
         "tests/data/generiek/input/37101000032.json",
         "r+",
