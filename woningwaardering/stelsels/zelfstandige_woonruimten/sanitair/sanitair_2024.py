@@ -4,6 +4,7 @@ from typing import List, Optional
 from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
+from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -84,24 +85,20 @@ class Sanitair2024(Stelselgroepversie):
                 woningwaarderingen.append(woningwaardering)
 
             woningwaardering.punten = float(
-                Decimal(
-                    str(
-                        woningwaardering.punten
-                        or 0.0
-                        + punten_per_element
-                        * aantal
-                        / (gedeeld_met_aantal_eenheden or 1)
-                    )
-                ).quantize(Decimal("0.01"))
+                rond_af(
+                    woningwaardering.punten
+                    or 0.0
+                    + punten_per_element * aantal / (gedeeld_met_aantal_eenheden or 1),
+                    decimalen=2,
+                )
             )
 
             woningwaardering.aantal = float(
-                Decimal(
-                    str(
-                        (woningwaardering.aantal or 0.0)
-                        + aantal / (gedeeld_met_aantal_eenheden or 1)
-                    )
-                ).quantize(Decimal("0.01"))
+                rond_af(
+                    (woningwaardering.aantal or 0.0)
+                    + aantal / (gedeeld_met_aantal_eenheden or 1),
+                    decimalen=2,
+                )
             )
 
             return True

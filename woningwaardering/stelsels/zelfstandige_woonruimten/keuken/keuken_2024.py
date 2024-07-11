@@ -1,9 +1,9 @@
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 
 from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_tabel, rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -107,9 +107,10 @@ class Keuken2024(Stelselgroepversie):
                                 meeteenheid=Meeteenheid.millimeter.value,
                             ),
                             aantal=aanrecht.lengte,
-                            punten=Decimal(
-                                str(punten / (ruimte.gedeeld_met_aantal_eenheden or 1))
-                            ).quantize(Decimal("0.1"), ROUND_HALF_UP),
+                            punten=rond_af(
+                                punten / (ruimte.gedeeld_met_aantal_eenheden or 1),
+                                decimalen=1,
+                            ),
                         )
                     )
 
@@ -119,13 +120,14 @@ class Keuken2024(Stelselgroepversie):
             )
             return woningwaardering_groep
 
-        totaal_punten = Decimal(
+        totaal_punten = rond_af(
             sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.punten is not None
-            )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
+            ),
+            decimalen=0,
+        ) * Decimal("1")
         woningwaardering_groep.punten = float(totaal_punten)
 
         return woningwaardering_groep
