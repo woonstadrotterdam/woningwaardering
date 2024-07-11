@@ -60,7 +60,11 @@ class SanitairJan2024(Stelselgroepversie):
 
             logger.debug(f"Aantal '{soorten}' in {ruimte.naam}: {aantal}")
 
-            naam = soorten
+            naam = (
+                soorten
+                if not gedeelde_ruimte
+                else f"{soorten} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
+            )
             if len(elementdetailsoort) > 1:
                 naam += " in zelfde ruimte"
 
@@ -78,25 +82,25 @@ class SanitairJan2024(Stelselgroepversie):
                 woningwaardering = WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=naam
-                        if not gedeelde_ruimte
-                        else f"{naam} ({aantal}, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                     )
                 )
                 woningwaarderingen.append(woningwaardering)
 
             woningwaardering.punten = float(
                 rond_af(
-                    woningwaardering.punten
-                    or 0.0
-                    + punten_per_element * aantal / (gedeeld_met_aantal_eenheden or 1),
+                    (woningwaardering.punten or 0.0)
+                    + (
+                        punten_per_element
+                        * aantal
+                        / (ruimte.gedeeld_met_aantal_eenheden or 1)
+                    ),
                     decimalen=2,
                 )
             )
 
             woningwaardering.aantal = float(
                 rond_af(
-                    (woningwaardering.aantal or 0.0)
-                    + aantal / (gedeeld_met_aantal_eenheden or 1),
+                    (woningwaardering.aantal or 0.0) + aantal,
                     decimalen=2,
                 )
             )
