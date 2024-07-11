@@ -1,9 +1,9 @@
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
+from woningwaardering.stelsels.utils import naar_tabel, rond_af
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
@@ -70,37 +70,36 @@ class OppervlakteVanVertrekken2024(Stelselgroepversie):
                     )
 
                     woningwaardering.aantal = float(
-                        Decimal(str(ruimte.oppervlakte)).quantize(
-                            Decimal("0.01"), ROUND_HALF_UP
-                        )
+                        rond_af(ruimte.oppervlakte, decimalen=2)
                     )
+
                 elif (
                     ruimte.gedeeld_met_aantal_eenheden
                     and ruimte.gedeeld_met_aantal_eenheden >= 2
                 ):
                     woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                         meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                        naam=f"{criterium_naam} ({ruimte.oppervlakte}m2, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
+                        naam=f"{criterium_naam} (~{rond_af(ruimte.oppervlakte, decimalen=2)}m2, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                     )
 
                     woningwaardering.aantal = float(
-                        (
-                            Decimal(str(ruimte.oppervlakte)).quantize(
-                                Decimal("0.01"), ROUND_HALF_UP
-                            )
-                            / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                        ).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                        rond_af(
+                            rond_af(ruimte.oppervlakte, decimalen=2)
+                            / ruimte.gedeeld_met_aantal_eenheden,
+                            decimalen=2,
+                        )
                     )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = Decimal(
+        punten = rond_af(
             sum(
                 Decimal(str(woningwaardering.aantal))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.aantal is not None
-            )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
+            ),
+            decimalen=0,
+        ) * Decimal("1")
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
@@ -124,6 +123,6 @@ if __name__ == "__main__":  # pragma: no cover
             )
         )
 
-        tabel = utils.naar_tabel(woningwaardering_resultaat)
+        tabel = naar_tabel(woningwaardering_resultaat)
 
         print(tabel)

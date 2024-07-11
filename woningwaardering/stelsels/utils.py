@@ -3,7 +3,7 @@ import keyword
 import os
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
-from typing import Type, TypeVar, Union
+from typing import Type, TypeVar
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
@@ -393,19 +393,25 @@ def energieprestatie_met_geldig_label(
     return None
 
 
-def round_half_up(
-    value: float, precision: int, type_: Type[Union[int, float, Decimal]] = Decimal
-) -> Union[int, float, Decimal]:
+def rond_af(
+    getal: float | None | Decimal,
+    decimalen: int,
+) -> Decimal:
     """
-    Round a float value to a specific precision using the round half up method.
+    Rondt een getal af op een bepaald aantal decimalen volgens de standaard afrondingsregels (arithemic).
 
     Args:
-        value (float): The value to round.
-        precision (int): The number of decimal places to round to.
+        getal (float | None | Decimal): Het getal om af te ronden.
+        decimalen (int): Het aantal decimalen na de komma om op af te ronden.
 
     Returns:
-        float: The rounded value.
+        Decimal: Het afgeronde getal.
+
+    Raises:
+        ValueError: als de input None is.
     """
-    return type_(
-        Decimal(str(value)).quantize(Decimal(f"1e{-precision}"), rounding=ROUND_HALF_UP)
+    if getal is None:
+        raise ValueError("Kan None niet afronden")
+    return Decimal(str(getal)).quantize(
+        Decimal(f"1e{-decimalen}"), rounding=ROUND_HALF_UP
     )

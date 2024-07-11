@@ -10,7 +10,7 @@ from woningwaardering.stelsels.utils import (
     dataframe_met_een_rij,
     filter_dataframe_op_datum,
     naar_tabel,
-    round_half_up,
+    rond_af,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
@@ -242,13 +242,11 @@ class PriveBuitenruimten2024(Stelselgroepversie):
             )
 
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"{ruimte.naam} (~{round_half_up(ruimte.oppervlakte, precision=2)}m2, gedeeld met {gedeeld_met_aantal_eenheden})",
+                naam=f"{ruimte.naam} (~{rond_af(ruimte.oppervlakte, decimalen=2)}m2, gedeeld met {gedeeld_met_aantal_eenheden})",
                 meeteenheid=Meeteenheid.vierkante_meter_m2.value,
             )
 
-            woningwaardering.aantal = round_half_up(
-                oppervlakte, precision=2, type_=float
-            )
+            woningwaardering.aantal = float(rond_af(oppervlakte, decimalen=2))
 
         return woningwaardering
 
@@ -263,8 +261,11 @@ class PriveBuitenruimten2024(Stelselgroepversie):
                 naam=ruimte.naam,
             )
         )
-        woningwaardering.aantal = round_half_up(
-            ruimte.oppervlakte, precision=2, type_=float
+        woningwaardering.aantal = float(
+            rond_af(
+                ruimte.oppervlakte,
+                decimalen=2,
+            )
         )
 
         return woningwaardering

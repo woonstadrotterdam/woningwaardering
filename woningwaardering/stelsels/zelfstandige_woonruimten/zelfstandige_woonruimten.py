@@ -2,8 +2,8 @@ from datetime import date
 
 from loguru import logger
 
-from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
