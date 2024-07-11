@@ -1,7 +1,9 @@
+from datetime import date
 from decimal import Decimal
 
 from loguru import logger
 
+from woningwaardering.stelsels import Stelsel
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import update_eenheid_monumenten
 from woningwaardering.vera.bvg.generated import (
@@ -95,6 +97,29 @@ class PrijsopslagMonumentenEnNieuwbouwJul2024(Stelselgroepversie):
                         naam="Beschermd stads- of dorpsgezicht",
                     ),
                     opslagpercentage=0.05,
+                )
+            )
+
+        puntentotaal = (
+            woningwaardering_resultaat is not None
+            and Stelsel.bereken_puntentotaal(woningwaardering_resultaat)
+            or None
+        )
+
+        if (
+            puntentotaal is not None
+            and 144 <= puntentotaal <= 186
+            and eenheid.begin_bouwdatum is not None
+            and eenheid.begin_bouwdatum < date(2028, 1, 1)
+            and eenheid.in_exploitatiedatum is not None
+            and eenheid.in_exploitatiedatum > date(2024, 7, 1)
+        ):
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Nieuwbouw",
+                    ),
+                    opslagpercentage=0.1,
                 )
             )
 

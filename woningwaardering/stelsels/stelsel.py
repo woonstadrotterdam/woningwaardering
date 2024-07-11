@@ -78,15 +78,7 @@ class Stelsel:
         #
         # https://wetten.overheid.nl/BWBR0003237/2024-01-01#BijlageI_DivisieA_Divisie_Divisie15
 
-        resultaat.punten = float(
-            Decimal(
-                sum(
-                    woningwaardering_groep.punten
-                    for woningwaardering_groep in resultaat.groepen or []
-                    if woningwaardering_groep.punten is not None
-                )
-            ).quantize(Decimal("1"), ROUND_HALF_UP)
-        )
+        resultaat.punten = Stelsel.bereken_puntentotaal(resultaat)
 
         resultaat.opslagpercentage = (
             sum(
@@ -113,6 +105,20 @@ class Stelsel:
         )
 
         return resultaat
+
+    @staticmethod
+    def bereken_puntentotaal(
+        resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    ):
+        return float(
+            Decimal(
+                sum(
+                    woningwaardering_groep.punten
+                    for woningwaardering_groep in resultaat.groepen or []
+                    if woningwaardering_groep.punten is not None
+                )
+            ).quantize(Decimal("1"), ROUND_HALF_UP)
+        )
 
     def bereken_maximale_huur(
         self, resultaat: WoningwaarderingResultatenWoningwaarderingResultaat

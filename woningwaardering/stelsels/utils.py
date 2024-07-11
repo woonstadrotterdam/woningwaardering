@@ -215,7 +215,7 @@ def naar_tabel(
                     "Subtotaal",
                     subtotaal or "",
                     meeteenheid,
-                    woningwaardering_groep.punten,
+                    woningwaardering_groep.punten or "",
                     f"{woningwaardering_groep.opslagpercentage:.0%}"
                     if woningwaardering_groep.opslagpercentage is not None
                     else "",
