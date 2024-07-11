@@ -2,6 +2,7 @@ from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 from importlib.resources import files
 from itertools import chain
+import warnings
 
 import pandas as pd
 from loguru import logger
@@ -66,7 +67,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
-            raise Warning(f"Geen WOZ-waarde gevonden voor eenheid {eenheid.id}")
+            warnings.warn(f"Geen WOZ-waarde gevonden voor eenheid {eenheid.id}")
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
 

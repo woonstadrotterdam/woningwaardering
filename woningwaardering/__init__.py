@@ -3,6 +3,8 @@ import os
 import sys
 import time
 from types import TracebackType
+from typing import Literal
+import warnings
 from loguru import logger
 
 logger.disable("woningwaardering")
@@ -45,3 +47,15 @@ def handle_unhandled_exception(
 
 
 sys.excepthook = handle_unhandled_exception
+
+
+def set_warning_filter(
+    filter: Literal["default", "error", "ignore", "always", "module", "once"] = "error",
+    category: type[Warning] = UserWarning,
+) -> None:
+    warnings.simplefilter(filter, category=category)
+
+
+set_warning_filter()
+
+__all__ = ["set_warning_filter"]

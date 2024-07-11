@@ -20,13 +20,10 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
-    # woningwaardering.configureer_logger(
-    #     config=woningwaardering.LoggerConfig(level="INFO", warning_critical=True)
-    # )
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten()
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/zelfstandige_woonruimten/input/41164000002.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

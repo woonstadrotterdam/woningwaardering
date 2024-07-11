@@ -1,7 +1,7 @@
 from decimal import ROUND_HALF_UP, Decimal
 
 from loguru import logger
-
+import warnings
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
@@ -44,7 +44,7 @@ class KeukenJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if not ruimte.detail_soort:
-                raise Warning(
+                warnings.warn(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail_soort."
                 )
 
@@ -70,14 +70,14 @@ class KeukenJan2024(Stelselgroepversie):
                 Ruimtedetailsoort.keuken.code,
                 Ruimtedetailsoort.woonkamer_en_of_keuken.code,
             ]:
-                raise Warning(
+                warnings.warn(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) is een (open) keuken zonder aanrecht."
                 )
                 continue
 
             for aanrecht in aanrechten:
                 if not aanrecht.lengte:
-                    raise Warning(
+                    warnings.warn(
                         f"{Bouwkundigelementdetailsoort.aanrecht.naam} {aanrecht.id} in ruimte {ruimte.id} heeft geen lengte en kan daardoor niet gewaardeerd worden."
                     )
 
@@ -105,7 +105,7 @@ class KeukenJan2024(Stelselgroepversie):
                     )
 
         if not keukens:
-            raise Warning(
+            warnings.warn(
                 f"Geen keuken met aanrecht gevonden: Eenheid {eenheid.id} kan neit gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
             )
 
@@ -130,7 +130,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     keukenJan2024 = KeukenJan2024()
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_zonder_lengte.json",
+        "tests/data/zelfstandige_woonruimten/input/41164000002.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

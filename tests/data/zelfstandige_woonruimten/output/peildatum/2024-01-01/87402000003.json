@@ -181,8 +181,20 @@
           "naam": "Keuken"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": []
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2400.0,
+          "criterium": {
+            "naam": "Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 7.0
+        }
+      ]
     },
     {
       "criteriumGroep": {
@@ -232,32 +244,19 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "REN",
-          "naam": "Renovatie"
-        }
-      },
-      "punten": 0.0
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
           "code": "BMZ",
           "naam": "Beschermd monument"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": []
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 532.92,
-  "punten": 92.0,
+  "maximaleHuur": 594.8,
+  "punten": 99.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 532.92
+  "maximaleHuurInclusiefOpslag": 594.8
 }
