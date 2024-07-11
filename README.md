@@ -326,10 +326,6 @@ Om te bepalen of de ruimten van een eenheid als individueel of collectief verwar
 Om dit attribuut ook aan de VERA standaard toe te voegen is
 https://github.com/Aedes-datastandaarden/vera-openapi/issues/54 aangemaakt.
 
-### Bidet en Lavet
-
-In het beleidshandboek van de huurcomissie voor het woningwaardeeringstelsel wordt voor zowel een bidet als een lavet één punt toegekend. In de huidige referentiedata ontbreken deze twee type `bouwkundigelementdetailsoort`. Zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/104.
-
 ### Verwarmd
 
 In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verwarmd is. Het attribuut `verwarmde_vertrekken_aantal` bestaat wel, maar dit bestaat op niveau van de eenheid en daarin bestaat geen onderscheid tussen vertrekken en overige ruimten. Dit is aangekaart in deze twee issues:
@@ -346,7 +342,3 @@ Voor de waardering van buitenruimten dienen de afmetingen van ruimtes doorgegeve
 - `hoogte`: De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan `None` zijn, bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
 
 Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/63.
-
-### Oppervlakten
-
-In de VERA VHE modellen bestaat een `oppervlakten` attribuut op `EenhedenEenheid`. Dit attribuut is nog niet beschikbaar in de door ons gebruikte VERA BVG modellen. Dit attribuut en de bijbehorende class `EenhedenOppervlakte` is toegevoegd in afwachting van een update in de VERA standaard. Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/61.
