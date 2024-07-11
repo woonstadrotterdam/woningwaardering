@@ -1,3 +1,6 @@
+from functools import wraps
+from typing import Callable
+
 from loguru import logger
 
 from woningwaardering.vera.bvg.generated import (
@@ -12,6 +15,28 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.utils import badruimte_met_toilet, heeft_bouwkundig_element
 
 
+def classificeer_ruimte_dec(
+    func: Callable[[EenhedenRuimte], Ruimtesoort | None],
+) -> Callable[[EenhedenRuimte], Ruimtesoort | None]:
+    """Logt de classificatie van de ruimte volgens het Woningwaarderingstelsel voor zelfstandige woonruimten."""
+
+    @wraps(func)
+    def wrapper(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
+        ruimtesoort = func(ruimte)
+        if ruimtesoort is not None:
+            logger.debug(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) is geklassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
+            )
+        else:
+            logger.debug(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) kan niet worden geklassificeerd als een ruimtesoort binnen {Woningwaarderingstelsel.zelfstandige_woonruimten.naam}"
+            )
+        return ruimtesoort
+
+    return wrapper
+
+
+@classificeer_ruimte_dec
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel voor zelfstandige woonruimten.
