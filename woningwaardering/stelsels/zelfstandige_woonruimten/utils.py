@@ -64,20 +64,21 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         raise TypeError(error_msg)
 
     if (
-        (
-            ruimte.soort.code == Ruimtesoort.buitenruimte.code
-            and ruimte.detail_soort.code
-            not in [
-                # Ruimtedetailsoort.gemeenschappelijk_dakterras_gak.code,  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/118
-                # Ruimtedetailsoort.gemeenschappelijk_dakterras_gda.code,  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/108
-                Ruimtedetailsoort.schuur.code,  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/92
-            ]
-        )
+        ruimte.soort.code == Ruimtesoort.buitenruimte.code
         or ruimte.detail_soort.code
         in [
             Ruimtedetailsoort.gemeenschappelijke_tuin.code,
             Ruimtedetailsoort.gemeenschappelijk_dakterras_gda.code,
-        ]  # twee ruimten met gemeenschappelijke ruimte als parent, maar moeten als gemeenschappelijke buitenruimte gerekend worden
+            Ruimtedetailsoort.achtertuin.code,
+            Ruimtedetailsoort.voortuin.code,
+            Ruimtedetailsoort.balkon.code,
+            Ruimtedetailsoort.atrium_en_of_patio.code,
+            Ruimtedetailsoort.loggia.code,
+            Ruimtedetailsoort.dakterras.code,
+            Ruimtedetailsoort.terras.code,
+            Ruimtedetailsoort.tuin_rondom.code,
+            Ruimtedetailsoort.tuin.code,
+        ]  # ruimten die ondanks potentieel verkeerde parent toch zeker een buitenruimte zijn
     ):
         return Ruimtesoort.buitenruimte
 
