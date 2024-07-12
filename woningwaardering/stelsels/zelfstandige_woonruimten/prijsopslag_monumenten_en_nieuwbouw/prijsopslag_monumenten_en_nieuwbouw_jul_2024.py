@@ -1,4 +1,5 @@
 from datetime import date
+from dateutil.relativedelta import relativedelta
 from decimal import Decimal
 
 from loguru import logger
@@ -106,6 +107,7 @@ class PrijsopslagMonumentenEnNieuwbouwJul2024(Stelselgroepversie):
             and eenheid.begin_bouwdatum < date(2028, 1, 1)
             and eenheid.in_exploitatiedatum is not None
             and eenheid.in_exploitatiedatum > date(2024, 7, 1)
+            and eenheid.in_exploitatiedatum > self.peildatum - relativedelta(years=20)
         ):
             if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
                 logger.warning(

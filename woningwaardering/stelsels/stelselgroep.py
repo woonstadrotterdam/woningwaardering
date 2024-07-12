@@ -88,7 +88,7 @@ class _StelselgroepABC(ABC):
             Stelselgroepversie,  # type: ignore[type-abstract] # https://github.com/python/mypy/issues/4717
         )
 
-        return stelselgroep_versie()
+        return stelselgroep_versie(peildatum)
 
 
 class Stelselgroep(_StelselgroepABC):
