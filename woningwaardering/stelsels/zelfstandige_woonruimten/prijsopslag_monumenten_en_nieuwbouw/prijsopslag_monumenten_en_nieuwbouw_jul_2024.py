@@ -6,9 +6,7 @@ from loguru import logger
 from woningwaardering.stelsels import Stelsel
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import update_eenheid_monumenten
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    PrijsopslagMonumentenEnNieuwbouw,
-)
+
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -169,14 +167,10 @@ class PrijsopslagMonumentenEnNieuwbouwJul2024(Stelselgroepversie):
             self.peildatum, Woningwaarderingstelsel.zelfstandige_woonruimten
         )
 
-        prijsopslag_monumenten_en_nieuwbouw_stelselgroep = (
-            PrijsopslagMonumentenEnNieuwbouw().stelselgroep
-        )
-
         for stelselgroep in geldige_stelselgroepen:
             if (
                 stelselgroep.stelselgroep
-                == prijsopslag_monumenten_en_nieuwbouw_stelselgroep
+                == Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw
             ):
                 continue
 

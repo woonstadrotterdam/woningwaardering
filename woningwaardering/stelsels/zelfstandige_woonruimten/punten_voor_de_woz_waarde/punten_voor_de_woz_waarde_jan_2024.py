@@ -13,9 +13,6 @@ from woningwaardering.stelsels.utils import (
     filter_dataframe_op_datum,
     naar_tabel,
 )
-from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
-    PuntenVoorDeWozWaarde,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -414,10 +411,11 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             self.peildatum, Woningwaarderingstelsel.zelfstandige_woonruimten
         )
 
-        woz_stelselgroep = PuntenVoorDeWozWaarde().stelselgroep
-
         for stelselgroep in geldige_stelselgroepen:
-            if stelselgroep.stelselgroep == woz_stelselgroep:
+            if (
+                stelselgroep.stelselgroep
+                == Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
+            ):
                 continue
 
             woningwaardering_groep = stelselgroep.bereken(

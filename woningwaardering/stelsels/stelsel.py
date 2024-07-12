@@ -109,7 +109,7 @@ class Stelsel:
     @staticmethod
     def bereken_puntentotaal(
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    ):
+    ) -> float:
         return float(
             Decimal(
                 sum(
