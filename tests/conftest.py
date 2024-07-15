@@ -1,7 +1,6 @@
 import re
 from datetime import date, datetime
 from pathlib import Path
-import warnings
 
 import pytest
 
@@ -63,12 +62,3 @@ def zelfstandige_woonruimten_input_en_outputmodel(
 @pytest.fixture()
 def woningwaardering_resultaat():
     return WoningwaarderingResultatenWoningwaarderingResultaat()
-
-
-# Zorg dat de warnings geen error worden
-def pytest_runtest_setup(item):
-    warnings.simplefilter("default", UserWarning)
-
-
-def pytest_runtest_teardown(item, nextitem):
-    warnings.resetwarnings()

@@ -1,5 +1,5 @@
 {
-  "id": "2000mm",
+  "id": "aanrecht_zonder_lengte",
   "ruimten": [
     {
       "id": "keuken",
@@ -18,7 +18,7 @@
       "afsluitbaar": true,
       "bouwkundigeElementen": [
         {
-          "id": "aanrecht",
+          "id": "aanrecht_1",
           "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",

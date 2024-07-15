@@ -235,22 +235,7 @@
       "bouwlaag": {
         "nummer": "02",
         "omschrijving": "tweede verdieping"
-      },
-      "bouwkundigeElementen": [
-        {
-          "id": "Aanrecht_29445351",
-          "naam": "Aanrecht",
-          "soort": {
-            "code": "KEU",
-            "naam": "Keuken voorziening"
-          },
-          "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
-          },
-          "lengte": 2435
-        }
-      ]
+      }
     },
     {
       "id": "Space_29446511",
