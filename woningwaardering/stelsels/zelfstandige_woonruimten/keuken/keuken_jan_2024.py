@@ -109,7 +109,7 @@ class KeukenJan2024(Stelselgroepversie):
                             aantal=aanrecht.lengte,
                             punten=rond_af(
                                 punten / (ruimte.gedeeld_met_aantal_eenheden or 1),
-                                decimalen=1,
+                                decimalen=2,
                             ),
                         )
                     )
