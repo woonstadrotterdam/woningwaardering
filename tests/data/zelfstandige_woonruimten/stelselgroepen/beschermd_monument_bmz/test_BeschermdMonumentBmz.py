@@ -7,33 +7,36 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.beschermd_monument_bmz i
     BeschermdMonumentBmz,
 )
 
+from woningwaardering.vera.bvg.generated import (
+    WoningwaarderingResultatenWoningwaarderingGroep,
+)
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
-# def test_BeschermdMonumentBmz(
-#     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
-# ):
-#     beschermd_monument_bmz = BeschermdMonumentBmz()
-#     resultaat = beschermd_monument_bmz.bereken(
-#         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
-#     )
-#     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
+def test_BeschermdMonumentBmz(
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+):
+    beschermd_monument_bmz = BeschermdMonumentBmz()
+    resultaat = beschermd_monument_bmz.bereken(
+        zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    )
+    assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-# def test_BeschermdMonumentBmz_output(
-#     zelfstandige_woonruimten_input_en_outputmodel,
-# ):
-#     eenheid_input, eenheid_output, peildatum = (
-#         zelfstandige_woonruimten_input_en_outputmodel
-#     )
-#     beschermd_monument_bmz = BeschermdMonumentBmz(peildatum=peildatum)
-#     resultaat = beschermd_monument_bmz.bereken(eenheid_input)
+def test_BeschermdMonumentBmz_output(
+    zelfstandige_woonruimten_input_en_outputmodel,
+):
+    eenheid_input, eenheid_output, peildatum = (
+        zelfstandige_woonruimten_input_en_outputmodel
+    )
+    beschermd_monument_bmz = BeschermdMonumentBmz(peildatum=peildatum)
+    resultaat = beschermd_monument_bmz.bereken(eenheid_input)
 
-#     assert_output_model(
-#         resultaat,
-#         eenheid_output,
-#         Woningwaarderingstelselgroep.beschermd_monument_bmz,
-#     )
+    assert_output_model(
+        resultaat,
+        eenheid_output,
+        Woningwaarderingstelselgroep.beschermd_monument_bmz,
+    )
 
 
 # Get the absolute path to the current file
@@ -73,8 +76,8 @@ specifiek_warning_mapping = {
 
 def test_BeschermdMonumentBmz_specifiek_warnings(specifieke_input_en_output_model):
     eenheid_input, _, peildatum = specifieke_input_en_output_model
-    woz = BeschermdMonumentBmz(peildatum=peildatum)
+    bmz = BeschermdMonumentBmz(peildatum=peildatum)
     warning_tuple = specifiek_warning_mapping.get(eenheid_input.id)
     if warning_tuple is not None:
         with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
-            woz.bereken(eenheid_input)
+            bmz.bereken(eenheid_input)
