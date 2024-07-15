@@ -398,7 +398,7 @@ def rond_af(
     decimalen: int,
 ) -> Decimal:
     """
-    Rondt een getal af op een bepaald aantal decimalen volgens de standaard afrondingsregels (arithemic).
+    Rondt een getal af op een bepaald aantal decimalen volgens de standaard afrondingsregels (arithmetic).
 
     Args:
         getal (float | None | Decimal): Het getal om af te ronden.
