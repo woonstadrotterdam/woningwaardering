@@ -794,3 +794,27 @@ Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register 
 ~~De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief beleid. Dit betekent dat het aan de verhuurder is om aan te tonen dat de woonruimte is gelegen binnen een beschermd stads- en dorpsgezicht en/of hier deel van uitmaakt. Er dient te worden aangetoond datBeleidsboek in een recent verleden en noodzakelijkerwijs investeringen zijn gedaan voor instandhouding van de monumentale waarde. De verhuurder dient middels facturen aan te tonen dat investeringen zijn gedaan op de beeldbepalende elementen én geen sprake is van noodzakelijke vervanging/ onderhoud of reguliere onderhoudswerkzaamheden. Alleen in die gevallen kan de commissie besluiten om de volgens waarderingsstelsel berekende maximale huurprijs, met 15% te verhogen. De beoordeling kan per situatie verschillen.~~
 
 ~~De berekende maximale huurprijs incl. 15% toeslag resulteert in de wettelijk maximale huurprijs. Indien de investeringen niet aantoonbaar zijn, dan wordt de 15% toeslag niet berekend.~~
+
+## 4.14 Gemeenschappelijke ruimten en voorzieningen
+
+Gemeenschappelijke vertrekken, overige ruimten, of voorzieningen (verwarming, keuken of sanitair), waarvan het (mede-)gebruik is inbegrepen in de huurovereenkomst, worden gewaardeerd overeen- komstig het woningwaarderingsstelsel, zoals toegelicht in de voorgaande paragrafen van dit hoofdstuk. Omdat het gaat om gemeenschappelijk te gebruiken ruimten en voorzieningen, wordt het puntenaantal evenredig verdeeld over het aantal wooneenheden. De grootte van de betreffende wooneenheid is niet relevant. Ook onzelfstandige wooneenheden worden meegeteld.
+
+### 4.14.1 Wat wordt gewaardeerd bij gemeenschappelijke vertrekken, overige ruimten en voorzieningen?
+
+- Alle gemeenschappelijke vertrekken en overige ruimten (recreatiezaal, hobbyruimte, bibliotheek, eetruimte, logeerkamers, wasruimte, berging, overdekte fietsenstalling etc.) worden gewaardeerd indien deze in de huurovereenkomst van de woning zijn inbegrepen c.q. waarvan de huurder contractueel gebruik kan maken. Met “waarvan de huurder gebruik kan maken” wordt bedoeld dat de gemeenschappelijke ruimten vertrekken of overige ruimten moeten zijn die, als onderdeel van de huurovereenkomst, door de huurder, zijn gezinsleden en gasten gebruikt kunnen worden. Uitgesloten zijn vertrekken en overige ruimten waarvoor ook door derden een vergoeding/ huurprijs wordt betaald alsmede vertrekken en ruimten die door de eigenaar/verhuurder in gebruik zijn (bijv. kantoor- ruimte, opslagruimte, e.d.)
+
+> Indien bij een vertrek of overig ruimte er sprake is van een gemeenschappelijke ruimte, dient het attribuut `gedeeldMetAantalEenheden` te worden ingevuld. Wanneer `gedeeldMetAantalEenheden` groter is dan 1 wordt het vertrek of de overige ruimte als gemeenschappelijke ruimte gezien. Het oppervlak van de ruimte wordt dan gedeeld door het aantal eenheden.
+
+- Alle voorzieningen (~~verwarming~~, keuken/pantry uitrusting, sanitair, etc.) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel en vervolgens verdeeld over het aantal wooneenheden.
+
+> Idien bij een voorziening er sprake is van een gemeenschappelijke voorziening, dient het attribuut `gedeeldMetAantalEenheden` te worden ingevuld bij de ruimte waarin zich de voorziening bevindt. Wanneer `gedeeldMetAantalEenheden` groter is dan 1 wordt de voorziening als gemeenschappelijke voorziening gezien.
+
+- Indien sprake is van een gemeenschappelijke buitenruimte (tuin, terras, parkeervoorziening, etc.) dan worden de oppervlaktes van die buitenruimtes bij elkaar opgeteld en gewaardeerd conform het onderdeel ‘privé-buitenruimte’, zoals toegelicht in paragraaf 4.9 (maximaal 15 punten). De punten, en niet oppervlakte, worden vervolgens gedeeld door het aantal wooneenheden.
+
+> Deze regel leidt tot complicaties wanneer niet elke gemeenschappelijke buitenruimte met evenveel eenheden wordt gedeeld. Daarom hebben wij ervoor gekozen om in plaats van de punten te delen door het aantal eenheden, de oppervlakte te delen door het aantal eenheden. Hierdoor kan er een onjuist puntenaantal ontstaan. In de praktijk blijkt dat meestal dit puntenaantal alsnog een goede benadering is van de beoogde berekening.
+
+- Indien het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten.
+
+> Voor een gemeenschappelijke (spoel)keuken moet `gedeeldMetAantalEenhden` groter dan 1 zijn voor ruimtedetailsoort `keuken`.
+
+- ~~De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en voorzieningen in een zorgwoning of woon/zorgcomplex de waardering per woning veelal uitkomt op een totaal van ongeveer 3 punten. Om arbeidsintensief meetwerk te voorkomen waardeert de Huurcommissie in dat geval een waardering van 3 punten per woning.~~

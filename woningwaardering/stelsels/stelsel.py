@@ -1,5 +1,5 @@
 from datetime import date
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 from importlib.resources import files
 
 import pandas as pd
@@ -12,6 +12,7 @@ from woningwaardering.stelsels.utils import (
     filter_dataframe_op_datum,
     import_class,
     is_geldig,
+    rond_af,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -95,8 +96,9 @@ class Stelsel:
 
         if resultaat.opslagpercentage is not None:
             resultaat.huurprijsopslag = float(
-                (maximale_huur * Decimal(str(resultaat.opslagpercentage))).quantize(
-                    Decimal("0.01"), ROUND_HALF_UP
+                rond_af(
+                    maximale_huur * Decimal(str(resultaat.opslagpercentage)),
+                    decimalen=2,
                 )
             )
 
@@ -111,13 +113,14 @@ class Stelsel:
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> float:
         return float(
-            Decimal(
+            rond_af(
                 sum(
                     woningwaardering_groep.punten
                     for woningwaardering_groep in resultaat.groepen or []
                     if woningwaardering_groep.punten is not None
-                )
-            ).quantize(Decimal("1"), ROUND_HALF_UP)
+                ),
+                decimalen=0,
+            ),
         )
 
     def bereken_maximale_huur(

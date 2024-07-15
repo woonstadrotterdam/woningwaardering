@@ -2,7 +2,7 @@ import importlib
 import keyword
 import os
 from datetime import date, datetime, time
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from typing import Type, TypeVar
 
 import pandas as pd
@@ -418,6 +418,30 @@ def energieprestatie_met_geldig_label(
 
     logger.debug("Geen geldige energieprestatie met label gevonden")
     return None
+
+
+def rond_af(
+    getal: float | None | Decimal,
+    decimalen: int,
+) -> Decimal:
+    """
+    Rondt een getal af op een bepaald aantal decimalen volgens de standaard afrondingsregels (arithmetic).
+
+    Args:
+        getal (float | None | Decimal): Het getal om af te ronden.
+        decimalen (int): Het aantal decimalen na de komma om op af te ronden.
+
+    Returns:
+        Decimal: Het afgeronde getal.
+
+    Raises:
+        ValueError: als de input None is.
+    """
+    if getal is None:
+        raise ValueError("Kan None niet afronden")
+    return Decimal(str(getal)).quantize(
+        Decimal(f"1e{-decimalen}"), rounding=ROUND_HALF_UP
+    )
 
 
 def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool:
