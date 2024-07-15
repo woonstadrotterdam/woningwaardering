@@ -1,7 +1,12 @@
+from datetime import date
 from pathlib import Path
 
 import pytest
-from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
+from tests.test_utils import (
+    assert_output_model,
+    krijg_warning_tuple_op_datum,
+    laad_specifiek_input_en_output_model,
+)
 
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     PuntenVoorDeWozWaarde,
@@ -63,19 +68,35 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(specifieke_input_en_output_model
     )
 
 
+# mapping eenheid_id naar peildatum-warning
 specifiek_warning_mapping = {
-    "hoogniveau_renovatie_1912": (
-        UserWarning,
-        "WOZ-waarde",
-    ),
-    "nieuwbouw_eenheid": (UserWarning, "WOZ-waarde"),
+    "hoogniveau_renovatie_1912": [
+        (
+            date(2024, 1, 1),
+            (
+                UserWarning,
+                "Geen WOZ-waarde",
+            ),
+        )
+    ],
+    "nieuwbouw_eenheid": [
+        (
+            date(2024, 1, 1),
+            (
+                UserWarning,
+                "Geen WOZ-waarde",
+            ),
+        )
+    ],
 }
 
 
 def test_PuntenVoorDeWozWaarde_specifiek_warnings(specifieke_input_en_output_model):
     eenheid_input, _, peildatum = specifieke_input_en_output_model
     woz = PuntenVoorDeWozWaarde(peildatum=peildatum)
-    warning_tuple = specifiek_warning_mapping.get(eenheid_input.id)
+    warning_tuple = krijg_warning_tuple_op_datum(
+        eenheid_input.id, peildatum, specifiek_warning_mapping
+    )
     if warning_tuple is not None:
         with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
             woz.bereken(eenheid_input)
