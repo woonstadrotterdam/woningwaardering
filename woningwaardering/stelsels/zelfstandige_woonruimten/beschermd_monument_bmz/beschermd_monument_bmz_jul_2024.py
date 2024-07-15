@@ -1,4 +1,5 @@
 from decimal import Decimal
+import warnings
 
 from loguru import logger
 
@@ -39,7 +40,7 @@ class BeschermdMonumentBmzJul2024(Stelselgroepversie):
 
         if eenheid.monumenten is None:
             # Voor nu is nog een warning, omdat er een fallback is naar de api van cultureelerfgoed.
-            logger.warning(
+            warnings.warn(
                 f"Monumenten is None voor eenheid {eenheid.id}. De api van cultureelerfgoed wordt geraadpleegd.",
                 UserWarning,
             )
