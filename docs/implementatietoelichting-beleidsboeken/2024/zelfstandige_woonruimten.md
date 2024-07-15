@@ -811,7 +811,7 @@ Gemeenschappelijke vertrekken, overige ruimten, of voorzieningen (verwarming, ke
 
 - Indien sprake is van een gemeenschappelijke buitenruimte (tuin, terras, parkeervoorziening, etc.) dan worden de oppervlaktes van die buitenruimtes bij elkaar opgeteld en gewaardeerd conform het onderdeel ‘privé-buitenruimte’, zoals toegelicht in paragraaf 4.9 (maximaal 15 punten). De punten, en niet oppervlakte, worden vervolgens gedeeld door het aantal wooneenheden.
 
-> Deze regel leidt tot complicaties wanneer niet elke gemeenschappelijke buitenruimte met evenveel eenheden wordt gedeeld. Daarom hebben wij ervoor gekozen om in plaats van de punten te delen door het aantal eenheden, de oppervlakte te delen door het aantal eenheden. Hierdoor kan er een onjuist puntenaantal ontstaan. In de praktijk blijkt dat meestal dat dit puntenaantal alsnog een goede benadering is van de beoogde berekening.
+> Deze regel leidt tot complicaties wanneer niet elke gemeenschappelijke buitenruimte met evenveel eenheden wordt gedeeld. Daarom hebben wij ervoor gekozen om in plaats van de punten te delen door het aantal eenheden, de oppervlakte te delen door het aantal eenheden. Hierdoor kan er een onjuist puntenaantal ontstaan. In de praktijk blijkt dat meestal dit puntenaantal alsnog een goede benadering is van de beoogde berekening.
 
 - Indien het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten.
 
