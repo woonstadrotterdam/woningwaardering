@@ -1,6 +1,6 @@
 from datetime import date
+import warnings
 from loguru import logger
-import woningwaardering
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
@@ -21,7 +21,8 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
-    woningwaardering.set_warning_filter("default", UserWarning)
+    warnings.simplefilter("default", UserWarning)
+
     zelfstandige_woonruimten = ZelfstandigeWoonruimten()
     with open(
         "tests/data/zelfstandige_woonruimten/input/41164000002.json",

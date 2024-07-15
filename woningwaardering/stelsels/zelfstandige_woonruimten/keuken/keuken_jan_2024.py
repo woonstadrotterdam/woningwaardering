@@ -2,7 +2,6 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from loguru import logger
 import warnings
-import woningwaardering
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
@@ -130,8 +129,6 @@ class KeukenJan2024(Stelselgroepversie):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
-
-    woningwaardering.set_warning_filter("error", UserWarning)
 
     keukenJan2024 = KeukenJan2024()
     with open(
