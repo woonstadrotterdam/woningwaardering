@@ -249,7 +249,8 @@
         }
       },
       "woningwaarderingen": [],
-      "opslagpercentage": 0.0
+      "opslagpercentage": 0.0,
+      "punten": 0.0
     }
   ],
   "maximaleHuur": 594.8,
