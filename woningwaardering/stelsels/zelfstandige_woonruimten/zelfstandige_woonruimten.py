@@ -1,8 +1,9 @@
 from datetime import date
 import warnings
 from loguru import logger
-from woningwaardering.stelsels.stelsel import Stelsel
+
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -23,7 +24,7 @@ if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
     warnings.simplefilter("default", UserWarning)
 
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten()
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 1, 1))
     with open(
         "tests/data/zelfstandige_woonruimten/input/41164000002.json",
         "r+",

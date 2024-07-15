@@ -1,3 +1,6 @@
+from functools import wraps
+from typing import Callable
+
 from loguru import logger
 
 from woningwaardering.vera.bvg.generated import (
@@ -12,6 +15,28 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.utils import badruimte_met_toilet, heeft_bouwkundig_element
 
 
+def classificeer_ruimte_dec(
+    func: Callable[[EenhedenRuimte], Ruimtesoort | None],
+) -> Callable[[EenhedenRuimte], Ruimtesoort | None]:
+    """Logt de classificatie van de ruimte volgens het Woningwaarderingstelsel voor zelfstandige woonruimten."""
+
+    @wraps(func)
+    def wrapper(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
+        ruimtesoort = func(ruimte)
+        if ruimtesoort is not None:
+            logger.debug(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) is geklassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
+            )
+        else:
+            logger.debug(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) kan niet worden geklassificeerd als een ruimtesoort binnen {Woningwaarderingstelsel.zelfstandige_woonruimten.naam}"
+            )
+        return ruimtesoort
+
+    return wrapper
+
+
+@classificeer_ruimte_dec
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel voor zelfstandige woonruimten.
@@ -40,12 +65,20 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
 
     if (
         ruimte.soort.code == Ruimtesoort.buitenruimte.code
-        and ruimte.detail_soort.code
-        not in [
-            Ruimtedetailsoort.gemeenschappelijk_dakterras_gak.code,  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/118
-            Ruimtedetailsoort.gemeenschappelijk_dakterras_gda.code,  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/108
-            Ruimtedetailsoort.schuur.code,  # zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/92
-        ]
+        or ruimte.detail_soort.code
+        in [
+            Ruimtedetailsoort.gemeenschappelijke_tuin.code,
+            Ruimtedetailsoort.gemeenschappelijk_dakterras_gda.code,
+            Ruimtedetailsoort.achtertuin.code,
+            Ruimtedetailsoort.voortuin.code,
+            Ruimtedetailsoort.balkon.code,
+            Ruimtedetailsoort.atrium_en_of_patio.code,
+            Ruimtedetailsoort.loggia.code,
+            Ruimtedetailsoort.dakterras.code,
+            Ruimtedetailsoort.terras.code,
+            Ruimtedetailsoort.tuin_rondom.code,
+            Ruimtedetailsoort.tuin.code,
+        ]  # ruimten die ondanks potentieel verkeerde parent toch zeker een buitenruimte zijn
     ):
         return Ruimtesoort.buitenruimte
 

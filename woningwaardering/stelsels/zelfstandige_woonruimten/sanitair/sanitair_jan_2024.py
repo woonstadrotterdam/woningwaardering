@@ -1,9 +1,10 @@
 from decimal import Decimal
-from typing import List
+from typing import List, Optional
 
 from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
+from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -29,6 +30,7 @@ class SanitairJan2024(Stelselgroepversie):
         woningwaarderingen: List[WoningwaarderingResultatenWoningwaardering],
         ruimte: EenhedenRuimte,
         punten_per_element: float,
+        gedeeld_met_aantal_eenheden: Optional[int] = None,
         *elementdetailsoort: Bouwkundigelementdetailsoort,
     ) -> bool:
         """
@@ -38,12 +40,17 @@ class SanitairJan2024(Stelselgroepversie):
             woningwaarderingen (List[WoningwaarderingResultatenWoningwaardering]): Een list met woningwaarderingen.
             ruimte (EenhedenRuimte): Een instantie van de klasse EenhedenRuimte die de ruimte vertegenwoordigt.
             punten_per_element (float): Het aantal punten dat aan elk element wordt toegekend.
+            gedeeld_met_aantal_eenheden (Optional[int]): Het aantal eenheden waarmee de ruimte waarin de bouwkundig element zich bevindt gedeeld wordt. Defaults to None.
             *elementdetailsoort (Bouwkundigelementdetailsoort): Een instantie van de klasse Bouwkundigelementdetailsoort die het element detailsoort vertegenwoordigt.
 
         Returns:
             bool: True wanneer er punten gewaardeerd zijn
         """
         aantal = aantal_bouwkundige_elementen(ruimte, *elementdetailsoort)
+        gedeelde_ruimte = (
+            ruimte.gedeeld_met_aantal_eenheden
+            and ruimte.gedeeld_met_aantal_eenheden >= 2
+        )
         if aantal > 0:
             soorten = " en ".join(
                 detailsoort.naam
@@ -53,7 +60,11 @@ class SanitairJan2024(Stelselgroepversie):
 
             logger.debug(f"Aantal '{soorten}' in {ruimte.naam}: {aantal}")
 
-            naam = soorten
+            naam = (
+                soorten
+                if not gedeelde_ruimte
+                else f"{soorten} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
+            )
             if len(elementdetailsoort) > 1:
                 naam += " in zelfde ruimte"
 
@@ -75,11 +86,24 @@ class SanitairJan2024(Stelselgroepversie):
                 )
                 woningwaarderingen.append(woningwaardering)
 
-            woningwaardering.punten = (
-                woningwaardering.punten or 0.0
-            ) + punten_per_element * aantal
+            woningwaardering.punten = float(
+                rond_af(
+                    (woningwaardering.punten or 0.0)
+                    + (
+                        punten_per_element
+                        * aantal
+                        / (ruimte.gedeeld_met_aantal_eenheden or 1)
+                    ),
+                    decimalen=2,
+                )
+            )
 
-            woningwaardering.aantal = (woningwaardering.aantal or 0.0) + aantal
+            woningwaardering.aantal = float(
+                rond_af(
+                    (woningwaardering.aantal or 0.0) + aantal,
+                    decimalen=2,
+                )
+            )
 
             return True
         else:
@@ -106,24 +130,28 @@ class SanitairJan2024(Stelselgroepversie):
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 3,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.closetcombinatie,
             )
             SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 1,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.wastafel,
             )
             SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 1,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.bidet,
             )
             SanitairJan2024._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 1,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.lavet,
             )
 
@@ -131,6 +159,7 @@ class SanitairJan2024(Stelselgroepversie):
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,
                 7,
+                ruimte.gedeeld_met_aantal_eenheden,
                 Bouwkundigelementdetailsoort.bad,
                 Bouwkundigelementdetailsoort.douche,
             ):
@@ -138,6 +167,7 @@ class SanitairJan2024(Stelselgroepversie):
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
                     6,
+                    ruimte.gedeeld_met_aantal_eenheden,
                     Bouwkundigelementdetailsoort.bad,
                 )
 
@@ -145,6 +175,7 @@ class SanitairJan2024(Stelselgroepversie):
                     woningwaardering_groep.woningwaarderingen,
                     ruimte,
                     4,
+                    ruimte.gedeeld_met_aantal_eenheden,
                     Bouwkundigelementdetailsoort.douche,
                 )
 

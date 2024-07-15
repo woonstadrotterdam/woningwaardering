@@ -1,5 +1,5 @@
 from datetime import date
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 from importlib.resources import files
 from itertools import chain
 import warnings
@@ -13,6 +13,7 @@ from woningwaardering.stelsels.utils import (
     energieprestatie_met_geldig_label,
     filter_dataframe_op_datum,
     naar_tabel,
+    rond_af,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
     PuntenVoorDeWozWaarde,
@@ -87,9 +88,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
                     naam="Onderdeel I"
                 ),
                 punten=float(
-                    Decimal(woz_waarde / factor_onderdeel_I).quantize(
-                        Decimal(".01"), rounding=ROUND_HALF_UP
-                    )
+                    rond_af(Decimal(woz_waarde / factor_onderdeel_I), decimalen=2)
                 ),
             )
         )
@@ -109,8 +108,9 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
                     naam="Onderdeel II"
                 ),
                 punten=float(
-                    Decimal(woz_waarde / oppervlakte / factor_onderdeel_II).quantize(
-                        Decimal(".01"), rounding=ROUND_HALF_UP
+                    rond_af(
+                        woz_waarde / oppervlakte / factor_onderdeel_II,
+                        decimalen=2,
                     )
                 ),
             )
@@ -121,9 +121,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         )
 
         punten = self._som_woz_punten(woningwaardering_groep)
-        woningwaardering_groep.punten = float(
-            Decimal(str(punten)).quantize(Decimal("1"), ROUND_HALF_UP)
-        )
+        woningwaardering_groep.punten = float(rond_af(punten, decimalen=0))
 
         logger.info(
             f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
@@ -213,9 +211,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             if groep.punten
         ) + Decimal(str(punten))
 
-        cap_punten = (totaal_punten / Decimal("3")).quantize(
-            Decimal(".01"), rounding=ROUND_HALF_UP
-        )
+        cap_punten = rond_af(totaal_punten / Decimal("3"), decimalen=2)
 
         # cap niet wanneer punten onder de cap grens zitten of totaal punten lager is dan 142
         if cap_punten >= Decimal(str(punten)) or totaal_punten < Decimal("142"):

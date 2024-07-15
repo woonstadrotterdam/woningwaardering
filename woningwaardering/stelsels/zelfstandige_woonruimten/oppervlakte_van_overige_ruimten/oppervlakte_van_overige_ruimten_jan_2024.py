@@ -1,9 +1,9 @@
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroepversie
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_tabel, rond_af
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
@@ -67,31 +67,39 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
                 woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-                woningwaardering.criterium = (
-                    WoningwaarderingResultatenWoningwaarderingCriterium(
-                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                        naam=criterium_naam,
-                    )
+                gedeelde_ruimte = (
+                    ruimte.gedeeld_met_aantal_eenheden
+                    and ruimte.gedeeld_met_aantal_eenheden >= 2
                 )
 
-                if (
-                    ruimte.gedeeld_met_aantal_eenheden is not None
-                    and ruimte.gedeeld_met_aantal_eenheden > 1
-                    and ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
-                ):
+                woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                    naam=criterium_naam
+                    if not gedeelde_ruimte
+                    else f"{criterium_naam} (~{rond_af(ruimte.oppervlakte, decimalen=2)}m2, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
+                )
+
+                if gedeelde_ruimte:
                     oppervlakte_per_eenheid = Decimal(
-                        ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
+                        ruimte.oppervlakte / (ruimte.gedeeld_met_aantal_eenheden or 1)
                     )
 
-                    if oppervlakte_per_eenheid >= 2:
-                        woningwaardering.aantal = float(
-                            (
-                                Decimal(str(ruimte.oppervlakte)).quantize(
-                                    Decimal("1"), ROUND_HALF_UP
-                                )
-                                / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                            ).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                    if (
+                        (
+                            ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
+                            and oppervlakte_per_eenheid
+                            >= 2  # Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als (...) de oppervlakte, na deling door het aantal woningen, per woning minstens 2m2 bedraagt.
                         )
+                        or ruimte.detail_soort.code != Ruimtedetailsoort.berging.code
+                    ):  # bij niet-bergingen staat geen specifieke eis in de regelgeving m.b.t. oppervlakte na deling door aantal woningen.
+                        woningwaardering.aantal = float(
+                            rond_af(
+                                rond_af(ruimte.oppervlakte, decimalen=0)
+                                / Decimal(str(ruimte.gedeeld_met_aantal_eenheden)),
+                                decimalen=2,
+                            )
+                        )
+
                     else:
                         logger.info(
                             f"Ruimte {ruimte.naam} ({ruimte.id}) is kleiner dan 2 m2 per eenheid en komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
@@ -109,22 +117,21 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
                 else:
                     woningwaardering.aantal = float(
-                        Decimal(str(ruimte.oppervlakte)).quantize(
-                            Decimal("0.01"), ROUND_HALF_UP
-                        )
+                        rond_af(ruimte.oppervlakte, decimalen=2)
                     )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = Decimal(
+        punten = rond_af(
             sum(
                 Decimal(str(woningwaardering.aantal))
                 for woningwaardering in (
                     woningwaardering_groep.woningwaarderingen or []
                 )
                 if woningwaardering.aantal is not None
-            )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("0.75")
+            ),
+            decimalen=0,
+        ) * Decimal("0.75")
 
         woningwaardering_groep.punten = float(punten)
 
@@ -152,11 +159,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
                 logger.info(
                     f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                 )
-                return float(
-                    Decimal(str(ruimte.oppervlakte)).quantize(
-                        Decimal("0.01"), ROUND_HALF_UP
-                    )
-                )
+                return float(rond_af(ruimte.oppervlakte, decimalen=2))
 
             vlizotrap = heeft_bouwkundig_element(
                 ruimte, Bouwkundigelementdetailsoort.vlizotrap
@@ -169,23 +172,24 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
                 return max(
                     0.0,
                     float(
-                        Decimal(
-                            Decimal(str(ruimte.oppervlakte)).quantize(
-                                Decimal("0.01"), ROUND_HALF_UP
-                            )
-                            # Min 5 punten omdat de ruimte niet bereikt kan worden met een
-                            # vaste trap.
-                            # Let op, hier wordt de oppervlakte gecorrigeerd met de
-                            # hoeveelheid punten per vierkante meter. Onze keuze is om hier
-                            # al de vijf punten in mindering te brengen. Het beleidsboek
-                            # geeft aan dat de punten in mindering gebracht moeten worden
-                            # op de punten berekend voor deze ruimte, maar ook dat punten
-                            # pas berekend moeten worden wanneer de totale oppervlakte
-                            # bekend is en afegerond is.
-                            # Door de afronding komt deze berekening niet helemaal juist
-                            # uit, maar dit is de benadering waar wij nu voor kiezen.
-                            - Decimal("5") / Decimal("0.75")
-                        ).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                        rond_af(
+                            Decimal(
+                                rond_af(ruimte.oppervlakte, decimalen=2)
+                                # Min 5 punten omdat de ruimte niet bereikt kan worden met een
+                                # vaste trap.
+                                # Let op, hier wordt de oppervlakte gecorrigeerd met de
+                                # hoeveelheid punten per vierkante meter. Onze keuze is om hier
+                                # al de vijf punten in mindering te brengen. Het beleidsboek
+                                # geeft aan dat de punten in mindering gebracht moeten worden
+                                # op de punten berekend voor deze ruimte, maar ook dat punten
+                                # pas berekend moeten worden wanneer de totale oppervlakte
+                                # bekend is en afegerond is.
+                                # Door de afronding komt deze berekening niet helemaal juist
+                                # uit, maar dit is de benadering waar wij nu voor kiezen.
+                                - Decimal("5") / Decimal("0.75")
+                            ),
+                            decimalen=2,
+                        )
                     ),
                 )
 
