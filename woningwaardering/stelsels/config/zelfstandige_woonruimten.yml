@@ -89,6 +89,7 @@ stelselgroepen:
     module: prijsopslag_monumenten_en_nieuwbouw
     class_naam: PrijsopslagMonumentenEnNieuwbouw
     begindatum: 2024-07-01
+    uitvoeringsvolgorde: 100
     versies:
       - module: prijsopslag_monumenten_en_nieuwbouw_jul_2024
         class_naam: PrijsopslagMonumentenEnNieuwbouwJul2024

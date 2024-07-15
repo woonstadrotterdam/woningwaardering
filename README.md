@@ -142,7 +142,7 @@ De begin- en einddatum van de geldigheid van een stelsel wordt vastgelegd in de 
 #### Stelselgroepen
 
 De namen voor de stelselgroepen zijn te vinden in de `Woningwaarderingstelselgroep` Enum. Bijvoorbeeld: de stelselgroep voor oppervlakte van vertrekken wordt aangeduid als `Woningwaarderingstelselgroep.oppervlakte_van_vertrekken`. De implementatie van deze `Stelselgroep` bevindt zich in [woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py](woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py).
-De begin- en einddatum van de geldigheid van een stelselgroep wordt vastgelegd in de configuratie `.yml` van het betreffende stelsel.
+De begin- en einddatum van de geldigheid van een stelselgroep en de volgorde waarin de stelselgroepen moeten worden uitgevoerd wordt vastgelegd in de configuratie `.yml` van het betreffende stelsel.
 
 #### Stelselgroepversies
 

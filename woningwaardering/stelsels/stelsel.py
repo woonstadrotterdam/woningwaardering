@@ -192,7 +192,9 @@ class Stelsel:
             )(
                 peildatum=peildatum,
             )
-            for _, stelgroep_config in config.stelselgroepen.items()
+            for stelgroep_config in sorted(
+                config.stelselgroepen.values(), key=lambda x: x.uitvoeringsvolgorde
+            )
             if is_geldig(
                 stelgroep_config.begindatum,
                 stelgroep_config.einddatum,
