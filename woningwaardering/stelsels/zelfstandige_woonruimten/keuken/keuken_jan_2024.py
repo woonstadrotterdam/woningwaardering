@@ -107,8 +107,8 @@ class KeukenJan2024(Stelselgroepversie):
                     )
 
         if not keukens:
-            raise Warning(
-                f"Geen keuken met aanrecht gevonden: Eenheid {eenheid.id} kan niet gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+            raise ValueError(
+                f"Eenheid {eenheid.id} kan niet gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam} omdat er geen keuken is gevonden."
             )
 
         totaal_punten = Decimal(
@@ -130,9 +130,10 @@ class KeukenJan2024(Stelselgroepversie):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
+    warnings.simplefilter("default", UserWarning)
     keukenJan2024 = KeukenJan2024()
     with open(
-        "tests/data/zelfstandige_woonruimten/input/41164000002.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/eenheid_zonder_keuken.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
