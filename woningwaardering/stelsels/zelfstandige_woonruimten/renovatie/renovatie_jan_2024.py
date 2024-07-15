@@ -50,7 +50,7 @@ class RenovatieJan2024(Stelselgroepversie):
             # gedaan van minimaal € 10.000.
             if eenheid.renovatie.investeringsbedrag < 10000:
                 logger.info(
-                    f"De Investering van renovatie in {eenheid.renovatie.datum.year} is te laag en komt niet aanmekring voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
+                    f"De investering van renovatie in {eenheid.renovatie.datum.year} is te laag en komt niet aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                 )
                 return woningwaardering_groep
 
