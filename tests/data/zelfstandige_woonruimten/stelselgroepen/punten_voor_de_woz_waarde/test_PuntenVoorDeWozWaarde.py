@@ -49,6 +49,8 @@ def test_PuntenVoorDeWozWaarde_output(
     )
 
 
+# In deze test data zit expres missende data
+@pytest.mark.filterwarnings("ignore::UserWarning")
 def test_PuntenVoorDeWozWaarde_specifiek_output(specifieke_input_en_output_model):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
     punten_voor_de_woz_waarde = PuntenVoorDeWozWaarde(peildatum=peildatum)
@@ -59,3 +61,21 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(specifieke_input_en_output_model
         eenheid_output,
         Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
     )
+
+
+specifiek_warning_mapping = {
+    "hoogniveau_renovatie_1912": (
+        UserWarning,
+        "WOZ-waarde",
+    ),
+    "nieuwbouw_eenheid": (UserWarning, "WOZ-waarde"),
+}
+
+
+def test_PuntenVoorDeWozWaarde_specifiek_warnings(specifieke_input_en_output_model):
+    eenheid_input, _, peildatum = specifieke_input_en_output_model
+    woz = PuntenVoorDeWozWaarde(peildatum=peildatum)
+    warning_tuple = specifiek_warning_mapping.get(eenheid_input.id)
+    if warning_tuple is not None:
+        with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
+            woz.bereken(eenheid_input)
