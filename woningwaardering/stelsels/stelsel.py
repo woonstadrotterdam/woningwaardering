@@ -187,17 +187,17 @@ class Stelsel:
         geldige_stelselgroepen: list[Stelselgroep] = [
             import_class(
                 f"woningwaardering.stelsels.{stelsel.name}",
-                stelgroep_config.class_naam,
+                stelselgroep_config.class_naam,
                 Stelselgroep,
             )(
                 peildatum=peildatum,
             )
-            for stelgroep_config in sorted(
+            for stelselgroep_config in sorted(
                 config.stelselgroepen.values(), key=lambda x: x.uitvoeringsvolgorde
             )
             if is_geldig(
-                stelgroep_config.begindatum,
-                stelgroep_config.einddatum,
+                stelselgroep_config.begindatum,
+                stelselgroep_config.einddatum,
                 peildatum,
             )
         ]
