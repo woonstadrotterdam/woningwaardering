@@ -67,10 +67,11 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
+            # TODO: dit moet uitgefaseerd worden
+            woz_waarde = 0
             warnings.warn(
                 f"Geen WOZ-waarde gevonden voor eenheid {eenheid.id}", UserWarning
             )
-            return woningwaardering_groep
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
 
