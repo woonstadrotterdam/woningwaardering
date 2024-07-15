@@ -781,7 +781,7 @@ Indien een woonruimte bestaat uit of deel uitmaakt van een rijksmonument, als be
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de Rijksmonumenten: http://monumentenregister.cultureelerfgoed.nl/.
 
-### 4.13.2 Woning gelegen in beschermd stads- en dorpsgezicht
+### ~~4.13.2 Woning gelegen in beschermd stads- en dorpsgezicht~~
 
 Voor woningen, niet zijnde Rijksmonument, binnen beschermd stads- of dorpsgezicht geldt geen toeslag van 50 punten. Wel geldt een 15% hogere maximale huurprijs indien:
 
