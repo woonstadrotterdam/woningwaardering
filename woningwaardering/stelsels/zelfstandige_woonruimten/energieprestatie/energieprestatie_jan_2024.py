@@ -200,15 +200,15 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
         if not eenheid.woningtype:
-            raise Warning(
+            raise ValueError(
                 f"Eenheid {eenheid.id} heeft geen woningtype en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
             )
         if not eenheid.woningtype.naam:
-            raise Warning(
+            raise ValueError(
                 f"Eenheid {eenheid.id} heeft geen woningtype naam en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
             )
         if not (energieprestatie or eenheid.bouwjaar):
-            raise Warning(
+            raise ValueError(
                 f"Eenheid {eenheid.id} heeft geen energieprestatie of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
             )
 

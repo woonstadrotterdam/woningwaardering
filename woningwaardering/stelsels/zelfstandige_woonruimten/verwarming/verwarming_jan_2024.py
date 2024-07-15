@@ -59,7 +59,7 @@ class VerwarmingJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.detail_soort is None:
-                raise TypeError(f"ruimte {ruimte.id} heeft geen detailsoort")
+                raise ValueError(f"ruimte {ruimte.id} heeft geen detailsoort")
 
             ruimtesoort = classificeer_ruimte(ruimte)
 
