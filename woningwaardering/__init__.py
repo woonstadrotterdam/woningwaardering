@@ -3,7 +3,7 @@ import os
 import sys
 import time
 from types import TracebackType
-from typing import Literal, TextIO
+from typing import TextIO
 import warnings
 from loguru import logger
 
@@ -49,15 +49,8 @@ def handle_unhandled_exception(
 sys.excepthook = handle_unhandled_exception
 
 
-def set_warning_filter(
-    filter: Literal["default", "error", "ignore", "always", "module", "once"] = "error",
-    category: type[Warning] = UserWarning,
-) -> None:
-    warnings.simplefilter(filter, category=category)
-
-
-# Set the warning filter to raise errors for UserWarning
-set_warning_filter()
+# Zet de warning filter zodat UserWarnings een error worden
+warnings.simplefilter("error", UserWarning)
 
 
 def warning_handler(
@@ -68,17 +61,28 @@ def warning_handler(
     file: TextIO | None = None,
     line: str | None = None,
 ) -> None:
+    """
+    Deze functie logt en print warning messages.
+
+    Args:
+        message (Warning | str): De warning message.
+        category (type[Warning]): De warning categorie.
+        filename (str): De naam van het bestand waar de warning is gedaan.
+        lineno (int): Het regelnummer waarop de warning is gedaan.
+        file (TextIO | None, optional): Het bestand waar de warning is gedaan. Default None.
+        line (str | None, optional): De regel code waar de waaring is gedaan. Default None.
+    """
     warning_message = f"{category.__name__}: {message}"
     try:
         logger.opt(depth=2, exception=None).warning(warning_message)
     except TypeError:
-        # Fallback als logger.warning de message niet accepteert
+        # Fallback if logger.warning de message niet kan loggen
         print(f"{filename}:{lineno} - {category.__name__}: {message} - {file}:{line}")
     finally:
-        # Stuur warning ook naar sys.stderr
+        # Print warning in sys.stderr
         print(f"{filename}:{lineno} - {warning_message}", file=sys.stderr)
 
 
 warnings.showwarning = warning_handler
 
-__all__ = ["set_warning_filter", "warnings"]
+__all__ = ["set_warning_filter"]
