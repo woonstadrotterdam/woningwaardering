@@ -783,7 +783,7 @@ Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register 
 
 ### ~~4.13.2 Woning gelegen in beschermd stads- en dorpsgezicht~~
 
-Voor woningen, niet zijnde Rijksmonument, binnen beschermd stads- of dorpsgezicht geldt geen toeslag van 50 punten. Wel geldt een 15% hogere maximale huurprijs indien:
+~~Voor woningen, niet zijnde Rijksmonument, binnen beschermd stads- of dorpsgezicht geldt geen toeslag van 50 punten. Wel geldt een 15% hogere maximale huurprijs indien:~~
 
 - ~~a. die woonruimte behoort tot een beschermd stads- en dorpsgezicht als bedoeld in artikel 1, onder g, van de Monumentenwet 1988,~~  
 - ~~b. die woonruimte is gebouwd voor 1945, en~~  
