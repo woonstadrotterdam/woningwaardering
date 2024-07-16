@@ -9,6 +9,7 @@ from .prive_buitenruimten import PriveBuitenruimten
 from .punten_voor_de_woz_waarde import PuntenVoorDeWozWaarde
 from .renovatie import Renovatie
 from .beschermd_monument_bmz import BeschermdMonumentBmz
+from .prijsopslag_monumenten_en_nieuwbouw import PrijsopslagMonumentenEnNieuwbouw
 
 
 __all__ = [
@@ -23,4 +24,5 @@ __all__ = [
     "PuntenVoorDeWozWaarde",
     "Renovatie",
     "BeschermdMonumentBmz",
+    "PrijsopslagMonumentenEnNieuwbouw",
 ]

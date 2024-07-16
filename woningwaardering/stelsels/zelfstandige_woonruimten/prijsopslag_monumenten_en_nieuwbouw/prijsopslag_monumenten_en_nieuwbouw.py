@@ -13,21 +13,27 @@ from woningwaardering.vera.referentiedata import (
 )
 
 
-class BeschermdMonumentBmz(Stelselgroep):
+class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
     def __init__(self, peildatum: date = date.today()) -> None:
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.beschermd_monument_bmz
+        self.stelselgroep = (
+            Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw
+        )
         super().__init__(peildatum=peildatum)
 
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    beschermd_monument_bmz = BeschermdMonumentBmz()
-    with open("tests/data/generiek/input/37101000032.json", "r+") as file:
+    prijsopslag_monumenten_en_nieuwbouw = PrijsopslagMonumentenEnNieuwbouw()
+    with open(
+        "tests/data/zelfstandige_woonruimten/input/23109000031.json", "r+"
+    ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-        woningwaardering_resultaat = beschermd_monument_bmz.bereken(eenheid)
+        woningwaardering_resultaat = prijsopslag_monumenten_en_nieuwbouw.bereken(
+            eenheid
+        )
 
         print(
             woningwaardering_resultaat.model_dump_json(

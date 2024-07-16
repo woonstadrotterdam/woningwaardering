@@ -4,8 +4,8 @@ from loguru import logger
 
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
+from woningwaardering.stelsels.utils import update_eenheid_monumenten
 from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
-from .beschermd_monument_bmz import BeschermdMonumentBmz
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -42,7 +42,7 @@ class BeschermdMonumentBmzJan2024(Stelselgroepversie):
                 f"Monumenten is None voor eenheid {eenheid.id}. De api van cultureelerfgoed wordt geraadpleegd."
             )
 
-            BeschermdMonumentBmz.update_eenheid_monumenten(eenheid)
+            update_eenheid_monumenten(eenheid)
 
         if any(
             monument.code == Eenheidmonument.rijksmonument.code
