@@ -189,7 +189,6 @@ from .voorrangdetailsoort import Voorrangdetailsoort
 from .voorrangsoort import Voorrangsoort
 from .vragenlijstregelherkomst import Vragenlijstregelherkomst
 from .vragenlijstregelonderwerpsoort import Vragenlijstregelonderwerpsoort
-from .woningtype import Woningtype
 from .woningwaarderingstelsel import Woningwaarderingstelsel
 from .woningwaarderingstelselgroep import Woningwaarderingstelselgroep
 from .woonsituatiesoort import Woonsituatiesoort
@@ -394,7 +393,6 @@ __all__ = [
     "Voorrangsoort",
     "Vragenlijstregelherkomst",
     "Vragenlijstregelonderwerpsoort",
-    "Woningtype",
     "Woningwaarderingstelsel",
     "Woningwaarderingstelselgroep",
     "Woonsituatiesoort",

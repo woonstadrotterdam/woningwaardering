@@ -14,10 +14,14 @@
       "naam": "ROTTERDAM"
     }
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {

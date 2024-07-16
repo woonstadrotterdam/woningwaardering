@@ -1,9 +1,13 @@
 {
   "bouwjaar": 1921,
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {
