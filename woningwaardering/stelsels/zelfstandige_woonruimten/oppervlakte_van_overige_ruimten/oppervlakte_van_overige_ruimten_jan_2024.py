@@ -50,7 +50,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.oppervlakte is None:
-                message = f"ruimte {ruimte.id} heeft geen oppervlakte"
+                message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte"
                 warnings.warn(message, UserWarning)
                 return woningwaardering_groep
 
