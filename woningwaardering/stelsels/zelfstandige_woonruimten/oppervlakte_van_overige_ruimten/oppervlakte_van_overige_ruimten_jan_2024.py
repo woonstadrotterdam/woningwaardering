@@ -55,7 +55,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
                 return woningwaardering_groep
 
             if ruimte.detail_soort is None:
-                message = f"ruimte {ruimte.id} heeft geen detailsoort"
+                message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort"
                 warnings.warn(message, UserWarning)
                 return woningwaardering_groep
 
