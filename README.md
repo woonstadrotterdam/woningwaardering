@@ -112,7 +112,7 @@ warnings.warn("Dit is een warning", UserWarning)
 ```
 
 Standaard genereert de `woningwaardering` package een error wanneer een `UserWarning` wordt gegeven.
-Hoewel de package kan werken met incomplete data, is ervoor gekozen om standaard te falen bij ontbrekende inputdata, zodat de gebruiker hiervan op de hoogte wordt gebracht.
+Hoewel de package kan werken met incomplete data, is ervoor gekozen om standaard te falen bij incomplete inputdata, zodat de gebruiker hiervan op de hoogte wordt gebracht.
 Het is echter mogelijk om het warning filter terug te zetten naar de standaardinstellingen. In dat geval kan het warning filter aangepast worden door een type warning naar "default" te zetten met:
 
 ```python
@@ -122,7 +122,7 @@ warnings.simplefilter("default", UserWarning)
 Alle waarschuwingen die worden gegenereerd met `warnings.warn()`, worden standaard gelogd met `logger.warning()` en weergegeven in het standaardfout bestand.
 Mocht door de gebruiker logging worden uitgezet, dan zullen de UserWarnings altijd te zien zijn voor de gebruiker.
 
-#### Warning vs Exceptiom
+#### Warning vs Exception
 
 Er wordt doorgaans in de stelgroepversies gebruik gemaakt van `warnings.warn()` in plaats van het raisen van een exception.
 Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroepen waarvoor de data wel compleet genoeg is, mits de `warnings.simplefilter` naar `default` is gezet.
