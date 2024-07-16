@@ -132,6 +132,7 @@ from .overeenkomstkoppelingdetailstatus import Overeenkomstkoppelingdetailstatus
 from .overeenkomstkoppelingstatus import Overeenkomstkoppelingstatus
 from .overeenkomstsoort import Overeenkomstsoort
 from .overeenkomststatus import Overeenkomststatus
+from .pandsoort import Pandsoort
 from .passendheiddetailsoort import Passendheiddetailsoort
 from .passendheidssoort import Passendheidssoort
 from .prestatieafspraak import Prestatieafspraak
@@ -336,6 +337,7 @@ __all__ = [
     "Overeenkomstkoppelingstatus",
     "Overeenkomstsoort",
     "Overeenkomststatus",
+    "Pandsoort",
     "Passendheiddetailsoort",
     "Passendheidssoort",
     "Prestatieafspraak",
