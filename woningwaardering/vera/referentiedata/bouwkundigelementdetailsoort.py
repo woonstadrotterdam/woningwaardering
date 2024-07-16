@@ -969,6 +969,15 @@ class Bouwkundigelementdetailsoort(Enum):
         ),
     )
 
+    bidet = Referentiedata(
+        code="BID",
+        naam="Bidet",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+
     binnenwanden = Referentiedata(
         code="BIN",
         naam="Binnenwanden",
@@ -1062,6 +1071,15 @@ class Bouwkundigelementdetailsoort(Enum):
     keukenvoorzieningen = Referentiedata(
         code="KEU",
         naam="Keukenvoorzieningen",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+
+    lavet = Referentiedata(
+        code="LAV",
+        naam="Lavet",
         parent=Referentiedata(
             code="VOO",
             naam="Voorziening",
@@ -1175,30 +1193,6 @@ class Bouwkundigelementdetailsoort(Enum):
             naam="Voorziening",
         ),
     )
-
-    bidet = Referentiedata(
-        code="BID",
-        naam="Bidet",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
-    )
-    """
-    Een bidet (UITBREIDING).
-    """
-
-    lavet = Referentiedata(
-        code="LAV",
-        naam="Lavet",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
-    )
-    """
-    Een Lavet (UITBREIDING).
-    """
 
     @property
     def code(self) -> str:

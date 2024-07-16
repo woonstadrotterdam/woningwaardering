@@ -8,7 +8,9 @@
 
 ⌛️ **Work in Progress**
 
-![](https://progress-bar.dev/70/?title=zelfstandige_woonruimten&width=120)
+![](https://progress-bar.dev/95/?title=zelfstandige_woonruimten_jan_2024&width=120)  
+![](https://progress-bar.dev/50/?title=zelfstandige_woonruimten_jul_2024&width=120)  
+![](https://progress-bar.dev/0/?title=onzelfstandige_woonruimten_jul_2024&width=108)
 
 Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk zal zijn om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij zo veel mogelijk uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) van de corporatiesector. Het doel is om tot een completere woningwaarderingsstelsel-berekening te komen dan die nu beschikbaar zijn via tools zoals bijvoorbeeld die van de [huurcommissie](https://www.huurcommissie.nl/huurders/sociale-huurwoning/maximale-huurprijs-berekenen).
 
@@ -167,7 +169,7 @@ De begin- en einddatum van de geldigheid van een stelsel wordt vastgelegd in de 
 #### Stelselgroepen
 
 De namen voor de stelselgroepen zijn te vinden in de `Woningwaarderingstelselgroep` Enum. Bijvoorbeeld: de stelselgroep voor oppervlakte van vertrekken wordt aangeduid als `Woningwaarderingstelselgroep.oppervlakte_van_vertrekken`. De implementatie van deze `Stelselgroep` bevindt zich in [woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py](woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py).
-De begin- en einddatum van de geldigheid van een stelselgroep wordt vastgelegd in de configuratie `.yml` van het betreffende stelsel.
+De begin- en einddatum van de geldigheid van een stelselgroep en de volgorde waarin de stelselgroepen moeten worden uitgevoerd wordt vastgelegd in de configuratie `.yml` van het betreffende stelsel.
 
 #### Stelselgroepversies
 
@@ -368,16 +370,16 @@ Om te bepalen of de ruimten van een eenheid als individueel of collectief verwar
 Om dit attribuut ook aan de VERA standaard toe te voegen is
 https://github.com/Aedes-datastandaarden/vera-openapi/issues/54 aangemaakt.
 
-### Bidet en Lavet
-
-In het beleidshandboek van de huurcomissie voor het woningwaardeeringstelsel wordt voor zowel een bidet als een lavet één punt toegekend. In de huidige referentiedata ontbreken deze twee type `bouwkundigelementdetailsoort`. Zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/104.
-
 ### Verwarmd
 
 In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verwarmd is. Het attribuut `verwarmde_vertrekken_aantal` bestaat wel, maar dit bestaat op niveau van de eenheid en daarin bestaat geen onderscheid tussen vertrekken en overige ruimten. Dit is aangekaart in deze twee issues:
 
 - https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
 - https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
+
+### Oppervlakten
+
+In de VERA VHE modellen bestaat een `oppervlakten` attribuut op `EenhedenEenheid`. Dit attribuut is nog niet beschikbaar in de door ons gebruikte VERA BVG modellen. Dit attribuut en de bijbehorende class `EenhedenOppervlakte` is toegevoegd in afwachting van een update in de VERA standaard. Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/61.
 
 ### Afmetingen Ruimte
 
@@ -388,7 +390,3 @@ Voor de waardering van buitenruimten dienen de afmetingen van ruimtes doorgegeve
 - `hoogte`: De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan `None` zijn, bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
 
 Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/63.
-
-### Oppervlakten
-
-In de VERA VHE modellen bestaat een `oppervlakten` attribuut op `EenhedenEenheid`. Dit attribuut is nog niet beschikbaar in de door ons gebruikte VERA BVG modellen. Dit attribuut en de bijbehorende class `EenhedenOppervlakte` is toegevoegd in afwachting van een update in de VERA standaard. Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/61.

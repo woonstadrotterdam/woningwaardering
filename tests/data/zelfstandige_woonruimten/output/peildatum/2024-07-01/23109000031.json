@@ -243,8 +243,8 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "BMZ",
-          "naam": "Beschermd monument"
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
         }
       },
       "woningwaarderingen": [
@@ -252,19 +252,19 @@
           "criterium": {
             "naam": "Rijksmonument"
           },
-          "opslagpercentage": 0.3
+          "opslagpercentage": 0.35
         }
       ],
-      "opslagpercentage": 0.3
+      "opslagpercentage": 0.35
     }
   ],
   "maximaleHuur": 834.27,
-  "opslagpercentage": 0.3,
+  "opslagpercentage": 0.35,
   "punten": 136.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "huurprijsopslag": 250.28,
-  "maximaleHuurInclusiefOpslag": 1084.55
+  "huurprijsopslag": 291.99,
+  "maximaleHuurInclusiefOpslag": 1126.26
 }

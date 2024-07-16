@@ -1,4 +1,3 @@
-from datetime import date
 from pathlib import Path
 
 import pytest
@@ -25,16 +24,11 @@ def specifieke_input_en_output_model(request):
 
 
 def test_Renovatie(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat):
-    try:
-        renovatie = Renovatie()
-        resultaat = renovatie.bereken(
-            zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
-        )
-        assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
-    except NotImplementedError:
-        pytest.skip(
-            f"{Woningwaarderingstelselgroep.renovatie.naam} is niet geïmplementeerd voor {date.today()}"
-        )
+    renovatie = Renovatie()
+    resultaat = renovatie.bereken(
+        zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    )
+    assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
 def test_Renovatie_output(
@@ -43,32 +37,24 @@ def test_Renovatie_output(
     eenheid_input, eenheid_output, peildatum = (
         zelfstandige_woonruimten_input_en_outputmodel
     )
-    try:
-        renovatie = Renovatie(peildatum=peildatum)
-        resultaat = renovatie.bereken(eenheid_input)
-        assert_output_model(
-            resultaat,
-            eenheid_output,
-            Woningwaarderingstelselgroep.renovatie,
-        )
-    except NotImplementedError:
-        pytest.skip(
-            f"{Woningwaarderingstelselgroep.renovatie.naam} is niet geïmplementeerd voor {peildatum}"
-        )
+
+    renovatie = Renovatie(peildatum=peildatum)
+    resultaat = renovatie.bereken(eenheid_input)
+    assert_output_model(
+        resultaat,
+        eenheid_output,
+        Woningwaarderingstelselgroep.renovatie,
+    )
 
 
 def test_Renovatie_specifiek_output(specifieke_input_en_output_model):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
-    try:
-        renovatie = Renovatie(peildatum=peildatum)
-        resultaat = renovatie.bereken(eenheid_input)
 
-        assert_output_model(
-            resultaat,
-            eenheid_output,
-            Woningwaarderingstelselgroep.renovatie,
-        )
-    except NotImplementedError:
-        pytest.skip(
-            f"{Woningwaarderingstelselgroep.renovatie.naam} is niet geïmplementeerd voor {peildatum}"
-        )
+    renovatie = Renovatie(peildatum=peildatum)
+    resultaat = renovatie.bereken(eenheid_input)
+
+    assert_output_model(
+        resultaat,
+        eenheid_output,
+        Woningwaarderingstelselgroep.renovatie,
+    )

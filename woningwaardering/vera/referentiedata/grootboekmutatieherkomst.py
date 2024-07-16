@@ -20,6 +20,14 @@ class Grootboekmutatieherkomst(Enum):
     elektronisch wordt verstuurd naar de bank
     """
 
+    beginbalans = Referentiedata(
+        code="BEG",
+        naam="Beginbalans",
+    )
+    """
+    Een boeking van het eindsaldo van een balansrekening uit een voorgaand boekjaar
+    """
+
     berekening = Referentiedata(
         code="BER",
         naam="Berekening",

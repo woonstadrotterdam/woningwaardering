@@ -380,8 +380,8 @@ class Ruimtedetailsoort(Enum):
         code="SCH",
         naam="Schuur",
         parent=Referentiedata(
-            code="BTR",
-            naam="Buitenruimte",
+            code="OVR",
+            naam="Overige ruimtes",
         ),
     )
     """

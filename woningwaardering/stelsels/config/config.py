@@ -23,6 +23,7 @@ class Stelselgroepconfig(BaseModel):
     class_naam: str
     begindatum: date = date.min
     einddatum: date = date.max
+    uitvoeringsvolgorde: int = 0
     versies: List[Stelselgroepversieconfig]
 
 

@@ -79,16 +79,7 @@ class Stelsel:
         #
         # https://wetten.overheid.nl/BWBR0003237/2024-01-01#BijlageI_DivisieA_Divisie_Divisie15
 
-        resultaat.punten = float(
-            rond_af(
-                sum(
-                    woningwaardering_groep.punten
-                    for woningwaardering_groep in resultaat.groepen or []
-                    if woningwaardering_groep.punten is not None
-                ),
-                decimalen=0,
-            ),
-        )
+        resultaat.punten = Stelsel.bereken_puntentotaal(resultaat)
 
         resultaat.opslagpercentage = (
             sum(
@@ -116,6 +107,21 @@ class Stelsel:
         )
 
         return resultaat
+
+    @staticmethod
+    def bereken_puntentotaal(
+        resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    ) -> float:
+        return float(
+            rond_af(
+                sum(
+                    woningwaardering_groep.punten
+                    for woningwaardering_groep in resultaat.groepen or []
+                    if woningwaardering_groep.punten is not None
+                ),
+                decimalen=0,
+            ),
+        )
 
     def bereken_maximale_huur(
         self, resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
@@ -184,15 +190,17 @@ class Stelsel:
         geldige_stelselgroepen: list[Stelselgroep] = [
             import_class(
                 f"woningwaardering.stelsels.{stelsel.name}",
-                stelgroep_config.class_naam,
+                stelselgroep_config.class_naam,
                 Stelselgroep,
             )(
                 peildatum=peildatum,
             )
-            for _, stelgroep_config in config.stelselgroepen.items()
+            for stelselgroep_config in sorted(
+                config.stelselgroepen.values(), key=lambda x: x.uitvoeringsvolgorde
+            )
             if is_geldig(
-                stelgroep_config.begindatum,
-                stelgroep_config.einddatum,
+                stelselgroep_config.begindatum,
+                stelselgroep_config.einddatum,
                 peildatum,
             )
         ]
