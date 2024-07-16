@@ -333,6 +333,10 @@ In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verw
 - https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
 - https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
 
+### Oppervlakten
+
+In de VERA VHE modellen bestaat een `oppervlakten` attribuut op `EenhedenEenheid`. Dit attribuut is nog niet beschikbaar in de door ons gebruikte VERA BVG modellen. Dit attribuut en de bijbehorende class `EenhedenOppervlakte` is toegevoegd in afwachting van een update in de VERA standaard. Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/61.
+
 ### Afmetingen Ruimte
 
 Voor de waardering van buitenruimten dienen de afmetingen van ruimtes doorgegeven te worden. Hiervoor zijn de volgende attributen op Eenheden-Ruimte toegevoegd:
