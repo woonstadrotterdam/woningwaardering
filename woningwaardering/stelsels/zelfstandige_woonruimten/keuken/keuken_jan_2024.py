@@ -44,9 +44,10 @@ class KeukenJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if not ruimte.detail_soort:
-                raise ValueError(
+                warnings.warn(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail_soort."
                 )
+                continue
 
             if ruimte.detail_soort.code not in [
                 Ruimtedetailsoort.keuken.code,
