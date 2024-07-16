@@ -65,7 +65,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
                 if ruimte.oppervlakte < 2:
                     logger.debug(f"ruimte.oppervlakte = {ruimte.oppervlakte} m2")
                     logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is kleiner dan 2 m2 en telt daarom niet mee voor overige ruimtes."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) is kleiner dan 2 m2 en telt daarom niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}."
                     )
                     continue
 
