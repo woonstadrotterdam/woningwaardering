@@ -60,9 +60,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             )
 
         if not eenheid.bouwjaar:
-            warnings.warn(
-                f"Eenheid {eenheid.id}: geen bouwjaar gevonden.", UserWarning
-            )
+            warnings.warn(f"Eenheid {eenheid.id}: geen bouwjaar gevonden.", UserWarning)
             return woningwaardering_groep
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
@@ -445,7 +443,9 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             return False
 
         if not eenheid.renovatie.datum:
-            warnings.warn("Eenheid {eenheid.id}: renovatie zonder renovatiedatum gevonden.")
+            warnings.warn(
+                "Eenheid {eenheid.id}: renovatie zonder renovatiedatum gevonden."
+            )
             return False
 
         # De specifieke berekeningsmethodiek, die geldt voor nieuwbouwwoningen (2015-2019) (...)  is ook van toepassing
@@ -464,12 +464,16 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
         if not energieprestatie.begindatum:
             warnings.warn(
-                "Eenheid {eenheid.id}: energieprestatie zonder begindatum gevonden.", UserWarning
+                "Eenheid {eenheid.id}: energieprestatie zonder begindatum gevonden.",
+                UserWarning,
             )
             return False
 
         if not energieprestatie.label:
-            warnings.warn("Eenheid {eenheid.id}: energieprestatie zonder label gevonden.", UserWarning)
+            warnings.warn(
+                "Eenheid {eenheid.id}: energieprestatie zonder label gevonden.",
+                UserWarning,
+            )
             return False
 
         if eenheid.renovatie.datum.year <= 2019:

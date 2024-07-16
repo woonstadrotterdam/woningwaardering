@@ -75,7 +75,7 @@ specifiek_warning_mapping = {
             date(2024, 1, 1),
             (
                 UserWarning,
-                "Geen WOZ-waarde",
+                "geen WOZ-waarde",
             ),
         )
     ],
@@ -84,7 +84,7 @@ specifiek_warning_mapping = {
             date(2024, 1, 1),
             (
                 UserWarning,
-                "Geen WOZ-waarde",
+                "geen WOZ-waarde",
             ),
         )
     ],

@@ -60,7 +60,10 @@ class VerwarmingJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.detail_soort is None:
-                warnings.warn(f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort.", UserWarning)
+                warnings.warn(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort.",
+                    UserWarning,
+                )
                 continue
 
             ruimtesoort = classificeer_ruimte(ruimte)
