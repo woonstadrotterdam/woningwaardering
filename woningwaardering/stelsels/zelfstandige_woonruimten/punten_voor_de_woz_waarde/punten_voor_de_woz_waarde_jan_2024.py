@@ -61,7 +61,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
         if not eenheid.bouwjaar:
             warnings.warn(
-                f"Geen bouwjaar gevonden voor eenheid {eenheid.id}", UserWarning
+                f"Eenheid {eenheid.id}: geen bouwjaar gevonden.", UserWarning
             )
             return woningwaardering_groep
         woz_waarde = self.bepaal_woz_waarde(eenheid)
@@ -69,7 +69,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         if woz_waarde is None:
             # TODO: woz mag mag niet naar 0 gezet worden. Test data specifiek hierop aanpassen.
             warnings.warn(
-                f"Geen WOZ-waarde gevonden voor eenheid {eenheid.id}", UserWarning
+                f"Eenheid {eenheid.id}: geen WOZ-waarde gevonden", UserWarning
             )
             woz_waarde = 0
 
@@ -96,7 +96,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
         if oppervlakte == 0:
             warnings.warn(
-                f"Kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
+                f"Eenheid {eenheid.id}: kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
                 UserWarning,
             )
 
@@ -445,7 +445,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             return False
 
         if not eenheid.renovatie.datum:
-            warnings.warn("Een renovatie zonder renovatiedatum gevonden")
+            warnings.warn("Eenheid {eenheid.id}: renovatie zonder renovatiedatum gevonden.")
             return False
 
         # De specifieke berekeningsmethodiek, die geldt voor nieuwbouwwoningen (2015-2019) (...)  is ook van toepassing
@@ -464,12 +464,12 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
         if not energieprestatie.begindatum:
             warnings.warn(
-                "Een energieprestatie zonder begindatum gevonden", UserWarning
+                "Eenheid {eenheid.id}: energieprestatie zonder begindatum gevonden.", UserWarning
             )
             return False
 
         if not energieprestatie.label:
-            warnings.warn("Een energieprestatie zonder label gevonden", UserWarning)
+            warnings.warn("Eenheid {eenheid.id}: energieprestatie zonder label gevonden.", UserWarning)
             return False
 
         if eenheid.renovatie.datum.year <= 2019:
@@ -484,7 +484,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         if eenheid.renovatie.datum.year <= 2021:
             if not energieprestatie.waarde:
                 warnings.warn(
-                    "Een energieprestatie zonder waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021",
+                    "Eenheid {eenheid.id}: energieprestatie zonder waarde (Energie-Index) gevonden bij een renovatie in de jaren 2015-2021.",
                     UserWarning,
                 )
                 return False
@@ -492,7 +492,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
                 energieprestatie_waarde = float(energieprestatie.waarde)
             except ValueError:
                 warnings.warn(
-                    f"Een energieprestatie met een waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021 dat niet kan worden omgezet in een getal: {energieprestatie.waarde}"
+                    f"Eenheid {eenheid.id}: energieprestatie met een waarde (Energie-Index) dat niet kan worden omgezet in een getal ({energieprestatie.waarde}) gevonden bij een renovatie in de jaren 2015-2021"
                 )
                 return False
             if energieprestatie_waarde < 0.4:

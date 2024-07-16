@@ -41,13 +41,13 @@ class RenovatieJan2024(Stelselgroepversie):
         if eenheid.renovatie is not None:
             if eenheid.renovatie.datum is None:
                 warnings.warn(
-                    f"Renovatiedatum mist voor eenheid {eenheid.id}", UserWarning
+                    f"Eenheid {eenheid.id}: renovatiedatum mist.", UserWarning
                 )
                 return woningwaardering_groep
 
             if eenheid.renovatie.investeringsbedrag is None:
                 warnings.warn(
-                    f"Investeringsbedrag mist voor eenheid {eenheid.id}", UserWarning
+                    f"Eenheid {eenheid.id}: investeringsbedrag mist.", UserWarning
                 )
                 return woningwaardering_groep
 

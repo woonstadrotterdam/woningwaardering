@@ -81,13 +81,13 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                     )
                 ):
                     warnings.warn(
-                        f"{buitenruimte.naam} {buitenruimte.id} is een gemeenschappelijke ruimte en moet gedeeld worden met minimaal 2 eenheden, maar gedeeldMetAantalEenheden={buitenruimte.gedeeld_met_aantal_eenheden}",
+                        f"Ruimte {buitenruimte.naam} ({buitenruimte.id}) is een gemeenschappelijke ruimte en moet gedeeld worden met minimaal 2 eenheden, maar gedeeldMetAantalEenheden={buitenruimte.gedeeld_met_aantal_eenheden}",
                         UserWarning,
                     )
                     continue
                 if buitenruimte.detail_soort is None:
                     warnings.warn(
-                        f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} heeft geen detailsoort"
+                        f"Prive-buitenruimte {buitenruimte.naam} ({buitenruimte.id}) heeft geen detailsoort"
                     )
                     continue
                 if not PriveBuitenruimtenJan2024._buitenruimte_heeft_geldige_afmetingen(
@@ -135,7 +135,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
             woningwaardering.punten = -5.0
 
             logger.info(
-                f"Geen buitenruimte gevonden in eenheid {eenheid.id}: 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                f"Eenheid {eenheid.id}: geen buitenruimte gevonden. 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
             )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)

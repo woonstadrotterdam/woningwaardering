@@ -52,7 +52,7 @@ class OppervlakteVanVertrekkenJan2024(Stelselgroepversie):
                 )
                 criterium_naam += " (1m2 verminderd ivm toilet)"
                 logger.info(
-                    f"Toilet in {ruimte.naam} ({ruimte.id}) gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
+                    f"Ruimte {ruimte.naam} ({ruimte.id}): toilet gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
                 )
 
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:

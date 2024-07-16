@@ -161,7 +161,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
             if trap:
                 logger.info(
-                    f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+                    f"Ruimte {ruimte.naam} ({ruimte.id}): trap gevonden. Telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                 )
                 return float(rond_af(ruimte.oppervlakte, decimalen=2))
 
@@ -171,7 +171,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
             if vlizotrap:
                 logger.info(
-                    f"Vlizotrap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van overige ruimten"
+                    f"Ruimte {ruimte.naam} ({ruimte.id}): vlizotrap gevonden. Telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                 )
                 return max(
                     0.0,

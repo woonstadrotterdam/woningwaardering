@@ -91,14 +91,14 @@ class VerwarmingJan2024(Stelselgroepversie):
             if ruimtesoort == Ruimtesoort.overige_ruimtes:
                 if totaal_punten_overige_ruimten >= Decimal("4.0"):
                     logger.info(
-                        f"De overige ruimten hebben bij elkaar {totaal_punten_overige_ruimten} punten behaald: {ruimte.naam} ({ruimte.id}) wordt niet meegeteld voor Verwarming."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) wordt niet meegeteld voor {Woningwaarderingstelselgroep.verwarming.naam}, omdat de overige ruimten bij elkaar {totaal_punten_overige_ruimten} punten hebben behaald."
                     )
                     continue
 
                 # Als de punten de maximum van 4.0 overschrijden, dan wordt het aantal punten dat nog mag worden gegeven voor de ruimte aangepast
                 if (totaal_punten_overige_ruimten + punten) >= Decimal("4.0"):
                     logger.info(
-                        f"De maximum punten voor {Ruimtesoort.overige_ruimtes.naam} zijn behaald: punten voor {ruimte.naam} ({ruimte.id}) worden gecorrigeerd."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}): punten worden gecorrigeerd. De maximum punten voor {Ruimtesoort.overige_ruimtes.naam} zijn behaald."
                     )
                     punten = Decimal("4.0") - totaal_punten_overige_ruimten
 
