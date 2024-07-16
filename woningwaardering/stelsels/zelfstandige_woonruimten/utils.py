@@ -162,19 +162,19 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
 
     Returns:
         str: De naam van de ruimte inclusief het aantal toegevoegde kasten.
-
-    Raises:
-        TypeError: Als de ruimte ontbrekende informatie heeft, zoals oppervlakte of detailsoort.
     """
-    if ruimte.detail_soort is None or ruimte.detail_soort.code is None:
-        message = f"ruimte {ruimte.id} heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
-        raise TypeError(message)
-
-    if ruimte.oppervlakte is None:
-        message = f"ruimte {ruimte.id} heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
-        raise TypeError(message)
 
     criterium_naam = ruimte.naam or "Naamloze ruimte"
+
+    if ruimte.detail_soort is None or ruimte.detail_soort.code is None:
+        message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        warnings.warn(message, UserWarning)
+        return criterium_naam
+
+    if ruimte.oppervlakte is None:
+        message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        warnings.warn(message, UserWarning)
+        return criterium_naam
 
     # Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald
     # en bij de oppervlakte van het betreffende vertrek opgeteld.
@@ -216,7 +216,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
                 )
 
             logger.info(
-                f"De netto oppervlakte van {aantal_ruimte_kasten} verbonden {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'} is opgeteld bij {ruimte.naam}"
+                f"Ruimte {ruimte.naam} ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
             )
 
             criterium_naam = f"{ruimte.naam} + {aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'}"
