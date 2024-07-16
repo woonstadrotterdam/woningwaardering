@@ -113,7 +113,7 @@ warnings.warn("Dit is een warning", UserWarning)
 
 Standaard genereert de `woningwaardering` package een error wanneer een `UserWarning` wordt gegeven.
 Hoewel de package kan werken met incomplete data, is ervoor gekozen om standaard te falen bij incomplete inputdata, zodat de gebruiker hiervan op de hoogte wordt gebracht.
-Het is echter mogelijk om het warning filter terug te zetten naar de standaardinstellingen. In dat geval kan het warning filter aangepast worden door een type warning naar "default" te zetten met:
+Het is echter ook mogelijk om het warning filter terug te zetten naar de standaardinstellingen, waardoor een warning m.b.t. incomplete data niet leidt tot een error, maar slechts een _warning_:
 
 ```python
 warnings.simplefilter("default", UserWarning)
