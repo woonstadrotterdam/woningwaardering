@@ -1,5 +1,6 @@
 from datetime import date
 from decimal import Decimal
+import warnings
 
 from loguru import logger
 
@@ -39,10 +40,16 @@ class RenovatieJan2024(Stelselgroepversie):
 
         if eenheid.renovatie is not None:
             if eenheid.renovatie.datum is None:
-                raise ValueError("Renovatiedatum mist")
+                warnings.warn(
+                    f"Renovatiedatum mist voor eenheid {eenheid.id}", UserWarning
+                )
+                return woningwaardering_groep
 
             if eenheid.renovatie.investeringsbedrag is None:
-                raise ValueError("Investeringsbedrag mist")
+                warnings.warn(
+                    f"Investeringsbedrag mist voor eenheid {eenheid.id}", UserWarning
+                )
+                return woningwaardering_groep
 
             # Volgens het woningwaarderingsstelsel kan aan een woning punten voor
             # renovatie worden toegekend. Om voor punten voor dit onderdeel in

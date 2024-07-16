@@ -1,4 +1,5 @@
 from decimal import Decimal
+import warnings
 
 from loguru import logger
 
@@ -59,7 +60,8 @@ class VerwarmingJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.detail_soort is None:
-                raise ValueError(f"ruimte {ruimte.id} heeft geen detailsoort")
+                warnings.warn(f"ruimte {ruimte.id} heeft geen detailsoort", UserWarning)
+                continue
 
             ruimtesoort = classificeer_ruimte(ruimte)
 

@@ -118,8 +118,9 @@ class KeukenJan2024(Stelselgroepversie):
                     )
 
         if not keukens:
-            raise ValueError(
-                f"Eenheid {eenheid.id} kan niet gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam} omdat er geen keuken is gevonden."
+            warnings.warn(
+                f"Eenheid {eenheid.id} kan niet gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam} omdat er geen keuken is gevonden.",
+                UserWarning,
             )
 
         totaal_punten = rond_af(

@@ -1,4 +1,5 @@
 from decimal import Decimal
+import warnings
 
 from loguru import logger
 
@@ -49,11 +50,14 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.oppervlakte is None:
-                error_msg = f"ruimte {ruimte.id} heeft geen oppervlakte"
-                raise TypeError(error_msg)
+                message = f"ruimte {ruimte.id} heeft geen oppervlakte"
+                warnings.warn(message, UserWarning)
+                return woningwaardering_groep
+
             if ruimte.detail_soort is None:
-                error_msg = f"ruimte {ruimte.id} heeft geen detailsoort"
-                raise TypeError(error_msg)
+                message = f"ruimte {ruimte.id} heeft geen detailsoort"
+                warnings.warn(message, UserWarning)
+                return woningwaardering_groep
 
             criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 

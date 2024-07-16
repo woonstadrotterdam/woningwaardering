@@ -1,6 +1,7 @@
 from datetime import date, datetime
 from decimal import Decimal
 from importlib.resources import files
+import warnings
 
 import pandas as pd
 from loguru import logger
@@ -97,9 +98,12 @@ class EnergieprestatieJan2024(Stelselgroepversie):
             )
 
             if gebruiksoppervlakte_thermische_zone is None:
-                raise TypeError(
-                    "voor de berekening van de energieprestatie met een nieuw energielabel dient de gebruiksoppervlakte van de thermische zone bekend te zijn"
+                warnings.warn(
+                    "voor de berekening van de energieprestatie met een nieuw energielabel dient de gebruiksoppervlakte van de thermische zone bekend te zijn",
+                    UserWarning,
                 )
+                return woningwaardering
+
             else:
                 woningwaardering.criterium.naam = label
                 woningwaardering.criterium.meeteenheid = (
@@ -200,17 +204,23 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
         if not eenheid.woningtype:
-            raise ValueError(
-                f"Eenheid {eenheid.id} heeft geen woningtype en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
+            warnings.warn(
+                f"Eenheid {eenheid.id} heeft geen woningtype en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}",
+                UserWarning,
             )
+            return woningwaardering_groep
         if not eenheid.woningtype.naam:
-            raise ValueError(
-                f"Eenheid {eenheid.id} heeft geen woningtype naam en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
+            warnings.warn(
+                f"Eenheid {eenheid.id} heeft geen woningtype naam en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}",
+                UserWarning,
             )
+            return woningwaardering_groep
         if not (energieprestatie or eenheid.bouwjaar):
-            raise ValueError(
-                f"Eenheid {eenheid.id} heeft geen energieprestatie of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
+            warnings.warn(
+                f"Eenheid {eenheid.id} heeft geen energieprestatie of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}",
+                UserWarning,
             )
+            return woningwaardering_groep
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 

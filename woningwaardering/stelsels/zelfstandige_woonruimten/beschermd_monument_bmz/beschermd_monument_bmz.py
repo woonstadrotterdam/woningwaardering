@@ -1,4 +1,5 @@
 from datetime import date
+import warnings
 
 from loguru import logger
 from rdflib import Graph, Literal, Namespace
@@ -71,7 +72,11 @@ class BeschermdMonumentBmz(Stelselgroep):
     @staticmethod
     def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool:
         if not str.isnumeric(verblijfsobjectIdentificatie):
-            raise ValueError("VerblijfsobjectIdentificatie moet numeriek zijn")
+            warnings.warn(
+                f"VerblijfsobjectIdentificatie moet numeriek zijn. VerblijfsobjectIdentificatie: {verblijfsobjectIdentificatie}",
+                UserWarning,
+            )
+            return False
 
         graph = Graph()
 

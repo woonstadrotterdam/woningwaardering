@@ -1,6 +1,7 @@
 import datetime
 from decimal import Decimal
 from importlib.resources import files
+import warnings
 
 import pandas as pd
 from loguru import logger
@@ -79,13 +80,16 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                         or buitenruimte.gedeeld_met_aantal_eenheden < 2
                     )
                 ):
-                    raise ValueError(
-                        f"{buitenruimte.naam} {buitenruimte.id} is een gemeenschappelijke ruimte en moet gedeeld worden met minimaal 2 eenheden, maar gedeeldMetAantalEenheden={buitenruimte.gedeeld_met_aantal_eenheden}"
+                    warnings.warn(
+                        f"{buitenruimte.naam} {buitenruimte.id} is een gemeenschappelijke ruimte en moet gedeeld worden met minimaal 2 eenheden, maar gedeeldMetAantalEenheden={buitenruimte.gedeeld_met_aantal_eenheden}",
+                        UserWarning,
                     )
+                    continue
                 if buitenruimte.detail_soort is None:
-                    raise ValueError(
+                    warnings.warn(
                         f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} heeft geen detailsoort"
                     )
+                    continue
                 if not PriveBuitenruimtenJan2024._buitenruimte_heeft_geldige_afmetingen(
                     buitenruimte
                 ):
@@ -199,7 +203,8 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                 f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen "
                 + " en ".join(missende_attributen)
             )
-            raise ValueError(error_message)
+            warnings.warn(error_message, UserWarning)
+            return False
         return (
             (ruimte.lengte or 0) >= 1.5
             and (ruimte.breedte or 0) >= 1.5

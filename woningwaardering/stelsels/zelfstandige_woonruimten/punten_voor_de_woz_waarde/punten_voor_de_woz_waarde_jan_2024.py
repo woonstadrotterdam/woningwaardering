@@ -63,16 +63,17 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             )
 
         if not eenheid.bouwjaar:
-            raise ValueError(f"Geen bouwjaar gevonden voor eenheid {eenheid.id}")
-
+            warnings.warn(
+                f"Geen bouwjaar gevonden voor eenheid {eenheid.id}", UserWarning
+            )
+            return woningwaardering_groep
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
-            # TODO: dit moet uitgefaseerd worden
-            woz_waarde = 0
             warnings.warn(
                 f"Geen WOZ-waarde gevonden voor eenheid {eenheid.id}", UserWarning
             )
+            woz_waarde = 0
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
 
@@ -96,8 +97,9 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         oppervlakte = self.bepaal_oppervlakte(woningwaardering_resultaat)
 
         if oppervlakte == 0:
-            raise ValueError(
-                f"Kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is"
+            warnings.warn(
+                f"Kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
+                UserWarning,
             )
 
         factor_onderdeel_II = df_woz_factor["Onderdeel II"].astype(float).item()
@@ -438,16 +440,14 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
         Returns:
             bool: True als de eenheid een hoogniveau renovatie heeft gehad, anders False.
-
-        Raises:
-            ValueError: Bij ontbrekende informatie die tot een onjuiste beoordeling kan leiden.
         """
 
         if not eenheid.renovatie:
             return False
 
         if not eenheid.renovatie.datum:
-            raise ValueError("Een renovatie zonder renovatiedatum gevonden")
+            warnings.warn("Een renovatie zonder renovatiedatum gevonden")
+            return False
 
         # De specifieke berekeningsmethodiek, die geldt voor nieuwbouwwoningen (2015-2019) (...)  is ook van toepassing
         # indien in de eerdergenoemde kalenderjaren sprake is van hoogniveau renovatie. (...) Hieruit volgt dat sprake is
@@ -464,10 +464,14 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             return False
 
         if not energieprestatie.begindatum:
-            raise ValueError("Een energieprestatie zonder begindatum gevonden")
+            warnings.warn(
+                "Een energieprestatie zonder begindatum gevonden", UserWarning
+            )
+            return False
 
         if not energieprestatie.label:
-            raise ValueError("Een energieprestatie zonder label gevonden")
+            warnings.warn("Een energieprestatie zonder label gevonden", UserWarning)
+            return False
 
         if eenheid.renovatie.datum.year <= 2019:
             if (
@@ -480,15 +484,18 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         # Indien sprake is van verbouw in de jaren 2015-2021 dan is sprake van hoogniveau renovatie als het Energie-Index van de woning lager is dan 0,4.
         if eenheid.renovatie.datum.year <= 2021:
             if not energieprestatie.waarde:
-                raise ValueError(
-                    "Een energieprestatie zonder waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021"
+                warnings.warn(
+                    "Een energieprestatie zonder waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021",
+                    UserWarning,
                 )
+                return False
             try:
                 energieprestatie_waarde = float(energieprestatie.waarde)
             except ValueError:
-                raise ValueError(
+                warnings.warn(
                     f"Een energieprestatie met een waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021 dat niet kan worden omgezet in een getal: {energieprestatie.waarde}"
                 )
+                return False
             if energieprestatie_waarde < 0.4:
                 return True
 
