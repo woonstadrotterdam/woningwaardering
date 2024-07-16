@@ -67,6 +67,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
+            # TODO: woz mag mag niet naar 0 gezet worden. Test data specifiek hierop aanpassen.
             warnings.warn(
                 f"Geen WOZ-waarde gevonden voor eenheid {eenheid.id}", UserWarning
             )
