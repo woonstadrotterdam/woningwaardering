@@ -1,9 +1,9 @@
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import Decimal
 
 from loguru import logger
 
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_tabel, rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -55,6 +55,11 @@ class KeukenJan2024(Stelselgroepversie):
                 Ruimtedetailsoort.slaapkamer.code,
             ]:
                 continue
+
+            gedeelde_ruimte = (
+                ruimte.gedeeld_met_aantal_eenheden
+                and ruimte.gedeeld_met_aantal_eenheden >= 2
+            )
             keukens.add(ruimte.id)
 
             aanrechten = list(
@@ -96,11 +101,16 @@ class KeukenJan2024(Stelselgroepversie):
                     woningwaardering_groep.woningwaarderingen.append(
                         WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam="Lengte aanrecht",
+                                naam="Lengte aanrecht"
+                                if not gedeelde_ruimte
+                                else f"Lengte aanrecht (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                                 meeteenheid=Meeteenheid.millimeter.value,
                             ),
                             aantal=aanrecht.lengte,
-                            punten=punten,
+                            punten=rond_af(
+                                punten / (ruimte.gedeeld_met_aantal_eenheden or 1),
+                                decimalen=2,
+                            ),
                         )
                     )
 
@@ -110,13 +120,14 @@ class KeukenJan2024(Stelselgroepversie):
             )
             return woningwaardering_groep
 
-        totaal_punten = Decimal(
+        totaal_punten = rond_af(
             sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.punten is not None
-            )
-        ).quantize(Decimal("1"), ROUND_HALF_UP) * Decimal("1")
+            ),
+            decimalen=0,
+        ) * Decimal("1")
         woningwaardering_groep.punten = float(totaal_punten)
 
         return woningwaardering_groep
