@@ -27,9 +27,7 @@ if __name__ == "__main__":  # pragma: no cover
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(
         peildatum=date(2024, 1, 1)
     )
-    with open(
-        "tests/data/input/zelfstandige_woonruimten/41164000002.json", "r+"
-    ) as file:
+    with open("tests/data/generiek/input/37101000032.json", "r+") as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
         woningwaardering_resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid)
