@@ -1,8 +1,7 @@
-from decimal import Decimal
 import warnings
+from decimal import Decimal
 
 from loguru import logger
-
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
@@ -19,12 +18,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
     Eenheidklimaatbeheersingsoort,
-    Ruimtesoort,
     Ruimtedetailsoort,
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
-    Bouwkundigelementdetailsoort,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
@@ -49,10 +48,10 @@ class VerwarmingJan2024(Stelselgroepversie):
         )
 
         logger.debug(
-            f"Punten per verwarmd vertrek: {punten_per_ruimte[Ruimtesoort.vertrek.code]}"
+            f"Punten per verwarmd {Ruimtesoort.vertrek.naam}: {punten_per_ruimte[Ruimtesoort.vertrek.code]}"
         )
         logger.debug(
-            f"Punten per verwarmd overige ruimte: {punten_per_ruimte[Ruimtesoort.overige_ruimtes.code]}"
+            f"Punten per verwarmd {Ruimtesoort.overige_ruimtes.naam}: {punten_per_ruimte[Ruimtesoort.overige_ruimtes.code]}"
         )
 
         woningwaardering_groep.woningwaarderingen = []
