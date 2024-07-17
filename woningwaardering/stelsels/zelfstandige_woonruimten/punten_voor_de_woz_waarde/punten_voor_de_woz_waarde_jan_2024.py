@@ -507,10 +507,11 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
+    # warnings.simplefilter("default", UserWarning)
 
     woz = PuntenVoorDeWozWaardeJan2024()
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/punten_voor_de_woz_waade/input/hoogniveau_renovatie_waarde.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/punten_voor_de_woz_waarde/input/hoogniveau_renovatie_label_post_2021.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
