@@ -99,7 +99,7 @@ class EnergieprestatieJan2024(Stelselgroepversie):
 
             if gebruiksoppervlakte_thermische_zone is None:
                 warnings.warn(
-                    "voor de berekening van de energieprestatie met een nieuw energielabel dient de gebruiksoppervlakte van de thermische zone bekend te zijn",
+                    f"Eenheid {eenheid.id}: voor de berekening van de energieprestatie met een nieuw energielabel dient de gebruiksoppervlakte van de thermische zone bekend te zijn",
                     UserWarning,
                 )
                 return woningwaardering
@@ -150,7 +150,7 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         )
 
         if energieprestatievergoeding:
-            logger.info("Energieprestatievergoeding gevonden.")
+            logger.info(f"Eenheid {eenheid.id}: energieprestatievergoeding gevonden.")
 
         if energieprestatievergoeding and waarderings_label != Energielabel.b.naam:
             waarderings_label = Energielabel.b.naam
@@ -247,7 +247,7 @@ class EnergieprestatieJan2024(Stelselgroepversie):
 
         if woningwaardering.criterium:
             logger.info(
-                f"{woningwaardering.criterium.naam} krijgt {woningwaardering.punten} punten."
+                f"Eenheid {eenheid.id} krijgt {woningwaardering.punten} punten voor {woningwaardering.criterium.naam}."
             )
 
         woningwaardering_groep.woningwaarderingen.append(woningwaardering)
