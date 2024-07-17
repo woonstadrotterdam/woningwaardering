@@ -58,7 +58,9 @@ class SanitairJan2024(Stelselgroepversie):
                 if detailsoort.naam is not None
             )
 
-            logger.debug(f"Aantal '{soorten}' in {ruimte.naam}: {aantal}")
+            logger.debug(
+                f"Ruimte {ruimte.naam} ({ruimte.id}): {aantal} aantal '{soorten}'"
+            )
 
             naam = (
                 soorten
