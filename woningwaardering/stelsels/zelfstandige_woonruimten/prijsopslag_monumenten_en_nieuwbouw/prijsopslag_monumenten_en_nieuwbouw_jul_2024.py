@@ -1,4 +1,5 @@
 from datetime import date
+import warnings
 from dateutil.relativedelta import relativedelta
 from decimal import Decimal
 
@@ -41,10 +42,10 @@ class PrijsopslagMonumentenEnNieuwbouwJul2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         if eenheid.monumenten is None:
+            warnings.warn(f"Eenheid {eenheid.id}: Monumenten is None.", UserWarning)
             logger.info(
-                f"Eenheid {eenheid.id}: Monumenten is None. De api van cultureelerfgoed wordt geraadpleegd."
+                f"Eenheid {eenheid.id}: De api van cultureelerfgoed wordt geraadpleegd voor monumenten."
             )
-
             update_eenheid_monumenten(eenheid)
 
         if any(

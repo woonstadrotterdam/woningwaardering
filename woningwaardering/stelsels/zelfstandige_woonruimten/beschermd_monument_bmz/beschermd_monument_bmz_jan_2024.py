@@ -39,10 +39,9 @@ class BeschermdMonumentBmzJan2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         if eenheid.monumenten is None:
-            # Voor nu is nog een warning, omdat er een fallback is naar de api van cultureelerfgoed.
-            warnings.warn(
-                f"Eenheid {eenheid.id}: monumenten is None. De api van cultureelerfgoed wordt geraadpleegd.",
-                UserWarning,
+            warnings.warn(f"Eenheid {eenheid.id}: Monumenten is None.", UserWarning)
+            logger.info(
+                f"Eenheid {eenheid.id}: De api van cultureelerfgoed wordt geraadpleegd voor monumenten."
             )
 
             update_eenheid_monumenten(eenheid)
