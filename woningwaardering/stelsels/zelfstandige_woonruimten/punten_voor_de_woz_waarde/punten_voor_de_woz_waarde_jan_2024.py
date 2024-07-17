@@ -1,8 +1,8 @@
+import warnings
 from datetime import date
 from decimal import Decimal
 from importlib.resources import files
 from itertools import chain
-import warnings
 
 import pandas as pd
 from loguru import logger
@@ -332,7 +332,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             eenheid, self.peildatum
         )
         if hoogniveau_renovatie:
-            logger.debug("Hoogniveau renovatie geconstateerd.")
+            logger.info(f"Eenheid {eenheid.id}: hoogniveau renovatie geconstateerd.")
 
         if (bouwjaar and 2015 <= bouwjaar <= 2019) or hoogniveau_renovatie:
             punten_critische_stelselgroepen = sum(
@@ -359,7 +359,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             if punten_critische_stelselgroepen >= 110:
                 minimum_punten = 40
                 logger.info(
-                    f"Minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid {eenheid.id}: minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
                 )
 
         return minimum_punten
@@ -444,7 +444,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
         if not eenheid.renovatie.datum:
             warnings.warn(
-                "Eenheid {eenheid.id}: renovatie zonder renovatiedatum gevonden."
+                f"Eenheid {eenheid.id}: renovatie zonder renovatiedatum gevonden."
             )
             return False
 
@@ -464,14 +464,14 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
         if not energieprestatie.begindatum:
             warnings.warn(
-                "Eenheid {eenheid.id}: energieprestatie zonder begindatum gevonden.",
+                f"Eenheid {eenheid.id}: energieprestatie zonder begindatum gevonden.",
                 UserWarning,
             )
             return False
 
         if not energieprestatie.label:
             warnings.warn(
-                "Eenheid {eenheid.id}: energieprestatie zonder label gevonden.",
+                f"Eenheid {eenheid.id}: energieprestatie zonder label gevonden.",
                 UserWarning,
             )
             return False
@@ -488,7 +488,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         if eenheid.renovatie.datum.year <= 2021:
             if not energieprestatie.waarde:
                 warnings.warn(
-                    "Eenheid {eenheid.id}: energieprestatie zonder waarde (Energie-Index) gevonden bij een renovatie in de jaren 2015-2021.",
+                    f"Eenheid {eenheid.id}: energieprestatie zonder waarde (Energie-Index) gevonden bij een renovatie in de jaren 2015-2021.",
                     UserWarning,
                 )
                 return False
