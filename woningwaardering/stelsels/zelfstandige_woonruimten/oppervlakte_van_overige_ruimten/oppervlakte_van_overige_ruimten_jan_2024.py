@@ -1,5 +1,5 @@
-from decimal import Decimal
 import warnings
+from decimal import Decimal
 
 from loguru import logger
 
@@ -63,7 +63,9 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
             if classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimtes:
                 if ruimte.oppervlakte < 2:
-                    logger.debug(f"ruimte.oppervlakte = {ruimte.oppervlakte} m2")
+                    logger.debug(
+                        f"Ruimte {ruimte.naam} ({ruimte.id}): {ruimte.oppervlakte = }m2"
+                    )
                     logger.info(
                         f"Ruimte {ruimte.naam} ({ruimte.id}) is kleiner dan 2 m2 en telt daarom niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}."
                     )
@@ -198,7 +200,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
                 )
 
         logger.info(
-            f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+            f"Ruimte {ruimte.naam} ({ruimte.id}): geen trap gevonden en telt dus niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
         )
         return 0.0
 
