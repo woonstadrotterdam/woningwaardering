@@ -41,7 +41,7 @@ class BeschermdMonumentBmzJan2024(Stelselgroepversie):
         if eenheid.monumenten is None:
             # Voor nu is nog een warning, omdat er een fallback is naar de api van cultureelerfgoed.
             warnings.warn(
-                f"Monumenten is None voor eenheid {eenheid.id}. De api van cultureelerfgoed wordt geraadpleegd.",
+                f"Eenheid {eenheid.id}: monumenten is None. De api van cultureelerfgoed wordt geraadpleegd.",
                 UserWarning,
             )
 
