@@ -42,7 +42,7 @@ class PrijsopslagMonumentenEnNieuwbouwJul2024(Stelselgroepversie):
 
         if eenheid.monumenten is None:
             logger.info(
-                f"Monumenten is None voor eenheid {eenheid.id}. De api van cultureelerfgoed wordt geraadpleegd."
+                f"Eenheid {eenheid.id}: Monumenten is None. De api van cultureelerfgoed wordt geraadpleegd."
             )
 
             update_eenheid_monumenten(eenheid)
