@@ -67,7 +67,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
 
         if buitenruimten:
             logger.debug(
-                f"{len(buitenruimten)} buitenruimt(en) gevonden in eenheid {eenheid.id}"
+                f"Eenheid ({eenheid.id}): {len(buitenruimten)} buitenruimt(en) gevonden."
             )
 
             for buitenruimte in buitenruimten:
@@ -87,14 +87,14 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                     continue
                 if buitenruimte.detail_soort is None:
                     warnings.warn(
-                        f"Prive-buitenruimte {buitenruimte.naam} ({buitenruimte.id}) heeft geen detailsoort"
+                        f"Ruimte {buitenruimte.naam} ({buitenruimte.id}) heeft geen detailsoort"
                     )
                     continue
                 if not PriveBuitenruimtenJan2024._buitenruimte_heeft_geldige_afmetingen(
                     buitenruimte
                 ):
                     logger.info(
-                        f"Buitenruimte {buitenruimte.naam} ({buitenruimte.id}) komt niet in aanmerking voor waardering onder {Woningwaarderingstelselgroep.prive_buitenruimten.naam} op basis van afmeting criteria"
+                        f"Ruimte {buitenruimte.naam} ({buitenruimte.id}) komt niet in aanmerking voor waardering onder {Woningwaarderingstelselgroep.prive_buitenruimten.naam} op basis van afmeting criteria"
                     )
                     continue
 
@@ -112,7 +112,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                     )
 
                 logger.info(
-                    f"Buitenruimte {buitenruimte.naam} ({buitenruimte.id}) wordt voor {woningwaardering.aantal} m2 meegerekend voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                    f"Ruimte {buitenruimte.naam} ({buitenruimte.id}) wordt voor {woningwaardering.aantal} m2 meegerekend voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
                 )
 
                 # corrigeer buitenruimte voor wanneer deze gedeeld wordt met andere eenheden
@@ -135,7 +135,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
             woningwaardering.punten = -5.0
 
             logger.info(
-                f"Eenheid {eenheid.id}: geen buitenruimte gevonden. 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                f"Eenheid {eenheid.id}: geen buitenruimten gevonden. 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
             )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
