@@ -57,7 +57,7 @@ class RenovatieJan2024(Stelselgroepversie):
             # gedaan van minimaal € 10.000.
             if eenheid.renovatie.investeringsbedrag < 10000:
                 logger.info(
-                    f"De investering van renovatie in {eenheid.renovatie.datum.year} is te laag en komt niet aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
+                    f"Eenheid {eenheid.id}: De investering van renovatie in {eenheid.renovatie.datum.year} is te laag. komt niet aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                 )
                 return woningwaardering_groep
 
@@ -82,7 +82,7 @@ class RenovatieJan2024(Stelselgroepversie):
                     )
                 ):
                     logger.info(
-                        f"Hoogniveau renovatie in 2015-2019 komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
+                        f"Eenheid {eenheid.id}: Hoogniveau renovatie in 2015-2019 komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                     )
                     return woningwaardering_groep
 
@@ -101,7 +101,7 @@ class RenovatieJan2024(Stelselgroepversie):
                 )
             else:
                 logger.info(
-                    f"Renovatie met datum {eenheid.renovatie.datum} komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
+                    f"Eenheid {eenheid.id}: Renovatie met datum {eenheid.renovatie.datum} komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                 )
                 return woningwaardering_groep
 
