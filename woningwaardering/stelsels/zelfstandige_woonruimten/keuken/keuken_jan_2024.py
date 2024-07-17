@@ -1,7 +1,8 @@
+import warnings
 from decimal import Decimal
 
 from loguru import logger
-import warnings
+
 from woningwaardering.stelsels.stelselgroepversie import Stelselgroepversie
 from woningwaardering.stelsels.utils import naar_tabel, rond_af
 from woningwaardering.vera.bvg.generated import (
@@ -146,7 +147,7 @@ if __name__ == "__main__":  # pragma: no cover
     warnings.simplefilter("default", UserWarning)
     keukenJan2024 = KeukenJan2024()
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/eenheid_zonder_keuken.json",
+        "/Users/tomergabay/Documents/woonstad_rotterdam/code_projects/woningwaardering/tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/keuken_zonder_aanrecht.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
