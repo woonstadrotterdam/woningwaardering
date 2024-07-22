@@ -1,9 +1,11 @@
 {
   "bouwjaar": 1981,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Mauritsstraat",
     "huisnummer": "44",

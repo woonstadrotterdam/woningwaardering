@@ -1,10 +1,12 @@
 {
   "id": "25048000007",
   "bouwjaar": 1997,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Rochussenstraat",
     "huisnummer": "251",

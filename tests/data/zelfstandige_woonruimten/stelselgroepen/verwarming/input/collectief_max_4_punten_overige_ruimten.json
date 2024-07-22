@@ -1,9 +1,11 @@
 {
   "id": "max4punten",
-  "klimaatbeheersingsoort": {
-    "code": "COL",
-    "naam": "Collectief"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "COL",
+      "naam": "Collectief"
+    }
+  ],
   "ruimten": [
     {
       "id": "Woonkamer1",

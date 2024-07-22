@@ -5,10 +5,12 @@
     "datum": "2014-12-31",
     "bedragInvestering": 10000
   },
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "oppervlakten": [
     {
       "soort": {

@@ -1,10 +1,12 @@
 {
   "id": "37101000032",
   "bouwjaar": 1924,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Nieuwe Boezemstraat",
     "huisnummer": "27",

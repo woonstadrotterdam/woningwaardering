@@ -1,10 +1,12 @@
 {
   "id": "nieuwbouw_eenheid",
   "bouwjaar": 2016,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Mauritsstraat",
     "huisnummer": "44",

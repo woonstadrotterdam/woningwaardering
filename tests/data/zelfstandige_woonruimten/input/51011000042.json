@@ -1,10 +1,12 @@
 {
   "id": "51011000042",
   "bouwjaar": 1952,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Eskampstraat",
     "huisnummer": "1",

@@ -1,10 +1,12 @@
 {
   "id": "85651000021",
   "bouwjaar": 1897,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Atjehstraat",
     "huisnummer": "47",

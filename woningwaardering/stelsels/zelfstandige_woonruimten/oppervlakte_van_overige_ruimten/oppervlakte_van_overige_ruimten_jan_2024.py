@@ -57,7 +57,7 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
             criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
-            if classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimtes:
+            if classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten:
                 if ruimte.oppervlakte < 2:
                     logger.debug(
                         f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter"

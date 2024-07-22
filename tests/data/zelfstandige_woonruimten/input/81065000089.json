@@ -14,6 +14,12 @@
     "id": "0599010000310211",
     "bagIdentificatie": "0599010000310211"
   },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "panden": [
     {
       "soort": {

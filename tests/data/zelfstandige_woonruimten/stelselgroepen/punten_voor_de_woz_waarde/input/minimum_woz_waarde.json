@@ -1,9 +1,11 @@
 {
   "bouwjaar": 1990,
-  "klimaatbeheersingsoort": {
-    "code": "COL",
-    "naam": "Collectief"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "COL",
+      "naam": "Collectief"
+    }
+  ],
   "panden": [
     {
       "soort": {

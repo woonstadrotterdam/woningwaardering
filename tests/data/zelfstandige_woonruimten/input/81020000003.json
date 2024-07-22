@@ -1,10 +1,12 @@
 {
   "id": "81020000003",
   "bouwjaar": 1923,
-  "klimaatbeheersingsoort": {
-    "code": "COL",
-    "naam": "Collectief"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "COL",
+      "naam": "Collectief"
+    }
+  ],
   "adres": {
     "straatnaam": "Putsebocht",
     "huisnummer": "18",

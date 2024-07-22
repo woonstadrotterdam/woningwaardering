@@ -1,10 +1,12 @@
 {
   "id": "71211000027",
   "bouwjaar": 1919,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Polslandstraat",
     "huisnummer": "37",

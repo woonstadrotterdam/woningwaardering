@@ -1,10 +1,12 @@
 {
   "id": "77795000000",
   "bouwjaar": 2011,
-  "klimaatbeheersingsoort": {
-    "code": "COL",
-    "naam": "Collectief"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "COL",
+      "naam": "Collectief"
+    }
+  ],
   "adres": {
     "straatnaam": "Sliedrechtstraat",
     "huisnummer": "22",

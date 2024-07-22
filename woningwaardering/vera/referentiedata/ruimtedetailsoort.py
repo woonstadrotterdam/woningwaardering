@@ -70,7 +70,7 @@ class Ruimtedetailsoort(Enum):
         naam="Berging",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -82,7 +82,7 @@ class Ruimtedetailsoort(Enum):
         naam="Bijkeuken",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -141,7 +141,7 @@ class Ruimtedetailsoort(Enum):
         naam="Gang",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -155,7 +155,7 @@ class Ruimtedetailsoort(Enum):
         naam="Garage",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -211,7 +211,7 @@ class Ruimtedetailsoort(Enum):
         naam="Hal",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -223,7 +223,7 @@ class Ruimtedetailsoort(Enum):
         naam="Kelder",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -327,7 +327,7 @@ class Ruimtedetailsoort(Enum):
         naam="Parkeergarage niet specifieke plek",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -341,7 +341,7 @@ class Ruimtedetailsoort(Enum):
         naam="Parkeergarage specifieke plek",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -381,7 +381,7 @@ class Ruimtedetailsoort(Enum):
         naam="Schuur",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -431,7 +431,7 @@ class Ruimtedetailsoort(Enum):
         naam="Toiletruimte",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -468,7 +468,7 @@ class Ruimtedetailsoort(Enum):
         naam="Vliering",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -496,7 +496,7 @@ class Ruimtedetailsoort(Enum):
         naam="Wasruimte",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -572,7 +572,7 @@ class Ruimtedetailsoort(Enum):
         naam="Zolder",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -591,7 +591,7 @@ class Ruimtedetailsoort(Enum):
         naam="Overloop",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -603,7 +603,7 @@ class Ruimtedetailsoort(Enum):
         naam="Entree",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """
@@ -615,7 +615,7 @@ class Ruimtedetailsoort(Enum):
         naam="Kast",
         parent=Referentiedata(
             code="OVR",
-            naam="Overige ruimtes",
+            naam="Overige ruimten",
         ),
     )
     """

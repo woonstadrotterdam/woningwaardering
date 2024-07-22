@@ -1,10 +1,12 @@
 {
   "id": "41027000003",
   "bouwjaar": 1948,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Frits Ruysstraat",
     "huisnummer": "16",

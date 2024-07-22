@@ -1,10 +1,12 @@
 {
   "id": "41164000002",
   "bouwjaar": 1904,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Aegidiusstraat",
     "huisnummer": "122",

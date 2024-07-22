@@ -1,10 +1,12 @@
 {
   "id": "87402000003",
   "bouwjaar": 1898,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Oranjeboomstraat",
     "huisnummer": "355",

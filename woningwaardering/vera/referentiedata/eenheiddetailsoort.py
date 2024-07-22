@@ -424,7 +424,7 @@ class Eenheiddetailsoort(Enum):
     generaties van een familie samen te laten wonen, maar wel met behoud van privacy
     en onafhankelijkheid. In een kangoeroewoning heeft elke generatie of familie een
     aparte woonruimte binnen hetzelfde huis, maar ze delen wel bepaalde
-    gemeenschappelijke ruimtes zoals de keuken, eetkamer, tuin, en soms zelfs een
+    gemeenschappelijke ruimten zoals de keuken, eetkamer, tuin, en soms zelfs een
     woonkamer.
     """
 
