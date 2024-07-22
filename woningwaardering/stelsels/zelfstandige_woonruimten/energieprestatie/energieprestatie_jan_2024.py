@@ -26,6 +26,7 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatiesoort,
     Meeteenheid,
     Oppervlaktesoort,
+    Pandsoort,
     Prijscomponentdetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -199,14 +200,17 @@ class EnergieprestatieJan2024(Stelselgroepversie):
 
         energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
-        pandsoorten = {pand.soort for pand in eenheid.panden or []}
-
-        if len(pandsoorten) > 1:
-            logger.warning(
-                f"Eenheid {eenheid.id} heeft meer dan een pandsoort en komt daardoor niet in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
-            )
-
-        pandsoort = pandsoorten.pop() if len(pandsoorten) == 1 else None
+        pandsoort = next(
+            (
+                pand.soort
+                for pand in sorted(
+                    eenheid.panden or [],
+                    key=lambda pand: pand.soort == Pandsoort.meergezinswoning,
+                    reverse=True,
+                )
+            ),
+            None,
+        )
 
         if not (
             pandsoort and pandsoort.naam and (energieprestatie or eenheid.bouwjaar)
