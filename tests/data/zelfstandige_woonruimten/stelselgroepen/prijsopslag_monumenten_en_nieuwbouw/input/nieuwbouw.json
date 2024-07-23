@@ -2,10 +2,6 @@
   "bouwjaar": 2023,
   "begin_bouwdatum": "2023-01-01",
   "in_exploitatiedatum": "2024-08-01",
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
   "woz_eenheden": [
     {
       "waardepeildatum": "2022-01-01",
@@ -14,6 +10,14 @@
     {
       "waardepeildatum": "2023-01-01",
       "vastgesteldeWaarde": 253000
+    }
+  ],
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
     }
   ],
   "energieprestaties": [

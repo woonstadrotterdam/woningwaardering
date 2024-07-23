@@ -1,9 +1,11 @@
 {
   "bouwjaar": 1981,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Mauritsstraat",
     "huisnummer": "44",
@@ -11,10 +13,14 @@
     "postcode": "3012CJ",
     "woonplaats": { "naam": "ROTTERDAM" }
   },
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
   "woz_eenheden": [
     {
       "waardepeildatum": "2022-01-01",

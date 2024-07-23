@@ -10,7 +10,6 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -43,15 +42,38 @@ class VerwarmingJan2024(Stelselgroepversie):
             )
         )
 
-        punten_per_ruimte = VerwarmingJan2024.punten_per_ruimte(
-            eenheid.klimaatbeheersingsoort
+        klimaatbeheersing_code = next(
+            (
+                soort.code
+                for soort in eenheid.klimaatbeheersing or []
+                if soort.code
+                in [
+                    Eenheidklimaatbeheersingsoort.individueel.code,
+                    Eenheidklimaatbeheersingsoort.collectief.code,
+                ]
+            ),
+            None,
         )
+
+        if klimaatbeheersing_code is None:
+            warnings.warn(
+                f"Geen klimaatbeheersing van het soort {Eenheidklimaatbeheersingsoort.individueel.naam} of {Eenheidklimaatbeheersingsoort.collectief.naam} is gevonden."
+            )
+            return woningwaardering_groep
+
+        punten_per_ruimte = VerwarmingJan2024.punten_per_ruimte(klimaatbeheersing_code)
+
+        if punten_per_ruimte is None:
+            warnings.warn(
+                f"Geen punten per verwarmd ruimte voor klimaatbeheersing van het soort {klimaatbeheersing_code} gevonden."
+            )
+            return woningwaardering_groep
 
         logger.debug(
             f"Punten per verwarmd {Ruimtesoort.vertrek.naam}: {punten_per_ruimte[Ruimtesoort.vertrek.code]}"
         )
         logger.debug(
-            f"Punten per verwarmd {Ruimtesoort.overige_ruimtes.naam}: {punten_per_ruimte[Ruimtesoort.overige_ruimtes.code]}"
+            f"Punten per verwarmd {Ruimtesoort.overige_ruimten.naam}: {punten_per_ruimte[Ruimtesoort.overige_ruimten.code]}"
         )
 
         woningwaardering_groep.woningwaarderingen = []
@@ -72,7 +94,7 @@ class VerwarmingJan2024(Stelselgroepversie):
 
             if not (
                 ruimtesoort.code
-                in [Ruimtesoort.overige_ruimtes.code, Ruimtesoort.vertrek.code]
+                in [Ruimtesoort.overige_ruimten.code, Ruimtesoort.vertrek.code]
                 and ruimte.verwarmd
             ):
                 logger.info(
@@ -90,7 +112,7 @@ class VerwarmingJan2024(Stelselgroepversie):
 
             punten = Decimal(str(punten_per_ruimte[ruimtesoort.code]))
 
-            if ruimtesoort == Ruimtesoort.overige_ruimtes:
+            if ruimtesoort == Ruimtesoort.overige_ruimten:
                 if totaal_punten_overige_ruimten >= Decimal("4.0"):
                     logger.info(
                         f"Ruimte {ruimte.naam} ({ruimte.id}) wordt niet meegeteld voor {Woningwaarderingstelselgroep.verwarming.naam}, omdat de overige ruimten bij elkaar {totaal_punten_overige_ruimten} punten hebben behaald."
@@ -100,13 +122,13 @@ class VerwarmingJan2024(Stelselgroepversie):
                 # Als de punten de maximum van 4.0 overschrijden, dan wordt het aantal punten dat nog mag worden gegeven voor de ruimte aangepast
                 if (totaal_punten_overige_ruimten + punten) >= Decimal("4.0"):
                     logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}): punten worden gecorrigeerd. De maximum punten voor {Ruimtesoort.overige_ruimtes.naam} zijn behaald."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}): punten worden gecorrigeerd. De maximum punten voor {Ruimtesoort.overige_ruimten.naam} zijn behaald."
                     )
                     punten = Decimal("4.0") - totaal_punten_overige_ruimten
 
                 totaal_punten_overige_ruimten += punten
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmde {Ruimtesoort.overige_ruimtes.naam} en krijgt {punten} punten."
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmde {Ruimtesoort.overige_ruimten.naam} en krijgt {punten} punten."
                 )
 
             else:
@@ -163,26 +185,20 @@ class VerwarmingJan2024(Stelselgroepversie):
 
     @staticmethod
     def punten_per_ruimte(
-        klimaatbeheersingsoort: Referentiedata | None,
-    ) -> dict[str, float]:
+        klimaatbeheersing_code: str,
+    ) -> dict[str, float] | None:
         punten_mapping: dict[str, dict[str, float]] = {
             Eenheidklimaatbeheersingsoort.individueel.code: {
                 Ruimtesoort.vertrek.code: 2,
-                Ruimtesoort.overige_ruimtes.code: 1,
+                Ruimtesoort.overige_ruimten.code: 1,
             },
             Eenheidklimaatbeheersingsoort.collectief.code: {
                 Ruimtesoort.vertrek.code: 1.5,
-                Ruimtesoort.overige_ruimtes.code: 0.75,
+                Ruimtesoort.overige_ruimten.code: 0.75,
             },
         }
 
-        punten_per_ruimte = punten_mapping[
-            klimaatbeheersingsoort.code
-            if klimaatbeheersingsoort is not None
-            and klimaatbeheersingsoort.code is not None
-            else Eenheidklimaatbeheersingsoort.individueel.code
-        ]
-        return punten_per_ruimte
+        return punten_mapping[klimaatbeheersing_code]
 
 
 if __name__ == "__main__":  # pragma: no cover

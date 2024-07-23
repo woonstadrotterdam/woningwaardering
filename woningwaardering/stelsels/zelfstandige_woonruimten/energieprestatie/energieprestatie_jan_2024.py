@@ -27,6 +27,7 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatiesoort,
     Meeteenheid,
     Oppervlaktesoort,
+    Pandsoort,
     Prijscomponentdetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -72,7 +73,7 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         energieprestatie: EenhedenEnergieprestatie,
         energieprestatie_soort: str,
         label: str,
-        woningtype: str,
+        pandsoortnaam: str,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
         woningwaardering.criterium = (
@@ -158,14 +159,14 @@ class EnergieprestatieJan2024(Stelselgroepversie):
 
         filtered_df = df[(df["Label"] == waarderings_label)].pipe(dataframe_met_een_rij)
 
-        woningwaardering.punten = float(filtered_df[woningtype].values[0])
+        woningwaardering.punten = float(filtered_df[pandsoortnaam].values[0])
 
         return woningwaardering
 
     @staticmethod
     def _bereken_punten_met_bouwjaar(
         eenheid: EenhedenEenheid,
-        woningtype: str,
+        pandsoortnaam: str,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
@@ -181,7 +182,7 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
         )
-        woningwaardering.punten = float(filtered_df[woningtype].values[0])
+        woningwaardering.punten = float(filtered_df[pandsoortnaam].values[0])
 
         return woningwaardering
 
@@ -203,18 +204,27 @@ class EnergieprestatieJan2024(Stelselgroepversie):
 
         energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
-        if not eenheid.woningtype:
+        pandsoort = (
+            Pandsoort.meergezinswoning
+            if any(
+                pand.soort == Pandsoort.meergezinswoning.value
+                for pand in eenheid.panden or []
+            )
+            else Pandsoort.eengezinswoning
+            if any(
+                pand.soort == Pandsoort.eengezinswoning.value
+                for pand in eenheid.panden or []
+            )
+            else None
+        )
+
+        if not pandsoort or not pandsoort.naam:
             warnings.warn(
-                f"Eenheid {eenheid.id} heeft geen woningtype en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}",
+                f"Eenheid {eenheid.id} heeft geen pandsoort {Pandsoort.eengezinswoning.naam} of {Pandsoort.meergezinswoning.naam} en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}",
                 UserWarning,
             )
             return woningwaardering_groep
-        if not eenheid.woningtype.naam:
-            warnings.warn(
-                f"Eenheid {eenheid.id} heeft geen woningtype naam en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}",
-                UserWarning,
-            )
-            return woningwaardering_groep
+
         if not (energieprestatie or eenheid.bouwjaar):
             warnings.warn(
                 f"Eenheid {eenheid.id} heeft geen energieprestatie of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}",
@@ -236,13 +246,13 @@ class EnergieprestatieJan2024(Stelselgroepversie):
                 energieprestatie,
                 energieprestatie.soort.code,
                 energieprestatie.label.naam,
-                eenheid.woningtype.naam,
+                pandsoort.naam,
                 woningwaardering,
             )
 
         elif eenheid.bouwjaar and not energieprestatie:
             woningwaardering = EnergieprestatieJan2024._bereken_punten_met_bouwjaar(
-                eenheid, eenheid.woningtype.naam, woningwaardering
+                eenheid, pandsoort.naam, woningwaardering
             )
 
         if woningwaardering.criterium:

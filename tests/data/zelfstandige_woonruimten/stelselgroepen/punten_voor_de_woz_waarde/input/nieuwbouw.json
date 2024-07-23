@@ -1,10 +1,12 @@
 {
   "id": "nieuwbouw_eenheid",
   "bouwjaar": 2016,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Mauritsstraat",
     "huisnummer": "44",
@@ -16,10 +18,14 @@
     "id": "0599010000320510",
     "bagIdentificatie": "0599010000320510"
   },
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
   "energieprestaties": [],
   "gebruiksoppervlakte": 71,
   "monumenten": [],

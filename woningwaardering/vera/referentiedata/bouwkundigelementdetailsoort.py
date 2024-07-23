@@ -324,7 +324,7 @@ class Bouwkundigelementdetailsoort(Enum):
         ),
     )
     """
-    Kleine wateruitlaat, vaak decoratief in publieke of privé-ruimtes. Relatie met IFC
+    Kleine wateruitlaat, vaak decoratief in publieke of privé-ruimten. Relatie met IFC
     codering (IfcSanitaryTerminal.SINK)
     """
 
@@ -683,7 +683,7 @@ class Bouwkundigelementdetailsoort(Enum):
         ),
     )
     """
-    Warmtewisselaar voor verwarming van ruimtes. Relatie met IFC codering
+    Warmtewisselaar voor verwarming van ruimten. Relatie met IFC codering
     (IfcSpaceHeater.RADIATOR)
     """
 

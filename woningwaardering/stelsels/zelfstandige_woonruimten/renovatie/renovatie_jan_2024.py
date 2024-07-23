@@ -45,9 +45,10 @@ class RenovatieJan2024(Stelselgroepversie):
                 )
                 return woningwaardering_groep
 
-            if eenheid.renovatie.investeringsbedrag is None:
+            if eenheid.renovatie.bedrag_investering is None:
                 warnings.warn(
-                    f"Eenheid {eenheid.id}: investeringsbedrag mist.", UserWarning
+                    f"Eenheid {eenheid.id}: bedrag investering van renovatie mist.",
+                    UserWarning,
                 )
                 return woningwaardering_groep
 
@@ -55,7 +56,7 @@ class RenovatieJan2024(Stelselgroepversie):
             # renovatie worden toegekend. Om voor punten voor dit onderdeel in
             # aanmerking te komen, dient er voor de renovatie een investering te zijn
             # gedaan van minimaal € 10.000.
-            if eenheid.renovatie.investeringsbedrag < 10000:
+            if eenheid.renovatie.bedrag_investering < 10000:
                 logger.info(
                     f"Eenheid {eenheid.id}: De investering van renovatie in {eenheid.renovatie.datum.year} is te laag. komt niet aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                 )
@@ -94,7 +95,7 @@ class RenovatieJan2024(Stelselgroepversie):
                         ),
                         # Per geïnvesteerd bedrag van € 1.000 wordt met 0,2 punt
                         # gewaardeerd.
-                        punten=Decimal(str(eenheid.renovatie.investeringsbedrag))
+                        punten=Decimal(str(eenheid.renovatie.bedrag_investering))
                         / 1000
                         * Decimal("0.2"),
                     )

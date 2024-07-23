@@ -93,7 +93,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         if ruimte.oppervlakte >= 4:
             return Ruimtesoort.vertrek
         elif ruimte.oppervlakte >= 2:
-            return Ruimtesoort.overige_ruimtes
+            return Ruimtesoort.overige_ruimten
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code:
         return Ruimtesoort.vertrek
@@ -120,7 +120,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         and ruimte.detail_soort.naam == Ruimtedetailsoort.schuur.naam
     ):  # zie hierboven i.v.m. limitaties schuur.code
         if ruimte.oppervlakte >= 2:
-            return Ruimtesoort.overige_ruimtes
+            return Ruimtesoort.overige_ruimten
         else:
             return None
 
@@ -135,15 +135,15 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             ):
                 return Ruimtesoort.vertrek
             elif ruimte.oppervlakte >= 2:
-                return Ruimtesoort.overige_ruimtes
+                return Ruimtesoort.overige_ruimten
             else:
                 return None
         elif heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap):
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}): vlizotrap gevonden. Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimtes}."
+                f"Ruimte {ruimte.naam} ({ruimte.id}): vlizotrap gevonden. Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten}."
             )
             if ruimte.oppervlakte >= 2:
-                return Ruimtesoort.overige_ruimtes
+                return Ruimtesoort.overige_ruimten
             else:
                 return None
 
