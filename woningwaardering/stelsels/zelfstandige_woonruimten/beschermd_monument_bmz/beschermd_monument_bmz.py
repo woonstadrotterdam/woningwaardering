@@ -1,4 +1,3 @@
-import warnings
 from datetime import date
 
 from loguru import logger
@@ -27,8 +26,8 @@ class BeschermdMonumentBmz(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
-    warnings.simplefilter("default", UserWarning)
-    beschermd_monument_bmz = BeschermdMonumentBmz(peildatum=date(2024, 5, 1))
+
+    beschermd_monument_bmz = BeschermdMonumentBmz()
     with open("tests/data/generiek/input/37101000032.json", "r+") as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
