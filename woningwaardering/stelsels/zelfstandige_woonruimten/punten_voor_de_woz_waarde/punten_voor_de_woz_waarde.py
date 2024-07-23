@@ -21,7 +21,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
 
-        super().__init__(peildatum=peildatum, config=config)
+        super().__init__(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
+            peildatum=peildatum,
+            config=config,
+        )
 
 
 if __name__ == "__main__":  # pragma: no cover

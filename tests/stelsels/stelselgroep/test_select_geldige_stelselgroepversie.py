@@ -22,9 +22,9 @@ from woningwaardering.vera.referentiedata import (
     ],
 )
 def test_select_geldige_stelselgroepversie(peildatum, stelsel, stelselgroep):
-    geldige_stelselgroep = Stelselgroep.select_stelselgroepversie(
+    geldige_stelselgroep = Stelselgroep(
         peildatum=peildatum, stelsel=stelsel, stelselgroep=stelselgroep
-    )
+    ).geldige_versie
     assert isinstance(
         geldige_stelselgroep, Stelselgroepversie
     ), f"Stelselgroepversie '{geldige_stelselgroep}' is geen instance van Stelselgroepversie, {type(geldige_stelselgroep)}"

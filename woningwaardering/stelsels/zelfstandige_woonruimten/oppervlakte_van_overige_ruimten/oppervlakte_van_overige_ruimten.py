@@ -20,6 +20,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten
         super().__init__(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
             peildatum=peildatum,
             config=config,
         )

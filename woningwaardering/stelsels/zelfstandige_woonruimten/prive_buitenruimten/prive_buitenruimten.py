@@ -21,7 +21,12 @@ class PriveBuitenruimten(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.prive_buitenruimten
 
-        super().__init__(peildatum=peildatum, config=config)
+        super().__init__(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
+            peildatum=peildatum,
+            config=config,
+        )
 
 
 if __name__ == "__main__":  # pragma: no cover

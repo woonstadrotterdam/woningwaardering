@@ -192,9 +192,7 @@ class Stelsel:
                 f"woningwaardering.stelsels.{stelsel.name}",
                 stelselgroep_config.class_naam,
                 Stelselgroep,
-            )(
-                peildatum=peildatum,
-            )
+            )(peildatum=peildatum, config=config)
             for stelselgroep_config in sorted(
                 config.stelselgroepen.values(), key=lambda x: x.uitvoeringsvolgorde
             )
