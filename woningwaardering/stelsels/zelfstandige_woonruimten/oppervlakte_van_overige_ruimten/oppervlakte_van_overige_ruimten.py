@@ -3,6 +3,7 @@ from datetime import date
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroep, utils
+from woningwaardering.stelsels.config.config import Stelselconfig
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -13,11 +14,14 @@ from woningwaardering.vera.referentiedata import (
 
 
 class OppervlakteVanOverigeRuimten(Stelselgroep):
-    def __init__(self, peildatum: date = date.today()) -> None:
+    def __init__(
+        self, peildatum: date = date.today(), config: Stelselconfig | None = None
+    ) -> None:
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten
         super().__init__(
             peildatum=peildatum,
+            config=config,
         )
 
 
