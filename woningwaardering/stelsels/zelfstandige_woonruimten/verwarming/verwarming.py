@@ -16,14 +16,15 @@ from woningwaardering.vera.referentiedata import (
 
 class Verwarming(Stelselgroep):
     def __init__(
-        self, peildatum: date = date.today(), config: Stelselconfig | None = None
+        self,
+        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
+        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.verwarming,
+        peildatum: date = date.today(),
+        config: Stelselconfig | None = None,
     ) -> None:
-        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.verwarming
-
         super().__init__(
-            stelsel=self.stelsel,
-            stelselgroep=self.stelselgroep,
+            stelsel=stelsel,
+            stelselgroep=stelselgroep,
             peildatum=peildatum,
             config=config,
         )

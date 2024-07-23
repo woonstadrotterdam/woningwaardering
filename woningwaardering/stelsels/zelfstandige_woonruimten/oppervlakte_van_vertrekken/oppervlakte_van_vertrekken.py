@@ -16,14 +16,15 @@ from woningwaardering.vera.referentiedata import (
 
 class OppervlakteVanVertrekken(Stelselgroep):
     def __init__(
-        self, peildatum: date = date.today(), config: Stelselconfig | None = None
+        self,
+        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
+        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+        peildatum: date = date.today(),
+        config: Stelselconfig | None = None,
     ) -> None:
-        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_vertrekken
-
         super().__init__(
-            stelsel=self.stelsel,
-            stelselgroep=self.stelselgroep,
+            stelsel=stelsel,
+            stelselgroep=stelselgroep,
             peildatum=peildatum,
             config=config,
         )
