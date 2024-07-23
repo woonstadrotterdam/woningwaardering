@@ -42,7 +42,7 @@ class Stelselgroep:
             config = Stelselconfig.load(stelsel=self.stelsel)
         self.config = config
 
-        self.geldige_versie = self.select_stelselgroepversie(
+        self.geldige_versie = Stelselgroep.select_stelselgroepversie(
             self.stelsel, self.stelselgroep, self.peildatum, self.config
         )
 
@@ -68,8 +68,8 @@ class Stelselgroep:
         )
         return self.geldige_versie.bereken(eenheid, woningwaardering_resultaat)
 
+    @staticmethod
     def select_stelselgroepversie(
-        self,
         stelsel: Woningwaarderingstelsel,
         stelselgroep: Woningwaarderingstelselgroep,
         peildatum: date = date.today(),
