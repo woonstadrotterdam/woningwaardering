@@ -50,18 +50,18 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
     """
     if ruimte.oppervlakte is None:
-        error_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
-        warnings.warn(error_msg, UserWarning)
+        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
+        warnings.warn(warning_msg, UserWarning)
         return None
 
     if ruimte.soort is None or ruimte.soort.code is None:
-        error_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen soort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
-        warnings.warn(error_msg, UserWarning)
+        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen soort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
+        warnings.warn(warning_msg, UserWarning)
         return None
 
     if ruimte.detail_soort is None:
-        error_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
-        warnings.warn(error_msg, UserWarning)
+        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
+        warnings.warn(warning_msg, UserWarning)
         return None
 
     if (
