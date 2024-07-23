@@ -480,7 +480,7 @@ class Woningwaarderingstelselgroep(Enum):
     """
     Waardering van verwarmde vertrekken, overige ruimten en verkeersruimten, inclusief
     extra punten voor verkoeling, op basis van NTA 8800 energielabels en
-    vastgestelde eisen aan koelsystemen en verwarming. (UITBREIDING)
+    vastgestelde eisen aan koelsystemen en verwarming.
     """
 
     buitenruimten = Referentiedata(
@@ -493,7 +493,7 @@ class Woningwaarderingstelselgroep(Enum):
     )
     """
     Waardering van privé- en gemeenschappelijke buitenruimten, met puntenaftrek voor
-    woningen zonder buitenruimte. (UITBREIDING)
+    woningen zonder buitenruimte.
     """
 
     gemeenschappelijke_parkeerruimten = Referentiedata(
@@ -507,7 +507,7 @@ class Woningwaarderingstelselgroep(Enum):
     """
     Waardering van parkeerplekken in een gemeenschappelijke ruimte die exclusief
     gebruikt worden door bewoners van minimaal twee adressen, met puntentoekenning
-    afhankelijk van type en aanwezigheid van laadpaal. (UITBREIDING)
+    afhankelijk van type en aanwezigheid van laadpaal.
     """
 
     prijsopslag_monumenten_en_nieuwbouw = Referentiedata(
@@ -522,7 +522,7 @@ class Woningwaarderingstelselgroep(Enum):
     Prijsopslagen voor monumenten en nieuwbouw, waarbij extra percentages worden
     toegevoegd aan de maximale huurprijs voor rijks-, gemeentelijke of provinciaal
     aangewezen monumenten, evenals voor nieuwbouwwoningen die aan specifieke
-    criteria voldoen. (UITBREIDING)
+    criteria voldoen.
     """
 
     @property

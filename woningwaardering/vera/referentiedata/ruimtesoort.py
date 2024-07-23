@@ -21,9 +21,9 @@ class Ruimtesoort(Enum):
     woningwaardering als gemeenschappelijke ruimte of voorziening wordt gezien
     """
 
-    overige_ruimtes = Referentiedata(
+    overige_ruimten = Referentiedata(
         code="OVR",
-        naam="Overige ruimtes",
+        naam="Overige ruimten",
     )
     """
     Een ruimte die geen buitenruimte is, en die geen vertrek is volgens de definitie van

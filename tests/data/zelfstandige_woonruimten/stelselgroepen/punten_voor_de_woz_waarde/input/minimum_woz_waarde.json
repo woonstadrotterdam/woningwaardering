@@ -1,13 +1,19 @@
 {
   "bouwjaar": 1990,
-  "klimaatbeheersingsoort": {
-    "code": "COL",
-    "naam": "Collectief"
-  },
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "COL",
+      "naam": "Collectief"
+    }
+  ],
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
   "woz_eenheden": [
     {
       "waardepeildatum": "2022-01-01",

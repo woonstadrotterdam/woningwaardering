@@ -1,10 +1,12 @@
 {
   "id": "25048000007",
   "bouwjaar": 1997,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Rochussenstraat",
     "huisnummer": "251",
@@ -18,10 +20,14 @@
     "id": "0599010000349626",
     "bagIdentificatie": "0599010000349626"
   },
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
   "woz_eenheden": [
     {
       "waardepeildatum": "2022-01-01",
