@@ -200,16 +200,13 @@ class EnergieprestatieJan2024(Stelselgroepversie):
 
         energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
-        pandsoort = next(
-            (
-                pand.soort
-                for pand in sorted(
-                    eenheid.panden or [],
-                    key=lambda pand: pand.soort == Pandsoort.meergezinswoning,
-                    reverse=True,
-                )
-            ),
-            None,
+        pandsoort = (
+            Pandsoort.meergezinswoning
+            if any(
+                pand.soort == Pandsoort.meergezinswoning.value
+                for pand in eenheid.panden or []
+            )
+            else Pandsoort.eengezinswoning
         )
 
         if not (
