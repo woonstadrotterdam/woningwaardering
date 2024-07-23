@@ -22,9 +22,6 @@ class Sanitair(Stelselgroep):
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
     ) -> None:
-        # self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        # self.stelselgroep = Woningwaarderingstelselgroep.sanitair
-
         super().__init__(
             stelsel=stelsel,
             stelselgroep=stelselgroep,

@@ -14,13 +14,20 @@ from woningwaardering.vera.referentiedata import (
 
 
 class {{ className }}(Stelselgroep):
-    def __init__(self, stelsel: Woningwaarderingstelsel = {{ stelsel }}, stelselgroep: Woningwaarderingstelselgroep = {{ stelselgroep }}  peildatum: date = date.today(), config: Stelselconfig | None = None) -> None:
+    def __init__(
+        self,
+        stelsel: Woningwaarderingstelsel = {{ stelsel }},
+        stelselgroep: Woningwaarderingstelselgroep = {{ stelselgroep }},
+        peildatum: date = date.today(),
+        config: Stelselconfig | None = None,
+    ) -> None:
         super().__init__(
             stelsel=stelsel,
             stelselgroep=stelselgroep,
             peildatum=peildatum,
             config=config,
         )
+
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
