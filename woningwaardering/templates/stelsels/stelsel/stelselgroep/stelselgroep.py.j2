@@ -14,10 +14,10 @@ from woningwaardering.vera.referentiedata import (
 
 
 class {{ className }}(Stelselgroep):
-    def __init__(self, peildatum: date = date.today()) -> None:
+    def __init__(self, peildatum: date = date.today(), config: Stelselconfig | None = None) -> None:
         self.stelsel = {{ stelsel }}
         self.stelselgroep = {{ stelselgroep }}
-        super().__init__(peildatum=peildatum)
+        super().__init__(peildatum=peildatum, config=config)
 
 
 if __name__ == "__main__":  # pragma: no cover

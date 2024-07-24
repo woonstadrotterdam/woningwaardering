@@ -194,6 +194,7 @@ class Stelsel:
                 Stelselgroep,
             )(
                 peildatum=peildatum,
+                config=config,
             )
             for stelselgroep_config in sorted(
                 config.stelselgroepen.values(), key=lambda x: x.uitvoeringsvolgorde
