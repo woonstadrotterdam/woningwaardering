@@ -4,6 +4,7 @@ from datetime import date
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.config.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -15,10 +16,13 @@ from woningwaardering.vera.referentiedata import (
 
 
 class BeschermdMonumentBmz(Stelselgroep):
-    def __init__(self, peildatum: date = date.today()) -> None:
+    def __init__(
+        self, peildatum: date = date.today(), config: Stelselconfig | None = None
+    ) -> None:
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.beschermd_monument_bmz
-        super().__init__(peildatum=peildatum)
+
+        super().__init__(peildatum=peildatum, config=config)
 
 
 if __name__ == "__main__":  # pragma: no cover
