@@ -99,7 +99,7 @@ class KeukenJan2024(Stelselgroepversie):
                         punten = 4.0
 
                     logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met een aanrecht met lengte {aanrecht.lengte} millimeter en krijgt {punten}."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met een aanrecht met lengte {aanrecht.lengte} millimeter en krijgt {punten} punten."
                     )
 
                     woningwaardering_groep.woningwaarderingen.append(
