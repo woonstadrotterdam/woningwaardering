@@ -90,37 +90,37 @@
           "naam": "Verwarming"
         }
       },
-      "punten": 10.0,
+      "punten": 7.5,
       "woningwaarderingen": [
         {
           "criterium": {
             "naam": "Slaapkamer"
           },
-          "punten": 2.0
+          "punten": 1.5
         },
         {
           "criterium": {
             "naam": "Badruimte"
           },
-          "punten": 2.0
+          "punten": 1.5
         },
         {
           "criterium": {
             "naam": "Woonkamer"
           },
-          "punten": 2.0
+          "punten": 1.5
         },
         {
           "criterium": {
             "naam": "Slaapkamer"
           },
-          "punten": 2.0
+          "punten": 1.5
         },
         {
           "criterium": {
             "naam": "Keuken"
           },
-          "punten": 2.0
+          "punten": 1.5
         }
       ]
     },
@@ -271,11 +271,11 @@
       ]
     }
   ],
-  "maximaleHuur": 1123.13,
-  "punten": 186.0,
+  "maximaleHuur": 1110.54,
+  "punten": 184.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 1123.13
+  "maximaleHuurInclusiefOpslag": 1110.54
 }

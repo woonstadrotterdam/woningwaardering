@@ -1,5 +1,4 @@
 {
-  "id": "nieuwbouw_eenheid",
   "bouwjaar": 2016,
   "klimaatbeheersing": [
     {
@@ -24,6 +23,16 @@
         "code": "MGW",
         "naam": "Meergezinswoning"
       }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 219999
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 239999
     }
   ],
   "energieprestaties": [],

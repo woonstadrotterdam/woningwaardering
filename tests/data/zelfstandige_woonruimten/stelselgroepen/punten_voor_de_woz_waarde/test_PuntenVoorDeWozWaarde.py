@@ -70,16 +70,7 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(specifieke_input_en_output_model
 
 # mapping eenheid_id naar peildatum-warning
 specifiek_warning_mapping = {
-    "hoogniveau_renovatie_1912": [
-        (
-            date(2024, 1, 1),
-            (
-                UserWarning,
-                "geen WOZ-waarde",
-            ),
-        )
-    ],
-    "nieuwbouw_eenheid": [
+    "geen_woz": [
         (
             date(2024, 1, 1),
             (

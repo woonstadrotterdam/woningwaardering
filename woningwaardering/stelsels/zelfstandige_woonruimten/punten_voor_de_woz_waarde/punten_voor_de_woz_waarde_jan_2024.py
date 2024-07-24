@@ -3,6 +3,7 @@ from datetime import date
 from decimal import Decimal
 from importlib.resources import files
 from itertools import chain
+import warnings
 
 import pandas as pd
 from loguru import logger
@@ -65,11 +66,10 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
-            # TODO: woz mag mag niet naar 0 gezet worden. Test data specifiek hierop aanpassen.
             warnings.warn(
                 f"Eenheid {eenheid.id}: geen WOZ-waarde gevonden", UserWarning
             )
-            woz_waarde = 0
+            return woningwaardering_groep
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
 
