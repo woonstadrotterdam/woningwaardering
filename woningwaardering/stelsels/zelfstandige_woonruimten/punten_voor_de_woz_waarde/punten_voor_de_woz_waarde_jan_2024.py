@@ -3,7 +3,6 @@ from datetime import date
 from decimal import Decimal
 from importlib.resources import files
 from itertools import chain
-import warnings
 
 import pandas as pd
 from loguru import logger
