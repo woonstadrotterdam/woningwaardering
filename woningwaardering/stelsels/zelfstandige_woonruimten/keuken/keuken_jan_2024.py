@@ -144,10 +144,9 @@ class KeukenJan2024(Stelselgroepversie):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    warnings.simplefilter("default", UserWarning)
     keukenJan2024 = KeukenJan2024()
     with open(
-        "/Users/tomergabay/Documents/woonstad_rotterdam/code_projects/woningwaardering/tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/keuken_zonder_aanrecht.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/keuken_zonder_aanrecht.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
