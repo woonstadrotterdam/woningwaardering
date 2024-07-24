@@ -108,9 +108,10 @@ class Stelselgroep(_StelselgroepABC):
 
         if config is None:
             config = Stelselconfig.load(stelsel=self.stelsel)
+        self.config = config
 
         self.geldige_versie = self.select_stelselgroepversie(
-            self.stelsel, self.stelselgroep, self.peildatum, config
+            self.stelsel, self.stelselgroep, self.peildatum, self.config
         )
 
     def bereken(
