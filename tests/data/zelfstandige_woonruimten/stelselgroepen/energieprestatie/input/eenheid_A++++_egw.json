@@ -1,9 +1,13 @@
 {
   "bouwjaar": 1921,
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
   "oppervlakten": [
     {
       "soort": {

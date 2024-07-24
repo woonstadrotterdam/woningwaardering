@@ -1,10 +1,12 @@
 {
   "id": "81020000003",
   "bouwjaar": 1923,
-  "klimaatbeheersingsoort": {
-    "code": "COL",
-    "naam": "Collectief"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "COL",
+      "naam": "Collectief"
+    }
+  ],
   "adres": {
     "straatnaam": "Putsebocht",
     "huisnummer": "18",
@@ -18,10 +20,14 @@
     "id": "0599010400029477",
     "bagIdentificatie": "0599010400029477"
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
   "woz_eenheden": [
     {
       "waardepeildatum": "2022-01-01",

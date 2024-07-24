@@ -14,10 +14,20 @@
     "id": "0599010000310211",
     "bagIdentificatie": "0599010000310211"
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
   "woz_eenheden": [
     {
       "waardepeildatum": "2022-01-01",

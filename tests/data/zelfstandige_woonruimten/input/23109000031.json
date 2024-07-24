@@ -1,10 +1,12 @@
 {
   "id": "23109000031",
   "bouwjaar": 1922,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Justus van Effenstraat",
     "huisnummer": "122",
@@ -14,10 +16,14 @@
       "naam": "ROTTERDAM"
     }
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {

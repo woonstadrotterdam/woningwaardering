@@ -3,12 +3,14 @@
   "renovatie": {
     "omschrijving": "hoogniveau renovatie",
     "datum": "2022-01-01",
-    "investeringsbedrag": 10000
+    "bedragInvestering": 10000
   },
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "oppervlakten": [
     {
       "soort": {
@@ -31,10 +33,14 @@
     "id": "0599010000320510",
     "bagIdentificatie": "0599010000320510"
   },
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {

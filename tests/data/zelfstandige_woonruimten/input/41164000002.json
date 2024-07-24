@@ -1,10 +1,12 @@
 {
   "id": "41164000002",
   "bouwjaar": 1904,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Aegidiusstraat",
     "huisnummer": "122",
@@ -18,10 +20,14 @@
     "id": "0599010000316161",
     "bagIdentificatie": "0599010000316161"
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
   "woz_eenheden": [
     {
       "waardepeildatum": "2022-01-01",

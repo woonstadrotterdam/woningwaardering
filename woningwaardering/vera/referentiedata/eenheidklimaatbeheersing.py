@@ -27,7 +27,7 @@ class Eenheidklimaatbeheersing(Enum):
     Blokverwarming is een centraal verwarmingssysteem dat wordt gebruikt in gebouwen met
     meerdere woningen. In plaats van individuele cv-ketels hebben alle woningen een
     gemeenschappelijke warmtebron, meestal een centrale ketelinstallatie. Warm water
-    wordt via leidingen naar radiatoren in elke woning gestuurd om de ruimtes te
+    wordt via leidingen naar radiatoren in elke woning gestuurd om de ruimten te
     verwarmen.
     """
 
@@ -38,7 +38,7 @@ class Eenheidklimaatbeheersing(Enum):
     """
     Centrale verwarming is een systeem waarbij warmte wordt geproduceerd op één centrale
     locatie, meestal een ketel, en vervolgens via leidingen naar verschillende
-    ruimtes in een gebouw wordt verspreid. Dit wordt vaak gedaan door radiatoren,
+    ruimten in een gebouw wordt verspreid. Dit wordt vaak gedaan door radiatoren,
     vloerverwarming of convectoren, waardoor een gelijkmatige warmteverdeling door
     het hele gebouw wordt bereikt. Dit kan zowel individueel als collectief
     georganiseerd zijn.

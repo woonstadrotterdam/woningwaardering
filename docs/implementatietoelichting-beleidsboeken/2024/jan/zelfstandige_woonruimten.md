@@ -753,7 +753,7 @@ _In februari 2022 heeft in een woning een renovatie plaatsgevonden van € 15.00
 
 > Om een renovatie te waarderen, dien je de details van de renovatie door te geven onder het attribuut `renovatie` van een eenheid.
 >- `datum`: Specificeer de datum waarop de renovatie is gereedgekomen.
->- `investeringsbedrag`: Specificeer het deel van de investering dat is toegekend aan de renovatie van deze eenheid.
+>- `bedrag_investering`: Specificeer het deel van de investering dat is toegekend aan de renovatie van deze eenheid.
 
 ### 4.11.1 Hoogniveau renovatie in 2015-2019
 

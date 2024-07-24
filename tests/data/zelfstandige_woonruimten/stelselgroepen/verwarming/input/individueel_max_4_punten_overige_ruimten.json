@@ -1,9 +1,11 @@
 {
   "id": "max4punten",
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "ruimten": [
     {
       "id": "Woonkamer1",

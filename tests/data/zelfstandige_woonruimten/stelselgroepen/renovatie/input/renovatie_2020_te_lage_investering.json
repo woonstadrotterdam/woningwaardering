@@ -3,7 +3,7 @@
   "renovatie": {
     "omschrijving": "hoogniveau renovatie",
     "datum": "2020-01-01",
-    "investeringsbedrag": 9000
+    "bedragInvestering": 9000
   },
   "energieprestaties": [
     {
