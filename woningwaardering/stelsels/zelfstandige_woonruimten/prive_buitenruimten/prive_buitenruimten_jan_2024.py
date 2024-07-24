@@ -1,6 +1,7 @@
 import datetime
 from decimal import Decimal
 from importlib.resources import files
+import warnings
 
 import pandas as pd
 from loguru import logger
@@ -66,7 +67,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
 
         if buitenruimten:
             logger.debug(
-                f"{len(buitenruimten)} buitenruimt(en) gevonden in eenheid {eenheid.id}"
+                f"Eenheid ({eenheid.id}): {len(buitenruimten)} buitenruimt(en) gevonden."
             )
 
             for buitenruimte in buitenruimten:
@@ -79,18 +80,21 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                         or buitenruimte.gedeeld_met_aantal_eenheden < 2
                     )
                 ):
-                    raise ValueError(
-                        f"{buitenruimte.naam} {buitenruimte.id} is een gemeenschappelijke ruimte en moet gedeeld worden met minimaal 2 eenheden, maar gedeeldMetAantalEenheden={buitenruimte.gedeeld_met_aantal_eenheden}"
+                    warnings.warn(
+                        f"Ruimte {buitenruimte.naam} ({buitenruimte.id}) is een gemeenschappelijke ruimte en moet gedeeld worden met minimaal 2 eenheden, maar gedeeldMetAantalEenheden={buitenruimte.gedeeld_met_aantal_eenheden}",
+                        UserWarning,
                     )
+                    continue
                 if buitenruimte.detail_soort is None:
-                    raise ValueError(
-                        f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} heeft geen detailsoort"
+                    warnings.warn(
+                        f"Ruimte {buitenruimte.naam} ({buitenruimte.id}) heeft geen detailsoort"
                     )
+                    continue
                 if not PriveBuitenruimtenJan2024._buitenruimte_heeft_geldige_afmetingen(
                     buitenruimte
                 ):
-                    logger.debug(
-                        f"Prive-buitenruimte {buitenruimte.naam} {buitenruimte.id} komt niet in aanmerking voor waardering onder {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                    logger.info(
+                        f"Ruimte {buitenruimte.naam} ({buitenruimte.id}) komt niet in aanmerking voor waardering onder {Woningwaarderingstelselgroep.prive_buitenruimten.naam} op basis van afmeting criteria"
                     )
                     continue
 
@@ -108,7 +112,7 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
                     )
 
                 logger.info(
-                    f"{buitenruimte.id} {buitenruimte.naam} wordt voor {woningwaardering.aantal} m2 meegerekend voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+                    f"Ruimte {buitenruimte.naam} ({buitenruimte.id}) wordt voor {woningwaardering.aantal} m2 meegerekend voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
                 )
 
                 # corrigeer buitenruimte voor wanneer deze gedeeld wordt met andere eenheden
@@ -130,8 +134,8 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
             # Punten aftrek wanneer er geen enkele buitenruimte is
             woningwaardering.punten = -5.0
 
-            logger.warning(
-                f"Geen buitenruimte gevonden in eenheid {eenheid.id}: 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
+            logger.info(
+                f"Eenheid {eenheid.id}: geen buitenruimten gevonden. 5 punten in mindering gebracht voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
             )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
@@ -158,13 +162,9 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            (
-                f"Eenheid {eenheid.id} wordt gewaardeerd met "
-                f"{woningwaardering_groep.punten} punten "
-                f"voor stelselgroep "
-                f"{Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
-            )
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.prive_buitenruimten.naam}"
         )
+
         return woningwaardering_groep
 
     @staticmethod
@@ -200,10 +200,11 @@ class PriveBuitenruimtenJan2024(Stelselgroepversie):
 
         if missende_attributen:
             error_message = (
-                f"Ruimte {ruimte.naam} {ruimte.id} heeft geen "
+                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen "
                 + " en ".join(missende_attributen)
             )
-            raise ValueError(error_message)
+            warnings.warn(error_message, UserWarning)
+            return False
         return (
             (ruimte.lengte or 0) >= 1.5
             and (ruimte.breedte or 0) >= 1.5

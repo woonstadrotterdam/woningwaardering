@@ -1,3 +1,4 @@
+import warnings
 from decimal import Decimal
 
 from loguru import logger
@@ -44,7 +45,9 @@ class KeukenJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if not ruimte.detail_soort:
-                logger.warning(f"Ruimte {ruimte.id} heeft geen detail_soort.")
+                warnings.warn(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail_soort."
+                )
                 continue
 
             if ruimte.detail_soort.code not in [
@@ -67,24 +70,25 @@ class KeukenJan2024(Stelselgroepversie):
             )
 
             if any(aanrechten):
-                logger.debug(
-                    f"Ruimte {ruimte.id} is een keuken met {Bouwkundigelementdetailsoort.aanrecht.naam} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met {Bouwkundigelementdetailsoort.aanrecht.naam} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
                 )
             elif ruimte.detail_soort.code in [
                 Ruimtedetailsoort.keuken.code,
                 Ruimtedetailsoort.woonkamer_en_of_keuken.code,
             ]:
-                logger.warning(
-                    f"Ruimte {ruimte.id} is een (open) keuken zonder aanrecht."
+                warnings.warn(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een (open) keuken zonder aanrecht.",
+                    UserWarning,
                 )
                 continue
 
             for aanrecht in aanrechten:
                 if not aanrecht.lengte:
-                    logger.warning(
-                        f"{Bouwkundigelementdetailsoort.aanrecht.naam} {aanrecht.id} in ruimte {ruimte.id} heeft geen lengte en kan daardoor niet gewaardeerd worden."
+                    warnings.warn(
+                        f"{Bouwkundigelementdetailsoort.aanrecht.naam} {aanrecht.id} in ruimte {ruimte.id} heeft geen lengte en kan daardoor niet gewaardeerd worden.",
+                        UserWarning,
                     )
-                    continue
 
                 if aanrecht.lengte:
                     if aanrecht.lengte < 1000:
@@ -95,7 +99,7 @@ class KeukenJan2024(Stelselgroepversie):
                         punten = 4.0
 
                     logger.info(
-                        f"Ruimte {ruimte.id} is een keuken met een aanrecht met lengte {aanrecht.lengte} millimeter en krijgt {punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met een aanrecht met lengte {aanrecht.lengte} millimeter en krijgt {punten}."
                     )
 
                     woningwaardering_groep.woningwaarderingen.append(
@@ -115,10 +119,10 @@ class KeukenJan2024(Stelselgroepversie):
                     )
 
         if not keukens:
-            logger.warning(
-                f"Geen keuken met aanrecht gevonden in eenheid {eenheid.id}."
+            warnings.warn(
+                f"Eenheid {eenheid.id} kan niet gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam} omdat er geen keuken is gevonden.",
+                UserWarning,
             )
-            return woningwaardering_groep
 
         totaal_punten = rond_af(
             sum(
@@ -130,6 +134,10 @@ class KeukenJan2024(Stelselgroepversie):
         ) * Decimal("1")
         woningwaardering_groep.punten = float(totaal_punten)
 
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+        )
+
         return woningwaardering_groep
 
 
@@ -138,7 +146,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     keukenJan2024 = KeukenJan2024()
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_zonder_lengte.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/keuken_zonder_aanrecht.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

@@ -1,5 +1,5 @@
 from datetime import date
-
+import warnings
 from loguru import logger
 
 from woningwaardering.stelsels import utils
@@ -22,10 +22,11 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
+    warnings.simplefilter("default", UserWarning)
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 1, 1))
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/zelfstandige_woonruimten/input/41164000002.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

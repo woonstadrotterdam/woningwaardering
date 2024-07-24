@@ -1,3 +1,4 @@
+import warnings
 from datetime import date
 from decimal import Decimal
 from importlib.resources import files
@@ -52,7 +53,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woningwaardering_groep.woningwaarderingen = []
 
         if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
-            logger.warning(
+            logger.info(
                 "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
             )
             woningwaardering_resultaat = self._bereken_woningwaarderingresultaat(
@@ -60,12 +61,14 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             )
 
         if not eenheid.bouwjaar:
-            raise ValueError(f"Geen bouwjaar gevonden voor eenheid {eenheid.id}")
-
+            warnings.warn(f"Eenheid {eenheid.id}: geen bouwjaar gevonden.", UserWarning)
+            return woningwaardering_groep
         woz_waarde = self.bepaal_woz_waarde(eenheid)
 
         if woz_waarde is None:
-            warnings.warn(f"Eenheid {eenheid.id}: geen WOZ-waarde gevonden")
+            warnings.warn(
+                f"Eenheid {eenheid.id}: geen WOZ-waarde gevonden", UserWarning
+            )
             return woningwaardering_groep
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
@@ -90,8 +93,9 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         oppervlakte = self.bepaal_oppervlakte(woningwaardering_resultaat)
 
         if oppervlakte == 0:
-            raise ValueError(
-                f"Kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is"
+            warnings.warn(
+                f"Eenheid {eenheid.id}: kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
+                UserWarning,
             )
 
         factor_onderdeel_II = df_woz_factor["Onderdeel II"].astype(float).item()
@@ -118,7 +122,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woningwaardering_groep.punten = float(rond_af(punten, decimalen=0))
 
         logger.info(
-            f"Stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam} krijgt {woningwaardering_groep.punten} punten"
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
         )
 
         return woningwaardering_groep
@@ -130,7 +134,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         """
-        Controleert of de punten voor de stelselgroep WOZ-waarde voldoen aan de minumum punten en de maximum hoeveelheid punten.
+        Controleert of de punten voor de stelselgroep WOZ-waarde voldoen aan de minimum punten en de maximum hoeveelheid punten.
         Een correctie vindt plaats wanneer:
             - Een nieuwbouwwoning niet het minimum aantal punten heeft.
             - De punten voor WOZ-waarde meer dan 33.33% van het totaal aantal punten bedraagt en geen nieuwbouwwoning is.
@@ -328,7 +332,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             eenheid, self.peildatum
         )
         if hoogniveau_renovatie:
-            logger.debug("Hoogniveau renovatie geconstateerd.")
+            logger.info(f"Eenheid {eenheid.id}: hoogniveau renovatie geconstateerd.")
 
         if (bouwjaar and 2015 <= bouwjaar <= 2019) or hoogniveau_renovatie:
             punten_critische_stelselgroepen = sum(
@@ -355,7 +359,7 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             if punten_critische_stelselgroepen >= 110:
                 minimum_punten = 40
                 logger.info(
-                    f"Minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid {eenheid.id}: minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
                 )
 
         return minimum_punten
@@ -433,16 +437,16 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
         Returns:
             bool: True als de eenheid een hoogniveau renovatie heeft gehad, anders False.
-
-        Raises:
-            ValueError: Bij ontbrekende informatie die tot een onjuiste beoordeling kan leiden.
         """
 
         if not eenheid.renovatie:
             return False
 
         if not eenheid.renovatie.datum:
-            raise ValueError("Een renovatie zonder renovatiedatum gevonden")
+            warnings.warn(
+                f"Eenheid {eenheid.id}: renovatie zonder renovatiedatum gevonden."
+            )
+            return False
 
         # De specifieke berekeningsmethodiek, die geldt voor nieuwbouwwoningen (2015-2019) (...)  is ook van toepassing
         # indien in de eerdergenoemde kalenderjaren sprake is van hoogniveau renovatie. (...) Hieruit volgt dat sprake is
@@ -459,10 +463,18 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
             return False
 
         if not energieprestatie.begindatum:
-            raise ValueError("Een energieprestatie zonder begindatum gevonden")
+            warnings.warn(
+                f"Eenheid {eenheid.id}: energieprestatie zonder begindatum gevonden.",
+                UserWarning,
+            )
+            return False
 
         if not energieprestatie.label:
-            raise ValueError("Een energieprestatie zonder label gevonden")
+            warnings.warn(
+                f"Eenheid {eenheid.id}: energieprestatie zonder label gevonden.",
+                UserWarning,
+            )
+            return False
 
         if eenheid.renovatie.datum.year <= 2019:
             if (
@@ -475,15 +487,18 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
         # Indien sprake is van verbouw in de jaren 2015-2021 dan is sprake van hoogniveau renovatie als het Energie-Index van de woning lager is dan 0,4.
         if eenheid.renovatie.datum.year <= 2021:
             if not energieprestatie.waarde:
-                raise ValueError(
-                    "Een energieprestatie zonder waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021"
+                warnings.warn(
+                    f"Eenheid {eenheid.id}: energieprestatie zonder waarde (Energie-Index) gevonden bij een renovatie in de jaren 2015-2021.",
+                    UserWarning,
                 )
+                return False
             try:
                 energieprestatie_waarde = float(energieprestatie.waarde)
             except ValueError:
-                raise ValueError(
-                    f"Een energieprestatie met een waarde (Energie-Index) gevonden bij een eenheid met een renovatie in de jaren 2015-2021 dat niet kan worden omgezet in een getal: {energieprestatie.waarde}"
+                warnings.warn(
+                    f"Eenheid {eenheid.id}: energieprestatie met een waarde (Energie-Index) dat niet kan worden omgezet in een getal ({energieprestatie.waarde}) gevonden bij een renovatie in de jaren 2015-2021"
                 )
+                return False
             if energieprestatie_waarde < 0.4:
                 return True
 
@@ -492,10 +507,11 @@ class PuntenVoorDeWozWaardeJan2024(Stelselgroepversie):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
+    # warnings.simplefilter("default", UserWarning)
 
     woz = PuntenVoorDeWozWaardeJan2024()
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/punten_voor_de_woz_waade/input/hoogniveau_renovatie_waarde.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/punten_voor_de_woz_waarde/input/hoogniveau_renovatie_label_post_2021.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
