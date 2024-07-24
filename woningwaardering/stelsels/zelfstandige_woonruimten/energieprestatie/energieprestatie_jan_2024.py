@@ -1,6 +1,7 @@
 from datetime import date, datetime
 from decimal import Decimal
 from importlib.resources import files
+import warnings
 
 import pandas as pd
 from loguru import logger
@@ -98,9 +99,12 @@ class EnergieprestatieJan2024(Stelselgroepversie):
             )
 
             if gebruiksoppervlakte_thermische_zone is None:
-                raise TypeError(
-                    "voor de berekening van de energieprestatie met een nieuw energielabel dient de gebruiksoppervlakte van de thermische zone bekend te zijn"
+                warnings.warn(
+                    f"Eenheid {eenheid.id}: voor de berekening van de energieprestatie met een nieuw energielabel dient de gebruiksoppervlakte van de thermische zone bekend te zijn",
+                    UserWarning,
                 )
+                return woningwaardering
+
             else:
                 woningwaardering.criterium.naam = label
                 woningwaardering.criterium.meeteenheid = (
@@ -147,7 +151,7 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         )
 
         if energieprestatievergoeding:
-            logger.debug("Energieprestatievergoeding gevonden.")
+            logger.info(f"Eenheid {eenheid.id}: energieprestatievergoeding gevonden.")
 
         if energieprestatievergoeding and waarderings_label != Energielabel.b.naam:
             waarderings_label = Energielabel.b.naam
@@ -207,13 +211,24 @@ class EnergieprestatieJan2024(Stelselgroepversie):
                 for pand in eenheid.panden or []
             )
             else Pandsoort.eengezinswoning
+            if any(
+                pand.soort == Pandsoort.eengezinswoning.value
+                for pand in eenheid.panden or []
+            )
+            else None
         )
 
-        if not (
-            pandsoort and pandsoort.naam and (energieprestatie or eenheid.bouwjaar)
-        ):
-            logger.warning(
-                f"Eenheid {eenheid.id} heeft geen pandsoort en/of geldig energielabel en/of bouwjaar en komt daarom niet in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
+        if not pandsoort or not pandsoort.naam:
+            warnings.warn(
+                f"Eenheid {eenheid.id} heeft geen pandsoort {Pandsoort.eengezinswoning.naam} of {Pandsoort.meergezinswoning.naam} en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}",
+                UserWarning,
+            )
+            return woningwaardering_groep
+
+        if not (energieprestatie or eenheid.bouwjaar):
+            warnings.warn(
+                f"Eenheid {eenheid.id} heeft geen energieprestatie of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}",
+                UserWarning,
             )
             return woningwaardering_groep
 
@@ -241,8 +256,8 @@ class EnergieprestatieJan2024(Stelselgroepversie):
             )
 
         if woningwaardering.criterium:
-            logger.debug(
-                f"Eenheid {eenheid.id} met {woningwaardering.criterium.naam} krijgt {woningwaardering.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
+            logger.info(
+                f"Eenheid {eenheid.id} krijgt {woningwaardering.punten} punten voor {woningwaardering.criterium.naam}."
             )
 
         woningwaardering_groep.woningwaarderingen.append(woningwaardering)
@@ -257,6 +272,11 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.punten = float(punten_totaal)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}"
+        )
+
         return woningwaardering_groep
 
 

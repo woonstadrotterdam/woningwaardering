@@ -88,3 +88,32 @@ def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterato
         else diff
         for diff in diffresult
     )
+
+
+def krijg_warning_tuple_op_datum(
+    id: str, peildatum: date, eenheid_warning_mapping: dict
+) -> tuple[Warning, str]:
+    """
+    Geeft de warning tuple terug die hoort bij een eenheid_id.
+
+    Args:
+        id (str): eenheid_id
+        peildatum (date): peildatum
+        eenheid_warning_mapping (dict): mapping van eenheid_id naar peildatum-warning
+
+    Returns:
+        tuple[Warning, str]: warning tuple
+    """
+
+    if id not in eenheid_warning_mapping:
+        return None
+
+    datum_lijst = eenheid_warning_mapping[id]
+
+    result = None
+
+    for datum_warning_tuple in datum_lijst:
+        if peildatum >= datum_warning_tuple[0]:
+            result = datum_warning_tuple[1]
+
+    return result

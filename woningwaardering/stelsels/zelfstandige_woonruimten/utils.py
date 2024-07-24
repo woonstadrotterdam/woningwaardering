@@ -1,5 +1,6 @@
 from functools import wraps
 from typing import Callable
+import warnings
 
 from loguru import logger
 
@@ -47,21 +48,21 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     Returns:
         Ruimtesoort | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
             Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
-
-    Raises:
-        TypeError: Als de ruimte ontbrekende informatie heeft, zoals oppervlakte, soort of detailsoort.
     """
     if ruimte.oppervlakte is None:
-        error_msg = f"ruimte {ruimte.id} heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
-        raise TypeError(error_msg)
+        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
+        warnings.warn(warning_msg, UserWarning)
+        return None
 
     if ruimte.soort is None or ruimte.soort.code is None:
-        error_msg = f"ruimte {ruimte.id} heeft geen soort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
-        raise TypeError(error_msg)
+        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen soort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
+        warnings.warn(warning_msg, UserWarning)
+        return None
 
     if ruimte.detail_soort is None:
-        error_msg = f"ruimte {ruimte.id} heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
-        raise TypeError(error_msg)
+        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
+        warnings.warn(warning_msg, UserWarning)
+        return None
 
     if (
         ruimte.soort.code == Ruimtesoort.buitenruimte.code
@@ -125,8 +126,8 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
         if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap):
-            logger.debug(
-                f"Vaste trap gevonden in {ruimte.naam} ({ruimte.id}): wordt gewaardeerd als {ruimte.soort.naam}"
+            logger.info(
+                f"Ruimte {ruimte.naam} ({ruimte.id}): vaste trap gevonden. Ruimte wordt gewaardeerd als {ruimte.soort.naam}."
             )
             if (
                 ruimte.soort.code == Ruimtesoort.vertrek.code
@@ -138,16 +139,16 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             else:
                 return None
         elif heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap):
-            logger.debug(
-                f"Vlizo trap gevonden in {ruimte.naam} ({ruimte.id}): wordt gewaardeerd als {Ruimtesoort.overige_ruimten}"
+            logger.info(
+                f"Ruimte {ruimte.naam} ({ruimte.id}): vlizotrap gevonden. Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten}."
             )
             if ruimte.oppervlakte >= 2:
                 return Ruimtesoort.overige_ruimten
             else:
                 return None
 
-        logger.debug(
-            f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): wordt niet gewaardeerd binnen {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        logger.info(
+            f"Ruimte {ruimte.naam} ({ruimte.id}): geen trap gevonden. Ruimte wordt niet gewaardeerd binnen {Woningwaarderingstelsel.zelfstandige_woonruimten}."
         )
     return None
 
@@ -161,19 +162,19 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
 
     Returns:
         str: De naam van de ruimte inclusief het aantal toegevoegde kasten.
-
-    Raises:
-        TypeError: Als de ruimte ontbrekende informatie heeft, zoals oppervlakte of detailsoort.
     """
-    if ruimte.detail_soort is None or ruimte.detail_soort.code is None:
-        error_msg = f"ruimte {ruimte.id} heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
-        raise TypeError(error_msg)
-
-    if ruimte.oppervlakte is None:
-        error_msg = f"ruimte {ruimte.id} heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
-        raise TypeError(error_msg)
 
     criterium_naam = ruimte.naam or "Naamloze ruimte"
+
+    if ruimte.detail_soort is None or ruimte.detail_soort.code is None:
+        message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        warnings.warn(message, UserWarning)
+        return criterium_naam
+
+    if ruimte.oppervlakte is None:
+        message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        warnings.warn(message, UserWarning)
+        return criterium_naam
 
     # Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald
     # en bij de oppervlakte van het betreffende vertrek opgeteld.
@@ -214,8 +215,8 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
                     ]
                 )
 
-            logger.debug(
-                f"De netto oppervlakte van {aantal_ruimte_kasten} verbonden {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'} is opgeteld bij {ruimte.naam}"
+            logger.info(
+                f"Ruimte {ruimte.naam} ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
             )
 
             criterium_naam = f"{ruimte.naam} + {aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'}"
