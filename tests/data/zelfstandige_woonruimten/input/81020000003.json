@@ -50,12 +50,12 @@
       },
       "begindatum": "2017-09-29",
       "einddatum": "2027-09-29",
-      "registratiedatum": "2017-10-01T10:55:54+02:00",
+      "registratiedatum": "2017-10-01T10:55:54.577000+02:00",
       "label": {
         "code": "A",
         "naam": "A"
       },
-      "waarde": "0.14"
+      "waarde": "0.33"
     }
   ],
   "gebruiksoppervlakte": 100,
