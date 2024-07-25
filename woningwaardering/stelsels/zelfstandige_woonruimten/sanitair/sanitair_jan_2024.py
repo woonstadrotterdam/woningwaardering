@@ -58,7 +58,9 @@ class SanitairJan2024(Stelselgroepversie):
                 if detailsoort.naam is not None
             )
 
-            logger.debug(f"Aantal '{soorten}' in {ruimte.naam}: {aantal}")
+            logger.debug(
+                f"Ruimte {ruimte.naam} ({ruimte.id}): {aantal} aantal '{soorten}'"
+            )
 
             naam = (
                 soorten
@@ -188,4 +190,9 @@ class SanitairJan2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+        )
+
         return woningwaardering_groep

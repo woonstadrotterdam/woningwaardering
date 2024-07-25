@@ -40,11 +40,16 @@ class RenovatieJan2024(Stelselgroepversie):
 
         if eenheid.renovatie is not None:
             if eenheid.renovatie.datum is None:
-                warnings.warn("Renovatiedatum is None")
+                warnings.warn(
+                    f"Eenheid {eenheid.id}: renovatiedatum mist.", UserWarning
+                )
                 return woningwaardering_groep
 
             if eenheid.renovatie.bedrag_investering is None:
-                warnings.warn("Bedrag van investering van de renovatie mist")
+                warnings.warn(
+                    f"Eenheid {eenheid.id}: bedrag investering van renovatie mist.",
+                    UserWarning,
+                )
                 return woningwaardering_groep
 
             # Volgens het woningwaarderingsstelsel kan aan een woning punten voor
@@ -53,7 +58,7 @@ class RenovatieJan2024(Stelselgroepversie):
             # gedaan van minimaal € 10.000.
             if eenheid.renovatie.bedrag_investering < 10000:
                 logger.info(
-                    f"Investering van renovatie in {eenheid.renovatie.datum.year} is te laag."
+                    f"Eenheid {eenheid.id}: De investering van renovatie in {eenheid.renovatie.datum.year} is te laag. komt niet aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                 )
                 return woningwaardering_groep
 
@@ -77,8 +82,8 @@ class RenovatieJan2024(Stelselgroepversie):
                         eenheid, self.peildatum
                     )
                 ):
-                    logger.debug(
-                        f"Hoogniveau renovatie in 2015-2019 komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
+                    logger.info(
+                        f"Eenheid {eenheid.id}: Hoogniveau renovatie in 2015-2019 komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                     )
                     return woningwaardering_groep
 
@@ -97,7 +102,7 @@ class RenovatieJan2024(Stelselgroepversie):
                 )
             else:
                 logger.info(
-                    f"Renovatie met datum {eenheid.renovatie.datum} komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
+                    f"Eenheid {eenheid.id}: Renovatie met datum {eenheid.renovatie.datum} komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}."
                 )
                 return woningwaardering_groep
 
@@ -110,4 +115,8 @@ class RenovatieJan2024(Stelselgroepversie):
         )
 
         woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.renovatie.naam}"
+        )
         return woningwaardering_groep

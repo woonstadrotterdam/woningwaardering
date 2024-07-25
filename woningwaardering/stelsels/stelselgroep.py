@@ -111,7 +111,7 @@ class Stelselgroep:
                 f"meerdere geldige stelselgroep configuraties gevonden voor {stelsel.value.naam} met peildatum {peildatum}: {geldige_stelselgroep_versie_configs}"
             )
 
-        logger.debug(
+        logger.info(
             f"{stelsel.value.naam}: stelselgroep '{stelselgroep}' is geldig op peildatum {peildatum}."
         )
         logger.debug(f"{stelsel.value.naam}: versies: {stelselgroep_config.versies}")

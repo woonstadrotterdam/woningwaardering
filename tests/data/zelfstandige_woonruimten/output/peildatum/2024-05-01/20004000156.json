@@ -11,10 +11,20 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 45.0,
+      "punten": 79.0,
       "woningwaarderingen": [
         {
-          "aantal": 10.79,
+          "aantal": 4.27,
+          "criterium": {
+            "naam": "Badruimte (1m2 verminderd ivm toilet)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 18.52,
           "criterium": {
             "naam": "Slaapkamer",
             "meeteenheid": {
@@ -24,9 +34,9 @@
           }
         },
         {
-          "aantal": 4.83,
+          "aantal": 4.1,
           "criterium": {
-            "naam": "Badruimte",
+            "naam": "Keuken",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -34,7 +44,7 @@
           }
         },
         {
-          "aantal": 14.33,
+          "aantal": 43.92,
           "criterium": {
             "naam": "Woonkamer",
             "meeteenheid": {
@@ -44,19 +54,9 @@
           }
         },
         {
-          "aantal": 9.28,
+          "aantal": 7.97,
           "criterium": {
             "naam": "Slaapkamer",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 5.79,
-          "criterium": {
-            "naam": "Keuken",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -89,40 +89,7 @@
           "code": "VZE",
           "naam": "Verwarming"
         }
-      },
-      "punten": 7.5,
-      "woningwaarderingen": [
-        {
-          "criterium": {
-            "naam": "Slaapkamer"
-          },
-          "punten": 1.5
-        },
-        {
-          "criterium": {
-            "naam": "Badruimte"
-          },
-          "punten": 1.5
-        },
-        {
-          "criterium": {
-            "naam": "Woonkamer"
-          },
-          "punten": 1.5
-        },
-        {
-          "criterium": {
-            "naam": "Slaapkamer"
-          },
-          "punten": 1.5
-        },
-        {
-          "criterium": {
-            "naam": "Keuken"
-          },
-          "punten": 1.5
-        }
-      ]
+      }
     },
     {
       "criteriumGroep": {
@@ -135,13 +102,13 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": 32.0,
+      "punten": 15.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "B (oud)"
+            "naam": "C (oud)"
           },
-          "punten": 32.0
+          "punten": 15.0
         }
       ]
     },
@@ -156,21 +123,21 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 9.0,
+      "punten": 11.0,
       "woningwaarderingen": [
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Closetcombinatie"
-          },
-          "punten": 3.0
-        },
         {
           "aantal": 2.0,
           "criterium": {
+            "naam": "Closetcombinatie"
+          },
+          "punten": 6.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
             "naam": "Wastafel"
           },
-          "punten": 2.0
+          "punten": 1.0
         },
         {
           "aantal": 1.0,
@@ -206,8 +173,19 @@
           "naam": "Privé-buitenruimten"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": []
+      "punten": 2.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 14.99,
+          "criterium": {
+            "naam": "Balkon",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
     },
     {
       "criteriumGroep": {
@@ -220,19 +198,19 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 40.0,
+      "punten": 38.0,
       "woningwaarderingen": [
         {
           "criterium": {
             "naam": "Onderdeel I"
           },
-          "punten": 16.75
+          "punten": 21.28
         },
         {
           "criterium": {
             "naam": "Onderdeel II"
           },
-          "punten": 23.71
+          "punten": 17.21
         }
       ]
     },
@@ -271,11 +249,11 @@
       ]
     }
   ],
-  "maximaleHuur": 1110.54,
-  "punten": 184.0,
+  "maximaleHuur": 1179.64,
+  "punten": 195.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 1110.54
+  "maximaleHuurInclusiefOpslag": 1179.64
 }

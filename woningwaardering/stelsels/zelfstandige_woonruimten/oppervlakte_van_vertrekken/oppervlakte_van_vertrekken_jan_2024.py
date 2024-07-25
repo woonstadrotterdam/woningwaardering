@@ -51,8 +51,8 @@ class OppervlakteVanVertrekkenJan2024(Stelselgroepversie):
                     Decimal(str(ruimte.oppervlakte)) - Decimal("1")
                 )
                 criterium_naam += " (1m2 verminderd ivm toilet)"
-                logger.debug(
-                    "Toilet in badkamer gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}): toilet gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
                 )
 
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
@@ -102,6 +102,11 @@ class OppervlakteVanVertrekkenJan2024(Stelselgroepversie):
         ) * Decimal("1")
 
         woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
+        )
+
         return woningwaardering_groep
 
 

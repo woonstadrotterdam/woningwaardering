@@ -1,3 +1,4 @@
+import warnings
 from decimal import Decimal
 
 from loguru import logger
@@ -49,18 +50,24 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.oppervlakte is None:
-                error_msg = f"ruimte {ruimte.id} heeft geen oppervlakte"
-                raise TypeError(error_msg)
+                message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte"
+                warnings.warn(message, UserWarning)
+                return woningwaardering_groep
+
             if ruimte.detail_soort is None:
-                error_msg = f"ruimte {ruimte.id} heeft geen detailsoort"
-                raise TypeError(error_msg)
+                message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort"
+                warnings.warn(message, UserWarning)
+                return woningwaardering_groep
 
             criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
             if classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten:
                 if ruimte.oppervlakte < 2:
                     logger.debug(
-                        f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter"
+                        f"Ruimte {ruimte.naam} ({ruimte.id}): {ruimte.oppervlakte = }m2"
+                    )
+                    logger.info(
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) is kleiner dan 2 m2 en telt daarom niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}."
                     )
                     continue
 
@@ -100,8 +107,8 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
                         )
 
                     else:
-                        logger.debug(
-                            f"{ruimte.naam} {ruimte.detail_soort.code} is kleiner dan 2 vierkante meter per eenheid en komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+                        logger.info(
+                            f"Ruimte {ruimte.naam} ({ruimte.id}) is kleiner dan 2 m2 per eenheid en komt niet in aanmerking voor een puntenwaardering onder {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                         )
                         continue
 
@@ -133,6 +140,11 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
         ) * Decimal("0.75")
 
         woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+        )
+
         return woningwaardering_groep
 
     @staticmethod
@@ -150,8 +162,8 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
             trap = heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
 
             if trap:
-                logger.debug(
-                    f"Trap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}): trap gevonden. Telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                 )
                 return float(rond_af(ruimte.oppervlakte, decimalen=2))
 
@@ -160,8 +172,8 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
             )
 
             if vlizotrap:
-                logger.debug(
-                    f"Vlizotrap gevonden in {ruimte.naam} ({ruimte.id}): telt mee voor oppervlakte van overige ruimten"
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}): vlizotrap gevonden. Telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
                 )
                 return max(
                     0.0,
@@ -187,8 +199,8 @@ class OppervlakteVanOverigeRuimtenJan2024(Stelselgroepversie):
                     ),
                 )
 
-        logger.warning(
-            f"Geen trap gevonden in {ruimte.naam} ({ruimte.id}): telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+        logger.info(
+            f"Ruimte {ruimte.naam} ({ruimte.id}): geen trap gevonden en telt dus niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
         )
         return 0.0
 
