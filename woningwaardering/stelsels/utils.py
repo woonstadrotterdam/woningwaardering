@@ -393,11 +393,11 @@ def energieprestatie_met_geldig_label(
                 and energieprestatie.label
                 and (
                     energieprestatie.soort.code
-                    == Energieprestatiesoort.energie_index.code
-                    or energieprestatie.soort.code
-                    == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
-                    or energieprestatie.soort.code
-                    == Energieprestatiesoort.voorlopig_energielabel.code  # Een voorlopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
+                    in [
+                        Energieprestatiesoort.energie_index.code,
+                        Energieprestatiesoort.primair_energieverbruik_woningbouw.code,
+                        Energieprestatiesoort.voorlopig_energielabel.code,  # Een voorlopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
+                    ]
                 )
                 and (
                     energieprestatie.begindatum < peildatum < energieprestatie.einddatum
