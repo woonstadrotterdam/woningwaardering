@@ -17,14 +17,12 @@ from woningwaardering.vera.referentiedata import (
 class Keuken(Stelselgroep):
     def __init__(
         self,
-        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
-        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.keuken,
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
     ) -> None:
         super().__init__(
-            stelsel=stelsel,
-            stelselgroep=stelselgroep,
+            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+            stelselgroep=Woningwaarderingstelselgroep.keuken,
             peildatum=peildatum,
             config=config,
         )

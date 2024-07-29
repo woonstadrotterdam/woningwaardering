@@ -17,14 +17,12 @@ from woningwaardering.vera.referentiedata import (
 class PuntenVoorDeWozWaarde(Stelselgroep):
     def __init__(
         self,
-        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
-        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
     ) -> None:
         super().__init__(
-            stelsel=stelsel,
-            stelselgroep=stelselgroep,
+            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+            stelselgroep=Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
             peildatum=peildatum,
             config=config,
         )
