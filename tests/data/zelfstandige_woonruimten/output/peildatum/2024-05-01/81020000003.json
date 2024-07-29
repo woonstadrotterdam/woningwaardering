@@ -162,13 +162,13 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": 36.0,
+      "punten": 44.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "A (oud)"
+            "naam": "A (oud) > A++ obv Energie-index"
           },
-          "punten": 36.0
+          "punten": 44.0
         }
       ]
     },
@@ -314,11 +314,11 @@
       "woningwaarderingen": []
     }
   ],
-  "maximaleHuur": 1167.08,
-  "punten": 193.0,
+  "maximaleHuur": 1217.29,
+  "punten": 201.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 1167.08
+  "maximaleHuurInclusiefOpslag": 1217.29
 }

@@ -71,8 +71,6 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         self,
         eenheid: EenhedenEenheid,
         energieprestatie: EenhedenEnergieprestatie,
-        energieprestatie_soort: str,
-        label: str,
         pandsoortnaam: str,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
@@ -80,10 +78,32 @@ class EnergieprestatieJan2024(Stelselgroepversie):
             WoningwaarderingResultatenWoningwaarderingCriterium()
         )
 
+        if not energieprestatie.soort or not energieprestatie.soort.code:
+            warnings.warn(
+                f"Eenheid {eenheid.id}: Energieprestatie heeft geen soort", UserWarning
+            )
+            return woningwaardering
+
+        if not energieprestatie.label or not energieprestatie.label.code:
+            warnings.warn(
+                f"Eenheid {eenheid.id}: Energieprestatie heeft geen label", UserWarning
+            )
+            return woningwaardering
+
+        if not energieprestatie.registratiedatum:
+            warnings.warn(
+                f"Eenheid {eenheid.id}: Energieprestatie heeft geen registratiedatum",
+                UserWarning,
+            )
+            return woningwaardering
+
+        label = energieprestatie.label.code
+
+        energieprestatie_soort = energieprestatie.soort.code
+
         if (
             energieprestatie_soort
             == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
-            and energieprestatie.registratiedatum
             and energieprestatie.registratiedatum >= datetime(2021, 1, 1).astimezone()
         ):
             gebruiksoppervlakte_thermische_zone = next(
@@ -120,7 +140,6 @@ class EnergieprestatieJan2024(Stelselgroepversie):
 
                 else:
                     lookup_key = "oppervlakte_40+"
-
         else:
             woningwaardering.criterium.naam = f"{label} (oud)"
             lookup_key = "oud"
@@ -130,6 +149,26 @@ class EnergieprestatieJan2024(Stelselgroepversie):
         )
 
         waarderings_label: str | None = label
+
+        if (
+            lookup_key == "oud"
+            and energieprestatie.registratiedatum >= datetime(2015, 1, 1).astimezone()
+        ):
+            if energieprestatie.waarde is not None:
+                energie_index = float(energieprestatie.waarde)
+
+                filtered_df = df[
+                    (df["Ondergrens (exclusief)"] < energie_index)
+                    & (energie_index <= (df["Bovengrens (inclusief)"]))
+                ].pipe(dataframe_met_een_rij)
+
+                waarderings_label_index = filtered_df["Label"].values[0]
+
+                if label != waarderings_label_index:
+                    woningwaardering.criterium.naam += (
+                        f" > {waarderings_label_index} obv Energie-index"
+                    )
+                    waarderings_label = waarderings_label_index
 
         energieprestatievergoeding = next(
             (
@@ -234,18 +273,10 @@ class EnergieprestatieJan2024(Stelselgroepversie):
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-        if (
-            energieprestatie
-            and energieprestatie.label
-            and energieprestatie.label.naam
-            and energieprestatie.soort
-            and energieprestatie.soort.code
-        ):
+        if energieprestatie:
             woningwaardering = self._bereken_punten_met_label(
                 eenheid,
                 energieprestatie,
-                energieprestatie.soort.code,
-                energieprestatie.label.naam,
                 pandsoort.naam,
                 woningwaardering,
             )
