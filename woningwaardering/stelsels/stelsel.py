@@ -21,6 +21,9 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
+    Woningwaarderingstelselgroep,
+)
 
 
 class Stelsel:
@@ -195,6 +198,8 @@ class Stelsel:
             )(
                 peildatum=peildatum,
                 config=config,
+                stelsel=stelsel,
+                stelselgroep=Woningwaarderingstelselgroep[stelselgroep_config.module],
             )
             for stelselgroep_config in sorted(
                 config.stelselgroepen.values(), key=lambda x: x.uitvoeringsvolgorde

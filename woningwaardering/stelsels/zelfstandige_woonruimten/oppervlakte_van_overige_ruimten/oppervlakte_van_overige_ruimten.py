@@ -1,4 +1,5 @@
 from datetime import date
+from typing import Any
 
 from loguru import logger
 
@@ -18,6 +19,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         self,
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
+        **kwargs: dict[str, Any],
     ) -> None:
         super().__init__(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
