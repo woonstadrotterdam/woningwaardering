@@ -40,7 +40,7 @@ class Stelsel:
         self.stelsel = stelsel
         self.peildatum = peildatum
         self.stelsel_config = Stelselconfig.load(stelsel=self.stelsel)
-        self.geldige_stelselgroepen = self.select_geldige_stelselgroepen(
+        self.geldige_stelselgroepen = Stelsel.select_geldige_stelselgroepen(
             self.peildatum,
             self.stelsel,
             self.stelsel_config,
@@ -188,7 +188,7 @@ class Stelsel:
             )
 
         geldige_stelselgroepen: list[Stelselgroep] = [
-            import_class(
+            import_class(  # type: ignore[call-arg]
                 f"woningwaardering.stelsels.{stelsel.name}",
                 stelselgroep_config.class_naam,
                 Stelselgroep,

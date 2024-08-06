@@ -17,12 +17,16 @@ from woningwaardering.vera.referentiedata import (
 
 class BeschermdMonumentBmz(Stelselgroep):
     def __init__(
-        self, peildatum: date = date.today(), config: Stelselconfig | None = None
+        self,
+        peildatum: date = date.today(),
+        config: Stelselconfig | None = None,
     ) -> None:
-        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.beschermd_monument_bmz
-
-        super().__init__(peildatum=peildatum, config=config)
+        super().__init__(
+            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+            stelselgroep=Woningwaarderingstelselgroep.beschermd_monument_bmz,
+            peildatum=peildatum,
+            config=config,
+        )
 
 
 if __name__ == "__main__":  # pragma: no cover

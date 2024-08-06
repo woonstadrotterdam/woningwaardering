@@ -16,14 +16,16 @@ from woningwaardering.vera.referentiedata import (
 
 class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
     def __init__(
-        self, peildatum: date = date.today(), config: Stelselconfig | None = None
+        self,
+        peildatum: date = date.today(),
+        config: Stelselconfig | None = None,
     ) -> None:
-        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = (
-            Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw
+        super().__init__(
+            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+            stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+            peildatum=peildatum,
+            config=config,
         )
-
-        super().__init__(peildatum=peildatum, config=config)
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -16,12 +16,16 @@ from woningwaardering.vera.referentiedata import (
 
 class PriveBuitenruimten(Stelselgroep):
     def __init__(
-        self, peildatum: date = date.today(), config: Stelselconfig | None = None
+        self,
+        peildatum: date = date.today(),
+        config: Stelselconfig | None = None,
     ) -> None:
-        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.prive_buitenruimten
-
-        super().__init__(peildatum=peildatum, config=config)
+        super().__init__(
+            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+            stelselgroep=Woningwaarderingstelselgroep.prive_buitenruimten,
+            peildatum=peildatum,
+            config=config,
+        )
 
 
 if __name__ == "__main__":  # pragma: no cover
