@@ -21,9 +21,6 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
-    Woningwaarderingstelselgroep,
-)
 
 
 class Stelsel:
@@ -191,15 +188,13 @@ class Stelsel:
             )
 
         geldige_stelselgroepen: list[Stelselgroep] = [
-            import_class(
+            import_class(  # type: ignore[call-arg]
                 f"woningwaardering.stelsels.{stelsel.name}",
                 stelselgroep_config.class_naam,
                 Stelselgroep,
             )(
                 peildatum=peildatum,
                 config=config,
-                stelsel=stelsel,
-                stelselgroep=Woningwaarderingstelselgroep[stelselgroep_config.module],
             )
             for stelselgroep_config in sorted(
                 config.stelselgroepen.values(), key=lambda x: x.uitvoeringsvolgorde

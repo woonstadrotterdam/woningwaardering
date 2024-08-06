@@ -1,4 +1,3 @@
-from typing import Any, Optional
 import warnings
 from datetime import date
 
@@ -21,7 +20,6 @@ class BeschermdMonumentBmz(Stelselgroep):
         self,
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
-        **kwargs: Optional[dict[str, Any]],
     ) -> None:
         super().__init__(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
