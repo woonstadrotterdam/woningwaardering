@@ -1,9 +1,9 @@
 from datetime import date
-
+import warnings
 from loguru import logger
 
-from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -20,22 +20,23 @@ class ZelfstandigeWoonruimten(Stelsel):
         )
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
+    warnings.simplefilter("default", UserWarning)
 
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten()
-    file = open(
-        "tests/data/generiek/input/37101000032.json",
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 1, 1))
+    with open(
+        "tests/data/zelfstandige_woonruimten/input/41164000002.json",
         "r+",
-    )
-    eenheid = EenhedenEenheid.model_validate_json(file.read())
-    woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid)
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
+    ) as file:
+        eenheid = EenhedenEenheid.model_validate_json(file.read())
+        woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid)
+        print(
+            woningwaardering_resultaat.model_dump_json(
+                by_alias=True, indent=2, exclude_none=True
+            )
         )
-    )
 
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+        tabel = utils.naar_tabel(woningwaardering_resultaat)
 
-    print(tabel)
+        print(tabel)

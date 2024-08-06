@@ -1,10 +1,12 @@
 {
   "id": "41027000003",
   "bouwjaar": 1948,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Frits Ruysstraat",
     "huisnummer": "16",
@@ -18,10 +20,24 @@
     "id": "0599010000302054",
     "bagIdentificatie": "0599010000302054"
   },
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 242000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 244000
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {
@@ -43,6 +59,7 @@
     }
   ],
   "gebruiksoppervlakte": 53,
+  "monumenten": [],
   "ruimten": [
     {
       "id": "Space_82953220",

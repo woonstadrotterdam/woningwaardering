@@ -47,7 +47,7 @@ def test_Verwarming_output(
     )
 
 
-def test_OppervlakteVanVetrekken_specifiek_output(specifieke_input_en_output_model):
+def test_PuntenVoorDeWozWaarde_specifiek_output(specifieke_input_en_output_model):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
     verwarming = Verwarming(peildatum=peildatum)
     resultaat = verwarming.bereken(eenheid_input)

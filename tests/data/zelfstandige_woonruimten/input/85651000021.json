@@ -1,10 +1,12 @@
 {
   "id": "85651000021",
   "bouwjaar": 1897,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Atjehstraat",
     "huisnummer": "47",
@@ -18,12 +20,27 @@
     "id": "0599010000078889",
     "bagIdentificatie": "0599010000078889"
   },
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 282000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 298000
+    }
+  ],
   "energieprestaties": [],
   "gebruiksoppervlakte": 72,
+  "monumenten": [],
   "ruimten": [
     {
       "id": "Space_91559685",

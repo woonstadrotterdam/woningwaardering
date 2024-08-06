@@ -6,11 +6,18 @@
 
 # Woningwaardering
 
-⌛️ **Work in Progress**
+📊 **Status**
 
-![](https://progress-bar.dev/70/?title=zelfstandige_woonruimten&width=120)
+![](https://progress-bar.dev/100/?title=zelfstandige_woonruimten_jan_2024&width=120)  
+![](https://progress-bar.dev/50/?title=zelfstandige_woonruimten_jul_2024&width=120)  
+![](https://progress-bar.dev/0/?title=onzelfstandige_woonruimten_jul_2024&width=108)
 
-Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk zal zijn om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij zo veel mogelijk uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) van de corporatiesector. Het doel is om tot een completere woningwaarderingsstelsel-berekening te komen dan die nu beschikbaar zijn via tools zoals bijvoorbeeld die van de [huurcommissie](https://www.huurcommissie.nl/huurders/sociale-huurwoning/maximale-huurprijs-berekenen).
+Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk zal zijn om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) van de corporatiesector. Het doel is om tot een completere woningwaarderingsstelsel-berekening te komen dan die nu beschikbaar zijn via tools zoals bijvoorbeeld die van de [huurcommissie](https://www.huurcommissie.nl/huurders/sociale-huurwoning/maximale-huurprijs-berekenen).
+
+Momenteel wordt er gewerkt aan de implementatie van de woningwaardering van zelfstandige woonruimten volgens het gepubliceerde beleidsboek van de huurcommissie in juli 2024.
+Het beleidsboek van januari 2024 voor zelfstandige woonruimten is afgerond voor zover deze geïmplementeerd kon worden en zal vanaf nu niet meer worden uitgebreid.
+Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van januari 2024 verwijzen wij naar de [documentatie](https://github.com/woonstadrotterdam/woningwaardering/blob/main/docs/implementatietoelichting-beleidsboeken/2024/jan/zelfstandige_woonruimten.md) over de implementatie van dit beleidsboek.
+Voor meer informatie over hoe documentatie van het beleidsboek is gemaakt, verwijzen wij naar het hoofdstuk [Implementatie beleidsboek huurcommissie](https://github.com/woonstadrotterdam/woningwaardering/tree/main?tab=readme-ov-file#implementatie-beleidsboek-huurcommissie) in deze `README`.
 
 Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team Microservices [Tomer Gabay](mailto:tomer.gabay@woonstadrotterdam.nl) of één van de andere maintainers van deze repo.
 
@@ -100,6 +107,31 @@ Dit betekent niet dat er geen werkbare en geldige rij geselecteerd kan worden.
 Wel zou het kunnen dat er door het ontbreken van een `Begindatum` of `Einddatum` meerdere rijen geldig zijn voor een peildatum.
 In dit geval zal de `woningwaardering`-package een error geven die duidelijk maakt dat er geen geldige rij gekozen kan worden op basis van de peildatum voor het desbetreffende CSV-bestand.
 
+### Warnings
+
+In de `woningwaardering` package worden `UserWarnings` gegenereerd wanneer de inputdata niet volledig of correct wordt aangeleverd.
+Deze waarschuwingen worden gegeven met een warning bericht en een type warning, bijvoorbeeld:
+
+```python
+warnings.warn("Dit is een warning", UserWarning)
+```
+
+Standaard genereert de `woningwaardering` package een error wanneer een `UserWarning` wordt gegeven.
+Hoewel de package kan werken met incomplete data, is ervoor gekozen om standaard te falen bij incomplete inputdata, zodat de gebruiker hiervan op de hoogte wordt gebracht.
+Het is echter ook mogelijk om het warning filter terug te zetten naar de standaardinstellingen, waardoor een warning m.b.t. incomplete data niet leidt tot een error, maar slechts een _warning_:
+
+```python
+warnings.simplefilter("default", UserWarning)
+```
+
+Alle waarschuwingen die worden gegenereerd met `warnings.warn()`, worden standaard gelogd met `logger.warning()` en weergegeven in het standaardfout bestand.
+Mocht door de gebruiker logging worden uitgezet, dan zullen de UserWarnings altijd te zien zijn voor de gebruiker in de output van de _stderr_.
+
+#### Warning vs Exception
+
+Er wordt doorgaans in de stelgroepversies gebruik gemaakt van `warnings.warn()` in plaats van het raisen van een exception.
+Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroepen waarvoor de data wel compleet genoeg is, mits de `warnings.simplefilter` naar `default` is gezet.
+
 ## 2. Contributing
 
 ### Setup
@@ -142,11 +174,11 @@ De begin- en einddatum van de geldigheid van een stelsel wordt vastgelegd in de 
 #### Stelselgroepen
 
 De namen voor de stelselgroepen zijn te vinden in de `Woningwaarderingstelselgroep` Enum. Bijvoorbeeld: de stelselgroep voor oppervlakte van vertrekken wordt aangeduid als `Woningwaarderingstelselgroep.oppervlakte_van_vertrekken`. De implementatie van deze `Stelselgroep` bevindt zich in [woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py](woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py).
-De begin- en einddatum van de geldigheid van een stelselgroep wordt vastgelegd in de configuratie `.yml` van het betreffende stelsel.
+De begin- en einddatum van de geldigheid van een stelselgroep en de volgorde waarin de stelselgroepen moeten worden uitgevoerd wordt vastgelegd in de configuratie `.yml` van het betreffende stelsel.
 
 #### Stelselgroepversies
 
-De daadwerkelijke implementatie van een stelselgroep is een `Stelselgroepversie`. Voor stelselgroepversies wordt de naam van de stelselgroep gevolgd door het jaar waarin de versie van de stelselgroep in gebruik gaat. Bijvoorbeeld: de implementatie van de `Stelselgroepversie` voor oppervlakte van vertrekken die in gaat in het jaar 2024 bevindt zich in [woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken_2024.py](woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken_2024.py).
+De daadwerkelijke implementatie van een stelselgroep is een `Stelselgroepversie`. Voor stelselgroepversies wordt de naam van de stelselgroep gevolgd door het jaar waarin de versie van de stelselgroep in gebruik gaat. Bijvoorbeeld: de implementatie van de `Stelselgroepversie` voor oppervlakte van vertrekken die in gaat in het jaar 2024 bevindt zich in [woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken_jan_2024.py](woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken_jan_2024.py).
 Omdat het lastig is met terugwerkende kracht te achterhalen in welk jaar een versie van een stelselgroep ingegaan is, gebruiken we voor de eerste versie van een stelselgroep het jaar van de implementatie van de stelselgroep in deze module. Wanneer de berekening van een stelselgroep in een bepaald jaar niet wijzigt, wordt er geen nieuwe stelselgroepversie aangemaakt. De begin- en einddatum van de geldigheid van een stelselgroepversie wordt vastgelegd in de configuratie `.yml` van het betreffende stelsel.
 
 ### Releasemanagement
@@ -197,6 +229,11 @@ Er zijn verschillende "test-scopes" te bedenken, zoals het testen van details en
 Daarnaast is het testen van een hele keten of stelselgroep-object ook vereist.
 Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
+#### Test coverage rapport
+
+Na het uitvoeren van `pytest` wordt er een code coverage report getoond. Hierin is per file te zien welk percentage van de code in de files getest is.
+Daarnaast wordt de code coverage ook naar een file `lcov.info` geschreven. Die kan gebruikt worden in VSCode om de coverage weer te geven met een plugin zoals "Coverage Gutters".
+
 #### Conventies voor tests
 
 Tests worden toegevoegd aan de `tests`-folder in de root van de repository.
@@ -227,9 +264,26 @@ def test_OppervlakteVanVertrekken():
 
 #### Test modellen
 
-Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er eenheidmodellen (in .json format) toegevoegd in `tests/data/input/...`. De modellen volgen de VERA standaard en dienen als een testinput voor de geschreven tests. Omdat er gewerkt wordt met peildata en de berekening van een stelselgroep per jaar kan veranderen worden de outputmodellen per jaar opgeslagen. Zie bijvoorbeeld de folder `tests/data/output/zelfstandige_woonruimten/peildatum/2024-01-01`. Deze bevat de output voor de inputmodellen met als peildatum 2024-01-01 of later. Op deze manier kunnen dezelfde inputmodellen in tests met verschillende peildata getest worden. De resulterende outputs zijn met de hand nagerekend om de kwaliteit van de tests te garanderen.
+Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er eenheidmodellen (in .json format) toegevoegd in `tests/data/...`. De modellen volgen de VERA standaard en dienen als een testinput voor de geschreven tests. Omdat er gewerkt wordt met peildata en de berekening van een stelselgroep per jaar kan veranderen worden de outputmodellen per jaar opgeslagen. Zie bijvoorbeeld de folder `tests/data/zelfstandige_woonruimten/output/peildatum/2024-01-01`. Deze bevat de output voor de inputmodellen met als peildatum 2024-01-01 of later. Op deze manier kunnen dezelfde inputmodellen in tests met verschillende peildata getest worden. De resulterende outputs zijn met de hand nagerekend om de kwaliteit van de tests te garanderen.
 
-Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/data/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifieke set van regels in oppervlakte_van_vertrekken te testen.
+Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/data/zelfstandige_woonruimten/stelselgroepen/oppervlakte_van_vertrekken/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifieke set van regels in oppervlakte_van_vertrekken te testen.
+
+### Logger Guidelines
+
+In de woningwaardering package wordt de logger van `loguru` gebruikt voor logging.
+Voor het developen in de woningwaardering package worden de logging levels `DEBUG`, `INFO`, `WARNING` en `ERROR` gebruikt.
+De verschillende levels worden gebruikt voor de verschillende types van logging, zoals beschreven in de [python 3.11 documentatie](https://docs.python.org/3.11/library/logging.html#logging-levels).
+Hieronder is de tabel van de python documentatie gekopieerd waarin de verschillende logging levels staan beschreven.
+De tabel is aangevuld met de kolom "Gebruik Woningwaardering Package", waarin wordt aangegeven met voorbeelden welke soort logging gedaan wordt op de verschillende logging levels.
+
+| Level    | Numerieke waarde | Wat het betekent / Wanneer te gebruiken                                                                                                                                                                                                                                                   | Gebruik Woningwaardering Package                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| -------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| NOTSET   | 0                | Wanneer ingesteld op een logger, geeft dit aan dat bovenliggende loggers geraadpleegd moeten worden om het effectieve niveau te bepalen. Als dit nog steeds NOTSET oplevert, worden alle gebeurtenissen gelogd. Wanneer ingesteld op een handler, worden alle gebeurtenissen afgehandeld. | Wordt niet gebruikt in de woningwaardering package.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| DEBUG    | 10               | Gedetailleerde informatie, meestal alleen van belang voor een ontwikkelaar die een probleem probeert te diagnosticeren.                                                                                                                                                                   | Wordt alleen gebruikt om details weer the geven aan een developer. bijvoorbeeld: wat een functie terug geeft of welke type een variabele heeft.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| INFO     | 20               | Bevestiging dat alles werkt zoals verwacht.                                                                                                                                                                                                                                               | Bevat beschrijvingen van de werking van de code. Bijvoorbeeld: Het berekende resultaat voor een stelselgroep of welke code op basis van de input data wordt gerund.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| WARNING  | 30               | Een indicatie dat er iets onverwachts is gebeurd, of dat er in de nabije toekomst een probleem kan optreden (bijv. 'schijfruimte bijna vol'). De software werkt nog steeds zoals verwacht.                                                                                                | Een warning wordt gelogd wanneer er bijvoorbeeld iets mist in de input data of een functie deprecated is. Dit kan er toe leiden dat bepaalde code niet uitgevoerd kan worden. Voor warnings aan de package gebruiker, wordt altijd `warnings.warn()` gebruikt. Zie het kopje [warnings](#warnings) voor meer informatie over het geven van warnings voor gebruikers en hoe hier mee omgegaan wordt.                                                                                                                                                                                                                                                                         |
+| ERROR    | 40               | Vanwege een ernstiger probleem heeft de software een bepaalde functie niet kunnen uitvoeren.                                                                                                                                                                                              | Een error wordt in de woningwaardering package gelogd wanneer het gedrag verwacht is en de error een extra toelichting nodig heeft. Wanneer een error kritiek is voor het functioneren van de package wordt deze error geraisd. Ook kan het voorkomen dat de verwachte error toegestaan is. Dit kan bijvoorbeeld in een `try`/`except` patroon. Er kan dan gekozen worden om de error te loggen maar niet te raisen. Hierdoor kan het programma wel doorgaan en is het wel duidelijk dat er een `exception` heeft plaatsgevonden. Zoals een error geraisd kan worden en het programma kan laten stoppen, zo kunnen warnings ook geraisd worden om het progromma te stoppen. |
+| CRITICAL | 50               | Een ernstige fout, die aangeeft dat het programma zelf mogelijk niet meer kan blijven draaien.                                                                                                                                                                                            | Wordt niet gebruikt in de woningwaardering package.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ### Datamodellen
 
@@ -315,56 +369,9 @@ Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarm
 
 In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Dit kan bijvoorbeeld tot gevolg hebben dat er punten in mindering worden gebracht, of punten extra gegeven worden. Bijvoorbeeld bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee de zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribuut `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een github issue open om `bouwkundige_elementen` standaard in het VERA model toe te voegen: https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
 
-### Eenheidklimaatbeheersingsoort
-
-Om te bepalen of de ruimten van een eenheid als individueel of collectief verwarmd gewaardeerd dienen te worden, mist de VERA standaard een veld voor de `Eenheidklimaatbeheersingsoort` referentiedata. Dit attribuut is toegevoegd aan `EenhedenEenheid`.  
-Om dit attribuut ook aan de VERA standaard toe te voegen is
-https://github.com/Aedes-datastandaarden/vera-openapi/issues/54 aangemaakt.
-
-### Bidet en Lavet
-
-In het beleidshandboek van de huurcomissie voor het woningwaardeeringstelsel wordt voor zowel een bidet als een lavet één punt toegekend. In de huidige referentiedata ontbreken deze twee type `bouwkundigelementdetailsoort`. Zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/104.
-
 ### Verwarmd
 
 In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verwarmd is. Het attribuut `verwarmde_vertrekken_aantal` bestaat wel, maar dit bestaat op niveau van de eenheid en daarin bestaat geen onderscheid tussen vertrekken en overige ruimten. Dit is aangekaart in deze twee issues:
 
 - https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
 - https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
-
-### Tuin
-
-In de huidige referentiedata zijn er vier verschillende soorten tuinen in de vorm van een privé buitenruimte:
-
-- achtertuin
-- tuin rondom
-- voortuin
-- zijtuin
-
-Dit leidt enigszins tot onnodige complexiteit in de context van bijvoorbeeld de woningwaardering, omdat elke vorm van een privétuin gelijkwaardig wordt gewaardeerd en bij modellering van eenheden tuinen niet op dit detailniveau worden gemodelleerd volgens de Aedes ILS. Hierom hebben wij de referentiedata uitgebreid met een nieuwe, generieke tuinsoort: `tuin`. Zie ook https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/107.
-
-### Afmetingen Ruimte
-
-Voor de waardering van buitenruimten dienen de afmetingen van ruimtes doorgegeven te worden. Hiervoor zijn de volgende attributen op Eenheden-Ruimte toegevoegd:
-
-- `lengte`: de maximale lengte van de ruimte gemeten in meters.
-- `breedte`: de maximale breedte van de ruimte gemeten in meters.
-- `hoogte`: De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan `None` zijn, bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
-
-Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/63.
-
-### Parkeervoorzieningen
-
-Om parkeerzoorzieningen correct te kunnen waarderen als onderdeel van Privé-buitenruimten missen er in de VERA referentiedata een aantal soorten parkeervoorziening. Hiervoor is de referentiedata voor ruimtedetailsoort aangevuld met:
-
-- `PNS`: Parkeergarage niet specifieke plek
-- `OPS`: Open parkeergarage specifieke plek
-- `OPN`: Open parkeergarage niet specifieke plek
-- `GPN`: Gemeenschappelijke parkeerruimte niet specifieke plek
-- `GPS`: Gemeenschappelijke parkeerruimte specifieke plek
-
-Zie ook https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110.
-
-### Oppervlakten
-
-In de VERA VHE modellen bestaat een `oppervlakten` attribuut op `EenhedenEenheid`. Dit attribuut is nog niet beschikbaar in de door ons gebruikte VERA BVG modellen. Dit attribuut en de bijbehorende class `EenhedenOppervlakte` is toegevoegd in afwachting van een update in de VERA standaard. Zie ook https://github.com/Aedes-datastandaarden/vera-openapi/issues/61.

@@ -1,10 +1,12 @@
 {
   "id": "41123000005",
   "bouwjaar": 1896,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Plantageweg",
     "huisnummer": "17",
@@ -18,10 +20,24 @@
     "id": "0599010000295253",
     "bagIdentificatie": "0599010000295253"
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 978000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 987000
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {
@@ -43,6 +59,7 @@
     }
   ],
   "gebruiksoppervlakte": 170,
+  "monumenten": [],
   "ruimten": [
     {
       "id": "Space_23702354",
@@ -409,8 +426,8 @@
             "code": "AAN",
             "naam": "Aanrecht"
           },
+          "lengte": 1920,
           "extraAttributen": {
-            "lengteAanrecht": 1920,
             "ifcSoort": "IfcFurniture"
           }
         }

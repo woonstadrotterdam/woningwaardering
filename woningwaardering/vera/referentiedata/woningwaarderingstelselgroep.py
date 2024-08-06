@@ -469,6 +469,62 @@ class Woningwaarderingstelselgroep(Enum):
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
+    verkoeling_en_verwarming = Referentiedata(
+        code="VKV",
+        naam="Verkoeling en verwarming",
+        parent=Referentiedata(
+            code="ZEL",
+            naam="Zelfstandige woonruimten",
+        ),
+    )
+    """
+    Waardering van verwarmde vertrekken, overige ruimten en verkeersruimten, inclusief
+    extra punten voor verkoeling, op basis van NTA 8800 energielabels en
+    vastgestelde eisen aan koelsystemen en verwarming.
+    """
+
+    buitenruimten = Referentiedata(
+        code="BUI",
+        naam="Buitenruimten",
+        parent=Referentiedata(
+            code="ZEL",
+            naam="Zelfstandige woonruimten",
+        ),
+    )
+    """
+    Waardering van privé- en gemeenschappelijke buitenruimten, met puntenaftrek voor
+    woningen zonder buitenruimte.
+    """
+
+    gemeenschappelijke_parkeerruimten = Referentiedata(
+        code="GPA",
+        naam="Gemeenschappelijke parkeerruimten",
+        parent=Referentiedata(
+            code="ZEL",
+            naam="Zelfstandige woonruimten",
+        ),
+    )
+    """
+    Waardering van parkeerplekken in een gemeenschappelijke ruimte die exclusief
+    gebruikt worden door bewoners van minimaal twee adressen, met puntentoekenning
+    afhankelijk van type en aanwezigheid van laadpaal.
+    """
+
+    prijsopslag_monumenten_en_nieuwbouw = Referentiedata(
+        code="PMN",
+        naam="Prijsopslag monumenten en nieuwbouw",
+        parent=Referentiedata(
+            code="ZEL",
+            naam="Zelfstandige woonruimten",
+        ),
+    )
+    """
+    Prijsopslagen voor monumenten en nieuwbouw, waarbij extra percentages worden
+    toegevoegd aan de maximale huurprijs voor rijks-, gemeentelijke of provinciaal
+    aangewezen monumenten, evenals voor nieuwbouwwoningen die aan specifieke
+    criteria voldoen.
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:

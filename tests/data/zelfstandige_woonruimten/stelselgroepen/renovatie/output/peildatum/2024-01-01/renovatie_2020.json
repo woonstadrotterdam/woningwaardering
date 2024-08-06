@@ -1,0 +1,25 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "REN",
+          "naam": "Renovatie"
+        }
+      },
+      "punten": 2.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Renovatie 2020"
+          },
+          "punten": 2.0
+        }
+      ]
+    }
+  ]
+}

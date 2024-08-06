@@ -1,10 +1,12 @@
 {
   "id": "87402000003",
   "bouwjaar": 1898,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Oranjeboomstraat",
     "huisnummer": "355",
@@ -18,12 +20,27 @@
     "id": "0599010000040514",
     "bagIdentificatie": "0599010000040514"
   },
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 170000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 170000
+    }
+  ],
   "energieprestaties": [],
   "gebruiksoppervlakte": 50,
+  "monumenten": [],
   "ruimten": [
     {
       "id": "Space_29509928",

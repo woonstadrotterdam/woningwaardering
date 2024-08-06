@@ -1,0 +1,142 @@
+{
+  "bouwjaar": 1990,
+  "klimaatbeheersing": [
+    {
+      "code": "COL",
+      "naam": "Collectief"
+    }
+  ],
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 59999
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 69999
+    }
+  ],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2018-06-22",
+      "einddatum": "2028-06-22",
+      "registratiedatum": "2018-07-27T09:05:06.440000+02:00",
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "1.67"
+    }
+  ],
+  "monumenten": [],
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 8.80793,
+      "oppervlakte": 3.59507,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2100
+        }
+      ]
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 7.67917,
+      "oppervlakte": 3.13436,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Douche",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "DOU",
+            "naam": "Douche"
+          }
+        },
+        {
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel"
+          }
+        },
+        {
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "CLO",
+            "naam": "Closetcombinatie (Toilet)"
+          }
+        }
+      ]
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 52.5102,
+      "oppervlakte": 21.4327,
+      "verwarmd": true,
+      "bouwkundigeElementen": []
+    }
+  ]
+}

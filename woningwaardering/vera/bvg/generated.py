@@ -43,38 +43,6 @@ class GebouwSleutels(BaseModel):
     """
 
 
-class PandSleutels(BaseModel):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
-    id: Optional[str] = None
-    """
-    De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
-    """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
-    """
-    De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
-    """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
-    """
-    De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
-    """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
-    """
-    Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
-    """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
-    """
-    Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
-    """
-    code: Optional[str] = None
-    """
-    De unieke code (Bijvoorbeeld om te tonen of te zoeken)
-    """
-
-
 class Referentiedata(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +60,14 @@ class Referentiedata(BaseModel):
     """
     De bovenliggende referentiedata in het geval er sprake is van een hierarchische relatie tussen referentiedata.
     """
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Referentiedata):
+            return self.code == other.code
+        return False
+
+    def __hash__(self) -> int:
+        return hash(self.code)
 
 
 class ClusterSleutels(BaseModel):
@@ -1082,6 +1058,38 @@ class EenhedenMarktwaarde(BaseModel):
     """
 
 
+class EenhedenOppervlakte(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    id: Optional[str] = None
+    """
+    De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
+    """
+    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    """
+    De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
+    """
+    id_gegevensbeheerder: Optional[str] = Field(
+        default=None, alias="idGegevensbeheerder"
+    )
+    """
+    De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
+    """
+    code: Optional[str] = None
+    """
+    De unieke code (Bijvoorbeeld om te tonen of te zoeken)
+    """
+    soort: Optional[Referentiedata] = None
+    """
+    Het soort oppervlakte. Bijv. GO (Gebruiksoppervlakte) of BVO (Brutovloeroppervlak) Referentiedatasoort OPPERVLAKTESOORT.
+    """
+    waarde: Optional[str] = None
+    """
+    De waarde van de oppervlakte in vierkante meters (m2)
+    """
+
+
 class EenhedenPand(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -1111,6 +1119,10 @@ class EenhedenPand(BaseModel):
     code: Optional[str] = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
+    """
+    soort: Optional[Referentiedata] = None
+    """
+    Het soort pand. Eengezins of meergezins. Referentiedatasoort PANDSOORT.
     """
     lift_aanwezig: Optional[bool] = Field(default=None, alias="liftAanwezig")
     """
@@ -1238,6 +1250,50 @@ class EenhedenRelatierol(BaseModel):
     """
 
 
+class EenhedenRenovatie(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    id: Optional[str] = None
+    """
+    De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
+    """
+    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    """
+    De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
+    """
+    id_gegevensbeheerder: Optional[str] = Field(
+        default=None, alias="idGegevensbeheerder"
+    )
+    """
+    De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
+    """
+    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    """
+    Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
+    """
+    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    """
+    Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
+    """
+    code: Optional[str] = None
+    """
+    De unieke code (Bijvoorbeeld om te tonen of te zoeken)
+    """
+    omschrijving: Optional[str] = None
+    """
+    De omschrijving van de renovatie(s) behorend bij de eenheid.
+    """
+    datum: Optional[date] = None
+    """
+    De datum dat het object is gerenoveerd.
+    """
+    bedrag_investering: Optional[float] = Field(default=None, alias="bedragInvestering")
+    """
+    Bedrag van de investering in de renovatie van de woning.
+    """
+
+
 class EenhedenRuimte(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -1280,9 +1336,25 @@ class EenhedenRuimte(BaseModel):
     """
     De omschrijving van de ruimte.
     """
+    breedte: Optional[float] = None
+    """
+    Breedte van de ruimte in milimeter.
+    """
+    hoogte: Optional[float] = None
+    """
+    Hoogte van de ruimte in milimeter.
+    """
     inhoud: Optional[float] = None
     """
     De inhoud van de ruimte in m3.
+    """
+    klimaatbeheersing: Optional[Referentiedata] = None
+    """
+    Referentiedatasoort EENHEIDKLIMAATBEHEERSING.
+    """
+    lengte: Optional[float] = None
+    """
+    Lengte van de ruimte in milimeter.
     """
     ligging: Optional[Referentiedata] = None
     """
@@ -1317,22 +1389,6 @@ class EenhedenRuimte(BaseModel):
     verwarmd: Optional[bool] = Field(default=None, alias="verwarmd")
     """
     Geeft aan of de ruimte verwarmd wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
-    """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/63
-    breedte: Optional[float] = None
-    """
-    De maximale breedte van de ruimte gemeten in meters.
-    """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/63
-    lengte: Optional[float] = None
-    """
-    De maximale lengte van de ruimte gemeten in meters.
-    """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/63
-    hoogte: Optional[float] = None
-    """
-    De maximale vrije hoogte van de ruimte gemeten in meters. Deze waarde kan None zijn,
-    bijvoorbeeld bij een tuin waarvan de vrije hoogte oneindig is.
     """
 
 
@@ -1789,7 +1845,7 @@ class PeiltijdstipMaterieel(RootModel[AwareDatetime]):
     root: AwareDatetime
 
 
-class BouwkundigElementenBouwdeel(BaseModel):
+class PandSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
@@ -1819,21 +1875,9 @@ class BouwkundigElementenBouwdeel(BaseModel):
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    soort: Optional[Referentiedata] = None
     """
-    De naam van het bouwdeel.
-    """
-    omschrijving: Optional[str] = None
-    """
-    De omschrijving van het bouwdeel.
-    """
-    gebouw: Optional[GebouwSleutels] = None
-    """
-    Het gebouw behorend bij het bouwdeel.
-    """
-    pand: Optional[PandSleutels] = None
-    """
-    Het pand behorend bij het bouwdeel.
+    Het soort pand. Eengezins of meergezins. Referentiedatasoort PANDSOORT.
     """
 
 
@@ -2369,6 +2413,54 @@ class Informatieobject(BaseModel):
     """
 
 
+class BouwkundigElementenBouwdeel(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    id: Optional[str] = None
+    """
+    De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
+    """
+    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    """
+    De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
+    """
+    id_gegevensbeheerder: Optional[str] = Field(
+        default=None, alias="idGegevensbeheerder"
+    )
+    """
+    De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
+    """
+    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    """
+    Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
+    """
+    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    """
+    Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
+    """
+    code: Optional[str] = None
+    """
+    De unieke code (Bijvoorbeeld om te tonen of te zoeken)
+    """
+    naam: Optional[str] = None
+    """
+    De naam van het bouwdeel.
+    """
+    omschrijving: Optional[str] = None
+    """
+    De omschrijving van het bouwdeel.
+    """
+    gebouw: Optional[GebouwSleutels] = None
+    """
+    Het gebouw behorend bij het bouwdeel.
+    """
+    pand: Optional[PandSleutels] = None
+    """
+    Het pand behorend bij het bouwdeel.
+    """
+
+
 class BouwkundigElementenRelatieBasis(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -2659,6 +2751,11 @@ class WoningwaarderingResultatenWoningwaardering(BaseModel):
     """
     Bevat een niet numerieke waarde van de woningwaardering.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
+    opslagpercentage: Optional[float] = None
+    """
+    Het huurprijsopslagpercentage dat is toegekend.
+    """
 
 
 class WoningwaarderingResultatenWoningwaarderingGroep(BaseModel):
@@ -2714,6 +2811,11 @@ class WoningwaarderingResultatenWoningwaarderingGroep(BaseModel):
     )
     """
     De woningwaarderingen behorend bij de woningwaardering groep.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
+    opslagpercentage: Optional[float] = None
+    """
+    Het huurprijsopslagpercentage dat is toegekend.
     """
 
 
@@ -2778,6 +2880,18 @@ class WoningwaarderingResultatenWoningwaarderingResultaat(BaseModel):
     stelsel: Optional[Referentiedata] = None
     """
     Het woningwaardering stelsel geeft aan welk puntensysteem voor de eenheid van toepassing is: het puntensysteem voor zelfstandige woonruimten, het puntensysteem voor onzelfstandige woonruimten, of het puntensysteem voor woonwagens en standplaatsen. Referentiedatasoort WONINGWAARDERINGSTELSEL.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
+    huurprijsopslag: Optional[float] = None
+    """
+    De huurprijsopslag in euro's die boven de maximale huurprijs mag worden gerekend.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
+    maximale_huur_inclusief_opslag: Optional[float] = Field(
+        default=None, alias="maximaleHuurInclusiefOpslag"
+    )
+    """
+    De maximale huurprijs inclusief de huurprijsopslag.
     """
 
 
@@ -3156,6 +3270,10 @@ class EenhedenEenheid(BaseModel):
     """
     Het onderhoudslabel geeft aan hoe hoog of laag het onderhoudsniveau van het betreffende eenheid moet zijn. Hierbij wordt rekening gehouden met het soort bewoners en de toekomst van het pand. Referentiedatasoort ONDERHOUDSLABEL.
     """
+    oppervlakten: Optional[list[EenhedenOppervlakte]] = None
+    """
+    De verschillende oppervlakten die gedefinieerd zijn (bijv. vanuit de NEN) voor een eenheid. Bijv. het gebruiksoppervlak (GO) of functioneel nuttig oppervlak (FNO).
+    """
     panden: Optional[list[EenhedenPand]] = None
     """
     De panden behorend bij een eenheid.
@@ -3175,6 +3293,10 @@ class EenhedenEenheid(BaseModel):
     relaties: Optional[list[EenhedenRelatie]] = None
     """
     Bij.v de eigenaar, beheerder en contactpersonen die gekoppeld zijn aan de eenheid. Met de koppeling naar Relatierol kan de soort rol van de relatie ten opzichte van de eenheid vastgelegd worden.
+    """
+    renovatie: Optional[EenhedenRenovatie] = None
+    """
+    De details van de laatste renovatie van de eenheid.
     """
     ruimten: Optional[list[EenhedenRuimte]] = None
     """
@@ -3196,9 +3318,11 @@ class EenhedenEenheid(BaseModel):
     """
     De totale inhoud van de eenheid in m3. Zowel bewoonbare als onbewoonbare vertrekken worden hierbij meegeteld.
     """
-    totale_oppervlakte: Optional[float] = Field(default=None, alias="totaleOppervlakte")
+    totale_oppervlakte: Optional[float] = Field(
+        default=None, alias="totaleOppervlakte", json_schema_extra={"deprecated": True}
+    )
     """
-    De totale oppervlakte van een eenheid. Vertrekken die niet bewoonbaar zijn, worden hierbij meegeteld. Let op: niet te verwarren met de voor de dVi vereiste "gebruiksoppervlakte".
+    De totale oppervlakte van een eenheid. Vertrekken die niet bewoonbaar zijn, worden hierbij meegeteld. Let op: niet te verwarren met de voor de dVi vereiste "gebruiksoppervlakte". OBSOLETE
     """
     uit_exploitatie_reden: Optional[Referentiedata] = Field(
         default=None, alias="uitExploitatieReden"
@@ -3257,23 +3381,6 @@ class EenhedenEenheid(BaseModel):
     )
     """
     De omschrijving van de zorgfaciliteit behorende bij de eenheid.
-    """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/54
-    klimaatbeheersingsoort: Optional[Referentiedata] = None
-    """
-    Het soort klimaatbeheersing. Bijvoorbeeld: individueel of collectief. Referentiedatasoort EENHEIDKLIMAATBEHEERSINGSOORT.
-    """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/57
-    woningtype: Optional[Referentiedata] = None
-    """
-    Het type woning: eengezinswoning of meergezinswoning. Referentiedatasoort WONINGTYPE.
-    """
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/61
-    oppervlakten: Optional[list[EenhedenOppervlakte]] = Field(
-        default=None, alias="verbondenRuimten"
-    )
-    """
-    De verschillende oppervlakten die gedefinieerd zijn (bijv. vanuit de NEN) voor een eenheid. Bijv. het gebruiksoppervlak (GO) of functioneel nuttig oppervlak (FNO).
     """
 
 
@@ -3426,11 +3533,11 @@ class BouwkundigElementenBouwkundigElement(BaseModel):
     """
     brandwerendheid: Optional[Referentiedata] = None
     """
-    Aedes ILS - De brandwerendheidscore van het element vlg de NEN-EN 13501 classificering, indien van toepassing voor het specifieke element. Relatie met IFC codering (FireRating) Referentiedatasoort BRANDWERENDHEIDSCORE.
+    De brandwerendheidscore van het element vlg de NEN-EN 13501 classificering, indien van toepassing voor het specifieke element. Relatie met IFC codering (FireRating) Referentiedatasoort BRANDWERENDHEIDSCORE.
     """
     breedte: Optional[float] = None
     """
-    Aedes ILS - Breedte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
+    Breedte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
     cluster: Optional[ClusterSleutels] = None
     """
@@ -3438,19 +3545,19 @@ class BouwkundigElementenBouwkundigElement(BaseModel):
     """
     constructief: Optional[bool] = None
     """
-    Aedes ILS - Geeft aan of het bouwkundig element onderdeel is van de constructie van de eenheid.
+    Geeft aan of het bouwkundig element onderdeel is van de constructie van de eenheid.
     """
     diameter: Optional[float] = None
     """
-    Aedes ILS - Diameter van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
+    Diameter van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
     diepte: Optional[float] = None
     """
-    Aedes ILS - Diepte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
+    Diepte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
     dikte: Optional[float] = None
     """
-    Aedes ILS - Dikte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
+    Dikte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
     eenheid: Optional[EenheidSleutels] = None
     """
@@ -3458,7 +3565,7 @@ class BouwkundigElementenBouwkundigElement(BaseModel):
     """
     exterieur: Optional[bool] = None
     """
-    Aedes ILS - Geeft aan of het bouwkundig element onderdeel is van het exterieur van de betreffende eenheid.
+    Geeft aan of het bouwkundig element onderdeel is van het exterieur van de betreffende eenheid.
     """
     garanties: Optional[list[BouwkundigElementenGarantie]] = None
     """
@@ -3466,15 +3573,15 @@ class BouwkundigElementenBouwkundigElement(BaseModel):
     """
     hoogte: Optional[float] = None
     """
-    Aedes ILS - Hoogte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
+    Hoogte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
     inhoud: Optional[float] = None
     """
-    Aedes ILS - Inhoud van het bouwkundig element in kubieke meter, indien van toepassing voor het specifieke element.
+    Inhoud van het bouwkundig element in kubieke meter, indien van toepassing voor het specifieke element.
     """
     lengte: Optional[float] = None
     """
-    Aedes ILS - Lengte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
+    Lengte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
     locatie: Optional[Referentiedata] = None
     """
@@ -3484,17 +3591,17 @@ class BouwkundigElementenBouwkundigElement(BaseModel):
         default=None, alias="materiaalDetailsoort"
     )
     """
-    Aedes ILS - het detailsoort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALDETAILSOORT.
+    het detailsoort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALDETAILSOORT.
     """
     materiaal_soort: Optional[Referentiedata] = Field(
         default=None, alias="materiaalSoort"
     )
     """
-    Aedes ILS - het soort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALSOORT.
+    het soort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALSOORT.
     """
     oppervlakte: Optional[float] = None
     """
-    Aedes ILS - Oppervlakte van het bouwkundig element in vierkante meters, indien van toepassing voor het specifieke element.
+    Oppervlakte van het bouwkundig element in vierkante meters, indien van toepassing voor het specifieke element.
     """
     overeenkomsten: Optional[list[OvereenkomstSleutels]] = None
     """
@@ -3517,36 +3624,3 @@ class BouwkundigElementenBouwkundigElementbericht(
     model_config = ConfigDict(
         populate_by_name=True,
     )
-
-
-class EenhedenOppervlakte(BaseModel):
-    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/61
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
-    id: Optional[str] = None
-    """
-    De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
-    """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
-    """
-    De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
-    """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
-    """
-    De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
-    """
-    code: Optional[str] = None
-    """
-    De unieke code (Bijvoorbeeld om te tonen of te zoeken)
-    """
-    soort: Optional[Referentiedata] = None
-    """
-    Het soort oppervlakte. Bijv. GO (Gebruiksoppervlakte) of BVO (Brutovloeroppervlak) Referentiedatasoort OPPERVLAKTESOORT.
-    """
-    waarde: Optional[str] = None
-    """
-    De waarde van de oppervlakte in vierkante meters (m2)
-    """

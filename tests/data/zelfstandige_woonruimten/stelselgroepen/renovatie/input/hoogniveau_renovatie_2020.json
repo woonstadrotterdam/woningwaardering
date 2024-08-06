@@ -1,0 +1,27 @@
+{
+  "bouwjaar": 1912,
+  "renovatie": {
+    "omschrijving": "hoogniveau renovatie",
+    "datum": "2020-01-01",
+    "bedragInvestering": 10000
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EP2"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2021-02-23",
+      "einddatum": "2027-02-23",
+      "registratiedatum": "2021-02-23T09:55:37+01:00",
+      "label": {
+        "code": "A++++",
+        "naam": "A++++"
+      },
+      "waarde": "0.3"
+    }
+  ]
+}

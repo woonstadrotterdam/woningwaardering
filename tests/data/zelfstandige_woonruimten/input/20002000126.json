@@ -1,0 +1,284 @@
+{
+  "id": "20002000126",
+  "bouwjaar": 1993,
+  "adres": {
+    "huisnummer": "146",
+    "huisnummerToevoeging": "",
+    "postcode": "3024NE",
+    "straatnaam": "Kees van Dongenhof"
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000342737",
+    "bagIdentificatie": "0599010000342737"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EP2",
+        "naam": "Primair energieverbruik - woningbouw"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2024-03-27",
+      "einddatum": "2034-03-27",
+      "registratiedatum": "2024-03-27T14:51:32.980000+01:00",
+      "label": {
+        "code": "F",
+        "naam": "F"
+      },
+      "waarde": "160.92"
+    }
+  ],
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "82.77"
+    }
+  ],
+  "panden": [
+    {
+      "idExtern": "0599100000641232",
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "ruimten": [
+    {
+      "id": "Space_90696842",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 67.8456,
+      "oppervlakte": 15.7414,
+      "bouwkundigeElementen": [
+        {
+          "id": "Wastafel_90696845",
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel"
+          }
+        },
+        {
+          "id": "Aanrecht_90696849",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2100.0
+        }
+      ],
+      "verwarmd": true
+    },
+    {
+      "id": "Space_90696852",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 171.627,
+      "oppervlakte": 39.8206,
+      "bouwkundigeElementen": [],
+      "verwarmd": true
+    },
+    {
+      "id": "Space_90696911",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "inhoud": 84.788,
+      "oppervlakte": 19.6724,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_90696915",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 7.62224,
+      "oppervlakte": 1.7685,
+      "bouwkundigeElementen": [
+        {
+          "id": "Douche_90696919",
+          "naam": "Douche",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "DOU",
+            "naam": "Douche"
+          }
+        },
+        {
+          "id": "Wastafel_90696922",
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel"
+          }
+        }
+      ],
+      "verwarmd": true
+    },
+    {
+      "id": "Space_90696925",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schacht"
+      },
+      "naam": "Schacht",
+      "inhoud": 3.76263,
+      "oppervlakte": 0.873,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_90696929",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "inhoud": 5.0427,
+      "oppervlakte": 1.17,
+      "bouwkundigeElementen": [
+        {
+          "id": "Closetcombinatie_90696933",
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "CLO",
+            "naam": "Closetcombinatie (Toilet)"
+          }
+        },
+        {
+          "id": "Fontein_90696936",
+          "naam": "Fontein",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "FON",
+            "naam": "Fontein"
+          }
+        }
+      ],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_90696940",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "ENT",
+        "naam": "Entree"
+      },
+      "naam": "Entree",
+      "inhoud": 20.2936,
+      "oppervlakte": 4.7085,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    }
+  ],
+  "wozEenheden": [
+    {
+      "vastgesteldeWaarde": 261000.0,
+      "waardepeildatum": "2023-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 250000.0,
+      "waardepeildatum": "2022-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 205000.0,
+      "waardepeildatum": "2021-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 166000.0,
+      "waardepeildatum": "2020-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 142000.0,
+      "waardepeildatum": "2019-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 137000.0,
+      "waardepeildatum": "2018-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 128000.0,
+      "waardepeildatum": "2017-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 61000.0,
+      "waardepeildatum": "2016-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 59000.0,
+      "waardepeildatum": "2015-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 59000.0,
+      "waardepeildatum": "2014-01-01"
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 {
   "id": "41162000015",
   "bouwjaar": 1949,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Rubensstraat",
     "huisnummer": "10",
@@ -18,10 +20,24 @@
     "id": "0599010000302221",
     "bagIdentificatie": "0599010000302221"
   },
-  "woningtype": {
-    "code": "MGW",
-    "naam": "Meergezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 273000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 282000
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {
@@ -43,6 +59,7 @@
     }
   ],
   "gebruiksoppervlakte": 66,
+  "monumenten": [],
   "ruimten": [
     {
       "id": "Space_23758614",

@@ -103,6 +103,7 @@ from .inspectierapportsoort import Inspectierapportsoort
 from .inspectierapportstatus import Inspectierapportstatus
 from .kandidaatdetailstatus import Kandidaatdetailstatus
 from .kandidaatstatus import Kandidaatstatus
+from .kwaliteitsmetingverzoeksoort import Kwaliteitsmetingverzoeksoort
 from .kwaliteitsniveau import Kwaliteitsniveau
 from .leningaflosvorm import Leningaflosvorm
 from .leningdetailsoort import Leningdetailsoort
@@ -131,6 +132,7 @@ from .overeenkomstkoppelingdetailstatus import Overeenkomstkoppelingdetailstatus
 from .overeenkomstkoppelingstatus import Overeenkomstkoppelingstatus
 from .overeenkomstsoort import Overeenkomstsoort
 from .overeenkomststatus import Overeenkomststatus
+from .pandsoort import Pandsoort
 from .passendheiddetailsoort import Passendheiddetailsoort
 from .passendheidssoort import Passendheidssoort
 from .prestatieafspraak import Prestatieafspraak
@@ -186,7 +188,7 @@ from .vertrouwelijkheid import Vertrouwelijkheid
 from .voorrangdetailsoort import Voorrangdetailsoort
 from .voorrangsoort import Voorrangsoort
 from .vragenlijstregelherkomst import Vragenlijstregelherkomst
-from .woningtype import Woningtype
+from .vragenlijstregelonderwerpsoort import Vragenlijstregelonderwerpsoort
 from .woningwaarderingstelsel import Woningwaarderingstelsel
 from .woningwaarderingstelselgroep import Woningwaarderingstelselgroep
 from .woonsituatiesoort import Woonsituatiesoort
@@ -305,6 +307,7 @@ __all__ = [
     "Inspectierapportstatus",
     "Kandidaatdetailstatus",
     "Kandidaatstatus",
+    "Kwaliteitsmetingverzoeksoort",
     "Kwaliteitsniveau",
     "Leningaflosvorm",
     "Leningdetailsoort",
@@ -333,6 +336,7 @@ __all__ = [
     "Overeenkomstkoppelingstatus",
     "Overeenkomstsoort",
     "Overeenkomststatus",
+    "Pandsoort",
     "Passendheiddetailsoort",
     "Passendheidssoort",
     "Prestatieafspraak",
@@ -388,7 +392,7 @@ __all__ = [
     "Voorrangdetailsoort",
     "Voorrangsoort",
     "Vragenlijstregelherkomst",
-    "Woningtype",
+    "Vragenlijstregelonderwerpsoort",
     "Woningwaarderingstelsel",
     "Woningwaarderingstelselgroep",
     "Woonsituatiesoort",

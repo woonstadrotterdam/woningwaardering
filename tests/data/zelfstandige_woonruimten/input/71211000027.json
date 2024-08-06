@@ -1,10 +1,12 @@
 {
   "id": "71211000027",
   "bouwjaar": 1919,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Polslandstraat",
     "huisnummer": "37",
@@ -18,10 +20,24 @@
     "id": "0599010000307252",
     "bagIdentificatie": "0599010000307252"
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 159000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 169000
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {
@@ -43,6 +59,7 @@
     }
   ],
   "gebruiksoppervlakte": 53,
+  "monumenten": [],
   "ruimten": [
     {
       "id": "Space_57380186",

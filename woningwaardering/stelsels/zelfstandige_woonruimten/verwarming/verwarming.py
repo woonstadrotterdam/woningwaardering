@@ -3,6 +3,7 @@ from datetime import date
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.config.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -14,13 +15,20 @@ from woningwaardering.vera.referentiedata import (
 
 
 class Verwarming(Stelselgroep):
-    def __init__(self, peildatum: date = date.today()) -> None:
-        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.verwarming
-        super().__init__(peildatum=peildatum)
+    def __init__(
+        self,
+        peildatum: date = date.today(),
+        config: Stelselconfig | None = None,
+    ) -> None:
+        super().__init__(
+            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+            stelselgroep=Woningwaarderingstelselgroep.verwarming,
+            peildatum=peildatum,
+            config=config,
+        )
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     verwarming = Verwarming()

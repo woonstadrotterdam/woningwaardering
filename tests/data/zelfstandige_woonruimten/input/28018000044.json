@@ -1,10 +1,12 @@
 {
   "id": "28018000044",
   "bouwjaar": 1992,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Baardsestraat",
     "huisnummer": "14",
@@ -18,12 +20,27 @@
     "id": "0599010000094913",
     "bagIdentificatie": "0599010000094913"
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 250000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 260000
+    }
+  ],
   "energieprestaties": [],
   "gebruiksoppervlakte": 87,
+  "monumenten": [],
   "ruimten": [
     {
       "id": "Space_20268173",

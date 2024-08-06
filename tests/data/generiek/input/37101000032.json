@@ -1,10 +1,12 @@
 {
   "id": "37101000032",
   "bouwjaar": 1924,
-  "klimaatbeheersingsoort": {
-    "code": "IND",
-    "naam": "Individueel"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
   "adres": {
     "straatnaam": "Nieuwe Boezemstraat",
     "huisnummer": "27",
@@ -18,10 +20,24 @@
     "id": "0599010000485697",
     "bagIdentificatie": "0599010000485697"
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 618000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 643000
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {

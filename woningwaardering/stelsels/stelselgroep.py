@@ -1,4 +1,3 @@
-from abc import ABC
 from datetime import date
 from typing import Type
 
@@ -18,19 +17,56 @@ from woningwaardering.vera.referentiedata import (
 )
 
 
-class _StelselgroepABC(ABC):
+class Stelselgroep:
+    """Initialiseert een Stelselgroep.
+
+    Args:
+        stelsel (Woningwaarderingstelsel): Het stelsel (referentie data) waartoe de stelselgroep behoort.
+        stelselgroep (Woningwaarderingstelselgroep): De stelselgroep (refenrentie data).
+        peildatum (date, optional): De peildatum voor de waardering".
+        config (Stelselconfig | None, optional): Een optionele configuratie. Defaults naar None.
+    """
+
     def __init__(
         self,
         stelsel: Woningwaarderingstelsel,
         stelselgroep: Woningwaarderingstelselgroep,
-        peildatum: date,
+        peildatum: date = date.today(),
+        config: Stelselconfig | None = None,
     ) -> None:
-        super().__init__()
         self.stelsel = stelsel
         self.stelselgroep = stelselgroep
-        self.geldig_versie = self.select_stelselgroepversie(
-            stelsel, stelselgroep, peildatum
+        self.peildatum = peildatum
+
+        if config is None:
+            config = Stelselconfig.load(stelsel=self.stelsel)
+        self.config = config
+
+        self.geldige_versie = Stelselgroep.select_stelselgroepversie(
+            self.stelsel, self.stelselgroep, self.peildatum, self.config
         )
+
+    def bereken(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
+    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        """Bereken de woningwaardering voor een specifieke eenheid op stelselgroep-niveau.
+
+        Args:
+            eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None, optional): Het resultaat van de woningwaardering.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaarderingGroep: Het resultaat van de woningwaardering voor de gehele groep.
+        """
+        woningwaardering_resultaat = (
+            woningwaardering_resultaat
+            or WoningwaarderingResultatenWoningwaarderingResultaat()
+        )
+        return self.geldige_versie.bereken(eenheid, woningwaardering_resultaat)
 
     @staticmethod
     def select_stelselgroepversie(
@@ -66,7 +102,7 @@ class _StelselgroepABC(ABC):
         ]
 
         if not geldige_stelselgroep_versie_configs:
-            raise ValueError(
+            raise NotImplementedError(
                 f"geen geldige stelselgroep configuratie gevonden voor stelsel {stelsel} met peildatum {peildatum}"
             )
 
@@ -75,7 +111,7 @@ class _StelselgroepABC(ABC):
                 f"meerdere geldige stelselgroep configuraties gevonden voor {stelsel.value.naam} met peildatum {peildatum}: {geldige_stelselgroep_versie_configs}"
             )
 
-        logger.debug(
+        logger.info(
             f"{stelsel.value.naam}: stelselgroep '{stelselgroep}' is geldig op peildatum {peildatum}."
         )
         logger.debug(f"{stelsel.value.naam}: versies: {stelselgroep_config.versies}")
@@ -88,49 +124,4 @@ class _StelselgroepABC(ABC):
             Stelselgroepversie,  # type: ignore[type-abstract] # https://github.com/python/mypy/issues/4717
         )
 
-        return stelselgroep_versie()
-
-
-class Stelselgroep(_StelselgroepABC):
-    """Initialiseert een Stelselgroep.
-
-    Args:
-        peildatum (date, optional): De peildatum voor de waardering".
-        config (Stelselconfig | None, optional): Een optionele configuratie. Defaults naar None.
-    """
-
-    def __init__(
-        self,
-        peildatum: date = date.today(),
-        config: Stelselconfig | None = None,
-    ) -> None:
-        self.peildatum = peildatum
-
-        if config is None:
-            config = Stelselconfig.load(stelsel=self.stelsel)
-
-        self.geldige_versie = self.select_stelselgroepversie(
-            self.stelsel, self.stelselgroep, self.peildatum, config
-        )
-
-    def bereken(
-        self,
-        eenheid: EenhedenEenheid,
-        woningwaardering_resultaat: (
-            WoningwaarderingResultatenWoningwaarderingResultaat | None
-        ) = None,
-    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        """Bereken de woningwaardering voor een specifieke eenheid op stelselgroep-niveau.
-
-        Args:
-            eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
-            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None, optional): Het resultaat van de woningwaardering.
-
-        Returns:
-            WoningwaarderingResultatenWoningwaarderingGroep: Het resultaat van de woningwaardering voor de gehele groep.
-        """
-        woningwaardering_resultaat = (
-            woningwaardering_resultaat
-            or WoningwaarderingResultatenWoningwaarderingResultaat()
-        )
-        return self.geldige_versie.bereken(eenheid, woningwaardering_resultaat)
+        return stelselgroep_versie(peildatum)

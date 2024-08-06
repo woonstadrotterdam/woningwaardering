@@ -14,10 +14,30 @@
     "id": "0599010000310211",
     "bagIdentificatie": "0599010000310211"
   },
-  "woningtype": {
-    "code": "EGW",
-    "naam": "Eengezinswoning"
-  },
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 216000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 226000
+    }
+  ],
   "energieprestaties": [
     {
       "soort": {
@@ -39,6 +59,7 @@
     }
   ],
   "gebruiksoppervlakte": 82,
+  "monumenten": [],
   "oppervlakten": [
     {
       "soort": {

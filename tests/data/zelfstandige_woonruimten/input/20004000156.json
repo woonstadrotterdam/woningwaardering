@@ -1,0 +1,379 @@
+{
+  "id": "20004000156",
+  "bouwjaar": 1993,
+  "adres": {
+    "huisnummer": "379",
+    "huisnummerToevoeging": "",
+    "postcode": "3024EB",
+    "straatnaam": "Puntegaalstraat"
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010000360260",
+    "bagIdentificatie": "0599010000360260"
+  },
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2017-03-21",
+      "einddatum": "2027-03-21",
+      "registratiedatum": "2018-01-31T08:32:39.580000+01:00",
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "1.74"
+    }
+  ],
+  "oppervlakten": [],
+  "panden": [
+    {
+      "idExtern": "0599100000665539",
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "ruimten": [
+    {
+      "id": "Space_88554482",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 19.9694,
+      "oppervlakte": 5.26896,
+      "bouwkundigeElementen": [
+        {
+          "id": "Radiator_88554483",
+          "naam": "Radiator",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening algemeen"
+          },
+          "detailSoort": {
+            "code": "RAD",
+            "naam": "Radiator"
+          }
+        },
+        {
+          "id": "Wastafel_88554484",
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel"
+          }
+        },
+        {
+          "id": "Douche_88554485",
+          "naam": "Douche",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "DOU",
+            "naam": "Douche"
+          }
+        },
+        {
+          "id": "Closetcombinatie_88554486",
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "CLO",
+            "naam": "Closetcombinatie (Toilet)"
+          }
+        }
+      ],
+      "verwarmd": true
+    },
+    {
+      "id": "Space_88554487",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "MET",
+        "naam": "Meterruimte"
+      },
+      "naam": "Meterruimte",
+      "inhoud": 4.01892,
+      "oppervlakte": 1.0604,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88554488",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 70.1937,
+      "oppervlakte": 18.5208,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88554489",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "ENT",
+        "naam": "Entree"
+      },
+      "naam": "Entree",
+      "inhoud": 24.1445,
+      "oppervlakte": 6.26911,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88554490",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "inhoud": 26.7435,
+      "oppervlakte": 7.1724,
+      "lengte": 7.5,
+      "breedte": 0.956,
+      "hoogte": 3.728,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88559327",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "inhoud": 46.731,
+      "oppervlakte": 14.9869,
+      "lengte": 7.382,
+      "breedte": 2.03,
+      "hoogte": 3.118,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88559328",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "inhoud": 16.4526,
+      "oppervlakte": 5.8875,
+      "lengte": 7.26,
+      "breedte": 0.811,
+      "hoogte": 2.794,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88559330",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 16.963,
+      "oppervlakte": 4.10198,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88559333",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "VID",
+        "naam": "Vide"
+      },
+      "naam": "Vide",
+      "inhoud": 11.8862,
+      "oppervlakte": 2.87211,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88559334",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 174.15,
+      "oppervlakte": 43.9219,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88559335",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 30.3863,
+      "oppervlakte": 7.96514,
+      "bouwkundigeElementen": [],
+      "verwarmd": true
+    },
+    {
+      "id": "Space_88559336",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "inhoud": 4.7445,
+      "oppervlakte": 1.14601,
+      "bouwkundigeElementen": [
+        {
+          "id": "Closetcombinatie_88559337",
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "CLO",
+            "naam": "Closetcombinatie (Toilet)"
+          }
+        },
+        {
+          "id": "Fontein_88559338",
+          "naam": "Fontein",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "FON",
+            "naam": "Fontein"
+          }
+        }
+      ],
+      "verwarmd": false
+    },
+    {
+      "id": "Space_88559339",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "OVL",
+        "naam": "Overloop"
+      },
+      "naam": "Overloop",
+      "inhoud": 8.27235,
+      "oppervlakte": 1.99815,
+      "bouwkundigeElementen": [],
+      "verwarmd": false
+    }
+  ],
+  "wozEenheden": [
+    {
+      "vastgesteldeWaarde": 301000.0,
+      "waardepeildatum": "2023-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 277000.0,
+      "waardepeildatum": "2022-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 248000.0,
+      "waardepeildatum": "2021-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 195000.0,
+      "waardepeildatum": "2020-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 166000.0,
+      "waardepeildatum": "2019-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 151000.0,
+      "waardepeildatum": "2018-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 139000.0,
+      "waardepeildatum": "2017-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 133000.0,
+      "waardepeildatum": "2016-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 130000.0,
+      "waardepeildatum": "2015-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 130000.0,
+      "waardepeildatum": "2014-01-01"
+    }
+  ]
+}
