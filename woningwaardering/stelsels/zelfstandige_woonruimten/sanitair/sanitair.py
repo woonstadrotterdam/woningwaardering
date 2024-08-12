@@ -1,6 +1,6 @@
 from datetime import date
 from decimal import Decimal
-from typing import Optional
+from typing import List, Optional
 
 from loguru import logger
 
@@ -41,7 +41,7 @@ class Sanitair(Stelselgroep):
 
     @staticmethod
     def _waardeer_bouwkundig_element_detailsoort(
-        woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
+        woningwaarderingen: List[WoningwaarderingResultatenWoningwaardering],
         ruimte: EenhedenRuimte,
         punten_per_element: float,
         gedeeld_met_aantal_eenheden: Optional[int] = None,

@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from datetime import date
 
 
@@ -14,7 +13,7 @@ from woningwaardering.vera.referentiedata import (
 )
 
 
-class Stelselgroep(ABC):
+class Stelselgroep:
     """Initialiseert een Stelselgroep.
 
     Args:
@@ -43,7 +42,7 @@ class Stelselgroep(ABC):
         #     self.stelsel, self.stelselgroep, self.peildatum, self.config
         # )
 
-    @abstractmethod
+    # @abstractmethod
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -60,7 +59,7 @@ class Stelselgroep(ABC):
         Returns:
             WoningwaarderingResultatenWoningwaarderingGroep: Het resultaat van de woningwaardering voor de gehele groep.
         """
-        pass
+        return WoningwaarderingResultatenWoningwaarderingGroep()
 
     # @staticmethod
     # def select_stelselgroep(
