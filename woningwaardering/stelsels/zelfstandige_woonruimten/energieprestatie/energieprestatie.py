@@ -75,12 +75,13 @@ class Energieprestatie(Stelselgroep):
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
     ) -> None:
-        super().__init__(
-            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-            stelselgroep=Woningwaarderingstelselgroep.energieprestatie,
-            peildatum=peildatum,
-            config=config,
-        )
+        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.energieprestatie
+        self.peildatum = peildatum
+
+        if config is None:
+            config = Stelselconfig.load(stelsel=self.stelsel)
+        self.config = config
 
     def _bereken_punten_met_label(
         self,

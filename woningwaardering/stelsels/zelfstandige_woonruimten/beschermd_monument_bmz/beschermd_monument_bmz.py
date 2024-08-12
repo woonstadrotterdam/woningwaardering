@@ -28,12 +28,13 @@ class BeschermdMonumentBmz(Stelselgroep):
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
     ) -> None:
-        super().__init__(
-            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-            stelselgroep=Woningwaarderingstelselgroep.beschermd_monument_bmz,
-            peildatum=peildatum,
-            config=config,
-        )
+        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.beschermd_monument_bmz
+        self.peildatum = peildatum
+
+        if config is None:
+            config = Stelselconfig.load(stelsel=self.stelsel)
+        self.config = config
 
     def bereken(
         self,

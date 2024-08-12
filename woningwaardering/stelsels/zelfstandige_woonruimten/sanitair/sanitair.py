@@ -32,12 +32,13 @@ class Sanitair(Stelselgroep):
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
     ) -> None:
-        super().__init__(
-            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-            stelselgroep=Woningwaarderingstelselgroep.sanitair,
-            peildatum=peildatum,
-            config=config,
-        )
+        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.sanitair
+        self.peildatum = peildatum
+
+        if config is None:
+            config = Stelselconfig.load(stelsel=self.stelsel)
+        self.config = config
 
     @staticmethod
     def _waardeer_bouwkundig_element_detailsoort(

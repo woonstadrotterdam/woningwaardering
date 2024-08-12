@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from datetime import date
 
 
@@ -13,36 +14,28 @@ from woningwaardering.vera.referentiedata import (
 )
 
 
-class Stelselgroep:
+class Stelselgroep(ABC):
     """Initialiseert een Stelselgroep.
 
     Args:
-        stelsel (Woningwaarderingstelsel): Het stelsel (referentie data) waartoe de stelselgroep behoort.
-        stelselgroep (Woningwaarderingstelselgroep): De stelselgroep (refenrentie data).
         peildatum (date, optional): De peildatum voor de waardering".
         config (Stelselconfig | None, optional): Een optionele configuratie. Defaults naar None.
     """
 
     def __init__(
         self,
-        stelsel: Woningwaarderingstelsel,
-        stelselgroep: Woningwaarderingstelselgroep,
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
     ) -> None:
-        self.stelsel: Woningwaarderingstelsel = stelsel
-        self.stelselgroep: Woningwaarderingstelselgroep = stelselgroep
+        self.stelsel: Woningwaarderingstelsel | None = None
+        self.stelselgroep: Woningwaarderingstelselgroep | None = None
         self.peildatum = peildatum
 
-        if config is None:
+        if config is None and self.stelsel is not None:
             config = Stelselconfig.load(stelsel=self.stelsel)
         self.config = config
 
-        # self.stelselgroep_object = Stelselgroep.select_stelselgroep(
-        #     self.stelsel, self.stelselgroep, self.peildatum, self.config
-        # )
-
-    # @abstractmethod
+    @abstractmethod
     def bereken(
         self,
         eenheid: EenhedenEenheid,

@@ -41,12 +41,13 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         peildatum: date = date.today(),
         config: Stelselconfig | None = None,
     ) -> None:
-        super().__init__(
-            stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-            stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
-            peildatum=peildatum,
-            config=config,
-        )
+        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten
+        self.peildatum = peildatum
+
+        if config is None:
+            config = Stelselconfig.load(stelsel=self.stelsel)
+        self.config = config
 
     def bereken(
         self,

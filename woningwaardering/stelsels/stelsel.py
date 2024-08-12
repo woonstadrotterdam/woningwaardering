@@ -188,7 +188,7 @@ class Stelsel:
             )
 
         stelselgroepen: list[Stelselgroep] = [
-            import_class(  # type: ignore[call-arg]
+            import_class(  # type: ignore[type-abstract]
                 f"woningwaardering.stelsels.{stelsel.name}",
                 stelselgroep_config.class_naam,
                 Stelselgroep,
