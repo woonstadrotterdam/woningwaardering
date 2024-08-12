@@ -166,7 +166,7 @@ class PrijsopslagMonumentenEnNieuwbouwJul2024(Stelselgroepversie):
         )
         woningwaardering_resultaat.groepen = []
 
-        geldige_stelselgroepen = Stelsel.select_geldige_stelselgroepen(
+        geldige_stelselgroepen = Stelsel.select_stelselgroepen(
             self.peildatum, Woningwaarderingstelsel.zelfstandige_woonruimten
         )
 

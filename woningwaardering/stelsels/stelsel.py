@@ -40,7 +40,7 @@ class Stelsel:
         self.stelsel = stelsel
         self.peildatum = peildatum
         self.stelsel_config = Stelselconfig.load(stelsel=self.stelsel)
-        self.geldige_stelselgroepen = Stelsel.select_geldige_stelselgroepen(
+        self.geldige_stelselgroepen = Stelsel.select_stelselgroepen(
             self.peildatum,
             self.stelsel,
             self.stelsel_config,
@@ -156,7 +156,7 @@ class Stelsel:
         return maximale_huur
 
     @staticmethod
-    def select_geldige_stelselgroepen(
+    def select_stelselgroepen(
         peildatum: date,
         stelsel: Woningwaarderingstelsel,
         config: Stelselconfig | None = None,
@@ -187,7 +187,7 @@ class Stelsel:
                 f"stelsel {stelsel.value.naam} met begindatum {config.begindatum} en einddatum {config.einddatum} is niet geldig op peildatum {peildatum}."
             )
 
-        geldige_stelselgroepen: list[Stelselgroep] = [
+        stelselgroepen: list[Stelselgroep] = [
             import_class(  # type: ignore[call-arg]
                 f"woningwaardering.stelsels.{stelsel.name}",
                 stelselgroep_config.class_naam,
@@ -206,9 +206,9 @@ class Stelsel:
             )
         ]
 
-        if not geldige_stelselgroepen:
+        if not stelselgroepen:
             raise ValueError(
                 f"geen geldige stelselgroepen gevonden voor {stelsel.value.naam} met peildatum {peildatum}"
             )
 
-        return geldige_stelselgroepen
+        return stelselgroepen

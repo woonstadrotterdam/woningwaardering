@@ -5,92 +5,46 @@ stelselgroepen:
     module: oppervlakte_van_vertrekken
     class_naam: OppervlakteVanVertrekken
     begindatum: 2024-01-01
-    versies:
-      - module: oppervlakte_van_vertrekken_jan_2024
-        class_naam: OppervlakteVanVertrekkenJan2024
-        begindatum: 2024-01-01
   oppervlakte_van_overige_ruimten:
     module: oppervlakte_van_overige_ruimten
     class_naam: OppervlakteVanOverigeRuimten
     begindatum: 2024-01-01
-    versies:
-      - module: oppervlakte_van_overige_ruimten_jan_2024
-        class_naam: OppervlakteVanOverigeRuimtenJan2024
-        begindatum: 2024-01-01
   verwarming:
     module: verwarming
     class_naam: Verwarming
     begindatum: 2024-01-01
-    versies:
-      - module: verwarming_jan_2024
-        class_naam: VerwarmingJan2024
-        begindatum: 2024-01-01
   energieprestatie:
     module: energieprestatie
     class_naam: Energieprestatie
     begindatum: 2024-01-01
-    versies:
-      - module: energieprestatie_jan_2024
-        class_naam: EnergieprestatieJan2024
-        begindatum: 2024-01-01
   sanitair:
     module: sanitair
     class_naam: Sanitair
     begindatum: 2024-01-01
-    versies:
-      - module: sanitair_jan_2024
-        class_naam: SanitairJan2024
-        begindatum: 2024-01-01
   keuken:
     module: keuken
     class_naam: Keuken
     begindatum: 2024-01-01
-    versies:
-      - module: keuken_jan_2024
-        class_naam: KeukenJan2024
-        begindatum: 2024-01-01
   prive_buitenruimten:
     module: prive_buitenruimten
     class_naam: PriveBuitenruimten
     begindatum: 2024-01-01
-    versies:
-      - module: prive_buitenruimten_jan_2024
-        class_naam: PriveBuitenruimtenJan2024
-        begindatum: 2024-01-01
   punten_voor_de_woz_waarde:
     module: punten_voor_de_woz_waarde
     class_naam: PuntenVoorDeWozWaarde
     begindatum: 2024-01-01
-    versies:
-      - module: punten_voor_de_woz_waarde_jan_2024
-        class_naam: PuntenVoorDeWozWaardeJan2024
-        begindatum: 2024-01-01
   renovatie:
     module: renovatie
     class_naam: Renovatie
     begindatum: 2024-01-01
     einddatum: 2024-06-30
-    versies:
-      - module: renovatie_jan_2024
-        class_naam: RenovatieJan2024
-        begindatum: 2024-01-01
-        einddatum: 2024-06-30
   beschermd_monument_bmz:
     module: beschermd_monument_bmz
     class_naam: BeschermdMonumentBmz
     begindatum: 2024-01-01
     einddatum: 2024-06-30
-    versies:
-      - module: beschermd_monument_bmz_jan_2024
-        class_naam: BeschermdMonumentBmzJan2024
-        begindatum: 2024-01-01
-        einddatum: 2024-06-30
   prijsopslag_monumenten_en_nieuwbouw:
     module: prijsopslag_monumenten_en_nieuwbouw
     class_naam: PrijsopslagMonumentenEnNieuwbouw
     begindatum: 2024-07-01
     uitvoeringsvolgorde: 100
-    versies:
-      - module: prijsopslag_monumenten_en_nieuwbouw_jul_2024
-        class_naam: PrijsopslagMonumentenEnNieuwbouwJul2024
-        begindatum: 2024-07-01

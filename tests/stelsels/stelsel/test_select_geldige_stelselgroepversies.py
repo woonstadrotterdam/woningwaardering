@@ -22,7 +22,7 @@ from woningwaardering.vera.referentiedata import (
 def test_select_geldige_stelselgroepen(
     peildatum, stelsel, aantal_geldige_stelselgroepen
 ):
-    geldigige_stelselgroepen = Stelsel.select_geldige_stelselgroepen(
+    geldigige_stelselgroepen = Stelsel.select_stelselgroepen(
         peildatum=peildatum, stelsel=stelsel
     )
     assert (

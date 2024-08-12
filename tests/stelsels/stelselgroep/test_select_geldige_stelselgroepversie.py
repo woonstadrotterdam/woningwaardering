@@ -22,7 +22,7 @@ from woningwaardering.vera.referentiedata import (
     ],
 )
 def test_select_geldige_stelselgroepversie(peildatum, stelsel, stelselgroep):
-    geldige_stelselgroep = Stelselgroep.select_stelselgroepversie(
+    geldige_stelselgroep = Stelselgroep.select_stelselgroep(
         peildatum=peildatum, stelsel=stelsel, stelselgroep=stelselgroep
     )
     assert isinstance(

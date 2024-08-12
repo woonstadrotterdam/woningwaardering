@@ -3,7 +3,7 @@ import yaml
 from importlib.resources import files
 from datetime import date
 from loguru import logger
-from typing import Dict, List
+from typing import Dict
 from pydantic import BaseModel, ValidationError
 
 from woningwaardering.vera.referentiedata import (
@@ -11,11 +11,11 @@ from woningwaardering.vera.referentiedata import (
 )
 
 
-class Stelselgroepversieconfig(BaseModel):
-    module: str
-    class_naam: str
-    begindatum: date = date.min
-    einddatum: date = date.max
+# class Stelselgroepversieconfig(BaseModel):
+#     module: str
+#     class_naam: str
+#     begindatum: date = date.min
+#     einddatum: date = date.max
 
 
 class Stelselgroepconfig(BaseModel):
@@ -24,7 +24,6 @@ class Stelselgroepconfig(BaseModel):
     begindatum: date = date.min
     einddatum: date = date.max
     uitvoeringsvolgorde: int = 0
-    versies: List[Stelselgroepversieconfig]
 
 
 class Stelselconfig(BaseModel):
