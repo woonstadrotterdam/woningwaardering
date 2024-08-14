@@ -55,7 +55,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = []
 
         if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
-            logger.info(
+            warnings.warn(
                 "Geen woningwaardering resultaat gevonden: kan punten voor woz waarde niet berekenen"
             )
             return woningwaardering_groep
@@ -386,53 +386,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         return woz_waarde
-
-    def _bereken_woningwaarderingresultaat(
-        self, eenheid: EenhedenEenheid
-    ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
-        """
-        Berekent de woningwaardering resultaten voor de eenheid voor alle stelselgroepen behalve stelselgroep WOZ-waarde.
-
-        Args:
-            eenheid (EenhedenEenheid): de eenheid waarvoor de woningwaardering wordt berekend.
-
-        Returns:
-            WoningwaarderingResultatenWoningwaarderingResultaat: de woningwaardering resultaten.
-        """
-
-        woningwaardering_resultaat = (
-            WoningwaarderingResultatenWoningwaarderingResultaat()
-        )
-        woningwaardering_resultaat.stelsel = (
-            Woningwaarderingstelsel.zelfstandige_woonruimten.value
-        )
-        woningwaardering_resultaat.groepen = []
-
-        stelselgroepen = [
-            # OppervlakteVanVertrekken(peildatum=self.peildatum),
-            # OppervlakteVanOverigeRuimten(peildatum=self.peildatum),
-            # Verwarming(peildatum=self.peildatum),
-            # Energieprestatie(peildatum=self.peildatum),
-            # Sanitair(peildatum=self.peildatum),
-            # Keuken(peildatum=self.peildatum),
-            # PriveBuitenruimten(peildatum=self.peildatum),
-            # Renovatie(peildatum=self.peildatum),
-            # BeschermdMonumentBmz(peildatum=self.peildatum),
-        ]
-
-        for stelselgroep in stelselgroepen:
-            if (
-                stelselgroep.stelselgroep
-                == Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
-            ):
-                continue
-
-            woningwaardering_groep = stelselgroep.bereken(
-                eenheid, woningwaardering_resultaat
-            )
-            woningwaardering_resultaat.groepen.append(woningwaardering_groep)
-
-        return woningwaardering_resultaat
 
     @staticmethod
     def hoogniveau_renovatie(eenheid: EenhedenEenheid, peildatum: date) -> bool:
