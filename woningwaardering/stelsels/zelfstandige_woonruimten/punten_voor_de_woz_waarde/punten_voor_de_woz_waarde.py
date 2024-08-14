@@ -8,8 +8,8 @@ import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -56,11 +56,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
             logger.info(
-                "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
+                "Geen woningwaardering resultaat gevonden: kan punten voor woz waarde niet berekenen"
             )
-            woningwaardering_resultaat = self._bereken_woningwaarderingresultaat(
-                eenheid
-            )
+            return woningwaardering_groep
 
         if not eenheid.bouwjaar:
             warnings.warn(f"Eenheid {eenheid.id}: geen bouwjaar gevonden.", UserWarning)
@@ -410,11 +408,19 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
         woningwaardering_resultaat.groepen = []
 
-        geldige_stelselgroepen = Stelsel.select_stelselgroepen(  # TODO: ombouwen
-            self.peildatum, Woningwaarderingstelsel.zelfstandige_woonruimten
-        )
+        stelselgroepen = [
+            # OppervlakteVanVertrekken(peildatum=self.peildatum),
+            # OppervlakteVanOverigeRuimten(peildatum=self.peildatum),
+            # Verwarming(peildatum=self.peildatum),
+            # Energieprestatie(peildatum=self.peildatum),
+            # Sanitair(peildatum=self.peildatum),
+            # Keuken(peildatum=self.peildatum),
+            # PriveBuitenruimten(peildatum=self.peildatum),
+            # Renovatie(peildatum=self.peildatum),
+            # BeschermdMonumentBmz(peildatum=self.peildatum),
+        ]
 
-        for stelselgroep in geldige_stelselgroepen:
+        for stelselgroep in stelselgroepen:
             if (
                 stelselgroep.stelselgroep
                 == Woningwaarderingstelselgroep.punten_voor_de_woz_waarde

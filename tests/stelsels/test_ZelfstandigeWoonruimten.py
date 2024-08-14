@@ -1,6 +1,6 @@
 from tests.test_utils import assert_output_model
 
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
+from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
 )
 from woningwaardering.vera.bvg.generated import (

@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
 
-from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken import (
+from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanVertrekken,
 )
 

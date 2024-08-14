@@ -1,4 +1,3 @@
-# from .zelfstandige_woonruimten import ZelfstandigeWoonruimten
 from .oppervlakte_van_vertrekken import OppervlakteVanVertrekken
 from .oppervlakte_van_overige_ruimten import OppervlakteVanOverigeRuimten
 from .verwarming import Verwarming
@@ -9,11 +8,9 @@ from .prive_buitenruimten import PriveBuitenruimten
 from .punten_voor_de_woz_waarde import PuntenVoorDeWozWaarde
 from .renovatie import Renovatie
 from .beschermd_monument_bmz import BeschermdMonumentBmz
-from .prijsopslag_monumenten_en_nieuwbouw import PrijsopslagMonumentenEnNieuwbouw
 
 
 __all__ = [
-    # "ZelfstandigeWoonruimten",
     "OppervlakteVanVertrekken",
     "OppervlakteVanOverigeRuimten",
     "Verwarming",
@@ -24,5 +21,4 @@ __all__ = [
     "PuntenVoorDeWozWaarde",
     "Renovatie",
     "BeschermdMonumentBmz",
-    "PrijsopslagMonumentenEnNieuwbouw",
 ]

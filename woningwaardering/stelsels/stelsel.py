@@ -37,13 +37,7 @@ class Stelsel:
     ) -> None:
         self.stelsel = stelsel
         self.peildatum = peildatum
-        # self.stelsel_config = Stelselconfig.load(stelsel=self.stelsel)
         self.stelselgroepen = stelselgroepen
-        # self.stelselgroepen = Stelsel.select_stelselgroepen(
-        #     self.peildatum,
-        #     self.stelsel,
-        #     self.stelsel_config,
-        # )
         self.df_maximale_huur = pd.read_csv(
             files("woningwaardering").joinpath(
                 f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"

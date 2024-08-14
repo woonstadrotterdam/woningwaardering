@@ -1,0 +1,1008 @@
+{
+    "id": "41123000005",
+    "bouwjaar": 1896,
+    "klimaatbeheersing": [{
+        "code": "IND",
+        "naam": "Individueel"
+    }],
+    "adres": {
+        "straatnaam": "Plantageweg",
+        "huisnummer": "17",
+        "huisnummer_toevoeging": "",
+        "postcode": "3061PJ",
+        "woonplaats": {
+            "naam": "ROTTERDAM"
+        }
+    },
+    "adresseerbaarObjectBasisregistratie": {
+        "id": "0599010000295253",
+        "bagIdentificatie": "0599010000295253"
+    },
+    "panden": [{
+  "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+    },
+  }],
+    "woz_eenheden": [
+        {
+            "waardepeildatum": "2022-01-01",
+            "vastgesteldeWaarde": null
+        },
+        {
+            "waardepeildatum": "2023-01-01",
+            "vastgesteldeWaarde": null
+        }
+    ],
+    "energieprestaties": [
+        {
+            "soort": {
+                "code": "EI",
+                "naam": "Energie-index"
+            },
+            "status": {
+                "code": "DEF",
+                "naam": "Definitief"
+            },
+            "begindatum": "2019-05-13",
+            "einddatum": "2029-05-13",
+            "registratiedatum": "2019-11-21T10:55:31+01:00",
+            "label": {
+                "code": "B",
+                "naam": "B"
+            },
+            "waarde": "1.39"
+        }
+    ],
+    "renovatie": {
+        "omschrijving": "renovatie",
+        "datum": "2019-01-01",
+        "bedrag_investering": 10000
+    },
+    "oppervlakten": [
+        {
+            "soort": {
+                "code": "GTZ",
+                "naam": "Gebruiksoppervlakte thermische zone"
+            },
+            "waarde": "78.84"
+        }
+    ],
+    "ruimten": [
+        {
+            "id": "Space_23702332",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "KEU",
+                "naam": "Keuken"
+            },
+            "naam": "Keuken",
+            "inhoud": 16.9645,
+            "oppervlakte": 5.37699,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Radiator_23702333",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY_1",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                },
+                {
+                    "id": "Aanrecht_72738742",
+                    "id_bimmodel": "2gXaYbZirD8B9X_pSRiJ46",
+                    "naam": "Aanrecht",
+                    "soort": {
+                        "code": "KEU",
+                        "naam": "Keuken voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "AAN",
+                        "naam": "Aanrecht"
+                    },
+                    "lengte": 1920,
+                    "extraAttributen": {
+                        "lengteAanrecht": 1920,
+                        "ifcSoort": "IfcFurniture"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_23702339",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "BAD",
+                "naam": "Badruimte"
+            },
+            "naam": "Badruimte",
+            "inhoud": 6.05195,
+            "oppervlakte": 1.88741,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Closetcombinatie_23702340",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY$C",
+                    "naam": "Closetcombinatie",
+                    "soort": {
+                        "code": "SAN",
+                        "naam": "Sanitaire voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "CLO",
+                        "naam": "Closetcombinatie (Toilet)"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSanitaryTerminal.TOILETPAN"
+                    }
+                },
+                {
+                    "id": "Wastafel_72738745",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAYLu",
+                    "naam": "Wastafel",
+                    "soort": {
+                        "code": "SAN",
+                        "naam": "Sanitaire voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "WAS",
+                        "naam": "Wastafel"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSanitaryTerminal.WASHHANDBASIN"
+                    }
+                },
+                {
+                    "id": "Douche_72738747",
+                    "id_bimmodel": "10Fc4nJTDFyuvYO2VEp4$R",
+                    "naam": "Douche",
+                    "soort": {
+                        "code": "SAN",
+                        "naam": "Sanitaire voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "DOU",
+                        "naam": "Douche"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSanitaryTerminal.SHOWER"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_23702354",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "WOO",
+                "naam": "Woonkamer"
+            },
+            "naam": "Woonkamer",
+            "inhoud": 56.3198,
+            "oppervlakte": 18.6425,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Radiator_23702355",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY$z",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                },
+                {
+                    "id": "Radiator_23702356",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY$_",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_23702358",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "SLA",
+                "naam": "Slaapkamer"
+            },
+            "naam": "Slaapkamer",
+            "inhoud": 51.9543,
+            "oppervlakte": 17.2606,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Radiator_23702359",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY$$",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                },
+                {
+                    "id": "Radiator_23702360",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY_0",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_23702450",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "TRH",
+                "naam": "Trappenhuis"
+            },
+            "naam": "Trappenhuis",
+            "inhoud": 7.95425,
+            "oppervlakte": 2.57427,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_23702451",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "ENT",
+                "naam": "Entree"
+            },
+            "naam": "Entree",
+            "inhoud": 9.27641,
+            "oppervlakte": 3.08186,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_23702457",
+            "soort": {
+                "code": "BTR",
+                "naam": "Buitenruimte"
+            },
+            "detailSoort": {
+                "code": "TUI",
+                "naam": "Tuin"
+            },
+            "naam": "Tuin",
+            "inhoud": 74.7335,
+            "oppervlakte": 30.6486,
+            "breedte": 4.79,
+            "lengte": 7.59,
+            "hoogte": 2.438,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_23702760",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "KEU",
+                "naam": "Keuken"
+            },
+            "naam": "Keuken",
+            "inhoud": 17.1534,
+            "oppervlakte": 5.75616,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Radiator_72739116",
+                    "id_bimmodel": "1eSesOKr13fwPsAQblVBf3",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                },
+                {
+                    "id": "Aanrecht_72739118",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY$F",
+                    "naam": "Aanrecht",
+                    "soort": {
+                        "code": "KEU",
+                        "naam": "Keuken voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "AAN",
+                        "naam": "Aanrecht"
+                    },
+                    "lengte": 1875,
+                    "extraAttributen": {
+                        "ifcSoort": "IfcFurniture"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            }
+        },
+        {
+            "id": "Space_23702771",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "WOO",
+                "naam": "Woonkamer"
+            },
+            "naam": "Woonkamer",
+            "inhoud": 70.7283,
+            "oppervlakte": 23.7343,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Radiator_23702772",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY_2",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                },
+                {
+                    "id": "Radiator_23702773",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY_3",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            }
+        },
+        {
+            "id": "Space_23702793",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "OVL",
+                "naam": "Overloop"
+            },
+            "naam": "Overloop",
+            "inhoud": 15.3509,
+            "oppervlakte": 5.11304,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "verbondenRuimten": [
+                {
+                    "id": "Space_23702802",
+                    "soort": {
+                        "code": "OVR",
+                        "naam": "Overige ruimtes"
+                    },
+                    "detailSoort": {
+                        "code": "KAS",
+                        "naam": "Kast"
+                    },
+                    "naam": "Kast",
+                    "inhoud": 1.18008,
+                    "oppervlakte": 0.396,
+                    "verwarmd": false,
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            }
+        },
+        {
+            "id": "Space_23702799",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "BAD",
+                "naam": "Badruimte"
+            },
+            "naam": "Badruimte",
+            "inhoud": 5.22735,
+            "oppervlakte": 1.75414,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Closetcombinatie_23702800",
+                    "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY$E",
+                    "naam": "Closetcombinatie",
+                    "soort": {
+                        "code": "SAN",
+                        "naam": "Sanitaire voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "CLO",
+                        "naam": "Closetcombinatie (Toilet)"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSanitaryTerminal.TOILETPAN"
+                    }
+                },
+                {
+                    "id": "Douche_72739130",
+                    "id_bimmodel": "23xaTPsCDF4hej85l1drBT",
+                    "naam": "Douche",
+                    "soort": {
+                        "code": "SAN",
+                        "naam": "Sanitaire voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "DOU",
+                        "naam": "Douche"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSanitaryTerminal.SHOWER"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            }
+        },
+        {
+            "id": "Space_23702802",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "KAS",
+                "naam": "Kast"
+            },
+            "naam": "Kast",
+            "inhoud": 1.18008,
+            "oppervlakte": 0.396,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            }
+        },
+        {
+            "id": "Space_23702848",
+            "soort": {
+                "code": "BTR",
+                "naam": "Buitenruimte"
+            },
+            "detailSoort": {
+                "code": "DAK",
+                "naam": "Dakterras"
+            },
+            "naam": "Dakterras",
+            "inhoud": 14.6212,
+            "oppervlakte": 4.4577,
+            "breedte": 2.41,
+            "lengte": 1.86,
+            "hoogte": 3.28,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            }
+        },
+        {
+            "id": "Space_23703087",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "BAD",
+                "naam": "Badruimte"
+            },
+            "naam": "Badruimte",
+            "inhoud": 14.5435,
+            "oppervlakte": 6.79878,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Radiator_23703088",
+                    "id_bimmodel": "2XbBk5LB909fIWTKMldH6E",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                },
+                {
+                    "id": "Wastafel_23703089",
+                    "id_bimmodel": "2XbBk5LB909fIWTKMldHzR",
+                    "naam": "Wastafel",
+                    "soort": {
+                        "code": "SAN",
+                        "naam": "Sanitaire voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "WAS",
+                        "naam": "Wastafel"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSanitaryTerminal.WASHHANDBASIN"
+                    }
+                },
+                {
+                    "id": "Douche_23703090",
+                    "id_bimmodel": "2XbBk5LB909fIWTKMldHwu",
+                    "naam": "Douche",
+                    "soort": {
+                        "code": "SAN",
+                        "naam": "Sanitaire voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "DOU",
+                        "naam": "Douche"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSanitaryTerminal.SHOWER"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "02",
+                "omschrijving": "tweede verdieping"
+            }
+        },
+        {
+            "id": "Space_23703095",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "SLA",
+                "naam": "Slaapkamer"
+            },
+            "naam": "Slaapkamer",
+            "inhoud": 25.7295,
+            "oppervlakte": 12.1949,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Radiator_23703096",
+                    "id_bimmodel": "2XbBk5LB909fIWTKMldH6h",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                },
+                {
+                    "id": "Radiator_23703097",
+                    "id_bimmodel": "3pJqPHBBn5kA5ucUyxi8HH",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "02",
+                "omschrijving": "tweede verdieping"
+            }
+        },
+        {
+            "id": "Space_23703105",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "ZOL",
+                "naam": "Zolder"
+            },
+            "naam": "Zolder",
+            "inhoud": 16.1584,
+            "oppervlakte": 8.70953,
+            "verwarmd": false,
+            "bouwkundigeElementen": [
+                {
+                    "naam": "Trap",
+                    "omschrijving": "(vaste) trap naar de zolder",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening"
+                    },
+                    "detailSoort": {
+                        "code": "TRA",
+                        "naam": "Trap"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "02",
+                "omschrijving": "tweede verdieping"
+            }
+        },
+        {
+            "id": "Space_23703107",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "SLA",
+                "naam": "Slaapkamer"
+            },
+            "naam": "Slaapkamer",
+            "inhoud": 24.3432,
+            "oppervlakte": 10.2396,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Radiator_23703108",
+                    "id_bimmodel": "2XbBk5LB909fIWTKMldHvU",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "02",
+                "omschrijving": "tweede verdieping"
+            }
+        },
+        {
+            "id": "Space_23703132",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "BER",
+                "naam": "Berging"
+            },
+            "naam": "Berging",
+            "inhoud": 5.21066,
+            "oppervlakte": 2.43587,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "02",
+                "omschrijving": "tweede verdieping"
+            }
+        },
+        {
+            "id": "Space_72738748",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "SCH",
+                "naam": "Schacht"
+            },
+            "naam": "Schacht",
+            "inhoud": 0.328662,
+            "oppervlakte": 0.10919,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_72738750",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "SCH",
+                "naam": "Schacht"
+            },
+            "naam": "Schacht",
+            "inhoud": 0.328662,
+            "oppervlakte": 0.10919,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_72738788",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "ENT",
+                "naam": "Entree"
+            },
+            "naam": "Entree",
+            "inhoud": 10.9249,
+            "oppervlakte": 3.62953,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "00",
+                "omschrijving": "begane grond"
+            }
+        },
+        {
+            "id": "Space_72739122",
+            "soort": {
+                "code": "VTK",
+                "naam": "Vertrek"
+            },
+            "detailSoort": {
+                "code": "SLA",
+                "naam": "Slaapkamer"
+            },
+            "naam": "Slaapkamer",
+            "inhoud": 26.0682,
+            "oppervlakte": 8.74772,
+            "verwarmd": true,
+            "bouwkundigeElementen": [
+                {
+                    "id": "Radiator_23702786",
+                    "id_bimmodel": "3pJqPHBBn5kA5ucUyxi8Sh",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                },
+                {
+                    "id": "Radiator_23702787",
+                    "id_bimmodel": "3pJqPHBBn5kA5ucUyxi8Tt",
+                    "naam": "Radiator",
+                    "soort": {
+                        "code": "VOO",
+                        "naam": "Voorziening algemeen"
+                    },
+                    "detailSoort": {
+                        "code": "RAD",
+                        "naam": "Radiator"
+                    },
+                    "extraAttributen": {
+                        "ifcSoort": "IfcSpaceHeater.RADIATOR"
+                    }
+                }
+            ],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            },
+            "verbondenRuimten": [
+                {
+                    "id": "Space_72739133",
+                    "soort": {
+                        "code": "OVR",
+                        "naam": "Overige ruimtes"
+                    },
+                    "detailSoort": {
+                        "code": "KAS",
+                        "naam": "Kast"
+                    },
+                    "naam": "Kast",
+                    "inhoud": 1.23491,
+                    "oppervlakte": 0.4144,
+                    "verwarmd": false
+                }
+            ]
+        },
+        {
+            "id": "Space_72739125",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "SCH",
+                "naam": "Schacht"
+            },
+            "naam": "Schacht",
+            "inhoud": 0.325386,
+            "oppervlakte": 0.10919,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            }
+        },
+        {
+            "id": "Space_72739133",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "KAS",
+                "naam": "Kast"
+            },
+            "naam": "Kast",
+            "inhoud": 1.23491,
+            "oppervlakte": 0.4144,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            }
+        },
+        {
+            "id": "Space_72739147",
+            "soort": {
+                "code": "OVR",
+                "naam": "Overige ruimtes"
+            },
+            "detailSoort": {
+                "code": "SCH",
+                "naam": "Schacht"
+            },
+            "naam": "Schacht",
+            "inhoud": 0.325386,
+            "oppervlakte": 0.10919,
+            "verwarmd": false,
+            "bouwkundigeElementen": [],
+            "bouwlaag": {
+                "nummer": "01",
+                "omschrijving": "eerste verdieping"
+            }
+        }
+    ]
+}
