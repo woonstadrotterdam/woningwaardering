@@ -37,7 +37,7 @@ class Stelsel:
     ) -> None:
         self.stelsel = stelsel
         self.peildatum = peildatum
-        self.stelselgroepen = stelselgroepen
+        self.stelselgroepen = stelselgroepen if stelselgroepen is not None else []
         self.df_maximale_huur = pd.read_csv(
             files("woningwaardering").joinpath(
                 f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"
