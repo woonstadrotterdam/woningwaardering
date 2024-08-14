@@ -1,6 +1,6 @@
+import warnings
 from functools import wraps
 from typing import Callable
-import warnings
 
 from loguru import logger
 
@@ -13,7 +13,6 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
     Woningwaarderingstelsel,
 )
-from ...vera.referentiedata.collectiefobjectsoort import Collectiefobjectsoort
 from woningwaardering.vera.utils import badruimte_met_toilet, heeft_bouwkundig_element
 
 
@@ -84,6 +83,18 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     ):
         return Ruimtesoort.buitenruimte
 
+    if ruimte.detail_soort.code in [
+        Ruimtedetailsoort.woonkamer.code,
+        Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+        Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+        Ruimtedetailsoort.slaapkamer.code,
+        Ruimtedetailsoort.overig_vertrek.code,
+    ]:
+        if ruimte.oppervlakte >= 4:
+            return Ruimtesoort.vertrek
+        elif ruimte.oppervlakte >= 2:
+            return Ruimtesoort.overige_ruimten
+
     if ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code:
         return Ruimtesoort.vertrek
 
@@ -96,6 +107,22 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             return None
         else:
             return Ruimtesoort.vertrek
+
+    if ruimte.detail_soort.code in [
+        Ruimtedetailsoort.bijkeuken.code,
+        Ruimtedetailsoort.berging.code,
+        Ruimtedetailsoort.wasruimte.code,
+        Ruimtedetailsoort.garage.code,
+        Ruimtedetailsoort.kelder.code,
+        # Ruimtedetailsoort.schuur.code # niet mogelijk want schuur en schacht zelfde code zie: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/116 en https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/92
+    ] or (
+        ruimte.detail_soort.naam
+        and ruimte.detail_soort.naam == Ruimtedetailsoort.schuur.naam
+    ):  # zie hierboven i.v.m. limitaties schuur.code
+        if ruimte.oppervlakte >= 2:
+            return Ruimtesoort.overige_ruimten
+        else:
+            return None
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
         if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap):
@@ -123,28 +150,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         logger.info(
             f"Ruimte {ruimte.naam} ({ruimte.id}): geen trap gevonden. Ruimte wordt niet gewaardeerd binnen {Woningwaarderingstelsel.zelfstandige_woonruimten}."
         )
-        return None
-
-    if ruimte.detail_soort.code in [
-        Ruimtedetailsoort.hal.code,
-        Ruimtedetailsoort.overloop.code,
-        Ruimtedetailsoort.entree.code,
-        Ruimtedetailsoort.gang.code,
-        Collectiefobjectsoort.trappenhuis.code,
-        Ruimtedetailsoort.kast.code,
-        "VID",
-        "OVR",
-    ]:
-        return None
-
-    if ruimte.oppervlakte >= 4 and ruimte.detail_soort.code not in [
-        Ruimtedetailsoort.berging.code,
-        Ruimtedetailsoort.wasruimte.code,
-    ]:
-        return Ruimtesoort.vertrek
-    elif ruimte.oppervlakte >= 2:
-        return Ruimtesoort.overige_ruimten
-
     return None
 
 
