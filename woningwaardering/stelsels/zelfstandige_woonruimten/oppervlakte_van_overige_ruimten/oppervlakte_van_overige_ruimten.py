@@ -1,14 +1,11 @@
+import warnings
 from datetime import date
 from decimal import Decimal
-import warnings
 
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroep, utils
 from woningwaardering.stelsels.config.config import Stelselconfig
-from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten.oppervlakte_van_overige_ruimten_jan_2024 import (
-    OppervlakteVanOverigeRuimtenJan2024,
-)
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
@@ -130,8 +127,10 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         continue
 
                 elif ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-                    oppervlakte_aantal = OppervlakteVanOverigeRuimtenJan2024._oppervlakte_zolder_overige_ruimte(
-                        ruimte
+                    oppervlakte_aantal = (
+                        OppervlakteVanOverigeRuimten._oppervlakte_zolder_overige_ruimte(
+                            ruimte
+                        )
                     )
                     if oppervlakte_aantal > 0.0:
                         woningwaardering.aantal = oppervlakte_aantal

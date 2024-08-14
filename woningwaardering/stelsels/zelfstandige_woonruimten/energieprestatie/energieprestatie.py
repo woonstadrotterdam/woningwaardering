@@ -1,17 +1,14 @@
+import warnings
 from datetime import date, datetime
 from decimal import Decimal
 from importlib.resources import files
-import warnings
 
-from loguru import logger
 import pandas as pd
+from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.config.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.energieprestatie.energieprestatie_jan_2024 import (
-    EnergieprestatieJan2024,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -228,7 +225,7 @@ class Energieprestatie(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaardering:
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
-        df = EnergieprestatieJan2024.lookup_mapping["bouwjaar"].pipe(
+        df = Energieprestatie.lookup_mapping["bouwjaar"].pipe(
             utils.filter_dataframe_op_datum, datum_filter=date(2024, 1, 1)
         )
         filtered_df = df[
@@ -302,7 +299,7 @@ class Energieprestatie(Stelselgroep):
             )
 
         elif eenheid.bouwjaar and not energieprestatie:
-            woningwaardering = EnergieprestatieJan2024._bereken_punten_met_bouwjaar(
+            woningwaardering = Energieprestatie._bereken_punten_met_bouwjaar(
                 eenheid, pandsoort.naam, woningwaardering
             )
 

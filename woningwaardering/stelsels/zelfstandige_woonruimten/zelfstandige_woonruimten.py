@@ -1,5 +1,6 @@
-from datetime import date
 import warnings
+from datetime import date
+
 from loguru import logger
 
 from woningwaardering.stelsels import utils
@@ -24,9 +25,9 @@ if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
     warnings.simplefilter("default", UserWarning)
 
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 1, 1))
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 5, 1))
     with open(
-        "tests/data/zelfstandige_woonruimten/input/41164000002.json",
+        "tests/data/zelfstandige_woonruimten/input/20004000156.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
@@ -36,7 +37,6 @@ if __name__ == "__main__":  # pragma: no cover
                 by_alias=True, indent=2, exclude_none=True
             )
         )
-
         tabel = utils.naar_tabel(woningwaardering_resultaat)
 
         print(tabel)
