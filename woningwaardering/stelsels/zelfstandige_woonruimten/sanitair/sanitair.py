@@ -5,7 +5,6 @@ from typing import List, Optional
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.config.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -30,15 +29,10 @@ class Sanitair(Stelselgroep):
     def __init__(
         self,
         peildatum: date = date.today(),
-        config: Stelselconfig | None = None,
     ) -> None:
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.sanitair
         self.peildatum = peildatum
-
-        if config is None:
-            config = Stelselconfig.load(stelsel=self.stelsel)
-        self.config = config
 
     @staticmethod
     def _waardeer_bouwkundig_element_detailsoort(

@@ -31,9 +31,9 @@ class Stelselgroep(ABC):
         self.stelselgroep: Woningwaarderingstelselgroep | None = None
         self.peildatum = peildatum
 
-        if config is None and self.stelsel is not None:
-            config = Stelselconfig.load(stelsel=self.stelsel)
-        self.config = config
+        # if config is None and self.stelsel is not None:
+        #     config = Stelselconfig.load(stelsel=self.stelsel)
+        # self.config = config
 
     @abstractmethod
     def bereken(

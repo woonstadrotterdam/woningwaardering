@@ -1,4 +1,4 @@
-from .zelfstandige_woonruimten import ZelfstandigeWoonruimten
+# from .zelfstandige_woonruimten import ZelfstandigeWoonruimten
 from .oppervlakte_van_vertrekken import OppervlakteVanVertrekken
 from .oppervlakte_van_overige_ruimten import OppervlakteVanOverigeRuimten
 from .verwarming import Verwarming
@@ -13,7 +13,7 @@ from .prijsopslag_monumenten_en_nieuwbouw import PrijsopslagMonumentenEnNieuwbou
 
 
 __all__ = [
-    "ZelfstandigeWoonruimten",
+    # "ZelfstandigeWoonruimten",
     "OppervlakteVanVertrekken",
     "OppervlakteVanOverigeRuimten",
     "Verwarming",

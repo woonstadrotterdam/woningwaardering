@@ -5,6 +5,18 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
+from woningwaardering.stelsels.zelfstandige_woonruimten import (
+    BeschermdMonumentBmz,
+    Energieprestatie,
+    Keuken,
+    OppervlakteVanOverigeRuimten,
+    OppervlakteVanVertrekken,
+    PriveBuitenruimten,
+    PuntenVoorDeWozWaarde,
+    Renovatie,
+    Sanitair,
+    Verwarming,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -18,6 +30,18 @@ class ZelfstandigeWoonruimten(Stelsel):
         super().__init__(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
             peildatum=peildatum,
+            stelselgroepen=[
+                OppervlakteVanVertrekken(peildatum=peildatum),
+                OppervlakteVanOverigeRuimten(peildatum=peildatum),
+                Verwarming(peildatum=peildatum),
+                Energieprestatie(peildatum=peildatum),
+                Sanitair(peildatum=peildatum),
+                Keuken(peildatum=peildatum),
+                PriveBuitenruimten(peildatum=peildatum),
+                PuntenVoorDeWozWaarde(peildatum=peildatum),
+                Renovatie(peildatum=peildatum),
+                BeschermdMonumentBmz(peildatum=peildatum),
+            ],
         )
 
 

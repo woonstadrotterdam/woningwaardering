@@ -1,14 +1,13 @@
+import warnings
 from datetime import date
 from decimal import Decimal
 from importlib.resources import files
 from itertools import chain
-import warnings
 
-from loguru import logger
 import pandas as pd
+from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.config.config import Stelselconfig
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -34,15 +33,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
     def __init__(
         self,
         peildatum: date = date.today(),
-        config: Stelselconfig | None = None,
     ) -> None:
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
         self.peildatum = peildatum
-
-        if config is None:
-            config = Stelselconfig.load(stelsel=self.stelsel)
-        self.config = config
 
     def bereken(
         self,
@@ -416,7 +410,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
         woningwaardering_resultaat.groepen = []
 
-        geldige_stelselgroepen = Stelsel.select_stelselgroepen(
+        geldige_stelselgroepen = Stelsel.select_stelselgroepen(  # TODO: ombouwen
             self.peildatum, Woningwaarderingstelsel.zelfstandige_woonruimten
         )
 

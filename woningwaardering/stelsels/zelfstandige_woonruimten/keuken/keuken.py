@@ -1,11 +1,10 @@
+import warnings
 from datetime import date
 from decimal import Decimal
-import warnings
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.config.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -31,15 +30,10 @@ class Keuken(Stelselgroep):
     def __init__(
         self,
         peildatum: date = date.today(),
-        config: Stelselconfig | None = None,
     ) -> None:
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.keuken
         self.peildatum = peildatum
-
-        if config is None:
-            config = Stelselconfig.load(stelsel=self.stelsel)
-        self.config = config
 
     def bereken(
         self,

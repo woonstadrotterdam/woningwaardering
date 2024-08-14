@@ -4,7 +4,6 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.config.config import Stelselconfig
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
@@ -31,15 +30,10 @@ class OppervlakteVanVertrekken(Stelselgroep):
     def __init__(
         self,
         peildatum: date = date.today(),
-        config: Stelselconfig | None = None,
     ) -> None:
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_vertrekken
         self.peildatum = peildatum
-
-        if config is None:
-            config = Stelselconfig.load(stelsel=self.stelsel)
-        self.config = config
 
     def bereken(
         self,

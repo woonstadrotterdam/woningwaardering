@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-# from woningwaardering.stelsels.config.config import Stelselconfig
+#
 from woningwaardering.stelsels.config import Stelselconfig
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
