@@ -9,6 +9,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.energieprestatie import 
 
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
@@ -30,7 +31,8 @@ def test_Energieprestatie_output(
         zelfstandige_woonruimten_input_en_outputmodel
     )
     energieprestatie = Energieprestatie(peildatum=peildatum)
-    resultaat = energieprestatie.bereken(eenheid_input)
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [energieprestatie.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -56,7 +58,8 @@ def test_Energieprestatie_specifiek_output(
 ):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
     energieprestatie = Energieprestatie(peildatum=peildatum)
-    resultaat = energieprestatie.bereken(eenheid_input)
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [energieprestatie.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,

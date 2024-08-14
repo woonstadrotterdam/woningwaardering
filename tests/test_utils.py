@@ -33,7 +33,22 @@ def assert_output_model(
         assert (
             len(verwachte_stelselgroep_resultaten) == 1
         ), f"Geen stelselgroepresultaat gevonden gevonden voor: {stelselgroep.naam}"
-        verwachte_resultaat = verwachte_stelselgroep_resultaten[0]
+        verwachte_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+        verwachte_resultaat.groepen = verwachte_stelselgroep_resultaten
+
+        stelselgroep_resultaten = [
+            groep
+            for groep in resultaat.groepen
+            if groep.criterium_groep.stelselgroep.code == stelselgroep.code
+        ]
+        assert (
+            len(stelselgroep_resultaten) < 2
+        ), f"Meer dan 1 stelselgroepresultaat gevonden voor {stelselgroep.naam}: {stelselgroep_resultaten}"
+        assert (
+            len(stelselgroep_resultaten) == 1
+        ), f"Geen stelselgroepresultaat gevonden gevonden voor: {stelselgroep.naam}"
+        resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+        resultaat.groepen = stelselgroep_resultaten
 
     difflines = [
         *difflib.unified_diff(
