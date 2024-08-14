@@ -2,17 +2,18 @@ from datetime import date
 from pathlib import Path
 
 import pytest
+
 from tests.test_utils import (
     assert_output_model,
     krijg_warning_tuple_op_datum,
     laad_specifiek_input_en_output_model,
 )
-
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import (
     Keuken,
 )
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
@@ -43,7 +44,9 @@ def test_Keuken_output(
         zelfstandige_woonruimten_input_en_outputmodel
     )
     keuken = Keuken(peildatum=peildatum)
-    resultaat = keuken.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [keuken.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -57,7 +60,8 @@ def test_Keuken_output(
 def test_Keuken_specifiek_output(specifieke_input_en_output_model):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
     keuken = Keuken(peildatum=peildatum)
-    resultaat = keuken.bereken(eenheid_input)
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [keuken.bereken(eenheid_input)]
     assert_output_model(
         resultaat,
         eenheid_output,

@@ -1,13 +1,14 @@
 from pathlib import Path
 
 import pytest
-from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
 
+from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     Sanitair,
 )
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
@@ -38,7 +39,9 @@ def test_Sanitair_output(
         zelfstandige_woonruimten_input_en_outputmodel
     )
     sanitair = Sanitair(peildatum=peildatum)
-    resultaat = sanitair.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [sanitair.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -50,7 +53,9 @@ def test_Sanitair_output(
 def test_OppervlakteVanVetrekken_specifiek_output(specifieke_input_en_output_model):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
     sanitair = Sanitair(peildatum=peildatum)
-    resultaat = sanitair.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [sanitair.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,

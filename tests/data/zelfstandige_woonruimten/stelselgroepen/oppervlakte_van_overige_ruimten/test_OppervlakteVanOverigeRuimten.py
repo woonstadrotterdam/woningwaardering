@@ -1,14 +1,14 @@
 from pathlib import Path
 
 import pytest
-from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
 
+from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
     OppervlakteVanOverigeRuimten,
 )
-
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
@@ -30,7 +30,8 @@ def test_OppervlakteVanOverigeRuimten_output(
         zelfstandige_woonruimten_input_en_outputmodel
     )
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
-    resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid_input)
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [oppervlakte_van_overige_ruimten.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -56,7 +57,9 @@ def test_OppervlakteVanOverigeRuimten_specifiek_output(
 ):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
-    resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [oppervlakte_van_overige_ruimten.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,

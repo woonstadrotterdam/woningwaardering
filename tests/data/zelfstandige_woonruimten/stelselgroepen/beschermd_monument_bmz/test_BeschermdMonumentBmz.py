@@ -11,9 +11,9 @@ from tests.test_utils import (
 from woningwaardering.stelsels.zelfstandige_woonruimten.beschermd_monument_bmz import (
     BeschermdMonumentBmz,
 )
-
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
@@ -35,7 +35,9 @@ def test_BeschermdMonumentBmz_output(
         zelfstandige_woonruimten_input_en_outputmodel
     )
     beschermd_monument_bmz = BeschermdMonumentBmz(peildatum=peildatum)
-    resultaat = beschermd_monument_bmz.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [beschermd_monument_bmz.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -62,7 +64,9 @@ def test_BeschermdMonumentBmz_specifiek_output(
 ):
     eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
     beschermd_monument_bmz = BeschermdMonumentBmz(peildatum=peildatum)
-    resultaat = beschermd_monument_bmz.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [beschermd_monument_bmz.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
