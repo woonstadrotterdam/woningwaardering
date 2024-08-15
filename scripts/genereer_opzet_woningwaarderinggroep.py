@@ -106,7 +106,11 @@ if check_write(stelselgroep_file_path):
     stelselgroep_folder.mkdir(parents=True, exist_ok=True)
     stelselgroep_file_path.write_text(stelselgroep_result)
 
-stelselgroep_directories = [f for f in stelsel_folder.iterdir() if f.is_dir()]
+stelselgroep_directories = [
+    f
+    for f in stelsel_folder.iterdir()
+    if f.is_dir() and f.name in Woningwaarderingstelselgroep.__members__
+]
 
 stelselgroepen = [
     (directory.name, string.capwords(directory.name, "_").replace("_", ""))
