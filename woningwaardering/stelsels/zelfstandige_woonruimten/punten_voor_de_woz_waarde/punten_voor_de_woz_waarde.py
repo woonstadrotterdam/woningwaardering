@@ -23,10 +23,6 @@ from woningwaardering.vera.referentiedata import (
 
 
 class PuntenVoorDeWozWaarde(Stelselgroep):
-    factor_onderdeel_I = 14146
-    factor_onderdeel_II = 222
-    factor_onderdeel_II_nieuwbouw_corop = 94
-
     def __init__(
         self,
         peildatum: date = date.today(),
@@ -77,9 +73,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 ),
                 punten=float(
                     utils.rond_af(
-                        Decimal(woz_waarde / 14146),
-                        decimalen=2,  # 14146 is de factor voor onderdeel I
-                    )
+                        Decimal(woz_waarde / 14146), decimalen=2
+                    )  # factor onderdeel I = 14146
                 ),
             )
         )
@@ -99,9 +94,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 ),
                 punten=float(
                     utils.rond_af(
-                        woz_waarde
-                        / oppervlakte
-                        / 222,  # 222 is de factor voor onderdeel II
+                        woz_waarde / oppervlakte / 222,  # factor onderdeel II = 222
                         decimalen=2,
                     )
                 ),
