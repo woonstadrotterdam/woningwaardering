@@ -17,7 +17,6 @@ class Stelselgroep(ABC):
 
     Args:
         peildatum (date, optional): De peildatum voor de waardering".
-        config (Stelselconfig | None, optional): Een optionele configuratie. Defaults naar None.
     """
 
     def __init__(
