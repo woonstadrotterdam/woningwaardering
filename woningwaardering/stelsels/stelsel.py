@@ -9,6 +9,7 @@ from woningwaardering.stelsels.stelselgroep import (
 )
 from woningwaardering.stelsels.utils import (
     filter_dataframe_op_datum,
+    is_geldig,
     rond_af,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -33,10 +34,16 @@ class Stelsel:
     def __init__(
         self,
         stelsel: Woningwaarderingstelsel,
+        begindatum: date,
+        einddatum: date = date.max,
         peildatum: date = date.today(),
         stelselgroepen: list[Stelselgroep] | None = None,
     ) -> None:
         self.stelsel = stelsel
+        if not is_geldig(begindatum, einddatum, peildatum):
+            raise ValueError(
+                f"Stelsel {stelsel.value.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
+            )
         self.peildatum = peildatum
         self.stelselgroepen = stelselgroepen if stelselgroepen is not None else []
         self.df_maximale_huur = pd.read_csv(
