@@ -24,11 +24,9 @@ def test_OppervlakteVanOverigeRuimten(
 
 
 def test_OppervlakteVanOverigeRuimten_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
+    zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     resultaat.groepen = [oppervlakte_van_overige_ruimten.bereken(eenheid_input)]
@@ -53,9 +51,9 @@ def specifieke_input_en_output_model(request):
 
 
 def test_OppervlakteVanOverigeRuimten_specifiek_output(
-    specifieke_input_en_output_model,
+    specifieke_input_en_output_model, peildatum
 ):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

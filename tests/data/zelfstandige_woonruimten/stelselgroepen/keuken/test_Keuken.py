@@ -37,12 +37,8 @@ def test_Keuken(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat)
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-def test_Keuken_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
-):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+def test_Keuken_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
     keuken = Keuken(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
@@ -57,8 +53,8 @@ def test_Keuken_output(
 
 # In deze test data zit expres missende data
 @pytest.mark.filterwarnings("ignore::UserWarning")
-def test_Keuken_specifiek_output(specifieke_input_en_output_model):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+def test_Keuken_specifiek_output(specifieke_input_en_output_model, peildatum):
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
     keuken = Keuken(peildatum=peildatum)
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     resultaat.groepen = [keuken.bereken(eenheid_input)]
@@ -92,8 +88,8 @@ specifiek_warning_mapping = {
 }
 
 
-def test_Keuken_specifiek_warnings(specifieke_input_en_output_model):
-    eenheid_input, _, peildatum = specifieke_input_en_output_model
+def test_Keuken_specifiek_warnings(specifieke_input_en_output_model, peildatum):
+    eenheid_input, _ = specifieke_input_en_output_model
     keuken = Keuken(peildatum=peildatum)
     warning_tuple = krijg_warning_tuple_op_datum(
         eenheid_input.id, peildatum, specifiek_warning_mapping

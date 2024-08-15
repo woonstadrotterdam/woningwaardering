@@ -1,6 +1,5 @@
 import difflib
-import re
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 from typing import Iterator
 
@@ -70,13 +69,9 @@ def assert_output_model(
 def laad_specifiek_input_en_output_model(
     module_path: Path,
     output_json_path: Path,
-) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat, date]:
+) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
     file_name = output_json_path.name
     input_path = module_path / f"input/{file_name}"
-    peildatum_match = re.search(r"\d{4}-\d{2}-\d{2}", str(output_json_path))
-    if peildatum_match is None:
-        raise ValueError(f"geen datum gevonden in bestandsnaam {file_name}")
-    peildatum = datetime.strptime(peildatum_match.group(0), "%Y-%m-%d").date()
     with open(input_path, "r+") as f:
         eenheid_input = EenhedenEenheid.model_validate_json(f.read())
 
@@ -87,7 +82,7 @@ def laad_specifiek_input_en_output_model(
             )
         )
 
-    return eenheid_input, eenheid_output, peildatum
+    return eenheid_input, eenheid_output
 
 
 def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterator[str]:

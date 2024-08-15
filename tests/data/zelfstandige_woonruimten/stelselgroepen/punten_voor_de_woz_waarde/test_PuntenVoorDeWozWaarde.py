@@ -2,16 +2,15 @@ from datetime import date
 from pathlib import Path
 
 import pytest
+
 from tests.test_utils import (
     assert_output_model,
     krijg_warning_tuple_op_datum,
     laad_specifiek_input_en_output_model,
 )
-
 from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
 )
-
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 # Get the absolute path to the current file
@@ -27,11 +26,9 @@ def specifieke_input_en_output_model(request):
 
 
 def test_PuntenVoorDeWozWaarde_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
+    zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=peildatum)
     resultaat = zelfstandige_woonruimten.bereken(eenheid_input)
 
@@ -44,8 +41,10 @@ def test_PuntenVoorDeWozWaarde_output(
 
 # In deze test data zit expres missende data
 @pytest.mark.filterwarnings("ignore::UserWarning")
-def test_PuntenVoorDeWozWaarde_specifiek_output(specifieke_input_en_output_model):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+def test_PuntenVoorDeWozWaarde_specifiek_output(
+    specifieke_input_en_output_model, peildatum
+):
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=peildatum)
     resultaat = zelfstandige_woonruimten.bereken(eenheid_input)
 
@@ -70,8 +69,10 @@ specifiek_warning_mapping = {
 }
 
 
-def test_PuntenVoorDeWozWaarde_specifiek_warnings(specifieke_input_en_output_model):
-    eenheid_input, _, peildatum = specifieke_input_en_output_model
+def test_PuntenVoorDeWozWaarde_specifiek_warnings(
+    specifieke_input_en_output_model, peildatum
+):
+    eenheid_input, _ = specifieke_input_en_output_model
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=peildatum)
     warning_tuple = krijg_warning_tuple_op_datum(
         eenheid_input.id, peildatum, specifiek_warning_mapping

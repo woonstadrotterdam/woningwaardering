@@ -32,12 +32,8 @@ def test_Verwarming(zelfstandige_woonruimten_inputmodel, woningwaardering_result
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-def test_Verwarming_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
-):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+def test_Verwarming_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
     verwarming = Verwarming(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
@@ -50,8 +46,10 @@ def test_Verwarming_output(
     )
 
 
-def test_PuntenVoorDeWozWaarde_specifiek_output(specifieke_input_en_output_model):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+def test_PuntenVoorDeWozWaarde_specifiek_output(
+    specifieke_input_en_output_model, peildatum
+):
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
     verwarming = Verwarming(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

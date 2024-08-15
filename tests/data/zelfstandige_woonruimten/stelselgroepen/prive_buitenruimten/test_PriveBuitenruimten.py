@@ -35,11 +35,9 @@ def test_PriveBuitenruimten(
 
 
 def test_PriveBuitenruimten_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
+    zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
     prive_buitenruimten = PriveBuitenruimten(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
@@ -52,8 +50,10 @@ def test_PriveBuitenruimten_output(
     )
 
 
-def test_PriveBuitenruimten_specifiek_output(specifieke_input_en_output_model):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+def test_PriveBuitenruimten_specifiek_output(
+    specifieke_input_en_output_model, peildatum
+):
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
     prive_buitenruimten = PriveBuitenruimten(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

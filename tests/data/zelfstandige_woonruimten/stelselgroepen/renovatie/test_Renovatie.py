@@ -32,12 +32,8 @@ def test_Renovatie(zelfstandige_woonruimten_inputmodel, woningwaardering_resulta
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-def test_Renovatie_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
-):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+def test_Renovatie_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
 
     renovatie = Renovatie(peildatum=peildatum)
 
@@ -51,8 +47,8 @@ def test_Renovatie_output(
     )
 
 
-def test_Renovatie_specifiek_output(specifieke_input_en_output_model):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+def test_Renovatie_specifiek_output(specifieke_input_en_output_model, peildatum):
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
 
     renovatie = Renovatie(peildatum=peildatum)
 

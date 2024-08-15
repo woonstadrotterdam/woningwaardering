@@ -32,12 +32,8 @@ def test_Sanitair(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaa
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-def test_Sanitair_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
-):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+def test_Sanitair_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
     sanitair = Sanitair(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
@@ -50,8 +46,10 @@ def test_Sanitair_output(
     )
 
 
-def test_OppervlakteVanVetrekken_specifiek_output(specifieke_input_en_output_model):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+def test_OppervlakteVanVetrekken_specifiek_output(
+    specifieke_input_en_output_model, peildatum
+):
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
     sanitair = Sanitair(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
