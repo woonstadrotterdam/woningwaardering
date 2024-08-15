@@ -151,9 +151,7 @@ class Energieprestatie(Stelselgroep):
             woningwaardering.criterium.naam = f"{label} (oud)"
             lookup_key = "oud"
 
-        df = Energieprestatie.lookup_mapping[lookup_key].pipe(
-            utils.filter_dataframe_op_datum, datum_filter=date(2024, 1, 1)
-        )
+        df = Energieprestatie.lookup_mapping[lookup_key]
 
         waarderings_label: str | None = label
 
@@ -219,9 +217,7 @@ class Energieprestatie(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaardering:
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
-        df = Energieprestatie.lookup_mapping["bouwjaar"].pipe(
-            utils.filter_dataframe_op_datum, datum_filter=date(2024, 1, 1)
-        )
+        df = Energieprestatie.lookup_mapping["bouwjaar"]
         filtered_df = df[
             ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
             & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
