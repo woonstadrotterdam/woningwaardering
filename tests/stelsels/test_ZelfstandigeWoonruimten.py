@@ -1,5 +1,6 @@
-from tests.test_utils import assert_output_model
+from datetime import date
 
+from tests.test_utils import assert_output_model
 from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
 )
@@ -9,7 +10,7 @@ from woningwaardering.vera.bvg.generated import (
 
 
 def test_ZelfstandigeWoonruimten(zelfstandige_woonruimten_inputmodel):
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten()
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 5, 1))
     resultaat = zelfstandige_woonruimten.bereken(zelfstandige_woonruimten_inputmodel)
     assert isinstance(
         resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
