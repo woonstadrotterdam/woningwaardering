@@ -5,7 +5,6 @@ import pandas as pd
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
-
 from rdflib import Graph, Literal, Namespace
 from rdflib.plugins.sparql import prepareQuery
 
@@ -20,6 +19,25 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatiesoort,
     Energieprestatiestatus,
 )
+
+
+def is_geldig(
+    begindatum: date = date.min,
+    einddatum: date = date.max,
+    peildatum: date = date.today(),
+) -> bool:
+    """
+    Controleert of de peildatum valt tussen de begindatum en einddatum.
+
+    Parameters:
+        begindatum (date): De begindatum.
+        einddatum (date): De einddatum.
+        peildatum (date): De peildatum.
+
+    Returns:
+        bool: True als de peildatum tussen de begindatum en einddatum valt, anders False.
+    """
+    return begindatum <= peildatum <= einddatum
 
 
 def naar_tabel(
