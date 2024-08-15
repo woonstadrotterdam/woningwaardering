@@ -23,6 +23,10 @@ from woningwaardering.vera.referentiedata import (
 
 
 class PuntenVoorDeWozWaarde(Stelselgroep):
+    factor_onderdeel_I = 14146
+    factor_onderdeel_II = 222
+    factor_onderdeel_II_nieuwbouw_corop = 94
+
     def __init__(
         self,
         peildatum: date = date.today(),
