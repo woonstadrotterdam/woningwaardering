@@ -26,9 +26,14 @@ class Stelsel:
 
     Parameters:
         stelsel (Woningwaarderingstelsel): Het stelsel dat wordt berekend.
+        begindatum (date): De begindatum van de geldigheid van het stelsel.
+        einddatum (date, optional): De einddatum van de geldigheid van het stelsel.
         peildatum (date, optional): De peildatum voor de waardering.
             Standaard is de huidige datum.
         stelselgroepen (list[Stelselgroep] | None, optional): De stelselgroepen die worden berekend.
+
+    Raises:
+        ValueError: Als het stelsel niet geldig is op de peildatum.
     """
 
     def __init__(
