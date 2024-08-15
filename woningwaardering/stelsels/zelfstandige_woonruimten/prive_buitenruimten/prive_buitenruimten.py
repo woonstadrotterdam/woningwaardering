@@ -36,7 +36,7 @@ class PriveBuitenruimten(Stelselgroep):
         files("woningwaardering").joinpath(
             f"{LOOKUP_TABEL_FOLDER}/oppervlakte_punten.csv"
         )
-    ).pipe(utils.filter_dataframe_op_datum, date(2024, 1, 1))
+    )
 
     def __init__(
         self,
