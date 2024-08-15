@@ -6,7 +6,7 @@
 
 # Woningwaardering
 
-> ⚠️ Deze release kan gebruikt worden voor zelfstandige woonruimten volgens het beleidsboek van januari 2024. De implementatie van het beleidsboek van juli 2024 (Wet Betaalbare Huur) voor zelfstandige en onzelfstandige woonruimten wordt momenteel ontwikkeld en later dit jaar gereleased.
+> ⚠️ Deze release kan gebruikt worden voor zelfstandige woonruimten volgens het beleidsboek van januari 2024. Toegestane peildatum is daarom vanaf 1 januari 2024 tot 1 juli 2024. De implementatie van het beleidsboek van juli 2024 (Wet Betaalbare Huur) voor zelfstandige en onzelfstandige woonruimten wordt momenteel ontwikkeld en later dit jaar gereleased.
 
 📊 **Status**
 
@@ -98,14 +98,6 @@ Met behulp van deze extensie kunnen CSV-bestanden als tabel weergegeven worden i
 Hieronder is een voorbeeldtabel te zien zoals deze met Excel Viewer in VSCode wordt weergegeven.
 
 ![Excel Viewer](https://github.com/woonstadrotterdam/woningwaardering/blob/main/docs/afbeeldingen/excel_viewer.png?raw=true)
-
-Door gebruik van CSV-bestanden, wordt het selecteren van de juiste rij of waarde door middel van een peildatum vergemakkelijkt.
-In de `woningwaardering`-package wordt een peildatum gebruikt om de juiste waarde van bijvoorbeeld een variabele uit een tabel te selecteren.
-Dit kan worden gedaan op basis van de `Begindatum` en de `Einddatum` kolommen in een CSV-bestand.
-Wanneer er geen `Begindatum` of `Einddatum` is gespecificeerd, dan is deze niet bekend.
-Dit betekent niet dat er geen werkbare en geldige rij geselecteerd kan worden.
-Wel zou het kunnen dat er door het ontbreken van een `Begindatum` of `Einddatum` meerdere rijen geldig zijn voor een peildatum.
-In dit geval zal de `woningwaardering`-package een error geven die duidelijk maakt dat er geen geldige rij gekozen kan worden op basis van de peildatum voor het desbetreffende CSV-bestand.
 
 ### Warnings
 
