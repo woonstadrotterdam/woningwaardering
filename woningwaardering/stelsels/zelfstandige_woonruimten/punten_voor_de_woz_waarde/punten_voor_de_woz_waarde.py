@@ -9,7 +9,6 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -30,6 +29,10 @@ LOOKUP_TABEL_FOLDER = (
 
 
 class PuntenVoorDeWozWaarde(Stelselgroep):
+    factor_onderdeel_I = 14146
+    factor_onderdeel_II = 222
+    factor_onderdeel_II_nieuwbouw_corop = 94
+
     def __init__(
         self,
         peildatum: date = date.today(),
@@ -73,19 +76,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
 
-        df_woz_factor = pd.read_csv(
-            files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/woz_factor.csv")
-        ).pipe(utils.filter_dataframe_op_datum, self.peildatum)
-
-        factor_onderdeel_I = df_woz_factor["Onderdeel I"].item()
-
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel I"
                 ),
                 punten=float(
-                    utils.rond_af(Decimal(woz_waarde / factor_onderdeel_I), decimalen=2)
+                    utils.rond_af(
+                        Decimal(woz_waarde / self.factor_onderdeel_I), decimalen=2
+                    )
                 ),
             )
         )
@@ -98,8 +97,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 UserWarning,
             )
 
-        factor_onderdeel_II = df_woz_factor["Onderdeel II"].astype(float).item()
-
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -107,7 +104,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 ),
                 punten=float(
                     utils.rond_af(
-                        woz_waarde / oppervlakte / factor_onderdeel_II,
+                        woz_waarde / oppervlakte / self.factor_onderdeel_II,
                         decimalen=2,
                     )
                 ),
