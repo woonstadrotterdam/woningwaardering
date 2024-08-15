@@ -48,6 +48,12 @@ questions = [
         message="Voor welk stelsel wil je een stelselgroep implementeren?",
         choices=[(stelsel.naam, stelsel.name) for stelsel in Woningwaarderingstelsel],
     ),
+    inquirer.Text(
+        "begindatum",
+        message=lambda answers: f"Vanaf welke datum is het {Woningwaarderingstelsel[answers.get('stelsel')].naam} stelsel geldig?",
+        default=date(date.today().year, 7, 1),
+        validate=validate_date,
+    ),
     inquirer.List(
         "stelselgroep",
         message="Welke stelselgroep wil je implementeren?",
@@ -64,6 +70,7 @@ questions = [
 answers = inquirer.prompt(questions)
 
 stelsel = str(answers.get("stelsel"))
+begindatum = str(answers.get("begindatum"))
 stelselgroep = str(answers.get("stelselgroep"))
 woningwaarderingstelsel = Woningwaarderingstelsel[stelsel]
 woningwaarderingstelselgroep = Woningwaarderingstelselgroep[stelselgroep]
@@ -117,34 +124,24 @@ stelselgroep_init_result = stelselgroep_init_template.render(
 
 (stelselgroep_folder / "__init__.py").write_text(stelselgroep_init_result)
 
-if check_write(stelsel_file_path):
-    begindatum = inquirer.prompt(
-        [
-            inquirer.Text(
-                "begindatum",
-                message=lambda answers: f"Vanaf welke datum is het {Woningwaarderingstelsel[stelsel].naam} stelsel geldig?",
-                default=date.today(),
-                validate=validate_date,
-            )
-        ]
-    )["begindatum"]
-    stelsel_template = environment.get_template("stelsels/stelsel/stelsel.py.j2")
-    stelsel_result = stelsel_template.render(
-        className=stelsel_class_naam,
-        stelsel=woningwaarderingstelsel,
-        begindatum=begindatum,
-        stelselgroepen=stelselgroepen,
+
+stelsel_template = environment.get_template("stelsels/stelsel/stelsel.py.j2")
+stelsel_result = stelsel_template.render(
+    className=stelsel_class_naam,
+    stelsel=woningwaarderingstelsel,
+    begindatum=begindatum,
+    stelselgroepen=stelselgroepen,
+)
+stelsel_file = stelsel_file_path.write_text(stelsel_result)
+
+huurprijzen_file_path = stelsel_folder / "maximale_huurprijzen.csv"
+
+if check_write(huurprijzen_file_path):
+    huurprijzen_template = environment.get_template(
+        "stelsels/stelsel/maximale_huurprijzen.csv"
     )
-    stelsel_file = stelsel_file_path.write_text(stelsel_result)
-
-    huurprijzen_file_path = stelsel_folder / "maximale_huurprijzen.csv"
-
-    if check_write(huurprijzen_file_path):
-        huurprijzen_template = environment.get_template(
-            "stelsels/stelsel/maximale_huurprijzen.csv"
-        )
-        huurprijzen_result = huurprijzen_template.render()
-        huurprijzen_file = huurprijzen_file_path.write_text(huurprijzen_result)
+    huurprijzen_result = huurprijzen_template.render()
+    huurprijzen_file = huurprijzen_file_path.write_text(huurprijzen_result)
 
 stelsel_init_template = environment.get_template("stelsels/stelsel/__init__.py.j2")
 
