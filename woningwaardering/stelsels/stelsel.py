@@ -8,7 +8,6 @@ from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
 )
 from woningwaardering.stelsels.utils import (
-    filter_dataframe_op_datum,
     is_geldig,
     rond_af,
 )
@@ -55,7 +54,7 @@ class Stelsel:
             files("woningwaardering").joinpath(
                 f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"
             )
-        ).pipe(filter_dataframe_op_datum, peildatum)
+        )
 
     def bereken(
         self,
@@ -148,7 +147,7 @@ class Stelsel:
         )
 
         hoogste_twee = df_maximale_huur.nlargest(2, "Punten")
-        hoogste_punten = hoogste_twee.iloc[0]["Punten"]
+        hoogste_punten = Decimal(hoogste_twee.iloc[0]["Punten"])
         hoogste_bedrag = Decimal(hoogste_twee.iloc[0]["Bedrag"])
         een_na_hoogste_bedrag = Decimal(hoogste_twee.iloc[1]["Bedrag"])
 
