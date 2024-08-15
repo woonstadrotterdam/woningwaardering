@@ -1,11 +1,5 @@
-from .{{ stelselgroepconfig.module }} import {{ stelselgroepconfig.class_naam }}
-{%- for versieconfig in stelselgroepconfig.versies %}
-from .{{ versieconfig.module }} import {{ versieconfig.class_naam }}
-{% endfor %}
+from .{{ stelselgroep }} import {{ className }}
 
 __all__ = [
-    "{{ stelselgroepconfig.class_naam }}",
-{%- for versieconfig in stelselgroepconfig.versies %}
-    "{{ versieconfig.class_naam }}",
-{% endfor -%}
+    "{{ className }}"
 ]

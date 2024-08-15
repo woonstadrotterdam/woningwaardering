@@ -4,13 +4,7 @@ import string
 import inquirer  # noqa
 import locale
 from jinja2 import Environment, PackageLoader, select_autoescape
-from loguru import logger
 
-from woningwaardering.stelsels.config.config import (
-    Stelselconfig,
-    Stelselgroepconfig,
-    Stelselgroepversieconfig,
-)
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -51,7 +45,7 @@ def check_write(file_path: Path) -> bool:
 questions = [
     inquirer.List(
         "stelsel",
-        message="Welk stelsel wil je implementeren?",
+        message="Voor welk stelsel wil je een stelselgroep implementeren?",
         choices=[(stelsel.naam, stelsel.name) for stelsel in Woningwaarderingstelsel],
     ),
     inquirer.List(
@@ -65,19 +59,12 @@ questions = [
             == Woningwaarderingstelsel[answers.get("stelsel")].code
         ],
     ),
-    inquirer.Text(
-        "begindatum",
-        message=lambda answers: f"Vanaf welke datum is de {Woningwaarderingstelselgroep[answers.get('stelselgroep')].naam} stelselgroep geldig?",
-        default=date.today(),
-        validate=validate_date,
-    ),
 ]
 
 answers = inquirer.prompt(questions)
 
 stelsel = str(answers.get("stelsel"))
 stelselgroep = str(answers.get("stelselgroep"))
-begindatum = date.fromisoformat(answers.get("begindatum"))
 woningwaarderingstelsel = Woningwaarderingstelsel[stelsel]
 woningwaarderingstelselgroep = Woningwaarderingstelselgroep[stelselgroep]
 
@@ -90,20 +77,11 @@ stelselgroep_class_naam = string.capwords(
 
 stelsels_folder = Path("woningwaardering") / "stelsels"
 stelsel_folder = stelsels_folder / stelsel
+stelsel_folder.mkdir(parents=True, exist_ok=True)
+
 stelsel_file_path = stelsel_folder / f"{stelsel}.py"
 
 stelsel_class_naam = string.capwords(woningwaarderingstelsel.name, "_").replace("_", "")
-
-if check_write(stelsel_file_path):
-    stelsel_template = environment.get_template("stelsels/stelsel/stelsel.py.j2")
-    stelsel_result = stelsel_template.render(
-        className=stelsel_class_naam,
-        stelsel=woningwaarderingstelsel,
-    )
-    stelsel_folder.mkdir(parents=True, exist_ok=True)
-    stelsel_file = stelsel_file_path.write_text(stelsel_result)
-
-stelselconfig: Stelselconfig
 
 stelselgroep_folder = stelsel_folder / stelselgroep
 stelselgroep_file_path = stelselgroep_folder / f"{stelselgroep}.py"
@@ -121,87 +99,55 @@ if check_write(stelselgroep_file_path):
     stelselgroep_folder.mkdir(parents=True, exist_ok=True)
     stelselgroep_file_path.write_text(stelselgroep_result)
 
-stelselgroepversie_module = (
-    f"{stelselgroep}_{begindatum.strftime('%b').lower()}_{begindatum.year}"
-)
+stelselgroep_directories = [f for f in stelsel_folder.iterdir() if f.is_dir()]
 
-stelselgroepversie_file_path = stelselgroep_folder / f"{stelselgroepversie_module}.py"
-
-if check_write(stelselgroepversie_file_path):
-    stelselgroepversie_template = environment.get_template(
-        "stelsels/stelsel/stelselgroep/stelselgroepversie.py.j2"
-    )
-    stelselgroepversie_result = stelselgroepversie_template.render(
-        className=f"{stelselgroep_class_naam}{begindatum.strftime('%b').capitalize()}{begindatum.year}",
-        stelsel=woningwaarderingstelsel,
-        stelselgroep=woningwaarderingstelselgroep,
-    )
-    stelselgroep_folder.mkdir(parents=True, exist_ok=True)
-    stelselgroepversie_file_path.write_text(stelselgroepversie_result)
-
-if Path(f"woningwaardering/stelsels/config/{stelsel}.yml").exists():
-    stelselconfig = Stelselconfig.load(woningwaarderingstelsel)
-else:
-    stelselconfig = Stelselconfig(
-        stelsel=woningwaarderingstelsel.name,
-        begindatum=begindatum,
-        stelselgroepen={},
-    )
-
-stelselgroepconfig = stelselconfig.stelselgroepen.get(stelselgroep)
-
-if stelselgroepconfig is None:
-    stelselgroepconfig = Stelselgroepconfig(
-        module=stelselgroep,
-        class_naam=stelselgroep_class_naam,
-        begindatum=begindatum,
-        versies=[],
-    )
-    stelselconfig.stelselgroepen[stelselgroep] = stelselgroepconfig
-
-stelselgroepversie_class_naam = f"{stelselgroep_class_naam}{begindatum.strftime('%b').capitalize()}{begindatum.year}"
-
-stelselgroepconfig.versies = stelselgroepconfig.versies or []
-
-stelselgroepversieconfig = (
-    next(
-        (
-            versie
-            for versie in stelselgroepconfig.versies
-            if versie.class_naam == stelselgroepversie_class_naam
-        ),
-        None,
-    )
-    if stelselgroepconfig is not None and stelselgroepconfig.versies is not None
-    else None
-)
-
-if stelselgroepversieconfig is None:
-    stelselgroepconfig.versies.append(
-        Stelselgroepversieconfig(
-            module=stelselgroepversie_module,
-            class_naam=stelselgroepversie_class_naam,
-            begindatum=begindatum,
-        )
-    )
-    stelselconfig.save()
-else:
-    logger.info(f"Configuratie voor {stelselgroepversieconfig.class_naam} bestaat al")
+stelselgroepen = [
+    (directory.name, string.capwords(directory.name, "_").replace("_", ""))
+    for directory in stelselgroep_directories
+]
 
 stelselgroep_init_template = environment.get_template(
     "stelsels/stelsel/stelselgroep/__init__.py.j2"
 )
 
 stelselgroep_init_result = stelselgroep_init_template.render(
-    stelselgroep=stelselgroep, stelselgroepconfig=stelselgroepconfig
+    stelselgroep=stelselgroep,
+    className=stelselgroep_class_naam,
 )
 
 (stelselgroep_folder / "__init__.py").write_text(stelselgroep_init_result)
 
+if check_write(stelsel_file_path):
+    begindatum = inquirer.prompt(
+        [
+            inquirer.Text(
+                "begindatum",
+                message=lambda answers: f"Vanaf welke datum is het {Woningwaarderingstelsel[stelsel].naam} stelsel geldig?",
+                default=date.today(),
+                validate=validate_date,
+            )
+        ]
+    )["begindatum"]
+    stelsel_template = environment.get_template("stelsels/stelsel/stelsel.py.j2")
+    stelsel_result = stelsel_template.render(
+        className=stelsel_class_naam,
+        stelsel=woningwaarderingstelsel,
+        begindatum=begindatum,
+        stelselgroepen=stelselgroepen,
+    )
+    stelsel_file = stelsel_file_path.write_text(stelsel_result)
+
+    huurprijzen_file_path = stelsel_folder / "maximale_huurprijzen.csv"
+
+    if check_write(huurprijzen_file_path):
+        huurprijzen_template = environment.get_template(
+            "stelsels/stelsel/maximale_huurprijzen.csv"
+        )
+        huurprijzen_result = huurprijzen_template.render()
+        huurprijzen_file = huurprijzen_file_path.write_text(huurprijzen_result)
+
 stelsel_init_template = environment.get_template("stelsels/stelsel/__init__.py.j2")
 
-stelsel_init_result = stelsel_init_template.render(
-    className=stelsel_class_naam, stelselconfig=stelselconfig
-)
+stelsel_init_result = stelsel_init_template.render(stelselgroepen=stelselgroepen)
 
 (stelsel_folder / "__init__.py").write_text(stelsel_init_result)
