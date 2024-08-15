@@ -1,15 +1,12 @@
 import warnings
 from datetime import date
 from decimal import Decimal
-from importlib.resources import files
 from itertools import chain
 
-import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -22,10 +19,6 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
-)
-
-LOOKUP_TABEL_FOLDER = (
-    "stelsels/zelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen"
 )
 
 
@@ -73,19 +66,16 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         woz_waarde = self.minimum_woz_waarde(woz_waarde)
 
-        df_woz_factor = pd.read_csv(
-            files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/woz_factor.csv")
-        ).pipe(utils.filter_dataframe_op_datum, self.peildatum)
-
-        factor_onderdeel_I = df_woz_factor["Onderdeel I"].item()
-
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel I"
                 ),
                 punten=float(
-                    utils.rond_af(Decimal(woz_waarde / factor_onderdeel_I), decimalen=2)
+                    utils.rond_af(
+                        Decimal(woz_waarde / 14146),
+                        decimalen=2,  # 14146 is de factor voor onderdeel I
+                    )
                 ),
             )
         )
@@ -98,8 +88,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 UserWarning,
             )
 
-        factor_onderdeel_II = df_woz_factor["Onderdeel II"].astype(float).item()
-
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -107,7 +95,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 ),
                 punten=float(
                     utils.rond_af(
-                        woz_waarde / oppervlakte / factor_onderdeel_II,
+                        woz_waarde
+                        / oppervlakte
+                        / 222,  # 222 is de factor voor onderdeel II
                         decimalen=2,
                     )
                 ),
@@ -252,13 +242,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         Returns:
             float: De minimum WOZ-waarde.
         """
-        df_minimum_woz_waarde = pd.read_csv(
-            files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/minimum_woz_waarde.csv"
-            )
-        ).pipe(utils.filter_dataframe_op_datum, self.peildatum)
 
-        minimum_woz_waarde = df_minimum_woz_waarde["Minimumwaarde"].astype(float).item()
+        minimum_woz_waarde = 71602
 
         if woz_waarde < minimum_woz_waarde:
             logger.info(
