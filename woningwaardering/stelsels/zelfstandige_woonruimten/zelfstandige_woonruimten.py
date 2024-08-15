@@ -29,6 +29,8 @@ class ZelfstandigeWoonruimten(Stelsel):
     def __init__(self, peildatum: date = date.today()) -> None:
         super().__init__(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
+            begindatum=date(2024, 1, 1),
+            einddatum=date(2024, 6, 30),
             peildatum=peildatum,
             stelselgroepen=[
                 OppervlakteVanVertrekken(peildatum=peildatum),
