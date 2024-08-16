@@ -41,9 +41,8 @@ def handle_unhandled_exception(
     """
     if issubclass(exception_type, KeyboardInterrupt):
         return
-    logger.exception(exception_value)
+    logger.error(exception_value)
     sys.__excepthook__(exception_type, exception_value, exception_traceback)
-    return
 
 
 sys.excepthook = handle_unhandled_exception
