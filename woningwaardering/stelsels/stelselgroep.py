@@ -6,10 +6,6 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
-from woningwaardering.vera.referentiedata import (
-    Woningwaarderingstelsel,
-    Woningwaarderingstelselgroep,
-)
 
 
 class Stelselgroep(ABC):
@@ -23,8 +19,6 @@ class Stelselgroep(ABC):
         self,
         peildatum: date = date.today(),
     ) -> None:
-        self.stelsel: Woningwaarderingstelsel | None = None
-        self.stelselgroep: Woningwaarderingstelselgroep | None = None
         self.peildatum = peildatum
 
     @abstractmethod
@@ -44,4 +38,4 @@ class Stelselgroep(ABC):
         Returns:
             WoningwaarderingResultatenWoningwaarderingGroep: Het resultaat van de woningwaardering voor de gehele groep.
         """
-        return WoningwaarderingResultatenWoningwaarderingGroep()
+        pass  # pragma: no cover

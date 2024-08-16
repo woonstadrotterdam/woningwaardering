@@ -31,9 +31,9 @@ class OppervlakteVanVertrekken(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_vertrekken
-        self.peildatum = peildatum
 
     def bereken(
         self,

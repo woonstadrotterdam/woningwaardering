@@ -30,9 +30,9 @@ class Sanitair(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.sanitair
-        self.peildatum = peildatum
 
     @staticmethod
     def _waardeer_bouwkundig_element_detailsoort(

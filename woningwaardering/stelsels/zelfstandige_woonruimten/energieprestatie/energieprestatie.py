@@ -70,9 +70,9 @@ class Energieprestatie(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.energieprestatie
-        self.peildatum = peildatum
 
     def _bereken_punten_met_label(
         self,

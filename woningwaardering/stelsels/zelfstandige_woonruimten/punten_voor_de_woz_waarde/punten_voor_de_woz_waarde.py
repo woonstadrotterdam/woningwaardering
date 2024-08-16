@@ -27,9 +27,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
-        self.peildatum = peildatum
 
     def bereken(
         self,

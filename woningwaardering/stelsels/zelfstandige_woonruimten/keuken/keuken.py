@@ -31,9 +31,9 @@ class Keuken(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.keuken
-        self.peildatum = peildatum
 
     def bereken(
         self,
