@@ -44,7 +44,6 @@ Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team 
     - [Naamgeving van classes](#naamgeving-van-classes)
       - [Stelsels](#stelsels)
       - [Stelselgroepen](#stelselgroepen)
-      - [Stelselgroepversies](#stelselgroepversies)
     - [Testing](#testing)
       - [Conventies voor tests](#conventies-voor-tests)
       - [Test modellen](#test-modellen)
