@@ -209,9 +209,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     ),
                 )
 
-        logger.info(
-            f"Ruimte {ruimte.naam} ({ruimte.id}): geen trap gevonden en telt dus niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
-        )
         return 0.0
 
 
