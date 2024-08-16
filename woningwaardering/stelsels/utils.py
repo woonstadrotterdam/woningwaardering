@@ -203,45 +203,6 @@ def naar_tabel(
     return table
 
 
-def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFrame:
-    """
-    Filtert een DataFrame op basis van een datum.
-    Het dataframe moet de kolommen 'Begindatum' en 'Einddatum' bevatten.
-
-    Args:
-        df (pd.DataFrame): Het DataFrame dat gefilterd moet worden.
-        datum_filter (date): De datum waarop gefilterd moet worden.
-
-    Returns:
-        pd.DataFrame: Het gefilterde DataFrame.
-
-    Raises:
-        ValueError: Als de DataFrame geen 'Begindatum' en 'Einddatum' kolommen bevat.
-        ValueError: Als de filtering op datum geen records oplevert.
-    """
-    datum_filter_datetime = datetime.combine(datum_filter, datetime.min.time())
-
-    if "Begindatum" not in df.columns or "Einddatum" not in df.columns:
-        error_message = (
-            "De DataFrame moet de kolommen 'Begindatum' en 'Einddatum' bevatten."
-        )
-        logger.error(error_message)
-        raise ValueError(error_message)
-
-    df["Begindatum"] = pd.to_datetime(df["Begindatum"])
-    df["Einddatum"] = pd.to_datetime(df["Einddatum"])
-
-    mask = (df["Begindatum"] <= datum_filter_datetime) & (
-        (df["Einddatum"] >= datum_filter_datetime) | df["Einddatum"].isnull()
-    )
-    resultaat_df = df[mask]
-
-    if resultaat_df.empty:
-        raise ValueError("Datum filter levert geen records op")
-
-    return df[mask]
-
-
 def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
     """
     Check of de dataframe exact één rij bevat.
