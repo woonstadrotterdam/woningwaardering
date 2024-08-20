@@ -1,5 +1,6 @@
 from datetime import date
 from decimal import Decimal
+import warnings
 
 from loguru import logger
 
@@ -7,7 +8,6 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
-    voeg_oppervlakte_kasten_toe_aan_ruimte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -23,7 +23,6 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
-from woningwaardering.vera.utils import badruimte_met_toilet
 
 
 class OppervlakteVanVertrekken(Stelselgroep):
@@ -52,54 +51,35 @@ class OppervlakteVanVertrekken(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
-            criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
-
-            # Indien een toilet in een badruimte of doucheruimte is geplaatst, wordt de oppervlakte van die ruimte met 1m2 verminderd.
-            if badruimte_met_toilet(ruimte):
-                ruimte.oppervlakte = float(
-                    Decimal(str(ruimte.oppervlakte)) - Decimal("1")
-                )
-                criterium_naam += " (1m2 verminderd ivm toilet)"
+            if not classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}): toilet gevonden. 1m2 in mindering gebracht van de oppervlakte van de ruimte."
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) is geen vertrek en komt niet aanmerking voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}."
                 )
+                continue
 
-            if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
-                woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            if not ruimte.oppervlakte:
+                warnings.warn(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
+                    UserWarning,
+                )
+                continue
 
-                if (
-                    not ruimte.gedeeld_met_aantal_eenheden
-                    or ruimte.gedeeld_met_aantal_eenheden <= 1
-                ):
-                    woningwaardering.criterium = (
-                        WoningwaarderingResultatenWoningwaarderingCriterium(
-                            meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                            naam=criterium_naam,
-                        )
-                    )
+            logger.info(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) is een vertek met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}."
+            )
 
-                    woningwaardering.aantal = float(
-                        utils.rond_af(ruimte.oppervlakte, decimalen=2)
-                    )
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                    naam=ruimte.naam,
+                )
+            )
+            woningwaardering.aantal = float(
+                utils.rond_af(ruimte.oppervlakte, decimalen=2)
+            )
 
-                elif (
-                    ruimte.gedeeld_met_aantal_eenheden
-                    and ruimte.gedeeld_met_aantal_eenheden >= 2
-                ):
-                    woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                        naam=f"{criterium_naam} (~{utils.rond_af(ruimte.oppervlakte, decimalen=2)}m2, gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
-                    )
-
-                    woningwaardering.aantal = float(
-                        utils.rond_af(
-                            utils.rond_af(ruimte.oppervlakte, decimalen=2)
-                            / ruimte.gedeeld_met_aantal_eenheden,
-                            decimalen=2,
-                        )
-                    )
-
-                woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         punten = utils.rond_af(
             sum(

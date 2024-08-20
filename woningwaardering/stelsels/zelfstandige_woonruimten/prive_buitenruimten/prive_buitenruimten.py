@@ -42,6 +42,9 @@ class PriveBuitenruimten(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        raise NotImplementedError(
+            "Stelselgroep PriveBuitenruimten is niet geïmplementeerd."
+        )
         super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.prive_buitenruimten
@@ -59,6 +62,8 @@ class PriveBuitenruimten(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.prive_buitenruimten.value,
             )
         )
+
+        raise NotImplementedError("Deze methode moet nog geïmplementeerd worden.")
 
         woningwaardering_groep.woningwaarderingen = []
 

@@ -30,6 +30,7 @@ class Sanitair(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        raise NotImplementedError("Stelselgroep Sanitair is niet geïmplementeerd.")
         super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.sanitair
@@ -133,6 +134,8 @@ class Sanitair(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.sanitair.value,
             )
         )
+
+        raise NotImplementedError("Stelselgroep Sanitair is niet geïmplementeerd.")
 
         woningwaardering_groep.woningwaarderingen = []
 

@@ -1,4 +1,3 @@
-from datetime import date
 from pathlib import Path
 
 import pytest
@@ -57,15 +56,15 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(
 
 # mapping eenheid_id naar peildatum-warning
 specifiek_warning_mapping = {
-    "geen_woz": [
-        (
-            date(2024, 1, 1),
-            (
-                UserWarning,
-                "geen WOZ-waarde",
-            ),
-        )
-    ],
+    # "geen_woz": [
+    #     (
+    #         date(2024, 1, 1),
+    #         (
+    #             UserWarning,
+    #             "geen WOZ-waarde",
+    #         ),
+    #     )
+    # ],
 }
 
 

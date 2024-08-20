@@ -31,6 +31,7 @@ class Keuken(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        raise NotImplementedError("Stelselgroep Keuken is niet geïmplementeerd.")
         super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.keuken
@@ -48,6 +49,7 @@ class Keuken(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.keuken.value,
             )
         )
+
         woningwaardering_groep.woningwaarderingen = []
 
         keukens = set()

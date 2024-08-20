@@ -35,6 +35,7 @@ class Verwarming(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        raise NotImplementedError("Stelselgroep Verwarming is niet geïmplementeerd.")
         super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.verwarming
@@ -52,6 +53,8 @@ class Verwarming(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.verwarming.value,
             )
         )
+
+        raise NotImplementedError("Stelselgroep Verwarming is niet geïmplementeerd.")
 
         klimaatbeheersing_code = next(
             (

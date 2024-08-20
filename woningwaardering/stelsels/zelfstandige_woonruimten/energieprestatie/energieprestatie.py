@@ -70,6 +70,9 @@ class Energieprestatie(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        raise NotImplementedError(
+            "Stelselgroep Energieprestatie is niet geïmplementeerd."
+        )
         super().__init__(peildatum=peildatum)
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.energieprestatie
@@ -242,6 +245,10 @@ class Energieprestatie(Stelselgroep):
                 stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
                 stelselgroep=Woningwaarderingstelselgroep.energieprestatie.value,
             )
+        )
+
+        raise NotImplementedError(
+            "Stelselgroep Energieprestatie is niet geïmplementeerd."
         )
 
         woningwaardering_groep.woningwaarderingen = []
