@@ -98,11 +98,6 @@ Het design van de `woningwaardering`-package is zo gekozen dat stelselgroep-obje
 In lookup tabellen worden constanten en variabelen opgeslagen die nodig zijn bij het berekenen van de punten voor een stelselgroep.
 In de `woningwaardering` package wordt CSV gebruikt als bestandstype voor het opslaan van een lookup tabel.
 De keuze is op CSV gevallen omdat lookup data soms bestaat uit meerdere datarijen waardoor dit vaak minder leesbaar wordt wanneer dit bijvoorbeeld in json of yaml wordt opgeslagen.
-Voor VSCode-gebruikers is de extensie Excel Viewer van GrapeCity aan te raden.
-Met behulp van deze extensie kunnen CSV-bestanden als tabel weergegeven worden in VSCode.
-Hieronder is een voorbeeldtabel te zien zoals deze met Excel Viewer in VSCode wordt weergegeven.
-
-![Excel Viewer](https://github.com/woonstadrotterdam/woningwaardering/blob/main/docs/afbeeldingen/excel_viewer.png?raw=true)
 
 ### Warnings
 
