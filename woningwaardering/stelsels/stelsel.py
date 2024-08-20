@@ -50,9 +50,7 @@ class Stelsel:
             )
         self.peildatum = peildatum
         self.stelselgroepen = (
-            [stelselgroep(peildatum) for stelselgroep in stelselgroepen]
-            if stelselgroepen is not None
-            else []
+            stelselgroep(peildatum) for stelselgroep in stelselgroepen or []
         )
         self.df_maximale_huur = pd.read_csv(
             files("woningwaardering").joinpath(
