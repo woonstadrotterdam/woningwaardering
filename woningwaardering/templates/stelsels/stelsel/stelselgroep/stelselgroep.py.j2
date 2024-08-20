@@ -72,7 +72,10 @@ class {{ className }}(Stelselgroep):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    {{ stelselgroep.name }} = {{ className }}(peildatum=date(2024, 1, 1))  # TODO: Peildatum
+    {{ stelselgroep.name }} = {{ className }}(
+        peildatum=date.fromisoformat("{{ begindatum }}")
+    )
+
     with open(
         "tests/data/generiek/input/37101000032.json", "r+"
     ) as file:
