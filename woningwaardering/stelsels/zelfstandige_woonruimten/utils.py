@@ -1,6 +1,6 @@
+import warnings
 from functools import wraps
 from typing import Callable
-import warnings
 
 from loguru import logger
 

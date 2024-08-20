@@ -6,17 +6,17 @@ from tests.test_utils import assert_output_model, laad_specifiek_input_en_output
 from woningwaardering.stelsels.zelfstandige_woonruimten.energieprestatie import (
     Energieprestatie,
 )
-
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
 def test_Energieprestatie(
-    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    energieprestatie = Energieprestatie()
+    energieprestatie = Energieprestatie(peildatum=peildatum)
     resultaat = energieprestatie.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
@@ -24,13 +24,12 @@ def test_Energieprestatie(
 
 
 def test_Energieprestatie_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
+    zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
     energieprestatie = Energieprestatie(peildatum=peildatum)
-    resultaat = energieprestatie.bereken(eenheid_input)
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [energieprestatie.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -51,12 +50,11 @@ def specifieke_input_en_output_model(request):
     )
 
 
-def test_Energieprestatie_specifiek_output(
-    specifieke_input_en_output_model,
-):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+def test_Energieprestatie_specifiek_output(specifieke_input_en_output_model, peildatum):
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
     energieprestatie = Energieprestatie(peildatum=peildatum)
-    resultaat = energieprestatie.bereken(eenheid_input)
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [energieprestatie.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,

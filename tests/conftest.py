@@ -1,5 +1,4 @@
-import re
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -11,6 +10,11 @@ from woningwaardering.vera.bvg.generated import (
 
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "tests/data"
+
+
+@pytest.fixture()
+def peildatum():
+    return date(2024, 5, 1)
 
 
 @pytest.fixture(
@@ -34,15 +38,10 @@ def zelfstandige_woonruimten_inputmodel(request):
 )
 def zelfstandige_woonruimten_input_en_outputmodel(
     request,
-) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat, date]:
+) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
     output_file_path = request.param
     file_name = Path(output_file_path).name
     input_file_path = DATA_DIR / "zelfstandige_woonruimten/input" / file_name
-    # Extract date from string
-    peildatum_match = re.search(r"\d{4}-\d{2}-\d{2}", str(output_file_path))
-    if peildatum_match is None:
-        raise ValueError(f"geen datum gevonden in bestandsnaam {output_file_path}")
-    peildatum = datetime.strptime(peildatum_match.group(0), "%Y-%m-%d").date()
 
     # get input model
     with open(input_file_path, "r+") as f:
@@ -56,7 +55,7 @@ def zelfstandige_woonruimten_input_en_outputmodel(
             )
         )
 
-    return eenheid_input, eenheid_output, peildatum
+    return eenheid_input, eenheid_output
 
 
 @pytest.fixture()

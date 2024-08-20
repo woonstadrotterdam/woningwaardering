@@ -1,4 +1,5 @@
 from datetime import datetime
+
 import pytest
 
 from woningwaardering.stelsels.utils import is_geldig

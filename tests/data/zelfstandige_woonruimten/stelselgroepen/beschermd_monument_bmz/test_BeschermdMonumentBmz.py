@@ -11,17 +11,17 @@ from tests.test_utils import (
 from woningwaardering.stelsels.zelfstandige_woonruimten.beschermd_monument_bmz import (
     BeschermdMonumentBmz,
 )
-
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
 def test_BeschermdMonumentBmz(
-    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    beschermd_monument_bmz = BeschermdMonumentBmz()
+    beschermd_monument_bmz = BeschermdMonumentBmz(peildatum=peildatum)
     resultaat = beschermd_monument_bmz.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
@@ -29,13 +29,13 @@ def test_BeschermdMonumentBmz(
 
 
 def test_BeschermdMonumentBmz_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
+    zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
     beschermd_monument_bmz = BeschermdMonumentBmz(peildatum=peildatum)
-    resultaat = beschermd_monument_bmz.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [beschermd_monument_bmz.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -58,11 +58,13 @@ def specifieke_input_en_output_model(request):
 
 @pytest.mark.filterwarnings("ignore::UserWarning")
 def test_BeschermdMonumentBmz_specifiek_output(
-    specifieke_input_en_output_model,
+    specifieke_input_en_output_model, peildatum
 ):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
     beschermd_monument_bmz = BeschermdMonumentBmz(peildatum=peildatum)
-    resultaat = beschermd_monument_bmz.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [beschermd_monument_bmz.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -92,8 +94,10 @@ specifiek_warning_mapping = {
 }
 
 
-def test_BeschermdMonumentBmz_specifiek_warnings(specifieke_input_en_output_model):
-    eenheid_input, _, peildatum = specifieke_input_en_output_model
+def test_BeschermdMonumentBmz_specifiek_warnings(
+    specifieke_input_en_output_model, peildatum
+):
+    eenheid_input, _ = specifieke_input_en_output_model
     bmz = BeschermdMonumentBmz(peildatum=peildatum)
     warning_tuple = krijg_warning_tuple_op_datum(
         eenheid_input.id, peildatum, specifiek_warning_mapping

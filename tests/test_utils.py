@@ -1,6 +1,5 @@
 import difflib
-import re
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 from typing import Iterator
 
@@ -9,11 +8,30 @@ from pytest import fail
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
+
+
+def get_stelselgroep_resultaten(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    stelselgroep: Woningwaarderingstelselgroep,
+) -> list[WoningwaarderingResultatenWoningwaarderingGroep]:
+    resultaten = [
+        groep
+        for groep in resultaat.groepen or []
+        if groep.criterium_groep.stelselgroep.code == stelselgroep.code
+    ]
+    assert (
+        len(resultaten) < 2
+    ), f"Meer dan 1 stelselgroepresultaat gevonden voor {stelselgroep.naam}: {resultaten}"
+    assert (
+        len(resultaten) == 1
+    ), f"Geen stelselgroepresultaat gevonden voor: {stelselgroep.naam}"
+    return resultaten
 
 
 def assert_output_model(
@@ -22,21 +40,18 @@ def assert_output_model(
     stelselgroep: Woningwaarderingstelselgroep | None = None,
 ):
     if stelselgroep:
-        stelselgroep_output = [
-            groep
-            for groep in verwachte_resultaat.groepen
-            if groep.criterium_groep.stelselgroep.code == stelselgroep.code
-        ]
-        assert (
-            len(stelselgroep_output) < 2
-        ), f"Meer dan 1 stelselgroepresultaat gevonden voor {stelselgroep.naam}: {stelselgroep_output}"
-        assert (
-            len(stelselgroep_output) == 1
-        ), f"Geen stelselgroepresultaat gevonden gevonden voor: {stelselgroep.naam}"
-        verwachte_resultaat = stelselgroep_output[0]
+        verwachte_groepen = get_stelselgroep_resultaten(
+            verwachte_resultaat, stelselgroep
+        )
+        verwachte_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+            groepen=verwachte_groepen
+        )
 
-    difflines = [
-        *difflib.unified_diff(
+        groepen = get_stelselgroep_resultaten(resultaat, stelselgroep)
+        resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(groepen=groepen)
+
+    difflines = list(
+        difflib.unified_diff(
             fromfile="verwacht",
             tofile="testresultaat",
             a=naar_tabel(verwachte_resultaat).get_string().split("\n"),
@@ -44,7 +59,7 @@ def assert_output_model(
             lineterm="",
             n=3,
         )
-    ]
+    )
 
     colored_diff = "\n".join(kleur_diff(difflines, use_loguru_colors=True))
 
@@ -55,13 +70,9 @@ def assert_output_model(
 def laad_specifiek_input_en_output_model(
     module_path: Path,
     output_json_path: Path,
-) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat, date]:
+) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
     file_name = output_json_path.name
     input_path = module_path / f"input/{file_name}"
-    peildatum_match = re.search(r"\d{4}-\d{2}-\d{2}", str(output_json_path))
-    if peildatum_match is None:
-        raise ValueError(f"geen datum gevonden in bestandsnaam {file_name}")
-    peildatum = datetime.strptime(peildatum_match.group(0), "%Y-%m-%d").date()
     with open(input_path, "r+") as f:
         eenheid_input = EenhedenEenheid.model_validate_json(f.read())
 
@@ -72,7 +83,7 @@ def laad_specifiek_input_en_output_model(
             )
         )
 
-    return eenheid_input, eenheid_output, peildatum
+    return eenheid_input, eenheid_output
 
 
 def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterator[str]:

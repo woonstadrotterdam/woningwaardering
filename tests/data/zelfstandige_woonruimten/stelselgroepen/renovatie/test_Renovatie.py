@@ -1,13 +1,14 @@
 from pathlib import Path
 
 import pytest
-from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
 
+from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     Renovatie,
 )
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
@@ -23,23 +24,24 @@ def specifieke_input_en_output_model(request):
     )
 
 
-def test_Renovatie(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat):
-    renovatie = Renovatie()
+def test_Renovatie(
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
+):
+    renovatie = Renovatie(peildatum=peildatum)
     resultaat = renovatie.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-def test_Renovatie_output(
-    zelfstandige_woonruimten_input_en_outputmodel,
-):
-    eenheid_input, eenheid_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+def test_Renovatie_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
+    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
 
     renovatie = Renovatie(peildatum=peildatum)
-    resultaat = renovatie.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [renovatie.bereken(eenheid_input)]
+
     assert_output_model(
         resultaat,
         eenheid_output,
@@ -47,11 +49,13 @@ def test_Renovatie_output(
     )
 
 
-def test_Renovatie_specifiek_output(specifieke_input_en_output_model):
-    eenheid_input, eenheid_output, peildatum = specifieke_input_en_output_model
+def test_Renovatie_specifiek_output(specifieke_input_en_output_model, peildatum):
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
 
     renovatie = Renovatie(peildatum=peildatum)
-    resultaat = renovatie.bereken(eenheid_input)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [renovatie.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,

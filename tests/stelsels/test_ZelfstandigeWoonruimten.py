@@ -1,6 +1,7 @@
-from tests.test_utils import assert_output_model
+from datetime import date
 
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
+from tests.test_utils import assert_output_model
+from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -9,7 +10,7 @@ from woningwaardering.vera.bvg.generated import (
 
 
 def test_ZelfstandigeWoonruimten(zelfstandige_woonruimten_inputmodel):
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten()
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 5, 1))
     resultaat = zelfstandige_woonruimten.bereken(zelfstandige_woonruimten_inputmodel)
     assert isinstance(
         resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
@@ -17,10 +18,10 @@ def test_ZelfstandigeWoonruimten(zelfstandige_woonruimten_inputmodel):
     assert resultaat.punten is not None
 
 
-def test_ZelfstandigeWoonruimtes_output(zelfstandige_woonruimten_input_en_outputmodel):
-    eenheid_input, verwachte_output, peildatum = (
-        zelfstandige_woonruimten_input_en_outputmodel
-    )
+def test_ZelfstandigeWoonruimtes_output(
+    zelfstandige_woonruimten_input_en_outputmodel, peildatum
+):
+    eenheid_input, verwachte_output = zelfstandige_woonruimten_input_en_outputmodel
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=peildatum)
     resultaat = zelfstandige_woonruimten.bereken(eenheid_input)
     assert_output_model(resultaat, verwachte_output)

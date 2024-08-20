@@ -1,15 +1,10 @@
-import importlib
-import keyword
-import os
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
-from typing import Type, TypeVar
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
-
 from rdflib import Graph, Literal, Namespace
 from rdflib.plugins.sparql import prepareQuery
 
@@ -24,56 +19,6 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatiesoort,
     Energieprestatiestatus,
 )
-
-T = TypeVar("T")
-
-
-def import_class(module_path: str, class_naam: str, class_type: Type[T]) -> Type[T]:
-    """
-    Importeert een klasse uit een module.
-
-    Parameters:
-        module_path (str): Het pad naar de module waarin de klasse zich bevindt.
-        class_naam (str): De naam van de klasse die geïmporteerd moet worden.
-        class_type (Type[T]): Het verwachtte type van de klasse.
-
-    Returns:
-        Type[T]: De geïmporteerde klasse.
-
-    Raises:
-        ValueError: Als de class naam of module path ongeldige tekens of een keyword bevat.
-        ModuleNotFoundError: Als de module niet gevonden kan worden.
-        AttributeError: Als de klasse van het opgegeven type niet gevonden kan worden in de module.
-    """
-    if not class_naam.isidentifier() or keyword.iskeyword(class_naam):
-        raise ValueError("Class naam bevat ongeldige tekens of is een keyword.")
-
-    module_path_parts = module_path.split(".")
-
-    if any(
-        not part.isidentifier() or keyword.iskeyword(part) for part in module_path_parts
-    ):
-        raise ValueError("Module path bevat ongeldige tekens of keywords.")
-
-    logger.debug(f"Importeer class '{class_naam}' uit '{module_path}'")
-
-    try:
-        module = importlib.import_module(module_path)
-        class_: Type[T] = getattr(module, class_naam)
-        if not issubclass(class_, class_type):
-            raise TypeError(
-                f"class '{class_.__qualname__}' in '{class_.__module__}' is niet van het type '{class_type.__qualname__}'"
-            )
-
-    except ModuleNotFoundError as e:
-        logger.error(f"Module {module_path} niet gevonden.", e)
-        raise
-
-    except AttributeError as e:
-        logger.error(f"Class {class_naam} niet gevonden in: {module_path}.", e)
-        raise
-
-    return class_
 
 
 def is_geldig(
@@ -93,30 +38,6 @@ def is_geldig(
         bool: True als de peildatum tussen de begindatum en einddatum valt, anders False.
     """
     return begindatum <= peildatum <= einddatum
-
-
-def vind_yaml_bestanden(directory: str) -> list[str]:
-    """
-    Zoekt alle YAML-bestanden in de opgegeven directory en de subdirectories.
-
-    Parameters:
-        directory (str): De hoofddirectory waarin naar YAML-bestanden wordt gezocht.
-
-    Returns:
-        list[str]: Een lijst met paden naar de gevonden YAML-bestanden.
-    """
-    logger.info(f"Zoek naar YAML-bestanden in: {directory}")
-
-    yaml_files = [
-        os.path.join(root, file)
-        for root, _, files in os.walk(directory)
-        for file in files
-        if file.endswith((".yaml", ".yml"))
-    ]
-
-    if not yaml_files:
-        logger.error(f"Geen YAML-bestanden gevonden in: {directory}")
-    return yaml_files
 
 
 def naar_tabel(
@@ -280,45 +201,6 @@ def naar_tabel(
             )
 
     return table
-
-
-def filter_dataframe_op_datum(df: pd.DataFrame, datum_filter: date) -> pd.DataFrame:
-    """
-    Filtert een DataFrame op basis van een datum.
-    Het dataframe moet de kolommen 'Begindatum' en 'Einddatum' bevatten.
-
-    Args:
-        df (pd.DataFrame): Het DataFrame dat gefilterd moet worden.
-        datum_filter (date): De datum waarop gefilterd moet worden.
-
-    Returns:
-        pd.DataFrame: Het gefilterde DataFrame.
-
-    Raises:
-        ValueError: Als de DataFrame geen 'Begindatum' en 'Einddatum' kolommen bevat.
-        ValueError: Als de filtering op datum geen records oplevert.
-    """
-    datum_filter_datetime = datetime.combine(datum_filter, datetime.min.time())
-
-    if "Begindatum" not in df.columns or "Einddatum" not in df.columns:
-        error_message = (
-            "De DataFrame moet de kolommen 'Begindatum' en 'Einddatum' bevatten."
-        )
-        logger.error(error_message)
-        raise ValueError(error_message)
-
-    df["Begindatum"] = pd.to_datetime(df["Begindatum"])
-    df["Einddatum"] = pd.to_datetime(df["Einddatum"])
-
-    mask = (df["Begindatum"] <= datum_filter_datetime) & (
-        (df["Einddatum"] >= datum_filter_datetime) | df["Einddatum"].isnull()
-    )
-    resultaat_df = df[mask]
-
-    if resultaat_df.empty:
-        raise ValueError("Datum filter levert geen records op")
-
-    return df[mask]
 
 
 def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
