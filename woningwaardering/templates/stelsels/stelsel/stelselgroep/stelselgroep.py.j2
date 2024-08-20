@@ -27,6 +27,11 @@ class {{ className }}(Stelselgroep):
         self.stelsel = {{ stelsel }}
         self.stelselgroep = {{ stelselgroep }}
         self.peildatum = peildatum
+        super().__init__(
+            begindatum=date.fromisoformat("{{ begindatum }}"),
+            einddatum=date.max,
+            peildatum=peildatum,
+        )
 
     def bereken(
         self,
