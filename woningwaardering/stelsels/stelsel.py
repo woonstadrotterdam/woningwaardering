@@ -29,7 +29,7 @@ class Stelsel:
         einddatum (date, optional): De einddatum van de geldigheid van het stelsel.
         peildatum (date, optional): De peildatum voor de waardering.
             Standaard is de huidige datum.
-        stelselgroepen (list[Stelselgroep] | None, optional): De stelselgroepen die worden berekend.
+        stelselgroepen (list[type[Stelselgroep]] | None, optional): De stelselgroepen die worden berekend.
 
     Raises:
         ValueError: Als het stelsel niet geldig is op de peildatum.
@@ -41,7 +41,7 @@ class Stelsel:
         begindatum: date,
         einddatum: date = date.max,
         peildatum: date = date.today(),
-        stelselgroepen: list[Stelselgroep] | None = None,
+        stelselgroepen: list[type[Stelselgroep]] | None = None,
     ) -> None:
         self.stelsel = stelsel
         if not is_geldig(begindatum, einddatum, peildatum):
@@ -49,7 +49,11 @@ class Stelsel:
                 f"Stelsel {stelsel.value.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
             )
         self.peildatum = peildatum
-        self.stelselgroepen = stelselgroepen if stelselgroepen is not None else []
+        self.stelselgroepen = (
+            [stelselgroep(peildatum) for stelselgroep in stelselgroepen]
+            if stelselgroepen is not None
+            else []
+        )
         self.df_maximale_huur = pd.read_csv(
             files("woningwaardering").joinpath(
                 f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"
