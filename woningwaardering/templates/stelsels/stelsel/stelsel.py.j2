@@ -27,7 +27,7 @@ class {{ className }}(Stelsel):
             peildatum=peildatum,
             stelselgroepen=[
                 {%- for stelselgroep, className in stelselgroepen %}
-                {{ className }}(peildatum=date.fromisoformat("{{ begindatum }}")),
+                {{ className }},
                 {%- endfor %}
             ],
         )
