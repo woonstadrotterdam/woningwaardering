@@ -8,11 +8,30 @@ from pytest import fail
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
+
+
+def get_stelselgroep_resultaten(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    stelselgroep: Woningwaarderingstelselgroep,
+) -> list[WoningwaarderingResultatenWoningwaarderingGroep]:
+    resultaten = [
+        groep
+        for groep in resultaat.groepen or []
+        if groep.criterium_groep.stelselgroep.code == stelselgroep.code
+    ]
+    assert (
+        len(resultaten) < 2
+    ), f"Meer dan 1 stelselgroepresultaat gevonden voor {stelselgroep.naam}: {resultaten}"
+    assert (
+        len(resultaten) == 1
+    ), f"Geen stelselgroepresultaat gevonden voor: {stelselgroep.naam}"
+    return resultaten
 
 
 def assert_output_model(
@@ -21,36 +40,18 @@ def assert_output_model(
     stelselgroep: Woningwaarderingstelselgroep | None = None,
 ):
     if stelselgroep:
-        verwachte_stelselgroep_resultaten = [
-            groep
-            for groep in verwachte_resultaat.groepen
-            if groep.criterium_groep.stelselgroep.code == stelselgroep.code
-        ]
-        assert (
-            len(verwachte_stelselgroep_resultaten) < 2
-        ), f"Meer dan 1 stelselgroepresultaat gevonden voor {stelselgroep.naam}: {verwachte_stelselgroep_resultaten}"
-        assert (
-            len(verwachte_stelselgroep_resultaten) == 1
-        ), f"Geen stelselgroepresultaat gevonden gevonden voor: {stelselgroep.naam}"
-        verwachte_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-        verwachte_resultaat.groepen = verwachte_stelselgroep_resultaten
+        verwachte_groepen = get_stelselgroep_resultaten(
+            verwachte_resultaat, stelselgroep
+        )
+        verwachte_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+            groepen=verwachte_groepen
+        )
 
-        stelselgroep_resultaten = [
-            groep
-            for groep in resultaat.groepen
-            if groep.criterium_groep.stelselgroep.code == stelselgroep.code
-        ]
-        assert (
-            len(stelselgroep_resultaten) < 2
-        ), f"Meer dan 1 stelselgroepresultaat gevonden voor {stelselgroep.naam}: {stelselgroep_resultaten}"
-        assert (
-            len(stelselgroep_resultaten) == 1
-        ), f"Geen stelselgroepresultaat gevonden gevonden voor: {stelselgroep.naam}"
-        resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-        resultaat.groepen = stelselgroep_resultaten
+        groepen = get_stelselgroep_resultaten(resultaat, stelselgroep)
+        resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(groepen=groepen)
 
-    difflines = [
-        *difflib.unified_diff(
+    difflines = list(
+        difflib.unified_diff(
             fromfile="verwacht",
             tofile="testresultaat",
             a=naar_tabel(verwachte_resultaat).get_string().split("\n"),
@@ -58,7 +59,7 @@ def assert_output_model(
             lineterm="",
             n=3,
         )
-    ]
+    )
 
     colored_diff = "\n".join(kleur_diff(difflines, use_loguru_colors=True))
 

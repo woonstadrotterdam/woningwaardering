@@ -26,7 +26,6 @@ class {{ className }}(Stelselgroep):
     ) -> None:
         self.stelsel = {{ stelsel }}
         self.stelselgroep = {{ stelselgroep }}
-        self.peildatum = peildatum
         super().__init__(
             begindatum=date.fromisoformat("{{ begindatum }}"),
             einddatum=date.max,
