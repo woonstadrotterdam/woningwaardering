@@ -85,23 +85,13 @@ class Energieprestatie(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingCriterium()
         )
 
-        if not energieprestatie.soort or not energieprestatie.soort.code:
-            warnings.warn(
-                f"Eenheid {eenheid.id}: Energieprestatie heeft geen soort", UserWarning
-            )
-            return woningwaardering
-
-        if not energieprestatie.label or not energieprestatie.label.code:
-            warnings.warn(
-                f"Eenheid {eenheid.id}: Energieprestatie heeft geen label", UserWarning
-            )
-            return woningwaardering
-
-        if not energieprestatie.registratiedatum:
-            warnings.warn(
-                f"Eenheid {eenheid.id}: Energieprestatie heeft geen registratiedatum",
-                UserWarning,
-            )
+        if (
+            not energieprestatie.soort
+            or not energieprestatie.soort.code
+            or not energieprestatie.label
+            or not energieprestatie.label.code
+            or not energieprestatie.registratiedatum
+        ):
             return woningwaardering
 
         label = energieprestatie.label.code
