@@ -24,8 +24,10 @@ def specifieke_input_en_output_model(request):
     )
 
 
-def test_Renovatie(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat):
-    renovatie = Renovatie()
+def test_Renovatie(
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
+):
+    renovatie = Renovatie(peildatum=peildatum)
     resultaat = renovatie.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )

@@ -19,9 +19,9 @@ from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
 def test_BeschermdMonumentBmz(
-    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    beschermd_monument_bmz = BeschermdMonumentBmz()
+    beschermd_monument_bmz = BeschermdMonumentBmz(peildatum=peildatum)
     resultaat = beschermd_monument_bmz.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )

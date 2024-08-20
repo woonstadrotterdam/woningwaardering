@@ -14,9 +14,9 @@ from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
 def test_OppervlakteVanOverigeRuimten(
-    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten()
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
     resultaat = oppervlakte_van_overige_ruimten.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
