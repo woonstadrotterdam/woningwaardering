@@ -14,9 +14,6 @@
 ![](https://progress-bar.dev/50/?title=zelfstandige_woonruimten_jul_2024&width=120)  
 ![](https://progress-bar.dev/0/?title=onzelfstandige_woonruimten_jul_2024&width=108)
 
-![werking-package](docs/afbeeldingen/diagram.png)
-_Voorbeeld van hoe wij deze package gebruiken bij Woonstad Rotterdam_.
-
 Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk wordt om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) van de corporatiesector voor de in- en output van de package. Dit project heeft drie hoofddoelen:
 
 - dat het mogelijk is om de woningwaardering te berekenen op basis van een digitale representatie van woning:
@@ -25,6 +22,13 @@ Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ont
   - door deze package als API te gebruiken kan de woningwaardering in een webapplicatie worden geïntegreerd.
 - om tot een completere woningwaarderingsstelsel-berekening te komen dan die nu beschikbaar zijn via tools zoals bijvoorbeeld die van de [huurcommissie](https://www.huurcommissie.nl/huurders/sociale-huurwoning/maximale-huurprijs-berekenen).
 - om als woningcorporatie of bedrijf te blijven voldoen aan de wetging zoals [Wet Betaalbare Huur](https://www.volkshuisvestingnederland.nl/onderwerpen/wet-betaalbare-huur).
+
+---
+
+![werking-package](docs/afbeeldingen/diagram.png)
+_Voorbeeld van hoe wij de woningwaardering package gebruiken bij Woonstad Rotterdam_.
+
+---
 
 Momenteel wordt er gewerkt aan de implementatie van de woningwaardering van zelfstandige woonruimten volgens het gepubliceerde beleidsboek van de huurcommissie in juli 2024.
 Het beleidsboek van januari 2024 voor zelfstandige woonruimten is afgerond voor zover deze geïmplementeerd kon worden en zal vanaf nu niet meer worden uitgebreid.
