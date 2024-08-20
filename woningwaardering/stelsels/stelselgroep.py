@@ -13,7 +13,12 @@ class Stelselgroep(ABC):
     """Initialiseert een Stelselgroep.
 
     Args:
+        begindatum (date): De begindatum van de geldigheid van de stelselgroep.
+        einddatum (date, optional): De einddatum (t/m) van de geldigheid van de stelselgroep.
         peildatum (date, optional): De peildatum voor de waardering".
+
+    Raises:
+        ValueError: Als de stelselgroep niet geldig is op de peildatum.
     """
 
     def __init__(
