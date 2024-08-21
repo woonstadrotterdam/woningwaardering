@@ -60,6 +60,20 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
+            if not ruimte.detail_soort:
+                warnings.warn(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail soort.",
+                    UserWarning,
+                )
+                continue
+
+            if not ruimte.detail_soort.code:
+                warnings.warn(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail soort code.",
+                    UserWarning,
+                )
+                continue
+
             if not classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten:
                 logger.info(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) is geen overige ruimte en komt niet aanmerking voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}."
