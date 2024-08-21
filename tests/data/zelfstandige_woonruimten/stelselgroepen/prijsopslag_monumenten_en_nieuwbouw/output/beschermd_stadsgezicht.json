@@ -11,15 +11,15 @@
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
       },
-      "woningwaarderingen": [],
-      "opslagpercentage": 0.0
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Beschermd stads- of dorpsgezicht"
+          },
+          "opslagpercentage": 0.05
+        }
+      ],
+      "opslagpercentage": 0.05
     }
-  ],
-  "maximaleHuur": 228.86,
-  "punten": 0.0,
-  "stelsel": {
-    "code": "ZEL",
-    "naam": "Zelfstandige woonruimten"
-  },
-  "maximaleHuurInclusiefOpslag": 228.86
+  ]
 }

@@ -1,0 +1,12 @@
+{
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    },
+    {
+      "code": "STA",
+      "naam": "Beschermd stadsgezicht"
+    }
+  ]
+}
