@@ -6,17 +6,16 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    BeschermdMonumentBmz,
-    Energieprestatie,
-    Keuken,
-    OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
+    OppervlakteVanOverigeRuimten,
+    Verwarming,
+    Energieprestatie,
+    Sanitair,
+    Keuken,
     PriveBuitenruimten,
     PuntenVoorDeWozWaarde,
-    Renovatie,
-    Sanitair,
-    Verwarming,
 )
+
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -27,10 +26,13 @@ from woningwaardering.vera.referentiedata import (
 
 class ZelfstandigeWoonruimten(Stelsel):
     def __init__(self, peildatum: date = date.today()) -> None:
+        raise NotImplementedError(
+            "Het stelsel ZelfstandigeWoonruimten is nog niet geïmplementeerd."
+        )
         super().__init__(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-            begindatum=date(2024, 1, 1),
-            einddatum=date(2024, 6, 30),
+            begindatum=date(2024, 7, 1),
+            einddatum=date.max,
             peildatum=peildatum,
             stelselgroepen=[
                 OppervlakteVanVertrekken,
@@ -41,8 +43,6 @@ class ZelfstandigeWoonruimten(Stelsel):
                 Keuken,
                 PriveBuitenruimten,
                 PuntenVoorDeWozWaarde,
-                Renovatie,
-                BeschermdMonumentBmz,
             ],
         )
 

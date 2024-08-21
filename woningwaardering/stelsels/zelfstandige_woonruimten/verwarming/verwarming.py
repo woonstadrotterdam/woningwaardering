@@ -35,6 +35,9 @@ class Verwarming(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        raise NotImplementedError(
+            "De stelselgroep Verwarming is nog niet geïmplementeerd."
+        )
         super().__init__(
             begindatum=date(2024, 1, 1),
             einddatum=date(2024, 6, 30),
