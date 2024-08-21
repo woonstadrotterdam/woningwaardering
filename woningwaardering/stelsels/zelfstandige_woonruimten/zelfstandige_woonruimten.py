@@ -43,7 +43,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date.today())
     with open(
-        "tests/data/zelfstandige_woonruimten/input/20002000126.json",
+        "tests/data/zelfstandige_woonruimten/input/23003000050.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

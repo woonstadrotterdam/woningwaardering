@@ -64,24 +64,12 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         warnings.warn(warning_msg, UserWarning)
         return None
 
-    # if (
-    #     ruimte.soort.code == Ruimtesoort.buitenruimte.code
-    #     or ruimte.detail_soort.code
-    #     in [
-    #         Ruimtedetailsoort.gemeenschappelijke_tuin.code,
-    #         Ruimtedetailsoort.gemeenschappelijk_dakterras_gda.code,
-    #         Ruimtedetailsoort.achtertuin.code,
-    #         Ruimtedetailsoort.voortuin.code,
-    #         Ruimtedetailsoort.balkon.code,
-    #         Ruimtedetailsoort.atrium_en_of_patio.code,
-    #         Ruimtedetailsoort.loggia.code,
-    #         Ruimtedetailsoort.dakterras.code,
-    #         Ruimtedetailsoort.terras.code,
-    #         Ruimtedetailsoort.tuin_rondom.code,
-    #         Ruimtedetailsoort.tuin.code,
-    #     ]  # ruimten die ondanks potentieel verkeerde parent toch zeker een buitenruimte zijn
-    # ):
-    #     return Ruimtesoort.buitenruimte
+    if ruimte.detail_soort.code in [
+        Ruimtedetailsoort.keuken.code,
+        Ruimtedetailsoort.badkamer.code,
+        Ruimtedetailsoort.doucheruimte.code,
+    ]:
+        return Ruimtesoort.vertrek
 
     if ruimte.detail_soort.code in [
         Ruimtedetailsoort.woonkamer.code,
@@ -90,32 +78,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtedetailsoort.slaapkamer.code,
         Ruimtedetailsoort.badkamer_met_toilet.code,  # potentieel verplaatsen
         Ruimtedetailsoort.overig_vertrek.code,
-    ]:
-        if ruimte.soort.code == Ruimtesoort.vertrek.code and ruimte.oppervlakte >= 4:
-            return Ruimtesoort.vertrek
-        if (
-            ruimte.soort.code == Ruimtesoort.overige_ruimten.code
-            and ruimte.oppervlakte >= 2
-        ):
-            return Ruimtesoort.overige_ruimten
-        else:
-            return None
-
-    if ruimte.detail_soort.code in [
-        Ruimtedetailsoort.keuken.code,
-        Ruimtedetailsoort.badkamer.code,
-        Ruimtedetailsoort.doucheruimte.code,
-    ]:
-        return Ruimtesoort.vertrek
-
-    if ruimte.detail_soort.code == Ruimtedetailsoort.toiletruimte.code:
-        if (
-            ruimte.soort.code == Ruimtesoort.overige_ruimten.code
-            and ruimte.oppervlakte >= 2
-        ):
-            return Ruimtesoort.overige_ruimten
-
-    if ruimte.detail_soort.code in [
         Ruimtedetailsoort.bijkeuken.code,
         Ruimtedetailsoort.berging.code,
         Ruimtedetailsoort.wasruimte.code,
@@ -133,6 +95,16 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             and ruimte.oppervlakte >= 2
         ):
             return Ruimtesoort.overige_ruimten
+        else:
+            return None
+
+    if ruimte.detail_soort.code == Ruimtedetailsoort.toiletruimte.code:
+        if (
+            ruimte.soort.code == Ruimtesoort.overige_ruimten.code
+            and ruimte.oppervlakte >= 2
+        ):
+            return Ruimtesoort.overige_ruimten
+
         else:
             return None
 

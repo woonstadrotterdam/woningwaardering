@@ -171,7 +171,7 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-     Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en
+    Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en
     zonder privé plek. Al dan niet evenveel parkeerplekken als eenheden.
     """
 
@@ -184,7 +184,7 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-     Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, met
+    Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, met
     privé plek.
     """
 
