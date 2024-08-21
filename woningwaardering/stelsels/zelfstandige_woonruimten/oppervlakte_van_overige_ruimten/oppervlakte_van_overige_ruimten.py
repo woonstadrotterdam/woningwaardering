@@ -30,8 +30,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         peildatum: date = date.today(),
     ) -> None:
         super().__init__(
-            begindatum=date(2024, 1, 1),
-            einddatum=date(2024, 6, 30),
+            begindatum=date(2024, 7, 1),
+            einddatum=date.max,
             peildatum=peildatum,
         )
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -106,9 +106,11 @@ if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(
-        peildatum=date(2024, 1, 1)
+        peildatum=date(2024, 7, 1)
     )
-    with open("tests/data/generiek/input/37101000032.json", "r+") as file:
+    with open(
+        "tests/data/zelfstandige_woonruimten/input/23003000050.json", "r+"
+    ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
         woningwaardering_resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid)
