@@ -59,9 +59,6 @@ class Verwarming(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.verwarming.value,
             )
         )
-
-        raise NotImplementedError("Stelselgroep Verwarming is niet geïmplementeerd.")
-
         klimaatbeheersing_code = next(
             (
                 soort.code

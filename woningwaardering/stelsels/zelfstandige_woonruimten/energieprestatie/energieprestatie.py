@@ -240,11 +240,6 @@ class Energieprestatie(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.energieprestatie.value,
             )
         )
-
-        raise NotImplementedError(
-            "Stelselgroep Energieprestatie is niet geïmplementeerd."
-        )
-
         woningwaardering_groep.woningwaarderingen = []
 
         energieprestatie = utils.energieprestatie_met_geldig_label(

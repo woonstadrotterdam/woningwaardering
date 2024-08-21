@@ -67,8 +67,6 @@ class PriveBuitenruimten(Stelselgroep):
             )
         )
 
-        raise NotImplementedError("Deze methode moet nog geïmplementeerd worden.")
-
         woningwaardering_groep.woningwaarderingen = []
 
         buitenruimten = [

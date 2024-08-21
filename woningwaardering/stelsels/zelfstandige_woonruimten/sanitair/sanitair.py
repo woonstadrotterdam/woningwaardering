@@ -140,9 +140,6 @@ class Sanitair(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.sanitair.value,
             )
         )
-
-        raise NotImplementedError("Stelselgroep Sanitair is niet geïmplementeerd.")
-
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:
