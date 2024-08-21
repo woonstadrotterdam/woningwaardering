@@ -86,7 +86,7 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 12.0,
+      "punten": 7.0,
       "woningwaarderingen": [
         {
           "aantal": 11.07,
@@ -97,6 +97,12 @@
               "naam": "Vierkante meter, m2"
             }
           }
+        },
+        {
+          "criterium": {
+            "naam": "Correctie: zolder zonder vaste trap"
+          },
+          "punten": -5.0
         },
         {
           "aantal": 5.05,
@@ -111,11 +117,11 @@
       ]
     }
   ],
-  "maximaleHuur": 377.56,
-  "punten": 66.0,
+  "maximaleHuur": 348.94,
+  "punten": 61.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 377.56
+  "maximaleHuurInclusiefOpslag": 348.94
 }

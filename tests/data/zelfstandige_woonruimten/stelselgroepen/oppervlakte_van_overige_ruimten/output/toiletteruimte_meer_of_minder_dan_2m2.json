@@ -7,20 +7,6 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "OVZ",
-          "naam": "Oppervlakte van vertrekken"
-        }
-      },
-      "punten": 0.0,
-      "woningwaarderingen": []
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
           "code": "OOZ",
           "naam": "Oppervlakte van overige ruimten"
         }

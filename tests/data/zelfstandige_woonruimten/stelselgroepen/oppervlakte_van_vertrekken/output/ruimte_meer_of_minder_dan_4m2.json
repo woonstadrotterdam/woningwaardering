@@ -34,20 +34,6 @@
           }
         }
       ]
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "OOZ",
-          "naam": "Oppervlakte van overige ruimten"
-        }
-      },
-      "punten": 0.0,
-      "woningwaarderingen": []
     }
   ],
   "maximaleHuur": 228.86,
