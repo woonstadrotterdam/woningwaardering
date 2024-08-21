@@ -10,7 +10,7 @@ from woningwaardering.vera.bvg.generated import (
 
 
 def test_ZelfstandigeWoonruimten(zelfstandige_woonruimten_inputmodel):
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 5, 1))
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
     resultaat = zelfstandige_woonruimten.bereken(zelfstandige_woonruimten_inputmodel)
     assert isinstance(
         resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
