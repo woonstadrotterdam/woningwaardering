@@ -140,6 +140,7 @@ class Sanitair(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.sanitair.value,
             )
         )
+
         woningwaardering_groep.woningwaarderingen = []
 
         for ruimte in eenheid.ruimten or []:

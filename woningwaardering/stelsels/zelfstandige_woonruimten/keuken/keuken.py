@@ -53,6 +53,7 @@ class Keuken(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.keuken.value,
             )
         )
+
         woningwaardering_groep.woningwaarderingen = []
 
         keukens = set()

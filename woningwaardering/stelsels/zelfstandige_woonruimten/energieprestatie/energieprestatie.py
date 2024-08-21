@@ -240,6 +240,7 @@ class Energieprestatie(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.energieprestatie.value,
             )
         )
+
         woningwaardering_groep.woningwaarderingen = []
 
         energieprestatie = utils.energieprestatie_met_geldig_label(

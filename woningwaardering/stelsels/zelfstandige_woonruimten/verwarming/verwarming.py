@@ -59,6 +59,7 @@ class Verwarming(Stelselgroep):
                 stelselgroep=Woningwaarderingstelselgroep.verwarming.value,
             )
         )
+
         klimaatbeheersing_code = next(
             (
                 soort.code
