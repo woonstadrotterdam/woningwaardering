@@ -95,8 +95,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             and ruimte.oppervlakte >= 2
         ):
             return Ruimtesoort.overige_ruimten
-        else:
-            return None
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.toiletruimte.code:
         if (
@@ -105,36 +103,37 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         ):
             return Ruimtesoort.overige_ruimten
 
-        else:
-            return None
-
     if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-        if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap):
-            logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}): vaste trap gevonden. Ruimte wordt gewaardeerd als {ruimte.soort.naam}."
-            )
-            if (
-                ruimte.soort.code == Ruimtesoort.vertrek.code
-                and ruimte.oppervlakte >= 4
+        if ruimte.soort.code == Ruimtesoort.vertrek.code:
+            if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap):
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}): trap gevonden. Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
+                )
+                if ruimte.oppervlakte >= 4:
+                    return Ruimtesoort.vertrek
+
+            else:
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen vaste trap gevonden: Ruimte wordt niet gewaardeerd als {ruimte.soort.naam}."
+                )
+
+        if ruimte.soort.code == Ruimtesoort.overige_ruimten.code:
+            if heeft_bouwkundig_element(
+                ruimte, Bouwkundigelementdetailsoort.trap
+            ) or heeft_bouwkundig_element(
+                ruimte, Bouwkundigelementdetailsoort.vlizotrap
             ):
-                return Ruimtesoort.vertrek
-            elif ruimte.oppervlakte >= 2:
-                return Ruimtesoort.overige_ruimten
-            else:
-                return None
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een trap: Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
+                )
+                if ruimte.oppervlakte >= 2:
+                    return Ruimtesoort.overige_ruimten
 
-        elif heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap):
-            logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}): vlizotrap gevonden. Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten}."
-            )
-            if ruimte.oppervlakte >= 2:
-                return Ruimtesoort.overige_ruimten
             else:
-                return None
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen trap: Ruimte wordt niet gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
+                )
 
-        logger.info(
-            f"Ruimte {ruimte.naam} ({ruimte.id}): geen trap gevonden. Ruimte wordt niet gewaardeerd binnen {Woningwaarderingstelsel.zelfstandige_woonruimten}."
-        )
     return None
 
 
