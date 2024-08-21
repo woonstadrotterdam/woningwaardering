@@ -20,9 +20,6 @@ from woningwaardering.vera.referentiedata import (
 
 class ZelfstandigeWoonruimten(Stelsel):
     def __init__(self, peildatum: date = date.today()) -> None:
-        raise NotImplementedError(
-            "Het stelsel ZelfstandigeWoonruimten is nog niet geïmplementeerd."
-        )
         super().__init__(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
             begindatum=date(2024, 7, 1),
@@ -47,7 +44,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date.today())
     with open(
-        "tests/data/zelfstandige_woonruimten/input/23003000050.json",
+        "tests/data/zelfstandige_woonruimten/input/41027000003.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

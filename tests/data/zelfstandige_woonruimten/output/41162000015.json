@@ -11,7 +11,7 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 51.0,
+      "punten": 53.0,
       "woningwaarderingen": [
         {
           "aantal": 1.89,
@@ -24,9 +24,9 @@
           }
         },
         {
-          "aantal": 18.26,
+          "aantal": 18.79,
           "criterium": {
-            "naam": "Woonkamer",
+            "naam": "Woonkamer + 1 kast",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -34,9 +34,9 @@
           }
         },
         {
-          "aantal": 5.55,
+          "aantal": 5.94,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer + 1 kast",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -44,9 +44,9 @@
           }
         },
         {
-          "aantal": 12.33,
+          "aantal": 12.74,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer + 1 kast",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -54,9 +54,9 @@
           }
         },
         {
-          "aantal": 4.72,
+          "aantal": 5.39,
           "criterium": {
-            "naam": "Keuken",
+            "naam": "Keuken + 2 kasten",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -64,9 +64,9 @@
           }
         },
         {
-          "aantal": 8.08,
+          "aantal": 8.56,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer + 2 kasten",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -111,11 +111,11 @@
       ]
     }
   ],
-  "maximaleHuur": 343.25,
-  "punten": 60.0,
+  "maximaleHuur": 354.68,
+  "punten": 62.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 343.25
+  "maximaleHuurInclusiefOpslag": 354.68
 }

@@ -11,7 +11,7 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 134.0,
+      "punten": 138.0,
       "woningwaarderingen": [
         {
           "aantal": 6.33,
@@ -24,9 +24,9 @@
           }
         },
         {
-          "aantal": 21.54,
+          "aantal": 23.42,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer + 1 kast",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -74,9 +74,9 @@
           }
         },
         {
-          "aantal": 18.58,
+          "aantal": 20.45,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer + 1 kast",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -111,11 +111,11 @@
       ]
     }
   ],
-  "maximaleHuur": 815.48,
-  "punten": 137.0,
+  "maximaleHuur": 840.6,
+  "punten": 141.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 815.48
+  "maximaleHuurInclusiefOpslag": 840.6
 }

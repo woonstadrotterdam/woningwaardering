@@ -7,6 +7,7 @@ from loguru import logger
 from woningwaardering.stelsels import Stelselgroep, utils
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
+    voeg_oppervlakte_kasten_toe_aan_ruimte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -29,9 +30,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
-        raise NotImplementedError(
-            "De stelselgroep Oppervlakte van overige ruimten is nog niet geïmplementeerd."
-        )
         super().__init__(
             begindatum=date(2024, 7, 1),
             einddatum=date.max,
@@ -70,6 +68,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 )
                 continue
 
+            criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
+
             logger.info(
                 f"Ruimte {ruimte.naam} ({ruimte.id}) is een overige ruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}."
             )
@@ -78,7 +78,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                    naam=ruimte.naam,
+                    naam=criterium_naam,
                 )
             )
             woningwaardering.aantal = float(
