@@ -40,7 +40,7 @@ def classificeer_ruimte_dec(
 @classificeer_ruimte_dec
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
-    Classificeert de ruimte volgens het Woningwaarderingstelsel (2024-07) voor zelfstandige woonruimten.
+    Classificeert de ruimte volgens het Woningwaarderingstelsel juli 2024 voor zelfstandige woonruimten.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte die geclassificeerd moet worden.
