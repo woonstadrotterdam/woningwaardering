@@ -71,7 +71,7 @@ class Energieprestatie(Stelselgroep):
         peildatum: date = date.today(),
     ) -> None:
         raise NotImplementedError(
-            "Stelselgroep Energieprestatie is niet geïmplementeerd."
+            "De stelselgroep Energieprestatie is nog niet geïmplementeerd."
         )
         super().__init__(
             begindatum=date(2024, 1, 1),

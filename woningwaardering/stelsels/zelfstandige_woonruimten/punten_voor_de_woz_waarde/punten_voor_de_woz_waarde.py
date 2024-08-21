@@ -28,9 +28,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         peildatum: date = date.today(),
     ) -> None:
         raise NotImplementedError(
-            "Stelselgroep PuntenVoorDeWozWaarde is niet geïmplementeerd."
+            "De stelselgroep PuntenVoorDeWozWaarde is nog niet geïmplementeerd."
         )
-        super().__init__(peildatum=peildatum)
         super().__init__(
             begindatum=date(2024, 1, 1),
             einddatum=date(2024, 6, 30),

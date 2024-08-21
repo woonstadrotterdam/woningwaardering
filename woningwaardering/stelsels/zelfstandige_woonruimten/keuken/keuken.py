@@ -31,7 +31,7 @@ class Keuken(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
-        raise NotImplementedError("Stelselgroep Keuken is niet geïmplementeerd.")
+        raise NotImplementedError("De stelselgroep Keuken is nog niet geïmplementeerd.")
         super().__init__(
             begindatum=date(2024, 1, 1),
             einddatum=date(2024, 6, 30),

@@ -30,6 +30,9 @@ class OppervlakteVanVertrekken(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        raise NotImplementedError(
+            "De stelselgroep OppervlakteVanVertrekken is nog niet geïmplementeerd."
+        )
         super().__init__(
             begindatum=date(2024, 7, 1),
             einddatum=date.max,

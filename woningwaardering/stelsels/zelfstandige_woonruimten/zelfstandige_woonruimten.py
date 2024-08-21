@@ -9,6 +9,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
 )
+
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -19,6 +20,9 @@ from woningwaardering.vera.referentiedata import (
 
 class ZelfstandigeWoonruimten(Stelsel):
     def __init__(self, peildatum: date = date.today()) -> None:
+        raise NotImplementedError(
+            "Het stelsel ZelfstandigeWoonruimten is nog niet geïmplementeerd."
+        )
         super().__init__(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
             begindatum=date(2024, 7, 1),

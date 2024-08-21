@@ -43,7 +43,7 @@ class PriveBuitenruimten(Stelselgroep):
         peildatum: date = date.today(),
     ) -> None:
         raise NotImplementedError(
-            "Stelselgroep PriveBuitenruimten is niet geïmplementeerd."
+            "De stelselgroep PriveBuitenruimten is nog niet geïmplementeerd."
         )
         super().__init__(
             begindatum=date(2024, 1, 1),
