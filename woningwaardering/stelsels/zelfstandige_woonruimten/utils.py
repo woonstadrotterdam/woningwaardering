@@ -160,9 +160,9 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
         warnings.warn(message, UserWarning)
         return criterium_naam
 
-    # Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald
-    # en bij de oppervlakte van het betreffende vertrek opgeteld.
-    # Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een
+    # Van vaste kasten wordt de netto oppervlakte bepaald
+    # en bij de oppervlakte van de betreffende ruimte opgeteld.
+    # Een kast waarvan de deur uitkomt op een
     # verkeersruimte, wordt niet gewaardeerd
     if ruimte.detail_soort.code not in [
         Ruimtedetailsoort.hal.code,
@@ -175,8 +175,6 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
             for verbonden_ruimte in ruimte.verbonden_ruimten or []
             if verbonden_ruimte.detail_soort is not None
             and verbonden_ruimte.detail_soort.code == Ruimtedetailsoort.kast.code
-            and verbonden_ruimte.oppervlakte is not None
-            and verbonden_ruimte.oppervlakte < 2.0
         ]
 
         aantal_ruimte_kasten = len(ruimte_kasten)
