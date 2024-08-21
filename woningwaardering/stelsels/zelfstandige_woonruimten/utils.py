@@ -64,7 +64,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         warnings.warn(warning_msg, UserWarning)
         return None
 
-    if ruimte.detail_soort.code in [
+    if ruimte.soort.code == Ruimtesoort.vertrek.code and ruimte.detail_soort.code in [
         Ruimtedetailsoort.keuken.code,
         Ruimtedetailsoort.badkamer.code,
         Ruimtedetailsoort.doucheruimte.code,

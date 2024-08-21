@@ -21,8 +21,13 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
+    Bouwkundigelementdetailsoort,
+)
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
+from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
+from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class OppervlakteVanOverigeRuimten(Stelselgroep):
@@ -81,20 +86,62 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     naam=criterium_naam,
                 )
             )
+
             woningwaardering.aantal = float(
                 utils.rond_af(ruimte.oppervlakte, decimalen=2)
             )
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = utils.rond_af(
-            sum(
-                Decimal(str(woningwaardering.aantal))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.aantal is not None
-            ),
-            decimalen=0,
-        ) * Decimal("0.75")
+            if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
+                # Corrigeer met -5 punten als de zolder niet bereikbaar is met een vaste trap
+                # Note: Op dit moment kan de zolder alleen een
+                # Bouwkundigelementdetailsoort.trap (vast) of Bouwkundigelementdetailsoort.vlizotrap (niet vast)
+                # hebben vanwege classificeer_ruimte in utils.py.
+                if heeft_bouwkundig_element(
+                    ruimte, Bouwkundigelementdetailsoort.vlizotrap
+                ):
+                    logger.info(
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) krijgt maximaal -5 punten omdat de zolder niet bereikbaar is via een vaste trap."
+                    )
+                    woningwaardering_correctie = (
+                        WoningwaarderingResultatenWoningwaardering()
+                    )
+                    woningwaardering_correctie.criterium = (
+                        WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam="Correctie: zolder zonder vaste trap",
+                        )
+                    )
+                    # corrigeeer niet met meer punten dan de oppervlakte voor stelselgroep overige ruimten zou opleveren
+                    correctie = min(
+                        float(
+                            utils.rond_af(ruimte.oppervlakte, decimalen=0)
+                            * Decimal("0.75")
+                        )
+                        - 5.0,
+                        5.0,
+                    )
+                    woningwaardering_correctie.punten = correctie * -1.0
+                    woningwaardering_groep.woningwaarderingen.append(
+                        woningwaardering_correctie
+                    )
+
+        punten = (
+            utils.rond_af(
+                sum(
+                    Decimal(str(woningwaardering.aantal))
+                    for woningwaardering in woningwaardering_groep.woningwaarderingen
+                    or []
+                    if woningwaardering.aantal is not None
+                ),
+                decimalen=0,
+            )
+            * Decimal("0.75")
+        ) + sum(
+            Decimal(str(woningwaardering.punten))
+            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+            if woningwaardering.punten is not None
+        )
 
         woningwaardering_groep.punten = float(punten)
 
