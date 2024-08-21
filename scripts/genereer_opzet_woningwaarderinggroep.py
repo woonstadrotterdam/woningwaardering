@@ -102,6 +102,7 @@ if check_write(stelselgroep_file_path):
         className=stelselgroep_class_naam,
         stelsel=woningwaarderingstelsel,
         stelselgroep=woningwaarderingstelselgroep,
+        begindatum=begindatum,
     )
     stelselgroep_folder.mkdir(parents=True, exist_ok=True)
     stelselgroep_file_path.write_text(stelselgroep_result)

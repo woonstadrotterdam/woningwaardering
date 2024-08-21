@@ -29,8 +29,10 @@ def specifieke_input_en_output_model(request):
     )
 
 
-def test_Keuken(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat):
-    keuken = Keuken()
+def test_Keuken(
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
+):
+    keuken = Keuken(peildatum=peildatum)
     resultaat = keuken.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )

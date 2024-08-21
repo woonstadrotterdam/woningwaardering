@@ -24,8 +24,10 @@ def specifieke_input_en_output_model(request):
     )
 
 
-def test_Sanitair(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat):
-    sanitair = Sanitair()
+def test_Sanitair(
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
+):
+    sanitair = Sanitair(peildatum=peildatum)
     resultaat = sanitair.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
