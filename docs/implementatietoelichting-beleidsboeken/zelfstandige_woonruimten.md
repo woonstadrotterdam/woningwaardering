@@ -102,7 +102,7 @@ De overige rubrieken van het woningwaarderingsstelsel zijn woonvoorzieningen voo
 Vertrekken worden gewaardeerd met 1 punt per vierkante meter.
 
 ### 1.2 Wat zijn vertrekken?
-> Een ruimte moet `Ruimtesoort` `vertrek` hebben om in aanmerking te komen voor een waardering in de rubriek Oppervlakte van vertrekken
+> Een ruimte moet `Ruimtesoort` `vertrek` hebben om in aanmerking te komen voor een waardering in de rubriek Oppervlakte van vertrekken.
 
 Een ruimte wordt als vertrek gewaardeerd als deze voldoet aan de volgende eisen:
 
@@ -184,7 +184,7 @@ Totaal : 26,73 m² Afronding op hele m² : 27 m².
 Dit vertaalt zich dan naar 27 \* 1 punt (per m2) = 27 punten
 
 ## Rubriek 2 Oppervlakte van overige ruimten
-> Een ruimte moet `Ruimtesoort` `overige_ruimte` hebben om in aanmerking te komen voor een waardering in de rubriek Oppervlakte van overige ruimten
+> Een ruimte moet `Ruimtesoort` `overige_ruimte` hebben om in aanmerking te komen voor een waardering in de rubriek Oppervlakte van overige ruimten.
 
 ### 2.1 Puntentoekenning
 Overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter.
@@ -209,7 +209,7 @@ _Zolderruimte_
 
 Indien een zolderruimte niet als vertrek wordt gewaardeerd (zie paragraaf 1.2), dan kan deze mogelijk wel in aanmerking komen voor een waardering als overige ruimte. Dan moet de zolderruimte naast bovenstaande eisen aan nog twee eisen voldoen. De zolderruimte moet namelijk bereikbaar zijn via een tot de woning behorende trap en het dak moet beschoten zijn. Voldoet de zolderruimte niet aan de eisen van paragraaf 1.2 en niet aan de voornoemde eisen, dan wordt de zolderruimte niet gewaardeerd.
 
-> Wanneer een zolder het `Bouwkundigelement` `trap` of `vlizotrap` bezit en de zolder een oppervlakte van minimaal 2 m2 heeft, dan wordt de zolder gewaardeerd onder Oppervlakte van overige ruimten
+> Wanneer een zolder het `Bouwkundigelement` `trap` of `vlizotrap` bezit en de zolder een oppervlakte van minimaal 2 m2 heeft, dan wordt de zolder gewaardeerd onder Oppervlakte van overige ruimten.
 
 _Toiletruimte_
 
