@@ -126,15 +126,16 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                             naam="Correctie: zolder zonder vaste trap",
                         )
                     )
+
                     # corrigeeer niet met meer punten dan de oppervlakte voor stelselgroep overige ruimten zou opleveren
                     correctie = min(
-                        float(
-                            utils.rond_af(ruimte.oppervlakte, decimalen=0)
-                            * Decimal("0.75")
-                        )
-                        - 5.0,
                         5.0,
+                        float(
+                            utils.rond_af(ruimte.oppervlakte, decimalen=2)
+                            * Decimal("0.75")
+                        ),
                     )
+
                     woningwaardering_correctie.punten = correctie * -1.0
                     woningwaardering_groep.woningwaarderingen.append(
                         woningwaardering_correctie
@@ -173,7 +174,7 @@ if __name__ == "__main__":  # pragma: no cover
         peildatum=date(2024, 7, 1)
     )
     with open(
-        "tests/data/zelfstandige_woonruimten/input/23003000050.json", "r+"
+        "tests/data/zelfstandige_woonruimten/input/71211000027.json", "r+"
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
