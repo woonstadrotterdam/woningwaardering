@@ -31,6 +31,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             "Stelselgroep PuntenVoorDeWozWaarde is niet geïmplementeerd."
         )
         super().__init__(peildatum=peildatum)
+        super().__init__(
+            begindatum=date(2024, 1, 1),
+            einddatum=date(2024, 6, 30),
+            peildatum=peildatum,
+        )
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
 

@@ -26,7 +26,11 @@ class {{ className }}(Stelselgroep):
     ) -> None:
         self.stelsel = {{ stelsel }}
         self.stelselgroep = {{ stelselgroep }}
-        self.peildatum = peildatum
+        super().__init__(
+            begindatum=date.fromisoformat("{{ begindatum }}"),
+            einddatum=date.max,
+            peildatum=peildatum,
+        )
 
     def bereken(
         self,
@@ -72,7 +76,10 @@ class {{ className }}(Stelselgroep):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    {{ stelselgroep.name }} = {{ className }}(peildatum=date(2024, 1, 1))  # TODO: Peildatum
+    {{ stelselgroep.name }} = {{ className }}(
+        peildatum=date.fromisoformat("{{ begindatum }}")
+    )
+
     with open(
         "tests/data/generiek/input/37101000032.json", "r+"
     ) as file:

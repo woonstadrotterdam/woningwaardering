@@ -14,9 +14,9 @@ from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
 def test_OppervlakteVanVertrekken(
-    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    oppervlakte_van_vertrekken = OppervlakteVanVertrekken()
+    oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
     resultaat = oppervlakte_van_vertrekken.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )

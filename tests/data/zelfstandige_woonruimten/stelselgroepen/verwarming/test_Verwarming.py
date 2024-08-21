@@ -24,8 +24,10 @@ def specifieke_input_en_output_model(request):
     )
 
 
-def test_Verwarming(zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat):
-    verwarming = Verwarming()
+def test_Verwarming(
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
+):
+    verwarming = Verwarming(peildatum=peildatum)
     resultaat = verwarming.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )

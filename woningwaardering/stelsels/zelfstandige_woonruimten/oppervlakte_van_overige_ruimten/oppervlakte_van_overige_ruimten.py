@@ -29,7 +29,11 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
-        super().__init__(peildatum=peildatum)
+        super().__init__(
+            begindatum=date(2024, 1, 1),
+            einddatum=date(2024, 6, 30),
+            peildatum=peildatum,
+        )
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten
 

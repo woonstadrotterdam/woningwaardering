@@ -14,9 +14,9 @@ from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
 def test_Energieprestatie(
-    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    energieprestatie = Energieprestatie()
+    energieprestatie = Energieprestatie(peildatum=peildatum)
     resultaat = energieprestatie.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )

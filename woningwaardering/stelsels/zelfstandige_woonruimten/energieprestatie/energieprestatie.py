@@ -73,7 +73,11 @@ class Energieprestatie(Stelselgroep):
         raise NotImplementedError(
             "Stelselgroep Energieprestatie is niet geïmplementeerd."
         )
-        super().__init__(peildatum=peildatum)
+        super().__init__(
+            begindatum=date(2024, 1, 1),
+            einddatum=date(2024, 6, 30),
+            peildatum=peildatum,
+        )
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.energieprestatie
 
@@ -88,23 +92,13 @@ class Energieprestatie(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingCriterium()
         )
 
-        if not energieprestatie.soort or not energieprestatie.soort.code:
-            warnings.warn(
-                f"Eenheid {eenheid.id}: Energieprestatie heeft geen soort", UserWarning
-            )
-            return woningwaardering
-
-        if not energieprestatie.label or not energieprestatie.label.code:
-            warnings.warn(
-                f"Eenheid {eenheid.id}: Energieprestatie heeft geen label", UserWarning
-            )
-            return woningwaardering
-
-        if not energieprestatie.registratiedatum:
-            warnings.warn(
-                f"Eenheid {eenheid.id}: Energieprestatie heeft geen registratiedatum",
-                UserWarning,
-            )
+        if (
+            not energieprestatie.soort
+            or not energieprestatie.soort.code
+            or not energieprestatie.label
+            or not energieprestatie.label.code
+            or not energieprestatie.registratiedatum
+        ):
             return woningwaardering
 
         label = energieprestatie.label.code

@@ -25,9 +25,9 @@ def specifieke_input_en_output_model(request):
 
 
 def test_PriveBuitenruimten(
-    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    prive_buitenruimten = PriveBuitenruimten()
+    prive_buitenruimten = PriveBuitenruimten(peildatum=peildatum)
     resultaat = prive_buitenruimten.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )

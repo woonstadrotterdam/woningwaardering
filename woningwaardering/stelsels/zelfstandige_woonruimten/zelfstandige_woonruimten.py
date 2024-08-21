@@ -25,8 +25,8 @@ class ZelfstandigeWoonruimten(Stelsel):
             einddatum=date.max,
             peildatum=peildatum,
             stelselgroepen=[
-                OppervlakteVanVertrekken(peildatum=peildatum),
-                OppervlakteVanOverigeRuimten(peildatum=peildatum),
+                OppervlakteVanVertrekken,
+                OppervlakteVanOverigeRuimten,
                 # Verwarming(peildatum=peildatum),
                 # Energieprestatie(peildatum=peildatum),
                 # Sanitair(peildatum=peildatum),
