@@ -1,6 +1,7 @@
 import sys
 from datetime import date, datetime
 from pathlib import Path
+import warnings
 
 from loguru import logger
 from pydantic import ValidationError
@@ -13,28 +14,28 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 logger.enable("woningwaardering")
+warnings.simplefilter("default", UserWarning)
 
 # zet logger level to INFO
 logger.remove()
 stdout_id = logger.add(sys.stdout, level="INFO")
 
 jaar = datetime.now().year
-PEILDATUM = date(year=jaar, month=1, day=1)
+PEILDATUM = date(year=jaar, month=7, day=1)
 
 DATA_DIR = Path("tests/data")
 
-input_file_paths = (DATA_DIR / "zelfstandige_woonruimten/input").rglob("*.json")
+input_file_paths = (DATA_DIR / "zelfstandige_woonruimten/input/").rglob("*.json")
 
 
-output_file_paths = list((DATA_DIR / "zelfstandige_woonruimten/output").rglob("*.json"))
+output_file_paths = list(
+    (DATA_DIR / "zelfstandige_woonruimten/output/").rglob("*.json")
+)
 
 for input_file_path in input_file_paths:
     if input_file_path.name not in [x.name for x in output_file_paths]:
         output_file_path = (
-            DATA_DIR
-            / "zelfstandige_woonruimten/output/peildatum"
-            / datetime.strftime(PEILDATUM, "%Y-%m-%d")
-            / input_file_path.name
+            DATA_DIR / "zelfstandige_woonruimten/output/" / input_file_path.name
         )
         unverified_path = output_file_path.with_suffix(
             ".unverified" + output_file_path.suffix
