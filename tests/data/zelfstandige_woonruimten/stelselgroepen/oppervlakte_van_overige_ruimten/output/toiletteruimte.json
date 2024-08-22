@@ -11,22 +11,12 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 3.0,
+      "punten": 1.5,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
+          "aantal": 2.1,
           "criterium": {
-            "naam": "Woonkamer (~3.50m2, gedeeld met 2)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 2.0,
-          "criterium": {
-            "naam": "Woonkamer (~3.50m2, gedeeld met 2)",
+            "naam": "Toiletruimte",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -35,5 +25,12 @@
         }
       ]
     }
-  ]
+  ],
+  "maximaleHuur": 228.86,
+  "punten": 2.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
+  "maximaleHuurInclusiefOpslag": 228.86
 }

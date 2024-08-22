@@ -6,14 +6,8 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    OppervlakteVanVertrekken,
     OppervlakteVanOverigeRuimten,
-    Verwarming,
-    Energieprestatie,
-    Sanitair,
-    Keuken,
-    PriveBuitenruimten,
-    PuntenVoorDeWozWaarde,
+    OppervlakteVanVertrekken,
 )
 
 from woningwaardering.vera.bvg.generated import (
@@ -26,9 +20,6 @@ from woningwaardering.vera.referentiedata import (
 
 class ZelfstandigeWoonruimten(Stelsel):
     def __init__(self, peildatum: date = date.today()) -> None:
-        raise NotImplementedError(
-            "Het stelsel ZelfstandigeWoonruimten is nog niet geïmplementeerd."
-        )
         super().__init__(
             stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
             begindatum=date(2024, 7, 1),
@@ -37,12 +28,12 @@ class ZelfstandigeWoonruimten(Stelsel):
             stelselgroepen=[
                 OppervlakteVanVertrekken,
                 OppervlakteVanOverigeRuimten,
-                Verwarming,
-                Energieprestatie,
-                Sanitair,
-                Keuken,
-                PriveBuitenruimten,
-                PuntenVoorDeWozWaarde,
+                # Verwarming,
+                # Energieprestatie,
+                # Sanitair,
+                # Keuken,
+                # PriveBuitenruimten,
+                # PuntenVoorDeWozWaarde,
             ],
         )
 
@@ -51,9 +42,9 @@ if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
     warnings.simplefilter("default", UserWarning)
 
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 5, 1))
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date.today())
     with open(
-        "tests/data/zelfstandige_woonruimten/input/20004000156.json",
+        "tests/data/zelfstandige_woonruimten/input/71211000027.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

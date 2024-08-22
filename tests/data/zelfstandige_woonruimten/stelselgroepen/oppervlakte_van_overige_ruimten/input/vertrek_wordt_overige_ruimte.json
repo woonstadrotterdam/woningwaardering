@@ -1,0 +1,19 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_108014589",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 3,
+      "verwarmd": true,
+      "gemeenschappelijk": true
+    }
+  ]
+}
