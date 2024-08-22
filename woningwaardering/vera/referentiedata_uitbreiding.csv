@@ -2,3 +2,15 @@ Soort;Code;Naam;Omschrijving;Begindatum;Einddatum;Parent;Informatiedomein
 RUIMTEDETAILSOORT;OVL;Overloop;Verkeersruimte: (UITBREIDING) Gang op een bovenverdieping.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
 RUIMTEDETAILSOORT;ENT;Entree;Verkeersruimte: (UITBREIDING) Ingang van een gebouw.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
 RUIMTEDETAILSOORT;KAS;Kast;Overige ruimte: (UITBREIDING);8-4-2024;;RUIMTESOORT.OVR;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;AFZ;Inbouw afzuiginstallatie;(UITBREIDING) Een inbouw afzuiginstallatie verwijdert kookdampen en geuren uit de keuken.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;KPI;Inbouw kookplaat inductie;(UITBREIDING) Een inbouw inductie kookplaat verwarmt met precisie en efficiëntie.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;KPK;Inbouw kookplaat keramisch;(UITBREIDING) Een inbouw keramische kookplaat biedt gelijkmatige verwarming en een glad oppervlak.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;KPG;Inbouw kookplaat gas;(UITBREIDING) Een inbouw gaskookplaat biedt directe vlamregeling voor koken.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;IKK;Inbouw koelkast;(UITBREIDING) Een inbouw koelkast voor geïntegreerde koeling van voedsel.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;IVK;Inbouw vrieskast;(UITBREIDING) Een inbouw vrieskast voor compacte vriesopslag in de keuken.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;IEO;Inbouw oven elektrisch;(UITBREIDING) Een inbouw oven elektrisch voor gelijkmatige verwarming en bakken.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;IOG;Inbouw oven gas;(UITBREIDING) Een inbouw oven op gas voor traditionele kookmethoden.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;IMN;Inbouw magnetron;(UITBREIDING) Een inbouw magnetron voor snelle verwarming en ontdooien.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;IVW;Inbouw vaatwasmachine;(UITBREIDING) Een inbouw vaatwasmachine voor geïntegreerde vaatwas.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;OHM;Éénhandsmengkraan;(UITBREIDING) Een éénhandsmengkraan voor eenvoudige bediening van water.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;THM;Thermostatische mengkraan;(UITBREIDING) Een thermostatische mengkraan voor temperatuurregeling.;22-8-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed

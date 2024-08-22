@@ -38,7 +38,16 @@ class Ruimtedetailsoort(Enum):
     )
     """
     Vertrek: voor een sanitaire ruimte in een woning, dat wil zeggen een ruimte die
-    speciaal is ingericht voor lichaamsverzorging.
+    speciaal is ingericht voor lichaamsverzorging. Een badkamer moet voldoen aan: en
+    waterdichte vloerafwerking, De ruimte heeft over ten minste 50% van de
+    oppervlakte een vrije hoogte van 2,00 m (gemeten vanaf de vloer tot het
+    zichtbare plafond), Waterdichte afwerking tot 1,50 m hoogte voor badruimte en
+    1,80 m voor doucheruimte, Een wastafel inclusief (tweehands-)mengkraan en een
+    spiegel, Een douche of bad met aansluitpunten voor warm en koud water (niet
+    zijnde een warmwaterapparaat) en voorzien van een warm- en koudwaterkraan of een
+    mengkraan. Een bad in een vertrek met een niet-waterdichte vloer wordt door de
+    Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking
+    wordt gezien.
     """
 
     balkon = Referentiedata(
@@ -171,7 +180,7 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-     Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en
+    Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en
     zonder privé plek. Al dan niet evenveel parkeerplekken als eenheden.
     """
 
@@ -184,7 +193,7 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-     Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, met
+    Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, met
     privé plek.
     """
 
@@ -278,8 +287,8 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-     Buitenruimte: een tot het complex behorende open parkeergarage (een open ruimte,
-    dus geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen)
+    Buitenruimte: een tot het complex behorende open parkeergarage (een open ruimte, dus
+    geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen)
     zonder een specifiek toegewezen parkeerplaats.
     """
 
@@ -292,9 +301,9 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-     Buitenruimte: een tot het complex behorende open parkeergarage (een open ruimte,
-    dus geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen)
-    met voor elke woning een specifiek toegewezen parkeerplaats.
+    Buitenruimte: een tot het complex behorende open parkeergarage (een open ruimte, dus
+    geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen) met
+    voor elke woning een specifiek toegewezen parkeerplaats.
     """
 
     overig_vertrek = Referentiedata(
@@ -331,7 +340,7 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-     Overige ruimte: een gesloten parkeergarage met voor elke woning een, al dan niet
+    Overige ruimte: een gesloten parkeergarage met voor elke woning een, al dan niet
     afgebakende, parkeerplaats (alle betrokken huurders moeten  op elk moment van de
     dag kunnen parkeren).
     """

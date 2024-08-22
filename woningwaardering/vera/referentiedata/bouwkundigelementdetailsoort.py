@@ -494,6 +494,21 @@ class Bouwkundigelementdetailsoort(Enum):
     Omlijsting waarin deur of raam bevestigd is. Relatie met IFC codering (IfcWindow)
     """
 
+    laadpaal = Referentiedata(
+        code="LAA",
+        naam="Laadpaal",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    Een laadpaal is een elektrisch oplaadstation voor voertuigen, zoals elektrische
+    auto&#39;s. Het biedt een aansluiting voor opladen, communiceert met het voertuig
+    voor veilige energieoverdracht, en kan slimme functies bevatten zoals
+    laadtijdbeheer en energiebeheer. Relatie met IFC codering (IfcFlowTerminal)
+    """
+
     leuning = Referentiedata(
         code="LEU",
         naam="Leuning",
@@ -1193,6 +1208,152 @@ class Bouwkundigelementdetailsoort(Enum):
             naam="Voorziening",
         ),
     )
+
+    inbouw_afzuiginstallatie = Referentiedata(
+        code="AFZ",
+        naam="Inbouw afzuiginstallatie",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw afzuiginstallatie verwijdert kookdampen en geuren uit de
+    keuken.
+    """
+
+    inbouw_kookplaat_inductie = Referentiedata(
+        code="KPI",
+        naam="Inbouw kookplaat inductie",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw inductie kookplaat verwarmt met precisie en efficiëntie.
+    """
+
+    inbouw_kookplaat_keramisch = Referentiedata(
+        code="KPK",
+        naam="Inbouw kookplaat keramisch",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw keramische kookplaat biedt gelijkmatige verwarming en een
+    glad oppervlak.
+    """
+
+    inbouw_kookplaat_gas = Referentiedata(
+        code="KPG",
+        naam="Inbouw kookplaat gas",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw gaskookplaat biedt directe vlamregeling voor koken.
+    """
+
+    inbouw_koelkast = Referentiedata(
+        code="IKK",
+        naam="Inbouw koelkast",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw koelkast voor geïntegreerde koeling van voedsel.
+    """
+
+    inbouw_vrieskast = Referentiedata(
+        code="IVK",
+        naam="Inbouw vrieskast",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw vrieskast voor compacte vriesopslag in de keuken.
+    """
+
+    inbouw_oven_elektrisch = Referentiedata(
+        code="IEO",
+        naam="Inbouw oven elektrisch",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw oven elektrisch voor gelijkmatige verwarming en bakken.
+    """
+
+    inbouw_oven_gas = Referentiedata(
+        code="IOG",
+        naam="Inbouw oven gas",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw oven op gas voor traditionele kookmethoden.
+    """
+
+    inbouw_magnetron = Referentiedata(
+        code="IMN",
+        naam="Inbouw magnetron",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw magnetron voor snelle verwarming en ontdooien.
+    """
+
+    inbouw_vaatwasmachine = Referentiedata(
+        code="IVW",
+        naam="Inbouw vaatwasmachine",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een inbouw vaatwasmachine voor geïntegreerde vaatwas.
+    """
+
+    eenhandsmengkraan = Referentiedata(
+        code="OHM",
+        naam="Éénhandsmengkraan",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een éénhandsmengkraan voor eenvoudige bediening van water.
+    """
+
+    thermostatische_mengkraan = Referentiedata(
+        code="THM",
+        naam="Thermostatische mengkraan",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    (UITBREIDING) Een thermostatische mengkraan voor temperatuurregeling.
+    """
 
     @property
     def code(self) -> str:
