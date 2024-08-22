@@ -1,6 +1,5 @@
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, ROUND_UP, Decimal
-from decimal import ROUND_HALF_UP, ROUND_UP, Decimal
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
@@ -326,28 +325,6 @@ def rond_af(
     return Decimal(str(getal)).quantize(
         Decimal(f"1e{-decimalen}"), rounding=ROUND_HALF_UP
     )
-
-
-def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
-    """
-    Rond een getal af op een kwart punt.
-
-    Args:
-        getal (float | None | Decimal): Het getal om af te ronden.
-
-    Returns:
-        Decimal: Het afgeronde getal.
-
-    Raises:
-        ValueError: als de input None is.
-    """
-    if getal is None:
-        raise ValueError("Kan None niet afronden")
-    kwart_punt = Decimal("0.25")
-    afronding = (Decimal(getal) / kwart_punt).quantize(
-        Decimal("1"), rounding=ROUND_UP
-    ) * kwart_punt
-    return afronding
 
 
 def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
