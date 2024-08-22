@@ -116,7 +116,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     ruimte, Bouwkundigelementdetailsoort.vlizotrap
                 ):
                     logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) krijgt maximaal -5 punten omdat de zolder niet bereikbaar is via een vaste trap."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) krijgt een correctie van -5 punten maximaal: de zolder is niet bereikbaar via een vaste trap."
                     )
                     woningwaardering_correctie = (
                         WoningwaarderingResultatenWoningwaardering()
