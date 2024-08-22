@@ -195,8 +195,8 @@ Een ruimte wordt als overige ruimte gewaardeerd als deze voldoet aan de volgende
 
 *   ~~de vloer moet begaanbaar zijn;~~
 *   de ruimte dient een oppervlakte te hebben van minimaal 2 m2;
-*   ~~de ruimte voldoet niet aan de eisen voor een vertrek (zie paragraaf 1.2) of een verkeersruimte zijnde;~~
-    *   ~~een ruimte die dient voor het bereiken van een andere ruimte;~~
+*   de ruimte voldoet niet aan de eisen voor een vertrek (zie paragraaf 1.2) of een verkeersruimte zijnde;
+    *   een ruimte die dient voor het bereiken van een andere ruimte;
     *   ~~geen ruimte om duurzaam in te verblijven.~~
 
 Voorbeelden van overige ruimten zijn bijkeukens, bergingen, wasruimten, schuren, garages, zolders en kelders, op voorwaarde dat aan bovenstaande eisen wordt voldaan. Parkeerruimte die exclusief tot één adres behoort (privé-garage), wordt gewaardeerd als overige ruimte. Gemeenschappelijke garages met daarin parkeerplek(ken) worden gewaardeerd onder rubriek 10  (gemeenschappelijke parkeerruimten).
