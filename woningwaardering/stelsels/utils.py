@@ -1,5 +1,5 @@
 from datetime import date, datetime, time
-from decimal import ROUND_HALF_UP, ROUND_UP, Decimal
+from decimal import ROUND_HALF_UP, Decimal
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
@@ -343,7 +343,9 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
     if getal is None:
         raise ValueError("Kan None niet afronden")
     kwart = Decimal("0.25")
-    return (Decimal(getal) / kwart).quantize(Decimal("1"), rounding=ROUND_UP) * kwart
+    return (Decimal(getal) / kwart).quantize(
+        Decimal("1"), rounding=ROUND_HALF_UP
+    ) * kwart
 
 
 def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool:
