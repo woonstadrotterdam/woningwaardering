@@ -7,6 +7,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
+    BouwkundigElementenBouwkundigElement,
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
@@ -21,9 +22,10 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
     Bouwkundigelementdetailsoort,
 )
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.utils import get_bouwkundige_elementen
+from woningwaardering.vera.utils import (
+    get_bouwkundige_elementen,
+)
 
 
 class Keuken(Stelselgroep):
@@ -31,10 +33,9 @@ class Keuken(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
-        raise NotImplementedError("De stelselgroep Keuken is nog niet geïmplementeerd.")
         super().__init__(
-            begindatum=date(2024, 1, 1),
-            einddatum=date(2024, 6, 30),
+            begindatum=date(2024, 7, 1),
+            einddatum=date.max,
             peildatum=peildatum,
         )
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -73,64 +74,47 @@ class Keuken(Stelselgroep):
             ]:
                 continue
 
-            gedeelde_ruimte = (
-                ruimte.gedeeld_met_aantal_eenheden
-                and ruimte.gedeeld_met_aantal_eenheden >= 2
-            )
             keukens.add(ruimte.id)
 
-            aanrechten = list(
-                get_bouwkundige_elementen(ruimte, Bouwkundigelementdetailsoort.aanrecht)
-            )
-
-            if any(aanrechten):
-                logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met {Bouwkundigelementdetailsoort.aanrecht.naam} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+            if ruimte.bouwkundige_elementen:
+                aanrechten = list(
+                    get_bouwkundige_elementen(
+                        ruimte, Bouwkundigelementdetailsoort.aanrecht
+                    )
                 )
-            elif ruimte.detail_soort.code in [
-                Ruimtedetailsoort.keuken.code,
-                Ruimtedetailsoort.woonkamer_en_of_keuken.code,
-            ]:
-                warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een (open) keuken zonder aanrecht.",
-                    UserWarning,
-                )
-                continue
 
-            for aanrecht in aanrechten:
-                if not aanrecht.lengte:
+                if any(aanrechten):
+                    logger.info(
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met {Bouwkundigelementdetailsoort.aanrecht.naam} en komt in aanmerking voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+                    )
+                elif ruimte.detail_soort.code in [
+                    Ruimtedetailsoort.keuken.code,
+                    Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+                ]:
                     warnings.warn(
-                        f"{Bouwkundigelementdetailsoort.aanrecht.naam} {aanrecht.id} in ruimte {ruimte.id} heeft geen lengte en kan daardoor niet gewaardeerd worden.",
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een (open) keuken zonder aanrecht.",
                         UserWarning,
                     )
+                    continue
 
-                if aanrecht.lengte:
-                    if aanrecht.lengte < 1000:
-                        punten = 0.0
-                    elif aanrecht.lengte >= 2000:
-                        punten = 7.0
-                    else:
-                        punten = 4.0
-
-                    logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met een aanrecht met lengte {aanrecht.lengte} millimeter en krijgt {punten} punten."
-                    )
-
-                    woningwaardering_groep.woningwaarderingen.append(
-                        WoningwaarderingResultatenWoningwaardering(
-                            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam="Lengte aanrecht"
-                                if not gedeelde_ruimte
-                                else f"Lengte aanrecht (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
-                                meeteenheid=Meeteenheid.millimeter.value,
-                            ),
-                            aantal=aanrecht.lengte,
-                            punten=utils.rond_af(
-                                punten / (ruimte.gedeeld_met_aantal_eenheden or 1),
-                                decimalen=2,
-                            ),
+                for element in ruimte.bouwkundige_elementen:
+                    punten = self.punten_voor_voorziening(element)
+                    if punten is not None:
+                        logger.info(
+                            f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken met een {element.naam} en krijgt daarvoor {punten} punten."
                         )
-                    )
+
+                        woningwaardering_groep.woningwaarderingen.append(
+                            WoningwaarderingResultatenWoningwaardering(
+                                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                                    naam=element.naam,
+                                ),
+                                punten=utils.rond_af(
+                                    punten,
+                                    decimalen=2,
+                                ),
+                            )
+                        )
 
         if not keukens:
             warnings.warn(
@@ -153,6 +137,48 @@ class Keuken(Stelselgroep):
         )
 
         return woningwaardering_groep
+
+    @staticmethod
+    def punten_voor_voorziening(
+        voorziening: BouwkundigElementenBouwkundigElement,
+    ) -> float | None:
+        # aanrecht
+        if not voorziening.detail_soort or not voorziening.detail_soort.code:
+            warnings.warn(
+                f"Voorziening {voorziening.id} heeft geen detail_soort(code) en kan daardoor niet gewaardeerd worden.",
+                UserWarning,
+            )
+            return None
+        if voorziening.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code:
+            if not voorziening.lengte:
+                warnings.warn(
+                    f"{Bouwkundigelementdetailsoort.aanrecht.naam} {voorziening.id} heeft geen lengte en kan daardoor niet gewaardeerd worden.",
+                    UserWarning,
+                )
+                return None
+            if voorziening.lengte < 1000:
+                return 0
+            if voorziening.lengte >= 2000:
+                return 7
+            return 4
+
+        # extra voorzieningen
+        lookup_dict = {
+            Bouwkundigelementdetailsoort.inbouw_afzuiginstallatie.code: 0.75,
+            Bouwkundigelementdetailsoort.inbouw_kookplaat_inductie.code: 1.75,
+            Bouwkundigelementdetailsoort.inbouw_kookplaat_keramisch.code: 1.0,
+            Bouwkundigelementdetailsoort.inbouw_kookplaat_gas.code: 0.5,
+            Bouwkundigelementdetailsoort.inbouw_koelkast.code: 1.0,
+            Bouwkundigelementdetailsoort.inbouw_vrieskast.code: 0.75,
+            Bouwkundigelementdetailsoort.inbouw_oven_elektrisch.code: 1.0,
+            Bouwkundigelementdetailsoort.inbouw_oven_gas.code: 0.5,
+            Bouwkundigelementdetailsoort.inbouw_magnetron.code: 1.0,
+            Bouwkundigelementdetailsoort.inbouw_vaatwasmachine.code: 1.5,
+            Bouwkundigelementdetailsoort.eenhandsmengkraan.code: 0.25,
+            Bouwkundigelementdetailsoort.thermostatische_mengkraan.code: 0.5,
+        }
+
+        return lookup_dict.get(voorziening.detail_soort.code)
 
 
 if __name__ == "__main__":  # pragma: no cover
