@@ -1,0 +1,18 @@
+{
+  "ruimten": [
+    {
+      "id": "Keuken_1",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "keuken als overige ruimte",
+      "oppervlakte": 1,
+      "verwarmd": true
+    }
+  ]
+}
