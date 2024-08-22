@@ -26,11 +26,11 @@ def classificeer_ruimte_dec(
         ruimtesoort = func(ruimte)
         if ruimtesoort is not None:
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is geklassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
+                f"Ruimte {ruimte.naam} ({ruimte.id}) is geclassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
             )
         else:
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) kan niet worden geklassificeerd als een ruimtesoort binnen {Woningwaarderingstelsel.zelfstandige_woonruimten.naam}"
+                f"Ruimte {ruimte.naam} ({ruimte.id}) kan niet worden geclassificeerd als een ruimtesoort binnen {Woningwaarderingstelsel.zelfstandige_woonruimten.naam}"
             )
         return ruimtesoort
 
