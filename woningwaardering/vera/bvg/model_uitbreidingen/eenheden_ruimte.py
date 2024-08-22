@@ -35,3 +35,8 @@ class _EenhedenRuimte(BaseModel):
     """
     Geeft aan of de ruimte verwarmd wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
     """
+    # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
+    verkoeld: Optional[bool] = Field(default=None, alias="verkoeld")
+    """
+    Geeft aan of de ruimte verkoeld wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
+    """
