@@ -4,7 +4,7 @@ import warnings
 
 from loguru import logger
 
-from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.utils import rond_af, rond_af_op_kwart, naar_tabel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
@@ -82,20 +82,24 @@ class OppervlakteVanVertrekken(Stelselgroep):
                     naam=criterium_naam,
                 )
             )
-            woningwaardering.aantal = float(
-                utils.rond_af(ruimte.oppervlakte, decimalen=2)
-            )
+            woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = utils.rond_af(
-            sum(
-                Decimal(str(woningwaardering.aantal))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.aantal is not None
-            ),
-            decimalen=0,
-        ) * Decimal("1")
+        punten = rond_af_op_kwart(
+            float(
+                rond_af(
+                    sum(
+                        Decimal(str(woningwaardering.aantal))
+                        for woningwaardering in woningwaardering_groep.woningwaarderingen
+                        or []
+                        if woningwaardering.aantal is not None
+                    ),
+                    decimalen=0,
+                )
+                * Decimal("1")
+            )
+        )
 
         woningwaardering_groep.punten = float(punten)
 
@@ -123,6 +127,6 @@ if __name__ == "__main__":  # pragma: no cover
         )
     )
 
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+    tabel = naar_tabel(woningwaardering_resultaat)
 
     print(tabel)

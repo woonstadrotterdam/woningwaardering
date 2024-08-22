@@ -4,7 +4,9 @@ from decimal import Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels import Stelselgroep, utils
+from woningwaardering.stelsels import Stelselgroep
+from woningwaardering.stelsels.utils import rond_af, rond_af_op_kwart, naar_tabel
+
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
@@ -101,9 +103,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 )
             )
 
-            woningwaardering.aantal = float(
-                utils.rond_af(ruimte.oppervlakte, decimalen=2)
-            )
+            woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
@@ -131,8 +131,10 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     correctie = min(
                         5.0,
                         float(
-                            utils.rond_af(ruimte.oppervlakte, decimalen=2)
-                            * Decimal("0.75")
+                            rond_af_op_kwart(
+                                rond_af(ruimte.oppervlakte, decimalen=2)
+                                * Decimal("0.75")
+                            )
                         ),
                     )
 
@@ -141,21 +143,24 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         woningwaardering_correctie
                     )
 
-        punten = (
-            utils.rond_af(
-                sum(
-                    Decimal(str(woningwaardering.aantal))
-                    for woningwaardering in woningwaardering_groep.woningwaarderingen
-                    or []
-                    if woningwaardering.aantal is not None
-                ),
-                decimalen=0,
+        punten = rond_af_op_kwart(
+            (
+                rond_af(
+                    sum(
+                        Decimal(str(woningwaardering.aantal))
+                        for woningwaardering in woningwaardering_groep.woningwaarderingen
+                        or []
+                        if woningwaardering.aantal is not None
+                    ),
+                    decimalen=0,
+                )
+                * Decimal("0.75")
             )
-            * Decimal("0.75")
-        ) + sum(
-            Decimal(str(woningwaardering.punten))
-            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-            if woningwaardering.punten is not None
+            + sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+            )
         )
 
         woningwaardering_groep.punten = float(punten)
@@ -186,6 +191,6 @@ if __name__ == "__main__":  # pragma: no cover
             )
         )
 
-        tabel = utils.naar_tabel(woningwaardering_resultaat)
+        tabel = naar_tabel(woningwaardering_resultaat)
 
         print(tabel)
