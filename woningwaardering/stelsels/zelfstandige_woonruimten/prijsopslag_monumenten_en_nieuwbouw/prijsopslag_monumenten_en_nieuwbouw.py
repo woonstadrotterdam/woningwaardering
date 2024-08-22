@@ -74,14 +74,28 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             monument.code == Eenheidmonument.rijksmonument.code
             for monument in eenheid.monumenten or []
         ):
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Rijksmonument",
-                    ),
-                    opslagpercentage=0.35,
+            begindatum_huurovereenkomst = eenheid.begindatum_huurovereenkomst
+            if begindatum_huurovereenkomst is None:
+                warnings.warn(
+                    f"Eenheid {eenheid.id}: De begindatum van de huurovereenkomst is niet opgegeven voor dit rijksmonument.",
+                    UserWarning,
                 )
+                logger.warning(
+                    f"Voor de waardering van dit rijksmonument wordt aangenomen dat de ingangsdatum van de huurovereenkomst gelijk is aan peildatum {self.peildatum}."
+                )
+                begindatum_huurovereenkomst = self.peildatum
+
+            woningwaardering = WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Rijksmonument",
+                ),
             )
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+            if begindatum_huurovereenkomst >= date(2024, 7, 1):
+                woningwaardering.opslagpercentage = 0.35
+            else:
+                woningwaardering.punten = 50.0
 
         if any(
             monument.code
