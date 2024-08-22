@@ -89,19 +89,19 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         ruimte.detail_soort.naam
         and ruimte.detail_soort.naam == Ruimtedetailsoort.schuur.naam
     ):
-        if ruimte.soort.code == Ruimtesoort.vertrek.code and ruimte.oppervlakte >= 4:
-            return Ruimtesoort.vertrek
-        if (
-            ruimte.soort.code == Ruimtesoort.overige_ruimten.code
-            and ruimte.oppervlakte >= 2
-        ):
-            return Ruimtesoort.overige_ruimten
+        if ruimte.soort.code == Ruimtesoort.vertrek.code:
+            if ruimte.oppervlakte >= 4:
+                return Ruimtesoort.vertrek
+            if ruimte.oppervlakte >= 2:
+                return Ruimtesoort.overige_ruimten
+
+        if ruimte.soort.code == Ruimtesoort.overige_ruimten.code:
+            if ruimte.oppervlakte >= 2:
+                return Ruimtesoort.overige_ruimten
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.toiletruimte.code:
-        if (
-            ruimte.soort.code == Ruimtesoort.overige_ruimten.code
-            and ruimte.oppervlakte >= 2
-        ):
+        # mag alleen als overige ruimte gewaardeerd worden
+        if ruimte.oppervlakte >= 2:
             return Ruimtesoort.overige_ruimten
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:

@@ -113,9 +113,9 @@ class OppervlakteVanVertrekken(Stelselgroep):
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=date(2024, 1, 1))
+    oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=date(2024, 7, 1))
     with open(
-        "tests/data/zelfstandige_woonruimten/input/41164000002.json", "r+"
+        "tests/data/zelfstandige_woonruimten/input/71211000027.json", "r+"
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
