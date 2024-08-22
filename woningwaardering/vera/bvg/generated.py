@@ -3382,6 +3382,13 @@ class EenhedenEenheid(BaseModel):
     """
     De omschrijving van de zorgfaciliteit behorende bij de eenheid.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
+    begindatum_huurovereenkomst: Optional[date] = Field(
+        default=None, alias="begindatumHuurovereenkomst"
+    )
+    """
+    De begindatum van de huurovereenkomst.
+    """
 
 
 class WoningwaarderingResultatenWoningwaarderingResultaatbericht(
