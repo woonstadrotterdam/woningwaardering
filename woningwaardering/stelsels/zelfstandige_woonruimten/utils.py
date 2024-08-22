@@ -84,8 +84,10 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtedetailsoort.wasruimte.code,
         Ruimtedetailsoort.garage.code,
         Ruimtedetailsoort.kelder.code,
-        Ruimtedetailsoort.schuur.code,
-    ]:
+        # Ruimtedetailsoort.schuur.code,
+    ] or (
+        Ruimtedetailsoort.schuur.naam == ruimte.detail_soort.naam
+    ):  # Schacht en schuur hebben dezelfde code
         if ruimte.soort.code == Ruimtesoort.vertrek.code:
             if ruimte.oppervlakte >= 4:
                 return Ruimtesoort.vertrek
