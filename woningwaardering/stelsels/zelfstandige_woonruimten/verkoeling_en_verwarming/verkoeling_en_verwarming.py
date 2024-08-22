@@ -205,7 +205,7 @@ if __name__ == "__main__":  # pragma: no cover
     )
 
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/verkoeling_en_verwarming/input/open_keukens.json",
+        "tests/data/generiek/input/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
