@@ -125,13 +125,13 @@ Voor zolderruimten gelden, naast bovengenoemde eisen,  nog twee eisen om als ve
 
 
 ### 1.3 Meetinstructies
-> De woningwaardering package gaat er vanuit dat de gebruiker zich houdt aan onderstaande meetinstructies voor vertrekken. Met uizondering van _kasten_ kunnen de meetinstructies niet getoets of berekend worden op basis van het VERA model.
+> De woningwaardering package gaat er vanuit dat de gebruiker zich houdt aan onderstaande meetinstructies voor vertrekken. Met uitzondering van _Kasten_ kunnen de meetinstructies niet getoets of berekend worden op basis van het VERA model.
 
 In de toelichting op het woningwaarderingsstelsel is een aantal meetinstructies meegegeven:
 
 #### 1 Binnenmaatse meting
 
-Meting van de oppervlakte van vertrekken vindt plaats van muur tot muur, op een hoogte van 1,50 m boven de vloer, inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten. Deze meethoogte geldt ook als de oppervlakte afwijkt van die op vloerniveau,
+~~Meting van de oppervlakte van vertrekken vindt plaats van muur tot muur, op een hoogte van 1,50 m boven de vloer, inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten. Deze meethoogte geldt ook als de oppervlakte afwijkt van die op vloerniveau,~~
 
 De Huurcommissie hanteert hierbij de volgende uitgangspunten.
 
@@ -165,7 +165,7 @@ De Huurcommissie leest de zinsnede uit de toelichting "alle tot de woning behore
 
 ~~Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50m-hoogte bepalend.~~
 
-#### 5 Oppervlakte onder een open of gesloten vaste trap
+#### ~~5 Oppervlakte onder een open of gesloten vaste trap~~
 
 ~~Van de oppervlakte onder een open dan wel gesloten vaste trap telt mee dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is.~~
 
@@ -264,7 +264,7 @@ Als geen _vaste_ trap aanwezig is, wordt het aantal punten van de vloeroppervlak
 
 ~~Is er op de zolderverdieping ook nog een vertrek aanwezig dat alleen bereikbaar is via het zoldergedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopruimte om het vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en wordt dan gewaardeerd als overige ruimte.~~
 
-#### 6\. Overloop
+#### ~~6\. Overloop~~
 
 ~~Een overloop is een verkeersruimte en wordt niet gewaardeerd. Als er met aftrek van de verkeersruimte en trap voldoende ruimte overblijft en deze (zolder)overloop kennelijk ook bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd (als overige ruimte).~~
 
