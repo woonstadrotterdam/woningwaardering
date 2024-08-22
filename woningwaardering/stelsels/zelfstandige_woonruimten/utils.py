@@ -64,7 +64,8 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         warnings.warn(warning_msg, UserWarning)
         return None
 
-    if ruimte.soort.code == Ruimtesoort.vertrek.code and ruimte.detail_soort.code in [
+    # Keuken, badkamer en doucheruimte worden altijd gewaardeerd als vertrek
+    if ruimte.detail_soort.code in [
         Ruimtedetailsoort.keuken.code,
         Ruimtedetailsoort.badkamer.code,
         Ruimtedetailsoort.doucheruimte.code,
@@ -76,7 +77,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtedetailsoort.woon_en_of_slaapkamer.code,
         Ruimtedetailsoort.woonkamer_en_of_keuken.code,
         Ruimtedetailsoort.slaapkamer.code,
-        Ruimtedetailsoort.badkamer_met_toilet.code,  # potentieel verplaatsen
+        Ruimtedetailsoort.badkamer_met_toilet.code,
         Ruimtedetailsoort.overig_vertrek.code,
         Ruimtedetailsoort.bijkeuken.code,
         Ruimtedetailsoort.berging.code,
