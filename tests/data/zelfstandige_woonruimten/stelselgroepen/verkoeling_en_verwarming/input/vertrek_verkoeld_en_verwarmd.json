@@ -1,0 +1,23 @@
+{
+  "id": "37101000032",
+  "bouwjaar": 1924,
+  "ruimten": [
+    {
+      "id": "Slaapkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 38.1247,
+      "oppervlakte": 19.1488,
+      "verwarmd": true,
+      "verkoeld": true,
+      "gemeenschappelijk": true
+    }
+  ]
+}
