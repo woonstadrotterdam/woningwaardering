@@ -28,12 +28,12 @@ class ZelfstandigeWoonruimten(Stelsel):
             stelselgroepen=[
                 OppervlakteVanVertrekken,
                 OppervlakteVanOverigeRuimten,
-                # Verwarming(peildatum=peildatum),
-                # Energieprestatie(peildatum=peildatum),
-                # Sanitair(peildatum=peildatum),
-                # Keuken(peildatum=peildatum),
-                # PriveBuitenruimten(peildatum=peildatum),
-                # PuntenVoorDeWozWaarde(peildatum=peildatum),
+                # Verwarming,
+                # Energieprestatie,
+                # Sanitair,
+                # Keuken,
+                # PriveBuitenruimten,
+                # PuntenVoorDeWozWaarde,
             ],
         )
 
