@@ -13,7 +13,7 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
     Woningwaarderingstelsel,
 )
-from woningwaardering.vera.utils import badruimte_met_toilet, heeft_bouwkundig_element
+from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 def classificeer_ruimte_dec(
@@ -26,11 +26,11 @@ def classificeer_ruimte_dec(
         ruimtesoort = func(ruimte)
         if ruimtesoort is not None:
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is geklassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
+                f"Ruimte {ruimte.naam} ({ruimte.id}) is geclassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
             )
         else:
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) kan niet worden geklassificeerd als een ruimtesoort binnen {Woningwaarderingstelsel.zelfstandige_woonruimten.naam}"
+                f"Ruimte {ruimte.naam} ({ruimte.id}) kan niet worden geclassificeerd als een ruimtesoort binnen {Woningwaarderingstelsel.zelfstandige_woonruimten.naam}"
             )
         return ruimtesoort
 
@@ -40,7 +40,7 @@ def classificeer_ruimte_dec(
 @classificeer_ruimte_dec
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
-    Classificeert de ruimte volgens het Woningwaarderingstelsel voor zelfstandige woonruimten.
+    Classificeert de ruimte volgens het Woningwaarderingstelsel juli 2024 voor zelfstandige woonruimten.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte die geclassificeerd moet worden.
@@ -50,106 +50,92 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
     """
     if ruimte.oppervlakte is None:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
+        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet geclassificeerd worden."
         warnings.warn(warning_msg, UserWarning)
         return None
 
-    if ruimte.soort is None or ruimte.soort.code is None:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen soort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
+    if ruimte.soort is None:
+        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen soort en kan daardoor niet geclassificeerd worden."
         warnings.warn(warning_msg, UserWarning)
         return None
 
     if ruimte.detail_soort is None:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}."
+        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet geclassificeerd worden."
         warnings.warn(warning_msg, UserWarning)
         return None
 
-    if (
-        ruimte.soort.code == Ruimtesoort.buitenruimte.code
-        or ruimte.detail_soort.code
-        in [
-            Ruimtedetailsoort.gemeenschappelijke_tuin.code,
-            Ruimtedetailsoort.gemeenschappelijk_dakterras_gda.code,
-            Ruimtedetailsoort.achtertuin.code,
-            Ruimtedetailsoort.voortuin.code,
-            Ruimtedetailsoort.balkon.code,
-            Ruimtedetailsoort.atrium_en_of_patio.code,
-            Ruimtedetailsoort.loggia.code,
-            Ruimtedetailsoort.dakterras.code,
-            Ruimtedetailsoort.terras.code,
-            Ruimtedetailsoort.tuin_rondom.code,
-            Ruimtedetailsoort.tuin.code,
-        ]  # ruimten die ondanks potentieel verkeerde parent toch zeker een buitenruimte zijn
-    ):
-        return Ruimtesoort.buitenruimte
+    # Keuken, badkamer en doucheruimte worden altijd gewaardeerd als vertrek
+    if ruimte.detail_soort.code in [
+        Ruimtedetailsoort.keuken.code,
+        Ruimtedetailsoort.badkamer.code,
+        Ruimtedetailsoort.doucheruimte.code,
+    ]:
+        return Ruimtesoort.vertrek
 
     if ruimte.detail_soort.code in [
         Ruimtedetailsoort.woonkamer.code,
         Ruimtedetailsoort.woon_en_of_slaapkamer.code,
         Ruimtedetailsoort.woonkamer_en_of_keuken.code,
         Ruimtedetailsoort.slaapkamer.code,
-        Ruimtedetailsoort.overig_vertrek.code,
-    ]:
-        if ruimte.oppervlakte >= 4:
-            return Ruimtesoort.vertrek
-        elif ruimte.oppervlakte >= 2:
-            return Ruimtesoort.overige_ruimten
-
-    if ruimte.detail_soort.code == Ruimtedetailsoort.keuken.code:
-        return Ruimtesoort.vertrek
-
-    if ruimte.detail_soort.code in [
         Ruimtedetailsoort.badkamer_met_toilet.code,
-        Ruimtedetailsoort.badkamer.code,
-        Ruimtedetailsoort.doucheruimte.code,
-    ]:
-        if badruimte_met_toilet(ruimte) and ruimte.oppervlakte < 0.64:
-            return None
-        else:
-            return Ruimtesoort.vertrek
-
-    if ruimte.detail_soort.code in [
+        Ruimtedetailsoort.overig_vertrek.code,
         Ruimtedetailsoort.bijkeuken.code,
         Ruimtedetailsoort.berging.code,
         Ruimtedetailsoort.wasruimte.code,
         Ruimtedetailsoort.garage.code,
         Ruimtedetailsoort.kelder.code,
-        # Ruimtedetailsoort.schuur.code # niet mogelijk want schuur en schacht zelfde code zie: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/116 en https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/92
+        # Ruimtedetailsoort.schuur.code,
     ] or (
-        ruimte.detail_soort.naam
-        and ruimte.detail_soort.naam == Ruimtedetailsoort.schuur.naam
-    ):  # zie hierboven i.v.m. limitaties schuur.code
-        if ruimte.oppervlakte >= 2:
-            return Ruimtesoort.overige_ruimten
-        else:
-            return None
-
-    if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-        if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap):
-            logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}): vaste trap gevonden. Ruimte wordt gewaardeerd als {ruimte.soort.naam}."
-            )
-            if (
-                ruimte.soort.code == Ruimtesoort.vertrek.code
-                and ruimte.oppervlakte >= 4
-            ):
+        Ruimtedetailsoort.schuur.naam == ruimte.detail_soort.naam
+    ):  # Schacht en schuur hebben dezelfde code
+        if ruimte.soort.code == Ruimtesoort.vertrek.code:
+            if ruimte.oppervlakte >= 4:
                 return Ruimtesoort.vertrek
-            elif ruimte.oppervlakte >= 2:
-                return Ruimtesoort.overige_ruimten
-            else:
-                return None
-        elif heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap):
-            logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}): vlizotrap gevonden. Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten}."
-            )
             if ruimte.oppervlakte >= 2:
                 return Ruimtesoort.overige_ruimten
-            else:
-                return None
 
-        logger.info(
-            f"Ruimte {ruimte.naam} ({ruimte.id}): geen trap gevonden. Ruimte wordt niet gewaardeerd binnen {Woningwaarderingstelsel.zelfstandige_woonruimten}."
-        )
+        if ruimte.soort.code == Ruimtesoort.overige_ruimten.code:
+            if ruimte.oppervlakte >= 2:
+                return Ruimtesoort.overige_ruimten
+
+    if ruimte.detail_soort.code == Ruimtedetailsoort.toiletruimte.code:
+        # mag alleen als overige ruimte gewaardeerd worden
+        if ruimte.oppervlakte >= 2:
+            return Ruimtesoort.overige_ruimten
+
+    if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
+        if ruimte.soort.code == Ruimtesoort.vertrek.code:
+            if (
+                heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
+                and ruimte.oppervlakte >= 4
+            ):
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een vaste trap: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
+                )
+                return Ruimtesoort.vertrek
+
+            else:
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen vaste trap gevonden: Ruimte wordt niet gewaardeerd als {ruimte.soort.naam}."
+                )
+
+        if ruimte.soort.code == Ruimtesoort.overige_ruimten.code:
+            if (
+                heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
+                or heeft_bouwkundig_element(
+                    ruimte, Bouwkundigelementdetailsoort.vlizotrap
+                )
+            ) and ruimte.oppervlakte >= 2:
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een trap: Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
+                )
+                return Ruimtesoort.overige_ruimten
+
+            else:
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen trap: Ruimte wordt niet gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
+                )
+
     return None
 
 
@@ -176,9 +162,9 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
         warnings.warn(message, UserWarning)
         return criterium_naam
 
-    # Van vaste kasten (kleiner dan 2m²) wordt de netto oppervlakte bepaald
-    # en bij de oppervlakte van het betreffende vertrek opgeteld.
-    # Een kast, (kleiner dan 2m²) waarvan de deur uitkomt op een
+    # Van vaste kasten wordt de netto oppervlakte bepaald
+    # en bij de oppervlakte van de betreffende ruimte opgeteld.
+    # Een kast waarvan de deur uitkomt op een
     # verkeersruimte, wordt niet gewaardeerd
     if ruimte.detail_soort.code not in [
         Ruimtedetailsoort.hal.code,
@@ -191,8 +177,6 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
             for verbonden_ruimte in ruimte.verbonden_ruimten or []
             if verbonden_ruimte.detail_soort is not None
             and verbonden_ruimte.detail_soort.code == Ruimtedetailsoort.kast.code
-            and verbonden_ruimte.oppervlakte is not None
-            and verbonden_ruimte.oppervlakte < 2.0
         ]
 
         aantal_ruimte_kasten = len(ruimte_kasten)
