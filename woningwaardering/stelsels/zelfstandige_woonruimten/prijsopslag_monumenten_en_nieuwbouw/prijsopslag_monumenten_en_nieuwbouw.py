@@ -127,20 +127,26 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         ) and not any(
             monument.code
             in [
+                Eenheidmonument.rijksmonument.code,
                 Eenheidmonument.gemeentelijk_monument.code,
                 Eenheidmonument.provinciaal_monument.code,
-                Eenheidmonument.rijksmonument.code,
             ]
             for monument in eenheid.monumenten or []
         ):
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Beschermd stads- of dorpsgezicht",
-                    ),
-                    opslagpercentage=0.05,
+            if eenheid.bouwjaar is None:
+                warnings.warn(
+                    f"Eenheid {eenheid.id}: 'bouwjaar' is niet gespecificeerd.",
+                    UserWarning,
                 )
-            )
+            elif eenheid.bouwjaar < 1965:
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam="Beschermd stads- of dorpsgezicht",
+                        ),
+                        opslagpercentage=0.05,
+                    )
+                )
 
         if (
             eenheid.begin_bouwdatum is not None
