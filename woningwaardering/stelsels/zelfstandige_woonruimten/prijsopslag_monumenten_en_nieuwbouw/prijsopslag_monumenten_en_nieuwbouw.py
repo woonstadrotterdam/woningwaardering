@@ -64,26 +64,28 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = []
 
         if eenheid.monumenten is None:
-            warnings.warn(f"Eenheid {eenheid.id}: Monumenten is None.", UserWarning)
-            logger.info(
-                f"Eenheid {eenheid.id}: De api van cultureelerfgoed wordt geraadpleegd voor monumenten."
+            warnings.warn(
+                f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
+                UserWarning,
             )
-            utils.update_eenheid_monumenten(eenheid)
+            return woningwaardering_groep
 
         if any(
             monument.code == Eenheidmonument.rijksmonument.code
             for monument in eenheid.monumenten or []
         ):
-            begindatum_huurovereenkomst = eenheid.begindatum_huurovereenkomst
-            if begindatum_huurovereenkomst is None:
+            datum_afsluiting_huurovereenkomst = (
+                eenheid.datum_afsluiting_huurovereenkomst
+            )
+            if datum_afsluiting_huurovereenkomst is None:
                 warnings.warn(
-                    f"Eenheid {eenheid.id}: De begindatum van de huurovereenkomst is niet opgegeven voor dit rijksmonument.",
+                    f"Eenheid {eenheid.id}: 'datum_afsluiting_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
                     UserWarning,
                 )
                 logger.warning(
-                    f"Voor de waardering van dit rijksmonument wordt aangenomen dat de ingangsdatum van de huurovereenkomst gelijk is aan peildatum {self.peildatum}."
+                    f"Eenheid {eenheid.id}: Voor de waardering van dit rijksmonument wordt de peildatum {self.peildatum} gebruikt in plaats van de datum van de afsluiting van de huurovereenkomst."
                 )
-                begindatum_huurovereenkomst = self.peildatum
+                datum_afsluiting_huurovereenkomst = self.peildatum
 
             woningwaardering = WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -92,7 +94,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-            if begindatum_huurovereenkomst >= date(2024, 7, 1):
+            if datum_afsluiting_huurovereenkomst >= date(2024, 7, 1):
                 woningwaardering.opslagpercentage = 0.35
             else:
                 woningwaardering.punten = 50.0

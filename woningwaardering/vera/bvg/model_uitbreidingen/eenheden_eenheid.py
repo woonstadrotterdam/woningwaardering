@@ -6,9 +6,9 @@ from pydantic import BaseModel, Field
 
 class _EenhedenEenheid(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
-    begindatum_huurovereenkomst: Optional[date] = Field(
-        default=None, alias="begindatumHuurovereenkomst"
+    datum_afsluiting_huurovereenkomst: Optional[date] = Field(
+        default=None, alias="datumAfsluitingHuurovereenkomst"
     )
     """
-    De begindatum van de huurovereenkomst.
+    De datum waarop de huurovereenkomst is afgesloten.
     """

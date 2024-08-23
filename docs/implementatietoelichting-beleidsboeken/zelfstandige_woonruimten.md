@@ -42,6 +42,8 @@ Indien een woonruimte een rijksmonument is of daar deel van uitmaakt, als bedoel
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de rijksmonumenten: [http://monumentenregister.cultureelerfgoed.nl](http://monumentenregister.cultureelerfgoed.nl/).
 
+> De datum van afsluiting van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Hiervoor is het attribuut `datum_afsluiting_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model.
+
 ### 2.8.2 Gemeentelijk of provinciaal monument
 
 Indien een woonruimte een gemeentelijk of provinciaal monument is of daarvan deel uitmaakt, dan wordt de maximale huurprijs vermeerderd met 15%. Het gemeentelijk monument moet zijn aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door de gedeputeerde staten. 
