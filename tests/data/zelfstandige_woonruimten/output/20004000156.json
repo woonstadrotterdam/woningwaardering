@@ -90,24 +90,23 @@
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
       },
+      "punten": 50.0,
       "woningwaarderingen": [
         {
           "criterium": {
             "naam": "Rijksmonument"
           },
-          "opslagpercentage": 0.35
+          "punten": 50.0
         }
       ],
-      "opslagpercentage": 0.35
+      "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 457.62,
-  "opslagpercentage": 0.35,
-  "punten": 80.0,
+  "maximaleHuur": 771.53,
+  "punten": 130.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "huurprijsopslag": 160.17,
-  "maximaleHuurInclusiefOpslag": 617.79
+  "maximaleHuurInclusiefOpslag": 771.53
 }

@@ -188,6 +188,15 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         )
 
         woningwaardering_groep.opslagpercentage = float(opslagpercentage)
+        punten = Decimal(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+            )
+        )
+
+        woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
 
     def _bereken_woningwaarderingresultaat(
