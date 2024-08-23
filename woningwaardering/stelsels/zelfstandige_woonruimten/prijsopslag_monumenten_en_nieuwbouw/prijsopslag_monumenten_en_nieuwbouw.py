@@ -74,18 +74,16 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             monument.code == Eenheidmonument.rijksmonument.code
             for monument in eenheid.monumenten or []
         ):
-            datum_afsluiting_huurovereenkomst = (
-                eenheid.datum_afsluiting_huurovereenkomst
-            )
-            if datum_afsluiting_huurovereenkomst is None:
+            datum_afsluiten_huurovereenkomst = eenheid.datum_afsluiten_huurovereenkomst
+            if datum_afsluiten_huurovereenkomst is None:
                 warnings.warn(
-                    f"Eenheid {eenheid.id}: 'datum_afsluiting_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
+                    f"Eenheid {eenheid.id}: 'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
                     UserWarning,
                 )
                 logger.warning(
                     f"Eenheid {eenheid.id}: Voor de waardering van dit rijksmonument wordt de peildatum {self.peildatum} gebruikt in plaats van de datum van de afsluiting van de huurovereenkomst."
                 )
-                datum_afsluiting_huurovereenkomst = self.peildatum
+                datum_afsluiten_huurovereenkomst = self.peildatum
 
             woningwaardering = WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -93,7 +91,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 ),
             )
 
-            if datum_afsluiting_huurovereenkomst >= date(2024, 7, 1):
+            if datum_afsluiten_huurovereenkomst >= date(2024, 7, 1):
                 woningwaardering.opslagpercentage = 0.35
             else:
                 woningwaardering.punten = 50.0
