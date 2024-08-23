@@ -65,7 +65,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
         if eenheid.monumenten is None:
             warnings.warn(
-                f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
+                f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
                 UserWarning,
             )
             return woningwaardering_groep
@@ -92,12 +92,13 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     naam="Rijksmonument",
                 ),
             )
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
             if datum_afsluiting_huurovereenkomst >= date(2024, 7, 1):
                 woningwaardering.opslagpercentage = 0.35
             else:
                 woningwaardering.punten = 50.0
+
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         if any(
             monument.code

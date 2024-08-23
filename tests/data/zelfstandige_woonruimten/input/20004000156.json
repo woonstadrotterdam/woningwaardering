@@ -41,6 +41,12 @@
       }
     }
   ],
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    }
+  ],
   "ruimten": [
     {
       "id": "Space_88554482",

@@ -59,6 +59,8 @@ def specifieke_input_en_output_model(request):
     )
 
 
+# In deze test data zit expres missende data
+@pytest.mark.filterwarnings("ignore::UserWarning")
 def test_PrijsopslagMonumentenEnNieuwbouw_specifiek_output(
     specifieke_input_en_output_model, peildatum
 ):
@@ -74,3 +76,36 @@ def test_PrijsopslagMonumentenEnNieuwbouw_specifiek_output(
         eenheid_output,
         Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
     )
+
+
+# mapping eenheid_id naar peildatum-warning
+specifiek_warning_mapping = {
+    "beschermd_stadsgezicht_zonder_bouwjaar": (
+        UserWarning,
+        "Eenheid beschermd_stadsgezicht_zonder_bouwjaar: 'bouwjaar' is niet gespecificeerd.",
+    ),
+    "monumenten_none": (
+        UserWarning,
+        "Eenheid monumenten_none: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
+    ),
+    "rijksmonument_zonder_datum_afsluiting_huurovereenkomst": (
+        UserWarning,
+        "Eenheid rijksmonument_zonder_datum_afsluiting_huurovereenkomst: 'datum_afsluiting_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
+    ),
+}
+
+
+# In deze test data zit expres missende data
+@pytest.mark.filterwarnings("ignore::UserWarning")
+def test_PrijsopslagMonumentenEnNieuwbouw_specifiek_warnings(
+    specifieke_input_en_output_model, peildatum
+):
+    eenheid_input, _ = specifieke_input_en_output_model
+    warning_tuple = specifiek_warning_mapping.get(eenheid_input.id)
+
+    if warning_tuple is not None:
+        with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
+            prijsopslag_monumenten_en_nieuwbouw = PrijsopslagMonumentenEnNieuwbouw(
+                peildatum=peildatum
+            )
+            prijsopslag_monumenten_en_nieuwbouw.bereken(eenheid_input)
