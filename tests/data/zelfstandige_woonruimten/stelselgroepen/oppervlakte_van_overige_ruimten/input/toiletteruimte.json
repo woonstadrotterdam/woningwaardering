@@ -1,0 +1,31 @@
+{
+  "id": "1",
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "oppervlakte": 1.9
+    },
+    {
+      "id": "Space_2",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "oppervlakte": 2.1
+    }
+  ]
+}

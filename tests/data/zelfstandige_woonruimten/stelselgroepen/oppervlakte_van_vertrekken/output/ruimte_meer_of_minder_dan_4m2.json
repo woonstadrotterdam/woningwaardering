@@ -11,7 +11,7 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 7.0,
+      "punten": 6.0,
       "woningwaarderingen": [
         {
           "aantal": 2.0,
@@ -32,33 +32,15 @@
               "naam": "Vierkante meter, m2"
             }
           }
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Badkamer/toilet (1m2 verminderd ivm toilet)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
         }
       ]
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "OOZ",
-          "naam": "Oppervlakte van overige ruimten"
-        }
-      },
-      "punten": 0.0,
-      "woningwaarderingen": []
     }
   ],
-  "punten": 7.0
+  "maximaleHuur": 228.86,
+  "punten": 6.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
+  "maximaleHuurInclusiefOpslag": 228.86
 }

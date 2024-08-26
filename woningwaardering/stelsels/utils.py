@@ -327,6 +327,27 @@ def rond_af(
     )
 
 
+def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
+    """
+    Rond een getal af op een kwart.
+
+    Args:
+        getal (float | None | Decimal): Het getal om af te ronden.
+
+    Returns:
+        Decimal: Het afgeronde getal.
+
+    Raises:
+        ValueError: als de input None is.
+    """
+    if getal is None:
+        raise ValueError("Kan None niet afronden")
+    kwart = Decimal("0.25")
+    return (Decimal(getal) / kwart).quantize(
+        Decimal("1"), rounding=ROUND_HALF_UP
+    ) * kwart
+
+
 def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool:
     if not str.isnumeric(verblijfsobjectIdentificatie):
         raise ValueError("VerblijfsobjectIdentificatie moet numeriek zijn")

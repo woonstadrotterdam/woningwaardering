@@ -14,9 +14,9 @@
       "punten": 1.0,
       "woningwaarderingen": [
         {
-          "aantal": 0.64,
+          "aantal": 1.0,
           "criterium": {
-            "naam": "Badkamer/toilet (1m2 verminderd ivm toilet)",
+            "naam": "keuken als overige ruimte",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -24,21 +24,6 @@
           }
         }
       ]
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "OOZ",
-          "naam": "Oppervlakte van overige ruimten"
-        }
-      },
-      "punten": 0.0,
-      "woningwaarderingen": []
     }
-  ],
-  "punten": 1.0
+  ]
 }

@@ -8,8 +8,8 @@ from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     # Energieprestatie,
     # Keuken,
-    # OppervlakteVanOverigeRuimten,
-    # OppervlakteVanVertrekken,
+    OppervlakteVanOverigeRuimten,
+    OppervlakteVanVertrekken,
     # PriveBuitenruimten,
     # PuntenVoorDeWozWaarde,
     # Sanitair,
@@ -31,8 +31,8 @@ class ZelfstandigeWoonruimten(Stelsel):
             einddatum=date.max,
             peildatum=peildatum,
             stelselgroepen=[
-                # OppervlakteVanVertrekken,
-                # OppervlakteVanOverigeRuimten,
+                OppervlakteVanVertrekken,
+                OppervlakteVanOverigeRuimten,
                 VerkoelingEnVerwarming,
                 # Energieprestatie,
                 # Sanitair,
@@ -47,9 +47,9 @@ if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
     warnings.simplefilter("default", UserWarning)
 
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
+    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date.today())
     with open(
-        "tests/data/zelfstandige_woonruimten/input/20004000156.json",
+        "tests/data/zelfstandige_woonruimten/input/71211000027.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

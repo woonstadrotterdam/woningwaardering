@@ -11,12 +11,12 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 3.0,
+      "punten": 2.25,
       "woningwaarderingen": [
         {
-          "aantal": 3.5,
+          "aantal": 3.0,
           "criterium": {
-            "naam": "Berging (~6.65m2, gedeeld met 2)",
+            "naam": "Slaapkamer",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
