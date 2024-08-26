@@ -21,7 +21,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.energielabel import Energielabel
+from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
 from woningwaardering.vera.referentiedata.energieprestatiesoort import (
     Energieprestatiesoort,
 )
@@ -49,14 +49,14 @@ class Energieprestatie(Stelselgroep):
                 f"{LOOKUP_TABEL_FOLDER}/oppervlakte_25-40m2_energielabel_punten.csv"
             )
         ),
-        "oppervlakte_40+": pd.read_csv(
+        "energieprestatievergoeding": pd.read_csv(
             files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/oppervlakte_40m2+_energielabel_punten.csv"
+                f"{LOOKUP_TABEL_FOLDER}/energieprestatievergoeding.csv"
             )
         ),
-        "oud": pd.read_csv(
+        "oud_en_nieuw": pd.read_csv(
             files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/oud_energielabel_punten.csv"
+                f"{LOOKUP_TABEL_FOLDER}/oud_en_nieuw_energielabel_punten.csv"
             )
         ),
         "bouwjaar": pd.read_csv(
@@ -70,12 +70,11 @@ class Energieprestatie(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
-        raise NotImplementedError(
-            "De stelselgroep Energieprestatie is nog niet geïmplementeerd."
-        )
         super().__init__(
-            begindatum=date(2024, 1, 1),
-            einddatum=date(2024, 6, 30),
+            begindatum=date(2024, 7, 1),
+            einddatum=date(
+                2025, 1, 1
+            ),  # vervallen vvergangsrecht kleine woningen ≤ 40 m2
             peildatum=peildatum,
         )
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -104,6 +103,9 @@ class Energieprestatie(Stelselgroep):
         label = energieprestatie.label.code
 
         energieprestatie_soort = energieprestatie.soort.code
+
+        lookup_key = "oud_en_nieuw"
+        woningwaardering.criterium.naam = f"{label}"
 
         if (
             energieprestatie_soort
@@ -142,18 +144,12 @@ class Energieprestatie(Stelselgroep):
                 elif 25.0 <= gebruiksoppervlakte_thermische_zone < 40.0:
                     lookup_key = "oppervlakte_25-40"
 
-                else:
-                    lookup_key = "oppervlakte_40+"
-        else:
-            woningwaardering.criterium.naam = f"{label} (oud)"
-            lookup_key = "oud"
-
         df = Energieprestatie.lookup_mapping[lookup_key]
 
         waarderings_label: str | None = label
 
         if (
-            lookup_key == "oud"
+            lookup_key == "oud_en_nieuw"
             and energieprestatie.registratiedatum >= datetime(2015, 1, 1).astimezone()
         ):
             if energieprestatie.waarde is not None:
@@ -171,32 +167,6 @@ class Energieprestatie(Stelselgroep):
                         f" > {waarderings_label_index} obv Energie-index"
                     )
                     waarderings_label = waarderings_label_index
-
-        energieprestatievergoeding = next(
-            (
-                prijscomponent
-                for prijscomponent in eenheid.prijscomponenten or []
-                if prijscomponent.detail_soort is not None
-                and prijscomponent.detail_soort.code
-                == Prijscomponentdetailsoort.energieprestatievergoeding.code
-                and (
-                    prijscomponent.begindatum is None
-                    or prijscomponent.begindatum <= self.peildatum
-                )
-                and (
-                    prijscomponent.einddatum is None
-                    or prijscomponent.einddatum > self.peildatum
-                )
-            ),
-            None,
-        )
-
-        if energieprestatievergoeding:
-            logger.info(f"Eenheid {eenheid.id}: energieprestatievergoeding gevonden.")
-
-        if energieprestatievergoeding and waarderings_label != Energielabel.b.naam:
-            waarderings_label = Energielabel.b.naam
-            woningwaardering.criterium.naam += f" > {waarderings_label} ivm EPV"
 
         filtered_df = df[(df["Label"] == waarderings_label)].pipe(
             utils.dataframe_met_een_rij
@@ -247,6 +217,12 @@ class Energieprestatie(Stelselgroep):
             self.peildatum, eenheid
         )
 
+        if eenheid.monumenten is None:
+            logger.warning(
+                f"Eenheid {eenheid.id}: Monumenten is None en kan daarom niet gewaardeerd worden in {Woningwaarderingstelselgroep.energieprestatie.naam}"
+            )
+            return woningwaardering_groep
+
         pandsoort = (
             Pandsoort.meergezinswoning
             if any(
@@ -277,7 +253,39 @@ class Energieprestatie(Stelselgroep):
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-        if energieprestatie:
+        energieprestatievergoeding = next(
+            (
+                prijscomponent
+                for prijscomponent in eenheid.prijscomponenten or []
+                if prijscomponent.detail_soort is not None
+                and prijscomponent.detail_soort.code
+                == Prijscomponentdetailsoort.energieprestatievergoeding.code
+                and (
+                    prijscomponent.begindatum is None
+                    or prijscomponent.begindatum <= self.peildatum
+                )
+                and (
+                    prijscomponent.einddatum is None
+                    or prijscomponent.einddatum > self.peildatum
+                )
+            ),
+            None,
+        )
+
+        if energieprestatievergoeding:
+            logger.info(f"Eenheid {eenheid.id}: energieprestatievergoeding gevonden.")
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Energieprestatievergoeding"
+                )
+            )
+            woningwaardering.punten = float(
+                Energieprestatie.lookup_mapping["energieprestatievergoeding"][
+                    pandsoort.naam
+                ].values[0]
+            )
+
+        elif energieprestatie:
             woningwaardering = self._bereken_punten_met_label(
                 eenheid,
                 energieprestatie,
@@ -290,12 +298,39 @@ class Energieprestatie(Stelselgroep):
                 eenheid, pandsoort.naam, woningwaardering
             )
 
-        if woningwaardering.criterium:
+        woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+        # Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
+        if (
+            eenheid.monumenten
+            and any(
+                monument.code
+                in [
+                    Eenheidmonument.rijksmonument.code,
+                    Eenheidmonument.gemeentelijk_monument.code,
+                    Eenheidmonument.provinciaal_monument.code,
+                ]
+                for monument in eenheid.monumenten or []
+            )
+            and woningwaardering.punten
+            and woningwaardering.punten < 0.0
+        ):
             logger.info(
-                f"Eenheid {eenheid.id} krijgt {woningwaardering.punten} punten voor {woningwaardering.criterium.naam}."
+                f"Eenheid {eenheid.id} is een monument: waardering voor {Woningwaarderingstelselgroep.energieprestatie.naam} is minimaal 0 punten."
+            )
+            woningwaardering_correctie_monument = (
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Correctie voor monument"
+                    ),
+                    punten=woningwaardering.punten * -1,
+                )
             )
 
-        woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+            woningwaardering_groep.woningwaarderingen.append(
+                woningwaardering_correctie_monument
+            )
+
         punten_totaal = Decimal(
             sum(
                 Decimal(str(woningwaardering.punten))
