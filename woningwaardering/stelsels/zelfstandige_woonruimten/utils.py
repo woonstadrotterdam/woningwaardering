@@ -64,6 +64,35 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         warnings.warn(warning_msg, UserWarning)
         return None
 
+    if (
+        ruimte.soort.code == Ruimtesoort.buitenruimte.code
+        and ruimte.detail_soort.code
+        not in [
+            Ruimtedetailsoort.carport.code,
+            Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code,
+            Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_specifieke_plek.code,
+            Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek.code,
+            Ruimtedetailsoort.open_parkeergarage_specifieke_plek.code,
+            # Ruimtedetailsoort.parkeerplaats.code, # parkeerplaats moet worden gebruikt voor oprit en oprit telt als buitenruimte.
+        ]
+    ) or ruimte.detail_soort.code in [
+        Ruimtedetailsoort.atrium_en_of_patio.code,
+        Ruimtedetailsoort.gemeenschappelijk_dakterras_gda.code,
+        Ruimtedetailsoort.achtertuin.code,
+        Ruimtedetailsoort.balkon.code,
+        Ruimtedetailsoort.gemeenschappelijk_dakterras_gak.code,
+        Ruimtedetailsoort.zijtuin.code,
+        Ruimtedetailsoort.voortuin.code,
+        Ruimtedetailsoort.dakterras.code,
+        Ruimtedetailsoort.gemeenschappelijke_tuin.code,
+        Ruimtedetailsoort.loggia.code,
+        Ruimtedetailsoort.terras.code,
+        Ruimtedetailsoort.tuin.code,
+        Ruimtedetailsoort.tuin_rondom.code,
+        # Ruimtedetailsoort.parkeerplaats.code, # parkeerplaats zonder buitenruimte als ruimte.soort wil je niet meetellen als buitenruimte.
+    ]:
+        return Ruimtesoort.buitenruimte
+
     # Keuken, badkamer en doucheruimte worden altijd gewaardeerd als vertrek
     if ruimte.detail_soort.code in [
         Ruimtedetailsoort.keuken.code,
