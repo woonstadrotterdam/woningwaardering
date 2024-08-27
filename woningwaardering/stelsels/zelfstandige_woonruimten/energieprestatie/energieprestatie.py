@@ -39,14 +39,14 @@ LOOKUP_TABEL_FOLDER = (
 
 class Energieprestatie(Stelselgroep):
     lookup_mapping = {
-        "oppervlakte_0-25": pd.read_csv(
+        "overgangsrecht_0-25": pd.read_csv(
             files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/oppervlakte_0-25m2_energielabel_punten.csv"
+                f"{LOOKUP_TABEL_FOLDER}/overgangsrecht_0-25m2.csv"
             )
         ),
-        "oppervlakte_25-40": pd.read_csv(
+        "overgangsrecht_25-40": pd.read_csv(
             files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/oppervlakte_25-40m2_energielabel_punten.csv"
+                f"{LOOKUP_TABEL_FOLDER}/overgangsrecht_25-40m2.csv"
             )
         ),
         "energieprestatievergoeding": pd.read_csv(
@@ -56,13 +56,11 @@ class Energieprestatie(Stelselgroep):
         ),
         "oud_en_nieuw": pd.read_csv(
             files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/oud_en_nieuw_energielabel_punten.csv"
+                f"{LOOKUP_TABEL_FOLDER}/oud_en_nieuw.csv"
             )
         ),
         "bouwjaar": pd.read_csv(
-            files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/bouwjaar_punten.csv"
-            )
+            files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/bouwjaar.csv")
         ),
     }
 
@@ -74,7 +72,7 @@ class Energieprestatie(Stelselgroep):
             begindatum=date(2024, 7, 1),
             einddatum=date(
                 2025, 1, 1
-            ),  # vervallen vvergangsrecht kleine woningen ≤ 40 m2
+            ),  # Overgangsrecht kleine woningen ≤ 40 m2 veravlt
             peildatum=peildatum,
         )
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -101,16 +99,15 @@ class Energieprestatie(Stelselgroep):
             return woningwaardering
 
         label = energieprestatie.label.code
-
-        energieprestatie_soort = energieprestatie.soort.code
-
-        lookup_key = "oud_en_nieuw"
         woningwaardering.criterium.naam = f"{label}"
+        energieprestatie_soort = energieprestatie.soort.code
+        lookup_key = "oud_en_nieuw"
 
         if (
             energieprestatie_soort
             == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
             and energieprestatie.registratiedatum >= datetime(2021, 1, 1).astimezone()
+            and energieprestatie.registratiedatum <= datetime(2024, 7, 1).astimezone()
         ):
             gebruiksoppervlakte_thermische_zone = next(
                 (
@@ -131,18 +128,30 @@ class Energieprestatie(Stelselgroep):
                 )
                 return woningwaardering
 
-            else:
-                woningwaardering.criterium.naam = label
-                woningwaardering.criterium.meeteenheid = (
-                    Meeteenheid.vierkante_meter_m2.value
+            woningwaardering.criterium.naam = label
+            woningwaardering.criterium.meeteenheid = (
+                Meeteenheid.vierkante_meter_m2.value
+            )
+            woningwaardering.aantal = gebruiksoppervlakte_thermische_zone
+
+            if gebruiksoppervlakte_thermische_zone < 25.0:
+                logger.info(
+                    f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen < 25 m2'"
                 )
-                woningwaardering.aantal = gebruiksoppervlakte_thermische_zone
+                lookup_key = "overgangsrecht_0-25"
+                woningwaardering.criterium.naam += " < 25 m2"
 
-                if gebruiksoppervlakte_thermische_zone < 25.0:
-                    lookup_key = "oppervlakte_0-25"
+            elif 25.0 <= gebruiksoppervlakte_thermische_zone < 40.0:
+                logger.info(
+                    f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen ≤ 40 m2'"
+                )
+                lookup_key = "overgangsrecht_25-40"
+                woningwaardering.criterium.naam += " 25-40 m2"
 
-                elif 25.0 <= gebruiksoppervlakte_thermische_zone < 40.0:
-                    lookup_key = "oppervlakte_25-40"
+            else:
+                logger.info(
+                    f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens de puntentelling van 'Oud en Nieuw' energielabel"
+                )
 
         df = Energieprestatie.lookup_mapping[lookup_key]
 
@@ -162,9 +171,10 @@ class Energieprestatie(Stelselgroep):
 
                 waarderings_label_index = filtered_df["Label"].values[0]
 
+                # wanneer de energie-index afwijkt van het label, geef voorkeur aan energie-index
                 if label != waarderings_label_index:
                     woningwaardering.criterium.naam += (
-                        f" > {waarderings_label_index} obv Energie-index"
+                        f" -> {waarderings_label_index} (Energie-index)"
                     )
                     waarderings_label = waarderings_label_index
 
@@ -323,7 +333,7 @@ class Energieprestatie(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Correctie voor monument"
                     ),
-                    punten=woningwaardering.punten * -1,
+                    punten=woningwaardering.punten * -1.0,
                 )
             )
 
@@ -354,7 +364,10 @@ if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
     energieprestatie = Energieprestatie()
-    with open("tests/data/generiek/input/37101000032.json", "r+") as file:
+    with open(
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/energieprestatie/input/2021_label_>40m2.json",
+        "r+",
+    ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
     woningwaardering_resultaat = energieprestatie.bereken(eenheid)
