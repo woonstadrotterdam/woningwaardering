@@ -84,6 +84,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     Ruimtedetailsoort.overloop.code,
                     Ruimtedetailsoort.entree.code,
                     Ruimtedetailsoort.gang.code,
+                    Ruimtedetailsoort.trappenhuis.code,
                 ]:  # verkeersruimten tellen ook mee
                     ruimtesoort = Ruimtesoort.overige_ruimten
 

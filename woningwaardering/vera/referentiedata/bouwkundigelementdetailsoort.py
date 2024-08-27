@@ -494,6 +494,21 @@ class Bouwkundigelementdetailsoort(Enum):
     Omlijsting waarin deur of raam bevestigd is. Relatie met IFC codering (IfcWindow)
     """
 
+    laadpaal = Referentiedata(
+        code="LAA",
+        naam="Laadpaal",
+        parent=Referentiedata(
+            code="VOO",
+            naam="Voorziening",
+        ),
+    )
+    """
+    Een laadpaal is een elektrisch oplaadstation voor voertuigen, zoals elektrische
+    auto&#39;s. Het biedt een aansluiting voor opladen, communiceert met het voertuig
+    voor veilige energieoverdracht, en kan slimme functies bevatten zoals
+    laadtijdbeheer en energiebeheer. Relatie met IFC codering (IfcFlowTerminal)
+    """
+
     leuning = Referentiedata(
         code="LEU",
         naam="Leuning",
