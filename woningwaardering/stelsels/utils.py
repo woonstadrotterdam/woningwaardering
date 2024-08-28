@@ -418,16 +418,26 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         eenheid.adresseerbaar_object_basisregistratie is not None
         and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie is not None
     ):
-        is_rijksmonument(
-            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
-        )
         rijksmonument = is_rijksmonument(
             eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
         )
-        logger.info(
-            f"Eenheid {eenheid.id} met verblijfsobjectIdentificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie} is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+
+        if rijksmonument is not None:
+            logger.info(
+                f"Eenheid {eenheid.id} is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+            )
+            if rijksmonument:
+                eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+
+        beschermd_gezicht = is_beschermd_gezicht(
+            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
         )
-        if rijksmonument:
-            eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+
+        if beschermd_gezicht is not None:
+            logger.info(
+                f"Eenheid {eenheid.id} {'behoort' if beschermd_gezicht else 'behoort niet'} tot een beschermd stads- of dorpsgezicht volgens de api van cultureelerfgoed."
+            )
+            if beschermd_gezicht:
+                eenheid.monumenten.append(Eenheidmonument.beschermd_stadsgezicht.value)
 
     return eenheid

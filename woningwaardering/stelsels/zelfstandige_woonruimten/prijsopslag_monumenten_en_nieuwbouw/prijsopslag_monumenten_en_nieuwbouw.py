@@ -92,8 +92,14 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
 
             if datum_afsluiten_huurovereenkomst >= date(2024, 7, 1):
+                logger.info(
+                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met een opslagpercentage van 35% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
+                )
                 woningwaardering.opslagpercentage = 0.35
             else:
+                logger.info(
+                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met een 50 punten voor de stelselgroep {self.stelselgroep.naam}."
+                )
                 woningwaardering.punten = 50.0
 
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
@@ -106,6 +112,9 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             ]
             for monument in eenheid.monumenten or []
         ):
+            logger.info(
+                f"Eenheid {eenheid.id} is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
+            )
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -137,6 +146,9 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     UserWarning,
                 )
             elif eenheid.bouwjaar < 1965:
+                logger.info(
+                    f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
+                )
                 woningwaardering_groep.woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -144,6 +156,10 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                         ),
                         opslagpercentage=0.05,
                     )
+                )
+            else:
+                logger.info(
+                    f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
                 )
 
         if (
@@ -168,6 +184,10 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
 
             if puntentotaal is not None and 144 <= puntentotaal <= 186:
+                logger.info(
+                    f"Eenheid {eenheid.id} is een nieuwbouw en wordt gewaardeerd met een opslagpercentage van 10% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
+                )
+
                 woningwaardering_groep.woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
