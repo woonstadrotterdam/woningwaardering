@@ -8,15 +8,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    PriveBuitenruimten,
-    Keuken,
-    Sanitair,
-    Energieprestatie,
-    Verwarming,
-    OppervlakteVanOverigeRuimten,
-    OppervlakteVanVertrekken,
-)
+
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -196,6 +188,10 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                         opslagpercentage=0.1,
                     )
                 )
+            else:
+                logger.info(
+                    f"Eenheid {eenheid.id} is een nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor de stelselgroep {self.stelselgroep.naam}."
+                )
 
         opslagpercentage = Decimal(
             sum(
@@ -230,36 +226,17 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat: de woningwaardering resultaten.
         """
 
-        woningwaardering_resultaat = (
-            WoningwaarderingResultatenWoningwaarderingResultaat()
+        from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
+            ZelfstandigeWoonruimten,
         )
-        woningwaardering_resultaat.stelsel = (
-            Woningwaarderingstelsel.zelfstandige_woonruimten.value
-        )
-        woningwaardering_resultaat.groepen = []
 
-        stelselgroepen = [
-            OppervlakteVanVertrekken(peildatum=self.peildatum),
-            OppervlakteVanOverigeRuimten(peildatum=self.peildatum),
-            Verwarming(peildatum=self.peildatum),
-            Energieprestatie(peildatum=self.peildatum),
-            Sanitair(peildatum=self.peildatum),
-            Keuken(peildatum=self.peildatum),
-            PriveBuitenruimten(peildatum=self.peildatum),
+        zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=self.peildatum)
+        zelfstandige_woonruimten.stelselgroepen = [
+            stelselgroep
+            for stelselgroep in zelfstandige_woonruimten.stelselgroepen
+            if not isinstance(stelselgroep, PrijsopslagMonumentenEnNieuwbouw)
         ]
-
-        for stelselgroep in stelselgroepen:
-            if (
-                stelselgroep.stelselgroep
-                == Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw
-            ):
-                continue
-
-            woningwaardering_groep = stelselgroep.bereken(
-                eenheid, woningwaardering_resultaat
-            )
-            woningwaardering_resultaat.groepen.append(woningwaardering_groep)
-
+        woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid)
         return woningwaardering_resultaat
 
 

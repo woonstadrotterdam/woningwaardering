@@ -49,9 +49,9 @@ class Stelsel:
                 f"Stelsel {stelsel.value.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
             )
         self.peildatum = peildatum
-        self.stelselgroepen = (
+        self.stelselgroepen = [
             stelselgroep(peildatum) for stelselgroep in stelselgroepen or []
-        )
+        ]
         self.df_maximale_huur = pd.read_csv(
             files("woningwaardering").joinpath(
                 f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"

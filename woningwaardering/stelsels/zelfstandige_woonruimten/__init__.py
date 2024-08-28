@@ -1,18 +1,18 @@
-from .oppervlakte_van_vertrekken import OppervlakteVanVertrekken
-from .oppervlakte_van_overige_ruimten import OppervlakteVanOverigeRuimten
-from .verwarming import Verwarming
 from .energieprestatie import Energieprestatie
-from .sanitair import Sanitair
 from .keuken import Keuken
+from .oppervlakte_van_overige_ruimten import OppervlakteVanOverigeRuimten
+from .oppervlakte_van_vertrekken import OppervlakteVanVertrekken
 from .prive_buitenruimten import PriveBuitenruimten
 from .punten_voor_de_woz_waarde import PuntenVoorDeWozWaarde
+from .sanitair import Sanitair
+from .verkoeling_en_verwarming import VerkoelingEnVerwarming
 from .prijsopslag_monumenten_en_nieuwbouw import PrijsopslagMonumentenEnNieuwbouw
 
 
 __all__ = [
     "OppervlakteVanVertrekken",
     "OppervlakteVanOverigeRuimten",
-    "Verwarming",
+    "VerkoelingEnVerwarming",
     "Energieprestatie",
     "Sanitair",
     "Keuken",

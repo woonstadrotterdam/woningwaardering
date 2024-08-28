@@ -86,6 +86,51 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 10.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Badruimte"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Woonkamer"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Keuken"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer"
+          },
+          "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "PMN",
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
@@ -95,11 +140,11 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 246.02,
-  "punten": 43.0,
+  "maximaleHuur": 303.2,
+  "punten": 53.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 246.02
+  "maximaleHuurInclusiefOpslag": 303.2
 }

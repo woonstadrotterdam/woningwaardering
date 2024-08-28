@@ -22,29 +22,23 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
     Bouwkundigelementdetailsoort,
 )
-from woningwaardering.vera.referentiedata.eenheidklimaatbeheersingsoort import (
-    Eenheidklimaatbeheersingsoort,
-)
 from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
-class Verwarming(Stelselgroep):
+class VerkoelingEnVerwarming(Stelselgroep):
     def __init__(
         self,
         peildatum: date = date.today(),
     ) -> None:
-        raise NotImplementedError(
-            "De stelselgroep Verwarming is nog niet geïmplementeerd."
-        )
+        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.verkoeling_en_verwarming
         super().__init__(
-            begindatum=date(2024, 1, 1),
-            einddatum=date(2024, 6, 30),
+            begindatum=date.fromisoformat("2024-07-01"),
+            einddatum=date.max,
             peildatum=peildatum,
         )
-        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.verwarming
 
     def bereken(
         self,
@@ -56,46 +50,23 @@ class Verwarming(Stelselgroep):
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
                 stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.verwarming.value,
+                stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming.value,
             )
         )
 
-        klimaatbeheersing_code = next(
-            (
-                soort.code
-                for soort in eenheid.klimaatbeheersing or []
-                if soort.code
-                in [
-                    Eenheidklimaatbeheersingsoort.individueel.code,
-                    Eenheidklimaatbeheersingsoort.collectief.code,
-                ]
-            ),
-            None,
-        )
-
-        if klimaatbeheersing_code is None:
-            warnings.warn(
-                f"Geen klimaatbeheersing van het soort {Eenheidklimaatbeheersingsoort.individueel.naam} of {Eenheidklimaatbeheersingsoort.collectief.naam} is gevonden."
-            )
-            return woningwaardering_groep
-
-        punten_per_ruimte = Verwarming.punten_per_ruimte(klimaatbeheersing_code)
-
-        if punten_per_ruimte is None:
-            warnings.warn(
-                f"Geen punten per verwarmd ruimte voor klimaatbeheersing van het soort {klimaatbeheersing_code} gevonden."
-            )
-            return woningwaardering_groep
-
+        logger.debug(f"Punten per verwarmd {Ruimtesoort.vertrek.naam}: 2")
         logger.debug(
-            f"Punten per verwarmd {Ruimtesoort.vertrek.naam}: {punten_per_ruimte[Ruimtesoort.vertrek.code]}"
+            f"Extra punt voor {Ruimtesoort.vertrek.naam} met ook een koelfunctie. Maximaal 2 extra punten per eenheid."
         )
         logger.debug(
-            f"Punten per verwarmd {Ruimtesoort.overige_ruimten.naam}: {punten_per_ruimte[Ruimtesoort.overige_ruimten.code]}"
+            f"Punten per verwarmd {Ruimtesoort.overige_ruimten.naam} of verkeersruimte (met totaal van max 4 punten per eenheid): 1."
         )
 
         woningwaardering_groep.woningwaarderingen = []
         totaal_punten_overige_ruimten = Decimal("0")
+        totaal_punten_verkoeld_en_verwarmd = Decimal(
+            "0"
+        )  # max 2 punten per eenheid voor vertrekken die en verwarmd en verkoeld zijn. 1 punt per vertrek.
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.detail_soort is None:
@@ -108,12 +79,20 @@ class Verwarming(Stelselgroep):
             ruimtesoort = classificeer_ruimte(ruimte)
 
             if ruimtesoort is None:
-                continue
+                if ruimte.detail_soort.code in [
+                    Ruimtedetailsoort.hal.code,
+                    Ruimtedetailsoort.overloop.code,
+                    Ruimtedetailsoort.entree.code,
+                    Ruimtedetailsoort.gang.code,
+                    Ruimtedetailsoort.trappenhuis.code,
+                ]:  # verkeersruimten tellen ook mee
+                    ruimtesoort = Ruimtesoort.overige_ruimten
 
-            if not (
-                ruimtesoort.code
-                in [Ruimtesoort.overige_ruimten.code, Ruimtesoort.vertrek.code]
-                and ruimte.verwarmd
+            if (
+                not ruimtesoort
+                or ruimtesoort.code
+                not in [Ruimtesoort.overige_ruimten.code, Ruimtesoort.vertrek.code]
+                or not ruimte.verwarmd
             ):
                 logger.info(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.verwarming.naam}"
@@ -128,7 +107,13 @@ class Verwarming(Stelselgroep):
                 )
             )
 
-            punten = Decimal(str(punten_per_ruimte[ruimtesoort.code]))
+            punten = Decimal(
+                str(
+                    {Ruimtesoort.vertrek.code: 2, Ruimtesoort.overige_ruimten.code: 1}[
+                        ruimtesoort.code
+                    ]
+                )
+            )
 
             if ruimtesoort == Ruimtesoort.overige_ruimten:
                 if totaal_punten_overige_ruimten >= Decimal("4.0"):
@@ -146,13 +131,23 @@ class Verwarming(Stelselgroep):
 
                 totaal_punten_overige_ruimten += punten
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmde {Ruimtesoort.overige_ruimten.naam} en krijgt {punten} punten."
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmde {Ruimtesoort.overige_ruimten.naam} en krijgt {punten} punt."
                 )
 
             else:
-                logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmd {Ruimtesoort.vertrek.naam} en krijgt {punten} punten."
-                )
+                if (
+                    ruimte.verkoeld
+                    and totaal_punten_verkoeld_en_verwarmd + 1 <= Decimal("2")
+                ):
+                    punten += Decimal("1")
+                    totaal_punten_verkoeld_en_verwarmd += Decimal("1")
+                    logger.info(
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmde en verkoelde {Ruimtesoort.vertrek.naam} en krijgt {punten} punten."
+                    )
+                else:
+                    logger.info(
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmd {Ruimtesoort.vertrek.naam} en krijgt {punten} punten."
+                    )
 
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
@@ -163,6 +158,7 @@ class Verwarming(Stelselgroep):
                 )
             )
 
+            # Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten.
             if (
                 ruimte.detail_soort.code
                 == Ruimtedetailsoort.woonkamer_en_of_keuken.code
@@ -196,44 +192,31 @@ class Verwarming(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.verwarming.naam}"
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punt(en) voor stelselgroep {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
         )
 
         return woningwaardering_groep
-
-    @staticmethod
-    def punten_per_ruimte(
-        klimaatbeheersing_code: str,
-    ) -> dict[str, float] | None:
-        punten_mapping: dict[str, dict[str, float]] = {
-            Eenheidklimaatbeheersingsoort.individueel.code: {
-                Ruimtesoort.vertrek.code: 2,
-                Ruimtesoort.overige_ruimten.code: 1,
-            },
-            Eenheidklimaatbeheersingsoort.collectief.code: {
-                Ruimtesoort.vertrek.code: 1.5,
-                Ruimtesoort.overige_ruimten.code: 0.75,
-            },
-        }
-
-        return punten_mapping[klimaatbeheersing_code]
 
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
 
-    verwarming = Verwarming()
-    with open("tests/data/generiek/input/37101000032.json", "r+") as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    woningwaardering_resultaat = verwarming.bereken(eenheid)
-
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
-        )
+    verkoeling_en_verwarming = VerkoelingEnVerwarming(
+        peildatum=date.fromisoformat("2024-07-01")
     )
 
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+    with open(
+        "tests/data/generiek/input/37101000032.json",
+        "r+",
+    ) as file:
+        eenheid = EenhedenEenheid.model_validate_json(file.read())
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+        groepen=[verkoeling_en_verwarming.bereken(eenheid)]
+    )
+
+    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
+
+    tabel = utils.naar_tabel(resultaat)
 
     print(tabel)

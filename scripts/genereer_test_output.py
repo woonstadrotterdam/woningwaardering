@@ -16,7 +16,7 @@ from woningwaardering.vera.bvg.generated import (
 logger.enable("woningwaardering")
 warnings.simplefilter("default", UserWarning)
 
-# zet logger level to INFO
+# Set logger level to INFO
 logger.remove()
 stdout_id = logger.add(sys.stdout, level="INFO")
 
@@ -25,17 +25,14 @@ PEILDATUM = date(year=jaar, month=7, day=1)
 
 DATA_DIR = Path("tests/data")
 
-input_file_paths = (DATA_DIR / "zelfstandige_woonruimten/input/").rglob("*.json")
-
-
-output_file_paths = list(
-    (DATA_DIR / "zelfstandige_woonruimten/output/").rglob("*.json")
-)
+input_file_paths = (DATA_DIR / "zelfstandige_woonruimten/input").rglob("*.json")
+output_file_paths = list((DATA_DIR / "zelfstandige_woonruimten/output").rglob("*.json"))
 
 for input_file_path in input_file_paths:
     if input_file_path.name not in [x.name for x in output_file_paths]:
+        # Construct the output file path without the peildatum in the folder structure
         output_file_path = (
-            DATA_DIR / "zelfstandige_woonruimten/output/" / input_file_path.name
+            DATA_DIR / "zelfstandige_woonruimten/output" / input_file_path.name
         )
         unverified_path = output_file_path.with_suffix(
             ".unverified" + output_file_path.suffix
@@ -43,7 +40,7 @@ for input_file_path in input_file_paths:
 
         output_file_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # get input model
+        # Get input model
         with open(input_file_path, "r+") as f:
             try:
                 eenheid_input = EenhedenEenheid.model_validate_json(f.read())
@@ -54,17 +51,15 @@ for input_file_path in input_file_paths:
             handler_id = logger.add(
                 unverified_path.with_suffix(".log"), level="TRACE", mode="w"
             )
-            # zet logger naar ERROR voor de stdout om niet alle logging in de terminal te zien van de berekeningen
+            # Set logger to ERROR for the stdout to avoid too much logging in the terminal during calculations
             logger.remove(stdout_id)
             zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=PEILDATUM)
             woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid_input)
             stdout_id = logger.add(sys.stdout, level="INFO")
             logger.remove(handler_id)
-            # write output model
-            with open(
-                unverified_path,
-                "w+",
-            ) as f:
+
+            # Write output model
+            with open(unverified_path, "w+") as f:
                 logger.info(
                     f"Resultaat voor {input_file_path.name} is opgenomen in {unverified_path}, inclusief logs in {unverified_path.with_suffix('.log')}"
                 )

@@ -7,35 +7,35 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "VZE",
-          "naam": "Verwarming"
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
         }
       },
       "punten": 4.0,
       "woningwaarderingen": [
         {
-          "punten": 1.0,
           "criterium": {
-            "naam": "Woonkamer1"
-          }
+            "naam": "Berging"
+          },
+          "punten": 1.0
         },
         {
-          "punten": 1.0,
           "criterium": {
-            "naam": "Woonkamer2"
-          }
+            "naam": "Berging2"
+          },
+          "punten": 1.0
         },
         {
-          "punten": 1.0,
           "criterium": {
-            "naam": "Woonkamer3"
-          }
+            "naam": "Berging3"
+          },
+          "punten": 1.0
         },
         {
-          "punten": 1.0,
           "criterium": {
-            "naam": "Woonkamer4"
-          }
+            "naam": "Berging4"
+          },
+          "punten": 1.0
         }
       ]
     }

@@ -1,10 +1,8 @@
 {
-  "id": "37101000032",
-  "bouwjaar": 1924,
   "klimaatbeheersing": [
     {
-      "code": "COL",
-      "naam": "Collectief"
+      "code": "IND",
+      "naam": "Individueel"
     }
   ],
   "ruimten": [
@@ -24,7 +22,7 @@
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Keuken",
+          "omschrijving": "Aanrecht in koonkamer",
           "soort": {
             "code": "KEU",
             "naam": "Keuken voorziening"
@@ -53,7 +51,7 @@
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Keuken",
+          "omschrijving": "Aanrecht in Kkeuken",
           "soort": {
             "code": "KEU",
             "naam": "Keuken voorziening"
@@ -82,7 +80,7 @@
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Keuken",
+          "omschrijving": "Aanrecht in slaapkamer",
           "soort": {
             "code": "KEU",
             "naam": "Keuken voorziening"
@@ -122,10 +120,11 @@
       "inhoud": 111.528,
       "oppervlakte": 41.0028,
       "verwarmd": false,
+      "verkoeld": true,
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Keuken",
+          "omschrijving": "Aanrecht in onverwarmde woonkamer",
           "soort": {
             "code": "KEU",
             "naam": "Keuken voorziening"
@@ -154,7 +153,7 @@
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Keuken",
+          "omschrijving": "Aanrecht in onverwarmde keuken",
           "soort": {
             "code": "KEU",
             "naam": "Keuken voorziening"
@@ -183,7 +182,7 @@
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Keuken",
+          "omschrijving": "Aanrecht in onverwarmde slaapkamer",
           "soort": {
             "code": "KEU",
             "naam": "Keuken voorziening"
