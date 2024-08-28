@@ -5,8 +5,7 @@ import pandas as pd
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
-from rdflib import Graph, Literal, Namespace
-from rdflib.plugins.sparql import prepareQuery
+from SPARQLWrapper import SPARQLWrapper2
 
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -225,29 +224,6 @@ def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-CEO = Namespace("https://linkeddata.cultureelerfgoed.nl/def/ceo#")
-BAG = Namespace("http://bag.basisregistraties.overheid.nl/bag/id/")
-
-endpoint = "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
-
-
-query_template = """
-ASK
-WHERE {{
-    SERVICE <{endpoint}> {{
-        ?monument a ceo:Rijksmonument .
-        ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
-        ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
-        ?bagRelatie ceo:verblijfsobjectIdentificatie ?verblijfsobjectIdentificatie .
-    }}
-}}
-"""
-
-rijksmonumenten_query = prepareQuery(
-    query_template.format(endpoint=endpoint), initNs={"ceo": CEO, "bag": BAG}
-)
-
-
 def energieprestatie_met_geldig_label(
     peildatum: date,
     eenheid: EenhedenEenheid,
@@ -348,23 +324,91 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
     ) * kwart
 
 
-def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool:
+endpoint_cultureelerfgoed = (
+    "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
+)
+endpoint_kadaster = (
+    "https://api.labs.kadaster.nl/datasets/dst/kkg/services/default/sparql"
+)
+
+rijksmonumenten_query_template = """
+PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
+PREFIX bag:<http://bag.basisregistraties.overheid.nl/bag/id/>
+
+ASK
+WHERE {{
+    ?monument a ceo:Rijksmonument .
+    ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
+    ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
+    ?bagRelatie ceo:verblijfsobjectIdentificatie "{verblijfsobjectIdentificatie}" .
+}}
+"""
+
+
+beschermd_gezicht_query_template = """
+PREFIX sor: <https://data.kkg.kadaster.nl/sor/model/def/>
+PREFIX nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
+PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
+PREFIX rn:<https://data.cultureelerfgoed.nl/term/id/rn/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof:<http://www.opengis.net/def/function/geosparql/>
+ASK
+WHERE {{
+  SERVICE <{endpoint_kadaster}> {{
+      ?verblijfsobject sor:geregistreerdMet/nen3610:identificatie "{verblijfsobjectIdentificatie}".
+      ?verblijfsobject geo:hasGeometry/geo:asWKT ?verblijfsobjectWkt.
+  }}
+  ?gezicht a ceo:Gezicht ;
+      ceo:heeftGeometrie ?gezichtGeometrie ;
+      ceo:heeftGezichtsstatus rn:fd968529-bf70-4afa-8564-7c6c2fcfcc54;
+      ceo:heeftNaam/ceo:naam ?naam.
+  ?gezichtGeometrie geo:asWKT ?gezichtWkt.
+  filter(geof:sfWithin(?verblijfsobjectWkt, ?gezichtWkt))
+}}
+"""
+
+
+def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool | None:
     if not str.isnumeric(verblijfsobjectIdentificatie):
         raise ValueError("VerblijfsobjectIdentificatie moet numeriek zijn")
 
-    graph = Graph()
-
-    result = graph.query(
-        rijksmonumenten_query,
-        initBindings={
-            "verblijfsobjectIdentificatie": Literal(verblijfsobjectIdentificatie),
-        },
+    rijksmonumenten_query = rijksmonumenten_query_template.format(
+        verblijfsobjectIdentificatie=verblijfsobjectIdentificatie,
     )
 
-    if result is None or result.askAnswer is None:
-        return False
+    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql.setQuery(rijksmonumenten_query)
+    result = sparql.queryAndConvert()
+
+    if isinstance(result, dict):
+        return result["boolean"]
     else:
-        return result.askAnswer
+        logger.warning(
+            f"Onverwacht resultaat bij ophalen rijksmonument voor verblijfsobjectIdentificatie {verblijfsobjectIdentificatie}"
+        )
+        return None
+
+
+def is_beschermd_gezicht(verblijfsobjectIdentificatie: str) -> bool | None:
+    if not str.isnumeric(verblijfsobjectIdentificatie):
+        raise ValueError("VerblijfsobjectIdentificatie moet numeriek zijn")
+
+    beschermd_gezicht_query = beschermd_gezicht_query_template.format(
+        endpoint_kadaster=endpoint_kadaster,
+        verblijfsobjectIdentificatie=verblijfsobjectIdentificatie,
+    )
+
+    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql.setQuery(beschermd_gezicht_query)
+    result = sparql.queryAndConvert()
+
+    if isinstance(result, dict):
+        return result["boolean"]
+    else:
+        logger.warning(
+            f"Onverwacht resultaat bij ophalen beschermd gezicht voor verblijfsobjectIdentificatie {verblijfsobjectIdentificatie}"
+        )
+        return None
 
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:

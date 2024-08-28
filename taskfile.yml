@@ -20,6 +20,7 @@ tasks:
           --allow-population-by-field-name \
           --use-title-as-name \
           --field-include-all-keys \
+          --collapse-root-models \
       - python scripts/uitbreiden_vera_modellen.py
   genereer-vera-referentiedata:
     desc: Genereer VERA referentiedata

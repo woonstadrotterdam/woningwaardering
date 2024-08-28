@@ -81,7 +81,9 @@
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
       },
-      "woningwaarderingen": []
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
     }
   ],
   "maximaleHuur": 411.87,
