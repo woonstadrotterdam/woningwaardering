@@ -1,0 +1,57 @@
+{
+  "id": "37101000032",
+  "bouwjaar": 1924,
+  "ruimten": [
+    {
+      "id": "Slaapkamer1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer1",
+      "inhoud": 38.1247,
+      "oppervlakte": 19.1488,
+      "verwarmd": true,
+      "verkoeld": true,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Slaapkamer2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer2",
+      "inhoud": 38.1247,
+      "oppervlakte": 19.1488,
+      "verwarmd": true,
+      "verkoeld": true,
+      "gemeenschappelijk": true
+    },
+    {
+      "id": "Slaapkamer3",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer3",
+      "inhoud": 38.1247,
+      "oppervlakte": 19.1488,
+      "verwarmd": true,
+      "verkoeld": true,
+      "gemeenschappelijk": true
+    }
+  ]
+}

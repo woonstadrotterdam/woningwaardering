@@ -1,23 +1,17 @@
 {
   "id": "max4punten",
-  "klimaatbeheersing": [
-    {
-      "code": "IND",
-      "naam": "Individueel"
-    }
-  ],
   "ruimten": [
     {
-      "id": "Woonkamer1",
+      "id": "Berging1",
       "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
+        "code": "OVR",
+        "naam": "Overige ruimten"
       },
       "detailSoort": {
         "code": "WOO",
-        "naam": "Woonkamer1"
+        "naam": "Berging1"
       },
-      "naam": "Woonkamer1",
+      "naam": "Berging",
       "inhoud": 4,
       "oppervlakte": 2,
       "verwarmd": true,
@@ -27,16 +21,16 @@
       }
     },
     {
-      "id": "Woonkamer2",
+      "id": "Berging2",
       "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
+        "code": "OVR",
+        "naam": "Overige ruimten"
       },
       "detailSoort": {
         "code": "WOO",
-        "naam": "Woonkamer2"
+        "naam": "Berging"
       },
-      "naam": "Woonkamer2",
+      "naam": "Berging2",
       "inhoud": 4,
       "oppervlakte": 2,
       "verwarmd": true,
@@ -46,16 +40,16 @@
       }
     },
     {
-      "id": "Woonkamer3",
+      "id": "Berging3",
       "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
+        "code": "OVR",
+        "naam": "Overige ruimten"
       },
       "detailSoort": {
         "code": "WOO",
-        "naam": "Woonkamer3"
+        "naam": "Berging"
       },
-      "naam": "Woonkamer3",
+      "naam": "Berging3",
       "inhoud": 4,
       "oppervlakte": 2,
       "verwarmd": true,
@@ -65,16 +59,16 @@
       }
     },
     {
-      "id": "woonkamer4",
+      "id": "Berging4",
       "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
+        "code": "OVR",
+        "naam": "Overige ruimten"
       },
       "detailSoort": {
         "code": "WOO",
-        "naam": "Woonkamer4"
+        "naam": "Berging"
       },
-      "naam": "Woonkamer4",
+      "naam": "Berging4",
       "inhoud": 4,
       "oppervlakte": 2,
       "verwarmd": true,
@@ -84,16 +78,16 @@
       }
     },
     {
-      "id": "woonkamer5",
+      "id": "Berging5",
       "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
+        "code": "OVR",
+        "naam": "Overige ruimten"
       },
       "detailSoort": {
         "code": "WOO",
-        "naam": "Woonkamer5"
+        "naam": "Berging"
       },
-      "naam": "Woonkamer5",
+      "naam": "Berging5",
       "inhoud": 4,
       "oppervlakte": 2,
       "verwarmd": true,

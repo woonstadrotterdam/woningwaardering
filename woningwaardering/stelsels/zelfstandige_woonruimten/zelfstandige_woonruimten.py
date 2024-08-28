@@ -6,10 +6,15 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
+    # Energieprestatie,
+    # Keuken,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
+    # PriveBuitenruimten,
+    # PuntenVoorDeWozWaarde,
+    # Sanitair,
+    VerkoelingEnVerwarming,
 )
-
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -28,7 +33,7 @@ class ZelfstandigeWoonruimten(Stelsel):
             stelselgroepen=[
                 OppervlakteVanVertrekken,
                 OppervlakteVanOverigeRuimten,
-                # Verwarming,
+                VerkoelingEnVerwarming,
                 # Energieprestatie,
                 # Sanitair,
                 # Keuken,

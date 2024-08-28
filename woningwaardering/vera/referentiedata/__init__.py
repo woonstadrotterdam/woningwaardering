@@ -101,6 +101,7 @@ from .inkoopopdrachtregelsoort import Inkoopopdrachtregelsoort
 from .inschrijvingherkomst import Inschrijvingherkomst
 from .inspectierapportsoort import Inspectierapportsoort
 from .inspectierapportstatus import Inspectierapportstatus
+from .installatiesoort import Installatiesoort
 from .kandidaatdetailstatus import Kandidaatdetailstatus
 from .kandidaatstatus import Kandidaatstatus
 from .kwaliteitsmetingverzoeksoort import Kwaliteitsmetingverzoeksoort
@@ -305,6 +306,7 @@ __all__ = [
     "Inschrijvingherkomst",
     "Inspectierapportsoort",
     "Inspectierapportstatus",
+    "Installatiesoort",
     "Kandidaatdetailstatus",
     "Kandidaatstatus",
     "Kwaliteitsmetingverzoeksoort",
