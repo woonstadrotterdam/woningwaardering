@@ -301,7 +301,7 @@ Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten.
 
 >Op het moment is verkeersruimte geen ruimtesoort in de referentiedata. Wij hanteren de volgende ruimtedetailsoorten als `verkeersruimte`:
 >- hal
->- overleep
+>- overloop
 >- entree
 >- gang 
 >- trappenhuis (onze eigen uitbreiding op de referentiedata)    
