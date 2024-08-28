@@ -68,7 +68,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
                 UserWarning,
             )
-            return woningwaardering_groep
+            utils.update_eenheid_monumenten(eenheid)
 
         if any(
             monument.code == Eenheidmonument.rijksmonument.code
