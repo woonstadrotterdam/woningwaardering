@@ -340,7 +340,7 @@ WHERE {{
     ?monument a ceo:Rijksmonument .
     ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
     ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
-    ?bagRelatie ceo:verblijfsobjectIdentificatie "{verblijfsobjectIdentificatie}" .
+    ?bagRelatie ceo:verblijfsobjectIdentificatie "{verblijfsobject_identificatie}" .
 }}
 """
 
@@ -355,7 +355,7 @@ PREFIX geof:<http://www.opengis.net/def/function/geosparql/>
 ASK
 WHERE {{
   SERVICE <{endpoint_kadaster}> {{
-      ?verblijfsobject sor:geregistreerdMet/nen3610:identificatie "{verblijfsobjectIdentificatie}".
+      ?verblijfsobject sor:geregistreerdMet/nen3610:identificatie "{verblijfsobject_identificatie}".
       ?verblijfsobject geo:hasGeometry/geo:asWKT ?verblijfsobjectWkt.
   }}
   ?gezicht a ceo:Gezicht ;
@@ -368,12 +368,24 @@ WHERE {{
 """
 
 
-def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool | None:
-    if not str.isnumeric(verblijfsobjectIdentificatie):
-        raise ValueError("VerblijfsobjectIdentificatie moet numeriek zijn")
+def is_rijksmonument(verblijfsobject_identificatie: str) -> bool | None:
+    """
+    Controleert of een verblijfsobject een rijksmonument is.
+
+    Args:
+        verblijfsobject_identificatie (str): De identificatie van het verblijfsobject.
+
+    Returns:
+        bool | None: True als het verblijfsobject een rijksmonument is, False anders, of None bij een fout.
+
+    Raises:
+        ValueError: Als verblijfsobject_identificatie niet numeriek is.
+    """
+    if not verblijfsobject_identificatie.isnumeric():
+        raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
 
     rijksmonumenten_query = rijksmonumenten_query_template.format(
-        verblijfsobjectIdentificatie=verblijfsobjectIdentificatie,
+        verblijfsobject_identificatie=verblijfsobject_identificatie,
     )
 
     sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
@@ -381,21 +393,35 @@ def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool | None:
     result = sparql.queryAndConvert()
 
     if isinstance(result, dict):
-        return result["boolean"]
-    else:
-        logger.warning(
-            f"Onverwacht resultaat bij ophalen rijksmonument voor verblijfsobjectIdentificatie {verblijfsobjectIdentificatie}"
-        )
-        return None
+        rijksmonument = result.get("boolean")
+        if isinstance(rijksmonument, bool):
+            return rijksmonument
+
+    logger.warning(
+        f"Onverwacht resultaat bij ophalen rijksmonument voor verblijfsobject identificatie {verblijfsobject_identificatie}"
+    )
+    return None
 
 
-def is_beschermd_gezicht(verblijfsobjectIdentificatie: str) -> bool | None:
-    if not str.isnumeric(verblijfsobjectIdentificatie):
-        raise ValueError("VerblijfsobjectIdentificatie moet numeriek zijn")
+def is_beschermd_gezicht(verblijfsobject_identificatie: str) -> bool | None:
+    """
+    Controleert of een verblijfsobject tot een beschermd gezicht behoort.
+
+    Args:
+        verblijfsobject_identificatie (str): De identificatie van het verblijfsobject.
+
+    Returns:
+        bool | None: True als het verblijfsobject tot een beschermd gezicht behoort, False anders, of None bij een fout.
+
+    Raises:
+        ValueError: Als verblijfsobject_identificatie niet numeriek is.
+    """
+    if not verblijfsobject_identificatie.isnumeric():
+        raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
 
     beschermd_gezicht_query = beschermd_gezicht_query_template.format(
         endpoint_kadaster=endpoint_kadaster,
-        verblijfsobjectIdentificatie=verblijfsobjectIdentificatie,
+        verblijfsobject_identificatie=verblijfsobject_identificatie,
     )
 
     sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
@@ -403,12 +429,14 @@ def is_beschermd_gezicht(verblijfsobjectIdentificatie: str) -> bool | None:
     result = sparql.queryAndConvert()
 
     if isinstance(result, dict):
-        return result["boolean"]
-    else:
-        logger.warning(
-            f"Onverwacht resultaat bij ophalen beschermd gezicht voor verblijfsobjectIdentificatie {verblijfsobjectIdentificatie}"
-        )
-        return None
+        rijksmonument = result.get("boolean")
+        if isinstance(rijksmonument, bool):
+            return rijksmonument
+
+    logger.warning(
+        f"Onverwacht resultaat bij ophalen beschermd gezicht voor verblijfsobject identificatie {verblijfsobject_identificatie}"
+    )
+    return None
 
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
