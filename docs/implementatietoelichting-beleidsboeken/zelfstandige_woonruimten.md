@@ -645,7 +645,9 @@ Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblij
       
     _Voorbeeld: een woongebouw met een gemeenschappelijk dakterras van 30 m2 waartoe drie adressen toegang hebben, wordt gewaardeerd met: (0,75 x 30) / 3 = 7,5._ 
      
-*   Een aftrek van 5 punten wordt toegepast als de woning geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft.  
+*   Een aftrek van 5 punten wordt toegepast als de woning geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft. 
+
+> Hoewel uit deze zin het lijkt alsof de loggia niet valt onder privé-buitenruimte of gemeenschappelijke buitenruimte, gaan wij ervanuit dat de loggia we onder één van beide categorieën valt en dat loggia in deze zin op een ongelukkige manier is toegevoegd om te benadrukken dat een loggia een buitenruimte is.
      
 *   Maximaal 15 punten worden toegekend voor buitenruimten.
 
