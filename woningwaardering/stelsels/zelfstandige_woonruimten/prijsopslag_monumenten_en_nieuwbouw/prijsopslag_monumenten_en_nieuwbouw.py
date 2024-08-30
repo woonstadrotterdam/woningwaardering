@@ -165,9 +165,13 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 logger.warning(
                     "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
                 )
-                woningwaardering_resultaat = self._bereken_woningwaarderingresultaat(
-                    eenheid
+                from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
+                    ZelfstandigeWoonruimten,
                 )
+
+                woningwaardering_resultaat = ZelfstandigeWoonruimten(
+                    peildatum=self.peildatum
+                ).bereken(eenheid, negeer_stelselgroep=PrijsopslagMonumentenEnNieuwbouw)
 
             puntentotaal = (
                 woningwaardering_resultaat is not None
@@ -212,32 +216,6 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
-
-    def _bereken_woningwaarderingresultaat(
-        self, eenheid: EenhedenEenheid
-    ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
-        """
-        Berekent de woningwaardering resultaten voor de eenheid voor alle stelselgroepen behalve stelselgroep Prijsopslag monumenten en nieuwbouw.
-
-        Args:
-            eenheid (EenhedenEenheid): de eenheid waarvoor de woningwaardering wordt berekend.
-
-        Returns:
-            WoningwaarderingResultatenWoningwaarderingResultaat: de woningwaardering resultaten.
-        """
-
-        from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
-            ZelfstandigeWoonruimten,
-        )
-
-        zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=self.peildatum)
-        zelfstandige_woonruimten.stelselgroepen = [
-            stelselgroep
-            for stelselgroep in zelfstandige_woonruimten.stelselgroepen
-            if not isinstance(stelselgroep, PrijsopslagMonumentenEnNieuwbouw)
-        ]
-        woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid)
-        return woningwaardering_resultaat
 
 
 if __name__ == "__main__":  # pragma: no cover

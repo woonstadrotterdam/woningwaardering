@@ -8,9 +8,7 @@ from tests.test_utils import (
     krijg_warning_tuple_op_datum,
     laad_specifiek_input_en_output_model,
 )
-from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
-    ZelfstandigeWoonruimten,
-)
+from woningwaardering.stelsels.zelfstandige_woonruimten import PuntenVoorDeWozWaarde
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -32,10 +30,10 @@ def test_PuntenVoorDeWozWaarde_output(
     zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
     eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=peildatum)
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [zelfstandige_woonruimten.bereken(eenheid_input)]
+    resultaat.groepen = [stelselgroep.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -50,10 +48,10 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(
     specifieke_input_en_output_model, peildatum
 ):
     eenheid_input, eenheid_output = specifieke_input_en_output_model
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=peildatum)
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [zelfstandige_woonruimten.bereken(eenheid_input)]
+    resultaat.groepen = [stelselgroep.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -80,10 +78,11 @@ def test_PuntenVoorDeWozWaarde_specifiek_warnings(
     specifieke_input_en_output_model, peildatum
 ):
     eenheid_input, _ = specifieke_input_en_output_model
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=peildatum)
+
     warning_tuple = krijg_warning_tuple_op_datum(
         eenheid_input.id, peildatum, specifiek_warning_mapping
     )
     if warning_tuple is not None:
+        stelselgroep = PuntenVoorDeWozWaarde(peildatum=peildatum)
         with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
-            zelfstandige_woonruimten.bereken(eenheid_input)
+            stelselgroep.bereken(eenheid_input)

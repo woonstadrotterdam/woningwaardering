@@ -61,11 +61,14 @@ class Stelsel:
     def bereken(
         self,
         eenheid: EenhedenEenheid,
+        *,
+        negeer_stelselgroep: type[Stelselgroep] | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """Berekent de woningwaardering voor een stelsel.
 
         Parameters:
             eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
+            negeer_stelselgroep (type[Stelselgroep] | None, optional): Een stelselgroep die moet worden overgeslagen.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
@@ -77,6 +80,11 @@ class Stelsel:
         resultaat.groepen = []
 
         for stelselgroep in self.stelselgroepen:
+            if negeer_stelselgroep is not None and isinstance(
+                stelselgroep, negeer_stelselgroep
+            ):
+                continue
+
             resultaat.groepen.append(stelselgroep.bereken(eenheid, resultaat))
 
         # Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij
