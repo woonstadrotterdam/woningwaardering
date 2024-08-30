@@ -40,7 +40,7 @@ class ZelfstandigeWoonruimten(Stelsel):
                 # Keuken,
                 # PriveBuitenruimten,
                 # PuntenVoorDeWozWaarde,
-                PrijsopslagMonumentenEnNieuwbouw,
+                PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als laatste te worden uitgevoerd
             ],
         )
 
