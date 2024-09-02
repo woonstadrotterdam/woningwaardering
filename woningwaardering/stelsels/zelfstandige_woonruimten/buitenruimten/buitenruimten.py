@@ -177,19 +177,17 @@ if __name__ == "__main__":  # pragma: no cover
     buitenruimten = Buitenruimten(peildatum=date.fromisoformat("2024-07-01"))
 
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/prive_buitenruimten/input/gedeelde_buitenruimtes.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/buitenruimten/input/te_kleine_buitenruimtes.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = buitenruimten.bereken(eenheid)
-
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
-        )
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+        groepen=[buitenruimten.bereken(eenheid)]
     )
 
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
+
+    tabel = utils.naar_tabel(resultaat)
 
     print(tabel)
