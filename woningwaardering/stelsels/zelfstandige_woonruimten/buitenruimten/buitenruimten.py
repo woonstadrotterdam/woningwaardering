@@ -56,10 +56,6 @@ class Buitenruimten(Stelselgroep):
         for ruimte in eenheid.ruimten or []:
             if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte:
                 buitenruimten_aanwezig = True
-                gedeelde_ruimte = (
-                    ruimte.gedeeld_met_aantal_eenheden
-                    and ruimte.gedeeld_met_aantal_eenheden >= 2
-                )
                 if not ruimte.oppervlakte:
                     warnings.warn(
                         f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
@@ -68,7 +64,10 @@ class Buitenruimten(Stelselgroep):
                     continue
 
                 woningwaardering = WoningwaarderingResultatenWoningwaardering()
-                if gedeelde_ruimte:  # gedeelde buitenruimte
+                if (
+                    ruimte.gedeeld_met_aantal_eenheden
+                    and ruimte.gedeeld_met_aantal_eenheden >= 2
+                ):  # gedeelde buitenruimte
                     # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
                     if not (ruimte.lengte and ruimte.breedte):
                         warnings.warn(
@@ -87,9 +86,11 @@ class Buitenruimten(Stelselgroep):
                     logger.info(
                         f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
                     )
-                    woningwaardering.aantal = utils.rond_af(
-                        ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden,
-                        decimalen=2,
+                    woningwaardering.aantal = float(
+                        utils.rond_af(
+                            ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden,
+                            decimalen=2,
+                        )
                     )
 
                     # Voor gemeenschappelijk buitenruimten worden 0,75 per vierkante meter toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
@@ -115,8 +116,8 @@ class Buitenruimten(Stelselgroep):
                             naam=f"{ruimte.naam} (privé)",
                         )
                     )
-                    woningwaardering.aantal = utils.rond_af(
-                        ruimte.oppervlakte, decimalen=2
+                    woningwaardering.aantal = float(
+                        utils.rond_af(ruimte.oppervlakte, decimalen=2)
                     )
                     # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,35 punt.
                     woningwaardering.punten = float(
