@@ -136,16 +136,15 @@ class Buitenruimten(Stelselgroep):
                     naam="Geen buitenruimten",
                 )
             )
-            woningwaardering.punten = -5
+            woningwaardering.punten = -5.0
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = utils.rond_af(
+        punten = utils.rond_af_op_kwart(
             sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.punten is not None
             ),
-            decimalen=0,
         )
         max_punten = 15
         if punten > max_punten:  # maximaal 15 punten
