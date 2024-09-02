@@ -91,6 +91,8 @@ class Buitenruimten(Stelselgroep):
                         ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden,
                         decimalen=2,
                     )
+
+                    # Voor gemeenschappelijk buitenruimten worden 0,75 per vierkante meter toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
                     woningwaardering.punten = float(
                         utils.rond_af(
                             ruimte.oppervlakte
@@ -116,11 +118,25 @@ class Buitenruimten(Stelselgroep):
                     woningwaardering.aantal = utils.rond_af(
                         ruimte.oppervlakte, decimalen=2
                     )
+                    # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,35 punt.
                     woningwaardering.punten = float(
-                        utils.rond_af(ruimte.oppervlakte * 0.35, decimalen=2)
+                        utils.rond_af(2 + ruimte.oppervlakte * 0.35, decimalen=2)
                     )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+        if not buitenruimten_aanwezig:
+            logger.info(
+                f"Eenheid {eenheid.id} heeft geen buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
+            )
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Geen buitenruimten",
+                )
+            )
+            woningwaardering.punten = -5
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         punten = utils.rond_af(
             sum(
@@ -145,19 +161,6 @@ class Buitenruimten(Stelselgroep):
                 )
             )
             woningwaardering.punten = float(aftrek)
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
-
-        if not buitenruimten_aanwezig:
-            logger.info(
-                f"Eenheid {eenheid.id} heeft geen buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
-            )
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = (
-                WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Geen buitenruimten",
-                )
-            )
-            woningwaardering.punten = -5
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         woningwaardering_groep.punten = float(punten)
