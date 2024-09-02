@@ -7,17 +7,17 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "PRI",
-          "naam": "Privé-buitenruimten"
+          "code": "BUI",
+          "naam": "Buitenruimten"
         }
       },
-      "punten": 2.0,
+      "punten": -5.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Carport"
+            "naam": "Geen buitenruimten"
           },
-          "punten": 2.0
+          "punten": -5.0
         }
       ]
     }

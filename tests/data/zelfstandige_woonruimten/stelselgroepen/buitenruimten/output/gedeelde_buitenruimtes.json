@@ -7,31 +7,33 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "PRI",
-          "naam": "Privé-buitenruimten"
+          "code": "BUI",
+          "naam": "Buitenruimten"
         }
       },
-      "punten": 2.0,
+      "punten": 4.0,
       "woningwaarderingen": [
         {
-          "aantal": 10.0,
+          "aantal": 3.0,
           "criterium": {
-            "naam": "Tuin (~20.00m2, gedeeld met 2)",
+            "naam": "Tuin (gedeeld met 2)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          }
+          },
+          "punten": 2.25
         },
         {
-          "aantal": 10.0,
+          "aantal": 2.0,
           "criterium": {
-            "naam": "Tuin (~30.00m2, gedeeld met 3)",
+            "naam": "Tuin (gedeeld met 3)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          }
+          },
+          "punten": 1.5
         }
       ]
     }
