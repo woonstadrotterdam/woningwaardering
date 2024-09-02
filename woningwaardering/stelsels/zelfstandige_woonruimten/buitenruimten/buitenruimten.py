@@ -69,6 +69,21 @@ class Buitenruimten(Stelselgroep):
 
                 woningwaardering = WoningwaarderingResultatenWoningwaardering()
                 if gedeelde_ruimte:  # gedeelde buitenruimte
+                    # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
+                    if not (ruimte.lengte and ruimte.breedte):
+                        warnings.warn(
+                            f"Ruimte {ruimte.naam} ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
+                            UserWarning,
+                        )
+                    if (
+                        (ruimte.hoogte and ruimte.hoogte < 2)
+                        or (ruimte.lengte and ruimte.lengte < 1.5)
+                        or (ruimte.breedte and ruimte.breedte < 1.5)
+                    ):
+                        logger.info(
+                            f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
+                        )
+                        continue
                     logger.info(
                         f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
                     )
