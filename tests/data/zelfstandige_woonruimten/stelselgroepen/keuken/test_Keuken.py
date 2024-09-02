@@ -90,6 +90,8 @@ specifiek_warning_mapping = {
 }
 
 
+# In deze test data zit expres missende data
+@pytest.mark.filterwarnings("ignore::UserWarning")
 def test_Keuken_specifiek_warnings(specifieke_input_en_output_model, peildatum):
     eenheid_input, _ = specifieke_input_en_output_model
     keuken = Keuken(peildatum=peildatum)

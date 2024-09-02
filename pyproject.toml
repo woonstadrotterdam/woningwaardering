@@ -29,7 +29,7 @@ dependencies = [
     "PyYAML==6.*",
     "prettytable==3.*",
     "pandas==2.*",
-    "rdflib==7.*"
+    "SPARQLWrapper==2.*",
 ]
 
 [project.urls]

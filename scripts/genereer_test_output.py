@@ -1,6 +1,7 @@
 import sys
 from datetime import date, datetime
 from pathlib import Path
+import warnings
 
 from loguru import logger
 from pydantic import ValidationError
@@ -13,6 +14,7 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 logger.enable("woningwaardering")
+warnings.simplefilter("default", UserWarning)
 
 # Set logger level to INFO
 logger.remove()

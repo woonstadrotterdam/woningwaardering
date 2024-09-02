@@ -41,6 +41,13 @@
       }
     }
   ],
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    }
+  ],
+  "datum_afsluiten_huurovereenkomst": "2024-05-29",
   "ruimten": [
     {
       "id": "Space_88554482",

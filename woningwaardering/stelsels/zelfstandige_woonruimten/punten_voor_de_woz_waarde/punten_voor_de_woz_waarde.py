@@ -55,10 +55,16 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = []
 
         if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
-            warnings.warn(
-                "Geen woningwaardering resultaat gevonden: kan punten voor woz waarde niet berekenen"
+            logger.warning(
+                "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
             )
-            return woningwaardering_groep
+            from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
+                ZelfstandigeWoonruimten,
+            )
+
+            woningwaardering_resultaat = ZelfstandigeWoonruimten(
+                peildatum=self.peildatum
+            ).bereken(eenheid, negeer_stelselgroep=PuntenVoorDeWozWaarde)
 
         if not eenheid.bouwjaar:
             warnings.warn(f"Eenheid {eenheid.id}: geen bouwjaar gevonden.", UserWarning)
