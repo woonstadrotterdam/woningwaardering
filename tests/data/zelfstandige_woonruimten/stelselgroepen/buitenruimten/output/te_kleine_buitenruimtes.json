@@ -7,8 +7,8 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "PRI",
-          "naam": "Privé-buitenruimten"
+          "code": "BUI",
+          "naam": "Buitenruimten"
         }
       },
       "punten": 0.0,
