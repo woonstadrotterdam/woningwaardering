@@ -164,6 +164,32 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 13.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 33.12,
+          "criterium": {
+            "naam": "Tuin (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 13.59
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "PMN",
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
@@ -173,11 +199,11 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 476.44,
-  "punten": 83.0,
+  "maximaleHuur": 564.35,
+  "punten": 97.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 476.44
+  "maximaleHuurInclusiefOpslag": 564.35
 }
