@@ -160,6 +160,7 @@ class Energieprestatie(Stelselgroep):
         if (
             lookup_key == "oud_en_nieuw"
             and energieprestatie.registratiedatum >= datetime(2015, 1, 1).astimezone()
+            and energieprestatie.registratiedatum < datetime(2021, 1, 1).astimezone()
         ):
             if energieprestatie.waarde is not None:
                 energie_index = float(energieprestatie.waarde)
@@ -171,7 +172,7 @@ class Energieprestatie(Stelselgroep):
 
                 waarderings_label_index = filtered_df["Label"].values[0]
 
-                # wanneer de energie-index afwijkt van het label, geef voorkeur aan energie-index
+                # wanneer de energie-index afwijkt van het label, geef voorkeur aan energie-index want de index is in deze tijd afgegeven
                 if label != waarderings_label_index:
                     woningwaardering.criterium.naam += (
                         f" -> {waarderings_label_index} (Energie-index)"
@@ -229,7 +230,8 @@ class Energieprestatie(Stelselgroep):
 
         if eenheid.monumenten is None:
             logger.warning(
-                f"Eenheid {eenheid.id}: Monumenten is None en kan daarom niet gewaardeerd worden in {Woningwaarderingstelselgroep.energieprestatie.naam}"
+                f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
+                UserWarning,
             )
             return woningwaardering_groep
 
@@ -286,7 +288,7 @@ class Energieprestatie(Stelselgroep):
             logger.info(f"Eenheid {eenheid.id}: energieprestatievergoeding gevonden.")
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Energieprestatievergoeding"
+                    naam=f"EPV {pandsoort.naam}"
                 )
             )
             woningwaardering.punten = float(
@@ -362,10 +364,10 @@ class Energieprestatie(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
-
-    energieprestatie = Energieprestatie()
+    warnings.simplefilter("default")
+    energieprestatie = Energieprestatie(peildatum=date(2024, 7, 1))
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/energieprestatie/input/2021_label_>40m2.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/energieprestatie/input/twee_energieprestaties.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
