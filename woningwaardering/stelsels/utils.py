@@ -288,6 +288,7 @@ def rond_af(
     Args:
         getal (float | None | Decimal): Het getal om af te ronden.
         decimalen (int): Het aantal decimalen na de komma om op af te ronden.
+        rounding (str | None, optional): Het type afrondingsregel. Default is ROUND_HALF_UP.
 
     Returns:
         Decimal: Het afgeronde getal.

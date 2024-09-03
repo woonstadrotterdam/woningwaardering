@@ -257,7 +257,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
-            float: De correctiepunten voor de stelselgroep WOZ-waarde.
+            float | None: De correctiepunten voor de stelselgroep WOZ-waarde.
         """
 
         totaal_punten = sum(
@@ -271,7 +271,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # cap niet wanneer punten onder de cap grens zitten of totaal punten lager is dan 187
         if cap_punten >= Decimal(str(punten)) or totaal_punten < Decimal("187"):
             return None
-
         else:
             return float(cap_punten - Decimal(str(punten)))
 
@@ -304,10 +303,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         Bepaalt de minimum WOZ-waarde.
 
         Args:
-            woz_waarde (float): De WOZ-waarde.
+            woz_eenheid (EenhedenWozEenheid): De WOZ-eenheid.
 
         Returns:
-            float: De minimum WOZ-waarde.
+            float | None: De minimum WOZ-waarde, of None indien er geen minimum vastgesteld kan worden.
         """
         if woz_eenheid.vastgestelde_waarde is None:
             warnings.warn("Vastgestelde WOZ-waarde is None")
