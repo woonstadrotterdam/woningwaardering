@@ -107,7 +107,7 @@ class Energieprestatie(Stelselgroep):
             energieprestatie_soort
             == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
             and energieprestatie.registratiedatum >= datetime(2021, 1, 1).astimezone()
-            and energieprestatie.registratiedatum <= datetime(2024, 7, 1).astimezone()
+            and energieprestatie.registratiedatum < datetime(2024, 7, 1).astimezone()
         ):
             gebruiksoppervlakte_thermische_zone = next(
                 (
@@ -136,14 +136,14 @@ class Energieprestatie(Stelselgroep):
 
             if gebruiksoppervlakte_thermische_zone < 25.0:
                 logger.info(
-                    f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen < 25 m2'"
+                    f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen < 25 m2.'"
                 )
                 lookup_key = "overgangsrecht_0-25"
                 woningwaardering.criterium.naam += " < 25 m2"
 
             elif 25.0 <= gebruiksoppervlakte_thermische_zone < 40.0:
                 logger.info(
-                    f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen ≤ 40 m2'"
+                    f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen ≥ 25m2 en < 40 m2.'"
                 )
                 lookup_key = "overgangsrecht_25-40"
                 woningwaardering.criterium.naam += " 25-40 m2"
@@ -163,6 +163,10 @@ class Energieprestatie(Stelselgroep):
             and energieprestatie.registratiedatum < datetime(2021, 1, 1).astimezone()
         ):
             if energieprestatie.waarde is not None:
+                logger.info(
+                    f"Eenheid {eenheid.id}: waardeer {Woningwaarderingstelselgroep.energieprestatie.naam} op basis van energie-index."
+                )
+
                 energie_index = float(energieprestatie.waarde)
 
                 filtered_df = df[
@@ -178,6 +182,8 @@ class Energieprestatie(Stelselgroep):
                         f" -> {waarderings_label_index} (Energie-index)"
                     )
                     waarderings_label = waarderings_label_index
+                else:
+                    woningwaardering.criterium.naam += " (Energie-index)"
 
         filtered_df = df[(df["Label"] == waarderings_label)].pipe(
             utils.dataframe_met_een_rij
