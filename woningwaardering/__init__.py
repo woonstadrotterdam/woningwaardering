@@ -1,4 +1,5 @@
 from decimal import BasicContext, setcontext
+import locale
 import os
 import sys
 import time
@@ -16,6 +17,7 @@ setcontext(BasicContext)
 default_timezone = "Europe/Amsterdam"
 
 timezone = os.environ.get("TZ")
+locale.setlocale(locale.LC_ALL, "nl_NL")
 
 if timezone is None:
     logger.info('Geen environment variable "TZ" gevonden')

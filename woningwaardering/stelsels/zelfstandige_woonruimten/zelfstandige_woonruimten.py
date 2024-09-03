@@ -10,7 +10,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanVertrekken,
     Buitenruimten,
     PrijsopslagMonumentenEnNieuwbouw,
-    # PuntenVoorDeWozWaarde,
+    PuntenVoorDeWozWaarde,
     # Sanitair,
     VerkoelingEnVerwarming,
 )
@@ -37,8 +37,8 @@ class ZelfstandigeWoonruimten(Stelsel):
                 # Energieprestatie,
                 # Sanitair,
                 # Keuken,
-                # PuntenVoorDeWozWaarde,
-                PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als laatste te worden uitgevoerd
+                PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als een na laatste te worden uitgevoerd
+                PuntenVoorDeWozWaarde,  # LET OP: deze stelselgroep dient als laatste te worden uitgevoerd
             ],
         )
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date.today())
     with open(
-        "tests/data/zelfstandige_woonruimten/input/71211000027.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/prijsopslag_monumenten_en_nieuwbouw/output/nieuwbouw.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

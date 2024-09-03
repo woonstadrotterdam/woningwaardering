@@ -280,8 +280,7 @@ def energieprestatie_met_geldig_label(
 
 
 def rond_af(
-    getal: float | None | Decimal,
-    decimalen: int,
+    getal: float | None | Decimal, decimalen: int, rounding: str | None = ROUND_HALF_UP
 ) -> Decimal:
     """
     Rondt een getal af op een bepaald aantal decimalen volgens de standaard afrondingsregels (arithmetic).
@@ -298,9 +297,7 @@ def rond_af(
     """
     if getal is None:
         raise ValueError("Kan None niet afronden")
-    return Decimal(str(getal)).quantize(
-        Decimal(f"1e{-decimalen}"), rounding=ROUND_HALF_UP
-    )
+    return Decimal(str(getal)).quantize(Decimal(f"1e{-decimalen}"), rounding=rounding)
 
 
 def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
