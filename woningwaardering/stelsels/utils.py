@@ -239,8 +239,15 @@ def energieprestatie_met_geldig_label(
     Returns:
         EenhedenEnergieprestatie | None: De eerste geldige energieprestatie met een energielabel en None Wanneer er geen geldige energieprestatie met label is gevonden.
     """
-    if eenheid.energieprestaties is not None:
+
+    if eenheid.energieprestaties is None:
+        warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
+        return None
+
+    if len(eenheid.energieprestaties) > 0:
         for idx, energieprestatie in enumerate(eenheid.energieprestaties):
+            # Check of de energieprestatie alle benodigde attributen heeft.
+            # sla missende attributen op in een lijst.
             missing_attributes = []
 
             if not energieprestatie.registratiedatum:
@@ -266,6 +273,7 @@ def energieprestatie_met_geldig_label(
             elif not energieprestatie.label.code:
                 missing_attributes.append("'label.code'")
 
+            # Check of er missende attributen zijn en log deze.
             if missing_attributes:
                 msg = f"Eenheid {eenheid.id} mist energieprestatie attributen:"
                 for attribute in missing_attributes:
@@ -351,11 +359,11 @@ def energieprestatie_met_geldig_label(
                     )
                     continue
 
-        logger.info(f"Eenheid {eenheid.id}: Geldige energieprestatie gevonden")
-        logger.debug(f"Energieprestatie: {energieprestatie}")
-        return energieprestatie
+            logger.info(f"Eenheid {eenheid.id}: Geldige energieprestatie gevonden")
+            logger.debug(f"Energieprestatie: {energieprestatie}")
+            return energieprestatie
 
-    warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
+    logger.info(f"Eenheid {eenheid.id}: Geen energieprestatie gevonden")
     return None
 
 
