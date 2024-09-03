@@ -316,7 +316,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             warnings.warn("Waardepeildatum is None")
             return None
 
-        minimum_woz_waarde = (
+        minimum_woz_waarde = float(
             self.pd_minimum_woz_waarde[
                 pd.to_datetime(self.pd_minimum_woz_waarde["Peildatum"])
                 == pd.to_datetime(woz_eenheid.waardepeildatum)
