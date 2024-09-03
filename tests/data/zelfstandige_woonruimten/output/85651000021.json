@@ -157,6 +157,27 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": -15.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Bouwjaar 1897"
+          },
+          "punten": -15.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "PMN",
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
@@ -166,11 +187,11 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 423.3,
-  "punten": 74.0,
+  "maximaleHuur": 337.54,
+  "punten": 59.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 423.3
+  "maximaleHuurInclusiefOpslag": 337.54
 }
