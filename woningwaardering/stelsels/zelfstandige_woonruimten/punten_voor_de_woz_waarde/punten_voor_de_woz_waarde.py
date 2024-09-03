@@ -109,14 +109,20 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         factor_onderdeel_I = factoren["Onderdeel I"].values[0]
         factor_onderdeel_II = factoren["Onderdeel II"].values[0]
 
+        punten_onderdeel_I = float(
+            utils.rond_af(Decimal(woz_waarde / factor_onderdeel_I), decimalen=2)
+        )
+
+        logger.info(
+            f"Eenheid {eenheid.id}: Punten voor de WOZ-waarde onderdeel I is {woz_waarde} / {factor_onderdeel_I} = {punten_onderdeel_I}"
+        )
+
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel I"
                 ),
-                punten=float(
-                    utils.rond_af(Decimal(woz_waarde / factor_onderdeel_I), decimalen=2)
-                ),
+                punten=punten_onderdeel_I,
             )
         )
 
@@ -128,17 +134,23 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 UserWarning,
             )
 
+        punten_onderdeel_II = float(
+            utils.rond_af(
+                woz_waarde / oppervlakte / factor_onderdeel_II,
+                decimalen=2,
+            )
+        )
+
+        logger.info(
+            f"Eenheid {eenheid.id}: Punten voor de WOZ-waarde onderdeel II is {woz_waarde} / {oppervlakte} / {factor_onderdeel_II} = {punten_onderdeel_II}"
+        )
+
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel II"
                 ),
-                punten=float(
-                    utils.rond_af(
-                        woz_waarde / oppervlakte / factor_onderdeel_II,
-                        decimalen=2,
-                    )
-                ),
+                punten=punten_onderdeel_II,
             )
         )
 
