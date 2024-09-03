@@ -11,13 +11,18 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": 28.0,
+      "punten": -9.0,
       "woningwaarderingen": [
         {
+          "aantal": 82.77,
           "criterium": {
-            "naam": "C (oud) > B ivm EPV"
+            "naam": "F",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
-          "punten": 28.0
+          "punten": -9.0
         }
       ]
     }

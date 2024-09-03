@@ -1,0 +1,25 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 22.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "A -> C (Energie-index)"
+          },
+          "punten": 22.0
+        }
+      ]
+    }
+  ]
+}

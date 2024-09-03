@@ -11,18 +11,18 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": 52.0,
+      "punten": -9.0,
       "woningwaarderingen": [
         {
+          "aantal": 35.77,
           "criterium": {
-            "naam": "A++++",
+            "naam": "F 25-40 m2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
           },
-          "aantal": 72.0,
-          "punten": 52.0
+          "punten": -9.0
         }
       ]
     }
