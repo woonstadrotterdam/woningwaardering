@@ -379,7 +379,7 @@ def energieprestatie_met_geldig_label(
         logger.debug(f"Energieprestatie: {energieprestatie}")
         return energieprestatie
 
-    warnings.warn("Eneregieprestaties is None", UserWarning)
+    warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
     return None
 
 
