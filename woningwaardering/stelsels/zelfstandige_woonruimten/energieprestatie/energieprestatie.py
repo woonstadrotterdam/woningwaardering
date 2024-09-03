@@ -150,7 +150,7 @@ class Energieprestatie(Stelselgroep):
 
             else:
                 logger.info(
-                    f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens de puntentelling van 'Oud en Nieuw' energielabel"
+                    f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens de puntentelling van 'Oud en Nieuw' energielabel."
                 )
 
         df = Energieprestatie.lookup_mapping[lookup_key]
@@ -193,6 +193,10 @@ class Energieprestatie(Stelselgroep):
         pandsoortnaam: str,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
+        logger.info(
+            f"Eenheid {eenheid.id}: punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam} worden berekend op basis van bouwjaar."
+        )
+
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
         df = Energieprestatie.lookup_mapping["bouwjaar"]
@@ -367,7 +371,7 @@ if __name__ == "__main__":  # pragma: no cover
     warnings.simplefilter("default")
     energieprestatie = Energieprestatie(peildatum=date(2024, 7, 1))
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/energieprestatie/input/twee_energieprestaties.json",
+        "/Users/tiddo/Documents/woonstad/woningwaardering/tests/data/zelfstandige_woonruimten/input/12006000004.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
