@@ -15,7 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Verwarmde woonkamer"
+            "naam": "Verwarmde woonkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -27,13 +27,13 @@
         },
         {
           "criterium": {
-            "naam": "Verwarmde keuken"
+            "naam": "Verwarmde keuken (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Verwarmde slaapkamer"
+            "naam": "Verwarmde slaapkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -45,7 +45,7 @@
         },
         {
           "criterium": {
-            "naam": "Verwarmde woonkamer/keuken"
+            "naam": "Verwarmde woonkamer/keuken (verwarmd vertrek)"
           },
           "punten": 2.0
         },

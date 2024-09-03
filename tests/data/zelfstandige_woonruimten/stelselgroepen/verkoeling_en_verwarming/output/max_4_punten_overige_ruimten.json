@@ -15,27 +15,39 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Berging"
+            "naam": "Berging (verwarmde overige/verkeers-ruimte)"
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Berging2"
+            "naam": "Berging2 (verwarmde overige/verkeers-ruimte)"
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Berging3"
+            "naam": "Berging3 (verwarmde overige/verkeers-ruimte)"
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Berging4"
+            "naam": "Berging4 (verwarmde overige/verkeers-ruimte)"
           },
           "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Berging5 (verwarmde overige/verkeers-ruimte)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 4 punten voor verwarmde overige- en verkeersruimten"
+          },
+          "punten": -1.0
         }
       ]
     }

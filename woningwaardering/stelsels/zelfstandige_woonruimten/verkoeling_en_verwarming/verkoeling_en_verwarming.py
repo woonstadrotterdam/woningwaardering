@@ -116,47 +116,47 @@ class VerkoelingEnVerwarming(Stelselgroep):
             )
 
             if ruimtesoort == Ruimtesoort.overige_ruimten:
-                if totaal_punten_overige_ruimten >= Decimal("4.0"):
-                    logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) wordt niet meegeteld voor {Woningwaarderingstelselgroep.verwarming.naam}, omdat de overige ruimten bij elkaar {totaal_punten_overige_ruimten} punten hebben behaald."
-                    )
-                    continue
-
-                # Als de punten de maximum van 4.0 overschrijden, dan wordt het aantal punten dat nog mag worden gegeven voor de ruimte aangepast
-                if (totaal_punten_overige_ruimten + punten) >= Decimal("4.0"):
-                    logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}): punten worden gecorrigeerd. De maximum punten voor {Ruimtesoort.overige_ruimten.naam} zijn behaald."
-                    )
-                    punten = Decimal("4.0") - totaal_punten_overige_ruimten
-
                 totaal_punten_overige_ruimten += punten
                 logger.info(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmde {Ruimtesoort.overige_ruimten.naam} en krijgt {punten} punt."
                 )
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam=f"{ruimte.naam} (verwarmde overige/verkeers-ruimte)"
+                        ),
+                        punten=punten,
+                    )
+                )
 
             else:
-                if (
-                    ruimte.verkoeld
-                    and totaal_punten_verkoeld_en_verwarmd + 1 <= Decimal("2")
-                ):
+                if ruimte.verkoeld:
                     punten += Decimal("1")
                     totaal_punten_verkoeld_en_verwarmd += Decimal("1")
                     logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmde en verkoelde {Ruimtesoort.vertrek.naam} en krijgt {punten} punten."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmd en verkoeld vertrek en krijgt {punten} punten."
+                    )
+                    woningwaardering_groep.woningwaarderingen.append(
+                        WoningwaarderingResultatenWoningwaardering(
+                            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                                naam=f"{ruimte.naam} (verkoeld en verwarmd vertrek)"
+                            ),
+                            punten=punten,
+                        )
                     )
                 else:
                     logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmd {Ruimtesoort.vertrek.naam} en krijgt {punten} punten."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmd vertrek en krijgt {punten} punten."
                     )
 
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=ruimte.naam,
-                    ),
-                    punten=punten,
-                )
-            )
+                    woningwaardering_groep.woningwaarderingen.append(
+                        WoningwaarderingResultatenWoningwaardering(
+                            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                                naam=f"{ruimte.naam} (verwarmd vertrek)",
+                            ),
+                            punten=punten,
+                        )
+                    )
 
             # Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten.
             if (
@@ -180,12 +180,46 @@ class VerkoelingEnVerwarming(Stelselgroep):
                         punten=punten,
                     )
                 )
+        max_punten_overige_ruimten = Decimal("4")
+        if totaal_punten_overige_ruimten > max_punten_overige_ruimten:
+            aftrek = max_punten_overige_ruimten - totaal_punten_overige_ruimten
+            logger.info(
+                f"Maximaal aantal punten voor verwarmde overige- en verkeersruimten overschreden ({totaal_punten_overige_ruimten} > {max_punten_overige_ruimten}). Een aftrek van {aftrek} punt(en) wordt toegepast."
+            )
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Maximaal 4 punten voor verwarmde overige- en verkeersruimten",
+                    ),
+                    punten=aftrek,
+                )
+            )
 
-        punten = Decimal(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
+        max_punten_verkoeld_en_verwarmd = Decimal("2")
+        if totaal_punten_verkoeld_en_verwarmd > max_punten_verkoeld_en_verwarmd:
+            aftrek = (
+                max_punten_verkoeld_en_verwarmd - totaal_punten_verkoeld_en_verwarmd
+            )
+            logger.info(
+                f"Maximaal aantal extra punten voor verwarmde en verkoelde vertrekken overschreden ({totaal_punten_verkoeld_en_verwarmd} > {max_punten_verkoeld_en_verwarmd}). Een aftrek van {aftrek} punt(en) wordt toegepast."
+            )
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Maximaal 2 extra punten voor verwarmde en verkoelde vertrekken",
+                    ),
+                    punten=aftrek,
+                )
+            )
+
+        punten = utils.rond_af_op_kwart(
+            Decimal(
+                sum(
+                    Decimal(str(woningwaardering.punten))
+                    for woningwaardering in woningwaardering_groep.woningwaarderingen
+                    or []
+                    if woningwaardering.punten is not None
+                )
             )
         )
 
@@ -206,7 +240,7 @@ if __name__ == "__main__":  # pragma: no cover
     )
 
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/verkoeling_en_verwarming/input/max_4_punten_overige_ruimten.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
