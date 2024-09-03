@@ -134,7 +134,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     punten += Decimal("1")
                     totaal_punten_verkoeld_en_verwarmd += Decimal("1")
                     logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmde en verkoelde vertrek en krijgt {punten} punten."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmd en verkoeld vertrek en krijgt {punten} punten."
                     )
                     woningwaardering_groep.woningwaarderingen.append(
                         WoningwaarderingResultatenWoningwaardering(
