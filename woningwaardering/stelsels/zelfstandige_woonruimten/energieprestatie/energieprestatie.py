@@ -70,9 +70,7 @@ class Energieprestatie(Stelselgroep):
     ) -> None:
         super().__init__(
             begindatum=date(2024, 7, 1),
-            einddatum=date(
-                2025, 1, 1
-            ),  # Overgangsrecht kleine woningen ≤ 40 m2 veravlt
+            einddatum=date.max,
             peildatum=peildatum,
         )
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -108,6 +106,8 @@ class Energieprestatie(Stelselgroep):
             == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
             and energieprestatie.registratiedatum >= datetime(2021, 1, 1).astimezone()
             and energieprestatie.registratiedatum < datetime(2024, 7, 1).astimezone()
+            and self.peildatum
+            < date(2025, 1, 1)  # Overgangsrecht kleine woningen < 40 m2 vervalt in 2025
         ):
             gebruiksoppervlakte_thermische_zone = next(
                 (
