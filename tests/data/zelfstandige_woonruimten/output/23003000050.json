@@ -89,13 +89,111 @@
           }
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 11.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Gang (verwarmde overige/verkeers-ruimte)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Woonkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Keuken (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 15.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 47.76,
+          "criterium": {
+            "naam": "Tuin (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 18.72
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 15 punten"
+          },
+          "punten": -3.75
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 366.11,
-  "punten": 64.0,
+  "maximaleHuur": 520.4,
+  "punten": 90.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 366.11
+  "maximaleHuurInclusiefOpslag": 520.4
 }

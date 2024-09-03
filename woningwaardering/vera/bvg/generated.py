@@ -1390,6 +1390,11 @@ class EenhedenRuimte(BaseModel):
     """
     Geeft aan of de ruimte verwarmd wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
     """
+    # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
+    verkoeld: Optional[bool] = Field(default=None, alias="verkoeld")
+    """
+    Geeft aan of de ruimte verkoeld wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
+    """
 
 
 class EenhedenStadsdeel(BaseModel):
@@ -1925,13 +1930,6 @@ class RelatieSleutels(BaseModel):
     """
 
 
-class ClustersGeometrie(RootModel[Union[ClustersPunt, ClustersGeometrieBasis]]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
-    root: Union[ClustersPunt, ClustersGeometrieBasis]
-
-
 class ClustersRelatieBasis(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -2146,13 +2144,6 @@ class EenhedenBeleidswaarde(BaseModel):
     """
     De beleidswaarde van de eenheid waarde die rekening houdt met het beleid van de corporatie. Marktwaarde minus de afslagen voor beschikbaarheid, betaalbaarheid, kwaliteit en beheer, vormt de beleidswaarde (bron beleidswaarde WSW). Let op: het verslagjaar waarvoor de beleidswaarde is bepaald is het verslagjaar van de marktwaarde die de grondslag vormt van de beleidswaarde.
     """
-
-
-class EenhedenGeometrie(RootModel[Union[EenhedenPunt, EenhedenGeometrieBasis]]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
-    root: Union[EenhedenPunt, EenhedenGeometrieBasis]
 
 
 class EenhedenRelatieBasis(BaseModel):
@@ -2579,15 +2570,6 @@ class ClustersRechtspersoon(ClustersRelatieBasis):
     """
 
 
-class ClustersRelatie(
-    RootModel[Union[ClustersNatuurlijkPersoon, ClustersRechtspersoon]]
-):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
-    root: Union[ClustersNatuurlijkPersoon, ClustersRechtspersoon]
-
-
 class EenhedenEenheidadres(EenhedenAdresBasis):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -2600,7 +2582,7 @@ class EenhedenEenheidadres(EenhedenAdresBasis):
     """
     De gemeente behorend bij het adres.
     """
-    geometrie: Optional[EenhedenGeometrie] = None
+    geometrie: Optional[Union[EenhedenPunt, EenhedenGeometrieBasis]] = None
     """
     De geometrie van het adres.
     """
@@ -2682,15 +2664,6 @@ class EenhedenRechtspersoon(EenhedenRelatieBasis):
     """
     De organisatievorm van de rechtspersoon. Bijvoorbeeld: BV, NV, stichting of vereniging. Ook wel rechtsvorm genoemd. Referentiedatasoort ORGANISATIEVORM.
     """
-
-
-class EenhedenRelatie(
-    RootModel[Union[EenhedenNatuurlijkPersoon, EenhedenRechtspersoon]]
-):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
-    root: Union[EenhedenNatuurlijkPersoon, EenhedenRechtspersoon]
 
 
 class WoningwaarderingResultatenWoningwaardering(BaseModel):
@@ -2950,13 +2923,6 @@ class BouwkundigElementenRechtspersoon(BouwkundigElementenRechtspersoonBasis):
     )
 
 
-class BouwkundigElementenRelatie(RootModel[BouwkundigElementenRechtspersoon]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
-    root: BouwkundigElementenRechtspersoon
-
-
 class ClustersCluster(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -3031,7 +2997,7 @@ class ClustersCluster(BaseModel):
     """
     De garanties behorend bij de cluster.
     """
-    geometrie: Optional[ClustersGeometrie] = None
+    geometrie: Optional[Union[ClustersPunt, ClustersGeometrieBasis]] = None
     """
     De geometrie van de cluster.
     """
@@ -3039,17 +3005,12 @@ class ClustersCluster(BaseModel):
     """
     De onderhoudsovereenkomsten die voor het cluster gelden.
     """
-    relaties: Optional[list[ClustersRelatie]] = None
+    relaties: Optional[
+        list[Union[ClustersNatuurlijkPersoon, ClustersRechtspersoon]]
+    ] = None
     """
     De relaties die een speciale rol spelen voor het cluster bijvoorbeeld een Vereniging van eigenaren, een onderhoudsbedrijf, projectleider etc.
     """
-
-
-class EenhedenAdres(RootModel[Union[EenhedenEenheidadres, EenhedenAdresBasis]]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
-    root: Union[EenhedenEenheidadres, EenhedenAdresBasis]
 
 
 class EenhedenEenheid(BaseModel):
@@ -3146,7 +3107,7 @@ class EenhedenEenheid(BaseModel):
     """
     De aanvullende doelgroep waarvoor de woning het meest geschikt is en waarvoor meestal ook voorrang wordt verleend. Bijv. Ouderen, Geestelijk gehandicapten, Lichamelijk gehandicapten, GGZ-Patiënten etc. Eventueel te gebruiken in combinatie met doelgroep. Referentiedatasoort AANVULLENDEDOELGROEP.
     """
-    adres: Optional[EenhedenAdres] = None
+    adres: Optional[Union[EenhedenEenheidadres, EenhedenAdresBasis]] = None
     """
     Het adres van de eenheid.
     """
@@ -3290,7 +3251,9 @@ class EenhedenEenheid(BaseModel):
     """
     De subsidiabele huur in euro's die geregistreerd staat bij de eenheid. De subsidiabele huur is het bedrag van de huur dat in aanmerking komt voor huurtoeslag.
     """
-    relaties: Optional[list[EenhedenRelatie]] = None
+    relaties: Optional[
+        list[Union[EenhedenNatuurlijkPersoon, EenhedenRechtspersoon]]
+    ] = None
     """
     Bij.v de eigenaar, beheerder en contactpersonen die gekoppeld zijn aan de eenheid. Met de koppeling naar Relatierol kan de soort rol van de relatie ten opzichte van de eenheid vastgelegd worden.
     """
@@ -3382,6 +3345,13 @@ class EenhedenEenheid(BaseModel):
     """
     De omschrijving van de zorgfaciliteit behorende bij de eenheid.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
+    datum_afsluiten_huurovereenkomst: Optional[date] = Field(
+        default=None, alias="datumAfsluitenHuurovereenkomst"
+    )
+    """
+    De datum waarop de huurovereenkomst is afgesloten.
+    """
 
 
 class WoningwaarderingResultatenWoningwaarderingResultaatbericht(
@@ -3435,7 +3405,7 @@ class BouwkundigElementenGarantie(BaseModel):
     """
     De einddatum van de garantie.
     """
-    relatie: Optional[BouwkundigElementenRelatie] = None
+    relatie: Optional[BouwkundigElementenRechtspersoon] = None
     """
     De leverancier die het product of dienst heeft geleverd.
     """
@@ -3611,7 +3581,7 @@ class BouwkundigElementenBouwkundigElement(BaseModel):
     """
     Op welke wijze het bouwkundig element is aangebracht. Bijv. bij de bouw, renovatie, onderhoud of door huurder. Referentiedatasoort BOUWKUNDIGELEMENTPLAATSING.
     """
-    relaties: Optional[list[BouwkundigElementenRelatie]] = None
+    relaties: Optional[list[BouwkundigElementenRechtspersoon]] = None
     """
     Bijv. de eigenaar of beheerder van het bouwkundig element, bijvoorbeeld de corporatie, een instelling, particulier of een VvE in een gemengd (verkoop/verhuur) gebouw.
     """

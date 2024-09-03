@@ -7,9 +7,29 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
+from woningwaardering.vera.referentiedata import (
+    Woningwaarderingstelselgroep,
+    Woningwaarderingstelsel,
+)
 
 
 class Stelselgroep(ABC):
+    @property
+    def stelsel(self) -> Woningwaarderingstelsel:
+        return self._stelsel
+
+    @stelsel.setter
+    def stelsel(self, value: Woningwaarderingstelsel) -> None:
+        self._stelsel = value
+
+    @property
+    def stelselgroep(self) -> Woningwaarderingstelselgroep:
+        return self._stelselgroep
+
+    @stelselgroep.setter
+    def stelselgroep(self, value: Woningwaarderingstelselgroep) -> None:
+        self._stelselgroep = value
+
     """Initialiseert een Stelselgroep.
 
     Args:

@@ -1,0 +1,42 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_108017427",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin",
+      "inhoud": 14.4272,
+      "oppervlakte": 6,
+      "lengte": 10,
+      "breedte": 2,
+      "verwarmd": false,
+      "gemeenschappelijk": true,
+      "gedeeldMetAantalEenheden": 2
+    },
+    {
+      "id": "Space_108017428",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin",
+      "inhoud": 14.4272,
+      "oppervlakte": 6,
+      "verwarmd": false,
+      "gemeenschappelijk": true,
+      "lengte": 10,
+      "breedte": 3,
+      "gedeeldMetAantalEenheden": 3
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 4.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Berging (verwarmde overige/verkeers-ruimte)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Berging2 (verwarmde overige/verkeers-ruimte)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Berging3 (verwarmde overige/verkeers-ruimte)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Berging4 (verwarmde overige/verkeers-ruimte)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Berging5 (verwarmde overige/verkeers-ruimte)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 4 punten voor verwarmde overige- en verkeersruimten"
+          },
+          "punten": -1.0
+        }
+      ]
+    }
+  ]
+}

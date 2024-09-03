@@ -69,13 +69,82 @@
           }
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 6.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Keuken (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": -5.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Geen buitenruimten"
+          },
+          "punten": -5.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 411.87,
-  "punten": 72.0,
+  "maximaleHuur": 417.55,
+  "punten": 73.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 411.87
+  "maximaleHuurInclusiefOpslag": 417.55
 }

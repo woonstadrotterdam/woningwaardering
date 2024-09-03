@@ -1,0 +1,25 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": -5.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Geen buitenruimten"
+          },
+          "punten": -5.0
+        }
+      ]
+    }
+  ]
+}

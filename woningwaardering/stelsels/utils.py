@@ -6,8 +6,7 @@ import pandas as pd
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
-from rdflib import Graph, Literal, Namespace
-from rdflib.plugins.sparql import prepareQuery
+from SPARQLWrapper import SPARQLWrapper2
 
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -226,29 +225,6 @@ def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-CEO = Namespace("https://linkeddata.cultureelerfgoed.nl/def/ceo#")
-BAG = Namespace("http://bag.basisregistraties.overheid.nl/bag/id/")
-
-endpoint = "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
-
-
-query_template = """
-ASK
-WHERE {{
-    SERVICE <{endpoint}> {{
-        ?monument a ceo:Rijksmonument .
-        ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
-        ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
-        ?bagRelatie ceo:verblijfsobjectIdentificatie ?verblijfsobjectIdentificatie .
-    }}
-}}
-"""
-
-rijksmonumenten_query = prepareQuery(
-    query_template.format(endpoint=endpoint), initNs={"ceo": CEO, "bag": BAG}
-)
-
-
 def energieprestatie_met_geldig_label(
     peildatum: date,
     eenheid: EenhedenEenheid,
@@ -428,23 +404,119 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
     ) * kwart
 
 
-def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool:
-    if not str.isnumeric(verblijfsobjectIdentificatie):
-        raise ValueError("VerblijfsobjectIdentificatie moet numeriek zijn")
+endpoint_cultureelerfgoed = (
+    "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
+)
+endpoint_kadaster = (
+    "https://api.labs.kadaster.nl/datasets/dst/kkg/services/default/sparql"
+)
 
-    graph = Graph()
+rijksmonumenten_query_template = """
+PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
+PREFIX bag:<http://bag.basisregistraties.overheid.nl/bag/id/>
 
-    result = graph.query(
-        rijksmonumenten_query,
-        initBindings={
-            "verblijfsobjectIdentificatie": Literal(verblijfsobjectIdentificatie),
-        },
+ASK
+WHERE {{
+    ?monument a ceo:Rijksmonument .
+    ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
+    ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
+    ?bagRelatie ceo:verblijfsobjectIdentificatie "{verblijfsobject_identificatie}" .
+}}
+"""
+
+
+beschermd_gezicht_query_template = """
+PREFIX sor: <https://data.kkg.kadaster.nl/sor/model/def/>
+PREFIX nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
+PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
+PREFIX rn:<https://data.cultureelerfgoed.nl/term/id/rn/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof:<http://www.opengis.net/def/function/geosparql/>
+ASK
+WHERE {{
+  SERVICE <{endpoint_kadaster}> {{
+      ?verblijfsobject sor:geregistreerdMet/nen3610:identificatie "{verblijfsobject_identificatie}".
+      ?verblijfsobject geo:hasGeometry/geo:asWKT ?verblijfsobjectWkt.
+  }}
+  ?gezicht a ceo:Gezicht ;
+      ceo:heeftGeometrie ?gezichtGeometrie ;
+      ceo:heeftGezichtsstatus rn:fd968529-bf70-4afa-8564-7c6c2fcfcc54;
+      ceo:heeftNaam/ceo:naam ?naam.
+  ?gezichtGeometrie geo:asWKT ?gezichtWkt.
+  filter(geof:sfWithin(?verblijfsobjectWkt, ?gezichtWkt))
+}}
+"""
+
+
+def is_rijksmonument(verblijfsobject_identificatie: str) -> bool | None:
+    """
+    Controleert of een verblijfsobject een rijksmonument is.
+
+    Args:
+        verblijfsobject_identificatie (str): De identificatie van het verblijfsobject.
+
+    Returns:
+        bool | None: True als het verblijfsobject een rijksmonument is, False anders, of None bij een fout.
+
+    Raises:
+        ValueError: Als verblijfsobject_identificatie niet numeriek is.
+    """
+    if not verblijfsobject_identificatie.isnumeric():
+        raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
+
+    rijksmonumenten_query = rijksmonumenten_query_template.format(
+        verblijfsobject_identificatie=verblijfsobject_identificatie,
     )
 
-    if result is None or result.askAnswer is None:
-        return False
-    else:
-        return result.askAnswer
+    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql.setQuery(rijksmonumenten_query)
+    result = sparql.queryAndConvert()
+
+    if isinstance(result, dict):
+        rijksmonument = result.get("boolean")
+        if isinstance(rijksmonument, bool):
+            return rijksmonument
+
+    logger.warning(
+        f"Onverwacht resultaat bij ophalen rijksmonument voor verblijfsobject identificatie {verblijfsobject_identificatie}"
+    )
+    return None
+
+
+def is_beschermd_gezicht(verblijfsobject_identificatie: str) -> bool | None:
+    """
+    Controleert of een verblijfsobject tot een beschermd gezicht behoort.
+
+    Args:
+        verblijfsobject_identificatie (str): De identificatie van het verblijfsobject.
+
+    Returns:
+        bool | None: True als het verblijfsobject tot een beschermd gezicht behoort, False anders, of None bij een fout.
+
+    Raises:
+        ValueError: Als verblijfsobject_identificatie niet numeriek is.
+    """
+    if not verblijfsobject_identificatie.isnumeric():
+        raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
+
+    beschermd_gezicht_query = beschermd_gezicht_query_template.format(
+        endpoint_kadaster=endpoint_kadaster,
+        verblijfsobject_identificatie=verblijfsobject_identificatie,
+    )
+
+    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql.setQuery(beschermd_gezicht_query)
+    result = sparql.queryAndConvert()
+
+    if isinstance(result, dict):
+        rijksmonument = result.get("boolean")
+        if isinstance(rijksmonument, bool):
+            return rijksmonument
+
+    logger.warning(
+        f"Onverwacht resultaat bij ophalen beschermd gezicht voor verblijfsobject identificatie {verblijfsobject_identificatie}"
+    )
+    return None
 
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
@@ -454,16 +526,26 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         eenheid.adresseerbaar_object_basisregistratie is not None
         and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie is not None
     ):
-        is_rijksmonument(
-            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
-        )
         rijksmonument = is_rijksmonument(
             eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
         )
-        logger.info(
-            f"Eenheid {eenheid.id} met verblijfsobjectIdentificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie} is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+
+        if rijksmonument is not None:
+            logger.info(
+                f"Eenheid {eenheid.id} is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+            )
+            if rijksmonument:
+                eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+
+        beschermd_gezicht = is_beschermd_gezicht(
+            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
         )
-        if rijksmonument:
-            eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+
+        if beschermd_gezicht is not None:
+            logger.info(
+                f"Eenheid {eenheid.id} {'behoort' if beschermd_gezicht else 'behoort niet'} tot een beschermd stads- of dorpsgezicht volgens de api van cultureelerfgoed."
+            )
+            if beschermd_gezicht:
+                eenheid.monumenten.append(Eenheidmonument.beschermd_stadsgezicht.value)
 
     return eenheid

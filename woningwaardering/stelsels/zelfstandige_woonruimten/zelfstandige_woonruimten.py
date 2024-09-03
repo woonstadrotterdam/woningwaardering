@@ -8,8 +8,12 @@ from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
+    Buitenruimten,
+    PrijsopslagMonumentenEnNieuwbouw,
+    # PuntenVoorDeWozWaarde,
+    # Sanitair,
+    VerkoelingEnVerwarming,
 )
-
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -28,12 +32,13 @@ class ZelfstandigeWoonruimten(Stelsel):
             stelselgroepen=[
                 OppervlakteVanVertrekken,
                 OppervlakteVanOverigeRuimten,
-                # Verwarming,
+                VerkoelingEnVerwarming,
+                Buitenruimten,
                 # Energieprestatie,
                 # Sanitair,
                 # Keuken,
-                # PriveBuitenruimten,
                 # PuntenVoorDeWozWaarde,
+                PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als laatste te worden uitgevoerd
             ],
         )
 

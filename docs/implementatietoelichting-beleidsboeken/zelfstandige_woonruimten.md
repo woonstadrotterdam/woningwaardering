@@ -42,6 +42,8 @@ Indien een woonruimte een rijksmonument is of daar deel van uitmaakt, als bedoel
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de rijksmonumenten: [http://monumentenregister.cultureelerfgoed.nl](http://monumentenregister.cultureelerfgoed.nl/).
 
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
+
 ### 2.8.2 Gemeentelijk of provinciaal monument
 
 Indien een woonruimte een gemeentelijk of provinciaal monument is of daarvan deel uitmaakt, dan wordt de maximale huurprijs vermeerderd met 15%. Het gemeentelijk monument moet zijn aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door de gedeputeerde staten. 
@@ -290,36 +292,47 @@ Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten.
 
 ## Rubriek 3 Verkoeling en verwarming
 
+> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100. Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
+
 ### 3.1 Puntentoekenning
 
 *   Verwarmde vertrekken worden gewaardeerd met 2 punten.
     
 *   Verwarmde overige ruimten en verkeersruimten worden gewaardeerd met 1 punt met een maximum van 4 punten voor alle overige ruimtes en verkeersruimten (samen).
-    
+
+
+>Op het moment is verkeersruimte geen ruimtesoort in de referentiedata. Wij hanteren de volgende ruimtedetailsoorten als `verkeersruimte`:
+>- hal
+>- overloop
+>- entree
+>- gang 
+>- trappenhuis (onze eigen uitbreiding op de referentiedata)    
 
 _Extra voorziening_
 
 Voorzieningen met zowel een verwarmingsfunctie als verkoelingsfunctie worden per vertrek gewaardeerd met 1 extra punt tot een maximum van 2 punten (bij meerdere vertrekken met een verkoelingsfunctie).
 
-Woningen die zonder koeling voldoende koel kunnen blijven, worden per vertrek gewaardeerd met 1 extra punt tot een maximum van 2 punten. Of sprake is van zo’n woning, dient te worden bepaald met de NTA 8800 en blijkt uit een actueel NTA-energielabel waarin de koelfunctie is meegenomen en het risico voor oververhitting als ‘laag’ is afgegeven.
+~~Woningen die zonder koeling voldoende koel kunnen blijven, worden per vertrek gewaardeerd met 1 extra punt tot een maximum van 2 punten. Of sprake is van zo’n woning, dient te worden bepaald met de NTA 8800 en blijkt uit een actueel NTA-energielabel waarin de koelfunctie is meegenomen en het risico voor oververhitting als ‘laag’ is afgegeven.~~
+
+> De informatie voor of het risico voor oververhitting op 'laag' is afgegeven is niet beschikbaar in EP-online, niet als veld in VABI en ook niet in de referentiedata. Daarom hebben wij deze regel vooralsnog niet opgenomen in de woningwaardering package.
 
 ### 3.2 Onroerende zaak en onroerende aanhorigheden
 
-Punten voor verwarming en verkoeling worden alleen toegekend als de verwarming of de voorziening met zowel een verwarmingsfunctie als verkoelingsfunctie tot de onroerende zaak en zijn onroerende aanhorigheid behoort.
+~~Punten voor verwarming en verkoeling worden alleen toegekend als de verwarming of de voorziening met zowel een verwarmingsfunctie als verkoelingsfunctie tot de onroerende zaak en zijn onroerende aanhorigheid behoort.~~
 
-Dit is bij een radiator het geval als hij is bevestigd aan de muur of in de grond. Een mobiele elektrische radiator of een mobiele airco behoort niet tot de onroerende zaak. Hetzelfde geldt voor gevelkachels en gashaarden. Een verdikte buis, pijp of moederhaard wordt wél gerekend tot de onroerende zaak, indien deze als zodanig bedoeld of herkenbaar is.
+~~Dit is bij een radiator het geval als hij is bevestigd aan de muur of in de grond. Een mobiele elektrische radiator of een mobiele airco behoort niet tot de onroerende zaak. Hetzelfde geldt voor gevelkachels en gashaarden. Een verdikte buis, pijp of moederhaard wordt wél gerekend tot de onroerende zaak, indien deze als zodanig bedoeld of herkenbaar is.~~
 
 _Koelsystemen_
 
-Centrale koelsystemen, zoals omkeerbare warmtepompen, passieve koeling door een bodemlus of een WKO-systeem moeten voorzien zijn van vloerkoeling, lage temperatuur radiatoren of radiatorconvectoren. Voor andere onroerend aanhorige koelsystemen, zoals een vaste airco, geldt dat deze een productgebonden energielabel moet hebben van minimaal A+ (bepaald volgens de Europese Ecodesign-richtlijn), en een minimaal vermogen moet kunnen leveren van 100 W/m2 bij een werkingstemperatuur tot 35 graden Celsius.
+~~Centrale koelsystemen, zoals omkeerbare warmtepompen, passieve koeling door een bodemlus of een WKO-systeem moeten voorzien zijn van vloerkoeling, lage temperatuur radiatoren of radiatorconvectoren. Voor andere onroerend aanhorige koelsystemen, zoals een vaste airco, geldt dat deze een productgebonden energielabel moet hebben van minimaal A+ (bepaald volgens de Europese Ecodesign-richtlijn), en een minimaal vermogen moet kunnen leveren van 100 W/m2 bij een werkingstemperatuur tot 35 graden Celsius.~~
 
 ### 3.3 Aangrenzende ruimten met open doorgang
 
-Vertrekken of overige ruimten die met elkaar in verbinding staan, worden in een bepaald geval als één verwarmd vertrek of overige ruimte gewaardeerd. Dit is het geval als zich tussen die twee verwarmde vertrekken of overige ruimten een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt. Het moet hierbij gaan om een niet afsluitbare opening, die over een breedte van minimaal 0,85 m een minimumhoogte heeft van 2 m. De muur wordt gemeten in het vertrek of overige ruimte, waarin de tussenwand het smalst is. De figuur in paragraaf 2.5 van het vorige hoofdstuk geeft dit visueel weer.
+~~Vertrekken of overige ruimten die met elkaar in verbinding staan, worden in een bepaald geval als één verwarmd vertrek of overige ruimte gewaardeerd. Dit is het geval als zich tussen die twee verwarmde vertrekken of overige ruimten een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt. Het moet hierbij gaan om een niet afsluitbare opening, die over een breedte van minimaal 0,85 m een minimumhoogte heeft van 2 m. De muur wordt gemeten in het vertrek of overige ruimte, waarin de tussenwand het smalst is. De figuur in paragraaf 2.5 van het vorige hoofdstuk geeft dit visueel weer.~~
 
 ### 3.4 Open keukens
 
-Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten. Onder een open keuken wordt hier verstaan een keuken die in open verbinding staat met een ander vertrek, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur. Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek individueel gewaardeerd met punten indien deze verwarmd zijn.
+Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten. ~~Onder een open keuken wordt hier verstaan een keuken die in open verbinding staat met een ander vertrek, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur.~~ Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek individueel gewaardeerd met punten indien deze verwarmd zijn.
 
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding tussen keukengedeelte en de rest van het vertrek aanwezig is.
 
@@ -645,42 +658,44 @@ Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblij
       
     _Voorbeeld: een woongebouw met een gemeenschappelijk dakterras van 30 m2 waartoe drie adressen toegang hebben, wordt gewaardeerd met: (0,75 x 30) / 3 = 7,5._ 
      
-*   Een aftrek van 5 punten wordt toegepast als de woning geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft.  
+*   Een aftrek van 5 punten wordt toegepast als de woning geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft. 
+
+> Hoewel uit deze zin het lijkt alsof de loggia niet valt onder privé-buitenruimte of gemeenschappelijke buitenruimte, gaan wij er vanuit dat de loggia wel onder één van beide categorieën valt en dat loggia in deze zin op een ongelukkige manier is toegevoegd om te benadrukken dat een loggia een buitenruimte is.
      
 *   Maximaal 15 punten worden toegekend voor buitenruimten.
 
 ### 8.2 Definitie privé-buitenruimte
 
-Privé-buitenruimte zijn tot de woning behorende buitenruimten, waarvan de huurder van de desbetreffende woning volgens de huurovereenkomst het exclusieve gebruiksrecht en toegang heeft. Dit kunnen onder meer voor-, zij- of achtertuinen, balkons, platjes of terrassen zijn, maar ook een oprit exclusief behorende tot de woning. Wanneer zich binnen de privé-buitenruimte een parkeerplek bevindt, geldt de parkeerplek en de weg daar naartoe als privé-buitenruimte. Gemeenschappelijke parkeerruimten worden gewaardeerd volgens rubriek 10.
+~~Privé-buitenruimte zijn tot de woning behorende buitenruimten, waarvan de huurder van de desbetreffende woning volgens de huurovereenkomst het exclusieve gebruiksrecht en toegang heeft.~~ Dit kunnen onder meer voor-, zij- of achtertuinen, balkons, platjes of terrassen zijn, maar ook een oprit exclusief behorende tot de woning. Wanneer zich binnen de privé-buitenruimte een parkeerplek bevindt, geldt de parkeerplek en de weg daar naartoe als privé-buitenruimte. Gemeenschappelijke parkeerruimten worden gewaardeerd volgens rubriek 10.
 
 Met exclusief gebruiksrecht van privé-buitenruimte wordt bedoeld dat uitsluitend de huurder het recht heeft om te bepalen welk gebruik hij maakt van de privé-buitenruimten die tot de woning behoren.
 
 ### 8.3 Definitie gemeenschappelijke buitenruimte
 
-Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, breedte, diepte) en zijn tot het woongebouw behorende buitenruimten waar de bewoners van tenminste twee adressen in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht toe hebben. De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke buitenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s). Gedeelde buitenruimten die als parkeerplek bedoeld zijn, worden gewaardeerd volgens rubriek 10.
+Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, breedte, diepte) en zijn tot het woongebouw behorende buitenruimten waar de bewoners van tenminste twee adressen ~~in het woongebouw volgens de huurovereenkomst exclusieve toegang en~~ gebruiksrecht toe hebben. ~~De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke buitenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s). Gedeelde buitenruimten die als parkeerplek bedoeld zijn, worden gewaardeerd volgens rubriek 10.~~
 
 Hieronder wordt ook verstaan een gebruiksrecht dat toekomt aan een collectief van huurders, maar waarbij het gebruiksrecht in feite exclusief voor de huurder is omdat de huurder het gebruik door derden kan weren.
 
 ### 8.4 Balkons, dakterrassen en loggia’s
 
-Balkons, dakterrassen en loggia’s moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze zijn:
+~~Balkons, dakterrassen en loggia’s moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze zijn:~~
 
-*   voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;
+~~*   voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;~~
     
-*   rondom voorzien van een afscheiding die tevens dient als valbeveiliging; en
+~~*   rondom voorzien van een afscheiding die tevens dient als valbeveiliging; en~~
     
-*   via een deur\* of schuifpui toegankelijk zijn.
+~~*   via een deur\* of schuifpui toegankelijk zijn.~~
     
 
-_\* Indien het balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als toegang tot de buitenruimte te worden gebruikt, dan wordt het balkon of het terras met punten gewaardeerd._
+~~_\* Indien het balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als toegang tot de buitenruimte te worden gebruikt, dan wordt het balkon of het terras met punten gewaardeerd._~~
 
-Franse balkons worden niet als buitenruimten beschouwd. Een Frans balkon is een opening in de gevel met naar binnen draaiende deuren, voorzien van een balustrade direct tegen het kozijn of de gevel. Zeembalkons worden, zolang zij voldoen aan de hiervoor aangegeven eisen van een balkon, wel gewaardeerd als buitenruimte.
+Franse balkons worden niet als buitenruimten beschouwd. Een Frans balkon is een opening in de gevel met naar binnen draaiende deuren, voorzien van een balustrade direct tegen het kozijn of de gevel. ~~Zeembalkons worden, zolang zij voldoen aan de hiervoor aangegeven eisen van een balkon, wel gewaardeerd als buitenruimte.~~
 
 ### 8.5 Meetinstructies
 
-Van de buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor-, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terugliggende deel van de gevel.
+~~Van de buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor-, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terugliggende deel van de gevel.~~
 
-Als uitzondering op de regel voor het meten van de gehele onbebouwde oppervlakte, wordt de oppervlakte, die wordt ingenomen door een balkonkast of kolenhok e.d., bij de oppervlakte van de desbetreffende buitenruimte meegerekend.
+~~Als uitzondering op de regel voor het meten van de gehele onbebouwde oppervlakte, wordt de oppervlakte, die wordt ingenomen door een balkonkast of kolenhok e.d., bij de oppervlakte van de desbetreffende buitenruimte meegerekend.~~
 
 ### 8.6 Puntenberekening en saldering
 
