@@ -244,13 +244,13 @@ def energieprestatie_met_geldig_label(
         warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
         return None
 
-    vereiste_attributen = [
-        ("registratiedatum", lambda ep: ep.registratiedatum),
-        ("soort", lambda ep: ep.soort and ep.soort.code),
-        ("status", lambda ep: ep.status and ep.status.code),
-        ("begindatum", lambda ep: ep.begindatum),
-        ("einddatum", lambda ep: ep.einddatum),
-        ("label", lambda ep: ep.label and ep.label.code),
+    vereiste_attributen: List[Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]] = [
+        ("registratiedatum", lambda ep: ep.registratiedatum is not None),
+        ("soort", lambda ep: ep.soort is not None and ep.soort.code is not None),
+        ("status", lambda ep: ep.status is not None and ep.status.code is not None),
+        ("begindatum", lambda ep: ep.begindatum is not None),
+        ("einddatum", lambda ep: ep.einddatum is not None),
+        ("label", lambda ep: ep.label is not None and ep.label.code is not None),
     ]
 
     for energieprestatie in eenheid.energieprestaties:
