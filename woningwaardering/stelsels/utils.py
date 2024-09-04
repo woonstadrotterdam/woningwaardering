@@ -226,8 +226,7 @@ def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def energieprestatie_met_geldig_label(
-    peildatum: date,
-    eenheid: EenhedenEenheid,
+    peildatum: date, eenheid: EenhedenEenheid
 ) -> EenhedenEnergieprestatie | None:
     """
     Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
@@ -237,133 +236,81 @@ def energieprestatie_met_geldig_label(
         eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
 
     Returns:
-        EenhedenEnergieprestatie | None: De eerste geldige energieprestatie met een energielabel en None Wanneer er geen geldige energieprestatie met label is gevonden.
+        EenhedenEnergieprestatie | None: De eerst geldige energieprestatie en None wanneer er geen geldige energieprestatie met label is gevonden.
     """
 
     if eenheid.energieprestaties is None:
         warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
         return None
 
-    if len(eenheid.energieprestaties) > 0:
-        for idx, energieprestatie in enumerate(eenheid.energieprestaties):
-            # Check of de energieprestatie alle benodigde attributen heeft.
-            # sla missende attributen op in een lijst.
-            missing_attributes = []
+    vereiste_attributen = [
+        ("registratiedatum", lambda ep: ep.registratiedatum),
+        ("soort", lambda ep: ep.soort and ep.soort.code),
+        ("status", lambda ep: ep.status and ep.status.code),
+        ("begindatum", lambda ep: ep.begindatum),
+        ("einddatum", lambda ep: ep.einddatum),
+        ("label", lambda ep: ep.label and ep.label.code),
+    ]
 
-            if not energieprestatie.registratiedatum:
-                missing_attributes.append("'registratiedatum'")
+    for energieprestatie in eenheid.energieprestaties:
+        logger.debug(f"Eenheid {eenheid.id}: valideer energieprestatie.")
+        ontbrekende_attributen = [
+            naam
+            for naam, check in vereiste_attributen
+            if not check(energieprestatie)  # type: ignore [no-untyped-call]
+        ]
+        if ontbrekende_attributen:
+            logger.debug(
+                f"Eenheid {eenheid.id} mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
+            )
+            continue
 
-            if not energieprestatie.soort:
-                missing_attributes.append("'soort'")
-            elif not energieprestatie.soort or not energieprestatie.soort.code:
-                missing_attributes.append("'soort.code'")
+        # vawege het gebruik van mypy wordt in de code hieronder de check op attributen nogmaals uitgevoerd, maar deze kunnen op dat moment niet None zijn
+        if (
+            energieprestatie.soort and energieprestatie.soort.code
+        ) and energieprestatie.soort.code not in {
+            Energieprestatiesoort.energie_index.code,
+            Energieprestatiesoort.primair_energieverbruik_woningbouw.code,
+            Energieprestatiesoort.voorlopig_energielabel.code,
+        }:
+            logger.debug(
+                f"Eenheid {eenheid.id}: Ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
+            )
+            continue
 
-            if not energieprestatie.status:
-                missing_attributes.append("status")
-            elif not energieprestatie.status or not energieprestatie.status.code:
-                missing_attributes.append("'status.code'")
+        if (energieprestatie.begindatum and energieprestatie.einddatum) and not (
+            energieprestatie.begindatum <= peildatum < energieprestatie.einddatum
+        ):
+            logger.debug(
+                f"Eenheid {eenheid.id}: Peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
+            )
+            continue
 
-            if not energieprestatie.begindatum:
-                missing_attributes.append("'begindatum'")
-            if not energieprestatie.einddatum:
-                missing_attributes.append("'einddatum'")
+        if (energieprestatie.status and energieprestatie.status.code) and (
+            energieprestatie.status.code != Energieprestatiestatus.definitief.code
+        ):
+            logger.debug(
+                f"Eenheid {eenheid.id}: Energieprestatie status is niet definitief."
+            )
+            continue
 
-            if not energieprestatie.label:
-                missing_attributes.append("'label'")
-            elif not energieprestatie.label.code:
-                missing_attributes.append("'label.code'")
+        if energieprestatie.registratiedatum and (
+            energieprestatie.registratiedatum
+            <= (
+                datetime.combine(peildatum, time.min).astimezone()
+                - relativedelta(years=10)
+            )
+        ):
+            logger.debug(
+                f"Eenheid {eenheid.id}: Registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
+            )
+            continue
 
-            # Check of er missende attributen zijn en log deze.
-            if missing_attributes:
-                msg = f"Eenheid {eenheid.id} mist energieprestatie attributen:"
-                for attribute in missing_attributes:
-                    msg += f" {attribute}"
-                    msg += ", " if attribute != missing_attributes[-1] else "."
+        logger.info(f"Eenheid {eenheid.id}: Geldige energieprestatie gevonden.")
+        logger.debug(f"Energieprestatie: {energieprestatie}")
+        return energieprestatie
 
-                # Als de energieprestatie niet alle benodigde attributen heeft, ga dan door naar de volgende energieprestatie indien die er is.
-                logger.debug(msg)
-                if (idx + 1) == len(eenheid.energieprestaties):
-                    logger.info(
-                        f"Eenheid {eenheid.id}: De energieprestatie mist attributen om gevalideerd te worden. Geen geldige energieprestatie gevonden."
-                    )
-                    return None
-                else:
-                    logger.debug(
-                        f"Eenheid {eenheid.id}: Missende atrributen op de energieprestatie gevonden. De volgende energieprestatie wordt gevalideerd."
-                    )
-                    continue
-
-            log_messages_count = 0
-
-            if (
-                energieprestatie.soort
-                and energieprestatie.soort.code
-                and energieprestatie.soort.code
-                not in [
-                    Energieprestatiesoort.energie_index.code,
-                    Energieprestatiesoort.primair_energieverbruik_woningbouw.code,
-                    Energieprestatiesoort.voorlopig_energielabel.code,  # Een voorlopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
-                ]
-            ):
-                logger.debug(
-                    f"Eenheid {eenheid.id}: Energieprestatie soort code '{energieprestatie.soort.code}' zit niet in ['{Energieprestatiesoort.energie_index.code}', '{Energieprestatiesoort.primair_energieverbruik_woningbouw.code}'. '{Energieprestatiesoort.voorlopig_energielabel.code}'."
-                )
-                log_messages_count += 1
-
-            if not (
-                energieprestatie.begindatum
-                and energieprestatie.einddatum
-                and energieprestatie.begindatum
-                <= peildatum
-                < energieprestatie.einddatum
-            ):
-                logger.debug(
-                    f"Eenheid {eenheid.id}: De peildatum {peildatum} ligt niet tussen de begindatum ({energieprestatie.begindatum}) en einddatum ({energieprestatie.einddatum}) van de energieprestatie."
-                )
-                log_messages_count += 1
-
-            if not (
-                energieprestatie.status
-                and energieprestatie.status.code
-                == Energieprestatiestatus.definitief.code
-            ):
-                logger.debug(
-                    f"Eenheid {eenheid.id}: Energieprestatie status is niet definitief."
-                )
-                log_messages_count += 1
-
-            if not (
-                # Check of de registratie niet ouder is dan 10 jaar
-                energieprestatie.registratiedatum
-                and energieprestatie.registratiedatum
-                > (
-                    datetime.combine(peildatum, time.min).astimezone()
-                    - relativedelta(years=10)
-                )
-            ):
-                logger.debug(
-                    f"Eenheid {eenheid.id}: Registratie van de energieprestatie is langer dan 10 jaar geleden gedaan op peildatum {peildatum}."
-                )
-                log_messages_count += 1
-
-            if log_messages_count > 0:
-                # Wanneer de energieprestatie niet voldoet aan de condities, ga dan door naar de volgende energieprestatie indien die er is.
-                if (idx + 1) == len(eenheid.energieprestaties):
-                    logger.info(
-                        f"Eenheid {eenheid.id}: De energieprestatie voldoet niet aan de condities van de geldigheid. Geen geldige energieprestatie gevonden"
-                    )
-                    return None
-                else:
-                    logger.debug(
-                        f"Eenheid {eenheid.id}: De energieprestatie voldoet niet aan de condities van de geldigheid. De volgende energieprestatie wordt gevalideerd."
-                    )
-                    continue
-
-            logger.info(f"Eenheid {eenheid.id}: Geldige energieprestatie gevonden")
-            logger.debug(f"Energieprestatie: {energieprestatie}")
-            return energieprestatie
-
-    logger.info(f"Eenheid {eenheid.id}: Geen energieprestatie gevonden")
+    logger.info(f"Eenheid {eenheid.id}: Geen geldige energieprestatie gevonden.")
     return None
 
 
