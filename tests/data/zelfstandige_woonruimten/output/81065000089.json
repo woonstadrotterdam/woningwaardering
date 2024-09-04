@@ -194,11 +194,7 @@
         {
           "aantal": 78.84,
           "criterium": {
-            "naam": "B",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "B"
           },
           "punten": 34.0
         }

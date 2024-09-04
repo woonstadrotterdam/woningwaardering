@@ -22,8 +22,8 @@
   "energieprestaties": [
     {
       "soort": {
-        "code": "EP2",
-        "naam": "Primair energieverbruik - woningbouw"
+        "code": "EI",
+        "naam": "Energie-index"
       },
       "status": {
         "code": "DEF",

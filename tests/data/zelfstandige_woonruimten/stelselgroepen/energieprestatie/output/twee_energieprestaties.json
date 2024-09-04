@@ -16,11 +16,7 @@
         {
           "aantal": 82.77,
           "criterium": {
-            "naam": "A",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "A"
           },
           "punten": 37.0
         }

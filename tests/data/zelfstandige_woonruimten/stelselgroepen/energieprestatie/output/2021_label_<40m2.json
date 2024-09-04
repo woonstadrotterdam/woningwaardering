@@ -16,11 +16,7 @@
         {
           "aantal": 35.77,
           "criterium": {
-            "naam": "F 25-40m2",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "F 25-40m2"
           },
           "punten": -9.0
         }
