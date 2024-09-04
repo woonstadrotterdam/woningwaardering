@@ -167,13 +167,13 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": -4.0,
+      "punten": 37.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Bouwjaar 1981"
+            "naam": "A"
           },
-          "punten": -4.0
+          "punten": 37.0
         }
       ]
     },
@@ -193,11 +193,11 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 400.39,
-  "punten": 70.0,
+  "maximaleHuur": 652.25,
+  "punten": 111.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 400.39
+  "maximaleHuurInclusiefOpslag": 652.25
 }
