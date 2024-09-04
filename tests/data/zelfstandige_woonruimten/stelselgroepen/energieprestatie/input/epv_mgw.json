@@ -1,10 +1,12 @@
 {
+  "id": "epv2",
   "bouwjaar": 1921,
+  "monumenten": [],
   "panden": [
     {
       "soort": {
-        "code": "EGW",
-        "naam": "Eengezinswoning"
+        "code": "MGW",
+        "naam": "Meergezinswoning"
       }
     }
   ],

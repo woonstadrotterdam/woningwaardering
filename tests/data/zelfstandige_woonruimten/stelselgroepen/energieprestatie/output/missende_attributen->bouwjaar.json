@@ -11,13 +11,13 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": 32.0,
+      "punten": -15.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "C (oud) > B ivm EPV"
+            "naam": "Bouwjaar 1921"
           },
-          "punten": 32.0
+          "punten": -15.0
         }
       ]
     }

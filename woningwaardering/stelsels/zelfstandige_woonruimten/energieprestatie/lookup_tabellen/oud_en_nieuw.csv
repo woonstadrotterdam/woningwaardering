@@ -1,0 +1,12 @@
+Label,Ondergrens (exclusief),Bovengrens (inclusief),Eengezinswoning,Meergezinswoning
+A++++,None,None,62,58
+A+++,None,None,57,53
+A++,-inf,0.6,52,48
+A+,0.6,0.8,47,43
+A,0.8,1.2,41,37
+B,1.2,1.4,34,30
+C,1.4,1.8,22,15
+D,1.8,2.1,14,11
+E,2.1,2.4,-4,-4
+F,2.4,2.7,-9,-9
+G,2.7,inf,-15,-15

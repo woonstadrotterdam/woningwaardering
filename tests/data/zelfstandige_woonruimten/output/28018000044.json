@@ -190,6 +190,27 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 22.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Bouwjaar 1992"
+          },
+          "punten": 22.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "PMN",
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
@@ -199,11 +220,11 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 564.35,
-  "punten": 97.0,
+  "maximaleHuur": 702.44,
+  "punten": 119.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 564.35
+  "maximaleHuurInclusiefOpslag": 702.44
 }

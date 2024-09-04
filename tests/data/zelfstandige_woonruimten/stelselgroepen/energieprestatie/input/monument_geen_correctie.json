@@ -1,10 +1,17 @@
 {
+  "id": "1",
   "bouwjaar": 1921,
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    }
+  ],
   "panden": [
     {
       "soort": {
-        "code": "MGW",
-        "naam": "Meergezinswoning"
+        "code": "EGW",
+        "naam": "Eengezinswoning"
       }
     }
   ],
