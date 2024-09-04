@@ -25,7 +25,6 @@ from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
 from woningwaardering.vera.referentiedata.energieprestatiesoort import (
     Energieprestatiesoort,
 )
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 from woningwaardering.vera.referentiedata.oppervlaktesoort import Oppervlaktesoort
 from woningwaardering.vera.referentiedata.pandsoort import Pandsoort
 from woningwaardering.vera.referentiedata.prijscomponentdetailsoort import (
@@ -129,9 +128,7 @@ class Energieprestatie(Stelselgroep):
                 return woningwaardering
 
             woningwaardering.criterium.naam = label
-            woningwaardering.criterium.meeteenheid = (
-                Meeteenheid.vierkante_meter_m2.value
-            )
+
             woningwaardering.aantal = gebruiksoppervlakte_thermische_zone
 
             if gebruiksoppervlakte_thermische_zone < 25.0:
@@ -161,6 +158,7 @@ class Energieprestatie(Stelselgroep):
             lookup_key == "oud_en_nieuw"
             and energieprestatie.registratiedatum >= datetime(2015, 1, 1).astimezone()
             and energieprestatie.registratiedatum < datetime(2021, 1, 1).astimezone()
+            and energieprestatie.soort.code == Energieprestatiesoort.energie_index.code
         ):
             if energieprestatie.waarde is not None:
                 logger.info(
@@ -243,7 +241,7 @@ class Energieprestatie(Stelselgroep):
                 f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
                 UserWarning,
             )
-            return woningwaardering_groep
+            eenheid = utils.update_eenheid_monumenten(eenheid)
 
         pandsoort = (
             Pandsoort.meergezinswoning

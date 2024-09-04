@@ -244,7 +244,9 @@ def energieprestatie_met_geldig_label(
         warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
         return None
 
-    vereiste_attributen: List[Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]] = [
+    vereiste_attributen: List[
+        Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]
+    ] = [
         ("registratiedatum", lambda ep: ep.registratiedatum is not None),
         ("soort", lambda ep: ep.soort is not None and ep.soort.code is not None),
         ("status", lambda ep: ep.status is not None and ep.status.code is not None),
@@ -256,9 +258,7 @@ def energieprestatie_met_geldig_label(
     for energieprestatie in eenheid.energieprestaties:
         logger.debug(f"Eenheid {eenheid.id}: valideer energieprestatie.")
         ontbrekende_attributen = [
-            naam
-            for naam, check in vereiste_attributen
-            if not check(energieprestatie)  # type: ignore [no-untyped-call]
+            naam for naam, check in vereiste_attributen if not check(energieprestatie)
         ]
         if ontbrekende_attributen:
             logger.debug(
@@ -266,7 +266,7 @@ def energieprestatie_met_geldig_label(
             )
             continue
 
-        # vawege het gebruik van mypy wordt in de code hieronder de check op attributen nogmaals uitgevoerd, maar deze kunnen op dat moment niet None zijn
+        # vanwege het gebruik van mypy wordt in de code hieronder de check op attributen nogmaals uitgevoerd, maar deze kunnen op dit moment niet meer None zijn
         if (
             energieprestatie.soort and energieprestatie.soort.code
         ) and energieprestatie.soort.code not in {
