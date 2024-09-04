@@ -1,1 +1,1 @@
-eengezinswoning met energieprestatievergoeding
+Eengezinswoning met energieprestatievergoeding.

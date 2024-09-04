@@ -1,1 +1,1 @@
-meergezinswoning met energieprestatievergoeding
+Meergezinswoning met energieprestatievergoeding.

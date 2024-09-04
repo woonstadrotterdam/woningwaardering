@@ -14,9 +14,9 @@
       "punten": -9.0,
       "woningwaarderingen": [
         {
-          "aantal": 35.77,
+          "aantal": 20.0,
           "criterium": {
-            "naam": "F 25-40m2",
+            "naam": "F <25m2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"

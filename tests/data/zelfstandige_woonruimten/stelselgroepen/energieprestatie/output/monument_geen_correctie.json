@@ -11,18 +11,13 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": -9.0,
+      "punten": 32.0,
       "woningwaarderingen": [
         {
-          "aantal": 35.77,
           "criterium": {
-            "naam": "F 25-40m2",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "EPV Eengezinswoning"
           },
-          "punten": -9.0
+          "punten": 32.0
         }
       ]
     }
