@@ -139,14 +139,14 @@ class Energieprestatie(Stelselgroep):
                     f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen < 25 m2.'"
                 )
                 lookup_key = "overgangsrecht_0-25"
-                woningwaardering.criterium.naam += " < 25 m2"
+                woningwaardering.criterium.naam += " <25m2"
 
             elif 25.0 <= gebruiksoppervlakte_thermische_zone < 40.0:
                 logger.info(
                     f"Eenheid {eenheid.id} heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone} m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen ≥ 25m2 en < 40 m2.'"
                 )
                 lookup_key = "overgangsrecht_25-40"
-                woningwaardering.criterium.naam += " 25-40 m2"
+                woningwaardering.criterium.naam += " 25-40m2"
 
             else:
                 logger.info(
@@ -343,7 +343,7 @@ class Energieprestatie(Stelselgroep):
             woningwaardering_correctie_monument = (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Correctie voor monument"
+                        naam="Correctie monument"
                     ),
                     punten=woningwaardering.punten * -1.0,
                 )
@@ -377,7 +377,7 @@ if __name__ == "__main__":  # pragma: no cover
     warnings.simplefilter("default")
     energieprestatie = Energieprestatie(peildatum=date(2024, 7, 1))
     with open(
-        "/Users/tiddo/Documents/woonstad/woningwaardering/tests/data/zelfstandige_woonruimten/input/12006000004.json",
+        "tests/data/generiek/input/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
