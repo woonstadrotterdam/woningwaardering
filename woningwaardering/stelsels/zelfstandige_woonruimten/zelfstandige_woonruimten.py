@@ -14,6 +14,9 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     # Sanitair,
     VerkoelingEnVerwarming,
 )
+from woningwaardering.stelsels.zelfstandige_woonruimten.energieprestatie.energieprestatie import (
+    Energieprestatie,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -34,7 +37,7 @@ class ZelfstandigeWoonruimten(Stelsel):
                 OppervlakteVanOverigeRuimten,
                 VerkoelingEnVerwarming,
                 Buitenruimten,
-                # Energieprestatie,
+                Energieprestatie,
                 # Sanitair,
                 # Keuken,
                 PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als een na laatste te worden uitgevoerd
@@ -49,7 +52,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date.today())
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/prijsopslag_monumenten_en_nieuwbouw/output/nieuwbouw.json",
+        "tests/data/zelfstandige_woonruimten/input/87402000003.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

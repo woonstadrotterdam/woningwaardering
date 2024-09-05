@@ -436,19 +436,19 @@ _\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte 
 
 Voor rijks-, provinciale en gemeentelijke monumenten gelden in afwijking van andere woningen geen minpunten voor de energielabels E, F, en G en daaraan gelijkgestelde Energie-indexen en bouwjaren. De puntentoekenning bedraagt dan, in afwijking van bovenstaande tabellen, 0 punten.
 
-### 4.5 Afwijkingsbevoegdheid hogere energielabelklasse dan A++++
+### 4.5 ~~Afwijkingsbevoegdheid hogere energielabelklasse dan A++++~~
 
-De hierboven vermelde tabellen met de puntentoekenning voor de labelklasse gaan tot A++++. De Huurcommissie heeft de bevoegdheid gekregen om af te wijken van de hierboven aangegeven puntenwaardering indien de gemaakte kosten om deze energieprestatie te bereiken, aanmerkelijk afwijken van hetgeen als gangbaar wordt beschouwd, of indien de energieprestatie aanmerkelijk beter is dan hetgeen als gangbaar bij een energielabelklasse A ++++ wordt beschouwd.
+~~De hierboven vermelde tabellen met de puntentoekenning voor de labelklasse gaan tot A++++. De Huurcommissie heeft de bevoegdheid gekregen om af te wijken van de hierboven aangegeven puntenwaardering indien de gemaakte kosten om deze energieprestatie te bereiken, aanmerkelijk afwijken van hetgeen als gangbaar wordt beschouwd, of indien de energieprestatie aanmerkelijk beter is dan hetgeen als gangbaar bij een energielabelklasse A ++++ wordt beschouwd.~~
 
-### 4.6 Gerede twijfel energielabel
+### 4.6 ~~Gerede twijfel energielabel~~
 
-Als huurder twijfelt aan de juistheid van het toepasselijke energielabel dan heeft de Huurcommissie de bevoegdheid om een ‘eigen oordeel’ uit te spreken bij gerede twijfel van het energielabel. Een Huurcommissie eigen oordeel (HEO) kan worden uitgesproken indien de huurder aantoont dat sprake is van gerede twijfel van de juistheid van het energielabel/energie-index en dat het gewijzigde energielabel/energie-index van invloed zal zijn op de maximaal redelijke huurprijs.
+~~Als huurder twijfelt aan de juistheid van het toepasselijke energielabel dan heeft de Huurcommissie de bevoegdheid om een ‘eigen oordeel’ uit te spreken bij gerede twijfel van het energielabel. Een Huurcommissie eigen oordeel (HEO) kan worden uitgesproken indien de huurder aantoont dat sprake is van gerede twijfel van de juistheid van het energielabel/energie-index en dat het gewijzigde energielabel/energie-index van invloed zal zijn op de maximaal redelijke huurprijs.~~
 
-Bij ‘gerede twijfel’ wordt beoordeeld of de huurder voldoende heeft aangetoond dat een verkeerd woningkenmerk of verkeerde woningkenmerken is/zijn gebruikt bij het vaststellen van het energielabel, waardoor de juistheid van de labelklasse voor de desbetreffende woning in het geding is. Zo’n fout kenmerk is bijvoorbeeld: het verkeerde soort glas, zoals enkel in plaats van dubbel glas. Of er staat een verkeerd type woning op het label, bijvoorbeeld een hoekwoning in plaats van een tussenwoning. Of de muren zijn slecht geïsoleerd, terwijl het energielabel aangeeft dat het huis juist goed geïsoleerd is.
+~~Bij ‘gerede twijfel’ wordt beoordeeld of de huurder voldoende heeft aangetoond dat een verkeerd woningkenmerk of verkeerde woningkenmerken is/zijn gebruikt bij het vaststellen van het energielabel, waardoor de juistheid van de labelklasse voor de desbetreffende woning in het geding is. Zo’n fout kenmerk is bijvoorbeeld: het verkeerde soort glas, zoals enkel in plaats van dubbel glas. Of er staat een verkeerd type woning op het label, bijvoorbeeld een hoekwoning in plaats van een tussenwoning. Of de muren zijn slecht geïsoleerd, terwijl het energielabel aangeeft dat het huis juist goed geïsoleerd is.~~
 
-De huurder dient gerede twijfel aan te tonen door middel van het energielabelafschrift en moet onderbouwen waarom een onjuist woningkenmerk is gebruikt. Het energielabelafschrift is te downloaden via [Mijnoverheid.](https://mijn.overheid.nl/)
+~~De huurder dient gerede twijfel aan te tonen door middel van het energielabelafschrift en moet onderbouwen waarom een onjuist woningkenmerk is gebruikt. Het energielabelafschrift is te downloaden via [Mijnoverheid.](https://mijn.overheid.nl/)~~
 
-Indien de Huurcommissie tot een eigen oordeel wil komen dan laat de Huurcommissie onderzoeken wat de energieprestatie van de woning is. Het eigen oordeel is uitsluitend in de voorliggende zaak van kracht, wordt niet geregistreerd in het register van de Rijksdienst voor Ondernemend Nederland en komt te vervallen na ontbinding van de huurovereenkomst.
+~~Indien de Huurcommissie tot een eigen oordeel wil komen dan laat de Huurcommissie onderzoeken wat de energieprestatie van de woning is. Het eigen oordeel is uitsluitend in de voorliggende zaak van kracht, wordt niet geregistreerd in het register van de Rijksdienst voor Ondernemend Nederland en komt te vervallen na ontbinding van de huurovereenkomst.~~
 
 ### 4.7 Energieprestatievergoeding
 

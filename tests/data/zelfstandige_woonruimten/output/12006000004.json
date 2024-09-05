@@ -163,6 +163,27 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": -4.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Bouwjaar 1981"
+          },
+          "punten": -4.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "PMN",
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
@@ -199,11 +220,11 @@
       ]
     }
   ],
-  "maximaleHuur": 696.16,
-  "punten": 118.0,
+  "maximaleHuur": 671.08,
+  "punten": 114.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 696.16
+  "maximaleHuurInclusiefOpslag": 671.08
 }

@@ -196,6 +196,27 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 52.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "A -> A++ (Energie-index)"
+          },
+          "punten": 52.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "PMN",
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
@@ -232,11 +253,11 @@
       ]
     }
   ],
-  "maximaleHuur": 922.19,
-  "punten": 154.0,
+  "maximaleHuur": 1248.68,
+  "punten": 206.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 922.19
+  "maximaleHuurInclusiefOpslag": 1248.68
 }

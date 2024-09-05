@@ -1,5 +1,7 @@
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
+from typing import Callable, List, Tuple
+import warnings
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
@@ -225,8 +227,7 @@ def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def energieprestatie_met_geldig_label(
-    peildatum: date,
-    eenheid: EenhedenEenheid,
+    peildatum: date, eenheid: EenhedenEenheid
 ) -> EenhedenEnergieprestatie | None:
     """
     Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
@@ -236,46 +237,81 @@ def energieprestatie_met_geldig_label(
         eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
 
     Returns:
-        EenhedenEnergieprestatie | None: De eerste geldige energieprestatie met een energielabel en None Wanneer er geen geldige energieprestatie met label is gevonden.
+        EenhedenEnergieprestatie | None: De eerst geldige energieprestatie en None wanneer er geen geldige energieprestatie met label is gevonden.
     """
-    if eenheid.energieprestaties is not None:
-        for energieprestatie in eenheid.energieprestaties:
-            if (
-                energieprestatie.registratiedatum
-                and energieprestatie.soort
-                and energieprestatie.soort.code
-                and energieprestatie.status
-                and energieprestatie.status.code
-                and energieprestatie.begindatum
-                and energieprestatie.einddatum
-                and energieprestatie.label
-                and (
-                    energieprestatie.soort.code
-                    in [
-                        Energieprestatiesoort.energie_index.code,
-                        Energieprestatiesoort.primair_energieverbruik_woningbouw.code,
-                        Energieprestatiesoort.voorlopig_energielabel.code,  # Een voorlopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
-                    ]
-                )
-                and (
-                    energieprestatie.begindatum < peildatum < energieprestatie.einddatum
-                    and energieprestatie.status.code
-                    == Energieprestatiestatus.definitief.code
-                )
-                and (
-                    # Check of de registratie niet ouder is dan 10 jaar
-                    energieprestatie.registratiedatum
-                    > (
-                        datetime.combine(peildatum, time.min).astimezone()
-                        - relativedelta(years=10)
-                    )
-                )
-            ):
-                logger.info("Energieprestatie met geldig label gevonden")
-                logger.debug(f"Energieprestatie: {energieprestatie}")
-                return energieprestatie
 
-    logger.info("Geen geldige energieprestatie met label gevonden")
+    if eenheid.energieprestaties is None:
+        warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
+        return None
+
+    vereiste_attributen: List[
+        Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]
+    ] = [
+        ("registratiedatum", lambda ep: ep.registratiedatum is not None),
+        ("soort", lambda ep: ep.soort is not None and ep.soort.code is not None),
+        ("status", lambda ep: ep.status is not None and ep.status.code is not None),
+        ("begindatum", lambda ep: ep.begindatum is not None),
+        ("einddatum", lambda ep: ep.einddatum is not None),
+        ("label", lambda ep: ep.label is not None and ep.label.code is not None),
+    ]
+
+    for energieprestatie in eenheid.energieprestaties:
+        logger.debug(f"Eenheid {eenheid.id}: valideer energieprestatie.")
+        ontbrekende_attributen = [
+            naam for naam, check in vereiste_attributen if not check(energieprestatie)
+        ]
+        if ontbrekende_attributen:
+            logger.debug(
+                f"Eenheid {eenheid.id} mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
+            )
+            continue
+
+        # vanwege het gebruik van mypy wordt in de code hieronder de check op attributen nogmaals uitgevoerd, maar deze kunnen op dit moment niet meer None zijn
+        if (
+            energieprestatie.soort and energieprestatie.soort.code
+        ) and energieprestatie.soort.code not in {
+            Energieprestatiesoort.energie_index.code,
+            Energieprestatiesoort.primair_energieverbruik_woningbouw.code,
+            Energieprestatiesoort.voorlopig_energielabel.code,
+        }:
+            logger.debug(
+                f"Eenheid {eenheid.id}: Ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
+            )
+            continue
+
+        if (energieprestatie.begindatum and energieprestatie.einddatum) and not (
+            energieprestatie.begindatum <= peildatum < energieprestatie.einddatum
+        ):
+            logger.debug(
+                f"Eenheid {eenheid.id}: Peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
+            )
+            continue
+
+        if (energieprestatie.status and energieprestatie.status.code) and (
+            energieprestatie.status.code != Energieprestatiestatus.definitief.code
+        ):
+            logger.debug(
+                f"Eenheid {eenheid.id}: Energieprestatie status is niet definitief."
+            )
+            continue
+
+        if energieprestatie.registratiedatum and (
+            energieprestatie.registratiedatum
+            <= (
+                datetime.combine(peildatum, time.min).astimezone()
+                - relativedelta(years=10)
+            )
+        ):
+            logger.debug(
+                f"Eenheid {eenheid.id}: Registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
+            )
+            continue
+
+        logger.info(f"Eenheid {eenheid.id}: Geldige energieprestatie gevonden.")
+        logger.debug(f"Energieprestatie: {energieprestatie}")
+        return energieprestatie
+
+    logger.info(f"Eenheid {eenheid.id}: Geen geldige energieprestatie gevonden.")
     return None
 
 
