@@ -11,7 +11,7 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 48.0,
+      "punten": 44.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -27,9 +27,9 @@
         },
         {
           "criterium": {
-            "naam": "Max. 33% van totaal"
+            "naam": "Max. 33% van totaal inclusief afronding"
           },
-          "punten": -4.05
+          "punten": -7.57
         }
       ]
     }

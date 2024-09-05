@@ -1,6 +1,6 @@
 import warnings
 from datetime import date
-from decimal import Decimal
+from decimal import ROUND_DOWN, Decimal
 from itertools import chain
 
 from loguru import logger
@@ -110,6 +110,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         punten = self._som_woz_punten(woningwaardering_groep)
+
         woningwaardering_groep.punten = float(utils.rond_af(punten, decimalen=0))
 
         logger.info(
@@ -169,9 +170,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Max. 33% van totaal"
+                        naam="Max. 33% van totaal inclusief afronding"
                     ),
-                    punten=correctie_punten,
+                    punten=utils.rond_af(correctie_punten, 2),
                 )
             )
             return woningwaardering_groep
@@ -180,34 +181,65 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def _cap_punten(
         self,
-        punten: float,
+        woz_punten: float,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> float:
         """
-        Berekent de capping voor de stelselgroep WOZ-waarde. De punten voor WOZ mag maximaal 33.33% van het totaal aantal punten.
+        Berekent de cap op de WOZ. Maximaal 33% van het
+        totale puntenaantal van een woning mag bepaald worden door de WOZ-waarde
+        van de woning.
 
         Args:
-            punten (float): Het aantal punten voor de stelselgroep WOZ-waarde.
+            woz_punten (float): Het aantal punten voor de stelselgroep WOZ-waarde.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
             float: De correctiepunten voor de stelselgroep WOZ-waarde.
         """
+        # Bereken de overige punten door de punten van alle groepen op te tellen, afgerond op 0 decimalen
+        overige_punten = utils.rond_af(
+            sum(
+                Decimal(str(groep.punten)) or Decimal("0")
+                for groep in woningwaardering_resultaat.groepen or []
+                if groep.punten
+            ),
+            0,
+        )
 
-        totaal_punten = sum(
-            Decimal(str(groep.punten)) or Decimal("0")
-            for groep in woningwaardering_resultaat.groepen or []
-            if groep.punten
-        ) + Decimal(str(punten))
+        # Bereken het maximum aantal WOZ-punten dat toegestaan is
+        max_woz_percentage = Decimal("33")
+        overige_percentage = Decimal("100") - max_woz_percentage
+        percentage_verhouding = overige_percentage / max_woz_percentage
+        max_woz_punten = overige_punten / percentage_verhouding
 
-        cap_punten = utils.rond_af(totaal_punten / Decimal("3"), decimalen=2)
+        # Pas de cap toe op de WOZ-punten
+        capped_woz_punten = min(
+            Decimal(str(woz_punten)),
+            max_woz_punten,
+        )
 
-        # cap niet wanneer punten onder de cap grens zitten of totaal punten lager is dan 142
-        if cap_punten >= Decimal(str(punten)) or totaal_punten < Decimal("142"):
+        # Als de capped WOZ-punten gelijk zijn aan of groter zijn dan de oorspronkelijke
+        # WOZ-punten, of als het totaal aantal punten minder is dan 142, pas dan geen
+        # cap toe
+        if capped_woz_punten >= Decimal(str(woz_punten)) or (
+            overige_punten + utils.rond_af(woz_punten, 0) < Decimal("142")
+        ):
             return 0.0
-
         else:
-            return float(cap_punten - Decimal(str(punten)))
+            # Indien het puntenaandeel voor de WOZ-waarde wordt beperkt op
+            # ten hoogste 33%, wordt het aantal punten voor de WOZ-waarde afgerond naar
+            # beneden op hele punten.
+            cap_punten = capped_woz_punten - Decimal(str(woz_punten))
+            logger.debug(f"Cap punten: {cap_punten}")
+            afrondingspunten = min(
+                (
+                    utils.rond_af(capped_woz_punten, 0, rounding=ROUND_DOWN)
+                    - capped_woz_punten
+                ),
+                Decimal(0.0),
+            )
+            logger.debug(f"Afronding punten: {afrondingspunten}")
+            return float(cap_punten + afrondingspunten)
 
     def _som_woz_punten(
         self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
