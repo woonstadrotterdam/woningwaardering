@@ -160,21 +160,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         punten = self._som_woz_punten(woningwaardering_groep)
 
-        # Indien met toepassing van de cap het puntenaandeel voor de WOZ-waarde wordt
-        # beperkt op ten hoogste 33%, wordt het aantal punten voor de WOZ-waarde
-        # afgerond naar beneden op hele punten.
-        rounding: str | None = None
-
-        if any(
-            woningwaardering
-            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-            if woningwaardering.punten is not None and woningwaardering.punten < 0.0
-        ):
-            rounding = ROUND_DOWN
-
-        woningwaardering_groep.punten = float(
-            utils.rond_af(punten, decimalen=0, rounding=rounding)
-        )
+        woningwaardering_groep.punten = float(utils.rond_af(punten, decimalen=0))
 
         logger.info(
             f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
@@ -203,80 +189,148 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingGroep: De woningwaardering groep met eventuele correcties.
         """
 
-        huidige_punten = self._som_woz_punten(woningwaardering_groep)
+        woz_punten = self._som_woz_punten(woningwaardering_groep)
 
-        minimum_punten = self._bereken_minimum_punten_nieuwbouw(
+        minimum_woz_punten = self._bereken_minimum_punten_nieuwbouw(
             eenheid, woningwaardering_resultaat
         )
 
         if (
-            0.0 < huidige_punten < minimum_punten
+            0.0 < woz_punten < minimum_woz_punten
             and woningwaardering_groep.woningwaarderingen is not None
         ):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"Nieuwbouw: min. {minimum_punten} punten"
+                        naam=f"Nieuwbouw: min. {minimum_woz_punten} punten"
                     ),
-                    punten=minimum_punten - huidige_punten,
+                    punten=minimum_woz_punten - woz_punten,
                 )
             )
             return woningwaardering_groep
 
-        correctie_punten = self._cap_punten(huidige_punten, woningwaardering_resultaat)
+        # Bereken de overige punten door de punten van alle groepen op te tellen, afgerond op 0 decimalen
+        overige_punten = utils.rond_af(
+            sum(
+                Decimal(str(groep.punten)) or Decimal("0")
+                for groep in woningwaardering_resultaat.groepen or []
+                if groep.punten
+            ),
+            0,
+        )
+
+        totaal_punten_zonder_cap = overige_punten + utils.rond_af(woz_punten, 0)
+        correctie_punten = self._cap_punten(woz_punten, overige_punten)
 
         if (
             correctie_punten is not None
-            and minimum_punten == 0.0
+            and minimum_woz_punten == 0.0
             and woningwaardering_groep.woningwaarderingen is not None
         ):
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Max. 33% van totaal"
-                    ),
-                    punten=correctie_punten,
-                )
+            totaal_punten_met_cap = totaal_punten_zonder_cap + correctie_punten
+
+            logger.debug(
+                f"Eenheid {eenheid.id}: Waardering zonder cap: {totaal_punten_zonder_cap} punten. Na toepassing van cap: {totaal_punten_met_cap} punten."
             )
-            return woningwaardering_groep
+
+            # Wanneer een woning zonder die beperking een waardering heeft van meer dan
+            # 186 punten en door deze beperking een waardering krijgt die lager is dan
+            # 187 punten, geldt een waardering van 186 punten voor de woning.
+            if totaal_punten_zonder_cap > 186 and totaal_punten_met_cap <= 187:
+                logger.info(
+                    f"Eenheid {eenheid.id} wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                )
+                correctie_punten = 186 - totaal_punten_zonder_cap
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam="Maximering WOZ-punten tot 186 punten totaal"
+                        ),
+                        punten=utils.rond_af(correctie_punten, 2),
+                    )
+                )
+            else:
+                logger.info(
+                    f"Eenheid {eenheid.id} wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                )
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam="Maximering WOZ-punten tot 33% van totaal"
+                        ),
+                        punten=utils.rond_af(correctie_punten, 2),
+                    )
+                )
 
         return woningwaardering_groep
 
     def _cap_punten(
         self,
-        punten: float,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    ) -> float | None:
+        woz_punten: Decimal,
+        overige_punten: Decimal,
+    ) -> Decimal | None:
         """
         Berekent de cap op de WOZ. Maximaal 33% van het
         totale puntenaantal van een woning mag bepaald worden door de WOZ-waarde
         van de woning.
 
         Args:
-            punten (float): Het aantal punten voor de stelselgroep WOZ-waarde.
-            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
+            woz_punten (Decimal): Het aantal punten voor de stelselgroep WOZ-waarde.
+            overige_punten (Decimal): Het totaal aantal punten van alle groepen behalve de stelselgroep WOZ-waarde.
 
         Returns:
-            float | None: De correctiepunten voor de stelselgroep WOZ-waarde.
+            Decimal | None: De correctiepunten voor de stelselgroep WOZ-waarde.
         """
+        drempel_cap_woz = Decimal("187")
 
-        totaal_punten = sum(
-            Decimal(str(groep.punten))
-            for groep in woningwaardering_resultaat.groepen or []
-            if groep.punten
-        ) + Decimal(str(punten))
+        totaal_punten_zonder_cap = overige_punten + utils.rond_af(woz_punten, 0)
 
-        cap_punten = totaal_punten * Decimal("0.33")
+        if totaal_punten_zonder_cap < drempel_cap_woz:
+            logger.info(
+                f"Cap op op de WOZ wordt niet toegepast omdat het totaal aantal punten minder is dan {drempel_cap_woz}."
+            )
+            return None
 
-        # cap niet wanneer punten onder de cap grens zitten of totaal punten lager is dan 187
-        if cap_punten >= Decimal(str(punten)) or totaal_punten < Decimal("187"):
+        # Bereken het maximum aantal WOZ-punten dat toegestaan is
+        max_woz_percentage = Decimal("33")
+        overige_percentage = Decimal("100") - max_woz_percentage
+        percentage_verhouding = overige_percentage / max_woz_percentage
+        max_woz_punten = overige_punten / percentage_verhouding
+
+        logger.debug(f"max_woz_punten: {max_woz_punten}")
+
+        # Pas de cap toe op de WOZ-punten
+        capped_woz_punten = min(
+            Decimal(str(woz_punten)),
+            max_woz_punten,
+        )
+
+        # Als de capped WOZ-punten gelijk zijn aan of groter zijn dan de oorspronkelijke
+        # WOZ-punten, pas dan geen cap toe
+        if capped_woz_punten >= Decimal(str(woz_punten)):
             return None
         else:
-            return float(cap_punten - Decimal(str(punten)))
+            # Indien het puntenaandeel voor de WOZ-waarde wordt beperkt op
+            # ten hoogste 33%, wordt het aantal punten voor de WOZ-waarde afgerond naar
+            # beneden op hele punten.
+            correctiepunten = capped_woz_punten - Decimal(str(woz_punten))
+            logger.debug(f"Cap punten: {correctiepunten}")
+            afrondingscorrectie = min(
+                (
+                    utils.rond_af(capped_woz_punten, 0, rounding=ROUND_DOWN)
+                    - capped_woz_punten
+                ),
+                Decimal(0.0),
+            )
+            logger.debug(f"Afronding punten: {afrondingscorrectie}")
+
+            totaal_correctiepunten = correctiepunten + afrondingscorrectie
+
+            return totaal_correctiepunten
 
     def _som_woz_punten(
         self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
-    ) -> float:
+    ) -> Decimal:
         """
         Berekent de som van de punten voor de stelselgroep WOZ-waarde.
 
@@ -284,17 +338,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): De woningwaardering groep voor de stelselgroep WOZ-waarde.
 
         Returns:
-            float: De som van de punten voor de stelselgroep WOZ-waarde.
+            Decimal: De som van de punten voor de stelselgroep WOZ-waarde.
         """
 
-        return float(
-            Decimal(
-                sum(
-                    Decimal(str(woningwaardering.punten))
-                    for woningwaardering in woningwaardering_groep.woningwaarderingen
-                    or []
-                    if woningwaardering.punten is not None
-                )
+        return Decimal(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
             )
         )
 
@@ -378,7 +429,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    ) -> float:
+    ) -> Decimal:
         """
         Berekent de minimum punten voor steselgroep WOZ-waarde bij nieuwbouw of hoogniveau renovatie.
 
@@ -387,10 +438,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
-            float: De minimum punten voor stelselgroep WOZ-waarde.
+            Decimal: De minimum punten voor stelselgroep WOZ-waarde.
         """
 
-        minimum_punten = 0.0
+        minimum_punten = Decimal("0")
 
         bouwjaar = eenheid.bouwjaar
 
@@ -400,6 +451,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if hoogniveau_renovatie:
             logger.info(f"Eenheid {eenheid.id}: hoogniveau renovatie geconstateerd.")
 
+        # Indien de bouwkundige oplevering of hoogniveau renovatie van de woning heeft
+        # plaatsgevonden in de jaren 2015-2019 en die woning voor de onderdelen
+        # 1 t/m 10 en 12 van het woningwaarderingsstelsel minimaal 110 punten heeft
+        # behaald dan worden, voor het aantal punten voor de WOZ-waarde,
+        # minimaal 40 punten toegekend.
         if (bouwjaar and 2015 <= bouwjaar <= 2019) or hoogniveau_renovatie:
             punten_critische_stelselgroepen = sum(
                 groep.punten or 0.0
@@ -410,20 +466,24 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 and groep.criterium_groep.stelselgroep.code
                 and groep.criterium_groep.stelselgroep.code
                 in [
-                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
-                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
-                    Woningwaarderingstelselgroep.verkoeling_en_verwarming.code,
-                    Woningwaarderingstelselgroep.energieprestatie.code,
-                    Woningwaarderingstelselgroep.keuken.code,
-                    Woningwaarderingstelselgroep.sanitair.code,
-                    Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,
-                    Woningwaarderingstelselgroep.buitenruimten.code,
-                    Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # Zorgwoning
+                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,  # 1
+                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,  # 2
+                    Woningwaarderingstelselgroep.verkoeling_en_verwarming.code,  # 3
+                    Woningwaarderingstelselgroep.energieprestatie.code,  # 4
+                    Woningwaarderingstelselgroep.keuken.code,  # 5
+                    Woningwaarderingstelselgroep.sanitair.code,  # 6
+                    Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,  # 7
+                    Woningwaarderingstelselgroep.buitenruimten.code,  # 8
+                    # Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.code,  # 9
+                    Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.code,  # 10
+                    Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # 12
                 ]
             )
-
+            logger.debug(
+                f"Eenheid {eenheid.id}: punten_critische_stelselgroepen: {punten_critische_stelselgroepen}"
+            )
             if punten_critische_stelselgroepen >= 110:
-                minimum_punten = 40
+                minimum_punten = Decimal("40")
                 logger.info(
                     f"Eenheid {eenheid.id}: minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
                 )
@@ -514,7 +574,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             ):
                 return True
 
-        # Indien sprake is van verbouw in de jaren 2015-2021 dan is sprake van hoogniveau renovatie als het Energie-Index van de woning lager is dan 0,4.
+        # Indien sprake is van verbouw in de jaren 2015-2021 dan is sprake van
+        # hoogniveau renovatie als het Energie-Index van de woning lager is dan 0,4.
         if eenheid.renovatie.datum.year <= 2021:
             if not energieprestatie.waarde:
                 warnings.warn(
@@ -524,13 +585,13 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 return False
             try:
                 energieprestatie_waarde = float(energieprestatie.waarde)
+                if energieprestatie_waarde < 0.4:
+                    return True
             except ValueError:
                 warnings.warn(
                     f"Eenheid {eenheid.id}: energieprestatie met een waarde (Energie-Index) dat niet kan worden omgezet in een getal ({energieprestatie.waarde}) gevonden bij een renovatie in de jaren 2015-2021"
                 )
                 return False
-            if energieprestatie_waarde < 0.4:
-                return True
 
         return False
 
