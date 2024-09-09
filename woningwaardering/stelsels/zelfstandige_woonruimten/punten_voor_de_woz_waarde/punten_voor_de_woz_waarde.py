@@ -236,7 +236,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             # Wanneer een woning zonder die beperking een waardering heeft van meer dan
             # 186 punten en door deze beperking een waardering krijgt die lager is dan
             # 187 punten, geldt een waardering van 186 punten voor de woning.
-            if totaal_punten_zonder_cap > 186 and totaal_punten_met_cap <= 187:
+            if totaal_punten_zonder_cap > 186 and totaal_punten_met_cap < 187:
                 logger.info(
                     f"Eenheid {eenheid.id} wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
                 )
