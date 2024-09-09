@@ -34,9 +34,9 @@ for input_file_path in input_file_paths:
         output_file_path = (
             DATA_DIR / "zelfstandige_woonruimten/output" / input_file_path.name
         )
-        unverified_path = output_file_path  # .with_suffix(
-        #     ".unverified" + output_file_path.suffix
-        # )
+        unverified_path = output_file_path.with_suffix(
+            ".unverified" + output_file_path.suffix
+        )
 
         output_file_path.parent.mkdir(parents=True, exist_ok=True)
 
