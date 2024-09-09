@@ -493,6 +493,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     # minimaal 110 punten heeft behaald dan worden, voor het aantal
                     # punten voor de WOZ-waarde, minimaal 40 punten toegekend.
                     #
+                    # Omdat verder in deze rubriek ook niet gerekend wordt met
+                    # gemeenschappelijke vertrekken, overige ruimten en voorzieninge
+                    # en parkeerruimten nemen wij aan dat dit een fout in het
+                    # betreft.
+                    #
                     # Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.code,  # 9
                     # Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.code,  # 10
                     Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # 12
