@@ -113,7 +113,7 @@ def naar_tabel(
             if woningwaardering.aantal is not None
         ]
 
-        subtotaal = float(sum(aantallen)) if aantallen else None
+        subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
 
         if (
             (subtotaal is not None or aantal_waarderingen > 1)

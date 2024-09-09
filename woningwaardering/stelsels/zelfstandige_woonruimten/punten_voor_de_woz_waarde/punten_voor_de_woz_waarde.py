@@ -106,11 +106,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             == pd.to_datetime(woz_eenheid.waardepeildatum)
         ].pipe(utils.dataframe_met_een_rij)
 
-        factor_onderdeel_I = factoren["Onderdeel I"].values[0]
-        factor_onderdeel_II = factoren["Onderdeel II"].values[0]
+        factor_onderdeel_I = Decimal(str(factoren["Onderdeel I"].values[0]))
+        factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
 
-        punten_onderdeel_I = float(
-            utils.rond_af(Decimal(woz_waarde / factor_onderdeel_I), decimalen=2)
+        punten_onderdeel_I = utils.rond_af(
+            Decimal(woz_waarde / factor_onderdeel_I), decimalen=2
         )
 
         logger.info(
@@ -134,11 +134,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 UserWarning,
             )
 
-        punten_onderdeel_II = float(
-            utils.rond_af(
-                woz_waarde / oppervlakte / factor_onderdeel_II,
-                decimalen=2,
-            )
+        punten_onderdeel_II = utils.rond_af(
+            woz_waarde / oppervlakte / factor_onderdeel_II,
+            decimalen=2,
         )
 
         logger.info(
@@ -150,7 +148,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel II"
                 ),
-                punten=punten_onderdeel_II,
+                punten=float(punten_onderdeel_II),
             )
         )
 
@@ -204,7 +202,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=f"Nieuwbouw: min. {minimum_woz_punten} punten"
                     ),
-                    punten=minimum_woz_punten - woz_punten,
+                    punten=float(minimum_woz_punten - woz_punten),
                 )
             )
             return woningwaardering_groep
@@ -349,7 +347,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
         )
 
-    def minimum_woz_waarde(self, woz_eenheid: EenhedenWozEenheid) -> float | None:
+    def minimum_woz_waarde(self, woz_eenheid: EenhedenWozEenheid) -> Decimal | None:
         """
         Bepaalt de minimum WOZ-waarde.
 
@@ -357,7 +355,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woz_eenheid (EenhedenWozEenheid): De WOZ-eenheid.
 
         Returns:
-            float | None: De minimum WOZ-waarde, of None indien er geen minimum vastgesteld kan worden.
+            Decimal | None: De minimum WOZ-waarde, of None indien er geen minimum vastgesteld kan worden.
         """
         if woz_eenheid.vastgestelde_waarde is None:
             warnings.warn("Vastgestelde WOZ-waarde is None")
@@ -367,27 +365,31 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             warnings.warn("Waardepeildatum is None")
             return None
 
-        minimum_woz_waarde = float(
-            self.pd_minimum_woz_waarde[
-                pd.to_datetime(self.pd_minimum_woz_waarde["Peildatum"])
-                == pd.to_datetime(woz_eenheid.waardepeildatum)
-            ]
-            .pipe(utils.dataframe_met_een_rij)["Minimumwaarde"]
-            .values[0]
+        vastgestelde_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
+
+        minimum_woz_waarde = Decimal(
+            str(
+                self.pd_minimum_woz_waarde[
+                    pd.to_datetime(self.pd_minimum_woz_waarde["Peildatum"])
+                    == pd.to_datetime(woz_eenheid.waardepeildatum)
+                ]
+                .pipe(utils.dataframe_met_een_rij)["Minimumwaarde"]
+                .values[0]
+            )
         )
 
-        if woz_eenheid.vastgestelde_waarde < minimum_woz_waarde:
+        if vastgestelde_waarde < minimum_woz_waarde:
             logger.info(
-                f"WOZ-waarde {woz_eenheid.vastgestelde_waarde} is kleiner dan minimum {minimum_woz_waarde}, minimum wordt gebruikt"
+                f"WOZ-waarde {vastgestelde_waarde} is kleiner dan minimum {minimum_woz_waarde}, minimum wordt gebruikt"
             )
             return minimum_woz_waarde
 
-        return woz_eenheid.vastgestelde_waarde
+        return vastgestelde_waarde
 
     def bepaal_oppervlakte(
         self,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    ) -> float:
+    ) -> Decimal:
         """
         Geeft de totale oppervlakte van de stelselgroepen oppervlakte van vertrekken en oppervlakte van overige ruimten.
 
@@ -395,7 +397,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten object.
 
         Returns:
-            float: De totale oppervlakte van de stelselgroepen oppervlakte van vertrekken en oppervlakte van overige ruimten.
+            Decimal: De totale oppervlakte van de stelselgroepen oppervlakte van vertrekken en oppervlakte van overige ruimten.
         """
         oppervlakte_stelsel_groepen = [
             groep
@@ -413,14 +415,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         oppervlakte = sum(
             (
-                waardering.aantal
+                Decimal(str(waardering.aantal))
                 for waardering in chain.from_iterable(
                     groep.woningwaarderingen or []
                     for groep in oppervlakte_stelsel_groepen
                 )
                 if waardering.aantal is not None
             ),
-            start=0.0,
+            start=Decimal("0"),
         )
 
         return oppervlakte
@@ -601,7 +603,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 )
                 return False
             try:
-                energieprestatie_waarde = float(energieprestatie.waarde)
+                energieprestatie_waarde = Decimal(energieprestatie.waarde)
                 if energieprestatie_waarde < 0.4:
                     return True
             except ValueError:
