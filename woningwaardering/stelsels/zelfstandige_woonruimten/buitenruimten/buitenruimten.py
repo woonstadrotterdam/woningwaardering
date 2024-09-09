@@ -96,8 +96,8 @@ class Buitenruimten(Stelselgroep):
                     # Voor gemeenschappelijk buitenruimten worden 0,75 per vierkante meter toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
                     woningwaardering.punten = float(
                         utils.rond_af(
-                            Decimal(str(ruimte.oppervlakte))
-                            * Decimal("0.75")
+                            ruimte.oppervlakte
+                            * 0.75
                             / ruimte.gedeeld_met_aantal_eenheden,
                             decimalen=2,
                         )
