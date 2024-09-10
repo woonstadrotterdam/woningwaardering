@@ -73,6 +73,17 @@ def naar_tabel(
     table.align["Opslag"] = "r"
     table.float_format = ".2"
 
+    table._min_width = {
+        "Groep": 33,
+        "Naam": 30,
+        "Aantal": 7,
+        "Meeteenheid": 19,
+        "Punten": 7,
+        "Opslag": 7,
+    }
+
+    table._max_width = table._min_width
+
     for woningwaardering_groep in (
         woningwaardering_resultaat.groepen or []
         if isinstance(
