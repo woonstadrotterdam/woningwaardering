@@ -612,39 +612,37 @@ _\* In het geval van een gemonteerde volledige afscheiding van de douche vindt d
 
 Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of, respectievelijk bad.
 
-## Rubriek 7 Woonvoorzieningen voor gehandicapten
+## ~~Rubriek 7 Woonvoorzieningen voor gehandicapten~~
 
-### 7.1 Puntentoekenning
+### ~~7.1 Puntentoekenning~~
 
-Het woningwaarderingsstelsel kent punten toe voor woonvoorzieningen voor gehandicapten. Per
+~~Het woningwaarderingsstelsel kent punten toe voor woonvoorzieningen voor gehandicapten. Per € 332,00 van de door de verhuurder bestede kosten aan ingrepen in of aan de woonruimte ten behoeve van een gehandicapte kan, voor zover deze kosten in een redelijke verhouding staan tot de geboden kwaliteit en het niet gesubsidieerde kosten betreft, één punt worden toegekend.~~
 
-€ 332,00 van de door de verhuurder bestede kosten aan ingrepen in of aan de woonruimte ten behoeve van een gehandicapte kan, voor zover deze kosten in een redelijke verhouding staan tot de geboden kwaliteit en het niet gesubsidieerde kosten betreft, één punt worden toegekend.
+### ~~7.2 Woonvoorzieningen~~
 
-### 7.2 Woonvoorzieningen
+~~Om de bestede kosten in of aan de woonruimte ten behoeve van een gehandicapte in de puntentelling te betrekken, is het nodig dat het gaat om:~~
 
-Om de bestede kosten in of aan de woonruimte ten behoeve van een gehandicapte in de puntentelling te betrekken, is het nodig dat het gaat om:
+1.  ~~maatwerkvoorzieningen: op de behoeften, persoonskenmerken en mogelijkheden van een persoon afgestemd geheel van diensten, hulpmiddelen, woningaanpassingen en andere maatregelen ten behoeve van zelfredzaamheid, participatie of beschermd wonen en opvang, of;~~
+2.  ~~woningaanpassingen: een bouwkundige of woontechnische ingreep in of aan een woonruimte, als bedoeld in artikel 1.1.1, eerste lid, van de Wet maatschappelijke ondersteuning 2015, of;~~
+3.  ~~gesubsidieerde voorzieningen of ingrepen op grond van een andere wettelijke regeling.~~
 
-1.  maatwerkvoorzieningen: op de behoeften, persoonskenmerken en mogelijkheden van een persoon afgestemd geheel van diensten, hulpmiddelen, woningaanpassingen en andere maatregelen ten behoeve van zelfredzaamheid, participatie of beschermd wonen en opvang, of;
-2.  woningaanpassingen: een bouwkundige of woontechnische ingreep in of aan een woonruimte, als bedoeld in artikel 1.1.1, eerste lid, van de Wet maatschappelijke ondersteuning 2015, of;
-3.  gesubsidieerde voorzieningen of ingrepen op grond van een andere wettelijke regeling.
+~~Extra punten worden voor deze woonvoorzieningen, woningaanpassingen of ingrepen toegekend indien aan de volgende cumulatieve voorwaarden is voldaan:~~
 
-Extra punten worden voor deze woonvoorzieningen, woningaanpassingen of ingrepen toegekend indien aan de volgende cumulatieve voorwaarden is voldaan:
+*   ~~de ingreep moet hebben plaatsgevonden op of ná 01-04-1994;~~
+*   ~~de ingreep moet voor een deel zijn gesubsidieerd;~~
+*   ~~de ingreep dient voor “de gehandicapte”\* te zijn aangebracht.~~
 
-*   de ingreep moet hebben plaatsgevonden op of ná 01-04-1994;
-*   de ingreep moet voor een deel zijn gesubsidieerd;
-*   de ingreep dient voor “de gehandicapte”\* te zijn aangebracht.
+_\*~~Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt.~~_
 
-_\*Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt._
+~~Buiten de waardering blijven voorzieningen ten behoeve van een gehandicapte, waarvoor subsidie is verstrekt waarmee de volledige kosten worden gedekt. Extra vloeroppervlakte (als bedoeld in de subsidieregelingen) wordt aangemerkt als gesubsidieerde voorziening.~~
 
-Buiten de waardering blijven voorzieningen ten behoeve van een gehandicapte, waarvoor subsidie is verstrekt waarmee de volledige kosten worden gedekt. Extra vloeroppervlakte (als bedoeld in de subsidieregelingen) wordt aangemerkt als gesubsidieerde voorziening.
+~~Het komt voor dat een voorziening slechts ten dele werd beschouwd als een specifieke aanpassing voor een gehandicapte en daarom slechts ten dele is gesubsidieerd. In zo’n geval worden alleen die onderdelen van de voorziening gewaardeerd, die ook in een vergelijkbare woning als standaardvoorziening voorkomen.~~
 
-Het komt voor dat een voorziening slechts ten dele werd beschouwd als een specifieke aanpassing voor een gehandicapte en daarom slechts ten dele is gesubsidieerd. In zo’n geval worden alleen die onderdelen van de voorziening gewaardeerd, die ook in een vergelijkbare woning als standaardvoorziening voorkomen.
+~~Indien de huurovereenkomst met de gehandicapte is beëindigd dan vervalt de toepassing van deze rubriek, tenzij de nieuwe huurder tevens gehandicapt is.~~
 
-Indien de huurovereenkomst met de gehandicapte is beëindigd dan vervalt de toepassing van deze rubriek, tenzij de nieuwe huurder tevens gehandicapt is.
+### ~~7.3 Vergoeding kosten~~
 
-### 7.3 Vergoeding kosten
-
-Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder) wordt één punt toegekend. Voorwaarde is wel dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit. De wetgever gaat ervan uit dat met deze puntenwaardering de verhuurder een redelijke rendementswaarborg heeft voor het door hem geïnvesteerde vermogen (te weten de kosten van de ingrepen, verminderd met de eigen bijdrage van de huurder en de financiële tegemoetkoming van gemeente of (bij dure woonvoorzieningen) enige instantie die ingevolge een wettelijke regeling die tegemoetkoming verleent.
+~~Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder) wordt één punt toegekend. Voorwaarde is wel dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit. De wetgever gaat ervan uit dat met deze puntenwaardering de verhuurder een redelijke rendementswaarborg heeft voor het door hem geïnvesteerde vermogen (te weten de kosten van de ingrepen, verminderd met de eigen bijdrage van de huurder en de financiële tegemoetkoming van gemeente of (bij dure woonvoorzieningen) enige instantie die ingevolge een wettelijke regeling die tegemoetkoming verleent.~~
 
 ## Rubriek 8 Buitenruimten
 
