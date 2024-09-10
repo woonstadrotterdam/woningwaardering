@@ -56,15 +56,59 @@ active_data = sorted(
     key=itemgetter("soort"),
 )
 
-# Count the occurrences of each combination of "soort" and "naam"
-counts = Counter((item["soort"], item["naam"]) for item in active_data)
+
+def resolve_duplicate(
+    duplicate_items: list[dict[str | Any, str | Any]],
+) -> dict[str | Any, str | Any]:
+    print(f"Er zijn {len(duplicate_items)} dezelfde items gevonden:")
+    for idx, item in enumerate(duplicate_items):
+        print("")
+        print(f"{idx + 1}: {item}")
+        print("")
+
+    while True:
+        try:
+            choice = int(
+                input("Geef het nummer van het item dat behouden moet blijven: ")
+            )
+            if 1 <= choice <= len(duplicate_items):
+                return duplicate_items[choice - 1]
+            else:
+                print("Geen geldige keuze. Kies een geldig nummer.")
+        except ValueError:
+            print("Voer een nummer in.")
+
+
+# Count the occurrences of each combination of "soort"/"naam" and "soort"/"code"
+counts_code = Counter((item["soort"], item["code"]) for item in active_data)
+counts_soort_naam = Counter((item["soort"], item["naam"]) for item in active_data)
 
 resolved_parents: dict[str, dict[str | Any, str | Any]] = dict()
 
 # Update the original list by suffixing duplicate names with the corresponding item code
 for item in active_data:
     item["variabele"] = item["naam"]
-    if counts[(item["soort"], item["naam"])] > 1:
+
+    if counts_code[(item["soort"], item["code"])] > 1:
+        duplicates = [
+            active_data_item
+            for active_data_item in active_data
+            if active_data_item["soort"] == item["soort"]
+            and active_data_item["code"] == item["code"]
+        ]
+        if len(duplicates) > 1:
+            # Prompt the user to choose one item to keep
+            logger.warning(
+                f"Dubbele soort/code combinatie: {item['soort']}.{item['code']}"
+            )
+            chosen_item = resolve_duplicate(duplicates)
+
+            # Remove the unchosen duplicates from the list
+            active_data = [
+                d for d in active_data if d == chosen_item or d not in duplicates
+            ]
+
+    elif counts_soort_naam[(item["soort"], item["naam"])] > 1:
         logger.warning(
             f"Dubbele soort/naam combinatie: {item['soort']}.{item['code']} {item['naam']}"
         )
@@ -72,23 +116,29 @@ for item in active_data:
             f"Variabele naam \"{item['variabele']}\" wordt vervangen door \"{item['variabele']} {item['code']}\""
         )
         item["variabele"] += " " + item["code"]
+
+    # Resolve parent information if the parent is not None or an empty string
     if item["parent"] is not None and item["parent"] != "":
         resolved_parent = resolved_parents.get(item["parent"])
+
         if resolved_parent is None:
             parent_soort = item["parent"].split(".")[0]
             parent_code = item["parent"].split(".")[1]
+
             parents = [
                 active_data_item
                 for active_data_item in active_data
                 if active_data_item["soort"] == parent_soort
                 and active_data_item["code"] == parent_code
             ]
+
             if parents is not None and len(parents) == 1:
                 resolved_parent = resolved_parents[item["parent"]] = parents[0]
             else:
                 logger.debug(
                     f"{len(parents)} parents gevonden voor {item['parent']}, verwachtte er 1"
                 )
+
         if resolved_parent is not None:
             item["parentcode"] = resolved_parent["code"]
             item["parentnaam"] = resolved_parent["naam"]
