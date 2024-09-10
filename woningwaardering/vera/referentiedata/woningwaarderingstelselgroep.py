@@ -525,6 +525,21 @@ class Woningwaarderingstelselgroep(Enum):
     criteria voldoen.
     """
 
+    gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen = Referentiedata(
+        code="GVR",
+        naam="Gemeenschappelijke vertrekken, overige ruimten en voorzieningen",
+        parent=Referentiedata(
+            code="ZEL",
+            naam="Zelfstandige woonruimten",
+        ),
+    )
+    """
+    Waardering van gemeenschappelijke vertrekken, overige ruimten en voorzieningen,
+    exclusief toegankelijk voor bewoners van minimaal twee adressen, met uitsluiting
+    van ruimten waarvoor ook door derden wordt betaald of die door de verhuurder
+    worden gebruikt
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:
