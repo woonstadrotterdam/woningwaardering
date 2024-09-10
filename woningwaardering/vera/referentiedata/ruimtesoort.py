@@ -39,6 +39,20 @@ class Ruimtesoort(Enum):
     (Beleidsboek waarderingsstelsel zelfstandige woonruimte)
     """
 
+    parkeergelegenheid = Referentiedata(
+        code="PAR",
+        naam="Parkeergelegenheid",
+    )
+    """
+    Een locatie die speciaal is ingericht voor het parkeren van voertuigen. Dit kan
+    variëren van een eenvoudige parkeerplaats op straat tot uitgebreide faciliteiten
+    zoals parkeerterreinen en parkeergarages. Parkeergelegenheden bieden gemarkeerde
+    plaatsen waar voertuigen veilig kunnen worden geparkeerd, en ze kunnen openbaar
+    of privé zijn. De term &#34;parkeergelegenheid&#34; omvat alle vormen van
+    parkeerinfrastructuur die zijn ontworpen om voertuigen tijdelijk of langdurig te
+    stallen.
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:
