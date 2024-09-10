@@ -137,6 +137,22 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         if ruimte.oppervlakte >= 2:
             return Ruimtesoort.overige_ruimten
 
+    if (
+        ruimte.detail_soort.code
+        in [
+            Ruimtedetailsoort.garage_inpandig.code,
+            Ruimtedetailsoort.garage_uitpandig.code,
+            Ruimtedetailsoort.garagebox.code,
+        ]
+        and ruimte.gedeeld_met_aantal_eenheden is None
+        or (
+            ruimte.gedeeld_met_aantal_eenheden is not None
+            and ruimte.gedeeld_met_aantal_eenheden < 2
+        )
+    ):
+        if ruimte.oppervlakte >= 2.0:
+            return Ruimtesoort.overige_ruimten
+
     if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
         if ruimte.soort.code == Ruimtesoort.vertrek.code:
             if (

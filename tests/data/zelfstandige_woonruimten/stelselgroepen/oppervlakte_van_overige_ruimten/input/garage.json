@@ -1,34 +1,29 @@
 {
   "ruimten": [
     {
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
       },
-      "detailSoort": {
-        "code": "GAR",
-        "naam": "Garage"
-      },
-      "naam": "Garage",
-      "oppervlakte": 15,
-      "lengte": 3,
-      "breedte": 5,
-      "hoogte": 3.17
-    },
-    {
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
-      },
-      "detailSoort": {
-        "code": "GAR",
-        "naam": "Garage"
-      },
-      "naam": "Garage",
-      "oppervlakte": 15,
-      "lengte": 3,
-      "breedte": 5,
-      "hoogte": 3.17
+      "punten": 11.25,
+      "woningwaarderingen": [
+        {
+          "aantal": 15.0,
+          "criterium": {
+            "naam": "Garagebox",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
     }
   ]
 }
