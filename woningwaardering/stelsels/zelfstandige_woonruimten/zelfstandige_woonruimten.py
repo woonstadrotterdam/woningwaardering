@@ -17,6 +17,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
 from woningwaardering.stelsels.zelfstandige_woonruimten.energieprestatie.energieprestatie import (
     Energieprestatie,
 )
+
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -41,6 +42,7 @@ class ZelfstandigeWoonruimten(Stelsel):
                 # Sanitair,
                 # Keuken,
                 # PuntenVoorDeWozWaarde,
+                # GemeenschappelijkeParkeerruimten,
                 PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als laatste te worden uitgevoerd
             ],
         )
