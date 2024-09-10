@@ -1,11 +1,11 @@
-from importlib.resources import files
 import warnings
 from datetime import date
 from decimal import ROUND_DOWN, Decimal
+from importlib.resources import files
 from itertools import chain
 
-from loguru import logger
 import pandas as pd
+from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -42,12 +42,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
         self.pd_woz_factor = pd.read_csv(
-            files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/woz_factor.csv")
+            files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/woz_factor.csv"),
+            parse_dates=["Peildatum"],
         )
         self.pd_minimum_woz_waarde = pd.read_csv(
             files("woningwaardering").joinpath(
                 f"{LOOKUP_TABEL_FOLDER}/minimum_woz_waarde.csv"
-            )
+            ),
+            parse_dates=["Peildatum"],
         )
 
     def bereken(
@@ -102,7 +104,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             return woningwaardering_groep
 
         factoren = self.pd_woz_factor[
-            pd.to_datetime(self.pd_woz_factor["Peildatum"])
+            self.pd_woz_factor["Peildatum"]
             == pd.to_datetime(woz_eenheid.waardepeildatum)
         ].pipe(utils.dataframe_met_een_rij)
 
@@ -370,7 +372,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         minimum_woz_waarde = Decimal(
             str(
                 self.pd_minimum_woz_waarde[
-                    pd.to_datetime(self.pd_minimum_woz_waarde["Peildatum"])
+                    self.pd_minimum_woz_waarde["Peildatum"]
                     == pd.to_datetime(woz_eenheid.waardepeildatum)
                 ]
                 .pipe(utils.dataframe_met_een_rij)["Minimumwaarde"]
