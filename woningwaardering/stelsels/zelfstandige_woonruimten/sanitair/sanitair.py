@@ -143,7 +143,14 @@ class Sanitair(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        for ruimte in eenheid.ruimten or []:
+        ruimten = [
+            ruimte
+            for ruimte in eenheid.ruimten or []
+            if ruimte.gedeeld_met_aantal_eenheden is None
+            or ruimte.gedeeld_met_aantal_eenheden == 1
+        ]
+
+        for ruimte in ruimten:
             Sanitair._waardeer_bouwkundig_element_detailsoort(
                 woningwaardering_groep.woningwaarderingen,
                 ruimte,

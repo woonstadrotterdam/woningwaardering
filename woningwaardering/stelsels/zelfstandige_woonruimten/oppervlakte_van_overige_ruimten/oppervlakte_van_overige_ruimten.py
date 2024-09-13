@@ -1,3 +1,4 @@
+from typing import Generator
 import warnings
 from datetime import date
 from decimal import Decimal
@@ -13,6 +14,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -61,87 +63,21 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        for ruimte in eenheid.ruimten or []:
-            if not ruimte.detail_soort:
-                warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail soort.",
-                    UserWarning,
-                )
-                continue
+        ruimten = [
+            ruimte
+            for ruimte in eenheid.ruimten or []
+            if ruimte.gedeeld_met_aantal_eenheden is None
+            or ruimte.gedeeld_met_aantal_eenheden == 1
+        ]
 
-            if not ruimte.detail_soort.code:
-                warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail soort code.",
-                    UserWarning,
-                )
-                continue
-
-            if not classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten:
-                logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is geen overige ruimte en komt niet aanmerking voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}."
-                )
-                continue
-
-            if not ruimte.oppervlakte:
-                warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
-                    UserWarning,
-                )
-                continue
-
-            criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
-
-            logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is een overige ruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}."
-            )
-
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = (
-                WoningwaarderingResultatenWoningwaarderingCriterium(
-                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                    naam=criterium_naam,
+        for ruimte in ruimten:
+            woningwaarderingen = (
+                OppervlakteVanOverigeRuimten.genereer_woningwaarderingen(
+                    ruimte, self.stelselgroep
                 )
             )
 
-            woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
-
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
-
-            if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-                # Corrigeer met -5 punten als de zolder niet bereikbaar is met een vaste trap
-                # Note: Op dit moment kan de zolder alleen een
-                # Bouwkundigelementdetailsoort.trap (vast) of Bouwkundigelementdetailsoort.vlizotrap (niet vast)
-                # hebben vanwege classificeer_ruimte in utils.py.
-                if heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.vlizotrap
-                ):
-                    logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) krijgt een correctie van -5 punten maximaal: de zolder is niet bereikbaar via een vaste trap."
-                    )
-                    woningwaardering_correctie = (
-                        WoningwaarderingResultatenWoningwaardering()
-                    )
-                    woningwaardering_correctie.criterium = (
-                        WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Correctie: zolder zonder vaste trap",
-                        )
-                    )
-
-                    # corrigeeer niet met meer punten dan de oppervlakte voor stelselgroep overige ruimten zou opleveren
-                    correctie = min(
-                        5.0,
-                        float(
-                            rond_af_op_kwart(
-                                rond_af(ruimte.oppervlakte, decimalen=2)
-                                * Decimal("0.75")
-                            )
-                        ),
-                    )
-
-                    woningwaardering_correctie.punten = correctie * -1.0
-                    woningwaardering_groep.woningwaarderingen.append(
-                        woningwaardering_correctie
-                    )
+            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
         punten = rond_af_op_kwart(
             (
@@ -170,6 +106,86 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         )
 
         return woningwaardering_groep
+
+    @staticmethod
+    def genereer_woningwaarderingen(
+        ruimte: EenhedenRuimte, stelselgroep: Woningwaarderingstelselgroep
+    ) -> Generator[WoningwaarderingResultatenWoningwaardering, None, None]:
+        if not ruimte.detail_soort:
+            warnings.warn(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail soort.",
+                UserWarning,
+            )
+            return
+
+        if not ruimte.detail_soort.code:
+            warnings.warn(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail soort code.",
+                UserWarning,
+            )
+            return
+
+        if not classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten:
+            logger.info(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) is geen overige ruimte en komt niet aanmerking voor stelselgroep {stelselgroep.naam}."
+            )
+            return
+
+        if not ruimte.oppervlakte:
+            warnings.warn(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
+                UserWarning,
+            )
+            return
+
+        criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
+
+        logger.info(
+            f"Ruimte {ruimte.naam} ({ruimte.id}) is een overige ruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {stelselgroep.naam}."
+        )
+
+        woningwaardering = WoningwaarderingResultatenWoningwaardering()
+        woningwaardering.criterium = (
+            WoningwaarderingResultatenWoningwaarderingCriterium(
+                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                naam=criterium_naam,
+            )
+        )
+
+        woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
+
+        yield woningwaardering
+
+        if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
+            # Corrigeer met -5 punten als de zolder niet bereikbaar is met een vaste trap
+            # Note: Op dit moment kan de zolder alleen een
+            # Bouwkundigelementdetailsoort.trap (vast) of Bouwkundigelementdetailsoort.vlizotrap (niet vast)
+            # hebben vanwege classificeer_ruimte in utils.py.
+            if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap):
+                logger.info(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) krijgt een correctie van -5 punten maximaal: de zolder is niet bereikbaar via een vaste trap."
+                )
+                woningwaardering_correctie = (
+                    WoningwaarderingResultatenWoningwaardering()
+                )
+                woningwaardering_correctie.criterium = (
+                    WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Correctie: zolder zonder vaste trap",
+                    )
+                )
+
+                # corrigeeer niet met meer punten dan de oppervlakte voor stelselgroep overige ruimten zou opleveren
+                correctie = min(
+                    5.0,
+                    float(
+                        rond_af_op_kwart(
+                            rond_af(ruimte.oppervlakte, decimalen=2) * Decimal("0.75")
+                        )
+                    ),
+                )
+
+                woningwaardering_correctie.punten = correctie * -1.0
+                yield woningwaardering_correctie
 
 
 if __name__ == "__main__":  # pragma: no cover
