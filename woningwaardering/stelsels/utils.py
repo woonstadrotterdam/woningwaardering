@@ -75,7 +75,7 @@ def naar_tabel(
 
     table._min_width = {
         "Groep": 33,
-        "Naam": 30,
+        "Naam": 50,
         "Aantal": 7,
         "Meeteenheid": 19,
         "Punten": 7,
@@ -92,6 +92,17 @@ def naar_tabel(
         )
         else [woningwaardering_resultaat]
     ):
+        stelselgroep_naam = (
+            woningwaardering_groep.criterium_groep
+            and woningwaardering_groep.criterium_groep.stelselgroep
+            and woningwaardering_groep.criterium_groep.stelselgroep.naam
+            or ""
+        )
+        stelselgroep_naam = (
+            (stelselgroep_naam[:30] + "...")
+            if len(stelselgroep_naam) > 33
+            else stelselgroep_naam
+        )
         woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
         aantal_waarderingen = len(woningwaarderingen)
         for index, woningwaardering in enumerate(woningwaarderingen):
@@ -102,7 +113,7 @@ def naar_tabel(
             ):
                 table.add_row(
                     [
-                        woningwaardering_groep.criterium_groep.stelselgroep.naam,
+                        stelselgroep_naam,
                         woningwaardering.criterium.naam,
                         woningwaardering.aantal or "",
                         woningwaardering.criterium.meeteenheid.naam
@@ -131,22 +142,22 @@ def naar_tabel(
             and woningwaardering_groep.criterium_groep
             and woningwaardering_groep.criterium_groep.stelselgroep
         ):
-            meeteenheid = ", ".join(
-                list(
-                    {
-                        woningwaardering.criterium.meeteenheid.naam or ""
-                        for woningwaardering in woningwaarderingen
-                        if woningwaardering.criterium is not None
-                        and woningwaardering.criterium.meeteenheid is not None
-                    }
-                )
+            meeteenheden = list(
+                {
+                    woningwaardering.criterium.meeteenheid.naam or ""
+                    for woningwaardering in woningwaarderingen
+                    if woningwaardering.criterium is not None
+                    and woningwaardering.criterium.meeteenheid is not None
+                }
             )
+
+            meeteenheid = ", ".join(meeteenheden) if len(meeteenheden) == 1 else ""
 
             table.add_row(
                 [
                     woningwaardering_groep.criterium_groep.stelselgroep.naam,
                     "Subtotaal",
-                    subtotaal or "",
+                    subtotaal or "" if len(meeteenheden) == 1 else "",
                     meeteenheid,
                     woningwaardering_groep.punten or "",
                     f"{woningwaardering_groep.opslagpercentage:.0%}"
