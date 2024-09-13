@@ -237,7 +237,7 @@ class Energieprestatie(Stelselgroep):
         )
 
         if eenheid.monumenten is None:
-            logger.warning(
+            warnings.warn(
                 f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
                 UserWarning,
             )
