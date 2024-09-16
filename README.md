@@ -88,10 +88,6 @@ Deze worden aangehouden in de opzet van de `woningwaardering`-package.
 Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
 
 De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de Nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpretatie. Daarnaast kan het voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens het beleidsboek tot op de letter nauwkeurig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elke stelselgroep is geïmplementeerd en welke keuzes daarin gemaakt zijn.
-In deze documenten wordt bijgehouden welke onderdelen van het beleidsboek wel en niet zijn geïmplementeerd per stelselgroep. De gepubliceerde tekst uit het beleidsboek wordt gekopieerd en wanneer een onderdeel niet in de code van de package is geïmplementeerd zal dit worden aangegeven met ~~doorgestreepte tekst~~.  
-De reden van het niet implementeren van een regelonderdeel is vrijwel altijd dat het technisch niet mogelijk is op basis van het inputmodel van de VERA-standaard. Een voorbeeld hiervan is dat voor oppervlakte van vertrekken in 2024 de minimale breedte van een vertrek over de volledige lengte 1,5m moet zijn. Omdat wij de data van de minimale breedte over de volledige lengte niet binnenkrijgen via het inputmodel kunnen wij dit onderdeel van de regel niet implementeren. **Dit betekent dat het aan de gebruiker is om met deze regelonderdelen rekening te houden bij het eenheid-inputmodel.** Een deel van de deze regelonderdelen wordt al afgevangen indien het eenheid-inputmodel voldoet aan de NEN-norm.
-Regels die wel zijn geimplementeerd zijn niet doorgestreept.
-Keuzes die zijn gemaakt en of interpretaties die zijn gedaan, worden in een gemarkeerd blok weergegeven zoals hieronder is gedaan.
 
 > Dit is een tekstblok waarmee commentaar van een developer wordt aangegeven in het beleidsboek.
 
@@ -137,6 +133,8 @@ Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroe
 
 #### Gebruik
 
+Optie 1; bijvoorbeeld via JSON bestand:
+
 ```python
 from woningwaardering.stelsels import ZelfstandigeWoonruimten
 from datetime import date
@@ -162,6 +160,146 @@ with open(
   tabel = utils.naar_tabel(woningwaardering_resultaat)
 
   print(tabel)
+```
+
+Optie 2; via Python zelf:
+
+```python
+from datetime import date
+
+from woningwaardering.stelsels import ZelfstandigeWoonruimten, utils
+from woningwaardering.vera.bvg.generated import (
+    BouwkundigElementenBouwkundigElement,
+    EenhedenAdresBasis,
+    EenhedenAdresseerbaarObjectBasisregistratie,
+    EenhedenEenheid,
+    EenhedenEnergieprestatie,
+    EenhedenPand,
+    EenhedenRuimte,
+    EenhedenWoonplaats,
+    EenhedenWozEenheid,
+    Referentiedata,
+)
+from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
+    Bouwkundigelementsoort,
+    Energielabel,
+    Energieprestatiesoort,
+    Energieprestatiestatus,
+    Pandsoort,
+    Ruimtedetailsoort,
+    Ruimtesoort,
+)
+
+stelsel = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
+
+eenheid = EenhedenEenheid(
+    id="37101000032",
+    bouwjaar=1924,
+    adres=EenhedenAdresBasis(
+        straatnaam="Nieuwe Boezemstraat",
+        huisnummer="27",
+        huisnummer_toevoeging="",
+        postcode="3034PH",
+        woonplaats=EenhedenWoonplaats(naam="ROTTERDAM"),
+    ),
+    adresseerbaarObjectBasisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
+        id="0599010000485697", bagIdentificatie="0599010000485697"
+    ),
+    panden=[
+        EenhedenPand(
+            soort=Referentiedata(
+                code=Pandsoort.eengezinswoning.code, naam=Pandsoort.eengezinswoning.naam
+            )
+        )
+    ],
+    woz_eenheden=[
+        EenhedenWozEenheid(waardepeildatum=date(2022, 1, 1), vastgesteldeWaarde=618000),
+        EenhedenWozEenheid(waardepeildatum=date(2023, 1, 1), vastgesteldeWaarde=643000),
+    ],
+    energieprestaties=[
+        EenhedenEnergieprestatie(
+            soort=Referentiedata(
+                code=Energieprestatiesoort.energie_index.code,
+                naam=Energieprestatiesoort.energie_index.naam,
+            ),
+            status=Referentiedata(
+                code=Energieprestatiestatus.definitief.code,
+                naam=Energieprestatiestatus.definitief.naam,
+            ),
+            begindatum=date(2019, 2, 25),
+            einddatum=date(2029, 2, 25),
+            registratiedatum="2019-02-26T14:51:38+01:00",
+            label=Referentiedata(
+                code=Energielabel.c.code,
+                naam=Energielabel.c.naam,
+            ),
+            waarde="1.58",
+        )
+    ],
+    gebruiksoppervlakte=187,
+    ruimten=[
+        EenhedenRuimte(
+            id="Space_108014589",
+            soort=Referentiedata(
+                code=Ruimtesoort.vertrek.code,
+                naam=Ruimtesoort.vertrek.naam,
+            ),
+            detailSoort=Referentiedata(
+                code=Ruimtedetailsoort.slaapkamer.code,
+                naam=Ruimtedetailsoort.slaapkamer.naam,
+            ),
+            naam="Slaapkamer",
+            inhoud=60.4048,
+            oppervlakte=21.047,
+            verwarmd=True,
+            gemeenschappelijk=True,
+        ),
+        EenhedenRuimte(
+            id="Space_108006229",
+            soort=Referentiedata(
+                code=Ruimtesoort.vertrek.code,
+                naam=Ruimtesoort.vertrek.naam,
+            ),
+            detailSoort=Referentiedata(
+                code=Ruimtedetailsoort.keuken.code,
+                naam=Ruimtedetailsoort.keuken.naam,
+            ),
+            naam="Keuken",
+            inhoud=57.4359,
+            oppervlakte=20.3673,
+            verwarmd=True,
+            gemeenschappelijk=True,
+            bouwkundigeElementen=[
+                BouwkundigElementenBouwkundigElement(
+                    id="Aanrecht_108006231",
+                    id_bimmodel="3ZBiDoTKz0JfnjhzfVcYcF",
+                    naam="Aanrecht",
+                    omschrijving="Aanrecht in Keuken",
+                    soort=Referentiedata(
+                        code=Bouwkundigelementsoort.voorziening.code,
+                        naam=Bouwkundigelementsoort.voorziening.naam,
+                    ),
+                    detailSoort=Referentiedata(
+                        code=Bouwkundigelementdetailsoort.aanrecht.code,
+                        naam=Bouwkundigelementdetailsoort.aanrecht.naam,
+                    ),
+                    lengte=2700,
+                )
+            ],
+        ),
+    ],
+)
+
+woningwaardering_resultaat = stelsel.bereken(eenheid)
+print(
+    woningwaardering_resultaat.model_dump_json(
+        by_alias=True, indent=2, exclude_none=True
+    )
+)
+tabel = utils.naar_tabel(woningwaardering_resultaat)
+
+print(tabel)
 ```
 
 ## 2. Contributing
