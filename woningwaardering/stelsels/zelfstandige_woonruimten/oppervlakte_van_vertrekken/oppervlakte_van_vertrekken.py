@@ -1,6 +1,6 @@
 from datetime import date
 from decimal import Decimal
-from typing import Generator
+from typing import Iterator
 import warnings
 
 from loguru import logger
@@ -97,7 +97,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
     @staticmethod
     def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte, stelselgroep: Woningwaarderingstelselgroep
-    ) -> Generator[WoningwaarderingResultatenWoningwaardering, None, None]:
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if not classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
             logger.info(
                 f"Ruimte {ruimte.naam} ({ruimte.id}) is geen vertrek en komt niet in aanmerking voor stelselgroep {stelselgroep.naam}."

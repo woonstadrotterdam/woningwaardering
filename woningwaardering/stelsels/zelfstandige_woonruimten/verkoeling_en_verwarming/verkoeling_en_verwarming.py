@@ -1,3 +1,4 @@
+from typing import Iterator
 import warnings
 from datetime import date
 from decimal import Decimal
@@ -142,7 +143,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ruimte: EenhedenRuimte,
         stelselgroep: Woningwaarderingstelselgroep,
         totalen: dict[str, Decimal] | None = None,
-    ):
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if ruimte.detail_soort is None:
             warnings.warn(
                 f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort.",

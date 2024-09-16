@@ -1,4 +1,4 @@
-from typing import Generator
+from typing import Iterator
 import warnings
 from datetime import date
 from decimal import Decimal
@@ -110,7 +110,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
     @staticmethod
     def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte, stelselgroep: Woningwaarderingstelselgroep
-    ) -> Generator[WoningwaarderingResultatenWoningwaardering, None, None]:
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if not ruimte.detail_soort:
             warnings.warn(
                 f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail soort.",
