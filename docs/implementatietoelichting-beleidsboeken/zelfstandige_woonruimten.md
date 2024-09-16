@@ -709,7 +709,9 @@ In totaal kan maximaal 15 punten worden toegekend.
 
 *   Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 *   Een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
-*   Voorzieningen (verkoeling en verwarming, keuken, sanitair, gehandicaptenvoorziening) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel, gedeeld door het aantal adressen.
+*   Voorzieningen (verkoeling en verwarming, keuken, sanitair~~, gehandicaptenvoorziening~~) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel, gedeeld door het aantal adressen.
+
+> Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_eenheden`, waarbij de eenheid zelf meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
 
 **Warme maaltijden**
 
