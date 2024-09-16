@@ -24,11 +24,11 @@
   "woz_eenheden": [
     {
       "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 497000
+      "vastgesteldeWaarde": 597000
     },
     {
       "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 553900
+      "vastgesteldeWaarde": 653900
     }
   ],
   "energieprestaties": [
@@ -45,8 +45,8 @@
       "einddatum": "2031-03-27",
       "registratiedatum": "2021-03-27T14:51:32.980000+01:00",
       "label": {
-        "code": "A+++",
-        "naam": "A+++"
+        "code": "A",
+        "naam": "A"
       },
       "waarde": "170"
     }

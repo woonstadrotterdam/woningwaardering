@@ -11,7 +11,7 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 17.0,
+      "punten": 16.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -23,7 +23,7 @@
           "criterium": {
             "naam": "Onderdeel II"
           },
-          "punten": 11.88
+          "punten": 11.41
         }
       ]
     }
