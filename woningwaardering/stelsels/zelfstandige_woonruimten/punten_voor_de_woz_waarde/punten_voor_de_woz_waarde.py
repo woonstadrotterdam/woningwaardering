@@ -91,6 +91,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return woningwaardering_groep
 
+        if woz_eenheid.vastgestelde_waarde is None:
+            warnings.warn("Vastgestelde WOZ-waarde is None")
+            return woningwaardering_groep
+
+        if woz_eenheid.waardepeildatum is None:
+            warnings.warn("Waardepeildatum is None")
+            return woningwaardering_groep
+
         logger.info(
             f"Eenheid {eenheid.id}: WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is {woz_eenheid.vastgestelde_waarde}"
         )
