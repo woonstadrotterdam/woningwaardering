@@ -24,7 +24,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 
 
 class Keuken(Stelselgroep):
@@ -87,8 +86,17 @@ class Keuken(Stelselgroep):
 
     @staticmethod
     def is_keuken(ruimte: EenhedenRuimte) -> bool:
-        aanrecht_aantal = aantal_bouwkundige_elementen(
-            ruimte, Bouwkundigelementdetailsoort.aanrecht
+        aanrecht_aantal = len(
+            [
+                aanrecht
+                for aanrecht in ruimte.bouwkundige_elementen or []
+                if aanrecht.detail_soort
+                and aanrecht.detail_soort.code
+                and aanrecht.detail_soort.code
+                == Bouwkundigelementdetailsoort.aanrecht.code
+                and aanrecht.lengte
+                and aanrecht.lengte >= 1000
+            ]
         )
 
         if not ruimte.detail_soort or not ruimte.detail_soort.code:
@@ -119,6 +127,7 @@ class Keuken(Stelselgroep):
             aanrecht_aantal == 0
         ):  # ruimte is geen keuken want heeft geen aanrecht en is geen expliciete keuken
             return False
+
         return True  # ruimte is geen specifieke keuken maar heeft een aanrecht
 
     @staticmethod
