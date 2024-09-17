@@ -409,3 +409,7 @@ Dit is aangekaart in deze twee issues:
 ### Datum afsluiten huurovereenkomst
 
 Voor een correcte waardering van rijksmonumenten dient de afsluitings datum van de huurovereenkomst opgegeven te worden. In de VERA standaard bestaat binnen het BVG domein geen model dat deze informatie bevat. Het VERA model `EenhedenEenheid` is uitgebreid met het attribuut `datum_afsluiten_huurovereenkomst`.
+
+### BOUWKUNDIGELEMENTDETAILSOORT aanbelfunctie met video- en audioverbinding
+
+De VERA-referentiedata biedt nog geen mogelijkheid om aan te geven dat een eenheid is voorzien van een aanbelfunctie met video- en audioverbinding. Daarom hebben we een nieuwe BOUWKUNDIGELEMENTDETAILSOORT toegevoegd. Om in aanmerking te komen voor waardering, moet dit bouwkundig element worden gespecificeerd voor een van de ruimten binnen de eenheid. Meer informatie is te vinden op: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/148

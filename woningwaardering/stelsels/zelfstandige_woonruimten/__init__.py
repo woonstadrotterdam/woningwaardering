@@ -1,3 +1,4 @@
+from .bijzondere_voorzieningen import BijzondereVoorzieningen
 from .buitenruimten import Buitenruimten
 from .energieprestatie import Energieprestatie
 from .keuken import Keuken
@@ -18,4 +19,5 @@ __all__ = [
     "Buitenruimten",
     "PuntenVoorDeWozWaarde",
     "PrijsopslagMonumentenEnNieuwbouw",
+    "BijzondereVoorzieningen",
 ]
