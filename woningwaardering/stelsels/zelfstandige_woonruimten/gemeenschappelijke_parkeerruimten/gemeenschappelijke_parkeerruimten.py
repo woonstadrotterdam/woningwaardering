@@ -1,6 +1,5 @@
 from datetime import date
 from decimal import Decimal
-from typing import Literal
 import warnings
 
 from loguru import logger
@@ -10,7 +9,6 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -25,14 +23,16 @@ from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
     Bouwkundigelementdetailsoort,
 )
 from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.utils import aantal_bouwkundige_elementen
+from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class GemeenschappelijkeParkeerruimten(Stelselgroep):
-    type_parkeerpunten = {
-        "type_I": Decimal("9.0"),
-        "type_II": Decimal("6.0"),
-        "type_III": Decimal("3.0"),
+    parkeertype_punten_mapping = {
+        Ruimtedetailsoort.parkeervak_auto_binnen.code: {"Type I": Decimal("9.0")},
+        Ruimtedetailsoort.carport.code: {"Type II": Decimal("6.0")},
+        Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code: {
+            "Type III": Decimal("3.0")
+        },
     }
 
     def __init__(
@@ -65,129 +65,127 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
+        max_gedeeld_met_aantal_eenheden = 1
+
         if eenheid.ruimten is None:
             warnings.warn(f"Eenheid {eenheid.id} heeft geen 'ruimten'")
             return woningwaardering_groep
 
         for ruimte in eenheid.ruimten:
-            type_parkeerruimte = GemeenschappelijkeParkeerruimten.bepaal_type_gemeenschappelijke_parkeerruimten(
-                ruimte
-            )
-
-            if type_parkeerruimte is not None:
-                criterium = f"{type_parkeerruimte} gedeeld met {ruimte.gedeeld_met_aantal_eenheden} eenheden"
-
-                punten_voor_deling = self.type_parkeerpunten[type_parkeerruimte]
-
-                # TODO: what if parkeergarage/parkeerterrein met meedere laadpalen? worden deze laadpalen allemaal op de ruimte gezet?
-                aantal_laadpaden = aantal_bouwkundige_elementen(
-                    ruimte, Bouwkundigelementdetailsoort.laadpaal
-                )
-
-                punten_voor_deling += Decimal("2.0") * Decimal(str(aantal_laadpaden))
-
-                if aantal_laadpaden > 0:
-                    logger.info(
-                        f"Ruimte {ruimte.id} heeft {aantal_laadpaden} laadpalen"
-                    )
-                    criterium += f" + {aantal_laadpaden} {'laadpalen' if aantal_laadpaden > 1 else 'laadpaal'}"
-
-                punten: Decimal = utils.rond_af_op_kwart(
-                    punten_voor_deling
-                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                )
-
-                woningwaardering = WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=criterium
-                    ),
-                    punten=float(punten),
-                )
-
-                woningwaardering_groep.woningwaarderingen.append(woningwaardering)
-
-            else:
-                logger.info(
-                    f"Ruimte {ruimte.id} is geen gedeelde parkeerruimte en komt niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
-                )
-                continue
-
-        punten = utils.rond_af(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-            decimalen=0,
-        )
-
-        woningwaardering_groep.punten = float(punten)
-
-        logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}"
-        )
-        return woningwaardering_groep
-
-    @staticmethod
-    def bepaal_type_gemeenschappelijke_parkeerruimten(
-        ruimte: EenhedenRuimte,
-    ) -> Literal["type_I", "type_II", "type_III"] | None:
-        if ruimte.oppervlakte is None:
-            warnings.warn(f"Ruimte {ruimte.id} heeft geen 'oppervlakte'")
-            return None
-
-        if (
-            classificeer_ruimte(ruimte) is None
-            and ruimte.gedeeld_met_aantal_eenheden is not None
-            and ruimte.gedeeld_met_aantal_eenheden > 1
-        ):
+            # Het beleidsboek geeft niet aan hoe er punten gegeven moeten worden voor onderstaande ruimtes
             if ruimte.code in [
-                Ruimtedetailsoort.parkeervak_auto_binnen.code,
                 Ruimtedetailsoort.parkeervak_motorfiets_binnen.code,
                 Ruimtedetailsoort.parkeervak_scootmobiel_binnen.code,
-            ]:
-                # Er is voor gekozen om een parkeervak_auto_binnen te toetsen op de oppervlakte eis van een parkeervak
-                if ruimte.code == Ruimtedetailsoort.parkeervak_auto_binnen.code:
-                    if not ruimte.oppervlakte >= 12.0:
-                        logger.info(
-                            f"Ruimte {ruimte.id} voldoet niet aan de eisen van 12m2 voor een parkeervakn"
-                        )
-                        return None
-
-                logger.info(
-                    f"Ruimte {ruimte.id} is een gemeenschappelijke parkeerruimte type_I"
-                )
-                return "type_I"
-            elif ruimte.code in [
-                Ruimtedetailsoort.carport.code,
                 Ruimtedetailsoort.stalling_extern.code,
                 Ruimtedetailsoort.stalling_intern.code,
-            ]:
-                # Er is voor gekozen om een carport te toetsen op de oppervlakte eis van een parkeervak
-                if ruimte.code == Ruimtedetailsoort.carport.code:
-                    if not ruimte.oppervlakte >= 12.0:
-                        logger.info(
-                            f"Ruimte {ruimte.id} voldoet niet aan de eisen van 12m2 voor een parkeervak"
-                        )
-                        return None
-
-                logger.info(
-                    f"Ruimte {ruimte.id} is een gemeenschappelijke parkeerruimte type_II"
-                )
-                return "type_II"
-
-            elif ruimte.code in [
-                Ruimtedetailsoort.parkeerterrein.code,
-                Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code,
                 Ruimtedetailsoort.parkeervak_motorfiets_buiten_niet_overdekt.code,
                 Ruimtedetailsoort.parkeervak_scootmobiel_buiten.code,
             ]:
-                logger.info(
-                    f"Ruimte {ruimte.id} is een gemeenschappelijke parkeerruimte type_III"
+                logger.warning(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een parkeerplek die niet gewaardeerd wordt in het woningwaardering stelsel volgens het beleidsboek."
                 )
-                return "type_III"
+                continue
 
-        return None
+            if ruimte.code in [
+                Ruimtedetailsoort.parkeerterrein.code,
+                Ruimtedetailsoort.parkeergarage.code,
+            ]:
+                logger.warning(
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een {Ruimtedetailsoort.parkeerterrein.naam if ruimte.code==Ruimtedetailsoort.parkeerterrein.code else Ruimtedetailsoort.parkeergarage.naam} en kan momenteel niet gewaardeerd worden in de woningwaardering package. Voeg parkeerplekken los toe aan de eenheden om deze in aanmerking te laten komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
+                )
+                continue
+
+            if ruimte.code not in [
+                Ruimtedetailsoort.parkeervak_auto_binnen.code,
+                Ruimtedetailsoort.carport.code,
+                Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code,
+            ]:
+                logger.info(
+                    f"Ruimte {ruimte.id} is geen gemeenschappelijke parkeerruimte en wordt niet gewaardeerd onder rubriek {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
+                )
+                continue
+
+            if classificeer_ruimte(ruimte) is not None:
+                logger.info(
+                    f"Eenheid {eenheid.id} wordt gewaardeerd onder de rubriek {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}."
+                )
+                continue
+
+            if ruimte.oppervlakte is None:
+                warnings.warn(f"Ruimte {ruimte.id} heeft geen 'oppervlakte'")
+                continue
+
+            if not ruimte.oppervlakte >= 12.0:
+                logger.info(
+                    f"Ruimte {ruimte.id} voldoet niet aan de eisen van 12m2 voor een parkeervak"
+                )
+                continue
+
+            for criterium, punten in self.parkeertype_punten_mapping[
+                ruimte.code
+            ].items():
+                if heeft_bouwkundig_element(
+                    ruimte, Bouwkundigelementdetailsoort.laadpaal
+                ):  # gaat uit van 1 laadpaal per parkeervak
+                    punten += Decimal("2.0")
+                    criterium += " + laadpaal"
+
+                logger.info(
+                    f"Ruimte {ruimte.id} is een gemeenschappelijke parkeerruimte {criterium}"
+                )
+
+                # update de max_gedeeld_met_aantal_eenheden variabele
+                if ruimte.gedeeld_met_aantal_eenheden is not None:
+                    if (
+                        ruimte.gedeeld_met_aantal_eenheden
+                        > max_gedeeld_met_aantal_eenheden
+                    ):
+                        max_gedeeld_met_aantal_eenheden = (
+                            ruimte.gedeeld_met_aantal_eenheden
+                        )
+
+                woningwaardering_groep.woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam=criterium
+                        ),
+                        punten=punten,
+                    ),
+                )
+
+        punten_totaal = float(
+            utils.rond_af_op_kwart(
+                Decimal(
+                    str(
+                        sum(
+                            woningwaardering.punten
+                            for woningwaardering in woningwaardering_groep.woningwaarderingen
+                            or []
+                            if woningwaardering.punten is not None
+                        )
+                    )
+                )
+                / Decimal(str(max_gedeeld_met_aantal_eenheden))
+            )
+        )
+
+        if punten_totaal > 0:
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Gedeeld met aantal eenheden",
+                        aantal=max_gedeeld_met_aantal_eenheden,
+                    )
+                )
+            )
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {punten_totaal} punten voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}"
+        )
+
+        woningwaardering_groep.punten = punten_totaal
+
+        return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
