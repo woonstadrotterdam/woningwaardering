@@ -11,19 +11,19 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 35.0,
+      "punten": 34.0,
       "woningwaarderingen": [
         {
           "criterium": {
             "naam": "Onderdeel I"
           },
-          "punten": 16.97
+          "punten": 16.5
         },
         {
           "criterium": {
             "naam": "Onderdeel II"
           },
-          "punten": 18.0
+          "punten": 17.45
         }
       ]
     }

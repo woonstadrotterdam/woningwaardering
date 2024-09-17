@@ -208,13 +208,40 @@
       "punten": 0.0,
       "woningwaarderingen": [],
       "opslagpercentage": 0.0
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "punten": 37.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Onderdeel I"
+          },
+          "punten": 18.7
+        },
+        {
+          "criterium": {
+            "naam": "Onderdeel II"
+          },
+          "punten": 18.26
+        }
+      ]
     }
   ],
-  "maximaleHuur": 614.53,
-  "punten": 105.0,
+  "maximaleHuur": 846.85,
+  "punten": 142.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 614.53
+  "maximaleHuurInclusiefOpslag": 846.85
 }
