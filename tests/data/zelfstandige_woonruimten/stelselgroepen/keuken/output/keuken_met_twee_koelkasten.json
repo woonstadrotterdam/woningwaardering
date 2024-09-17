@@ -14,13 +14,6 @@
       "punten": 6.0,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
-          "criterium": {
-            "naam": "Inbouw koelkast (in zelfde ruimte)"
-          },
-          "punten": 2.0
-        },
-        {
           "aantal": 1000.0,
           "criterium": {
             "naam": "Lengte aanrecht",
@@ -30,6 +23,13 @@
             }
           },
           "punten": 4.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Inbouw koelkast (in zelfde ruimte)"
+          },
+          "punten": 2.0
         }
       ]
     }
