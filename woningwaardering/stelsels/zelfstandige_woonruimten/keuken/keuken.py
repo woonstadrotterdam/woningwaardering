@@ -112,10 +112,11 @@ class Keuken(Stelselgroep):
         ]:
             if aanrecht_aantal == 0:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken, maar heeft geen aanrecht en kan daardoor niet gewaardeerd worden.",
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >=1000mm) en mag daardoor niet gewaardeerd worden voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}.",
                     UserWarning,
                 )
-            return True  # ruimte is een keuken
+                return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
+            return True  # ruimte is een keuken met een valide aanrecht
         if ruimte.detail_soort.code not in [
             Ruimtedetailsoort.woonkamer.code,
             Ruimtedetailsoort.woon_en_of_slaapkamer.code,
@@ -125,10 +126,10 @@ class Keuken(Stelselgroep):
 
         if (
             aanrecht_aantal == 0
-        ):  # ruimte is geen keuken want heeft geen aanrecht en is geen expliciete keuken
+        ):  # ruimte is geen keuken want heeft geen valide aanrecht
             return False
 
-        return True  # ruimte is geen specifieke keuken maar heeft een aanrecht
+        return True  # ruimte is een impliciete keuken vanwege een valide aanrecht
 
     @staticmethod
     def punten_voor_voorziening(
@@ -140,8 +141,46 @@ class Keuken(Stelselgroep):
                 f"Ruimte {ruimte.naam} ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor keukenvoorzieningen"
             )
             return 0
+        totaal_punten = 0
+        totaal_lengte_aanrechten = 0
+        # deze loop is voor de lengte van de aanrechten
+        for element in ruimte.bouwkundige_elementen or []:
+            if not element.detail_soort or not element.detail_soort.code:
+                warnings.warn(
+                    f"Bouwkundig element {element.id} heeft geen detail_soort.code en kan daardoor niet gewaardeerd worden.",
+                    UserWarning,
+                )
+                continue
+            if element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code:
+                if not element.lengte:
+                    warnings.warn(
+                        f"{Bouwkundigelementdetailsoort.aanrecht.naam} {element.id} heeft geen lengte en kan daardoor niet gewaardeerd worden.",
+                        UserWarning,
+                    )
+                    continue
+                if element.lengte < 1000:
+                    aanrecht_punten = 0
+                    totaal_lengte_aanrechten += element.lengte
+                elif element.lengte >= 2000:
+                    aanrecht_punten = 7
+                    totaal_lengte_aanrechten += element.lengte
+                else:
+                    aanrecht_punten = 4
+                    totaal_lengte_aanrechten += element.lengte
+                totaal_punten += aanrecht_punten
+                woningwaarderingen.append(
+                    WoningwaarderingResultatenWoningwaardering(
+                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                            naam=f"Lengte {element.naam.lower() if element.naam else Bouwkundigelementdetailsoort.aanrecht.naam.lower()}",
+                            meeteenheid=Meeteenheid.millimeter.value,
+                        ),
+                        punten=aanrecht_punten,
+                        aantal=element.lengte,
+                    )
+                )
         # extra voorzieningen
-        lookup_dict = {
+        punten_voor_extra_voorzieningen = 0
+        punten_per_installatie = {
             Installatiesoort.inbouw_afzuiginstallatie.value: 0.75,
             Installatiesoort.inbouw_kookplaat_inductie.value: 1.75,
             Installatiesoort.inbouw_kookplaat_keramisch.value: 1.0,
@@ -159,14 +198,13 @@ class Keuken(Stelselgroep):
         }
 
         voorziening_counts: dict[Referentiedata, int] = {}
-        total_points = 0.0
         # tel aantal voorzieningen per type
         for voorziening in ruimte.installaties or []:
-            if voorziening in lookup_dict:
+            if voorziening in punten_per_installatie:
                 voorziening_counts[voorziening] = (
                     voorziening_counts.get(voorziening, 0) + 1
                 )
-                total_points += lookup_dict[voorziening]
+                punten_voor_extra_voorzieningen += punten_per_installatie[voorziening]
         # voeg punten toe voor elk type voorziening
         for voorziening, count in voorziening_counts.items():
             woningwaarderingen.append(
@@ -176,43 +214,25 @@ class Keuken(Stelselgroep):
                         if count > 1
                         else voorziening.naam,
                     ),
-                    punten=utils.rond_af(lookup_dict[voorziening] * count, decimalen=2),
+                    punten=utils.rond_af(
+                        punten_per_installatie[voorziening] * count, decimalen=2
+                    ),
                     aantal=count,
                 )
             )
-        for element in ruimte.bouwkundige_elementen or []:
-            # aanrecht
-            if not element.detail_soort or not element.detail_soort.code:
-                warnings.warn(
-                    f"Bouwkundig element {element.id} heeft geen detail_soort.code en kan daardoor niet gewaardeerd worden.",
-                    UserWarning,
+
+        max_punten_voorzieningen = 7 if totaal_lengte_aanrechten >= 2000 else 4
+        if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
+            aftrek = max_punten_voorzieningen - punten_voor_extra_voorzieningen
+            woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam=f"Max. {max_punten_voorzieningen} punten voor een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
+                    ),
+                    punten=aftrek,
                 )
-                continue
-            if element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code:
-                if not element.lengte:
-                    warnings.warn(
-                        f"{Bouwkundigelementdetailsoort.aanrecht.naam} {element.id} heeft geen lengte en kan daardoor niet gewaardeerd worden.",
-                        UserWarning,
-                    )
-                    continue
-                if element.lengte < 1000:
-                    punten = 0
-                elif element.lengte >= 2000:
-                    punten = 7
-                else:
-                    punten = 4
-                total_points += punten
-                woningwaarderingen.append(
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"Lengte {Bouwkundigelementdetailsoort.aanrecht.naam.lower() if Bouwkundigelementdetailsoort.aanrecht.naam else 'aanrecht'}",
-                            meeteenheid=Meeteenheid.millimeter.value,
-                        ),
-                        punten=punten,
-                        aantal=element.lengte,
-                    )
-                )
-        return total_points
+            )
+        return totaal_punten
 
 
 if __name__ == "__main__":  # pragma: no cover
