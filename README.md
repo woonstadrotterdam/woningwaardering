@@ -178,7 +178,6 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     EenhedenWoonplaats,
     EenhedenWozEenheid,
-    Referentiedata,
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
@@ -208,9 +207,7 @@ eenheid = EenhedenEenheid(
     ),
     panden=[
         EenhedenPand(
-            soort=Referentiedata(
-                code=Pandsoort.eengezinswoning.code, naam=Pandsoort.eengezinswoning.naam
-            )
+            soort=Pandsoort.eengezinswoning.value,
         )
     ],
     woz_eenheden=[
@@ -219,21 +216,12 @@ eenheid = EenhedenEenheid(
     ],
     energieprestaties=[
         EenhedenEnergieprestatie(
-            soort=Referentiedata(
-                code=Energieprestatiesoort.energie_index.code,
-                naam=Energieprestatiesoort.energie_index.naam,
-            ),
-            status=Referentiedata(
-                code=Energieprestatiestatus.definitief.code,
-                naam=Energieprestatiestatus.definitief.naam,
-            ),
+            soort=Energieprestatiesoort.energie_index.value,
+            status=Energieprestatiestatus.definitief.value,
             begindatum=date(2019, 2, 25),
             einddatum=date(2029, 2, 25),
             registratiedatum="2019-02-26T14:51:38+01:00",
-            label=Referentiedata(
-                code=Energielabel.c.code,
-                naam=Energielabel.c.naam,
-            ),
+            label=Energielabel.c.value,
             waarde="1.58",
         )
     ],
@@ -241,14 +229,8 @@ eenheid = EenhedenEenheid(
     ruimten=[
         EenhedenRuimte(
             id="Space_108014589",
-            soort=Referentiedata(
-                code=Ruimtesoort.vertrek.code,
-                naam=Ruimtesoort.vertrek.naam,
-            ),
-            detailSoort=Referentiedata(
-                code=Ruimtedetailsoort.slaapkamer.code,
-                naam=Ruimtedetailsoort.slaapkamer.naam,
-            ),
+            soort=Ruimtesoort.vertrek.value,
+            detailSoort=Ruimtedetailsoort.slaapkamer.value,
             naam="Slaapkamer",
             inhoud=60.4048,
             oppervlakte=21.047,
@@ -257,14 +239,8 @@ eenheid = EenhedenEenheid(
         ),
         EenhedenRuimte(
             id="Space_108006229",
-            soort=Referentiedata(
-                code=Ruimtesoort.vertrek.code,
-                naam=Ruimtesoort.vertrek.naam,
-            ),
-            detailSoort=Referentiedata(
-                code=Ruimtedetailsoort.keuken.code,
-                naam=Ruimtedetailsoort.keuken.naam,
-            ),
+            soort=Ruimtesoort.vertrek.value,
+            detailSoort=Ruimtedetailsoort.keuken.value,
             naam="Keuken",
             inhoud=57.4359,
             oppervlakte=20.3673,
@@ -276,14 +252,8 @@ eenheid = EenhedenEenheid(
                     id_bimmodel="3ZBiDoTKz0JfnjhzfVcYcF",
                     naam="Aanrecht",
                     omschrijving="Aanrecht in Keuken",
-                    soort=Referentiedata(
-                        code=Bouwkundigelementsoort.voorziening.code,
-                        naam=Bouwkundigelementsoort.voorziening.naam,
-                    ),
-                    detailSoort=Referentiedata(
-                        code=Bouwkundigelementdetailsoort.aanrecht.code,
-                        naam=Bouwkundigelementdetailsoort.aanrecht.naam,
-                    ),
+                    soort=Bouwkundigelementsoort.voorziening.value,
+                    detailSoort=Bouwkundigelementdetailsoort.aanrecht.value,
                     lengte=2700,
                 )
             ],
