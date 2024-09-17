@@ -141,8 +141,8 @@ class Keuken(Stelselgroep):
                 f"Ruimte {ruimte.naam} ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor keukenvoorzieningen"
             )
             return 0
-        totaal_punten = 0
-        totaal_lengte_aanrechten = 0
+        totaal_punten = 0.0
+        totaal_lengte_aanrechten = 0.0
         # deze loop is voor de lengte van de aanrechten
         for element in ruimte.bouwkundige_elementen or []:
             if not element.detail_soort or not element.detail_soort.code:
@@ -171,7 +171,7 @@ class Keuken(Stelselgroep):
                 woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"Lengte {element.naam.lower() if element.naam else Bouwkundigelementdetailsoort.aanrecht.naam.lower()}",
+                            naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                             meeteenheid=Meeteenheid.millimeter.value,
                         ),
                         punten=aanrecht_punten,
@@ -179,7 +179,7 @@ class Keuken(Stelselgroep):
                     )
                 )
         # extra voorzieningen
-        punten_voor_extra_voorzieningen = 0
+        punten_voor_extra_voorzieningen = 0.0
         punten_per_installatie = {
             Installatiesoort.inbouw_afzuiginstallatie.value: 0.75,
             Installatiesoort.inbouw_kookplaat_inductie.value: 1.75,
