@@ -1,12 +1,13 @@
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
+from typing import Callable, List, Tuple
+import warnings
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
-from rdflib import Graph, Literal, Namespace
-from rdflib.plugins.sparql import prepareQuery
+from SPARQLWrapper import SPARQLWrapper2
 
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -112,7 +113,7 @@ def naar_tabel(
             if woningwaardering.aantal is not None
         ]
 
-        subtotaal = float(sum(aantallen)) if aantallen else None
+        subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
 
         if (
             (subtotaal is not None or aantal_waarderingen > 1)
@@ -225,32 +226,8 @@ def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-CEO = Namespace("https://linkeddata.cultureelerfgoed.nl/def/ceo#")
-BAG = Namespace("http://bag.basisregistraties.overheid.nl/bag/id/")
-
-endpoint = "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
-
-
-query_template = """
-ASK
-WHERE {{
-    SERVICE <{endpoint}> {{
-        ?monument a ceo:Rijksmonument .
-        ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
-        ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
-        ?bagRelatie ceo:verblijfsobjectIdentificatie ?verblijfsobjectIdentificatie .
-    }}
-}}
-"""
-
-rijksmonumenten_query = prepareQuery(
-    query_template.format(endpoint=endpoint), initNs={"ceo": CEO, "bag": BAG}
-)
-
-
 def energieprestatie_met_geldig_label(
-    peildatum: date,
-    eenheid: EenhedenEenheid,
+    peildatum: date, eenheid: EenhedenEenheid
 ) -> EenhedenEnergieprestatie | None:
     """
     Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
@@ -260,52 +237,86 @@ def energieprestatie_met_geldig_label(
         eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
 
     Returns:
-        EenhedenEnergieprestatie | None: De eerste geldige energieprestatie met een energielabel en None Wanneer er geen geldige energieprestatie met label is gevonden.
+        EenhedenEnergieprestatie | None: De eerst geldige energieprestatie en None wanneer er geen geldige energieprestatie met label is gevonden.
     """
-    if eenheid.energieprestaties is not None:
-        for energieprestatie in eenheid.energieprestaties:
-            if (
-                energieprestatie.registratiedatum
-                and energieprestatie.soort
-                and energieprestatie.soort.code
-                and energieprestatie.status
-                and energieprestatie.status.code
-                and energieprestatie.begindatum
-                and energieprestatie.einddatum
-                and energieprestatie.label
-                and (
-                    energieprestatie.soort.code
-                    in [
-                        Energieprestatiesoort.energie_index.code,
-                        Energieprestatiesoort.primair_energieverbruik_woningbouw.code,
-                        Energieprestatiesoort.voorlopig_energielabel.code,  # Een voorlopig energie_label kan ook als status definitief zijn, want dit is het soort energie label gemeten met de meetmethode van voor 2015.
-                    ]
-                )
-                and (
-                    energieprestatie.begindatum < peildatum < energieprestatie.einddatum
-                    and energieprestatie.status.code
-                    == Energieprestatiestatus.definitief.code
-                )
-                and (
-                    # Check of de registratie niet ouder is dan 10 jaar
-                    energieprestatie.registratiedatum
-                    > (
-                        datetime.combine(peildatum, time.min).astimezone()
-                        - relativedelta(years=10)
-                    )
-                )
-            ):
-                logger.info("Energieprestatie met geldig label gevonden")
-                logger.debug(f"Energieprestatie: {energieprestatie}")
-                return energieprestatie
 
-    logger.info("Geen geldige energieprestatie met label gevonden")
+    if eenheid.energieprestaties is None:
+        warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
+        return None
+
+    vereiste_attributen: List[
+        Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]
+    ] = [
+        ("registratiedatum", lambda ep: ep.registratiedatum is not None),
+        ("soort", lambda ep: ep.soort is not None and ep.soort.code is not None),
+        ("status", lambda ep: ep.status is not None and ep.status.code is not None),
+        ("begindatum", lambda ep: ep.begindatum is not None),
+        ("einddatum", lambda ep: ep.einddatum is not None),
+        ("label", lambda ep: ep.label is not None and ep.label.code is not None),
+    ]
+
+    for energieprestatie in eenheid.energieprestaties:
+        logger.debug(f"Eenheid {eenheid.id}: valideer energieprestatie.")
+        ontbrekende_attributen = [
+            naam for naam, check in vereiste_attributen if not check(energieprestatie)
+        ]
+        if ontbrekende_attributen:
+            logger.debug(
+                f"Eenheid {eenheid.id} mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
+            )
+            continue
+
+        # vanwege het gebruik van mypy wordt in de code hieronder de check op attributen nogmaals uitgevoerd, maar deze kunnen op dit moment niet meer None zijn
+        if (
+            energieprestatie.soort and energieprestatie.soort.code
+        ) and energieprestatie.soort.code not in {
+            Energieprestatiesoort.energie_index.code,
+            Energieprestatiesoort.primair_energieverbruik_woningbouw.code,
+            Energieprestatiesoort.voorlopig_energielabel.code,
+        }:
+            logger.debug(
+                f"Eenheid {eenheid.id}: Ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
+            )
+            continue
+
+        if (energieprestatie.begindatum and energieprestatie.einddatum) and not (
+            energieprestatie.begindatum <= peildatum < energieprestatie.einddatum
+        ):
+            logger.debug(
+                f"Eenheid {eenheid.id}: Peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
+            )
+            continue
+
+        if (energieprestatie.status and energieprestatie.status.code) and (
+            energieprestatie.status.code != Energieprestatiestatus.definitief.code
+        ):
+            logger.debug(
+                f"Eenheid {eenheid.id}: Energieprestatie status is niet definitief."
+            )
+            continue
+
+        if energieprestatie.registratiedatum and (
+            energieprestatie.registratiedatum
+            <= (
+                datetime.combine(peildatum, time.min).astimezone()
+                - relativedelta(years=10)
+            )
+        ):
+            logger.debug(
+                f"Eenheid {eenheid.id}: Registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
+            )
+            continue
+
+        logger.info(f"Eenheid {eenheid.id}: Geldige energieprestatie gevonden.")
+        logger.debug(f"Energieprestatie: {energieprestatie}")
+        return energieprestatie
+
+    logger.info(f"Eenheid {eenheid.id}: Geen geldige energieprestatie gevonden.")
     return None
 
 
 def rond_af(
-    getal: float | None | Decimal,
-    decimalen: int,
+    getal: float | None | Decimal, decimalen: int, rounding: str | None = ROUND_HALF_UP
 ) -> Decimal:
     """
     Rondt een getal af op een bepaald aantal decimalen volgens de standaard afrondingsregels (arithmetic).
@@ -313,6 +324,7 @@ def rond_af(
     Args:
         getal (float | None | Decimal): Het getal om af te ronden.
         decimalen (int): Het aantal decimalen na de komma om op af te ronden.
+        rounding (str | None, optional): Het type afrondingsregel. Default is ROUND_HALF_UP.
 
     Returns:
         Decimal: Het afgeronde getal.
@@ -322,28 +334,143 @@ def rond_af(
     """
     if getal is None:
         raise ValueError("Kan None niet afronden")
-    return Decimal(str(getal)).quantize(
-        Decimal(f"1e{-decimalen}"), rounding=ROUND_HALF_UP
+    return Decimal(str(getal)).quantize(Decimal(f"1e{-decimalen}"), rounding=rounding)
+
+
+def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
+    """
+    Rond een getal af op een kwart.
+
+    Args:
+        getal (float | None | Decimal): Het getal om af te ronden.
+
+    Returns:
+        Decimal: Het afgeronde getal.
+
+    Raises:
+        ValueError: als de input None is.
+    """
+    if getal is None:
+        raise ValueError("Kan None niet afronden")
+    kwart = Decimal("0.25")
+    return (Decimal(getal) / kwart).quantize(
+        Decimal("1"), rounding=ROUND_HALF_UP
+    ) * kwart
+
+
+endpoint_cultureelerfgoed = (
+    "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
+)
+endpoint_kadaster = (
+    "https://api.labs.kadaster.nl/datasets/dst/kkg/services/default/sparql"
+)
+
+rijksmonumenten_query_template = """
+PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
+PREFIX bag:<http://bag.basisregistraties.overheid.nl/bag/id/>
+
+ASK
+WHERE {{
+    ?monument a ceo:Rijksmonument .
+    ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
+    ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
+    ?bagRelatie ceo:verblijfsobjectIdentificatie "{verblijfsobject_identificatie}" .
+}}
+"""
+
+
+beschermd_gezicht_query_template = """
+PREFIX sor: <https://data.kkg.kadaster.nl/sor/model/def/>
+PREFIX nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
+PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
+PREFIX rn:<https://data.cultureelerfgoed.nl/term/id/rn/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof:<http://www.opengis.net/def/function/geosparql/>
+ASK
+WHERE {{
+  SERVICE <{endpoint_kadaster}> {{
+      ?verblijfsobject sor:geregistreerdMet/nen3610:identificatie "{verblijfsobject_identificatie}".
+      ?verblijfsobject geo:hasGeometry/geo:asWKT ?verblijfsobjectWkt.
+  }}
+  ?gezicht a ceo:Gezicht ;
+      ceo:heeftGeometrie ?gezichtGeometrie ;
+      ceo:heeftGezichtsstatus rn:fd968529-bf70-4afa-8564-7c6c2fcfcc54;
+      ceo:heeftNaam/ceo:naam ?naam.
+  ?gezichtGeometrie geo:asWKT ?gezichtWkt.
+  filter(geof:sfWithin(?verblijfsobjectWkt, ?gezichtWkt))
+}}
+"""
+
+
+def is_rijksmonument(verblijfsobject_identificatie: str) -> bool | None:
+    """
+    Controleert of een verblijfsobject een rijksmonument is.
+
+    Args:
+        verblijfsobject_identificatie (str): De identificatie van het verblijfsobject.
+
+    Returns:
+        bool | None: True als het verblijfsobject een rijksmonument is, False anders, of None bij een fout.
+
+    Raises:
+        ValueError: Als verblijfsobject_identificatie niet numeriek is.
+    """
+    if not verblijfsobject_identificatie.isnumeric():
+        raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
+
+    rijksmonumenten_query = rijksmonumenten_query_template.format(
+        verblijfsobject_identificatie=verblijfsobject_identificatie,
     )
 
+    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql.setQuery(rijksmonumenten_query)
+    result = sparql.queryAndConvert()
 
-def is_rijksmonument(verblijfsobjectIdentificatie: str) -> bool:
-    if not str.isnumeric(verblijfsobjectIdentificatie):
-        raise ValueError("VerblijfsobjectIdentificatie moet numeriek zijn")
+    if isinstance(result, dict):
+        rijksmonument = result.get("boolean")
+        if isinstance(rijksmonument, bool):
+            return rijksmonument
 
-    graph = Graph()
+    logger.warning(
+        f"Onverwacht resultaat bij ophalen rijksmonument voor verblijfsobject identificatie {verblijfsobject_identificatie}"
+    )
+    return None
 
-    result = graph.query(
-        rijksmonumenten_query,
-        initBindings={
-            "verblijfsobjectIdentificatie": Literal(verblijfsobjectIdentificatie),
-        },
+
+def is_beschermd_gezicht(verblijfsobject_identificatie: str) -> bool | None:
+    """
+    Controleert of een verblijfsobject tot een beschermd gezicht behoort.
+
+    Args:
+        verblijfsobject_identificatie (str): De identificatie van het verblijfsobject.
+
+    Returns:
+        bool | None: True als het verblijfsobject tot een beschermd gezicht behoort, False anders, of None bij een fout.
+
+    Raises:
+        ValueError: Als verblijfsobject_identificatie niet numeriek is.
+    """
+    if not verblijfsobject_identificatie.isnumeric():
+        raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
+
+    beschermd_gezicht_query = beschermd_gezicht_query_template.format(
+        endpoint_kadaster=endpoint_kadaster,
+        verblijfsobject_identificatie=verblijfsobject_identificatie,
     )
 
-    if result is None or result.askAnswer is None:
-        return False
-    else:
-        return result.askAnswer
+    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql.setQuery(beschermd_gezicht_query)
+    result = sparql.queryAndConvert()
+
+    if isinstance(result, dict):
+        rijksmonument = result.get("boolean")
+        if isinstance(rijksmonument, bool):
+            return rijksmonument
+
+    logger.warning(
+        f"Onverwacht resultaat bij ophalen beschermd gezicht voor verblijfsobject identificatie {verblijfsobject_identificatie}"
+    )
+    return None
 
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
@@ -353,16 +480,26 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         eenheid.adresseerbaar_object_basisregistratie is not None
         and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie is not None
     ):
-        is_rijksmonument(
-            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
-        )
         rijksmonument = is_rijksmonument(
             eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
         )
-        logger.info(
-            f"Eenheid {eenheid.id} met verblijfsobjectIdentificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie} is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+
+        if rijksmonument is not None:
+            logger.info(
+                f"Eenheid {eenheid.id} is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+            )
+            if rijksmonument:
+                eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+
+        beschermd_gezicht = is_beschermd_gezicht(
+            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
         )
-        if rijksmonument:
-            eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+
+        if beschermd_gezicht is not None:
+            logger.info(
+                f"Eenheid {eenheid.id} {'behoort' if beschermd_gezicht else 'behoort niet'} tot een beschermd stads- of dorpsgezicht volgens de api van cultureelerfgoed."
+            )
+            if beschermd_gezicht:
+                eenheid.monumenten.append(Eenheidmonument.beschermd_stadsgezicht.value)
 
     return eenheid

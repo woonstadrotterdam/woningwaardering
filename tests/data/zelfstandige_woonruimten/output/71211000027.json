@@ -86,10 +86,10 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 6.75,
+      "punten": 7.0,
       "woningwaarderingen": [
         {
-          "aantal": 4.4,
+          "aantal": 11.07,
           "criterium": {
             "naam": "Zolder",
             "meeteenheid": {
@@ -97,6 +97,12 @@
               "naam": "Vierkante meter, m2"
             }
           }
+        },
+        {
+          "criterium": {
+            "naam": "Correctie: zolder zonder vaste trap"
+          },
+          "punten": -5.0
         },
         {
           "aantal": 5.05,
@@ -117,47 +123,90 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "VZE",
-          "naam": "Verwarming"
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
         }
       },
       "punten": 12.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Woonkamer"
+            "naam": "Woonkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Keuken"
+            "naam": "Keuken (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer"
+            "naam": "Slaapkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer"
+            "naam": "Slaapkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer"
+            "naam": "Slaapkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Badruimte"
+            "naam": "Badruimte (verwarmd vertrek)"
           },
           "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 15.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 4.62,
+          "criterium": {
+            "naam": "Tuin (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.62
+        },
+        {
+          "aantal": 34.41,
+          "criterium": {
+            "naam": "Tuin (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 14.04
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 15 punten"
+          },
+          "punten": -2.75
         }
       ]
     },
@@ -176,7 +225,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "D (oud)"
+            "naam": "D (Energie-index)"
           },
           "punten": 14.0
         }
@@ -189,95 +238,13 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "SAN",
-          "naam": "Sanitair"
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
         }
       },
-      "punten": 9.0,
-      "woningwaarderingen": [
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Closetcombinatie"
-          },
-          "punten": 3.0
-        },
-        {
-          "aantal": 2.0,
-          "criterium": {
-            "naam": "Wastafel"
-          },
-          "punten": 2.0
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Douche"
-          },
-          "punten": 4.0
-        }
-      ]
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "KEU",
-          "naam": "Keuken"
-        }
-      },
-      "punten": 7.0,
-      "woningwaarderingen": [
-        {
-          "aantal": 3000.0,
-          "criterium": {
-            "naam": "Lengte aanrecht",
-            "meeteenheid": {
-              "code": "MIL",
-              "naam": "Millimeter"
-            }
-          },
-          "punten": 7.0
-        }
-      ]
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "PRI",
-          "naam": "Privé-buitenruimten"
-        }
-      },
-      "punten": 4.0,
-      "woningwaarderingen": [
-        {
-          "aantal": 4.62,
-          "criterium": {
-            "naam": "Tuin",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 34.41,
-          "criterium": {
-            "naam": "Tuin",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        }
-      ]
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
     },
     {
       "criteriumGroep": {
@@ -290,55 +257,28 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 24.0,
+      "punten": 22.0,
       "woningwaarderingen": [
         {
           "criterium": {
             "naam": "Onderdeel I"
           },
-          "punten": 11.95
+          "punten": 11.62
         },
         {
           "criterium": {
             "naam": "Onderdeel II"
           },
-          "punten": 12.0
+          "punten": 10.53
         }
       ]
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "REN",
-          "naam": "Renovatie"
-        }
-      },
-      "punten": 0.0
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "BMZ",
-          "naam": "Beschermd monument"
-        }
-      },
-      "punten": 0.0,
-      "woningwaarderingen": []
     }
   ],
-  "maximaleHuur": 777.81,
-  "punten": 131.0,
+  "maximaleHuur": 733.87,
+  "punten": 124.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 777.81
+  "maximaleHuurInclusiefOpslag": 733.87
 }

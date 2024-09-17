@@ -1,0 +1,41 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 3.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "naam": "Tuin (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.25
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Tuin (gedeeld met 3)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.5
+        }
+      ]
+    }
+  ]
+}

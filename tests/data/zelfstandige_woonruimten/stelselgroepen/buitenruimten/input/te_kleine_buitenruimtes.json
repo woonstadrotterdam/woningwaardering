@@ -1,0 +1,58 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Te korte buitenruimte",
+      "inhoud": 9.01742,
+      "oppervlakte": 3.14196,
+      "lengte": 1.15,
+      "breedte": 2.8,
+      "hoogte": 3.17,
+      "verwarmd": false,
+      "gedeeldMetAantalEenheden": 2
+    },
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Te smalle buitenruimte",
+      "inhoud": 9.01742,
+      "oppervlakte": 3.14196,
+      "breedte": 1.15,
+      "lengte": 2.8,
+      "hoogte": 3.17,
+      "verwarmd": false,
+      "gedeeldMetAantalEenheden": 2
+    },
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Te lage buitenruimte",
+      "inhoud": 9.01742,
+      "oppervlakte": 3.14196,
+      "lengte": 3.17,
+      "breedte": 2.8,
+      "hoogte": 1.15,
+      "verwarmd": false,
+      "gedeeldMetAantalEenheden": 2
+    }
+  ]
+}

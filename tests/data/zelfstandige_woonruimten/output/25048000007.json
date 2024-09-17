@@ -97,41 +97,73 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "VZE",
-          "naam": "Verwarming"
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 10.0,
+      "punten": 11.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Woonkamer"
+            "naam": "Woonkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer"
+            "naam": "Entree (verwarmde overige/verkeers-ruimte)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Badruimte"
+            "naam": "Badruimte (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer"
+            "naam": "Slaapkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Keuken"
+            "naam": "Keuken (verwarmd vertrek)"
           },
           "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 4.62,
+          "criterium": {
+            "naam": "Balkon (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.62
         }
       ]
     },
@@ -146,13 +178,13 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": 28.0,
+      "punten": 30.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "B (oud)"
+            "naam": "B (Energie-index)"
           },
-          "punten": 28.0
+          "punten": 30.0
         }
       ]
     },
@@ -163,51 +195,13 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "SAN",
-          "naam": "Sanitair"
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
         }
       },
       "punten": 0.0,
-      "woningwaarderingen": []
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "KEU",
-          "naam": "Keuken"
-        }
-      },
-      "punten": 0.0,
-      "woningwaarderingen": []
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "PRI",
-          "naam": "Privé-buitenruimten"
-        }
-      },
-      "punten": 2.0,
-      "woningwaarderingen": [
-        {
-          "aantal": 4.62,
-          "criterium": {
-            "naam": "Balkon",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        }
-      ]
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
     },
     {
       "criteriumGroep": {
@@ -220,55 +214,28 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 42.0,
+      "punten": 41.0,
       "woningwaarderingen": [
         {
           "criterium": {
             "naam": "Onderdeel I"
           },
-          "punten": 21.7
+          "punten": 21.11
         },
         {
           "criterium": {
             "naam": "Onderdeel II"
           },
-          "punten": 20.78
+          "punten": 20.14
         }
       ]
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "REN",
-          "naam": "Renovatie"
-        }
-      },
-      "punten": 0.0
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "BMZ",
-          "naam": "Beschermd monument"
-        }
-      },
-      "punten": 0.0,
-      "woningwaarderingen": []
     }
   ],
-  "maximaleHuur": 878.27,
-  "punten": 147.0,
+  "maximaleHuur": 897.09,
+  "punten": 150.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 878.27
+  "maximaleHuurInclusiefOpslag": 897.09
 }

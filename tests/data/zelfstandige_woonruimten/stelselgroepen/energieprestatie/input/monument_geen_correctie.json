@@ -1,0 +1,46 @@
+{
+  "id": "1",
+  "bouwjaar": 1921,
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    }
+  ],
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2017-02-23",
+      "einddatum": "2027-02-23",
+      "registratiedatum": "2017-02-23T09:55:37+01:00",
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "1.48"
+    }
+  ],
+  "prijscomponenten": [
+    {
+      "detailSoort": {
+        "code": "EPV",
+        "naam": "Energieprestatievergoeding"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": -15.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Bouwjaar 1921"
+          },
+          "punten": -15.0
+        }
+      ]
+    }
+  ]
+}

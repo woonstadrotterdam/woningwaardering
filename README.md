@@ -46,14 +46,23 @@ Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team 
     - [Repository-structuur](#repository-structuur)
     - [Design](#design)
     - [Lookup tabellen](#lookup-tabellen)
+    - [Warnings](#warnings)
+      - [Warning vs Exception](#warning-vs-exception)
+      - [Gebruik](#gebruik)
   - [2. Contributing](#2-contributing)
     - [Setup](#setup)
     - [Naamgeving van classes](#naamgeving-van-classes)
+      - [Genereren opzet woningwaarderingstelsels en -groepen](#genereren-opzet-woningwaarderingstelsels-en--groepen)
       - [Stelsels](#stelsels)
       - [Stelselgroepen](#stelselgroepen)
+    - [Releasemanagement](#releasemanagement)
+      - [Versienummering](#versienummering)
+      - [Releaseproces](#releaseproces)
     - [Testing](#testing)
+      - [Test coverage rapport](#test-coverage-rapport)
       - [Conventies voor tests](#conventies-voor-tests)
       - [Test modellen](#test-modellen)
+    - [Logger Guidelines](#logger-guidelines)
     - [Datamodellen](#datamodellen)
       - [Datamodellen uitbreiden](#datamodellen-uitbreiden)
     - [Referentiedata](#referentiedata)
@@ -62,6 +71,8 @@ Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team 
     - [Verbonden ruimten](#verbonden-ruimten)
     - [Gedeeld met aantal eenheden](#gedeeld-met-aantal-eenheden)
     - [Bouwkundige elementen](#bouwkundige-elementen)
+    - [Verkoeld en verwarmd](#verkoeld-en-verwarmd)
+    - [Datum afsluiten huurovereenkomst](#datum-afsluiten-huurovereenkomst)
 
 ## 1. Opzet woningwaardering-package
 
@@ -123,6 +134,35 @@ Mocht door de gebruiker logging worden uitgezet, dan zullen de UserWarnings alti
 
 Er wordt doorgaans in de stelgroepversies gebruik gemaakt van `warnings.warn()` in plaats van het raisen van een exception.
 Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroepen waarvoor de data wel compleet genoeg is, mits de `warnings.simplefilter` naar `default` is gezet.
+
+#### Gebruik
+
+```python
+from woningwaardering.stelsels import ZelfstandigeWoonruimten
+from datetime import date
+from woningwaardering.stelsels import utils
+from woningwaardering.vera.bvg.generated import (
+    EenhedenEenheid,
+)
+
+stelsel = ZelfstandigeWoonruimten(
+    peildatum = date(2024, 7, 1) # bij niet meegeven wordt de huidige dag gebruikt.
+)
+with open(
+  "tests/data/zelfstandige_woonruimten/input/87402000003.json",
+  "r+",
+) as file:
+  eenheid = EenhedenEenheid.model_validate_json(file.read())
+  woningwaardering_resultaat = stelsel.bereken(eenheid)
+  print(
+      woningwaardering_resultaat.model_dump_json(
+          by_alias=True, indent=2, exclude_none=True
+      )
+  )
+  tabel = utils.naar_tabel(woningwaardering_resultaat)
+
+  print(tabel)
+```
 
 ## 2. Contributing
 
@@ -356,9 +396,16 @@ Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarm
 
 In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Dit kan bijvoorbeeld tot gevolg hebben dat er punten in mindering worden gebracht, of punten extra gegeven worden. Bijvoorbeeld bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee de zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribuut `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een github issue open om `bouwkundige_elementen` standaard in het VERA model toe te voegen: https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
 
-### Verwarmd
+### Verkoeld en verwarmd
 
-In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verwarmd is. Het attribuut `verwarmde_vertrekken_aantal` bestaat wel, maar dit bestaat op niveau van de eenheid en daarin bestaat geen onderscheid tussen vertrekken en overige ruimten. Dit is aangekaart in deze twee issues:
+In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verwarmd en/of verkoeld is. Het attribuut `verwarmde_vertrekken_aantal` bestaat wel, maar dit bestaat op niveau van de eenheid en daarin bestaat geen onderscheid tussen vertrekken en overige ruimten.  
+Hierom hebben wij twee boolean kenmerken toegevoegd aan `EenhedenRuimte`: `verwarmd` en `verkoeld`. Deze kenmerken geven aan of een ruimte verwarmd en/of verkoeld is.
+
+Dit is aangekaart in deze twee issues:
 
 - https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
 - https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
+
+### Datum afsluiten huurovereenkomst
+
+Voor een correcte waardering van rijksmonumenten dient de afsluitings datum van de huurovereenkomst opgegeven te worden. In de VERA standaard bestaat binnen het BVG domein geen model dat deze informatie bevat. Het VERA model `EenhedenEenheid` is uitgebreid met het attribuut `datum_afsluiten_huurovereenkomst`.

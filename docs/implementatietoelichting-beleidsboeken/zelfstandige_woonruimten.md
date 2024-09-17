@@ -42,6 +42,8 @@ Indien een woonruimte een rijksmonument is of daar deel van uitmaakt, als bedoel
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de rijksmonumenten: [http://monumentenregister.cultureelerfgoed.nl](http://monumentenregister.cultureelerfgoed.nl/).
 
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
+
 ### 2.8.2 Gemeentelijk of provinciaal monument
 
 Indien een woonruimte een gemeentelijk of provinciaal monument is of daarvan deel uitmaakt, dan wordt de maximale huurprijs vermeerderd met 15%. Het gemeentelijk monument moet zijn aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door de gedeputeerde staten. 
@@ -102,68 +104,72 @@ De overige rubrieken van het woningwaarderingsstelsel zijn woonvoorzieningen voo
 Vertrekken worden gewaardeerd met 1 punt per vierkante meter.
 
 ### 1.2 Wat zijn vertrekken?
+> Een ruimte moet `Ruimtesoort` `vertrek` hebben om in aanmerking te komen voor een waardering in de rubriek oppervlakte van vertrekken. Wanneer de ruimte voldoet aan de eisen van een vertrek dan wordt deze gewaardeerd onder oppervlakte van vertekken. Wanneer een vertrek niet aan de eisen van een vertrek voldoet, dan wordt er gekeken of de ruimte wel gewaardeeerd kan worden onder de rubriek oppervlakte van overige ruimten.
 
 Een ruimte wordt als vertrek gewaardeerd als deze voldoet aan de volgende eisen:
 
-*   de vloer moet begaanbaar zijn;
-*   de muren/wanden dienen uit “vast” materiaal te bestaan;
-*   de ruimte dient over tenminste 80% van de lengte (de langste zijde) ten minste 1,50 m breed te zijn;
+*   ~~de vloer moet begaanbaar zijn;~~
+*   ~~de muren/wanden dienen uit “vast” materiaal te bestaan;~~
+*   ~~de ruimte dient over tenminste 80% van de lengte (de langste zijde) ten minste 1,50 m breed te zijn;~~
 *   de ruimte dient een oppervlakte te hebben van minimaal 4 m2;
-*   de ruimte dient over ten minste 50% van de oppervlakte of over een oppervlakte van 11 m2 een vrije hoogte te hebben van ten minste 2,10 m (gemeten vanaf de vloer tot het zichtbare plafond (onder het zichtbare plafond aanwezige balken blijven buiten de meting);
-*   de ruimte dient te zijn voorzien van minimaal 0,5 m2 aan de buitenlucht grenzend transparant oppervlak (bijvoorbeeld een raam of deur met vensters);
-*   de ruimte dient te beschikken over direct met de buitenlucht verbonden ventilatie;
-*   er moet ten minste één stopcontact en één lichtpunt aanwezig zijn.
+*   ~~de ruimte dient over ten minste 50% van de oppervlakte of over een oppervlakte van 11 m2 een vrije hoogte te hebben van ten minste 2,10 m (gemeten vanaf de vloer tot het zichtbare plafond (onder het zichtbare plafond aanwezige balken blijven buiten de meting);~~
+*   ~~de ruimte dient te zijn voorzien van minimaal 0,5 m2 aan de buitenlucht grenzend transparant oppervlak (bijvoorbeeld een raam of deur met vensters);~~
+*  ~~ de ruimte dient te beschikken over direct met de buitenlucht verbonden ventilatie;~~
+*   ~~er moet ten minste één stopcontact en één lichtpunt aanwezig zijn.~~
 
 Voorbeelden van vertrekken zijn onder andere de woonkamer, een hobbykamer, studeerkamer, slaapkamer en eetkamer, op voorwaarde dat aan de hierboven gestelde eisen wordt voldaan.
 
 In afwijking van bovengenoemde eisen is een ruimte die uitsluitend als keuken, badkamer of doucheruimte bestemd is altijd een vertrek.
 
 _Zolderruimte_  
-Voor zolderruimten gelden, naast bovengenoemde eisen,  nog twee eisen om als vertrek gewaardeerd te worden. De zolderruimte moet namelijk bereikbaar zijn via een vaste trap en het dak moet beschoten zijn.
+Voor zolderruimten gelden, naast bovengenoemde eisen,  nog twee eisen om als vertrek gewaardeerd te worden. De zolderruimte moet namelijk bereikbaar zijn via een vaste trap ~~en het dak moet beschoten zijn~~.
+
+
 
 ### 1.3 Meetinstructies
+> De woningwaardering package gaat er vanuit dat de gebruiker zich houdt aan onderstaande meetinstructies voor vertrekken. Met uitzondering van _Kasten_ kunnen de meetinstructies niet getoets of berekend worden op basis van het VERA model.
 
 In de toelichting op het woningwaarderingsstelsel is een aantal meetinstructies meegegeven:
 
 #### 1 Binnenmaatse meting
 
-Meting van de oppervlakte van vertrekken vindt plaats van muur tot muur, op een hoogte van 1,50 m boven de vloer, inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten. Deze meethoogte geldt ook als de oppervlakte afwijkt van die op vloerniveau,
+~~Meting van de oppervlakte van vertrekken vindt plaats van muur tot muur, op een hoogte van 1,50 m boven de vloer, inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten. Deze meethoogte geldt ook als de oppervlakte afwijkt van die op vloerniveau,~~
 
 De Huurcommissie hanteert hierbij de volgende uitgangspunten.
 
-_Pui, erker en entresol_  
-Als er sprake is van een pui wordt de binnenzijde van die pui (het kozijn) genomen. Een erker wordt meegerekend indien deze inwendig een vrije hoogte heeft van ten minste 1,50 m. Indien er sprake is van een zgn. entresol (tussenverdieping) dan dient de oppervlakte onder en/of boven deze entresol te worden meegerekend, indien de vrije hoogte ten minste 1,50 m bedraagt. Voor het meten van vertrekken die met elkaar in open verbinding staan, zie hierboven paragraaf 2.5.  
+~~_Pui, erker en entresol_ ~~
+~~Als er sprake is van een pui wordt de binnenzijde van die pui (het kozijn) genomen. Een erker wordt meegerekend indien deze inwendig een vrije hoogte heeft van ten minste 1,50 m. Indien er sprake is van een zgn. entresol (tussenverdieping) dan dient de oppervlakte onder en/of boven deze entresol te worden meegerekend, indien de vrije hoogte ten minste 1,50 m bedraagt. Voor het meten van vertrekken die met elkaar in open verbinding staan, zie hierboven paragraaf 2.5.~~
   
 _Kasten_  
 De Huurcommissie leest de zinsnede uit de toelichting "alle tot de woning behorende losse en vaste kasten" als: "alle tot de vertrekken behorende kasten". **De plaats van de deur van de kast** bepaalt bij welk vertrek de kast behoort. Dus een kast die in een vertrek uitkomt wordt, ongeacht de afmeting, bij dat vertrek geteld. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
 
 *   van vaste kasten wordt de netto oppervlakte bepaald en bij de oppervlakte van het betreffende vertrek opgeteld;
 *   een kast, waarvan de deur uitkomt op een verkeersruimte, wordt niet gewaardeerd;
-*   losse kasten zijn niet van belang bij het meten. De oppervlakte van het vertrek wordt bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast.
+*   ~~losse kasten zijn niet van belang bij het meten. De oppervlakte van het vertrek wordt bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast.~~
 
-#### 2 Hellend of verlaagd plafond
+#### ~~2 Hellend of verlaagd plafond~~
 
-Als oppervlakte van een vertrek met een (ten dele) hellend of verlaagd plafond geldt dat alleen het gedeelte van de ruimte waarboven het plafond ten minste 1,50 m hoog is, wordt meegeteld bij de berekening van de oppervlakte.
+~~Als oppervlakte van een vertrek met een (ten dele) hellend of verlaagd plafond geldt dat alleen het gedeelte van de ruimte waarboven het plafond ten minste 1,50 m hoog is, wordt meegeteld bij de berekening van de oppervlakte.~~
 
-De Huurcommissie eist in geval van een (ten dele) hellend plafond dat de 1,50 m hoogte loopt tot het dakbeschot of tot het zichtbare dakvlak of plafond. Met gordingen en balken wordt bij de meting geen rekening gehouden.
+~~De Huurcommissie eist in geval van een (ten dele) hellend plafond dat de 1,50 m hoogte loopt tot het dakbeschot of tot het zichtbare dakvlak of plafond. Met gordingen en balken wordt bij de meting geen rekening gehouden.~~
 
-#### 3 Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en installaties
+#### ~~3 Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en installaties~~
 
-De vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak, moederhaard, cv-ketel, boilerinstallatie en radiatoren wordt meegeteld.
+~~De vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak, moederhaard, cv-ketel, boilerinstallatie en radiatoren wordt meegeteld.~~
 
-Indien zich in een vertrek, of in een kast in een vertrek, een gas- en/of elektrameter bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek van 30 x 60 cm (minimale afmeting meterkast bestaande bouw).
+~~Indien zich in een vertrek, of in een kast in een vertrek, een gas- en/of elektrameter bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek van 30 x 60 cm (minimale afmeting meterkast bestaande bouw).~~
 
-#### 4 Oppervlakte kanalen of leidingen
+#### ~~4 Oppervlakte kanalen of leidingen~~
 
-De oppervlakte die wordt ingenomen door verticale koven, schoorsteenkanalen, ventilatiekanalen of stand- of grondleidingen (tenzij horizontale leidingen, zie hierna) wordt niet meegeteld.
+~~De oppervlakte die wordt ingenomen door verticale koven, schoorsteenkanalen, ventilatiekanalen of stand- of grondleidingen (tenzij horizontale leidingen, zie hierna) wordt niet meegeteld.~~
 
-De oppervlakte die wordt ingenomen door standleidingen (verticale leidingen) wordt niet meegeteld. De oppervlakte die wordt ingenomen door grondleidingen (horizontale leidingen), wordt wel meegeteld.
+~~De oppervlakte die wordt ingenomen door standleidingen (verticale leidingen) wordt niet meegeteld. De oppervlakte die wordt ingenomen door grondleidingen (horizontale leidingen), wordt wel meegeteld.~~
 
-Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50m-hoogte bepalend.
+~~Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50m-hoogte bepalend.~~
 
-#### 5 Oppervlakte onder een open of gesloten vaste trap
+#### ~~5 Oppervlakte onder een open of gesloten vaste trap~~
 
-Van de oppervlakte onder een open dan wel gesloten vaste trap telt mee dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is.
+~~Van de oppervlakte onder een open dan wel gesloten vaste trap telt mee dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is.~~
 
 ### 1.4 Afronding oppervlakte op hele m2
 
@@ -180,20 +186,20 @@ Totaal : 26,73 m² Afronding op hele m² : 27 m².
 Dit vertaalt zich dan naar 27 \* 1 punt (per m2) = 27 punten
 
 ## Rubriek 2 Oppervlakte van overige ruimten
+> Een ruimte moet `Ruimtesoort` `vertrek` of `overige_ruimte` hebben om in aanmerking te komen voor een waardering in de rubriek oppervlakte van overige ruimten. Wanneer een ruimte voldoet aan de eisen van een overige ruimte dan wordt deze gewaardeerd in de rubriek oppervlakte van overige ruimten.
 
 ### 2.1 Puntentoekenning
-
 Overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter.
 
 ### 2.2 Wat zijn overige ruimten?
 
 Een ruimte wordt als overige ruimte gewaardeerd als deze voldoet aan de volgende eisen:
 
-*   de vloer moet begaanbaar zijn;
+*   ~~de vloer moet begaanbaar zijn;~~
 *   de ruimte dient een oppervlakte te hebben van minimaal 2 m2;
 *   de ruimte voldoet niet aan de eisen voor een vertrek (zie paragraaf 1.2) of een verkeersruimte zijnde;
     *   een ruimte die dient voor het bereiken van een andere ruimte;
-    *   geen ruimte om duurzaam in te verblijven.
+    *   ~~geen ruimte om duurzaam in te verblijven.~~
 
 Voorbeelden van overige ruimten zijn bijkeukens, bergingen, wasruimten, schuren, garages, zolders en kelders, op voorwaarde dat aan bovenstaande eisen wordt voldaan. Parkeerruimte die exclusief tot één adres behoort (privé-garage), wordt gewaardeerd als overige ruimte. Gemeenschappelijke garages met daarin parkeerplek(ken) worden gewaardeerd onder rubriek 10  (gemeenschappelijke parkeerruimten).
 
@@ -205,23 +211,26 @@ _Zolderruimte_
 
 Indien een zolderruimte niet als vertrek wordt gewaardeerd (zie paragraaf 1.2), dan kan deze mogelijk wel in aanmerking komen voor een waardering als overige ruimte. Dan moet de zolderruimte naast bovenstaande eisen aan nog twee eisen voldoen. De zolderruimte moet namelijk bereikbaar zijn via een tot de woning behorende trap en het dak moet beschoten zijn. Voldoet de zolderruimte niet aan de eisen van paragraaf 1.2 en niet aan de voornoemde eisen, dan wordt de zolderruimte niet gewaardeerd.
 
+> Wanneer een zolder het `Bouwkundigelement` `trap` of `vlizotrap` bezit en de zolder een oppervlakte van minimaal 2 m2 heeft, dan wordt de zolder gewaardeerd onder Oppervlakte van overige ruimten.
+
 _Toiletruimte_
 
 Een toiletruimte kan als overige ruimte worden gewaardeerd als aan de eisen van overige ruimte wordt voldaan.
 
 ### 2.3 Meetinstructies
 
+> De woningwaardering package gaat er vanuit dat de gebruiker zich houdt aan onderstaande meetinstructies voor oveirge ruimten. Met uizondering van _kasten_ kunnen de meetinstructies niet getoets of berekend worden op basis van het VERA model.
+
 De wetgever heeft een aantal meetinstructies meegegeven:
 
 #### 1\. Binnenmaatse meting
 
-Meting van de oppervlakte van overige ruimten vindt plaats van muur tot muur, op een hoogte van 1,50 m boven de vloer, inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten.
+~~Meting van de oppervlakte van overige ruimten vindt plaats van muur tot muur, op een hoogte van 1,50 m boven de vloer, inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten.~~
 
-De Huurcommissie berekent de hoogte van 1,50 m door te meten tot het dakbeschot, het zichtbare dakvlak of plafond (gordingen en balken blijven buiten de meting).
-
+~~De Huurcommissie berekent de hoogte van 1,50 m door te meten tot het dakbeschot, het zichtbare dakvlak of plafond (gordingen en balken blijven buiten de meting).~~
 _Pui, erker en entresol_
 
-Als er sprake is van een pui wordt de binnenzijde van die pui (het kozijn) genomen. Een erker wordt meegerekend indien deze inwendig een vrije hoogte heeft van ten minste 1,50 m. Indien er sprake is van een zgn. entresol (tussenverdieping) dan dient de oppervlakte onder en/of boven deze entresol te worden meegerekend, indien de vrije hoogte ten minste 1,50m bedraagt.
+~~Als er sprake is van een pui wordt de binnenzijde van die pui (het kozijn) genomen. Een erker wordt meegerekend indien deze inwendig een vrije hoogte heeft van ten minste 1,50 m. Indien er sprake is van een zgn. entresol (tussenverdieping) dan dient de oppervlakte onder en/of boven deze entresol te worden meegerekend, indien de vrije hoogte ten minste 1,50m bedraagt.~~
 
 _Kasten_
 
@@ -229,41 +238,43 @@ De oppervlakte van alle tot de woning behorende losse en vaste kasten wordt meeg
 
 *   Van vaste kasten die uitkomen in een wel gewaardeerde overige ruimte wordt de netto oppervlakte bepaald en bij de oppervlakte opgeteld
 *   Een kast, waarvan de deur uitkomt op een verkeersruimte, wordt niet gewaardeerd.
-*   Losse kasten zijn niet van belang bij het meten. De oppervlakte van de overige ruimte wordt bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast.
+*   ~~Losse kasten zijn niet van belang bij het meten. De oppervlakte van de overige ruimte wordt bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast.~~
 
-#### 2\. Oppervlakte trap(gat)
+#### ~~2\. Oppervlakte trap(gat)~~
 
-Van de oppervlakte onder een open dan wel gesloten vaste trap telt dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is. De oppervlakte die door een in ingeschoven toestand liggende inschuifbare of opvouwbare trap wordt ingenomen, wordt niet meegeteld.
+~~Van de oppervlakte onder een open dan wel gesloten vaste trap telt dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is. De oppervlakte die door een in ingeschoven toestand liggende inschuifbare of opvouwbare trap wordt ingenomen, wordt niet meegeteld.~~
 
-De oppervlakte van een trapgat wordt in mindering gebracht.
+~~De oppervlakte van een trapgat wordt in mindering gebracht.~~
 
-#### 3\. Vloeroppervlakte moederhaard, cv-ketel, boilerinstallatie en radiatoren
+#### ~~3\. Vloeroppervlakte moederhaard, cv-ketel, boilerinstallatie en radiatoren~~
 
-De vloeroppervlakte onder moederhaard, cv-ketel, boilerinstallatie en radiatoren wordt meegeteld.
+~~De vloeroppervlakte onder moederhaard, cv-ketel, boilerinstallatie en radiatoren wordt meegeteld.~~
 
-Als zich in een overige ruimte, of een kast in een overige ruimte, een gas- en/of elektrameter bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek van 30 x 60 cm (minimale afmeting meterkast bestaande bouw).
+~~Als zich in een overige ruimte, of een kast in een overige ruimte, een gas- en/of elektrameter bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek van 30 x 60 cm (minimale afmeting meterkast bestaande bouw).~~
 
-#### 4\. Oppervlakte kanalen of leidingen
+#### ~~4\. Oppervlakte kanalen of leidingen~~
 
-De oppervlakte die wordt ingenomen door schoorsteenkanalen, ventilatiekanalen of stand- of grondleidingen (tenzij horizontale leidingen, zie hierna) wordt niet meegeteld.
+~~De oppervlakte die wordt ingenomen door schoorsteenkanalen, ventilatiekanalen of stand- of grondleidingen (tenzij horizontale leidingen, zie hierna) wordt niet meegeteld.~~
 
-De oppervlakte die wordt ingenomen door standleidingen (verticale leidingen) wordt niet meegeteld. De oppervlakte die wordt ingenomen door grondleidingen (horizontale leidingen), wordt wel meegeteld.
+~~De oppervlakte die wordt ingenomen door standleidingen (verticale leidingen) wordt niet meegeteld. De oppervlakte die wordt ingenomen door grondleidingen (horizontale leidingen), wordt wel meegeteld.~~
 
-Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50m-hoogte bepalend.
+~~Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50m-hoogte bepalend.~~
 
 #### 5\. Zolderruimte
 
 Als geen _vaste_ trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de zolderruimte met 5 punten verminderd, maar niet met meer punten dan voor de oppervlakte van de zolderruimten wordt gegeven.
 
-Is er op de zolderverdieping ook nog een vertrek aanwezig dat alleen bereikbaar is via het zoldergedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopruimte om het vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en wordt dan gewaardeerd als overige ruimte.
+~~Is er op de zolderverdieping ook nog een vertrek aanwezig dat alleen bereikbaar is via het zoldergedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopruimte om het vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en wordt dan gewaardeerd als overige ruimte.~~
 
-#### 6\. Overloop
+#### ~~6\. Overloop~~
 
-Een overloop is een verkeersruimte en wordt niet gewaardeerd. Als er met aftrek van de verkeersruimte en trap voldoende ruimte overblijft en deze (zolder)overloop kennelijk ook bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd (als overige ruimte).
+~~Een overloop is een verkeersruimte en wordt niet gewaardeerd. Als er met aftrek van de verkeersruimte en trap voldoende ruimte overblijft en deze (zolder)overloop kennelijk ook bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd (als overige ruimte).~~
 
 #### 7\. Parkeerruimte
 
 Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens deze rubriek. Een voorbeeld is een garagebox behorende tot de woning.
+
+> De `Ruimtedetailsoort` `garage` wordt tot op heden alleen gewaardeerd als overige ruimte wanneer deze voldoet aan de voorwaarden. 
 
 ### 2.4 Afronding oppervlakte op hele m2
 
@@ -281,36 +292,47 @@ Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten.
 
 ## Rubriek 3 Verkoeling en verwarming
 
+> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100. Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
+
 ### 3.1 Puntentoekenning
 
 *   Verwarmde vertrekken worden gewaardeerd met 2 punten.
     
 *   Verwarmde overige ruimten en verkeersruimten worden gewaardeerd met 1 punt met een maximum van 4 punten voor alle overige ruimtes en verkeersruimten (samen).
-    
+
+
+>Op het moment is verkeersruimte geen ruimtesoort in de referentiedata. Wij hanteren de volgende ruimtedetailsoorten als `verkeersruimte`:
+>- hal
+>- overloop
+>- entree
+>- gang 
+>- trappenhuis (onze eigen uitbreiding op de referentiedata)    
 
 _Extra voorziening_
 
 Voorzieningen met zowel een verwarmingsfunctie als verkoelingsfunctie worden per vertrek gewaardeerd met 1 extra punt tot een maximum van 2 punten (bij meerdere vertrekken met een verkoelingsfunctie).
 
-Woningen die zonder koeling voldoende koel kunnen blijven, worden per vertrek gewaardeerd met 1 extra punt tot een maximum van 2 punten. Of sprake is van zo’n woning, dient te worden bepaald met de NTA 8800 en blijkt uit een actueel NTA-energielabel waarin de koelfunctie is meegenomen en het risico voor oververhitting als ‘laag’ is afgegeven.
+~~Woningen die zonder koeling voldoende koel kunnen blijven, worden per vertrek gewaardeerd met 1 extra punt tot een maximum van 2 punten. Of sprake is van zo’n woning, dient te worden bepaald met de NTA 8800 en blijkt uit een actueel NTA-energielabel waarin de koelfunctie is meegenomen en het risico voor oververhitting als ‘laag’ is afgegeven.~~
+
+> De informatie voor of het risico voor oververhitting op 'laag' is afgegeven is niet beschikbaar in EP-online, niet als veld in VABI en ook niet in de referentiedata. Daarom hebben wij deze regel vooralsnog niet opgenomen in de woningwaardering package.
 
 ### 3.2 Onroerende zaak en onroerende aanhorigheden
 
-Punten voor verwarming en verkoeling worden alleen toegekend als de verwarming of de voorziening met zowel een verwarmingsfunctie als verkoelingsfunctie tot de onroerende zaak en zijn onroerende aanhorigheid behoort.
+~~Punten voor verwarming en verkoeling worden alleen toegekend als de verwarming of de voorziening met zowel een verwarmingsfunctie als verkoelingsfunctie tot de onroerende zaak en zijn onroerende aanhorigheid behoort.~~
 
-Dit is bij een radiator het geval als hij is bevestigd aan de muur of in de grond. Een mobiele elektrische radiator of een mobiele airco behoort niet tot de onroerende zaak. Hetzelfde geldt voor gevelkachels en gashaarden. Een verdikte buis, pijp of moederhaard wordt wél gerekend tot de onroerende zaak, indien deze als zodanig bedoeld of herkenbaar is.
+~~Dit is bij een radiator het geval als hij is bevestigd aan de muur of in de grond. Een mobiele elektrische radiator of een mobiele airco behoort niet tot de onroerende zaak. Hetzelfde geldt voor gevelkachels en gashaarden. Een verdikte buis, pijp of moederhaard wordt wél gerekend tot de onroerende zaak, indien deze als zodanig bedoeld of herkenbaar is.~~
 
 _Koelsystemen_
 
-Centrale koelsystemen, zoals omkeerbare warmtepompen, passieve koeling door een bodemlus of een WKO-systeem moeten voorzien zijn van vloerkoeling, lage temperatuur radiatoren of radiatorconvectoren. Voor andere onroerend aanhorige koelsystemen, zoals een vaste airco, geldt dat deze een productgebonden energielabel moet hebben van minimaal A+ (bepaald volgens de Europese Ecodesign-richtlijn), en een minimaal vermogen moet kunnen leveren van 100 W/m2 bij een werkingstemperatuur tot 35 graden Celsius.
+~~Centrale koelsystemen, zoals omkeerbare warmtepompen, passieve koeling door een bodemlus of een WKO-systeem moeten voorzien zijn van vloerkoeling, lage temperatuur radiatoren of radiatorconvectoren. Voor andere onroerend aanhorige koelsystemen, zoals een vaste airco, geldt dat deze een productgebonden energielabel moet hebben van minimaal A+ (bepaald volgens de Europese Ecodesign-richtlijn), en een minimaal vermogen moet kunnen leveren van 100 W/m2 bij een werkingstemperatuur tot 35 graden Celsius.~~
 
 ### 3.3 Aangrenzende ruimten met open doorgang
 
-Vertrekken of overige ruimten die met elkaar in verbinding staan, worden in een bepaald geval als één verwarmd vertrek of overige ruimte gewaardeerd. Dit is het geval als zich tussen die twee verwarmde vertrekken of overige ruimten een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt. Het moet hierbij gaan om een niet afsluitbare opening, die over een breedte van minimaal 0,85 m een minimumhoogte heeft van 2 m. De muur wordt gemeten in het vertrek of overige ruimte, waarin de tussenwand het smalst is. De figuur in paragraaf 2.5 van het vorige hoofdstuk geeft dit visueel weer.
+~~Vertrekken of overige ruimten die met elkaar in verbinding staan, worden in een bepaald geval als één verwarmd vertrek of overige ruimte gewaardeerd. Dit is het geval als zich tussen die twee verwarmde vertrekken of overige ruimten een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt. Het moet hierbij gaan om een niet afsluitbare opening, die over een breedte van minimaal 0,85 m een minimumhoogte heeft van 2 m. De muur wordt gemeten in het vertrek of overige ruimte, waarin de tussenwand het smalst is. De figuur in paragraaf 2.5 van het vorige hoofdstuk geeft dit visueel weer.~~
 
 ### 3.4 Open keukens
 
-Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten. Onder een open keuken wordt hier verstaan een keuken die in open verbinding staat met een ander vertrek, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur. Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek individueel gewaardeerd met punten indien deze verwarmd zijn.
+Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten. ~~Onder een open keuken wordt hier verstaan een keuken die in open verbinding staat met een ander vertrek, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur.~~ Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek individueel gewaardeerd met punten indien deze verwarmd zijn.
 
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding tussen keukengedeelte en de rest van het vertrek aanwezig is.
 
@@ -414,19 +436,19 @@ _\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte 
 
 Voor rijks-, provinciale en gemeentelijke monumenten gelden in afwijking van andere woningen geen minpunten voor de energielabels E, F, en G en daaraan gelijkgestelde Energie-indexen en bouwjaren. De puntentoekenning bedraagt dan, in afwijking van bovenstaande tabellen, 0 punten.
 
-### 4.5 Afwijkingsbevoegdheid hogere energielabelklasse dan A++++
+### 4.5 ~~Afwijkingsbevoegdheid hogere energielabelklasse dan A++++~~
 
-De hierboven vermelde tabellen met de puntentoekenning voor de labelklasse gaan tot A++++. De Huurcommissie heeft de bevoegdheid gekregen om af te wijken van de hierboven aangegeven puntenwaardering indien de gemaakte kosten om deze energieprestatie te bereiken, aanmerkelijk afwijken van hetgeen als gangbaar wordt beschouwd, of indien de energieprestatie aanmerkelijk beter is dan hetgeen als gangbaar bij een energielabelklasse A ++++ wordt beschouwd.
+~~De hierboven vermelde tabellen met de puntentoekenning voor de labelklasse gaan tot A++++. De Huurcommissie heeft de bevoegdheid gekregen om af te wijken van de hierboven aangegeven puntenwaardering indien de gemaakte kosten om deze energieprestatie te bereiken, aanmerkelijk afwijken van hetgeen als gangbaar wordt beschouwd, of indien de energieprestatie aanmerkelijk beter is dan hetgeen als gangbaar bij een energielabelklasse A ++++ wordt beschouwd.~~
 
-### 4.6 Gerede twijfel energielabel
+### 4.6 ~~Gerede twijfel energielabel~~
 
-Als huurder twijfelt aan de juistheid van het toepasselijke energielabel dan heeft de Huurcommissie de bevoegdheid om een ‘eigen oordeel’ uit te spreken bij gerede twijfel van het energielabel. Een Huurcommissie eigen oordeel (HEO) kan worden uitgesproken indien de huurder aantoont dat sprake is van gerede twijfel van de juistheid van het energielabel/energie-index en dat het gewijzigde energielabel/energie-index van invloed zal zijn op de maximaal redelijke huurprijs.
+~~Als huurder twijfelt aan de juistheid van het toepasselijke energielabel dan heeft de Huurcommissie de bevoegdheid om een ‘eigen oordeel’ uit te spreken bij gerede twijfel van het energielabel. Een Huurcommissie eigen oordeel (HEO) kan worden uitgesproken indien de huurder aantoont dat sprake is van gerede twijfel van de juistheid van het energielabel/energie-index en dat het gewijzigde energielabel/energie-index van invloed zal zijn op de maximaal redelijke huurprijs.~~
 
-Bij ‘gerede twijfel’ wordt beoordeeld of de huurder voldoende heeft aangetoond dat een verkeerd woningkenmerk of verkeerde woningkenmerken is/zijn gebruikt bij het vaststellen van het energielabel, waardoor de juistheid van de labelklasse voor de desbetreffende woning in het geding is. Zo’n fout kenmerk is bijvoorbeeld: het verkeerde soort glas, zoals enkel in plaats van dubbel glas. Of er staat een verkeerd type woning op het label, bijvoorbeeld een hoekwoning in plaats van een tussenwoning. Of de muren zijn slecht geïsoleerd, terwijl het energielabel aangeeft dat het huis juist goed geïsoleerd is.
+~~Bij ‘gerede twijfel’ wordt beoordeeld of de huurder voldoende heeft aangetoond dat een verkeerd woningkenmerk of verkeerde woningkenmerken is/zijn gebruikt bij het vaststellen van het energielabel, waardoor de juistheid van de labelklasse voor de desbetreffende woning in het geding is. Zo’n fout kenmerk is bijvoorbeeld: het verkeerde soort glas, zoals enkel in plaats van dubbel glas. Of er staat een verkeerd type woning op het label, bijvoorbeeld een hoekwoning in plaats van een tussenwoning. Of de muren zijn slecht geïsoleerd, terwijl het energielabel aangeeft dat het huis juist goed geïsoleerd is.~~
 
-De huurder dient gerede twijfel aan te tonen door middel van het energielabelafschrift en moet onderbouwen waarom een onjuist woningkenmerk is gebruikt. Het energielabelafschrift is te downloaden via [Mijnoverheid.](https://mijn.overheid.nl/)
+~~De huurder dient gerede twijfel aan te tonen door middel van het energielabelafschrift en moet onderbouwen waarom een onjuist woningkenmerk is gebruikt. Het energielabelafschrift is te downloaden via [Mijnoverheid.](https://mijn.overheid.nl/)~~
 
-Indien de Huurcommissie tot een eigen oordeel wil komen dan laat de Huurcommissie onderzoeken wat de energieprestatie van de woning is. Het eigen oordeel is uitsluitend in de voorliggende zaak van kracht, wordt niet geregistreerd in het register van de Rijksdienst voor Ondernemend Nederland en komt te vervallen na ontbinding van de huurovereenkomst.
+~~Indien de Huurcommissie tot een eigen oordeel wil komen dan laat de Huurcommissie onderzoeken wat de energieprestatie van de woning is. Het eigen oordeel is uitsluitend in de voorliggende zaak van kracht, wordt niet geregistreerd in het register van de Rijksdienst voor Ondernemend Nederland en komt te vervallen na ontbinding van de huurovereenkomst.~~
 
 ### 4.7 Energieprestatievergoeding
 
@@ -590,39 +612,37 @@ _\* In het geval van een gemonteerde volledige afscheiding van de douche vindt d
 
 Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of, respectievelijk bad.
 
-## Rubriek 7 Woonvoorzieningen voor gehandicapten
+## ~~Rubriek 7 Woonvoorzieningen voor gehandicapten~~
 
-### 7.1 Puntentoekenning
+### ~~7.1 Puntentoekenning~~
 
-Het woningwaarderingsstelsel kent punten toe voor woonvoorzieningen voor gehandicapten. Per
+~~Het woningwaarderingsstelsel kent punten toe voor woonvoorzieningen voor gehandicapten. Per € 332,00 van de door de verhuurder bestede kosten aan ingrepen in of aan de woonruimte ten behoeve van een gehandicapte kan, voor zover deze kosten in een redelijke verhouding staan tot de geboden kwaliteit en het niet gesubsidieerde kosten betreft, één punt worden toegekend.~~
 
-€ 332,00 van de door de verhuurder bestede kosten aan ingrepen in of aan de woonruimte ten behoeve van een gehandicapte kan, voor zover deze kosten in een redelijke verhouding staan tot de geboden kwaliteit en het niet gesubsidieerde kosten betreft, één punt worden toegekend.
+### ~~7.2 Woonvoorzieningen~~
 
-### 7.2 Woonvoorzieningen
+~~Om de bestede kosten in of aan de woonruimte ten behoeve van een gehandicapte in de puntentelling te betrekken, is het nodig dat het gaat om:~~
 
-Om de bestede kosten in of aan de woonruimte ten behoeve van een gehandicapte in de puntentelling te betrekken, is het nodig dat het gaat om:
+1.  ~~maatwerkvoorzieningen: op de behoeften, persoonskenmerken en mogelijkheden van een persoon afgestemd geheel van diensten, hulpmiddelen, woningaanpassingen en andere maatregelen ten behoeve van zelfredzaamheid, participatie of beschermd wonen en opvang, of;~~
+2.  ~~woningaanpassingen: een bouwkundige of woontechnische ingreep in of aan een woonruimte, als bedoeld in artikel 1.1.1, eerste lid, van de Wet maatschappelijke ondersteuning 2015, of;~~
+3.  ~~gesubsidieerde voorzieningen of ingrepen op grond van een andere wettelijke regeling.~~
 
-1.  maatwerkvoorzieningen: op de behoeften, persoonskenmerken en mogelijkheden van een persoon afgestemd geheel van diensten, hulpmiddelen, woningaanpassingen en andere maatregelen ten behoeve van zelfredzaamheid, participatie of beschermd wonen en opvang, of;
-2.  woningaanpassingen: een bouwkundige of woontechnische ingreep in of aan een woonruimte, als bedoeld in artikel 1.1.1, eerste lid, van de Wet maatschappelijke ondersteuning 2015, of;
-3.  gesubsidieerde voorzieningen of ingrepen op grond van een andere wettelijke regeling.
+~~Extra punten worden voor deze woonvoorzieningen, woningaanpassingen of ingrepen toegekend indien aan de volgende cumulatieve voorwaarden is voldaan:~~
 
-Extra punten worden voor deze woonvoorzieningen, woningaanpassingen of ingrepen toegekend indien aan de volgende cumulatieve voorwaarden is voldaan:
+*   ~~de ingreep moet hebben plaatsgevonden op of ná 01-04-1994;~~
+*   ~~de ingreep moet voor een deel zijn gesubsidieerd;~~
+*   ~~de ingreep dient voor “de gehandicapte”\* te zijn aangebracht.~~
 
-*   de ingreep moet hebben plaatsgevonden op of ná 01-04-1994;
-*   de ingreep moet voor een deel zijn gesubsidieerd;
-*   de ingreep dient voor “de gehandicapte”\* te zijn aangebracht.
+_\*~~Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt.~~_
 
-_\*Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt._
+~~Buiten de waardering blijven voorzieningen ten behoeve van een gehandicapte, waarvoor subsidie is verstrekt waarmee de volledige kosten worden gedekt. Extra vloeroppervlakte (als bedoeld in de subsidieregelingen) wordt aangemerkt als gesubsidieerde voorziening.~~
 
-Buiten de waardering blijven voorzieningen ten behoeve van een gehandicapte, waarvoor subsidie is verstrekt waarmee de volledige kosten worden gedekt. Extra vloeroppervlakte (als bedoeld in de subsidieregelingen) wordt aangemerkt als gesubsidieerde voorziening.
+~~Het komt voor dat een voorziening slechts ten dele werd beschouwd als een specifieke aanpassing voor een gehandicapte en daarom slechts ten dele is gesubsidieerd. In zo’n geval worden alleen die onderdelen van de voorziening gewaardeerd, die ook in een vergelijkbare woning als standaardvoorziening voorkomen.~~
 
-Het komt voor dat een voorziening slechts ten dele werd beschouwd als een specifieke aanpassing voor een gehandicapte en daarom slechts ten dele is gesubsidieerd. In zo’n geval worden alleen die onderdelen van de voorziening gewaardeerd, die ook in een vergelijkbare woning als standaardvoorziening voorkomen.
+~~Indien de huurovereenkomst met de gehandicapte is beëindigd dan vervalt de toepassing van deze rubriek, tenzij de nieuwe huurder tevens gehandicapt is.~~
 
-Indien de huurovereenkomst met de gehandicapte is beëindigd dan vervalt de toepassing van deze rubriek, tenzij de nieuwe huurder tevens gehandicapt is.
+### ~~7.3 Vergoeding kosten~~
 
-### 7.3 Vergoeding kosten
-
-Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder) wordt één punt toegekend. Voorwaarde is wel dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit. De wetgever gaat ervan uit dat met deze puntenwaardering de verhuurder een redelijke rendementswaarborg heeft voor het door hem geïnvesteerde vermogen (te weten de kosten van de ingrepen, verminderd met de eigen bijdrage van de huurder en de financiële tegemoetkoming van gemeente of (bij dure woonvoorzieningen) enige instantie die ingevolge een wettelijke regeling die tegemoetkoming verleent.
+~~Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder) wordt één punt toegekend. Voorwaarde is wel dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit. De wetgever gaat ervan uit dat met deze puntenwaardering de verhuurder een redelijke rendementswaarborg heeft voor het door hem geïnvesteerde vermogen (te weten de kosten van de ingrepen, verminderd met de eigen bijdrage van de huurder en de financiële tegemoetkoming van gemeente of (bij dure woonvoorzieningen) enige instantie die ingevolge een wettelijke regeling die tegemoetkoming verleent.~~
 
 ## Rubriek 8 Buitenruimten
 
@@ -636,42 +656,44 @@ Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblij
       
     _Voorbeeld: een woongebouw met een gemeenschappelijk dakterras van 30 m2 waartoe drie adressen toegang hebben, wordt gewaardeerd met: (0,75 x 30) / 3 = 7,5._ 
      
-*   Een aftrek van 5 punten wordt toegepast als de woning geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft.  
+*   Een aftrek van 5 punten wordt toegepast als de woning geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft. 
+
+> Hoewel uit deze zin het lijkt alsof de loggia niet valt onder privé-buitenruimte of gemeenschappelijke buitenruimte, gaan wij er vanuit dat de loggia wel onder één van beide categorieën valt en dat loggia in deze zin op een ongelukkige manier is toegevoegd om te benadrukken dat een loggia een buitenruimte is.
      
 *   Maximaal 15 punten worden toegekend voor buitenruimten.
 
 ### 8.2 Definitie privé-buitenruimte
 
-Privé-buitenruimte zijn tot de woning behorende buitenruimten, waarvan de huurder van de desbetreffende woning volgens de huurovereenkomst het exclusieve gebruiksrecht en toegang heeft. Dit kunnen onder meer voor-, zij- of achtertuinen, balkons, platjes of terrassen zijn, maar ook een oprit exclusief behorende tot de woning. Wanneer zich binnen de privé-buitenruimte een parkeerplek bevindt, geldt de parkeerplek en de weg daar naartoe als privé-buitenruimte. Gemeenschappelijke parkeerruimten worden gewaardeerd volgens rubriek 10.
+~~Privé-buitenruimte zijn tot de woning behorende buitenruimten, waarvan de huurder van de desbetreffende woning volgens de huurovereenkomst het exclusieve gebruiksrecht en toegang heeft.~~ Dit kunnen onder meer voor-, zij- of achtertuinen, balkons, platjes of terrassen zijn, maar ook een oprit exclusief behorende tot de woning. Wanneer zich binnen de privé-buitenruimte een parkeerplek bevindt, geldt de parkeerplek en de weg daar naartoe als privé-buitenruimte. Gemeenschappelijke parkeerruimten worden gewaardeerd volgens rubriek 10.
 
 Met exclusief gebruiksrecht van privé-buitenruimte wordt bedoeld dat uitsluitend de huurder het recht heeft om te bepalen welk gebruik hij maakt van de privé-buitenruimten die tot de woning behoren.
 
 ### 8.3 Definitie gemeenschappelijke buitenruimte
 
-Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, breedte, diepte) en zijn tot het woongebouw behorende buitenruimten waar de bewoners van tenminste twee adressen in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht toe hebben. De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke buitenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s). Gedeelde buitenruimten die als parkeerplek bedoeld zijn, worden gewaardeerd volgens rubriek 10.
+Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, breedte, diepte) en zijn tot het woongebouw behorende buitenruimten waar de bewoners van tenminste twee adressen ~~in het woongebouw volgens de huurovereenkomst exclusieve toegang en~~ gebruiksrecht toe hebben. ~~De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke buitenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s). Gedeelde buitenruimten die als parkeerplek bedoeld zijn, worden gewaardeerd volgens rubriek 10.~~
 
 Hieronder wordt ook verstaan een gebruiksrecht dat toekomt aan een collectief van huurders, maar waarbij het gebruiksrecht in feite exclusief voor de huurder is omdat de huurder het gebruik door derden kan weren.
 
 ### 8.4 Balkons, dakterrassen en loggia’s
 
-Balkons, dakterrassen en loggia’s moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze zijn:
+~~Balkons, dakterrassen en loggia’s moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze zijn:~~
 
-*   voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;
+~~*   voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;~~
     
-*   rondom voorzien van een afscheiding die tevens dient als valbeveiliging; en
+~~*   rondom voorzien van een afscheiding die tevens dient als valbeveiliging; en~~
     
-*   via een deur\* of schuifpui toegankelijk zijn.
+~~*   via een deur\* of schuifpui toegankelijk zijn.~~
     
 
-_\* Indien het balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als toegang tot de buitenruimte te worden gebruikt, dan wordt het balkon of het terras met punten gewaardeerd._
+~~_\* Indien het balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als toegang tot de buitenruimte te worden gebruikt, dan wordt het balkon of het terras met punten gewaardeerd._~~
 
-Franse balkons worden niet als buitenruimten beschouwd. Een Frans balkon is een opening in de gevel met naar binnen draaiende deuren, voorzien van een balustrade direct tegen het kozijn of de gevel. Zeembalkons worden, zolang zij voldoen aan de hiervoor aangegeven eisen van een balkon, wel gewaardeerd als buitenruimte.
+Franse balkons worden niet als buitenruimten beschouwd. Een Frans balkon is een opening in de gevel met naar binnen draaiende deuren, voorzien van een balustrade direct tegen het kozijn of de gevel. ~~Zeembalkons worden, zolang zij voldoen aan de hiervoor aangegeven eisen van een balkon, wel gewaardeerd als buitenruimte.~~
 
 ### 8.5 Meetinstructies
 
-Van de buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor-, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terugliggende deel van de gevel.
+~~Van de buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor-, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terugliggende deel van de gevel.~~
 
-Als uitzondering op de regel voor het meten van de gehele onbebouwde oppervlakte, wordt de oppervlakte, die wordt ingenomen door een balkonkast of kolenhok e.d., bij de oppervlakte van de desbetreffende buitenruimte meegerekend.
+~~Als uitzondering op de regel voor het meten van de gehele onbebouwde oppervlakte, wordt de oppervlakte, die wordt ingenomen door een balkonkast of kolenhok e.d., bij de oppervlakte van de desbetreffende buitenruimte meegerekend.~~
 
 ### 8.6 Puntenberekening en saldering
 
@@ -781,6 +803,8 @@ Een groot deel van het totale puntenaantal wordt bepaald door de punten die een 
 
 Als geen relevante WOZ-waarde bekend is, kan als alternatief 85% van de taxatiewaarde van de woning worden gebruikt volgend uit een door een Register-Taxateur opgesteld (hybride)taxatierapport. Als de verhuurder geen taxatierapport heeft aangeleverd dan wordt met de minimum WOZ-waarde gerekend.
 
+> In bovenstaand geval dient het alternatief van 85% van de taxatiewaarde als een WOZ-waarde in het datamodel opgegeven te worden.
+
 ### 11.1 Berekening punten voor de WOZ-waarde
 
 Op basis van de WOZ-waarde vindt een berekening plaats die een puntenaantal oplevert voor de woningwaardering. Hiervoor worden kengetallen gebruikt die ieder jaar opnieuw worden vastgesteld door de minister. 5 De kengetallen van de afgelopen drie jaar staan in tabel 1 hieronder weergegeven.
@@ -792,7 +816,7 @@ Onderdeel I:
 *   1 punt wordt gegeven voor iedere € 14.543 van de laatstelijk vastgestelde WOZ-waarde met **peildatum 1 januari 2023**, taxatiewaarden en minimumwaarden;
 *   1 punt wordt gegeven voor iedere € 14.146 van de laatstelijk vastgestelde WOZ-waarde met **peildatum 1 januari 2022**.
 
-Dus afhankelijk van in welk jaar de WOZ-waarde laatstelijk is vastgesteld, wordt gerekend met € 14,543 (1 januari 2023) of € 14.146 (1 januari 2022).
+Dus afhankelijk van in welk jaar de WOZ-waarde laatstelijk is vastgesteld, wordt gerekend met € 14.543 (1 januari 2023) of € 14.146 (1 januari 2022).
 
 De taxatiewaarden worden toegepast in geval geen relevante WOZ-waarde bekend is. De minimumwaarden worden toegepast ingeval geen relevante WOZ-waarde en geen taxatiewaarde bekend is.
 
@@ -832,27 +856,27 @@ Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2019 en/of de 
 
 Deze regeling komt te vervallen per 2039.
 
-**Woningen gelegen in COROP-gebied (2018-2022)**
+**~~Woningen gelegen in COROP-gebied (2018-2022)~~**
 
-Indien de bouwkundige oplevering of hoogniveau renovatie van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de Corop-gebieden7 Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 229 (peildatum 1 januari 2023). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 229 gebruikt maar € 97 bij de peildatum 1 januari 2023. Bij de peildatum 1 januari 2022 wordt niet het bedrag van € 222 gebruikt, maar € 94.
+~~Indien de bouwkundige oplevering of hoogniveau renovatie van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de Corop-gebieden7 Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 229 (peildatum 1 januari 2023). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 229 gebruikt maar € 97 bij de peildatum 1 januari 2023. Bij de peildatum 1 januari 2022 wordt niet het bedrag van € 222 gebruikt, maar € 94.~~
 
-Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2022 of de woning is groter dan 40 m2 of de woning is niet gelegen in de COROP-gebieden Amsterdam en Utrecht, dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.
+~~Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2022 of de woning is groter dan 40 m2 of de woning is niet gelegen in de COROP-gebieden Amsterdam en Utrecht, dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.~~
 
-In bijlage 3 van dit beleidsboek staan de gemeenten opgesomd die zijn gelegen in de COROP-gebieden Amsterdam en Utrecht.
+~~In bijlage 3 van dit beleidsboek staan de gemeenten opgesomd die zijn gelegen in de COROP-gebieden Amsterdam en Utrecht.~~
 
-Deze regeling komt te vervallen per 2042.
+~~Deze regeling komt te vervallen per 2042.~~
 
-7 Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.  
+~~7 Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.  ~~
  
 
-_Rekenvoorbeeld:_
+_~~Rekenvoorbeeld:~~_
 
-_De WOZ-waarde van een woning in Amsterdam is voor het kalenderjaar 2024, met peildatum 1 januari 2023, vastgesteld op € 300.000 en de oppervlakte van de vertrekken en overige ruimten van de woning is 35 m2._
+_~~De WOZ-waarde van een woning in Amsterdam is voor het kalenderjaar 2024, met peildatum 1 januari 2023, vastgesteld op € 300.000 en de oppervlakte van de vertrekken en overige ruimten van de woning is 35 m2.~~_
 
-*   _Onderdeel I: € 300.000 / € 14.453 = 20,76 punten_
-*   _Onderdeel II: € 300.000 / 35 (m2) / € 97 = 88,37 punten_
+*   _~~Onderdeel I: € 300.000 / € 14.453 = 20,76 punten~~_
+*   _~~Onderdeel II: € 300.000 / 35 (m2) / € 97 = 88,37 punten~~_
 
-_Het totale puntenaantal is 20,76 + 88,37 = 109,13. Na afronding is het puntenaantal 109 punten. In dit rekenvoorbeeld zijn de kengetallen gebruikt met peildatum 1 januari 2023, zie tabel 1 hieronder._
+_~~Het totale puntenaantal is 20,76 + 88,37 = 109,13. Na afronding is het puntenaantal 109 punten. In dit rekenvoorbeeld zijn de kengetallen gebruikt met peildatum 1 januari 2023, zie tabel 1 hieronder.~~_
 
 _Tabel 1 Kengetallen WOZ_
 | Peildatum | Onderdeel I | Onderdeel II | Onderdeel II bij kleine nieuwbouwwoningen in Corop-gebieden Amsterdam en Utrecht |
@@ -885,17 +909,19 @@ Tabel 2
 
 **Tijdelijke woning**
 
-In geval van een tijdelijke woning hanteert de register-taxateur de objectafbakeningsvoorschriften en waarderingsvoorschriften van hoofdstuk III van de Wet WOZ met uitzondering van de  voorschriften op grond van artikel 17, vierde lid, en artikel 18, eerste en tweede lid, van de Wet WOZ. In plaats van de voorschriften van artikel 18, eerste en tweede lid, gaat de register-taxateur uit van de staat van de woning na oplevering.
+In geval van een tijdelijke woning hanteert de register-taxateur de objectafbakeningsvoorschriften en waarderingsvoorschriften van hoofdstuk III van de Wet WOZ met uitzondering van de voorschriften op grond van artikel 17, vierde lid, en artikel 18, eerste en tweede lid, van de Wet WOZ. In plaats van de voorschriften van artikel 18, eerste en tweede lid, gaat de register-taxateur uit van de staat van de woning na oplevering.
 
 Onder tijdelijke woning wordt voor deze rubriek een woning verstaan die voor een bepaalde tijd op een tijdelijke locatie (met toegelaten functie wonen of tijdelijke afwijking Omgevingsplan) mogen worden gebouwd. Dit zijn woningen die voldoen aan de eisen die gelden voor nieuwbouw óf die getoetst zijn aan tijdelijke woningen zoals gedefinieerd in het Besluit bouwwerken leefomgeving (termijn van ten hoogste 15 jaar).
 
-### 11.5 Gebouwd eigendom in aanbouw
+### ~~11.5 Gebouwd eigendom in aanbouw~~
 
-Indien de WOZ-waarde betrekking heeft op een ‘gebouwd eigendom in aanbouw’, als bedoeld in artikel 17 lid 4 Wet WOZ, dan wordt voor de puntentoekenning uitgegaan van de waarde van de woning als ware de bouw is voltooid. De WOZ-beschikking zal het voortgangspercentage vermelden. De Huurcommissie heeft dan tot taak de WOZ-waarde gerelateerd aan de voortgang van de aanbouw om te rekenen naar de waarde “als ware de bouw voltooid”, dus naar 100%.
+~~Indien de WOZ-waarde betrekking heeft op een ‘gebouwd eigendom in aanbouw’, als bedoeld in artikel 17 lid 4 Wet WOZ, dan wordt voor de puntentoekenning uitgegaan van de waarde van de woning als ware de bouw is voltooid. De WOZ-beschikking zal het voortgangspercentage vermelden. De Huurcommissie heeft dan tot taak de WOZ-waarde gerelateerd aan de voortgang van de aanbouw om te rekenen naar de waarde “als ware de bouw voltooid”, dus naar 100%.~~
 
-Onder een ‘gebouwd eigendom in aanbouw’ wordt verstaan een onroerende zaak of gedeelte daarvan waarvoor een omgevingsvergunning is verleend en die door bouw nog niet geschikt is voor gebruik overeenkomstig haar beoogde bestemming. Het gaat hier om de situatie waarbij nieuwbouw/verbouw is begonnen na 1 januari van een lopend jaar en die niet is afgerond voor 1 januari van het daaropvolgende jaar.
+~~Onder een ‘gebouwd eigendom in aanbouw’ wordt verstaan een onroerende zaak of gedeelte daarvan waarvoor een omgevingsvergunning is verleend en die door bouw nog niet geschikt is voor gebruik overeenkomstig haar beoogde bestemming. Het gaat hier om de situatie waarbij nieuwbouw/verbouw is begonnen na 1 januari van een lopend jaar en die niet is afgerond voor 1 januari van het daaropvolgende jaar.~~
 
-Hiervan is bijvoorbeeld sprake als, in het kader van de WOZ-beschikking 2023 dat als peildatum 1 januari 2022 heeft, de werkzaamheden aan het gehuurde zijn aangevangen na 1 januari 2022 en zijn voltooid ná 1 januari 2023. De WOZ-beschikking 2024, dat als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven “als ware de bouw voltooid”. In dat geval kan de woning worden aangemerkt als ‘een gebouwd eigendom in aanbouw’ als bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.
+~~Hiervan is bijvoorbeeld sprake als, in het kader van de WOZ-beschikking 2023 dat als peildatum 1 januari 2022 heeft, de werkzaamheden aan het gehuurde zijn aangevangen na 1 januari 2022 en zijn voltooid ná 1 januari 2023. De WOZ-beschikking 2024, dat als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven “als ware de bouw voltooid”. In dat geval kan de woning worden aangemerkt als ‘een gebouwd eigendom in aanbouw’ als bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.~~
+
+> Wanneer sprake is van gebouwd eigendom in aanbouw, dient de naar 100% omgerekende WOZ-waarde met de juiste waardepeildatum doorgegeven te worden.
 
 ### 11.6 Maximering WOZ-punten tot maximaal 33%
 
@@ -905,7 +931,7 @@ Wanneer een woning zonder de cap op de WOZ een waardering heeft van meer dan 186
 
 **Uitzonderingen**
 
-Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 187 punten en voor kleine nieuwbouwwoningen 8 (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022.
+Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 187 punten~~ en voor kleine nieuwbouwwoningen 8 (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022~~.
 
 Daarnaast wordt in nog twee andere gevallen de cap op de WOZ niet toegepast. In het geval dat de minimumwaarde is toegepast vindt namelijk ook geen aftopping plaats aangezien de WOZ-waarde niet meer dan 33% zal bedragen. Het tweede geval gaat het om nieuwbouwwoningen gebouwd in de jaren 2015-2019 waarvoor minimaal 110 punten zijn behaald voor de onderdelen 1 tot en met 10 en 12 van het woningwaarderingsstelsel. Ook in dat geval wordt de cap op de WOZ niet toegepast. In deze situatie wordt minimaal 40 punten voor het onderdeel WOZ-waarde toegekend en dit komt overeen met 26,6%, waardoor geen aftopping plaatsvindt. Deze gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde rekenkundig, in deze gevallen, nooit meer dan 33% kan bedragen. Daarom zijn ze niet opgenomen in onderstaand schema.
 

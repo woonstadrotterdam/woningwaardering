@@ -631,6 +631,18 @@ class Ruimtedetailsoort(Enum):
     Overige ruimte: (UITBREIDING)
     """
 
+    trappenhuis = Referentiedata(
+        code="TRH",
+        naam="Trappenhuis",
+        parent=Referentiedata(
+            code="OVR",
+            naam="Overige ruimten",
+        ),
+    )
+    """
+     Verkeersruimte: (UITBREIDING) Verkeersruimte waarin een trap ligt
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:

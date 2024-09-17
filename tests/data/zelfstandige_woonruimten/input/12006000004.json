@@ -36,7 +36,26 @@
       "vastgesteldeWaarde": 309000
     }
   ],
-  "energieprestaties": [],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EP2",
+        "naam": "Primair energieverbruik - woningbouw"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2024-07-18",
+      "einddatum": "2034-07-18",
+      "registratiedatum": "2024-07-24T00:00:00.000000+01:00",
+      "label": {
+        "code": "A",
+        "naam": "A"
+      },
+      "waarde": "80.17"
+    }
+  ],
   "gebruiksoppervlakte": 71,
   "monumenten": [],
   "ruimten": [

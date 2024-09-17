@@ -1,0 +1,44 @@
+{
+  "id": "82",
+  "bouwjaar": 1993,
+  "monumenten": [],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EP2",
+        "naam": "Primair energieverbruik - woningbouw"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2021-03-27",
+      "einddatum": "2031-03-27",
+      "registratiedatum": "2021-03-27T14:51:32.980000+01:00",
+      "label": {
+        "code": "F",
+        "naam": "F"
+      },
+      "waarde": "160.92"
+    }
+  ],
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "82.77"
+    }
+  ],
+  "panden": [
+    {
+      "idExtern": "0599100000641232",
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "ruimten": []
+}

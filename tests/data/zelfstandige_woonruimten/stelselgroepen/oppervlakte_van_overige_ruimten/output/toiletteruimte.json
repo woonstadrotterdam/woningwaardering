@@ -1,0 +1,36 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 1.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 2.1,
+          "criterium": {
+            "naam": "Toiletruimte",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "maximaleHuur": 228.86,
+  "punten": 2.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
+  "maximaleHuurInclusiefOpslag": 228.86
+}

@@ -1,0 +1,13 @@
+{
+  "bouwjaar": 1964,
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    },
+    {
+      "code": "STA",
+      "naam": "Beschermd stadsgezicht"
+    }
+  ]
+}
