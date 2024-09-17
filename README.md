@@ -542,7 +542,6 @@ eenheid = EenhedenEenheid(
             bouwkundigeElementen=[
                 BouwkundigElementenBouwkundigElement(
                     id="Aanrecht_108006231",
-                    id_bimmodel="3ZBiDoTKz0JfnjhzfVcYcF",
                     naam="Aanrecht",
                     omschrijving="Aanrecht in Keuken",
                     soort=Bouwkundigelementsoort.voorziening.value,
