@@ -16,7 +16,6 @@
       "oppervlakte": 9.5565,
       "verwarmd": true,
       "afsluitbaar": true,
-      "gedeeldMetAantalEenheden": 2,
       "bouwkundigeElementen": [
         {
           "id": "aanrecht",
@@ -32,6 +31,27 @@
             "naam": "Aanrecht"
           },
           "lengte": 1000
+        }
+      ]
+    },
+    {
+      "id": "badkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "installaties": [
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
         }
       ]
     }
