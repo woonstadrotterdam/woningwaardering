@@ -11,7 +11,9 @@
     "huisnummer": "44",
     "huisnummer_toevoeging": "",
     "postcode": "3012CJ",
-    "woonplaats": { "naam": "ROTTERDAM" }
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
   },
   "panden": [
     {
@@ -24,15 +26,42 @@
   "woz_eenheden": [
     {
       "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 297000
+      "vastgesteldeWaarde": 497000
     },
     {
       "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 353900
+      "vastgesteldeWaarde": 553900
     }
   ],
-  "energieprestaties": [],
-  "gebruiksoppervlakte": 71,
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EP2",
+        "naam": "Primair energieverbruik - woningbouw"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2021-03-27",
+      "einddatum": "2031-03-27",
+      "registratiedatum": "2021-03-27T14:51:32.980000+01:00",
+      "label": {
+        "code": "A+++",
+        "naam": "A+++"
+      },
+      "waarde": "170"
+    }
+  ],
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "82.77"
+    }
+  ],
   "monumenten": [],
   "ruimten": [
     {
@@ -51,60 +80,6 @@
       "lengte": 1.29,
       "hoogte": 2.6,
       "verwarmd": false,
-      "bouwlaag": {
-        "nummer": "01",
-        "omschrijving": "eerste verdieping"
-      }
-    },
-    {
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
-      },
-      "detailSoort": {
-        "code": "TEC",
-        "naam": "Technische ruimte"
-      },
-      "naam": "Technische ruimte",
-      "inhoud": 0.89856,
-      "oppervlakte": 0.3456,
-      "verwarmd": false,
-      "afsluitbaar": false,
-      "bouwkundigeElementen": [
-        {
-          "naam": "Ketel",
-          "soort": {
-            "code": "VER",
-            "naam": "Verwarming"
-          },
-          "detailSoort": {
-            "code": "VTO",
-            "naam": "Verwarmingstoestellen"
-          },
-          "extraAttributen": {
-            "ifcSoort": "IfcBoiler"
-          }
-        }
-      ],
-      "bouwlaag": {
-        "nummer": "01",
-        "omschrijving": "eerste verdieping"
-      }
-    },
-    {
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
-      },
-      "detailSoort": {
-        "code": "SCH",
-        "naam": "Schacht"
-      },
-      "naam": "Schacht",
-      "inhoud": 0.6566,
-      "oppervlakte": 0.2345,
-      "verwarmd": false,
-      "afsluitbaar": false,
       "bouwlaag": {
         "nummer": "01",
         "omschrijving": "eerste verdieping"
@@ -173,21 +148,7 @@
       "oppervlakte": 9.5565,
       "verwarmd": true,
       "afsluitbaar": true,
-      "bouwkundigeElementen": [
-        {
-          "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Keuken",
-          "soort": {
-            "code": "KEU",
-            "naam": "Keuken voorziening"
-          },
-          "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
-          },
-          "lengte": 2100
-        }
-      ],
+      "bouwkundigeElementen": [],
       "verbondenRuimten": [
         {
           "soort": {

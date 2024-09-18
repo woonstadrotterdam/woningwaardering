@@ -7,22 +7,17 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "KEU",
-          "naam": "Keuken"
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
         }
       },
-      "punten": 2.0,
+      "punten": 0.25,
       "woningwaarderingen": [
         {
-          "aantal": 1000.0,
           "criterium": {
-            "naam": "Lengte aanrecht (gedeeld met 2)",
-            "meeteenheid": {
-              "code": "MIL",
-              "naam": "Millimeter"
-            }
+            "naam": "Aanbelfunctie met video- en audioverbinding"
           },
-          "punten": 2.0
+          "punten": 0.25
         }
       ]
     }
