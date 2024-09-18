@@ -312,11 +312,48 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 8.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1875.0,
+          "criterium": {
+            "naam": "Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 1920.0,
+          "criterium": {
+            "naam": "Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 4.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "WOZ",
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 94.0,
+      "punten": 98.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -334,7 +371,7 @@
           "criterium": {
             "naam": "Maximering WOZ-punten tot 33% van totaal"
           },
-          "punten": -8.64
+          "punten": -4.64
         }
       ]
     },
@@ -368,11 +405,11 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1805.12,
-  "punten": 286.0,
+  "maximaleHuur": 1882.76,
+  "punten": 298.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 1805.12
+  "maximaleHuurInclusiefOpslag": 1882.76
 }

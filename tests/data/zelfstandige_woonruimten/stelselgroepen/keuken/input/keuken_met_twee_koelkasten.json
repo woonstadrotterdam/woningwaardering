@@ -1,4 +1,5 @@
 {
+  "id": "1000mm",
   "ruimten": [
     {
       "id": "keuken",
@@ -18,6 +19,7 @@
       "bouwkundigeElementen": [
         {
           "id": "aanrecht",
+          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -28,21 +30,17 @@
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 1820
+          "lengte": 1000
+        }
+      ],
+      "installaties": [
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
         },
         {
-          "id": "wandafwerking",
-          "naam": "Binnenwandafwerking",
-          "omschrijving": "Tegels in Keuken",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "BIA",
-            "naam": "Binnenwandafwerking"
-          },
-          "lengte": 3200
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
         }
       ]
     }

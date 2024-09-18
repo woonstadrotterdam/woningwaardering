@@ -11,16 +11,23 @@
           "naam": "Keuken"
         }
       },
-      "punten": 2.0,
+      "punten": 6.0,
       "woningwaarderingen": [
         {
           "aantal": 1000.0,
           "criterium": {
-            "naam": "Lengte aanrecht (gedeeld met 2)",
+            "naam": "Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
             }
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Inbouw koelkast (in zelfde ruimte)"
           },
           "punten": 2.0
         }
