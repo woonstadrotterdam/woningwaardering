@@ -125,13 +125,24 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "PMN",
-          "naam": "Prijsopslag monumenten en nieuwbouw"
+          "code": "KEU",
+          "naam": "Keuken"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": [],
-      "opslagpercentage": 0.0
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2700.0,
+          "criterium": {
+            "naam": "Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 7.0
+        }
+      ]
     },
     {
       "criteriumGroep": {
@@ -159,13 +170,42 @@
           "punten": 67.79
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1047.78,
-  "punten": 174.0,
+  "maximaleHuur": 1091.75,
+  "punten": 181.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 1047.78
+  "maximaleHuurInclusiefOpslag": 1091.75
 }

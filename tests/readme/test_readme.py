@@ -118,7 +118,7 @@ def test_readme_json_voorbeeld():
     # Dit is voorbeeld 1 uit de readme met als input een JSON bestand.
     stelsel = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
     with open(
-        "tests/data/zelfstandige_woonruimten/input/87402000003.json",
+        "tests/data/generiek/input/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

@@ -11,7 +11,9 @@
     "huisnummer": "44",
     "huisnummer_toevoeging": "",
     "postcode": "3012CJ",
-    "woonplaats": { "naam": "ROTTERDAM" }
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
   },
   "panden": [
     {
@@ -146,21 +148,7 @@
       "oppervlakte": 9.5565,
       "verwarmd": true,
       "afsluitbaar": true,
-      "bouwkundigeElementen": [
-        {
-          "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Keuken",
-          "soort": {
-            "code": "KEU",
-            "naam": "Keuken voorziening"
-          },
-          "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
-          },
-          "lengte": 2100
-        }
-      ],
+      "bouwkundigeElementen": [],
       "verbondenRuimten": [
         {
           "soort": {

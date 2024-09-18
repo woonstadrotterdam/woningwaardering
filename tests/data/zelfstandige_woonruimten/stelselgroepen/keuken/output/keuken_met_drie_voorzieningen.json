@@ -11,18 +11,32 @@
           "naam": "Keuken"
         }
       },
-      "punten": 4.0,
+      "punten": 7.0,
       "woningwaarderingen": [
         {
-          "aantal": 1820.0,
+          "aantal": 1000.0,
           "criterium": {
             "naam": "Lengte aanrecht",
             "meeteenheid": {
-              "code": "MLM",
+              "code": "MIL",
               "naam": "Millimeter"
             }
           },
           "punten": 4.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Inbouw koelkast (in zelfde ruimte)"
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Inbouw oven elektrisch"
+          },
+          "punten": 1.0
         }
       ]
     }

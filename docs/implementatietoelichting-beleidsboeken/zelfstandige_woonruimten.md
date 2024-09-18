@@ -467,10 +467,10 @@ Voor de puntentoekenningen in de tabellen wordt onderscheid gemaakt tussen eenge
 
 Punten worden alleen aan het onderdeel ‘keuken’ toegekend als de ruimte voldoet aan het volgende basisniveau:
 
-*   aan- en afvoer van water en ten minste één vast aansluitpunt voor koken op gas of elektriciteit;
+*   ~~aan- en afvoer van water en ten minste één vast aansluitpunt voor koken op gas of elektriciteit;~~
 *   een aanrechtblad met een aan een gesloten lengte van minimaal 1 m (lengte incl. spoelbak, incl. kookplaat);
-*   twee inbouwkasten met een breedte van minimaal 50 cm;
-*   waterdichte afwerking boven het waterdichte aanrechtblad en in de kookhoek vanaf de vloer tot een hoogte van minimaal 1,50 m.
+*   ~~twee inbouwkasten met een breedte van minimaal 50 cm;~~
+*   ~~waterdichte afwerking boven het waterdichte aanrechtblad en in de kookhoek vanaf de vloer tot een hoogte van minimaal 1,50 m.~~
 
 Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, ook niet voor de extra voorzieningen als bedoeld in paragraaf 5.4 hierna. Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als ‘wastafel’.
 
@@ -480,10 +480,10 @@ Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, oo
 *   Bij een aanrechtlengte tussen de 1 en 2 m, worden 4 punten toegekend.
 *   Bij een aanrechtlengte van 2 m of langer, worden 7 punten toegekend.
 
-De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van het aanrecht, waarbij sprake moet zijn van een waterdicht keukenblad
+De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van het aanrecht, ~~waarbij sprake moet zijn van een waterdicht keukenblad~~
 
-Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel.  
-Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.
+~~Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel.~~  
+~~Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.~~
 
 ### 5.3 Meetinstructies lengte aanrechtblad
 
@@ -501,6 +501,8 @@ Indien er sprake is van een hoekaanrecht wordt de lengte van het aanrecht bepaal
 2.  Vervolgens die lengte te salderen met de lange zijde van het kortere aanrechtdeel (zie verticale blauwe lijn).
 
 De lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.
+
+> Zorg ervoor dat de lengte die wordt meegegeven in het inputmodel volgens deze regels zijn gemeten. De package doet geen aanpassingen aan de lengte.
 
 ### 5.4 Puntentoekenning extra voorzieningen
 
@@ -527,9 +529,9 @@ Punten toekenning extra voorzieningen
 | Thermostatische mengkraan | 0,5 punt |
 | Kokend waterfunctie (al dan niet apart of in aanvulling op de kraan) | \+ 0,5 punt |
 
-_\* Bij een afzuiginstallatie gaat het om een luchtafvoer met afzuiging naar buiten de woning of op basis van recirculatie met actieve koolstof- en vetfilters. Een afzuiginstallatie kan zowel een afzuig- of recirculatiekap boven de kookinstallatie zijn, als een in het aanrecht geïntegreerd afzuigsysteem._
+_\* ~~Bij een afzuiginstallatie gaat het om een luchtafvoer met afzuiging naar buiten de woning of op basis van recirculatie met actieve koolstof- en vetfilters. Een afzuiginstallatie kan zowel een afzuig- of recirculatiekap boven de kookinstallatie zijn, als een in het aanrecht geïntegreerd afzuigsysteem.~~_
 
-Wanneer een object twee voorzieningen heeft, bijvoorbeeld een ingebouwde combi magnetron/oven of een gecombineerde koel- en vrieskast, worden beide voorzieningen in dit object gewaardeerd conform bovenstaande lijst. Voor de meting van keukenkasten wordt uitgegaan van de buitenmaat.
+Wanneer een object twee voorzieningen heeft, bijvoorbeeld een ingebouwde combi magnetron/oven of een gecombineerde koel- en vrieskast, worden beide voorzieningen in dit object gewaardeerd conform bovenstaande lijst. ~~Voor de meting van keukenkasten wordt uitgegaan van de buitenmaat.~~
 
 ## Rubriek 6 Sanitair
 

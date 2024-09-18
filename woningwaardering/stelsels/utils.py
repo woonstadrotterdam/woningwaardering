@@ -1,7 +1,7 @@
+import warnings
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Callable, List, Tuple
-import warnings
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
@@ -120,23 +120,34 @@ def naar_tabel(
             and woningwaardering_groep.criterium_groep
             and woningwaardering_groep.criterium_groep.stelselgroep
         ):
-            meeteenheid = ", ".join(
-                list(
-                    {
-                        woningwaardering.criterium.meeteenheid.naam or ""
-                        for woningwaardering in woningwaarderingen
-                        if woningwaardering.criterium is not None
-                        and woningwaardering.criterium.meeteenheid is not None
-                    }
-                )
-            )
+            # stukje hieronder is om subtotaal en meeteenheid te bepalen.
+            # indien er meerdere meeteenheden zijn, dan wordt het subtotaal en de meeteenheid leeg bij subtotalen
+            meeteenheden_zonder_nones = [
+                woningwaardering.criterium.meeteenheid.naam or ""
+                for woningwaardering in woningwaarderingen
+                if woningwaardering.criterium is not None
+                and woningwaardering.criterium.meeteenheid is not None
+            ]
+            critera = [
+                woningwaardering.criterium or ""
+                for woningwaardering in woningwaarderingen
+                if woningwaardering.criterium is not None
+            ]
+            verschillende_meeteenheden = len(set(meeteenheden_zonder_nones)) > 1 or len(
+                critera
+            ) != len(meeteenheden_zonder_nones)
+
+            if verschillende_meeteenheden:
+                meeteenheid = ""
+            else:
+                meeteenheid = meeteenheden_zonder_nones[0]
 
             table.add_row(
                 [
                     woningwaardering_groep.criterium_groep.stelselgroep.naam,
                     "Subtotaal",
-                    subtotaal or "",
-                    meeteenheid,
+                    (subtotaal or "") if not verschillende_meeteenheden else "",
+                    meeteenheid if not verschillende_meeteenheden else "",
                     woningwaardering_groep.punten or "",
                     f"{woningwaardering_groep.opslagpercentage:.0%}"
                     if woningwaardering_groep.opslagpercentage is not None

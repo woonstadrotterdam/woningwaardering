@@ -1395,6 +1395,13 @@ class EenhedenRuimte(BaseModel):
     """
     Geeft aan of de ruimte verkoeld wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/70
+    installaties: Optional[list[Referentiedata]] = Field(
+        default=None, alias="installaties"
+    )
+    """
+    Het soort installaties van de ruimte. Bijvoorbeeld Hangend toilet, Wastafel, Inbouw koelkast, warmkokend water functie etc. Deze installaties zijn van belang voor de woningwaardering. Referentiedatasoort INSTALLATIESOORT.
+    """
 
 
 class EenhedenStadsdeel(BaseModel):

@@ -189,6 +189,20 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "WOZ",
           "naam": "Punten voor de WOZ-waarde"
         }
