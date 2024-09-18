@@ -1,0 +1,34 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "GAR",
+        "naam": "Garagebox"
+      },
+      "naam": "Garagebox",
+      "oppervlakte": 15,
+      "lengte": 3,
+      "breedte": 5,
+      "hoogte": 3.17
+    },
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "GAR",
+        "naam": "Garagebox"
+      },
+      "naam": "Garagebox",
+      "oppervlakte": 15,
+      "lengte": 3,
+      "breedte": 5,
+      "hoogte": 3.17
+    }
+  ]
+}
