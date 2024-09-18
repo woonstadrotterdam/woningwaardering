@@ -1,4 +1,5 @@
 import warnings
+from collections import Counter
 from datetime import date
 from decimal import Decimal
 
@@ -9,7 +10,6 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
-    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -24,6 +24,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
+from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
 class Keuken(Stelselgroep):
@@ -89,13 +90,10 @@ class Keuken(Stelselgroep):
         aanrecht_aantal = len(
             [
                 aanrecht
-                for aanrecht in ruimte.bouwkundige_elementen or []
-                if aanrecht.detail_soort
-                and aanrecht.detail_soort.code
-                and aanrecht.detail_soort.code
-                == Bouwkundigelementdetailsoort.aanrecht.code
-                and aanrecht.lengte
-                and aanrecht.lengte >= 1000
+                for aanrecht in get_bouwkundige_elementen(
+                    ruimte, Bouwkundigelementdetailsoort.aanrecht
+                )
+                if aanrecht.lengte and aanrecht.lengte >= 1000
             ]
         )
 
@@ -179,7 +177,6 @@ class Keuken(Stelselgroep):
                     )
                 )
         # extra voorzieningen
-        punten_voor_extra_voorzieningen = 0.0
         punten_per_installatie = {
             Installatiesoort.inbouw_afzuiginstallatie.value: 0.75,
             Installatiesoort.inbouw_kookplaat_inductie.value: 1.75,
@@ -197,15 +194,16 @@ class Keuken(Stelselgroep):
             Installatiesoort.kokend_waterfunctie.value: 0.5,
         }
 
-        voorziening_counts: dict[Referentiedata, int] = {}
-        # tel aantal voorzieningen per type
-        for voorziening in ruimte.installaties or []:
-            if voorziening in punten_per_installatie:
-                voorziening_counts[voorziening] = (
-                    voorziening_counts.get(voorziening, 0) + 1
-                )
-                punten_voor_extra_voorzieningen += punten_per_installatie[voorziening]
-        # voeg punten toe voor elk type voorziening
+        voorziening_counts = Counter(
+            voorziening
+            for voorziening in ruimte.installaties or []
+            if voorziening in punten_per_installatie
+        )
+        punten_voor_extra_voorzieningen = sum(
+            punten_per_installatie[voorziening] * count
+            for voorziening, count in voorziening_counts.items()
+        )
+
         for voorziening, count in voorziening_counts.items():
             woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
