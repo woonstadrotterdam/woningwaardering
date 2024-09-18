@@ -10,6 +10,7 @@ from woningwaardering.stelsels.stelselgroep import (
 from woningwaardering.stelsels.utils import (
     is_geldig,
     rond_af,
+    rond_af_op_kwart,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -87,14 +88,7 @@ class Stelsel:
 
             resultaat.groepen.append(stelselgroep.bereken(eenheid, resultaat))
 
-        # Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij
-        # zorgwoningen geldende toeslag) afgerond op hele punten. Bij 0,5 punten of
-        # meer wordt afgerond naar boven op hele punten, bij minder dan 0,5 punten
-        # wordt afgerond naar beneden op hele punten.
-        #
-        # https://wetten.overheid.nl/BWBR0003237/2024-01-01#BijlageI_DivisieA_Divisie_Divisie15
-
-        resultaat.punten = Stelsel.bereken_puntentotaal(resultaat)
+        resultaat.punten = float(Stelsel.bereken_puntentotaal(resultaat))
 
         resultaat.opslagpercentage = (
             sum(
@@ -109,16 +103,16 @@ class Stelsel:
 
         resultaat.maximale_huur = float(maximale_huur)
 
-        if resultaat.opslagpercentage is not None:
-            resultaat.huurprijsopslag = float(
-                rond_af(
-                    maximale_huur * Decimal(str(resultaat.opslagpercentage)),
-                    decimalen=2,
-                )
-            )
+        huurprijsopslag = rond_af(
+            maximale_huur * Decimal(str(resultaat.opslagpercentage or 0)),
+            decimalen=2,
+        )
+
+        if huurprijsopslag > 0:
+            resultaat.huurprijsopslag = float(huurprijsopslag)
 
         resultaat.maximale_huur_inclusief_opslag = float(
-            maximale_huur + Decimal(str(resultaat.huurprijsopslag or 0))
+            maximale_huur + huurprijsopslag
         )
 
         return resultaat
@@ -126,16 +120,25 @@ class Stelsel:
     @staticmethod
     def bereken_puntentotaal(
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    ) -> float:
-        return float(
-            rond_af(
-                sum(
-                    woningwaardering_groep.punten
-                    for woningwaardering_groep in resultaat.groepen or []
-                    if woningwaardering_groep.punten is not None
-                ),
-                decimalen=0,
+    ) -> Decimal:
+        # Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij
+        # zorgwoningen geldende toeslag) afgerond op hele punten.
+        # Bij 0,5 punten of meer wordt afgerond naar boven op hele punten, bij minder
+        # dan 0,5 punten wordt afgerond naar beneden op hele punten. In de
+        # eindsaldering zitten ook de punten voor eventuele gemeenschappelijke ruimten
+        # en voorzieningen.
+        return rond_af(
+            sum(
+                # De waardering in punten wordt per rubriek na saldering afgerond op
+                # 0,25 punt waarbij een achtste (1/8) punt naar boven wordt afgerond.
+                # Dat wil zeggen dat 0,125 wordt afgerond naar 0,25. Een kwartpunt is
+                # de kleinst werkbare waardering binnen het woningwaarderingsstelsel
+                # voor een afzonderlijke rubriek.
+                rond_af_op_kwart(woningwaardering_groep.punten)
+                for woningwaardering_groep in resultaat.groepen or []
+                if woningwaardering_groep.punten is not None
             ),
+            decimalen=0,
         )
 
     def bereken_maximale_huur(
@@ -156,6 +159,11 @@ class Stelsel:
             ].item()
         )
 
+        # In geval van een woonruimte met méér dan 250 punten wordt de maximale
+        # huurprijs als volgt berekend: elk punt boven de 250 wordt vermenigvuldigd met
+        # het verschil tussen de bedragen, genoemd in de huurprijstabel (zie bijlage 5)
+        # bij 249 en 250 punten. Het verkregen bedrag wordt vervolgens opgeteld bij de
+        # maximale huurprijs die volgens de huurprijstabel behoort bij 250 punten.
         hoogste_twee = df_maximale_huur.nlargest(2, "Punten")
         hoogste_punten = Decimal(hoogste_twee.iloc[0]["Punten"])
         hoogste_bedrag = Decimal(hoogste_twee.iloc[0]["Bedrag"])
