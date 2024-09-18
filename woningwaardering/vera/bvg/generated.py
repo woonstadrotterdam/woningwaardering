@@ -1369,7 +1369,7 @@ class EenhedenRuimte(BaseModel):
         default=None, alias="gedeeldMetAantalEenheden"
     )
     """
-    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging.
+    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_eenheden groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
     bouwkundige_elementen: Optional[list[BouwkundigElementenBouwkundigElement]] = Field(
@@ -1394,6 +1394,10 @@ class EenhedenRuimte(BaseModel):
     verkoeld: Optional[bool] = Field(default=None, alias="verkoeld")
     """
     Geeft aan of de ruimte verkoeld wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
+    """
+    aantal: Optional[int] = Field(default=1, alias="aantalRuimten")
+    """
+    Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aan gemaakt om de rubriek 'Gemeenschappelijke parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat bijvoorbeeld alle gedeelde parkeervakken van een parkeerruimten meegegeven dienen te worden.
     """
 
 

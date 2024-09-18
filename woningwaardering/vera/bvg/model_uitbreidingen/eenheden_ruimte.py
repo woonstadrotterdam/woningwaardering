@@ -40,3 +40,7 @@ class _EenhedenRuimte(BaseModel):
     """
     Geeft aan of de ruimte verkoeld wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
     """
+    aantal: Optional[int] = Field(default=1, alias="aantalRuimten")
+    """
+    Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aan gemaakt om de rubriek 'Gemeenschappelijke parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat bijvoorbeeld alle gedeelde parkeervakken van een parkeerruimten meegegeven dienen te worden.
+    """
