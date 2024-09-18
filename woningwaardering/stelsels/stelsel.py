@@ -108,8 +108,7 @@ class Stelsel:
             decimalen=2,
         )
 
-        if huurprijsopslag > 0:
-            resultaat.huurprijsopslag = float(huurprijsopslag)
+        resultaat.huurprijsopslag = float(huurprijsopslag)
 
         resultaat.maximale_huur_inclusief_opslag = float(
             maximale_huur + huurprijsopslag
