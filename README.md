@@ -151,7 +151,7 @@ stelsel = ZelfstandigeWoonruimten(
     peildatum = date(2024, 7, 1) # bij niet meegeven wordt de huidige dag gebruikt.
 )
 with open(
-  "tests/data/zelfstandige_woonruimten/input/87402000003.json",
+  "tests/data/generiek/input/37101000032.json",
   "r+",
 ) as file:
   eenheid = EenhedenEenheid.model_validate_json(file.read())
@@ -183,10 +183,10 @@ with open(
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 53.0,
+      "punten": 141.0,
       "woningwaarderingen": [
         {
-          "aantal": 11.65,
+          "aantal": 21.05,
           "criterium": {
             "naam": "Slaapkamer",
             "meeteenheid": {
@@ -196,27 +196,7 @@ with open(
           }
         },
         {
-          "aantal": 3.12,
-          "criterium": {
-            "naam": "Badruimte",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 6.37,
-          "criterium": {
-            "naam": "Keuken",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 23.1,
+          "aantal": 41.0,
           "criterium": {
             "naam": "Woonkamer",
             "meeteenheid": {
@@ -226,7 +206,47 @@ with open(
           }
         },
         {
-          "aantal": 8.35,
+          "aantal": 20.37,
+          "criterium": {
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 7.5,
+          "criterium": {
+            "naam": "Badruimte",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 15.98,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 19.15,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 15.82,
           "criterium": {
             "naam": "Slaapkamer",
             "meeteenheid": {
@@ -248,10 +268,10 @@ with open(
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 3.75,
+      "punten": 5.25,
       "woningwaarderingen": [
         {
-          "aantal": 5.25,
+          "aantal": 6.65,
           "criterium": {
             "naam": "Berging",
             "meeteenheid": {
@@ -273,7 +293,7 @@ with open(
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 10.0,
+      "punten": 14.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -283,7 +303,7 @@ with open(
         },
         {
           "criterium": {
-            "naam": "Badruimte (verwarmd vertrek)"
+            "naam": "Woonkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -295,7 +315,19 @@ with open(
         },
         {
           "criterium": {
-            "naam": "Woonkamer (verwarmd vertrek)"
+            "naam": "Badruimte (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -318,10 +350,10 @@ with open(
           "naam": "Buitenruimten"
         }
       },
-      "punten": 4.0,
+      "punten": 15.0,
       "woningwaarderingen": [
         {
-          "aantal": 5.6,
+          "aantal": 3.14,
           "criterium": {
             "naam": "Balkon (privé)",
             "meeteenheid": {
@@ -329,7 +361,46 @@ with open(
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 3.96
+          "punten": 3.1
+        },
+        {
+          "aantal": 3.14,
+          "criterium": {
+            "naam": "Balkon (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.1
+        },
+        {
+          "aantal": 49.11,
+          "criterium": {
+            "naam": "Tuin (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 19.19
+        },
+        {
+          "aantal": 15.93,
+          "criterium": {
+            "naam": "Dakterras (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 7.57
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 15 punten"
+          },
+          "punten": -18.0
         }
       ]
     },
@@ -344,15 +415,82 @@ with open(
           "naam": "Energieprestatie"
         }
       },
-      "punten": -15.0,
+      "punten": 22.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Bouwjaar 1898"
+            "naam": "C (Energie-index)"
           },
-          "punten": -15.0
+          "punten": 22.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2700.0,
+          "criterium": {
+            "naam": "Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 7.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "punten": 63.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Onderdeel I"
+          },
+          "punten": 44.21
+        },
+        {
+          "criterium": {
+            "naam": "Onderdeel II"
+          },
+          "punten": 19.03
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
     },
     {
       "criteriumGroep": {
@@ -368,42 +506,15 @@ with open(
       "punten": 0.0,
       "woningwaarderingen": [],
       "opslagpercentage": 0.0
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
-          "code": "WOZ",
-          "naam": "Punten voor de WOZ-waarde"
-        }
-      },
-      "punten": 25.0,
-      "woningwaarderingen": [
-        {
-          "criterium": {
-            "naam": "Onderdeel I"
-          },
-          "punten": 11.69
-        },
-        {
-          "criterium": {
-            "naam": "Onderdeel II"
-          },
-          "punten": 12.83
-        }
-      ]
     }
   ],
-  "maximaleHuur": 463.87,
-  "punten": 81.0,
+  "maximaleHuur": 1631.51,
+  "punten": 267.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 463.87
+  "maximaleHuurInclusiefOpslag": 1631.51
 }
 ```
 
@@ -413,44 +524,56 @@ with open(
 <summary>Voorbeeld output in tabel</summary>
 
 ```text
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Groep                           | Naam                          | Aantal | Meeteenheid         | Punten | Opslag |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Oppervlakte van vertrekken      | Slaapkamer                    |  11.65 | Vierkante meter, m2 |        |        |
-| Oppervlakte van vertrekken      | Badruimte                     |   3.12 | Vierkante meter, m2 |        |        |
-| Oppervlakte van vertrekken      | Keuken                        |   6.37 | Vierkante meter, m2 |        |        |
-| Oppervlakte van vertrekken      | Woonkamer                     |  23.10 | Vierkante meter, m2 |        |        |
-| Oppervlakte van vertrekken      | Slaapkamer                    |   8.35 | Vierkante meter, m2 |        |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Oppervlakte van vertrekken      | Subtotaal                     |  52.59 | Vierkante meter, m2 |  53.00 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Oppervlakte van overige ruimten | Berging                       |   5.25 | Vierkante meter, m2 |        |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Oppervlakte van overige ruimten | Subtotaal                     |   5.25 | Vierkante meter, m2 |   3.75 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |        |                     |   2.00 |        |
-| Verkoeling en verwarming        | Badruimte (verwarmd vertrek)  |        |                     |   2.00 |        |
-| Verkoeling en verwarming        | Keuken (verwarmd vertrek)     |        |                     |   2.00 |        |
-| Verkoeling en verwarming        | Woonkamer (verwarmd vertrek)  |        |                     |   2.00 |        |
-| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |        |                     |   2.00 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Verkoeling en verwarming        | Subtotaal                     |        |                     |  10.00 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Buitenruimten                   | Balkon (privé)                |   5.60 | Vierkante meter, m2 |   3.96 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Buitenruimten                   | Subtotaal                     |   5.60 | Vierkante meter, m2 |   4.00 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Energieprestatie                | Bouwjaar 1898                 |        |                     | -15.00 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Punten voor de WOZ-waarde       | Onderdeel I                   |        |                     |  11.69 |        |
-| Punten voor de WOZ-waarde       | Onderdeel II                  |        |                     |  12.83 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Punten voor de WOZ-waarde       | Subtotaal                     |        |                     |  25.00 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-| Zelfstandige woonruimten        | Afgerond totaal               |        |                     |  81.00 |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
-|                                 | Maximale huur                 | 463.87 | EUR                 |        |        |
-+---------------------------------+-------------------------------+--------+---------------------+--------+--------+
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Groep                           | Naam                          |  Aantal | Meeteenheid         | Punten | Opslag |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van vertrekken      | Slaapkamer                    |   21.05 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Woonkamer                     |   41.00 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Keuken                        |   20.37 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Badruimte                     |    7.50 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Slaapkamer                    |   15.98 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Slaapkamer                    |   19.15 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Slaapkamer                    |   15.82 | Vierkante meter, m2 |        |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van vertrekken      | Subtotaal                     |  140.87 | Vierkante meter, m2 | 141.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van overige ruimten | Berging                       |    6.65 | Vierkante meter, m2 |        |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van overige ruimten | Subtotaal                     |    6.65 | Vierkante meter, m2 |   5.25 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Woonkamer (verwarmd vertrek)  |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Keuken (verwarmd vertrek)     |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Badruimte (verwarmd vertrek)  |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |         |                     |   2.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Verkoeling en verwarming        | Subtotaal                     |         |                     |  14.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Buitenruimten                   | Balkon (privé)                |    3.14 | Vierkante meter, m2 |   3.10 |        |
+| Buitenruimten                   | Balkon (privé)                |    3.14 | Vierkante meter, m2 |   3.10 |        |
+| Buitenruimten                   | Tuin (privé)                  |   49.11 | Vierkante meter, m2 |  19.19 |        |
+| Buitenruimten                   | Dakterras (privé)             |   15.93 | Vierkante meter, m2 |   7.57 |        |
+| Buitenruimten                   | Maximaal 15 punten            |         |                     | -18.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Buitenruimten                   | Subtotaal                     |         |                     |  15.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Energieprestatie                | C (Energie-index)             |         |                     |  22.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Keuken                          | Lengte aanrecht               | 2700.00 | Millimeter          |   7.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Keuken                          | Subtotaal                     | 2700.00 | Millimeter          |   7.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Punten voor de WOZ-waarde       | Onderdeel I                   |         |                     |  44.21 |        |
+| Punten voor de WOZ-waarde       | Onderdeel II                  |         |                     |  19.03 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Punten voor de WOZ-waarde       | Subtotaal                     |         |                     |  63.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Zelfstandige woonruimten        | Afgerond totaal               |         |                     | 267.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+|                                 | Maximale huur                 | 1631.51 | EUR                 |        |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
 ```
 
 </details>
@@ -697,13 +820,24 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "PMN",
-          "naam": "Prijsopslag monumenten en nieuwbouw"
+          "code": "KEU",
+          "naam": "Keuken"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": [],
-      "opslagpercentage": 0.0
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2700.0,
+          "criterium": {
+            "naam": "Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 7.0
+        }
+      ]
     },
     {
       "criteriumGroep": {
@@ -731,10 +865,44 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "punten": 67.79
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1047.78,
-  "punten": 174.0
+  "maximaleHuur": 1091.75,
+  "punten": 181.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
+  "maximaleHuurInclusiefOpslag": 1091.75
 }
 ```
 
@@ -761,14 +929,18 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
 +----------------------------+-------------------------------+---------+---------------------+--------+--------+
 | Energieprestatie           | C (Energie-index)             |         |                     |  22.00 |        |
 +----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Keuken                     | Lengte aanrecht               | 2700.00 | Millimeter          |   7.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Keuken                     | Subtotaal                     | 2700.00 | Millimeter          |   7.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
 | Punten voor de WOZ-waarde  | Onderdeel I                   |         |                     |  44.21 |        |
 | Punten voor de WOZ-waarde  | Onderdeel II                  |         |                     |  67.79 |        |
 +----------------------------+-------------------------------+---------+---------------------+--------+--------+
 | Punten voor de WOZ-waarde  | Subtotaal                     |         |                     | 112.00 |        |
 +----------------------------+-------------------------------+---------+---------------------+--------+--------+
-| Zelfstandige woonruimten   | Afgerond totaal               |         |                     | 174.00 |        |
+| Zelfstandige woonruimten   | Afgerond totaal               |         |                     | 181.00 |        |
 +----------------------------+-------------------------------+---------+---------------------+--------+--------+
-|                            | Maximale huur                 | 1047.78 | EUR                 |        |        |
+|                            | Maximale huur                 | 1091.75 | EUR                 |        |        |
 +----------------------------+-------------------------------+---------+---------------------+--------+--------+
 ```
 
