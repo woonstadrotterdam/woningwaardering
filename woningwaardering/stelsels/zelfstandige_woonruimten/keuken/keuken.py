@@ -2,6 +2,7 @@ import warnings
 from collections import Counter
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from loguru import logger
 
@@ -59,10 +60,11 @@ class Keuken(Stelselgroep):
             ruimte for ruimte in eenheid.ruimten or [] if Keuken.is_keuken(ruimte)
         ]
 
-        for ruimte in keukens:
-            Keuken.punten_voor_voorziening(
-                woningwaardering_groep.woningwaarderingen, ruimte
-            )
+        woningwaardering_groep.woningwaarderingen = [
+            woningwaardering
+            for ruimte in keukens
+            for woningwaardering in Keuken.waarderingen_voor_voorzieningen(ruimte)
+        ]
 
         if not keukens:
             warnings.warn(
@@ -130,10 +132,9 @@ class Keuken(Stelselgroep):
         return True  # ruimte is een impliciete keuken vanwege een valide aanrecht
 
     @staticmethod
-    def punten_voor_voorziening(
-        woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
+    def waarderingen_voor_voorzieningen(
         ruimte: EenhedenRuimte,
-    ) -> float:
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if not Keuken.is_keuken(ruimte):
             logger.debug(
                 f"Ruimte {ruimte.naam} ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor keukenvoorzieningen"
@@ -166,7 +167,7 @@ class Keuken(Stelselgroep):
                     aanrecht_punten = 4
                     totaal_lengte_aanrechten += element.lengte
                 totaal_punten += aanrecht_punten
-                woningwaarderingen.append(
+                yield (
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                             naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
@@ -205,7 +206,7 @@ class Keuken(Stelselgroep):
         )
 
         for voorziening, count in voorziening_counts.items():
-            woningwaarderingen.append(
+            yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=f"{voorziening.naam} (in zelfde ruimte)"
@@ -222,7 +223,7 @@ class Keuken(Stelselgroep):
         max_punten_voorzieningen = 7 if totaal_lengte_aanrechten >= 2000 else 4
         if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
             aftrek = max_punten_voorzieningen - punten_voor_extra_voorzieningen
-            woningwaarderingen.append(
+            yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=f"Max. {max_punten_voorzieningen} punten voor een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
@@ -230,7 +231,6 @@ class Keuken(Stelselgroep):
                     punten=aftrek,
                 )
             )
-        return totaal_punten
 
 
 if __name__ == "__main__":  # pragma: no cover
