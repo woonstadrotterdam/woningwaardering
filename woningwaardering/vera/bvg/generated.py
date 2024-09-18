@@ -1366,7 +1366,7 @@ class EenhedenRuimte(BaseModel):
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
     gedeeld_met_aantal_eenheden: Optional[int] = Field(
-        default=None, alias="gedeeldMetAantalEenheden"
+        default=None, alias="gedeeldMetAantalEenheden", ge=0
     )
     """
     Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_eenheden groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
@@ -1402,9 +1402,9 @@ class EenhedenRuimte(BaseModel):
     """
     Het soort installaties van de ruimte. Bijvoorbeeld Hangend toilet, Wastafel, Inbouw koelkast, warmkokend water functie etc. Deze installaties zijn van belang voor de woningwaardering. Referentiedatasoort INSTALLATIESOORT.
     """
-    aantal: Optional[int] = Field(default=1, alias="aantalRuimten")
+    aantal: Optional[int] = Field(default=1, alias="aantal", ge=0)
     """
-    Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aan gemaakt om de rubriek 'Gemeenschappelijke parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat bijvoorbeeld alle gedeelde parkeervakken van een parkeerruimten meegegeven dienen te worden.
+    Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aangemaakt om de rubriek 'Gemeenschappelijke parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat alle gedeelde parkeervakken van een parkeerruimten apart meegegeven dienen te worden.
     """
 
 
