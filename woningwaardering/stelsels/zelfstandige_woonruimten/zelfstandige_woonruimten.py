@@ -9,13 +9,12 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
     Buitenruimten,
+    Energieprestatie,
     PrijsopslagMonumentenEnNieuwbouw,
     PuntenVoorDeWozWaarde,
     # Sanitair,
     VerkoelingEnVerwarming,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten.energieprestatie.energieprestatie import (
-    Energieprestatie,
+    BijzondereVoorzieningen,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -40,8 +39,9 @@ class ZelfstandigeWoonruimten(Stelsel):
                 Energieprestatie,
                 # Sanitair,
                 # Keuken,
-                PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als een na laatste te worden uitgevoerd
-                PuntenVoorDeWozWaarde,  # LET OP: deze stelselgroep dient als laatste te worden uitgevoerd
+                PuntenVoorDeWozWaarde,  # LET OP: deze stelselgroep dient als twee na laatste te worden uitgevoerd
+                BijzondereVoorzieningen,  # LET OP: deze stelselgroep dient als een na laatste te worden uitgevoerd
+                PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als laatste te worden uitgevoerd
             ],
         )
 

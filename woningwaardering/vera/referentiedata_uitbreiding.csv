@@ -3,3 +3,4 @@ RUIMTEDETAILSOORT;OVL;Overloop;Verkeersruimte: (UITBREIDING) Gang op een bovenve
 RUIMTEDETAILSOORT;ENT;Entree;Verkeersruimte: (UITBREIDING) Ingang van een gebouw.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
 RUIMTEDETAILSOORT;KAS;Kast;Overige ruimte: (UITBREIDING);8-4-2024;;RUIMTESOORT.OVR;Vastgoed
 RUIMTEDETAILSOORT;TRH;Trappenhuis; Verkeersruimte: (UITBREIDING) Verkeersruimte waarin een trap ligt;27-8-2024;;RUIMTESOORT.OVR;Vastgoed
+BOUWKUNDIGELEMENTDETAILSOORT;AAV;Aanbelfunctie met video- en audioverbinding;Systeem dat tweewegcommunicatie (beeld en geluid) mogelijk maakt en waarmee de voordeur op afstand geopend kan worden. Relatie met IFC codering (IfcCommunicationsAppliance) (UITBREIDING);01-07-2024;;BOUWKUNDIGELEMENTSOORT.VOO;Vastgoed

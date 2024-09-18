@@ -188,28 +188,6 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "PMN",
-          "naam": "Prijsopslag monumenten en nieuwbouw"
-        }
-      },
-      "punten": 50.0,
-      "woningwaarderingen": [
-        {
-          "criterium": {
-            "naam": "Rijksmonument"
-          },
-          "punten": 50.0
-        }
-      ],
-      "opslagpercentage": 0.0
-    },
-    {
-      "criteriumGroep": {
-        "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
-        },
-        "stelselgroep": {
           "code": "WOZ",
           "naam": "Punten voor de WOZ-waarde"
         }
@@ -229,6 +207,42 @@
           "punten": 16.48
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 50.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Rijksmonument"
+          },
+          "punten": 50.0
+        }
+      ],
+      "opslagpercentage": 0.0
     }
   ],
   "maximaleHuur": 1217.29,
