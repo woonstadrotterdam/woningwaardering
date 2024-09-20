@@ -1,6 +1,10 @@
 {
   "ruimten": [
     {
+      "detailSoort": {
+        "code": "DOU",
+        "naam": "Doucheruimte"
+      },
       "bouwkundigeElementen": [
         {
           "naam": "Douche",

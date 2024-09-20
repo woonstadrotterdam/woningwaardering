@@ -1,6 +1,10 @@
 {
   "ruimten": [
     {
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
       "bouwkundigeElementen": [
         {
           "naam": "Bad",

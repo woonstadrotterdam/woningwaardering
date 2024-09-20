@@ -1,6 +1,10 @@
 {
   "ruimten": [
     {
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
       "bouwkundigeElementen": [
         {
           "naam": "Wastafel",
@@ -16,6 +20,10 @@
       ]
     },
     {
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
       "gedeeldMetAantalEenheden": 2,
       "bouwkundigeElementen": [
         {
