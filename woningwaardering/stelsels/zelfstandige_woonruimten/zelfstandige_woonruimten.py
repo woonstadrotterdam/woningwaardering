@@ -14,7 +14,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanVertrekken,
     PrijsopslagMonumentenEnNieuwbouw,
     PuntenVoorDeWozWaarde,
-    # Sanitair,
+    Sanitair,
     VerkoelingEnVerwarming,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -39,7 +39,7 @@ class ZelfstandigeWoonruimten(Stelsel):
                 Buitenruimten,
                 Energieprestatie,
                 Keuken,
-                # Sanitair,
+                Sanitair,
                 PuntenVoorDeWozWaarde,  # LET OP: deze stelselgroep dient als twee na laatste te worden uitgevoerd
                 BijzondereVoorzieningen,  # LET OP: deze stelselgroep dient als een na laatste te worden uitgevoerd
                 PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als laatste te worden uitgevoerd
