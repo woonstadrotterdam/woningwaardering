@@ -170,7 +170,7 @@ class Keuken(Stelselgroep):
                 yield (
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
+                            naam=f"{ruimte.naam} - Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                             meeteenheid=Meeteenheid.millimeter.value,
                         ),
                         punten=aanrecht_punten,

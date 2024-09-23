@@ -148,7 +148,7 @@ class Sanitair(Stelselgroep):
                     yield (
                         WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam=f"{ruimte.detail_soort.naam} - {toiletsoort.naam}",
+                                naam=f"{ruimte.naam} - {toiletsoort.naam}",
                             ),
                             punten=float(
                                 utils.rond_af(
@@ -190,7 +190,7 @@ class Sanitair(Stelselgroep):
                 yield (
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{ruimte.detail_soort.naam} - {wastafelsoort.naam}"
+                            naam=f"{ruimte.naam} - {wastafelsoort.naam}"
                         ),
                         punten=float(punten_voor_wastafels),
                         aantal=aantal_wastafels,
@@ -215,7 +215,7 @@ class Sanitair(Stelselgroep):
                     yield (
                         WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam=f"{ruimte.detail_soort.naam} - Max {punten_per_wastafel} punt voor {wastafelsoort.naam}",
+                                naam=f"{ruimte.naam} - Max {punten_per_wastafel} punt voor {wastafelsoort.naam}",
                             ),
                             punten=utils.rond_af(
                                 punten_per_wastafel - punten_voor_wastafels,
@@ -243,7 +243,7 @@ class Sanitair(Stelselgroep):
             yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"{ruimte.detail_soort.naam} - {Installatiesoort.bad_en_douche.naam}"
+                        naam=f"{ruimte.naam} - {Installatiesoort.bad_en_douche.naam}"
                     ),
                     punten=float(punten),
                     aantal=aantal_bad_en_douches,
@@ -265,7 +265,7 @@ class Sanitair(Stelselgroep):
                 yield (
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{ruimte.detail_soort.naam} - {installatiesoort.naam}"
+                            naam=f"{ruimte.naam} - {installatiesoort.naam}"
                         ),
                         punten=float(punten),
                         aantal=aantal,
@@ -311,7 +311,7 @@ class Sanitair(Stelselgroep):
                     yield (
                         WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam=f"{ruimte.detail_soort.naam} - Voorzieningen: {installatie.naam}",
+                                naam=f"{ruimte.naam} - Voorzieningen: {installatie.naam}",
                             ),
                             punten=float(punten),
                             aantal=aantal,
@@ -326,7 +326,7 @@ class Sanitair(Stelselgroep):
 
                             yield WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                    naam=f"{ruimte.detail_soort.naam} - Voorzieningen: Max {maximum} punten voor {installatie.naam}"
+                                    naam=f"{ruimte.naam} - Voorzieningen: Max {maximum} punten voor {installatie.naam}"
                                 ),
                                 punten=float(correctie),
                             )
@@ -345,7 +345,7 @@ class Sanitair(Stelselgroep):
 
                             yield WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                    naam=f"{ruimte.detail_soort.naam} - Voorzieningen: Max 2 stopcontacten per wastafel"
+                                    naam=f"{ruimte.naam} - Voorzieningen: Max 2 stopcontacten per wastafel"
                                 ),
                                 punten=float(correctie),
                             )
@@ -358,7 +358,7 @@ class Sanitair(Stelselgroep):
         if maximering < 0:
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"{ruimte.detail_soort.naam} - Voorzieningen: Max verdubbeling punten bad en douche"
+                    naam=f"{ruimte.naam} - Voorzieningen: Max verdubbeling punten bad en douche"
                 ),
                 punten=maximering,
             )

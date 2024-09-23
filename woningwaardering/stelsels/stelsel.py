@@ -1,3 +1,4 @@
+from collections import Counter
 from datetime import date
 from decimal import Decimal
 from importlib.resources import files
@@ -74,6 +75,18 @@ class Stelsel:
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
         """
+
+        for ruimte in eenheid.ruimten or []:
+            if not ruimte.naam:
+                ruimte.naam = getattr(ruimte.detail_soort, "naam", ruimte.id)
+
+        naam_counter = Counter(ruimte.naam for ruimte in eenheid.ruimten if ruimte.naam)
+        nummering_counter = Counter()
+
+        for ruimte in eenheid.ruimten or []:
+            if naam_counter[ruimte.naam] > 1:
+                nummering_counter[ruimte.naam] += 1
+                ruimte.naam = f"{ruimte.naam} {nummering_counter[ruimte.naam]}"
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
         resultaat.stelsel = self.stelsel.value
