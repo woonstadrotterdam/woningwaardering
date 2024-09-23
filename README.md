@@ -49,7 +49,18 @@ Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team 
     - [Warnings](#warnings)
       - [Warning vs Exception](#warning-vs-exception)
       - [Gebruik](#gebruik)
-  - [2. Contributing](#2-contributing)
+        - [Optie 1; bijvoorbeeld via JSON bestand](#optie-1-bijvoorbeeld-via-json-bestand)
+        - [Optie 2; via Python zelf](#optie-2-via-python-zelf)
+  - [2. Datamodel uitbreidingen](#2-datamodel-uitbreidingen)
+    - [Ruimtedetailsoort kast](#ruimtedetailsoort-kast)
+    - [Verbonden ruimten](#verbonden-ruimten)
+    - [Gedeeld met aantal eenheden](#gedeeld-met-aantal-eenheden)
+    - [Bouwkundige elementen](#bouwkundige-elementen)
+    - [Verkoeld en verwarmd](#verkoeld-en-verwarmd)
+    - [Datum afsluiten huurovereenkomst](#datum-afsluiten-huurovereenkomst)
+    - [Aanbelfunctie met video- en audioverbinding](#aanbelfunctie-met-video--en-audioverbinding)
+    - [Installaties](#installaties)
+  - [3. Contributing](#3-contributing)
     - [Setup](#setup)
     - [Naamgeving van classes](#naamgeving-van-classes)
       - [Genereren opzet woningwaarderingstelsels en -groepen](#genereren-opzet-woningwaarderingstelsels-en--groepen)
@@ -66,13 +77,6 @@ Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team 
     - [Datamodellen](#datamodellen)
       - [Datamodellen uitbreiden](#datamodellen-uitbreiden)
     - [Referentiedata](#referentiedata)
-  - [3. Datamodel uitbreidingen](#3-datamodel-uitbreidingen)
-    - [Ruimtedetailsoort kast](#ruimtedetailsoort-kast)
-    - [Verbonden ruimten](#verbonden-ruimten)
-    - [Gedeeld met aantal eenheden](#gedeeld-met-aantal-eenheden)
-    - [Bouwkundige elementen](#bouwkundige-elementen)
-    - [Verkoeld en verwarmd](#verkoeld-en-verwarmd)
-    - [Datum afsluiten huurovereenkomst](#datum-afsluiten-huurovereenkomst)
 
 ## 1. Opzet woningwaardering-package
 
@@ -946,7 +950,49 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
 
 </details>
 
-## 2. Contributing
+## 2. Datamodel uitbreidingen
+
+Tijdens de ontwikkeling van de woningwaardering-package komt het voor dat de VERA modellen niet toereikend zijn om de punten voor een stelselgroep te berekenen. Daarom kunnen er indien nodig uitbreidingen gemaakt worden op de VERA modellen. In deze sectie onderbouwen en documenteren wij deze uitbreidingen. In de sectie Referentiedata wordt uitgelegd hoe [uitbreidingen toe te voegen](#datamodellen-uitbreiden) als contributor van dit project.
+
+### Ruimtedetailsoort kast
+
+Binnen het woningwaarderingsstelsel mag onder bepaalde voorwaarden de oppervlakte van vaste kasten worden opgeteld bij de ruimte waar de deur van de kast zich bevindt. Als hier bij het inmeten geen rekening mee gehouden is, kan het attribuut verbonden_ruimten gebruikt worden om de met een ruimte verbonden vaste kasten mee te laten nemen in de waardering. Hiervoor is de VERA referentiedata binnen deze repository uitgebreid met ruimtedetailsoort `Kast`, code `KAS`.
+
+### Verbonden ruimten
+
+Het attribuut `verbonden_ruimten` bevat de ruimten die in verbinding staan met de ruimte die het attribuut bezit. `verbonden_ruimten` wordt gebruikt bij het berekenen van de waardering van kasten en verwarming van ruimten. `verbonden_ruimten` heeft type `Optional[list[EenhedenRuimte]]` en is een uitbreiding op `EenhedenRuimte`. Voor deze uitbreiding staat een [github issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/47) open ter aanvulling op het VERA model.
+
+### Gedeeld met aantal eenheden
+
+Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarmee een bepaalde ruimte wordt gedeeld. Dit attribuut wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging. `gedeeld_met_aantal_eenheden` heeft als type `Optional[int]`. Er staat een github issue open voor deze aanvulling op het VERA model: https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+
+### Bouwkundige elementen
+
+In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Dit kan bijvoorbeeld tot gevolg hebben dat er punten in mindering worden gebracht, of punten extra gegeven worden. Bijvoorbeeld bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee de zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribuut `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een github issue open om `bouwkundige_elementen` standaard in het VERA model toe te voegen: https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
+
+### Verkoeld en verwarmd
+
+In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verwarmd en/of verkoeld is. Het attribuut `verwarmde_vertrekken_aantal` bestaat wel, maar dit bestaat op niveau van de eenheid en daarin bestaat geen onderscheid tussen vertrekken en overige ruimten.  
+Hierom hebben wij twee boolean kenmerken toegevoegd aan `EenhedenRuimte`: `verwarmd` en `verkoeld`. Deze kenmerken geven aan of een ruimte verwarmd en/of verkoeld is.
+
+Dit is aangekaart in deze twee issues:
+
+- https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
+- https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
+
+### Datum afsluiten huurovereenkomst
+
+Voor een correcte waardering van rijksmonumenten dient de afsluitings datum van de huurovereenkomst opgegeven te worden. In de VERA standaard bestaat binnen het BVG domein geen model dat deze informatie bevat. Het VERA model `EenhedenEenheid` is uitgebreid met het attribuut `datum_afsluiten_huurovereenkomst`.
+
+### Aanbelfunctie met video- en audioverbinding
+
+De VERA-referentiedata biedt nog geen mogelijkheid om aan te geven dat een eenheid is voorzien van een aanbelfunctie met video- en audioverbinding. Daarom hebben we een nieuwe BOUWKUNDIGELEMENTDETAILSOORT toegevoegd. Om in aanmerking te komen voor waardering, moet dit bouwkundig element worden gespecificeerd voor een van de ruimten binnen de eenheid. Meer informatie is te vinden op: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/148
+
+### Installaties
+
+Installaties zouden toegevoegd moeten worden aan het VERA model `EenhedenRuimte`. Het attribuut `installaties` bestaat al in de wiki, maar nog niet in de `vera-openapi` repository: https://github.com/Aedes-datastandaarden/vera-openapi/issues/70
+
+## 3. Contributing
 
 ### Setup
 
@@ -1157,45 +1203,3 @@ task genereer-vera-referentiedata
 ```
 
 De referentiedata wordt gegenereerd in `woningwaardering/vera/referentiedata`
-
-## 3. Datamodel uitbreidingen
-
-Tijdens de ontwikkeling van de woningwaardering-package komt het voor dat de VERA modellen niet toereikend zijn om de punten voor een stelselgroep te berekenen. Daarom kunnen er indien nodig uitbreidingen gemaakt worden op de VERA modellen. In deze sectie onderbouwen en documenteren wij deze uitbreidingen. In de sectie Referentiedata wordt uitgelegd hoe [uitbreidingen toe te voegen](#datamodellen-uitbreiden) als contributor van dit project.
-
-### Ruimtedetailsoort kast
-
-Binnen het woningwaarderingsstelsel mag onder bepaalde voorwaarden de oppervlakte van vaste kasten worden opgeteld bij de ruimte waar de deur van de kast zich bevindt. Als hier bij het inmeten geen rekening mee gehouden is, kan het attribuut verbonden_ruimten gebruikt worden om de met een ruimte verbonden vaste kasten mee te laten nemen in de waardering. Hiervoor is de VERA referentiedata binnen deze repository uitgebreid met ruimtedetailsoort `Kast`, code `KAS`.
-
-### Verbonden ruimten
-
-Het attribuut `verbonden_ruimten` bevat de ruimten die in verbinding staan met de ruimte die het attribuut bezit. `verbonden_ruimten` wordt gebruikt bij het berekenen van de waardering van kasten en verwarming van ruimten. `verbonden_ruimten` heeft type `Optional[list[EenhedenRuimte]]` en is een uitbreiding op `EenhedenRuimte`. Voor deze uitbreiding staat een [github issue](https://github.com/Aedes-datastandaarden/vera-openapi/issues/47) open ter aanvulling op het VERA model.
-
-### Gedeeld met aantal eenheden
-
-Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarmee een bepaalde ruimte wordt gedeeld. Dit attribuut wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging. `gedeeld_met_aantal_eenheden` heeft als type `Optional[int]`. Er staat een github issue open voor deze aanvulling op het VERA model: https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
-
-### Bouwkundige elementen
-
-In de beleidsboeken wordt soms op basis van een bouwkundig element dat aanwezig is in een ruimte, een uitzondering of nuance op een regel besproken. Dit kan bijvoorbeeld tot gevolg hebben dat er punten in mindering worden gebracht, of punten extra gegeven worden. Bijvoorbeeld bij de berekening van de oppervlakte van een zolder als vertrek of als overige ruimte is er informatie nodig over de trap waarmee de zolder te bereiken is. Daartoe is het VERA model `EenhedenRuimte` uitgebreid met het attribuut `bouwkundige_elementen` met als type `Optional[list[BouwkundigElementenBouwkundigElement]]`. Er staat een github issue open om `bouwkundige_elementen` standaard in het VERA model toe te voegen: https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
-
-### Verkoeld en verwarmd
-
-In de VERA standaard is nog geen mogelijkheid om aan te geven of een ruimte verwarmd en/of verkoeld is. Het attribuut `verwarmde_vertrekken_aantal` bestaat wel, maar dit bestaat op niveau van de eenheid en daarin bestaat geen onderscheid tussen vertrekken en overige ruimten.  
-Hierom hebben wij twee boolean kenmerken toegevoegd aan `EenhedenRuimte`: `verwarmd` en `verkoeld`. Deze kenmerken geven aan of een ruimte verwarmd en/of verkoeld is.
-
-Dit is aangekaart in deze twee issues:
-
-- https://github.com/Aedes-datastandaarden/vera-openapi/issues/41
-- https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
-
-### Datum afsluiten huurovereenkomst
-
-Voor een correcte waardering van rijksmonumenten dient de afsluitings datum van de huurovereenkomst opgegeven te worden. In de VERA standaard bestaat binnen het BVG domein geen model dat deze informatie bevat. Het VERA model `EenhedenEenheid` is uitgebreid met het attribuut `datum_afsluiten_huurovereenkomst`.
-
-### BOUWKUNDIGELEMENTDETAILSOORT aanbelfunctie met video- en audioverbinding
-
-De VERA-referentiedata biedt nog geen mogelijkheid om aan te geven dat een eenheid is voorzien van een aanbelfunctie met video- en audioverbinding. Daarom hebben we een nieuwe BOUWKUNDIGELEMENTDETAILSOORT toegevoegd. Om in aanmerking te komen voor waardering, moet dit bouwkundig element worden gespecificeerd voor een van de ruimten binnen de eenheid. Meer informatie is te vinden op: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/148
-
-### Installaties
-
-Installaties zouden toegevoegd moeten worden aan het VERA model `EenhedenRuimte`. Het attribuut `installaties` bestaat al in de wiki, maar nog niet in de `vera-openapi` repository: https://github.com/Aedes-datastandaarden/vera-openapi/issues/70
