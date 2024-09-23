@@ -49,7 +49,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtesoort | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
             Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
     """
-    # TODO: maak code dit kijkt of garages prive zijn -> overige ruimten
 
     if ruimte.oppervlakte is None:
         warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet geclassificeerd worden."
@@ -67,7 +66,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         return None
 
     if (
-        (
+        (  # binnenkort wordt dit niet meer ondersteund
             ruimte.soort.code == Ruimtesoort.buitenruimte.code
             and ruimte.detail_soort.code
             not in [  # deze buitenruimten zijn geen buitenruimten volgens woningwaarderingstelsel
@@ -147,7 +146,8 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         and ruimte.gedeeld_met_aantal_eenheden is None
         or (
             ruimte.gedeeld_met_aantal_eenheden is not None
-            and ruimte.gedeeld_met_aantal_eenheden < 2
+            and ruimte.gedeeld_met_aantal_eenheden
+            < 2  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
         )
     ):
         if ruimte.oppervlakte >= 2.0:
