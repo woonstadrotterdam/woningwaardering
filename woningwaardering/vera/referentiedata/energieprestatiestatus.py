@@ -17,7 +17,7 @@ class Energieprestatiestatus(Enum):
         naam="Voorlopig",
     )
     """
-    Een voorlopige energieprestatie wordt ook wel &#39;pré-label&#39; genoemd en is een op basis
+    Een voorlopige energieprestatie wordt ook wel 'pré-label' genoemd en is een op basis
     van woningkenmerken afgeleide (theoretische) prestatie
     """
 

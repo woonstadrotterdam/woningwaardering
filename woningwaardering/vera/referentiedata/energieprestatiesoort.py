@@ -58,7 +58,7 @@ class Energieprestatiesoort(Enum):
         naam="Voorlopig energielabel",
     )
     """
-    Het tot 1-1-2015 door de overheid afgegeven &#39;Oude&#39; energielabel. Dit is geen
+    Het tot 1-1-2015 door de overheid afgegeven 'Oude' energielabel. Dit is geen
     officieel energieprestatiecertificaat. Als er een voorlopig energielabel is
     toegekend zal er geen energie-index of andere waarde bij de energieprestatie
     horen.

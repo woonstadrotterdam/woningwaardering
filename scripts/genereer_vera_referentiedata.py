@@ -151,7 +151,7 @@ os.makedirs(output_folder)
 # Group items by 'soort'
 grouped_data = [(k, list(g)) for k, g in groupby(active_data, key=itemgetter("soort"))]
 
-environment = Environment(autoescape=True)
+environment = Environment()
 
 
 def regex_replace(

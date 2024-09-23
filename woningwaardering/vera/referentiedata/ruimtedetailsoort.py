@@ -631,7 +631,7 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-    Parkeergelegenheid: een overdekte, open parkeerruimte voor een of meer auto&#39;s. In
+    Parkeergelegenheid: een overdekte, open parkeerruimte voor een of meer auto's. In
     tegenstelling tot een garage heeft een carport meestal geen muren of deuren.
     Carports kunnen vrijstaand zijn of aan een gebouw bevestigd worden. Onder
     carport vallen ook ander soortige overdekte (buiten) parkeervakken, zoals die in
@@ -728,7 +728,7 @@ class Ruimtedetailsoort(Enum):
     gebouw, zoals een parkeergarage waarin een voertuig kan worden geparkeerd. Deze
     parkeervakken zijn genummerd of gemarkeerd om een georganiseerde indeling te
     waarborgen. Ze zijn bedoeld voor motorvoertuigen met meer dan twee wielen, zoals
-    auto&#39;s.
+    auto's.
     """
 
     parkeervak_auto_buiten_niet_overdekt = Referentiedata(
@@ -744,7 +744,7 @@ class Ruimtedetailsoort(Enum):
     buiten een gebouw, zoals een parkeerterrein waar een voertuig kan worden
     geparkeerd. Deze parkeervakken zijn genummerd of gemarkeerd om een
     georganiseerde indeling te waarborgen. Ze zijn bedoeld voor motorvoertuigen met
-    meer dan twee wielen, zoals auto&#39;s.
+    meer dan twee wielen, zoals auto's.
     """
 
     parkeervak_motorfiets_binnen = Referentiedata(
@@ -760,7 +760,7 @@ class Ruimtedetailsoort(Enum):
     gebouw, zoals een parkeergarage waarin een motorfiets kan worden geparkeerd.
     Deze parkeerplaatsen zijn genummerd of gemarkeerd om een georganiseerde indeling
     te waarborgen. Ze zijn bedoeld voor motorfietsen met twee wielen. Deze
-    parkeerplaatsen zijn meestal kleiner dan gewone parkeerplaatsen voor auto&#39;s.
+    parkeerplaatsen zijn meestal kleiner dan gewone parkeerplaatsen voor auto's.
     """
 
     parkeervak_motorfiets_buiten_niet_overdekt = Referentiedata(
@@ -777,7 +777,7 @@ class Ruimtedetailsoort(Enum):
     worden geparkeerd. Deze parkeerplaatsen zijn genummerd of gemarkeerd om een
     georganiseerde indeling te waarborgen. Ze zijn bedoeld voor motorfietsen met
     twee wielen. Deze parkeerplaatsen zijn meestal kleiner dan gewone
-    parkeerplaatsen voor auto&#39;s.
+    parkeerplaatsen voor auto's.
     """
 
     parkeervak_scootmobiel_binnen = Referentiedata(
