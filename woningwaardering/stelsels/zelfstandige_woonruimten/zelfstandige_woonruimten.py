@@ -44,9 +44,9 @@ class ZelfstandigeWoonruimten(Stelsel):
                 Energieprestatie,
                 Keuken,
                 # Sanitair,
+                GemeenschappelijkeParkeerruimten,
                 PuntenVoorDeWozWaarde,  # LET OP: deze stelselgroep dient als twee na laatste te worden uitgevoerd
                 BijzondereVoorzieningen,  # LET OP: deze stelselgroep dient als een na laatste te worden uitgevoerd
-                GemeenschappelijkeParkeerruimten,
                 PrijsopslagMonumentenEnNieuwbouw,  # LET OP: deze stelselgroep dient als laatste te worden uitgevoerd
             ],
         )
