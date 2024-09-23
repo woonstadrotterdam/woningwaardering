@@ -64,10 +64,19 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(
 specifiek_warning_mapping = {
     "geen_woz": [
         (
-            date(2024, 1, 1),
+            date(2024, 7, 1),
             (
                 UserWarning,
                 "geen WOZ-waarde",
+            ),
+        )
+    ],
+    "corop": [
+        (
+            date(2024, 7, 1),
+            (
+                UserWarning,
+                "plaats is in de lijst van COROP-plaatsen",
             ),
         )
     ],
