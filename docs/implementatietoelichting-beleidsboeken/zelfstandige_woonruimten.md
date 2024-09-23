@@ -66,6 +66,8 @@ De maximale huurprijs die hoort bij de kwaliteit van een huurwoning uit het midd
 
 *   de woning voor het eerst in gebruik wordt genomen na 1 juli 2024, en;
 *   de start van de nieuwbouw, transformatie of bijbouw van de woning plaatsvindt vóór 1 januari 2028.
+    
+> In tegenstelling tot de VERA-definitie van `inExploitatiedatum` gebruiken wij voor ons inputmodel `inExploitatiedatum` als de datum van de _eerste_ ingebruikname. Zie: https://github.com/woonstadrotterdam/woningwaardering/issues/105
 
 Hieronder wordt nadere uitleg gegeven over de begrippen nieuwbouw, transformatie en bijbouw:
 
