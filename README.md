@@ -6,12 +6,12 @@
 
 # Woningwaardering
 
-> ⚠️ Deze release kan gebruikt worden voor zelfstandige woonruimten volgens het beleidsboek van januari 2024. Toegestane peildatum is daarom vanaf 1 januari 2024 tot 1 juli 2024. De implementatie van het beleidsboek van juli 2024 (Wet Betaalbare Huur) voor zelfstandige en onzelfstandige woonruimten wordt momenteel ontwikkeld en later dit jaar gereleased.
+> ⚠️ Deze release kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens het beleidsboek van de huurcommissie van juli 2024 (Wet Betaalbare Huur). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [README](https://github.com/woonstadrotterdam/woningwaardering#), [de toelichting op de implementatie van het beleidsboek](https://github.com/woonstadrotterdam/woningwaardering/tree/main/docs/implementatietoelichting-beleidsboeken) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
 
 📊 **Status**
 
 ![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jan_2024&width=120)  
-![](https://progress-bar.xyz/0/?title=zelfstandige_woonruimten_jul_2024&width=120)  
+![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jul_2024&width=120)  
 ![](https://progress-bar.xyz/0/?title=onzelfstandige_woonruimten_jul_2024&width=108)
 
 Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk wordt om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) van de corporatiesector voor de in- en output van de package. Dit project heeft drie hoofddoelen:
