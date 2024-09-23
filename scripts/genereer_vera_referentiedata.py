@@ -5,7 +5,7 @@ import shutil
 import time
 from typing import Any, Callable, Pattern, Match
 import unidecode
-from jinja2 import Environment
+from jinja2 import Environment, select_autoescape
 from itertools import groupby
 from operator import itemgetter
 import os
@@ -151,7 +151,7 @@ os.makedirs(output_folder)
 # Group items by 'soort'
 grouped_data = [(k, list(g)) for k, g in groupby(active_data, key=itemgetter("soort"))]
 
-environment = Environment()
+environment = Environment(autoescape=select_autoescape())
 
 
 def regex_replace(
@@ -214,18 +214,18 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 class {{ soort|remove_accents|title }}(Enum):
 {%- for item in items %}
     {{ item|normalize_variable_name }} = Referentiedata(
-        code="{{ item['code'] }}",
-        naam="{{ item['naam'] }}",
-        {%- if item['parent'] %}
+        code="{{ item['code'] | safe }}",
+        naam="{{ item['naam'] | safe }}",
+        {%- if item['parent'] | safe %}
         parent=Referentiedata(
-            code="{{ item['parentcode'] }}",
-            naam="{{ item['parentnaam'] }}",
+            code="{{ item['parentcode'] | safe}}",
+            naam="{{ item['parentnaam'] | safe}}",
         ),
         {%- endif %}
     )
-    {%- if item['omschrijving'] %}
+    {%- if item['omschrijving'] | safe %}
     \"\"\"
-    {{ item['omschrijving']|split_long_line }}
+    {{ item['omschrijving']|split_long_line | safe }}
     \"\"\"
     {%- endif %}
 {% endfor %}
