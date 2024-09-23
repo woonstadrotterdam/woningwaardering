@@ -11,14 +11,14 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 3.0,
+      "punten": 14.0,
       "woningwaarderingen": [
         {
-          "aantal": 1.0,
+          "aantal": 2.0,
           "criterium": {
-            "naam": "Closetcombinatie"
+            "naam": "Badkamer - Bad en douche"
           },
-          "punten": 3.0
+          "punten": 14.0
         }
       ]
     }

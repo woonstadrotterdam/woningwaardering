@@ -1,0 +1,48 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "BUB",
+          "naam": "Bubbelfunctie van het bad"
+        },
+        {
+          "code": "DOW",
+          "naam": "Douchewand"
+        },
+        {
+          "code": "KAS",
+          "naam": "Kastruimte"
+        },
+        {
+          "code": "KAS",
+          "naam": "Kastruimte"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "STW",
+          "naam": "Stopcontact bij wastafel"
+        },
+        {
+          "code": "IKW",
+          "naam": "Ingebouwd kastje met in- of opgebouwde wastafel"
+        }
+      ]
+    }
+  ]
+}

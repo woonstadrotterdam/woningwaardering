@@ -204,6 +204,49 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 9.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Douche"
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toiletruimte - Staand Toilet"
+          },
+          "punten": 3.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toiletruimte - Wastafel"
+          },
+          "punten": 1.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "WOZ",
           "naam": "Punten voor de WOZ-waarde"
         }
@@ -254,11 +297,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 594.8,
-  "punten": 99.0,
+  "maximaleHuur": 653.02,
+  "punten": 108.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 594.8
+  "huurprijsopslag": 0.0,
+  "maximaleHuurInclusiefOpslag": 653.02
 }

@@ -203,6 +203,20 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "WOZ",
           "naam": "Punten voor de WOZ-waarde"
         }
@@ -259,5 +273,6 @@
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
+  "huurprijsopslag": 0.0,
   "maximaleHuurInclusiefOpslag": 478.25
 }

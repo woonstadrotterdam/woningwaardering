@@ -48,9 +48,7 @@ def test_Sanitair_output(zelfstandige_woonruimten_input_en_outputmodel, peildatu
     )
 
 
-def test_OppervlakteVanVetrekken_specifiek_output(
-    specifieke_input_en_output_model, peildatum
-):
+def test_Sanitair_specifiek_output(specifieke_input_en_output_model, peildatum):
     eenheid_input, eenheid_output = specifieke_input_en_output_model
     sanitair = Sanitair(peildatum=peildatum)
 

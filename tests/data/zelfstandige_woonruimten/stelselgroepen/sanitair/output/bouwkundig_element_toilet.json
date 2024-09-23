@@ -11,14 +11,14 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 6.0,
+      "punten": 3.0,
       "woningwaarderingen": [
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Bad"
+            "naam": "Toilet - Staand Toilet"
           },
-          "punten": 6.0
+          "punten": 3.0
         }
       ]
     }

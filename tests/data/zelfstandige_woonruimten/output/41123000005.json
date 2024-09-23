@@ -349,11 +349,75 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 18.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Douche"
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Staand Toilet"
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Douche"
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Staand Toilet"
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Douche"
+          },
+          "punten": 4.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "WOZ",
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 98.0,
+      "punten": 103.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -366,12 +430,6 @@
             "naam": "Onderdeel II"
           },
           "punten": 34.77
-        },
-        {
-          "criterium": {
-            "naam": "Maximering WOZ-punten tot 33% van totaal"
-          },
-          "punten": -4.64
         }
       ]
     },
@@ -405,11 +463,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1882.76,
-  "punten": 298.0,
+  "maximaleHuur": 2031.57,
+  "punten": 321.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 1882.76
+  "huurprijsopslag": 0.0,
+  "maximaleHuurInclusiefOpslag": 2031.57
 }
