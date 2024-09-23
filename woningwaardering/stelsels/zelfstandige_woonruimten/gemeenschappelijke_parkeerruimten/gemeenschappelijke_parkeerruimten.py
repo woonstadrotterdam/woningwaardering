@@ -84,7 +84,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                 Ruimtedetailsoort.parkeervak_motorfiets_buiten_niet_overdekt.code,
                 Ruimtedetailsoort.parkeervak_scootmobiel_buiten.code,
             ]:
-                logger.warning(  # TODO: logger warning/info of user warning?
+                logger.warning(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) met ruimtedetailsoort {ruimte.detail_soort.code} is een parkeerplek die niet gewaardeerd wordt in het woningwaardering stelsel volgens het beleidsboek."
                 )
                 continue
@@ -93,7 +93,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                 Ruimtedetailsoort.parkeerterrein.code,
                 Ruimtedetailsoort.parkeergarage.code,
             ]:
-                logger.warning(  # TODO: logger of user warning?
+                logger.warning(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) is een {Ruimtedetailsoort.parkeerterrein.naam if ruimte.detail_soort.code==Ruimtedetailsoort.parkeerterrein.code else Ruimtedetailsoort.parkeergarage.naam} en kan momenteel niet gewaardeerd worden in de woningwaardering package. Voeg een parkeerplek los toe aan de eenheden om deze in aanmerking te laten komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}. Raadpleeg docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md voor meer informatie."
                 )
                 continue
