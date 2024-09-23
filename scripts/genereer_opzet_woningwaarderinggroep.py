@@ -1,15 +1,15 @@
+import locale
+import string
 from datetime import date
 from pathlib import Path
-import string
+
 import inquirer  # noqa
-import locale
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-
 
 locale.setlocale(locale.LC_ALL, "nl_NL")
 

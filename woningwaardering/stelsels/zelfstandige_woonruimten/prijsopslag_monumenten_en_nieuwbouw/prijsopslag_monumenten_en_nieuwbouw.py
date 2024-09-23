@@ -8,7 +8,6 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,

@@ -9,7 +9,6 @@ from tests.test_utils import (
 from woningwaardering.stelsels.zelfstandige_woonruimten.prijsopslag_monumenten_en_nieuwbouw import (
     PrijsopslagMonumentenEnNieuwbouw,
 )
-
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,

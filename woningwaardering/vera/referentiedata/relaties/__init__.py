@@ -28,7 +28,6 @@ from woningwaardering.vera.referentiedata import (
     Signaleringstatus,
 )
 
-
 __all__ = [
     "Accountstatus",
     "Adressoort",

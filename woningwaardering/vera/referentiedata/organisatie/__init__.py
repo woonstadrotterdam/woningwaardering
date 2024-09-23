@@ -4,7 +4,6 @@ from woningwaardering.vera.referentiedata import (
     Medewerkersoort,
 )
 
-
 __all__ = [
     "Afwezigheidsoort",
     "Medewerkerrol",

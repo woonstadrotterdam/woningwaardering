@@ -1,7 +1,8 @@
 from typing import Iterator
+
 from woningwaardering.vera.bvg.generated import (
-    EenhedenRuimte,
     BouwkundigElementenBouwkundigElement,
+    EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,

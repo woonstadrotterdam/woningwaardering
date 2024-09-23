@@ -1,7 +1,7 @@
 import sys
+import warnings
 from datetime import date, datetime
 from pathlib import Path
-import warnings
 
 from loguru import logger
 from pydantic import ValidationError

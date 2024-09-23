@@ -1,4 +1,5 @@
 from enum import Enum
+
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 

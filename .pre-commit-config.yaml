@@ -18,6 +18,9 @@ repos:
       # Run the formatter.
       - id: ruff-format
         types_or: [python, pyi, jupyter]
+      - id: ruff
+        args: ["check", "--select", "I", "--fix"]
+        files: "./"
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8

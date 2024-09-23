@@ -1,6 +1,6 @@
+import warnings
 from datetime import date
 from decimal import Decimal
-import warnings
 
 from loguru import logger
 

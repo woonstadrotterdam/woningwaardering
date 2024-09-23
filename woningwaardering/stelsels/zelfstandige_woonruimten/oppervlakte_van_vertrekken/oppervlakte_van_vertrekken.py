@@ -1,11 +1,11 @@
+import warnings
 from datetime import date
 from decimal import Decimal
-import warnings
 
 from loguru import logger
 
-from woningwaardering.stelsels.utils import rond_af, rond_af_op_kwart, naar_tabel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.utils import naar_tabel, rond_af, rond_af_op_kwart
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
     voeg_oppervlakte_kasten_toe_aan_ruimte,

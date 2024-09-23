@@ -8,7 +8,6 @@ from woningwaardering.vera.referentiedata import (
     Regiesoort,
 )
 
-
 __all__ = [
     "Projectbudgetregelregelsoort",
     "Projectbudgetregelsoort",

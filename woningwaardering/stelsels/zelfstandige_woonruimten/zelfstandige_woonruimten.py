@@ -17,7 +17,6 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     # Sanitair,
     VerkoelingEnVerwarming,
 )
-
 from woningwaardering.stelsels.zelfstandige_woonruimten.gemeenschappelijke_parkeerruimten.gemeenschappelijke_parkeerruimten import (
     GemeenschappelijkeParkeerruimten,
 )
