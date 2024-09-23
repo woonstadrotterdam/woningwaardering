@@ -76,7 +76,7 @@ specifiek_warning_mapping = {
             date(2024, 7, 1),
             (
                 UserWarning,
-                "plaats is in de lijst van COROP-plaatsen",
+                "COROP",
             ),
         )
     ],
