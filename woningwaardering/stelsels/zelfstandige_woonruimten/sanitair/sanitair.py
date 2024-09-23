@@ -114,9 +114,7 @@ class Sanitair(Stelselgroep):
                     [mapping[1].value for _ in bouwkundige_elementen]
                 )
 
-        installatie_counter = Counter(
-            [installatie for installatie in ruimte.installaties]
-        )
+        installaties = Counter([installatie for installatie in ruimte.installaties])
 
         mapping_toilet = {
             Ruimtedetailsoort.toiletruimte.value: {
@@ -144,7 +142,7 @@ class Sanitair(Stelselgroep):
                 Installatiesoort.hangend_toilet.value,
                 Installatiesoort.staand_toilet.value,
             ]:
-                aantal_toiletten = installatie_counter[toiletsoort]
+                aantal_toiletten = installaties[toiletsoort]
 
                 if aantal_toiletten > 0:
                     yield (
@@ -177,7 +175,7 @@ class Sanitair(Stelselgroep):
             Installatiesoort.wastafel,
             Installatiesoort.meerpersoonswastafel,
         ]:
-            aantal_wastafels = installatie_counter[wastafelsoort.value]
+            aantal_wastafels = installaties[wastafelsoort.value]
 
             totaal_aantal_wastafels += aantal_wastafels
 
@@ -228,8 +226,8 @@ class Sanitair(Stelselgroep):
 
         totaal_punten_bad_en_douche = Decimal("0")
 
-        aantal_douches = installatie_counter[Installatiesoort.douche.value]
-        aantal_baden = installatie_counter[Installatiesoort.bad.value]
+        aantal_douches = installaties[Installatiesoort.douche.value]
+        aantal_baden = installaties[Installatiesoort.bad.value]
 
         aantal_bad_en_douches = min(aantal_douches, aantal_baden)
 
@@ -256,7 +254,7 @@ class Sanitair(Stelselgroep):
             Installatiesoort.bad,
             Installatiesoort.douche,
         ]:
-            aantal = installatie_counter[installatiesoort.value] - aantal_bad_en_douches
+            aantal = installaties[installatiesoort.value] - aantal_bad_en_douches
             if aantal > 0:
                 punten = utils.rond_af(
                     aantal * punten_sanitair[installatiesoort.value], 2
@@ -292,7 +290,7 @@ class Sanitair(Stelselgroep):
             Ruimtedetailsoort.badkamer_met_toilet.value,
             Ruimtedetailsoort.doucheruimte.value,
         ]:
-            for installatie, aantal in installatie_counter.items():
+            for installatie, aantal in installaties.items():
                 if installatie not in (
                     punten_voorzieningen
                     | punten_sanitair
