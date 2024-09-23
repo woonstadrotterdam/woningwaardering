@@ -69,6 +69,7 @@ def test_Keuken_specifiek_output(specifieke_input_en_output_model, peildatum):
 
 # mapping eenheid_id naar peildatum-warning
 specifiek_warning_mapping = {
+    # let op: dit is de eenheid_id in de input json
     "aanrecht_zonder_lengte": [
         (
             date(2024, 7, 1),
@@ -78,6 +79,7 @@ specifiek_warning_mapping = {
             ),
         )
     ],
+    # let op: dit is de eenheid_id in de input json
     "keuken_zonder_aanrecht": [
         (
             date(2024, 7, 1),
