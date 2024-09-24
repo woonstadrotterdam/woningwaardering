@@ -131,6 +131,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                             )
                             oppervlakte_waarderingen = []
 
+                # waarderingen voor de oppervlakten van gedeelde ruimten
                 for oppervlakte_waardering in oppervlakte_waarderingen:
                     if oppervlakte_waardering.punten is None:
                         oppervlakte_waardering.punten = float(
@@ -148,6 +149,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     )
                 )
 
+                # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
                 verkoeling_en_verwarming_waarderingen = list(
                     VerkoelingEnVerwarming.genereer_woningwaarderingen(
                         ruimte, self.stelselgroep
@@ -160,7 +162,10 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     )
                 )
 
-                keuken_waarderingen = list(Keuken.genereer_woningwaarderingen(ruimte))
+                # waarderingen voor de keuken van gedeelde ruimten
+                keuken_waarderingen = list(
+                    Keuken.genereer_woningwaarderingen(ruimte, self.stelselgroep)
+                )
                 woningwaardering_groep.woningwaarderingen.extend(
                     self.deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, keuken_waarderingen
