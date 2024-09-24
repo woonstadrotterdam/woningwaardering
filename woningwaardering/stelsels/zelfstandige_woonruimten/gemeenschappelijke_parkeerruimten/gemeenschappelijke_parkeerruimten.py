@@ -84,7 +84,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                 Ruimtedetailsoort.parkeervak_motorfiets_buiten_niet_overdekt.code,
                 Ruimtedetailsoort.parkeervak_scootmobiel_buiten.code,
             ]:
-                logger.warning(
+                logger.info(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) met ruimtedetailsoort {ruimte.detail_soort.code} is een parkeerplek die niet gewaardeerd wordt in het woningwaardering stelsel volgens het beleidsboek."
                 )
                 continue
