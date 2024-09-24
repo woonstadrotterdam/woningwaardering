@@ -47,9 +47,9 @@ Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team 
     - [Lookup tabellen](#lookup-tabellen)
     - [Warnings](#warnings)
       - [Warning vs Exception](#warning-vs-exception)
-      - [Gebruik](#gebruik)
-        - [Optie 1; bijvoorbeeld via JSON bestand](#optie-1-bijvoorbeeld-via-json-bestand)
-        - [Optie 2; via Python zelf](#optie-2-via-python-zelf)
+    - [Gebruik](#gebruik)
+      - [Optie 1; bijvoorbeeld via JSON bestand](#optie-1-bijvoorbeeld-via-json-bestand)
+      - [Optie 2; via Python zelf](#optie-2-via-python-zelf)
   - [2. Datamodel uitbreidingen](#2-datamodel-uitbreidingen)
     - [Ruimtedetailsoort kast](#ruimtedetailsoort-kast)
     - [Verbonden ruimten](#verbonden-ruimten)
@@ -140,9 +140,9 @@ Mocht door de gebruiker logging worden uitgezet, dan zullen de UserWarnings alti
 Er wordt doorgaans in de stelgroepversies gebruik gemaakt van `warnings.warn()` in plaats van het raisen van een exception.
 Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroepen waarvoor de data wel compleet genoeg is, mits de `warnings.simplefilter` naar `default` is gezet.
 
-#### Gebruik
+### Gebruik
 
-##### Optie 1; bijvoorbeeld via JSON bestand
+#### Optie 1; bijvoorbeeld via JSON bestand
 
 ```python
 from woningwaardering.stelsels import ZelfstandigeWoonruimten
@@ -642,7 +642,7 @@ with open(
 
 </details>
 
-##### Optie 2; via Python zelf
+#### Optie 2; via Python zelf
 
 ```python
 from datetime import date
