@@ -8,7 +8,6 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -158,7 +157,10 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             eenheid.begin_bouwdatum is not None
             and eenheid.begin_bouwdatum < date(2028, 1, 1)
             and eenheid.in_exploitatiedatum is not None
-            and eenheid.in_exploitatiedatum > date(2024, 7, 1)
+            and eenheid.in_exploitatiedatum
+            > date(
+                2024, 7, 1
+            )  # TODO: https://github.com/woonstadrotterdam/woningwaardering/issues/105
             and eenheid.in_exploitatiedatum > self.peildatum - relativedelta(years=20)
         ):
             if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
