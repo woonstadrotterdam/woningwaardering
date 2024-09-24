@@ -7,9 +7,9 @@
       },
       "detailSoort": {
         "code": "GAR",
-        "naam": "Garage"
+        "naam": "Garagebox"
       },
-      "naam": "Garage",
+      "naam": "Garagebox",
       "oppervlakte": 15,
       "lengte": 3,
       "breedte": 5,
@@ -22,9 +22,9 @@
       },
       "detailSoort": {
         "code": "GAR",
-        "naam": "Garage"
+        "naam": "Garagebox"
       },
-      "naam": "Garage",
+      "naam": "Garagebox",
       "oppervlakte": 15,
       "lengte": 3,
       "breedte": 5,

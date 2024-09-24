@@ -8,7 +8,7 @@ class Inkoopopdrachtregelsoort(Enum):
         naam="Initieel",
     )
     """
-    De inkoopopdrachtregel betreft &#39;standaard&#39; overeengekomen werkzaamheden
+    De inkoopopdrachtregel betreft 'standaard' overeengekomen werkzaamheden
     """
 
     meerwerk = Referentiedata(
