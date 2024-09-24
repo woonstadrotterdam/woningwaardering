@@ -142,6 +142,8 @@ Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroe
 
 ### Gebruik
 
+Installeer de package met `pip install woningwaardering`. Vervolgens kun je de package importeren en gebruiken op verschillende manieren.
+
 #### Optie 1; bijvoorbeeld via JSON bestand
 
 ```python
