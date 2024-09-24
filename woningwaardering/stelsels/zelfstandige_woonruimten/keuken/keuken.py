@@ -63,7 +63,9 @@ class Keuken(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = [
             woningwaardering
             for ruimte in keukens
-            for woningwaardering in Keuken.genereer_woningwaarderingen(ruimte)
+            for woningwaardering in Keuken.genereer_woningwaarderingen(
+                ruimte, self.stelselgroep
+            )
         ]
 
         if not keukens:
