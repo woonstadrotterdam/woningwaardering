@@ -111,12 +111,10 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
                 oppervlakte_berekening = oppervlakte_berekeningen.get(ruimtesoort, None)
 
-                if oppervlakte_berekening is None:
-                    continue  # TODO: weghalen?
-
-                oppervlakte_waarderingen = list(
-                    oppervlakte_berekening(ruimte, self.stelselgroep)
-                )
+                if oppervlakte_berekening is not None:
+                    oppervlakte_waarderingen = list(
+                        oppervlakte_berekening(ruimte, self.stelselgroep)
+                    )
                 # Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
                 #
                 # […]
@@ -131,7 +129,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                             logger.info(
                                 f"Eenheid {eenheid.id}: {Ruimtedetailsoort.berging.naam} {ruimte.id} heeft, na deling door het aantal adressen, een oppervlakte van minder dan 2 m2 en wordt daarom niet gewaardeerd onder {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
                             )
-                            continue  # TODO: weghalen?
+                            oppervlakte_waarderingen = []
 
                 for oppervlakte_waardering in oppervlakte_waarderingen:
                     if oppervlakte_waardering.punten is None:
