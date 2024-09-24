@@ -11,7 +11,7 @@
           "naam": "Keuken"
         }
       },
-      "punten": 6.0,
+      "punten": 8.0,
       "woningwaarderingen": [
         {
           "aantal": 1000.0,
@@ -25,11 +25,24 @@
           "punten": 4.0
         },
         {
-          "aantal": 2.0,
+          "aantal": 4.0,
           "criterium": {
             "naam": "Inbouw koelkast (in zelfde ruimte)"
           },
-          "punten": 2.0
+          "punten": 4.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Inbouw oven elektrisch"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Max. 4 punten voor een (open) keuken met een aanrechtlengte van 1000.0mm"
+          },
+          "punten": -1.0
         }
       ]
     }

@@ -1,3 +1,5 @@
+from importlib import import_module
+import string
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -6,11 +8,15 @@ import warnings
 from loguru import logger
 from pydantic import ValidationError
 
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+)
+from woningwaardering.vera.bvg.generated import (
+    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 
 logger.enable("woningwaardering")
@@ -25,15 +31,14 @@ PEILDATUM = date(year=jaar, month=7, day=1)
 
 DATA_DIR = Path("tests/data")
 
-input_file_paths = (DATA_DIR / "zelfstandige_woonruimten/input").rglob("*.json")
-output_file_paths = list((DATA_DIR / "zelfstandige_woonruimten/output").rglob("*.json"))
+input_file_paths = (DATA_DIR / "zelfstandige_woonruimten/").rglob("**/input/*.json")
+output_file_paths = list(
+    (DATA_DIR / "zelfstandige_woonruimten").rglob("**/output/*.json")
+)
 
 for input_file_path in input_file_paths:
     if input_file_path.name not in [x.name for x in output_file_paths]:
-        # Construct the output file path without the peildatum in the folder structure
-        output_file_path = (
-            DATA_DIR / "zelfstandige_woonruimten/output" / input_file_path.name
-        )
+        output_file_path = Path(str(input_file_path).replace("/input/", "/output/"))
         unverified_path = output_file_path.with_suffix(
             ".unverified" + output_file_path.suffix
         )
@@ -53,8 +58,29 @@ for input_file_path in input_file_paths:
             )
             # Set logger to ERROR for the stdout to avoid too much logging in the terminal during calculations
             logger.remove(stdout_id)
-            zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=PEILDATUM)
-            woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid_input)
+
+            if input_file_path.parent.parent.parent.name == "stelselgroepen":
+                stelselgroep_naam = input_file_path.parent.parent.name
+                stelselgroep_class = import_module(
+                    "woningwaardering.stelsels.zelfstandige_woonruimten."
+                    + stelselgroep_naam
+                )
+                stelselgroep: Stelselgroep = getattr(
+                    stelselgroep_class,
+                    string.capwords(stelselgroep_naam.replace("_", " ")).replace(
+                        " ", ""
+                    ),
+                )(peildatum=PEILDATUM)
+                woningwaardering_resultaat = (
+                    WoningwaarderingResultatenWoningwaarderingResultaat(
+                        groepen=[stelselgroep.bereken(eenheid_input)]
+                    )
+                )
+            else:
+                zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=PEILDATUM)
+                woningwaardering_resultaat = zelfstandige_woonruimten.bereken(
+                    eenheid_input
+                )
             stdout_id = logger.add(sys.stdout, level="INFO")
             logger.remove(handler_id)
 

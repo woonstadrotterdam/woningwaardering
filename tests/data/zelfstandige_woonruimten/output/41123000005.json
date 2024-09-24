@@ -16,7 +16,7 @@
         {
           "aantal": 18.64,
           "criterium": {
-            "naam": "Woonkamer",
+            "naam": "Woonkamer 1",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -26,7 +26,7 @@
         {
           "aantal": 12.19,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 1",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -36,7 +36,7 @@
         {
           "aantal": 17.26,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -46,7 +46,7 @@
         {
           "aantal": 6.8,
           "criterium": {
-            "naam": "Badruimte",
+            "naam": "Badruimte 1",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -56,7 +56,7 @@
         {
           "aantal": 10.24,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 3",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -66,7 +66,7 @@
         {
           "aantal": 5.76,
           "criterium": {
-            "naam": "Keuken",
+            "naam": "Keuken 1",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -76,7 +76,7 @@
         {
           "aantal": 5.38,
           "criterium": {
-            "naam": "Keuken",
+            "naam": "Keuken 2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -86,7 +86,7 @@
         {
           "aantal": 1.75,
           "criterium": {
-            "naam": "Badruimte",
+            "naam": "Badruimte 2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -96,7 +96,7 @@
         {
           "aantal": 23.73,
           "criterium": {
-            "naam": "Woonkamer",
+            "naam": "Woonkamer 2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -106,7 +106,7 @@
         {
           "aantal": 1.89,
           "criterium": {
-            "naam": "Badruimte",
+            "naam": "Badruimte 3",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -116,7 +116,7 @@
         {
           "aantal": 9.16,
           "criterium": {
-            "naam": "Slaapkamer + 1 kast",
+            "naam": "Slaapkamer 4 (+1 kast)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -175,67 +175,67 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Woonkamer (verwarmd vertrek)"
+            "naam": "Woonkamer 1 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 1 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 2 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Badruimte (verwarmd vertrek)"
+            "naam": "Badruimte 1 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 3 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Keuken (verwarmd vertrek)"
+            "naam": "Keuken 1 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Keuken (verwarmd vertrek)"
+            "naam": "Keuken 2 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Badruimte (verwarmd vertrek)"
+            "naam": "Badruimte 2 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Woonkamer (verwarmd vertrek)"
+            "naam": "Woonkamer 2 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Badruimte (verwarmd vertrek)"
+            "naam": "Badruimte 3 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 4 (verwarmd vertrek)"
           },
           "punten": 2.0
         }
@@ -321,7 +321,7 @@
         {
           "aantal": 1875.0,
           "criterium": {
-            "naam": "Lengte aanrecht",
+            "naam": "Keuken 1 - Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -332,7 +332,7 @@
         {
           "aantal": 1920.0,
           "criterium": {
-            "naam": "Lengte aanrecht",
+            "naam": "Keuken 2 - Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -358,49 +358,49 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Badruimte - Wastafel"
+            "naam": "Badruimte 1 - Wastafel"
           },
           "punten": 1.0
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Badruimte - Douche"
+            "naam": "Badruimte 1 - Douche"
           },
           "punten": 4.0
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Badruimte - Staand Toilet"
+            "naam": "Badruimte 2 - Staand Toilet"
           },
           "punten": 2.0
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Badruimte - Douche"
+            "naam": "Badruimte 2 - Douche"
           },
           "punten": 4.0
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Badruimte - Staand Toilet"
+            "naam": "Badruimte 3 - Staand Toilet"
           },
           "punten": 2.0
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Badruimte - Wastafel"
+            "naam": "Badruimte 3 - Wastafel"
           },
           "punten": 1.0
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Badruimte - Douche"
+            "naam": "Badruimte 3 - Douche"
           },
           "punten": 4.0
         }

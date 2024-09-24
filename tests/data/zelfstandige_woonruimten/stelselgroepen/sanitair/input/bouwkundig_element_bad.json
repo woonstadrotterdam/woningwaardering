@@ -1,6 +1,7 @@
 {
   "ruimten": [
     {
+      "naam": "Badkamer",
       "detailSoort": {
         "code": "BAD",
         "naam": "Badkamer"

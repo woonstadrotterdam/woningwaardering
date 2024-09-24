@@ -16,7 +16,7 @@
         {
           "aantal": 9.6,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 1",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -46,7 +46,7 @@
         {
           "aantal": 13.41,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -66,7 +66,7 @@
         {
           "aantal": 6.06,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 3",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -125,7 +125,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 1 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -155,7 +155,7 @@
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 2 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -167,7 +167,7 @@
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 3 (verwarmd vertrek)"
           },
           "punten": 2.0
         }
@@ -242,7 +242,7 @@
         {
           "aantal": 3600.0,
           "criterium": {
-            "naam": "Lengte aanrecht",
+            "naam": "Keuken - Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"

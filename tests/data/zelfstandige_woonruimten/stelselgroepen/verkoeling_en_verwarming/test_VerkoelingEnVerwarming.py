@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
+from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming import (
     VerkoelingEnVerwarming,
 )
@@ -38,6 +39,9 @@ def test_VerkoelingEnVerwarming_output(
     zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
     eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
+
+    normaliseer_ruimte_namen(eenheid_input)
+
     verkoeling_en_verwarming = VerkoelingEnVerwarming(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

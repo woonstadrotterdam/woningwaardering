@@ -1,6 +1,7 @@
 {
   "ruimten": [
     {
+      "naam": "Toilet",
       "detailSoort": {
         "code": "TOI",
         "naam": "Toilet"

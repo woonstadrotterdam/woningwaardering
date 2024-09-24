@@ -1,6 +1,7 @@
 {
   "ruimten": [
     {
+      "naam": "Doucheruimte",
       "detailSoort": {
         "code": "DOU",
         "naam": "Doucheruimte"

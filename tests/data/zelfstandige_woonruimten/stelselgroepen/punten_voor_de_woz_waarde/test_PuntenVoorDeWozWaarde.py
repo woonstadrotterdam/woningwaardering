@@ -8,6 +8,7 @@ from tests.test_utils import (
     krijg_warning_tuple_op_datum,
     laad_specifiek_input_en_output_model,
 )
+from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten import PuntenVoorDeWozWaarde
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -30,6 +31,9 @@ def test_PuntenVoorDeWozWaarde_output(
     zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
     eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
+
+    normaliseer_ruimte_namen(eenheid_input)
+
     stelselgroep = PuntenVoorDeWozWaarde(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

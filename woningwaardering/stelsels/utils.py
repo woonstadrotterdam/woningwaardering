@@ -1,6 +1,6 @@
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
-from typing import Callable, List, Tuple
+from typing import Callable, Counter, List, Tuple
 import warnings
 
 import pandas as pd
@@ -514,3 +514,19 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
                 eenheid.monumenten.append(Eenheidmonument.beschermd_stadsgezicht.value)
 
     return eenheid
+
+
+def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:
+    for ruimte in eenheid.ruimten or []:
+        if not ruimte.naam:
+            ruimte.naam = getattr(ruimte.detail_soort, "naam", ruimte.id)
+
+    naam_counter = Counter(
+        ruimte.naam for ruimte in eenheid.ruimten or [] if ruimte.naam
+    )
+    nummering_counter: Counter[str] = Counter()
+
+    for ruimte in eenheid.ruimten or []:
+        if ruimte.naam is not None and naam_counter[ruimte.naam] > 1:
+            nummering_counter[ruimte.naam] += 1
+            ruimte.naam = f"{ruimte.naam} {nummering_counter[ruimte.naam]}"
