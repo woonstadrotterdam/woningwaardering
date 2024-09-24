@@ -13,6 +13,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken import (
     OppervlakteVanVertrekken,
 )
+from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair import Sanitair
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
 )
@@ -172,9 +173,15 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     )
                 )
 
-                # TODO: Toevoegen sanitair waarderingen
-                # sanitair_waarderingen = list(Sanitair.genereer_woningwaarderingen(ruimte))
-                # woningwaardering_groep.woningwaarderingen.extend(sanitair_waarderingen)
+                # waarderingen voor sanitair van gedeelde ruimten
+                sanitair_waarderingen = list(
+                    Sanitair.genereer_woningwaarderingen(ruimte, self.stelselgroep)
+                )
+                woningwaardering_groep.woningwaarderingen.extend(
+                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                        ruimte, sanitair_waarderingen
+                    )
+                )
 
         punten = utils.rond_af_op_kwart(
             sum(

@@ -1,8 +1,8 @@
-from collections import Counter
-from typing import Iterator
 import warnings
+from collections import Counter
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from loguru import logger
 
@@ -66,7 +66,7 @@ class Sanitair(Stelselgroep):
 
         for ruimte in ruimten:
             woningwaardering_groep.woningwaarderingen.extend(
-                Sanitair.punten_voor_voorziening(ruimte)
+                Sanitair.genereer_woningwaarderingen(ruimte, self.stelselgroep)
             )
 
         totaal_punten = utils.rond_af_op_kwart(
@@ -85,8 +85,9 @@ class Sanitair(Stelselgroep):
         return woningwaardering_groep
 
     @staticmethod
-    def punten_voor_voorziening(
+    def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte,
+        stelselgroep: Woningwaarderingstelselgroep,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if ruimte.detail_soort is None:
             warnings.warn(f"Ruimte {ruimte.id} heeft geen detailsoort.")
