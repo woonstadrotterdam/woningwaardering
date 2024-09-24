@@ -5,11 +5,15 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import Keuken
+from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
+    OppervlakteVanOverigeRuimten,
+)
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken import (
     OppervlakteVanVertrekken,
 )
-from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
-    OppervlakteVanOverigeRuimten,
+from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
+    classificeer_ruimte,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming import (
     VerkoelingEnVerwarming,
@@ -28,9 +32,6 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
-    classificeer_ruimte,
 )
 
 
@@ -154,9 +155,8 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     verkoeling_en_verwarming_waarderingen
                 )
 
-                # TODO: Toevoegen keuken waarderingen
-                # keuken_waarderingen = list(Keuken.genereer_woningwaarderingen(ruimte))
-                # woningwaardering_groep.woningwaarderingen.extend(keuken_waarderingen)
+                keuken_waarderingen = list(Keuken.genereer_woningwaarderingen(ruimte))
+                woningwaardering_groep.woningwaarderingen.extend(keuken_waarderingen)
 
                 # TODO: Toevoegen sanitair waarderingen
                 # sanitair_waarderingen = list(Sanitair.genereer_woningwaarderingen(ruimte))
