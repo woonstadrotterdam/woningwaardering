@@ -1,16 +1,21 @@
 {
   "ruimten": [
     {
+      "naam": "Badkamer",
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
       "bouwkundigeElementen": [
         {
-          "naam": "Closetcombinatie",
+          "naam": "Wastafel",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
           },
           "detailSoort": {
-            "code": "CLO",
-            "naam": "Toilet"
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
           }
         }
       ]

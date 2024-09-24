@@ -6,6 +6,7 @@ from tests.test_utils import (
     assert_output_model,
     laad_specifiek_input_en_output_model,
 )
+from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten.prijsopslag_monumenten_en_nieuwbouw import (
     PrijsopslagMonumentenEnNieuwbouw,
 )
@@ -33,6 +34,9 @@ def test_PrijsopslagMonumentenEnNieuwbouw_output(
     zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
     eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
+
+    normaliseer_ruimte_namen(eenheid_input)
+
     prijsopslag_monumenten_en_nieuwbouw = PrijsopslagMonumentenEnNieuwbouw(
         peildatum=peildatum
     )

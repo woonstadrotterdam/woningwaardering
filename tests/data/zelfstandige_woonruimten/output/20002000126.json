@@ -162,13 +162,56 @@
         {
           "aantal": 2100.0,
           "criterium": {
-            "naam": "Lengte aanrecht",
+            "naam": "Keuken - Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
             }
           },
           "punten": 7.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 9.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Keuken - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Douche"
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toiletruimte - Staand Toilet"
+          },
+          "punten": 3.0
         }
       ]
     },
@@ -243,11 +286,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 627.14,
-  "punten": 104.0,
+  "maximaleHuur": 685.39,
+  "punten": 113.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 627.14
+  "huurprijsopslag": 0.0,
+  "maximaleHuurInclusiefOpslag": 685.39
 }

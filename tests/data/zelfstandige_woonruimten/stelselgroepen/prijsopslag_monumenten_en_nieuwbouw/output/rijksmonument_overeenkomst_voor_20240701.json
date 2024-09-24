@@ -11,15 +11,16 @@
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
       },
+      "punten": 50.0,
       "woningwaarderingen": [
         {
           "criterium": {
             "naam": "Rijksmonument"
           },
-          "punten": 50
+          "punten": 50.0
         }
       ],
-      "punten": 50
+      "opslagpercentage": 0.0
     }
   ]
 }

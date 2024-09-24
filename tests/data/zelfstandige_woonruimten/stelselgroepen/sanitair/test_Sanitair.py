@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
+from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     Sanitair,
 )
@@ -36,6 +37,9 @@ def test_Sanitair(
 
 def test_Sanitair_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
     eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
+
+    normaliseer_ruimte_namen(eenheid_input)
+
     sanitair = Sanitair(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
@@ -48,9 +52,7 @@ def test_Sanitair_output(zelfstandige_woonruimten_input_en_outputmodel, peildatu
     )
 
 
-def test_OppervlakteVanVetrekken_specifiek_output(
-    specifieke_input_en_output_model, peildatum
-):
+def test_Sanitair_specifiek_output(specifieke_input_en_output_model, peildatum):
     eenheid_input, eenheid_output = specifieke_input_en_output_model
     sanitair = Sanitair(peildatum=peildatum)
 

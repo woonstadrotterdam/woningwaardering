@@ -11,14 +11,21 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 14.0,
+      "punten": 6.75,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
-            "naam": "Bad en Douche in zelfde ruimte"
+            "naam": "Toiletruimte - Hangend toilet"
           },
-          "punten": 14.0
+          "punten": 3.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toiletruimte - Staand Toilet"
+          },
+          "punten": 3.0
         }
       ]
     }

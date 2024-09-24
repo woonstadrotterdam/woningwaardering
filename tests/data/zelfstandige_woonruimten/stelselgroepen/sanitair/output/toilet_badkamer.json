@@ -11,14 +11,21 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 1.0,
+      "punten": 4.75,
       "woningwaarderingen": [
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Lavet"
+            "naam": "Badkamer - Hangend toilet"
           },
-          "punten": 1.0
+          "punten": 2.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badkamer - Staand Toilet"
+          },
+          "punten": 2.0
         }
       ]
     }

@@ -1,0 +1,45 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 2.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Toiletruimte - Wastafel"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Toiletruimte - Max 1.0 punt voor Wastafel"
+          },
+          "punten": -1.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Toiletruimte - Meerpersoonswastafel"
+          },
+          "punten": 3.0
+        },
+        {
+          "criterium": {
+            "naam": "Toiletruimte - Max 1.5 punt voor Meerpersoonswastafel"
+          },
+          "punten": -1.5
+        }
+      ]
+    }
+  ]
+}

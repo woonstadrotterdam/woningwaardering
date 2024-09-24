@@ -55,6 +55,8 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        utils.normaliseer_ruimte_namen(eenheid)
+
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
                 stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,

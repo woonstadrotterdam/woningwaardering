@@ -9,6 +9,7 @@ from woningwaardering.stelsels.stelselgroep import (
 )
 from woningwaardering.stelsels.utils import (
     is_geldig,
+    normaliseer_ruimte_namen,
     rond_af,
     rond_af_op_kwart,
 )
@@ -74,6 +75,7 @@ class Stelsel:
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
         """
+        normaliseer_ruimte_namen(eenheid)
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
         resultaat.stelsel = self.stelsel.value

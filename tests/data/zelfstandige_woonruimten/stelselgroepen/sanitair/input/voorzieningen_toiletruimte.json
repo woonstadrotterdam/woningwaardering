@@ -1,0 +1,56 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "BUB",
+          "naam": "Bubbelfunctie van het bad"
+        },
+        {
+          "code": "DOW",
+          "naam": "Douchewand"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "IKW",
+          "naam": "Ingebouwd kastje met in- of opgebouwde wastafel"
+        },
+        {
+          "code": "KAS",
+          "naam": "Kastruimte"
+        },
+        {
+          "code": "KAS",
+          "naam": "Kastruimte"
+        },
+        {
+          "code": "STW",
+          "naam": "Stopcontact bij wastafel"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "TME",
+          "naam": "Thermostatische mengkraan"
+        }
+      ]
+    }
+  ]
+}
