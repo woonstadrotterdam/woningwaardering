@@ -28,7 +28,7 @@ class Passendheiddetailsoort(Enum):
     """
     Niet-passende toewijzing, noodzakelijk geacht i.v.m. calamiteit of andere dringende
     oorzaak. Let op: voor herhuisvesting in verband met herstructurering gebruik
-    passenheiddetailsoort &#39;Herstructurering&#39;
+    passenheiddetailsoort 'Herstructurering'
     """
 
     @property

@@ -8,14 +8,16 @@ from tests.test_utils import (
     krijg_warning_tuple_op_datum,
     laad_specifiek_input_en_output_model,
 )
-from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import (
-    Keuken,
+from woningwaardering.stelsels.zelfstandige_woonruimten.gemeenschappelijke_parkeerruimten import (
+    GemeenschappelijkeParkeerruimten,
 )
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
-from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
+from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
+    Woningwaarderingstelselgroep,
+)
 
 # Get the absolute path to the current file
 current_file_path = Path(__file__).absolute().parent
@@ -29,63 +31,72 @@ def specifieke_input_en_output_model(request):
     )
 
 
-def test_Keuken(
+def test_GemeenschappelijkeParkeerruimten(
     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    keuken = Keuken(peildatum=peildatum)
-    resultaat = keuken.bereken(
+    gemeenschappelijke_parkeerruimten = GemeenschappelijkeParkeerruimten(
+        peildatum=peildatum
+    )
+    resultaat = gemeenschappelijke_parkeerruimten.bereken(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-def test_Keuken_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
+def test_GemeenschappelijkeParkeerruimten_output(
+    zelfstandige_woonruimten_input_en_outputmodel, peildatum
+):
     eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
-    keuken = Keuken(peildatum=peildatum)
+    gemeenschappelijke_parkeerruimten = GemeenschappelijkeParkeerruimten(
+        peildatum=peildatum
+    )
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [keuken.bereken(eenheid_input)]
+    resultaat.groepen = [gemeenschappelijke_parkeerruimten.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
         eenheid_output,
-        Woningwaarderingstelselgroep.keuken,
+        Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
     )
 
 
-# In deze test data zit expres missende data
 @pytest.mark.filterwarnings("ignore::UserWarning")
-def test_Keuken_specifiek_output(specifieke_input_en_output_model, peildatum):
+def test_GemeenschappelijkeParkeerruimten_specifiek_output(
+    specifieke_input_en_output_model, peildatum
+):
     eenheid_input, eenheid_output = specifieke_input_en_output_model
-    keuken = Keuken(peildatum=peildatum)
+    gemeenschappelijke_parkeerruimten = GemeenschappelijkeParkeerruimten(
+        peildatum=peildatum
+    )
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [keuken.bereken(eenheid_input)]
+    resultaat.groepen = [gemeenschappelijke_parkeerruimten.bereken(eenheid_input)]
     assert_output_model(
         resultaat,
         eenheid_output,
-        Woningwaarderingstelselgroep.keuken,
+        Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
     )
 
 
 # mapping eenheid_id naar peildatum-warning
 specifiek_warning_mapping = {
     # let op: dit is de eenheid_id in de input json
-    "aanrecht_zonder_lengte": [
+    "warning_gedeeld_met_aantal_eenheden": [
         (
             date(2024, 7, 1),
             (
                 UserWarning,
-                "geen aanrecht",
+                "gedeeld_met_aantal_eenheden",
             ),
         )
     ],
     # let op: dit is de eenheid_id in de input json
-    "keuken_zonder_aanrecht": [
+    "warning_geen_oppervlakte": [
         (
             date(2024, 7, 1),
             (
                 UserWarning,
-                "geen aanrecht",
+                "oppervlakte",
             ),
         )
     ],
@@ -94,12 +105,16 @@ specifiek_warning_mapping = {
 
 # In deze test data zit expres missende data
 @pytest.mark.filterwarnings("ignore::UserWarning")
-def test_Keuken_specifiek_warnings(specifieke_input_en_output_model, peildatum):
-    eenheid_input, _ = specifieke_input_en_output_model
-    keuken = Keuken(peildatum=peildatum)
+def test_Gemeenschappelijke_parkeerruimte_specifiek_warnings(
+    specifieke_input_en_output_model, peildatum
+):
+    eenheid_input, x = specifieke_input_en_output_model
+    gemeenschappelijke_parkeerruimte = GemeenschappelijkeParkeerruimten(
+        peildatum=peildatum
+    )
     warning_tuple = krijg_warning_tuple_op_datum(
         eenheid_input.id, peildatum, specifiek_warning_mapping
     )
     if warning_tuple is not None:
         with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
-            keuken.bereken(eenheid_input)
+            gemeenschappelijke_parkeerruimte.bereken(eenheid_input)

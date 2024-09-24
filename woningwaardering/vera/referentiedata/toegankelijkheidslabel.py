@@ -13,7 +13,7 @@ class Toegankelijkheidslabel(Enum):
     zijn bereikbaar zonder gebruik te hoeven maken van een trap (d.w.z. gelegen op
     één verdieping laag of meerdere verdiepingslagen die zonder trap - maar
     bijvoorbeeld met traplift - bereikbaar zijn). Een gelijkvloerse woning voldoet
-    niet per definitie aan het criterium &#39;nultredenwoning&#39; omdat de woning daarvoor
+    niet per definitie aan het criterium 'nultredenwoning' omdat de woning daarvoor
     ook extern toegankelijk moet zijn voor minder validen.
     """
 
@@ -24,7 +24,7 @@ class Toegankelijkheidslabel(Enum):
     """
     Label dat aangeeft dat de woning zowel intern als extern toegankelijk is met een
     rollator. De woning voldoet hiermee automatisch aan het criterium
-    &#39;nultredenwoning&#39;, maar is niet per definitie ook een &#39;rolstoelwoning&#39; omdat er
+    'nultredenwoning', maar is niet per definitie ook een 'rolstoelwoning' omdat er
     bijvoorbeeld drempels aanwezig kunnen zijn.
     """
 
@@ -35,8 +35,8 @@ class Toegankelijkheidslabel(Enum):
     """
     Label dat aangeeft dat de woning zowel intern als extern toegankelijk is, met een
     rolstoel. De woning voldoet hiermee automatisch aan het criterium
-    &#39;nultredewoning&#39;. Een rolstoelwoning voldoet per definitie ook aan het label
-    Rollatorwoning, maar is niet per definitie ook een &#39;extra ruime rolstoelwoning&#39;.
+    'nultredewoning'. Een rolstoelwoning voldoet per definitie ook aan het label
+    Rollatorwoning, maar is niet per definitie ook een 'extra ruime rolstoelwoning'.
     """
 
     extra_ruime_rolstoelwoning = Referentiedata(
@@ -46,7 +46,7 @@ class Toegankelijkheidslabel(Enum):
     """
     Label dat aangeeft dat de woning zowel intern als extern toegankelijk is, met een
     grote (elektrische) rolstoel. De woning voldoet hiermee automatisch aan het
-    criterium &#39;nultredenwoning&#39;. Een extra ruime rolstoelwoning voldoet per
+    criterium 'nultredenwoning'. Een extra ruime rolstoelwoning voldoet per
     definitie ook aan het label Rolstoelwoning.
     """
 

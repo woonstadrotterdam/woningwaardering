@@ -1,5 +1,4 @@
 from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
@@ -505,7 +504,7 @@ class Bouwkundigelementdetailsoort(Enum):
     )
     """
     Een laadpaal is een elektrisch oplaadstation voor voertuigen, zoals elektrische
-    auto&#39;s. Het biedt een aansluiting voor opladen, communiceert met het voertuig
+    auto's. Het biedt een aansluiting voor opladen, communiceert met het voertuig
     voor veilige energieoverdracht, en kan slimme functies bevatten zoals
     laadtijdbeheer en energiebeheer. Relatie met IFC codering (IfcFlowTerminal)
     """

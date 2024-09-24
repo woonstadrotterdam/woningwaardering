@@ -48,7 +48,7 @@ class Defectsoort(Enum):
 
     beschadigd_1m2 = Referentiedata(
         code="BS1",
-        naam="Beschadigd &lt; 1m2",
+        naam="Beschadigd < 1m2",
     )
 
     beschadigd_1_5_m2 = Referentiedata(
@@ -58,7 +58,7 @@ class Defectsoort(Enum):
 
     beschadigd_5_m2 = Referentiedata(
         code="BS3",
-        naam="Beschadigd &gt;5 m2",
+        naam="Beschadigd >5 m2",
     )
 
     defect_en_of_onderdeel_defect = Referentiedata(
