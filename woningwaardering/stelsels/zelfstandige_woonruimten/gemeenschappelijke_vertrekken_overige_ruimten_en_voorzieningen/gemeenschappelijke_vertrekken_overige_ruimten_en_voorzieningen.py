@@ -162,19 +162,19 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # sanitair_waarderingen = list(Sanitair.genereer_woningwaarderingen(ruimte))
                 # woningwaardering_groep.woningwaarderingen.extend(sanitair_waarderingen)
 
-            for woningwaardering in woningwaardering_groep.woningwaarderingen:
-                woningwaardering.punten = float(
-                    Decimal(str(woningwaardering.punten))
-                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                )
-
-                if (
-                    woningwaardering.criterium is not None
-                    and woningwaardering.criterium.naam is not None
-                ):
-                    woningwaardering.criterium.naam += (
-                        f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
+                for woningwaardering in woningwaardering_groep.woningwaarderingen:
+                    woningwaardering.punten = float(
+                        Decimal(str(woningwaardering.punten))
+                        / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
                     )
+
+                    if (
+                        woningwaardering.criterium is not None
+                        and woningwaardering.criterium.naam is not None
+                    ):
+                        woningwaardering.criterium.naam += (
+                            f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
+                        )
 
         punten = utils.rond_af_op_kwart(
             sum(
