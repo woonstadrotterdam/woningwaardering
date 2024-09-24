@@ -10,6 +10,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     Buitenruimten,
     Energieprestatie,
     GemeenschappelijkeParkeerruimten,
+    GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen,
     Keuken,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
@@ -17,9 +18,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     PuntenVoorDeWozWaarde,
     Sanitair,
     VerkoelingEnVerwarming,
-    GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen,
 )
-
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )

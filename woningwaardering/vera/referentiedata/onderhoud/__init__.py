@@ -17,7 +17,6 @@ from woningwaardering.vera.referentiedata import (
     Verrekeningsoort,
 )
 
-
 __all__ = [
     "Afrekenwijzesoort",
     "Defectlocatie",

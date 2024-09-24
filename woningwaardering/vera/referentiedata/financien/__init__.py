@@ -39,7 +39,6 @@ from woningwaardering.vera.referentiedata import (
     Verbijzonderingstatus,
 )
 
-
 __all__ = [
     "Bedrijfsoort",
     "Begrotingversie",

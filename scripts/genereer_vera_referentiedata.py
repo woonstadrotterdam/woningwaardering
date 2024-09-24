@@ -1,18 +1,19 @@
-from collections import Counter, defaultdict
 import csv
+import os
 import re
 import shutil
+import textwrap
 import time
-from typing import Any, Callable, Pattern, Match
-import unidecode
-from jinja2 import Environment, select_autoescape
+from collections import Counter, defaultdict
+from datetime import date, datetime
 from itertools import groupby
 from operator import itemgetter
-import os
-from datetime import date, datetime
+from typing import Any, Callable, Match, Pattern
+
 import requests
+import unidecode
+from jinja2 import Environment, select_autoescape
 from loguru import logger
-import textwrap
 
 os.environ["TZ"] = "Europe/Amsterdam"
 time.tzset()

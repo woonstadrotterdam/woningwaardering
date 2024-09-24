@@ -4,7 +4,6 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatievergoedingsoort,
 )
 
-
 __all__ = [
     "Energieprestatiesoort",
     "Energieprestatiestatus",

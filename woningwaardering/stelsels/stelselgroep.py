@@ -8,8 +8,8 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Woningwaarderingstelselgroep,
     Woningwaarderingstelsel,
+    Woningwaarderingstelselgroep,
 )
 
 

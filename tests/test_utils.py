@@ -1,11 +1,11 @@
-from decimal import Decimal
 import difflib
 from datetime import date
+from decimal import Decimal
 from pathlib import Path
 from typing import Iterator
 
-from pytest import fail
 import pytest
+from pytest import fail
 
 from woningwaardering.stelsels.utils import naar_tabel, rond_af_op_kwart
 from woningwaardering.vera.bvg.generated import (

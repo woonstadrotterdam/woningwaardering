@@ -1,9 +1,9 @@
-from importlib import import_module
 import string
 import sys
-from datetime import date, datetime
-from pathlib import Path
 import warnings
+from datetime import date, datetime
+from importlib import import_module
+from pathlib import Path
 
 from loguru import logger
 from pydantic import ValidationError
@@ -14,8 +14,6 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-)
-from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 

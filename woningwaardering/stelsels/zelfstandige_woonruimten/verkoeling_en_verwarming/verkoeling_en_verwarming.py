@@ -1,7 +1,7 @@
-from typing import Iterator
 import warnings
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from loguru import logger
 

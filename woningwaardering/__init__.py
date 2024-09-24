@@ -1,9 +1,10 @@
-from decimal import BasicContext, setcontext
 import os
 import sys
 import time
-from types import TracebackType
 import warnings
+from decimal import BasicContext, setcontext
+from types import TracebackType
+
 from loguru import logger
 
 logger.disable("woningwaardering")

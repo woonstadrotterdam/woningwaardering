@@ -50,7 +50,6 @@ from woningwaardering.vera.referentiedata import (
     Zekerheidverpandingsoort,
 )
 
-
 __all__ = [
     "Aanvullendedoelgroep",
     "Aktesoort",

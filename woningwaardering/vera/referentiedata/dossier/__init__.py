@@ -12,7 +12,6 @@ from woningwaardering.vera.referentiedata import (
     Zaaktypesoort,
 )
 
-
 __all__ = [
     "Authentiekgegevenbron",
     "Authentiekgegevensoort",
