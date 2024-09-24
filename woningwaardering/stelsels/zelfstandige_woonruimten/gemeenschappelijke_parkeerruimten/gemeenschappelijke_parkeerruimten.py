@@ -146,9 +146,6 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                     ) / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
                 else:
                     criterium += " (privé)"
-                    logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{criterium}'."
-                    )
                     totaal_punten_type_parkeeruimte = (
                         punten * Decimal(str(ruimte.aantal)) / Decimal("1")
                     )
