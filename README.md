@@ -46,14 +46,23 @@ Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team 
     - [Repository-structuur](#repository-structuur)
     - [Design](#design)
     - [Lookup tabellen](#lookup-tabellen)
+    - [Warnings](#warnings)
+      - [Warning vs Exception](#warning-vs-exception)
+      - [Gebruik](#gebruik)
   - [2. Contributing](#2-contributing)
     - [Setup](#setup)
     - [Naamgeving van classes](#naamgeving-van-classes)
+      - [Genereren opzet woningwaarderingstelsels en -groepen](#genereren-opzet-woningwaarderingstelsels-en--groepen)
       - [Stelsels](#stelsels)
       - [Stelselgroepen](#stelselgroepen)
+    - [Releasemanagement](#releasemanagement)
+      - [Versienummering](#versienummering)
+      - [Releaseproces](#releaseproces)
     - [Testing](#testing)
+      - [Test coverage rapport](#test-coverage-rapport)
       - [Conventies voor tests](#conventies-voor-tests)
       - [Test modellen](#test-modellen)
+    - [Logger Guidelines](#logger-guidelines)
     - [Datamodellen](#datamodellen)
       - [Datamodellen uitbreiden](#datamodellen-uitbreiden)
     - [Referentiedata](#referentiedata)
@@ -62,6 +71,8 @@ Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team 
     - [Verbonden ruimten](#verbonden-ruimten)
     - [Gedeeld met aantal eenheden](#gedeeld-met-aantal-eenheden)
     - [Bouwkundige elementen](#bouwkundige-elementen)
+    - [Verkoeld en verwarmd](#verkoeld-en-verwarmd)
+    - [Datum afsluiten huurovereenkomst](#datum-afsluiten-huurovereenkomst)
 
 ## 1. Opzet woningwaardering-package
 
@@ -76,7 +87,7 @@ De stelselgroepen waarop gescoord wordt, zijn vastgelegd in het [woningwaarderin
 Deze worden aangehouden in de opzet van de `woningwaardering`-package.
 Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
 
-De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de Nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpretatie. Daarnaast kan het voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens het beleidsboek tot op de letter nauwkeurig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elke stelselgroep is geïmplementeerd en welke keuzes daarin gemaakt zijn.
+De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de Nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpretatie. Daarnaast kan het voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens het beleidsboek tot op de letter nauwkeurig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elke stelselgroep is geïmplementeerd en welke keuzes daarin gemaakt zijn.  
 In deze documenten wordt bijgehouden welke onderdelen van het beleidsboek wel en niet zijn geïmplementeerd per stelselgroep. De gepubliceerde tekst uit het beleidsboek wordt gekopieerd en wanneer een onderdeel niet in de code van de package is geïmplementeerd zal dit worden aangegeven met ~~doorgestreepte tekst~~.  
 De reden van het niet implementeren van een regelonderdeel is vrijwel altijd dat het technisch niet mogelijk is op basis van het inputmodel van de VERA-standaard. Een voorbeeld hiervan is dat voor oppervlakte van vertrekken in 2024 de minimale breedte van een vertrek over de volledige lengte 1,5m moet zijn. Omdat wij de data van de minimale breedte over de volledige lengte niet binnenkrijgen via het inputmodel kunnen wij dit onderdeel van de regel niet implementeren. **Dit betekent dat het aan de gebruiker is om met deze regelonderdelen rekening te houden bij het eenheid-inputmodel.** Een deel van de deze regelonderdelen wordt al afgevangen indien het eenheid-inputmodel voldoet aan de NEN-norm.
 Regels die wel zijn geimplementeerd zijn niet doorgestreept.
@@ -123,6 +134,817 @@ Mocht door de gebruiker logging worden uitgezet, dan zullen de UserWarnings alti
 
 Er wordt doorgaans in de stelgroepversies gebruik gemaakt van `warnings.warn()` in plaats van het raisen van een exception.
 Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroepen waarvoor de data wel compleet genoeg is, mits de `warnings.simplefilter` naar `default` is gezet.
+
+#### Gebruik
+
+##### Optie 1; bijvoorbeeld via JSON bestand
+
+```python
+from woningwaardering.stelsels import ZelfstandigeWoonruimten
+from datetime import date
+from woningwaardering.stelsels import utils
+from woningwaardering.vera.bvg.generated import (
+    EenhedenEenheid,
+)
+
+stelsel = ZelfstandigeWoonruimten(
+    peildatum = date(2024, 7, 1) # bij niet meegeven wordt de huidige dag gebruikt.
+)
+with open(
+  "tests/data/generiek/input/37101000032.json",
+  "r+",
+) as file:
+  eenheid = EenhedenEenheid.model_validate_json(file.read())
+  woningwaardering_resultaat = stelsel.bereken(eenheid)
+  print(
+      woningwaardering_resultaat.model_dump_json(
+          by_alias=True, indent=2, exclude_none=True
+      )
+  )
+  tabel = utils.naar_tabel(woningwaardering_resultaat)
+
+  print(tabel)
+```
+
+<details>
+<summary>Voorbeeld output in JSON</summary>
+
+```json
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
+        }
+      },
+      "punten": 141.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 21.05,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 41.0,
+          "criterium": {
+            "naam": "Woonkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 20.37,
+          "criterium": {
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 7.5,
+          "criterium": {
+            "naam": "Badruimte",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 15.98,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 19.15,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 15.82,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 5.25,
+      "woningwaarderingen": [
+        {
+          "aantal": 6.65,
+          "criterium": {
+            "naam": "Berging",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 14.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Woonkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Keuken (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 15.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 3.14,
+          "criterium": {
+            "naam": "Balkon (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.1
+        },
+        {
+          "aantal": 3.14,
+          "criterium": {
+            "naam": "Balkon (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.1
+        },
+        {
+          "aantal": 49.11,
+          "criterium": {
+            "naam": "Tuin (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 19.19
+        },
+        {
+          "aantal": 15.93,
+          "criterium": {
+            "naam": "Dakterras (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 7.57
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 15 punten"
+          },
+          "punten": -18.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 22.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "C (Energie-index)"
+          },
+          "punten": 22.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2700.0,
+          "criterium": {
+            "naam": "Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 7.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "punten": 63.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Onderdeel I"
+          },
+          "punten": 44.21
+        },
+        {
+          "criterium": {
+            "naam": "Onderdeel II"
+          },
+          "punten": 19.03
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
+    }
+  ],
+  "maximaleHuur": 1631.51,
+  "punten": 267.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
+  "maximaleHuurInclusiefOpslag": 1631.51
+}
+```
+
+</details>
+
+<details>
+<summary>Voorbeeld output in tabel</summary>
+
+```text
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Groep                           | Naam                          |  Aantal | Meeteenheid         | Punten | Opslag |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van vertrekken      | Slaapkamer                    |   21.05 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Woonkamer                     |   41.00 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Keuken                        |   20.37 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Badruimte                     |    7.50 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Slaapkamer                    |   15.98 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Slaapkamer                    |   19.15 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken      | Slaapkamer                    |   15.82 | Vierkante meter, m2 |        |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van vertrekken      | Subtotaal                     |  140.87 | Vierkante meter, m2 | 141.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van overige ruimten | Berging                       |    6.65 | Vierkante meter, m2 |        |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van overige ruimten | Subtotaal                     |    6.65 | Vierkante meter, m2 |   5.25 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Woonkamer (verwarmd vertrek)  |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Keuken (verwarmd vertrek)     |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Badruimte (verwarmd vertrek)  |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |         |                     |   2.00 |        |
+| Verkoeling en verwarming        | Slaapkamer (verwarmd vertrek) |         |                     |   2.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Verkoeling en verwarming        | Subtotaal                     |         |                     |  14.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Buitenruimten                   | Balkon (privé)                |    3.14 | Vierkante meter, m2 |   3.10 |        |
+| Buitenruimten                   | Balkon (privé)                |    3.14 | Vierkante meter, m2 |   3.10 |        |
+| Buitenruimten                   | Tuin (privé)                  |   49.11 | Vierkante meter, m2 |  19.19 |        |
+| Buitenruimten                   | Dakterras (privé)             |   15.93 | Vierkante meter, m2 |   7.57 |        |
+| Buitenruimten                   | Maximaal 15 punten            |         |                     | -18.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Buitenruimten                   | Subtotaal                     |         |                     |  15.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Energieprestatie                | C (Energie-index)             |         |                     |  22.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Keuken                          | Lengte aanrecht               | 2700.00 | Millimeter          |   7.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Keuken                          | Subtotaal                     | 2700.00 | Millimeter          |   7.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Punten voor de WOZ-waarde       | Onderdeel I                   |         |                     |  44.21 |        |
+| Punten voor de WOZ-waarde       | Onderdeel II                  |         |                     |  19.03 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Punten voor de WOZ-waarde       | Subtotaal                     |         |                     |  63.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Zelfstandige woonruimten        | Afgerond totaal               |         |                     | 267.00 |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+|                                 | Maximale huur                 | 1631.51 | EUR                 |        |        |
++---------------------------------+-------------------------------+---------+---------------------+--------+--------+
+```
+
+</details>
+
+##### Optie 2; via Python zelf
+
+```python
+from datetime import date
+
+from woningwaardering.stelsels import ZelfstandigeWoonruimten, utils
+from woningwaardering.vera.bvg.generated import (
+    BouwkundigElementenBouwkundigElement,
+    EenhedenAdresBasis,
+    EenhedenAdresseerbaarObjectBasisregistratie,
+    EenhedenEenheid,
+    EenhedenEnergieprestatie,
+    EenhedenPand,
+    EenhedenRuimte,
+    EenhedenWoonplaats,
+    EenhedenWozEenheid,
+)
+from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
+    Bouwkundigelementsoort,
+    Energielabel,
+    Energieprestatiesoort,
+    Energieprestatiestatus,
+    Pandsoort,
+    Ruimtedetailsoort,
+    Ruimtesoort,
+)
+
+stelsel = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
+
+eenheid = EenhedenEenheid(
+    id="37101000032",
+    bouwjaar=1924,
+    adres=EenhedenAdresBasis(
+        straatnaam="Nieuwe Boezemstraat",
+        huisnummer="27",
+        huisnummer_toevoeging="",
+        postcode="3034PH",
+        woonplaats=EenhedenWoonplaats(naam="ROTTERDAM"),
+    ),
+    adresseerbaarObjectBasisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
+        id="0599010000485697", bagIdentificatie="0599010000485697"
+    ),
+    panden=[
+        EenhedenPand(
+            soort=Pandsoort.eengezinswoning.value,
+        )
+    ],
+    woz_eenheden=[
+        EenhedenWozEenheid(waardepeildatum=date(2022, 1, 1), vastgesteldeWaarde=618000),
+        EenhedenWozEenheid(waardepeildatum=date(2023, 1, 1), vastgesteldeWaarde=643000),
+    ],
+    energieprestaties=[
+        EenhedenEnergieprestatie(
+            soort=Energieprestatiesoort.energie_index.value,
+            status=Energieprestatiestatus.definitief.value,
+            begindatum=date(2019, 2, 25),
+            einddatum=date(2029, 2, 25),
+            registratiedatum="2019-02-26T14:51:38+01:00",
+            label=Energielabel.c.value,
+            waarde="1.58",
+        )
+    ],
+    gebruiksoppervlakte=187,
+    ruimten=[
+        EenhedenRuimte(
+            id="Space_108014589",
+            soort=Ruimtesoort.vertrek.value,
+            detailSoort=Ruimtedetailsoort.slaapkamer.value,
+            naam="Slaapkamer",
+            inhoud=60.4048,
+            oppervlakte=21.047,
+            verwarmd=True,
+            gemeenschappelijk=True,
+        ),
+        EenhedenRuimte(
+            id="Space_108006229",
+            soort=Ruimtesoort.vertrek.value,
+            detailSoort=Ruimtedetailsoort.keuken.value,
+            naam="Keuken",
+            inhoud=57.4359,
+            oppervlakte=20.3673,
+            verwarmd=True,
+            gemeenschappelijk=True,
+            bouwkundigeElementen=[
+                BouwkundigElementenBouwkundigElement(
+                    id="Aanrecht_108006231",
+                    naam="Aanrecht",
+                    omschrijving="Aanrecht in Keuken",
+                    soort=Bouwkundigelementsoort.voorziening.value,
+                    detailSoort=Bouwkundigelementdetailsoort.aanrecht.value,
+                    lengte=2700,
+                )
+            ],
+        ),
+    ],
+)
+
+woningwaardering_resultaat = stelsel.bereken(eenheid)
+print(
+    woningwaardering_resultaat.model_dump_json(
+        by_alias=True, indent=2, exclude_none=True
+    )
+)
+tabel = utils.naar_tabel(woningwaardering_resultaat)
+
+print(tabel)
+```
+
+De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan vervolgens worden omgezet naar een tabel zoals hierboven is gedaan.
+
+<details>
+<summary>Voorbeeld output in JSON</summary>
+
+```json
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
+        }
+      },
+      "punten": 41.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 21.05,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 20.37,
+          "criterium": {
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 4.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Slaapkamer (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Keuken (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": -5.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Geen buitenruimten"
+          },
+          "punten": -5.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 22.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "C (Energie-index)"
+          },
+          "punten": 22.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2700.0,
+          "criterium": {
+            "naam": "Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 7.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "punten": 112.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Onderdeel I"
+          },
+          "punten": 44.21
+        },
+        {
+          "criterium": {
+            "naam": "Onderdeel II"
+          },
+          "punten": 67.79
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
+    }
+  ],
+  "maximaleHuur": 1091.75,
+  "punten": 181.0,
+  "stelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
+  "maximaleHuurInclusiefOpslag": 1091.75
+}
+```
+
+</details>
+
+<details>
+<summary>Voorbeeld output in tabel</summary>
+
+```text
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Groep                      | Naam                          |  Aantal | Meeteenheid         | Punten | Opslag |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van vertrekken | Slaapkamer                    |   21.05 | Vierkante meter, m2 |        |        |
+| Oppervlakte van vertrekken | Keuken                        |   20.37 | Vierkante meter, m2 |        |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Oppervlakte van vertrekken | Subtotaal                     |   41.42 | Vierkante meter, m2 |  41.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Verkoeling en verwarming   | Slaapkamer (verwarmd vertrek) |         |                     |   2.00 |        |
+| Verkoeling en verwarming   | Keuken (verwarmd vertrek)     |         |                     |   2.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Verkoeling en verwarming   | Subtotaal                     |         |                     |   4.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Buitenruimten              | Geen buitenruimten            |         |                     |  -5.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Energieprestatie           | C (Energie-index)             |         |                     |  22.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Keuken                     | Lengte aanrecht               | 2700.00 | Millimeter          |   7.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Keuken                     | Subtotaal                     | 2700.00 | Millimeter          |   7.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Punten voor de WOZ-waarde  | Onderdeel I                   |         |                     |  44.21 |        |
+| Punten voor de WOZ-waarde  | Onderdeel II                  |         |                     |  67.79 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Punten voor de WOZ-waarde  | Subtotaal                     |         |                     | 112.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+| Zelfstandige woonruimten   | Afgerond totaal               |         |                     | 181.00 |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+|                            | Maximale huur                 | 1091.75 | EUR                 |        |        |
++----------------------------+-------------------------------+---------+---------------------+--------+--------+
+```
+
+</details>
 
 ## 2. Contributing
 
@@ -369,3 +1191,11 @@ Dit is aangekaart in deze twee issues:
 ### Datum afsluiten huurovereenkomst
 
 Voor een correcte waardering van rijksmonumenten dient de afsluitings datum van de huurovereenkomst opgegeven te worden. In de VERA standaard bestaat binnen het BVG domein geen model dat deze informatie bevat. Het VERA model `EenhedenEenheid` is uitgebreid met het attribuut `datum_afsluiten_huurovereenkomst`.
+
+### BOUWKUNDIGELEMENTDETAILSOORT aanbelfunctie met video- en audioverbinding
+
+De VERA-referentiedata biedt nog geen mogelijkheid om aan te geven dat een eenheid is voorzien van een aanbelfunctie met video- en audioverbinding. Daarom hebben we een nieuwe BOUWKUNDIGELEMENTDETAILSOORT toegevoegd. Om in aanmerking te komen voor waardering, moet dit bouwkundig element worden gespecificeerd voor een van de ruimten binnen de eenheid. Meer informatie is te vinden op: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/148
+
+### Installaties
+
+Installaties zouden toegevoegd moeten worden aan het VERA model `EenhedenRuimte`. Het attribuut `installaties` bestaat al in de wiki, maar nog niet in de `vera-openapi` repository: https://github.com/Aedes-datastandaarden/vera-openapi/issues/70

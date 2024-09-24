@@ -1,3 +1,4 @@
+from .bijzondere_voorzieningen import BijzondereVoorzieningen
 from .buitenruimten import Buitenruimten
 from .energieprestatie import Energieprestatie
 from .gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen import (
@@ -22,4 +23,5 @@ __all__ = [
     "PuntenVoorDeWozWaarde",
     "Sanitair",
     "VerkoelingEnVerwarming",
+    "BijzondereVoorzieningen",
 ]

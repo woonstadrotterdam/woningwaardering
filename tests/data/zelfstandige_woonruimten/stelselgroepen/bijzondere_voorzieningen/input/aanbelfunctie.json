@@ -1,0 +1,29 @@
+{
+  "id": "aanbelfunctie",
+  "ruimten": [
+    {
+      "id": "Woonkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 38.1247,
+      "oppervlakte": 19.1488,
+      "verwarmd": true,
+      "verkoeld": false,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "AAV",
+            "naam": "Aanbelfunctie met video- en audioverbinding"
+          }
+        }
+      ]
+    }
+  ]
+}

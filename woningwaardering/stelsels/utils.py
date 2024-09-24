@@ -1,7 +1,7 @@
+import warnings
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Callable, List, Tuple
-import warnings
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
@@ -135,30 +135,41 @@ def naar_tabel(
             if woningwaardering.aantal is not None
         ]
 
-        subtotaal = float(sum(aantallen)) if aantallen else None
+        subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
 
         if (
             (subtotaal is not None or aantal_waarderingen > 1)
             and woningwaardering_groep.criterium_groep
             and woningwaardering_groep.criterium_groep.stelselgroep
         ):
-            meeteenheden = list(
-                {
-                    woningwaardering.criterium.meeteenheid.naam or ""
-                    for woningwaardering in woningwaarderingen
-                    if woningwaardering.criterium is not None
-                    and woningwaardering.criterium.meeteenheid is not None
-                }
-            )
+            # stukje hieronder is om subtotaal en meeteenheid te bepalen.
+            # indien er meerdere meeteenheden zijn, dan wordt het subtotaal en de meeteenheid leeg bij subtotalen
+            meeteenheden_zonder_nones = [
+                woningwaardering.criterium.meeteenheid.naam or ""
+                for woningwaardering in woningwaarderingen
+                if woningwaardering.criterium is not None
+                and woningwaardering.criterium.meeteenheid is not None
+            ]
+            critera = [
+                woningwaardering.criterium or ""
+                for woningwaardering in woningwaarderingen
+                if woningwaardering.criterium is not None
+            ]
+            verschillende_meeteenheden = len(set(meeteenheden_zonder_nones)) > 1 or len(
+                critera
+            ) != len(meeteenheden_zonder_nones)
 
-            meeteenheid = ", ".join(meeteenheden) if len(meeteenheden) == 1 else ""
+            if verschillende_meeteenheden:
+                meeteenheid = ""
+            else:
+                meeteenheid = meeteenheden_zonder_nones[0]
 
             table.add_row(
                 [
                     woningwaardering_groep.criterium_groep.stelselgroep.naam,
                     "Subtotaal",
-                    subtotaal or "" if len(meeteenheden) == 1 else "",
-                    meeteenheid,
+                    (subtotaal or "") if not verschillende_meeteenheden else "",
+                    meeteenheid if not verschillende_meeteenheden else "",
                     woningwaardering_groep.punten or "",
                     f"{woningwaardering_groep.opslagpercentage:.0%}"
                     if woningwaardering_groep.opslagpercentage is not None
@@ -338,8 +349,7 @@ def energieprestatie_met_geldig_label(
 
 
 def rond_af(
-    getal: float | None | Decimal,
-    decimalen: int,
+    getal: float | None | Decimal, decimalen: int, rounding: str | None = ROUND_HALF_UP
 ) -> Decimal:
     """
     Rondt een getal af op een bepaald aantal decimalen volgens de standaard afrondingsregels (arithmetic).
@@ -347,6 +357,7 @@ def rond_af(
     Args:
         getal (float | None | Decimal): Het getal om af te ronden.
         decimalen (int): Het aantal decimalen na de komma om op af te ronden.
+        rounding (str | None, optional): Het type afrondingsregel. Default is ROUND_HALF_UP.
 
     Returns:
         Decimal: Het afgeronde getal.
@@ -356,9 +367,7 @@ def rond_af(
     """
     if getal is None:
         raise ValueError("Kan None niet afronden")
-    return Decimal(str(getal)).quantize(
-        Decimal(f"1e{-decimalen}"), rounding=ROUND_HALF_UP
-    )
+    return Decimal(str(getal)).quantize(Decimal(f"1e{-decimalen}"), rounding=rounding)
 
 
 def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:

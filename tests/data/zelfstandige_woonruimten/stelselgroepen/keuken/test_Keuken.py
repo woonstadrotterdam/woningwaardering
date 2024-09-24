@@ -71,19 +71,19 @@ def test_Keuken_specifiek_output(specifieke_input_en_output_model, peildatum):
 specifiek_warning_mapping = {
     "aanrecht_zonder_lengte": [
         (
-            date(2024, 1, 1),
+            date(2024, 7, 1),
             (
                 UserWarning,
-                "Aanrecht aanrecht_1 in ruimte keuken heeft geen lengte",
+                "geen aanrecht",
             ),
         )
     ],
     "keuken_zonder_aanrecht": [
         (
-            date(2024, 1, 1),
+            date(2024, 7, 1),
             (
                 UserWarning,
-                "keuken zonder aanrecht",
+                "geen aanrecht",
             ),
         )
     ],
