@@ -11,14 +11,14 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 1.0,
+      "punten": 6.0,
       "woningwaarderingen": [
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Wastafel"
+            "naam": "Badkamer - Bad"
           },
-          "punten": 1.0
+          "punten": 6.0
         }
       ]
     }

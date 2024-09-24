@@ -1,16 +1,21 @@
 {
   "ruimten": [
     {
+      "naam": "Doucheruimte",
+      "detailSoort": {
+        "code": "DOU",
+        "naam": "Doucheruimte"
+      },
       "bouwkundigeElementen": [
         {
-          "naam": "Wastafel",
+          "naam": "Douche",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
           },
           "detailSoort": {
-            "code": "WAS",
-            "naam": "Wastafel/Fontein"
+            "code": "DOU",
+            "naam": "Douche"
           }
         }
       ]

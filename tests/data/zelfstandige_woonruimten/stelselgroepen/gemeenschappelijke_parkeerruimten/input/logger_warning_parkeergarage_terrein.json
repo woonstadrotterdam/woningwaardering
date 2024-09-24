@@ -1,0 +1,33 @@
+{
+  "id": "12006000004",
+  "ruimten": [
+    {
+      "id": "1",
+      "gedeeld_met_aantal_eenheden": 10,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "PAG",
+        "naam": "Parkeergarage"
+      },
+      "naam": "Parkeergarage",
+      "oppervlakte": 100
+    },
+    {
+      "id": "2",
+      "gedeeld_met_aantal_eenheden": 10,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "PAT",
+        "naam": "Parkeerterrein"
+      },
+      "naam": "Parkeerterrein",
+      "oppervlakte": 100
+    }
+  ]
+}

@@ -9,15 +9,17 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     BijzondereVoorzieningen,
     Buitenruimten,
     Energieprestatie,
+    GemeenschappelijkeParkeerruimten,
     Keuken,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
     PrijsopslagMonumentenEnNieuwbouw,
     PuntenVoorDeWozWaarde,
-    # Sanitair,
+    Sanitair,
     VerkoelingEnVerwarming,
     GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen,
 )
+
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -40,8 +42,8 @@ class ZelfstandigeWoonruimten(Stelsel):
                 Buitenruimten,
                 Energieprestatie,
                 Keuken,
-                # Sanitair,
-                Keuken,
+                Sanitair,
+                GemeenschappelijkeParkeerruimten,
                 GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen,
                 PuntenVoorDeWozWaarde,  # LET OP: deze stelselgroep dient als twee na laatste te worden uitgevoerd
                 BijzondereVoorzieningen,  # LET OP: deze stelselgroep dient als een na laatste te worden uitgevoerd
@@ -56,7 +58,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date.today())
     with open(
-        "tests/data/zelfstandige_woonruimten/input/87402000003.json",
+        "tests/data/zelfstandige_woonruimten/input/12006000004.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

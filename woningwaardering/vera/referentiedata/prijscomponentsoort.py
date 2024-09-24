@@ -8,8 +8,8 @@ class Prijscomponentsoort(Enum):
         naam="Dienstencomponent",
     )
     """
-    Let op: niet te verwarren met prijscomponentdetailsoort &#39;Dienst- en
-    recreatieruimten&#39;. Die laatste is een (subsidiabele) Servicekosten component.
+    Let op: niet te verwarren met prijscomponentdetailsoort 'Dienst- en
+    recreatieruimten'. Die laatste is een (subsidiabele) Servicekosten component.
     """
 
     eenmalig = Referentiedata(

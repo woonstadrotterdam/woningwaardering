@@ -557,25 +557,25 @@ _\* tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer.
 
 **_Toilet_**
 
-Punten worden toegekend aan een toilet met waterspoeling als het toilet is geplaatst in een daartoe bestemde ruimte en als het toilet binnen het woongebouw is gelegen. Wanneer sprake is van een toilet dat buiten de woning maar binnen het woongebouw is gelegen, dan geldt dat het toilet in de waardering wordt meegenomen als het gebruik van het toilet door derden is uit te sluiten. Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor waardering.
+Punten worden toegekend aan een toilet met waterspoeling als het toilet is geplaatst in een daartoe bestemde ruimte~~ en als het toilet binnen het woongebouw is gelegen. Wanneer sprake is van een toilet dat buiten de woning maar binnen het woongebouw is gelegen, dan geldt dat het toilet in de waardering wordt meegenomen als het gebruik van het toilet door derden is uit te sluiten~~. Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor waardering.
 
 **_Wastafel_**
 
-Als wastafels worden alle bakken geteld voor wassen en spoelen die op de waterleiding én op het huisriool zijn aangesloten. Een dergelijke bak wordt niet als wastafel gewaardeerd indien boven de bak een douche is aangebracht. Een bad of spoelbakken in een keukenaanrecht, bidet of lavet wordt niet als wastafel, douche of bad gewaardeerd. Wastafels worden gewaardeerd tot een maximum van 1 punt per vertrek of overige ruimte, m.u.v. de badkamer.
+~~Als wastafels worden alle bakken geteld voor wassen en spoelen die op de waterleiding én op het huisriool zijn aangesloten. Een dergelijke bak wordt niet als wastafel gewaardeerd indien boven de bak een douche is aangebracht. Een bad of spoelbakken in een keukenaanrecht, bidet of lavet wordt niet als wastafel, douche of bad gewaardeerd. ~~Wastafels worden gewaardeerd tot een maximum van 1 punt per vertrek of overige ruimte, m.u.v. de badkamer.
 
-Van een meerpersoonswastafel is sprake bij een wastafel met een minimale breedte van 70 cm, voorzien van twee kranen. Deze wastafels worden tot maximaal 1,5 punt per vertrek of overige ruimte, m.u.v. de badkamer, gewaardeerd. De kranen worden afzonderlijk gewaardeerd.
+Van een meerpersoonswastafel is sprake bij een wastafel~~ met een minimale breedte van 70 cm, voorzien van twee kranen~~. Deze wastafels worden tot maximaal 1,5 punt per vertrek of overige ruimte, m.u.v. de badkamer, gewaardeerd. De kranen worden afzonderlijk gewaardeerd.
 
-Zoals genoemd in paragraaf 5.2 waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter is dan één meter, als wastafel. In alle andere gevallen wordt een spoelbak in de keuken dus niet als wastafel gewaardeerd.
+~~Zoals genoemd in paragraaf 5.2 waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter is dan één meter, als wastafel. In alle andere gevallen wordt een spoelbak in de keuken dus niet als wastafel gewaardeerd.~~
 
 **_Bad en douche_**
 
 Als douche wordt meegeteld iedere door de verhuurder aangebrachte installatie voor het nemen van een stortbad. Hieronder valt eveneens een zogenaamde douchecabine, die voldoet aan bovengenoemde voorwaarden, als de douchcabine in een vertrek (anders dan bad- of doucheruimte) of overige ruimte is geplaatst. De oppervlakte van dat vertrek of van die overige ruimte wordt in dat geval niet verminderd met de door de douchecabine ingenomen oppervlakte.
 
-Aan baden worden 6 punten toegekend, ongeacht de lengte van het bad, als een volwassen persoon er in een normale zithouding in kan plaatsnemen. Indien een bad is voorzien van een (hand)douche, dan wordt het douchegarnituur niet afzonderlijk geteld.
+Aan baden worden 6 punten toegekend, ongeacht de lengte van het bad~~, als een volwassen persoon er in een normale zithouding in kan plaatsnemen. Indien een bad is voorzien van een (hand)douche, dan wordt het douchegarnituur niet afzonderlijk geteld~~.
 
 Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangebracht, geldt een waardering van 7 punten.
 
-Als het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of respectievelijk bad.
+~~Als het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of respectievelijk bad.~~
 
 ### 6.2 Puntentoekenning extra voorzieningen
 
@@ -585,11 +585,11 @@ Het woningwaarderingsstelsel geeft voor het onderdeel sanitair extra punten voor
 
 Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden in een bad- of doucheruimte. Bad- of doucheruimten moeten voldoen aan de volgende eisen:
 
-*   Een waterdichte vloerafwerking\*.
-*   De ruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).
-*   Waterdichte afwerking tot 1,50 m hoogte voor badruimte en 1,80 m voor doucheruimte;
-*   Een wastafel inclusief (tweehands-)mengkraan en een spiegel.
-*   Een douche of bad met aansluitpunten voor warm en koud water (niet zijnde een warmwater apparaat) en voorzien van een warm- en koudwaterkraan of een mengkraan.
+*   ~~Een waterdichte vloerafwerking~~\*.
+*   ~~De ruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).~~
+*   ~~Waterdichte afwerking tot 1,50 m hoogte voor badruimte en 1,80 m voor doucheruimte;~~
+*   ~~Een wastafel inclusief (tweehands-)mengkraan en een spiegel.~~
+*   ~~Een douche of bad met aansluitpunten voor warm en koud water (niet zijnde een warmwater apparaat) en voorzien van een warm- en koudwaterkraan of een mengkraan.~~
 
 \* Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien.
 
@@ -612,7 +612,7 @@ Voorzieningen in de bad- of doucheruimte
 
 _\* In het geval van een gemonteerde volledige afscheiding van de douche vindt de waardering van 1,25 punten plaats wanneer de doucheruimte beschikt over een onroerend aanhorige afscheiding met een waterdichte afwerking aan alle zijden van de douche. Ter illustratie: glazen deuren vallen hier wel onder, maar een douchegordijn (dat snel weggenomen kan worden) niet._
 
-Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of, respectievelijk bad.
+~~Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of, respectievelijk bad.~~
 
 ## ~~Rubriek 7 Woonvoorzieningen voor gehandicapten~~
 
@@ -764,6 +764,9 @@ Voorbeeld
 
 ### 10.1 Puntentoekenning
 
+> Bij het rekenvoorbeeld aan het einde van deze rubriek wordt uitgelegd hoe de woningwaardering package te gebruiken is om een eenheid te waarderen op de rubriek gemeenschappelijke parkeerruimten.
+
+
 Voor verschillende typen gemeenschappelijke parkeerplekken, afhankelijk van afdekking van de buitenlucht, worden punten toegekend:
 
 *   Type I: parkeerplek in afgesloten parkeergarage behorende tot het complex krijgt 9 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
@@ -771,6 +774,11 @@ Voor verschillende typen gemeenschappelijke parkeerplekken, afhankelijk van afde
 *   Type III: parkeerplek buiten behorende tot het complex of de woning zonder dak krijgt 4 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
 2 extra punten worden toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft, als de parkeerplek beschikt over een laadpaal voor elektrisch rijden, en exclusief is voor gebruik door bewoners.
+
+> Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:
+> - Type I: `Ruimtedetailsoort.parkeervak_auto_binnen` met code `VAI`
+> - Type II: `Ruimtedetailsoort.carport` met code `CAR`
+> - Type III: `Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt` met code `VAU`
 
 ### 10.2 Definitie gemeenschappelijke parkeerruimte en laadpaal
 
@@ -802,6 +810,67 @@ Tien adressen delen vijf type II-parkeerplekken met laadpaal en twee type III-pa
 1.  Vijf parkeerplekken type II (zes punten) + elke een laadpaal (twee punten) en twee parkeerplekken type III (4 punten) = 5 x (6+2)+ 2 x 4 = 48.
 2.  48 / 10 adressen = 4,8 per adres.
 3.  Afronden geschiedt op een kwart punt per adres, in dit voorbeeld dus op 4,75.
+
+> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken bovenstaande berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven hoeveel van bovenstaande parkertypes de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden. Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt (in JSON-formaat) meegegeven worden.
+
+
+```json
+{
+  "id": "12006000004",
+  "ruimten": [
+    {
+      "id": "1",
+      "gedeeld_met_aantal_eenheden": 10,
+      "aantal": 5,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "gedeeld_met_aantal_eenheden": 10,
+      "aantal": 2,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "VAU",
+        "naam": "Parkeervak auto (buiten, niet overdekt)"
+      },
+      "naam": "Parkeervak buiten",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4
+    }
+  ]
+}
+```
+> Let op: in bovenstaand voorbeeld, wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte ook keer het `Eenhedenruimte.aantal` meegeteld voor het berekenen van de punten. In bovenstaand voorbeeld wordt de laadpaal dus vijf (5) keer meegeteld.
+
 
 ## Rubriek 11 Punten voor de WOZ-waarde
 

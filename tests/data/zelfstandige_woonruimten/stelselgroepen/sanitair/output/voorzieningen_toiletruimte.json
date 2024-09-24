@@ -11,16 +11,8 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 1.0,
-      "woningwaarderingen": [
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Lavet"
-          },
-          "punten": 1.0
-        }
-      ]
+      "punten": 0.0,
+      "woningwaarderingen": []
     }
   ]
 }

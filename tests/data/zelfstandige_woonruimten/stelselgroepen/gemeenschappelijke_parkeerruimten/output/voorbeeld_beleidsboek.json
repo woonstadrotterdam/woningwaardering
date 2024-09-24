@@ -7,25 +7,25 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "SAN",
-          "naam": "Sanitair"
+          "code": "GPA",
+          "naam": "Gemeenschappelijke parkeerruimten"
         }
       },
-      "punten": 1.5,
+      "punten": 4.75,
       "woningwaarderingen": [
         {
-          "aantal": 1.0,
+          "aantal": 5.0,
           "criterium": {
-            "naam": "Wastafel"
+            "naam": "Type II + laadpaal (gedeeld met 10 adressen)"
           },
-          "punten": 1.0
+          "punten": 4.0
         },
         {
-          "aantal": 1.0,
+          "aantal": 2.0,
           "criterium": {
-            "naam": "Wastafel (gedeeld met 2)"
+            "naam": "Type III (gedeeld met 10 adressen)"
           },
-          "punten": 0.5
+          "punten": 0.8
         }
       ]
     }

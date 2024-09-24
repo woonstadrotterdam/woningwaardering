@@ -16,7 +16,7 @@
         {
           "aantal": 10.79,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 1",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -46,7 +46,7 @@
         {
           "aantal": 9.28,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -100,7 +100,7 @@
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 1 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -124,7 +124,7 @@
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 2 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -194,8 +194,63 @@
           "naam": "Keuken"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": []
+      "punten": 4.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1500.0,
+          "criterium": {
+            "naam": "Keuken - Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 4.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 10.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toiletruimte - Staand Toilet"
+          },
+          "punten": 3.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Staand Toilet"
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Douche"
+          },
+          "punten": 4.0
+        }
+      ]
     },
     {
       "criteriumGroep": {
@@ -245,6 +300,20 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "GPA",
+          "naam": "Gemeenschappelijke parkeerruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "PMN",
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
@@ -261,11 +330,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1138.52,
-  "punten": 183.0,
+  "maximaleHuur": 1229.14,
+  "punten": 197.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 1138.52
+  "huurprijsopslag": 0.0,
+  "maximaleHuurInclusiefOpslag": 1229.14
 }

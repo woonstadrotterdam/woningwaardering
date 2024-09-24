@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
+from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
     OppervlakteVanOverigeRuimten,
 )
@@ -27,6 +28,9 @@ def test_OppervlakteVanOverigeRuimten_output(
     zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
     eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
+
+    normaliseer_ruimte_namen(eenheid_input)
+
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     resultaat.groepen = [oppervlakte_van_overige_ruimten.bereken(eenheid_input)]

@@ -1,16 +1,21 @@
 {
   "ruimten": [
     {
+      "naam": "Badkamer",
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
       "bouwkundigeElementen": [
         {
-          "naam": "Closetcombinatie",
+          "naam": "Bad",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
           },
           "detailSoort": {
-            "code": "BID",
-            "naam": "Bidet"
+            "code": "BAD",
+            "naam": "Bad"
           }
         }
       ]

@@ -1,0 +1,21 @@
+{
+  "id": "warning_geen_oppervlakte",
+  "ruimten": [
+    {
+      "id": "warning_2",
+      "gedeeld_met_aantal_eenheden": 10,
+      "aantal": 2,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "VAU",
+        "naam": "Parkeervak auto (buiten, niet overdekt)"
+      },
+      "naam": "Parkeervak buiten",
+      "breedte": 3,
+      "lengte": 4
+    }
+  ]
+}

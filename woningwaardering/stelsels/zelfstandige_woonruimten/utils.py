@@ -49,6 +49,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtesoort | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
             Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
     """
+
     if ruimte.oppervlakte is None:
         warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet geclassificeerd worden."
         warnings.warn(warning_msg, UserWarning)
@@ -70,6 +71,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             and ruimte.detail_soort.code
             not in [  # deze buitenruimten zijn geen buitenruimten volgens woningwaarderingstelsel
                 Ruimtedetailsoort.carport.code,
+                # onderstaande parkeergelegenden worden binnenkort vervangen: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
                 Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code,
                 Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_specifieke_plek.code,
                 Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek.code,
@@ -115,7 +117,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtedetailsoort.bijkeuken.code,
         Ruimtedetailsoort.berging.code,
         Ruimtedetailsoort.wasruimte.code,
-        Ruimtedetailsoort.garage.code,
         Ruimtedetailsoort.kelder.code,
         # Ruimtedetailsoort.schuur.code,
     ] or (
@@ -134,6 +135,23 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     if ruimte.detail_soort.code == Ruimtedetailsoort.toiletruimte.code:
         # mag alleen als overige ruimte gewaardeerd worden
         if ruimte.oppervlakte >= 2:
+            return Ruimtesoort.overige_ruimten
+
+    if (
+        ruimte.detail_soort.code
+        in [
+            Ruimtedetailsoort.garage_inpandig.code,
+            Ruimtedetailsoort.garage_uitpandig.code,
+            Ruimtedetailsoort.garagebox.code,
+        ]
+        and ruimte.gedeeld_met_aantal_eenheden is None
+        or (
+            ruimte.gedeeld_met_aantal_eenheden is not None
+            and ruimte.gedeeld_met_aantal_eenheden
+            < 2  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
+        )
+    ):
+        if ruimte.oppervlakte >= 2.0:
             return Ruimtesoort.overige_ruimten
 
     if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
@@ -236,5 +254,5 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
                 f"Ruimte {ruimte.naam} ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
             )
 
-            criterium_naam = f"{ruimte.naam} + {aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'}"
+            criterium_naam = f"{ruimte.naam} (+{aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'})"
     return criterium_naam

@@ -26,7 +26,7 @@
         {
           "aantal": 15.74,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 1",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -46,7 +46,7 @@
         {
           "aantal": 15.15,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -56,7 +56,7 @@
         {
           "aantal": 26.54,
           "criterium": {
-            "naam": "Woonkamer + 1 kast",
+            "naam": "Woonkamer (+1 kast)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -66,7 +66,7 @@
         {
           "aantal": 12.23,
           "criterium": {
-            "naam": "Slaapkamer",
+            "naam": "Slaapkamer 3",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -121,7 +121,7 @@
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 1 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -133,7 +133,7 @@
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 2 (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -151,7 +151,7 @@
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer 3 (verwarmd vertrek)"
           },
           "punten": 2.0
         }
@@ -226,13 +226,63 @@
         {
           "aantal": 1800.0,
           "criterium": {
-            "naam": "Lengte aanrecht",
+            "naam": "Keuken - Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
             }
           },
           "punten": 4.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 11.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Staand Toilet"
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Douche"
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toiletruimte - Staand Toilet"
+          },
+          "punten": 3.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toiletruimte - Wastafel"
+          },
+          "punten": 1.0
         }
       ]
     },
@@ -284,6 +334,20 @@
           "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "GPA",
+          "naam": "Gemeenschappelijke parkeerruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "PMN",
           "naam": "Prijsopslag monumenten en nieuwbouw"
         }
@@ -293,11 +357,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1313.32,
-  "punten": 210.0,
+  "maximaleHuur": 1384.48,
+  "punten": 221.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 1313.32
+  "huurprijsopslag": 0.0,
+  "maximaleHuurInclusiefOpslag": 1384.48
 }

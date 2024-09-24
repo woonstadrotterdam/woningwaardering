@@ -1,0 +1,36 @@
+{
+  "id": "12006000004",
+  "ruimten": [
+    {
+      "id": "1",
+      "gedeeld_met_aantal_eenheden": 1,
+      "aantal": 1,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    }
+  ]
+}

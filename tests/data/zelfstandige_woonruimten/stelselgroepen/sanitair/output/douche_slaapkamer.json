@@ -11,14 +11,14 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 14.0,
+      "punten": 4.0,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
-            "naam": "Bad en Douche in zelfde ruimte"
+            "naam": "Slaapkamer - Douche"
           },
-          "punten": 14.0
+          "punten": 4.0
         }
       ]
     }

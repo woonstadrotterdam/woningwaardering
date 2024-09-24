@@ -8,6 +8,7 @@ from tests.test_utils import (
     krijg_warning_tuple_op_datum,
     laad_specifiek_input_en_output_model,
 )
+from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import (
     Keuken,
 )
@@ -41,6 +42,9 @@ def test_Keuken(
 
 def test_Keuken_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
     eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
+
+    normaliseer_ruimte_namen(eenheid_input)
+
     keuken = Keuken(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
@@ -69,6 +73,7 @@ def test_Keuken_specifiek_output(specifieke_input_en_output_model, peildatum):
 
 # mapping eenheid_id naar peildatum-warning
 specifiek_warning_mapping = {
+    # let op: dit is de eenheid_id in de input json
     "aanrecht_zonder_lengte": [
         (
             date(2024, 7, 1),
@@ -78,6 +83,7 @@ specifiek_warning_mapping = {
             ),
         )
     ],
+    # let op: dit is de eenheid_id in de input json
     "keuken_zonder_aanrecht": [
         (
             date(2024, 7, 1),
