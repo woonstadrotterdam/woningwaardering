@@ -141,6 +141,16 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                                 else Decimal("0.75")
                             )
                         )
+                        oppervlakte_waardering.punten = float(
+                            Decimal(str(oppervlakte_waardering.punten))
+                            / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
+                        )
+
+                if (
+                    oppervlakte_waardering.criterium is not None
+                    and oppervlakte_waardering.criterium.naam is not None
+                ):
+                    oppervlakte_waardering.criterium.naam = f"{oppervlakte_waardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
 
                 woningwaardering_groep.woningwaarderingen.extend(
                     oppervlakte_waarderingen
@@ -161,20 +171,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # TODO: Toevoegen sanitair waarderingen
                 # sanitair_waarderingen = list(Sanitair.genereer_woningwaarderingen(ruimte))
                 # woningwaardering_groep.woningwaarderingen.extend(sanitair_waarderingen)
-
-                for woningwaardering in woningwaardering_groep.woningwaarderingen:
-                    woningwaardering.punten = float(
-                        Decimal(str(woningwaardering.punten))
-                        / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                    )
-
-                    if (
-                        woningwaardering.criterium is not None
-                        and woningwaardering.criterium.naam is not None
-                    ):
-                        woningwaardering.criterium.naam += (
-                            f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
-                        )
 
         punten = utils.rond_af_op_kwart(
             sum(
@@ -201,19 +197,22 @@ if __name__ == "__main__":  # pragma: no cover
         )
     )
 
-    with open("tests/data/generiek/input/37101000032.json", "r+") as file:
+    with open(
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen/input/vertrekken.json",
+        "r+",
+    ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = (
-        gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.bereken(eenheid)
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+        groepen=[
+            gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.bereken(
+                eenheid
+            )
+        ]
     )
 
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
-        )
-    )
+    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
 
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+    tabel = utils.naar_tabel(resultaat)
 
     print(tabel)
