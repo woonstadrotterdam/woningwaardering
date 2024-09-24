@@ -33,7 +33,7 @@
         {
           "aantal": 1000.0,
           "criterium": {
-            "naam": "Lengte aanrecht (gedeeld met 5)",
+            "naam": "Keuken - Lengte aanrecht (gedeeld met 5)",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
