@@ -760,6 +760,8 @@ Voorbeeld
 5.  _Delen door het aantal adressen levert op: 38,25 punten / 4 = 9.5625 per adres._
 6.  _Afronden geschiedt op een kwart punt per adres, in dit geval dus op 9,50._
 
+> Voor ons is het niet duidelijk op basis van de tekst en de voorbeeldrekening hoe het zit met de maximering op punten. Wij zijn er vanuit gegaan dat ook de maximering van de hoeveelheid punten gedeeeld moet worden door het aantal adressen. Bijvoorbeeld maximaal 0.75 punten voor kastruimte in de badruimte wordt met toegang van twee adressen ~0.38.
+
 ## Rubriek 10 Gemeenschappelijke parkeerruimten
 
 ### 10.1 Puntentoekenning
