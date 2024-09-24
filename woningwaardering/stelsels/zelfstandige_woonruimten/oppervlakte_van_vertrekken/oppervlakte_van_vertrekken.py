@@ -1,17 +1,19 @@
+import warnings
 from datetime import date
 from decimal import Decimal
-import warnings
+from typing import Iterator
 
 from loguru import logger
 
-from woningwaardering.stelsels.utils import rond_af, rond_af_op_kwart, naar_tabel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.utils import naar_tabel, rond_af, rond_af_op_kwart
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -55,36 +57,19 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        for ruimte in eenheid.ruimten or []:
-            if not classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
-                logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is geen vertrek en komt niet aanmerking voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}."
-                )
-                continue
+        ruimten = [
+            ruimte
+            for ruimte in eenheid.ruimten or []
+            if ruimte.gedeeld_met_aantal_eenheden is None
+            or ruimte.gedeeld_met_aantal_eenheden == 1
+        ]
 
-            if not ruimte.oppervlakte:
-                warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
-                    UserWarning,
-                )
-                continue
-
-            criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
-
-            logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is een vertek met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}."
+        for ruimte in ruimten:
+            woningwaarderingen = OppervlakteVanVertrekken.genereer_woningwaarderingen(
+                ruimte, self.stelselgroep
             )
 
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = (
-                WoningwaarderingResultatenWoningwaarderingCriterium(
-                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                    naam=criterium_naam,
-                )
-            )
-            woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
-
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
         punten = rond_af_op_kwart(
             float(
@@ -108,6 +93,40 @@ class OppervlakteVanVertrekken(Stelselgroep):
         )
 
         return woningwaardering_groep
+
+    @staticmethod
+    def genereer_woningwaarderingen(
+        ruimte: EenhedenRuimte, stelselgroep: Woningwaarderingstelselgroep
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        if not classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
+            logger.info(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) is geen vertrek en komt niet in aanmerking voor stelselgroep {stelselgroep.naam}."
+            )
+            return
+
+        if not ruimte.oppervlakte:
+            warnings.warn(
+                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
+                UserWarning,
+            )
+            return
+
+        criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
+
+        logger.info(
+            f"Ruimte {ruimte.naam} ({ruimte.id}) is een vertrek met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {stelselgroep.naam}."
+        )
+
+        woningwaardering = WoningwaarderingResultatenWoningwaardering()
+        woningwaardering.criterium = (
+            WoningwaarderingResultatenWoningwaarderingCriterium(
+                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                naam=criterium_naam,
+            )
+        )
+        woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
+
+        yield woningwaardering
 
 
 if __name__ == "__main__":  # pragma: no cover

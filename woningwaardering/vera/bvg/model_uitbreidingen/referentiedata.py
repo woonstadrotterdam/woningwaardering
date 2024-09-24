@@ -1,4 +1,5 @@
 from typing import Optional
+
 from pydantic import Field
 
 from woningwaardering.vera.bvg.generated import Referentiedata

@@ -23,7 +23,6 @@ from woningwaardering.vera.referentiedata import (
     Redenvernietiging,
 )
 
-
 __all__ = [
     "Btw",
     "Eindedetailreden",

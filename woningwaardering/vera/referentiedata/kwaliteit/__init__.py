@@ -4,7 +4,6 @@ from woningwaardering.vera.referentiedata import (
     Vragenlijstregelonderwerpsoort,
 )
 
-
 __all__ = [
     "Kwaliteitsmetingverzoeksoort",
     "Vragenlijstregelherkomst",

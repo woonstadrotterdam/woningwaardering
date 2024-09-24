@@ -1,0 +1,49 @@
+{
+  "id": "1000mm",
+  "ruimten": [
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 24.8469,
+      "oppervlakte": 10.0,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "gedeeld_met_aantal_eenheden": 5,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1000
+        }
+      ],
+      "installaties": [
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        }
+      ]
+    }
+  ]
+}

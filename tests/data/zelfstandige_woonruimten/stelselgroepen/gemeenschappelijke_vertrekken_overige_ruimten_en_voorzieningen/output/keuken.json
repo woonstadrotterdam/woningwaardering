@@ -1,0 +1,54 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GVR",
+          "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "naam": "Keuken (gedeeld met 5)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Keuken (verwarmd vertrek) (gedeeld met 5)"
+          },
+          "punten": 0.4
+        },
+        {
+          "aantal": 1000.0,
+          "criterium": {
+            "naam": "Keuken - Lengte aanrecht (gedeeld met 5)",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 0.8
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Inbouw koelkast (in zelfde ruimte) (gedeeld met 5)"
+          },
+          "punten": 0.4
+        }
+      ]
+    }
+  ]
+}

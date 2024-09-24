@@ -711,11 +711,15 @@ In totaal kan maximaal 15 punten worden toegekend.
 
 *   Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 *   Een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
-*   Voorzieningen (verkoeling en verwarming, keuken, sanitair, gehandicaptenvoorziening) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel, gedeeld door het aantal adressen.
+*   Voorzieningen (verkoeling en verwarming, keuken, sanitair~~, gehandicaptenvoorziening~~) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel, gedeeld door het aantal adressen.
+
+> Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_eenheden`, waarbij de eenheid zelf meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
 
 **Warme maaltijden**
 
 Indien het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
+
+> Indien dit zo is, geef bijvoorbeeld een `keuken` mee met `gedeeld_met_aantal_eenheden`.
 
 **Gemeenschappelijke ruimten en voorzieningen in een zorgwoning**
 
@@ -723,14 +727,14 @@ De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en voo
 
 ### 9.2 Definitie gemeenschappelijke vertrekken en overige ruimten
 
-Gemeenschappelijke vertrekken en overige ruimten zijn tot het woongebouw behorende binnenruimten waarvan de bewoners van tenminste twee adressen in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht hebben. De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke binnenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s).
+Gemeenschappelijke vertrekken en overige ruimten zijn tot het woongebouw behorende binnenruimten waarvan de bewoners van tenminste twee adressen in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht hebben. ~~De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke binnenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s).~~
 
-Uitgesloten zijn vertrekken en overige ruimten waarvoor ook door derden een vergoeding/huurprijs wordt betaald alsmede vertrekken en ruimten die door de eigenaar/verhuurder in gebruik zijn (bijv. kantoor- ruimte, opslagruimte, e.d.).
+~~Uitgesloten zijn vertrekken en overige ruimten waarvoor ook door derden een vergoeding/huurprijs wordt betaald alsmede vertrekken en ruimten die door de eigenaar/verhuurder in gebruik zijn (bijv. kantoor- ruimte, opslagruimte, e.d.).~~
 
 Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
 
-*   zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;
-*   de vergoeding daarvoor in de huurprijs van de woning is begrepen;
+*  ~~zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
+*   ~~de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
 *   de oppervlakte, na deling door het aantal adressen, per woning minstens 2m2 bedraagt.
 
 De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte, afronden in m2, delen door het aantal adressen en waarderen als “overige ruimte”. Kasten worden meegeteld, mits zij voldoen aan de voorwaarden als genoemd in paragraaf 2.2. Dat betekent dat kasten uitkomend in een verkeersruimte worden niet meegeteld.
@@ -757,6 +761,8 @@ Voorbeeld
 4.  _Saldering levert op: 20 + 1,5 + 2 + 10 + 4,75 = 38,25._
 5.  _Delen door het aantal adressen levert op: 38,25 punten / 4 = 9.5625 per adres._
 6.  _Afronden geschiedt op een kwart punt per adres, in dit geval dus op 9,50._
+
+> Voor ons is het niet helemaal duidelijk op basis van de tekst en de voorbeeldrekening hoe het zit met de maximering op punten. Wij zijn er vanuit gegaan dat ook de maximering van de hoeveelheid punten gedeeeld moet worden door het aantal adressen. Bijvoorbeeld maximaal 0.75 punten voor kastruimte in de badruimte wordt met toegang van twee adressen ~0.38.
 
 ## Rubriek 10 Gemeenschappelijke parkeerruimten
 

@@ -1,6 +1,6 @@
+import warnings
 from datetime import date
 from decimal import Decimal
-import warnings
 
 from loguru import logger
 
@@ -140,9 +140,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                     criterium += " + laadpaal"
 
                 if ruimte.gedeeld_met_aantal_eenheden >= 2:
-                    criterium += (
-                        f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
-                    )
+                    criterium += f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
                     totaal_punten_type_parkeeruimte = (
                         punten * Decimal(str(ruimte.aantal))
                     ) / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))

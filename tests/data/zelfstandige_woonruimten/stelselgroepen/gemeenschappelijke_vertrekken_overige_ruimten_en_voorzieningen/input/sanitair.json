@@ -1,0 +1,56 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 21.5125,
+      "oppervlakte": 10,
+      "gedeeld_met_aantal_eenheden": 2,
+      "installaties": [
+        {
+          "code": "BUB",
+          "naam": "Bubbelfunctie van het bad"
+        },
+        {
+          "code": "DOW",
+          "naam": "Douchewand"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "IKW",
+          "naam": "Ingebouwd kastje met in- of opgebouwde wastafel"
+        },
+        {
+          "code": "KAS",
+          "naam": "Kastruimte"
+        },
+        {
+          "code": "KAS",
+          "naam": "Kastruimte"
+        },
+        {
+          "code": "STW",
+          "naam": "Stopcontact bij wastafel"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "TME",
+          "naam": "Thermostatische mengkraan"
+        }
+      ]
+    }
+  ]
+}

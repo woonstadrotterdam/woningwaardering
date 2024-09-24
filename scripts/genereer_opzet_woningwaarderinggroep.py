@@ -1,15 +1,15 @@
+import locale
+import string
 from datetime import date
 from pathlib import Path
-import string
+
 import inquirer  # noqa
-import locale
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-
 
 locale.setlocale(locale.LC_ALL, "nl_NL")
 
@@ -113,10 +113,13 @@ stelselgroep_directories = [
     if f.is_dir() and f.name in Woningwaarderingstelselgroep.__members__
 ]
 
-stelselgroepen = [
-    (directory.name, string.capwords(directory.name, "_").replace("_", ""))
-    for directory in stelselgroep_directories
-]
+stelselgroepen = sorted(
+    [
+        (directory.name, string.capwords(directory.name, "_").replace("_", ""))
+        for directory in stelselgroep_directories
+    ],
+    key=lambda d: d[0],
+)
 
 stelselgroep_init_template = environment.get_template(
     "stelsels/stelsel/stelselgroep/__init__.py.j2"

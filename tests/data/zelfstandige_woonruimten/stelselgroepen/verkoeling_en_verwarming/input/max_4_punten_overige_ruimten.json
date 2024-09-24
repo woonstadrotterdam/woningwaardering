@@ -8,7 +8,7 @@
         "naam": "Overige ruimten"
       },
       "detailSoort": {
-        "code": "WOO",
+        "code": "BER",
         "naam": "Berging1"
       },
       "naam": "Berging",
@@ -27,7 +27,7 @@
         "naam": "Overige ruimten"
       },
       "detailSoort": {
-        "code": "WOO",
+        "code": "BER",
         "naam": "Berging"
       },
       "naam": "Berging2",
@@ -46,7 +46,7 @@
         "naam": "Overige ruimten"
       },
       "detailSoort": {
-        "code": "WOO",
+        "code": "BER",
         "naam": "Berging"
       },
       "naam": "Berging3",
@@ -65,7 +65,7 @@
         "naam": "Overige ruimten"
       },
       "detailSoort": {
-        "code": "WOO",
+        "code": "BER",
         "naam": "Berging"
       },
       "naam": "Berging4",
@@ -84,7 +84,7 @@
         "naam": "Overige ruimten"
       },
       "detailSoort": {
-        "code": "WOO",
+        "code": "BER",
         "naam": "Berging"
       },
       "naam": "Berging5",

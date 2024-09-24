@@ -201,7 +201,6 @@ from .zaaktypedetailsoort import Zaaktypedetailsoort
 from .zaaktypesoort import Zaaktypesoort
 from .zekerheidverpandingsoort import Zekerheidverpandingsoort
 
-
 __all__ = [
     "Aanbiedingdetailstatus",
     "Aanbiedingstatus",

@@ -1,0 +1,104 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GVR",
+          "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
+        }
+      },
+      "punten": 5.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "naam": "Badruimte (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 5.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad (gedeeld met 2)"
+          },
+          "punten": 0.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Douchewand (gedeeld met 2)"
+          },
+          "punten": 0.63
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Handdoekenradiator (gedeeld met 2)"
+          },
+          "punten": 0.38
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel (gedeeld met 2)"
+          },
+          "punten": 0.5
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Kastruimte (gedeeld met 2)"
+          },
+          "punten": 0.75
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte (gedeeld met 2)"
+          },
+          "punten": -0.38
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel (gedeeld met 2)"
+          },
+          "punten": 0.13
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Max 2 stopcontacten per wastafel (gedeeld met 2)"
+          },
+          "punten": -0.13
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan (gedeeld met 2)"
+          },
+          "punten": 0.13
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan (gedeeld met 2)"
+          },
+          "punten": 0.25
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche (gedeeld met 2)"
+          },
+          "punten": -3.0
+        }
+      ]
+    }
+  ]
+}

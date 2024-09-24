@@ -1,7 +1,7 @@
+import warnings
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Callable, Counter, List, Tuple
-import warnings
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
@@ -73,6 +73,17 @@ def naar_tabel(
     table.align["Opslag"] = "r"
     table.float_format = ".2"
 
+    table._min_width = {
+        "Groep": 33,
+        "Naam": 50,
+        "Aantal": 7,
+        "Meeteenheid": 19,
+        "Punten": 7,
+        "Opslag": 7,
+    }
+
+    table._max_width = table._min_width
+
     for woningwaardering_groep in (
         woningwaardering_resultaat.groepen or []
         if isinstance(
@@ -81,6 +92,17 @@ def naar_tabel(
         )
         else [woningwaardering_resultaat]
     ):
+        stelselgroep_naam = (
+            woningwaardering_groep.criterium_groep
+            and woningwaardering_groep.criterium_groep.stelselgroep
+            and woningwaardering_groep.criterium_groep.stelselgroep.naam
+            or ""
+        )
+        stelselgroep_naam = (
+            (stelselgroep_naam[:30] + "...")
+            if len(stelselgroep_naam) > 33
+            else stelselgroep_naam
+        )
         woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
         aantal_waarderingen = len(woningwaarderingen)
         for index, woningwaardering in enumerate(woningwaarderingen):
@@ -91,7 +113,7 @@ def naar_tabel(
             ):
                 table.add_row(
                     [
-                        woningwaardering_groep.criterium_groep.stelselgroep.naam,
+                        stelselgroep_naam,
                         woningwaardering.criterium.naam,
                         woningwaardering.aantal or "",
                         woningwaardering.criterium.meeteenheid.naam
