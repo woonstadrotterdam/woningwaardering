@@ -1,0 +1,33 @@
+{
+  "id": "1",
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 10.0,
+      "gedeeldMetAantalEenheden": 5
+    },
+    {
+      "id": "Space_2",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 10.0,
+      "gedeeldMetAantalEenheden": 6
+    }
+  ]
+}
