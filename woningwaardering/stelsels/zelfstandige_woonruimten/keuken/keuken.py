@@ -134,10 +134,11 @@ class Keuken(Stelselgroep):
     @staticmethod
     def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte,
+        stelselgroep: Woningwaarderingstelselgroep,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if not Keuken.is_keuken(ruimte):
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor keukenvoorzieningen"
+                f"Ruimte {ruimte.naam} ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor stelselgroep {stelselgroep.naam}"
             )
             return 0
         totaal_punten = 0.0

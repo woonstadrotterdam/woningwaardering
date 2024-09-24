@@ -197,9 +197,12 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         for woningwaardering in woningwaarderingen or []:
-            woningwaardering.punten = float(
-                Decimal(str(woningwaardering.punten))
-                / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
+            woningwaardering.punten = utils.rond_af(
+                float(
+                    Decimal(str(woningwaardering.punten))
+                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
+                ),
+                decimalen=2,
             )
 
             if (
