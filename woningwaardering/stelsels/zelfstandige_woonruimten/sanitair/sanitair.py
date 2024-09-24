@@ -1,8 +1,8 @@
-from collections import Counter
-from typing import Iterator
 import warnings
+from collections import Counter
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from loguru import logger
 
@@ -89,7 +89,7 @@ class Sanitair(Stelselgroep):
         ruimte: EenhedenRuimte,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if ruimte.detail_soort is None:
-            warnings.warn(f"Ruimte {ruimte.id} heeft geen detailsoort.")
+            warnings.warn(f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort.")
             return
 
         ruimte.installaties = ruimte.installaties or []
@@ -105,7 +105,7 @@ class Sanitair(Stelselgroep):
             bouwkundige_elementen = list(get_bouwkundige_elementen(ruimte, mapping[0]))
             if bouwkundige_elementen:
                 warnings.warn(
-                    f"Ruimte {ruimte.id} heeft een {mapping[0].naam} als bouwkundig element. Voor een correcte waardering dient dit als installatie in de ruimte gespecificeerd te worden."
+                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een {mapping[0].naam} als bouwkundig element. Voor een correcte waardering dient dit als installatie in de ruimte gespecificeerd te worden."
                 )
                 logger.info(
                     f"Ruimte {ruimte.id}: {mapping[0].naam} wordt als {mapping[1].naam} toegevoegd aan installaties"
@@ -210,7 +210,7 @@ class Sanitair(Stelselgroep):
                     ]
                 ):
                     logger.info(
-                        f"Ruimte {ruimte.id}: {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
+                        f"Ruimte {ruimte.naam} ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
                     )
                     yield (
                         WoningwaarderingResultatenWoningwaardering(
