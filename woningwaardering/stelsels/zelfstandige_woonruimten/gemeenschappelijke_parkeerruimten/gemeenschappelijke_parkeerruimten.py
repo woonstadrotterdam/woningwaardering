@@ -139,7 +139,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
                 if ruimte.gedeeld_met_aantal_eenheden >= 2:
                     criterium += (
-                        f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} eenheden)"
+                        f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
                     )
                     totaal_punten_type_parkeeruimte = (
                         punten * Decimal(str(ruimte.aantal))

@@ -16,14 +16,14 @@
         {
           "aantal": 5.0,
           "criterium": {
-            "naam": "Type II + laadpaal (gedeeld met 10 eenheden)"
+            "naam": "Type II + laadpaal (gedeeld met 10 adressen)"
           },
           "punten": 4.0
         },
         {
           "aantal": 2.0,
           "criterium": {
-            "naam": "Type III (gedeeld met 10 eenheden)"
+            "naam": "Type III (gedeeld met 10 adressen)"
           },
           "punten": 0.8
         }
