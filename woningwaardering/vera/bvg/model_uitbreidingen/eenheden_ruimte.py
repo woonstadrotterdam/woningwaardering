@@ -50,5 +50,5 @@ class _EenhedenRuimte(BaseModel):
     """
     aantal: Optional[int] = Field(default=1, alias="aantal", ge=0)
     """
-    Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aangemaakt om de rubriek 'Gemeenschappelijke parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat alle gedeelde parkeervakken van een parkeerruimten apart meegegeven dienen te worden.
+    Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aangemaakt om de rubriek 'Gemeenschappelijke Parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat alle gedeelde parkeervakken van een parkeerruimten apart meegegeven dienen te worden. Dit attribuut wordt uitsluitend gebruikt in het berekenen van de punten voor 'Gemeenschappelijke Parkeerruimten'.
     """

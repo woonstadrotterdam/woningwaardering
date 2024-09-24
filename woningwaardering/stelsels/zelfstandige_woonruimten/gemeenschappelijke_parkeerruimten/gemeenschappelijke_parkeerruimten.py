@@ -84,7 +84,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                 Ruimtedetailsoort.parkeervak_motorfiets_buiten_niet_overdekt.code,
                 Ruimtedetailsoort.parkeervak_scootmobiel_buiten.code,
             ]:
-                logger.warning(
+                logger.info(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) met ruimtedetailsoort {ruimte.detail_soort.code} is een parkeerplek die niet gewaardeerd wordt in het woningwaardering stelsel volgens het beleidsboek."
                 )
                 continue
@@ -139,16 +139,13 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
                 if ruimte.gedeeld_met_aantal_eenheden >= 2:
                     criterium += (
-                        f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} eenheden)"
+                        f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
                     )
                     totaal_punten_type_parkeeruimte = (
                         punten * Decimal(str(ruimte.aantal))
                     ) / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
                 else:
                     criterium += " (privé)"
-                    logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{criterium}'."
-                    )
                     totaal_punten_type_parkeeruimte = (
                         punten * Decimal(str(ruimte.aantal)) / Decimal("1")
                     )

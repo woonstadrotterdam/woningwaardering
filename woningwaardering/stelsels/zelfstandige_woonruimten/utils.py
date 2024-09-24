@@ -66,11 +66,12 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         return None
 
     if (
-        (  # binnenkort wordt dit niet meer ondersteund
+        (
             ruimte.soort.code == Ruimtesoort.buitenruimte.code
             and ruimte.detail_soort.code
             not in [  # deze buitenruimten zijn geen buitenruimten volgens woningwaarderingstelsel
                 Ruimtedetailsoort.carport.code,
+                # onderstaande parkeergelegenden worden binnenkort vervangen: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
                 Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code,
                 Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_specifieke_plek.code,
                 Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek.code,
