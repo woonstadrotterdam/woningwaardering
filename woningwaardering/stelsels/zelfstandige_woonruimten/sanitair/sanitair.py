@@ -108,7 +108,7 @@ class Sanitair(Stelselgroep):
                     f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een {mapping[0].naam} als bouwkundig element. Voor een correcte waardering dient dit als installatie in de ruimte gespecificeerd te worden."
                 )
                 logger.info(
-                    f"Ruimte {ruimte.id}: {mapping[0].naam} wordt als {mapping[1].naam} toegevoegd aan installaties"
+                    f"Ruimte {ruimte.naam} ({ruimte.id}): {mapping[0].naam} wordt als {mapping[1].naam} toegevoegd aan installaties"
                 )
                 ruimte.installaties.extend(
                     [mapping[1].value for _ in bouwkundige_elementen]
