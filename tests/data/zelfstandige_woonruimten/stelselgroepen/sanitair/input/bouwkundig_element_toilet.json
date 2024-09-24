@@ -1,6 +1,11 @@
 {
   "ruimten": [
     {
+      "naam": "Toilet",
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toilet"
+      },
       "bouwkundigeElementen": [
         {
           "naam": "Closetcombinatie",
@@ -9,8 +14,8 @@
             "naam": "Sanitaire voorziening"
           },
           "detailSoort": {
-            "code": "LAV",
-            "naam": "Lavet"
+            "code": "CLO",
+            "naam": "Toilet"
           }
         }
       ]

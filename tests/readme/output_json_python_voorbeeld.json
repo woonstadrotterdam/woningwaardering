@@ -134,7 +134,7 @@
         {
           "aantal": 2700.0,
           "criterium": {
-            "naam": "Lengte aanrecht",
+            "naam": "Keuken - Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -143,6 +143,20 @@
           "punten": 7.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
     },
     {
       "criteriumGroep": {
@@ -207,5 +221,6 @@
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
+  "huurprijsopslag": 0.0,
   "maximaleHuurInclusiefOpslag": 1125.6
 }

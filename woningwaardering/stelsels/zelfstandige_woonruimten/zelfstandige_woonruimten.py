@@ -9,18 +9,16 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     BijzondereVoorzieningen,
     Buitenruimten,
     Energieprestatie,
+    GemeenschappelijkeParkeerruimten,
     Keuken,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
     PrijsopslagMonumentenEnNieuwbouw,
     PuntenVoorDeWozWaarde,
-    # Sanitair,
+    Sanitair,
     VerkoelingEnVerwarming,
 )
 
-from woningwaardering.stelsels.zelfstandige_woonruimten.gemeenschappelijke_parkeerruimten.gemeenschappelijke_parkeerruimten import (
-    GemeenschappelijkeParkeerruimten,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -43,7 +41,7 @@ class ZelfstandigeWoonruimten(Stelsel):
                 Buitenruimten,
                 Energieprestatie,
                 Keuken,
-                # Sanitair,
+                Sanitair,
                 GemeenschappelijkeParkeerruimten,
                 PuntenVoorDeWozWaarde,  # LET OP: deze stelselgroep dient als twee na laatste te worden uitgevoerd
                 BijzondereVoorzieningen,  # LET OP: deze stelselgroep dient als een na laatste te worden uitgevoerd

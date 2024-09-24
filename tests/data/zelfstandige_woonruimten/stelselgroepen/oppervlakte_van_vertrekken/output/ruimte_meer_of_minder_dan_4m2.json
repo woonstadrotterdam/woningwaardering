@@ -35,12 +35,5 @@
         }
       ]
     }
-  ],
-  "maximaleHuur": 228.86,
-  "punten": 6.0,
-  "stelsel": {
-    "code": "ZEL",
-    "naam": "Zelfstandige woonruimten"
-  },
-  "maximaleHuurInclusiefOpslag": 228.86
+  ]
 }
