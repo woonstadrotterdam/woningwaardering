@@ -717,20 +717,22 @@ In totaal kan maximaal 15 punten worden toegekend.
 
 Indien het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
+> Indien dit zo is, geef bijvoorbeeld een `keuken` mee met `gedeeld_met_aantal_eenheden`.
+
 **Gemeenschappelijke ruimten en voorzieningen in een zorgwoning**
 
 De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en voorzieningen in een zorgwoning of woon/zorgcomplex de waardering per woning veelal uitkomt op een totaal van ongeveer 3 punten. Om arbeidsintensief meetwerk te voorkomen waardeert de Huurcommissie in dat geval een waardering van 3 punten per woning.
 
 ### 9.2 Definitie gemeenschappelijke vertrekken en overige ruimten
 
-Gemeenschappelijke vertrekken en overige ruimten zijn tot het woongebouw behorende binnenruimten waarvan de bewoners van tenminste twee adressen in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht hebben. De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke binnenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s).
+Gemeenschappelijke vertrekken en overige ruimten zijn tot het woongebouw behorende binnenruimten waarvan de bewoners van tenminste twee adressen in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht hebben. ~~De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke binnenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s).~~
 
-Uitgesloten zijn vertrekken en overige ruimten waarvoor ook door derden een vergoeding/huurprijs wordt betaald alsmede vertrekken en ruimten die door de eigenaar/verhuurder in gebruik zijn (bijv. kantoor- ruimte, opslagruimte, e.d.).
+~~Uitgesloten zijn vertrekken en overige ruimten waarvoor ook door derden een vergoeding/huurprijs wordt betaald alsmede vertrekken en ruimten die door de eigenaar/verhuurder in gebruik zijn (bijv. kantoor- ruimte, opslagruimte, e.d.).~~
 
 Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
 
-*   zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;
-*   de vergoeding daarvoor in de huurprijs van de woning is begrepen;
+*  ~~zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
+*   ~~de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
 *   de oppervlakte, na deling door het aantal adressen, per woning minstens 2m2 bedraagt.
 
 De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte, afronden in m2, delen door het aantal adressen en waarderen als “overige ruimte”. Kasten worden meegeteld, mits zij voldoen aan de voorwaarden als genoemd in paragraaf 2.2. Dat betekent dat kasten uitkomend in een verkeersruimte worden niet meegeteld.
