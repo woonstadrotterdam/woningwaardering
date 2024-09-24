@@ -9,7 +9,7 @@ class Btw(Enum):
     )
     """
     Over de grondslag (bijvoorbeeld een prijscomponent) is het algemene BTW-tarief van
-    toepassing. Dit tarief wordt ook wel &#39;Hoog&#39; genoemd.
+    toepassing. Dit tarief wordt ook wel 'Hoog' genoemd.
     """
 
     nul = Referentiedata(

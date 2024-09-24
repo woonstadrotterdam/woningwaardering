@@ -1,0 +1,51 @@
+{
+  "id": "warning_gedeeld_met_aantal_eenheden",
+  "ruimten": [
+    {
+      "id": "1",
+      "aantal": 5,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "aantal": 2,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "VAU",
+        "naam": "Parkeervak auto (buiten, niet overdekt)"
+      },
+      "naam": "Parkeervak buiten",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4
+    }
+  ]
+}

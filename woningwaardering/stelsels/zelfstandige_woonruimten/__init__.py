@@ -8,6 +8,7 @@ from .prijsopslag_monumenten_en_nieuwbouw import PrijsopslagMonumentenEnNieuwbou
 from .punten_voor_de_woz_waarde import PuntenVoorDeWozWaarde
 from .sanitair import Sanitair
 from .verkoeling_en_verwarming import VerkoelingEnVerwarming
+from .gemeenschappelijke_parkeerruimten import GemeenschappelijkeParkeerruimten
 
 __all__ = [
     "OppervlakteVanVertrekken",
@@ -20,4 +21,5 @@ __all__ = [
     "PuntenVoorDeWozWaarde",
     "PrijsopslagMonumentenEnNieuwbouw",
     "BijzondereVoorzieningen",
+    "GemeenschappelijkeParkeerruimten",
 ]

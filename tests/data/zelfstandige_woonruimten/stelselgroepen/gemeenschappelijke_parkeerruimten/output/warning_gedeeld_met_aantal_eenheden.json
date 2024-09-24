@@ -1,0 +1,18 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GPA",
+          "naam": "Gemeenschappelijke parkeerruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    }
+  ]
+}

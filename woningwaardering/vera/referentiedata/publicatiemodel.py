@@ -38,7 +38,7 @@ class Publicatiemodel(Enum):
     )
     """
     Vastgoed wordt verloot onder geïnteresseerde woningzoekenden. Hierbij kan ook sprake
-    zijn van &#39;gewogen&#39; loting of andere combinaties van spelregels.
+    zijn van 'gewogen' loting of andere combinaties van spelregels.
     """
 
     optiemodel = Referentiedata(

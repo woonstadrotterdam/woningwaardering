@@ -77,7 +77,7 @@ class Installatiesoort(Enum):
     Een inbouw elektrische oven is een keukenapparaat dat naadloos in een keukenkast
     wordt geïntegreerd. Het gebruikt elektriciteit om gerechten gelijkmatig te
     bakken en braden, biedt nauwkeurige temperatuurregeling, en heeft verschillende
-    programma&#39;s voor diverse kookmethoden.
+    programma's voor diverse kookmethoden.
     """
 
     inbouw_oven_gas = Referentiedata(
