@@ -1,5 +1,6 @@
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from loguru import logger
 
@@ -20,6 +21,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -110,7 +112,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 oppervlakte_berekening = oppervlakte_berekeningen.get(ruimtesoort, None)
 
                 if oppervlakte_berekening is None:
-                    continue
+                    continue  # TODO: weghalen?
 
                 oppervlakte_waarderingen = list(
                     oppervlakte_berekening(ruimte, self.stelselgroep)
@@ -121,15 +123,15 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # * de oppervlakte, na deling door het aantal adressen, per woning minstens
                 #   2m2 bedraagt.
                 if ruimte.detail_soort.code == Ruimtedetailsoort.berging.code:
-                    gedeelde_oppervlakte = sum(
-                        Decimal(str(woningwaardering.aantal))
-                        for woningwaardering in oppervlakte_waarderingen
-                    ) / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                    if gedeelde_oppervlakte < Decimal("2.0"):
-                        logger.info(
-                            f"Eenheid {eenheid.id}: {Ruimtedetailsoort.berging.naam} {ruimte.id} heeft, na deling door het aantal adressen, een oppervlakte van minder dan 2 m2 en wordt daarom niet gewaardeerd onder {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
+                    if ruimte.oppervlakte and ruimte.gedeeld_met_aantal_eenheden:
+                        gedeelde_oppervlakte = (
+                            ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
                         )
-                        continue
+                        if gedeelde_oppervlakte < Decimal("2.0"):
+                            logger.info(
+                                f"Eenheid {eenheid.id}: {Ruimtedetailsoort.berging.naam} {ruimte.id} heeft, na deling door het aantal adressen, een oppervlakte van minder dan 2 m2 en wordt daarom niet gewaardeerd onder {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
+                            )
+                            continue  # TODO: weghalen?
 
                 for oppervlakte_waardering in oppervlakte_waarderingen:
                     if oppervlakte_waardering.punten is None:
@@ -141,19 +143,11 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                                 else Decimal("0.75")
                             )
                         )
-                        oppervlakte_waardering.punten = float(
-                            Decimal(str(oppervlakte_waardering.punten))
-                            / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                        )
-
-                if (
-                    oppervlakte_waardering.criterium is not None
-                    and oppervlakte_waardering.criterium.naam is not None
-                ):
-                    oppervlakte_waardering.criterium.naam = f"{oppervlakte_waardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
 
                 woningwaardering_groep.woningwaarderingen.extend(
-                    oppervlakte_waarderingen
+                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                        ruimte, oppervlakte_waarderingen
+                    )
                 )
 
                 verkoeling_en_verwarming_waarderingen = list(
@@ -161,12 +155,19 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                         ruimte, self.stelselgroep
                     )
                 )
+
                 woningwaardering_groep.woningwaarderingen.extend(
-                    verkoeling_en_verwarming_waarderingen
+                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                        ruimte, verkoeling_en_verwarming_waarderingen
+                    )
                 )
 
                 keuken_waarderingen = list(Keuken.genereer_woningwaarderingen(ruimte))
-                woningwaardering_groep.woningwaarderingen.extend(keuken_waarderingen)
+                woningwaardering_groep.woningwaarderingen.extend(
+                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                        ruimte, keuken_waarderingen
+                    )
+                )
 
                 # TODO: Toevoegen sanitair waarderingen
                 # sanitair_waarderingen = list(Sanitair.genereer_woningwaarderingen(ruimte))
@@ -187,6 +188,24 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         )
         return woningwaardering_groep
 
+    @staticmethod
+    def deel_woningwaarderingen_door_aantal_eenheden(
+        ruimte: EenhedenRuimte,
+        woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        for woningwaardering in woningwaarderingen or []:
+            woningwaardering.punten = float(
+                Decimal(str(woningwaardering.punten))
+                / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
+            )
+
+            if (
+                woningwaardering.criterium is not None
+                and woningwaardering.criterium.naam is not None
+            ):
+                woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
+            yield woningwaardering
+
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
@@ -198,7 +217,7 @@ if __name__ == "__main__":  # pragma: no cover
     )
 
     with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen/input/vertrekken.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen/input/verwarmde_vertrekken.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
