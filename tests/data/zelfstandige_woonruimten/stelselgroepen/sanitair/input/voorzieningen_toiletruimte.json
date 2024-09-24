@@ -23,24 +23,32 @@
           "naam": "Douchewand"
         },
         {
-          "code": "KAS",
-          "naam": "Kastruimte"
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "IKW",
+          "naam": "Ingebouwd kastje met in- of opgebouwde wastafel"
         },
         {
           "code": "KAS",
           "naam": "Kastruimte"
         },
         {
-          "code": "EHM",
-          "naam": "Éénhandsmengkraan"
+          "code": "KAS",
+          "naam": "Kastruimte"
         },
         {
           "code": "STW",
           "naam": "Stopcontact bij wastafel"
         },
         {
-          "code": "IKW",
-          "naam": "Ingebouwd kastje met in- of opgebouwde wastafel"
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "TME",
+          "naam": "Thermostatische mengkraan"
         }
       ]
     }

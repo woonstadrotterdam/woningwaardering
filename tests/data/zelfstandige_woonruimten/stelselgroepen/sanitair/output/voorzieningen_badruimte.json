@@ -28,6 +28,20 @@
           "punten": 1.25
         },
         {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Handdoekenradiator"
+          },
+          "punten": 0.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel"
+          },
+          "punten": 1.0
+        },
+        {
           "aantal": 2.0,
           "criterium": {
             "naam": "Badruimte - Voorzieningen: Kastruimte"
@@ -39,13 +53,6 @@
             "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte"
           },
           "punten": -0.75
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan"
-          },
-          "punten": 0.25
         },
         {
           "aantal": 1.0,
@@ -63,15 +70,22 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel"
+            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan"
           },
-          "punten": 1.0
+          "punten": 0.25
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan"
+          },
+          "punten": 0.5
         },
         {
           "criterium": {
             "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche"
           },
-          "punten": -4.75
+          "punten": -6.0
         }
       ]
     }
