@@ -90,11 +90,17 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 4.0,
+      "punten": 6.0,
       "woningwaarderingen": [
         {
           "criterium": {
             "naam": "Badruimte (verwarmd vertrek)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Woonkamer (verwarmd vertrek)"
           },
           "punten": 2.0
         },
@@ -117,7 +123,7 @@
           "naam": "Buitenruimten"
         }
       },
-      "punten": 15.0,
+      "punten": 11.75,
       "woningwaarderingen": [
         {
           "aantal": 7.17,
@@ -128,7 +134,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 4.51
+          "punten": 2.51
         },
         {
           "aantal": 14.99,
@@ -139,7 +145,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 7.25
+          "punten": 5.25
         },
         {
           "aantal": 5.89,
@@ -150,13 +156,13 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 4.06
+          "punten": 2.06
         },
         {
           "criterium": {
-            "naam": "Maximaal 15 punten"
+            "naam": "Privé buitenruimten aanwezig"
           },
-          "punten": -0.75
+          "punten": 2.0
         }
       ]
     },
@@ -330,12 +336,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1319.78,
-  "punten": 211.0,
+  "maximaleHuur": 1313.32,
+  "punten": 210.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1319.78
+  "maximaleHuurInclusiefOpslag": 1313.32
 }

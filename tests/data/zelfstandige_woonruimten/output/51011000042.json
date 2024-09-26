@@ -184,7 +184,13 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 2.71
+          "punten": 0.71
+        },
+        {
+          "criterium": {
+            "naam": "Privé buitenruimten aanwezig"
+          },
+          "punten": 2.0
         }
       ]
     },
