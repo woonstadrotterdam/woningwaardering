@@ -143,7 +143,7 @@ class Buitenruimten(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         # 2 punten bij de aanwezigheid van privé buitenruimten
-        if prive_buitenruimten_aanwezig:
+        elif prive_buitenruimten_aanwezig:
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
