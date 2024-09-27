@@ -53,6 +53,7 @@ class Buitenruimten(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = []
 
         buitenruimten_aanwezig = False
+        prive_buitenruimten_aanwezig = False
         for ruimte in eenheid.ruimten or []:
             if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte:
                 buitenruimten_aanwezig = True
@@ -107,6 +108,7 @@ class Buitenruimten(Stelselgroep):
                         naam=f"{ruimte.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})",
                     )
                 else:  # privé buitenruimte
+                    prive_buitenruimten_aanwezig = True
                     logger.info(
                         f"Ruimte {ruimte.naam} ({ruimte.id}) is een privé-buitenruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
                     )
@@ -120,8 +122,9 @@ class Buitenruimten(Stelselgroep):
                         utils.rond_af(ruimte.oppervlakte, decimalen=2)
                     )
                     # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,35 punt.
+                    # De in ieder geval 2 punten worden verderop toegevoegd.
                     woningwaardering.punten = float(
-                        utils.rond_af(2 + ruimte.oppervlakte * 0.35, decimalen=2)
+                        utils.rond_af(ruimte.oppervlakte * 0.35, decimalen=2)
                     )
 
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
@@ -137,6 +140,17 @@ class Buitenruimten(Stelselgroep):
                 )
             )
             woningwaardering.punten = -5.0
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+        # 2 punten bij de aanwezigheid van privé buitenruimten
+        elif prive_buitenruimten_aanwezig:
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Privé buitenruimten aanwezig",
+                )
+            )
+            woningwaardering.punten = 2.0
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         punten = utils.rond_af_op_kwart(

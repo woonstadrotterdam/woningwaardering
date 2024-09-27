@@ -252,7 +252,7 @@
           "naam": "Buitenruimten"
         }
       },
-      "punten": 15.0,
+      "punten": 14.25,
       "woningwaarderingen": [
         {
           "aantal": 4.46,
@@ -263,7 +263,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 3.56
+          "punten": 1.56
         },
         {
           "aantal": 30.65,
@@ -274,13 +274,13 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 12.73
+          "punten": 10.73
         },
         {
           "criterium": {
-            "naam": "Maximaal 15 punten"
+            "naam": "Privé buitenruimten aanwezig"
           },
-          "punten": -1.25
+          "punten": 2.0
         }
       ]
     },

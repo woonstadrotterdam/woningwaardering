@@ -172,7 +172,7 @@
           "naam": "Buitenruimten"
         }
       },
-      "punten": 6.75,
+      "punten": 4.75,
       "woningwaarderingen": [
         {
           "aantal": 2.81,
@@ -183,7 +183,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 2.99
+          "punten": 0.99
         },
         {
           "aantal": 5.2,
@@ -194,7 +194,13 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 3.82
+          "punten": 1.82
+        },
+        {
+          "criterium": {
+            "naam": "Privé buitenruimten aanwezig"
+          },
+          "punten": 2.0
         }
       ]
     },
@@ -373,12 +379,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 924.9,
-  "punten": 150.0,
+  "maximaleHuur": 911.96,
+  "punten": 148.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 924.9
+  "maximaleHuurInclusiefOpslag": 911.96
 }
