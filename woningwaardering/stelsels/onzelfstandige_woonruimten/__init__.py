@@ -1,3 +1,4 @@
+from .buitenruimten import Buitenruimten
 from .energieprestatie import Energieprestatie
 from .keuken import Keuken
 from .oppervlakte_van_overige_ruimten import OppervlakteVanOverigeRuimten
