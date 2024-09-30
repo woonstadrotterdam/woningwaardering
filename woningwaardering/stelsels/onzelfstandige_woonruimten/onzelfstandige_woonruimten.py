@@ -5,6 +5,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
+    OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
 )
 from woningwaardering.stelsels.stelsel import Stelsel
@@ -25,6 +26,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
             peildatum=peildatum,
             stelselgroepen=[
                 OppervlakteVanVertrekken,
+                # OppervlakteVanOverigeRuimten
             ],
         )
 
