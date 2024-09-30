@@ -1,5 +1,6 @@
 from .buitenruimten import Buitenruimten
 from .energieprestatie import Energieprestatie
+from .gemeenschappelijke_parkeerruimten import GemeenschappelijkeParkeerruimten
 from .keuken import Keuken
 from .oppervlakte_van_overige_ruimten import OppervlakteVanOverigeRuimten
 from .oppervlakte_van_vertrekken import OppervlakteVanVertrekken
@@ -13,4 +14,6 @@ __all__ = [
     "Energieprestatie",
     "Keuken",
     "Sanitair",
+    "Buitenruimten",
+    "GemeenschappelijkeParkeerruimten",
 ]
