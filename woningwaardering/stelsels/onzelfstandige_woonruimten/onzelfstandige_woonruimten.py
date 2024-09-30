@@ -7,6 +7,7 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
+    VerkoelingEnVerwarming,
 )
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.vera.bvg.generated import (
@@ -26,7 +27,8 @@ class OnzelfstandigeWoonruimten(Stelsel):
             peildatum=peildatum,
             stelselgroepen=[
                 OppervlakteVanVertrekken,
-                # OppervlakteVanOverigeRuimten
+                # OppervlakteVanOverigeRuimten,
+                # VerkoelingEnVerWarming,
             ],
         )
 
