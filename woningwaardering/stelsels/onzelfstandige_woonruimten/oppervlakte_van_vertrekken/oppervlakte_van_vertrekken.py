@@ -58,16 +58,23 @@ class OppervlakteVanVertrekken(Stelselgroep):
                 and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 2
             )
             for woningwaardering in woningwaarderingen:
-                if gedeelde_ruimte:
+                if (
+                    gedeelde_ruimte
+                    and woningwaardering.criterium
+                    and woningwaardering.aantal
+                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten  # nodig voor mypy
+                ):
                     woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
-                    woningwaardering.punten = utils.rond_af(
-                        utils.rond_af(woningwaardering.aantal, decimalen=2)
-                        / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                        decimalen=2,
+                    woningwaardering.punten = float(
+                        utils.rond_af(
+                            utils.rond_af(woningwaardering.aantal, decimalen=2)
+                            / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            decimalen=2,
+                        )
                     )
                 else:
-                    woningwaardering.punten = utils.rond_af(
-                        woningwaardering.aantal, decimalen=2
+                    woningwaardering.punten = float(
+                        utils.rond_af(woningwaardering.aantal, decimalen=2)
                     )
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
