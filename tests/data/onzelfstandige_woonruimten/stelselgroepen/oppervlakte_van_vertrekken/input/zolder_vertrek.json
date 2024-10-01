@@ -1,0 +1,106 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder vertrek met trap",
+      "inhoud": 20,
+      "oppervlakte": 10,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Trap",
+          "omschrijving": "(vaste) trap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "TRA",
+            "naam": "Trap"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Space_2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder vertrek zonder trap",
+      "inhoud": 20,
+      "oppervlakte": 10,
+      "verwarmd": true
+    },
+    {
+      "id": "Space_3",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder vertrek met vlizo trap",
+      "inhoud": 20,
+      "oppervlakte": 10,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Vlizotrap",
+          "omschrijving": "Vlizo trap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Space_3",
+      "soort": {
+        "code": "OVR",
+        "naam": "Ovr"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder overig met trap",
+      "inhoud": 10,
+      "oppervlakte": 1,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Trap",
+          "omschrijving": "Trap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "TRA",
+            "naam": "Trap"
+          }
+        }
+      ]
+    }
+  ]
+}
