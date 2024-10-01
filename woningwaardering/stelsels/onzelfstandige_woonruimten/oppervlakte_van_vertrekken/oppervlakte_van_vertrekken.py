@@ -10,8 +10,6 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekk
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -56,15 +54,15 @@ class OppervlakteVanVertrekken(Stelselgroep):
                 ruimte, self.stelselgroep
             )
             gedeelde_ruimte = (
-                ruimte.gedeeld_met_aantal_eenheden is not None
-                and ruimte.gedeeld_met_aantal_eenheden >= 2
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
+                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 2
             )
             for woningwaardering in woningwaarderingen:
                 if gedeelde_ruimte:
-                    woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
+                    woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
                     woningwaardering.punten = utils.rond_af(
                         utils.rond_af(woningwaardering.aantal, decimalen=2)
-                        / ruimte.gedeeld_met_aantal_eenheden,
+                        / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
                         decimalen=2,
                     )
                 else:
