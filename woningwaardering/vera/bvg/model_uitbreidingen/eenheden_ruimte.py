@@ -52,3 +52,10 @@ class _EenhedenRuimte(BaseModel):
     """
     Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aangemaakt om de rubriek 'Gemeenschappelijke Parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat alle gedeelde parkeervakken van een parkeerruimten apart meegegeven dienen te worden. Dit attribuut wordt uitsluitend gebruikt in het berekenen van de punten voor 'Gemeenschappelijke Parkeerruimten'.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+    gedeeld_met_aantal_onzelfstandige_woonruimten: Optional[int] = Field(
+        default=None, alias="gedeeldMetAantalOnzelfstandigeWoonruimten", ge=0
+    )
+    """
+    Het aantal onzelfstandige woningen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_onzelfstandige_woonruimten groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
+    """
