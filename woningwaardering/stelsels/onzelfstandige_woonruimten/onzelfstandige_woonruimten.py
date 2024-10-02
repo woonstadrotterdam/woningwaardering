@@ -33,14 +33,14 @@ class OnzelfstandigeWoonruimten(Stelsel):
             peildatum=peildatum,
             stelselgroepen=[
                 OppervlakteVanVertrekken,
-                OppervlakteVanOverigeRuimten,
-                VerkoelingEnVerwarming,
-                Energieprestatie,
-                Keuken,
-                Sanitair,
-                Buitenruimten,
-                GemeenschappelijkeParkeerruimten,
-                PuntenVoorDeWOZWaarde,
+                # OppervlakteVanOverigeRuimten,
+                # VerkoelingEnVerwarming,
+                # Energieprestatie,
+                # Keuken,
+                # Sanitair,
+                # Buitenruimten,
+                # GemeenschappelijkeParkeerruimten,
+                # PuntenVoorDeWOZWaarde,
             ],
         )
 
