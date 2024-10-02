@@ -1,0 +1,147 @@
+{
+  "id": "15004000185",
+  "bouwjaar": 1998,
+  "adres": {
+    "huisnummer": "375",
+    "huisnummerToevoeging": "a",
+    "postcode": "3032CG",
+    "straatnaam": "Hofdijk"
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0599010400027895",
+    "bagIdentificatie": "0599010400027895"
+  },
+  "energieprestaties": [],
+  "oppervlakten": [],
+  "panden": [
+    {
+      "idExtern": "0599100000634734",
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "ruimten": [
+    {
+      "id": "Space_29425491",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 49.4717,
+      "oppervlakte": 20.044,
+      "bouwkundigeElementen": [
+        {
+          "id": "Radiator_29424408",
+          "naam": "Radiator",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening algemeen"
+          },
+          "detailSoort": {
+            "code": "RAD",
+            "naam": "Radiator"
+          }
+        }
+      ],
+      "verwarmd": true
+    },
+    {
+      "id": "Space_29425492",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 18.64,
+      "oppervlakte": 7.5,
+      "verwarmd": false,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "bouwkundigeElementen": [
+        {
+          "id": "Aanrecht_29424502",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2220
+        }
+      ]
+    },
+    {
+      "id": "Space_29425493",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "HAL",
+        "naam": "Hal"
+      },
+      "naam": "Hal",
+      "inhoud": 11.6,
+      "oppervlakte": 4.7,
+      "verwarmd": false,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    },
+    {
+      "id": "Space_29425495",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toilet"
+      },
+      "naam": "Toilet",
+      "inhoud": 2.56,
+      "oppervlakte": 1.0,
+      "verwarmd": false,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "installaties": [
+        {
+          "code": "STO",
+          "naam": "Staand toilet"
+        }
+      ]
+    },
+    {
+      "id": "Space_29425496",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 4.12,
+      "oppervlakte": 1.7,
+      "verwarmd": false,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "installaties": [
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        }
+      ]
+    }
+  ]
+}

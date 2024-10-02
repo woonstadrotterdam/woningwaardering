@@ -1,0 +1,60 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
+        }
+      },
+      "punten": 29.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 20.04,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 20.04
+        },
+        {
+          "aantal": 7.5,
+          "criterium": {
+            "naam": "Keuken (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.75
+        },
+        {
+          "aantal": 1.7,
+          "criterium": {
+            "naam": "Badruimte (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 0.85
+        }
+      ]
+    }
+  ],
+  "maximaleHuur": 278.66,
+  "punten": 29.0,
+  "stelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  },
+  "huurprijsopslag": 0.0,
+  "maximaleHuurInclusiefOpslag": 278.66
+}
