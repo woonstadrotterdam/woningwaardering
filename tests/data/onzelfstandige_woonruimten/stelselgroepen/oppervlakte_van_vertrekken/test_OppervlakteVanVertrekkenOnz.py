@@ -13,33 +13,34 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
-# def test_OppervlakteVanVertrekken(
-#     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
-# ):
-#     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
-#     resultaat = oppervlakte_van_vertrekken.bereken(
-#         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
-#     )
-#     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
+
+def test_OppervlakteVanVertrekken(
+    onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
+):
+    oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
+    resultaat = oppervlakte_van_vertrekken.bereken(
+        onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+    )
+    assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-# def test_OppervlakteVanVertrekken_output(
-#     zelfstandige_woonruimten_input_en_outputmodel, peildatum
-# ):
-#     eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
+def test_OppervlakteVanVertrekken_output(
+    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
+):
+    eenheid_input, eenheid_output = onzelfstandige_woonruimten_input_en_outputmodel
 
-#     normaliseer_ruimte_namen(eenheid_input)
+    normaliseer_ruimte_namen(eenheid_input)
 
-#     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
+    oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
 
-#     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-#     resultaat.groepen = [oppervlakte_van_vertrekken.bereken(eenheid_input)]
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [oppervlakte_van_vertrekken.bereken(eenheid_input)]
 
-#     assert_output_model(
-#         resultaat,
-#         eenheid_output,
-#         Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
-#     )
+    assert_output_model(
+        resultaat,
+        eenheid_output,
+        Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+    )
 
 
 # Get the absolute path to the current file
