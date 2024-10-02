@@ -33,14 +33,14 @@ class OnzelfstandigeWoonruimten(Stelsel):
             peildatum=peildatum,
             stelselgroepen=[
                 OppervlakteVanVertrekken,
-                OppervlakteVanOverigeRuimten,
-                VerkoelingEnVerwarming,
-                Energieprestatie,
-                Keuken,
-                Sanitair,
-                Buitenruimten,
-                GemeenschappelijkeParkeerruimten,
-                PuntenVoorDeWOZWaarde,
+                # OppervlakteVanOverigeRuimten,
+                # VerkoelingEnVerwarming,
+                # Energieprestatie,
+                # Keuken,
+                # Sanitair,
+                # Buitenruimten,
+                # GemeenschappelijkeParkeerruimten,
+                # PuntenVoorDeWOZWaarde,
             ],
         )
 
@@ -54,7 +54,7 @@ if __name__ == "__main__":  # pragma: no cover
     )
 
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

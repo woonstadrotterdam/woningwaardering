@@ -1,0 +1,65 @@
+{
+  "bouwjaar": 1924,
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 10,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 10,
+      "oppervlakte": 3,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 10,
+      "oppervlakte": 4,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAT",
+        "naam": "Badkamer/toilet"
+      },
+      "naam": "Badkamer/toilet",
+      "inhoud": 10,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    }
+  ]
+}

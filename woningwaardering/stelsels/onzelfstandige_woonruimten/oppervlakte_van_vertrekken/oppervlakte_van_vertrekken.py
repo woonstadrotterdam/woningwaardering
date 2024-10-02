@@ -5,10 +5,11 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken.oppervlakte_van_vertrekken import (
+    OppervlakteVanVertrekken as ZelfstandigeWoonruimtenOppervlakteVanVertrekken,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -48,21 +49,48 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="NotImplemented"
-                )
+        for ruimte in eenheid.ruimten or []:
+            woningwaarderingen = ZelfstandigeWoonruimtenOppervlakteVanVertrekken.genereer_woningwaarderingen(
+                ruimte, self.stelselgroep
             )
-        )
+            gedeelde_ruimte = (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
+                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 2
+            )
+            for woningwaardering in woningwaarderingen:
+                if (
+                    gedeelde_ruimte
+                    and woningwaardering.criterium
+                    and woningwaardering.aantal
+                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten  # nodig voor mypy
+                ):
+                    woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
+                    woningwaardering.punten = float(
+                        utils.rond_af(
+                            utils.rond_af(woningwaardering.aantal, decimalen=2)
+                            / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            decimalen=2,
+                        )
+                    )
+                else:
+                    woningwaardering.punten = float(
+                        utils.rond_af(woningwaardering.aantal, decimalen=2)
+                    )
+                woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = utils.rond_af(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-            decimalen=0,
+        punten = utils.rond_af_op_kwart(
+            float(
+                utils.rond_af(
+                    sum(
+                        Decimal(str(woningwaardering.aantal))
+                        for woningwaardering in woningwaardering_groep.woningwaarderingen
+                        or []
+                        if woningwaardering.aantal is not None
+                    ),
+                    decimalen=0,
+                )
+                * Decimal("1")
+            )
         )
 
         woningwaardering_groep.punten = float(punten)
@@ -78,7 +106,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = OppervlakteVanVertrekken()
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

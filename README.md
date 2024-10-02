@@ -1079,7 +1079,11 @@ Het attribuut `verbonden_ruimten` bevat de ruimten die in verbinding staan met d
 
 ### Gedeeld met aantal eenheden
 
-Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden weer waarmee een bepaalde ruimte wordt gedeeld. Dit attribuut wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging. `gedeeld_met_aantal_eenheden` heeft als type `Optional[int]`. Er staat een github issue open voor deze aanvulling op het VERA model: https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden (verschillende adressen) weer waarmee een bepaalde ruimte wordt gedeeld. Dit attribuut wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging. `gedeeld_met_aantal_eenheden` heeft als type `Optional[int]`. Er staat een github issue open om dit ter discussie te stellen: https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+
+### Gedeeld met aantal onzelfstandige woonruimten
+
+Het attribuut `gedeeld_met_aantal_onzelfstandige_woonruimten` geeft het aantal onzelfstandige woonruimten (op zelfde adres) weer waarmee een bepaalde ruimte wordt gedeeld. `gedeeld_met_aantal_onzelfstandige_woonruimten` heeft als type `Optional[int]`. Er staat een github issue open om dit ter discussie te stellen: https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
 
 ### Bouwkundige elementen
 
