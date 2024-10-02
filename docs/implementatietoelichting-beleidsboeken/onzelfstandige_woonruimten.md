@@ -1,5 +1,7 @@
 # Hoofdstuk 2 - Algemene toelichting
 
+> Momenteel is nog niks geïmplementeerd in de package dat relateert aan Hoofdstuk 2 - Algemene toelichting.
+
 ## 2.1 Functie van het woningwaarderingsstelsel
 
 Het woningwaarderingsstelsel is een systeem waarbij aan de woonruimte kwaliteitspunten worden toegekend. Bij dit puntenaantal hoort een maximale redelijke huurprijs.1 Hoe hoger de kwaliteit van de woonruimte is, hoe meer punten de woonruimte krijgt en des te hoger de huurprijs[^1] mag zijn. Het puntensysteem van het woningwaarderingsstelsel staat uitgewerkt in het Besluit huurprijzen woonruimte (verder ook: Bhw). Zie voor dit besluit bijlage 1.
@@ -145,3 +147,63 @@ a. de woonruimte behoort tot een rijksbeschermd stads- of dorpsgezicht als bedoe
 b. de woonruimte behoort tot een woning die is gebouwd voor 1965; en
 c. de woonruimte niet bestaat uit of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet of van een door het college van burgemeester en wethouders aangewezen gemeentelijk monument of een door gedeputeerde staten aangewezen provinciaal monument.
 De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief beleid. Dit betekent dat het aan de verhuurder is om aan te tonen dat de woonruimte aan de voorwaarden voor deze prijsopslag voldoet.
+
+## Rubriek 1 - Oppervlakte van vertrekken
+
+### 1.1 Puntentoekenning
+
+- Privévertrekken worden gewaardeerd met 1 punt per vierkante meter.
+- Gemeenschappelijke vertrekken worden ook gewaardeerd met 1 punt per vierkante meter. Dit puntenaantal wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot die gemeenschappelijke vertrekken.
+
+> Wij hebben `gedeeldMetAantalOnzelfstandigeWoonruimten` toegevoegd als property van ruimten om te kunnen specificeren of een ruimte gedeeld wordt met andere personen op hetzelfde adres.
+
+### 1.2 Wat zijn vertrekken?
+
+Een ruimte wordt als vertrek gewaardeerd als deze voldoet aan de volgende eisen:
+
+- ~~de vloer moet begaanbaar zijn;~~
+- ~~de muren/wanden dienen uit “vast” materiaal te bestaan;~~
+- ~~de ruimte dient over tenminste 80% van de lengte (de langste zijde) ten minste 1,50 m breed te zijn;~~
+- de ruimte dient een oppervlakte te hebben van minimaal 4 m2;
+- ~~de ruimte dient over ten minste 50% van de oppervlakte of over een oppervlakte van 11 m2 een vrije hoogte te hebben van ten minste 2,10 m (gemeten vanaf de vloer tot het zichtbare plafond (onder het zichtbare plafond aanwezige balken blijven buiten de meting);~~
+- ~~de ruimte dient te zijn voorzien van minimaal 0,5 m2 aan de buitenlucht grenzend transparant oppervlak (bijvoorbeeld een raam of deur met vensters);~~
+- ~~de ruimte dient te beschikken over direct met de buitenlucht verbonden ventilatie;~~
+- ~~er moet ten minste één stopcontact en één lichtpunt aanwezig zijn.~~
+
+Voorbeelden van vertrekken zijn onder andere de woonkamer, een hobbykamer, studeerkamer, slaapkamer en eetkamer, maar dus alleen als aan de hierboven gestelde eisen wordt voldaan.
+
+In afwijking van bovenstaande eisen is een ruimte die uitsluitend als keuken, badkamer of doucheruimte dient altijd een vertrek.
+
+**Zolderruimte**
+
+Voor zolderruimten gelden, naast bovenstaande eisen, nog twee eisen om als vertrek gewaardeerd te worden. De zolderruimte moet namelijk bereikbaar zijn via een vaste trap ~~en het dak moet beschoten zijn.~~
+
+### ~~1.3 Meetinstructies~~
+
+~~De wetgever heeft in de toelichting op het woningwaarderingsstelsel een aantal meetinstructies meegegeven:~~
+
+> De woningwaarderingpackage gaat ervanuit dat ruimten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
+
+### 1.4 Puntenberekening en saldering
+
+De oppervlakten voor privé- en gemeenschappelijke vertrekken worden afzonderlijk berekend. Als sprake is van meerdere vertrekken die tot dezelfde categorie behoren (privé of gemeenschappelijk), dan wordt voor de berekening eerst de oppervlakte voor die categorie vertrek afgerond en per categorie punten toegekend alvorens die bij elkaar worden opgeteld.
+
+De Huurcommissie bepaalt eerst de oppervlakte per vertrek afgerond op twee decimalen. Daarna wordt de oppervlakte van alle vertrekken per categorie (privé of gemeenschappelijk) gesaldeerd en vind afronding plaats op hele vierkante meter. Bij 0,5m² of meer wordt afgerond naar boven, bij minder dan 0,5m² naar beneden. Als laatste wordt een waardering in punten toegekend.
+
+Voorbeeld Puntenberekening en saldering
+
+```text
+Privévertrekken
+
+Privékamer: lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²
+
+Gemeenschappelijke vertrekken voor drie kamers
+
+Gedeelde keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²
+
+Totaal: 15 m2 privévetrekken en 11 m2 gemeenschappelijk vertrekken
+
+Dit vertaalt zich naar 15 (15*1) + 3.75* (11 * 1 gedeeld door 3 kamers) = 18.75 punt
+
+*11 punten gedeeld door 3 (kamers) = 3,67. Er wordt afgerond op 0,25 punt, waarbij een achtste punt naar boven wordt afgerond, waardoor de uitkomst 3,75 punt is.
+```
