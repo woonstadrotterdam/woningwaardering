@@ -8,8 +8,8 @@
     "straatnaam": ""
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000342737",
-    "bagIdentificatie": "0599010000342737"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "energieprestaties": [
     {
@@ -280,5 +280,6 @@
       "vastgesteldeWaarde": 59000.0,
       "waardepeildatum": "2014-01-01"
     }
-  ]
+  ],
+  "monumenten": []
 }
