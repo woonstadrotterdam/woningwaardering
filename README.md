@@ -713,17 +713,18 @@ from woningwaardering.vera.referentiedata import (
 stelsel = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
 
 eenheid = EenhedenEenheid(
-    id="37101000032",
+    id="<id>",
     bouwjaar=1924,
+    monumenten=[],
     adres=EenhedenAdresBasis(
-        straatnaam="Nieuwe Boezemstraat",
-        huisnummer="27",
+        straatnaam="<straatnaam>",
+        huisnummer="<huisnummer>",
         huisnummer_toevoeging="",
-        postcode="3034PH",
+        postcode="<postcode>",
         woonplaats=EenhedenWoonplaats(naam="ROTTERDAM"),
     ),
     adresseerbaarObjectBasisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-        id="0599010000485697", bagIdentificatie="0599010000485697"
+        id="<id>", bagIdentificatie="<bag_identificatie>"
     ),
     panden=[
         EenhedenPand(
