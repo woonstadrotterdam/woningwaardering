@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Oranjeboomstraat",
-    "huisnummer": "355",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "c",
-    "postcode": "3071SV",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000040514",
-    "bagIdentificatie": "0599010000040514"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

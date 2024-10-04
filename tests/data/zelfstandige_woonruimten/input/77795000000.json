@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Sliedrechtstraat",
-    "huisnummer": "22",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3086JM",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010400005761",
-    "bagIdentificatie": "0599010400005761"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

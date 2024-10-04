@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Plantageweg",
-    "huisnummer": "17",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3061PJ",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000295253",
-    "bagIdentificatie": "0599010000295253"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

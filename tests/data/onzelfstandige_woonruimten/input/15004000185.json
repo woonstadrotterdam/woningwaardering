@@ -2,20 +2,20 @@
   "id": "15004000185",
   "bouwjaar": 1998,
   "adres": {
-    "huisnummer": "375",
-    "huisnummerToevoeging": "a",
-    "postcode": "3032CG",
-    "straatnaam": "Hofdijk"
+    "huisnummer": "",
+    "huisnummerToevoeging": "",
+    "postcode": "",
+    "straatnaam": ""
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010400027895",
-    "bagIdentificatie": "0599010400027895"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "energieprestaties": [],
   "oppervlakten": [],
   "panden": [
     {
-      "idExtern": "0599100000634734",
+      "idExtern": "",
       "soort": {
         "code": "MGW",
         "naam": "Meergezinswoning"
@@ -143,5 +143,6 @@
         }
       ]
     }
-  ]
+  ],
+  "monumenten": []
 }

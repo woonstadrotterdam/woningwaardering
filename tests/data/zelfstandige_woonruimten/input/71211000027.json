@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Polslandstraat",
-    "huisnummer": "37",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3081TK",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000307252",
-    "bagIdentificatie": "0599010000307252"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Nieuwe Boezemstraat",
-    "huisnummer": "27",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3034PH",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000485697",
-    "bagIdentificatie": "0599010000485697"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

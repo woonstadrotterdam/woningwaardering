@@ -2,17 +2,17 @@
   "id": "23003000050",
   "bouwjaar": 1921,
   "adres": {
-    "straatnaam": "Vosmaerstraat",
-    "huisnummer": "54",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3027KM",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000090716",
-    "bagIdentificatie": "0599010000090716"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

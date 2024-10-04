@@ -2,17 +2,17 @@
   "id": "81065000089",
   "bouwjaar": 1921,
   "adres": {
-    "straatnaam": "Oostendamstraat",
-    "huisnummer": "145",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3073NE",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000310211",
-    "bagIdentificatie": "0599010000310211"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "klimaatbeheersing": [
     {

@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Putsebocht",
-    "huisnummer": "18",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "b",
-    "postcode": "3073HK",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010400029477",
-    "bagIdentificatie": "0599010400029477"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

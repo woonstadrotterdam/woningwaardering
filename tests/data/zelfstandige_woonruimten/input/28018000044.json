@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Baardsestraat",
-    "huisnummer": "14",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3028RC",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000094913",
-    "bagIdentificatie": "0599010000094913"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

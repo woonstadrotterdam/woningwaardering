@@ -2,14 +2,14 @@
   "id": "20004000156",
   "bouwjaar": 1993,
   "adres": {
-    "huisnummer": "379",
+    "huisnummer": "",
     "huisnummerToevoeging": "",
-    "postcode": "3024EB",
-    "straatnaam": "Puntegaalstraat"
+    "postcode": "",
+    "straatnaam": ""
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000360260",
-    "bagIdentificatie": "0599010000360260"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "energieprestaties": [
     {
@@ -34,7 +34,7 @@
   "oppervlakten": [],
   "panden": [
     {
-      "idExtern": "0599100000665539",
+      "idExtern": "",
       "soort": {
         "code": "MGW",
         "naam": "Meergezinswoning"

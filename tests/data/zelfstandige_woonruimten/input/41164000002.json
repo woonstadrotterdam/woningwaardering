@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Aegidiusstraat",
-    "huisnummer": "122",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3061XR",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000316161",
-    "bagIdentificatie": "0599010000316161"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

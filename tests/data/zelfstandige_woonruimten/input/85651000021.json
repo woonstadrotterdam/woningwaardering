@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Atjehstraat",
-    "huisnummer": "47",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "d",
-    "postcode": "3072ZB",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000078889",
-    "bagIdentificatie": "0599010000078889"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

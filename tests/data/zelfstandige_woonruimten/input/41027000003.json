@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Frits Ruysstraat",
-    "huisnummer": "16",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "d",
-    "postcode": "3061ME",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000302054",
-    "bagIdentificatie": "0599010000302054"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

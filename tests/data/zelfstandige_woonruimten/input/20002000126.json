@@ -2,14 +2,14 @@
   "id": "20002000126",
   "bouwjaar": 1993,
   "adres": {
-    "huisnummer": "146",
+    "huisnummer": "",
     "huisnummerToevoeging": "",
-    "postcode": "3024NE",
-    "straatnaam": "Kees van Dongenhof"
+    "postcode": "",
+    "straatnaam": ""
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000342737",
-    "bagIdentificatie": "0599010000342737"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "energieprestaties": [
     {
@@ -42,7 +42,7 @@
   ],
   "panden": [
     {
-      "idExtern": "0599100000641232",
+      "idExtern": "",
       "soort": {
         "code": "MGW",
         "naam": "Meergezinswoning"
@@ -280,5 +280,6 @@
       "vastgesteldeWaarde": 59000.0,
       "waardepeildatum": "2014-01-01"
     }
-  ]
+  ],
+  "monumenten": []
 }

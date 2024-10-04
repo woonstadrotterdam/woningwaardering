@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Justus van Effenstraat",
-    "huisnummer": "122",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3027TM",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
@@ -57,8 +57,8 @@
     ]
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000318897",
-    "bagIdentificatie": "0599010000318897"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "wozEenheden": [
     {

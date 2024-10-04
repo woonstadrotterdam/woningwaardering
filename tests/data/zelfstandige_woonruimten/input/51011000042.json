@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Eskampstraat",
-    "huisnummer": "1",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "b",
-    "postcode": "3042SJ",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000312130",
-    "bagIdentificatie": "0599010000312130"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {

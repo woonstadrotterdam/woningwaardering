@@ -8,17 +8,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Rubensstraat",
-    "huisnummer": "10",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "c",
-    "postcode": "3061ZX",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000302221",
-    "bagIdentificatie": "0599010000302221"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
