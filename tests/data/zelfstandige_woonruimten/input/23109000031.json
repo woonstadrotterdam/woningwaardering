@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Justus van Effenstraat",
-    "huisnummer": "122",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3027TM",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }

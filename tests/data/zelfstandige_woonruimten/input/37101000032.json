@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Nieuwe Boezemstraat",
-    "huisnummer": "27",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3034PH",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }

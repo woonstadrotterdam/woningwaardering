@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Polslandstraat",
-    "huisnummer": "37",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3081TK",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }

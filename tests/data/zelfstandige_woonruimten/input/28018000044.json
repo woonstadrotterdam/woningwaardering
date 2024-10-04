@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Baardsestraat",
-    "huisnummer": "14",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3028RC",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }

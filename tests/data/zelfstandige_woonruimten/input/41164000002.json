@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Aegidiusstraat",
-    "huisnummer": "122",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3061XR",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }

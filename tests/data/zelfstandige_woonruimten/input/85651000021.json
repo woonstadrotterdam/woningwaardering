@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Atjehstraat",
-    "huisnummer": "47",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "d",
-    "postcode": "3072ZB",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }

@@ -8,11 +8,13 @@
     }
   ],
   "adres": {
-    "straatnaam": "Mauritsstraat",
-    "huisnummer": "44",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3012CJ",
-    "woonplaats": { "naam": "ROTTERDAM" }
+    "postcode": "",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
   },
   "adresseerbaarObjectBasisregistratie": {
     "id": "0599010000320510",

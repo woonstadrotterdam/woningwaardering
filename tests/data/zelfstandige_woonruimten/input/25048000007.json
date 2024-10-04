@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Rochussenstraat",
-    "huisnummer": "251",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "c",
-    "postcode": "3021NW",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }

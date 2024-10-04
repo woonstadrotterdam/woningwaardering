@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Putsebocht",
-    "huisnummer": "18",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "b",
-    "postcode": "3073HK",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }

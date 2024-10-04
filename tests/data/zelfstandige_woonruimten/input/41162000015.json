@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Rubensstraat",
-    "huisnummer": "10",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "c",
-    "postcode": "3061ZX",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }

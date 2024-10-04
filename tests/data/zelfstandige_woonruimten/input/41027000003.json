@@ -8,10 +8,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Frits Ruysstraat",
-    "huisnummer": "16",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "d",
-    "postcode": "3061ME",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
