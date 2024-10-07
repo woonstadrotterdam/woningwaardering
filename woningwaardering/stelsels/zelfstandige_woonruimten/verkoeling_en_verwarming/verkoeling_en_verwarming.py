@@ -1,7 +1,7 @@
 import warnings
 from datetime import date
 from decimal import Decimal
-from typing import Iterator
+from typing import Iterator, Literal
 
 from loguru import logger
 
@@ -66,8 +66,10 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        totalen = {
-            "overige_ruimten": Decimal("0"),
+        totalen: dict[Literal["overige_ruimten", "verkoeld_en_verwarmd"], Decimal] = {
+            "overige_ruimten": Decimal(
+                "0"
+            ),  # max 4 punten per eenheid voor verwarmde overige- en verkeersruimten.
             "verkoeld_en_verwarmd": Decimal(
                 "0"
             ),  # max 2 punten per eenheid voor vertrekken die en verwarmd en verkoeld zijn. 1 punt per vertrek.
@@ -89,35 +91,9 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
-        max_punten_overige_ruimten = Decimal("4")
-        if totalen["overige_ruimten"] > max_punten_overige_ruimten:
-            aftrek = max_punten_overige_ruimten - totalen["overige_ruimten"]
-            logger.info(
-                f'Maximaal aantal punten voor verwarmde overige- en verkeersruimten overschreden ({totalen["overige_ruimten"]} > {max_punten_overige_ruimten}). Een aftrek van {aftrek} punt(en) wordt toegepast.'
-            )
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Maximaal 4 punten voor verwarmde overige- en verkeersruimten",
-                    ),
-                    punten=aftrek,
-                )
-            )
-
-        max_punten_verkoeld_en_verwarmd = Decimal("2")
-        if totalen["verkoeld_en_verwarmd"] > max_punten_verkoeld_en_verwarmd:
-            aftrek = max_punten_verkoeld_en_verwarmd - totalen["verkoeld_en_verwarmd"]
-            logger.info(
-                f'Maximaal aantal extra punten voor verwarmde en verkoelde vertrekken overschreden ({totalen["verkoeld_en_verwarmd"]} > {max_punten_verkoeld_en_verwarmd}). Een aftrek van {aftrek} punt(en) wordt toegepast.'
-            )
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Maximaal 2 extra punten voor verwarmde en verkoelde vertrekken",
-                    ),
-                    punten=aftrek,
-                )
-            )
+        woningwaardering_groep.woningwaarderingen.extend(
+            VerkoelingEnVerwarming.maximering(totalen)
+        )
 
         punten = utils.rond_af_op_kwart(
             Decimal(
@@ -142,7 +118,8 @@ class VerkoelingEnVerwarming(Stelselgroep):
     def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte,
         stelselgroep: Woningwaarderingstelselgroep,
-        totalen: dict[str, Decimal] | None = None,
+        totalen: dict[Literal["overige_ruimten", "verkoeld_en_verwarmd"], Decimal]
+        | None = None,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if ruimte.detail_soort is None:
             warnings.warn(
@@ -236,6 +213,36 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     naam=f"Open keuken in {ruimte.naam}",
                 ),
                 punten=punten,
+            )
+
+    @staticmethod
+    def maximering(
+        totalen: dict[Literal["overige_ruimten", "verkoeld_en_verwarmd"], Decimal],
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        max_punten_overige_ruimten = Decimal("4")
+        if totalen["overige_ruimten"] > max_punten_overige_ruimten:
+            aftrek = max_punten_overige_ruimten - totalen["overige_ruimten"]
+            logger.info(
+                f'Maximaal aantal punten voor verwarmde overige- en verkeersruimten overschreden ({totalen["overige_ruimten"]} > {max_punten_overige_ruimten}). Een aftrek van {aftrek} punt(en) wordt toegepast.'
+            )
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Maximaal 4 punten voor verwarmde overige- en verkeersruimten",
+                ),
+                punten=aftrek,
+            )
+
+        max_punten_verkoeld_en_verwarmd = Decimal("2")
+        if totalen["verkoeld_en_verwarmd"] > max_punten_verkoeld_en_verwarmd:
+            aftrek = max_punten_verkoeld_en_verwarmd - totalen["verkoeld_en_verwarmd"]
+            logger.info(
+                f'Maximaal aantal extra punten voor verwarmde en verkoelde vertrekken overschreden ({totalen["verkoeld_en_verwarmd"]} > {max_punten_verkoeld_en_verwarmd}). Een aftrek van {aftrek} punt(en) wordt toegepast.'
+            )
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Maximaal 2 extra punten voor verwarmde en verkoelde vertrekken",
+                ),
+                punten=aftrek,
             )
 
 
