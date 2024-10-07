@@ -1,0 +1,55 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 1.5,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Berging (verwarmde overige/verkeers-ruimte) (gedeeld met 2)"
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Berging2 (verwarmde overige/verkeers-ruimte) (gedeeld met 2)"
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Berging3 (verwarmde overige/verkeers-ruimte) (gedeeld met 2)"
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Berging4 (verwarmde overige/verkeers-ruimte) (gedeeld met 2)"
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Berging5 (verwarmde overige/verkeers-ruimte) (gedeeld met 2)"
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 4 punten voor verwarmde overige- en verkeersruimten"
+          },
+          "punten": -1.0
+        }
+      ]
+    }
+  ]
+}
