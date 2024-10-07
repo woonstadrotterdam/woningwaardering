@@ -207,3 +207,47 @@ Dit vertaalt zich naar 15 (15*1) + 3.75* (11 * 1 gedeeld door 3 kamers) = 18.75 
 
 *11 punten gedeeld door 3 (kamers) = 3,67. Er wordt afgerond op 0,25 punt, waarbij een achtste punt naar boven wordt afgerond, waardoor de uitkomst 3,75 punt is.
 ```
+
+## Rubriek 3 - Verkoeling en verwarming
+
+### 3.1 Puntentoekenning
+
+**Vertrekken**
+
+- Verwarmde privévertrekken worden gewaardeerd met 2 punten.
+- Verwarmde gemeenschappelijke vertrekken worden gewaardeerd met 2 punten. Dit puntenaantal wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
+
+**Overige ruimten**
+
+- Verwarmde privé overige ruimten en verkeersruimten worden gewaardeerd met 1 punt met een maximum van 4 punten voor alle overige ruimtes en verkeersruimten (samen).
+- Verwarmde gemeenschappelijke overige ruimten en verkeersruimten worden gewaardeerd met 1 punt per ruimte met een maximum van 4 punten voor alle overige ruimten en verkeersruimten (samen). Dit puntenaantal wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
+
+**Extra voorziening**
+
+- Voorzieningen met zowel een verwarmingsfunctie als verkoelingsfunctie worden per privé vertrek gewaardeerd met 1 punt tot een maximum van 2 punten (bij meerdere vertrekken met een verkoelingsfunctie).
+- Voorzieningen met zowel een verwarmingsfunctie als verkoelingsfunctie worden per gemeenschappelijk vertrek gewaardeerd met 1 punt tot een maximum van 2 punten. Dit puntenaantal wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
+- ~~Woningen die zonder koeling voldoende koel kunnen blijven, worden per vertrek gewaardeerd met 1 extra punt tot een maximum van twee punten. Of sprake is van zo’n woning, dient te worden bepaald met de NTA 8800 en blijkt uit een actueel NTA-energielabel waarin de koelfunctie is meegenomen en het risico voor oververhitting als ‘laag’ is afgegeven.~~
+
+### 3.2 Onroerende zaak en onroerende aanhorigheden
+
+~~Punten voor verwarming en verkoeling worden alleen toegekend als de verwarming of de voorziening met zowel een verwarmingsfunctie als verkoelingsfunctie tot de onroerende zaak en zijn onroerende aanhorigheid behoort.~~
+
+~~Dit is bij een radiator het geval als hij is bevestigd aan de muur of in de grond. Een mobiele elektrische radiator of mobiele airco behoort niet tot de onroerende zaak. Hetzelfde geldt voor gevelkachels en gashaarden. Een verdikte buis, pijp of moederhaard wordt wél gerekend tot de onroerende zaak, indien deze als zodanig bedoeld of herkenbaar is.~~
+
+> De properties `verkoeld` en `verwarmd` mogen alleen gebruikt worden voor ruimten die verkoeld dan wel verwarmd worden door onroerende zaken die tot de onroerende aanhorigheid behoren.
+
+**Koelsystemen**
+
+~~Centrale koelsystemen, zoals omkeerbare warmtepompen, passieve koeling door een bodemlus of een WKO-systeem moeten voorzien zijn van vloerkoeling, lage temperatuur radiatoren of radiatorconvectoren. Voor andere onroerend aanhorige koelsystemen, zoals een vaste airco, geldt dat deze een productgebonden energielabel moet hebben van minimaal A+ (bepaald volgens de Europese Ecodesign-richtlijn), en een minimaal vermogen moet kunnen leveren van 100 W/m2 bij een werkingstemperatuur tot 35 graden Celsius.~~
+
+> Indien een ruimte wordt doorgegeven als `verkoeld` moet de koelsysteem die ervoor zorgt dat de ruimte verkoeld wordt aan deze voorwaarden voldoen.
+
+### 3.3 Aangrenzende ruimten met open doorgang
+
+~~Vertrekken of overige ruimten die met elkaar in verbinding staan, worden in een bepaald geval als één verwarmd vertrek of overige ruimte gewaardeerd. Dit is het geval als zich tussen die twee verwarmde vertrekken of overige ruimten een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt. Het moet hierbij gaan om een niet afsluitbare opening, die over een breedte van minimaal 0,85 m een minimumhoogte heeft van 2 m. De muur wordt gemeten in het vertrek of overige ruimte, waarin de tussenwand het smalst is. De figuur in paragraaf 2.4 van het vorige hoofdstuk geeft dit visueel weer.~~
+
+### 3.4 Open keukens
+
+~~Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten. Onder een open keuken wordt hier verstaan een keuken die in open verbinding staat met een ander vertrek, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur.~~ Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek individueel gewaardeerd met punten indien deze verwarmd zijn.
+
+Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding tussen keukengedeelte en de rest van het vertrek aanwezig is.
