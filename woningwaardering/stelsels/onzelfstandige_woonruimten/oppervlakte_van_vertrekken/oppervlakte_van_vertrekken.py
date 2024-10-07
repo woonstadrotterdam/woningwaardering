@@ -60,8 +60,8 @@ class OppervlakteVanVertrekken(Stelselgroep):
             )
             for woningwaardering in woningwaarderingen:
                 if woningwaardering.aantal:
-                    woningwaardering.punten = utils.rond_af(
-                        woningwaardering.aantal, decimalen=2
+                    woningwaardering.punten = float(
+                        utils.rond_af(woningwaardering.aantal, decimalen=2)
                     )
             woningwaardering_groep.woningwaarderingen.extend(
                 deel_punten_door_aantal_onzelfstandige_woonruimten(
