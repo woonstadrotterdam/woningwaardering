@@ -66,8 +66,10 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        totalen = {
-            "overige_ruimten": Decimal("0"),
+        totalen: dict[Literal["overige_ruimten", "verkoeld_en_verwarmd"], Decimal] = {
+            "overige_ruimten": Decimal(
+                "0"
+            ),  # max 4 punten per eenheid voor verwarmde overige- en verkeersruimten.
             "verkoeld_en_verwarmd": Decimal(
                 "0"
             ),  # max 2 punten per eenheid voor vertrekken die en verwarmd en verkoeld zijn. 1 punt per vertrek.
@@ -116,7 +118,8 @@ class VerkoelingEnVerwarming(Stelselgroep):
     def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte,
         stelselgroep: Woningwaarderingstelselgroep,
-        totalen: dict[str, Decimal] | None = None,
+        totalen: dict[Literal["overige_ruimten", "verkoeld_en_verwarmd"], Decimal]
+        | None = None,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if ruimte.detail_soort is None:
             warnings.warn(
