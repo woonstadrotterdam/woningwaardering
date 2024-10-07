@@ -34,7 +34,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
             stelselgroepen=[
                 OppervlakteVanVertrekken,
                 # OppervlakteVanOverigeRuimten,
-                # VerkoelingEnVerwarming,
+                VerkoelingEnVerwarming,
                 # Energieprestatie,
                 # Keuken,
                 # Sanitair,

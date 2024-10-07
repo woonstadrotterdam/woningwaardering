@@ -1,0 +1,61 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Verwarmde woonkamer (verwarmd vertrek) (gedeeld met 2)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Open keuken in Verwarmde woonkamer (gedeeld met 2)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Verwarmde keuken (verwarmd vertrek) (gedeeld met 2)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Verwarmde slaapkamer (verwarmd vertrek) (gedeeld met 2)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Open keuken in Verwarmde slaapkamer (gedeeld met 2)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Verwarmde woonkamer/keuken (verwarmd vertrek) (gedeeld met 2)"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Open keuken in Verwarmde woonkamer/keuken (gedeeld met 2)"
+          },
+          "punten": 1.0
+        }
+      ]
+    }
+  ]
+}

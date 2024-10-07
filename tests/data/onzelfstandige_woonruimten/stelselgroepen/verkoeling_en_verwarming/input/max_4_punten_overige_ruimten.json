@@ -1,0 +1,100 @@
+{
+  "id": "max4punten",
+  "ruimten": [
+    {
+      "id": "Berging1",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging1"
+      },
+      "naam": "Berging",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Berging2",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging2",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Berging3",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging3",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Berging4",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging4",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    },
+    {
+      "id": "Berging5",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging5",
+      "inhoud": 4,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "bouwlaag": {
+        "nummer": "00",
+        "omschrijving": "begane grond"
+      }
+    }
+  ]
+}

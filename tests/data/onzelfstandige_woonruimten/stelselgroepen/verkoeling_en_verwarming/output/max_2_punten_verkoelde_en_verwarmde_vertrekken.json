@@ -1,0 +1,43 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 8.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Slaapkamer1 (verkoeld en verwarmd vertrek)"
+          },
+          "punten": 3.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer2 (verkoeld en verwarmd vertrek)"
+          },
+          "punten": 3.0
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer3 (verkoeld en verwarmd vertrek)"
+          },
+          "punten": 3.0
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 2 extra punten voor verwarmde en verkoelde vertrekken"
+          },
+          "punten": -1.0
+        }
+      ]
+    }
+  ]
+}

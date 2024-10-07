@@ -1,10 +1,17 @@
 from datetime import date
 from decimal import Decimal
+from typing import Literal
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
+    deel_punten_door_aantal_onzelfstandige_woonruimten,
+)
+from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming.verkoeling_en_verwarming import (
+    VerkoelingEnVerwarming as ZelfstandigeWoonruimtenVerkoelingEnVerwarming,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -47,22 +54,52 @@ class VerkoelingEnVerwarming(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen = []
+        woningwaarderingen_voor_gedeeld = []
 
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="NotImplemented"
+        totalen: dict[Literal["overige_ruimten", "verkoeld_en_verwarmd"], Decimal] = {
+            "overige_ruimten": Decimal(
+                "0"
+            ),  # max 4 punten per eenheid voor verwarmde overige- en verkeersruimten.
+            "verkoeld_en_verwarmd": Decimal(
+                "0"
+            ),  # max 2 punten per eenheid voor vertrekken die en verwarmd en verkoeld zijn. 1 punt per vertrek.
+        }
+
+        ruimten = [
+            ruimte
+            for ruimte in eenheid.ruimten or []
+            if ruimte.gedeeld_met_aantal_eenheden is None
+            or ruimte.gedeeld_met_aantal_eenheden == 1
+        ]
+
+        for ruimte in ruimten:
+            woningwaarderingen = ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
+                ruimte,
+                self.stelselgroep,
+                totalen,
+            )
+
+            woningwaarderingen_voor_gedeeld.append((ruimte, woningwaarderingen))
+
+        for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld:
+            woningwaardering_groep.woningwaarderingen.extend(
+                deel_punten_door_aantal_onzelfstandige_woonruimten(
+                    ruimte, woningwaarderingen
                 )
             )
+
+        # maximering is op basis van de punten voordat ze gedeeld worden door het aantal onzelfstandige wonruimten
+        # vandaar het gebruik van totalen
+        woningwaardering_groep.woningwaarderingen.extend(
+            ZelfstandigeWoonruimtenVerkoelingEnVerwarming.maximering(totalen)
         )
 
-        punten = utils.rond_af(
+        punten = utils.rond_af_op_kwart(
             sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.punten is not None
             ),
-            decimalen=0,
         )
 
         woningwaardering_groep.punten = float(punten)
@@ -78,7 +115,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = VerkoelingEnVerwarming()
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/onzelfstandige_woonruimten/stelselgroepen/verkoeling_en_verwarming/input/max_2_punten_verkoelde_en_verwarmde_vertrekken.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
