@@ -1,11 +1,13 @@
 import warnings
 from functools import wraps
-from typing import Callable
+from typing import Callable, Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
+    WoningwaarderingResultatenWoningwaardering,
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
@@ -256,3 +258,42 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
 
             criterium_naam = f"{ruimte.naam} (+{aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'})"
     return criterium_naam
+
+
+def deel_punten_door_aantal_onzelfstandige_woonruimten(
+    ruimte: EenhedenRuimte,
+    woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering]
+    | Iterator[WoningwaarderingResultatenWoningwaardering],
+) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    """
+    Deelt punten door het aantal onzelfstandige woonruimten.
+
+    Deze functie verdeelt de punten voor woningwaarderingen over het aantal onzelfstandige woonruimten dat een ruimte deelt.
+
+    Parameters:
+    - ruimte (EenhedenRuimte): De ruimte waarvoor de punten verdeeld moeten worden.
+    - woningwaarderingen (list[WoningwaarderingResultatenWoningwaardering] | Iterator[WoningwaarderingResultatenWoningwaardering]): Een lijst of iterator van woningwaarderingen waarvan de punten verdeeld moeten worden.
+
+    Returns:
+    - Iterator[WoningwaarderingResultatenWoningwaardering]: Een iterator over de woningwaarderingen met verdeelde punten.
+    """
+    gedeelde_ruimte = (
+        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
+        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 2
+    )
+    for woningwaardering in woningwaarderingen:
+        if (
+            gedeelde_ruimte
+            and woningwaardering.criterium
+            and woningwaardering.punten
+            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten  # nodig voor mypy
+        ):
+            woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
+            woningwaardering.punten = float(
+                utils.rond_af(
+                    utils.rond_af(woningwaardering.punten, decimalen=2)
+                    / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                    decimalen=2,
+                )
+            )
+        yield woningwaardering
