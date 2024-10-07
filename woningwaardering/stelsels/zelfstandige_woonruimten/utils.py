@@ -270,12 +270,13 @@ def deel_punten_door_aantal_onzelfstandige_woonruimten(
 
     Deze functie verdeelt de punten voor woningwaarderingen over het aantal onzelfstandige woonruimten dat een ruimte deelt.
 
-    Parameters:
-    - ruimte (EenhedenRuimte): De ruimte waarvoor de punten verdeeld moeten worden.
-    - woningwaarderingen (list[WoningwaarderingResultatenWoningwaardering] | Iterator[WoningwaarderingResultatenWoningwaardering]): Een lijst of iterator van woningwaarderingen waarvan de punten verdeeld moeten worden.
+    Args:
+        ruimte (EenhedenRuimte): De ruimte waarvoor de punten verdeeld moeten worden.
+        woningwaarderingen (list[WoningwaarderingResultatenWoningwaardering] | Iterator[WoningwaarderingResultatenWoningwaardering]):
+            Een lijst of iterator van woningwaarderingen waarvan de punten verdeeld moeten worden.
 
-    Returns:
-    - Iterator[WoningwaarderingResultatenWoningwaardering]: Een iterator over de woningwaarderingen met verdeelde punten.
+    Yields:
+        WoningwaarderingResultatenWoningwaardering: Woningwaarderingen met verdeelde punten.
     """
     gedeelde_ruimte = (
         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
