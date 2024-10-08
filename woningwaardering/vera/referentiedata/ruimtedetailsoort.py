@@ -113,7 +113,7 @@ class Ruimtedetailsoort(Enum):
     Een dakterras.
     """
 
-    gemeenschappelijk_dakterras_gak = Referentiedata(
+    gemeenschappelijk_dakterras = Referentiedata(
         code="GAK",
         naam="Gemeenschappelijk dakterras",
         parent=Referentiedata(
@@ -141,14 +141,14 @@ class Ruimtedetailsoort(Enum):
         code="GAN",
         naam="Gang",
         parent=Referentiedata(
-            code="OVR",
-            naam="Overige ruimten",
+            code="VRK",
+            naam="Verkeersruimte",
         ),
     )
     """
-    Ruimte : is een betrekkelijk smalle en lange ruimte omgeven door muren en afgedekt
-    door een plafond of zoldering, in een gebouw, als verbinding van vertrekken
-    waarvan de deuren erop uitkomen.
+    Verkeersruimte : is een betrekkelijk smalle en lange ruimte omgeven door muren en
+    afgedekt door een plafond of zoldering, in een gebouw, als verbinding van
+    vertrekken waarvan de deuren erop uitkomen.
     """
 
     gemeenschappelijke_parkeerruimte_niet_specifieke_plek = Referentiedata(
@@ -186,21 +186,12 @@ class Ruimtedetailsoort(Enum):
         ),
     )
 
-    gemeenschappelijk_dakterras_gda = Referentiedata(
-        code="GDA",
-        naam="Gemeenschappelijk dakterras",
-        parent=Referentiedata(
-            code="GEM",
-            naam="Gemeenschappelijke ruimten en voorzieningen",
-        ),
-    )
-
     hal = Referentiedata(
         code="HAL",
         naam="Hal",
         parent=Referentiedata(
-            code="OVR",
-            naam="Overige ruimten",
+            code="VRK",
+            naam="Verkeersruimte",
         ),
     )
     """
@@ -374,8 +365,9 @@ class Ruimtedetailsoort(Enum):
         ),
     )
     """
-    Buitenruimte: veelal vrijstaand gebouw, dat gebruikt wordt om goederen of voedsel in
-    op te slaan, en ook als werkruimte kan dienen, maar niet als woning bedoeld is.
+    Overige ruimte: veelal vrijstaand gebouw, dat gebruikt wordt om goederen of voedsel
+    in op te slaan, en ook als werkruimte kan dienen, maar niet als woning bedoeld
+    is.
     """
 
     serre = Referentiedata(

@@ -1210,20 +1210,6 @@ class Bouwkundigelementdetailsoort(Enum):
         ),
     )
 
-    aanbelfunctie_met_video_en_audioverbinding = Referentiedata(
-        code="AAV",
-        naam="Aanbelfunctie met video- en audioverbinding",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
-    )
-    """
-    Systeem dat tweewegcommunicatie (beeld en geluid) mogelijk maakt en waarmee de
-    voordeur op afstand geopend kan worden. Relatie met IFC codering
-    (IfcCommunicationsAppliance) (UITBREIDING)
-    """
-
     @property
     def code(self) -> str:
         if self.value.code is None:

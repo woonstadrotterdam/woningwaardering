@@ -2,6 +2,7 @@ import csv
 import os
 import re
 import shutil
+import string
 import textwrap
 import time
 from collections import Counter, defaultdict
@@ -209,6 +210,7 @@ environment.filters["normalize_variable_name"] = normalize_variable_name
 # Define the Jinja2 template for soort_folder/<soort>.py
 soort_template = environment.from_string(
     """from enum import Enum
+
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
@@ -259,7 +261,6 @@ soort_folder_init_template = environment.from_string(
 {%- for soort in grouped_data -%}
 from .{{ soort[0]|remove_accents|lower }} import {{ soort[0]|remove_accents|title }}
 {% endfor %}
-
 __all__ = [
 {%- for soort in grouped_data %}
     "{{ soort[0]|remove_accents|title }}",
@@ -278,7 +279,7 @@ with open(os.path.join(output_folder, "__init__.py"), "w") as file:
 # Create a mapping from domein to soorten
 domein_to_soorten = defaultdict(set)  # Use a defaultdict for faster lookup
 for item in active_data:
-    for domein in item["informatiedomein"].split(", "):
+    for domein in string.capwords(item["informatiedomein"]).split(", "):
         domein_to_soorten[domein].add(item["soort"])
 
 # Define the Jinja2 template for domein/__init__.py
@@ -288,7 +289,6 @@ domein_folder_init_template = environment.from_string(
     {{ soort|title }},
 {%- endfor %}
 )
-
 
 __all__ = [
 {%- for soort in soorten %}
