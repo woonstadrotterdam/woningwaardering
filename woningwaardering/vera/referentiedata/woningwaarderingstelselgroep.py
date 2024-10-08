@@ -60,10 +60,6 @@ class Woningwaarderingstelselgroep(Enum):
     energieprestatie = Referentiedata(
         code="ENE",
         naam="Energieprestatie",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     De groep criteria die betrekking heeft op de energieprestaties (Beleidsboek
@@ -86,10 +82,6 @@ class Woningwaarderingstelselgroep(Enum):
     woonvoorzieningen_voor_gehandicapten = Referentiedata(
         code="GEH",
         naam="Woonvoorzieningen voor gehandicapten",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     De groep criteria die betrekking heeft op ingrepen die zijn gedaan ten behoeve van
@@ -141,10 +133,6 @@ class Woningwaarderingstelselgroep(Enum):
     keuken = Referentiedata(
         code="KEU",
         naam="Keuken",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     De groep criteria die betrekking heeft op de keuken (Beleidsboek Waarderingsstelsel
@@ -232,10 +220,6 @@ class Woningwaarderingstelselgroep(Enum):
     oppervlakte_van_overige_ruimten = Referentiedata(
         code="OOZ",
         naam="Oppervlakte van overige ruimten",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     Tot deze ruimten worden gerekend: bijkeukens, bergingen, wasruimten, schuren,
@@ -273,10 +257,6 @@ class Woningwaarderingstelselgroep(Enum):
     oppervlakte_van_vertrekken = Referentiedata(
         code="OVZ",
         naam="Oppervlakte van vertrekken",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     Onder vertrekken worden verstaan: woonkamer, andere kamers, keuken, badkamer en
@@ -341,10 +321,6 @@ class Woningwaarderingstelselgroep(Enum):
     sanitair = Referentiedata(
         code="SAN",
         naam="Sanitair",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     De groep criteria die betrekking heeft op het sanitair (Beleidsboek
@@ -447,10 +423,6 @@ class Woningwaarderingstelselgroep(Enum):
     punten_voor_de_woz_waarde = Referentiedata(
         code="WOZ",
         naam="Punten voor de WOZ-waarde",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     De groep criteria die betrekking heeft op de vastgestelde WOZ-waarde (Beleidsboek
@@ -473,10 +445,6 @@ class Woningwaarderingstelselgroep(Enum):
     verkoeling_en_verwarming = Referentiedata(
         code="VKV",
         naam="Verkoeling en verwarming",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     Waardering van verwarmde vertrekken, overige ruimten en verkeersruimten, inclusief
@@ -487,10 +455,6 @@ class Woningwaarderingstelselgroep(Enum):
     buitenruimten = Referentiedata(
         code="BUI",
         naam="Buitenruimten",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     Waardering van privé- en gemeenschappelijke buitenruimten, met puntenaftrek voor
@@ -500,10 +464,6 @@ class Woningwaarderingstelselgroep(Enum):
     gemeenschappelijke_parkeerruimten = Referentiedata(
         code="GPA",
         naam="Gemeenschappelijke parkeerruimten",
-        parent=Referentiedata(
-            code="ZEL",
-            naam="Zelfstandige woonruimten",
-        ),
     )
     """
     Waardering van parkeerplekken in een gemeenschappelijke ruimte die exclusief
@@ -539,6 +499,55 @@ class Woningwaarderingstelselgroep(Enum):
     exclusief toegankelijk voor bewoners van minimaal twee adressen, met uitsluiting
     van ruimten waarvoor ook door derden wordt betaald of die door de verhuurder
     worden gebruikt
+    """
+
+    gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen = Referentiedata(
+        code="GBA",
+        naam="Gemeenschappelijke binnenruimten gedeeld met meerdere adressen",
+        parent=Referentiedata(
+            code="ONZ",
+            naam="Onzelfstandige woonruimten",
+        ),
+    )
+    """
+    Waardering van gemeenschappelijke binnenruimten gedeeld met meerdere adressen
+    """
+
+    bijzondere_voorzieningen_zorgwoning_en_aanbelfunctie = Referentiedata(
+        code="BIA",
+        naam="Bijzondere voorzieningen: zorgwoning en aanbelfunctie",
+        parent=Referentiedata(
+            code="ZEL",
+            naam="Zelfstandige woonruimten",
+        ),
+    )
+    """
+    Waardering van bijzondere voorzieningen in een zorgwoning waaronder een
+    aanbelfunctie met video- en audioverbinding
+    """
+
+    bijzondere_voorzieningen_zorgwoning = Referentiedata(
+        code="BIZ",
+        naam="Bijzondere voorzieningen: zorgwoning",
+        parent=Referentiedata(
+            code="ONZ",
+            naam="Onzelfstandige woonruimten",
+        ),
+    )
+    """
+    Waardering van bijzondere voorzieningen in een zorgwoning
+    """
+
+    aftrekpunten = Referentiedata(
+        code="AFT",
+        naam="Aftrekpunten",
+        parent=Referentiedata(
+            code="ONZ",
+            naam="Onzelfstandige woonruimten",
+        ),
+    )
+    """
+    Aftrekpunten waardering onzelfstandige woonruimten
     """
 
     @property

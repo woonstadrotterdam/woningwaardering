@@ -16,12 +16,10 @@
       "oppervlakte": 19.1488,
       "verwarmd": true,
       "verkoeld": false,
-      "bouwkundigeElementen": [
+      "installaties": [
         {
-          "detailSoort": {
-            "code": "AAV",
-            "naam": "Aanbelfunctie met video- en audioverbinding"
-          }
+          "code": "ABF",
+          "naam": "Aanbelfunctie met video- en audioverbinding"
         }
       ]
     }

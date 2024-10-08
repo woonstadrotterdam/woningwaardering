@@ -37,6 +37,7 @@ from .clustersoort import Clustersoort
 from .collectiefobjectsoort import Collectiefobjectsoort
 from .communicatiekanaal import Communicatiekanaal
 from .communicatierichting import Communicatierichting
+from .communicatievoorkeursoort import Communicatievoorkeursoort
 from .conditiescore import Conditiescore
 from .contactgegevendetailsoort import Contactgegevendetailsoort
 from .contactgegevensoort import Contactgegevensoort
@@ -101,7 +102,6 @@ from .inkoopopdrachtregelsoort import Inkoopopdrachtregelsoort
 from .inschrijvingherkomst import Inschrijvingherkomst
 from .inspectierapportsoort import Inspectierapportsoort
 from .inspectierapportstatus import Inspectierapportstatus
-from .installatiesoort import Installatiesoort
 from .kandidaatdetailstatus import Kandidaatdetailstatus
 from .kandidaatstatus import Kandidaatstatus
 from .kwaliteitsmetingverzoeksoort import Kwaliteitsmetingverzoeksoort
@@ -113,6 +113,7 @@ from .maatschappelijklabel import Maatschappelijklabel
 from .machtigingsoort import Machtigingsoort
 from .materiaaldetailsoort import Materiaaldetailsoort
 from .materiaalsoort import Materiaalsoort
+from .medewerkerbudgetsoort import Medewerkerbudgetsoort
 from .medewerkerrol import Medewerkerrol
 from .medewerkersoort import Medewerkersoort
 from .meeteenheid import Meeteenheid
@@ -136,6 +137,7 @@ from .overeenkomststatus import Overeenkomststatus
 from .pandsoort import Pandsoort
 from .passendheiddetailsoort import Passendheiddetailsoort
 from .passendheidssoort import Passendheidssoort
+from .personelefunctiesoort import Personelefunctiesoort
 from .prestatieafspraak import Prestatieafspraak
 from .prijsaanpassingsoort import Prijsaanpassingsoort
 from .prijscomponentdetailsoort import Prijscomponentdetailsoort
@@ -177,9 +179,13 @@ from .signaleringdetailsoort import Signaleringdetailsoort
 from .signaleringsoort import Signaleringsoort
 from .signaleringstatus import Signaleringstatus
 from .taal import Taal
+from .tijdsbestedingdetailsoort import Tijdsbestedingdetailsoort
+from .tijdsbestedingsoort import Tijdsbestedingsoort
+from .tijdseenheid import Tijdseenheid
 from .toegankelijkheidslabel import Toegankelijkheidslabel
 from .uitexploitatiereden import Uitexploitatiereden
 from .uitvoerendesoort import Uitvoerendesoort
+from .vacaturesoort import Vacaturesoort
 from .verantwoordingconsolidatie import Verantwoordingconsolidatie
 from .verantwoordingregime import Verantwoordingregime
 from .verbijzonderingsoort import Verbijzonderingsoort
@@ -188,6 +194,7 @@ from .verrekeningsoort import Verrekeningsoort
 from .vertrouwelijkheid import Vertrouwelijkheid
 from .voorrangdetailsoort import Voorrangdetailsoort
 from .voorrangsoort import Voorrangsoort
+from .voorzieningsoort import Voorzieningsoort
 from .vragenlijstregelherkomst import Vragenlijstregelherkomst
 from .vragenlijstregelonderwerpsoort import Vragenlijstregelonderwerpsoort
 from .woningwaarderingstelsel import Woningwaarderingstelsel
@@ -241,6 +248,7 @@ __all__ = [
     "Collectiefobjectsoort",
     "Communicatiekanaal",
     "Communicatierichting",
+    "Communicatievoorkeursoort",
     "Conditiescore",
     "Contactgegevendetailsoort",
     "Contactgegevensoort",
@@ -305,7 +313,6 @@ __all__ = [
     "Inschrijvingherkomst",
     "Inspectierapportsoort",
     "Inspectierapportstatus",
-    "Installatiesoort",
     "Kandidaatdetailstatus",
     "Kandidaatstatus",
     "Kwaliteitsmetingverzoeksoort",
@@ -317,6 +324,7 @@ __all__ = [
     "Machtigingsoort",
     "Materiaaldetailsoort",
     "Materiaalsoort",
+    "Medewerkerbudgetsoort",
     "Medewerkerrol",
     "Medewerkersoort",
     "Meeteenheid",
@@ -340,6 +348,7 @@ __all__ = [
     "Pandsoort",
     "Passendheiddetailsoort",
     "Passendheidssoort",
+    "Personelefunctiesoort",
     "Prestatieafspraak",
     "Prijsaanpassingsoort",
     "Prijscomponentdetailsoort",
@@ -381,9 +390,13 @@ __all__ = [
     "Signaleringsoort",
     "Signaleringstatus",
     "Taal",
+    "Tijdsbestedingdetailsoort",
+    "Tijdsbestedingsoort",
+    "Tijdseenheid",
     "Toegankelijkheidslabel",
     "Uitexploitatiereden",
     "Uitvoerendesoort",
+    "Vacaturesoort",
     "Verantwoordingconsolidatie",
     "Verantwoordingregime",
     "Verbijzonderingsoort",
@@ -392,6 +405,7 @@ __all__ = [
     "Vertrouwelijkheid",
     "Voorrangdetailsoort",
     "Voorrangsoort",
+    "Voorzieningsoort",
     "Vragenlijstregelherkomst",
     "Vragenlijstregelonderwerpsoort",
     "Woningwaarderingstelsel",

@@ -3,7 +3,21 @@ from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
 
 
-class Installatiesoort(Enum):
+class Voorzieningsoort(Enum):
+    aanbelfunctie_met_video_en_audioverbinding = Referentiedata(
+        code="ABF",
+        naam="Aanbelfunctie met video- en audioverbinding",
+    )
+    """
+    Een aanbelfunctie met video- en audioverbinding waarbij de voordeur automatisch kan
+    worden geopend vanuit de woning wordt gewaardeerd met 0,25 punt. Hieronder wordt
+    een systeem verstaan dat tweewegcommunicatie mogelijk maakt met beeld en geluid
+    tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er
+    tevens sprake te zijn van de mogelijkheid tot het openen van de
+    (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang
+    geeft tot het complex waarvan de woning onderdeel uitmaakt.
+    """
+
     inbouw_afzuiginstallatie = Referentiedata(
         code="IAF",
         naam="Inbouw afzuiginstallatie",

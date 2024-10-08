@@ -213,6 +213,47 @@ class Overeenkomstdetailsoort(Enum):
     Verkoop van voormalige huurwoning aan de voormalige huurder of een nieuwe eigenaar.
     """
 
+    inhuurovereenkomst_plaatsvervangend = Referentiedata(
+        code="INP",
+        naam="Inhuurovereenkomst plaatsvervangend",
+        parent=Referentiedata(
+            code="ARB",
+            naam="Arbeid",
+        ),
+    )
+    """
+    Een inhuurovereenkomst plaatsvervangend is een contract waarbij een werknemer
+    tijdelijk wordt ingehuurd om de taken van een afwezige medewerker over te nemen.
+    """
+
+    inhuurovereenkomst_boven_formatie = Referentiedata(
+        code="INB",
+        naam="Inhuurovereenkomst boven formatie",
+        parent=Referentiedata(
+            code="ARB",
+            naam="Arbeid",
+        ),
+    )
+    """
+    Een inhuurovereenkomst boven formatie is een contract waarbij een werknemer
+    tijdelijk wordt ingehuurd voor extra capaciteit bovenop de bestaande
+    personeelsformatie.
+    """
+
+    inhuurovereenkomst_structureel = Referentiedata(
+        code="INS",
+        naam="Inhuurovereenkomst structureel",
+        parent=Referentiedata(
+            code="ARB",
+            naam="Arbeid",
+        ),
+    )
+    """
+    Een overeenkomst waarin de rechten en plichten van een externe kracht, zoals een
+    zzp-er of freelancer, voor een langere periode worden vastgelegd om continuïteit
+    en duidelijkheid te waarborgen.
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:

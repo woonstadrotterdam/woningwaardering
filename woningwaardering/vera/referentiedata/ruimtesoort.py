@@ -40,6 +40,15 @@ class Ruimtesoort(Enum):
     (Beleidsboek waarderingsstelsel zelfstandige woonruimte)
     """
 
+    verkeersruimte = Referentiedata(
+        code="VRK",
+        naam="Verkeersruimte",
+    )
+    """
+    Een verkeersruimte is een ruimte die wordt gebruikt om toegang te krijgen tot andere
+    vertrekken.
+    """
+
     parkeergelegenheid = Referentiedata(
         code="PAR",
         naam="Parkeergelegenheid",
