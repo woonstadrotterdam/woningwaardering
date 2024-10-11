@@ -442,7 +442,7 @@ class Ruimtedetailsoort(Enum):
     overloop = Referentiedata(
         code="OVL",
         naam="Overloop",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.verkeersruimte.value,
     )
     """
     Verkeersruimte: (UITBREIDING) Gang op een bovenverdieping.
@@ -451,7 +451,7 @@ class Ruimtedetailsoort(Enum):
     entree = Referentiedata(
         code="ENT",
         naam="Entree",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.verkeersruimte.value,
     )
     """
     Verkeersruimte: (UITBREIDING) Ingang van een gebouw.
@@ -469,7 +469,7 @@ class Ruimtedetailsoort(Enum):
     trappenhuis = Referentiedata(
         code="TRH",
         naam="Trappenhuis",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.verkeersruimte.value,
     )
     """
     Verkeersruimte: (UITBREIDING) Verkeersruimte waarin een trap ligt

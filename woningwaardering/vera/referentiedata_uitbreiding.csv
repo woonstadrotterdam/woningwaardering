@@ -1,8 +1,8 @@
 Soort;Code;Naam;Omschrijving;Begindatum;Einddatum;Parent;Informatiedomein
-RUIMTEDETAILSOORT;OVL;Overloop;Verkeersruimte: (UITBREIDING) Gang op een bovenverdieping.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
-RUIMTEDETAILSOORT;ENT;Entree;Verkeersruimte: (UITBREIDING) Ingang van een gebouw.;3-4-2024;;RUIMTESOORT.OVR;Vastgoed
+RUIMTEDETAILSOORT;OVL;Overloop;Verkeersruimte: (UITBREIDING) Gang op een bovenverdieping.;3-4-2024;;RUIMTESOORT.VRK;Vastgoed
+RUIMTEDETAILSOORT;ENT;Entree;Verkeersruimte: (UITBREIDING) Ingang van een gebouw.;3-4-2024;;RUIMTESOORT.VRK;Vastgoed
 RUIMTEDETAILSOORT;KAS;Kast;Overige ruimte: (UITBREIDING);8-4-2024;;RUIMTESOORT.OVR;Vastgoed
-RUIMTEDETAILSOORT;TRH;Trappenhuis;Verkeersruimte: (UITBREIDING) Verkeersruimte waarin een trap ligt;27-8-2024;;RUIMTESOORT.OVR;Vastgoed
+RUIMTEDETAILSOORT;TRH;Trappenhuis;Verkeersruimte: (UITBREIDING) Verkeersruimte waarin een trap ligt;27-8-2024;;RUIMTESOORT.VRK;Vastgoed
 RUIMTESOORT;PAR;Parkeergelegenheid;Een locatie die speciaal is ingericht voor het parkeren van voertuigen. Dit kan variëren van een eenvoudige parkeerplaats op straat tot uitgebreide faciliteiten zoals parkeerterreinen en parkeergarages. Parkeergelegenheden bieden gemarkeerde plaatsen waar voertuigen veilig kunnen worden geparkeerd, en ze kunnen openbaar of privé zijn. De term "parkeergelegenheid" omvat alle vormen van parkeerinfrastructuur die zijn ontworpen om voertuigen tijdelijk of langdurig te stallen.;;;;Vastgoed
 RUIMTEDETAILSOORT;CAR;Carport;Parkeergelegenheid: een overdekte, open parkeerruimte voor een of meer auto's. In tegenstelling tot een garage heeft een carport meestal geen muren of deuren. Carports kunnen vrijstaand zijn of aan een gebouw bevestigd worden. Onder carport vallen ook ander soortige overdekte (buiten) parkeervakken, zoals die in de plint (begane grond) van een appartementencomplex.;;;RUIMTESOORT.PAR;Vastgoed
 RUIMTEDETAILSOORT;GAI;Garage inpandig;Parkeergelegenheid: een garage die deel uitmaakt van de hoofdbebouwing van een huis of ander gebouw. Deze ruimte is meestal direct toegankelijk vanuit het interieur van het gebouw, bijvoorbeeld via een deur die leidt naar een gang, keuken, of bijkeuken. De garage is voorzien van een garagedeur die naar buiten opent.;;;RUIMTESOORT.PAR;Vastgoed
