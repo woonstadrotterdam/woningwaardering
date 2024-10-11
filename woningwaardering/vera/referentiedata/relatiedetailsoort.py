@@ -1,16 +1,14 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.relatiesoort import Relatiesoort
 
 
 class Relatiedetailsoort(Enum):
     huishouden = Referentiedata(
         code="HUI",
         naam="Huishouden",
-        parent=Referentiedata(
-            code="GRO",
-            naam="Relatiegroep",
-        ),
+        parent=Relatiesoort.relatiegroep.value,
     )
     """
     Een huishouden bestaat uit één of meer personen die op hetzelfde adres wonen en een

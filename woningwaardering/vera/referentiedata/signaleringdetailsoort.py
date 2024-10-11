@@ -1,16 +1,14 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.signaleringsoort import Signaleringsoort
 
 
 class Signaleringdetailsoort(Enum):
     agressie = Referentiedata(
         code="AGS",
         naam="Agressie",
-        parent=Referentiedata(
-            code="AGR",
-            naam="Agressie",
-        ),
+        parent=Signaleringsoort.agressie.value,
     )
 
     ambulante_begeleiding = Referentiedata(
@@ -25,100 +23,67 @@ class Signaleringdetailsoort(Enum):
     betalingsachterstand = Referentiedata(
         code="BET",
         naam="Betalingsachterstand",
-        parent=Referentiedata(
-            code="SCH",
-            naam="Huurschuld",
-        ),
+        parent=Signaleringsoort.huurschuld.value,
     )
 
     bewindvoerder = Referentiedata(
         code="BEW",
         naam="Bewindvoerder",
-        parent=Referentiedata(
-            code="SCH",
-            naam="Huurschuld",
-        ),
+        parent=Signaleringsoort.huurschuld.value,
     )
 
     brandstichting = Referentiedata(
         code="BRA",
         naam="Brandstichting",
-        parent=Referentiedata(
-            code="AGR",
-            naam="Agressie",
-        ),
+        parent=Signaleringsoort.agressie.value,
     )
 
     deurwaarder = Referentiedata(
         code="DEU",
         naam="Deurwaarder",
-        parent=Referentiedata(
-            code="SCH",
-            naam="Huurschuld",
-        ),
+        parent=Signaleringsoort.huurschuld.value,
     )
 
     drugshandel = Referentiedata(
         code="DRU",
         naam="Drugshandel",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
     )
 
     geluidsoverlast = Referentiedata(
         code="GEL",
         naam="Geluidsoverlast",
-        parent=Referentiedata(
-            code="OVE",
-            naam="Overlast",
-        ),
+        parent=Signaleringsoort.overlast.value,
     )
 
     hennepkwekerij = Referentiedata(
         code="HEN",
         naam="Hennepkwekerij",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
     )
 
     mutatieschade = Referentiedata(
         code="MUT",
         naam="Mutatieschade",
-        parent=Referentiedata(
-            code="SCH",
-            naam="Huurschuld",
-        ),
+        parent=Signaleringsoort.huurschuld.value,
     )
 
     onderverhuur = Referentiedata(
         code="OND",
         naam="Onderverhuur",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
     )
 
     prostitutie = Referentiedata(
         code="PRO",
         naam="Prostitutie",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
     )
 
     vervuiling = Referentiedata(
         code="VER",
         naam="Vervuiling",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
     )
 
     @property

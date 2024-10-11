@@ -142,8 +142,7 @@ for item in active_data:
                 )
 
         if resolved_parent is not None:
-            item["parentcode"] = resolved_parent["code"]
-            item["parentnaam"] = resolved_parent["naam"]
+            item["parent"] = resolved_parent
 
 if os.path.exists(output_folder):
     shutil.rmtree(output_folder)
@@ -212,6 +211,18 @@ soort_template = environment.from_string(
     """from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+{%- set parent_classes = items | map(attribute='parent.soort') | unique | select('string') -%}
+{%- if parent_classes -%}
+{%- for parentClass in parent_classes %}
+{%- if parentClass | length > 19 %}
+from woningwaardering.vera.referentiedata.{{ parentClass | remove_accents | lower }} import (
+    {{ parentClass | remove_accents | title }},
+)
+{%- else %}
+from woningwaardering.vera.referentiedata.{{ parentClass | remove_accents | lower }} import {{ parentClass | remove_accents | title }}
+{%- endif %}
+{%- endfor %}
+{%- endif %}
 
 
 class {{ soort|remove_accents|title }}(Enum):
@@ -220,10 +231,7 @@ class {{ soort|remove_accents|title }}(Enum):
         code="{{ item['code'] | safe }}",
         naam="{{ item['naam'] | safe }}",
         {%- if item['parent'] | safe %}
-        parent=Referentiedata(
-            code="{{ item['parentcode'] | safe}}",
-            naam="{{ item['parentnaam'] | safe}}",
-        ),
+        parent={{item['parent'].soort | remove_accents | title}}.{{item['parent'] | normalize_variable_name}}.value,
         {%- endif %}
     )
     {%- if item['omschrijving'] | safe %}
@@ -279,6 +287,11 @@ with open(os.path.join(output_folder, "__init__.py"), "w") as file:
 # Create a mapping from domein to soorten
 domein_to_soorten = defaultdict(set)  # Use a defaultdict for faster lookup
 for item in active_data:
+    if not item["informatiedomein"]:
+        logger.warning(
+            f"\"{item['soort']} {item['naam']}\" heeft geen informatiedomein. Default domein \"Vastgoed\" wordt gebruikt."
+        )
+        item["informatiedomein"] = "Vastgoed"
     for domein in string.capwords(item["informatiedomein"]).split(", "):
         domein_to_soorten[domein].add(item["soort"])
 

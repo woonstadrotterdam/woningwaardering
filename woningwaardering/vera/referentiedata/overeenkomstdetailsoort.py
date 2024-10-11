@@ -1,16 +1,14 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.overeenkomstsoort import Overeenkomstsoort
 
 
 class Overeenkomstdetailsoort(Enum):
     bepaalde_tijd = Referentiedata(
         code="BEP",
         naam="Bepaalde tijd",
-        parent=Referentiedata(
-            code="ARB",
-            naam="Arbeid",
-        ),
+        parent=Overeenkomstsoort.arbeid.value,
     )
     """
     Arbeidsovereenkomst voor bepaalde tijd.
@@ -19,10 +17,7 @@ class Overeenkomstdetailsoort(Enum):
     bedrijfsonroerendgoed = Referentiedata(
         code="BOG",
         naam="Bedrijfsonroerendgoed",
-        parent=Referentiedata(
-            code="HUU",
-            naam="Huurovereenkomst",
-        ),
+        parent=Overeenkomstsoort.huurovereenkomst.value,
     )
     """
     Verhuur van vastgoed voor zakelijke doeleinden.
@@ -31,10 +26,7 @@ class Overeenkomstdetailsoort(Enum):
     campuscontract = Referentiedata(
         code="CAM",
         naam="Campuscontract",
-        parent=Referentiedata(
-            code="HUU",
-            naam="Huurovereenkomst",
-        ),
+        parent=Overeenkomstsoort.huurovereenkomst.value,
     )
     """
     Een campuscontract is een huurovereenkomst die direct is gekoppeld aan een
@@ -45,10 +37,7 @@ class Overeenkomstdetailsoort(Enum):
     flexcontract = Referentiedata(
         code="FLE",
         naam="Flexcontract",
-        parent=Referentiedata(
-            code="HUU",
-            naam="Huurovereenkomst",
-        ),
+        parent=Overeenkomstsoort.huurovereenkomst.value,
     )
     """
     Huurovereenkomst voor een flexwoning: de einddatum van de omgevingsvergunning die
@@ -59,10 +48,7 @@ class Overeenkomstdetailsoort(Enum):
     jongerencontract = Referentiedata(
         code="JON",
         naam="Jongerencontract",
-        parent=Referentiedata(
-            code="HUU",
-            naam="Huurovereenkomst",
-        ),
+        parent=Overeenkomstsoort.huurovereenkomst.value,
     )
     """
     Jongeren tussen 18 en 28 jaar kunnen een huurcontract voor vijf jaar krijgen voor
@@ -72,10 +58,7 @@ class Overeenkomstdetailsoort(Enum):
     koopgarant = Referentiedata(
         code="KGA",
         naam="Koopgarant",
-        parent=Referentiedata(
-            code="KOO",
-            naam="Koopovereenkomst",
-        ),
+        parent=Overeenkomstsoort.koopovereenkomst.value,
     )
     """
     Verkoop van een woning tegen lagere prijs dan de marktwaarde en de garantie dat de
@@ -86,10 +69,7 @@ class Overeenkomstdetailsoort(Enum):
     mge_constructie = Referentiedata(
         code="MGE",
         naam="MGE constructie",
-        parent=Referentiedata(
-            code="KOO",
-            naam="Koopovereenkomst",
-        ),
+        parent=Overeenkomstsoort.koopovereenkomst.value,
     )
     """
     Verkoop met Maatschappelijk Gebonden Eigendom.
@@ -98,10 +78,7 @@ class Overeenkomstdetailsoort(Enum):
     nieuwsbrief = Referentiedata(
         code="NIE",
         naam="Nieuwsbrief",
-        parent=Referentiedata(
-            code="SER",
-            naam="Serviceovereenkomst",
-        ),
+        parent=Overeenkomstsoort.serviceovereenkomst.value,
     )
     """
     Nieuwsbrief voor marketing doeleinden.
@@ -110,10 +87,7 @@ class Overeenkomstdetailsoort(Enum):
     nul_uren_contract = Referentiedata(
         code="NUL",
         naam="Nul-uren contract",
-        parent=Referentiedata(
-            code="ARB",
-            naam="Arbeid",
-        ),
+        parent=Overeenkomstsoort.arbeid.value,
     )
     """
     Nul-uren arbeidsovereenkomst
@@ -122,10 +96,7 @@ class Overeenkomstdetailsoort(Enum):
     onbepaalde_tijd = Referentiedata(
         code="OBE",
         naam="Onbepaalde tijd",
-        parent=Referentiedata(
-            code="ARB",
-            naam="Arbeid",
-        ),
+        parent=Overeenkomstsoort.arbeid.value,
     )
     """
     Arbeidsovereenkomst voor onbepaalde tijd
@@ -134,10 +105,7 @@ class Overeenkomstdetailsoort(Enum):
     onbepaalde_tijd_contract = Referentiedata(
         code="ONB",
         naam="Onbepaalde tijd contract",
-        parent=Referentiedata(
-            code="HUU",
-            naam="Huurovereenkomst",
-        ),
+        parent=Overeenkomstsoort.huurovereenkomst.value,
     )
     """
     Regulier huurcontract zonder einddatum.
@@ -146,10 +114,7 @@ class Overeenkomstdetailsoort(Enum):
     persoonlijke_woonkrant = Referentiedata(
         code="PER",
         naam="Persoonlijke woonkrant",
-        parent=Referentiedata(
-            code="SER",
-            naam="Serviceovereenkomst",
-        ),
+        parent=Overeenkomstsoort.serviceovereenkomst.value,
     )
     """
     Nieuwsbrief met gepersonificeerd aanbod. (Digizine)
@@ -158,10 +123,7 @@ class Overeenkomstdetailsoort(Enum):
     nieuwbouwinformatie = Referentiedata(
         code="PRO",
         naam="Nieuwbouwinformatie",
-        parent=Referentiedata(
-            code="SER",
-            naam="Serviceovereenkomst",
-        ),
+        parent=Overeenkomstsoort.serviceovereenkomst.value,
     )
     """
     Abonnement of nieuwsbrief met informatie over nieuwbouw projecten en/of vastgoed
@@ -171,10 +133,7 @@ class Overeenkomstdetailsoort(Enum):
     shortstay = Referentiedata(
         code="SHS",
         naam="ShortStay",
-        parent=Referentiedata(
-            code="HUU",
-            naam="Huurovereenkomst",
-        ),
+        parent=Overeenkomstsoort.huurovereenkomst.value,
     )
     """
     Short stay is het tijdelijk wonen in een zelfstandige woning voor een periode van
@@ -184,10 +143,7 @@ class Overeenkomstdetailsoort(Enum):
     tijdelijk_contract = Referentiedata(
         code="TIJ",
         naam="Tijdelijk contract",
-        parent=Referentiedata(
-            code="HUU",
-            naam="Huurovereenkomst",
-        ),
+        parent=Overeenkomstsoort.huurovereenkomst.value,
     )
     """
     Huurcontract voor bepaalde tijd.
@@ -204,10 +160,7 @@ class Overeenkomstdetailsoort(Enum):
     is_onderdeel_uitpondproject = Referentiedata(
         code="UIT",
         naam="Is onderdeel uitpondproject",
-        parent=Referentiedata(
-            code="KOO",
-            naam="Koopovereenkomst",
-        ),
+        parent=Overeenkomstsoort.koopovereenkomst.value,
     )
     """
     Verkoop van voormalige huurwoning aan de voormalige huurder of een nieuwe eigenaar.
@@ -216,10 +169,7 @@ class Overeenkomstdetailsoort(Enum):
     inhuurovereenkomst_plaatsvervangend = Referentiedata(
         code="INP",
         naam="Inhuurovereenkomst plaatsvervangend",
-        parent=Referentiedata(
-            code="ARB",
-            naam="Arbeid",
-        ),
+        parent=Overeenkomstsoort.arbeid.value,
     )
     """
     Een inhuurovereenkomst plaatsvervangend is een contract waarbij een werknemer
@@ -229,10 +179,7 @@ class Overeenkomstdetailsoort(Enum):
     inhuurovereenkomst_boven_formatie = Referentiedata(
         code="INB",
         naam="Inhuurovereenkomst boven formatie",
-        parent=Referentiedata(
-            code="ARB",
-            naam="Arbeid",
-        ),
+        parent=Overeenkomstsoort.arbeid.value,
     )
     """
     Een inhuurovereenkomst boven formatie is een contract waarbij een werknemer
@@ -243,10 +190,7 @@ class Overeenkomstdetailsoort(Enum):
     inhuurovereenkomst_structureel = Referentiedata(
         code="INS",
         naam="Inhuurovereenkomst structureel",
-        parent=Referentiedata(
-            code="ARB",
-            naam="Arbeid",
-        ),
+        parent=Overeenkomstsoort.arbeid.value,
     )
     """
     Een overeenkomst waarin de rechten en plichten van een externe kracht, zoals een

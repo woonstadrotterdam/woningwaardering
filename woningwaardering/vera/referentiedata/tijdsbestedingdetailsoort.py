@@ -1,16 +1,14 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.tijdsbestedingsoort import Tijdsbestedingsoort
 
 
 class Tijdsbestedingdetailsoort(Enum):
     verlof_regulier = Referentiedata(
         code="VER",
         naam="Verlof (regulier)",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
     """
     Regulier verlof
@@ -19,10 +17,7 @@ class Tijdsbestedingdetailsoort(Enum):
     ziek = Referentiedata(
         code="ZIE",
         naam="Ziek",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
     """
     Afwezig wegens ziekte
@@ -31,10 +26,7 @@ class Tijdsbestedingdetailsoort(Enum):
     bijzonder_verlof = Referentiedata(
         code="BIJ",
         naam="Bijzonder verlof",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
     """
     Bijzonder of  buitengewoon verlof. Denk bijvoorbeeld aan een examen, ondertrouw, een
@@ -44,10 +36,7 @@ class Tijdsbestedingdetailsoort(Enum):
     onbetaald_verlof = Referentiedata(
         code="ONB",
         naam="Onbetaald verlof",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
     """
     Onbetaald verlof
@@ -56,10 +45,7 @@ class Tijdsbestedingdetailsoort(Enum):
     zwangerschapsverlof = Referentiedata(
         code="ZWA",
         naam="Zwangerschapsverlof",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
     """
     Zwangersschapsverlof of bevallingsverlof
@@ -68,10 +54,7 @@ class Tijdsbestedingdetailsoort(Enum):
     ouderschapsverlof = Referentiedata(
         code="OUD",
         naam="Ouderschapsverlof",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
     """
     Ouderschapsverlof
@@ -80,10 +63,7 @@ class Tijdsbestedingdetailsoort(Enum):
     zorgverlof = Referentiedata(
         code="ZOR",
         naam="Zorgverlof",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
     """
     Zorgverlof kortdurend of langdurend
@@ -92,10 +72,7 @@ class Tijdsbestedingdetailsoort(Enum):
     calamiteitenverlof = Referentiedata(
         code="CAL",
         naam="Calamiteitenverlof",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
     """
     Calamiteitenverlof of kort verzuimverlof
@@ -104,19 +81,13 @@ class Tijdsbestedingdetailsoort(Enum):
     non_actief = Referentiedata(
         code="NON",
         naam="Non-actief",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
 
     adoptieverlof = Referentiedata(
         code="ADO",
         naam="Adoptieverlof",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
     """
     Adoptie of pleegzorgverlof
@@ -125,10 +96,7 @@ class Tijdsbestedingdetailsoort(Enum):
     geschorst = Referentiedata(
         code="GES",
         naam="Geschorst",
-        parent=Referentiedata(
-            code="AFW",
-            naam="Afwezig",
-        ),
+        parent=Tijdsbestedingsoort.afwezig.value,
     )
 
     @property

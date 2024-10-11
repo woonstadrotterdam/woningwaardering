@@ -1,16 +1,14 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.publicatiemodel import Publicatiemodel
 
 
 class Publicatieintakevorm(Enum):
     cooptatie = Referentiedata(
         code="COO",
         naam="Coöptatie",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel.value,
     )
     """
     Medebewoners bepalen welke woningzoekende de eenheid krijgt.
@@ -19,10 +17,7 @@ class Publicatieintakevorm(Enum):
     intakegesprek = Referentiedata(
         code="INT",
         naam="Intakegesprek",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel.value,
     )
     """
     Er vindt een intake gesprek plaats met de eigenaar van de woning.
@@ -31,10 +26,7 @@ class Publicatieintakevorm(Enum):
     motivatie = Referentiedata(
         code="MOT",
         naam="Motivatie",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel.value,
     )
     """
     Toewijzing vindt plaats op basis van de beoordeling van een motivatiebrief of
@@ -44,10 +36,7 @@ class Publicatieintakevorm(Enum):
     sociale_spelregels = Referentiedata(
         code="SOC",
         naam="Sociale spelregels",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel.value,
     )
     """
     Sociale spelregels bepalen welke woningzoekende de eenheid krijgt.
