@@ -303,12 +303,12 @@ Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten.
 *   Verwarmde overige ruimten en verkeersruimten worden gewaardeerd met 1 punt met een maximum van 4 punten voor alle overige ruimtes en verkeersruimten (samen).
 
 
->Op het moment is verkeersruimte geen ruimtesoort in de referentiedata. Wij hanteren de volgende ruimtedetailsoorten als `verkeersruimte`:
+> Wij hanteren de volgende ruimtedetailsoorten als `verkeersruimte`:
 >- hal
 >- overloop
->- entree
->- gang 
->- trappenhuis (onze eigen uitbreiding op de referentiedata)    
+>- entree (onze eigen uitbreiding op de referentiedata)
+>- gang (onze eigen uitbreiding op de referentiedata)
+>- trappenhuis (onze eigen uitbreiding op de referentiedata)
 
 _Extra voorziening_
 
