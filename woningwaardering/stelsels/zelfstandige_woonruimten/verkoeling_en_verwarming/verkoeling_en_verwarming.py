@@ -200,7 +200,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             if ruimte.verkoeld:
                 punten += Decimal("1")
                 if totalen:
-                    totalen["verkoelde_en_verwarmde_vertrekken"] += Decimal("1")
+                    totalen["verkoelde_en_verwarmde_vertrekken"] += punten
                 logger.info(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmd en verkoeld vertrek en krijgt {punten} punten."
                 )
@@ -277,7 +277,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Maximaal 4 punten voor verwarmde overige- en verkeersruimten",
+                    naam="Maximaal 4 punten",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                         id="verwarmde_overige_en_verkeersruimten",
                     ),
@@ -292,17 +292,16 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ):
             aftrek = (
                 max_punten_verkoeld_en_verwarmd
-                - totalen["verkoelde_en_verwarmde_vertrekken"]
+                - totalen["verkoelde_en_verwarmde_vertrekken"] / 3
             )
-            totalen["verkoelde_en_verwarmde_vertrekken"] = (
-                max_punten_verkoeld_en_verwarmd
-            )
+            totalen["verkoelde_en_verwarmde_vertrekken"] += aftrek
+
             logger.info(
                 f'Maximaal aantal extra punten voor verwarmde en verkoelde vertrekken overschreden ({totalen["verkoelde_en_verwarmde_vertrekken"]} > {max_punten_verkoeld_en_verwarmd}). Een aftrek van {aftrek} punt(en) wordt toegepast.'
             )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Maximaal 2 extra punten voor verwarmde en verkoelde vertrekken",
+                    naam="Maximaal 2 extra punten",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                         id="verkoelde_en_verwarmde_vertrekken",
                     ),

@@ -70,7 +70,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             ),  # max 4 punten per eenheid voor verwarmde overige- en verkeersruimten.
             "verkoelde_en_verwarmde_vertrekken": Decimal(
                 "0"
-            ),  # max 2 punten per eenheid voor vertrekken die en verwarmd en verkoeld zijn. 1 punt per vertrek.
+            ),  # max 2 extra punten per eenheid voor vertrekken die en verwarmd en verkoeld zijn. 1 punt extra per vertrek.
             "open_keuken": Decimal("0"),
             "verwarmde_vertrekken": Decimal("0"),
         }
@@ -109,6 +109,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.punten is not None
+                and woningwaardering.criterium.bovenliggende_criterium is not None
             ),
         )
 
