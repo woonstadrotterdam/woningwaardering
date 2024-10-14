@@ -56,13 +56,23 @@ class VerkoelingEnVerwarming(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = []
         woningwaarderingen_voor_gedeeld = []
 
-        totalen: dict[Literal["overige_ruimten", "verkoeld_en_verwarmd"], Decimal] = {
-            "overige_ruimten": Decimal(
+        totalen: dict[
+            Literal[
+                "verwarmde_overige_en_verkeersruimten",
+                "verkoelde_en_verwarmde_vertrekken",
+                "open_keuken",
+                "verwarmde_vertrekken",
+            ],
+            Decimal,
+        ] = {
+            "verwarmde_overige_en_verkeersruimten": Decimal(
                 "0"
             ),  # max 4 punten per eenheid voor verwarmde overige- en verkeersruimten.
-            "verkoeld_en_verwarmd": Decimal(
+            "verkoelde_en_verwarmde_vertrekken": Decimal(
                 "0"
             ),  # max 2 punten per eenheid voor vertrekken die en verwarmd en verkoeld zijn. 1 punt per vertrek.
+            "open_keuken": Decimal("0"),
+            "verwarmde_vertrekken": Decimal("0"),
         }
 
         ruimten = [

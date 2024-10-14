@@ -155,12 +155,14 @@ def naar_tabel(
                                 [
                                     stelselgroep_naam,
                                     f" - {onderliggende_woningwaardering.criterium.naam}",
-                                    onderliggende_woningwaardering.aantal or "",
+                                    f"[{onderliggende_woningwaardering.aantal}]"
+                                    if onderliggende_woningwaardering.aantal is not None
+                                    else "",
                                     onderliggende_woningwaardering.criterium.meeteenheid.naam
                                     if onderliggende_woningwaardering.criterium.meeteenheid
                                     is not None
                                     else "",
-                                    onderliggende_woningwaardering.punten
+                                    f"[{onderliggende_woningwaardering.punten}]"
                                     if onderliggende_woningwaardering.punten is not None
                                     else "",
                                     f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
@@ -174,6 +176,8 @@ def naar_tabel(
             Decimal(woningwaardering.aantal)
             for woningwaardering in woningwaarderingen
             if woningwaardering.aantal is not None
+            and woningwaardering.criterium is not None
+            and woningwaardering.criterium.bovenliggende_criterium is None
         ]
 
         subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
@@ -208,7 +212,7 @@ def naar_tabel(
             table.add_row(
                 [
                     woningwaardering_groep.criterium_groep.stelselgroep.naam,
-                    "Subtotaal",
+                    "Totaal",
                     (subtotaal or "") if not verschillende_meeteenheden else "",
                     meeteenheid if not verschillende_meeteenheden else "",
                     woningwaardering_groep.punten or "",
