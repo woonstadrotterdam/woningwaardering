@@ -198,7 +198,9 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
         else:
             if ruimte.verkoeld:
-                punten += Decimal("1")
+                punten += Decimal(
+                    "1"
+                )  # 1 punt extra per vertrek wanneer verwarmd en verkoeld
                 if totalen:
                     totalen["verkoelde_en_verwarmde_vertrekken"] += punten
                 logger.info(
@@ -290,6 +292,9 @@ class VerkoelingEnVerwarming(Stelselgroep):
             totalen["verkoelde_en_verwarmde_vertrekken"]
             > max_punten_verkoeld_en_verwarmd
         ):
+            # maximaal 2 extra punten voor verkoelde en verwarmde vertrekken.
+            # 3 punten per verkoeld en verwarmd vertrek
+            # aantal extra punten = aantal punten voor verkoelde en verwarmde vertrekken / 3
             aftrek = (
                 max_punten_verkoeld_en_verwarmd
                 - totalen["verkoelde_en_verwarmde_vertrekken"] / 3
