@@ -11,7 +11,7 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 5.5,
+      "punten": 1.5,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -60,7 +60,7 @@
         },
         {
           "criterium": {
-            "naam": "Maximaal 4 punten voor verwarmde overige- en verkeersruimten",
+            "naam": "Maximaal 4 punten",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
             }
