@@ -1,9 +1,13 @@
 from abc import ABC, abstractmethod
+from collections import defaultdict
 from datetime import date
+from typing import Iterator
 
 from woningwaardering.stelsels.utils import is_geldig
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    WoningwaarderingResultatenWoningwaardering,
+    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -71,3 +75,23 @@ class Stelselgroep(ABC):
             WoningwaarderingResultatenWoningwaarderingGroep: Het resultaat van de woningwaardering voor de gehele groep.
         """
         pass  # pragma: no cover
+
+    def som_criterium_sleutels(
+        self,
+        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        criteriumsleutelpunten = defaultdict(float)
+        for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
+            if woningwaardering.criterium.bovenliggende_criterium:
+                criteriumsleutelpunten[
+                    woningwaardering.criterium.bovenliggende_criterium.id
+                ] += woningwaardering.punten
+
+        for id, punten in criteriumsleutelpunten.items():
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=id.replace("_", " ").capitalize(),
+                    id=id,
+                ),
+                punten=punten,
+            )
