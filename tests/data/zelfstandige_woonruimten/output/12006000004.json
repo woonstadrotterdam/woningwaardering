@@ -90,7 +90,7 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 0.0,
+      "punten": 11.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -145,6 +145,20 @@
             }
           },
           "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          },
+          "punten": 10.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten"
+          },
+          "punten": 1.0
         }
       ]
     },
@@ -355,12 +369,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 724.22,
-  "punten": 119.0,
+  "maximaleHuur": 795.45,
+  "punten": 130.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 724.22
+  "maximaleHuurInclusiefOpslag": 795.45
 }
