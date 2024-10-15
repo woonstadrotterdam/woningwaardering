@@ -82,10 +82,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         or ruimte.detail_soort.code
         in [  # deze ruimten zijn sowieso buitenruimten
             Ruimtedetailsoort.atrium_en_of_patio.code,
-            Ruimtedetailsoort.gemeenschappelijk_dakterras_gda.code,
+            Ruimtedetailsoort.gemeenschappelijk_dakterras.code,
             Ruimtedetailsoort.achtertuin.code,
             Ruimtedetailsoort.balkon.code,
-            Ruimtedetailsoort.gemeenschappelijk_dakterras_gak.code,
             Ruimtedetailsoort.zijtuin.code,
             Ruimtedetailsoort.voortuin.code,
             Ruimtedetailsoort.dakterras.code,

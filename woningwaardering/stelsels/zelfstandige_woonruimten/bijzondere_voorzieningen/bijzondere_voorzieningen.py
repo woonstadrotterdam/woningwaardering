@@ -16,12 +16,12 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Doelgroep,
+    Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.utils import (
     aantal_bouwkundige_elementen,
-    heeft_bouwkundig_element,
 )
 
 
@@ -114,11 +114,10 @@ class BijzondereVoorzieningen(Stelselgroep):
         # automatisch kan worden geopend vanuit de woning wordt gewaardeerd
         # met 0,25 punt.
         if any(
-            heeft_bouwkundig_element(
-                ruimte,
-                Bouwkundigelementdetailsoort.aanbelfunctie_met_video_en_audioverbinding,
-            )
-            for ruimte in eenheid.ruimten or []
+            installatie.code
+            == Voorzieningsoort.aanbelfunctie_met_video_en_audioverbinding.code
+            for ruimte in (eenheid.ruimten or [])
+            for installatie in (ruimte.installaties or [])
         ):
             logger.info(
                 f"Eenheid {eenheid.id} heeft een aanbelfunctie met video en audioverbinding en wordt met 0,25 punt gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"

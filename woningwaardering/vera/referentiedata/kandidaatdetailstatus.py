@@ -1,16 +1,14 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.kandidaatstatus import Kandidaatstatus
 
 
 class Kandidaatdetailstatus(Enum):
     aanbieding = Referentiedata(
         code="AAN",
         naam="Aanbieding",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aangeboden",
-        ),
+        parent=Kandidaatstatus.aangeboden.value,
     )
     """
     Kandidaat krijgt aanbieding.
@@ -19,10 +17,7 @@ class Kandidaatdetailstatus(Enum):
     bezichtiging = Referentiedata(
         code="BEZ",
         naam="Bezichtiging",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aangeboden",
-        ),
+        parent=Kandidaatstatus.aangeboden.value,
     )
     """
     Kandidaat mag bezichtigen.
@@ -31,10 +26,7 @@ class Kandidaatdetailstatus(Enum):
     documentcontrole = Referentiedata(
         code="DOC",
         naam="Documentcontrole",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aangeboden",
-        ),
+        parent=Kandidaatstatus.aangeboden.value,
     )
     """
     Kandidaat moet documenten laten controleren.
@@ -59,10 +51,7 @@ class Kandidaatdetailstatus(Enum):
     niet_gereageerd = Referentiedata(
         code="NRE",
         naam="Niet gereageerd",
-        parent=Referentiedata(
-            code="GEW",
-            naam="Geweigerd",
-        ),
+        parent=Kandidaatstatus.geweigerd.value,
     )
     """
     Kandidaat heeft te laat of niet gereageerd.
@@ -71,10 +60,7 @@ class Kandidaatdetailstatus(Enum):
     ongeschikt = Referentiedata(
         code="ONG",
         naam="Ongeschikt",
-        parent=Referentiedata(
-            code="AFG",
-            naam="Afgewezen",
-        ),
+        parent=Kandidaatstatus.afgewezen.value,
     )
     """
     Kandidaat niet geschikt voor omgeving.
@@ -83,10 +69,7 @@ class Kandidaatdetailstatus(Enum):
     gegevens_onjuist = Referentiedata(
         code="ONJ",
         naam="Gegevens onjuist",
-        parent=Referentiedata(
-            code="AFG",
-            naam="Afgewezen",
-        ),
+        parent=Kandidaatstatus.afgewezen.value,
     )
     """
     Kandidaat komt niet in aanmerking na controle gegevens.
@@ -95,10 +78,7 @@ class Kandidaatdetailstatus(Enum):
     overeenkomst_getekend = Referentiedata(
         code="OVE",
         naam="Overeenkomst getekend",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aangeboden",
-        ),
+        parent=Kandidaatstatus.aangeboden.value,
     )
     """
     Kandidaat heeft huur- of koopovereenkomst getekend.
@@ -115,10 +95,7 @@ class Kandidaatdetailstatus(Enum):
     peilen_belangstelling = Referentiedata(
         code="PEI",
         naam="Peilen belangstelling",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aangeboden",
-        ),
+        parent=Kandidaatstatus.aangeboden.value,
     )
     """
     Kandidaat wordt gevraagd of deze nog steeds belangstelling heeft.
@@ -127,10 +104,7 @@ class Kandidaatdetailstatus(Enum):
     weigering_aanbieding = Referentiedata(
         code="WEI",
         naam="Weigering aanbieding",
-        parent=Referentiedata(
-            code="GEW",
-            naam="Geweigerd",
-        ),
+        parent=Kandidaatstatus.geweigerd.value,
     )
     """
     Kandidaat weigert de aanbieding.

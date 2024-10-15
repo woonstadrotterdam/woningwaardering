@@ -1,19 +1,13 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.relatiesoort import Relatiesoort
 
 
-class Relatiedetailsoort(Enum):
-    huishouden = Referentiedata(
-        code="HUI",
-        naam="Huishouden",
-        parent=Relatiesoort.relatiegroep.value,
+class Personelefunctiesoort(Enum):
+    leidinggevende_functie = Referentiedata(
+        code="LEI",
+        naam="Leidinggevende functie",
     )
-    """
-    Een huishouden bestaat uit één of meer personen die op hetzelfde adres wonen en een
-    economisch-consumptieve eenheid vormen. (CORA)
-    """
 
     @property
     def code(self) -> str:
