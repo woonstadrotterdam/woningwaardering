@@ -225,9 +225,14 @@ class VerkoelingEnVerwarming(Stelselgroep):
         woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         # som van punten per criteriumsleutel
-        criteriumsleutelpunten = defaultdict(float)
+        criteriumsleutelpunten: dict[str, float] = defaultdict(float)
         for woningwaardering in woningwaarderingen or []:
-            if woningwaardering.criterium.bovenliggende_criterium:
+            if (
+                woningwaardering.criterium
+                and woningwaardering.criterium.bovenliggende_criterium
+                and woningwaardering.criterium.bovenliggende_criterium.id
+                and isinstance(woningwaardering.punten, float)
+            ):
                 criteriumsleutelpunten[
                     woningwaardering.criterium.bovenliggende_criterium.id
                 ] += woningwaardering.punten
