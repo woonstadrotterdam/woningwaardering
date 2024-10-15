@@ -1,16 +1,14 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.doelgroep import Doelgroep
 
 
 class Aanvullendedoelgroep(Enum):
     buitenlandse_studenten = Referentiedata(
         code="BSTU",
         naam="Buitenlandse studenten",
-        parent=Referentiedata(
-            code="STU",
-            naam="Studenten",
-        ),
+        parent=Doelgroep.studenten.value,
     )
     """
     Woonruimte is bestemd voor en/of huurder is een uit het buitenland afkomstige

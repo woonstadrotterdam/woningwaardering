@@ -32,6 +32,16 @@ class Eenheidinterieur(Enum):
     Plavuizen of tegels
     """
 
+    pvc_vloer = Referentiedata(
+        code="PVC",
+        naam="Pvc vloer",
+    )
+    """
+    Een PVC-vloer is een vloerbedekking gemaakt van polyvinylchloride (PVC), een
+    synthetisch materiaal dat bekend staat om zijn duurzaamheid, waterbestendigheid
+    en veelzijdigheid.
+    """
+
     vloerbedekking = Referentiedata(
         code="VLB",
         naam="Vloerbedekking",

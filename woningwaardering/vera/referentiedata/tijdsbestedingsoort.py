@@ -1,19 +1,23 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.relatiesoort import Relatiesoort
 
 
-class Relatiedetailsoort(Enum):
-    huishouden = Referentiedata(
-        code="HUI",
-        naam="Huishouden",
-        parent=Relatiesoort.relatiegroep.value,
+class Tijdsbestedingsoort(Enum):
+    declarabel = Referentiedata(
+        code="DEC",
+        naam="Declarabel",
     )
-    """
-    Een huishouden bestaat uit één of meer personen die op hetzelfde adres wonen en een
-    economisch-consumptieve eenheid vormen. (CORA)
-    """
+
+    niet_declarabel = Referentiedata(
+        code="NDE",
+        naam="Niet declarabel",
+    )
+
+    afwezig = Referentiedata(
+        code="AFW",
+        naam="Afwezig",
+    )
 
     @property
     def code(self) -> str:

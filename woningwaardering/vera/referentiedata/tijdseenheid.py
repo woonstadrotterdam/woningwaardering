@@ -1,18 +1,23 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.relatiesoort import Relatiesoort
 
 
-class Relatiedetailsoort(Enum):
-    huishouden = Referentiedata(
-        code="HUI",
-        naam="Huishouden",
-        parent=Relatiesoort.relatiegroep.value,
+class Tijdseenheid(Enum):
+    uren = Referentiedata(
+        code="UUR",
+        naam="Uren",
     )
     """
-    Een huishouden bestaat uit één of meer personen die op hetzelfde adres wonen en een
-    economisch-consumptieve eenheid vormen. (CORA)
+    Registratie van de duur in uren
+    """
+
+    minuten = Referentiedata(
+        code="MIN",
+        naam="Minuten",
+    )
+    """
+    Registratie van de duur in minuten
     """
 
     @property
