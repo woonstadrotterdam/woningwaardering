@@ -81,14 +81,14 @@
             "id": "verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken"
           },
-          "punten": 8.0
+          "punten": 4.0
         },
         {
           "criterium": {
             "id": "open_keuken",
             "naam": "Open keuken"
           },
-          "punten": 6.0
+          "punten": 3.0
         }
       ]
     }

@@ -171,7 +171,7 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 22.0,
+      "punten": 0.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -271,13 +271,6 @@
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
-          },
-          "punten": 22.0
         }
       ]
     },
@@ -485,7 +478,7 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 103.0,
+      "punten": 96.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -498,6 +491,12 @@
             "naam": "Onderdeel II"
           },
           "punten": 34.77
+        },
+        {
+          "criterium": {
+            "naam": "Maximering WOZ-punten tot 33% van totaal"
+          },
+          "punten": -6.64
         }
       ]
     },
@@ -531,12 +530,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 2031.57,
-  "punten": 321.0,
+  "maximaleHuur": 1843.94,
+  "punten": 292.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 2031.57
+  "maximaleHuurInclusiefOpslag": 1843.94
 }

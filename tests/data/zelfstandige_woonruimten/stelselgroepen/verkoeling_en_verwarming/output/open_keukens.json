@@ -11,7 +11,7 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 14.0,
+      "punten": 0.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -75,20 +75,6 @@
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
-          },
-          "punten": 8.0
-        },
-        {
-          "criterium": {
-            "id": "open_keuken",
-            "naam": "Open keuken"
-          },
-          "punten": 6.0
         }
       ]
     }

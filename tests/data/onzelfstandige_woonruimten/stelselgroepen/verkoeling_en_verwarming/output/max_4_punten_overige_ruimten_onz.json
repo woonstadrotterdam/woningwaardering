@@ -70,9 +70,9 @@
         {
           "criterium": {
             "id": "verwarmde_overige_en_verkeersruimten",
-            "naam": "Verwarmde overige- en verkeersruimten"
+            "naam": "Verwarmde overige en verkeersruimten"
           },
-          "punten": 4.0
+          "punten": 1.5
         }
       ]
     }

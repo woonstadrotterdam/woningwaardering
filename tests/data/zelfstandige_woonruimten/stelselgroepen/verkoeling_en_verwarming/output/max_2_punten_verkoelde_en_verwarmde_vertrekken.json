@@ -11,7 +11,7 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 8.0,
+      "punten": 0.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -48,13 +48,6 @@
             }
           },
           "punten": -1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoelde_en_verwarmde_vertrekken",
-            "naam": "Verkoelde en verwarmde vertrekken"
-          },
-          "punten": 8.0
         }
       ]
     }
