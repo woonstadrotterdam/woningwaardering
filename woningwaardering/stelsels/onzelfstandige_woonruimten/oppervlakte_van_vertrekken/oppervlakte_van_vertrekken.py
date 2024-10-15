@@ -65,6 +65,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
                     ruimte, self.stelselgroep
                 )
             )
+            # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for woningwaardering in woningwaarderingen:
                 if woningwaardering.criterium is not None:
                     if (
@@ -91,6 +92,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
+        # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal, oppervlakte in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
