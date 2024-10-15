@@ -85,7 +85,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             Ruimtedetailsoort.gemeenschappelijk_dakterras.code,
             Ruimtedetailsoort.achtertuin.code,
             Ruimtedetailsoort.balkon.code,
-            Ruimtedetailsoort.gemeenschappelijk_dakterras.code,
             Ruimtedetailsoort.zijtuin.code,
             Ruimtedetailsoort.voortuin.code,
             Ruimtedetailsoort.dakterras.code,
