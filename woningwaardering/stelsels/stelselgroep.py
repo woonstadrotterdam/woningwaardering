@@ -76,7 +76,7 @@ class Stelselgroep(ABC):
         """
         pass  # pragma: no cover
 
-    def som_criterium_sleutels(
+    def criteriumsleutel_resultaten(
         self,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:

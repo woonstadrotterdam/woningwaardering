@@ -87,7 +87,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             VerkoelingEnVerwarming.maximering(woningwaardering_groep.woningwaarderingen)
         )
         woningwaardering_groep.woningwaarderingen.extend(
-            self.som_criterium_sleutels(woningwaardering_groep)
+            self.criteriumsleutel_resultaten(woningwaardering_groep)
         )
 
         punten = utils.rond_af_op_kwart(
