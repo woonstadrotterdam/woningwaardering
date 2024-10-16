@@ -105,8 +105,8 @@ class OppervlakteVanVertrekken(Stelselgroep):
                 else f"{self.stelselgroep.name}_prive",
             )
             woningwaardering.punten = float(
-                utils.rond_af(
-                    utils.rond_af(oppervlakte, decimalen=0) / aantal, decimalen=2
+                utils.rond_af_op_kwart(
+                    utils.rond_af(oppervlakte, decimalen=0) / aantal,
                 )
             )
             woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=0))
