@@ -113,19 +113,10 @@ class OppervlakteVanVertrekken(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         punten = float(
-            utils.rond_af_op_kwart(
-                float(
-                    utils.rond_af(
-                        sum(
-                            Decimal(str(woningwaardering.punten))
-                            for woningwaardering in woningwaardering_groep.woningwaarderingen
-                            or []
-                            if woningwaardering.punten is not None
-                        ),
-                        decimalen=0,
-                    )
-                    * Decimal("1")
-                )
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
             )
         )
 
