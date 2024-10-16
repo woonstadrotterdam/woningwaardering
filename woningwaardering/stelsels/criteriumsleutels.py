@@ -6,7 +6,7 @@ from woningwaardering.vera.bvg.generated import (
 
 
 class CriteriumSleutels(Enum):
-    """The enum name must be equal to the id of the criterion."""
+    """De naam van de enum moet gelijk zijn aan het id van de criterium."""
 
     verwarmde_overige_en_verkeersruimten = (
         WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -28,8 +28,3 @@ class CriteriumSleutels(Enum):
         naam="Verwarmde vertrekken",
         id="verwarmde_vertrekken",
     )
-
-
-# Example usage:
-# x = "verwarmde_overige_en_verkeersruimten"
-# enum_value = CriteriumSleutelsVerkoelingEnVerwarming[x]
