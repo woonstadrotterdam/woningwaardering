@@ -1,6 +1,5 @@
 from datetime import date
 from decimal import Decimal
-from typing import Literal
 
 from loguru import logger
 
@@ -14,8 +13,6 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -56,15 +53,6 @@ class VerkoelingEnVerwarming(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = []
         woningwaarderingen_voor_gedeeld = []
 
-        totalen: dict[Literal["overige_ruimten", "verkoeld_en_verwarmd"], Decimal] = {
-            "overige_ruimten": Decimal(
-                "0"
-            ),  # max 4 punten per eenheid voor verwarmde overige- en verkeersruimten.
-            "verkoeld_en_verwarmd": Decimal(
-                "0"
-            ),  # max 2 punten per eenheid voor vertrekken die en verwarmd en verkoeld zijn. 1 punt per vertrek.
-        }
-
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
@@ -73,13 +61,25 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaarderingen = ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
-                ruimte,
-                self.stelselgroep,
-                totalen,
+            woningwaarderingen = list(
+                ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
+                    ruimte,
+                    self.stelselgroep,
+                )
             )
 
             woningwaarderingen_voor_gedeeld.append((ruimte, woningwaarderingen))
+
+        # maximering is op basis van de punten voordat ze gedeeld worden door het aantal onzelfstandige woonruimten
+        maximering = list(
+            ZelfstandigeWoonruimtenVerkoelingEnVerwarming.maximering(
+                [
+                    woningwaardering
+                    for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld
+                    for woningwaardering in woningwaarderingen
+                ]
+            )
+        )
 
         for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld:
             woningwaardering_groep.woningwaarderingen.extend(
@@ -88,17 +88,19 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 )
             )
 
-        # maximering is op basis van de punten voordat ze gedeeld worden door het aantal onzelfstandige wonruimten
-        # vandaar het gebruik van totalen
-        woningwaardering_groep.woningwaarderingen.extend(
-            ZelfstandigeWoonruimtenVerkoelingEnVerwarming.maximering(totalen)
-        )
+        # maximering hier pas toevoegen voor meer intuitieve volgorde
+        woningwaardering_groep.woningwaarderingen.extend(maximering)
 
+        woningwaardering_groep.woningwaarderingen.extend(
+            self.criteriumsleutel_resultaten(woningwaardering_groep)
+        )
         punten = utils.rond_af_op_kwart(
             sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
                 if woningwaardering.punten is not None
+                and woningwaardering.criterium
+                and woningwaardering.criterium.bovenliggende_criterium is None
             ),
         )
 
@@ -115,7 +117,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = VerkoelingEnVerwarming()
     with open(
-        "tests/data/onzelfstandige_woonruimten/stelselgroepen/verkoeling_en_verwarming/input/max_2_punten_verkoelde_en_verwarmde_vertrekken.json",
+        "tests/data/onzelfstandige_woonruimten/stelselgroepen/verkoeling_en_verwarming/input/max_4_punten_overige_ruimten_onz.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())

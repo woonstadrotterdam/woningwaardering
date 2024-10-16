@@ -15,39 +15,64 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Berging (verwarmde overige/verkeers-ruimte)"
+            "naam": "Berging",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Berging2 (verwarmde overige/verkeers-ruimte)"
+            "naam": "Berging2",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Berging3 (verwarmde overige/verkeers-ruimte)"
+            "naam": "Berging3",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Berging4 (verwarmde overige/verkeers-ruimte)"
+            "naam": "Berging4",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Berging5 (verwarmde overige/verkeers-ruimte)"
+            "naam": "Berging5",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Maximaal 4 punten voor verwarmde overige- en verkeersruimten"
+            "naam": "Maximaal 4 punten",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
           },
           "punten": -1.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige- en verkeersruimten"
+          },
+          "punten": 4.0
         }
       ]
     }

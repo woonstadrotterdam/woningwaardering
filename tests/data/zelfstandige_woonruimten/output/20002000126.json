@@ -85,21 +85,37 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Keuken (verwarmd vertrek)"
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer (verwarmd vertrek)"
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Badruimte (verwarmd vertrek)"
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          },
+          "punten": 6.0
         }
       ]
     },

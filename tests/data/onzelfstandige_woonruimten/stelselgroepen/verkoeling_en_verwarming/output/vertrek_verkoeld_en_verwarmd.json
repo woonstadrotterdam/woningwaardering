@@ -3,8 +3,8 @@
     {
       "criteriumGroep": {
         "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
         },
         "stelselgroep": {
           "code": "VKV",
@@ -15,7 +15,17 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Slaapkamer (verkoeld en verwarmd vertrek)"
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "verkoelde_en_verwarmde_vertrekken"
+            }
+          },
+          "punten": 3.0
+        },
+        {
+          "criterium": {
+            "id": "verkoelde_en_verwarmde_vertrekken",
+            "naam": "Verkoelde en verwarmde vertrekken"
           },
           "punten": 3.0
         }

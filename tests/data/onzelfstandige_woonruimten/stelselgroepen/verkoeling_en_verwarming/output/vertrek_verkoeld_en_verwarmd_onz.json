@@ -15,7 +15,17 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Slaapkamer (verkoeld en verwarmd vertrek) (gedeeld met 2)"
+            "naam": "Slaapkamer (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verkoelde_en_verwarmde_vertrekken"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "id": "verkoelde_en_verwarmde_vertrekken",
+            "naam": "Verkoelde en verwarmde vertrekken"
           },
           "punten": 1.5
         }
