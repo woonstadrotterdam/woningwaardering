@@ -11,7 +11,7 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 4.0,
+      "punten": 3.75,
       "woningwaarderingen": [
         {
           "aantal": 10.0,
@@ -61,7 +61,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 1.67
+          "punten": 1.75
         }
       ]
     }

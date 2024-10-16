@@ -7,6 +7,9 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.criteriumsleutels import (
+    CriteriumSleutels,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
@@ -162,7 +165,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=ruimte.naam,
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id="verwarmde_overige_en_verkeersruimten",
+                        id=CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id,
                     ),
                 ),
                 punten=punten,
@@ -180,7 +183,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=ruimte.naam,
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id="verkoelde_en_verwarmde_vertrekken",
+                            id=CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id,
                         ),
                     ),
                     punten=punten,
@@ -193,7 +196,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=ruimte.naam,
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id="verwarmde_vertrekken",
+                            id=CriteriumSleutels.verwarmde_vertrekken.value.id,
                         ),
                     ),
                     punten=punten,
@@ -214,7 +217,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=ruimte.naam,
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id="open_keuken",
+                        id=CriteriumSleutels.open_keuken.value.id,
                     ),
                 ),
                 punten=punten,
@@ -225,7 +228,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         # som van punten per criteriumsleutel
-        criteriumsleutelpunten: dict[str, float] = defaultdict(float)
+        criteriumsleutelpunten: dict[str | None, float] = defaultdict(float)
         for woningwaardering in woningwaarderingen or []:
             if (
                 woningwaardering.criterium
@@ -239,21 +242,25 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
         max_punten_overige_ruimten = 4
         if (
-            criteriumsleutelpunten.get("verwarmde_overige_en_verkeersruimten", 0)
+            criteriumsleutelpunten.get(
+                CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id,
+                0,
+            )
             > max_punten_overige_ruimten
         ):
             aftrek = max_punten_overige_ruimten - criteriumsleutelpunten.get(
-                "verwarmde_overige_en_verkeersruimten", 0
+                CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id,
+                0,
             )
 
             logger.info(
-                f'Maximaal aantal punten voor verwarmde overige- en verkeersruimten overschreden ({criteriumsleutelpunten["verwarmde_overige_en_verkeersruimten"]} > {max_punten_overige_ruimten}). Een aftrek van {aftrek} punt(en) wordt toegepast.'
+                f"Maximaal aantal punten voor verwarmde overige- en verkeersruimten overschreden ({criteriumsleutelpunten[CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id]} > {max_punten_overige_ruimten}). Een aftrek van {aftrek} punt(en) wordt toegepast."
             )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Maximaal 4 punten",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id="verwarmde_overige_en_verkeersruimten",
+                        id=CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id,
                     ),
                 ),
                 punten=aftrek,
@@ -261,7 +268,10 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
         max_punten_verkoeld_en_verwarmd_zonder_aftrek = 6  # 6 want maximaal 2 extra punten per verkoeld en verwarmd vertrek, en 3 punten per verkoeld en verwarmd vertrek
         if (
-            criteriumsleutelpunten.get("verkoelde_en_verwarmde_vertrekken", 0)
+            criteriumsleutelpunten.get(
+                CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id,
+                0,
+            )
             > max_punten_verkoeld_en_verwarmd_zonder_aftrek
         ):
             # maximaal 2 extra punten voor verkoelde en verwarmde vertrekken.
@@ -269,17 +279,20 @@ class VerkoelingEnVerwarming(Stelselgroep):
             # aantal extra punten meer dan 2 = (6 - aantal punten voor verkoelde en verwarmde vertrekken) / 3
             aftrek = (
                 max_punten_verkoeld_en_verwarmd_zonder_aftrek
-                - criteriumsleutelpunten.get("verkoelde_en_verwarmde_vertrekken", 0)
+                - criteriumsleutelpunten.get(
+                    CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id,
+                    0,
+                )
             ) / 3
 
             logger.info(
-                f'Maximaal aantal extra punten voor verwarmde en verkoelde vertrekken overschreden ({criteriumsleutelpunten["verkoelde_en_verwarmde_vertrekken"]} > {max_punten_verkoeld_en_verwarmd_zonder_aftrek}). Een aftrek van {aftrek} punt(en) wordt toegepast.'
+                f"Maximaal aantal extra punten voor verwarmde en verkoelde vertrekken overschreden ({criteriumsleutelpunten[CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id]} > {max_punten_verkoeld_en_verwarmd_zonder_aftrek}). Een aftrek van {aftrek} punt(en) wordt toegepast."
             )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Maximaal 2 extra punten",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id="verkoelde_en_verwarmde_vertrekken",
+                        id=CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id,
                     ),
                 ),
                 punten=aftrek,

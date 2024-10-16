@@ -3,6 +3,7 @@ from collections import defaultdict
 from datetime import date
 from typing import Iterator
 
+from woningwaardering.stelsels.criteriumsleutels import CriteriumSleutels
 from woningwaardering.stelsels.utils import is_geldig
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -94,9 +95,6 @@ class Stelselgroep(ABC):
 
         for id, punten in criteriumsleutelpunten.items():
             yield WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=id.replace("_", " ").capitalize(),
-                    id=id,
-                ),
+                criterium=CriteriumSleutels[id].value,
                 punten=punten,
             )
