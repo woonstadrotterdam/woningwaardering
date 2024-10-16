@@ -94,45 +94,80 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Entree (verwarmde overige/verkeers-ruimte)"
+            "naam": "Entree",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer 1 (verwarmd vertrek)"
+            "naam": "Slaapkamer 1",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Badruimte (verwarmd vertrek)"
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Hal (verwarmde overige/verkeers-ruimte)"
+            "naam": "Hal",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "naam": "Woonkamer (verwarmd vertrek)"
+            "naam": "Woonkamer",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer 2 (verwarmd vertrek)"
+            "naam": "Slaapkamer 2",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Keuken (verwarmd vertrek)"
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          },
+          "punten": 10.0
         }
       ]
     },

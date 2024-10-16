@@ -1,0 +1,80 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 1.5,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Berging (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Berging2 (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Berging3 (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Berging4 (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Berging5 (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 4 punten",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": -1.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten"
+          },
+          "punten": 1.5
+        }
+      ]
+    }
+  ]
+}

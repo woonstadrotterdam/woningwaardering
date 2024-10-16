@@ -16,7 +16,34 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "naam": "Slaapkamer (gedeeld met 5)",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken_gedeeld_met_5_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "naam": "Woonkamer",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken_gedeeld_met_6_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken_gedeeld_met_5_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 5)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -27,7 +54,8 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "naam": "Woonkamer (gedeeld met 6)",
+            "id": "oppervlakte_van_vertrekken_gedeeld_met_6_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 6)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"

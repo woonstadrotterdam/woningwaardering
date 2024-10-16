@@ -1,16 +1,14 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.publicatiemodel import Publicatiemodel
 
 
 class Publicatiedetailmodel(Enum):
     leefstijl = Referentiedata(
         code="LEE",
         naam="Leefstijl",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel.value,
     )
     """
     Eenheden in kwetsbare buurten waarbij leefstijl een belangrijke factor speelt.
@@ -19,10 +17,7 @@ class Publicatiedetailmodel(Enum):
     loting = Referentiedata(
         code="LOT",
         naam="Loting",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel.value,
     )
     """
     Binnen het aanbodmodel wordt geloot nadat eerst een selectie heeft plaatsgevonden.
@@ -31,10 +26,7 @@ class Publicatiedetailmodel(Enum):
     omklapcontract = Referentiedata(
         code="OMK",
         naam="Omklapcontract",
-        parent=Referentiedata(
-            code="DIS",
-            naam="Distributiemodel",
-        ),
+        parent=Publicatiemodel.distributiemodel.value,
     )
     """
     Ccontract dat de eerste periode, bijv. een jaar, op naam van een zorgaanbieder of
@@ -46,10 +38,7 @@ class Publicatiedetailmodel(Enum):
     snelzoek = Referentiedata(
         code="SNE",
         naam="Snelzoek",
-        parent=Referentiedata(
-            code="LOT",
-            naam="Lotingmodel",
-        ),
+        parent=Publicatiemodel.lotingmodel.value,
     )
     """
     Eenheden voor huishoudens die snel een woning nodig hebben en daar geen eisen aan

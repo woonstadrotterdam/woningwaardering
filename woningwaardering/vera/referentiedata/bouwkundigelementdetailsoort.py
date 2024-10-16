@@ -1,16 +1,16 @@
 from enum import Enum
 
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.bouwkundigelementsoort import (
+    Bouwkundigelementsoort,
+)
 
 
 class Bouwkundigelementdetailsoort(Enum):
     aanrecht = Referentiedata(
         code="AAN",
         naam="Aanrecht",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Werkoppervlak in keukens, uitgerust met spoelbak en ruimte voor het bereiden van
@@ -20,10 +20,7 @@ class Bouwkundigelementdetailsoort(Enum):
     afdekker = Referentiedata(
         code="AFD",
         naam="Afdekker",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Beschermend element dat het bovenste deel van een constructie bedekt tegen
@@ -33,10 +30,7 @@ class Bouwkundigelementdetailsoort(Enum):
     armatuur = Referentiedata(
         code="ARM",
         naam="Armatuur",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Compleet toestel inclusief behuizing, lamp en fittingen voor lichtverspreiding.
@@ -46,10 +40,7 @@ class Bouwkundigelementdetailsoort(Enum):
     bad = Referentiedata(
         code="BAD",
         naam="Bad",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Waterhoudend sanitair gebruiksvoorwerp voor persoonlijke hygiëne. Relatie met IFC
@@ -59,10 +50,7 @@ class Bouwkundigelementdetailsoort(Enum):
     balk = Referentiedata(
         code="BLK",
         naam="Balk",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Horizontaal steunelement in constructies, draagt vloer-, daklasten. Relatie met IFC
@@ -72,10 +60,7 @@ class Bouwkundigelementdetailsoort(Enum):
     balkon = Referentiedata(
         code="BKO",
         naam="Balkon",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Uitkragend platform aan buitenzijde gebouw, toegankelijk via deur. Relatie met IFC
@@ -85,10 +70,7 @@ class Bouwkundigelementdetailsoort(Enum):
     balustrade = Referentiedata(
         code="BLU",
         naam="Balustrade",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Rij van balusters (kleine pilaren), dient als afscheiding of reling. Relatie met IFC
@@ -98,10 +80,7 @@ class Bouwkundigelementdetailsoort(Enum):
     beglazing = Referentiedata(
         code="BEG",
         naam="Beglazing",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Glaswerk in kozijnen van ramen en deuren voor lichtinval en isolatie. Relatie met
@@ -111,10 +90,7 @@ class Bouwkundigelementdetailsoort(Enum):
     boeiboord = Referentiedata(
         code="BOE",
         naam="Boeiboord",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Afwerkingsrand aan de dakrand voor bescherming en esthetiek. Relatie met IFC
@@ -124,10 +100,7 @@ class Bouwkundigelementdetailsoort(Enum):
     boiler = Referentiedata(
         code="BOI",
         naam="Boiler",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Apparaat voor opwarming en opslag van gebruikswater. Relatie met IFC codering
@@ -137,10 +110,7 @@ class Bouwkundigelementdetailsoort(Enum):
     borstwering = Referentiedata(
         code="BOR",
         naam="Borstwering",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Lage muur aan de rand van een balkon, dak of brug. Relatie met IFC codering
@@ -150,10 +120,7 @@ class Bouwkundigelementdetailsoort(Enum):
     brandblusser = Referentiedata(
         code="BRA",
         naam="Brandblusser",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Draagbaar toestel voor het blussen van beginnende branden. Relatie met IFC codering
@@ -163,10 +130,7 @@ class Bouwkundigelementdetailsoort(Enum):
     brandmeldinstallatie = Referentiedata(
         code="BME",
         naam="Brandmeldinstallatie",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Systeem voor detectie en alarmering van brand in gebouwen. Relatie met IFC codering
@@ -176,10 +140,7 @@ class Bouwkundigelementdetailsoort(Enum):
     closetcombinatie = Referentiedata(
         code="CLO",
         naam="Closetcombinatie",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Complete toiletopstelling inclusief pot, stortbak en soms bidet. Relatie met IFC
@@ -189,10 +150,7 @@ class Bouwkundigelementdetailsoort(Enum):
     console = Referentiedata(
         code="CON",
         naam="Console",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Uitstekend steunelement aan muur voor dragende functies. Relatie met IFC codering
@@ -202,10 +160,7 @@ class Bouwkundigelementdetailsoort(Enum):
     dak = Referentiedata(
         code="DAK",
         naam="Dak",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Bovenste afdekking van een gebouw, beschermt tegen weersinvloeden. Relatie met IFC
@@ -215,10 +170,7 @@ class Bouwkundigelementdetailsoort(Enum):
     dakkapel = Referentiedata(
         code="DKA",
         naam="Dakkapel",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Uitbouw op dakvlak, zorgt voor extra ruimte en licht. Relatie met IFC codering
@@ -228,10 +180,7 @@ class Bouwkundigelementdetailsoort(Enum):
     dakraam = Referentiedata(
         code="DRA",
         naam="Dakraam",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Raam geplaatst in dak, voor licht en ventilatie. Relatie met IFC codering
@@ -241,10 +190,7 @@ class Bouwkundigelementdetailsoort(Enum):
     dakrand = Referentiedata(
         code="DRN",
         naam="Dakrand",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Afwerking aan de rand van het dak voor bescherming en esthetiek. Relatie met IFC
@@ -254,10 +200,7 @@ class Bouwkundigelementdetailsoort(Enum):
     deur = Referentiedata(
         code="DEU",
         naam="Deur",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Beweegbaar element dat toegang biedt of afsluit. Relatie met IFC codering
@@ -267,10 +210,7 @@ class Bouwkundigelementdetailsoort(Enum):
     deurdranger = Referentiedata(
         code="DDR",
         naam="Deurdranger",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Mechanisme dat deuren automatisch sluit na opening. Relatie met IFC codering
@@ -280,10 +220,7 @@ class Bouwkundigelementdetailsoort(Enum):
     dorpel = Referentiedata(
         code="DOR",
         naam="Dorpel",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Onderste deel van een deur- of raamkozijn. houdt vocht buiten. Relatie met IFC
@@ -293,10 +230,7 @@ class Bouwkundigelementdetailsoort(Enum):
     douche = Referentiedata(
         code="DOU",
         naam="Douche",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Installatie voor lichaamsreiniging door middel van waterstralen. Relatie met IFC
@@ -306,10 +240,7 @@ class Bouwkundigelementdetailsoort(Enum):
     expansievat = Referentiedata(
         code="EXP",
         naam="Expansievat",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Veiligheidsonderdeel in verwarmingssystemen, vangt drukverschillen op. Relatie met
@@ -319,10 +250,7 @@ class Bouwkundigelementdetailsoort(Enum):
     fontein = Referentiedata(
         code="FON",
         naam="Fontein",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Kleine wateruitlaat, vaak decoratief in publieke of privé-ruimten. Relatie met IFC
@@ -332,10 +260,7 @@ class Bouwkundigelementdetailsoort(Enum):
     galerij = Referentiedata(
         code="GAL",
         naam="Galerij",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Overdekte, open gang langs buitenzijde van een gebouw. Relatie met IFC codering
@@ -345,10 +270,7 @@ class Bouwkundigelementdetailsoort(Enum):
     garagedeur = Referentiedata(
         code="GAR",
         naam="Garagedeur",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Grote deur specifiek ontworpen voor toegang tot een garage. Relatie met IFC codering
@@ -358,10 +280,7 @@ class Bouwkundigelementdetailsoort(Enum):
     goot = Referentiedata(
         code="GOO",
         naam="Goot",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Kanaal voor afvoer van hemelwater van daken. Relatie met IFC codering
@@ -371,10 +290,7 @@ class Bouwkundigelementdetailsoort(Enum):
     handmelder = Referentiedata(
         code="HAN",
         naam="Handmelder",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Handbediend alarmtoestel voor het activeren van brandalarm. Relatie met IFC codering
@@ -384,10 +300,7 @@ class Bouwkundigelementdetailsoort(Enum):
     hek = Referentiedata(
         code="HEK",
         naam="Hek",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Omheining of afscheiding, vaak van metaal of hout. Relatie met IFC codering
@@ -397,10 +310,7 @@ class Bouwkundigelementdetailsoort(Enum):
     hellingbaan = Referentiedata(
         code="HEL",
         naam="Hellingbaan",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Hellend vlak voor toegang met voertuigen of rolstoelen. Relatie met IFC codering
@@ -410,10 +320,7 @@ class Bouwkundigelementdetailsoort(Enum):
     hemelwaterafvoer = Referentiedata(
         code="HEM",
         naam="Hemelwaterafvoer",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Systeem voor afvoer van regenwater van daken naar riolering. Relatie met IFC
@@ -423,10 +330,7 @@ class Bouwkundigelementdetailsoort(Enum):
     isolatie = Referentiedata(
         code="ISO",
         naam="Isolatie",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Materiaal gebruikt om warmte, geluid of elektriciteit te beperken. Relatie met IFC
@@ -436,10 +340,7 @@ class Bouwkundigelementdetailsoort(Enum):
     kanteldeur = Referentiedata(
         code="KAN",
         naam="Kanteldeur",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Deur die kantelt om te openen, vaak gebruikt bij garages. Relatie met IFC codering
@@ -449,10 +350,7 @@ class Bouwkundigelementdetailsoort(Enum):
     kast = Referentiedata(
         code="KAS",
         naam="Kast",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Opbergmeubel met deuren of laden. Relatie met IFC codering (IfcFurniture.SHELF)
@@ -461,10 +359,7 @@ class Bouwkundigelementdetailsoort(Enum):
     ketel = Referentiedata(
         code="KET",
         naam="Ketel",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Apparaat voor verwarming van water of stoomproductie. Relatie met IFC codering
@@ -474,10 +369,7 @@ class Bouwkundigelementdetailsoort(Enum):
     kolom = Referentiedata(
         code="KOL",
         naam="Kolom",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Verticaal steunelement in constructies. Relatie met IFC codering (IfcColumn.COLUMN)
@@ -486,10 +378,7 @@ class Bouwkundigelementdetailsoort(Enum):
     kozijn = Referentiedata(
         code="KOZ",
         naam="Kozijn",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Omlijsting waarin deur of raam bevestigd is. Relatie met IFC codering (IfcWindow)
@@ -498,10 +387,7 @@ class Bouwkundigelementdetailsoort(Enum):
     laadpaal = Referentiedata(
         code="LAA",
         naam="Laadpaal",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Een laadpaal is een elektrisch oplaadstation voor voertuigen, zoals elektrische
@@ -513,10 +399,7 @@ class Bouwkundigelementdetailsoort(Enum):
     leuning = Referentiedata(
         code="LEU",
         naam="Leuning",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Steun- of geleidingsreling, vooral bij trappen. Relatie met IFC codering
@@ -526,10 +409,7 @@ class Bouwkundigelementdetailsoort(Enum):
     lichtkoepel = Referentiedata(
         code="LIC",
         naam="Lichtkoepel",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Doorzichtig element op daken voor daglichttoetreding. Relatie met IFC codering
@@ -539,10 +419,7 @@ class Bouwkundigelementdetailsoort(Enum):
     lichtstraat = Referentiedata(
         code="LST",
         naam="Lichtstraat",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Serie aaneengesloten ramen of koepels op het dak voor lichtinval. Relatie met IFC
@@ -552,10 +429,7 @@ class Bouwkundigelementdetailsoort(Enum):
     lift = Referentiedata(
         code="LIF",
         naam="Lift",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Verticaal transportsysteem voor personen of goederen. Relatie met IFC codering
@@ -565,10 +439,7 @@ class Bouwkundigelementdetailsoort(Enum):
     luchtbehandelingskast = Referentiedata(
         code="LUC",
         naam="Luchtbehandelingskast",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Apparaat voor conditioneren van lucht in gebouwen. Relatie met IFC codering
@@ -578,10 +449,7 @@ class Bouwkundigelementdetailsoort(Enum):
     luifel = Referentiedata(
         code="LFE",
         naam="Luifel",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Overkapping boven deur of raam tegen weersinvloeden. Relatie met IFC codering
@@ -591,10 +459,7 @@ class Bouwkundigelementdetailsoort(Enum):
     luik = Referentiedata(
         code="LUI",
         naam="Luik",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Afsluitbaar paneel in deur, raam of vloer. Relatie met IFC codering
@@ -604,10 +469,7 @@ class Bouwkundigelementdetailsoort(Enum):
     meldsirene = Referentiedata(
         code="MEL",
         naam="Meldsirene",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Geluidsapparaat voor waarschuwing bij gevaar, zoals brand. Relatie met IFC codering
@@ -617,10 +479,7 @@ class Bouwkundigelementdetailsoort(Enum):
     nvo = Referentiedata(
         code="NVO",
         naam="NVO",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Niet van toepassing, specificeer term. Relatie met IFC codering (IfcSpace.SPACE)
@@ -629,10 +488,7 @@ class Bouwkundigelementdetailsoort(Enum):
     paneel = Referentiedata(
         code="PAN",
         naam="Paneel",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Vlak element gebruikt in wanden, deuren of meubels. Relatie met IFC codering
@@ -642,10 +498,7 @@ class Bouwkundigelementdetailsoort(Enum):
     plafond = Referentiedata(
         code="PLA",
         naam="Plafond",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Binnenafwerking van bovenzijde ruimte. Relatie met IFC codering
@@ -655,10 +508,7 @@ class Bouwkundigelementdetailsoort(Enum):
     postkast = Referentiedata(
         code="POS",
         naam="Postkast",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Kast voor ontvangst van poststukken. Relatie met IFC codering (IfcFurniture)
@@ -667,10 +517,7 @@ class Bouwkundigelementdetailsoort(Enum):
     privacyscherm = Referentiedata(
         code="PRI",
         naam="Privacyscherm",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Afscheiding bedoeld voor het creëren van privacy. Relatie met IFC codering
@@ -680,10 +527,7 @@ class Bouwkundigelementdetailsoort(Enum):
     raam = Referentiedata(
         code="RAA",
         naam="Raam",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Kozijn met glas voor licht en ventilatie. Relatie met IFC codering
@@ -693,10 +537,7 @@ class Bouwkundigelementdetailsoort(Enum):
     radiator = Referentiedata(
         code="RAD",
         naam="Radiator",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Warmtewisselaar voor verwarming van ruimten. Relatie met IFC codering
@@ -706,10 +547,7 @@ class Bouwkundigelementdetailsoort(Enum):
     rookmelder = Referentiedata(
         code="ROO",
         naam="Rookmelder",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Detectieapparaat voor vroegtijdige waarschuwing bij rookontwikkeling. Relatie met
@@ -719,10 +557,7 @@ class Bouwkundigelementdetailsoort(Enum):
     rooster = Referentiedata(
         code="RST",
         naam="Rooster",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Geperforeerd paneel voor ventilatie of afdekking. Relatie met IFC codering
@@ -732,10 +567,7 @@ class Bouwkundigelementdetailsoort(Enum):
     schoorsteen = Referentiedata(
         code="SST",
         naam="Schoorsteen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Constructie voor afvoer van rook en verbrandingsgassen. Relatie met IFC codering
@@ -745,10 +577,7 @@ class Bouwkundigelementdetailsoort(Enum):
     schuifdeur = Referentiedata(
         code="SDE",
         naam="Schuifdeur",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Deur die open en dicht gaat door te schuiven. Relatie met IFC codering
@@ -758,10 +587,7 @@ class Bouwkundigelementdetailsoort(Enum):
     schuifpui = Referentiedata(
         code="SPU",
         naam="Schuifpui",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Grote schuifdeur, vaak glas, verbindt binnen met buiten. Relatie met IFC codering
@@ -771,10 +597,7 @@ class Bouwkundigelementdetailsoort(Enum):
     trap = Referentiedata(
         code="TRA",
         naam="Trap",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Constructie van treden voor verticale verplaatsing. Relatie met IFC codering
@@ -784,10 +607,7 @@ class Bouwkundigelementdetailsoort(Enum):
     traplift = Referentiedata(
         code="TLI",
         naam="Traplift",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Hulpmiddel voor het overbruggen van trappen door mindervaliden. Relatie met IFC
@@ -797,10 +617,7 @@ class Bouwkundigelementdetailsoort(Enum):
     urinoir = Referentiedata(
         code="URI",
         naam="Urinoir",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Sanitair voor staand urineren door mannen. Relatie met IFC codering
@@ -810,10 +627,7 @@ class Bouwkundigelementdetailsoort(Enum):
     ventilatiekap = Referentiedata(
         code="VEN",
         naam="Ventilatiekap",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Afzuigkap boven kookplaat, voert kookdampen af. Relatie met IFC codering
@@ -823,10 +637,7 @@ class Bouwkundigelementdetailsoort(Enum):
     ventilatierooster = Referentiedata(
         code="VRO",
         naam="Ventilatierooster",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Opening in muur of raam voor luchttoe- of afvoer. Relatie met IFC codering
@@ -836,10 +647,7 @@ class Bouwkundigelementdetailsoort(Enum):
     vliesgevel = Referentiedata(
         code="VLI",
         naam="Vliesgevel",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Lichtgewicht gevelsysteem, veelal van glas. Relatie met IFC codering
@@ -849,10 +657,7 @@ class Bouwkundigelementdetailsoort(Enum):
     vlizotrap = Referentiedata(
         code="VTR",
         naam="Vlizotrap",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Opvouwbare trap naar zolder of vliering. Relatie met IFC codering (IfcStair)
@@ -861,10 +666,7 @@ class Bouwkundigelementdetailsoort(Enum):
     vloer = Referentiedata(
         code="VLO",
         naam="Vloer",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Horizontaal steunelement, scheidt verschillende verdiepingen. Relatie met IFC
@@ -874,10 +676,7 @@ class Bouwkundigelementdetailsoort(Enum):
     wand = Referentiedata(
         code="WAN",
         naam="Wand",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Verticaal scheidend element in bouwkundige constructies. Relatie met IFC codering
@@ -887,10 +686,7 @@ class Bouwkundigelementdetailsoort(Enum):
     warmtepomp = Referentiedata(
         code="WAR",
         naam="Warmtepomp",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Apparaat dat warmte verplaatst voor verwarming of koeling. Relatie met IFC codering
@@ -900,10 +696,7 @@ class Bouwkundigelementdetailsoort(Enum):
     warmteterugwinning_apparaat = Referentiedata(
         code="WTE",
         naam="Warmteterugwinning apparaat",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Systeem dat warmte uit afvoerlucht hergebruikt voor energie-efficiëntie. Relatie met
@@ -913,10 +706,7 @@ class Bouwkundigelementdetailsoort(Enum):
     wastafel = Referentiedata(
         code="WAS",
         naam="Wastafel",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Sanitair voor handen wassen en persoonlijke verzorging. Relatie met IFC codering
@@ -926,10 +716,7 @@ class Bouwkundigelementdetailsoort(Enum):
     zonnepaneel = Referentiedata(
         code="ZPA",
         naam="Zonnepaneel",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Apparaat dat zonlicht omzet in elektriciteit. Relatie met IFC codering
@@ -939,10 +726,7 @@ class Bouwkundigelementdetailsoort(Enum):
     zonwering = Referentiedata(
         code="ZON",
         naam="Zonwering",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
     """
     Extern of intern systeem om zonlicht en warmte te reguleren. Relatie met IFC
@@ -952,277 +736,176 @@ class Bouwkundigelementdetailsoort(Enum):
     afvoer = Referentiedata(
         code="AFV",
         naam="Afvoer",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     balustrades_en_leuningen = Referentiedata(
         code="BAL",
         naam="Balustrades en leuningen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     beveiliging = Referentiedata(
         code="BEV",
         naam="Beveiliging",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     binnenwandafwerking = Referentiedata(
         code="BIA",
         naam="Binnenwandafwerking",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     bidet = Referentiedata(
         code="BID",
         naam="Bidet",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     binnenwanden = Referentiedata(
         code="BIN",
         naam="Binnenwanden",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     binnenwandopeningen = Referentiedata(
         code="BIW",
         naam="Binnenwandopeningen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     buitenwandafwerking = Referentiedata(
         code="BUA",
         naam="Buitenwandafwerking",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     buitenwanden = Referentiedata(
         code="BUI",
         naam="Buitenwanden",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     buitenwandopeningen = Referentiedata(
         code="BUW",
         naam="Buitenwandopeningen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     communicatie = Referentiedata(
         code="COM",
         naam="Communicatie",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     dakbedekking = Referentiedata(
         code="DBE",
         naam="Dakbedekking",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     dakopeningen = Referentiedata(
         code="DOP",
         naam="Dakopeningen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     elektra = Referentiedata(
         code="ELE",
         naam="Elektra",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     gas = Referentiedata(
         code="GAS",
         naam="Gas",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     keukenvoorzieningen = Referentiedata(
         code="KEU",
         naam="Keukenvoorzieningen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     lavet = Referentiedata(
         code="LAV",
         naam="Lavet",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     losse_opslaginventaris = Referentiedata(
         code="LOS",
         naam="Losse opslaginventaris",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     plafondafwerking = Referentiedata(
         code="PAF",
         naam="Plafondafwerking",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     sanitaire_voorzieningen = Referentiedata(
         code="SAN",
         naam="Sanitaire voorzieningen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     schilderwerk = Referentiedata(
         code="SCH",
         naam="Schilderwerk",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     terrein = Referentiedata(
         code="TER",
         naam="Terrein",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     trap_en_hellingafwerking = Referentiedata(
         code="THA",
         naam="Trap- en hellingafwerking",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     vloerafwerking = Referentiedata(
         code="VAF",
         naam="Vloerafwerking",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     verwarmingsonderdelen = Referentiedata(
         code="VEO",
         naam="Verwarmingsonderdelen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     verlichting = Referentiedata(
         code="VER",
         naam="Verlichting",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     vloeropeningen = Referentiedata(
         code="VOP",
         naam="Vloeropeningen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     verwarmingstoestellen = Referentiedata(
         code="VTO",
         naam="Verwarmingstoestellen",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
 
     waterleiding_en_of_hoofdkraan = Referentiedata(
         code="WAT",
         naam="Waterleiding/hoofdkraan",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
+        parent=Bouwkundigelementsoort.voorziening.value,
     )
-
-    aanbelfunctie_met_video_en_audioverbinding = Referentiedata(
-        code="AAV",
-        naam="Aanbelfunctie met video- en audioverbinding",
-        parent=Referentiedata(
-            code="VOO",
-            naam="Voorziening",
-        ),
-    )
-    """
-    Systeem dat tweewegcommunicatie (beeld en geluid) mogelijk maakt en waarmee de
-    voordeur op afstand geopend kan worden. Relatie met IFC codering
-    (IfcCommunicationsAppliance) (UITBREIDING)
-    """
 
     @property
     def code(self) -> str:

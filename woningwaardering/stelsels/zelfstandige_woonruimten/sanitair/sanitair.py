@@ -19,8 +19,8 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-    Installatiesoort,
     Ruimtedetailsoort,
+    Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -97,11 +97,11 @@ class Sanitair(Stelselgroep):
 
         # Backwards compatibiliteit voor bouwkundige elementen
         for mapping in {
-            Bouwkundigelementdetailsoort.wastafel: Installatiesoort.wastafel,
-            Bouwkundigelementdetailsoort.douche: Installatiesoort.douche,
-            Bouwkundigelementdetailsoort.bad: Installatiesoort.bad,
-            Bouwkundigelementdetailsoort.kast: Installatiesoort.kastruimte,
-            Bouwkundigelementdetailsoort.closetcombinatie: Installatiesoort.staand_toilet,
+            Bouwkundigelementdetailsoort.wastafel: Voorzieningsoort.wastafel,
+            Bouwkundigelementdetailsoort.douche: Voorzieningsoort.douche,
+            Bouwkundigelementdetailsoort.bad: Voorzieningsoort.bad,
+            Bouwkundigelementdetailsoort.kast: Voorzieningsoort.kastruimte,
+            Bouwkundigelementdetailsoort.closetcombinatie: Voorzieningsoort.staand_toilet,
         }.items():
             bouwkundige_elementen = list(get_bouwkundige_elementen(ruimte, mapping[0]))
             if bouwkundige_elementen:
@@ -119,16 +119,16 @@ class Sanitair(Stelselgroep):
 
         mapping_toilet = {
             Ruimtedetailsoort.toiletruimte.value: {
-                Installatiesoort.hangend_toilet.value: 3.75,
-                Installatiesoort.staand_toilet.value: 3.0,
+                Voorzieningsoort.hangend_toilet.value: 3.75,
+                Voorzieningsoort.staand_toilet.value: 3.0,
             },
             Ruimtedetailsoort.badkamer.value: {
-                Installatiesoort.hangend_toilet.value: 2.75,
-                Installatiesoort.staand_toilet.value: 2.0,
+                Voorzieningsoort.hangend_toilet.value: 2.75,
+                Voorzieningsoort.staand_toilet.value: 2.0,
             },
             Ruimtedetailsoort.badkamer_met_toilet.value: {
-                Installatiesoort.hangend_toilet.value: 2.75,
-                Installatiesoort.staand_toilet.value: 2.0,
+                Voorzieningsoort.hangend_toilet.value: 2.75,
+                Voorzieningsoort.staand_toilet.value: 2.0,
             },
         }
 
@@ -140,8 +140,8 @@ class Sanitair(Stelselgroep):
             Ruimtedetailsoort.doucheruimte.value,
         ]:
             for toiletsoort in [
-                Installatiesoort.hangend_toilet.value,
-                Installatiesoort.staand_toilet.value,
+                Voorzieningsoort.hangend_toilet.value,
+                Voorzieningsoort.staand_toilet.value,
             ]:
                 aantal_toiletten = installaties[toiletsoort]
 
@@ -163,18 +163,18 @@ class Sanitair(Stelselgroep):
                     )
 
         punten_sanitair = {
-            Installatiesoort.wastafel.value: 1.0,
-            Installatiesoort.meerpersoonswastafel.value: 1.5,
-            Installatiesoort.douche.value: 4.0,
-            Installatiesoort.bad.value: 6.0,
-            Installatiesoort.bad_en_douche.value: 7.0,
+            Voorzieningsoort.wastafel.value: 1.0,
+            Voorzieningsoort.meerpersoonswastafel.value: 1.5,
+            Voorzieningsoort.douche.value: 4.0,
+            Voorzieningsoort.bad.value: 6.0,
+            Voorzieningsoort.bad_en_douche.value: 7.0,
         }
 
         totaal_aantal_wastafels = 0
 
         for wastafelsoort in [
-            Installatiesoort.wastafel,
-            Installatiesoort.meerpersoonswastafel,
+            Voorzieningsoort.wastafel,
+            Voorzieningsoort.meerpersoonswastafel,
         ]:
             aantal_wastafels = installaties[wastafelsoort.value]
 
@@ -227,15 +227,15 @@ class Sanitair(Stelselgroep):
 
         totaal_punten_bad_en_douche = Decimal("0")
 
-        aantal_douches = installaties[Installatiesoort.douche.value]
-        aantal_baden = installaties[Installatiesoort.bad.value]
+        aantal_douches = installaties[Voorzieningsoort.douche.value]
+        aantal_baden = installaties[Voorzieningsoort.bad.value]
 
         aantal_bad_en_douches = min(aantal_douches, aantal_baden)
 
         if aantal_bad_en_douches > 0:
             punten = utils.rond_af(
                 aantal_bad_en_douches
-                * punten_sanitair[Installatiesoort.bad_en_douche.value],
+                * punten_sanitair[Voorzieningsoort.bad_en_douche.value],
                 decimalen=2,
             )
 
@@ -244,21 +244,21 @@ class Sanitair(Stelselgroep):
             yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"{ruimte.naam} - {Installatiesoort.bad_en_douche.naam}"
+                        naam=f"{ruimte.naam} - {Voorzieningsoort.bad_en_douche.naam}"
                     ),
                     punten=float(punten),
                     aantal=aantal_bad_en_douches,
                 )
             )
 
-        for installatiesoort in [
-            Installatiesoort.bad,
-            Installatiesoort.douche,
+        for voorzieningsoort in [
+            Voorzieningsoort.bad,
+            Voorzieningsoort.douche,
         ]:
-            aantal = installaties[installatiesoort.value] - aantal_bad_en_douches
+            aantal = installaties[voorzieningsoort.value] - aantal_bad_en_douches
             if aantal > 0:
                 punten = utils.rond_af(
-                    aantal * punten_sanitair[installatiesoort.value], 2
+                    aantal * punten_sanitair[voorzieningsoort.value], 2
                 )
 
                 totaal_punten_bad_en_douche += punten
@@ -266,7 +266,7 @@ class Sanitair(Stelselgroep):
                 yield (
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{ruimte.naam} - {installatiesoort.naam}"
+                            naam=f"{ruimte.naam} - {voorzieningsoort.naam}"
                         ),
                         punten=float(punten),
                         aantal=aantal,
@@ -274,14 +274,14 @@ class Sanitair(Stelselgroep):
                 )
 
         punten_voorzieningen = {
-            Installatiesoort.bubbelfunctie_van_het_bad.value: 1.5,
-            Installatiesoort.douchewand.value: 1.25,
-            Installatiesoort.handdoekenradiator.value: 0.75,
-            Installatiesoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel.value: 1,
-            Installatiesoort.kastruimte.value: 0.75,
-            Installatiesoort.stopcontact_bij_wastafel.value: 0.25,
-            Installatiesoort.eenhandsmengkraan.value: 0.25,
-            Installatiesoort.thermostatische_mengkraan.value: 0.5,
+            Voorzieningsoort.bubbelfunctie_van_het_bad.value: 1.5,
+            Voorzieningsoort.douchewand.value: 1.25,
+            Voorzieningsoort.handdoekenradiator.value: 0.75,
+            Voorzieningsoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel.value: 1,
+            Voorzieningsoort.kastruimte.value: 0.75,
+            Voorzieningsoort.stopcontact_bij_wastafel.value: 0.25,
+            Voorzieningsoort.eenhandsmengkraan.value: 0.25,
+            Voorzieningsoort.thermostatische_mengkraan.value: 0.5,
         }
 
         totaal_punten_voorzieningen = Decimal("0")
@@ -319,7 +319,7 @@ class Sanitair(Stelselgroep):
                         )
                     )
 
-                    if installatie == Installatiesoort.kastruimte.value:
+                    if installatie == Voorzieningsoort.kastruimte.value:
                         maximum = Decimal("0.75")
                         correctie = min(maximum - punten, Decimal("0"))
                         if correctie < 0:
@@ -332,7 +332,7 @@ class Sanitair(Stelselgroep):
                                 punten=float(correctie),
                             )
 
-                    if installatie == Installatiesoort.stopcontact_bij_wastafel.value:
+                    if installatie == Voorzieningsoort.stopcontact_bij_wastafel.value:
                         correctie_aantal = (
                             totaal_aantal_wastafels * Decimal("2") - aantal
                         )

@@ -60,7 +60,8 @@ questions = [
         choices=lambda answers: [
             (stelselgroep.naam, stelselgroep.name)
             for stelselgroep in Woningwaarderingstelselgroep
-            if stelselgroep.value.parent is not None
+            if stelselgroep.value.parent is None
+            or stelselgroep.value.parent is not None
             and stelselgroep.value.parent.code
             == Woningwaarderingstelsel[answers.get("stelsel")].code
         ],

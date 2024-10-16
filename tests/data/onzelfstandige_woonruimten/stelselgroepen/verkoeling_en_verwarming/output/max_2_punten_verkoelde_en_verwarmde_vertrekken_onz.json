@@ -15,27 +15,46 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Slaapkamer1 (verkoeld en verwarmd vertrek) (gedeeld met 2)"
+            "naam": "Slaapkamer1 (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verkoelde_en_verwarmde_vertrekken"
+            }
           },
           "punten": 1.5
         },
         {
           "criterium": {
-            "naam": "Slaapkamer2 (verkoeld en verwarmd vertrek) (gedeeld met 2)"
+            "naam": "Slaapkamer2 (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verkoelde_en_verwarmde_vertrekken"
+            }
           },
           "punten": 1.5
         },
         {
           "criterium": {
-            "naam": "Slaapkamer3 (verkoeld en verwarmd vertrek) (gedeeld met 2)"
+            "naam": "Slaapkamer3 (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verkoelde_en_verwarmde_vertrekken"
+            }
           },
           "punten": 1.5
         },
         {
           "criterium": {
-            "naam": "Maximaal 2 extra punten voor verwarmde en verkoelde vertrekken"
+            "naam": "Maximaal 2 extra punten",
+            "bovenliggendeCriterium": {
+              "id": "verkoelde_en_verwarmde_vertrekken"
+            }
           },
           "punten": -1.0
+        },
+        {
+          "criterium": {
+            "id": "verkoelde_en_verwarmde_vertrekken",
+            "naam": "Verkoelde en verwarmde vertrekken"
+          },
+          "punten": 3.5
         }
       ]
     }

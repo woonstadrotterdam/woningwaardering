@@ -19,8 +19,8 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-    Installatiesoort,
     Ruimtedetailsoort,
+    Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -182,20 +182,20 @@ class Keuken(Stelselgroep):
                 )
         # extra voorzieningen
         punten_per_installatie = {
-            Installatiesoort.inbouw_afzuiginstallatie.value: 0.75,
-            Installatiesoort.inbouw_kookplaat_inductie.value: 1.75,
-            Installatiesoort.inbouw_kookplaat_keramisch.value: 1.0,
-            Installatiesoort.inbouw_kookplaat_gas.value: 0.5,
-            Installatiesoort.inbouw_koelkast.value: 1.0,
-            Installatiesoort.inbouw_vrieskast.value: 0.75,
-            Installatiesoort.inbouw_oven_elektrisch.value: 1.0,
-            Installatiesoort.inbouw_oven_gas.value: 0.5,
-            Installatiesoort.inbouw_magnetron.value: 1.0,
-            Installatiesoort.inbouw_vaatwasmachine.value: 1.5,
-            Installatiesoort.extra_keukenkastruimte_boven_het_minimum.value: 0.75,
-            Installatiesoort.eenhandsmengkraan.value: 0.25,
-            Installatiesoort.thermostatische_mengkraan.value: 0.5,
-            Installatiesoort.kokend_waterfunctie.value: 0.5,
+            Voorzieningsoort.inbouw_afzuiginstallatie.value: 0.75,
+            Voorzieningsoort.inbouw_kookplaat_inductie.value: 1.75,
+            Voorzieningsoort.inbouw_kookplaat_keramisch.value: 1.0,
+            Voorzieningsoort.inbouw_kookplaat_gas.value: 0.5,
+            Voorzieningsoort.inbouw_koelkast.value: 1.0,
+            Voorzieningsoort.inbouw_vrieskast.value: 0.75,
+            Voorzieningsoort.inbouw_oven_elektrisch.value: 1.0,
+            Voorzieningsoort.inbouw_oven_gas.value: 0.5,
+            Voorzieningsoort.inbouw_magnetron.value: 1.0,
+            Voorzieningsoort.inbouw_vaatwasmachine.value: 1.5,
+            Voorzieningsoort.extra_keukenkastruimte_boven_het_minimum.value: 0.75,
+            Voorzieningsoort.eenhandsmengkraan.value: 0.25,
+            Voorzieningsoort.thermostatische_mengkraan.value: 0.5,
+            Voorzieningsoort.kokend_waterfunctie.value: 0.5,
         }
 
         voorziening_counts = Counter(

@@ -1,0 +1,96 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Verwarmde woonkamer (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Verwarmde woonkamer (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "open_keuken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Verwarmde keuken (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Verwarmde slaapkamer (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Verwarmde slaapkamer (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "open_keuken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Verwarmde woonkamer/keuken (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Verwarmde woonkamer/keuken (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "open_keuken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "open_keuken",
+            "naam": "Open keuken"
+          },
+          "punten": 3.0
+        }
+      ]
+    }
+  ]
+}
