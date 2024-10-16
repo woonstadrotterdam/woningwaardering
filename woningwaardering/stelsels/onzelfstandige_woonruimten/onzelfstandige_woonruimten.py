@@ -33,7 +33,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
             peildatum=peildatum,
             stelselgroepen=[
                 OppervlakteVanVertrekken,
-                # OppervlakteVanOverigeRuimten,
+                OppervlakteVanOverigeRuimten,
                 VerkoelingEnVerwarming,
                 # Energieprestatie,
                 # Keuken,
