@@ -5,14 +5,8 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
-    Buitenruimten,
-    Energieprestatie,
-    GemeenschappelijkeParkeerruimten,
-    Keuken,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
-    PuntenVoorDeWOZWaarde,
-    Sanitair,
     VerkoelingEnVerwarming,
 )
 from woningwaardering.stelsels.stelsel import Stelsel
