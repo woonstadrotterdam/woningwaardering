@@ -166,6 +166,20 @@ class Keuken(Stelselgroep):
                 elif element.lengte >= 2000:
                     aanrecht_punten = 7
                     totaal_lengte_aanrechten += element.lengte
+                elif (
+                    element.lengte >= 3000
+                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                    and 1 < ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten < 8
+                ):
+                    aanrecht_punten = 10
+                    totaal_lengte_aanrechten += element.lengte
+                elif (
+                    element.lengte >= 3000
+                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
+                ):
+                    aanrecht_punten = 13
+                    totaal_lengte_aanrechten += element.lengte
                 else:
                     aanrecht_punten = 4
                     totaal_lengte_aanrechten += element.lengte
@@ -173,7 +187,7 @@ class Keuken(Stelselgroep):
                 yield (
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{ruimte.naam} - Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
+                            naam=f"{ruimte.naam}: Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                             meeteenheid=Meeteenheid.millimeter.value,
                         ),
                         punten=aanrecht_punten,
@@ -229,7 +243,7 @@ class Keuken(Stelselgroep):
             yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"Max. {max_punten_voorzieningen} punten voor een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
+                        naam=f"Max. {max_punten_voorzieningen} punten voor voorzieningen in een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
                     ),
                     punten=aftrek,
                 )
@@ -241,7 +255,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     keuken = Keuken()
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/keuken_met_maximering_op_voorzieningen.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
