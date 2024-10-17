@@ -156,7 +156,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = OppervlakteVanOverigeRuimten()
     with open(
-        "tests/data/onzelfstandige_woonruimten/stelselgroepen/oppervlakte_van_overige_ruimten/input/zolder_overige_ruimte.json",
+        "tests/data/generiek/input/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
