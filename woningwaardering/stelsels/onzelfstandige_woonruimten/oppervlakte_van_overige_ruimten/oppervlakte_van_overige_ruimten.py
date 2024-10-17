@@ -53,6 +53,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen = []
+        woningwaardering_correcties = []
 
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
 
@@ -63,7 +64,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 )
             )
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
-            for woningwaardering in woningwaarderingen:
+            for idx, woningwaardering in enumerate(woningwaarderingen):
                 if woningwaardering.criterium is not None:
                     if (
                         woningwaardering.aantal
@@ -77,7 +78,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
                         )
-                    else:
+                    elif woningwaardering.aantal is not None:
                         gedeeld_met_counter[1] += float(
                             utils.rond_af(woningwaardering.aantal, decimalen=2)
                         )
@@ -86,6 +87,25 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                                 id=f"{self.stelselgroep.name}_prive"
                             )
                         )
+                    elif (
+                        woningwaardering.punten
+                        and woningwaardering.criterium.naam
+                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                    ):
+                        woningwaardering.punten = float(
+                            utils.rond_af(
+                                Decimal(str(woningwaardering.punten))
+                                / Decimal(
+                                    str(
+                                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                                    )
+                                ),
+                                decimalen=2,
+                            )
+                        )
+                        woningwaardering_correcties.append(woningwaardering)
+                        woningwaarderingen.pop(idx)
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
@@ -103,17 +123,22 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             )
             woningwaardering.punten = float(
                 utils.rond_af_op_kwart(
-                    utils.rond_af(oppervlakte, decimalen=0) * Decimal("0.75") / aantal
+                    (utils.rond_af(oppervlakte, decimalen=0) * Decimal("0.75")) / aantal
                 )
             )
             woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=0))
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
+        woningwaardering_groep.woningwaarderingen.extend(woningwaardering_correcties)
+
         punten = float(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
+            utils.rond_af_op_kwart(
+                sum(
+                    Decimal(str(woningwaardering.punten))
+                    for woningwaardering in woningwaardering_groep.woningwaarderingen
+                    or []
+                    if woningwaardering.punten is not None
+                )
             )
         )
 
@@ -130,7 +155,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = OppervlakteVanOverigeRuimten()
     with open(
-        "tests/data/onzelfstandige_woonruimten/input/15004000185.json",
+        "tests/data/onzelfstandige_woonruimten/stelselgroepen/oppervlakte_van_overige_ruimten/input/zolder_overige_ruimte.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
