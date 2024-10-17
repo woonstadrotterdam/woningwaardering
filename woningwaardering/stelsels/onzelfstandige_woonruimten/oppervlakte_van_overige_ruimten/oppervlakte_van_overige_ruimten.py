@@ -129,6 +129,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=0))
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
+        # voeg de correcties als laatste toe
         woningwaardering_groep.woningwaarderingen.extend(woningwaardering_correcties)
 
         punten = float(
