@@ -105,12 +105,19 @@ def naar_tabel(
         )
         woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
         aantal_waarderingen = len(woningwaarderingen)
-        for index, woningwaardering in enumerate(woningwaarderingen):
+        index = 0
+        for woningwaardering in [
+            woningwaardering
+            for woningwaardering in woningwaarderingen
+            if woningwaardering.criterium is not None
+            and woningwaardering.criterium.bovenliggende_criterium is None
+        ]:
             if (
                 woningwaardering_groep.criterium_groep
                 and woningwaardering_groep.criterium_groep.stelselgroep
                 and woningwaardering.criterium
             ):
+                index += 1
                 table.add_row(
                     [
                         stelselgroep_naam,
@@ -126,13 +133,51 @@ def naar_tabel(
                         if woningwaardering.opslagpercentage is not None
                         else "",
                     ],
-                    divider=index + 1 == aantal_waarderingen,
+                    divider=index == aantal_waarderingen,
                 )
 
+                if woningwaardering.criterium.id:
+                    onderliggende_woningwaarderingen = [
+                        onderliggende_woningwaardering
+                        for onderliggende_woningwaardering in woningwaarderingen
+                        if onderliggende_woningwaardering.criterium is not None
+                        and onderliggende_woningwaardering.criterium.bovenliggende_criterium
+                        is not None
+                        and onderliggende_woningwaardering.criterium.bovenliggende_criterium.id
+                        == woningwaardering.criterium.id
+                    ]
+                    for (
+                        onderliggende_woningwaardering
+                    ) in onderliggende_woningwaarderingen:
+                        if onderliggende_woningwaardering.criterium is not None:
+                            index += 1
+                            table.add_row(
+                                [
+                                    stelselgroep_naam,
+                                    f" - {onderliggende_woningwaardering.criterium.naam}",
+                                    f"[{onderliggende_woningwaardering.aantal}]"
+                                    if onderliggende_woningwaardering.aantal is not None
+                                    else "",
+                                    onderliggende_woningwaardering.criterium.meeteenheid.naam
+                                    if onderliggende_woningwaardering.criterium.meeteenheid
+                                    is not None
+                                    else "",
+                                    f"[{onderliggende_woningwaardering.punten}]"
+                                    if onderliggende_woningwaardering.punten is not None
+                                    else "",
+                                    f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
+                                    if onderliggende_woningwaardering.opslagpercentage
+                                    is not None
+                                    else "",
+                                ],
+                                divider=index == aantal_waarderingen,
+                            )
         aantallen = [
             Decimal(woningwaardering.aantal)
             for woningwaardering in woningwaarderingen
             if woningwaardering.aantal is not None
+            and woningwaardering.criterium is not None
+            and woningwaardering.criterium.bovenliggende_criterium is None
         ]
 
         subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
@@ -167,7 +212,7 @@ def naar_tabel(
             table.add_row(
                 [
                     woningwaardering_groep.criterium_groep.stelselgroep.naam,
-                    "Subtotaal",
+                    "Totaal",
                     (subtotaal or "") if not verschillende_meeteenheden else "",
                     meeteenheid if not verschillende_meeteenheden else "",
                     woningwaardering_groep.punten or "",
@@ -410,7 +455,6 @@ WHERE {{
     ?bagRelatie ceo:verblijfsobjectIdentificatie "{verblijfsobject_identificatie}" .
 }}
 """
-
 
 beschermd_gezicht_query_template = """
 PREFIX sor: <https://data.kkg.kadaster.nl/sor/model/def/>

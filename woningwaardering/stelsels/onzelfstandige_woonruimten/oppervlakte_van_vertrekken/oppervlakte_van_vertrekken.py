@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 
@@ -8,8 +9,14 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken.oppervlakte_van_vertrekken import (
     OppervlakteVanVertrekken as ZelfstandigeWoonruimtenOppervlakteVanVertrekken,
 )
+from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
+    deel_punten_door_aantal_onzelfstandige_woonruimten,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    WoningwaarderingCriteriumSleutels,
+    WoningwaarderingResultatenWoningwaardering,
+    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -18,6 +25,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 
 
 class OppervlakteVanVertrekken(Stelselgroep):
@@ -49,54 +57,73 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = ZelfstandigeWoonruimtenOppervlakteVanVertrekken.genereer_woningwaarderingen(
-                ruimte, self.stelselgroep
-            )
-            gedeelde_ruimte = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
-                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 2
-            )
-            for woningwaardering in woningwaarderingen:
-                if (
-                    gedeelde_ruimte
-                    and woningwaardering.criterium
-                    and woningwaardering.aantal
-                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten  # nodig voor mypy
-                ):
-                    woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
-                    woningwaardering.punten = float(
-                        utils.rond_af(
-                            utils.rond_af(woningwaardering.aantal, decimalen=2)
-                            / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                            decimalen=2,
-                        )
-                    )
-                else:
-                    woningwaardering.punten = float(
-                        utils.rond_af(woningwaardering.aantal, decimalen=2)
-                    )
-                woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+        gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
 
-        punten = utils.rond_af_op_kwart(
-            float(
-                utils.rond_af(
-                    sum(
-                        Decimal(str(woningwaardering.aantal))
-                        for woningwaardering in woningwaardering_groep.woningwaarderingen
-                        or []
-                        if woningwaardering.aantal is not None
-                    ),
-                    decimalen=0,
+        for ruimte in eenheid.ruimten or []:
+            woningwaarderingen = list(
+                ZelfstandigeWoonruimtenOppervlakteVanVertrekken.genereer_woningwaarderingen(
+                    ruimte, self.stelselgroep
                 )
-                * Decimal("1")
+            )
+            # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
+            for woningwaardering in woningwaarderingen:
+                if woningwaardering.criterium is not None:
+                    if (
+                        woningwaardering.aantal
+                        and woningwaardering.criterium.naam
+                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                    ):
+                        gedeeld_met_counter[
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        ] += float(utils.rond_af(woningwaardering.aantal, decimalen=2))
+                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
+                            id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
+                        )
+                    else:
+                        gedeeld_met_counter[1] += float(
+                            utils.rond_af(woningwaardering.aantal, decimalen=2)
+                        )
+                        woningwaardering.criterium.bovenliggende_criterium = (
+                            WoningwaarderingCriteriumSleutels(
+                                id=f"{self.stelselgroep.name}_prive"
+                            )
+                        )
+
+            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
+
+        # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
+        for aantal, oppervlakte in gedeeld_met_counter.items():
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                naam=f"Totaal (gedeeld met {aantal})"
+                if aantal > 1
+                else "Totaal (privé)",
+                id=f"{self.stelselgroep.name}_gedeeld_met_{aantal}_onzelfstandige_woonruimten"
+                if aantal > 1
+                else f"{self.stelselgroep.name}_prive",
+            )
+            woningwaardering.punten = float(
+                utils.rond_af_op_kwart(
+                    utils.rond_af(oppervlakte, decimalen=0) / aantal,
+                )
+            )
+            woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=0))
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+        punten = float(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
             )
         )
 
-        woningwaardering_groep.punten = float(punten)
+        woningwaardering_groep.punten = punten
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_onzelfstandige_woonruimte.naam}"
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 

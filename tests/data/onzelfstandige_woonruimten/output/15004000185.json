@@ -11,50 +11,111 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 29.0,
+      "punten": 24.5,
       "woningwaarderingen": [
         {
           "aantal": 20.04,
           "criterium": {
             "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken_prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 20.04
+          }
         },
         {
           "aantal": 7.5,
           "criterium": {
-            "naam": "Keuken (gedeeld met 2)",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken_gedeeld_met_2_onzelfstandige_woonruimten"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 3.75
+          }
         },
         {
           "aantal": 1.7,
           "criterium": {
-            "naam": "Badruimte (gedeeld met 2)",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken_gedeeld_met_2_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 20.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken_prive",
+            "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 0.85
+          "punten": 20.0
+        },
+        {
+          "aantal": 9.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken_gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 4.5
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 2.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          },
+          "punten": 2.0
         }
       ]
     }
   ],
-  "maximaleHuur": 278.66,
-  "punten": 29.0,
+  "maximaleHuur": 259.39,
+  "punten": 27.0,
   "stelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 278.66
+  "maximaleHuurInclusiefOpslag": 259.39
 }

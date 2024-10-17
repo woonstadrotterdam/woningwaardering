@@ -3,60 +3,60 @@
     {
       "criteriumGroep": {
         "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
         },
         "stelselgroep": {
           "code": "VKV",
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 4.0,
+      "punten": 1.5,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Berging",
+            "naam": "Berging (gedeeld met 2)",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
             }
           },
-          "punten": 1.0
+          "punten": 0.5
         },
         {
           "criterium": {
-            "naam": "Berging2",
+            "naam": "Berging2 (gedeeld met 2)",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
             }
           },
-          "punten": 1.0
+          "punten": 0.5
         },
         {
           "criterium": {
-            "naam": "Berging3",
+            "naam": "Berging3 (gedeeld met 2)",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
             }
           },
-          "punten": 1.0
+          "punten": 0.5
         },
         {
           "criterium": {
-            "naam": "Berging4",
+            "naam": "Berging4 (gedeeld met 2)",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
             }
           },
-          "punten": 1.0
+          "punten": 0.5
         },
         {
           "criterium": {
-            "naam": "Berging5",
+            "naam": "Berging5 (gedeeld met 2)",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
             }
           },
-          "punten": 1.0
+          "punten": 0.5
         },
         {
           "criterium": {
@@ -72,7 +72,7 @@
             "id": "verwarmde_overige_en_verkeersruimten",
             "naam": "Verwarmde overige- en verkeersruimten"
           },
-          "punten": 4.0
+          "punten": 1.5
         }
       ]
     }
