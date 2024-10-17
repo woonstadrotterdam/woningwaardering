@@ -1,0 +1,69 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 2.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "naam": "Bijkeuken",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten_gedeeld_met_5_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "naam": "Garagebox",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten_gedeeld_met_6_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten_gedeeld_met_5_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 5)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten_gedeeld_met_6_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 6)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.25
+        }
+      ]
+    }
+  ]
+}

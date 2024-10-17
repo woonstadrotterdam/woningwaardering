@@ -1,0 +1,82 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 9.25,
+      "woningwaarderingen": [
+        {
+          "aantal": 4.0,
+          "criterium": {
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten_prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 19.34,
+          "criterium": {
+            "naam": "Garage",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten_gedeeld_met_3_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 6.06,
+          "criterium": {
+            "naam": "Bijkeuken",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten_gedeeld_met_3_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 4.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten_prive",
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.0
+        },
+        {
+          "aantal": 25.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten_gedeeld_met_3_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 3)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 6.25
+        }
+      ]
+    }
+  ]
+}

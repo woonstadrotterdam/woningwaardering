@@ -85,6 +85,20 @@
           "naam": "Onzelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "VKV",
           "naam": "Verkoeling en verwarming"
         }

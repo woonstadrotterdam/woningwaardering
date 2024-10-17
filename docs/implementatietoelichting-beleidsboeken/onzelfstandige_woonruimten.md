@@ -208,6 +208,71 @@ Dit vertaalt zich naar 15 (15*1) + 3.75* (11 * 1 gedeeld door 3 kamers) = 18.75 
 *11 punten gedeeld door 3 (kamers) = 3,67. Er wordt afgerond op 0,25 punt, waarbij een achtste punt naar boven wordt afgerond, waardoor de uitkomst 3,75 punt is.
 ```
 
+## Rubriek 2 - Oppervlakte van overige ruimten
+### 2.1 Puntentoekenning
+Privé overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter.
+Gemeenschappelijke overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter. Dit puntenaantal wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot de gemeenschappelijke overige ruimte(n).
+
+### 2.2 Wat zijn overige ruimten?
+Een ruimte wordt als overige ruimte gewaardeerd als deze voldoet aan de volgende eisen:
+
+- ~~de vloer moet begaanbaar zijn;~~
+- de ruimte dient een oppervlakte te hebben van minimaal 2 m2; en
+- voldoet niet aan de eisen voor een vertrek (zie paragraaf 1.2) of een verkeersruimte zijnde;
+- ~~een ruimte die dient voor het bereiken van een andere ruimte;~~
+- ~~geen ruimte om duurzaam in te verblijven.~~
+
+Voorbeelden van overige ruimten zijn bijkeukens, bergingen, wasruimten, schuren, garages, zolders en kelders, op voorwaarde dat aan bovenstaande eisen wordt voldaan.
+Parkeerruimte die exclusief tot één adres behoort (privé-garage), wordt gewaardeerd als overige ruimte. Gemeenschappelijke garages met daarin parkeerplek(ken) worden gewaardeerd onder rubriek 10  (gemeenschappelijke parkeerruimten).
+
+#### Verkeersruimten
+
+Verkeersruimten zoals hallen, gangen, en overlopen worden sowieso niet afzonderlijk gewaardeerd, dus krijgen geen punten op basis van dit onderdeel van het woningwaarderingsstelsel.
+
+#### Zolderruimte
+
+Indien een zolderruimte niet als vertrek kan worden gewaardeerd (zie paragraaf 1.2), dan kan deze mogelijk wel in aanmerking komen voor een waardering als overige ruimte. Dan moet de zolderruimte naast bovenstaande eisen aan nog twee eisen voldoen. De zolderruimte moet namelijk bereikbaar zijn via een tot de woning behorende trap ~~en het dak moet beschoten zijn.~~ Voldoet de zolderruimte niet aan de eisen van paragraaf 1.2 en niet aan de voornoemde eisen, dan wordt de zolderruimte niet gewaardeerd.
+
+#### Toiletruimte
+
+Een toiletruimte kan als overige ruimte worden gewaardeerd als aan de eisen van overige ruimte wordt voldaan.
+
+### ~~2.3 Meetinstructies~~
+
+~~De wetgever heeft in de toelichting op het woningwaarderingsstelsel een aantal meetinstructies meegegeven:~~
+
+> De woningwaarderingpackage gaat ervanuit dat ruimten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
+
+### 2.4 Saldering en puntenberekening
+De oppervlakten voor privé en voor gemeenschappelijke overige ruimten worden afzonderlijk berekend. De punten voor privé overige ruimte(n) worden uitsluitend in de berekening betrokken voor de woonruimte in kwestie.
+
+De punten voor gemeenschappelijke overige ruimte(n) moeten worden verdeeld over het aantal onzelfstandige woonruimtes.
+
+Als sprake is van meerdere overige ruimten die tot dezelfde categorie behoren (privé of gemeenschappelijk) dan wordt voor de berekening eerst de oppervlakte per categorie overige ruimte berekend en afgerond.
+
+Voor privé overige ruimte betekent dit dat de oppervlakte van de overige ruimtes bij mekaar worden opgeteld en op basis daarvan punten worden toegekend.
+
+Voor gemeenschappelijke overige ruimtes betekent dit ook dat de oppervlakte van deze overige ruimtes bij elkaar worden opgeteld en op basis daarvan punten worden toegekend. Om de juiste punten aan de woonruimte in kwestie te kunnen toerekenen moeten de punten eerst nog worden verdeeld door het aantal onzelfstandige woonruimtes die gebruikmaken van de gemeenschappelijke overige ruimte.
+
+De oppervlakte per overige ruimte wordt afgerond op 2 decimalen. De afronding van de oppervlakte van alle overige ruimte samen vindt plaats op hele vierkante meters na saldering van de oppervlakte van de afzonderlijke overige ruimten; bij 0,5 m2 of meer wordt naar boven afgerond, bij minder dan 0,5 m2 naar beneden. Waardering in punten vindt na saldering en afronding plaats.
+
+```text
+Voorbeeld:
+
+Privé overige ruimten
+
+Er is sprake van één privé overige ruimte van 4 m2. Er worden 3 punten toegekend (4 x 0,75).
+
+Gemeenschappelijke overige ruimten voor drie kamers
+
+Garage: lengte 3,16m x breedte 6,12m = 19,3392 m², afgerond : 19,34 m²
+Bijkeuken: lengte 2,11m x breedte 2,87m = 6,0557 m², afgerond : 6,06 m²
+Totaal : 25,40 m² Afronding op hele m² : 25 m².
+
+Dit vertaalt zich dan naar 25 * 0,75 punt (per m2) = 18.75 punten. Dit puntenaantal wordt gedeeld door 3 (kamers) en de uitkomst is 6,25 punt.
+
+In totaal is voor de woonruimte in dit voorbeeld een puntenaantal van 3 plus 6,25 punten, dus 9.25 punten voor overige ruimte.
+```
 ## Rubriek 3 - Verkoeling en verwarming
 
 ### 3.1 Puntentoekenning

@@ -9,9 +9,6 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken.oppervlakte_van_vertrekken import (
     OppervlakteVanVertrekken as ZelfstandigeWoonruimtenOppervlakteVanVertrekken,
 )
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
-    deel_punten_door_aantal_onzelfstandige_woonruimten,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingCriteriumSleutels,

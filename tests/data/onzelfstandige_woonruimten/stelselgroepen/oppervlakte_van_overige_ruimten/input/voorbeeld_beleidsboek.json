@@ -1,0 +1,47 @@
+{
+  "id": "1",
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 4.0,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 0
+    },
+    {
+      "id": "Space_2",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "GAR",
+        "naam": "Garage"
+      },
+      "naam": "Garage",
+      "oppervlakte": 19.34,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 3
+    },
+    {
+      "id": "Space_3",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "BIJ",
+        "naam": "Bijkeuken"
+      },
+      "naam": "Bijkeuken",
+      "oppervlakte": 6.06,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 3
+    }
+  ]
+}
