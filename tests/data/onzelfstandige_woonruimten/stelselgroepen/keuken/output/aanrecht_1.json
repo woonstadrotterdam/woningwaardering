@@ -3,20 +3,23 @@
     {
       "criteriumGroep": {
         "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
         },
         "stelselgroep": {
           "code": "KEU",
           "naam": "Keuken"
         }
       },
-      "punten": 8.0,
+      "punten": 4.0,
       "woningwaarderingen": [
         {
           "aantal": 1000.0,
           "criterium": {
             "naam": "Keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken_prive"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -25,24 +28,11 @@
           "punten": 4.0
         },
         {
-          "aantal": 4.0,
           "criterium": {
-            "naam": "Inbouw koelkast (in zelfde ruimte)"
+            "id": "keuken_prive",
+            "naam": "Totaal (privé)"
           },
           "punten": 4.0
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Inbouw oven elektrisch"
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
-            "naam": "Max. 4 punten voor voorzieningen in een (open) keuken met een aanrechtlengte van 1000.0mm"
-          },
-          "punten": -1.0
         }
       ]
     }
