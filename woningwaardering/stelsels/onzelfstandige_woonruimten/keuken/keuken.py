@@ -84,7 +84,7 @@ class Keuken(Stelselgroep):
                                 decimalen=2,
                             )
                         )
-                    else:
+                    elif woningwaardering.punten:
                         gedeeld_met_counter[1] += woningwaardering.punten
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
@@ -108,14 +108,17 @@ class Keuken(Stelselgroep):
             woningwaardering.punten = float(utils.rond_af(punten / aantal, decimalen=2))
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-                and woningwaardering.criterium is not None
-                and woningwaardering.criterium.bovenliggende_criterium is None
-            ),
+        punten = float(
+            utils.rond_af_op_kwart(
+                sum(
+                    Decimal(str(woningwaardering.punten))
+                    for woningwaardering in woningwaardering_groep.woningwaarderingen
+                    or []
+                    if woningwaardering.punten is not None
+                    and woningwaardering.criterium is not None
+                    and woningwaardering.criterium.bovenliggende_criterium is None
+                ),
+            )
         )
 
         woningwaardering_groep.punten = float(punten)
