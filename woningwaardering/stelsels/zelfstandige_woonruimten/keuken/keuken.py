@@ -163,11 +163,24 @@ class Keuken(Stelselgroep):
                 if element.lengte < 1000:
                     aanrecht_punten = 0
                     totaal_lengte_aanrechten += element.lengte
-                elif element.lengte >= 2000:
+                elif (
+                    element.lengte >= 2000
+                    and (
+                        (  # zelfstandige keuken met aanrecht boven 2000mm is 7 punten
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
+                            or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten == 1
+                        )
+                        or (  # onzelfstandige keuken met aanrecht tussen 2000mm en 3000mm is 7 punten
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                            and element.lengte <= 3000
+                        )
+                    )
+                ):
                     aanrecht_punten = 7
                     totaal_lengte_aanrechten += element.lengte
                 elif (
-                    element.lengte >= 3000
+                    element.lengte > 3000
                     and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                     and 1 < ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten < 8
                 ):
