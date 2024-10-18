@@ -251,3 +251,83 @@ Dit vertaalt zich naar 15 (15*1) + 3.75* (11 * 1 gedeeld door 3 kamers) = 18.75 
 ~~Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten. Onder een open keuken wordt hier verstaan een keuken die in open verbinding staat met een ander vertrek, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur.~~ Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek individueel gewaardeerd met punten indien deze verwarmd zijn.
 
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding tussen keukengedeelte en de rest van het vertrek aanwezig is.
+
+## Rubriek 5 - Keuken
+
+### 5.1 Eisen keuken
+
+Punten worden alleen aan het onderdeel ‘keuken’ toegekend als de keuken voldoet aan het volgende basisniveau:
+
+- ~~aan- en afvoer van water en ten minste één vast aansluitpunt voor koken op gas of elektriciteit;~~
+- een aanrechtblad met een aan een gesloten lengte van minimaal 1 m ~~(lengte incl. spoelbak, incl. kookplaat);~~
+- ~~twee inbouwkasten met een breedte van minimaal 50 cm;~~
+- ~~waterdichte afwerking boven het aanrechtblad en in de kookhoek vanaf de vloer tot een hoogte van minimaal 1,50 m.~~
+
+Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend. ~~Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als ‘wastafel’.~~
+
+### 5.2 Puntentoekenning lengte aanrecht
+
+De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van het aanrecht. ~~Hierbij worden alleen punten toegekend als het aanrechtblad waterdicht is.~~
+
+- Bij een aanrechtlengte minder dan 1 meter worden 0 punten toegekend.
+- Bij een aanrechtlengte tussen de 1 en 2 meter worden 4 punten toegekend.
+- Bij een aanrechtlengte tussen de 2 en 3 meter worden 7 punten toegekend.
+- Bij een aanrechtlengte van meer dan 3 meter worden 10 punten toegekend, worden 13 punten toegekend als er minimaal 8 onzelfstandige woonruimten toegang en gebruiksrecht hebben tot de keuken.
+- De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
+
+~~Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel. Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.~~
+
+~~### 5.3 Meetinstructies lengte aanrechtblad~~
+
+> De woningwaarderingpackage gaat ervanuit dat lengten van aanrechten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
+
+~~De aanrechtlengte wordt over het midden van het bovenblad gemeten, inclusief ingebouwde spoelbakken en kookplaten.~~
+
+~~De lengte van een niet direct aan het aanrecht aansluitend werkblad of van een blad dat is samengesteld uit een ander materiaal wordt bij de lengte meegeteld.~~
+
+~~Indien een aanrechtblad langer is dan de aanwezige onderkasten met de bedoeling dat er onder het langere gedeelte van het aanrechtblad een losstaande koelkast, vaatwasser, wasmachine e.d., kan worden geplaatst, dan wordt dit gedeelte van het aanrechtblad mee gemeten mits er onder het blad aansluitmogelijkheden aanwezig zijn voor genoemde apparatuur.~~
+
+~~Van een (standaard)aanrechtblad dat gedeeltelijk is ingemetseld of waar de wandbetegeling op het blad is aangebracht, wordt uitsluitend het bruikbare c.q. zichtbare gedeelte gemeten.~~
+
+~~Indien er sprake is van een hoekaanrecht wordt de lengte van het aanrecht bepaald door (zie figuur):~~
+
+~~De lange zijde van het langere aanrechtdeel te meten (zie horizontale blauwe lijn).~~
+~~Vervolgens die lengte te salderen met de lange zijde van het kortere aanrechtdeel (zie verticale blauwe lijn).~~
+~~De lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.~~
+
+### 5.4 Puntentoekenning extra voorzieningen
+
+Het woningwaarderingsstelsel geeft voor het onderdeel keuken extra punten voor voorzieningen in de keuken. Hiervoor geldt een maximum tot het aantal punten dat voor de aanrechtlengte is bepaald. Een keuken met een aanrechtlengte tussen de 1 en 2 m kan bijvoorbeeld tot maximaal 4 extra punten krijgen voor voorzieningen en een keuken met een aanrechtlengte van 2 of meer meter kan tot maximaal 7 punten extra krijgen voor voorzieningen. 
+
+Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
+
+Voorzieningen
+
+| Voorziening | Punten |
+| --- | --- |
+| Inbouw afzuiginstallatie* | 0,75 |
+| Inbouw kookplaat inductie | 1,75 |
+| Inbouw kookplaat keramisch | 1 |
+| Inbouw kookplaat gas | 0,5 |
+| Inbouw koelkast | 1 |
+| Inbouw vrieskast | 0,75 |
+| Inbouw oven elektrisch | 1 |
+| Inbouw oven gas | 0,5 |
+| Inbouw magnetron | 1 |
+| Inbouw vaatwasmachine | 1,5 |
+| Extra kastruimte boven het minimum (per 60 cm breedte, met een minimum van 60 cm hoogte) | 0,75 |
+| Éénhandsmengkraan | 0,25 |
+| Thermostatische mengkraan | 0,5 |
+| Kokend waterfunctie (al dan niet apart of in aanvulling op de kraan) | + 0,5 |
+
+* Bij een afzuiginstallatie gaat het om een luchtafvoer met afzuiging naar buiten de woning of op basis van recirculatie met actieve koolstof- en vetfilters. Een afzuiginstallatie kan zowel een afzuig- of recirculatiekap boven de kookinstallatie zijn, als een in het aanrecht geïntegreerd afzuigsysteem.
+
+Wanneer een object twee voorzieningen heeft, bijvoorbeeld een ingebouwde combi magnetron/oven of een gecombineerde koel- en vrieskast, worden beide voorzieningen in dit object gewaardeerd conform bovenstaande lijst. ~~Voor de meting van keukenkasten wordt uitgegaan van de buitenmaat.~~
+
+De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
+
+Voorbeeld
+
+```text
+Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één keuken, met een aanrechtlengte tussen 2 m en 3 m. Hiervoor worden 7 punten toegekend. Daarnaast worden 3 punten toegekend voor voorzieningen (bijv. een inbouwkoelkast, inbouw keramische kookplaat en inbouw magnetron). Omdat de keuken wordt gedeeld door vier onzelfstandige woonruimten, geldt 10/4 = 2,5 punt per onzelfstandige woonruimte.
+```

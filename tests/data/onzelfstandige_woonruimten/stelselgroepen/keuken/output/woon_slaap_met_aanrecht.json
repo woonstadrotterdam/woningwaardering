@@ -1,0 +1,82 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 22.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2000.0,
+          "criterium": {
+            "naam": "Woonkamer/keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken_prive"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 7.0
+        },
+        {
+          "aantal": 1000.0,
+          "criterium": {
+            "naam": "Woonkamer: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken_prive"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 2000.0,
+          "criterium": {
+            "naam": "Woon-/slaapkamer: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken_prive"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 7.0
+        },
+        {
+          "aantal": 1000.0,
+          "criterium": {
+            "naam": "Slaapkamer: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken_prive"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "keuken_prive",
+            "naam": "Totaal (privé)"
+          },
+          "punten": 22.0
+        }
+      ]
+    }
+  ]
+}

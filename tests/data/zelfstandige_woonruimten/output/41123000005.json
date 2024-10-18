@@ -361,7 +361,7 @@
         {
           "aantal": 1875.0,
           "criterium": {
-            "naam": "Keuken 1 - Lengte aanrecht",
+            "naam": "Keuken 1: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -372,7 +372,7 @@
         {
           "aantal": 1920.0,
           "criterium": {
-            "naam": "Keuken 2 - Lengte aanrecht",
+            "naam": "Keuken 2: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
