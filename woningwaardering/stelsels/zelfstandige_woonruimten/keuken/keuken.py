@@ -187,7 +187,7 @@ class Keuken(Stelselgroep):
                     aanrecht_punten = 10
                     totaal_lengte_aanrechten += element.lengte
                 elif (
-                    element.lengte >= 3000
+                    element.lengte > 3000
                     and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                     and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
                 ):
