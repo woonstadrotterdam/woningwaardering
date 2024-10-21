@@ -17,8 +17,8 @@ from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 def test_OppervlakteVanOverigeRuimten(
     onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    oppervlakte_van_vertrekken = OppervlakteVanOverigeRuimten(peildatum=peildatum)
-    resultaat = oppervlakte_van_vertrekken.bereken(
+    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
+    resultaat = oppervlakte_van_overige_ruimten.bereken(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
