@@ -189,7 +189,7 @@ class Energieprestatie(Stelselgroep):
         if eenheid.ruimten is None:
             raise ValueError(f"Eenheid {eenheid.id}: ruimten is None")
 
-        oppervlakte_gedeeld_met_counter = defaultdict(int)
+        oppervlakte_gedeeld_met_counter: dict[int, float] = defaultdict(int)
 
         for ruimte in eenheid.ruimten:
             if ruimte.oppervlakte is None:
@@ -202,13 +202,14 @@ class Energieprestatie(Stelselgroep):
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
                 oppervlakte_gedeeld_met_counter[
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                ] += utils.rond_af(ruimte.oppervlakte, decimalen=2)
+                ] += float(utils.rond_af(ruimte.oppervlakte, decimalen=2))
 
-        oppervlakte_van_vertrekken = sum(
-            utils.rond_af(
-                Decimal(str(utils.rond_af(oppervlakte, decimalen=0)))
-                / Decimal(str((aantal))),
-                decimalen=2,
+        oppervlakte_van_vertrekken: float = sum(
+            float(
+                utils.rond_af(
+                    (utils.rond_af(oppervlakte, decimalen=0) / Decimal(str((aantal)))),
+                    decimalen=2,
+                )
             )
             for aantal, oppervlakte in oppervlakte_gedeeld_met_counter.items()
         )
@@ -256,8 +257,11 @@ class Energieprestatie(Stelselgroep):
             woningwaardering.aantal = float(
                 utils.rond_af(oppervlakte_van_vertrekken, decimalen=2)
             )
-            woningwaardering.punten = utils.rond_af(
-                Decimal("0.5") * Decimal(str(oppervlakte_van_vertrekken)), decimalen=2
+            woningwaardering.punten = float(
+                utils.rond_af(
+                    Decimal("0.5") * Decimal(str(oppervlakte_van_vertrekken)),
+                    decimalen=2,
+                )
             )
 
         elif energieprestatie:
