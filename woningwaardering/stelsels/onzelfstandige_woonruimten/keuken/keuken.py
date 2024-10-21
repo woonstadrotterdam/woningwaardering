@@ -105,23 +105,16 @@ class Keuken(Stelselgroep):
                 if aantal > 1
                 else f"{self.stelselgroep.name}_prive",
             )
-            woningwaardering.punten = float(utils.rond_af(punten / aantal, decimalen=2))
+            woningwaardering.punten = float(utils.rond_af_op_kwart(punten / aantal))
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = float(
-            utils.rond_af_op_kwart(
-                sum(
-                    Decimal(str(woningwaardering.punten))
-                    for woningwaardering in woningwaardering_groep.woningwaarderingen
-                    or []
-                    if woningwaardering.punten is not None
-                    and woningwaardering.criterium is not None
-                    and woningwaardering.criterium.bovenliggende_criterium is None
-                ),
-            )
+        woningwaardering_groep.punten = sum(
+            woningwaardering.punten
+            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+            if woningwaardering.punten is not None
+            and woningwaardering.criterium is not None
+            and woningwaardering.criterium.bovenliggende_criterium is None
         )
-
-        woningwaardering_groep.punten = float(punten)
 
         logger.info(
             f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_onzelfstandige_woonruimte.naam}"
