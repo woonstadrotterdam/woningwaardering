@@ -1,0 +1,30 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 1.25,
+      "woningwaarderingen": [
+        {
+          "aantal": 3.67,
+          "criterium": {
+            "naam": "A -> C (Energie-index)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.28
+        }
+      ]
+    }
+  ]
+}
