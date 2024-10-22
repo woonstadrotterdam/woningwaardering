@@ -68,7 +68,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 if woningwaardering.criterium is not None:
                     if (
                         woningwaardering.aantal
-                        and woningwaardering.criterium.naam
                         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
                     ):
@@ -89,7 +88,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         )
                     elif (
                         woningwaardering.punten
-                        and woningwaardering.criterium.naam
                         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
                     ):
