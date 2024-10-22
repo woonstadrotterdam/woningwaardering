@@ -5,14 +5,8 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
-    Buitenruimten,
-    Energieprestatie,
-    GemeenschappelijkeParkeerruimten,
-    Keuken,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
-    PuntenVoorDeWOZWaarde,
-    Sanitair,
     VerkoelingEnVerwarming,
 )
 from woningwaardering.stelsels.stelsel import Stelsel
@@ -33,7 +27,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
             peildatum=peildatum,
             stelselgroepen=[
                 OppervlakteVanVertrekken,
-                # OppervlakteVanOverigeRuimten,
+                OppervlakteVanOverigeRuimten,
                 VerkoelingEnVerwarming,
                 # Energieprestatie,
                 # Keuken,
