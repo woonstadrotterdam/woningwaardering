@@ -16,7 +16,7 @@
         {
           "aantal": 1000.0,
           "criterium": {
-            "naam": "Keuken - Lengte aanrecht",
+            "naam": "Keuken: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -40,7 +40,7 @@
         },
         {
           "criterium": {
-            "naam": "Max. 4 punten voor een (open) keuken met een aanrechtlengte van 1000.0mm"
+            "naam": "Max. 4 punten voor voorzieningen in een (open) keuken met een aanrechtlengte van 1000.0mm"
           },
           "punten": -1.0
         }

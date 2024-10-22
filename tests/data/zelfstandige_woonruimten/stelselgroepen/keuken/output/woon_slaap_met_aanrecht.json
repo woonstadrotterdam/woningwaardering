@@ -16,7 +16,7 @@
         {
           "aantal": 2000.0,
           "criterium": {
-            "naam": "Woonkamer/keuken - Lengte aanrecht",
+            "naam": "Woonkamer/keuken: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -27,7 +27,7 @@
         {
           "aantal": 1000.0,
           "criterium": {
-            "naam": "Woonkamer - Lengte aanrecht",
+            "naam": "Woonkamer: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -38,7 +38,7 @@
         {
           "aantal": 2000.0,
           "criterium": {
-            "naam": "Woon-/slaapkamer - Lengte aanrecht",
+            "naam": "Woon-/slaapkamer: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -49,7 +49,7 @@
         {
           "aantal": 1000.0,
           "criterium": {
-            "naam": "Slaapkamer - Lengte aanrecht",
+            "naam": "Slaapkamer: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"

@@ -178,7 +178,7 @@
         {
           "aantal": 2100.0,
           "criterium": {
-            "naam": "Keuken - Lengte aanrecht",
+            "naam": "Keuken: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"

@@ -76,7 +76,7 @@ def naar_tabel(
     table._min_width = {
         "Groep": 33,
         "Naam": 50,
-        "Aantal": 7,
+        "Aantal": 9,
         "Meeteenheid": 19,
         "Punten": 7,
         "Opslag": 7,

@@ -1,0 +1,21 @@
+{
+  "id": "keuken_zonder_aanrecht",
+  "ruimten": [
+    {
+      "id": "1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 24.8469,
+      "oppervlakte": 9.5565,
+      "verwarmd": true,
+      "afsluitbaar": true
+    }
+  ]
+}
