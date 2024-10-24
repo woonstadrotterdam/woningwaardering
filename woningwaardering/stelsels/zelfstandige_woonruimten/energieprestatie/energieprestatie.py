@@ -53,9 +53,9 @@ class Energieprestatie(Stelselgroep):
                 f"{LOOKUP_TABEL_FOLDER}/energieprestatievergoeding.csv"
             )
         ),
-        "oud_en_nieuw": pd.read_csv(
+        "label_ei": pd.read_csv(
             files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/oud_en_nieuw.csv"
+                f"{LOOKUP_TABEL_FOLDER}/label_en_energie-index.csv"
             )
         ),
         "bouwjaar": pd.read_csv(
@@ -98,7 +98,7 @@ class Energieprestatie(Stelselgroep):
         label = energieprestatie.label.code
         woningwaardering.criterium.naam = f"{label}"
         energieprestatie_soort = energieprestatie.soort.code
-        lookup_key = "oud_en_nieuw"
+        lookup_key = "label_ei"
 
         if (
             energieprestatie_soort
@@ -155,7 +155,7 @@ class Energieprestatie(Stelselgroep):
         waarderings_label: str | None = label
 
         if (
-            lookup_key == "oud_en_nieuw"
+            lookup_key == "label_ei"
             and energieprestatie.registratiedatum >= datetime(2015, 1, 1).astimezone()
             and energieprestatie.registratiedatum < datetime(2021, 1, 1).astimezone()
             and energieprestatie.soort.code == Energieprestatiesoort.energie_index.code
@@ -191,8 +191,8 @@ class Energieprestatie(Stelselgroep):
 
         return woningwaardering
 
-    @staticmethod
     def _bereken_punten_met_bouwjaar(
+        self,
         eenheid: EenhedenEenheid,
         pandsoortnaam: str,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
@@ -314,7 +314,7 @@ class Energieprestatie(Stelselgroep):
             )
 
         elif eenheid.bouwjaar and not energieprestatie:
-            woningwaardering = Energieprestatie._bereken_punten_met_bouwjaar(
+            woningwaardering = self._bereken_punten_met_bouwjaar(
                 eenheid, pandsoort.naam, woningwaardering
             )
 

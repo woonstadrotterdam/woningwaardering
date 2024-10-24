@@ -5,6 +5,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
+    Energieprestatie,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
     VerkoelingEnVerwarming,
@@ -29,7 +30,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
                 OppervlakteVanVertrekken,
                 OppervlakteVanOverigeRuimten,
                 VerkoelingEnVerwarming,
-                # Energieprestatie,
+                Energieprestatie,
                 # Keuken,
                 # Sanitair,
                 # Buitenruimten,

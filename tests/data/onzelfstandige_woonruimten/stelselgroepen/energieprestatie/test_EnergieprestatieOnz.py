@@ -4,7 +4,7 @@ import pytest
 
 from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
-    OppervlakteVanOverigeRuimten,
+    Energieprestatie,
 )
 from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
@@ -14,32 +14,32 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
-def test_OppervlakteVanOverigeRuimten(
+def test_Energieprestatie(
     onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
-    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
-    resultaat = oppervlakte_van_overige_ruimten.bereken(
+    energieprestatie = Energieprestatie(peildatum=peildatum)
+    resultaat = energieprestatie.bereken(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
-def test_OppervlakteVanOverigeRuimten_output(
+def test_Energieprestatie_output(
     onzelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
     eenheid_input, eenheid_output = onzelfstandige_woonruimten_input_en_outputmodel
 
     normaliseer_ruimte_namen(eenheid_input)
 
-    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
+    energieprestatie = Energieprestatie(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [oppervlakte_van_overige_ruimten.bereken(eenheid_input)]
+    resultaat.groepen = [energieprestatie.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
         eenheid_output,
-        Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+        Woningwaarderingstelselgroep.energieprestatie,
     )
 
 
@@ -55,17 +55,15 @@ def specifieke_input_en_output_model(request):
     )
 
 
-def test_OppervlakteVanOverigeRuimten_specifiek_output(
-    specifieke_input_en_output_model, peildatum
-):
+def test_Energieprestatie_specifiek_output(specifieke_input_en_output_model, peildatum):
     eenheid_input, eenheid_output = specifieke_input_en_output_model
-    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
+    energieprestatie = Energieprestatie(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [oppervlakte_van_overige_ruimten.bereken(eenheid_input)]
+    resultaat.groepen = [energieprestatie.bereken(eenheid_input)]
 
     assert_output_model(
         resultaat,
         eenheid_output,
-        Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+        Woningwaarderingstelselgroep.energieprestatie,
     )

@@ -1,0 +1,50 @@
+{
+  "id": "1",
+  "bouwjaar": 1921,
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    }
+  ],
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "energieprestaties": [],
+  "prijscomponenten": [],
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 10.0,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
+    },
+    {
+      "id": "Space_2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "oppervlakte": 10.0,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
+    }
+  ]
+}
