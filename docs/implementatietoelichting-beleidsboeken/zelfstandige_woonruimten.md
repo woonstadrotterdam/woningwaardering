@@ -476,6 +476,8 @@ Punten worden alleen aan het onderdeel ‘keuken’ toegekend als de ruimte vold
 
 Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, ook niet voor de extra voorzieningen als bedoeld in paragraaf 5.4 hierna. Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als ‘wastafel’.
 
+> Zorg ervoor dat alleen aanrechten met een spoelbak worden meegegeven, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
+
 ### 5.2 Puntentoekenning lengte aanrecht
 
 *   Bij een aanrechtlengte minder dan 1 m, worden 0 punten toegekend.
@@ -484,7 +486,7 @@ Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, oo
 
 De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van het aanrecht, ~~waarbij sprake moet zijn van een waterdicht keukenblad~~
 
-~~Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel.~~  
+Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel.  
 ~~Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.~~
 
 ### 5.3 Meetinstructies lengte aanrechtblad
@@ -567,7 +569,7 @@ Punten worden toegekend aan een toilet met waterspoeling als het toilet is gepla
 
 Van een meerpersoonswastafel is sprake bij een wastafel~~ met een minimale breedte van 70 cm, voorzien van twee kranen~~. Deze wastafels worden tot maximaal 1,5 punt per vertrek of overige ruimte, m.u.v. de badkamer, gewaardeerd. De kranen worden afzonderlijk gewaardeerd.
 
-~~Zoals genoemd in paragraaf 5.2 waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter is dan één meter, als wastafel. In alle andere gevallen wordt een spoelbak in de keuken dus niet als wastafel gewaardeerd.~~
+Zoals genoemd in paragraaf 5.2 waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter is dan één meter, als wastafel. In alle andere gevallen wordt een spoelbak in de keuken dus niet als wastafel gewaardeerd.
 
 **_Bad en douche_**
 
