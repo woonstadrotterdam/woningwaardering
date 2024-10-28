@@ -195,10 +195,10 @@ class Sanitair(Stelselgroep):
             ):
                 for element in ruimte.bouwkundige_elementen or []:
                     if (
-                        element.detail_soort
-                        == Bouwkundigelementdetailsoort.aanrecht.value
+                        element.detail_soort.code
+                        == Bouwkundigelementdetailsoort.aanrecht.code
                     ):
-                        if element.lengte and element.lengte < 1000:
+                        if element.lengte is not None and element.lengte < 1000:
                             logger.info(
                                 f"Ruimte {ruimte.naam} ({ruimte.id}): aanrecht < 1m wordt als wastafel gewaardeerd."
                             )
