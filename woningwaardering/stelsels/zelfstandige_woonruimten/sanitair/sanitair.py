@@ -199,7 +199,7 @@ class Sanitair(Stelselgroep):
                         element.detail_soort
                         == Bouwkundigelementdetailsoort.aanrecht.value
                     ):
-                        if element.lengte < 1000:
+                        if element.lengte and element.lengte < 1000:
                             logger.info(
                                 f"Ruimte {ruimte.naam} ({ruimte.id}): aanrecht < 1m wordt als wastafel gewaardeerd."
                             )
