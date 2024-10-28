@@ -195,7 +195,8 @@ class Sanitair(Stelselgroep):
             ):
                 for element in ruimte.bouwkundige_elementen or []:
                     if (
-                        element.detail_soort.code
+                        element.detail_soort
+                        and element.detail_soort.code
                         == Bouwkundigelementdetailsoort.aanrecht.code
                     ):
                         if element.lengte is not None and element.lengte < 1000:
