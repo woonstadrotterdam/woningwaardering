@@ -476,7 +476,7 @@ Punten worden alleen aan het onderdeel ‘keuken’ toegekend als de ruimte vold
 
 Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, ook niet voor de extra voorzieningen als bedoeld in paragraaf 5.4 hierna. Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als ‘wastafel’.
 
-> Zorg ervoor dat alleen aanrechten met een spoelbak worden meegegeven, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
+> Zorg ervoor dat alleen aanrechten met een spoelbak worden meegegeven en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
 
 ### 5.2 Puntentoekenning lengte aanrecht
 
