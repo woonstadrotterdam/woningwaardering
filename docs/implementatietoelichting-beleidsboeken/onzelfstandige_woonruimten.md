@@ -209,11 +209,14 @@ Dit vertaalt zich naar 15 (15*1) + 3.75* (11 * 1 gedeeld door 3 kamers) = 18.75 
 ```
 
 ## Rubriek 2 - Oppervlakte van overige ruimten
+
 ### 2.1 Puntentoekenning
+
 Privé overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter.
 Gemeenschappelijke overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter. Dit puntenaantal wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot de gemeenschappelijke overige ruimte(n).
 
 ### 2.2 Wat zijn overige ruimten?
+
 Een ruimte wordt als overige ruimte gewaardeerd als deze voldoet aan de volgende eisen:
 
 - ~~de vloer moet begaanbaar zijn;~~
@@ -244,6 +247,7 @@ Een toiletruimte kan als overige ruimte worden gewaardeerd als aan de eisen van 
 > De woningwaarderingpackage gaat ervanuit dat ruimten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
 
 ### 2.4 Saldering en puntenberekening
+
 De oppervlakten voor privé en voor gemeenschappelijke overige ruimten worden afzonderlijk berekend. De punten voor privé overige ruimte(n) worden uitsluitend in de berekening betrokken voor de woonruimte in kwestie.
 
 De punten voor gemeenschappelijke overige ruimte(n) moeten worden verdeeld over het aantal onzelfstandige woonruimtes.
@@ -273,6 +277,7 @@ Dit vertaalt zich dan naar 25 * 0,75 punt (per m2) = 18.75 punten. Dit puntenaan
 
 In totaal is voor de woonruimte in dit voorbeeld een puntenaantal van 3 plus 6,25 punten, dus 9.25 punten voor overige ruimte.
 ```
+
 ## Rubriek 3 - Verkoeling en verwarming
 
 ### 3.1 Puntentoekenning
@@ -328,7 +333,9 @@ Punten worden alleen aan het onderdeel ‘keuken’ toegekend als de keuken vold
 - ~~twee inbouwkasten met een breedte van minimaal 50 cm;~~
 - ~~waterdichte afwerking boven het aanrechtblad en in de kookhoek vanaf de vloer tot een hoogte van minimaal 1,50 m.~~
 
-Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend. ~~Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als ‘wastafel’.~~
+> Zorg ervoor dat alleen aanrechten met een spoelbak worden meegegeven en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
+
+Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend. Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als ‘wastafel’.
 
 ### 5.2 Puntentoekenning lengte aanrecht
 
@@ -340,7 +347,7 @@ De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van 
 - Bij een aanrechtlengte van meer dan 3 meter worden 10 punten toegekend, worden 13 punten toegekend als er minimaal 8 onzelfstandige woonruimten toegang en gebruiksrecht hebben tot de keuken.
 - De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
 
-~~Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel. Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.~~
+Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel. ~~Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.~~
 
 ~~### 5.3 Meetinstructies lengte aanrechtblad~~
 
