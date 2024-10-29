@@ -289,7 +289,7 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 7.0,
+      "punten": 8.0,
       "woningwaarderingen": [
         {
           "aantal": 1.0,
@@ -302,6 +302,13 @@
           "aantal": 1.0,
           "criterium": {
             "naam": "Badruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Keuken - Wastafel (spoelbak in aanrecht < 1m)"
           },
           "punten": 1.0
         },
@@ -413,12 +420,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1623.96,
-  "punten": 258.0,
+  "maximaleHuur": 1630.43,
+  "punten": 259.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1623.96
+  "maximaleHuurInclusiefOpslag": 1630.43
 }
