@@ -1,6 +1,5 @@
 from collections import defaultdict
 from datetime import date
-from decimal import Decimal
 
 from loguru import logger
 
@@ -22,7 +21,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 
 
 class Keuken(Stelselgroep):
