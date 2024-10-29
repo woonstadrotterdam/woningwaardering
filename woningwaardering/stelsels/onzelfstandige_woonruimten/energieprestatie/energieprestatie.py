@@ -272,7 +272,7 @@ class Energieprestatie(Stelselgroep):
                 woningwaardering,
             )
 
-        elif eenheid.bouwjaar and not energieprestatie:
+        elif eenheid.bouwjaar:
             woningwaardering = self._bereken_punten_met_bouwjaar(
                 eenheid, oppervlakte_van_vertrekken, woningwaardering
             )
