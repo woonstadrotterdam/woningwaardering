@@ -65,7 +65,6 @@ class Keuken(Stelselgroep):
                 if woningwaardering.criterium is not None:
                     if (
                         woningwaardering.punten
-                        and woningwaardering.criterium.naam
                         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
                     ):
