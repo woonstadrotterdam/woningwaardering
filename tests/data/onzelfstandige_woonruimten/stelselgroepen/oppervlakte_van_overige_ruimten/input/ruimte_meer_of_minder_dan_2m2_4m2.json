@@ -1,0 +1,50 @@
+{
+  "bouwjaar": 1924,
+  "ruimten": [
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 10,
+      "oppervlakte": 3,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "BIJ",
+        "naam": "Bijkeuken"
+      },
+      "naam": "Bijkeuken",
+      "inhoud": 10,
+      "oppervlakte": 2,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toilet"
+      },
+      "naam": "Toilet",
+      "inhoud": 10,
+      "oppervlakte": 1,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    }
+  ]
+}

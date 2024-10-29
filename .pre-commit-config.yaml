@@ -11,11 +11,9 @@ repos:
     # Ruff version.
     rev: v0.3.4
     hooks:
-      # Run the linter.
       - id: ruff
         types_or: [python, pyi, jupyter]
-        args: ["check", "--select", "I", "--fix"]
-
+        args: ["--fix", "--extend-select", "I"]
       # Run the formatter.
       - id: ruff-format
         types_or: [python, pyi, jupyter]
