@@ -178,22 +178,61 @@ class Sanitair(Stelselgroep):
         ]:
             aantal_wastafels = installaties[wastafelsoort.value]
 
+            # Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m,
+            # voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd,
+            # maar als wastafel.
+            aantal_spoelbakken = 0
+            if (
+                wastafelsoort == Installatiesoort.wastafel
+                and ruimte.detail_soort.code
+                in [
+                    Ruimtedetailsoort.keuken.code,
+                    Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+                    Ruimtedetailsoort.woonkamer.code,
+                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                    Ruimtedetailsoort.slaapkamer.code,
+                ]
+            ):
+                for element in ruimte.bouwkundige_elementen or []:
+                    if (
+                        element.detail_soort
+                        and element.detail_soort.code
+                        == Bouwkundigelementdetailsoort.aanrecht.code
+                    ):
+                        if element.lengte is not None and element.lengte < 1000:
+                            logger.info(
+                                f"Ruimte {ruimte.naam} ({ruimte.id}): aanrecht < 1m wordt als wastafel gewaardeerd."
+                            )
+                            yield WoningwaarderingResultatenWoningwaardering(
+                                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                                    naam=f"{ruimte.naam} - {wastafelsoort.naam} (spoelbak in aanrecht < 1m)"
+                                ),
+                                punten=float(punten_sanitair[wastafelsoort.value]),
+                                aantal=1,
+                            )
+                            aantal_spoelbakken += 1
+
             totaal_aantal_wastafels += aantal_wastafels
 
             punten_per_wastafel = Decimal(str(punten_sanitair[wastafelsoort.value]))
 
             punten_voor_wastafels = utils.rond_af(
-                aantal_wastafels * punten_per_wastafel,
+                (aantal_wastafels + aantal_spoelbakken) * punten_per_wastafel,
                 decimalen=2,
             )
 
-            if punten_voor_wastafels > 0:
+            if aantal_wastafels > 0:
                 yield (
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                             naam=f"{ruimte.naam} - {wastafelsoort.naam}"
                         ),
-                        punten=float(punten_voor_wastafels),
+                        punten=float(
+                            utils.rond_af(
+                                aantal_wastafels * punten_per_wastafel,
+                                decimalen=2,
+                            )
+                        ),
                         aantal=aantal_wastafels,
                     )
                 )

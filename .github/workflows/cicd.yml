@@ -45,4 +45,10 @@ jobs:
         run: pre-commit run --all-files --hook-stage pre-push
 
       - name: Run pytest
-        run: python -m pytest
+        run: python -m pytest --junitxml=pytest-report.xml
+
+      - name: Produce test summary
+        uses: test-summary/action@v2
+        with:
+          paths: "pytest-report.xml"
+        if: always()
