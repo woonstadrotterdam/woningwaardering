@@ -137,6 +137,7 @@ class Keuken(Stelselgroep):
     def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte,
         stelselgroep: Woningwaarderingstelselgroep,
+        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if not Keuken.is_keuken(ruimte):
             logger.debug(
@@ -181,8 +182,7 @@ class Keuken(Stelselgroep):
                     totaal_lengte_aanrechten += element.lengte
                 elif (
                     element.lengte > 3000
-                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                    and 1 < ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten < 8
+                    and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
                 ):
                     aanrecht_punten = 10
                     totaal_lengte_aanrechten += element.lengte
