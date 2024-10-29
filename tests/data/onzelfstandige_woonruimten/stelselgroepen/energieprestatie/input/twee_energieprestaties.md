@@ -1,1 +1,1 @@
-Een eenheid met twee energieprestatie waarvan er 1 geldig is.
+Een eenheid met twee energieprestaties waarvan er 1 geldig is.
