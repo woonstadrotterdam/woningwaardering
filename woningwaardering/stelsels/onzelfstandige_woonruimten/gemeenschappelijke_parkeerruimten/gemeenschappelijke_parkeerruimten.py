@@ -105,7 +105,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                     )
                     if waardering.criterium is not None:
                         waardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten",
+                            id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_{'woonruimten' if gedeeld_met_aantal_onzelfstandige_woonruimten > 1 else 'woonruimte'}",
                         )
                         woningwaardering_groep.woningwaarderingen.append(waardering)
 
@@ -116,7 +116,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten",
+                        id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_{'woonruimten' if gedeeld_met_aantal_onzelfstandige_woonruimten > 1 else 'woonruimte'}",
                         naam=f"Totaal gedeeld met {gedeeld_met_aantal_onzelfstandige_woonruimten} onzelfstandige {'woonruimten' if gedeeld_met_aantal_onzelfstandige_woonruimten > 1 else 'woonruimte'}",
                     ),
                     aantal=count["aantal"],
