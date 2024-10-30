@@ -4,6 +4,7 @@
     {
       "id": "1",
       "gedeeld_met_aantal_eenheden": 10,
+      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
       "soort": {
         "code": "PAR",
         "naam": "Parkeergelegenheid"
@@ -18,6 +19,7 @@
     {
       "id": "2",
       "gedeeld_met_aantal_eenheden": 10,
+      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
       "soort": {
         "code": "PAR",
         "naam": "Parkeergelegenheid"

@@ -11,27 +11,8 @@
           "naam": "Gemeenschappelijke parkeerruimten"
         }
       },
-      "punten": 8.0,
-      "woningwaarderingen": [
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Type II + laadpaal (privé)",
-            "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten_gedeeld_met_1_onzelfstandige_woonruimten"
-            }
-          },
-          "punten": 8.0
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten_gedeeld_met_1_onzelfstandige_woonruimten",
-            "naam": "Totaal gedeeld met 1 onzelfstandige woonruimte"
-          },
-          "punten": 8.0
-        }
-      ]
+      "punten": 0.0,
+      "woningwaarderingen": []
     }
   ]
 }

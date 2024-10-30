@@ -66,15 +66,28 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                 for waardering in list(waarderingen_zelfstandig):
                     if waardering is None:
                         continue
+
+                    # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2,  (bijvoorbeeld een garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief behorende tot de woning).
+                    if (
+                        ruimte.gedeeld_met_aantal_eenheden is None
+                        or ruimte.gedeeld_met_aantal_eenheden <= 1
+                    ):
+                        logger.info(
+                            f"Ruimte {ruimte.id} is niet gedeeld met andere eenheden en komt daarom niet in aanmerking voor waardering onder {self.stelselgroep.value} onzelfstandig."
+                        )
+                        continue
+
                     if (
                         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
                         or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten == 0
                     ):
                         gedeeld_met_aantal_onzelfstandige_woonruimten = 1
+
                     else:
                         gedeeld_met_aantal_onzelfstandige_woonruimten = (
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         )
+
                     if (
                         gedeeld_met_counter.get(
                             gedeeld_met_aantal_onzelfstandige_woonruimten
@@ -105,7 +118,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                     )
                     if waardering.criterium is not None:
                         waardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_{'woonruimten' if gedeeld_met_aantal_onzelfstandige_woonruimten > 1 else 'woonruimte'}",
+                            id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten",
                         )
                         woningwaardering_groep.woningwaarderingen.append(waardering)
 
@@ -116,8 +129,8 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_{'woonruimten' if gedeeld_met_aantal_onzelfstandige_woonruimten > 1 else 'woonruimte'}",
-                        naam=f"Totaal gedeeld met {gedeeld_met_aantal_onzelfstandige_woonruimten} onzelfstandige {'woonruimten' if gedeeld_met_aantal_onzelfstandige_woonruimten > 1 else 'woonruimte'}",
+                        id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten",
+                        naam=f"Totaal gedeeld met {gedeeld_met_aantal_onzelfstandige_woonruimten} onzelfstandige woonruimten",
                     ),
                     aantal=count["aantal"],
                     punten=float(
@@ -157,7 +170,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = GemeenschappelijkeParkeerruimten()
     with open(
-        "tests/data/onzelfstandige_woonruimten/input/15004000185.json",
+        "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_parkeerruimten/input/carport_met_laadpaal_niet_gedeeld.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
