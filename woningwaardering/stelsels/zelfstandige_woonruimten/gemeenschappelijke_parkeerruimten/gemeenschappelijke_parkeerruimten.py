@@ -128,7 +128,9 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                 criterium += " + laadpaal"
 
             if ruimte.gedeeld_met_aantal_eenheden >= 2:
-                criterium += f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
+                criterium += (
+                    f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
+                )
                 totaal_punten_type_parkeeruimte = (
                     punten * Decimal(str(ruimte.aantal))
                 ) / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
@@ -147,7 +149,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                     naam=criterium,
                 ),
                 aantal=ruimte.aantal,
-                punten=totaal_punten_type_parkeeruimte,
+                punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),
             )
 
     def bereken(
