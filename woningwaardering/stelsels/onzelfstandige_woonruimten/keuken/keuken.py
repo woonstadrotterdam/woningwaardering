@@ -1,12 +1,16 @@
+from collections import defaultdict
 from datetime import date
-from decimal import Decimal
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.zelfstandige_woonruimten.keuken.keuken import (
+    Keuken as ZelfstandigeWoonruimtenKeuken,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -48,24 +52,66 @@ class Keuken(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="NotImplemented"
+        gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
+
+        for ruimte in eenheid.ruimten or []:
+            woningwaarderingen = list(
+                ZelfstandigeWoonruimtenKeuken.genereer_woningwaarderingen(
+                    ruimte, self.stelselgroep
                 )
             )
-        )
+            # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
+            for woningwaardering in woningwaarderingen:
+                if woningwaardering.criterium is not None:
+                    if (
+                        woningwaardering.punten
+                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                    ):
+                        gedeeld_met_counter[
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        ] += woningwaardering.punten
+                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
+                            id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
+                        )
+                        woningwaardering.punten = float(
+                            utils.rond_af(
+                                woningwaardering.punten
+                                / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                decimalen=2,
+                            )
+                        )
+                    elif woningwaardering.punten:
+                        gedeeld_met_counter[1] += woningwaardering.punten
+                        woningwaardering.criterium.bovenliggende_criterium = (
+                            WoningwaarderingCriteriumSleutels(
+                                id=f"{self.stelselgroep.name}_prive"
+                            )
+                        )
 
-        punten = utils.rond_af(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-            decimalen=0,
-        )
+            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
-        woningwaardering_groep.punten = float(punten)
+        # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
+        for aantal, punten in gedeeld_met_counter.items():
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam=f"Totaal (gedeeld met {aantal})"
+                if aantal > 1
+                else "Totaal (privé)",
+                id=f"{self.stelselgroep.name}_gedeeld_met_{aantal}_onzelfstandige_woonruimten"
+                if aantal > 1
+                else f"{self.stelselgroep.name}_prive",
+            )
+            woningwaardering.punten = float(utils.rond_af_op_kwart(punten / aantal))
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+        woningwaardering_groep.punten = sum(
+            woningwaardering.punten
+            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+            if woningwaardering.punten is not None
+            and woningwaardering.criterium is not None
+            and woningwaardering.criterium.bovenliggende_criterium is None
+        )
 
         logger.info(
             f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_onzelfstandige_woonruimte.naam}"
@@ -78,7 +124,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = Keuken()
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/onzelfstandige_woonruimten/stelselgroepen/keuken/input/woon_slaap_met_aanrecht.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
