@@ -137,6 +137,7 @@ class Keuken(Stelselgroep):
     def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte,
         stelselgroep: Woningwaarderingstelselgroep,
+        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if not Keuken.is_keuken(ruimte):
             logger.debug(
@@ -163,8 +164,34 @@ class Keuken(Stelselgroep):
                 if element.lengte < 1000:
                     aanrecht_punten = 0
                     totaal_lengte_aanrechten += element.lengte
-                elif element.lengte >= 2000:
+                elif (
+                    element.lengte >= 2000
+                    and (
+                        (  # zelfstandige keuken met aanrecht boven 2000mm is 7 punten
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
+                            or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten == 1
+                        )
+                        or (  # onzelfstandige keuken met aanrecht tussen 2000mm en 3000mm is 7 punten
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                            and element.lengte <= 3000
+                        )
+                    )
+                ):
                     aanrecht_punten = 7
+                    totaal_lengte_aanrechten += element.lengte
+                elif (
+                    element.lengte > 3000
+                    and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
+                ):
+                    aanrecht_punten = 10
+                    totaal_lengte_aanrechten += element.lengte
+                elif (
+                    element.lengte > 3000
+                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
+                ):
+                    aanrecht_punten = 13
                     totaal_lengte_aanrechten += element.lengte
                 else:
                     aanrecht_punten = 4
@@ -173,7 +200,7 @@ class Keuken(Stelselgroep):
                 yield (
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{ruimte.naam} - Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
+                            naam=f"{ruimte.naam}: Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                             meeteenheid=Meeteenheid.millimeter.value,
                         ),
                         punten=aanrecht_punten,
@@ -229,7 +256,7 @@ class Keuken(Stelselgroep):
             yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"Max. {max_punten_voorzieningen} punten voor een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
+                        naam=f"Max. {max_punten_voorzieningen} punten voor voorzieningen in een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
                     ),
                     punten=aftrek,
                 )
@@ -241,7 +268,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     keuken = Keuken()
     with open(
-        "tests/data/generiek/input/37101000032.json",
+        "tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/keuken_met_maximering_op_voorzieningen.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
