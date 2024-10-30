@@ -522,3 +522,56 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één keuken
 ### ~~7.3 Vergoeding kosten~~
 
 ~~Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder) wordt één punt toegekend. Voorwaarde is wel dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit. De wetgever gaat ervan uit dat met deze puntenwaardering de verhuurder een redelijke rendementswaarborg heeft voor het door hem geïnvesteerde vermogen (te weten de kosten van de ingrepen, verminderd met de eigen bijdrage van de huurder en de financiële tegemoetkoming van gemeente of (bij dure woonvoorzieningen) enige instantie die ingevolge een wettelijke regeling die tegemoetkoming verleent.~~
+
+## Rubriek 11 Punten voor de WOZ-waarde
+
+Punten worden toegekend op basis van de WOZ-waarde van het adres waar de onzelfstandige woonruimte onderdeel van is. WOZ staat voor Wet waardering onroerende zaken. De WOZ-waarde geeft de geschatte marktwaarde van de woning weer zoals volgt uit de Wet waardering onroerende zaken. Deze waarde wordt in principe ieder kalenderjaar door de gemeente vastgesteld, die in de WOZ-beschikking van de desbetreffende woning wordt weergegeven.
+
+De waardepeildatum van de WOZ-waarde ligt op 1 januari van twee kalenderjaren voorafgaand. Ter illustratie: de WOZ-waarde in de WOZ-beschikking van 2024 heeft een waardepeildatum van 1 januari 2022.
+
+### 11.1 Puntentoekenning
+
+De puntentoekenning is als volgt.
+
+- 14 punten wanneer de WOZ-waarde per m2 gebruiksoppervlakte **meer dan 10%** hoger is dan de gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van de woningen in het COROP-gebied waarbinnen de woning is gelegen.
+- 12 punten wanneer de WOZ-waarde per m2 gebruiksoppervlakte **maximaal 10% hoger of lager** is dan de gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van de woningen in het COROP-gebied waarbinnen de woning is gelegen.
+- 10 punten wanneer de WOZ-waarde per m2 gebruiksoppervlakte **meer dan 10% lager is** dan de gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van de woningen in het COROP-gebied waarbinnen de woning is gelegen.
+
+Punten worden bepaald aan de hand van de gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van woningen in het COROP-gebied, zoals in bijlage 3 is weergegeven. Deze gemiddelden worden elk jaar, met ingang van 1 januari, aangepast met de gemiddelde wijziging van de eigenwoningwaarden van elk COROP-gebied. In de Uitvoeringsregeling huurprijzen woonruimte zijn de COROP-gebieden weergegeven alsmede de daarbij behorende gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van woningen. In deze regeling zijn twee verschillende kolommen weergegeven: één voor de gemiddelden waar nog geen nieuwe WOZ-beschikking voor is afgegeven en één voor de gemiddelden waar wel een nieuwe WOZ-beschikking is afgegeven. De kolommen geven op basis van de peildatum van de WOZ-beschikking weer met welk bedrag moet worden gerekend.'
+
+Onder gebruiksoppervlakte in deze rubriek wordt verstaan: de oppervlakte van een verblijfsobject in gehele vierkante meters als bedoeld onder “kenmerken”, te vinden per woning op de officiële site van het WOZ-waardeloket. Het gaat hierbij op de gebruiksoppervlakte van de gehele woning (het adres) waarvan de onzelfstandige woonruimten onderdeel uitmaken.
+
+_Rekenvoorbeeld:_
+
+_De WOZ-waarde van een woning met peildatum 1 januari 2022 is vastgesteld op € 250.000. De woning, waarvan de onzelfstandige woonruimte deel uitmaakt, is gelegen in Amsterdam en heeft een gebruiksoppervlakte van 40 m2._
+
+_De gemeente Amsterdam ligt in het COROP-gebied Groot-Amsterdam dat € 5.596 als gemiddelde WOZ-waarde per vierkante meter heeft. De WOZ-waarde per m2 gebruiksoppervlakte van de woning betreft € 6.250 (250.000 gedeeld door 40). Dit bedrag is 11,69% hoger dan de gemiddelde WOZ-waarde per vierkante meter van het COROP-gebied Groot-Amsterdam. Gelet hierop worden 14 punten aan de onzelfstandige woonruimte toegekend aangezien de WOZ-waarde per m2 gebruiksoppervlakte meer dan 10% hoger is dan de gemiddelde WOZ-waarde per m2 in gebruiksoppervlakte het COROP-gebied Groot-Amsterdam._
+
+### 11.2 Ontbreken WOZ-waarde en minimumwaarde
+
+Als geen WOZ-waarde bekend is, kan als alternatief 85% van de taxatiewaarde van de woning worden gebruikt volgend uit een door een Register-Taxateur opgesteld (hybride)taxatierapport. De verhuurder draagt de verantwoordelijkheid voor het opstellen van dit rapport. De taxatiewaarde geldt totdat een WOZ-waarde is vastgesteld en vervalt voor toepassing van deze rubriek. Als de verhuurder geen taxatierapport heeft aangeleverd dan geldt de minimum WOZ-waarde.
+
+**Minimumwaarde**
+
+De minimum WOZ-waarde wordt ook gebruikt voor specifieke woningen van specifieke verhuurders, zoals ‘containerwoningen’ die zijn bestemd voor studentenhuisvesting. In die gevallen wordt een minimum WOZ-waarde gehanteerd indien de WOZ-waarde lager is dan deze minimumwaarde. Deze waarde met peildatum 1 januari 2023 bedraagt € 73.607. Zie de tabel hieronder voor de minimumwaarde van de afgelopen jaren.
+
+Tabel 1
+| Peildatum | Minimumwaarde |
+| ------------------ | -------- |
+| Per 1 januari 2021 | € 61.198 |
+| Per 1 januari 2022 | € 71.602 |
+| Per 1 januari 2023 | € 73.607 |
+
+**Tijdelijke woning**
+
+In geval van een tijdelijke woning hanteert de register-taxateur de objectafbakeningsvoorschriften en waarderingsvoorschriften van hoofdstuk III van de Wet WOZ met uitzondering van de voorschriften op grond van artikel 17, vierde lid, en artikel 18, eerste en tweede lid, van de Wet WOZ. In plaats van de voorschriften van artikel 18, eerste en tweede lid, gaat de register-taxateur uit van de staat van de woning na oplevering.
+
+Onder tijdelijke woning wordt voor deze rubriek een woning verstaan die voor een bepaalde tijd op een tijdelijke locatie (met toegelaten functie wonen of tijdelijke afwijking Omgevingsplan) mogen worden gebouwd. Dit zijn woningen die voldoen aan de eisen die gelden voor nieuwbouw óf die getoetst zijn aan tijdelijke woningen zoals gedefinieerd in het Besluit bouwwerken leefomgeving (termijn van ten hoogste 15 jaar).
+
+### 11.3 Gebouwd eigendom in aanbouw
+
+Indien de WOZ-waarde betrekking heeft op een ‘gebouwd eigendom in aanbouw’, als bedoeld in artikel 17 lid 4 Wet WOZ, dan wordt voor de puntentoekenning uitgegaan van de waarde van de woning als ware de bouw voltooid. De WOZ-beschikking zal het voortgangspercentage vermelden. De Huurcommissie heeft dan tot taak de WOZ-waarde gerelateerd aan de voortgang van de aanbouw om te rekenen naar de waarde “als ware de bouw voltooid”, dus naar 100%.
+
+Onder een ‘gebouwd eigendom in aanbouw’ wordt verstaan een onroerende zaak of gedeelte daarvan waarvoor een omgevingsvergunning is verleend en die door bouw nog niet geschikt is voor gebruik overeenkomstig haar beoogde bestemming. Het gaat hier om de situatie waarbij nieuwbouw/verbouw is begonnen na 1 januari van een lopend jaar en die niet is afgerond voor 1 januari van het daaropvolgende jaar.
+
+Hiervan is bijvoorbeeld sprake als, in het kader van de WOZ-beschikking 2023 dat als peildatum 1 januari 2022 heeft, de werkzaamheden aan het gehuurde zijn aangevangen na 1 januari 2022 en zijn voltooid ná 1 januari 2023. De WOZ-beschikking 2024, dat als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven “als ware de bouw voltooid”. In dat geval kan de woning worden aangemerkt als ‘een gebouwd eigendom in aanbouw’ als bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.
