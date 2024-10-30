@@ -1,0 +1,30 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": -0.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 3.67,
+          "criterium": {
+            "naam": "Bouwjaar 1921",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": -0.55
+        }
+      ]
+    }
+  ]
+}

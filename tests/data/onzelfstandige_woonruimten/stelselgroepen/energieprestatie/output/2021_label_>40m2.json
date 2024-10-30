@@ -3,21 +3,26 @@
     {
       "criteriumGroep": {
         "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
         },
         "stelselgroep": {
           "code": "ENE",
           "naam": "Energieprestatie"
         }
       },
-      "punten": 28.0,
+      "punten": -1.0,
       "woningwaarderingen": [
         {
+          "aantal": 9.0,
           "criterium": {
-            "naam": "Energieprestatievergoeding Meergezinswoning"
+            "naam": "F",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
-          "punten": 28.0
+          "punten": -0.9
         }
       ]
     }

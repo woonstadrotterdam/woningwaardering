@@ -322,6 +322,91 @@ In totaal is voor de woonruimte in dit voorbeeld een puntenaantal van 3 plus 6,2
 
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding tussen keukengedeelte en de rest van het vertrek aanwezig is.
 
+## Rubriek 4 - Energieprestatie
+
+De energieprestatie van een woning kan sinds 1 januari 2021 op drie manieren zijn vastgesteld:
+
+1. **Een oud energielabel**: registratie heeft plaatsgevonden vóór 1 januari 2015. In 2021 en later liepen en lopen veel sinds 1 juli 2011 verstrekte energielabels af, want de geldigheidsduur is tien jaar.
+2. **De energie-index**: registratie op of na 1 januari 2015 tot 1 januari 2021. In 2025 en later lopen veel sinds 1 januari 2015 verstrekte energie-indexen af, want de geldigheidsduur is tien jaar.
+3. **Het energielabel op basis van de NTA 8800**: registratie op of na 1 januari 2021.
+
+In EP-online is te vinden wat de energieprestatie van een woning is. Voor de waardering van de energieprestatie van de onzelfstandige woonruimte(n) wordt de energieprestatie toegepast van de gehele woning (het adres) waar de onzelfstandige woonruimte onderdeel van uitmaakt.
+
+### 4.1 Puntentoekenning
+
+Bij een energielabel bepaalt de labelklasse (A++++ t/m G) het aantal punten dat de verhuurder mag doorrekenen in de maximale huur. Bij een energie-index is de indeling in letters vervangen door een cijfer. De energie-index wordt meegenomen indien in EP-online staat aangegeven dat de energie-index geldig is voor het woningwaarderingsstelsel.
+
+#### Puntentoekenning energielabel
+
+| **Energielabel** | **Energie-index (EI)**  | **Punten per m² die volgens rubriek 1 zijn toe te rekenen aan de huurder** |
+|------------------|-------------------------|--------------------------------------------------------------------------|
+| A++++            | n.v.t.                  | 1 punt                                                                   |
+| A+++             | n.v.t.                  | 0,95 punt                                                                |
+| A++              | EI < 0,6                | 0,85 punt                                                                |
+| A+               | 0,6 < EI ≤ 0,8          | 0,75 punt                                                                |
+| A                | 0,8 < EI ≤ 1,2          | 0,65 punt                                                                |
+| B                | 1,2 < EI ≤ 1,4          | 0,50 punt                                                                |
+| C                | 1,4 < EI ≤ 1,8          | 0,35 punt                                                                |
+| D                | 1,8 < EI ≤ 2,1          | 0,20 punt                                                                |
+| E                | 2,1 < EI ≤ 2,4          | -0,05 punt                                                               |
+| F                | 2,4 < EI ≤ 2,7          | -0,10 punt                                                               |
+| G                | EI > 2,7                | -0,15 punt                                                               |
+
+Zoals aangegeven in de tabel hierboven, worden voor de waardering van energieprestatie de punten per m² die volgens rubriek 1 (oppervlakte van vertrekken) zijn toe te rekenen aan de onzelfstandige woonruimte gebruikt om de punten voor energieprestatie te berekenen.
+
+#### Voorbeeld Puntentoekenning
+
+Huurder A huurt één onzelfstandige woonruimte. Het totale privévertrek beslaat 10 m². Daarnaast is het totale oppervlakte van de aanwezige gemeenschappelijke vertrek op het adres 40 m². Huurder A deelt dit met drie andere huurders van onzelfstandige woonruimten op dit adres.
+
+Het aantal m² dat volgens rubriek 1 aan de huurder is toe te rekenen is 10 m² + 10 m² (40 m² / 4) = 20 m². Het energielabel van de woning is A. Dit maakt het aantal punten in deze rubriek:  
+20 m² x 0,65 punt = **13 punten**.
+
+### 4.2 Bouwjaar bepalend bij ontbreken geldig energielabel of energie-index
+
+Indien op de peildatum van de woningwaardering een geldig energielabel of energie-index ontbreekt of als de geldigheidsduur van het energielabel is verstreken, dan bepaalt het bouwjaar van de woning het aantal punten.
+
+#### Puntentelling bij toepassing bouwjaar
+
+| **Bouwjaar**      | **Punten per m² die volgens rubriek 1 zijn toe te rekenen aan de huurder** |
+|-------------------|---------------------------------------------------------------------------|
+| 2002 en later     | 0,65 punt                                                                 |
+| 2000 t/m 2001     | 0,50 punt                                                                 |
+| 1992 t/m 1999     | 0,35 punt                                                                 |
+| 1984 t/m 1991     | 0,20 punt                                                                 |
+| 1979 t/m 1983     | -0,05 punt                                                                |
+| 1977 t/m 1978     | -0,10 punt                                                                |
+| 1976 of ouder     | -0,15 punt                                                                |
+
+### 4.3 Monumenten
+
+Voor Rijks-, provinciale en gemeentelijke monumenten gelden, in afwijking van andere woningen, geen minpunten voor de energielabels E, F, en G. De puntentoekenning bedraagt dan, in afwijking van bovenstaande tabellen, **0 punten**.
+
+### 4.4 Afwijkingsbevoegdheid hogere energielabelklasse dan A++++
+> Het is mogelijk om met een energielabel A++++ de punten voor de Energieprestatie te berekenen.
+
+De hierboven vermelde tabellen met de puntentoekenning voor de labelklasse gaan tot A++++. De Huurcommissie heeft de bevoegdheid om af te wijken van de hierboven aangegeven puntenwaardering indien de gemaakte kosten om deze energieprestatie te bereiken, aanmerkelijk afwijken van hetgeen als gangbaar wordt beschouwd, of indien de energieprestatie aanmerkelijk beter is dan hetgeen als gangbaar bij een energielabelklasse A++++ wordt beschouwd.
+
+### ~~4.5 Gerede twijfel energielabel~~
+> In woningwaardering package wordt er vanuit gegaan dat een energieprestatie juist is.
+
+~~Als een huurder twijfelt aan de juistheid van het toepasselijke energielabel, dan heeft de Huurcommissie de bevoegdheid om een 'eigen oordeel' uit te spreken bij gerede twijfel van het energielabel. Een Huurcommissie Eigen Oordeel (HEO) kan worden uitgesproken indien de huurder aantoont dat er sprake is van gerede twijfel over de juistheid van het energielabel/energie-index en dat het gewijzigde energielabel/energie-index van invloed zal zijn op de maximaal redelijke huurprijs.~~
+
+~~Bij ‘gerede twijfel’ wordt beoordeeld of de huurder voldoende heeft aangetoond dat een verkeerd woningkenmerk is gebruikt bij het vaststellen van het energielabel, waardoor de juistheid van de labelklasse voor de woning in het geding is. Voorbeelden van foutieve kenmerken zijn:~~
+
+~~- Verkeerd soort glas, bijvoorbeeld enkel in plaats van dubbel glas.~~
+~~- Verkeerd type woning, zoals een hoekwoning in plaats van een tussenwoning.~~
+~~- Slecht geïsoleerde muren terwijl het energielabel aangeeft dat het huis goed geïsoleerd is.~~
+
+~~De huurder dient gerede twijfel aan te tonen door middel van het energielabelafschrift en moet onderbouwen waarom een onjuist woningkenmerk is gebruikt. Het energielabelafschrift is te downloaden via Mijnoverheid.~~
+
+~~Indien de Huurcommissie tot een eigen oordeel wil komen, dan laat de Huurcommissie onderzoeken wat de energieprestatie van de woning is. Het eigen oordeel is uitsluitend in de voorliggende zaak van kracht, wordt niet geregistreerd in het register van de Rijksdienst voor Ondernemend Nederland, en komt te vervallen na ontbinding van de huurovereenkomst.~~
+
+### 4.6 Energieprestatievergoeding
+
+Voor woningen die zelf (gedeeltelijk) in hun energieverbruik voorzien, bijvoorbeeld door zonnepanelen, kan bij het verhuren een energieprestatievergoeding (EPV) worden afgesproken. De woning moet dan voldoen aan de eisen voor een EPV. Als dit het geval is, dan is het aantal punten op basis van het puntenstelsel voor de energieprestatie lager.
+
+Om te voorkomen dat in gevallen waarin een energieprestatievergoeding is overeengekomen, de opwekking van energie voor de huurder tevens wordt verdisconteerd in de huurprijs door middel van puntentoekenning vanwege het energielabel/-index, wordt voor deze woningen een correctiefactor toegepast op het aantal punten voor de energieprestatie. In deze gevallen wordt de energieprestatie gewaardeerd met **0,50 punt per m²**.
+
 ## Rubriek 5 - Keuken
 
 ### 5.1 Eisen keuken
