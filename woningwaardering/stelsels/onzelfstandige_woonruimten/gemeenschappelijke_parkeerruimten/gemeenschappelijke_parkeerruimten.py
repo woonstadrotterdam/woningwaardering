@@ -59,50 +59,55 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
         gedeeld_met_counter: dict[int, dict[str, float]] = {}
         for ruimte in eenheid.ruimten:
-            waarderingen_zelfstandig = list(
-                ZelfGemeenschappelijkeParkeerruimten(
-                    peildatum=self.peildatum
-                ).genereer_woningwaarderingen(ruimte)
-            )
-            for waardering in waarderingen_zelfstandig:
-                if waardering is None:
-                    continue
-                if (
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
-                    or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten == 0
-                ):
-                    gedeeld_met_aantal_onzelfstandige_woonruimten = 1
-                else:
-                    gedeeld_met_aantal_onzelfstandige_woonruimten = (
-                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                    )
-                if (
-                    gedeeld_met_counter.get(
-                        gedeeld_met_aantal_onzelfstandige_woonruimten
-                    )
-                    is None
-                ):
-                    gedeeld_met_counter[
-                        gedeeld_met_aantal_onzelfstandige_woonruimten
-                    ] = {"aantal": 0.0, "punten": 0.0}
+            waarderingen_zelfstandig = ZelfGemeenschappelijkeParkeerruimten(
+                peildatum=self.peildatum
+            ).genereer_woningwaarderingen(ruimte)
+            if waarderingen_zelfstandig is not None:
+                for waardering in list(waarderingen_zelfstandig):
+                    if waardering is None:
+                        continue
+                    if (
+                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
+                        or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten == 0
+                    ):
+                        gedeeld_met_aantal_onzelfstandige_woonruimten = 1
+                    else:
+                        gedeeld_met_aantal_onzelfstandige_woonruimten = (
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        )
+                    if (
+                        gedeeld_met_counter.get(
+                            gedeeld_met_aantal_onzelfstandige_woonruimten
+                        )
+                        is None
+                    ):
+                        gedeeld_met_counter[
+                            gedeeld_met_aantal_onzelfstandige_woonruimten
+                        ] = {"aantal": 0.0, "punten": 0.0}
 
-                gedeeld_met_counter[gedeeld_met_aantal_onzelfstandige_woonruimten][
-                    "aantal"
-                ] += waardering.aantal
-                gedeeld_met_counter[gedeeld_met_aantal_onzelfstandige_woonruimten][
-                    "punten"
-                ] += waardering.punten
-                waardering.punten = float(
-                    utils.rond_af(
-                        Decimal(str(waardering.punten))
-                        / Decimal(str(gedeeld_met_aantal_onzelfstandige_woonruimten)),
-                        decimalen=2,
+                    if waardering.aantal is not None:
+                        gedeeld_met_counter[
+                            gedeeld_met_aantal_onzelfstandige_woonruimten
+                        ]["aantal"] += waardering.aantal
+                    if waardering.punten is not None:
+                        gedeeld_met_counter[
+                            gedeeld_met_aantal_onzelfstandige_woonruimten
+                        ]["punten"] += waardering.punten
+
+                    waardering.punten = float(
+                        utils.rond_af(
+                            Decimal(str(waardering.punten))
+                            / Decimal(
+                                str(gedeeld_met_aantal_onzelfstandige_woonruimten)
+                            ),
+                            decimalen=2,
+                        )
                     )
-                )
-                waardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                    id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten",
-                )
-                woningwaardering_groep.woningwaarderingen.append(waardering)
+                    if waardering.criterium is not None:
+                        waardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
+                            id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten",
+                        )
+                        woningwaardering_groep.woningwaarderingen.append(waardering)
 
         for (
             gedeeld_met_aantal_onzelfstandige_woonruimten,
@@ -131,8 +136,11 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-                and woningwaardering.criterium.bovenliggende_criterium is None
+                if (
+                    woningwaardering.punten is not None
+                    and woningwaardering.criterium
+                    and woningwaardering.criterium.bovenliggende_criterium is None
+                )
             )
         )
 

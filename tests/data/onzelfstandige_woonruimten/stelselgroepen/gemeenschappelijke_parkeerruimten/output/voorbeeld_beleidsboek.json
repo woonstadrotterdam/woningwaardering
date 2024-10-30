@@ -1,0 +1,47 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GPA",
+          "naam": "Gemeenschappelijke parkeerruimten"
+        }
+      },
+      "punten": 4.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 5.0,
+          "criterium": {
+            "naam": "Type II + laadpaal (gedeeld met 10 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_parkeerruimten_gedeeld_met_1_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Type III (gedeeld met 10 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_parkeerruimten_gedeeld_met_1_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 0.8
+        },
+        {
+          "aantal": 7.0,
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten_gedeeld_met_1_onzelfstandige_woonruimten",
+            "naam": "Totaal gedeeld met 1 onzelfstandige woonruimte"
+          },
+          "punten": 4.8
+        }
+      ]
+    }
+  ]
+}

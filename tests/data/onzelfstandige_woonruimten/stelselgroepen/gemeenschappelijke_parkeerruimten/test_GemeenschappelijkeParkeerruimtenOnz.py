@@ -8,7 +8,7 @@ from tests.test_utils import (
     krijg_warning_tuple_op_datum,
     laad_specifiek_input_en_output_model,
 )
-from woningwaardering.stelsels.zelfstandige_woonruimten.gemeenschappelijke_parkeerruimten import (
+from woningwaardering.stelsels.onzelfstandige_woonruimten.gemeenschappelijke_parkeerruimten import (
     GemeenschappelijkeParkeerruimten,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -32,21 +32,21 @@ def specifieke_input_en_output_model(request):
 
 
 def test_GemeenschappelijkeParkeerruimten(
-    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
+    onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     gemeenschappelijke_parkeerruimten = GemeenschappelijkeParkeerruimten(
         peildatum=peildatum
     )
     resultaat = gemeenschappelijke_parkeerruimten.bereken(
-        zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
+        onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
 
 
 def test_GemeenschappelijkeParkeerruimten_output(
-    zelfstandige_woonruimten_input_en_outputmodel, peildatum
+    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
-    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
+    eenheid_input, eenheid_output = onzelfstandige_woonruimten_input_en_outputmodel
     gemeenschappelijke_parkeerruimten = GemeenschappelijkeParkeerruimten(
         peildatum=peildatum
     )
