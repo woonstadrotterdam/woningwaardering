@@ -170,7 +170,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = GemeenschappelijkeParkeerruimten()
     with open(
-        "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_parkeerruimten/input/carport_met_laadpaal_niet_gedeeld.json",
+        "tests/data/generiek/input/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
