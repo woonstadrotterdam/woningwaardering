@@ -296,7 +296,7 @@ class Energieprestatie(Stelselgroep):
             logger.info(f"Eenheid {eenheid.id}: energieprestatievergoeding gevonden.")
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"EPV {pandsoort.naam}"
+                    naam=f"Energieprestatievergoeding {pandsoort.naam}"
                 )
             )
             woningwaardering.punten = float(

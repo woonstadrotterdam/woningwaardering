@@ -250,7 +250,7 @@ class Energieprestatie(Stelselgroep):
             logger.info(f"Eenheid {eenheid.id}: energieprestatievergoeding gevonden.")
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="EPV",
+                    naam="Energieprestatievergoeding",
                     meeteenheid=Meeteenheid.vierkante_meter_m2.value,
                 )
             )
