@@ -99,9 +99,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             and eenheid.adres.woonplaats.naam.lower() in COROP_PLAATSEN
         ):
             warnings.warn(
-                f"Eenheid {eenheid.id}: plaats {eenheid.adres.woonplaats.naam} is in de lijst van COROP-plaatsen. De logica hiervoor is nog niet geïmplementeerd. Zie: https://github.com/woonstadrotterdam/woningwaardering/issues/103"
+                f"Eenheid {eenheid.id}: plaats {eenheid.adres.woonplaats.naam} is in de lijst van COROP-plaatsen met een andere logica. De logica hiervoor is nog niet geïmplementeerd. Zie: https://github.com/woonstadrotterdam/woningwaardering/issues/103"
             )
-            return woningwaardering_groep
 
         woz_eenheid = self.bepaal_woz_eenheid(eenheid)
 
