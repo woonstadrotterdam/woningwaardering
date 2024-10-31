@@ -486,30 +486,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     Woningwaarderingstelselgroep.sanitair.code,  # 6
                     Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,  # 7
                     Woningwaarderingstelselgroep.buitenruimten.code,  # 8
-                    # In de wet staat:
-                    #
-                    # Indien een woning is gebouwd in het kalenderjaar 2015, 2016, 2017,
-                    # 2018 of 2019 en ten aanzien daarvan het totaal aantal punten na
-                    # saldering van de punten van de onderdelen 1 tot en met 8 en 12
-                    # minimaal 110 punten betreft, leidt de berekeningsmethodiek tot
-                    # een aantal punten voor de WOZ-waarde dat minimaal 40 punten
-                    # bedraagt.
-                    #
-                    # Echter in het beleidsboek staat:
-                    #
-                    # Indien de bouwkundige oplevering of hoogniveau renovatie van de
-                    # woning heeft plaatsgevonden in de jaren 2015-2019 en die woning
-                    # voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingsstelsel
-                    # minimaal 110 punten heeft behaald dan worden, voor het aantal
-                    # punten voor de WOZ-waarde, minimaal 40 punten toegekend.
-                    #
-                    # Omdat verder in deze rubriek ook niet gerekend wordt met
-                    # gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-                    # en parkeerruimten nemen wij aan dat dit een fout in het
-                    # beleidsboek betreft.
-                    #
-                    # Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.code,  # 9
-                    # Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.code,  # 10
+                    Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.code,  # 9
+                    Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.code,  # 10
                     Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # 12
                 ]
             )
