@@ -88,12 +88,16 @@ class Sanitair(Stelselgroep):
     def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte,
         stelselgroep: Woningwaarderingstelselgroep,
+        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if ruimte.detail_soort is None:
             warnings.warn(f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort.")
             return
 
         ruimte.installaties = ruimte.installaties or []
+        zelfstandige_woonruimte = (
+            stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
+        )
 
         # Backwards compatibiliteit voor bouwkundige elementen
         for mapping in {
@@ -165,9 +169,11 @@ class Sanitair(Stelselgroep):
         punten_sanitair = {
             Voorzieningsoort.wastafel.value: 1.0,
             Voorzieningsoort.meerpersoonswastafel.value: 1.5,
-            Voorzieningsoort.douche.value: 4.0,
-            Voorzieningsoort.bad.value: 6.0,
-            Voorzieningsoort.bad_en_douche.value: 7.0,
+            Voorzieningsoort.douche.value: 4.0 if zelfstandige_woonruimte else 3.0,
+            Voorzieningsoort.bad.value: 6.0 if zelfstandige_woonruimte else 5.0,
+            Voorzieningsoort.bad_en_douche.value: 7.0
+            if zelfstandige_woonruimte
+            else 6.0,
         }
 
         totaal_aantal_wastafels = 0
@@ -248,6 +254,19 @@ class Sanitair(Stelselgroep):
                         Ruimtedetailsoort.badkamer_met_toilet.value,
                         Ruimtedetailsoort.doucheruimte.value,
                     ]
+                    # Op een adres met minimaal acht of meer onzelfstandige woonruimten geldt dit maximum niet voor maximaal één ruimte.
+                    # Dat betekent dat er voor adressen met acht of meer onzelfstandige woonruimten maximaal één ruimte mag zijn,
+                    # naast de badkamer, met meer dan één wastafel die voor waardering in aanmerking komt.
+                    # Voor woonruimten met >= 8 onzelfstandige woonruimten passen we hier geen maximering toe,
+                    # dit doen we in de Sanitair class voor onzelfstandige woonruimten
+                    and (
+                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
+                        or (
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                            is not None
+                            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten < 8
+                        )
+                    )
                 ):
                     logger.info(
                         f"Ruimte {ruimte.naam} ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
