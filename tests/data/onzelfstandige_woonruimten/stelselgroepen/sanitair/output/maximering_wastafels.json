@@ -1,0 +1,129 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 3.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Badkamer - Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Badkamer - Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": 3.0
+        },
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "naam": "Woonkamer - Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 3.0
+        },
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "naam": "Woonkamer - Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 4.5
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "WoonkamerMetMax - Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "WoonkamerMetMax - Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 3.0
+        },
+        {
+          "criterium": {
+            "naam": "Badkamer - Max 1 punt voor Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": -1.0
+        },
+        {
+          "criterium": {
+            "naam": "Badkamer - Max 1,5 punt voor Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": -1.5
+        },
+        {
+          "criterium": {
+            "naam": "WoonkamerMetMax - Max 1 punt voor Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": -1.0
+        },
+        {
+          "criterium": {
+            "naam": "WoonkamerMetMax - Max 1,5 punt voor Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": -1.5
+        },
+        {
+          "criterium": {
+            "id": "sanitair_prive",
+            "naam": "Totaal (privé)"
+          },
+          "punten": 2.5
+        },
+        {
+          "criterium": {
+            "id": "sanitair_gedeeld_met_8_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 8)"
+          },
+          "punten": 1.25
+        }
+      ]
+    }
+  ]
+}
