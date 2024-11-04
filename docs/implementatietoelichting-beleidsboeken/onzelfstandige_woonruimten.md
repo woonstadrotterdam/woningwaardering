@@ -489,6 +489,101 @@ Voorbeeld
 Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één keuken, met een aanrechtlengte tussen 2 m en 3 m. Hiervoor worden 7 punten toegekend. Daarnaast worden 3 punten toegekend voor voorzieningen (bijv. een inbouwkoelkast, inbouw keramische kookplaat en inbouw magnetron). Omdat de keuken wordt gedeeld door vier onzelfstandige woonruimten, geldt 10/4 = 2,5 punt per onzelfstandige woonruimte.
 ```
 
+## Rubriek 6 - Sanitair
+
+### 6.1 Puntentoekenning sanitaire basisvoorzieningen
+
+Het woningwaarderingsstelsel geeft punten aan sanitaire basisvoorzieningen:
+
+| Voorziening | Punten |
+| --- | --- |
+| Toilet in een aparte ruimte | 3 |
+| Toilet in een badkamer | 2 |
+| Hangend toilet in aparte ruimte | 3,75 |
+| Hangend toilet in badkamer | 2,75 |
+| Wastafel* | 1 |
+| Meerpersoonswastafel | 1,5** |
+| Douche | 3 |
+| Bad | 5 |
+| Bad en douche | 6 |
+
+\* tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer. Op een adres met minimaal acht of meer onzelfstandige woonruimten geldt dit maximum niet voor maximaal één ruimte. Dat betekent dat er voor adressen met acht of meer onzelfstandige woonruimten maximaal één ruimte mag zijn, naast de badkamer, met meer dan één wastafel die voor waardering in aanmerking komt.
+
+** *Tot een maximum van 1,5 punt per vertrek of overige ruimte m.u.v. de badkamer. Op een adres met minimaal 8 of meer onzelfstandige woonruimten geldt het bovengenoemde maximum niet voor maximaal één ruimte.*
+
+De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
+
+**Toilet**
+
+Punten worden toegekend aan een toilet met waterspoeling als het toilet is geplaatst in een daartoe bestemde ruimte ~~en als het toilet binnen het woongebouw is gelegen~~. ~~Wanneer sprake is van een toilet dat buiten de woning maar binnen het woongebouw is gelegen, dan geldt dat het toilet in de waardering wordt meegenomen als het gebruik van het toilet door derden is uit te sluiten~~. Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor waardering.
+
+**Wastafel**
+
+~~Als wastafels worden alle bakken geteld voor wassen en spoelen die op de waterleiding én op het huisriool zijn aangesloten. Een dergelijke bak wordt niet als wastafel gewaardeerd indien boven de bak een douche is aangebracht. Een bad of spoelbakken in een keukenaanrecht, bidet of lavet wordt niet als wastafel, douche of bad gewaardeerd. Wastafels worden gewaardeerd tot een maximum van 1 punt per vertrek of overige ruimte, m.u.v. de badkamer.~~
+
+> Zorg dat wastafels alleen worden meegenomen die voldoen aan de vereisten van een wastafel.
+
+~~Van een meerpersoonswastafel is sprake bij een wastafel met een minimale breedte van 70 cm, voorzien van twee kranen.~~ Deze wastafels worden tot maximaal 1,5 punt per vertrek of overige ruimte, m.u.v. de badkamer, gewaardeerd. De kranen worden afzonderlijk gewaardeerd.
+
+Zoals genoemd in paragraaf 5.2  waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter is dan één meter, als wastafel. In alle andere gevallen wordt een spoelbak in de keuken dus niet als wastafel gewaardeerd.
+
+> Indien een aanrecht met een lengte van minder dan één meter wordt meegegeven wordt deze als wastafel gewaardeerd. Geef hier niet ook nog een wastafel mee voor de spoelbak.
+
+**Bad en douche**
+
+~~Als douche wordt meegeteld iedere door de verhuurder aangebrachte installatie voor het nemen van een stortbad. Hieronder valt eveneens een zogenaamde douchecabine, die voldoet aan bovengenoemde voorwaarden, als de douchcabine in een vertrek (anders dan bad- of doucheruimte) of overige ruimte is geplaatst. De oppervlakte van dat vertrek of van die overige ruimte wordt in dat geval niet verminderd met de door de douchecabine ingenomen oppervlakte.~~
+
+Aan baden worden 5 punten toegekend, ~~ongeacht de lengte van het bad, als een volwassen persoon er in een normale zithouding in kan plaatsnemen. Indien een bad is voorzien van een (hand)douche, dan wordt het douchegarnituur niet afzonderlijk geteld.~~
+
+Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangebracht, geldt een waardering van 6 punten.
+
+~~Als het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 5 punten voor douche of respectievelijk bad.~~
+
+### 6.2 Puntentoekenning extra voorzieningen
+
+Het woningwaarderingsstelsel geeft voor het onderdeel sanitair extra punten voor voorzieningen in de bad- of doucheruimte. Hiervoor geldt een maximum tot het aantal punten dat reeds voor douche, bad en/of bad/douche is verkregen. Anders gezegd: maximaal een verdubbeling van de toegekende punten voor douche, bad en/of bad/douche.
+
+**Eisen bad-of doucheruimte**
+
+Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden in een bad- of doucheruimte. Bad- of doucheruimten moeten voldoen aan de volgende eisen:
+
+- ~~Een waterdichte vloerafwerking*.~~
+- ~~De ruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).~~
+- ~~Waterdichte afwerking tot 1,50 m hoogte voor badruimte en 1,80 m voor doucheruimte;~~
+- ~~Een wastafel inclusief (tweehands-)mengkraan en een spiegel.~~
+- ~~Een douche of bad met aansluitpunten voor warm en koud water (niet zijnde een warmwater apparaat) en voorzien van een warm- en koudwaterkraan of een mengkraan.~~
+
+\* Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien.
+
+**Lijst voorzieningen**
+
+Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
+
+Voorzieningen in de bad- of doucheruimte
+
+| Voorziening | Punten |
+| --- | --- |
+| Bubbelfunctie van het bad | 1,5 |
+| Gemonteerde volledige afscheiding van de douche* | 1,25 |
+| Handdoekenradiator | 0,75 |
+| Ingebouwd kastje met in- of opgebouwde wastafel | 1 |
+| Kastruimte (minimale breedte van 40cm, en minimale hoogte van 40cm) | 0,75 |
+| Stopcontact (maximaal twee per wastafel) | 0,25 |
+| Éénhandsmengkraan | 0,25 |
+| Thermostatische mengkraan | 0,5 |
+
+\* In het geval van een gemonteerde volledige afscheiding van de douche vindt de waardering van 1,25 punten plaats wanneer doucheruimte beschikt over  een onroerend aanhorige afscheiding met  een waterdichte afwerking aan alle zijden van de douche. Ter illustratie: glazen deuren vallen hier wel onder, maar een douchegordijn (dat snel weggenomen kan worden) niet.
+
+~~Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 3 of 5 punten voor douche of, respectievelijk bad.~~
+
+De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
+
+Voorbeeld
+
+```text
+Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkamer met een douche (3 punten), met gemonteerde afscheiding (1,25 punt) en handdoekradiator (0,75 punt). Daarnaast beschikt elke huurder over een eigen toilet (3 punten) in de onzelfstandige woonruimte. De badkamer levert in totaal 5 punten op (3 + 1,25 + 0,75). De badkamer wordt gedeeld door vier onzelfstandige woonruimten, dus 5/4 = 1,25 punt per onzelfstandige woonruimte. De vier onzelfstandige woonruimten hebben elk hun eigen toilet, dus dit puntenaantal hoeft niet nader gedeeld te worden. In dit voorbeeld geldt daarom dat elke huurder 1,25 + 3 = 4,25 punten krijgt voor de rubriek sanitair.
+```
+
 ## ~~Rubriek 7 - Woonvoorzieningen voor gehandicapten~~
 
 ### ~~7.1 Puntentoekenning~~
