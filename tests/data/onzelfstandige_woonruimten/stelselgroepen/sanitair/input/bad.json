@@ -1,0 +1,24 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "BAD",
+          "naam": "Bad"
+        }
+      ]
+    }
+  ]
+}

@@ -148,14 +148,56 @@
           "punten": 8.58
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toilet - Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 3.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair_gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2)"
+          },
+          "punten": 3.5
+        }
+      ]
     }
   ],
-  "maximaleHuur": 336.32,
-  "punten": 35.0,
+  "maximaleHuur": 374.72,
+  "punten": 39.0,
   "stelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 336.32
+  "maximaleHuurInclusiefOpslag": 374.72
 }
