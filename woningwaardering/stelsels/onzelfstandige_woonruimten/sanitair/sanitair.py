@@ -131,7 +131,11 @@ class Sanitair(Stelselgroep):
         # de ruimte met de meeste wastafels/meerpersoonswastafels.
         woningwaarderingen_met_maximering = []
         for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld:
-            if max_wastafels.ruimte != ruimte:
+            if (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
+                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
+                and max_wastafels.ruimte != ruimte
+            ):
                 for index, woningwaardering in enumerate(woningwaarderingen):
                     if (
                         woningwaardering.criterium
@@ -163,7 +167,11 @@ class Sanitair(Stelselgroep):
                                 )
                             ),
                         )
-            if max_meerpersoonswastafels.ruimte != ruimte:
+            if (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
+                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
+                and max_meerpersoonswastafels.ruimte != ruimte
+            ):
                 for index, woningwaardering in enumerate(woningwaarderingen):
                     if (
                         woningwaardering.criterium
@@ -182,7 +190,7 @@ class Sanitair(Stelselgroep):
                             index + 1,
                             WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                    naam=f"{ruimte.naam} - Max 1,5 punt voor {Voorzieningsoort.meerpersoonswastafel.naam}",
+                                    naam=f"{ruimte.naam} - Max 1.5 punt voor {Voorzieningsoort.meerpersoonswastafel.naam}",
                                 ),
                                 punten=utils.rond_af(
                                     1.5 - woningwaardering.aantal * 1.5,
