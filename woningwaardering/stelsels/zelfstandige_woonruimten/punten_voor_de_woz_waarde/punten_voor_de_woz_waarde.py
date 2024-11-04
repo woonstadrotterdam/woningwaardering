@@ -9,6 +9,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.corop_plaatsen import (
+    COROP_PLAATSEN,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -83,6 +86,22 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if not eenheid.bouwjaar:
             warnings.warn(f"Eenheid {eenheid.id}: geen bouwjaar gevonden.", UserWarning)
             return woningwaardering_groep
+
+        # abusievelijk wordt EenhedenAdresBasis gebruikt i.p.v. EenhedenEenheidadres, vandaar de checks met hasattr
+        # TODO: zorgen dat EenhedenEenheidadres wordt gebruikt
+        # Correctie implementatie van regels omtrent COROP-plaatsen ontbreekt: https://github.com/woonstadrotterdam/woningwaardering/issues/103
+        if (
+            eenheid.adres
+            and hasattr(eenheid.adres, "woonplaats")
+            and eenheid.adres.woonplaats
+            and hasattr(eenheid.adres.woonplaats, "naam")
+            and eenheid.adres.woonplaats.naam
+            and eenheid.adres.woonplaats.naam.lower() in COROP_PLAATSEN
+        ):
+            warnings.warn(
+                f"Eenheid {eenheid.id}: plaats {eenheid.adres.woonplaats.naam} is in de lijst van COROP-plaatsen met een andere logica. De logica hiervoor is nog niet geïmplementeerd. Zie: https://github.com/woonstadrotterdam/woningwaardering/issues/103"
+            )
+
         woz_eenheid = self.bepaal_woz_eenheid(eenheid)
 
         if woz_eenheid is None:
@@ -618,14 +637,12 @@ if __name__ == "__main__":  # pragma: no cover
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    woningwaardering_resultaat = punten_voor_de_woz_waarde.bereken(eenheid)
-
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
-        )
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+        groepen=[punten_voor_de_woz_waarde.bereken(eenheid)]
     )
 
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
+
+    tabel = utils.naar_tabel(resultaat)
 
     print(tabel)
