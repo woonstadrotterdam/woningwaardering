@@ -204,7 +204,21 @@ class Sanitair(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
         for ruimte, woningwaarderingen in woningwaarderingen_met_maximering:
             for woningwaardering in woningwaarderingen:
-                if ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None:
+                logger.error(
+                    f"woningwaardering.punten: {woningwaardering.punten}, ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten: {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}"
+                )
+                woningwaardering.punten = float(
+                    utils.rond_af(
+                        (woningwaardering.punten or 0)
+                        / (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1),
+                        decimalen=2,
+                    )
+                )
+                logger.error(woningwaardering.punten)
+                if (
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
+                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                ):
                     if woningwaardering.criterium:
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
@@ -220,6 +234,7 @@ class Sanitair(Stelselgroep):
                             )
                         )
                     gedeeld_met_counter[1] += woningwaardering.punten or 0
+
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
@@ -233,7 +248,7 @@ class Sanitair(Stelselgroep):
                 if aantal > 1
                 else f"{self.stelselgroep.name}_prive",
             )
-            woningwaardering.punten = float(utils.rond_af_op_kwart(punten / aantal))
+            woningwaardering.punten = utils.rond_af_op_kwart(punten)
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         woningwaardering_groep.punten = sum(
@@ -257,7 +272,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     sanitair = Sanitair()
     with open(
-        "tests/data/onzelfstandige_woonruimten/stelselgroepen/sanitair/input/maximering_wastafels.json",
+        "tests/data/onzelfstandige_woonruimten/stelselgroepen/sanitair/input/maximering_wastafels_7onz.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
