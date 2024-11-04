@@ -182,17 +182,18 @@ class Keuken(Stelselgroep):
                     totaal_lengte_aanrechten += element.lengte
                 elif (
                     element.lengte > 3000
-                    and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
-                ):
-                    aanrecht_punten = 10
-                    totaal_lengte_aanrechten += element.lengte
-                elif (
-                    element.lengte > 3000
                     and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                     and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
                 ):
                     aanrecht_punten = 13
                     totaal_lengte_aanrechten += element.lengte
+                elif (
+                    element.lengte > 3000
+                    and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
+                ):
+                    aanrecht_punten = 10
+                    totaal_lengte_aanrechten += element.lengte
+
                 else:
                     aanrecht_punten = 4
                     totaal_lengte_aanrechten += element.lengte
