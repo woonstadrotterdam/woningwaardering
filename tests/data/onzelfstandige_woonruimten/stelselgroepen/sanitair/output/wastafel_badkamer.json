@@ -11,7 +11,7 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 2.5,
+      "punten": 5.0,
       "woningwaarderingen": [
         {
           "aantal": 2.0,
@@ -22,15 +22,6 @@
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "naam": "Badkamer - Max 1 punt voor Wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": -1.0
         },
         {
           "aantal": 2.0,
@@ -44,19 +35,10 @@
         },
         {
           "criterium": {
-            "naam": "Badkamer - Max 1,5 punt voor Meerpersoonswastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": -1.5
-        },
-        {
-          "criterium": {
             "id": "sanitair_prive",
             "naam": "Totaal (privé)"
           },
-          "punten": 2.5
+          "punten": 5.0
         }
       ]
     }
