@@ -98,7 +98,6 @@ class Sanitair(Stelselgroep):
         zelfstandige_woonruimte = (
             stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
         )
-
         # Backwards compatibiliteit voor bouwkundige elementen
         for mapping in {
             Bouwkundigelementdetailsoort.wastafel: Voorzieningsoort.wastafel,
