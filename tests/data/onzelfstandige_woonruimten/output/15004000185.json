@@ -152,6 +152,42 @@
     {
       "criteriumGroep": {
         "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 2220.0,
+          "criterium": {
+            "naam": "Keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 3.5
+        },
+        {
+          "criterium": {
+            "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2)"
+          },
+          "punten": 3.5
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
           "code": "ZEL",
           "naam": "Zelfstandige woonruimten"
         },
@@ -192,12 +228,12 @@
       ]
     }
   ],
-  "maximaleHuur": 374.72,
-  "punten": 39.0,
+  "maximaleHuur": 403.51,
+  "punten": 42.0,
   "stelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 374.72
+  "maximaleHuurInclusiefOpslag": 403.51
 }
