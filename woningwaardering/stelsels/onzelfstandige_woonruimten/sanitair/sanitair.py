@@ -248,7 +248,7 @@ class Sanitair(Stelselgroep):
                 if aantal > 1
                 else f"{self.stelselgroep.name}_prive",
             )
-            woningwaardering.punten = utils.rond_af_op_kwart(punten)
+            woningwaardering.punten = float(utils.rond_af_op_kwart(punten))
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         woningwaardering_groep.punten = sum(
