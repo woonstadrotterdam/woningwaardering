@@ -114,9 +114,8 @@ class Buitenruimten(Stelselgroep):
     def _saldering(
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
-        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
     ) -> WoningwaarderingResultatenWoningwaardering | None:
-        if stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten and not any(
+        if not any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
             for ruimte in eenheid.ruimten or []
         ):
@@ -134,9 +133,12 @@ class Buitenruimten(Stelselgroep):
 
         # 2 punten bij de aanwezigheid van privé buitenruimten
         elif woningwaardering_groep.woningwaarderingen and any(
-            "(gedeeld met" not in woningwaardering.criterium.naam
-            for woningwaardering in woningwaardering_groep.woningwaarderingen
-            if woningwaardering.criterium and woningwaardering.criterium.naam
+            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
+            and (
+                ruimte.gedeeld_met_aantal_eenheden is None
+                or ruimte.gedeeld_met_aantal_eenheden < 2
+            )
+            for ruimte in eenheid.ruimten or []
         ):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
@@ -179,7 +181,7 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.punten = float(aftrek)
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        woningwaardering_groep.punten = float(punten)
+        woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
         return woningwaardering_groep
 
     def bereken(
