@@ -85,7 +85,8 @@ class Buitenruimten(Stelselgroep):
                             f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
                         )
                         continue
-                    # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
+                    # Gedeelde buitenruimte die als parkeerplek bedoeld is,
+                    # wordt gewaardeerd volgens rubriek 10.
                     if (
                         ruimte.detail_soort
                         and ruimte.detail_soort.code
