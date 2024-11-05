@@ -79,10 +79,10 @@ class Buitenruimten(Stelselgroep):
     def _punten_per_buitenruimte(
         ruimte: EenhedenRuimte,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        if (
-            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            or ruimte.detail_soort.code
-            in [  # Een fietsenberging wordt gewaardeerd als gemeenschappelijke buitenruimte
+        if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte or (
+            ruimte.detail_soort is not None
+            and ruimte.detail_soort.code
+            in [
                 Ruimtedetailsoort.stalling_extern.code,
                 Ruimtedetailsoort.stalling_intern.code,
             ]
