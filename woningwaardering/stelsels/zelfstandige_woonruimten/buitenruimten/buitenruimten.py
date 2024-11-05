@@ -115,7 +115,7 @@ class Buitenruimten(Stelselgroep):
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
-    ) -> WoningwaarderingResultatenWoningwaardering:
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
         if not any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
             for ruimte in eenheid.ruimten or []
@@ -133,9 +133,10 @@ class Buitenruimten(Stelselgroep):
             return woningwaardering
 
         # 2 punten bij de aanwezigheid van privé buitenruimten
-        elif any(
+        elif woningwaardering_groep.woningwaarderingen and any(
             woningwaardering.criterium.naam.endswith("(privé)")
             for woningwaardering in woningwaardering_groep.woningwaarderingen
+            if woningwaardering.criterium and woningwaardering.criterium.naam
         ):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
@@ -145,12 +146,13 @@ class Buitenruimten(Stelselgroep):
             )
             woningwaardering.punten = 2.0
             return woningwaardering
+        return None
 
     def _maximering(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
-    ) -> WoningwaarderingResultatenWoningwaardering:
+    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         punten = utils.rond_af_op_kwart(
             sum(
                 Decimal(str(woningwaardering.punten))
@@ -159,7 +161,9 @@ class Buitenruimten(Stelselgroep):
             ),
         )
         max_punten = 15
-        if punten > max_punten:  # maximaal 15 punten
+        if (
+            punten > max_punten and woningwaardering_groep.woningwaarderingen
+        ):  # maximaal 15 punten
             aftrek = max_punten - punten
 
             logger.info(
@@ -181,9 +185,8 @@ class Buitenruimten(Stelselgroep):
     def bereken(
         self,
         eenheid: EenhedenEenheid,
-        woningwaardering_resultaat: (
-            WoningwaarderingResultatenWoningwaarderingResultaat | None
-        ) = None,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
+        | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
