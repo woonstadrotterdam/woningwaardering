@@ -108,15 +108,15 @@ class Buitenruimten(Stelselgroep):
                 woningwaardering.punten = float(
                     utils.rond_af(ruimte.oppervlakte * 0.35, decimalen=2)
                 )
-
             yield woningwaardering
 
+    @staticmethod
     def _saldering(
-        self,
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
     ) -> WoningwaarderingResultatenWoningwaardering | None:
-        if not any(
+        if stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten and not any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
             for ruimte in eenheid.ruimten or []
         ):
@@ -134,7 +134,7 @@ class Buitenruimten(Stelselgroep):
 
         # 2 punten bij de aanwezigheid van privé buitenruimten
         elif woningwaardering_groep.woningwaarderingen and any(
-            woningwaardering.criterium.naam.endswith("(privé)")
+            "(gedeeld met" not in woningwaardering.criterium.naam
             for woningwaardering in woningwaardering_groep.woningwaarderingen
             if woningwaardering.criterium and woningwaardering.criterium.naam
         ):
@@ -148,8 +148,8 @@ class Buitenruimten(Stelselgroep):
             return woningwaardering
         return None
 
+    @staticmethod
     def _maximering(
-        self,
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
