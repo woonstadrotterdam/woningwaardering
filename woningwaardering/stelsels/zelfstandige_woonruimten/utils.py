@@ -95,8 +95,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             Ruimtedetailsoort.tuin.code,
             Ruimtedetailsoort.tuin_rondom.code,
             Ruimtedetailsoort.loggia.code,
-            Ruimtedetailsoort.stalling_extern.code,
-            Ruimtedetailsoort.stalling_intern.code,
             # Ruimtedetailsoort.parkeerplaats.code, # parkeerplaats zonder buitenruimte als ruimte.soort wil je niet meetellen als buitenruimte.
         ]
     ):

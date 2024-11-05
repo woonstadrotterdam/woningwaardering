@@ -79,7 +79,14 @@ class Buitenruimten(Stelselgroep):
     def _punten_per_buitenruimte(
         ruimte: EenhedenRuimte,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte:
+        if (
+            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
+            or ruimte.detail_soort.code
+            in [  # Een fietsenberging wordt gewaardeerd als gemeenschappelijke buitenruimte
+                Ruimtedetailsoort.stalling_extern.code,
+                Ruimtedetailsoort.stalling_intern.code,
+            ]
+        ):
             if not ruimte.oppervlakte:
                 warnings.warn(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
