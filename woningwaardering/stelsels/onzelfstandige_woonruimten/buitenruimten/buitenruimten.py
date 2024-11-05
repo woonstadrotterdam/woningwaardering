@@ -107,7 +107,8 @@ class Buitenruimten(Stelselgroep):
                     return
             # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
             if (
-                ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
+                ruimte.detail_soort
+                and ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
                 and (
                     ruimte.gedeeld_met_aantal_eenheden
                     and ruimte.gedeeld_met_aantal_eenheden >= 2
@@ -202,6 +203,9 @@ class Buitenruimten(Stelselgroep):
         for ruimte in eenheid.ruimten or []:
             woningwaarderingen = self._punten_per_buitenruimte(ruimte)
             for woningwaardering in woningwaarderingen:
+                if woningwaardering.criterium is None:
+                    continue
+
                 if (
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                     and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
@@ -209,9 +213,10 @@ class Buitenruimten(Stelselgroep):
                     woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                         id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
                     )
-                    gedeeld_met_counter[
-                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                    ] += woningwaardering.punten
+                    if woningwaardering.punten is not None:
+                        gedeeld_met_counter[
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        ] += woningwaardering.punten
                 elif (
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
                     or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten < 2
@@ -224,13 +229,15 @@ class Buitenruimten(Stelselgroep):
                             id=f"{self.stelselgroep.name}_prive"
                         )
                     )
-                    gedeeld_met_counter[1] += woningwaardering.punten
+                    if woningwaardering.punten is not None:
+                        gedeeld_met_counter[1] += woningwaardering.punten
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         # minimaal 2 punten bij aanwezigheid van privé buitenruimten
         if (result := self._saldering(eenheid, woningwaardering_groep)) is not None:
             woningwaardering_groep.woningwaarderingen.append(result)
-            gedeeld_met_counter[1] += result.punten
+            if result.punten is not None:
+                gedeeld_met_counter[1] += result.punten
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal, punten in gedeeld_met_counter.items():
