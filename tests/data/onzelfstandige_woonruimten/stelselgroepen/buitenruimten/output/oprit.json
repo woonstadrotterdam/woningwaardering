@@ -1,0 +1,49 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 6.25,
+      "woningwaarderingen": [
+        {
+          "aantal": 12.0,
+          "criterium": {
+            "naam": "Parkeerplaats",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 4.2
+        },
+        {
+          "criterium": {
+            "naam": "Privé buitenruimten aanwezig",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten_prive",
+            "naam": "Totaal (privé)"
+          },
+          "punten": 6.2
+        }
+      ]
+    }
+  ]
+}

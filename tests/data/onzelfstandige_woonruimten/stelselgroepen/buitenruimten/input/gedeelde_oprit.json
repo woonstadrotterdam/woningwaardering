@@ -1,0 +1,22 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_108017427",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "PAR",
+        "naam": "Parkeerplaats"
+      },
+      "naam": "Parkeerplaats",
+      "inhoud": 14.4272,
+      "oppervlakte": 12,
+      "lengte": 4,
+      "breedte": 3,
+      "verwarmd": false,
+      "gedeeldMetAantalEenheden": 2
+    }
+  ]
+}

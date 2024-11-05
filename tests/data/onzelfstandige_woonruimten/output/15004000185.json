@@ -148,6 +148,20 @@
           "punten": 8.58
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
     }
   ],
   "maximaleHuur": 336.32,
