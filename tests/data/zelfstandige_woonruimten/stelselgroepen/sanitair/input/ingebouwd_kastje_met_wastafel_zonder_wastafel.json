@@ -1,0 +1,25 @@
+{
+  "id": "ingebouwd_kastje_met_wastafel_zonder_wastafel",
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "IKW",
+          "naam": "Ingebouwd kastje met in- of opgebouwde wastafel"
+        }
+      ]
+    }
+  ]
+}

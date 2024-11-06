@@ -1,0 +1,32 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche"
+          },
+          "punten": -1.0
+        }
+      ]
+    }
+  ]
+}
