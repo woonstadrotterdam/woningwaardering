@@ -199,7 +199,7 @@ class Buitenruimten(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+                stelsel=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
                 stelselgroep=Woningwaarderingstelselgroep.buitenruimten.value,
             )
         )
