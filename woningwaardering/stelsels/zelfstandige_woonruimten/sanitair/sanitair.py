@@ -359,15 +359,17 @@ class Sanitair(Stelselgroep):
             Ruimtedetailsoort.badkamer_met_toilet.value,
             Ruimtedetailsoort.doucheruimte.value,
         ]:
+            # Geen waardering voor extra voorzieningen indien er geen wastafel in de ruimte is
             if totaal_aantal_wastafels == 0:
                 warnings.warn(
                     f"Ruimte {ruimte.naam} ({ruimte.id}): geen wastafel aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
                 )
+            # Geen waardering voor extra voorzieningen indien er geen douche of bad in de ruimte is
             elif totaal_punten_bad_en_douche == 0:
                 warnings.warn(
                     f"Ruimte {ruimte.naam} ({ruimte.id}): geen bad of douche aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
                 )
-            elif totaal_aantal_wastafels > 0:
+            elif totaal_aantal_wastafels > 0 and totaal_punten_bad_en_douche > 0:
                 for installatie, aantal in installaties.items():
                     if installatie not in (
                         punten_voorzieningen
