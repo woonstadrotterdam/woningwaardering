@@ -282,6 +282,17 @@ class Sanitair(Stelselgroep):
                         )
                     )
 
+        # Waarschuw indien er minder wastafels zijn dan ingebouwde kasten met wastafel
+        # want een wastafel moet apart worden meegegeven
+        aantal_ingebouwde_kasten = installaties[
+            Voorzieningsoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel.value
+        ]
+        if totaal_aantal_wastafels < aantal_ingebouwde_kasten:
+            warnings.warn(
+                f"Ruimte {ruimte.naam} ({ruimte.id}): {totaal_aantal_wastafels} wastafel(s) zijn minder dan het aantal ingebouwde kasten met wastafel ({aantal_ingebouwde_kasten})."
+                f" Een wastafel in een {Voorzieningsoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel.naam} moet apart worden meegegeven."
+            )
+
         totaal_punten_bad_en_douche = Decimal("0")
 
         aantal_douches = installaties[Voorzieningsoort.douche.value]

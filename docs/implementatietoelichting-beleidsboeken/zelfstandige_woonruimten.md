@@ -616,6 +616,8 @@ Voorzieningen in de bad- of doucheruimte
 
 _\* In het geval van een gemonteerde volledige afscheiding van de douche vindt de waardering van 1,25 punten plaats wanneer de doucheruimte beschikt over een onroerend aanhorige afscheiding met een waterdichte afwerking aan alle zijden van de douche. Ter illustratie: glazen deuren vallen hier wel onder, maar een douchegordijn (dat snel weggenomen kan worden) niet._
 
+> Voor een ingebouwde kast met wastafel moet de wastafel als aparte voorziening worden meegegeven.
+
 ~~Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of, respectievelijk bad.~~
 
 ## ~~Rubriek 7 Woonvoorzieningen voor gehandicapten~~
