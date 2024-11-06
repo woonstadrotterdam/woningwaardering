@@ -7,6 +7,7 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     Buitenruimten,
     Energieprestatie,
+    GemeenschappelijkeParkeerruimten,
     Keuken,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
@@ -37,7 +38,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
                 Keuken,
                 Sanitair,
                 Buitenruimten,
-                # GemeenschappelijkeParkeerruimten,
+                GemeenschappelijkeParkeerruimten,
                 # PuntenVoorDeWOZWaarde,
             ],
         )
