@@ -552,7 +552,7 @@ De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke buiten
 
 Een fietsenberging wordt gewaardeerd als gemeenschappelijke buitenruimte. Onder een fietsenberging wordt verstaan een afsluitbare, overdekte bergplaats, niet zijnde een portiek, trap, gang, hal en dergelijke. Een fietsenberging in deze rubriek kan niet als overige ruimte uit rubriek 2 worden gewaardeerd, omdat deze niet onroerend is.
 
-> `stalling_extern` en `stalling_intern` worden gewaardeerd als gemeenschappelijke buitenruimte.
+> `Stalling extern` en `Stalling intern` worden gewaardeerd als gemeenschappelijke buitenruimte.
 
 
 ### 8.4 Balkons, dakterrassen en loggia’s
