@@ -20,6 +20,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
+from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 
 
@@ -82,6 +83,17 @@ class Buitenruimten(Stelselgroep):
                     ):
                         logger.info(
                             f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
+                        )
+                        continue
+                    # Gedeelde buitenruimte die als parkeerplek bedoeld is,
+                    # wordt gewaardeerd volgens rubriek 10.
+                    if (
+                        ruimte.detail_soort
+                        and ruimte.detail_soort.code
+                        == Ruimtedetailsoort.parkeerplaats.code
+                    ):
+                        logger.info(
+                            f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde parkeerplaats en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
                         )
                         continue
                     logger.info(
