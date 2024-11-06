@@ -11,7 +11,7 @@
           "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
         }
       },
-      "punten": 5.0,
+      "punten": 11.5,
       "woningwaarderingen": [
         {
           "aantal": 10.0,
@@ -23,6 +23,20 @@
             }
           },
           "punten": 5.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Wastafel (gedeeld met 2)"
+          },
+          "punten": 0.5
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Bad (gedeeld met 2)"
+          },
+          "punten": 3.0
         },
         {
           "aantal": 1.0,
@@ -73,12 +87,6 @@
           "punten": 0.13
         },
         {
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Max 2 stopcontacten per wastafel (gedeeld met 2)"
-          },
-          "punten": -0.13
-        },
-        {
           "aantal": 1.0,
           "criterium": {
             "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan (gedeeld met 2)"
@@ -96,7 +104,7 @@
           "criterium": {
             "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche (gedeeld met 2)"
           },
-          "punten": -3.0
+          "punten": -0.13
         }
       ]
     }

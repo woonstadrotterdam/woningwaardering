@@ -57,7 +57,7 @@ class Keuken(Stelselgroep):
         for ruimte in eenheid.ruimten or []:
             woningwaarderingen = list(
                 ZelfstandigeWoonruimtenKeuken.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep
+                    ruimte, self.stelselgroep, self.stelsel
                 )
             )
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
@@ -114,7 +114,7 @@ class Keuken(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_onzelfstandige_woonruimte.naam}"
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 

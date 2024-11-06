@@ -148,14 +148,92 @@
           "punten": 8.58
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 2220.0,
+          "criterium": {
+            "naam": "Keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 3.5
+        },
+        {
+          "criterium": {
+            "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2)"
+          },
+          "punten": 3.5
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toilet - Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair_gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2)"
+          },
+          "punten": 3.5
+        }
+      ]
     }
   ],
-  "maximaleHuur": 336.32,
-  "punten": 35.0,
+  "maximaleHuur": 403.51,
+  "punten": 42.0,
   "stelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 336.32
+  "maximaleHuurInclusiefOpslag": 403.51
 }

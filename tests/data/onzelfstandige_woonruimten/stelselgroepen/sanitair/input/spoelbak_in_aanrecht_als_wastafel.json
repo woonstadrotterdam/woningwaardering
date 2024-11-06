@@ -1,0 +1,52 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        }
+      ],
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Woonkamer",
+          "soort": {
+            "code": "WOO",
+            "naam": "Woonkamer voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 900
+        }
+      ]
+    }
+  ]
+}
