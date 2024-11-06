@@ -1,0 +1,24 @@
+{
+  "ruimten": [
+    {
+      "naam": "Badkamer",
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "bouwkundigeElementen": [
+        {
+          "naam": "Bad",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "BAD",
+            "naam": "Bad"
+          }
+        }
+      ]
+    }
+  ]
+}

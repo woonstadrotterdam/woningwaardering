@@ -1,0 +1,74 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 2.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Woonkamer - Wastafel (spoelbak in aanrecht < 1m)",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Woonkamer - Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Woonkamer - Max 1.0 punt voor Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": -2.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "naam": "Woonkamer - Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": 3.0
+        },
+        {
+          "criterium": {
+            "naam": "Woonkamer - Max 1.5 punt voor Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": -1.5
+        },
+        {
+          "criterium": {
+            "id": "sanitair_prive",
+            "naam": "Totaal (privé)"
+          },
+          "punten": 2.5
+        }
+      ]
+    }
+  ]
+}
