@@ -2,26 +2,18 @@
   "ruimten": [
     {
       "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
+        "code": "OVR",
+        "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "BAD",
-        "naam": "Badruimte"
+        "code": "TOI",
+        "naam": "Toiletruimte"
       },
-      "naam": "Badruimte",
+      "naam": "Toiletruimte",
       "inhoud": 21.5125,
-      "oppervlakte": 10,
-      "gedeeld_met_aantal_eenheden": 2,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
       "installaties": [
-        {
-          "code": "BAD",
-          "naam": "Bad"
-        },
-        {
-          "code": "WAS",
-          "naam": "Wastafel"
-        },
         {
           "code": "BUB",
           "naam": "Bubbelfunctie van het bad"

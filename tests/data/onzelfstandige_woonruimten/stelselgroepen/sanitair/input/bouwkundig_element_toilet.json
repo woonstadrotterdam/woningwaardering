@@ -1,0 +1,24 @@
+{
+  "ruimten": [
+    {
+      "naam": "Toilet",
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toilet"
+      },
+      "bouwkundigeElementen": [
+        {
+          "naam": "Closetcombinatie",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "CLO",
+            "naam": "Toilet"
+          }
+        }
+      ]
+    }
+  ]
+}
