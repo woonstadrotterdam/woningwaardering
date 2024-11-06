@@ -3,8 +3,8 @@
     {
       "criteriumGroep": {
         "stelsel": {
-          "code": "ZEL",
-          "naam": "Zelfstandige woonruimten"
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
         },
         "stelselgroep": {
           "code": "SAN",
@@ -12,122 +12,7 @@
         }
       },
       "punten": 0.0,
-      "woningwaarderingen": [
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": 1.5
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Douchewand",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": 1.25
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Handdoekenradiator",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": 0.75
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "aantal": 2.0,
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Kastruimte",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": 1.5
-        },
-        {
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": -0.75
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": 0.25
-        },
-        {
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Max 2 stopcontacten per wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": -0.25
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": 0.25
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": 0.5
-        },
-        {
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche",
-            "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
-            }
-          },
-          "punten": -6.0
-        },
-        {
-          "criterium": {
-            "id": "sanitair_prive",
-            "naam": "Totaal (privé)"
-          },
-          "punten": 0.0
-        }
-      ]
+      "woningwaarderingen": []
     }
   ]
 }
