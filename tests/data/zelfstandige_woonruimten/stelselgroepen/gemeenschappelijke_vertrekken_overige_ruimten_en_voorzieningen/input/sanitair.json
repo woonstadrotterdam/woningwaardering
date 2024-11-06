@@ -15,6 +15,14 @@
       "gedeeld_met_aantal_eenheden": 2,
       "installaties": [
         {
+          "code": "BAD",
+          "naam": "Bad"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
           "code": "BUB",
           "naam": "Bubbelfunctie van het bad"
         },
