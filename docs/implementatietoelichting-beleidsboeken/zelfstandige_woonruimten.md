@@ -592,8 +592,8 @@ Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden
 *   ~~Een waterdichte vloerafwerking~~\*.
 *   ~~De ruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).~~
 *   ~~Waterdichte afwerking tot 1,50 m hoogte voor badruimte en 1,80 m voor doucheruimte;~~
-*   ~~Een wastafel inclusief (tweehands-)mengkraan en een spiegel.~~
-*   ~~Een douche of bad met aansluitpunten voor warm en koud water (niet zijnde een warmwater apparaat) en voorzien van een warm- en koudwaterkraan of een mengkraan.~~
+*   Een wastafel ~~inclusief (tweehands-)mengkraan en een spiegel.~~
+*   Een douche of bad ~~met aansluitpunten voor warm en koud water (niet zijnde een warmwater apparaat) en voorzien van een warm- en koudwaterkraan of een mengkraan.~~
 
 \* Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien.
 
