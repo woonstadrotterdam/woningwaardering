@@ -20,6 +20,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 
 
 class Aftrekpunten(Stelselgroep):
@@ -87,9 +88,11 @@ class Aftrekpunten(Stelselgroep):
             if totale_oppervlakte_vertrekken < 8:
                 woningwaardering = WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Totale oppervlakte in Rubriek 1 is minder dan 8 m2"
+                        naam=f"Totale oppervlakte in Rubriek '{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}' is minder dan 8m2",
+                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
                     )
                 )
+                woningwaardering.aantal = totale_oppervlakte_vertrekken
                 woningwaardering.punten = -4.0
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 

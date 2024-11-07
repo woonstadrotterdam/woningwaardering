@@ -14,8 +14,13 @@
       "punten": -4.0,
       "woningwaarderingen": [
         {
+          "aantal": 7.0,
           "criterium": {
-            "naam": "Totale oppervlakte in Rubriek 1 is minder dan 8 m2"
+            "naam": "Totale oppervlakte in Rubriek 'Oppervlakte van vertrekken' is minder dan 8m2",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
           "punten": -4.0
         }
