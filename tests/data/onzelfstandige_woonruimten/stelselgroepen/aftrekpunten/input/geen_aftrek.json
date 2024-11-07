@@ -1,0 +1,19 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 10,
+      "oppervlakte": 8,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    }
+  ]
+}

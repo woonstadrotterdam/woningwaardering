@@ -1,0 +1,25 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "AFT",
+          "naam": "Aftrekpunten"
+        }
+      },
+      "punten": -4.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Totale oppervlakte in Rubriek 1 is minder dan 8 m2"
+          },
+          "punten": -4.0
+        }
+      ]
+    }
+  ]
+}
