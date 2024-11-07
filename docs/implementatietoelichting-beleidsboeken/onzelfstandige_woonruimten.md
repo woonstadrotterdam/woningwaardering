@@ -702,3 +702,14 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
   ]
 }
 ```
+
+## Rubriek 13 - Aftrekpunten
+
+Het waarderingsstelsel voor onzelfstandige woonruimten kent een rubriek voor aftrekpunten. Een aftrek van 4 punten wordt toegepast in ieder van de volgende situaties:
+
+- Wanneer de totale oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m2.
+- ~~Als de verhuurder van de onzelfstandige woonruimte zijn hoofdverblijf heeft in de woning waarvan de onzelfstandige woonruimte onderdeel uitmaakt en de onzelfstandige woonruimte of het sanitair waartoe de huurder toegang en gebruiksrecht heeft, uitsluitend via een woon- of slaapvertrek van de verhuurder te bereiken is.~~
+- ~~Bij een ruitoppervlakte in het (hoofd)woonvertrek van minder dan 0,75 m2.~~
+- ~~Wanneer het laagste raamkozijn van het (hoofd)woonvertrek meer dan 1,60 m boven de vloer is.~~
+
+~~Bij de bepaling van de ruitoppervlakte van het (hoofd) woonvertrek is de oppervlakte van het zichtbare glas bepalend. Dit betekent dat het glas dat zich in de sponning bevindt niet bijdraagt aan het bepalen van de ruitoppervlakte.~~
