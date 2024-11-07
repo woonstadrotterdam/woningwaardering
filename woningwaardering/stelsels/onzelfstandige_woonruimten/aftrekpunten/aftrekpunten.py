@@ -51,42 +51,47 @@ class Aftrekpunten(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        # Bereken de oppervlakte van de vertrekken als deze nog niet berekend is on het woningwaarderingresultaat
-        if woningwaardering_resultaat is None or (
-            woningwaardering_resultaat
-            and not any(
-                groep.criterium_groep.stelselgroep.naam
-                == Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.value.naam
-                for groep in woningwaardering_resultaat.groepen or []
-                if groep.criterium_groep
-                and groep.criterium_groep.stelselgroep
-                and groep.criterium_groep.stelselgroep.naam
+        # check of de oppervlakte van de vertrekken al berekend is
+        oppervlakte_resultaat = None
+        if woningwaardering_resultaat:
+            oppervlakte_resultaat = next(
+                (
+                    groep
+                    for groep in woningwaardering_resultaat.groepen or []
+                    if groep.criterium_groep
+                    and groep.criterium_groep.stelselgroep
+                    and groep.criterium_groep.stelselgroep.naam
+                    == Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.value.naam
+                ),
+                None,
             )
-        ):
+
+        # Bereken de oppervlakte van de vertrekken als deze nog niet berekend is on het woningwaarderingresultaat
+        if oppervlakte_resultaat is None:
             oppervlakte_resultaat = OppervlakteVanVertrekken(
                 peildatum=self.peildatum
             ).bereken(eenheid)
 
-            if oppervlakte_resultaat.woningwaarderingen:
-                totale_oppervlakte_vertrekken = sum(
-                    woningwaardering.aantal
-                    for woningwaardering in oppervlakte_resultaat.woningwaarderingen
-                    if (
-                        woningwaardering.criterium
-                        and woningwaardering.criterium.bovenliggende_criterium is None
-                        and woningwaardering.aantal is not None
+        if oppervlakte_resultaat.woningwaarderingen:
+            totale_oppervlakte_vertrekken = sum(
+                woningwaardering.aantal
+                for woningwaardering in oppervlakte_resultaat.woningwaarderingen
+                if (
+                    woningwaardering.criterium
+                    and woningwaardering.criterium.bovenliggende_criterium is None
+                    and woningwaardering.aantal is not None
+                )
+            )
+
+            # 4 punten aftrek als de totale oppervlakte van de vertrekken minder is dan 8 m2
+            if totale_oppervlakte_vertrekken < 8:
+                woningwaardering = WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Totale oppervlakte in Rubriek 1 is minder dan 8 m2"
                     )
                 )
-
-                # 4 punten aftrek als de totale oppervlakte van de vertrekken minder is dan 8 m2
-                if totale_oppervlakte_vertrekken < 8:
-                    woningwaardering = WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Totale oppervlakte in Rubriek 1 is minder dan 8 m2"
-                        )
-                    )
-                    woningwaardering.punten = -4.0
-                    woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+                woningwaardering.punten = -4.0
+                woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         punten = utils.rond_af_op_kwart(
             sum(
