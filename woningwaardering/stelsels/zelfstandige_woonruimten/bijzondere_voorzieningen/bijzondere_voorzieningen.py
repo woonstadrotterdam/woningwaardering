@@ -85,7 +85,7 @@ class BijzondereVoorzieningen(Stelselgroep):
     def _genereer_woningwaarderingen(
         peildatum: date,
         eenheid: EenhedenEenheid,
-        stelselgroepen_zonder_opslag: list[Stelselgroep],
+        stelselgroepen_zonder_opslag: list[Woningwaarderingstelselgroep],
         stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
