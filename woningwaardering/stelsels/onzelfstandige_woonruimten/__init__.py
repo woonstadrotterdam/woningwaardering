@@ -1,4 +1,5 @@
 from .aftrekpunten import Aftrekpunten
+from .bijzondere_voorzieningen_zorgwoning import BijzondereVoorzieningenZorgwoning
 from .buitenruimten import Buitenruimten
 from .energieprestatie import Energieprestatie
 from .gemeenschappelijke_parkeerruimten import GemeenschappelijkeParkeerruimten
@@ -20,4 +21,5 @@ __all__ = [
     "GemeenschappelijkeParkeerruimten",
     "PuntenVoorDeWOZWaarde",
     "Aftrekpunten",
+    "BijzondereVoorzieningenZorgwoning",
 ]

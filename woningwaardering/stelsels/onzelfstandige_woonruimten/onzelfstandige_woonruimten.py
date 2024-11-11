@@ -6,6 +6,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     Aftrekpunten,
+    BijzondereVoorzieningenZorgwoning,
     Energieprestatie,
     GemeenschappelijkeParkeerruimten,
     Keuken,
@@ -40,6 +41,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
                 # Buitenruimten,
                 GemeenschappelijkeParkeerruimten,
                 # PuntenVoorDeWOZWaarde,
+                BijzondereVoorzieningenZorgwoning,
                 Aftrekpunten,
             ],
         )
