@@ -1,0 +1,25 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIZ",
+          "naam": "Bijzondere voorzieningen: zorgwoning"
+        }
+      },
+      "punten": 0.25,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Aanbelfunctie met video- en audioverbinding"
+          },
+          "punten": 0.25
+        }
+      ]
+    }
+  ]
+}

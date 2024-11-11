@@ -248,6 +248,20 @@
           "naam": "Onzelfstandige woonruimten"
         },
         "stelselgroep": {
+          "code": "BIZ",
+          "naam": "Bijzondere voorzieningen: zorgwoning"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
           "code": "AFT",
           "naam": "Aftrekpunten"
         }
