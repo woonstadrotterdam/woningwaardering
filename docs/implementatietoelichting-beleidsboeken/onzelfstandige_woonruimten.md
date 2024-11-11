@@ -703,6 +703,53 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
 }
 ```
 
+## Rubriek 12 - Bijzondere voorzieningen: zorgwoning
+
+### 12.1 Zorgwoning
+
+Als sprake is van een zorgwoning, dan wordt het puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel met 35% verhoogd. Dit resulteert in een hogere maximale huurprijs.
+
+> De onderstaande doorgehaalde voorwaarden worden niet gecontroleerd door de woningwaardering package. Wanneer een eenheid de doelgroep Zorg heeft, wordt de woning automatisch als zorgwoning gewaardeerd.
+
+**~~Voorwaarden zorgwoning~~**
+
+~~Er is sprake van een zorgwoning als aan de volgende vijf voorwaarden is voldaan.~~
+
+1. **~~De zorgwoning betreft een onzelfstandige woonruimte~~**  
+   Hoe het begrip onzelfstandige woonruimte door de Huurcommissie wordt ingevuld is te vinden in paragraaf 2.3.1 van dit beleidsboek.
+2. **~~De onzelfstandige woonruimte is gelegen in een woongebouw~~**
+3. **~~De woning en het woongebouw waarin de woning is gelegen zijn bestemd voor mensen met een fysieke beperking~~**  
+
+~~Dat de woning en het woongebouw bestemd zijn voor mensen met een fysieke beperking moet in ieder geval blijken uit a) drempelloze toegankelijkheid en b) doorgankelijkheid.~~
+
+~~Deze drempelloze toegankelijkheid en doorgankelijkheid houden tenminste in dat alle gangen, waar de bewoners doorheen moeten om de eigen woning en andere relevante (gemeenschappelijke) ruimten in het woongebouw te bereiken, een minimale breedte hebben van 1,2 m. Bovendien moet er sprake zijn van een lift of hellingbaan indien de eigen woning en andere relevante ruimten drempels hebben van 2 cm of hoger.~~
+
+4. **~~De huurovereenkomst\* van de woning voorziet op de aanwezigheid van technische voorzieningen in het gebouw die het mogelijk maken dat een individuele persoonsalarmering verbinding kan maken met de noodalarmcentrale in zowel de woning als het complex waarvan de woning deel uitmaakt.~~**  
+   
+~~Het woongebouw moet zodanig zijn uitgerust dat een afgegeven persoonsalarm door individuele persoonsalarmering overal verbinding kan maken met de noodalarmcentrale in zowel de woning als het complex waarvan de woning deel uitmaakt. Het moet dus bijvoorbeeld ook mogelijk zijn, dat de uitrusting in het gebouw in staat moet zijn om een persoonsalarm op te vangen indien dat uit de lift van het complex wordt verzonden, of uit de tot het complex behorende buitenruimte.~~
+
+~~Voorbeelden van technische voorzieningen zijn een noodoproepinstallatie of een persoonlijk alarmsysteem dat op de persoon wordt gedragen met een halskoord.~~
+
+5. **~~De huurovereenkomst\* van de woning moet zien op het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie~~**  
+
+~~Het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie moet deel uit maken van een huurovereenkomst om een woning als zorgwoning te kunnen kwalificeren in de zin van het Besluit huurprijzen woonruimte. Deze ruimten dienen tot het woongebouw te behoren of als onroerende aanhorigheid van het complex te kunnen worden aangemerkt. Het exclusieve gebruik van deze ruimten door de huurders van het woongebouw is geen vereiste. Wel dienen de ruimten primair ter beschikking te staan van de huurders van het woongebouw.~~
+
+~~Als de gemeenschappelijke ruimten voor maaltijden of recreatie niet binnen hetzelfde maar geheel of gedeeltelijk in een naastgelegen (woon)gebouw zijn gelegen, dienen deze voorzieningen binnendoor (gesloten loopbrug, corridor, etc.) bereikbaar te zijn om als zorgwoning in de zin van het Besluit huurprijzen woonruimte te kwalificeren.~~
+
+~~\* Indien sprake is van een gemengde woon-zorgovereenkomst dan is het woningwaarderingsstelsel, waaronder de toeslag die geldt bij een zorgwoning, alleen van toepassing indien het huurelement in de gemengde overeenkomst overheerst.~~
+
+### 12.2 Aanbelfunctie met video- en audioverbinding
+
+Een aanbelfunctie met video- en audioverbinding waarbij de voordeur automatisch kan worden geopend vanuit de woning wordt gewaardeerd met 0,25 punt.
+
+Hieronder wordt een systeem verstaan dat tweewegcommunicatie mogelijk maakt met beeld en geluid tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er tevens sprake te zijn van de mogelijkheid tot het openen van de (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang geeft tot het complex waarvan de woning onderdeel uitmaakt.
+
+### 12.3 Laadpalen
+
+Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik door de bewoners, wordt gewaardeerd met 2 punten. Dit geldt alleen als de laadpaal bestemd is voor het elektrisch opladen van een gemotoriseerd voertuig, niet zijnde een bromfiets, fiets met trapondersteuning of gehandicaptenvoertuig.
+
+In geval een gemeenschappelijke parkeerruimte beschikt over een laadpaal, wordt voor de berekeningswijze aangesloten bij Rubriek 10.
+
 ## Rubriek 13 - Aftrekpunten
 
 Het waarderingsstelsel voor onzelfstandige woonruimten kent een rubriek voor aftrekpunten. Een aftrek van 4 punten wordt toegepast in ieder van de volgende situaties:
