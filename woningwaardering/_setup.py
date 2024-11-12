@@ -44,7 +44,7 @@ def handle_unhandled_exception(
     sys.__excepthook__(exception_type, exception_value, exception_traceback)
 
 
-def initialize():
+def initialize() -> None:
     logger.disable("woningwaardering")
     setup_timezone()
     sys.excepthook = handle_unhandled_exception

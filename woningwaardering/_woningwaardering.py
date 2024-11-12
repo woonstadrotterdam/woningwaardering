@@ -50,19 +50,29 @@ class Woningwaardering:
             ValueError: Als het type woonruimte niet kan worden bepaald.
         """
         if (
+            eenheid.woningwaarderingstelsel is None
+            or eenheid.woningwaarderingstelsel.code is None
+            or eenheid.woningwaarderingstelsel.code
+            not in [
+                Woningwaarderingstelsel.zelfstandige_woonruimten.code,
+                Woningwaarderingstelsel.onzelfstandige_woonruimten.code,
+            ]
+        ):
+            raise ValueError(
+                f"Eenheid {eenheid.id}: kan niet bepalen welk stelsel voor eenheid {eenheid.id} van toepassing is."
+            )
+        elif (
             eenheid.woningwaarderingstelsel.code
             == Woningwaarderingstelsel.zelfstandige_woonruimten.code
         ):
-            stelsel = ZelfstandigeWoonruimten(peildatum=self.peildatum)
+            stelsel: ZelfstandigeWoonruimten | OnzelfstandigeWoonruimten = (
+                ZelfstandigeWoonruimten(peildatum=self.peildatum)
+            )
         elif (
             eenheid.woningwaarderingstelsel.code
             == Woningwaarderingstelsel.onzelfstandige_woonruimten.code
         ):
             stelsel = OnzelfstandigeWoonruimten(peildatum=self.peildatum)
-        else:
-            raise ValueError(
-                f"Kan niet bepalen welk stelsel voor eenheid {eenheid.id} van toepassing is."
-            )
 
         return stelsel.bereken(eenheid)
 
