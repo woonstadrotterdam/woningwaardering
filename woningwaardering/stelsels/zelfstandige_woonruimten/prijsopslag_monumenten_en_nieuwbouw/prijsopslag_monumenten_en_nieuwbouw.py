@@ -142,11 +142,21 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met een opslagpercentage van 35% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
                 )
                 woningwaardering.opslagpercentage = 0.35
-            else:
+            elif (
+                stelselgroep
+                == Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw
+            ):
+                # 50 punten voor zelfstandige woonruimten
                 logger.info(
-                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met een 50 punten voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met 50 punten voor de stelselgroep {stelselgroep.naam}."
                 )
                 woningwaardering.punten = 50.0
+            elif stelselgroep == Woningwaarderingstelselgroep.prijsopslag_monumenten:
+                # 10 punten voor onzelfstandige woonruimten
+                logger.info(
+                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met 10 punten voor de stelselgroep {stelselgroep.naam}."
+                )
+                woningwaardering.punten = 10.0
 
             return woningwaardering
         return None
