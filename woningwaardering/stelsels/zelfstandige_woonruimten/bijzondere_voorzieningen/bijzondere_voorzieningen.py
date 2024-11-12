@@ -1,5 +1,6 @@
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from loguru import logger
 
@@ -52,10 +53,46 @@ class BijzondereVoorzieningen(Stelselgroep):
             )
         )
 
-        woningwaardering_groep.woningwaarderingen = []
+        woningwaardering_groep.woningwaarderingen = list(
+            self._genereer_woningwaarderingen(
+                peildatum=self.peildatum,
+                eenheid=eenheid,
+                stelselgroepen_zonder_opslag=[
+                    Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+                    self.stelselgroep,
+                ],
+                woningwaardering_resultaat=woningwaardering_resultaat,
+            )
+        )
 
+        punten = utils.rond_af_op_kwart(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+            ),
+        )
+
+        woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {self.stelselgroep.naam}"
+        )
+
+        return woningwaardering_groep
+
+    @staticmethod
+    def _genereer_woningwaarderingen(
+        peildatum: date,
+        eenheid: EenhedenEenheid,
+        stelselgroepen_zonder_opslag: list[Woningwaarderingstelselgroep],
+        stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         # Als sprake is van een zorgwoning, dan wordt het puntentotaal van de rubrieken
-        # 1 tot en met 11 van het woningwaarderingsstelsel met 35% verhoogd. Dit
+        # 1 tot en met 11 (of 1 tot en met 10 voor onzelfstandige woonruimten) van het woningwaarderingsstelsel met 35% verhoogd. Dit
         # resulteert in een hogere maximale huurprijs.
         if (
             eenheid.doelgroep is not None
@@ -65,13 +102,33 @@ class BijzondereVoorzieningen(Stelselgroep):
                 logger.warning(
                     "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
                 )
-                from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
-                    ZelfstandigeWoonruimten,
-                )
+                if stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten:
+                    from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
+                        ZelfstandigeWoonruimten,
+                    )
 
-                woningwaardering_resultaat = ZelfstandigeWoonruimten(
-                    peildatum=self.peildatum
-                ).bereken(eenheid, negeer_stelselgroep=BijzondereVoorzieningen)
+                    woningwaardering_resultaat = ZelfstandigeWoonruimten(
+                        peildatum=peildatum
+                    ).bereken(eenheid, negeer_stelselgroep=BijzondereVoorzieningen)
+
+                elif stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
+                    from woningwaardering.stelsels.onzelfstandige_woonruimten.bijzondere_voorzieningen.bijzondere_voorzieningen import (
+                        BijzondereVoorzieningen as BijzondereVoorzieningenOnzelfstandigeWoonruimten,
+                    )
+                    from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (
+                        OnzelfstandigeWoonruimten,
+                    )
+
+                    woningwaardering_resultaat = OnzelfstandigeWoonruimten(
+                        peildatum=peildatum
+                    ).bereken(
+                        eenheid,
+                        negeer_stelselgroep=BijzondereVoorzieningenOnzelfstandigeWoonruimten,
+                    )
+                else:
+                    raise ValueError(
+                        f"Invalid stelsel {stelsel}. Bijzondere voorzieningen zijn alleen gedefinieerd voor {Woningwaarderingstelsel.zelfstandige_woonruimten.naam} en {Woningwaarderingstelsel.onzelfstandige_woonruimten.naam}"
+                    )
 
             puntentotaal = utils.rond_af(
                 sum(
@@ -83,8 +140,8 @@ class BijzondereVoorzieningen(Stelselgroep):
                         and groep.criterium_groep.stelselgroep
                         and groep.criterium_groep.stelselgroep.code
                         not in [
-                            Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,
-                            Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw.code,
+                            stelselgroep.code
+                            for stelselgroep in stelselgroepen_zonder_opslag
                         ]
                     )
                 ),
@@ -101,13 +158,11 @@ class BijzondereVoorzieningen(Stelselgroep):
                 f"Eenheid {eenheid.id} is een zorgwoning en wordt gewaardeerd met een verhoging van {verhoging} punten voor stelselgroep {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
             )
 
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Zorgwoning 35% puntenverhoging",
-                    ),
-                    punten=float(verhoging),
-                )
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Zorgwoning 35% puntenverhoging",
+                ),
+                punten=float(verhoging),
             )
 
         # Een aanbelfunctie met video- en audioverbinding waarbij de voordeur
@@ -123,13 +178,11 @@ class BijzondereVoorzieningen(Stelselgroep):
                 f"Eenheid {eenheid.id} heeft een aanbelfunctie met video en audioverbinding en wordt met 0,25 punt gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
             )
 
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Aanbelfunctie met video- en audioverbinding",
-                    ),
-                    punten=0.25,
-                )
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Aanbelfunctie met video- en audioverbinding",
+                ),
+                punten=0.25,
             )
 
         # Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik
@@ -147,31 +200,13 @@ class BijzondereVoorzieningen(Stelselgroep):
                 f"Eenheid {eenheid.id} heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'} en wordt met {punten_laadpalen} punten gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
             )
 
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Laadpalen",
-                    ),
-                    aantal=aantal_laadpalen,
-                    punten=punten_laadpalen,
-                )
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Laadpalen",
+                ),
+                aantal=aantal_laadpalen,
+                punten=punten_laadpalen,
             )
-
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-        )
-
-        woningwaardering_groep.punten = float(punten)
-
-        logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
-        )
-
-        return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
