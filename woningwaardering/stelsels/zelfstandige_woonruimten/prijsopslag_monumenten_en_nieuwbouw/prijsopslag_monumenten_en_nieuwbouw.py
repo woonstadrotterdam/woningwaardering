@@ -54,7 +54,11 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen = list(
-            self._genereer_woningwaarderingen(eenheid, woningwaardering_resultaat)
+            woningwaardering
+            for woningwaardering in self._genereer_woningwaarderingen(
+                eenheid, woningwaardering_resultaat
+            )
+            if woningwaardering is not None
         )
 
         opslagpercentage = Decimal(
@@ -78,8 +82,19 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         return woningwaardering_groep
 
     def _genereer_woningwaarderingen(
-        self, eenheid, woningwaardering_resultaat
-    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
+        | None,
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
+        self._check_monumenten_attribuut(eenheid)
+
+        yield self._opslag_rijksmonument(eenheid)
+        yield self._opslag_gemeentelijk_of_provinciaal_monument(eenheid)
+        yield self._opslag_beschermd_stads_of_dorpsgezicht(eenheid)
+        yield self._opslag_nieuwbouw(eenheid, woningwaardering_resultaat)
+
+    def _check_monumenten_attribuut(self, eenheid: EenhedenEenheid) -> None:
         if eenheid.monumenten is None:
             warnings.warn(
                 f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
@@ -87,6 +102,9 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
             utils.update_eenheid_monumenten(eenheid)
 
+    def _opslag_rijksmonument(
+        self, eenheid: EenhedenEenheid
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
         if any(
             monument.code == Eenheidmonument.rijksmonument.code
             for monument in eenheid.monumenten or []
@@ -119,8 +137,12 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 )
                 woningwaardering.punten = 50.0
 
-            yield woningwaardering
+            return woningwaardering
+        return None
 
+    def _opslag_gemeentelijk_of_provinciaal_monument(
+        self, eenheid: EenhedenEenheid
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
         if any(
             monument.code
             in [
@@ -132,13 +154,17 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             logger.info(
                 f"Eenheid {eenheid.id} is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
             )
-            yield WoningwaarderingResultatenWoningwaardering(
+            return WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Gemeentelijk of provinciaal monument",
                 ),
                 opslagpercentage=0.15,
             )
+        return None
 
+    def _opslag_beschermd_stads_of_dorpsgezicht(
+        self, eenheid: EenhedenEenheid
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
         if any(
             monument.code
             in [
@@ -164,7 +190,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 logger.info(
                     f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
                 )
-                yield WoningwaarderingResultatenWoningwaardering(
+                return WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Beschermd stads- of dorpsgezicht",
                     ),
@@ -175,7 +201,15 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 logger.info(
                     f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
                 )
+        return None
 
+    def _opslag_nieuwbouw(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
         if (
             eenheid.begin_bouwdatum is not None
             and eenheid.begin_bouwdatum < date(2028, 1, 1)
@@ -209,7 +243,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     f"Eenheid {eenheid.id} is een nieuwbouw en wordt gewaardeerd met een opslagpercentage van 10% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
                 )
 
-                yield WoningwaarderingResultatenWoningwaardering(
+                return WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Nieuwbouw",
                     ),
@@ -220,6 +254,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 logger.info(
                     f"Eenheid {eenheid.id} is een nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor de stelselgroep {self.stelselgroep.naam}."
                 )
+        return None
 
 
 if __name__ == "__main__":  # pragma: no cover
