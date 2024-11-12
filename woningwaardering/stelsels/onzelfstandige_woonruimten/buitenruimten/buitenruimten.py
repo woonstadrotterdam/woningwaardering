@@ -2,13 +2,17 @@ import warnings
 from collections import defaultdict
 from datetime import date
 from decimal import Decimal
-from typing import Iterator
+from typing import Iterator, cast
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import classificeer_ruimte
+from woningwaardering.stelsels.utils import (
+    classificeer_ruimte,
+    gedeeld_met_eenheden,
+    gedeeld_met_onzelfstandige_woonruimten,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -93,10 +97,7 @@ class Buitenruimten(Stelselgroep):
                     UserWarning,
                 )
                 return
-            if (
-                ruimte.gedeeld_met_aantal_eenheden
-                and ruimte.gedeeld_met_aantal_eenheden >= 2
-            ):
+            if gedeeld_met_eenheden(ruimte):
                 # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
                 if not (ruimte.lengte and ruimte.breedte):
                     warnings.warn(
@@ -116,14 +117,8 @@ class Buitenruimten(Stelselgroep):
             if (
                 ruimte.detail_soort
                 and ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
-                and (
-                    ruimte.gedeeld_met_aantal_eenheden
-                    and ruimte.gedeeld_met_aantal_eenheden >= 2
-                )
-                or (
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 2
-                )
+                and gedeeld_met_eenheden(ruimte)
+                or gedeeld_met_onzelfstandige_woonruimten(ruimte)
             ):
                 logger.info(
                     f"Ruimte {ruimte.naam} ({ruimte.id}) is een gedeelde parkeerplaats en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
@@ -133,8 +128,7 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                 meeteenheid=Meeteenheid.vierkante_meter_m2.value,
                 naam=ruimte.naam
-                if ruimte.gedeeld_met_aantal_eenheden is None
-                or ruimte.gedeeld_met_aantal_eenheden < 2
+                if not gedeeld_met_eenheden(ruimte)
                 else f"{ruimte.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)",
             )
             woningwaardering.aantal = float(
@@ -142,10 +136,7 @@ class Buitenruimten(Stelselgroep):
             )
             # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,75 punt.
             # De in ieder geval 2 punten worden verderop toegevoegd.
-            if (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
-            ):
+            if gedeeld_met_onzelfstandige_woonruimten(ruimte):
                 woningwaardering.punten = float(
                     Decimal(str(ruimte.oppervlakte))
                     * Decimal("0.75")
@@ -168,14 +159,8 @@ class Buitenruimten(Stelselgroep):
         # 2 punten bij de aanwezigheid van privé buitenruimten
         if woningwaardering_groep.woningwaarderingen and any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            and (
-                ruimte.gedeeld_met_aantal_eenheden is None
-                or ruimte.gedeeld_met_aantal_eenheden < 2
-            )
-            and (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
-                or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten < 2
-            )
+            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
             for ruimte in eenheid.ruimten or []
         ):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
@@ -213,24 +198,20 @@ class Buitenruimten(Stelselgroep):
                 if woningwaardering.criterium is None:
                     continue
 
-                if (
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
-                ):
+                if gedeeld_met_onzelfstandige_woonruimten(ruimte):
                     woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                         id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
                     )
                     if woningwaardering.punten is not None:
                         gedeeld_met_counter[
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                            cast(
+                                int,
+                                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            )
                         ] += woningwaardering.punten
-                elif (
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
-                    or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten < 2
-                ) and (
-                    ruimte.gedeeld_met_aantal_eenheden is None
-                    or ruimte.gedeeld_met_aantal_eenheden < 2
-                ):
+                elif not gedeeld_met_onzelfstandige_woonruimten(
+                    ruimte
+                ) and not gedeeld_met_eenheden(ruimte):
                     woningwaardering.criterium.bovenliggende_criterium = (
                         WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_prive"

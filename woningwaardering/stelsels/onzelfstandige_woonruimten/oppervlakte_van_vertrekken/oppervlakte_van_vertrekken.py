@@ -1,6 +1,7 @@
 from collections import defaultdict
 from datetime import date
 from decimal import Decimal
+from typing import cast
 
 from loguru import logger
 
@@ -68,11 +69,13 @@ class OppervlakteVanVertrekken(Stelselgroep):
                     if (
                         woningwaardering.aantal
                         and woningwaardering.criterium.naam
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
                     ):
                         gedeeld_met_counter[
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                            cast(
+                                int,
+                                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            )
                         ] += float(utils.rond_af(woningwaardering.aantal, decimalen=2))
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"

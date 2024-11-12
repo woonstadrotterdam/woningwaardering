@@ -1,6 +1,7 @@
 import warnings
 from datetime import date
 from decimal import Decimal
+from typing import cast
 
 from loguru import logger
 
@@ -68,24 +69,18 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                         continue
 
                     # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2,  (bijvoorbeeld een garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief behorende tot de woning).
-                    if (
-                        ruimte.gedeeld_met_aantal_eenheden is None
-                        or ruimte.gedeeld_met_aantal_eenheden <= 1
-                    ):
+                    if not utils.gedeeld_met_eenheden(ruimte):
                         logger.info(
                             f"Ruimte {ruimte.id} is niet gedeeld met andere eenheden en komt daarom niet in aanmerking voor waardering onder {self.stelselgroep.value} onzelfstandig."
                         )
                         continue
 
-                    if (
-                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
-                        or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten == 0
-                    ):
+                    if not utils.gedeeld_met_onzelfstandige_woonruimten(ruimte):
                         gedeeld_met_aantal_onzelfstandige_woonruimten = 1
 
                     else:
-                        gedeeld_met_aantal_onzelfstandige_woonruimten = (
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        gedeeld_met_aantal_onzelfstandige_woonruimten = cast(
+                            int, ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         )
 
                     if (

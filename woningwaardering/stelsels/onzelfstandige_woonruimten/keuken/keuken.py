@@ -1,5 +1,6 @@
 from collections import defaultdict
 from datetime import date
+from typing import cast
 
 from loguru import logger
 
@@ -65,11 +66,13 @@ class Keuken(Stelselgroep):
                 if woningwaardering.criterium is not None:
                     if (
                         woningwaardering.punten
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
                     ):
                         gedeeld_met_counter[
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                            cast(
+                                int,
+                                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            )
                         ] += woningwaardering.punten
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
@@ -77,7 +80,10 @@ class Keuken(Stelselgroep):
                         woningwaardering.punten = float(
                             utils.rond_af(
                                 woningwaardering.punten
-                                / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                / cast(
+                                    int,
+                                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                ),
                                 decimalen=2,
                             )
                         )

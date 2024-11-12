@@ -7,7 +7,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import classificeer_ruimte
+from woningwaardering.stelsels.utils import (
+    classificeer_ruimte,
+    gedeeld_met_eenheden,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -144,10 +147,7 @@ class Buitenruimten(Stelselgroep):
         # 2 punten bij de aanwezigheid van privé buitenruimten
         elif woningwaardering_groep.woningwaarderingen and any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            and (
-                ruimte.gedeeld_met_aantal_eenheden is None
-                or ruimte.gedeeld_met_aantal_eenheden < 2
-            )
+            and not gedeeld_met_eenheden(ruimte)
             for ruimte in eenheid.ruimten or []
         ):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
