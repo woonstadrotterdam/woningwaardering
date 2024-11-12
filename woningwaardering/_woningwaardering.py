@@ -52,7 +52,6 @@ class Woningwaardering:
         if (
             eenheid.woningwaarderingstelsel is None
             or eenheid.woningwaarderingstelsel.code is None
-            or eenheid.woningwaarderingstelsel.code
         ):
             raise ValueError(
                 f"Eenheid {eenheid.id}: woningwaarderingstelsel-attribuut ontbreekt in het inputmodel."
