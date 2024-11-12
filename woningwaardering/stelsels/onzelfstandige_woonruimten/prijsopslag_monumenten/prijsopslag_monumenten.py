@@ -79,8 +79,12 @@ class PrijsopslagMonumenten(Stelselgroep):
 
     @staticmethod
     def _genereer_woningwaarderingen(
-        peildatum: date, eenheid, woningwaardering_resultaat
-    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        peildatum: date,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
         PrijsopslagMonumentenEnNieuwbouw._check_monumenten_attribuut(eenheid)
 
         yield PrijsopslagMonumentenEnNieuwbouw._opslag_rijksmonument(
