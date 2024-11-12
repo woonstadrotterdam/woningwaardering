@@ -1,6 +1,7 @@
 import warnings
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from dateutil.relativedelta import relativedelta
 from loguru import logger
@@ -52,8 +53,33 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
         )
 
-        woningwaardering_groep.woningwaarderingen = []
+        woningwaardering_groep.woningwaarderingen = list(
+            self._genereer_woningwaarderingen(eenheid, woningwaardering_resultaat)
+        )
 
+        opslagpercentage = Decimal(
+            sum(
+                Decimal(str(woningwaardering.opslagpercentage))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.opslagpercentage is not None
+            )
+        )
+
+        woningwaardering_groep.opslagpercentage = float(opslagpercentage)
+        punten = Decimal(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+            )
+        )
+
+        woningwaardering_groep.punten = float(punten)
+        return woningwaardering_groep
+
+    def _genereer_woningwaarderingen(
+        self, eenheid, woningwaardering_resultaat
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if eenheid.monumenten is None:
             warnings.warn(
                 f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
@@ -93,7 +119,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 )
                 woningwaardering.punten = 50.0
 
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+            yield woningwaardering
 
         if any(
             monument.code
@@ -106,13 +132,11 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             logger.info(
                 f"Eenheid {eenheid.id} is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
             )
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Gemeentelijk of provinciaal monument",
-                    ),
-                    opslagpercentage=0.15,
-                )
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Gemeentelijk of provinciaal monument",
+                ),
+                opslagpercentage=0.15,
             )
 
         if any(
@@ -140,14 +164,13 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 logger.info(
                     f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
                 )
-                woningwaardering_groep.woningwaarderingen.append(
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Beschermd stads- of dorpsgezicht",
-                        ),
-                        opslagpercentage=0.05,
-                    )
+                yield WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Beschermd stads- of dorpsgezicht",
+                    ),
+                    opslagpercentage=0.05,
                 )
+
             else:
                 logger.info(
                     f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
@@ -186,38 +209,17 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     f"Eenheid {eenheid.id} is een nieuwbouw en wordt gewaardeerd met een opslagpercentage van 10% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
                 )
 
-                woningwaardering_groep.woningwaarderingen.append(
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Nieuwbouw",
-                        ),
-                        opslagpercentage=0.1,
-                    )
+                yield WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Nieuwbouw",
+                    ),
+                    opslagpercentage=0.1,
                 )
+
             else:
                 logger.info(
                     f"Eenheid {eenheid.id} is een nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor de stelselgroep {self.stelselgroep.naam}."
                 )
-
-        opslagpercentage = Decimal(
-            sum(
-                Decimal(str(woningwaardering.opslagpercentage))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.opslagpercentage is not None
-            )
-        )
-
-        woningwaardering_groep.opslagpercentage = float(opslagpercentage)
-        punten = Decimal(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            )
-        )
-
-        woningwaardering_groep.punten = float(punten)
-        return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
