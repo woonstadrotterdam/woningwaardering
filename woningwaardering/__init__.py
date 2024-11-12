@@ -1,3 +1,4 @@
+import locale
 import os
 import sys
 import time
@@ -13,6 +14,11 @@ logger.disable("woningwaardering")
 # See https://docs.python.org/3/library/decimal.html#rounding
 setcontext(BasicContext)
 
+try:
+    locale.setlocale(locale.LC_ALL, "nl_NL.UTF-8")
+    logger.info(f"Locale set to: {locale.getlocale()}")
+except locale.Error as e:
+    logger.error(f"Failed to set locale: {e}")
 
 default_timezone = "Europe/Amsterdam"
 

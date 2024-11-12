@@ -11,7 +11,7 @@
           "naam": "Keuken"
         }
       },
-      "punten": 5.0,
+      "punten": 2.0,
       "woningwaarderingen": [
         {
           "aantal": 3001.0,
@@ -25,14 +25,14 @@
               "naam": "Millimeter"
             }
           },
-          "punten": 5.0
+          "punten": 2.0
         },
         {
           "criterium": {
             "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 2)"
           },
-          "punten": 5.0
+          "punten": 2.0
         }
       ]
     }

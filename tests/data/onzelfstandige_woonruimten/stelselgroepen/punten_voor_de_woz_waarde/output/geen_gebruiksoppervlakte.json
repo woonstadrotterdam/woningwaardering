@@ -1,0 +1,24 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "woningwaarderingen": [
+        {
+          "aantal": 148000.0,
+          "criterium": {
+            "naam": "WOZ-waarde op peildatum 01-01-2022"
+          }
+        }
+      ]
+    }
+  ]
+}

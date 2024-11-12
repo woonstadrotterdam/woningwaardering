@@ -6,17 +6,18 @@ import pandas as pd
 from loguru import logger
 
 BASE_URL = "https://datasets.cbs.nl/odata/v1/CBS"
-OUTPUT_FILE = "woningwaardering/data/corop.generated.csv"
+OUTPUT_FILE = "woningwaardering/data/corop/corop.generated.csv"
 
 
 async def fetch_data(
-    endpoint: str, session: aiohttp.ClientSession, params: Dict[str, str] = None
+    endpoint: str, session: aiohttp.ClientSession, params: Dict[str, str] | None = None
 ) -> List[Dict[str, Any]]:
     url = f"{BASE_URL}/{endpoint}"
     async with session.get(url, params=params) as response:
         response.raise_for_status()
         json = await response.json()
-        return json["value"]
+        value: List[Dict[str, Any]] = json["value"]
+        return value
 
 
 async def get_woonplaats_data(session: aiohttp.ClientSession) -> pd.DataFrame:
@@ -57,7 +58,7 @@ async def get_gemeente_corop_data(session: aiohttp.ClientSession) -> pd.DataFram
         "85755NED/Observations",
         session,
         {
-            "$filter": "Measure eq 'CR0001' or Measure eq 'CR0002' or Measure eq 'GM000C_1' or Measure eq 'GM000B'",
+            "$filter": "Measure in ('CR0001', 'CR0002', 'GM000C_1', 'GM000B')",
             "$select": "RegioS,Measure,StringValue",
             "$format": "json",
         },
@@ -76,7 +77,7 @@ async def get_gemeente_corop_data(session: aiohttp.ClientSession) -> pd.DataFram
     ]
 
 
-async def main():
+async def main() -> None:
     async with aiohttp.ClientSession() as session:
         woonplaatsen_task = get_woonplaats_data(session)
         gemeenten_task = get_gemeente_corop_data(session)
@@ -87,7 +88,8 @@ async def main():
 
         data = pd.merge(woonplaatsen, gemeenten, on="Gemeentecode")
         data.to_csv(OUTPUT_FILE, index=False)
-        logger.info(f"COROP data opgeslagen in {OUTPUT_FILE}")
+        logger.info(f"COROP-gebieden:\n{data}")
+        logger.info(f"COROP-gebieden opgeslagen in {OUTPUT_FILE}")
 
 
 if __name__ == "__main__":

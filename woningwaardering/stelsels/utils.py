@@ -1,15 +1,19 @@
+import asyncio
 import warnings
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
-from typing import Callable, Counter, List, Tuple
+from importlib.resources import files
+from typing import Any, Callable, Counter, List, Tuple
 
 import pandas as pd
+import requests
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
 from SPARQLWrapper import SPARQLWrapper2
 
 from woningwaardering.vera.bvg.generated import (
+    EenhedenAdresBasis,
     EenhedenEenheid,
     EenhedenEnergieprestatie,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -596,3 +600,95 @@ def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:
         if ruimte.naam is not None and naam_counter[ruimte.naam] > 1:
             nummering_counter[ruimte.naam] += 1
             ruimte.naam = f"{ruimte.naam} {nummering_counter[ruimte.naam]}"
+
+
+KADASTER_SPARQL_ENDPOINT = (
+    "https://api.labs.kadaster.nl/datasets/dst/kkg/services/default/sparql"
+)
+KADASTER_SEMAPHORE = asyncio.Semaphore(4)
+
+WOONPLAATS_QUERY_TEMPLATE = """
+prefix sor: <https://data.kkg.kadaster.nl/sor/model/def/>
+prefix nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+select ?identificatie ?naam
+where {{
+  values ?postcode {{ "{postcode}" }}
+  values ?huisnummer {{ {huisnummer} }}
+  values ?huisnummertoevoeging {{ "{huisnummertoevoeging}" }}
+  values ?huisletter {{ "{huisletter}" }}
+
+  ?adres a sor:Nummeraanduiding;
+         sor:postcode ?postcode;
+         sor:ligtAan/sor:ligtIn ?woonplaats;
+         sor:huisnummer ?adresHuisnummer.
+
+  ?woonplaats sor:geregistreerdMet/nen3610:identificatie ?identificatie;
+              skos:prefLabel ?naam.
+
+  optional
+  {{
+    ?adres sor:huisnummer ?adresHuisnummer.
+  }}
+  optional
+  {{
+    ?adres sor:huisnummertoevoeging ?adresHuisnummertoevoeging.
+  }}
+  optional
+  {{
+    ?adres sor:huisletter ?adresHuisletter.
+  }}
+  FILTER(
+    (!BOUND(?adresHuisnummer) && ?huisnummer = "") ||
+    (?adresHuisnummer = ?huisnummer)
+  )
+  FILTER(
+    (!BOUND(?adresHuisnummertoevoeging) && ?huisnummertoevoeging = "") ||
+    (?adresHuisnummertoevoeging = ?huisnummertoevoeging)
+  )
+  FILTER(
+    (!BOUND(?adresHuisletter) && ?huisletter = "") ||
+    (?adresHuisletter = ?huisletter)
+  )
+}}
+"""
+
+
+def get_woonplaats(adres: EenhedenAdresBasis) -> dict[str, Any] | None:
+    if adres.postcode is None or adres.huisnummer is None:
+        return None
+
+    query = WOONPLAATS_QUERY_TEMPLATE.format(
+        postcode=adres.postcode,
+        huisnummer=int(adres.huisnummer),
+        huisnummertoevoeging=adres.huisnummer_toevoeging or "",
+        huisletter=adres.huisletter or "",
+    )
+    request_data = {"query": query, "format": "json"}
+
+    response = requests.post(KADASTER_SPARQL_ENDPOINT, data=request_data, timeout=5)
+
+    response.raise_for_status()
+    resultaat = response.json()
+    print(resultaat)
+    if isinstance(resultaat, list) and len(resultaat) == 1:
+        return {"code": resultaat[0]["identificatie"], "naam": resultaat[0]["naam"]}
+    return None
+
+
+def get_corop_voor_woonplaats(woonplaats_identificatie: str) -> pd.DataFrame:
+    data = pd.read_csv(
+        files("woningwaardering").joinpath("data/corop/corop.generated.csv")
+    )
+
+    woonplaats_dataframe = data[
+        data["Woonplaatscode"] == f"WP{woonplaats_identificatie}"
+    ]
+
+    if woonplaats_dataframe.empty:
+        return None
+
+    resultaat = woonplaats_dataframe.iloc[0]
+
+    return {"code": resultaat["COROP-gebiedcode"], "naam": resultaat["COROP-gebied"]}

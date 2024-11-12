@@ -1,0 +1,54 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "punten": 10.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 148000.0,
+          "criterium": {
+            "naam": "WOZ-waarde op peildatum 01-01-2022"
+          }
+        },
+        {
+          "aantal": 58.0,
+          "criterium": {
+            "naam": "Gebruiksoppervlakte",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 2551.72414,
+          "criterium": {
+            "naam": "WOZ-waarde per m²"
+          }
+        },
+        {
+          "aantal": 3255.0,
+          "criterium": {
+            "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond"
+          }
+        },
+        {
+          "aantal": -21.6060172,
+          "criterium": {
+            "naam": "Percentage verschil"
+          },
+          "punten": 10.0
+        }
+      ]
+    }
+  ]
+}

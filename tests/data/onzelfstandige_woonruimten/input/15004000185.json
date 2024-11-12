@@ -2,17 +2,38 @@
   "id": "15004000185",
   "bouwjaar": 1998,
   "adres": {
-    "huisnummer": "",
+    "huisnummer": "21",
     "huisnummerToevoeging": "",
-    "postcode": "",
-    "straatnaam": ""
+    "postcode": "3015EA",
+    "straatnaam": "",
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
   },
   "adresseerbaarObjectBasisregistratie": {
     "id": "",
     "bagIdentificatie": ""
   },
   "energieprestaties": [],
-  "oppervlakten": [],
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GBO",
+        "naam": "Gebruiksoppervlakte"
+      },
+      "waarde": "58.0"
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 148000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 184000
+    }
+  ],
   "panden": [
     {
       "idExtern": "",

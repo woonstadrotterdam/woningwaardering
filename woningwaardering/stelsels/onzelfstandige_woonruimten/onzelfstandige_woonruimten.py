@@ -8,6 +8,7 @@ from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     Energieprestatie,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
+    PuntenVoorDeWozWaarde,
     VerkoelingEnVerwarming,
 )
 from woningwaardering.stelsels.stelsel import Stelsel
@@ -35,7 +36,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
                 # Sanitair,
                 # Buitenruimten,
                 # GemeenschappelijkeParkeerruimten,
-                # PuntenVoorDeWOZWaarde,
+                PuntenVoorDeWozWaarde,
             ],
         )
 
