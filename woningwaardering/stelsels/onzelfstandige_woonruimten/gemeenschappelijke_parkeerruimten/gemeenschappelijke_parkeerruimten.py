@@ -1,7 +1,6 @@
 import warnings
 from datetime import date
 from decimal import Decimal
-from typing import cast
 
 from loguru import logger
 
@@ -78,9 +77,12 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                     if not utils.gedeeld_met_onzelfstandige_woonruimten(ruimte):
                         gedeeld_met_aantal_onzelfstandige_woonruimten = 1
 
-                    else:
-                        gedeeld_met_aantal_onzelfstandige_woonruimten = cast(
-                            int, ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                    elif (
+                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        is not None  # mypy check, kan al niet meer None zijn hier
+                    ):
+                        gedeeld_met_aantal_onzelfstandige_woonruimten = (
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         )
 
                     if (

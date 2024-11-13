@@ -2,7 +2,7 @@ import warnings
 from collections import defaultdict
 from datetime import date
 from decimal import Decimal
-from typing import Iterator, cast
+from typing import Iterator
 
 from loguru import logger
 
@@ -202,12 +202,13 @@ class Buitenruimten(Stelselgroep):
                     woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                         id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
                     )
-                    if woningwaardering.punten is not None:
+                    if (
+                        woningwaardering.punten is not None
+                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        is not None  # mypy check, kan al niet meer None zijn hier
+                    ):
                         gedeeld_met_counter[
-                            cast(
-                                int,
-                                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                            )
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         ] += woningwaardering.punten
                 elif not gedeeld_met_onzelfstandige_woonruimten(
                     ruimte
