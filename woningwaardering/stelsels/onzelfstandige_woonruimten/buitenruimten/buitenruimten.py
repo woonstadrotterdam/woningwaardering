@@ -202,13 +202,9 @@ class Buitenruimten(Stelselgroep):
                     woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                         id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
                     )
-                    if (
-                        woningwaardering.punten is not None
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        is not None  # mypy check, kan al niet meer None zijn hier
-                    ):
+                    if woningwaardering.punten is not None:
                         gedeeld_met_counter[
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                         ] += woningwaardering.punten
                 elif not gedeeld_met_onzelfstandige_woonruimten(
                     ruimte

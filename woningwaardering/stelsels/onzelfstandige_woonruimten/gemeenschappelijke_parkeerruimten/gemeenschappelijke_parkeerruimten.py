@@ -74,13 +74,14 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                         )
                         continue
 
-                    if not utils.gedeeld_met_onzelfstandige_woonruimten(ruimte):
+                    if (
+                        not utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
+                        or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                        is None  # mypy check
+                    ):
                         gedeeld_met_aantal_onzelfstandige_woonruimten = 1
 
-                    elif (
-                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        is not None  # mypy check, kan al niet meer None zijn hier
-                    ):
+                    else:
                         gedeeld_met_aantal_onzelfstandige_woonruimten = (
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         )
