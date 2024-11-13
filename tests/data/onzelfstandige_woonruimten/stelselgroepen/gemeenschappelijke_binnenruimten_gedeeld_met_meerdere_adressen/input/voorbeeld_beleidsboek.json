@@ -1,0 +1,81 @@
+{
+  "id": "1",
+  "ruimten": [
+    {
+      "id": "A",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 4,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in koonkamer",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2700
+        },
+        {
+          "id": "Radiator_29424408",
+          "naam": "Radiator",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening algemeen"
+          },
+          "detailSoort": {
+            "code": "RAD",
+            "naam": "Radiator"
+          }
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige Ruimte"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toilet"
+      },
+      "naam": "Toilet",
+      "oppervlakte": 2.0,
+      "gedeeld_met_aantal_eenheden": 4,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "Wastafel_108014566",
+          "id_bimmodel": "1r9bfeurv43e$egF8LAwX2",
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          },
+          "extraAttributen": {
+            "ifcSoort": "IfcSanitaryTerminal.WASHHANDBASIN"
+          }
+        }
+      ]
+    }
+  ]
+}
