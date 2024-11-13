@@ -16,6 +16,20 @@
       "gedeeld_met_aantal_eenheden": 4,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
       "verwarmd": true,
+      "installaties": [
+        {
+          "code": "IMA",
+          "naam": "Inbouw magnetron"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IOE",
+          "naam": "Inbouw oven elektrisch"
+        }
+      ],
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
@@ -58,22 +72,14 @@
       "oppervlakte": 2.0,
       "gedeeld_met_aantal_eenheden": 4,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
-      "bouwkundigeElementen": [
+      "installaties": [
         {
-          "id": "Wastafel_108014566",
-          "id_bimmodel": "1r9bfeurv43e$egF8LAwX2",
-          "naam": "Wastafel",
-          "soort": {
-            "code": "SAN",
-            "naam": "Sanitaire voorziening"
-          },
-          "detailSoort": {
-            "code": "WAS",
-            "naam": "Wastafel/Fontein"
-          },
-          "extraAttributen": {
-            "ifcSoort": "IfcSanitaryTerminal.WASHHANDBASIN"
-          }
+          "code": "WAS",
+          "naam": "Wastafel/Fontein"
+        },
+        {
+          "code": "HTO",
+          "naam": "Hangend Toilet"
         }
       ]
     }

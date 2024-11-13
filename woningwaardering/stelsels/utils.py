@@ -75,7 +75,7 @@ def naar_tabel(
 
     table._min_width = {
         "Groep": 33,
-        "Naam": 50,
+        "Naam": 60,
         "Aantal": 9,
         "Meeteenheid": 19,
         "Punten": 7,
@@ -126,7 +126,7 @@ def naar_tabel(
                         woningwaardering.criterium.meeteenheid.naam
                         if woningwaardering.criterium.meeteenheid is not None
                         else "",
-                        woningwaardering.punten
+                        rond_af(woningwaardering.punten, decimalen=2)
                         if woningwaardering.punten is not None
                         else "",
                         f"{woningwaardering.opslagpercentage:.0%}"
@@ -162,7 +162,7 @@ def naar_tabel(
                                     if onderliggende_woningwaardering.criterium.meeteenheid
                                     is not None
                                     else "",
-                                    f"[{onderliggende_woningwaardering.punten}]"
+                                    f"[{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}]"
                                     if onderliggende_woningwaardering.punten is not None
                                     else "",
                                     f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
@@ -215,7 +215,7 @@ def naar_tabel(
                     "Totaal",
                     (subtotaal or "") if not verschillende_meeteenheden else "",
                     meeteenheid if not verschillende_meeteenheden else "",
-                    woningwaardering_groep.punten or "",
+                    rond_af(woningwaardering_groep.punten, decimalen=2) or "",
                     f"{woningwaardering_groep.opslagpercentage:.0%}"
                     if woningwaardering_groep.opslagpercentage is not None
                     else "",
