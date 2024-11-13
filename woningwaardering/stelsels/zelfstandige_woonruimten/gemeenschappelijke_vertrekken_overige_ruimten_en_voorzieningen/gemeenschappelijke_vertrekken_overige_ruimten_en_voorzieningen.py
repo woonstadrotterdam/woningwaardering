@@ -5,6 +5,7 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import Keuken
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
@@ -223,30 +224,8 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-
-    gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen = (
-        GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(
-            peildatum=date.fromisoformat("2024-07-01")
-        )
+    bereken(
+        class_=GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(),
+        eenheid_input="tests/data/generiek/input/37101000032.json",
+        strict=False,
     )
-
-    with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen/input/verwarmde_vertrekken.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-        groepen=[
-            gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.bereken(
-                eenheid
-            )
-        ]
-    )
-
-    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-
-    tabel = utils.naar_tabel(resultaat)
-
-    print(tabel)

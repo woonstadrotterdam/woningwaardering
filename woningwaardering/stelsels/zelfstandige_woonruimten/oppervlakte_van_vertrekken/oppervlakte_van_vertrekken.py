@@ -5,8 +5,9 @@ from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_tabel, rond_af, rond_af_op_kwart
+from woningwaardering.stelsels.utils import rond_af, rond_af_op_kwart
 from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
     classificeer_ruimte,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
@@ -130,22 +131,8 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-
-    oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=date(2024, 7, 1))
-    with open(
-        "tests/data/zelfstandige_woonruimten/input/71211000027.json", "r+"
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    woningwaardering_resultaat = oppervlakte_van_vertrekken.bereken(eenheid)
-
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
-        )
+    bereken(
+        class_=OppervlakteVanVertrekken(),
+        eenheid_input="tests/data/generiek/input/37101000032.json",
+        strict=False,
     )
-
-    tabel = naar_tabel(woningwaardering_resultaat)
-
-    print(tabel)

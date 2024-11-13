@@ -8,6 +8,7 @@ import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -609,23 +610,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-    warnings.simplefilter("default", UserWarning)
-
-    punten_voor_de_woz_waarde = PuntenVoorDeWozWaarde()
-    with open(
-        "tests/data/zelfstandige_woonruimten/input/20002000126.json", "r+"
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    woningwaardering_resultaat = punten_voor_de_woz_waarde.bereken(eenheid)
-
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
-        )
+    bereken(
+        class_=PuntenVoorDeWozWaarde(),
+        eenheid_input="tests/data/generiek/input/37101000032.json",
+        strict=False,
     )
-
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
-
-    print(tabel)
