@@ -5,7 +5,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
+from woningwaardering.stelsels.utils import (
     deel_punten_door_aantal_onzelfstandige_woonruimten,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming.verkoeling_en_verwarming import (
