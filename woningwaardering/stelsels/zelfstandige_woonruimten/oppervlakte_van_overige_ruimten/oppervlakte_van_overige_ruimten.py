@@ -10,7 +10,6 @@ from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     gedeeld_met_eenheden,
-    naar_tabel,
     rond_af,
     rond_af_op_kwart,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
