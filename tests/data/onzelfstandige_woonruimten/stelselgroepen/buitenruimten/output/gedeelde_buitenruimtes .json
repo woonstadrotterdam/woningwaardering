@@ -11,10 +11,10 @@
           "naam": "Buitenruimten"
         }
       },
-      "punten": 3.75,
+      "punten": 1.75,
       "woningwaarderingen": [
         {
-          "aantal": 3.0,
+          "aantal": 6.0,
           "criterium": {
             "naam": "Tuin (gedeeld met 2 adressen)",
             "meeteenheid": {
@@ -22,10 +22,10 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 2.25
+          "punten": 1.05
         },
         {
-          "aantal": 2.0,
+          "aantal": 6.0,
           "criterium": {
             "naam": "Tuin (gedeeld met 3 adressen)",
             "meeteenheid": {
@@ -33,7 +33,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 1.5
+          "punten": 0.7
         }
       ]
     }

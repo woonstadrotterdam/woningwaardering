@@ -11,29 +11,37 @@
           "naam": "Buitenruimten"
         }
       },
-      "punten": 3.75,
+      "punten": 2.25,
       "woningwaarderingen": [
         {
-          "aantal": 3.0,
+          "aantal": 1.0,
           "criterium": {
-            "naam": "Tuin (gedeeld met 2 adressen)",
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 2.25
+          "punten": 0.35
         },
         {
-          "aantal": 2.0,
           "criterium": {
-            "naam": "Tuin (gedeeld met 3 adressen)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
+            "naam": "Privé buitenruimten aanwezig",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
             }
           },
-          "punten": 1.5
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten_prive",
+            "naam": "Totaal (privé)"
+          },
+          "punten": 2.35
         }
       ]
     }
