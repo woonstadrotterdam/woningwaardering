@@ -681,6 +681,7 @@ def get_woonplaats(adres: EenhedenAdresBasis) -> dict[str, str] | None:
         return None
     except requests.RequestException as e:
         warnings.warn(f"Fout bij het ophalen van woonplaatsdata: {e}, UserWarning")
+        return None
 
 
 def get_corop_voor_woonplaats(woonplaats_code: str) -> dict[str, str] | None:

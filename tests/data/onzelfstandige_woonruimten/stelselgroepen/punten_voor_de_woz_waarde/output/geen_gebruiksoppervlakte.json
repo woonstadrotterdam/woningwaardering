@@ -10,15 +10,7 @@
           "code": "WOZ",
           "naam": "Punten voor de WOZ-waarde"
         }
-      },
-      "woningwaarderingen": [
-        {
-          "aantal": 148000.0,
-          "criterium": {
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2022"
-          }
-        }
-      ]
+      }
     }
   ]
 }
