@@ -159,7 +159,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if corop_gebied is None:
             warnings.warn(
-                f"Eenheid {eenheid.id}: Geen COROP-gebied gevonden voor woonplaats {eenheid.adres}. Kan punten voor de WOZ-waarde niet bepalen.",
+                f"Eenheid {eenheid.id}: Geen COROP-gebied gevonden voor woonplaats {woonplaats}. Kan punten voor de WOZ-waarde niet bepalen.",
                 UserWarning,
             )
             return woningwaardering_groep
@@ -171,14 +171,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         df_woz = pd.read_csv(
             files("woningwaardering")
             .joinpath(LOOKUP_TABEL_FOLDER)
-            .joinpath("corop_gebied_gemiddelde_woz_waarde_per_m2_2022.csv")
+            .joinpath("corop_gebied_gemiddelde_woz_waarde_per_m2_2022.csv"),
+            dtype={"COROP-gebiedcode": str},
         )
 
         woz_mask = df_woz["COROP-gebiedcode"] == corop_gebied["code"]
 
         if not woz_mask.any():
             warnings.warn(
-                f"Eenheid {eenheid.id}: Geen gemiddelde WOZ-waarde gevonden voor COROP-gebied {corop_gebied['naam']}. Kan punten voor de WOZ-waarde niet bepalen.",
+                f"Eenheid {eenheid.id}: Geen gemiddelde WOZ-waarde gevonden voor COROP-gebied {corop_gebied}. Kan punten voor de WOZ-waarde niet bepalen.",
                 UserWarning,
             )
             return woningwaardering_groep
@@ -262,7 +263,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     logger.enable("woningwaardering")
-    warnings.filterwarnings("ignore", category=UserWarning)
+    warnings.filterwarnings("default", category=UserWarning)
     stelselgroep = PuntenVoorDeWozWaarde()
     with open(
         "tests/data/onzelfstandige_woonruimten/stelselgroepen/punten_voor_de_woz_waarde/input/gebruiksoppervlakten.json",
@@ -270,12 +271,12 @@ if __name__ == "__main__":  # pragma: no cover
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-        groepen=[stelselgroep.bereken(eenheid)]
-    )
+        resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+            groepen=[stelselgroep.bereken(eenheid)]
+        )
 
-    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
+        print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
 
-    tabel = utils.naar_tabel(resultaat)
+        tabel = utils.naar_tabel(resultaat)
 
-    print(tabel)
+        print(tabel)

@@ -72,9 +72,7 @@ async def get_gemeente_corop_data(session: aiohttp.ClientSession) -> pd.DataFram
     )
     df_pivot.columns = ["COROP-gebiedcode", "COROP-gebied", "Gemeentecode", "Gemeente"]
 
-    return df_pivot.reset_index()[
-        ["Gemeentecode", "Gemeente", "COROP-gebiedcode", "COROP-gebied"]
-    ]
+    return df_pivot[["Gemeentecode", "Gemeente", "COROP-gebiedcode", "COROP-gebied"]]
 
 
 async def main() -> None:
@@ -87,6 +85,11 @@ async def main() -> None:
         )
 
         data = pd.merge(woonplaatsen, gemeenten, on="Gemeentecode")
+
+        data["Woonplaatscode"] = data["Woonplaatscode"].str.lstrip("WP")
+        data["Gemeentecode"] = data["Gemeentecode"].str.lstrip("GM")
+        data["COROP-gebiedcode"] = data["COROP-gebiedcode"].str.lstrip("CR")
+
         data.to_csv(OUTPUT_FILE, index=False)
         logger.info(f"COROP-gebieden:\n{data}")
         logger.info(f"COROP-gebieden opgeslagen in {OUTPUT_FILE}")

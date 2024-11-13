@@ -679,12 +679,11 @@ def get_woonplaats(adres: EenhedenAdresBasis) -> dict[str, Any] | None:
 
 def get_corop_voor_woonplaats(woonplaats_identificatie: str) -> pd.DataFrame:
     data = pd.read_csv(
-        files("woningwaardering").joinpath("data/corop/corop.generated.csv")
+        files("woningwaardering").joinpath("data/corop/corop.generated.csv"),
+        dtype={"Woonplaatscode": str, "Gemeentecode": str, "COROP-gebiedcode": str},
     )
 
-    woonplaats_dataframe = data[
-        data["Woonplaatscode"] == f"WP{woonplaats_identificatie}"
-    ]
+    woonplaats_dataframe = data[data["Woonplaatscode"] == woonplaats_identificatie]
 
     if woonplaats_dataframe.empty:
         return None
