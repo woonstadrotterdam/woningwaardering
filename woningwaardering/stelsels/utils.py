@@ -1,9 +1,8 @@
-import asyncio
 import warnings
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
 from importlib.resources import files
-from typing import Any, Callable, Counter, List, Tuple
+from typing import Callable, Counter, List, Tuple
 
 import pandas as pd
 import requests
@@ -440,14 +439,14 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
     ) * kwart
 
 
-endpoint_cultureelerfgoed = (
+CULTUREELERFGOED_SPARQL_ENDPOINT = (
     "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
 )
-endpoint_kadaster = (
+KADASTER_SPARQL_ENDPOINT = (
     "https://api.labs.kadaster.nl/datasets/dst/kkg/services/default/sparql"
 )
 
-rijksmonumenten_query_template = """
+RIJKSMONUMENTEN_QUERY_TEMPLATE = """
 PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
 PREFIX bag:<http://bag.basisregistraties.overheid.nl/bag/id/>
 
@@ -460,7 +459,7 @@ WHERE {{
 }}
 """
 
-beschermd_gezicht_query_template = """
+BESCHERMD_GEZICHT_QUERY_TEMPLATE = """
 PREFIX sor: <https://data.kkg.kadaster.nl/sor/model/def/>
 PREFIX nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
 PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
@@ -499,11 +498,11 @@ def is_rijksmonument(verblijfsobject_identificatie: str) -> bool | None:
     if not verblijfsobject_identificatie.isnumeric():
         raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
 
-    rijksmonumenten_query = rijksmonumenten_query_template.format(
+    rijksmonumenten_query = RIJKSMONUMENTEN_QUERY_TEMPLATE.format(
         verblijfsobject_identificatie=verblijfsobject_identificatie,
     )
 
-    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql = SPARQLWrapper2(CULTUREELERFGOED_SPARQL_ENDPOINT)
     sparql.setQuery(rijksmonumenten_query)
     result = sparql.queryAndConvert()
 
@@ -534,12 +533,12 @@ def is_beschermd_gezicht(verblijfsobject_identificatie: str) -> bool | None:
     if not verblijfsobject_identificatie.isnumeric():
         raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
 
-    beschermd_gezicht_query = beschermd_gezicht_query_template.format(
-        endpoint_kadaster=endpoint_kadaster,
+    beschermd_gezicht_query = BESCHERMD_GEZICHT_QUERY_TEMPLATE.format(
+        endpoint_kadaster=KADASTER_SPARQL_ENDPOINT,
         verblijfsobject_identificatie=verblijfsobject_identificatie,
     )
 
-    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql = SPARQLWrapper2(CULTUREELERFGOED_SPARQL_ENDPOINT)
     sparql.setQuery(beschermd_gezicht_query)
     result = sparql.queryAndConvert()
 
@@ -602,11 +601,6 @@ def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:
             ruimte.naam = f"{ruimte.naam} {nummering_counter[ruimte.naam]}"
 
 
-KADASTER_SPARQL_ENDPOINT = (
-    "https://api.labs.kadaster.nl/datasets/dst/kkg/services/default/sparql"
-)
-KADASTER_SEMAPHORE = asyncio.Semaphore(4)
-
 WOONPLAATS_QUERY_TEMPLATE = """
 prefix sor: <https://data.kkg.kadaster.nl/sor/model/def/>
 prefix nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
@@ -655,7 +649,17 @@ where {{
 """
 
 
-def get_woonplaats(adres: EenhedenAdresBasis) -> dict[str, Any] | None:
+def get_woonplaats(adres: EenhedenAdresBasis) -> dict[str, str] | None:
+    """
+    Haalt de woonplaats op voor een gegeven adres.
+
+    Args:
+        adres (EenhedenAdresBasis): Adres met postcode, huisnummer, huisnummertoevoeging en huisletter.
+
+    Returns:
+        dict[str, str] | None: Een dictionary met 'code' en 'naam' van de woonplaats,
+                               of None als de gegevens niet gevonden kunnen worden.
+    """
     if adres.postcode is None or adres.huisnummer is None:
         return None
 
@@ -667,23 +671,35 @@ def get_woonplaats(adres: EenhedenAdresBasis) -> dict[str, Any] | None:
     )
     request_data = {"query": query, "format": "json"}
 
-    response = requests.post(KADASTER_SPARQL_ENDPOINT, data=request_data, timeout=5)
+    try:
+        response = requests.post(KADASTER_SPARQL_ENDPOINT, data=request_data, timeout=5)
+        response.raise_for_status()
+        result = response.json()
 
-    response.raise_for_status()
-    resultaat = response.json()
-    print(resultaat)
-    if isinstance(resultaat, list) and len(resultaat) == 1:
-        return {"code": resultaat[0]["identificatie"], "naam": resultaat[0]["naam"]}
-    return None
+        if isinstance(result, list) and len(result) == 1:
+            return {"code": result[0]["identificatie"], "naam": result[0]["naam"]}
+        return None
+    except requests.RequestException as e:
+        warnings.warn(f"Fout bij het ophalen van woonplaatsdata: {e}, UserWarning")
 
 
-def get_corop_voor_woonplaats(woonplaats_identificatie: str) -> pd.DataFrame:
+def get_corop_voor_woonplaats(woonplaats_code: str) -> dict[str, str]:
+    """
+    Haalt het COROP-gebied op voor een gegeven woonplaatscode.
+
+    Args:
+        woonplaats_code (str): De code van de woonplaats.
+
+    Returns:
+        dict[str, str] | None: Een dictionary met 'code' en 'naam' van het COROP-gebied,
+                               of None als de gegevens niet gevonden kunnen worden.
+    """
     data = pd.read_csv(
         files("woningwaardering").joinpath("data/corop/corop.generated.csv"),
         dtype={"Woonplaatscode": str, "Gemeentecode": str, "COROP-gebiedcode": str},
     )
 
-    woonplaats_dataframe = data[data["Woonplaatscode"] == woonplaats_identificatie]
+    woonplaats_dataframe = data[data["Woonplaatscode"] == woonplaats_code.lstrip("WP")]
 
     if woonplaats_dataframe.empty:
         return None

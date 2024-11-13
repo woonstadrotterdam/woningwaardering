@@ -88,7 +88,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"WOZ-waarde op peildatum {waardepeildatum.strftime('%x')}"
+                    naam=f"WOZ-waarde op waardepeildatum {waardepeildatum.strftime('%x')}"
                 ),
                 aantal=woz_waarde,
             )
