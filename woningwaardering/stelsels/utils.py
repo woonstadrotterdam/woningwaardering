@@ -683,7 +683,7 @@ def get_woonplaats(adres: EenhedenAdresBasis) -> dict[str, str] | None:
         warnings.warn(f"Fout bij het ophalen van woonplaatsdata: {e}, UserWarning")
 
 
-def get_corop_voor_woonplaats(woonplaats_code: str) -> dict[str, str]:
+def get_corop_voor_woonplaats(woonplaats_code: str) -> dict[str, str] | None:
     """
     Haalt het COROP-gebied op voor een gegeven woonplaatscode.
 
