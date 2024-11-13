@@ -15,7 +15,7 @@
         {
           "aantal": 148000.0,
           "criterium": {
-            "naam": "WOZ-waarde op peildatum 01-01-2022"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2022"
           }
         }
       ]
