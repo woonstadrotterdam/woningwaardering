@@ -620,6 +620,80 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkam
 
 ~~Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder) wordt één punt toegekend. Voorwaarde is wel dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit. De wetgever gaat ervan uit dat met deze puntenwaardering de verhuurder een redelijke rendementswaarborg heeft voor het door hem geïnvesteerde vermogen (te weten de kosten van de ingrepen, verminderd met de eigen bijdrage van de huurder en de financiële tegemoetkoming van gemeente of (bij dure woonvoorzieningen) enige instantie die ingevolge een wettelijke regeling die tegemoetkoming verleent.~~
 
+## Rubriek 8 - Buitenruimten
+
+### 8.1 Puntentoekenning
+
+- Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,35 punt.  
+*Voorbeeld: 10 vierkante meter privé-buitenruimte levert 5,5 punt op (2 + 10 x 0,35).*  
+
+- Voor gemeenschappelijk buitenruimten op hetzelfde adres worden 0,75 per vierkante meter toegekend, gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
+- Voor gemeenschappelijk buitenruimten gedeeld met meerdere adressen, worden 0,75 per vierkante meter toegekend. Dit puntenaantal wordt gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft en vervolgens gedeeld door het aantal onzelfstandige woonruimten op dat adres.
+- Maximaal 15 punten worden toegekend voor buitenruimten.
+
+### 8.2 Definitie privé-buitenruimte
+
+Privé-buitenruimte zijn tot de woning behorende buitenruimten, waarvan de huurder van de desbetreffende woning volgens de huurovereenkomst het exclusieve gebruiksrecht en toegang heeft. Dit kunnen onder meer voor-, zij- of achtertuinen, balkons, platjes of terrassen zijn, maar ook een oprit exclusief behorende tot de woning. Wanneer zich binnen de privé-buitenruimte een parkeerplek bevindt, geldt de parkeerplek en de weg daar naartoe als privé-buitenruimte. Gemeenschappelijke parkeerruimte wordt volgens rubriek 10 gewaardeerd.
+
+Met exclusief gebruiksrecht van privé-buitenruimte wordt bedoeld dat uitsluitend de huurder het recht heeft om te bepalen welk gebruik hij maakt van de privé-buitenruimten die tot de woning behoren.
+
+### 8.3 Definitie gemeenschappelijke buitenruimte
+
+Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, breedte, diepte) en zijn tot het woongebouw behorende buitenruimten waar de bewoners in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht toe hebben. Gemeenschappelijke buitenruimten kunnen zich bevinden op hetzelfde adres of worden gedeeld met meerdere adressen binnen hetzelfde woongebouw.
+
+De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke buitenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s). Gedeelde buitenruimte die als parkeerplek bedoeld is, wordt gewaardeerd volgens rubriek 10.
+
+> Er wordt vanuitgegaan dat gemeenschappelijke buitenruimten die worden meegegeven als zodanig aan de hierboven beschreven eisen voldoen.
+
+### 8.4 Fietsenberging
+
+Een fietsenberging wordt gewaardeerd als gemeenschappelijke buitenruimte. Onder een fietsenberging wordt verstaan een afsluitbare, overdekte bergplaats, niet zijnde een portiek, trap, gang, hal en dergelijke. Een fietsenberging in deze rubriek kan niet als overige ruimte uit rubriek 2 worden gewaardeerd, omdat deze niet onroerend is.
+
+> `Stalling extern` en `Stalling intern` worden gewaardeerd als gemeenschappelijke buitenruimte.
+
+
+### 8.4 Balkons, dakterrassen en loggia’s
+
+Balkons, dakterrassen en loggia’s moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze zijn:
+
+- voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;
+- rondom voorzien van een afscheiding die tevens dient als valbeveiliging; en
+- via een deur* of schuifpui toegankelijk zijn.
+
+> Er wordt vanuitgegaan dat balkons, dakterrassen en loggia’s alleen worden meegegeven als ze aan de hierboven beschreven eisen voldoen.
+
+\* Indien het balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als buitenruimte te worden gebruikt, dan worden deze met punten gewaardeerd.
+
+Franse balkons worden niet als buitenruimten beschouwd. Een Frans balkon is een opening in de gevel met naar binnen draaiende deuren, voorzien van een balustrade direct tegen het kozijn of de gevel. Zeembalkons worden, zolang zij voldoen aan de hiervoor aangegeven eisen van een balkon, wel gewaardeerd als buitenruimte.
+
+> Indien een zeembalkon voldoet aan de eisen voor een balkon moet deze als `balkon` worden meegegeven.
+
+### 8.5 Meetinstructies
+
+Van de buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor-, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terugliggende deel van de gevel. De oppervlakte, die wordt ingenomen door een balkonkast of kolenhok e.d., wordt bij de oppervlakte van de desbetreffende buitenruimte meegerekend.
+
+### 8.6 Puntenberekening en saldering
+
+De oppervlakten voor privé en gemeenschappelijke buitenruimten worden afzonderlijk berekend. Als sprake is van meerdere buitenruimten die tot dezelfde categorie behoren (privé, gemeenschappelijk op hetzelfde adres of gemeenschappelijk met meerdere adressen) dan wordt voor de berekening eerst de oppervlakte voor die categorie buitenruimte berekend en daarna wordt de oppervlakte van de categorie buitenruimte bij elkaar opgeteld.
+
+De punten voor privé en gemeenschappelijke buitenruimten worden vervolgens gesaldeerd. In totaal kan maximaal 15 punten worden toegekend.
+
+Puntenberekening en saldering
+```text
+Voorbeeld: in een woongebouw bevinden zich vijf adressen. Op één van deze adressen bevinden zich vier onzelfstandige woonruimten. Huurder A huurt één van deze onzelfstandige woonruimten, bestaande uit een kamer met een klein balkon (lengte 2m en breedte 0,5m). Daarnaast is er een balkon (lengte 3m en breedte 1,5m), dat huurder A deelt met de drie andere huurders van onzelfstandige woonruimten op dit adres. Tot slot beschikt het woongebouw over een gemeenschappelijk dakterras (lengte 8m en breedte 6,5m).
+```
+
+*Privé-buitenruimte*  
+De woning van A beschikt over een privé-buitenruimte van 2m x 0,5m = 1m2. Dit resulteert in 2 punten + 0,35 punt x 1m2 = 2,35 punten.
+
+*Gemeenschappelijke ruimte op hetzelfde adres*  
+Op het adres van huurder A is een balkon van 3m x 1,5m = 4,5m2. Dit resulteert in 0,75 punt x 4,5m2 = 3,375 punt. Het balkon wordt gedeeld door vier onzelfstandige woonruimten op hetzelfde adres, dus 3,375 punt/4 = 0,84375 punt..
+
+*Gemeenschappelijke ruimte gedeeld met meerdere adressen*  
+Tot slot is er een dakterras van 8m x 6,5m = 52m2. Dit resulteert in 0,75 punt x 52m2 = 39 punten. Het dakterras wordt gedeeld door 5 adressen, dus 39 punten/5 = 7,8 punt. Op het adres van huurder A zijn vier onzelfstandige woonruimten, dus 7,8 punt/4 = 1,95 punt.
+
+*Totaal*  
+Voor huurder A resulteert dit in 2,35 punt + 0,84375 punt + 1,95 punt = 5,14375 punten, afgerond 5,25 punten.
 
 ## Rubriek 10 - Gemeenschappelijke parkeerruimten 
 
