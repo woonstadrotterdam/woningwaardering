@@ -12,8 +12,8 @@ from prettytable import PrettyTable
 from SPARQLWrapper import SPARQLWrapper2
 
 from woningwaardering.vera.bvg.generated import (
-    EenhedenAdresBasis,
     EenhedenEenheid,
+    EenhedenEenheidadres,
     EenhedenEnergieprestatie,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -649,19 +649,30 @@ where {{
 """
 
 
-def get_woonplaats(adres: EenhedenAdresBasis) -> dict[str, str] | None:
+def get_woonplaats(adres: EenhedenEenheidadres) -> dict[str, str] | None:
     """
     Haalt de woonplaats op voor een gegeven adres.
 
     Args:
-        adres (EenhedenAdresBasis): Adres met postcode, huisnummer, huisnummertoevoeging en huisletter.
+        adres (EenhedenEenheidadres): Adres met woonplaats met woonplaatscode of postcode, huisnummer en optioneel huisnummertoevoeging en huisletter.
 
     Returns:
         dict[str, str] | None: Een dictionary met 'code' en 'naam' van de woonplaats,
                                of None als de gegevens niet gevonden kunnen worden.
     """
+    if (
+        adres.woonplaats is not None
+        and adres.woonplaats.code is not None
+        and adres.woonplaats.naam is not None
+    ):
+        return {"code": adres.woonplaats.code, "naam": adres.woonplaats.naam}
+
     if adres.postcode is None or adres.huisnummer is None:
         return None
+
+    logger.info(
+        f"Adres {adres} bevat geen woonplaats met woonplaatscode. Woonplaats wordt opgehaald via het Kadaster"
+    )
 
     query = WOONPLAATS_QUERY_TEMPLATE.format(
         postcode=adres.postcode,
