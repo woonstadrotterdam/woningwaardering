@@ -169,12 +169,10 @@ class Keuken(Stelselgroep):
                     element.lengte >= 2000
                     and (
                         (  # zelfstandige keuken met aanrecht boven 2000mm is 7 punten
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
-                            or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten == 1
+                            not utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
                         )
                         or (  # onzelfstandige keuken met aanrecht tussen 2000mm en 3000mm is 7 punten
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                            utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
                             and element.lengte <= 3000
                         )
                     )

@@ -69,8 +69,9 @@ class OppervlakteVanVertrekken(Stelselgroep):
                     if (
                         woningwaardering.aantal
                         and woningwaardering.criterium.naam
+                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
                         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                        is not None
                     ):
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten

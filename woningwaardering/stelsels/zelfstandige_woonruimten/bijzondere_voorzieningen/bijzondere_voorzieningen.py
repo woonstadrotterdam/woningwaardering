@@ -191,8 +191,7 @@ class BijzondereVoorzieningen(Stelselgroep):
         aantal_laadpalen = sum(
             aantal_bouwkundige_elementen(ruimte, Bouwkundigelementdetailsoort.laadpaal)
             for ruimte in eenheid.ruimten or []
-            if ruimte.gedeeld_met_aantal_eenheden is None
-            or ruimte.gedeeld_met_aantal_eenheden < 2
+            if not utils.gedeeld_met_eenheden(ruimte)
         )
 
         if aantal_laadpalen > 0:

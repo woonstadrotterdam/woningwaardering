@@ -7,6 +7,9 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.utils import (
+    classificeer_ruimte,
+)
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import Keuken
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
     OppervlakteVanOverigeRuimten,
@@ -15,9 +18,6 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekk
     OppervlakteVanVertrekken,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair import Sanitair
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
-    classificeer_ruimte,
-)
 from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming import (
     VerkoelingEnVerwarming,
 )
@@ -94,8 +94,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             gedeelde_ruimten = [
                 ruimte
                 for ruimte in eenheid.ruimten or []
-                if ruimte.gedeeld_met_aantal_eenheden is not None
-                and ruimte.gedeeld_met_aantal_eenheden > 1
+                if utils.gedeeld_met_eenheden(ruimte)
             ]
 
             oppervlakte_berekeningen = {

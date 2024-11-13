@@ -58,8 +58,7 @@ class Sanitair(Stelselgroep):
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if ruimte.gedeeld_met_aantal_eenheden is None
-            or ruimte.gedeeld_met_aantal_eenheden < 2
+            if not utils.gedeeld_met_eenheden(ruimte)
         ]
         # * tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer.
         # Op een adres met minimaal acht of meer onzelfstandige woonruimten geldt dit maximum niet voor maximaal één ruimte.

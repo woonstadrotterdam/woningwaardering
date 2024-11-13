@@ -7,9 +7,12 @@ from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import rond_af, rond_af_op_kwart
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
+from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
+    gedeeld_met_eenheden,
+    naar_tabel,
+    rond_af,
+    rond_af_op_kwart,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -61,8 +64,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if ruimte.gedeeld_met_aantal_eenheden is None
-            or ruimte.gedeeld_met_aantal_eenheden == 1
+            if not gedeeld_met_eenheden(ruimte)
         ]
 
         for ruimte in ruimten:
