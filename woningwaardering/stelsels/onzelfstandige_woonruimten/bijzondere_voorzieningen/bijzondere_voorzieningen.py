@@ -5,10 +5,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.bijzondere_voorzieningen.bijzondere_voorzieningen import (
-    BijzondereVoorzieningen as BijzondereVoorzieningenZelfstandigeWoonruimten,
+from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen import (
+    woningwaarderingen,
 )
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -49,7 +49,7 @@ class BijzondereVoorzieningen(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen = list(
-            BijzondereVoorzieningenZelfstandigeWoonruimten._genereer_woningwaarderingen(
+            woningwaarderingen(
                 peildatum=self.peildatum,
                 eenheid=eenheid,
                 stelselgroepen_zonder_opslag=[

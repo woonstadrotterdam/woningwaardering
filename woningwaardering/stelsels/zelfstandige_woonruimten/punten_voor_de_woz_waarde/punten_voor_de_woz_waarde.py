@@ -79,7 +79,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
             woningwaardering_resultaat = ZelfstandigeWoonruimten(
                 peildatum=self.peildatum
-            ).bereken(eenheid, negeer_stelselgroep=PuntenVoorDeWozWaarde)
+            ).bereken(
+                eenheid,
+                negeer_stelselgroep=Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
+            )
 
         if not eenheid.bouwjaar:
             warnings.warn(f"Eenheid {eenheid.id}: geen bouwjaar gevonden.", UserWarning)

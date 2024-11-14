@@ -21,6 +21,9 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
+    Woningwaarderingstelselgroep,
+)
 
 
 class Stelsel:
@@ -67,13 +70,13 @@ class Stelsel:
         self,
         eenheid: EenhedenEenheid,
         *,
-        negeer_stelselgroep: type[Stelselgroep] | None = None,
+        negeer_stelselgroep: Woningwaarderingstelselgroep | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """Berekent de woningwaardering voor een stelsel.
 
         Parameters:
             eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
-            negeer_stelselgroep (type[Stelselgroep] | None, optional): Een stelselgroep die moet worden overgeslagen.
+            negeer_stelselgroep (Woningwaarderingstelselgroep | None, optional): Een stelselgroep die moet worden overgeslagen.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
@@ -86,8 +89,9 @@ class Stelsel:
         resultaat.groepen = []
 
         for stelselgroep in self.stelselgroepen:
-            if negeer_stelselgroep is not None and isinstance(
-                stelselgroep, negeer_stelselgroep
+            if (
+                negeer_stelselgroep is not None
+                and stelselgroep.stelselgroep == negeer_stelselgroep
             ):
                 continue
 

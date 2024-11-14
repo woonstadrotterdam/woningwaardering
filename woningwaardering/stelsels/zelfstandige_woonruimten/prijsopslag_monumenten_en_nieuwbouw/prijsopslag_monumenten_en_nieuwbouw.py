@@ -258,7 +258,10 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
                 woningwaardering_resultaat = ZelfstandigeWoonruimten(
                     peildatum=peildatum
-                ).bereken(eenheid, negeer_stelselgroep=PrijsopslagMonumentenEnNieuwbouw)
+                ).bereken(
+                    eenheid,
+                    negeer_stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+                )
 
             puntentotaal = (
                 woningwaardering_resultaat is not None
