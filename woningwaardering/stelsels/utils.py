@@ -630,7 +630,7 @@ def _classificeer_ruimte_dec(
     return wrapper
 
 
-@_classificeer_ruimte_dec
+# @_classificeer_ruimte_dec
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
