@@ -36,16 +36,14 @@ def verwarmde_overige_ruimten(
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: Waardering voor verwarmde overige ruimten
     """
+    if not ruimte.verwarmd:
+        return None
+
     ruimtesoort = classificeer_ruimte(ruimte)
-    if (
-        ruimtesoort
-        and ruimtesoort.code
-        in [
-            Ruimtesoort.overige_ruimten.code,
-            Ruimtesoort.verkeersruimte.code,
-        ]
-        and ruimte.verwarmd
-    ):
+    if ruimtesoort and ruimtesoort.code in [
+        Ruimtesoort.overige_ruimten.code,
+        Ruimtesoort.verkeersruimte.code,
+    ]:
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde overige- of verkeersruimte en krijgt 1 punt"
         )
@@ -74,9 +72,12 @@ def verkoelde_en_of_verwarmde_vertrekken(
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: Waardering voor verkoelde en verwarmde vertrekken
     """
+    if not ruimte.verwarmd:
+        return None
+
     punten = 2
     ruimtesoort = classificeer_ruimte(ruimte)
-    if ruimte.verwarmd and ruimtesoort and ruimtesoort.code == Ruimtesoort.vertrek.code:
+    if ruimtesoort and ruimtesoort.code == Ruimtesoort.vertrek.code:
         if ruimte.verkoeld:
             punten += 1  # 1 punt extra per vertrek wanneer verwarmd en verkoeld
             logger.info(
