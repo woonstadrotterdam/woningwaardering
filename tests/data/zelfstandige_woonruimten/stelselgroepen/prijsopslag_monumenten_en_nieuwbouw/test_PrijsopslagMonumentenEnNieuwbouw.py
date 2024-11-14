@@ -85,15 +85,15 @@ def test_PrijsopslagMonumentenEnNieuwbouw_specifiek_output(
 specifiek_warning_mapping = {
     "beschermd_stadsgezicht_zonder_bouwjaar": (
         UserWarning,
-        "Eenheid beschermd_stadsgezicht_zonder_bouwjaar: 'bouwjaar' is niet gespecificeerd.",
+        "'bouwjaar' is niet gespecificeerd.",
     ),
     "monumenten_none": (
         UserWarning,
-        "Eenheid monumenten_none: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
+        "'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
     ),
     "rijksmonument_zonder_datum_afsluiten_huurovereenkomst": (
         UserWarning,
-        "Eenheid rijksmonument_zonder_datum_afsluiten_huurovereenkomst: 'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
+        "'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
     ),
 }
 
