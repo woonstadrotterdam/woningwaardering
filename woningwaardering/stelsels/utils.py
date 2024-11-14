@@ -328,7 +328,9 @@ def energieprestatie_met_geldig_label(
     """
 
     if eenheid.energieprestaties is None:
-        warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
+        warnings.warn(
+            f"Eenheid ({eenheid.id}): 'Energieprestaties' is None", UserWarning
+        )
         return None
 
     vereiste_attributen: List[
@@ -343,13 +345,13 @@ def energieprestatie_met_geldig_label(
     ]
 
     for energieprestatie in eenheid.energieprestaties:
-        logger.debug(f"Eenheid {eenheid.id}: valideer energieprestatie.")
+        logger.debug(f"Eenheid ({eenheid.id}): valideer energieprestatie.")
         ontbrekende_attributen = [
             naam for naam, check in vereiste_attributen if not check(energieprestatie)
         ]
         if ontbrekende_attributen:
             logger.debug(
-                f"Eenheid {eenheid.id} mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
+                f"Eenheid ({eenheid.id}) mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
             )
             continue
 
@@ -362,7 +364,7 @@ def energieprestatie_met_geldig_label(
             Energieprestatiesoort.voorlopig_energielabel.code,
         }:
             logger.debug(
-                f"Eenheid {eenheid.id}: Ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
+                f"Eenheid ({eenheid.id}): Ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
             )
             continue
 
@@ -370,7 +372,7 @@ def energieprestatie_met_geldig_label(
             energieprestatie.begindatum <= peildatum < energieprestatie.einddatum
         ):
             logger.debug(
-                f"Eenheid {eenheid.id}: Peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
+                f"Eenheid ({eenheid.id}): Peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
             )
             continue
 
@@ -378,7 +380,7 @@ def energieprestatie_met_geldig_label(
             energieprestatie.status.code != Energieprestatiestatus.definitief.code
         ):
             logger.debug(
-                f"Eenheid {eenheid.id}: Energieprestatie status is niet definitief."
+                f"Eenheid ({eenheid.id}): Energieprestatie status is niet definitief."
             )
             continue
 
@@ -390,15 +392,15 @@ def energieprestatie_met_geldig_label(
             )
         ):
             logger.debug(
-                f"Eenheid {eenheid.id}: Registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
+                f"Eenheid ({eenheid.id}): Registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
             )
             continue
 
-        logger.info(f"Eenheid {eenheid.id}: Geldige energieprestatie gevonden.")
+        logger.info(f"Eenheid ({eenheid.id}): Geldige energieprestatie gevonden.")
         logger.debug(f"Energieprestatie: {energieprestatie}")
         return energieprestatie
 
-    logger.info(f"Eenheid {eenheid.id}: Geen geldige energieprestatie gevonden.")
+    logger.info(f"Eenheid ({eenheid.id}): Geen geldige energieprestatie gevonden.")
     return None
 
 
@@ -572,7 +574,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
 
         if rijksmonument is not None:
             logger.info(
-                f"Eenheid {eenheid.id} is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+                f"Eenheid ({eenheid.id}) is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
             )
             if rijksmonument:
                 eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
@@ -583,7 +585,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
 
         if beschermd_gezicht is not None:
             logger.info(
-                f"Eenheid {eenheid.id} {'behoort' if beschermd_gezicht else 'behoort niet'} tot een beschermd stads- of dorpsgezicht volgens de api van cultureelerfgoed."
+                f"Eenheid ({eenheid.id}) {'behoort' if beschermd_gezicht else 'behoort niet'} tot een beschermd stads- of dorpsgezicht volgens de api van cultureelerfgoed."
             )
             if beschermd_gezicht:
                 eenheid.monumenten.append(Eenheidmonument.beschermd_stadsgezicht.value)

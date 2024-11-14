@@ -65,7 +65,7 @@ class Buitenruimten(Stelselgroep):
             aftrek = max_punten - punten
 
             logger.info(
-                f"Eenheid {eenheid.id}: maximaal aantal punten voor buitenruimten overschreden ({punten} > {max_punten}). Een aftrek van {aftrek} punt(en) wordt toegepast."
+                f"Eenheid ({eenheid.id}): maximaal aantal punten voor buitenruimten overschreden ({punten} > {max_punten}). Een aftrek van {aftrek} punt(en) wordt toegepast."
             )
             punten += aftrek
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
@@ -251,7 +251,7 @@ class Buitenruimten(Stelselgroep):
         woningwaardering_groep = self._maximering(eenheid, woningwaardering_groep)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}"
+            f"Eenheid ({eenheid.id}) wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}"
         )
         return woningwaardering_groep
 

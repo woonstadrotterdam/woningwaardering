@@ -53,7 +53,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         )
 
         if not eenheid.ruimten:
-            warnings.warn(f"Eenheid {eenheid.id} heeft geen 'ruimten'.")
+            warnings.warn(f"Eenheid ({eenheid.id}) heeft geen 'ruimten'.")
             return woningwaardering_groep
 
         woningwaardering_groep.woningwaarderingen = []
@@ -159,7 +159,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         woningwaardering_groep.punten = float(totaal_punten)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}"
+            f"Eenheid ({eenheid.id}) wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}"
         )
         return woningwaardering_groep
 

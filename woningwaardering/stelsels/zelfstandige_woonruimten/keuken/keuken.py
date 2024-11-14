@@ -71,7 +71,7 @@ class Keuken(Stelselgroep):
 
         if not keukens:
             warnings.warn(
-                f"Eenheid {eenheid.id} kan niet gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam} omdat er geen keuken is gevonden.",
+                f"Eenheid ({eenheid.id}) kan niet gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam} omdat er geen keuken is gevonden.",
                 UserWarning,
             )
 
@@ -85,7 +85,7 @@ class Keuken(Stelselgroep):
         woningwaardering_groep.punten = float(totaal_punten)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+            f"Eenheid ({eenheid.id}) wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
         )
 
         return woningwaardering_groep

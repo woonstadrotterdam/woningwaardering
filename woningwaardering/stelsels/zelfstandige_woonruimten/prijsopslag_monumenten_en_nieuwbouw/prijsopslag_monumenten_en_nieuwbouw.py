@@ -106,7 +106,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
     def _check_monumenten_attribuut(eenheid: EenhedenEenheid) -> None:
         if eenheid.monumenten is None:
             warnings.warn(
-                f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
+                f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
                 UserWarning,
             )
             utils.update_eenheid_monumenten(eenheid)
@@ -124,11 +124,11 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             datum_afsluiten_huurovereenkomst = eenheid.datum_afsluiten_huurovereenkomst
             if datum_afsluiten_huurovereenkomst is None:
                 warnings.warn(
-                    f"Eenheid {eenheid.id}: 'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
+                    f"Eenheid ({eenheid.id}): 'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
                     UserWarning,
                 )
                 logger.warning(
-                    f"Eenheid {eenheid.id}: Voor de waardering van dit rijksmonument wordt de peildatum {peildatum} gebruikt in plaats van de datum van de afsluiting van de huurovereenkomst."
+                    f"Eenheid ({eenheid.id}): Voor de waardering van dit rijksmonument wordt de peildatum {peildatum} gebruikt in plaats van de datum van de afsluiting van de huurovereenkomst."
                 )
                 datum_afsluiten_huurovereenkomst = peildatum
 
@@ -140,7 +140,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             if datum_afsluiten_huurovereenkomst >= date(2024, 7, 1):
                 logger.info(
-                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met een opslagpercentage van 35% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is een rijksmonument en wordt gewaardeerd met een opslagpercentage van 35% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
                 )
                 woningwaardering.opslagpercentage = 0.35
             elif (
@@ -149,13 +149,13 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             ):
                 # 50 punten voor zelfstandige woonruimten
                 logger.info(
-                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met 50 punten voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is een rijksmonument en wordt gewaardeerd met 50 punten voor de stelselgroep {stelselgroep.naam}."
                 )
                 woningwaardering.punten = 50.0
             elif stelselgroep == Woningwaarderingstelselgroep.prijsopslag_monumenten:
                 # 10 punten voor onzelfstandige woonruimten
                 logger.info(
-                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met 10 punten voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is een rijksmonument en wordt gewaardeerd met 10 punten voor de stelselgroep {stelselgroep.naam}."
                 )
                 woningwaardering.punten = 10.0
 
@@ -176,7 +176,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             for monument in eenheid.monumenten or []
         ):
             logger.info(
-                f"Eenheid {eenheid.id} is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
+                f"Eenheid ({eenheid.id}) is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
             )
             return WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -209,12 +209,12 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         ):
             if eenheid.bouwjaar is None:
                 warnings.warn(
-                    f"Eenheid {eenheid.id}: 'bouwjaar' is niet gespecificeerd.",
+                    f"Eenheid ({eenheid.id}): 'bouwjaar' is niet gespecificeerd.",
                     UserWarning,
                 )
             elif eenheid.bouwjaar < 1965:
                 logger.info(
-                    f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
                 )
                 return WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -225,7 +225,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             else:
                 logger.info(
-                    f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
+                    f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
                 )
         return None
 
@@ -271,7 +271,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             if puntentotaal is not None and 144 <= puntentotaal <= 186:
                 logger.info(
-                    f"Eenheid {eenheid.id} is een nieuwbouw en wordt gewaardeerd met een opslagpercentage van 10% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is een nieuwbouw en wordt gewaardeerd met een opslagpercentage van 10% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
                 )
 
                 return WoningwaarderingResultatenWoningwaardering(
@@ -283,7 +283,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             else:
                 logger.info(
-                    f"Eenheid {eenheid.id} is een nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is een nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor de stelselgroep {stelselgroep.naam}."
                 )
         return None
 

@@ -92,7 +92,7 @@ def opslag_zorgwoning(
         eenheid.doelgroep and eenheid.doelgroep.code != Doelgroep.zorg.code
     ):
         logger.debug(
-            f"Eenheid {eenheid.id} is geen zorgwoning en krijgt dus geen zorgwoningopslag"
+            f"Eenheid ({eenheid.id}) is geen zorgwoning en krijgt dus geen zorgwoningopslag"
         )
         return None
 
@@ -146,13 +146,13 @@ def opslag_zorgwoning(
     )
 
     logger.info(
-        f"Eenheid {eenheid.id}: Puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel is {puntentotaal}"
+        f"Eenheid ({eenheid.id}): Puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel is {puntentotaal}"
     )
 
     verhoging = puntentotaal * Decimal("0.35")
 
     logger.info(
-        f"Eenheid {eenheid.id} is een zorgwoning: {verhoging} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
+        f"Eenheid ({eenheid.id}) is een zorgwoning: {verhoging} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
     return WoningwaarderingResultatenWoningwaardering(
@@ -184,12 +184,12 @@ def aanbelfunctie_met_video_en_audioverbinding(
         for installatie in (ruimte.installaties or [])
     ):
         logger.debug(
-            f"Eenheid {eenheid.id} heeft geen aanbelfunctie met video en audioverbinding"
+            f"Eenheid ({eenheid.id}) heeft geen aanbelfunctie met video en audioverbinding"
         )
         return None
 
     logger.info(
-        f"Eenheid {eenheid.id} heeft een aanbelfunctie met video en audioverbinding: 0.25 punt voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
+        f"Eenheid ({eenheid.id}) heeft een aanbelfunctie met video en audioverbinding: 0.25 punt voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
     return WoningwaarderingResultatenWoningwaardering(
@@ -219,13 +219,13 @@ def prive_laadpaal(
     )
 
     if aantal_laadpalen == 0:
-        logger.debug(f"Eenheid {eenheid.id} heeft geen privé laadpaal")
+        logger.debug(f"Eenheid ({eenheid.id}) heeft geen privé laadpaal")
         return None
 
     punten_laadpalen = aantal_laadpalen * 2
 
     logger.info(
-        f"Eenheid {eenheid.id} heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'}: {punten_laadpalen} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
+        f"Eenheid ({eenheid.id}) heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'}: {punten_laadpalen} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
     return WoningwaarderingResultatenWoningwaardering(

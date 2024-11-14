@@ -85,13 +85,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
 
         if not eenheid.bouwjaar:
-            warnings.warn(f"Eenheid {eenheid.id}: geen bouwjaar gevonden.", UserWarning)
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): geen bouwjaar gevonden.", UserWarning
+            )
             return woningwaardering_groep
         woz_eenheid = self.bepaal_woz_eenheid(eenheid)
 
         if woz_eenheid is None:
             warnings.warn(
-                f"Eenheid {eenheid.id}: geen WOZ-waarde gevonden", UserWarning
+                f"Eenheid ({eenheid.id}): geen WOZ-waarde gevonden", UserWarning
             )
             return woningwaardering_groep
 
@@ -104,14 +106,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             return woningwaardering_groep
 
         logger.info(
-            f"Eenheid {eenheid.id}: WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is {woz_eenheid.vastgestelde_waarde}"
+            f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is {woz_eenheid.vastgestelde_waarde}"
         )
 
         woz_waarde = self.minimum_woz_waarde(woz_eenheid)
 
         if woz_waarde is None:
             warnings.warn(
-                f"Eenheid {eenheid.id}: geen minimum WOZ-waarde gevonden", UserWarning
+                f"Eenheid ({eenheid.id}): geen minimum WOZ-waarde gevonden", UserWarning
             )
             return woningwaardering_groep
 
@@ -128,7 +130,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid {eenheid.id}: Punten voor de WOZ-waarde onderdeel I is {woz_waarde} / {factor_onderdeel_I} = {punten_onderdeel_I}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde} / {factor_onderdeel_I} = {punten_onderdeel_I}"
         )
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -144,7 +146,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if oppervlakte == 0:
             warnings.warn(
-                f"Eenheid {eenheid.id}: kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
+                f"Eenheid ({eenheid.id}): kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
                 UserWarning,
             )
 
@@ -154,7 +156,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid {eenheid.id}: Punten voor de WOZ-waarde onderdeel II is {woz_waarde} / {oppervlakte} / {factor_onderdeel_II} = {punten_onderdeel_II}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde} / {oppervlakte} / {factor_onderdeel_II} = {punten_onderdeel_II}"
         )
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -175,7 +177,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.punten = float(utils.rond_af(punten, decimalen=0))
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+            f"Eenheid ({eenheid.id}) wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
         )
 
         return woningwaardering_groep
@@ -242,7 +244,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             totaal_punten_met_cap = totaal_punten_zonder_cap + correctie_punten
 
             logger.debug(
-                f"Eenheid {eenheid.id}: Waardering zonder cap: {totaal_punten_zonder_cap} punten. Na toepassing van cap: {totaal_punten_met_cap} punten."
+                f"Eenheid ({eenheid.id}): Waardering zonder cap: {totaal_punten_zonder_cap} punten. Na toepassing van cap: {totaal_punten_met_cap} punten."
             )
 
             # Wanneer een woning zonder die beperking een waardering heeft van meer dan
@@ -250,7 +252,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             # 187 punten, geldt een waardering van 186 punten voor de woning.
             if totaal_punten_zonder_cap > 186 and totaal_punten_met_cap < 187:
                 logger.info(
-                    f"Eenheid {eenheid.id} wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
                 )
                 correctie_punten = 186 - totaal_punten_zonder_cap
                 woningwaardering_groep.woningwaarderingen.append(
@@ -263,7 +265,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 )
             else:
                 logger.info(
-                    f"Eenheid {eenheid.id} wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
                 )
                 woningwaardering_groep.woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
@@ -465,7 +467,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             eenheid, self.peildatum
         )
         if hoogniveau_renovatie:
-            logger.info(f"Eenheid {eenheid.id}: hoogniveau renovatie geconstateerd.")
+            logger.info(f"Eenheid ({eenheid.id}): hoogniveau renovatie geconstateerd.")
 
         # Indien de bouwkundige oplevering of hoogniveau renovatie van de woning heeft
         # plaatsgevonden in de jaren 2015-2019 en die woning voor de onderdelen
@@ -496,12 +498,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 ]
             )
             logger.debug(
-                f"Eenheid {eenheid.id}: punten_critische_stelselgroepen: {punten_critische_stelselgroepen}"
+                f"Eenheid ({eenheid.id}): punten_critische_stelselgroepen: {punten_critische_stelselgroepen}"
             )
             if punten_critische_stelselgroepen >= 110:
                 minimum_punten = Decimal("40")
                 logger.info(
-                    f"Eenheid {eenheid.id}: minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}): minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
                 )
 
         return minimum_punten
@@ -550,7 +552,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if not eenheid.renovatie.datum:
             warnings.warn(
-                f"Eenheid {eenheid.id}: renovatie zonder renovatiedatum gevonden."
+                f"Eenheid ({eenheid.id}): renovatie zonder renovatiedatum gevonden."
             )
             return False
 
@@ -570,14 +572,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if not energieprestatie.begindatum:
             warnings.warn(
-                f"Eenheid {eenheid.id}: energieprestatie zonder begindatum gevonden.",
+                f"Eenheid ({eenheid.id}): energieprestatie zonder begindatum gevonden.",
                 UserWarning,
             )
             return False
 
         if not energieprestatie.label:
             warnings.warn(
-                f"Eenheid {eenheid.id}: energieprestatie zonder label gevonden.",
+                f"Eenheid ({eenheid.id}): energieprestatie zonder label gevonden.",
                 UserWarning,
             )
             return False
@@ -595,7 +597,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if eenheid.renovatie.datum.year <= 2021:
             if not energieprestatie.waarde:
                 warnings.warn(
-                    f"Eenheid {eenheid.id}: energieprestatie zonder waarde (Energie-Index) gevonden bij een renovatie in de jaren 2015-2021.",
+                    f"Eenheid ({eenheid.id}): energieprestatie zonder waarde (Energie-Index) gevonden bij een renovatie in de jaren 2015-2021.",
                     UserWarning,
                 )
                 return False
@@ -605,7 +607,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     return True
             except ValueError:
                 warnings.warn(
-                    f"Eenheid {eenheid.id}: energieprestatie met een waarde (Energie-Index) dat niet kan worden omgezet in een getal ({energieprestatie.waarde}) gevonden bij een renovatie in de jaren 2015-2021"
+                    f"Eenheid ({eenheid.id}): energieprestatie met een waarde (Energie-Index) dat niet kan worden omgezet in een getal ({energieprestatie.waarde}) gevonden bij een renovatie in de jaren 2015-2021"
                 )
                 return False
 

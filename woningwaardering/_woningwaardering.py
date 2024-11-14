@@ -54,14 +54,14 @@ class Woningwaardering:
             or eenheid.woningwaarderingstelsel.code is None
         ):
             raise ValueError(
-                f"Eenheid {eenheid.id}: woningwaarderingstelsel-attribuut ontbreekt in het inputmodel."
+                f"Eenheid ({eenheid.id}): woningwaarderingstelsel-attribuut ontbreekt in het inputmodel."
             )
         elif eenheid.woningwaarderingstelsel.code not in [
             Woningwaarderingstelsel.zelfstandige_woonruimten.code,
             Woningwaarderingstelsel.onzelfstandige_woonruimten.code,
         ]:
             raise ValueError(
-                f"Eenheid {eenheid.id}: ongeldig woningwaarderingsstelsel-attribuut. Code moet één van {Woningwaarderingstelsel.zelfstandige_woonruimten.code} of {Woningwaarderingstelsel.onzelfstandige_woonruimten.code} zijn."
+                f"Eenheid ({eenheid.id}): ongeldig woningwaarderingsstelsel-attribuut. Code moet één van {Woningwaarderingstelsel.zelfstandige_woonruimten.code} of {Woningwaarderingstelsel.onzelfstandige_woonruimten.code} zijn."
             )
         elif (
             eenheid.woningwaarderingstelsel.code
