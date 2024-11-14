@@ -113,7 +113,7 @@ class BijzondereVoorzieningen(Stelselgroep):
             eenheid.doelgroep and eenheid.doelgroep.code != Doelgroep.zorg.code
         ):
             logger.debug(
-                f"Eenheid {eenheid.id} is geen zorgwoning en wordt niet gewaardeerd met zorgwoning opslag"
+                f"Eenheid {eenheid.id} is geen zorgwoning krijgt dus geen zorgwoning opslag"
             )
             return None
 
@@ -206,7 +206,7 @@ class BijzondereVoorzieningen(Stelselgroep):
             for installatie in (ruimte.installaties or [])
         ):
             logger.debug(
-                f"Eenheid {eenheid.id} heeft geen aanbelfunctie met video en audioverbinding en wordt niet gewaardeerd met aanbelfunctie met video en audioverbinding"
+                f"Eenheid {eenheid.id} heeft geen aanbelfunctie met video en audioverbinding"
             )
             return None
 
@@ -242,15 +242,13 @@ class BijzondereVoorzieningen(Stelselgroep):
         )
 
         if aantal_laadpalen == 0:
-            logger.debug(
-                f"Eenheid {eenheid.id} heeft geen laadpaal en wordt niet gewaardeerd met laadpaal"
-            )
+            logger.debug(f"Eenheid {eenheid.id} heeft geen privé laadpaal")
             return None
 
         punten_laadpalen = aantal_laadpalen * 2
 
         logger.info(
-            f"Eenheid {eenheid.id} heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'} en wordt met {punten_laadpalen} punten gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
+            f"Eenheid {eenheid.id} heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'} en wordt met {punten_laadpalen} punten gewaardeerd."
         )
 
         return WoningwaarderingResultatenWoningwaardering(
