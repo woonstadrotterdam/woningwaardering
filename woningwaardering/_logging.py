@@ -4,7 +4,7 @@ from typing import Any
 from loguru import logger
 
 
-def verkort_path(name: str, regel: int) -> str:
+def verkort_path(name: str, regel: int, dev: bool = False) -> str:
     name = name.replace("zelfstandige_woonruimten", "zelf")
     parts = name.split(".")
     if len(parts) > 4:
@@ -14,12 +14,21 @@ def verkort_path(name: str, regel: int) -> str:
         path = f"{package}.{stelsel}.{stelselgroep}"
     else:
         path = name
+    if dev:
+        path = path.replace("woningwaardering.", "")
     return f"{path}:{regel}"
 
 
 def custom_filter(record: dict[str, Any]) -> bool:
     record["extra"]["formatted_name_with_line"] = verkort_path(
         record["name"], record["line"]
+    )
+    return True
+
+
+def custom_dev_filter(record: dict[str, Any]) -> bool:
+    record["extra"]["formatted_name_with_line"] = verkort_path(
+        record["name"], record["line"], True
     )
     return True
 
