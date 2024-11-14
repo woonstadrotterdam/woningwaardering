@@ -1,13 +1,13 @@
-from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen.bijzondere_voorzieningen import (
+from .bijzondere_voorzieningen import (
     aanbelfunctie_met_video_en_audioverbinding,
     opslag_zorgwoning,
     prive_laadpaal,
-    woningwaarderingen,
+    waardeer,
 )
 
 __all__ = [
     "opslag_zorgwoning",
     "aanbelfunctie_met_video_en_audioverbinding",
     "prive_laadpaal",
-    "woningwaarderingen",
+    "waardeer",
 ]

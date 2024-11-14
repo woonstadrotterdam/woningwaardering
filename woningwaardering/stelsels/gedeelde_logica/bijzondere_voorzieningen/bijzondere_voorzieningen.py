@@ -24,7 +24,7 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
 from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 
 
-def woningwaarderingen(
+def waardeer(
     peildatum: date,
     eenheid: EenhedenEenheid,
     stelselgroepen_zonder_opslag: list[Woningwaarderingstelselgroep],
@@ -152,7 +152,7 @@ def opslag_zorgwoning(
     verhoging = puntentotaal * Decimal("0.35")
 
     logger.info(
-        f"Eenheid {eenheid.id} is een zorgwoning en wordt gewaardeerd met een verhoging van {verhoging} punten voor stelselgroep {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
+        f"Eenheid {eenheid.id} is een zorgwoning: {verhoging} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
     return WoningwaarderingResultatenWoningwaardering(
@@ -189,7 +189,7 @@ def aanbelfunctie_met_video_en_audioverbinding(
         return None
 
     logger.info(
-        f"Eenheid {eenheid.id} heeft een aanbelfunctie met video en audioverbinding en wordt met 0,25 punt gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
+        f"Eenheid {eenheid.id} heeft een aanbelfunctie met video en audioverbinding: 0.25 punt voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
     return WoningwaarderingResultatenWoningwaardering(
@@ -207,8 +207,7 @@ def prive_laadpaal(
     door de bewoners wordt gewaardeerd met 2 punten.
 
     Args:
-        eenheid (EenhedenEenheid): De eenheid waarvoor de opslag berekend wordt.
-
+        eenheid (EenhedenEenheid): De eenheid waarvoor de waardering berekend wordt.
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De woningwaardering met 2 punten
         als de eenheid een laadpaal heeft, anders None.
@@ -226,7 +225,7 @@ def prive_laadpaal(
     punten_laadpalen = aantal_laadpalen * 2
 
     logger.info(
-        f"Eenheid {eenheid.id} heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'} en wordt met {punten_laadpalen} punten gewaardeerd."
+        f"Eenheid {eenheid.id} heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'}: {punten_laadpalen} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
     return WoningwaarderingResultatenWoningwaardering(
