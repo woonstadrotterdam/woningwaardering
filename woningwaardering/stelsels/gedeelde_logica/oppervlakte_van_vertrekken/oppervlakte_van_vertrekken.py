@@ -39,7 +39,7 @@ def waardeer(
     criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
     logger.info(
-        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte}m2 telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
+        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte:.2f}m2 telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
     )
 
     woningwaardering = WoningwaarderingResultatenWoningwaardering()
