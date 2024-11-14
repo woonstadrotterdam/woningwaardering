@@ -58,8 +58,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.value,
+                stelsel=self.stelsel.value,
+                stelselgroep=self.stelselgroep.value,
             ),
         )
 

@@ -41,8 +41,8 @@ class {{ className }}(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel={{ stelsel }}.value,
-                stelselgroep={{ stelselgroep }}.value,
+                stelsel=self.stelsel.value,
+stelselgroep=self.stelselgroep.value,
             )
         )
 
