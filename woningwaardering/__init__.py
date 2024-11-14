@@ -1,3 +1,4 @@
+from woningwaardering._logging import logger
 from woningwaardering._woningwaardering import Woningwaardering
 from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (
     OnzelfstandigeWoonruimten,
@@ -10,4 +11,9 @@ from ._setup import initialize
 
 initialize()
 
-__all__ = ["OnzelfstandigeWoonruimten", "ZelfstandigeWoonruimten", "Woningwaardering"]
+__all__ = [
+    "OnzelfstandigeWoonruimten",
+    "ZelfstandigeWoonruimten",
+    "Woningwaardering",
+    "logger",
+]
