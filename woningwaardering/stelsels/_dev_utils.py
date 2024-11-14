@@ -1,7 +1,9 @@
+import sys
 import warnings
 
 from loguru import logger
 
+from woningwaardering._logging import custom_filter, format
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -15,6 +17,7 @@ def bereken(
     class_: Stelselgroep | Stelsel,
     eenheid_input: EenhedenEenheid | str,
     strict: bool = False,
+    log_level: str = "DEBUG",
 ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
     """
     Berekent de punten voor een stelselgroep of stelsel voor een eenheid.
@@ -23,11 +26,20 @@ def bereken(
         class_ (Stelselgroep | Stelsel): Het stelselgroep of stelsel object dat gebruikt wordt voor de berekening.
         eenheid_input (EenhedenEenheid | str): Het eenheid object of het pad naar het eenheid object in een json bestand.
         strict (bool, optional): Of er warnings geraised moeten worden. Defaults to False.
+        log_level (str, optional): Het log level. Defaults to "DEBUG".
 
     Returns:
         WoningwaarderingResultatenWoningwaarderingResultaat: Het resultaat van de berekening.
     """
     logger.enable("woningwaardering")
+    logger.remove()
+    logger.add(
+        sys.stderr,
+        format=format,
+        level=log_level,
+        filter=custom_filter,
+    )
+
     if not strict:
         warnings.filterwarnings("ignore", category=UserWarning)
 

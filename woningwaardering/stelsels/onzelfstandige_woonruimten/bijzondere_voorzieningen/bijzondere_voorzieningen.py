@@ -83,5 +83,6 @@ if __name__ == "__main__":  # pragma: no cover
     bereken(
         class_=BijzondereVoorzieningen(),
         eenheid_input="tests/data/onzelfstandige_woonruimten/stelselgroepen/bijzondere_voorzieningen/input/zorgwoning.json",
-        strict=False,
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     )

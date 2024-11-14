@@ -24,10 +24,11 @@ def custom_filter(record: dict[str, Any]) -> bool:
     return True
 
 
+format = "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level}</level> | <cyan>{extra[formatted_name_with_line]}</cyan> | <blue>{message}</blue>"
 logger.remove()
 logger.add(
     sys.stderr,
-    format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level}</level> | <cyan>{extra[formatted_name_with_line]}</cyan> | <blue>{message}</blue>",
+    format=format,
     level="DEBUG",
     filter=custom_filter,
 )
