@@ -6,6 +6,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_vertrekken import (
+    waardeer as waardeer_oppervlakte_vertrekken,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -13,9 +16,6 @@ from woningwaardering.stelsels.utils import (
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import Keuken
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
     OppervlakteVanOverigeRuimten,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken import (
-    OppervlakteVanVertrekken,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair import Sanitair
 from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming import (
@@ -98,7 +98,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             ]
 
             oppervlakte_berekeningen = {
-                Ruimtesoort.vertrek: OppervlakteVanVertrekken.genereer_woningwaarderingen,
+                Ruimtesoort.vertrek: waardeer_oppervlakte_vertrekken,
                 Ruimtesoort.overige_ruimten: OppervlakteVanOverigeRuimten.genereer_woningwaarderingen,
             }
 

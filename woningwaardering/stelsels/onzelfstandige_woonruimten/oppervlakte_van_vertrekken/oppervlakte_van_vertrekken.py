@@ -6,10 +6,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken.oppervlakte_van_vertrekken import (
-    OppervlakteVanVertrekken as ZelfstandigeWoonruimtenOppervlakteVanVertrekken,
+from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_vertrekken import (
+    waardeer,
 )
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingCriteriumSleutels,
@@ -58,11 +58,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
 
         for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = list(
-                ZelfstandigeWoonruimtenOppervlakteVanVertrekken.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep
-                )
-            )
+            woningwaarderingen = list(waardeer(ruimte, self.stelselgroep))
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for woningwaardering in woningwaarderingen:
                 if woningwaardering.criterium is not None:
@@ -122,7 +118,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         woningwaardering_groep.punten = punten
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {self.stelselgroep.naam}"
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
