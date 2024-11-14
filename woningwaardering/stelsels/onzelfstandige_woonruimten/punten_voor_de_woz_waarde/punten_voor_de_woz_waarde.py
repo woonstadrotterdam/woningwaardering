@@ -199,29 +199,20 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid {eenheid.id} met woonplaats {woonplaats} ligt in COROP-gebied {corop_gebied['naam']}"
         )
 
-        df_woz = pd.read_csv(
-            files("woningwaardering")
-            .joinpath(LOOKUP_TABEL_FOLDER)
-            .joinpath("corop_gebied_gemiddelde_woz_waarde_per_m2_2022.csv"),
-            dtype={"COROP-gebiedcode": str},
+        gemiddelde_woz_waarde_per_m2 = self._gemiddelde_woz_voor_corop_gebied(
+            corop_gebied
         )
 
-        woz_mask = df_woz["COROP-gebiedcode"] == corop_gebied["code"]
+        logger.debug(
+            f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}: {gemiddelde_woz_waarde_per_m2}"
+        )
 
-        if not woz_mask.any():
+        if gemiddelde_woz_waarde_per_m2 is None:
             warnings.warn(
                 f"Eenheid {eenheid.id}: Geen gemiddelde WOZ-waarde gevonden voor COROP-gebied {corop_gebied}. Kan punten voor de WOZ-waarde niet bepalen.",
                 UserWarning,
             )
             return woningwaardering_groep
-
-        gemiddelde_woz_waarde_per_m2 = df_woz.loc[
-            woz_mask, "Gemiddelde WOZ-waarde per m2"
-        ].values[0]
-
-        logger.debug(
-            f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}: {gemiddelde_woz_waarde_per_m2}"
-        )
 
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
@@ -272,6 +263,25 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_onzelfstandige_woonruimte.naam}"
         )
         return woningwaardering_groep
+
+    def _gemiddelde_woz_voor_corop_gebied(self, corop_gebied) -> Decimal:
+        df_woz = pd.read_csv(
+            files("woningwaardering")
+            .joinpath(LOOKUP_TABEL_FOLDER)
+            .joinpath("corop_gebied_gemiddelde_woz_waarde_per_m2_2022.csv"),
+            dtype={"COROP-gebiedcode": str, "Gemiddelde WOZ-waarde per m2": str},
+        )
+
+        woz_mask = df_woz["COROP-gebiedcode"] == corop_gebied["code"]
+
+        if not woz_mask.any():
+            return None
+
+        gemiddelde_woz_waarde_per_m2 = df_woz.loc[
+            woz_mask, "Gemiddelde WOZ-waarde per m2"
+        ].values[0]
+
+        return Decimal(gemiddelde_woz_waarde_per_m2)
 
 
 if __name__ == "__main__":  # pragma: no cover
