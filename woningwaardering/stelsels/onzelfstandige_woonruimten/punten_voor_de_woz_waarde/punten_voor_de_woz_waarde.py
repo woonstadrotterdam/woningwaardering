@@ -142,7 +142,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 and oppervlakte.soort.code == Oppervlaktesoort.gebruiksoppervlakte.code
                 and oppervlakte.waarde is not None
             ),
-            eenheid.gebruiksoppervlakte,
+            Decimal(eenheid.gebruiksoppervlakte)
+            if eenheid.gebruiksoppervlakte is not None
+            else None,
         )
 
         if gebruiksoppervlakte is None:
