@@ -658,6 +658,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         warnings.warn(warning_msg, UserWarning)
         return None
 
+    if ruimte.soort.code == Ruimtesoort.verkeersruimte.code:
+        return Ruimtesoort.verkeersruimte
+
     if ruimte.detail_soort.code in [
         # onderstaande parkeergelegenden worden binnenkort vervangen: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
         Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code,
