@@ -194,7 +194,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}) wordt gewaardeerd met {punten_totaal} punten voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {punten_totaal} punten voor {self.stelselgroep.naam}"
         )
 
         woningwaardering_groep.punten = punten_totaal

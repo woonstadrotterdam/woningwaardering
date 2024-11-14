@@ -177,7 +177,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.punten = float(utils.rond_af(punten, decimalen=0))
 
         logger.info(
-            f"Eenheid ({eenheid.id}) wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
 
         return woningwaardering_groep

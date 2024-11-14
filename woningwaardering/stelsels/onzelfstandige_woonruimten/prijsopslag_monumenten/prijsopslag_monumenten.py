@@ -2,6 +2,8 @@ from datetime import date
 from decimal import Decimal
 from typing import Iterator
 
+from loguru import logger
+
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.prijsopslag_monumenten_en_nieuwbouw.prijsopslag_monumenten_en_nieuwbouw import (
@@ -73,6 +75,10 @@ class PrijsopslagMonumenten(Stelselgroep):
         )
 
         woningwaardering_groep.punten = float(punten)
+
+        logger.info(
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+        )
         return woningwaardering_groep
 
     @staticmethod

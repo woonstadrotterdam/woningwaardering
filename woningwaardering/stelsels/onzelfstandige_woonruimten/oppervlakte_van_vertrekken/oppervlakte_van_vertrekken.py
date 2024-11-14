@@ -118,7 +118,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         woningwaardering_groep.punten = punten
 
         logger.info(
-            f"Eenheid ({eenheid.id}) wordt gewaardeerd met {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 

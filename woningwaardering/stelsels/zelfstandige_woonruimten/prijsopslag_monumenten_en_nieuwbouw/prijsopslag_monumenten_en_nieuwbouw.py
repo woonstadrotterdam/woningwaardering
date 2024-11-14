@@ -140,7 +140,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             if datum_afsluiten_huurovereenkomst >= date(2024, 7, 1):
                 logger.info(
-                    f"Eenheid ({eenheid.id}) is een rijksmonument en wordt gewaardeerd met een opslagpercentage van 35% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt een opslagpercentage van 35% op de maximale huurprijs voor {stelselgroep.naam}."
                 )
                 woningwaardering.opslagpercentage = 0.35
             elif (
@@ -149,13 +149,13 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             ):
                 # 50 punten voor zelfstandige woonruimten
                 logger.info(
-                    f"Eenheid ({eenheid.id}) is een rijksmonument en wordt gewaardeerd met 50 punten voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 50 punten voor {stelselgroep.naam}."
                 )
                 woningwaardering.punten = 50.0
             elif stelselgroep == Woningwaarderingstelselgroep.prijsopslag_monumenten:
                 # 10 punten voor onzelfstandige woonruimten
                 logger.info(
-                    f"Eenheid ({eenheid.id}) is een rijksmonument en wordt gewaardeerd met 10 punten voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 10 punten voor {stelselgroep.naam}."
                 )
                 woningwaardering.punten = 10.0
 
