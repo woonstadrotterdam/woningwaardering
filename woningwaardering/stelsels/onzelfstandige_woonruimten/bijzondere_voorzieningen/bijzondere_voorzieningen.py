@@ -1,10 +1,10 @@
-import warnings
 from datetime import date
 from decimal import Decimal
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.bijzondere_voorzieningen.bijzondere_voorzieningen import (
     BijzondereVoorzieningen as BijzondereVoorzieningenZelfstandigeWoonruimten,
@@ -80,27 +80,8 @@ class BijzondereVoorzieningen(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-    warnings.filterwarnings("ignore", category=UserWarning)
-
-    stelselgroep = BijzondereVoorzieningen(peildatum=date.fromisoformat("2024-07-01"))
-
-    with open(
-        "tests/data/onzelfstandige_woonruimten/stelselgroepen/bijzondere_voorzieningen/input/zorgwoning.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    woningwaardering_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-        groepen=[stelselgroep.bereken(eenheid)]
+    bereken(
+        class_=BijzondereVoorzieningen(),
+        eenheid_input="tests/data/onzelfstandige_woonruimten/stelselgroepen/bijzondere_voorzieningen/input/zorgwoning.json",
+        strict=False,
     )
-
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
-        )
-    )
-
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
-
-    print(tabel)
