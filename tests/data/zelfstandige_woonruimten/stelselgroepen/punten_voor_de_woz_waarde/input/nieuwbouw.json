@@ -335,8 +335,8 @@
     {
       "id": "Space_82123455",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",

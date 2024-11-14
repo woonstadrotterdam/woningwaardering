@@ -153,8 +153,8 @@
     {
       "id": "Space_88554489",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "ENT",
@@ -331,8 +331,8 @@
     {
       "id": "Space_88559339",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",
