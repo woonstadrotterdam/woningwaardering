@@ -12,15 +12,18 @@ from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten i
 from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_vertrekken import (
     waardeer as waardeer_oppervlakte_vertrekken,
 )
+from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming import (
+    maximeer as maximeer_verkoeling_en_verwarming,
+)
+from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming import (
+    waardeer as waardeer_verkoeling_en_verwarming,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import Keuken
 from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair import Sanitair
-from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming import (
-    VerkoelingEnVerwarming,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -150,11 +153,13 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
                 # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
                 verkoeling_en_verwarming_waarderingen = list(
-                    VerkoelingEnVerwarming.genereer_woningwaarderingen(
-                        ruimte, self.stelselgroep
+                    waardeer_verkoeling_en_verwarming(ruimte)
+                )
+                verkoeling_en_verwarming_waarderingen += list(
+                    maximeer_verkoeling_en_verwarming(
+                        verkoeling_en_verwarming_waarderingen
                     )
                 )
-
                 woningwaardering_groep.woningwaarderingen.extend(
                     self.deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, verkoeling_en_verwarming_waarderingen

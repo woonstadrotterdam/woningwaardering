@@ -5,12 +5,13 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming import (
+    maximeer,
+    waardeer,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     deel_punten_door_aantal_onzelfstandige_woonruimten,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming.verkoeling_en_verwarming import (
-    VerkoelingEnVerwarming as ZelfstandigeWoonruimtenVerkoelingEnVerwarming,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -62,18 +63,13 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaarderingen = list(
-                ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
-                    ruimte,
-                    self.stelselgroep,
-                )
-            )
+            woningwaarderingen = list(waardeer(ruimte))
 
             woningwaarderingen_voor_gedeeld.append((ruimte, woningwaarderingen))
 
         # maximering is op basis van de punten voordat ze gedeeld worden door het aantal onzelfstandige woonruimten
         maximering = list(
-            ZelfstandigeWoonruimtenVerkoelingEnVerwarming.maximering(
+            maximeer(
                 [
                     woningwaardering
                     for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld
