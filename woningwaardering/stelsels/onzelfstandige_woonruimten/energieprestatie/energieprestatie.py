@@ -195,7 +195,7 @@ class Energieprestatie(Stelselgroep):
         for ruimte in eenheid.ruimten:
             if ruimte.oppervlakte is None:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte.",
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte.",
                     UserWarning,
                 )
                 continue

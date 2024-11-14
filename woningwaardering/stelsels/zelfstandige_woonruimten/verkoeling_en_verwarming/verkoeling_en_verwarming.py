@@ -122,7 +122,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if ruimte.detail_soort is None:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort.",
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.",
                 UserWarning,
             )
             return
@@ -146,7 +146,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             or not ruimte.verwarmd
         ):
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) komt niet in aanmerking voor waardering onder stelselgroep {stelselgroep.naam}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) komt niet in aanmerking voor waardering onder stelselgroep {stelselgroep.naam}"
             )
             return
 
@@ -160,7 +160,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
         if ruimtesoort == Ruimtesoort.overige_ruimten:
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmde {Ruimtesoort.overige_ruimten.naam} en krijgt {punten} punt."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde {Ruimtesoort.overige_ruimten.naam} en krijgt {punten} punt."
             )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -178,7 +178,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     "1"
                 )  # 1 punt extra per vertrek wanneer verwarmd en verkoeld
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmd en verkoeld vertrek en krijgt {punten} punten."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd en verkoeld vertrek en krijgt {punten} punten."
                 )
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -191,7 +191,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 )
             else:
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) telt als verwarmd vertrek en krijgt {punten} punten."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek en krijgt {punten} punten."
                 )
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(

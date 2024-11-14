@@ -114,27 +114,27 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if not ruimte.detail_soort:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail soort.",
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detail soort.",
                 UserWarning,
             )
             return
 
         if not ruimte.detail_soort.code:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail soort code.",
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detail soort code.",
                 UserWarning,
             )
             return
 
         if not classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten:
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is geen overige ruimte en komt niet aanmerking voor stelselgroep {stelselgroep.naam}."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen overige ruimte en komt niet aanmerking voor stelselgroep {stelselgroep.naam}."
             )
             return
 
         if not ruimte.oppervlakte:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte",
                 UserWarning,
             )
             return
@@ -142,7 +142,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
         logger.info(
-            f"Ruimte {ruimte.naam} ({ruimte.id}) is een overige ruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {stelselgroep.naam}."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een overige ruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {stelselgroep.naam}."
         )
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
@@ -164,7 +164,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             # hebben vanwege classificeer_ruimte in utils.py.
             if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap):
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) krijgt een correctie van -5 punten maximaal: de zolder is niet bereikbaar via een vaste trap."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) krijgt een correctie van -5 punten maximaal: de zolder is niet bereikbaar via een vaste trap."
                 )
                 woningwaardering_correctie = (
                     WoningwaarderingResultatenWoningwaardering()

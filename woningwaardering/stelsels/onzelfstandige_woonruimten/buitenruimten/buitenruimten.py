@@ -94,7 +94,7 @@ class Buitenruimten(Stelselgroep):
         ):
             if not ruimte.oppervlakte:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte",
                     UserWarning,
                 )
                 return
@@ -102,7 +102,7 @@ class Buitenruimten(Stelselgroep):
                 # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
                 if not (ruimte.lengte and ruimte.breedte):
                     warnings.warn(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
                         UserWarning,
                     )
                 if (
@@ -111,7 +111,7 @@ class Buitenruimten(Stelselgroep):
                     or (ruimte.breedte and ruimte.breedte < 1.5)
                 ):
                     logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
                     )
                     return
             # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
@@ -122,7 +122,7 @@ class Buitenruimten(Stelselgroep):
                 or gedeeld_met_onzelfstandige_woonruimten(ruimte)
             ):
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een gedeelde parkeerplaats en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde parkeerplaats en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
                 )
                 return
             woningwaardering = WoningwaarderingResultatenWoningwaardering()

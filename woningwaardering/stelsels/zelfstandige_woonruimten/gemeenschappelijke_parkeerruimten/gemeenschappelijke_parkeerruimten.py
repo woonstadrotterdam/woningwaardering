@@ -57,12 +57,12 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering] | None:
         if ruimte.detail_soort is None:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen 'detail_soort'."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'detail_soort'."
             )
             return None
         if ruimte.detail_soort.code is None:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen 'code' in 'detail_soort'."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'code' in 'detail_soort'."
             )
             return None
 
@@ -75,7 +75,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             Ruimtedetailsoort.parkeervak_scootmobiel_buiten.code,
         ]:
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) met ruimtedetailsoort {ruimte.detail_soort.code} is een parkeerplek die niet gewaardeerd wordt in het woningwaardering stelsel volgens het beleidsboek."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) met ruimtedetailsoort {ruimte.detail_soort.code} is een parkeerplek die niet gewaardeerd wordt in het woningwaardering stelsel volgens het beleidsboek."
             )
             return None
 
@@ -84,7 +84,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             Ruimtedetailsoort.parkeergarage.code,
         ]:
             logger.warning(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is een {Ruimtedetailsoort.parkeerterrein.naam if ruimte.detail_soort.code==Ruimtedetailsoort.parkeerterrein.code else Ruimtedetailsoort.parkeergarage.naam} en kan momenteel niet gewaardeerd worden in de woningwaardering package. Voeg een parkeerplek los toe aan de eenheden om deze in aanmerking te laten komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}. Raadpleeg docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md voor meer informatie."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een {Ruimtedetailsoort.parkeerterrein.naam if ruimte.detail_soort.code==Ruimtedetailsoort.parkeerterrein.code else Ruimtedetailsoort.parkeergarage.naam} en kan momenteel niet gewaardeerd worden in de woningwaardering package. Voeg een parkeerplek los toe aan de eenheden om deze in aanmerking te laten komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}. Raadpleeg docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md voor meer informatie."
             )
             return None
 
@@ -94,25 +94,25 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code,
         ]:
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is geen gemeenschappelijke parkeerruimte en wordt niet gewaardeerd onder rubriek {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen gemeenschappelijke parkeerruimte en wordt niet gewaardeerd onder rubriek {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
             )
             return None
 
         if ruimte.oppervlakte is None:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen 'oppervlakte'."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'oppervlakte'."
             )
             return None
 
         if ruimte.gedeeld_met_aantal_eenheden is None:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen 'gedeeld_met_aantal_eenheden'. Zet 'gedeeld_met_aantal_eenheden' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_eenheden' op 0 of 1 wordt beschouwd als niet gedeeld."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_eenheden'. Zet 'gedeeld_met_aantal_eenheden' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_eenheden' op 0 of 1 wordt beschouwd als niet gedeeld."
             )
             return None
 
         if not ruimte.oppervlakte >= 12.0:
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) voldoet niet aan de eis van 12m2 voor een parkeervak."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) voldoet niet aan de eis van 12m2 voor een parkeervak."
             )
             return None
 
@@ -142,7 +142,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                 )
 
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{criterium}'."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{criterium}'."
             )
 
             yield WoningwaarderingResultatenWoningwaardering(

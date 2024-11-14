@@ -619,11 +619,11 @@ def _classificeer_ruimte_dec(
         ruimtesoort = func(ruimte)
         if ruimtesoort is not None:
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is geclassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geclassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
             )
         else:
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) kan niet worden geclassificeerd als een ruimtesoort."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) kan niet worden geclassificeerd als een ruimtesoort."
             )
         return ruimtesoort
 
@@ -644,17 +644,17 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
 
     if ruimte.oppervlakte is None:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet geclassificeerd worden."
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet geclassificeerd worden."
         warnings.warn(warning_msg, UserWarning)
         return None
 
     if ruimte.soort is None:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen soort en kan daardoor niet geclassificeerd worden."
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen soort en kan daardoor niet geclassificeerd worden."
         warnings.warn(warning_msg, UserWarning)
         return None
 
     if ruimte.detail_soort is None:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet geclassificeerd worden."
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort en kan daardoor niet geclassificeerd worden."
         warnings.warn(warning_msg, UserWarning)
         return None
 
@@ -667,7 +667,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtedetailsoort.parkeergarage_niet_specifieke_plek.code,
         Ruimtedetailsoort.parkeergarage_specifieke_plek.code,
     ]:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort.naam} ({ruimte.detail_soort.code}) en kan daardoor niet geclassificeerd worden. Gebruik voor parkeerplaatsen: {Ruimtedetailsoort.carport.naam} ({Ruimtedetailsoort.carport.code}), {Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.naam} ({Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code}) of {Ruimtedetailsoort.parkeervak_auto_binnen.naam} ({Ruimtedetailsoort.parkeervak_auto_binnen.code})"
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort.naam} ({ruimte.detail_soort.code}) en kan daardoor niet geclassificeerd worden. Gebruik voor parkeerplaatsen: {Ruimtedetailsoort.carport.naam} ({Ruimtedetailsoort.carport.code}), {Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.naam} ({Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code}) of {Ruimtedetailsoort.parkeervak_auto_binnen.naam} ({Ruimtedetailsoort.parkeervak_auto_binnen.code})"
         warnings.warn(warning_msg, UserWarning)
         return None
 
@@ -768,13 +768,13 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
                 and ruimte.oppervlakte >= 4
             ):
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een vaste trap: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een vaste trap: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
                 )
                 return Ruimtesoort.vertrek
 
             else:
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen vaste trap gevonden: Ruimte wordt niet gewaardeerd als {ruimte.soort.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen vaste trap gevonden: Ruimte wordt niet gewaardeerd als {ruimte.soort.naam}."
                 )
 
         if ruimte.soort.code == Ruimtesoort.overige_ruimten.code:
@@ -785,13 +785,13 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
                 )
             ) and ruimte.oppervlakte >= 2:
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een trap: Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een trap: Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
                 )
                 return Ruimtesoort.overige_ruimten
 
             else:
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen trap: Ruimte wordt niet gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen trap: Ruimte wordt niet gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
                 )
 
     return None
@@ -811,12 +811,12 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     criterium_naam = ruimte.naam or "Naamloze ruimte"
 
     if ruimte.detail_soort is None or ruimte.detail_soort.code is None:
-        message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
         warnings.warn(message, UserWarning)
         return criterium_naam
 
     if ruimte.oppervlakte is None:
-        message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
         warnings.warn(message, UserWarning)
         return criterium_naam
 
@@ -858,7 +858,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
                 )
 
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
             )
 
             criterium_naam = f"{ruimte.naam} (+{aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'})"

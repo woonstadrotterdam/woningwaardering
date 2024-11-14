@@ -25,13 +25,13 @@ def waardeer(
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if not classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
         logger.debug(
-            f"Ruimte {ruimte.naam} ({ruimte.id}) telt niet als vertrek en komt niet in aanmerking voor {stelselgroep.naam}"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet als vertrek voor {stelselgroep.naam}"
         )
         return
 
     if not ruimte.oppervlakte:
         warnings.warn(
-            f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte",
             UserWarning,
         )
         return
@@ -39,7 +39,7 @@ def waardeer(
     criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
     logger.info(
-        f"Ruimte {ruimte.naam} ({ruimte.id}) is een vertrek van {ruimte.oppervlakte}m2 en wordt gewaardeerd voor {stelselgroep.naam}"
+        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte}m2 telt mee voor {stelselgroep.naam}"
     )
 
     woningwaardering = WoningwaarderingResultatenWoningwaardering()

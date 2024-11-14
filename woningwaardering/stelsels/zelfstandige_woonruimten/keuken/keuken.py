@@ -104,7 +104,7 @@ class Keuken(Stelselgroep):
 
         if not ruimte.detail_soort or not ruimte.detail_soort.code:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detail_soort(code) en daardoor kan niet gecontroleerd of het een keuken is.",
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detail_soort(code) en daardoor kan niet gecontroleerd of het een keuken is.",
                 UserWarning,
             )
             return False
@@ -115,7 +115,7 @@ class Keuken(Stelselgroep):
         ]:
             if aanrecht_aantal == 0:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >=1000mm) en mag daardoor niet gewaardeerd worden voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}.",
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >=1000mm) en mag daardoor niet gewaardeerd worden voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}.",
                     UserWarning,
                 )
                 return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
@@ -142,7 +142,7 @@ class Keuken(Stelselgroep):
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if not Keuken.is_keuken(ruimte):
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor stelselgroep {stelselgroep.naam}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor stelselgroep {stelselgroep.naam}"
             )
             return 0
         totaal_punten = 0.0

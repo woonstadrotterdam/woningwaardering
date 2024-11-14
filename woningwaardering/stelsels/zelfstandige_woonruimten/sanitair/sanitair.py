@@ -91,7 +91,9 @@ class Sanitair(Stelselgroep):
         stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if ruimte.detail_soort is None:
-            warnings.warn(f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort.")
+            warnings.warn(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort."
+            )
             return
 
         ruimte.installaties = ruimte.installaties or []
@@ -109,10 +111,10 @@ class Sanitair(Stelselgroep):
             bouwkundige_elementen = list(get_bouwkundige_elementen(ruimte, mapping[0]))
             if bouwkundige_elementen:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een {mapping[0].naam} als bouwkundig element. Voor een correcte waardering dient dit als installatie in de ruimte gespecificeerd te worden."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {mapping[0].naam} als bouwkundig element. Voor een correcte waardering dient dit als installatie in de ruimte gespecificeerd te worden."
                 )
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}): {mapping[0].naam} wordt als {mapping[1].naam} toegevoegd aan installaties"
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): {mapping[0].naam} wordt als {mapping[1].naam} toegevoegd aan installaties"
                 )
                 ruimte.installaties.extend(
                     [mapping[1].value for _ in bouwkundige_elementen]
@@ -206,7 +208,7 @@ class Sanitair(Stelselgroep):
                     ):
                         if element.lengte is not None and element.lengte < 1000:
                             logger.info(
-                                f"Ruimte {ruimte.naam} ({ruimte.id}): aanrecht < 1m wordt als wastafel gewaardeerd."
+                                f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m wordt als wastafel gewaardeerd."
                             )
                             yield WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -268,7 +270,7 @@ class Sanitair(Stelselgroep):
                     )
                 ):
                     logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
                     )
                     yield (
                         WoningwaarderingResultatenWoningwaardering(
@@ -289,7 +291,7 @@ class Sanitair(Stelselgroep):
         ]
         if totaal_aantal_wastafels < aantal_ingebouwde_kasten:
             warnings.warn(
-                f"Ruimte {ruimte.naam} ({ruimte.id}): {totaal_aantal_wastafels} wastafel(s) zijn minder dan het aantal ingebouwde kasten met wastafel ({aantal_ingebouwde_kasten})."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {totaal_aantal_wastafels} wastafel(s) zijn minder dan het aantal ingebouwde kasten met wastafel ({aantal_ingebouwde_kasten})."
                 f" Een wastafel in een {Voorzieningsoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel.naam} moet apart worden meegegeven."
             )
 
@@ -362,12 +364,12 @@ class Sanitair(Stelselgroep):
             # Geen waardering voor extra voorzieningen indien er geen wastafel in de ruimte is
             if totaal_aantal_wastafels == 0:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}): geen wastafel aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): geen wastafel aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
                 )
             # Geen waardering voor extra voorzieningen indien er geen douche of bad in de ruimte is
             elif totaal_punten_bad_en_douche == 0:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}): geen bad of douche aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): geen bad of douche aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
                 )
             elif totaal_aantal_wastafels > 0 and totaal_punten_bad_en_douche > 0:
                 for installatie, aantal in installaties.items():
