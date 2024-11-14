@@ -58,7 +58,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
 
         for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = list(waardeer(ruimte, self.stelselgroep))
+            woningwaarderingen = list(waardeer(ruimte))
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for woningwaardering in woningwaarderingen:
                 if woningwaardering.criterium is not None:

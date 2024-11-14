@@ -21,11 +21,11 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
 
 
 def waardeer(
-    ruimte: EenhedenRuimte, stelselgroep: Woningwaarderingstelselgroep
+    ruimte: EenhedenRuimte,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if not classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
         logger.debug(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet als vertrek voor {stelselgroep.naam}"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
         )
         return
 
@@ -39,7 +39,7 @@ def waardeer(
     criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
     logger.info(
-        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte}m2 telt mee voor {stelselgroep.naam}"
+        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte}m2 telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
     )
 
     woningwaardering = WoningwaarderingResultatenWoningwaardering()

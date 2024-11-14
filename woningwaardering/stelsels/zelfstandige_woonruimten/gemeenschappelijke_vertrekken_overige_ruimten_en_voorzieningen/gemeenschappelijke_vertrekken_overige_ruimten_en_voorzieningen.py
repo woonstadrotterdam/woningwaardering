@@ -6,6 +6,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten import (
+    waardeer as waardeer_oppervlakte_van_overige_ruimten,
+)
 from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_vertrekken import (
     waardeer as waardeer_oppervlakte_vertrekken,
 )
@@ -14,9 +17,6 @@ from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import Keuken
-from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
-    OppervlakteVanOverigeRuimten,
-)
 from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair import Sanitair
 from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming import (
     VerkoelingEnVerwarming,
@@ -99,7 +99,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
             oppervlakte_berekeningen = {
                 Ruimtesoort.vertrek: waardeer_oppervlakte_vertrekken,
-                Ruimtesoort.overige_ruimten: OppervlakteVanOverigeRuimten.genereer_woningwaarderingen,
+                Ruimtesoort.overige_ruimten: waardeer_oppervlakte_van_overige_ruimten,
             }
 
             for ruimte in gedeelde_ruimten:
@@ -113,9 +113,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 oppervlakte_berekening = oppervlakte_berekeningen.get(ruimtesoort, None)
 
                 if oppervlakte_berekening is not None:
-                    oppervlakte_waarderingen = list(
-                        oppervlakte_berekening(ruimte, self.stelselgroep)
-                    )
+                    oppervlakte_waarderingen = list(oppervlakte_berekening(ruimte))
                 # Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
                 #
                 # […]

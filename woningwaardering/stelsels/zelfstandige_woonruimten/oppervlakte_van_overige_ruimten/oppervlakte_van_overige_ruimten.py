@@ -1,24 +1,20 @@
-import warnings
 from datetime import date
 from decimal import Decimal
-from typing import Iterator
 
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroep
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten.oppervlakte_van_overige_ruimten import (
+    waardeer,
+)
 from woningwaardering.stelsels.utils import (
-    classificeer_ruimte,
     gedeeld_met_eenheden,
     rond_af,
     rond_af_op_kwart,
-    voeg_oppervlakte_kasten_toe_aan_ruimte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenRuimte,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -27,13 +23,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
-    Bouwkundigelementdetailsoort,
-)
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
-from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class OppervlakteVanOverigeRuimten(Stelselgroep):
@@ -72,11 +61,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaarderingen = (
-                OppervlakteVanOverigeRuimten.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep
-                )
-            )
+            woningwaarderingen = waardeer(ruimte)
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
@@ -103,90 +88,10 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid ({eenheid.id}) wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
 
         return woningwaardering_groep
-
-    @staticmethod
-    def genereer_woningwaarderingen(
-        ruimte: EenhedenRuimte, stelselgroep: Woningwaarderingstelselgroep
-    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        if not ruimte.detail_soort:
-            warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detail soort.",
-                UserWarning,
-            )
-            return
-
-        if not ruimte.detail_soort.code:
-            warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detail soort code.",
-                UserWarning,
-            )
-            return
-
-        if not classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten:
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen overige ruimte en komt niet aanmerking voor stelselgroep {stelselgroep.naam}."
-            )
-            return
-
-        if not ruimte.oppervlakte:
-            warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte",
-                UserWarning,
-            )
-            return
-
-        criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
-
-        logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een overige ruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {stelselgroep.naam}."
-        )
-
-        woningwaardering = WoningwaarderingResultatenWoningwaardering()
-        woningwaardering.criterium = (
-            WoningwaarderingResultatenWoningwaarderingCriterium(
-                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                naam=criterium_naam,
-            )
-        )
-
-        woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
-
-        yield woningwaardering
-
-        if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-            # Corrigeer met -5 punten als de zolder niet bereikbaar is met een vaste trap
-            # Note: Op dit moment kan de zolder alleen een
-            # Bouwkundigelementdetailsoort.trap (vast) of Bouwkundigelementdetailsoort.vlizotrap (niet vast)
-            # hebben vanwege classificeer_ruimte in utils.py.
-            if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap):
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) krijgt een correctie van -5 punten maximaal: de zolder is niet bereikbaar via een vaste trap."
-                )
-                woningwaardering_correctie = (
-                    WoningwaarderingResultatenWoningwaardering()
-                )
-                woningwaardering_correctie.criterium = (
-                    WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Correctie: zolder zonder vaste trap",
-                    )
-                )
-
-                # corrigeeer niet met meer punten dan de oppervlakte voor stelselgroep overige ruimten zou opleveren
-                correctie = min(
-                    5.0,
-                    float(
-                        rond_af_op_kwart(
-                            rond_af(ruimte.oppervlakte, decimalen=2) * Decimal("0.75")
-                        )
-                    ),
-                )
-
-                woningwaardering_correctie.punten = correctie * -1.0
-                yield woningwaardering_correctie
 
 
 if __name__ == "__main__":  # pragma: no cover

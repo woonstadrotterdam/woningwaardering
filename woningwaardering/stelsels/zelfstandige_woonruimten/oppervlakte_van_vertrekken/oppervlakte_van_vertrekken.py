@@ -61,9 +61,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaardering_groep.woningwaarderingen.extend(
-                waardeer(ruimte, self.stelselgroep)
-            )
+            woningwaardering_groep.woningwaarderingen.extend(waardeer(ruimte))
 
         punten = rond_af_op_kwart(
             float(
