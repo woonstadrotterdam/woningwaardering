@@ -6,10 +6,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    GemeenschappelijkeParkeerruimten as ZelfGemeenschappelijkeParkeerruimten,
+from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
+    waardeer,
 )
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingCriteriumSleutels,
@@ -53,16 +53,14 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         )
 
         if not eenheid.ruimten:
-            warnings.warn(f"Eenheid ({eenheid.id}) heeft geen 'ruimten'.")
+            warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
             return woningwaardering_groep
 
         woningwaardering_groep.woningwaarderingen = []
 
         gedeeld_met_counter: dict[int, dict[str, float]] = {}
         for ruimte in eenheid.ruimten:
-            waarderingen_zelfstandig = ZelfGemeenschappelijkeParkeerruimten(
-                peildatum=self.peildatum
-            ).genereer_woningwaarderingen(ruimte)
+            waarderingen_zelfstandig = waardeer(ruimte)
             if waarderingen_zelfstandig is not None:
                 for waardering in list(waarderingen_zelfstandig):
                     if waardering is None:
