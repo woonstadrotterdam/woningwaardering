@@ -4,6 +4,7 @@ import time
 import warnings
 from decimal import BasicContext, setcontext
 from types import TracebackType
+from typing import TextIO
 
 from loguru import logger
 
@@ -12,6 +13,9 @@ from loguru import logger
 setcontext(BasicContext)
 
 default_timezone = "Europe/Amsterdam"
+
+# om warnings te loggen
+_original_showwarning = warnings.showwarning
 
 
 def setup_timezone() -> None:
@@ -44,19 +48,22 @@ def handle_unhandled_exception(
     sys.__excepthook__(exception_type, exception_value, exception_traceback)
 
 
-def log_userwarning(message, category, filename, lineno, file=None, line=None):
-    """
-    Log a UserWarning message.
-    """
+def log_userwarning(
+    message: Warning | str,
+    category: type[Warning],
+    filename: str,
+    lineno: int,
+    file: TextIO | None = None,
+    line: str | None = None,
+) -> None:
     logger.warning(f"{UserWarning.__name__}: {message}")
-    warnings._showwarning_original(message, category, filename, lineno, file, line)
+    _original_showwarning(message, category, filename, lineno, file, line)
 
 
 def initialize() -> None:
     logger.disable("woningwaardering")
     setup_timezone()
     sys.excepthook = handle_unhandled_exception
-    # warnings.simplefilter("once", UserWarning) # TODO: bepalen of dit wenselijk is
+    warnings.simplefilter("once", UserWarning)  # TODO: bepalen of dit wenselijk is
     warnings.simplefilter("error", UserWarning)
-    warnings._showwarning_original = warnings.showwarning
     warnings.showwarning = log_userwarning

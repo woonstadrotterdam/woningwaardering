@@ -399,8 +399,9 @@ def energieprestatie_met_geldig_label(
 
         logger.info(f"Eenheid ({eenheid.id}): geldige energieprestatie gevonden.")
         logger.debug(
-            f"Energieprestatie: id={energieprestatie.id} soort={energieprestatie.soort.naam}"
-            f" status={energieprestatie.status.naam} label={energieprestatie.label.naam}"
+            f"Energieprestatie: id={energieprestatie.id} soort={energieprestatie.soort.naam if energieprestatie.soort else None}"
+            f" status={energieprestatie.status.naam if energieprestatie.status else None}"
+            f" label={energieprestatie.label.naam if energieprestatie.label else None}"
             f" waarde={energieprestatie.waarde} begindatum={energieprestatie.begindatum}"
             f" einddatum={energieprestatie.einddatum} registratiedatum={energieprestatie.registratiedatum.date() if energieprestatie.registratiedatum else None}"
         )
