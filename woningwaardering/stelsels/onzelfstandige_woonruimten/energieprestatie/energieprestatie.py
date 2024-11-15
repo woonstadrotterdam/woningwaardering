@@ -233,8 +233,9 @@ class Energieprestatie(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        if eenheid.ruimten is None:
-            raise ValueError(f"Eenheid ({eenheid.id}): ruimten is None")
+        if not eenheid.ruimten:
+            warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
+            return woningwaardering_groep
 
         if eenheid.monumenten is None:
             warnings.warn(

@@ -209,7 +209,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         ):
             if eenheid.bouwjaar is None:
                 warnings.warn(
-                    f"Eenheid ({eenheid.id}): 'bouwjaar' is niet gespecificeerd.",
+                    f"Eenheid ({eenheid.id}): geen bouwjaar gevonden",
                     UserWarning,
                 )
             elif eenheid.bouwjaar < 1965:

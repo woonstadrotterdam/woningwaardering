@@ -71,7 +71,7 @@ class Keuken(Stelselgroep):
 
         if not keukens:
             warnings.warn(
-                f"Eenheid ({eenheid.id}) kan niet gewaardeerd worden op stelselgroep {Woningwaarderingstelselgroep.keuken.naam} omdat er geen keuken is gevonden.",
+                f"Eenheid ({eenheid.id}) kan niet gewaardeerd worden voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam} omdat er geen keuken is gevonden.",
                 UserWarning,
             )
 
@@ -102,9 +102,16 @@ class Keuken(Stelselgroep):
             ]
         )
 
-        if not ruimte.detail_soort or not ruimte.detail_soort.code:
+        if not ruimte.detail_soort:
             warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detail_soort(code) en daardoor kan niet gecontroleerd of het een keuken is.",
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort",
+                UserWarning,
+            )
+            return False
+
+        if not ruimte.detail_soort.code:
+            warnings.warn(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.code",
                 UserWarning,
             )
             return False
@@ -151,7 +158,7 @@ class Keuken(Stelselgroep):
         for element in ruimte.bouwkundige_elementen or []:
             if not element.detail_soort or not element.detail_soort.code:
                 warnings.warn(
-                    f"Bouwkundig element {element.id} heeft geen detail_soort.code en kan daardoor niet gewaardeerd worden.",
+                    f"Bouwkundig element {element.id} heeft geen detailsoort.code en kan daardoor niet gewaardeerd worden.",
                     UserWarning,
                 )
                 continue
@@ -266,7 +273,7 @@ class Keuken(Stelselgroep):
 if __name__ == "__main__":  # pragma: no cover
     bereken(
         class_=Keuken(),
-        eenheid_input="tests/data/generiek/input/37101000032.json",
+        eenheid_input="tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_zonder_lengte.json",
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     )

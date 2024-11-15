@@ -86,7 +86,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if not eenheid.bouwjaar:
             warnings.warn(
-                f"Eenheid ({eenheid.id}): geen bouwjaar gevonden.", UserWarning
+                f"Eenheid ({eenheid.id}): geen bouwjaar gevonden", UserWarning
             )
             return woningwaardering_groep
         woz_eenheid = self.bepaal_woz_eenheid(eenheid)
@@ -98,11 +98,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             return woningwaardering_groep
 
         if woz_eenheid.vastgestelde_waarde is None:
-            warnings.warn("Vastgestelde WOZ-waarde is None")
+            warnings.warn("Vastgestelde WOZ-waarde in WOZ-eenheid is None")
             return woningwaardering_groep
 
         if woz_eenheid.waardepeildatum is None:
-            warnings.warn("Waardepeildatum is None")
+            warnings.warn("Waardepeildatum in WOZ-eenheid is None")
             return woningwaardering_groep
 
         logger.info(
@@ -374,11 +374,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             Decimal | None: De minimum WOZ-waarde, of None indien er geen minimum vastgesteld kan worden.
         """
         if woz_eenheid.vastgestelde_waarde is None:
-            warnings.warn("Vastgestelde WOZ-waarde is None")
+            warnings.warn("Vastgestelde WOZ-waarde in WOZ-eenheid is None")
             return None
 
         if woz_eenheid.waardepeildatum is None:
-            warnings.warn("Waardepeildatum is None")
+            warnings.warn("Waardepeildatum in WOZ-eenheid is None")
             return None
 
         vastgestelde_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
@@ -572,14 +572,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if not energieprestatie.begindatum:
             warnings.warn(
-                f"Eenheid ({eenheid.id}): energieprestatie zonder begindatum gevonden.",
+                f"Eenheid ({eenheid.id}): energieprestatie zonder begindatum gevonden",
                 UserWarning,
             )
             return False
 
         if not energieprestatie.label:
             warnings.warn(
-                f"Eenheid ({eenheid.id}): energieprestatie zonder label gevonden.",
+                f"Eenheid ({eenheid.id}): energieprestatie zonder label gevonden",
                 UserWarning,
             )
             return False

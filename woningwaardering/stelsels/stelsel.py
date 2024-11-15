@@ -1,3 +1,4 @@
+import warnings
 from datetime import date
 from decimal import Decimal
 from importlib.resources import files
@@ -81,6 +82,10 @@ class Stelsel:
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
         """
+        if not eenheid.ruimten:
+            warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
+            return
+
         normaliseer_ruimte_namen(eenheid)
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()

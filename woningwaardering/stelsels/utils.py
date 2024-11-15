@@ -26,7 +26,6 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatiestatus,
     Ruimtedetailsoort,
     Ruimtesoort,
-    Woningwaarderingstelsel,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
@@ -646,17 +645,17 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
 
     if ruimte.oppervlakte is None:
-        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet geclassificeerd worden."
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte"
         warnings.warn(warning_msg, UserWarning)
         return None
 
     if ruimte.soort is None:
-        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen soort en kan daardoor niet geclassificeerd worden."
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen soort"
         warnings.warn(warning_msg, UserWarning)
         return None
 
     if ruimte.detail_soort is None:
-        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort en kan daardoor niet geclassificeerd worden."
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort"
         warnings.warn(warning_msg, UserWarning)
         return None
 
@@ -816,12 +815,12 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     criterium_naam = ruimte.naam or "Naamloze ruimte"
 
     if ruimte.detail_soort is None or ruimte.detail_soort.code is None:
-        message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort"
         warnings.warn(message, UserWarning)
         return criterium_naam
 
     if ruimte.oppervlakte is None:
-        message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte"
         warnings.warn(message, UserWarning)
         return criterium_naam
 
