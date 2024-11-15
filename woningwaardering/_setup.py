@@ -44,8 +44,19 @@ def handle_unhandled_exception(
     sys.__excepthook__(exception_type, exception_value, exception_traceback)
 
 
+def log_userwarning(message, category, filename, lineno, file=None, line=None):
+    """
+    Log a UserWarning message.
+    """
+    logger.warning(f"{UserWarning.__name__}: {message}")
+    warnings._showwarning_original(message, category, filename, lineno, file, line)
+
+
 def initialize() -> None:
     logger.disable("woningwaardering")
     setup_timezone()
     sys.excepthook = handle_unhandled_exception
+    warnings.simplefilter("once", UserWarning)
     warnings.simplefilter("error", UserWarning)
+    warnings._showwarning_original = warnings.showwarning
+    warnings.showwarning = log_userwarning

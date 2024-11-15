@@ -41,7 +41,7 @@ def bereken(
     )
 
     if not strict:
-        warnings.filterwarnings("ignore", category=UserWarning)
+        warnings.filterwarnings("default", category=UserWarning)
 
     if isinstance(eenheid_input, str):
         with open(eenheid_input, "r+") as file:
