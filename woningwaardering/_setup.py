@@ -56,7 +56,7 @@ def initialize() -> None:
     logger.disable("woningwaardering")
     setup_timezone()
     sys.excepthook = handle_unhandled_exception
-    warnings.simplefilter("once", UserWarning)
+    # warnings.simplefilter("once", UserWarning) # TODO: bepalen of dit wenselijk is
     warnings.simplefilter("error", UserWarning)
     warnings._showwarning_original = warnings.showwarning
     warnings.showwarning = log_userwarning
