@@ -326,10 +326,10 @@ def energieprestatie_met_geldig_label(
     Returns:
         EenhedenEnergieprestatie | None: De eerst geldige energieprestatie en None wanneer er geen geldige energieprestatie met label is gevonden.
     """
-
-    if eenheid.energieprestaties is None:
+    aantal_energieprestaties = len(eenheid.energieprestaties or [])
+    if aantal_energieprestaties == 0:
         warnings.warn(
-            f"Eenheid ({eenheid.id}): 'Energieprestaties' is None", UserWarning
+            f"Eenheid ({eenheid.id}): 'energieprestaties' is None", UserWarning
         )
         return None
 
@@ -344,8 +344,10 @@ def energieprestatie_met_geldig_label(
         ("label", lambda ep: ep.label is not None and ep.label.code is not None),
     ]
 
-    for energieprestatie in eenheid.energieprestaties:
-        logger.debug(f"Eenheid ({eenheid.id}): valideer energieprestatie.")
+    for idx, energieprestatie in enumerate(eenheid.energieprestaties or []):
+        logger.debug(
+            f"Eenheid ({eenheid.id}): energieprestatie {idx + 1} van {aantal_energieprestaties} wordt gevalideerd."
+        )
         ontbrekende_attributen = [
             naam for naam, check in vereiste_attributen if not check(energieprestatie)
         ]
@@ -364,7 +366,7 @@ def energieprestatie_met_geldig_label(
             Energieprestatiesoort.voorlopig_energielabel.code,
         }:
             logger.debug(
-                f"Eenheid ({eenheid.id}): Ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
+                f"Eenheid ({eenheid.id}): ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
             )
             continue
 
@@ -372,7 +374,7 @@ def energieprestatie_met_geldig_label(
             energieprestatie.begindatum <= peildatum < energieprestatie.einddatum
         ):
             logger.debug(
-                f"Eenheid ({eenheid.id}): Peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
+                f"Eenheid ({eenheid.id}): peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
             )
             continue
 
@@ -380,7 +382,7 @@ def energieprestatie_met_geldig_label(
             energieprestatie.status.code != Energieprestatiestatus.definitief.code
         ):
             logger.debug(
-                f"Eenheid ({eenheid.id}): Energieprestatie status is niet definitief."
+                f"Eenheid ({eenheid.id}): energieprestatie status is niet definitief."
             )
             continue
 
@@ -392,15 +394,15 @@ def energieprestatie_met_geldig_label(
             )
         ):
             logger.debug(
-                f"Eenheid ({eenheid.id}): Registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
+                f"Eenheid ({eenheid.id}): registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
             )
             continue
 
-        logger.info(f"Eenheid ({eenheid.id}): Geldige energieprestatie gevonden.")
+        logger.info(f"Eenheid ({eenheid.id}): geldige energieprestatie gevonden.")
         logger.debug(f"Energieprestatie: {energieprestatie}")
         return energieprestatie
 
-    logger.info(f"Eenheid ({eenheid.id}): Geen geldige energieprestatie gevonden.")
+    logger.info(f"Eenheid ({eenheid.id}): geen geldige energieprestatie gevonden.")
     return None
 
 
