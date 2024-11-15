@@ -10,6 +10,9 @@ from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
     monument_correctie,
 )
+from woningwaardering.stelsels.gedeelde_logica.energieprestatie.energieprestatie import (
+    get_energieprestatievergoeding,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -29,9 +32,6 @@ from woningwaardering.vera.referentiedata.energieprestatiesoort import (
 )
 from woningwaardering.vera.referentiedata.oppervlaktesoort import Oppervlaktesoort
 from woningwaardering.vera.referentiedata.pandsoort import Pandsoort
-from woningwaardering.vera.referentiedata.prijscomponentdetailsoort import (
-    Prijscomponentdetailsoort,
-)
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/zelfstandige_woonruimten/energieprestatie/lookup_tabellen"
@@ -306,23 +306,8 @@ class Energieprestatie(Stelselgroep):
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-        energieprestatievergoeding = next(
-            (
-                prijscomponent
-                for prijscomponent in eenheid.prijscomponenten or []
-                if prijscomponent.detail_soort is not None
-                and prijscomponent.detail_soort.code
-                == Prijscomponentdetailsoort.energieprestatievergoeding.code
-                and (
-                    prijscomponent.begindatum is None
-                    or prijscomponent.begindatum <= self.peildatum
-                )
-                and (
-                    prijscomponent.einddatum is None
-                    or prijscomponent.einddatum > self.peildatum
-                )
-            ),
-            None,
+        energieprestatievergoeding = get_energieprestatievergoeding(
+            self.peildatum, eenheid
         )
 
         if energieprestatievergoeding:

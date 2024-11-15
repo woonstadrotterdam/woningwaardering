@@ -1,11 +1,17 @@
+from datetime import date
+
 from loguru import logger
 
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenPrijscomponent,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
+from woningwaardering.vera.referentiedata.prijscomponentdetailsoort import (
+    Prijscomponentdetailsoort,
+)
 from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     Woningwaarderingstelselgroep,
 )
@@ -51,3 +57,26 @@ def monument_correctie(
             punten=woningwaardering.punten * -1.0,
         )
     return None
+
+
+def get_energieprestatievergoeding(
+    peildatum: date,
+    eenheid: EenhedenEenheid,
+) -> EenhedenPrijscomponent | None:
+    return next(
+        (
+            prijscomponent
+            for prijscomponent in eenheid.prijscomponenten or []
+            if prijscomponent.detail_soort is not None
+            and prijscomponent.detail_soort.code
+            == Prijscomponentdetailsoort.energieprestatievergoeding.code
+            and (
+                prijscomponent.begindatum is None
+                or prijscomponent.begindatum <= peildatum
+            )
+            and (
+                prijscomponent.einddatum is None or prijscomponent.einddatum > peildatum
+            )
+        ),
+        None,
+    )

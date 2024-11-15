@@ -10,6 +10,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie.energieprestatie import (
+    get_energieprestatievergoeding,
     monument_correctie,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -31,9 +32,6 @@ from woningwaardering.vera.referentiedata.energieprestatiesoort import (
     Energieprestatiesoort,
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.prijscomponentdetailsoort import (
-    Prijscomponentdetailsoort,
-)
 from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 
 LOOKUP_TABEL_FOLDER = (
@@ -226,23 +224,8 @@ class Energieprestatie(Stelselgroep):
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-        energieprestatievergoeding = next(
-            (
-                prijscomponent
-                for prijscomponent in eenheid.prijscomponenten or []
-                if prijscomponent.detail_soort is not None
-                and prijscomponent.detail_soort.code
-                == Prijscomponentdetailsoort.energieprestatievergoeding.code
-                and (
-                    prijscomponent.begindatum is None
-                    or prijscomponent.begindatum <= self.peildatum
-                )
-                and (
-                    prijscomponent.einddatum is None
-                    or prijscomponent.einddatum > self.peildatum
-                )
-            ),
-            None,
+        energieprestatievergoeding = get_energieprestatievergoeding(
+            self.peildatum, eenheid
         )
 
         energieprestatie = utils.energieprestatie_met_geldig_label(
