@@ -63,6 +63,16 @@ def get_energieprestatievergoeding(
     peildatum: date,
     eenheid: EenhedenEenheid,
 ) -> EenhedenPrijscomponent | None:
+    """
+    Geeft de eerst gevonden geldige energieprestatievergoeding voor de eenheid.
+
+    Args:
+        peildatum (date): Peildatum
+        eenheid (EenhedenEenheid): Eenheid
+
+    Returns:
+        EenhedenPrijscomponent | None: Energieprestatievergoeding of None indien niet gevonden.
+    """
     return next(
         (
             prijscomponent
