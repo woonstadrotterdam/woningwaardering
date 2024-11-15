@@ -47,11 +47,6 @@ class Sanitair(Stelselgroep):
     ) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
         woningwaarderingen_voor_gedeeld = []
 
-        ruimten = [
-            ruimte
-            for ruimte in eenheid.ruimten or []
-            if not utils.gedeeld_met_eenheden(ruimte)
-        ]
         # * tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer.
         # Op een adres met minimaal acht of meer onzelfstandige woonruimten geldt dit maximum niet voor maximaal één ruimte.
         # Dat betekent dat er voor adressen met acht of meer onzelfstandige woonruimten maximaal één ruimte mag zijn,
@@ -195,9 +190,6 @@ class Sanitair(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
         for ruimte, woningwaarderingen in woningwaarderingen_met_maximering:
             for woningwaardering in woningwaarderingen:
-                logger.error(
-                    f"woningwaardering.punten: {woningwaardering.punten}, ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten: {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}"
-                )
                 woningwaardering.punten = float(
                     utils.rond_af(
                         (woningwaardering.punten or 0)
@@ -205,7 +197,6 @@ class Sanitair(Stelselgroep):
                         decimalen=2,
                     )
                 )
-                logger.error(woningwaardering.punten)
                 if (
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
                     and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
@@ -262,9 +253,9 @@ class Sanitair(Stelselgroep):
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if ruimte.gedeeld_met_aantal_eenheden is None
-            or ruimte.gedeeld_met_aantal_eenheden < 2
+            if not utils.gedeeld_met_eenheden(ruimte)
         ]
+
         waarderingen_met_ruimten = list(
             Sanitair.genereer_woningwaarderingen(ruimten, self.stelselgroep)
         )

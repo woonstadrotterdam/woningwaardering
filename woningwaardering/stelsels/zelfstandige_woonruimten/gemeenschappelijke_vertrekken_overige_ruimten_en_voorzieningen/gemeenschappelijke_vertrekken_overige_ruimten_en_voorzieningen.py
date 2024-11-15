@@ -149,19 +149,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     )
                 )
 
-                # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
-                verkoeling_en_verwarming_waarderingen = list(
-                    VerkoelingEnVerwarming.genereer_woningwaarderingen(
-                        ruimte, self.stelselgroep
-                    )
-                )
-
-                woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
-                        ruimte, verkoeling_en_verwarming_waarderingen
-                    )
-                )
-
                 # waarderingen voor de keuken van gedeelde ruimten
                 keuken_waarderingen = list(
                     Keuken.genereer_woningwaarderingen(ruimte, self.stelselgroep)
@@ -179,6 +166,20 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 woningwaardering_groep.woningwaarderingen.extend(
                     self.deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, sanitair_waarderingen
+                    )
+                )
+
+            # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
+            verkoeling_en_verwarming_waarderingen = list(
+                VerkoelingEnVerwarming.genereer_woningwaarderingen(
+                    gedeelde_ruimten, self.stelselgroep
+                )
+            )
+
+            for ruimte, waardering in verkoeling_en_verwarming_waarderingen:
+                woningwaardering_groep.woningwaarderingen.extend(
+                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                        ruimte, [waardering]
                     )
                 )
 
