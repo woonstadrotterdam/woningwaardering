@@ -139,6 +139,17 @@ class Energieprestatie(Stelselgroep):
         oppervlakte: float,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
+        """
+        Berekent de punten voor Energieprestatie op basis van het bouwjaar.
+
+        Args:
+            eenheid (EenhedenEenheid): Eenheid
+            oppervlakte (float): Oppervlakte
+            woningwaardering (WoningwaarderingResultatenWoningwaardering): De waardering voor Energieprestatie tot zover.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaardering: De waardering met aangepaste criteriumnaam en punten.
+        """
         logger.info(
             f"Eenheid ({eenheid.id}): punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam} worden berekend op basis van bouwjaar."
         )
@@ -171,6 +182,41 @@ class Energieprestatie(Stelselgroep):
 
         return woningwaardering
 
+    def _oppervlakte_vertrekken(self, eenheid: EenhedenEenheid) -> float:
+        """
+        Berekent de oppervlakte van de vertrekken in de eenheid.
+
+        Args:
+            eenheid (EenhedenEenheid): Eenheid
+
+        Returns:
+            float: Oppervlakte van de vertrekken.
+        """
+        oppervlakte_gedeeld_met_counter: dict[int, float] = defaultdict(int)
+
+        for ruimte in eenheid.ruimten or []:
+            if ruimte.oppervlakte is None:
+                warnings.warn(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte.",
+                    UserWarning,
+                )
+                continue
+
+            if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
+                oppervlakte_gedeeld_met_counter[
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                ] += float(utils.rond_af(ruimte.oppervlakte, decimalen=2))
+
+        return sum(
+            float(
+                utils.rond_af(
+                    (utils.rond_af(oppervlakte, decimalen=0) / Decimal(str((aantal)))),
+                    decimalen=2,
+                )
+            )
+            for aantal, oppervlakte in oppervlakte_gedeeld_met_counter.items()
+        )
+
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -190,37 +236,14 @@ class Energieprestatie(Stelselgroep):
         if eenheid.ruimten is None:
             raise ValueError(f"Eenheid ({eenheid.id}): ruimten is None")
 
-        oppervlakte_gedeeld_met_counter: dict[int, float] = defaultdict(int)
-
-        for ruimte in eenheid.ruimten:
-            if ruimte.oppervlakte is None:
-                warnings.warn(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte.",
-                    UserWarning,
-                )
-                continue
-
-            if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
-                oppervlakte_gedeeld_met_counter[
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                ] += float(utils.rond_af(ruimte.oppervlakte, decimalen=2))
-
-        oppervlakte_van_vertrekken: float = sum(
-            float(
-                utils.rond_af(
-                    (utils.rond_af(oppervlakte, decimalen=0) / Decimal(str((aantal)))),
-                    decimalen=2,
-                )
-            )
-            for aantal, oppervlakte in oppervlakte_gedeeld_met_counter.items()
-        )
-
         if eenheid.monumenten is None:
             warnings.warn(
                 f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
                 UserWarning,
             )
             eenheid = utils.update_eenheid_monumenten(eenheid)
+
+        oppervlakte_van_vertrekken = self._oppervlakte_vertrekken(eenheid)
 
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
