@@ -1,5 +1,7 @@
 import asyncio
+from datetime import date
 from typing import Any, Dict, List
+from urllib.parse import urlparse
 
 import aiohttp
 import pandas as pd
@@ -8,11 +10,16 @@ from loguru import logger
 BASE_URL = "https://datasets.cbs.nl/odata/v1/CBS"
 OUTPUT_FILE = "woningwaardering/data/corop/corop.generated.csv"
 
+jaar = date.today().year
+
+DATASETNAAM_WOONPLAATSEN = f"Woonplaatsen in Nederland {jaar}"
+DATASETNAAM_GEBIEDEN = f"Gebieden in Nederland {jaar}"
+
 
 async def fetch_data(
     endpoint: str, session: aiohttp.ClientSession, params: Dict[str, str] | None = None
 ) -> List[Dict[str, Any]]:
-    url = f"{BASE_URL}/{endpoint}"
+    url = f"{endpoint}"
     async with session.get(url, params=params) as response:
         response.raise_for_status()
         json = await response.json()
@@ -20,10 +27,55 @@ async def fetch_data(
         return value
 
 
+async def get_odata_url(datasetnaam: str, session: aiohttp.ClientSession) -> str:
+    datasets = await fetch_data(
+        f"{BASE_URL}/Datasets",
+        session,
+        {
+            "$filter": f"Title eq '{datasetnaam}'",
+            "$format": "json",
+        },
+    )
+
+    if len(datasets) == 0:
+        raise ValueError(f"Geen dataset gevonden met de titel {datasetnaam}")
+
+    distributions = datasets[0].get("Distributions")
+
+    if (
+        distributions is None
+        or not isinstance(distributions, list)
+        or len(distributions) == 0
+    ):
+        raise ValueError(f"Geen distributies gevonden voor {datasetnaam}")
+
+    odata_distribution = next(
+        (
+            distribution
+            for distribution in distributions
+            if distribution is not None and distribution["Format"] == "odata"
+        ),
+        None,
+    )
+
+    if odata_distribution is None:
+        raise ValueError(f"Geen odata distributie gevonden voor {datasetnaam}")
+
+    odata_url = str(odata_distribution.get("DownloadUrl"))
+
+    parse_result = urlparse(odata_url)
+    if parse_result.scheme and parse_result.netloc:
+        return odata_url
+    else:
+        raise ValueError(f"{odata_url} is geen geldige url")
+
+
 async def get_woonplaats_data(session: aiohttp.ClientSession) -> pd.DataFrame:
-    woonplaatsen_task = fetch_data("85877NED/WoonplaatsenCodes", session)
+    odata_url = await get_odata_url(DATASETNAAM_WOONPLAATSEN, session)
+
+    woonplaatsen_task = fetch_data(f"{odata_url}/WoonplaatsenCodes", session)
     observations_task = fetch_data(
-        "85877NED/Observations",
+        f"{odata_url}/Observations",
         session,
         {
             "$filter": "Measure eq 'GM000B'",
@@ -54,8 +106,10 @@ async def get_woonplaats_data(session: aiohttp.ClientSession) -> pd.DataFrame:
 
 
 async def get_gemeente_corop_data(session: aiohttp.ClientSession) -> pd.DataFrame:
+    odata_url = await get_odata_url(DATASETNAAM_GEBIEDEN, session)
+
     observations = await fetch_data(
-        "85755NED/Observations",
+        f"{odata_url}/Observations",
         session,
         {
             "$filter": "Measure in ('CR0001', 'CR0002', 'GM000C_1', 'GM000B')",
