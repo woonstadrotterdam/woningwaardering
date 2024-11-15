@@ -11,6 +11,7 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
+    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -91,10 +92,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         woningwaarderingen = list[WoningwaarderingResultatenWoningwaardering]()
 
+        puntenwaardering_sleutel = WoningwaarderingCriteriumSleutels(
+            id="punten_waardering"
+        )
+
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"WOZ-waarde op waardepeildatum {waardepeildatum.strftime('%x')}"
+                    naam=f"WOZ-waarde op waardepeildatum {waardepeildatum.strftime('%x')}",
+                    bovenliggendeCriterium=puntenwaardering_sleutel,
                 ),
                 aantal=woz_waarde,
             )
@@ -127,7 +133,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Minimum WOZ-waarde gebruikt voor berekening"
+                        naam="Minimum WOZ-waarde gebruikt voor berekening",
+                        bovenliggendeCriterium=puntenwaardering_sleutel,
                     ),
                     aantal=minimum_woz_waarde,
                 )
@@ -159,6 +166,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Gebruiksoppervlakte",
                     meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                    bovenliggendeCriterium=puntenwaardering_sleutel,
                 ),
                 aantal=gebruiksoppervlakte,
             )
@@ -171,7 +179,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="WOZ-waarde per m²"
+                    naam="WOZ-waarde per m²",
+                    bovenliggendeCriterium=puntenwaardering_sleutel,
                 ),
                 aantal=woz_waarde_per_m2,
             )
@@ -203,10 +212,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             corop_gebied
         )
 
-        logger.debug(
-            f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}: {gemiddelde_woz_waarde_per_m2}"
-        )
-
         if gemiddelde_woz_waarde_per_m2 is None:
             warnings.warn(
                 f"Eenheid {eenheid.id}: Geen gemiddelde WOZ-waarde gevonden voor COROP-gebied {corop_gebied}. Kan punten voor de WOZ-waarde niet bepalen.",
@@ -214,10 +219,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return woningwaardering_groep
 
+        logger.debug(
+            f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}: {gemiddelde_woz_waarde_per_m2}"
+        )
+
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}",
+                    bovenliggendeCriterium=puntenwaardering_sleutel,
                 ),
                 aantal=gemiddelde_woz_waarde_per_m2,
             )
@@ -249,7 +259,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Percentage verschil"
+                    id="punten_waardering", naam="Percentage verschil"
                 ),
                 aantal=verschil_percentage,
                 punten=punten,
@@ -264,7 +274,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
         return woningwaardering_groep
 
-    def _gemiddelde_woz_voor_corop_gebied(self, corop_gebied) -> Decimal:
+    def _gemiddelde_woz_voor_corop_gebied(
+        self, corop_gebied: dict[str, str]
+    ) -> Decimal | None:
         df_woz = pd.read_csv(
             files("woningwaardering")
             .joinpath(LOOKUP_TABEL_FOLDER)
