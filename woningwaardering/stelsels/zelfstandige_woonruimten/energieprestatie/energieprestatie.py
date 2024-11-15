@@ -7,6 +7,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
+    monument_correctie,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -21,7 +24,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
 from woningwaardering.vera.referentiedata.energieprestatiesoort import (
     Energieprestatiesoort,
 )
@@ -240,48 +242,6 @@ class Energieprestatie(Stelselgroep):
 
         return woningwaardering
 
-    def _monument_correctie(
-        self,
-        eenheid: EenhedenEenheid,
-        woningwaardering: WoningwaarderingResultatenWoningwaardering,
-    ) -> WoningwaarderingResultatenWoningwaardering | None:
-        """
-        Berekent de correctie voor monumenten.
-        Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
-
-        Args:
-            eenheid (EenhedenEenheid): Eenheid
-            woningwaardering (WoningwaarderingResultatenWoningwaardering): De waardering voor Energieprestatie tot zover.
-
-        Returns:
-            WoningwaarderingResultatenWoningwaardering | None: De correctiewaardering indien van toepassing, anders None
-        """
-
-        if (
-            eenheid.monumenten
-            and any(
-                monument.code
-                in [
-                    Eenheidmonument.rijksmonument.code,
-                    Eenheidmonument.gemeentelijk_monument.code,
-                    Eenheidmonument.provinciaal_monument.code,
-                ]
-                for monument in eenheid.monumenten or []
-            )
-            and woningwaardering.punten
-            and woningwaardering.punten < 0.0
-        ):
-            logger.info(
-                f"Eenheid ({eenheid.id}) is een monument: waardering voor {Woningwaarderingstelselgroep.energieprestatie.naam} is minimaal 0 punten."
-            )
-            return WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Correctie monument"
-                ),
-                punten=woningwaardering.punten * -1.0,
-            )
-        return None
-
     def bereken(
         self,
         eenheid: EenhedenEenheid,
@@ -393,8 +353,12 @@ class Energieprestatie(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        if monument_correctie := self._monument_correctie(eenheid, woningwaardering):
-            woningwaardering_groep.woningwaarderingen.append(monument_correctie)
+        if monument_correctie_waardering := monument_correctie(
+            eenheid, woningwaardering
+        ):
+            woningwaardering_groep.woningwaarderingen.append(
+                monument_correctie_waardering
+            )
 
         punten_totaal = sum(
             woningwaardering.punten

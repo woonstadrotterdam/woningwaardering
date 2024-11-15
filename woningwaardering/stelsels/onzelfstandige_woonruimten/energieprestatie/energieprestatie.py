@@ -9,6 +9,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.energieprestatie.energieprestatie import (
+    monument_correctie,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
@@ -24,7 +27,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
 from woningwaardering.vera.referentiedata.energieprestatiesoort import (
     Energieprestatiesoort,
 )
@@ -281,34 +283,11 @@ class Energieprestatie(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         # Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
-        if (
-            eenheid.monumenten
-            and any(
-                monument.code
-                in [
-                    Eenheidmonument.rijksmonument.code,
-                    Eenheidmonument.gemeentelijk_monument.code,
-                    Eenheidmonument.provinciaal_monument.code,
-                ]
-                for monument in eenheid.monumenten or []
-            )
-            and woningwaardering.punten
-            and woningwaardering.punten < 0.0
+        if monument_correctie_waardering := monument_correctie(
+            eenheid, woningwaardering
         ):
-            logger.info(
-                f"Eenheid ({eenheid.id}) is een monument: waardering voor {Woningwaarderingstelselgroep.energieprestatie.naam} is minimaal 0 punten."
-            )
-            woningwaardering_correctie_monument = (
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Correctie monument"
-                    ),
-                    punten=woningwaardering.punten * -1.0,
-                )
-            )
-
             woningwaardering_groep.woningwaarderingen.append(
-                woningwaardering_correctie_monument
+                monument_correctie_waardering
             )
 
         punten_totaal = Decimal(
