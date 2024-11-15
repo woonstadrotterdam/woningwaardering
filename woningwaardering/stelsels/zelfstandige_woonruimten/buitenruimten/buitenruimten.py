@@ -70,7 +70,7 @@ class Buitenruimten(Stelselgroep):
                     or (ruimte.lengte and ruimte.lengte < 1.5)
                     or (ruimte.breedte and ruimte.breedte < 1.5)
                 ):
-                    logger.info(
+                    logger.debug(
                         f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
                     )
                     return
@@ -79,12 +79,12 @@ class Buitenruimten(Stelselgroep):
                     ruimte.detail_soort
                     and ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
                 ):
-                    logger.info(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde parkeerplaats en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
+                    logger.debug(
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde parkeerplaats en telt niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}."
                     )
                     return
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
+                logger.debug(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte van {ruimte.oppervlakte}m2 en telt mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}."
                 )
                 woningwaardering.aantal = float(
                     utils.rond_af(
@@ -106,7 +106,7 @@ class Buitenruimten(Stelselgroep):
                 )
             else:  # privé buitenruimte
                 logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een privé-buitenruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een privé-buitenruimte van {ruimte.oppervlakte}m2 en telt mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}."
                 )
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -151,6 +151,9 @@ class Buitenruimten(Stelselgroep):
             and not gedeeld_met_eenheden(ruimte)
             for ruimte in eenheid.ruimten or []
         ):
+            logger.info(
+                f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
+            )
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -180,7 +183,7 @@ class Buitenruimten(Stelselgroep):
             aftrek = max_punten - punten
 
             logger.info(
-                f"Eenheid ({eenheid.id}): maximaal aantal punten voor buitenruimten overschreden ({punten} > {max_punten}). Een aftrek van {aftrek} punt(en) wordt toegepast."
+                f"Eenheid ({eenheid.id}): maximaal aantal punten voor {Woningwaarderingstelselgroep.buitenruimten.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
             )
             punten += aftrek
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
