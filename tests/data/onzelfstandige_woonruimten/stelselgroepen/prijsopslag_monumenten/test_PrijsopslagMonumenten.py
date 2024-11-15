@@ -81,7 +81,7 @@ def test_PrijsopslagMonumentenEnNieuwbouw_specifiek_output(
 specifiek_warning_mapping = {
     "beschermd_stadsgezicht_zonder_bouwjaar": (
         UserWarning,
-        "'bouwjaar' is niet gespecificeerd.",
+        "geen bouwjaar",
     ),
     "monumenten_none": (
         UserWarning,
