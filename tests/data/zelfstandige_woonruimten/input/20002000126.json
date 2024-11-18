@@ -1,6 +1,10 @@
 {
   "id": "20002000126",
   "bouwjaar": 1993,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "adres": {
     "huisnummer": "",
     "huisnummerToevoeging": "",

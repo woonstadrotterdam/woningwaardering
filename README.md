@@ -154,14 +154,15 @@ Installeer de package met `pip install woningwaardering`. Vervolgens kun je de p
 import warnings
 from datetime import date
 
-from woningwaardering.stelsels import ZelfstandigeWoonruimten, utils
+from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
+from woningwaardering.stelsels.utils import naar_tabel
 
 warnings.simplefilter("default", UserWarning)
 
-stelsel = ZelfstandigeWoonruimten(
+wws = Woningwaardering(
     peildatum=date(2024, 7, 1)  # bij niet meegeven wordt de huidige dag gebruikt.
 )
 with open(
@@ -169,13 +170,15 @@ with open(
     "r+",
 ) as file:
     eenheid = EenhedenEenheid.model_validate_json(file.read())
-    woningwaardering_resultaat = stelsel.bereken(eenheid)
+
+    # Woningwaardering class kiest op basis van de input het zelfstandig of onzelfstandige stelsel.
+    woningwaardering_resultaat = wws.bereken(eenheid)
     print(
         woningwaardering_resultaat.model_dump_json(
             by_alias=True, indent=2, exclude_none=True
         )
     )
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+    tabel = naar_tabel(woningwaardering_resultaat)
 
     print(tabel)
 ```
@@ -720,7 +723,8 @@ with open(
 ```python
 from datetime import date
 
-from woningwaardering.stelsels import ZelfstandigeWoonruimten, utils
+from woningwaardering import Woningwaardering
+from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
     EenhedenAdresBasis,
@@ -742,13 +746,15 @@ from woningwaardering.vera.referentiedata import (
     Ruimtedetailsoort,
     Ruimtesoort,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelsel import Woningwaarderingstelsel
 
-stelsel = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
+wws = Woningwaardering(peildatum=date(2024, 7, 1))
 
 eenheid = EenhedenEenheid(
     id="<id>",
     bouwjaar=1924,
     monumenten=[],
+    woningwaarderingstelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
     adres=EenhedenAdresBasis(
         straatnaam="<straatnaam>",
         huisnummer="<huisnummer>",
@@ -814,13 +820,13 @@ eenheid = EenhedenEenheid(
     ],
 )
 
-woningwaardering_resultaat = stelsel.bereken(eenheid)
+woningwaardering_resultaat = wws.bereken(eenheid)
 print(
     woningwaardering_resultaat.model_dump_json(
         by_alias=True, indent=2, exclude_none=True
     )
 )
-tabel = utils.naar_tabel(woningwaardering_resultaat)
+tabel = naar_tabel(woningwaardering_resultaat)
 
 print(tabel)
 ```
