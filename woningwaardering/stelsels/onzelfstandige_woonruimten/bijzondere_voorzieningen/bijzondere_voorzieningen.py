@@ -55,6 +55,7 @@ class BijzondereVoorzieningen(Stelselgroep):
                 stelselgroepen_zonder_opslag=[
                     self.stelselgroep,
                     Woningwaarderingstelselgroep.aftrekpunten,
+                    Woningwaarderingstelselgroep.prijsopslag_monumenten,
                 ],
                 stelsel=self.stelsel,
                 woningwaardering_resultaat=woningwaardering_resultaat,

@@ -13,6 +13,7 @@ from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     Keuken,
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
+    PrijsopslagMonumenten,
     Sanitair,
     VerkoelingEnVerwarming,
 )
@@ -44,6 +45,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
                 # PuntenVoorDeWOZWaarde,
                 BijzondereVoorzieningen,
                 Aftrekpunten,
+                PrijsopslagMonumenten,
             ],
         )
 

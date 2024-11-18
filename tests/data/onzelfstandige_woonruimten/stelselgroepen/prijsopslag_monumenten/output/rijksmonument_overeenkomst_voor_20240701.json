@@ -1,0 +1,26 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMO",
+          "naam": "Prijsopslag monumenten"
+        }
+      },
+      "punten": 10.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Rijksmonument"
+          },
+          "punten": 10.0
+        }
+      ],
+      "opslagpercentage": 0.0
+    }
+  ]
+}
