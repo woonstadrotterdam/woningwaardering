@@ -54,31 +54,43 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
 
     def _maak_woningwaardering(
         self,
-        punten: Decimal,
+        punten: Decimal | None,
         criterium: str,
         bovenliggende_criterium_id: str | None = None,
         aantal: float | None = None,
         meeteenheid: Referentiedata | None = None,
+        id: str | None = None,
     ) -> WoningwaarderingResultatenWoningwaardering:
-        return WoningwaarderingResultatenWoningwaardering(
+        woningwaardering = WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                id=id,
                 meeteenheid=meeteenheid,
                 naam=criterium,
-                bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                    id=bovenliggende_criterium_id,
-                ),
             ),
             aantal=aantal,
             punten=punten,
         )
+        if bovenliggende_criterium_id and woningwaardering.criterium:
+            woningwaardering.criterium.bovenliggende_criterium = (
+                WoningwaarderingCriteriumSleutels(id=bovenliggende_criterium_id)
+            )
+        return woningwaardering
 
     def _maak_oppervlakte_waarderingen(
         self,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_onzelfstandig_en_adressen: dict[int, Decimal],
-    ) -> tuple[dict[int, Decimal], list[WoningwaarderingResultatenWoningwaardering]]:
+        gedeeld_met_punten: dict[int, dict[int, Decimal]],
+    ) -> tuple[
+        dict[int, dict[int, Decimal]], list[WoningwaarderingResultatenWoningwaardering]
+    ]:
         waarderigen = []
         for ruimte in ruimten:
+            aantal_onzelfstandige_woonruimten = (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            )
+
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+
             oppervlakte_vertrekken = list(
                 ZelfstandigeWoonruimtenOppervlakteVanVertrekken.genereer_woningwaarderingen(
                     ruimte, self.stelselgroep
@@ -102,28 +114,29 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     oppervlakte_resultaat = oppervlakte_van_overige_ruimten[0]
                     punten_per_m2 = Decimal("0.75")
 
-                aantal_onzelfstandige_woonruimten = (
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                )
+                if gedeeld_met_punten.get(aantal_onzelfstandige_woonruimten) is None:
+                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = {
+                        aantal_eenheden: Decimal("0")
+                    }
 
                 if (
-                    gedeeld_met_onzelfstandig_en_adressen.get(
-                        aantal_onzelfstandige_woonruimten
+                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten].get(
+                        aantal_eenheden
                     )
                     is None
                 ):
-                    gedeeld_met_onzelfstandig_en_adressen[
-                        aantal_onzelfstandige_woonruimten
+                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
+                        aantal_eenheden
                     ] = Decimal("0")
 
                 punten = (
                     Decimal(str(oppervlakte_resultaat.aantal))
                     * punten_per_m2
-                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
+                    / Decimal(str(aantal_eenheden))
                     / Decimal(str(aantal_onzelfstandige_woonruimten))
                 )
-                gedeeld_met_onzelfstandig_en_adressen[
-                    aantal_onzelfstandige_woonruimten
+                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
+                    aantal_eenheden
                 ] += punten
 
                 if ruimte.soort is None:
@@ -134,13 +147,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     continue
 
                 criterium_naam = (
-                    f"{oppervlakte_resultaat.criterium.naam}: {ruimte.soort.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
-                    # if oppervlakte_resultaat.criterium
-                    # else f"{ruimte.soort.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
+                    f"{oppervlakte_resultaat.criterium.naam}: {ruimte.soort.naam}"
                 )
                 aantal = oppervlakte_resultaat.aantal
                 meeteenheid = Meeteenheid.vierkante_meter_m2.value
-                bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandige_woonruimten}"
+                bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen"
 
                 waarderigen.append(
                     self._maak_woningwaardering(
@@ -152,75 +163,80 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     )
                 )
 
-        return gedeeld_met_onzelfstandig_en_adressen, waarderigen
+        return gedeeld_met_punten, waarderigen
 
     def _maak_verkoeling_en_verwarming_waarderingen(
         self,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_onzelfstandig_en_adressen: dict[int, Decimal],
-    ) -> tuple[dict[int, Decimal], list[WoningwaarderingResultatenWoningwaardering]]:
-        verkoeling_en_verwarming_resultaten = []
+        gedeeld_met_punten: dict[int, dict[int, Decimal]],
+    ) -> tuple[
+        dict[int, dict[int, Decimal]], list[WoningwaarderingResultatenWoningwaardering]
+    ]:
         waarderingen = []
-        for ruimte in ruimten:
-            resultaten = list(
-                ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep
+
+        resultaten = list(
+            ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
+                ruimten, self.stelselgroep
+            )
+        )
+        for ruimte, resultaat in resultaten:
+            aantal_onzelfstandige_woonruimten = (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            )
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+
+            if gedeeld_met_punten.get(aantal_onzelfstandige_woonruimten) is None:
+                gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = {
+                    aantal_eenheden: Decimal("0")
+                }
+
+            if (
+                gedeeld_met_punten[aantal_onzelfstandige_woonruimten].get(
+                    aantal_eenheden
+                )
+                is None
+            ):
+                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
+                    aantal_eenheden
+                ] = Decimal("0")
+
+            punten = (
+                Decimal(str(resultaat.punten))
+                / Decimal(str(aantal_eenheden))
+                / Decimal(str(aantal_onzelfstandige_woonruimten))
+            )
+
+            gedeeld_met_punten[aantal_onzelfstandige_woonruimten][aantal_eenheden] += (
+                punten
+            )
+
+            if ruimte.soort is None:
+                warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
+                continue
+            if resultaat.criterium is None:
+                warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
+                continue
+
+            if "Max" not in (resultaat.criterium.naam or ""):
+                criterium_naam = f"{resultaat.criterium.naam}: {resultaat.criterium.bovenliggende_criterium.id.capitalize().replace('_', ' ') if resultaat.criterium.bovenliggende_criterium and resultaat.criterium.bovenliggende_criterium.id else ''}"
+            else:
+                criterium_naam = f"{resultaat.criterium.naam}"
+            bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen"
+            waarderingen.append(
+                self._maak_woningwaardering(
+                    punten, criterium_naam, bovenliggende_criterium_id, None, None
                 )
             )
-            verkoeling_en_verwarming_resultaten.extend(resultaten)
 
-            for resultaat in resultaten:
-                aantal_onzelfstandige_woonruimten = (
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                )
-
-                if (
-                    gedeeld_met_onzelfstandig_en_adressen.get(
-                        aantal_onzelfstandige_woonruimten
-                    )
-                    is None
-                ):
-                    gedeeld_met_onzelfstandig_en_adressen[
-                        aantal_onzelfstandige_woonruimten
-                    ] = Decimal("0")
-
-                punten = (
-                    Decimal(str(resultaat.punten))
-                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-                    / Decimal(str(aantal_onzelfstandige_woonruimten))
-                )
-
-                gedeeld_met_onzelfstandig_en_adressen[
-                    aantal_onzelfstandige_woonruimten
-                ] += punten
-
-                if ruimte.soort is None:
-                    warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
-                    continue
-                if resultaat.criterium is None:
-                    warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
-                    continue
-
-                criterium_naam = f"{resultaat.criterium.naam}: {resultaat.criterium.bovenliggende_criterium.id.capitalize().replace('_', ' ') if resultaat.criterium.bovenliggende_criterium and resultaat.criterium.bovenliggende_criterium.id else ''} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
-                bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandige_woonruimten}"
-                waarderingen.append(
-                    self._maak_woningwaardering(
-                        punten, criterium_naam, bovenliggende_criterium_id, None, None
-                    )
-                )
-
-        # TODO: maximering
-        # maximering = list(
-        #     ZelfstandigeWoonruimtenVerkoelingEnVerwarming.maximering(
-        #         verkoeling_en_verwarming_resultaten
-        #     )
-        # )
-
-        return gedeeld_met_onzelfstandig_en_adressen, waarderingen
+        return gedeeld_met_punten, waarderingen
 
     def _maak_sanitair_waarderingen(
-        self, ruimten: list[EenhedenRuimte], gedeeld_met_punten: dict[int, Decimal]
-    ) -> tuple[dict[int, Decimal], list[WoningwaarderingResultatenWoningwaardering]]:
+        self,
+        ruimten: list[EenhedenRuimte],
+        gedeeld_met_punten: dict[int, dict[int, Decimal]],
+    ) -> tuple[
+        dict[int, dict[int, Decimal]], list[WoningwaarderingResultatenWoningwaardering]
+    ]:
         woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering] = []
         woningwaarderingen_met_ruimten = list(
             OnzelfstandigeWoonruimtenSanitair.genereer_woningwaarderingen(
@@ -232,6 +248,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             return gedeeld_met_punten, woningwaarderingen
 
         for ruimte, woningwaardering in woningwaarderingen_met_ruimten:
+            aantal_onzelfstandige_woonruimten = (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            )
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+
             if (
                 woningwaardering.criterium is None
                 or woningwaardering.criterium.naam is None
@@ -243,18 +264,29 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 and woningwaardering.criterium.bovenliggende_criterium is None
             ):
                 continue
-            aantal_onzelfstandige_woonruimten = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
 
             if gedeeld_met_punten.get(aantal_onzelfstandige_woonruimten) is None:
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = Decimal("0")
+                gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = {
+                    aantal_eenheden: Decimal("0")
+                }
+
+            if (
+                gedeeld_met_punten[aantal_onzelfstandige_woonruimten].get(
+                    aantal_eenheden
+                )
+                is None
+            ):
+                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
+                    aantal_eenheden
+                ] = Decimal("0")
 
             punten = Decimal(str(woningwaardering.punten)) / Decimal(
                 str(aantal_onzelfstandige_woonruimten)
             )
 
-            gedeeld_met_punten[aantal_onzelfstandige_woonruimten] += punten
+            gedeeld_met_punten[aantal_onzelfstandige_woonruimten][aantal_eenheden] += (
+                punten
+            )
 
             if ruimte.soort is None:
                 warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
@@ -263,8 +295,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
                 continue
 
-            criterium_naam = f"{woningwaardering.criterium.naam.replace(':', '').replace(' -', ':')} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
-            bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandige_woonruimten}"
+            criterium_naam = (
+                f"{woningwaardering.criterium.naam.replace(':', '').replace(' -', ':')}"
+            )
+            bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen"
             woningwaarderingen.append(
                 self._maak_woningwaardering(
                     punten, criterium_naam, bovenliggende_criterium_id, None, None
@@ -274,13 +308,22 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         return gedeeld_met_punten, woningwaarderingen
 
     def _maak_keuken_waarderingen(
-        self, ruimten: list[EenhedenRuimte], gedeeld_met_punten: dict[int, Decimal]
-    ) -> tuple[dict[int, Decimal], list[WoningwaarderingResultatenWoningwaardering]]:
+        self,
+        ruimten: list[EenhedenRuimte],
+        gedeeld_met_punten: dict[int, dict[int, Decimal]],
+    ) -> tuple[
+        dict[int, dict[int, Decimal]], list[WoningwaarderingResultatenWoningwaardering]
+    ]:
         woningwaarderingen = []
         for ruimte in ruimten:
+            aantal_onzelfstandige_woonruimten = (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            )
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+
             waarderingen = list(
                 ZelfstandigeWoonruimtenKeuken.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep
+                    ruimte, self.stelselgroep, self.stelsel
                 )
             )
             for waardering in waarderingen:
@@ -294,25 +337,38 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 )
 
                 if gedeeld_met_punten.get(aantal_onzelfstandige_woonruimten) is None:
-                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = Decimal("0")
+                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = {
+                        aantal_eenheden: Decimal("0")
+                    }
+
+                if (
+                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten].get(
+                        aantal_eenheden
+                    )
+                    is None
+                ):
+                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
+                        aantal_eenheden
+                    ] = Decimal("0")
+
                 if not waardering.punten:
                     continue
 
                 punten = (
                     Decimal(str(waardering.punten))
-                    / Decimal(
-                        str(ruimte.gedeeld_met_aantal_eenheden)
-                    )  # ruimte.gedeeld_met_aantal_eenheden is altijd groter dan 1 in deze functie
+                    / Decimal(str(aantal_eenheden))
                     / Decimal(str(aantal_onzelfstandige_woonruimten))
                     if waardering.punten
                     else Decimal("0")
                 )
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten] += punten
+                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
+                    aantal_eenheden
+                ] += punten
                 if waardering.criterium.naam is None:
-                    criterium = f"{ruimte.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
+                    criterium = f"{ruimte.naam}"
                 else:
-                    criterium = f"{ruimte.naam + ': ' if ruimte.naam is not None and ruimte.naam not in waardering.criterium.naam else ''}{waardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
-                bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandige_woonruimten}"
+                    criterium = f"{ruimte.naam + ': ' if ruimte.naam is not None and ruimte.naam not in waardering.criterium.naam else ''}{waardering.criterium.naam}"
+                bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen"
                 woningwaarderingen.append(
                     self._maak_woningwaardering(
                         punten,
@@ -322,7 +378,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         waardering.criterium.meeteenheid,
                     )
                 )
-        print(woningwaarderingen)
         return gedeeld_met_punten, woningwaarderingen
 
     def bereken(
@@ -349,7 +404,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         ]
 
         gedeeld_met_punten: dict[
-            int, Decimal
+            int, dict[int, Decimal]
         ] = {}  # {onzelfstandige_woonruimten: (aantal_adressen, punten)}
 
         # maak oppervlakte waarderingen
@@ -380,20 +435,29 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         )
         woningwaardering_groep.woningwaarderingen.extend(list(sanitair_waarderingen))
 
-        # maak woningwaarderingen totaal voor de gedeelde binnen ruimte
+        # maak (sub)totaal waarderingen
         for (
-            aantal_onzelfstandige_woonruimten,
-            punten,
+            aantal_onzelfstandifge_woonruimten,
+            punten_per_aantal_adressen,
         ) in gedeeld_met_punten.items():
-            woningwaardering = WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"Totaal (gedeeld met {aantal_onzelfstandige_woonruimten} onzelfstandige {'woonruimten' if aantal_onzelfstandige_woonruimten > 1 else 'woonruimte'})",
-                    id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandige_woonruimten}",
-                ),
-                punten=punten,
+            onz_punten = Decimal("0")
+            for aantal_adressen, punten in punten_per_aantal_adressen.items():
+                onz_punten += punten
+                woningwaardering_groep.woningwaarderingen.append(
+                    self._maak_woningwaardering(
+                        punten=punten,
+                        id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_adressen}_adressen",
+                        criterium=f"Totaal (gedeeld met {aantal_adressen} adressen)",
+                        bovenliggende_criterium_id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandifge_woonruimten}_onzelfstandige_woonruimten",
+                    )
+                )
+            woningwaardering_groep.woningwaarderingen.append(
+                self._maak_woningwaardering(
+                    punten=onz_punten,
+                    id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandifge_woonruimten}_onzelfstandige_woonruimten",
+                    criterium=f"Totaal (gedeeld met {aantal_onzelfstandifge_woonruimten} onzelfstandige {'woonruimten' if aantal_onzelfstandifge_woonruimten > 1 else 'woonruimte'})",
+                )
             )
-
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         punten = utils.rond_af_op_kwart(
             sum(
