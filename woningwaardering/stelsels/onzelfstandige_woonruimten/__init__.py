@@ -2,6 +2,9 @@ from .aftrekpunten import Aftrekpunten
 from .bijzondere_voorzieningen import BijzondereVoorzieningen
 from .buitenruimten import Buitenruimten
 from .energieprestatie import Energieprestatie
+from .gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen import (
+    GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen,
+)
 from .gemeenschappelijke_parkeerruimten import GemeenschappelijkeParkeerruimten
 from .keuken import Keuken
 from .oppervlakte_van_overige_ruimten import OppervlakteVanOverigeRuimten
@@ -18,6 +21,7 @@ __all__ = [
     "Keuken",
     "Sanitair",
     "Buitenruimten",
+    "GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen",
     "GemeenschappelijkeParkeerruimten",
     "PuntenVoorDeWOZWaarde",
     "Aftrekpunten",

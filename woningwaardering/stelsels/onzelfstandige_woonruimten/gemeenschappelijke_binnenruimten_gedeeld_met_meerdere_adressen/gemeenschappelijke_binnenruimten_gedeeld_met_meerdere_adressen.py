@@ -253,16 +253,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             )
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
 
-            if (
-                woningwaardering.criterium is None
-                or woningwaardering.criterium.naam is None
-            ):
-                logger.warning(f"Geen criterium gevonden voor ruimte {ruimte.id}")
+            if ruimte.soort is None:
+                warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
                 continue
-            if (
-                woningwaardering.criterium
-                and woningwaardering.criterium.bovenliggende_criterium is None
-            ):
+            if woningwaardering.criterium is None:
+                warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
                 continue
 
             if gedeeld_met_punten.get(aantal_onzelfstandige_woonruimten) is None:
@@ -287,13 +282,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             gedeeld_met_punten[aantal_onzelfstandige_woonruimten][aantal_eenheden] += (
                 punten
             )
-
-            if ruimte.soort is None:
-                warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
-                continue
-            if woningwaardering.criterium is None:
-                warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
-                continue
 
             criterium_naam = (
                 f"{woningwaardering.criterium.naam.replace(':', '').replace(' -', ':')}"
@@ -482,7 +470,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen()
     with open(
-        "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/input/voorbeeld_beleidsboek.json",
+        "tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
