@@ -76,7 +76,6 @@ class VerkoelingEnVerwarming(Stelselgroep):
             if ruimte.gedeeld_met_aantal_eenheden is None
             or ruimte.gedeeld_met_aantal_eenheden == 1
         ]
-        print(len(ruimten))
 
         resultaten = list(
             VerkoelingEnVerwarming.genereer_woningwaarderingen(
