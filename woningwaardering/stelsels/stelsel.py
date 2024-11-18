@@ -3,6 +3,7 @@ from decimal import Decimal
 from importlib.resources import files
 
 import pandas as pd
+from loguru import logger
 
 from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
@@ -46,10 +47,12 @@ class Stelsel:
         stelselgroepen: list[type[Stelselgroep]] | None = None,
     ) -> None:
         self.stelsel = stelsel
+        logger.info(f"Stelsel {stelsel.value.naam} wordt gebruikt.")
         if not is_geldig(begindatum, einddatum, peildatum):
             raise ValueError(
                 f"Stelsel {stelsel.value.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
             )
+
         self.peildatum = peildatum
         self.stelselgroepen = [
             stelselgroep(peildatum) for stelselgroep in stelselgroepen or []

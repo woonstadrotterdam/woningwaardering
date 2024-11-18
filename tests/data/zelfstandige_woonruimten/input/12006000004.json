@@ -1,6 +1,10 @@
 {
   "id": "12006000004",
   "bouwjaar": 1981,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "IND",

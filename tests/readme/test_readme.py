@@ -2,7 +2,7 @@ import json
 from datetime import date
 
 from tests.test_utils import assert_output_model
-from woningwaardering.stelsels import ZelfstandigeWoonruimten
+from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
     EenhedenAdresBasis,
@@ -25,15 +25,19 @@ from woningwaardering.vera.referentiedata import (
     Ruimtedetailsoort,
     Ruimtesoort,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Woningwaarderingstelsel,
+)
 
 
 def test_readme_python_voorbeeld():
     # Dit is voorbeeld 2 uit de readme met als input een Python object.
-    stelsel = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
+    wws = Woningwaardering(peildatum=date(2024, 7, 1))
 
     eenheid = EenhedenEenheid(
         id="37101000032",
         bouwjaar=1924,
+        woningwaarderingstelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
         adres=EenhedenAdresBasis(
             straatnaam="Nieuwe Boezemstraat",
             huisnummer="27",
@@ -104,7 +108,7 @@ def test_readme_python_voorbeeld():
         ],
     )
 
-    woningwaardering_resultaat = stelsel.bereken(eenheid)
+    woningwaardering_resultaat = wws.bereken(eenheid)
     with open("tests/readme/output_json_python_voorbeeld.json", "r") as f:
         expected_result = (
             WoningwaarderingResultatenWoningwaarderingResultaat.model_validate(
@@ -116,13 +120,13 @@ def test_readme_python_voorbeeld():
 
 def test_readme_json_voorbeeld():
     # Dit is voorbeeld 1 uit de readme met als input een JSON bestand.
-    stelsel = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
+    wws = Woningwaardering(peildatum=date(2024, 7, 1))
     with open(
         "tests/data/generiek/input/37101000032.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
-        woningwaardering_resultaat = stelsel.bereken(eenheid)
+        woningwaardering_resultaat = wws.bereken(eenheid)
         with open("tests/readme/output_json_json_voorbeeld.json", "r") as f:
             expected_result = (
                 WoningwaarderingResultatenWoningwaarderingResultaat.model_validate(

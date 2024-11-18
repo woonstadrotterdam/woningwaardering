@@ -1,5 +1,9 @@
 {
   "id": "25048000007",
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "bouwjaar": 1997,
   "klimaatbeheersing": [
     {
