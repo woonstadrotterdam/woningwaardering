@@ -5,7 +5,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.onzelfstandige_woonruimten import (
+from woningwaardering.stelsels.onzelfstandige_woonruimten.sanitair import (
     Sanitair as OnzelfstandigeWoonruimtenSanitair,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -103,10 +103,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 )
             )
 
-            if (
-                oppervlakte_vertrekken is not None
-                or oppervlakte_van_overige_ruimten is not None
-            ):
+            if oppervlakte_vertrekken or oppervlakte_van_overige_ruimten:
                 if oppervlakte_vertrekken:
                     oppervlakte_resultaat = oppervlakte_vertrekken[0]
                     punten_per_m2 = Decimal("1.0")
@@ -256,7 +253,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             if ruimte.soort is None:
                 warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
                 continue
-            if woningwaardering.criterium is None:
+            if (
+                woningwaardering.criterium is None
+                or woningwaardering.criterium.naam is None
+            ):
                 warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
                 continue
 
@@ -470,7 +470,7 @@ if __name__ == "__main__":  # pragma: no cover
 
     stelselgroep = GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen()
     with open(
-        "tests/data/onzelfstandige_woonruimten/input/15004000185.json",
+        "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/input/gedeelde_berging_<2m2.json",
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
