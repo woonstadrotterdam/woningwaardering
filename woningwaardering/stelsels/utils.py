@@ -769,8 +769,12 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             and Ruimtesoort.overige_ruimten
         ):
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-            if (ruimte.oppervlakte / aantal_eenheden) >= 2:
+            if (
+                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_eenheden))
+            ) >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
+            else:
+                return None
 
         if ruimte.soort.code == Ruimtesoort.vertrek.code:
             if ruimte.oppervlakte >= 4:
