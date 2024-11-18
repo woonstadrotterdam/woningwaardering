@@ -2,7 +2,9 @@ from datetime import date
 from decimal import Decimal
 from typing import Iterator
 
-from woningwaardering.stelsels._dev_utils import bereken
+from loguru import logger
+
+from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.prijsopslag_monumenten_en_nieuwbouw.prijsopslag_monumenten_en_nieuwbouw import (
     PrijsopslagMonumentenEnNieuwbouw,
@@ -106,3 +108,4 @@ if __name__ == "__main__":  # pragma: no cover
         eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         strict=False,
     )
+
