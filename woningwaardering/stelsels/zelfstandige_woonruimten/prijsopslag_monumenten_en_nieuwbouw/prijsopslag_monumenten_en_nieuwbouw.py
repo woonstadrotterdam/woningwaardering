@@ -1,6 +1,7 @@
 import warnings
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from dateutil.relativedelta import relativedelta
 from loguru import logger
@@ -52,8 +53,56 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
         )
 
-        woningwaardering_groep.woningwaarderingen = []
+        woningwaardering_groep.woningwaarderingen = list(
+            woningwaardering
+            for woningwaardering in PrijsopslagMonumentenEnNieuwbouw._genereer_woningwaarderingen(
+                self.peildatum, eenheid, woningwaardering_resultaat
+            )
+            if woningwaardering is not None
+        )
 
+        opslagpercentage = Decimal(
+            sum(
+                Decimal(str(woningwaardering.opslagpercentage))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.opslagpercentage is not None
+            )
+        )
+
+        woningwaardering_groep.opslagpercentage = float(opslagpercentage)
+        punten = Decimal(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+            )
+        )
+
+        woningwaardering_groep.punten = float(punten)
+        return woningwaardering_groep
+
+    @staticmethod
+    def _genereer_woningwaarderingen(
+        peildatum: date,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
+        | None,
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
+        PrijsopslagMonumentenEnNieuwbouw._check_monumenten_attribuut(eenheid)
+
+        yield PrijsopslagMonumentenEnNieuwbouw._opslag_rijksmonument(peildatum, eenheid)
+        yield PrijsopslagMonumentenEnNieuwbouw._opslag_gemeentelijk_of_provinciaal_monument(
+            eenheid
+        )
+        yield PrijsopslagMonumentenEnNieuwbouw._opslag_beschermd_stads_of_dorpsgezicht(
+            eenheid
+        )
+        yield PrijsopslagMonumentenEnNieuwbouw._opslag_nieuwbouw(
+            peildatum, eenheid, woningwaardering_resultaat
+        )
+
+    @staticmethod
+    def _check_monumenten_attribuut(eenheid: EenhedenEenheid) -> None:
         if eenheid.monumenten is None:
             warnings.warn(
                 f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
@@ -61,6 +110,12 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
             utils.update_eenheid_monumenten(eenheid)
 
+    @staticmethod
+    def _opslag_rijksmonument(
+        peildatum: date,
+        eenheid: EenhedenEenheid,
+        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
         if any(
             monument.code == Eenheidmonument.rijksmonument.code
             for monument in eenheid.monumenten or []
@@ -72,9 +127,9 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     UserWarning,
                 )
                 logger.warning(
-                    f"Eenheid {eenheid.id}: Voor de waardering van dit rijksmonument wordt de peildatum {self.peildatum} gebruikt in plaats van de datum van de afsluiting van de huurovereenkomst."
+                    f"Eenheid {eenheid.id}: Voor de waardering van dit rijksmonument wordt de peildatum {peildatum} gebruikt in plaats van de datum van de afsluiting van de huurovereenkomst."
                 )
-                datum_afsluiten_huurovereenkomst = self.peildatum
+                datum_afsluiten_huurovereenkomst = peildatum
 
             woningwaardering = WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -84,17 +139,33 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             if datum_afsluiten_huurovereenkomst >= date(2024, 7, 1):
                 logger.info(
-                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met een opslagpercentage van 35% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
+                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met een opslagpercentage van 35% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
                 )
                 woningwaardering.opslagpercentage = 0.35
-            else:
+            elif (
+                stelselgroep
+                == Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw
+            ):
+                # 50 punten voor zelfstandige woonruimten
                 logger.info(
-                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met een 50 punten voor de stelselgroep {self.stelselgroep.naam}."
+                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met 50 punten voor de stelselgroep {stelselgroep.naam}."
                 )
                 woningwaardering.punten = 50.0
+            elif stelselgroep == Woningwaarderingstelselgroep.prijsopslag_monumenten:
+                # 10 punten voor onzelfstandige woonruimten
+                logger.info(
+                    f"Eenheid {eenheid.id} is een rijksmonument en wordt gewaardeerd met 10 punten voor de stelselgroep {stelselgroep.naam}."
+                )
+                woningwaardering.punten = 10.0
 
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+            return woningwaardering
+        return None
 
+    @staticmethod
+    def _opslag_gemeentelijk_of_provinciaal_monument(
+        eenheid: EenhedenEenheid,
+        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
         if any(
             monument.code
             in [
@@ -104,17 +175,21 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             for monument in eenheid.monumenten or []
         ):
             logger.info(
-                f"Eenheid {eenheid.id} is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
+                f"Eenheid {eenheid.id} is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
             )
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Gemeentelijk of provinciaal monument",
-                    ),
-                    opslagpercentage=0.15,
-                )
+            return WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Gemeentelijk of provinciaal monument",
+                ),
+                opslagpercentage=0.15,
             )
+        return None
 
+    @staticmethod
+    def _opslag_beschermd_stads_of_dorpsgezicht(
+        eenheid: EenhedenEenheid,
+        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
         if any(
             monument.code
             in [
@@ -138,21 +213,30 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 )
             elif eenheid.bouwjaar < 1965:
                 logger.info(
-                    f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
+                    f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
                 )
-                woningwaardering_groep.woningwaarderingen.append(
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Beschermd stads- of dorpsgezicht",
-                        ),
-                        opslagpercentage=0.05,
-                    )
+                return WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Beschermd stads- of dorpsgezicht",
+                    ),
+                    opslagpercentage=0.05,
                 )
+
             else:
                 logger.info(
                     f"Eenheid {eenheid.id} behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
                 )
+        return None
 
+    @staticmethod
+    def _opslag_nieuwbouw(
+        peildatum: date,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
+        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
         if (
             eenheid.begin_bouwdatum is not None
             and eenheid.begin_bouwdatum < date(2028, 1, 1)
@@ -161,7 +245,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             > date(
                 2024, 7, 1
             )  # TODO: https://github.com/woonstadrotterdam/woningwaardering/issues/105
-            and eenheid.in_exploitatiedatum > self.peildatum - relativedelta(years=20)
+            and eenheid.in_exploitatiedatum > peildatum - relativedelta(years=20)
         ):
             if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
                 logger.warning(
@@ -172,7 +256,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 )
 
                 woningwaardering_resultaat = ZelfstandigeWoonruimten(
-                    peildatum=self.peildatum
+                    peildatum=peildatum
                 ).bereken(eenheid, negeer_stelselgroep=PrijsopslagMonumentenEnNieuwbouw)
 
             puntentotaal = (
@@ -183,41 +267,21 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             if puntentotaal is not None and 144 <= puntentotaal <= 186:
                 logger.info(
-                    f"Eenheid {eenheid.id} is een nieuwbouw en wordt gewaardeerd met een opslagpercentage van 10% op de maximale huurprijs voor de stelselgroep {self.stelselgroep.naam}."
+                    f"Eenheid {eenheid.id} is een nieuwbouw en wordt gewaardeerd met een opslagpercentage van 10% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
                 )
 
-                woningwaardering_groep.woningwaarderingen.append(
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Nieuwbouw",
-                        ),
-                        opslagpercentage=0.1,
-                    )
+                return WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Nieuwbouw",
+                    ),
+                    opslagpercentage=0.1,
                 )
+
             else:
                 logger.info(
-                    f"Eenheid {eenheid.id} is een nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor de stelselgroep {self.stelselgroep.naam}."
+                    f"Eenheid {eenheid.id} is een nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor de stelselgroep {stelselgroep.naam}."
                 )
-
-        opslagpercentage = Decimal(
-            sum(
-                Decimal(str(woningwaardering.opslagpercentage))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.opslagpercentage is not None
-            )
-        )
-
-        woningwaardering_groep.opslagpercentage = float(opslagpercentage)
-        punten = Decimal(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            )
-        )
-
-        woningwaardering_groep.punten = float(punten)
-        return woningwaardering_groep
+        return None
 
 
 if __name__ == "__main__":  # pragma: no cover

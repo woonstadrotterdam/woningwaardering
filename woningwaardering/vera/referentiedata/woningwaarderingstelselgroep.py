@@ -451,6 +451,17 @@ class Woningwaarderingstelselgroep(Enum):
     Aftrekpunten waardering onzelfstandige woonruimten
     """
 
+    prijsopslag_monumenten = Referentiedata(
+        code="PMO",
+        naam="Prijsopslag monumenten",
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+    )
+    """
+    Prijsopslagen voor monumenten, waarbij extra percentages worden toegevoegd aan de
+    maximale huurprijs voor rijks-, gemeentelijke of provinciaal aangewezen
+    monumentenn.
+    """
+
     @property
     def code(self) -> str:
         if self.value.code is None:

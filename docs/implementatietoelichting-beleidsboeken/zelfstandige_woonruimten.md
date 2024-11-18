@@ -46,7 +46,7 @@ Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register 
 
 ### 2.8.2 Gemeentelijk of provinciaal monument
 
-Indien een woonruimte een gemeentelijk of provinciaal monument is of daarvan deel uitmaakt, dan wordt de maximale huurprijs vermeerderd met 15%. Het gemeentelijk monument moet zijn aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door de gedeputeerde staten. 
+Indien een woonruimte een gemeentelijk of provinciaal monument is of daarvan deel uitmaakt, dan wordt de maximale huurprijs vermeerderd met 15%. Het gemeentelijk monument moet zijn aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door de gedeputeerde staten.
 
 De Huurcommissie hanteert passief beleid. De partijen moeten aantonen dat een woning bestaat of deel uitmaakt van een gemeentelijk of provinciaal monument.
 
