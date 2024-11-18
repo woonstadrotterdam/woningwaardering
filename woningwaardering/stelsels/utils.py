@@ -764,6 +764,14 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     ] or (
         Ruimtedetailsoort.schuur.naam == ruimte.detail_soort.naam
     ):  # Schacht en schuur hebben dezelfde code
+        if (
+            ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
+            and Ruimtesoort.overige_ruimten
+        ):
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            if (ruimte.oppervlakte / aantal_eenheden) >= 2:
+                return Ruimtesoort.overige_ruimten
+
         if ruimte.soort.code == Ruimtesoort.vertrek.code:
             if ruimte.oppervlakte >= 4:
                 return Ruimtesoort.vertrek
