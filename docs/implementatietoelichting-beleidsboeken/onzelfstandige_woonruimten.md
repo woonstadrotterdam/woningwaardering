@@ -727,7 +727,7 @@ De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale
 
 Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aangesloten bij de definities en meetinstructies zoals toegelicht in paragraaf 1.3 en 2.3 van dit hoofdstuk.
 
-> Wanneer gedeelde vertrekken en overige ruimten worden inschoten met `gedeeld_met_aantal_eenheden` groter of gelijk aan 2, dan zullen deze ruimten in aanmerking komen voor een waardering onder "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen", mits deze voldoen aan de criteria voor vertrekken of overige ruimten.
+> Wanneer het attribuut `gedeeld_met_aantal_eenheden` van een ruimte groter of gelijk aan 2 is, dan komt de ruimte in aanmerking voor een waardering onder "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen", mits deze voldoet aan de criteria voor vertrekken of overige ruimten.
 
 ### 9.3 Rekenmethode en voorbeeldberekening
 
