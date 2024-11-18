@@ -33,7 +33,7 @@
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in koonkamer",
+          "omschrijving": "Aanrecht in woonkamer",
           "soort": {
             "code": "KEU",
             "naam": "Keuken voorziening"
@@ -42,7 +42,7 @@
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 2700
+          "lengte": 3001
         },
         {
           "id": "Radiator_29424408",
