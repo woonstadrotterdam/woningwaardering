@@ -1,6 +1,10 @@
 {
   "id": "15004000185",
   "bouwjaar": 1998,
+  "woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  },
   "adres": {
     "huisnummer": "",
     "huisnummerToevoeging": "",
