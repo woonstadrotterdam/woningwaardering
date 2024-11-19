@@ -31,27 +31,28 @@ async def fetch_data(
 async def get_odata_url(datasetnaam: str, session: aiohttp.ClientSession) -> str:
     logger.debug(f"Ophalen dataset info voor {datasetnaam}")
 
-    datasets = await fetch_data(
-        f"{BASE_URL}/Datasets",
-        session,
-        {
-            "$filter": f"startswith(Title,'{datasetnaam}') and Distributions/any(a: a/Format eq 'odata')",
-            "$format": "json",
-        },
+    datasets = sorted(
+        await fetch_data(
+            f"{BASE_URL}/Datasets",
+            session,
+            {
+                "$filter": f"startswith(Title,'{datasetnaam}') and Distributions/any(a: a/Format eq 'odata')",
+                "$format": "json",
+            },
+        ),
+        key=lambda x: x["Title"],
+        reverse=True,
     )
 
     if len(datasets) == 0:
         raise ValueError(f"Geen dataset gevonden met de titel {datasetnaam}")
 
-    choices = sorted(
-        [
-            (dataset.get("Title"), dist.get("DownloadUrl"))
-            for dataset in datasets
-            for dist in dataset.get("Distributions", [])
-            if dist.get("Format") == "odata"
-        ],
-        reverse=True,
-    )
+    choices = [
+        (dataset.get("Title"), dist.get("DownloadUrl"))
+        for dataset in datasets
+        for dist in dataset.get("Distributions", [])
+        if dist.get("Format") == "odata"
+    ]
 
     odata_url = inquirer.list_input(
         message=f"Welke dataset wil je gebruiken voor {datasetnaam}", choices=choices
