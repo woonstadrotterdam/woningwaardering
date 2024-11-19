@@ -62,7 +62,7 @@ async def get_odata_url(datasetnaam: str, session: aiohttp.ClientSession) -> str
     if parse_result.scheme and parse_result.netloc:
         parsed_url = parse_result.geturl()
         logger.debug(f"Url voor {datasetnaam} is {parsed_url}")
-        return parsed_url
+        return str(parsed_url)
     else:
         raise ValueError(f"{odata_url} is geen geldige url")
 
