@@ -8,6 +8,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import is_keuken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -20,13 +21,11 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-    Ruimtedetailsoort,
     Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
 class Keuken(Stelselgroep):
@@ -57,9 +56,7 @@ class Keuken(Stelselgroep):
         )
         woningwaardering_groep.woningwaarderingen = []
 
-        keukens = [
-            ruimte for ruimte in eenheid.ruimten or [] if Keuken.is_keuken(ruimte)
-        ]
+        keukens = [ruimte for ruimte in eenheid.ruimten or [] if is_keuken(ruimte)]
 
         woningwaardering_groep.woningwaarderingen = [
             woningwaardering
@@ -91,63 +88,12 @@ class Keuken(Stelselgroep):
         return woningwaardering_groep
 
     @staticmethod
-    def is_keuken(ruimte: EenhedenRuimte) -> bool:
-        aanrecht_aantal = len(
-            [
-                aanrecht
-                for aanrecht in get_bouwkundige_elementen(
-                    ruimte, Bouwkundigelementdetailsoort.aanrecht
-                )
-                if aanrecht.lengte and aanrecht.lengte >= 1000
-            ]
-        )
-
-        if not ruimte.detail_soort:
-            warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort",
-                UserWarning,
-            )
-            return False
-
-        if not ruimte.detail_soort.code:
-            warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.code",
-                UserWarning,
-            )
-            return False
-
-        if ruimte.detail_soort.code in [
-            Ruimtedetailsoort.keuken.code,
-            Ruimtedetailsoort.woonkamer_en_of_keuken.code,
-        ]:
-            if aanrecht_aantal == 0:
-                warnings.warn(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >=1000mm) en mag daardoor niet gewaardeerd worden voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}.",
-                    UserWarning,
-                )
-                return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
-            return True  # ruimte is een keuken met een valide aanrecht
-        if ruimte.detail_soort.code not in [
-            Ruimtedetailsoort.woonkamer.code,
-            Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-            Ruimtedetailsoort.slaapkamer.code,
-        ]:
-            return False  # ruimte is geen ruimte dat een keuken zou kunnen zijn met een aanrecht erin
-
-        if (
-            aanrecht_aantal == 0
-        ):  # ruimte is geen keuken want heeft geen valide aanrecht
-            return False
-
-        return True  # ruimte is een impliciete keuken vanwege een valide aanrecht
-
-    @staticmethod
     def genereer_woningwaarderingen(
         ruimte: EenhedenRuimte,
         stelselgroep: Woningwaarderingstelselgroep,
         stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        if not Keuken.is_keuken(ruimte):
+        if not is_keuken(ruimte):
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor stelselgroep {stelselgroep.naam}"
             )
