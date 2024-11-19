@@ -34,7 +34,7 @@ def waardeer(
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if not _is_keuken(ruimte):
         logger.debug(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {Woningwaarderingstelselgroep.keuken.naam}"
         )
         return
 
@@ -83,7 +83,7 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
     ]:
         if aanrecht_aantal == 0:
             warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >=1000mm) en mag daardoor niet gewaardeerd worden voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}.",
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >=1000mm) en mag daardoor niet gewaardeerd worden voor {Woningwaarderingstelselgroep.keuken.naam}.",
                 UserWarning,
             )
             return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
@@ -158,6 +158,9 @@ def _waardeer_aanrecht(
 
             else:
                 aanrecht_punten = 4
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een aanrecht van {element.lengte}mm dat meetelt voor {Woningwaarderingstelselgroep.keuken.naam}"
+            )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"{ruimte.naam}: Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
@@ -214,6 +217,10 @@ def _waardeer_extra_voorzieningen(
     )
 
     for voorziening, count in voorziening_counts.items():
+        punten = rond_af(punten_per_installatie[voorziening] * count, decimalen=2)
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {voorziening.naam} dat meetelt voor {Woningwaarderingstelselgroep.keuken.naam}"
+        )
         yield (
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -221,9 +228,7 @@ def _waardeer_extra_voorzieningen(
                     if count > 1
                     else voorziening.naam,
                 ),
-                punten=rond_af(
-                    punten_per_installatie[voorziening] * count, decimalen=2
-                ),
+                punten=punten,
                 aantal=count,
             )
         )
@@ -231,6 +236,9 @@ def _waardeer_extra_voorzieningen(
     max_punten_voorzieningen = 7 if totaal_lengte_aanrechten >= 2000 else 4
     if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
         aftrek = max_punten_voorzieningen - punten_voor_extra_voorzieningen
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft te veel punten voor extra keuken voorzieningen, aftrek volgt"
+        )
         yield (
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
