@@ -1,3 +1,3 @@
-from .keuken import is_keuken, waardeer_aanrecht
+from .keuken import waardeer
 
-__all__ = ["is_keuken", "waardeer_aanrecht"]
+__all__ = ["waardeer"]

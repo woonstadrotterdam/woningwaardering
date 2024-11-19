@@ -5,11 +5,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import waardeer_aanrecht
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.keuken.keuken import (
-    Keuken as ZelfstandigeWoonruimtenKeuken,
+from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import (
+    waardeer,
 )
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingCriteriumSleutels,
@@ -57,11 +56,8 @@ class Keuken(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
 
         for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = list(waardeer_aanrecht(ruimte)) + list(
-                ZelfstandigeWoonruimtenKeuken.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep, self.stelsel
-                )
-            )
+            woningwaarderingen = list(waardeer(ruimte, self.stelsel))
+
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for woningwaardering in woningwaarderingen:
                 if woningwaardering.criterium is not None:

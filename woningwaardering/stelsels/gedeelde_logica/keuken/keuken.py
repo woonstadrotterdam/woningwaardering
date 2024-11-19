@@ -1,8 +1,13 @@
 import warnings
+from collections import Counter
 from typing import Iterator
 
-from woningwaardering.stelsels import stelsel
-from woningwaardering.stelsels.utils import gedeeld_met_onzelfstandige_woonruimten
+from loguru import logger
+
+from woningwaardering.stelsels.utils import (
+    gedeeld_met_onzelfstandige_woonruimten,
+    rond_af,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     WoningwaarderingResultatenWoningwaardering,
@@ -13,6 +18,7 @@ from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
+from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoort
 from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
     Woningwaarderingstelsel,
 )
@@ -20,6 +26,21 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.utils import get_bouwkundige_elementen
+
+
+def waardeer(
+    ruimte: EenhedenRuimte,
+    stelsel: Woningwaarderingstelsel,
+) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    if not is_keuken(ruimte):
+        logger.debug(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
+        )
+        return
+
+    yield from waardeer_aanrecht(ruimte, stelsel)
+
+    yield from waardeer_extra_voorzieningen(ruimte)
 
 
 def is_keuken(ruimte: EenhedenRuimte) -> bool:
@@ -73,6 +94,7 @@ def is_keuken(ruimte: EenhedenRuimte) -> bool:
 
 def waardeer_aanrecht(
     ruimte: EenhedenRuimte,
+    stelsel: Woningwaarderingstelsel,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     for element in ruimte.bouwkundige_elementen or []:
         if not element.detail_soort or not element.detail_soort.code:
@@ -125,3 +147,67 @@ def waardeer_aanrecht(
                 punten=aanrecht_punten,
                 aantal=element.lengte,
             )
+
+
+def waardeer_extra_voorzieningen(
+    ruimte: EenhedenRuimte,
+) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    totaal_lengte_aanrechten = sum(
+        element.lengte or 0
+        for element in ruimte.bouwkundige_elementen or []
+        if element.detail_soort
+        and element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code
+    )
+    punten_per_installatie = {
+        Voorzieningsoort.inbouw_afzuiginstallatie.value: 0.75,
+        Voorzieningsoort.inbouw_kookplaat_inductie.value: 1.75,
+        Voorzieningsoort.inbouw_kookplaat_keramisch.value: 1.0,
+        Voorzieningsoort.inbouw_kookplaat_gas.value: 0.5,
+        Voorzieningsoort.inbouw_koelkast.value: 1.0,
+        Voorzieningsoort.inbouw_vrieskast.value: 0.75,
+        Voorzieningsoort.inbouw_oven_elektrisch.value: 1.0,
+        Voorzieningsoort.inbouw_oven_gas.value: 0.5,
+        Voorzieningsoort.inbouw_magnetron.value: 1.0,
+        Voorzieningsoort.inbouw_vaatwasmachine.value: 1.5,
+        Voorzieningsoort.extra_keukenkastruimte_boven_het_minimum.value: 0.75,
+        Voorzieningsoort.eenhandsmengkraan.value: 0.25,
+        Voorzieningsoort.thermostatische_mengkraan.value: 0.5,
+        Voorzieningsoort.kokend_waterfunctie.value: 0.5,
+    }
+
+    voorziening_counts = Counter(
+        voorziening
+        for voorziening in ruimte.installaties or []
+        if voorziening in punten_per_installatie
+    )
+    punten_voor_extra_voorzieningen = sum(
+        punten_per_installatie[voorziening] * count
+        for voorziening, count in voorziening_counts.items()
+    )
+
+    for voorziening, count in voorziening_counts.items():
+        yield (
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=f"{voorziening.naam} (in zelfde ruimte)"
+                    if count > 1
+                    else voorziening.naam,
+                ),
+                punten=rond_af(
+                    punten_per_installatie[voorziening] * count, decimalen=2
+                ),
+                aantal=count,
+            )
+        )
+
+    max_punten_voorzieningen = 7 if totaal_lengte_aanrechten >= 2000 else 4
+    if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
+        aftrek = max_punten_voorzieningen - punten_voor_extra_voorzieningen
+        yield (
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=f"Max. {max_punten_voorzieningen} punten voor voorzieningen in een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
+                ),
+                punten=aftrek,
+            )
+        )
