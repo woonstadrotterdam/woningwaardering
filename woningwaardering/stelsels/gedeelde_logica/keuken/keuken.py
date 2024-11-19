@@ -32,18 +32,27 @@ def waardeer(
     ruimte: EenhedenRuimte,
     stelsel: Woningwaarderingstelsel,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-    if not is_keuken(ruimte):
+    if not _is_keuken(ruimte):
         logger.debug(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam}"
         )
         return
 
-    yield from waardeer_aanrecht(ruimte, stelsel)
+    yield from _waardeer_aanrecht(ruimte, stelsel)
 
-    yield from waardeer_extra_voorzieningen(ruimte)
+    yield from _waardeer_extra_voorzieningen(ruimte)
 
 
-def is_keuken(ruimte: EenhedenRuimte) -> bool:
+def _is_keuken(ruimte: EenhedenRuimte) -> bool:
+    """
+    Controleert of de ruimte een keuken is op basis van het aanrecht.
+
+    Args:
+        ruimte (EenhedenRuimte): De ruimte om te controleren.
+
+    Returns:
+        bool: True als de ruimte een keuken is, anders False.
+    """
     aanrecht_aantal = len(
         [
             aanrecht
@@ -92,10 +101,20 @@ def is_keuken(ruimte: EenhedenRuimte) -> bool:
     return True  # ruimte is een impliciete keuken vanwege een valide aanrecht
 
 
-def waardeer_aanrecht(
+def _waardeer_aanrecht(
     ruimte: EenhedenRuimte,
     stelsel: Woningwaarderingstelsel,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    """
+    Waardeert de aanrechten van een keuken.
+
+    Args:
+        ruimte (EenhedenRuimte): De keuken waarvan de aanrechten gewaardeerd worden.
+        stelsel (Woningwaarderingstelsel): Het stelsel waarvoor de aanrechten gewaardeerd worden.
+
+    Yields:
+        WoningwaarderingResultatenWoningwaardering: De gewaardeerde aanrechten.
+    """
     for element in ruimte.bouwkundige_elementen or []:
         if not element.detail_soort or not element.detail_soort.code:
             warnings.warn(
@@ -149,9 +168,18 @@ def waardeer_aanrecht(
             )
 
 
-def waardeer_extra_voorzieningen(
+def _waardeer_extra_voorzieningen(
     ruimte: EenhedenRuimte,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    """
+    Waardeert de extra voorzieningen van een keuken.
+
+    Args:
+        ruimte (EenhedenRuimte): De keuken waarvan de extra voorzieningen gewaardeerd worden.
+
+    Yields:
+        WoningwaarderingResultatenWoningwaardering: De gewaardeerde extra voorzieningen.
+    """
     totaal_lengte_aanrechten = sum(
         element.lengte or 0
         for element in ruimte.bouwkundige_elementen or []
