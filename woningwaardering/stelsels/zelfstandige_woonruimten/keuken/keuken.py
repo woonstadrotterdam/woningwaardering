@@ -272,7 +272,7 @@ class Keuken(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     bereken(
-        class_=Keuken(),
+        instance=Keuken(),
         eenheid_input="tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_zonder_lengte.json",
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR

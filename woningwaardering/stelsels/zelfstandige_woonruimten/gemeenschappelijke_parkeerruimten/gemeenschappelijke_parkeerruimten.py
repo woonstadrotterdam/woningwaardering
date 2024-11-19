@@ -86,7 +86,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     bereken(
-        class_=GemeenschappelijkeParkeerruimten(),
+        instance=GemeenschappelijkeParkeerruimten(),
         eenheid_input="warnings.json",
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
