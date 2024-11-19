@@ -3,7 +3,7 @@ import warnings
 
 from loguru import logger
 
-from woningwaardering._logging import custom_dev_filter, format
+from woningwaardering._logging import custom_dev_filter, dev_format
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -35,7 +35,7 @@ def bereken(
     logger.remove()
     logger.add(
         sys.stderr,
-        format=format,
+        format=dev_format,
         level=log_level,
         filter=custom_dev_filter,
     )

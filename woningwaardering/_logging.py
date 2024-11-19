@@ -34,6 +34,7 @@ def custom_dev_filter(record: dict[str, Any]) -> bool:
 
 
 format = "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <7}</level> | <cyan>{extra[formatted_name_with_line]}</cyan> | <level>{message}</level>"
+dev_format = "<level>{level: <7}</level> | <cyan>{extra[formatted_name_with_line]}</cyan> | <level>{message}</level>"
 logger.remove()
 logger.add(
     sys.stderr,
