@@ -267,7 +267,7 @@ class Sanitair(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     bereken(
-        class_=Sanitair(),
+        instance=Sanitair(),
         eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         strict=False,
     )

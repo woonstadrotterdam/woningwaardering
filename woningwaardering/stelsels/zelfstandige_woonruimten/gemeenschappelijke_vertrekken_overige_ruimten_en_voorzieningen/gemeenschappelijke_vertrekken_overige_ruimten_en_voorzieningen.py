@@ -224,7 +224,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     bereken(
-        class_=GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(),
+        instance=GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(),
         eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,
     )

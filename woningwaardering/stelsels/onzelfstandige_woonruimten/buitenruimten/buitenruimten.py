@@ -258,7 +258,7 @@ class Buitenruimten(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     bereken(
-        class_=Buitenruimten(),
+        instance=Buitenruimten(),
         eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         strict=False,
     )

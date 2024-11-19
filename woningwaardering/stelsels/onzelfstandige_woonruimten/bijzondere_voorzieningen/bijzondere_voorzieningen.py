@@ -81,7 +81,7 @@ class BijzondereVoorzieningen(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     bereken(
-        class_=BijzondereVoorzieningen(),
+        instance=BijzondereVoorzieningen(),
         eenheid_input="tests/data/onzelfstandige_woonruimten/stelselgroepen/bijzondere_voorzieningen/input/zorgwoning.json",
         strict=False,
     )

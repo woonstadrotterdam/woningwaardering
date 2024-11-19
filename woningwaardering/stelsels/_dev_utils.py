@@ -12,7 +12,7 @@ from woningwaardering.vera.bvg.generated import (
 
 
 def bereken(
-    class_: Stelselgroep | Stelsel,
+    instance: Stelselgroep | Stelsel,
     eenheid_input: EenhedenEenheid | str,
     strict: bool = False,
 ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
@@ -20,7 +20,7 @@ def bereken(
     Berekent de punten voor een stelselgroep of stelsel voor een eenheid.
 
     Args:
-        class_ (Stelselgroep | Stelsel): Het stelselgroep of stelsel object dat gebruikt wordt voor de berekening.
+        instance (Stelselgroep | Stelsel): Het stelselgroep of stelsel object dat gebruikt wordt voor de berekening.
         eenheid_input (EenhedenEenheid | str): Het eenheid object of het pad naar het eenheid object in een json bestand.
         strict (bool, optional): Of er warnings geraised moeten worden. Defaults to False.
 
@@ -37,12 +37,12 @@ def bereken(
     else:
         eenheid = eenheid_input
 
-    if isinstance(class_, Stelselgroep):
+    if isinstance(instance, Stelselgroep):
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-            groepen=[class_.bereken(eenheid)]
+            groepen=[instance.bereken(eenheid)]
         )
-    elif isinstance(class_, Stelsel):
-        resultaat = class_.bereken(eenheid)
+    elif isinstance(instance, Stelsel):
+        resultaat = instance.bereken(eenheid)
 
     print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
 

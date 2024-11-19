@@ -373,7 +373,7 @@ class Energieprestatie(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     bereken(
-        class_=Energieprestatie(),
+        instance=Energieprestatie(),
         eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,
     )

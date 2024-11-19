@@ -152,7 +152,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     bereken(
-        class_=OppervlakteVanOverigeRuimten(),
+        instance=OppervlakteVanOverigeRuimten(),
         eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         strict=False,
     )

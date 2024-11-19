@@ -133,7 +133,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     bereken(
-        class_=OppervlakteVanVertrekken(),
+        instance=OppervlakteVanVertrekken(),
         eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,
     )
