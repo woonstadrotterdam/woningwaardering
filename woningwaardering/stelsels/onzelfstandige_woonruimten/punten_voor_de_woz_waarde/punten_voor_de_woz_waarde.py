@@ -209,7 +209,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         gemiddelde_woz_waarde_per_m2 = self._gemiddelde_woz_voor_corop_gebied(
-            corop_gebied
+            corop_gebied, waardepeildatum.year
         )
 
         if gemiddelde_woz_waarde_per_m2 is None:
@@ -275,13 +275,13 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         return woningwaardering_groep
 
     def _gemiddelde_woz_voor_corop_gebied(
-        self, corop_gebied: dict[str, str]
+        self, corop_gebied: dict[str, str], jaar: int
     ) -> Decimal | None:
         df_woz = pd.read_csv(
             files("woningwaardering")
             .joinpath(LOOKUP_TABEL_FOLDER)
-            .joinpath("corop_gebied_gemiddelde_woz_waarde_per_m2_2022.csv"),
-            dtype={"COROP-gebiedcode": str, "Gemiddelde WOZ-waarde per m2": str},
+            .joinpath("corop_gebied_gemiddelde_woz_waarde_per_m2.csv"),
+            dtype={"COROP-gebiedcode": str, str(jaar): str},
         )
 
         woz_mask = df_woz["COROP-gebiedcode"] == corop_gebied["code"]
@@ -289,9 +289,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if not woz_mask.any():
             return None
 
-        gemiddelde_woz_waarde_per_m2 = df_woz.loc[
-            woz_mask, "Gemiddelde WOZ-waarde per m2"
-        ].values[0]
+        gemiddelde_woz_waarde_per_m2 = df_woz.loc[woz_mask, str(jaar)].values[0]
 
         return Decimal(gemiddelde_woz_waarde_per_m2)
 

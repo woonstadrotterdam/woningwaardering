@@ -1402,3 +1402,20 @@ task genereer-vera-referentiedata
 ```
 
 De referentiedata wordt gegenereerd in `woningwaardering/vera/referentiedata`
+
+### Woonplaatsen en COROP-gebieden
+
+Om te bepalen in welk COROP-gebied een woonplaats ligt, maken we gebruik van de CBS datasets "Woonplaatsen in Nederland" en "Gebieden in Nederland".
+Het CBS publiceert eens per jaar nieuwe datasets, daarom hebben we een script gemaakt dat een extract van deze data als resource in de package opslaat in `woningwaardering/data/corop/corop.generated.csv`.
+
+Wanneer je deze data bij wilt werken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) is geïnstalleerd.
+
+Vervolgens kan je met dit commando de woonplaatsen en COROP-gebieden in deze repository bijwerken:
+
+```
+task genereer-corop-data
+```
+
+### Gemiddelde WOZ-waarden per vierkante meter per COROP-gebied
+
+Bij het beleidsboek wordt een bijlage gepubliceerd met de gemiddelde WOZ-waarden per vierkante meter per COROP-gebied. Na publicatie van een nieuwe bijlage dient het bestand `woningwaardering/stelsels/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen/corop_gebied_gemiddelde_woz_waarde_per_m2.csv` bijgewerkt te worden, door een kolom toe te voegen met als kolomnaam het jaar van de waardepeildatum waarvoor de nieuwe gemiddelde waarden gelden.
