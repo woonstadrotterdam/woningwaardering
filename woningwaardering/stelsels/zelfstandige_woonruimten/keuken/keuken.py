@@ -7,7 +7,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import (
-    waardeer,
+    waardeer_ruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -53,7 +53,7 @@ class Keuken(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.extend(
             woningwaardering
             for ruimte in eenheid.ruimten or []
-            for woningwaardering in waardeer(ruimte, self.stelsel)
+            for woningwaardering in waardeer_ruimte(ruimte, self.stelsel)
         )
 
         if not woningwaardering_groep.woningwaarderingen:

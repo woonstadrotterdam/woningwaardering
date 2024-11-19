@@ -1,3 +1,3 @@
-from .oppervlakte_van_vertrekken import waardeer
+from .oppervlakte_van_vertrekken import waardeer_ruimte
 
-__all__ = ["waardeer"]
+__all__ = ["waardeer_ruimte"]

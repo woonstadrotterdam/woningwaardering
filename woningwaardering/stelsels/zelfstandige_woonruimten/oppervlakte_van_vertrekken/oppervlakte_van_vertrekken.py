@@ -5,7 +5,7 @@ from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_vertrekken import (
-    waardeer,
+    waardeer_ruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
@@ -61,7 +61,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaardering_groep.woningwaarderingen.extend(waardeer(ruimte))
+            woningwaardering_groep.woningwaarderingen.extend(waardeer_ruimte(ruimte))
 
         punten = rond_af_op_kwart(
             float(

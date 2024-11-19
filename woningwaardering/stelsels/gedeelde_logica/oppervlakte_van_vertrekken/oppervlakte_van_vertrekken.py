@@ -20,7 +20,7 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
 )
 
 
-def waardeer(
+def waardeer_ruimte(
     ruimte: EenhedenRuimte,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if not classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:

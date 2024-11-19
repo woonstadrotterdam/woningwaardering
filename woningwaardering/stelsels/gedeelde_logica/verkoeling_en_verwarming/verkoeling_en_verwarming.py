@@ -24,14 +24,14 @@ from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
-def waardeer(
+def waardeer_ruimte(
     ruimte: EenhedenRuimte,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     waarderingen = (
         waardering
         for waardering in [
-            _waardeer_verwarmde_overige_ruimten(ruimte),
-            _waardeer_verkoelde_en_of_verwarmde_vertrekken(ruimte),
+            _waardeer_verwarmde_overige_ruimte(ruimte),
+            _waardeer_verkoeld_en_of_verwarmd_vertrek(ruimte),
             _waardeer_open_keuken(ruimte),
         ]
         if waardering is not None
@@ -124,7 +124,7 @@ def maximeer(
         )
 
 
-def _waardeer_verwarmde_overige_ruimten(
+def _waardeer_verwarmde_overige_ruimte(
     ruimte: EenhedenRuimte,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """
@@ -159,7 +159,7 @@ def _waardeer_verwarmde_overige_ruimten(
     return None
 
 
-def _waardeer_verkoelde_en_of_verwarmde_vertrekken(
+def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     ruimte: EenhedenRuimte,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """

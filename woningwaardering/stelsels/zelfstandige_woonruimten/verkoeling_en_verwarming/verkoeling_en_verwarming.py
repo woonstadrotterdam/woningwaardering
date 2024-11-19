@@ -7,7 +7,7 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming import (
     maximeer,
-    waardeer,
+    waardeer_ruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -59,7 +59,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaarderingen = waardeer(ruimte)
+            woningwaarderingen = waardeer_ruimte(ruimte)
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 

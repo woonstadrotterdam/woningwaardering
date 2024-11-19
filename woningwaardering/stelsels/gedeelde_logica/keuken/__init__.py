@@ -1,3 +1,3 @@
-from .keuken import waardeer
+from .keuken import waardeer_ruimte
 
-__all__ = ["waardeer"]
+__all__ = ["waardeer_ruimte"]
