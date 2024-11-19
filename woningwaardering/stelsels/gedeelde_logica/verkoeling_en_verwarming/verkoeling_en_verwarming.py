@@ -24,144 +24,15 @@ from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
-def verwarmde_overige_ruimten(
-    ruimte: EenhedenRuimte,
-) -> WoningwaarderingResultatenWoningwaardering | None:
-    """
-    Verwarmde overige ruimten tellen als 1 punt voor verwarmde overige ruimten.
-
-    Args:
-        ruimte (EenhedenRuimte): Ruimte om te waarderen
-
-    Returns:
-        WoningwaarderingResultatenWoningwaardering | None: Waardering voor verwarmde overige ruimten
-    """
-    if not ruimte.verwarmd:
-        return None
-
-    ruimtesoort = classificeer_ruimte(ruimte)
-    if ruimtesoort and ruimtesoort.code in [
-        Ruimtesoort.overige_ruimten.code,
-        Ruimtesoort.verkeersruimte.code,
-    ]:
-        logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde overige- of verkeersruimte en krijgt 1 punt"
-        )
-        return WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=ruimte.naam,
-                bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                    id=CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id,
-                ),
-            ),
-            punten=1.0,
-        )
-    return None
-
-
-def verkoelde_en_of_verwarmde_vertrekken(
-    ruimte: EenhedenRuimte,
-) -> WoningwaarderingResultatenWoningwaardering | None:
-    """
-    Verkoelde en verwarmde vertrekken tellen voor 2 punten per verwarmd vertrek.
-    Een verkoeld en verwarmd vertrek telt voor 3 punten.
-
-    Args:
-        ruimte (EenhedenRuimte): Ruimte om te waarderen
-
-    Returns:
-        WoningwaarderingResultatenWoningwaardering | None: Waardering voor verkoelde en verwarmde vertrekken
-    """
-    if not ruimte.verwarmd:
-        return None
-
-    punten = 2
-    ruimtesoort = classificeer_ruimte(ruimte)
-    if ruimtesoort and ruimtesoort.code == Ruimtesoort.vertrek.code:
-        if ruimte.verkoeld:
-            punten += 1  # 1 punt extra per vertrek wanneer verwarmd en verkoeld
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verkoeld en verwarmd vertrek en krijgt {punten} punten"
-            )
-            return WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=ruimte.naam,
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id,
-                    ),
-                ),
-                punten=punten,
-            )
-
-        logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek en krijgt {punten} punten"
-        )
-        return WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=ruimte.naam,
-                bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                    id=CriteriumSleutels.verwarmde_vertrekken.value.id,
-                ),
-            ),
-            punten=punten,
-        )
-    return None
-
-
-def open_keuken(
-    ruimte: EenhedenRuimte,
-) -> WoningwaarderingResultatenWoningwaardering | None:
-    """
-    Open keuken tellen voor 2 punten per verwarmd vertrek.
-
-    Args:
-        ruimte (EenhedenRuimte): Ruimte om te waarderen
-
-    Returns:
-        WoningwaarderingResultatenWoningwaardering | None: Waardering voor open keuken
-    """
-    if (
-        ruimte.verwarmd
-        and ruimte.detail_soort
-        and (  # detailsoort is woonkamer/keuken of een woonkamer/slaapkamer met aanrecht
-            ruimte.detail_soort.code == Ruimtedetailsoort.woonkamer_en_of_keuken.code
-            or (
-                ruimte.detail_soort.code
-                in [
-                    Ruimtedetailsoort.woonkamer.code,
-                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-                    Ruimtedetailsoort.slaapkamer.code,
-                ]
-                and heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.aanrecht
-                )
-            )
-        )
-    ):
-        logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als open keuken en krijgt 2 punten"
-        )
-        return WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=ruimte.naam,
-                bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                    id=CriteriumSleutels.open_keuken.value.id,
-                ),
-            ),
-            punten=2.0,
-        )
-    return None
-
-
 def waardeer(
     ruimte: EenhedenRuimte,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     waarderingen = (
         waardering
         for waardering in [
-            verwarmde_overige_ruimten(ruimte),
-            verkoelde_en_of_verwarmde_vertrekken(ruimte),
-            open_keuken(ruimte),
+            _waardeer_verwarmde_overige_ruimten(ruimte),
+            _waardeer_verkoelde_en_of_verwarmde_vertrekken(ruimte),
+            _waardeer_open_keuken(ruimte),
         ]
         if waardering is not None
     )
@@ -251,3 +122,132 @@ def maximeer(
             ),
             punten=aftrek,
         )
+
+
+def _waardeer_verwarmde_overige_ruimten(
+    ruimte: EenhedenRuimte,
+) -> WoningwaarderingResultatenWoningwaardering | None:
+    """
+    Verwarmde overige ruimten tellen als 1 punt voor verwarmde overige ruimten.
+
+    Args:
+        ruimte (EenhedenRuimte): Ruimte om te waarderen
+
+    Returns:
+        WoningwaarderingResultatenWoningwaardering | None: Waardering voor verwarmde overige ruimten
+    """
+    if not ruimte.verwarmd:
+        return None
+
+    ruimtesoort = classificeer_ruimte(ruimte)
+    if ruimtesoort and ruimtesoort.code in [
+        Ruimtesoort.overige_ruimten.code,
+        Ruimtesoort.verkeersruimte.code,
+    ]:
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde overige- of verkeersruimte en krijgt 1 punt"
+        )
+        return WoningwaarderingResultatenWoningwaardering(
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam=ruimte.naam,
+                bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                    id=CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id,
+                ),
+            ),
+            punten=1.0,
+        )
+    return None
+
+
+def _waardeer_verkoelde_en_of_verwarmde_vertrekken(
+    ruimte: EenhedenRuimte,
+) -> WoningwaarderingResultatenWoningwaardering | None:
+    """
+    Verkoelde en verwarmde vertrekken tellen voor 2 punten per verwarmd vertrek.
+    Een verkoeld en verwarmd vertrek telt voor 3 punten.
+
+    Args:
+        ruimte (EenhedenRuimte): Ruimte om te waarderen
+
+    Returns:
+        WoningwaarderingResultatenWoningwaardering | None: Waardering voor verkoelde en verwarmde vertrekken
+    """
+    if not ruimte.verwarmd:
+        return None
+
+    punten = 2
+    ruimtesoort = classificeer_ruimte(ruimte)
+    if ruimtesoort and ruimtesoort.code == Ruimtesoort.vertrek.code:
+        if ruimte.verkoeld:
+            punten += 1  # 1 punt extra per vertrek wanneer verwarmd en verkoeld
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verkoeld en verwarmd vertrek en krijgt {punten} punten"
+            )
+            return WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=ruimte.naam,
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id,
+                    ),
+                ),
+                punten=punten,
+            )
+
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek en krijgt {punten} punten"
+        )
+        return WoningwaarderingResultatenWoningwaardering(
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam=ruimte.naam,
+                bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                    id=CriteriumSleutels.verwarmde_vertrekken.value.id,
+                ),
+            ),
+            punten=punten,
+        )
+    return None
+
+
+def _waardeer_open_keuken(
+    ruimte: EenhedenRuimte,
+) -> WoningwaarderingResultatenWoningwaardering | None:
+    """
+    Open keuken tellen voor 2 punten per verwarmd vertrek.
+
+    Args:
+        ruimte (EenhedenRuimte): Ruimte om te waarderen
+
+    Returns:
+        WoningwaarderingResultatenWoningwaardering | None: Waardering voor open keuken
+    """
+    if (
+        ruimte.verwarmd
+        and ruimte.detail_soort
+        and (  # detailsoort is woonkamer/keuken of een woonkamer/slaapkamer met aanrecht
+            ruimte.detail_soort.code == Ruimtedetailsoort.woonkamer_en_of_keuken.code
+            or (
+                ruimte.detail_soort.code
+                in [
+                    Ruimtedetailsoort.woonkamer.code,
+                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                    Ruimtedetailsoort.slaapkamer.code,
+                ]
+                and heeft_bouwkundig_element(
+                    ruimte, Bouwkundigelementdetailsoort.aanrecht
+                )
+            )
+        )
+    ):
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als open keuken en krijgt 2 punten"
+        )
+        return WoningwaarderingResultatenWoningwaardering(
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam=ruimte.naam,
+                bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                    id=CriteriumSleutels.open_keuken.value.id,
+                ),
+            ),
+            punten=2.0,
+        )
+    return None
