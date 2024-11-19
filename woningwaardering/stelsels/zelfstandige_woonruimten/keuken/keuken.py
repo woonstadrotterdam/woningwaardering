@@ -8,7 +8,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import is_keuken
+from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import (
+    is_keuken,
+    waardeer_aanrecht,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -25,7 +28,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 
 
 class Keuken(Stelselgroep):
@@ -57,14 +59,19 @@ class Keuken(Stelselgroep):
         woningwaardering_groep.woningwaarderingen = []
 
         keukens = [ruimte for ruimte in eenheid.ruimten or [] if is_keuken(ruimte)]
+        woningwaardering_groep.woningwaarderingen.extend(
+            woningwaardering
+            for ruimte in keukens
+            for woningwaardering in waardeer_aanrecht(ruimte)
+        )
 
-        woningwaardering_groep.woningwaarderingen = [
+        woningwaardering_groep.woningwaarderingen.extend(
             woningwaardering
             for ruimte in keukens
             for woningwaardering in Keuken.genereer_woningwaarderingen(
                 ruimte, self.stelselgroep
             )
-        ]
+        )
 
         if not keukens:
             warnings.warn(
@@ -98,69 +105,13 @@ class Keuken(Stelselgroep):
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen keuken en wordt daarom niet gewaardeerd voor stelselgroep {stelselgroep.naam}"
             )
             return 0
-        totaal_punten = 0.0
-        totaal_lengte_aanrechten = 0.0
-        # deze loop is voor de lengte van de aanrechten
-        for element in ruimte.bouwkundige_elementen or []:
-            if not element.detail_soort or not element.detail_soort.code:
-                warnings.warn(
-                    f"Bouwkundig element {element.id} heeft geen detailsoort.code en kan daardoor niet gewaardeerd worden.",
-                    UserWarning,
-                )
-                continue
-            if element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code:
-                if not element.lengte:
-                    warnings.warn(
-                        f"{Bouwkundigelementdetailsoort.aanrecht.naam} {element.id} heeft geen lengte en kan daardoor niet gewaardeerd worden.",
-                        UserWarning,
-                    )
-                    continue
-                if element.lengte < 1000:
-                    aanrecht_punten = 0
-                    totaal_lengte_aanrechten += element.lengte
-                elif (
-                    element.lengte >= 2000
-                    and (
-                        (  # zelfstandige keuken met aanrecht boven 2000mm is 7 punten
-                            not utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                        )
-                        or (  # onzelfstandige keuken met aanrecht tussen 2000mm en 3000mm is 7 punten
-                            utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                            and element.lengte <= 3000
-                        )
-                    )
-                ):
-                    aanrecht_punten = 7
-                    totaal_lengte_aanrechten += element.lengte
-                elif (
-                    element.lengte > 3000
-                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                    and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
-                ):
-                    aanrecht_punten = 13
-                    totaal_lengte_aanrechten += element.lengte
-                elif (
-                    element.lengte > 3000
-                    and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
-                ):
-                    aanrecht_punten = 10
-                    totaal_lengte_aanrechten += element.lengte
-
-                else:
-                    aanrecht_punten = 4
-                    totaal_lengte_aanrechten += element.lengte
-                totaal_punten += aanrecht_punten
-                yield (
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{ruimte.naam}: Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
-                            meeteenheid=Meeteenheid.millimeter.value,
-                        ),
-                        punten=aanrecht_punten,
-                        aantal=element.lengte,
-                    )
-                )
         # extra voorzieningen
+        totaal_lengte_aanrechten = sum(
+            element.lengte or 0
+            for element in ruimte.bouwkundige_elementen or []
+            if element.detail_soort
+            and element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code
+        )
         punten_per_installatie = {
             Voorzieningsoort.inbouw_afzuiginstallatie.value: 0.75,
             Voorzieningsoort.inbouw_kookplaat_inductie.value: 1.75,

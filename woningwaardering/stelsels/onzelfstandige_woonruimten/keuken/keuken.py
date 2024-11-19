@@ -5,6 +5,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import waardeer_aanrecht
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken.keuken import (
     Keuken as ZelfstandigeWoonruimtenKeuken,
@@ -56,7 +57,7 @@ class Keuken(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
 
         for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = list(
+            woningwaarderingen = list(waardeer_aanrecht(ruimte)) + list(
                 ZelfstandigeWoonruimtenKeuken.genereer_woningwaarderingen(
                     ruimte, self.stelselgroep, self.stelsel
                 )

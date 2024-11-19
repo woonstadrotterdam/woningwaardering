@@ -6,6 +6,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import waardeer_aanrecht
 from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten import (
     waardeer as waardeer_oppervlakte_van_overige_ruimten,
 )
@@ -167,7 +168,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 )
 
                 # waarderingen voor de keuken van gedeelde ruimten
-                keuken_waarderingen = list(
+                keuken_waarderingen = list(waardeer_aanrecht(ruimte)) + list(
                     Keuken.genereer_woningwaarderingen(ruimte, self.stelselgroep)
                 )
                 woningwaardering_groep.woningwaarderingen.extend(
