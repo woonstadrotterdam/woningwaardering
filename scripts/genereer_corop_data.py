@@ -109,7 +109,7 @@ async def get_gemeente_corop_data(session: aiohttp.ClientSession) -> pd.DataFram
         f"{odata_url}/Observations",
         session,
         {
-            "$filter": "Measure in ('CR0001', 'CR0002', 'GM000C_1', 'GM000B')",
+            "$filter": "Measure in ('CR0001', 'CR0002', 'GM000C_1')",
             "$select": "RegioS,Measure,StringValue",
             "$format": "json",
         },
@@ -121,8 +121,9 @@ async def get_gemeente_corop_data(session: aiohttp.ClientSession) -> pd.DataFram
     df_pivot = df_observations.pivot(
         index="RegioS", columns="Measure", values="StringValue"
     )
+    df_pivot = df_pivot.reset_index(names=["Gemeentecode"])
 
-    df_pivot.columns = ["COROP-gebiedcode", "COROP-gebied", "Gemeentecode", "Gemeente"]
+    df_pivot.columns = ["Gemeentecode", "COROP-gebiedcode", "COROP-gebied", "Gemeente"]
 
     return df_pivot[["Gemeentecode", "Gemeente", "COROP-gebiedcode", "COROP-gebied"]]
 
