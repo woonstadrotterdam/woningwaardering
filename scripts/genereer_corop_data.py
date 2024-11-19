@@ -4,6 +4,7 @@ from typing import Any, Dict, List
 from urllib.parse import urlparse
 
 import aiohttp
+import inquirer
 import pandas as pd
 from loguru import logger
 
@@ -12,8 +13,8 @@ OUTPUT_FILE = "woningwaardering/data/corop/corop.generated.csv"
 
 jaar = date.today().year
 
-DATASETNAAM_WOONPLAATSEN = f"Woonplaatsen in Nederland {jaar}"
-DATASETNAAM_GEBIEDEN = f"Gebieden in Nederland {jaar}"
+DATASETNAAM_WOONPLAATSEN = "Woonplaatsen in Nederland"
+DATASETNAAM_GEBIEDEN = "Gebieden in Nederland"
 
 
 async def fetch_data(
@@ -28,11 +29,13 @@ async def fetch_data(
 
 
 async def get_odata_url(datasetnaam: str, session: aiohttp.ClientSession) -> str:
+    logger.debug(f"Ophalen dataset info voor {datasetnaam}")
+
     datasets = await fetch_data(
         f"{BASE_URL}/Datasets",
         session,
         {
-            "$filter": f"Title eq '{datasetnaam}'",
+            "$filter": f"startswith(Title,'{datasetnaam}') and Distributions/any(a: a/Format eq 'odata')",
             "$format": "json",
         },
     )
@@ -40,32 +43,26 @@ async def get_odata_url(datasetnaam: str, session: aiohttp.ClientSession) -> str
     if len(datasets) == 0:
         raise ValueError(f"Geen dataset gevonden met de titel {datasetnaam}")
 
-    distributions = datasets[0].get("Distributions")
-
-    if (
-        distributions is None
-        or not isinstance(distributions, list)
-        or len(distributions) == 0
-    ):
-        raise ValueError(f"Geen distributies gevonden voor {datasetnaam}")
-
-    odata_distribution = next(
-        (
-            distribution
-            for distribution in distributions
-            if distribution is not None and distribution["Format"] == "odata"
-        ),
-        None,
+    choices = sorted(
+        [
+            (dataset.get("Title"), dist.get("DownloadUrl"))
+            for dataset in datasets
+            for dist in dataset.get("Distributions", [])
+            if dist.get("Format") == "odata"
+        ],
+        reverse=True,
     )
 
-    if odata_distribution is None:
-        raise ValueError(f"Geen odata distributie gevonden voor {datasetnaam}")
-
-    odata_url = str(odata_distribution.get("DownloadUrl"))
+    odata_url = inquirer.list_input(
+        message=f"Welke dataset wil je gebruiken voor {datasetnaam}", choices=choices
+    )
 
     parse_result = urlparse(odata_url)
+
     if parse_result.scheme and parse_result.netloc:
-        return odata_url
+        parsed_url = parse_result.geturl()
+        logger.debug(f"Url voor {datasetnaam} is {parsed_url}")
+        return parsed_url
     else:
         raise ValueError(f"{odata_url} is geen geldige url")
 
@@ -124,6 +121,7 @@ async def get_gemeente_corop_data(session: aiohttp.ClientSession) -> pd.DataFram
     df_pivot = df_observations.pivot(
         index="RegioS", columns="Measure", values="StringValue"
     )
+
     df_pivot.columns = ["COROP-gebiedcode", "COROP-gebied", "Gemeentecode", "Gemeente"]
 
     return df_pivot[["Gemeentecode", "Gemeente", "COROP-gebiedcode", "COROP-gebied"]]
