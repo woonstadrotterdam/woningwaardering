@@ -16,13 +16,19 @@
         {
           "aantal": 178000.0,
           "criterium": {
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2022"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2022",
+            "bovenliggendeCriterium": {
+              "id": "punten_waardering"
+            }
           }
         },
         {
           "aantal": 58.0,
           "criterium": {
             "naam": "Gebruiksoppervlakte",
+            "bovenliggendeCriterium": {
+              "id": "punten_waardering"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -32,18 +38,25 @@
         {
           "aantal": 3068.96552,
           "criterium": {
-            "naam": "WOZ-waarde per m²"
+            "naam": "WOZ-waarde per m²",
+            "bovenliggendeCriterium": {
+              "id": "punten_waardering"
+            }
           }
         },
         {
           "aantal": 3255.0,
           "criterium": {
-            "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond"
+            "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond",
+            "bovenliggendeCriterium": {
+              "id": "punten_waardering"
+            }
           }
         },
         {
           "aantal": -5.715345,
           "criterium": {
+            "id": "punten_waardering",
             "naam": "Percentage verschil"
           },
           "punten": 12.0
