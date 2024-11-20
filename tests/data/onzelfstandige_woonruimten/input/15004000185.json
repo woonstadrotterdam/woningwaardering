@@ -2,11 +2,12 @@
   "id": "15004000185",
   "bouwjaar": 1998,
   "adres": {
-    "huisnummer": "21",
+    "huisnummer": "",
     "huisnummerToevoeging": "",
-    "postcode": "3015EA",
+    "postcode": "",
     "straatnaam": "",
     "woonplaats": {
+      "code": "3086",
       "naam": "ROTTERDAM"
     }
   },

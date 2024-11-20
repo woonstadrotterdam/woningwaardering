@@ -1,10 +1,9 @@
 {
   "id": "gebruiksoppervlakten",
   "adres": {
-    "postcode": "3015EA",
-    "huisnummer": "21",
     "woonplaats": {
-      "naam": "Rotterdam"
+      "code": "3086",
+      "naam": "ROTTERDAM"
     }
   },
   "oppervlakten": [

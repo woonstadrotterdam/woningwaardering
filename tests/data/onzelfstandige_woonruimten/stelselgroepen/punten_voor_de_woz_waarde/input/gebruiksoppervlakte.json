@@ -1,8 +1,10 @@
 {
   "id": "gebruiksoppervlakte",
   "adres": {
-    "postcode": "3015EA",
-    "huisnummer": "21"
+    "woonplaats": {
+      "code": "3086",
+      "naam": "ROTTERDAM"
+    }
   },
   "gebruiksoppervlakte": 58.0,
   "woz_eenheden": [

@@ -667,7 +667,7 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> dict[str, str] | None:
     ):
         return {"code": adres.woonplaats.code, "naam": adres.woonplaats.naam}
 
-    if adres.postcode is None or adres.huisnummer is None:
+    if not adres.postcode or not adres.huisnummer:
         return None
 
     logger.info(
