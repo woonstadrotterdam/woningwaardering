@@ -73,22 +73,52 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return woningwaardering_groep
 
-        waardepeildatum = date(2022, 1, 1)
-        woz_waarde = woz_waarde_voor_waardering = next(
-            (
-                Decimal(str(woz_eenheid.vastgestelde_waarde))
-                for woz_eenheid in eenheid.woz_eenheden or []
-                if woz_eenheid.waardepeildatum == waardepeildatum
-                and woz_eenheid.vastgestelde_waarde is not None
-            ),
-            None,
-        )
+        # De waardepeildatum van de WOZ-waarde ligt op 1 januari van twee kalenderjaren voorafgaand.
+        relevante_waardepeildatums = [
+            date(self.peildatum.year - 2, 1, 1)  # T-2
+            # date(self.peildatum.year - 1, 1, 1),  # T-1 Tabellen voor peildatum 1-1-2023 zijn nog niet gepubliceerd
+        ]
 
-        if woz_waarde is None:
+        woz_eenheden = [
+            woz_eenheid
+            for woz_eenheid in eenheid.woz_eenheden or []
+            if woz_eenheid.waardepeildatum is not None
+            and woz_eenheid.waardepeildatum in relevante_waardepeildatums
+            and woz_eenheid.vastgestelde_waarde is not None
+        ]
+
+        if not woz_eenheden:
+            datums = " of ".join(
+                [
+                    relevante_waardepeildatum.strftime("%x")
+                    for relevante_waardepeildatum in relevante_waardepeildatums
+                ]
+            )
             warnings.warn(
-                f"Eenheid {eenheid.id}: geen WOZ-waarde gevonden met waardepeildatum {waardepeildatum}",
+                f"Eenheid {eenheid.id}: geen WOZ-waarde gevonden met waardepeildatum {datums}",
                 UserWarning,
             )
+            woz_waarde = None
+            woz_waardepeildatum = max(relevante_waardepeildatums, default=None)
+        else:
+            meest_recente_woz_eenheid = max(
+                woz_eenheden, key=lambda x: x.waardepeildatum or date.min
+            )
+
+            woz_waarde = (
+                Decimal(str(meest_recente_woz_eenheid.vastgestelde_waarde))
+                if meest_recente_woz_eenheid.vastgestelde_waarde is not None
+                else None
+            )
+            woz_waardepeildatum = meest_recente_woz_eenheid.waardepeildatum
+
+        if woz_waardepeildatum is None:
+            warnings.warn(
+                f"Eenheid {eenheid.id} kon geen waardepeildatum bepalen. Kan Punten voor de WOZ-waarde niet berekenen."
+            )
+            return woningwaardering_groep
+
+        woz_waarde_voor_waardering = woz_waarde
 
         woningwaarderingen = list[WoningwaarderingResultatenWoningwaardering]()
 
@@ -99,7 +129,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"WOZ-waarde op waardepeildatum {waardepeildatum.strftime('%x')}",
+                    naam=f"WOZ-waarde op waardepeildatum {woz_waardepeildatum.strftime('%x')}",
                     bovenliggendeCriterium=puntenwaardering_sleutel,
                 ),
                 aantal=woz_waarde,
@@ -128,7 +158,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             or woz_waarde_voor_waardering < minimum_woz_waarde
         ):
             logger.info(
-                f"Eenheid {eenheid.id}: minimum WOZ waarde  {minimum_woz_waarde} voor waardepeildatum {waardepeildatum} wordt gebruikt"
+                f"Eenheid {eenheid.id}: minimum WOZ waarde  {minimum_woz_waarde} voor waardepeildatum {woz_waardepeildatum.strftime('%x')} wordt gebruikt"
             )
             woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
@@ -209,7 +239,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         gemiddelde_woz_waarde_per_m2 = self._gemiddelde_woz_voor_corop_gebied(
-            corop_gebied, waardepeildatum.year
+            corop_gebied, woz_waardepeildatum.year
         )
 
         if gemiddelde_woz_waarde_per_m2 is None:
