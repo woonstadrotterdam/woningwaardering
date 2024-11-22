@@ -10,7 +10,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_vertrekken,
 )
 from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import (
-    waardeer_ruimte as waardeer_keuken,
+    waardeer_keuken as waardeer_keuken,
 )
 from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten import (
     waardeer_oppervlakte_van_overige_ruimten as waardeer_oppervlakte_van_overige_ruimten,

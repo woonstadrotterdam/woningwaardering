@@ -28,7 +28,7 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
-def waardeer_ruimte(
+def waardeer_keuken(
     ruimte: EenhedenRuimte,
     stelsel: Woningwaarderingstelsel,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
