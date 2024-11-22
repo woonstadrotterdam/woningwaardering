@@ -1,0 +1,28 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "STO",
+          "naam": "Staand Toilet"
+        },
+        {
+          "code": "HTO",
+          "naam": "Hangend Toilet"
+        }
+      ]
+    }
+  ]
+}

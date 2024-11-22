@@ -8,6 +8,7 @@ import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -486,30 +487,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     Woningwaarderingstelselgroep.sanitair.code,  # 6
                     Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,  # 7
                     Woningwaarderingstelselgroep.buitenruimten.code,  # 8
-                    # In de wet staat:
-                    #
-                    # Indien een woning is gebouwd in het kalenderjaar 2015, 2016, 2017,
-                    # 2018 of 2019 en ten aanzien daarvan het totaal aantal punten na
-                    # saldering van de punten van de onderdelen 1 tot en met 8 en 12
-                    # minimaal 110 punten betreft, leidt de berekeningsmethodiek tot
-                    # een aantal punten voor de WOZ-waarde dat minimaal 40 punten
-                    # bedraagt.
-                    #
-                    # Echter in het beleidsboek staat:
-                    #
-                    # Indien de bouwkundige oplevering of hoogniveau renovatie van de
-                    # woning heeft plaatsgevonden in de jaren 2015-2019 en die woning
-                    # voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingsstelsel
-                    # minimaal 110 punten heeft behaald dan worden, voor het aantal
-                    # punten voor de WOZ-waarde, minimaal 40 punten toegekend.
-                    #
-                    # Omdat verder in deze rubriek ook niet gerekend wordt met
-                    # gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-                    # en parkeerruimten nemen wij aan dat dit een fout in het
-                    # beleidsboek betreft.
-                    #
-                    # Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.code,  # 9
-                    # Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.code,  # 10
+                    Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.code,  # 9
+                    Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.code,  # 10
                     Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # 12
                 ]
             )
@@ -631,23 +610,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-    warnings.simplefilter("default", UserWarning)
-
-    punten_voor_de_woz_waarde = PuntenVoorDeWozWaarde()
-    with open(
-        "tests/data/zelfstandige_woonruimten/input/20002000126.json", "r+"
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    woningwaardering_resultaat = punten_voor_de_woz_waarde.bereken(eenheid)
-
-    print(
-        woningwaardering_resultaat.model_dump_json(
-            by_alias=True, indent=2, exclude_none=True
-        )
+    bereken(
+        instance=PuntenVoorDeWozWaarde(),
+        eenheid_input="tests/data/generiek/input/37101000032.json",
+        strict=False,
     )
-
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
-
-    print(tabel)

@@ -12,7 +12,7 @@
 
 ![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jan_2024&width=120)  
 ![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jul_2024&width=120)  
-![](https://progress-bar.xyz/15/?title=onzelfstandige_woonruimten_jul_2024&width=108)
+![](https://progress-bar.xyz/80/?title=onzelfstandige_woonruimten_jul_2024&width=108)
 
 Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk wordt om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) [[referentiedata v4.1.241004](https://github.com/Aedes-datastandaarden/vera-referentiedata), [openapi v4.1.5](https://github.com/Aedes-datastandaarden/vera-openapi)] van de corporatiesector voor de in- en output van de package. Dit project heeft drie hoofddoelen:
 
@@ -154,14 +154,15 @@ Installeer de package met `pip install woningwaardering`. Vervolgens kun je de p
 import warnings
 from datetime import date
 
-from woningwaardering.stelsels import ZelfstandigeWoonruimten, utils
+from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
+from woningwaardering.stelsels.utils import naar_tabel
 
 warnings.simplefilter("default", UserWarning)
 
-stelsel = ZelfstandigeWoonruimten(
+wws = Woningwaardering(
     peildatum=date(2024, 7, 1)  # bij niet meegeven wordt de huidige dag gebruikt.
 )
 with open(
@@ -169,13 +170,15 @@ with open(
     "r+",
 ) as file:
     eenheid = EenhedenEenheid.model_validate_json(file.read())
-    woningwaardering_resultaat = stelsel.bereken(eenheid)
+
+    # Woningwaardering class kiest op basis van de input het zelfstandig of onzelfstandige stelsel.
+    woningwaardering_resultaat = wws.bereken(eenheid)
     print(
         woningwaardering_resultaat.model_dump_json(
             by_alias=True, indent=2, exclude_none=True
         )
     )
-    tabel = utils.naar_tabel(woningwaardering_resultaat)
+    tabel = naar_tabel(woningwaardering_resultaat)
 
     print(tabel)
 ```
@@ -720,7 +723,8 @@ with open(
 ```python
 from datetime import date
 
-from woningwaardering.stelsels import ZelfstandigeWoonruimten, utils
+from woningwaardering import Woningwaardering
+from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
     EenhedenAdresBasis,
@@ -742,13 +746,15 @@ from woningwaardering.vera.referentiedata import (
     Ruimtedetailsoort,
     Ruimtesoort,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelsel import Woningwaarderingstelsel
 
-stelsel = ZelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
+wws = Woningwaardering(peildatum=date(2024, 7, 1))
 
 eenheid = EenhedenEenheid(
     id="<id>",
     bouwjaar=1924,
     monumenten=[],
+    woningwaarderingstelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
     adres=EenhedenAdresBasis(
         straatnaam="<straatnaam>",
         huisnummer="<huisnummer>",
@@ -814,13 +820,13 @@ eenheid = EenhedenEenheid(
     ],
 )
 
-woningwaardering_resultaat = stelsel.bereken(eenheid)
+woningwaardering_resultaat = wws.bereken(eenheid)
 print(
     woningwaardering_resultaat.model_dump_json(
         by_alias=True, indent=2, exclude_none=True
     )
 )
-tabel = utils.naar_tabel(woningwaardering_resultaat)
+tabel = naar_tabel(woningwaardering_resultaat)
 
 print(tabel)
 ```

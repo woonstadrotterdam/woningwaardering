@@ -5,6 +5,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanOverigeRuimten as ZelfstandigeWoonruimtenOppervlakteVanOverigeruimten,
@@ -68,8 +69,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 if woningwaardering.criterium is not None:
                     if (
                         woningwaardering.aantal
+                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
                         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                        is not None
                     ):
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
@@ -88,8 +90,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         )
                     elif (
                         woningwaardering.punten
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
                     ):
                         woningwaardering.punten = float(
                             utils.rond_af(
@@ -150,21 +151,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-
-    stelselgroep = OppervlakteVanOverigeRuimten()
-    with open(
-        "tests/data/generiek/input/37101000032.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-        groepen=[stelselgroep.bereken(eenheid)]
+    bereken(
+        instance=OppervlakteVanOverigeRuimten(),
+        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
+        strict=False,
     )
-
-    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-
-    tabel = utils.naar_tabel(resultaat)
-
-    print(tabel)

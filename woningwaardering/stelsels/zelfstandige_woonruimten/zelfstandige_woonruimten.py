@@ -1,9 +1,6 @@
-import warnings
 from datetime import date
 
-from loguru import logger
-
-from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     BijzondereVoorzieningen,
@@ -18,9 +15,6 @@ from woningwaardering.stelsels.zelfstandige_woonruimten import (
     PuntenVoorDeWozWaarde,
     Sanitair,
     VerkoelingEnVerwarming,
-)
-from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
 )
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
@@ -52,21 +46,8 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-    warnings.simplefilter("default", UserWarning)
-
-    zelfstandige_woonruimten = ZelfstandigeWoonruimten(peildatum=date.today())
-    with open(
-        "tests/data/zelfstandige_woonruimten/input/12006000004.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-        woningwaardering_resultaat = zelfstandige_woonruimten.bereken(eenheid)
-        print(
-            woningwaardering_resultaat.model_dump_json(
-                by_alias=True, indent=2, exclude_none=True
-            )
-        )
-        tabel = utils.naar_tabel(woningwaardering_resultaat)
-
-        print(tabel)
+    bereken(
+        instance=ZelfstandigeWoonruimten(),
+        eenheid_input="tests/data/generiek/input/37101000032.json",
+        strict=False,
+    )

@@ -1,0 +1,46 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 6.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toiletruimte - Hangend toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": 3.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Toiletruimte - Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair_prive"
+            }
+          },
+          "punten": 3.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair_prive",
+            "naam": "Totaal (privé)"
+          },
+          "punten": 6.75
+        }
+      ]
+    }
+  ]
+}

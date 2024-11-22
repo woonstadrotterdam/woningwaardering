@@ -5,7 +5,11 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.utils import (
+    classificeer_ruimte,
+)
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import Keuken
 from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
     OppervlakteVanOverigeRuimten,
@@ -14,9 +18,6 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekk
     OppervlakteVanVertrekken,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair import Sanitair
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
-    classificeer_ruimte,
-)
 from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming import (
     VerkoelingEnVerwarming,
 )
@@ -93,8 +94,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             gedeelde_ruimten = [
                 ruimte
                 for ruimte in eenheid.ruimten or []
-                if ruimte.gedeeld_met_aantal_eenheden is not None
-                and ruimte.gedeeld_met_aantal_eenheden > 1
+                if utils.gedeeld_met_eenheden(ruimte)
             ]
 
             oppervlakte_berekeningen = {
@@ -223,30 +223,8 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-
-    gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen = (
-        GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(
-            peildatum=date.fromisoformat("2024-07-01")
-        )
+    bereken(
+        instance=GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(),
+        eenheid_input="tests/data/generiek/input/37101000032.json",
+        strict=False,
     )
-
-    with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen/input/verwarmde_vertrekken.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-        groepen=[
-            gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.bereken(
-                eenheid
-            )
-        ]
-    )
-
-    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-
-    tabel = utils.naar_tabel(resultaat)
-
-    print(tabel)

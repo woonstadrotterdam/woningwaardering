@@ -1,0 +1,35 @@
+{
+  "id": "2 laadpalen",
+  "ruimten": [
+    {
+      "id": "Garage",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "GAR",
+        "naam": "Garage"
+      },
+      "naam": "Garage",
+      "inhoud": 38.1247,
+      "oppervlakte": 19.1488,
+      "verwarmd": true,
+      "verkoeld": false,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        },
+        {
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    }
+  ]
+}

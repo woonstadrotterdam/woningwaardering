@@ -1,88 +1,5 @@
 # Hoofdstuk 2 - Algemene toelichting
 
-> Momenteel is nog niks geïmplementeerd in de package dat relateert aan Hoofdstuk 2 - Algemene toelichting.
-
-## 2.1 Functie van het woningwaarderingsstelsel
-
-Het woningwaarderingsstelsel is een systeem waarbij aan de woonruimte kwaliteitspunten worden toegekend. Bij dit puntenaantal hoort een maximale redelijke huurprijs.1 Hoe hoger de kwaliteit van de woonruimte is, hoe meer punten de woonruimte krijgt en des te hoger de huurprijs[^1] mag zijn. Het puntensysteem van het woningwaarderingsstelsel staat uitgewerkt in het Besluit huurprijzen woonruimte (verder ook: Bhw). Zie voor dit besluit bijlage 1.
-
-Voorbeeld
-
-```text
-Voorbeeld: Een kamer heeft 95 punten. Op verzoek van de huurder bepaalt de Huurcommissie op basis van dit puntenaantal de maximale huurprijs van deze woning op € 750,46. Dit bedrag is gebaseerd op de maximale huurprijs voor onzelfstandige woonruimte per 1 juli 2024.
-```
-
-Er bestaan drie verschillende woningwaarderingsstelsels voor de verschillende soorten woonruimten die zijn uitgewerkt en toegelicht in de Bijlage I van het Bhw:
-
-1. zelfstandige woonruimten (Bijlage 1A van het Bhw);
-2. **onzelfstandige** woonruimten (Bijlage 1B van het Bhw);
-3. woonwagen en/of standplaatsen (Bijlage 1C van het Bhw).
-
-Dit beleidsboek gaat over het woningwaarderingsstelsel voor **onzelfstandige** woonruimten.
-
-[^1]: Zie bijlage 5 bij dit beleidsboek voor het overzicht van de maximale huurprijsgrenzen voor zelfstandige woonruimte. De maximale huurprijzen zijn te vinden in de jaarlijkse circulaire ‘huurprijsbeleid’ en de Uitvoeringsregeling huurprijzen woonruimte.
-
-## 2.2 Woningwaarderingsstelsel onzelfstandige woonruimte
-
-Huurders van onzelfstandige woonruimten kunnen de maximale huurprijs afdwingen via de Huurcommissie. Een onzelfstandige woonruimte wordt namelijk altijd als gereguleerde woonruimte aangemerkt, ongeacht de hoogte van de aanvangshuurprijs van de woonruimte in het huurcontract.
-
-### 2.2.1 Uitleg begrip onzelfstandige woonruimte
-
-Een onzelfstandige woning is een woonruimte die niet voldoet aan het begrip zelfstandige woonruimte, zoals hieronder wordt uitgelegd.
-
-Bij de uitleg van het begrip zelfstandige woonruimte wordt artikel 7:234 BW gevolgd. Dit betekent dat de woning een eigen afsluitbare toegangsdeur moet hebben en dat de huurder de ruimte kan bewonen zonder afhankelijk te zijn van wezenlijke voorzieningen buiten de woning. De volgende wezenlijke voorzieningen moeten in ieder geval aanwezig zijn:
-
-- één vertrek;
-- kookgelegenheid; dat wil zeggen een aanrecht, aan- en afvoer van water en tenminste één aansluitpunt voor koken op gas of elektriciteit
-- wasgelegenheid, waaronder een douchecabine in een vertrek of en suite;
-- een eigen toilet.
-
-In aanvulling op bovenstaande voorwaarden geldt dat sprake is van een zelfstandige woning als deze is bewoond door maximaal twee personen of door drie of meer personen die een duurzaam gemeenschappelijk huishouden voeren. Er is doorgaans sprake van een duurzaam gemeenschappelijk huishouden indien sprake is van een koppel met een relatie of een gezin. In dit geval is zonder meer geen sprake van kamerverhuur en wordt dus een zelfstandige woning verhuurd. Daarnaast kan het voorkomen dat – ook al vormen huurders geen gezin of hebben zij geen affectieve relatie – toch sprake is van een duurzaam gemeenschappelijk huishouden. Hier zal echter slechts bij uitzondering sprake van zijn, zoals bij een duurzame (bijvoorbeeld religieuze) woongroep. Voor de uitwerking van het begrip 'duurzaam gemeenschappelijk huishouden’ wordt aangesloten bij de jurisprudentie in het bestuursrecht.
-
-Volgens vaste rechtspraak van de Afdeling Bestuursrechtspraak van de Raad van State is sprake van een duurzaam gemeenschappelijk huishouden wanneer men de bedoeling heeft om bestendig en voor onbepaalde tijd een huishouden te vormen. Relevant zijn daarnaast de eisen die in het privaatrecht worden gesteld aan een duurzame huishouding. Vanuit het privaatrecht wordt de duurzaamheid van die huishouding bepaald door objectieve factoren als de duur van de samenwoning en door subjectieve factoren als de bedoeling van betrokkenen (HR 10 maart 2006, NJ 2006/419 (Hooft/Rochdale)) en voorts door alle omstandigheden van het geval in onderling verband (HR 17 januari 2014, ECLI:NL:HR:2014:93, NJ 2014/249). In de uiteenlopende, want casuïstische rechtspraak wordt van belang geacht welke bedoelingen partijen voor de toekomst hadden, in welke mate die zijn geëffectueerd en welke onderlinge uitwisseling (gezamenlijke aankopen, verrekening van uitgaven, onderlinge zorg, sociaal verkeer) er plaatsvond (HR 22 januari 1993, NJ 1993/549 (Van Schellen/Dijkstra)). Als het huishouden geen perspectieven op langere termijn had, zal het ook niet duurzaam zijn.
-
-Als een woonruimte aan deze voorwaarden **niet** voldoet, dan is sprake van een onzelfstandige woonruimte en is het woningwaarderingsstelsel onzelfstandige woonruimte van toepassing. Voorbeelden van onzelfstandige woningen zijn studentenkamers. Ook studenten die met andere studenten een woning huren, die een eigen toegangsdeur heeft en voorzien is van wezenlijke voorzieningen, worden in principe niet beschouwd als een duurzaam gemeenschappelijk huishouden. De verhuurde kamers worden dan dus beschouwd als onzelfstandige woonruimtes en de waardering van de (onzelfstandige) woonruimte in kwestie gebeurt aan de hand van dit beleidsboek.
-
-_Uitzondering voor hospitaverhuur_
-
-Voor hospitaverhuur geldt een uitzondering. Indien een hoofdhuurder als hospita een deel van de woonruimte wil verhuren aan een onderhuurder, geldt onder voorwaarden een uitzondering voor de hoofdregel dat sprake is van een onzelfstandige woonruimte als een woonruimte bewoond wordt door meer dan twee personen die geen duurzaam gemeenschappelijk huishouden voeren. De hoofdhuurder kan daardoor, onder voorwaarden een huurprijs betalen volgens het WWS zelfstandige woonruimte aan de hoofdverhuurder. De huurprijs die de (hospita-)onderhuur betaalt aan de (hospita)verhuurder is volgens het WWS onzelfstandige woonruimte. De gestelde voorwaarden zijn de volgende:
-
-1. Het (duurzaam gemeenschappelijk) huishouden van de hoofdhuurder (de hospita) moet tenminste twee jaar zelfstandig de huurwoning hebben bewoond.
-2. De (hospita-)onderhuurder betreft maximaal één (duurzaam gemeenschappelijk) huishouden.
-3. De (hospita-)onderhuurder mag alleen een huurovereenkomst hebben met de hoofdhuurder (de hospita) van de woning (niet met de hoofdverhuurder/eigenaar van de woning).
-
-### 2.2.2 Onroerende aanhorigheden en zelf aangebrachte voorzieningen
-
-Alleen de (gemeenschappelijke) vertrekken, overige ruimten en voorzieningen die tot de onroerende zaak behoren worden met punten gewaardeerd. Dit kan zijn doordat ze fysiek verbonden zijn met de woonruimte, of omdat dit in de huurovereenkomst is afgesproken. Als voor het gebruik van een onroerende aanhorigheid (bijv. een gemeenschappelijke tuin) een afzonderlijke huurovereenkomst is gesloten en de huur hiervan kan worden beëindigd zonder dat dit invloed heeft op de huur van de woonruimte, dan wordt de voorziening niet meegenomen in puntenwaardering.
-
-Door de bewoner onverplicht en voor eigen rekening aangebrachte verbeteringen worden niet met punten gewaardeerd, tenzij de verhuurder voor deze verbeteringen een vergoeding aan de huurder heeft verstrekt.
-
-## 2.3 Peildatum toetsing woningwaardering
-
-De peildatum voor de waardering van de kwaliteit van een woonruimte vindt plaats aan de hand van de artikelen 11, 12, 13, 14, 15 van de Uitvoeringswet huurprijzen woonruimte en verschilt per procedure:
-
-- Toetsing aanvangshuurprijs (artikel 7:249 BW): de ingangsdatum van de huurovereenkomst.
-- Jaarlijkse huurverhoging (artikel 7:253 BW) en huurverlaging op grond van punten (artikel 7:254 BW): de voorgestelde ingangsdatum van de huurverhoging of huurverlaging.
-- Huurverhoging na woningverbetering (artikel 7:255 BW): de eerste dag van de maand volgend op de maand waarin de woningverbetering tot stand is gekomen.
-
-Bij de beoordeling van de kwaliteit van de woonruimte gaat het niet alleen om de toestand van de woning als zodanig, maar ook om aspecten waarvan de huurder kennis kan hebben op de relevante datum door opname van de woning en door het raadplegen van algemeen beschikbare informatie van de woning. In het bijzonder gaat het daarbij om aspecten als het energielabel en de WOZ-waarde van de woning.
-
-## 2.4 Aangrenzende ruimten met open doorgang
-
-Twee vertrekken of overige ruimten die met elkaar in verbinding staan, worden in een bepaald geval als één vertrek of overige ruimte gewaardeerd. Dit is het geval als zich tussen die twee vertrekken of overige ruimten een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt. Het moet hierbij gaan om een niet afsluitbare opening, die over een breedte van minimaal 0,85 m een minimumhoogte heeft van 2 m. De muur wordt gemeten in het vertrek of overige ruimte, waarin de tussenwand het smalst is. [De figuur](https://arc.net/l/quote/unuvdjdp) hieronder schetst de rekenmethode.
-
-Als X ≥ 50% van Y, dan is 1 en 2 één vertrek / overige ruimte.
-
-Als X < 50% van Y, dan zijn 1 en 2 afzonderlijke vertrekken / overige ruimten
-
-Als zich in de opening een (deur)omlijsting bevindt, wordt in afwijking van bovenstaande rekenregel in ieder geval gesproken van twee ruimten.
-
-## 2.5 Afwijkingsbevoegdheid
-
-Het woningwaarderingsstelsel is een gedetailleerd en dwingend stelsel. Dit betekent dat de Huurcommissie conform dit systeem de woning waardeert. Wel heeft de wetgever voorzien in een mogelijkheid om af te wijken van het waarderingsstelsel, wanneer de aard van de woonruimte daartoe aanleiding geeft[^2]. Dat is de zogenoemde afwijkingsbevoegdheid van artikel 5 lid 2 Bhw.
-
-[^2]: Hiervan kan sprake zijn als de strikte toepassing van het woningwaarderingsstelsel onvoldoende recht doet aan de kwaliteit van een woning, aldus de nota van toelichting bij het Bhw. Als voorbeeld wordt genoemd woningen die “door een zeer geringe oppervlakte geen 140 punten halen, doch wel van uitstekende kwaliteit zijn; bij voorbeeld zeer kleine, doch luxueuze appartementen”.
-
 ## 2.6 Evenredige verdeling, afronding punten en eindsaldering
 
 **Evenredige verdeling**
@@ -90,6 +7,8 @@ Het woningwaarderingsstelsel is een gedetailleerd en dwingend stelsel. Dit betek
 In geval van een onzelfstandige woonruimte zijn er vaak ruimtes of voorzieningen waarvan (ook) andere bewoners gebruik maken. Deze ruimtes of voorzieningen worden betrokken in de berekening van het aantal punten voor de onzelfstandige woonruimte in kwestie. De manier waarop is als volgt.  
 
 Punten die moeten worden gedeeld door het aantal onzelfstandige woonruimten worden evenredig over het aantal woonruimten binnen de gehele woning verdeeld, ongeacht de grootte van de afzonderlijke onzelfstandige woonruimten. Als slechts een deel van de onzelfstandige woonruimten op een adres toegang heeft tot bepaalde gemeenschappelijke vertrekken, ruimtes en voorzieningen, worden de punten alleen verdeeld onder die specifieke woonruimten die, volgens de huurovereenkomst, daadwerkelijk toegangs- en gebruiksrecht hebben tot die gedeelde vertrekken, ruimtes of voorzieningen.
+
+> Wij hebben `gedeeld_met_aantal_onzelfstandige_woonruimten` toegevoegd als property van ruimten om te kunnen specificeren moet hoeveel een ruimte gedeeld wordt met andere personen op hetzelfde adres. Indien deze property leeg is of kleiner is dan 2, tellen we de ruimte mee als zijnde niet gedeeld.
 
 **Afronding per rubriek**
 
@@ -132,6 +51,8 @@ De Huurcommissie hanteert passief beleid. De verhuurder moet aantonen dat een wo
 Indien een woonruimte een rijksmonument is of daar deel van uitmaakt, als bedoeld in artikel 1.1 Erfgoedwet, dan worden 10 punten extra toegekend. Hiermee worden rijksmonumenten, en dus niet gemeentelijke monumenten, bedoeld die zijn geregistreerd in het monumentenregister van de Rijksdienst voor het Cultureel Erfgoed. Alleen deze monumenten krijgen een toeslag van 10 punten.
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de Rijksmonumenten: http://monumentenregister.cultureelerfgoed.nl/.
+
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
 
 ### 2.7.2 Gemeentelijk of provinciaal monument
 
@@ -489,6 +410,103 @@ Voorbeeld
 Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één keuken, met een aanrechtlengte tussen 2 m en 3 m. Hiervoor worden 7 punten toegekend. Daarnaast worden 3 punten toegekend voor voorzieningen (bijv. een inbouwkoelkast, inbouw keramische kookplaat en inbouw magnetron). Omdat de keuken wordt gedeeld door vier onzelfstandige woonruimten, geldt 10/4 = 2,5 punt per onzelfstandige woonruimte.
 ```
 
+## Rubriek 6 - Sanitair
+
+### 6.1 Puntentoekenning sanitaire basisvoorzieningen
+
+Het woningwaarderingsstelsel geeft punten aan sanitaire basisvoorzieningen:
+
+| Voorziening | Punten |
+| --- | --- |
+| Toilet in een aparte ruimte | 3 |
+| Toilet in een badkamer | 2 |
+| Hangend toilet in aparte ruimte | 3,75 |
+| Hangend toilet in badkamer | 2,75 |
+| Wastafel* | 1 |
+| Meerpersoonswastafel | 1,5** |
+| Douche | 3 |
+| Bad | 5 |
+| Bad en douche | 6 |
+
+\* tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer. Op een adres met minimaal acht of meer onzelfstandige woonruimten geldt dit maximum niet voor maximaal één ruimte. Dat betekent dat er voor adressen met acht of meer onzelfstandige woonruimten maximaal één ruimte mag zijn, naast de badkamer, met meer dan één wastafel die voor waardering in aanmerking komt.
+
+** *Tot een maximum van 1,5 punt per vertrek of overige ruimte m.u.v. de badkamer. Op een adres met minimaal 8 of meer onzelfstandige woonruimten geldt het bovengenoemde maximum niet voor maximaal één ruimte.*
+
+De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
+
+**Toilet**
+
+Punten worden toegekend aan een toilet met waterspoeling als het toilet is geplaatst in een daartoe bestemde ruimte ~~en als het toilet binnen het woongebouw is gelegen~~. ~~Wanneer sprake is van een toilet dat buiten de woning maar binnen het woongebouw is gelegen, dan geldt dat het toilet in de waardering wordt meegenomen als het gebruik van het toilet door derden is uit te sluiten~~. Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor waardering.
+
+**Wastafel**
+
+~~Als wastafels worden alle bakken geteld voor wassen en spoelen die op de waterleiding én op het huisriool zijn aangesloten. Een dergelijke bak wordt niet als wastafel gewaardeerd indien boven de bak een douche is aangebracht. Een bad of spoelbakken in een keukenaanrecht, bidet of lavet wordt niet als wastafel, douche of bad gewaardeerd. Wastafels worden gewaardeerd tot een maximum van 1 punt per vertrek of overige ruimte, m.u.v. de badkamer.~~
+
+> Zorg dat wastafels alleen worden meegenomen die voldoen aan de vereisten van een wastafel.
+
+~~Van een meerpersoonswastafel is sprake bij een wastafel met een minimale breedte van 70 cm, voorzien van twee kranen.~~ Deze wastafels worden tot maximaal 1,5 punt per vertrek of overige ruimte, m.u.v. de badkamer, gewaardeerd. De kranen worden afzonderlijk gewaardeerd.
+
+Zoals genoemd in paragraaf 5.2  waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter is dan één meter, als wastafel. In alle andere gevallen wordt een spoelbak in de keuken dus niet als wastafel gewaardeerd.
+
+> Indien een aanrecht met een lengte van minder dan één meter wordt meegegeven wordt deze als wastafel gewaardeerd. Geef hier niet ook nog een wastafel mee voor de spoelbak.
+
+**Bad en douche**
+
+~~Als douche wordt meegeteld iedere door de verhuurder aangebrachte installatie voor het nemen van een stortbad. Hieronder valt eveneens een zogenaamde douchecabine, die voldoet aan bovengenoemde voorwaarden, als de douchcabine in een vertrek (anders dan bad- of doucheruimte) of overige ruimte is geplaatst. De oppervlakte van dat vertrek of van die overige ruimte wordt in dat geval niet verminderd met de door de douchecabine ingenomen oppervlakte.~~
+
+Aan baden worden 5 punten toegekend, ~~ongeacht de lengte van het bad, als een volwassen persoon er in een normale zithouding in kan plaatsnemen. Indien een bad is voorzien van een (hand)douche, dan wordt het douchegarnituur niet afzonderlijk geteld.~~
+
+Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangebracht, geldt een waardering van 6 punten.
+
+~~Als het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 5 punten voor douche of respectievelijk bad.~~
+
+### 6.2 Puntentoekenning extra voorzieningen
+
+Het woningwaarderingsstelsel geeft voor het onderdeel sanitair extra punten voor voorzieningen in de bad- of doucheruimte. Hiervoor geldt een maximum tot het aantal punten dat reeds voor douche, bad en/of bad/douche is verkregen. Anders gezegd: maximaal een verdubbeling van de toegekende punten voor douche, bad en/of bad/douche.
+
+**Eisen bad-of doucheruimte**
+
+Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden in een bad- of doucheruimte. Bad- of doucheruimten moeten voldoen aan de volgende eisen:
+
+- ~~Een waterdichte vloerafwerking*.~~
+- ~~De ruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).~~
+- ~~Waterdichte afwerking tot 1,50 m hoogte voor badruimte en 1,80 m voor doucheruimte;~~
+- Een wastafel ~~inclusief (tweehands-)mengkraan en een spiegel.~~
+- Een douche of bad ~~met aansluitpunten voor warm en koud water (niet zijnde een warmwater apparaat) en voorzien van een warm- en koudwaterkraan of een mengkraan.~~
+
+\* Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien.
+
+**Lijst voorzieningen**
+
+Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
+
+Voorzieningen in de bad- of doucheruimte
+
+| Voorziening | Punten |
+| --- | --- |
+| Bubbelfunctie van het bad | 1,5 |
+| Gemonteerde volledige afscheiding van de douche* | 1,25 |
+| Handdoekenradiator | 0,75 |
+| Ingebouwd kastje met in- of opgebouwde wastafel | 1 |
+| Kastruimte (minimale breedte van 40cm, en minimale hoogte van 40cm) | 0,75 |
+| Stopcontact (maximaal twee per wastafel) | 0,25 |
+| Éénhandsmengkraan | 0,25 |
+| Thermostatische mengkraan | 0,5 |
+
+\* In het geval van een gemonteerde volledige afscheiding van de douche vindt de waardering van 1,25 punten plaats wanneer doucheruimte beschikt over  een onroerend aanhorige afscheiding met  een waterdichte afwerking aan alle zijden van de douche. Ter illustratie: glazen deuren vallen hier wel onder, maar een douchegordijn (dat snel weggenomen kan worden) niet.
+
+> Voor een ingebouwde kast met wastafel moet de wastafel als aparte voorziening worden meegegeven.
+
+~~Indien het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 3 of 5 punten voor douche of, respectievelijk bad.~~
+
+De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
+
+Voorbeeld
+
+```text
+Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkamer met een douche (3 punten), met gemonteerde afscheiding (1,25 punt) en handdoekradiator (0,75 punt). Daarnaast beschikt elke huurder over een eigen toilet (3 punten) in de onzelfstandige woonruimte. De badkamer levert in totaal 5 punten op (3 + 1,25 + 0,75). De badkamer wordt gedeeld door vier onzelfstandige woonruimten, dus 5/4 = 1,25 punt per onzelfstandige woonruimte. De vier onzelfstandige woonruimten hebben elk hun eigen toilet, dus dit puntenaantal hoeft niet nader gedeeld te worden. In dit voorbeeld geldt daarom dat elke huurder 1,25 + 3 = 4,25 punten krijgt voor de rubriek sanitair.
+```
+
 ## ~~Rubriek 7 - Woonvoorzieningen voor gehandicapten~~
 
 ### ~~7.1 Puntentoekenning~~
@@ -522,6 +540,163 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één keuken
 ### ~~7.3 Vergoeding kosten~~
 
 ~~Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder) wordt één punt toegekend. Voorwaarde is wel dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit. De wetgever gaat ervan uit dat met deze puntenwaardering de verhuurder een redelijke rendementswaarborg heeft voor het door hem geïnvesteerde vermogen (te weten de kosten van de ingrepen, verminderd met de eigen bijdrage van de huurder en de financiële tegemoetkoming van gemeente of (bij dure woonvoorzieningen) enige instantie die ingevolge een wettelijke regeling die tegemoetkoming verleent.~~
+
+## Rubriek 8 - Buitenruimten
+
+### 8.1 Puntentoekenning
+
+- Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,35 punt.  
+*Voorbeeld: 10 vierkante meter privé-buitenruimte levert 5,5 punt op (2 + 10 x 0,35).*  
+
+- Voor gemeenschappelijk buitenruimten op hetzelfde adres worden 0,75 per vierkante meter toegekend, gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
+- Voor gemeenschappelijk buitenruimten gedeeld met meerdere adressen, worden 0,75 per vierkante meter toegekend. Dit puntenaantal wordt gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft en vervolgens gedeeld door het aantal onzelfstandige woonruimten op dat adres.
+- Maximaal 15 punten worden toegekend voor buitenruimten.
+
+### 8.2 Definitie privé-buitenruimte
+
+Privé-buitenruimte zijn tot de woning behorende buitenruimten, waarvan de huurder van de desbetreffende woning volgens de huurovereenkomst het exclusieve gebruiksrecht en toegang heeft. Dit kunnen onder meer voor-, zij- of achtertuinen, balkons, platjes of terrassen zijn, maar ook een oprit exclusief behorende tot de woning. Wanneer zich binnen de privé-buitenruimte een parkeerplek bevindt, geldt de parkeerplek en de weg daar naartoe als privé-buitenruimte. Gemeenschappelijke parkeerruimte wordt volgens rubriek 10 gewaardeerd.
+
+Met exclusief gebruiksrecht van privé-buitenruimte wordt bedoeld dat uitsluitend de huurder het recht heeft om te bepalen welk gebruik hij maakt van de privé-buitenruimten die tot de woning behoren.
+
+### 8.3 Definitie gemeenschappelijke buitenruimte
+
+Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, breedte, diepte) en zijn tot het woongebouw behorende buitenruimten waar de bewoners in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht toe hebben. Gemeenschappelijke buitenruimten kunnen zich bevinden op hetzelfde adres of worden gedeeld met meerdere adressen binnen hetzelfde woongebouw.
+
+De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke buitenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s). Gedeelde buitenruimte die als parkeerplek bedoeld is, wordt gewaardeerd volgens rubriek 10.
+
+> Er wordt vanuitgegaan dat gemeenschappelijke buitenruimten die worden meegegeven als zodanig aan de hierboven beschreven eisen voldoen.
+
+### 8.4 Fietsenberging
+
+Een fietsenberging wordt gewaardeerd als gemeenschappelijke buitenruimte. Onder een fietsenberging wordt verstaan een afsluitbare, overdekte bergplaats, niet zijnde een portiek, trap, gang, hal en dergelijke. Een fietsenberging in deze rubriek kan niet als overige ruimte uit rubriek 2 worden gewaardeerd, omdat deze niet onroerend is.
+
+> `Stalling extern` en `Stalling intern` worden gewaardeerd als gemeenschappelijke buitenruimte.
+
+
+### 8.4 Balkons, dakterrassen en loggia’s
+
+Balkons, dakterrassen en loggia’s moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze zijn:
+
+- voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;
+- rondom voorzien van een afscheiding die tevens dient als valbeveiliging; en
+- via een deur* of schuifpui toegankelijk zijn.
+
+> Er wordt vanuitgegaan dat balkons, dakterrassen en loggia’s alleen worden meegegeven als ze aan de hierboven beschreven eisen voldoen.
+
+\* Indien het balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als buitenruimte te worden gebruikt, dan worden deze met punten gewaardeerd.
+
+Franse balkons worden niet als buitenruimten beschouwd. Een Frans balkon is een opening in de gevel met naar binnen draaiende deuren, voorzien van een balustrade direct tegen het kozijn of de gevel. Zeembalkons worden, zolang zij voldoen aan de hiervoor aangegeven eisen van een balkon, wel gewaardeerd als buitenruimte.
+
+> Indien een zeembalkon voldoet aan de eisen voor een balkon moet deze als `balkon` worden meegegeven.
+
+### 8.5 Meetinstructies
+
+Van de buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor-, achter of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terugliggende deel van de gevel. De oppervlakte, die wordt ingenomen door een balkonkast of kolenhok e.d., wordt bij de oppervlakte van de desbetreffende buitenruimte meegerekend.
+
+### 8.6 Puntenberekening en saldering
+
+De oppervlakten voor privé en gemeenschappelijke buitenruimten worden afzonderlijk berekend. Als sprake is van meerdere buitenruimten die tot dezelfde categorie behoren (privé, gemeenschappelijk op hetzelfde adres of gemeenschappelijk met meerdere adressen) dan wordt voor de berekening eerst de oppervlakte voor die categorie buitenruimte berekend en daarna wordt de oppervlakte van de categorie buitenruimte bij elkaar opgeteld.
+
+De punten voor privé en gemeenschappelijke buitenruimten worden vervolgens gesaldeerd. In totaal kan maximaal 15 punten worden toegekend.
+
+Puntenberekening en saldering
+```text
+Voorbeeld: in een woongebouw bevinden zich vijf adressen. Op één van deze adressen bevinden zich vier onzelfstandige woonruimten. Huurder A huurt één van deze onzelfstandige woonruimten, bestaande uit een kamer met een klein balkon (lengte 2m en breedte 0,5m). Daarnaast is er een balkon (lengte 3m en breedte 1,5m), dat huurder A deelt met de drie andere huurders van onzelfstandige woonruimten op dit adres. Tot slot beschikt het woongebouw over een gemeenschappelijk dakterras (lengte 8m en breedte 6,5m).
+```
+
+*Privé-buitenruimte*  
+De woning van A beschikt over een privé-buitenruimte van 2m x 0,5m = 1m2. Dit resulteert in 2 punten + 0,35 punt x 1m2 = 2,35 punten.
+
+*Gemeenschappelijke ruimte op hetzelfde adres*  
+Op het adres van huurder A is een balkon van 3m x 1,5m = 4,5m2. Dit resulteert in 0,75 punt x 4,5m2 = 3,375 punt. Het balkon wordt gedeeld door vier onzelfstandige woonruimten op hetzelfde adres, dus 3,375 punt/4 = 0,84375 punt..
+
+*Gemeenschappelijke ruimte gedeeld met meerdere adressen*  
+Tot slot is er een dakterras van 8m x 6,5m = 52m2. Dit resulteert in 0,75 punt x 52m2 = 39 punten. Het dakterras wordt gedeeld door 5 adressen, dus 39 punten/5 = 7,8 punt. Op het adres van huurder A zijn vier onzelfstandige woonruimten, dus 7,8 punt/4 = 1,95 punt.
+
+*Totaal*  
+Voor huurder A resulteert dit in 2,35 punt + 0,84375 punt + 1,95 punt = 5,14375 punten, afgerond 5,25 punten.
+
+## Rubriek 10 - Gemeenschappelijke parkeerruimten 
+
+### 10.1 Puntentoekenning
+Voor verschillende typen gemeenschappelijke parkeerplekken, afhankelijk van afdekking van de buitenlucht, worden punten toegekend:
+
+- **Type I**: parkeerplek in afgesloten parkeergarage behorende tot het complex krijgt **9 punten**.
+- **Type II**: parkeerplek buiten behorende tot het complex of de woning met dak krijgt **6 punten**. Hieronder wordt ook begrepen een carport.
+- **Type III**: parkeerplek buiten behorende tot het complex of de woning zonder dak krijgt **4 punten**.
+
+> Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:
+> - Type I: `Ruimtedetailsoort.parkeervak_auto_binnen` met code `VAI`
+> - Type II: `Ruimtedetailsoort.carport` met code `CAR`
+> - Type III: `Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt` met code `VAU`
+
+Daarnaast worden **2 extra punten** toegekend als de parkeerplek beschikt over een laadpaal voor elektrisch rijden, exclusief voor gebruik door bewoners.
+
+De punten worden gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft en vervolgens gedeeld door het aantal onzelfstandige woonruimten op dat adres.
+
+### 10.2 Definitie gemeenschappelijke parkeerruimte
+Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewoners van ten minste twee adressen die daar exclusief gebruiksrecht op hebben, waarin zich ten minste één parkeerplek bevindt (zoals een gemeenschappelijke parkeergarage onder een wooncomplex of een gemeenschappelijke parkeerplaats buiten met één of meer parkeerplekken). De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een complex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
+
+Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2 (bijvoorbeeld een garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief behorende tot de woning).
+
+> Volgens rubriek 10 in het beleidsboek zelfstandige woonruimten, geldt voor een parkeeruimte dat deze minimaal 12m2 moet zijn. deze eis wordt hier niet expliciet genoemd, maar er is vanuit gegaan dat deze eis ook geldt voor rubriek 10 in onzelfstandige woonruimten.
+
+### 10.3 Onroerende aanhorigheid
+> De woningwaardering package gaat uit van onderstaande eisen, wanneer een parkeeruimte wordt meegegeven in het input model.
+
+Punten voor een parkeervoorziening worden alleen toegekend als deze als onroerende aanhorigheid gekwalificeerd wordt. Hiervan is sprake als de parkeervoorziening naar haar aard onlosmakelijk verbonden is met de woonruimte (bijvoorbeeld wanneer de parkeerplek direct in verbinding staat met de woonruimte of tot het adres of complex behoort, zoals bij een gemeenschappelijke oprit of gemeenschappelijke garage) of omdat de parkeervoorziening volgens verkeersopvatting onderdeel of krachtens de huurovereenkomst deel uitmaakt van de gehuurde woning.
+
+Dit geldt als in de huurovereenkomst is afgesproken dat de parkeervoorziening tot de onroerende zaak behoort en de woonruimte en parkeerplaats verhuurd moeten zijn zonder dat ze van elkaar contractueel te scheiden zijn. Als de parkeerplek geen onroerende aanhorigheid betreft, heeft de verhuurder de mogelijkheid dit als los goed te verhuren volgens artikel 7:201 BW.
+
+### 10.4 Rekenmethode en voorbeeldberekening
+
+**Rekenmethode**
+
+1. Bepaal tot welk type de parkeerplek(ken) horen.
+2. Indien er sprake is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee punten extra per parkeerplek met laadpaal.
+3. Bij meerdere parkeerplekken worden de punten bij elkaar opgeteld.
+4. Daarna wordt dit puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de parkeerplek(ken). Indien sprake is van een privéparkeerplek voor één adres, wordt gedeeld door 1.
+5. Tot slot wordt dit puntentotaal gedeeld door het aantal onzelfstandige woonruimten op het adres.
+
+**Voorbeeldberekening**
+```text
+In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn vier onzelfstandige woonruimten. Huurder A huurt één van deze onzelfstandige woonruimten. Bij het woongebouw horen vijf Type-III parkeerplaatsen.
+
+1. De vijf parkeerplekken behoren tot Type III.
+2. Geen laadpaal is aanwezig.
+3. De vijf parkeerplaatsen leveren 5 × 4 = 20 punten op.
+4. De parkeerplaatsen worden gedeeld door tien adressen, dus 20 / 10 = 2 punten per adres.
+5. Op het adres van A zijn vier onzelfstandige woonruimten, dus voor A resulteert dit in 2 / 4 = 0,50 punt in de rubriek parkeerruimte.
+```
+
+> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken bovenstaande berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model niet mogelijk. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van bovenstaande parkertypes de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` en `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek meegegeven te worden wanneer het een onzelfstandige woonruimte betreft. Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt (in JSON-formaat) meegegeven worden.
+
+
+```json
+{
+  "id": "A",
+  "ruimten": [
+    {
+      "id": "1",
+      "aantal": 5,
+      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeld_met_aantal_onzelfstandige_woonruimten": 4,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "VAU",
+        "naam": "Parkeervak auto (buiten, niet overdekt)"
+      },
+      "naam": "Parkeervak buiten",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4
+    }
+  ]
+}
+```
 
 ## Rubriek 11 Punten voor de WOZ-waarde
 
@@ -583,3 +758,61 @@ Tabel 1
 ~~Hiervan is bijvoorbeeld sprake als, in het kader van de WOZ-beschikking 2023 dat als peildatum 1 januari 2022 heeft, de werkzaamheden aan het gehuurde zijn aangevangen na 1 januari 2022 en zijn voltooid ná 1 januari 2023. De WOZ-beschikking 2024, dat als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven “als ware de bouw voltooid”. In dat geval kan de woning worden aangemerkt als ‘een gebouwd eigendom in aanbouw’ als bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.~~
 
 > De omrekening naar 100% voorgangspercentage dient als WOZ-waarde opgegeven te worden.
+
+## Rubriek 12 - Bijzondere voorzieningen: zorgwoning
+
+### 12.1 Zorgwoning
+
+Als sprake is van een zorgwoning, dan wordt het puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel met 35% verhoogd. Dit resulteert in een hogere maximale huurprijs.
+
+> De onderstaande doorgehaalde voorwaarden worden niet gecontroleerd door de woningwaardering package. Wanneer een eenheid de doelgroep Zorg heeft, wordt de woning automatisch als zorgwoning gewaardeerd.
+
+**~~Voorwaarden zorgwoning~~**
+
+~~Er is sprake van een zorgwoning als aan de volgende vijf voorwaarden is voldaan.~~
+
+1. **~~De zorgwoning betreft een onzelfstandige woonruimte~~**  
+   Hoe het begrip onzelfstandige woonruimte door de Huurcommissie wordt ingevuld is te vinden in paragraaf 2.3.1 van dit beleidsboek.
+2. **~~De onzelfstandige woonruimte is gelegen in een woongebouw~~**
+3. **~~De woning en het woongebouw waarin de woning is gelegen zijn bestemd voor mensen met een fysieke beperking~~**  
+
+~~Dat de woning en het woongebouw bestemd zijn voor mensen met een fysieke beperking moet in ieder geval blijken uit a) drempelloze toegankelijkheid en b) doorgankelijkheid.~~
+
+~~Deze drempelloze toegankelijkheid en doorgankelijkheid houden tenminste in dat alle gangen, waar de bewoners doorheen moeten om de eigen woning en andere relevante (gemeenschappelijke) ruimten in het woongebouw te bereiken, een minimale breedte hebben van 1,2 m. Bovendien moet er sprake zijn van een lift of hellingbaan indien de eigen woning en andere relevante ruimten drempels hebben van 2 cm of hoger.~~
+
+4. **~~De huurovereenkomst\* van de woning voorziet op de aanwezigheid van technische voorzieningen in het gebouw die het mogelijk maken dat een individuele persoonsalarmering verbinding kan maken met de noodalarmcentrale in zowel de woning als het complex waarvan de woning deel uitmaakt.~~**  
+   
+~~Het woongebouw moet zodanig zijn uitgerust dat een afgegeven persoonsalarm door individuele persoonsalarmering overal verbinding kan maken met de noodalarmcentrale in zowel de woning als het complex waarvan de woning deel uitmaakt. Het moet dus bijvoorbeeld ook mogelijk zijn, dat de uitrusting in het gebouw in staat moet zijn om een persoonsalarm op te vangen indien dat uit de lift van het complex wordt verzonden, of uit de tot het complex behorende buitenruimte.~~
+
+~~Voorbeelden van technische voorzieningen zijn een noodoproepinstallatie of een persoonlijk alarmsysteem dat op de persoon wordt gedragen met een halskoord.~~
+
+5. **~~De huurovereenkomst\* van de woning moet zien op het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie~~**  
+
+~~Het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie moet deel uit maken van een huurovereenkomst om een woning als zorgwoning te kunnen kwalificeren in de zin van het Besluit huurprijzen woonruimte. Deze ruimten dienen tot het woongebouw te behoren of als onroerende aanhorigheid van het complex te kunnen worden aangemerkt. Het exclusieve gebruik van deze ruimten door de huurders van het woongebouw is geen vereiste. Wel dienen de ruimten primair ter beschikking te staan van de huurders van het woongebouw.~~
+
+~~Als de gemeenschappelijke ruimten voor maaltijden of recreatie niet binnen hetzelfde maar geheel of gedeeltelijk in een naastgelegen (woon)gebouw zijn gelegen, dienen deze voorzieningen binnendoor (gesloten loopbrug, corridor, etc.) bereikbaar te zijn om als zorgwoning in de zin van het Besluit huurprijzen woonruimte te kwalificeren.~~
+
+~~\* Indien sprake is van een gemengde woon-zorgovereenkomst dan is het woningwaarderingsstelsel, waaronder de toeslag die geldt bij een zorgwoning, alleen van toepassing indien het huurelement in de gemengde overeenkomst overheerst.~~
+
+### 12.2 Aanbelfunctie met video- en audioverbinding
+
+Een aanbelfunctie met video- en audioverbinding waarbij de voordeur automatisch kan worden geopend vanuit de woning wordt gewaardeerd met 0,25 punt.
+
+Hieronder wordt een systeem verstaan dat tweewegcommunicatie mogelijk maakt met beeld en geluid tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er tevens sprake te zijn van de mogelijkheid tot het openen van de (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang geeft tot het complex waarvan de woning onderdeel uitmaakt.
+
+### 12.3 Laadpalen
+
+Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik door de bewoners, wordt gewaardeerd met 2 punten. Dit geldt alleen als de laadpaal bestemd is voor het elektrisch opladen van een gemotoriseerd voertuig, niet zijnde een bromfiets, fiets met trapondersteuning of gehandicaptenvoertuig.
+
+In geval een gemeenschappelijke parkeerruimte beschikt over een laadpaal, wordt voor de berekeningswijze aangesloten bij Rubriek 10.
+
+## Rubriek 13 - Aftrekpunten
+
+Het waarderingsstelsel voor onzelfstandige woonruimten kent een rubriek voor aftrekpunten. Een aftrek van 4 punten wordt toegepast in ieder van de volgende situaties:
+
+- Wanneer de totale oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m2.
+- ~~Als de verhuurder van de onzelfstandige woonruimte zijn hoofdverblijf heeft in de woning waarvan de onzelfstandige woonruimte onderdeel uitmaakt en de onzelfstandige woonruimte of het sanitair waartoe de huurder toegang en gebruiksrecht heeft, uitsluitend via een woon- of slaapvertrek van de verhuurder te bereiken is.~~
+- ~~Bij een ruitoppervlakte in het (hoofd)woonvertrek van minder dan 0,75 m2.~~
+- ~~Wanneer het laagste raamkozijn van het (hoofd)woonvertrek meer dan 1,60 m boven de vloer is.~~
+
+~~Bij de bepaling van de ruitoppervlakte van het (hoofd) woonvertrek is de oppervlakte van het zichtbare glas bepalend. Dit betekent dat het glas dat zich in de sponning bevindt niet bijdraagt aan het bepalen van de ruitoppervlakte.~~

@@ -11,8 +11,22 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 0.0,
+      "punten": 13.0,
       "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "naam": "Badruimte - Bad"
+          },
+          "punten": 6.0
+        },
         {
           "aantal": 1.0,
           "criterium": {
@@ -62,12 +76,6 @@
           "punten": 0.25
         },
         {
-          "criterium": {
-            "naam": "Badruimte - Voorzieningen: Max 2 stopcontacten per wastafel"
-          },
-          "punten": -0.25
-        },
-        {
           "aantal": 1.0,
           "criterium": {
             "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan"
@@ -85,7 +93,7 @@
           "criterium": {
             "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche"
           },
-          "punten": -6.0
+          "punten": -0.25
         }
       ]
     }

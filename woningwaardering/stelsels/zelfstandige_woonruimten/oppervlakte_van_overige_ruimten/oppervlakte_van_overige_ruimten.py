@@ -6,9 +6,12 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroep
-from woningwaardering.stelsels.utils import naar_tabel, rond_af, rond_af_op_kwart
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import (
+from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
+    gedeeld_met_eenheden,
+    rond_af,
+    rond_af_op_kwart,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -65,8 +68,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if ruimte.gedeeld_met_aantal_eenheden is None
-            or ruimte.gedeeld_met_aantal_eenheden == 1
+            if not gedeeld_met_eenheden(ruimte)
         ]
 
         for ruimte in ruimten:
@@ -188,24 +190,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-
-    oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(
-        peildatum=date(2024, 7, 1)
+    bereken(
+        instance=OppervlakteVanOverigeRuimten(),
+        eenheid_input="tests/data/generiek/input/37101000032.json",
+        strict=False,
     )
-    with open(
-        "tests/data/zelfstandige_woonruimten/input/71211000027.json", "r+"
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-        woningwaardering_resultaat = oppervlakte_van_overige_ruimten.bereken(eenheid)
-
-        print(
-            woningwaardering_resultaat.model_dump_json(
-                by_alias=True, indent=2, exclude_none=True
-            )
-        )
-
-        tabel = naar_tabel(woningwaardering_resultaat)
-
-        print(tabel)

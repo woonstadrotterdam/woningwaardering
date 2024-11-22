@@ -7,11 +7,12 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.criteriumsleutels import (
     CriteriumSleutels,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.utils import classificeer_ruimte
+from woningwaardering.stelsels.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -300,24 +301,8 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-
-    verkoeling_en_verwarming = VerkoelingEnVerwarming(
-        peildatum=date.fromisoformat("2024-07-01")
+    bereken(
+        instance=VerkoelingEnVerwarming(),
+        eenheid_input="tests/data/generiek/input/37101000032.json",
+        strict=False,
     )
-
-    with open(
-        "tests/data/zelfstandige_woonruimten/stelselgroepen/verkoeling_en_verwarming/input/max_4_punten_overige_ruimten.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-        groepen=[verkoeling_en_verwarming.bereken(eenheid)]
-    )
-
-    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-
-    tabel = utils.naar_tabel(resultaat)
-
-    print(tabel)
