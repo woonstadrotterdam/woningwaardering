@@ -19,7 +19,59 @@ from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoo
 from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
     Woningwaarderingstelsel,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
+    Woningwaarderingstelselgroep,
+)
 from woningwaardering.vera.utils import get_bouwkundige_elementen
+
+
+def waardeer(
+    ruimte: EenhedenRuimte,
+    stelselgroep: Woningwaarderingstelselgroep,
+    stelsel: Woningwaarderingstelsel,
+) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    if ruimte.detail_soort is None:
+        warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.")
+        return
+
+    _bouwkundige_elementen_naar_installaties(ruimte)
+
+    yield from _waardeer_toiletten(ruimte)
+
+    yield from _waardeer_wastafels(ruimte, stelsel)
+
+    baden_en_douches_waarderingen = list(_waardeer_baden_en_douches(ruimte, stelsel))
+    totaal_punten_bad_en_douche = Decimal(
+        sum(
+            woningwaardering.punten
+            for woningwaardering in baden_en_douches_waarderingen
+            if woningwaardering.punten is not None
+        )
+    )
+    yield from baden_en_douches_waarderingen
+
+    voorziening_waarderingen = list(_waardeer_installaties(ruimte, stelsel))
+    totaal_punten_voorzieningen = Decimal(
+        sum(
+            woningwaardering.punten
+            for woningwaardering in voorziening_waarderingen
+            if woningwaardering.punten is not None
+        )
+    )
+    yield from voorziening_waarderingen
+
+    maximering = min(
+        rond_af(totaal_punten_bad_en_douche - totaal_punten_voorzieningen, 2),
+        Decimal("0"),
+    )
+
+    if maximering < 0:
+        yield WoningwaarderingResultatenWoningwaardering(
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam=f"{ruimte.naam} - Voorzieningen: Max verdubbeling punten bad en douche"
+            ),
+            punten=maximering,
+        )
 
 
 def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:

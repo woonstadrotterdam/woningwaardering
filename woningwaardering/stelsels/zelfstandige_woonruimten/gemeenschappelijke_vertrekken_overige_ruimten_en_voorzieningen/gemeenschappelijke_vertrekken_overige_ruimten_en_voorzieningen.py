@@ -15,6 +15,9 @@ from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten i
 from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_vertrekken import (
     waardeer_ruimte as waardeer_oppervlakte_vertrekken,
 )
+from woningwaardering.stelsels.gedeelde_logica.sanitair import (
+    waardeer as waardeer_sanitair,
+)
 from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming import (
     maximeer as maximeer_verkoeling_en_verwarming,
 )
@@ -25,7 +28,6 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
 )
-from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair import Sanitair
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -178,7 +180,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
                 # waarderingen voor sanitair van gedeelde ruimten
                 sanitair_waarderingen = list(
-                    Sanitair.genereer_woningwaarderingen(ruimte, self.stelselgroep)
+                    waardeer_sanitair(ruimte, self.stelselgroep, self.stelsel)
                 )
                 woningwaardering_groep.woningwaarderingen.extend(
                     self.deel_woningwaarderingen_door_aantal_eenheden(

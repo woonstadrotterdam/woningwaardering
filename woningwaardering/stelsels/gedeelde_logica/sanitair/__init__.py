@@ -1,3 +1,3 @@
-from .sanitair import _bouwkundige_elementen_naar_installaties
+from .sanitair import waardeer
 
-__all__ = ["_bouwkundige_elementen_naar_installaties"]
+__all__ = ["waardeer"]

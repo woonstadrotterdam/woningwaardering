@@ -5,10 +5,8 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.sanitair import waardeer
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair.sanitair import (
-    Sanitair as ZelfstandigeWoonruimtenSanitair,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingCriteriumSleutels,
@@ -71,11 +69,7 @@ class Sanitair(Stelselgroep):
         max_meerpersoonswastafels = MaxCount(0, None)
 
         for ruimte in ruimten:
-            woningwaarderingen = list(
-                ZelfstandigeWoonruimtenSanitair.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep
-                )
-            )
+            woningwaarderingen = list(waardeer(ruimte, self.stelselgroep, self.stelsel))
             # zoek het maximum aantal wastafels in een ruimte m.u.v. badkamer
             if ruimte.detail_soort not in [
                 Ruimtedetailsoort.badkamer.value,
