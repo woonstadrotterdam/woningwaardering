@@ -8,6 +8,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
+    _bouwkundige_elementen_naar_installaties,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -24,9 +27,6 @@ from woningwaardering.vera.referentiedata import (
     Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
-)
-from woningwaardering.vera.utils import (
-    get_bouwkundige_elementen,
 )
 
 
@@ -96,29 +96,10 @@ class Sanitair(Stelselgroep):
             )
             return
 
-        ruimte.installaties = ruimte.installaties or []
+        _bouwkundige_elementen_naar_installaties(ruimte)
         zelfstandige_woonruimte = (
             stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
         )
-        # Backwards compatibiliteit voor bouwkundige elementen
-        for mapping in {
-            Bouwkundigelementdetailsoort.wastafel: Voorzieningsoort.wastafel,
-            Bouwkundigelementdetailsoort.douche: Voorzieningsoort.douche,
-            Bouwkundigelementdetailsoort.bad: Voorzieningsoort.bad,
-            Bouwkundigelementdetailsoort.kast: Voorzieningsoort.kastruimte,
-            Bouwkundigelementdetailsoort.closetcombinatie: Voorzieningsoort.staand_toilet,
-        }.items():
-            bouwkundige_elementen = list(get_bouwkundige_elementen(ruimte, mapping[0]))
-            if bouwkundige_elementen:
-                warnings.warn(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {mapping[0].naam} als bouwkundig element. Voor een correcte waardering dient dit als installatie in de ruimte gespecificeerd te worden."
-                )
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): {mapping[0].naam} wordt als {mapping[1].naam} toegevoegd aan installaties"
-                )
-                ruimte.installaties.extend(
-                    [mapping[1].value for _ in bouwkundige_elementen]
-                )
 
         installaties = Counter([installatie for installatie in ruimte.installaties])
 
