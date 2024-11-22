@@ -5,8 +5,8 @@ from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroep
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten.oppervlakte_van_overige_ruimten import (
-    waardeer_ruimte,
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_oppervlakte_van_overige_ruimten,
 )
 from woningwaardering.stelsels.utils import (
     gedeeld_met_eenheden,
@@ -61,7 +61,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaarderingen = waardeer_ruimte(ruimte)
+            woningwaarderingen = waardeer_oppervlakte_van_overige_ruimten(ruimte)
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 

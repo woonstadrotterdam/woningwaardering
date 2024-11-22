@@ -13,7 +13,7 @@ from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import (
     waardeer_ruimte as waardeer_keuken,
 )
 from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten import (
-    waardeer_ruimte as waardeer_oppervlakte_van_overige_ruimten,
+    waardeer_oppervlakte_van_overige_ruimten as waardeer_oppervlakte_van_overige_ruimten,
 )
 from woningwaardering.stelsels.gedeelde_logica.sanitair import (
     waardeer as waardeer_sanitair,

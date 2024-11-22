@@ -26,7 +26,7 @@ from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
-def waardeer_ruimte(
+def waardeer_oppervlakte_van_overige_ruimten(
     ruimte: EenhedenRuimte,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if classificeer_ruimte(ruimte) != Ruimtesoort.overige_ruimten:

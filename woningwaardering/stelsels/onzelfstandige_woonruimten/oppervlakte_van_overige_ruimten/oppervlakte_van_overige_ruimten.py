@@ -6,8 +6,8 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten.oppervlakte_van_overige_ruimten import (
-    waardeer_ruimte,
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_oppervlakte_van_overige_ruimten,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -59,7 +59,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
 
         for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = list(waardeer_ruimte(ruimte))
+            woningwaarderingen = list(waardeer_oppervlakte_van_overige_ruimten(ruimte))
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for idx, woningwaardering in enumerate(woningwaarderingen):
                 if woningwaardering.criterium is not None:
