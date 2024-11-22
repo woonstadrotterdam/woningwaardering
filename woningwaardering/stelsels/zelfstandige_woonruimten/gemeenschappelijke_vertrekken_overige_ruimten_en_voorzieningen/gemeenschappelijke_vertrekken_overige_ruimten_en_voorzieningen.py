@@ -6,14 +6,14 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_oppervlakte_vertrekken,
+)
 from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import (
     waardeer_ruimte as waardeer_keuken,
 )
 from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten import (
     waardeer_ruimte as waardeer_oppervlakte_van_overige_ruimten,
-)
-from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_vertrekken import (
-    waardeer_ruimte as waardeer_oppervlakte_vertrekken,
 )
 from woningwaardering.stelsels.gedeelde_logica.sanitair import (
     waardeer as waardeer_sanitair,
