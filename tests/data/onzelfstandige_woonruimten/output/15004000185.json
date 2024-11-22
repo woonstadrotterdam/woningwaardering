@@ -196,7 +196,7 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 3.5,
+      "punten": 3.0,
       "woningwaarderingen": [
         {
           "aantal": 1.0,
@@ -216,14 +216,14 @@
               "id": "sanitair_gedeeld_met_2_onzelfstandige_woonruimten"
             }
           },
-          "punten": 2.0
+          "punten": 1.5
         },
         {
           "criterium": {
             "id": "sanitair_gedeeld_met_2_onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 2)"
           },
-          "punten": 3.5
+          "punten": 3.0
         }
       ]
     },
