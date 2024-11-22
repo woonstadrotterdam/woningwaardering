@@ -2,9 +2,7 @@ from datetime import date
 from decimal import Decimal
 from typing import Iterator
 
-from loguru import logger
-
-from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.prijsopslag_monumenten_en_nieuwbouw.prijsopslag_monumenten_en_nieuwbouw import (
     PrijsopslagMonumentenEnNieuwbouw,
@@ -103,24 +101,8 @@ class PrijsopslagMonumenten(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-
-    prijsopslag_monumenten_en_nieuwbouw = PrijsopslagMonumenten()
-    with open(
-        "tests/data/zelfstandige_woonruimten/input/23109000031.json", "r+"
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-        woningwaardering_resultaat = prijsopslag_monumenten_en_nieuwbouw.bereken(
-            eenheid
-        )
-
-        print(
-            woningwaardering_resultaat.model_dump_json(
-                by_alias=True, indent=2, exclude_none=True
-            )
-        )
-
-        tabel = utils.naar_tabel(woningwaardering_resultaat)
-
-        print(tabel)
+    bereken(
+        instance=PrijsopslagMonumenten(),
+        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
+        strict=False,
+    )
