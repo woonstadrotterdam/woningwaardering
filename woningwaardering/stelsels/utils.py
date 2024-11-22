@@ -15,6 +15,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
     EenhedenEnergieprestatie,
+    EenhedenWoonplaats,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -638,26 +639,26 @@ where {{
     (?adresHuisnummer = ?huisnummer)
   )
   FILTER(
-    (!BOUND(?adresHuisnummertoevoeging) && ?huisnummertoevoeging = "") ||
-    (?adresHuisnummertoevoeging = ?huisnummertoevoeging)
+    (!BOUND(?adresHuisletter) && ?huisletter = "") ||
+    (lcase(?adresHuisletter) = lcase(?huisletter))
   )
   FILTER(
-    (!BOUND(?adresHuisletter) && ?huisletter = "") ||
-    (?adresHuisletter = ?huisletter)
+    (!BOUND(?adresHuisnummertoevoeging) && ?huisnummertoevoeging = "") ||
+    (lcase(?adresHuisnummertoevoeging) = lcase(?huisnummertoevoeging))
   )
 }}
 """
 
 
-def get_woonplaats(adres: EenhedenEenheidadres) -> dict[str, str] | None:
+def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
     """
     Haalt de woonplaats op voor een gegeven adres.
 
     Args:
-        adres (EenhedenEenheidadres): Adres met woonplaats met woonplaatscode of postcode, huisnummer en optioneel huisnummertoevoeging en huisletter.
+        adres (EenhedenEenheidadres): Adres met woonplaats met woonplaatscode of postcode, huisnummer en optioneel huisletter en huisnummertoevoeging.
 
     Returns:
-        dict[str, str] | None: Een dictionary met 'code' en 'naam' van de woonplaats,
+        EenhedenWoonplaats | None: de woonplaats,
                                of None als de gegevens niet gevonden kunnen worden.
     """
     if (
@@ -665,7 +666,7 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> dict[str, str] | None:
         and adres.woonplaats.code is not None
         and adres.woonplaats.naam is not None
     ):
-        return {"code": adres.woonplaats.code, "naam": adres.woonplaats.naam}
+        return adres.woonplaats
 
     if not adres.postcode or not adres.huisnummer:
         return None
@@ -674,11 +675,16 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> dict[str, str] | None:
         f"Adres {adres} bevat geen woonplaats met woonplaatscode. Woonplaats wordt opgehaald via het Kadaster"
     )
 
+    if not adres.huisnummer.isnumeric():
+        warnings.warn(
+            f'Huisnummer "{adres.huisnummer}" moet numeriek zijn. Maak gebruik van de attributen huisnummer, huisnummerToevoeging en huisletter voor de nummeraanduiding.'
+        )
+
     query = WOONPLAATS_QUERY_TEMPLATE.format(
-        postcode=adres.postcode,
+        postcode=adres.postcode.replace(" ", ""),
         huisnummer=int(adres.huisnummer),
-        huisnummertoevoeging=adres.huisnummer_toevoeging or "",
         huisletter=adres.huisletter or "",
+        huisnummertoevoeging=adres.huisnummer_toevoeging or "",
     )
     request_data = {"query": query, "format": "json"}
 
@@ -688,7 +694,10 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> dict[str, str] | None:
         result = response.json()
 
         if isinstance(result, list) and len(result) == 1:
-            return {"code": result[0]["identificatie"], "naam": result[0]["naam"]}
+            adres.woonplaats = EenhedenWoonplaats(
+                code=result[0]["identificatie"], naam=result[0]["naam"]
+            )
+            return adres.woonplaats
         return None
     except requests.RequestException as e:
         warnings.warn(f"Fout bij het ophalen van woonplaatsdata: {e}, UserWarning")

@@ -218,24 +218,24 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         woonplaats = utils.get_woonplaats(adres)
 
-        if woonplaats is None:
+        if woonplaats is None or woonplaats.code is None:
             warnings.warn(
                 f"Eenheid {eenheid.id}: Geen woonplaats gevonden voor adres {adres}. Kan punten voor de WOZ-waarde niet bepalen.",
                 UserWarning,
             )
             return woningwaardering_groep
 
-        corop_gebied = utils.get_corop_voor_woonplaats(woonplaats["code"])
+        corop_gebied = utils.get_corop_voor_woonplaats(woonplaats.code)
 
         if corop_gebied is None:
             warnings.warn(
-                f"Eenheid {eenheid.id}: Geen COROP-gebied gevonden voor woonplaats {woonplaats}. Kan punten voor de WOZ-waarde niet bepalen.",
+                f"Eenheid {eenheid.id}: Geen COROP-gebied gevonden voor woonplaats {woonplaats.naam} met woonplaatscode {woonplaats.code}. Kan punten voor de WOZ-waarde niet bepalen.",
                 UserWarning,
             )
             return woningwaardering_groep
 
-        logger.info(
-            f"Eenheid {eenheid.id} met woonplaats {woonplaats} ligt in COROP-gebied {corop_gebied['naam']}"
+        logger.debug(
+            f"Eenheid {eenheid.id} met woonplaats {woonplaats.naam} ligt in COROP-gebied {corop_gebied['naam']}"
         )
 
         gemiddelde_woz_waarde_per_m2 = self._gemiddelde_woz_voor_corop_gebied(
