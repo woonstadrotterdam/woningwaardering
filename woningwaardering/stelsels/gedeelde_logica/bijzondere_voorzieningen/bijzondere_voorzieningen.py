@@ -24,11 +24,11 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
 from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 
 
-def waardeer(
+def waardeer_bijzondere_voorzieningen(
     peildatum: date,
     eenheid: EenhedenEenheid,
     stelselgroepen_zonder_opslag: list[Woningwaarderingstelselgroep],
-    stelsel: Woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten,
+    stelsel: Woningwaarderingstelsel,
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
     ) = None,
@@ -46,15 +46,15 @@ def waardeer(
         WoningwaarderingResultatenWoningwaardering: De woningwaarderingen.
     """
     woningwaarderingen = [
-        opslag_zorgwoning(
+        _opslag_zorgwoning(
             peildatum,
             eenheid,
             stelselgroepen_zonder_opslag,
             stelsel,
             woningwaardering_resultaat,
         ),
-        aanbelfunctie_met_video_en_audioverbinding(eenheid),
-        prive_laadpaal(eenheid),
+        _aanbelfunctie_met_video_en_audioverbinding(eenheid),
+        _prive_laadpaal(eenheid),
     ]
 
     for waardering in woningwaarderingen:
@@ -62,7 +62,7 @@ def waardeer(
             yield waardering
 
 
-def opslag_zorgwoning(
+def _opslag_zorgwoning(
     peildatum: date,
     eenheid: EenhedenEenheid,
     stelselgroepen_zonder_opslag: list[Woningwaarderingstelselgroep],
@@ -163,7 +163,7 @@ def opslag_zorgwoning(
     )
 
 
-def aanbelfunctie_met_video_en_audioverbinding(
+def _aanbelfunctie_met_video_en_audioverbinding(
     eenheid: EenhedenEenheid,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Een aanbelfunctie met video- en audioverbinding waarbij de voordeur
@@ -200,7 +200,7 @@ def aanbelfunctie_met_video_en_audioverbinding(
     )
 
 
-def prive_laadpaal(
+def _prive_laadpaal(
     eenheid: EenhedenEenheid,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik

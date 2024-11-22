@@ -5,8 +5,8 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen.bijzondere_voorzieningen import (
-    waardeer,
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_bijzondere_voorzieningen,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -49,13 +49,14 @@ class BijzondereVoorzieningen(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen = list(
-            waardeer(
+            waardeer_bijzondere_voorzieningen(
                 peildatum=self.peildatum,
                 eenheid=eenheid,
                 stelselgroepen_zonder_opslag=[
                     Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
                     self.stelselgroep,
                 ],
+                stelsel=self.stelsel,
                 woningwaardering_resultaat=woningwaardering_resultaat,
             )
         )
