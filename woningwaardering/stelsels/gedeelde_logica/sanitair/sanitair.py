@@ -217,3 +217,58 @@ def _waardeer_wastafels(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {totaal_aantal_wastafels} wastafel(s) zijn minder dan het aantal ingebouwde kasten met wastafel ({aantal_ingebouwde_kasten})."
             f" Een wastafel in een {Voorzieningsoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel.naam} moet apart worden meegegeven."
         )
+
+
+def _waardeer_baden_en_douches(
+    ruimte: EenhedenRuimte, stelsel: Woningwaarderingstelsel
+) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    installaties = Counter([installatie for installatie in ruimte.installaties])
+    zelfstandige_woonruimte = (
+        stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
+    )
+    punten_sanitair = {
+        Voorzieningsoort.wastafel.value: 1.0,
+        Voorzieningsoort.meerpersoonswastafel.value: 1.5,
+        Voorzieningsoort.douche.value: 4.0 if zelfstandige_woonruimte else 3.0,
+        Voorzieningsoort.bad.value: 6.0 if zelfstandige_woonruimte else 5.0,
+        Voorzieningsoort.bad_en_douche.value: 7.0 if zelfstandige_woonruimte else 6.0,
+    }
+    aantal_douches = installaties[Voorzieningsoort.douche.value]
+    aantal_baden = installaties[Voorzieningsoort.bad.value]
+
+    aantal_bad_en_douches = min(aantal_douches, aantal_baden)
+
+    if aantal_bad_en_douches > 0:
+        punten = rond_af(
+            aantal_bad_en_douches
+            * punten_sanitair[Voorzieningsoort.bad_en_douche.value],
+            decimalen=2,
+        )
+
+        yield (
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=f"{ruimte.naam} - {Voorzieningsoort.bad_en_douche.naam}"
+                ),
+                punten=float(punten),
+                aantal=aantal_bad_en_douches,
+            )
+        )
+
+    for voorzieningsoort in [
+        Voorzieningsoort.bad,
+        Voorzieningsoort.douche,
+    ]:
+        aantal = installaties[voorzieningsoort.value] - aantal_bad_en_douches
+        if aantal > 0:
+            punten = rond_af(aantal * punten_sanitair[voorzieningsoort.value], 2)
+
+            yield (
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam=f"{ruimte.naam} - {voorzieningsoort.naam}"
+                    ),
+                    punten=float(punten),
+                    aantal=aantal,
+                )
+            )

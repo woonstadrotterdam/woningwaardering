@@ -10,6 +10,7 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
     _bouwkundige_elementen_naar_installaties,
+    _waardeer_baden_en_douches,
     _waardeer_toiletten,
     _waardeer_wastafels,
 )
@@ -118,53 +119,16 @@ class Sanitair(Stelselgroep):
 
         yield from _waardeer_wastafels(ruimte, stelsel)
 
-        totaal_punten_bad_en_douche = Decimal("0")
-
-        aantal_douches = installaties[Voorzieningsoort.douche.value]
-        aantal_baden = installaties[Voorzieningsoort.bad.value]
-
-        aantal_bad_en_douches = min(aantal_douches, aantal_baden)
-
-        if aantal_bad_en_douches > 0:
-            punten = utils.rond_af(
-                aantal_bad_en_douches
-                * punten_sanitair[Voorzieningsoort.bad_en_douche.value],
-                decimalen=2,
+        baden_en_douches_waarderingen = list(
+            _waardeer_baden_en_douches(ruimte, stelsel)
+        )
+        totaal_punten_bad_en_douche = Decimal(
+            sum(
+                woningwaardering.punten
+                for woningwaardering in baden_en_douches_waarderingen
             )
-
-            totaal_punten_bad_en_douche += punten
-
-            yield (
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"{ruimte.naam} - {Voorzieningsoort.bad_en_douche.naam}"
-                    ),
-                    punten=float(punten),
-                    aantal=aantal_bad_en_douches,
-                )
-            )
-
-        for voorzieningsoort in [
-            Voorzieningsoort.bad,
-            Voorzieningsoort.douche,
-        ]:
-            aantal = installaties[voorzieningsoort.value] - aantal_bad_en_douches
-            if aantal > 0:
-                punten = utils.rond_af(
-                    aantal * punten_sanitair[voorzieningsoort.value], 2
-                )
-
-                totaal_punten_bad_en_douche += punten
-
-                yield (
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{ruimte.naam} - {voorzieningsoort.naam}"
-                        ),
-                        punten=float(punten),
-                        aantal=aantal,
-                    )
-                )
+        )
+        yield from baden_en_douches_waarderingen
 
         punten_voorzieningen = {
             Voorzieningsoort.bubbelfunctie_van_het_bad.value: 1.5,
