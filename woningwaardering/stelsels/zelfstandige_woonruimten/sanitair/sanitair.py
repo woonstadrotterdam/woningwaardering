@@ -10,6 +10,8 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
     _bouwkundige_elementen_naar_installaties,
+    _waardeer_toiletten,
+    _waardeer_wastafels,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -22,7 +24,6 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
     Voorzieningsoort,
     Woningwaarderingstelsel,
@@ -103,50 +104,7 @@ class Sanitair(Stelselgroep):
 
         installaties = Counter([installatie for installatie in ruimte.installaties])
 
-        mapping_toilet = {
-            Ruimtedetailsoort.toiletruimte.value: {
-                Voorzieningsoort.hangend_toilet.value: 3.75,
-                Voorzieningsoort.staand_toilet.value: 3.0,
-            },
-            Ruimtedetailsoort.badkamer.value: {
-                Voorzieningsoort.hangend_toilet.value: 2.75,
-                Voorzieningsoort.staand_toilet.value: 2.0,
-            },
-            Ruimtedetailsoort.badkamer_met_toilet.value: {
-                Voorzieningsoort.hangend_toilet.value: 2.75,
-                Voorzieningsoort.staand_toilet.value: 2.0,
-            },
-        }
-
-        # Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor waardering.
-        if ruimte.detail_soort in [
-            Ruimtedetailsoort.toiletruimte.value,
-            Ruimtedetailsoort.badkamer.value,
-            Ruimtedetailsoort.badkamer_met_toilet.value,
-            Ruimtedetailsoort.doucheruimte.value,
-        ]:
-            for toiletsoort in [
-                Voorzieningsoort.hangend_toilet.value,
-                Voorzieningsoort.staand_toilet.value,
-            ]:
-                aantal_toiletten = installaties[toiletsoort]
-
-                if aantal_toiletten > 0:
-                    yield (
-                        WoningwaarderingResultatenWoningwaardering(
-                            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam=f"{ruimte.naam} - {toiletsoort.naam}",
-                            ),
-                            punten=float(
-                                utils.rond_af(
-                                    mapping_toilet[ruimte.detail_soort][toiletsoort]
-                                    * aantal_toiletten,
-                                    decimalen=2,
-                                )
-                            ),
-                            aantal=aantal_toiletten,
-                        )
-                    )
+        yield from _waardeer_toiletten(ruimte)
 
         punten_sanitair = {
             Voorzieningsoort.wastafel.value: 1.0,
@@ -158,123 +116,7 @@ class Sanitair(Stelselgroep):
             else 6.0,
         }
 
-        totaal_aantal_wastafels = 0
-
-        for wastafelsoort in [
-            Voorzieningsoort.wastafel,
-            Voorzieningsoort.meerpersoonswastafel,
-        ]:
-            aantal_wastafels = installaties[wastafelsoort.value]
-
-            # Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m,
-            # voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd,
-            # maar als wastafel.
-            aantal_spoelbakken = 0
-            if (
-                wastafelsoort == Voorzieningsoort.wastafel
-                and ruimte.detail_soort.code
-                in [
-                    Ruimtedetailsoort.keuken.code,
-                    Ruimtedetailsoort.woonkamer_en_of_keuken.code,
-                    Ruimtedetailsoort.woonkamer.code,
-                    Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-                    Ruimtedetailsoort.slaapkamer.code,
-                ]
-            ):
-                for element in ruimte.bouwkundige_elementen or []:
-                    if (
-                        element.detail_soort
-                        and element.detail_soort.code
-                        == Bouwkundigelementdetailsoort.aanrecht.code
-                    ):
-                        if element.lengte is not None and element.lengte < 1000:
-                            logger.info(
-                                f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m wordt als wastafel gewaardeerd."
-                            )
-                            yield WoningwaarderingResultatenWoningwaardering(
-                                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                    naam=f"{ruimte.naam} - {wastafelsoort.naam} (spoelbak in aanrecht < 1m)"
-                                ),
-                                punten=float(punten_sanitair[wastafelsoort.value]),
-                                aantal=1,
-                            )
-                            aantal_spoelbakken += 1
-
-            totaal_aantal_wastafels += aantal_wastafels
-
-            punten_per_wastafel = Decimal(str(punten_sanitair[wastafelsoort.value]))
-
-            punten_voor_wastafels = utils.rond_af(
-                (aantal_wastafels + aantal_spoelbakken) * punten_per_wastafel,
-                decimalen=2,
-            )
-
-            if aantal_wastafels > 0:
-                yield (
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{ruimte.naam} - {wastafelsoort.naam}"
-                        ),
-                        punten=float(
-                            utils.rond_af(
-                                aantal_wastafels * punten_per_wastafel,
-                                decimalen=2,
-                            )
-                        ),
-                        aantal=aantal_wastafels,
-                    )
-                )
-
-                # Wastafels worden gewaardeerd tot een maximum van 1 punt,
-                # meerpersoonswastafels tot een maximum van 1,5 punt,
-                # per vertrek of overige ruimte, m.u.v. de badkamer.
-                if (
-                    punten_voor_wastafels > punten_per_wastafel
-                    and ruimte.detail_soort
-                    not in [
-                        Ruimtedetailsoort.badkamer.value,
-                        Ruimtedetailsoort.badkamer_met_toilet.value,
-                        Ruimtedetailsoort.doucheruimte.value,
-                    ]
-                    # Op een adres met minimaal acht of meer onzelfstandige woonruimten geldt dit maximum niet voor maximaal één ruimte.
-                    # Dat betekent dat er voor adressen met acht of meer onzelfstandige woonruimten maximaal één ruimte mag zijn,
-                    # naast de badkamer, met meer dan één wastafel die voor waardering in aanmerking komt.
-                    # Voor woonruimten met >= 8 onzelfstandige woonruimten passen we hier geen maximering toe,
-                    # dit doen we in de Sanitair class voor onzelfstandige woonruimten
-                    and (
-                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is None
-                        or (
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                            is not None
-                            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten < 8
-                        )
-                    )
-                ):
-                    logger.info(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
-                    )
-                    yield (
-                        WoningwaarderingResultatenWoningwaardering(
-                            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam=f"{ruimte.naam} - Max {punten_per_wastafel} punt voor {wastafelsoort.naam}",
-                            ),
-                            punten=utils.rond_af(
-                                punten_per_wastafel - punten_voor_wastafels,
-                                decimalen=2,
-                            ),
-                        )
-                    )
-
-        # Waarschuw indien er minder wastafels zijn dan ingebouwde kasten met wastafel
-        # want een wastafel moet apart worden meegegeven
-        aantal_ingebouwde_kasten = installaties[
-            Voorzieningsoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel.value
-        ]
-        if totaal_aantal_wastafels < aantal_ingebouwde_kasten:
-            warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {totaal_aantal_wastafels} wastafel(s) zijn minder dan het aantal ingebouwde kasten met wastafel ({aantal_ingebouwde_kasten})."
-                f" Een wastafel in een {Voorzieningsoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel.naam} moet apart worden meegegeven."
-            )
+        yield from _waardeer_wastafels(ruimte, stelsel)
 
         totaal_punten_bad_en_douche = Decimal("0")
 
@@ -337,6 +179,11 @@ class Sanitair(Stelselgroep):
 
         totaal_punten_voorzieningen = Decimal("0")
 
+        totaal_aantal_wastafels = (
+            installaties[Voorzieningsoort.wastafel.value]
+            + installaties[Voorzieningsoort.meerpersoonswastafel.value]
+        )
+
         if ruimte.detail_soort in [
             Ruimtedetailsoort.badkamer.value,
             Ruimtedetailsoort.badkamer_met_toilet.value,
@@ -355,9 +202,12 @@ class Sanitair(Stelselgroep):
             elif totaal_aantal_wastafels > 0 and totaal_punten_bad_en_douche > 0:
                 for installatie, aantal in installaties.items():
                     if installatie not in (
-                        punten_voorzieningen
-                        | punten_sanitair
-                        | mapping_toilet[Ruimtedetailsoort.toiletruimte.value]
+                        set(punten_voorzieningen)
+                        | set(punten_sanitair)
+                        | {
+                            Voorzieningsoort.hangend_toilet.value,
+                            Voorzieningsoort.staand_toilet.value,
+                        }
                     ):
                         logger.info(
                             f"Installatie {installatie.naam} komt niet in aanmerking voor waardering"
