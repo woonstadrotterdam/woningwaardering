@@ -10,9 +10,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimten,
     waardeer_oppervlakte_van_vertrekken,
-)
-from woningwaardering.stelsels.gedeelde_logica.sanitair import (
-    waardeer as waardeer_sanitair,
+    waardeer_sanitair,
 )
 from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming import (
     maximeer as maximeer_verkoeling_en_verwarming,

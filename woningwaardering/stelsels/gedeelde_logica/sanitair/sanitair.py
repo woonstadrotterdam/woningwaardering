@@ -25,7 +25,7 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
-def waardeer(
+def waardeer_sanitair(
     ruimte: EenhedenRuimte,
     stelselgroep: Woningwaarderingstelselgroep,
     stelsel: Woningwaarderingstelsel,

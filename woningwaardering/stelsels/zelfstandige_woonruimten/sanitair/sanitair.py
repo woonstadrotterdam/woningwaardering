@@ -5,8 +5,8 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
-    waardeer,
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_sanitair,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -57,7 +57,7 @@ class Sanitair(Stelselgroep):
 
         for ruimte in ruimten:
             woningwaardering_groep.woningwaarderingen.extend(
-                waardeer(ruimte, self.stelselgroep, self.stelsel)
+                waardeer_sanitair(ruimte, self.stelselgroep, self.stelsel)
             )
 
         totaal_punten = utils.rond_af_op_kwart(
