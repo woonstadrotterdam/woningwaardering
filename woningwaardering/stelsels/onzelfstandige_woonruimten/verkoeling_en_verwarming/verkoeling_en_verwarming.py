@@ -5,9 +5,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming import (
-    maximeer,
-    waardeer_ruimte,
+from woningwaardering.stelsels.gedeelde_logica import (
+    maximeer_verkoeling_en_verwarming,
+    waardeer_verkoeling_en_verwarming,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
@@ -63,13 +63,13 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaarderingen = list(waardeer_ruimte(ruimte))
+            woningwaarderingen = list(waardeer_verkoeling_en_verwarming(ruimte))
 
             woningwaarderingen_voor_gedeeld.append((ruimte, woningwaarderingen))
 
         # maximering is op basis van de punten voordat ze gedeeld worden door het aantal onzelfstandige woonruimten
         maximering = list(
-            maximeer(
+            maximeer_verkoeling_en_verwarming(
                 [
                     woningwaardering
                     for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld

@@ -24,7 +24,7 @@ from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
-def waardeer_ruimte(
+def waardeer_verkoeling_en_verwarming(
     ruimte: EenhedenRuimte,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     waarderingen = (
@@ -49,7 +49,7 @@ def waardeer_ruimte(
     yield from waarderingen  # Yield de resterende waarderingen
 
 
-def maximeer(
+def maximeer_verkoeling_en_verwarming(
     woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     # som van punten per criteriumsleutel

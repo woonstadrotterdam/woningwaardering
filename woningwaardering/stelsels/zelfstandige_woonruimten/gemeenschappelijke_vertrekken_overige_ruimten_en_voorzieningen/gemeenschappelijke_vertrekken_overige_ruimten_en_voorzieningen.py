@@ -7,16 +7,12 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica import (
+    maximeer_verkoeling_en_verwarming,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimten,
     waardeer_oppervlakte_van_vertrekken,
     waardeer_sanitair,
-)
-from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming import (
-    maximeer as maximeer_verkoeling_en_verwarming,
-)
-from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming import (
-    waardeer_ruimte as waardeer_verkoeling_en_verwarming,
+    waardeer_verkoeling_en_verwarming,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
