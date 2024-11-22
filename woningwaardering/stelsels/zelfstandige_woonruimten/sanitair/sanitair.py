@@ -103,7 +103,9 @@ class Sanitair(Stelselgroep):
             stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
         )
 
-        installaties = Counter([installatie for installatie in ruimte.installaties])
+        installaties = Counter(
+            [installatie for installatie in ruimte.installaties or []]
+        )
 
         yield from _waardeer_toiletten(ruimte)
 
@@ -126,6 +128,7 @@ class Sanitair(Stelselgroep):
             sum(
                 woningwaardering.punten
                 for woningwaardering in baden_en_douches_waarderingen
+                if woningwaardering.punten is not None
             )
         )
         yield from baden_en_douches_waarderingen

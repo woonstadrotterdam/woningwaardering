@@ -22,7 +22,7 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
-def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte):
+def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:
     ruimte.installaties = ruimte.installaties or []
     # Backwards compatibiliteit voor bouwkundige elementen
     for mapping in {
@@ -48,7 +48,7 @@ def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte):
 def _waardeer_toiletten(
     ruimte: EenhedenRuimte,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-    installaties = Counter([installatie for installatie in ruimte.installaties])
+    installaties = Counter([installatie for installatie in ruimte.installaties or []])
     mapping_toilet = {
         Ruimtedetailsoort.toiletruimte.value: {
             Voorzieningsoort.hangend_toilet.value: 3.75,
@@ -99,7 +99,7 @@ def _waardeer_wastafels(
     zelfstandige_woonruimte = (
         stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
     )
-    installaties = Counter([installatie for installatie in ruimte.installaties])
+    installaties = Counter([installatie for installatie in ruimte.installaties or []])
     punten_sanitair = {
         Voorzieningsoort.wastafel.value: 1.0,
         Voorzieningsoort.meerpersoonswastafel.value: 1.5,
@@ -120,13 +120,18 @@ def _waardeer_wastafels(
         # voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd,
         # maar als wastafel.
         aantal_spoelbakken = 0
-        if wastafelsoort == Voorzieningsoort.wastafel and ruimte.detail_soort.code in [
-            Ruimtedetailsoort.keuken.code,
-            Ruimtedetailsoort.woonkamer_en_of_keuken.code,
-            Ruimtedetailsoort.woonkamer.code,
-            Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-            Ruimtedetailsoort.slaapkamer.code,
-        ]:
+        if (
+            wastafelsoort == Voorzieningsoort.wastafel
+            and ruimte.detail_soort
+            and ruimte.detail_soort.code
+            in [
+                Ruimtedetailsoort.keuken.code,
+                Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+                Ruimtedetailsoort.woonkamer.code,
+                Ruimtedetailsoort.woon_en_of_slaapkamer.code,
+                Ruimtedetailsoort.slaapkamer.code,
+            ]
+        ):
             for element in ruimte.bouwkundige_elementen or []:
                 if (
                     element.detail_soort
@@ -196,7 +201,7 @@ def _waardeer_wastafels(
                 )
             ):
                 logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam if ruimte.detail_soort else ruimte.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
                 )
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -222,7 +227,7 @@ def _waardeer_wastafels(
 def _waardeer_baden_en_douches(
     ruimte: EenhedenRuimte, stelsel: Woningwaarderingstelsel
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-    installaties = Counter([installatie for installatie in ruimte.installaties])
+    installaties = Counter([installatie for installatie in ruimte.installaties or []])
     zelfstandige_woonruimte = (
         stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
     )
