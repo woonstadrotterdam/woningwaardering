@@ -30,6 +30,8 @@ LOOKUP_TABEL_FOLDER = (
     "stelsels/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen"
 )
 
+DATUM_FORMAT = "%d-%m-%Y"
+
 
 class PuntenVoorDeWozWaarde(Stelselgroep):
     def __init__(
@@ -91,7 +93,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if not woz_eenheden:
             datums = " of ".join(
                 [
-                    relevante_waardepeildatum.strftime("%x")
+                    relevante_waardepeildatum.strftime(DATUM_FORMAT)
                     for relevante_waardepeildatum in relevante_waardepeildatums
                 ]
             )
@@ -130,7 +132,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"WOZ-waarde op waardepeildatum {woz_waardepeildatum.strftime('%x')}",
+                    naam=f"WOZ-waarde op waardepeildatum {woz_waardepeildatum.strftime(DATUM_FORMAT)}",
                     bovenliggendeCriterium=puntenwaardering_sleutel,
                 ),
                 aantal=woz_waarde,
@@ -159,7 +161,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             or woz_waarde_voor_waardering < minimum_woz_waarde
         ):
             logger.info(
-                f"Eenheid {eenheid.id}: minimum WOZ waarde  {minimum_woz_waarde} voor waardepeildatum {woz_waardepeildatum.strftime('%x')} wordt gebruikt"
+                f"Eenheid {eenheid.id}: minimum WOZ waarde  {minimum_woz_waarde} voor waardepeildatum {woz_waardepeildatum.strftime(DATUM_FORMAT)} wordt gebruikt"
             )
             woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
