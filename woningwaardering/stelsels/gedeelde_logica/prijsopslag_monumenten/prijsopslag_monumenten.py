@@ -3,6 +3,7 @@ from datetime import date
 
 from loguru import logger
 
+from woningwaardering.stelsels.utils import update_eenheid_monumenten
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -144,3 +145,12 @@ def opslag_beschermd_stads_of_dorpsgezicht(
             f"Eenheid ({eenheid.id}) behoort niet tot een beschermd stads- of dorpsgezicht."
         )
     return None
+
+
+def check_monumenten_attribuut(eenheid: EenhedenEenheid) -> None:
+    if eenheid.monumenten is None:
+        warnings.warn(
+            f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
+            UserWarning,
+        )
+        update_eenheid_monumenten(eenheid)

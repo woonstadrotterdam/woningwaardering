@@ -6,14 +6,12 @@ from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
+    check_monumenten_attribuut,
     opslag_beschermd_stads_of_dorpsgezicht,
     opslag_gemeentelijk_of_provinciaal_monument,
     opslag_rijksmonument,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.prijsopslag_monumenten_en_nieuwbouw.prijsopslag_monumenten_en_nieuwbouw import (
-    PrijsopslagMonumentenEnNieuwbouw,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -94,7 +92,7 @@ class PrijsopslagMonumenten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
-        PrijsopslagMonumentenEnNieuwbouw._check_monumenten_attribuut(eenheid)
+        check_monumenten_attribuut(eenheid)
 
         yield opslag_rijksmonument(
             peildatum,

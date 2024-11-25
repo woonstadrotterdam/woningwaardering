@@ -1,4 +1,3 @@
-import warnings
 from datetime import date
 from decimal import Decimal
 from typing import Iterator
@@ -6,9 +5,9 @@ from typing import Iterator
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 
-from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
+    check_monumenten_attribuut,
     opslag_beschermd_stads_of_dorpsgezicht,
     opslag_gemeentelijk_of_provinciaal_monument,
     opslag_rijksmonument,
@@ -93,7 +92,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
-        PrijsopslagMonumentenEnNieuwbouw._check_monumenten_attribuut(eenheid)
+        check_monumenten_attribuut(eenheid)
 
         yield opslag_rijksmonument(peildatum, eenheid)
         yield opslag_gemeentelijk_of_provinciaal_monument(eenheid)
@@ -101,15 +100,6 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         yield PrijsopslagMonumentenEnNieuwbouw._opslag_nieuwbouw(
             peildatum, eenheid, woningwaardering_resultaat
         )
-
-    @staticmethod
-    def _check_monumenten_attribuut(eenheid: EenhedenEenheid) -> None:
-        if eenheid.monumenten is None:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
-                UserWarning,
-            )
-            utils.update_eenheid_monumenten(eenheid)
 
     @staticmethod
     def _opslag_nieuwbouw(
