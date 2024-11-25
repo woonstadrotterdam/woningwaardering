@@ -704,7 +704,7 @@ Punten worden toegekend op basis van de WOZ-waarde van het adres waar de onzelfs
 
 De waardepeildatum van de WOZ-waarde ligt op 1 januari van twee kalenderjaren voorafgaand. Ter illustratie: de WOZ-waarde in de WOZ-beschikking van 2024 heeft een waardepeildatum van 1 januari 2022.
 
-> Hier staat een fout in het beleidsboek. Dit moet zijn: Ter illustratie: de WOZ-waarde in de WOZ-beschikking van 2023 heeft een waardepeildatum van 1 januari 2022.
+> Hier staat een fout in het beleidsboek. Dit moet zijn: Ter illustratie: de WOZ-waarde in de WOZ-beschikking van **2023** heeft een waardepeildatum van 1 januari 2022.
 
 ### 11.1 Puntentoekenning
 
