@@ -6,8 +6,8 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
-    waardeer,
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_gemeenschappelijke_parkeerruimten,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -56,7 +56,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             return woningwaardering_groep
 
         for ruimte in eenheid.ruimten:
-            woningwaardering = waardeer(ruimte)
+            woningwaardering = waardeer_gemeenschappelijke_parkeerruimten(ruimte)
             if woningwaardering is not None:
                 woningwaardering_groep.woningwaarderingen.extend(list(woningwaardering))
 
