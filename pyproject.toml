@@ -29,6 +29,7 @@ dependencies = [
     "PyYAML==6.*",
     "prettytable==3.*",
     "pandas==2.*",
+    "requests==2.*",
     "SPARQLWrapper==2.*",
 ]
 

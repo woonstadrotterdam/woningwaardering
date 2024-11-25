@@ -1,0 +1,2502 @@
+Woonplaatscode,Woonplaats,Gemeentecode,Gemeente,COROP-gebiedcode,COROP-gebied
+1000,Hoogerheide,0873,Woensdrecht,33,West-Noord-Brabant
+1001,Huijbergen,0873,Woensdrecht,33,West-Noord-Brabant
+1002,Ossendrecht,0873,Woensdrecht,33,West-Noord-Brabant
+1003,Putte,0873,Woensdrecht,33,West-Noord-Brabant
+1004,Woensdrecht,0873,Woensdrecht,33,West-Noord-Brabant
+1005,Gouda,0513,Gouda,28,Oost-Zuid-Holland
+1006,Waalre,0866,Waalre,36,Zuidoost-Noord-Brabant
+1007,Middelburg,0687,Middelburg (Z.),32,Overig Zeeland
+1008,Arnemuiden,0687,Middelburg (Z.),32,Overig Zeeland
+1009,Nieuw- en Sint Joosland,0687,Middelburg (Z.),32,Overig Zeeland
+1010,Etten-Leur,0777,Etten-Leur,33,West-Noord-Brabant
+1011,Huizen,0406,Huizen,24,Het Gooi en Vechtstreek
+1013,Soest,0342,Soest,17,Utrecht
+1014,Soesterberg,0342,Soest,17,Utrecht
+1015,Vlaardingen,0622,Vlaardingen,29,Groot-Rijnmond
+1016,Nieuwerkerk aan den IJssel,1892,Zuidplas,29,Groot-Rijnmond
+1017,Foxhol,1952,Midden-Groningen,03,Overig Groningen
+1018,Hoogezand,1952,Midden-Groningen,03,Overig Groningen
+1019,Kiel-Windeweer,1952,Midden-Groningen,03,Overig Groningen
+1020,Kropswolde,1952,Midden-Groningen,03,Overig Groningen
+1021,Sappemeer,1952,Midden-Groningen,03,Overig Groningen
+1022,Waterhuizen,1952,Midden-Groningen,03,Overig Groningen
+1023,Westerbroek,1952,Midden-Groningen,03,Overig Groningen
+1026,America,1507,Horst aan de Maas,37,Noord-Limburg
+1027,Broekhuizen,1507,Horst aan de Maas,37,Noord-Limburg
+1028,Broekhuizenvorst,1507,Horst aan de Maas,37,Noord-Limburg
+1029,Griendtsveen,1507,Horst aan de Maas,37,Noord-Limburg
+1030,Grubbenvorst,1507,Horst aan de Maas,37,Noord-Limburg
+1031,Hegelsom,1507,Horst aan de Maas,37,Noord-Limburg
+1032,Horst,1507,Horst aan de Maas,37,Noord-Limburg
+1033,Lottum,1507,Horst aan de Maas,37,Noord-Limburg
+1034,Melderslo,1507,Horst aan de Maas,37,Noord-Limburg
+1035,Meterik,1507,Horst aan de Maas,37,Noord-Limburg
+1036,Hilversum,0402,Hilversum,24,Het Gooi en Vechtstreek
+1037,Eemnes,0317,Eemnes,17,Utrecht
+1038,Daarle,0163,Hellendoorn,12,Twente
+1039,Daarlerveen,0163,Hellendoorn,12,Twente
+1040,Haarle,0163,Hellendoorn,12,Twente
+1043,Tilburg,0855,Tilburg,34,Midden-Noord-Brabant
+1044,Berkel-Enschot,0855,Tilburg,34,Midden-Noord-Brabant
+1045,Udenhout,0855,Tilburg,34,Midden-Noord-Brabant
+1046,Staphorst,0180,Staphorst,10,Noord-Overijssel
+1047,Rouveen,0180,Staphorst,10,Noord-Overijssel
+1048,IJhorst,0180,Staphorst,10,Noord-Overijssel
+1049,Punthorst,0180,Staphorst,10,Noord-Overijssel
+1050,Amstelveen,0362,Amstelveen,23,Groot-Amsterdam
+1051,Lelystad,0995,Lelystad,40,Flevoland
+1052,Naarden,1942,Gooise Meren,24,Het Gooi en Vechtstreek
+1053,Andijk,0420,Medemblik,18,Kop van Noord-Holland
+1056,Kootwijkerbroek,0203,Barneveld,13,Veluwe
+1057,Garderen,0203,Barneveld,13,Veluwe
+1059,Stroe,0203,Barneveld,13,Veluwe
+1061,De Glind,0203,Barneveld,13,Veluwe
+1062,Kootwijk,0203,Barneveld,13,Veluwe
+1063,Achterveld,0203,Barneveld,13,Veluwe
+1064,Bladel,1728,Bladel,36,Zuidoost-Noord-Brabant
+1065,Hapert,1728,Bladel,36,Zuidoost-Noord-Brabant
+1066,Hoogeloon,1728,Bladel,36,Zuidoost-Noord-Brabant
+1067,Casteren,1728,Bladel,36,Zuidoost-Noord-Brabant
+1068,Netersel,1728,Bladel,36,Zuidoost-Noord-Brabant
+1069,Maassluis,0556,Maassluis,29,Groot-Rijnmond
+1070,Groningen,0014,Groningen,03,Overig Groningen
+1071,Woerden,0632,Woerden,17,Utrecht
+1072,Harmelen,0632,Woerden,17,Utrecht
+1073,Kamerik,0632,Woerden,17,Utrecht
+1074,Zegveld,0632,Woerden,17,Utrecht
+1075,Zeewolde,0050,Zeewolde,40,Flevoland
+1076,Oost-Souburg,0718,Vlissingen,32,Overig Zeeland
+1077,Ritthem,0718,Vlissingen,32,Overig Zeeland
+1078,Vlissingen,0718,Vlissingen,32,Overig Zeeland
+1079,Aarlanderveen,0484,Alphen aan den Rijn,28,Oost-Zuid-Holland
+1080,Alphen aan den Rijn,0484,Alphen aan den Rijn,28,Oost-Zuid-Holland
+1081,Zwammerdam,0484,Alphen aan den Rijn,28,Oost-Zuid-Holland
+1082,Meppel,0119,Meppel,09,Zuidwest-Drenthe
+1083,Nijeveen,0119,Meppel,09,Zuidwest-Drenthe
+1084,Rogat,0119,Meppel,09,Zuidwest-Drenthe
+1085,De Schiphorst,0119,Meppel,09,Zuidwest-Drenthe
+1086,Broekhuizen,0119,Meppel,09,Zuidwest-Drenthe
+1087,Wierden,0189,Wierden,12,Twente
+1088,Enter,0189,Wierden,12,Twente
+1089,Hoge Hexel,0189,Wierden,12,Twente
+1090,Notter,0189,Wierden,12,Twente
+1091,Zuna,0189,Wierden,12,Twente
+1092,Baarn,0308,Baarn,17,Utrecht
+1093,Lage Vuursche,0308,Baarn,17,Utrecht
+1094,Dodewaard,1740,Neder-Betuwe,16,Zuidwest-Gelderland
+1096,Kesteren,1740,Neder-Betuwe,16,Zuidwest-Gelderland
+1097,Ochten,1740,Neder-Betuwe,16,Zuidwest-Gelderland
+1098,Opheusden,1740,Neder-Betuwe,16,Zuidwest-Gelderland
+1099,IJzendoorn,1740,Neder-Betuwe,16,Zuidwest-Gelderland
+1100,Valkenswaard,0858,Valkenswaard,36,Zuidoost-Noord-Brabant
+1101,Eindhoven,0772,Eindhoven,36,Zuidoost-Noord-Brabant
+1102,Bovenkarspel,0532,Stede Broec,18,Kop van Noord-Holland
+1103,Grootebroek,0532,Stede Broec,18,Kop van Noord-Holland
+1104,Lutjebroek,0532,Stede Broec,18,Kop van Noord-Holland
+1105,Capelle aan den IJssel,0502,Capelle aan den IJssel,29,Groot-Rijnmond
+1107,Zwaagdijk-Oost,0420,Medemblik,18,Kop van Noord-Holland
+1108,Nieuwegein,0356,Nieuwegein,17,Utrecht
+1109,Empe,0213,Brummen,14,Achterhoek
+1110,Tonden,0213,Brummen,14,Achterhoek
+1111,Brummen,0213,Brummen,14,Achterhoek
+1112,Leuvenheim,0213,Brummen,14,Achterhoek
+1113,Hall,0213,Brummen,14,Achterhoek
+1114,Eerbeek,0213,Brummen,14,Achterhoek
+1115,Sint Pancras,1980,Dijk en Waard,19,Alkmaar en omgeving
+1116,Broek op Langedijk,1980,Dijk en Waard,19,Alkmaar en omgeving
+1117,Zuid-Scharwoude,1980,Dijk en Waard,19,Alkmaar en omgeving
+1118,Noord-Scharwoude,1980,Dijk en Waard,19,Alkmaar en omgeving
+1119,Oudkarspel,1980,Dijk en Waard,19,Alkmaar en omgeving
+1120,Koedijk,1980,Dijk en Waard,19,Alkmaar en omgeving
+1121,Bergen L,0893,Bergen (L.),37,Noord-Limburg
+1122,Afferden L,0893,Bergen (L.),37,Noord-Limburg
+1123,Siebengewald,0893,Bergen (L.),37,Noord-Limburg
+1124,Well L,0893,Bergen (L.),37,Noord-Limburg
+1125,Wellerlooi,0893,Bergen (L.),37,Noord-Limburg
+1126,Geldrop,1771,Geldrop-Mierlo,36,Zuidoost-Noord-Brabant
+1127,Mierlo,1771,Geldrop-Mierlo,36,Zuidoost-Noord-Brabant
+1128,Axel,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1129,Biervliet,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1130,Hoek,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1131,Koewacht,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1132,Overslag,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1133,Philippine,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1134,Sas van Gent,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1135,Sluiskil,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1136,Spui,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1137,Terneuzen,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1138,Westdorpe,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1139,Zaamslag,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1140,Zuiddorpe,0715,Terneuzen,31,Zeeuwsch-Vlaanderen
+1141,Pijnacker,1926,Pijnacker-Nootdorp,26,Agglomeratie 's-Gravenhage
+1142,Nootdorp,1926,Pijnacker-Nootdorp,26,Agglomeratie 's-Gravenhage
+1143,Delfgauw,1926,Pijnacker-Nootdorp,26,Agglomeratie 's-Gravenhage
+1144,Krimpen aan den IJssel,0542,Krimpen aan den IJssel,29,Groot-Rijnmond
+1145,Enschede,0153,Enschede,12,Twente
+1146,Helmond,0794,Helmond,36,Zuidoost-Noord-Brabant
+1147,Amen,1680,Aa en Hunze,07,Noord-Drenthe
+1148,Anderen,1680,Aa en Hunze,07,Noord-Drenthe
+1149,Anloo,1680,Aa en Hunze,07,Noord-Drenthe
+1150,Annen,1680,Aa en Hunze,07,Noord-Drenthe
+1151,Annerveenschekanaal,1680,Aa en Hunze,07,Noord-Drenthe
+1152,Balloo,1680,Aa en Hunze,07,Noord-Drenthe
+1153,Balloërveld,1680,Aa en Hunze,07,Noord-Drenthe
+1154,Deurze,1680,Aa en Hunze,07,Noord-Drenthe
+1155,Eext,1680,Aa en Hunze,07,Noord-Drenthe
+1156,Eexterveen,1680,Aa en Hunze,07,Noord-Drenthe
+1157,Eexterveenschekanaal,1680,Aa en Hunze,07,Noord-Drenthe
+1158,Eexterzandvoort,1680,Aa en Hunze,07,Noord-Drenthe
+1159,Ekehaar,1680,Aa en Hunze,07,Noord-Drenthe
+1160,Eldersloo,1680,Aa en Hunze,07,Noord-Drenthe
+1161,Eleveld,1680,Aa en Hunze,07,Noord-Drenthe
+1162,Gasselte,1680,Aa en Hunze,07,Noord-Drenthe
+1163,Gasselternijveen,1680,Aa en Hunze,07,Noord-Drenthe
+1164,Gasselternijveenschemond,1680,Aa en Hunze,07,Noord-Drenthe
+1165,Gasteren,1680,Aa en Hunze,07,Noord-Drenthe
+1166,Geelbroek,1680,Aa en Hunze,07,Noord-Drenthe
+1167,Gieten,1680,Aa en Hunze,07,Noord-Drenthe
+1168,Gieterveen,1680,Aa en Hunze,07,Noord-Drenthe
+1169,Grolloo,1680,Aa en Hunze,07,Noord-Drenthe
+1170,Marwijksoord,1680,Aa en Hunze,07,Noord-Drenthe
+1171,Nieuw Annerveen,1680,Aa en Hunze,07,Noord-Drenthe
+1172,Nieuwediep,1680,Aa en Hunze,07,Noord-Drenthe
+1173,Nijlande,1680,Aa en Hunze,07,Noord-Drenthe
+1174,Nooitgedacht,1680,Aa en Hunze,07,Noord-Drenthe
+1175,Oud Annerveen,1680,Aa en Hunze,07,Noord-Drenthe
+1176,Papenvoort,1680,Aa en Hunze,07,Noord-Drenthe
+1177,Rolde,1680,Aa en Hunze,07,Noord-Drenthe
+1178,Schipborg,1680,Aa en Hunze,07,Noord-Drenthe
+1179,Schoonloo,1680,Aa en Hunze,07,Noord-Drenthe
+1180,Spijkerboor,1680,Aa en Hunze,07,Noord-Drenthe
+1181,Vredenheim,1680,Aa en Hunze,07,Noord-Drenthe
+1182,Zwolle,0193,Zwolle,10,Noord-Overijssel
+1183,Avenhorn,1598,Koggenland,18,Kop van Noord-Holland
+1184,Berkhout,1598,Koggenland,18,Kop van Noord-Holland
+1185,De Goorn,1598,Koggenland,18,Kop van Noord-Holland
+1186,Hensbroek,1598,Koggenland,18,Kop van Noord-Holland
+1187,Obdam,1598,Koggenland,18,Kop van Noord-Holland
+1188,Oudendijk,1598,Koggenland,18,Kop van Noord-Holland
+1189,Scharwoude,1598,Koggenland,18,Kop van Noord-Holland
+1190,Spierdijk,1598,Koggenland,18,Kop van Noord-Holland
+1191,Ursem,1598,Koggenland,18,Kop van Noord-Holland
+1192,Zuidermeer,1598,Koggenland,18,Kop van Noord-Holland
+1193,Aalten,0197,Aalten,14,Achterhoek
+1194,Bredevoort,0197,Aalten,14,Achterhoek
+1195,De Heurne,0197,Aalten,14,Achterhoek
+1196,Dinxperlo,0197,Aalten,14,Achterhoek
+1198,Lekkum,0080,Leeuwarden,04,Noord-Friesland
+1199,Miedum,0080,Leeuwarden,04,Noord-Friesland
+1200,Snakkerburen,0080,Leeuwarden,04,Noord-Friesland
+1202,Hempens,0080,Leeuwarden,04,Noord-Friesland
+1203,Teerns,0080,Leeuwarden,04,Noord-Friesland
+1204,Swichum,0080,Leeuwarden,04,Noord-Friesland
+1206,Wytgaard,0080,Leeuwarden,04,Noord-Friesland
+1207,Oirschot,0823,Oirschot,36,Zuidoost-Noord-Brabant
+1208,Oost West en Middelbeers,0823,Oirschot,36,Zuidoost-Noord-Brabant
+1209,Oostvoorne,1992,Voorne aan Zee,29,Groot-Rijnmond
+1210,Rockanje,1992,Voorne aan Zee,29,Groot-Rijnmond
+1211,Tinte,1992,Voorne aan Zee,29,Groot-Rijnmond
+1212,Moerkapelle,1892,Zuidplas,29,Groot-Rijnmond
+1213,Zevenhuizen,1892,Zuidplas,29,Groot-Rijnmond
+1214,Beugen,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1215,Boxmeer,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1216,Groeningen,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1217,Holthees,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1218,Maashees,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1219,Oeffelt,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1220,Overloon,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1221,Rijkevoort,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1222,Sambeek,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1223,Vierlingsbeek,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1224,Vortum-Mullem,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1225,Gulpen,1729,Gulpen-Wittem,39,Zuid-Limburg
+1226,Ingber,1729,Gulpen-Wittem,39,Zuid-Limburg
+1227,Reijmerstok,1729,Gulpen-Wittem,39,Zuid-Limburg
+1228,Heijenrath,1729,Gulpen-Wittem,39,Zuid-Limburg
+1229,Slenaken,1729,Gulpen-Wittem,39,Zuid-Limburg
+1230,Beutenaken,1729,Gulpen-Wittem,39,Zuid-Limburg
+1231,Mechelen,1729,Gulpen-Wittem,39,Zuid-Limburg
+1232,Epen,1729,Gulpen-Wittem,39,Zuid-Limburg
+1233,Wittem,1729,Gulpen-Wittem,39,Zuid-Limburg
+1234,Eys,1729,Gulpen-Wittem,39,Zuid-Limburg
+1235,Elkenrade,1729,Gulpen-Wittem,39,Zuid-Limburg
+1236,Wijlre,1729,Gulpen-Wittem,39,Zuid-Limburg
+1237,Dalfsen,0148,Dalfsen,10,Noord-Overijssel
+1238,Lemelerveld,0148,Dalfsen,10,Noord-Overijssel
+1239,Nieuwleusen,0148,Dalfsen,10,Noord-Overijssel
+1240,Veendam,0047,Veendam,01,Oost-Groningen
+1241,Wildervank,0047,Veendam,01,Oost-Groningen
+1242,Borgercompagnie,0047,Veendam,01,Oost-Groningen
+1243,Heiloo,0399,Heiloo,19,Alkmaar en omgeving
+1244,Moordrecht,1892,Zuidplas,29,Groot-Rijnmond
+1245,'s-Gravenhage,0518,'s-Gravenhage,26,Agglomeratie 's-Gravenhage
+1246,Oudenbosch,1655,Halderberge,33,West-Noord-Brabant
+1247,Stampersgat,1655,Halderberge,33,West-Noord-Brabant
+1248,Oud Gastel,1655,Halderberge,33,West-Noord-Brabant
+1249,Bosschenhoofd,1655,Halderberge,33,West-Noord-Brabant
+1250,Hoeven,1655,Halderberge,33,West-Noord-Brabant
+1251,Baarland,0654,Borsele,32,Overig Zeeland
+1252,Borssele,0654,Borsele,32,Overig Zeeland
+1253,Driewegen,0654,Borsele,32,Overig Zeeland
+1254,Ellewoutsdijk,0654,Borsele,32,Overig Zeeland
+1255,Heinkenszand,0654,Borsele,32,Overig Zeeland
+1256,Hoedekenskerke,0654,Borsele,32,Overig Zeeland
+1257,Kwadendamme,0654,Borsele,32,Overig Zeeland
+1258,Lewedorp,0654,Borsele,32,Overig Zeeland
+1259,Nieuwdorp,0654,Borsele,32,Overig Zeeland
+1260,Nisse,0654,Borsele,32,Overig Zeeland
+1261,Oudelande,0654,Borsele,32,Overig Zeeland
+1262,Ovezande,0654,Borsele,32,Overig Zeeland
+1263,'s-Gravenpolder,0654,Borsele,32,Overig Zeeland
+1264,'s-Heer Abtskerke,0654,Borsele,32,Overig Zeeland
+1265,'s-Heerenhoek,0654,Borsele,32,Overig Zeeland
+1266,Haren Gn,0014,Groningen,03,Overig Groningen
+1267,Glimmen,0014,Groningen,03,Overig Groningen
+1268,Noordlaren,0014,Groningen,03,Overig Groningen
+1269,Onnen,0014,Groningen,03,Overig Groningen
+1270,Almere,0034,Almere,40,Flevoland
+1271,Emmeloord,0171,Noordoostpolder,40,Flevoland
+1272,Bant,0171,Noordoostpolder,40,Flevoland
+1273,Luttelgeest,0171,Noordoostpolder,40,Flevoland
+1274,Marknesse,0171,Noordoostpolder,40,Flevoland
+1275,Kraggenburg,0171,Noordoostpolder,40,Flevoland
+1276,Ens,0171,Noordoostpolder,40,Flevoland
+1277,Schokland,0171,Noordoostpolder,40,Flevoland
+1278,Nagele,0171,Noordoostpolder,40,Flevoland
+1279,Tollebeek,0171,Noordoostpolder,40,Flevoland
+1280,Espel,0171,Noordoostpolder,40,Flevoland
+1281,Creil,0171,Noordoostpolder,40,Flevoland
+1282,Rutten,0171,Noordoostpolder,40,Flevoland
+1283,Albergen,0183,Tubbergen,12,Twente
+1284,Fleringen,0183,Tubbergen,12,Twente
+1285,Geesteren,0183,Tubbergen,12,Twente
+1286,Haarle,0183,Tubbergen,12,Twente
+1287,Harbrinkhoek,0183,Tubbergen,12,Twente
+1288,Hezingen,0183,Tubbergen,12,Twente
+1289,Langeveen,0183,Tubbergen,12,Twente
+1290,Mander,0183,Tubbergen,12,Twente
+1291,Manderveen,0183,Tubbergen,12,Twente
+1292,Mariaparochie,0183,Tubbergen,12,Twente
+1293,Reutum,0183,Tubbergen,12,Twente
+1294,Tubbergen,0183,Tubbergen,12,Twente
+1295,Vasse,0183,Tubbergen,12,Twente
+1296,Arnhem,0202,Arnhem,15,Arnhem/Nijmegen
+1297,Zevenaar,0299,Zevenaar,15,Arnhem/Nijmegen
+1298,Babberich,0299,Zevenaar,15,Arnhem/Nijmegen
+1299,Angerlo,0299,Zevenaar,15,Arnhem/Nijmegen
+1300,Giesbeek,0299,Zevenaar,15,Arnhem/Nijmegen
+1301,Lathum,0299,Zevenaar,15,Arnhem/Nijmegen
+1302,Wijk bij Duurstede,0352,Wijk bij Duurstede,17,Utrecht
+1303,Langbroek,0352,Wijk bij Duurstede,17,Utrecht
+1304,Cothen,0352,Wijk bij Duurstede,17,Utrecht
+1305,Zandvoort,0473,Zandvoort,21,Agglomeratie Haarlem
+1306,Bentveld,0473,Zandvoort,21,Agglomeratie Haarlem
+1307,Hilvarenbeek,0798,Hilvarenbeek,34,Midden-Noord-Brabant
+1308,Diessen,0798,Hilvarenbeek,34,Midden-Noord-Brabant
+1309,Biest-Houtakker,0798,Hilvarenbeek,34,Midden-Noord-Brabant
+1310,Haghorst,0798,Hilvarenbeek,34,Midden-Noord-Brabant
+1311,Esbeek,0798,Hilvarenbeek,34,Midden-Noord-Brabant
+1312,Heerlen,0917,Heerlen,39,Zuid-Limburg
+1313,Hoensbroek,0917,Heerlen,39,Zuid-Limburg
+1314,Heeze,1658,Heeze-Leende,36,Zuidoost-Noord-Brabant
+1315,Leende,1658,Heeze-Leende,36,Zuidoost-Noord-Brabant
+1316,Sterksel,1658,Heeze-Leende,36,Zuidoost-Noord-Brabant
+1317,Willemstad,1709,Moerdijk,33,West-Noord-Brabant
+1318,Heijningen,1709,Moerdijk,33,West-Noord-Brabant
+1319,Klundert,1709,Moerdijk,33,West-Noord-Brabant
+1320,Oudemolen,1709,Moerdijk,33,West-Noord-Brabant
+1321,Fijnaart,1709,Moerdijk,33,West-Noord-Brabant
+1322,Moerdijk,1709,Moerdijk,33,West-Noord-Brabant
+1323,Zevenbergen,1709,Moerdijk,33,West-Noord-Brabant
+1324,Standdaarbuiten,1709,Moerdijk,33,West-Noord-Brabant
+1325,Noordhoek,1709,Moerdijk,33,West-Noord-Brabant
+1326,Langeweg,1709,Moerdijk,33,West-Noord-Brabant
+1327,Zevenbergschen Hoek,1709,Moerdijk,33,West-Noord-Brabant
+1328,Landsmeer,0415,Landsmeer,23,Groot-Amsterdam
+1329,Den Ilp,0415,Landsmeer,23,Groot-Amsterdam
+1330,Purmerland,0415,Landsmeer,23,Groot-Amsterdam
+1331,Bussum,1942,Gooise Meren,24,Het Gooi en Vechtstreek
+1332,Abcoude,0736,De Ronde Venen,17,Utrecht
+1333,Baambrugge,0736,De Ronde Venen,17,Utrecht
+1334,Almen,0262,Lochem,14,Achterhoek
+1335,Barchem,0262,Lochem,14,Achterhoek
+1336,Eefde,0262,Lochem,14,Achterhoek
+1337,Epse,0262,Lochem,14,Achterhoek
+1338,Gorssel,0262,Lochem,14,Achterhoek
+1339,Harfsen,0262,Lochem,14,Achterhoek
+1340,Joppe,0262,Lochem,14,Achterhoek
+1341,Kring van Dorth,0262,Lochem,14,Achterhoek
+1342,Laren,0262,Lochem,14,Achterhoek
+1343,Lochem,0262,Lochem,14,Achterhoek
+1344,Epe,0232,Epe,13,Veluwe
+1345,Vaassen,0232,Epe,13,Veluwe
+1346,Emst,0232,Epe,13,Veluwe
+1347,Oene,0232,Epe,13,Veluwe
+1348,Froombosch,1952,Midden-Groningen,03,Overig Groningen
+1349,Harkstede,1952,Midden-Groningen,03,Overig Groningen
+1350,Hellum,1952,Midden-Groningen,03,Overig Groningen
+1351,Kolham,1952,Midden-Groningen,03,Overig Groningen
+1352,Lageland,1952,Midden-Groningen,03,Overig Groningen
+1353,Luddeweer,1952,Midden-Groningen,03,Overig Groningen
+1354,Overschild,1952,Midden-Groningen,03,Overig Groningen
+1355,Scharmer,1952,Midden-Groningen,03,Overig Groningen
+1356,Schildwolde,1952,Midden-Groningen,03,Overig Groningen
+1357,Siddeburen,1952,Midden-Groningen,03,Overig Groningen
+1358,Slochteren,1952,Midden-Groningen,03,Overig Groningen
+1359,Steendam,1952,Midden-Groningen,03,Overig Groningen
+1360,Tjuchem,1952,Midden-Groningen,03,Overig Groningen
+1361,Woudbloem,1952,Midden-Groningen,03,Overig Groningen
+1362,Tzum,1949,Waadhoeke,04,Noord-Friesland
+1363,Hitzum,1949,Waadhoeke,04,Noord-Friesland
+1364,Achlum,1949,Waadhoeke,04,Noord-Friesland
+1365,Herbaijum,1949,Waadhoeke,04,Noord-Friesland
+1366,Franeker,1949,Waadhoeke,04,Noord-Friesland
+1367,Zweins,1949,Waadhoeke,04,Noord-Friesland
+1368,Peins,1949,Waadhoeke,04,Noord-Friesland
+1369,Schalsum,1949,Waadhoeke,04,Noord-Friesland
+1370,Ried,1949,Waadhoeke,04,Noord-Friesland
+1371,Boer,1949,Waadhoeke,04,Noord-Friesland
+1372,Dongjum,1949,Waadhoeke,04,Noord-Friesland
+1373,Sexbierum,1949,Waadhoeke,04,Noord-Friesland
+1374,Pietersbierum,1949,Waadhoeke,04,Noord-Friesland
+1375,Oosterbierum,1949,Waadhoeke,04,Noord-Friesland
+1376,Klooster Lidlum,1949,Waadhoeke,04,Noord-Friesland
+1377,Tzummarum,1949,Waadhoeke,04,Noord-Friesland
+1378,Firdgum,1949,Waadhoeke,04,Noord-Friesland
+1379,Olst,1773,Olst-Wijhe,11,Zuidwest-Overijssel
+1380,Wijhe,1773,Olst-Wijhe,11,Zuidwest-Overijssel
+1381,Wesepe,1773,Olst-Wijhe,11,Zuidwest-Overijssel
+1382,Welsum,1773,Olst-Wijhe,11,Zuidwest-Overijssel
+1383,Marle,1773,Olst-Wijhe,11,Zuidwest-Overijssel
+1384,Veldhoven,0861,Veldhoven,36,Zuidoost-Noord-Brabant
+1385,Abbenbroek,1930,Nissewaard,29,Groot-Rijnmond
+1386,Geervliet,1930,Nissewaard,29,Groot-Rijnmond
+1387,Heenvliet,1930,Nissewaard,29,Groot-Rijnmond
+1388,Oudenhoorn,1992,Voorne aan Zee,29,Groot-Rijnmond
+1389,Simonshaven,1930,Nissewaard,29,Groot-Rijnmond
+1390,Zuidland,1930,Nissewaard,29,Groot-Rijnmond
+1392,Breukelen,1904,Stichtse Vecht,17,Utrecht
+1393,Kockengen,1904,Stichtse Vecht,17,Utrecht
+1394,Nieuwer Ter Aa,1904,Stichtse Vecht,17,Utrecht
+1395,Zutphen,0301,Zutphen,14,Achterhoek
+1396,Warnsveld,0301,Zutphen,14,Achterhoek
+1397,Oude Pekela,0765,Pekela,01,Oost-Groningen
+1398,Nieuwe Pekela,0765,Pekela,01,Oost-Groningen
+1399,Rhenen,0340,Rhenen,17,Utrecht
+1400,Elst Ut,0340,Rhenen,17,Utrecht
+1401,De Heen,0851,Steenbergen,33,West-Noord-Brabant
+1402,Dinteloord,0851,Steenbergen,33,West-Noord-Brabant
+1403,Kruisland,0851,Steenbergen,33,West-Noord-Brabant
+1404,Nieuw-Vossemeer,0851,Steenbergen,33,West-Noord-Brabant
+1405,Steenbergen,0851,Steenbergen,33,West-Noord-Brabant
+1406,Maastricht,0935,Maastricht,39,Zuid-Limburg
+1407,Agelo,1774,Dinkelland,12,Twente
+1408,Denekamp,1774,Dinkelland,12,Twente
+1409,Deurningen,1774,Dinkelland,12,Twente
+1410,Lattrop-Breklenkamp,1774,Dinkelland,12,Twente
+1411,Nutter,1774,Dinkelland,12,Twente
+1412,Ootmarsum,1774,Dinkelland,12,Twente
+1413,Oud Ootmarsum,1774,Dinkelland,12,Twente
+1414,Rossum,1774,Dinkelland,12,Twente
+1415,Saasveld,1774,Dinkelland,12,Twente
+1416,Tilligte,1774,Dinkelland,12,Twente
+1417,Weerselo,1774,Dinkelland,12,Twente
+1419,Finsterwolde,1895,Oldambt,01,Oost-Groningen
+1420,Bad Nieuweschans,1895,Oldambt,01,Oost-Groningen
+1421,Nieuw Beerta,1895,Oldambt,01,Oost-Groningen
+1422,Drieborg,1895,Oldambt,01,Oost-Groningen
+1423,Oudezijl,1895,Oldambt,01,Oost-Groningen
+1425,Biezenmortel,0855,Tilburg,34,Midden-Noord-Brabant
+1426,Esch,0757,Boxtel,35,Noordoost-Noord-Brabant
+1427,Haaren,0824,Oisterwijk,34,Midden-Noord-Brabant
+1428,Helvoirt,0865,Vught,35,Noordoost-Noord-Brabant
+1429,Vaals,0981,Vaals,39,Zuid-Limburg
+1430,Lemiers,0981,Vaals,39,Zuid-Limburg
+1431,Vijlen,0981,Vaals,39,Zuid-Limburg
+1432,Arkel,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1433,Giessenburg,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1434,Hoogblokland,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1435,Hoornaar,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1436,Noordeloos,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1437,Schelluinen,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1438,Ambt Delden,1735,Hof van Twente,12,Twente
+1439,Bentelo,1735,Hof van Twente,12,Twente
+1440,Delden,1735,Hof van Twente,12,Twente
+1441,Diepenheim,1735,Hof van Twente,12,Twente
+1442,Goor,1735,Hof van Twente,12,Twente
+1443,Hengevelde,1735,Hof van Twente,12,Twente
+1444,Markelo,1735,Hof van Twente,12,Twente
+1445,Aarle-Rixtel,1659,Laarbeek,36,Zuidoost-Noord-Brabant
+1446,Beek en Donk,1659,Laarbeek,36,Zuidoost-Noord-Brabant
+1447,Lieshout,1659,Laarbeek,36,Zuidoost-Noord-Brabant
+1448,Mariahout,1659,Laarbeek,36,Zuidoost-Noord-Brabant
+1449,Beers NB,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1450,Cuijk,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1451,Haps,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1452,Katwijk NB,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1453,Linden,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1454,Sint Agatha,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1455,Vianen NB,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1456,Best,0753,Best,36,Zuidoost-Noord-Brabant
+1457,Bergeijk,1724,Bergeijk,36,Zuidoost-Noord-Brabant
+1458,Luyksgestel,1724,Bergeijk,36,Zuidoost-Noord-Brabant
+1459,Riethoven,1724,Bergeijk,36,Zuidoost-Noord-Brabant
+1460,Westerhoven,1724,Bergeijk,36,Zuidoost-Noord-Brabant
+1461,Bunde,0938,Meerssen,39,Zuid-Limburg
+1462,Geulle,0938,Meerssen,39,Zuid-Limburg
+1463,Meerssen,0938,Meerssen,39,Zuid-Limburg
+1464,Moorveld,0938,Meerssen,39,Zuid-Limburg
+1465,Ulestraten,0938,Meerssen,39,Zuid-Limburg
+1466,Lisse,0553,Lisse,25,Agglomeratie Leiden en Bollenstreek
+1467,Kapelle,0678,Kapelle,32,Overig Zeeland
+1468,Kloetinge,0678,Kapelle,32,Overig Zeeland
+1469,Schore,0678,Kapelle,32,Overig Zeeland
+1470,Wemeldinge,0678,Kapelle,32,Overig Zeeland
+1471,Winschoten,1895,Oldambt,01,Oost-Groningen
+1473,Venlo,0983,Venlo,37,Noord-Limburg
+1474,Tegelen,0983,Venlo,37,Noord-Limburg
+1475,Steyl,0983,Venlo,37,Noord-Limburg
+1476,Belfeld,0983,Venlo,37,Noord-Limburg
+1477,Papendrecht,0590,Papendrecht,30,Zuidoost-Zuid-Holland
+1478,Winterswijk,0294,Winterswijk,14,Achterhoek
+1479,Winterswijk Meddo,0294,Winterswijk,14,Achterhoek
+1480,Winterswijk Huppel,0294,Winterswijk,14,Achterhoek
+1481,Winterswijk Ratum,0294,Winterswijk,14,Achterhoek
+1482,Winterswijk Kotten,0294,Winterswijk,14,Achterhoek
+1483,Winterswijk Woold,0294,Winterswijk,14,Achterhoek
+1484,Winterswijk Miste,0294,Winterswijk,14,Achterhoek
+1485,Winterswijk Henxel,0294,Winterswijk,14,Achterhoek
+1486,Winterswijk Brinkheurne,0294,Winterswijk,14,Achterhoek
+1487,Winterswijk Corle,0294,Winterswijk,14,Achterhoek
+1488,Hippolytushoef,1911,Hollands Kroon,18,Kop van Noord-Holland
+1489,Den Oever,1911,Hollands Kroon,18,Kop van Noord-Holland
+1490,Westerland,1911,Hollands Kroon,18,Kop van Noord-Holland
+1491,Raalte,0177,Raalte,11,Zuidwest-Overijssel
+1492,Heino,0177,Raalte,11,Zuidwest-Overijssel
+1493,Mariënheem,0177,Raalte,11,Zuidwest-Overijssel
+1494,Luttenberg,0177,Raalte,11,Zuidwest-Overijssel
+1495,Laag Zuthem,0177,Raalte,11,Zuidwest-Overijssel
+1496,Lierderholthuis,0177,Raalte,11,Zuidwest-Overijssel
+1497,Broekland,0177,Raalte,11,Zuidwest-Overijssel
+1498,Heeten,0177,Raalte,11,Zuidwest-Overijssel
+1499,Nieuw Heeten,0177,Raalte,11,Zuidwest-Overijssel
+1500,Velp,0275,Rheden,15,Arnhem/Nijmegen
+1501,Rheden,0275,Rheden,15,Arnhem/Nijmegen
+1502,De Steeg,0275,Rheden,15,Arnhem/Nijmegen
+1503,Ellecom,0275,Rheden,15,Arnhem/Nijmegen
+1504,Dieren,0275,Rheden,15,Arnhem/Nijmegen
+1505,Spankeren,0275,Rheden,15,Arnhem/Nijmegen
+1506,Laag-Soeren,0275,Rheden,15,Arnhem/Nijmegen
+1507,Hem,0498,Drechterland,18,Kop van Noord-Holland
+1508,Hoogkarspel,0498,Drechterland,18,Kop van Noord-Holland
+1510,Oosterleek,0498,Drechterland,18,Kop van Noord-Holland
+1511,Schellinkhout,0498,Drechterland,18,Kop van Noord-Holland
+1512,Venhuizen,0498,Drechterland,18,Kop van Noord-Holland
+1513,Westwoud,0498,Drechterland,18,Kop van Noord-Holland
+1514,Wijdenes,0498,Drechterland,18,Kop van Noord-Holland
+1515,Sevenum,1507,Horst aan de Maas,37,Noord-Limburg
+1516,Kronenberg,1507,Horst aan de Maas,37,Noord-Limburg
+1517,Evertsoord,1507,Horst aan de Maas,37,Noord-Limburg
+1519,Muiderberg,1942,Gooise Meren,24,Het Gooi en Vechtstreek
+1520,Drempt,1876,Bronckhorst,14,Achterhoek
+1521,Hoog-Keppel,1876,Bronckhorst,14,Achterhoek
+1522,Laag-Keppel,1876,Bronckhorst,14,Achterhoek
+1523,Hummelo,1876,Bronckhorst,14,Achterhoek
+1526,Steenderen,1876,Bronckhorst,14,Achterhoek
+1527,Baak,1876,Bronckhorst,14,Achterhoek
+1528,Rha,1876,Bronckhorst,14,Achterhoek
+1529,Olburgen,1876,Bronckhorst,14,Achterhoek
+1530,Bronkhorst,1876,Bronckhorst,14,Achterhoek
+1531,Toldijk,1876,Bronckhorst,14,Achterhoek
+1532,Vierakker,1876,Bronckhorst,14,Achterhoek
+1535,Hengelo (Gld),1876,Bronckhorst,14,Achterhoek
+1536,Keijenborg,1876,Bronckhorst,14,Achterhoek
+1537,Ane,0160,Hardenberg,10,Noord-Overijssel
+1538,Anerveen,0160,Hardenberg,10,Noord-Overijssel
+1539,Anevelde,0160,Hardenberg,10,Noord-Overijssel
+1540,Balkbrug,0160,Hardenberg,10,Noord-Overijssel
+1541,Bergentheim,0160,Hardenberg,10,Noord-Overijssel
+1542,Brucht,0160,Hardenberg,10,Noord-Overijssel
+1544,Collendoorn,0160,Hardenberg,10,Noord-Overijssel
+1545,De Krim,0160,Hardenberg,10,Noord-Overijssel
+1546,Dedemsvaart,0160,Hardenberg,10,Noord-Overijssel
+1547,Den Velde,0160,Hardenberg,10,Noord-Overijssel
+1548,Diffelen,0160,Hardenberg,10,Noord-Overijssel
+1549,Gramsbergen,0160,Hardenberg,10,Noord-Overijssel
+1551,Heemserveen,0160,Hardenberg,10,Noord-Overijssel
+1552,Holtheme,0160,Hardenberg,10,Noord-Overijssel
+1553,Holthone,0160,Hardenberg,10,Noord-Overijssel
+1554,Hoogenweg,0160,Hardenberg,10,Noord-Overijssel
+1555,Kloosterhaar,0160,Hardenberg,10,Noord-Overijssel
+1556,Loozen,0160,Hardenberg,10,Noord-Overijssel
+1557,Lutten,0160,Hardenberg,10,Noord-Overijssel
+1558,Mariënberg,0160,Hardenberg,10,Noord-Overijssel
+1559,Radewijk,0160,Hardenberg,10,Noord-Overijssel
+1560,Rheeze,0160,Hardenberg,10,Noord-Overijssel
+1561,Rheezerveen,0160,Hardenberg,10,Noord-Overijssel
+1562,Schuinesloot,0160,Hardenberg,10,Noord-Overijssel
+1563,Sibculo,0160,Hardenberg,10,Noord-Overijssel
+1564,Slagharen,0160,Hardenberg,10,Noord-Overijssel
+1565,Venebrugge,0160,Hardenberg,10,Noord-Overijssel
+1566,Rijssen,1742,Rijssen-Holten,12,Twente
+1567,Holten,1742,Rijssen-Holten,12,Twente
+1568,Maarheeze,1706,Cranendonck,36,Zuidoost-Noord-Brabant
+1569,Soerendonk,1706,Cranendonck,36,Zuidoost-Noord-Brabant
+1570,Gastel,1706,Cranendonck,36,Zuidoost-Noord-Brabant
+1571,Budel,1706,Cranendonck,36,Zuidoost-Noord-Brabant
+1572,Budel-Schoot,1706,Cranendonck,36,Zuidoost-Noord-Brabant
+1573,Budel-Dorplein,1706,Cranendonck,36,Zuidoost-Noord-Brabant
+1574,Varsseveld,1509,Oude IJsselstreek,14,Achterhoek
+1575,Westendorp,1509,Oude IJsselstreek,14,Achterhoek
+1576,Heelweg,1509,Oude IJsselstreek,14,Achterhoek
+1577,Terborg,1509,Oude IJsselstreek,14,Achterhoek
+1578,Silvolde,1509,Oude IJsselstreek,14,Achterhoek
+1579,Sinderen,1509,Oude IJsselstreek,14,Achterhoek
+1580,Ulft,1509,Oude IJsselstreek,14,Achterhoek
+1581,Etten,1509,Oude IJsselstreek,14,Achterhoek
+1582,Varsselder,1509,Oude IJsselstreek,14,Achterhoek
+1583,Netterden,1509,Oude IJsselstreek,14,Achterhoek
+1584,Megchelen,1509,Oude IJsselstreek,14,Achterhoek
+1585,Gendringen,1509,Oude IJsselstreek,14,Achterhoek
+1586,Voorst,1509,Oude IJsselstreek,14,Achterhoek
+1587,Breedenbroek,1509,Oude IJsselstreek,14,Achterhoek
+1588,Roosendaal,1674,Roosendaal,33,West-Noord-Brabant
+1589,Wouw,1674,Roosendaal,33,West-Noord-Brabant
+1590,Heerle,1674,Roosendaal,33,West-Noord-Brabant
+1591,Nispen,1674,Roosendaal,33,West-Noord-Brabant
+1592,Wouwse Plantage,1674,Roosendaal,33,West-Noord-Brabant
+1593,Moerstraten,1674,Roosendaal,33,West-Noord-Brabant
+1594,Barendrecht,0489,Barendrecht,29,Groot-Rijnmond
+1595,'s-Hertogenbosch,0796,'s-Hertogenbosch,35,Noordoost-Noord-Brabant
+1596,Rosmalen,0796,'s-Hertogenbosch,35,Noordoost-Noord-Brabant
+1597,Hoofddorp,0394,Haarlemmermeer,23,Groot-Amsterdam
+1598,Rozenburg,0394,Haarlemmermeer,23,Groot-Amsterdam
+1599,Oude Meer,0394,Haarlemmermeer,23,Groot-Amsterdam
+1600,Aalsmeerderbrug,0394,Haarlemmermeer,23,Groot-Amsterdam
+1601,Rijsenhout,0394,Haarlemmermeer,23,Groot-Amsterdam
+1602,Nieuw-Vennep,0394,Haarlemmermeer,23,Groot-Amsterdam
+1603,Burgerveen,0394,Haarlemmermeer,23,Groot-Amsterdam
+1604,Schiphol-Rijk,0394,Haarlemmermeer,23,Groot-Amsterdam
+1605,Leimuiderbrug,0394,Haarlemmermeer,23,Groot-Amsterdam
+1606,Weteringbrug,0394,Haarlemmermeer,23,Groot-Amsterdam
+1607,Buitenkaag,0394,Haarlemmermeer,23,Groot-Amsterdam
+1608,Abbenes,0394,Haarlemmermeer,23,Groot-Amsterdam
+1609,Lisserbroek,0394,Haarlemmermeer,23,Groot-Amsterdam
+1610,Beinsdorp,0394,Haarlemmermeer,23,Groot-Amsterdam
+1611,Zwaanshoek,0394,Haarlemmermeer,23,Groot-Amsterdam
+1612,Cruquius,0394,Haarlemmermeer,23,Groot-Amsterdam
+1613,Vijfhuizen,0394,Haarlemmermeer,23,Groot-Amsterdam
+1614,Zwanenburg,0394,Haarlemmermeer,23,Groot-Amsterdam
+1615,Boesingheliede,0394,Haarlemmermeer,23,Groot-Amsterdam
+1616,Lijnden,0394,Haarlemmermeer,23,Groot-Amsterdam
+1617,Badhoevedorp,0394,Haarlemmermeer,23,Groot-Amsterdam
+1618,Schiphol,0394,Haarlemmermeer,23,Groot-Amsterdam
+1619,Vught,0865,Vught,35,Noordoost-Noord-Brabant
+1620,Cromvoirt,0865,Vught,35,Noordoost-Noord-Brabant
+1621,Leidschendam,1916,Leidschendam-Voorburg,26,Agglomeratie 's-Gravenhage
+1622,Voorburg,1916,Leidschendam-Voorburg,26,Agglomeratie 's-Gravenhage
+1623,Alem,0263,Maasdriel,16,Zuidwest-Gelderland
+1624,Ammerzoden,0263,Maasdriel,16,Zuidwest-Gelderland
+1625,Hedel,0263,Maasdriel,16,Zuidwest-Gelderland
+1626,Heerewaarden,0263,Maasdriel,16,Zuidwest-Gelderland
+1627,Hoenzadriel,0263,Maasdriel,16,Zuidwest-Gelderland
+1628,Hurwenen,0263,Maasdriel,16,Zuidwest-Gelderland
+1629,Kerkdriel,0263,Maasdriel,16,Zuidwest-Gelderland
+1630,Rossum,0263,Maasdriel,16,Zuidwest-Gelderland
+1631,Velddriel,0263,Maasdriel,16,Zuidwest-Gelderland
+1632,Well,0263,Maasdriel,16,Zuidwest-Gelderland
+1633,Alteveer,1699,Noordenveld,07,Noord-Drenthe
+1634,Een,1699,Noordenveld,07,Noord-Drenthe
+1635,Een-West,1699,Noordenveld,07,Noord-Drenthe
+1636,Foxwolde,1699,Noordenveld,07,Noord-Drenthe
+1637,Huis ter Heide,1699,Noordenveld,07,Noord-Drenthe
+1638,Langelo,1699,Noordenveld,07,Noord-Drenthe
+1639,Leutingewolde,1699,Noordenveld,07,Noord-Drenthe
+1640,Lieveren,1699,Noordenveld,07,Noord-Drenthe
+1641,Matsloot,1699,Noordenveld,07,Noord-Drenthe
+1642,Nietap,1699,Noordenveld,07,Noord-Drenthe
+1643,Nieuw-Roden,1699,Noordenveld,07,Noord-Drenthe
+1644,Norg,1699,Noordenveld,07,Noord-Drenthe
+1645,Peest,1699,Noordenveld,07,Noord-Drenthe
+1646,Peize,1699,Noordenveld,07,Noord-Drenthe
+1647,Roden,1699,Noordenveld,07,Noord-Drenthe
+1649,Roderwolde,1699,Noordenveld,07,Noord-Drenthe
+1651,Veenhuizen,1699,Noordenveld,07,Noord-Drenthe
+1652,Westervelde,1699,Noordenveld,07,Noord-Drenthe
+1653,Zuidvelde,1699,Noordenveld,07,Noord-Drenthe
+1654,Gelselaar,1859,Berkelland,14,Achterhoek
+1655,Geesteren,1859,Berkelland,14,Achterhoek
+1656,Neede,1859,Berkelland,14,Achterhoek
+1657,Rietmolen,1859,Berkelland,14,Achterhoek
+1658,Ruurlo,1859,Berkelland,14,Achterhoek
+1659,Borculo,1859,Berkelland,14,Achterhoek
+1660,Haarlo,1859,Berkelland,14,Achterhoek
+1661,Beltrum,1859,Berkelland,14,Achterhoek
+1662,Eibergen,1859,Berkelland,14,Achterhoek
+1663,Rekken,1859,Berkelland,14,Achterhoek
+1664,Amersfoort,0307,Amersfoort,17,Utrecht
+1665,Hoogland,0307,Amersfoort,17,Utrecht
+1666,Hooglanderveen,0307,Amersfoort,17,Utrecht
+1667,Stoutenburg Noord,0307,Amersfoort,17,Utrecht
+1668,Oldenzaal,0173,Oldenzaal,12,Twente
+1669,Deurningen,0173,Oldenzaal,12,Twente
+1670,Beek,0888,Beek (L.),39,Zuid-Limburg
+1671,Spaubeek,0888,Beek (L.),39,Zuid-Limburg
+1672,Maastricht-Airport,0888,Beek (L.),39,Zuid-Limburg
+1673,Bakhuizen,1940,De Fryske Marren,05,Zuidwest-Friesland
+1674,Balk,1940,De Fryske Marren,05,Zuidwest-Friesland
+1675,Elahuizen,1940,De Fryske Marren,05,Zuidwest-Friesland
+1676,Harich,1940,De Fryske Marren,05,Zuidwest-Friesland
+1677,Kolderwolde,1940,De Fryske Marren,05,Zuidwest-Friesland
+1678,Mirns,1940,De Fryske Marren,05,Zuidwest-Friesland
+1679,Nijemirdum,1940,De Fryske Marren,05,Zuidwest-Friesland
+1680,Oudega,1940,De Fryske Marren,05,Zuidwest-Friesland
+1681,Oudemirdum,1940,De Fryske Marren,05,Zuidwest-Friesland
+1682,Rijs,1940,De Fryske Marren,05,Zuidwest-Friesland
+1683,Ruigahuizen,1940,De Fryske Marren,05,Zuidwest-Friesland
+1684,Sloten,1940,De Fryske Marren,05,Zuidwest-Friesland
+1685,Sondel,1940,De Fryske Marren,05,Zuidwest-Friesland
+1686,Wijckel,1940,De Fryske Marren,05,Zuidwest-Friesland
+1687,Berkel en Rodenrijs,1621,Lansingerland,29,Groot-Rijnmond
+1688,Bergschenhoek,1621,Lansingerland,29,Groot-Rijnmond
+1689,Bleiswijk,1621,Lansingerland,29,Groot-Rijnmond
+1690,Banholt,1903,Eijsden-Margraten,39,Zuid-Limburg
+1691,Bemelen,1903,Eijsden-Margraten,39,Zuid-Limburg
+1692,Cadier en Keer,1903,Eijsden-Margraten,39,Zuid-Limburg
+1693,Eckelrade,1903,Eijsden-Margraten,39,Zuid-Limburg
+1694,Margraten,1903,Eijsden-Margraten,39,Zuid-Limburg
+1695,Mheer,1903,Eijsden-Margraten,39,Zuid-Limburg
+1696,Noorbeek,1903,Eijsden-Margraten,39,Zuid-Limburg
+1697,Scheulder,1903,Eijsden-Margraten,39,Zuid-Limburg
+1698,Sint Geertruid,1903,Eijsden-Margraten,39,Zuid-Limburg
+1699,Kessel,1894,Peel en Maas,37,Noord-Limburg
+1700,Eijsden,1903,Eijsden-Margraten,39,Zuid-Limburg
+1701,Gronsveld,1903,Eijsden-Margraten,39,Zuid-Limburg
+1704,Ulvenhout,0758,Breda,33,West-Noord-Brabant
+1705,Prinsenbeek,0758,Breda,33,West-Noord-Brabant
+1707,Katwijk,0537,Katwijk,25,Agglomeratie Leiden en Bollenstreek
+1708,Rijnsburg,0537,Katwijk,25,Agglomeratie Leiden en Bollenstreek
+1709,Valkenburg,0537,Katwijk,25,Agglomeratie Leiden en Bollenstreek
+1711,Beuningen,0168,Losser,12,Twente
+1712,Glane,0168,Losser,12,Twente
+1713,Losser,0168,Losser,12,Twente
+1714,de Lutte,0168,Losser,12,Twente
+1715,Overdinkel,0168,Losser,12,Twente
+1716,Berg en Terblijt,0994,Valkenburg aan de Geul,39,Zuid-Limburg
+1717,Schin op Geul,0994,Valkenburg aan de Geul,39,Zuid-Limburg
+1718,Valkenburg,0994,Valkenburg aan de Geul,39,Zuid-Limburg
+1719,Walem,0994,Valkenburg aan de Geul,39,Zuid-Limburg
+1720,Blesdijke,0098,Weststellingwerf,06,Zuidoost-Friesland
+1721,Boijl,0098,Weststellingwerf,06,Zuidoost-Friesland
+1722,De Blesse,0098,Weststellingwerf,06,Zuidoost-Friesland
+1723,De Hoeve,0098,Weststellingwerf,06,Zuidoost-Friesland
+1724,Langelille,0098,Weststellingwerf,06,Zuidoost-Friesland
+1725,Munnekeburen,0098,Weststellingwerf,06,Zuidoost-Friesland
+1726,Nijeholtpade,0098,Weststellingwerf,06,Zuidoost-Friesland
+1727,Nijeholtwolde,0098,Weststellingwerf,06,Zuidoost-Friesland
+1728,Nijelamer,0098,Weststellingwerf,06,Zuidoost-Friesland
+1729,Nijetrijne,0098,Weststellingwerf,06,Zuidoost-Friesland
+1730,Noordwolde,0098,Weststellingwerf,06,Zuidoost-Friesland
+1731,Oldeholtpade,0098,Weststellingwerf,06,Zuidoost-Friesland
+1732,Oldeholtwolde,0098,Weststellingwerf,06,Zuidoost-Friesland
+1733,Oldelamer,0098,Weststellingwerf,06,Zuidoost-Friesland
+1734,Oldetrijne,0098,Weststellingwerf,06,Zuidoost-Friesland
+1735,Oosterstreek,0098,Weststellingwerf,06,Zuidoost-Friesland
+1736,Peperga,0098,Weststellingwerf,06,Zuidoost-Friesland
+1737,Scherpenzeel,0098,Weststellingwerf,06,Zuidoost-Friesland
+1738,Slijkenburg,0098,Weststellingwerf,06,Zuidoost-Friesland
+1739,Sonnega,0098,Weststellingwerf,06,Zuidoost-Friesland
+1740,Spanga,0098,Weststellingwerf,06,Zuidoost-Friesland
+1741,Steggerda,0098,Weststellingwerf,06,Zuidoost-Friesland
+1742,Ter Idzard,0098,Weststellingwerf,06,Zuidoost-Friesland
+1743,Vinkega,0098,Weststellingwerf,06,Zuidoost-Friesland
+1744,Wolvega,0098,Weststellingwerf,06,Zuidoost-Friesland
+1745,Zandhuizen,0098,Weststellingwerf,06,Zuidoost-Friesland
+1746,Heerhugowaard,1980,Dijk en Waard,19,Alkmaar en omgeving
+1747,Edam,0385,Edam-Volendam,23,Groot-Amsterdam
+1748,Volendam,0385,Edam-Volendam,23,Groot-Amsterdam
+1749,Purmer,0385,Edam-Volendam,23,Groot-Amsterdam
+1750,Raamsdonksveer,0779,Geertruidenberg,33,West-Noord-Brabant
+1751,Geertruidenberg,0779,Geertruidenberg,33,West-Noord-Brabant
+1752,Raamsdonk,0779,Geertruidenberg,33,West-Noord-Brabant
+1753,Appelscha,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1754,Donkerbroek,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1755,Elsloo,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1756,Fochteloo,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1759,Langedijke,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1760,Makkinga,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1761,Nijeberkoop,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1762,Oldeberkoop,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1763,Oosterwolde,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1764,Ravenswoud,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1765,Waskemeer,0085,Ooststellingwerf,06,Zuidoost-Friesland
+1766,Alphen,0668,West Maas en Waal,16,Zuidwest-Gelderland
+1767,Altforst,0668,West Maas en Waal,16,Zuidwest-Gelderland
+1768,Appeltern,0668,West Maas en Waal,16,Zuidwest-Gelderland
+1769,Beneden-Leeuwen,0668,West Maas en Waal,16,Zuidwest-Gelderland
+1770,Boven-Leeuwen,0668,West Maas en Waal,16,Zuidwest-Gelderland
+1771,Dreumel,0668,West Maas en Waal,16,Zuidwest-Gelderland
+1772,Maasbommel,0668,West Maas en Waal,16,Zuidwest-Gelderland
+1773,Wamel,0668,West Maas en Waal,16,Zuidwest-Gelderland
+1774,Deurne,0762,Deurne,36,Zuidoost-Noord-Brabant
+1775,Vlierden,0762,Deurne,36,Zuidoost-Noord-Brabant
+1776,Liessel,0762,Deurne,36,Zuidoost-Noord-Brabant
+1777,Neerkant,0762,Deurne,36,Zuidoost-Noord-Brabant
+1778,Helenaveen,0762,Deurne,36,Zuidoost-Noord-Brabant
+1779,1e Exloërmond,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1780,2e Exloërmond,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1781,2e Valthermond,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1782,Borger,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1783,Bronneger,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1784,Bronnegerveen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1785,Buinen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1786,Buinerveen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1787,Drouwen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1788,Drouwenermond,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1789,Drouwenerveen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1790,Ees,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1791,Eesergroen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1792,Eeserveen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1793,Ellertshaar,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1794,Exloërveen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1795,Exloo,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1796,Klijndijk,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1797,Nieuw-Buinen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1798,Odoorn,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1799,Odoornerveen,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1800,Valthe,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1801,Valthermond,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1802,Westdorp,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1803,Zandberg,1681,Borger-Odoorn,08,Zuidoost-Drenthe
+1805,Streefkerk,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1806,Groot-Ammers,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1807,Nieuwpoort,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1808,Langerak,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1809,Waal,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1810,Alteveer gem Hoogeveen,0118,Hoogeveen,09,Zuidwest-Drenthe
+1811,Elim,0118,Hoogeveen,09,Zuidwest-Drenthe
+1812,Fluitenberg,0118,Hoogeveen,09,Zuidwest-Drenthe
+1813,Hollandscheveld,0118,Hoogeveen,09,Zuidwest-Drenthe
+1814,Hoogeveen,0118,Hoogeveen,09,Zuidwest-Drenthe
+1815,Nieuweroord,0118,Hoogeveen,09,Zuidwest-Drenthe
+1816,Nieuwlande,0118,Hoogeveen,09,Zuidwest-Drenthe
+1817,Noordscheschut,0118,Hoogeveen,09,Zuidwest-Drenthe
+1818,Pesse,0118,Hoogeveen,09,Zuidwest-Drenthe
+1819,Stuifzand,0118,Hoogeveen,09,Zuidwest-Drenthe
+1820,Tiendeveen,0118,Hoogeveen,09,Zuidwest-Drenthe
+1821,Wassenaar,0629,Wassenaar,26,Agglomeratie 's-Gravenhage
+1822,'s-Heer Arendskerke,0664,Goes,32,Overig Zeeland
+1823,'s-Heer Hendrikskinderen,0664,Goes,32,Overig Zeeland
+1824,Goes,0664,Goes,32,Overig Zeeland
+1825,Kattendijke,0664,Goes,32,Overig Zeeland
+1826,Kloetinge,0664,Goes,32,Overig Zeeland
+1827,Wilhelminadorp,0664,Goes,32,Overig Zeeland
+1828,Wolphaartsdijk,0664,Goes,32,Overig Zeeland
+1829,Ten Boer,0014,Groningen,03,Overig Groningen
+1830,Ten Post,0014,Groningen,03,Overig Groningen
+1831,Garmerwolde,0014,Groningen,03,Overig Groningen
+1832,Thesinge,0014,Groningen,03,Overig Groningen
+1833,Woltersum,0014,Groningen,03,Overig Groningen
+1834,Sint Annen,0014,Groningen,03,Overig Groningen
+1835,Lellens,0014,Groningen,03,Overig Groningen
+1836,Winneweer,0014,Groningen,03,Overig Groningen
+1837,Beets,0385,Edam-Volendam,23,Groot-Amsterdam
+1838,Hobrede,0385,Edam-Volendam,23,Groot-Amsterdam
+1839,Kwadijk,0385,Edam-Volendam,23,Groot-Amsterdam
+1840,Middelie,0385,Edam-Volendam,23,Groot-Amsterdam
+1841,Oosthuizen,0385,Edam-Volendam,23,Groot-Amsterdam
+1842,Schardam,0385,Edam-Volendam,23,Groot-Amsterdam
+1843,Warder,0385,Edam-Volendam,23,Groot-Amsterdam
+1844,Elburg,0230,Elburg,13,Veluwe
+1845,'t Harde,0230,Elburg,13,Veluwe
+1846,Doornspijk,0230,Elburg,13,Veluwe
+1847,Uden,1991,Maashorst,35,Noordoost-Noord-Brabant
+1848,Volkel,1991,Maashorst,35,Noordoost-Noord-Brabant
+1849,Odiliapeel,1991,Maashorst,35,Noordoost-Noord-Brabant
+1850,Zeeland,1991,Maashorst,35,Noordoost-Noord-Brabant
+1851,Schaijk,1991,Maashorst,35,Noordoost-Noord-Brabant
+1852,Reek,1991,Maashorst,35,Noordoost-Noord-Brabant
+1853,Klimmen,0986,Voerendaal,39,Zuid-Limburg
+1854,Ransdaal,0986,Voerendaal,39,Zuid-Limburg
+1855,Voerendaal,0986,Voerendaal,39,Zuid-Limburg
+1856,Blitterswijck,0984,Venray,37,Noord-Limburg
+1857,Geijsteren,0984,Venray,37,Noord-Limburg
+1858,Meerlo,1507,Horst aan de Maas,37,Noord-Limburg
+1859,Swolgen,1507,Horst aan de Maas,37,Noord-Limburg
+1860,Tienray,1507,Horst aan de Maas,37,Noord-Limburg
+1861,Wanssum,0984,Venray,37,Noord-Limburg
+1862,Andelst,1734,Overbetuwe,15,Arnhem/Nijmegen
+1863,Driel,1734,Overbetuwe,15,Arnhem/Nijmegen
+1864,Elst,1734,Overbetuwe,15,Arnhem/Nijmegen
+1865,Hemmen,1734,Overbetuwe,15,Arnhem/Nijmegen
+1866,Herveld,1734,Overbetuwe,15,Arnhem/Nijmegen
+1867,Heteren,1734,Overbetuwe,15,Arnhem/Nijmegen
+1868,Homoet,1734,Overbetuwe,15,Arnhem/Nijmegen
+1869,Oosterhout,1734,Overbetuwe,15,Arnhem/Nijmegen
+1870,Randwijk,1734,Overbetuwe,15,Arnhem/Nijmegen
+1871,Slijk-Ewijk,1734,Overbetuwe,15,Arnhem/Nijmegen
+1872,Valburg,1734,Overbetuwe,15,Arnhem/Nijmegen
+1873,Zetten,1734,Overbetuwe,15,Arnhem/Nijmegen
+1874,Hooge Mierde,1667,Reusel-De Mierden,36,Zuidoost-Noord-Brabant
+1875,Hulsel,1667,Reusel-De Mierden,36,Zuidoost-Noord-Brabant
+1876,Lage Mierde,1667,Reusel-De Mierden,36,Zuidoost-Noord-Brabant
+1877,Reusel,1667,Reusel-De Mierden,36,Zuidoost-Noord-Brabant
+1878,Assendelft,0479,Zaanstad,22,Zaanstreek
+1879,Koog aan de Zaan,0479,Zaanstad,22,Zaanstreek
+1880,Krommenie,0479,Zaanstad,22,Zaanstreek
+1881,Westknollendam,0479,Zaanstad,22,Zaanstreek
+1882,Westzaan,0479,Zaanstad,22,Zaanstreek
+1883,Wormerveer,0479,Zaanstad,22,Zaanstreek
+1884,Zaandam,0479,Zaanstad,22,Zaanstreek
+1885,Zaandijk,0479,Zaanstad,22,Zaanstreek
+1886,Driehuizen,0361,Alkmaar,19,Alkmaar en omgeving
+1887,Grootschermer,0361,Alkmaar,19,Alkmaar en omgeving
+1888,Oterleek,0361,Alkmaar,19,Alkmaar en omgeving
+1889,Schermerhorn,0361,Alkmaar,19,Alkmaar en omgeving
+1890,Stompetoren,0361,Alkmaar,19,Alkmaar en omgeving
+1891,Ursem,0361,Alkmaar,19,Alkmaar en omgeving
+1892,Zuidschermer,0361,Alkmaar,19,Alkmaar en omgeving
+1893,Scheemda,1895,Oldambt,01,Oost-Groningen
+1894,Nieuw Scheemda,1895,Oldambt,01,Oost-Groningen
+1895,'t Waar,1895,Oldambt,01,Oost-Groningen
+1896,Nieuwolda,1895,Oldambt,01,Oost-Groningen
+1897,Midwolda,1895,Oldambt,01,Oost-Groningen
+1898,Oostwold,1895,Oldambt,01,Oost-Groningen
+1899,Heiligerlee,1895,Oldambt,01,Oost-Groningen
+1900,Westerlee,1895,Oldambt,01,Oost-Groningen
+1903,Graft,0361,Alkmaar,19,Alkmaar en omgeving
+1905,Noordeinde,0361,Alkmaar,19,Alkmaar en omgeving
+1908,West-Graftdijk,0361,Alkmaar,19,Alkmaar en omgeving
+1909,Hekendorp,0589,Oudewater,17,Utrecht
+1910,Oudewater,0589,Oudewater,17,Utrecht
+1911,Papekop,0589,Oudewater,17,Utrecht
+1912,Snelrewaard,0589,Oudewater,17,Utrecht
+1913,Stein,0971,Stein (L.),39,Zuid-Limburg
+1914,Elsloo,0971,Stein (L.),39,Zuid-Limburg
+1915,Urmond,0971,Stein (L.),39,Zuid-Limburg
+1916,Thorn,1641,Maasgouw,38,Midden-Limburg
+1917,Heel,1641,Maasgouw,38,Midden-Limburg
+1918,Beegden,1641,Maasgouw,38,Midden-Limburg
+1919,Wessem,1641,Maasgouw,38,Midden-Limburg
+1920,Maasbracht,1641,Maasgouw,38,Midden-Limburg
+1921,Linne,1641,Maasgouw,38,Midden-Limburg
+1922,Stevensweert,1641,Maasgouw,38,Midden-Limburg
+1923,Ohé en Laak,1641,Maasgouw,38,Midden-Limburg
+1924,Almelo,0141,Almelo,12,Twente
+1925,Aadorp,0141,Almelo,12,Twente
+1926,Bornerbroek,0141,Almelo,12,Twente
+1927,Noordwijkerhout,0575,Noordwijk,25,Agglomeratie Leiden en Bollenstreek
+1928,De Zilk,0575,Noordwijk,25,Agglomeratie Leiden en Bollenstreek
+1931,Wilnis,0736,De Ronde Venen,17,Utrecht
+1935,Schiedam,0606,Schiedam,29,Groot-Rijnmond
+1936,Westervoort,0293,Westervoort,15,Arnhem/Nijmegen
+1937,Bergen op Zoom,0748,Bergen op Zoom,33,West-Noord-Brabant
+1938,Halsteren,0748,Bergen op Zoom,33,West-Noord-Brabant
+1939,Lepelstraat,0748,Bergen op Zoom,33,West-Noord-Brabant
+1940,Broek in Waterland,0852,Waterland,23,Groot-Amsterdam
+1941,Ilpendam,0852,Waterland,23,Groot-Amsterdam
+1942,Katwoude,0852,Waterland,23,Groot-Amsterdam
+1943,Marken,0852,Waterland,23,Groot-Amsterdam
+1944,Monnickendam,0852,Waterland,23,Groot-Amsterdam
+1945,Watergang,0852,Waterland,23,Groot-Amsterdam
+1946,Purmer,0852,Waterland,23,Groot-Amsterdam
+1947,Uitdam,0852,Waterland,23,Groot-Amsterdam
+1948,Zuiderwoude,0852,Waterland,23,Groot-Amsterdam
+1949,Reuver,0889,Beesel,37,Noord-Limburg
+1950,Beesel,0889,Beesel,37,Noord-Limburg
+1951,Babyloniënbroek,1959,Altena,34,Midden-Noord-Brabant
+1952,Drongelen,1959,Altena,34,Midden-Noord-Brabant
+1953,Eethen,1959,Altena,34,Midden-Noord-Brabant
+1954,Genderen,1959,Altena,34,Midden-Noord-Brabant
+1955,Meeuwen,1959,Altena,34,Midden-Noord-Brabant
+1956,Veen,1959,Altena,34,Midden-Noord-Brabant
+1957,Wijk en Aalburg,1959,Altena,34,Midden-Noord-Brabant
+1958,Benschop,0331,Lopik,17,Utrecht
+1959,Jaarsveld,0331,Lopik,17,Utrecht
+1960,Lopik,0331,Lopik,17,Utrecht
+1961,Lopikerkapel,0331,Lopik,17,Utrecht
+1962,Polsbroek,0331,Lopik,17,Utrecht
+1963,Linschoten,0335,Montfoort,17,Utrecht
+1964,Montfoort,0335,Montfoort,17,Utrecht
+1965,Workum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+1966,Koudum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+1967,Molkwerum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+1968,Hindeloopen,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+1969,Stavoren,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+1970,Hemelum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+1971,Warns,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+1972,Nijhuizum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+1973,It Heidenskip,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+1974,Weert,0988,Weert,38,Midden-Limburg
+1975,Stramproy,0988,Weert,38,Midden-Limburg
+1976,Mill,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1977,Sint Hubert,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1978,Langenboom,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1979,Wilbertoord,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+1980,Bleskensgraaf ca,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1981,Brandwijk,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1983,Molenaarsgraaf,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1985,Oud-Alblas,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1986,Wijngaarden,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+1987,Barger-Compascuum,0114,Emmen,08,Zuidoost-Drenthe
+1988,Emmen,0114,Emmen,08,Zuidoost-Drenthe
+1989,Emmer-Compascuum,0114,Emmen,08,Zuidoost-Drenthe
+1990,Erica,0114,Emmen,08,Zuidoost-Drenthe
+1991,Klazienaveen,0114,Emmen,08,Zuidoost-Drenthe
+1992,Klazienaveen-Noord,0114,Emmen,08,Zuidoost-Drenthe
+1993,Nieuw-Amsterdam,0114,Emmen,08,Zuidoost-Drenthe
+1994,Nieuw-Dordrecht,0114,Emmen,08,Zuidoost-Drenthe
+1995,Nieuw-Schoonebeek,0114,Emmen,08,Zuidoost-Drenthe
+1996,Nieuw-Weerdinge,0114,Emmen,08,Zuidoost-Drenthe
+1997,Roswinkel,0114,Emmen,08,Zuidoost-Drenthe
+1998,Schoonebeek,0114,Emmen,08,Zuidoost-Drenthe
+1999,Veenoord,0114,Emmen,08,Zuidoost-Drenthe
+2000,Weiteveen,0114,Emmen,08,Zuidoost-Drenthe
+2001,Zandpol,0114,Emmen,08,Zuidoost-Drenthe
+2002,Zwartemeer,0114,Emmen,08,Zuidoost-Drenthe
+2003,Sassenheim,1525,Teylingen,25,Agglomeratie Leiden en Bollenstreek
+2004,Voorhout,1525,Teylingen,25,Agglomeratie Leiden en Bollenstreek
+2006,Wageningen,0289,Wageningen,13,Veluwe
+2008,Baaium,1949,Waadhoeke,04,Noord-Friesland
+2009,Baard,0080,Leeuwarden,04,Noord-Friesland
+2010,Bears,0080,Leeuwarden,04,Noord-Friesland
+2011,Boazum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2012,Britswert,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2013,Easterein,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2014,Easterlittens,0080,Leeuwarden,04,Noord-Friesland
+2015,Easterwierrum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2016,Hidaard,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2017,Hilaard,0080,Leeuwarden,04,Noord-Friesland
+2018,Hinnaard,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2019,Húns,0080,Leeuwarden,04,Noord-Friesland
+2020,Iens,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2021,Itens,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2022,Jellum,0080,Leeuwarden,04,Noord-Friesland
+2023,Jorwert,0080,Leeuwarden,04,Noord-Friesland
+2024,Kûbaard,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2025,Leons,0080,Leeuwarden,04,Noord-Friesland
+2026,Lytsewierrum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2027,Mantgum,0080,Leeuwarden,04,Noord-Friesland
+2028,Reahûs,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2029,Rien,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2030,Spannum,1949,Waadhoeke,04,Noord-Friesland
+2031,Waaksens,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2032,Weidum,0080,Leeuwarden,04,Noord-Friesland
+2033,Winsum,1949,Waadhoeke,04,Noord-Friesland
+2034,Wiuwert,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2035,Wjelsryp,1949,Waadhoeke,04,Noord-Friesland
+2036,Wommels,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2037,Nederweert,0946,Nederweert,38,Midden-Limburg
+2038,Ospel,0946,Nederweert,38,Midden-Limburg
+2039,Nederweert-Eind,0946,Nederweert,38,Midden-Limburg
+2040,Leveroy,0946,Nederweert,38,Midden-Limburg
+2041,Echt,1711,Echt-Susteren,38,Midden-Limburg
+2042,Koningsbosch,1711,Echt-Susteren,38,Midden-Limburg
+2043,Maria Hoop,1711,Echt-Susteren,38,Midden-Limburg
+2044,Sint Joost,1711,Echt-Susteren,38,Midden-Limburg
+2045,Susteren,1711,Echt-Susteren,38,Midden-Limburg
+2046,Roosteren,1711,Echt-Susteren,38,Midden-Limburg
+2047,Nieuwstadt,1711,Echt-Susteren,38,Midden-Limburg
+2048,Veenendaal,0345,Veenendaal,17,Utrecht
+2052,Culemborg,0216,Culemborg,16,Zuidwest-Gelderland
+2053,Houten,0321,Houten,17,Utrecht
+2054,'t Goy,0321,Houten,17,Utrecht
+2055,Tull en 't Waal,0321,Houten,17,Utrecht
+2056,Schalkwijk,0321,Houten,17,Utrecht
+2057,Berlicum,0845,Sint-Michielsgestel,35,Noordoost-Noord-Brabant
+2058,Den Dungen,0845,Sint-Michielsgestel,35,Noordoost-Noord-Brabant
+2059,Gemonde,0845,Sint-Michielsgestel,35,Noordoost-Noord-Brabant
+2060,Sint-Michielsgestel,0845,Sint-Michielsgestel,35,Noordoost-Noord-Brabant
+2061,Noordwijk,0575,Noordwijk,25,Agglomeratie Leiden en Bollenstreek
+2062,Uithoorn,0451,Uithoorn,23,Groot-Amsterdam
+2064,Maarssen,1904,Stichtse Vecht,17,Utrecht
+2065,Tienhoven,1904,Stichtse Vecht,17,Utrecht
+2066,Oud Zuilen,1904,Stichtse Vecht,17,Utrecht
+2067,Gilze,0784,Gilze en Rijen,34,Midden-Noord-Brabant
+2068,Hulten,0784,Gilze en Rijen,34,Midden-Noord-Brabant
+2069,Molenschot,0784,Gilze en Rijen,34,Midden-Noord-Brabant
+2070,Rijen,0784,Gilze en Rijen,34,Midden-Noord-Brabant
+2071,Tholen,0716,Tholen,32,Overig Zeeland
+2072,Poortvliet,0716,Tholen,32,Overig Zeeland
+2073,Scherpenisse,0716,Tholen,32,Overig Zeeland
+2074,Sint-Maartensdijk,0716,Tholen,32,Overig Zeeland
+2075,Stavenisse,0716,Tholen,32,Overig Zeeland
+2076,Sint-Annaland,0716,Tholen,32,Overig Zeeland
+2077,Oud-Vossemeer,0716,Tholen,32,Overig Zeeland
+2078,Sint Philipsland,0716,Tholen,32,Overig Zeeland
+2079,Bolsward,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2080,Landhorst,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+2081,Ledeacker,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+2082,Oploo,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+2083,Sint Anthonis,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+2084,Stevensbeek,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+2085,Wanroij,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+2086,Westerbeek,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+2087,Rijkevoort-De Walsert,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+2088,Leiden,0546,Leiden,25,Agglomeratie Leiden en Bollenstreek
+2089,Gemert,1652,Gemert-Bakel,36,Zuidoost-Noord-Brabant
+2090,Bakel,1652,Gemert-Bakel,36,Zuidoost-Noord-Brabant
+2091,Milheeze,1652,Gemert-Bakel,36,Zuidoost-Noord-Brabant
+2092,Handel,1652,Gemert-Bakel,36,Zuidoost-Noord-Brabant
+2093,De Mortel,1652,Gemert-Bakel,36,Zuidoost-Noord-Brabant
+2094,De Rips,1652,Gemert-Bakel,36,Zuidoost-Noord-Brabant
+2095,Elsendorp,1652,Gemert-Bakel,36,Zuidoost-Noord-Brabant
+2096,Duiven,0226,Duiven,15,Arnhem/Nijmegen
+2097,Groessen,0226,Duiven,15,Arnhem/Nijmegen
+2098,Loo Gld,0226,Duiven,15,Arnhem/Nijmegen
+2099,Amstenrade,1954,Beekdaelen,39,Zuid-Limburg
+2100,Doenrade,1954,Beekdaelen,39,Zuid-Limburg
+2101,Oirsbeek,1954,Beekdaelen,39,Zuid-Limburg
+2102,Puth,1954,Beekdaelen,39,Zuid-Limburg
+2103,Schinnen,1954,Beekdaelen,39,Zuid-Limburg
+2104,Sweikhuizen,1954,Beekdaelen,39,Zuid-Limburg
+2105,Lexmond,1961,Vijfheerenlanden,17,Utrecht
+2106,Ameide,1961,Vijfheerenlanden,17,Utrecht
+2107,Tienhoven aan de Lek,1961,Vijfheerenlanden,17,Utrecht
+2108,Meerkerk,1961,Vijfheerenlanden,17,Utrecht
+2109,Hei- en Boeicop,1961,Vijfheerenlanden,17,Utrecht
+2110,Leerbroek,1961,Vijfheerenlanden,17,Utrecht
+2111,Nieuwland,1961,Vijfheerenlanden,17,Utrecht
+2112,Leiderdorp,0547,Leiderdorp,25,Agglomeratie Leiden en Bollenstreek
+2113,Oostzaan,0431,Oostzaan,23,Groot-Amsterdam
+2114,Aduard,1969,Westerkwartier,03,Overig Groningen
+2115,Briltil,1969,Westerkwartier,03,Overig Groningen
+2116,Den Ham,1969,Westerkwartier,03,Overig Groningen
+2117,Den Horn,1969,Westerkwartier,03,Overig Groningen
+2118,Grijpskerk,1969,Westerkwartier,03,Overig Groningen
+2119,Kommerzijl,1969,Westerkwartier,03,Overig Groningen
+2120,Lauwerzijl,1969,Westerkwartier,03,Overig Groningen
+2121,Niehove,1969,Westerkwartier,03,Overig Groningen
+2122,Niezijl,1969,Westerkwartier,03,Overig Groningen
+2123,Noordhorn,1969,Westerkwartier,03,Overig Groningen
+2124,Oldehove,1969,Westerkwartier,03,Overig Groningen
+2125,Pieterzijl,1969,Westerkwartier,03,Overig Groningen
+2126,Saaksum,1969,Westerkwartier,03,Overig Groningen
+2127,Visvliet,1969,Westerkwartier,03,Overig Groningen
+2128,Zuidhorn,1969,Westerkwartier,03,Overig Groningen
+2129,Ouderkerk aan de Amstel,0437,Ouder-Amstel,23,Groot-Amsterdam
+2131,Achthuizen,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2132,Den Bommel,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2133,Ooltgensplaat,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2134,Oude-Tonge,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2135,Scherpenzeel,0279,Scherpenzeel,13,Veluwe
+2136,Nuenen,0820,"Nuenen, Gerwen en Nederwetten",36,Zuidoost-Noord-Brabant
+2137,Hellevoetsluis,1992,Voorne aan Zee,29,Groot-Rijnmond
+2138,Delft,0503,Delft,27,Delft en Westland
+2139,Schijndel,1948,Meierijstad,35,Noordoost-Noord-Brabant
+2140,Meijel,1894,Peel en Maas,37,Noord-Limburg
+2141,Renswoude,0339,Renswoude,17,Utrecht
+2142,Doesburg,0221,Doesburg,15,Arnhem/Nijmegen
+2143,Urk,0184,Urk,40,Flevoland
+2144,Diemen,0384,Diemen,23,Groot-Amsterdam
+2145,Aalden,0109,Coevorden,08,Zuidoost-Drenthe
+2146,Benneveld,0109,Coevorden,08,Zuidoost-Drenthe
+2147,Coevorden,0109,Coevorden,08,Zuidoost-Drenthe
+2148,Dalen,0109,Coevorden,08,Zuidoost-Drenthe
+2149,Dalerpeel,0109,Coevorden,08,Zuidoost-Drenthe
+2150,Dalerveen,0109,Coevorden,08,Zuidoost-Drenthe
+2151,De Kiel,0109,Coevorden,08,Zuidoost-Drenthe
+2152,Diphoorn,0109,Coevorden,08,Zuidoost-Drenthe
+2153,Erm,0109,Coevorden,08,Zuidoost-Drenthe
+2154,Gees,0109,Coevorden,08,Zuidoost-Drenthe
+2155,Geesbrug,0109,Coevorden,08,Zuidoost-Drenthe
+2156,Holsloot,0109,Coevorden,08,Zuidoost-Drenthe
+2157,Meppen,0109,Coevorden,08,Zuidoost-Drenthe
+2158,Nieuwlande Coevorden,0109,Coevorden,08,Zuidoost-Drenthe
+2159,Noord-Sleen,0109,Coevorden,08,Zuidoost-Drenthe
+2160,Oosterhesselen,0109,Coevorden,08,Zuidoost-Drenthe
+2161,Schoonoord,0109,Coevorden,08,Zuidoost-Drenthe
+2162,Sleen,0109,Coevorden,08,Zuidoost-Drenthe
+2163,Stieltjeskanaal,0109,Coevorden,08,Zuidoost-Drenthe
+2164,'t Haantje,0109,Coevorden,08,Zuidoost-Drenthe
+2165,Wachtum,0109,Coevorden,08,Zuidoost-Drenthe
+2166,Wezup,0109,Coevorden,08,Zuidoost-Drenthe
+2167,Wezuperbrug,0109,Coevorden,08,Zuidoost-Drenthe
+2168,Zweeloo,0109,Coevorden,08,Zuidoost-Drenthe
+2169,Zwinderen,0109,Coevorden,08,Zuidoost-Drenthe
+2170,Middenbeemster,0439,Purmerend,23,Groot-Amsterdam
+2171,Noordbeemster,0439,Purmerend,23,Groot-Amsterdam
+2172,Westbeemster,0439,Purmerend,23,Groot-Amsterdam
+2173,Zuidoostbeemster,0439,Purmerend,23,Groot-Amsterdam
+2174,Doezum,1969,Westerkwartier,03,Overig Groningen
+2175,Grootegast,1969,Westerkwartier,03,Overig Groningen
+2176,Kornhorn,1969,Westerkwartier,03,Overig Groningen
+2177,Lutjegast,1969,Westerkwartier,03,Overig Groningen
+2178,Niekerk,1969,Westerkwartier,03,Overig Groningen
+2179,Oldekerk,1969,Westerkwartier,03,Overig Groningen
+2180,Opende,1969,Westerkwartier,03,Overig Groningen
+2181,Sebaldeburen,1969,Westerkwartier,03,Overig Groningen
+2182,Terband,0074,Heerenveen,06,Zuidoost-Friesland
+2183,Luinjeberd,0074,Heerenveen,06,Zuidoost-Friesland
+2184,Tjalleberd,0074,Heerenveen,06,Zuidoost-Friesland
+2185,Gersloot,0074,Heerenveen,06,Zuidoost-Friesland
+2187,Nieuweschoot,0074,Heerenveen,06,Zuidoost-Friesland
+2188,Oudeschoot,0074,Heerenveen,06,Zuidoost-Friesland
+2189,Oranjewoud,0074,Heerenveen,06,Zuidoost-Friesland
+2190,De Knipe,0074,Heerenveen,06,Zuidoost-Friesland
+2191,Mildam,0074,Heerenveen,06,Zuidoost-Friesland
+2192,Katlijk,0074,Heerenveen,06,Zuidoost-Friesland
+2193,Bontebok,0074,Heerenveen,06,Zuidoost-Friesland
+2194,Nieuwehorne,0074,Heerenveen,06,Zuidoost-Friesland
+2195,Oudehorne,0074,Heerenveen,06,Zuidoost-Friesland
+2196,Jubbega,0074,Heerenveen,06,Zuidoost-Friesland
+2197,Hoornsterzwaag,0074,Heerenveen,06,Zuidoost-Friesland
+2198,Genemuiden,1896,Zwartewaterland,10,Noord-Overijssel
+2199,Hasselt,1896,Zwartewaterland,10,Noord-Overijssel
+2200,Mastenbroek,1896,Zwartewaterland,10,Noord-Overijssel
+2201,Zwartsluis,1896,Zwartewaterland,10,Noord-Overijssel
+2202,Azewijn,1955,Montferland,14,Achterhoek
+2203,Beek,1955,Montferland,14,Achterhoek
+2204,Braamt,1955,Montferland,14,Achterhoek
+2205,Didam,1955,Montferland,14,Achterhoek
+2206,'s-Heerenberg,1955,Montferland,14,Achterhoek
+2207,Kilder,1955,Montferland,14,Achterhoek
+2208,Lengel,1955,Montferland,14,Achterhoek
+2209,Loerbeek,1955,Montferland,14,Achterhoek
+2210,Stokkum,1955,Montferland,14,Achterhoek
+2211,Vethuizen,1955,Montferland,14,Achterhoek
+2212,Wijnbergen,1955,Montferland,14,Achterhoek
+2213,Zeddam,1955,Montferland,14,Achterhoek
+2214,Dussen,1959,Altena,34,Midden-Noord-Brabant
+2215,Hank,1959,Altena,34,Midden-Noord-Brabant
+2216,Nieuwendijk,1959,Altena,34,Midden-Noord-Brabant
+2217,Sleeuwijk,1959,Altena,34,Midden-Noord-Brabant
+2218,Werkendam,1959,Altena,34,Midden-Noord-Brabant
+2219,Loenen aan de Vecht,1904,Stichtse Vecht,17,Utrecht
+2220,Loenersloot,1904,Stichtse Vecht,17,Utrecht
+2221,Nieuwersluis,1904,Stichtse Vecht,17,Utrecht
+2222,Nigtevecht,1904,Stichtse Vecht,17,Utrecht
+2224,Groenlo,1586,Oost Gelre,14,Achterhoek
+2225,Lievelde,1586,Oost Gelre,14,Achterhoek
+2226,Vragender,1586,Oost Gelre,14,Achterhoek
+2227,Lichtenvoorde,1586,Oost Gelre,14,Achterhoek
+2228,Harreveld,1586,Oost Gelre,14,Achterhoek
+2229,Zieuwent,1586,Oost Gelre,14,Achterhoek
+2230,Mariënvelde,1586,Oost Gelre,14,Achterhoek
+2231,Bellingwolde,1950,Westerwolde,01,Oost-Groningen
+2232,Blijham,1950,Westerwolde,01,Oost-Groningen
+2233,Oudeschans,1950,Westerwolde,01,Oost-Groningen
+2234,Veelerveen,1950,Westerwolde,01,Oost-Groningen
+2235,Vriescheloo,1950,Westerwolde,01,Oost-Groningen
+2236,Wedde,1950,Westerwolde,01,Oost-Groningen
+2237,Bunschoten-Spakenburg,0313,Bunschoten,17,Utrecht
+2238,Eemdijk,0313,Bunschoten,17,Utrecht
+2239,Bantega,1940,De Fryske Marren,05,Zuidwest-Friesland
+2240,Delfstrahuizen,1940,De Fryske Marren,05,Zuidwest-Friesland
+2241,Echten,1940,De Fryske Marren,05,Zuidwest-Friesland
+2242,Echtenerbrug,1940,De Fryske Marren,05,Zuidwest-Friesland
+2243,Eesterga,1940,De Fryske Marren,05,Zuidwest-Friesland
+2244,Follega,1940,De Fryske Marren,05,Zuidwest-Friesland
+2245,Lemmer,1940,De Fryske Marren,05,Zuidwest-Friesland
+2246,Oosterzee,1940,De Fryske Marren,05,Zuidwest-Friesland
+2248,Klarenbeek,0200,Apeldoorn,13,Veluwe
+2250,Lieren,0200,Apeldoorn,13,Veluwe
+2251,Loenen,0200,Apeldoorn,13,Veluwe
+2254,Beemte Broekland,0200,Apeldoorn,13,Veluwe
+2256,Ugchelen,0200,Apeldoorn,13,Veluwe
+2257,Hoenderloo,0200,Apeldoorn,13,Veluwe
+2258,Beekbergen,0200,Apeldoorn,13,Veluwe
+2259,Boerakker,1969,Westerkwartier,03,Overig Groningen
+2260,De Wilp,1969,Westerkwartier,03,Overig Groningen
+2261,Jonkersvaart,1969,Westerkwartier,03,Overig Groningen
+2262,Lucaswolde,1969,Westerkwartier,03,Overig Groningen
+2263,Marum,1969,Westerkwartier,03,Overig Groningen
+2264,Niebert,1969,Westerkwartier,03,Overig Groningen
+2265,Noordwijk,1969,Westerkwartier,03,Overig Groningen
+2266,Nuis,1969,Westerkwartier,03,Overig Groningen
+2267,Akersloot,0383,Castricum,20,IJmond
+2268,Castricum,0383,Castricum,20,IJmond
+2269,de Woude,0383,Castricum,20,IJmond
+2270,Limmen,0383,Castricum,20,IJmond
+2271,Leerdam,1961,Vijfheerenlanden,17,Utrecht
+2272,Schoonrewoerd,1961,Vijfheerenlanden,17,Utrecht
+2273,Kedichem,1961,Vijfheerenlanden,17,Utrecht
+2274,Oosterwijk,1961,Vijfheerenlanden,17,Utrecht
+2275,Borgercompagnie,1952,Midden-Groningen,03,Overig Groningen
+2276,Tripscompagnie,1952,Midden-Groningen,03,Overig Groningen
+2277,Meeden,1952,Midden-Groningen,03,Overig Groningen
+2278,Muntendam,1952,Midden-Groningen,03,Overig Groningen
+2279,Noordbroek,1952,Midden-Groningen,03,Overig Groningen
+2280,Zuidbroek,1952,Midden-Groningen,03,Overig Groningen
+2281,Roermond,0957,Roermond,38,Midden-Limburg
+2282,Herten,0957,Roermond,38,Midden-Limburg
+2283,Swalmen,0957,Roermond,38,Midden-Limburg
+2284,Jisp,0880,Wormerland,22,Zaanstreek
+2285,Oostknollendam,0880,Wormerland,22,Zaanstreek
+2286,Spijkerboor,0880,Wormerland,22,Zaanstreek
+2287,Wormer,0880,Wormerland,22,Zaanstreek
+2288,Wijdewormer,0880,Wormerland,22,Zaanstreek
+2289,Millingen aan de Rijn,1945,Berg en Dal,15,Arnhem/Nijmegen
+2291,Groesbeek,1945,Berg en Dal,15,Arnhem/Nijmegen
+2292,Heilig Landstichting,1945,Berg en Dal,15,Arnhem/Nijmegen
+2293,Zoetermeer,0637,Zoetermeer,26,Agglomeratie 's-Gravenhage
+2294,Bourtange,1950,Westerwolde,01,Oost-Groningen
+2295,Sellingen,1950,Westerwolde,01,Oost-Groningen
+2296,Ter Apel,1950,Westerwolde,01,Oost-Groningen
+2297,Ter Apelkanaal,1950,Westerwolde,01,Oost-Groningen
+2298,Vlagtwedde,1950,Westerwolde,01,Oost-Groningen
+2299,Gorinchem,0512,Gorinchem,30,Zuidoost-Zuid-Holland
+2300,Dalem,0512,Gorinchem,30,Zuidoost-Zuid-Holland
+2301,Allingawier,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2302,Arum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2303,Breezanddijk,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2304,Burgwerd,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2305,Cornwerd,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2306,Dedgum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2307,Exmorra,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2308,Ferwoude,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2309,Gaast,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2310,Hartwerd,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2311,Hichtum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2312,Hieslum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2313,Idsegahuizum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2314,Kimswerd,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2315,Kornwerderzand,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2316,Lollum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2317,Longerhouw,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2318,Makkum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2319,Parrega,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2320,Piaam,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2321,Pingjum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2322,Schettens,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2323,Schraard,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2324,Tjerkwerd,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2325,Witmarsum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2326,Wons,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2327,Zurich,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2328,Castenray,0984,Venray,37,Noord-Limburg
+2329,Heide,0984,Venray,37,Noord-Limburg
+2330,Leunen,0984,Venray,37,Noord-Limburg
+2331,Merselo,0984,Venray,37,Noord-Limburg
+2334,Smakt,0984,Venray,37,Noord-Limburg
+2335,Venray,0984,Venray,37,Noord-Limburg
+2336,Veulen,0984,Venray,37,Noord-Limburg
+2337,Vredepeel,0984,Venray,37,Noord-Limburg
+2338,Ysselsteyn,0984,Venray,37,Noord-Limburg
+2340,Enumatil,1969,Westerkwartier,03,Overig Groningen
+2341,Leek,1969,Westerkwartier,03,Overig Groningen
+2342,Lettelbert,1969,Westerkwartier,03,Overig Groningen
+2343,Midwolde,1969,Westerkwartier,03,Overig Groningen
+2344,Oostwold,1969,Westerkwartier,03,Overig Groningen
+2345,Tolbert,1969,Westerkwartier,03,Overig Groningen
+2346,Zevenhuizen,1969,Westerkwartier,03,Overig Groningen
+2347,Haaksbergen,0158,Haaksbergen,12,Twente
+2348,Alkmaar,0361,Alkmaar,19,Alkmaar en omgeving
+2349,Koedijk,0361,Alkmaar,19,Alkmaar en omgeving
+2350,Oudorp,0361,Alkmaar,19,Alkmaar en omgeving
+2351,Dordrecht,0505,Dordrecht,30,Zuidoost-Zuid-Holland
+2352,Hendrik-Ido-Ambacht,0531,Hendrik-Ido-Ambacht,30,Zuidoost-Zuid-Holland
+2353,Asperen,1960,West Betuwe,16,Zuidwest-Gelderland
+2354,Herwijnen,1960,West Betuwe,16,Zuidwest-Gelderland
+2355,Heukelum,1960,West Betuwe,16,Zuidwest-Gelderland
+2356,Spijk,1960,West Betuwe,16,Zuidwest-Gelderland
+2357,Vuren,1960,West Betuwe,16,Zuidwest-Gelderland
+2358,Nuth,1954,Beekdaelen,39,Zuid-Limburg
+2359,Hulsberg,1954,Beekdaelen,39,Zuid-Limburg
+2360,Schimmert,1954,Beekdaelen,39,Zuid-Limburg
+2361,Wijnandsrade,1954,Beekdaelen,39,Zuid-Limburg
+2362,Rhoon,0613,Albrandswaard,29,Groot-Rijnmond
+2363,Poortugaal,0613,Albrandswaard,29,Groot-Rijnmond
+2364,Rotterdam-Albrandswaard,0613,Albrandswaard,29,Groot-Rijnmond
+2365,Bergambacht,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2366,Berkenwoude,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2367,Ammerstol,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2368,Brielle,1992,Voorne aan Zee,29,Groot-Rijnmond
+2369,Vierpolders,1992,Voorne aan Zee,29,Groot-Rijnmond
+2370,Zwartewaal,1992,Voorne aan Zee,29,Groot-Rijnmond
+2371,Klaaswaal,1963,Hoeksche Waard,29,Groot-Rijnmond
+2372,Numansdorp,1963,Hoeksche Waard,29,Groot-Rijnmond
+2373,Ouderkerk aan den IJssel,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2374,Gouderak,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2375,Krimpen aan de Lek,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2376,Lekkerkerk,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2377,Dirksland,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2378,Herkingen,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2379,Melissant,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2380,'s-Gravendeel,1963,Hoeksche Waard,29,Groot-Rijnmond
+2381,Heinenoord,1963,Hoeksche Waard,29,Groot-Rijnmond
+2382,Maasdam,1963,Hoeksche Waard,29,Groot-Rijnmond
+2383,Mijnsheerenland,1963,Hoeksche Waard,29,Groot-Rijnmond
+2384,Puttershoek,1963,Hoeksche Waard,29,Groot-Rijnmond
+2385,Westmaas,1963,Hoeksche Waard,29,Groot-Rijnmond
+2386,Alblasserdam,0482,Alblasserdam,30,Zuidoost-Zuid-Holland
+2387,Haastrecht,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2388,Stolwijk,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2389,Vlist,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2390,Schoonhoven,1931,Krimpenerwaard,28,Oost-Zuid-Holland
+2391,Assen,0106,Assen,07,Noord-Drenthe
+2392,Loon,0106,Assen,07,Noord-Drenthe
+2393,Rhee,0106,Assen,07,Noord-Drenthe
+2394,Ter Aard,0106,Assen,07,Noord-Drenthe
+2395,Ubbena,0106,Assen,07,Noord-Drenthe
+2396,Zeijerveen,0106,Assen,07,Noord-Drenthe
+2397,Zeijerveld,0106,Assen,07,Noord-Drenthe
+2398,Heerjansdam,0642,Zwijndrecht,30,Zuidoost-Zuid-Holland
+2399,Zwijndrecht,0642,Zwijndrecht,30,Zuidoost-Zuid-Holland
+2400,Abbega,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2401,Blauwhuis,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2402,Folsgare,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2403,Gaastmeer,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2404,Gauw,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2405,Goënga,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2406,Greonterp,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2407,Heeg,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2408,Hommerts,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2409,Idzega,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2410,IJlst,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2411,Indijk,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2412,Jutrijp,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2413,Koufurderrige,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2414,Nijland,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2415,Oosthem,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2416,Oppenhuizen,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2417,Oudega,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2418,Sandfirden,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2419,Scharnegoutum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2420,Smallebrugge,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2422,Tjalhuizum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2423,Uitwellingerga,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2424,Westhem,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2425,Wolsum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2426,Woudsend,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2427,Ypecolsga,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2428,Schiermonnikoog,0088,Schiermonnikoog,04,Noord-Friesland
+2429,Biddinghuizen,0303,Dronten,40,Flevoland
+2430,Dronten,0303,Dronten,40,Flevoland
+2431,Swifterbant,0303,Dronten,40,Flevoland
+2432,IJsselstein,0353,IJsselstein,17,Utrecht
+2433,Kreileroord,1911,Hollands Kroon,18,Kop van Noord-Holland
+2434,Middenmeer,1911,Hollands Kroon,18,Kop van Noord-Holland
+2435,Slootdorp,1911,Hollands Kroon,18,Kop van Noord-Holland
+2436,Wieringerwerf,1911,Hollands Kroon,18,Kop van Noord-Holland
+2437,Rozenburg,0599,Rotterdam,29,Groot-Rijnmond
+2438,Sliedrecht,0610,Sliedrecht,30,Zuidoost-Zuid-Holland
+2439,Boxtel,0757,Boxtel,35,Noordoost-Noord-Brabant
+2440,Liempde,0757,Boxtel,35,Noordoost-Noord-Brabant
+2441,Aldtsjerk,0737,Tytsjerksteradiel,04,Noord-Friesland
+2442,Wyns,0737,Tytsjerksteradiel,04,Noord-Friesland
+2443,Oentsjerk,0737,Tytsjerksteradiel,04,Noord-Friesland
+2444,Gytsjerk,0737,Tytsjerksteradiel,04,Noord-Friesland
+2445,Ryptsjerk,0737,Tytsjerksteradiel,04,Noord-Friesland
+2446,Mûnein,0737,Tytsjerksteradiel,04,Noord-Friesland
+2447,Tytsjerk,0737,Tytsjerksteradiel,04,Noord-Friesland
+2448,Suwâld,0737,Tytsjerksteradiel,04,Noord-Friesland
+2449,Hurdegaryp,0737,Tytsjerksteradiel,04,Noord-Friesland
+2450,Noardburgum,0737,Tytsjerksteradiel,04,Noord-Friesland
+2451,Burgum,0737,Tytsjerksteradiel,04,Noord-Friesland
+2452,Jistrum,0737,Tytsjerksteradiel,04,Noord-Friesland
+2453,Sumar,0737,Tytsjerksteradiel,04,Noord-Friesland
+2454,Eastermar,0737,Tytsjerksteradiel,04,Noord-Friesland
+2455,Garyp,0737,Tytsjerksteradiel,04,Noord-Friesland
+2456,Earnewâld,0737,Tytsjerksteradiel,04,Noord-Friesland
+2458,Heemskerk,0396,Heemskerk,20,IJmond
+2459,Rijswijk,0603,Rijswijk (ZH.),26,Agglomeratie 's-Gravenhage
+2460,Schagen,0441,Schagen,18,Kop van Noord-Holland
+2463,Zwaag,0405,Hoorn,18,Kop van Noord-Holland
+2464,Adorp,1966,Het Hogeland,03,Overig Groningen
+2465,Baflo,1966,Het Hogeland,03,Overig Groningen
+2466,Den Andel,1966,Het Hogeland,03,Overig Groningen
+2467,Ezinge,1969,Westerkwartier,03,Overig Groningen
+2468,Feerwerd,1969,Westerkwartier,03,Overig Groningen
+2469,Garnwerd,1969,Westerkwartier,03,Overig Groningen
+2470,Rasquert,1966,Het Hogeland,03,Overig Groningen
+2471,Saaxumhuizen,1966,Het Hogeland,03,Overig Groningen
+2472,Sauwerd,1966,Het Hogeland,03,Overig Groningen
+2473,Tinallinge,1966,Het Hogeland,03,Overig Groningen
+2474,Wetsinge,1966,Het Hogeland,03,Overig Groningen
+2475,Winsum,1966,Het Hogeland,03,Overig Groningen
+2476,Reeuwijk,1901,Bodegraven-Reeuwijk,28,Oost-Zuid-Holland
+2477,Driebruggen,1901,Bodegraven-Reeuwijk,28,Oost-Zuid-Holland
+2478,Waarder,1901,Bodegraven-Reeuwijk,28,Oost-Zuid-Holland
+2479,Milsbeek,0907,Gennep,37,Noord-Limburg
+2480,Ottersum,0907,Gennep,37,Noord-Limburg
+2481,Ven-Zelderheide,0907,Gennep,37,Noord-Limburg
+2482,Gennep,0907,Gennep,37,Noord-Limburg
+2483,Heijen,0907,Gennep,37,Noord-Limburg
+2484,Akmarijp,1940,De Fryske Marren,05,Zuidwest-Friesland
+2485,Boornzwaag,1940,De Fryske Marren,05,Zuidwest-Friesland
+2486,Broek,1940,De Fryske Marren,05,Zuidwest-Friesland
+2487,Dijken,1940,De Fryske Marren,05,Zuidwest-Friesland
+2488,Doniaga,1940,De Fryske Marren,05,Zuidwest-Friesland
+2489,Goingarijp,1940,De Fryske Marren,05,Zuidwest-Friesland
+2490,Haskerdijken,0074,Heerenveen,06,Zuidoost-Friesland
+2491,Haskerhorne,1940,De Fryske Marren,05,Zuidwest-Friesland
+2492,Idskenhuizen,1940,De Fryske Marren,05,Zuidwest-Friesland
+2493,Joure,1940,De Fryske Marren,05,Zuidwest-Friesland
+2494,Langweer,1940,De Fryske Marren,05,Zuidwest-Friesland
+2495,Legemeer,1940,De Fryske Marren,05,Zuidwest-Friesland
+2496,Nieuwebrug,0074,Heerenveen,06,Zuidoost-Friesland
+2498,Oldeouwer,1940,De Fryske Marren,05,Zuidwest-Friesland
+2500,Ouwsterhaule,1940,De Fryske Marren,05,Zuidwest-Friesland
+2501,Ouwster-Nijega,1940,De Fryske Marren,05,Zuidwest-Friesland
+2502,Rohel,1940,De Fryske Marren,05,Zuidwest-Friesland
+2503,Rotstergaast,1940,De Fryske Marren,05,Zuidwest-Friesland
+2504,Rotsterhaule,1940,De Fryske Marren,05,Zuidwest-Friesland
+2505,Rottum,1940,De Fryske Marren,05,Zuidwest-Friesland
+2506,Scharsterbrug,1940,De Fryske Marren,05,Zuidwest-Friesland
+2507,Sint Nicolaasga,1940,De Fryske Marren,05,Zuidwest-Friesland
+2508,Sintjohannesga,1940,De Fryske Marren,05,Zuidwest-Friesland
+2509,Snikzwaag,1940,De Fryske Marren,05,Zuidwest-Friesland
+2510,Terkaple,1940,De Fryske Marren,05,Zuidwest-Friesland
+2511,Teroele,1940,De Fryske Marren,05,Zuidwest-Friesland
+2512,Tjerkgaast,1940,De Fryske Marren,05,Zuidwest-Friesland
+2513,Vegelinsoord,1940,De Fryske Marren,05,Zuidwest-Friesland
+2514,Barsingerhorn,1911,Hollands Kroon,18,Kop van Noord-Holland
+2515,Haringhuizen,1911,Hollands Kroon,18,Kop van Noord-Holland
+2516,Kolhorn,1911,Hollands Kroon,18,Kop van Noord-Holland
+2517,Lutjewinkel,1911,Hollands Kroon,18,Kop van Noord-Holland
+2518,Nieuwe Niedorp,1911,Hollands Kroon,18,Kop van Noord-Holland
+2519,Oude Niedorp,1911,Hollands Kroon,18,Kop van Noord-Holland
+2520,'t Veld,1911,Hollands Kroon,18,Kop van Noord-Holland
+2521,Winkel,1911,Hollands Kroon,18,Kop van Noord-Holland
+2522,Zijdewind,1911,Hollands Kroon,18,Kop van Noord-Holland
+2523,Woudenberg,0351,Woudenberg,17,Utrecht
+2524,Eagum,0080,Leeuwarden,04,Noord-Friesland
+2525,Akkrum,0074,Heerenveen,06,Zuidoost-Friesland
+2526,Dearsum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2527,Friens,0080,Leeuwarden,04,Noord-Friesland
+2529,Idaerd,0080,Leeuwarden,04,Noord-Friesland
+2530,Jirnsum,0080,Leeuwarden,04,Noord-Friesland
+2532,Aldeboarn,0074,Heerenveen,06,Zuidoost-Friesland
+2533,Poppenwier,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2534,Raerd,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2535,Reduzum,0080,Leeuwarden,04,Noord-Friesland
+2536,Sibrandabuorren,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2537,Terherne,1940,De Fryske Marren,05,Zuidwest-Friesland
+2538,Tersoal,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+2539,Wergea,0080,Leeuwarden,04,Noord-Friesland
+2540,Warstiens,0080,Leeuwarden,04,Noord-Friesland
+2541,Warten,0080,Leeuwarden,04,Noord-Friesland
+2545,Lent,0268,Nijmegen,15,Arnhem/Nijmegen
+2548,Beerze,0175,Ommen,10,Noord-Overijssel
+2549,Beerzerveld,0175,Ommen,10,Noord-Overijssel
+2550,Dalmsholte,0175,Ommen,10,Noord-Overijssel
+2551,Giethmen,0175,Ommen,10,Noord-Overijssel
+2552,Lemele,0175,Ommen,10,Noord-Overijssel
+2553,Stegeren,0175,Ommen,10,Noord-Overijssel
+2554,Vilsteren,0175,Ommen,10,Noord-Overijssel
+2555,Vinkenbuurt,0175,Ommen,10,Noord-Overijssel
+2556,Witharen,0175,Ommen,10,Noord-Overijssel
+2558,Zennewijnen,0281,Tiel,16,Zuidwest-Gelderland
+2559,Wadenoijen,0281,Tiel,16,Zuidwest-Gelderland
+2560,Kapel Avezaath,0281,Tiel,16,Zuidwest-Gelderland
+2561,Kerk Avezaath,0281,Tiel,16,Zuidwest-Gelderland
+2562,Ridderkerk,0597,Ridderkerk,29,Groot-Rijnmond
+2563,Heemstede,0397,Heemstede,21,Agglomeratie Haarlem
+2564,Wijchen,0296,Wijchen,15,Arnhem/Nijmegen
+2565,Bergharen,0296,Wijchen,15,Arnhem/Nijmegen
+2566,Hernen,0296,Wijchen,15,Arnhem/Nijmegen
+2567,Leur,0296,Wijchen,15,Arnhem/Nijmegen
+2568,Batenburg,0296,Wijchen,15,Arnhem/Nijmegen
+2569,Niftrik,0296,Wijchen,15,Arnhem/Nijmegen
+2570,Balgoij,0296,Wijchen,15,Arnhem/Nijmegen
+2571,Aalsmeer,0358,Aalsmeer,23,Groot-Amsterdam
+2572,Kudelstaart,0358,Aalsmeer,23,Groot-Amsterdam
+2573,Ermelo,0233,Ermelo,13,Veluwe
+2574,Drimmelen,1719,Drimmelen,33,West-Noord-Brabant
+2575,Hooge Zwaluwe,1719,Drimmelen,33,West-Noord-Brabant
+2576,Lage Zwaluwe,1719,Drimmelen,33,West-Noord-Brabant
+2577,Made,1719,Drimmelen,33,West-Noord-Brabant
+2578,Terheijden,1719,Drimmelen,33,West-Noord-Brabant
+2579,Wagenberg,1719,Drimmelen,33,West-Noord-Brabant
+2580,Zevenbergschen Hoek,1719,Drimmelen,33,West-Noord-Brabant
+2581,Rucphen,0840,Rucphen,33,West-Noord-Brabant
+2582,Schijf,0840,Rucphen,33,West-Noord-Brabant
+2583,Sprundel,0840,Rucphen,33,West-Noord-Brabant
+2584,St. Willebrord,0840,Rucphen,33,West-Noord-Brabant
+2585,Zegge,0840,Rucphen,33,West-Noord-Brabant
+2586,Hollum,0060,Ameland,04,Noord-Friesland
+2587,Ballum,0060,Ameland,04,Noord-Friesland
+2588,Nes,0060,Ameland,04,Noord-Friesland
+2589,Buren,0060,Ameland,04,Noord-Friesland
+2590,Herkenbosch,1669,Roerdalen,38,Midden-Limburg
+2591,Melick,1669,Roerdalen,38,Midden-Limburg
+2592,Montfort,1669,Roerdalen,38,Midden-Limburg
+2593,Posterholt,1669,Roerdalen,38,Midden-Limburg
+2594,Sint Odiliënberg,1669,Roerdalen,38,Midden-Limburg
+2595,Vlodrop,1669,Roerdalen,38,Midden-Limburg
+2596,Sprang-Capelle,0867,Waalwijk,34,Midden-Noord-Brabant
+2597,Waalwijk,0867,Waalwijk,34,Midden-Noord-Brabant
+2598,Waspik,0867,Waalwijk,34,Midden-Noord-Brabant
+2601,Maasbree,1894,Peel en Maas,37,Noord-Limburg
+2602,Baarlo,1894,Peel en Maas,37,Noord-Limburg
+2603,Bunnik,0312,Bunnik,17,Utrecht
+2604,Odijk,0312,Bunnik,17,Utrecht
+2605,Werkhoven,0312,Bunnik,17,Utrecht
+2606,Klarenbeek,0285,Voorst,13,Veluwe
+2607,Nijbroek,0285,Voorst,13,Veluwe
+2608,Steenenkamer,0285,Voorst,13,Veluwe
+2609,Terwolde,0285,Voorst,13,Veluwe
+2610,Teuge,0285,Voorst,13,Veluwe
+2611,Twello,0285,Voorst,13,Veluwe
+2612,Voorst,0285,Voorst,13,Veluwe
+2613,Wilp,0285,Voorst,13,Veluwe
+2614,Oosterend,0093,Terschelling,04,Noord-Friesland
+2615,Hoorn,0093,Terschelling,04,Noord-Friesland
+2616,Lies,0093,Terschelling,04,Noord-Friesland
+2617,Formerum,0093,Terschelling,04,Noord-Friesland
+2618,Landerum,0093,Terschelling,04,Noord-Friesland
+2619,Midsland,0093,Terschelling,04,Noord-Friesland
+2620,Striep,0093,Terschelling,04,Noord-Friesland
+2621,Baaiduinen,0093,Terschelling,04,Noord-Friesland
+2622,Kaard,0093,Terschelling,04,Noord-Friesland
+2623,Hee,0093,Terschelling,04,Noord-Friesland
+2624,Kinnum,0093,Terschelling,04,Noord-Friesland
+2625,West-Terschelling,0093,Terschelling,04,Noord-Friesland
+2626,Aalst,0297,Zaltbommel,16,Zuidwest-Gelderland
+2627,Bern,0297,Zaltbommel,16,Zuidwest-Gelderland
+2628,Brakel,0297,Zaltbommel,16,Zuidwest-Gelderland
+2629,Bruchem,0297,Zaltbommel,16,Zuidwest-Gelderland
+2630,Delwijnen,0297,Zaltbommel,16,Zuidwest-Gelderland
+2631,Gameren,0297,Zaltbommel,16,Zuidwest-Gelderland
+2632,Kerkwijk,0297,Zaltbommel,16,Zuidwest-Gelderland
+2633,Nederhemert,0297,Zaltbommel,16,Zuidwest-Gelderland
+2634,Nieuwaal,0297,Zaltbommel,16,Zuidwest-Gelderland
+2635,Poederoijen,0297,Zaltbommel,16,Zuidwest-Gelderland
+2636,Zaltbommel,0297,Zaltbommel,16,Zuidwest-Gelderland
+2637,Zuilichem,0297,Zaltbommel,16,Zuidwest-Gelderland
+2638,Leusden,0327,Leusden,17,Utrecht
+2639,Stoutenburg,0327,Leusden,17,Utrecht
+2640,Achterveld,0327,Leusden,17,Utrecht
+2641,Haarlemmerliede,0394,Haarlemmermeer,23,Groot-Amsterdam
+2643,Halfweg,0394,Haarlemmermeer,23,Groot-Amsterdam
+2644,Zoeterwoude,0638,Zoeterwoude,25,Agglomeratie Leiden en Bollenstreek
+2645,Gelderswoude,0638,Zoeterwoude,25,Agglomeratie Leiden en Bollenstreek
+2646,Oisterwijk,0824,Oisterwijk,34,Midden-Noord-Brabant
+2647,Moergestel,0824,Oisterwijk,34,Midden-Noord-Brabant
+2648,Heukelom,0824,Oisterwijk,34,Midden-Noord-Brabant
+2649,Kerkrade,0928,Kerkrade,39,Zuid-Limburg
+2650,Eygelshoven,0928,Kerkrade,39,Zuid-Limburg
+2651,Vogelenzang,0377,Bloemendaal,21,Agglomeratie Haarlem
+2652,Aerdenhout,0377,Bloemendaal,21,Agglomeratie Haarlem
+2653,Overveen,0377,Bloemendaal,21,Agglomeratie Haarlem
+2654,Bloemendaal,0377,Bloemendaal,21,Agglomeratie Haarlem
+2655,De Lier,1783,Westland,27,Delft en Westland
+2656,Honselersdijk,1783,Westland,27,Delft en Westland
+2657,Kwintsheul,1783,Westland,27,Delft en Westland
+2658,Maasdijk,1783,Westland,27,Delft en Westland
+2659,Monster,1783,Westland,27,Delft en Westland
+2660,Naaldwijk,1783,Westland,27,Delft en Westland
+2661,Poeldijk,1783,Westland,27,Delft en Westland
+2662,'s-Gravenzande,1783,Westland,27,Delft en Westland
+2663,Ter Heijde,1783,Westland,27,Delft en Westland
+2664,Wateringen,1783,Westland,27,Delft en Westland
+2665,Bodegraven,1901,Bodegraven-Reeuwijk,28,Oost-Zuid-Holland
+2666,Nieuwerbrug aan den Rijn,1901,Bodegraven-Reeuwijk,28,Oost-Zuid-Holland
+2667,Nieuwkoop,0569,Nieuwkoop,28,Oost-Zuid-Holland
+2668,Noorden,0569,Nieuwkoop,28,Oost-Zuid-Holland
+2669,Woerdense Verlaat,0569,Nieuwkoop,28,Oost-Zuid-Holland
+2670,Nieuwveen,0569,Nieuwkoop,28,Oost-Zuid-Holland
+2671,Zevenhoven,0569,Nieuwkoop,28,Oost-Zuid-Holland
+2672,Vrouwenakker,0569,Nieuwkoop,28,Oost-Zuid-Holland
+2673,Ter Aar,0569,Nieuwkoop,28,Oost-Zuid-Holland
+2674,Brouwershaven,1676,Schouwen-Duiveland,32,Overig Zeeland
+2675,Bruinisse,1676,Schouwen-Duiveland,32,Overig Zeeland
+2676,Burgh-Haamstede,1676,Schouwen-Duiveland,32,Overig Zeeland
+2677,Dreischor,1676,Schouwen-Duiveland,32,Overig Zeeland
+2678,Ellemeet,1676,Schouwen-Duiveland,32,Overig Zeeland
+2679,Kerkwerve,1676,Schouwen-Duiveland,32,Overig Zeeland
+2680,Nieuwerkerk,1676,Schouwen-Duiveland,32,Overig Zeeland
+2681,Noordgouwe,1676,Schouwen-Duiveland,32,Overig Zeeland
+2682,Noordwelle,1676,Schouwen-Duiveland,32,Overig Zeeland
+2683,Oosterland,1676,Schouwen-Duiveland,32,Overig Zeeland
+2684,Ouwerkerk,1676,Schouwen-Duiveland,32,Overig Zeeland
+2685,Renesse,1676,Schouwen-Duiveland,32,Overig Zeeland
+2686,Scharendijke,1676,Schouwen-Duiveland,32,Overig Zeeland
+2687,Serooskerke,1676,Schouwen-Duiveland,32,Overig Zeeland
+2688,Sirjansland,1676,Schouwen-Duiveland,32,Overig Zeeland
+2689,Zierikzee,1676,Schouwen-Duiveland,32,Overig Zeeland
+2690,Zonnemaire,1676,Schouwen-Duiveland,32,Overig Zeeland
+2691,Baarlo,1708,Steenwijkerland,10,Noord-Overijssel
+2692,Baars,1708,Steenwijkerland,10,Noord-Overijssel
+2693,Basse,1708,Steenwijkerland,10,Noord-Overijssel
+2694,Belt-Schutsloot,1708,Steenwijkerland,10,Noord-Overijssel
+2695,Blankenham,1708,Steenwijkerland,10,Noord-Overijssel
+2696,Blokzijl,1708,Steenwijkerland,10,Noord-Overijssel
+2697,De Bult,1708,Steenwijkerland,10,Noord-Overijssel
+2698,De Pol,1708,Steenwijkerland,10,Noord-Overijssel
+2699,Eesveen,1708,Steenwijkerland,10,Noord-Overijssel
+2700,Giethoorn,1708,Steenwijkerland,10,Noord-Overijssel
+2701,IJsselham,1708,Steenwijkerland,10,Noord-Overijssel
+2702,Kalenberg,1708,Steenwijkerland,10,Noord-Overijssel
+2703,Kallenkote,1708,Steenwijkerland,10,Noord-Overijssel
+2704,Kuinre,1708,Steenwijkerland,10,Noord-Overijssel
+2705,Marijenkampen,1708,Steenwijkerland,10,Noord-Overijssel
+2706,Nederland,1708,Steenwijkerland,10,Noord-Overijssel
+2707,Oldemarkt,1708,Steenwijkerland,10,Noord-Overijssel
+2708,Onna,1708,Steenwijkerland,10,Noord-Overijssel
+2709,Ossenzijl,1708,Steenwijkerland,10,Noord-Overijssel
+2710,Paasloo,1708,Steenwijkerland,10,Noord-Overijssel
+2711,Scheerwolde,1708,Steenwijkerland,10,Noord-Overijssel
+2712,Sint Jansklooster,1708,Steenwijkerland,10,Noord-Overijssel
+2713,Steenwijk,1708,Steenwijkerland,10,Noord-Overijssel
+2714,Steenwijkerwold,1708,Steenwijkerland,10,Noord-Overijssel
+2715,Tuk,1708,Steenwijkerland,10,Noord-Overijssel
+2716,Vollenhove,1708,Steenwijkerland,10,Noord-Overijssel
+2717,Wanneperveen,1708,Steenwijkerland,10,Noord-Overijssel
+2718,Wetering,1708,Steenwijkerland,10,Noord-Overijssel
+2719,Willemsoord,1708,Steenwijkerland,10,Noord-Overijssel
+2720,Witte Paarden,1708,Steenwijkerland,10,Noord-Overijssel
+2721,Zuidveen,1708,Steenwijkerland,10,Noord-Overijssel
+2722,Bitgum,1949,Waadhoeke,04,Noord-Friesland
+2723,Bitgummole,1949,Waadhoeke,04,Noord-Friesland
+2724,Berltsum,1949,Waadhoeke,04,Noord-Friesland
+2725,Blessum,1949,Waadhoeke,04,Noord-Friesland
+2726,Boksum,1949,Waadhoeke,04,Noord-Friesland
+2727,Deinum,1949,Waadhoeke,04,Noord-Friesland
+2728,Ingelum,1949,Waadhoeke,04,Noord-Friesland
+2729,Dronryp,1949,Waadhoeke,04,Noord-Friesland
+2730,Marsum,1949,Waadhoeke,04,Noord-Friesland
+2731,Menaam,1949,Waadhoeke,04,Noord-Friesland
+2732,Skingen,1949,Waadhoeke,04,Noord-Friesland
+2733,Slappeterp,1949,Waadhoeke,04,Noord-Friesland
+2734,Wier,1949,Waadhoeke,04,Noord-Friesland
+2735,Beverwijk,0375,Beverwijk,20,IJmond
+2737,De Cocksdorp,0448,Texel,18,Kop van Noord-Holland
+2738,De Koog,0448,Texel,18,Kop van Noord-Holland
+2739,De Waal,0448,Texel,18,Kop van Noord-Holland
+2740,Den Burg,0448,Texel,18,Kop van Noord-Holland
+2741,Den Hoorn,0448,Texel,18,Kop van Noord-Holland
+2742,Oosterend,0448,Texel,18,Kop van Noord-Holland
+2743,Oudeschild,0448,Texel,18,Kop van Noord-Holland
+2744,Oegstgeest,0579,Oegstgeest,25,Agglomeratie Leiden en Bollenstreek
+2745,Someren,0847,Someren,36,Zuidoost-Noord-Brabant
+2746,Lierop,0847,Someren,36,Zuidoost-Noord-Brabant
+2750,Weurt,0209,Beuningen,15,Arnhem/Nijmegen
+2751,Beuningen Gld,0209,Beuningen,15,Arnhem/Nijmegen
+2752,Ewijk,0209,Beuningen,15,Arnhem/Nijmegen
+2753,Winssen,0209,Beuningen,15,Arnhem/Nijmegen
+2754,Enkhuizen,0388,Enkhuizen,18,Kop van Noord-Holland
+2755,Uitgeest,0450,Uitgeest,20,IJmond
+2756,Schagerbrug,0441,Schagen,18,Kop van Noord-Holland
+2757,Callantsoog,0441,Schagen,18,Kop van Noord-Holland
+2758,'t Zand,0441,Schagen,18,Kop van Noord-Holland
+2759,Sint Maartensbrug,0441,Schagen,18,Kop van Noord-Holland
+2760,Sint Maartensvlotbrug,0441,Schagen,18,Kop van Noord-Holland
+2761,Petten,0441,Schagen,18,Kop van Noord-Holland
+2762,Burgerbrug,0441,Schagen,18,Kop van Noord-Holland
+2763,Oudesluis,0441,Schagen,18,Kop van Noord-Holland
+2764,Ede,0228,Ede,13,Veluwe
+2765,Lunteren,0228,Ede,13,Veluwe
+2766,Bennekom,0228,Ede,13,Veluwe
+2767,Otterlo,0228,Ede,13,Veluwe
+2768,Harskamp,0228,Ede,13,Veluwe
+2769,Ederveen,0228,Ede,13,Veluwe
+2770,De Klomp,0228,Ede,13,Veluwe
+2771,Wekerom,0228,Ede,13,Veluwe
+2772,Hoenderloo,0228,Ede,13,Veluwe
+2773,Deelen,0228,Ede,13,Veluwe
+2774,Aagtekerke,0717,Veere,32,Overig Zeeland
+2775,Biggekerke,0717,Veere,32,Overig Zeeland
+2776,Domburg,0717,Veere,32,Overig Zeeland
+2777,Gapinge,0717,Veere,32,Overig Zeeland
+2778,Grijpskerke,0717,Veere,32,Overig Zeeland
+2779,Koudekerke,0717,Veere,32,Overig Zeeland
+2780,Meliskerke,0717,Veere,32,Overig Zeeland
+2781,Oostkapelle,0717,Veere,32,Overig Zeeland
+2782,Serooskerke,0717,Veere,32,Overig Zeeland
+2783,Veere,0717,Veere,32,Overig Zeeland
+2784,Vrouwenpolder,0717,Veere,32,Overig Zeeland
+2785,Westkapelle,0717,Veere,32,Overig Zeeland
+2786,Zoutelande,0717,Veere,32,Overig Zeeland
+2787,Sint-Oedenrode,1948,Meierijstad,35,Noordoost-Noord-Brabant
+2788,Aartswoud,0432,Opmeer,18,Kop van Noord-Holland
+2789,De Weere,0432,Opmeer,18,Kop van Noord-Holland
+2790,Hoogwoud,0432,Opmeer,18,Kop van Noord-Holland
+2791,Opmeer,0432,Opmeer,18,Kop van Noord-Holland
+2792,Spanbroek,0432,Opmeer,18,Kop van Noord-Holland
+2793,Oud-Beijerland,1963,Hoeksche Waard,29,Groot-Rijnmond
+2794,Kinderdijk,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+2795,Nieuw-Lekkerland,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+2796,Mookhoek,1963,Hoeksche Waard,29,Groot-Rijnmond
+2797,Strijen,1963,Hoeksche Waard,29,Groot-Rijnmond
+2798,Strijensas,1963,Hoeksche Waard,29,Groot-Rijnmond
+2799,Dongen,0766,Dongen,34,Midden-Noord-Brabant
+2800,'s Gravenmoer,0766,Dongen,34,Midden-Noord-Brabant
+2801,Middelaar,0944,Mook en Middelaar,37,Noord-Limburg
+2802,Molenhoek,0944,Mook en Middelaar,37,Noord-Limburg
+2803,Mook,0944,Mook en Middelaar,37,Noord-Limburg
+2804,Plasmolen,0944,Mook en Middelaar,37,Noord-Limburg
+2805,Schipluiden,1842,Midden-Delfland,27,Delft en Westland
+2806,Maasland,1842,Midden-Delfland,27,Delft en Westland
+2807,Den Hoorn,1842,Midden-Delfland,27,Delft en Westland
+2808,Born,1883,Sittard-Geleen,39,Zuid-Limburg
+2809,Buchten,1883,Sittard-Geleen,39,Zuid-Limburg
+2810,Einighausen,1883,Sittard-Geleen,39,Zuid-Limburg
+2812,Grevenbicht,1883,Sittard-Geleen,39,Zuid-Limburg
+2813,Guttecoven,1883,Sittard-Geleen,39,Zuid-Limburg
+2814,Holtum,1883,Sittard-Geleen,39,Zuid-Limburg
+2815,Limbricht,1883,Sittard-Geleen,39,Zuid-Limburg
+2816,Munstergeleen,1883,Sittard-Geleen,39,Zuid-Limburg
+2817,Obbicht,1883,Sittard-Geleen,39,Zuid-Limburg
+2818,Papenhoven,1883,Sittard-Geleen,39,Zuid-Limburg
+2820,Windraak,1883,Sittard-Geleen,39,Zuid-Limburg
+2821,Zeist,0355,Zeist,17,Utrecht
+2822,Den Dolder,0355,Zeist,17,Utrecht
+2823,Bosch en Duin,0355,Zeist,17,Utrecht
+2824,Austerlitz,0355,Zeist,17,Utrecht
+2825,Huis ter Heide,0355,Zeist,17,Utrecht
+2826,Erp,1948,Meierijstad,35,Noordoost-Noord-Brabant
+2827,Veghel,1948,Meierijstad,35,Noordoost-Noord-Brabant
+2828,Blaricum,0376,Blaricum,24,Het Gooi en Vechtstreek
+2829,Bedum,1966,Het Hogeland,03,Overig Groningen
+2830,Noordwolde,1966,Het Hogeland,03,Overig Groningen
+2831,Onderdendam,1966,Het Hogeland,03,Overig Groningen
+2832,Zuidwolde,1966,Het Hogeland,03,Overig Groningen
+2835,IJmuiden,0453,Velsen,20,IJmond
+2836,Driehuis NH,0453,Velsen,20,IJmond
+2837,Santpoort-Noord,0453,Velsen,20,IJmond
+2838,Santpoort-Zuid,0453,Velsen,20,IJmond
+2839,Velserbroek,0453,Velsen,20,IJmond
+2840,Everdingen,1961,Vijfheerenlanden,17,Utrecht
+2842,Ossenwaard,1961,Vijfheerenlanden,17,Utrecht
+2843,Vianen,1961,Vijfheerenlanden,17,Utrecht
+2844,Zijderveld,1961,Vijfheerenlanden,17,Utrecht
+2845,Bingelrade,1954,Beekdaelen,39,Zuid-Limburg
+2846,Jabeek,1954,Beekdaelen,39,Zuid-Limburg
+2847,Merkelbeek,1954,Beekdaelen,39,Zuid-Limburg
+2848,Schinveld,1954,Beekdaelen,39,Zuid-Limburg
+2849,Brunssum,0899,Brunssum,39,Zuid-Limburg
+2850,Koudekerk aan den Rijn,0484,Alphen aan den Rijn,28,Oost-Zuid-Holland
+2851,Hazerswoude-Rijndijk,0484,Alphen aan den Rijn,28,Oost-Zuid-Holland
+2852,Hazerswoude-Dorp,0484,Alphen aan den Rijn,28,Oost-Zuid-Holland
+2853,Benthuizen,0484,Alphen aan den Rijn,28,Oost-Zuid-Holland
+2854,Bathmen,0150,Deventer,11,Zuidwest-Overijssel
+2855,Colmschate,0150,Deventer,11,Zuidwest-Overijssel
+2856,Deventer,0150,Deventer,11,Zuidwest-Overijssel
+2857,Diepenveen,0150,Deventer,11,Zuidwest-Overijssel
+2858,Lettele,0150,Deventer,11,Zuidwest-Overijssel
+2859,Okkenbroek,0150,Deventer,11,Zuidwest-Overijssel
+2860,Schalkhaar,0150,Deventer,11,Zuidwest-Overijssel
+2865,Heerde,0246,Heerde,13,Veluwe
+2866,Veessen,0246,Heerde,13,Veluwe
+2867,Vorchten,0246,Heerde,13,Veluwe
+2868,Wapenveld,0246,Heerde,13,Veluwe
+2871,Hoevelaken,0267,Nijkerk,13,Veluwe
+2872,Beek,1945,Berg en Dal,15,Arnhem/Nijmegen
+2874,Erlecom,1945,Berg en Dal,15,Arnhem/Nijmegen
+2875,Kekerdom,1945,Berg en Dal,15,Arnhem/Nijmegen
+2876,Leuth,1945,Berg en Dal,15,Arnhem/Nijmegen
+2877,Ooij,1945,Berg en Dal,15,Arnhem/Nijmegen
+2878,Persingen,1945,Berg en Dal,15,Arnhem/Nijmegen
+2879,Ubbergen,1945,Berg en Dal,15,Arnhem/Nijmegen
+2880,Goirle,0785,Goirle,34,Midden-Noord-Brabant
+2881,Riel,0785,Goirle,34,Midden-Noord-Brabant
+2882,Hattem,0244,Hattem,13,Veluwe
+2883,Baarle-Nassau,0744,Baarle-Nassau,34,Midden-Noord-Brabant
+2884,Ulicoten,0744,Baarle-Nassau,34,Midden-Noord-Brabant
+2885,Castelre,0744,Baarle-Nassau,34,Midden-Noord-Brabant
+2886,Goudswaard,1963,Hoeksche Waard,29,Groot-Rijnmond
+2887,Nieuw-Beijerland,1963,Hoeksche Waard,29,Groot-Rijnmond
+2888,Piershil,1963,Hoeksche Waard,29,Groot-Rijnmond
+2889,Zuid-Beijerland,1963,Hoeksche Waard,29,Groot-Rijnmond
+2890,Laren,0417,Laren (NH.),24,Het Gooi en Vechtstreek
+2891,Harlingen,0072,Harlingen,04,Noord-Friesland
+2892,Midlum,0072,Harlingen,04,Noord-Friesland
+2893,Wijnaldum,0072,Harlingen,04,Noord-Friesland
+2894,Kampen,0166,Kampen,10,Noord-Overijssel
+2895,IJsselmuiden,0166,Kampen,10,Noord-Overijssel
+2896,Grafhorst,0166,Kampen,10,Noord-Overijssel
+2897,Zalk,0166,Kampen,10,Noord-Overijssel
+2898,Wilsum,0166,Kampen,10,Noord-Overijssel
+2899,'s-Heerenbroek,0166,Kampen,10,Noord-Overijssel
+2900,Kamperveen,0166,Kampen,10,Noord-Overijssel
+2901,Mastenbroek,0166,Kampen,10,Noord-Overijssel
+2902,Afferden,0225,Druten,15,Arnhem/Nijmegen
+2903,Deest,0225,Druten,15,Arnhem/Nijmegen
+2904,Druten,0225,Druten,15,Arnhem/Nijmegen
+2905,Horssen,0225,Druten,15,Arnhem/Nijmegen
+2906,Puiflijk,0225,Druten,15,Arnhem/Nijmegen
+2907,Haarlem,0392,Haarlem,21,Agglomeratie Haarlem
+2908,Spaarndam gem. Haarlem,0392,Haarlem,21,Agglomeratie Haarlem
+2909,Eelde,1730,Tynaarlo,07,Noord-Drenthe
+2910,Paterswolde,1730,Tynaarlo,07,Noord-Drenthe
+2911,Eelderwolde,1730,Tynaarlo,07,Noord-Drenthe
+2912,Vries,1730,Tynaarlo,07,Noord-Drenthe
+2913,Zuidlaren,1730,Tynaarlo,07,Noord-Drenthe
+2914,Bunne,1730,Tynaarlo,07,Noord-Drenthe
+2915,De Punt,1730,Tynaarlo,07,Noord-Drenthe
+2916,Donderen,1730,Tynaarlo,07,Noord-Drenthe
+2917,Oudemolen,1730,Tynaarlo,07,Noord-Drenthe
+2918,Taarlo,1730,Tynaarlo,07,Noord-Drenthe
+2919,Tynaarlo,1730,Tynaarlo,07,Noord-Drenthe
+2920,Winde,1730,Tynaarlo,07,Noord-Drenthe
+2921,Yde,1730,Tynaarlo,07,Noord-Drenthe
+2922,Zeegse,1730,Tynaarlo,07,Noord-Drenthe
+2923,Zeijen,1730,Tynaarlo,07,Noord-Drenthe
+2924,De Groeve,1730,Tynaarlo,07,Noord-Drenthe
+2925,Zuidlaarderveen,1730,Tynaarlo,07,Noord-Drenthe
+2926,Midlaren,1730,Tynaarlo,07,Noord-Drenthe
+2927,Rozendaal,0277,Rozendaal,15,Arnhem/Nijmegen
+2928,Asten,0743,Asten,36,Zuidoost-Noord-Brabant
+2929,Heusden,0743,Asten,36,Zuidoost-Noord-Brabant
+2930,Ommel,0743,Asten,36,Zuidoost-Noord-Brabant
+2931,Goedereede,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2932,Ouddorp,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2933,Stellendam,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+2934,De Bilt,0310,De Bilt,17,Utrecht
+2935,Bilthoven,0310,De Bilt,17,Utrecht
+2936,Maartensdijk,0310,De Bilt,17,Utrecht
+2937,Groenekan,0310,De Bilt,17,Utrecht
+2938,Hollandsche Rading,0310,De Bilt,17,Utrecht
+2939,Westbroek,0310,De Bilt,17,Utrecht
+2940,Baexem,1640,Leudal,38,Midden-Limburg
+2941,Buggenum,1640,Leudal,38,Midden-Limburg
+2942,Ell,1640,Leudal,38,Midden-Limburg
+2943,Grathem,1640,Leudal,38,Midden-Limburg
+2944,Haelen,1640,Leudal,38,Midden-Limburg
+2945,Haler,1640,Leudal,38,Midden-Limburg
+2946,Heibloem,1640,Leudal,38,Midden-Limburg
+2947,Heythuysen,1640,Leudal,38,Midden-Limburg
+2948,Horn,1640,Leudal,38,Midden-Limburg
+2949,Hunsel,1640,Leudal,38,Midden-Limburg
+2950,Ittervoort,1640,Leudal,38,Midden-Limburg
+2951,Kelpen-Oler,1640,Leudal,38,Midden-Limburg
+2952,Neer,1640,Leudal,38,Midden-Limburg
+2953,Neeritter,1640,Leudal,38,Midden-Limburg
+2954,Nunhem,1640,Leudal,38,Midden-Limburg
+2955,Roggel,1640,Leudal,38,Midden-Limburg
+2957,Oosteind,0826,Oosterhout,33,West-Noord-Brabant
+2959,Dorst,0826,Oosterhout,33,West-Noord-Brabant
+2960,Oostburg,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2961,Aardenburg,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2962,Sluis,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2963,Waterlandkerkje,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2964,Cadzand,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2965,Breskens,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2966,Eede,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2967,Groede,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2968,Hoofdplaat,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2969,Nieuwvliet,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2970,Retranchement,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2971,Schoondijke,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2972,Zuidzande,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2973,Sint Kruis,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2974,IJzendijke,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2975,Biervliet,1714,Sluis,31,Zeeuwsch-Vlaanderen
+2976,Aerdt,0299,Zevenaar,15,Arnhem/Nijmegen
+2977,Herwen,0299,Zevenaar,15,Arnhem/Nijmegen
+2978,Lobith,0299,Zevenaar,15,Arnhem/Nijmegen
+2979,Pannerden,0299,Zevenaar,15,Arnhem/Nijmegen
+2980,Spijk,0299,Zevenaar,15,Arnhem/Nijmegen
+2981,Tolkamer,0299,Zevenaar,15,Arnhem/Nijmegen
+2982,Nunspeet,0302,Nunspeet,13,Veluwe
+2983,Elspeet,0302,Nunspeet,13,Veluwe
+2984,Hulshorst,0302,Nunspeet,13,Veluwe
+2985,Vierhouten,0302,Nunspeet,13,Veluwe
+2986,Doorwerth,0274,Renkum,15,Arnhem/Nijmegen
+2987,Heelsum,0274,Renkum,15,Arnhem/Nijmegen
+2988,Heveadorp,0274,Renkum,15,Arnhem/Nijmegen
+2989,Wolfheze,0274,Renkum,15,Arnhem/Nijmegen
+2990,Oosterbeek,0274,Renkum,15,Arnhem/Nijmegen
+2991,Renkum,0274,Renkum,15,Arnhem/Nijmegen
+2992,Duizel,0770,Eersel,36,Zuidoost-Noord-Brabant
+2993,Eersel,0770,Eersel,36,Zuidoost-Noord-Brabant
+2994,Knegsel,0770,Eersel,36,Zuidoost-Noord-Brabant
+2995,Steensel,0770,Eersel,36,Zuidoost-Noord-Brabant
+2996,Vessem,0770,Eersel,36,Zuidoost-Noord-Brabant
+2997,Wintelre,0770,Eersel,36,Zuidoost-Noord-Brabant
+2998,Boskoop,0484,Alphen aan den Rijn,28,Oost-Zuid-Holland
+2999,Ankeveen,1696,Wijdemeren,24,Het Gooi en Vechtstreek
+3000,'s-Graveland,1696,Wijdemeren,24,Het Gooi en Vechtstreek
+3003,Nederhorst den Berg,1696,Wijdemeren,24,Het Gooi en Vechtstreek
+3004,Breukeleveen,1696,Wijdemeren,24,Het Gooi en Vechtstreek
+3005,Balinge,1731,Midden-Drenthe,07,Noord-Drenthe
+3006,Beilen,1731,Midden-Drenthe,07,Noord-Drenthe
+3007,Bovensmilde,1731,Midden-Drenthe,07,Noord-Drenthe
+3008,Bruntinge,1731,Midden-Drenthe,07,Noord-Drenthe
+3009,Drijber,1731,Midden-Drenthe,07,Noord-Drenthe
+3010,Elp,1731,Midden-Drenthe,07,Noord-Drenthe
+3011,Eursinge,1731,Midden-Drenthe,07,Noord-Drenthe
+3012,Garminge,1731,Midden-Drenthe,07,Noord-Drenthe
+3013,Hijken,1731,Midden-Drenthe,07,Noord-Drenthe
+3014,Hoogersmilde,1731,Midden-Drenthe,07,Noord-Drenthe
+3015,Hooghalen,1731,Midden-Drenthe,07,Noord-Drenthe
+3016,Mantinge,1731,Midden-Drenthe,07,Noord-Drenthe
+3017,Nieuweroord,1731,Midden-Drenthe,07,Noord-Drenthe
+3018,Nieuw-Balinge,1731,Midden-Drenthe,07,Noord-Drenthe
+3019,Oranje,1731,Midden-Drenthe,07,Noord-Drenthe
+3020,Orvelte,1731,Midden-Drenthe,07,Noord-Drenthe
+3021,Smilde,1731,Midden-Drenthe,07,Noord-Drenthe
+3022,Spier,1731,Midden-Drenthe,07,Noord-Drenthe
+3023,Stuifzand,1731,Midden-Drenthe,07,Noord-Drenthe
+3024,Tiendeveen,1731,Midden-Drenthe,07,Noord-Drenthe
+3025,Westerbork,1731,Midden-Drenthe,07,Noord-Drenthe
+3026,Wijster,1731,Midden-Drenthe,07,Noord-Drenthe
+3027,Witteveen,1731,Midden-Drenthe,07,Noord-Drenthe
+3028,Zuidveld,1731,Midden-Drenthe,07,Noord-Drenthe
+3029,Zwiggelte,1731,Midden-Drenthe,07,Noord-Drenthe
+3030,Nijmegen,0268,Nijmegen,15,Arnhem/Nijmegen
+3031,Hardinxveld-Giessendam,0523,Hardinxveld-Giessendam,30,Zuidoost-Zuid-Holland
+3032,Spijkenisse,1930,Nissewaard,29,Groot-Rijnmond
+3033,Hekelingen,1930,Nissewaard,29,Groot-Rijnmond
+3034,Hoogmade,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3035,Kaag,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3037,Nieuwe Wetering,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3039,Oude Wetering,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3040,Rijnsaterwoude,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3042,Roelofarendsveen,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3043,Woubrugge,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3044,Groet,0373,Bergen (NH.),19,Alkmaar en omgeving
+3045,Schoorl,0373,Bergen (NH.),19,Alkmaar en omgeving
+3046,Bergen aan Zee,0373,Bergen (NH.),19,Alkmaar en omgeving
+3047,Bergen (NH),0373,Bergen (NH.),19,Alkmaar en omgeving
+3048,Egmond aan den Hoef,0373,Bergen (NH.),19,Alkmaar en omgeving
+3049,Egmond aan Zee,0373,Bergen (NH.),19,Alkmaar en omgeving
+3050,Egmond-Binnen,0373,Bergen (NH.),19,Alkmaar en omgeving
+3051,Waddinxveen,0627,Waddinxveen,28,Oost-Zuid-Holland
+3052,Kaatsheuvel,0809,Loon op Zand,34,Midden-Noord-Brabant
+3053,Loon op Zand,0809,Loon op Zand,34,Midden-Noord-Brabant
+3054,De Moer,0809,Loon op Zand,34,Midden-Noord-Brabant
+3055,Landgraaf,0882,Landgraaf,39,Zuid-Limburg
+3056,Den Helder,0400,Den Helder,18,Kop van Noord-Holland
+3057,Huisduinen,0400,Den Helder,18,Kop van Noord-Holland
+3058,Julianadorp,0400,Den Helder,18,Kop van Noord-Holland
+3059,Heesch,1721,Bernheze,35,Noordoost-Noord-Brabant
+3060,Heeswijk-Dinther,1721,Bernheze,35,Noordoost-Noord-Brabant
+3061,Loosbroek,1721,Bernheze,35,Noordoost-Noord-Brabant
+3062,Nistelrode,1721,Bernheze,35,Noordoost-Noord-Brabant
+3063,Vinkel,1721,Bernheze,35,Noordoost-Noord-Brabant
+3064,Vorstenbosch,1721,Bernheze,35,Noordoost-Noord-Brabant
+3065,Simpelveld,0965,Simpelveld,39,Zuid-Limburg
+3066,Bocholtz,0965,Simpelveld,39,Zuid-Limburg
+3067,Baneheide,0965,Simpelveld,39,Zuid-Limburg
+3068,'t Loo Oldebroek,0269,Oldebroek,13,Veluwe
+3069,Hattemerbroek,0269,Oldebroek,13,Veluwe
+3070,Noordeinde Gld,0269,Oldebroek,13,Veluwe
+3071,Oldebroek,0269,Oldebroek,13,Veluwe
+3072,Oosterwolde Gld,0269,Oldebroek,13,Veluwe
+3073,Wezep,0269,Oldebroek,13,Veluwe
+3074,Stadskanaal,0037,Stadskanaal,01,Oost-Groningen
+3075,Musselkanaal,0037,Stadskanaal,01,Oost-Groningen
+3076,Onstwedde,0037,Stadskanaal,01,Oost-Groningen
+3077,Mussel,0037,Stadskanaal,01,Oost-Groningen
+3078,Vledderveen,0037,Stadskanaal,01,Oost-Groningen
+3079,Alteveer,0037,Stadskanaal,01,Oost-Groningen
+3080,Botlek Rotterdam,0599,Rotterdam,29,Groot-Rijnmond
+3081,Europoort Rotterdam,0599,Rotterdam,29,Groot-Rijnmond
+3082,Hoek van Holland,0599,Rotterdam,29,Groot-Rijnmond
+3083,Hoogvliet Rotterdam,0599,Rotterdam,29,Groot-Rijnmond
+3084,Maasvlakte Rotterdam,0599,Rotterdam,29,Groot-Rijnmond
+3085,Pernis Rotterdam,0599,Rotterdam,29,Groot-Rijnmond
+3086,Rotterdam,0599,Rotterdam,29,Groot-Rijnmond
+3087,Vondelingenplaat Rotterdam,0599,Rotterdam,29,Groot-Rijnmond
+3088,Hulst,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3089,Sint Jansteen,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3090,Kapellebrug,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3091,Heikant,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3092,Clinge,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3093,Nieuw Namen,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3094,Graauw,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3095,Vogelwaarde,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3096,Terhole,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3097,Kuitaart,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3098,Hengstdijk,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3099,Lamswaarde,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3100,Kloosterzande,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3101,Walsoorden,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3102,Ossenisse,0677,Hulst,31,Zeeuwsch-Vlaanderen
+3103,Purmerend,0439,Purmerend,23,Groot-Amsterdam
+3104,Ansen,1701,Westerveld,09,Zuidwest-Drenthe
+3105,Boschoord,1701,Westerveld,09,Zuidwest-Drenthe
+3106,Darp,1701,Westerveld,09,Zuidwest-Drenthe
+3107,Diever,1701,Westerveld,09,Zuidwest-Drenthe
+3108,Dieverbrug,1701,Westerveld,09,Zuidwest-Drenthe
+3109,Doldersum,1701,Westerveld,09,Zuidwest-Drenthe
+3110,Dwingeloo,1701,Westerveld,09,Zuidwest-Drenthe
+3111,Frederiksoord,1701,Westerveld,09,Zuidwest-Drenthe
+3112,Geeuwenbrug,1701,Westerveld,09,Zuidwest-Drenthe
+3113,Havelte,1701,Westerveld,09,Zuidwest-Drenthe
+3114,Havelterberg,1701,Westerveld,09,Zuidwest-Drenthe
+3115,Hoogersmilde,1701,Westerveld,09,Zuidwest-Drenthe
+3116,Nijensleek,1701,Westerveld,09,Zuidwest-Drenthe
+3117,Oude Willem,1701,Westerveld,09,Zuidwest-Drenthe
+3118,Pesse,1701,Westerveld,09,Zuidwest-Drenthe
+3119,Ruinen,1701,Westerveld,09,Zuidwest-Drenthe
+3120,Spier,1701,Westerveld,09,Zuidwest-Drenthe
+3121,Uffelte,1701,Westerveld,09,Zuidwest-Drenthe
+3122,Vledder,1701,Westerveld,09,Zuidwest-Drenthe
+3123,Vledderveen,1701,Westerveld,09,Zuidwest-Drenthe
+3124,Wapse,1701,Westerveld,09,Zuidwest-Drenthe
+3125,Wapserveen,1701,Westerveld,09,Zuidwest-Drenthe
+3126,Wateren,1701,Westerveld,09,Zuidwest-Drenthe
+3127,Wilhelminaoord,1701,Westerveld,09,Zuidwest-Drenthe
+3128,Wittelte,1701,Westerveld,09,Zuidwest-Drenthe
+3129,Zorgvlied,1701,Westerveld,09,Zuidwest-Drenthe
+3130,Huissen,1705,Lingewaard,15,Arnhem/Nijmegen
+3131,Bemmel,1705,Lingewaard,15,Arnhem/Nijmegen
+3132,Gendt,1705,Lingewaard,15,Arnhem/Nijmegen
+3133,Angeren,1705,Lingewaard,15,Arnhem/Nijmegen
+3134,Doornenburg,1705,Lingewaard,15,Arnhem/Nijmegen
+3135,Loo Gld,1705,Lingewaard,15,Arnhem/Nijmegen
+3136,Haalderen,1705,Lingewaard,15,Arnhem/Nijmegen
+3137,Ressen,1705,Lingewaard,15,Arnhem/Nijmegen
+3138,Boekel,0755,Boekel,35,Noordoost-Noord-Brabant
+3139,Venhorst,0755,Boekel,35,Noordoost-Noord-Brabant
+3140,Arcen,0983,Venlo,37,Noord-Limburg
+3141,Lomm,0983,Venlo,37,Noord-Limburg
+3142,Velden,0983,Venlo,37,Noord-Limburg
+3143,Middelharnis,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+3144,Nieuwe-Tonge,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+3145,Sommelsdijk,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+3146,Stad aan 't Haringvliet,1924,Goeree-Overflakkee,29,Groot-Rijnmond
+3147,Abbekerk,0420,Medemblik,18,Kop van Noord-Holland
+3148,Benningbroek,0420,Medemblik,18,Kop van Noord-Holland
+3150,Lambertschaag,0420,Medemblik,18,Kop van Noord-Holland
+3151,Medemblik,0420,Medemblik,18,Kop van Noord-Holland
+3152,Midwoud,0420,Medemblik,18,Kop van Noord-Holland
+3153,Nibbixwoud,0420,Medemblik,18,Kop van Noord-Holland
+3155,Opperdoes,0420,Medemblik,18,Kop van Noord-Holland
+3156,Sijbekarspel,0420,Medemblik,18,Kop van Noord-Holland
+3157,Twisk,0420,Medemblik,18,Kop van Noord-Holland
+3158,Wognum,0420,Medemblik,18,Kop van Noord-Holland
+3159,Zwaagdijk-West,0420,Medemblik,18,Kop van Noord-Holland
+3160,Alteveer,1690,De Wolden,09,Zuidwest-Drenthe
+3161,Ansen,1690,De Wolden,09,Zuidwest-Drenthe
+3162,de Wijk,1690,De Wolden,09,Zuidwest-Drenthe
+3163,Drogteropslagen,1690,De Wolden,09,Zuidwest-Drenthe
+3164,Echten,1690,De Wolden,09,Zuidwest-Drenthe
+3165,Eursinge,1690,De Wolden,09,Zuidwest-Drenthe
+3166,Kerkenveld,1690,De Wolden,09,Zuidwest-Drenthe
+3167,Koekange,1690,De Wolden,09,Zuidwest-Drenthe
+3168,Linde,1690,De Wolden,09,Zuidwest-Drenthe
+3169,Ruinen,1690,De Wolden,09,Zuidwest-Drenthe
+3170,Ruinerwold,1690,De Wolden,09,Zuidwest-Drenthe
+3171,Veeningen,1690,De Wolden,09,Zuidwest-Drenthe
+3172,Zuidwolde,1690,De Wolden,09,Zuidwest-Drenthe
+3173,Augustinusga,0059,Achtkarspelen,04,Noord-Friesland
+3174,Boelenslaan,0059,Achtkarspelen,04,Noord-Friesland
+3175,Buitenpost,0059,Achtkarspelen,04,Noord-Friesland
+3176,Drogeham,0059,Achtkarspelen,04,Noord-Friesland
+3177,Gerkesklooster,0059,Achtkarspelen,04,Noord-Friesland
+3178,Harkema,0059,Achtkarspelen,04,Noord-Friesland
+3179,Kootstertille,0059,Achtkarspelen,04,Noord-Friesland
+3180,Stroobos,0059,Achtkarspelen,04,Noord-Friesland
+3181,Surhuisterveen,0059,Achtkarspelen,04,Noord-Friesland
+3182,Surhuizum,0059,Achtkarspelen,04,Noord-Friesland
+3183,Twijzel,0059,Achtkarspelen,04,Noord-Friesland
+3184,Twijzelerheide,0059,Achtkarspelen,04,Noord-Friesland
+3185,Anna Paulowna,1911,Hollands Kroon,18,Kop van Noord-Holland
+3186,Breezand,1911,Hollands Kroon,18,Kop van Noord-Holland
+3187,Wieringerwaard,1911,Hollands Kroon,18,Kop van Noord-Holland
+3188,Kamperland,1695,Noord-Beveland,32,Overig Zeeland
+3189,Kortgene,1695,Noord-Beveland,32,Overig Zeeland
+3190,Colijnsplaat,1695,Noord-Beveland,32,Overig Zeeland
+3191,Wissenkerke,1695,Noord-Beveland,32,Overig Zeeland
+3192,Kats,1695,Noord-Beveland,32,Overig Zeeland
+3193,Geersdijk,1695,Noord-Beveland,32,Overig Zeeland
+3195,Escharen,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+3196,Gassel,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+3197,Grave,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+3198,Velp,1982,Land van Cuijk,35,Noordoost-Noord-Brabant
+3199,Blije,1970,Noardeast-Fryslân,04,Noord-Friesland
+3200,Burdaard,1970,Noardeast-Fryslân,04,Noord-Friesland
+3201,Ferwert,1970,Noardeast-Fryslân,04,Noord-Friesland
+3202,Ginnum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3203,Hallum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3204,Hegebeintum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3205,Jannum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3206,Jislum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3207,Lichtaard,1970,Noardeast-Fryslân,04,Noord-Friesland
+3208,Marrum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3209,Reitsum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3210,Wânswert,1970,Noardeast-Fryslân,04,Noord-Friesland
+3213,Beesd,1960,West Betuwe,16,Zuidwest-Gelderland
+3214,Gellicum,1960,West Betuwe,16,Zuidwest-Gelderland
+3215,Rumpt,1960,West Betuwe,16,Zuidwest-Gelderland
+3216,Enspijk,1960,West Betuwe,16,Zuidwest-Gelderland
+3217,Deil,1960,West Betuwe,16,Zuidwest-Gelderland
+3222,Harderwijk,0243,Harderwijk,13,Veluwe
+3223,Hierden,0243,Harderwijk,13,Veluwe
+3224,Alde Leie,0080,Leeuwarden,04,Noord-Friesland
+3225,Britsum,0080,Leeuwarden,04,Noord-Friesland
+3226,Feinsum,0080,Leeuwarden,04,Noord-Friesland
+3227,Hijum,0080,Leeuwarden,04,Noord-Friesland
+3228,Jelsum,0080,Leeuwarden,04,Noord-Friesland
+3229,Koarnjum,0080,Leeuwarden,04,Noord-Friesland
+3230,Stiens,0080,Leeuwarden,04,Noord-Friesland
+3231,Voorschoten,0626,Voorschoten,25,Agglomeratie Leiden en Bollenstreek
+3232,Bierum,1979,Eemsdelta,02,Delfzijl en omgeving
+3233,Borgsweer,1979,Eemsdelta,02,Delfzijl en omgeving
+3234,Delfzijl,1979,Eemsdelta,02,Delfzijl en omgeving
+3235,Farmsum,1979,Eemsdelta,02,Delfzijl en omgeving
+3236,Godlinze,1979,Eemsdelta,02,Delfzijl en omgeving
+3237,Holwierde,1979,Eemsdelta,02,Delfzijl en omgeving
+3238,Krewerd,1979,Eemsdelta,02,Delfzijl en omgeving
+3239,Losdorp,1979,Eemsdelta,02,Delfzijl en omgeving
+3240,Meedhuizen,1979,Eemsdelta,02,Delfzijl en omgeving
+3241,Spijk,1979,Eemsdelta,02,Delfzijl en omgeving
+3242,Termunten,1979,Eemsdelta,02,Delfzijl en omgeving
+3243,Termunterzijl,1979,Eemsdelta,02,Delfzijl en omgeving
+3244,Wagenborgen,1979,Eemsdelta,02,Delfzijl en omgeving
+3245,Woldendorp,1979,Eemsdelta,02,Delfzijl en omgeving
+3246,Doetinchem,0222,Doetinchem,14,Achterhoek
+3247,Gaanderen,0222,Doetinchem,14,Achterhoek
+3248,Wehl,0222,Doetinchem,14,Achterhoek
+3249,Oss,0828,Oss,35,Noordoost-Noord-Brabant
+3250,Berghem,0828,Oss,35,Noordoost-Noord-Brabant
+3251,Megen,0828,Oss,35,Noordoost-Noord-Brabant
+3252,Macharen,0828,Oss,35,Noordoost-Noord-Brabant
+3253,Haren,0828,Oss,35,Noordoost-Noord-Brabant
+3254,Ravenstein,0828,Oss,35,Noordoost-Noord-Brabant
+3255,Herpen,0828,Oss,35,Noordoost-Noord-Brabant
+3256,Deursen-Dennenburg,0828,Oss,35,Noordoost-Noord-Brabant
+3257,Huisseling,0828,Oss,35,Noordoost-Noord-Brabant
+3259,Dieden,0828,Oss,35,Noordoost-Noord-Brabant
+3260,Demen,0828,Oss,35,Noordoost-Noord-Brabant
+3261,Neerlangel,0828,Oss,35,Noordoost-Noord-Brabant
+3262,Neerloon,0828,Oss,35,Noordoost-Noord-Brabant
+3263,Overlangel,0828,Oss,35,Noordoost-Noord-Brabant
+3264,Keent,0828,Oss,35,Noordoost-Noord-Brabant
+3265,Broeksterwâld,1891,Dantumadiel,04,Noord-Friesland
+3266,Damwâld,1891,Dantumadiel,04,Noord-Friesland
+3267,De Falom,1891,Dantumadiel,04,Noord-Friesland
+3268,Driezum,1891,Dantumadiel,04,Noord-Friesland
+3269,Wâlterswâld,1891,Dantumadiel,04,Noord-Friesland
+3270,Rinsumageast,1891,Dantumadiel,04,Noord-Friesland
+3271,Feanwâlden,1891,Dantumadiel,04,Noord-Friesland
+3272,Readtsjerk,1891,Dantumadiel,04,Noord-Friesland
+3273,De Westereen,1891,Dantumadiel,04,Noord-Friesland
+3274,Sibrandahûs,1891,Dantumadiel,04,Noord-Friesland
+3275,Boornbergum,0090,Smallingerland,06,Zuidoost-Friesland
+3276,De Tike,0090,Smallingerland,06,Zuidoost-Friesland
+3277,De Veenhoop,0090,Smallingerland,06,Zuidoost-Friesland
+3278,De Wilgen,0090,Smallingerland,06,Zuidoost-Friesland
+3279,Drachten,0090,Smallingerland,06,Zuidoost-Friesland
+3280,Drachtstercompagnie,0090,Smallingerland,06,Zuidoost-Friesland
+3281,Goëngahuizen,0090,Smallingerland,06,Zuidoost-Friesland
+3282,Houtigehage,0090,Smallingerland,06,Zuidoost-Friesland
+3283,Kortehemmen,0090,Smallingerland,06,Zuidoost-Friesland
+3284,Nijega,0090,Smallingerland,06,Zuidoost-Friesland
+3285,Opeinde,0090,Smallingerland,06,Zuidoost-Friesland
+3286,Oudega,0090,Smallingerland,06,Zuidoost-Friesland
+3287,Rottevalle,0090,Smallingerland,06,Zuidoost-Friesland
+3288,Smalle Ee,0090,Smallingerland,06,Zuidoost-Friesland
+3289,Dirkshorn,0441,Schagen,18,Kop van Noord-Holland
+3290,Oudkarspel,0441,Schagen,18,Kop van Noord-Holland
+3291,Sint Maarten,0441,Schagen,18,Kop van Noord-Holland
+3292,Tuitjenhorn,0441,Schagen,18,Kop van Noord-Holland
+3293,Waarland,0441,Schagen,18,Kop van Noord-Holland
+3294,Warmenhuizen,0441,Schagen,18,Kop van Noord-Holland
+3295,Utrecht,0344,Utrecht,17,Utrecht
+3296,Vleuten,0344,Utrecht,17,Utrecht
+3297,De Meern,0344,Utrecht,17,Utrecht
+3298,Haarzuilens,0344,Utrecht,17,Utrecht
+3299,Vlieland,0096,Vlieland,04,Noord-Friesland
+3300,Almkerk,1959,Altena,34,Midden-Noord-Brabant
+3301,Andel,1959,Altena,34,Midden-Noord-Brabant
+3302,Giessen,1959,Altena,34,Midden-Noord-Brabant
+3303,Rijswijk (NB),1959,Altena,34,Midden-Noord-Brabant
+3304,Uitwijk,1959,Altena,34,Midden-Noord-Brabant
+3305,Waardhuizen,1959,Altena,34,Midden-Noord-Brabant
+3306,Woudrichem,1959,Altena,34,Midden-Noord-Brabant
+3307,Augsbuert-Lytsewâld,1970,Noardeast-Fryslân,04,Noord-Friesland
+3308,Burum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3309,Kollum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3310,Kollumerpomp,1970,Noardeast-Fryslân,04,Noord-Friesland
+3311,Kollumersweach,1970,Noardeast-Fryslân,04,Noord-Friesland
+3312,Munnekezijl,1970,Noardeast-Fryslân,04,Noord-Friesland
+3313,Aldwâld,1970,Noardeast-Fryslân,04,Noord-Friesland
+3314,De Trieme,1970,Noardeast-Fryslân,04,Noord-Friesland
+3315,Feankleaster,1970,Noardeast-Fryslân,04,Noord-Friesland
+3316,Warfstermolen,1970,Noardeast-Fryslân,04,Noord-Friesland
+3317,Westergeast,1970,Noardeast-Fryslân,04,Noord-Friesland
+3318,Sweagerbosk,1970,Noardeast-Fryslân,04,Noord-Friesland
+3320,Bruinehaar,1700,Twenterand,12,Twente
+3321,Den Ham,1700,Twenterand,12,Twente
+3322,Geerdijk,1700,Twenterand,12,Twente
+3323,Kloosterhaar,1700,Twenterand,12,Twente
+3324,Sibculo,1700,Twenterand,12,Twente
+3325,Vriezenveen,1700,Twenterand,12,Twente
+3326,Vroomshoop,1700,Twenterand,12,Twente
+3327,Westerhaar-Vriezenveensewijk,1700,Twenterand,12,Twente
+3328,Oudebildtzijl,1949,Waadhoeke,04,Noord-Friesland
+3329,Westhoek,1949,Waadhoeke,04,Noord-Friesland
+3330,Nij Altoenae,1949,Waadhoeke,04,Noord-Friesland
+3331,St.-Annaparochie,1949,Waadhoeke,04,Noord-Friesland
+3332,St.-Jacobiparochie,1949,Waadhoeke,04,Noord-Friesland
+3333,Minnertsga,1949,Waadhoeke,04,Noord-Friesland
+3334,Vrouwenparochie,1949,Waadhoeke,04,Noord-Friesland
+3335,Driebergen-Rijsenburg,1581,Utrechtse Heuvelrug,17,Utrecht
+3337,Amerongen,1581,Utrechtse Heuvelrug,17,Utrecht
+3339,Doorn,1581,Utrechtse Heuvelrug,17,Utrecht
+3340,Maarn,1581,Utrechtse Heuvelrug,17,Utrecht
+3341,Maarsbergen,1581,Utrechtse Heuvelrug,17,Utrecht
+3342,Bakkeveen,0086,Opsterland,06,Zuidoost-Friesland
+3343,Beetsterzwaag,0086,Opsterland,06,Zuidoost-Friesland
+3344,Drachten-Azeven,0086,Opsterland,06,Zuidoost-Friesland
+3345,Frieschepalen,0086,Opsterland,06,Zuidoost-Friesland
+3346,Gorredijk,0086,Opsterland,06,Zuidoost-Friesland
+3347,Hemrik,0086,Opsterland,06,Zuidoost-Friesland
+3348,Jonkerslân,0086,Opsterland,06,Zuidoost-Friesland
+3349,Langezwaag,0086,Opsterland,06,Zuidoost-Friesland
+3350,Lippenhuizen,0086,Opsterland,06,Zuidoost-Friesland
+3351,Luxwoude,0086,Opsterland,06,Zuidoost-Friesland
+3352,Nij Beets,0086,Opsterland,06,Zuidoost-Friesland
+3353,Olterterp,0086,Opsterland,06,Zuidoost-Friesland
+3354,Siegerswoude,0086,Opsterland,06,Zuidoost-Friesland
+3355,Terwispel,0086,Opsterland,06,Zuidoost-Friesland
+3356,Tijnje,0086,Opsterland,06,Zuidoost-Friesland
+3357,Ureterp,0086,Opsterland,06,Zuidoost-Friesland
+3358,Wijnjewoude,0086,Opsterland,06,Zuidoost-Friesland
+3359,Est,1960,West Betuwe,16,Zuidwest-Gelderland
+3360,Haaften,1960,West Betuwe,16,Zuidwest-Gelderland
+3361,Heesselt,1960,West Betuwe,16,Zuidwest-Gelderland
+3362,Hellouw,1960,West Betuwe,16,Zuidwest-Gelderland
+3363,Neerijnen,1960,West Betuwe,16,Zuidwest-Gelderland
+3364,Ophemert,1960,West Betuwe,16,Zuidwest-Gelderland
+3365,Opijnen,1960,West Betuwe,16,Zuidwest-Gelderland
+3366,Tuil,1960,West Betuwe,16,Zuidwest-Gelderland
+3367,Varik,1960,West Betuwe,16,Zuidwest-Gelderland
+3368,Waardenburg,1960,West Betuwe,16,Zuidwest-Gelderland
+3369,Zennewijnen,1960,West Betuwe,16,Zuidwest-Gelderland
+3370,Asch,0214,Buren,16,Zuidwest-Gelderland
+3371,Beusichem,0214,Buren,16,Zuidwest-Gelderland
+3372,Buren,0214,Buren,16,Zuidwest-Gelderland
+3373,Buurmalsen,0214,Buren,16,Zuidwest-Gelderland
+3374,Eck en Wiel,0214,Buren,16,Zuidwest-Gelderland
+3375,Erichem,0214,Buren,16,Zuidwest-Gelderland
+3376,Ingen,0214,Buren,16,Zuidwest-Gelderland
+3377,Kapel-Avezaath,0214,Buren,16,Zuidwest-Gelderland
+3378,Kerk-Avezaath,0214,Buren,16,Zuidwest-Gelderland
+3379,Lienden,0214,Buren,16,Zuidwest-Gelderland
+3380,Maurik,0214,Buren,16,Zuidwest-Gelderland
+3381,Ommeren,0214,Buren,16,Zuidwest-Gelderland
+3382,Ravenswaaij,0214,Buren,16,Zuidwest-Gelderland
+3383,Rijswijk (GLD),0214,Buren,16,Zuidwest-Gelderland
+3384,Zoelen,0214,Buren,16,Zuidwest-Gelderland
+3385,Zoelmond,0214,Buren,16,Zuidwest-Gelderland
+3386,Appingedam,1979,Eemsdelta,02,Delfzijl en omgeving
+3387,Aalsum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3388,Eanjum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3389,Boarnwert,1970,Noardeast-Fryslân,04,Noord-Friesland
+3390,Brantgum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3391,Dokkum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3392,Ie,1970,Noardeast-Fryslân,04,Noord-Friesland
+3393,Ingwierrum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3394,Foudgum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3395,Hantum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3396,Hantumerútbuorren,1970,Noardeast-Fryslân,04,Noord-Friesland
+3397,Hantumhuzen,1970,Noardeast-Fryslân,04,Noord-Friesland
+3398,Hiaure,1970,Noardeast-Fryslân,04,Noord-Friesland
+3399,Holwert,1970,Noardeast-Fryslân,04,Noord-Friesland
+3400,Jouswier,1970,Noardeast-Fryslân,04,Noord-Friesland
+3401,Ljussens,1970,Noardeast-Fryslân,04,Noord-Friesland
+3402,Mitselwier,1970,Noardeast-Fryslân,04,Noord-Friesland
+3403,Moddergat,1970,Noardeast-Fryslân,04,Noord-Friesland
+3404,Moarre,1970,Noardeast-Fryslân,04,Noord-Friesland
+3405,Nes,1970,Noardeast-Fryslân,04,Noord-Friesland
+3406,Nijewier,1970,Noardeast-Fryslân,04,Noord-Friesland
+3407,Easternijtsjerk,1970,Noardeast-Fryslân,04,Noord-Friesland
+3408,Eastrum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3409,Peazens,1970,Noardeast-Fryslân,04,Noord-Friesland
+3410,Raard,1970,Noardeast-Fryslân,04,Noord-Friesland
+3411,Ternaard,1970,Noardeast-Fryslân,04,Noord-Friesland
+3412,Waaxens,1970,Noardeast-Fryslân,04,Noord-Friesland
+3413,Wetsens,1970,Noardeast-Fryslân,04,Noord-Friesland
+3414,Wierum,1970,Noardeast-Fryslân,04,Noord-Friesland
+3415,Eenrum,1966,Het Hogeland,03,Overig Groningen
+3416,Hornhuizen,1966,Het Hogeland,03,Overig Groningen
+3417,Houwerzijl,1966,Het Hogeland,03,Overig Groningen
+3418,Kloosterburen,1966,Het Hogeland,03,Overig Groningen
+3419,Lauwersoog,1966,Het Hogeland,03,Overig Groningen
+3420,Leens,1966,Het Hogeland,03,Overig Groningen
+3421,Mensingeweer,1966,Het Hogeland,03,Overig Groningen
+3422,Niekerk,1966,Het Hogeland,03,Overig Groningen
+3423,Pieterburen,1966,Het Hogeland,03,Overig Groningen
+3424,Schouwerzijl,1966,Het Hogeland,03,Overig Groningen
+3425,Ulrum,1966,Het Hogeland,03,Overig Groningen
+3426,Vierhuizen,1966,Het Hogeland,03,Overig Groningen
+3427,Warfhuizen,1966,Het Hogeland,03,Overig Groningen
+3428,Wehe-den Hoorn,1966,Het Hogeland,03,Overig Groningen
+3429,Westernieland,1966,Het Hogeland,03,Overig Groningen
+3430,Zoutkamp,1966,Het Hogeland,03,Overig Groningen
+3431,Zuurdijk,1966,Het Hogeland,03,Overig Groningen
+3432,Alphen,1723,Alphen-Chaam,34,Midden-Noord-Brabant
+3433,Chaam,1723,Alphen-Chaam,34,Midden-Noord-Brabant
+3434,Galder,1723,Alphen-Chaam,34,Midden-Noord-Brabant
+3435,Strijbeek,1723,Alphen-Chaam,34,Midden-Noord-Brabant
+3436,Ulvenhout AC,1723,Alphen-Chaam,34,Midden-Noord-Brabant
+3437,Bavel AC,1723,Alphen-Chaam,34,Midden-Noord-Brabant
+3438,Beringe,1894,Peel en Maas,37,Noord-Limburg
+3439,Egchel,1894,Peel en Maas,37,Noord-Limburg
+3440,Grashoek,1894,Peel en Maas,37,Noord-Limburg
+3441,Helden,1894,Peel en Maas,37,Noord-Limburg
+3442,Koningslust,1894,Peel en Maas,37,Noord-Limburg
+3443,Panningen,1894,Peel en Maas,37,Noord-Limburg
+3444,Eenum,1979,Eemsdelta,02,Delfzijl en omgeving
+3445,Garrelsweer,1979,Eemsdelta,02,Delfzijl en omgeving
+3446,Garsthuizen,1979,Eemsdelta,02,Delfzijl en omgeving
+3447,Huizinge,1979,Eemsdelta,02,Delfzijl en omgeving
+3448,Leermens,1979,Eemsdelta,02,Delfzijl en omgeving
+3449,Loppersum,1979,Eemsdelta,02,Delfzijl en omgeving
+3450,Middelstum,1979,Eemsdelta,02,Delfzijl en omgeving
+3451,Oosterwijtwerd,1979,Eemsdelta,02,Delfzijl en omgeving
+3452,Startenhuizen,1979,Eemsdelta,02,Delfzijl en omgeving
+3453,Stedum,1979,Eemsdelta,02,Delfzijl en omgeving
+3454,Toornwerd,1979,Eemsdelta,02,Delfzijl en omgeving
+3455,Westeremden,1979,Eemsdelta,02,Delfzijl en omgeving
+3456,Westerwijtwerd,1979,Eemsdelta,02,Delfzijl en omgeving
+3457,Wirdum,1979,Eemsdelta,02,Delfzijl en omgeving
+3458,'t Zandt,1979,Eemsdelta,02,Delfzijl en omgeving
+3459,Zeerijp,1979,Eemsdelta,02,Delfzijl en omgeving
+3460,Zijldijk,1979,Eemsdelta,02,Delfzijl en omgeving
+3461,Hansweert,0703,Reimerswaal,32,Overig Zeeland
+3462,Krabbendijke,0703,Reimerswaal,32,Overig Zeeland
+3463,Kruiningen,0703,Reimerswaal,32,Overig Zeeland
+3464,Oostdijk,0703,Reimerswaal,32,Overig Zeeland
+3465,Rilland,0703,Reimerswaal,32,Overig Zeeland
+3466,Waarde,0703,Reimerswaal,32,Overig Zeeland
+3467,Yerseke,0703,Reimerswaal,32,Overig Zeeland
+3468,Lith,0828,Oss,35,Noordoost-Noord-Brabant
+3469,Lithoijen,0828,Oss,35,Noordoost-Noord-Brabant
+3470,Oijen,0828,Oss,35,Noordoost-Noord-Brabant
+3471,Maren-Kessel,0828,Oss,35,Noordoost-Noord-Brabant
+3472,Teeffelen,0828,Oss,35,Noordoost-Noord-Brabant
+3473,Eemshaven,1966,Het Hogeland,03,Overig Groningen
+3474,Eppenhuizen,1966,Het Hogeland,03,Overig Groningen
+3475,Kantens,1966,Het Hogeland,03,Overig Groningen
+3476,Oldenzijl,1966,Het Hogeland,03,Overig Groningen
+3477,Oosternieland,1966,Het Hogeland,03,Overig Groningen
+3478,Oudeschip,1966,Het Hogeland,03,Overig Groningen
+3479,Roodeschool,1966,Het Hogeland,03,Overig Groningen
+3480,Rottum,1966,Het Hogeland,03,Overig Groningen
+3481,Startenhuizen,1966,Het Hogeland,03,Overig Groningen
+3482,Stitswerd,1966,Het Hogeland,03,Overig Groningen
+3483,Uithuizen,1966,Het Hogeland,03,Overig Groningen
+3484,Uithuizermeeden,1966,Het Hogeland,03,Overig Groningen
+3485,Usquert,1966,Het Hogeland,03,Overig Groningen
+3486,Warffum,1966,Het Hogeland,03,Overig Groningen
+3487,Zandeweer,1966,Het Hogeland,03,Overig Groningen
+3488,Meerstad,0014,Groningen,03,Overig Groningen
+3489,Zundert,0879,Zundert,33,West-Noord-Brabant
+3490,Rijsbergen,0879,Zundert,33,West-Noord-Brabant
+3491,Wernhout,0879,Zundert,33,West-Noord-Brabant
+3492,Klein Zundert,0879,Zundert,33,West-Noord-Brabant
+3493,Achtmaal,0879,Zundert,33,West-Noord-Brabant
+3494,Malden,0252,Heumen,15,Arnhem/Nijmegen
+3495,Heumen,0252,Heumen,15,Arnhem/Nijmegen
+3496,Overasselt,0252,Heumen,15,Arnhem/Nijmegen
+3497,Nederasselt,0252,Heumen,15,Arnhem/Nijmegen
+3500,Haarsteeg,0797,Heusden,35,Noordoost-Noord-Brabant
+3502,Nieuwkuijk,0797,Heusden,35,Noordoost-Noord-Brabant
+3503,Vlijmen,0797,Heusden,35,Noordoost-Noord-Brabant
+3504,Sneek,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+3505,Loënga,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+3506,Offingawier,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+3508,Beerta,1895,Oldambt,01,Oost-Groningen
+3509,Blauwestad,1895,Oldambt,01,Oost-Groningen
+3510,Hengelo,0164,Hengelo (O.),12,Twente
+3511,Borne,0147,Borne,12,Twente
+3512,Sittard,1883,Sittard-Geleen,39,Zuid-Limburg
+3513,Geleen,1883,Sittard-Geleen,39,Zuid-Limburg
+3514,Doeveren,0797,Heusden,35,Noordoost-Noord-Brabant
+3515,Hedikhuizen,0797,Heusden,35,Noordoost-Noord-Brabant
+3516,Heesbeen,0797,Heusden,35,Noordoost-Noord-Brabant
+3517,Herpt,0797,Heusden,35,Noordoost-Noord-Brabant
+3518,Heusden,0797,Heusden,35,Noordoost-Noord-Brabant
+3519,Oudheusden,0797,Heusden,35,Noordoost-Noord-Brabant
+3520,Son en Breugel,0848,Son en Breugel,36,Zuidoost-Noord-Brabant
+3521,Nijehaske,1940,De Fryske Marren,05,Zuidwest-Friesland
+3522,Oudehaske,1940,De Fryske Marren,05,Zuidwest-Friesland
+3523,Heerenveen,0074,Heerenveen,06,Zuidoost-Friesland
+3524,Echteld,1740,Neder-Betuwe,16,Zuidwest-Gelderland
+3525,Vreeland,1904,Stichtse Vecht,17,Utrecht
+3526,Kortenhoef,1696,Wijdemeren,24,Het Gooi en Vechtstreek
+3527,Acquoy,1960,West Betuwe,16,Zuidwest-Gelderland
+3528,Rhenoy,1960,West Betuwe,16,Zuidwest-Gelderland
+3529,Geldermalsen,1960,West Betuwe,16,Zuidwest-Gelderland
+3530,Meteren,1960,West Betuwe,16,Zuidwest-Gelderland
+3531,Tricht,1960,West Betuwe,16,Zuidwest-Gelderland
+3532,Buurmalsen,1960,West Betuwe,16,Zuidwest-Gelderland
+3533,Bennebroek,0377,Bloemendaal,21,Agglomeratie Haarlem
+3534,Spaarndam,0394,Haarlemmermeer,23,Groot-Amsterdam
+3535,Hillegom,0534,Hillegom,25,Agglomeratie Leiden en Bollenstreek
+3536,Velsen-Zuid,0453,Velsen,20,IJmond
+3537,Loosdrecht,1696,Wijdemeren,24,Het Gooi en Vechtstreek
+3538,Velsen-Noord,0453,Velsen,20,IJmond
+3539,De Kwakel,0451,Uithoorn,23,Groot-Amsterdam
+3540,Oud Ade,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3541,Leimuiden,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3542,Warmond,1525,Teylingen,25,Agglomeratie Leiden en Bollenstreek
+3545,Wirdum,0080,Leeuwarden,04,Noord-Friesland
+3546,Rijpwetering,1884,Kaag en Braassem,25,Agglomeratie Leiden en Bollenstreek
+3547,Amstelhoek,0736,De Ronde Venen,17,Utrecht
+3548,de Hoef,0736,De Ronde Venen,17,Utrecht
+3549,Mijdrecht,0736,De Ronde Venen,17,Utrecht
+3550,Vinkeveen,0736,De Ronde Venen,17,Utrecht
+3551,Waverveen,0736,De Ronde Venen,17,Utrecht
+3552,Wijk aan Zee,0375,Beverwijk,20,IJmond
+3553,De Rijp,0361,Alkmaar,19,Alkmaar en omgeving
+3554,Oost-Graftdijk,0361,Alkmaar,19,Alkmaar en omgeving
+3555,Starnmeer,0361,Alkmaar,19,Alkmaar en omgeving
+3556,Markenbinnen,0361,Alkmaar,19,Alkmaar en omgeving
+3559,Reeve,0166,Kampen,10,Noord-Overijssel
+3560,Apeldoorn,0200,Apeldoorn,13,Veluwe
+3561,Wenum Wiesel,0200,Apeldoorn,13,Veluwe
+3562,Uddel,0200,Apeldoorn,13,Veluwe
+3563,Radio Kootwijk,0200,Apeldoorn,13,Veluwe
+3564,Hoog Soeren,0200,Apeldoorn,13,Veluwe
+3565,Wervershoof,0420,Medemblik,18,Kop van Noord-Holland
+3566,Hauwert,0420,Medemblik,18,Kop van Noord-Holland
+3567,Oostwoud,0420,Medemblik,18,Kop van Noord-Holland
+3568,Duivendrecht,0437,Ouder-Amstel,23,Groot-Amsterdam
+3569,Amsterdam-Duivendrecht,0437,Ouder-Amstel,23,Groot-Amsterdam
+3570,Hertme,0147,Borne,12,Twente
+3571,Zenderen,0147,Borne,12,Twente
+3572,Wichmond,1876,Bronckhorst,14,Achterhoek
+3573,Vorden,1876,Bronckhorst,14,Achterhoek
+3574,Zelhem,1876,Bronckhorst,14,Achterhoek
+3575,Halle,1876,Bronckhorst,14,Achterhoek
+3576,Haule,0085,Ooststellingwerf,06,Zuidoost-Friesland
+3577,Haulerwijk,0085,Ooststellingwerf,06,Zuidoost-Friesland
+3580,Putten,0273,Putten,13,Veluwe
+3583,Hellendoorn,0163,Hellendoorn,12,Twente
+3584,Nijverdal,0163,Hellendoorn,12,Twente
+3587,Leersum,1581,Utrechtse Heuvelrug,17,Utrecht
+3588,Overberg,1581,Utrechtse Heuvelrug,17,Utrecht
+3589,Drunen,0797,Heusden,35,Noordoost-Noord-Brabant
+3590,Elshout,0797,Heusden,35,Noordoost-Noord-Brabant
+3591,Tirns,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+3592,Ysbrechtum,1900,Súdwest-Fryslân,05,Zuidwest-Friesland
+3594,Amsterdam,0363,Amsterdam,23,Groot-Amsterdam
+3595,Den Hout,0826,Oosterhout,33,West-Noord-Brabant
+3596,Oosterhout,0826,Oosterhout,33,West-Noord-Brabant
+3597,Barneveld,0203,Barneveld,13,Veluwe
+3598,Terschuur,0203,Barneveld,13,Veluwe
+3599,Voorthuizen,0203,Barneveld,13,Veluwe
+3600,Zwartebroek,0203,Barneveld,13,Veluwe
+3601,Tiel,0281,Tiel,16,Zuidwest-Gelderland
+3602,Grou,0080,Leeuwarden,04,Noord-Friesland
+3603,Nes,0074,Heerenveen,06,Zuidoost-Friesland
+3604,Oirlo,0984,Venray,37,Noord-Limburg
+3605,Oostrum,0984,Venray,37,Noord-Limburg
+3606,Nijkerk,0267,Nijkerk,13,Veluwe
+3607,Nijkerkerveen,0267,Nijkerk,13,Veluwe
+3608,Hardenberg,0160,Hardenberg,10,Noord-Overijssel
+3609,Bruchterveld,0160,Hardenberg,10,Noord-Overijssel
+3610,Geffen,0828,Oss,35,Noordoost-Noord-Brabant
+3611,Nuland,0796,'s-Hertogenbosch,35,Noordoost-Noord-Brabant
+3612,Vinkel,0796,'s-Hertogenbosch,35,Noordoost-Noord-Brabant
+3613,Blokker,0405,Hoorn,18,Kop van Noord-Holland
+3614,Hoorn,0405,Hoorn,18,Kop van Noord-Holland
+3615,Leeuwarden,0080,Leeuwarden,04,Noord-Friesland
+3616,Goutum,0080,Leeuwarden,04,Noord-Friesland
+3618,Berg en Dal,1945,Berg en Dal,15,Arnhem/Nijmegen
+3619,Oosterblokker,0498,Drechterland,18,Kop van Noord-Holland
+3622,Breda,0758,Breda,33,West-Noord-Brabant
+3623,Teteringen,0758,Breda,33,West-Noord-Brabant
+3624,Bavel,0758,Breda,33,West-Noord-Brabant
+3625,Hagestein,1961,Vijfheerenlanden,17,Utrecht
+3626,Hoef en Haag,1961,Vijfheerenlanden,17,Utrecht
+3627,Goudriaan,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+3628,Ottoland,1978,Molenlanden,30,Zuidoost-Zuid-Holland
+3629,Ommen,0175,Ommen,10,Noord-Overijssel
+3630,Arriën,0175,Ommen,10,Noord-Overijssel
+3631,Weesp,0363,Amsterdam,23,Groot-Amsterdam
+3632,Muiden,1942,Gooise Meren,24,Het Gooi en Vechtstreek
+3633,Roderesch,1699,Noordenveld,07,Noord-Drenthe
+3634,Steenbergen,1699,Noordenveld,07,Noord-Drenthe
+3635,Harkstede GN,0014,Groningen,03,Overig Groningen
+3636,Lageland GN,0014,Groningen,03,Overig Groningen

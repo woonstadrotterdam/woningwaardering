@@ -8,6 +8,7 @@ import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
@@ -332,21 +333,8 @@ class Energieprestatie(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-
-    stelselgroep = Energieprestatie()
-    with open(
-        "tests/data/onzelfstandige_woonruimten/stelselgroepen/energieprestatie/input/monument_geen_correctie.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-        groepen=[stelselgroep.bereken(eenheid)]
+    bereken(
+        instance=Energieprestatie(),
+        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
+        strict=False,
     )
-
-    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-
-    tabel = utils.naar_tabel(resultaat)
-
-    print(tabel)

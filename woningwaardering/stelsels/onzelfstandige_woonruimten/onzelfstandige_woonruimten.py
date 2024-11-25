@@ -1,9 +1,6 @@
-import warnings
 from datetime import date
 
-from loguru import logger
-
-from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     Aftrekpunten,
     BijzondereVoorzieningen,
@@ -15,13 +12,11 @@ from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
     PrijsopslagMonumenten,
+    PuntenVoorDeWozWaarde,
     Sanitair,
     VerkoelingEnVerwarming,
 )
 from woningwaardering.stelsels.stelsel import Stelsel
-from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
-)
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
@@ -44,7 +39,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
                 Buitenruimten,
                 GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen,
                 GemeenschappelijkeParkeerruimten,
-                # PuntenVoorDeWOZWaarde,
+                PuntenVoorDeWozWaarde,
                 BijzondereVoorzieningen,
                 Aftrekpunten,
                 PrijsopslagMonumenten,
@@ -53,24 +48,8 @@ class OnzelfstandigeWoonruimten(Stelsel):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-    warnings.simplefilter("default", UserWarning)
-
-    onzelfstandige_woonruimten = OnzelfstandigeWoonruimten(
-        peildatum=date.fromisoformat("2024-07-01")
+    bereken(
+        instance=OnzelfstandigeWoonruimten(),
+        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
+        strict=False,
     )
-
-    with open(
-        "tests/data/onzelfstandige_woonruimten/input/15004000185.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-        woningwaardering_resultaat = onzelfstandige_woonruimten.bereken(eenheid)
-        print(
-            woningwaardering_resultaat.model_dump_json(
-                by_alias=True, indent=2, exclude_none=True
-            )
-        )
-        tabel = utils.naar_tabel(woningwaardering_resultaat)
-
-        print(tabel)
