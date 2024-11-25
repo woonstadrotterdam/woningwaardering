@@ -1,9 +1,6 @@
-import warnings
 from datetime import date
 
-from loguru import logger
-
-from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (
     OnzelfstandigeWoonruimten,
 )
@@ -80,21 +77,9 @@ class Woningwaardering:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-    warnings.simplefilter("default", UserWarning)
-
-    woningwaardering = Woningwaardering(peildatum=date.today())
-
-    with open(
-        "tests/data/generiek/input/37101000032.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-        woningwaardering_resultaat = woningwaardering.bereken(eenheid)
-        print(
-            woningwaardering_resultaat.model_dump_json(
-                by_alias=True, indent=2, exclude_none=True
-            )
-        )
-        tabel = utils.naar_tabel(woningwaardering_resultaat)
-        print(tabel)
+    bereken(
+        instance=Woningwaardering(),
+        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    )

@@ -56,6 +56,11 @@ def bereken(
     elif isinstance(instance, Stelsel):
         resultaat = instance.bereken(eenheid)
 
+    elif hasattr(instance, "bereken"):  # Woningwaardering class
+        resultaat = instance.bereken(eenheid)
+    else:
+        raise ValueError(f"Ongeldig stelselgroep of stelsel: {instance}")
+
     print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
 
     tabel = utils.naar_tabel(resultaat)
