@@ -11,7 +11,7 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 1.5,
+      "punten": 2.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -60,19 +60,19 @@
         },
         {
           "criterium": {
-            "naam": "Maximaal 4 punten",
+            "naam": "Berging5: Maximaal 4 punten voor verwarmde overige- en verkeersruimten (gedeeld met 2)",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
             }
           },
-          "punten": -1.0
+          "punten": -0.5
         },
         {
           "criterium": {
             "id": "verwarmde_overige_en_verkeersruimten",
             "naam": "Verwarmde overige- en verkeersruimten"
           },
-          "punten": 1.5
+          "punten": 2.0
         }
       ]
     }

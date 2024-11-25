@@ -616,6 +616,67 @@ Tot slot is er een dakterras van 8m x 6,5m = 52m2. Dit resulteert in 0,75 punt x
 *Totaal*  
 Voor huurder A resulteert dit in 2,35 punt + 0,84375 punt + 1,95 punt = 5,14375 punten, afgerond 5,25 punten.
 
+## Rubriek 9 - Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
+
+### 9.1 Puntentoekenning
+- Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter.  
+- Een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter.  
+- Voorzieningen (verkoeling en verwarming, keuken, sanitair, gehandicaptenvoorziening) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel.  
+De punten worden gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft en vervolgens gedeeld door het aantal onzelfstandige woonruimten op dat adres.
+
+> De rubriek gehandicaptenvoorziening is niet geimplementeerd in de woningwaardering package en zal dus ook niet berekend worden onder "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
+
+~~**Warme maaltijden**  
+Indien het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten.~~
+
+**Gemeenschappelijke ruimten en voorzieningen in een zorgwoning**  
+De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en voorzieningen in een zorgwoning of woon/zorgcomplex de waardering per woning veelal uitkomt op een totaal van ongeveer 3 punten. Om arbeidsintensief meetwerk te voorkomen waardeert de Huurcommissie in dat geval voor de gemeenschappelijke ruimten en voorzieningen een waardering van 3 punten per woning.
+
+### 9.2 Definitie gemeenschappelijke vertrekken en overige ruimten
+Gemeenschappelijke vertrekken en overige ruimten zijn tot het woongebouw behorende binnenruimten waar de bewoners van tenminste twee adressen in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht toe hebben. De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke binnenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s).
+
+~~Uitgesloten zijn vertrekken en overige ruimten waarvoor ook door derden een vergoeding/huurprijs wordt betaald alsmede vertrekken en ruimten die door de eigenaar/verhuurder in gebruik zijn (bijv. kantoor- ruimte, opslagruimte, e.d.).~~
+
+**Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:**
+~~- zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
+~~- de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
+- de oppervlakte, na deling door het aantal adressen, per woning minstens 2m2 bedraagt.
+
+De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte, afronden in m2, delen door het aantal adressen en waarderen als “overige ruimte”. Dat betekent dat kasten uitkomend in een verkeersruimte niet worden meegeteld.
+
+Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aangesloten bij de definities en meetinstructies zoals toegelicht in paragraaf 1.3 en 2.3 van dit hoofdstuk.
+
+> Wanneer het attribuut `gedeeld_met_aantal_eenheden` van een ruimte groter of gelijk aan 2 is, dan komt de ruimte in aanmerking voor een waardering onder "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen", mits deze voldoet aan de criteria voor vertrekken of overige ruimten.
+
+### 9.3 Rekenmethode en voorbeeldberekening
+
+**Rekenmethode**
+
+1. Bepaal of het een vertrek of een overige ruimte is en reken de oppervlaktepunten:  
+  a. Gemeenschappelijke vertrekken worden met 1 punt per m2 gewaardeerd.  
+  b. Gemeenschappelijke overige ruimten worden met 0,75 punt per m2 gewaardeerd.  
+2. Bepaal de punten voor verkoeling en verwarming conform rubriek 3.  
+3. Bepaal eventueel van toepassing zijnde extra punten conform rubriek 5, 6 en/of 7.  
+4. Saldeer de punten uit de hierboven genoemde stappen.  
+5. Deel dit aantal punten door het aantal adressen dat toegang heeft tot de gemeenschappelijke binnenruimten.  
+6. Deel het aantal punten door het aantal onzelfstandige woonruimten op dat adres.  
+
+
+**Voorbeeld** 
+```text
+Voorbeeld: (A) een gemeenschappelijke binnenruimte met keuken van 20 vierkante meter, en daarnaast (B) een gedeeld toilet van 2 vierkante meter. Tot beiden hebben 4 adressen toegang. Op één van deze adressen zijn vier onzelfstandige woonruimten.
+
+1. Vertrek A voldoet aan de eisen van een vertrek en wordt gewaardeerd met 20 x 1 punt (oppervlakte) conform rubriek 1. Ruimte B voldoet aan de eisen van een overige ruimte en wordt gewaardeerd met 1,5 (2 x 0,75) punt conform rubriek 2.  
+2. Vertrek A is verwarmd middels een radiator en krijgt daarvoor 2 punten conform rubriek 3. Het toilet is onverwarmd en ontvangt daarvoor geen punten.  
+3. In vertrek A wordt voldaan aan de minimumeisen van een keuken conform rubriek 5. Voor deze rubriek wordt 10 punten toegekend (7 voor het aanrecht, en 3 voor de voorzieningen). De toiletruimte B krijgt 4,75 punt (3,75 voor het hangend toilet en 1 voor de wastafel).  
+
+4. Saldering levert op: 20 + 1,5 + 2 + 10 + 4,75 = 38,25  
+5. Delen door het aantal adressen levert op: 38,25 punten/4 = 9.5625 per adres.  
+6.Vervolgens wordt gedeeld door het aantal onzelfstandige woonruimten op het adres, dus 9,5625/4 = 2,390625 punten per onzelfstandige woonruimte.  
+
+Afronden geschiedt op een kwart punt per onzelfstandige woonruimte, in dit geval dus op 2,50.
+```
+
 ## Rubriek 10 - Gemeenschappelijke parkeerruimten 
 
 ### 10.1 Puntentoekenning

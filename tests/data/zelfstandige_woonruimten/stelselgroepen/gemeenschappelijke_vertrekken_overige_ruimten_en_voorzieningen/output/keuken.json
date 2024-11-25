@@ -25,15 +25,6 @@
           "punten": 2.0
         },
         {
-          "criterium": {
-            "naam": "Keuken (gedeeld met 5)",
-            "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
-            }
-          },
-          "punten": 0.4
-        },
-        {
           "aantal": 1000.0,
           "criterium": {
             "naam": "Keuken: Lengte aanrecht (gedeeld met 5)",
@@ -48,6 +39,15 @@
           "aantal": 2.0,
           "criterium": {
             "naam": "Inbouw koelkast (in zelfde ruimte) (gedeeld met 5)"
+          },
+          "punten": 0.4
+        },
+        {
+          "criterium": {
+            "naam": "Keuken (gedeeld met 5)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
           },
           "punten": 0.4
         }

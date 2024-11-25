@@ -52,7 +52,6 @@ class VerkoelingEnVerwarming(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen = []
-        woningwaarderingen_voor_gedeeld = []
 
         ruimten = [
             ruimte
@@ -61,36 +60,17 @@ class VerkoelingEnVerwarming(Stelselgroep):
             or ruimte.gedeeld_met_aantal_eenheden == 1
         ]
 
-        for ruimte in ruimten:
-            woningwaarderingen = list(
-                ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
-                    ruimte,
-                    self.stelselgroep,
-                )
-            )
-
-            woningwaarderingen_voor_gedeeld.append((ruimte, woningwaarderingen))
-
-        # maximering is op basis van de punten voordat ze gedeeld worden door het aantal onzelfstandige woonruimten
-        maximering = list(
-            ZelfstandigeWoonruimtenVerkoelingEnVerwarming.maximering(
-                [
-                    woningwaardering
-                    for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld
-                    for woningwaardering in woningwaarderingen
-                ]
+        waarderingen = list(
+            ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
+                ruimten,
+                self.stelselgroep,
             )
         )
 
-        for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld:
+        for ruimte, waardering in waarderingen:
             woningwaardering_groep.woningwaarderingen.extend(
-                deel_punten_door_aantal_onzelfstandige_woonruimten(
-                    ruimte, woningwaarderingen
-                )
+                deel_punten_door_aantal_onzelfstandige_woonruimten(ruimte, [waardering])
             )
-
-        # maximering hier pas toevoegen voor meer intuitieve volgorde
-        woningwaardering_groep.woningwaarderingen.extend(maximering)
 
         woningwaardering_groep.woningwaarderingen.extend(
             self.criteriumsleutel_resultaten(woningwaardering_groep)
@@ -108,7 +88,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.oppervlakte_onzelfstandige_woonruimte.naam}"
+            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
         )
         return woningwaardering_groep
 

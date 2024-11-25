@@ -88,7 +88,7 @@ def naar_tabel(
 
     table._min_width = {
         "Groep": 33,
-        "Naam": 50,
+        "Naam": 75,
         "Aantal": 12,
         "Meeteenheid": 19,
         "Punten": 7,
@@ -119,6 +119,7 @@ def naar_tabel(
         woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
         aantal_waarderingen = len(woningwaarderingen)
         index = 0
+
         for woningwaardering in [
             woningwaardering
             for woningwaardering in woningwaarderingen
@@ -139,7 +140,7 @@ def naar_tabel(
                         woningwaardering.criterium.meeteenheid.naam
                         if woningwaardering.criterium.meeteenheid is not None
                         else "",
-                        woningwaardering.punten
+                        rond_af(woningwaardering.punten, decimalen=2)
                         if woningwaardering.punten is not None
                         else "",
                         f"{woningwaardering.opslagpercentage:.0%}"
@@ -149,7 +150,26 @@ def naar_tabel(
                     divider=index == aantal_waarderingen,
                 )
 
-                if woningwaardering.criterium.id:
+                def voeg_onderliggende_woningwaarderingen_toe(
+                    table: PrettyTable,
+                    stelselgroep_naam: str,
+                    woningwaardering: WoningwaarderingResultatenWoningwaardering,
+                    woningwaarderingen: list[
+                        WoningwaarderingResultatenWoningwaardering
+                    ],
+                    index: int,
+                    indent: int = 0,
+                ) -> None:
+                    """
+                    Voeg de onderliggende woningwaarderingen toe aan de tabel.
+                    """
+
+                    if (
+                        not woningwaardering.criterium
+                        or not woningwaardering.criterium.id
+                    ):
+                        return
+
                     onderliggende_woningwaarderingen = [
                         onderliggende_woningwaardering
                         for onderliggende_woningwaardering in woningwaarderingen
@@ -159,6 +179,7 @@ def naar_tabel(
                         and onderliggende_woningwaardering.criterium.bovenliggende_criterium.id
                         == woningwaardering.criterium.id
                     ]
+
                     for (
                         onderliggende_woningwaardering
                     ) in onderliggende_woningwaarderingen:
@@ -167,7 +188,7 @@ def naar_tabel(
                             table.add_row(
                                 [
                                     stelselgroep_naam,
-                                    f" - {onderliggende_woningwaardering.criterium.naam}",
+                                    f"{' '*indent} - {onderliggende_woningwaardering.criterium.naam}",
                                     f"[{onderliggende_woningwaardering.aantal}]"
                                     if onderliggende_woningwaardering.aantal is not None
                                     else "",
@@ -175,7 +196,7 @@ def naar_tabel(
                                     if onderliggende_woningwaardering.criterium.meeteenheid
                                     is not None
                                     else "",
-                                    f"[{onderliggende_woningwaardering.punten}]"
+                                    f"[{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}]"
                                     if onderliggende_woningwaardering.punten is not None
                                     else "",
                                     f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
@@ -185,6 +206,25 @@ def naar_tabel(
                                 ],
                                 divider=index == aantal_waarderingen,
                             )
+
+                        voeg_onderliggende_woningwaarderingen_toe(
+                            table,
+                            stelselgroep_naam,
+                            onderliggende_woningwaardering,
+                            woningwaarderingen,
+                            index,
+                            indent=indent + 1,
+                        )
+
+                voeg_onderliggende_woningwaarderingen_toe(
+                    table,
+                    stelselgroep_naam,
+                    woningwaardering,
+                    woningwaarderingen,
+                    index,
+                    indent=0,
+                )
+
         aantallen = [
             Decimal(woningwaardering.aantal)
             for woningwaardering in woningwaarderingen
@@ -228,7 +268,7 @@ def naar_tabel(
                     "Totaal",
                     (subtotaal or "") if not verschillende_meeteenheden else "",
                     meeteenheid if not verschillende_meeteenheden else "",
-                    woningwaardering_groep.punten or "",
+                    rond_af(woningwaardering_groep.punten, decimalen=2) or "",
                     f"{woningwaardering_groep.opslagpercentage:.0%}"
                     if woningwaardering_groep.opslagpercentage is not None
                     else "",
@@ -728,6 +768,18 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     ] or (
         Ruimtedetailsoort.schuur.naam == ruimte.detail_soort.naam
     ):  # Schacht en schuur hebben dezelfde code
+        if (
+            ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
+            and Ruimtesoort.overige_ruimten
+        ):
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            if (
+                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_eenheden))
+            ) >= Decimal("2"):
+                return Ruimtesoort.overige_ruimten
+            else:
+                return None
+
         if ruimte.soort.code == Ruimtesoort.vertrek.code:
             if ruimte.oppervlakte >= 4:
                 return Ruimtesoort.vertrek
