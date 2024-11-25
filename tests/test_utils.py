@@ -38,14 +38,14 @@ def get_stelselgroep_resultaten(
 
 def assert_output_model(
     resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    verwachte_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    verwacht_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     stelselgroep: Woningwaarderingstelselgroep | None = None,
 ):
     if stelselgroep:
         verwachte_groepen = get_stelselgroep_resultaten(
-            verwachte_resultaat, stelselgroep
+            verwacht_resultaat, stelselgroep
         )
-        verwachte_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+        verwacht_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
             groepen=verwachte_groepen
         )
 
@@ -56,7 +56,7 @@ def assert_output_model(
         difflib.unified_diff(
             fromfile="verwacht",
             tofile="testresultaat",
-            a=naar_tabel(verwachte_resultaat).get_string().split("\n"),
+            a=naar_tabel(verwacht_resultaat).get_string().split("\n"),
             b=naar_tabel(resultaat).get_string().split("\n"),
             lineterm="",
             n=3,
@@ -67,6 +67,10 @@ def assert_output_model(
 
     if colored_diff != "":
         fail(reason=f"Output komt niet overeen\n{colored_diff}", pytrace=False)
+
+    assert (
+        verwacht_resultaat == resultaat
+    ), "Output-model verschilt van verwacht resultaat"
 
 
 def laad_specifiek_input_en_output_model(
