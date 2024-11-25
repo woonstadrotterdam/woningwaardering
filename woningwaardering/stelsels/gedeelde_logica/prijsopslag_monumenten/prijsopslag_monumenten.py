@@ -18,8 +18,23 @@ from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
 def opslag_rijksmonument(
     peildatum: date,
     eenheid: EenhedenEenheid,
-    stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+    stelselgroep: Woningwaarderingstelselgroep,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
+    """Bepaalt de prijsopslag of puntentoeslag voor een rijksmonument.
+
+    Voor huurovereenkomsten vanaf 1 juli 2024 geldt een prijsopslag van 35%.
+    Voor eerdere huurovereenkomsten geldt:
+    - 50 punten voor zelfstandige woonruimten
+    - 10 punten voor onzelfstandige woonruimten
+
+    Args:
+        peildatum (date): De datum waarop de waardering wordt uitgevoerd
+        eenheid (EenhedenEenheid): De te waarderen eenheid
+        stelselgroep (Woningwaarderingstelselgroep): De stelselgroep waarvoor de prijsopslag wordt berekend
+
+    Returns:
+        WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag of puntentoeslag, of None als de eenheid geen rijksmonument is
+    """
     if any(
         monument.code == Eenheidmonument.rijksmonument.code
         for monument in eenheid.monumenten or []
@@ -69,9 +84,19 @@ def opslag_rijksmonument(
 
 
 def opslag_gemeentelijk_of_provinciaal_monument(
-    eenheid: EenhedenEenheid,
-    stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+    eenheid: EenhedenEenheid, stelselgroep: Woningwaarderingstelselgroep
 ) -> WoningwaarderingResultatenWoningwaardering | None:
+    """Bepaalt de prijsopslag voor een gemeentelijk of provinciaal monument.
+
+    Voor gemeentelijke en provinciale monumenten geldt een prijsopslag van 15%.
+
+    Args:
+        eenheid (EenhedenEenheid): De te waarderen eenheid
+        stelselgroep (Woningwaarderingstelselgroep): De stelselgroep waarvoor de prijsopslag wordt berekend
+
+    Returns:
+        WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als de eenheid geen gemeentelijk of provinciaal monument is
+    """
     if any(
         monument.code
         in [
@@ -97,9 +122,22 @@ def opslag_gemeentelijk_of_provinciaal_monument(
 
 
 def opslag_beschermd_stads_of_dorpsgezicht(
-    eenheid: EenhedenEenheid,
-    stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+    eenheid: EenhedenEenheid, stelselgroep: Woningwaarderingstelselgroep
 ) -> WoningwaarderingResultatenWoningwaardering | None:
+    """Bepaalt de prijsopslag voor een beschermd stads- of dorpsgezicht.
+
+    Een prijsopslag van 5% wordt toegekend als:
+    - De woonruimte behoort tot een beschermd stads- of dorpsgezicht
+    - De woonruimte is gebouwd voor 1965
+    - De woonruimte is geen rijks-, gemeentelijk of provinciaal monument
+
+    Args:
+        eenheid (EenhedenEenheid): De te waarderen eenheid
+        stelselgroep (Woningwaarderingstelselgroep): De stelselgroep waarvoor de prijsopslag wordt berekend
+
+    Returns:
+        WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
+    """
     if any(
         monument.code
         in [
@@ -148,6 +186,13 @@ def opslag_beschermd_stads_of_dorpsgezicht(
 
 
 def check_monumenten_attribuut(eenheid: EenhedenEenheid) -> None:
+    """Controleert of het monumenten-attribuut correct is gespecificeerd.
+
+    Geeft een waarschuwing als het attribuut None is en zoekt vervolgens de monumentstatus op basis van de gegevens in de eenheid.
+
+    Args:
+        eenheid (EenhedenEenheid): De te controleren eenheid
+    """
     if eenheid.monumenten is None:
         warnings.warn(
             f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",

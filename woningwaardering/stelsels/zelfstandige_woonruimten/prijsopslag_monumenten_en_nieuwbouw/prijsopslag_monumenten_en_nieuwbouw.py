@@ -59,8 +59,8 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = list(
             woningwaardering
-            for woningwaardering in PrijsopslagMonumentenEnNieuwbouw._genereer_woningwaarderingen(
-                self.peildatum, eenheid, woningwaardering_resultaat
+            for woningwaardering in self._genereer_woningwaarderingen(
+                eenheid, woningwaardering_resultaat
             )
             if woningwaardering is not None
         )
@@ -85,31 +85,44 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
         return woningwaardering_groep
 
-    @staticmethod
     def _genereer_woningwaarderingen(
-        peildatum: date,
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
         check_monumenten_attribuut(eenheid)
 
-        yield opslag_rijksmonument(peildatum, eenheid)
-        yield opslag_gemeentelijk_of_provinciaal_monument(eenheid)
-        yield opslag_beschermd_stads_of_dorpsgezicht(eenheid)
+        yield opslag_rijksmonument(self.peildatum, eenheid, self.stelselgroep)
+        yield opslag_gemeentelijk_of_provinciaal_monument(eenheid, self.stelselgroep)
+        yield opslag_beschermd_stads_of_dorpsgezicht(eenheid, self.stelselgroep)
         yield PrijsopslagMonumentenEnNieuwbouw._opslag_nieuwbouw(
-            peildatum, eenheid, woningwaardering_resultaat
+            self.peildatum, eenheid, woningwaardering_resultaat, self.stelselgroep
         )
 
-    @staticmethod
     def _opslag_nieuwbouw(
-        peildatum: date,
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
-        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
     ) -> WoningwaarderingResultatenWoningwaardering | None:
+        """Bepaalt de prijsopslag voor nieuwbouw.
+
+        Een prijsopslag van 10% wordt toegekend als:
+        - De bouwdatum voor 1-1-2028 ligt
+        - De in exploitatiedatum na 1-7-2024 ligt
+        - De in exploitatiedatum niet ouder is dan 20 jaar t.o.v. de peildatum
+        - Het puntentotaal tussen 144 en 186 punten ligt
+
+        Args:
+            eenheid (EenhedenEenheid): De te waarderen eenheid
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None, optional):
+                Bestaand waarderingsresultaat. Defaults to None.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
+        """
         if (
             eenheid.begin_bouwdatum is not None
             and eenheid.begin_bouwdatum < date(2028, 1, 1)
@@ -118,7 +131,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             > date(
                 2024, 7, 1
             )  # TODO: https://github.com/woonstadrotterdam/woningwaardering/issues/105
-            and eenheid.in_exploitatiedatum > peildatum - relativedelta(years=20)
+            and eenheid.in_exploitatiedatum > self.peildatum - relativedelta(years=20)
         ):
             if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
                 logger.warning(
@@ -129,7 +142,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 )
 
                 woningwaardering_resultaat = ZelfstandigeWoonruimten(
-                    peildatum=peildatum
+                    peildatum=self.peildatum
                 ).bereken(
                     eenheid,
                     negeer_stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
@@ -143,7 +156,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             if puntentotaal is not None and 144 <= puntentotaal <= 186:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {self.stelselgroep.naam}."
                 )
 
                 return WoningwaarderingResultatenWoningwaardering(
@@ -155,7 +168,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             else:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) is nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor {self.stelselgroep.naam}."
                 )
         else:
             logger.debug(f"Eenheid ({eenheid.id}) is geen nieuwbouw.")
