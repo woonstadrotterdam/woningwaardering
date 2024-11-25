@@ -7,7 +7,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica import (
-    waardeer_gemeenschappelijke_parkeerruimten,
+    waardeer_gemeenschappelijke_parkeerruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -60,9 +60,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
         gedeeld_met_counter: dict[int, dict[str, float]] = {}
         for ruimte in eenheid.ruimten:
-            waarderingen_zelfstandig = waardeer_gemeenschappelijke_parkeerruimten(
-                ruimte
-            )
+            waarderingen_zelfstandig = waardeer_gemeenschappelijke_parkeerruimte(ruimte)
             if waarderingen_zelfstandig is not None:
                 for waardering in list(waarderingen_zelfstandig):
                     if waardering is None:

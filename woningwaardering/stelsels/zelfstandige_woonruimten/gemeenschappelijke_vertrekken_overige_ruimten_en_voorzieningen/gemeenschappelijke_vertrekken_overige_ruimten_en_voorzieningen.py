@@ -9,8 +9,8 @@ from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica import (
     maximeer_verkoeling_en_verwarming,
     waardeer_keuken,
-    waardeer_oppervlakte_van_overige_ruimten,
-    waardeer_oppervlakte_van_vertrekken,
+    waardeer_oppervlakte_van_overige_ruimte,
+    waardeer_oppervlakte_van_vertrek,
     waardeer_sanitair,
     waardeer_verkoeling_en_verwarming,
 )
@@ -95,8 +95,8 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             ]
 
             oppervlakte_berekeningen = {
-                Ruimtesoort.vertrek: waardeer_oppervlakte_van_vertrekken,
-                Ruimtesoort.overige_ruimten: waardeer_oppervlakte_van_overige_ruimten,
+                Ruimtesoort.vertrek: waardeer_oppervlakte_van_vertrek,
+                Ruimtesoort.overige_ruimten: waardeer_oppervlakte_van_overige_ruimte,
             }
 
             for ruimte in gedeelde_ruimten:

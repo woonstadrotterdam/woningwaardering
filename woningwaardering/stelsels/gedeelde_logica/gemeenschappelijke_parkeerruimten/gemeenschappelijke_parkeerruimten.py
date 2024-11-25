@@ -28,7 +28,7 @@ parkeertype_punten_mapping = {
 }
 
 
-def waardeer_gemeenschappelijke_parkeerruimten(
+def waardeer_gemeenschappelijke_parkeerruimte(
     ruimte: EenhedenRuimte,
 ) -> Generator[WoningwaarderingResultatenWoningwaardering, None, None]:
     """Bepaalt de waardering voor gemeenschappelijke parkeerruimten.
