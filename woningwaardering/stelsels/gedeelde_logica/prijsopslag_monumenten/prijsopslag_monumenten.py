@@ -87,3 +87,46 @@ def opslag_gemeentelijk_of_provinciaal_monument(
             opslagpercentage=0.15,
         )
     return None
+
+
+def opslag_beschermd_stads_of_dorpsgezicht(
+    eenheid: EenhedenEenheid,
+    stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+) -> WoningwaarderingResultatenWoningwaardering | None:
+    if any(
+        monument.code
+        in [
+            Eenheidmonument.beschermd_dorpsgezicht.code,
+            Eenheidmonument.beschermd_stadsgezicht.code,
+        ]
+        for monument in eenheid.monumenten or []
+    ) and not any(
+        monument.code
+        in [
+            Eenheidmonument.rijksmonument.code,
+            Eenheidmonument.gemeentelijk_monument.code,
+            Eenheidmonument.provinciaal_monument.code,
+        ]
+        for monument in eenheid.monumenten or []
+    ):
+        if eenheid.bouwjaar is None:
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): geen bouwjaar gevonden",
+                UserWarning,
+            )
+        elif eenheid.bouwjaar < 1965:
+            logger.info(
+                f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
+            )
+            return WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Beschermd stads- of dorpsgezicht",
+                ),
+                opslagpercentage=0.05,
+            )
+
+        else:
+            logger.info(
+                f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
+            )
+    return None

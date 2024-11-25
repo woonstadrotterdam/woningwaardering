@@ -9,6 +9,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
+    opslag_beschermd_stads_of_dorpsgezicht,
     opslag_gemeentelijk_of_provinciaal_monument,
     opslag_rijksmonument,
 )
@@ -26,7 +27,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
 
 
 class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
@@ -97,9 +97,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
         yield opslag_rijksmonument(peildatum, eenheid)
         yield opslag_gemeentelijk_of_provinciaal_monument(eenheid)
-        yield PrijsopslagMonumentenEnNieuwbouw._opslag_beschermd_stads_of_dorpsgezicht(
-            eenheid
-        )
+        yield opslag_beschermd_stads_of_dorpsgezicht(eenheid)
         yield PrijsopslagMonumentenEnNieuwbouw._opslag_nieuwbouw(
             peildatum, eenheid, woningwaardering_resultaat
         )
@@ -112,49 +110,6 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 UserWarning,
             )
             utils.update_eenheid_monumenten(eenheid)
-
-    @staticmethod
-    def _opslag_beschermd_stads_of_dorpsgezicht(
-        eenheid: EenhedenEenheid,
-        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
-    ) -> WoningwaarderingResultatenWoningwaardering | None:
-        if any(
-            monument.code
-            in [
-                Eenheidmonument.beschermd_dorpsgezicht.code,
-                Eenheidmonument.beschermd_stadsgezicht.code,
-            ]
-            for monument in eenheid.monumenten or []
-        ) and not any(
-            monument.code
-            in [
-                Eenheidmonument.rijksmonument.code,
-                Eenheidmonument.gemeentelijk_monument.code,
-                Eenheidmonument.provinciaal_monument.code,
-            ]
-            for monument in eenheid.monumenten or []
-        ):
-            if eenheid.bouwjaar is None:
-                warnings.warn(
-                    f"Eenheid ({eenheid.id}): geen bouwjaar gevonden",
-                    UserWarning,
-                )
-            elif eenheid.bouwjaar < 1965:
-                logger.info(
-                    f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
-                )
-                return WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Beschermd stads- of dorpsgezicht",
-                    ),
-                    opslagpercentage=0.05,
-                )
-
-            else:
-                logger.info(
-                    f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
-                )
-        return None
 
     @staticmethod
     def _opslag_nieuwbouw(

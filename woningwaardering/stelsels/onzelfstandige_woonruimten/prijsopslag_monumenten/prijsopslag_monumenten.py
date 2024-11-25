@@ -6,6 +6,7 @@ from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
+    opslag_beschermd_stads_of_dorpsgezicht,
     opslag_gemeentelijk_of_provinciaal_monument,
     opslag_rijksmonument,
 )
@@ -104,7 +105,7 @@ class PrijsopslagMonumenten(Stelselgroep):
             eenheid,
             stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten,
         )
-        yield PrijsopslagMonumentenEnNieuwbouw._opslag_beschermd_stads_of_dorpsgezicht(
+        yield opslag_beschermd_stads_of_dorpsgezicht(
             eenheid,
             stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten,
         )
