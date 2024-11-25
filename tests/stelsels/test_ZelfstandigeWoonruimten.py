@@ -1,6 +1,6 @@
 from datetime import date
 
-from tests.test_utils import assert_output_model
+from tests.utils import assert_output_model
 from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
 )

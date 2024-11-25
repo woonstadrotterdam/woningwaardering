@@ -1,6 +1,6 @@
 from datetime import date
 
-from tests.test_utils import assert_output_model
+from tests.utils import assert_output_model
 from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
