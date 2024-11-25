@@ -18,7 +18,7 @@ def test_OppervlakteVanOverigeRuimten(
     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
-    resultaat = oppervlakte_van_overige_ruimten.bereken(
+    resultaat = oppervlakte_van_overige_ruimten.waardeer(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -33,7 +33,7 @@ def test_OppervlakteVanOverigeRuimten_output(
 
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [oppervlakte_van_overige_ruimten.bereken(eenheid_input)]
+    resultaat.groepen = [oppervlakte_van_overige_ruimten.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -61,7 +61,7 @@ def test_OppervlakteVanOverigeRuimten_specifiek_output(
     oppervlakte_van_overige_ruimten = OppervlakteVanOverigeRuimten(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [oppervlakte_van_overige_ruimten.bereken(eenheid_input)]
+    resultaat.groepen = [oppervlakte_van_overige_ruimten.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

@@ -34,7 +34,7 @@ def test_Keuken(
     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     keuken = Keuken(peildatum=peildatum)
-    resultaat = keuken.bereken(
+    resultaat = keuken.waardeer(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -48,7 +48,7 @@ def test_Keuken_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum)
     keuken = Keuken(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [keuken.bereken(eenheid_input)]
+    resultaat.groepen = [keuken.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -63,7 +63,7 @@ def test_Keuken_specifiek_output(specifieke_input_en_output_model, peildatum):
     eenheid_input, eenheid_output = specifieke_input_en_output_model
     keuken = Keuken(peildatum=peildatum)
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [keuken.bereken(eenheid_input)]
+    resultaat.groepen = [keuken.waardeer(eenheid_input)]
     assert_output_model(
         resultaat,
         eenheid_output,
@@ -106,4 +106,4 @@ def test_Keuken_specifiek_warnings(specifieke_input_en_output_model, peildatum):
     )
     if warning_tuple is not None:
         with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
-            keuken.bereken(eenheid_input)
+            keuken.waardeer(eenheid_input)

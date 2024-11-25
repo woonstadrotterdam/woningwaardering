@@ -8,7 +8,7 @@ import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie.energieprestatie import (
     get_energieprestatievergoeding,
     monument_correctie,
@@ -217,7 +217,7 @@ class Energieprestatie(Stelselgroep):
             for aantal, oppervlakte in oppervlakte_gedeeld_met_counter.items()
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -319,7 +319,7 @@ class Energieprestatie(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    waardeer(
         instance=Energieprestatie(),
         eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         strict=False,  # False is log warnings, True is raise warnings

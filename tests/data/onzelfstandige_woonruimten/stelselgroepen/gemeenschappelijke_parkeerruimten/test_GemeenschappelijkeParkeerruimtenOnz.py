@@ -37,7 +37,7 @@ def test_GemeenschappelijkeParkeerruimten(
     gemeenschappelijke_parkeerruimten = GemeenschappelijkeParkeerruimten(
         peildatum=peildatum
     )
-    resultaat = gemeenschappelijke_parkeerruimten.bereken(
+    resultaat = gemeenschappelijke_parkeerruimten.waardeer(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -52,7 +52,7 @@ def test_GemeenschappelijkeParkeerruimten_output(
     )
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [gemeenschappelijke_parkeerruimten.bereken(eenheid_input)]
+    resultaat.groepen = [gemeenschappelijke_parkeerruimten.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -70,7 +70,7 @@ def test_GemeenschappelijkeParkeerruimten_specifiek_output(
         peildatum=peildatum
     )
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [gemeenschappelijke_parkeerruimten.bereken(eenheid_input)]
+    resultaat.groepen = [gemeenschappelijke_parkeerruimten.waardeer(eenheid_input)]
     assert_output_model(
         resultaat,
         eenheid_output,
@@ -117,4 +117,4 @@ def test_Gemeenschappelijke_parkeerruimte_specifiek_warnings(
     )
     if warning_tuple is not None:
         with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
-            gemeenschappelijke_parkeerruimte.bereken(eenheid_input)
+            gemeenschappelijke_parkeerruimte.waardeer(eenheid_input)

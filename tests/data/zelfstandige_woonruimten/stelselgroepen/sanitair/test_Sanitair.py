@@ -34,7 +34,7 @@ def test_Sanitair(
     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     sanitair = Sanitair(peildatum=peildatum)
-    resultaat = sanitair.bereken(
+    resultaat = sanitair.waardeer(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -48,7 +48,7 @@ def test_Sanitair_output(zelfstandige_woonruimten_input_en_outputmodel, peildatu
     sanitair = Sanitair(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [sanitair.bereken(eenheid_input)]
+    resultaat.groepen = [sanitair.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -62,7 +62,7 @@ def test_Sanitair_specifiek_output(specifieke_input_en_output_model, peildatum):
     sanitair = Sanitair(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [sanitair.bereken(eenheid_input)]
+    resultaat.groepen = [sanitair.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -94,4 +94,4 @@ def test_Sanitair_specifiek_warnings(specifieke_input_en_output_model, peildatum
     if warning_tuple is not None:
         sanitair = Sanitair(peildatum=peildatum)
         with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
-            sanitair.bereken(eenheid_input)
+            sanitair.waardeer(eenheid_input)

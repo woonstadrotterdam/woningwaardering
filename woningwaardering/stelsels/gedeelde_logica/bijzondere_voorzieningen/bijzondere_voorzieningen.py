@@ -107,7 +107,7 @@ def _opslag_zorgwoning(
 
             woningwaardering_resultaat = ZelfstandigeWoonruimten(
                 peildatum=peildatum
-            ).bereken(
+            ).waardeer(
                 eenheid,
                 negeer_stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
             )
@@ -119,7 +119,7 @@ def _opslag_zorgwoning(
 
             woningwaardering_resultaat = OnzelfstandigeWoonruimten(
                 peildatum=peildatum
-            ).bereken(
+            ).waardeer(
                 eenheid,
                 negeer_stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
             )

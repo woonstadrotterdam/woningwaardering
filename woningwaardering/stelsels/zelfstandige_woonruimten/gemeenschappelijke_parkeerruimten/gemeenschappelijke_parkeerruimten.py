@@ -5,7 +5,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
@@ -37,7 +37,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
@@ -85,7 +85,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    waardeer(
         instance=GemeenschappelijkeParkeerruimten(),
         eenheid_input="warnings.json",
         strict=False,  # False is log warnings, True is raise warnings

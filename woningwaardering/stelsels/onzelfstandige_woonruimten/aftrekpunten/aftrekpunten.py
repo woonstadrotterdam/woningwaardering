@@ -4,7 +4,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.onzelfstandige_woonruimten.oppervlakte_van_vertrekken import (
     OppervlakteVanVertrekken,
 )
@@ -37,7 +37,7 @@ class Aftrekpunten(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -72,7 +72,7 @@ class Aftrekpunten(Stelselgroep):
         if oppervlakte_resultaat is None:
             oppervlakte_resultaat = OppervlakteVanVertrekken(
                 peildatum=self.peildatum
-            ).bereken(eenheid)
+            ).waardeer(eenheid)
 
         if oppervlakte_resultaat.woningwaarderingen:
             totale_oppervlakte_vertrekken = sum(
@@ -116,7 +116,7 @@ class Aftrekpunten(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    waardeer(
         instance=Aftrekpunten(),
         eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         strict=False,  # False is log warnings, True is raise warnings

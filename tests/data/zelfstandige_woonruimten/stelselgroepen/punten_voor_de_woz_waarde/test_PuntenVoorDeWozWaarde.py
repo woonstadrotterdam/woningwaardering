@@ -37,7 +37,7 @@ def test_PuntenVoorDeWozWaarde_output(
     stelselgroep = PuntenVoorDeWozWaarde(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [stelselgroep.bereken(eenheid_input)]
+    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -55,7 +55,7 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(
     stelselgroep = PuntenVoorDeWozWaarde(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [stelselgroep.bereken(eenheid_input)]
+    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -89,4 +89,4 @@ def test_PuntenVoorDeWozWaarde_specifiek_warnings(
     if warning_tuple is not None:
         stelselgroep = PuntenVoorDeWozWaarde(peildatum=peildatum)
         with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
-            stelselgroep.bereken(eenheid_input)
+            stelselgroep.waardeer(eenheid_input)

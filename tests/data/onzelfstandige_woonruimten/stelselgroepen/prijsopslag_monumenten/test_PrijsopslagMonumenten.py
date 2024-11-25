@@ -22,7 +22,7 @@ def test_PrijsopslagMonumenten(
 ):
     prijsopslag_monumenten = PrijsopslagMonumenten()
 
-    resultaat = prijsopslag_monumenten.bereken(
+    resultaat = prijsopslag_monumenten.waardeer(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
 
@@ -39,7 +39,7 @@ def test_PrijsopslagMonumenten_output(
     prijsopslag_monumenten = PrijsopslagMonumenten(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [prijsopslag_monumenten.bereken(eenheid_input)]
+    resultaat.groepen = [prijsopslag_monumenten.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -68,7 +68,7 @@ def test_PrijsopslagMonumentenEnNieuwbouw_specifiek_output(
     eenheid_input, eenheid_output = specifieke_input_en_output_model
     prijsopslag_monumenten = PrijsopslagMonumenten(peildatum=peildatum)
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [prijsopslag_monumenten.bereken(eenheid_input)]
+    resultaat.groepen = [prijsopslag_monumenten.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -105,4 +105,4 @@ def test_PrijsopslagMonumenten_specifiek_warnings(
     if warning_tuple is not None:
         with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
             prijsopslag_monumenten = PrijsopslagMonumenten(peildatum=peildatum)
-            prijsopslag_monumenten.bereken(eenheid_input)
+            prijsopslag_monumenten.waardeer(eenheid_input)

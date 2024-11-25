@@ -66,7 +66,7 @@ class Stelsel:
             )
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         *,
@@ -96,7 +96,7 @@ class Stelsel:
             ):
                 continue
 
-            resultaat.groepen.append(stelselgroep.bereken(eenheid, resultaat))
+            resultaat.groepen.append(stelselgroep.waardeer(eenheid, resultaat))
 
         resultaat.punten = float(Stelsel.bereken_puntentotaal(resultaat))
 

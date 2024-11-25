@@ -8,7 +8,7 @@ import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -53,7 +53,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             parse_dates=["Peildatum"],
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -79,7 +79,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
             woningwaardering_resultaat = ZelfstandigeWoonruimten(
                 peildatum=self.peildatum
-            ).bereken(
+            ).waardeer(
                 eenheid,
                 negeer_stelselgroep=Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
             )
@@ -615,7 +615,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    waardeer(
         instance=PuntenVoorDeWozWaarde(),
         eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,  # False is log warnings, True is raise warnings

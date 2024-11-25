@@ -5,7 +5,7 @@ from typing import Iterator
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
     check_monumenten_attribuut,
     opslag_beschermd_stads_of_dorpsgezicht,
@@ -43,7 +43,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -141,7 +141,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
                 woningwaardering_resultaat = ZelfstandigeWoonruimten(
                     peildatum=self.peildatum
-                ).bereken(
+                ).waardeer(
                     eenheid,
                     negeer_stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
                 )
@@ -174,7 +174,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    waardeer(
         instance=PrijsopslagMonumentenEnNieuwbouw(),
         eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,  # False is log warnings, True is raise warnings

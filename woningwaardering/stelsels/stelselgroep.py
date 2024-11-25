@@ -58,7 +58,7 @@ class Stelselgroep(ABC):
             )
 
     @abstractmethod
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (

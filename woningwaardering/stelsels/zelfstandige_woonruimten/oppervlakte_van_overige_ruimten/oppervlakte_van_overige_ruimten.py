@@ -4,7 +4,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroep
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_overige_ruimte,
 )
@@ -38,7 +38,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -95,7 +95,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    waardeer(
         instance=OppervlakteVanOverigeRuimten(),
         eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,  # False is log warnings, True is raise warnings

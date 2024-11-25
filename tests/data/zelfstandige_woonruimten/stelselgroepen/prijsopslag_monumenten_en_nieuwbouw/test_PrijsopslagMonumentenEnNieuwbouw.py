@@ -22,7 +22,7 @@ def test_PrijsopslagMonumentenEnNieuwbouw(
 ):
     prijsopslag_monumenten_en_nieuwbouw = PrijsopslagMonumentenEnNieuwbouw()
 
-    resultaat = prijsopslag_monumenten_en_nieuwbouw.bereken(
+    resultaat = prijsopslag_monumenten_en_nieuwbouw.waardeer(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
 
@@ -41,7 +41,7 @@ def test_PrijsopslagMonumentenEnNieuwbouw_output(
     )
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [prijsopslag_monumenten_en_nieuwbouw.bereken(eenheid_input)]
+    resultaat.groepen = [prijsopslag_monumenten_en_nieuwbouw.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -72,7 +72,7 @@ def test_PrijsopslagMonumentenEnNieuwbouw_specifiek_output(
         peildatum=peildatum
     )
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [prijsopslag_monumenten_en_nieuwbouw.bereken(eenheid_input)]
+    resultaat.groepen = [prijsopslag_monumenten_en_nieuwbouw.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -111,4 +111,4 @@ def test_PrijsopslagMonumentenEnNieuwbouw_specifiek_warnings(
             prijsopslag_monumenten_en_nieuwbouw = PrijsopslagMonumentenEnNieuwbouw(
                 peildatum=peildatum
             )
-            prijsopslag_monumenten_en_nieuwbouw.bereken(eenheid_input)
+            prijsopslag_monumenten_en_nieuwbouw.waardeer(eenheid_input)

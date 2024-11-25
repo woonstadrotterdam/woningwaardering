@@ -18,7 +18,7 @@ def test_Sanitair(
     onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     sanitair = Sanitair(peildatum=peildatum)
-    resultaat = sanitair.bereken(
+    resultaat = sanitair.waardeer(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -32,7 +32,7 @@ def test_Sanitair_output(onzelfstandige_woonruimten_input_en_outputmodel, peilda
     sanitair = Sanitair(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [sanitair.bereken(eenheid_input)]
+    resultaat.groepen = [sanitair.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -58,7 +58,7 @@ def test_Sanitair_specifiek_output(specifieke_input_en_output_model, peildatum):
     sanitair = Sanitair(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [sanitair.bereken(eenheid_input)]
+    resultaat.groepen = [sanitair.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

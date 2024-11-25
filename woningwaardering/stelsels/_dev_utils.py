@@ -13,7 +13,7 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 
-def bereken(
+def waardeer(
     instance: Stelselgroep | Stelsel,
     eenheid_input: EenhedenEenheid | str,
     strict: bool = False,
@@ -30,6 +30,9 @@ def bereken(
 
     Returns:
         WoningwaarderingResultatenWoningwaarderingResultaat: Het resultaat van de berekening.
+
+    Raises:
+        ValueError: Als de instance niet valide is om mee te waarderen.
     """
     logger.enable("woningwaardering")
     logger.remove()
@@ -51,13 +54,13 @@ def bereken(
 
     if isinstance(instance, Stelselgroep):
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-            groepen=[instance.bereken(eenheid)]
+            groepen=[instance.waardeer(eenheid)]
         )
     elif isinstance(instance, Stelsel):
-        resultaat = instance.bereken(eenheid)
+        resultaat = instance.waardeer(eenheid)
 
     elif hasattr(instance, "bereken"):  # Woningwaardering class
-        resultaat = instance.bereken(eenheid)
+        resultaat = instance.waardeer(eenheid)
     else:
         raise ValueError(f"Ongeldig stelselgroep of stelsel: {instance}")
 

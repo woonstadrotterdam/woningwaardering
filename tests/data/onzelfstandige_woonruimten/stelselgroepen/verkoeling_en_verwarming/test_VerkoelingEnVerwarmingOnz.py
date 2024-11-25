@@ -18,7 +18,7 @@ def test_VerkoelingEnVerwarming(
     onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     verkoeling_en_verwarming = VerkoelingEnVerwarming(peildatum=peildatum)
-    resultaat = verkoeling_en_verwarming.bereken(
+    resultaat = verkoeling_en_verwarming.waardeer(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -34,7 +34,7 @@ def test_VerkoelingEnVerwarming_output(
     verkoeling_en_verwarming = VerkoelingEnVerwarming(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [verkoeling_en_verwarming.bereken(eenheid_input)]
+    resultaat.groepen = [verkoeling_en_verwarming.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -62,7 +62,7 @@ def test_VerkoelingEnVerwarming_specifiek_output(
     verkoeling_en_verwarming = VerkoelingEnVerwarming(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [verkoeling_en_verwarming.bereken(eenheid_input)]
+    resultaat.groepen = [verkoeling_en_verwarming.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

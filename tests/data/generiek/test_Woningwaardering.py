@@ -12,7 +12,7 @@ def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte(
     onzelfstandige_woonruimten_inputmodel,
 ):
     woningwaardering = Woningwaardering(peildatum=date(2024, 7, 1))
-    resultaat = woningwaardering.bereken(onzelfstandige_woonruimten_inputmodel)
+    resultaat = woningwaardering.waardeer(onzelfstandige_woonruimten_inputmodel)
 
     assert isinstance(
         resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
@@ -30,7 +30,7 @@ def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte_output(
 ):
     eenheid_input, verwachte_output = onzelfstandige_woonruimten_input_en_outputmodel
     woningwaardering = Woningwaardering(peildatum=peildatum)
-    resultaat = woningwaardering.bereken(eenheid_input)
+    resultaat = woningwaardering.waardeer(eenheid_input)
     assert_output_model(resultaat, verwachte_output)
 
 
@@ -38,7 +38,7 @@ def test_WoningwaarderingGeneriekZelfstandigeWoonruimte(
     zelfstandige_woonruimten_inputmodel,
 ):
     woningwaardering = Woningwaardering(peildatum=date(2024, 7, 1))
-    resultaat = woningwaardering.bereken(zelfstandige_woonruimten_inputmodel)
+    resultaat = woningwaardering.waardeer(zelfstandige_woonruimten_inputmodel)
 
     assert isinstance(
         resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
@@ -56,5 +56,5 @@ def test_WoningwaarderingGeneriekZelfstandigeWoonruimte_output(
 ):
     eenheid_input, verwachte_output = zelfstandige_woonruimten_input_en_outputmodel
     woningwaardering = Woningwaardering(peildatum=peildatum)
-    resultaat = woningwaardering.bereken(eenheid_input)
+    resultaat = woningwaardering.waardeer(eenheid_input)
     assert_output_model(resultaat, verwachte_output)

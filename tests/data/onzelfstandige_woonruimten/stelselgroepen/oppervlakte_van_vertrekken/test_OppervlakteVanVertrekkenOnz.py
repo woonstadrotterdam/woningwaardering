@@ -18,7 +18,7 @@ def test_OppervlakteVanVertrekken(
     onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
-    resultaat = oppervlakte_van_vertrekken.bereken(
+    resultaat = oppervlakte_van_vertrekken.waardeer(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -34,7 +34,7 @@ def test_OppervlakteVanVertrekken_output(
     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [oppervlakte_van_vertrekken.bereken(eenheid_input)]
+    resultaat.groepen = [oppervlakte_van_vertrekken.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -62,7 +62,7 @@ def test_OppervlakteVanVertrekken_specifiek_output(
     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [oppervlakte_van_vertrekken.bereken(eenheid_input)]
+    resultaat.groepen = [oppervlakte_van_vertrekken.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

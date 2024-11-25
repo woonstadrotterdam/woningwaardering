@@ -1,6 +1,6 @@
 from datetime import date
 
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (
     OnzelfstandigeWoonruimten,
 )
@@ -31,7 +31,7 @@ class Woningwaardering:
     def __init__(self, peildatum: date = date.today()) -> None:
         self.peildatum = peildatum
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
@@ -73,12 +73,12 @@ class Woningwaardering:
         ):
             stelsel = OnzelfstandigeWoonruimten(peildatum=self.peildatum)
 
-        return stelsel.bereken(eenheid)
+        return stelsel.waardeer(eenheid)
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
-        instance=Woningwaardering(),
+    waardeer(
+        instance=Woningwaardering(),  # type: ignore
         eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR

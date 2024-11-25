@@ -89,7 +89,7 @@ if __name__ == "__main__":  # pragma: no cover
         eenheid = EenhedenEenheid.model_validate_json(file.read())
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-        groepen=[stelselgroep.bereken(eenheid)]
+        groepen=[stelselgroep.waardeer(eenheid)]
     )
     print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
 

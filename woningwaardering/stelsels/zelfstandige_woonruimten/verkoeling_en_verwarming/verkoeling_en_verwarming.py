@@ -4,7 +4,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.gedeelde_logica import (
     maximeer_verkoeling_en_verwarming,
     waardeer_verkoeling_en_verwarming,
@@ -35,7 +35,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -93,7 +93,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    waardeer(
         instance=VerkoelingEnVerwarming(),
         eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,  # False is log warnings, True is raise warnings

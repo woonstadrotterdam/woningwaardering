@@ -18,7 +18,7 @@ def test_Buitenruimten(
     onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     buitenruimten = Buitenruimten(peildatum=peildatum)
-    resultaat = buitenruimten.bereken(
+    resultaat = buitenruimten.waardeer(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -34,7 +34,7 @@ def test_Buitenruimten_output(
     buitenruimten = Buitenruimten(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [buitenruimten.bereken(eenheid_input)]
+    resultaat.groepen = [buitenruimten.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -60,7 +60,7 @@ def test_Buitenruimten_specifiek_output(specifieke_input_en_output_model, peilda
     buitenruimten = Buitenruimten(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [buitenruimten.bereken(eenheid_input)]
+    resultaat.groepen = [buitenruimten.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

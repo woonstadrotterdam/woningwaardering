@@ -29,7 +29,7 @@ def test_BijzondereVoorzieningen(
     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     bijzondere_voorzieningen = BijzondereVoorzieningen(peildatum=peildatum)
-    resultaat = bijzondere_voorzieningen.bereken(
+    resultaat = bijzondere_voorzieningen.waardeer(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -45,7 +45,7 @@ def test_BijzondereVoorzieningen_output(
     bijzondere_voorzieningen = BijzondereVoorzieningen(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [bijzondere_voorzieningen.bereken(eenheid_input)]
+    resultaat.groepen = [bijzondere_voorzieningen.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -61,7 +61,7 @@ def test_BijzondereVoorzieningen_specifiek_output(
     bijzondere_voorzieningen = BijzondereVoorzieningen(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [bijzondere_voorzieningen.bereken(eenheid_input)]
+    resultaat.groepen = [bijzondere_voorzieningen.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

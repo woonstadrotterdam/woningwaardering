@@ -18,7 +18,7 @@ def test_Keuken(
     onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     keuken = Keuken(peildatum=peildatum)
-    resultaat = keuken.bereken(
+    resultaat = keuken.waardeer(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -32,7 +32,7 @@ def test_Keuken_output(onzelfstandige_woonruimten_input_en_outputmodel, peildatu
     keuken = Keuken(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [keuken.bereken(eenheid_input)]
+    resultaat.groepen = [keuken.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -58,7 +58,7 @@ def test_Keuken_specifiek_output(specifieke_input_en_output_model, peildatum):
     keuken = Keuken(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [keuken.bereken(eenheid_input)]
+    resultaat.groepen = [keuken.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

@@ -172,7 +172,7 @@ with open(
     eenheid = EenhedenEenheid.model_validate_json(file.read())
 
     # Woningwaardering class kiest op basis van de input het zelfstandig of onzelfstandige stelsel.
-    woningwaardering_resultaat = wws.bereken(eenheid)
+    woningwaardering_resultaat = wws.waardeer(eenheid)
     print(
         woningwaardering_resultaat.model_dump_json(
             by_alias=True, indent=2, exclude_none=True
@@ -820,7 +820,7 @@ eenheid = EenhedenEenheid(
     ],
 )
 
-woningwaardering_resultaat = wws.bereken(eenheid)
+woningwaardering_resultaat = wws.waardeer(eenheid)
 print(
     woningwaardering_resultaat.model_dump_json(
         by_alias=True, indent=2, exclude_none=True

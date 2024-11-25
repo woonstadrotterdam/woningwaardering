@@ -1,6 +1,6 @@
 from datetime import date
 
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     BijzondereVoorzieningen,
@@ -46,7 +46,7 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    waardeer(
         instance=ZelfstandigeWoonruimten(),
         eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,  # False is log warnings, True is raise warnings
