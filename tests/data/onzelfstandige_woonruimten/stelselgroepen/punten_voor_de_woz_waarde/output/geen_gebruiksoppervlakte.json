@@ -7,12 +7,10 @@
           "naam": "Onzelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "BUI",
-          "naam": "Buitenruimten"
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
         }
-      },
-      "punten": 0.0,
-      "woningwaarderingen": []
+      }
     }
   ]
 }

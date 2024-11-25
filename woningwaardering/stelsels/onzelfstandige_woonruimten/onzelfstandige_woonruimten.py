@@ -11,6 +11,7 @@ from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     OppervlakteVanOverigeRuimten,
     OppervlakteVanVertrekken,
     PrijsopslagMonumenten,
+    PuntenVoorDeWozWaarde,
     Sanitair,
     VerkoelingEnVerwarming,
 )
@@ -36,7 +37,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
                 Sanitair,
                 Buitenruimten,
                 GemeenschappelijkeParkeerruimten,
-                # PuntenVoorDeWOZWaarde,
+                PuntenVoorDeWozWaarde,
                 BijzondereVoorzieningen,
                 Aftrekpunten,
                 PrijsopslagMonumenten,

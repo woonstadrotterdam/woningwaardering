@@ -1,0 +1,24 @@
+{
+  "id": "geen_geldige_woz_waarde",
+  "adres": {
+    "woonplaats": {
+      "code": "3086",
+      "naam": "ROTTERDAM"
+    }
+  },
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GBO",
+        "naam": "Gebruiksoppervlakte"
+      },
+      "waarde": "58.0"
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2021-01-01",
+      "vastgesteldeWaarde": 124000
+    }
+  ]
+}

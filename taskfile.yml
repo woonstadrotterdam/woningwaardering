@@ -34,3 +34,7 @@ tasks:
     desc: Genereer test output
     cmds:
       - python scripts/genereer_test_output.py
+  genereer-corop-data:
+    desc: Genereer COROP data
+    cmds:
+      - python scripts/genereer_corop_data.py
