@@ -193,7 +193,6 @@ class Sanitair(Stelselgroep):
                                 ),
                             ),
                         )
-            print([type(woningwaardering) for woningwaardering in woningwaarderingen])
             woningwaarderingen_met_maximering.append((ruimte, woningwaarderingen))
 
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
