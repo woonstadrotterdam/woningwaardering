@@ -1,3 +1,15 @@
+"""
+Dit script haalt gegevens op over woonplaatsen, gemeenten en COROP-gebieden in Nederland
+van de CBS (Centraal Bureau voor de Statistiek) Open Data API. Deze gegevens worden
+gecombineerd om een mapping te creëren tussen adresgegevens (woonplaats, gemeente) en
+COROP-gebieden.
+
+De gegenereerde data wordt opgeslagen in een CSV-bestand, gespecificeerd door OUTPUT_FILE.
+Deze data kan vervolgens worden gebruikt om op basis van de adresgegevens van een
+woonruimte te bepalen in welk COROP-gebied deze zich bevindt. Dit is van belang bij de
+bepaling van de punten voor de WOZ-waarde.
+"""
+
 import asyncio
 from datetime import date
 from typing import Any, Dict, List
