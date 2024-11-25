@@ -42,7 +42,7 @@ def opslag_rijksmonument(
 
         if datum_afsluiten_huurovereenkomst >= date(2024, 7, 1):
             logger.info(
-                f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt een opslagpercentage van 35% op de maximale huurprijs voor {stelselgroep.naam}."
+                f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 35% opslag op de maximale huurprijs voor {stelselgroep.naam}."
             )
             woningwaardering.opslagpercentage = 0.35
         elif (
@@ -62,6 +62,8 @@ def opslag_rijksmonument(
             woningwaardering.punten = 10.0
 
         return woningwaardering
+
+    logger.debug(f"Eenheid ({eenheid.id}) behoort niet tot een rijksmonument.")
     return None
 
 
@@ -78,13 +80,17 @@ def opslag_gemeentelijk_of_provinciaal_monument(
         for monument in eenheid.monumenten or []
     ):
         logger.info(
-            f"Eenheid ({eenheid.id}) is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
+            f"Eenheid ({eenheid.id}) is gemeentelijk of provinciaal monument en krijgt 15% opslag op de maximale huurprijs voor {stelselgroep.naam}."
         )
         return WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam="Gemeentelijk of provinciaal monument",
             ),
             opslagpercentage=0.15,
+        )
+    else:
+        logger.debug(
+            f"Eenheid ({eenheid.id}) behoort niet tot een gemeentelijk of provinciaal monument."
         )
     return None
 
@@ -100,33 +106,41 @@ def opslag_beschermd_stads_of_dorpsgezicht(
             Eenheidmonument.beschermd_stadsgezicht.code,
         ]
         for monument in eenheid.monumenten or []
-    ) and not any(
-        monument.code
-        in [
-            Eenheidmonument.rijksmonument.code,
-            Eenheidmonument.gemeentelijk_monument.code,
-            Eenheidmonument.provinciaal_monument.code,
-        ]
-        for monument in eenheid.monumenten or []
     ):
-        if eenheid.bouwjaar is None:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): geen bouwjaar gevonden",
-                UserWarning,
-            )
-        elif eenheid.bouwjaar < 1965:
-            logger.info(
-                f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht en wordt gewaardeerd met een opslagpercentage van 5% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
-            )
-            return WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Beschermd stads- of dorpsgezicht",
-                ),
-                opslagpercentage=0.05,
-            )
+        logger.info(
+            f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht."
+        )
+        if not any(
+            monument.code
+            in [
+                Eenheidmonument.rijksmonument.code,
+                Eenheidmonument.gemeentelijk_monument.code,
+                Eenheidmonument.provinciaal_monument.code,
+            ]
+            for monument in eenheid.monumenten or []
+        ):
+            if eenheid.bouwjaar is None:
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): geen bouwjaar gevonden",
+                    UserWarning,
+                )
+            elif eenheid.bouwjaar < 1965:
+                logger.info(
+                    f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht en krijgt 5% opslag op de maximale huurprijs voor {stelselgroep.naam}."
+                )
+                return WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Beschermd stads- of dorpsgezicht",
+                    ),
+                    opslagpercentage=0.05,
+                )
 
-        else:
-            logger.info(
-                f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
-            )
+            else:
+                logger.info(
+                    f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
+                )
+    else:
+        logger.debug(
+            f"Eenheid ({eenheid.id}) behoort niet tot een beschermd stads- of dorpsgezicht."
+        )
     return None

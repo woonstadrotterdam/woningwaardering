@@ -153,7 +153,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             if puntentotaal is not None and 144 <= puntentotaal <= 186:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) is een nieuwbouw en wordt gewaardeerd met een opslagpercentage van 10% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {stelselgroep.naam}."
                 )
 
                 return WoningwaarderingResultatenWoningwaardering(
@@ -165,8 +165,10 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             else:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) is een nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor de stelselgroep {stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor {stelselgroep.naam}."
                 )
+        else:
+            logger.debug(f"Eenheid ({eenheid.id}) is geen nieuwbouw.")
         return None
 
 
