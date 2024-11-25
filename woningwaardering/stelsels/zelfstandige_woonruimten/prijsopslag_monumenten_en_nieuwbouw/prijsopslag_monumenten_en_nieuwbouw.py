@@ -96,9 +96,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         yield opslag_rijksmonument(self.peildatum, eenheid, self.stelselgroep)
         yield opslag_gemeentelijk_of_provinciaal_monument(eenheid, self.stelselgroep)
         yield opslag_beschermd_stads_of_dorpsgezicht(eenheid, self.stelselgroep)
-        yield PrijsopslagMonumentenEnNieuwbouw._opslag_nieuwbouw(
-            self.peildatum, eenheid, woningwaardering_resultaat, self.stelselgroep
-        )
+        yield self._opslag_nieuwbouw(eenheid, woningwaardering_resultaat)
 
     def _opslag_nieuwbouw(
         self,
