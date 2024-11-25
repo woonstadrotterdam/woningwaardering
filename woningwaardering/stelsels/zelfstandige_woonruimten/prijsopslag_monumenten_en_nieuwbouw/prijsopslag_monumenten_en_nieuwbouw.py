@@ -9,6 +9,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
+    opslag_gemeentelijk_of_provinciaal_monument,
     opslag_rijksmonument,
 )
 from woningwaardering.stelsels.stelsel import Stelsel
@@ -95,9 +96,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         PrijsopslagMonumentenEnNieuwbouw._check_monumenten_attribuut(eenheid)
 
         yield opslag_rijksmonument(peildatum, eenheid)
-        yield PrijsopslagMonumentenEnNieuwbouw._opslag_gemeentelijk_of_provinciaal_monument(
-            eenheid
-        )
+        yield opslag_gemeentelijk_of_provinciaal_monument(eenheid)
         yield PrijsopslagMonumentenEnNieuwbouw._opslag_beschermd_stads_of_dorpsgezicht(
             eenheid
         )
@@ -113,30 +112,6 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 UserWarning,
             )
             utils.update_eenheid_monumenten(eenheid)
-
-    @staticmethod
-    def _opslag_gemeentelijk_of_provinciaal_monument(
-        eenheid: EenhedenEenheid,
-        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
-    ) -> WoningwaarderingResultatenWoningwaardering | None:
-        if any(
-            monument.code
-            in [
-                Eenheidmonument.gemeentelijk_monument.code,
-                Eenheidmonument.provinciaal_monument.code,
-            ]
-            for monument in eenheid.monumenten or []
-        ):
-            logger.info(
-                f"Eenheid ({eenheid.id}) is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
-            )
-            return WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Gemeentelijk of provinciaal monument",
-                ),
-                opslagpercentage=0.15,
-            )
-        return None
 
     @staticmethod
     def _opslag_beschermd_stads_of_dorpsgezicht(

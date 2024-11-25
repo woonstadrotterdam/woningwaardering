@@ -63,3 +63,27 @@ def opslag_rijksmonument(
 
         return woningwaardering
     return None
+
+
+def opslag_gemeentelijk_of_provinciaal_monument(
+    eenheid: EenhedenEenheid,
+    stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+) -> WoningwaarderingResultatenWoningwaardering | None:
+    if any(
+        monument.code
+        in [
+            Eenheidmonument.gemeentelijk_monument.code,
+            Eenheidmonument.provinciaal_monument.code,
+        ]
+        for monument in eenheid.monumenten or []
+    ):
+        logger.info(
+            f"Eenheid ({eenheid.id}) is gemeentelijk of provinciaal monument en wordt gewaardeerd met een opslagpercentage van 15% op de maximale huurprijs voor de stelselgroep {stelselgroep.naam}."
+        )
+        return WoningwaarderingResultatenWoningwaardering(
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam="Gemeentelijk of provinciaal monument",
+            ),
+            opslagpercentage=0.15,
+        )
+    return None
