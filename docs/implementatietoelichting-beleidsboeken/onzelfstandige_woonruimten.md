@@ -757,7 +757,7 @@ Tabel 1
 
 ~~Hiervan is bijvoorbeeld sprake als, in het kader van de WOZ-beschikking 2023 dat als peildatum 1 januari 2022 heeft, de werkzaamheden aan het gehuurde zijn aangevangen na 1 januari 2022 en zijn voltooid ná 1 januari 2023. De WOZ-beschikking 2024, dat als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven “als ware de bouw voltooid”. In dat geval kan de woning worden aangemerkt als ‘een gebouwd eigendom in aanbouw’ als bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.~~
 
-> De omrekening naar 100% voorgangspercentage dient als WOZ-waarde opgegeven te worden.
+> De omrekening naar 100% voortgangspercentage dient als WOZ-waarde opgegeven te worden.
 
 ## Rubriek 12 - Bijzondere voorzieningen: zorgwoning
 
