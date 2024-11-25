@@ -720,7 +720,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtedetailsoort.berging.code,
         Ruimtedetailsoort.wasruimte.code,
         Ruimtedetailsoort.kelder.code,
-        # Ruimtedetailsoort.schuur.code,
+        Ruimtedetailsoort.schuur.code,
     ] or (
         Ruimtedetailsoort.schuur.naam == ruimte.detail_soort.naam
     ):  # Schacht en schuur hebben dezelfde code

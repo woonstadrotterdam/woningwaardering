@@ -1,0 +1,17 @@
+{
+  "ruimten": [
+    {
+      "id": "Schuur_1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schuur"
+      },
+      "naam": "Schuur als vertrek",
+      "oppervlakte": 6
+    }
+  ]
+}

@@ -3,26 +3,25 @@
     {
       "criteriumGroep": {
         "stelsel": {
-          "code": "ONZ",
-          "naam": "Onzelfstandige woonruimten"
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "BUI",
-          "naam": "Buitenruimten"
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 1.0,
+      "punten": 6.0,
       "woningwaarderingen": [
         {
           "aantal": 6.0,
           "criterium": {
-            "naam": "Tuin (gedeeld met 2 adressen)",
+            "naam": "Schuur als vertrek",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 1.05
+          }
         }
       ]
     }
