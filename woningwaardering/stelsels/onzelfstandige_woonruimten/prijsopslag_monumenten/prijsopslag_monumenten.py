@@ -5,6 +5,9 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
+    opslag_rijksmonument,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.prijsopslag_monumenten_en_nieuwbouw.prijsopslag_monumenten_en_nieuwbouw import (
     PrijsopslagMonumentenEnNieuwbouw,
@@ -91,7 +94,7 @@ class PrijsopslagMonumenten(Stelselgroep):
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
         PrijsopslagMonumentenEnNieuwbouw._check_monumenten_attribuut(eenheid)
 
-        yield PrijsopslagMonumentenEnNieuwbouw._opslag_rijksmonument(
+        yield opslag_rijksmonument(
             peildatum,
             eenheid,
             stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten,

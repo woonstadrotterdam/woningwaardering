@@ -8,6 +8,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
+    opslag_rijksmonument,
+)
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -91,7 +94,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
         PrijsopslagMonumentenEnNieuwbouw._check_monumenten_attribuut(eenheid)
 
-        yield PrijsopslagMonumentenEnNieuwbouw._opslag_rijksmonument(peildatum, eenheid)
+        yield opslag_rijksmonument(peildatum, eenheid)
         yield PrijsopslagMonumentenEnNieuwbouw._opslag_gemeentelijk_of_provinciaal_monument(
             eenheid
         )
@@ -110,57 +113,6 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 UserWarning,
             )
             utils.update_eenheid_monumenten(eenheid)
-
-    @staticmethod
-    def _opslag_rijksmonument(
-        peildatum: date,
-        eenheid: EenhedenEenheid,
-        stelselgroep: Woningwaarderingstelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
-    ) -> WoningwaarderingResultatenWoningwaardering | None:
-        if any(
-            monument.code == Eenheidmonument.rijksmonument.code
-            for monument in eenheid.monumenten or []
-        ):
-            datum_afsluiten_huurovereenkomst = eenheid.datum_afsluiten_huurovereenkomst
-            if datum_afsluiten_huurovereenkomst is None:
-                warnings.warn(
-                    f"Eenheid ({eenheid.id}): 'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
-                    UserWarning,
-                )
-                logger.warning(
-                    f"Eenheid ({eenheid.id}): Voor de waardering van dit rijksmonument wordt de peildatum {peildatum} gebruikt in plaats van de datum van de afsluiting van de huurovereenkomst."
-                )
-                datum_afsluiten_huurovereenkomst = peildatum
-
-            woningwaardering = WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Rijksmonument",
-                ),
-            )
-
-            if datum_afsluiten_huurovereenkomst >= date(2024, 7, 1):
-                logger.info(
-                    f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt een opslagpercentage van 35% op de maximale huurprijs voor {stelselgroep.naam}."
-                )
-                woningwaardering.opslagpercentage = 0.35
-            elif (
-                stelselgroep
-                == Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw
-            ):
-                # 50 punten voor zelfstandige woonruimten
-                logger.info(
-                    f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 50 punten voor {stelselgroep.naam}."
-                )
-                woningwaardering.punten = 50.0
-            elif stelselgroep == Woningwaarderingstelselgroep.prijsopslag_monumenten:
-                # 10 punten voor onzelfstandige woonruimten
-                logger.info(
-                    f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 10 punten voor {stelselgroep.naam}."
-                )
-                woningwaardering.punten = 10.0
-
-            return woningwaardering
-        return None
 
     @staticmethod
     def _opslag_gemeentelijk_of_provinciaal_monument(
