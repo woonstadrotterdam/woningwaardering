@@ -60,7 +60,7 @@
         },
         {
           "criterium": {
-            "naam": "Berging5: maximaal 4 punten",
+            "naam": "Berging5: Maximaal 4 punten",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
             }

@@ -1,0 +1,170 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GBA",
+          "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
+        }
+      },
+      "punten": 18.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 20.0,
+          "criterium": {
+            "naam": "Berging: Overige ruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.75
+        },
+        {
+          "aantal": 20.0,
+          "criterium": {
+            "naam": "Berging: Overige Ruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.75
+        },
+        {
+          "aantal": 20.0,
+          "criterium": {
+            "naam": "Berging: Overige Ruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.75
+        },
+        {
+          "aantal": 20.0,
+          "criterium": {
+            "naam": "Berging: Overige Ruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.75
+        },
+        {
+          "aantal": 20.0,
+          "criterium": {
+            "naam": "Berging: Overige Ruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_3_adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.5
+        },
+        {
+          "criterium": {
+            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+            }
+          },
+          "punten": 0.25
+        },
+        {
+          "criterium": {
+            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+            }
+          },
+          "punten": 0.25
+        },
+        {
+          "criterium": {
+            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+            }
+          },
+          "punten": 0.25
+        },
+        {
+          "criterium": {
+            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+            }
+          },
+          "punten": 0.25
+        },
+        {
+          "criterium": {
+            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_3_adressen"
+            }
+          },
+          "punten": 0.166666667
+        },
+        {
+          "criterium": {
+            "naam": "Berging: Maximaal 4 punten voor verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_3_adressen"
+            }
+          },
+          "punten": -0.166666667
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen",
+            "naam": "Totaal (gedeeld met 2 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 16.0
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_3_adressen",
+            "naam": "Totaal (gedeeld met 3 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 2.5
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+          },
+          "punten": 18.5
+        }
+      ]
+    }
+  ]
+}

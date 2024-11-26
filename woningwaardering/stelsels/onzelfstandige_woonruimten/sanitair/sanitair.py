@@ -189,9 +189,6 @@ class Sanitair(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
         for ruimte, woningwaarderingen in woningwaarderingen_met_maximering:
             for woningwaardering in woningwaarderingen:
-                logger.error(
-                    f"woningwaardering.punten: {woningwaardering.punten}, ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten: {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}"
-                )
                 woningwaardering.punten = float(
                     utils.rond_af(
                         (woningwaardering.punten or 0)
@@ -199,7 +196,6 @@ class Sanitair(Stelselgroep):
                         decimalen=2,
                     )
                 )
-                logger.error(woningwaardering.punten)
                 if (
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
                     and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
@@ -223,6 +219,7 @@ class Sanitair(Stelselgroep):
                 yield ruimte, woningwaardering
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
+        logger.error(f"gedeeld_met_counter: {gedeeld_met_counter}")
         for aantal, punten in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(

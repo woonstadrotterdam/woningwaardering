@@ -71,7 +71,7 @@ def _waardeer_verwarmde_overige_ruimte(
                     ruimte,
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"{ruimte.naam}: maximaal 4 punten",
+                            naam=f"{ruimte.naam}: Maximaal 4 punten",
                             bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                                 id=CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id,
                             ),
@@ -128,7 +128,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                         ruimte,
                         WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam=f"{ruimte.naam}: maximaal 2 extra punten",
+                                naam=f"{ruimte.naam}: Maximaal 2 extra punten",
                                 bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                                     id=CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id,
                                 ),

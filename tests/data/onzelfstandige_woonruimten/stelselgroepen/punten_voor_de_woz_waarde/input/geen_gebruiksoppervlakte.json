@@ -1,0 +1,28 @@
+{
+  "id": "geen_gebruiksoppervlakte",
+  "adres": {
+    "woonplaats": {
+      "code": "3086",
+      "naam": "ROTTERDAM"
+    }
+  },
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "58.0"
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 148000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 184000
+    }
+  ]
+}

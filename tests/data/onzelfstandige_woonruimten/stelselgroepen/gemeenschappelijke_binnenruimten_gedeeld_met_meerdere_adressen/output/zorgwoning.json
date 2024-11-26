@@ -7,17 +7,17 @@
           "naam": "Onzelfstandige woonruimten"
         },
         "stelselgroep": {
-          "code": "BIJ",
-          "naam": "Bijzondere voorzieningen"
+          "code": "GBA",
+          "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
         }
       },
-      "punten": 36.0,
+      "punten": 3.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Zorgwoning 35% puntenverhoging"
+            "naam": "Zorgwoning"
           },
-          "punten": 36.05
+          "punten": 3.0
         }
       ]
     }

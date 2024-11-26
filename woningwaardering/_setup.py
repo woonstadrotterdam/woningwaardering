@@ -1,3 +1,4 @@
+import locale
 import os
 import sys
 import time
@@ -28,6 +29,14 @@ def setup_timezone() -> None:
         time.tzset()
     else:
         logger.debug(f'Tijdzone ingesteld via environment variable "TZ": {timezone}')
+
+
+def setup_locale() -> None:
+    try:
+        locale.setlocale(locale.LC_ALL, "nl_NL.UTF-8")
+        logger.info(f"Locale set to: {locale.getlocale()}")
+    except locale.Error as e:
+        logger.error(f"Failed to set locale: {e}")
 
 
 def handle_unhandled_exception(
@@ -62,6 +71,7 @@ def log_userwarning(
 
 def initialize() -> None:
     logger.disable("woningwaardering")
+    setup_locale()
     setup_timezone()
     sys.excepthook = handle_unhandled_exception
     warnings.simplefilter("once", UserWarning)  # TODO: bepalen of dit wenselijk is
