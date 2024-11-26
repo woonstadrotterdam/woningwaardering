@@ -6,7 +6,6 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.gedeelde_logica import (
-    maximeer_verkoeling_en_verwarming,
     waardeer_verkoeling_en_verwarming,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -58,14 +57,10 @@ class VerkoelingEnVerwarming(Stelselgroep):
             or ruimte.gedeeld_met_aantal_eenheden == 1
         ]
 
-        for ruimte in ruimten:
-            woningwaarderingen = waardeer_verkoeling_en_verwarming(ruimte)
-
-            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
-
         woningwaardering_groep.woningwaarderingen.extend(
-            maximeer_verkoeling_en_verwarming(woningwaardering_groep.woningwaarderingen)
+            waardering for _, waardering in waardeer_verkoeling_en_verwarming(ruimten)
         )
+
         woningwaardering_groep.woningwaarderingen.extend(
             self.criteriumsleutel_resultaten(woningwaardering_groep)
         )

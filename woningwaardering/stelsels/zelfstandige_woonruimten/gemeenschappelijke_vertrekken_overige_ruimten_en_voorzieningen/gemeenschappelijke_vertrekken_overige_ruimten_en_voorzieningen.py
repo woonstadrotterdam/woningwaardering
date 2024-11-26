@@ -7,7 +7,6 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.gedeelde_logica import (
-    maximeer_verkoeling_en_verwarming,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
     waardeer_oppervlakte_van_vertrek,
@@ -145,21 +144,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     )
                 )
 
-                # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
-                verkoeling_en_verwarming_waarderingen = list(
-                    waardeer_verkoeling_en_verwarming(ruimte)
-                )
-                verkoeling_en_verwarming_waarderingen += list(
-                    maximeer_verkoeling_en_verwarming(
-                        verkoeling_en_verwarming_waarderingen
-                    )
-                )
-                woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
-                        ruimte, verkoeling_en_verwarming_waarderingen
-                    )
-                )
-
                 # waarderingen voor de keuken van gedeelde ruimten
                 keuken_waarderingen = list(waardeer_keuken(ruimte, self.stelsel))
                 woningwaardering_groep.woningwaarderingen.extend(
@@ -175,6 +159,18 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 woningwaardering_groep.woningwaarderingen.extend(
                     self.deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, sanitair_waarderingen
+                    )
+                )
+
+            # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
+            verkoeling_en_verwarming_waarderingen = list(
+                waardeer_verkoeling_en_verwarming(gedeelde_ruimten)
+            )
+
+            for ruimte, waardering in verkoeling_en_verwarming_waarderingen:
+                woningwaardering_groep.woningwaarderingen.extend(
+                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                        ruimte, [waardering]
                     )
                 )
 
