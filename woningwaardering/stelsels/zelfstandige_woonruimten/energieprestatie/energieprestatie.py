@@ -8,10 +8,8 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
-    monument_correctie,
-)
-from woningwaardering.stelsels.gedeelde_logica.energieprestatie.energieprestatie import (
     get_energieprestatievergoeding,
+    monument_correctie,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (

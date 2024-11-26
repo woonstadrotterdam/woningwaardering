@@ -9,7 +9,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import waardeer
-from woningwaardering.stelsels.gedeelde_logica.energieprestatie.energieprestatie import (
+from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
     get_energieprestatievergoeding,
     monument_correctie,
 )
