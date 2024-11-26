@@ -5,18 +5,16 @@ import time
 import warnings
 from decimal import BasicContext, setcontext
 from types import TracebackType
-from typing import TextIO
 
 from loguru import logger
+
+from woningwaardering._logging import log_userwarning
 
 # Set context for all calculations to avoid rounding errors
 # See https://docs.python.org/3/library/decimal.html#rounding
 setcontext(BasicContext)
 
 default_timezone = "Europe/Amsterdam"
-
-# om warnings te loggen
-_original_showwarning = warnings.showwarning
 
 
 def setup_timezone() -> None:
@@ -55,18 +53,6 @@ def handle_unhandled_exception(
         return
     logger.error(exception_value)
     sys.__excepthook__(exception_type, exception_value, exception_traceback)
-
-
-def log_userwarning(
-    message: Warning | str,
-    category: type[Warning],
-    filename: str,
-    lineno: int,
-    file: TextIO | None = None,
-    line: str | None = None,
-) -> None:
-    logger.warning(f"{UserWarning.__name__}: {message}")
-    _original_showwarning(message, category, filename, lineno, file, line)
 
 
 def initialize() -> None:

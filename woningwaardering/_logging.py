@@ -1,7 +1,23 @@
 import sys
-from typing import Any
+import warnings
+from typing import Any, TextIO
 
 from loguru import logger
+
+# om warnings te loggen
+_original_showwarning = warnings.showwarning
+
+
+def log_userwarning(
+    message: Warning | str,
+    category: type[Warning],
+    filename: str,
+    lineno: int,
+    file: TextIO | None = None,
+    line: str | None = None,
+) -> None:
+    logger.warning(f"{UserWarning.__name__}: {message}")
+    _original_showwarning(message, category, filename, lineno, file, line)
 
 
 def verkort_path(name: str, regel: int, dev: bool = False) -> str:
