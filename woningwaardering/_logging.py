@@ -5,7 +5,7 @@ from loguru import logger
 
 
 def verkort_path(name: str, regel: int, dev: bool = False) -> str:
-    name = name.replace("zelfstandige_woonruimten", "zelf")
+    name = name.replace("zelfstandige_woonruimten", "zelfstandig")
     parts = name.split(".")
     if len(parts) > 4:
         package = parts[0]
