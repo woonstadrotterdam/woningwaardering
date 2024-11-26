@@ -4,7 +4,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroep
-from woningwaardering.stelsels._dev_utils import waardeer
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_overige_ruimte,
 )
@@ -95,9 +95,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    waardeer(
+    with DevelopmentContext(
         instance=OppervlakteVanOverigeRuimten(),
-        eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    )
+    ) as context:
+        context.waardeer("tests/data/generiek/input/37101000032.json")

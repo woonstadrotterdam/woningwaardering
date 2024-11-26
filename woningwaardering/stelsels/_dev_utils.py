@@ -1,5 +1,6 @@
 import sys
 import warnings
+from typing import Any, Optional
 
 from loguru import logger
 
@@ -9,65 +10,97 @@ from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 
 
-def waardeer(
-    instance: Stelselgroep | Stelsel,
-    eenheid_input: EenhedenEenheid | str,
-    strict: bool = False,
-    log_level: str = "DEBUG",
-) -> WoningwaarderingResultatenWoningwaarderingResultaat:
+class DevelopmentContext:
     """
-    Berekent de punten voor een stelselgroep of stelsel voor een eenheid.
+    Een context manager voor het opzetten van een context voor woningwaardering.
 
-    Args:
-        instance (Stelselgroep | Stelsel): Het stelselgroep of stelsel object dat gebruikt wordt voor de berekening.
-        eenheid_input (EenhedenEenheid | str): Het eenheid object of het pad naar het eenheid object in een json bestand.
-        strict (bool, optional): Of er warnings geraised moeten worden. Defaults to False.
-        log_level (str, optional): Het log level. Defaults to "DEBUG".
+    Deze class stelt een context in voor het uitvoeren van woningwaarderingsberekeningen,
+    met aanpasbare logging en waarschuwingsinstellingen.
 
-    Returns:
-        WoningwaarderingResultatenWoningwaarderingResultaat: Het resultaat van de berekening.
+    Parameters:
+        instance (Stelselgroep | Stelsel): Het stelsel of de stelselgroep waarvoor de berekeningen worden uitgevoerd.
+        strict (bool): Bepaalt of waarschuwingen strikt worden behandeld. Standaard is False.
+        log_level (str): Het logniveau voor de uitgevoerde berekeningen. Standaard is "DEBUG".
 
-    Raises:
-        ValueError: Als de instance niet valide is om mee te waarderen.
+    Usage:
+        with DevelopmentContext(stelsel_instance, strict=True, log_level="INFO") as context:
+            resultaat = context.waardeer(eenheid)
     """
-    logger.enable("woningwaardering")
-    logger.remove()
-    logger.add(
-        sys.stderr,
-        format=dev_format,
-        level=log_level,
-        filter=custom_dev_filter,
-    )
 
-    if not strict:
-        warnings.filterwarnings("default", category=UserWarning)
+    def __init__(
+        self,
+        instance: Stelselgroep | Stelsel,
+        strict: bool = False,
+        log_level: str = "DEBUG",
+    ):
+        self.instance = instance
+        self.strict = strict
+        self.log_level = log_level
 
-    if isinstance(eenheid_input, str):
-        with open(eenheid_input, "r+") as file:
-            eenheid = EenhedenEenheid.model_validate_json(file.read())
-    else:
-        eenheid = eenheid_input
+    def __enter__(self) -> "DevelopmentContext":
+        self._setup_logging()
+        self._setup_warnings()
+        return self
 
-    if isinstance(instance, Stelselgroep):
-        resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-            groepen=[instance.waardeer(eenheid)]
+    def __exit__(
+        self,
+        exc_type: Optional[type],
+        exc_val: Optional[Exception],
+        exc_tb: Optional[Any],
+    ) -> None:
+        pass
+
+    def _setup_logging(self) -> None:
+        logger.enable("woningwaardering")
+        logger.remove()
+        logger.add(
+            sys.stderr,
+            format=dev_format,
+            level=self.log_level,
+            filter=custom_dev_filter,
         )
-    elif isinstance(instance, Stelsel):
-        resultaat = instance.waardeer(eenheid)
 
-    elif hasattr(instance, "waardeer"):  # Woningwaardering class
-        resultaat = instance.waardeer(eenheid)
-    else:
-        raise ValueError(f"Ongeldig stelselgroep of stelsel: {instance}")
+    def _setup_warnings(self) -> None:
+        if not self.strict:
+            warnings.filterwarnings("default", category=UserWarning)
 
-    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
+    def _load_eenheid(self, eenheid_input: EenhedenEenheid | str) -> EenhedenEenheid:
+        if isinstance(eenheid_input, str):
+            with open(eenheid_input, "r") as file:
+                return EenhedenEenheid.model_validate_json(file.read())
+        return eenheid_input
 
-    tabel = utils.naar_tabel(resultaat)
+    def waardeer(
+        self, eenheid_input: EenhedenEenheid | str
+    ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
+        """
+        Berekent de punten voor een stelselgroep of stelsel voor een eenheid en print het resultaat
 
-    print(tabel)
+        Args:
+            eenheid_input (EenhedenEenheid | str): Het eenheid object of het pad naar het eenheid object in een json bestand.
 
-    return resultaat
+        Returns:
+            WoningwaarderingResultatenWoningwaarderingResultaat: Het resultaat van de berekening.
+        """
+        eenheid = self._load_eenheid(eenheid_input)
+        resultaat = self.instance.waardeer(eenheid)
+
+        if isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep):
+            resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+                groepen=[resultaat]
+            )
+
+        self._print_resultaat(resultaat)
+        return resultaat
+
+    def _print_resultaat(
+        self, resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
+    ) -> None:
+        print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
+        tabel = utils.naar_tabel(resultaat)
+        print(tabel)

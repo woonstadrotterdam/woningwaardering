@@ -6,7 +6,7 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import waardeer
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -233,9 +233,9 @@ class Buitenruimten(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    waardeer(
+    with DevelopmentContext(
         instance=Buitenruimten(),
-        eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    )
+    ) as context:
+        context.waardeer("tests/data/generiek/input/37101000032.json")

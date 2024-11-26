@@ -4,7 +4,7 @@ from typing import Iterator
 
 from loguru import logger
 
-from woningwaardering.stelsels._dev_utils import waardeer
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
     check_monumenten_attribuut,
     opslag_beschermd_stads_of_dorpsgezicht,
@@ -110,9 +110,9 @@ class PrijsopslagMonumenten(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    waardeer(
+    with DevelopmentContext(
         instance=PrijsopslagMonumenten(),
-        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    )
+    ) as context:
+        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

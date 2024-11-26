@@ -5,7 +5,7 @@ from typing import Iterator
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 
-from woningwaardering.stelsels._dev_utils import waardeer
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
     check_monumenten_attribuut,
     opslag_beschermd_stads_of_dorpsgezicht,
@@ -174,9 +174,9 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    waardeer(
+    with DevelopmentContext(
         instance=PrijsopslagMonumentenEnNieuwbouw(),
-        eenheid_input="tests/data/generiek/input/37101000032.json",
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    )
+    ) as context:
+        context.waardeer("tests/data/generiek/input/37101000032.json")
