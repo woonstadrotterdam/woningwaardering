@@ -219,7 +219,6 @@ class Sanitair(Stelselgroep):
                 yield ruimte, woningwaardering
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
-        logger.error(f"gedeeld_met_counter: {gedeeld_met_counter}")
         for aantal, punten in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
