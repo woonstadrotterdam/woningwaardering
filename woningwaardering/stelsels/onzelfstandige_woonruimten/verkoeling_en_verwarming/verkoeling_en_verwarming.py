@@ -6,7 +6,6 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import waardeer
 from woningwaardering.stelsels.gedeelde_logica import (
-    maximeer_verkoeling_en_verwarming,
     waardeer_verkoeling_en_verwarming,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -53,7 +52,6 @@ class VerkoelingEnVerwarming(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen = []
-        woningwaarderingen_voor_gedeeld = []
 
         ruimten = [
             ruimte
@@ -62,31 +60,14 @@ class VerkoelingEnVerwarming(Stelselgroep):
             or ruimte.gedeeld_met_aantal_eenheden == 1
         ]
 
-        for ruimte in ruimten:
-            woningwaarderingen = list(waardeer_verkoeling_en_verwarming(ruimte))
+        woningwaarderingen = list(waardeer_verkoeling_en_verwarming(ruimten))
 
-            woningwaarderingen_voor_gedeeld.append((ruimte, woningwaarderingen))
-
-        # maximering is op basis van de punten voordat ze gedeeld worden door het aantal onzelfstandige woonruimten
-        maximering = list(
-            maximeer_verkoeling_en_verwarming(
-                [
-                    woningwaardering
-                    for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld
-                    for woningwaardering in woningwaarderingen
-                ]
-            )
-        )
-
-        for ruimte, woningwaarderingen in woningwaarderingen_voor_gedeeld:
+        for ruimte, woningwaardering in woningwaarderingen:
             woningwaardering_groep.woningwaarderingen.extend(
                 deel_punten_door_aantal_onzelfstandige_woonruimten(
-                    ruimte, woningwaarderingen
+                    ruimte, [woningwaardering]
                 )
             )
-
-        # maximering hier pas toevoegen voor meer intuitieve volgorde
-        woningwaardering_groep.woningwaarderingen.extend(maximering)
 
         woningwaardering_groep.woningwaarderingen.extend(
             self.criteriumsleutel_resultaten(woningwaardering_groep)
