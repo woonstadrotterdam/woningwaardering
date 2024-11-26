@@ -25,15 +25,6 @@
           "punten": 2.0
         },
         {
-          "criterium": {
-            "naam": "Slaapkamer (gedeeld met 5)",
-            "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
-            }
-          },
-          "punten": 0.4
-        },
-        {
           "aantal": 10.0,
           "criterium": {
             "naam": "Woonkamer (gedeeld met 6)",
@@ -43,6 +34,15 @@
             }
           },
           "punten": 1.67
+        },
+        {
+          "criterium": {
+            "naam": "Slaapkamer (gedeeld met 5)",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_vertrekken"
+            }
+          },
+          "punten": 0.4
         },
         {
           "criterium": {

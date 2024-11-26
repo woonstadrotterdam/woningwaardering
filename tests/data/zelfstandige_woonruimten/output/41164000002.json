@@ -161,15 +161,6 @@
         },
         {
           "criterium": {
-            "naam": "Trappenhuis",
-            "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
             "naam": "Slaapkamer 3",
             "bovenliggendeCriterium": {
               "id": "verwarmde_vertrekken"
@@ -194,6 +185,15 @@
             }
           },
           "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Trappenhuis",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 1.0
         },
         {
           "criterium": {
