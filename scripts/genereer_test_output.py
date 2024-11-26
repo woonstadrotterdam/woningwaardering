@@ -66,7 +66,7 @@ for stelsel_naam in stelsels:
                     )(peildatum=PEILDATUM)
                     woningwaardering_resultaat = (
                         WoningwaarderingResultatenWoningwaarderingResultaat(
-                            groepen=[stelselgroep.bereken(eenheid_input)]
+                            groepen=[stelselgroep.waardeer(eenheid_input)]
                         )
                     )
                 else:
@@ -79,7 +79,7 @@ for stelsel_naam in stelsels:
                             " ", ""
                         ),
                     )(peildatum=PEILDATUM)
-                    woningwaardering_resultaat = stelsel.bereken(eenheid_input)
+                    woningwaardering_resultaat = stelsel.waardeer(eenheid_input)
                 stdout_id = logger.add(sys.stdout, level="INFO")
                 logger.remove(handler_id)
 
