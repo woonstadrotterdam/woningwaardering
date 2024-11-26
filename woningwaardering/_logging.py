@@ -42,5 +42,3 @@ logger.add(
     level="DEBUG",
     filter=custom_filter,
 )
-
-__all__ = ["logger"]

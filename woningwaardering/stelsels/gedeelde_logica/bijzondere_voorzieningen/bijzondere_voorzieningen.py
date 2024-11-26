@@ -2,7 +2,8 @@ from datetime import date
 from decimal import Decimal
 from typing import Iterator
 
-from woningwaardering._logging import logger
+from loguru import logger
+
 from woningwaardering.stelsels.utils import gedeeld_met_eenheden, rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
