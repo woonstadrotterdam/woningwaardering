@@ -616,6 +616,67 @@ Tot slot is er een dakterras van 8m x 6,5m = 52m2. Dit resulteert in 0,75 punt x
 *Totaal*  
 Voor huurder A resulteert dit in 2,35 punt + 0,84375 punt + 1,95 punt = 5,14375 punten, afgerond 5,25 punten.
 
+## Rubriek 9 - Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
+
+### 9.1 Puntentoekenning
+- Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter.  
+- Een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter.  
+- Voorzieningen (verkoeling en verwarming, keuken, sanitair, gehandicaptenvoorziening) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel.  
+De punten worden gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft en vervolgens gedeeld door het aantal onzelfstandige woonruimten op dat adres.
+
+> De rubriek gehandicaptenvoorziening is niet geimplementeerd in de woningwaardering package en zal dus ook niet berekend worden onder "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
+
+~~**Warme maaltijden**  
+Indien het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten.~~
+
+**Gemeenschappelijke ruimten en voorzieningen in een zorgwoning**  
+De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en voorzieningen in een zorgwoning of woon/zorgcomplex de waardering per woning veelal uitkomt op een totaal van ongeveer 3 punten. Om arbeidsintensief meetwerk te voorkomen waardeert de Huurcommissie in dat geval voor de gemeenschappelijke ruimten en voorzieningen een waardering van 3 punten per woning.
+
+### 9.2 Definitie gemeenschappelijke vertrekken en overige ruimten
+Gemeenschappelijke vertrekken en overige ruimten zijn tot het woongebouw behorende binnenruimten waar de bewoners van tenminste twee adressen in het woongebouw volgens de huurovereenkomst exclusieve toegang en gebruiksrecht toe hebben. De huurder(s) moet(en) daarnaast toegang hebben tot de gemeenschappelijke binnenruimte zonder gebruikmaking van vertrekken, overige ruimten of verkeersruimten die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s).
+
+~~Uitgesloten zijn vertrekken en overige ruimten waarvoor ook door derden een vergoeding/huurprijs wordt betaald alsmede vertrekken en ruimten die door de eigenaar/verhuurder in gebruik zijn (bijv. kantoor- ruimte, opslagruimte, e.d.).~~
+
+**Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:**
+~~- zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
+~~- de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
+- de oppervlakte, na deling door het aantal adressen, per woning minstens 2m2 bedraagt.
+
+De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte, afronden in m2, delen door het aantal adressen en waarderen als “overige ruimte”. Dat betekent dat kasten uitkomend in een verkeersruimte niet worden meegeteld.
+
+Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aangesloten bij de definities en meetinstructies zoals toegelicht in paragraaf 1.3 en 2.3 van dit hoofdstuk.
+
+> Wanneer het attribuut `gedeeld_met_aantal_eenheden` van een ruimte groter of gelijk aan 2 is, dan komt de ruimte in aanmerking voor een waardering onder "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen", mits deze voldoet aan de criteria voor vertrekken of overige ruimten.
+
+### 9.3 Rekenmethode en voorbeeldberekening
+
+**Rekenmethode**
+
+1. Bepaal of het een vertrek of een overige ruimte is en reken de oppervlaktepunten:  
+  a. Gemeenschappelijke vertrekken worden met 1 punt per m2 gewaardeerd.  
+  b. Gemeenschappelijke overige ruimten worden met 0,75 punt per m2 gewaardeerd.  
+2. Bepaal de punten voor verkoeling en verwarming conform rubriek 3.  
+3. Bepaal eventueel van toepassing zijnde extra punten conform rubriek 5, 6 en/of 7.  
+4. Saldeer de punten uit de hierboven genoemde stappen.  
+5. Deel dit aantal punten door het aantal adressen dat toegang heeft tot de gemeenschappelijke binnenruimten.  
+6. Deel het aantal punten door het aantal onzelfstandige woonruimten op dat adres.  
+
+
+**Voorbeeld** 
+```text
+Voorbeeld: (A) een gemeenschappelijke binnenruimte met keuken van 20 vierkante meter, en daarnaast (B) een gedeeld toilet van 2 vierkante meter. Tot beiden hebben 4 adressen toegang. Op één van deze adressen zijn vier onzelfstandige woonruimten.
+
+1. Vertrek A voldoet aan de eisen van een vertrek en wordt gewaardeerd met 20 x 1 punt (oppervlakte) conform rubriek 1. Ruimte B voldoet aan de eisen van een overige ruimte en wordt gewaardeerd met 1,5 (2 x 0,75) punt conform rubriek 2.  
+2. Vertrek A is verwarmd middels een radiator en krijgt daarvoor 2 punten conform rubriek 3. Het toilet is onverwarmd en ontvangt daarvoor geen punten.  
+3. In vertrek A wordt voldaan aan de minimumeisen van een keuken conform rubriek 5. Voor deze rubriek wordt 10 punten toegekend (7 voor het aanrecht, en 3 voor de voorzieningen). De toiletruimte B krijgt 4,75 punt (3,75 voor het hangend toilet en 1 voor de wastafel).  
+
+4. Saldering levert op: 20 + 1,5 + 2 + 10 + 4,75 = 38,25  
+5. Delen door het aantal adressen levert op: 38,25 punten/4 = 9.5625 per adres.  
+6.Vervolgens wordt gedeeld door het aantal onzelfstandige woonruimten op het adres, dus 9,5625/4 = 2,390625 punten per onzelfstandige woonruimte.  
+
+Afronden geschiedt op een kwart punt per onzelfstandige woonruimte, in dit geval dus op 2,50.
+```
+
 ## Rubriek 10 - Gemeenschappelijke parkeerruimten 
 
 ### 10.1 Puntentoekenning
@@ -697,6 +758,67 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
   ]
 }
 ```
+
+## Rubriek 11 Punten voor de WOZ-waarde
+
+Punten worden toegekend op basis van de WOZ-waarde van het adres waar de onzelfstandige woonruimte onderdeel van is. WOZ staat voor Wet waardering onroerende zaken. De WOZ-waarde geeft de geschatte marktwaarde van de woning weer zoals volgt uit de Wet waardering onroerende zaken. Deze waarde wordt in principe ieder kalenderjaar door de gemeente vastgesteld, die in de WOZ-beschikking van de desbetreffende woning wordt weergegeven.
+
+De waardepeildatum van de WOZ-waarde ligt op 1 januari van twee kalenderjaren voorafgaand. Ter illustratie: de WOZ-waarde in de WOZ-beschikking van 2024 heeft een waardepeildatum van 1 januari 2022.
+
+> Hier staat een fout in het beleidsboek. Dit moet zijn: Ter illustratie: de WOZ-waarde in de WOZ-beschikking van **2023** heeft een waardepeildatum van 1 januari 2022.
+
+### 11.1 Puntentoekenning
+
+De puntentoekenning is als volgt.
+
+- 14 punten wanneer de WOZ-waarde per m2 gebruiksoppervlakte **meer dan 10%** hoger is dan de gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van de woningen in het COROP-gebied waarbinnen de woning is gelegen.
+- 12 punten wanneer de WOZ-waarde per m2 gebruiksoppervlakte **maximaal 10% hoger of lager** is dan de gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van de woningen in het COROP-gebied waarbinnen de woning is gelegen.
+- 10 punten wanneer de WOZ-waarde per m2 gebruiksoppervlakte **meer dan 10% lager is** dan de gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van de woningen in het COROP-gebied waarbinnen de woning is gelegen.
+
+Punten worden bepaald aan de hand van de gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van woningen in het COROP-gebied, zoals in bijlage 3 is weergegeven. Deze gemiddelden worden elk jaar, met ingang van 1 januari, aangepast met de gemiddelde wijziging van de eigenwoningwaarden van elk COROP-gebied. In de Uitvoeringsregeling huurprijzen woonruimte zijn de COROP-gebieden weergegeven alsmede de daarbij behorende gemiddelde WOZ-waarde per m2 gebruiksoppervlakte van woningen. In deze regeling zijn twee verschillende kolommen weergegeven: één voor de gemiddelden waar nog geen nieuwe WOZ-beschikking voor is afgegeven en één voor de gemiddelden waar wel een nieuwe WOZ-beschikking is afgegeven. De kolommen geven op basis van de peildatum van de WOZ-beschikking weer met welk bedrag moet worden gerekend.'
+
+> Het COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats waarin de eenheid zich bevindt. Hiervoor dient de BAG-woonplaatscode in het attribuut `code` van de woonplaats op het adres van de eenheid gespecificeerd te zijn. Indien dit attribuut niet gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en huisnummertoevoeging bepaald in welke woonplaats een eenheid zich bevindt. Hierbij is het van belang dat deze waarden overeenkomen met de BAG-registratie.
+
+Onder gebruiksoppervlakte in deze rubriek wordt verstaan: de oppervlakte van een verblijfsobject in gehele vierkante meters als bedoeld onder “kenmerken”, te vinden per woning op de officiële site van het WOZ-waardeloket. Het gaat hierbij op de gebruiksoppervlakte van de gehele woning (het adres) waarvan de onzelfstandige woonruimten onderdeel uitmaken.
+
+_Rekenvoorbeeld:_
+
+_De WOZ-waarde van een woning met peildatum 1 januari 2022 is vastgesteld op € 250.000. De woning, waarvan de onzelfstandige woonruimte deel uitmaakt, is gelegen in Amsterdam en heeft een gebruiksoppervlakte van 40 m2._
+
+_De gemeente Amsterdam ligt in het COROP-gebied Groot-Amsterdam dat € 5.596 als gemiddelde WOZ-waarde per vierkante meter heeft. De WOZ-waarde per m2 gebruiksoppervlakte van de woning betreft € 6.250 (250.000 gedeeld door 40). Dit bedrag is 11,69% hoger dan de gemiddelde WOZ-waarde per vierkante meter van het COROP-gebied Groot-Amsterdam. Gelet hierop worden 14 punten aan de onzelfstandige woonruimte toegekend aangezien de WOZ-waarde per m2 gebruiksoppervlakte meer dan 10% hoger is dan de gemiddelde WOZ-waarde per m2 in gebruiksoppervlakte het COROP-gebied Groot-Amsterdam._
+
+### ~~11.2 Ontbreken WOZ-waarde en minimumwaarde~~
+
+~~Als geen WOZ-waarde bekend is, kan als alternatief 85% van de taxatiewaarde van de woning worden gebruikt volgend uit een door een Register-Taxateur opgesteld (hybride)taxatierapport. De verhuurder draagt de verantwoordelijkheid voor het opstellen van dit rapport. De taxatiewaarde geldt totdat een WOZ-waarde is vastgesteld en vervalt voor toepassing van deze rubriek. Als de verhuurder geen taxatierapport heeft aangeleverd dan geldt de minimum WOZ-waarde.~~
+
+> Als er geen WOZ-waarde beschikbaar is, maar wel een taxatiewaarde, dient 85% van deze taxatiewaarde als invoer voor de WOZ-waarde gebruikt te worden.
+
+**Minimumwaarde**
+
+De minimum WOZ-waarde wordt ook gebruikt voor specifieke woningen van specifieke verhuurders, zoals ‘containerwoningen’ die zijn bestemd voor studentenhuisvesting. In die gevallen wordt een minimum WOZ-waarde gehanteerd indien de WOZ-waarde lager is dan deze minimumwaarde. Deze waarde met peildatum 1 januari 2023 bedraagt € 73.607. Zie de tabel hieronder voor de minimumwaarde van de afgelopen jaren.
+
+Tabel 1
+| Peildatum | Minimumwaarde |
+| ------------------ | -------- |
+| Per 1 januari 2021 | € 61.198 |
+| Per 1 januari 2022 | € 71.602 |
+| Per 1 januari 2023 | € 73.607 |
+
+**~~Tijdelijke woning~~**
+
+~~In geval van een tijdelijke woning hanteert de register-taxateur de objectafbakeningsvoorschriften en waarderingsvoorschriften van hoofdstuk III van de Wet WOZ met uitzondering van de voorschriften op grond van artikel 17, vierde lid, en artikel 18, eerste en tweede lid, van de Wet WOZ. In plaats van de voorschriften van artikel 18, eerste en tweede lid, gaat de register-taxateur uit van de staat van de woning na oplevering.~~
+
+~~Onder tijdelijke woning wordt voor deze rubriek een woning verstaan die voor een bepaalde tijd op een tijdelijke locatie (met toegelaten functie wonen of tijdelijke afwijking Omgevingsplan) mogen worden gebouwd. Dit zijn woningen die voldoen aan de eisen die gelden voor nieuwbouw óf die getoetst zijn aan tijdelijke woningen zoals gedefinieerd in het Besluit bouwwerken leefomgeving (termijn van ten hoogste 15 jaar).~~
+
+### ~~11.3 Gebouwd eigendom in aanbouw~~
+
+~~Indien de WOZ-waarde betrekking heeft op een ‘gebouwd eigendom in aanbouw’, als bedoeld in artikel 17 lid 4 Wet WOZ, dan wordt voor de puntentoekenning uitgegaan van de waarde van de woning als ware de bouw voltooid. De WOZ-beschikking zal het voortgangspercentage vermelden. De Huurcommissie heeft dan tot taak de WOZ-waarde gerelateerd aan de voortgang van de aanbouw om te rekenen naar de waarde “als ware de bouw voltooid”, dus naar 100%.~~
+
+~~Onder een ‘gebouwd eigendom in aanbouw’ wordt verstaan een onroerende zaak of gedeelte daarvan waarvoor een omgevingsvergunning is verleend en die door bouw nog niet geschikt is voor gebruik overeenkomstig haar beoogde bestemming. Het gaat hier om de situatie waarbij nieuwbouw/verbouw is begonnen na 1 januari van een lopend jaar en die niet is afgerond voor 1 januari van het daaropvolgende jaar.~~
+
+~~Hiervan is bijvoorbeeld sprake als, in het kader van de WOZ-beschikking 2023 dat als peildatum 1 januari 2022 heeft, de werkzaamheden aan het gehuurde zijn aangevangen na 1 januari 2022 en zijn voltooid ná 1 januari 2023. De WOZ-beschikking 2024, dat als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven “als ware de bouw voltooid”. In dat geval kan de woning worden aangemerkt als ‘een gebouwd eigendom in aanbouw’ als bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.~~
+
+> De omrekening naar 100% voortgangspercentage dient als WOZ-waarde opgegeven te worden.
 
 ## Rubriek 12 - Bijzondere voorzieningen: zorgwoning
 

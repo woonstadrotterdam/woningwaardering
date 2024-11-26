@@ -1,3 +1,3 @@
-from .punten_voor_de_woz_waarde import PuntenVoorDeWOZWaarde
+from .punten_voor_de_woz_waarde import PuntenVoorDeWozWaarde
 
-__all__ = ["PuntenVoorDeWOZWaarde"]
+__all__ = ["PuntenVoorDeWozWaarde"]

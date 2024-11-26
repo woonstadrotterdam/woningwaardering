@@ -1,0 +1,25 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GBA",
+          "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
+        }
+      },
+      "punten": 3.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Zorgwoning"
+          },
+          "punten": 3.0
+        }
+      ]
+    }
+  ]
+}

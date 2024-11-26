@@ -2,9 +2,11 @@ import warnings
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
 from functools import wraps
+from importlib.resources import files
 from typing import Callable, Counter, Iterator, List, Tuple
 
 import pandas as pd
+import requests
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
@@ -13,8 +15,10 @@ from SPARQLWrapper import SPARQLWrapper2
 from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenEenheidadres,
     EenhedenEnergieprestatie,
     EenhedenRuimte,
+    EenhedenWoonplaats,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -84,8 +88,8 @@ def naar_tabel(
 
     table._min_width = {
         "Groep": 33,
-        "Naam": 50,
-        "Aantal": 9,
+        "Naam": 75,
+        "Aantal": 12,
         "Meeteenheid": 19,
         "Punten": 7,
         "Opslag": 7,
@@ -115,6 +119,7 @@ def naar_tabel(
         woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
         aantal_waarderingen = len(woningwaarderingen)
         index = 0
+
         for woningwaardering in [
             woningwaardering
             for woningwaardering in woningwaarderingen
@@ -135,7 +140,7 @@ def naar_tabel(
                         woningwaardering.criterium.meeteenheid.naam
                         if woningwaardering.criterium.meeteenheid is not None
                         else "",
-                        woningwaardering.punten
+                        rond_af(woningwaardering.punten, decimalen=2)
                         if woningwaardering.punten is not None
                         else "",
                         f"{woningwaardering.opslagpercentage:.0%}"
@@ -145,7 +150,26 @@ def naar_tabel(
                     divider=index == aantal_waarderingen,
                 )
 
-                if woningwaardering.criterium.id:
+                def voeg_onderliggende_woningwaarderingen_toe(
+                    table: PrettyTable,
+                    stelselgroep_naam: str,
+                    woningwaardering: WoningwaarderingResultatenWoningwaardering,
+                    woningwaarderingen: list[
+                        WoningwaarderingResultatenWoningwaardering
+                    ],
+                    index: int,
+                    indent: int = 0,
+                ) -> None:
+                    """
+                    Voeg de onderliggende woningwaarderingen toe aan de tabel.
+                    """
+
+                    if (
+                        not woningwaardering.criterium
+                        or not woningwaardering.criterium.id
+                    ):
+                        return
+
                     onderliggende_woningwaarderingen = [
                         onderliggende_woningwaardering
                         for onderliggende_woningwaardering in woningwaarderingen
@@ -155,6 +179,7 @@ def naar_tabel(
                         and onderliggende_woningwaardering.criterium.bovenliggende_criterium.id
                         == woningwaardering.criterium.id
                     ]
+
                     for (
                         onderliggende_woningwaardering
                     ) in onderliggende_woningwaarderingen:
@@ -163,7 +188,7 @@ def naar_tabel(
                             table.add_row(
                                 [
                                     stelselgroep_naam,
-                                    f" - {onderliggende_woningwaardering.criterium.naam}",
+                                    f"{' '*indent} - {onderliggende_woningwaardering.criterium.naam}",
                                     f"[{onderliggende_woningwaardering.aantal}]"
                                     if onderliggende_woningwaardering.aantal is not None
                                     else "",
@@ -171,7 +196,7 @@ def naar_tabel(
                                     if onderliggende_woningwaardering.criterium.meeteenheid
                                     is not None
                                     else "",
-                                    f"[{onderliggende_woningwaardering.punten}]"
+                                    f"[{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}]"
                                     if onderliggende_woningwaardering.punten is not None
                                     else "",
                                     f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
@@ -181,6 +206,25 @@ def naar_tabel(
                                 ],
                                 divider=index == aantal_waarderingen,
                             )
+
+                        voeg_onderliggende_woningwaarderingen_toe(
+                            table,
+                            stelselgroep_naam,
+                            onderliggende_woningwaardering,
+                            woningwaarderingen,
+                            index,
+                            indent=indent + 1,
+                        )
+
+                voeg_onderliggende_woningwaarderingen_toe(
+                    table,
+                    stelselgroep_naam,
+                    woningwaardering,
+                    woningwaarderingen,
+                    index,
+                    indent=0,
+                )
+
         aantallen = [
             Decimal(woningwaardering.aantal)
             for woningwaardering in woningwaarderingen
@@ -224,7 +268,7 @@ def naar_tabel(
                     "Totaal",
                     (subtotaal or "") if not verschillende_meeteenheden else "",
                     meeteenheid if not verschillende_meeteenheden else "",
-                    woningwaardering_groep.punten or "",
+                    rond_af(woningwaardering_groep.punten, decimalen=2) or "",
                     f"{woningwaardering_groep.opslagpercentage:.0%}"
                     if woningwaardering_groep.opslagpercentage is not None
                     else "",
@@ -445,14 +489,14 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
     ) * kwart
 
 
-endpoint_cultureelerfgoed = (
+CULTUREELERFGOED_SPARQL_ENDPOINT = (
     "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
 )
-endpoint_kadaster = (
+KADASTER_SPARQL_ENDPOINT = (
     "https://api.labs.kadaster.nl/datasets/dst/kkg/services/default/sparql"
 )
 
-rijksmonumenten_query_template = """
+RIJKSMONUMENTEN_QUERY_TEMPLATE = """
 PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
 PREFIX bag:<http://bag.basisregistraties.overheid.nl/bag/id/>
 
@@ -465,7 +509,7 @@ WHERE {{
 }}
 """
 
-beschermd_gezicht_query_template = """
+BESCHERMD_GEZICHT_QUERY_TEMPLATE = """
 PREFIX sor: <https://data.kkg.kadaster.nl/sor/model/def/>
 PREFIX nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
 PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
@@ -504,11 +548,11 @@ def is_rijksmonument(verblijfsobject_identificatie: str) -> bool | None:
     if not verblijfsobject_identificatie.isnumeric():
         raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
 
-    rijksmonumenten_query = rijksmonumenten_query_template.format(
+    rijksmonumenten_query = RIJKSMONUMENTEN_QUERY_TEMPLATE.format(
         verblijfsobject_identificatie=verblijfsobject_identificatie,
     )
 
-    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql = SPARQLWrapper2(CULTUREELERFGOED_SPARQL_ENDPOINT)
     sparql.setQuery(rijksmonumenten_query)
     result = sparql.queryAndConvert()
 
@@ -539,12 +583,12 @@ def is_beschermd_gezicht(verblijfsobject_identificatie: str) -> bool | None:
     if not verblijfsobject_identificatie.isnumeric():
         raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
 
-    beschermd_gezicht_query = beschermd_gezicht_query_template.format(
-        endpoint_kadaster=endpoint_kadaster,
+    beschermd_gezicht_query = BESCHERMD_GEZICHT_QUERY_TEMPLATE.format(
+        endpoint_kadaster=KADASTER_SPARQL_ENDPOINT,
         verblijfsobject_identificatie=verblijfsobject_identificatie,
     )
 
-    sparql = SPARQLWrapper2(endpoint_cultureelerfgoed)
+    sparql = SPARQLWrapper2(CULTUREELERFGOED_SPARQL_ENDPOINT)
     sparql.setQuery(beschermd_gezicht_query)
     result = sparql.queryAndConvert()
 
@@ -724,6 +768,18 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     ] or (
         Ruimtedetailsoort.schuur.naam == ruimte.detail_soort.naam
     ):  # Schacht en schuur hebben dezelfde code
+        if (
+            ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
+            and Ruimtesoort.overige_ruimten
+        ):
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            if (
+                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_eenheden))
+            ) >= Decimal("2"):
+                return Ruimtesoort.overige_ruimten
+            else:
+                return None
+
         if ruimte.soort.code == Ruimtesoort.vertrek.code:
             if ruimte.oppervlakte >= 4:
                 return Ruimtesoort.vertrek
@@ -916,3 +972,131 @@ def gedeeld_met_onzelfstandige_woonruimten(
         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 2
     )
+
+
+WOONPLAATS_QUERY_TEMPLATE = """
+prefix sor: <https://data.kkg.kadaster.nl/sor/model/def/>
+prefix nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+select ?identificatie ?naam
+where {{
+  values ?postcode {{ "{postcode}" }}
+  values ?huisnummer {{ {huisnummer} }}
+  values ?huisnummertoevoeging {{ "{huisnummertoevoeging}" }}
+  values ?huisletter {{ "{huisletter}" }}
+
+  ?adres a sor:Nummeraanduiding;
+         sor:postcode ?postcode;
+         sor:ligtAan/sor:ligtIn ?woonplaats;
+         sor:huisnummer ?adresHuisnummer.
+
+  ?woonplaats sor:geregistreerdMet/nen3610:identificatie ?identificatie;
+              skos:prefLabel ?naam.
+
+  optional
+  {{
+    ?adres sor:huisnummer ?adresHuisnummer.
+  }}
+  optional
+  {{
+    ?adres sor:huisnummertoevoeging ?adresHuisnummertoevoeging.
+  }}
+  optional
+  {{
+    ?adres sor:huisletter ?adresHuisletter.
+  }}
+  FILTER(
+    (!BOUND(?adresHuisnummer) && ?huisnummer = "") ||
+    (?adresHuisnummer = ?huisnummer)
+  )
+  FILTER(
+    (!BOUND(?adresHuisletter) && ?huisletter = "") ||
+    (lcase(?adresHuisletter) = lcase(?huisletter))
+  )
+  FILTER(
+    (!BOUND(?adresHuisnummertoevoeging) && ?huisnummertoevoeging = "") ||
+    (lcase(?adresHuisnummertoevoeging) = lcase(?huisnummertoevoeging))
+  )
+}}
+"""
+
+
+def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
+    """
+    Haalt de woonplaats op voor een gegeven adres.
+
+    Args:
+        adres (EenhedenEenheidadres): Adres met woonplaats met woonplaatscode of postcode, huisnummer en optioneel huisletter en huisnummertoevoeging.
+
+    Returns:
+        EenhedenWoonplaats | None: de woonplaats,
+                               of None als de gegevens niet gevonden kunnen worden.
+    """
+    if (
+        adres.woonplaats is not None
+        and adres.woonplaats.code is not None
+        and adres.woonplaats.naam is not None
+    ):
+        return adres.woonplaats
+
+    if not adres.postcode or not adres.huisnummer:
+        return None
+
+    logger.info(
+        f"Adres {adres} bevat geen woonplaats met woonplaatscode. Woonplaats wordt opgehaald via het Kadaster"
+    )
+
+    if not adres.huisnummer.isnumeric():
+        warnings.warn(
+            f'Huisnummer "{adres.huisnummer}" moet numeriek zijn. Maak gebruik van de attributen huisnummer, huisnummerToevoeging en huisletter voor de nummeraanduiding.'
+        )
+
+    query = WOONPLAATS_QUERY_TEMPLATE.format(
+        postcode=adres.postcode.replace(" ", ""),
+        huisnummer=int(adres.huisnummer),
+        huisletter=adres.huisletter or "",
+        huisnummertoevoeging=adres.huisnummer_toevoeging or "",
+    )
+    request_data = {"query": query, "format": "json"}
+
+    try:
+        response = requests.post(KADASTER_SPARQL_ENDPOINT, data=request_data, timeout=5)
+        response.raise_for_status()
+        result = response.json()
+
+        if isinstance(result, list) and len(result) == 1:
+            adres.woonplaats = EenhedenWoonplaats(
+                code=result[0]["identificatie"], naam=result[0]["naam"]
+            )
+            return adres.woonplaats
+        return None
+    except requests.RequestException as e:
+        warnings.warn(f"Fout bij het ophalen van woonplaatsdata: {e}, UserWarning")
+        return None
+
+
+def get_corop_voor_woonplaats(woonplaats_code: str) -> dict[str, str] | None:
+    """
+    Haalt het COROP-gebied op voor een gegeven woonplaatscode.
+
+    Args:
+        woonplaats_code (str): De code van de woonplaats.
+
+    Returns:
+        dict[str, str] | None: Een dictionary met 'code' en 'naam' van het COROP-gebied,
+                               of None als de gegevens niet gevonden kunnen worden.
+    """
+    data = pd.read_csv(
+        files("woningwaardering").joinpath("data/corop/corop.generated.csv"),
+        dtype={"Woonplaatscode": str, "Gemeentecode": str, "COROP-gebiedcode": str},
+    )
+
+    woonplaats_dataframe = data[data["Woonplaatscode"] == woonplaats_code.lstrip("WP")]
+
+    if woonplaats_dataframe.empty:
+        return None
+
+    resultaat = woonplaats_dataframe.iloc[0]
+
+    return {"code": resultaat["COROP-gebiedcode"], "naam": resultaat["COROP-gebied"]}
