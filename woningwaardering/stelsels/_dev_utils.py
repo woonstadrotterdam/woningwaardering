@@ -59,7 +59,7 @@ def waardeer(
     elif isinstance(instance, Stelsel):
         resultaat = instance.waardeer(eenheid)
 
-    elif hasattr(instance, "bereken"):  # Woningwaardering class
+    elif hasattr(instance, "waardeer"):  # Woningwaardering class
         resultaat = instance.waardeer(eenheid)
     else:
         raise ValueError(f"Ongeldig stelselgroep of stelsel: {instance}")
