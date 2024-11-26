@@ -69,6 +69,8 @@ b. de woonruimte behoort tot een woning die is gebouwd voor 1965; en
 c. de woonruimte niet bestaat uit of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet of van een door het college van burgemeester en wethouders aangewezen gemeentelijk monument of een door gedeputeerde staten aangewezen provinciaal monument.
 De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief beleid. Dit betekent dat het aan de verhuurder is om aan te tonen dat de woonruimte aan de voorwaarden voor deze prijsopslag voldoet.
 
+# Hoofdstuk 3 - De rubrieken van het woningwaarderingsstelsel onzelfstandige woonruimte
+
 ## Rubriek 1 - Oppervlakte van vertrekken
 
 ### 1.1 Puntentoekenning
