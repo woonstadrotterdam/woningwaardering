@@ -106,7 +106,11 @@ De overige rubrieken van het woningwaarderingsstelsel zijn woonvoorzieningen voo
 Vertrekken worden gewaardeerd met 1 punt per vierkante meter.
 
 ### 1.2 Wat zijn vertrekken?
-> Een ruimte moet `Ruimtesoort` `vertrek` hebben om in aanmerking te komen voor een waardering in de rubriek oppervlakte van vertrekken. Wanneer de ruimte voldoet aan de eisen van een vertrek dan wordt deze gewaardeerd onder oppervlakte van vertekken. Wanneer een vertrek niet aan de eisen van een vertrek voldoet, dan wordt er gekeken of de ruimte wel gewaardeeerd kan worden onder de rubriek oppervlakte van overige ruimten.
+> De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'.
+> 
+> Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
+>
+> Wanneer een ruimte met Ruimtesoort vertrek niet voldoet aan de minimale oppervlakte, wordt er gekeken of de ruimte gewaardeeerd kan worden onder de rubriek 'Oppervlakte van overige ruimten'.
 
 Een ruimte wordt als vertrek gewaardeerd als deze voldoet aan de volgende eisen:
 
@@ -188,13 +192,15 @@ Totaal : 26,73 m² Afronding op hele m² : 27 m².
 Dit vertaalt zich dan naar 27 \* 1 punt (per m2) = 27 punten
 
 ## Rubriek 2 Oppervlakte van overige ruimten
-> Een ruimte moet `Ruimtesoort` `vertrek` of `overige_ruimte` hebben om in aanmerking te komen voor een waardering in de rubriek oppervlakte van overige ruimten. Wanneer een ruimte voldoet aan de eisen van een overige ruimte dan wordt deze gewaardeerd in de rubriek oppervlakte van overige ruimten.
 
 ### 2.1 Puntentoekenning
 Overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter.
 
 ### 2.2 Wat zijn overige ruimten?
 
+> De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte dient `Ruimtesoort` `overige ruimte` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van overige ruimten'.
+> 
+> Een ruimte dient alleen als overige ruimte gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 Een ruimte wordt als overige ruimte gewaardeerd als deze voldoet aan de volgende eisen:
 
 *   ~~de vloer moet begaanbaar zijn;~~
