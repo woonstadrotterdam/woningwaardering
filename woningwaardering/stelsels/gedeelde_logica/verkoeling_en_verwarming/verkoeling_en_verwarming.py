@@ -32,7 +32,7 @@ def _waardeer_verwarmde_overige_ruimte(
     ruimten: list[EenhedenRuimte],
 ) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
     """
-    Verwarmde overige ruimten tellen als 1 punt voor verwarmde overige ruimten.
+    Verwarmde overige ruimten tellen als 1 punt voor verwarmde overige ruimten tot een maximum van 4 punten.
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
@@ -86,7 +86,8 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 ) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
     """
     Verkoelde en verwarmde vertrekken tellen voor 2 punten per verwarmd vertrek.
-    Een verkoeld en verwarmd vertrek telt voor 3 punten.
+    Indien een verwarmd vertrek ook verkoeld is, wordt er 1 punt extra toegekend.
+    Het maximum aantal extra punten voor vertrekken die verkoeld en verwarmd zijn is 2.
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
