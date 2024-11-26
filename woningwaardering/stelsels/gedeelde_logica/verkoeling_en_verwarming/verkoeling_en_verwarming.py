@@ -22,7 +22,7 @@ from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 def waardeer_verkoeling_en_verwarming(
     ruimten: list[EenhedenRuimte],
-) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
     yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(ruimten)
     yield from _waardeer_verwarmde_overige_ruimte(ruimten)
     yield from _waardeer_open_keuken(ruimten)
@@ -35,10 +35,10 @@ def _waardeer_verwarmde_overige_ruimte(
     Verwarmde overige ruimten tellen als 1 punt voor verwarmde overige ruimten.
 
     Args:
-        ruimte (EenhedenRuimte): Ruimte om te waarderen
+        ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
 
-    Returns:
-        Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]: Waarderingen voor verwarmde overige ruimten
+    Yields:
+        tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]: Tuple van ruimte en waardering voor verwarmde overige ruimten
     """
     totaal_punten = 0
     for ruimte in ruimten:
@@ -89,10 +89,10 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     Een verkoeld en verwarmd vertrek telt voor 3 punten.
 
     Args:
-        ruimte (EenhedenRuimte): Ruimte om te waarderen
+        ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
 
-    Returns:
-        WoningwaarderingResultatenWoningwaardering | None: Waardering voor verkoelde en verwarmde vertrekken
+    Yields:
+        tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
     """
     totaal_punten_verkoeld_en_verwarmd = 0
     for ruimte in ruimten:
@@ -161,10 +161,10 @@ def _waardeer_open_keuken(
     Open keuken tellen voor 2 punten per verwarmd vertrek.
 
     Args:
-        ruimte (EenhedenRuimte): Ruimte om te waarderen
+        ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
 
-    Returns:
-        WoningwaarderingResultatenWoningwaardering | None: Waardering voor open keuken
+    Yields:
+        tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]: Tuple van ruimte en waardering voor open keuken
     """
     for ruimte in ruimten:
         if (
