@@ -61,6 +61,7 @@ class Buitenruimten(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
+        gedeeld_met_m2_som: defaultdict[int, float] = defaultdict(float)
         # punten per buitenruimte
         for ruimte in eenheid.ruimten or []:
             woningwaarderingen = self._punten_per_buitenruimte(ruimte)
@@ -87,6 +88,13 @@ class Buitenruimten(Stelselgroep):
                     if woningwaardering.punten is not None:
                         gedeeld_met_counter[1] += woningwaardering.punten
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+                gedeeld_met_m2_som[
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                ] += (
+                    woningwaardering.aantal
+                    if isinstance(woningwaardering.aantal, float)
+                    else 0
+                )
 
         # minimaal 2 punten bij aanwezigheid van privé buitenruimten
         if (result := self._saldering(eenheid, woningwaardering_groep)) is not None:
@@ -106,6 +114,10 @@ class Buitenruimten(Stelselgroep):
                 else f"{self.stelselgroep.name}_prive",
             )
             woningwaardering.punten = punten
+            woningwaardering.criterium.meeteenheid = (
+                Meeteenheid.vierkante_meter_m2.value
+            )
+            woningwaardering.aantal = gedeeld_met_m2_som[aantal]
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         woningwaardering_groep.punten = sum(
@@ -206,7 +218,7 @@ class Buitenruimten(Stelselgroep):
                 return
 
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt mee voor {self.stelselgroep.naam}."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte:.2f}m2 telt mee voor {self.stelselgroep.naam}."
             )
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
