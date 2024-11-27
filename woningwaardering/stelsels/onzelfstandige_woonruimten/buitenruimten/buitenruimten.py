@@ -46,137 +46,6 @@ class Buitenruimten(Stelselgroep):
             peildatum=peildatum,
         )
 
-    @staticmethod
-    def _maximering(
-        eenheid: EenhedenEenheid,
-        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
-    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        punten = sum(
-            woningwaardering.punten
-            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-            if woningwaardering.punten is not None
-            and woningwaardering.criterium is not None
-            and woningwaardering.criterium.bovenliggende_criterium is None
-        )
-        max_punten = 15
-        if (
-            punten > max_punten and woningwaardering_groep.woningwaarderingen
-        ):  # maximaal 15 punten
-            aftrek = max_punten - punten
-
-            logger.info(
-                f"Eenheid ({eenheid.id}): maximaal aantal punten voor buitenruimten overschreden ({punten} > {max_punten}). Een aftrek van {aftrek} punt(en) wordt toegepast."
-            )
-            punten += aftrek
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = (
-                WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Maximaal 15 punten",
-                )
-            )
-            woningwaardering.punten = float(aftrek)
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
-
-        woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
-        return woningwaardering_groep
-
-    @staticmethod
-    def _punten_per_buitenruimte(
-        ruimte: EenhedenRuimte,
-    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte or (
-            ruimte.detail_soort is not None
-            and ruimte.detail_soort.code
-            in [
-                Ruimtedetailsoort.stalling_extern.code,
-                Ruimtedetailsoort.stalling_intern.code,
-            ]
-        ):
-            if not ruimte.oppervlakte:
-                warnings.warn(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte",
-                    UserWarning,
-                )
-                return
-            if gedeeld_met_eenheden(ruimte):
-                # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
-                if not (ruimte.lengte and ruimte.breedte):
-                    warnings.warn(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
-                        UserWarning,
-                    )
-                if (
-                    (ruimte.hoogte and ruimte.hoogte < 2)
-                    or (ruimte.lengte and ruimte.lengte < 1.5)
-                    or (ruimte.breedte and ruimte.breedte < 1.5)
-                ):
-                    logger.info(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
-                    )
-                    return
-            # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
-            if (
-                ruimte.detail_soort
-                and ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
-                and gedeeld_met_eenheden(ruimte)
-                or gedeeld_met_onzelfstandige_woonruimten(ruimte)
-            ):
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde parkeerplaats en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
-                )
-                return
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                naam=ruimte.naam
-                if not gedeeld_met_eenheden(ruimte)
-                else f"{ruimte.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)",
-            )
-            woningwaardering.aantal = float(
-                utils.rond_af(ruimte.oppervlakte, decimalen=2)
-            )
-            # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,75 punt.
-            # De in ieder geval 2 punten worden verderop toegevoegd.
-            if gedeeld_met_onzelfstandige_woonruimten(ruimte):
-                woningwaardering.punten = float(
-                    Decimal(str(ruimte.oppervlakte))
-                    * Decimal("0.75")
-                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 1))
-                    / Decimal(str(ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten))
-                )
-            else:
-                woningwaardering.punten = float(
-                    Decimal(str(ruimte.oppervlakte))
-                    * Decimal("0.35")
-                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 1))
-                )
-            yield woningwaardering
-
-    def _saldering(
-        self,
-        eenheid: EenhedenEenheid,
-        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
-    ) -> WoningwaarderingResultatenWoningwaardering | None:
-        # 2 punten bij de aanwezigheid van privé buitenruimten
-        if woningwaardering_groep.woningwaarderingen and any(
-            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            and not gedeeld_met_eenheden(ruimte)
-            and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
-            for ruimte in eenheid.ruimten or []
-        ):
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = (
-                WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Privé buitenruimten aanwezig",
-                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.name}_prive"
-                    ),
-                )
-            )
-            woningwaardering.punten = 2.0
-            return woningwaardering
-        return None
-
     def waardeer(
         self,
         eenheid: EenhedenEenheid,
@@ -254,6 +123,149 @@ class Buitenruimten(Stelselgroep):
             f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
+
+    def _maximering(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        punten = sum(
+            woningwaardering.punten
+            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+            if woningwaardering.punten is not None
+            and woningwaardering.criterium is not None
+            and woningwaardering.criterium.bovenliggende_criterium is None
+        )
+        max_punten = 15
+        if (
+            punten > max_punten and woningwaardering_groep.woningwaarderingen
+        ):  # maximaal 15 punten
+            aftrek = max_punten - punten
+
+            logger.info(
+                f"Eenheid ({eenheid.id}): maximaal aantal punten voor {self.stelselgroep.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
+            )
+            punten += aftrek
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Maximaal 15 punten",
+                )
+            )
+            woningwaardering.punten = float(aftrek)
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+        woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
+        return woningwaardering_groep
+
+    def _punten_per_buitenruimte(
+        self,
+        ruimte: EenhedenRuimte,
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte or (
+            ruimte.detail_soort is not None
+            and ruimte.detail_soort.code
+            in [
+                Ruimtedetailsoort.stalling_extern.code,
+                Ruimtedetailsoort.stalling_intern.code,
+            ]
+        ):
+            if not ruimte.oppervlakte:
+                warnings.warn(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte",
+                    UserWarning,
+                )
+                return
+            if gedeeld_met_eenheden(ruimte):
+                # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
+                if not (ruimte.lengte and ruimte.breedte):
+                    warnings.warn(
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
+                        UserWarning,
+                    )
+                if (
+                    (ruimte.hoogte and ruimte.hoogte < 2)
+                    or (ruimte.lengte and ruimte.lengte < 1.5)
+                    or (ruimte.breedte and ruimte.breedte < 1.5)
+                ):
+                    logger.debug(
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en telt daarom niet mee voor {self.stelselgroep.naam}."
+                    )
+                    return
+            # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
+            if (
+                ruimte.detail_soort
+                and ruimte.detail_soort.code
+                == Ruimtedetailsoort.parkeerplaats.code  # parkeerplaats heeft als ruimtesoort buitenruimte
+                and gedeeld_met_eenheden(ruimte)
+                or gedeeld_met_onzelfstandige_woonruimten(ruimte)
+            ):
+                logger.debug(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde parkeerplaats en telt daarom niet mee voor {self.stelselgroep.naam}."
+                )
+                return
+
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt mee voor {self.stelselgroep.naam}."
+            )
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                naam=ruimte.naam
+                if not gedeeld_met_eenheden(ruimte)
+                else f"{ruimte.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)",
+            )
+            woningwaardering.aantal = float(
+                utils.rond_af(ruimte.oppervlakte, decimalen=2)
+            )
+            # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,75 punt.
+            # De in ieder geval 2 punten worden verderop toegevoegd.
+            if gedeeld_met_onzelfstandige_woonruimten(ruimte):
+                woningwaardering.punten = float(
+                    Decimal(str(ruimte.oppervlakte))
+                    * Decimal("0.75")
+                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 1))
+                    / Decimal(str(ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten))
+                )
+            else:
+                woningwaardering.punten = float(
+                    Decimal(str(ruimte.oppervlakte))
+                    * Decimal("0.35")
+                    / Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 1))
+                )
+            yield woningwaardering
+        else:
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {self.stelselgroep.naam}."
+            )
+
+    def _saldering(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
+        # 2 punten bij de aanwezigheid van privé buitenruimten
+        if woningwaardering_groep.woningwaarderingen and any(
+            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
+            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
+            for ruimte in eenheid.ruimten or []
+        ):
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Privé buitenruimten aanwezig",
+                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                        id=f"{self.stelselgroep.name}_prive"
+                    ),
+                )
+            )
+            woningwaardering.punten = 2.0
+            logger.info(
+                f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig, {woningwaardering.punten} punten voor {self.stelselgroep.naam}."
+            )
+            return woningwaardering
+        return None
 
 
 if __name__ == "__main__":  # pragma: no cover
