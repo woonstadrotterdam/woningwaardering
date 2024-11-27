@@ -293,7 +293,7 @@ class Buitenruimten(Stelselgroep):
             woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): Woningwaardering groep van buitenruimten.
 
         Returns:
-            WoningwaarderingResultatenWoningwaardering | None: Punten als er privé buitenruimten aanwezig zijn.
+            WoningwaarderingResultatenWoningwaardering | None: Woningwaardering met 2 punten als er privé buitenruimten aanwezig zijn.
         """
         # 2 punten bij de aanwezigheid van privé buitenruimten
         if woningwaardering_groep.woningwaarderingen and any(
