@@ -235,15 +235,12 @@ class Buitenruimten(Stelselgroep):
                         f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en telt daarom niet mee voor {self.stelselgroep.naam}."
                     )
                     return
-            # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
+            # Parkeerplaatsen worden alleen gewaardeerd als ze niet gedeeld zijn met andere eenheden
             if (
                 ruimte.detail_soort
                 and ruimte.detail_soort.code
                 == Ruimtedetailsoort.parkeerplaats.code  # parkeerplaats heeft als ruimtesoort buitenruimte
-                and (
-                    gedeeld_met_eenheden(ruimte)
-                    or gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                )
+                and gedeeld_met_eenheden(ruimte)
             ):
                 logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde parkeerplaats en telt daarom niet mee voor {self.stelselgroep.naam}."
