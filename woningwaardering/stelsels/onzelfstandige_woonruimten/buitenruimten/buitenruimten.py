@@ -209,8 +209,10 @@ class Buitenruimten(Stelselgroep):
                 ruimte.detail_soort
                 and ruimte.detail_soort.code
                 == Ruimtedetailsoort.parkeerplaats.code  # parkeerplaats heeft als ruimtesoort buitenruimte
-                and gedeeld_met_eenheden(ruimte)
-                or gedeeld_met_onzelfstandige_woonruimten(ruimte)
+                and (
+                    gedeeld_met_eenheden(ruimte)
+                    or gedeeld_met_onzelfstandige_woonruimten(ruimte)
+                )
             ):
                 logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde parkeerplaats en telt daarom niet mee voor {self.stelselgroep.naam}."
