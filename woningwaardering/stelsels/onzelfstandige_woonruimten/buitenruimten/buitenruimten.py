@@ -60,8 +60,8 @@ class Buitenruimten(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen = []
-        gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
-        gedeeld_met_m2_som: defaultdict[int, float] = defaultdict(float)
+        gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
+        gedeeld_met_m2_som: defaultdict[int, Decimal] = defaultdict(Decimal)
         # punten per buitenruimte
         for ruimte in eenheid.ruimten or []:
             woningwaarderingen = self._punten_per_buitenruimte(ruimte)
@@ -76,7 +76,7 @@ class Buitenruimten(Stelselgroep):
                     if woningwaardering.punten is not None:
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                        ] += woningwaardering.punten
+                        ] += Decimal(str(woningwaardering.punten))
                 elif not gedeeld_met_onzelfstandige_woonruimten(
                     ruimte
                 ) and not gedeeld_met_eenheden(ruimte):
@@ -86,21 +86,23 @@ class Buitenruimten(Stelselgroep):
                         )
                     )
                     if woningwaardering.punten is not None:
-                        gedeeld_met_counter[1] += woningwaardering.punten
+                        gedeeld_met_counter[1] += Decimal(str(woningwaardering.punten))
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
                 gedeeld_met_m2_som[
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                ] += (
-                    woningwaardering.aantal
-                    if isinstance(woningwaardering.aantal, float)
-                    else 0
+                ] += Decimal(
+                    str(
+                        woningwaardering.aantal
+                        if isinstance(woningwaardering.aantal, float)
+                        else 0
+                    )
                 )
 
         # minimaal 2 punten bij aanwezigheid van privé buitenruimten
         if (result := self._saldering(eenheid, woningwaardering_groep)) is not None:
             woningwaardering_groep.woningwaarderingen.append(result)
             if result.punten is not None:
-                gedeeld_met_counter[1] += result.punten
+                gedeeld_met_counter[1] += Decimal(str(result.punten))
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal, punten in gedeeld_met_counter.items():
@@ -113,19 +115,21 @@ class Buitenruimten(Stelselgroep):
                 if aantal > 1
                 else f"{self.stelselgroep.name}_prive",
             )
-            woningwaardering.punten = punten
+            woningwaardering.punten = float(punten)
             woningwaardering.criterium.meeteenheid = (
                 Meeteenheid.vierkante_meter_m2.value
             )
-            woningwaardering.aantal = gedeeld_met_m2_som[aantal]
+            woningwaardering.aantal = float(gedeeld_met_m2_som[aantal])
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        woningwaardering_groep.punten = sum(
-            woningwaardering.punten
-            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-            if woningwaardering.punten is not None
-            and woningwaardering.criterium is not None
-            and woningwaardering.criterium.bovenliggende_criterium is None
+        woningwaardering_groep.punten = float(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+                and woningwaardering.criterium is not None
+                and woningwaardering.criterium.bovenliggende_criterium is None
+            )
         )
 
         # maximaal 15 punten
