@@ -5,21 +5,17 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_keuken,
+    waardeer_oppervlakte_van_overige_ruimte,
+    waardeer_oppervlakte_van_vertrek,
+    waardeer_sanitair,
+    waardeer_verkoeling_en_verwarming,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import Keuken
-from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_overige_ruimten import (
-    OppervlakteVanOverigeRuimten,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken import (
-    OppervlakteVanVertrekken,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair import Sanitair
-from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming import (
-    VerkoelingEnVerwarming,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -52,7 +48,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -61,8 +57,8 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.value,
+                stelsel=self.stelsel.value,
+                stelselgroep=self.stelselgroep.value,
             )
         )
 
@@ -80,7 +76,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             and eenheid.doelgroep.code == Doelgroep.zorg.code
         ):
             logger.info(
-                f"Eenheid {eenheid.id} is een zorgwoning en wordt met 3 punten gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
+                f"Eenheid ({eenheid.id}) is een zorgwoning en wordt met 3 punten gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
             )
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
@@ -98,8 +94,8 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             ]
 
             oppervlakte_berekeningen = {
-                Ruimtesoort.vertrek: OppervlakteVanVertrekken.genereer_woningwaarderingen,
-                Ruimtesoort.overige_ruimten: OppervlakteVanOverigeRuimten.genereer_woningwaarderingen,
+                Ruimtesoort.vertrek: waardeer_oppervlakte_van_vertrek,
+                Ruimtesoort.overige_ruimten: waardeer_oppervlakte_van_overige_ruimte,
             }
 
             for ruimte in gedeelde_ruimten:
@@ -113,9 +109,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 oppervlakte_berekening = oppervlakte_berekeningen.get(ruimtesoort, None)
 
                 if oppervlakte_berekening is not None:
-                    oppervlakte_waarderingen = list(
-                        oppervlakte_berekening(ruimte, self.stelselgroep)
-                    )
+                    oppervlakte_waarderingen = list(oppervlakte_berekening(ruimte))
                 # Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
                 #
                 # […]
@@ -128,7 +122,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                         )
                         if gedeelde_oppervlakte < Decimal("2.0"):
                             logger.info(
-                                f"Eenheid {eenheid.id}: {Ruimtedetailsoort.berging.naam} ({ruimte.id}) heeft, na deling door het aantal adressen, een oppervlakte van minder dan 2 m2 en wordt daarom niet gewaardeerd onder {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
+                                f"Eenheid ({eenheid.id}): {Ruimtedetailsoort.berging.naam} ({ruimte.id}) heeft, na deling door het aantal adressen, een oppervlakte van minder dan 2 m2 en wordt daarom niet gewaardeerd onder {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
                             )
                             oppervlakte_waarderingen = []
 
@@ -151,9 +145,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 )
 
                 # waarderingen voor de keuken van gedeelde ruimten
-                keuken_waarderingen = list(
-                    Keuken.genereer_woningwaarderingen(ruimte, self.stelselgroep)
-                )
+                keuken_waarderingen = list(waardeer_keuken(ruimte, self.stelsel))
                 woningwaardering_groep.woningwaarderingen.extend(
                     self.deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, keuken_waarderingen
@@ -162,7 +154,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
                 # waarderingen voor sanitair van gedeelde ruimten
                 sanitair_waarderingen = list(
-                    Sanitair.genereer_woningwaarderingen(ruimte, self.stelselgroep)
+                    waardeer_sanitair(ruimte, self.stelselgroep, self.stelsel)
                 )
                 woningwaardering_groep.woningwaarderingen.extend(
                     self.deel_woningwaarderingen_door_aantal_eenheden(
@@ -172,9 +164,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
             # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
             verkoeling_en_verwarming_waarderingen = list(
-                VerkoelingEnVerwarming.genereer_woningwaarderingen(
-                    gedeelde_ruimten, self.stelselgroep
-                )
+                waardeer_verkoeling_en_verwarming(gedeelde_ruimten)
             )
 
             for ruimte, waardering in verkoeling_en_verwarming_waarderingen:
@@ -195,7 +185,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
@@ -224,8 +214,9 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(),
-        eenheid_input="tests/data/generiek/input/37101000032.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/generiek/input/37101000032.json")

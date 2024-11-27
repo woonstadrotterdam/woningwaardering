@@ -1,6 +1,6 @@
 from datetime import date
 
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     BijzondereVoorzieningen,
@@ -46,8 +46,9 @@ class ZelfstandigeWoonruimten(Stelsel):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=ZelfstandigeWoonruimten(),
-        eenheid_input="tests/data/generiek/input/37101000032.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/generiek/input/37101000032.json")

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
+from tests.utils import assert_output_model, laad_specifiek_input_en_output_model
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     Sanitair,
 )
@@ -18,7 +18,7 @@ def test_Sanitair(
     onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     sanitair = Sanitair(peildatum=peildatum)
-    resultaat = sanitair.bereken(
+    resultaat = sanitair.waardeer(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -32,7 +32,7 @@ def test_Sanitair_output(onzelfstandige_woonruimten_input_en_outputmodel, peilda
     sanitair = Sanitair(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [sanitair.bereken(eenheid_input)]
+    resultaat.groepen = [sanitair.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -58,7 +58,7 @@ def test_Sanitair_specifiek_output(specifieke_input_en_output_model, peildatum):
     sanitair = Sanitair(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [sanitair.bereken(eenheid_input)]
+    resultaat.groepen = [sanitair.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

@@ -5,11 +5,9 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.gedeelde_logica import waardeer_sanitair
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.sanitair.sanitair import (
-    Sanitair as ZelfstandigeWoonruimtenSanitair,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -43,10 +41,10 @@ class Sanitair(Stelselgroep):
 
     @staticmethod
     def genereer_woningwaarderingen(
-        ruimten: list[EenhedenRuimte], stelselgroep: Woningwaarderingstelselgroep
+        ruimten: list[EenhedenRuimte],
+        stelselgroep: Woningwaarderingstelselgroep,
     ) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
         woningwaarderingen_voor_gedeeld = []
-
         # * tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer.
         # Op een adres met minimaal acht of meer onzelfstandige woonruimten geldt dit maximum niet voor maximaal één ruimte.
         # Dat betekent dat er voor adressen met acht of meer onzelfstandige woonruimten maximaal één ruimte mag zijn,
@@ -59,8 +57,10 @@ class Sanitair(Stelselgroep):
 
         for ruimte in ruimten:
             woningwaarderingen = list(
-                ZelfstandigeWoonruimtenSanitair.genereer_woningwaarderingen(
-                    ruimte, stelselgroep
+                waardeer_sanitair(
+                    ruimte,
+                    stelselgroep,
+                    Woningwaarderingstelsel.onzelfstandige_woonruimten,
                 )
             )
             # zoek het maximum aantal wastafels in een ruimte m.u.v. badkamer
@@ -137,7 +137,7 @@ class Sanitair(Stelselgroep):
                         and woningwaardering.aantal > 1
                     ):
                         logger.info(
-                            f"Ruimte {ruimte.naam} ({ruimte.id}) heeft {woningwaardering.aantal} wastafels. Maximaal 1 punt voor wastafels."
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {woningwaardering.aantal} wastafels. Maximaal 1 punt voor wastafels."
                         )
                         woningwaarderingen.insert(
                             index + 1,
@@ -170,7 +170,7 @@ class Sanitair(Stelselgroep):
                         and woningwaardering.aantal > 1
                     ):
                         logger.info(
-                            f"Ruimte {ruimte.naam} ({ruimte.id}) heeft {woningwaardering.aantal} meerpersoonswastafels. Maximaal 1,5 punt voor meerpersoonswastafels."
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {woningwaardering.aantal} meerpersoonswastafels. Maximaal 1,5 punt voor meerpersoonswastafels."
                         )
                         woningwaarderingen.insert(
                             index + 1,
@@ -184,7 +184,6 @@ class Sanitair(Stelselgroep):
                                 ),
                             ),
                         )
-
             woningwaarderingen_met_maximering.append((ruimte, woningwaarderingen))
 
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
@@ -218,7 +217,6 @@ class Sanitair(Stelselgroep):
                     gedeeld_met_counter[1] += woningwaardering.punten or 0
 
                 yield ruimte, woningwaardering
-            # woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal, punten in gedeeld_met_counter.items():
@@ -233,9 +231,8 @@ class Sanitair(Stelselgroep):
             )
             woningwaardering.punten = float(utils.rond_af_op_kwart(punten))
             yield ruimte, woningwaardering
-            # woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -244,8 +241,8 @@ class Sanitair(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.sanitair.value,
+                stelsel=self.stelsel.value,
+                stelselgroep=self.stelselgroep.value,
             )
         )
         woningwaardering_groep.woningwaarderingen = []
@@ -272,15 +269,16 @@ class Sanitair(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.sanitair.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
 
         return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=Sanitair(),
-        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

@@ -5,11 +5,11 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.oppervlakte_van_vertrekken.oppervlakte_van_vertrekken import (
-    OppervlakteVanVertrekken as ZelfstandigeWoonruimtenOppervlakteVanVertrekken,
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_oppervlakte_van_vertrek,
 )
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingCriteriumSleutels,
@@ -39,7 +39,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -48,8 +48,8 @@ class OppervlakteVanVertrekken(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
+                stelsel=self.stelsel.value,
+                stelselgroep=self.stelselgroep.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
             )
         )
 
@@ -58,11 +58,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
 
         for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = list(
-                ZelfstandigeWoonruimtenOppervlakteVanVertrekken.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep
-                )
-            )
+            woningwaarderingen = list(waardeer_oppervlakte_van_vertrek(ruimte))
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for woningwaardering in woningwaarderingen:
                 if woningwaardering.criterium is not None:
@@ -122,14 +118,15 @@ class OppervlakteVanVertrekken(Stelselgroep):
         woningwaardering_groep.punten = punten
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=OppervlakteVanVertrekken(),
-        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

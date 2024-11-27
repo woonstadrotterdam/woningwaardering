@@ -30,7 +30,6 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatiestatus,
     Ruimtedetailsoort,
     Ruimtesoort,
-    Woningwaarderingstelsel,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
@@ -370,9 +369,11 @@ def energieprestatie_met_geldig_label(
     Returns:
         EenhedenEnergieprestatie | None: De eerst geldige energieprestatie en None wanneer er geen geldige energieprestatie met label is gevonden.
     """
-
-    if eenheid.energieprestaties is None:
-        warnings.warn(f"Eenheid {eenheid.id}: 'Energieprestaties' is None", UserWarning)
+    aantal_energieprestaties = len(eenheid.energieprestaties or [])
+    if aantal_energieprestaties == 0:
+        warnings.warn(
+            f"Eenheid ({eenheid.id}): 'energieprestaties' is None", UserWarning
+        )
         return None
 
     vereiste_attributen: List[
@@ -386,14 +387,16 @@ def energieprestatie_met_geldig_label(
         ("label", lambda ep: ep.label is not None and ep.label.code is not None),
     ]
 
-    for energieprestatie in eenheid.energieprestaties:
-        logger.debug(f"Eenheid {eenheid.id}: valideer energieprestatie.")
+    for idx, energieprestatie in enumerate(eenheid.energieprestaties or []):
+        logger.debug(
+            f"Eenheid ({eenheid.id}): energieprestatie {idx + 1} van {aantal_energieprestaties} wordt gevalideerd."
+        )
         ontbrekende_attributen = [
             naam for naam, check in vereiste_attributen if not check(energieprestatie)
         ]
         if ontbrekende_attributen:
             logger.debug(
-                f"Eenheid {eenheid.id} mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
+                f"Eenheid ({eenheid.id}) mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
             )
             continue
 
@@ -406,7 +409,7 @@ def energieprestatie_met_geldig_label(
             Energieprestatiesoort.voorlopig_energielabel.code,
         }:
             logger.debug(
-                f"Eenheid {eenheid.id}: Ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
+                f"Eenheid ({eenheid.id}): ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
             )
             continue
 
@@ -414,7 +417,7 @@ def energieprestatie_met_geldig_label(
             energieprestatie.begindatum <= peildatum < energieprestatie.einddatum
         ):
             logger.debug(
-                f"Eenheid {eenheid.id}: Peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
+                f"Eenheid ({eenheid.id}): peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
             )
             continue
 
@@ -422,7 +425,7 @@ def energieprestatie_met_geldig_label(
             energieprestatie.status.code != Energieprestatiestatus.definitief.code
         ):
             logger.debug(
-                f"Eenheid {eenheid.id}: Energieprestatie status is niet definitief."
+                f"Eenheid ({eenheid.id}): energieprestatie status is niet definitief."
             )
             continue
 
@@ -434,15 +437,21 @@ def energieprestatie_met_geldig_label(
             )
         ):
             logger.debug(
-                f"Eenheid {eenheid.id}: Registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
+                f"Eenheid ({eenheid.id}): registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
             )
             continue
 
-        logger.info(f"Eenheid {eenheid.id}: Geldige energieprestatie gevonden.")
-        logger.debug(f"Energieprestatie: {energieprestatie}")
+        logger.info(f"Eenheid ({eenheid.id}): geldige energieprestatie gevonden.")
+        logger.debug(
+            f"Energieprestatie: id={energieprestatie.id} soort={energieprestatie.soort.naam if energieprestatie.soort else None}"
+            f" status={energieprestatie.status.naam if energieprestatie.status else None}"
+            f" label={energieprestatie.label.naam if energieprestatie.label else None}"
+            f" waarde={energieprestatie.waarde} begindatum={energieprestatie.begindatum}"
+            f" einddatum={energieprestatie.einddatum} registratiedatum={energieprestatie.registratiedatum.date() if energieprestatie.registratiedatum else None}"
+        )
         return energieprestatie
 
-    logger.info(f"Eenheid {eenheid.id}: Geen geldige energieprestatie gevonden.")
+    logger.info(f"Eenheid ({eenheid.id}): geen geldige energieprestatie gevonden.")
     return None
 
 
@@ -616,7 +625,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
 
         if rijksmonument is not None:
             logger.info(
-                f"Eenheid {eenheid.id} is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+                f"Eenheid ({eenheid.id}) is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
             )
             if rijksmonument:
                 eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
@@ -627,7 +636,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
 
         if beschermd_gezicht is not None:
             logger.info(
-                f"Eenheid {eenheid.id} {'behoort' if beschermd_gezicht else 'behoort niet'} tot een beschermd stads- of dorpsgezicht volgens de api van cultureelerfgoed."
+                f"Eenheid ({eenheid.id}) {'behoort' if beschermd_gezicht else 'behoort niet'} tot een beschermd stads- of dorpsgezicht volgens de api van cultureelerfgoed."
             )
             if beschermd_gezicht:
                 eenheid.monumenten.append(Eenheidmonument.beschermd_stadsgezicht.value)
@@ -661,18 +670,18 @@ def _classificeer_ruimte_dec(
         ruimtesoort = func(ruimte)
         if ruimtesoort is not None:
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) is geclassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geclassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
             )
         else:
             logger.debug(
-                f"Ruimte {ruimte.naam} ({ruimte.id}) kan niet worden geclassificeerd als een ruimtesoort."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) kan niet worden geclassificeerd als een ruimtesoort."
             )
         return ruimtesoort
 
     return wrapper
 
 
-@_classificeer_ruimte_dec
+# @_classificeer_ruimte_dec
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
@@ -686,19 +695,22 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
     """
 
     if ruimte.oppervlakte is None:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet geclassificeerd worden."
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte"
         warnings.warn(warning_msg, UserWarning)
         return None
 
     if ruimte.soort is None:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen soort en kan daardoor niet geclassificeerd worden."
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen soort"
         warnings.warn(warning_msg, UserWarning)
         return None
 
     if ruimte.detail_soort is None:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet geclassificeerd worden."
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort"
         warnings.warn(warning_msg, UserWarning)
         return None
+
+    if ruimte.soort.code == Ruimtesoort.verkeersruimte.code:
+        return Ruimtesoort.verkeersruimte
 
     if ruimte.detail_soort.code in [
         # onderstaande parkeergelegenden worden binnenkort vervangen: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
@@ -709,7 +721,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         Ruimtedetailsoort.parkeergarage_niet_specifieke_plek.code,
         Ruimtedetailsoort.parkeergarage_specifieke_plek.code,
     ]:
-        warning_msg = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort.naam} ({ruimte.detail_soort.code}) en kan daardoor niet geclassificeerd worden. Gebruik voor parkeerplaatsen: {Ruimtedetailsoort.carport.naam} ({Ruimtedetailsoort.carport.code}), {Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.naam} ({Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code}) of {Ruimtedetailsoort.parkeervak_auto_binnen.naam} ({Ruimtedetailsoort.parkeervak_auto_binnen.code})"
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort.naam} ({ruimte.detail_soort.code}) en kan daardoor niet geclassificeerd worden. Gebruik voor parkeerplaatsen: {Ruimtedetailsoort.carport.naam} ({Ruimtedetailsoort.carport.code}), {Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.naam} ({Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code}) of {Ruimtedetailsoort.parkeervak_auto_binnen.naam} ({Ruimtedetailsoort.parkeervak_auto_binnen.code})"
         warnings.warn(warning_msg, UserWarning)
         return None
 
@@ -822,13 +834,13 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
                 and ruimte.oppervlakte >= 4
             ):
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een vaste trap: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een vaste trap: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
                 )
                 return Ruimtesoort.vertrek
 
             else:
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen vaste trap gevonden: Ruimte wordt niet gewaardeerd als {ruimte.soort.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen vaste trap gevonden: Ruimte wordt niet gewaardeerd als {ruimte.soort.naam}."
                 )
 
         if ruimte.soort.code == Ruimtesoort.overige_ruimten.code:
@@ -839,13 +851,13 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
                 )
             ) and ruimte.oppervlakte >= 2:
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft een trap: Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een trap: Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
                 )
                 return Ruimtesoort.overige_ruimten
 
             else:
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen trap: Ruimte wordt niet gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen trap: Ruimte wordt niet gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
                 )
 
     return None
@@ -865,12 +877,12 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     criterium_naam = ruimte.naam or "Naamloze ruimte"
 
     if ruimte.detail_soort is None or ruimte.detail_soort.code is None:
-        message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen detailsoort en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort"
         warnings.warn(message, UserWarning)
         return criterium_naam
 
     if ruimte.oppervlakte is None:
-        message = f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte en kan daardoor niet gewaardeerd worden voor {Woningwaarderingstelsel.zelfstandige_woonruimten}"
+        message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte"
         warnings.warn(message, UserWarning)
         return criterium_naam
 
@@ -912,7 +924,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
                 )
 
             logger.info(
-                f"Ruimte {ruimte.naam} ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
             )
 
             criterium_naam = f"{ruimte.naam} (+{aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'})"

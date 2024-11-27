@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
+from tests.utils import assert_output_model, laad_specifiek_input_en_output_model
 from woningwaardering.stelsels.zelfstandige_woonruimten.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen import (
     GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen,
 )
@@ -19,7 +19,7 @@ def test_GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(
     gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen = (
         GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(peildatum=peildatum)
     )
-    resultaat = gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.bereken(
+    resultaat = gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.waardeer(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -34,7 +34,7 @@ def test_GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen_output(
     )
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     resultaat.groepen = [
-        gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.bereken(
+        gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.waardeer(
             eenheid_input
         )
     ]
@@ -68,7 +68,7 @@ def test_GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen_specifiek_out
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
     resultaat.groepen = [
-        gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.bereken(
+        gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.waardeer(
             eenheid_input
         )
     ]

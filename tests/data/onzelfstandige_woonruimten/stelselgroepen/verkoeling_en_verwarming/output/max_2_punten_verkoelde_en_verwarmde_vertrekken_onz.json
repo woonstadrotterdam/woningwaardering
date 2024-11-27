@@ -42,7 +42,7 @@
         },
         {
           "criterium": {
-            "naam": "Slaapkamer3: Maximaal 2 extra punten voor verkoelde en verwarmde vertrekken (gedeeld met 2)",
+            "naam": "Slaapkamer3: Maximaal 2 extra punten (gedeeld met 2)",
             "bovenliggendeCriterium": {
               "id": "verkoelde_en_verwarmde_vertrekken"
             }

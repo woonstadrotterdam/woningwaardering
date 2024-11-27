@@ -4,13 +4,13 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_verkoeling_en_verwarming,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     deel_punten_door_aantal_onzelfstandige_woonruimten,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming.verkoeling_en_verwarming import (
-    VerkoelingEnVerwarming as ZelfstandigeWoonruimtenVerkoelingEnVerwarming,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -37,7 +37,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -46,8 +46,8 @@ class VerkoelingEnVerwarming(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
+                stelsel=self.stelsel.value,
+                stelselgroep=self.stelselgroep.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
             )
         )
 
@@ -60,16 +60,13 @@ class VerkoelingEnVerwarming(Stelselgroep):
             or ruimte.gedeeld_met_aantal_eenheden == 1
         ]
 
-        waarderingen = list(
-            ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
-                ruimten,
-                self.stelselgroep,
-            )
-        )
+        woningwaarderingen = list(waardeer_verkoeling_en_verwarming(ruimten))
 
-        for ruimte, waardering in waarderingen:
+        for ruimte, woningwaardering in woningwaarderingen:
             woningwaardering_groep.woningwaarderingen.extend(
-                deel_punten_door_aantal_onzelfstandige_woonruimten(ruimte, [waardering])
+                deel_punten_door_aantal_onzelfstandige_woonruimten(
+                    ruimte, [woningwaardering]
+                )
             )
 
         woningwaardering_groep.woningwaarderingen.extend(
@@ -88,14 +85,15 @@ class VerkoelingEnVerwarming(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=VerkoelingEnVerwarming(),
-        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

@@ -1,9 +1,6 @@
-import warnings
 from datetime import date
 
-from loguru import logger
-
-from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (
     OnzelfstandigeWoonruimten,
 )
@@ -34,7 +31,7 @@ class Woningwaardering:
     def __init__(self, peildatum: date = date.today()) -> None:
         self.peildatum = peildatum
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
@@ -54,14 +51,14 @@ class Woningwaardering:
             or eenheid.woningwaarderingstelsel.code is None
         ):
             raise ValueError(
-                f"Eenheid {eenheid.id}: woningwaarderingstelsel-attribuut ontbreekt in het inputmodel."
+                f"Eenheid ({eenheid.id}): woningwaarderingstelsel-attribuut ontbreekt in het inputmodel."
             )
         elif eenheid.woningwaarderingstelsel.code not in [
             Woningwaarderingstelsel.zelfstandige_woonruimten.code,
             Woningwaarderingstelsel.onzelfstandige_woonruimten.code,
         ]:
             raise ValueError(
-                f"Eenheid {eenheid.id}: ongeldig woningwaarderingsstelsel-attribuut. Code moet één van {Woningwaarderingstelsel.zelfstandige_woonruimten.code} of {Woningwaarderingstelsel.onzelfstandige_woonruimten.code} zijn."
+                f"Eenheid ({eenheid.id}): ongeldig woningwaarderingsstelsel-attribuut. Code moet één van {Woningwaarderingstelsel.zelfstandige_woonruimten.code} of {Woningwaarderingstelsel.onzelfstandige_woonruimten.code} zijn."
             )
         elif (
             eenheid.woningwaarderingstelsel.code
@@ -76,25 +73,13 @@ class Woningwaardering:
         ):
             stelsel = OnzelfstandigeWoonruimten(peildatum=self.peildatum)
 
-        return stelsel.bereken(eenheid)
+        return stelsel.waardeer(eenheid)
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-    warnings.simplefilter("default", UserWarning)
-
-    woningwaardering = Woningwaardering(peildatum=date.today())
-
-    with open(
-        "tests/data/generiek/input/37101000032.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-        woningwaardering_resultaat = woningwaardering.bereken(eenheid)
-        print(
-            woningwaardering_resultaat.model_dump_json(
-                by_alias=True, indent=2, exclude_none=True
-            )
-        )
-        tabel = utils.naar_tabel(woningwaardering_resultaat)
-        print(tabel)
+    with DevelopmentContext(
+        instance=Woningwaardering(),  # type: ignore
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

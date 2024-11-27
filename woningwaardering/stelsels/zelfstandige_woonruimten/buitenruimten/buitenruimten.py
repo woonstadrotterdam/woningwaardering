@@ -6,7 +6,7 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -49,7 +49,7 @@ class Buitenruimten(Stelselgroep):
         if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte:
             if not ruimte.oppervlakte:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte",
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte",
                     UserWarning,
                 )
                 return
@@ -62,7 +62,7 @@ class Buitenruimten(Stelselgroep):
                 # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
                 if not (ruimte.lengte and ruimte.breedte):
                     warnings.warn(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
                         UserWarning,
                     )
                 if (
@@ -70,8 +70,8 @@ class Buitenruimten(Stelselgroep):
                     or (ruimte.lengte and ruimte.lengte < 1.5)
                     or (ruimte.breedte and ruimte.breedte < 1.5)
                 ):
-                    logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
+                    logger.debug(
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
                     )
                     return
                 # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
@@ -79,12 +79,12 @@ class Buitenruimten(Stelselgroep):
                     ruimte.detail_soort
                     and ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
                 ):
-                    logger.info(
-                        f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde parkeerplaats en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
+                    logger.debug(
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde parkeerplaats en telt niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
                     )
                     return
-                logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
+                logger.debug(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte van {ruimte.oppervlakte}m2 en telt mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
                 )
                 woningwaardering.aantal = float(
                     utils.rond_af(
@@ -106,7 +106,7 @@ class Buitenruimten(Stelselgroep):
                 )
             else:  # privé buitenruimte
                 logger.info(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) is een privé-buitenruimte met oppervlakte {ruimte.oppervlakte}m2 en wordt gewaardeerd onder stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een privé-buitenruimte van {ruimte.oppervlakte}m2 en telt mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
                 )
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -134,7 +134,7 @@ class Buitenruimten(Stelselgroep):
             for ruimte in eenheid.ruimten or []
         ):
             logger.info(
-                f"Eenheid {eenheid.id} heeft geen buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
+                f"Eenheid ({eenheid.id}) heeft geen buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
             )
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
@@ -151,6 +151,9 @@ class Buitenruimten(Stelselgroep):
             and not gedeeld_met_eenheden(ruimte)
             for ruimte in eenheid.ruimten or []
         ):
+            logger.info(
+                f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
+            )
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -180,7 +183,7 @@ class Buitenruimten(Stelselgroep):
             aftrek = max_punten - punten
 
             logger.info(
-                f"Eenheid {eenheid.id}: maximaal aantal punten voor buitenruimten overschreden ({punten} > {max_punten}). Een aftrek van {aftrek} punt(en) wordt toegepast."
+                f"Eenheid ({eenheid.id}): maximaal aantal punten voor {Woningwaarderingstelselgroep.buitenruimten.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
             )
             punten += aftrek
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
@@ -195,7 +198,7 @@ class Buitenruimten(Stelselgroep):
         woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
         return woningwaardering_groep
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
@@ -203,8 +206,8 @@ class Buitenruimten(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.buitenruimten.value,
+                stelsel=self.stelsel.value,
+                stelselgroep=self.stelselgroep.value,
             )
         )
 
@@ -224,14 +227,15 @@ class Buitenruimten(Stelselgroep):
         woningwaardering_groep = self._maximering(eenheid, woningwaardering_groep)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=Buitenruimten(),
-        eenheid_input="tests/data/generiek/input/37101000032.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/generiek/input/37101000032.json")

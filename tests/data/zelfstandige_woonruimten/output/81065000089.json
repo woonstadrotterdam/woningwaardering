@@ -148,15 +148,6 @@
         },
         {
           "criterium": {
-            "naam": "Wasruimte",
-            "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
             "naam": "Keuken",
             "bovenliggendeCriterium": {
               "id": "verwarmde_vertrekken"
@@ -172,6 +163,15 @@
             }
           },
           "punten": 2.0
+        },
+        {
+          "criterium": {
+            "naam": "Wasruimte",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 1.0
         },
         {
           "criterium": {

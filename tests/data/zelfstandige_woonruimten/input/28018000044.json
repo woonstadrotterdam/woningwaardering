@@ -170,8 +170,8 @@
     {
       "id": "Space_20268170",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -415,8 +415,8 @@
     {
       "id": "Space_20256213",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -435,8 +435,8 @@
     {
       "id": "Space_20268165",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",
@@ -478,8 +478,8 @@
     {
       "id": "Space_20256211",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",

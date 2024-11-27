@@ -4,7 +4,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.onzelfstandige_woonruimten.oppervlakte_van_vertrekken import (
     OppervlakteVanVertrekken,
 )
@@ -37,7 +37,7 @@ class Aftrekpunten(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -46,8 +46,8 @@ class Aftrekpunten(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criterium_groep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.aftrekpunten.value,
+                stelsel=self.stelsel.value,
+                stelselgroep=self.stelselgroep.value,
             )
         )
 
@@ -72,7 +72,7 @@ class Aftrekpunten(Stelselgroep):
         if oppervlakte_resultaat is None:
             oppervlakte_resultaat = OppervlakteVanVertrekken(
                 peildatum=self.peildatum
-            ).bereken(eenheid)
+            ).waardeer(eenheid)
 
         if oppervlakte_resultaat.woningwaarderingen:
             totale_oppervlakte_vertrekken = sum(
@@ -110,14 +110,15 @@ class Aftrekpunten(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.aftrekpunten.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=Aftrekpunten(),
-        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

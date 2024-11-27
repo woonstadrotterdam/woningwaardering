@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
+from tests.utils import assert_output_model, laad_specifiek_input_en_output_model
 from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten.bijzondere_voorzieningen import (
     BijzondereVoorzieningen,
@@ -29,7 +29,7 @@ def test_BijzondereVoorzieningen(
     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     bijzondere_voorzieningen = BijzondereVoorzieningen(peildatum=peildatum)
-    resultaat = bijzondere_voorzieningen.bereken(
+    resultaat = bijzondere_voorzieningen.waardeer(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -45,7 +45,7 @@ def test_BijzondereVoorzieningen_output(
     bijzondere_voorzieningen = BijzondereVoorzieningen(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [bijzondere_voorzieningen.bereken(eenheid_input)]
+    resultaat.groepen = [bijzondere_voorzieningen.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -61,7 +61,7 @@ def test_BijzondereVoorzieningen_specifiek_output(
     bijzondere_voorzieningen = BijzondereVoorzieningen(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [bijzondere_voorzieningen.bereken(eenheid_input)]
+    resultaat.groepen = [bijzondere_voorzieningen.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

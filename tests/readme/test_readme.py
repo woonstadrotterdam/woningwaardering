@@ -1,7 +1,7 @@
 import json
 from datetime import date
 
-from tests.test_utils import assert_output_model
+from tests.utils import assert_output_model
 from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
@@ -108,7 +108,7 @@ def test_readme_python_voorbeeld():
         ],
     )
 
-    woningwaardering_resultaat = wws.bereken(eenheid)
+    woningwaardering_resultaat = wws.waardeer(eenheid)
     with open("tests/readme/output_json_python_voorbeeld.json", "r") as f:
         expected_result = (
             WoningwaarderingResultatenWoningwaarderingResultaat.model_validate(
@@ -126,7 +126,7 @@ def test_readme_json_voorbeeld():
         "r+",
     ) as file:
         eenheid = EenhedenEenheid.model_validate_json(file.read())
-        woningwaardering_resultaat = wws.bereken(eenheid)
+        woningwaardering_resultaat = wws.waardeer(eenheid)
         with open("tests/readme/output_json_json_voorbeeld.json", "r") as f:
             expected_result = (
                 WoningwaarderingResultatenWoningwaarderingResultaat.model_validate(

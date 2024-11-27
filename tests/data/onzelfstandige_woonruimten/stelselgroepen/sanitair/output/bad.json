@@ -11,7 +11,7 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 6.0,
+      "punten": 5.0,
       "woningwaarderingen": [
         {
           "aantal": 1.0,
@@ -21,14 +21,14 @@
               "id": "sanitair_prive"
             }
           },
-          "punten": 6.0
+          "punten": 5.0
         },
         {
           "criterium": {
             "id": "sanitair_prive",
             "naam": "Totaal (privé)"
           },
-          "punten": 6.0
+          "punten": 5.0
         }
       ]
     }

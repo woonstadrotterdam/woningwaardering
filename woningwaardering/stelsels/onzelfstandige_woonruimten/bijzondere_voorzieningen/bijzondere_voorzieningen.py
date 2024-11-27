@@ -4,11 +4,11 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten.bijzondere_voorzieningen.bijzondere_voorzieningen import (
-    BijzondereVoorzieningen as BijzondereVoorzieningenZelfstandigeWoonruimten,
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen import (
+    waardeer_bijzondere_voorzieningen,
 )
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -34,7 +34,7 @@ class BijzondereVoorzieningen(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -49,7 +49,7 @@ class BijzondereVoorzieningen(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen = list(
-            BijzondereVoorzieningenZelfstandigeWoonruimten._genereer_woningwaarderingen(
+            waardeer_bijzondere_voorzieningen(
                 peildatum=self.peildatum,
                 eenheid=eenheid,
                 stelselgroepen_zonder_opslag=[
@@ -73,15 +73,18 @@ class BijzondereVoorzieningen(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
 
         return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=BijzondereVoorzieningen(),
-        eenheid_input="tests/data/onzelfstandige_woonruimten/stelselgroepen/bijzondere_voorzieningen/input/zorgwoning.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer(
+            "tests/data/onzelfstandige_woonruimten/stelselgroepen/bijzondere_voorzieningen/input/zorgwoning.json"
+        )

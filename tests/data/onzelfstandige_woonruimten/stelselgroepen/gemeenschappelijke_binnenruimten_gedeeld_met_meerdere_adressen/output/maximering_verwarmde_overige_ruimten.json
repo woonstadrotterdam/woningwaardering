@@ -130,7 +130,7 @@
         },
         {
           "criterium": {
-            "naam": "Berging: Maximaal 4 punten voor verwarmde overige- en verkeersruimten",
+            "naam": "Berging: Maximaal 4 punten voor verwarmde overige en verkeersruimten",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_3_adressen"
             }
