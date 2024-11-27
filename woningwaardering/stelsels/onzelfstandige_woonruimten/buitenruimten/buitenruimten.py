@@ -2,7 +2,7 @@ import warnings
 from collections import defaultdict
 from datetime import date
 from decimal import Decimal
-from typing import Iterator
+from typing import Generator
 
 from loguru import logger
 
@@ -168,7 +168,7 @@ class Buitenruimten(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering | None: Maximering als er een maximering is.
         """
         max_punten = 15
-        punten = woningwaardering_groep.punten
+        punten = woningwaardering_groep.punten or 0
         if punten > max_punten:
             aftrek = max_punten - punten
 
@@ -190,7 +190,7 @@ class Buitenruimten(Stelselgroep):
     def _punten_voor_buitenruimte(
         self,
         ruimte: EenhedenRuimte,
-    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    ) -> Generator[WoningwaarderingResultatenWoningwaardering, None, None]:
         """Berekent de punten voor een buitenruimte.
 
         0.75 punten per m2 voor gedeelde buitenruimten.
@@ -202,8 +202,8 @@ class Buitenruimten(Stelselgroep):
         Args:
             ruimte (EenhedenRuimte): Ruimte waarvoor de punten berekend worden.
 
-        Returns:
-            Iterator[WoningwaarderingResultatenWoningwaardering]: Punten voor de buitenruimte.
+        Yields:
+            WoningwaarderingResultatenWoningwaardering: Punten voor de buitenruimte.
         """
         if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte or (
             ruimte.detail_soort is not None
