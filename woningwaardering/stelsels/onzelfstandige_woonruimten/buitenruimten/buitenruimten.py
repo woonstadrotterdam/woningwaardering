@@ -191,7 +191,7 @@ class Buitenruimten(Stelselgroep):
         self,
         ruimte: EenhedenRuimte,
     ) -> Generator[WoningwaarderingResultatenWoningwaardering, None, None]:
-        """Berekent de punten voor een buitenruimte.
+        """Berekent de punten voor een ruimte voor rubriek Buitenruimten
 
         0.75 punten per m2 voor gedeelde buitenruimten.
         0.35 punten per m2 voor privé buitenruimten.
