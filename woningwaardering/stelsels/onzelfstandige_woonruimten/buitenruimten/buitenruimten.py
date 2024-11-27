@@ -137,7 +137,7 @@ class Buitenruimten(Stelselgroep):
         )
 
         # maximaal 15 punten
-        maximering = self._maximering(eenheid, woningwaardering_groep.punten)
+        maximering = self._maximering(eenheid, woningwaardering_groep)
         if maximering:
             woningwaardering_groep.woningwaarderingen.append(maximering)
             woningwaardering_groep.punten += float(Decimal(str(maximering.punten)))
