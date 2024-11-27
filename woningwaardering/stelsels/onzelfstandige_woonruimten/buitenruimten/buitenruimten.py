@@ -156,14 +156,17 @@ class Buitenruimten(Stelselgroep):
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
-    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        punten = sum(
-            woningwaardering.punten
-            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-            if woningwaardering.punten is not None
-            and woningwaardering.criterium is not None
-            and woningwaardering.criterium.bovenliggende_criterium is None
-        )
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
+        """Berekent de maximering voor Buitenruimten. Maximaal 15 punten toegestaan.
+
+
+        Args:
+            eenheid (EenhedenEenheid): Eenheid waarvoor de maximering berekend wordt.
+            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): Woningwaardering groep van buitenruimten.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaardering | None: Maximering als er een maximering is.
+        """
         max_punten = 15
         punten = woningwaardering_groep.punten
         if punten > max_punten:
@@ -188,6 +191,20 @@ class Buitenruimten(Stelselgroep):
         self,
         ruimte: EenhedenRuimte,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        """Berekent de punten voor een buitenruimte.
+
+        0.75 punten per m2 voor gedeelde buitenruimten.
+        0.35 punten per m2 voor privé buitenruimten.
+
+        Ruimte moet minimaal een afmeting hebben van 2 m x 1,5 m x 1,5 m (hoogte, lengte, breedte).
+        Parkeerplaatsen worden niet meegewaardeerd als ze gedeeld zijn met andere eenheden.
+
+        Args:
+            ruimte (EenhedenRuimte): Ruimte waarvoor de punten berekend worden.
+
+        Returns:
+            Iterator[WoningwaarderingResultatenWoningwaardering]: Punten voor de buitenruimte.
+        """
         if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte or (
             ruimte.detail_soort is not None
             and ruimte.detail_soort.code
@@ -272,6 +289,15 @@ class Buitenruimten(Stelselgroep):
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
     ) -> WoningwaarderingResultatenWoningwaardering | None:
+        """Kent 2 punten toe bij de aanwezigheid van privé buitenruimten.
+
+        Args:
+            eenheid (EenhedenEenheid): Eenheid waarvoor de punten berekend worden.
+            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): Woningwaardering groep van buitenruimten.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaardering | None: Punten als er privé buitenruimten aanwezig zijn.
+        """
         # 2 punten bij de aanwezigheid van privé buitenruimten
         if woningwaardering_groep.woningwaarderingen and any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
