@@ -109,12 +109,12 @@ class Buitenruimten(Stelselgroep):
                 ruimte.detail_soort
                 and ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
                 and gedeeld_met_eenheden(ruimte)
-                or gedeeld_met_onzelfstandige_woonruimten(ruimte)
             ):
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde parkeerplaats en wordt daarom niet gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.buitenruimten.naam}."
                 )
                 return
+
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                 meeteenheid=Meeteenheid.vierkante_meter_m2.value,
@@ -236,15 +236,17 @@ class Buitenruimten(Stelselgroep):
         punten_totaal = sum(
             Decimal(str(woningwaardering.punten))
             for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-            if woningwaardering.punten is not None
+            if woningwaardering.punten
             and woningwaardering.criterium is not None
             and woningwaardering.criterium.bovenliggende_criterium is None
         )
 
+        punten_totaal = punten_totaal if punten_totaal else Decimal("0")
+
         maximering = self._maximering(eenheid, punten_totaal)
 
         if maximering:
-            woningwaardering_groep.append(maximering)
+            woningwaardering_groep.woningwaarderingen.append(maximering)
             woningwaardering_groep.punten = float(
                 utils.rond_af_op_kwart(
                     sum(
@@ -272,4 +274,6 @@ if __name__ == "__main__":  # pragma: no cover
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
-        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")
+        context.waardeer(
+            "tests/data/onzelfstandige_woonruimten/stelselgroepen/buitenruimten/input/gedeelde_buitenruimtes_onz.json"
+        )

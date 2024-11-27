@@ -11,12 +11,12 @@
           "naam": "Buitenruimten"
         }
       },
-      "punten": 2.25,
+      "punten": 5.25,
       "woningwaarderingen": [
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Tuin",
+            "naam": "Balkon",
             "bovenliggendeCriterium": {
               "id": "buitenruimten_prive"
             },
@@ -26,6 +26,34 @@
             }
           },
           "punten": 0.35
+        },
+        {
+          "aantal": 4.5,
+          "criterium": {
+            "naam": "Balkon",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 0.84375
+        },
+        {
+          "aantal": 52.0,
+          "criterium": {
+            "naam": "Dakterras (gedeeld met 5 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.95
         },
         {
           "criterium": {
@@ -42,6 +70,13 @@
             "naam": "Totaal (privé)"
           },
           "punten": 2.35
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 4 onzelfstandige woonruimten)"
+          },
+          "punten": 2.79375
         }
       ]
     }
