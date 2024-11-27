@@ -16,7 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Tuin",
+            "naam": "Klein balkon",
             "bovenliggendeCriterium": {
               "id": "buitenruimten_prive"
             },
