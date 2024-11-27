@@ -64,7 +64,7 @@ class Buitenruimten(Stelselgroep):
         gedeeld_met_m2_som: defaultdict[int, Decimal] = defaultdict(Decimal)
         # punten per buitenruimte
         for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = self._punten_per_buitenruimte(ruimte)
+            woningwaarderingen = self._punten_voor_buitenruimte(ruimte)
             for woningwaardering in woningwaarderingen:
                 if woningwaardering.criterium is None:
                     continue
@@ -99,7 +99,11 @@ class Buitenruimten(Stelselgroep):
                 )
 
         # minimaal 2 punten bij aanwezigheid van privé buitenruimten
-        if (result := self._saldering(eenheid, woningwaardering_groep)) is not None:
+        if (
+            result := self._prive_buitenruimten_aanwezig(
+                eenheid, woningwaardering_groep
+            )
+        ) is not None:
             woningwaardering_groep.woningwaarderingen.append(result)
             if result.punten is not None:
                 gedeeld_met_counter[1] += Decimal(str(result.punten))
@@ -133,7 +137,15 @@ class Buitenruimten(Stelselgroep):
         )
 
         # maximaal 15 punten
-        woningwaardering_groep = self._maximering(eenheid, woningwaardering_groep)
+        maximering = self._maximering(eenheid, woningwaardering_groep.punten)
+        if maximering:
+            woningwaardering_groep.woningwaarderingen.append(maximering)
+            woningwaardering_groep.punten += float(Decimal(str(maximering.punten)))
+
+        # rond af op kwarten
+        woningwaardering_groep.punten = float(
+            utils.rond_af_op_kwart(woningwaardering_groep.punten)
+        )
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -153,9 +165,8 @@ class Buitenruimten(Stelselgroep):
             and woningwaardering.criterium.bovenliggende_criterium is None
         )
         max_punten = 15
-        if (
-            punten > max_punten and woningwaardering_groep.woningwaarderingen
-        ):  # maximaal 15 punten
+        punten = woningwaardering_groep.punten
+        if punten > max_punten:
             aftrek = max_punten - punten
 
             logger.info(
@@ -169,12 +180,11 @@ class Buitenruimten(Stelselgroep):
                 )
             )
             woningwaardering.punten = float(aftrek)
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+            return woningwaardering
 
-        woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
-        return woningwaardering_groep
+        return None
 
-    def _punten_per_buitenruimte(
+    def _punten_voor_buitenruimte(
         self,
         ruimte: EenhedenRuimte,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
@@ -257,7 +267,7 @@ class Buitenruimten(Stelselgroep):
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {self.stelselgroep.naam}."
             )
 
-    def _saldering(
+    def _prive_buitenruimten_aanwezig(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
