@@ -5,22 +5,17 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_keuken,
+    waardeer_oppervlakte_van_overige_ruimte,
+    waardeer_oppervlakte_van_vertrek,
+    waardeer_verkoeling_en_verwarming,
+)
 from woningwaardering.stelsels.onzelfstandige_woonruimten.sanitair import (
     Sanitair as OnzelfstandigeWoonruimtenSanitair,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    Keuken as ZelfstandigeWoonruimtenKeuken,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    OppervlakteVanOverigeRuimten as ZelfstandigeWoonruimtenOppervlakteVanOverigeRuimten,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    OppervlakteVanVertrekken as ZelfstandigeWoonruimtenOppervlakteVanVertrekken,
-)
-from woningwaardering.stelsels.zelfstandige_woonruimten.verkoeling_en_verwarming.verkoeling_en_verwarming import (
-    VerkoelingEnVerwarming as ZelfstandigeWoonruimtenVerkoelingEnVerwarming,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -92,16 +87,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
 
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
 
-            oppervlakte_vertrekken = list(
-                ZelfstandigeWoonruimtenOppervlakteVanVertrekken.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep
-                )
-            )
+            oppervlakte_vertrekken = list(waardeer_oppervlakte_van_vertrek(ruimte))
 
             oppervlakte_van_overige_ruimten = list(
-                ZelfstandigeWoonruimtenOppervlakteVanOverigeRuimten.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep
-                )
+                waardeer_oppervlakte_van_overige_ruimte(ruimte)
             )
 
             if oppervlakte_vertrekken or oppervlakte_van_overige_ruimten:
@@ -172,11 +161,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
     ]:
         waarderingen = []
 
-        resultaten = list(
-            ZelfstandigeWoonruimtenVerkoelingEnVerwarming.genereer_woningwaarderingen(
-                ruimten, self.stelselgroep
-            )
-        )
+        resultaten = list(waardeer_verkoeling_en_verwarming(ruimten))
         for ruimte, resultaat in resultaten:
             aantal_onzelfstandige_woonruimten = (
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
@@ -207,18 +192,19 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             gedeeld_met_punten[aantal_onzelfstandige_woonruimten][aantal_eenheden] += (
                 punten
             )
-
+            criterium = resultaat.criterium
             if ruimte.soort is None:
                 warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
                 continue
-            if resultaat.criterium is None:
+            if criterium is None:
                 warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
                 continue
 
-            if "Max" not in (resultaat.criterium.naam or ""):
-                criterium_naam = f"{resultaat.criterium.naam}: {resultaat.criterium.bovenliggende_criterium.id.capitalize().replace('_', ' ') if resultaat.criterium.bovenliggende_criterium and resultaat.criterium.bovenliggende_criterium.id else ''}"
+            if resultaat.punten and resultaat.punten < 0:
+                criterium_naam = f"{criterium.naam.rstrip(':') if criterium.naam else ''} voor {criterium.bovenliggende_criterium.id.lower().replace('_', ' ') if criterium.bovenliggende_criterium and criterium.bovenliggende_criterium.id else ''}"
             else:
-                criterium_naam = f"{resultaat.criterium.naam}"
+                criterium_naam = f"{criterium.naam}: {criterium.bovenliggende_criterium.id.capitalize().replace('_', ' ') if criterium.bovenliggende_criterium and criterium.bovenliggende_criterium.id else ''}"
+
             bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen"
             waarderingen.append(
                 self._maak_woningwaardering(
@@ -310,11 +296,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             )
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
 
-            waarderingen = list(
-                ZelfstandigeWoonruimtenKeuken.genereer_woningwaarderingen(
-                    ruimte, self.stelselgroep, self.stelsel
-                )
-            )
+            waarderingen = list(waardeer_keuken(ruimte, self.stelsel))
             for waardering in waarderingen:
                 if waardering.criterium is None:
                     logger.warning(
@@ -369,7 +351,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 )
         return gedeeld_met_punten, woningwaarderingen
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -495,21 +477,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    logger.enable("woningwaardering")
-
-    stelselgroep = GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen()
-    with open(
-        "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/input/gedeelde_berging_<2m2.json",
-        "r+",
-    ) as file:
-        eenheid = EenhedenEenheid.model_validate_json(file.read())
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
-        groepen=[stelselgroep.bereken(eenheid)]
-    )
-
-    print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-
-    tabel = utils.naar_tabel(resultaat)
-
-    print(tabel)
+    with DevelopmentContext(
+        instance=GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(),
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer(
+            "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/input/gedeelde_berging_<2m2.json"
+        )

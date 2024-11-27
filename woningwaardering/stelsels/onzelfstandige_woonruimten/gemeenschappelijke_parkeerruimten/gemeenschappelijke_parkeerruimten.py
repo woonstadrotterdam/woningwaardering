@@ -5,11 +5,11 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.zelfstandige_woonruimten import (
-    GemeenschappelijkeParkeerruimten as ZelfGemeenschappelijkeParkeerruimten,
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.gedeelde_logica import (
+    waardeer_gemeenschappelijke_parkeerruimte,
 )
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingCriteriumSleutels,
@@ -38,7 +38,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
@@ -47,22 +47,20 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
+                stelsel=self.stelsel.value,
+                stelselgroep=self.stelselgroep.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
             )
         )
 
         if not eenheid.ruimten:
-            warnings.warn(f"Eenheid {eenheid.id} heeft geen 'ruimten'.")
+            warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
             return woningwaardering_groep
 
         woningwaardering_groep.woningwaarderingen = []
 
         gedeeld_met_counter: dict[int, dict[str, float]] = {}
         for ruimte in eenheid.ruimten:
-            waarderingen_zelfstandig = ZelfGemeenschappelijkeParkeerruimten(
-                peildatum=self.peildatum
-            ).genereer_woningwaarderingen(ruimte)
+            waarderingen_zelfstandig = waardeer_gemeenschappelijke_parkeerruimte(ruimte)
             if waarderingen_zelfstandig is not None:
                 for waardering in list(waarderingen_zelfstandig):
                     if waardering is None:
@@ -159,14 +157,15 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         woningwaardering_groep.punten = float(totaal_punten)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=GemeenschappelijkeParkeerruimten(),
-        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

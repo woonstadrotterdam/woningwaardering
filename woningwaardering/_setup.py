@@ -8,6 +8,8 @@ from types import TracebackType
 
 from loguru import logger
 
+from woningwaardering._logging import log_userwarning
+
 # Set context for all calculations to avoid rounding errors
 # See https://docs.python.org/3/library/decimal.html#rounding
 setcontext(BasicContext)
@@ -58,4 +60,6 @@ def initialize() -> None:
     setup_locale()
     setup_timezone()
     sys.excepthook = handle_unhandled_exception
+    warnings.simplefilter("once", UserWarning)  # TODO: bepalen of dit wenselijk is
     warnings.simplefilter("error", UserWarning)
+    warnings.showwarning = log_userwarning

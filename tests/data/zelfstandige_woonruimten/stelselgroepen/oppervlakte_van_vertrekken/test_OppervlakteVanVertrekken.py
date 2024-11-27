@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from tests.test_utils import assert_output_model, laad_specifiek_input_en_output_model
+from tests.utils import assert_output_model, laad_specifiek_input_en_output_model
 from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanVertrekken,
@@ -18,7 +18,7 @@ def test_OppervlakteVanVertrekken(
     zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
 ):
     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
-    resultaat = oppervlakte_van_vertrekken.bereken(
+    resultaat = oppervlakte_van_vertrekken.waardeer(
         zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -34,7 +34,7 @@ def test_OppervlakteVanVertrekken_output(
     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [oppervlakte_van_vertrekken.bereken(eenheid_input)]
+    resultaat.groepen = [oppervlakte_van_vertrekken.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -62,7 +62,7 @@ def test_OppervlakteVanVertrekken_specifiek_output(
     oppervlakte_van_vertrekken = OppervlakteVanVertrekken(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [oppervlakte_van_vertrekken.bereken(eenheid_input)]
+    resultaat.groepen = [oppervlakte_van_vertrekken.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,

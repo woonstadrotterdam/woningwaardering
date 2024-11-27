@@ -8,7 +8,11 @@ import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import bereken
+from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
+    get_energieprestatievergoeding,
+    monument_correctie,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
@@ -24,14 +28,10 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
 from woningwaardering.vera.referentiedata.energieprestatiesoort import (
     Energieprestatiesoort,
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.prijscomponentdetailsoort import (
-    Prijscomponentdetailsoort,
-)
 from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 
 LOOKUP_TABEL_FOLDER = (
@@ -92,7 +92,7 @@ class Energieprestatie(Stelselgroep):
         ):
             if energieprestatie.waarde is not None:
                 logger.info(
-                    f"Eenheid {eenheid.id}: waardeer {Woningwaarderingstelselgroep.energieprestatie.naam} op basis van energie-index."
+                    f"Eenheid ({eenheid.id}): waardeer {Woningwaarderingstelselgroep.energieprestatie.naam} op basis van energie-index."
                 )
 
                 energie_index = float(energieprestatie.waarde)
@@ -139,8 +139,19 @@ class Energieprestatie(Stelselgroep):
         oppervlakte: float,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
+        """
+        Berekent de punten voor Energieprestatie op basis van het bouwjaar.
+
+        Args:
+            eenheid (EenhedenEenheid): Eenheid
+            oppervlakte (float): Oppervlakte
+            woningwaardering (WoningwaarderingResultatenWoningwaardering): De waardering voor Energieprestatie tot zover.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaardering: De waardering met aangepaste criteriumnaam en punten.
+        """
         logger.info(
-            f"Eenheid {eenheid.id}: punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam} worden berekend op basis van bouwjaar."
+            f"Eenheid ({eenheid.id}): punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam} worden berekend op basis van bouwjaar."
         )
 
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
@@ -171,31 +182,22 @@ class Energieprestatie(Stelselgroep):
 
         return woningwaardering
 
-    def bereken(
-        self,
-        eenheid: EenhedenEenheid,
-        woningwaardering_resultaat: (
-            WoningwaarderingResultatenWoningwaarderingResultaat | None
-        ) = None,
-    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
-                stelselgroep=Woningwaarderingstelselgroep.energieprestatie.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
-            )
-        )
+    def _oppervlakte_vertrekken(self, eenheid: EenhedenEenheid) -> float:
+        """
+        Berekent de oppervlakte van de vertrekken in de eenheid.
 
-        woningwaardering_groep.woningwaarderingen = []
+        Args:
+            eenheid (EenhedenEenheid): Eenheid
 
-        if eenheid.ruimten is None:
-            raise ValueError(f"Eenheid {eenheid.id}: ruimten is None")
-
+        Returns:
+            float: Oppervlakte van de vertrekken.
+        """
         oppervlakte_gedeeld_met_counter: dict[int, float] = defaultdict(int)
 
-        for ruimte in eenheid.ruimten:
+        for ruimte in eenheid.ruimten or []:
             if ruimte.oppervlakte is None:
                 warnings.warn(
-                    f"Ruimte {ruimte.naam} ({ruimte.id}) heeft geen oppervlakte.",
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte.",
                     UserWarning,
                 )
                 continue
@@ -205,7 +207,7 @@ class Energieprestatie(Stelselgroep):
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                 ] += float(utils.rond_af(ruimte.oppervlakte, decimalen=2))
 
-        oppervlakte_van_vertrekken: float = sum(
+        return sum(
             float(
                 utils.rond_af(
                     (utils.rond_af(oppervlakte, decimalen=0) / Decimal(str((aantal)))),
@@ -215,32 +217,39 @@ class Energieprestatie(Stelselgroep):
             for aantal, oppervlakte in oppervlakte_gedeeld_met_counter.items()
         )
 
+    def waardeer(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None,
+    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
+            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
+                stelsel=self.stelsel.value,
+                stelselgroep=self.stelselgroep.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
+            )
+        )
+
+        woningwaardering_groep.woningwaarderingen = []
+
+        if not eenheid.ruimten:
+            warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
+            return woningwaardering_groep
+
         if eenheid.monumenten is None:
             warnings.warn(
-                f"Eenheid {eenheid.id}: 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
+                f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
                 UserWarning,
             )
             eenheid = utils.update_eenheid_monumenten(eenheid)
 
+        oppervlakte_van_vertrekken = self._oppervlakte_vertrekken(eenheid)
+
         woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
-        energieprestatievergoeding = next(
-            (
-                prijscomponent
-                for prijscomponent in eenheid.prijscomponenten or []
-                if prijscomponent.detail_soort is not None
-                and prijscomponent.detail_soort.code
-                == Prijscomponentdetailsoort.energieprestatievergoeding.code
-                and (
-                    prijscomponent.begindatum is None
-                    or prijscomponent.begindatum <= self.peildatum
-                )
-                and (
-                    prijscomponent.einddatum is None
-                    or prijscomponent.einddatum > self.peildatum
-                )
-            ),
-            None,
+        energieprestatievergoeding = get_energieprestatievergoeding(
+            self.peildatum, eenheid
         )
 
         energieprestatie = utils.energieprestatie_met_geldig_label(
@@ -248,7 +257,7 @@ class Energieprestatie(Stelselgroep):
         )
 
         if energieprestatievergoeding:
-            logger.info(f"Eenheid {eenheid.id}: energieprestatievergoeding gevonden.")
+            logger.info(f"Eenheid ({eenheid.id}): energieprestatievergoeding gevonden.")
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Energieprestatievergoeding",
@@ -281,34 +290,11 @@ class Energieprestatie(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         # Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
-        if (
-            eenheid.monumenten
-            and any(
-                monument.code
-                in [
-                    Eenheidmonument.rijksmonument.code,
-                    Eenheidmonument.gemeentelijk_monument.code,
-                    Eenheidmonument.provinciaal_monument.code,
-                ]
-                for monument in eenheid.monumenten or []
-            )
-            and woningwaardering.punten
-            and woningwaardering.punten < 0.0
+        if monument_correctie_waardering := monument_correctie(
+            eenheid, woningwaardering
         ):
-            logger.info(
-                f"Eenheid {eenheid.id} is een monument: waardering voor {Woningwaarderingstelselgroep.energieprestatie.naam} is minimaal 0 punten."
-            )
-            woningwaardering_correctie_monument = (
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Correctie monument"
-                    ),
-                    punten=woningwaardering.punten * -1.0,
-                )
-            )
-
             woningwaardering_groep.woningwaarderingen.append(
-                woningwaardering_correctie_monument
+                monument_correctie_waardering
             )
 
         punten_totaal = Decimal(
@@ -326,15 +312,16 @@ class Energieprestatie(Stelselgroep):
         woningwaardering_groep.punten = float(punten_totaal)
 
         logger.info(
-            f"Eenheid {eenheid.id} wordt gewaardeerd met {woningwaardering_groep.punten} punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}."
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
 
         return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
-    bereken(
+    with DevelopmentContext(
         instance=Energieprestatie(),
-        eenheid_input="tests/data/onzelfstandige_woonruimten/input/15004000185.json",
-        strict=False,
-    )
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
+    ) as context:
+        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

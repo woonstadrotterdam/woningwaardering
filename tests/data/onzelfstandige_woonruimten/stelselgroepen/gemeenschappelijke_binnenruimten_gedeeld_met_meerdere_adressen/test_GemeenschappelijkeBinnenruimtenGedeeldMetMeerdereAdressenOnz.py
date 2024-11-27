@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from tests.test_utils import (
+from tests.utils import (
     assert_output_model,
     laad_specifiek_input_en_output_model,
 )
@@ -35,7 +35,7 @@ def test_GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(
     gemeenschappelijke_binnenruimten = (
         GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(peildatum=peildatum)
     )
-    resultaat = gemeenschappelijke_binnenruimten.bereken(
+    resultaat = gemeenschappelijke_binnenruimten.waardeer(
         onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
     )
     assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
@@ -50,7 +50,7 @@ def test_GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen_output(
     )
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [gemeenschappelijke_binnenruimten.bereken(eenheid_input)]
+    resultaat.groepen = [gemeenschappelijke_binnenruimten.waardeer(eenheid_input)]
 
     assert_output_model(
         resultaat,
@@ -68,7 +68,7 @@ def test_GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen_specifiek_out
         GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(peildatum=peildatum)
     )
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [gemeenschappelijke_binnenruimten.bereken(eenheid_input)]
+    resultaat.groepen = [gemeenschappelijke_binnenruimten.waardeer(eenheid_input)]
     assert_output_model(
         resultaat,
         eenheid_output,

@@ -60,7 +60,7 @@
         },
         {
           "criterium": {
-            "naam": "Berging5: Maximaal 4 punten voor verwarmde overige- en verkeersruimten",
+            "naam": "Berging5: Maximaal 4 punten",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
             }

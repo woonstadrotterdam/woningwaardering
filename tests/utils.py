@@ -1,13 +1,11 @@
 import difflib
 from datetime import date
-from decimal import Decimal
 from pathlib import Path
 from typing import Iterator
 
-import pytest
 from pytest import fail
 
-from woningwaardering.stelsels.utils import naar_tabel, rond_af_op_kwart
+from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -38,14 +36,14 @@ def get_stelselgroep_resultaten(
 
 def assert_output_model(
     resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    verwachte_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    verwacht_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     stelselgroep: Woningwaarderingstelselgroep | None = None,
 ):
     if stelselgroep:
         verwachte_groepen = get_stelselgroep_resultaten(
-            verwachte_resultaat, stelselgroep
+            verwacht_resultaat, stelselgroep
         )
-        verwachte_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
+        verwacht_resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(
             groepen=verwachte_groepen
         )
 
@@ -56,7 +54,7 @@ def assert_output_model(
         difflib.unified_diff(
             fromfile="verwacht",
             tofile="testresultaat",
-            a=naar_tabel(verwachte_resultaat).get_string().split("\n"),
+            a=naar_tabel(verwacht_resultaat).get_string().split("\n"),
             b=naar_tabel(resultaat).get_string().split("\n"),
             lineterm="",
             n=3,
@@ -67,6 +65,10 @@ def assert_output_model(
 
     if colored_diff != "":
         fail(reason=f"Output komt niet overeen\n{colored_diff}", pytrace=False)
+
+    assert (
+        verwacht_resultaat == resultaat
+    ), "Output-model verschilt van verwacht resultaat"
 
 
 def laad_specifiek_input_en_output_model(
@@ -130,27 +132,3 @@ def krijg_warning_tuple_op_datum(
             result = datum_warning_tuple[1]
 
     return result
-
-
-def test_rond_af_op_kwart():
-    # floats
-    assert rond_af_op_kwart(0.125) == Decimal("0.25")
-    assert rond_af_op_kwart(0.3) == Decimal("0.25")
-    assert rond_af_op_kwart(0.55) == Decimal("0.5")
-    assert rond_af_op_kwart(0.6) == Decimal("0.5")
-    assert rond_af_op_kwart(0.625) == Decimal("0.75")
-    assert rond_af_op_kwart(1.2) == Decimal("1.25")
-    assert rond_af_op_kwart(1.875) == Decimal("2.0")
-
-    # Decimals
-    assert rond_af_op_kwart(Decimal("0.125")) == Decimal("0.25")
-    assert rond_af_op_kwart(Decimal("0.55")) == Decimal("0.5")
-    assert rond_af_op_kwart(Decimal("0.625")) == Decimal("0.75")
-
-    # ints
-    assert rond_af_op_kwart(1) == Decimal("1.0")
-    assert rond_af_op_kwart(2) == Decimal("2.0")
-
-    # Test value error
-    with pytest.raises(ValueError):
-        rond_af_op_kwart(None)

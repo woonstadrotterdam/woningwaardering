@@ -94,15 +94,6 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Entree",
-            "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
               "id": "verwarmde_vertrekken"
@@ -118,15 +109,6 @@
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "naam": "Hal",
-            "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
-            }
-          },
-          "punten": 1.0
         },
         {
           "criterium": {
@@ -157,10 +139,21 @@
         },
         {
           "criterium": {
-            "id": "verwarmde_overige_en_verkeersruimten",
-            "naam": "Verwarmde overige- en verkeersruimten"
+            "naam": "Entree",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
           },
-          "punten": 2.0
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "naam": "Hal",
+            "bovenliggendeCriterium": {
+              "id": "verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 1.0
         },
         {
           "criterium": {
@@ -168,6 +161,13 @@
             "naam": "Verwarmde vertrekken"
           },
           "punten": 10.0
+        },
+        {
+          "criterium": {
+            "id": "verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige- en verkeersruimten"
+          },
+          "punten": 2.0
         }
       ]
     },

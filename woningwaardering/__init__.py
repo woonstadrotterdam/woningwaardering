@@ -10,4 +10,8 @@ from ._setup import initialize
 
 initialize()
 
-__all__ = ["OnzelfstandigeWoonruimten", "ZelfstandigeWoonruimten", "Woningwaardering"]
+__all__ = [
+    "OnzelfstandigeWoonruimten",
+    "ZelfstandigeWoonruimten",
+    "Woningwaardering",
+]
