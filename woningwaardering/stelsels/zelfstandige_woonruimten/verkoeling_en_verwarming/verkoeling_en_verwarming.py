@@ -53,8 +53,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if ruimte.gedeeld_met_aantal_eenheden is None
-            or ruimte.gedeeld_met_aantal_eenheden == 1
+            if not utils.gedeeld_met_eenheden(ruimte)
         ]
 
         woningwaardering_groep.woningwaarderingen.extend(
