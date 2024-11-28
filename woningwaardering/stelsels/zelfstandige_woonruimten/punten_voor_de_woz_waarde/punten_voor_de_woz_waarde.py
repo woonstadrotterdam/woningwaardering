@@ -126,7 +126,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
 
         punten_onderdeel_I = utils.rond_af(
-            Decimal(woz_waarde / factor_onderdeel_I), decimalen=2
+            (woz_waarde / factor_onderdeel_I), decimalen=2
         )
 
         logger.info(
