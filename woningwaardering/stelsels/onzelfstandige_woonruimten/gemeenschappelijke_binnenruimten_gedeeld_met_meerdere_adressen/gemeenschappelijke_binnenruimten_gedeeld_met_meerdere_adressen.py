@@ -1,4 +1,5 @@
 import warnings
+from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 
@@ -75,9 +76,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
     def _maak_oppervlakte_waarderingen(
         self,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_punten: dict[int, dict[int, Decimal]],
+        gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]],
     ) -> tuple[
-        dict[int, dict[int, Decimal]], list[WoningwaarderingResultatenWoningwaardering]
+        defaultdict[int, defaultdict[int, Decimal]],
+        list[WoningwaarderingResultatenWoningwaardering],
     ]:
         waarderigen = []
         for ruimte in ruimten:
@@ -100,21 +102,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 else:
                     oppervlakte_resultaat = oppervlakte_van_overige_ruimten[0]
                     punten_per_m2 = Decimal("0.75")
-
-                if gedeeld_met_punten.get(aantal_onzelfstandige_woonruimten) is None:
-                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = {
-                        aantal_eenheden: Decimal("0")
-                    }
-
-                if (
-                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten].get(
-                        aantal_eenheden
-                    )
-                    is None
-                ):
-                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
-                        aantal_eenheden
-                    ] = Decimal("0")
 
                 punten = (
                     Decimal(str(oppervlakte_resultaat.aantal))
@@ -155,9 +142,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
     def _maak_verkoeling_en_verwarming_waarderingen(
         self,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_punten: dict[int, dict[int, Decimal]],
+        gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]],
     ) -> tuple[
-        dict[int, dict[int, Decimal]], list[WoningwaarderingResultatenWoningwaardering]
+        defaultdict[int, defaultdict[int, Decimal]],
+        list[WoningwaarderingResultatenWoningwaardering],
     ]:
         waarderingen = []
 
@@ -167,21 +155,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             )
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-
-            if gedeeld_met_punten.get(aantal_onzelfstandige_woonruimten) is None:
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = {
-                    aantal_eenheden: Decimal("0")
-                }
-
-            if (
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten].get(
-                    aantal_eenheden
-                )
-                is None
-            ):
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
-                    aantal_eenheden
-                ] = Decimal("0")
 
             punten = (
                 Decimal(str(resultaat.punten))
@@ -217,9 +190,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
     def _maak_sanitair_waarderingen(
         self,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_punten: dict[int, dict[int, Decimal]],
+        gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]],
     ) -> tuple[
-        dict[int, dict[int, Decimal]], list[WoningwaarderingResultatenWoningwaardering]
+        defaultdict[int, defaultdict[int, Decimal]],
+        list[WoningwaarderingResultatenWoningwaardering],
     ]:
         woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering] = []
         woningwaarderingen_met_ruimten = list(
@@ -247,21 +221,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
                 continue
 
-            if gedeeld_met_punten.get(aantal_onzelfstandige_woonruimten) is None:
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = {
-                    aantal_eenheden: Decimal("0")
-                }
-
-            if (
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten].get(
-                    aantal_eenheden
-                )
-                is None
-            ):
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
-                    aantal_eenheden
-                ] = Decimal("0")
-
             punten = Decimal(str(woningwaardering.punten)) / Decimal(
                 str(aantal_onzelfstandige_woonruimten)
             )
@@ -285,9 +244,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
     def _maak_keuken_waarderingen(
         self,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_punten: dict[int, dict[int, Decimal]],
+        gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]],
     ) -> tuple[
-        dict[int, dict[int, Decimal]], list[WoningwaarderingResultatenWoningwaardering]
+        defaultdict[int, defaultdict[int, Decimal]],
+        list[WoningwaarderingResultatenWoningwaardering],
     ]:
         woningwaarderingen = []
         for ruimte in ruimten:
@@ -307,21 +267,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                 )
 
-                if gedeeld_met_punten.get(aantal_onzelfstandige_woonruimten) is None:
-                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten] = {
-                        aantal_eenheden: Decimal("0")
-                    }
-
-                if (
-                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten].get(
-                        aantal_eenheden
-                    )
-                    is None
-                ):
-                    gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
-                        aantal_eenheden
-                    ] = Decimal("0")
-
                 if not waardering.punten:
                     continue
 
@@ -335,10 +280,12 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
                     aantal_eenheden
                 ] += punten
+
                 if waardering.criterium.naam is None:
                     criterium = f"{ruimte.naam}"
                 else:
                     criterium = f"{ruimte.naam + ': ' if ruimte.naam is not None and ruimte.naam not in waardering.criterium.naam else ''}{waardering.criterium.naam}"
+
                 bovenliggende_criterium_id = f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen"
                 woningwaarderingen.append(
                     self._maak_woningwaardering(
@@ -396,9 +343,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 and ruimte.gedeeld_met_aantal_eenheden > 1
             ]
 
-            gedeeld_met_punten: dict[
-                int, dict[int, Decimal]
-            ] = {}  # {onzelfstandige_woonruimten: (aantal_adressen, punten)}
+            gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]] = (
+                defaultdict(lambda: defaultdict(Decimal))
+            )  # {onzelfstandige_woonruimten: (aantal_adressen, punten)}
 
             # maak oppervlakte waarderingen
             gedeeld_met_punten, oppervlakte_waarderingen = (
