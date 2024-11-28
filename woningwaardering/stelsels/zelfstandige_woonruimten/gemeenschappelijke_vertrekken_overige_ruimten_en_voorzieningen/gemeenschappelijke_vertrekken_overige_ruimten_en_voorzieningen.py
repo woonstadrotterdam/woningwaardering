@@ -139,7 +139,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                         )
 
                 woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                    self._deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, oppervlakte_waarderingen
                     )
                 )
@@ -147,7 +147,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # waarderingen voor de keuken van gedeelde ruimten
                 keuken_waarderingen = list(waardeer_keuken(ruimte, self.stelsel))
                 woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                    self._deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, keuken_waarderingen
                     )
                 )
@@ -157,7 +157,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     waardeer_sanitair(ruimte, self.stelselgroep, self.stelsel)
                 )
                 woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                    self._deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, sanitair_waarderingen
                     )
                 )
@@ -169,7 +169,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
             for ruimte, waardering in verkoeling_en_verwarming_waarderingen:
                 woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                    self._deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, [waardering]
                     )
                 )
@@ -189,8 +189,8 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         )
         return woningwaardering_groep
 
-    @staticmethod
-    def deel_woningwaarderingen_door_aantal_eenheden(
+    def _deel_woningwaarderingen_door_aantal_eenheden(
+        self,
         ruimte: EenhedenRuimte,
         woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
