@@ -16,7 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Balkon",
+            "naam": "Klein balkon",
             "bovenliggendeCriterium": {
               "id": "buitenruimten_prive"
             },
@@ -65,16 +65,26 @@
           "punten": 2.0
         },
         {
+          "aantal": 1.0,
           "criterium": {
             "id": "buitenruimten_prive",
-            "naam": "Totaal (privé)"
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
           "punten": 2.35
         },
         {
+          "aantal": 56.5,
           "criterium": {
             "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 4 onzelfstandige woonruimten)"
+            "naam": "Totaal (gedeeld met 4 onzelfstandige woonruimten)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
           "punten": 2.79375
         }

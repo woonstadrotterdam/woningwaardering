@@ -39,9 +39,14 @@
           "punten": 0.75
         },
         {
+          "aantal": 6.0,
           "criterium": {
             "id": "buitenruimten_gedeeld_met_2_onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
           "punten": 0.75
         }
