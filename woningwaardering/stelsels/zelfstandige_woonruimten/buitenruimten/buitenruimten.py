@@ -122,6 +122,8 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.punten = float(aftrek)
             return woningwaardering
 
+        return None
+
     def _punten_voor_buitenruimte(
         self, ruimte: EenhedenRuimte
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
