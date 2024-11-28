@@ -11,12 +11,12 @@
           "naam": "Buitenruimten"
         }
       },
-      "punten": 2.25,
+      "punten": 5.25,
       "woningwaarderingen": [
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Tuin",
+            "naam": "Klein balkon",
             "bovenliggendeCriterium": {
               "id": "buitenruimten_prive"
             },
@@ -28,6 +28,34 @@
           "punten": 0.35
         },
         {
+          "aantal": 4.5,
+          "criterium": {
+            "naam": "Balkon",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 0.84375
+        },
+        {
+          "aantal": 52.0,
+          "criterium": {
+            "naam": "Dakterras (gedeeld met 5 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.95
+        },
+        {
           "criterium": {
             "naam": "Privé buitenruimten aanwezig",
             "bovenliggendeCriterium": {
@@ -37,11 +65,28 @@
           "punten": 2.0
         },
         {
+          "aantal": 1.0,
           "criterium": {
             "id": "buitenruimten_prive",
-            "naam": "Totaal (privé)"
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
           "punten": 2.35
+        },
+        {
+          "aantal": 56.5,
+          "criterium": {
+            "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 4 onzelfstandige woonruimten)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.79375
         }
       ]
     }

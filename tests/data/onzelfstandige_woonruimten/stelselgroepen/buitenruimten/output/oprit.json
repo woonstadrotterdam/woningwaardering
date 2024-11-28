@@ -37,9 +37,14 @@
           "punten": 2.0
         },
         {
+          "aantal": 12.0,
           "criterium": {
             "id": "buitenruimten_prive",
-            "naam": "Totaal (privé)"
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           },
           "punten": 6.2
         }
