@@ -167,8 +167,8 @@ class Buitenruimten(Stelselgroep):
         Returns:
             WoningwaarderingResultatenWoningwaardering | None: Maximering als er een maximering is.
         """
-        max_punten = 15
-        punten = woningwaardering_groep.punten or 0
+        max_punten = Decimal("15")
+        punten = Decimal(str(woningwaardering_groep.punten or "0"))
         if punten > max_punten:
             aftrek = max_punten - punten
 
