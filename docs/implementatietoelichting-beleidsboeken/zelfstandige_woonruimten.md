@@ -198,7 +198,7 @@ Overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter.
 
 ### 2.2 Wat zijn overige ruimten?
 
-> De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte dient `Ruimtesoort` `overige ruimte` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van overige ruimten'.
+> De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte met `Ruimtesoort` `overige ruimte` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minimaal 2 m² is. Een ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is.
 >
 > Een ruimte dient alleen als overige ruimte gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 Een ruimte wordt als overige ruimte gewaardeerd als deze voldoet aan de volgende eisen:
