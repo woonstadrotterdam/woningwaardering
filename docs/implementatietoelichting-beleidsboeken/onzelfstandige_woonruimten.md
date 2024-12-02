@@ -69,6 +69,8 @@ b. de woonruimte behoort tot een woning die is gebouwd voor 1965; en
 c. de woonruimte niet bestaat uit of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet of van een door het college van burgemeester en wethouders aangewezen gemeentelijk monument of een door gedeputeerde staten aangewezen provinciaal monument.
 De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief beleid. Dit betekent dat het aan de verhuurder is om aan te tonen dat de woonruimte aan de voorwaarden voor deze prijsopslag voldoet.
 
+# Hoofdstuk 3 - De rubrieken van het woningwaarderingsstelsel onzelfstandige woonruimte
+
 ## Rubriek 1 - Oppervlakte van vertrekken
 
 ### 1.1 Puntentoekenning
@@ -79,6 +81,11 @@ De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief b
 > Wij hebben `gedeeldMetAantalOnzelfstandigeWoonruimten` toegevoegd als property van ruimten om te kunnen specificeren of een ruimte gedeeld wordt met andere personen op hetzelfde adres.
 
 ### 1.2 Wat zijn vertrekken?
+> De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'.
+>
+> Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
+>
+> Wanneer een ruimte met `Ruimtesoort` `vertrek` niet voldoet aan de minimale oppervlakte, wordt er gekeken of de ruimte gewaardeeerd kan worden onder de rubriek 'Oppervlakte van overige ruimten'.
 
 Een ruimte wordt als vertrek gewaardeerd als deze voldoet aan de volgende eisen:
 
@@ -137,6 +144,9 @@ Privé overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter.
 Gemeenschappelijke overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter. Dit puntenaantal wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot de gemeenschappelijke overige ruimte(n).
 
 ### 2.2 Wat zijn overige ruimten?
+> De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte met `Ruimtesoort` `overige ruimte` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minimaal 2 m² is. Een ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is.
+>
+> Een ruimte dient alleen als overige ruimte gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 
 Een ruimte wordt als overige ruimte gewaardeerd als deze voldoet aan de volgende eisen:
 
