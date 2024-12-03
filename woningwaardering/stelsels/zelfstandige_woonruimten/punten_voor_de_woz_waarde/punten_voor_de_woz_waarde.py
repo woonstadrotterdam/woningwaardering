@@ -106,7 +106,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             return woningwaardering_groep
 
         logger.info(
-            f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is {woz_eenheid.vastgestelde_waarde}"
+            f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is €{woz_eenheid.vastgestelde_waarde:.0f}"
         )
 
         woz_waarde = self.minimum_woz_waarde(woz_eenheid)
@@ -130,7 +130,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde} / {factor_onderdeel_I} = {punten_onderdeel_I}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
         )
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -156,7 +156,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde} / {oppervlakte} / {factor_onderdeel_II} = {punten_onderdeel_II}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
         )
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -311,8 +311,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         percentage_verhouding = overige_percentage / max_woz_percentage
         max_woz_punten = overige_punten / percentage_verhouding
 
-        logger.debug(f"max_woz_punten: {max_woz_punten}")
-
         # Pas de cap toe op de WOZ-punten
         capped_woz_punten = min(
             Decimal(str(woz_punten)),
@@ -396,7 +394,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if vastgestelde_waarde < minimum_woz_waarde:
             logger.info(
-                f"WOZ-waarde {vastgestelde_waarde} is kleiner dan minimum {minimum_woz_waarde}, minimum wordt gebruikt"
+                f"WOZ-waarde {vastgestelde_waarde:.0f} is kleiner dan minimum {minimum_woz_waarde:.0f}, minimum wordt gebruikt"
             )
             return minimum_woz_waarde
 
