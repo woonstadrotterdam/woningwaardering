@@ -185,6 +185,9 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.punten = float(aftrek)
             return woningwaardering
 
+        logger.debug(
+            f"Eenheid ({eenheid.id}): geen maximaal aantal punten voor {self.stelselgroep.naam} overschreden ({punten} <= {max_punten})."
+        )
         return None
 
     def _punten_voor_buitenruimte(
@@ -316,6 +319,9 @@ class Buitenruimten(Stelselgroep):
                 f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig, {woningwaardering.punten} punten voor {self.stelselgroep.naam}."
             )
             return woningwaardering
+        logger.debug(
+            f"Eenheid ({eenheid.id}): geen privé buitenruimten aanwezig voor {self.stelselgroep.naam}."
+        )
         return None
 
 
