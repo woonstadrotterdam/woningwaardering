@@ -43,7 +43,7 @@ def waardeer_sanitair(
     baden_en_douches_waarderingen = list(_waardeer_baden_en_douches(ruimte, stelsel))
     totaal_punten_bad_en_douche = Decimal(
         sum(
-            woningwaardering.punten
+            Decimal(str(woningwaardering.punten))
             for woningwaardering in baden_en_douches_waarderingen
             if woningwaardering.punten is not None
         )
@@ -53,7 +53,7 @@ def waardeer_sanitair(
     voorziening_waarderingen = list(_waardeer_installaties(ruimte, stelsel))
     totaal_punten_voorzieningen = Decimal(
         sum(
-            woningwaardering.punten
+            Decimal(str(woningwaardering.punten))
             for woningwaardering in voorziening_waarderingen
             if woningwaardering.punten is not None
         )
@@ -70,7 +70,7 @@ def waardeer_sanitair(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=f"{ruimte.naam} - Voorzieningen: Max verdubbeling punten bad en douche"
             ),
-            punten=maximering,
+            punten=float(maximering),
         )
 
 
@@ -136,8 +136,10 @@ def _waardeer_toiletten(
                     ),
                     punten=float(
                         rond_af(
-                            mapping_toilet[ruimte.detail_soort][toiletsoort]
-                            * aantal_toiletten,
+                            Decimal(
+                                str(mapping_toilet[ruimte.detail_soort][toiletsoort])
+                            )
+                            * Decimal(str(aantal_toiletten)),
                             decimalen=2,
                         )
                     ),
@@ -208,7 +210,7 @@ def _waardeer_wastafels(
         punten_per_wastafel = Decimal(str(punten_sanitair[wastafelsoort.value]))
 
         punten_voor_wastafels = rond_af(
-            (aantal_wastafels + aantal_spoelbakken) * punten_per_wastafel,
+            Decimal(str(aantal_wastafels + aantal_spoelbakken)) * punten_per_wastafel,
             decimalen=2,
         )
 
@@ -297,8 +299,8 @@ def _waardeer_baden_en_douches(
 
     if aantal_bad_en_douches > 0:
         punten = rond_af(
-            aantal_bad_en_douches
-            * punten_sanitair[Voorzieningsoort.bad_en_douche.value],
+            Decimal(str(aantal_bad_en_douches))
+            * Decimal(str(punten_sanitair[Voorzieningsoort.bad_en_douche.value])),
             decimalen=2,
         )
 
@@ -318,7 +320,11 @@ def _waardeer_baden_en_douches(
     ]:
         aantal = installaties[voorzieningsoort.value] - aantal_bad_en_douches
         if aantal > 0:
-            punten = rond_af(aantal * punten_sanitair[voorzieningsoort.value], 2)
+            punten = rond_af(
+                Decimal(str(aantal))
+                * Decimal(str(punten_sanitair[voorzieningsoort.value])),
+                2,
+            )
 
             yield (
                 WoningwaarderingResultatenWoningwaardering(
@@ -397,7 +403,9 @@ def _waardeer_installaties(
 
                 if installatie in punten_voorzieningen:
                     punten = rond_af(
-                        aantal * punten_voorzieningen[installatie], decimalen=2
+                        Decimal(str(aantal))
+                        * Decimal(str(punten_voorzieningen[installatie])),
+                        decimalen=2,
                     )
 
                     totaal_punten_voorzieningen += punten
@@ -426,11 +434,9 @@ def _waardeer_installaties(
                             )
 
                     if installatie == Voorzieningsoort.stopcontact_bij_wastafel.value:
-                        correctie_aantal = (
-                            totaal_aantal_wastafels * Decimal("2") - aantal
-                        )
+                        correctie_aantal = (totaal_aantal_wastafels * 2) - aantal
                         correctie = min(
-                            correctie_aantal
+                            Decimal(str(correctie_aantal))
                             * Decimal(punten_voorzieningen[installatie]),
                             Decimal("0"),
                         )

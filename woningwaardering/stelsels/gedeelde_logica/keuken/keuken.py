@@ -1,5 +1,6 @@
 import warnings
 from collections import Counter
+from decimal import Decimal
 from typing import Iterator
 
 from loguru import logger
@@ -184,7 +185,7 @@ def _waardeer_extra_voorzieningen(
         WoningwaarderingResultatenWoningwaardering: De gewaardeerde extra voorzieningen.
     """
     totaal_lengte_aanrechten = sum(
-        element.lengte or 0
+        Decimal(str(element.lengte or "0"))
         for element in ruimte.bouwkundige_elementen or []
         if element.detail_soort
         and element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code
@@ -212,12 +213,15 @@ def _waardeer_extra_voorzieningen(
         if voorziening in punten_per_installatie
     )
     punten_voor_extra_voorzieningen = sum(
-        punten_per_installatie[voorziening] * count
+        Decimal(str(punten_per_installatie[voorziening])) * Decimal(str(count))
         for voorziening, count in voorziening_counts.items()
     )
 
     for voorziening, count in voorziening_counts.items():
-        punten = rond_af(punten_per_installatie[voorziening] * count, decimalen=2)
+        punten = rond_af(
+            Decimal(str(punten_per_installatie[voorziening])) * Decimal(str(count)),
+            decimalen=2,
+        )
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {voorziening.naam} dat meetelt voor {Woningwaarderingstelselgroep.keuken.naam}"
         )
@@ -228,12 +232,14 @@ def _waardeer_extra_voorzieningen(
                     if count > 1
                     else voorziening.naam,
                 ),
-                punten=punten,
+                punten=float(punten),
                 aantal=count,
             )
         )
 
-    max_punten_voorzieningen = 7 if totaal_lengte_aanrechten >= 2000 else 4
+    max_punten_voorzieningen = (
+        Decimal("7") if totaal_lengte_aanrechten >= Decimal("2000") else Decimal("4")
+    )
     if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
         aftrek = max_punten_voorzieningen - punten_voor_extra_voorzieningen
         logger.info(
@@ -244,6 +250,6 @@ def _waardeer_extra_voorzieningen(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"Max. {max_punten_voorzieningen} punten voor voorzieningen in een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
                 ),
-                punten=aftrek,
+                punten=float(aftrek),
             )
         )

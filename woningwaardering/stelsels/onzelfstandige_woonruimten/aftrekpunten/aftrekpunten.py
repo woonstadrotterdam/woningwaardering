@@ -76,7 +76,7 @@ class Aftrekpunten(Stelselgroep):
 
         if oppervlakte_resultaat.woningwaarderingen:
             totale_oppervlakte_vertrekken = sum(
-                woningwaardering.aantal
+                Decimal(str(woningwaardering.aantal))
                 for woningwaardering in oppervlakte_resultaat.woningwaarderingen
                 if (
                     woningwaardering.criterium
@@ -86,14 +86,16 @@ class Aftrekpunten(Stelselgroep):
             )
 
             # 4 punten aftrek als de totale oppervlakte van de vertrekken minder is dan 8 m2
-            if totale_oppervlakte_vertrekken < 8:
+            if totale_oppervlakte_vertrekken < Decimal("8"):
                 woningwaardering = WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=f"Totale oppervlakte in Rubriek '{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}' is minder dan 8m2",
                         meeteenheid=Meeteenheid.vierkante_meter_m2.value,
                     )
                 )
-                woningwaardering.aantal = totale_oppervlakte_vertrekken
+                woningwaardering.aantal = float(
+                    utils.rond_af(totale_oppervlakte_vertrekken, 2)
+                )
                 woningwaardering.punten = -4.0
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 

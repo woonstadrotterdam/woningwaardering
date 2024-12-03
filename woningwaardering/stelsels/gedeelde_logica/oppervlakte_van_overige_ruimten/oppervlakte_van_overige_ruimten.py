@@ -73,13 +73,11 @@ def waardeer_oppervlakte_van_overige_ruimte(
 
             # corrigeeer niet met meer punten dan de oppervlakte voor stelselgroep overige ruimten zou opleveren
             correctie = min(
-                5.0,
-                float(
-                    rond_af_op_kwart(
-                        rond_af(ruimte.oppervlakte, decimalen=2) * Decimal("0.75")
-                    )
+                Decimal("5"),
+                rond_af_op_kwart(
+                    rond_af(ruimte.oppervlakte, decimalen=2) * Decimal("0.75")
                 ),
             )
 
-            woningwaardering_correctie.punten = correctie * -1.0
+            woningwaardering_correctie.punten = float(correctie * Decimal("-1"))
             yield woningwaardering_correctie

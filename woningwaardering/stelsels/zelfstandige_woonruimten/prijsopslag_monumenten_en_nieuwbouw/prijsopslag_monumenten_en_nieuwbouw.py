@@ -65,7 +65,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             if woningwaardering is not None
         )
 
-        opslagpercentage = Decimal(
+        opslagpercentage = float(
             sum(
                 Decimal(str(woningwaardering.opslagpercentage))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
@@ -73,8 +73,9 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
         )
 
-        woningwaardering_groep.opslagpercentage = float(opslagpercentage)
-        punten = Decimal(
+        woningwaardering_groep.opslagpercentage = opslagpercentage
+
+        punten = float(
             sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
@@ -82,7 +83,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
         )
 
-        woningwaardering_groep.punten = float(punten)
+        woningwaardering_groep.punten = punten
         return woningwaardering_groep
 
     def _genereer_woningwaarderingen(

@@ -78,6 +78,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 )
                 * Decimal("0.75")
             )
+            # de maximering is altijd in punten en daarom wordt de som de maximering hier van de punten afgetrokken
             + sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []

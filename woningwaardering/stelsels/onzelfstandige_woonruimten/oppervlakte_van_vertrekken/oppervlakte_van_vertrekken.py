@@ -55,7 +55,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
+        gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
         for ruimte in eenheid.ruimten or []:
             woningwaarderingen = list(waardeer_oppervlakte_van_vertrek(ruimte))
@@ -71,14 +71,15 @@ class OppervlakteVanVertrekken(Stelselgroep):
                     ):
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ] += float(utils.rond_af(woningwaardering.aantal, decimalen=2))
+                        ] += utils.rond_af(woningwaardering.aantal, decimalen=2)
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
                         )
                     else:
-                        gedeeld_met_counter[1] += float(
-                            utils.rond_af(woningwaardering.aantal, decimalen=2)
+                        gedeeld_met_counter[1] += utils.rond_af(
+                            woningwaardering.aantal, decimalen=2
                         )
+
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
                                 id=f"{self.stelselgroep.name}_prive"
@@ -88,33 +89,35 @@ class OppervlakteVanVertrekken(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
-        for aantal, oppervlakte in gedeeld_met_counter.items():
+        for aantal_onz, oppervlakte in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                 meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                naam=f"Totaal (gedeeld met {aantal})"
-                if aantal > 1
+                naam=f"Totaal (gedeeld met {aantal_onz})"
+                if aantal_onz > 1
                 else "Totaal (privé)",
-                id=f"{self.stelselgroep.name}_gedeeld_met_{aantal}_onzelfstandige_woonruimten"
-                if aantal > 1
+                id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
+                if aantal_onz > 1
                 else f"{self.stelselgroep.name}_prive",
             )
             woningwaardering.punten = float(
                 utils.rond_af_op_kwart(
-                    utils.rond_af(oppervlakte, decimalen=0) / aantal,
+                    utils.rond_af(oppervlakte, decimalen=0) / Decimal(str(aantal_onz)),
                 )
             )
             woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=0))
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         punten = float(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
+            utils.rond_af_op_kwart(
+                sum(
+                    Decimal(str(woningwaardering.punten))
+                    for woningwaardering in woningwaardering_groep.woningwaarderingen
+                    or []
+                    if woningwaardering.punten is not None
+                )
             )
         )
-
         woningwaardering_groep.punten = punten
 
         logger.info(

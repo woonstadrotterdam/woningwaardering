@@ -167,15 +167,15 @@ class Buitenruimten(Stelselgroep):
         Returns:
             WoningwaarderingResultatenWoningwaardering | None: Maximering als er een maximering is.
         """
-        max_punten = 15
-        punten = woningwaardering_groep.punten or 0
+        max_punten = Decimal("15")
+        punten = Decimal(str(woningwaardering_groep.punten or "0"))
         if punten > max_punten:
             aftrek = max_punten - punten
 
             logger.info(
                 f"Eenheid ({eenheid.id}): maximaal aantal punten voor {self.stelselgroep.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
             )
-            punten += aftrek
+
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -325,4 +325,6 @@ if __name__ == "__main__":  # pragma: no cover
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
-        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")
+        context.waardeer(
+            "tests/data/onzelfstandige_woonruimten/stelselgroepen/buitenruimten/input/gedeelde_buitenruimtes_onz.json"
+        )

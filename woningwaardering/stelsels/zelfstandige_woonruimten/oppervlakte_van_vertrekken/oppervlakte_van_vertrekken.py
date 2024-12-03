@@ -66,18 +66,16 @@ class OppervlakteVanVertrekken(Stelselgroep):
             )
 
         punten = rond_af_op_kwart(
-            float(
-                rond_af(
-                    sum(
-                        Decimal(str(woningwaardering.aantal))
-                        for woningwaardering in woningwaardering_groep.woningwaarderingen
-                        or []
-                        if woningwaardering.aantal is not None
-                    ),
-                    decimalen=0,
-                )
-                * Decimal("1")
+            rond_af(
+                sum(
+                    Decimal(str(woningwaardering.aantal))
+                    for woningwaardering in woningwaardering_groep.woningwaarderingen
+                    or []
+                    if woningwaardering.aantal is not None
+                ),
+                decimalen=0,
             )
+            * Decimal("1")
         )
 
         woningwaardering_groep.punten = float(punten)
