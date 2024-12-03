@@ -53,6 +53,65 @@ def is_geldig(
     return begindatum <= peildatum <= einddatum
 
 
+def _voeg_onderliggende_woningwaarderingen_toe(
+    table: PrettyTable,
+    stelselgroep_naam: str,
+    woningwaardering: WoningwaarderingResultatenWoningwaardering,
+    woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
+    aantal_waarderingen: int,
+    indent: int = 0,
+) -> None:
+    """
+    Voeg de onderliggende woningwaarderingen toe aan de tabel.
+    """
+
+    global index
+
+    if not woningwaardering.criterium or not woningwaardering.criterium.id:
+        return
+
+    onderliggende_woningwaarderingen = [
+        onderliggende_woningwaardering
+        for onderliggende_woningwaardering in woningwaarderingen
+        if onderliggende_woningwaardering.criterium is not None
+        and onderliggende_woningwaardering.criterium.bovenliggende_criterium is not None
+        and onderliggende_woningwaardering.criterium.bovenliggende_criterium.id
+        == woningwaardering.criterium.id
+    ]
+
+    for onderliggende_woningwaardering in onderliggende_woningwaarderingen:
+        if onderliggende_woningwaardering.criterium is not None:
+            index += 1
+            table.add_row(
+                [
+                    stelselgroep_naam,
+                    f"{' '*indent} - {onderliggende_woningwaardering.criterium.naam}",
+                    f"[{onderliggende_woningwaardering.aantal}]"
+                    if onderliggende_woningwaardering.aantal is not None
+                    else "",
+                    onderliggende_woningwaardering.criterium.meeteenheid.naam
+                    if onderliggende_woningwaardering.criterium.meeteenheid is not None
+                    else "",
+                    f"[{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}]"
+                    if onderliggende_woningwaardering.punten is not None
+                    else "",
+                    f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
+                    if onderliggende_woningwaardering.opslagpercentage is not None
+                    else "",
+                ],
+                divider=index == aantal_waarderingen,
+            )
+
+        _voeg_onderliggende_woningwaarderingen_toe(
+            table,
+            stelselgroep_naam,
+            onderliggende_woningwaardering,
+            woningwaarderingen,
+            aantal_waarderingen=aantal_waarderingen,
+            indent=indent + 1,
+        )
+
+
 def naar_tabel(
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat
@@ -117,6 +176,7 @@ def naar_tabel(
         )
         woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
         aantal_waarderingen = len(woningwaarderingen)
+        global index
         index = 0
 
         for woningwaardering in [
@@ -149,79 +209,13 @@ def naar_tabel(
                     divider=index == aantal_waarderingen,
                 )
 
-                def voeg_onderliggende_woningwaarderingen_toe(
-                    table: PrettyTable,
-                    stelselgroep_naam: str,
-                    woningwaardering: WoningwaarderingResultatenWoningwaardering,
-                    woningwaarderingen: list[
-                        WoningwaarderingResultatenWoningwaardering
-                    ],
-                    index: int,
-                    indent: int = 0,
-                ) -> None:
-                    """
-                    Voeg de onderliggende woningwaarderingen toe aan de tabel.
-                    """
-
-                    if (
-                        not woningwaardering.criterium
-                        or not woningwaardering.criterium.id
-                    ):
-                        return
-
-                    onderliggende_woningwaarderingen = [
-                        onderliggende_woningwaardering
-                        for onderliggende_woningwaardering in woningwaarderingen
-                        if onderliggende_woningwaardering.criterium is not None
-                        and onderliggende_woningwaardering.criterium.bovenliggende_criterium
-                        is not None
-                        and onderliggende_woningwaardering.criterium.bovenliggende_criterium.id
-                        == woningwaardering.criterium.id
-                    ]
-
-                    for (
-                        onderliggende_woningwaardering
-                    ) in onderliggende_woningwaarderingen:
-                        if onderliggende_woningwaardering.criterium is not None:
-                            index += 1
-                            table.add_row(
-                                [
-                                    stelselgroep_naam,
-                                    f"{' '*indent} - {onderliggende_woningwaardering.criterium.naam}",
-                                    f"[{onderliggende_woningwaardering.aantal}]"
-                                    if onderliggende_woningwaardering.aantal is not None
-                                    else "",
-                                    onderliggende_woningwaardering.criterium.meeteenheid.naam
-                                    if onderliggende_woningwaardering.criterium.meeteenheid
-                                    is not None
-                                    else "",
-                                    f"[{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}]"
-                                    if onderliggende_woningwaardering.punten is not None
-                                    else "",
-                                    f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
-                                    if onderliggende_woningwaardering.opslagpercentage
-                                    is not None
-                                    else "",
-                                ],
-                                divider=index == aantal_waarderingen,
-                            )
-
-                        voeg_onderliggende_woningwaarderingen_toe(
-                            table,
-                            stelselgroep_naam,
-                            onderliggende_woningwaardering,
-                            woningwaarderingen,
-                            index,
-                            indent=indent + 1,
-                        )
-
-                voeg_onderliggende_woningwaarderingen_toe(
+                _voeg_onderliggende_woningwaarderingen_toe(
                     table,
                     stelselgroep_naam,
                     woningwaardering,
                     woningwaarderingen,
-                    index,
                     indent=0,
+                    aantal_waarderingen=aantal_waarderingen,
                 )
 
         aantallen = [
