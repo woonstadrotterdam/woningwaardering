@@ -252,7 +252,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             # 187 punten, geldt een waardering van 186 punten voor de woning.
             if totaal_punten_zonder_cap > 186 and totaal_punten_met_cap < 187:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 correctie_punten = 186 - totaal_punten_zonder_cap
                 woningwaardering_groep.woningwaarderingen.append(
@@ -265,7 +265,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 )
             else:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 woningwaardering_groep.woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
@@ -398,6 +398,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return minimum_woz_waarde
 
+        logger.debug(
+            f"WOZ-waarde €{vastgestelde_waarde:.0f} is groter dan minimum {minimum_woz_waarde:.0f}, minimum wordt niet gebruikt"
+        )
+
         return vastgestelde_waarde
 
     def bepaal_oppervlakte(
@@ -496,12 +500,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 ]
             )
             logger.debug(
-                f"Eenheid ({eenheid.id}): punten_critische_stelselgroepen: {punten_critische_stelselgroepen}"
+                f"Eenheid ({eenheid.id}): nieuwbouw of hoogniveau renovatie in de jaren 2015-2019. Punten voor de stelselgroepen 1 t/m 10 en 12: {punten_critische_stelselgroepen}"
             )
             if punten_critische_stelselgroepen >= 110:
                 minimum_punten = Decimal("40")
                 logger.info(
-                    f"Eenheid ({eenheid.id}): minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}): nieuwbouw of hoogniveau renovatie in de jaren 2015-2019 en >= 110 punten voor de stelselgroepen 1 t/m 10 en 12. Minimaal 40 punten voor {self.stelselgroep.naam}"
                 )
 
         return minimum_punten
