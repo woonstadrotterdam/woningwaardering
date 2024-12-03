@@ -160,7 +160,7 @@ def _waardeer_aanrecht(
             else:
                 aanrecht_punten = 4
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een aanrecht van {element.lengte}mm dat meetelt voor {Woningwaarderingstelselgroep.keuken.naam}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een aanrecht van {int(element.lengte)}mm dat meetelt voor {Woningwaarderingstelselgroep.keuken.naam}"
             )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
