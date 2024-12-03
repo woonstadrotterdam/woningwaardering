@@ -72,8 +72,8 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
                     # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2,  (bijvoorbeeld een garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief behorende tot de woning).
                     if not utils.gedeeld_met_eenheden(ruimte):
-                        logger.info(
-                            f"Ruimte {ruimte.id} is niet gedeeld met andere eenheden en komt daarom niet in aanmerking voor waardering onder {self.stelselgroep.value} onzelfstandig."
+                        logger.debug(
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is niet gedeeld met andere eenheden en telt daarom niet voor {self.stelselgroep.naam}."
                         )
                         continue
 
