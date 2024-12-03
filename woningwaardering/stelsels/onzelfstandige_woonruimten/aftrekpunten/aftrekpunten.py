@@ -133,7 +133,7 @@ class Aftrekpunten(Stelselgroep):
             if totale_oppervlakte_vertrekken < Decimal("8"):
                 aftrekpunten = -4.0
                 logger.info(
-                    f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken < 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), {aftrekpunten} punten aftrek voor {self.stelselgroep.naam}"
+                    f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken < 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), {aftrekpunten} punten voor {self.stelselgroep.naam}"
                 )
                 woningwaardering = WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
