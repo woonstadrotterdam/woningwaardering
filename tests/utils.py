@@ -8,7 +8,7 @@ import pytest
 from pytest import fail
 
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_tabel, normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -115,7 +115,7 @@ class WarningConfig:
     warnings: dict[type[Warning], str]
 
 
-def stelselgroep_warnings(
+def assert_stelselgroep_warnings(
     warning_config: WarningConfig, peildatum: date, stelselgroep_class: Stelselgroep
 ):
     """
@@ -144,3 +144,28 @@ def stelselgroep_warnings(
                     for r in records
                 ]
             ), f"Geen {warning_type} met message '{warning_message}' geraised"
+
+
+def assert_stelselgroep_output_in_eenheid_output(
+    input_en_output_model: tuple[
+        EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat
+    ],
+    peildatum: date,
+    stelselgroep_class: Stelselgroep,
+):
+    eenheid_input, eenheid_output = input_en_output_model
+    normaliseer_ruimte_namen(eenheid_input)
+
+    stelselgroep = stelselgroep_class(peildatum=peildatum)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    assert isinstance(
+        resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
+    ), "Resultaat is geen WoningwaarderingResultatenWoningwaarderingResultaat"
+    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
+
+    assert_output_model(
+        resultaat,
+        eenheid_output,
+        stelselgroep.stelselgroep,
+    )

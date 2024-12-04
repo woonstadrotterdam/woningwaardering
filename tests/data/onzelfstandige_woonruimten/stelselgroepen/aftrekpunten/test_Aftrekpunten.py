@@ -2,44 +2,27 @@ from pathlib import Path
 
 import pytest
 
-from tests.utils import assert_output_model, laad_specifiek_input_en_output_model
+from tests.utils import (
+    assert_output_model,
+    assert_stelselgroep_output_in_eenheid_output,
+    laad_specifiek_input_en_output_model,
+)
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     Aftrekpunten,
 )
-from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
-    WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
 
 
-def test_Aftrekpunten(
-    onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
-):
-    aftrekpunten = Aftrekpunten(peildatum=peildatum)
-    resultaat = aftrekpunten.waardeer(
-        onzelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
-    )
-    assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
-
-
 def test_Aftrekpunten_output(
     onzelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
-    eenheid_input, eenheid_output = onzelfstandige_woonruimten_input_en_outputmodel
-
-    normaliseer_ruimte_namen(eenheid_input)
-
-    aftrekpunten = Aftrekpunten(peildatum=peildatum)
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [aftrekpunten.waardeer(eenheid_input)]
-
-    assert_output_model(
-        resultaat,
-        eenheid_output,
-        Woningwaarderingstelselgroep.aftrekpunten,
+    assert_stelselgroep_output_in_eenheid_output(
+        onzelfstandige_woonruimten_input_en_outputmodel,
+        peildatum,
+        Aftrekpunten,
     )
 
 

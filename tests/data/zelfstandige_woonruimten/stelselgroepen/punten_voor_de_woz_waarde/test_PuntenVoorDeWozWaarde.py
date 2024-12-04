@@ -6,8 +6,8 @@ import pytest
 from tests.utils import (
     WarningConfig,
     assert_output_model,
+    assert_stelselgroep_warnings,
     laad_specifiek_input_en_output_model,
-    stelselgroep_warnings,
 )
 from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten import PuntenVoorDeWozWaarde
@@ -79,4 +79,4 @@ warning_configs = [
 @pytest.mark.filterwarnings("ignore::UserWarning")
 @pytest.mark.parametrize("warning_config", warning_configs)
 def test_PuntenVoorDeWozWaarde_specifiek_warnings(warning_config, peildatum):
-    stelselgroep_warnings(warning_config, peildatum, PuntenVoorDeWozWaarde)
+    assert_stelselgroep_warnings(warning_config, peildatum, PuntenVoorDeWozWaarde)

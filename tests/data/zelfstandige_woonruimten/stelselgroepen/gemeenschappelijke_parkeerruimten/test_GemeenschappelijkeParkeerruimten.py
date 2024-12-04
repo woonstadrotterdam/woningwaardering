@@ -6,8 +6,8 @@ import pytest
 from tests.utils import (
     WarningConfig,
     assert_output_model,
+    assert_stelselgroep_warnings,
     laad_specifiek_input_en_output_model,
-    stelselgroep_warnings,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.gemeenschappelijke_parkeerruimten import (
     GemeenschappelijkeParkeerruimten,
@@ -124,4 +124,6 @@ warning_configs = [
 @pytest.mark.filterwarnings("ignore::UserWarning")
 @pytest.mark.parametrize("warning_config", warning_configs)
 def test_GemeenschappelijkeParkeerruimten_specifiek_warnings(warning_config, peildatum):
-    stelselgroep_warnings(warning_config, peildatum, GemeenschappelijkeParkeerruimten)
+    assert_stelselgroep_warnings(
+        warning_config, peildatum, GemeenschappelijkeParkeerruimten
+    )
