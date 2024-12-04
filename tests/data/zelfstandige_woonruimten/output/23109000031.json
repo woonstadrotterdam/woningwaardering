@@ -187,7 +187,10 @@
         {
           "aantal": 3.21,
           "criterium": {
-            "naam": "Terras (privé)",
+            "naam": "Terras",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -197,9 +200,24 @@
         },
         {
           "criterium": {
-            "naam": "Privé buitenruimten aanwezig"
+            "naam": "Buitenruimten aanwezig",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            }
           },
           "punten": 2.0
+        },
+        {
+          "aantal": 3.21,
+          "criterium": {
+            "id": "buitenruimten_prive",
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.12
         }
       ]
     },

@@ -282,7 +282,7 @@ class Buitenruimten(Stelselgroep):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Privé buitenruimten aanwezig",
+                    naam="Buitenruimten aanwezig",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                         id=f"{self.stelselgroep.name}_prive",
                     ),
