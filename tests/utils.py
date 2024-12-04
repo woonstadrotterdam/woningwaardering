@@ -122,9 +122,9 @@ def stelselgroep_warnings(
     Generieke functie om warnings voor stelselgroepen te testen
 
     Args:
-        warning_config: WarningConfig object met waarschuwing test configuratie
-        peildatum: peildatum
-        stelselgroep_class: Class van de stelselgroep om te testen
+        warning_config (WarningConfig): WarningConfig object met waarschuwing test configuratie
+        peildatum (date): peildatum
+        stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
     """
     if peildatum < warning_config.peildatum:
         pytest.skip(f"Warning is niet van toepassing op peildatum: {peildatum}")
