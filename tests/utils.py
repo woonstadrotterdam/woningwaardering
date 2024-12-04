@@ -169,3 +169,53 @@ def assert_stelselgroep_output_in_eenheid_output(
         eenheid_output,
         stelselgroep.stelselgroep,
     )
+
+
+def assert_stelselgroep_specifiek_output(
+    specifieke_input_en_output_model: tuple[
+        EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat
+    ],
+    peildatum: date,
+    stelselgroep_class: Stelselgroep,
+):
+    """
+    Generieke functie om specifieke output voor stelselgroepen te testen
+
+    Args:
+        specifieke_input_en_output_model (tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]): Tuple van input en verwachte output
+        peildatum (date): peildatum
+        stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
+    """
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
+    stelselgroep = stelselgroep_class(peildatum=peildatum)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
+
+    assert_output_model(
+        resultaat,
+        eenheid_output,
+        stelselgroep.stelselgroep,
+    )
+
+
+def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fixture:
+    """
+    Factory functie die een pytest fixture maakt voor het laden van specifieke test cases.
+
+    Args:
+        base_path (Path): Pad naar de directory waarin de test file zich bevindt
+
+    Returns:
+        pytest.fixture: Een pytest fixture die een tuple van input en output model retourneert
+    """
+
+    @pytest.fixture(params=[str(p) for p in (base_path / "output").rglob("*.json")])
+    def specifieke_input_en_output_model(request):
+        current_file_path = Path(request.fspath).parent
+        output_file_path = request.param
+        return laad_specifiek_input_en_output_model(
+            current_file_path, Path(output_file_path)
+        )
+
+    return specifieke_input_en_output_model

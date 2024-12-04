@@ -27,7 +27,6 @@ def test_Sanitair_output(zelfstandige_woonruimten_input_en_outputmodel, peildatu
     )
 
 
-# Get the absolute path to the current file
 current_file_path = Path(__file__).absolute().parent
 
 

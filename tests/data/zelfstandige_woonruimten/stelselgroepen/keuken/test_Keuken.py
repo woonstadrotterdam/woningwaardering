@@ -27,7 +27,6 @@ def test_Keuken_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum)
     )
 
 
-# Get the absolute path to the current file
 current_file_path = Path(__file__).absolute().parent
 
 

@@ -31,7 +31,6 @@ def test_GemeenschappelijkeParkeerruimten_output(
     )
 
 
-# Get the absolute path to the current file
 current_file_path = Path(__file__).absolute().parent
 
 
