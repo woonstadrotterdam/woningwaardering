@@ -4,13 +4,14 @@ from pathlib import Path
 import pytest
 
 from tests.utils import (
+    WarningConfig,
     assert_output_model,
-    krijg_warning_tuple_op_datum,
     laad_specifiek_input_en_output_model,
 )
 from woningwaardering.stelsels.onzelfstandige_woonruimten import PuntenVoorDeWozWaarde
 from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
+    EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
@@ -64,29 +65,35 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(
     )
 
 
-# mapping eenheid_id naar peildatum-warning
-specifiek_warning_mapping = {
-    "geen_woz": [
-        (
-            date(2024, 1, 1),
-            (
-                UserWarning,
-                "geen WOZ-waarde",
-            ),
-        )
-    ],
-}
+warning_configs = [
+    WarningConfig(
+        file=f"{current_file_path}/input/geen_geldige_woz_waarde.json",
+        peildatum=date(2024, 1, 1),
+        warnings={
+            UserWarning: "geen WOZ-waarde",
+        },
+    ),
+]
 
 
-def test_PuntenVoorDeWozWaarde_specifiek_warnings(
-    specifieke_input_en_output_model, peildatum
-):
-    eenheid_input, _ = specifieke_input_en_output_model
+@pytest.mark.filterwarnings("ignore::UserWarning")
+@pytest.mark.parametrize("warning_config", warning_configs)
+def test_PuntenVoorDeWozWaarde_specifiek_warnings(warning_config, peildatum):
+    if peildatum < warning_config.peildatum:
+        pytest.skip(f"Warning is niet van toepassing op peildatum: {peildatum}")
 
-    warning_tuple = krijg_warning_tuple_op_datum(
-        eenheid_input.id, peildatum, specifiek_warning_mapping
-    )
-    if warning_tuple is not None:
-        stelselgroep = PuntenVoorDeWozWaarde(peildatum=peildatum)
-        with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
-            stelselgroep.waardeer(eenheid_input)
+    with open(warning_config.file, "r+") as f:
+        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
+
+    with pytest.warns() as records:
+        woz = PuntenVoorDeWozWaarde(peildatum=peildatum)
+        woz.waardeer(eenheid_input)
+
+        warning_message = [(r.category, str(r.message)) for r in records]
+        for warning_type, warning_message in warning_config.warnings.items():
+            assert any(
+                [
+                    warning_type == r.category and warning_message in str(r.message)
+                    for r in records
+                ]
+            ), f"Geen {warning_type} met message '{warning_message}' geraised"

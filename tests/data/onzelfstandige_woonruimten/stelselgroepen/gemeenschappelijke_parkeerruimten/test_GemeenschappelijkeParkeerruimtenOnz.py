@@ -4,14 +4,15 @@ from pathlib import Path
 import pytest
 
 from tests.utils import (
+    WarningConfig,
     assert_output_model,
-    krijg_warning_tuple_op_datum,
     laad_specifiek_input_en_output_model,
 )
 from woningwaardering.stelsels.onzelfstandige_woonruimten.gemeenschappelijke_parkeerruimten import (
     GemeenschappelijkeParkeerruimten,
 )
 from woningwaardering.vera.bvg.generated import (
+    EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -78,43 +79,44 @@ def test_GemeenschappelijkeParkeerruimten_specifiek_output(
     )
 
 
-# mapping eenheid_id naar peildatum-warning
-specifiek_warning_mapping = {
-    # let op: dit is de eenheid_id in de input json
-    "warning_gedeeld_met_aantal_eenheden": [
-        (
-            date(2024, 7, 1),
-            (
-                UserWarning,
-                "gedeeld_met_aantal_eenheden",
-            ),
-        )
-    ],
-    # let op: dit is de eenheid_id in de input json
-    "warning_geen_oppervlakte": [
-        (
-            date(2024, 7, 1),
-            (
-                UserWarning,
-                "oppervlakte",
-            ),
-        )
-    ],
-}
+warning_configs = [
+    WarningConfig(
+        file=f"{current_file_path}/input/warning_geen_oppervlakte.json",
+        peildatum=date(2024, 7, 1),
+        warnings={
+            UserWarning: "oppervlakte",
+        },
+    ),
+    WarningConfig(
+        file=f"{current_file_path}/input/warning_gedeeld_met_aantal_eenheden.json",
+        peildatum=date(2024, 7, 1),
+        warnings={
+            UserWarning: "gedeeld_met_aantal_eenheden",
+        },
+    ),
+]
 
 
-# In deze test data zit expres missende data
 @pytest.mark.filterwarnings("ignore::UserWarning")
-def test_Gemeenschappelijke_parkeerruimte_specifiek_warnings(
-    specifieke_input_en_output_model, peildatum
-):
-    eenheid_input, x = specifieke_input_en_output_model
-    gemeenschappelijke_parkeerruimte = GemeenschappelijkeParkeerruimten(
-        peildatum=peildatum
-    )
-    warning_tuple = krijg_warning_tuple_op_datum(
-        eenheid_input.id, peildatum, specifiek_warning_mapping
-    )
-    if warning_tuple is not None:
-        with pytest.warns(warning_tuple[0], match=warning_tuple[1]):
-            gemeenschappelijke_parkeerruimte.waardeer(eenheid_input)
+@pytest.mark.parametrize("warning_config", warning_configs)
+def test_GemeenschappelijkeParkeerruimten_specifiek_warnings(warning_config, peildatum):
+    if peildatum < warning_config.peildatum:
+        pytest.skip(f"Warning is niet van toepassing op peildatum: {peildatum}")
+
+    with open(warning_config.file, "r+") as f:
+        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
+
+    with pytest.warns() as records:
+        gemeenschappelijke_parkeerruimten = GemeenschappelijkeParkeerruimten(
+            peildatum=peildatum
+        )
+        gemeenschappelijke_parkeerruimten.waardeer(eenheid_input)
+
+        warning_message = [(r.category, str(r.message)) for r in records]
+        for warning_type, warning_message in warning_config.warnings.items():
+            assert any(
+                [
+                    warning_type == r.category and warning_message in str(r.message)
+                    for r in records
+                ]
+            ), f"Geen {warning_type} met message '{warning_message}' geraised"
