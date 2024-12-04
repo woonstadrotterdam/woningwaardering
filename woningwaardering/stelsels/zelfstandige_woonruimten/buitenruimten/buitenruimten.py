@@ -75,8 +75,8 @@ class Buitenruimten(Stelselgroep):
         ) is not None:
             woningwaardering_groep.woningwaarderingen.append(result)
 
-        som: dict[str, tuple[float, float]] = defaultdict(
-            lambda: (0.0, 0.0)
+        som: dict[str, tuple[Decimal, Decimal]] = defaultdict(
+            lambda: (Decimal("0.0"), Decimal("0.0"))
         )  # (punten, aantal)
         for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
             if (
@@ -87,8 +87,8 @@ class Buitenruimten(Stelselgroep):
                 criterium_id = woningwaardering.criterium.bovenliggende_criterium.id
                 current_punten, current_aantal = som[criterium_id]
                 som[criterium_id] = (
-                    current_punten + (woningwaardering.punten or 0),
-                    current_aantal + (woningwaardering.aantal or 0),
+                    current_punten + (Decimal(str(woningwaardering.punten or "0"))),
+                    current_aantal + (Decimal(str(woningwaardering.aantal or "0"))),
                 )
 
         for id, (punten, aantal) in som.items():
@@ -106,8 +106,8 @@ class Buitenruimten(Stelselgroep):
                     meeteenheid=Meeteenheid.vierkante_meter_m2.value,
                 )
             )
-            woningwaardering.punten = punten
-            woningwaardering.aantal = aantal
+            woningwaardering.punten = float(punten)
+            woningwaardering.aantal = float(aantal)
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         woningwaardering_groep.punten = float(
