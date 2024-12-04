@@ -4,8 +4,10 @@ from datetime import date
 from pathlib import Path
 from typing import Iterator
 
+import pytest
 from pytest import fail
 
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -111,3 +113,34 @@ class WarningConfig:
     file: str
     peildatum: date
     warnings: dict[type[Warning], str]
+
+
+def stelselgroep_warnings(
+    warning_config: WarningConfig, peildatum: date, stelselgroep_class: Stelselgroep
+):
+    """
+    Generieke functie om warnings voor stelselgroepen te testen
+
+    Args:
+        warning_config: WarningConfig object met waarschuwing test configuratie
+        peildatum: peildatum
+        stelselgroep_class: Class van de stelselgroep om te testen
+    """
+    if peildatum < warning_config.peildatum:
+        pytest.skip(f"Warning is niet van toepassing op peildatum: {peildatum}")
+
+    with open(warning_config.file, "r+") as f:
+        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
+
+    with pytest.warns() as records:
+        stelselgroep = stelselgroep_class(peildatum=peildatum)
+        stelselgroep.waardeer(eenheid_input)
+
+        warning_message = [(r.category, str(r.message)) for r in records]
+        for warning_type, warning_message in warning_config.warnings.items():
+            assert any(
+                [
+                    warning_type == r.category and warning_message in str(r.message)
+                    for r in records
+                ]
+            ), f"Geen {warning_type} met message '{warning_message}' geraised"

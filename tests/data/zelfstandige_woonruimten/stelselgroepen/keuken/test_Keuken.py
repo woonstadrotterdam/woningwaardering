@@ -7,13 +7,13 @@ from tests.utils import (
     WarningConfig,
     assert_output_model,
     laad_specifiek_input_en_output_model,
+    stelselgroep_warnings,
 )
 from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.stelsels.zelfstandige_woonruimten.keuken import (
     Keuken,
 )
 from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -92,21 +92,4 @@ warning_configs = [
 @pytest.mark.filterwarnings("ignore::UserWarning")
 @pytest.mark.parametrize("warning_config", warning_configs)
 def test_Keuken_specifiek_warnings(warning_config, peildatum):
-    if peildatum < warning_config.peildatum:
-        pytest.skip(f"Warning is niet van toepassing op peildatum: {peildatum}")
-
-    with open(warning_config.file, "r+") as f:
-        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-
-    with pytest.warns() as records:
-        keuken = Keuken(peildatum=peildatum)
-        keuken.waardeer(eenheid_input)
-
-        warning_message = [(r.category, str(r.message)) for r in records]
-        for warning_type, warning_message in warning_config.warnings.items():
-            assert any(
-                [
-                    warning_type == r.category and warning_message in str(r.message)
-                    for r in records
-                ]
-            ), f"Geen {warning_type} met message '{warning_message}' geraised"
+    stelselgroep_warnings(warning_config, peildatum, Keuken)
