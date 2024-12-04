@@ -73,8 +73,13 @@ class DevelopmentContext:
 
     def _setup_warnings(self) -> None:
         def warning_to_logger(
-            message, category, filename, lineno, file=None, line=None
-        ):
+            message: Warning | str,
+            category: type[Warning],
+            filename: str,
+            lineno: int,
+            file: Optional[Any] = None,
+            line: Optional[str] = None,
+        ) -> None:
             logger.warning(f"{category.__name__}: {message}")
 
         if not self.strict:

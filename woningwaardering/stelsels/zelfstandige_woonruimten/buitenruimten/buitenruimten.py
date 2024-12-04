@@ -75,20 +75,26 @@ class Buitenruimten(Stelselgroep):
         ) is not None:
             woningwaardering_groep.woningwaarderingen.append(result)
 
-        som = defaultdict(lambda: (0.0, 0.0))  # (punten, aantal)
+        som: dict[str, tuple[float, float]] = defaultdict(
+            lambda: (0.0, 0.0)
+        )  # (punten, aantal)
         for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
-            if woningwaardering.criterium.bovenliggende_criterium:
-                print(woningwaardering.aantal)
-                current_punten, current_aantal = som[
-                    woningwaardering.criterium.bovenliggende_criterium.id
-                ]
-                som[woningwaardering.criterium.bovenliggende_criterium.id] = (
+            if (
+                woningwaardering.criterium
+                and woningwaardering.criterium.bovenliggende_criterium
+                and woningwaardering.criterium.bovenliggende_criterium.id
+            ):
+                criterium_id = woningwaardering.criterium.bovenliggende_criterium.id
+                current_punten, current_aantal = som[criterium_id]
+                som[criterium_id] = (
                     current_punten + (woningwaardering.punten or 0),
                     current_aantal + (woningwaardering.aantal or 0),
                 )
 
         for id, (punten, aantal) in som.items():
-            match = re.search(r"\d+", id)
+            match = re.search(
+                r"\d+", id
+            )  # in criterium id staat gedeeld_met_<aantal> of prive
             gedeeld_met = int(match.group()) if match else 1
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (

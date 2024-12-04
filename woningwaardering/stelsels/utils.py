@@ -33,6 +33,8 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
+index: int = 0  # nodig voor mypy voor de global index voor de tabel
+
 
 def is_geldig(
     begindatum: date = date.min,
