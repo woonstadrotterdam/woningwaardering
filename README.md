@@ -12,7 +12,7 @@
 
 ![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jan_2024&width=120)  
 ![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jul_2024&width=120)  
-![](https://progress-bar.xyz/80/?title=onzelfstandige_woonruimten_jul_2024&width=108)
+![](https://progress-bar.xyz/95/?title=onzelfstandige_woonruimten_jul_2024&width=108)
 
 Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk wordt om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) [[referentiedata v4.1.241004](https://github.com/Aedes-datastandaarden/vera-referentiedata), [openapi v4.1.5](https://github.com/Aedes-datastandaarden/vera-openapi)] van de corporatiesector voor de in- en output van de package. Dit project heeft drie hoofddoelen:
 
