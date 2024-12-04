@@ -158,7 +158,7 @@ class Energieprestatie(Stelselgroep):
         woningwaardering_groep.punten = float(punten_totaal)
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
 
         return woningwaardering_groep
@@ -191,10 +191,6 @@ class Energieprestatie(Stelselgroep):
             and energieprestatie.soort.code == Energieprestatiesoort.energie_index.code
         ):
             if energieprestatie.waarde is not None:
-                logger.info(
-                    f"Eenheid ({eenheid.id}): waardeer {Woningwaarderingstelselgroep.energieprestatie.naam} op basis van energie-index."
-                )
-
                 energie_index = float(energieprestatie.waarde)
 
                 filtered_df = df[
@@ -231,6 +227,10 @@ class Energieprestatie(Stelselgroep):
             )
         )
 
+        logger.info(
+            f"Eenheid ({eenheid.id}): krijgt {woningwaardering.punten} punten op basis van label {label} voor {self.stelselgroep.naam}."
+        )
+
         return woningwaardering
 
     def _bereken_punten_met_bouwjaar(
@@ -250,10 +250,6 @@ class Energieprestatie(Stelselgroep):
         Returns:
             WoningwaarderingResultatenWoningwaardering: De waardering met aangepaste criteriumnaam en punten.
         """
-        logger.info(
-            f"Eenheid ({eenheid.id}): punten voor stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam} worden berekend op basis van bouwjaar."
-        )
-
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
         df = Energieprestatie.lookup_mapping["bouwjaar"]
@@ -278,6 +274,10 @@ class Energieprestatie(Stelselgroep):
             utils.rond_af(
                 Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte)), decimalen=2
             )
+        )
+
+        logger.info(
+            f"Eenheid ({eenheid.id}): krijgt {woningwaardering.punten} punten op basis van bouwjaar {eenheid.bouwjaar} voor {self.stelselgroep.naam}."
         )
 
         return woningwaardering

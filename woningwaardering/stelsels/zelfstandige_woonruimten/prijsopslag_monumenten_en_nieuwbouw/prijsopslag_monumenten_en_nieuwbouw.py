@@ -83,6 +83,15 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
         )
 
+        if opslagpercentage > 0:
+            logger.info(
+                f"Eenheid ({eenheid.id}) krijgt een opslagpercentage van {opslagpercentage}% voor {self.stelselgroep.naam}."
+            )
+        else:
+            logger.info(
+                f"Eenheid ({eenheid.id}) krijgt geen opslagpercentage voor {self.stelselgroep.naam}."
+            )
+
         woningwaardering_groep.punten = punten
         return woningwaardering_groep
 
@@ -166,8 +175,8 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 )
 
             else:
-                logger.info(
-                    f"Eenheid ({eenheid.id}) is nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor {self.stelselgroep.naam}."
+                logger.debug(
+                    f"Eenheid ({eenheid.id}) is nieuwbouw, maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor {self.stelselgroep.naam}."
                 )
         else:
             logger.debug(f"Eenheid ({eenheid.id}) is geen nieuwbouw.")
