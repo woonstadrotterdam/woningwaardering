@@ -78,7 +78,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 )
                 * Decimal("0.75")
             )
-            # de maximering is altijd in punten en daarom wordt de som de maximering hier van de punten afgetrokken
+            # de maximering is altijd in punten en daarom wordt de som van de punten hier gebruikt om de maximering toe te passsen
             + sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
@@ -89,7 +89,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
 
         return woningwaardering_groep

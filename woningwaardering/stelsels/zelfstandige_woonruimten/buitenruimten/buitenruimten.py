@@ -1,4 +1,6 @@
+import re
 import warnings
+from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 from typing import Iterator
@@ -15,6 +17,7 @@ from woningwaardering.stelsels.utils import (
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
+    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -72,6 +75,41 @@ class Buitenruimten(Stelselgroep):
         ) is not None:
             woningwaardering_groep.woningwaarderingen.append(result)
 
+        som: dict[str, tuple[Decimal, Decimal]] = defaultdict(
+            lambda: (Decimal("0.0"), Decimal("0.0"))
+        )  # (punten, aantal)
+        for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
+            if (
+                woningwaardering.criterium
+                and woningwaardering.criterium.bovenliggende_criterium
+                and woningwaardering.criterium.bovenliggende_criterium.id
+            ):
+                criterium_id = woningwaardering.criterium.bovenliggende_criterium.id
+                current_punten, current_aantal = som[criterium_id]
+                som[criterium_id] = (
+                    current_punten + (Decimal(str(woningwaardering.punten or "0"))),
+                    current_aantal + (Decimal(str(woningwaardering.aantal or "0"))),
+                )
+
+        for id, (punten, aantal) in som.items():
+            match = re.search(
+                r"\d+", id
+            )  # in criterium id staat gedeeld_met_<aantal> of prive
+            gedeeld_met = int(match.group()) if match else 1
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=f"Totaal (gedeeld met {gedeeld_met} eenheden)"
+                    if gedeeld_met > 1
+                    else "Totaal (privé)",
+                    id=id,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                )
+            )
+            woningwaardering.punten = float(punten)
+            woningwaardering.aantal = float(aantal)
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
         woningwaardering_groep.punten = float(
             sum(
                 Decimal(str(woningwaardering.punten))
@@ -94,7 +132,7 @@ class Buitenruimten(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
@@ -183,7 +221,10 @@ class Buitenruimten(Stelselgroep):
                 )
                 woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                     meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                    naam=f"{ruimte.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)",
+                    naam=ruimte.naam,
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_eenheden}_eenheden",
+                    ),
                 )
             else:  # privé buitenruimte
                 logger.info(
@@ -192,7 +233,10 @@ class Buitenruimten(Stelselgroep):
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                        naam=f"{ruimte.naam} (privé)",
+                        naam=ruimte.naam,
+                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                            id=f"{self.stelselgroep.name}_prive",
+                        ),
                     )
                 )
                 woningwaardering.aantal = float(
@@ -238,7 +282,10 @@ class Buitenruimten(Stelselgroep):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Privé buitenruimten aanwezig",
+                    naam="Buitenruimten aanwezig",
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=f"{self.stelselgroep.name}_prive",
+                    ),
                 )
             )
             woningwaardering.punten = 2.0

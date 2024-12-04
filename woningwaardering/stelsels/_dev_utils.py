@@ -4,7 +4,7 @@ from typing import Any, Optional
 
 from loguru import logger
 
-from woningwaardering._logging import custom_dev_filter, dev_format
+from woningwaardering._logging import verkort_path
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -24,7 +24,7 @@ class DevelopmentContext:
 
     Parameters:
         instance (Stelselgroep | Stelsel): Het stelsel of de stelselgroep waarvoor de berekeningen worden uitgevoerd.
-        strict (bool): Bepaalt of waarschuwingen strikt worden behandeld. Standaard is False.
+        strict (bool): Bepaalt of waarschuwingen worden geraised. Standaard is False.
         log_level (str): Het logniveau voor de uitgevoerde berekeningen. Standaard is "DEBUG".
 
     Usage:
@@ -56,18 +56,35 @@ class DevelopmentContext:
         pass
 
     def _setup_logging(self) -> None:
+        def custom_dev_filter(record: dict[str, Any]) -> bool:
+            record["extra"]["formatted_name_with_line"] = verkort_path(
+                record["name"], record["line"], dev=True
+            )
+            return True
+
         logger.enable("woningwaardering")
         logger.remove()
         logger.add(
             sys.stderr,
-            format=dev_format,
+            format="<level>{level: <7}</level> | <cyan>{extra[formatted_name_with_line]}</cyan> | <level>{message}</level>",
             level=self.log_level,
             filter=custom_dev_filter,
         )
 
     def _setup_warnings(self) -> None:
+        def warning_to_logger(
+            message: Warning | str,
+            category: type[Warning],
+            filename: str,
+            lineno: int,
+            file: Optional[Any] = None,
+            line: Optional[str] = None,
+        ) -> None:
+            logger.warning(f"{category.__name__}: {message}")
+
         if not self.strict:
             warnings.filterwarnings("default", category=UserWarning)
+            warnings.showwarning = warning_to_logger
 
     def _load_eenheid(self, eenheid_input: EenhedenEenheid | str) -> EenhedenEenheid:
         if isinstance(eenheid_input, str):

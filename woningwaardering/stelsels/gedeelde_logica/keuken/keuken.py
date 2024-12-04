@@ -160,7 +160,7 @@ def _waardeer_aanrecht(
             else:
                 aanrecht_punten = 4
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een aanrecht van {element.lengte}mm dat meetelt voor {Woningwaarderingstelselgroep.keuken.naam}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een aanrecht van {int(element.lengte)}mm dat meetelt voor {Woningwaarderingstelselgroep.keuken.naam}"
             )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -223,7 +223,7 @@ def _waardeer_extra_voorzieningen(
             decimalen=2,
         )
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {voorziening.naam} dat meetelt voor {Woningwaarderingstelselgroep.keuken.naam}"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {count}x een '{voorziening.naam}' dat meetelt voor {Woningwaarderingstelselgroep.keuken.naam}"
         )
         yield (
             WoningwaarderingResultatenWoningwaardering(
@@ -243,7 +243,7 @@ def _waardeer_extra_voorzieningen(
     if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
         aftrek = max_punten_voorzieningen - punten_voor_extra_voorzieningen
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft te veel punten voor extra keuken voorzieningen, aftrek volgt"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aftrek} punt(en) i.v.m. te veel punten ({punten_voor_extra_voorzieningen} > {max_punten_voorzieningen}) voor extra keuken voorzieningen"
         )
         yield (
             WoningwaarderingResultatenWoningwaardering(

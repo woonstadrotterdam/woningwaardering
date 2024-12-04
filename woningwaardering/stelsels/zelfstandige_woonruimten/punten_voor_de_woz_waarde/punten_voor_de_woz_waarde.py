@@ -106,7 +106,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             return woningwaardering_groep
 
         logger.info(
-            f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is {woz_eenheid.vastgestelde_waarde}"
+            f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is €{woz_eenheid.vastgestelde_waarde:.0f}"
         )
 
         woz_waarde = self.minimum_woz_waarde(woz_eenheid)
@@ -130,7 +130,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde} / {factor_onderdeel_I} = {punten_onderdeel_I}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
         )
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -149,6 +149,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid ({eenheid.id}): kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
                 UserWarning,
             )
+            return woningwaardering_groep
 
         punten_onderdeel_II = utils.rond_af(
             woz_waarde / oppervlakte / factor_onderdeel_II,
@@ -156,7 +157,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde} / {oppervlakte} / {factor_onderdeel_II} = {punten_onderdeel_II}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
         )
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -177,7 +178,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.punten = float(utils.rond_af(punten, decimalen=0))
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
 
         return woningwaardering_groep
@@ -252,7 +253,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             # 187 punten, geldt een waardering van 186 punten voor de woning.
             if totaal_punten_zonder_cap > 186 and totaal_punten_met_cap < 187:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 correctie_punten = 186 - totaal_punten_zonder_cap
                 woningwaardering_groep.woningwaarderingen.append(
@@ -265,7 +266,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 )
             else:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 woningwaardering_groep.woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
@@ -310,8 +311,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         overige_percentage = Decimal("100") - max_woz_percentage
         percentage_verhouding = overige_percentage / max_woz_percentage
         max_woz_punten = overige_punten / percentage_verhouding
-
-        logger.debug(f"max_woz_punten: {max_woz_punten}")
 
         # Pas de cap toe op de WOZ-punten
         capped_woz_punten = min(
@@ -396,9 +395,13 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if vastgestelde_waarde < minimum_woz_waarde:
             logger.info(
-                f"WOZ-waarde {vastgestelde_waarde} is kleiner dan minimum {minimum_woz_waarde}, minimum wordt gebruikt"
+                f"WOZ-waarde {vastgestelde_waarde:.0f} is kleiner dan minimum {minimum_woz_waarde:.0f}, minimum wordt gebruikt"
             )
             return minimum_woz_waarde
+
+        logger.debug(
+            f"WOZ-waarde €{vastgestelde_waarde:.0f} is groter dan minimum {minimum_woz_waarde:.0f}, minimum wordt niet gebruikt"
+        )
 
         return vastgestelde_waarde
 
@@ -498,12 +501,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 ]
             )
             logger.debug(
-                f"Eenheid ({eenheid.id}): punten_critische_stelselgroepen: {punten_critische_stelselgroepen}"
+                f"Eenheid ({eenheid.id}): nieuwbouw of hoogniveau renovatie in de jaren 2015-2019. Punten voor de stelselgroepen 1 t/m 10 en 12: {punten_critische_stelselgroepen}"
             )
             if punten_critische_stelselgroepen >= 110:
                 minimum_punten = Decimal("40")
                 logger.info(
-                    f"Eenheid ({eenheid.id}): minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}): nieuwbouw of hoogniveau renovatie in de jaren 2015-2019 en >= 110 punten voor de stelselgroepen 1 t/m 10 en 12. Minimaal 40 punten voor {self.stelselgroep.naam}"
                 )
 
         return minimum_punten
