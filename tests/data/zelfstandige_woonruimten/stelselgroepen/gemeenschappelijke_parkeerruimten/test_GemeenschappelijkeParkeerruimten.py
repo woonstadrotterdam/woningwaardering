@@ -6,6 +6,7 @@ import pytest
 from tests.utils import (
     WarningConfig,
     assert_output_model,
+    assert_stelselgroep_output_in_eenheid_output,
     assert_stelselgroep_warnings,
     laad_specifiek_input_en_output_model,
 )
@@ -13,12 +14,22 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.gemeenschappelijke_parke
     GemeenschappelijkeParkeerruimten,
 )
 from woningwaardering.vera.bvg.generated import (
-    WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     Woningwaarderingstelselgroep,
 )
+
+
+def test_GemeenschappelijkeParkeerruimten_output(
+    zelfstandige_woonruimten_input_en_outputmodel, peildatum
+):
+    assert_stelselgroep_output_in_eenheid_output(
+        zelfstandige_woonruimten_input_en_outputmodel,
+        peildatum,
+        GemeenschappelijkeParkeerruimten,
+    )
+
 
 # Get the absolute path to the current file
 current_file_path = Path(__file__).absolute().parent
@@ -29,36 +40,6 @@ def specifieke_input_en_output_model(request):
     output_file_path = request.param
     return laad_specifiek_input_en_output_model(
         current_file_path, Path(output_file_path)
-    )
-
-
-def test_GemeenschappelijkeParkeerruimten(
-    zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat, peildatum
-):
-    gemeenschappelijke_parkeerruimten = GemeenschappelijkeParkeerruimten(
-        peildatum=peildatum
-    )
-    resultaat = gemeenschappelijke_parkeerruimten.waardeer(
-        zelfstandige_woonruimten_inputmodel, woningwaardering_resultaat
-    )
-    assert isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep)
-
-
-def test_GemeenschappelijkeParkeerruimten_output(
-    zelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    eenheid_input, eenheid_output = zelfstandige_woonruimten_input_en_outputmodel
-    gemeenschappelijke_parkeerruimten = GemeenschappelijkeParkeerruimten(
-        peildatum=peildatum
-    )
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [gemeenschappelijke_parkeerruimten.waardeer(eenheid_input)]
-
-    assert_output_model(
-        resultaat,
-        eenheid_output,
-        Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
     )
 
 
@@ -78,30 +59,6 @@ def test_GemeenschappelijkeParkeerruimten_specifiek_output(
         Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
     )
 
-
-# mapping eenheid_id naar peildatum-warning
-specifiek_warning_mapping = {
-    # let op: dit is de eenheid_id in de input json
-    "warning_gedeeld_met_aantal_eenheden": [
-        (
-            date(2024, 7, 1),
-            (
-                UserWarning,
-                "gedeeld_met_aantal_eenheden",
-            ),
-        )
-    ],
-    # let op: dit is de eenheid_id in de input json
-    "warning_geen_oppervlakte": [
-        (
-            date(2024, 7, 1),
-            (
-                UserWarning,
-                "oppervlakte",
-            ),
-        )
-    ],
-}
 
 warning_configs = [
     WarningConfig(
