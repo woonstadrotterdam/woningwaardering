@@ -5,7 +5,7 @@ import pytest
 
 from tests.utils import (
     WarningConfig,
-    assert_stelselgroep_output_in_eenheid_output,
+    assert_stelselgroep_output,
     assert_stelselgroep_specifiek_output,
     assert_stelselgroep_warnings,
     maak_specifieke_input_en_output_model_fixture,
@@ -18,7 +18,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.gemeenschappelijke_parke
 def test_GemeenschappelijkeParkeerruimten_output(
     zelfstandige_woonruimten_input_en_outputmodel, peildatum
 ):
-    assert_stelselgroep_output_in_eenheid_output(
+    assert_stelselgroep_output(
         zelfstandige_woonruimten_input_en_outputmodel,
         peildatum,
         GemeenschappelijkeParkeerruimten,

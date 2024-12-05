@@ -146,7 +146,7 @@ def assert_stelselgroep_warnings(
             ), f"Geen {warning_type} met message '{warning_message}' geraised"
 
 
-def assert_stelselgroep_output_in_eenheid_output(
+def assert_stelselgroep_output(
     input_en_output_model: tuple[
         EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat
     ],
