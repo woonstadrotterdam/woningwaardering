@@ -29,7 +29,6 @@ specifieke_input_en_output_model = maak_specifieke_input_en_output_model_fixture
 )
 
 
-# In deze test data zit expres missende data
 @pytest.mark.filterwarnings("ignore::UserWarning")
 def test_PuntenVoorDeWozWaarde_specifiek_output(
     specifieke_input_en_output_model, peildatum
