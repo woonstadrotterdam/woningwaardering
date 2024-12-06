@@ -66,9 +66,9 @@ class Sanitair(Stelselgroep):
             )
             # zoek het maximum aantal wastafels in een ruimte m.u.v. badkamer
             if ruimte.detail_soort not in [
-                Ruimtedetailsoort.badkamer.value,
-                Ruimtedetailsoort.badkamer_met_toilet.value,
-                Ruimtedetailsoort.doucheruimte.value,
+                Ruimtedetailsoort.badkamer,
+                Ruimtedetailsoort.badkamer_met_toilet,
+                Ruimtedetailsoort.doucheruimte,
             ]:
                 aantal_wastafels = sum(
                     [
@@ -257,8 +257,8 @@ class Sanitair(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
         woningwaardering_groep.woningwaarderingen = []

@@ -90,7 +90,7 @@ def _opslag_zorgwoning(
         ValueError: Als het stelsel niet gelijk is aan zelfstandige woonruimten of onzelfstandige woonruimten.
     """
     if eenheid.doelgroep is None or (
-        eenheid.doelgroep and eenheid.doelgroep.code != Doelgroep.zorg.code
+        eenheid.doelgroep and eenheid.doelgroep != Doelgroep.zorg
     ):
         logger.debug(
             f"Eenheid ({eenheid.id}) is geen zorgwoning en krijgt dus geen zorgwoningopslag"
@@ -137,10 +137,7 @@ def _opslag_zorgwoning(
                 groep.punten
                 and groep.criterium_groep
                 and groep.criterium_groep.stelselgroep
-                and groep.criterium_groep.stelselgroep.code
-                not in [
-                    stelselgroep.code for stelselgroep in stelselgroepen_zonder_opslag
-                ]
+                not in stelselgroepen_zonder_opslag
             )
         ),
         0,
@@ -179,8 +176,7 @@ def _aanbelfunctie_met_video_en_audioverbinding(
         als de eenheid een aanbelfunctie met video en audio heeft, anders None.
     """
     if not any(
-        installatie.code
-        == Voorzieningsoort.aanbelfunctie_met_video_en_audioverbinding.code
+        installatie == Voorzieningsoort.aanbelfunctie_met_video_en_audioverbinding
         for ruimte in (eenheid.ruimten or [])
         for installatie in (ruimte.installaties or [])
     ):

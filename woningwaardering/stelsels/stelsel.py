@@ -50,10 +50,10 @@ class Stelsel:
         stelselgroepen: list[type[Stelselgroep]] | None = None,
     ) -> None:
         self.stelsel = stelsel
-        logger.info(f"Stelsel {stelsel.value.naam} wordt gebruikt.")
+        logger.info(f"Stelsel {stelsel.naam} wordt gebruikt.")
         if not is_geldig(begindatum, einddatum, peildatum):
             raise ValueError(
-                f"Stelsel {stelsel.value.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
+                f"Stelsel {stelsel.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
             )
 
         self.peildatum = peildatum
@@ -85,7 +85,7 @@ class Stelsel:
         normaliseer_ruimte_namen(eenheid)
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-        resultaat.stelsel = self.stelsel.value
+        resultaat.stelsel = self.stelsel
 
         resultaat.groepen = []
 

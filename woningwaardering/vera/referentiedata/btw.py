@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Btw(Enum):
+class Btw(Referentiedatasoort):
     algemeen = Referentiedata(
         code="ALG",
         naam="Algemeen",
@@ -38,17 +37,3 @@ class Btw(Enum):
     """
     De grondslag (bijvoorbeeld een prijscomponent) is vrijgesteld van BTW.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

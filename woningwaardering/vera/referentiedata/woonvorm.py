@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Woonvorm(Enum):
+class Woonvorm(Referentiedatasoort):
     adl_clusterwoning = Referentiedata(
         code="ADL",
         naam="ADL-clusterwoning",
@@ -101,17 +100,3 @@ class Woonvorm(Enum):
     automatisch kunnen openen en moeten woningen die niet op de begane grond zijn,
     bereikbaar zijn met een rolstoeltoegankelijke personenlift.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

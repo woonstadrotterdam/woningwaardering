@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Betaalwijzesoort(Enum):
+class Betaalwijzesoort(Referentiedatasoort):
     handmatige_overboeking = Referentiedata(
         code="HND",
         naam="Handmatige overboeking",
@@ -21,17 +20,3 @@ class Betaalwijzesoort(Enum):
     Een door de ontvanger geïnitieerde incasso, er moet een Incassomachtiging aan ten
     grondslag liggen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

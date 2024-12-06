@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Inkomensverklaringsoort(Enum):
+class Inkomensverklaringsoort(Referentiedatasoort):
     ib60 = Referentiedata(
         code="IB6",
         naam="IB60",
@@ -33,17 +32,3 @@ class Inkomensverklaringsoort(Enum):
         code="UIT",
         naam="Uitkeringsspecificatie",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

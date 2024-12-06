@@ -1,14 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.aanbiedingstatus import Aanbiedingstatus
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Aanbiedingdetailstatus(Enum):
+class Aanbiedingdetailstatus(Referentiedatasoort):
     andere_woning_geaccepteerd = Referentiedata(
         code="AND",
         naam="Andere woning geaccepteerd",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is geweigerd, omdat een kandidaat een andere woning heeft
@@ -18,7 +17,7 @@ class Aanbiedingdetailstatus(Enum):
     anderen_krijgen_voorrang = Referentiedata(
         code="ANV",
         naam="Anderen krijgen voorrang",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     Bij het verlenen van huisvestingsvergunningen wordt voorrang gegeven aan
@@ -29,7 +28,7 @@ class Aanbiedingdetailstatus(Enum):
     buitenruimte_bevalt_niet = Referentiedata(
         code="BUI",
         naam="Buitenruimte bevalt niet",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     Een aanbieding is geweigerd, met als aangegeven reden dat de buitenruimte niet
@@ -39,7 +38,7 @@ class Aanbiedingdetailstatus(Enum):
     cooptatie_mislukt = Referentiedata(
         code="COO",
         naam="Cooptatie mislukt",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat een kandidaat is afgevallen in de
@@ -49,7 +48,7 @@ class Aanbiedingdetailstatus(Enum):
     documenten_niet_aangeleverd = Referentiedata(
         code="DOC",
         naam="Documenten niet aangeleverd",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat een kandidaat de vereiste documenten niet heeft
@@ -59,7 +58,7 @@ class Aanbiedingdetailstatus(Enum):
     documenten_niet_akkoord = Referentiedata(
         code="DON",
         naam="Documenten niet akkoord",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat de door een kandidaat aangeleverde documenten
@@ -69,7 +68,7 @@ class Aanbiedingdetailstatus(Enum):
     geen_belangstelling_meer = Referentiedata(
         code="GEE",
         naam="Geen belangstelling meer",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     Een aanbieding is geweigerd, met als aangegeven reden dat de kandidaat geen
@@ -79,7 +78,7 @@ class Aanbiedingdetailstatus(Enum):
     gegevens_onjuist = Referentiedata(
         code="GEG",
         naam="Gegevens onjuist",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat de door een kandidaat aangeleverde gegevens
@@ -89,7 +88,7 @@ class Aanbiedingdetailstatus(Enum):
     geen_recht_op_huisvestingsvergunning = Referentiedata(
         code="GER",
         naam="Geen recht op huisvestingsvergunning",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     De huisvestingsvergoeding is niet verleend door een gegrond vermoeden dat het
@@ -102,7 +101,7 @@ class Aanbiedingdetailstatus(Enum):
     huurprijs_te_hoog = Referentiedata(
         code="HUU",
         naam="Huurprijs te hoog",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     Een aanbieding is geweigerd, met als aangegeven reden dat de huurprijs te hoog is.
@@ -111,7 +110,7 @@ class Aanbiedingdetailstatus(Enum):
     inkomen_te_hoog = Referentiedata(
         code="INH",
         naam="Inkomen te hoog",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat op basis van de aangeleverde inkomensgegevens
@@ -121,7 +120,7 @@ class Aanbiedingdetailstatus(Enum):
     inkomen_te_laag = Referentiedata(
         code="INL",
         naam="Inkomen te laag",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat op basis van de aangeleverde inkomensgegevens
@@ -131,7 +130,7 @@ class Aanbiedingdetailstatus(Enum):
     niet_verschenen_bij_afspraak = Referentiedata(
         code="NIE",
         naam="Niet verschenen bij afspraak",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat een kandidaat niet is verschenen op de gemaakte
@@ -141,7 +140,7 @@ class Aanbiedingdetailstatus(Enum):
     ongeschikt_als_huurder = Referentiedata(
         code="ONG",
         naam="Ongeschikt als huurder",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat een kandidaat ongeschikt wordt geacht als
@@ -151,7 +150,7 @@ class Aanbiedingdetailstatus(Enum):
     onterecht_aangeboden = Referentiedata(
         code="ONT",
         naam="Onterecht aangeboden",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat de eenheid ten onrechte is aangeboden.
@@ -160,7 +159,7 @@ class Aanbiedingdetailstatus(Enum):
     parkeer_bergingruimte_onvoldoende = Referentiedata(
         code="PAO",
         naam="Parkeer, bergingruimte onvoldoende",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     Een aanbieding is geweigerd, met als aangegeven reden dat de parkeer en/of
@@ -170,7 +169,7 @@ class Aanbiedingdetailstatus(Enum):
     persoonlijke_omstandigheden = Referentiedata(
         code="PER",
         naam="Persoonlijke omstandigheden",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     Een aanbieding is geweigerd, met als aangegeven reden persoonlijke omstandigheden.
@@ -179,7 +178,7 @@ class Aanbiedingdetailstatus(Enum):
     reactietermijn_verlopen = Referentiedata(
         code="REA",
         naam="Reactietermijn verlopen",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat een kandidaat niet binnen de reactietermijn
@@ -189,7 +188,7 @@ class Aanbiedingdetailstatus(Enum):
     toewijzing_andere_kandidaat = Referentiedata(
         code="TOE",
         naam="Toewijzing andere kandidaat",
-        parent=Aanbiedingstatus.ingetrokken.value,
+        parent=Aanbiedingstatus.ingetrokken,
     )
     """
     Een aanbieding is ingetrokken, omdat de eenheid is toegewezen aan een andere
@@ -199,7 +198,7 @@ class Aanbiedingdetailstatus(Enum):
     woning_bevalt_niet = Referentiedata(
         code="WBN",
         naam="Woning bevalt niet",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     Een aanbieding is geweigerd, met als aangegeven reden dat de woning niet voldoet.
@@ -208,7 +207,7 @@ class Aanbiedingdetailstatus(Enum):
     woningkwaliteit_bevalt_niet = Referentiedata(
         code="WKN",
         naam="Woningkwaliteit bevalt niet",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     Een aanbieding is geweigerd, met als aangegeven reden dat de kwaliteit van de woning
@@ -218,23 +217,9 @@ class Aanbiedingdetailstatus(Enum):
     woonomgeving_bevalt_niet = Referentiedata(
         code="WOB",
         naam="Woonomgeving bevalt niet",
-        parent=Aanbiedingstatus.geweigerd.value,
+        parent=Aanbiedingstatus.geweigerd,
     )
     """
     Een aanbieding is geweigerd, met als aangegeven reden dat de woonomgeving niet
     voldoet.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

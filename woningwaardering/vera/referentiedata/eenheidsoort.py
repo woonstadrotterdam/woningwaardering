@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidsoort(Enum):
+class Eenheidsoort(Referentiedatasoort):
     bedrijfsruimte = Referentiedata(
         code="BED",
         naam="Bedrijfsruimte",
@@ -66,17 +65,3 @@ class Eenheidsoort(Enum):
     """
     Synoniemen zijn onder andere: wooneenheden,  woongelegenheden (Handboek MVS)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

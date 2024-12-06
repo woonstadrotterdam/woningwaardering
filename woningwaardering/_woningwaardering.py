@@ -48,28 +48,28 @@ class Woningwaardering:
         """
         if (
             eenheid.woningwaarderingstelsel is None
-            or eenheid.woningwaarderingstelsel.code is None
+            or eenheid.woningwaarderingstelsel is None
         ):
             raise ValueError(
                 f"Eenheid ({eenheid.id}): woningwaarderingstelsel-attribuut ontbreekt in het inputmodel."
             )
-        elif eenheid.woningwaarderingstelsel.code not in [
-            Woningwaarderingstelsel.zelfstandige_woonruimten.code,
-            Woningwaarderingstelsel.onzelfstandige_woonruimten.code,
+        elif eenheid.woningwaarderingstelsel not in [
+            Woningwaarderingstelsel.zelfstandige_woonruimten,
+            Woningwaarderingstelsel.onzelfstandige_woonruimten,
         ]:
             raise ValueError(
-                f"Eenheid ({eenheid.id}): ongeldig woningwaarderingsstelsel-attribuut. Code moet één van {Woningwaarderingstelsel.zelfstandige_woonruimten.code} of {Woningwaarderingstelsel.onzelfstandige_woonruimten.code} zijn."
+                f"Eenheid ({eenheid.id}): ongeldig woningwaarderingsstelsel-attribuut: {eenheid.woningwaarderingstelsel}. Code moet één van {Woningwaarderingstelsel.zelfstandige_woonruimten} of {Woningwaarderingstelsel.onzelfstandige_woonruimten} zijn."
             )
         elif (
-            eenheid.woningwaarderingstelsel.code
-            == Woningwaarderingstelsel.zelfstandige_woonruimten.code
+            eenheid.woningwaarderingstelsel
+            == Woningwaarderingstelsel.zelfstandige_woonruimten
         ):
             stelsel: ZelfstandigeWoonruimten | OnzelfstandigeWoonruimten = (
                 ZelfstandigeWoonruimten(peildatum=self.peildatum)
             )
         elif (
-            eenheid.woningwaarderingstelsel.code
-            == Woningwaarderingstelsel.onzelfstandige_woonruimten.code
+            eenheid.woningwaarderingstelsel
+            == Woningwaarderingstelsel.onzelfstandige_woonruimten
         ):
             stelsel = OnzelfstandigeWoonruimten(peildatum=self.peildatum)
 

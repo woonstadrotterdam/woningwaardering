@@ -1,16 +1,15 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
     Woningwaarderingstelsel,
 )
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Woningwaarderingstelselgroep(Enum):
+class Woningwaarderingstelselgroep(Referentiedatasoort):
     bijzondere_voorzieningen = Referentiedata(
         code="BIJ",
         naam="Bijzondere voorzieningen",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
     )
     """
     De groep criteria die betrekking heeft op de aanwezigheid van bijzondere
@@ -21,7 +20,7 @@ class Woningwaarderingstelselgroep(Enum):
     beschermd_monument_bmo = Referentiedata(
         code="BMO",
         naam="Beschermd monument",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     De extra punten die worden toegekend als de woonruimte bestaat uit of deel uitmaakt
@@ -31,7 +30,7 @@ class Woningwaarderingstelselgroep(Enum):
     beschermd_monument_bmz = Referentiedata(
         code="BMZ",
         naam="Beschermd monument",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
     )
     """
     De extra punten die worden toegekend als de woonruimte bestaat uit of deel uitmaakt
@@ -41,7 +40,7 @@ class Woningwaarderingstelselgroep(Enum):
     berging = Referentiedata(
         code="BWN",
         naam="Berging",
-        parent=Woningwaarderingstelsel.woonwagens.value,
+        parent=Woningwaarderingstelsel.woonwagens,
     )
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op de aanwezigheid
@@ -60,7 +59,7 @@ class Woningwaarderingstelselgroep(Enum):
     extra_punten_woonoppervlakte_standplaats = Referentiedata(
         code="EOS",
         naam="Extra punten woonoppervlakte standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen.value,
+        parent=Woningwaarderingstelsel.standplaatsen,
     )
     """
     Standplaats: De groep criteria die betrekking heeft op de woonoppervlakte als die
@@ -79,7 +78,7 @@ class Woningwaarderingstelselgroep(Enum):
     voorzieningen_gehandicapten_standplaats = Referentiedata(
         code="GST",
         naam="Voorzieningen gehandicapten standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen.value,
+        parent=Woningwaarderingstelsel.standplaatsen,
     )
     """
     Standplaats: De groep criteria die betrekking heeft op (gedeeltelijk) vanuit de WMO
@@ -90,7 +89,7 @@ class Woningwaarderingstelselgroep(Enum):
     voorzieningen_gehandicapten_niet_standaardwoonwagen = Referentiedata(
         code="GWN",
         naam="Voorzieningen gehandicapten niet-standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens.value,
+        parent=Woningwaarderingstelsel.woonwagens,
     )
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op (gedeeltelijk)
@@ -101,7 +100,7 @@ class Woningwaarderingstelselgroep(Enum):
     voorzieningen_gehandicapten_standaardwoonwagen = Referentiedata(
         code="GWS",
         naam="Voorzieningen gehandicapten standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens.value,
+        parent=Woningwaarderingstelsel.woonwagens,
     )
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op (gedeeltelijk) vanuit
@@ -121,7 +120,7 @@ class Woningwaarderingstelselgroep(Enum):
     kookgelegenheid = Referentiedata(
         code="KOO",
         naam="Kookgelegenheid",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     De groep criteria die betrekking heeft op de kookgelegenheid (Beleidsboek
@@ -131,7 +130,7 @@ class Woningwaarderingstelselgroep(Enum):
     extra_kwaliteit_keuken_en_sanitair_standplaats = Referentiedata(
         code="KST",
         naam="Extra kwaliteit keuken en sanitair standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen.value,
+        parent=Woningwaarderingstelsel.standplaatsen,
     )
     """
     Standplaats: De groep criteria die betrekking heeft op extra kwaliteit van keuken en
@@ -141,7 +140,7 @@ class Woningwaarderingstelselgroep(Enum):
     kwaliteitsfactoren = Referentiedata(
         code="KWA",
         naam="Kwaliteitsfactoren",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     De groep criteria die betrekking heeft op aanvullende kwaliteitsfactoren
@@ -151,7 +150,7 @@ class Woningwaarderingstelselgroep(Enum):
     keuken_en_sanitair_niet_standaardwoonwagen = Referentiedata(
         code="KWN",
         naam="Keuken en sanitair niet-standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens.value,
+        parent=Woningwaarderingstelsel.woonwagens,
     )
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op keuken en
@@ -161,7 +160,7 @@ class Woningwaarderingstelselgroep(Enum):
     extra_kwaliteit_keuken_en_sanitair_standaardwoonwagen = Referentiedata(
         code="KWS",
         naam="Extra kwaliteit keuken en sanitair standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens.value,
+        parent=Woningwaarderingstelsel.woonwagens,
     )
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op extra kwaliteit van
@@ -171,7 +170,7 @@ class Woningwaarderingstelselgroep(Enum):
     minpunten_woonomgeving_standplaats = Referentiedata(
         code="MWS",
         naam="Minpunten woonomgeving standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen.value,
+        parent=Woningwaarderingstelsel.standplaatsen,
     )
     """
     Standplaats: De groep criteria die betrekking heeft op hinderlijke situaties in de
@@ -191,7 +190,7 @@ class Woningwaarderingstelselgroep(Enum):
     oppervlakte_onzelfstandige_woonruimte = Referentiedata(
         code="OPO",
         naam="Oppervlakte onzelfstandige woonruimte",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     De groep criteria die betrekking heeft op de oppervlakte van kamers en keukens, en
@@ -202,7 +201,7 @@ class Woningwaarderingstelselgroep(Enum):
     oppervlakte_standplaats = Referentiedata(
         code="OST",
         naam="Oppervlakte standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen.value,
+        parent=Woningwaarderingstelsel.standplaatsen,
     )
     """
     Standplaats: De groep criteria die betrekking heeft op de oppervlakte
@@ -221,7 +220,7 @@ class Woningwaarderingstelselgroep(Enum):
     oppervlakte_niet_standaardwoonwagen = Referentiedata(
         code="OWN",
         naam="Oppervlakte niet-standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens.value,
+        parent=Woningwaarderingstelsel.woonwagens,
     )
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op de oppervlakte
@@ -231,7 +230,7 @@ class Woningwaarderingstelselgroep(Enum):
     oppervlakte_standaardwoonwagen = Referentiedata(
         code="OWS",
         naam="Oppervlakte standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens.value,
+        parent=Woningwaarderingstelsel.woonwagens,
     )
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op de oppervlakte
@@ -241,7 +240,7 @@ class Woningwaarderingstelselgroep(Enum):
     prive_buitenruimten = Referentiedata(
         code="PRI",
         naam="Privé-buitenruimten",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
     )
     """
     Privé-buitenruimten zijn tot de woning behorende buitenruimten, waarvan de bewoners
@@ -254,7 +253,7 @@ class Woningwaarderingstelselgroep(Enum):
     renovatie = Referentiedata(
         code="REN",
         naam="Renovatie",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
     )
     """
     De groep criteria die betrekking heeft op renovatie van de woonruimte (Beleidsboek
@@ -273,7 +272,7 @@ class Woningwaarderingstelselgroep(Enum):
     toilet = Referentiedata(
         code="TOI",
         naam="Toilet",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     De groep criteria die betrekking heeft op de w.c. (Beleidsboek Waarderingsstelsel
@@ -283,7 +282,7 @@ class Woningwaarderingstelselgroep(Enum):
     verwarmingsmogelijkheden = Referentiedata(
         code="VON",
         naam="Verwarmingsmogelijkheden",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     De groep criteria die betrekking heeft op de verwarmingsmogelijkheden (Beleidsboek
@@ -293,7 +292,7 @@ class Woningwaarderingstelselgroep(Enum):
     verwarming_standplaats = Referentiedata(
         code="VST",
         naam="Verwarming standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen.value,
+        parent=Woningwaarderingstelsel.standplaatsen,
     )
     """
     Standplaats: De groep criteria die betrekking heeft op de verwarming (Puntentelling:
@@ -303,7 +302,7 @@ class Woningwaarderingstelselgroep(Enum):
     verwarming_niet_standaardwoonwagen = Referentiedata(
         code="VWN",
         naam="Verwarming niet-standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens.value,
+        parent=Woningwaarderingstelsel.woonwagens,
     )
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op de verwarming
@@ -313,7 +312,7 @@ class Woningwaarderingstelselgroep(Enum):
     verwarming_standaardwoonwagen = Referentiedata(
         code="VWS",
         naam="Verwarming standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens.value,
+        parent=Woningwaarderingstelsel.woonwagens,
     )
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op de verwarming
@@ -323,7 +322,7 @@ class Woningwaarderingstelselgroep(Enum):
     verwarming = Referentiedata(
         code="VZE",
         naam="Verwarming",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
     )
     """
     Vertrekken, die met punten als vertrek zijn gewaardeerd, en die verwarmd zijn. Open
@@ -335,7 +334,7 @@ class Woningwaarderingstelselgroep(Enum):
     wasgelegenheid = Referentiedata(
         code="WAS",
         naam="Wasgelegenheid",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     De groep criteria die betrekking heeft op douche, bad en wastafel (Beleidsboek
@@ -354,7 +353,7 @@ class Woningwaarderingstelselgroep(Enum):
     woonomgeving_standplaats = Referentiedata(
         code="WST",
         naam="Woonomgeving standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen.value,
+        parent=Woningwaarderingstelsel.standplaatsen,
     )
     """
     Standplaats: De groep criteria die betrekking heeft op de woonomgeving
@@ -393,7 +392,7 @@ class Woningwaarderingstelselgroep(Enum):
     prijsopslag_monumenten_en_nieuwbouw = Referentiedata(
         code="PMN",
         naam="Prijsopslag monumenten en nieuwbouw",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
     )
     """
     Prijsopslagen voor monumenten en nieuwbouw, waarbij extra percentages worden
@@ -405,7 +404,7 @@ class Woningwaarderingstelselgroep(Enum):
     gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen = Referentiedata(
         code="GVR",
         naam="Gemeenschappelijke vertrekken, overige ruimten en voorzieningen",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
     )
     """
     Waardering van gemeenschappelijke vertrekken, overige ruimten en voorzieningen,
@@ -417,7 +416,7 @@ class Woningwaarderingstelselgroep(Enum):
     gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen = Referentiedata(
         code="GBA",
         naam="Gemeenschappelijke binnenruimten gedeeld met meerdere adressen",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     Waardering van gemeenschappelijke binnenruimten gedeeld met meerdere adressen
@@ -426,7 +425,7 @@ class Woningwaarderingstelselgroep(Enum):
     bijzondere_voorzieningen_zorgwoning_en_aanbelfunctie = Referentiedata(
         code="BIA",
         naam="Bijzondere voorzieningen: zorgwoning en aanbelfunctie",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
     )
     """
     Waardering van bijzondere voorzieningen in een zorgwoning waaronder een
@@ -436,7 +435,7 @@ class Woningwaarderingstelselgroep(Enum):
     bijzondere_voorzieningen_zorgwoning = Referentiedata(
         code="BIZ",
         naam="Bijzondere voorzieningen: zorgwoning",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     Waardering van bijzondere voorzieningen in een zorgwoning
@@ -445,7 +444,7 @@ class Woningwaarderingstelselgroep(Enum):
     aftrekpunten = Referentiedata(
         code="AFT",
         naam="Aftrekpunten",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     Aftrekpunten waardering onzelfstandige woonruimten
@@ -454,24 +453,10 @@ class Woningwaarderingstelselgroep(Enum):
     prijsopslag_monumenten = Referentiedata(
         code="PMO",
         naam="Prijsopslag monumenten",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten.value,
+        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
     Prijsopslagen voor monumenten, waarbij extra percentages worden toegevoegd aan de
     maximale huurprijs voor rijks-, gemeentelijke of provinciaal aangewezen
     monumentenn.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

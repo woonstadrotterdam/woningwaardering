@@ -1,14 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.voorrangsoort import Voorrangsoort
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Voorrangdetailsoort(Enum):
+class Voorrangdetailsoort(Referentiedatasoort):
     beroep = Referentiedata(
         code="BER",
         naam="Beroep",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Ugrentie wegens een bijzonder beroep in de regio onderwijs, zorg of politie
@@ -17,7 +16,7 @@ class Voorrangdetailsoort(Enum):
     dakloos = Referentiedata(
         code="DAK",
         naam="(Bijna) dakloos",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     dakloos / calamiteit /brand onbewoonbaar / uitzetting / terugkeer uit buitenland
@@ -26,7 +25,7 @@ class Voorrangdetailsoort(Enum):
     gedupeerd = Referentiedata(
         code="DUP",
         naam="Gedupeerd",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens dupering van woningzoekende bij woningaanbieding
@@ -35,7 +34,7 @@ class Voorrangdetailsoort(Enum):
     economisch = Referentiedata(
         code="ECO",
         naam="Economisch",
-        parent=Voorrangsoort.binding.value,
+        parent=Voorrangsoort.binding,
     )
     """
     Economische binding
@@ -44,7 +43,7 @@ class Voorrangdetailsoort(Enum):
     ex_gedetineerd = Referentiedata(
         code="EXD",
         naam="ex-gedetineerd",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens het vrijkomen uit detentie
@@ -53,7 +52,7 @@ class Voorrangdetailsoort(Enum):
     financieel = Referentiedata(
         code="FIN",
         naam="Financieel",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens financiele problemen
@@ -62,7 +61,7 @@ class Voorrangdetailsoort(Enum):
     gelijkvloers = Referentiedata(
         code="GEL",
         naam="Gelijkvloers",
-        parent=Voorrangsoort.indicatie.value,
+        parent=Voorrangsoort.indicatie,
     )
     """
     Indicatie voor een gelijkvloerse woning
@@ -71,7 +70,7 @@ class Voorrangdetailsoort(Enum):
     geweld_bedreiging_en_of_overlast = Referentiedata(
         code="GEW",
         naam="Geweld bedreiging / overlast",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens overlast uit de omgeving of bedreiging.
@@ -80,7 +79,7 @@ class Voorrangdetailsoort(Enum):
     herhuisvesting = Referentiedata(
         code="HUI",
         naam="Herhuisvesting",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens (langdurige) renovatie, nieuwbouw of sloop
@@ -89,7 +88,7 @@ class Voorrangdetailsoort(Enum):
     kern = Referentiedata(
         code="KRN",
         naam="Kern",
-        parent=Voorrangsoort.binding.value,
+        parent=Voorrangsoort.binding,
     )
     """
     Kernbinding
@@ -98,7 +97,7 @@ class Voorrangdetailsoort(Enum):
     maatschappelijk = Referentiedata(
         code="MAA",
         naam="Maatschappelijk",
-        parent=Voorrangsoort.binding.value,
+        parent=Voorrangsoort.binding,
     )
     """
     Maatschappelijke binding
@@ -107,7 +106,7 @@ class Voorrangdetailsoort(Enum):
     mantelzorg = Referentiedata(
         code="MAN",
         naam="Mantelzorg",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens het ontvangen of geven van mantelzorg
@@ -116,7 +115,7 @@ class Voorrangdetailsoort(Enum):
     medisch = Referentiedata(
         code="MED",
         naam="Medisch",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie voor een aangepaste woning op medische gronden
@@ -125,7 +124,7 @@ class Voorrangdetailsoort(Enum):
     regio = Referentiedata(
         code="REG",
         naam="Regio",
-        parent=Voorrangsoort.binding.value,
+        parent=Voorrangsoort.binding,
     )
     """
     Regionale of regio binding
@@ -134,7 +133,7 @@ class Voorrangdetailsoort(Enum):
     relationeel = Referentiedata(
         code="REL",
         naam="Relationeel",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Echtscheiding / verbroken relatie / gezinsproblemen /zwangerschap
@@ -143,7 +142,7 @@ class Voorrangdetailsoort(Enum):
     rollatorgeschikt = Referentiedata(
         code="ROL",
         naam="Rollatorgeschikt",
-        parent=Voorrangsoort.indicatie.value,
+        parent=Voorrangsoort.indicatie,
     )
     """
     Indicatie voor een rollatorgeschikte woning
@@ -152,7 +151,7 @@ class Voorrangdetailsoort(Enum):
     rolstoelgeschikt = Referentiedata(
         code="RST",
         naam="Rolstoelgeschikt",
-        parent=Voorrangsoort.indicatie.value,
+        parent=Voorrangsoort.indicatie,
     )
     """
     Indicatie voor een rolstoelgeschikte woning
@@ -161,7 +160,7 @@ class Voorrangdetailsoort(Enum):
     servicewoning = Referentiedata(
         code="SER",
         naam="Servicewoning",
-        parent=Voorrangsoort.indicatie.value,
+        parent=Voorrangsoort.indicatie,
     )
     """
     Woningen bij een zorginstelling of verpleegcentrum.
@@ -170,7 +169,7 @@ class Voorrangdetailsoort(Enum):
     sociaal = Referentiedata(
         code="SOC",
         naam="Sociaal",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     De woonsituatie is levensontwrichtend of levensbedreigend voor een of meer
@@ -180,7 +179,7 @@ class Voorrangdetailsoort(Enum):
     statushouder = Referentiedata(
         code="STA",
         naam="Statushouder",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens het verkrijgen van een verblijfsstatus
@@ -189,22 +188,8 @@ class Voorrangdetailsoort(Enum):
     uitstroom_maatschappelijke_instelling = Referentiedata(
         code="UIT",
         naam="uitstroom maatschappelijke instelling",
-        parent=Voorrangsoort.urgentie.value,
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens het uitstromen bij een maatschappelijke instelling
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

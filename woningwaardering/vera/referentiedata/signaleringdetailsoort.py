@@ -1,14 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.signaleringsoort import Signaleringsoort
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Signaleringdetailsoort(Enum):
+class Signaleringdetailsoort(Referentiedatasoort):
     agressie = Referentiedata(
         code="AGS",
         naam="Agressie",
-        parent=Signaleringsoort.agressie.value,
+        parent=Signaleringsoort.agressie,
     )
 
     ambulante_begeleiding = Referentiedata(
@@ -23,79 +22,65 @@ class Signaleringdetailsoort(Enum):
     betalingsachterstand = Referentiedata(
         code="BET",
         naam="Betalingsachterstand",
-        parent=Signaleringsoort.huurschuld.value,
+        parent=Signaleringsoort.huurschuld,
     )
 
     bewindvoerder = Referentiedata(
         code="BEW",
         naam="Bewindvoerder",
-        parent=Signaleringsoort.huurschuld.value,
+        parent=Signaleringsoort.huurschuld,
     )
 
     brandstichting = Referentiedata(
         code="BRA",
         naam="Brandstichting",
-        parent=Signaleringsoort.agressie.value,
+        parent=Signaleringsoort.agressie,
     )
 
     deurwaarder = Referentiedata(
         code="DEU",
         naam="Deurwaarder",
-        parent=Signaleringsoort.huurschuld.value,
+        parent=Signaleringsoort.huurschuld,
     )
 
     drugshandel = Referentiedata(
         code="DRU",
         naam="Drugshandel",
-        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
 
     geluidsoverlast = Referentiedata(
         code="GEL",
         naam="Geluidsoverlast",
-        parent=Signaleringsoort.overlast.value,
+        parent=Signaleringsoort.overlast,
     )
 
     hennepkwekerij = Referentiedata(
         code="HEN",
         naam="Hennepkwekerij",
-        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
 
     mutatieschade = Referentiedata(
         code="MUT",
         naam="Mutatieschade",
-        parent=Signaleringsoort.huurschuld.value,
+        parent=Signaleringsoort.huurschuld,
     )
 
     onderverhuur = Referentiedata(
         code="OND",
         naam="Onderverhuur",
-        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
 
     prostitutie = Referentiedata(
         code="PRO",
         naam="Prostitutie",
-        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
 
     vervuiling = Referentiedata(
         code="VER",
         naam="Vervuiling",
-        parent=Signaleringsoort.oneigenlijk_gebruik_woning.value,
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

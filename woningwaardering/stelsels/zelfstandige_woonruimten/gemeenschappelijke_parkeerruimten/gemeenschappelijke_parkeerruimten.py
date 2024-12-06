@@ -45,8 +45,8 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
         woningwaardering_groep.woningwaarderingen = []

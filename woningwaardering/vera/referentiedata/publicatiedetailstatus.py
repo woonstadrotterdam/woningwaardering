@@ -1,14 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.publicatiestatus import Publicatiestatus
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Publicatiedetailstatus(Enum):
+class Publicatiedetailstatus(Referentiedatasoort):
     woning_krijgt_andere_bestemming = Referentiedata(
         code="BES",
         naam="Woning krijgt andere bestemming",
-        parent=Publicatiestatus.ingetrokken.value,
+        parent=Publicatiestatus.ingetrokken,
     )
     """
     Woning krijgt andere bestemming.
@@ -17,7 +16,7 @@ class Publicatiedetailstatus(Enum):
     geen_toewijzing = Referentiedata(
         code="GTW",
         naam="Geen toewijzing",
-        parent=Publicatiestatus.afgerond.value,
+        parent=Publicatiestatus.afgerond,
     )
     """
     Geen toewijzing
@@ -26,7 +25,7 @@ class Publicatiedetailstatus(Enum):
     woning_wordt_handmatig_bemiddeld = Referentiedata(
         code="HAN",
         naam="Woning wordt handmatig bemiddeld",
-        parent=Publicatiestatus.ingetrokken.value,
+        parent=Publicatiestatus.ingetrokken,
     )
     """
     Woning wordt handmatig bemiddeld.
@@ -35,7 +34,7 @@ class Publicatiedetailstatus(Enum):
     verhuurd_onder_voorbehoud = Referentiedata(
         code="HUU",
         naam="Verhuurd onder voorbehoud",
-        parent=Publicatiestatus.gepubliceerd.value,
+        parent=Publicatiestatus.gepubliceerd,
     )
     """
     Verhuurd onder voorbehoud
@@ -44,7 +43,7 @@ class Publicatiedetailstatus(Enum):
     huuropzegging_is_ingetrokken = Referentiedata(
         code="ING",
         naam="Huuropzegging is ingetrokken",
-        parent=Publicatiestatus.ingetrokken.value,
+        parent=Publicatiestatus.ingetrokken,
     )
     """
     Huuropzegging is ingetrokken.
@@ -53,7 +52,7 @@ class Publicatiedetailstatus(Enum):
     verkocht_onder_voorbehoud = Referentiedata(
         code="KOO",
         naam="Verkocht onder voorbehoud",
-        parent=Publicatiestatus.gepubliceerd.value,
+        parent=Publicatiestatus.gepubliceerd,
     )
     """
     Verkocht onder voorbehoud
@@ -62,7 +61,7 @@ class Publicatiedetailstatus(Enum):
     onder_bod = Referentiedata(
         code="OND",
         naam="Onder bod",
-        parent=Publicatiestatus.gepubliceerd.value,
+        parent=Publicatiestatus.gepubliceerd,
     )
     """
     Onder bod
@@ -71,7 +70,7 @@ class Publicatiedetailstatus(Enum):
     publicatie_met_onjuiste_gegevens = Referentiedata(
         code="ONJ",
         naam="Publicatie met onjuiste gegevens",
-        parent=Publicatiestatus.ingetrokken.value,
+        parent=Publicatiestatus.ingetrokken,
     )
     """
     Publicatie met onjuiste gegevens.
@@ -80,7 +79,7 @@ class Publicatiedetailstatus(Enum):
     onder_optie = Referentiedata(
         code="OOP",
         naam="Onder optie",
-        parent=Publicatiestatus.gepubliceerd.value,
+        parent=Publicatiestatus.gepubliceerd,
     )
     """
     Onder optie
@@ -89,7 +88,7 @@ class Publicatiedetailstatus(Enum):
     woning_wordt_gerenoveerd = Referentiedata(
         code="REN",
         naam="Woning wordt gerenoveerd",
-        parent=Publicatiestatus.ingetrokken.value,
+        parent=Publicatiestatus.ingetrokken,
     )
     """
     Woning wordt gerenoveerd.
@@ -98,7 +97,7 @@ class Publicatiedetailstatus(Enum):
     toegewezen = Referentiedata(
         code="TOE",
         naam="Toegewezen",
-        parent=Publicatiestatus.afgerond.value,
+        parent=Publicatiestatus.afgerond,
     )
     """
     Toegewezen
@@ -107,22 +106,8 @@ class Publicatiedetailstatus(Enum):
     woning_gaat_uit_exploitatie = Referentiedata(
         code="UIT",
         naam="Woning gaat uit exploitatie",
-        parent=Publicatiestatus.ingetrokken.value,
+        parent=Publicatiestatus.ingetrokken,
     )
     """
     Woning gaat uit exploitatie.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

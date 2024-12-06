@@ -48,8 +48,8 @@ class OppervlakteVanVertrekken(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
             )
         )
 
@@ -92,7 +92,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         for aantal_onz, oppervlakte in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
                 naam=f"Totaal (gedeeld met {aantal_onz})"
                 if aantal_onz > 1
                 else "Totaal (privé)",

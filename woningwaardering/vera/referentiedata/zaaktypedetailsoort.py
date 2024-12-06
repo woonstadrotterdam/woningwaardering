@@ -1,14 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.zaaktypesoort import Zaaktypesoort
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Zaaktypedetailsoort(Enum):
+class Zaaktypedetailsoort(Referentiedatasoort):
     agressie_en_of_bedreiging = Referentiedata(
         code="AGR",
         naam="Agressie/bedreiging",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over agressie/bedreiging
@@ -17,7 +16,7 @@ class Zaaktypedetailsoort(Enum):
     bedrijfsmatig_gebruik_woning = Referentiedata(
         code="BED",
         naam="Bedrijfsmatig gebruik woning",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Bedrijfsmatig gebruik woning
@@ -26,7 +25,7 @@ class Zaaktypedetailsoort(Enum):
     huisdieren = Referentiedata(
         code="DIE",
         naam="Huisdieren",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Overlast door huisdieren
@@ -35,7 +34,7 @@ class Zaaktypedetailsoort(Enum):
     dealen_en_of_drugspanden = Referentiedata(
         code="DRU",
         naam="Dealen/drugspanden",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Dealen/drugspanden
@@ -44,7 +43,7 @@ class Zaaktypedetailsoort(Enum):
     geluidsoverlast = Referentiedata(
         code="GEL",
         naam="Geluidsoverlast",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Geluidsoverlast
@@ -53,7 +52,7 @@ class Zaaktypedetailsoort(Enum):
     omgevingsoverlast = Referentiedata(
         code="HAN",
         naam="Omgevingsoverlast",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Omgevingsoverlast
@@ -62,7 +61,7 @@ class Zaaktypedetailsoort(Enum):
     hennepkwekerij = Referentiedata(
         code="HEN",
         naam="Hennepkwekerij",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Hennepkwekerij
@@ -71,7 +70,7 @@ class Zaaktypedetailsoort(Enum):
     oneigenlijk_gebruik_gemeenschappelijke_ruimte = Referentiedata(
         code="KLI",
         naam="Oneigenlijk gebruik gemeenschappelijke ruimte",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Oneigenlijk gebruik gemeenschappelijke ruimte
@@ -80,7 +79,7 @@ class Zaaktypedetailsoort(Enum):
     ongedierte = Referentiedata(
         code="ONG",
         naam="Ongedierte",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Ongedierte
@@ -89,7 +88,7 @@ class Zaaktypedetailsoort(Enum):
     onrechtmatige_bewoning = Referentiedata(
         code="ONR",
         naam="Onrechtmatige bewoning",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Onrechtmatige bewoning
@@ -98,7 +97,7 @@ class Zaaktypedetailsoort(Enum):
     onveiligheid_gemeenschappelijke_ruimte = Referentiedata(
         code="ONV",
         naam="Onveiligheid gemeenschappelijke ruimte",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Onveiligheid gemeenschappelijke ruimte
@@ -107,7 +106,7 @@ class Zaaktypedetailsoort(Enum):
     overige = Referentiedata(
         code="OVE",
         naam="Overige",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Overige
@@ -116,7 +115,7 @@ class Zaaktypedetailsoort(Enum):
     psychische_problematiek = Referentiedata(
         code="PSY",
         naam="Psychische problematiek",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Psychische problematiek
@@ -125,7 +124,7 @@ class Zaaktypedetailsoort(Enum):
     burenruzie = Referentiedata(
         code="RUZ",
         naam="Burenruzie",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Burenruzie
@@ -134,7 +133,7 @@ class Zaaktypedetailsoort(Enum):
     stankoverlast = Referentiedata(
         code="STA",
         naam="Stankoverlast",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Stankoverlast
@@ -143,7 +142,7 @@ class Zaaktypedetailsoort(Enum):
     vandalisme = Referentiedata(
         code="VAN",
         naam="Vandalisme",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Vandalisme
@@ -152,7 +151,7 @@ class Zaaktypedetailsoort(Enum):
     verslavingsproblematiek = Referentiedata(
         code="VER",
         naam="Verslavingsproblematiek",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Verslavingsproblematiek
@@ -161,22 +160,8 @@ class Zaaktypedetailsoort(Enum):
     vervuiling = Referentiedata(
         code="VUI",
         naam="Vervuiling",
-        parent=Zaaktypesoort.sociale_melding.value,
+        parent=Zaaktypesoort.sociale_melding,
     )
     """
     Sociale melding over Vervuiling
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

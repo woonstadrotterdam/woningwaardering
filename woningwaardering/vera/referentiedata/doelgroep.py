@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Doelgroep(Enum):
+class Doelgroep(Referentiedatasoort):
     persoon = Referentiedata(
         code="EEN",
         naam="Persoon",
@@ -76,17 +75,3 @@ class Doelgroep(Enum):
     aanwendbaarheid kent dan een zorgwoning). Betreft o.a. aanleunwoningen en
     serviceflats.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

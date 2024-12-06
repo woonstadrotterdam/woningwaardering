@@ -782,7 +782,7 @@ eenheid = EenhedenEenheid(
     id="<id>",
     bouwjaar=1924,
     monumenten=[],
-    woningwaarderingstelsel=Woningwaarderingstelsel.zelfstandige_woonruimten.value,
+    woningwaarderingstelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
     adres=EenhedenAdresBasis(
         straatnaam="<straatnaam>",
         huisnummer="<huisnummer>",
@@ -795,7 +795,7 @@ eenheid = EenhedenEenheid(
     ),
     panden=[
         EenhedenPand(
-            soort=Pandsoort.eengezinswoning.value,
+            soort=Pandsoort.eengezinswoning,
         )
     ],
     woz_eenheden=[
@@ -804,12 +804,12 @@ eenheid = EenhedenEenheid(
     ],
     energieprestaties=[
         EenhedenEnergieprestatie(
-            soort=Energieprestatiesoort.energie_index.value,
-            status=Energieprestatiestatus.definitief.value,
+            soort=Energieprestatiesoort.energie_index,
+            status=Energieprestatiestatus.definitief,
             begindatum=date(2019, 2, 25),
             einddatum=date(2029, 2, 25),
             registratiedatum="2019-02-26T14:51:38+01:00",
-            label=Energielabel.c.value,
+            label=Energielabel.c,
             waarde="1.58",
         )
     ],
@@ -817,8 +817,8 @@ eenheid = EenhedenEenheid(
     ruimten=[
         EenhedenRuimte(
             id="Space_108014589",
-            soort=Ruimtesoort.vertrek.value,
-            detailSoort=Ruimtedetailsoort.slaapkamer.value,
+            soort=Ruimtesoort.vertrek,
+            detailSoort=Ruimtedetailsoort.slaapkamer,
             naam="Slaapkamer",
             inhoud=60.4048,
             oppervlakte=21.047,
@@ -827,8 +827,8 @@ eenheid = EenhedenEenheid(
         ),
         EenhedenRuimte(
             id="Space_108006229",
-            soort=Ruimtesoort.vertrek.value,
-            detailSoort=Ruimtedetailsoort.keuken.value,
+            soort=Ruimtesoort.vertrek,
+            detailSoort=Ruimtedetailsoort.keuken,
             naam="Keuken",
             inhoud=57.4359,
             oppervlakte=20.3673,
@@ -839,8 +839,8 @@ eenheid = EenhedenEenheid(
                     id="Aanrecht_108006231",
                     naam="Aanrecht",
                     omschrijving="Aanrecht in Keuken",
-                    soort=Bouwkundigelementsoort.voorziening.value,
-                    detailSoort=Bouwkundigelementdetailsoort.aanrecht.value,
+                    soort=Bouwkundigelementsoort.voorziening,
+                    detailSoort=Bouwkundigelementdetailsoort.aanrecht,
                     lengte=2700,
                 )
             ],

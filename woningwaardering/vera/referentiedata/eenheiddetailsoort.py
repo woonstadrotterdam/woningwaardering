@@ -1,20 +1,19 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.eenheidsoort import Eenheidsoort
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheiddetailsoort(Enum):
+class Eenheiddetailsoort(Referentiedatasoort):
     antenne_opstelplaats = Referentiedata(
         code="ANT",
         naam="Antenne-opstelplaats",
-        parent=Eenheidsoort.overig.value,
+        parent=Eenheidsoort.overig,
     )
 
     atelierruimte = Referentiedata(
         code="ATE",
         naam="Atelierruimte",
-        parent=Eenheidsoort.bedrijfsruimte.value,
+        parent=Eenheidsoort.bedrijfsruimte,
     )
     """
     Een atelier is een werkplaats, in het bijzonder die van een beeldend kunstenaar.
@@ -23,7 +22,7 @@ class Eenheiddetailsoort(Enum):
     basisschool = Referentiedata(
         code="BAS",
         naam="Basisschool",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Basisschool conform: art. 49 lid 2a
@@ -32,7 +31,7 @@ class Eenheiddetailsoort(Enum):
     benedenwoning = Referentiedata(
         code="BEN",
         naam="Benedenwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een benedenwoning is een etagewoning of flatwoning op de begane grond met een
@@ -43,7 +42,7 @@ class Eenheiddetailsoort(Enum):
     berging = Referentiedata(
         code="BER",
         naam="Berging",
-        parent=Eenheidsoort.overig.value,
+        parent=Eenheidsoort.overig,
     )
     """
     Een berging is een bergruimte of bijgebouw met een algemene bergfunctie op een apart
@@ -54,7 +53,7 @@ class Eenheiddetailsoort(Enum):
     bibliotheek = Referentiedata(
         code="BIB",
         naam="Bibliotheek",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Dorps- of wijkbibliotheek
@@ -63,7 +62,7 @@ class Eenheiddetailsoort(Enum):
     bijeenkomstruimte = Referentiedata(
         code="BIJ",
         naam="Bijeenkomstruimte",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Ruimte voor het samenkomen van personen voor kunst, cultuur, godsdienst,
@@ -75,7 +74,7 @@ class Eenheiddetailsoort(Enum):
     bouwkavel = Referentiedata(
         code="BOU",
         naam="Bouwkavel",
-        parent=Eenheidsoort.overig.value,
+        parent=Eenheidsoort.overig,
     )
     """
     Een aaneengesloten terreinoppervlak, waarop krachtens het bestemmingsplan een
@@ -85,7 +84,7 @@ class Eenheiddetailsoort(Enum):
     bovenwoning = Referentiedata(
         code="BOV",
         naam="Bovenwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een bovenwoning is een etagewoning of flatwoning op een etage die bereikbaar is via
@@ -99,7 +98,7 @@ class Eenheiddetailsoort(Enum):
     brede_school = Referentiedata(
         code="BRE",
         naam="Brede school",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Brede school met bijv. peuterzaal, kinderopvang, voor-, tussen- en naschoolse
@@ -109,7 +108,7 @@ class Eenheiddetailsoort(Enum):
     buurthuis = Referentiedata(
         code="BUU",
         naam="Buurthuis",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Openbaar gebouw in een woonkern dat dienst doet als centrum voor maatschappelijk
@@ -119,7 +118,7 @@ class Eenheiddetailsoort(Enum):
     centrum_voor_jeugd_en_gezin = Referentiedata(
         code="CJG",
         naam="Centrum voor Jeugd en Gezin",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Centrum voor jeugd en gezin conform: art. 49 lid 2a
@@ -128,7 +127,7 @@ class Eenheiddetailsoort(Enum):
     corridorflat = Referentiedata(
         code="COR",
         naam="Corridorflat",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een corridorflat is een flatwoning waarbij de voordeur uitkomt op een centraal
@@ -139,7 +138,7 @@ class Eenheiddetailsoort(Enum):
     cultuur_ruimte = Referentiedata(
         code="CUL",
         naam="Cultuur ruimte",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Ruimten voor kleinschalige culturele activiteiten
@@ -148,7 +147,7 @@ class Eenheiddetailsoort(Enum):
     dagbestedingsruimte = Referentiedata(
         code="DAG",
         naam="Dagbestedingsruimte",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Ruimte voor dagbesteding van gehandicapten of ouderen, incl. enige
@@ -158,7 +157,7 @@ class Eenheiddetailsoort(Enum):
     eindwoning = Referentiedata(
         code="EIN",
         naam="Eindwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een eindwoning is een eengezinswoning die grenst aan een aanliggende woning. De
@@ -170,7 +169,7 @@ class Eenheiddetailsoort(Enum):
     erfpachtkavel = Referentiedata(
         code="EPK",
         naam="Erfpachtkavel",
-        parent=Eenheidsoort.overig.value,
+        parent=Eenheidsoort.overig,
     )
     """
     Kavels die gepacht zijn danwel verpacht worden
@@ -179,13 +178,13 @@ class Eenheiddetailsoort(Enum):
     fietsparkeerplaats_en_of_stalling = Referentiedata(
         code="FIE",
         naam="Fietsparkeerplaats/stalling",
-        parent=Eenheidsoort.overig.value,
+        parent=Eenheidsoort.overig,
     )
 
     galerijflat = Referentiedata(
         code="GAL",
         naam="Galerijflat",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een galerijflat is een flatwoning waarbij de voordeur uitkomt op een aan de
@@ -196,7 +195,7 @@ class Eenheiddetailsoort(Enum):
     garage = Referentiedata(
         code="GAR",
         naam="Garage",
-        parent=Eenheidsoort.parkeergelegenheid.value,
+        parent=Eenheidsoort.parkeergelegenheid,
     )
     """
     Een garage is een overdekte stallingruimte bestemd en geschikt voor motorvoertuigen
@@ -206,7 +205,7 @@ class Eenheiddetailsoort(Enum):
     gemeenschapscentrum = Referentiedata(
         code="GEM",
         naam="Gemeenschapscentrum",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Culturele infrastructuur door de gemeente beheerd met het oog op
@@ -217,7 +216,7 @@ class Eenheiddetailsoort(Enum):
     geschakelde_twee_onder_een_kapwoning = Referentiedata(
         code="GTW",
         naam="Geschakelde Twee-onder-een-kapwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een geschakelde 2-onder-1-kapwoning is een 2-onder-1-kapwoning waarbij de muren van
@@ -230,7 +229,7 @@ class Eenheiddetailsoort(Enum):
     geschakelde_woning = Referentiedata(
         code="GWO",
         naam="Geschakelde woning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een geschakelde woning is een eengezinswoning waarbij de muren of muren van
@@ -241,7 +240,7 @@ class Eenheiddetailsoort(Enum):
     half_vrijstaande_woning = Referentiedata(
         code="HAL",
         naam="Half vrijstaande woning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een halfvrijstaande woning is een eengezinswoning waarvan het hoofdgebouw verbonden
@@ -254,7 +253,7 @@ class Eenheiddetailsoort(Enum):
     herenhuis = Referentiedata(
         code="HER",
         naam="Herenhuis",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een herenhuis is een relatief grote eengezinswoning gesitueerd binnen de bebouwde
@@ -267,7 +266,7 @@ class Eenheiddetailsoort(Enum):
     hoekwoning = Referentiedata(
         code="HOE",
         naam="Hoekwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een hoekwoning is een eengezinswoning die grenst aan een aanliggende woning. De
@@ -279,13 +278,13 @@ class Eenheiddetailsoort(Enum):
     horeca = Referentiedata(
         code="HOR",
         naam="Horeca",
-        parent=Eenheidsoort.bedrijfsruimte.value,
+        parent=Eenheidsoort.bedrijfsruimte,
     )
 
     hospice = Referentiedata(
         code="HOS",
         naam="Hospice",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Woongelegenheid voor personen die niet meer kunnen genezen.
@@ -294,7 +293,7 @@ class Eenheiddetailsoort(Enum):
     jongerencentrum = Referentiedata(
         code="JON",
         naam="Jongerencentrum",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Jongerencentrum, mits zonder horecavoorziening
@@ -303,7 +302,7 @@ class Eenheiddetailsoort(Enum):
     kamer = Referentiedata(
         code="KAM",
         naam="Kamer",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Onzelfstandige woonruimte. Een kamer heeft geen eigen toegang of deelt de keuken of
@@ -313,7 +312,7 @@ class Eenheiddetailsoort(Enum):
     kantoorruimte = Referentiedata(
         code="KAN",
         naam="Kantoorruimte",
-        parent=Eenheidsoort.bedrijfsruimte.value,
+        parent=Eenheidsoort.bedrijfsruimte,
     )
     """
     Kantoorruimte, vallend onder Bedrijfsmatig vastgoed. Let op: gebruik voor
@@ -323,7 +322,7 @@ class Eenheiddetailsoort(Enum):
     kangoeroewoning = Referentiedata(
         code="KNG",
         naam="Kangoeroewoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een kangoeroewoning is een type huisvesting dat is ontworpen om twee of meer
@@ -337,7 +336,7 @@ class Eenheiddetailsoort(Enum):
     kinderopvanglocatie = Referentiedata(
         code="KIN",
         naam="Kinderopvanglocatie",
-        parent=Eenheidsoort.bedrijfsruimte.value,
+        parent=Eenheidsoort.bedrijfsruimte,
     )
     """
     Hieronder vallen kinderdagverblijven, peuterspeelzalen, buitenschoolse of
@@ -347,7 +346,7 @@ class Eenheiddetailsoort(Enum):
     kantoorruimte_van_toegelaten_instelling = Referentiedata(
         code="KTI",
         naam="Kantoorruimte van toegelaten instelling",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Kantoorruimte van toegelaten instelling, als zodanig vallend onder Maatschappelijk
@@ -357,7 +356,7 @@ class Eenheiddetailsoort(Enum):
     lichamelijk_beperkten_instelling = Referentiedata(
         code="LGI",
         naam="Lichamelijk beperkten instelling",
-        parent=Eenheidsoort.intramuraal_zorgvastgoed.value,
+        parent=Eenheidsoort.intramuraal_zorgvastgoed,
     )
     """
     Instelling voor mensen met een lichamelijke beperking.
@@ -366,7 +365,7 @@ class Eenheiddetailsoort(Enum):
     ligplaats = Referentiedata(
         code="LIG",
         naam="Ligplaats",
-        parent=Eenheidsoort.overig.value,
+        parent=Eenheidsoort.overig,
     )
     """
     Een ligplaats is een formeel door de gemeente als zodanig aangewezen plaats in het
@@ -378,7 +377,7 @@ class Eenheiddetailsoort(Enum):
     lichamelijk_en_geestelijk_beperkten_instelling = Referentiedata(
         code="LVG",
         naam="Lichamelijk en geestelijk beperkten instelling",
-        parent=Eenheidsoort.intramuraal_zorgvastgoed.value,
+        parent=Eenheidsoort.intramuraal_zorgvastgoed,
     )
     """
     Instelling voor mensen met een lichamelijke en/of verstandelijke beperking.
@@ -387,7 +386,7 @@ class Eenheiddetailsoort(Enum):
     maatschappelijk_werkruimte_wijk_en_of_buurtgericht = Referentiedata(
         code="MAA",
         naam="Maatschappelijk werkruimte wijk-/buurtgericht",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Ruimte voor op de buurt of wijk gericht maatschappelijk werk door stichtingen of
@@ -397,7 +396,7 @@ class Eenheiddetailsoort(Enum):
     maisonette = Referentiedata(
         code="MAI",
         naam="Maisonette",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een maisonnette is een specifiek type flatwoning waarbij de woning zelf twee of meer
@@ -409,7 +408,7 @@ class Eenheiddetailsoort(Enum):
     multifunctionele_centrum = Referentiedata(
         code="MUL",
         naam="Multifunctionele centrum",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Multifunctionele centrum voor maatschappelijke dienstverlening
@@ -418,7 +417,7 @@ class Eenheiddetailsoort(Enum):
     maatschappelijk_werkruimte_niet_wijk_of_buurtgericht = Referentiedata(
         code="MWR",
         naam="Maatschappelijk werkruimte niet-wijk- of buurtgericht",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Ruimten voor niet op de buurt of wijk gericht maatschappelijk werk door stichtingen
@@ -428,7 +427,7 @@ class Eenheiddetailsoort(Enum):
     opvangcentrum = Referentiedata(
         code="OPV",
         naam="Opvangcentrum",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Opvangcentrum (blijf-van-mijn-lijfhuizen, dag- en nachtopvang voor dak- en
@@ -438,7 +437,7 @@ class Eenheiddetailsoort(Enum):
     parkeerplaats_motor = Referentiedata(
         code="PAM",
         naam="Parkeerplaats motor",
-        parent=Eenheidsoort.parkeergelegenheid.value,
+        parent=Eenheidsoort.parkeergelegenheid,
     )
     """
     Een parkeerplaats die dienstbaar is aan wonen, waarbij de parkeerplaats een
@@ -449,13 +448,13 @@ class Eenheiddetailsoort(Enum):
     parkeerplaats_overdekt = Referentiedata(
         code="PAO",
         naam="Parkeerplaats overdekt",
-        parent=Eenheidsoort.parkeergelegenheid.value,
+        parent=Eenheidsoort.parkeergelegenheid,
     )
 
     parkeerplaats_auto = Referentiedata(
         code="PAR",
         naam="Parkeerplaats auto",
-        parent=Eenheidsoort.parkeergelegenheid.value,
+        parent=Eenheidsoort.parkeergelegenheid,
     )
     """
     Een parkeerplaats die dienstbaar is aan wonen, waarbij de parkeerplaats een
@@ -466,7 +465,7 @@ class Eenheiddetailsoort(Enum):
     portiekflat = Referentiedata(
         code="POF",
         naam="Portiekflat",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een portiekflat is een flatwoning waarbij de voordeur uitkomt op een
@@ -477,7 +476,7 @@ class Eenheiddetailsoort(Enum):
     portiekwoning = Referentiedata(
         code="POW",
         naam="Portiekwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een portiekwoning is een etagewoning waarbij de voordeur uitkomt in een open
@@ -490,7 +489,7 @@ class Eenheiddetailsoort(Enum):
     praktijkruimte = Referentiedata(
         code="PRA",
         naam="Praktijkruimte",
-        parent=Eenheidsoort.bedrijfsruimte.value,
+        parent=Eenheidsoort.bedrijfsruimte,
     )
     """
     Een praktijkruimte of therapieruimte bestaat minimaal uit een wachtruimte (met
@@ -500,7 +499,7 @@ class Eenheiddetailsoort(Enum):
     praktijkwoning = Referentiedata(
         code="PRW",
         naam="Praktijkwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een woning waarvan een deel bestemd en in gebruik is voor het uitoefenen van een
@@ -510,7 +509,7 @@ class Eenheiddetailsoort(Enum):
     psychische_zorginstelling = Referentiedata(
         code="PZI",
         naam="Psychische zorginstelling",
-        parent=Eenheidsoort.intramuraal_zorgvastgoed.value,
+        parent=Eenheidsoort.intramuraal_zorgvastgoed,
     )
     """
     Instelling voor psychische zorg
@@ -519,7 +518,7 @@ class Eenheiddetailsoort(Enum):
     recreatiewoning = Referentiedata(
         code="REC",
         naam="Recreatiewoning",
-        parent=Eenheidsoort.recreatiebestemming.value,
+        parent=Eenheidsoort.recreatiebestemming,
     )
     """
     Woning met een recreatiebestemming en niet bedoeld voor permanente bewoning.
@@ -528,7 +527,7 @@ class Eenheiddetailsoort(Enum):
     recreatiezaal = Referentiedata(
         code="REZ",
         naam="Recreatiezaal",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Ruimte bestemd voor ontmoeting, recreatie en informeel amusement, binnen een
@@ -538,7 +537,7 @@ class Eenheiddetailsoort(Enum):
     schoolgebouw = Referentiedata(
         code="SCH",
         naam="Schoolgebouw",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Vmbo-mbo-scholen, vwo-scholen, schoolgebouwen voor speciaal onderwijs.
@@ -547,13 +546,13 @@ class Eenheiddetailsoort(Enum):
     scootmobielplek = Referentiedata(
         code="SCO",
         naam="Scootmobielplek",
-        parent=Eenheidsoort.parkeergelegenheid.value,
+        parent=Eenheidsoort.parkeergelegenheid,
     )
 
     steunpunt = Referentiedata(
         code="STP",
         naam="Steunpunt",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Steunpunten voor schuldsanering en budgetbeheeradvies voor huishoudens in financiële
@@ -563,7 +562,7 @@ class Eenheiddetailsoort(Enum):
     tijdelijke_woning = Referentiedata(
         code="TIJ",
         naam="Tijdelijke woning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een tijdelijke woning is een woning met een tijdelijke instandhoudingstermijn (van
@@ -574,7 +573,7 @@ class Eenheiddetailsoort(Enum):
     tiny_house = Referentiedata(
         code="TIN",
         naam="Tiny house",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een tiny house is een kleine volwaardige (vrijstaande) woningen van maximaal 50 m2
@@ -585,7 +584,7 @@ class Eenheiddetailsoort(Enum):
     tussenwoning = Referentiedata(
         code="TUS",
         naam="Tussenwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een tussenwoning is een eengezinswoning waarbij de tussenmuren aan andere panden
@@ -598,7 +597,7 @@ class Eenheiddetailsoort(Enum):
     twee_onder_een_kapwoning = Referentiedata(
         code="TWE",
         naam="Twee-onder-een-kapwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een 2-onder-1-kapwoning is een eengezinswoning waarvan het hoofdgebouw is verbonden
@@ -613,7 +612,7 @@ class Eenheiddetailsoort(Enum):
     veiligheidshuis = Referentiedata(
         code="VEI",
         naam="Veiligheidshuis",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Een veiligheidshuis is een fysieke locatie waar verschillende instellingen in een
@@ -624,7 +623,7 @@ class Eenheiddetailsoort(Enum):
     verstandelijk_gehandicapten_instelling = Referentiedata(
         code="VGI",
         naam="Verstandelijk gehandicapten instelling",
-        parent=Eenheidsoort.intramuraal_zorgvastgoed.value,
+        parent=Eenheidsoort.intramuraal_zorgvastgoed,
     )
     """
     Instelling voor mensen met een verstandelijke beperking.
@@ -633,7 +632,7 @@ class Eenheiddetailsoort(Enum):
     volkstuin = Referentiedata(
         code="VOL",
         naam="Volkstuin",
-        parent=Eenheidsoort.overig.value,
+        parent=Eenheidsoort.overig,
     )
     """
     Gehuurd stukje grond waarop je planten, groenten en fruit kunt laten groeien
@@ -642,7 +641,7 @@ class Eenheiddetailsoort(Enum):
     verpleeghuis = Referentiedata(
         code="VPL",
         naam="Verpleeghuis",
-        parent=Eenheidsoort.intramuraal_zorgvastgoed.value,
+        parent=Eenheidsoort.intramuraal_zorgvastgoed,
     )
     """
     Een verpleeghuis is een instelling waar mensen met gezondheidsproblemen kunnen
@@ -653,7 +652,7 @@ class Eenheiddetailsoort(Enum):
     vrijstaande_woning = Referentiedata(
         code="VRI",
         naam="Vrijstaande woning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een vrijstaande woning is een eengezinswoning die los staat van (eventueel)
@@ -663,7 +662,7 @@ class Eenheiddetailsoort(Enum):
     verzorgingshuis = Referentiedata(
         code="VZO",
         naam="Verzorgingshuis",
-        parent=Eenheidsoort.intramuraal_zorgvastgoed.value,
+        parent=Eenheidsoort.intramuraal_zorgvastgoed,
     )
     """
     Een verzorgingshuis biedt uitgebreide zorg, ondersteuning en een beschutte
@@ -674,7 +673,7 @@ class Eenheiddetailsoort(Enum):
     waterwoning = Referentiedata(
         code="WAT",
         naam="Waterwoning",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een waterwoning is een woning voorzien van een draagconstructie met een groot
@@ -686,7 +685,7 @@ class Eenheiddetailsoort(Enum):
     welzijnswerkruimte_wijk_en_of_buurtgericht = Referentiedata(
         code="WEL",
         naam="Welzijnswerkruimte wijk-/buurtgericht",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Ruimte voor op de buurt of wijk gerichte activiteiten op het gebied van welzijnswerk
@@ -696,7 +695,7 @@ class Eenheiddetailsoort(Enum):
     centrum_voor_werk = Referentiedata(
         code="WER",
         naam="Centrum voor werk",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Centrum voor werk(gelegenheid) en/of bevordering van bedrijvigheid in de wijk
@@ -705,19 +704,19 @@ class Eenheiddetailsoort(Enum):
     wijksportvoorziening = Referentiedata(
         code="WIJ",
         naam="Wijksportvoorziening",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
 
     winkelruimte = Referentiedata(
         code="WIR",
         naam="Winkelruimte",
-        parent=Eenheidsoort.bedrijfsruimte.value,
+        parent=Eenheidsoort.bedrijfsruimte,
     )
 
     woonboot = Referentiedata(
         code="WOB",
         naam="Woonboot",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een woonboot is een verblijfsobject dat bestemd is voor permanente danwel
@@ -728,7 +727,7 @@ class Eenheiddetailsoort(Enum):
     woonwagen = Referentiedata(
         code="WOW",
         naam="Woonwagen",
-        parent=Eenheidsoort.woonruimte.value,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een woonwagen respectievelijk stacaravan is een voor permanente respectievelijk
@@ -742,7 +741,7 @@ class Eenheiddetailsoort(Enum):
     woon_en_of_winkelpand = Referentiedata(
         code="WWI",
         naam="Woon-/Winkelpand",
-        parent=Eenheidsoort.bedrijfsruimte.value,
+        parent=Eenheidsoort.bedrijfsruimte,
     )
     """
     Een gebouw in de zin van art. 7:290 BW met een binnen de contouren van de
@@ -758,7 +757,7 @@ class Eenheiddetailsoort(Enum):
     woonwagenstandplaats = Referentiedata(
         code="WWP",
         naam="Woonwagenstandplaats",
-        parent=Eenheidsoort.overig.value,
+        parent=Eenheidsoort.overig,
     )
     """
     Een standplaats is een formeel door de gemeente als zodanig aangewezen terrein of
@@ -772,7 +771,7 @@ class Eenheiddetailsoort(Enum):
     welzijnswerkruimte_niet_wijk_of_buurtgericht = Referentiedata(
         code="WWR",
         naam="Welzijnswerkruimte niet-wijk- of buurtgericht",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Ruimten voor niet op de buurt of wijk gerichte activiteiten op het gebied van
@@ -782,28 +781,14 @@ class Eenheiddetailsoort(Enum):
     ziekenhuis = Referentiedata(
         code="ZIE",
         naam="Ziekenhuis",
-        parent=Eenheidsoort.intramuraal_zorgvastgoed.value,
+        parent=Eenheidsoort.intramuraal_zorgvastgoed,
     )
 
     zorgsteunpunt = Referentiedata(
         code="ZST",
         naam="Zorgsteunpunt",
-        parent=Eenheidsoort.maatschappelijk_vastgoed.value,
+        parent=Eenheidsoort.maatschappelijk_vastgoed,
     )
     """
     Zorgsteunpunten die inpandig in een woonzorggebouw zijn gevestigd
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

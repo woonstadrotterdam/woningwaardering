@@ -1,14 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.kandidaatstatus import Kandidaatstatus
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Kandidaatdetailstatus(Enum):
+class Kandidaatdetailstatus(Referentiedatasoort):
     aanbieding = Referentiedata(
         code="AAN",
         naam="Aanbieding",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat krijgt aanbieding.
@@ -17,7 +16,7 @@ class Kandidaatdetailstatus(Enum):
     bezichtiging = Referentiedata(
         code="BEZ",
         naam="Bezichtiging",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat mag bezichtigen.
@@ -26,7 +25,7 @@ class Kandidaatdetailstatus(Enum):
     documentcontrole = Referentiedata(
         code="DOC",
         naam="Documentcontrole",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat moet documenten laten controleren.
@@ -51,7 +50,7 @@ class Kandidaatdetailstatus(Enum):
     niet_gereageerd = Referentiedata(
         code="NRE",
         naam="Niet gereageerd",
-        parent=Kandidaatstatus.geweigerd.value,
+        parent=Kandidaatstatus.geweigerd,
     )
     """
     Kandidaat heeft te laat of niet gereageerd.
@@ -60,7 +59,7 @@ class Kandidaatdetailstatus(Enum):
     ongeschikt = Referentiedata(
         code="ONG",
         naam="Ongeschikt",
-        parent=Kandidaatstatus.afgewezen.value,
+        parent=Kandidaatstatus.afgewezen,
     )
     """
     Kandidaat niet geschikt voor omgeving.
@@ -69,7 +68,7 @@ class Kandidaatdetailstatus(Enum):
     gegevens_onjuist = Referentiedata(
         code="ONJ",
         naam="Gegevens onjuist",
-        parent=Kandidaatstatus.afgewezen.value,
+        parent=Kandidaatstatus.afgewezen,
     )
     """
     Kandidaat komt niet in aanmerking na controle gegevens.
@@ -78,7 +77,7 @@ class Kandidaatdetailstatus(Enum):
     overeenkomst_getekend = Referentiedata(
         code="OVE",
         naam="Overeenkomst getekend",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat heeft huur- of koopovereenkomst getekend.
@@ -95,7 +94,7 @@ class Kandidaatdetailstatus(Enum):
     peilen_belangstelling = Referentiedata(
         code="PEI",
         naam="Peilen belangstelling",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat wordt gevraagd of deze nog steeds belangstelling heeft.
@@ -104,22 +103,8 @@ class Kandidaatdetailstatus(Enum):
     weigering_aanbieding = Referentiedata(
         code="WEI",
         naam="Weigering aanbieding",
-        parent=Kandidaatstatus.geweigerd.value,
+        parent=Kandidaatstatus.geweigerd,
     )
     """
     Kandidaat weigert de aanbieding.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

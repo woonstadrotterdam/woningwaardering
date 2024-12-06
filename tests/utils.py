@@ -26,7 +26,7 @@ def get_stelselgroep_resultaten(
     resultaten = [
         groep
         for groep in resultaat.groepen or []
-        if groep.criterium_groep.stelselgroep.code == stelselgroep.code
+        if groep.criterium_groep.stelselgroep == stelselgroep
     ]
     assert (
         len(resultaten) < 2

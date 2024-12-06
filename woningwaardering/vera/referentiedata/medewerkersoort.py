@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Medewerkersoort(Enum):
+class Medewerkersoort(Referentiedatasoort):
     in_dienst = Referentiedata(
         code="DIE",
         naam="In dienst",
@@ -52,17 +51,3 @@ class Medewerkersoort(Enum):
     organisatie. Dit programma is bedoeld om hen de vaardigheden, kennis en ervaring
     te geven die nodig zijn om succesvol te zijn in een specifieke rol of sector.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

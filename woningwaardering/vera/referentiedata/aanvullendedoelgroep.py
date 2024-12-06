@@ -1,14 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.doelgroep import Doelgroep
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Aanvullendedoelgroep(Enum):
+class Aanvullendedoelgroep(Referentiedatasoort):
     buitenlandse_studenten = Referentiedata(
         code="BSTU",
         naam="Buitenlandse studenten",
-        parent=Doelgroep.studenten.value,
+        parent=Doelgroep.studenten,
     )
     """
     Woonruimte is bestemd voor en/of huurder is een uit het buitenland afkomstige
@@ -121,17 +120,3 @@ class Aanvullendedoelgroep(Enum):
     """
     Woonruimte is bestemd voor en/of huurder heeft een zorgindicatie.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

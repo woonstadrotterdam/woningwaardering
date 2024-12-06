@@ -1,14 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.eenheidstatus import Eenheidstatus
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheiddetailstatus(Enum):
+class Eenheiddetailstatus(Referentiedatasoort):
     verhuurd_antikraak = Referentiedata(
         code="ANT",
         naam="Verhuurd antikraak",
-        parent=Eenheidstatus.verhuurd.value,
+        parent=Eenheidstatus.verhuurd,
     )
     """
     De eenheid wordt verhuurd onder de voorwaarden van anti-kraak
@@ -17,7 +16,7 @@ class Eenheiddetailstatus(Enum):
     bouwplannen = Referentiedata(
         code="BOU",
         naam="Bouwplannen",
-        parent=Eenheidstatus.in_ontwikkeling.value,
+        parent=Eenheidstatus.in_ontwikkeling,
     )
     """
     Eenheid is in ontwikkeling, nog in de planfase
@@ -26,7 +25,7 @@ class Eenheiddetailstatus(Enum):
     bruikleen = Referentiedata(
         code="BRU",
         naam="Bruikleen",
-        parent=Eenheidstatus.verhuurd.value,
+        parent=Eenheidstatus.verhuurd,
     )
     """
     De eenheid wordt verhuurd onder een bruikleen constructie
@@ -35,7 +34,7 @@ class Eenheiddetailstatus(Enum):
     wacht_op_energie_prestatie_advies = Referentiedata(
         code="EPA",
         naam="Wacht op Energie Prestatie Advies",
-        parent=Eenheidstatus.leegstand.value,
+        parent=Eenheidstatus.leegstand,
     )
     """
     Frictieleegstand, ontstaan doordat er nog gewacht wordt op de afgifte van een EPA
@@ -45,7 +44,7 @@ class Eenheiddetailstatus(Enum):
     mutatie = Referentiedata(
         code="MUT",
         naam="Mutatie",
-        parent=Eenheidstatus.leegstand.value,
+        parent=Eenheidstatus.leegstand,
     )
     """
     Frictieleegstand wegens mutatieonderhoud. De eenheid is in exploitatie, maar niet
@@ -56,7 +55,7 @@ class Eenheiddetailstatus(Enum):
     wacht_op_nieuwe_huurder_niet_regulier = Referentiedata(
         code="NIB",
         naam="Wacht op nieuwe huurder - niet-regulier",
-        parent=Eenheidstatus.leegstand.value,
+        parent=Eenheidstatus.leegstand,
     )
     """
     Frictieleegstand, ontstaan doordat er nog geen nieuwe huurder is gevonden, waarbij
@@ -69,7 +68,7 @@ class Eenheiddetailstatus(Enum):
     nieuwbouw = Referentiedata(
         code="NIE",
         naam="Nieuwbouw",
-        parent=Eenheidstatus.in_ontwikkeling.value,
+        parent=Eenheidstatus.in_ontwikkeling,
     )
     """
     Eenheid is in ontwikkeling, realisatie-/bouwfase is gestart
@@ -78,7 +77,7 @@ class Eenheiddetailstatus(Enum):
     wacht_op_nieuwe_huurder_regulier = Referentiedata(
         code="NIH",
         naam="Wacht op nieuwe huurder - regulier",
-        parent=Eenheidstatus.leegstand.value,
+        parent=Eenheidstatus.leegstand,
     )
     """
     Frictieleegstand, ontstaan doordat er nog geen nieuwe huurder is gevonden, zonder
@@ -91,7 +90,7 @@ class Eenheiddetailstatus(Enum):
     oplevering = Referentiedata(
         code="OPL",
         naam="Oplevering",
-        parent=Eenheidstatus.in_ontwikkeling.value,
+        parent=Eenheidstatus.in_ontwikkeling,
     )
     """
     Eenheid is in ontwikkeling, klaar voor oplevering
@@ -100,7 +99,7 @@ class Eenheiddetailstatus(Enum):
     verhuurd_permanent = Referentiedata(
         code="PER",
         naam="Verhuurd permanent",
-        parent=Eenheidstatus.verhuurd.value,
+        parent=Eenheidstatus.verhuurd,
     )
     """
     Doorlopend contract of voor onbepaalde tijd.
@@ -109,7 +108,7 @@ class Eenheiddetailstatus(Enum):
     projectleegstand = Referentiedata(
         code="PRO",
         naam="Projectleegstand",
-        parent=Eenheidstatus.leegstand.value,
+        parent=Eenheidstatus.leegstand,
     )
     """
     Leegstand doordat de eenheid deel uitmaakt van een onderhouds- of renovatieproject,
@@ -119,7 +118,7 @@ class Eenheiddetailstatus(Enum):
     structurele_leegstand = Referentiedata(
         code="STR",
         naam="Structurele leegstand",
-        parent=Eenheidstatus.leegstand.value,
+        parent=Eenheidstatus.leegstand,
     )
     """
     (Verwachte) Langdurige frictieleegstand, doordat vraag en aanbod niet op elkaar
@@ -129,7 +128,7 @@ class Eenheiddetailstatus(Enum):
     verhuurd_tijdelijk = Referentiedata(
         code="TIJD",
         naam="Verhuurd tijdelijk",
-        parent=Eenheidstatus.verhuurd.value,
+        parent=Eenheidstatus.verhuurd,
     )
     """
     Huurcontract met beperkte looptijd (anders dan anti-kraak of onder een bruikleen
@@ -139,7 +138,7 @@ class Eenheiddetailstatus(Enum):
     verkoop = Referentiedata(
         code="VEK",
         naam="Verkoop",
-        parent=Eenheidstatus.leegstand.value,
+        parent=Eenheidstatus.leegstand,
     )
     """
     Leegstand omdat de eenheid op korte termijn verkocht zal worden, maar nog wel in
@@ -149,22 +148,8 @@ class Eenheiddetailstatus(Enum):
     vergunning_verleend = Referentiedata(
         code="VER",
         naam="Vergunning verleend",
-        parent=Eenheidstatus.in_ontwikkeling.value,
+        parent=Eenheidstatus.in_ontwikkeling,
     )
     """
     Eenheid is in ontwikkeling, bouwvergunning is verleend
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

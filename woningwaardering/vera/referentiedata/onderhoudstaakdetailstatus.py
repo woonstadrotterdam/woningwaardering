@@ -1,16 +1,15 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.onderhoudstaakstatus import (
     Onderhoudstaakstatus,
 )
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Onderhoudstaakdetailstatus(Enum):
+class Onderhoudstaakdetailstatus(Referentiedatasoort):
     klant_niet_aanwezig = Referentiedata(
         code="AFW",
         naam="Klant niet aanwezig",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat de klant niet aanwezig is
@@ -19,7 +18,7 @@ class Onderhoudstaakdetailstatus(Enum):
     niet_de_juiste_discipline = Referentiedata(
         code="DIS",
         naam="Niet de juiste discipline",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat de vakman niet de juiste discipline heeft
@@ -28,7 +27,7 @@ class Onderhoudstaakdetailstatus(Enum):
     inspectie_en_of_beoordeling_vereist = Referentiedata(
         code="INS",
         naam="Inspectie/beoordeling vereist",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat inspectie/beoordeling door inspecteur noodzakelijk is
@@ -37,7 +36,7 @@ class Onderhoudstaakdetailstatus(Enum):
     materiaal_bestellen = Referentiedata(
         code="MAT",
         naam="Materiaal bestellen",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat materiaal besteld moet worden
@@ -46,7 +45,7 @@ class Onderhoudstaakdetailstatus(Enum):
     offerte_benodigd = Referentiedata(
         code="OFF",
         naam="Offerte benodigd",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat een offerte nodig is
@@ -55,22 +54,8 @@ class Onderhoudstaakdetailstatus(Enum):
     onvoldoende_tijd = Referentiedata(
         code="ONV",
         naam="Onvoldoende tijd",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat er onvoldoende tijd voor de vakman is
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Voorzieningsoort(Enum):
+class Voorzieningsoort(Referentiedatasoort):
     aanbelfunctie_met_video_en_audioverbinding = Referentiedata(
         code="ABF",
         naam="Aanbelfunctie met video- en audioverbinding",
@@ -326,17 +325,3 @@ class Voorzieningsoort(Enum):
     Stopcontact bij de wastafel. Maximaal twee per wastafel worden meegeteld in de
     waardering.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

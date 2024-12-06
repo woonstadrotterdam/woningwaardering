@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Opleidingsniveau(Enum):
+class Opleidingsniveau(Referentiedatasoort):
     hbo_associate_degree = Referentiedata(
         code="HAD",
         naam="HBO Associate degree",
@@ -105,17 +104,3 @@ class Opleidingsniveau(Enum):
     """
     Centraal Register Opleidingen Hoger Onderwijs (CROHO)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

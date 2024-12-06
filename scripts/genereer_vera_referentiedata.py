@@ -26,7 +26,8 @@ output_folder = os.path.join("woningwaardering", "vera", "referentiedata")
 # response = requests.get(url)
 # source_data = json.load(loads(response.text)
 
-url = "https://raw.githubusercontent.com/Aedes-datastandaarden/vera-referentiedata/main/Referentiedata.csv"
+version = "02eee3c2de6c05ec2661c0b4b7659c21d0727b1a"
+url = f"https://raw.githubusercontent.com/Aedes-datastandaarden/vera-referentiedata/{version}/Referentiedata.csv"
 response = requests.get(url, timeout=10)
 source_data = csv.DictReader(response.text.splitlines(), delimiter=";")
 
@@ -208,9 +209,7 @@ environment.filters["normalize_variable_name"] = normalize_variable_name
 
 # Define the Jinja2 template for soort_folder/<soort>.py
 soort_template = environment.from_string(
-    """from enum import Enum
-
-from woningwaardering.vera.bvg.generated import Referentiedata
+    """from woningwaardering.vera.bvg.generated import Referentiedata
 {%- set parent_classes = items | map(attribute='parent.soort') | unique | select('string') -%}
 {%- if parent_classes -%}
 {%- for parentClass in parent_classes %}
@@ -223,15 +222,16 @@ from woningwaardering.vera.referentiedata.{{ parentClass | remove_accents | lowe
 {%- endif %}
 {%- endfor %}
 {%- endif %}
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class {{ soort|remove_accents|title }}(Enum):
+class {{ soort|remove_accents|title }}(Referentiedatasoort):
 {%- for item in items %}
     {{ item|normalize_variable_name }} = Referentiedata(
         code="{{ item['code'] | safe }}",
         naam="{{ item['naam'] | safe }}",
         {%- if item['parent'] | safe %}
-        parent={{item['parent'].soort | remove_accents | title}}.{{item['parent'] | normalize_variable_name}}.value,
+        parent={{item['parent'].soort | remove_accents | title}}.{{item['parent'] | normalize_variable_name}},
         {%- endif %}
     )
     {%- if item['omschrijving'] | safe %}
@@ -240,20 +240,6 @@ class {{ soort|remove_accents|title }}(Enum):
     \"\"\"
     {%- endif %}
 {% endfor %}
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent
-
 """
 )
 

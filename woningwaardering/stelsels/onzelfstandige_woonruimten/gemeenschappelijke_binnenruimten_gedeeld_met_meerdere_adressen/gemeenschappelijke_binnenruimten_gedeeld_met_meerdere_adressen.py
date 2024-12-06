@@ -58,8 +58,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -168,10 +168,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         Returns:
             WoningwaarderingResultatenWoningwaardering | None: Woningwaardering van 3 punten voor een zorgwoning of None als de eenheid geen zorgwoning is
         """
-        if (
-            eenheid.doelgroep is not None
-            and eenheid.doelgroep.code == Doelgroep.zorg.code
-        ):
+        if eenheid.doelgroep == Doelgroep.zorg:
             logger.info(
                 f"Eenheid {eenheid.id} is een zorgwoning en krijgt 3 punten voor {self.stelselgroep.naam}"
             )
@@ -263,7 +260,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         criterium=f"{oppervlakte_resultaat.criterium.naam}: {ruimte.soort.naam}",
                         bovenliggende_criterium_id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen",
                         aantal=oppervlakte_resultaat.aantal,
-                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                        meeteenheid=Meeteenheid.vierkante_meter_m2,
                     )
                 )
 

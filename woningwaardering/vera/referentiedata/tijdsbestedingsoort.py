@@ -1,9 +1,8 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Tijdsbestedingsoort(Enum):
+class Tijdsbestedingsoort(Referentiedatasoort):
     declarabel = Referentiedata(
         code="DEC",
         naam="Declarabel",
@@ -18,17 +17,3 @@ class Tijdsbestedingsoort(Enum):
         code="AFW",
         naam="Afwezig",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

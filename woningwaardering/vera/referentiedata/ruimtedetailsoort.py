@@ -1,14 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Ruimtedetailsoort(Enum):
+class Ruimtedetailsoort(Referentiedatasoort):
     atrium_en_of_patio = Referentiedata(
         code="ATR",
         naam="Atrium / Patio",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Niet overdekt atrium of patio
@@ -17,7 +16,7 @@ class Ruimtedetailsoort(Enum):
     achtertuin = Referentiedata(
         code="ATU",
         naam="Achtertuin",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: tuim gelegen aan de achterzijde van de woning. Deze waarde kan
@@ -27,7 +26,7 @@ class Ruimtedetailsoort(Enum):
     badkamer = Referentiedata(
         code="BAD",
         naam="Badkamer",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek: voor een sanitaire ruimte in een woning, dat wil zeggen een ruimte die
@@ -46,7 +45,7 @@ class Ruimtedetailsoort(Enum):
     balkon = Referentiedata(
         code="BAL",
         naam="Balkon",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Een balkon.
@@ -55,7 +54,7 @@ class Ruimtedetailsoort(Enum):
     badkamer_met_toilet = Referentiedata(
         code="BAT",
         naam="Badkamer met toilet",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Gecombineerde badkamer/toilet
@@ -64,7 +63,7 @@ class Ruimtedetailsoort(Enum):
     berging = Referentiedata(
         code="BER",
         naam="Berging",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Berging voor eigen gebruik, overige ruimte
@@ -73,7 +72,7 @@ class Ruimtedetailsoort(Enum):
     bijkeuken = Referentiedata(
         code="BIJ",
         naam="Bijkeuken",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: grenzend aan de eigenlijke keuken die voor ondersteunende
@@ -84,7 +83,7 @@ class Ruimtedetailsoort(Enum):
     dakterras = Referentiedata(
         code="DAK",
         naam="Dakterras",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Een dakterras.
@@ -93,7 +92,7 @@ class Ruimtedetailsoort(Enum):
     gemeenschappelijk_dakterras = Referentiedata(
         code="GAK",
         naam="Gemeenschappelijk dakterras",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: een gemeenschappelijk dakterras
@@ -102,7 +101,7 @@ class Ruimtedetailsoort(Enum):
     doucheruimte = Referentiedata(
         code="DOU",
         naam="Doucheruimte",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek: sanitaire ruimte met een douche.
@@ -111,7 +110,7 @@ class Ruimtedetailsoort(Enum):
     gang = Referentiedata(
         code="GAN",
         naam="Gang",
-        parent=Ruimtesoort.verkeersruimte.value,
+        parent=Ruimtesoort.verkeersruimte,
     )
     """
     Verkeersruimte : is een betrekkelijk smalle en lange ruimte omgeven door muren en
@@ -122,7 +121,7 @@ class Ruimtedetailsoort(Enum):
     gemeenschappelijke_parkeerruimte_niet_specifieke_plek = Referentiedata(
         code="GPN",
         naam="Gemeenschappelijke parkeerruimte niet specifieke plek",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, en
@@ -132,7 +131,7 @@ class Ruimtedetailsoort(Enum):
     gemeenschappelijke_parkeerruimte_specifieke_plek = Referentiedata(
         code="GPS",
         naam="Gemeenschappelijke parkeerruimte specifieke plek",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: een afsluitbare gemeenschappelijke parkeerruimte, zonder dak, met
@@ -142,13 +141,13 @@ class Ruimtedetailsoort(Enum):
     gemeenschappelijke_tuin = Referentiedata(
         code="GTU",
         naam="Gemeenschappelijke tuin",
-        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen.value,
+        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
 
     hal = Referentiedata(
         code="HAL",
         naam="Hal",
-        parent=Ruimtesoort.verkeersruimte.value,
+        parent=Ruimtesoort.verkeersruimte,
     )
     """
     Verkeersruimte bijv. entree, Hal, overloop, speelhal etc.
@@ -157,7 +156,7 @@ class Ruimtedetailsoort(Enum):
     kelder = Referentiedata(
         code="KEL",
         naam="Kelder",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: dat gedeelte van een gebouw dat onder de grond (onder het maaiveld)
@@ -167,7 +166,7 @@ class Ruimtedetailsoort(Enum):
     keuken = Referentiedata(
         code="KEU",
         naam="Keuken",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek of plaats in een gebouw waarin mensen hun voedsel bereiden of laten bereiden
@@ -176,7 +175,7 @@ class Ruimtedetailsoort(Enum):
     overige_ruimte = Referentiedata(
         code="OBR",
         naam="Overige ruimte",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte die niet nader is gespecifeerd als ruimtedetailsoort. Bijvoorbeeld een
@@ -186,7 +185,7 @@ class Ruimtedetailsoort(Enum):
     overige_gemeenschappelijke_ruimte_of_voorziening = Referentiedata(
         code="OGR",
         naam="Overige gemeenschappelijke ruimte of voorziening",
-        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen.value,
+        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
     Gemeenschappelijke ruimte of voorziening die niet nader is gespecifeerd als
@@ -196,7 +195,7 @@ class Ruimtedetailsoort(Enum):
     open_parkeergarage_niet_specifieke_plek = Referentiedata(
         code="OPN",
         naam="Open parkeergarage niet specifieke plek",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: een tot het complex behorende open parkeergarage (een open ruimte, dus
@@ -207,7 +206,7 @@ class Ruimtedetailsoort(Enum):
     open_parkeergarage_specifieke_plek = Referentiedata(
         code="OPS",
         naam="Open parkeergarage specifieke plek",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: een tot het complex behorende open parkeergarage (een open ruimte, dus
@@ -218,7 +217,7 @@ class Ruimtedetailsoort(Enum):
     overig_vertrek = Referentiedata(
         code="OVT",
         naam="Overig vertrek",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek dat niet nader gespecifeerd is als ruimtedetailsoort. Bijvoorbeeld eetkamer,
@@ -228,7 +227,7 @@ class Ruimtedetailsoort(Enum):
     parkeerplaats = Referentiedata(
         code="PAR",
         naam="Parkeerplaats",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Eigen parkeerplaats of oprit bij de woning
@@ -237,7 +236,7 @@ class Ruimtedetailsoort(Enum):
     parkeergarage_niet_specifieke_plek = Referentiedata(
         code="PNS",
         naam="Parkeergarage niet specifieke plek",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: een gesloten parkeergarage met voor elke woning een, al dan niet
@@ -248,7 +247,7 @@ class Ruimtedetailsoort(Enum):
     parkeergarage_specifieke_plek = Referentiedata(
         code="PSP",
         naam="Parkeergarage specifieke plek",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: een gesloten parkeergarage (bijvoorbeeld in de onderbouw van een
@@ -259,7 +258,7 @@ class Ruimtedetailsoort(Enum):
     recreatieruimte = Referentiedata(
         code="REC",
         naam="Recreatieruimte",
-        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen.value,
+        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
     Een ruimte binnen de eenheid die recreatie als gebruiksdoel heeft. Bijvoorbeeld
@@ -269,7 +268,7 @@ class Ruimtedetailsoort(Enum):
     tuin_rondom = Referentiedata(
         code="RON",
         naam="Tuin Rondom",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: tuin gelegen rondom de eenheid. Deze waarde kan gebruikt worden voor
@@ -279,7 +278,7 @@ class Ruimtedetailsoort(Enum):
     schuur = Referentiedata(
         code="SCH",
         naam="Schuur",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: veelal vrijstaand gebouw, dat gebruikt wordt om goederen of voedsel
@@ -290,7 +289,7 @@ class Ruimtedetailsoort(Enum):
     serre = Referentiedata(
         code="SER",
         naam="Serre",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek: glazen veranda verbonden aan een woning.
@@ -299,7 +298,7 @@ class Ruimtedetailsoort(Enum):
     slaapkamer = Referentiedata(
         code="SLA",
         naam="Slaapkamer",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek: ruimte in een woning waarin men kan slapen.
@@ -308,7 +307,7 @@ class Ruimtedetailsoort(Enum):
     terras = Referentiedata(
         code="TER",
         naam="Terras",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: deel van een buitenruimte met een vlakke oppervlakte die wordt
@@ -318,7 +317,7 @@ class Ruimtedetailsoort(Enum):
     toiletruimte = Referentiedata(
         code="TOI",
         naam="Toiletruimte",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: Sanitaire ruimte met een toilet.
@@ -327,7 +326,7 @@ class Ruimtedetailsoort(Enum):
     tuin = Referentiedata(
         code="TUI",
         naam="Tuin",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: indien geen specificatie/verbijzondering bekend is van tuin kan voor
@@ -337,7 +336,7 @@ class Ruimtedetailsoort(Enum):
     tussenkamer = Referentiedata(
         code="TUS",
         naam="Tussenkamer",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek: ruimte gelegen tussen en verbonden met twee andere kamers.
@@ -346,7 +345,7 @@ class Ruimtedetailsoort(Enum):
     vliering = Referentiedata(
         code="VLI",
         naam="Vliering",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: een meestal niet of beperkt afgewerkte opslagruimte onder het dak,
@@ -357,7 +356,7 @@ class Ruimtedetailsoort(Enum):
     voortuin = Referentiedata(
         code="VTU",
         naam="Voortuin",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: tuin gelegen voor de voorgevellijn, waar meestal de voordeur van een
@@ -368,7 +367,7 @@ class Ruimtedetailsoort(Enum):
     wasruimte = Referentiedata(
         code="WAS",
         naam="Wasruimte",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: Specifieke ruimte voor wasmachine, droger, strijken, voor eigen
@@ -378,7 +377,7 @@ class Ruimtedetailsoort(Enum):
     woonkamer_en_of_keuken = Referentiedata(
         code="WOK",
         naam="Woonkamer/keuken",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek: ruimte met een gecombineerde functie van keuken en woonkamer
@@ -387,7 +386,7 @@ class Ruimtedetailsoort(Enum):
     woonkamer = Referentiedata(
         code="WOO",
         naam="Woonkamer",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek: de kamer in een huis waar het dagelijkse gezinsleven zich afspeelt. Het is
@@ -398,7 +397,7 @@ class Ruimtedetailsoort(Enum):
     woon_en_of_slaapkamer = Referentiedata(
         code="WSL",
         naam="Woon-/slaapkamer",
-        parent=Ruimtesoort.vertrek.value,
+        parent=Ruimtesoort.vertrek,
     )
     """
     Vertrek: ruimte met een gecombineerde functie van woonkamer en slaapkamer.
@@ -407,7 +406,7 @@ class Ruimtedetailsoort(Enum):
     zijtuin = Referentiedata(
         code="ZIJ",
         naam="Zijtuin",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: tuin gelegen aan de zijkant van een woning. Deze waarde kan gebruikt
@@ -417,7 +416,7 @@ class Ruimtedetailsoort(Enum):
     loggia = Referentiedata(
         code="LOG",
         naam="Loggia",
-        parent=Ruimtesoort.buitenruimte.value,
+        parent=Ruimtesoort.buitenruimte,
     )
     """
     Buitenruimte: een inpandig balkon.
@@ -426,7 +425,7 @@ class Ruimtedetailsoort(Enum):
     zolder = Referentiedata(
         code="ZOL",
         naam="Zolder",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: is de bovenste verdieping direct onder het dak van een gebouw met
@@ -442,7 +441,7 @@ class Ruimtedetailsoort(Enum):
     overloop = Referentiedata(
         code="OVL",
         naam="Overloop",
-        parent=Ruimtesoort.verkeersruimte.value,
+        parent=Ruimtesoort.verkeersruimte,
     )
     """
     Verkeersruimte: (UITBREIDING) Gang op een bovenverdieping.
@@ -451,7 +450,7 @@ class Ruimtedetailsoort(Enum):
     entree = Referentiedata(
         code="ENT",
         naam="Entree",
-        parent=Ruimtesoort.verkeersruimte.value,
+        parent=Ruimtesoort.verkeersruimte,
     )
     """
     Verkeersruimte: (UITBREIDING) Ingang van een gebouw.
@@ -460,7 +459,7 @@ class Ruimtedetailsoort(Enum):
     kast = Referentiedata(
         code="KAS",
         naam="Kast",
-        parent=Ruimtesoort.overige_ruimten.value,
+        parent=Ruimtesoort.overige_ruimten,
     )
     """
     Overige ruimte: (UITBREIDING)
@@ -469,7 +468,7 @@ class Ruimtedetailsoort(Enum):
     trappenhuis = Referentiedata(
         code="TRH",
         naam="Trappenhuis",
-        parent=Ruimtesoort.verkeersruimte.value,
+        parent=Ruimtesoort.verkeersruimte,
     )
     """
     Verkeersruimte: (UITBREIDING) Verkeersruimte waarin een trap ligt
@@ -478,7 +477,7 @@ class Ruimtedetailsoort(Enum):
     carport = Referentiedata(
         code="CAR",
         naam="Carport",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Parkeergelegenheid: een overdekte, open parkeerruimte voor een of meer auto's. In
@@ -491,7 +490,7 @@ class Ruimtedetailsoort(Enum):
     garage_inpandig = Referentiedata(
         code="GAI",
         naam="Garage inpandig",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Parkeergelegenheid: een garage die deel uitmaakt van de hoofdbebouwing van een huis
@@ -503,7 +502,7 @@ class Ruimtedetailsoort(Enum):
     garage_uitpandig = Referentiedata(
         code="GAU",
         naam="Garage uitpandig",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een uitpandige garage is een garage die geen deel uitmaakt van de hoofdbebouwing van
@@ -516,7 +515,7 @@ class Ruimtedetailsoort(Enum):
     garagebox = Referentiedata(
         code="GAR",
         naam="Garagebox",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een garagebox is een afgesloten, individuele ruimte bedoeld voor het stallen van een
@@ -532,7 +531,7 @@ class Ruimtedetailsoort(Enum):
     parkeergarage = Referentiedata(
         code="PAG",
         naam="Parkeergarage",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een parkeergarage is een gebouwde parkeervoorziening met meerdere parkeerplaatsen,
@@ -543,7 +542,7 @@ class Ruimtedetailsoort(Enum):
     parkeerterrein = Referentiedata(
         code="PAT",
         naam="Parkeerterrein",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een parkeerterrein is een open, meestal verharde locatie die speciaal is ingericht
@@ -553,7 +552,7 @@ class Ruimtedetailsoort(Enum):
     parkeervak_auto_binnen = Referentiedata(
         code="VAI",
         naam="Parkeervak auto (binnen)",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een parkeervak auto (binnen) is een specifieke, afgebakende ruimte binnen een
@@ -566,7 +565,7 @@ class Ruimtedetailsoort(Enum):
     parkeervak_auto_buiten_niet_overdekt = Referentiedata(
         code="VAU",
         naam="Parkeervak auto (buiten, niet overdekt)",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een parkeervak auto (buiten, niet overdekt) is een specifieke, afgebakende ruimte
@@ -579,7 +578,7 @@ class Ruimtedetailsoort(Enum):
     parkeervak_motorfiets_binnen = Referentiedata(
         code="VMI",
         naam="Parkeervak motorfiets (binnen)",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een parkeervak motorfiets (binnen) is een specifieke, afgebakende ruimte binnen een
@@ -592,7 +591,7 @@ class Ruimtedetailsoort(Enum):
     parkeervak_motorfiets_buiten_niet_overdekt = Referentiedata(
         code="VMU",
         naam="Parkeervak motorfiets (buiten, niet overdekt)",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een parkeervak motorfiets (buiten, niet overdekt) is een specifieke, afgebakende
@@ -606,7 +605,7 @@ class Ruimtedetailsoort(Enum):
     parkeervak_scootmobiel_binnen = Referentiedata(
         code="VSI",
         naam="Parkeervak scootmobiel (binnen)",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een parkeervak scootmobiel (binnen) is een specifieke, afgebakende ruimte binnen een
@@ -619,7 +618,7 @@ class Ruimtedetailsoort(Enum):
     parkeervak_scootmobiel_buiten = Referentiedata(
         code="VSU",
         naam="Parkeervak scootmobiel (buiten)",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een parkeervak scootmobiel (buiten) is een specifieke, afgebakende ruimte buiten een
@@ -632,7 +631,7 @@ class Ruimtedetailsoort(Enum):
     stalling_extern = Referentiedata(
         code="STE",
         naam="Stalling extern",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een stalling extern is een al dan niet overdekte of afgesloten ruimte buiten het
@@ -643,23 +642,9 @@ class Ruimtedetailsoort(Enum):
     stalling_intern = Referentiedata(
         code="STI",
         naam="Stalling intern",
-        parent=Ruimtesoort.parkeergelegenheid.value,
+        parent=Ruimtesoort.parkeergelegenheid,
     )
     """
     Een stalling intern is een overdekte en afgesloten ruimte binnen het hoofdgebouw die
     bedoeld is voor het parkeren of opslaan van fietsen of scootmobielen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

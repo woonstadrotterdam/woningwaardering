@@ -54,8 +54,8 @@ class Buitenruimten(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -103,7 +103,7 @@ class Buitenruimten(Stelselgroep):
                     if gedeeld_met > 1
                     else "Totaal (privé)",
                     id=id,
-                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
             )
             woningwaardering.punten = float(punten)
@@ -194,10 +194,7 @@ class Buitenruimten(Stelselgroep):
                     )
                     return
                 # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
-                if (
-                    ruimte.detail_soort
-                    and ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
-                ):
+                if ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats:
                     logger.debug(
                         f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde parkeerplaats en telt niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
                     )
@@ -220,7 +217,7 @@ class Buitenruimten(Stelselgroep):
                     )
                 )
                 woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
                     naam=ruimte.naam,
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                         id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_eenheden}_eenheden",
@@ -232,7 +229,7 @@ class Buitenruimten(Stelselgroep):
                 )
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
-                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                        meeteenheid=Meeteenheid.vierkante_meter_m2,
                         naam=ruimte.naam,
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_prive",

@@ -37,6 +37,10 @@ dependencies = [
 Homepage = "https://github.com/woonstadrotterdam/woningwaardering"
 Issues = "https://github.com/woonstadrotterdam/woningwaardering/issues"
 
+[tool.woningwaardering.datasources]
+vera = "4.1.6"
+referentiedata = "02eee3c2de6c05ec2661c0b4b7659c21d0727b1a"
+
 [tool.setuptools.packages.find]
 include = ["woningwaardering*"]
 
