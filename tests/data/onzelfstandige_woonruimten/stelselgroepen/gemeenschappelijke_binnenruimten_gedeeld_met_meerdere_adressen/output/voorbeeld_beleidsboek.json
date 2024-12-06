@@ -11,7 +11,7 @@
           "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
         }
       },
-      "punten": 3.0,
+      "punten": 2.5,
       "woningwaarderingen": [
         {
           "aantal": 20.0,
@@ -51,7 +51,7 @@
           "punten": 0.125
         },
         {
-          "aantal": 3001.0,
+          "aantal": 2999.0,
           "criterium": {
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
@@ -62,7 +62,7 @@
               "naam": "Millimeter"
             }
           },
-          "punten": 0.625
+          "punten": 0.4375
         },
         {
           "aantal": 1.0,
@@ -101,7 +101,7 @@
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
             }
           },
-          "punten": 0.235
+          "punten": 0.234375
         },
         {
           "criterium": {
@@ -114,29 +114,20 @@
         },
         {
           "criterium": {
-            "naam": "Totaal (gedeeld met 4)",
-            "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
-            }
-          },
-          "punten": 0.3125
-        },
-        {
-          "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen",
             "naam": "Totaal (gedeeld met 4 adressen)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
             }
           },
-          "punten": 2.89125
+          "punten": 2.390625
         },
         {
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 4 onzelfstandige woonruimten)"
           },
-          "punten": 2.89125
+          "punten": 2.390625
         }
       ]
     }
