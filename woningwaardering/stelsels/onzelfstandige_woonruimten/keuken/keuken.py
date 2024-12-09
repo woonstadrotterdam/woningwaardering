@@ -99,7 +99,7 @@ class Keuken(Stelselgroep):
         for aantal, punten in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"Totaal (gedeeld met {aantal})"
+                naam=f"Totaal (gedeeld met {aantal} onzelfstandige woonruimten)"
                 if aantal > 1
                 else "Totaal (privé)",
                 id=f"{self.stelselgroep.name}_gedeeld_met_{aantal}_onzelfstandige_woonruimten"
