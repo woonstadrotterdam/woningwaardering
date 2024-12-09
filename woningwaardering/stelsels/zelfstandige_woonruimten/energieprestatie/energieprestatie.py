@@ -102,12 +102,12 @@ class Energieprestatie(Stelselgroep):
             not energieprestatie.soort
             or not energieprestatie.soort.code
             or not energieprestatie.label
-            or not energieprestatie.label.code
+            or not energieprestatie.label.naam
             or not energieprestatie.registratiedatum
         ):
             return woningwaardering
 
-        label = energieprestatie.label.code
+        label = energieprestatie.label.naam
         woningwaardering.criterium.naam = f"{label}"
         energieprestatie_soort = energieprestatie.soort.code
         lookup_key = "label_ei"
@@ -178,11 +178,14 @@ class Energieprestatie(Stelselgroep):
                 )
 
                 energie_index = float(energieprestatie.waarde)
-
                 filtered_df = df[
                     (df["Ondergrens (exclusief)"] < energie_index)
                     & (energie_index <= (df["Bovengrens (inclusief)"]))
-                ].pipe(utils.dataframe_met_een_rij)
+                ]
+                if len(filtered_df) != 1:
+                    raise ValueError(
+                        f"Eenheid ({eenheid.id}): lookup-table gefaald voor energie-index {energie_index}."
+                    )
 
                 waarderings_label_index = filtered_df["Label"].values[0]
 
@@ -195,9 +198,11 @@ class Energieprestatie(Stelselgroep):
                 else:
                     woningwaardering.criterium.naam += " (Energie-index)"
 
-        filtered_df = df[(df["Label"] == waarderings_label)].pipe(
-            utils.dataframe_met_een_rij
-        )
+        filtered_df = df[(df["Label"] == waarderings_label)]
+        if len(filtered_df) != 1:
+            raise ValueError(
+                f"Eenheid ({eenheid.id}): lookup-table gefaald voor label {waarderings_label} voor {self.stelselgroep.naam}."
+            )
 
         woningwaardering.punten = float(filtered_df[pandsoort.naam].values[0])
 
@@ -219,6 +224,9 @@ class Energieprestatie(Stelselgroep):
 
         Returns:
             WoningwaarderingResultatenWoningwaardering: De waardering met aangepaste criteriumnaam en punten.
+
+        Raises:
+            ValueError: Als er iets onverwachts fout gaat bij het gebruiken van een lookup-tabel.
         """
 
         logger.info(
@@ -231,7 +239,11 @@ class Energieprestatie(Stelselgroep):
         filtered_df = df[
             ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
             & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
-        ].pipe(utils.dataframe_met_een_rij)
+        ]
+        if len(filtered_df) != 1:
+            raise ValueError(
+                f"Eenheid ({eenheid.id}): lookup-table gefaald voor bouwjaar {eenheid.bouwjaar} voor {self.stelselgroep.naam}."
+            )
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)

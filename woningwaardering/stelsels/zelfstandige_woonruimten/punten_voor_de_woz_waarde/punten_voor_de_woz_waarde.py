@@ -120,7 +120,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         factoren = self.pd_woz_factor[
             self.pd_woz_factor["Peildatum"]
             == pd.to_datetime(woz_eenheid.waardepeildatum)
-        ].pipe(utils.dataframe_met_een_rij)
+        ]
+        if len(factoren) != 1:
+            raise ValueError(
+                f"Eenheid ({eenheid.id}): lookup-table gefaald voor peildatum {woz_eenheid.waardepeildatum} voor {self.stelselgroep.naam}."
+            )
 
         factor_onderdeel_I = Decimal(str(factoren["Onderdeel I"].values[0]))
         factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
@@ -371,6 +375,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         Returns:
             Decimal | None: De minimum WOZ-waarde, of None indien er geen minimum vastgesteld kan worden.
+
+        Raises:
+            ValueError: Als er iets onverwachts fout gaat bij het gebruiken van een lookup-tabel.
         """
         if woz_eenheid.vastgestelde_waarde is None:
             warnings.warn("Vastgestelde WOZ-waarde in WOZ-eenheid is None")
@@ -382,16 +389,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         vastgestelde_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
 
-        minimum_woz_waarde = Decimal(
-            str(
-                self.pd_minimum_woz_waarde[
-                    self.pd_minimum_woz_waarde["Peildatum"]
-                    == pd.to_datetime(woz_eenheid.waardepeildatum)
-                ]
-                .pipe(utils.dataframe_met_een_rij)["Minimumwaarde"]
-                .values[0]
+        filtered_df = self.pd_minimum_woz_waarde[
+            self.pd_minimum_woz_waarde["Peildatum"]
+            == pd.to_datetime(woz_eenheid.waardepeildatum)
+        ]
+        if len(filtered_df) != 1:
+            raise ValueError(
+                f"Eenheid ({woz_eenheid.id}): lookup-table gefaald voor peildatum {woz_eenheid.waardepeildatum} voor {self.stelselgroep.naam}."
             )
-        )
+        minimum_woz_waarde = Decimal(str(filtered_df["Minimumwaarde"].values[0]))
 
         if vastgestelde_waarde < minimum_woz_waarde:
             logger.info(
