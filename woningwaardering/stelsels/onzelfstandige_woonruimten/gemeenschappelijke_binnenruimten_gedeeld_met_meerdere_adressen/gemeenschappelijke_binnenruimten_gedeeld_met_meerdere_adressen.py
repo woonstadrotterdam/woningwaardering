@@ -340,39 +340,39 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         if not woningwaarderingen_met_ruimten:
             return gedeeld_met_punten, woningwaarderingen
 
-        for ruimte, woningwaardering in woningwaarderingen_met_ruimten:
-            aantal_onzelfstandige_woonruimten = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-
-            if ruimte.soort is None:
-                warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
-                continue
-            if (
-                woningwaardering.criterium is None
-                or woningwaardering.criterium.naam is None
-            ):
-                warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
-                continue
-
-            punten = Decimal(str(woningwaardering.punten)) / Decimal(
-                str(aantal_onzelfstandige_woonruimten)
-            )
-
-            gedeeld_met_punten[aantal_onzelfstandige_woonruimten][aantal_eenheden] += (
-                punten
-            )
-
-            woningwaarderingen.append(
-                self._maak_woningwaardering(
-                    punten=punten,
-                    criterium=f"{woningwaardering.criterium.naam.replace(':', '').replace(' -', ':')}",
-                    bovenliggende_criterium_id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen",
-                    aantal=None,
-                    meeteenheid=None,
+        for ruimte, waarderingen in woningwaarderingen_met_ruimten:
+            for waardering in waarderingen:
+                aantal_onzelfstandige_woonruimten = (
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                 )
-            )
+                aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+
+                if ruimte.soort is None:
+                    warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
+                    continue
+                if waardering.criterium is None or waardering.criterium.naam is None:
+                    warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
+                    continue
+
+                punten = (
+                    Decimal(str(waardering.punten))
+                    / Decimal(aantal_eenheden)
+                    / Decimal(str(aantal_onzelfstandige_woonruimten))
+                )
+
+                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
+                    aantal_eenheden
+                ] += punten
+
+                woningwaarderingen.append(
+                    self._maak_woningwaardering(
+                        punten=punten,
+                        criterium=f"{waardering.criterium.naam.replace(':', '').replace(' -', ':')}",
+                        bovenliggende_criterium_id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen",
+                        aantal=None,
+                        meeteenheid=None,
+                    )
+                )
 
         return gedeeld_met_punten, woningwaarderingen
 
@@ -440,5 +440,5 @@ if __name__ == "__main__":  # pragma: no cover
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
         context.waardeer(
-            "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/input/gedeelde_berging_<2m2.json"
+            "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/input/voorbeeld_beleidsboek.json"
         )
