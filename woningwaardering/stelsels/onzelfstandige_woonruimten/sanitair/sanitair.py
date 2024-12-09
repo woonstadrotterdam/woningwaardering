@@ -44,7 +44,9 @@ class Sanitair(Stelselgroep):
     def genereer_woningwaarderingen(
         ruimten: list[EenhedenRuimte],
         stelselgroep: Woningwaarderingstelselgroep,
-    ) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
+    ) -> Iterator[
+        tuple[EenhedenRuimte, list[WoningwaarderingResultatenWoningwaardering]]
+    ]:
         woningwaarderingen_voor_gedeeld = []
         # * tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer.
         # Op een adres met minimaal acht of meer onzelfstandige woonruimten geldt dit maximum niet voor maximaal één ruimte.
@@ -241,8 +243,14 @@ class Sanitair(Stelselgroep):
         return woningwaardering_groep
 
     def _maak_totalen(
-        self, ruimte_met_waarderingen
-    ) -> Iterator[WoningwaarderingResultatenWoningwaarderingResultaat]:
+        self,
+        ruimte_met_waarderingen: list[
+            tuple[
+                EenhedenRuimte,
+                list[WoningwaarderingResultatenWoningwaardering],
+            ]
+        ],
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
         for ruimte, woningwaarderingen in ruimte_met_waarderingen:
             for woningwaardering in woningwaarderingen:
