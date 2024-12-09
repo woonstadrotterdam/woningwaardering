@@ -135,7 +135,7 @@ def _waardeer_toiletten(
 
             if aantal_toiletten > 0:
                 logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) bevat {aantal_toiletten}x een {toiletsoort.naam}."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_toiletten}x een {toiletsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
                 )
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -201,7 +201,7 @@ def _waardeer_wastafels(
                 ):
                     if element.lengte is not None and element.lengte < 1000:
                         logger.info(
-                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m wordt als wastafel gewaardeerd."
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
                         )
                         yield WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -223,7 +223,7 @@ def _waardeer_wastafels(
 
         if aantal_wastafels > 0:
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) bevat {aantal_wastafels}x een {wastafelsoort.naam}."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_wastafels}x een {wastafelsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
             )
             yield (
                 WoningwaarderingResultatenWoningwaardering(
@@ -314,7 +314,7 @@ def _waardeer_baden_en_douches(
             decimalen=2,
         )
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) bevat {aantal_bad_en_douches}x een {Voorzieningsoort.bad_en_douche.naam}."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_bad_en_douches}x een {Voorzieningsoort.bad_en_douche.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
         )
         yield (
             WoningwaarderingResultatenWoningwaardering(
@@ -338,7 +338,7 @@ def _waardeer_baden_en_douches(
                 2,
             )
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) bevat {aantal}x een {voorzieningsoort.naam}."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {voorzieningsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
             )
             yield (
                 WoningwaarderingResultatenWoningwaardering(
@@ -425,7 +425,7 @@ def _waardeer_installaties(
                     totaal_punten_voorzieningen += punten
 
                     logger.info(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) bevat {aantal}x een {installatie.naam}."
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatie.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
                     )
                     yield (
                         WoningwaarderingResultatenWoningwaardering(
@@ -443,7 +443,7 @@ def _waardeer_installaties(
                         if correctie < 0:
                             totaal_punten_voorzieningen += correctie
                             logger.info(
-                                f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten."
+                                f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten in {Woningwaarderingstelselgroep.sanitair.naam}."
                             )
                             yield WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
