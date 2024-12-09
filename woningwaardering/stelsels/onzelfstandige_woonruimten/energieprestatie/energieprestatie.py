@@ -192,11 +192,23 @@ class Energieprestatie(Stelselgroep):
         ):
             if energieprestatie.waarde is not None:
                 energie_index = float(energieprestatie.waarde)
-
-                filtered_df = df[
-                    (df["Ondergrens (exclusief)"] < energie_index)
-                    & (energie_index <= (df["Bovengrens (inclusief)"]))
-                ].pipe(utils.dataframe_met_een_rij)
+                try:
+                    filtered_df = df[
+                        (df["Ondergrens (exclusief)"] < energie_index)
+                        & (energie_index <= (df["Bovengrens (inclusief)"]))
+                    ].pipe(utils.dataframe_met_een_rij)
+                except ValueError as e:
+                    if "Dataframe is leeg" in str(e):
+                        warnings.warn(
+                            f"Eenheid ({eenheid.id}): geen waarderingslabel gevonden voor energie-index {energie_index}.",
+                            UserWarning,
+                        )
+                    elif "Dataframe heeft meer dan één rij" in str(e):
+                        warnings.warn(
+                            f"Eenheid ({eenheid.id}): meerdere waarderingslabels gevonden voor energie-index {energie_index}.",
+                            UserWarning,
+                        )
+                    return woningwaardering
 
                 waarderings_label_index = filtered_df["Label"].values[0]
 
@@ -207,11 +219,24 @@ class Energieprestatie(Stelselgroep):
                 else:
                     criterium_naam += " (Energie-index)"
 
-        punten_per_m2 = (
-            df[(df["Label"] == waarderings_label)]
-            .pipe(utils.dataframe_met_een_rij)["PuntenPerM2"]
-            .values[0]
-        )
+        try:
+            punten_per_m2 = (
+                df[(df["Label"] == waarderings_label)]
+                .pipe(utils.dataframe_met_een_rij)["PuntenPerM2"]
+                .values[0]
+            )
+        except ValueError as e:
+            if "Dataframe is leeg" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): geen punten per m2 gevonden voor label {waarderings_label}.",
+                    UserWarning,
+                )
+            elif "Dataframe heeft meer dan één rij" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): meerdere punten per m2 gevonden voor label {waarderings_label}.",
+                    UserWarning,
+                )
+            return woningwaardering
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -253,14 +278,33 @@ class Energieprestatie(Stelselgroep):
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
         df = Energieprestatie.lookup_mapping["bouwjaar"]
-        punten_per_m2 = (
-            df[
-                ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
-                & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
-            ]
-            .pipe(utils.dataframe_met_een_rij)["PuntenPerM2"]
-            .values[0]
-        )
+        try:
+            punten_per_m2 = (
+                df[
+                    (
+                        (df["BouwjaarMin"] <= eenheid.bouwjaar)
+                        | df["BouwjaarMin"].isnull()
+                    )
+                    & (
+                        (df["BouwjaarMax"] >= eenheid.bouwjaar)
+                        | df["BouwjaarMax"].isnull()
+                    )
+                ]
+                .pipe(utils.dataframe_met_een_rij)["PuntenPerM2"]
+                .values[0]
+            )
+        except ValueError as e:
+            if "Dataframe is leeg" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): geen punten per m2 gevonden voor bouwjaar {eenheid.bouwjaar}.",
+                    UserWarning,
+                )
+            elif "Dataframe heeft meer dan één rij" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): meerdere punten per m2 gevonden voor bouwjaar {eenheid.bouwjaar}.",
+                    UserWarning,
+                )
+            return woningwaardering
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(

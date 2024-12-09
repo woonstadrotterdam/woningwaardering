@@ -178,11 +178,25 @@ class Energieprestatie(Stelselgroep):
                 )
 
                 energie_index = float(energieprestatie.waarde)
-
-                filtered_df = df[
-                    (df["Ondergrens (exclusief)"] < energie_index)
-                    & (energie_index <= (df["Bovengrens (inclusief)"]))
-                ].pipe(utils.dataframe_met_een_rij)
+                try:
+                    filtered_df = df[
+                        (df["Ondergrens (exclusief)"] < energie_index)
+                        & (energie_index <= (df["Bovengrens (inclusief)"]))
+                    ].pipe(utils.dataframe_met_een_rij)
+                except ValueError as e:
+                    if "Dataframe is leeg" in str(e):
+                        warnings.warn(
+                            f"Eenheid ({eenheid.id}): geen waarderingslabel gevonden voor energie-index {energie_index}.",
+                            UserWarning,
+                        )
+                    elif "Dataframe heeft meer dan één rij" in str(e):
+                        warnings.warn(
+                            f"Eenheid ({eenheid.id}): meerdere waarderingslabels gevonden voor energie-index {energie_index}.",
+                            UserWarning,
+                        )
+                    else:
+                        raise e
+                    return woningwaardering
 
                 waarderings_label_index = filtered_df["Label"].values[0]
 
@@ -195,9 +209,24 @@ class Energieprestatie(Stelselgroep):
                 else:
                     woningwaardering.criterium.naam += " (Energie-index)"
 
-        filtered_df = df[(df["Label"] == waarderings_label)].pipe(
-            utils.dataframe_met_een_rij
-        )
+        try:
+            filtered_df = df[(df["Label"] == waarderings_label)].pipe(
+                utils.dataframe_met_een_rij
+            )
+        except ValueError as e:
+            if "Dataframe is leeg" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): geen punten gevonden voor label {waarderings_label}.",
+                    UserWarning,
+                )
+            elif "Dataframe heeft meer dan één rij" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): meerdere punten gevonden voor label {waarderings_label}.",
+                    UserWarning,
+                )
+            else:
+                raise e
+            return woningwaardering
 
         woningwaardering.punten = float(filtered_df[pandsoort.naam].values[0])
 
@@ -227,11 +256,26 @@ class Energieprestatie(Stelselgroep):
 
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
-        df = Energieprestatie.lookup_mapping["bouwjaar"]
-        filtered_df = df[
-            ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
-            & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
-        ].pipe(utils.dataframe_met_een_rij)
+        try:
+            df = Energieprestatie.lookup_mapping["bouwjaar"]
+            filtered_df = df[
+                ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
+                & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
+            ].pipe(utils.dataframe_met_een_rij)
+        except ValueError as e:
+            if "Dataframe is leeg" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): geen punten gevonden voor bouwjaar {eenheid.bouwjaar}.",
+                    UserWarning,
+                )
+            elif "Dataframe heeft meer dan één rij" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): meerdere punten gevonden voor bouwjaar {eenheid.bouwjaar}.",
+                    UserWarning,
+                )
+            else:
+                raise e
+            return woningwaardering
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
