@@ -410,7 +410,7 @@ def _waardeer_installaties(
                         Voorzieningsoort.staand_toilet.value,
                     }
                 ):
-                    logger.info(
+                    logger.debug(
                         f"Installatie {installatie.naam} komt niet in aanmerking voor waardering"
                     )
                     continue
@@ -462,7 +462,7 @@ def _waardeer_installaties(
                         if correctie < 0:
                             totaal_punten_voorzieningen += correctie
                             logger.info(
-                                f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten want er zijn meer dan 2x zoveel stopcontacten als wastafels."
+                                f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten want er zijn meer dan 2x zoveel stopcontacten ({aantal}) als wastafels ({totaal_aantal_wastafels})."
                             )
                             yield WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
