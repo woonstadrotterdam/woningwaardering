@@ -248,6 +248,10 @@ class Energieprestatie(Stelselgroep):
 
         Returns:
             WoningwaarderingResultatenWoningwaardering: De waardering met aangepaste criteriumnaam en punten.
+
+        Raises:
+            ValueError: Als er geen punten gevonden worden voor het bouwjaar.
+            ValueError: Als er meerdere punten gevonden worden voor het bouwjaar.
         """
 
         logger.info(

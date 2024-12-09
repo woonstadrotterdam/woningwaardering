@@ -386,6 +386,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         Returns:
             Decimal | None: De minimum WOZ-waarde, of None indien er geen minimum vastgesteld kan worden.
+
+        Raises:
+            ValueError: Als er geen minimum woz-waarde gevonden kan worden voor de peildatum.
+            ValueError: Als er meerdere minimum woz-waarden gevonden worden voor de peildatum.
         """
         if woz_eenheid.vastgestelde_waarde is None:
             warnings.warn("Vastgestelde WOZ-waarde in WOZ-eenheid is None")
