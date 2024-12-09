@@ -117,10 +117,25 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return woningwaardering_groep
 
-        factoren = self.pd_woz_factor[
-            self.pd_woz_factor["Peildatum"]
-            == pd.to_datetime(woz_eenheid.waardepeildatum)
-        ].pipe(utils.dataframe_met_een_rij)
+        try:
+            factoren = self.pd_woz_factor[
+                self.pd_woz_factor["Peildatum"]
+                == pd.to_datetime(woz_eenheid.waardepeildatum)
+            ].pipe(utils.dataframe_met_een_rij)
+        except ValueError as e:
+            if "Dataframe is leeg" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): geen woz-factoren gevonden voor peildatum {woz_eenheid.waardepeildatum}.",
+                    UserWarning,
+                )
+            elif "Dataframe heeft meer dan één rij" in str(e):
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): meerdere woz-factoren gevonden voor peildatum {woz_eenheid.waardepeildatum}.",
+                    UserWarning,
+                )
+            else:
+                raise e
+            return woningwaardering_groep
 
         factor_onderdeel_I = Decimal(str(factoren["Onderdeel I"].values[0]))
         factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
@@ -382,16 +397,31 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         vastgestelde_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
 
-        minimum_woz_waarde = Decimal(
-            str(
-                self.pd_minimum_woz_waarde[
-                    self.pd_minimum_woz_waarde["Peildatum"]
-                    == pd.to_datetime(woz_eenheid.waardepeildatum)
-                ]
-                .pipe(utils.dataframe_met_een_rij)["Minimumwaarde"]
-                .values[0]
+        try:
+            minimum_woz_waarde = Decimal(
+                str(
+                    self.pd_minimum_woz_waarde[
+                        self.pd_minimum_woz_waarde["Peildatum"]
+                        == pd.to_datetime(woz_eenheid.waardepeildatum)
+                    ]
+                    .pipe(utils.dataframe_met_een_rij)["Minimumwaarde"]
+                    .values[0]
+                )
             )
-        )
+        except ValueError as e:
+            if "Dataframe is leeg" in str(e):
+                warnings.warn(
+                    f"Eenheid ({woz_eenheid.id}): geen minimum woz-waarde gevonden voor peildatum {woz_eenheid.waardepeildatum}.",
+                    UserWarning,
+                )
+            elif "Dataframe heeft meer dan één rij" in str(e):
+                warnings.warn(
+                    f"Eenheid ({woz_eenheid.id}): meerdere minimum woz-waarden gevonden voor peildatum {woz_eenheid.waardepeildatum}.",
+                    UserWarning,
+                )
+            else:
+                raise e
+            return None
 
         if vastgestelde_waarde < minimum_woz_waarde:
             logger.info(
