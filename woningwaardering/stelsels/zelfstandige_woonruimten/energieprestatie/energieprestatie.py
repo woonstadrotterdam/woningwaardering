@@ -102,12 +102,12 @@ class Energieprestatie(Stelselgroep):
             not energieprestatie.soort
             or not energieprestatie.soort.code
             or not energieprestatie.label
-            or not energieprestatie.label.code
+            or not energieprestatie.label.naam
             or not energieprestatie.registratiedatum
         ):
             return woningwaardering
 
-        label = energieprestatie.label.code
+        label = energieprestatie.label.naam
         woningwaardering.criterium.naam = f"{label}"
         energieprestatie_soort = energieprestatie.soort.code
         lookup_key = "label_ei"
