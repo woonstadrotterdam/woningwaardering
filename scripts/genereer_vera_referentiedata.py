@@ -12,6 +12,7 @@ from operator import itemgetter
 from typing import Any, Callable, Match, Pattern
 
 import requests
+import tomli
 import unidecode
 from jinja2 import Environment, select_autoescape
 from loguru import logger
@@ -26,7 +27,12 @@ output_folder = os.path.join("woningwaardering", "vera", "referentiedata")
 # response = requests.get(url)
 # source_data = json.load(loads(response.text)
 
-version = "02eee3c2de6c05ec2661c0b4b7659c21d0727b1a"
+with open("pyproject.toml", "rb") as f:
+    pyproject_data = tomli.load(f)
+
+    woningwaardering_data = pyproject_data.get("tool", {}).get("woningwaardering", {})
+    version = woningwaardering_data.get("datasources", {}).get("referentiedata", {})
+
 url = f"https://raw.githubusercontent.com/Aedes-datastandaarden/vera-referentiedata/{version}/Referentiedata.csv"
 response = requests.get(url, timeout=10)
 source_data = csv.DictReader(response.text.splitlines(), delimiter=";")
