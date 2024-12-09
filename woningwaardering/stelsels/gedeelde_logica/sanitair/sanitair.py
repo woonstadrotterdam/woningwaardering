@@ -66,6 +66,10 @@ def waardeer_sanitair(
     )
 
     if maximering < 0:
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximering van {maximering} punten want maximaal evenveel punten voor bad en douche ({totaal_punten_bad_en_douche}) als voor voorzieningen ({totaal_punten_voorzieningen})."
+        )
+
         yield WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=f"{ruimte.naam} - Voorzieningen: Max verdubbeling punten bad en douche"
@@ -130,6 +134,9 @@ def _waardeer_toiletten(
             aantal_toiletten = installaties[toiletsoort]
 
             if aantal_toiletten > 0:
+                logger.info(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_toiletten}x een {toiletsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
+                )
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=f"{ruimte.naam} - {toiletsoort.naam}",
@@ -194,7 +201,7 @@ def _waardeer_wastafels(
                 ):
                     if element.lengte is not None and element.lengte < 1000:
                         logger.info(
-                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m wordt als wastafel gewaardeerd."
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
                         )
                         yield WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -215,6 +222,9 @@ def _waardeer_wastafels(
         )
 
         if aantal_wastafels > 0:
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_wastafels}x een {wastafelsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
+            )
             yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -303,7 +313,9 @@ def _waardeer_baden_en_douches(
             * Decimal(str(punten_sanitair[Voorzieningsoort.bad_en_douche.value])),
             decimalen=2,
         )
-
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_bad_en_douches}x een {Voorzieningsoort.bad_en_douche.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
+        )
         yield (
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -325,7 +337,9 @@ def _waardeer_baden_en_douches(
                 * Decimal(str(punten_sanitair[voorzieningsoort.value])),
                 2,
             )
-
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {voorzieningsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
+            )
             yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -396,7 +410,7 @@ def _waardeer_installaties(
                         Voorzieningsoort.staand_toilet.value,
                     }
                 ):
-                    logger.info(
+                    logger.debug(
                         f"Installatie {installatie.naam} komt niet in aanmerking voor waardering"
                     )
                     continue
@@ -410,6 +424,9 @@ def _waardeer_installaties(
 
                     totaal_punten_voorzieningen += punten
 
+                    logger.info(
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatie.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
+                    )
                     yield (
                         WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -425,7 +442,9 @@ def _waardeer_installaties(
                         correctie = min(maximum - punten, Decimal("0"))
                         if correctie < 0:
                             totaal_punten_voorzieningen += correctie
-
+                            logger.info(
+                                f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten in {Woningwaarderingstelselgroep.sanitair.naam}."
+                            )
                             yield WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                                     naam=f"{ruimte.naam} - Voorzieningen: Max {maximum} punten voor {installatie.naam}"
@@ -442,7 +461,9 @@ def _waardeer_installaties(
                         )
                         if correctie < 0:
                             totaal_punten_voorzieningen += correctie
-
+                            logger.info(
+                                f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten want er zijn meer dan 2x zoveel stopcontacten ({aantal}) als wastafels ({totaal_aantal_wastafels})."
+                            )
                             yield WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                                     naam=f"{ruimte.naam} - Voorzieningen: Max 2 stopcontacten per wastafel"

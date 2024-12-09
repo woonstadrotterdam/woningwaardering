@@ -401,12 +401,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if vastgestelde_waarde < minimum_woz_waarde:
             logger.info(
-                f"WOZ-waarde {vastgestelde_waarde:.0f} is kleiner dan minimum {minimum_woz_waarde:.0f}, minimum wordt gebruikt"
+                f"WOZ-waarde €{vastgestelde_waarde:.0f} is kleiner dan minimum €{minimum_woz_waarde:.0f}, minimum wordt gebruikt"
             )
             return minimum_woz_waarde
 
         logger.debug(
-            f"WOZ-waarde €{vastgestelde_waarde:.0f} is groter dan minimum {minimum_woz_waarde:.0f}, minimum wordt niet gebruikt"
+            f"WOZ-waarde €{vastgestelde_waarde:.0f} is groter dan minimum €{minimum_woz_waarde:.0f}, minimum wordt niet gebruikt"
         )
 
         return vastgestelde_waarde
