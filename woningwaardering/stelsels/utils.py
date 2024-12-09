@@ -330,28 +330,6 @@ def naar_tabel(
     return table
 
 
-def dataframe_met_een_rij(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Check of de dataframe exact één rij bevat.
-
-    Args:
-        df (pd.DataFrame): Het DataFrame dat gecheckt moet worden.
-
-    Returns:
-        pd.DataFrame: Het DataFrame als het aan de voorwaarden voldoet.
-
-    Raises:
-        ValueError: Als het DataFrame leeg is.
-        ValueError: Als het DataFrame meer dan één rij bevat.
-    """
-    if df.empty:
-        raise ValueError("Dataframe is leeg")
-    if len(df) > 1:
-        raise ValueError("Dataframe heeft meer dan één rij")
-
-    return df
-
-
 def energieprestatie_met_geldig_label(
     peildatum: date, eenheid: EenhedenEenheid
 ) -> EenhedenEnergieprestatie | None:

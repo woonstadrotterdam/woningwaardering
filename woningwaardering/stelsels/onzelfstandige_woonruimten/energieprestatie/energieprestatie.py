@@ -196,7 +196,11 @@ class Energieprestatie(Stelselgroep):
                 filtered_df = df[
                     (df["Ondergrens (exclusief)"] < energie_index)
                     & (energie_index <= (df["Bovengrens (inclusief)"]))
-                ].pipe(utils.dataframe_met_een_rij)
+                ]
+                if len(filtered_df) != 1:
+                    raise ValueError(
+                        f"Eenheid ({eenheid.id}): lookup-table gefaald voor energie-index {energie_index} voor {self.stelselgroep.naam}."
+                    )
 
                 waarderings_label_index = filtered_df["Label"].values[0]
 
@@ -207,11 +211,13 @@ class Energieprestatie(Stelselgroep):
                 else:
                     criterium_naam += " (Energie-index)"
 
-        punten_per_m2 = (
-            df[(df["Label"] == waarderings_label)]
-            .pipe(utils.dataframe_met_een_rij)["PuntenPerM2"]
-            .values[0]
-        )
+        filtered_df = df[(df["Label"] == waarderings_label)]
+        if len(filtered_df) != 1:
+            raise ValueError(
+                f"Eenheid ({eenheid.id}): lookup-table gefaald voor label {waarderings_label} voor {self.stelselgroep.naam}."
+            )
+
+        punten_per_m2 = filtered_df["PuntenPerM2"].values[0]
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -249,18 +255,23 @@ class Energieprestatie(Stelselgroep):
 
         Returns:
             WoningwaarderingResultatenWoningwaardering: De waardering met aangepaste criteriumnaam en punten.
+
+        Raises:
+            ValueError: Als er iets onverwachts fout gaat bij het gebruiken van een lookup-tabel.
         """
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
         df = Energieprestatie.lookup_mapping["bouwjaar"]
-        punten_per_m2 = (
-            df[
-                ((df["BouwjaarMin"] <= eenheid.bouwjaar) | df["BouwjaarMin"].isnull())
-                & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
-            ]
-            .pipe(utils.dataframe_met_een_rij)["PuntenPerM2"]
-            .values[0]
-        )
+        filtered_df = df[
+            (df["BouwjaarMin"] <= eenheid.bouwjaar)
+            & ((df["BouwjaarMax"] >= eenheid.bouwjaar) | df["BouwjaarMax"].isnull())
+        ]
+        if len(filtered_df) != 1:
+            raise ValueError(
+                f"Eenheid ({eenheid.id}): lookup-table gefaald voor bouwjaar {eenheid.bouwjaar} voor {self.stelselgroep.naam}."
+            )
+
+        punten_per_m2 = filtered_df["PuntenPerM2"].values[0]
 
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
