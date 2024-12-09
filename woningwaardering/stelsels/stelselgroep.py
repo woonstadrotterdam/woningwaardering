@@ -7,31 +7,28 @@ from woningwaardering.stelsels.criteriumsleutels import CriteriumSleutels
 from woningwaardering.stelsels.utils import is_geldig
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
-)
-from woningwaardering.vera.referentiedata import (
-    Woningwaarderingstelsel,
-    Woningwaarderingstelselgroep,
 )
 
 
 class Stelselgroep(ABC):
     @property
-    def stelsel(self) -> Woningwaarderingstelsel:
+    def stelsel(self) -> Referentiedata:
         return self._stelsel
 
     @stelsel.setter
-    def stelsel(self, value: Woningwaarderingstelsel) -> None:
+    def stelsel(self, value: Referentiedata) -> None:
         self._stelsel = value
 
     @property
-    def stelselgroep(self) -> Woningwaarderingstelselgroep:
+    def stelselgroep(self) -> Referentiedata:
         return self._stelselgroep
 
     @stelselgroep.setter
-    def stelselgroep(self, value: Woningwaarderingstelselgroep) -> None:
+    def stelselgroep(self, value: Referentiedata) -> None:
         self._stelselgroep = value
 
     """Initialiseert een Stelselgroep.

@@ -68,10 +68,15 @@ class Referentiedata(BaseModel):
     """
     De bovenliggende referentiedata in het geval er sprake is van een hierarchische relatie tussen referentiedata.
     """
-    name: Optional[str] = Field(None, exclude=True)
+
+    _name: str = ""
+
+    @property
+    def name(self) -> str:
+        return self._name
 
     @validator("code", always=True)
-    def niet_optioneel(cls, value: str):
+    def niet_optioneel(cls, value: str) -> str:
         if value is None or value.strip() == "":
             warnings.warn("code moet een waarde hebben", UserWarning)
         return value
@@ -85,7 +90,7 @@ class Referentiedata(BaseModel):
         return hash(self.code)
 
     def __str__(self) -> str:
-        return f"{self.naam} ({self.code})" if self.naam else self.code
+        return f"{self.naam} ({self.code})" if self.naam else self.code or ""
 
 
 class ClusterSleutels(BaseModel):

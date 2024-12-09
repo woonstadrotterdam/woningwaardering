@@ -12,6 +12,7 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
+    Referentiedata,
     WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
@@ -43,7 +44,7 @@ class Sanitair(Stelselgroep):
     @staticmethod
     def genereer_woningwaarderingen(
         ruimten: list[EenhedenRuimte],
-        stelselgroep: Woningwaarderingstelselgroep,
+        stelselgroep: Referentiedata,
     ) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
         woningwaarderingen_voor_gedeeld = []
         # * tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer.

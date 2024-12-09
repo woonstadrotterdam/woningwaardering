@@ -8,6 +8,7 @@ from loguru import logger
 from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
@@ -19,16 +20,13 @@ from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoo
 from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
     Woningwaarderingstelsel,
 )
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
-    Woningwaarderingstelselgroep,
-)
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
 def waardeer_sanitair(
     ruimte: EenhedenRuimte,
-    stelselgroep: Woningwaarderingstelselgroep,
-    stelsel: Woningwaarderingstelsel,
+    stelselgroep: Referentiedata,
+    stelsel: Referentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if ruimte.detail_soort is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.")
@@ -146,7 +144,7 @@ def _waardeer_toiletten(
 
 
 def _waardeer_wastafels(
-    ruimte: EenhedenRuimte, stelsel: Woningwaarderingstelsel
+    ruimte: EenhedenRuimte, stelsel: Referentiedata
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     zelfstandige_woonruimte = (
         stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -268,7 +266,7 @@ def _waardeer_wastafels(
 
 
 def _waardeer_baden_en_douches(
-    ruimte: EenhedenRuimte, stelsel: Woningwaarderingstelsel
+    ruimte: EenhedenRuimte, stelsel: Referentiedata
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     zelfstandige_woonruimte = (
@@ -326,7 +324,7 @@ def _waardeer_baden_en_douches(
 
 
 def _waardeer_installaties(
-    ruimte: EenhedenRuimte, stelsel: Woningwaarderingstelsel
+    ruimte: EenhedenRuimte, stelsel: Referentiedata
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     punten_voorzieningen = {

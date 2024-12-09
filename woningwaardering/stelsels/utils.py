@@ -19,6 +19,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEnergieprestatie,
     EenhedenRuimte,
     EenhedenWoonplaats,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -673,7 +674,7 @@ def _classificeer_ruimte_dec(
 
 
 # @_classificeer_ruimte_dec
-def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
+def classificeer_ruimte(ruimte: EenhedenRuimte) -> Referentiedata | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
 
@@ -681,7 +682,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         ruimte (EenhedenRuimte): De ruimte die geclassificeerd moet worden.
 
     Returns:
-        Ruimtesoort | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
+        Referentiedata | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
             Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
     """
 

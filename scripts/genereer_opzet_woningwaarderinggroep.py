@@ -6,6 +6,7 @@ from pathlib import Path
 import inquirer  # noqa
 from jinja2 import Environment, PackageLoader, select_autoescape
 
+from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -72,8 +73,10 @@ answers = inquirer.prompt(questions)
 stelsel = str(answers.get("stelsel"))
 begindatum = str(answers.get("begindatum"))
 stelselgroep = str(answers.get("stelselgroep"))
-woningwaarderingstelsel = Woningwaarderingstelsel[stelsel]
-woningwaarderingstelselgroep = Woningwaarderingstelselgroep[stelselgroep]
+woningwaarderingstelsel: Referentiedata = getattr(Woningwaarderingstelsel, stelsel)
+woningwaarderingstelselgroep: Referentiedata = getattr(
+    Woningwaarderingstelselgroep, stelselgroep
+)
 
 if woningwaarderingstelselgroep.naam is None:
     raise TypeError(f"{woningwaarderingstelselgroep} heeft geen naam")
@@ -110,7 +113,7 @@ if check_write(stelselgroep_file_path):
 stelselgroep_directories = [
     f
     for f in stelsel_folder.iterdir()
-    if f.is_dir() and f.name in Woningwaarderingstelselgroep.__members__
+    if f.is_dir() and hasattr(Woningwaarderingstelselgroep, f.name)
 ]
 
 stelselgroepen = sorted(

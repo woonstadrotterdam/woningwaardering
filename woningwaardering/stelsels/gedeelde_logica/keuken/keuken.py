@@ -11,6 +11,7 @@ from woningwaardering.stelsels.utils import (
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
@@ -31,7 +32,7 @@ from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 def waardeer_keuken(
     ruimte: EenhedenRuimte,
-    stelsel: Woningwaarderingstelsel,
+    stelsel: Referentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if not _is_keuken(ruimte):
         logger.debug(
@@ -97,14 +98,14 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
 
 def _waardeer_aanrecht(
     ruimte: EenhedenRuimte,
-    stelsel: Woningwaarderingstelsel,
+    stelsel: Referentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     """
     Waardeert de aanrechten van een keuken.
 
     Args:
         ruimte (EenhedenRuimte): De keuken waarvan de aanrechten gewaardeerd worden.
-        stelsel (Woningwaarderingstelsel): Het stelsel waarvoor de aanrechten gewaardeerd worden.
+        stelsel (Referentiedata): Het stelsel waarvoor de aanrechten gewaardeerd worden.
 
     Yields:
         WoningwaarderingResultatenWoningwaardering: De gewaardeerde aanrechten.

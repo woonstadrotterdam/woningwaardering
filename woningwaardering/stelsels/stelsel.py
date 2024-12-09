@@ -16,13 +16,8 @@ from woningwaardering.stelsels.utils import (
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaarderingResultaat,
-)
-from woningwaardering.vera.referentiedata import (
-    Woningwaarderingstelsel,
-)
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
-    Woningwaarderingstelselgroep,
 )
 
 
@@ -30,7 +25,7 @@ class Stelsel:
     """Initialiseert een Stelsel object.
 
     Parameters:
-        stelsel (Woningwaarderingstelsel): Het stelsel dat wordt berekend.
+        stelsel (Referentiedata): Het stelsel dat wordt berekend.
         begindatum (date): De begindatum van de geldigheid van het stelsel.
         einddatum (date, optional): De einddatum van de geldigheid van het stelsel.
         peildatum (date, optional): De peildatum voor de waardering.
@@ -43,7 +38,7 @@ class Stelsel:
 
     def __init__(
         self,
-        stelsel: Woningwaarderingstelsel,
+        stelsel: Referentiedata,
         begindatum: date,
         einddatum: date = date.max,
         peildatum: date = date.today(),
@@ -70,13 +65,13 @@ class Stelsel:
         self,
         eenheid: EenhedenEenheid,
         *,
-        negeer_stelselgroep: Woningwaarderingstelselgroep | None = None,
+        negeer_stelselgroep: Referentiedata | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """Berekent de woningwaardering voor een stelsel.
 
         Parameters:
             eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
-            negeer_stelselgroep (Woningwaarderingstelselgroep | None, optional): Een stelselgroep die moet worden overgeslagen.
+            negeer_stelselgroep (Referentiedata | None, optional): Een stelselgroep die moet worden overgeslagen.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.

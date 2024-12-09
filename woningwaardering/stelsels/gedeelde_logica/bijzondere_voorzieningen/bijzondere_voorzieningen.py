@@ -7,6 +7,7 @@ from loguru import logger
 from woningwaardering.stelsels.utils import gedeeld_met_eenheden, rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -28,8 +29,8 @@ from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 def waardeer_bijzondere_voorzieningen(
     peildatum: date,
     eenheid: EenhedenEenheid,
-    stelselgroepen_zonder_opslag: list[Woningwaarderingstelselgroep],
-    stelsel: Woningwaarderingstelsel,
+    stelselgroepen_zonder_opslag: list[Referentiedata],
+    stelsel: Referentiedata,
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
     ) = None,
@@ -39,8 +40,8 @@ def waardeer_bijzondere_voorzieningen(
     Args:
         peildatum (date): De peildatum.
         eenheid (EenhedenEenheid): De eenheid.
-        stelselgroepen_zonder_opslag (list[Woningwaarderingstelselgroep]): De stelselgroepen die niet moeten worden opgehoogd met zorgwoning opslag.
-        stelsel (Woningwaarderingstelsel): Het woningwaarderingsstelsel.
+        stelselgroepen_zonder_opslag (list[Referentiedata]): De stelselgroepen die niet moeten worden opgehoogd met zorgwoning opslag.
+        stelsel (Referentiedata): Het woningwaarderingsstelsel.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het woningwaardering resultaat.
 
     Yields:
@@ -66,8 +67,8 @@ def waardeer_bijzondere_voorzieningen(
 def _opslag_zorgwoning(
     peildatum: date,
     eenheid: EenhedenEenheid,
-    stelselgroepen_zonder_opslag: list[Woningwaarderingstelselgroep],
-    stelsel: Woningwaarderingstelsel,
+    stelselgroepen_zonder_opslag: list[Referentiedata],
+    stelsel: Referentiedata,
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
     ) = None,
@@ -79,8 +80,8 @@ def _opslag_zorgwoning(
     Args:
         peildatum (date): De peildatum voor de berekening.
         eenheid (EenhedenEenheid): De eenheid die wordt gewaardeerd.
-        stelselgroepen_zonder_opslag (list[Woningwaarderingstelselgroep]): Lijst van stelselgroepen die niet worden meegenomen in de opslag.
-        stelsel (Woningwaarderingstelsel): Het type woningwaarderingsstelsel.
+        stelselgroepen_zonder_opslag (list[Referentiedata]): Lijst van stelselgroepen die niet worden meegenomen in de opslag.
+        stelsel (Referentiedata): Het type woningwaarderingsstelsel.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het bestaande waarderingsresultaat, indien aanwezig.
 
     Returns:
