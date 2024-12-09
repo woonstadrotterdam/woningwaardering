@@ -274,6 +274,9 @@ class Energieprestatie(Stelselgroep):
 
         Returns:
             WoningwaarderingResultatenWoningwaardering: De waardering met aangepaste criteriumnaam en punten.
+
+        Raises:
+            ValueError: Als er iets onverwachts fout gaat bij het gebruiken van een lookup-tabel.
         """
         criterium_naam = f"Bouwjaar {eenheid.bouwjaar}"
 
