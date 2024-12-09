@@ -68,7 +68,7 @@
           "aantal": 9.0,
           "criterium": {
             "id": "oppervlakte_van_vertrekken_gedeeld_met_2_onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2)",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
