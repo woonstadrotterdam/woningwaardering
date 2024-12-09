@@ -304,6 +304,8 @@ class Energieprestatie(Stelselgroep):
                     f"Eenheid ({eenheid.id}): meerdere punten per m2 gevonden voor bouwjaar {eenheid.bouwjaar}.",
                     UserWarning,
                 )
+            else:
+                raise e
             return woningwaardering
 
         woningwaardering.criterium = (
