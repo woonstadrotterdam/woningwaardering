@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class GrootboekmutatieherkomstReferentiedata(Referentiedata):
+    pass
+
+
 class Grootboekmutatieherkomst(Referentiedatasoort):
-    activa_administratie = Referentiedata(
+    activa_administratie = GrootboekmutatieherkomstReferentiedata(
         code="ACT",
         naam="Activa-administratie",
     )
@@ -11,7 +15,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking in de activa (sub-)administratie
     """
 
-    batch = Referentiedata(
+    batch = GrootboekmutatieherkomstReferentiedata(
         code="BAT",
         naam="Batch",
     )
@@ -20,7 +24,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     elektronisch wordt verstuurd naar de bank
     """
 
-    beginbalans = Referentiedata(
+    beginbalans = GrootboekmutatieherkomstReferentiedata(
         code="BEG",
         naam="Beginbalans",
     )
@@ -28,12 +32,12 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking van het eindsaldo van een balansrekening uit een voorgaand boekjaar
     """
 
-    berekening = Referentiedata(
+    berekening = GrootboekmutatieherkomstReferentiedata(
         code="BER",
         naam="Berekening",
     )
 
-    bank = Referentiedata(
+    bank = GrootboekmutatieherkomstReferentiedata(
         code="BNK",
         naam="Bank",
     )
@@ -41,7 +45,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking in de bank (sub-)administratie
     """
 
-    crediteuren = Referentiedata(
+    crediteuren = GrootboekmutatieherkomstReferentiedata(
         code="CRE",
         naam="Crediteuren",
     )
@@ -49,7 +53,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking van een schuld in de crediteuren (sub-)administratie
     """
 
-    debiteuren = Referentiedata(
+    debiteuren = GrootboekmutatieherkomstReferentiedata(
         code="DEB",
         naam="Debiteuren",
     )
@@ -57,7 +61,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking van een vordering in de debiteuren (sub-)administratie
     """
 
-    huuradministratie = Referentiedata(
+    huuradministratie = GrootboekmutatieherkomstReferentiedata(
         code="HUU",
         naam="Huuradministratie",
     )
@@ -65,7 +69,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking in de huur (sub-)administratie
     """
 
-    inkoopadministratie = Referentiedata(
+    inkoopadministratie = GrootboekmutatieherkomstReferentiedata(
         code="INK",
         naam="Inkoopadministratie",
     )
@@ -73,7 +77,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking in de inkoop (sub-)administratie
     """
 
-    kas = Referentiedata(
+    kas = GrootboekmutatieherkomstReferentiedata(
         code="KAS",
         naam="Kas",
     )
@@ -81,7 +85,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking in de kas (sub-)administratie
     """
 
-    leningenadministratie = Referentiedata(
+    leningenadministratie = GrootboekmutatieherkomstReferentiedata(
         code="LEN",
         naam="Leningenadministratie",
     )
@@ -89,7 +93,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking in de leningen (sub-)administratie
     """
 
-    memoriaal = Referentiedata(
+    memoriaal = GrootboekmutatieherkomstReferentiedata(
         code="MEM",
         naam="Memoriaal",
     )
@@ -98,7 +102,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     geboekt onder de noemer memoriaal.
     """
 
-    projectadministratie = Referentiedata(
+    projectadministratie = GrootboekmutatieherkomstReferentiedata(
         code="PRO",
         naam="Projectadministratie",
     )
@@ -106,7 +110,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking in de project (sub-)administratie
     """
 
-    salarisadministratie = Referentiedata(
+    salarisadministratie = GrootboekmutatieherkomstReferentiedata(
         code="SAL",
         naam="Salarisadministratie",
     )
@@ -114,7 +118,7 @@ class Grootboekmutatieherkomst(Referentiedatasoort):
     Een boeking in de salaris (sub-)administratie
     """
 
-    systeem = Referentiedata(
+    systeem = GrootboekmutatieherkomstReferentiedata(
         code="SYS",
         naam="Systeem",
     )

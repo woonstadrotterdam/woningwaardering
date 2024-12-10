@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PassendheidssoortReferentiedata(Referentiedata):
+    pass
+
+
 class Passendheidssoort(Referentiedatasoort):
-    niet_passend = Referentiedata(
+    niet_passend = PassendheidssoortReferentiedata(
         code="NIE",
         naam="Niet passend",
     )
@@ -13,7 +17,7 @@ class Passendheidssoort(Referentiedatasoort):
     verantwoorden kan passendheiddetailsoort worden gebruikt.
     """
 
-    passendheidtoets_niet_van_toepassing = Referentiedata(
+    passendheidtoets_niet_van_toepassing = PassendheidssoortReferentiedata(
         code="NVT",
         naam="Passendheidtoets niet van toepassing",
     )
@@ -22,7 +26,7 @@ class Passendheidssoort(Referentiedatasoort):
     bijvoorbeeld omdat de woning niet tot de betaalbare woningvoorraad behoort
     """
 
-    passend = Referentiedata(
+    passend = PassendheidssoortReferentiedata(
         code="PAS",
         naam="Passend",
     )

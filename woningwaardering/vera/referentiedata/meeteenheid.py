@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class MeeteenheidReferentiedata(Referentiedata):
+    pass
+
+
 class Meeteenheid(Referentiedatasoort):
-    centimeter = Referentiedata(
+    centimeter = MeeteenheidReferentiedata(
         code="CM",
         naam="Centimeter",
     )
@@ -11,12 +15,12 @@ class Meeteenheid(Referentiedatasoort):
     Aantal uitgedrukt in centimeters
     """
 
-    omvang_personeelsbestand = Referentiedata(
+    omvang_personeelsbestand = MeeteenheidReferentiedata(
         code="FTE",
         naam="Omvang personeelsbestand",
     )
 
-    gram = Referentiedata(
+    gram = MeeteenheidReferentiedata(
         code="GRM",
         naam="Gram",
     )
@@ -24,27 +28,27 @@ class Meeteenheid(Referentiedatasoort):
     Aantal uitgedrukt in gram
     """
 
-    kilogram = Referentiedata(
+    kilogram = MeeteenheidReferentiedata(
         code="KGR",
         naam="Kilogram",
     )
 
-    liter = Referentiedata(
+    liter = MeeteenheidReferentiedata(
         code="LTR",
         naam="Liter",
     )
 
-    vierkante_meter_m2 = Referentiedata(
+    vierkante_meter_m2 = MeeteenheidReferentiedata(
         code="M2",
         naam="Vierkante meter, m2",
     )
 
-    kubieke_meter_m3 = Referentiedata(
+    kubieke_meter_m3 = MeeteenheidReferentiedata(
         code="M3",
         naam="Kubieke meter, m3",
     )
 
-    millimeter = Referentiedata(
+    millimeter = MeeteenheidReferentiedata(
         code="MIL",
         naam="Millimeter",
     )
@@ -52,7 +56,7 @@ class Meeteenheid(Referentiedatasoort):
     Aantal uitgedrukt in millimeters
     """
 
-    minuten = Referentiedata(
+    minuten = MeeteenheidReferentiedata(
         code="MIN",
         naam="Minuten",
     )
@@ -60,12 +64,12 @@ class Meeteenheid(Referentiedatasoort):
     Aantal uitgedrukt in minuten, bijvoorbeeld 15 minuten reistijd
     """
 
-    meter = Referentiedata(
+    meter = MeeteenheidReferentiedata(
         code="MTR",
         naam="Meter",
     )
 
-    stuks = Referentiedata(
+    stuks = MeeteenheidReferentiedata(
         code="STU",
         naam="Stuks",
     )
@@ -73,7 +77,7 @@ class Meeteenheid(Referentiedatasoort):
     Aantal uitgedrukt per stuk, bijvoorbeeld 2 stuks deurklink, 10 stuks schroeven, etc.
     """
 
-    uren = Referentiedata(
+    uren = MeeteenheidReferentiedata(
         code="UUR",
         naam="Uren",
     )

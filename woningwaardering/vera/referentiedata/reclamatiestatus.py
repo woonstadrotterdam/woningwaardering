@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ReclamatiestatusReferentiedata(Referentiedata):
+    pass
+
+
 class Reclamatiestatus(Referentiedatasoort):
-    afgewezen = Referentiedata(
+    afgewezen = ReclamatiestatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -11,7 +15,7 @@ class Reclamatiestatus(Referentiedatasoort):
     De reclamatie is afgewezen door commissie.
     """
 
-    in_beroep = Referentiedata(
+    in_beroep = ReclamatiestatusReferentiedata(
         code="BER",
         naam="In beroep",
     )
@@ -19,7 +23,7 @@ class Reclamatiestatus(Referentiedatasoort):
     De reclamatie is in beroep gegaan door de woningzoekende.
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = ReclamatiestatusReferentiedata(
         code="INB",
         naam="In behandeling",
     )
@@ -27,7 +31,7 @@ class Reclamatiestatus(Referentiedatasoort):
     De reclamatie is in behandeling genomen door de commissie.
     """
 
-    ingediend = Referentiedata(
+    ingediend = ReclamatiestatusReferentiedata(
         code="ING",
         naam="Ingediend",
     )
@@ -35,7 +39,7 @@ class Reclamatiestatus(Referentiedatasoort):
     De reclamatie is ingediend door de woningzoekende.
     """
 
-    toegekend = Referentiedata(
+    toegekend = ReclamatiestatusReferentiedata(
         code="TOE",
         naam="Toegekend",
     )

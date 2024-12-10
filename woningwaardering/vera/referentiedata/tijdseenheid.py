@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class TijdseenheidReferentiedata(Referentiedata):
+    pass
+
+
 class Tijdseenheid(Referentiedatasoort):
-    uren = Referentiedata(
+    uren = TijdseenheidReferentiedata(
         code="UUR",
         naam="Uren",
     )
@@ -11,7 +15,7 @@ class Tijdseenheid(Referentiedatasoort):
     Registratie van de duur in uren
     """
 
-    minuten = Referentiedata(
+    minuten = TijdseenheidReferentiedata(
         code="MIN",
         naam="Minuten",
     )

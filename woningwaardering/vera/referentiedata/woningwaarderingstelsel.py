@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class WoningwaarderingstelselReferentiedata(Referentiedata):
+    pass
+
+
 class Woningwaarderingstelsel(Referentiedatasoort):
-    onzelfstandige_woonruimten = Referentiedata(
+    onzelfstandige_woonruimten = WoningwaarderingstelselReferentiedata(
         code="ONZ",
         naam="Onzelfstandige woonruimten",
     )
@@ -12,7 +16,7 @@ class Woningwaarderingstelsel(Referentiedatasoort):
     onzelfstandig woonruimten
     """
 
-    standplaatsen = Referentiedata(
+    standplaatsen = WoningwaarderingstelselReferentiedata(
         code="STA",
         naam="Standplaatsen",
     )
@@ -21,7 +25,7 @@ class Woningwaarderingstelsel(Referentiedatasoort):
     standplaatsen
     """
 
-    woonwagens = Referentiedata(
+    woonwagens = WoningwaarderingstelselReferentiedata(
         code="WOO",
         naam="Woonwagens",
     )
@@ -30,7 +34,7 @@ class Woningwaarderingstelsel(Referentiedatasoort):
     woonwagens
     """
 
-    zelfstandige_woonruimten = Referentiedata(
+    zelfstandige_woonruimten = WoningwaarderingstelselReferentiedata(
         code="ZEL",
         naam="Zelfstandige woonruimten",
     )

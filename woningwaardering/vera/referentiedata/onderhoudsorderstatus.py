@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class OnderhoudsorderstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Onderhoudsorderstatus(Referentiedatasoort):
-    afgehandeld = Referentiedata(
+    afgehandeld = OnderhoudsorderstatusReferentiedata(
         code="AFG",
         naam="Afgehandeld",
     )
@@ -11,7 +15,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     De order is volledig technisch en financieel afgehandeld
     """
 
-    financieel_afwikkelen = Referentiedata(
+    financieel_afwikkelen = OnderhoudsorderstatusReferentiedata(
         code="FIN",
         naam="Financieel afwikkelen",
     )
@@ -21,7 +25,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     de onderhoudsorder
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = OnderhoudsorderstatusReferentiedata(
         code="GEA",
         naam="Geannuleerd",
     )
@@ -29,7 +33,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     De order is geannuleerd
     """
 
-    order_gegund = Referentiedata(
+    order_gegund = OnderhoudsorderstatusReferentiedata(
         code="GUN",
         naam="Order gegund",
     )
@@ -37,7 +41,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     De order is verstrekt aan de uitvoerende partij
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = OnderhoudsorderstatusReferentiedata(
         code="INB",
         naam="In behandeling",
     )
@@ -48,7 +52,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     uitvoerende partij (geen differentiatie tussen gegeund, gepland, etc)
     """
 
-    offertetraject = Referentiedata(
+    offertetraject = OnderhoudsorderstatusReferentiedata(
         code="OFF",
         naam="Offertetraject",
     )
@@ -57,7 +61,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     wordt met de uitvoering van de werkzaamheden.
     """
 
-    order_gepland = Referentiedata(
+    order_gepland = OnderhoudsorderstatusReferentiedata(
         code="PLN",
         naam="Order gepland",
     )
@@ -65,7 +69,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     De order is gepland door de uitvoerende partij
     """
 
-    geregistreerd = Referentiedata(
+    geregistreerd = OnderhoudsorderstatusReferentiedata(
         code="REG",
         naam="Geregistreerd",
     )
@@ -73,7 +77,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     De onderhoudsorder is slechts geregistreerd/vastgelegd
     """
 
-    order_in_steekproef = Referentiedata(
+    order_in_steekproef = OnderhoudsorderstatusReferentiedata(
         code="STE",
         naam="Order in steekproef",
     )
@@ -82,7 +86,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     worden beoordeeld door de corporatie
     """
 
-    technisch_gereed = Referentiedata(
+    technisch_gereed = OnderhoudsorderstatusReferentiedata(
         code="TEC",
         naam="Technisch gereed",
     )
@@ -90,7 +94,7 @@ class Onderhoudsorderstatus(Referentiedatasoort):
     De order is technisch gereed en de uitvoering kan inhoudelijk beoordeeld worden
     """
 
-    wacht_op_goedkeuring = Referentiedata(
+    wacht_op_goedkeuring = OnderhoudsorderstatusReferentiedata(
         code="WOG",
         naam="Wacht op goedkeuring",
     )

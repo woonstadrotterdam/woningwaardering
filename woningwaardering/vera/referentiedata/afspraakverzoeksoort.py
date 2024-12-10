@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AfspraakverzoeksoortReferentiedata(Referentiedata):
+    pass
+
+
 class Afspraakverzoeksoort(Referentiedatasoort):
-    eindinspectie = Referentiedata(
+    eindinspectie = AfspraakverzoeksoortReferentiedata(
         code="EIN",
         naam="Eindinspectie",
     )
@@ -12,7 +16,7 @@ class Afspraakverzoeksoort(Referentiedatasoort):
     de ontvangst van een huuropzegging.
     """
 
-    voorinspectie = Referentiedata(
+    voorinspectie = AfspraakverzoeksoortReferentiedata(
         code="VOO",
         naam="Voorinspectie",
     )

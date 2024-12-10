@@ -6,20 +6,23 @@ from loguru import logger
 from woningwaardering.stelsels.utils import update_eenheid_monumenten
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
-    Woningwaarderingstelselgroep,
+    WoningwaarderingstelselgroepReferentiedata,
 )
 from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
+
+from ....vera.referentiedata.woningwaarderingstelselgroep import (
+    Woningwaarderingstelselgroep,
+)
 
 
 def opslag_rijksmonument(
     peildatum: date,
     eenheid: EenhedenEenheid,
-    stelselgroep: Referentiedata,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Bepaalt de prijsopslag of puntentoeslag voor een rijksmonument.
 
@@ -31,7 +34,7 @@ def opslag_rijksmonument(
     Args:
         peildatum (date): De datum waarop de waardering wordt uitgevoerd
         eenheid (EenhedenEenheid): De te waarderen eenheid
-        stelselgroep (Referentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
 
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag of puntentoeslag, of None als de eenheid geen rijksmonument is
@@ -82,7 +85,7 @@ def opslag_rijksmonument(
 
 
 def opslag_gemeentelijk_of_provinciaal_monument(
-    eenheid: EenhedenEenheid, stelselgroep: Referentiedata
+    eenheid: EenhedenEenheid, stelselgroep: WoningwaarderingstelselgroepReferentiedata
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Bepaalt de prijsopslag voor een gemeentelijk of provinciaal monument.
 
@@ -90,7 +93,7 @@ def opslag_gemeentelijk_of_provinciaal_monument(
 
     Args:
         eenheid (EenhedenEenheid): De te waarderen eenheid
-        stelselgroep (Referentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
 
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als de eenheid geen gemeentelijk of provinciaal monument is
@@ -120,7 +123,7 @@ def opslag_gemeentelijk_of_provinciaal_monument(
 
 
 def opslag_beschermd_stads_of_dorpsgezicht(
-    eenheid: EenhedenEenheid, stelselgroep: Referentiedata
+    eenheid: EenhedenEenheid, stelselgroep: WoningwaarderingstelselgroepReferentiedata
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Bepaalt de prijsopslag voor een beschermd stads- of dorpsgezicht.
 
@@ -131,7 +134,7 @@ def opslag_beschermd_stads_of_dorpsgezicht(
 
     Args:
         eenheid (EenhedenEenheid): De te waarderen eenheid
-        stelselgroep (Referentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
 
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan

@@ -15,7 +15,6 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
-    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -30,7 +29,10 @@ from woningwaardering.vera.referentiedata.energieprestatiesoort import (
     Energieprestatiesoort,
 )
 from woningwaardering.vera.referentiedata.oppervlaktesoort import Oppervlaktesoort
-from woningwaardering.vera.referentiedata.pandsoort import Pandsoort
+from woningwaardering.vera.referentiedata.pandsoort import (
+    Pandsoort,
+    PandsoortReferentiedata,
+)
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/zelfstandige_woonruimten/energieprestatie/lookup_tabellen"
@@ -80,7 +82,7 @@ class Energieprestatie(Stelselgroep):
         self,
         eenheid: EenhedenEenheid,
         energieprestatie: EenhedenEnergieprestatie,
-        pandsoort: Referentiedata,
+        pandsoort: PandsoortReferentiedata,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
         woningwaardering.criterium = (
@@ -204,7 +206,7 @@ class Energieprestatie(Stelselgroep):
     def _bereken_punten_met_bouwjaar(
         self,
         eenheid: EenhedenEenheid,
-        pandsoort: Referentiedata,
+        pandsoort: PandsoortReferentiedata,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
         """
@@ -212,7 +214,7 @@ class Energieprestatie(Stelselgroep):
 
         Args:
             eenheid (EenhedenEenheid): Eenheid
-            pandsoort (Referentiedata): Pandsoort
+            pandsoort (PandsoortReferentiedata): Pandsoort
             woningwaardering (WoningwaarderingResultatenWoningwaardering): De waardering voor Energieprestatie tot zover.
 
         Returns:

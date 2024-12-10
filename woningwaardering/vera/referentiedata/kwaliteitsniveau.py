@@ -2,23 +2,27 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class KwaliteitsniveauReferentiedata(Referentiedata):
+    pass
+
+
 class Kwaliteitsniveau(Referentiedatasoort):
-    eenvoudig = Referentiedata(
+    eenvoudig = KwaliteitsniveauReferentiedata(
         code="EEN",
         naam="Eenvoudig",
     )
 
-    hoogwaardig = Referentiedata(
+    hoogwaardig = KwaliteitsniveauReferentiedata(
         code="HOO",
         naam="Hoogwaardig",
     )
 
-    luxe = Referentiedata(
+    luxe = KwaliteitsniveauReferentiedata(
         code="LUX",
         naam="Luxe",
     )
 
-    standaard = Referentiedata(
+    standaard = KwaliteitsniveauReferentiedata(
         code="STA",
         naam="Standaard",
     )

@@ -2,23 +2,27 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BurgerlijkestaatReferentiedata(Referentiedata):
+    pass
+
+
 class Burgerlijkestaat(Referentiedatasoort):
-    achtergebleven_partner = Referentiedata(
+    achtergebleven_partner = BurgerlijkestaatReferentiedata(
         code="ACH",
         naam="Achtergebleven partner",
     )
 
-    gehuwd = Referentiedata(
+    gehuwd = BurgerlijkestaatReferentiedata(
         code="GEH",
         naam="Gehuwd",
     )
 
-    gescheiden = Referentiedata(
+    gescheiden = BurgerlijkestaatReferentiedata(
         code="GES",
         naam="Gescheiden",
     )
 
-    ongehuwd = Referentiedata(
+    ongehuwd = BurgerlijkestaatReferentiedata(
         code="ONG",
         naam="Ongehuwd",
     )
@@ -26,12 +30,12 @@ class Burgerlijkestaat(Referentiedatasoort):
     En nooit gehuwd of partnerschap
     """
 
-    partnerschap_beeindigd = Referentiedata(
+    partnerschap_beeindigd = BurgerlijkestaatReferentiedata(
         code="PAB",
         naam="Partnerschap beëindigd",
     )
 
-    partnerschap = Referentiedata(
+    partnerschap = BurgerlijkestaatReferentiedata(
         code="PAR",
         naam="Partnerschap",
     )
@@ -39,7 +43,7 @@ class Burgerlijkestaat(Referentiedatasoort):
     Geregistreerd partnerschap
     """
 
-    samenwonend = Referentiedata(
+    samenwonend = BurgerlijkestaatReferentiedata(
         code="SAM",
         naam="Samenwonend",
     )
@@ -47,7 +51,7 @@ class Burgerlijkestaat(Referentiedatasoort):
     Langdurig huishouden voerend
     """
 
-    weduwe_en_of_weduwnaar = Referentiedata(
+    weduwe_en_of_weduwnaar = BurgerlijkestaatReferentiedata(
         code="WED",
         naam="Weduwe/weduwnaar",
     )

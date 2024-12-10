@@ -2,18 +2,22 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class LeningdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Leningdetailsoort(Referentiedatasoort):
-    collegiaal = Referentiedata(
+    collegiaal = LeningdetailsoortReferentiedata(
         code="COL",
         naam="Collegiaal",
     )
 
-    converteerbaar = Referentiedata(
+    converteerbaar = LeningdetailsoortReferentiedata(
         code="CON",
         naam="Converteerbaar",
     )
 
-    extendible = Referentiedata(
+    extendible = LeningdetailsoortReferentiedata(
         code="EXT",
         naam="Extendible",
     )
@@ -21,12 +25,12 @@ class Leningdetailsoort(Referentiedatasoort):
     De financier (geldverstrekker) kan de lening verlengen.
     """
 
-    hypothecaire_lening = Referentiedata(
+    hypothecaire_lening = LeningdetailsoortReferentiedata(
         code="HYP",
         naam="Hypothecaire lening",
     )
 
-    intern = Referentiedata(
+    intern = LeningdetailsoortReferentiedata(
         code="INT",
         naam="Intern",
     )
@@ -35,7 +39,7 @@ class Leningdetailsoort(Referentiedatasoort):
     en een dochtermaatschappij.
     """
 
-    obligatielening = Referentiedata(
+    obligatielening = LeningdetailsoortReferentiedata(
         code="OBL",
         naam="Obligatielening",
     )

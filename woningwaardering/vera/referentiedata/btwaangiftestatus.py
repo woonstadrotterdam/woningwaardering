@@ -2,18 +2,22 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BtwaangiftestatusReferentiedata(Referentiedata):
+    pass
+
+
 class Btwaangiftestatus(Referentiedatasoort):
-    definitief = Referentiedata(
+    definitief = BtwaangiftestatusReferentiedata(
         code="DEF",
         naam="Definitief",
     )
 
-    in_behandeling = Referentiedata(
+    in_behandeling = BtwaangiftestatusReferentiedata(
         code="IBH",
         naam="In behandeling",
     )
 
-    voorlopig = Referentiedata(
+    voorlopig = BtwaangiftestatusReferentiedata(
         code="VRL",
         naam="Voorlopig",
     )

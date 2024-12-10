@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class HuuropzeggingstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Huuropzeggingstatus(Referentiedatasoort):
-    aangemaakt = Referentiedata(
+    aangemaakt = HuuropzeggingstatusReferentiedata(
         code="AAN",
         naam="Aangemaakt",
     )
@@ -12,7 +16,7 @@ class Huuropzeggingstatus(Referentiedatasoort):
     niet in behandeling genomen.
     """
 
-    afgewezen = Referentiedata(
+    afgewezen = HuuropzeggingstatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -20,7 +24,7 @@ class Huuropzeggingstatus(Referentiedatasoort):
     De huuropzegging voldoet niet aan de voorwaarden en is afgewezen.
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = HuuropzeggingstatusReferentiedata(
         code="GEA",
         naam="Geannuleerd",
     )
@@ -28,7 +32,7 @@ class Huuropzeggingstatus(Referentiedatasoort):
     De huuropzegging is geannuleerd, voordat de beoordeling heeft plaatsgevonden.
     """
 
-    goedgekeurd = Referentiedata(
+    goedgekeurd = HuuropzeggingstatusReferentiedata(
         code="GOE",
         naam="Goedgekeurd",
     )
@@ -36,7 +40,7 @@ class Huuropzeggingstatus(Referentiedatasoort):
     De huuropzegging voldoet aan de voorwaarden en is goedgekeurd.
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = HuuropzeggingstatusReferentiedata(
         code="INB",
         naam="In behandeling",
     )

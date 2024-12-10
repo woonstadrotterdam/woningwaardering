@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PublicatiemodelReferentiedata(Referentiedata):
+    pass
+
+
 class Publicatiemodel(Referentiedatasoort):
-    aanbodmodel = Referentiedata(
+    aanbodmodel = PublicatiemodelReferentiedata(
         code="AAN",
         naam="Aanbodmodel",
     )
@@ -13,7 +17,7 @@ class Publicatiemodel(Referentiedatasoort):
     krijgt de woningzoekende met de hoogste positie de eenheid aangeboden.
     """
 
-    distributiemodel = Referentiedata(
+    distributiemodel = PublicatiemodelReferentiedata(
         code="DIS",
         naam="Distributiemodel",
     )
@@ -23,7 +27,7 @@ class Publicatiemodel(Referentiedatasoort):
     rechtspersoon zijn, die namens een woningzoekende acteert.)
     """
 
-    eerste_reageerder = Referentiedata(
+    eerste_reageerder = PublicatiemodelReferentiedata(
         code="EER",
         naam="Eerste reageerder",
     )
@@ -32,7 +36,7 @@ class Publicatiemodel(Referentiedatasoort):
     staat bovenaan de lijst.
     """
 
-    lotingmodel = Referentiedata(
+    lotingmodel = PublicatiemodelReferentiedata(
         code="LOT",
         naam="Lotingmodel",
     )
@@ -41,7 +45,7 @@ class Publicatiemodel(Referentiedatasoort):
     zijn van 'gewogen' loting of andere combinaties van spelregels.
     """
 
-    optiemodel = Referentiedata(
+    optiemodel = PublicatiemodelReferentiedata(
         code="OPT",
         naam="Optiemodel",
     )
@@ -51,7 +55,7 @@ class Publicatiemodel(Referentiedatasoort):
     positie de eenheid aangeboden.
     """
 
-    vrijesectormodel = Referentiedata(
+    vrijesectormodel = PublicatiemodelReferentiedata(
         code="VRI",
         naam="Vrijesectormodel",
     )
@@ -61,7 +65,7 @@ class Publicatiemodel(Referentiedatasoort):
     kunnen overigens wel degelijk eisen gesteld worden (bijv. minimaal inkomen.)
     """
 
-    woningruilmodel = Referentiedata(
+    woningruilmodel = PublicatiemodelReferentiedata(
         code="WON",
         naam="Woningruilmodel",
     )

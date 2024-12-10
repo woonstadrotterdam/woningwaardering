@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class HuurklasseReferentiedata(Referentiedata):
+    pass
+
+
 class Huurklasse(Referentiedatasoort):
-    betaalbaar = Referentiedata(
+    betaalbaar = HuurklasseReferentiedata(
         code="BET",
         naam="Betaalbaar",
     )
@@ -12,7 +16,7 @@ class Huurklasse(Referentiedatasoort):
     kwaliteitskortingsgrens en onder de aftoppingsgrens (hoog) ligt.
     """
 
-    boven_huurtoeslaggrens = Referentiedata(
+    boven_huurtoeslaggrens = HuurklasseReferentiedata(
         code="BOV",
         naam="Boven huurtoeslaggrens",
     )
@@ -21,7 +25,7 @@ class Huurklasse(Referentiedatasoort):
     (liberalisatiegrens) ligt.
     """
 
-    duur = Referentiedata(
+    duur = HuurklasseReferentiedata(
         code="DUU",
         naam="Duur",
     )
@@ -30,7 +34,7 @@ class Huurklasse(Referentiedatasoort):
     (hoog) en onder de huurtoeslaggrens ligt.
     """
 
-    goedkoop = Referentiedata(
+    goedkoop = HuurklasseReferentiedata(
         code="GOE",
         naam="Goedkoop",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class DefectoorzaakReferentiedata(Referentiedata):
+    pass
+
+
 class Defectoorzaak(Referentiedatasoort):
-    bewonersopdracht_en_of_gedrag = Referentiedata(
+    bewonersopdracht_en_of_gedrag = DefectoorzaakReferentiedata(
         code="BEW",
         naam="Bewonersopdracht/gedrag",
     )
@@ -12,7 +16,7 @@ class Defectoorzaak(Referentiedatasoort):
     Ketenstandaard: oorzaakcode HUU - Huurder
     """
 
-    schade_door_brand = Referentiedata(
+    schade_door_brand = DefectoorzaakReferentiedata(
         code="BRA",
         naam="Schade door brand",
     )
@@ -20,7 +24,7 @@ class Defectoorzaak(Referentiedatasoort):
     Defect is veroorzaakt door brand. (bijv. keukenbrand).
     """
 
-    ouderdom = Referentiedata(
+    ouderdom = DefectoorzaakReferentiedata(
         code="OUD",
         naam="Ouderdom",
     )
@@ -29,7 +33,7 @@ class Defectoorzaak(Referentiedatasoort):
     hangt scheef). Relatie met Ketenstandaard: oorzaakcode OUD - Ouderdom
     """
 
-    normale_slijtage = Referentiedata(
+    normale_slijtage = DefectoorzaakReferentiedata(
         code="SLT",
         naam="Normale slijtage",
     )
@@ -38,7 +42,7 @@ class Defectoorzaak(Referentiedatasoort):
     element). Relatie met Ketenstandaard: oorzaakcode SLT - Slijtage
     """
 
-    slecht_opgeleverd = Referentiedata(
+    slecht_opgeleverd = DefectoorzaakReferentiedata(
         code="SOP",
         naam="Slecht opgeleverd",
     )
@@ -47,7 +51,7 @@ class Defectoorzaak(Referentiedatasoort):
     (bijv. kraan lekt van nieuwe keuken).
     """
 
-    schade_door_storm = Referentiedata(
+    schade_door_storm = DefectoorzaakReferentiedata(
         code="STO",
         naam="Schade door storm",
     )
@@ -56,7 +60,7 @@ class Defectoorzaak(Referentiedatasoort):
     storm).
     """
 
-    schade_door_vandalisme = Referentiedata(
+    schade_door_vandalisme = DefectoorzaakReferentiedata(
         code="VAN",
         naam="Schade door vandalisme",
     )
@@ -64,7 +68,7 @@ class Defectoorzaak(Referentiedatasoort):
     Defect is veroorzaakt door vandalisme. (bijv. graffiti op gevel).
     """
 
-    verzoek_van_de_vastgoedeigenaar = Referentiedata(
+    verzoek_van_de_vastgoedeigenaar = DefectoorzaakReferentiedata(
         code="VGE",
         naam="Verzoek van de vastgoedeigenaar",
     )
@@ -72,7 +76,7 @@ class Defectoorzaak(Referentiedatasoort):
     Vastgoedeigenaar heeft expliciet verzoek gedaan om het defect op te lossen.
     """
 
-    schade_door_water = Referentiedata(
+    schade_door_water = DefectoorzaakReferentiedata(
         code="WAT",
         naam="Schade door water",
     )

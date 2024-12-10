@@ -1,10 +1,16 @@
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.tijdsbestedingsoort import Tijdsbestedingsoort
+from woningwaardering.vera.referentiedata.tijdsbestedingsoort import (
+    Tijdsbestedingsoort,
+)
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class TijdsbestedingdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Tijdsbestedingdetailsoort(Referentiedatasoort):
-    verlof_regulier = Referentiedata(
+    verlof_regulier = TijdsbestedingdetailsoortReferentiedata(
         code="VER",
         naam="Verlof (regulier)",
         parent=Tijdsbestedingsoort.afwezig,
@@ -13,7 +19,7 @@ class Tijdsbestedingdetailsoort(Referentiedatasoort):
     Regulier verlof
     """
 
-    ziek = Referentiedata(
+    ziek = TijdsbestedingdetailsoortReferentiedata(
         code="ZIE",
         naam="Ziek",
         parent=Tijdsbestedingsoort.afwezig,
@@ -22,7 +28,7 @@ class Tijdsbestedingdetailsoort(Referentiedatasoort):
     Afwezig wegens ziekte
     """
 
-    bijzonder_verlof = Referentiedata(
+    bijzonder_verlof = TijdsbestedingdetailsoortReferentiedata(
         code="BIJ",
         naam="Bijzonder verlof",
         parent=Tijdsbestedingsoort.afwezig,
@@ -32,7 +38,7 @@ class Tijdsbestedingdetailsoort(Referentiedatasoort):
     huwelijk en tandartsbezoek.
     """
 
-    onbetaald_verlof = Referentiedata(
+    onbetaald_verlof = TijdsbestedingdetailsoortReferentiedata(
         code="ONB",
         naam="Onbetaald verlof",
         parent=Tijdsbestedingsoort.afwezig,
@@ -41,7 +47,7 @@ class Tijdsbestedingdetailsoort(Referentiedatasoort):
     Onbetaald verlof
     """
 
-    zwangerschapsverlof = Referentiedata(
+    zwangerschapsverlof = TijdsbestedingdetailsoortReferentiedata(
         code="ZWA",
         naam="Zwangerschapsverlof",
         parent=Tijdsbestedingsoort.afwezig,
@@ -50,7 +56,7 @@ class Tijdsbestedingdetailsoort(Referentiedatasoort):
     Zwangersschapsverlof of bevallingsverlof
     """
 
-    ouderschapsverlof = Referentiedata(
+    ouderschapsverlof = TijdsbestedingdetailsoortReferentiedata(
         code="OUD",
         naam="Ouderschapsverlof",
         parent=Tijdsbestedingsoort.afwezig,
@@ -59,7 +65,7 @@ class Tijdsbestedingdetailsoort(Referentiedatasoort):
     Ouderschapsverlof
     """
 
-    zorgverlof = Referentiedata(
+    zorgverlof = TijdsbestedingdetailsoortReferentiedata(
         code="ZOR",
         naam="Zorgverlof",
         parent=Tijdsbestedingsoort.afwezig,
@@ -68,7 +74,7 @@ class Tijdsbestedingdetailsoort(Referentiedatasoort):
     Zorgverlof kortdurend of langdurend
     """
 
-    calamiteitenverlof = Referentiedata(
+    calamiteitenverlof = TijdsbestedingdetailsoortReferentiedata(
         code="CAL",
         naam="Calamiteitenverlof",
         parent=Tijdsbestedingsoort.afwezig,
@@ -77,13 +83,13 @@ class Tijdsbestedingdetailsoort(Referentiedatasoort):
     Calamiteitenverlof of kort verzuimverlof
     """
 
-    non_actief = Referentiedata(
+    non_actief = TijdsbestedingdetailsoortReferentiedata(
         code="NON",
         naam="Non-actief",
         parent=Tijdsbestedingsoort.afwezig,
     )
 
-    adoptieverlof = Referentiedata(
+    adoptieverlof = TijdsbestedingdetailsoortReferentiedata(
         code="ADO",
         naam="Adoptieverlof",
         parent=Tijdsbestedingsoort.afwezig,
@@ -92,7 +98,7 @@ class Tijdsbestedingdetailsoort(Referentiedatasoort):
     Adoptie of pleegzorgverlof
     """
 
-    geschorst = Referentiedata(
+    geschorst = TijdsbestedingdetailsoortReferentiedata(
         code="GES",
         naam="Geschorst",
         parent=Tijdsbestedingsoort.afwezig,

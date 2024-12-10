@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class VertrouwelijkheidReferentiedata(Referentiedata):
+    pass
+
+
 class Vertrouwelijkheid(Referentiedatasoort):
-    geheim = Referentiedata(
+    geheim = VertrouwelijkheidReferentiedata(
         code="GEH",
         naam="Geheim",
     )
@@ -12,7 +16,7 @@ class Vertrouwelijkheid(Referentiedatasoort):
     strafrechtelijke informatie)
     """
 
-    intern = Referentiedata(
+    intern = VertrouwelijkheidReferentiedata(
         code="INT",
         naam="Intern",
     )
@@ -20,7 +24,7 @@ class Vertrouwelijkheid(Referentiedatasoort):
     Informatie is toegankelijk voor alle medewerkers van de organisatie (bv: intranet)
     """
 
-    openbaar = Referentiedata(
+    openbaar = VertrouwelijkheidReferentiedata(
         code="OPE",
         naam="Openbaar",
     )
@@ -28,7 +32,7 @@ class Vertrouwelijkheid(Referentiedatasoort):
     Informatie mag door iedereen worden ingezien (bv: algemene informatie op de website)
     """
 
-    vertrouwelijk = Referentiedata(
+    vertrouwelijk = VertrouwelijkheidReferentiedata(
         code="VER",
         naam="Vertrouwelijk",
     )

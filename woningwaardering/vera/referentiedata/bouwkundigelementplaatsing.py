@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BouwkundigelementplaatsingReferentiedata(Referentiedata):
+    pass
+
+
 class Bouwkundigelementplaatsing(Referentiedatasoort):
-    individuele_wmo_voorziening = Referentiedata(
+    individuele_wmo_voorziening = BouwkundigelementplaatsingReferentiedata(
         code="IWV",
         naam="Individuele WMO voorziening",
     )
@@ -11,7 +15,7 @@ class Bouwkundigelementplaatsing(Referentiedatasoort):
     Het bouwkundig element is aangebracht als individuele WMO voorziening.
     """
 
-    overig = Referentiedata(
+    overig = BouwkundigelementplaatsingReferentiedata(
         code="OVE",
         naam="Overig",
     )
@@ -20,7 +24,7 @@ class Bouwkundigelementplaatsing(Referentiedatasoort):
     (ZAV, WMO) valt.
     """
 
-    wet_maatschappelijke_ondersteuning = Referentiedata(
+    wet_maatschappelijke_ondersteuning = BouwkundigelementplaatsingReferentiedata(
         code="WMO",
         naam="Wet maatschappelijke ondersteuning",
     )
@@ -29,7 +33,7 @@ class Bouwkundigelementplaatsing(Referentiedatasoort):
     Maatschappelijke Ondersteuning.
     """
 
-    zelf_aangebrachte_voorziening = Referentiedata(
+    zelf_aangebrachte_voorziening = BouwkundigelementplaatsingReferentiedata(
         code="ZAV",
         naam="Zelf aangebrachte voorziening",
     )

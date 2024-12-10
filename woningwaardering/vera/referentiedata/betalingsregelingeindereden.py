@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BetalingsregelingeinderedenReferentiedata(Referentiedata):
+    pass
+
+
 class Betalingsregelingeindereden(Referentiedatasoort):
-    afbetaald = Referentiedata(
+    afbetaald = BetalingsregelingeinderedenReferentiedata(
         code="AFB",
         naam="Afbetaald",
     )
@@ -11,7 +15,7 @@ class Betalingsregelingeindereden(Referentiedatasoort):
     De betalingsregeling is beëindigd omdat deze is afbetaald.
     """
 
-    oninbaar = Referentiedata(
+    oninbaar = BetalingsregelingeinderedenReferentiedata(
         code="ONI",
         naam="Oninbaar",
     )
@@ -19,7 +23,7 @@ class Betalingsregelingeindereden(Referentiedatasoort):
     De betalingsregeling is beëindigd omdat deze oninbaar is gebleken.
     """
 
-    restschuld_gesaneerd = Referentiedata(
+    restschuld_gesaneerd = BetalingsregelingeinderedenReferentiedata(
         code="SAN",
         naam="Restschuld gesaneerd",
     )
@@ -27,7 +31,7 @@ class Betalingsregelingeindereden(Referentiedatasoort):
     De betalingsregeling is beëindigd omdat de restschuld is gesaneerd.
     """
 
-    regeling_voldoet_niet = Referentiedata(
+    regeling_voldoet_niet = BetalingsregelingeinderedenReferentiedata(
         code="VOL",
         naam="Regeling voldoet niet",
     )

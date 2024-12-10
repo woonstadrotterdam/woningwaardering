@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class OvereenkomstkoppelingstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Overeenkomstkoppelingstatus(Referentiedatasoort):
-    aangevraagd = Referentiedata(
+    aangevraagd = OvereenkomstkoppelingstatusReferentiedata(
         code="AAN",
         naam="Aangevraagd",
     )
@@ -11,7 +15,7 @@ class Overeenkomstkoppelingstatus(Referentiedatasoort):
     Het koppelen van de overeenkomsten is aangevraagd
     """
 
-    afgewezen = Referentiedata(
+    afgewezen = OvereenkomstkoppelingstatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -19,7 +23,7 @@ class Overeenkomstkoppelingstatus(Referentiedatasoort):
     Het koppelen van de overeenkomsten is afgewezen
     """
 
-    gekoppeld = Referentiedata(
+    gekoppeld = OvereenkomstkoppelingstatusReferentiedata(
         code="GEK",
         naam="Gekoppeld",
     )

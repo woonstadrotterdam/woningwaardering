@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EinderedenReferentiedata(Referentiedata):
+    pass
+
+
 class Eindereden(Referentiedatasoort):
-    ontbinding = Referentiedata(
+    ontbinding = EinderedenReferentiedata(
         code="ONT",
         naam="Ontbinding",
     )
@@ -12,7 +16,7 @@ class Eindereden(Referentiedatasoort):
     de overeenkomst niet nakomt.
     """
 
-    opzegging = Referentiedata(
+    opzegging = EinderedenReferentiedata(
         code="OPZ",
         naam="Opzegging",
     )
@@ -22,7 +26,7 @@ class Eindereden(Referentiedatasoort):
     of een arbeidsovereenkomst.
     """
 
-    vernietiging = Referentiedata(
+    vernietiging = EinderedenReferentiedata(
         code="VER",
         naam="Vernietiging",
     )

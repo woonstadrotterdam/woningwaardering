@@ -1,10 +1,16 @@
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.eenheidstatus import Eenheidstatus
+from woningwaardering.vera.referentiedata.eenheidstatus import (
+    Eenheidstatus,
+)
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EenheiddetailstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Eenheiddetailstatus(Referentiedatasoort):
-    verhuurd_antikraak = Referentiedata(
+    verhuurd_antikraak = EenheiddetailstatusReferentiedata(
         code="ANT",
         naam="Verhuurd antikraak",
         parent=Eenheidstatus.verhuurd,
@@ -13,7 +19,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     De eenheid wordt verhuurd onder de voorwaarden van anti-kraak
     """
 
-    bouwplannen = Referentiedata(
+    bouwplannen = EenheiddetailstatusReferentiedata(
         code="BOU",
         naam="Bouwplannen",
         parent=Eenheidstatus.in_ontwikkeling,
@@ -22,7 +28,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     Eenheid is in ontwikkeling, nog in de planfase
     """
 
-    bruikleen = Referentiedata(
+    bruikleen = EenheiddetailstatusReferentiedata(
         code="BRU",
         naam="Bruikleen",
         parent=Eenheidstatus.verhuurd,
@@ -31,7 +37,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     De eenheid wordt verhuurd onder een bruikleen constructie
     """
 
-    wacht_op_energie_prestatie_advies = Referentiedata(
+    wacht_op_energie_prestatie_advies = EenheiddetailstatusReferentiedata(
         code="EPA",
         naam="Wacht op Energie Prestatie Advies",
         parent=Eenheidstatus.leegstand,
@@ -41,7 +47,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     label
     """
 
-    mutatie = Referentiedata(
+    mutatie = EenheiddetailstatusReferentiedata(
         code="MUT",
         naam="Mutatie",
         parent=Eenheidstatus.leegstand,
@@ -52,7 +58,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     woning plaatsvindt.
     """
 
-    wacht_op_nieuwe_huurder_niet_regulier = Referentiedata(
+    wacht_op_nieuwe_huurder_niet_regulier = EenheiddetailstatusReferentiedata(
         code="NIB",
         naam="Wacht op nieuwe huurder - niet-regulier",
         parent=Eenheidstatus.leegstand,
@@ -65,7 +71,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     totdat de overeenkomst met een nieuwe, niet-reguliere, huurder ingaat.
     """
 
-    nieuwbouw = Referentiedata(
+    nieuwbouw = EenheiddetailstatusReferentiedata(
         code="NIE",
         naam="Nieuwbouw",
         parent=Eenheidstatus.in_ontwikkeling,
@@ -74,7 +80,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     Eenheid is in ontwikkeling, realisatie-/bouwfase is gestart
     """
 
-    wacht_op_nieuwe_huurder_regulier = Referentiedata(
+    wacht_op_nieuwe_huurder_regulier = EenheiddetailstatusReferentiedata(
         code="NIH",
         naam="Wacht op nieuwe huurder - regulier",
         parent=Eenheidstatus.leegstand,
@@ -87,7 +93,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     overeenkomst met een nieuwe huurder ingaat.
     """
 
-    oplevering = Referentiedata(
+    oplevering = EenheiddetailstatusReferentiedata(
         code="OPL",
         naam="Oplevering",
         parent=Eenheidstatus.in_ontwikkeling,
@@ -96,7 +102,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     Eenheid is in ontwikkeling, klaar voor oplevering
     """
 
-    verhuurd_permanent = Referentiedata(
+    verhuurd_permanent = EenheiddetailstatusReferentiedata(
         code="PER",
         naam="Verhuurd permanent",
         parent=Eenheidstatus.verhuurd,
@@ -105,7 +111,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     Doorlopend contract of voor onbepaalde tijd.
     """
 
-    projectleegstand = Referentiedata(
+    projectleegstand = EenheiddetailstatusReferentiedata(
         code="PRO",
         naam="Projectleegstand",
         parent=Eenheidstatus.leegstand,
@@ -115,7 +121,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     waarbij de eenheid niet uit exploitatie wordt genomen
     """
 
-    structurele_leegstand = Referentiedata(
+    structurele_leegstand = EenheiddetailstatusReferentiedata(
         code="STR",
         naam="Structurele leegstand",
         parent=Eenheidstatus.leegstand,
@@ -125,7 +131,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     aansluiten
     """
 
-    verhuurd_tijdelijk = Referentiedata(
+    verhuurd_tijdelijk = EenheiddetailstatusReferentiedata(
         code="TIJD",
         naam="Verhuurd tijdelijk",
         parent=Eenheidstatus.verhuurd,
@@ -135,7 +141,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     constructie)
     """
 
-    verkoop = Referentiedata(
+    verkoop = EenheiddetailstatusReferentiedata(
         code="VEK",
         naam="Verkoop",
         parent=Eenheidstatus.leegstand,
@@ -145,7 +151,7 @@ class Eenheiddetailstatus(Referentiedatasoort):
     exploitatie is.
     """
 
-    vergunning_verleend = Referentiedata(
+    vergunning_verleend = EenheiddetailstatusReferentiedata(
         code="VER",
         naam="Vergunning verleend",
         parent=Eenheidstatus.in_ontwikkeling,

@@ -2,43 +2,47 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class RuimteliggingReferentiedata(Referentiedata):
+    pass
+
+
 class Ruimteligging(Referentiedatasoort):
-    noord = Referentiedata(
+    noord = RuimteliggingReferentiedata(
         code="NOO",
         naam="Noord",
     )
 
-    noordoost = Referentiedata(
+    noordoost = RuimteliggingReferentiedata(
         code="NOS",
         naam="Noordoost",
     )
 
-    noordwest = Referentiedata(
+    noordwest = RuimteliggingReferentiedata(
         code="NWE",
         naam="Noordwest",
     )
 
-    oost = Referentiedata(
+    oost = RuimteliggingReferentiedata(
         code="OOS",
         naam="Oost",
     )
 
-    west = Referentiedata(
+    west = RuimteliggingReferentiedata(
         code="WES",
         naam="West",
     )
 
-    zuidoost = Referentiedata(
+    zuidoost = RuimteliggingReferentiedata(
         code="ZOO",
         naam="Zuidoost",
     )
 
-    zuid = Referentiedata(
+    zuid = RuimteliggingReferentiedata(
         code="ZUI",
         naam="Zuid",
     )
 
-    zuidwest = Referentiedata(
+    zuidwest = RuimteliggingReferentiedata(
         code="ZWE",
         naam="Zuidwest",
     )

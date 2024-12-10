@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AuthentiekgegevensoortReferentiedata(Referentiedata):
+    pass
+
+
 class Authentiekgegevensoort(Referentiedatasoort):
-    actueel_inkomen = Referentiedata(
+    actueel_inkomen = AuthentiekgegevensoortReferentiedata(
         code="AIN",
         naam="Actueel inkomen",
     )
@@ -11,7 +15,7 @@ class Authentiekgegevensoort(Referentiedatasoort):
     Actueel inkomen voor als iemands inkomenssituatie is veranderd.
     """
 
-    digitale_identiteit = Referentiedata(
+    digitale_identiteit = AuthentiekgegevensoortReferentiedata(
         code="DID",
         naam="Digitale identiteit",
     )
@@ -19,7 +23,7 @@ class Authentiekgegevensoort(Referentiedatasoort):
     Versleuteld BSN nummer.
     """
 
-    geregistreerd_inkomen = Referentiedata(
+    geregistreerd_inkomen = AuthentiekgegevensoortReferentiedata(
         code="GIN",
         naam="Geregistreerd inkomen",
     )
@@ -27,7 +31,7 @@ class Authentiekgegevensoort(Referentiedatasoort):
     Geregistreerde inkomen.
     """
 
-    huidhoudsamenstelling = Referentiedata(
+    huidhoudsamenstelling = AuthentiekgegevensoortReferentiedata(
         code="HUI",
         naam="Huidhoudsamenstelling",
     )
@@ -35,7 +39,7 @@ class Authentiekgegevensoort(Referentiedatasoort):
     Huidhoudsamenstelling uit BRP.
     """
 
-    naam_adres_woonplaats = Referentiedata(
+    naam_adres_woonplaats = AuthentiekgegevensoortReferentiedata(
         code="NAW",
         naam="Naam Adres Woonplaats",
     )
@@ -43,7 +47,7 @@ class Authentiekgegevensoort(Referentiedatasoort):
     NAW gegevens van een natuurlijke persoon.
     """
 
-    opleiding = Referentiedata(
+    opleiding = AuthentiekgegevensoortReferentiedata(
         code="OPL",
         naam="Opleiding",
     )
@@ -51,7 +55,7 @@ class Authentiekgegevensoort(Referentiedatasoort):
     Opleiding en studennummer.
     """
 
-    werkgevers = Referentiedata(
+    werkgevers = AuthentiekgegevensoortReferentiedata(
         code="WER",
         naam="Werkgevers",
     )
@@ -59,7 +63,7 @@ class Authentiekgegevensoort(Referentiedatasoort):
     Actuele werkgevers.
     """
 
-    woongeschiedenis = Referentiedata(
+    woongeschiedenis = AuthentiekgegevensoortReferentiedata(
         code="WOO",
         naam="Woongeschiedenis",
     )

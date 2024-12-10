@@ -2,28 +2,32 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EenheidinterieurReferentiedata(Referentiedata):
+    pass
+
+
 class Eenheidinterieur(Referentiedatasoort):
-    gemeubileerd = Referentiedata(
+    gemeubileerd = EenheidinterieurReferentiedata(
         code="GEM",
         naam="Gemeubileerd",
     )
 
-    gestoffeerd = Referentiedata(
+    gestoffeerd = EenheidinterieurReferentiedata(
         code="GES",
         naam="Gestoffeerd",
     )
 
-    houten_vloer = Referentiedata(
+    houten_vloer = EenheidinterieurReferentiedata(
         code="HOU",
         naam="Houten vloer",
     )
 
-    laminaat = Referentiedata(
+    laminaat = EenheidinterieurReferentiedata(
         code="LAM",
         naam="Laminaat",
     )
 
-    plavuizen = Referentiedata(
+    plavuizen = EenheidinterieurReferentiedata(
         code="PLA",
         naam="Plavuizen",
     )
@@ -31,7 +35,7 @@ class Eenheidinterieur(Referentiedatasoort):
     Plavuizen of tegels
     """
 
-    pvc_vloer = Referentiedata(
+    pvc_vloer = EenheidinterieurReferentiedata(
         code="PVC",
         naam="Pvc vloer",
     )
@@ -41,12 +45,12 @@ class Eenheidinterieur(Referentiedatasoort):
     en veelzijdigheid.
     """
 
-    vloerbedekking = Referentiedata(
+    vloerbedekking = EenheidinterieurReferentiedata(
         code="VLB",
         naam="Vloerbedekking",
     )
 
-    zelf_inrichten = Referentiedata(
+    zelf_inrichten = EenheidinterieurReferentiedata(
         code="ZEL",
         naam="Zelf inrichten",
     )

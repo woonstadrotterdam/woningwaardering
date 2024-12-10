@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class HuurgeschilstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Huurgeschilstatus(Referentiedatasoort):
-    afgewezen = Referentiedata(
+    afgewezen = HuurgeschilstatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -11,7 +15,7 @@ class Huurgeschilstatus(Referentiedatasoort):
     Het huurgeschil is afgewezen, en daarmee tevens afgehandeld
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = HuurgeschilstatusReferentiedata(
         code="INB",
         naam="In behandeling",
     )
@@ -19,7 +23,7 @@ class Huurgeschilstatus(Referentiedatasoort):
     Het huurgeschil is (nog) in behandeling
     """
 
-    toegekend = Referentiedata(
+    toegekend = HuurgeschilstatusReferentiedata(
         code="TOE",
         naam="Toegekend",
     )

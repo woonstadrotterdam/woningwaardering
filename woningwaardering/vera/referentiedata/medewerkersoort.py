@@ -2,18 +2,22 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class MedewerkersoortReferentiedata(Referentiedata):
+    pass
+
+
 class Medewerkersoort(Referentiedatasoort):
-    in_dienst = Referentiedata(
+    in_dienst = MedewerkersoortReferentiedata(
         code="DIE",
         naam="In dienst",
     )
 
-    meewerkende_partner = Referentiedata(
+    meewerkende_partner = MedewerkersoortReferentiedata(
         code="FAM",
         naam="Meewerkende partner",
     )
 
-    inhuur_zzp_en_of_payroll_en_of_detachering = Referentiedata(
+    inhuur_zzp_en_of_payroll_en_of_detachering = MedewerkersoortReferentiedata(
         code="INH",
         naam="Inhuur: zzp / payroll / detachering",
     )
@@ -25,12 +29,12 @@ class Medewerkersoort(Referentiedatasoort):
     detacheringsbureau.
     """
 
-    oproepkracht = Referentiedata(
+    oproepkracht = MedewerkersoortReferentiedata(
         code="OPR",
         naam="Oproepkracht",
     )
 
-    stagair = Referentiedata(
+    stagair = MedewerkersoortReferentiedata(
         code="STA",
         naam="Stagair",
     )
@@ -41,7 +45,7 @@ class Medewerkersoort(Referentiedatasoort):
     werkervaring op te doen en hun vaardigheden in de praktijk te ontwikkelen.
     """
 
-    trainee = Referentiedata(
+    trainee = MedewerkersoortReferentiedata(
         code="TRA",
         naam="Trainee",
     )

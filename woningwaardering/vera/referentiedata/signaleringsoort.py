@@ -2,23 +2,27 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class SignaleringsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Signaleringsoort(Referentiedatasoort):
-    agressie = Referentiedata(
+    agressie = SignaleringsoortReferentiedata(
         code="AGR",
         naam="Agressie",
     )
 
-    oneigenlijk_gebruik_woning = Referentiedata(
+    oneigenlijk_gebruik_woning = SignaleringsoortReferentiedata(
         code="ONE",
         naam="Oneigenlijk gebruik woning",
     )
 
-    overlast = Referentiedata(
+    overlast = SignaleringsoortReferentiedata(
         code="OVE",
         naam="Overlast",
     )
 
-    huurschuld = Referentiedata(
+    huurschuld = SignaleringsoortReferentiedata(
         code="SCH",
         naam="Huurschuld",
     )

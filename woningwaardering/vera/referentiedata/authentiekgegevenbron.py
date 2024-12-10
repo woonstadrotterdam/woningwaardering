@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AuthentiekgegevenbronReferentiedata(Referentiedata):
+    pass
+
+
 class Authentiekgegevenbron(Referentiedatasoort):
-    klantcontact = Referentiedata(
+    klantcontact = AuthentiekgegevenbronReferentiedata(
         code="KLA",
         naam="Klantcontact",
     )
@@ -11,7 +15,7 @@ class Authentiekgegevenbron(Referentiedatasoort):
     Gegevens zijn aangeleverd via de balie of klantcontactcentrum.
     """
 
-    bvbsn = Referentiedata(
+    bvbsn = AuthentiekgegevenbronReferentiedata(
         code="BSN",
         naam="BvBSN",
     )
@@ -19,7 +23,7 @@ class Authentiekgegevenbron(Referentiedatasoort):
     Gegevens zijn gedeeld vanuit de basisvoorziening burgerservicenummer
     """
 
-    dienst_uitvoering_onderwijs = Referentiedata(
+    dienst_uitvoering_onderwijs = AuthentiekgegevenbronReferentiedata(
         code="DUO",
         naam="Dienst uitvoering onderwijs",
     )
@@ -27,7 +31,7 @@ class Authentiekgegevenbron(Referentiedatasoort):
     Gegevens zijn gedeeld vanuit DUO.
     """
 
-    inkomensregistratieformulier = Referentiedata(
+    inkomensregistratieformulier = AuthentiekgegevenbronReferentiedata(
         code="IRF",
         naam="Inkomensregistratieformulier",
     )
@@ -35,7 +39,7 @@ class Authentiekgegevenbron(Referentiedatasoort):
     Gegevens zijn gedeeld vanuit het Inkomensregistratieformulier.
     """
 
-    mijn_overheid = Referentiedata(
+    mijn_overheid = AuthentiekgegevenbronReferentiedata(
         code="MIJ",
         naam="Mijn Overheid",
     )
@@ -43,7 +47,7 @@ class Authentiekgegevenbron(Referentiedatasoort):
     Gegevens zijn gedeeld vanuit Mijn Overheid.
     """
 
-    qii = Referentiedata(
+    qii = AuthentiekgegevenbronReferentiedata(
         code="QII",
         naam="Qii",
     )
@@ -51,7 +55,7 @@ class Authentiekgegevenbron(Referentiedatasoort):
     Gegevens zijn gedeeld vanuit Qii.
     """
 
-    uwv = Referentiedata(
+    uwv = AuthentiekgegevenbronReferentiedata(
         code="UWV",
         naam="UWV",
     )

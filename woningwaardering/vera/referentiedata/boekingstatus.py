@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BoekingstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Boekingstatus(Referentiedatasoort):
-    gefiatteerd = Referentiedata(
+    gefiatteerd = BoekingstatusReferentiedata(
         code="FIA",
         naam="Gefiatteerd",
     )
@@ -11,7 +15,7 @@ class Boekingstatus(Referentiedatasoort):
     Boeking is definitief en niet meer wijzigbaar.
     """
 
-    historisch = Referentiedata(
+    historisch = BoekingstatusReferentiedata(
         code="HIS",
         naam="Historisch",
     )
@@ -19,7 +23,7 @@ class Boekingstatus(Referentiedatasoort):
     Boeking is onderdeel van een afgesloten administratieve periode of boekjaar.
     """
 
-    voorlopig = Referentiedata(
+    voorlopig = BoekingstatusReferentiedata(
         code="VRL",
         naam="Voorlopig",
     )

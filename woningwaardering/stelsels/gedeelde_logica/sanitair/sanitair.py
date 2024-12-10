@@ -19,14 +19,18 @@ from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetails
 from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoort
 from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
     Woningwaarderingstelsel,
+    WoningwaarderingstelselReferentiedata,
+)
+from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
+    WoningwaarderingstelselgroepReferentiedata,
 )
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
 def waardeer_sanitair(
     ruimte: EenhedenRuimte,
-    stelselgroep: Referentiedata,
-    stelsel: Referentiedata,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
+    stelsel: WoningwaarderingstelselReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if ruimte.detail_soort is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.")
@@ -97,7 +101,7 @@ def _waardeer_toiletten(
     ruimte: EenhedenRuimte,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
-    mapping_toilet = {
+    mapping_toilet: dict[Referentiedata, dict[Referentiedata, float]] = {
         Ruimtedetailsoort.toiletruimte: {
             Voorzieningsoort.hangend_toilet: 3.75,
             Voorzieningsoort.staand_toilet: 3.0,
@@ -144,7 +148,7 @@ def _waardeer_toiletten(
 
 
 def _waardeer_wastafels(
-    ruimte: EenhedenRuimte, stelsel: Referentiedata
+    ruimte: EenhedenRuimte, stelsel: WoningwaarderingstelselReferentiedata
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     zelfstandige_woonruimte = (
         stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -266,7 +270,7 @@ def _waardeer_wastafels(
 
 
 def _waardeer_baden_en_douches(
-    ruimte: EenhedenRuimte, stelsel: Referentiedata
+    ruimte: EenhedenRuimte, stelsel: WoningwaarderingstelselReferentiedata
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     zelfstandige_woonruimte = (
@@ -324,10 +328,10 @@ def _waardeer_baden_en_douches(
 
 
 def _waardeer_installaties(
-    ruimte: EenhedenRuimte, stelsel: Referentiedata
+    ruimte: EenhedenRuimte, stelsel: WoningwaarderingstelselReferentiedata
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
-    punten_voorzieningen = {
+    punten_voorzieningen: dict[Referentiedata, float] = {
         Voorzieningsoort.bubbelfunctie_van_het_bad: 1.5,
         Voorzieningsoort.douchewand: 1.25,
         Voorzieningsoort.handdoekenradiator: 0.75,

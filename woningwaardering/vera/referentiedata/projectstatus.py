@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ProjectstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Projectstatus(Referentiedatasoort):
-    actief = Referentiedata(
+    actief = ProjectstatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
@@ -11,7 +15,7 @@ class Projectstatus(Referentiedatasoort):
     Het project is actief, en bevindt zich in een van de projectfasen
     """
 
-    afgerond = Referentiedata(
+    afgerond = ProjectstatusReferentiedata(
         code="AFG",
         naam="Afgerond",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class MedewerkerbudgetsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Medewerkerbudgetsoort(Referentiedatasoort):
-    individueel_loopbaanontwikkelingsbudget = Referentiedata(
+    individueel_loopbaanontwikkelingsbudget = MedewerkerbudgetsoortReferentiedata(
         code="IND",
         naam="Individueel loopbaanontwikkelingsbudget",
     )
@@ -14,7 +18,7 @@ class Medewerkerbudgetsoort(Referentiedatasoort):
     hun loopbaanontwikkeling.
     """
 
-    functiegebonden_scholing = Referentiedata(
+    functiegebonden_scholing = MedewerkerbudgetsoortReferentiedata(
         code="FUN",
         naam="Functiegebonden scholing",
     )
@@ -24,7 +28,7 @@ class Medewerkerbudgetsoort(Referentiedatasoort):
     en in de toekomst
     """
 
-    informeel_leren = Referentiedata(
+    informeel_leren = MedewerkerbudgetsoortReferentiedata(
         code="INF",
         naam="Informeel leren",
     )

@@ -2,13 +2,17 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class CollectiefobjectsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Collectiefobjectsoort(Referentiedatasoort):
-    achterpad = Referentiedata(
+    achterpad = CollectiefobjectsoortReferentiedata(
         code="APD",
         naam="Achterpad",
     )
 
-    casco = Referentiedata(
+    casco = CollectiefobjectsoortReferentiedata(
         code="CAS",
         naam="Casco",
     )
@@ -16,52 +20,52 @@ class Collectiefobjectsoort(Referentiedatasoort):
     Gevel e.d.
     """
 
-    centrale_hal = Referentiedata(
+    centrale_hal = CollectiefobjectsoortReferentiedata(
         code="CEH",
         naam="Centrale hal",
     )
 
-    dak = Referentiedata(
+    dak = CollectiefobjectsoortReferentiedata(
         code="DAK",
         naam="Dak",
     )
 
-    galerij = Referentiedata(
+    galerij = CollectiefobjectsoortReferentiedata(
         code="GAL",
         naam="Galerij",
     )
 
-    lift = Referentiedata(
+    lift = CollectiefobjectsoortReferentiedata(
         code="LIF",
         naam="Lift",
     )
 
-    onderdoorgang = Referentiedata(
+    onderdoorgang = CollectiefobjectsoortReferentiedata(
         code="ONG",
         naam="Onderdoorgang",
     )
 
-    parkeergarage = Referentiedata(
+    parkeergarage = CollectiefobjectsoortReferentiedata(
         code="PAG",
         naam="Parkeergarage",
     )
 
-    recreatie_en_of_ontmoetingsruimte = Referentiedata(
+    recreatie_en_of_ontmoetingsruimte = CollectiefobjectsoortReferentiedata(
         code="ROR",
         naam="Recreatie-/ontmoetingsruimte",
     )
 
-    speelplaats = Referentiedata(
+    speelplaats = CollectiefobjectsoortReferentiedata(
         code="SPP",
         naam="Speelplaats",
     )
 
-    stortkoker = Referentiedata(
+    stortkoker = CollectiefobjectsoortReferentiedata(
         code="STK",
         naam="Stortkoker",
     )
 
-    terrein = Referentiedata(
+    terrein = CollectiefobjectsoortReferentiedata(
         code="TER",
         naam="Terrein",
     )
@@ -69,17 +73,17 @@ class Collectiefobjectsoort(Referentiedatasoort):
     Parkeerterrein, buitenterrein
     """
 
-    trappenhuis = Referentiedata(
+    trappenhuis = CollectiefobjectsoortReferentiedata(
         code="TRH",
         naam="Trappenhuis",
     )
 
-    technische_ruimte = Referentiedata(
+    technische_ruimte = CollectiefobjectsoortReferentiedata(
         code="TRU",
         naam="Technische ruimte",
     )
 
-    tuin = Referentiedata(
+    tuin = CollectiefobjectsoortReferentiedata(
         code="TUI",
         naam="Tuin",
     )
@@ -87,7 +91,7 @@ class Collectiefobjectsoort(Referentiedatasoort):
     Gemeenschappelijke tuin
     """
 
-    gemeenschappelijke_badkamer = Referentiedata(
+    gemeenschappelijke_badkamer = CollectiefobjectsoortReferentiedata(
         code="BDK",
         naam="Gemeenschappelijke badkamer",
     )
@@ -95,7 +99,7 @@ class Collectiefobjectsoort(Referentiedatasoort):
     Gemeenschappelijke badkamer
     """
 
-    gemeenschappelijk_balkon = Referentiedata(
+    gemeenschappelijk_balkon = CollectiefobjectsoortReferentiedata(
         code="BAL",
         naam="Gemeenschappelijk balkon",
     )
@@ -103,7 +107,7 @@ class Collectiefobjectsoort(Referentiedatasoort):
     Gemeenschappelijk balkon
     """
 
-    gemeenschappelijke_berging = Referentiedata(
+    gemeenschappelijke_berging = CollectiefobjectsoortReferentiedata(
         code="BER",
         naam="Gemeenschappelijke berging",
     )
@@ -111,7 +115,7 @@ class Collectiefobjectsoort(Referentiedatasoort):
     Gemeenschappelijke berging of berginsgsgang
     """
 
-    gemeenschappelijke_fietsenstalling = Referentiedata(
+    gemeenschappelijke_fietsenstalling = CollectiefobjectsoortReferentiedata(
         code="FTS",
         naam="Gemeenschappelijke fietsenstalling",
     )
@@ -119,7 +123,7 @@ class Collectiefobjectsoort(Referentiedatasoort):
     Gemeenschappelijke fietsenstalling
     """
 
-    gemeenschappeijke_keuken = Referentiedata(
+    gemeenschappeijke_keuken = CollectiefobjectsoortReferentiedata(
         code="KEU",
         naam="Gemeenschappeijke keuken",
     )
@@ -127,7 +131,7 @@ class Collectiefobjectsoort(Referentiedatasoort):
     Gemeenschappelijke keuken
     """
 
-    gemeenschappelijke_toilet = Referentiedata(
+    gemeenschappelijke_toilet = CollectiefobjectsoortReferentiedata(
         code="TOI",
         naam="Gemeenschappelijke toilet",
     )
@@ -135,7 +139,7 @@ class Collectiefobjectsoort(Referentiedatasoort):
     Gemeenschappelijk toilet
     """
 
-    wasruimte = Referentiedata(
+    wasruimte = CollectiefobjectsoortReferentiedata(
         code="WAS",
         naam="Wasruimte",
     )

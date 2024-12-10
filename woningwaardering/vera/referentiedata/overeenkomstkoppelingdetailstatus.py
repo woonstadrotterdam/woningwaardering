@@ -5,8 +5,12 @@ from woningwaardering.vera.referentiedata.overeenkomstkoppelingstatus import (
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class OvereenkomstkoppelingdetailstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Overeenkomstkoppelingdetailstatus(Referentiedatasoort):
-    afgewezen_door_woningzoekende = Referentiedata(
+    afgewezen_door_woningzoekende = OvereenkomstkoppelingdetailstatusReferentiedata(
         code="AFG",
         naam="Afgewezen door woningzoekende",
         parent=Overeenkomstkoppelingstatus.afgewezen,
@@ -15,7 +19,7 @@ class Overeenkomstkoppelingdetailstatus(Referentiedatasoort):
     Woningzoekende heeft het verzoek tot koppelen afgewezen.
     """
 
-    bevestigingstermijn_is_verstreken = Referentiedata(
+    bevestigingstermijn_is_verstreken = OvereenkomstkoppelingdetailstatusReferentiedata(
         code="BEV",
         naam="Bevestigingstermijn is verstreken",
         parent=Overeenkomstkoppelingstatus.afgewezen,
@@ -24,7 +28,7 @@ class Overeenkomstkoppelingdetailstatus(Referentiedatasoort):
     Koppeling is afgewezen omdat de bevestigingstermijn is verstreken.
     """
 
-    geboortedatum_komt_niet_overeen = Referentiedata(
+    geboortedatum_komt_niet_overeen = OvereenkomstkoppelingdetailstatusReferentiedata(
         code="GEB",
         naam="Geboortedatum komt niet overeen",
         parent=Overeenkomstkoppelingstatus.afgewezen,
@@ -34,7 +38,7 @@ class Overeenkomstkoppelingdetailstatus(Referentiedatasoort):
     inschrijvingen niet overeenkomt.
     """
 
-    naamgegevens_komen_niet_overeen = Referentiedata(
+    naamgegevens_komen_niet_overeen = OvereenkomstkoppelingdetailstatusReferentiedata(
         code="NAA",
         naam="Naamgegevens komen niet overeen",
         parent=Overeenkomstkoppelingstatus.afgewezen,

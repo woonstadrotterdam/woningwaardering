@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ZaakstatussoortReferentiedata(Referentiedata):
+    pass
+
+
 class Zaakstatussoort(Referentiedatasoort):
-    aangemaakt = Referentiedata(
+    aangemaakt = ZaakstatussoortReferentiedata(
         code="AAN",
         naam="Aangemaakt",
     )
@@ -11,7 +15,7 @@ class Zaakstatussoort(Referentiedatasoort):
     De zaak is aangemaakt/geregistreerd maar nog niet toegewezen ter afhandeling
     """
 
-    afgerond = Referentiedata(
+    afgerond = ZaakstatussoortReferentiedata(
         code="AFG",
         naam="Afgerond",
     )
@@ -19,7 +23,7 @@ class Zaakstatussoort(Referentiedatasoort):
     De zaak is inhoudelijk afgerond, maar nog niet definitief gesloten
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = ZaakstatussoortReferentiedata(
         code="GEA",
         naam="Geannuleerd",
     )
@@ -27,7 +31,7 @@ class Zaakstatussoort(Referentiedatasoort):
     De afhandeling van de zaak geannuleerd
     """
 
-    gesloten = Referentiedata(
+    gesloten = ZaakstatussoortReferentiedata(
         code="GES",
         naam="Gesloten",
     )
@@ -35,7 +39,7 @@ class Zaakstatussoort(Referentiedatasoort):
     De zaak is afgerond en gesloten
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = ZaakstatussoortReferentiedata(
         code="INB",
         naam="In behandeling",
     )
@@ -44,7 +48,7 @@ class Zaakstatussoort(Referentiedatasoort):
     zijn nog geen stappen in de uitvoering gezet
     """
 
-    in_uitvoering = Referentiedata(
+    in_uitvoering = ZaakstatussoortReferentiedata(
         code="INU",
         naam="In uitvoering",
     )

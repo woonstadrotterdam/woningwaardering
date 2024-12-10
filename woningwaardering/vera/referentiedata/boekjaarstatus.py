@@ -2,23 +2,27 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BoekjaarstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Boekjaarstatus(Referentiedatasoort):
-    gesloten = Referentiedata(
+    gesloten = BoekjaarstatusReferentiedata(
         code="GES",
         naam="Gesloten",
     )
 
-    huidig = Referentiedata(
+    huidig = BoekjaarstatusReferentiedata(
         code="HUD",
         naam="Huidig",
     )
 
-    open = Referentiedata(
+    open = BoekjaarstatusReferentiedata(
         code="OPN",
         naam="Open",
     )
 
-    vorig = Referentiedata(
+    vorig = BoekjaarstatusReferentiedata(
         code="VRG",
         naam="Vorig",
     )

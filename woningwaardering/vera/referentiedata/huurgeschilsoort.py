@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class HuurgeschilsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Huurgeschilsoort(Referentiedatasoort):
-    bezwaarschrift = Referentiedata(
+    bezwaarschrift = HuurgeschilsoortReferentiedata(
         code="BEZ",
         naam="Bezwaarschrift",
     )
@@ -11,7 +15,7 @@ class Huurgeschilsoort(Referentiedatasoort):
     Huurgeschil met als aanleiding een (niet nader gespecificeerd) bezwaarschrift
     """
 
-    inkomen = Referentiedata(
+    inkomen = HuurgeschilsoortReferentiedata(
         code="INK",
         naam="Inkomen",
     )
@@ -19,7 +23,7 @@ class Huurgeschilsoort(Referentiedatasoort):
     Huurgeschil met als aanleiding een dispuut over het inkomen van de huurder
     """
 
-    onderhoud = Referentiedata(
+    onderhoud = HuurgeschilsoortReferentiedata(
         code="OND",
         naam="Onderhoud",
     )
@@ -28,7 +32,7 @@ class Huurgeschilsoort(Referentiedatasoort):
     over kosten die voortvloeien uit uitgevoerd onderhoud
     """
 
-    verzoekschrift = Referentiedata(
+    verzoekschrift = HuurgeschilsoortReferentiedata(
         code="VER",
         naam="Verzoekschrift",
     )
@@ -36,7 +40,7 @@ class Huurgeschilsoort(Referentiedatasoort):
     Huurgeschil met als aanleiding een (niet nader gespecificeerd) verzoekschrift
     """
 
-    woningwaardering = Referentiedata(
+    woningwaardering = HuurgeschilsoortReferentiedata(
         code="WON",
         naam="Woningwaardering",
     )

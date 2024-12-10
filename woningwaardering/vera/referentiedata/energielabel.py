@@ -2,58 +2,62 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EnergielabelReferentiedata(Referentiedata):
+    pass
+
+
 class Energielabel(Referentiedatasoort):
-    a = Referentiedata(
+    a = EnergielabelReferentiedata(
         code="A",
         naam="A",
     )
 
-    ap = Referentiedata(
+    ap = EnergielabelReferentiedata(
         code="AP",
         naam="A+",
     )
 
-    ap3 = Referentiedata(
+    ap3 = EnergielabelReferentiedata(
         code="AP3",
         naam="A+++",
     )
 
-    ap4 = Referentiedata(
+    ap4 = EnergielabelReferentiedata(
         code="AP4",
         naam="A++++",
     )
 
-    app = Referentiedata(
+    app = EnergielabelReferentiedata(
         code="APP",
         naam="A++",
     )
 
-    b = Referentiedata(
+    b = EnergielabelReferentiedata(
         code="B",
         naam="B",
     )
 
-    c = Referentiedata(
+    c = EnergielabelReferentiedata(
         code="C",
         naam="C",
     )
 
-    d = Referentiedata(
+    d = EnergielabelReferentiedata(
         code="D",
         naam="D",
     )
 
-    e = Referentiedata(
+    e = EnergielabelReferentiedata(
         code="E",
         naam="E",
     )
 
-    f = Referentiedata(
+    f = EnergielabelReferentiedata(
         code="F",
         naam="F",
     )
 
-    g = Referentiedata(
+    g = EnergielabelReferentiedata(
         code="G",
         naam="G",
     )

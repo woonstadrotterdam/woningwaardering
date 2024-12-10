@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class GebeurtenissoortReferentiedata(Referentiedata):
+    pass
+
+
 class Gebeurtenissoort(Referentiedatasoort):
-    begin_situatiepunten = Referentiedata(
+    begin_situatiepunten = GebeurtenissoortReferentiedata(
         code="BSI",
         naam="Begin situatiepunten",
     )
@@ -11,7 +15,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Begin situatiepunten
     """
 
-    begin_startpunten = Referentiedata(
+    begin_startpunten = GebeurtenissoortReferentiedata(
         code="BST",
         naam="Begin startpunten",
     )
@@ -19,7 +23,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Begin startpunten
     """
 
-    gewijzigde_inschrijving = Referentiedata(
+    gewijzigde_inschrijving = GebeurtenissoortReferentiedata(
         code="GEW",
         naam="Gewijzigde inschrijving",
     )
@@ -27,7 +31,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Gewijzigde inschrijving
     """
 
-    gewijzigde_startpunten = Referentiedata(
+    gewijzigde_startpunten = GebeurtenissoortReferentiedata(
         code="GSA",
         naam="Gewijzigde startpunten",
     )
@@ -35,7 +39,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Gewijzigde startpunten
     """
 
-    gewijzigde_situatiepunten = Referentiedata(
+    gewijzigde_situatiepunten = GebeurtenissoortReferentiedata(
         code="GSI",
         naam="Gewijzigde situatiepunten",
     )
@@ -43,7 +47,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Gewijzigde situatiepunten
     """
 
-    intrekken_no_show = Referentiedata(
+    intrekken_no_show = GebeurtenissoortReferentiedata(
         code="INS",
         naam="Intrekken no-show",
     )
@@ -51,7 +55,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Intrekken gebeurtenis niet aanwezig op bevestigde bezichtiging (No-show)
     """
 
-    intrekken_reactie = Referentiedata(
+    intrekken_reactie = GebeurtenissoortReferentiedata(
         code="IRE",
         naam="Intrekken reactie",
     )
@@ -59,7 +63,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Intrekken reactie met puntenopbouw
     """
 
-    intrekken_toewijzing = Referentiedata(
+    intrekken_toewijzing = GebeurtenissoortReferentiedata(
         code="ITO",
         naam="Intrekken toewijzing",
     )
@@ -67,7 +71,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Intrekken toewijzing van de eenheid.
     """
 
-    intrekken_weigering_als_hoogste_acceptant = Referentiedata(
+    intrekken_weigering_als_hoogste_acceptant = GebeurtenissoortReferentiedata(
         code="IWH",
         naam="Intrekken weigering als hoogste acceptant",
     )
@@ -75,7 +79,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Intrekken weigering als hoogste acceptant
     """
 
-    intrekken_weigering_niet_als_hoogste_acceptant = Referentiedata(
+    intrekken_weigering_niet_als_hoogste_acceptant = GebeurtenissoortReferentiedata(
         code="IWN",
         naam="Intrekken weigering niet als hoogste acceptant",
     )
@@ -83,7 +87,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Intrekken weigering niet als hoogste acceptant
     """
 
-    nieuwe_inschrijving = Referentiedata(
+    nieuwe_inschrijving = GebeurtenissoortReferentiedata(
         code="NIE",
         naam="Nieuwe inschrijving",
     )
@@ -91,7 +95,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Nieuwe inschrijving
     """
 
-    no_show = Referentiedata(
+    no_show = GebeurtenissoortReferentiedata(
         code="NOS",
         naam="No-show",
     )
@@ -99,7 +103,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Niet aanwezig op bevestigde bezichtiging
     """
 
-    reactie = Referentiedata(
+    reactie = GebeurtenissoortReferentiedata(
         code="REA",
         naam="Reactie",
     )
@@ -107,7 +111,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Reactie met puntenopbouw
     """
 
-    toewijzing = Referentiedata(
+    toewijzing = GebeurtenissoortReferentiedata(
         code="TOE",
         naam="Toewijzing",
     )
@@ -115,7 +119,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Toewijzing
     """
 
-    weigering_als_hoogste_acceptant = Referentiedata(
+    weigering_als_hoogste_acceptant = GebeurtenissoortReferentiedata(
         code="WEI",
         naam="Weigering als hoogste acceptant",
     )
@@ -123,7 +127,7 @@ class Gebeurtenissoort(Referentiedatasoort):
     Weigering als hoogste acceptant
     """
 
-    weigering_niet_als_hoogste_acceptant = Referentiedata(
+    weigering_niet_als_hoogste_acceptant = GebeurtenissoortReferentiedata(
         code="WEN",
         naam="Weigering niet als hoogste acceptant",
     )

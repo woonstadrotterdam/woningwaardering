@@ -19,7 +19,6 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEnergieprestatie,
     EenhedenRuimte,
     EenhedenWoonplaats,
-    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -33,6 +32,8 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
+
+from ..vera.referentiedata.ruimtesoort import RuimtesoortReferentiedata
 
 index: int = 0  # nodig voor mypy voor de global index voor de tabel
 
@@ -674,7 +675,7 @@ def _classificeer_ruimte_dec(
 
 
 # @_classificeer_ruimte_dec
-def classificeer_ruimte(ruimte: EenhedenRuimte) -> Referentiedata | None:
+def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
 
@@ -682,7 +683,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Referentiedata | None:
         ruimte (EenhedenRuimte): De ruimte die geclassificeerd moet worden.
 
     Returns:
-        Referentiedata | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
+        RuimtesoortReferentiedata | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
             Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
     """
 

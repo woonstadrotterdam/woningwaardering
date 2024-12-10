@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ProjectbudgetregelstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Projectbudgetregelstatus(Referentiedatasoort):
-    aangevraagd = Referentiedata(
+    aangevraagd = ProjectbudgetregelstatusReferentiedata(
         code="AAN",
         naam="Aangevraagd",
     )
@@ -12,7 +16,7 @@ class Projectbudgetregelstatus(Referentiedatasoort):
     prognosebedrag
     """
 
-    bijgesteld = Referentiedata(
+    bijgesteld = ProjectbudgetregelstatusReferentiedata(
         code="BIJ",
         naam="Bijgesteld",
     )
@@ -21,7 +25,7 @@ class Projectbudgetregelstatus(Referentiedatasoort):
     prognosebedrag
     """
 
-    goedgekeurd = Referentiedata(
+    goedgekeurd = ProjectbudgetregelstatusReferentiedata(
         code="GOE",
         naam="Goedgekeurd",
     )
@@ -30,7 +34,7 @@ class Projectbudgetregelstatus(Referentiedatasoort):
     prognosebedrag
     """
 
-    vrijgegeven = Referentiedata(
+    vrijgegeven = ProjectbudgetregelstatusReferentiedata(
         code="VRI",
         naam="Vrijgegeven",
     )

@@ -2,23 +2,27 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class DebiteurstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Debiteurstatus(Referentiedatasoort):
-    actief = Referentiedata(
+    actief = DebiteurstatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
 
-    alleen_voor_betalen = Referentiedata(
+    alleen_voor_betalen = DebiteurstatusReferentiedata(
         code="BET",
         naam="Alleen voor betalen",
     )
 
-    geblokkeerd = Referentiedata(
+    geblokkeerd = DebiteurstatusReferentiedata(
         code="GEB",
         naam="Geblokkeerd",
     )
 
-    voorlopig = Referentiedata(
+    voorlopig = DebiteurstatusReferentiedata(
         code="VRL",
         naam="Voorlopig",
     )

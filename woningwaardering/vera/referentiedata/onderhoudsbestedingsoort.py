@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class OnderhoudsbestedingsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Onderhoudsbestedingsoort(Referentiedatasoort):
-    materiaal = Referentiedata(
+    materiaal = OnderhoudsbestedingsoortReferentiedata(
         code="MAT",
         naam="Materiaal",
     )
@@ -12,7 +16,7 @@ class Onderhoudsbestedingsoort(Referentiedatasoort):
     verbruikte materiaal door te belasten
     """
 
-    onderbroken_tijd = Referentiedata(
+    onderbroken_tijd = OnderhoudsbestedingsoortReferentiedata(
         code="OND",
         naam="Onderbroken tijd",
     )
@@ -21,7 +25,7 @@ class Onderhoudsbestedingsoort(Referentiedatasoort):
     voor het ophalen van materiaal) kan deze bestedingssoort gebruikt worden.
     """
 
-    overige_kosten = Referentiedata(
+    overige_kosten = OnderhoudsbestedingsoortReferentiedata(
         code="OVE",
         naam="Overige kosten",
     )
@@ -29,7 +33,7 @@ class Onderhoudsbestedingsoort(Referentiedatasoort):
     Overige bestedingen die niet onder één van de andere bestedingssoorten vallen
     """
 
-    pakbonkosten = Referentiedata(
+    pakbonkosten = OnderhoudsbestedingsoortReferentiedata(
         code="PAK",
         naam="Pakbonkosten",
     )
@@ -37,7 +41,7 @@ class Onderhoudsbestedingsoort(Referentiedatasoort):
     Pakbonkosten
     """
 
-    reistijd = Referentiedata(
+    reistijd = OnderhoudsbestedingsoortReferentiedata(
         code="REI",
         naam="Reistijd",
     )
@@ -45,7 +49,7 @@ class Onderhoudsbestedingsoort(Referentiedatasoort):
     Reistijd van de uitvoerende
     """
 
-    uitwerktijd = Referentiedata(
+    uitwerktijd = OnderhoudsbestedingsoortReferentiedata(
         code="UIT",
         naam="Uitwerktijd",
     )
@@ -55,7 +59,7 @@ class Onderhoudsbestedingsoort(Referentiedatasoort):
     de uitvoerende beschikbaar is voor een vervolgtaak
     """
 
-    vaste_taakprijs = Referentiedata(
+    vaste_taakprijs = OnderhoudsbestedingsoortReferentiedata(
         code="VAS",
         naam="Vaste taakprijs",
     )
@@ -65,7 +69,7 @@ class Onderhoudsbestedingsoort(Referentiedatasoort):
     deze soort om de verschillende taakprijzen op te voeren.
     """
 
-    werktijd = Referentiedata(
+    werktijd = OnderhoudsbestedingsoortReferentiedata(
         code="WER",
         naam="Werktijd",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EnergieprestatiesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Energieprestatiesoort(Referentiedatasoort):
-    compactheid = Referentiedata(
+    compactheid = EnergieprestatiesoortReferentiedata(
         code="COM",
         naam="Compactheid",
     )
@@ -15,7 +19,7 @@ class Energieprestatiesoort(Referentiedatasoort):
     ls-gebouwen/standaard-streefwaarden-woningisolatie)
     """
 
-    energie_index = Referentiedata(
+    energie_index = EnergieprestatiesoortReferentiedata(
         code="EI",
         naam="Energie-index",
     )
@@ -26,7 +30,7 @@ class Energieprestatiesoort(Referentiedatasoort):
     afgeleid op basis van een tabel met bandbreedtes voor de energie-index.
     """
 
-    primair_energieverbruik_woningbouw = Referentiedata(
+    primair_energieverbruik_woningbouw = EnergieprestatiesoortReferentiedata(
         code="EP2",
         naam="Primair energieverbruik - woningbouw",
     )
@@ -41,7 +45,7 @@ class Energieprestatiesoort(Referentiedatasoort):
     (EPV).
     """
 
-    opgewekte_duurzame_elektriciteit = Referentiedata(
+    opgewekte_duurzame_elektriciteit = EnergieprestatiesoortReferentiedata(
         code="OPG",
         naam="Opgewekte duurzame elektriciteit",
     )
@@ -53,7 +57,7 @@ class Energieprestatiesoort(Referentiedatasoort):
     energieprestatievergoeding (EPV).
     """
 
-    voorlopig_energielabel = Referentiedata(
+    voorlopig_energielabel = EnergieprestatiesoortReferentiedata(
         code="VEL",
         naam="Voorlopig energielabel",
     )
@@ -64,7 +68,7 @@ class Energieprestatiesoort(Referentiedatasoort):
     horen.
     """
 
-    warmtebehoefte_ruimteverwarming = Referentiedata(
+    warmtebehoefte_ruimteverwarming = EnergieprestatiesoortReferentiedata(
         code="WAR",
         naam="Warmtebehoefte ruimteverwarming",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class DagdeelReferentiedata(Referentiedata):
+    pass
+
+
 class Dagdeel(Referentiedatasoort):
-    avond = Referentiedata(
+    avond = DagdeelReferentiedata(
         code="AVO",
         naam="Avond",
     )
@@ -11,7 +15,7 @@ class Dagdeel(Referentiedatasoort):
     Tussen 18 en 24 uur.
     """
 
-    middag = Referentiedata(
+    middag = DagdeelReferentiedata(
         code="MID",
         naam="Middag",
     )
@@ -19,7 +23,7 @@ class Dagdeel(Referentiedatasoort):
     Tussen 12 en 18 uur.
     """
 
-    ochtend = Referentiedata(
+    ochtend = DagdeelReferentiedata(
         code="OCH",
         naam="Ochtend",
     )

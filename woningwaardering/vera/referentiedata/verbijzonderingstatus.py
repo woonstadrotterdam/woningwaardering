@@ -2,18 +2,22 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class VerbijzonderingstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Verbijzonderingstatus(Referentiedatasoort):
-    actief = Referentiedata(
+    actief = VerbijzonderingstatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
 
-    geblokkeerd = Referentiedata(
+    geblokkeerd = VerbijzonderingstatusReferentiedata(
         code="BLK",
         naam="Geblokkeerd",
     )
 
-    historisch = Referentiedata(
+    historisch = VerbijzonderingstatusReferentiedata(
         code="HIS",
         naam="Historisch",
     )

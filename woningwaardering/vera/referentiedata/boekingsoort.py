@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BoekingsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Boekingsoort(Referentiedatasoort):
-    belastingen_en_premies_sv = Referentiedata(
+    belastingen_en_premies_sv = BoekingsoortReferentiedata(
         code="BEP",
         naam="Belastingen en premies SV",
     )
@@ -13,7 +17,7 @@ class Boekingsoort(Referentiedatasoort):
     onderhoudsfacturen.
     """
 
-    budget = Referentiedata(
+    budget = BoekingsoortReferentiedata(
         code="BUD",
         naam="Budget",
     )
@@ -21,7 +25,7 @@ class Boekingsoort(Referentiedatasoort):
     Boeking voor opvoer of wijziging van een budget of budgetregel
     """
 
-    memoriaal = Referentiedata(
+    memoriaal = BoekingsoortReferentiedata(
         code="MEM",
         naam="Memoriaal",
     )
@@ -30,7 +34,7 @@ class Boekingsoort(Referentiedatasoort):
     boekingen, meestal van soort VOR.
     """
 
-    onderhoud = Referentiedata(
+    onderhoud = BoekingsoortReferentiedata(
         code="OHD",
         naam="Onderhoud",
     )
@@ -38,7 +42,7 @@ class Boekingsoort(Referentiedatasoort):
     Boeking ten behoeve van of voortkomend uit de onderhoudsadministratie.
     """
 
-    ontvangst = Referentiedata(
+    ontvangst = BoekingsoortReferentiedata(
         code="ONT",
         naam="Ontvangst",
     )
@@ -48,7 +52,7 @@ class Boekingsoort(Referentiedatasoort):
     eindafrekening.
     """
 
-    projecten = Referentiedata(
+    projecten = BoekingsoortReferentiedata(
         code="PRJ",
         naam="Projecten",
     )
@@ -56,7 +60,7 @@ class Boekingsoort(Referentiedatasoort):
     Boeking ten behoeve van of voortkomend uit de projectadministratie.
     """
 
-    salaris = Referentiedata(
+    salaris = BoekingsoortReferentiedata(
         code="SAL",
         naam="Salaris",
     )
@@ -64,7 +68,7 @@ class Boekingsoort(Referentiedatasoort):
     Boeking ten behoeve van of voortkomend uit de salarisadministratie.
     """
 
-    servicekosten = Referentiedata(
+    servicekosten = BoekingsoortReferentiedata(
         code="SKS",
         naam="Servicekosten",
     )
@@ -72,7 +76,7 @@ class Boekingsoort(Referentiedatasoort):
     Boeking ten behoeve van of voortkomend uit de servicekostenadministratie.
     """
 
-    uitbetaling = Referentiedata(
+    uitbetaling = BoekingsoortReferentiedata(
         code="UIT",
         naam="Uitbetaling",
     )
@@ -81,7 +85,7 @@ class Boekingsoort(Referentiedatasoort):
     boekingen, zoals een vordering, borg of eindafrekening.
     """
 
-    vordering = Referentiedata(
+    vordering = BoekingsoortReferentiedata(
         code="VOR",
         naam="Vordering",
     )

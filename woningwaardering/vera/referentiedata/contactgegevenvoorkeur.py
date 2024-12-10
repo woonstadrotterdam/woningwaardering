@@ -2,13 +2,17 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ContactgegevenvoorkeurReferentiedata(Referentiedata):
+    pass
+
+
 class Contactgegevenvoorkeur(Referentiedatasoort):
-    eerste = Referentiedata(
+    eerste = ContactgegevenvoorkeurReferentiedata(
         code="EER",
         naam="Eerste",
     )
 
-    tweede = Referentiedata(
+    tweede = ContactgegevenvoorkeurReferentiedata(
         code="TWE",
         naam="Tweede",
     )

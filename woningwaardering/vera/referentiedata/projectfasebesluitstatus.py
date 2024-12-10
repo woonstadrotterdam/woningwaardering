@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ProjectfasebesluitstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Projectfasebesluitstatus(Referentiedatasoort):
-    afgewezen = Referentiedata(
+    afgewezen = ProjectfasebesluitstatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -11,7 +15,7 @@ class Projectfasebesluitstatus(Referentiedatasoort):
     Projectfasebesluit (-versie) is afgewezen
     """
 
-    aangeboden_ter_goedkeuring = Referentiedata(
+    aangeboden_ter_goedkeuring = ProjectfasebesluitstatusReferentiedata(
         code="ATG",
         naam="Aangeboden ter goedkeuring",
     )
@@ -19,7 +23,7 @@ class Projectfasebesluitstatus(Referentiedatasoort):
     Projectfasebesluit wacht op goedkeuring, is in behandeling
     """
 
-    concept = Referentiedata(
+    concept = ProjectfasebesluitstatusReferentiedata(
         code="CON",
         naam="Concept",
     )
@@ -27,7 +31,7 @@ class Projectfasebesluitstatus(Referentiedatasoort):
     Projectfasebesluit(-versie) in concept
     """
 
-    definitief = Referentiedata(
+    definitief = ProjectfasebesluitstatusReferentiedata(
         code="DEF",
         naam="Definitief",
     )
@@ -35,7 +39,7 @@ class Projectfasebesluitstatus(Referentiedatasoort):
     Projectfasebesluit definitief maar nog niet ter goedkeuring aangeboden
     """
 
-    goedgekeurd = Referentiedata(
+    goedgekeurd = ProjectfasebesluitstatusReferentiedata(
         code="GOE",
         naam="Goedgekeurd",
     )

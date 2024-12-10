@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AfrekenwijzesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Afrekenwijzesoort(Referentiedatasoort):
-    afkoop = Referentiedata(
+    afkoop = AfrekenwijzesoortReferentiedata(
         code="AFK",
         naam="Afkoop",
     )
@@ -12,7 +16,7 @@ class Afrekenwijzesoort(Referentiedatasoort):
     totaalniveau.
     """
 
-    garantie = Referentiedata(
+    garantie = AfrekenwijzesoortReferentiedata(
         code="GAR",
         naam="Garantie",
     )
@@ -21,7 +25,7 @@ class Afrekenwijzesoort(Referentiedatasoort):
     vallen
     """
 
-    nacalculatie_eenheidsprijzen = Referentiedata(
+    nacalculatie_eenheidsprijzen = AfrekenwijzesoortReferentiedata(
         code="NCE",
         naam="Nacalculatie eenheidsprijzen",
     )
@@ -30,7 +34,7 @@ class Afrekenwijzesoort(Referentiedatasoort):
     Bij bestedingsoort kan hier gebruik gemaakt worden van de soort Vaste taakprijs
     """
 
-    nacalculatie_regie = Referentiedata(
+    nacalculatie_regie = AfrekenwijzesoortReferentiedata(
         code="NCR",
         naam="Nacalculatie regie",
     )
@@ -39,7 +43,7 @@ class Afrekenwijzesoort(Referentiedatasoort):
     (arbeidstijd, reistijd, materiaal)
     """
 
-    vaste_prijs = Referentiedata(
+    vaste_prijs = AfrekenwijzesoortReferentiedata(
         code="VPR",
         naam="Vaste prijs",
     )

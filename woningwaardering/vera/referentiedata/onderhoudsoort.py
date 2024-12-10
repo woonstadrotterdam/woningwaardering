@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class OnderhoudsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Onderhoudsoort(Referentiedatasoort):
-    inspectie = Referentiedata(
+    inspectie = OnderhoudsoortReferentiedata(
         code="INS",
         naam="Inspectie",
     )
@@ -14,7 +18,7 @@ class Onderhoudsoort(Referentiedatasoort):
     naar aanleiding van een verhuurmutatie.
     """
 
-    mutatie = Referentiedata(
+    mutatie = OnderhoudsoortReferentiedata(
         code="MUT",
         naam="Mutatie",
     )
@@ -23,7 +27,7 @@ class Onderhoudsoort(Referentiedatasoort):
     verhuurmutatie.
     """
 
-    planmatig = Referentiedata(
+    planmatig = OnderhoudsoortReferentiedata(
         code="PLN",
         naam="Planmatig",
     )
@@ -32,7 +36,7 @@ class Onderhoudsoort(Referentiedatasoort):
     goedgekeurd MJO-budget
     """
 
-    projectmatig = Referentiedata(
+    projectmatig = OnderhoudsoortReferentiedata(
         code="PRJ",
         naam="Projectmatig",
     )
@@ -41,7 +45,7 @@ class Onderhoudsoort(Referentiedatasoort):
     investeringsproject zoals verduurzaming, renovatie, etc.
     """
 
-    reparatie = Referentiedata(
+    reparatie = OnderhoudsoortReferentiedata(
         code="REP",
         naam="Reparatie",
     )
@@ -50,7 +54,7 @@ class Onderhoudsoort(Referentiedatasoort):
     geconstateerd defect
     """
 
-    wmo_aanpassing = Referentiedata(
+    wmo_aanpassing = OnderhoudsoortReferentiedata(
         code="WMO",
         naam="WMO Aanpassing",
     )
@@ -59,7 +63,7 @@ class Onderhoudsoort(Referentiedatasoort):
     invaliditeit aanbrengen van WMO-aanpassing)
     """
 
-    woningverbetering = Referentiedata(
+    woningverbetering = OnderhoudsoortReferentiedata(
         code="WOV",
         naam="Woningverbetering",
     )

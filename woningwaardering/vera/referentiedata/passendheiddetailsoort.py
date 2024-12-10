@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PassendheiddetailsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Passendheiddetailsoort(Referentiedatasoort):
-    bijzondere_gezinssituatie = Referentiedata(
+    bijzondere_gezinssituatie = PassendheiddetailsoortReferentiedata(
         code="BIJ",
         naam="Bijzondere gezinssituatie",
     )
@@ -13,7 +17,7 @@ class Passendheiddetailsoort(Referentiedatasoort):
     een zeer groot gezin of een bijzondere gezinssamenstelling.
     """
 
-    herstructurering = Referentiedata(
+    herstructurering = PassendheiddetailsoortReferentiedata(
         code="HER",
         naam="Herstructurering",
     )
@@ -21,7 +25,7 @@ class Passendheiddetailsoort(Referentiedatasoort):
     Niet-passende toewijzing, noodzakelijk geacht i.v.m. herstructurering
     """
 
-    herhuisvesting = Referentiedata(
+    herhuisvesting = PassendheiddetailsoortReferentiedata(
         code="HHV",
         naam="Herhuisvesting",
     )

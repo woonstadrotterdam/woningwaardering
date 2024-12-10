@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class OnderhoudsverzoekstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Onderhoudsverzoekstatus(Referentiedatasoort):
-    afgehandeld = Referentiedata(
+    afgehandeld = OnderhoudsverzoekstatusReferentiedata(
         code="AFG",
         naam="Afgehandeld",
     )
@@ -11,7 +15,7 @@ class Onderhoudsverzoekstatus(Referentiedatasoort):
     Het onderhoudsverzoek is volledig afgehandeld
     """
 
-    ter_beoordeling = Referentiedata(
+    ter_beoordeling = OnderhoudsverzoekstatusReferentiedata(
         code="BEO",
         naam="Ter beoordeling",
     )
@@ -21,7 +25,7 @@ class Onderhoudsverzoekstatus(Referentiedatasoort):
     Onderhouden eenheden)
     """
 
-    financieel_afwikkelen = Referentiedata(
+    financieel_afwikkelen = OnderhoudsverzoekstatusReferentiedata(
         code="FIN",
         naam="Financieel afwikkelen",
     )
@@ -30,7 +34,7 @@ class Onderhoudsverzoekstatus(Referentiedatasoort):
     in rekening gebracht worden bij huurders of derden (bijv. verzekering)
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = OnderhoudsverzoekstatusReferentiedata(
         code="GEA",
         naam="Geannuleerd",
     )
@@ -39,7 +43,7 @@ class Onderhoudsverzoekstatus(Referentiedatasoort):
     uitgevoerd.
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = OnderhoudsverzoekstatusReferentiedata(
         code="INB",
         naam="In behandeling",
     )
@@ -48,7 +52,7 @@ class Onderhoudsverzoekstatus(Referentiedatasoort):
     afgerond
     """
 
-    geregistreerd = Referentiedata(
+    geregistreerd = OnderhoudsverzoekstatusReferentiedata(
         code="REG",
         naam="Geregistreerd",
     )
@@ -56,7 +60,7 @@ class Onderhoudsverzoekstatus(Referentiedatasoort):
     Het onderzhoudsverzoek is geregistreerd maar nog niet in behandeling genomen.
     """
 
-    technisch_gereed = Referentiedata(
+    technisch_gereed = OnderhoudsverzoekstatusReferentiedata(
         code="TEC",
         naam="Technisch gereed",
     )

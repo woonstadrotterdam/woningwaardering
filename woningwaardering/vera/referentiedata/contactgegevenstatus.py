@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ContactgegevenstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Contactgegevenstatus(Referentiedatasoort):
-    aangemaakt = Referentiedata(
+    aangemaakt = ContactgegevenstatusReferentiedata(
         code="AAN",
         naam="Aangemaakt",
     )
@@ -11,7 +15,7 @@ class Contactgegevenstatus(Referentiedatasoort):
     Het contactgegeven is aangemaakt.
     """
 
-    gevalideerd = Referentiedata(
+    gevalideerd = ContactgegevenstatusReferentiedata(
         code="GEV",
         naam="Gevalideerd",
     )
@@ -19,7 +23,7 @@ class Contactgegevenstatus(Referentiedatasoort):
     Het contactgeggeven is gevalideerd via een mail, sms etc.
     """
 
-    ongeldig = Referentiedata(
+    ongeldig = ContactgegevenstatusReferentiedata(
         code="ONG",
         naam="Ongeldig",
     )

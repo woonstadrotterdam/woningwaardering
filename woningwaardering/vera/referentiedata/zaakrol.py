@@ -2,13 +2,17 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ZaakrolReferentiedata(Referentiedata):
+    pass
+
+
 class Zaakrol(Referentiedatasoort):
-    adviseur = Referentiedata(
+    adviseur = ZaakrolReferentiedata(
         code="ADV",
         naam="Adviseur",
     )
 
-    behandelaar = Referentiedata(
+    behandelaar = ZaakrolReferentiedata(
         code="BEH",
         naam="Behandelaar",
     )
@@ -16,7 +20,7 @@ class Zaakrol(Referentiedatasoort):
     De medewerker die de zaak in behandeling heeft
     """
 
-    beklaagde = Referentiedata(
+    beklaagde = ZaakrolReferentiedata(
         code="BEK",
         naam="Beklaagde",
     )
@@ -24,27 +28,27 @@ class Zaakrol(Referentiedatasoort):
     De betrokkene binnen de zaak waarover geklaagd wordt bij een (sociale) klacht
     """
 
-    belanghebbende = Referentiedata(
+    belanghebbende = ZaakrolReferentiedata(
         code="BEL",
         naam="Belanghebbende",
     )
 
-    beslisser = Referentiedata(
+    beslisser = ZaakrolReferentiedata(
         code="BES",
         naam="Beslisser",
     )
 
-    initiator = Referentiedata(
+    initiator = ZaakrolReferentiedata(
         code="INI",
         naam="Initiator",
     )
 
-    klantcontacter = Referentiedata(
+    klantcontacter = ZaakrolReferentiedata(
         code="KLA",
         naam="Klantcontacter",
     )
 
-    klager = Referentiedata(
+    klager = ZaakrolReferentiedata(
         code="KLG",
         naam="Klager",
     )
@@ -52,7 +56,7 @@ class Zaakrol(Referentiedatasoort):
     De betrokkene binnen de zaak die een klacht heeft ingediend
     """
 
-    melder = Referentiedata(
+    melder = ZaakrolReferentiedata(
         code="MEL",
         naam="Melder",
     )
@@ -60,7 +64,7 @@ class Zaakrol(Referentiedatasoort):
     De melder van de zaak
     """
 
-    overige_betrokkene = Referentiedata(
+    overige_betrokkene = ZaakrolReferentiedata(
         code="OVE",
         naam="Overige betrokkene",
     )
@@ -69,7 +73,7 @@ class Zaakrol(Referentiedatasoort):
     gemeente, sociale dienst, etc.
     """
 
-    zaakcoordinator = Referentiedata(
+    zaakcoordinator = ZaakrolReferentiedata(
         code="ZAA",
         naam="Zaakcoördinator",
     )

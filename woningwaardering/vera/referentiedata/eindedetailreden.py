@@ -1,10 +1,16 @@
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.eindereden import Eindereden
+from woningwaardering.vera.referentiedata.eindereden import (
+    Eindereden,
+)
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EindedetailredenReferentiedata(Referentiedata):
+    pass
+
+
 class Eindedetailreden(Referentiedatasoort):
-    faillissement = Referentiedata(
+    faillissement = EindedetailredenReferentiedata(
         code="FAI",
         naam="Faillissement",
         parent=Eindereden.ontbinding,
@@ -13,7 +19,7 @@ class Eindedetailreden(Referentiedatasoort):
     Een overeenkomst is beëindigd wegens faillissement
     """
 
-    noorderzon = Referentiedata(
+    noorderzon = EindedetailredenReferentiedata(
         code="NOO",
         naam="Noorderzon",
         parent=Eindereden.ontbinding,
@@ -23,7 +29,7 @@ class Eindedetailreden(Referentiedatasoort):
     vertrokken
     """
 
-    ontruiming = Referentiedata(
+    ontruiming = EindedetailredenReferentiedata(
         code="ONT",
         naam="Ontruiming",
         parent=Eindereden.ontbinding,
@@ -32,7 +38,7 @@ class Eindedetailreden(Referentiedatasoort):
     Een overeenkomst is beëindigd omdat de woning is ontruimd
     """
 
-    overlijden = Referentiedata(
+    overlijden = EindedetailredenReferentiedata(
         code="OVE",
         naam="Overlijden",
         parent=Eindereden.ontbinding,
@@ -41,7 +47,7 @@ class Eindedetailreden(Referentiedatasoort):
     Een overeenkomst is beëindigd wegens overlijden
     """
 
-    regulier = Referentiedata(
+    regulier = EindedetailredenReferentiedata(
         code="REG",
         naam="Regulier",
         parent=Eindereden.opzegging,
@@ -51,7 +57,7 @@ class Eindedetailreden(Referentiedatasoort):
     reden is niet bekend.
     """
 
-    terugkoop = Referentiedata(
+    terugkoop = EindedetailredenReferentiedata(
         code="TER",
         naam="Terugkoop",
         parent=Eindereden.opzegging,
@@ -60,7 +66,7 @@ class Eindedetailreden(Referentiedatasoort):
     Een overeenkomst is beëindigd wegens terugkoop
     """
 
-    verkoop = Referentiedata(
+    verkoop = EindedetailredenReferentiedata(
         code="VER",
         naam="Verkoop",
         parent=Eindereden.opzegging,
@@ -69,7 +75,7 @@ class Eindedetailreden(Referentiedatasoort):
     Een overeenkomst is beëindigd wegens verkoop
     """
 
-    wijziging_tenaamstelling = Referentiedata(
+    wijziging_tenaamstelling = EindedetailredenReferentiedata(
         code="WIJ",
         naam="Wijziging tenaamstelling",
         parent=Eindereden.opzegging,
@@ -79,7 +85,7 @@ class Eindedetailreden(Referentiedatasoort):
     door een nieuwe overeenkomst)
     """
 
-    woningruil = Referentiedata(
+    woningruil = EindedetailredenReferentiedata(
         code="WON",
         naam="Woningruil",
         parent=Eindereden.opzegging,

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ProjectbudgetregelsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Projectbudgetregelsoort(Referentiedatasoort):
-    budget = Referentiedata(
+    budget = ProjectbudgetregelsoortReferentiedata(
         code="BUD",
         naam="Budget",
     )
@@ -11,7 +15,7 @@ class Projectbudgetregelsoort(Referentiedatasoort):
     Projectbudgetregel betreft een budgetbedrag
     """
 
-    prognose = Referentiedata(
+    prognose = ProjectbudgetregelsoortReferentiedata(
         code="PRO",
         naam="Prognose",
     )

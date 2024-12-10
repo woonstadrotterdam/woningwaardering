@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EenheidstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Eenheidstatus(Referentiedatasoort):
-    administratief = Referentiedata(
+    administratief = EenheidstatusReferentiedata(
         code="ADM",
         naam="Administratief",
     )
@@ -13,7 +17,7 @@ class Eenheidstatus(Referentiedatasoort):
     corporatie
     """
 
-    leegstand = Referentiedata(
+    leegstand = EenheidstatusReferentiedata(
         code="LEE",
         naam="Leegstand",
     )
@@ -23,7 +27,7 @@ class Eenheidstatus(Referentiedatasoort):
     gereed is voor verhuur
     """
 
-    in_ontwikkeling = Referentiedata(
+    in_ontwikkeling = EenheidstatusReferentiedata(
         code="ONT",
         naam="In ontwikkeling",
     )
@@ -33,7 +37,7 @@ class Eenheidstatus(Referentiedatasoort):
     ontwikkelingsproces de eenheid zich bevindt
     """
 
-    uit_exploitatie = Referentiedata(
+    uit_exploitatie = EenheidstatusReferentiedata(
         code="UIT",
         naam="Uit exploitatie",
     )
@@ -43,7 +47,7 @@ class Eenheidstatus(Referentiedatasoort):
     exploitatie is.
     """
 
-    verhuurd = Referentiedata(
+    verhuurd = EenheidstatusReferentiedata(
         code="VEH",
         naam="Verhuurd",
     )

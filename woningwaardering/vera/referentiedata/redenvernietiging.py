@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class RedenvernietigingReferentiedata(Referentiedata):
+    pass
+
+
 class Redenvernietiging(Referentiedatasoort):
-    bedreiging = Referentiedata(
+    bedreiging = RedenvernietigingReferentiedata(
         code="DRE",
         naam="Bedreiging",
     )
@@ -11,7 +15,7 @@ class Redenvernietiging(Referentiedatasoort):
     De overeenkomst is nietig aangezien deze tot stand is gekomen onder bedreiging.
     """
 
-    bedrog = Referentiedata(
+    bedrog = RedenvernietigingReferentiedata(
         code="DRO",
         naam="Bedrog",
     )
@@ -19,7 +23,7 @@ class Redenvernietiging(Referentiedatasoort):
     De overeenkomst is nietig aangezien deze tot stand is gekomen  door bedrog.
     """
 
-    dwaling = Referentiedata(
+    dwaling = RedenvernietigingReferentiedata(
         code="DWA",
         naam="Dwaling",
     )
@@ -28,7 +32,7 @@ class Redenvernietiging(Referentiedatasoort):
     dwaling.
     """
 
-    misbruik = Referentiedata(
+    misbruik = RedenvernietigingReferentiedata(
         code="MIS",
         naam="Misbruik",
     )

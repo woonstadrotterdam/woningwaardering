@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PandsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Pandsoort(Referentiedatasoort):
-    eengezinswoning = Referentiedata(
+    eengezinswoning = PandsoortReferentiedata(
         code="EGW",
         naam="Eengezinswoning",
     )
@@ -12,7 +16,7 @@ class Pandsoort(Referentiedatasoort):
     bewoond te worden.
     """
 
-    meergezinswoning = Referentiedata(
+    meergezinswoning = PandsoortReferentiedata(
         code="MGW",
         naam="Meergezinswoning",
     )

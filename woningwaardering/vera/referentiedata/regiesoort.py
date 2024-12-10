@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class RegiesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Regiesoort(Referentiedatasoort):
-    bouwteam = Referentiedata(
+    bouwteam = RegiesoortReferentiedata(
         code="BOU",
         naam="Bouwteam",
     )
@@ -17,7 +21,7 @@ class Regiesoort(Referentiedatasoort):
     een realisatiefase.
     """
 
-    traditioneel = Referentiedata(
+    traditioneel = RegiesoortReferentiedata(
         code="TRA",
         naam="Traditioneel",
     )
@@ -29,7 +33,7 @@ class Regiesoort(Referentiedatasoort):
     https://www.igg.nl/diensten/bouworganisatievormen/)
     """
 
-    turnkey = Referentiedata(
+    turnkey = RegiesoortReferentiedata(
         code="TUR",
         naam="Turnkey",
     )

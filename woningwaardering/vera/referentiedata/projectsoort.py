@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ProjectsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Projectsoort(Referentiedatasoort):
-    grondexploitatie = Referentiedata(
+    grondexploitatie = ProjectsoortReferentiedata(
         code="GRX",
         naam="Grondexploitatie",
     )
@@ -18,7 +22,7 @@ class Projectsoort(Referentiedatasoort):
     stellen. (Bron: vrij naar Wikipedia)
     """
 
-    modulaire_bouw = Referentiedata(
+    modulaire_bouw = ProjectsoortReferentiedata(
         code="MOD",
         naam="Modulaire bouw",
     )
@@ -29,7 +33,7 @@ class Projectsoort(Referentiedatasoort):
     geïnstalleerd en aangesloten (Bron: Portakabin)
     """
 
-    nieuwbouw = Referentiedata(
+    nieuwbouw = ProjectsoortReferentiedata(
         code="NIU",
         naam="Nieuwbouw",
     )
@@ -39,7 +43,7 @@ class Projectsoort(Referentiedatasoort):
     eenheden zijn gesloopt
     """
 
-    renovatie_bewoond = Referentiedata(
+    renovatie_bewoond = ProjectsoortReferentiedata(
         code="REB",
         naam="Renovatie bewoond",
     )
@@ -54,7 +58,7 @@ class Projectsoort(Referentiedatasoort):
     bestaande situatie niet het geval was (Bron: SBR-Wonen).
     """
 
-    renovatie_onbewoond = Referentiedata(
+    renovatie_onbewoond = ProjectsoortReferentiedata(
         code="REO",
         naam="Renovatie onbewoond",
     )
@@ -69,7 +73,7 @@ class Projectsoort(Referentiedatasoort):
     bestaande situatie niet het geval was (Bron: SBR-Wonen).
     """
 
-    sloop_en_nieuwbouw = Referentiedata(
+    sloop_en_nieuwbouw = ProjectsoortReferentiedata(
         code="SLN",
         naam="Sloop- en Nieuwbouw",
     )
@@ -79,7 +83,7 @@ class Projectsoort(Referentiedatasoort):
     nieuwbouw op het(/de)zelde perce(e)l(en)
     """
 
-    sloop = Referentiedata(
+    sloop = ProjectsoortReferentiedata(
         code="SLO",
         naam="Sloop",
     )
@@ -88,7 +92,7 @@ class Projectsoort(Referentiedatasoort):
     zonder dat daar nieuwbouw op het(/de)zelde perce(e)l(en) tegenover staat
     """
 
-    transformatie = Referentiedata(
+    transformatie = ProjectsoortReferentiedata(
         code="TRA",
         naam="Transformatie",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class VerbijzonderingsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Verbijzonderingsoort(Referentiedatasoort):
-    cluster = Referentiedata(
+    cluster = VerbijzonderingsoortReferentiedata(
         code="CLS",
         naam="Cluster",
     )
@@ -12,7 +16,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     verbijzonderen
     """
 
-    soort_huurdebiteur = Referentiedata(
+    soort_huurdebiteur = VerbijzonderingsoortReferentiedata(
         code="DEB",
         naam="Soort huurdebiteur",
     )
@@ -21,7 +25,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     kunnen verbijzonderen
     """
 
-    dimensie = Referentiedata(
+    dimensie = VerbijzonderingsoortReferentiedata(
         code="DIM",
         naam="Dimensie",
     )
@@ -31,7 +35,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     dimensie nader te duiden (dimensiesoort)
     """
 
-    divisie = Referentiedata(
+    divisie = VerbijzonderingsoortReferentiedata(
         code="DIV",
         naam="Divisie",
     )
@@ -40,7 +44,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     verbijzonderen.
     """
 
-    kostenplaats = Referentiedata(
+    kostenplaats = VerbijzonderingsoortReferentiedata(
         code="KPL",
         naam="Kostenplaats",
     )
@@ -49,7 +53,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     verbijzonderen. Vaak is een kostenplaats een afdeling
     """
 
-    kostensoort = Referentiedata(
+    kostensoort = VerbijzonderingsoortReferentiedata(
         code="KST",
         naam="Kostensoort",
     )
@@ -58,7 +62,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     verbijzonderen
     """
 
-    soort_leverancier = Referentiedata(
+    soort_leverancier = VerbijzonderingsoortReferentiedata(
         code="LEV",
         naam="Soort leverancier",
     )
@@ -67,7 +71,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     kunnen verbijzonderen
     """
 
-    maatschappelijk_label = Referentiedata(
+    maatschappelijk_label = VerbijzonderingsoortReferentiedata(
         code="MAA",
         naam="Maatschappelijk label",
     )
@@ -76,7 +80,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     (DAEB/niet-DAEB) om een financieel feit nader te kunnen te kunnen verbijzonderen
     """
 
-    medewerker = Referentiedata(
+    medewerker = VerbijzonderingsoortReferentiedata(
         code="MED",
         naam="Medewerker",
     )
@@ -85,7 +89,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     verbijzonderen
     """
 
-    project = Referentiedata(
+    project = VerbijzonderingsoortReferentiedata(
         code="PRO",
         naam="Project",
     )
@@ -94,7 +98,7 @@ class Verbijzonderingsoort(Referentiedatasoort):
     verbijzonderen
     """
 
-    vastgoedeenheid = Referentiedata(
+    vastgoedeenheid = VerbijzonderingsoortReferentiedata(
         code="VGE",
         naam="Vastgoedeenheid",
     )

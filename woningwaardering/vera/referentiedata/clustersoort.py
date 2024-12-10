@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ClustersoortReferentiedata(Referentiedata):
+    pass
+
+
 class Clustersoort(Referentiedatasoort):
-    buurt = Referentiedata(
+    buurt = ClustersoortReferentiedata(
         code="BUU",
         naam="Buurt",
     )
@@ -11,27 +15,27 @@ class Clustersoort(Referentiedatasoort):
     Cluster van eenheden die samen een buurt vormen, anders dan de officiële CBS-buurt
     """
 
-    financieel = Referentiedata(
+    financieel = ClustersoortReferentiedata(
         code="FIN",
         naam="Financieel",
     )
 
-    markt = Referentiedata(
+    markt = ClustersoortReferentiedata(
         code="MAR",
         naam="Markt",
     )
 
-    onderhoud = Referentiedata(
+    onderhoud = ClustersoortReferentiedata(
         code="OND",
         naam="Onderhoud",
     )
 
-    project = Referentiedata(
+    project = ClustersoortReferentiedata(
         code="PRO",
         naam="Project",
     )
 
-    rayon = Referentiedata(
+    rayon = ClustersoortReferentiedata(
         code="RAY",
         naam="Rayon",
     )
@@ -40,7 +44,7 @@ class Clustersoort(Referentiedatasoort):
     organisatorische eenheid, vormen
     """
 
-    servicekosten = Referentiedata(
+    servicekosten = ClustersoortReferentiedata(
         code="SER",
         naam="Servicekosten",
     )
@@ -48,7 +52,7 @@ class Clustersoort(Referentiedatasoort):
     Cluster van eenheden t.b.v. afrekening servicekosten
     """
 
-    verbruikskosten = Referentiedata(
+    verbruikskosten = ClustersoortReferentiedata(
         code="STO",
         naam="Verbruikskosten",
     )
@@ -57,17 +61,17 @@ class Clustersoort(Referentiedatasoort):
     warmte.
     """
 
-    strategisch = Referentiedata(
+    strategisch = ClustersoortReferentiedata(
         code="STR",
         naam="Strategisch",
     )
 
-    vereniging_van_eigenaars = Referentiedata(
+    vereniging_van_eigenaars = ClustersoortReferentiedata(
         code="VVE",
         naam="Vereniging van Eigenaars",
     )
 
-    wijk = Referentiedata(
+    wijk = ClustersoortReferentiedata(
         code="WIJ",
         naam="Wijk",
     )
@@ -75,7 +79,7 @@ class Clustersoort(Referentiedatasoort):
     Cluster van eenheden die samen een wijk vormen, anders dan de officiële CBS-wijk
     """
 
-    waardering = Referentiedata(
+    waardering = ClustersoortReferentiedata(
         code="WRD",
         naam="Waardering",
     )

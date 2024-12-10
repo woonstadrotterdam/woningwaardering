@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BetaalwijzesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Betaalwijzesoort(Referentiedatasoort):
-    handmatige_overboeking = Referentiedata(
+    handmatige_overboeking = BetaalwijzesoortReferentiedata(
         code="HND",
         naam="Handmatige overboeking",
     )
@@ -12,7 +16,7 @@ class Betaalwijzesoort(Referentiedatasoort):
     betaalverzoek of via een PIN-betaling.
     """
 
-    incasso = Referentiedata(
+    incasso = BetaalwijzesoortReferentiedata(
         code="INC",
         naam="Incasso",
     )

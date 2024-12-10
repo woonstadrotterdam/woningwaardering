@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class RedenopzeggingReferentiedata(Referentiedata):
+    pass
+
+
 class Redenopzegging(Referentiedatasoort):
-    woning_geaccepteerd = Referentiedata(
+    woning_geaccepteerd = RedenopzeggingReferentiedata(
         code="ACC",
         naam="Woning geaccepteerd",
     )
@@ -11,7 +15,7 @@ class Redenopzegging(Referentiedatasoort):
     De overeenkomst is opgezegd in verband met het accepteren van een (andere) woning.
     """
 
-    op_verzoek_corporatie = Referentiedata(
+    op_verzoek_corporatie = RedenopzeggingReferentiedata(
         code="COR",
         naam="Op verzoek corporatie",
     )
@@ -19,7 +23,7 @@ class Redenopzegging(Referentiedatasoort):
     De overeenkomst is beeindigd door de woningcorporatie of vastgoedeigenaar.
     """
 
-    inschrijfkosten_niet_betaald = Referentiedata(
+    inschrijfkosten_niet_betaald = RedenopzeggingReferentiedata(
         code="INB",
         naam="Inschrijfkosten niet betaald",
     )
@@ -27,7 +31,7 @@ class Redenopzegging(Referentiedatasoort):
     Inschrijfkosten niet betaald
     """
 
-    opzegging_woonconsument = Referentiedata(
+    opzegging_woonconsument = RedenopzeggingReferentiedata(
         code="OPZ",
         naam="Opzegging woonconsument",
     )
@@ -36,7 +40,7 @@ class Redenopzegging(Referentiedatasoort):
     woonconsument.
     """
 
-    overleden = Referentiedata(
+    overleden = RedenopzeggingReferentiedata(
         code="OVE",
         naam="Overleden",
     )
@@ -44,7 +48,7 @@ class Redenopzegging(Referentiedatasoort):
     De contractant is overleden.
     """
 
-    samengevoegd = Referentiedata(
+    samengevoegd = RedenopzeggingReferentiedata(
         code="SAM",
         naam="Samengevoegd",
     )
@@ -53,7 +57,7 @@ class Redenopzegging(Referentiedatasoort):
     overeenkomst voor dezelfde contractant.
     """
 
-    niet_verlengd = Referentiedata(
+    niet_verlengd = RedenopzeggingReferentiedata(
         code="VER",
         naam="Niet verlengd",
     )

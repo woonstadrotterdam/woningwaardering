@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class GeslachtReferentiedata(Referentiedata):
+    pass
+
+
 class Geslacht(Referentiedatasoort):
-    mannelijk = Referentiedata(
+    mannelijk = GeslachtReferentiedata(
         code="M",
         naam="Mannelijk",
     )
@@ -11,7 +15,7 @@ class Geslacht(Referentiedatasoort):
     Mannelijk geslacht
     """
 
-    onbekend = Referentiedata(
+    onbekend = GeslachtReferentiedata(
         code="O",
         naam="Onbekend",
     )
@@ -19,7 +23,7 @@ class Geslacht(Referentiedatasoort):
     Manier om genderneutraal aan te duiden of wanneer geslacht niet ter zake doet.
     """
 
-    vrouwelijk = Referentiedata(
+    vrouwelijk = GeslachtReferentiedata(
         code="V",
         naam="Vrouwelijk",
     )

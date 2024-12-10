@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class InkoopfactuurstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Inkoopfactuurstatus(Referentiedatasoort):
-    afgewezen = Referentiedata(
+    afgewezen = InkoopfactuurstatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -11,7 +15,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is afgewezen.
     """
 
-    afgehandeld = Referentiedata(
+    afgehandeld = InkoopfactuurstatusReferentiedata(
         code="AFH",
         naam="Afgehandeld",
     )
@@ -19,7 +23,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is afgehandeld.
     """
 
-    afgekeurd = Referentiedata(
+    afgekeurd = InkoopfactuurstatusReferentiedata(
         code="AGK",
         naam="Afgekeurd",
     )
@@ -27,7 +31,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is afgekeurd.
     """
 
-    aangeboden_ter_betaling = Referentiedata(
+    aangeboden_ter_betaling = InkoopfactuurstatusReferentiedata(
         code="ATB",
         naam="Aangeboden ter betaling",
     )
@@ -35,7 +39,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is aangeboden ter betaling.
     """
 
-    aangeboden_ter_goedkeuring = Referentiedata(
+    aangeboden_ter_goedkeuring = InkoopfactuurstatusReferentiedata(
         code="ATG",
         naam="Aangeboden ter goedkeuring",
     )
@@ -43,7 +47,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is aangeboden ter goedkeuring.
     """
 
-    betaald = Referentiedata(
+    betaald = InkoopfactuurstatusReferentiedata(
         code="BET",
         naam="Betaald",
     )
@@ -51,7 +55,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is betaald.
     """
 
-    geblokkeerd = Referentiedata(
+    geblokkeerd = InkoopfactuurstatusReferentiedata(
         code="BLK",
         naam="Geblokkeerd",
     )
@@ -59,7 +63,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is geblokkeerd.
     """
 
-    goedgekeurd = Referentiedata(
+    goedgekeurd = InkoopfactuurstatusReferentiedata(
         code="GDK",
         naam="Goedgekeurd",
     )
@@ -67,7 +71,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is goedgekeurd.
     """
 
-    historisch = Referentiedata(
+    historisch = InkoopfactuurstatusReferentiedata(
         code="HIS",
         naam="Historisch",
     )
@@ -75,7 +79,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is gearchiveerd/historisch.
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = InkoopfactuurstatusReferentiedata(
         code="IBH",
         naam="In behandeling",
     )
@@ -83,7 +87,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is in behandeling.
     """
 
-    geregistreerd = Referentiedata(
+    geregistreerd = InkoopfactuurstatusReferentiedata(
         code="REG",
         naam="Geregistreerd",
     )
@@ -91,7 +95,7 @@ class Inkoopfactuurstatus(Referentiedatasoort):
     Inkoopfactuur is geregistreerd.
     """
 
-    wacht_op_creditfactuur = Referentiedata(
+    wacht_op_creditfactuur = InkoopfactuurstatusReferentiedata(
         code="WOC",
         naam="Wacht op creditfactuur",
     )

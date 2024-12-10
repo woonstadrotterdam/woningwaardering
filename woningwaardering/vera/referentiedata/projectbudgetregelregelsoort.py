@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ProjectbudgetregelregelsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Projectbudgetregelregelsoort(Referentiedatasoort):
-    kostendetailregel = Referentiedata(
+    kostendetailregel = ProjectbudgetregelregelsoortReferentiedata(
         code="KDT",
         naam="Kostendetailregel",
     )
@@ -11,7 +15,7 @@ class Projectbudgetregelregelsoort(Referentiedatasoort):
     Projectbudgetregel is een kostenregel binnen de stichtingskosten hiërarchie
     """
 
-    opbrengstendetailregel = Referentiedata(
+    opbrengstendetailregel = ProjectbudgetregelregelsoortReferentiedata(
         code="ODT",
         naam="Opbrengstendetailregel",
     )
@@ -19,7 +23,7 @@ class Projectbudgetregelregelsoort(Referentiedatasoort):
     Projectbudgetregel is een opbrengstenregel binnen de stichtingskosten hiërarchie
     """
 
-    subtotaalregel = Referentiedata(
+    subtotaalregel = ProjectbudgetregelregelsoortReferentiedata(
         code="STR",
         naam="Subtotaalregel",
     )

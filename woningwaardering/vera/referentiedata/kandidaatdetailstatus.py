@@ -1,10 +1,16 @@
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.kandidaatstatus import Kandidaatstatus
+from woningwaardering.vera.referentiedata.kandidaatstatus import (
+    Kandidaatstatus,
+)
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class KandidaatdetailstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Kandidaatdetailstatus(Referentiedatasoort):
-    aanbieding = Referentiedata(
+    aanbieding = KandidaatdetailstatusReferentiedata(
         code="AAN",
         naam="Aanbieding",
         parent=Kandidaatstatus.aangeboden,
@@ -13,7 +19,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat krijgt aanbieding.
     """
 
-    bezichtiging = Referentiedata(
+    bezichtiging = KandidaatdetailstatusReferentiedata(
         code="BEZ",
         naam="Bezichtiging",
         parent=Kandidaatstatus.aangeboden,
@@ -22,7 +28,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat mag bezichtigen.
     """
 
-    documentcontrole = Referentiedata(
+    documentcontrole = KandidaatdetailstatusReferentiedata(
         code="DOC",
         naam="Documentcontrole",
         parent=Kandidaatstatus.aangeboden,
@@ -31,7 +37,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat moet documenten laten controleren.
     """
 
-    geen_belangstelling_meer = Referentiedata(
+    geen_belangstelling_meer = KandidaatdetailstatusReferentiedata(
         code="GEE",
         naam="Geen belangstelling meer",
     )
@@ -39,7 +45,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat geeft aan geen belangstelling (meer) te hebben.
     """
 
-    geinteresseerd = Referentiedata(
+    geinteresseerd = KandidaatdetailstatusReferentiedata(
         code="INT",
         naam="Geïnteresseerd",
     )
@@ -47,7 +53,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat is geïnteresseerd.
     """
 
-    niet_gereageerd = Referentiedata(
+    niet_gereageerd = KandidaatdetailstatusReferentiedata(
         code="NRE",
         naam="Niet gereageerd",
         parent=Kandidaatstatus.geweigerd,
@@ -56,7 +62,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat heeft te laat of niet gereageerd.
     """
 
-    ongeschikt = Referentiedata(
+    ongeschikt = KandidaatdetailstatusReferentiedata(
         code="ONG",
         naam="Ongeschikt",
         parent=Kandidaatstatus.afgewezen,
@@ -65,7 +71,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat niet geschikt voor omgeving.
     """
 
-    gegevens_onjuist = Referentiedata(
+    gegevens_onjuist = KandidaatdetailstatusReferentiedata(
         code="ONJ",
         naam="Gegevens onjuist",
         parent=Kandidaatstatus.afgewezen,
@@ -74,7 +80,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat komt niet in aanmerking na controle gegevens.
     """
 
-    overeenkomst_getekend = Referentiedata(
+    overeenkomst_getekend = KandidaatdetailstatusReferentiedata(
         code="OVE",
         naam="Overeenkomst getekend",
         parent=Kandidaatstatus.aangeboden,
@@ -83,7 +89,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat heeft huur- of koopovereenkomst getekend.
     """
 
-    geparkeerd = Referentiedata(
+    geparkeerd = KandidaatdetailstatusReferentiedata(
         code="PAR",
         naam="Geparkeerd",
     )
@@ -91,7 +97,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat wil tijdelijk geen aanbiedingen ontvangen naar aanleiding van de reactie.
     """
 
-    peilen_belangstelling = Referentiedata(
+    peilen_belangstelling = KandidaatdetailstatusReferentiedata(
         code="PEI",
         naam="Peilen belangstelling",
         parent=Kandidaatstatus.aangeboden,
@@ -100,7 +106,7 @@ class Kandidaatdetailstatus(Referentiedatasoort):
     Kandidaat wordt gevraagd of deze nog steeds belangstelling heeft.
     """
 
-    weigering_aanbieding = Referentiedata(
+    weigering_aanbieding = KandidaatdetailstatusReferentiedata(
         code="WEI",
         naam="Weigering aanbieding",
         parent=Kandidaatstatus.geweigerd,

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BetaalwijzedeelsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Betaalwijzedeelsoort(Referentiedatasoort):
-    maximaal_bedrag = Referentiedata(
+    maximaal_bedrag = BetaalwijzedeelsoortReferentiedata(
         code="MAX",
         naam="Maximaal bedrag",
     )
@@ -12,7 +16,7 @@ class Betaalwijzedeelsoort(Referentiedatasoort):
     de ouders van de student dragen maximaal EUR 300 bij aan de huur.
     """
 
-    percentage = Referentiedata(
+    percentage = BetaalwijzedeelsoortReferentiedata(
         code="PER",
         naam="Percentage",
     )
@@ -21,7 +25,7 @@ class Betaalwijzedeelsoort(Referentiedatasoort):
     stel waarbij beiden de helft van de huur betalen.
     """
 
-    restant_bedrag = Referentiedata(
+    restant_bedrag = BetaalwijzedeelsoortReferentiedata(
         code="RES",
         naam="Restant bedrag",
     )

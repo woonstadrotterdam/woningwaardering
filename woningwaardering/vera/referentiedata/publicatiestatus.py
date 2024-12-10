@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PublicatiestatusReferentiedata(Referentiedata):
+    pass
+
+
 class Publicatiestatus(Referentiedatasoort):
-    in_aanbieding = Referentiedata(
+    in_aanbieding = PublicatiestatusReferentiedata(
         code="AAN",
         naam="In aanbieding",
     )
@@ -11,7 +15,7 @@ class Publicatiestatus(Referentiedatasoort):
     Het gepubliceerde vastgoed is in aanbieding.
     """
 
-    afgerond = Referentiedata(
+    afgerond = PublicatiestatusReferentiedata(
         code="AFG",
         naam="Afgerond",
     )
@@ -19,7 +23,7 @@ class Publicatiestatus(Referentiedatasoort):
     De publicatie van het vastgoed is afgerond.
     """
 
-    gepubliceerd = Referentiedata(
+    gepubliceerd = PublicatiestatusReferentiedata(
         code="GEP",
         naam="Gepubliceerd",
     )
@@ -27,7 +31,7 @@ class Publicatiestatus(Referentiedatasoort):
     Het beschikbaar vastgoed is gepubliceerd.
     """
 
-    gereed_voor_publicatie = Referentiedata(
+    gereed_voor_publicatie = PublicatiestatusReferentiedata(
         code="GER",
         naam="Gereed voor publicatie",
     )
@@ -35,7 +39,7 @@ class Publicatiestatus(Referentiedatasoort):
     De publicatie van beschikbaar vastgoed is gereed voor publicatie.
     """
 
-    ingetrokken = Referentiedata(
+    ingetrokken = PublicatiestatusReferentiedata(
         code="ING",
         naam="Ingetrokken",
     )
@@ -43,7 +47,7 @@ class Publicatiestatus(Referentiedatasoort):
     De publicatie van het vastgoed is ingetrokken.
     """
 
-    in_voorbereiding = Referentiedata(
+    in_voorbereiding = PublicatiestatusReferentiedata(
         code="VOO",
         naam="In voorbereiding",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BetaalgegevensoortReferentiedata(Referentiedata):
+    pass
+
+
 class Betaalgegevensoort(Referentiedatasoort):
-    bankrekening = Referentiedata(
+    bankrekening = BetaalgegevensoortReferentiedata(
         code="BAN",
         naam="Bankrekening",
     )
@@ -12,7 +16,7 @@ class Betaalgegevensoort(Referentiedatasoort):
     bankrekening.
     """
 
-    creditcard = Referentiedata(
+    creditcard = BetaalgegevensoortReferentiedata(
         code="CRE",
         naam="Creditcard",
     )
@@ -21,7 +25,7 @@ class Betaalgegevensoort(Referentiedatasoort):
     card.
     """
 
-    paypal_account = Referentiedata(
+    paypal_account = BetaalgegevensoortReferentiedata(
         code="PAY",
         naam="Paypal account",
     )
@@ -30,7 +34,7 @@ class Betaalgegevensoort(Referentiedatasoort):
     account.
     """
 
-    transfermate = Referentiedata(
+    transfermate = BetaalgegevensoortReferentiedata(
         code="TRA",
         naam="TransferMate",
     )

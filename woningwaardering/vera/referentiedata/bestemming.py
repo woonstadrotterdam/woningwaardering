@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BestemmingReferentiedata(Referentiedata):
+    pass
+
+
 class Bestemming(Referentiedatasoort):
-    huur = Referentiedata(
+    huur = BestemmingReferentiedata(
         code="HUU",
         naam="Huur",
     )
@@ -11,7 +15,7 @@ class Bestemming(Referentiedatasoort):
     Eenheid is bestemd voor verhuur bij mutatie.
     """
 
-    koop = Referentiedata(
+    koop = BestemmingReferentiedata(
         code="KOO",
         naam="Koop",
     )
@@ -19,7 +23,7 @@ class Bestemming(Referentiedatasoort):
     Eenheid is bestemd voor verkoop bij mutatie.
     """
 
-    sloop = Referentiedata(
+    sloop = BestemmingReferentiedata(
         code="SLO",
         naam="Sloop",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class SanctiesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Sanctiesoort(Referentiedatasoort):
-    milde_sanctie = Referentiedata(
+    milde_sanctie = SanctiesoortReferentiedata(
         code="MIL",
         naam="Milde sanctie",
     )
@@ -11,7 +15,7 @@ class Sanctiesoort(Referentiedatasoort):
     Milde sanctie
     """
 
-    no_show_sanctie = Referentiedata(
+    no_show_sanctie = SanctiesoortReferentiedata(
         code="NOS",
         naam="No-show sanctie",
     )
@@ -19,7 +23,7 @@ class Sanctiesoort(Referentiedatasoort):
     No-show sanctie, , verlies van alle zoek-, situatie en zoekpunten
     """
 
-    zware_sanctie = Referentiedata(
+    zware_sanctie = SanctiesoortReferentiedata(
         code="ZWA",
         naam="Zware sanctie",
     )

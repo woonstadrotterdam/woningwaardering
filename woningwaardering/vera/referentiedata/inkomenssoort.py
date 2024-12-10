@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class InkomenssoortReferentiedata(Referentiedata):
+    pass
+
+
 class Inkomenssoort(Referentiedatasoort):
-    bruto_jaarinkomen = Referentiedata(
+    bruto_jaarinkomen = InkomenssoortReferentiedata(
         code="BRU",
         naam="Bruto jaarinkomen",
     )
@@ -12,7 +16,7 @@ class Inkomenssoort(Referentiedatasoort):
     actuele inkomen of een zelf opgegeven inkomen.
     """
 
-    netto_jaarinkomen = Referentiedata(
+    netto_jaarinkomen = InkomenssoortReferentiedata(
         code="NET",
         naam="Netto jaarinkomen",
     )

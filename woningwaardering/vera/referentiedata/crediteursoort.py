@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class CrediteursoortReferentiedata(Referentiedata):
+    pass
+
+
 class Crediteursoort(Referentiedatasoort):
-    crediteur_gemeente = Referentiedata(
+    crediteur_gemeente = CrediteursoortReferentiedata(
         code="CGM",
         naam="Crediteur gemeente",
     )
@@ -17,7 +21,7 @@ class Crediteursoort(Referentiedatasoort):
     goederen of diensten.
     """
 
-    crediteur_leningen_kredietinstelling = Referentiedata(
+    crediteur_leningen_kredietinstelling = CrediteursoortReferentiedata(
         code="CKI",
         naam="Crediteur leningen kredietinstelling",
     )
@@ -31,7 +35,7 @@ class Crediteursoort(Referentiedatasoort):
     voorwaarden van de leningsovereenkomst die tussen beide partijen is gesloten.
     """
 
-    crediteur_leningen_overheid = Referentiedata(
+    crediteur_leningen_overheid = CrediteursoortReferentiedata(
         code="CLO",
         naam="Crediteur leningen overheid",
     )
@@ -46,7 +50,7 @@ class Crediteursoort(Referentiedatasoort):
     te dekken.
     """
 
-    crediteur_overheid = Referentiedata(
+    crediteur_overheid = CrediteursoortReferentiedata(
         code="COH",
         naam="Crediteur overheid",
     )
@@ -60,7 +64,7 @@ class Crediteursoort(Referentiedatasoort):
     moment terug te betalen.
     """
 
-    handelscrediteur = Referentiedata(
+    handelscrediteur = CrediteursoortReferentiedata(
         code="HCR",
         naam="Handelscrediteur",
     )

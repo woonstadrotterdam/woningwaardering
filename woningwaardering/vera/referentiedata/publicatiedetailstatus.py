@@ -1,10 +1,16 @@
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.publicatiestatus import Publicatiestatus
+from woningwaardering.vera.referentiedata.publicatiestatus import (
+    Publicatiestatus,
+)
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PublicatiedetailstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Publicatiedetailstatus(Referentiedatasoort):
-    woning_krijgt_andere_bestemming = Referentiedata(
+    woning_krijgt_andere_bestemming = PublicatiedetailstatusReferentiedata(
         code="BES",
         naam="Woning krijgt andere bestemming",
         parent=Publicatiestatus.ingetrokken,
@@ -13,7 +19,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Woning krijgt andere bestemming.
     """
 
-    geen_toewijzing = Referentiedata(
+    geen_toewijzing = PublicatiedetailstatusReferentiedata(
         code="GTW",
         naam="Geen toewijzing",
         parent=Publicatiestatus.afgerond,
@@ -22,7 +28,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Geen toewijzing
     """
 
-    woning_wordt_handmatig_bemiddeld = Referentiedata(
+    woning_wordt_handmatig_bemiddeld = PublicatiedetailstatusReferentiedata(
         code="HAN",
         naam="Woning wordt handmatig bemiddeld",
         parent=Publicatiestatus.ingetrokken,
@@ -31,7 +37,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Woning wordt handmatig bemiddeld.
     """
 
-    verhuurd_onder_voorbehoud = Referentiedata(
+    verhuurd_onder_voorbehoud = PublicatiedetailstatusReferentiedata(
         code="HUU",
         naam="Verhuurd onder voorbehoud",
         parent=Publicatiestatus.gepubliceerd,
@@ -40,7 +46,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Verhuurd onder voorbehoud
     """
 
-    huuropzegging_is_ingetrokken = Referentiedata(
+    huuropzegging_is_ingetrokken = PublicatiedetailstatusReferentiedata(
         code="ING",
         naam="Huuropzegging is ingetrokken",
         parent=Publicatiestatus.ingetrokken,
@@ -49,7 +55,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Huuropzegging is ingetrokken.
     """
 
-    verkocht_onder_voorbehoud = Referentiedata(
+    verkocht_onder_voorbehoud = PublicatiedetailstatusReferentiedata(
         code="KOO",
         naam="Verkocht onder voorbehoud",
         parent=Publicatiestatus.gepubliceerd,
@@ -58,7 +64,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Verkocht onder voorbehoud
     """
 
-    onder_bod = Referentiedata(
+    onder_bod = PublicatiedetailstatusReferentiedata(
         code="OND",
         naam="Onder bod",
         parent=Publicatiestatus.gepubliceerd,
@@ -67,7 +73,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Onder bod
     """
 
-    publicatie_met_onjuiste_gegevens = Referentiedata(
+    publicatie_met_onjuiste_gegevens = PublicatiedetailstatusReferentiedata(
         code="ONJ",
         naam="Publicatie met onjuiste gegevens",
         parent=Publicatiestatus.ingetrokken,
@@ -76,7 +82,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Publicatie met onjuiste gegevens.
     """
 
-    onder_optie = Referentiedata(
+    onder_optie = PublicatiedetailstatusReferentiedata(
         code="OOP",
         naam="Onder optie",
         parent=Publicatiestatus.gepubliceerd,
@@ -85,7 +91,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Onder optie
     """
 
-    woning_wordt_gerenoveerd = Referentiedata(
+    woning_wordt_gerenoveerd = PublicatiedetailstatusReferentiedata(
         code="REN",
         naam="Woning wordt gerenoveerd",
         parent=Publicatiestatus.ingetrokken,
@@ -94,7 +100,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Woning wordt gerenoveerd.
     """
 
-    toegewezen = Referentiedata(
+    toegewezen = PublicatiedetailstatusReferentiedata(
         code="TOE",
         naam="Toegewezen",
         parent=Publicatiestatus.afgerond,
@@ -103,7 +109,7 @@ class Publicatiedetailstatus(Referentiedatasoort):
     Toegewezen
     """
 
-    woning_gaat_uit_exploitatie = Referentiedata(
+    woning_gaat_uit_exploitatie = PublicatiedetailstatusReferentiedata(
         code="UIT",
         naam="Woning gaat uit exploitatie",
         parent=Publicatiestatus.ingetrokken,

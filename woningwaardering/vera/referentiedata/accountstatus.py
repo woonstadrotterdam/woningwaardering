@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AccountstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Accountstatus(Referentiedatasoort):
-    beeindigd = Referentiedata(
+    beeindigd = AccountstatusReferentiedata(
         code="BEE",
         naam="Beëindigd",
     )
@@ -11,7 +15,7 @@ class Accountstatus(Referentiedatasoort):
     Het account is beeïndigd.
     """
 
-    geactiveerd = Referentiedata(
+    geactiveerd = AccountstatusReferentiedata(
         code="GEA",
         naam="Geactiveerd",
     )
@@ -19,7 +23,7 @@ class Accountstatus(Referentiedatasoort):
     Het account is geactiveerd.
     """
 
-    geblokkeerd = Referentiedata(
+    geblokkeerd = AccountstatusReferentiedata(
         code="GEB",
         naam="Geblokkeerd",
     )
@@ -28,7 +32,7 @@ class Accountstatus(Referentiedatasoort):
     wachtwoord.
     """
 
-    geregistreerd = Referentiedata(
+    geregistreerd = AccountstatusReferentiedata(
         code="GER",
         naam="Geregistreerd",
     )

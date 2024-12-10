@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PrijscomponentsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Prijscomponentsoort(Referentiedatasoort):
-    dienstencomponent = Referentiedata(
+    dienstencomponent = PrijscomponentsoortReferentiedata(
         code="DIE",
         naam="Dienstencomponent",
     )
@@ -12,7 +16,7 @@ class Prijscomponentsoort(Referentiedatasoort):
     recreatieruimten'. Die laatste is een (subsidiabele) Servicekosten component.
     """
 
-    eenmalig = Referentiedata(
+    eenmalig = PrijscomponentsoortReferentiedata(
         code="EEN",
         naam="Eenmalig",
     )
@@ -20,7 +24,7 @@ class Prijscomponentsoort(Referentiedatasoort):
     Eenmalige kosten, bijv. administratiekosten afsluiten huurovereenkomst
     """
 
-    huuraanpassing = Referentiedata(
+    huuraanpassing = PrijscomponentsoortReferentiedata(
         code="HUA",
         naam="Huuraanpassing",
     )
@@ -28,7 +32,7 @@ class Prijscomponentsoort(Referentiedatasoort):
     Aanpassingen zoals, korting, compensatie, opslag, etc.
     """
 
-    aankoopprijs = Referentiedata(
+    aankoopprijs = PrijscomponentsoortReferentiedata(
         code="KOO",
         naam="Aankoopprijs",
     )
@@ -36,7 +40,7 @@ class Prijscomponentsoort(Referentiedatasoort):
     Prijs van de aankoop
     """
 
-    netto_huur = Referentiedata(
+    netto_huur = PrijscomponentsoortReferentiedata(
         code="NET",
         naam="Netto Huur",
     )
@@ -45,7 +49,7 @@ class Prijscomponentsoort(Referentiedatasoort):
     prijscomponentdetailsoorten) die tot de netto huur wordt gerekend.
     """
 
-    parkeren = Referentiedata(
+    parkeren = PrijscomponentsoortReferentiedata(
         code="PAR",
         naam="Parkeren",
     )
@@ -56,7 +60,7 @@ class Prijscomponentsoort(Referentiedatasoort):
     Netto Huur in combinatie met een prijscomponentdetailsoort.
     """
 
-    service = Referentiedata(
+    service = PrijscomponentsoortReferentiedata(
         code="SER",
         naam="Service",
     )
@@ -64,12 +68,12 @@ class Prijscomponentsoort(Referentiedatasoort):
     Aanvullende kosten zoals: huismeester, glasfonds, rioolreiniging, etc.
     """
 
-    starterslening = Referentiedata(
+    starterslening = PrijscomponentsoortReferentiedata(
         code="STA",
         naam="Starterslening",
     )
 
-    verbruik = Referentiedata(
+    verbruik = PrijscomponentsoortReferentiedata(
         code="VER",
         naam="Verbruik",
     )

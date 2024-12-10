@@ -5,8 +5,12 @@ from woningwaardering.vera.referentiedata.bouwkundigelementsoort import (
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BouwkundigelementdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Bouwkundigelementdetailsoort(Referentiedatasoort):
-    aanrecht = Referentiedata(
+    aanrecht = BouwkundigelementdetailsoortReferentiedata(
         code="AAN",
         naam="Aanrecht",
         parent=Bouwkundigelementsoort.voorziening,
@@ -16,7 +20,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     voedsel. Relatie met IFC codering (IfcFurniture)
     """
 
-    afdekker = Referentiedata(
+    afdekker = BouwkundigelementdetailsoortReferentiedata(
         code="AFD",
         naam="Afdekker",
         parent=Bouwkundigelementsoort.voorziening,
@@ -26,7 +30,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     weersinvloeden. Relatie met IFC codering (IfcCovering.ROOFING)
     """
 
-    armatuur = Referentiedata(
+    armatuur = BouwkundigelementdetailsoortReferentiedata(
         code="ARM",
         naam="Armatuur",
         parent=Bouwkundigelementsoort.voorziening,
@@ -36,7 +40,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     Relatie met IFC codering (IfcLightFixture)
     """
 
-    bad = Referentiedata(
+    bad = BouwkundigelementdetailsoortReferentiedata(
         code="BAD",
         naam="Bad",
         parent=Bouwkundigelementsoort.voorziening,
@@ -46,7 +50,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcSanitaryTerminal.BATH)
     """
 
-    balk = Referentiedata(
+    balk = BouwkundigelementdetailsoortReferentiedata(
         code="BLK",
         naam="Balk",
         parent=Bouwkundigelementsoort.voorziening,
@@ -56,7 +60,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcBeam.BEAM)
     """
 
-    balkon = Referentiedata(
+    balkon = BouwkundigelementdetailsoortReferentiedata(
         code="BKO",
         naam="Balkon",
         parent=Bouwkundigelementsoort.voorziening,
@@ -66,7 +70,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcSlab.FLOOR)
     """
 
-    balustrade = Referentiedata(
+    balustrade = BouwkundigelementdetailsoortReferentiedata(
         code="BLU",
         naam="Balustrade",
         parent=Bouwkundigelementsoort.voorziening,
@@ -76,7 +80,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcRailing.BALUSTRADE)
     """
 
-    beglazing = Referentiedata(
+    beglazing = BouwkundigelementdetailsoortReferentiedata(
         code="BEG",
         naam="Beglazing",
         parent=Bouwkundigelementsoort.voorziening,
@@ -86,7 +90,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     IFC codering (IfcWindow.WINDOW)
     """
 
-    boeiboord = Referentiedata(
+    boeiboord = BouwkundigelementdetailsoortReferentiedata(
         code="BOE",
         naam="Boeiboord",
         parent=Bouwkundigelementsoort.voorziening,
@@ -96,7 +100,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcPlate.SHEET)
     """
 
-    boiler = Referentiedata(
+    boiler = BouwkundigelementdetailsoortReferentiedata(
         code="BOI",
         naam="Boiler",
         parent=Bouwkundigelementsoort.voorziening,
@@ -106,7 +110,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcBoiler)
     """
 
-    borstwering = Referentiedata(
+    borstwering = BouwkundigelementdetailsoortReferentiedata(
         code="BOR",
         naam="Borstwering",
         parent=Bouwkundigelementsoort.voorziening,
@@ -116,7 +120,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcWall.PARAPET)
     """
 
-    brandblusser = Referentiedata(
+    brandblusser = BouwkundigelementdetailsoortReferentiedata(
         code="BRA",
         naam="Brandblusser",
         parent=Bouwkundigelementsoort.voorziening,
@@ -126,7 +130,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcFurniture)
     """
 
-    brandmeldinstallatie = Referentiedata(
+    brandmeldinstallatie = BouwkundigelementdetailsoortReferentiedata(
         code="BME",
         naam="Brandmeldinstallatie",
         parent=Bouwkundigelementsoort.voorziening,
@@ -136,7 +140,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcSystem.FIREPROTECTION)
     """
 
-    closetcombinatie = Referentiedata(
+    closetcombinatie = BouwkundigelementdetailsoortReferentiedata(
         code="CLO",
         naam="Closetcombinatie",
         parent=Bouwkundigelementsoort.voorziening,
@@ -146,7 +150,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcSanitaryTerminal.TOILETPAN)
     """
 
-    console = Referentiedata(
+    console = BouwkundigelementdetailsoortReferentiedata(
         code="CON",
         naam="Console",
         parent=Bouwkundigelementsoort.voorziening,
@@ -156,7 +160,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcBeam.T-BEAM)
     """
 
-    dak = Referentiedata(
+    dak = BouwkundigelementdetailsoortReferentiedata(
         code="DAK",
         naam="Dak",
         parent=Bouwkundigelementsoort.voorziening,
@@ -166,7 +170,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcRoof)
     """
 
-    dakkapel = Referentiedata(
+    dakkapel = BouwkundigelementdetailsoortReferentiedata(
         code="DKA",
         naam="Dakkapel",
         parent=Bouwkundigelementsoort.voorziening,
@@ -176,7 +180,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcRoof)
     """
 
-    dakraam = Referentiedata(
+    dakraam = BouwkundigelementdetailsoortReferentiedata(
         code="DRA",
         naam="Dakraam",
         parent=Bouwkundigelementsoort.voorziening,
@@ -186,7 +190,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcWindow.SKYLIGHT)
     """
 
-    dakrand = Referentiedata(
+    dakrand = BouwkundigelementdetailsoortReferentiedata(
         code="DRN",
         naam="Dakrand",
         parent=Bouwkundigelementsoort.voorziening,
@@ -196,7 +200,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcRoof)
     """
 
-    deur = Referentiedata(
+    deur = BouwkundigelementdetailsoortReferentiedata(
         code="DEU",
         naam="Deur",
         parent=Bouwkundigelementsoort.voorziening,
@@ -206,7 +210,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcDoor.DOOR)
     """
 
-    deurdranger = Referentiedata(
+    deurdranger = BouwkundigelementdetailsoortReferentiedata(
         code="DDR",
         naam="Deurdranger",
         parent=Bouwkundigelementsoort.voorziening,
@@ -216,7 +220,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcBuildingElementProxy)
     """
 
-    dorpel = Referentiedata(
+    dorpel = BouwkundigelementdetailsoortReferentiedata(
         code="DOR",
         naam="Dorpel",
         parent=Bouwkundigelementsoort.voorziening,
@@ -226,7 +230,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcMember)
     """
 
-    douche = Referentiedata(
+    douche = BouwkundigelementdetailsoortReferentiedata(
         code="DOU",
         naam="Douche",
         parent=Bouwkundigelementsoort.voorziening,
@@ -236,7 +240,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcSanitaryTerminal.SHOWER)
     """
 
-    expansievat = Referentiedata(
+    expansievat = BouwkundigelementdetailsoortReferentiedata(
         code="EXP",
         naam="Expansievat",
         parent=Bouwkundigelementsoort.voorziening,
@@ -246,7 +250,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     IFC codering (IfcTank.EXPANSION)
     """
 
-    fontein = Referentiedata(
+    fontein = BouwkundigelementdetailsoortReferentiedata(
         code="FON",
         naam="Fontein",
         parent=Bouwkundigelementsoort.voorziening,
@@ -256,7 +260,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcSanitaryTerminal.SINK)
     """
 
-    galerij = Referentiedata(
+    galerij = BouwkundigelementdetailsoortReferentiedata(
         code="GAL",
         naam="Galerij",
         parent=Bouwkundigelementsoort.voorziening,
@@ -266,7 +270,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcSlab)
     """
 
-    garagedeur = Referentiedata(
+    garagedeur = BouwkundigelementdetailsoortReferentiedata(
         code="GAR",
         naam="Garagedeur",
         parent=Bouwkundigelementsoort.voorziening,
@@ -276,7 +280,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcDoor.DOOR)
     """
 
-    goot = Referentiedata(
+    goot = BouwkundigelementdetailsoortReferentiedata(
         code="GOO",
         naam="Goot",
         parent=Bouwkundigelementsoort.voorziening,
@@ -286,7 +290,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcPipeSegment.GUTTER)
     """
 
-    handmelder = Referentiedata(
+    handmelder = BouwkundigelementdetailsoortReferentiedata(
         code="HAN",
         naam="Handmelder",
         parent=Bouwkundigelementsoort.voorziening,
@@ -296,7 +300,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcAlarm.MANUALPULLBOX)
     """
 
-    hek = Referentiedata(
+    hek = BouwkundigelementdetailsoortReferentiedata(
         code="HEK",
         naam="Hek",
         parent=Bouwkundigelementsoort.voorziening,
@@ -306,7 +310,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcRailing)
     """
 
-    hellingbaan = Referentiedata(
+    hellingbaan = BouwkundigelementdetailsoortReferentiedata(
         code="HEL",
         naam="Hellingbaan",
         parent=Bouwkundigelementsoort.voorziening,
@@ -316,7 +320,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcRamp)
     """
 
-    hemelwaterafvoer = Referentiedata(
+    hemelwaterafvoer = BouwkundigelementdetailsoortReferentiedata(
         code="HEM",
         naam="Hemelwaterafvoer",
         parent=Bouwkundigelementsoort.voorziening,
@@ -326,7 +330,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcPipeSegment)
     """
 
-    isolatie = Referentiedata(
+    isolatie = BouwkundigelementdetailsoortReferentiedata(
         code="ISO",
         naam="Isolatie",
         parent=Bouwkundigelementsoort.voorziening,
@@ -336,7 +340,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcCovering.INSULATION)
     """
 
-    kanteldeur = Referentiedata(
+    kanteldeur = BouwkundigelementdetailsoortReferentiedata(
         code="KAN",
         naam="Kanteldeur",
         parent=Bouwkundigelementsoort.voorziening,
@@ -346,7 +350,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcDoor.DOOR)
     """
 
-    kast = Referentiedata(
+    kast = BouwkundigelementdetailsoortReferentiedata(
         code="KAS",
         naam="Kast",
         parent=Bouwkundigelementsoort.voorziening,
@@ -355,7 +359,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     Opbergmeubel met deuren of laden. Relatie met IFC codering (IfcFurniture.SHELF)
     """
 
-    ketel = Referentiedata(
+    ketel = BouwkundigelementdetailsoortReferentiedata(
         code="KET",
         naam="Ketel",
         parent=Bouwkundigelementsoort.voorziening,
@@ -365,7 +369,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcBoiler)
     """
 
-    kolom = Referentiedata(
+    kolom = BouwkundigelementdetailsoortReferentiedata(
         code="KOL",
         naam="Kolom",
         parent=Bouwkundigelementsoort.voorziening,
@@ -374,7 +378,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     Verticaal steunelement in constructies. Relatie met IFC codering (IfcColumn.COLUMN)
     """
 
-    kozijn = Referentiedata(
+    kozijn = BouwkundigelementdetailsoortReferentiedata(
         code="KOZ",
         naam="Kozijn",
         parent=Bouwkundigelementsoort.voorziening,
@@ -383,7 +387,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     Omlijsting waarin deur of raam bevestigd is. Relatie met IFC codering (IfcWindow)
     """
 
-    laadpaal = Referentiedata(
+    laadpaal = BouwkundigelementdetailsoortReferentiedata(
         code="LAA",
         naam="Laadpaal",
         parent=Bouwkundigelementsoort.voorziening,
@@ -395,7 +399,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     laadtijdbeheer en energiebeheer. Relatie met IFC codering (IfcFlowTerminal)
     """
 
-    leuning = Referentiedata(
+    leuning = BouwkundigelementdetailsoortReferentiedata(
         code="LEU",
         naam="Leuning",
         parent=Bouwkundigelementsoort.voorziening,
@@ -405,7 +409,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcRailing.HANDRAIL)
     """
 
-    lichtkoepel = Referentiedata(
+    lichtkoepel = BouwkundigelementdetailsoortReferentiedata(
         code="LIC",
         naam="Lichtkoepel",
         parent=Bouwkundigelementsoort.voorziening,
@@ -415,7 +419,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcWindow.LIGHTDOME)
     """
 
-    lichtstraat = Referentiedata(
+    lichtstraat = BouwkundigelementdetailsoortReferentiedata(
         code="LST",
         naam="Lichtstraat",
         parent=Bouwkundigelementsoort.voorziening,
@@ -425,7 +429,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcWindow.LIGHTDOME)
     """
 
-    lift = Referentiedata(
+    lift = BouwkundigelementdetailsoortReferentiedata(
         code="LIF",
         naam="Lift",
         parent=Bouwkundigelementsoort.voorziening,
@@ -435,7 +439,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcTransportElement.ELEVATOR)
     """
 
-    luchtbehandelingskast = Referentiedata(
+    luchtbehandelingskast = BouwkundigelementdetailsoortReferentiedata(
         code="LUC",
         naam="Luchtbehandelingskast",
         parent=Bouwkundigelementsoort.voorziening,
@@ -445,7 +449,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcUnitaryEquipment)
     """
 
-    luifel = Referentiedata(
+    luifel = BouwkundigelementdetailsoortReferentiedata(
         code="LFE",
         naam="Luifel",
         parent=Bouwkundigelementsoort.voorziening,
@@ -455,7 +459,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcRoof)
     """
 
-    luik = Referentiedata(
+    luik = BouwkundigelementdetailsoortReferentiedata(
         code="LUI",
         naam="Luik",
         parent=Bouwkundigelementsoort.voorziening,
@@ -465,7 +469,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcDoor.TRAPDOOR)
     """
 
-    meldsirene = Referentiedata(
+    meldsirene = BouwkundigelementdetailsoortReferentiedata(
         code="MEL",
         naam="Meldsirene",
         parent=Bouwkundigelementsoort.voorziening,
@@ -475,7 +479,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcAlarm.SIREN)
     """
 
-    nvo = Referentiedata(
+    nvo = BouwkundigelementdetailsoortReferentiedata(
         code="NVO",
         naam="NVO",
         parent=Bouwkundigelementsoort.voorziening,
@@ -484,7 +488,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     Niet van toepassing, specificeer term. Relatie met IFC codering (IfcSpace.SPACE)
     """
 
-    paneel = Referentiedata(
+    paneel = BouwkundigelementdetailsoortReferentiedata(
         code="PAN",
         naam="Paneel",
         parent=Bouwkundigelementsoort.voorziening,
@@ -494,7 +498,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcPlate.SHEET)
     """
 
-    plafond = Referentiedata(
+    plafond = BouwkundigelementdetailsoortReferentiedata(
         code="PLA",
         naam="Plafond",
         parent=Bouwkundigelementsoort.voorziening,
@@ -504,7 +508,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcCovering.CEILING)
     """
 
-    postkast = Referentiedata(
+    postkast = BouwkundigelementdetailsoortReferentiedata(
         code="POS",
         naam="Postkast",
         parent=Bouwkundigelementsoort.voorziening,
@@ -513,7 +517,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     Kast voor ontvangst van poststukken. Relatie met IFC codering (IfcFurniture)
     """
 
-    privacyscherm = Referentiedata(
+    privacyscherm = BouwkundigelementdetailsoortReferentiedata(
         code="PRI",
         naam="Privacyscherm",
         parent=Bouwkundigelementsoort.voorziening,
@@ -523,7 +527,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcFurniture)
     """
 
-    raam = Referentiedata(
+    raam = BouwkundigelementdetailsoortReferentiedata(
         code="RAA",
         naam="Raam",
         parent=Bouwkundigelementsoort.voorziening,
@@ -533,7 +537,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcWindow.WINDOW)
     """
 
-    radiator = Referentiedata(
+    radiator = BouwkundigelementdetailsoortReferentiedata(
         code="RAD",
         naam="Radiator",
         parent=Bouwkundigelementsoort.voorziening,
@@ -543,7 +547,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcSpaceHeater.RADIATOR)
     """
 
-    rookmelder = Referentiedata(
+    rookmelder = BouwkundigelementdetailsoortReferentiedata(
         code="ROO",
         naam="Rookmelder",
         parent=Bouwkundigelementsoort.voorziening,
@@ -553,7 +557,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     IFC codering (IfcSensor.SMOKESENSOR)
     """
 
-    rooster = Referentiedata(
+    rooster = BouwkundigelementdetailsoortReferentiedata(
         code="RST",
         naam="Rooster",
         parent=Bouwkundigelementsoort.voorziening,
@@ -563,7 +567,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcAirTerminal.GRILLE)
     """
 
-    schoorsteen = Referentiedata(
+    schoorsteen = BouwkundigelementdetailsoortReferentiedata(
         code="SST",
         naam="Schoorsteen",
         parent=Bouwkundigelementsoort.voorziening,
@@ -573,7 +577,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcChimney)
     """
 
-    schuifdeur = Referentiedata(
+    schuifdeur = BouwkundigelementdetailsoortReferentiedata(
         code="SDE",
         naam="Schuifdeur",
         parent=Bouwkundigelementsoort.voorziening,
@@ -583,7 +587,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcDoor.DOOR)
     """
 
-    schuifpui = Referentiedata(
+    schuifpui = BouwkundigelementdetailsoortReferentiedata(
         code="SPU",
         naam="Schuifpui",
         parent=Bouwkundigelementsoort.voorziening,
@@ -593,7 +597,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcWindow.WINDOW)
     """
 
-    trap = Referentiedata(
+    trap = BouwkundigelementdetailsoortReferentiedata(
         code="TRA",
         naam="Trap",
         parent=Bouwkundigelementsoort.voorziening,
@@ -603,7 +607,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcStair)
     """
 
-    traplift = Referentiedata(
+    traplift = BouwkundigelementdetailsoortReferentiedata(
         code="TLI",
         naam="Traplift",
         parent=Bouwkundigelementsoort.voorziening,
@@ -613,7 +617,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcTransportElement)
     """
 
-    urinoir = Referentiedata(
+    urinoir = BouwkundigelementdetailsoortReferentiedata(
         code="URI",
         naam="Urinoir",
         parent=Bouwkundigelementsoort.voorziening,
@@ -623,7 +627,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcSanitaryTerminal.URINAL)
     """
 
-    ventilatiekap = Referentiedata(
+    ventilatiekap = BouwkundigelementdetailsoortReferentiedata(
         code="VEN",
         naam="Ventilatiekap",
         parent=Bouwkundigelementsoort.voorziening,
@@ -633,7 +637,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcStackTerminal.COWL)
     """
 
-    ventilatierooster = Referentiedata(
+    ventilatierooster = BouwkundigelementdetailsoortReferentiedata(
         code="VRO",
         naam="Ventilatierooster",
         parent=Bouwkundigelementsoort.voorziening,
@@ -643,7 +647,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcAirTerminal.DIFFUSER)
     """
 
-    vliesgevel = Referentiedata(
+    vliesgevel = BouwkundigelementdetailsoortReferentiedata(
         code="VLI",
         naam="Vliesgevel",
         parent=Bouwkundigelementsoort.voorziening,
@@ -653,7 +657,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcCurtainWall)
     """
 
-    vlizotrap = Referentiedata(
+    vlizotrap = BouwkundigelementdetailsoortReferentiedata(
         code="VTR",
         naam="Vlizotrap",
         parent=Bouwkundigelementsoort.voorziening,
@@ -662,7 +666,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     Opvouwbare trap naar zolder of vliering. Relatie met IFC codering (IfcStair)
     """
 
-    vloer = Referentiedata(
+    vloer = BouwkundigelementdetailsoortReferentiedata(
         code="VLO",
         naam="Vloer",
         parent=Bouwkundigelementsoort.voorziening,
@@ -672,7 +676,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcSlab.FLOOR)
     """
 
-    wand = Referentiedata(
+    wand = BouwkundigelementdetailsoortReferentiedata(
         code="WAN",
         naam="Wand",
         parent=Bouwkundigelementsoort.voorziening,
@@ -682,7 +686,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcWallStandardCase)
     """
 
-    warmtepomp = Referentiedata(
+    warmtepomp = BouwkundigelementdetailsoortReferentiedata(
         code="WAR",
         naam="Warmtepomp",
         parent=Bouwkundigelementsoort.voorziening,
@@ -692,7 +696,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcPump)
     """
 
-    warmteterugwinning_apparaat = Referentiedata(
+    warmteterugwinning_apparaat = BouwkundigelementdetailsoortReferentiedata(
         code="WTE",
         naam="Warmteterugwinning apparaat",
         parent=Bouwkundigelementsoort.voorziening,
@@ -702,7 +706,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     IFC codering (IfcAirToAirHeatRecovery)
     """
 
-    wastafel = Referentiedata(
+    wastafel = BouwkundigelementdetailsoortReferentiedata(
         code="WAS",
         naam="Wastafel",
         parent=Bouwkundigelementsoort.voorziening,
@@ -712,7 +716,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcSanitaryTerminal.WASHHANDBASIN)
     """
 
-    zonnepaneel = Referentiedata(
+    zonnepaneel = BouwkundigelementdetailsoortReferentiedata(
         code="ZPA",
         naam="Zonnepaneel",
         parent=Bouwkundigelementsoort.voorziening,
@@ -722,7 +726,7 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     (IfcSolarDevice)
     """
 
-    zonwering = Referentiedata(
+    zonwering = BouwkundigelementdetailsoortReferentiedata(
         code="ZON",
         naam="Zonwering",
         parent=Bouwkundigelementsoort.voorziening,
@@ -732,175 +736,175 @@ class Bouwkundigelementdetailsoort(Referentiedatasoort):
     codering (IfcShadingDevice)
     """
 
-    afvoer = Referentiedata(
+    afvoer = BouwkundigelementdetailsoortReferentiedata(
         code="AFV",
         naam="Afvoer",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    balustrades_en_leuningen = Referentiedata(
+    balustrades_en_leuningen = BouwkundigelementdetailsoortReferentiedata(
         code="BAL",
         naam="Balustrades en leuningen",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    beveiliging = Referentiedata(
+    beveiliging = BouwkundigelementdetailsoortReferentiedata(
         code="BEV",
         naam="Beveiliging",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    binnenwandafwerking = Referentiedata(
+    binnenwandafwerking = BouwkundigelementdetailsoortReferentiedata(
         code="BIA",
         naam="Binnenwandafwerking",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    bidet = Referentiedata(
+    bidet = BouwkundigelementdetailsoortReferentiedata(
         code="BID",
         naam="Bidet",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    binnenwanden = Referentiedata(
+    binnenwanden = BouwkundigelementdetailsoortReferentiedata(
         code="BIN",
         naam="Binnenwanden",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    binnenwandopeningen = Referentiedata(
+    binnenwandopeningen = BouwkundigelementdetailsoortReferentiedata(
         code="BIW",
         naam="Binnenwandopeningen",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    buitenwandafwerking = Referentiedata(
+    buitenwandafwerking = BouwkundigelementdetailsoortReferentiedata(
         code="BUA",
         naam="Buitenwandafwerking",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    buitenwanden = Referentiedata(
+    buitenwanden = BouwkundigelementdetailsoortReferentiedata(
         code="BUI",
         naam="Buitenwanden",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    buitenwandopeningen = Referentiedata(
+    buitenwandopeningen = BouwkundigelementdetailsoortReferentiedata(
         code="BUW",
         naam="Buitenwandopeningen",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    communicatie = Referentiedata(
+    communicatie = BouwkundigelementdetailsoortReferentiedata(
         code="COM",
         naam="Communicatie",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    dakbedekking = Referentiedata(
+    dakbedekking = BouwkundigelementdetailsoortReferentiedata(
         code="DBE",
         naam="Dakbedekking",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    dakopeningen = Referentiedata(
+    dakopeningen = BouwkundigelementdetailsoortReferentiedata(
         code="DOP",
         naam="Dakopeningen",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    elektra = Referentiedata(
+    elektra = BouwkundigelementdetailsoortReferentiedata(
         code="ELE",
         naam="Elektra",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    gas = Referentiedata(
+    gas = BouwkundigelementdetailsoortReferentiedata(
         code="GAS",
         naam="Gas",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    keukenvoorzieningen = Referentiedata(
+    keukenvoorzieningen = BouwkundigelementdetailsoortReferentiedata(
         code="KEU",
         naam="Keukenvoorzieningen",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    lavet = Referentiedata(
+    lavet = BouwkundigelementdetailsoortReferentiedata(
         code="LAV",
         naam="Lavet",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    losse_opslaginventaris = Referentiedata(
+    losse_opslaginventaris = BouwkundigelementdetailsoortReferentiedata(
         code="LOS",
         naam="Losse opslaginventaris",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    plafondafwerking = Referentiedata(
+    plafondafwerking = BouwkundigelementdetailsoortReferentiedata(
         code="PAF",
         naam="Plafondafwerking",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    sanitaire_voorzieningen = Referentiedata(
+    sanitaire_voorzieningen = BouwkundigelementdetailsoortReferentiedata(
         code="SAN",
         naam="Sanitaire voorzieningen",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    schilderwerk = Referentiedata(
+    schilderwerk = BouwkundigelementdetailsoortReferentiedata(
         code="SCH",
         naam="Schilderwerk",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    terrein = Referentiedata(
+    terrein = BouwkundigelementdetailsoortReferentiedata(
         code="TER",
         naam="Terrein",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    trap_en_hellingafwerking = Referentiedata(
+    trap_en_hellingafwerking = BouwkundigelementdetailsoortReferentiedata(
         code="THA",
         naam="Trap- en hellingafwerking",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    vloerafwerking = Referentiedata(
+    vloerafwerking = BouwkundigelementdetailsoortReferentiedata(
         code="VAF",
         naam="Vloerafwerking",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    verwarmingsonderdelen = Referentiedata(
+    verwarmingsonderdelen = BouwkundigelementdetailsoortReferentiedata(
         code="VEO",
         naam="Verwarmingsonderdelen",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    verlichting = Referentiedata(
+    verlichting = BouwkundigelementdetailsoortReferentiedata(
         code="VER",
         naam="Verlichting",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    vloeropeningen = Referentiedata(
+    vloeropeningen = BouwkundigelementdetailsoortReferentiedata(
         code="VOP",
         naam="Vloeropeningen",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    verwarmingstoestellen = Referentiedata(
+    verwarmingstoestellen = BouwkundigelementdetailsoortReferentiedata(
         code="VTO",
         naam="Verwarmingstoestellen",
         parent=Bouwkundigelementsoort.voorziening,
     )
 
-    waterleiding_en_of_hoofdkraan = Referentiedata(
+    waterleiding_en_of_hoofdkraan = BouwkundigelementdetailsoortReferentiedata(
         code="WAT",
         naam="Waterleiding/hoofdkraan",
         parent=Bouwkundigelementsoort.voorziening,

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PuntenmutatiesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Puntenmutatiesoort(Referentiedatasoort):
-    intrekken_toewijzing = Referentiedata(
+    intrekken_toewijzing = PuntenmutatiesoortReferentiedata(
         code="ITO",
         naam="Intrekken toewijzing",
     )
@@ -11,7 +15,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Intrekken toewijzing van de eenheid.
     """
 
-    puntenafbouw_situatiepunten = Referentiedata(
+    puntenafbouw_situatiepunten = PuntenmutatiesoortReferentiedata(
         code="PAS",
         naam="Puntenafbouw situatiepunten",
     )
@@ -19,7 +23,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Puntenafbouw situatiepunten
     """
 
-    puntenafbouw_startpunten = Referentiedata(
+    puntenafbouw_startpunten = PuntenmutatiesoortReferentiedata(
         code="PAT",
         naam="Puntenafbouw startpunten",
     )
@@ -27,7 +31,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Puntenafbouw startpunten
     """
 
-    puntenafbouw_zoekpunten = Referentiedata(
+    puntenafbouw_zoekpunten = PuntenmutatiesoortReferentiedata(
         code="PAZ",
         naam="Puntenafbouw zoekpunten",
     )
@@ -35,7 +39,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Puntenafbouw zoekpunten
     """
 
-    puntenopbouw_situatiepunten = Referentiedata(
+    puntenopbouw_situatiepunten = PuntenmutatiesoortReferentiedata(
         code="PSI",
         naam="Puntenopbouw situatiepunten",
     )
@@ -43,7 +47,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Puntenopbouw situatiepunten
     """
 
-    puntenopbouw_startpunten = Referentiedata(
+    puntenopbouw_startpunten = PuntenmutatiesoortReferentiedata(
         code="PST",
         naam="Puntenopbouw startpunten",
     )
@@ -51,7 +55,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Puntenopbouw startpunten
     """
 
-    puntenopbouw_zoekpunten = Referentiedata(
+    puntenopbouw_zoekpunten = PuntenmutatiesoortReferentiedata(
         code="PZO",
         naam="Puntenopbouw zoekpunten",
     )
@@ -59,7 +63,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Puntenopbouw zoekpunten
     """
 
-    milde_sanctie = Referentiedata(
+    milde_sanctie = PuntenmutatiesoortReferentiedata(
         code="SMI",
         naam="Milde sanctie",
     )
@@ -67,7 +71,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Milde sanctie
     """
 
-    no_show_sanctie = Referentiedata(
+    no_show_sanctie = PuntenmutatiesoortReferentiedata(
         code="SNS",
         naam="No-show sanctie",
     )
@@ -75,7 +79,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     No-show sanctie
     """
 
-    zware_sanctie = Referentiedata(
+    zware_sanctie = PuntenmutatiesoortReferentiedata(
         code="SZW",
         naam="Zware sanctie",
     )
@@ -83,7 +87,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Zware sanctie
     """
 
-    terugdraaien_milde_sanctie = Referentiedata(
+    terugdraaien_milde_sanctie = PuntenmutatiesoortReferentiedata(
         code="TSM",
         naam="Terugdraaien milde sanctie",
     )
@@ -91,7 +95,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Terugdraaien milde sanctie
     """
 
-    terugdraaien_no_show_sanctie = Referentiedata(
+    terugdraaien_no_show_sanctie = PuntenmutatiesoortReferentiedata(
         code="TSN",
         naam="Terugdraaien no-show sanctie",
     )
@@ -99,7 +103,7 @@ class Puntenmutatiesoort(Referentiedatasoort):
     Terugdraaien no-show sanctie
     """
 
-    terugdraaien_zware_sanctie = Referentiedata(
+    terugdraaien_zware_sanctie = PuntenmutatiesoortReferentiedata(
         code="TSZ",
         naam="Terugdraaien zware sanctie",
     )

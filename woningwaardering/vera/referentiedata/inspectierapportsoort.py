@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class InspectierapportsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Inspectierapportsoort(Referentiedatasoort):
-    eindinspectierapport = Referentiedata(
+    eindinspectierapport = InspectierapportsoortReferentiedata(
         code="EIN",
         naam="Eindinspectierapport",
     )
@@ -11,7 +15,7 @@ class Inspectierapportsoort(Referentiedatasoort):
     Rapport naar aanleiding van een eindinspectie
     """
 
-    reparatieinspectierapport = Referentiedata(
+    reparatieinspectierapport = InspectierapportsoortReferentiedata(
         code="REP",
         naam="Reparatieinspectierapport",
     )
@@ -19,7 +23,7 @@ class Inspectierapportsoort(Referentiedatasoort):
     Inspectierapport naar aanleiding van een onduidelijk reparatieverzoek
     """
 
-    steekproefinspectierapport = Referentiedata(
+    steekproefinspectierapport = InspectierapportsoortReferentiedata(
         code="STE",
         naam="Steekproefinspectierapport",
     )
@@ -28,7 +32,7 @@ class Inspectierapportsoort(Referentiedatasoort):
     inspecteur/opzichter.
     """
 
-    voorinspectierapport = Referentiedata(
+    voorinspectierapport = InspectierapportsoortReferentiedata(
         code="VOO",
         naam="Voorinspectierapport",
     )

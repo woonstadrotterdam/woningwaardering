@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EenheidmonumentReferentiedata(Referentiedata):
+    pass
+
+
 class Eenheidmonument(Referentiedatasoort):
-    beschermd_dorpsgezicht = Referentiedata(
+    beschermd_dorpsgezicht = EenheidmonumentReferentiedata(
         code="DOR",
         naam="Beschermd dorpsgezicht",
     )
@@ -16,7 +20,7 @@ class Eenheidmonument(Referentiedatasoort):
     vergunning nodig.
     """
 
-    gemeentelijk_monument = Referentiedata(
+    gemeentelijk_monument = EenheidmonumentReferentiedata(
         code="GEM",
         naam="Gemeentelijk monument",
     )
@@ -26,7 +30,7 @@ class Eenheidmonument(Referentiedatasoort):
     plaatselijk of regionaal belang is.
     """
 
-    provinciaal_monument = Referentiedata(
+    provinciaal_monument = EenheidmonumentReferentiedata(
         code="PRO",
         naam="Provinciaal monument",
     )
@@ -40,7 +44,7 @@ class Eenheidmonument(Referentiedatasoort):
     hebben aangewezen.
     """
 
-    rijksmonument = Referentiedata(
+    rijksmonument = EenheidmonumentReferentiedata(
         code="RIJ",
         naam="Rijksmonument",
     )
@@ -50,7 +54,7 @@ class Eenheidmonument(Referentiedatasoort):
     monument.
     """
 
-    beschermd_stadsgezicht = Referentiedata(
+    beschermd_stadsgezicht = EenheidmonumentReferentiedata(
         code="STA",
         naam="Beschermd stadsgezicht",
     )
@@ -63,7 +67,7 @@ class Eenheidmonument(Referentiedatasoort):
     vergunning nodig.
     """
 
-    werelderfgoed = Referentiedata(
+    werelderfgoed = EenheidmonumentReferentiedata(
         code="WER",
         naam="Werelderfgoed",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class OppervlaktesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Oppervlaktesoort(Referentiedatasoort):
-    bruto_vloeroppervlakte = Referentiedata(
+    bruto_vloeroppervlakte = OppervlaktesoortReferentiedata(
         code="BVO",
         naam="Bruto vloeroppervlakte",
     )
@@ -12,7 +16,7 @@ class Oppervlaktesoort(Referentiedatasoort):
     gemeten conform NEN 2580.
     """
 
-    functioneel_nuttig_oppervlakte = Referentiedata(
+    functioneel_nuttig_oppervlakte = OppervlaktesoortReferentiedata(
         code="FNO",
         naam="Functioneel nuttig oppervlakte",
     )
@@ -21,7 +25,7 @@ class Oppervlaktesoort(Referentiedatasoort):
     meters, gemeten conform NEN 2580.
     """
 
-    gebruiksoppervlakte = Referentiedata(
+    gebruiksoppervlakte = OppervlaktesoortReferentiedata(
         code="GBO",
         naam="Gebruiksoppervlakte",
     )
@@ -30,7 +34,7 @@ class Oppervlaktesoort(Referentiedatasoort):
     gemeten conform NEN 2580.
     """
 
-    gerealiseerd_nuttig_oppervlakte = Referentiedata(
+    gerealiseerd_nuttig_oppervlakte = OppervlaktesoortReferentiedata(
         code="GNO",
         naam="Gerealiseerd nuttig oppervlakte",
     )
@@ -39,7 +43,7 @@ class Oppervlaktesoort(Referentiedatasoort):
     vierkante meters, gemeten conform NEN 2580.
     """
 
-    gebruiksoppervlakte_thermische_zone = Referentiedata(
+    gebruiksoppervlakte_thermische_zone = OppervlaktesoortReferentiedata(
         code="GTZ",
         naam="Gebruiksoppervlakte thermische zone",
     )
@@ -47,7 +51,7 @@ class Oppervlaktesoort(Referentiedatasoort):
     Gebruiksoppervlakte van de thermische zone, afgebakend volgens NTA 8800
     """
 
-    netto_vloeroppervlakte = Referentiedata(
+    netto_vloeroppervlakte = OppervlaktesoortReferentiedata(
         code="NVO",
         naam="Netto vloeroppervlakte",
     )
@@ -56,7 +60,7 @@ class Oppervlaktesoort(Referentiedatasoort):
     meters, gemeten conform NEN 2580.
     """
 
-    verhuurbare_vloeroppervlakte = Referentiedata(
+    verhuurbare_vloeroppervlakte = OppervlaktesoortReferentiedata(
         code="VVO",
         naam="Verhuurbare vloeroppervlakte",
     )
@@ -65,7 +69,7 @@ class Oppervlaktesoort(Referentiedatasoort):
     meters, gemeten conform NEN 2580.
     """
 
-    de_woon_of_werk_oppervlakte = Referentiedata(
+    de_woon_of_werk_oppervlakte = OppervlaktesoortReferentiedata(
         code="WOW",
         naam="De woon of werk oppervlakte",
     )

@@ -23,6 +23,7 @@ from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetails
 from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoort
 from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
     Woningwaarderingstelsel,
+    WoningwaarderingstelselReferentiedata,
 )
 from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     Woningwaarderingstelselgroep,
@@ -32,7 +33,7 @@ from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 def waardeer_keuken(
     ruimte: EenhedenRuimte,
-    stelsel: Referentiedata,
+    stelsel: WoningwaarderingstelselReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if not _is_keuken(ruimte):
         logger.debug(
@@ -98,14 +99,14 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
 
 def _waardeer_aanrecht(
     ruimte: EenhedenRuimte,
-    stelsel: Referentiedata,
+    stelsel: WoningwaarderingstelselReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     """
     Waardeert de aanrechten van een keuken.
 
     Args:
         ruimte (EenhedenRuimte): De keuken waarvan de aanrechten gewaardeerd worden.
-        stelsel (Referentiedata): Het stelsel waarvoor de aanrechten gewaardeerd worden.
+        stelsel (WoningwaarderingstelselReferentiedata): Het stelsel waarvoor de aanrechten gewaardeerd worden.
 
     Yields:
         WoningwaarderingResultatenWoningwaardering: De gewaardeerde aanrechten.
@@ -184,7 +185,7 @@ def _waardeer_extra_voorzieningen(
         if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
     )
 
-    punten_per_installatie = {
+    punten_per_installatie: dict[Referentiedata, float] = {
         Voorzieningsoort.inbouw_afzuiginstallatie: 0.75,
         Voorzieningsoort.inbouw_kookplaat_inductie: 1.75,
         Voorzieningsoort.inbouw_kookplaat_keramisch: 1.0,

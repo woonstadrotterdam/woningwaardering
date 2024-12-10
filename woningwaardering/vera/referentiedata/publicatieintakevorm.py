@@ -1,10 +1,16 @@
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.publicatiemodel import Publicatiemodel
+from woningwaardering.vera.referentiedata.publicatiemodel import (
+    Publicatiemodel,
+)
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PublicatieintakevormReferentiedata(Referentiedata):
+    pass
+
+
 class Publicatieintakevorm(Referentiedatasoort):
-    cooptatie = Referentiedata(
+    cooptatie = PublicatieintakevormReferentiedata(
         code="COO",
         naam="Coöptatie",
         parent=Publicatiemodel.aanbodmodel,
@@ -13,7 +19,7 @@ class Publicatieintakevorm(Referentiedatasoort):
     Medebewoners bepalen welke woningzoekende de eenheid krijgt.
     """
 
-    intakegesprek = Referentiedata(
+    intakegesprek = PublicatieintakevormReferentiedata(
         code="INT",
         naam="Intakegesprek",
         parent=Publicatiemodel.aanbodmodel,
@@ -22,7 +28,7 @@ class Publicatieintakevorm(Referentiedatasoort):
     Er vindt een intake gesprek plaats met de eigenaar van de woning.
     """
 
-    motivatie = Referentiedata(
+    motivatie = PublicatieintakevormReferentiedata(
         code="MOT",
         naam="Motivatie",
         parent=Publicatiemodel.aanbodmodel,
@@ -32,7 +38,7 @@ class Publicatieintakevorm(Referentiedatasoort):
     -gesprek.
     """
 
-    sociale_spelregels = Referentiedata(
+    sociale_spelregels = PublicatieintakevormReferentiedata(
         code="SOC",
         naam="Sociale spelregels",
         parent=Publicatiemodel.aanbodmodel,

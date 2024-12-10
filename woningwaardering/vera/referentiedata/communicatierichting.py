@@ -2,13 +2,17 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class CommunicatierichtingReferentiedata(Referentiedata):
+    pass
+
+
 class Communicatierichting(Referentiedatasoort):
-    inkomend = Referentiedata(
+    inkomend = CommunicatierichtingReferentiedata(
         code="INK",
         naam="Inkomend",
     )
 
-    uitgaand = Referentiedata(
+    uitgaand = CommunicatierichtingReferentiedata(
         code="UIT",
         naam="Uitgaand",
     )

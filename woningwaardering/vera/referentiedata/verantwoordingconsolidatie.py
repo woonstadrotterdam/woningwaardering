@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class VerantwoordingconsolidatieReferentiedata(Referentiedata):
+    pass
+
+
 class Verantwoordingconsolidatie(Referentiedatasoort):
-    geconsolideerd = Referentiedata(
+    geconsolideerd = VerantwoordingconsolidatieReferentiedata(
         code="CON",
         naam="Geconsolideerd",
     )
@@ -12,7 +16,7 @@ class Verantwoordingconsolidatie(Referentiedatasoort):
     geconsolideerd
     """
 
-    enkelvoudig = Referentiedata(
+    enkelvoudig = VerantwoordingconsolidatieReferentiedata(
         code="ENK",
         naam="Enkelvoudig",
     )

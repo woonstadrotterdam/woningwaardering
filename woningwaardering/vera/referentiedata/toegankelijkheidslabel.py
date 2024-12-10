@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ToegankelijkheidslabelReferentiedata(Referentiedata):
+    pass
+
+
 class Toegankelijkheidslabel(Referentiedatasoort):
-    gelijkvloerse_woning = Referentiedata(
+    gelijkvloerse_woning = ToegankelijkheidslabelReferentiedata(
         code="GEL",
         naam="Gelijkvloerse woning",
     )
@@ -17,7 +21,7 @@ class Toegankelijkheidslabel(Referentiedatasoort):
     ook extern toegankelijk moet zijn voor minder validen.
     """
 
-    rollatorwoning = Referentiedata(
+    rollatorwoning = ToegankelijkheidslabelReferentiedata(
         code="ROA",
         naam="Rollatorwoning",
     )
@@ -28,7 +32,7 @@ class Toegankelijkheidslabel(Referentiedatasoort):
     bijvoorbeeld drempels aanwezig kunnen zijn.
     """
 
-    rolstoelwoning = Referentiedata(
+    rolstoelwoning = ToegankelijkheidslabelReferentiedata(
         code="ROL",
         naam="Rolstoelwoning",
     )
@@ -39,7 +43,7 @@ class Toegankelijkheidslabel(Referentiedatasoort):
     Rollatorwoning, maar is niet per definitie ook een 'extra ruime rolstoelwoning'.
     """
 
-    extra_ruime_rolstoelwoning = Referentiedata(
+    extra_ruime_rolstoelwoning = ToegankelijkheidslabelReferentiedata(
         code="RUI",
         naam="Extra ruime rolstoelwoning",
     )
@@ -50,7 +54,7 @@ class Toegankelijkheidslabel(Referentiedatasoort):
     definitie ook aan het label Rolstoelwoning.
     """
 
-    woning_zonder_bijzondere_toegankelijkheid = Referentiedata(
+    woning_zonder_bijzondere_toegankelijkheid = ToegankelijkheidslabelReferentiedata(
         code="ZON",
         naam="Woning zonder bijzondere toegankelijkheid",
     )

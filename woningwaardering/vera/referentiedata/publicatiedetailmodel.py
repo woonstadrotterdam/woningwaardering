@@ -1,10 +1,16 @@
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.publicatiemodel import Publicatiemodel
+from woningwaardering.vera.referentiedata.publicatiemodel import (
+    Publicatiemodel,
+)
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PublicatiedetailmodelReferentiedata(Referentiedata):
+    pass
+
+
 class Publicatiedetailmodel(Referentiedatasoort):
-    leefstijl = Referentiedata(
+    leefstijl = PublicatiedetailmodelReferentiedata(
         code="LEE",
         naam="Leefstijl",
         parent=Publicatiemodel.aanbodmodel,
@@ -13,7 +19,7 @@ class Publicatiedetailmodel(Referentiedatasoort):
     Eenheden in kwetsbare buurten waarbij leefstijl een belangrijke factor speelt.
     """
 
-    loting = Referentiedata(
+    loting = PublicatiedetailmodelReferentiedata(
         code="LOT",
         naam="Loting",
         parent=Publicatiemodel.aanbodmodel,
@@ -22,7 +28,7 @@ class Publicatiedetailmodel(Referentiedatasoort):
     Binnen het aanbodmodel wordt geloot nadat eerst een selectie heeft plaatsgevonden.
     """
 
-    omklapcontract = Referentiedata(
+    omklapcontract = PublicatiedetailmodelReferentiedata(
         code="OMK",
         naam="Omklapcontract",
         parent=Publicatiemodel.distributiemodel,
@@ -34,7 +40,7 @@ class Publicatiedetailmodel(Referentiedatasoort):
     omgeklapt, d.w.z. komt het op zijn eigen naam te staan.
     """
 
-    snelzoek = Referentiedata(
+    snelzoek = PublicatiedetailmodelReferentiedata(
         code="SNE",
         naam="Snelzoek",
         parent=Publicatiemodel.lotingmodel,

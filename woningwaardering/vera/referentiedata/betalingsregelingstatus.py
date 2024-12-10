@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BetalingsregelingstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Betalingsregelingstatus(Referentiedatasoort):
-    aangevraagd = Referentiedata(
+    aangevraagd = BetalingsregelingstatusReferentiedata(
         code="AAN",
         naam="Aangevraagd",
     )
@@ -11,7 +15,7 @@ class Betalingsregelingstatus(Referentiedatasoort):
     Ook wel aangemaakt.
     """
 
-    actief = Referentiedata(
+    actief = BetalingsregelingstatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
@@ -19,7 +23,7 @@ class Betalingsregelingstatus(Referentiedatasoort):
     Toegekende betalingsregeling die loopt.
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = BetalingsregelingstatusReferentiedata(
         code="ANN",
         naam="Geannuleerd",
     )
@@ -27,7 +31,7 @@ class Betalingsregelingstatus(Referentiedatasoort):
     Tussentijds gestopte regeling.
     """
 
-    beeindigd = Referentiedata(
+    beeindigd = BetalingsregelingstatusReferentiedata(
         code="BEE",
         naam="Beëindigd",
     )
@@ -35,7 +39,7 @@ class Betalingsregelingstatus(Referentiedatasoort):
     Ook wel afgerond. Alle betalingsverplichtingen zijn voldaan.
     """
 
-    bevroren = Referentiedata(
+    bevroren = BetalingsregelingstatusReferentiedata(
         code="BEV",
         naam="Bevroren",
     )

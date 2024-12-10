@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class RelatiesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Relatiesoort(Referentiedatasoort):
-    relatiegroep = Referentiedata(
+    relatiegroep = RelatiesoortReferentiedata(
         code="GRO",
         naam="Relatiegroep",
     )
@@ -11,7 +15,7 @@ class Relatiesoort(Referentiedatasoort):
     Een verzameling relaties (bijvoorbeeld een huishouden)
     """
 
-    natuurlijke_persoon = Referentiedata(
+    natuurlijke_persoon = RelatiesoortReferentiedata(
         code="NAT",
         naam="Natuurlijke persoon",
     )
@@ -20,7 +24,7 @@ class Relatiesoort(Referentiedatasoort):
     plichten heeft.
     """
 
-    rechtspersoon = Referentiedata(
+    rechtspersoon = RelatiesoortReferentiedata(
         code="REC",
         naam="Rechtspersoon",
     )

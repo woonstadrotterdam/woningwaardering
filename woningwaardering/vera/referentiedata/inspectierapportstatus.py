@@ -2,28 +2,32 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class InspectierapportstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Inspectierapportstatus(Referentiedatasoort):
-    concept = Referentiedata(
+    concept = InspectierapportstatusReferentiedata(
         code="CON",
         naam="Concept",
     )
 
-    definitief = Referentiedata(
+    definitief = InspectierapportstatusReferentiedata(
         code="DEF",
         naam="Definitief",
     )
 
-    getekend = Referentiedata(
+    getekend = InspectierapportstatusReferentiedata(
         code="GET",
         naam="Getekend",
     )
 
-    ter_review = Referentiedata(
+    ter_review = InspectierapportstatusReferentiedata(
         code="REV",
         naam="Ter review",
     )
 
-    vervallen = Referentiedata(
+    vervallen = InspectierapportstatusReferentiedata(
         code="VAL",
         naam="Vervallen",
     )

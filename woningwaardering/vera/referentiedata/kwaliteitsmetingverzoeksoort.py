@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class KwaliteitsmetingverzoeksoortReferentiedata(Referentiedata):
+    pass
+
+
 class Kwaliteitsmetingverzoeksoort(Referentiedatasoort):
-    algemene_dienstverlening = Referentiedata(
+    algemene_dienstverlening = KwaliteitsmetingverzoeksoortReferentiedata(
         code="ALG",
         naam="Algemene dienstverlening",
     )
@@ -11,7 +15,7 @@ class Kwaliteitsmetingverzoeksoort(Referentiedatasoort):
     Kwaliteitsmetingverzoek betreffende algemene dienstverlening
     """
 
-    nieuwe_huurders = Referentiedata(
+    nieuwe_huurders = KwaliteitsmetingverzoeksoortReferentiedata(
         code="HUN",
         naam="Nieuwe huurders",
     )
@@ -19,7 +23,7 @@ class Kwaliteitsmetingverzoeksoort(Referentiedatasoort):
     Kwaliteitsmetingverzoek betreffende nieuwe huurders
     """
 
-    vertrokken_huurders = Referentiedata(
+    vertrokken_huurders = KwaliteitsmetingverzoeksoortReferentiedata(
         code="HUV",
         naam="Vertrokken huurders",
     )
@@ -27,7 +31,7 @@ class Kwaliteitsmetingverzoeksoort(Referentiedatasoort):
     Kwaliteitsmetingverzoek betreffende vertrokken huurders
     """
 
-    onderhoud = Referentiedata(
+    onderhoud = KwaliteitsmetingverzoeksoortReferentiedata(
         code="OND",
         naam="Onderhoud",
     )
@@ -35,7 +39,7 @@ class Kwaliteitsmetingverzoeksoort(Referentiedatasoort):
     Kwaliteitsmetingverzoek betreffende onderhoud
     """
 
-    overig = Referentiedata(
+    overig = KwaliteitsmetingverzoeksoortReferentiedata(
         code="OVR",
         naam="Overig",
     )
@@ -43,7 +47,7 @@ class Kwaliteitsmetingverzoeksoort(Referentiedatasoort):
     Kwaliteitsmetingverzoek betreffende overige onderwerpen
     """
 
-    reparaties = Referentiedata(
+    reparaties = KwaliteitsmetingverzoeksoortReferentiedata(
         code="REP",
         naam="Reparaties",
     )
@@ -51,7 +55,7 @@ class Kwaliteitsmetingverzoeksoort(Referentiedatasoort):
     Kwaliteitsmetingverzoek betreffende reparaties
     """
 
-    woonomgeving = Referentiedata(
+    woonomgeving = KwaliteitsmetingverzoeksoortReferentiedata(
         code="WOO",
         naam="Woonomgeving",
     )

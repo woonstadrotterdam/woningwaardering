@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class CommunicatievoorkeursoortReferentiedata(Referentiedata):
+    pass
+
+
 class Communicatievoorkeursoort(Referentiedatasoort):
-    klantcontact = Referentiedata(
+    klantcontact = CommunicatievoorkeursoortReferentiedata(
         code="KLA",
         naam="Klantcontact",
     )
@@ -11,7 +15,7 @@ class Communicatievoorkeursoort(Referentiedatasoort):
     Direct contact voor ondersteuning, vragen, of klachten
     """
 
-    nieuwsbrief = Referentiedata(
+    nieuwsbrief = CommunicatievoorkeursoortReferentiedata(
         code="NIE",
         naam="Nieuwsbrief",
     )
@@ -20,7 +24,7 @@ class Communicatievoorkeursoort(Referentiedatasoort):
     huurders
     """
 
-    kennisgeving = Referentiedata(
+    kennisgeving = CommunicatievoorkeursoortReferentiedata(
         code="KEN",
         naam="Kennisgeving",
     )
@@ -29,7 +33,7 @@ class Communicatievoorkeursoort(Referentiedatasoort):
     beleidswijzigingen, etc.
     """
 
-    formele_communicatie = Referentiedata(
+    formele_communicatie = CommunicatievoorkeursoortReferentiedata(
         code="FOR",
         naam="Formele communicatie",
     )
@@ -38,7 +42,7 @@ class Communicatievoorkeursoort(Referentiedatasoort):
     betalingsherrinneringen, informatie over huurverhogingen
     """
 
-    overige_communicatie = Referentiedata(
+    overige_communicatie = CommunicatievoorkeursoortReferentiedata(
         code="OVE",
         naam="Overige communicatie",
     )

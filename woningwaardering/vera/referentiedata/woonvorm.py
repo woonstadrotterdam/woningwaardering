@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class WoonvormReferentiedata(Referentiedata):
+    pass
+
+
 class Woonvorm(Referentiedatasoort):
-    adl_clusterwoning = Referentiedata(
+    adl_clusterwoning = WoonvormReferentiedata(
         code="ADL",
         naam="ADL-clusterwoning",
     )
@@ -13,12 +17,12 @@ class Woonvorm(Referentiedatasoort):
     levensverrichtingen (ADL) in en om de woning
     """
 
-    begeleid_wonen = Referentiedata(
+    begeleid_wonen = WoonvormReferentiedata(
         code="BEG",
         naam="Begeleid wonen",
     )
 
-    geclusterde_woonvorm = Referentiedata(
+    geclusterde_woonvorm = WoonvormReferentiedata(
         code="GEC",
         naam="Geclusterde woonvorm",
     )
@@ -30,7 +34,7 @@ class Woonvorm(Referentiedatasoort):
     voldoen aan de uitgangspunten voor nultredenwoningen.
     """
 
-    groepswonen = Referentiedata(
+    groepswonen = WoonvormReferentiedata(
         code="GRO",
         naam="Groepswonen",
     )
@@ -42,7 +46,7 @@ class Woonvorm(Referentiedatasoort):
     leeftijd, etc. Ook wel geclusterd wonen genoemd.
     """
 
-    grote_woonvorm = Referentiedata(
+    grote_woonvorm = WoonvormReferentiedata(
         code="GRW",
         naam="Grote woonvorm",
     )
@@ -51,7 +55,7 @@ class Woonvorm(Referentiedatasoort):
     bij elkaar. Deze mensen wonen zo zelfstandig mogelijk.
     """
 
-    hat_eenheid = Referentiedata(
+    hat_eenheid = WoonvormReferentiedata(
         code="HAT",
         naam="HAT-eenheid",
     )
@@ -59,7 +63,7 @@ class Woonvorm(Referentiedatasoort):
     eenheden voor 1 of twee persoonshuishoudens met gezamelijke keuken, badkamer etc.
     """
 
-    kleine_woonvorm = Referentiedata(
+    kleine_woonvorm = WoonvormReferentiedata(
         code="KLE",
         naam="Kleine woonvorm",
     )
@@ -67,7 +71,7 @@ class Woonvorm(Referentiedatasoort):
     gezinsvervangende tehuizen voor lichamelijk gehandicapten
     """
 
-    seniorenwoning_met_zorg = Referentiedata(
+    seniorenwoning_met_zorg = WoonvormReferentiedata(
         code="SEN",
         naam="Seniorenwoning met zorg",
     )
@@ -77,7 +81,7 @@ class Woonvorm(Referentiedatasoort):
     allerlei voorzieningen dichtbij.
     """
 
-    thomashuis = Referentiedata(
+    thomashuis = WoonvormReferentiedata(
         code="THO",
         naam="Thomashuis",
     )
@@ -86,7 +90,7 @@ class Woonvorm(Referentiedatasoort):
     verstandelijke beperking
     """
 
-    zorggeschikte_woning = Referentiedata(
+    zorggeschikte_woning = WoonvormReferentiedata(
         code="ZWO",
         naam="Zorggeschikte woning",
     )

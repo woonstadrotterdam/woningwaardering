@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BtwReferentiedata(Referentiedata):
+    pass
+
+
 class Btw(Referentiedatasoort):
-    algemeen = Referentiedata(
+    algemeen = BtwReferentiedata(
         code="ALG",
         naam="Algemeen",
     )
@@ -12,7 +16,7 @@ class Btw(Referentiedatasoort):
     toepassing. Dit tarief wordt ook wel 'Hoog' genoemd.
     """
 
-    nul = Referentiedata(
+    nul = BtwReferentiedata(
         code="NUL",
         naam="Nul",
     )
@@ -21,7 +25,7 @@ class Btw(Referentiedatasoort):
     toepassing.
     """
 
-    verlaagd = Referentiedata(
+    verlaagd = BtwReferentiedata(
         code="VER",
         naam="Verlaagd",
     )
@@ -30,7 +34,7 @@ class Btw(Referentiedatasoort):
     toepassing.
     """
 
-    vrijstelling = Referentiedata(
+    vrijstelling = BtwReferentiedata(
         code="VRI",
         naam="Vrijstelling",
     )

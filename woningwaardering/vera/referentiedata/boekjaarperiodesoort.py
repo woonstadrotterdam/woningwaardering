@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BoekjaarperiodesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Boekjaarperiodesoort(Referentiedatasoort):
-    boekjaarperiodesoort_4_weken = Referentiedata(
+    boekjaarperiodesoort_4_weken = BoekjaarperiodesoortReferentiedata(
         code="4WE",
         naam="4-weken",
     )
@@ -11,7 +15,7 @@ class Boekjaarperiodesoort(Referentiedatasoort):
     Deel van een kalenderjaar met een vaste duur van 4 aaneengesloten kalenderweken.
     """
 
-    halfjaar = Referentiedata(
+    halfjaar = BoekjaarperiodesoortReferentiedata(
         code="HLJ",
         naam="Halfjaar",
     )
@@ -19,7 +23,7 @@ class Boekjaarperiodesoort(Referentiedatasoort):
     Deel van een kalenderjaar met een vaste duur van 6 aaneengesloten kalendermaanden.
     """
 
-    jaar = Referentiedata(
+    jaar = BoekjaarperiodesoortReferentiedata(
         code="JAR",
         naam="Jaar",
     )
@@ -27,7 +31,7 @@ class Boekjaarperiodesoort(Referentiedatasoort):
     Periode die uitgaat van een kalenderjaar.
     """
 
-    kwartaal = Referentiedata(
+    kwartaal = BoekjaarperiodesoortReferentiedata(
         code="KWA",
         naam="Kwartaal",
     )
@@ -35,7 +39,7 @@ class Boekjaarperiodesoort(Referentiedatasoort):
     Deel van een kalenderjaar met een vaste duur van 3 aaneengesloten kalandermaanden.
     """
 
-    maand = Referentiedata(
+    maand = BoekjaarperiodesoortReferentiedata(
         code="MAA",
         naam="Maand",
     )
@@ -43,7 +47,7 @@ class Boekjaarperiodesoort(Referentiedatasoort):
     Deel van een kalenderjaar met een vaste duur van 1 kalendermaand.
     """
 
-    tertiaal = Referentiedata(
+    tertiaal = BoekjaarperiodesoortReferentiedata(
         code="TER",
         naam="Tertiaal",
     )
@@ -51,7 +55,7 @@ class Boekjaarperiodesoort(Referentiedatasoort):
     Deel van een kalenderjaar met een vaste duur van 4 aaneengesloten kalandermaanden.
     """
 
-    week = Referentiedata(
+    week = BoekjaarperiodesoortReferentiedata(
         code="WEE",
         naam="Week",
     )

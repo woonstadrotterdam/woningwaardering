@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AfspraakstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Afspraakstatus(Referentiedatasoort):
-    aangevraagd = Referentiedata(
+    aangevraagd = AfspraakstatusReferentiedata(
         code="AAN",
         naam="Aangevraagd",
     )
@@ -12,7 +16,7 @@ class Afspraakstatus(Referentiedatasoort):
     voorkeur bloktijd zijn opgegeven.
     """
 
-    afgerond = Referentiedata(
+    afgerond = AfspraakstatusReferentiedata(
         code="AFG",
         naam="Afgerond",
     )
@@ -20,7 +24,7 @@ class Afspraakstatus(Referentiedatasoort):
     De afspraak heeft plaatsgevonden.
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = AfspraakstatusReferentiedata(
         code="ANN",
         naam="Geannuleerd",
     )
@@ -28,7 +32,7 @@ class Afspraakstatus(Referentiedatasoort):
     De afspraak is geannuleerd.
     """
 
-    gepland = Referentiedata(
+    gepland = AfspraakstatusReferentiedata(
         code="GEP",
         naam="Gepland",
     )

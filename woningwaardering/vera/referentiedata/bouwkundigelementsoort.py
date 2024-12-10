@@ -2,23 +2,27 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BouwkundigelementsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Bouwkundigelementsoort(Referentiedatasoort):
-    overig = Referentiedata(
+    overig = BouwkundigelementsoortReferentiedata(
         code="OVE",
         naam="Overig",
     )
 
-    verwarming = Referentiedata(
+    verwarming = BouwkundigelementsoortReferentiedata(
         code="VER",
         naam="Verwarming",
     )
 
-    voorziening = Referentiedata(
+    voorziening = BouwkundigelementsoortReferentiedata(
         code="VOO",
         naam="Voorziening",
     )
 
-    warmwater = Referentiedata(
+    warmwater = BouwkundigelementsoortReferentiedata(
         code="WAT",
         naam="Warmwater",
     )

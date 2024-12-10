@@ -219,7 +219,7 @@ soort_template = environment.from_string(
 {%- set parent_classes = items | map(attribute='parent.soort') | unique | select('string') -%}
 {%- if parent_classes -%}
 {%- for parentClass in parent_classes %}
-{%- if parentClass | length > 19 %}
+{%- if parentClass | length > 6 %}
 from woningwaardering.vera.referentiedata.{{ parentClass | remove_accents | lower }} import (
     {{ parentClass | remove_accents | title }},
 )
@@ -231,9 +231,13 @@ from woningwaardering.vera.referentiedata.{{ parentClass | remove_accents | lowe
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class {{ soort|remove_accents|title }}Referentiedata(Referentiedata):
+    pass
+
+
 class {{ soort|remove_accents|title }}(Referentiedatasoort):
 {%- for item in items %}
-    {{ item|normalize_variable_name }} = Referentiedata(
+    {{ item|normalize_variable_name }} = {{ soort|remove_accents|title }}Referentiedata(
         code="{{ item['code'] | safe }}",
         naam="{{ item['naam'] | safe }}",
         {%- if item['parent'] | safe %}
@@ -259,11 +263,15 @@ for soort, items in grouped_data:
 soort_folder_init_template = environment.from_string(
     """
 {%- for soort in grouped_data -%}
-from .{{ soort[0]|remove_accents|lower }} import {{ soort[0]|remove_accents|title }}
+from .{{ soort[0]|remove_accents|lower }} import (
+    {{ soort[0]|remove_accents|title }},
+    {{ soort[0]|remove_accents|title }}Referentiedata
+)
 {% endfor %}
 __all__ = [
 {%- for soort in grouped_data %}
     "{{ soort[0]|remove_accents|title }}",
+    "{{ soort[0]|remove_accents|title }}Referentiedata",
 {%- endfor %}
 ]
 

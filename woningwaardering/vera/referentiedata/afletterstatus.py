@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AfletterstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Afletterstatus(Referentiedatasoort):
-    deels_afgeletterd = Referentiedata(
+    deels_afgeletterd = AfletterstatusReferentiedata(
         code="DEE",
         naam="Deels afgeletterd",
     )
@@ -15,7 +19,7 @@ class Afletterstatus(Referentiedatasoort):
     worden.
     """
 
-    niet_afgeletterd = Referentiedata(
+    niet_afgeletterd = AfletterstatusReferentiedata(
         code="NIE",
         naam="Niet afgeletterd",
     )
@@ -25,7 +29,7 @@ class Afletterstatus(Referentiedatasoort):
     niet gekoppeld is aan een vordering.
     """
 
-    volledig_afgeletterd = Referentiedata(
+    volledig_afgeletterd = AfletterstatusReferentiedata(
         code="VOL",
         naam="Volledig afgeletterd",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class VerantwoordingregimeReferentiedata(Referentiedata):
+    pass
+
+
 class Verantwoordingregime(Referentiedatasoort):
-    administratieve_scheiding = Referentiedata(
+    administratieve_scheiding = VerantwoordingregimeReferentiedata(
         code="ADM",
         naam="Administratieve scheiding",
     )
@@ -12,7 +16,7 @@ class Verantwoordingregime(Referentiedatasoort):
     gescheiden
     """
 
-    hybride = Referentiedata(
+    hybride = VerantwoordingregimeReferentiedata(
         code="HYB",
         naam="Hybride",
     )
@@ -21,7 +25,7 @@ class Verantwoordingregime(Referentiedatasoort):
     dochtervennootschap, terwijl ook niet-DAEB bezit achterblijft in de TI.
     """
 
-    juridische_scheiding = Referentiedata(
+    juridische_scheiding = VerantwoordingregimeReferentiedata(
         code="JUR",
         naam="Juridische scheiding",
     )
@@ -30,7 +34,7 @@ class Verantwoordingregime(Referentiedatasoort):
     entiteiten ondergebracht, elk met een eigen financiële administratie
     """
 
-    verlicht_regime = Referentiedata(
+    verlicht_regime = VerantwoordingregimeReferentiedata(
         code="VER",
         naam="Verlicht regime",
     )

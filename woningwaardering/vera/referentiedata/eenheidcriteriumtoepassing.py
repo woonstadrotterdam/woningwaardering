@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EenheidcriteriumtoepassingReferentiedata(Referentiedata):
+    pass
+
+
 class Eenheidcriteriumtoepassing(Referentiedatasoort):
-    selectie = Referentiedata(
+    selectie = EenheidcriteriumtoepassingReferentiedata(
         code="SEL",
         naam="Selectie",
     )
@@ -12,7 +16,7 @@ class Eenheidcriteriumtoepassing(Referentiedatasoort):
     de eenheid te bepalen.
     """
 
-    sortering = Referentiedata(
+    sortering = EenheidcriteriumtoepassingReferentiedata(
         code="SOR",
         naam="Sortering",
     )

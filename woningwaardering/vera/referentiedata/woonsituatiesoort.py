@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class WoonsituatiesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Woonsituatiesoort(Referentiedatasoort):
-    doorstromer = Referentiedata(
+    doorstromer = WoonsituatiesoortReferentiedata(
         code="DOO",
         naam="Doorstromer",
     )
@@ -11,7 +15,7 @@ class Woonsituatiesoort(Referentiedatasoort):
     Een doorstromer is een woningzoekende die een zelfstandige woning achterlaat.
     """
 
-    starter = Referentiedata(
+    starter = WoonsituatiesoortReferentiedata(
         code="STA",
         naam="Starter",
     )

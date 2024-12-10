@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AuthentiekgegevenstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Authentiekgegevenstatus(Referentiedatasoort):
-    gevalideerd = Referentiedata(
+    gevalideerd = AuthentiekgegevenstatusReferentiedata(
         code="GEV",
         naam="Gevalideerd",
     )
@@ -11,7 +15,7 @@ class Authentiekgegevenstatus(Referentiedatasoort):
     Gegevens zijn gevalideerd door de bron.
     """
 
-    vervallen = Referentiedata(
+    vervallen = AuthentiekgegevenstatusReferentiedata(
         code="VER",
         naam="Vervallen",
     )

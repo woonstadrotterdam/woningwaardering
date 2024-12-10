@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AdressoortReferentiedata(Referentiedata):
+    pass
+
+
 class Adressoort(Referentiedatasoort):
-    buitenlands_adres = Referentiedata(
+    buitenlands_adres = AdressoortReferentiedata(
         code="BUI",
         naam="Buitenlands adres",
     )
@@ -11,7 +15,7 @@ class Adressoort(Referentiedatasoort):
     Een buitenlands adres.
     """
 
-    eenheid_adres = Referentiedata(
+    eenheid_adres = AdressoortReferentiedata(
         code="EEN",
         naam="Eenheid adres",
     )
@@ -19,7 +23,7 @@ class Adressoort(Referentiedatasoort):
     De adresgegevens van een eenheid, ook wel woonadres
     """
 
-    postadres = Referentiedata(
+    postadres = AdressoortReferentiedata(
         code="POS",
         naam="Postadres",
     )

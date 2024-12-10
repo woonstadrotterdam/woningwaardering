@@ -2,24 +2,32 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PrijscomponentwijzigingsredenReferentiedata(Referentiedata):
+    pass
+
+
 class Prijscomponentwijzigingsreden(Referentiedatasoort):
-    jaarlijkse_huuraanpassing_inkomensafhankelijk = Referentiedata(
-        code="INK",
-        naam="Jaarlijkse huuraanpassing -inkomensafhankelijk",
+    jaarlijkse_huuraanpassing_inkomensafhankelijk = (
+        PrijscomponentwijzigingsredenReferentiedata(
+            code="INK",
+            naam="Jaarlijkse huuraanpassing -inkomensafhankelijk",
+        )
     )
     """
     Jaarlijkse huuraanpassing - met inkomensafhankelijke huurverhoging
     """
 
-    jaarlijkse_huuraanpassing_niet_inkomensafhankelijk = Referentiedata(
-        code="JAA",
-        naam="Jaarlijkse huuraanpassing -niet inkomensafhankelijk",
+    jaarlijkse_huuraanpassing_niet_inkomensafhankelijk = (
+        PrijscomponentwijzigingsredenReferentiedata(
+            code="JAA",
+            naam="Jaarlijkse huuraanpassing -niet inkomensafhankelijk",
+        )
     )
     """
     Jaarlijkse huuraanpassing - zonder inkomensafhankelijke huurverhoging
     """
 
-    nieuwe_verhuring = Referentiedata(
+    nieuwe_verhuring = PrijscomponentwijzigingsredenReferentiedata(
         code="MUT",
         naam="Nieuwe verhuring",
     )
@@ -27,7 +35,7 @@ class Prijscomponentwijzigingsreden(Referentiedatasoort):
     Nieuwe verhuring, inclusief de eerste verhuring van een eenheid
     """
 
-    nieuw_component = Referentiedata(
+    nieuw_component = PrijscomponentwijzigingsredenReferentiedata(
         code="NIE",
         naam="Nieuw component",
     )
@@ -35,7 +43,7 @@ class Prijscomponentwijzigingsreden(Referentiedatasoort):
     Nieuw prijscomponent bij een eenheid of een overeenkomst
     """
 
-    renovatie_of_woningverbetering = Referentiedata(
+    renovatie_of_woningverbetering = PrijscomponentwijzigingsredenReferentiedata(
         code="REN",
         naam="Renovatie of woningverbetering",
     )

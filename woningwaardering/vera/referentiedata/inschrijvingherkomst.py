@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class InschrijvingherkomstReferentiedata(Referentiedata):
+    pass
+
+
 class Inschrijvingherkomst(Referentiedatasoort):
-    heropend = Referentiedata(
+    heropend = InschrijvingherkomstReferentiedata(
         code="HER",
         naam="Heropend",
     )
@@ -12,7 +16,7 @@ class Inschrijvingherkomst(Referentiedatasoort):
     inschrijving.
     """
 
-    medewerker = Referentiedata(
+    medewerker = InschrijvingherkomstReferentiedata(
         code="MED",
         naam="Medewerker",
     )
@@ -20,7 +24,7 @@ class Inschrijvingherkomst(Referentiedatasoort):
     De inschrijving is aangemaakt door een medewerker.
     """
 
-    migratie = Referentiedata(
+    migratie = InschrijvingherkomstReferentiedata(
         code="MIG",
         naam="Migratie",
     )
@@ -28,7 +32,7 @@ class Inschrijvingherkomst(Referentiedatasoort):
     De inschrijving is aangemaakt tijdens een migratie van gegevens.
     """
 
-    gesplitst = Referentiedata(
+    gesplitst = InschrijvingherkomstReferentiedata(
         code="SPL",
         naam="Gesplitst",
     )
@@ -37,7 +41,7 @@ class Inschrijvingherkomst(Referentiedatasoort):
     inschrijving waarbij de hoofd- en medeaanvrager een eigen inschrijving krijgen.
     """
 
-    urgentie = Referentiedata(
+    urgentie = InschrijvingherkomstReferentiedata(
         code="URG",
         naam="Urgentie",
     )
@@ -45,7 +49,7 @@ class Inschrijvingherkomst(Referentiedatasoort):
     De inschrijving is aangemaakt naar aanleiding van het toekennen van een urgentie.
     """
 
-    woningzoekende = Referentiedata(
+    woningzoekende = InschrijvingherkomstReferentiedata(
         code="WOO",
         naam="Woningzoekende",
     )

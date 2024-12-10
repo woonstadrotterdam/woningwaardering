@@ -2,48 +2,52 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class CommunicatiekanaalReferentiedata(Referentiedata):
+    pass
+
+
 class Communicatiekanaal(Referentiedatasoort):
-    whatsapp = Referentiedata(
+    whatsapp = CommunicatiekanaalReferentiedata(
         code="APP",
         naam="Whatsapp",
     )
 
-    balie = Referentiedata(
+    balie = CommunicatiekanaalReferentiedata(
         code="BAL",
         naam="Balie",
     )
 
-    huisbezoek = Referentiedata(
+    huisbezoek = CommunicatiekanaalReferentiedata(
         code="BEZ",
         naam="Huisbezoek",
     )
 
-    brief = Referentiedata(
+    brief = CommunicatiekanaalReferentiedata(
         code="BRI",
         naam="Brief",
     )
 
-    e_mail = Referentiedata(
+    e_mail = CommunicatiekanaalReferentiedata(
         code="EMA",
         naam="E-mail",
     )
 
-    inspectie = Referentiedata(
+    inspectie = CommunicatiekanaalReferentiedata(
         code="INS",
         naam="Inspectie",
     )
 
-    internet_en_of_klantportaal = Referentiedata(
+    internet_en_of_klantportaal = CommunicatiekanaalReferentiedata(
         code="INT",
         naam="Internet / klantportaal",
     )
 
-    sms = Referentiedata(
+    sms = CommunicatiekanaalReferentiedata(
         code="SMS",
         naam="SMS",
     )
 
-    telefoon = Referentiedata(
+    telefoon = CommunicatiekanaalReferentiedata(
         code="TEL",
         naam="Telefoon",
     )

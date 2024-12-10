@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EnergieprestatiestatusReferentiedata(Referentiedata):
+    pass
+
+
 class Energieprestatiestatus(Referentiedatasoort):
-    definitief = Referentiedata(
+    definitief = EnergieprestatiestatusReferentiedata(
         code="DEF",
         naam="Definitief",
     )
@@ -12,7 +16,7 @@ class Energieprestatiestatus(Referentiedatasoort):
     energieprestatie, wat leidt tot een officieel geldig label.
     """
 
-    voorlopig = Referentiedata(
+    voorlopig = EnergieprestatiestatusReferentiedata(
         code="VOO",
         naam="Voorlopig",
     )

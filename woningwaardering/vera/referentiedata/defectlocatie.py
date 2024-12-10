@@ -2,103 +2,107 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class DefectlocatieReferentiedata(Referentiedata):
+    pass
+
+
 class Defectlocatie(Referentiedatasoort):
-    airco_en_of_koelinstallatie = Referentiedata(
+    airco_en_of_koelinstallatie = DefectlocatieReferentiedata(
         code="AIR",
         naam="Airco/koelinstallatie",
     )
 
-    badkamer_en_of_doucheruimte = Referentiedata(
+    badkamer_en_of_doucheruimte = DefectlocatieReferentiedata(
         code="BAD",
         naam="Badkamer / doucheruimte",
     )
 
-    balkon = Referentiedata(
+    balkon = DefectlocatieReferentiedata(
         code="BAL",
         naam="Balkon",
     )
 
-    bergingsruimte = Referentiedata(
+    bergingsruimte = DefectlocatieReferentiedata(
         code="BER",
         naam="Bergingsruimte",
     )
 
-    bijkeuken = Referentiedata(
+    bijkeuken = DefectlocatieReferentiedata(
         code="BIJ",
         naam="Bijkeuken",
     )
 
-    buitengevel = Referentiedata(
+    buitengevel = DefectlocatieReferentiedata(
         code="BUI",
         naam="Buitengevel",
     )
 
-    containerruimte = Referentiedata(
+    containerruimte = DefectlocatieReferentiedata(
         code="CON",
         naam="Containerruimte",
     )
 
-    dak = Referentiedata(
+    dak = DefectlocatieReferentiedata(
         code="DAK",
         naam="Dak",
     )
 
-    dakterras = Referentiedata(
+    dakterras = DefectlocatieReferentiedata(
         code="DTE",
         naam="Dakterras",
     )
 
-    entreehal_en_of_ingang = Referentiedata(
+    entreehal_en_of_ingang = DefectlocatieReferentiedata(
         code="ENT",
         naam="Entreehal / Ingang",
     )
 
-    fietsenstalling = Referentiedata(
+    fietsenstalling = DefectlocatieReferentiedata(
         code="FIE",
         naam="Fietsenstalling",
     )
 
-    galerij_en_of_galerijgang = Referentiedata(
+    galerij_en_of_galerijgang = DefectlocatieReferentiedata(
         code="GAL",
         naam="Galerij / galerijgang",
     )
 
-    gangkast_en_of_trapkast = Referentiedata(
+    gangkast_en_of_trapkast = DefectlocatieReferentiedata(
         code="GAN",
         naam="Gangkast / trapkast",
     )
 
-    garage_perceelgebonden_en_of_carport = Referentiedata(
+    garage_perceelgebonden_en_of_carport = DefectlocatieReferentiedata(
         code="GAR",
         naam="Garage (perceelgebonden) / carport",
     )
 
-    hal_en_of_gang_individueel = Referentiedata(
+    hal_en_of_gang_individueel = DefectlocatieReferentiedata(
         code="HAL",
         naam="Hal / gang individueel",
     )
 
-    kelder = Referentiedata(
+    kelder = DefectlocatieReferentiedata(
         code="KEL",
         naam="Kelder",
     )
 
-    keuken = Referentiedata(
+    keuken = DefectlocatieReferentiedata(
         code="KEU",
         naam="Keuken",
     )
 
-    kruipruimte = Referentiedata(
+    kruipruimte = DefectlocatieReferentiedata(
         code="KRU",
         naam="Kruipruimte",
     )
 
-    lift = Referentiedata(
+    lift = DefectlocatieReferentiedata(
         code="LIF",
         naam="Lift",
     )
 
-    overige_ruimte = Referentiedata(
+    overige_ruimte = DefectlocatieReferentiedata(
         code="OVE",
         naam="Overige ruimte",
     )
@@ -106,92 +110,92 @@ class Defectlocatie(Referentiedatasoort):
     Overige locaties die niet onder één van de andere defectlocaties vallen
     """
 
-    overloop = Referentiedata(
+    overloop = DefectlocatieReferentiedata(
         code="OVL",
         naam="Overloop",
     )
 
-    pad_en_of_brandgang = Referentiedata(
+    pad_en_of_brandgang = DefectlocatieReferentiedata(
         code="PAD",
         naam="Pad / brandgang",
     )
 
-    pantry = Referentiedata(
+    pantry = DefectlocatieReferentiedata(
         code="PAN",
         naam="Pantry",
     )
 
-    parkeerplaats = Referentiedata(
+    parkeerplaats = DefectlocatieReferentiedata(
         code="PAR",
         naam="Parkeerplaats",
     )
 
-    trappenhuis_en_of_portiek = Referentiedata(
+    trappenhuis_en_of_portiek = DefectlocatieReferentiedata(
         code="POR",
         naam="Trappenhuis / Portiek",
     )
 
-    schuur = Referentiedata(
+    schuur = DefectlocatieReferentiedata(
         code="SCH",
         naam="Schuur",
     )
 
-    scootmobielruimte = Referentiedata(
+    scootmobielruimte = DefectlocatieReferentiedata(
         code="SCO",
         naam="Scootmobielruimte",
     )
 
-    slaapkamer = Referentiedata(
+    slaapkamer = DefectlocatieReferentiedata(
         code="SLA",
         naam="Slaapkamer",
     )
 
-    toiletruimte = Referentiedata(
+    toiletruimte = DefectlocatieReferentiedata(
         code="TOI",
         naam="Toiletruimte",
     )
 
-    trap = Referentiedata(
+    trap = DefectlocatieReferentiedata(
         code="TRA",
         naam="Trap",
     )
 
-    technische_ruimte_collectief = Referentiedata(
+    technische_ruimte_collectief = DefectlocatieReferentiedata(
         code="TRC",
         naam="Technische ruimte (collectief)",
     )
 
-    technische_ruimte_individueel = Referentiedata(
+    technische_ruimte_individueel = DefectlocatieReferentiedata(
         code="TRI",
         naam="Technische ruimte (individueel)",
     )
 
-    tuin = Referentiedata(
+    tuin = DefectlocatieReferentiedata(
         code="TUI",
         naam="Tuin",
     )
 
-    voertuigingang = Referentiedata(
+    voertuigingang = DefectlocatieReferentiedata(
         code="VOE",
         naam="Voertuigingang",
     )
 
-    woonkamer = Referentiedata(
+    woonkamer = DefectlocatieReferentiedata(
         code="WOO",
         naam="Woonkamer",
     )
 
-    wasruimte_collectief = Referentiedata(
+    wasruimte_collectief = DefectlocatieReferentiedata(
         code="WRC",
         naam="Wasruimte collectief",
     )
 
-    wasruimte_individueel = Referentiedata(
+    wasruimte_individueel = DefectlocatieReferentiedata(
         code="WRI",
         naam="Wasruimte individueel",
     )
 
-    zolder_en_of_vliering = Referentiedata(
+    zolder_en_of_vliering = DefectlocatieReferentiedata(
         code="ZOL",
         naam="Zolder / vliering",
     )

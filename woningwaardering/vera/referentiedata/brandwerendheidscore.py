@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BrandwerendheidscoreReferentiedata(Referentiedata):
+    pass
+
+
 class Brandwerendheidscore(Referentiedatasoort):
-    brandwerendheidscore_15_minuten = Referentiedata(
+    brandwerendheidscore_15_minuten = BrandwerendheidscoreReferentiedata(
         code="15",
         naam="15 minuten",
     )
@@ -11,7 +15,7 @@ class Brandwerendheidscore(Referentiedatasoort):
     15 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_20_minuten = Referentiedata(
+    brandwerendheidscore_20_minuten = BrandwerendheidscoreReferentiedata(
         code="20",
         naam="20 minuten",
     )
@@ -19,7 +23,7 @@ class Brandwerendheidscore(Referentiedatasoort):
     20 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_30_minuten = Referentiedata(
+    brandwerendheidscore_30_minuten = BrandwerendheidscoreReferentiedata(
         code="30",
         naam="30 minuten",
     )
@@ -27,7 +31,7 @@ class Brandwerendheidscore(Referentiedatasoort):
     30 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_45_minuten = Referentiedata(
+    brandwerendheidscore_45_minuten = BrandwerendheidscoreReferentiedata(
         code="45",
         naam="45 minuten",
     )
@@ -35,7 +39,7 @@ class Brandwerendheidscore(Referentiedatasoort):
     45 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_60_minuten = Referentiedata(
+    brandwerendheidscore_60_minuten = BrandwerendheidscoreReferentiedata(
         code="60",
         naam="60 minuten",
     )
@@ -43,7 +47,7 @@ class Brandwerendheidscore(Referentiedatasoort):
     60 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_90_minuten = Referentiedata(
+    brandwerendheidscore_90_minuten = BrandwerendheidscoreReferentiedata(
         code="90",
         naam="90 minuten",
     )
@@ -51,7 +55,7 @@ class Brandwerendheidscore(Referentiedatasoort):
     90 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_120_minuten = Referentiedata(
+    brandwerendheidscore_120_minuten = BrandwerendheidscoreReferentiedata(
         code="120",
         naam="120 minuten",
     )
@@ -59,7 +63,7 @@ class Brandwerendheidscore(Referentiedatasoort):
     120 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_180_minuten = Referentiedata(
+    brandwerendheidscore_180_minuten = BrandwerendheidscoreReferentiedata(
         code="180",
         naam="180 minuten",
     )
@@ -67,7 +71,7 @@ class Brandwerendheidscore(Referentiedatasoort):
     180 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_240_minuten = Referentiedata(
+    brandwerendheidscore_240_minuten = BrandwerendheidscoreReferentiedata(
         code="240",
         naam="240 minuten",
     )
@@ -75,7 +79,7 @@ class Brandwerendheidscore(Referentiedatasoort):
     240 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_360_minuten = Referentiedata(
+    brandwerendheidscore_360_minuten = BrandwerendheidscoreReferentiedata(
         code="360",
         naam="360 minuten",
     )

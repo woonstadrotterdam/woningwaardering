@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class InformatieobjectdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Informatieobjectdetailsoort(Referentiedatasoort):
-    advertentietekst = Referentiedata(
+    advertentietekst = InformatieobjectdetailsoortReferentiedata(
         code="ADT",
         naam="Advertentietekst",
     )
@@ -11,67 +15,67 @@ class Informatieobjectdetailsoort(Referentiedatasoort):
     Advertentietekst met (HTML) of zonder opmaak (Text).
     """
 
-    advies = Referentiedata(
+    advies = InformatieobjectdetailsoortReferentiedata(
         code="ADV",
         naam="Advies",
     )
 
-    agenda = Referentiedata(
+    agenda = InformatieobjectdetailsoortReferentiedata(
         code="AGE",
         naam="Agenda",
     )
 
-    dag = Referentiedata(
+    dag = InformatieobjectdetailsoortReferentiedata(
         code="DAG",
         naam="Dag",
     )
 
-    evaluatie = Referentiedata(
+    evaluatie = InformatieobjectdetailsoortReferentiedata(
         code="EVA",
         naam="Evaluatie",
     )
 
-    inspectie = Referentiedata(
+    inspectie = InformatieobjectdetailsoortReferentiedata(
         code="INS",
         naam="Inspectie",
     )
 
-    jaar = Referentiedata(
+    jaar = InformatieobjectdetailsoortReferentiedata(
         code="JAA",
         naam="Jaar",
     )
 
-    kwartaal = Referentiedata(
+    kwartaal = InformatieobjectdetailsoortReferentiedata(
         code="KWA",
         naam="Kwartaal",
     )
 
-    maand = Referentiedata(
+    maand = InformatieobjectdetailsoortReferentiedata(
         code="MAA",
         naam="Maand",
     )
 
-    notulen = Referentiedata(
+    notulen = InformatieobjectdetailsoortReferentiedata(
         code="NOT",
         naam="Notulen",
     )
 
-    onderhoud = Referentiedata(
+    onderhoud = InformatieobjectdetailsoortReferentiedata(
         code="OND",
         naam="Onderhoud",
     )
 
-    programma = Referentiedata(
+    programma = InformatieobjectdetailsoortReferentiedata(
         code="PRG",
         naam="Programma",
     )
 
-    project = Referentiedata(
+    project = InformatieobjectdetailsoortReferentiedata(
         code="PRJ",
         naam="Project",
     )
 
-    week = Referentiedata(
+    week = InformatieobjectdetailsoortReferentiedata(
         code="WEE",
         naam="Week",
     )

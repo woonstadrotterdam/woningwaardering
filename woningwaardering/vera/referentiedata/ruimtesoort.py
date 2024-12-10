@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class RuimtesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Ruimtesoort(Referentiedatasoort):
-    buitenruimte = Referentiedata(
+    buitenruimte = RuimtesoortReferentiedata(
         code="BTR",
         naam="Buitenruimte",
     )
@@ -12,7 +16,7 @@ class Ruimtesoort(Referentiedatasoort):
     buitenruimte wordt gezien. Nader te specificeren met ruimtedetailsoort.
     """
 
-    gemeenschappelijke_ruimten_en_voorzieningen = Referentiedata(
+    gemeenschappelijke_ruimten_en_voorzieningen = RuimtesoortReferentiedata(
         code="GEM",
         naam="Gemeenschappelijke ruimten en voorzieningen",
     )
@@ -21,7 +25,7 @@ class Ruimtesoort(Referentiedatasoort):
     woningwaardering als gemeenschappelijke ruimte of voorziening wordt gezien
     """
 
-    overige_ruimten = Referentiedata(
+    overige_ruimten = RuimtesoortReferentiedata(
         code="OVR",
         naam="Overige ruimten",
     )
@@ -30,7 +34,7 @@ class Ruimtesoort(Referentiedatasoort):
     de woningwaardering. Nader te specificeren met ruimtedetailsoort.
     """
 
-    vertrek = Referentiedata(
+    vertrek = RuimtesoortReferentiedata(
         code="VTK",
         naam="Vertrek",
     )
@@ -39,7 +43,7 @@ class Ruimtesoort(Referentiedatasoort):
     (Beleidsboek waarderingsstelsel zelfstandige woonruimte)
     """
 
-    verkeersruimte = Referentiedata(
+    verkeersruimte = RuimtesoortReferentiedata(
         code="VRK",
         naam="Verkeersruimte",
     )
@@ -48,7 +52,7 @@ class Ruimtesoort(Referentiedatasoort):
     vertrekken.
     """
 
-    parkeergelegenheid = Referentiedata(
+    parkeergelegenheid = RuimtesoortReferentiedata(
         code="PAR",
         naam="Parkeergelegenheid",
     )

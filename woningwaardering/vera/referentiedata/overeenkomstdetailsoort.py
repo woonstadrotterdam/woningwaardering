@@ -1,10 +1,16 @@
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.overeenkomstsoort import Overeenkomstsoort
+from woningwaardering.vera.referentiedata.overeenkomstsoort import (
+    Overeenkomstsoort,
+)
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class OvereenkomstdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Overeenkomstdetailsoort(Referentiedatasoort):
-    bepaalde_tijd = Referentiedata(
+    bepaalde_tijd = OvereenkomstdetailsoortReferentiedata(
         code="BEP",
         naam="Bepaalde tijd",
         parent=Overeenkomstsoort.arbeid,
@@ -13,7 +19,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Arbeidsovereenkomst voor bepaalde tijd.
     """
 
-    bedrijfsonroerendgoed = Referentiedata(
+    bedrijfsonroerendgoed = OvereenkomstdetailsoortReferentiedata(
         code="BOG",
         naam="Bedrijfsonroerendgoed",
         parent=Overeenkomstsoort.huurovereenkomst,
@@ -22,7 +28,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Verhuur van vastgoed voor zakelijke doeleinden.
     """
 
-    campuscontract = Referentiedata(
+    campuscontract = OvereenkomstdetailsoortReferentiedata(
         code="CAM",
         naam="Campuscontract",
         parent=Overeenkomstsoort.huurovereenkomst,
@@ -33,7 +39,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     ook de overeenkomst.
     """
 
-    flexcontract = Referentiedata(
+    flexcontract = OvereenkomstdetailsoortReferentiedata(
         code="FLE",
         naam="Flexcontract",
         parent=Overeenkomstsoort.huurovereenkomst,
@@ -44,7 +50,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     7:271 lid 4 BW).
     """
 
-    jongerencontract = Referentiedata(
+    jongerencontract = OvereenkomstdetailsoortReferentiedata(
         code="JON",
         naam="Jongerencontract",
         parent=Overeenkomstsoort.huurovereenkomst,
@@ -54,7 +60,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     een geschikte woning voor jongeren.
     """
 
-    koopgarant = Referentiedata(
+    koopgarant = OvereenkomstdetailsoortReferentiedata(
         code="KGA",
         naam="Koopgarant",
         parent=Overeenkomstsoort.koopovereenkomst,
@@ -65,7 +71,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     gewenst.
     """
 
-    mge_constructie = Referentiedata(
+    mge_constructie = OvereenkomstdetailsoortReferentiedata(
         code="MGE",
         naam="MGE constructie",
         parent=Overeenkomstsoort.koopovereenkomst,
@@ -74,7 +80,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Verkoop met Maatschappelijk Gebonden Eigendom.
     """
 
-    nieuwsbrief = Referentiedata(
+    nieuwsbrief = OvereenkomstdetailsoortReferentiedata(
         code="NIE",
         naam="Nieuwsbrief",
         parent=Overeenkomstsoort.serviceovereenkomst,
@@ -83,7 +89,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Nieuwsbrief voor marketing doeleinden.
     """
 
-    nul_uren_contract = Referentiedata(
+    nul_uren_contract = OvereenkomstdetailsoortReferentiedata(
         code="NUL",
         naam="Nul-uren contract",
         parent=Overeenkomstsoort.arbeid,
@@ -92,7 +98,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Nul-uren arbeidsovereenkomst
     """
 
-    onbepaalde_tijd = Referentiedata(
+    onbepaalde_tijd = OvereenkomstdetailsoortReferentiedata(
         code="OBE",
         naam="Onbepaalde tijd",
         parent=Overeenkomstsoort.arbeid,
@@ -101,7 +107,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Arbeidsovereenkomst voor onbepaalde tijd
     """
 
-    onbepaalde_tijd_contract = Referentiedata(
+    onbepaalde_tijd_contract = OvereenkomstdetailsoortReferentiedata(
         code="ONB",
         naam="Onbepaalde tijd contract",
         parent=Overeenkomstsoort.huurovereenkomst,
@@ -110,7 +116,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Regulier huurcontract zonder einddatum.
     """
 
-    persoonlijke_woonkrant = Referentiedata(
+    persoonlijke_woonkrant = OvereenkomstdetailsoortReferentiedata(
         code="PER",
         naam="Persoonlijke woonkrant",
         parent=Overeenkomstsoort.serviceovereenkomst,
@@ -119,7 +125,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Nieuwsbrief met gepersonificeerd aanbod. (Digizine)
     """
 
-    nieuwbouwinformatie = Referentiedata(
+    nieuwbouwinformatie = OvereenkomstdetailsoortReferentiedata(
         code="PRO",
         naam="Nieuwbouwinformatie",
         parent=Overeenkomstsoort.serviceovereenkomst,
@@ -129,7 +135,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     ontwikkelingen.
     """
 
-    shortstay = Referentiedata(
+    shortstay = OvereenkomstdetailsoortReferentiedata(
         code="SHS",
         naam="ShortStay",
         parent=Overeenkomstsoort.huurovereenkomst,
@@ -139,7 +145,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     tenminste zeven nachten en maximaal zes maanden
     """
 
-    tijdelijk_contract = Referentiedata(
+    tijdelijk_contract = OvereenkomstdetailsoortReferentiedata(
         code="TIJ",
         naam="Tijdelijk contract",
         parent=Overeenkomstsoort.huurovereenkomst,
@@ -148,7 +154,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Huurcontract voor bepaalde tijd.
     """
 
-    te_woon_en_of_vrije_keuze = Referentiedata(
+    te_woon_en_of_vrije_keuze = OvereenkomstdetailsoortReferentiedata(
         code="TWO",
         naam="Te Woon / Vrije keuze",
     )
@@ -156,7 +162,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     De woning is zowel te huur als te koop.
     """
 
-    is_onderdeel_uitpondproject = Referentiedata(
+    is_onderdeel_uitpondproject = OvereenkomstdetailsoortReferentiedata(
         code="UIT",
         naam="Is onderdeel uitpondproject",
         parent=Overeenkomstsoort.koopovereenkomst,
@@ -165,7 +171,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     Verkoop van voormalige huurwoning aan de voormalige huurder of een nieuwe eigenaar.
     """
 
-    inhuurovereenkomst_plaatsvervangend = Referentiedata(
+    inhuurovereenkomst_plaatsvervangend = OvereenkomstdetailsoortReferentiedata(
         code="INP",
         naam="Inhuurovereenkomst plaatsvervangend",
         parent=Overeenkomstsoort.arbeid,
@@ -175,7 +181,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     tijdelijk wordt ingehuurd om de taken van een afwezige medewerker over te nemen.
     """
 
-    inhuurovereenkomst_boven_formatie = Referentiedata(
+    inhuurovereenkomst_boven_formatie = OvereenkomstdetailsoortReferentiedata(
         code="INB",
         naam="Inhuurovereenkomst boven formatie",
         parent=Overeenkomstsoort.arbeid,
@@ -186,7 +192,7 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     personeelsformatie.
     """
 
-    inhuurovereenkomst_structureel = Referentiedata(
+    inhuurovereenkomst_structureel = OvereenkomstdetailsoortReferentiedata(
         code="INS",
         naam="Inhuurovereenkomst structureel",
         parent=Overeenkomstsoort.arbeid,

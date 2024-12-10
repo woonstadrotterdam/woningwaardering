@@ -2,18 +2,22 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class SignaleringstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Signaleringstatus(Referentiedatasoort):
-    actief = Referentiedata(
+    actief = SignaleringstatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
 
-    passief = Referentiedata(
+    passief = SignaleringstatusReferentiedata(
         code="PAS",
         naam="Passief",
     )
 
-    vervallen = Referentiedata(
+    vervallen = SignaleringstatusReferentiedata(
         code="VER",
         naam="Vervallen",
     )

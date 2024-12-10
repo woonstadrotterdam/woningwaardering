@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ReclamatiesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Reclamatiesoort(Referentiedatasoort):
-    bezwaar = Referentiedata(
+    bezwaar = ReclamatiesoortReferentiedata(
         code="BEZ",
         naam="Bezwaar",
     )
@@ -12,7 +16,7 @@ class Reclamatiesoort(Referentiedatasoort):
     woonruimteverdeelproces.
     """
 
-    klacht = Referentiedata(
+    klacht = ReclamatiesoortReferentiedata(
         code="KLA",
         naam="Klacht",
     )

@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class UitvoerendesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Uitvoerendesoort(Referentiedatasoort):
-    leverancier = Referentiedata(
+    leverancier = UitvoerendesoortReferentiedata(
         code="LEV",
         naam="Leverancier",
     )
@@ -11,7 +15,7 @@ class Uitvoerendesoort(Referentiedatasoort):
     Uitvoering vindt plaats door een externe partij
     """
 
-    vakgroep = Referentiedata(
+    vakgroep = UitvoerendesoortReferentiedata(
         code="VAK",
         naam="Vakgroep",
     )

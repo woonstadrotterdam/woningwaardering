@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class MaatschappelijklabelReferentiedata(Referentiedata):
+    pass
+
+
 class Maatschappelijklabel(Referentiedatasoort):
-    daeb = Referentiedata(
+    daeb = MaatschappelijklabelReferentiedata(
         code="DAE",
         naam="DAEB",
     )
@@ -15,7 +19,7 @@ class Maatschappelijklabel(Referentiedatasoort):
     als DAEB verantwoord worden.
     """
 
-    geconsolideerde_niet_daeb_verbinding = Referentiedata(
+    geconsolideerde_niet_daeb_verbinding = MaatschappelijklabelReferentiedata(
         code="GNDV",
         naam="Geconsolideerde NIET-DAEB verbinding",
     )
@@ -24,7 +28,7 @@ class Maatschappelijklabel(Referentiedatasoort):
     consolidatiebedrijf is, waarbinnen NIET-DAEB activiteiten worden verricht.
     """
 
-    niet_daeb = Referentiedata(
+    niet_daeb = MaatschappelijklabelReferentiedata(
         code="NDA",
         naam="NIET-DAEB",
     )

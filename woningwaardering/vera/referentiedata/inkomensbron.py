@@ -2,23 +2,27 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class InkomensbronReferentiedata(Referentiedata):
+    pass
+
+
 class Inkomensbron(Referentiedatasoort):
-    anders = Referentiedata(
+    anders = InkomensbronReferentiedata(
         code="AND",
         naam="Anders",
     )
 
-    arbeid = Referentiedata(
+    arbeid = InkomensbronReferentiedata(
         code="ARB",
         naam="Arbeid",
     )
 
-    sociale_uitkering = Referentiedata(
+    sociale_uitkering = InkomensbronReferentiedata(
         code="SOC",
         naam="Sociale uitkering",
     )
 
-    studiefinanciering = Referentiedata(
+    studiefinanciering = InkomensbronReferentiedata(
         code="STU",
         naam="Studiefinanciering",
     )

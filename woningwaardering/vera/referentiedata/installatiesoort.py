@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class InstallatiesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Installatiesoort(Referentiedatasoort):
-    inbouw_afzuiginstallatie = Referentiedata(
+    inbouw_afzuiginstallatie = InstallatiesoortReferentiedata(
         code="IAF",
         naam="Inbouw afzuiginstallatie",
     )
@@ -14,7 +18,7 @@ class Installatiesoort(Referentiedatasoort):
     kookinstallatie zijn, als een in het aanrecht geïntegreerd afzuigsysteem.
     """
 
-    inbouw_kookplaat_inductie = Referentiedata(
+    inbouw_kookplaat_inductie = InstallatiesoortReferentiedata(
         code="IKI",
         naam="Inbouw kookplaat inductie",
     )
@@ -25,7 +29,7 @@ class Installatiesoort(Referentiedatasoort):
     energie-efficiëntie in vergelijking met traditionele kookplaten.
     """
 
-    inbouw_kookplaat_keramisch = Referentiedata(
+    inbouw_kookplaat_keramisch = InstallatiesoortReferentiedata(
         code="IKK",
         naam="Inbouw kookplaat keramisch",
     )
@@ -36,7 +40,7 @@ class Installatiesoort(Referentiedatasoort):
     schoon te maken is, maar trager opwarmt dan inductie.
     """
 
-    inbouw_kookplaat_gas = Referentiedata(
+    inbouw_kookplaat_gas = InstallatiesoortReferentiedata(
         code="IKG",
         naam="Inbouw kookplaat gas",
     )
@@ -47,7 +51,7 @@ class Installatiesoort(Referentiedatasoort):
     kookgerei, maar vereist gasaanvoer en ventilatie.
     """
 
-    inbouw_koelkast = Referentiedata(
+    inbouw_koelkast = InstallatiesoortReferentiedata(
         code="IKO",
         naam="Inbouw koelkast",
     )
@@ -58,7 +62,7 @@ class Installatiesoort(Referentiedatasoort):
     uitstraling in de keuken.
     """
 
-    inbouw_vrieskast = Referentiedata(
+    inbouw_vrieskast = InstallatiesoortReferentiedata(
         code="IVR",
         naam="Inbouw vrieskast",
     )
@@ -69,7 +73,7 @@ class Installatiesoort(Referentiedatasoort):
     uniforme uitstraling in de keuken.
     """
 
-    inbouw_oven_elektrisch = Referentiedata(
+    inbouw_oven_elektrisch = InstallatiesoortReferentiedata(
         code="IOE",
         naam="Inbouw oven elektrisch",
     )
@@ -80,7 +84,7 @@ class Installatiesoort(Referentiedatasoort):
     programma's voor diverse kookmethoden.
     """
 
-    inbouw_oven_gas = Referentiedata(
+    inbouw_oven_gas = InstallatiesoortReferentiedata(
         code="IOG",
         naam="Inbouw oven gas",
     )
@@ -91,7 +95,7 @@ class Installatiesoort(Referentiedatasoort):
     vereist gasaanvoer.
     """
 
-    inbouw_magnetron = Referentiedata(
+    inbouw_magnetron = InstallatiesoortReferentiedata(
         code="IMA",
         naam="Inbouw magnetron",
     )
@@ -102,7 +106,7 @@ class Installatiesoort(Referentiedatasoort):
     uitstraling in de keuken.
     """
 
-    inbouw_vaatwasmachine = Referentiedata(
+    inbouw_vaatwasmachine = InstallatiesoortReferentiedata(
         code="IVA",
         naam="Inbouw vaatwasmachine",
     )
@@ -113,7 +117,7 @@ class Installatiesoort(Referentiedatasoort):
     uitstraling van de keuken.
     """
 
-    extra_keukenkastruimte_boven_het_minimum = Referentiedata(
+    extra_keukenkastruimte_boven_het_minimum = InstallatiesoortReferentiedata(
         code="EKA",
         naam="Extra keukenkastruimte boven het minimum",
     )
@@ -121,7 +125,7 @@ class Installatiesoort(Referentiedatasoort):
     per 60 cm breedte, met een minimum van 60 cm hoogte
     """
 
-    eenhandsmengkraan = Referentiedata(
+    eenhandsmengkraan = InstallatiesoortReferentiedata(
         code="EHM",
         naam="Éénhandsmengkraan",
     )
@@ -132,7 +136,7 @@ class Installatiesoort(Referentiedatasoort):
     elke keuken of badkamer.
     """
 
-    thermostatische_mengkraan = Referentiedata(
+    thermostatische_mengkraan = InstallatiesoortReferentiedata(
         code="TME",
         naam="Thermostatische mengkraan",
     )
@@ -143,7 +147,7 @@ class Installatiesoort(Referentiedatasoort):
     of keuken.
     """
 
-    kokend_waterfunctie = Referentiedata(
+    kokend_waterfunctie = InstallatiesoortReferentiedata(
         code="KWA",
         naam="Kokend waterfunctie",
     )
@@ -154,7 +158,7 @@ class Installatiesoort(Referentiedatasoort):
     apart of in aanvulling op de kraan
     """
 
-    staand_toilet = Referentiedata(
+    staand_toilet = InstallatiesoortReferentiedata(
         code="STO",
         naam="Staand Toilet",
     )
@@ -167,7 +171,7 @@ class Installatiesoort(Referentiedatasoort):
     niet in aanmerking voor waardering.
     """
 
-    hangend_toilet = Referentiedata(
+    hangend_toilet = InstallatiesoortReferentiedata(
         code="HTO",
         naam="Hangend toilet",
     )
@@ -180,7 +184,7 @@ class Installatiesoort(Referentiedatasoort):
     toiletruimten en badkamers komen niet in aanmerking voor waardering.
     """
 
-    wastafel = Referentiedata(
+    wastafel = InstallatiesoortReferentiedata(
         code="WAS",
         naam="Wastafel",
     )
@@ -196,7 +200,7 @@ class Installatiesoort(Referentiedatasoort):
     keer per vertrek of overige ruimte, m.u.v. de badkamer.
     """
 
-    meerpersoonswastafel = Referentiedata(
+    meerpersoonswastafel = InstallatiesoortReferentiedata(
         code="MPW",
         naam="Meerpersoonswastafel",
     )
@@ -210,7 +214,7 @@ class Installatiesoort(Referentiedatasoort):
     afzonderlijk gewaardeerd.
     """
 
-    douche = Referentiedata(
+    douche = InstallatiesoortReferentiedata(
         code="DOU",
         naam="Douche",
     )
@@ -227,7 +231,7 @@ class Installatiesoort(Referentiedatasoort):
     douchecabine ingenomen oppervlakte.
     """
 
-    bad = Referentiedata(
+    bad = InstallatiesoortReferentiedata(
         code="BAD",
         naam="Bad",
     )
@@ -241,7 +245,7 @@ class Installatiesoort(Referentiedatasoort):
     douchegarnituur niet afzonderlijk geteld.
     """
 
-    bad_en_douche = Referentiedata(
+    bad_en_douche = InstallatiesoortReferentiedata(
         code="BDO",
         naam="Bad en douche",
     )
@@ -250,7 +254,7 @@ class Installatiesoort(Referentiedatasoort):
     aangebracht, geldt een afwijkende waardering.
     """
 
-    bubbelfunctie_van_het_bad = Referentiedata(
+    bubbelfunctie_van_het_bad = InstallatiesoortReferentiedata(
         code="BUB",
         naam="Bubbelfunctie van het bad",
     )
@@ -261,7 +265,7 @@ class Installatiesoort(Referentiedatasoort):
     bieden.
     """
 
-    douchewand = Referentiedata(
+    douchewand = InstallatiesoortReferentiedata(
         code="DOW",
         naam="Douchewand",
     )
@@ -274,7 +278,7 @@ class Installatiesoort(Referentiedatasoort):
     worden) niet.
     """
 
-    handdoekenradiator = Referentiedata(
+    handdoekenradiator = InstallatiesoortReferentiedata(
         code="HRA",
         naam="Handdoekenradiator",
     )
@@ -285,7 +289,7 @@ class Installatiesoort(Referentiedatasoort):
     voor een aangename temperatuur.
     """
 
-    ingebouwd_kastje_met_in_of_opgebouwde_wastafel = Referentiedata(
+    ingebouwd_kastje_met_in_of_opgebouwde_wastafel = InstallatiesoortReferentiedata(
         code="IKW",
         naam="Ingebouwd kastje met in- of opgebouwde wastafel",
     )
@@ -295,7 +299,7 @@ class Installatiesoort(Referentiedatasoort):
     een gestroomlijnde uitstraling en praktische opslag in badkamers of keukens.
     """
 
-    kastruimte = Referentiedata(
+    kastruimte = InstallatiesoortReferentiedata(
         code="KAS",
         naam="Kastruimte",
     )
@@ -303,7 +307,7 @@ class Installatiesoort(Referentiedatasoort):
     Kastruimte met een minimale breedte van 40cm, en minimale hoogte van 40cm.
     """
 
-    stopcontact_bij_wastafel = Referentiedata(
+    stopcontact_bij_wastafel = InstallatiesoortReferentiedata(
         code="STW",
         naam="Stopcontact bij wastafel",
     )

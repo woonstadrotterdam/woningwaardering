@@ -7,6 +7,7 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
@@ -19,7 +20,7 @@ from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
 from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
-parkeertype_punten_mapping = {
+parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
     Ruimtedetailsoort.parkeervak_auto_binnen: {"Type I": Decimal("9.0")},
     Ruimtedetailsoort.carport: {"Type II": Decimal("6.0")},
     Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt: {

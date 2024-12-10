@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EenheidsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Eenheidsoort(Referentiedatasoort):
-    bedrijfsruimte = Referentiedata(
+    bedrijfsruimte = EenheidsoortReferentiedata(
         code="BED",
         naam="Bedrijfsruimte",
     )
@@ -11,7 +15,7 @@ class Eenheidsoort(Referentiedatasoort):
     Bedrijfsruimte en winkels
     """
 
-    intramuraal_zorgvastgoed = Referentiedata(
+    intramuraal_zorgvastgoed = EenheidsoortReferentiedata(
         code="INT",
         naam="Intramuraal zorgvastgoed",
     )
@@ -24,7 +28,7 @@ class Eenheidsoort(Referentiedatasoort):
     gehandicapten of instelling voor cliënten met langdurige psychische problemen.
     """
 
-    maatschappelijk_vastgoed = Referentiedata(
+    maatschappelijk_vastgoed = EenheidsoortReferentiedata(
         code="MOG",
         naam="Maatschappelijk vastgoed",
     )
@@ -34,7 +38,7 @@ class Eenheidsoort(Referentiedatasoort):
     buurtcentra, scholen en bibliotheken.
     """
 
-    overig = Referentiedata(
+    overig = EenheidsoortReferentiedata(
         code="OVE",
         naam="Overig",
     )
@@ -42,7 +46,7 @@ class Eenheidsoort(Referentiedatasoort):
     Restcategorie voor ligplaatsen, bergingen, bouwkavels, plantsoenen etc.
     """
 
-    parkeergelegenheid = Referentiedata(
+    parkeergelegenheid = EenheidsoortReferentiedata(
         code="PAR",
         naam="Parkeergelegenheid",
     )
@@ -50,7 +54,7 @@ class Eenheidsoort(Referentiedatasoort):
     Parkeergelegenheden, Garage, parkeerplaatsen individueel of collectief
     """
 
-    recreatiebestemming = Referentiedata(
+    recreatiebestemming = EenheidsoortReferentiedata(
         code="REC",
         naam="Recreatiebestemming",
     )
@@ -58,7 +62,7 @@ class Eenheidsoort(Referentiedatasoort):
     Vastgoed voor recreatief gebruik (lokale regelgeving) zoals Recreatiewoningen
     """
 
-    woonruimte = Referentiedata(
+    woonruimte = EenheidsoortReferentiedata(
         code="WOO",
         naam="Woonruimte",
     )

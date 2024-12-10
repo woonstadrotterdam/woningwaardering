@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class DoelgroepReferentiedata(Referentiedata):
+    pass
+
+
 class Doelgroep(Referentiedatasoort):
-    persoon = Referentiedata(
+    persoon = DoelgroepReferentiedata(
         code="EEN",
         naam="Persoon",
     )
@@ -11,7 +15,7 @@ class Doelgroep(Referentiedatasoort):
     Woonruimte is bestemd voor en/of huurder vormt een eenpersoonshuishouden
     """
 
-    gezin = Referentiedata(
+    gezin = DoelgroepReferentiedata(
         code="GEZ",
         naam="Gezin",
     )
@@ -20,7 +24,7 @@ class Doelgroep(Referentiedatasoort):
     verzorging en opvoeding van één of meer kinderen.
     """
 
-    huishouden_zonder_kinderen = Referentiedata(
+    huishouden_zonder_kinderen = DoelgroepReferentiedata(
         code="HZO",
         naam="Huishouden zonder kinderen",
     )
@@ -30,7 +34,7 @@ class Doelgroep(Referentiedatasoort):
     verzorgen.
     """
 
-    jongeren = Referentiedata(
+    jongeren = DoelgroepReferentiedata(
         code="JON",
         naam="Jongeren",
     )
@@ -39,7 +43,7 @@ class Doelgroep(Referentiedatasoort):
     specifieke maximum leeftijd
     """
 
-    senioren = Referentiedata(
+    senioren = DoelgroepReferentiedata(
         code="SEN",
         naam="Senioren",
     )
@@ -48,7 +52,7 @@ class Doelgroep(Referentiedatasoort):
     specifieke minimum leeftijd
     """
 
-    starter = Referentiedata(
+    starter = DoelgroepReferentiedata(
         code="STA",
         naam="Starter",
     )
@@ -56,7 +60,7 @@ class Doelgroep(Referentiedatasoort):
     Woonruimte is bestemd voor en/of huurder betreft een starter op de woningmarkt
     """
 
-    studenten = Referentiedata(
+    studenten = DoelgroepReferentiedata(
         code="STU",
         naam="Studenten",
     )
@@ -65,7 +69,7 @@ class Doelgroep(Referentiedatasoort):
     studiefinanciering, studeert voltijds of gaat promoveren).
     """
 
-    zorg = Referentiedata(
+    zorg = DoelgroepReferentiedata(
         code="ZOR",
         naam="Zorg",
     )

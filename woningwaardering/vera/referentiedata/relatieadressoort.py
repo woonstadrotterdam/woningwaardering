@@ -2,18 +2,22 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class RelatieadressoortReferentiedata(Referentiedata):
+    pass
+
+
 class Relatieadressoort(Referentiedatasoort):
-    bezoekadres = Referentiedata(
+    bezoekadres = RelatieadressoortReferentiedata(
         code="BEZ",
         naam="Bezoekadres",
     )
 
-    factuuradres = Referentiedata(
+    factuuradres = RelatieadressoortReferentiedata(
         code="FAC",
         naam="Factuuradres",
     )
 
-    leveringsadres = Referentiedata(
+    leveringsadres = RelatieadressoortReferentiedata(
         code="LEV",
         naam="Leveringsadres",
     )
@@ -21,12 +25,12 @@ class Relatieadressoort(Referentiedatasoort):
     Het adres waar eventuele goederen afgeleverd of bezorgd dienen te worden.
     """
 
-    postadres = Referentiedata(
+    postadres = RelatieadressoortReferentiedata(
         code="POS",
         naam="Postadres",
     )
 
-    woonadres = Referentiedata(
+    woonadres = RelatieadressoortReferentiedata(
         code="WOO",
         naam="Woonadres",
     )

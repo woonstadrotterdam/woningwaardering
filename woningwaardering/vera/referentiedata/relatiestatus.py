@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class RelatiestatusReferentiedata(Referentiedata):
+    pass
+
+
 class Relatiestatus(Referentiedatasoort):
-    actief = Referentiedata(
+    actief = RelatiestatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
@@ -11,7 +15,7 @@ class Relatiestatus(Referentiedatasoort):
     De relatie is een actieve relatie
     """
 
-    inactief = Referentiedata(
+    inactief = RelatiestatusReferentiedata(
         code="INA",
         naam="Inactief",
     )
@@ -19,7 +23,7 @@ class Relatiestatus(Referentiedatasoort):
     De relatie is niet (meer) actief
     """
 
-    slapend = Referentiedata(
+    slapend = RelatiestatusReferentiedata(
         code="SLA",
         naam="Slapend",
     )

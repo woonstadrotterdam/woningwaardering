@@ -2,18 +2,22 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ContactgegevendetailsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Contactgegevendetailsoort(Referentiedatasoort):
-    in_case_of_emergency = Referentiedata(
+    in_case_of_emergency = ContactgegevendetailsoortReferentiedata(
         code="ICE",
         naam="In case of emergency",
     )
 
-    prive = Referentiedata(
+    prive = ContactgegevendetailsoortReferentiedata(
         code="PRI",
         naam="Privé",
     )
 
-    zakelijk = Referentiedata(
+    zakelijk = ContactgegevendetailsoortReferentiedata(
         code="ZAK",
         naam="Zakelijk",
     )

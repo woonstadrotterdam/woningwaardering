@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BoekingdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Boekingdetailsoort(Referentiedatasoort):
-    aanmaning = Referentiedata(
+    aanmaning = BoekingdetailsoortReferentiedata(
         code="AAN",
         naam="Aanmaning",
     )
@@ -13,7 +17,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     daarvan.
     """
 
-    afboeking = Referentiedata(
+    afboeking = BoekingdetailsoortReferentiedata(
         code="AFB",
         naam="Afboeking",
     )
@@ -21,7 +25,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     Boeking voor afboeken van het totale saldo van een openstaande vordering.
     """
 
-    bank = Referentiedata(
+    bank = BoekingdetailsoortReferentiedata(
         code="BAN",
         naam="Bank",
     )
@@ -30,7 +34,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     uitgevoerd.
     """
 
-    betalingsregeling = Referentiedata(
+    betalingsregeling = BoekingdetailsoortReferentiedata(
         code="BET",
         naam="Betalingsregeling",
     )
@@ -39,7 +43,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     voor een of meer openstaande vorderingen.
     """
 
-    borg = Referentiedata(
+    borg = BoekingdetailsoortReferentiedata(
         code="BOR",
         naam="Borg",
     )
@@ -49,7 +53,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     ontvangst of uitbetaling daarvan.
     """
 
-    betalingsregelingtermijn = Referentiedata(
+    betalingsregelingtermijn = BoekingdetailsoortReferentiedata(
         code="BRT",
         naam="Betalingsregelingtermijn",
     )
@@ -58,7 +62,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     met een huurder of debiteur afgesproken betalingsregeling.
     """
 
-    creditnota = Referentiedata(
+    creditnota = BoekingdetailsoortReferentiedata(
         code="CRE",
         naam="Creditnota",
     )
@@ -66,7 +70,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     Boeking voor het geheel of gedeeltelijk corrigeren van een debiteurenfactuur.
     """
 
-    eindafrekening = Referentiedata(
+    eindafrekening = BoekingdetailsoortReferentiedata(
         code="EIN",
         naam="Eindafrekening",
     )
@@ -76,7 +80,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     daarvan.
     """
 
-    eerste_verhuurnota = Referentiedata(
+    eerste_verhuurnota = BoekingdetailsoortReferentiedata(
         code="EVN",
         naam="Eerste verhuurnota",
     )
@@ -85,7 +89,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     voor een nieuwe huurder, dan wel de ontvangst naar aanleiding daarvan.
     """
 
-    factuur = Referentiedata(
+    factuur = BoekingdetailsoortReferentiedata(
         code="FAC",
         naam="Factuur",
     )
@@ -95,7 +99,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     aanleiding daarvan.
     """
 
-    prolongatie = Referentiedata(
+    prolongatie = BoekingdetailsoortReferentiedata(
         code="PRO",
         naam="Prolongatie",
     )
@@ -104,7 +108,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     huurprolongatie.
     """
 
-    storno = Referentiedata(
+    storno = BoekingdetailsoortReferentiedata(
         code="STO",
         naam="Storno",
     )
@@ -113,7 +117,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     of doordat deze niet kan worden uitgevoerd door de bank.
     """
 
-    terugbetaling = Referentiedata(
+    terugbetaling = BoekingdetailsoortReferentiedata(
         code="TER",
         naam="Terugbetaling",
     )
@@ -122,7 +126,7 @@ class Boekingdetailsoort(Referentiedatasoort):
     betaald bedrag.
     """
 
-    voucher = Referentiedata(
+    voucher = BoekingdetailsoortReferentiedata(
         code="VOU",
         naam="Voucher",
     )

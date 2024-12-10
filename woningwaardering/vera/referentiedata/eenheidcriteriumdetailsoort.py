@@ -5,8 +5,12 @@ from woningwaardering.vera.referentiedata.eenheidcriteriumsoort import (
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EenheidcriteriumdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Eenheidcriteriumdetailsoort(Referentiedatasoort):
-    beroep = Referentiedata(
+    beroep = EenheidcriteriumdetailsoortReferentiedata(
         code="BER",
         naam="Beroep",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -15,7 +19,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Urgentie wegens een bijzonder beroep in de regio onderwijs, zorg of politie
     """
 
-    dakloos = Referentiedata(
+    dakloos = EenheidcriteriumdetailsoortReferentiedata(
         code="DAK",
         naam="(Bijna) dakloos",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -24,7 +28,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     dakloos / calamiteit /brand onbewoonbaar / uitzetting / terugkeer uit buitenland
     """
 
-    doelgroep = Referentiedata(
+    doelgroep = EenheidcriteriumdetailsoortReferentiedata(
         code="DOE",
         naam="Doelgroep",
         parent=Eenheidcriteriumsoort.groep,
@@ -33,7 +37,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Behoren tot een doelgroep. Bijv. gezin, student, senioren etc.
     """
 
-    gedupeerd = Referentiedata(
+    gedupeerd = EenheidcriteriumdetailsoortReferentiedata(
         code="DUP",
         naam="Gedupeerd",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -42,7 +46,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Urgentie wegens dupering van woningzoekende bij woningaanbieding
     """
 
-    economisch = Referentiedata(
+    economisch = EenheidcriteriumdetailsoortReferentiedata(
         code="ECO",
         naam="Economisch",
         parent=Eenheidcriteriumsoort.binding,
@@ -51,7 +55,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Economische binding
     """
 
-    ex_gedetineerd = Referentiedata(
+    ex_gedetineerd = EenheidcriteriumdetailsoortReferentiedata(
         code="EXD",
         naam="ex-gedetineerd",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -60,7 +64,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Urgentie wegens het vrijkomen uit detentie
     """
 
-    financieel = Referentiedata(
+    financieel = EenheidcriteriumdetailsoortReferentiedata(
         code="FIN",
         naam="Financieel",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -69,7 +73,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Urgentie wegens financiele problemen
     """
 
-    gelijkvloers = Referentiedata(
+    gelijkvloers = EenheidcriteriumdetailsoortReferentiedata(
         code="GEL",
         naam="Gelijkvloers",
         parent=Eenheidcriteriumsoort.indicatie,
@@ -78,7 +82,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Indicatie voor een gelijkvloerse woning
     """
 
-    geweld_bedreiging_en_of_overlast = Referentiedata(
+    geweld_bedreiging_en_of_overlast = EenheidcriteriumdetailsoortReferentiedata(
         code="GEW",
         naam="Geweld bedreiging / overlast",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -87,7 +91,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Urgentie wegens overlast uit de omgeving of bedreiging.
     """
 
-    herhuisvesting = Referentiedata(
+    herhuisvesting = EenheidcriteriumdetailsoortReferentiedata(
         code="HUI",
         naam="Herhuisvesting",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -96,7 +100,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Urgentie wegens (langdurige) renovatie, nieuwbouw of sloop
     """
 
-    kern = Referentiedata(
+    kern = EenheidcriteriumdetailsoortReferentiedata(
         code="KRN",
         naam="Kern",
         parent=Eenheidcriteriumsoort.binding,
@@ -105,7 +109,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Kernbinding
     """
 
-    maatschappelijk = Referentiedata(
+    maatschappelijk = EenheidcriteriumdetailsoortReferentiedata(
         code="MAA",
         naam="Maatschappelijk",
         parent=Eenheidcriteriumsoort.binding,
@@ -114,7 +118,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Maatschappelijke binding
     """
 
-    mantelzorg = Referentiedata(
+    mantelzorg = EenheidcriteriumdetailsoortReferentiedata(
         code="MAN",
         naam="Mantelzorg",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -123,7 +127,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Urgentie wegens het ontvangen of geven van mantelzorg
     """
 
-    medisch = Referentiedata(
+    medisch = EenheidcriteriumdetailsoortReferentiedata(
         code="MED",
         naam="Medisch",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -132,7 +136,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Urgentie voor een aangepaste woning op medische gronden
     """
 
-    regio = Referentiedata(
+    regio = EenheidcriteriumdetailsoortReferentiedata(
         code="REG",
         naam="Regio",
         parent=Eenheidcriteriumsoort.binding,
@@ -141,7 +145,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Regionale of regio binding
     """
 
-    relationeel = Referentiedata(
+    relationeel = EenheidcriteriumdetailsoortReferentiedata(
         code="REL",
         naam="Relationeel",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -150,7 +154,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Echtscheiding / verbroken relatie / gezinsproblemen /zwangerschap
     """
 
-    rollatorgeschikt = Referentiedata(
+    rollatorgeschikt = EenheidcriteriumdetailsoortReferentiedata(
         code="ROL",
         naam="Rollatorgeschikt",
         parent=Eenheidcriteriumsoort.indicatie,
@@ -159,7 +163,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Indicatie voor een rollatorgeschikte woning
     """
 
-    rolstoelgeschikt = Referentiedata(
+    rolstoelgeschikt = EenheidcriteriumdetailsoortReferentiedata(
         code="RST",
         naam="Rolstoelgeschikt",
         parent=Eenheidcriteriumsoort.indicatie,
@@ -168,7 +172,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Indicatie voor een rolstoelgeschikte woning
     """
 
-    servicewoning = Referentiedata(
+    servicewoning = EenheidcriteriumdetailsoortReferentiedata(
         code="SER",
         naam="Servicewoning",
         parent=Eenheidcriteriumsoort.indicatie,
@@ -177,7 +181,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Woningen bij een zorginstelling of verpleegcentrum.
     """
 
-    sociaal = Referentiedata(
+    sociaal = EenheidcriteriumdetailsoortReferentiedata(
         code="SOC",
         naam="Sociaal",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -187,7 +191,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     gezinsleden.
     """
 
-    statushouder = Referentiedata(
+    statushouder = EenheidcriteriumdetailsoortReferentiedata(
         code="STA",
         naam="Statushouder",
         parent=Eenheidcriteriumsoort.urgentie,
@@ -196,7 +200,7 @@ class Eenheidcriteriumdetailsoort(Referentiedatasoort):
     Urgentie wegens het verkrijgen van een verblijfsstatus
     """
 
-    uitstroom_maatschappelijke_instelling = Referentiedata(
+    uitstroom_maatschappelijke_instelling = EenheidcriteriumdetailsoortReferentiedata(
         code="UIT",
         naam="Uitstroom maatschappelijke instelling",
         parent=Eenheidcriteriumsoort.urgentie,

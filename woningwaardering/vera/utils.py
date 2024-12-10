@@ -5,17 +5,21 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
 )
+from woningwaardering.vera.referentiedata import (
+    BouwkundigelementdetailsoortReferentiedata,
+)
 
 
 def get_bouwkundige_elementen(
-    ruimte: EenhedenRuimte, *bouwkundigelementdetailsoort: Referentiedata
+    ruimte: EenhedenRuimte,
+    *bouwkundigelementdetailsoort: BouwkundigelementdetailsoortReferentiedata,
 ) -> Iterator[BouwkundigElementenBouwkundigElement]:
     """
     Haalt de lijst met bouwkundige elementen met de gegeven detailsoorten in de ruimte op.
 
     Args:
         ruimte (EenhedenRuimte): Een ruimte met bouwkundige elementen
-        *bouwkundigelementdetailsoort (Referentiedata): De soort bouwkundige elementen die opgehaald moeten worden.
+        *bouwkundigelementdetailsoort (BouwkundigelementdetailsoortReferentiedata): De soort bouwkundige elementen die opgehaald moeten worden.
 
     Returns:
         Iterator[BouwkundigElementenBouwkundigElement]: Een iterator van bouwkundige elementen.
@@ -47,14 +51,15 @@ def get_bouwkundige_elementen_detailsoort(
 
 
 def heeft_bouwkundig_element(
-    ruimte: EenhedenRuimte, *bouwkundigelementdetailsoort: Referentiedata
+    ruimte: EenhedenRuimte,
+    *bouwkundigelementdetailsoort: BouwkundigelementdetailsoortReferentiedata,
 ) -> bool:
     """
     Controleert of een ruimte een specifiek bouwkundig element bevat.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waarin gecontroleerd moet worden.
-        *bouwkundigelementdetailsoort (Referentiedata): De bouwkundige elementen waarop gecontroleerd moet worden.
+        *bouwkundigelementdetailsoort (BouwkundigelementdetailsoortReferentiedata): De bouwkundige elementen waarop gecontroleerd moet worden.
 
     Returns:
         bool: True als de ruimte alle opgegeven bouwkundige elementen bevat, anders False.
@@ -69,14 +74,15 @@ def heeft_bouwkundig_element(
 
 
 def aantal_bouwkundige_elementen(
-    ruimte: EenhedenRuimte, *bouwkundigelementdetailsoort: Referentiedata
+    ruimte: EenhedenRuimte,
+    *bouwkundigelementdetailsoort: BouwkundigelementdetailsoortReferentiedata,
 ) -> int:
     """
     Telt (de combinatie van) het aantal bouwkundige elementen in een ruimte dat overeenkomt met het opgegeven bouwkundige element.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waarin geteld moet worden.
-        *bouwkundigelementdetailsoort (Referentiedata): De bouwkundige elementen die geteld moeten worden.
+        *bouwkundigelementdetailsoort (BouwkundigelementdetailsoortReferentiedata): De bouwkundige elementen die geteld moeten worden.
 
     Returns:
         int: Het aantal bouwkundige elementen in de ruimte dat overeenkomt met de opgegeven bouwkundige elementen.

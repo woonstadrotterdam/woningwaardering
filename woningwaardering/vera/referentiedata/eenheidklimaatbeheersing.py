@@ -5,8 +5,12 @@ from woningwaardering.vera.referentiedata.eenheidklimaatbeheersingsoort import (
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class EenheidklimaatbeheersingReferentiedata(Referentiedata):
+    pass
+
+
 class Eenheidklimaatbeheersing(Referentiedatasoort):
-    airco = Referentiedata(
+    airco = EenheidklimaatbeheersingReferentiedata(
         code="AIR",
         naam="Airco",
     )
@@ -18,7 +22,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     handhaven. Dit kan zowel individueel als collectief georganiseerd zijn.
     """
 
-    blokverwarming = Referentiedata(
+    blokverwarming = EenheidklimaatbeheersingReferentiedata(
         code="BLO",
         naam="Blokverwarming",
         parent=Eenheidklimaatbeheersingsoort.collectief,
@@ -31,7 +35,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     verwarmen.
     """
 
-    centrale_verwarming = Referentiedata(
+    centrale_verwarming = EenheidklimaatbeheersingReferentiedata(
         code="CEV",
         naam="Centrale verwarming",
     )
@@ -44,7 +48,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     georganiseerd zijn.
     """
 
-    gaskachels = Referentiedata(
+    gaskachels = EenheidklimaatbeheersingReferentiedata(
         code="GAS",
         naam="Gaskachels",
         parent=Eenheidklimaatbeheersingsoort.individueel,
@@ -55,7 +59,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     omgevingstemperatuur wordt verhoogd voor comfort in een ruimte.
     """
 
-    houtkachel = Referentiedata(
+    houtkachel = EenheidklimaatbeheersingReferentiedata(
         code="HKA",
         naam="Houtkachel",
         parent=Eenheidklimaatbeheersingsoort.individueel,
@@ -66,7 +70,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     ruimte wordt verwarmd voor comfort.
     """
 
-    muurverwarming = Referentiedata(
+    muurverwarming = EenheidklimaatbeheersingReferentiedata(
         code="MUU",
         naam="Muurverwarming",
         parent=Eenheidklimaatbeheersingsoort.individueel,
@@ -77,7 +81,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     waardoor de muren warmte afgeven en de ruimte gelijkmatig verwarmen.
     """
 
-    mechanische_ventilatie = Referentiedata(
+    mechanische_ventilatie = EenheidklimaatbeheersingReferentiedata(
         code="MVE",
         naam="Mechanische ventilatie",
     )
@@ -88,7 +92,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     kan zowel individueel als collectief georganiseerd zijn.
     """
 
-    open_haard = Referentiedata(
+    open_haard = EenheidklimaatbeheersingReferentiedata(
         code="OHA",
         naam="Open haard",
         parent=Eenheidklimaatbeheersingsoort.individueel,
@@ -99,7 +103,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     kookmogelijkheden.
     """
 
-    stadsverwarming = Referentiedata(
+    stadsverwarming = EenheidklimaatbeheersingReferentiedata(
         code="STV",
         naam="Stadsverwarming",
         parent=Eenheidklimaatbeheersingsoort.collectief,
@@ -112,12 +116,12 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     industriële processen, wat bijdraagt aan energie-efficiëntie.
     """
 
-    onverwarmd = Referentiedata(
+    onverwarmd = EenheidklimaatbeheersingReferentiedata(
         code="ONV",
         naam="Onverwarmd",
     )
 
-    vloerverwarming = Referentiedata(
+    vloerverwarming = EenheidklimaatbeheersingReferentiedata(
         code="VLV",
         naam="Vloerverwarming",
         parent=Eenheidklimaatbeheersingsoort.individueel,
@@ -128,7 +132,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     vloer wordt verwarmd en de warmte gelijkmatig wordt verspreid in de ruimte.
     """
 
-    volledig_elektrisch = Referentiedata(
+    volledig_elektrisch = EenheidklimaatbeheersingReferentiedata(
         code="VOL",
         naam="Volledig Elektrisch",
         parent=Eenheidklimaatbeheersingsoort.individueel,
@@ -137,7 +141,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     Volledig elektrische klimaatbeheersing
     """
 
-    warmtepomp_cv = Referentiedata(
+    warmtepomp_cv = EenheidklimaatbeheersingReferentiedata(
         code="WAC",
         naam="Warmtepomp CV",
     )
@@ -146,7 +150,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     waterpomp genoemd. Dit kan zowel individueel als collectief georganiseerd zijn.
     """
 
-    warmtepomp = Referentiedata(
+    warmtepomp = EenheidklimaatbeheersingReferentiedata(
         code="WAR",
         naam="Warmtepomp",
     )
@@ -155,7 +159,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     individueel als collectief georganiseerd zijn.
     """
 
-    warmte_koudeopslaginstallatie = Referentiedata(
+    warmte_koudeopslaginstallatie = EenheidklimaatbeheersingReferentiedata(
         code="WKO",
         naam="Warmte- koudeopslaginstallatie",
     )
@@ -166,7 +170,7 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
     (bodem-)waterpomp Dit kan zowel individueel als collectief georganiseerd zijn.
     """
 
-    warmteterugwinsysteem = Referentiedata(
+    warmteterugwinsysteem = EenheidklimaatbeheersingReferentiedata(
         code="WTW",
         naam="Warmteterugwinsysteem",
     )

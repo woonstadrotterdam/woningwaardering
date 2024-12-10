@@ -5,8 +5,12 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class WoningwaarderingstelselgroepReferentiedata(Referentiedata):
+    pass
+
+
 class Woningwaarderingstelselgroep(Referentiedatasoort):
-    bijzondere_voorzieningen = Referentiedata(
+    bijzondere_voorzieningen = WoningwaarderingstelselgroepReferentiedata(
         code="BIJ",
         naam="Bijzondere voorzieningen",
         parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
@@ -17,7 +21,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waarderingsstelsel zelfstandige woonruimte)
     """
 
-    beschermd_monument_bmo = Referentiedata(
+    beschermd_monument_bmo = WoningwaarderingstelselgroepReferentiedata(
         code="BMO",
         naam="Beschermd monument",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
@@ -27,7 +31,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     van een rijksmonument (Beleidsboek Waarderingsstelsel onzelfstandige woonruimte)
     """
 
-    beschermd_monument_bmz = Referentiedata(
+    beschermd_monument_bmz = WoningwaarderingstelselgroepReferentiedata(
         code="BMZ",
         naam="Beschermd monument",
         parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
@@ -37,7 +41,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     van een rijksmonument (Beleidsboek Waarderingsstelsel zelfstandige woonruimte)
     """
 
-    berging = Referentiedata(
+    berging = WoningwaarderingstelselgroepReferentiedata(
         code="BWN",
         naam="Berging",
         parent=Woningwaarderingstelsel.woonwagens,
@@ -47,7 +51,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     van een berging (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    energieprestatie = Referentiedata(
+    energieprestatie = WoningwaarderingstelselgroepReferentiedata(
         code="ENE",
         naam="Energieprestatie",
     )
@@ -56,17 +60,19 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waarderingsstelsel zelfstandige woonruimte)
     """
 
-    extra_punten_woonoppervlakte_standplaats = Referentiedata(
-        code="EOS",
-        naam="Extra punten woonoppervlakte standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen,
+    extra_punten_woonoppervlakte_standplaats = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="EOS",
+            naam="Extra punten woonoppervlakte standplaats",
+            parent=Woningwaarderingstelsel.standplaatsen,
+        )
     )
     """
     Standplaats: De groep criteria die betrekking heeft op de woonoppervlakte als die
     meer dan 200m2 bedraagt (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    woonvoorzieningen_voor_gehandicapten = Referentiedata(
+    woonvoorzieningen_voor_gehandicapten = WoningwaarderingstelselgroepReferentiedata(
         code="GEH",
         naam="Woonvoorzieningen voor gehandicapten",
     )
@@ -75,10 +81,12 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     een gehandicapte (Beleidsboek Waarderingsstelsel zelfstandige woonruimte)
     """
 
-    voorzieningen_gehandicapten_standplaats = Referentiedata(
-        code="GST",
-        naam="Voorzieningen gehandicapten standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen,
+    voorzieningen_gehandicapten_standplaats = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="GST",
+            naam="Voorzieningen gehandicapten standplaats",
+            parent=Woningwaarderingstelsel.standplaatsen,
+        )
     )
     """
     Standplaats: De groep criteria die betrekking heeft op (gedeeltelijk) vanuit de WMO
@@ -86,10 +94,12 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     woonwagen/standplaats: Huurcommissie)
     """
 
-    voorzieningen_gehandicapten_niet_standaardwoonwagen = Referentiedata(
-        code="GWN",
-        naam="Voorzieningen gehandicapten niet-standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens,
+    voorzieningen_gehandicapten_niet_standaardwoonwagen = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="GWN",
+            naam="Voorzieningen gehandicapten niet-standaardwoonwagen",
+            parent=Woningwaarderingstelsel.woonwagens,
+        )
     )
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op (gedeeltelijk)
@@ -97,10 +107,12 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     woonwagen/standplaats: Huurcommissie)
     """
 
-    voorzieningen_gehandicapten_standaardwoonwagen = Referentiedata(
-        code="GWS",
-        naam="Voorzieningen gehandicapten standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens,
+    voorzieningen_gehandicapten_standaardwoonwagen = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="GWS",
+            naam="Voorzieningen gehandicapten standaardwoonwagen",
+            parent=Woningwaarderingstelsel.woonwagens,
+        )
     )
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op (gedeeltelijk) vanuit
@@ -108,7 +120,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     woonwagen/standplaats: Huurcommissie)
     """
 
-    keuken = Referentiedata(
+    keuken = WoningwaarderingstelselgroepReferentiedata(
         code="KEU",
         naam="Keuken",
     )
@@ -117,7 +129,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     zelfstandige woonruimte)
     """
 
-    kookgelegenheid = Referentiedata(
+    kookgelegenheid = WoningwaarderingstelselgroepReferentiedata(
         code="KOO",
         naam="Kookgelegenheid",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
@@ -127,17 +139,19 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waarderingsstelsel onzelfstandige woonruimte)
     """
 
-    extra_kwaliteit_keuken_en_sanitair_standplaats = Referentiedata(
-        code="KST",
-        naam="Extra kwaliteit keuken en sanitair standplaats",
-        parent=Woningwaarderingstelsel.standplaatsen,
+    extra_kwaliteit_keuken_en_sanitair_standplaats = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="KST",
+            naam="Extra kwaliteit keuken en sanitair standplaats",
+            parent=Woningwaarderingstelsel.standplaatsen,
+        )
     )
     """
     Standplaats: De groep criteria die betrekking heeft op extra kwaliteit van keuken en
     sanitair  (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    kwaliteitsfactoren = Referentiedata(
+    kwaliteitsfactoren = WoningwaarderingstelselgroepReferentiedata(
         code="KWA",
         naam="Kwaliteitsfactoren",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
@@ -147,27 +161,31 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     (Beleidsboek Waarderingsstelsel onzelfstandige woonruimte)
     """
 
-    keuken_en_sanitair_niet_standaardwoonwagen = Referentiedata(
-        code="KWN",
-        naam="Keuken en sanitair niet-standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens,
+    keuken_en_sanitair_niet_standaardwoonwagen = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="KWN",
+            naam="Keuken en sanitair niet-standaardwoonwagen",
+            parent=Woningwaarderingstelsel.woonwagens,
+        )
     )
     """
     Niet-standaardwoonwagen: De groep criteria die betrekking heeft op keuken en
     sanitair  (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    extra_kwaliteit_keuken_en_sanitair_standaardwoonwagen = Referentiedata(
-        code="KWS",
-        naam="Extra kwaliteit keuken en sanitair standaardwoonwagen",
-        parent=Woningwaarderingstelsel.woonwagens,
+    extra_kwaliteit_keuken_en_sanitair_standaardwoonwagen = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="KWS",
+            naam="Extra kwaliteit keuken en sanitair standaardwoonwagen",
+            parent=Woningwaarderingstelsel.woonwagens,
+        )
     )
     """
     Standaardwoonwagen: De groep criteria die betrekking heeft op extra kwaliteit van
     keuken en sanitair  (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    minpunten_woonomgeving_standplaats = Referentiedata(
+    minpunten_woonomgeving_standplaats = WoningwaarderingstelselgroepReferentiedata(
         code="MWS",
         naam="Minpunten woonomgeving standplaats",
         parent=Woningwaarderingstelsel.standplaatsen,
@@ -177,7 +195,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     woonomgeving (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    oppervlakte_van_overige_ruimten = Referentiedata(
+    oppervlakte_van_overige_ruimten = WoningwaarderingstelselgroepReferentiedata(
         code="OOZ",
         naam="Oppervlakte van overige ruimten",
     )
@@ -187,7 +205,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     woonruimte)
     """
 
-    oppervlakte_onzelfstandige_woonruimte = Referentiedata(
+    oppervlakte_onzelfstandige_woonruimte = WoningwaarderingstelselgroepReferentiedata(
         code="OPO",
         naam="Oppervlakte onzelfstandige woonruimte",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
@@ -198,7 +216,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waarderingsstelsel onzelfstandige woonruimte)
     """
 
-    oppervlakte_standplaats = Referentiedata(
+    oppervlakte_standplaats = WoningwaarderingstelselgroepReferentiedata(
         code="OST",
         naam="Oppervlakte standplaats",
         parent=Woningwaarderingstelsel.standplaatsen,
@@ -208,7 +226,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    oppervlakte_van_vertrekken = Referentiedata(
+    oppervlakte_van_vertrekken = WoningwaarderingstelselgroepReferentiedata(
         code="OVZ",
         naam="Oppervlakte van vertrekken",
     )
@@ -217,7 +235,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     doucheruimte (Beleidsboek Waarderingsstelsel zelfstandige woonruimte)
     """
 
-    oppervlakte_niet_standaardwoonwagen = Referentiedata(
+    oppervlakte_niet_standaardwoonwagen = WoningwaarderingstelselgroepReferentiedata(
         code="OWN",
         naam="Oppervlakte niet-standaardwoonwagen",
         parent=Woningwaarderingstelsel.woonwagens,
@@ -227,7 +245,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    oppervlakte_standaardwoonwagen = Referentiedata(
+    oppervlakte_standaardwoonwagen = WoningwaarderingstelselgroepReferentiedata(
         code="OWS",
         naam="Oppervlakte standaardwoonwagen",
         parent=Woningwaarderingstelsel.woonwagens,
@@ -237,7 +255,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    prive_buitenruimten = Referentiedata(
+    prive_buitenruimten = WoningwaarderingstelselgroepReferentiedata(
         code="PRI",
         naam="Privé-buitenruimten",
         parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
@@ -250,7 +268,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     woonruimte)
     """
 
-    renovatie = Referentiedata(
+    renovatie = WoningwaarderingstelselgroepReferentiedata(
         code="REN",
         naam="Renovatie",
         parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
@@ -260,7 +278,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waarderingsstelsel zelfstandige woonruimte)
     """
 
-    sanitair = Referentiedata(
+    sanitair = WoningwaarderingstelselgroepReferentiedata(
         code="SAN",
         naam="Sanitair",
     )
@@ -269,7 +287,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waarderingsstelsel zelfstandige woonruimte)
     """
 
-    toilet = Referentiedata(
+    toilet = WoningwaarderingstelselgroepReferentiedata(
         code="TOI",
         naam="Toilet",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
@@ -279,7 +297,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     onzelfstandige woonruimte)
     """
 
-    verwarmingsmogelijkheden = Referentiedata(
+    verwarmingsmogelijkheden = WoningwaarderingstelselgroepReferentiedata(
         code="VON",
         naam="Verwarmingsmogelijkheden",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
@@ -289,7 +307,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waarderingsstelsel onzelfstandige woonruimte)
     """
 
-    verwarming_standplaats = Referentiedata(
+    verwarming_standplaats = WoningwaarderingstelselgroepReferentiedata(
         code="VST",
         naam="Verwarming standplaats",
         parent=Woningwaarderingstelsel.standplaatsen,
@@ -299,7 +317,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     woonwagen/standplaats: Huurcommissie)
     """
 
-    verwarming_niet_standaardwoonwagen = Referentiedata(
+    verwarming_niet_standaardwoonwagen = WoningwaarderingstelselgroepReferentiedata(
         code="VWN",
         naam="Verwarming niet-standaardwoonwagen",
         parent=Woningwaarderingstelsel.woonwagens,
@@ -309,7 +327,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    verwarming_standaardwoonwagen = Referentiedata(
+    verwarming_standaardwoonwagen = WoningwaarderingstelselgroepReferentiedata(
         code="VWS",
         naam="Verwarming standaardwoonwagen",
         parent=Woningwaarderingstelsel.woonwagens,
@@ -319,7 +337,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    verwarming = Referentiedata(
+    verwarming = WoningwaarderingstelselgroepReferentiedata(
         code="VZE",
         naam="Verwarming",
         parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
@@ -331,7 +349,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     zelfstandige woonruimte)
     """
 
-    wasgelegenheid = Referentiedata(
+    wasgelegenheid = WoningwaarderingstelselgroepReferentiedata(
         code="WAS",
         naam="Wasgelegenheid",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
@@ -341,7 +359,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waarderingsstelsel onzelfstandige woonruimte)
     """
 
-    punten_voor_de_woz_waarde = Referentiedata(
+    punten_voor_de_woz_waarde = WoningwaarderingstelselgroepReferentiedata(
         code="WOZ",
         naam="Punten voor de WOZ-waarde",
     )
@@ -350,7 +368,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waarderingsstelsel zelfstandige woonruimte)
     """
 
-    woonomgeving_standplaats = Referentiedata(
+    woonomgeving_standplaats = WoningwaarderingstelselgroepReferentiedata(
         code="WST",
         naam="Woonomgeving standplaats",
         parent=Woningwaarderingstelsel.standplaatsen,
@@ -360,7 +378,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     (Puntentelling: woonwagen/standplaats: Huurcommissie)
     """
 
-    verkoeling_en_verwarming = Referentiedata(
+    verkoeling_en_verwarming = WoningwaarderingstelselgroepReferentiedata(
         code="VKV",
         naam="Verkoeling en verwarming",
     )
@@ -370,7 +388,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     vastgestelde eisen aan koelsystemen en verwarming.
     """
 
-    buitenruimten = Referentiedata(
+    buitenruimten = WoningwaarderingstelselgroepReferentiedata(
         code="BUI",
         naam="Buitenruimten",
     )
@@ -379,7 +397,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     woningen zonder buitenruimte.
     """
 
-    gemeenschappelijke_parkeerruimten = Referentiedata(
+    gemeenschappelijke_parkeerruimten = WoningwaarderingstelselgroepReferentiedata(
         code="GPA",
         naam="Gemeenschappelijke parkeerruimten",
     )
@@ -389,7 +407,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     afhankelijk van type en aanwezigheid van laadpaal.
     """
 
-    prijsopslag_monumenten_en_nieuwbouw = Referentiedata(
+    prijsopslag_monumenten_en_nieuwbouw = WoningwaarderingstelselgroepReferentiedata(
         code="PMN",
         naam="Prijsopslag monumenten en nieuwbouw",
         parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
@@ -401,10 +419,12 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     criteria voldoen.
     """
 
-    gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen = Referentiedata(
-        code="GVR",
-        naam="Gemeenschappelijke vertrekken, overige ruimten en voorzieningen",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
+    gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="GVR",
+            naam="Gemeenschappelijke vertrekken, overige ruimten en voorzieningen",
+            parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
+        )
     )
     """
     Waardering van gemeenschappelijke vertrekken, overige ruimten en voorzieningen,
@@ -413,26 +433,30 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     worden gebruikt
     """
 
-    gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen = Referentiedata(
-        code="GBA",
-        naam="Gemeenschappelijke binnenruimten gedeeld met meerdere adressen",
-        parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
+    gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="GBA",
+            naam="Gemeenschappelijke binnenruimten gedeeld met meerdere adressen",
+            parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
+        )
     )
     """
     Waardering van gemeenschappelijke binnenruimten gedeeld met meerdere adressen
     """
 
-    bijzondere_voorzieningen_zorgwoning_en_aanbelfunctie = Referentiedata(
-        code="BIA",
-        naam="Bijzondere voorzieningen: zorgwoning en aanbelfunctie",
-        parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
+    bijzondere_voorzieningen_zorgwoning_en_aanbelfunctie = (
+        WoningwaarderingstelselgroepReferentiedata(
+            code="BIA",
+            naam="Bijzondere voorzieningen: zorgwoning en aanbelfunctie",
+            parent=Woningwaarderingstelsel.zelfstandige_woonruimten,
+        )
     )
     """
     Waardering van bijzondere voorzieningen in een zorgwoning waaronder een
     aanbelfunctie met video- en audioverbinding
     """
 
-    bijzondere_voorzieningen_zorgwoning = Referentiedata(
+    bijzondere_voorzieningen_zorgwoning = WoningwaarderingstelselgroepReferentiedata(
         code="BIZ",
         naam="Bijzondere voorzieningen: zorgwoning",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
@@ -441,7 +465,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Waardering van bijzondere voorzieningen in een zorgwoning
     """
 
-    aftrekpunten = Referentiedata(
+    aftrekpunten = WoningwaarderingstelselgroepReferentiedata(
         code="AFT",
         naam="Aftrekpunten",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
@@ -450,7 +474,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
     Aftrekpunten waardering onzelfstandige woonruimten
     """
 
-    prijsopslag_monumenten = Referentiedata(
+    prijsopslag_monumenten = WoningwaarderingstelselgroepReferentiedata(
         code="PMO",
         naam="Prijsopslag monumenten",
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,

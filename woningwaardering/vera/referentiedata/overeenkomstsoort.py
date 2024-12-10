@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class OvereenkomstsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Overeenkomstsoort(Referentiedatasoort):
-    arbeid = Referentiedata(
+    arbeid = OvereenkomstsoortReferentiedata(
         code="ARB",
         naam="Arbeid",
     )
@@ -11,7 +15,7 @@ class Overeenkomstsoort(Referentiedatasoort):
     Arbeidsovereenkomst
     """
 
-    betalerovereenkomst = Referentiedata(
+    betalerovereenkomst = OvereenkomstsoortReferentiedata(
         code="BET",
         naam="Betalerovereenkomst",
     )
@@ -20,7 +24,7 @@ class Overeenkomstsoort(Referentiedatasoort):
     andere (huur-)overeenkomst
     """
 
-    huurovereenkomst = Referentiedata(
+    huurovereenkomst = OvereenkomstsoortReferentiedata(
         code="HUU",
         naam="Huurovereenkomst",
     )
@@ -28,7 +32,7 @@ class Overeenkomstsoort(Referentiedatasoort):
     Overeenkomst met betrekking tot het huren van roerend of onroerend goed.
     """
 
-    inhuur = Referentiedata(
+    inhuur = OvereenkomstsoortReferentiedata(
         code="INH",
         naam="Inhuur",
     )
@@ -36,7 +40,7 @@ class Overeenkomstsoort(Referentiedatasoort):
     Inhuurovereenkomst
     """
 
-    inschrijving = Referentiedata(
+    inschrijving = OvereenkomstsoortReferentiedata(
         code="INS",
         naam="Inschrijving",
     )
@@ -45,7 +49,7 @@ class Overeenkomstsoort(Referentiedatasoort):
     woonruimteverdeel gebied.
     """
 
-    koopovereenkomst = Referentiedata(
+    koopovereenkomst = OvereenkomstsoortReferentiedata(
         code="KOO",
         naam="Koopovereenkomst",
     )
@@ -53,7 +57,7 @@ class Overeenkomstsoort(Referentiedatasoort):
     Overeenkomst met betrekking tot het kopen van roerend of onroerend goed.
     """
 
-    lease = Referentiedata(
+    lease = OvereenkomstsoortReferentiedata(
         code="LEA",
         naam="Lease",
     )
@@ -61,7 +65,7 @@ class Overeenkomstsoort(Referentiedatasoort):
     Leaseovereenkomst
     """
 
-    onderhoudsovereenkomst = Referentiedata(
+    onderhoudsovereenkomst = OvereenkomstsoortReferentiedata(
         code="OND",
         naam="Onderhoudsovereenkomst",
     )
@@ -70,7 +74,7 @@ class Overeenkomstsoort(Referentiedatasoort):
     goed.
     """
 
-    serviceovereenkomst = Referentiedata(
+    serviceovereenkomst = OvereenkomstsoortReferentiedata(
         code="SER",
         naam="Serviceovereenkomst",
     )

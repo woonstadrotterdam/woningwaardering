@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class VoorzieningsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Voorzieningsoort(Referentiedatasoort):
-    aanbelfunctie_met_video_en_audioverbinding = Referentiedata(
+    aanbelfunctie_met_video_en_audioverbinding = VoorzieningsoortReferentiedata(
         code="ABF",
         naam="Aanbelfunctie met video- en audioverbinding",
     )
@@ -17,7 +21,7 @@ class Voorzieningsoort(Referentiedatasoort):
     geeft tot het complex waarvan de woning onderdeel uitmaakt.
     """
 
-    inbouw_afzuiginstallatie = Referentiedata(
+    inbouw_afzuiginstallatie = VoorzieningsoortReferentiedata(
         code="IAF",
         naam="Inbouw afzuiginstallatie",
     )
@@ -28,7 +32,7 @@ class Voorzieningsoort(Referentiedatasoort):
     kookinstallatie zijn, als een in het aanrecht geïntegreerd afzuigsysteem.
     """
 
-    inbouw_kookplaat_inductie = Referentiedata(
+    inbouw_kookplaat_inductie = VoorzieningsoortReferentiedata(
         code="IKI",
         naam="Inbouw kookplaat inductie",
     )
@@ -39,7 +43,7 @@ class Voorzieningsoort(Referentiedatasoort):
     energie-efficiëntie in vergelijking met traditionele kookplaten.
     """
 
-    inbouw_kookplaat_keramisch = Referentiedata(
+    inbouw_kookplaat_keramisch = VoorzieningsoortReferentiedata(
         code="IKK",
         naam="Inbouw kookplaat keramisch",
     )
@@ -50,7 +54,7 @@ class Voorzieningsoort(Referentiedatasoort):
     schoon te maken is, maar trager opwarmt dan inductie.
     """
 
-    inbouw_kookplaat_gas = Referentiedata(
+    inbouw_kookplaat_gas = VoorzieningsoortReferentiedata(
         code="IKG",
         naam="Inbouw kookplaat gas",
     )
@@ -61,7 +65,7 @@ class Voorzieningsoort(Referentiedatasoort):
     kookgerei, maar vereist gasaanvoer en ventilatie.
     """
 
-    inbouw_koelkast = Referentiedata(
+    inbouw_koelkast = VoorzieningsoortReferentiedata(
         code="IKO",
         naam="Inbouw koelkast",
     )
@@ -72,7 +76,7 @@ class Voorzieningsoort(Referentiedatasoort):
     uitstraling in de keuken.
     """
 
-    inbouw_vrieskast = Referentiedata(
+    inbouw_vrieskast = VoorzieningsoortReferentiedata(
         code="IVR",
         naam="Inbouw vrieskast",
     )
@@ -83,7 +87,7 @@ class Voorzieningsoort(Referentiedatasoort):
     uniforme uitstraling in de keuken.
     """
 
-    inbouw_oven_elektrisch = Referentiedata(
+    inbouw_oven_elektrisch = VoorzieningsoortReferentiedata(
         code="IOE",
         naam="Inbouw oven elektrisch",
     )
@@ -94,7 +98,7 @@ class Voorzieningsoort(Referentiedatasoort):
     programma's voor diverse kookmethoden.
     """
 
-    inbouw_oven_gas = Referentiedata(
+    inbouw_oven_gas = VoorzieningsoortReferentiedata(
         code="IOG",
         naam="Inbouw oven gas",
     )
@@ -105,7 +109,7 @@ class Voorzieningsoort(Referentiedatasoort):
     vereist gasaanvoer.
     """
 
-    inbouw_magnetron = Referentiedata(
+    inbouw_magnetron = VoorzieningsoortReferentiedata(
         code="IMA",
         naam="Inbouw magnetron",
     )
@@ -116,7 +120,7 @@ class Voorzieningsoort(Referentiedatasoort):
     uitstraling in de keuken.
     """
 
-    inbouw_vaatwasmachine = Referentiedata(
+    inbouw_vaatwasmachine = VoorzieningsoortReferentiedata(
         code="IVA",
         naam="Inbouw vaatwasmachine",
     )
@@ -127,7 +131,7 @@ class Voorzieningsoort(Referentiedatasoort):
     uitstraling van de keuken.
     """
 
-    extra_keukenkastruimte_boven_het_minimum = Referentiedata(
+    extra_keukenkastruimte_boven_het_minimum = VoorzieningsoortReferentiedata(
         code="EKA",
         naam="Extra keukenkastruimte boven het minimum",
     )
@@ -135,7 +139,7 @@ class Voorzieningsoort(Referentiedatasoort):
     per 60 cm breedte, met een minimum van 60 cm hoogte
     """
 
-    eenhandsmengkraan = Referentiedata(
+    eenhandsmengkraan = VoorzieningsoortReferentiedata(
         code="EHM",
         naam="Éénhandsmengkraan",
     )
@@ -146,7 +150,7 @@ class Voorzieningsoort(Referentiedatasoort):
     elke keuken of badkamer.
     """
 
-    thermostatische_mengkraan = Referentiedata(
+    thermostatische_mengkraan = VoorzieningsoortReferentiedata(
         code="TME",
         naam="Thermostatische mengkraan",
     )
@@ -157,7 +161,7 @@ class Voorzieningsoort(Referentiedatasoort):
     of keuken.
     """
 
-    kokend_waterfunctie = Referentiedata(
+    kokend_waterfunctie = VoorzieningsoortReferentiedata(
         code="KWA",
         naam="Kokend waterfunctie",
     )
@@ -168,7 +172,7 @@ class Voorzieningsoort(Referentiedatasoort):
     apart of in aanvulling op de kraan
     """
 
-    staand_toilet = Referentiedata(
+    staand_toilet = VoorzieningsoortReferentiedata(
         code="STO",
         naam="Staand Toilet",
     )
@@ -181,7 +185,7 @@ class Voorzieningsoort(Referentiedatasoort):
     niet in aanmerking voor waardering.
     """
 
-    hangend_toilet = Referentiedata(
+    hangend_toilet = VoorzieningsoortReferentiedata(
         code="HTO",
         naam="Hangend toilet",
     )
@@ -194,7 +198,7 @@ class Voorzieningsoort(Referentiedatasoort):
     toiletruimten en badkamers komen niet in aanmerking voor waardering.
     """
 
-    wastafel = Referentiedata(
+    wastafel = VoorzieningsoortReferentiedata(
         code="WAS",
         naam="Wastafel",
     )
@@ -210,7 +214,7 @@ class Voorzieningsoort(Referentiedatasoort):
     keer per vertrek of overige ruimte, m.u.v. de badkamer.
     """
 
-    meerpersoonswastafel = Referentiedata(
+    meerpersoonswastafel = VoorzieningsoortReferentiedata(
         code="MPW",
         naam="Meerpersoonswastafel",
     )
@@ -224,7 +228,7 @@ class Voorzieningsoort(Referentiedatasoort):
     afzonderlijk gewaardeerd.
     """
 
-    douche = Referentiedata(
+    douche = VoorzieningsoortReferentiedata(
         code="DOU",
         naam="Douche",
     )
@@ -241,7 +245,7 @@ class Voorzieningsoort(Referentiedatasoort):
     douchecabine ingenomen oppervlakte.
     """
 
-    bad = Referentiedata(
+    bad = VoorzieningsoortReferentiedata(
         code="BAD",
         naam="Bad",
     )
@@ -255,7 +259,7 @@ class Voorzieningsoort(Referentiedatasoort):
     douchegarnituur niet afzonderlijk geteld.
     """
 
-    bad_en_douche = Referentiedata(
+    bad_en_douche = VoorzieningsoortReferentiedata(
         code="BDO",
         naam="Bad en douche",
     )
@@ -264,7 +268,7 @@ class Voorzieningsoort(Referentiedatasoort):
     aangebracht, geldt een afwijkende waardering.
     """
 
-    bubbelfunctie_van_het_bad = Referentiedata(
+    bubbelfunctie_van_het_bad = VoorzieningsoortReferentiedata(
         code="BUB",
         naam="Bubbelfunctie van het bad",
     )
@@ -275,7 +279,7 @@ class Voorzieningsoort(Referentiedatasoort):
     bieden.
     """
 
-    douchewand = Referentiedata(
+    douchewand = VoorzieningsoortReferentiedata(
         code="DOW",
         naam="Douchewand",
     )
@@ -288,7 +292,7 @@ class Voorzieningsoort(Referentiedatasoort):
     worden) niet.
     """
 
-    handdoekenradiator = Referentiedata(
+    handdoekenradiator = VoorzieningsoortReferentiedata(
         code="HRA",
         naam="Handdoekenradiator",
     )
@@ -299,7 +303,7 @@ class Voorzieningsoort(Referentiedatasoort):
     voor een aangename temperatuur.
     """
 
-    ingebouwd_kastje_met_in_of_opgebouwde_wastafel = Referentiedata(
+    ingebouwd_kastje_met_in_of_opgebouwde_wastafel = VoorzieningsoortReferentiedata(
         code="IKW",
         naam="Ingebouwd kastje met in- of opgebouwde wastafel",
     )
@@ -309,7 +313,7 @@ class Voorzieningsoort(Referentiedatasoort):
     een gestroomlijnde uitstraling en praktische opslag in badkamers of keukens.
     """
 
-    kastruimte = Referentiedata(
+    kastruimte = VoorzieningsoortReferentiedata(
         code="KAS",
         naam="Kastruimte",
     )
@@ -317,7 +321,7 @@ class Voorzieningsoort(Referentiedatasoort):
     Kastruimte met een minimale breedte van 40cm, en minimale hoogte van 40cm.
     """
 
-    stopcontact_bij_wastafel = Referentiedata(
+    stopcontact_bij_wastafel = VoorzieningsoortReferentiedata(
         code="STW",
         naam="Stopcontact bij wastafel",
     )

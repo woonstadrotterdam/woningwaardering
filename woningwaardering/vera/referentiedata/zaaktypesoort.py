@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class ZaaktypesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Zaaktypesoort(Referentiedatasoort):
-    leefbaarheid = Referentiedata(
+    leefbaarheid = ZaaktypesoortReferentiedata(
         code="LEE",
         naam="Leefbaarheid",
     )
@@ -11,7 +15,7 @@ class Zaaktypesoort(Referentiedatasoort):
     Op initiatief van de corporatie verbeteren van de buurt
     """
 
-    omgevingsoverlast = Referentiedata(
+    omgevingsoverlast = ZaaktypesoortReferentiedata(
         code="OMG",
         naam="Omgevingsoverlast",
     )
@@ -19,7 +23,7 @@ class Zaaktypesoort(Referentiedatasoort):
     Overlast in de omgeving
     """
 
-    klacht_over_organisatie = Referentiedata(
+    klacht_over_organisatie = ZaaktypesoortReferentiedata(
         code="ORG",
         naam="Klacht over organisatie",
     )
@@ -27,7 +31,7 @@ class Zaaktypesoort(Referentiedatasoort):
     Klachten over de corporatie als organisatie
     """
 
-    sociale_melding = Referentiedata(
+    sociale_melding = ZaaktypesoortReferentiedata(
         code="SOC",
         naam="Sociale melding",
     )
@@ -35,7 +39,7 @@ class Zaaktypesoort(Referentiedatasoort):
     Overige sociale gerelateerde meldingen
     """
 
-    woonfraude = Referentiedata(
+    woonfraude = ZaaktypesoortReferentiedata(
         code="WOO",
         naam="Woonfraude",
     )

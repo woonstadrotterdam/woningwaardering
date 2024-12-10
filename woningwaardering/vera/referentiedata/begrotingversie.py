@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class BegrotingversieReferentiedata(Referentiedata):
+    pass
+
+
 class Begrotingversie(Referentiedatasoort):
-    actueel_budget = Referentiedata(
+    actueel_budget = BegrotingversieReferentiedata(
         code="ACB",
         naam="Actueel budget",
     )
@@ -12,7 +16,7 @@ class Begrotingversie(Referentiedatasoort):
     periode.
     """
 
-    mutatie_budget = Referentiedata(
+    mutatie_budget = BegrotingversieReferentiedata(
         code="MUB",
         naam="Mutatie budget",
     )
@@ -20,7 +24,7 @@ class Begrotingversie(Referentiedatasoort):
     Gewijzigd bedrag van een budgetregel voor een jaar of periode.
     """
 
-    oorspronkelijk_budget = Referentiedata(
+    oorspronkelijk_budget = BegrotingversieReferentiedata(
         code="OOB",
         naam="Oorspronkelijk budget",
     )

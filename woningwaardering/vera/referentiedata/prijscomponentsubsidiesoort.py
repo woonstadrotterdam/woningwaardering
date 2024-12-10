@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class PrijscomponentsubsidiesoortReferentiedata(Referentiedata):
+    pass
+
+
 class Prijscomponentsubsidiesoort(Referentiedatasoort):
-    niet_subsidiabel_prijscomponent = Referentiedata(
+    niet_subsidiabel_prijscomponent = PrijscomponentsubsidiesoortReferentiedata(
         code="NSU",
         naam="Niet subsidiabel prijscomponent",
     )
@@ -12,7 +16,7 @@ class Prijscomponentsubsidiesoort(Referentiedatasoort):
     is in de Wet op de huurtoeslag
     """
 
-    subsidiabel_prijscomponent = Referentiedata(
+    subsidiabel_prijscomponent = PrijscomponentsubsidiesoortReferentiedata(
         code="SUB",
         naam="Subsidiabel prijscomponent",
     )

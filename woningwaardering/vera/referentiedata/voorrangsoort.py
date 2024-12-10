@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class VoorrangsoortReferentiedata(Referentiedata):
+    pass
+
+
 class Voorrangsoort(Referentiedatasoort):
-    binding = Referentiedata(
+    binding = VoorrangsoortReferentiedata(
         code="BIN",
         naam="Binding",
     )
@@ -13,7 +17,7 @@ class Voorrangsoort(Referentiedatasoort):
     werken, lokaal voor mensen die in de gemeente wonen.
     """
 
-    groep = Referentiedata(
+    groep = VoorrangsoortReferentiedata(
         code="GRO",
         naam="Groep",
     )
@@ -22,7 +26,7 @@ class Voorrangsoort(Referentiedatasoort):
     binding, urgentie of indicatie van toepassing is.
     """
 
-    indicatie = Referentiedata(
+    indicatie = VoorrangsoortReferentiedata(
         code="IND",
         naam="Indicatie",
     )
@@ -30,7 +34,7 @@ class Voorrangsoort(Referentiedatasoort):
     Er is voorrang voor woningzoekenden met een (medische) indicatie.
     """
 
-    urgentie = Referentiedata(
+    urgentie = VoorrangsoortReferentiedata(
         code="URG",
         naam="Urgentie",
     )

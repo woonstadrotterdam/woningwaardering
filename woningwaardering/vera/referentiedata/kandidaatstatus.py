@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class KandidaatstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Kandidaatstatus(Referentiedatasoort):
-    aangeboden = Referentiedata(
+    aangeboden = KandidaatstatusReferentiedata(
         code="AAN",
         naam="Aangeboden",
     )
@@ -11,7 +15,7 @@ class Kandidaatstatus(Referentiedatasoort):
     Kandidaat zit  in aanbiedingsproces.
     """
 
-    afgewezen = Referentiedata(
+    afgewezen = KandidaatstatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -19,7 +23,7 @@ class Kandidaatstatus(Referentiedatasoort):
     Kandidaat is afgewezen door de aanbieder, corporatie, medebewoners etc.
     """
 
-    geweigerd = Referentiedata(
+    geweigerd = KandidaatstatusReferentiedata(
         code="GEW",
         naam="Geweigerd",
     )
@@ -27,7 +31,7 @@ class Kandidaatstatus(Referentiedatasoort):
     Kandidaat heeft de aanbieiding geweigerd.
     """
 
-    potentiele_kandidaat = Referentiedata(
+    potentiele_kandidaat = KandidaatstatusReferentiedata(
         code="POT",
         naam="Potentiele kandidaat",
     )
@@ -35,7 +39,7 @@ class Kandidaatstatus(Referentiedatasoort):
     Kandidaat voldoet aan de spelregels van de publicatie.
     """
 
-    gereageerd = Referentiedata(
+    gereageerd = KandidaatstatusReferentiedata(
         code="REA",
         naam="Gereageerd",
     )
@@ -43,7 +47,7 @@ class Kandidaatstatus(Referentiedatasoort):
     Kandidaat heeft gereageerd op de publicatie.
     """
 
-    geselecteerd = Referentiedata(
+    geselecteerd = KandidaatstatusReferentiedata(
         code="SEL",
         naam="Geselecteerd",
     )
@@ -51,7 +55,7 @@ class Kandidaatstatus(Referentiedatasoort):
     Kandidaat staat op vrijgegeven kandidatenlijst.
     """
 
-    toegewezen = Referentiedata(
+    toegewezen = KandidaatstatusReferentiedata(
         code="TOE",
         naam="Toegewezen",
     )

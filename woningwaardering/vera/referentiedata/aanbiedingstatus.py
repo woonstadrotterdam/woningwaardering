@@ -2,8 +2,12 @@ from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
+class AanbiedingstatusReferentiedata(Referentiedata):
+    pass
+
+
 class Aanbiedingstatus(Referentiedatasoort):
-    aangeboden = Referentiedata(
+    aangeboden = AanbiedingstatusReferentiedata(
         code="AAN",
         naam="Aangeboden",
     )
@@ -11,7 +15,7 @@ class Aanbiedingstatus(Referentiedatasoort):
     Er is aanbieding gedaan aan een of meer kandidaten.
     """
 
-    geweigerd = Referentiedata(
+    geweigerd = AanbiedingstatusReferentiedata(
         code="GEW",
         naam="Geweigerd",
     )
@@ -19,7 +23,7 @@ class Aanbiedingstatus(Referentiedatasoort):
     Een kandidaat heeft een verstrekte aanbieding afgewezen.
     """
 
-    ingetrokken = Referentiedata(
+    ingetrokken = AanbiedingstatusReferentiedata(
         code="ING",
         naam="Ingetrokken",
     )
@@ -27,7 +31,7 @@ class Aanbiedingstatus(Referentiedatasoort):
     Een aan een kandidaat verstrekte aanbieding is ingetrokken.
     """
 
-    toegewezen = Referentiedata(
+    toegewezen = AanbiedingstatusReferentiedata(
         code="TOE",
         naam="Toegewezen",
     )
