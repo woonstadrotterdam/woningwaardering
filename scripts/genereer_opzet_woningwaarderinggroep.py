@@ -50,7 +50,7 @@ questions = [
     ),
     inquirer.Text(
         "begindatum",
-        message=lambda answers: f"Vanaf welke datum is het {Woningwaarderingstelsel[answers.get('stelsel')].naam} stelsel geldig?",
+        message=lambda answers: f"Vanaf welke datum is het {getattr(Woningwaarderingstelsel, answers.get('stelsel').naam)} stelsel geldig?",
         default=date(date.today().year, 7, 1),
         validate=validate_date,
     ),
@@ -62,7 +62,8 @@ questions = [
             for stelselgroep in Woningwaarderingstelselgroep
             if stelselgroep.parent is None
             or stelselgroep.parent is not None
-            and stelselgroep.parent == Woningwaarderingstelsel[answers.get("stelsel")]
+            and stelselgroep.parent
+            == getattr(Woningwaarderingstelsel, answers.get("stelsel"))
         ],
     ),
 ]
