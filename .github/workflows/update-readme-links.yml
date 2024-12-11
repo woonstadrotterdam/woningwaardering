@@ -20,7 +20,8 @@ jobs:
         id: get_version
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
-          BRANCH=$(git branch -r --contains $VERSION | grep -v HEAD | sed 's/origin\///' | head -n 1)
+          # Default to main if no specific branch is found
+          BRANCH=$(git branch -r --contains $VERSION | grep -v HEAD | sed 's/origin\///' | head -n 1 || echo "main")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "branch=$BRANCH" >> $GITHUB_OUTPUT
 
@@ -38,7 +39,13 @@ jobs:
           if [[ -n "$(git status --porcelain)" ]]; then
             git add README.md
             git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
-            git push origin HEAD:${{ steps.get_version.outputs.branch }}
-            git tag -f ${{ steps.get_version.outputs.version }}
-            git push -f origin ${{ steps.get_version.outputs.version }}
+            # Make sure we have a valid branch name before pushing
+            if [ -n "${{ steps.get_version.outputs.branch }}" ]; then
+              git push origin HEAD:${{ steps.get_version.outputs.branch }}
+              git tag -f ${{ steps.get_version.outputs.version }}
+              git push -f origin ${{ steps.get_version.outputs.version }}
+            else
+              echo "Error: No valid branch name found"
+              exit 1
+            fi
           fi
