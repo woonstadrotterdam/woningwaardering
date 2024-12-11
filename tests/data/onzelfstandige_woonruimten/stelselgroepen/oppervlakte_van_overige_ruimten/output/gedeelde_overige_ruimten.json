@@ -43,7 +43,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten_gedeeld_met_5_onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 5)",
+            "naam": "Totaal (gedeeld met 5 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -55,7 +55,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten_gedeeld_met_6_onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 6)",
+            "naam": "Totaal (gedeeld met 6 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
