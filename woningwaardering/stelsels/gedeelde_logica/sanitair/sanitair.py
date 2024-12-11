@@ -17,6 +17,7 @@ from woningwaardering.vera.referentiedata import (
     Ruimtedetailsoort,
     Voorzieningsoort,
     Woningwaarderingstelsel,
+    Woningwaarderingstelselgroep,
     WoningwaarderingstelselgroepReferentiedata,
     WoningwaarderingstelselReferentiedata,
 )
