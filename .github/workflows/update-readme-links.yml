@@ -36,20 +36,29 @@ jobs:
         run: |
           sed -i "s|\${VERSION}|${{ steps.get_version.outputs.version }}|g" README.md
 
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          - name: Commit and push changes
+          run: |
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
 
-          # Resolve branch name
-          BRANCH=$(git branch --contains ${GITHUB_SHA} | grep -v 'HEAD' | xargs)
+            # Fetch all branches so `git branch -r --contains` works properly
+            git fetch --all --prune
 
-          # Check out the branch
-          git checkout $BRANCH
+            # Try to find the branch containing the commit
+            BRANCH=$(git branch -r --contains ${GITHUB_SHA} | sed 's|origin/||g' | grep -v HEAD | head -n1)
 
-          # Only commit if there are changes
-          if [[ -n "$(git status --porcelain)" ]]; then
-            git add README.md
-            git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
-            git push origin HEAD:$BRANCH
-          fi
+            # If we can't determine the branch, fail the workflow
+            if [ -z "$BRANCH" ]; then
+              echo "Error: Could not determine the branch containing commit ${GITHUB_SHA}"
+              exit 1
+            fi
+
+            # Now that we have a branch, check it out
+            git checkout $BRANCH
+
+            # Only commit and push if there are changes
+            if [[ -n "$(git status --porcelain)" ]]; then
+              git add README.md
+              git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
+              git push origin HEAD:$BRANCH
+            fi
