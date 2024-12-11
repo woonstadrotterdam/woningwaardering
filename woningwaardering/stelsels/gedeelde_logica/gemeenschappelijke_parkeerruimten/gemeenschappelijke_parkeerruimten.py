@@ -91,9 +91,6 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         Ruimtedetailsoort.carport.code,
         Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code,
     ]:
-        logger.debug(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
-        )
         return
 
     if ruimte.oppervlakte is None:
