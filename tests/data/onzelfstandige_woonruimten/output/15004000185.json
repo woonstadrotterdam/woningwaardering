@@ -117,7 +117,17 @@
         {
           "criterium": {
             "id": "verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
+            "naam": "Verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming_gedeeld_met_1_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming_gedeeld_met_1_onzelfstandige_woonruimten",
+            "naam": "Totaal (privé)"
           },
           "punten": 2.0
         }

@@ -1,5 +1,7 @@
+from collections import defaultdict
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from loguru import logger
 
@@ -14,6 +16,10 @@ from woningwaardering.stelsels.utils import (
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
+    WoningwaarderingCriteriumSleutels,
+    WoningwaarderingResultatenWoningwaardering,
+    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -61,17 +67,22 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ]
 
         woningwaarderingen = list(waardeer_verkoeling_en_verwarming(ruimten))
-
+        woningwaarderingen_totaal: list[
+            tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]
+        ] = []
         for ruimte, woningwaardering in woningwaarderingen:
-            woningwaardering_groep.woningwaarderingen.extend(
+            waardering_gedeeld = list(
                 deel_punten_door_aantal_onzelfstandige_woonruimten(
-                    ruimte, [woningwaardering]
+                    ruimte, [woningwaardering], update_criterium_naam=False
                 )
-            )
+            )[0]  # er is altijd maar een woningwaardering
+            woningwaarderingen_totaal.append((ruimte, waardering_gedeeld))
+            woningwaardering_groep.woningwaarderingen.append(waardering_gedeeld)
 
         woningwaardering_groep.woningwaarderingen.extend(
-            self.criteriumsleutel_resultaten(woningwaardering_groep)
+            list(self._maak_totalen(woningwaarderingen_totaal))
         )
+
         punten = utils.rond_af_op_kwart(
             sum(
                 Decimal(str(woningwaardering.punten))
@@ -89,6 +100,50 @@ class VerkoelingEnVerwarming(Stelselgroep):
         )
         return woningwaardering_groep
 
+    def _maak_totalen(
+        self,
+        waarderingen: list[
+            tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]
+        ],
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        gedeeld_met_counter: defaultdict[int, defaultdict[str, Decimal]] = defaultdict(
+            lambda: defaultdict(Decimal)
+        )
+        # {bovenliggend_criterium: {onzelfstandige_woonruimten: punten}}
+        for ruimte, woningwaardering in waarderingen:
+            gedeeld_met_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            gedeeld_met_counter[gedeeld_met_onz][
+                woningwaardering.criterium.bovenliggende_criterium.id
+                if woningwaardering.criterium
+                and woningwaardering.criterium.bovenliggende_criterium
+                and woningwaardering.criterium.bovenliggende_criterium.id
+                else "verkoeling_en_verwarming_default"
+            ] += Decimal(str(woningwaardering.punten))
+
+        for aantal_onz, bovenliggend_criterium_punten in gedeeld_met_counter.items():
+            for criterium_id, punten in bovenliggend_criterium_punten.items():
+                yield WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        id=criterium_id,
+                        naam=criterium_id.capitalize().replace("_", " "),
+                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                            id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
+                        ),
+                    ),
+                    punten=float(punten),
+                )
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten",
+                    naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
+                    if aantal_onz > 1
+                    else "Totaal (privé)",
+                ),
+                punten=float(
+                    utils.rond_af_op_kwart(sum(bovenliggend_criterium_punten.values()))
+                ),
+            )
+
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
@@ -96,4 +151,6 @@ if __name__ == "__main__":  # pragma: no cover
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
-        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")
+        context.waardeer(
+            "tests/data/onzelfstandige_woonruimten/stelselgroepen/verkoeling_en_verwarming/input/vertrek_verkoeld_en_verwarmd_onz.json"
+        )

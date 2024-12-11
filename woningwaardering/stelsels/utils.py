@@ -88,13 +88,13 @@ def _voeg_onderliggende_woningwaarderingen_toe(
                 [
                     stelselgroep_naam,
                     f"{' '*indent} - {onderliggende_woningwaardering.criterium.naam}",
-                    f"[{onderliggende_woningwaardering.aantal}]"
+                    f"{'['*indent}{onderliggende_woningwaardering.aantal}{']'*indent}"
                     if onderliggende_woningwaardering.aantal is not None
                     else "",
                     onderliggende_woningwaardering.criterium.meeteenheid.naam
                     if onderliggende_woningwaardering.criterium.meeteenheid is not None
                     else "",
-                    f"[{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}]"
+                    f"{'['*indent}{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}{']'*indent}"
                     if onderliggende_woningwaardering.punten is not None
                     else "",
                     f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
@@ -909,6 +909,7 @@ def deel_punten_door_aantal_onzelfstandige_woonruimten(
     ruimte: EenhedenRuimte,
     woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering]
     | Iterator[WoningwaarderingResultatenWoningwaardering],
+    update_criterium_naam: bool = True,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     """
     Deelt punten door het aantal onzelfstandige woonruimten.
@@ -919,6 +920,7 @@ def deel_punten_door_aantal_onzelfstandige_woonruimten(
         ruimte (EenhedenRuimte): De ruimte waarvoor de punten verdeeld moeten worden.
         woningwaarderingen (list[WoningwaarderingResultatenWoningwaardering] | Iterator[WoningwaarderingResultatenWoningwaardering]):
             Een lijst of iterator van woningwaarderingen waarvan de punten verdeeld moeten worden.
+        update_criterium_naam (bool, optional): Een boolean die aangeeft of de naam van het criterium moet worden aangepast. Default is True.
 
     Yields:
         WoningwaarderingResultatenWoningwaardering: Woningwaarderingen met verdeelde punten.
@@ -931,7 +933,10 @@ def deel_punten_door_aantal_onzelfstandige_woonruimten(
             and woningwaardering.punten
             and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten  # nodig voor mypy
         ):
-            woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
+            woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam}"
+            if update_criterium_naam:
+                woningwaardering.criterium.naam += f" (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
+
             woningwaardering.punten = float(
                 utils.rond_af(
                     utils.rond_af(woningwaardering.punten, decimalen=2)
