@@ -29,11 +29,11 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Doelgroep,
+    Meeteenheid,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.doelgroep import Doelgroep
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 
 
 class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):

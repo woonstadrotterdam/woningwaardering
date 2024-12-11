@@ -30,10 +30,9 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatiestatus,
     Ruimtedetailsoort,
     Ruimtesoort,
+    RuimtesoortReferentiedata,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
-
-from ..vera.referentiedata.ruimtesoort import RuimtesoortReferentiedata
 
 index: int = 0  # nodig voor mypy voor de global index voor de tabel
 

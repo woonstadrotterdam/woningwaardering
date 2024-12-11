@@ -13,9 +13,9 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
+from woningwaardering.vera.referentiedata import (
+    Meeteenheid,
+    Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
 

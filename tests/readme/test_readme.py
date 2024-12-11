@@ -24,8 +24,6 @@ from woningwaardering.vera.referentiedata import (
     Pandsoort,
     Ruimtedetailsoort,
     Ruimtesoort,
-)
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
     Woningwaarderingstelsel,
 )
 

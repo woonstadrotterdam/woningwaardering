@@ -12,12 +12,10 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
+    Ruimtedetailsoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
-    Bouwkundigelementdetailsoort,
-)
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {

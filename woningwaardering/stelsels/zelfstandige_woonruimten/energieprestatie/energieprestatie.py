@@ -22,16 +22,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Woningwaarderingstelsel,
-    Woningwaarderingstelselgroep,
-)
-from woningwaardering.vera.referentiedata.energieprestatiesoort import (
     Energieprestatiesoort,
-)
-from woningwaardering.vera.referentiedata.oppervlaktesoort import Oppervlaktesoort
-from woningwaardering.vera.referentiedata.pandsoort import (
+    Oppervlaktesoort,
     Pandsoort,
     PandsoortReferentiedata,
+    Woningwaarderingstelsel,
+    Woningwaarderingstelselgroep,
 )
 
 LOOKUP_TABEL_FOLDER = (

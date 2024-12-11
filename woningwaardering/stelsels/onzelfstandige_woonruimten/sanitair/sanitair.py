@@ -20,12 +20,10 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Ruimtedetailsoort,
+    Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
-)
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoort
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     WoningwaarderingstelselgroepReferentiedata,
 )
 

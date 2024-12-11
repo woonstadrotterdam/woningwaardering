@@ -10,12 +10,9 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
-    WoningwaarderingstelselgroepReferentiedata,
-)
-from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
-
-from ....vera.referentiedata.woningwaarderingstelselgroep import (
+    Eenheidmonument,
     Woningwaarderingstelselgroep,
+    WoningwaarderingstelselgroepReferentiedata,
 )
 
 

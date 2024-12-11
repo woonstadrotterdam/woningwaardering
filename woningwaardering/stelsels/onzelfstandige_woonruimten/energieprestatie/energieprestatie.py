@@ -25,14 +25,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Energieprestatiesoort,
+    Meeteenheid,
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.energieprestatiesoort import (
-    Energieprestatiesoort,
-)
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/onzelfstandige_woonruimten/energieprestatie/lookup_tabellen"

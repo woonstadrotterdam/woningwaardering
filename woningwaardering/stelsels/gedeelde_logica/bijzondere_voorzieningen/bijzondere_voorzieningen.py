@@ -17,10 +17,8 @@ from woningwaardering.vera.referentiedata import (
     Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
-    WoningwaarderingstelselReferentiedata,
-)
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     WoningwaarderingstelselgroepReferentiedata,
+    WoningwaarderingstelselReferentiedata,
 )
 from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 

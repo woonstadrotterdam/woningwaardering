@@ -25,12 +25,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Meeteenheid,
+    Ruimtedetailsoort,
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 
 
 class Buitenruimten(Stelselgroep):

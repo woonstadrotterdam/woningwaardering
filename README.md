@@ -773,8 +773,8 @@ from woningwaardering.vera.referentiedata import (
     Pandsoort,
     Ruimtedetailsoort,
     Ruimtesoort,
+    Woningwaarderingstelsel,
 )
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import Woningwaarderingstelsel
 
 wws = Woningwaardering(peildatum=date(2024, 7, 1))
 

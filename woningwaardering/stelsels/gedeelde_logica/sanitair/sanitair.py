@@ -12,17 +12,13 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
-from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
+from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-)
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoort
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Ruimtedetailsoort,
+    Voorzieningsoort,
     Woningwaarderingstelsel,
-    WoningwaarderingstelselReferentiedata,
-)
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     WoningwaarderingstelselgroepReferentiedata,
+    WoningwaarderingstelselReferentiedata,
 )
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
