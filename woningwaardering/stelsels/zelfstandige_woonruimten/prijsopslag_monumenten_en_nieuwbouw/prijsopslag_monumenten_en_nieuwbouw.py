@@ -52,8 +52,8 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -65,7 +65,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             if woningwaardering is not None
         )
 
-        opslagpercentage = Decimal(
+        opslagpercentage = float(
             sum(
                 Decimal(str(woningwaardering.opslagpercentage))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
@@ -73,8 +73,9 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
         )
 
-        woningwaardering_groep.opslagpercentage = float(opslagpercentage)
-        punten = Decimal(
+        woningwaardering_groep.opslagpercentage = opslagpercentage
+
+        punten = float(
             sum(
                 Decimal(str(woningwaardering.punten))
                 for woningwaardering in woningwaardering_groep.woningwaarderingen or []
@@ -82,7 +83,16 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             )
         )
 
-        woningwaardering_groep.punten = float(punten)
+        if opslagpercentage > 0:
+            logger.info(
+                f"Eenheid ({eenheid.id}) krijgt een opslagpercentage van {opslagpercentage}% voor {self.stelselgroep.naam}."
+            )
+        else:
+            logger.info(
+                f"Eenheid ({eenheid.id}) krijgt geen opslagpercentage voor {self.stelselgroep.naam}."
+            )
+
+        woningwaardering_groep.punten = punten
         return woningwaardering_groep
 
     def _genereer_woningwaarderingen(
@@ -154,7 +164,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             if puntentotaal is not None and 144 <= puntentotaal <= 186:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {self.stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {self.stelselgroep}."
                 )
 
                 return WoningwaarderingResultatenWoningwaardering(
@@ -165,8 +175,8 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 )
 
             else:
-                logger.info(
-                    f"Eenheid ({eenheid.id}) is nieuwbouw maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor {self.stelselgroep.naam}."
+                logger.debug(
+                    f"Eenheid ({eenheid.id}) is nieuwbouw, maar valt buiten het puntenbereik om in aanmerking te komen voor een opslagpercentage voor {self.stelselgroep.naam}."
                 )
         else:
             logger.debug(f"Eenheid ({eenheid.id}) is geen nieuwbouw.")

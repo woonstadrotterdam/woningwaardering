@@ -1,4 +1,5 @@
 import warnings
+from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 
@@ -47,8 +48,8 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
             )
         )
 
@@ -58,7 +59,10 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        gedeeld_met_counter: dict[int, dict[str, float]] = {}
+        gedeeld_met_counter: defaultdict[int, defaultdict[str, Decimal]] = defaultdict(
+            lambda: defaultdict(Decimal)
+        )
+
         for ruimte in eenheid.ruimten:
             waarderingen_zelfstandig = waardeer_gemeenschappelijke_parkeerruimte(ruimte)
             if waarderingen_zelfstandig is not None:
@@ -68,41 +72,23 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
                     # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2,  (bijvoorbeeld een garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief behorende tot de woning).
                     if not utils.gedeeld_met_eenheden(ruimte):
-                        logger.info(
-                            f"Ruimte {ruimte.id} is niet gedeeld met andere eenheden en komt daarom niet in aanmerking voor waardering onder {self.stelselgroep.value} onzelfstandig."
+                        logger.debug(
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is niet gedeeld met andere eenheden en telt daarom niet voor {self.stelselgroep.naam}."
                         )
                         continue
 
-                    if (
-                        not utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                        or ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        is None  # mypy check
-                    ):
-                        gedeeld_met_aantal_onzelfstandige_woonruimten = 1
-
-                    else:
-                        gedeeld_met_aantal_onzelfstandige_woonruimten = (
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        )
-
-                    if (
-                        gedeeld_met_counter.get(
-                            gedeeld_met_aantal_onzelfstandige_woonruimten
-                        )
-                        is None
-                    ):
-                        gedeeld_met_counter[
-                            gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ] = {"aantal": 0.0, "punten": 0.0}
+                    gedeeld_met_aantal_onzelfstandige_woonruimten = (
+                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                    )
 
                     if waardering.aantal is not None:
                         gedeeld_met_counter[
                             gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ]["aantal"] += waardering.aantal
+                        ]["aantal"] += Decimal(str(waardering.aantal))
                     if waardering.punten is not None:
                         gedeeld_met_counter[
                             gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ]["punten"] += waardering.punten
+                        ]["punten"] += Decimal(str(waardering.punten))
 
                     waardering.punten = float(
                         utils.rond_af(
@@ -129,7 +115,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                         id=f"{self.stelselgroep.name}_gedeeld_met_{gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten",
                         naam=f"Totaal gedeeld met {gedeeld_met_aantal_onzelfstandige_woonruimten} onzelfstandige woonruimten",
                     ),
-                    aantal=count["aantal"],
+                    aantal=float(count["aantal"]),
                     punten=float(
                         utils.rond_af(
                             Decimal(str(count["punten"]))
@@ -157,7 +143,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         woningwaardering_groep.punten = float(totaal_punten)
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
@@ -168,4 +154,6 @@ if __name__ == "__main__":  # pragma: no cover
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
-        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")
+        context.waardeer(
+            "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_parkeerruimten/input/voorbeeld_beleidsboek.json"
+        )

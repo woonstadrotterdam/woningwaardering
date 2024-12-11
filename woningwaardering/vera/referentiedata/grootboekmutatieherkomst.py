@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Grootboekmutatieherkomst(Enum):
-    activa_administratie = Referentiedata(
+class GrootboekmutatieherkomstReferentiedata(Referentiedata):
+    pass
+
+
+class Grootboekmutatieherkomst(Referentiedatasoort):
+    activa_administratie = GrootboekmutatieherkomstReferentiedata(
         code="ACT",
         naam="Activa-administratie",
     )
@@ -12,7 +15,7 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking in de activa (sub-)administratie
     """
 
-    batch = Referentiedata(
+    batch = GrootboekmutatieherkomstReferentiedata(
         code="BAT",
         naam="Batch",
     )
@@ -21,7 +24,7 @@ class Grootboekmutatieherkomst(Enum):
     elektronisch wordt verstuurd naar de bank
     """
 
-    beginbalans = Referentiedata(
+    beginbalans = GrootboekmutatieherkomstReferentiedata(
         code="BEG",
         naam="Beginbalans",
     )
@@ -29,12 +32,12 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking van het eindsaldo van een balansrekening uit een voorgaand boekjaar
     """
 
-    berekening = Referentiedata(
+    berekening = GrootboekmutatieherkomstReferentiedata(
         code="BER",
         naam="Berekening",
     )
 
-    bank = Referentiedata(
+    bank = GrootboekmutatieherkomstReferentiedata(
         code="BNK",
         naam="Bank",
     )
@@ -42,7 +45,7 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking in de bank (sub-)administratie
     """
 
-    crediteuren = Referentiedata(
+    crediteuren = GrootboekmutatieherkomstReferentiedata(
         code="CRE",
         naam="Crediteuren",
     )
@@ -50,7 +53,7 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking van een schuld in de crediteuren (sub-)administratie
     """
 
-    debiteuren = Referentiedata(
+    debiteuren = GrootboekmutatieherkomstReferentiedata(
         code="DEB",
         naam="Debiteuren",
     )
@@ -58,7 +61,7 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking van een vordering in de debiteuren (sub-)administratie
     """
 
-    huuradministratie = Referentiedata(
+    huuradministratie = GrootboekmutatieherkomstReferentiedata(
         code="HUU",
         naam="Huuradministratie",
     )
@@ -66,7 +69,7 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking in de huur (sub-)administratie
     """
 
-    inkoopadministratie = Referentiedata(
+    inkoopadministratie = GrootboekmutatieherkomstReferentiedata(
         code="INK",
         naam="Inkoopadministratie",
     )
@@ -74,7 +77,7 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking in de inkoop (sub-)administratie
     """
 
-    kas = Referentiedata(
+    kas = GrootboekmutatieherkomstReferentiedata(
         code="KAS",
         naam="Kas",
     )
@@ -82,7 +85,7 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking in de kas (sub-)administratie
     """
 
-    leningenadministratie = Referentiedata(
+    leningenadministratie = GrootboekmutatieherkomstReferentiedata(
         code="LEN",
         naam="Leningenadministratie",
     )
@@ -90,7 +93,7 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking in de leningen (sub-)administratie
     """
 
-    memoriaal = Referentiedata(
+    memoriaal = GrootboekmutatieherkomstReferentiedata(
         code="MEM",
         naam="Memoriaal",
     )
@@ -99,7 +102,7 @@ class Grootboekmutatieherkomst(Enum):
     geboekt onder de noemer memoriaal.
     """
 
-    projectadministratie = Referentiedata(
+    projectadministratie = GrootboekmutatieherkomstReferentiedata(
         code="PRO",
         naam="Projectadministratie",
     )
@@ -107,7 +110,7 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking in de project (sub-)administratie
     """
 
-    salarisadministratie = Referentiedata(
+    salarisadministratie = GrootboekmutatieherkomstReferentiedata(
         code="SAL",
         naam="Salarisadministratie",
     )
@@ -115,24 +118,10 @@ class Grootboekmutatieherkomst(Enum):
     Een boeking in de salaris (sub-)administratie
     """
 
-    systeem = Referentiedata(
+    systeem = GrootboekmutatieherkomstReferentiedata(
         code="SYS",
         naam="Systeem",
     )
     """
     Overige (automatische) (correctie)boekingen
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Vacaturesoort(Enum):
-    tijdelijke_inhuur = Referentiedata(
+class VacaturesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Vacaturesoort(Referentiedatasoort):
+    tijdelijke_inhuur = VacaturesoortReferentiedata(
         code="TIJ",
         naam="Tijdelijke inhuur",
     )
@@ -12,24 +15,10 @@ class Vacaturesoort(Enum):
     Tijdelijke inhuur
     """
 
-    vaste_dienst = Referentiedata(
+    vaste_dienst = VacaturesoortReferentiedata(
         code="VAS",
         naam="Vaste dienst",
     )
     """
     Vaste dienst
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

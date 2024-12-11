@@ -62,8 +62,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -106,7 +106,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             return woningwaardering_groep
 
         logger.info(
-            f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is {woz_eenheid.vastgestelde_waarde}"
+            f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is €{woz_eenheid.vastgestelde_waarde:.0f}"
         )
 
         woz_waarde = self.minimum_woz_waarde(woz_eenheid)
@@ -120,17 +120,21 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         factoren = self.pd_woz_factor[
             self.pd_woz_factor["Peildatum"]
             == pd.to_datetime(woz_eenheid.waardepeildatum)
-        ].pipe(utils.dataframe_met_een_rij)
+        ]
+        if len(factoren) != 1:
+            raise ValueError(
+                f"Eenheid ({eenheid.id}): lookup-table gefaald voor peildatum {woz_eenheid.waardepeildatum} voor {self.stelselgroep.naam}."
+            )
 
         factor_onderdeel_I = Decimal(str(factoren["Onderdeel I"].values[0]))
         factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
 
         punten_onderdeel_I = utils.rond_af(
-            Decimal(woz_waarde / factor_onderdeel_I), decimalen=2
+            (woz_waarde / factor_onderdeel_I), decimalen=2
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde} / {factor_onderdeel_I} = {punten_onderdeel_I}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
         )
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -157,7 +161,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde} / {oppervlakte} / {factor_onderdeel_II} = {punten_onderdeel_II}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
         )
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -178,7 +182,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.punten = float(utils.rond_af(punten, decimalen=0))
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
 
         return woningwaardering_groep
@@ -253,7 +257,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             # 187 punten, geldt een waardering van 186 punten voor de woning.
             if totaal_punten_zonder_cap > 186 and totaal_punten_met_cap < 187:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 correctie_punten = 186 - totaal_punten_zonder_cap
                 woningwaardering_groep.woningwaarderingen.append(
@@ -266,7 +270,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 )
             else:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor de stelselgroep {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 woningwaardering_groep.woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
@@ -311,8 +315,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         overige_percentage = Decimal("100") - max_woz_percentage
         percentage_verhouding = overige_percentage / max_woz_percentage
         max_woz_punten = overige_punten / percentage_verhouding
-
-        logger.debug(f"max_woz_punten: {max_woz_punten}")
 
         # Pas de cap toe op de WOZ-punten
         capped_woz_punten = min(
@@ -373,6 +375,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         Returns:
             Decimal | None: De minimum WOZ-waarde, of None indien er geen minimum vastgesteld kan worden.
+
+        Raises:
+            ValueError: Als er iets onverwachts fout gaat bij het gebruiken van een lookup-tabel.
         """
         if woz_eenheid.vastgestelde_waarde is None:
             warnings.warn("Vastgestelde WOZ-waarde in WOZ-eenheid is None")
@@ -384,22 +389,25 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         vastgestelde_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
 
-        minimum_woz_waarde = Decimal(
-            str(
-                self.pd_minimum_woz_waarde[
-                    self.pd_minimum_woz_waarde["Peildatum"]
-                    == pd.to_datetime(woz_eenheid.waardepeildatum)
-                ]
-                .pipe(utils.dataframe_met_een_rij)["Minimumwaarde"]
-                .values[0]
+        filtered_df = self.pd_minimum_woz_waarde[
+            self.pd_minimum_woz_waarde["Peildatum"]
+            == pd.to_datetime(woz_eenheid.waardepeildatum)
+        ]
+        if len(filtered_df) != 1:
+            raise ValueError(
+                f"Eenheid ({woz_eenheid.id}): lookup-table gefaald voor peildatum {woz_eenheid.waardepeildatum} voor {self.stelselgroep.naam}."
             )
-        )
+        minimum_woz_waarde = Decimal(str(filtered_df["Minimumwaarde"].values[0]))
 
         if vastgestelde_waarde < minimum_woz_waarde:
             logger.info(
-                f"WOZ-waarde {vastgestelde_waarde} is kleiner dan minimum {minimum_woz_waarde}, minimum wordt gebruikt"
+                f"WOZ-waarde €{vastgestelde_waarde:.0f} is kleiner dan minimum €{minimum_woz_waarde:.0f}, minimum wordt gebruikt"
             )
             return minimum_woz_waarde
+
+        logger.debug(
+            f"WOZ-waarde €{vastgestelde_waarde:.0f} is groter dan minimum €{minimum_woz_waarde:.0f}, minimum wordt niet gebruikt"
+        )
 
         return vastgestelde_waarde
 
@@ -421,12 +429,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             for groep in (woningwaardering_resultaat.groepen or [])
             if (
                 groep.criterium_groep is not None
-                and groep.criterium_groep.stelselgroep is not None
-                and groep.criterium_groep.stelselgroep.code
-                in [
-                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
-                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
-                ]
+                and groep.criterium_groep.stelselgroep
+                in (
+                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+                )
             )
         ]
 
@@ -482,29 +489,27 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 if groep.punten
                 and groep.criterium_groep
                 and groep.criterium_groep.stelselgroep
-                and groep.criterium_groep.stelselgroep.code
-                and groep.criterium_groep.stelselgroep.code
-                in [
-                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,  # 1
-                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,  # 2
-                    Woningwaarderingstelselgroep.verkoeling_en_verwarming.code,  # 3
-                    Woningwaarderingstelselgroep.energieprestatie.code,  # 4
-                    Woningwaarderingstelselgroep.keuken.code,  # 5
-                    Woningwaarderingstelselgroep.sanitair.code,  # 6
-                    Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,  # 7
-                    Woningwaarderingstelselgroep.buitenruimten.code,  # 8
-                    Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.code,  # 9
-                    Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.code,  # 10
-                    Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # 12
-                ]
+                in (
+                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,  # 1
+                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,  # 2
+                    Woningwaarderingstelselgroep.verkoeling_en_verwarming,  # 3
+                    Woningwaarderingstelselgroep.energieprestatie,  # 4
+                    Woningwaarderingstelselgroep.keuken,  # 5
+                    Woningwaarderingstelselgroep.sanitair,  # 6
+                    Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten,  # 7
+                    Woningwaarderingstelselgroep.buitenruimten,  # 8
+                    Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen,  # 9
+                    Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,  # 10
+                    Woningwaarderingstelselgroep.bijzondere_voorzieningen,  # 12
+                )
             )
             logger.debug(
-                f"Eenheid ({eenheid.id}): punten_critische_stelselgroepen: {punten_critische_stelselgroepen}"
+                f"Eenheid ({eenheid.id}): nieuwbouw of hoogniveau renovatie in de jaren 2015-2019. Punten voor de stelselgroepen 1 t/m 10 en 12: {punten_critische_stelselgroepen}"
             )
             if punten_critische_stelselgroepen >= 110:
                 minimum_punten = Decimal("40")
                 logger.info(
-                    f"Eenheid ({eenheid.id}): minimum van 40 {Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.naam}"
+                    f"Eenheid ({eenheid.id}): nieuwbouw of hoogniveau renovatie in de jaren 2015-2019 en >= 110 punten voor de stelselgroepen 1 t/m 10 en 12. Minimaal 40 punten voor {self.stelselgroep.naam}"
                 )
 
         return minimum_punten

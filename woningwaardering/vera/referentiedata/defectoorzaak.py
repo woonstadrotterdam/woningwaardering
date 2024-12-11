@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Defectoorzaak(Enum):
-    bewonersopdracht_en_of_gedrag = Referentiedata(
+class DefectoorzaakReferentiedata(Referentiedata):
+    pass
+
+
+class Defectoorzaak(Referentiedatasoort):
+    bewonersopdracht_en_of_gedrag = DefectoorzaakReferentiedata(
         code="BEW",
         naam="Bewonersopdracht/gedrag",
     )
@@ -13,7 +16,7 @@ class Defectoorzaak(Enum):
     Ketenstandaard: oorzaakcode HUU - Huurder
     """
 
-    schade_door_brand = Referentiedata(
+    schade_door_brand = DefectoorzaakReferentiedata(
         code="BRA",
         naam="Schade door brand",
     )
@@ -21,7 +24,7 @@ class Defectoorzaak(Enum):
     Defect is veroorzaakt door brand. (bijv. keukenbrand).
     """
 
-    ouderdom = Referentiedata(
+    ouderdom = DefectoorzaakReferentiedata(
         code="OUD",
         naam="Ouderdom",
     )
@@ -30,7 +33,7 @@ class Defectoorzaak(Enum):
     hangt scheef). Relatie met Ketenstandaard: oorzaakcode OUD - Ouderdom
     """
 
-    normale_slijtage = Referentiedata(
+    normale_slijtage = DefectoorzaakReferentiedata(
         code="SLT",
         naam="Normale slijtage",
     )
@@ -39,7 +42,7 @@ class Defectoorzaak(Enum):
     element). Relatie met Ketenstandaard: oorzaakcode SLT - Slijtage
     """
 
-    slecht_opgeleverd = Referentiedata(
+    slecht_opgeleverd = DefectoorzaakReferentiedata(
         code="SOP",
         naam="Slecht opgeleverd",
     )
@@ -48,7 +51,7 @@ class Defectoorzaak(Enum):
     (bijv. kraan lekt van nieuwe keuken).
     """
 
-    schade_door_storm = Referentiedata(
+    schade_door_storm = DefectoorzaakReferentiedata(
         code="STO",
         naam="Schade door storm",
     )
@@ -57,7 +60,7 @@ class Defectoorzaak(Enum):
     storm).
     """
 
-    schade_door_vandalisme = Referentiedata(
+    schade_door_vandalisme = DefectoorzaakReferentiedata(
         code="VAN",
         naam="Schade door vandalisme",
     )
@@ -65,7 +68,7 @@ class Defectoorzaak(Enum):
     Defect is veroorzaakt door vandalisme. (bijv. graffiti op gevel).
     """
 
-    verzoek_van_de_vastgoedeigenaar = Referentiedata(
+    verzoek_van_de_vastgoedeigenaar = DefectoorzaakReferentiedata(
         code="VGE",
         naam="Verzoek van de vastgoedeigenaar",
     )
@@ -73,7 +76,7 @@ class Defectoorzaak(Enum):
     Vastgoedeigenaar heeft expliciet verzoek gedaan om het defect op te lossen.
     """
 
-    schade_door_water = Referentiedata(
+    schade_door_water = DefectoorzaakReferentiedata(
         code="WAT",
         naam="Schade door water",
     )
@@ -81,17 +84,3 @@ class Defectoorzaak(Enum):
     Defect is veroorzaakt door lekkage (van binnenuit) of overstroming (van buitenaf).
     (bijv. ondergelopen kelder).
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

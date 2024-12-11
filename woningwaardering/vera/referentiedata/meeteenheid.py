@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Meeteenheid(Enum):
-    centimeter = Referentiedata(
+class MeeteenheidReferentiedata(Referentiedata):
+    pass
+
+
+class Meeteenheid(Referentiedatasoort):
+    centimeter = MeeteenheidReferentiedata(
         code="CM",
         naam="Centimeter",
     )
@@ -12,12 +15,12 @@ class Meeteenheid(Enum):
     Aantal uitgedrukt in centimeters
     """
 
-    omvang_personeelsbestand = Referentiedata(
+    omvang_personeelsbestand = MeeteenheidReferentiedata(
         code="FTE",
         naam="Omvang personeelsbestand",
     )
 
-    gram = Referentiedata(
+    gram = MeeteenheidReferentiedata(
         code="GRM",
         naam="Gram",
     )
@@ -25,27 +28,27 @@ class Meeteenheid(Enum):
     Aantal uitgedrukt in gram
     """
 
-    kilogram = Referentiedata(
+    kilogram = MeeteenheidReferentiedata(
         code="KGR",
         naam="Kilogram",
     )
 
-    liter = Referentiedata(
+    liter = MeeteenheidReferentiedata(
         code="LTR",
         naam="Liter",
     )
 
-    vierkante_meter_m2 = Referentiedata(
+    vierkante_meter_m2 = MeeteenheidReferentiedata(
         code="M2",
         naam="Vierkante meter, m2",
     )
 
-    kubieke_meter_m3 = Referentiedata(
+    kubieke_meter_m3 = MeeteenheidReferentiedata(
         code="M3",
         naam="Kubieke meter, m3",
     )
 
-    millimeter = Referentiedata(
+    millimeter = MeeteenheidReferentiedata(
         code="MIL",
         naam="Millimeter",
     )
@@ -53,7 +56,7 @@ class Meeteenheid(Enum):
     Aantal uitgedrukt in millimeters
     """
 
-    minuten = Referentiedata(
+    minuten = MeeteenheidReferentiedata(
         code="MIN",
         naam="Minuten",
     )
@@ -61,12 +64,12 @@ class Meeteenheid(Enum):
     Aantal uitgedrukt in minuten, bijvoorbeeld 15 minuten reistijd
     """
 
-    meter = Referentiedata(
+    meter = MeeteenheidReferentiedata(
         code="MTR",
         naam="Meter",
     )
 
-    stuks = Referentiedata(
+    stuks = MeeteenheidReferentiedata(
         code="STU",
         naam="Stuks",
     )
@@ -74,7 +77,7 @@ class Meeteenheid(Enum):
     Aantal uitgedrukt per stuk, bijvoorbeeld 2 stuks deurklink, 10 stuks schroeven, etc.
     """
 
-    uren = Referentiedata(
+    uren = MeeteenheidReferentiedata(
         code="UUR",
         naam="Uren",
     )
@@ -82,17 +85,3 @@ class Meeteenheid(Enum):
     Aantal uitgedrukt in uren, bijvoorbeeld 2,5 uur werktijd. 15 minuten kan uitgedrukt
     worden in 0,25 uur
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

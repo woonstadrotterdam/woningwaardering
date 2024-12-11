@@ -1,20 +1,23 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Contactgegevensoort(Enum):
-    e_mail = Referentiedata(
+class ContactgegevensoortReferentiedata(Referentiedata):
+    pass
+
+
+class Contactgegevensoort(Referentiedatasoort):
+    e_mail = ContactgegevensoortReferentiedata(
         code="EMA",
         naam="E-mail",
     )
 
-    fax = Referentiedata(
+    fax = ContactgegevensoortReferentiedata(
         code="FAX",
         naam="Fax",
     )
 
-    mobiele_telefoon = Referentiedata(
+    mobiele_telefoon = ContactgegevensoortReferentiedata(
         code="MOB",
         naam="Mobiele telefoon",
     )
@@ -22,39 +25,25 @@ class Contactgegevensoort(Enum):
     Mobiel telefoonnummer, ook geschikt voor SMS
     """
 
-    pager = Referentiedata(
+    pager = ContactgegevensoortReferentiedata(
         code="PAG",
         naam="Pager",
     )
 
-    post = Referentiedata(
+    post = ContactgegevensoortReferentiedata(
         code="POS",
         naam="Post",
     )
 
-    social_media = Referentiedata(
+    social_media = ContactgegevensoortReferentiedata(
         code="SOC",
         naam="Social media",
     )
 
-    telefoon = Referentiedata(
+    telefoon = ContactgegevensoortReferentiedata(
         code="TEL",
         naam="Telefoon",
     )
     """
     Gewoon telefoonnummer
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

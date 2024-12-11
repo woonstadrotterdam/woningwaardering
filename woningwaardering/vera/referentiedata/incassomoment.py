@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Incassomoment(Enum):
-    incassomoment_1e_dag_van_de_maand = Referentiedata(
+class IncassomomentReferentiedata(Referentiedata):
+    pass
+
+
+class Incassomoment(Referentiedatasoort):
+    incassomoment_1e_dag_van_de_maand = IncassomomentReferentiedata(
         code="001",
         naam="1e dag van de maand",
     )
@@ -12,7 +15,7 @@ class Incassomoment(Enum):
     1e dag van de maand
     """
 
-    incassomoment_2e_dag_van_de_maand = Referentiedata(
+    incassomoment_2e_dag_van_de_maand = IncassomomentReferentiedata(
         code="002",
         naam="2e dag van de maand",
     )
@@ -20,7 +23,7 @@ class Incassomoment(Enum):
     2e dag van de maand
     """
 
-    incassomoment_3e_dag_van_de_maand = Referentiedata(
+    incassomoment_3e_dag_van_de_maand = IncassomomentReferentiedata(
         code="003",
         naam="3e dag van de maand",
     )
@@ -28,7 +31,7 @@ class Incassomoment(Enum):
     3e dag van de maand
     """
 
-    incassomoment_4e_dag_van_de_maand = Referentiedata(
+    incassomoment_4e_dag_van_de_maand = IncassomomentReferentiedata(
         code="004",
         naam="4e dag van de maand",
     )
@@ -36,7 +39,7 @@ class Incassomoment(Enum):
     4e dag van de maand
     """
 
-    incassomoment_5e_dag_van_de_maand = Referentiedata(
+    incassomoment_5e_dag_van_de_maand = IncassomomentReferentiedata(
         code="005",
         naam="5e dag van de maand",
     )
@@ -44,7 +47,7 @@ class Incassomoment(Enum):
     5e dag van de maand
     """
 
-    incassomoment_6e_dag_van_de_maand = Referentiedata(
+    incassomoment_6e_dag_van_de_maand = IncassomomentReferentiedata(
         code="006",
         naam="6e dag van de maand",
     )
@@ -52,7 +55,7 @@ class Incassomoment(Enum):
     6e dag van de maand
     """
 
-    incassomoment_7e_dag_van_de_maand = Referentiedata(
+    incassomoment_7e_dag_van_de_maand = IncassomomentReferentiedata(
         code="007",
         naam="7e dag van de maand",
     )
@@ -60,7 +63,7 @@ class Incassomoment(Enum):
     7e dag van de maand
     """
 
-    incassomoment_8e_dag_van_de_maand = Referentiedata(
+    incassomoment_8e_dag_van_de_maand = IncassomomentReferentiedata(
         code="008",
         naam="8e dag van de maand",
     )
@@ -68,7 +71,7 @@ class Incassomoment(Enum):
     8e dag van de maand
     """
 
-    incassomoment_9e_dag_van_de_maand = Referentiedata(
+    incassomoment_9e_dag_van_de_maand = IncassomomentReferentiedata(
         code="009",
         naam="9e dag van de maand",
     )
@@ -76,7 +79,7 @@ class Incassomoment(Enum):
     9e dag van de maand
     """
 
-    incassomoment_10e_dag_van_de_maand = Referentiedata(
+    incassomoment_10e_dag_van_de_maand = IncassomomentReferentiedata(
         code="010",
         naam="10e dag van de maand",
     )
@@ -84,7 +87,7 @@ class Incassomoment(Enum):
     10e dag van de maand
     """
 
-    incassomoment_11e_dag_van_de_maand = Referentiedata(
+    incassomoment_11e_dag_van_de_maand = IncassomomentReferentiedata(
         code="011",
         naam="11e dag van de maand",
     )
@@ -92,7 +95,7 @@ class Incassomoment(Enum):
     11e dag van de maand
     """
 
-    incassomoment_12e_dag_van_de_maand = Referentiedata(
+    incassomoment_12e_dag_van_de_maand = IncassomomentReferentiedata(
         code="012",
         naam="12e dag van de maand",
     )
@@ -100,7 +103,7 @@ class Incassomoment(Enum):
     12e dag van de maand
     """
 
-    incassomoment_13e_dag_van_de_maand = Referentiedata(
+    incassomoment_13e_dag_van_de_maand = IncassomomentReferentiedata(
         code="013",
         naam="13e dag van de maand",
     )
@@ -108,7 +111,7 @@ class Incassomoment(Enum):
     13e dag van de maand
     """
 
-    incassomoment_14e_dag_van_de_maand = Referentiedata(
+    incassomoment_14e_dag_van_de_maand = IncassomomentReferentiedata(
         code="014",
         naam="14e dag van de maand",
     )
@@ -116,7 +119,7 @@ class Incassomoment(Enum):
     14e dag van de maand
     """
 
-    incassomoment_15e_dag_van_de_maand = Referentiedata(
+    incassomoment_15e_dag_van_de_maand = IncassomomentReferentiedata(
         code="015",
         naam="15e dag van de maand",
     )
@@ -124,7 +127,7 @@ class Incassomoment(Enum):
     15e dag van de maand
     """
 
-    incassomoment_16e_dag_van_de_maand = Referentiedata(
+    incassomoment_16e_dag_van_de_maand = IncassomomentReferentiedata(
         code="016",
         naam="16e dag van de maand",
     )
@@ -132,7 +135,7 @@ class Incassomoment(Enum):
     16e dag van de maand
     """
 
-    incassomoment_17e_dag_van_de_maand = Referentiedata(
+    incassomoment_17e_dag_van_de_maand = IncassomomentReferentiedata(
         code="017",
         naam="17e dag van de maand",
     )
@@ -140,7 +143,7 @@ class Incassomoment(Enum):
     17e dag van de maand
     """
 
-    incassomoment_18e_dag_van_de_maand = Referentiedata(
+    incassomoment_18e_dag_van_de_maand = IncassomomentReferentiedata(
         code="018",
         naam="18e dag van de maand",
     )
@@ -148,7 +151,7 @@ class Incassomoment(Enum):
     18e dag van de maand
     """
 
-    incassomoment_19e_dag_van_de_maand = Referentiedata(
+    incassomoment_19e_dag_van_de_maand = IncassomomentReferentiedata(
         code="019",
         naam="19e dag van de maand",
     )
@@ -156,7 +159,7 @@ class Incassomoment(Enum):
     19e dag van de maand
     """
 
-    incassomoment_20e_dag_van_de_maand = Referentiedata(
+    incassomoment_20e_dag_van_de_maand = IncassomomentReferentiedata(
         code="020",
         naam="20e dag van de maand",
     )
@@ -164,7 +167,7 @@ class Incassomoment(Enum):
     20e dag van de maand
     """
 
-    incassomoment_21e_dag_van_de_maand = Referentiedata(
+    incassomoment_21e_dag_van_de_maand = IncassomomentReferentiedata(
         code="021",
         naam="21e dag van de maand",
     )
@@ -172,7 +175,7 @@ class Incassomoment(Enum):
     21e dag van de maand
     """
 
-    incassomoment_22e_dag_van_de_maand = Referentiedata(
+    incassomoment_22e_dag_van_de_maand = IncassomomentReferentiedata(
         code="022",
         naam="22e dag van de maand",
     )
@@ -180,7 +183,7 @@ class Incassomoment(Enum):
     22e dag van de maand
     """
 
-    incassomoment_23e_dag_van_de_maand = Referentiedata(
+    incassomoment_23e_dag_van_de_maand = IncassomomentReferentiedata(
         code="023",
         naam="23e dag van de maand",
     )
@@ -188,7 +191,7 @@ class Incassomoment(Enum):
     23e dag van de maand
     """
 
-    incassomoment_24e_dag_van_de_maand = Referentiedata(
+    incassomoment_24e_dag_van_de_maand = IncassomomentReferentiedata(
         code="024",
         naam="24e dag van de maand",
     )
@@ -196,7 +199,7 @@ class Incassomoment(Enum):
     24e dag van de maand
     """
 
-    incassomoment_25e_dag_van_de_maand = Referentiedata(
+    incassomoment_25e_dag_van_de_maand = IncassomomentReferentiedata(
         code="025",
         naam="25e dag van de maand",
     )
@@ -204,7 +207,7 @@ class Incassomoment(Enum):
     25e dag van de maand
     """
 
-    incassomoment_26e_dag_van_de_maand = Referentiedata(
+    incassomoment_26e_dag_van_de_maand = IncassomomentReferentiedata(
         code="026",
         naam="26e dag van de maand",
     )
@@ -212,7 +215,7 @@ class Incassomoment(Enum):
     26e dag van de maand
     """
 
-    incassomoment_27e_dag_van_de_maand = Referentiedata(
+    incassomoment_27e_dag_van_de_maand = IncassomomentReferentiedata(
         code="027",
         naam="27e dag van de maand",
     )
@@ -220,7 +223,7 @@ class Incassomoment(Enum):
     27e dag van de maand
     """
 
-    incassomoment_28e_dag_van_de_maand = Referentiedata(
+    incassomoment_28e_dag_van_de_maand = IncassomomentReferentiedata(
         code="028",
         naam="28e dag van de maand",
     )
@@ -228,7 +231,7 @@ class Incassomoment(Enum):
     28e dag van de maand
     """
 
-    incassomoment_29e_dag_van_de_maand = Referentiedata(
+    incassomoment_29e_dag_van_de_maand = IncassomomentReferentiedata(
         code="029",
         naam="29e dag van de maand",
     )
@@ -236,7 +239,7 @@ class Incassomoment(Enum):
     29e dag van de maand
     """
 
-    incassomoment_30e_dag_van_de_maand = Referentiedata(
+    incassomoment_30e_dag_van_de_maand = IncassomomentReferentiedata(
         code="030",
         naam="30e dag van de maand",
     )
@@ -244,7 +247,7 @@ class Incassomoment(Enum):
     30e dag van de maand
     """
 
-    incassomoment_31e_dag_van_de_maand = Referentiedata(
+    incassomoment_31e_dag_van_de_maand = IncassomomentReferentiedata(
         code="031",
         naam="31e dag van de maand",
     )
@@ -252,7 +255,7 @@ class Incassomoment(Enum):
     31e dag van de maand
     """
 
-    laatste_dag = Referentiedata(
+    laatste_dag = IncassomomentReferentiedata(
         code="LAA",
         naam="Laatste dag",
     )
@@ -260,17 +263,3 @@ class Incassomoment(Enum):
     Laatste dag van de maand, door de verwerkende partij (de bank) te bepalen op basis
     van de kalendermaand (28e, 29e, 30e of 31e dag van de maand)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

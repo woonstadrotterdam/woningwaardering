@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Gebeurtenissoort(Enum):
-    begin_situatiepunten = Referentiedata(
+class GebeurtenissoortReferentiedata(Referentiedata):
+    pass
+
+
+class Gebeurtenissoort(Referentiedatasoort):
+    begin_situatiepunten = GebeurtenissoortReferentiedata(
         code="BSI",
         naam="Begin situatiepunten",
     )
@@ -12,7 +15,7 @@ class Gebeurtenissoort(Enum):
     Begin situatiepunten
     """
 
-    begin_startpunten = Referentiedata(
+    begin_startpunten = GebeurtenissoortReferentiedata(
         code="BST",
         naam="Begin startpunten",
     )
@@ -20,7 +23,7 @@ class Gebeurtenissoort(Enum):
     Begin startpunten
     """
 
-    gewijzigde_inschrijving = Referentiedata(
+    gewijzigde_inschrijving = GebeurtenissoortReferentiedata(
         code="GEW",
         naam="Gewijzigde inschrijving",
     )
@@ -28,7 +31,7 @@ class Gebeurtenissoort(Enum):
     Gewijzigde inschrijving
     """
 
-    gewijzigde_startpunten = Referentiedata(
+    gewijzigde_startpunten = GebeurtenissoortReferentiedata(
         code="GSA",
         naam="Gewijzigde startpunten",
     )
@@ -36,7 +39,7 @@ class Gebeurtenissoort(Enum):
     Gewijzigde startpunten
     """
 
-    gewijzigde_situatiepunten = Referentiedata(
+    gewijzigde_situatiepunten = GebeurtenissoortReferentiedata(
         code="GSI",
         naam="Gewijzigde situatiepunten",
     )
@@ -44,7 +47,7 @@ class Gebeurtenissoort(Enum):
     Gewijzigde situatiepunten
     """
 
-    intrekken_no_show = Referentiedata(
+    intrekken_no_show = GebeurtenissoortReferentiedata(
         code="INS",
         naam="Intrekken no-show",
     )
@@ -52,7 +55,7 @@ class Gebeurtenissoort(Enum):
     Intrekken gebeurtenis niet aanwezig op bevestigde bezichtiging (No-show)
     """
 
-    intrekken_reactie = Referentiedata(
+    intrekken_reactie = GebeurtenissoortReferentiedata(
         code="IRE",
         naam="Intrekken reactie",
     )
@@ -60,7 +63,7 @@ class Gebeurtenissoort(Enum):
     Intrekken reactie met puntenopbouw
     """
 
-    intrekken_toewijzing = Referentiedata(
+    intrekken_toewijzing = GebeurtenissoortReferentiedata(
         code="ITO",
         naam="Intrekken toewijzing",
     )
@@ -68,7 +71,7 @@ class Gebeurtenissoort(Enum):
     Intrekken toewijzing van de eenheid.
     """
 
-    intrekken_weigering_als_hoogste_acceptant = Referentiedata(
+    intrekken_weigering_als_hoogste_acceptant = GebeurtenissoortReferentiedata(
         code="IWH",
         naam="Intrekken weigering als hoogste acceptant",
     )
@@ -76,7 +79,7 @@ class Gebeurtenissoort(Enum):
     Intrekken weigering als hoogste acceptant
     """
 
-    intrekken_weigering_niet_als_hoogste_acceptant = Referentiedata(
+    intrekken_weigering_niet_als_hoogste_acceptant = GebeurtenissoortReferentiedata(
         code="IWN",
         naam="Intrekken weigering niet als hoogste acceptant",
     )
@@ -84,7 +87,7 @@ class Gebeurtenissoort(Enum):
     Intrekken weigering niet als hoogste acceptant
     """
 
-    nieuwe_inschrijving = Referentiedata(
+    nieuwe_inschrijving = GebeurtenissoortReferentiedata(
         code="NIE",
         naam="Nieuwe inschrijving",
     )
@@ -92,7 +95,7 @@ class Gebeurtenissoort(Enum):
     Nieuwe inschrijving
     """
 
-    no_show = Referentiedata(
+    no_show = GebeurtenissoortReferentiedata(
         code="NOS",
         naam="No-show",
     )
@@ -100,7 +103,7 @@ class Gebeurtenissoort(Enum):
     Niet aanwezig op bevestigde bezichtiging
     """
 
-    reactie = Referentiedata(
+    reactie = GebeurtenissoortReferentiedata(
         code="REA",
         naam="Reactie",
     )
@@ -108,7 +111,7 @@ class Gebeurtenissoort(Enum):
     Reactie met puntenopbouw
     """
 
-    toewijzing = Referentiedata(
+    toewijzing = GebeurtenissoortReferentiedata(
         code="TOE",
         naam="Toewijzing",
     )
@@ -116,7 +119,7 @@ class Gebeurtenissoort(Enum):
     Toewijzing
     """
 
-    weigering_als_hoogste_acceptant = Referentiedata(
+    weigering_als_hoogste_acceptant = GebeurtenissoortReferentiedata(
         code="WEI",
         naam="Weigering als hoogste acceptant",
     )
@@ -124,24 +127,10 @@ class Gebeurtenissoort(Enum):
     Weigering als hoogste acceptant
     """
 
-    weigering_niet_als_hoogste_acceptant = Referentiedata(
+    weigering_niet_als_hoogste_acceptant = GebeurtenissoortReferentiedata(
         code="WEN",
         naam="Weigering niet als hoogste acceptant",
     )
     """
     Weigering niet als hoogste acceptant
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

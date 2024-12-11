@@ -57,8 +57,8 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -71,10 +71,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         # veelal uitkomt op een totaal van ongeveer 3 punten. Om arbeidsintensief
         # meetwerk te voorkomen waardeert de Huurcommissie in dat geval een waardering
         # van 3 punten per woning.
-        if (
-            eenheid.doelgroep is not None
-            and eenheid.doelgroep.code == Doelgroep.zorg.code
-        ):
+        if eenheid.doelgroep == Doelgroep.zorg:
             logger.info(
                 f"Eenheid ({eenheid.id}) is een zorgwoning en wordt met 3 punten gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
             )
@@ -115,7 +112,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # […]
                 # * de oppervlakte, na deling door het aantal adressen, per woning minstens
                 #   2m2 bedraagt.
-                if ruimte.detail_soort.code == Ruimtedetailsoort.berging.code:
+                if ruimte.detail_soort == Ruimtedetailsoort.berging:
                     if ruimte.oppervlakte and ruimte.gedeeld_met_aantal_eenheden:
                         gedeelde_oppervlakte = (
                             ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
@@ -139,7 +136,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                         )
 
                 woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                    self._deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, oppervlakte_waarderingen
                     )
                 )
@@ -147,7 +144,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # waarderingen voor de keuken van gedeelde ruimten
                 keuken_waarderingen = list(waardeer_keuken(ruimte, self.stelsel))
                 woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                    self._deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, keuken_waarderingen
                     )
                 )
@@ -157,7 +154,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     waardeer_sanitair(ruimte, self.stelselgroep, self.stelsel)
                 )
                 woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                    self._deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, sanitair_waarderingen
                     )
                 )
@@ -169,7 +166,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
             for ruimte, waardering in verkoeling_en_verwarming_waarderingen:
                 woningwaardering_groep.woningwaarderingen.extend(
-                    self.deel_woningwaarderingen_door_aantal_eenheden(
+                    self._deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, [waardering]
                     )
                 )
@@ -185,12 +182,12 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
-    @staticmethod
-    def deel_woningwaarderingen_door_aantal_eenheden(
+    def _deel_woningwaarderingen_door_aantal_eenheden(
+        self,
         ruimte: EenhedenRuimte,
         woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:

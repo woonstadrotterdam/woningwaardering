@@ -1,38 +1,43 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.kandidaatstatus import Kandidaatstatus
+from woningwaardering.vera.referentiedata.kandidaatstatus import (
+    Kandidaatstatus,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Kandidaatdetailstatus(Enum):
-    aanbieding = Referentiedata(
+class KandidaatdetailstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Kandidaatdetailstatus(Referentiedatasoort):
+    aanbieding = KandidaatdetailstatusReferentiedata(
         code="AAN",
         naam="Aanbieding",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat krijgt aanbieding.
     """
 
-    bezichtiging = Referentiedata(
+    bezichtiging = KandidaatdetailstatusReferentiedata(
         code="BEZ",
         naam="Bezichtiging",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat mag bezichtigen.
     """
 
-    documentcontrole = Referentiedata(
+    documentcontrole = KandidaatdetailstatusReferentiedata(
         code="DOC",
         naam="Documentcontrole",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat moet documenten laten controleren.
     """
 
-    geen_belangstelling_meer = Referentiedata(
+    geen_belangstelling_meer = KandidaatdetailstatusReferentiedata(
         code="GEE",
         naam="Geen belangstelling meer",
     )
@@ -40,7 +45,7 @@ class Kandidaatdetailstatus(Enum):
     Kandidaat geeft aan geen belangstelling (meer) te hebben.
     """
 
-    geinteresseerd = Referentiedata(
+    geinteresseerd = KandidaatdetailstatusReferentiedata(
         code="INT",
         naam="Geïnteresseerd",
     )
@@ -48,43 +53,43 @@ class Kandidaatdetailstatus(Enum):
     Kandidaat is geïnteresseerd.
     """
 
-    niet_gereageerd = Referentiedata(
+    niet_gereageerd = KandidaatdetailstatusReferentiedata(
         code="NRE",
         naam="Niet gereageerd",
-        parent=Kandidaatstatus.geweigerd.value,
+        parent=Kandidaatstatus.geweigerd,
     )
     """
     Kandidaat heeft te laat of niet gereageerd.
     """
 
-    ongeschikt = Referentiedata(
+    ongeschikt = KandidaatdetailstatusReferentiedata(
         code="ONG",
         naam="Ongeschikt",
-        parent=Kandidaatstatus.afgewezen.value,
+        parent=Kandidaatstatus.afgewezen,
     )
     """
     Kandidaat niet geschikt voor omgeving.
     """
 
-    gegevens_onjuist = Referentiedata(
+    gegevens_onjuist = KandidaatdetailstatusReferentiedata(
         code="ONJ",
         naam="Gegevens onjuist",
-        parent=Kandidaatstatus.afgewezen.value,
+        parent=Kandidaatstatus.afgewezen,
     )
     """
     Kandidaat komt niet in aanmerking na controle gegevens.
     """
 
-    overeenkomst_getekend = Referentiedata(
+    overeenkomst_getekend = KandidaatdetailstatusReferentiedata(
         code="OVE",
         naam="Overeenkomst getekend",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat heeft huur- of koopovereenkomst getekend.
     """
 
-    geparkeerd = Referentiedata(
+    geparkeerd = KandidaatdetailstatusReferentiedata(
         code="PAR",
         naam="Geparkeerd",
     )
@@ -92,34 +97,20 @@ class Kandidaatdetailstatus(Enum):
     Kandidaat wil tijdelijk geen aanbiedingen ontvangen naar aanleiding van de reactie.
     """
 
-    peilen_belangstelling = Referentiedata(
+    peilen_belangstelling = KandidaatdetailstatusReferentiedata(
         code="PEI",
         naam="Peilen belangstelling",
-        parent=Kandidaatstatus.aangeboden.value,
+        parent=Kandidaatstatus.aangeboden,
     )
     """
     Kandidaat wordt gevraagd of deze nog steeds belangstelling heeft.
     """
 
-    weigering_aanbieding = Referentiedata(
+    weigering_aanbieding = KandidaatdetailstatusReferentiedata(
         code="WEI",
         naam="Weigering aanbieding",
-        parent=Kandidaatstatus.geweigerd.value,
+        parent=Kandidaatstatus.geweigerd,
     )
     """
     Kandidaat weigert de aanbieding.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -55,8 +55,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
             )
         )
 
@@ -76,44 +76,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return woningwaardering_groep
 
-        # De waardepeildatum van de WOZ-waarde ligt op 1 januari van twee kalenderjaren voorafgaand.
-        relevante_waardepeildatums = [
-            date(self.peildatum.year - 2, 1, 1)  # T-2
-            # date(self.peildatum.year - 1, 1, 1),  # T-1 Tabellen voor peildatum 1-1-2023 zijn nog niet gepubliceerd
-        ]
-
-        woz_eenheden = [
-            woz_eenheid
-            for woz_eenheid in eenheid.woz_eenheden or []
-            if woz_eenheid.waardepeildatum is not None
-            and woz_eenheid.waardepeildatum in relevante_waardepeildatums
-            and woz_eenheid.vastgestelde_waarde is not None
-        ]
-
-        if not woz_eenheden:
-            datums = " of ".join(
-                [
-                    relevante_waardepeildatum.strftime(DATUM_FORMAT)
-                    for relevante_waardepeildatum in relevante_waardepeildatums
-                ]
-            )
-            warnings.warn(
-                f"Eenheid {eenheid.id}: geen WOZ-waarde gevonden met waardepeildatum {datums}",
-                UserWarning,
-            )
-            woz_waarde = None
-            woz_waardepeildatum = max(relevante_waardepeildatums, default=None)
-        else:
-            meest_recente_woz_eenheid = max(
-                woz_eenheden, key=lambda x: x.waardepeildatum or date.min
-            )
-
-            woz_waarde = (
-                Decimal(str(meest_recente_woz_eenheid.vastgestelde_waarde))
-                if meest_recente_woz_eenheid.vastgestelde_waarde is not None
-                else None
-            )
-            woz_waardepeildatum = meest_recente_woz_eenheid.waardepeildatum
+        woz_waarde, woz_waardepeildatum = self._meest_recente_woz_eenheid(eenheid)
 
         if woz_waardepeildatum is None:
             warnings.warn(
@@ -178,8 +141,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             (
                 Decimal(oppervlakte.waarde)
                 for oppervlakte in eenheid.oppervlakten or []
-                if oppervlakte.soort is not None
-                and oppervlakte.soort.code == Oppervlaktesoort.gebruiksoppervlakte.code
+                if oppervlakte.soort == Oppervlaktesoort.gebruiksoppervlakte
                 and oppervlakte.waarde is not None
             ),
             Decimal(eenheid.gebruiksoppervlakte)
@@ -198,7 +160,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Gebruiksoppervlakte",
-                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
                     bovenliggendeCriterium=puntenwaardering_sleutel,
                 ),
                 aantal=gebruiksoppervlakte,
@@ -206,8 +168,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         woz_waarde_per_m2 = woz_waarde_voor_waardering / gebruiksoppervlakte
-
-        logger.debug(f"Eenheid {eenheid.id}: WOZ-waarde per m²: {woz_waarde_per_m2}")
 
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
@@ -255,6 +215,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         logger.debug(
             f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}: {gemiddelde_woz_waarde_per_m2}"
         )
+        logger.debug(f"Eenheid {eenheid.id}: WOZ-waarde per m²: {woz_waarde_per_m2}")
 
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
@@ -270,6 +231,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             (woz_waarde_per_m2 / gemiddelde_woz_waarde_per_m2) - 1
         ) * 100
 
+        logger.debug(
+            f"Eenheid {eenheid.id}: verschil percentage WOZ-waarde per m² en gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}: {verschil_percentage}%"
+        )
+
         punten = 0
 
         # De puntentoekenning is als volgt.
@@ -278,16 +243,25 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             # is dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte van de woningen
             # in het COROP-gebied waarbinnen de woning is gelegen.
             punten = 14
+            logger.info(
+                f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is meer dan 10% hoger dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
+            )
         elif verschil_percentage >= -10:
             # 12 punten wanneer de WOZ-waarde per m² gebruiksoppervlakte maximaal 10% hoger
             # of lager is dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte van de
             # woningen in het COROP-gebied waarbinnen de woning is gelegen.
             punten = 12
+            logger.info(
+                f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is maximaal 10% hoger of lager dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
+            )
         else:
             # 10 punten wanneer de WOZ-waarde per m² gebruiksoppervlakte meer dan 10% lager
             # is dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte van de woningen
             # in het COROP-gebied waarbinnen de woning is gelegen.
             punten = 10
+            logger.info(
+                f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is meer dan 10% lager dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
+            )
 
         woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
@@ -303,9 +277,52 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
+
+    def _meest_recente_woz_eenheid(
+        self, eenheid: EenhedenEenheid
+    ) -> tuple[Decimal | None, date | None]:
+        """
+        De waardepeildatum van de WOZ-waarde ligt op 1 januari van twee kalenderjaren voorafgaand.
+        """
+        relevante_waardepeildatums = [
+            date(self.peildatum.year - 2, 1, 1)  # T-2
+            # date(self.peildatum.year - 1, 1, 1),  # T-1 Tabellen voor peildatum 1-1-2023 zijn nog niet gepubliceerd
+        ]
+
+        woz_eenheden = [
+            woz_eenheid
+            for woz_eenheid in eenheid.woz_eenheden or []
+            if woz_eenheid.waardepeildatum is not None
+            and woz_eenheid.waardepeildatum in relevante_waardepeildatums
+            and woz_eenheid.vastgestelde_waarde is not None
+        ]
+
+        if not woz_eenheden:
+            datums = " of ".join(
+                [
+                    relevante_waardepeildatum.strftime(DATUM_FORMAT)
+                    for relevante_waardepeildatum in relevante_waardepeildatums
+                ]
+            )
+            warnings.warn(
+                f"Eenheid {eenheid.id}: geen WOZ-waarde gevonden met waardepeildatum {datums}",
+                UserWarning,
+            )
+            return None, max(relevante_waardepeildatums, default=None)
+        else:
+            meest_recente_woz_eenheid = max(
+                woz_eenheden, key=lambda x: x.waardepeildatum or date.min
+            )
+            woz_waarde = (
+                Decimal(str(meest_recente_woz_eenheid.vastgestelde_waarde))
+                if meest_recente_woz_eenheid.vastgestelde_waarde is not None
+                else None
+            )
+
+            return woz_waarde, meest_recente_woz_eenheid.waardepeildatum
 
     def _gemiddelde_woz_voor_corop_gebied(
         self, corop_gebied: dict[str, str], jaar: int

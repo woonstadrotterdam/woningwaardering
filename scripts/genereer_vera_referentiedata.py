@@ -12,6 +12,7 @@ from operator import itemgetter
 from typing import Any, Callable, Match, Pattern
 
 import requests
+import tomli
 import unidecode
 from jinja2 import Environment, select_autoescape
 from loguru import logger
@@ -26,7 +27,13 @@ output_folder = os.path.join("woningwaardering", "vera", "referentiedata")
 # response = requests.get(url)
 # source_data = json.load(loads(response.text)
 
-url = "https://raw.githubusercontent.com/Aedes-datastandaarden/vera-referentiedata/main/Referentiedata.csv"
+with open("pyproject.toml", "rb") as f:
+    pyproject_data = tomli.load(f)
+
+    woningwaardering_data = pyproject_data.get("tool", {}).get("woningwaardering", {})
+    version = woningwaardering_data.get("datasources", {}).get("referentiedata", {})
+
+url = f"https://raw.githubusercontent.com/Aedes-datastandaarden/vera-referentiedata/{version}/Referentiedata.csv"
 response = requests.get(url, timeout=10)
 source_data = csv.DictReader(response.text.splitlines(), delimiter=";")
 
@@ -208,13 +215,11 @@ environment.filters["normalize_variable_name"] = normalize_variable_name
 
 # Define the Jinja2 template for soort_folder/<soort>.py
 soort_template = environment.from_string(
-    """from enum import Enum
-
-from woningwaardering.vera.bvg.generated import Referentiedata
+    """from woningwaardering.vera.bvg.generated import Referentiedata
 {%- set parent_classes = items | map(attribute='parent.soort') | unique | select('string') -%}
 {%- if parent_classes -%}
 {%- for parentClass in parent_classes %}
-{%- if parentClass | length > 19 %}
+{%- if parentClass | length > 6 %}
 from woningwaardering.vera.referentiedata.{{ parentClass | remove_accents | lower }} import (
     {{ parentClass | remove_accents | title }},
 )
@@ -223,15 +228,20 @@ from woningwaardering.vera.referentiedata.{{ parentClass | remove_accents | lowe
 {%- endif %}
 {%- endfor %}
 {%- endif %}
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class {{ soort|remove_accents|title }}(Enum):
+class {{ soort|remove_accents|title }}Referentiedata(Referentiedata):
+    pass
+
+
+class {{ soort|remove_accents|title }}(Referentiedatasoort):
 {%- for item in items %}
-    {{ item|normalize_variable_name }} = Referentiedata(
+    {{ item|normalize_variable_name }} = {{ soort|remove_accents|title }}Referentiedata(
         code="{{ item['code'] | safe }}",
         naam="{{ item['naam'] | safe }}",
         {%- if item['parent'] | safe %}
-        parent={{item['parent'].soort | remove_accents | title}}.{{item['parent'] | normalize_variable_name}}.value,
+        parent={{item['parent'].soort | remove_accents | title}}.{{item['parent'] | normalize_variable_name}},
         {%- endif %}
     )
     {%- if item['omschrijving'] | safe %}
@@ -240,20 +250,6 @@ class {{ soort|remove_accents|title }}(Enum):
     \"\"\"
     {%- endif %}
 {% endfor %}
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent
-
 """
 )
 
@@ -267,11 +263,15 @@ for soort, items in grouped_data:
 soort_folder_init_template = environment.from_string(
     """
 {%- for soort in grouped_data -%}
-from .{{ soort[0]|remove_accents|lower }} import {{ soort[0]|remove_accents|title }}
+from .{{ soort[0]|remove_accents|lower }} import (
+    {{ soort[0]|remove_accents|title }},
+    {{ soort[0]|remove_accents|title }}Referentiedata
+)
 {% endfor %}
 __all__ = [
 {%- for soort in grouped_data %}
     "{{ soort[0]|remove_accents|title }}",
+    "{{ soort[0]|remove_accents|title }}Referentiedata",
 {%- endfor %}
 ]
 

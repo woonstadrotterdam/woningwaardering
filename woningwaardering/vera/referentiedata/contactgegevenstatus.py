@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Contactgegevenstatus(Enum):
-    aangemaakt = Referentiedata(
+class ContactgegevenstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Contactgegevenstatus(Referentiedatasoort):
+    aangemaakt = ContactgegevenstatusReferentiedata(
         code="AAN",
         naam="Aangemaakt",
     )
@@ -12,7 +15,7 @@ class Contactgegevenstatus(Enum):
     Het contactgegeven is aangemaakt.
     """
 
-    gevalideerd = Referentiedata(
+    gevalideerd = ContactgegevenstatusReferentiedata(
         code="GEV",
         naam="Gevalideerd",
     )
@@ -20,24 +23,10 @@ class Contactgegevenstatus(Enum):
     Het contactgeggeven is gevalideerd via een mail, sms etc.
     """
 
-    ongeldig = Referentiedata(
+    ongeldig = ContactgegevenstatusReferentiedata(
         code="ONG",
         naam="Ongeldig",
     )
     """
     Het contactgegeven is niet (meer) geldig.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

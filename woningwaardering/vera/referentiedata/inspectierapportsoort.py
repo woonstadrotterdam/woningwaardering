@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Inspectierapportsoort(Enum):
-    eindinspectierapport = Referentiedata(
+class InspectierapportsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Inspectierapportsoort(Referentiedatasoort):
+    eindinspectierapport = InspectierapportsoortReferentiedata(
         code="EIN",
         naam="Eindinspectierapport",
     )
@@ -12,7 +15,7 @@ class Inspectierapportsoort(Enum):
     Rapport naar aanleiding van een eindinspectie
     """
 
-    reparatieinspectierapport = Referentiedata(
+    reparatieinspectierapport = InspectierapportsoortReferentiedata(
         code="REP",
         naam="Reparatieinspectierapport",
     )
@@ -20,7 +23,7 @@ class Inspectierapportsoort(Enum):
     Inspectierapport naar aanleiding van een onduidelijk reparatieverzoek
     """
 
-    steekproefinspectierapport = Referentiedata(
+    steekproefinspectierapport = InspectierapportsoortReferentiedata(
         code="STE",
         naam="Steekproefinspectierapport",
     )
@@ -29,24 +32,10 @@ class Inspectierapportsoort(Enum):
     inspecteur/opzichter.
     """
 
-    voorinspectierapport = Referentiedata(
+    voorinspectierapport = InspectierapportsoortReferentiedata(
         code="VOO",
         naam="Voorinspectierapport",
     )
     """
     Rapport naar aanleiding van een voor- of tusseninspectie
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

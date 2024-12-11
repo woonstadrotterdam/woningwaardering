@@ -1,39 +1,28 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Signaleringsoort(Enum):
-    agressie = Referentiedata(
+class SignaleringsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Signaleringsoort(Referentiedatasoort):
+    agressie = SignaleringsoortReferentiedata(
         code="AGR",
         naam="Agressie",
     )
 
-    oneigenlijk_gebruik_woning = Referentiedata(
+    oneigenlijk_gebruik_woning = SignaleringsoortReferentiedata(
         code="ONE",
         naam="Oneigenlijk gebruik woning",
     )
 
-    overlast = Referentiedata(
+    overlast = SignaleringsoortReferentiedata(
         code="OVE",
         naam="Overlast",
     )
 
-    huurschuld = Referentiedata(
+    huurschuld = SignaleringsoortReferentiedata(
         code="SCH",
         naam="Huurschuld",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

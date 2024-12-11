@@ -1,5 +1,6 @@
 from collections import defaultdict
 from datetime import date
+from decimal import Decimal
 
 from loguru import logger
 
@@ -46,14 +47,14 @@ class Keuken(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
             )
         )
 
         woningwaardering_groep.woningwaarderingen = []
 
-        gedeeld_met_counter: defaultdict[int, float] = defaultdict(float)
+        gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
         for ruimte in eenheid.ruimten or []:
             woningwaarderingen = list(waardeer_keuken(ruimte, self.stelsel))
@@ -69,19 +70,23 @@ class Keuken(Stelselgroep):
                     ):
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ] += woningwaardering.punten
+                        ] += Decimal(str(woningwaardering.punten))
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
                         )
                         woningwaardering.punten = float(
                             utils.rond_af(
-                                woningwaardering.punten
-                                / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                Decimal(str(woningwaardering.punten))
+                                / Decimal(
+                                    str(
+                                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                                    )
+                                ),
                                 decimalen=2,
                             )
                         )
                     elif woningwaardering.punten:
-                        gedeeld_met_counter[1] += woningwaardering.punten
+                        gedeeld_met_counter[1] += Decimal(str(woningwaardering.punten))
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
                                 id=f"{self.stelselgroep.name}_prive"
@@ -101,19 +106,23 @@ class Keuken(Stelselgroep):
                 if aantal > 1
                 else f"{self.stelselgroep.name}_prive",
             )
-            woningwaardering.punten = float(utils.rond_af_op_kwart(punten / aantal))
+            woningwaardering.punten = float(
+                utils.rond_af_op_kwart(punten / Decimal(str(aantal)))
+            )
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        woningwaardering_groep.punten = sum(
-            woningwaardering.punten
-            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-            if woningwaardering.punten is not None
-            and woningwaardering.criterium is not None
-            and woningwaardering.criterium.bovenliggende_criterium is None
+        woningwaardering_groep.punten = float(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+                and woningwaardering.criterium is not None
+                and woningwaardering.criterium.bovenliggende_criterium is None
+            )
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 

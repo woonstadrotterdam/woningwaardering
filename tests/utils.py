@@ -1,11 +1,14 @@
 import difflib
+from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 from typing import Iterator
 
+import pytest
 from pytest import fail
 
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.utils import naar_tabel, normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -23,7 +26,7 @@ def get_stelselgroep_resultaten(
     resultaten = [
         groep
         for groep in resultaat.groepen or []
-        if groep.criterium_groep.stelselgroep.code == stelselgroep.code
+        if groep.criterium_groep.stelselgroep == stelselgroep
     ]
     assert (
         len(resultaten) < 2
@@ -105,30 +108,114 @@ def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterato
     )
 
 
-def krijg_warning_tuple_op_datum(
-    id: str, peildatum: date, eenheid_warning_mapping: dict
-) -> tuple[Warning, str]:
+@dataclass
+class WarningConfig:
+    file: str
+    peildatum: date
+    warnings: dict[type[Warning], str]
+
+
+def assert_stelselgroep_warnings(
+    warning_config: WarningConfig, peildatum: date, stelselgroep_class: Stelselgroep
+):
     """
-    Geeft de warning tuple terug die hoort bij een eenheid_id.
+    Generieke functie om warnings voor stelselgroepen te testen
 
     Args:
-        id (str): eenheid_id
+        warning_config (WarningConfig): WarningConfig object met waarschuwing test configuratie
         peildatum (date): peildatum
-        eenheid_warning_mapping (dict): mapping van eenheid_id naar peildatum-warning
+        stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
+    """
+    if peildatum < warning_config.peildatum:
+        pytest.skip(f"Warning is niet van toepassing op peildatum: {peildatum}")
+
+    with open(warning_config.file, "r+") as f:
+        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
+
+    with pytest.warns() as records:
+        stelselgroep = stelselgroep_class(peildatum=peildatum)
+        stelselgroep.waardeer(eenheid_input)
+
+        warning_message = [(r.category, str(r.message)) for r in records]
+        for warning_type, warning_message in warning_config.warnings.items():
+            assert any(
+                [
+                    warning_type == r.category and warning_message in str(r.message)
+                    for r in records
+                ]
+            ), f"Geen {warning_type} met message '{warning_message}' geraised"
+
+
+def assert_stelselgroep_output(
+    input_en_output_model: tuple[
+        EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat
+    ],
+    peildatum: date,
+    stelselgroep_class: Stelselgroep,
+):
+    eenheid_input, eenheid_output = input_en_output_model
+    normaliseer_ruimte_namen(eenheid_input)
+
+    stelselgroep = stelselgroep_class(peildatum=peildatum)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    assert isinstance(
+        resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
+    ), "Resultaat is geen WoningwaarderingResultatenWoningwaarderingResultaat"
+    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
+
+    assert_output_model(
+        resultaat,
+        eenheid_output,
+        stelselgroep.stelselgroep,
+    )
+
+
+def assert_stelselgroep_specifiek_output(
+    specifieke_input_en_output_model: tuple[
+        EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat
+    ],
+    peildatum: date,
+    stelselgroep_class: Stelselgroep,
+):
+    """
+    Generieke functie om specifieke output voor stelselgroepen te testen
+
+    Args:
+        specifieke_input_en_output_model (tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]): Tuple van input en verwachte output
+        peildatum (date): peildatum
+        stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
+    """
+    eenheid_input, eenheid_output = specifieke_input_en_output_model
+    stelselgroep = stelselgroep_class(peildatum=peildatum)
+
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
+    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
+
+    assert_output_model(
+        resultaat,
+        eenheid_output,
+        stelselgroep.stelselgroep,
+    )
+
+
+def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fixture:
+    """
+    Factory functie die een pytest fixture maakt voor het laden van specifieke test cases.
+
+    Args:
+        base_path (Path): Pad naar de directory waarin de test file zich bevindt
 
     Returns:
-        tuple[Warning, str]: warning tuple
+        pytest.fixture: Een pytest fixture die een tuple van input en output model retourneert
     """
 
-    if id not in eenheid_warning_mapping:
-        return None
+    @pytest.fixture(params=[str(p) for p in (base_path / "output").rglob("*.json")])
+    def specifieke_input_en_output_model(request):
+        current_file_path = Path(request.fspath).parent
+        output_file_path = request.param
+        return laad_specifiek_input_en_output_model(
+            current_file_path, Path(output_file_path)
+        )
 
-    datum_lijst = eenheid_warning_mapping[id]
-
-    result = None
-
-    for datum_warning_tuple in datum_lijst:
-        if peildatum >= datum_warning_tuple[0]:
-            result = datum_warning_tuple[1]
-
-    return result
+    return specifieke_input_en_output_model

@@ -25,12 +25,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Meeteenheid,
+    Ruimtedetailsoort,
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 
 
 class Buitenruimten(Stelselgroep):
@@ -54,8 +54,8 @@ class Buitenruimten(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -120,9 +120,7 @@ class Buitenruimten(Stelselgroep):
                 else f"{self.stelselgroep.name}_prive",
             )
             woningwaardering.punten = float(punten)
-            woningwaardering.criterium.meeteenheid = (
-                Meeteenheid.vierkante_meter_m2.value
-            )
+            woningwaardering.criterium.meeteenheid = Meeteenheid.vierkante_meter_m2
             woningwaardering.aantal = float(gedeeld_met_m2_som[aantal])
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
@@ -148,7 +146,7 @@ class Buitenruimten(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
 
@@ -167,15 +165,15 @@ class Buitenruimten(Stelselgroep):
         Returns:
             WoningwaarderingResultatenWoningwaardering | None: Maximering als er een maximering is.
         """
-        max_punten = 15
-        punten = woningwaardering_groep.punten or 0
+        max_punten = Decimal("15")
+        punten = Decimal(str(woningwaardering_groep.punten or "0"))
         if punten > max_punten:
             aftrek = max_punten - punten
 
             logger.info(
                 f"Eenheid ({eenheid.id}): maximaal aantal punten voor {self.stelselgroep.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
             )
-            punten += aftrek
+
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -185,6 +183,9 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.punten = float(aftrek)
             return woningwaardering
 
+        logger.debug(
+            f"Eenheid ({eenheid.id}): geen maximaal aantal punten voor {self.stelselgroep.naam} overschreden ({punten} <= {max_punten})."
+        )
         return None
 
     def _punten_voor_buitenruimte(
@@ -206,11 +207,10 @@ class Buitenruimten(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering: Punten voor de buitenruimte.
         """
         if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte or (
-            ruimte.detail_soort is not None
-            and ruimte.detail_soort.code
+            ruimte.detail_soort
             in [
-                Ruimtedetailsoort.stalling_extern.code,
-                Ruimtedetailsoort.stalling_intern.code,
+                Ruimtedetailsoort.stalling_extern,
+                Ruimtedetailsoort.stalling_intern,
             ]
         ):
             if not ruimte.oppervlakte:
@@ -238,8 +238,7 @@ class Buitenruimten(Stelselgroep):
             # Parkeerplaatsen worden alleen gewaardeerd als ze niet gedeeld zijn met andere eenheden
             if (
                 ruimte.detail_soort
-                and ruimte.detail_soort.code
-                == Ruimtedetailsoort.parkeerplaats.code  # parkeerplaats heeft als ruimtesoort buitenruimte
+                == Ruimtedetailsoort.parkeerplaats  # parkeerplaats heeft als ruimtesoort buitenruimte
                 and gedeeld_met_eenheden(ruimte)
             ):
                 logger.debug(
@@ -252,7 +251,7 @@ class Buitenruimten(Stelselgroep):
             )
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
                 naam=ruimte.naam
                 if not gedeeld_met_eenheden(ruimte)
                 else f"{ruimte.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)",
@@ -316,6 +315,9 @@ class Buitenruimten(Stelselgroep):
                 f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig, {woningwaardering.punten} punten voor {self.stelselgroep.naam}."
             )
             return woningwaardering
+        logger.debug(
+            f"Eenheid ({eenheid.id}): geen privé buitenruimten aanwezig voor {self.stelselgroep.naam}."
+        )
         return None
 
 
@@ -325,4 +327,6 @@ if __name__ == "__main__":  # pragma: no cover
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
-        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")
+        context.waardeer(
+            "tests/data/onzelfstandige_woonruimten/stelselgroepen/buitenruimten/input/gedeelde_buitenruimtes_onz.json"
+        )

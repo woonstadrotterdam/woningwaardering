@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Crediteursoort(Enum):
-    crediteur_gemeente = Referentiedata(
+class CrediteursoortReferentiedata(Referentiedata):
+    pass
+
+
+class Crediteursoort(Referentiedatasoort):
+    crediteur_gemeente = CrediteursoortReferentiedata(
         code="CGM",
         naam="Crediteur gemeente",
     )
@@ -18,7 +21,7 @@ class Crediteursoort(Enum):
     goederen of diensten.
     """
 
-    crediteur_leningen_kredietinstelling = Referentiedata(
+    crediteur_leningen_kredietinstelling = CrediteursoortReferentiedata(
         code="CKI",
         naam="Crediteur leningen kredietinstelling",
     )
@@ -32,7 +35,7 @@ class Crediteursoort(Enum):
     voorwaarden van de leningsovereenkomst die tussen beide partijen is gesloten.
     """
 
-    crediteur_leningen_overheid = Referentiedata(
+    crediteur_leningen_overheid = CrediteursoortReferentiedata(
         code="CLO",
         naam="Crediteur leningen overheid",
     )
@@ -47,7 +50,7 @@ class Crediteursoort(Enum):
     te dekken.
     """
 
-    crediteur_overheid = Referentiedata(
+    crediteur_overheid = CrediteursoortReferentiedata(
         code="COH",
         naam="Crediteur overheid",
     )
@@ -61,7 +64,7 @@ class Crediteursoort(Enum):
     moment terug te betalen.
     """
 
-    handelscrediteur = Referentiedata(
+    handelscrediteur = CrediteursoortReferentiedata(
         code="HCR",
         naam="Handelscrediteur",
     )
@@ -75,17 +78,3 @@ class Crediteursoort(Enum):
     belangrijk onderdeel van het werkkapitaalbeheer van een bedrijf en een aspect
     van het crediteurenbeheer.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

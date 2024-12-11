@@ -211,7 +211,10 @@
         {
           "aantal": 3.14,
           "criterium": {
-            "naam": "Balkon 1 (privé)",
+            "naam": "Balkon 1",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -222,7 +225,10 @@
         {
           "aantal": 3.14,
           "criterium": {
-            "naam": "Balkon 2 (privé)",
+            "naam": "Balkon 2",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -233,7 +239,10 @@
         {
           "aantal": 49.11,
           "criterium": {
-            "naam": "Tuin (privé)",
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -244,7 +253,10 @@
         {
           "aantal": 15.93,
           "criterium": {
-            "naam": "Dakterras (privé)",
+            "naam": "Dakterras",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -254,15 +266,30 @@
         },
         {
           "criterium": {
-            "naam": "Privé buitenruimten aanwezig"
+            "naam": "Buitenruimten aanwezig",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            }
           },
           "punten": 2.0
+        },
+        {
+          "aantal": 71.32,
+          "criterium": {
+            "id": "buitenruimten_prive",
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 26.96
         },
         {
           "criterium": {
             "naam": "Maximaal 15 punten"
           },
-          "punten": -12.0
+          "punten": -11.96
         }
       ]
     },

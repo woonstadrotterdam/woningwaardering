@@ -202,7 +202,10 @@
         {
           "aantal": 2.81,
           "criterium": {
-            "naam": "Balkon 1 (privé)",
+            "naam": "Balkon 1",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -213,7 +216,10 @@
         {
           "aantal": 5.2,
           "criterium": {
-            "naam": "Balkon 2 (privé)",
+            "naam": "Balkon 2",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -223,9 +229,24 @@
         },
         {
           "criterium": {
-            "naam": "Privé buitenruimten aanwezig"
+            "naam": "Buitenruimten aanwezig",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            }
           },
           "punten": 2.0
+        },
+        {
+          "aantal": 8.01,
+          "criterium": {
+            "id": "buitenruimten_prive",
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 4.81
         }
       ]
     },

@@ -1,64 +1,53 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Communicatiekanaal(Enum):
-    whatsapp = Referentiedata(
+class CommunicatiekanaalReferentiedata(Referentiedata):
+    pass
+
+
+class Communicatiekanaal(Referentiedatasoort):
+    whatsapp = CommunicatiekanaalReferentiedata(
         code="APP",
         naam="Whatsapp",
     )
 
-    balie = Referentiedata(
+    balie = CommunicatiekanaalReferentiedata(
         code="BAL",
         naam="Balie",
     )
 
-    huisbezoek = Referentiedata(
+    huisbezoek = CommunicatiekanaalReferentiedata(
         code="BEZ",
         naam="Huisbezoek",
     )
 
-    brief = Referentiedata(
+    brief = CommunicatiekanaalReferentiedata(
         code="BRI",
         naam="Brief",
     )
 
-    e_mail = Referentiedata(
+    e_mail = CommunicatiekanaalReferentiedata(
         code="EMA",
         naam="E-mail",
     )
 
-    inspectie = Referentiedata(
+    inspectie = CommunicatiekanaalReferentiedata(
         code="INS",
         naam="Inspectie",
     )
 
-    internet_en_of_klantportaal = Referentiedata(
+    internet_en_of_klantportaal = CommunicatiekanaalReferentiedata(
         code="INT",
         naam="Internet / klantportaal",
     )
 
-    sms = Referentiedata(
+    sms = CommunicatiekanaalReferentiedata(
         code="SMS",
         naam="SMS",
     )
 
-    telefoon = Referentiedata(
+    telefoon = CommunicatiekanaalReferentiedata(
         code="TEL",
         naam="Telefoon",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

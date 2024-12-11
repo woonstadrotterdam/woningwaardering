@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Btw(Enum):
-    algemeen = Referentiedata(
+class BtwReferentiedata(Referentiedata):
+    pass
+
+
+class Btw(Referentiedatasoort):
+    algemeen = BtwReferentiedata(
         code="ALG",
         naam="Algemeen",
     )
@@ -13,7 +16,7 @@ class Btw(Enum):
     toepassing. Dit tarief wordt ook wel 'Hoog' genoemd.
     """
 
-    nul = Referentiedata(
+    nul = BtwReferentiedata(
         code="NUL",
         naam="Nul",
     )
@@ -22,7 +25,7 @@ class Btw(Enum):
     toepassing.
     """
 
-    verlaagd = Referentiedata(
+    verlaagd = BtwReferentiedata(
         code="VER",
         naam="Verlaagd",
     )
@@ -31,24 +34,10 @@ class Btw(Enum):
     toepassing.
     """
 
-    vrijstelling = Referentiedata(
+    vrijstelling = BtwReferentiedata(
         code="VRI",
         naam="Vrijstelling",
     )
     """
     De grondslag (bijvoorbeeld een prijscomponent) is vrijgesteld van BTW.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

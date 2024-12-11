@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Projectfasebesluitstatus(Enum):
-    afgewezen = Referentiedata(
+class ProjectfasebesluitstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Projectfasebesluitstatus(Referentiedatasoort):
+    afgewezen = ProjectfasebesluitstatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -12,7 +15,7 @@ class Projectfasebesluitstatus(Enum):
     Projectfasebesluit (-versie) is afgewezen
     """
 
-    aangeboden_ter_goedkeuring = Referentiedata(
+    aangeboden_ter_goedkeuring = ProjectfasebesluitstatusReferentiedata(
         code="ATG",
         naam="Aangeboden ter goedkeuring",
     )
@@ -20,7 +23,7 @@ class Projectfasebesluitstatus(Enum):
     Projectfasebesluit wacht op goedkeuring, is in behandeling
     """
 
-    concept = Referentiedata(
+    concept = ProjectfasebesluitstatusReferentiedata(
         code="CON",
         naam="Concept",
     )
@@ -28,7 +31,7 @@ class Projectfasebesluitstatus(Enum):
     Projectfasebesluit(-versie) in concept
     """
 
-    definitief = Referentiedata(
+    definitief = ProjectfasebesluitstatusReferentiedata(
         code="DEF",
         naam="Definitief",
     )
@@ -36,24 +39,10 @@ class Projectfasebesluitstatus(Enum):
     Projectfasebesluit definitief maar nog niet ter goedkeuring aangeboden
     """
 
-    goedgekeurd = Referentiedata(
+    goedgekeurd = ProjectfasebesluitstatusReferentiedata(
         code="GOE",
         naam="Goedgekeurd",
     )
     """
     Projectfasebesluit is formeel goedgekeurd
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

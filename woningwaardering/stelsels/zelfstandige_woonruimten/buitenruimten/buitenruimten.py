@@ -1,4 +1,6 @@
+import re
 import warnings
+from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 from typing import Iterator
@@ -15,6 +17,7 @@ from woningwaardering.stelsels.utils import (
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
+    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -22,12 +25,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Meeteenheid,
+    Ruimtedetailsoort,
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 
 
 class Buitenruimten(Stelselgroep):
@@ -43,7 +46,123 @@ class Buitenruimten(Stelselgroep):
             peildatum=peildatum,
         )
 
-    def _punten_per_buitenruimte(
+    def waardeer(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
+        | None = None,
+    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
+            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
+            )
+        )
+
+        woningwaardering_groep.woningwaarderingen = []
+
+        # punten per buitenruimte
+        for ruimte in eenheid.ruimten or []:
+            woningwaarderingen = self._punten_voor_buitenruimte(ruimte)
+            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
+
+        # minimaal 2 punten bij aanwezigheid van privé buitenruimten
+        # 5 aftrekpunten bij geen buitenruimten
+        if (
+            result := self._prive_buitenruimten_aanwezig(
+                eenheid, woningwaardering_groep
+            )
+        ) is not None:
+            woningwaardering_groep.woningwaarderingen.append(result)
+
+        som: dict[str, tuple[Decimal, Decimal]] = defaultdict(
+            lambda: (Decimal("0.0"), Decimal("0.0"))
+        )  # (punten, aantal)
+        for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
+            if (
+                woningwaardering.criterium
+                and woningwaardering.criterium.bovenliggende_criterium
+                and woningwaardering.criterium.bovenliggende_criterium.id
+            ):
+                criterium_id = woningwaardering.criterium.bovenliggende_criterium.id
+                current_punten, current_aantal = som[criterium_id]
+                som[criterium_id] = (
+                    current_punten + (Decimal(str(woningwaardering.punten or "0"))),
+                    current_aantal + (Decimal(str(woningwaardering.aantal or "0"))),
+                )
+
+        for id, (punten, aantal) in som.items():
+            match = re.search(
+                r"\d+", id
+            )  # in criterium id staat gedeeld_met_<aantal> of prive
+            gedeeld_met = int(match.group()) if match else 1
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=f"Totaal (gedeeld met {gedeeld_met} eenheden)"
+                    if gedeeld_met > 1
+                    else "Totaal (privé)",
+                    id=id,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
+                )
+            )
+            woningwaardering.punten = float(punten)
+            woningwaardering.aantal = float(aantal)
+            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
+
+        woningwaardering_groep.punten = float(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+                and woningwaardering.criterium is not None
+                and woningwaardering.criterium.bovenliggende_criterium is None
+            )
+        )
+
+        # maximaal 15 punten
+        maximering = self._maximering(eenheid, woningwaardering_groep)
+        if maximering:
+            woningwaardering_groep.woningwaarderingen.append(maximering)
+            woningwaardering_groep.punten += float(Decimal(str(maximering.punten)))
+
+        # rond af op kwarten
+        woningwaardering_groep.punten = float(
+            utils.rond_af_op_kwart(woningwaardering_groep.punten)
+        )
+
+        logger.info(
+            f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
+        )
+        return woningwaardering_groep
+
+    def _maximering(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
+        punten = Decimal(str(woningwaardering_groep.punten or "0"))
+        max_punten = Decimal("15")
+        if (
+            punten > max_punten and woningwaardering_groep.woningwaarderingen
+        ):  # maximaal 15 punten
+            aftrek = max_punten - punten
+
+            logger.info(
+                f"Eenheid ({eenheid.id}): maximaal aantal punten voor {Woningwaarderingstelselgroep.buitenruimten.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
+            )
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Maximaal 15 punten",
+                )
+            )
+            woningwaardering.punten = float(aftrek)
+            return woningwaardering
+
+        return None
+
+    def _punten_voor_buitenruimte(
         self, ruimte: EenhedenRuimte
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte:
@@ -75,10 +194,7 @@ class Buitenruimten(Stelselgroep):
                     )
                     return
                 # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
-                if (
-                    ruimte.detail_soort
-                    and ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
-                ):
+                if ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats:
                     logger.debug(
                         f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde parkeerplaats en telt niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
                     )
@@ -101,8 +217,11 @@ class Buitenruimten(Stelselgroep):
                     )
                 )
                 woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                    naam=f"{ruimte.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)",
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
+                    naam=ruimte.naam,
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_eenheden}_eenheden",
+                    ),
                 )
             else:  # privé buitenruimte
                 logger.info(
@@ -110,8 +229,11 @@ class Buitenruimten(Stelselgroep):
                 )
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
-                        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
-                        naam=f"{ruimte.naam} (privé)",
+                        meeteenheid=Meeteenheid.vierkante_meter_m2,
+                        naam=ruimte.naam,
+                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                            id=f"{self.stelselgroep.name}_prive",
+                        ),
                     )
                 )
                 woningwaardering.aantal = float(
@@ -124,8 +246,8 @@ class Buitenruimten(Stelselgroep):
                 )
             yield woningwaardering
 
-    @staticmethod
-    def _saldering(
+    def _prive_buitenruimten_aanwezig(
+        self,
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
     ) -> WoningwaarderingResultatenWoningwaardering | None:
@@ -157,79 +279,15 @@ class Buitenruimten(Stelselgroep):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Privé buitenruimten aanwezig",
+                    naam="Buitenruimten aanwezig",
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=f"{self.stelselgroep.name}_prive",
+                    ),
                 )
             )
             woningwaardering.punten = 2.0
             return woningwaardering
         return None
-
-    @staticmethod
-    def _maximering(
-        eenheid: EenhedenEenheid,
-        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
-    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-        )
-        max_punten = 15
-        if (
-            punten > max_punten and woningwaardering_groep.woningwaarderingen
-        ):  # maximaal 15 punten
-            aftrek = max_punten - punten
-
-            logger.info(
-                f"Eenheid ({eenheid.id}): maximaal aantal punten voor {Woningwaarderingstelselgroep.buitenruimten.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
-            )
-            punten += aftrek
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = (
-                WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Maximaal 15 punten",
-                )
-            )
-            woningwaardering.punten = float(aftrek)
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
-
-        woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
-        return woningwaardering_groep
-
-    def waardeer(
-        self,
-        eenheid: EenhedenEenheid,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
-        | None = None,
-    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
-            )
-        )
-
-        woningwaardering_groep.woningwaarderingen = []
-
-        # punten per buitenruimte
-        for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = self._punten_per_buitenruimte(ruimte)
-            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
-
-        # minimaal 2 punten bij aanwezigheid van privé buitenruimten
-        # 5 aftrekpunten bij geen buitenruimten
-        if (result := self._saldering(eenheid, woningwaardering_groep)) is not None:
-            woningwaardering_groep.woningwaarderingen.append(result)
-
-        # maximaal 15 punten
-        woningwaardering_groep = self._maximering(eenheid, woningwaardering_groep)
-
-        logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
-        )
-        return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
