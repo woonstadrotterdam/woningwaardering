@@ -90,7 +90,7 @@ def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:
         bouwkundige_elementen = list(get_bouwkundige_elementen(ruimte, mapping[0]))
         if bouwkundige_elementen:
             warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {mapping[0].naam} als bouwkundig element. Voor een correcte waardering dient dit als installatie in de ruimte gespecificeerd te worden."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {mapping[0].naam} als bouwkundig element. Dit dient als `Voorzieningsoort` op de ruimte onder `installaties` gespecificeerd te worden."
             )
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): {mapping[0].naam} wordt als {mapping[1].naam} toegevoegd aan installaties"
