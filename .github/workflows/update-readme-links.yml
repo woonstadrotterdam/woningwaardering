@@ -33,10 +33,14 @@ jobs:
       - name: Commit and push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+            git config --local user.name "github-actions[bot]"
 
-          if [[ -n "$(git status --porcelain)" ]]; then
-            git add README.md
-            git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
-            git push origin HEAD:${{ steps.get_version.outputs.branch }}
-          fi
+            # Only commit if there are changes
+            if [[ -n "$(git status --porcelain)" ]]; then
+              git add README.md
+              git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
+
+              # Push changes to the resolved branch
+              BRANCH=$(git branch --contains ${GITHUB_SHA} | grep -v 'HEAD' | xargs)
+          git push origin HEAD:$BRANCH
+            fi
