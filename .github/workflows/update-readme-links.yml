@@ -16,11 +16,13 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.ref }}
 
-      - name: Get version from tag
+      - name: Get version and branch
         id: get_version
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
+          BRANCH=$(git branch -r --contains $VERSION | grep -v HEAD | sed 's/origin\///' | head -n 1)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
 
       - name: Update README links
         run: |
@@ -36,6 +38,7 @@ jobs:
           if [[ -n "$(git status --porcelain)" ]]; then
             git add README.md
             git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
+            git push origin HEAD:${{ steps.get_version.outputs.branch }}
             git tag -f ${{ steps.get_version.outputs.version }}
             git push -f origin ${{ steps.get_version.outputs.version }}
           fi
