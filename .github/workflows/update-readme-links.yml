@@ -15,6 +15,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Debug branch
+        run: |
+          echo "GITHUB_REF: $GITHUB_REF"
+          echo "Resolved branch: $BRANCH"
+          git branch --contains ${GITHUB_SHA}
+
       - name: Get version and branch
         id: get_version
         run: |
@@ -33,14 +39,17 @@ jobs:
       - name: Commit and push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-            git config --local user.name "github-actions[bot]"
+          git config --local user.name "github-actions[bot]"
 
-            # Only commit if there are changes
-            if [[ -n "$(git status --porcelain)" ]]; then
-              git add README.md
-              git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
+          # Resolve branch name
+          BRANCH=$(git branch --contains ${GITHUB_SHA} | grep -v 'HEAD' | xargs)
 
-              # Push changes to the resolved branch
-              BRANCH=$(git branch --contains ${GITHUB_SHA} | grep -v 'HEAD' | xargs)
-          git push origin HEAD:$BRANCH
-            fi
+          # Check out the branch
+          git checkout $BRANCH
+
+          # Only commit if there are changes
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add README.md
+            git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
+            git push origin HEAD:$BRANCH
+          fi
