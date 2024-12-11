@@ -15,50 +15,33 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug branch
-        run: |
-          echo "GITHUB_REF: $GITHUB_REF"
-          echo "Resolved branch: $BRANCH"
-          git branch --contains ${GITHUB_SHA}
-
       - name: Get version and branch
         id: get_version
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
-          BRANCH=$(git branch --contains ${GITHUB_SHA} | grep -v 'HEAD' | xargs)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
-
-      - name: Check out branch
-        run: git checkout ${{ steps.get_version.outputs.branch }}
 
       - name: Update README links
         run: |
           sed -i "s|\${VERSION}|${{ steps.get_version.outputs.version }}|g" README.md
 
-          - name: Commit and push changes
-          run: |
-            git config --local user.email "github-actions[bot]@users.noreply.github.com"
-            git config --local user.name "github-actions[bot]"
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git fetch --all --prune
+          BRANCH=$(git branch -r --contains ${GITHUB_SHA} | sed 's|origin/||g' | grep -v HEAD | head -n1)
 
-            # Fetch all branches so `git branch -r --contains` works properly
-            git fetch --all --prune
+          # If we can’t determine the branch, fail the workflow
+          if [ -z "$BRANCH" ]; then
+            echo "Error: Could not determine the branch containing commit ${GITHUB_SHA}"
+            exit 1
+          fi
 
-            # Try to find the branch containing the commit
-            BRANCH=$(git branch -r --contains ${GITHUB_SHA} | sed 's|origin/||g' | grep -v HEAD | head -n1)
+          git checkout $BRANCH
 
-            # If we can't determine the branch, fail the workflow
-            if [ -z "$BRANCH" ]; then
-              echo "Error: Could not determine the branch containing commit ${GITHUB_SHA}"
-              exit 1
-            fi
-
-            # Now that we have a branch, check it out
-            git checkout $BRANCH
-
-            # Only commit and push if there are changes
-            if [[ -n "$(git status --porcelain)" ]]; then
-              git add README.md
-              git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
-              git push origin HEAD:$BRANCH
-            fi
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add README.md
+            git commit -m "docs: update README links to version ${{ steps.get_version.outputs.version }}"
+            git push origin HEAD:$BRANCH
+          fi
