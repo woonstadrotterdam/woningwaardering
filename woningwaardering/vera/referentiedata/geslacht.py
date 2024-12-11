@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Geslacht(Enum):
-    mannelijk = Referentiedata(
+class GeslachtReferentiedata(Referentiedata):
+    pass
+
+
+class Geslacht(Referentiedatasoort):
+    mannelijk = GeslachtReferentiedata(
         code="M",
         naam="Mannelijk",
     )
@@ -12,7 +15,7 @@ class Geslacht(Enum):
     Mannelijk geslacht
     """
 
-    onbekend = Referentiedata(
+    onbekend = GeslachtReferentiedata(
         code="O",
         naam="Onbekend",
     )
@@ -20,24 +23,10 @@ class Geslacht(Enum):
     Manier om genderneutraal aan te duiden of wanneer geslacht niet ter zake doet.
     """
 
-    vrouwelijk = Referentiedata(
+    vrouwelijk = GeslachtReferentiedata(
         code="V",
         naam="Vrouwelijk",
     )
     """
     Vrouwelijk geslacht
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Relatierolsoort(Enum):
-    aankopende_makelaar = Referentiedata(
+class RelatierolsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Relatierolsoort(Referentiedatasoort):
+    aankopende_makelaar = RelatierolsoortReferentiedata(
         code="AMA",
         naam="Aankopende makelaar",
     )
@@ -12,7 +15,7 @@ class Relatierolsoort(Enum):
     Makelaar die namens de aankopende partij optreedt
     """
 
-    ambulante_begeleider = Referentiedata(
+    ambulante_begeleider = RelatierolsoortReferentiedata(
         code="AMB",
         naam="Ambulante begeleider",
     )
@@ -21,7 +24,7 @@ class Relatierolsoort(Enum):
     veel mogelijk zelfstandig te functioneren.
     """
 
-    assetmanager = Referentiedata(
+    assetmanager = RelatierolsoortReferentiedata(
         code="ASS",
         naam="Assetmanager",
     )
@@ -29,7 +32,7 @@ class Relatierolsoort(Enum):
     De assetmanager voor het betreffende vastgoed
     """
 
-    behandelaar = Referentiedata(
+    behandelaar = RelatierolsoortReferentiedata(
         code="BED",
         naam="Behandelaar",
     )
@@ -38,7 +41,7 @@ class Relatierolsoort(Enum):
     medewerker van de corporatie maar kan ook een externe behandelaar zijn
     """
 
-    beheerder = Referentiedata(
+    beheerder = RelatierolsoortReferentiedata(
         code="BEH",
         naam="Beheerder",
     )
@@ -46,7 +49,7 @@ class Relatierolsoort(Enum):
     De beheerder van een eenheid of cluster
     """
 
-    betaler = Referentiedata(
+    betaler = RelatierolsoortReferentiedata(
         code="BET",
         naam="Betaler",
     )
@@ -57,7 +60,7 @@ class Relatierolsoort(Enum):
     betaalt).
     """
 
-    bewoner = Referentiedata(
+    bewoner = RelatierolsoortReferentiedata(
         code="BEW",
         naam="Bewoner",
     )
@@ -67,7 +70,7 @@ class Relatierolsoort(Enum):
     Gebruiker.
     """
 
-    bestuurslid = Referentiedata(
+    bestuurslid = RelatierolsoortReferentiedata(
         code="BSL",
         naam="Bestuurslid",
     )
@@ -78,7 +81,7 @@ class Relatierolsoort(Enum):
     afzonderlijke relatierolsoorten beschikbaar
     """
 
-    budgetcoach = Referentiedata(
+    budgetcoach = RelatierolsoortReferentiedata(
         code="BUD",
         naam="Budgetcoach",
     )
@@ -89,7 +92,7 @@ class Relatierolsoort(Enum):
     voor de vaste lasten worden uitgevoerd door budgetcoach.
     """
 
-    bewindvoerder = Referentiedata(
+    bewindvoerder = RelatierolsoortReferentiedata(
         code="BWI",
         naam="Bewindvoerder",
     )
@@ -100,7 +103,7 @@ class Relatierolsoort(Enum):
     (namens een huurder betaalt, maar vanaf een eigen bankrekening)
     """
 
-    wooncooperatie_lid = Referentiedata(
+    wooncooperatie_lid = RelatierolsoortReferentiedata(
         code="COL",
         naam="Wooncoöperatie-lid",
     )
@@ -110,7 +113,7 @@ class Relatierolsoort(Enum):
     beschikbaar zijn: Bestuurslid, Voorzitter, Penningmeester, Secretaris.
     """
 
-    wooncooperatie = Referentiedata(
+    wooncooperatie = RelatierolsoortReferentiedata(
         code="COO",
         naam="Wooncoöperatie",
     )
@@ -126,7 +129,7 @@ class Relatierolsoort(Enum):
     met de relatierolsoort Wooncoöperatie-lid
     """
 
-    contactpersoon = Referentiedata(
+    contactpersoon = RelatierolsoortReferentiedata(
         code="CPE",
         naam="Contactpersoon",
     )
@@ -135,7 +138,7 @@ class Relatierolsoort(Enum):
     clusters vertegenwoordigt
     """
 
-    deurwaarder = Referentiedata(
+    deurwaarder = RelatierolsoortReferentiedata(
         code="DEU",
         naam="Deurwaarder",
     )
@@ -144,7 +147,7 @@ class Relatierolsoort(Enum):
     huurschuld en wordt extern geincasseerd door deurwaarder Karelse)
     """
 
-    eigenaar = Referentiedata(
+    eigenaar = RelatierolsoortReferentiedata(
         code="EIG",
         naam="Eigenaar",
     )
@@ -156,7 +159,7 @@ class Relatierolsoort(Enum):
     heeft de eigenaar tevens de rol van verkoper.
     """
 
-    erfpachter = Referentiedata(
+    erfpachter = RelatierolsoortReferentiedata(
         code="ERF",
         naam="Erfpachter",
     )
@@ -167,7 +170,7 @@ class Relatierolsoort(Enum):
     (CORA)
     """
 
-    fiatteur = Referentiedata(
+    fiatteur = RelatierolsoortReferentiedata(
         code="FIA",
         naam="Fiatteur",
     )
@@ -176,7 +179,7 @@ class Relatierolsoort(Enum):
     activiteit
     """
 
-    garantiegever = Referentiedata(
+    garantiegever = RelatierolsoortReferentiedata(
         code="GAR",
         naam="Garantiegever",
     )
@@ -184,7 +187,7 @@ class Relatierolsoort(Enum):
     De garantiegever bij een lening
     """
 
-    gebruiker = Referentiedata(
+    gebruiker = RelatierolsoortReferentiedata(
         code="GEB",
         naam="Gebruiker",
     )
@@ -194,7 +197,7 @@ class Relatierolsoort(Enum):
     dan ook ook Huurder worden gebruikt. Zie ook Bewoner.
     """
 
-    geldnemer = Referentiedata(
+    geldnemer = RelatierolsoortReferentiedata(
         code="GEL",
         naam="Geldnemer",
     )
@@ -202,7 +205,7 @@ class Relatierolsoort(Enum):
     De geldnemer van de lening
     """
 
-    huismeester = Referentiedata(
+    huismeester = RelatierolsoortReferentiedata(
         code="HME",
         naam="Huismeester",
     )
@@ -210,7 +213,7 @@ class Relatierolsoort(Enum):
     De huismeester voor het betreffende vastgoed
     """
 
-    huurder = Referentiedata(
+    huurder = RelatierolsoortReferentiedata(
         code="HUU",
         naam="Huurder",
     )
@@ -221,7 +224,7 @@ class Relatierolsoort(Enum):
     huurder een netto huur betaald (CORA). Synoniem aan het begrip Hoofdhuurder
     """
 
-    inspecteur = Referentiedata(
+    inspecteur = RelatierolsoortReferentiedata(
         code="INS",
         naam="Inspecteur",
     )
@@ -229,7 +232,7 @@ class Relatierolsoort(Enum):
     Medewerker die de inspectie uitvoert
     """
 
-    koper = Referentiedata(
+    koper = RelatierolsoortReferentiedata(
         code="KOP",
         naam="Koper",
     )
@@ -243,7 +246,7 @@ class Relatierolsoort(Enum):
     moment van verkoop
     """
 
-    leverancier = Referentiedata(
+    leverancier = RelatierolsoortReferentiedata(
         code="LEV",
         naam="Leverancier",
     )
@@ -252,7 +255,7 @@ class Relatierolsoort(Enum):
     leveren of heeft geleverd aan de woningcorporatie (CORA)
     """
 
-    medebewoner = Referentiedata(
+    medebewoner = RelatierolsoortReferentiedata(
         code="MBW",
         naam="Medebewoner",
     )
@@ -261,7 +264,7 @@ class Relatierolsoort(Enum):
     (willen) vormen.
     """
 
-    medehuurder = Referentiedata(
+    medehuurder = RelatierolsoortReferentiedata(
         code="MDH",
         naam="Medehuurder",
     )
@@ -269,7 +272,7 @@ class Relatierolsoort(Enum):
     Op de huurovereenkomst vermelde medehuurder
     """
 
-    medewerker = Referentiedata(
+    medewerker = RelatierolsoortReferentiedata(
         code="MDW",
         naam="Medewerker",
     )
@@ -277,7 +280,7 @@ class Relatierolsoort(Enum):
     Werknemers ingehuurd of in vaste dienst van een woningcorporatie (CORA)
     """
 
-    mede_aanvrager = Referentiedata(
+    mede_aanvrager = RelatierolsoortReferentiedata(
         code="MED",
         naam="Mede aanvrager",
     )
@@ -286,7 +289,7 @@ class Relatierolsoort(Enum):
     woning (of ander vastgoed)zoekt.
     """
 
-    melder = Referentiedata(
+    melder = RelatierolsoortReferentiedata(
         code="MEL",
         naam="Melder",
     )
@@ -294,7 +297,7 @@ class Relatierolsoort(Enum):
     De melder van een verzoek of incident. Vaak de initiator van een (werk-)proces.
     """
 
-    notaris = Referentiedata(
+    notaris = RelatierolsoortReferentiedata(
         code="NOT",
         naam="Notaris",
     )
@@ -302,7 +305,7 @@ class Relatierolsoort(Enum):
     Notaris die een koop-/verkooptransactie formeel bekrachtigt
     """
 
-    opdrachtgever = Referentiedata(
+    opdrachtgever = RelatierolsoortReferentiedata(
         code="OPD",
         naam="Opdrachtgever",
     )
@@ -310,7 +313,7 @@ class Relatierolsoort(Enum):
     Opdrachtgevende partij
     """
 
-    opdrachtnemer = Referentiedata(
+    opdrachtnemer = RelatierolsoortReferentiedata(
         code="OPN",
         naam="Opdrachtnemer",
     )
@@ -318,7 +321,7 @@ class Relatierolsoort(Enum):
     Opdrachtnemende partij
     """
 
-    opzichter = Referentiedata(
+    opzichter = RelatierolsoortReferentiedata(
         code="OPZ",
         naam="Opzichter",
     )
@@ -326,12 +329,12 @@ class Relatierolsoort(Enum):
     De opzichter voor het betreffende vastgoed
     """
 
-    onderwijsinstelling = Referentiedata(
+    onderwijsinstelling = RelatierolsoortReferentiedata(
         code="OWI",
         naam="Onderwijsinstelling",
     )
 
-    penningmeester = Referentiedata(
+    penningmeester = RelatierolsoortReferentiedata(
         code="PEN",
         naam="Penningmeester",
     )
@@ -340,7 +343,7 @@ class Relatierolsoort(Enum):
     bewonersvereniging, en daarin de rol van Penningmeester heeft
     """
 
-    prospect = Referentiedata(
+    prospect = RelatierolsoortReferentiedata(
         code="PRO",
         naam="Prospect",
     )
@@ -350,7 +353,7 @@ class Relatierolsoort(Enum):
     te zijn.
     """
 
-    secretaris = Referentiedata(
+    secretaris = RelatierolsoortReferentiedata(
         code="SEC",
         naam="Secretaris",
     )
@@ -359,7 +362,7 @@ class Relatierolsoort(Enum):
     bewonersvereniging, en daarin de rol van Secretaris heeft
     """
 
-    verkoper = Referentiedata(
+    verkoper = RelatierolsoortReferentiedata(
         code="VER",
         naam="Verkoper",
     )
@@ -367,7 +370,7 @@ class Relatierolsoort(Enum):
     Verkopende partij
     """
 
-    verkopende_makelaar = Referentiedata(
+    verkopende_makelaar = RelatierolsoortReferentiedata(
         code="VMA",
         naam="Verkopende makelaar",
     )
@@ -375,7 +378,7 @@ class Relatierolsoort(Enum):
     Makelaar die namens de verkopende partij optreedt
     """
 
-    voorzitter = Referentiedata(
+    voorzitter = RelatierolsoortReferentiedata(
         code="VOO",
         naam="Voorzitter",
     )
@@ -384,7 +387,7 @@ class Relatierolsoort(Enum):
     bewonersvereniging, en daarin de rol van Voorzitter heeft
     """
 
-    vereniging_van_eigenaren = Referentiedata(
+    vereniging_van_eigenaren = RelatierolsoortReferentiedata(
         code="VVE",
         naam="Vereniging van Eigenaren",
     )
@@ -397,7 +400,7 @@ class Relatierolsoort(Enum):
     VvE-lid
     """
 
-    vve_lid = Referentiedata(
+    vve_lid = RelatierolsoortReferentiedata(
         code="VVL",
         naam="VvE-lid",
     )
@@ -409,7 +412,7 @@ class Relatierolsoort(Enum):
     Bestuurslid, Voorzitter, Penningmeester, Secretaris.
     """
 
-    woningzoekende = Referentiedata(
+    woningzoekende = RelatierolsoortReferentiedata(
         code="WON",
         naam="Woningzoekende",
     )
@@ -421,7 +424,7 @@ class Relatierolsoort(Enum):
     de inschrijving, is sprake van een klantrelatie. Synoniem aan Hoofdaanvrager
     """
 
-    woonconsulent = Referentiedata(
+    woonconsulent = RelatierolsoortReferentiedata(
         code="WOO",
         naam="Woonconsulent",
     )
@@ -429,7 +432,7 @@ class Relatierolsoort(Enum):
     De woonconsulent voor het betreffende vastgoed
     """
 
-    zekerheidsnemer = Referentiedata(
+    zekerheidsnemer = RelatierolsoortReferentiedata(
         code="ZEK",
         naam="Zekerheidsnemer",
     )
@@ -437,17 +440,3 @@ class Relatierolsoort(Enum):
     De relatie aan wie de zekerheid op de eenheid is verleend bij een eventuele
     zekerheidsverpanding
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

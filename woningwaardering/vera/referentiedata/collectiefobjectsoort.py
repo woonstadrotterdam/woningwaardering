@@ -1,15 +1,18 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Collectiefobjectsoort(Enum):
-    achterpad = Referentiedata(
+class CollectiefobjectsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Collectiefobjectsoort(Referentiedatasoort):
+    achterpad = CollectiefobjectsoortReferentiedata(
         code="APD",
         naam="Achterpad",
     )
 
-    casco = Referentiedata(
+    casco = CollectiefobjectsoortReferentiedata(
         code="CAS",
         naam="Casco",
     )
@@ -17,52 +20,52 @@ class Collectiefobjectsoort(Enum):
     Gevel e.d.
     """
 
-    centrale_hal = Referentiedata(
+    centrale_hal = CollectiefobjectsoortReferentiedata(
         code="CEH",
         naam="Centrale hal",
     )
 
-    dak = Referentiedata(
+    dak = CollectiefobjectsoortReferentiedata(
         code="DAK",
         naam="Dak",
     )
 
-    galerij = Referentiedata(
+    galerij = CollectiefobjectsoortReferentiedata(
         code="GAL",
         naam="Galerij",
     )
 
-    lift = Referentiedata(
+    lift = CollectiefobjectsoortReferentiedata(
         code="LIF",
         naam="Lift",
     )
 
-    onderdoorgang = Referentiedata(
+    onderdoorgang = CollectiefobjectsoortReferentiedata(
         code="ONG",
         naam="Onderdoorgang",
     )
 
-    parkeergarage = Referentiedata(
+    parkeergarage = CollectiefobjectsoortReferentiedata(
         code="PAG",
         naam="Parkeergarage",
     )
 
-    recreatie_en_of_ontmoetingsruimte = Referentiedata(
+    recreatie_en_of_ontmoetingsruimte = CollectiefobjectsoortReferentiedata(
         code="ROR",
         naam="Recreatie-/ontmoetingsruimte",
     )
 
-    speelplaats = Referentiedata(
+    speelplaats = CollectiefobjectsoortReferentiedata(
         code="SPP",
         naam="Speelplaats",
     )
 
-    stortkoker = Referentiedata(
+    stortkoker = CollectiefobjectsoortReferentiedata(
         code="STK",
         naam="Stortkoker",
     )
 
-    terrein = Referentiedata(
+    terrein = CollectiefobjectsoortReferentiedata(
         code="TER",
         naam="Terrein",
     )
@@ -70,17 +73,17 @@ class Collectiefobjectsoort(Enum):
     Parkeerterrein, buitenterrein
     """
 
-    trappenhuis = Referentiedata(
+    trappenhuis = CollectiefobjectsoortReferentiedata(
         code="TRH",
         naam="Trappenhuis",
     )
 
-    technische_ruimte = Referentiedata(
+    technische_ruimte = CollectiefobjectsoortReferentiedata(
         code="TRU",
         naam="Technische ruimte",
     )
 
-    tuin = Referentiedata(
+    tuin = CollectiefobjectsoortReferentiedata(
         code="TUI",
         naam="Tuin",
     )
@@ -88,7 +91,7 @@ class Collectiefobjectsoort(Enum):
     Gemeenschappelijke tuin
     """
 
-    gemeenschappelijke_badkamer = Referentiedata(
+    gemeenschappelijke_badkamer = CollectiefobjectsoortReferentiedata(
         code="BDK",
         naam="Gemeenschappelijke badkamer",
     )
@@ -96,7 +99,7 @@ class Collectiefobjectsoort(Enum):
     Gemeenschappelijke badkamer
     """
 
-    gemeenschappelijk_balkon = Referentiedata(
+    gemeenschappelijk_balkon = CollectiefobjectsoortReferentiedata(
         code="BAL",
         naam="Gemeenschappelijk balkon",
     )
@@ -104,7 +107,7 @@ class Collectiefobjectsoort(Enum):
     Gemeenschappelijk balkon
     """
 
-    gemeenschappelijke_berging = Referentiedata(
+    gemeenschappelijke_berging = CollectiefobjectsoortReferentiedata(
         code="BER",
         naam="Gemeenschappelijke berging",
     )
@@ -112,7 +115,7 @@ class Collectiefobjectsoort(Enum):
     Gemeenschappelijke berging of berginsgsgang
     """
 
-    gemeenschappelijke_fietsenstalling = Referentiedata(
+    gemeenschappelijke_fietsenstalling = CollectiefobjectsoortReferentiedata(
         code="FTS",
         naam="Gemeenschappelijke fietsenstalling",
     )
@@ -120,7 +123,7 @@ class Collectiefobjectsoort(Enum):
     Gemeenschappelijke fietsenstalling
     """
 
-    gemeenschappeijke_keuken = Referentiedata(
+    gemeenschappeijke_keuken = CollectiefobjectsoortReferentiedata(
         code="KEU",
         naam="Gemeenschappeijke keuken",
     )
@@ -128,7 +131,7 @@ class Collectiefobjectsoort(Enum):
     Gemeenschappelijke keuken
     """
 
-    gemeenschappelijke_toilet = Referentiedata(
+    gemeenschappelijke_toilet = CollectiefobjectsoortReferentiedata(
         code="TOI",
         naam="Gemeenschappelijke toilet",
     )
@@ -136,16 +139,10 @@ class Collectiefobjectsoort(Enum):
     Gemeenschappelijk toilet
     """
 
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent
+    wasruimte = CollectiefobjectsoortReferentiedata(
+        code="WAS",
+        naam="Wasruimte",
+    )
+    """
+    Een gemeenschappelijke wasruimte.
+    """

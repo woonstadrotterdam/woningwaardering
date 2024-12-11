@@ -1,15 +1,18 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Informatieobjectsoort(Enum):
-    brochure = Referentiedata(
+class InformatieobjectsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Informatieobjectsoort(Referentiedatasoort):
+    brochure = InformatieobjectsoortReferentiedata(
         code="BRO",
         naam="Brochure",
     )
 
-    document = Referentiedata(
+    document = InformatieobjectsoortReferentiedata(
         code="DOC",
         naam="Document",
     )
@@ -17,7 +20,7 @@ class Informatieobjectsoort(Enum):
     Text bestand met (HTML) of zonder opmaak (Text)
     """
 
-    foto = Referentiedata(
+    foto = InformatieobjectsoortReferentiedata(
         code="FOT",
         naam="Foto",
     )
@@ -25,12 +28,12 @@ class Informatieobjectsoort(Enum):
     Foto, Image, Plaatje, Afbeelding
     """
 
-    kopie = Referentiedata(
+    kopie = InformatieobjectsoortReferentiedata(
         code="KOP",
         naam="Kopie",
     )
 
-    notitie = Referentiedata(
+    notitie = InformatieobjectsoortReferentiedata(
         code="NOT",
         naam="Notitie",
     )
@@ -38,46 +41,32 @@ class Informatieobjectsoort(Enum):
     Het informatieobject is een notitie- of memo (tekst)
     """
 
-    overeenkomst = Referentiedata(
+    overeenkomst = InformatieobjectsoortReferentiedata(
         code="OVE",
         naam="Overeenkomst",
     )
 
-    plattegrond = Referentiedata(
+    plattegrond = InformatieobjectsoortReferentiedata(
         code="PLA",
         naam="Plattegrond",
     )
 
-    plan = Referentiedata(
+    plan = InformatieobjectsoortReferentiedata(
         code="PLN",
         naam="Plan",
     )
 
-    rapport = Referentiedata(
+    rapport = InformatieobjectsoortReferentiedata(
         code="RAP",
         naam="Rapport",
     )
 
-    verslag = Referentiedata(
+    verslag = InformatieobjectsoortReferentiedata(
         code="VER",
         naam="Verslag",
     )
 
-    video = Referentiedata(
+    video = InformatieobjectsoortReferentiedata(
         code="VID",
         naam="Video",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Clustersoort(Enum):
-    buurt = Referentiedata(
+class ClustersoortReferentiedata(Referentiedata):
+    pass
+
+
+class Clustersoort(Referentiedatasoort):
+    buurt = ClustersoortReferentiedata(
         code="BUU",
         naam="Buurt",
     )
@@ -12,27 +15,27 @@ class Clustersoort(Enum):
     Cluster van eenheden die samen een buurt vormen, anders dan de officiële CBS-buurt
     """
 
-    financieel = Referentiedata(
+    financieel = ClustersoortReferentiedata(
         code="FIN",
         naam="Financieel",
     )
 
-    markt = Referentiedata(
+    markt = ClustersoortReferentiedata(
         code="MAR",
         naam="Markt",
     )
 
-    onderhoud = Referentiedata(
+    onderhoud = ClustersoortReferentiedata(
         code="OND",
         naam="Onderhoud",
     )
 
-    project = Referentiedata(
+    project = ClustersoortReferentiedata(
         code="PRO",
         naam="Project",
     )
 
-    rayon = Referentiedata(
+    rayon = ClustersoortReferentiedata(
         code="RAY",
         naam="Rayon",
     )
@@ -41,7 +44,7 @@ class Clustersoort(Enum):
     organisatorische eenheid, vormen
     """
 
-    servicekosten = Referentiedata(
+    servicekosten = ClustersoortReferentiedata(
         code="SER",
         naam="Servicekosten",
     )
@@ -49,7 +52,7 @@ class Clustersoort(Enum):
     Cluster van eenheden t.b.v. afrekening servicekosten
     """
 
-    verbruikskosten = Referentiedata(
+    verbruikskosten = ClustersoortReferentiedata(
         code="STO",
         naam="Verbruikskosten",
     )
@@ -58,17 +61,17 @@ class Clustersoort(Enum):
     warmte.
     """
 
-    strategisch = Referentiedata(
+    strategisch = ClustersoortReferentiedata(
         code="STR",
         naam="Strategisch",
     )
 
-    vereniging_van_eigenaars = Referentiedata(
+    vereniging_van_eigenaars = ClustersoortReferentiedata(
         code="VVE",
         naam="Vereniging van Eigenaars",
     )
 
-    wijk = Referentiedata(
+    wijk = ClustersoortReferentiedata(
         code="WIJ",
         naam="Wijk",
     )
@@ -76,7 +79,7 @@ class Clustersoort(Enum):
     Cluster van eenheden die samen een wijk vormen, anders dan de officiële CBS-wijk
     """
 
-    waardering = Referentiedata(
+    waardering = ClustersoortReferentiedata(
         code="WRD",
         naam="Waardering",
     )
@@ -84,17 +87,3 @@ class Clustersoort(Enum):
     Cluster van eenheden dat wordt gewaardeerd conform de uitgangspunten van het
     Handboek Marktwaarde Verhuurde Staat (MVS).
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

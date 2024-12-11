@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Authentiekgegevenbron(Enum):
-    klantcontact = Referentiedata(
+class AuthentiekgegevenbronReferentiedata(Referentiedata):
+    pass
+
+
+class Authentiekgegevenbron(Referentiedatasoort):
+    klantcontact = AuthentiekgegevenbronReferentiedata(
         code="KLA",
         naam="Klantcontact",
     )
@@ -12,7 +15,7 @@ class Authentiekgegevenbron(Enum):
     Gegevens zijn aangeleverd via de balie of klantcontactcentrum.
     """
 
-    bvbsn = Referentiedata(
+    bvbsn = AuthentiekgegevenbronReferentiedata(
         code="BSN",
         naam="BvBSN",
     )
@@ -20,7 +23,7 @@ class Authentiekgegevenbron(Enum):
     Gegevens zijn gedeeld vanuit de basisvoorziening burgerservicenummer
     """
 
-    dienst_uitvoering_onderwijs = Referentiedata(
+    dienst_uitvoering_onderwijs = AuthentiekgegevenbronReferentiedata(
         code="DUO",
         naam="Dienst uitvoering onderwijs",
     )
@@ -28,7 +31,7 @@ class Authentiekgegevenbron(Enum):
     Gegevens zijn gedeeld vanuit DUO.
     """
 
-    inkomensregistratieformulier = Referentiedata(
+    inkomensregistratieformulier = AuthentiekgegevenbronReferentiedata(
         code="IRF",
         naam="Inkomensregistratieformulier",
     )
@@ -36,7 +39,7 @@ class Authentiekgegevenbron(Enum):
     Gegevens zijn gedeeld vanuit het Inkomensregistratieformulier.
     """
 
-    mijn_overheid = Referentiedata(
+    mijn_overheid = AuthentiekgegevenbronReferentiedata(
         code="MIJ",
         naam="Mijn Overheid",
     )
@@ -44,7 +47,7 @@ class Authentiekgegevenbron(Enum):
     Gegevens zijn gedeeld vanuit Mijn Overheid.
     """
 
-    qii = Referentiedata(
+    qii = AuthentiekgegevenbronReferentiedata(
         code="QII",
         naam="Qii",
     )
@@ -52,24 +55,10 @@ class Authentiekgegevenbron(Enum):
     Gegevens zijn gedeeld vanuit Qii.
     """
 
-    uwv = Referentiedata(
+    uwv = AuthentiekgegevenbronReferentiedata(
         code="UWV",
         naam="UWV",
     )
     """
     Gegevens zijn gedeeld vanuit UWV.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

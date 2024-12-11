@@ -11,16 +11,14 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
-from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
+from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-)
-from woningwaardering.vera.referentiedata.doelgroep import Doelgroep
-from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoort
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Doelgroep,
+    Voorzieningsoort,
     Woningwaarderingstelsel,
-)
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     Woningwaarderingstelselgroep,
+    WoningwaarderingstelselgroepReferentiedata,
+    WoningwaarderingstelselReferentiedata,
 )
 from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 
@@ -28,8 +26,8 @@ from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 def waardeer_bijzondere_voorzieningen(
     peildatum: date,
     eenheid: EenhedenEenheid,
-    stelselgroepen_zonder_opslag: list[Woningwaarderingstelselgroep],
-    stelsel: Woningwaarderingstelsel,
+    stelselgroepen_zonder_opslag: list[WoningwaarderingstelselgroepReferentiedata],
+    stelsel: WoningwaarderingstelselReferentiedata,
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
     ) = None,
@@ -39,8 +37,8 @@ def waardeer_bijzondere_voorzieningen(
     Args:
         peildatum (date): De peildatum.
         eenheid (EenhedenEenheid): De eenheid.
-        stelselgroepen_zonder_opslag (list[Woningwaarderingstelselgroep]): De stelselgroepen die niet moeten worden opgehoogd met zorgwoning opslag.
-        stelsel (Woningwaarderingstelsel): Het woningwaarderingsstelsel.
+        stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]): De stelselgroepen die niet moeten worden opgehoogd met zorgwoning opslag.
+        stelsel (WoningwaarderingstelselReferentiedata): Het woningwaarderingsstelsel.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het woningwaardering resultaat.
 
     Yields:
@@ -66,8 +64,8 @@ def waardeer_bijzondere_voorzieningen(
 def _opslag_zorgwoning(
     peildatum: date,
     eenheid: EenhedenEenheid,
-    stelselgroepen_zonder_opslag: list[Woningwaarderingstelselgroep],
-    stelsel: Woningwaarderingstelsel,
+    stelselgroepen_zonder_opslag: list[WoningwaarderingstelselgroepReferentiedata],
+    stelsel: WoningwaarderingstelselReferentiedata,
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
     ) = None,
@@ -79,8 +77,8 @@ def _opslag_zorgwoning(
     Args:
         peildatum (date): De peildatum voor de berekening.
         eenheid (EenhedenEenheid): De eenheid die wordt gewaardeerd.
-        stelselgroepen_zonder_opslag (list[Woningwaarderingstelselgroep]): Lijst van stelselgroepen die niet worden meegenomen in de opslag.
-        stelsel (Woningwaarderingstelsel): Het type woningwaarderingsstelsel.
+        stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]): Lijst van stelselgroepen die niet worden meegenomen in de opslag.
+        stelsel (WoningwaarderingstelselReferentiedata): Het type woningwaarderingsstelsel.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het bestaande waarderingsresultaat, indien aanwezig.
 
     Returns:
@@ -90,7 +88,7 @@ def _opslag_zorgwoning(
         ValueError: Als het stelsel niet gelijk is aan zelfstandige woonruimten of onzelfstandige woonruimten.
     """
     if eenheid.doelgroep is None or (
-        eenheid.doelgroep and eenheid.doelgroep.code != Doelgroep.zorg.code
+        eenheid.doelgroep and eenheid.doelgroep != Doelgroep.zorg
     ):
         logger.debug(
             f"Eenheid ({eenheid.id}) is geen zorgwoning en krijgt dus geen zorgwoningopslag"
@@ -137,10 +135,7 @@ def _opslag_zorgwoning(
                 groep.punten
                 and groep.criterium_groep
                 and groep.criterium_groep.stelselgroep
-                and groep.criterium_groep.stelselgroep.code
-                not in [
-                    stelselgroep.code for stelselgroep in stelselgroepen_zonder_opslag
-                ]
+                not in stelselgroepen_zonder_opslag
             )
         ),
         0,
@@ -179,8 +174,7 @@ def _aanbelfunctie_met_video_en_audioverbinding(
         als de eenheid een aanbelfunctie met video en audio heeft, anders None.
     """
     if not any(
-        installatie.code
-        == Voorzieningsoort.aanbelfunctie_met_video_en_audioverbinding.code
+        installatie == Voorzieningsoort.aanbelfunctie_met_video_en_audioverbinding
         for ruimte in (eenheid.ruimten or [])
         for installatie in (ruimte.installaties or [])
     ):

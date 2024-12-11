@@ -55,8 +55,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
             )
         )
 
@@ -141,8 +141,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             (
                 Decimal(oppervlakte.waarde)
                 for oppervlakte in eenheid.oppervlakten or []
-                if oppervlakte.soort is not None
-                and oppervlakte.soort.code == Oppervlaktesoort.gebruiksoppervlakte.code
+                if oppervlakte.soort == Oppervlaktesoort.gebruiksoppervlakte
                 and oppervlakte.waarde is not None
             ),
             Decimal(eenheid.gebruiksoppervlakte)
@@ -161,7 +160,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Gebruiksoppervlakte",
-                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
                     bovenliggendeCriterium=puntenwaardering_sleutel,
                 ),
                 aantal=gebruiksoppervlakte,

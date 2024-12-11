@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Vragenlijstregelonderwerpsoort(Enum):
-    aanbod = Referentiedata(
+class VragenlijstregelonderwerpsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Vragenlijstregelonderwerpsoort(Referentiedatasoort):
+    aanbod = VragenlijstregelonderwerpsoortReferentiedata(
         code="AAN",
         naam="Aanbod",
     )
@@ -12,7 +15,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: aanbod
     """
 
-    afrekening = Referentiedata(
+    afrekening = VragenlijstregelonderwerpsoortReferentiedata(
         code="AFR",
         naam="Afrekening",
     )
@@ -20,7 +23,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: afrekening
     """
 
-    afspraak = Referentiedata(
+    afspraak = VragenlijstregelonderwerpsoortReferentiedata(
         code="AFS",
         naam="Afspraak",
     )
@@ -28,7 +31,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: afspraak
     """
 
-    algemene_ruimte = Referentiedata(
+    algemene_ruimte = VragenlijstregelonderwerpsoortReferentiedata(
         code="ALG",
         naam="Algemene ruimte",
     )
@@ -36,7 +39,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: algemene ruimte
     """
 
-    behulpzaamheid = Referentiedata(
+    behulpzaamheid = VragenlijstregelonderwerpsoortReferentiedata(
         code="BEH",
         naam="Behulpzaamheid",
     )
@@ -44,7 +47,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: behulpzaamheid
     """
 
-    behulpzaamheid_aannemer = Referentiedata(
+    behulpzaamheid_aannemer = VragenlijstregelonderwerpsoortReferentiedata(
         code="BEA",
         naam="Behulpzaamheid aannemer",
     )
@@ -52,7 +55,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: behulpzaamheid aannemer
     """
 
-    bel = Referentiedata(
+    bel = VragenlijstregelonderwerpsoortReferentiedata(
         code="BEL",
         naam="BEL",
     )
@@ -60,7 +63,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: belofte
     """
 
-    besluit = Referentiedata(
+    besluit = VragenlijstregelonderwerpsoortReferentiedata(
         code="BES",
         naam="Besluit",
     )
@@ -68,7 +71,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: besluit
     """
 
-    buurt = Referentiedata(
+    buurt = VragenlijstregelonderwerpsoortReferentiedata(
         code="BUU",
         naam="Buurt",
     )
@@ -76,7 +79,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: buurt
     """
 
-    buurt_motivatie = Referentiedata(
+    buurt_motivatie = VragenlijstregelonderwerpsoortReferentiedata(
         code="BUM",
         naam="Buurt motivatie",
     )
@@ -84,7 +87,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: buurt motivatie
     """
 
-    customereffortscore = Referentiedata(
+    customereffortscore = VragenlijstregelonderwerpsoortReferentiedata(
         code="CES",
         naam="CustomerEffortScore",
     )
@@ -92,7 +95,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: Customer Effort Score
     """
 
-    contact = Referentiedata(
+    contact = VragenlijstregelonderwerpsoortReferentiedata(
         code="CON",
         naam="Contact",
     )
@@ -100,7 +103,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij contact: aanbod
     """
 
-    deskundigheid = Referentiedata(
+    deskundigheid = VragenlijstregelonderwerpsoortReferentiedata(
         code="DES",
         naam="Deskundigheid",
     )
@@ -108,7 +111,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: deskundigheid
     """
 
-    dienstverlening = Referentiedata(
+    dienstverlening = VragenlijstregelonderwerpsoortReferentiedata(
         code="DIE",
         naam="Dienstverlening",
     )
@@ -116,7 +119,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: dienstverlening
     """
 
-    duidelijkheid = Referentiedata(
+    duidelijkheid = VragenlijstregelonderwerpsoortReferentiedata(
         code="DUI",
         naam="Duidelijkheid",
     )
@@ -124,7 +127,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: duidelijkheid
     """
 
-    eindopname = Referentiedata(
+    eindopname = VragenlijstregelonderwerpsoortReferentiedata(
         code="EIN",
         naam="Eindopname",
     )
@@ -132,7 +135,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: eindopname
     """
 
-    gemak = Referentiedata(
+    gemak = VragenlijstregelonderwerpsoortReferentiedata(
         code="GEM",
         naam="Gemak",
     )
@@ -140,7 +143,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: gemak
     """
 
-    informatie = Referentiedata(
+    informatie = VragenlijstregelonderwerpsoortReferentiedata(
         code="INF",
         naam="Informatie",
     )
@@ -148,7 +151,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: informatie
     """
 
-    medewerker = Referentiedata(
+    medewerker = VragenlijstregelonderwerpsoortReferentiedata(
         code="MED",
         naam="Medewerker",
     )
@@ -156,7 +159,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: medewerker
     """
 
-    monteur = Referentiedata(
+    monteur = VragenlijstregelonderwerpsoortReferentiedata(
         code="MON",
         naam="Monteur",
     )
@@ -164,7 +167,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: monteur
     """
 
-    netheid = Referentiedata(
+    netheid = VragenlijstregelonderwerpsoortReferentiedata(
         code="NET",
         naam="Netheid",
     )
@@ -172,7 +175,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: netheid
     """
 
-    oplevering = Referentiedata(
+    oplevering = VragenlijstregelonderwerpsoortReferentiedata(
         code="OLE",
         naam="Oplevering",
     )
@@ -180,7 +183,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: oplevering
     """
 
-    oplossing = Referentiedata(
+    oplossing = VragenlijstregelonderwerpsoortReferentiedata(
         code="OPL",
         naam="Oplossing",
     )
@@ -188,7 +191,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: oplossing
     """
 
-    resultaat = Referentiedata(
+    resultaat = VragenlijstregelonderwerpsoortReferentiedata(
         code="RES",
         naam="Resultaat",
     )
@@ -196,7 +199,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: resultaat
     """
 
-    snelheid = Referentiedata(
+    snelheid = VragenlijstregelonderwerpsoortReferentiedata(
         code="SNE",
         naam="Snelheid",
     )
@@ -204,7 +207,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: snelheid
     """
 
-    staat = Referentiedata(
+    staat = VragenlijstregelonderwerpsoortReferentiedata(
         code="STA",
         naam="Staat",
     )
@@ -212,7 +215,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: staat
     """
 
-    termijn = Referentiedata(
+    termijn = VragenlijstregelonderwerpsoortReferentiedata(
         code="TER",
         naam="Termijn",
     )
@@ -220,7 +223,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: termijn
     """
 
-    tijdstip = Referentiedata(
+    tijdstip = VragenlijstregelonderwerpsoortReferentiedata(
         code="TIJ",
         naam="Tijdstip",
     )
@@ -228,7 +231,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: tijdstip
     """
 
-    uitleg = Referentiedata(
+    uitleg = VragenlijstregelonderwerpsoortReferentiedata(
         code="UIT",
         naam="Uitleg",
     )
@@ -236,7 +239,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: uitleg
     """
 
-    verloop = Referentiedata(
+    verloop = VragenlijstregelonderwerpsoortReferentiedata(
         code="VER",
         naam="Verloop",
     )
@@ -244,7 +247,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: verloop
     """
 
-    vooropname = Referentiedata(
+    vooropname = VragenlijstregelonderwerpsoortReferentiedata(
         code="VOO",
         naam="Vooropname",
     )
@@ -252,7 +255,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: vooropname
     """
 
-    website = Referentiedata(
+    website = VragenlijstregelonderwerpsoortReferentiedata(
         code="WEB",
         naam="Website",
     )
@@ -260,7 +263,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: website
     """
 
-    weten = Referentiedata(
+    weten = VragenlijstregelonderwerpsoortReferentiedata(
         code="WET",
         naam="Weten",
     )
@@ -268,7 +271,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: weten
     """
 
-    weten_aannemer = Referentiedata(
+    weten_aannemer = VragenlijstregelonderwerpsoortReferentiedata(
         code="WEA",
         naam="Weten aannemer",
     )
@@ -276,7 +279,7 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: weten aannemer
     """
 
-    woning = Referentiedata(
+    woning = VragenlijstregelonderwerpsoortReferentiedata(
         code="WON",
         naam="Woning",
     )
@@ -284,24 +287,10 @@ class Vragenlijstregelonderwerpsoort(Enum):
     Vraag behoort bij onderwerp: woning
     """
 
-    woning_motivatie = Referentiedata(
+    woning_motivatie = VragenlijstregelonderwerpsoortReferentiedata(
         code="WOM",
         naam="Woning motivatie",
     )
     """
     Vraag behoort bij onderwerp: woning motivatie
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

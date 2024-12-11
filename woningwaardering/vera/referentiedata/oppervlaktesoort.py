@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Oppervlaktesoort(Enum):
-    bruto_vloeroppervlakte = Referentiedata(
+class OppervlaktesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Oppervlaktesoort(Referentiedatasoort):
+    bruto_vloeroppervlakte = OppervlaktesoortReferentiedata(
         code="BVO",
         naam="Bruto vloeroppervlakte",
     )
@@ -13,7 +16,7 @@ class Oppervlaktesoort(Enum):
     gemeten conform NEN 2580.
     """
 
-    functioneel_nuttig_oppervlakte = Referentiedata(
+    functioneel_nuttig_oppervlakte = OppervlaktesoortReferentiedata(
         code="FNO",
         naam="Functioneel nuttig oppervlakte",
     )
@@ -22,7 +25,7 @@ class Oppervlaktesoort(Enum):
     meters, gemeten conform NEN 2580.
     """
 
-    gebruiksoppervlakte = Referentiedata(
+    gebruiksoppervlakte = OppervlaktesoortReferentiedata(
         code="GBO",
         naam="Gebruiksoppervlakte",
     )
@@ -31,7 +34,7 @@ class Oppervlaktesoort(Enum):
     gemeten conform NEN 2580.
     """
 
-    gerealiseerd_nuttig_oppervlakte = Referentiedata(
+    gerealiseerd_nuttig_oppervlakte = OppervlaktesoortReferentiedata(
         code="GNO",
         naam="Gerealiseerd nuttig oppervlakte",
     )
@@ -40,7 +43,7 @@ class Oppervlaktesoort(Enum):
     vierkante meters, gemeten conform NEN 2580.
     """
 
-    gebruiksoppervlakte_thermische_zone = Referentiedata(
+    gebruiksoppervlakte_thermische_zone = OppervlaktesoortReferentiedata(
         code="GTZ",
         naam="Gebruiksoppervlakte thermische zone",
     )
@@ -48,7 +51,7 @@ class Oppervlaktesoort(Enum):
     Gebruiksoppervlakte van de thermische zone, afgebakend volgens NTA 8800
     """
 
-    netto_vloeroppervlakte = Referentiedata(
+    netto_vloeroppervlakte = OppervlaktesoortReferentiedata(
         code="NVO",
         naam="Netto vloeroppervlakte",
     )
@@ -57,7 +60,7 @@ class Oppervlaktesoort(Enum):
     meters, gemeten conform NEN 2580.
     """
 
-    verhuurbare_vloeroppervlakte = Referentiedata(
+    verhuurbare_vloeroppervlakte = OppervlaktesoortReferentiedata(
         code="VVO",
         naam="Verhuurbare vloeroppervlakte",
     )
@@ -66,7 +69,7 @@ class Oppervlaktesoort(Enum):
     meters, gemeten conform NEN 2580.
     """
 
-    de_woon_of_werk_oppervlakte = Referentiedata(
+    de_woon_of_werk_oppervlakte = OppervlaktesoortReferentiedata(
         code="WOW",
         naam="De woon of werk oppervlakte",
     )
@@ -74,17 +77,3 @@ class Oppervlaktesoort(Enum):
     De gebruiksoppervlakte van een eenheid(verblijfsobject) in gehele vierkante meters,
     gemeten conform NEN 2580.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

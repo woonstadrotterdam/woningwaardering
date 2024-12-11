@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Communicatievoorkeursoort(Enum):
-    klantcontact = Referentiedata(
+class CommunicatievoorkeursoortReferentiedata(Referentiedata):
+    pass
+
+
+class Communicatievoorkeursoort(Referentiedatasoort):
+    klantcontact = CommunicatievoorkeursoortReferentiedata(
         code="KLA",
         naam="Klantcontact",
     )
@@ -12,7 +15,7 @@ class Communicatievoorkeursoort(Enum):
     Direct contact voor ondersteuning, vragen, of klachten
     """
 
-    nieuwsbrief = Referentiedata(
+    nieuwsbrief = CommunicatievoorkeursoortReferentiedata(
         code="NIE",
         naam="Nieuwsbrief",
     )
@@ -21,7 +24,7 @@ class Communicatievoorkeursoort(Enum):
     huurders
     """
 
-    kennisgeving = Referentiedata(
+    kennisgeving = CommunicatievoorkeursoortReferentiedata(
         code="KEN",
         naam="Kennisgeving",
     )
@@ -30,7 +33,7 @@ class Communicatievoorkeursoort(Enum):
     beleidswijzigingen, etc.
     """
 
-    formele_communicatie = Referentiedata(
+    formele_communicatie = CommunicatievoorkeursoortReferentiedata(
         code="FOR",
         naam="Formele communicatie",
     )
@@ -39,21 +42,7 @@ class Communicatievoorkeursoort(Enum):
     betalingsherrinneringen, informatie over huurverhogingen
     """
 
-    overige_communicatie = Referentiedata(
+    overige_communicatie = CommunicatievoorkeursoortReferentiedata(
         code="OVE",
         naam="Overige communicatie",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

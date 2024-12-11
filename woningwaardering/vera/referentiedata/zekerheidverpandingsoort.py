@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Zekerheidverpandingsoort(Enum):
-    hypotheek_en_pandrecht_huurpenningen = Referentiedata(
+class ZekerheidverpandingsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Zekerheidverpandingsoort(Referentiedatasoort):
+    hypotheek_en_pandrecht_huurpenningen = ZekerheidverpandingsoortReferentiedata(
         code="HPH",
         naam="Hypotheek en pandrecht huurpenningen",
     )
@@ -12,15 +15,17 @@ class Zekerheidverpandingsoort(Enum):
     Hypotheek en pandrecht huurpenningen
     """
 
-    hypotheek_en_positieve_verkaring_pandrecht_huurpenningen = Referentiedata(
-        code="HPO",
-        naam="Hypotheek en positieve verkaring pandrecht huurpenningen",
+    hypotheek_en_positieve_verkaring_pandrecht_huurpenningen = (
+        ZekerheidverpandingsoortReferentiedata(
+            code="HPO",
+            naam="Hypotheek en positieve verkaring pandrecht huurpenningen",
+        )
     )
     """
     Hypotheek en positieve verkaring pandrecht huurpenningen
     """
 
-    hypotheek = Referentiedata(
+    hypotheek = ZekerheidverpandingsoortReferentiedata(
         code="HYP",
         naam="Hypotheek",
     )
@@ -28,7 +33,7 @@ class Zekerheidverpandingsoort(Enum):
     Hypotheek
     """
 
-    overig = Referentiedata(
+    overig = ZekerheidverpandingsoortReferentiedata(
         code="OVE",
         naam="Overig",
     )
@@ -36,7 +41,7 @@ class Zekerheidverpandingsoort(Enum):
     Overig, bijvoorbeeld vastgelegd in onderhandse akte
     """
 
-    pandrecht_huurpenningen = Referentiedata(
+    pandrecht_huurpenningen = ZekerheidverpandingsoortReferentiedata(
         code="PHU",
         naam="Pandrecht huurpenningen",
     )
@@ -44,7 +49,7 @@ class Zekerheidverpandingsoort(Enum):
     Pandrecht huurpenningen
     """
 
-    positieve_verklaring = Referentiedata(
+    positieve_verklaring = ZekerheidverpandingsoortReferentiedata(
         code="POV",
         naam="Positieve verklaring",
     )
@@ -52,24 +57,12 @@ class Zekerheidverpandingsoort(Enum):
     Positieve verklaring hypotheek en/of positieve verkaring pandrecht huurpenningen
     """
 
-    pandrecht_huurpenningen_en_positieve_verklaring_hypotheek = Referentiedata(
-        code="PPO",
-        naam="Pandrecht huurpenningen en positieve verklaring hypotheek",
+    pandrecht_huurpenningen_en_positieve_verklaring_hypotheek = (
+        ZekerheidverpandingsoortReferentiedata(
+            code="PPO",
+            naam="Pandrecht huurpenningen en positieve verklaring hypotheek",
+        )
     )
     """
     Pandrecht huurpenningen en positieve verklaring hypotheek
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

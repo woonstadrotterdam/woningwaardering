@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Opleidingsniveau(Enum):
-    hbo_associate_degree = Referentiedata(
+class OpleidingsniveauReferentiedata(Referentiedata):
+    pass
+
+
+class Opleidingsniveau(Referentiedatasoort):
+    hbo_associate_degree = OpleidingsniveauReferentiedata(
         code="HAD",
         naam="HBO Associate degree",
     )
@@ -12,12 +15,12 @@ class Opleidingsniveau(Enum):
     Centraal Register Opleidingen Hoger Onderwijs (CROHO)
     """
 
-    havo = Referentiedata(
+    havo = OpleidingsniveauReferentiedata(
         code="HAV",
         naam="HAVO",
     )
 
-    hbo_bachelor = Referentiedata(
+    hbo_bachelor = OpleidingsniveauReferentiedata(
         code="HBA",
         naam="HBO Bachelor",
     )
@@ -25,7 +28,7 @@ class Opleidingsniveau(Enum):
     Centraal Register Opleidingen Hoger Onderwijs (CROHO)
     """
 
-    hoger_beroepsonderwijs = Referentiedata(
+    hoger_beroepsonderwijs = OpleidingsniveauReferentiedata(
         code="HBO",
         naam="Hoger beroepsonderwijs",
     )
@@ -33,7 +36,7 @@ class Opleidingsniveau(Enum):
     Centraal Register Opleidingen Hoger Onderwijs (CROHO)
     """
 
-    hbo_master = Referentiedata(
+    hbo_master = OpleidingsniveauReferentiedata(
         code="HMA",
         naam="HBO Master",
     )
@@ -41,7 +44,7 @@ class Opleidingsniveau(Enum):
     Centraal Register Opleidingen Hoger Onderwijs (CROHO)
     """
 
-    hbo_postinitiele_master = Referentiedata(
+    hbo_postinitiele_master = OpleidingsniveauReferentiedata(
         code="HPM",
         naam="HBO Postinitiële master",
     )
@@ -49,12 +52,12 @@ class Opleidingsniveau(Enum):
     Centraal Register Opleidingen Hoger Onderwijs (CROHO)
     """
 
-    middelbaar_beroeps_onderwijs = Referentiedata(
+    middelbaar_beroeps_onderwijs = OpleidingsniveauReferentiedata(
         code="MBO",
         naam="Middelbaar beroeps onderwijs",
     )
 
-    postdoc = Referentiedata(
+    postdoc = OpleidingsniveauReferentiedata(
         code="POD",
         naam="PostDoc",
     )
@@ -62,7 +65,7 @@ class Opleidingsniveau(Enum):
     Gepromoveerd onderzoeker
     """
 
-    promovendus = Referentiedata(
+    promovendus = OpleidingsniveauReferentiedata(
         code="PRO",
         naam="Promovendus",
     )
@@ -72,17 +75,17 @@ class Opleidingsniveau(Enum):
     VERA 4.0 wordt code PRO vervangen door code PHD
     """
 
-    voorbereidend_middelbaar_beroeps_onderwijs = Referentiedata(
+    voorbereidend_middelbaar_beroeps_onderwijs = OpleidingsniveauReferentiedata(
         code="VMB",
         naam="Voorbereidend middelbaar beroeps onderwijs",
     )
 
-    voorbereidend_wetenschappelijk_onderwijs = Referentiedata(
+    voorbereidend_wetenschappelijk_onderwijs = OpleidingsniveauReferentiedata(
         code="VWO",
         naam="Voorbereidend wetenschappelijk onderwijs",
     )
 
-    wo_bachelor = Referentiedata(
+    wo_bachelor = OpleidingsniveauReferentiedata(
         code="WBA",
         naam="WO Bachelor",
     )
@@ -90,7 +93,7 @@ class Opleidingsniveau(Enum):
     Centraal Register Opleidingen Hoger Onderwijs (CROHO)
     """
 
-    wo_master = Referentiedata(
+    wo_master = OpleidingsniveauReferentiedata(
         code="WMA",
         naam="WO Master",
     )
@@ -98,24 +101,10 @@ class Opleidingsniveau(Enum):
     Centraal Register Opleidingen Hoger Onderwijs (CROHO)
     """
 
-    wo_postinitiele_master = Referentiedata(
+    wo_postinitiele_master = OpleidingsniveauReferentiedata(
         code="WPM",
         naam="WO Postinitiële master",
     )
     """
     Centraal Register Opleidingen Hoger Onderwijs (CROHO)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

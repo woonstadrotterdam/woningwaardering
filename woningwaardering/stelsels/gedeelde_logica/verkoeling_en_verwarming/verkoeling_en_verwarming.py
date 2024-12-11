@@ -12,11 +12,11 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
-from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
+from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
+    Ruimtedetailsoort,
+    Ruimtesoort,
 )
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
@@ -46,10 +46,10 @@ def _waardeer_verwarmde_overige_ruimte(
             continue
 
         ruimtesoort = classificeer_ruimte(ruimte)
-        if ruimtesoort and ruimtesoort.code in [
-            Ruimtesoort.overige_ruimten.code,
-            Ruimtesoort.verkeersruimte.code,
-        ]:
+        if ruimtesoort in (
+            Ruimtesoort.overige_ruimten,
+            Ruimtesoort.verkeersruimte,
+        ):
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde overige- of verkeersruimte en krijgt 1 punt"
             )
@@ -102,7 +102,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
         punten = 2
         ruimtesoort = classificeer_ruimte(ruimte)
-        if ruimtesoort and ruimtesoort.code == Ruimtesoort.vertrek.code:
+        if ruimtesoort == Ruimtesoort.vertrek:
             if ruimte.verkoeld:
                 totaal_punten_verkoeld_en_verwarmd += 1
                 punten += 1  # 1 punt extra per vertrek wanneer verwarmd en verkoeld
@@ -168,22 +168,17 @@ def _waardeer_open_keuken(
         tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]: Tuple van ruimte en waardering voor open keuken
     """
     for ruimte in ruimten:
-        if (
-            ruimte.verwarmd
-            and ruimte.detail_soort
-            and (  # detailsoort is woonkamer/keuken of een woonkamer/slaapkamer met aanrecht
-                ruimte.detail_soort.code
-                == Ruimtedetailsoort.woonkamer_en_of_keuken.code
-                or (
-                    ruimte.detail_soort.code
-                    in [
-                        Ruimtedetailsoort.woonkamer.code,
-                        Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-                        Ruimtedetailsoort.slaapkamer.code,
-                    ]
-                    and heeft_bouwkundig_element(
-                        ruimte, Bouwkundigelementdetailsoort.aanrecht
-                    )
+        if ruimte.verwarmd and (
+            ruimte.detail_soort == Ruimtedetailsoort.woonkamer_en_of_keuken
+            or (
+                ruimte.detail_soort
+                in [
+                    Ruimtedetailsoort.woonkamer,
+                    Ruimtedetailsoort.woon_en_of_slaapkamer,
+                    Ruimtedetailsoort.slaapkamer,
+                ]
+                and heeft_bouwkundig_element(
+                    ruimte, Bouwkundigelementdetailsoort.aanrecht
                 )
             )
         ):

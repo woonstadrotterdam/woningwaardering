@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Puntenmutatiesoort(Enum):
-    intrekken_toewijzing = Referentiedata(
+class PuntenmutatiesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Puntenmutatiesoort(Referentiedatasoort):
+    intrekken_toewijzing = PuntenmutatiesoortReferentiedata(
         code="ITO",
         naam="Intrekken toewijzing",
     )
@@ -12,7 +15,7 @@ class Puntenmutatiesoort(Enum):
     Intrekken toewijzing van de eenheid.
     """
 
-    puntenafbouw_situatiepunten = Referentiedata(
+    puntenafbouw_situatiepunten = PuntenmutatiesoortReferentiedata(
         code="PAS",
         naam="Puntenafbouw situatiepunten",
     )
@@ -20,7 +23,7 @@ class Puntenmutatiesoort(Enum):
     Puntenafbouw situatiepunten
     """
 
-    puntenafbouw_startpunten = Referentiedata(
+    puntenafbouw_startpunten = PuntenmutatiesoortReferentiedata(
         code="PAT",
         naam="Puntenafbouw startpunten",
     )
@@ -28,7 +31,7 @@ class Puntenmutatiesoort(Enum):
     Puntenafbouw startpunten
     """
 
-    puntenafbouw_zoekpunten = Referentiedata(
+    puntenafbouw_zoekpunten = PuntenmutatiesoortReferentiedata(
         code="PAZ",
         naam="Puntenafbouw zoekpunten",
     )
@@ -36,7 +39,7 @@ class Puntenmutatiesoort(Enum):
     Puntenafbouw zoekpunten
     """
 
-    puntenopbouw_situatiepunten = Referentiedata(
+    puntenopbouw_situatiepunten = PuntenmutatiesoortReferentiedata(
         code="PSI",
         naam="Puntenopbouw situatiepunten",
     )
@@ -44,7 +47,7 @@ class Puntenmutatiesoort(Enum):
     Puntenopbouw situatiepunten
     """
 
-    puntenopbouw_startpunten = Referentiedata(
+    puntenopbouw_startpunten = PuntenmutatiesoortReferentiedata(
         code="PST",
         naam="Puntenopbouw startpunten",
     )
@@ -52,7 +55,7 @@ class Puntenmutatiesoort(Enum):
     Puntenopbouw startpunten
     """
 
-    puntenopbouw_zoekpunten = Referentiedata(
+    puntenopbouw_zoekpunten = PuntenmutatiesoortReferentiedata(
         code="PZO",
         naam="Puntenopbouw zoekpunten",
     )
@@ -60,7 +63,7 @@ class Puntenmutatiesoort(Enum):
     Puntenopbouw zoekpunten
     """
 
-    milde_sanctie = Referentiedata(
+    milde_sanctie = PuntenmutatiesoortReferentiedata(
         code="SMI",
         naam="Milde sanctie",
     )
@@ -68,7 +71,7 @@ class Puntenmutatiesoort(Enum):
     Milde sanctie
     """
 
-    no_show_sanctie = Referentiedata(
+    no_show_sanctie = PuntenmutatiesoortReferentiedata(
         code="SNS",
         naam="No-show sanctie",
     )
@@ -76,7 +79,7 @@ class Puntenmutatiesoort(Enum):
     No-show sanctie
     """
 
-    zware_sanctie = Referentiedata(
+    zware_sanctie = PuntenmutatiesoortReferentiedata(
         code="SZW",
         naam="Zware sanctie",
     )
@@ -84,7 +87,7 @@ class Puntenmutatiesoort(Enum):
     Zware sanctie
     """
 
-    terugdraaien_milde_sanctie = Referentiedata(
+    terugdraaien_milde_sanctie = PuntenmutatiesoortReferentiedata(
         code="TSM",
         naam="Terugdraaien milde sanctie",
     )
@@ -92,7 +95,7 @@ class Puntenmutatiesoort(Enum):
     Terugdraaien milde sanctie
     """
 
-    terugdraaien_no_show_sanctie = Referentiedata(
+    terugdraaien_no_show_sanctie = PuntenmutatiesoortReferentiedata(
         code="TSN",
         naam="Terugdraaien no-show sanctie",
     )
@@ -100,24 +103,10 @@ class Puntenmutatiesoort(Enum):
     Terugdraaien no-show sanctie
     """
 
-    terugdraaien_zware_sanctie = Referentiedata(
+    terugdraaien_zware_sanctie = PuntenmutatiesoortReferentiedata(
         code="TSZ",
         naam="Terugdraaien zware sanctie",
     )
     """
     Terugdraaien zware sanctie
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

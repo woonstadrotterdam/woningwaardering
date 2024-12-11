@@ -1,44 +1,33 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Onderhoudslabel(Enum):
-    basis_onderhoud = Referentiedata(
+class OnderhoudslabelReferentiedata(Referentiedata):
+    pass
+
+
+class Onderhoudslabel(Referentiedatasoort):
+    basis_onderhoud = OnderhoudslabelReferentiedata(
         code="BAS",
         naam="Basis onderhoud",
     )
 
-    geen_onderhoud = Referentiedata(
+    geen_onderhoud = OnderhoudslabelReferentiedata(
         code="GEE",
         naam="Geen onderhoud",
     )
 
-    monument_onderhoud = Referentiedata(
+    monument_onderhoud = OnderhoudslabelReferentiedata(
         code="MON",
         naam="Monument onderhoud",
     )
 
-    volledig_onderhoud = Referentiedata(
+    volledig_onderhoud = OnderhoudslabelReferentiedata(
         code="VOL",
         naam="Volledig onderhoud",
     )
 
-    wind_en_waterdicht_houden = Referentiedata(
+    wind_en_waterdicht_houden = OnderhoudslabelReferentiedata(
         code="WIN",
         naam="Wind en waterdicht houden",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

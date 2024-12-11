@@ -30,6 +30,7 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatiestatus,
     Ruimtedetailsoort,
     Ruimtesoort,
+    RuimtesoortReferentiedata,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
@@ -354,11 +355,11 @@ def energieprestatie_met_geldig_label(
         Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]
     ] = [
         ("registratiedatum", lambda ep: ep.registratiedatum is not None),
-        ("soort", lambda ep: ep.soort is not None and ep.soort.code is not None),
-        ("status", lambda ep: ep.status is not None and ep.status.code is not None),
+        ("soort", lambda ep: ep.soort is not None),
+        ("status", lambda ep: ep.status is not None),
         ("begindatum", lambda ep: ep.begindatum is not None),
         ("einddatum", lambda ep: ep.einddatum is not None),
-        ("label", lambda ep: ep.label is not None and ep.label.code is not None),
+        ("label", lambda ep: ep.label is not None),
     ]
 
     for idx, energieprestatie in enumerate(eenheid.energieprestaties or []):
@@ -374,16 +375,13 @@ def energieprestatie_met_geldig_label(
             )
             continue
 
-        # vanwege het gebruik van mypy wordt in de code hieronder de check op attributen nogmaals uitgevoerd, maar deze kunnen op dit moment niet meer None zijn
-        if (
-            energieprestatie.soort and energieprestatie.soort.code
-        ) and energieprestatie.soort.code not in {
-            Energieprestatiesoort.energie_index.code,
-            Energieprestatiesoort.primair_energieverbruik_woningbouw.code,
-            Energieprestatiesoort.voorlopig_energielabel.code,
-        }:
+        if energieprestatie.soort not in (
+            Energieprestatiesoort.energie_index,
+            Energieprestatiesoort.primair_energieverbruik_woningbouw,
+            Energieprestatiesoort.voorlopig_energielabel,
+        ):
             logger.debug(
-                f"Eenheid ({eenheid.id}): ongeldige energieprestatie.soort.code '{energieprestatie.soort.code}'."
+                f"Eenheid ({eenheid.id}): ongeldige energieprestatiesoort '{energieprestatie.soort}'."
             )
             continue
 
@@ -395,9 +393,7 @@ def energieprestatie_met_geldig_label(
             )
             continue
 
-        if (energieprestatie.status and energieprestatie.status.code) and (
-            energieprestatie.status.code != Energieprestatiestatus.definitief.code
-        ):
+        if energieprestatie.status != Energieprestatiestatus.definitief:
             logger.debug(
                 f"Eenheid ({eenheid.id}): energieprestatie status is niet definitief."
             )
@@ -602,7 +598,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
                 f"Eenheid ({eenheid.id}) is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
             )
             if rijksmonument:
-                eenheid.monumenten.append(Eenheidmonument.rijksmonument.value)
+                eenheid.monumenten.append(Eenheidmonument.rijksmonument)
 
         beschermd_gezicht = is_beschermd_gezicht(
             eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
@@ -613,7 +609,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
                 f"Eenheid ({eenheid.id}) {'behoort' if beschermd_gezicht else 'behoort niet'} tot een beschermd stads- of dorpsgezicht volgens de api van cultureelerfgoed."
             )
             if beschermd_gezicht:
-                eenheid.monumenten.append(Eenheidmonument.beschermd_stadsgezicht.value)
+                eenheid.monumenten.append(Eenheidmonument.beschermd_stadsgezicht)
 
     return eenheid
 
@@ -644,7 +640,7 @@ def _classificeer_ruimte_dec(
         ruimtesoort = func(ruimte)
         if ruimtesoort is not None:
             logger.debug(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geclassificeerd als een {ruimtesoort.naam if ruimtesoort.naam else ruimtesoort.code}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geclassificeerd als een {ruimtesoort}"
             )
         else:
             logger.debug(
@@ -656,7 +652,7 @@ def _classificeer_ruimte_dec(
 
 
 # @_classificeer_ruimte_dec
-def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
+def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
 
@@ -664,7 +660,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         ruimte (EenhedenRuimte): De ruimte die geclassificeerd moet worden.
 
     Returns:
-        Ruimtesoort | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
+        RuimtesoortReferentiedata | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
             Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
     """
 
@@ -683,79 +679,79 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
         warnings.warn(warning_msg, UserWarning)
         return None
 
-    if ruimte.soort.code == Ruimtesoort.verkeersruimte.code:
+    if ruimte.soort == Ruimtesoort.verkeersruimte:
         return Ruimtesoort.verkeersruimte
 
-    if ruimte.detail_soort.code in [
+    if ruimte.detail_soort in [
         # onderstaande parkeergelegenden worden binnenkort vervangen: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
-        Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek.code,
-        Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_specifieke_plek.code,
-        Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek.code,
-        Ruimtedetailsoort.open_parkeergarage_specifieke_plek.code,
-        Ruimtedetailsoort.parkeergarage_niet_specifieke_plek.code,
-        Ruimtedetailsoort.parkeergarage_specifieke_plek.code,
+        Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_niet_specifieke_plek,
+        Ruimtedetailsoort.gemeenschappelijke_parkeerruimte_specifieke_plek,
+        Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek,
+        Ruimtedetailsoort.open_parkeergarage_specifieke_plek,
+        Ruimtedetailsoort.parkeergarage_niet_specifieke_plek,
+        Ruimtedetailsoort.parkeergarage_specifieke_plek,
     ]:
-        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort.naam} ({ruimte.detail_soort.code}) en kan daardoor niet geclassificeerd worden. Gebruik voor parkeerplaatsen: {Ruimtedetailsoort.carport.naam} ({Ruimtedetailsoort.carport.code}), {Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.naam} ({Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code}) of {Ruimtedetailsoort.parkeervak_auto_binnen.naam} ({Ruimtedetailsoort.parkeervak_auto_binnen.code})"
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort} en kan daardoor niet geclassificeerd worden. Gebruik voor parkeerplaatsen: {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt} of {Ruimtedetailsoort.parkeervak_auto_binnen}"
         warnings.warn(warning_msg, UserWarning)
         return None
 
     if (
-        ruimte.detail_soort.code
+        ruimte.detail_soort
         in [  # deze ruimten zijn sowieso buitenruimten
-            Ruimtedetailsoort.atrium_en_of_patio.code,
-            Ruimtedetailsoort.gemeenschappelijk_dakterras.code,
-            Ruimtedetailsoort.achtertuin.code,
-            Ruimtedetailsoort.balkon.code,
-            Ruimtedetailsoort.zijtuin.code,
-            Ruimtedetailsoort.voortuin.code,
-            Ruimtedetailsoort.dakterras.code,
-            Ruimtedetailsoort.gemeenschappelijke_tuin.code,
-            Ruimtedetailsoort.terras.code,
-            Ruimtedetailsoort.tuin.code,
-            Ruimtedetailsoort.tuin_rondom.code,
-            Ruimtedetailsoort.loggia.code,
+            Ruimtedetailsoort.atrium_en_of_patio,
+            Ruimtedetailsoort.gemeenschappelijk_dakterras,
+            Ruimtedetailsoort.achtertuin,
+            Ruimtedetailsoort.balkon,
+            Ruimtedetailsoort.zijtuin,
+            Ruimtedetailsoort.voortuin,
+            Ruimtedetailsoort.dakterras,
+            Ruimtedetailsoort.gemeenschappelijke_tuin,
+            Ruimtedetailsoort.terras,
+            Ruimtedetailsoort.tuin,
+            Ruimtedetailsoort.tuin_rondom,
+            Ruimtedetailsoort.loggia,
         ]
         or (  # privé parkeerplaatsen buiten zijn privé buitenruimten
-            ruimte.detail_soort.code
+            ruimte.detail_soort
             in [
-                Ruimtedetailsoort.carport.code,
-                Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code,
+                Ruimtedetailsoort.carport,
+                Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt,
             ]
             and not gedeeld_met_eenheden(ruimte)
         )
         or (
-            ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
-            and ruimte.soort.code == Ruimtesoort.buitenruimte.code
+            ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
+            and ruimte.soort == Ruimtesoort.buitenruimte
             and not gedeeld_met_eenheden(ruimte)
         )
     ):
         return Ruimtesoort.buitenruimte
 
     # Keuken, badkamer en doucheruimte worden altijd gewaardeerd als vertrek
-    if ruimte.detail_soort.code in [
-        Ruimtedetailsoort.keuken.code,
-        Ruimtedetailsoort.badkamer.code,
-        Ruimtedetailsoort.doucheruimte.code,
+    if ruimte.detail_soort in [
+        Ruimtedetailsoort.keuken,
+        Ruimtedetailsoort.badkamer,
+        Ruimtedetailsoort.doucheruimte,
     ]:
         return Ruimtesoort.vertrek
 
-    if ruimte.detail_soort.code in [
-        Ruimtedetailsoort.woonkamer.code,
-        Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-        Ruimtedetailsoort.woonkamer_en_of_keuken.code,
-        Ruimtedetailsoort.slaapkamer.code,
-        Ruimtedetailsoort.badkamer_met_toilet.code,
-        Ruimtedetailsoort.overig_vertrek.code,
-        Ruimtedetailsoort.bijkeuken.code,
-        Ruimtedetailsoort.berging.code,
-        Ruimtedetailsoort.wasruimte.code,
-        Ruimtedetailsoort.kelder.code,
-        # Ruimtedetailsoort.schuur.code,
+    if ruimte.detail_soort in [
+        Ruimtedetailsoort.woonkamer,
+        Ruimtedetailsoort.woon_en_of_slaapkamer,
+        Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.slaapkamer,
+        Ruimtedetailsoort.badkamer_met_toilet,
+        Ruimtedetailsoort.overig_vertrek,
+        Ruimtedetailsoort.bijkeuken,
+        Ruimtedetailsoort.berging,
+        Ruimtedetailsoort.wasruimte,
+        Ruimtedetailsoort.kelder,
+        # Ruimtedetailsoort.schuur,
     ] or (
         Ruimtedetailsoort.schuur.naam == ruimte.detail_soort.naam
     ):  # Schacht en schuur hebben dezelfde code
         if (
-            ruimte.detail_soort.code == Ruimtedetailsoort.berging.code
+            ruimte.detail_soort == Ruimtedetailsoort.berging
             and Ruimtesoort.overige_ruimten
         ):
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
@@ -766,43 +762,43 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
             else:
                 return None
 
-        if ruimte.soort.code == Ruimtesoort.vertrek.code:
+        if ruimte.soort == Ruimtesoort.vertrek:
             if ruimte.oppervlakte >= 4:
                 return Ruimtesoort.vertrek
             if ruimte.oppervlakte >= 2:
                 return Ruimtesoort.overige_ruimten
 
-        if ruimte.soort.code == Ruimtesoort.overige_ruimten.code:
+        if ruimte.soort == Ruimtesoort.overige_ruimten:
             if ruimte.oppervlakte >= 2:
                 return Ruimtesoort.overige_ruimten
 
-    if ruimte.detail_soort.code == Ruimtedetailsoort.toiletruimte.code:
+    if ruimte.detail_soort == Ruimtedetailsoort.toiletruimte:
         # mag alleen als overige ruimte gewaardeerd worden
         if ruimte.oppervlakte >= 2:
             return Ruimtesoort.overige_ruimten
 
     if (
-        ruimte.detail_soort.code
+        ruimte.detail_soort
         in [
-            Ruimtedetailsoort.garage_inpandig.code,
-            Ruimtedetailsoort.garage_uitpandig.code,
-            Ruimtedetailsoort.garagebox.code,
-            Ruimtedetailsoort.parkeervak_auto_binnen.code,
+            Ruimtedetailsoort.garage_inpandig,
+            Ruimtedetailsoort.garage_uitpandig,
+            Ruimtedetailsoort.garagebox,
+            Ruimtedetailsoort.parkeervak_auto_binnen,
         ]
         and not gedeeld_met_eenheden(
             ruimte
         )  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
         or (
-            ruimte.detail_soort.code == Ruimtedetailsoort.parkeerplaats.code
-            and ruimte.soort.code == Ruimtesoort.overige_ruimten.code
+            ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
+            and ruimte.soort == Ruimtesoort.overige_ruimten
             and not gedeeld_met_eenheden(ruimte)
         )
     ):
         if ruimte.oppervlakte >= 2.0:
             return Ruimtesoort.overige_ruimten
 
-    if ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code:
-        if ruimte.soort.code == Ruimtesoort.vertrek.code:
+    if ruimte.detail_soort == Ruimtedetailsoort.zolder:
+        if ruimte.soort == Ruimtesoort.vertrek:
             if (
                 heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
                 and ruimte.oppervlakte >= 4
@@ -817,7 +813,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen vaste trap gevonden: Ruimte wordt niet gewaardeerd als {ruimte.soort.naam}."
                 )
 
-        if ruimte.soort.code == Ruimtesoort.overige_ruimten.code:
+        if ruimte.soort == Ruimtesoort.overige_ruimten:
             if (
                 heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
                 or heeft_bouwkundig_element(
@@ -850,7 +846,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
 
     criterium_naam = ruimte.naam or "Naamloze ruimte"
 
-    if ruimte.detail_soort is None or ruimte.detail_soort.code is None:
+    if ruimte.detail_soort is None or ruimte.detail_soort is None:
         message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort"
         warnings.warn(message, UserWarning)
         return criterium_naam
@@ -864,17 +860,17 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     # en bij de oppervlakte van de betreffende ruimte opgeteld.
     # Een kast waarvan de deur uitkomt op een
     # verkeersruimte, wordt niet gewaardeerd
-    if ruimte.detail_soort.code not in [
-        Ruimtedetailsoort.hal.code,
-        Ruimtedetailsoort.overloop.code,
-        Ruimtedetailsoort.entree.code,
-        Ruimtedetailsoort.gang.code,
+    if ruimte.detail_soort not in [
+        Ruimtedetailsoort.hal,
+        Ruimtedetailsoort.overloop,
+        Ruimtedetailsoort.entree,
+        Ruimtedetailsoort.gang,
     ]:
         ruimte_kasten = [
             verbonden_ruimte
             for verbonden_ruimte in ruimte.verbonden_ruimten or []
             if verbonden_ruimte.detail_soort is not None
-            and verbonden_ruimte.detail_soort.code == Ruimtedetailsoort.kast.code
+            and verbonden_ruimte.detail_soort == Ruimtedetailsoort.kast
         ]
 
         aantal_ruimte_kasten = len(ruimte_kasten)
@@ -1021,7 +1017,7 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
     """
     if (
         adres.woonplaats is not None
-        and adres.woonplaats.code is not None
+        and adres.woonplaats is not None
         and adres.woonplaats.naam is not None
     ):
         return adres.woonplaats

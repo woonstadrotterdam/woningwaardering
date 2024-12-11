@@ -1,20 +1,23 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Leningdetailsoort(Enum):
-    collegiaal = Referentiedata(
+class LeningdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Leningdetailsoort(Referentiedatasoort):
+    collegiaal = LeningdetailsoortReferentiedata(
         code="COL",
         naam="Collegiaal",
     )
 
-    converteerbaar = Referentiedata(
+    converteerbaar = LeningdetailsoortReferentiedata(
         code="CON",
         naam="Converteerbaar",
     )
 
-    extendible = Referentiedata(
+    extendible = LeningdetailsoortReferentiedata(
         code="EXT",
         naam="Extendible",
     )
@@ -22,12 +25,12 @@ class Leningdetailsoort(Enum):
     De financier (geldverstrekker) kan de lening verlengen.
     """
 
-    hypothecaire_lening = Referentiedata(
+    hypothecaire_lening = LeningdetailsoortReferentiedata(
         code="HYP",
         naam="Hypothecaire lening",
     )
 
-    intern = Referentiedata(
+    intern = LeningdetailsoortReferentiedata(
         code="INT",
         naam="Intern",
     )
@@ -36,21 +39,7 @@ class Leningdetailsoort(Enum):
     en een dochtermaatschappij.
     """
 
-    obligatielening = Referentiedata(
+    obligatielening = LeningdetailsoortReferentiedata(
         code="OBL",
         naam="Obligatielening",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -52,8 +52,8 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -164,7 +164,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
             if puntentotaal is not None and 144 <= puntentotaal <= 186:
                 logger.info(
-                    f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {self.stelselgroep.naam}."
+                    f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {self.stelselgroep}."
                 )
 
                 return WoningwaarderingResultatenWoningwaardering(
