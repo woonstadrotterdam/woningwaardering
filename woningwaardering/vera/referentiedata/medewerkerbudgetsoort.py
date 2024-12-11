@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Medewerkerbudgetsoort(Enum):
-    individueel_loopbaanontwikkelingsbudget = Referentiedata(
+class MedewerkerbudgetsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Medewerkerbudgetsoort(Referentiedatasoort):
+    individueel_loopbaanontwikkelingsbudget = MedewerkerbudgetsoortReferentiedata(
         code="IND",
         naam="Individueel loopbaanontwikkelingsbudget",
     )
@@ -15,7 +18,7 @@ class Medewerkerbudgetsoort(Enum):
     hun loopbaanontwikkeling.
     """
 
-    functiegebonden_scholing = Referentiedata(
+    functiegebonden_scholing = MedewerkerbudgetsoortReferentiedata(
         code="FUN",
         naam="Functiegebonden scholing",
     )
@@ -25,21 +28,7 @@ class Medewerkerbudgetsoort(Enum):
     en in de toekomst
     """
 
-    informeel_leren = Referentiedata(
+    informeel_leren = MedewerkerbudgetsoortReferentiedata(
         code="INF",
         naam="Informeel leren",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Onderhoudsorderstatus(Enum):
-    afgehandeld = Referentiedata(
+class OnderhoudsorderstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Onderhoudsorderstatus(Referentiedatasoort):
+    afgehandeld = OnderhoudsorderstatusReferentiedata(
         code="AFG",
         naam="Afgehandeld",
     )
@@ -12,7 +15,7 @@ class Onderhoudsorderstatus(Enum):
     De order is volledig technisch en financieel afgehandeld
     """
 
-    financieel_afwikkelen = Referentiedata(
+    financieel_afwikkelen = OnderhoudsorderstatusReferentiedata(
         code="FIN",
         naam="Financieel afwikkelen",
     )
@@ -22,7 +25,7 @@ class Onderhoudsorderstatus(Enum):
     de onderhoudsorder
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = OnderhoudsorderstatusReferentiedata(
         code="GEA",
         naam="Geannuleerd",
     )
@@ -30,7 +33,7 @@ class Onderhoudsorderstatus(Enum):
     De order is geannuleerd
     """
 
-    order_gegund = Referentiedata(
+    order_gegund = OnderhoudsorderstatusReferentiedata(
         code="GUN",
         naam="Order gegund",
     )
@@ -38,7 +41,7 @@ class Onderhoudsorderstatus(Enum):
     De order is verstrekt aan de uitvoerende partij
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = OnderhoudsorderstatusReferentiedata(
         code="INB",
         naam="In behandeling",
     )
@@ -49,7 +52,7 @@ class Onderhoudsorderstatus(Enum):
     uitvoerende partij (geen differentiatie tussen gegeund, gepland, etc)
     """
 
-    offertetraject = Referentiedata(
+    offertetraject = OnderhoudsorderstatusReferentiedata(
         code="OFF",
         naam="Offertetraject",
     )
@@ -58,7 +61,7 @@ class Onderhoudsorderstatus(Enum):
     wordt met de uitvoering van de werkzaamheden.
     """
 
-    order_gepland = Referentiedata(
+    order_gepland = OnderhoudsorderstatusReferentiedata(
         code="PLN",
         naam="Order gepland",
     )
@@ -66,7 +69,7 @@ class Onderhoudsorderstatus(Enum):
     De order is gepland door de uitvoerende partij
     """
 
-    geregistreerd = Referentiedata(
+    geregistreerd = OnderhoudsorderstatusReferentiedata(
         code="REG",
         naam="Geregistreerd",
     )
@@ -74,7 +77,7 @@ class Onderhoudsorderstatus(Enum):
     De onderhoudsorder is slechts geregistreerd/vastgelegd
     """
 
-    order_in_steekproef = Referentiedata(
+    order_in_steekproef = OnderhoudsorderstatusReferentiedata(
         code="STE",
         naam="Order in steekproef",
     )
@@ -83,7 +86,7 @@ class Onderhoudsorderstatus(Enum):
     worden beoordeeld door de corporatie
     """
 
-    technisch_gereed = Referentiedata(
+    technisch_gereed = OnderhoudsorderstatusReferentiedata(
         code="TEC",
         naam="Technisch gereed",
     )
@@ -91,24 +94,10 @@ class Onderhoudsorderstatus(Enum):
     De order is technisch gereed en de uitvoering kan inhoudelijk beoordeeld worden
     """
 
-    wacht_op_goedkeuring = Referentiedata(
+    wacht_op_goedkeuring = OnderhoudsorderstatusReferentiedata(
         code="WOG",
         naam="Wacht op goedkeuring",
     )
     """
     Order wordt voordat deze gegund kan worden intern eerst beoordeeld.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

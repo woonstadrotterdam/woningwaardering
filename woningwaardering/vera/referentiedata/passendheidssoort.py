@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Passendheidssoort(Enum):
-    niet_passend = Referentiedata(
+class PassendheidssoortReferentiedata(Referentiedata):
+    pass
+
+
+class Passendheidssoort(Referentiedatasoort):
+    niet_passend = PassendheidssoortReferentiedata(
         code="NIE",
         naam="Niet passend",
     )
@@ -14,7 +17,7 @@ class Passendheidssoort(Enum):
     verantwoorden kan passendheiddetailsoort worden gebruikt.
     """
 
-    passendheidtoets_niet_van_toepassing = Referentiedata(
+    passendheidtoets_niet_van_toepassing = PassendheidssoortReferentiedata(
         code="NVT",
         naam="Passendheidtoets niet van toepassing",
     )
@@ -23,7 +26,7 @@ class Passendheidssoort(Enum):
     bijvoorbeeld omdat de woning niet tot de betaalbare woningvoorraad behoort
     """
 
-    passend = Referentiedata(
+    passend = PassendheidssoortReferentiedata(
         code="PAS",
         naam="Passend",
     )
@@ -31,17 +34,3 @@ class Passendheidssoort(Enum):
     De toewijzing is passend volgens de Woningwet (toewijzen betaalbare woning aan
     huishoudens met huurtoeslag)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

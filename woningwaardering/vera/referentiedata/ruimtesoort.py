@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Ruimtesoort(Enum):
-    buitenruimte = Referentiedata(
+class RuimtesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Ruimtesoort(Referentiedatasoort):
+    buitenruimte = RuimtesoortReferentiedata(
         code="BTR",
         naam="Buitenruimte",
     )
@@ -13,7 +16,7 @@ class Ruimtesoort(Enum):
     buitenruimte wordt gezien. Nader te specificeren met ruimtedetailsoort.
     """
 
-    gemeenschappelijke_ruimten_en_voorzieningen = Referentiedata(
+    gemeenschappelijke_ruimten_en_voorzieningen = RuimtesoortReferentiedata(
         code="GEM",
         naam="Gemeenschappelijke ruimten en voorzieningen",
     )
@@ -22,7 +25,7 @@ class Ruimtesoort(Enum):
     woningwaardering als gemeenschappelijke ruimte of voorziening wordt gezien
     """
 
-    overige_ruimten = Referentiedata(
+    overige_ruimten = RuimtesoortReferentiedata(
         code="OVR",
         naam="Overige ruimten",
     )
@@ -31,7 +34,7 @@ class Ruimtesoort(Enum):
     de woningwaardering. Nader te specificeren met ruimtedetailsoort.
     """
 
-    vertrek = Referentiedata(
+    vertrek = RuimtesoortReferentiedata(
         code="VTK",
         naam="Vertrek",
     )
@@ -40,7 +43,7 @@ class Ruimtesoort(Enum):
     (Beleidsboek waarderingsstelsel zelfstandige woonruimte)
     """
 
-    verkeersruimte = Referentiedata(
+    verkeersruimte = RuimtesoortReferentiedata(
         code="VRK",
         naam="Verkeersruimte",
     )
@@ -49,7 +52,7 @@ class Ruimtesoort(Enum):
     vertrekken.
     """
 
-    parkeergelegenheid = Referentiedata(
+    parkeergelegenheid = RuimtesoortReferentiedata(
         code="PAR",
         naam="Parkeergelegenheid",
     )
@@ -62,17 +65,3 @@ class Ruimtesoort(Enum):
     parkeerinfrastructuur die zijn ontworpen om voertuigen tijdelijk of langdurig te
     stallen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

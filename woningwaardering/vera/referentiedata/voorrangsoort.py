@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Voorrangsoort(Enum):
-    binding = Referentiedata(
+class VoorrangsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Voorrangsoort(Referentiedatasoort):
+    binding = VoorrangsoortReferentiedata(
         code="BIN",
         naam="Binding",
     )
@@ -14,7 +17,7 @@ class Voorrangsoort(Enum):
     werken, lokaal voor mensen die in de gemeente wonen.
     """
 
-    groep = Referentiedata(
+    groep = VoorrangsoortReferentiedata(
         code="GRO",
         naam="Groep",
     )
@@ -23,7 +26,7 @@ class Voorrangsoort(Enum):
     binding, urgentie of indicatie van toepassing is.
     """
 
-    indicatie = Referentiedata(
+    indicatie = VoorrangsoortReferentiedata(
         code="IND",
         naam="Indicatie",
     )
@@ -31,24 +34,10 @@ class Voorrangsoort(Enum):
     Er is voorrang voor woningzoekenden met een (medische) indicatie.
     """
 
-    urgentie = Referentiedata(
+    urgentie = VoorrangsoortReferentiedata(
         code="URG",
         naam="Urgentie",
     )
     """
     Er is voorrang voor woningzoekenden met een urgentie.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Betalingsregelingstatus(Enum):
-    aangevraagd = Referentiedata(
+class BetalingsregelingstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Betalingsregelingstatus(Referentiedatasoort):
+    aangevraagd = BetalingsregelingstatusReferentiedata(
         code="AAN",
         naam="Aangevraagd",
     )
@@ -12,7 +15,7 @@ class Betalingsregelingstatus(Enum):
     Ook wel aangemaakt.
     """
 
-    actief = Referentiedata(
+    actief = BetalingsregelingstatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
@@ -20,7 +23,7 @@ class Betalingsregelingstatus(Enum):
     Toegekende betalingsregeling die loopt.
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = BetalingsregelingstatusReferentiedata(
         code="ANN",
         naam="Geannuleerd",
     )
@@ -28,7 +31,7 @@ class Betalingsregelingstatus(Enum):
     Tussentijds gestopte regeling.
     """
 
-    beeindigd = Referentiedata(
+    beeindigd = BetalingsregelingstatusReferentiedata(
         code="BEE",
         naam="Beëindigd",
     )
@@ -36,7 +39,7 @@ class Betalingsregelingstatus(Enum):
     Ook wel afgerond. Alle betalingsverplichtingen zijn voldaan.
     """
 
-    bevroren = Referentiedata(
+    bevroren = BetalingsregelingstatusReferentiedata(
         code="BEV",
         naam="Bevroren",
     )
@@ -44,17 +47,3 @@ class Betalingsregelingstatus(Enum):
     Tussentijds bevroren betalingsregeling omdat het niet mogelijk is om te voldoen aan
     de regeling.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

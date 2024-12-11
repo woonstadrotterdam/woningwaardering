@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Woonsituatiesoort(Enum):
-    doorstromer = Referentiedata(
+class WoonsituatiesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Woonsituatiesoort(Referentiedatasoort):
+    doorstromer = WoonsituatiesoortReferentiedata(
         code="DOO",
         naam="Doorstromer",
     )
@@ -12,7 +15,7 @@ class Woonsituatiesoort(Enum):
     Een doorstromer is een woningzoekende die een zelfstandige woning achterlaat.
     """
 
-    starter = Referentiedata(
+    starter = WoonsituatiesoortReferentiedata(
         code="STA",
         naam="Starter",
     )
@@ -20,17 +23,3 @@ class Woonsituatiesoort(Enum):
     Een woningzoekende die geen zelfstandige woning achterlaat. Bijvoorbeeld omdat deze
     nog thuis of in een onzelfstandige woning woont, of dat men gaat scheiden.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

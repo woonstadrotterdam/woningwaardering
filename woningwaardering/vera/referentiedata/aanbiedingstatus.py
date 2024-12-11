@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Aanbiedingstatus(Enum):
-    aangeboden = Referentiedata(
+class AanbiedingstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Aanbiedingstatus(Referentiedatasoort):
+    aangeboden = AanbiedingstatusReferentiedata(
         code="AAN",
         naam="Aangeboden",
     )
@@ -12,7 +15,7 @@ class Aanbiedingstatus(Enum):
     Er is aanbieding gedaan aan een of meer kandidaten.
     """
 
-    geweigerd = Referentiedata(
+    geweigerd = AanbiedingstatusReferentiedata(
         code="GEW",
         naam="Geweigerd",
     )
@@ -20,7 +23,7 @@ class Aanbiedingstatus(Enum):
     Een kandidaat heeft een verstrekte aanbieding afgewezen.
     """
 
-    ingetrokken = Referentiedata(
+    ingetrokken = AanbiedingstatusReferentiedata(
         code="ING",
         naam="Ingetrokken",
     )
@@ -28,24 +31,10 @@ class Aanbiedingstatus(Enum):
     Een aan een kandidaat verstrekte aanbieding is ingetrokken.
     """
 
-    toegewezen = Referentiedata(
+    toegewezen = AanbiedingstatusReferentiedata(
         code="TOE",
         naam="Toegewezen",
     )
     """
     Een eenheid is toegewezen aan een kandidaat.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eindereden(Enum):
-    ontbinding = Referentiedata(
+class EinderedenReferentiedata(Referentiedata):
+    pass
+
+
+class Eindereden(Referentiedatasoort):
+    ontbinding = EinderedenReferentiedata(
         code="ONT",
         naam="Ontbinding",
     )
@@ -13,7 +16,7 @@ class Eindereden(Enum):
     de overeenkomst niet nakomt.
     """
 
-    opzegging = Referentiedata(
+    opzegging = EinderedenReferentiedata(
         code="OPZ",
         naam="Opzegging",
     )
@@ -23,7 +26,7 @@ class Eindereden(Enum):
     of een arbeidsovereenkomst.
     """
 
-    vernietiging = Referentiedata(
+    vernietiging = EinderedenReferentiedata(
         code="VER",
         naam="Vernietiging",
     )
@@ -32,17 +35,3 @@ class Eindereden(Enum):
     sprake is van een zogenaamd wilsgebrek (bedreiging, bedrog, dwaling, misbruik
     van omstandigheden)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

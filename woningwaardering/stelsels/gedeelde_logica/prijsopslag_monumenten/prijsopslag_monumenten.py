@@ -10,15 +10,16 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
+    Eenheidmonument,
     Woningwaarderingstelselgroep,
+    WoningwaarderingstelselgroepReferentiedata,
 )
-from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
 
 
 def opslag_rijksmonument(
     peildatum: date,
     eenheid: EenhedenEenheid,
-    stelselgroep: Woningwaarderingstelselgroep,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Bepaalt de prijsopslag of puntentoeslag voor een rijksmonument.
 
@@ -30,15 +31,12 @@ def opslag_rijksmonument(
     Args:
         peildatum (date): De datum waarop de waardering wordt uitgevoerd
         eenheid (EenhedenEenheid): De te waarderen eenheid
-        stelselgroep (Woningwaarderingstelselgroep): De stelselgroep waarvoor de prijsopslag wordt berekend
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
 
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag of puntentoeslag, of None als de eenheid geen rijksmonument is
     """
-    if any(
-        monument.code == Eenheidmonument.rijksmonument.code
-        for monument in eenheid.monumenten or []
-    ):
+    if Eenheidmonument.rijksmonument in (eenheid.monumenten or []):
         datum_afsluiten_huurovereenkomst = eenheid.datum_afsluiten_huurovereenkomst
         if datum_afsluiten_huurovereenkomst is None:
             warnings.warn(
@@ -84,7 +82,7 @@ def opslag_rijksmonument(
 
 
 def opslag_gemeentelijk_of_provinciaal_monument(
-    eenheid: EenhedenEenheid, stelselgroep: Woningwaarderingstelselgroep
+    eenheid: EenhedenEenheid, stelselgroep: WoningwaarderingstelselgroepReferentiedata
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Bepaalt de prijsopslag voor een gemeentelijk of provinciaal monument.
 
@@ -92,17 +90,17 @@ def opslag_gemeentelijk_of_provinciaal_monument(
 
     Args:
         eenheid (EenhedenEenheid): De te waarderen eenheid
-        stelselgroep (Woningwaarderingstelselgroep): De stelselgroep waarvoor de prijsopslag wordt berekend
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
 
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als de eenheid geen gemeentelijk of provinciaal monument is
     """
     if any(
-        monument.code
-        in [
-            Eenheidmonument.gemeentelijk_monument.code,
-            Eenheidmonument.provinciaal_monument.code,
-        ]
+        monument
+        in (
+            Eenheidmonument.gemeentelijk_monument,
+            Eenheidmonument.provinciaal_monument,
+        )
         for monument in eenheid.monumenten or []
     ):
         logger.info(
@@ -122,7 +120,7 @@ def opslag_gemeentelijk_of_provinciaal_monument(
 
 
 def opslag_beschermd_stads_of_dorpsgezicht(
-    eenheid: EenhedenEenheid, stelselgroep: Woningwaarderingstelselgroep
+    eenheid: EenhedenEenheid, stelselgroep: WoningwaarderingstelselgroepReferentiedata
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Bepaalt de prijsopslag voor een beschermd stads- of dorpsgezicht.
 
@@ -133,29 +131,29 @@ def opslag_beschermd_stads_of_dorpsgezicht(
 
     Args:
         eenheid (EenhedenEenheid): De te waarderen eenheid
-        stelselgroep (Woningwaarderingstelselgroep): De stelselgroep waarvoor de prijsopslag wordt berekend
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
 
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
     """
     if any(
-        monument.code
-        in [
-            Eenheidmonument.beschermd_dorpsgezicht.code,
-            Eenheidmonument.beschermd_stadsgezicht.code,
-        ]
+        monument
+        in (
+            Eenheidmonument.beschermd_dorpsgezicht,
+            Eenheidmonument.beschermd_stadsgezicht,
+        )
         for monument in eenheid.monumenten or []
     ):
         logger.info(
             f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht."
         )
         if not any(
-            monument.code
-            in [
-                Eenheidmonument.rijksmonument.code,
-                Eenheidmonument.gemeentelijk_monument.code,
-                Eenheidmonument.provinciaal_monument.code,
-            ]
+            monument
+            in (
+                Eenheidmonument.rijksmonument,
+                Eenheidmonument.gemeentelijk_monument,
+                Eenheidmonument.provinciaal_monument,
+            )
             for monument in eenheid.monumenten or []
         ):
             if eenheid.bouwjaar is None:

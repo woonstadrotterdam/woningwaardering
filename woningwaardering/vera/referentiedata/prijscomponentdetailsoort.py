@@ -1,53 +1,58 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.prijscomponentsoort import Prijscomponentsoort
+from woningwaardering.vera.referentiedata.prijscomponentsoort import (
+    Prijscomponentsoort,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Prijscomponentdetailsoort(Enum):
-    administratiekosten = Referentiedata(
+class PrijscomponentdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Prijscomponentdetailsoort(Referentiedatasoort):
+    administratiekosten = PrijscomponentdetailsoortReferentiedata(
         code="AKO",
         naam="Administratiekosten",
-        parent=Prijscomponentsoort.eenmalig.value,
+        parent=Prijscomponentsoort.eenmalig,
     )
 
-    alarm_bewaking = Referentiedata(
+    alarm_bewaking = PrijscomponentdetailsoortReferentiedata(
         code="ALA",
         naam="Alarm bewaking",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het alarm en de bewaking van de woning
     """
 
-    servicekosten_bedrijfsruimten = Referentiedata(
+    servicekosten_bedrijfsruimten = PrijscomponentdetailsoortReferentiedata(
         code="BED",
         naam="Servicekosten bedrijfsruimten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor services m.b.t. bedrijfsruimten
     """
 
-    beheerders = Referentiedata(
+    beheerders = PrijscomponentdetailsoortReferentiedata(
         code="BEH",
         naam="Beheerder(s)",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor de beheerder(s) van de eenheid en/of het complex
     """
 
-    borg = Referentiedata(
+    borg = PrijscomponentdetailsoortReferentiedata(
         code="BOR",
         naam="Borg",
-        parent=Prijscomponentsoort.eenmalig.value,
+        parent=Prijscomponentsoort.eenmalig,
     )
 
-    dienst_en_recreatieruimten = Referentiedata(
+    dienst_en_recreatieruimten = PrijscomponentdetailsoortReferentiedata(
         code="DIE",
         naam="Dienst- en recreatieruimten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     De maandelijkse kosten voor reparaties en groot onderhoud aan dienstruimten en
@@ -56,35 +61,35 @@ class Prijscomponentdetailsoort(Enum):
     ruimten of onderhoud aan de tuin.
     """
 
-    electriciteit = Referentiedata(
+    electriciteit = PrijscomponentdetailsoortReferentiedata(
         code="ELE",
         naam="Electriciteit",
-        parent=Prijscomponentsoort.verbruik.value,
+        parent=Prijscomponentsoort.verbruik,
     )
 
-    elektrische_installaties = Referentiedata(
+    elektrische_installaties = PrijscomponentdetailsoortReferentiedata(
         code="ELI",
         naam="Elektrische installaties",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van elektrische installaties
     """
 
-    elektra_oplaadpunt = Referentiedata(
+    elektra_oplaadpunt = PrijscomponentdetailsoortReferentiedata(
         code="ELO",
         naam="Elektra oplaadpunt",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van een oplaadpunt voor andere elektrische
     apparaten dan een elektrische auto (b.v. scootmobiel)
     """
 
-    energie_voor_gemeenschappelijke_ruimten = Referentiedata(
+    energie_voor_gemeenschappelijke_ruimten = PrijscomponentdetailsoortReferentiedata(
         code="ENE",
         naam="Energie voor gemeenschappelijke ruimten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Dit zijn bijvoorbeeld de maandelijkse kosten voor elektriciteit voor bijvoorbeeld:
@@ -92,154 +97,154 @@ class Prijscomponentdetailsoort(Enum):
     ruimten.
     """
 
-    energieprestatievergoeding = Referentiedata(
+    energieprestatievergoeding = PrijscomponentdetailsoortReferentiedata(
         code="EPV",
         naam="Energieprestatievergoeding",
-        parent=Prijscomponentsoort.verbruik.value,
+        parent=Prijscomponentsoort.verbruik,
     )
     """
     Een vergoeding die verhuurder aan huurder mag vragen voor een huurwoning die zelf
     energie opwekt
     """
 
-    gas = Referentiedata(
+    gas = PrijscomponentdetailsoortReferentiedata(
         code="GAS",
         naam="Gas",
-        parent=Prijscomponentsoort.verbruik.value,
+        parent=Prijscomponentsoort.verbruik,
     )
 
-    reparatie_gem_ruimten = Referentiedata(
+    reparatie_gem_ruimten = PrijscomponentdetailsoortReferentiedata(
         code="GEM",
         naam="Reparatie gem. ruimten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het repareren van defecten aan gemeenschappelijke ruimten
     """
 
-    gladheidsbestrijding = Referentiedata(
+    gladheidsbestrijding = PrijscomponentdetailsoortReferentiedata(
         code="GHB",
         naam="Gladheidsbestrijding",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het bestrijden van gladheid rondom de eenheid
     """
 
-    glasbewassing = Referentiedata(
+    glasbewassing = PrijscomponentdetailsoortReferentiedata(
         code="GLB",
         naam="Glasbewassing",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het wassen van glas van ramen en deuren van de eenheid
     """
 
-    glasfonds = Referentiedata(
+    glasfonds = PrijscomponentdetailsoortReferentiedata(
         code="GLF",
         naam="Glasfonds",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor de voorziening voor repareren van glasschade
     """
 
-    groenvoorziening = Referentiedata(
+    groenvoorziening = PrijscomponentdetailsoortReferentiedata(
         code="GRO",
         naam="Groenvoorziening",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het onderhouden van de groenvoorziening rondom de eenheid
     """
 
-    huismeester = Referentiedata(
+    huismeester = PrijscomponentdetailsoortReferentiedata(
         code="HUI",
         naam="Huismeester",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     De maandelijkse kosten voor de diensten die de huismeester, flatwacht, wijkbeheerder
     of conciërge levert.
     """
 
-    huisvuil = Referentiedata(
+    huisvuil = PrijscomponentdetailsoortReferentiedata(
         code="HUV",
         naam="Huisvuil",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het verwerken van huisvuil
     """
 
-    individuele_garage = Referentiedata(
+    individuele_garage = PrijscomponentdetailsoortReferentiedata(
         code="IGA",
         naam="Individuele garage",
-        parent=Prijscomponentsoort.parkeren.value,
+        parent=Prijscomponentsoort.parkeren,
     )
     """
     Inpandige parkeerplek individueel
     """
 
-    installaties = Referentiedata(
+    installaties = PrijscomponentdetailsoortReferentiedata(
         code="INS",
         naam="Installaties",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van andere installaties dan elektrische
     installaties
     """
 
-    inventaris = Referentiedata(
+    inventaris = PrijscomponentdetailsoortReferentiedata(
         code="INV",
         naam="Inventaris",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van inventaris
     """
 
-    kale_huur = Referentiedata(
+    kale_huur = PrijscomponentdetailsoortReferentiedata(
         code="KAL",
         naam="Kale huur",
-        parent=Prijscomponentsoort.netto_huur.value,
+        parent=Prijscomponentsoort.netto_huur,
     )
     """
     Basisbedrag voor het gebruik van de woning
     """
 
-    laadpaal = Referentiedata(
+    laadpaal = PrijscomponentdetailsoortReferentiedata(
         code="LAA",
         naam="Laadpaal",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van een laadpaal voor elektrische auto
     """
 
-    liftkosten = Referentiedata(
+    liftkosten = PrijscomponentdetailsoortReferentiedata(
         code="LIF",
         naam="Liftkosten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van de lift(en)
     """
 
-    linnenpakket = Referentiedata(
+    linnenpakket = PrijscomponentdetailsoortReferentiedata(
         code="LIN",
         naam="Linnenpakket",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van linnen
     """
 
-    matiging_huurtoeslag = Referentiedata(
+    matiging_huurtoeslag = PrijscomponentdetailsoortReferentiedata(
         code="MAT",
         naam="Matiging huurtoeslag",
-        parent=Prijscomponentsoort.huuraanpassing.value,
+        parent=Prijscomponentsoort.huuraanpassing,
     )
     """
     Component voor het matigen van de huurprijs op basis van toegekende huurtoeslag
@@ -247,25 +252,25 @@ class Prijscomponentdetailsoort(Enum):
     voor het uitwisselen van historische data
     """
 
-    mechanische_ventilatie = Referentiedata(
+    mechanische_ventilatie = PrijscomponentdetailsoortReferentiedata(
         code="MVE",
         naam="Mechanische ventilatie",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van de mechanische ventilatie
     """
 
-    overnamekosten = Referentiedata(
+    overnamekosten = PrijscomponentdetailsoortReferentiedata(
         code="OKO",
         naam="Overnamekosten",
-        parent=Prijscomponentsoort.eenmalig.value,
+        parent=Prijscomponentsoort.eenmalig,
     )
 
-    onderhoudsabonnement = Referentiedata(
+    onderhoudsabonnement = PrijscomponentdetailsoortReferentiedata(
         code="OND",
         naam="Onderhoudsabonnement",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor onderhoudsabonnement. De huurder is zelf verantwoordelijk
@@ -273,10 +278,10 @@ class Prijscomponentdetailsoort(Enum):
     afsluit, dan regelt de corporatie het klein onderhoud voor de huurder.
     """
 
-    overige_netto_huur_component = Referentiedata(
+    overige_netto_huur_component = PrijscomponentdetailsoortReferentiedata(
         code="ONH",
         naam="Overige netto huur component",
-        parent=Prijscomponentsoort.netto_huur.value,
+        parent=Prijscomponentsoort.netto_huur,
     )
     """
     Een overige netto huur component wordt bijvoorbeeld gebruikt om de extra huur na het
@@ -284,188 +289,174 @@ class Prijscomponentdetailsoort(Enum):
     kale huur.
     """
 
-    overige_kosten_gem_ruimten = Referentiedata(
+    overige_kosten_gem_ruimten = PrijscomponentdetailsoortReferentiedata(
         code="OVE",
         naam="Overige kosten gem. ruimten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor overige kosten voor gemeenschappelijke ruimten (naast
     schoonmaak, energie en reparatie)
     """
 
-    parkeerplaats_buiten = Referentiedata(
+    parkeerplaats_buiten = PrijscomponentdetailsoortReferentiedata(
         code="PBU",
         naam="Parkeerplaats buiten",
-        parent=Prijscomponentsoort.parkeren.value,
+        parent=Prijscomponentsoort.parkeren,
     )
     """
     Uitpandige parkeerplek
     """
 
-    parkeergarage = Referentiedata(
+    parkeergarage = PrijscomponentdetailsoortReferentiedata(
         code="PGA",
         naam="Parkeergarage",
-        parent=Prijscomponentsoort.parkeren.value,
+        parent=Prijscomponentsoort.parkeren,
     )
     """
     Inpandige parkeerplek collectief
     """
 
-    rioolfonds = Referentiedata(
+    rioolfonds = PrijscomponentdetailsoortReferentiedata(
         code="RIO",
         naam="Rioolfonds",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor de voorziening voor het repareren van problemen aan het
     riool
     """
 
-    schoonmaak_eenheid = Referentiedata(
+    schoonmaak_eenheid = PrijscomponentdetailsoortReferentiedata(
         code="SCE",
         naam="Schoonmaak eenheid",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor schoonmaak van de eenheid
     """
 
-    schoonmaak_van_gemeenschappelijke_ruimten = Referentiedata(
+    schoonmaak_van_gemeenschappelijke_ruimten = PrijscomponentdetailsoortReferentiedata(
         code="SCH",
         naam="Schoonmaak van gemeenschappelijke ruimten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     De maandelijkse schoonmaakkosten voor de lift en andere gemeenschappelijke ruimten,
     zoals een galerij, trappenhuis of recreatieruimte
     """
 
-    signaallevering_o_a_cai = Referentiedata(
+    signaallevering_o_a_cai = PrijscomponentdetailsoortReferentiedata(
         code="SIG",
         naam="Signaallevering (o.a. CAI)",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor signaallevering (o.a. CAI)
     """
 
-    schoorsteenvegen = Referentiedata(
+    schoorsteenvegen = PrijscomponentdetailsoortReferentiedata(
         code="STV",
         naam="Schoorsteenvegen",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het vegen van de schoorsteen
     """
 
-    verenigingskosten = Referentiedata(
+    verenigingskosten = PrijscomponentdetailsoortReferentiedata(
         code="VER",
         naam="Verenigingskosten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor lidmaatschap van  verenigingen
     """
 
-    volkstuin = Referentiedata(
+    volkstuin = PrijscomponentdetailsoortReferentiedata(
         code="VOL",
         naam="Volkstuin",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van een volkstuin
     """
 
-    vve_kosten = Referentiedata(
+    vve_kosten = PrijscomponentdetailsoortReferentiedata(
         code="VVE",
         naam="VVE kosten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor VVE-lidmaatschap
     """
 
-    verzekeringskosten = Referentiedata(
+    verzekeringskosten = PrijscomponentdetailsoortReferentiedata(
         code="VZE",
         naam="Verzekeringskosten",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor verzekeringen
     """
 
-    warmte_installaties = Referentiedata(
+    warmte_installaties = PrijscomponentdetailsoortReferentiedata(
         code="WAI",
         naam="Warmte-installaties",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van installaties voor verwarming van de
     vertrekken van de eenheid
     """
 
-    warmte = Referentiedata(
+    warmte = PrijscomponentdetailsoortReferentiedata(
         code="WAR",
         naam="Warmte",
-        parent=Prijscomponentsoort.verbruik.value,
+        parent=Prijscomponentsoort.verbruik,
     )
     """
     Centrale verwarming, Stadsverwarming, etc.
     """
 
-    water = Referentiedata(
+    water = PrijscomponentdetailsoortReferentiedata(
         code="WAT",
         naam="Water",
-        parent=Prijscomponentsoort.verbruik.value,
+        parent=Prijscomponentsoort.verbruik,
     )
 
-    witgoed = Referentiedata(
+    witgoed = PrijscomponentdetailsoortReferentiedata(
         code="WIT",
         naam="Witgoed",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van witgoed (bijvoorbeeld wasmachine of droger)
     """
 
-    warmwaterinstallaties = Referentiedata(
+    warmwaterinstallaties = PrijscomponentdetailsoortReferentiedata(
         code="WWI",
         naam="Warmwaterinstallaties",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van installaties voor warm water
     """
 
-    zonnepanelen = Referentiedata(
+    zonnepanelen = PrijscomponentdetailsoortReferentiedata(
         code="ZON",
         naam="Zonnepanelen",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van zonnepanelen
     """
 
-    zonwering = Referentiedata(
+    zonwering = PrijscomponentdetailsoortReferentiedata(
         code="ZWE",
         naam="Zonwering",
-        parent=Prijscomponentsoort.service.value,
+        parent=Prijscomponentsoort.service,
     )
     """
     Maandelijkse kosten voor het gebruik van zonwering
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

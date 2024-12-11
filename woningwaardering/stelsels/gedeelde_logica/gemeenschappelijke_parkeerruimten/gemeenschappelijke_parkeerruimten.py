@@ -7,22 +7,21 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
+    Ruimtedetailsoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
-    Bouwkundigelementdetailsoort,
-)
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
-parkeertype_punten_mapping = {
-    Ruimtedetailsoort.parkeervak_auto_binnen.code: {"Type I": Decimal("9.0")},
-    Ruimtedetailsoort.carport.code: {"Type II": Decimal("6.0")},
-    Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code: {
+parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
+    Ruimtedetailsoort.parkeervak_auto_binnen: {"Type I": Decimal("9.0")},
+    Ruimtedetailsoort.carport: {"Type II": Decimal("6.0")},
+    Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt: {
         "Type III": Decimal("4.0")
     },
 }
@@ -58,38 +57,33 @@ def waardeer_gemeenschappelijke_parkeerruimte(
     if ruimte.detail_soort is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort")
         return
-    if ruimte.detail_soort.code is None:
-        warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'code' in detailsoort"
-        )
-        return
 
-    if ruimte.detail_soort.code in [
-        Ruimtedetailsoort.parkeervak_motorfiets_binnen.code,
-        Ruimtedetailsoort.parkeervak_scootmobiel_binnen.code,
-        Ruimtedetailsoort.stalling_extern.code,
-        Ruimtedetailsoort.stalling_intern.code,
-        Ruimtedetailsoort.parkeervak_motorfiets_buiten_niet_overdekt.code,
-        Ruimtedetailsoort.parkeervak_scootmobiel_buiten.code,
+    if ruimte.detail_soort in [
+        Ruimtedetailsoort.parkeervak_motorfiets_binnen,
+        Ruimtedetailsoort.parkeervak_scootmobiel_binnen,
+        Ruimtedetailsoort.stalling_extern,
+        Ruimtedetailsoort.stalling_intern,
+        Ruimtedetailsoort.parkeervak_motorfiets_buiten_niet_overdekt,
+        Ruimtedetailsoort.parkeervak_scootmobiel_buiten,
     ]:
         logger.debug(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) met ruimtedetailsoort {ruimte.detail_soort.code} is een parkeerplek die niet gewaardeerd wordt voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) met ruimtedetailsoort {ruimte.detail_soort} is een parkeerplek die niet gewaardeerd wordt voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
         )
         return
 
-    if ruimte.detail_soort.code in [
-        Ruimtedetailsoort.parkeerterrein.code,
-        Ruimtedetailsoort.parkeergarage.code,
+    if ruimte.detail_soort in [
+        Ruimtedetailsoort.parkeerterrein,
+        Ruimtedetailsoort.parkeergarage,
     ]:
         logger.warning(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een {Ruimtedetailsoort.parkeerterrein.naam if ruimte.detail_soort.code==Ruimtedetailsoort.parkeerterrein.code else Ruimtedetailsoort.parkeergarage.naam} en kan momenteel niet gewaardeerd worden in de woningwaardering package. Voeg een parkeerplek los toe aan de eenheden om deze in aanmerking te laten komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}. Raadpleeg docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md voor meer informatie."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een {Ruimtedetailsoort.parkeerterrein.naam if ruimte.detail_soort==Ruimtedetailsoort.parkeerterrein else Ruimtedetailsoort.parkeergarage.naam} en kan momenteel niet gewaardeerd worden in de woningwaardering package. Voeg een parkeerplek los toe aan de eenheden om deze in aanmerking te laten komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}. Raadpleeg docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md voor meer informatie."
         )
         return
 
-    if ruimte.detail_soort.code not in [
-        Ruimtedetailsoort.parkeervak_auto_binnen.code,
-        Ruimtedetailsoort.carport.code,
-        Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt.code,
+    if ruimte.detail_soort not in [
+        Ruimtedetailsoort.parkeervak_auto_binnen,
+        Ruimtedetailsoort.carport,
+        Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt,
     ]:
         return
 
@@ -112,7 +106,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
     for (
         type_parkeeruimte,
         punten,
-    ) in parkeertype_punten_mapping[ruimte.detail_soort.code].items():
+    ) in parkeertype_punten_mapping[ruimte.detail_soort].items():
         criterium = f"{type_parkeeruimte}"
 
         if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.laadpaal):

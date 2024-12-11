@@ -1,15 +1,18 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidisolatie(Enum):
-    dakisolatie = Referentiedata(
+class EenheidisolatieReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheidisolatie(Referentiedatasoort):
+    dakisolatie = EenheidisolatieReferentiedata(
         code="DAK",
         naam="Dakisolatie",
     )
 
-    normaal_dubbelglas = Referentiedata(
+    normaal_dubbelglas = EenheidisolatieReferentiedata(
         code="DGL",
         naam="Normaal dubbelglas",
     )
@@ -17,7 +20,7 @@ class Eenheidisolatie(Enum):
     Dubbel glas waarbij de spouw tussen de glasplaten is gevuld met droge lucht.
     """
 
-    hr_glas = Referentiedata(
+    hr_glas = EenheidisolatieReferentiedata(
         code="HR",
         naam="HR-glas",
     )
@@ -26,7 +29,7 @@ class Eenheidisolatie(Enum):
     droge lucht.
     """
 
-    hr1 = Referentiedata(
+    hr1 = EenheidisolatieReferentiedata(
         code="HR1",
         naam="HR+ glas",
     )
@@ -35,7 +38,7 @@ class Eenheidisolatie(Enum):
     spouw.
     """
 
-    hr2 = Referentiedata(
+    hr2 = EenheidisolatieReferentiedata(
         code="HR2",
         naam="HR++ glas",
     )
@@ -43,7 +46,7 @@ class Eenheidisolatie(Enum):
     Dit is dubbelglas heeft een spouw die gevuld is met gas, meestal argon.
     """
 
-    hr3 = Referentiedata(
+    hr3 = EenheidisolatieReferentiedata(
         code="HR3",
         naam="HR+++ glas",
     )
@@ -51,7 +54,7 @@ class Eenheidisolatie(Enum):
     Dit is driedubbel glas met twee spouwen gevuld met gas.
     """
 
-    eco_bouw = Referentiedata(
+    eco_bouw = EenheidisolatieReferentiedata(
         code="ECO",
         naam="Eco-bouw",
     )
@@ -59,12 +62,12 @@ class Eenheidisolatie(Enum):
     Ecologische, duurzame bouw
     """
 
-    gedeeltelijk_dubbel_glas = Referentiedata(
+    gedeeltelijk_dubbel_glas = EenheidisolatieReferentiedata(
         code="GDG",
         naam="Gedeeltelijk dubbel glas",
     )
 
-    toekomstklaar = Referentiedata(
+    toekomstklaar = EenheidisolatieReferentiedata(
         code="TOE",
         naam="Toekomstklaar",
     )
@@ -73,7 +76,7 @@ class Eenheidisolatie(Enum):
     derwerpen/wetten-en-regels-gebouwen/standaard-streefwaarden-woningisolatie
     """
 
-    vergaand_geisoleerd = Referentiedata(
+    vergaand_geisoleerd = EenheidisolatieReferentiedata(
         code="VER",
         naam="Vergaand geïsoleerd",
     )
@@ -83,7 +86,7 @@ class Eenheidisolatie(Enum):
     bron.
     """
 
-    gereed_voor_aansluiting_op_mt_warmtenet = Referentiedata(
+    gereed_voor_aansluiting_op_mt_warmtenet = EenheidisolatieReferentiedata(
         code="GER",
         naam="Gereed voor aansluiting op MT-warmtenet",
     )
@@ -93,31 +96,17 @@ class Eenheidisolatie(Enum):
     MT-warmtenet of een HT-net dat op termijn naar MT gaat.
     """
 
-    muurisolatie = Referentiedata(
+    muurisolatie = EenheidisolatieReferentiedata(
         code="MUU",
         naam="Muurisolatie",
     )
 
-    vloerisolatie = Referentiedata(
+    vloerisolatie = EenheidisolatieReferentiedata(
         code="VLO",
         naam="Vloerisolatie",
     )
 
-    volledig_geisoleerd = Referentiedata(
+    volledig_geisoleerd = EenheidisolatieReferentiedata(
         code="VOL",
         naam="Volledig geïsoleerd",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

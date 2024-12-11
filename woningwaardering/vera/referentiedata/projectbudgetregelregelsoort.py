@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Projectbudgetregelregelsoort(Enum):
-    kostendetailregel = Referentiedata(
+class ProjectbudgetregelregelsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Projectbudgetregelregelsoort(Referentiedatasoort):
+    kostendetailregel = ProjectbudgetregelregelsoortReferentiedata(
         code="KDT",
         naam="Kostendetailregel",
     )
@@ -12,7 +15,7 @@ class Projectbudgetregelregelsoort(Enum):
     Projectbudgetregel is een kostenregel binnen de stichtingskosten hiërarchie
     """
 
-    opbrengstendetailregel = Referentiedata(
+    opbrengstendetailregel = ProjectbudgetregelregelsoortReferentiedata(
         code="ODT",
         naam="Opbrengstendetailregel",
     )
@@ -20,7 +23,7 @@ class Projectbudgetregelregelsoort(Enum):
     Projectbudgetregel is een opbrengstenregel binnen de stichtingskosten hiërarchie
     """
 
-    subtotaalregel = Referentiedata(
+    subtotaalregel = ProjectbudgetregelregelsoortReferentiedata(
         code="STR",
         naam="Subtotaalregel",
     )
@@ -28,17 +31,3 @@ class Projectbudgetregelregelsoort(Enum):
     Projectbudgetregel is een optelling van één of meer onderliggende kosten- of
     opbrengstenregels binnen de stichtingskosten hiërarchie
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

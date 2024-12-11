@@ -1,74 +1,63 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Afwezigheidsoort(Enum):
-    adoptieverlof = Referentiedata(
+class AfwezigheidsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Afwezigheidsoort(Referentiedatasoort):
+    adoptieverlof = AfwezigheidsoortReferentiedata(
         code="ADO",
         naam="Adoptieverlof",
     )
 
-    bijzonder_verlof = Referentiedata(
+    bijzonder_verlof = AfwezigheidsoortReferentiedata(
         code="BIJ",
         naam="Bijzonder verlof",
     )
 
-    calamiteitenverlof = Referentiedata(
+    calamiteitenverlof = AfwezigheidsoortReferentiedata(
         code="CAL",
         naam="Calamiteitenverlof",
     )
 
-    geschorst = Referentiedata(
+    geschorst = AfwezigheidsoortReferentiedata(
         code="GES",
         naam="Geschorst",
     )
 
-    non_actief = Referentiedata(
+    non_actief = AfwezigheidsoortReferentiedata(
         code="NON",
         naam="Non-actief",
     )
 
-    onbetaald_verlof = Referentiedata(
+    onbetaald_verlof = AfwezigheidsoortReferentiedata(
         code="ONB",
         naam="Onbetaald verlof",
     )
 
-    ouderschapsverlof = Referentiedata(
+    ouderschapsverlof = AfwezigheidsoortReferentiedata(
         code="OUD",
         naam="Ouderschapsverlof",
     )
 
-    verlof_regulier = Referentiedata(
+    verlof_regulier = AfwezigheidsoortReferentiedata(
         code="VER",
         naam="Verlof (regulier)",
     )
 
-    ziek = Referentiedata(
+    ziek = AfwezigheidsoortReferentiedata(
         code="ZIE",
         naam="Ziek",
     )
 
-    zorgverlof = Referentiedata(
+    zorgverlof = AfwezigheidsoortReferentiedata(
         code="ZOR",
         naam="Zorgverlof",
     )
 
-    zwangerschapsverlof = Referentiedata(
+    zwangerschapsverlof = AfwezigheidsoortReferentiedata(
         code="ZWA",
         naam="Zwangerschapsverlof",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

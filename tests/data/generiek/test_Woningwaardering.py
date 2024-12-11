@@ -19,8 +19,8 @@ def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte(
     ), f"Resultaat is geen instance van WoningwaarderingResultatenWoningwaarderingResultaat, {type(resultaat) = }"
     assert resultaat.punten is not None
     assert all(
-        groepresultaat.criterium_groep.stelsel.code
-        == Woningwaarderingstelsel.onzelfstandige_woonruimten.code
+        groepresultaat.criterium_groep.stelsel
+        == Woningwaarderingstelsel.onzelfstandige_woonruimten
         for groepresultaat in resultaat.groepen
     )
 
@@ -45,8 +45,8 @@ def test_WoningwaarderingGeneriekZelfstandigeWoonruimte(
     ), f"Resultaat is geen instance van WoningwaarderingResultatenWoningwaarderingResultaat, {type(resultaat) = }"
     assert resultaat.punten is not None
     assert all(
-        groepresultaat.criterium_groep.stelsel.code
-        == Woningwaarderingstelsel.zelfstandige_woonruimten.code
+        groepresultaat.criterium_groep.stelsel
+        == Woningwaarderingstelsel.zelfstandige_woonruimten
         for groepresultaat in resultaat.groepen
     )
 

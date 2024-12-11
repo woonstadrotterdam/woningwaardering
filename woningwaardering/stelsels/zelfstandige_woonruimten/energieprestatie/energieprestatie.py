@@ -22,14 +22,13 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Energieprestatiesoort,
+    Oppervlaktesoort,
+    Pandsoort,
+    PandsoortReferentiedata,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.energieprestatiesoort import (
-    Energieprestatiesoort,
-)
-from woningwaardering.vera.referentiedata.oppervlaktesoort import Oppervlaktesoort
-from woningwaardering.vera.referentiedata.pandsoort import Pandsoort
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/zelfstandige_woonruimten/energieprestatie/lookup_tabellen"
@@ -79,7 +78,7 @@ class Energieprestatie(Stelselgroep):
         self,
         eenheid: EenhedenEenheid,
         energieprestatie: EenhedenEnergieprestatie,
-        pandsoort: Pandsoort,
+        pandsoort: PandsoortReferentiedata,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
         woningwaardering.criterium = (
@@ -100,7 +99,6 @@ class Energieprestatie(Stelselgroep):
 
         if (
             not energieprestatie.soort
-            or not energieprestatie.soort.code
             or not energieprestatie.label
             or not energieprestatie.label.naam
             or not energieprestatie.registratiedatum
@@ -109,12 +107,11 @@ class Energieprestatie(Stelselgroep):
 
         label = energieprestatie.label.naam
         woningwaardering.criterium.naam = f"{label}"
-        energieprestatie_soort = energieprestatie.soort.code
         lookup_key = "label_ei"
 
         if (
-            energieprestatie_soort
-            == Energieprestatiesoort.primair_energieverbruik_woningbouw.code
+            energieprestatie.soort
+            == Energieprestatiesoort.primair_energieverbruik_woningbouw
             and energieprestatie.registratiedatum >= datetime(2021, 1, 1).astimezone()
             and energieprestatie.registratiedatum < datetime(2024, 7, 1).astimezone()
             and self.peildatum
@@ -124,9 +121,8 @@ class Energieprestatie(Stelselgroep):
                 (
                     float(oppervlakte.waarde)
                     for oppervlakte in eenheid.oppervlakten or []
-                    if oppervlakte.soort is not None
-                    and oppervlakte.soort.code
-                    == Oppervlaktesoort.gebruiksoppervlakte_thermische_zone.code
+                    if oppervlakte.soort
+                    == Oppervlaktesoort.gebruiksoppervlakte_thermische_zone
                     and oppervlakte.waarde is not None
                 ),
                 None,
@@ -170,7 +166,7 @@ class Energieprestatie(Stelselgroep):
             lookup_key == "label_ei"
             and energieprestatie.registratiedatum >= datetime(2015, 1, 1).astimezone()
             and energieprestatie.registratiedatum < datetime(2021, 1, 1).astimezone()
-            and energieprestatie.soort.code == Energieprestatiesoort.energie_index.code
+            and energieprestatie.soort == Energieprestatiesoort.energie_index
         ):
             if energieprestatie.waarde is not None:
                 logger.info(
@@ -211,7 +207,7 @@ class Energieprestatie(Stelselgroep):
     def _bereken_punten_met_bouwjaar(
         self,
         eenheid: EenhedenEenheid,
-        pandsoort: Pandsoort,
+        pandsoort: PandsoortReferentiedata,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
         """
@@ -219,7 +215,7 @@ class Energieprestatie(Stelselgroep):
 
         Args:
             eenheid (EenhedenEenheid): Eenheid
-            pandsoort (Pandsoort): Pandsoort
+            pandsoort (PandsoortReferentiedata): Pandsoort
             woningwaardering (WoningwaarderingResultatenWoningwaardering): De waardering voor Energieprestatie tot zover.
 
         Returns:
@@ -261,8 +257,8 @@ class Energieprestatie(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -282,13 +278,12 @@ class Energieprestatie(Stelselgroep):
         pandsoort = (
             Pandsoort.meergezinswoning
             if any(
-                pand.soort == Pandsoort.meergezinswoning.value
+                pand.soort == Pandsoort.meergezinswoning
                 for pand in eenheid.panden or []
             )
             else Pandsoort.eengezinswoning
             if any(
-                pand.soort == Pandsoort.eengezinswoning.value
-                for pand in eenheid.panden or []
+                pand.soort == Pandsoort.eengezinswoning for pand in eenheid.panden or []
             )
             else None
         )

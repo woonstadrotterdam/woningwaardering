@@ -1,59 +1,48 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Ruimteligging(Enum):
-    noord = Referentiedata(
+class RuimteliggingReferentiedata(Referentiedata):
+    pass
+
+
+class Ruimteligging(Referentiedatasoort):
+    noord = RuimteliggingReferentiedata(
         code="NOO",
         naam="Noord",
     )
 
-    noordoost = Referentiedata(
+    noordoost = RuimteliggingReferentiedata(
         code="NOS",
         naam="Noordoost",
     )
 
-    noordwest = Referentiedata(
+    noordwest = RuimteliggingReferentiedata(
         code="NWE",
         naam="Noordwest",
     )
 
-    oost = Referentiedata(
+    oost = RuimteliggingReferentiedata(
         code="OOS",
         naam="Oost",
     )
 
-    west = Referentiedata(
+    west = RuimteliggingReferentiedata(
         code="WES",
         naam="West",
     )
 
-    zuidoost = Referentiedata(
+    zuidoost = RuimteliggingReferentiedata(
         code="ZOO",
         naam="Zuidoost",
     )
 
-    zuid = Referentiedata(
+    zuid = RuimteliggingReferentiedata(
         code="ZUI",
         naam="Zuid",
     )
 
-    zuidwest = Referentiedata(
+    zuidwest = RuimteliggingReferentiedata(
         code="ZWE",
         naam="Zuidwest",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

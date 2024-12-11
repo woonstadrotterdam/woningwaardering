@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Redenontbinding(Enum):
-    niet_betaald = Referentiedata(
+class RedenontbindingReferentiedata(Referentiedata):
+    pass
+
+
+class Redenontbinding(Referentiedatasoort):
+    niet_betaald = RedenontbindingReferentiedata(
         code="BET",
         naam="Niet betaald",
     )
@@ -12,7 +15,7 @@ class Redenontbinding(Enum):
     Het verschuldigde bedrag van de overeenkomst is niet voldaan.
     """
 
-    wanprestatie = Referentiedata(
+    wanprestatie = RedenontbindingReferentiedata(
         code="WAN",
         naam="Wanprestatie",
     )
@@ -20,17 +23,3 @@ class Redenontbinding(Enum):
     De overeenkomst wordt ontbonden omdat contractant tekortschiet in het nakomen van de
     afspraken.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

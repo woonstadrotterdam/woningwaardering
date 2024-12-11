@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Onderhoudspecialisme(Enum):
-    specialist_alarminstallaties = Referentiedata(
+class OnderhoudspecialismeReferentiedata(Referentiedata):
+    pass
+
+
+class Onderhoudspecialisme(Referentiedatasoort):
+    specialist_alarminstallaties = OnderhoudspecialismeReferentiedata(
         code="ALA",
         naam="Specialist Alarminstallaties",
     )
@@ -13,7 +16,7 @@ class Onderhoudspecialisme(Enum):
     alarminstallaties en andere beveiligingsystemen
     """
 
-    specialist_asbestsanering = Referentiedata(
+    specialist_asbestsanering = OnderhoudspecialismeReferentiedata(
         code="ASB",
         naam="Specialist Asbestsanering",
     )
@@ -21,7 +24,7 @@ class Onderhoudspecialisme(Enum):
     Inventarisatie en sanering van asbest
     """
 
-    specialist_bliksemgeleider = Referentiedata(
+    specialist_bliksemgeleider = OnderhoudspecialismeReferentiedata(
         code="BLI",
         naam="Specialist Bliksemgeleider",
     )
@@ -30,7 +33,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    specialist_blusmiddelen = Referentiedata(
+    specialist_blusmiddelen = OnderhoudspecialismeReferentiedata(
         code="BLU",
         naam="Specialist Blusmiddelen",
     )
@@ -39,7 +42,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    specialist_brandmeldinstallatie = Referentiedata(
+    specialist_brandmeldinstallatie = OnderhoudspecialismeReferentiedata(
         code="BRA",
         naam="Specialist Brandmeldinstallatie",
     )
@@ -48,7 +51,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    cv_installateur = Referentiedata(
+    cv_installateur = OnderhoudspecialismeReferentiedata(
         code="CVI",
         naam="CV Installateur",
     )
@@ -57,7 +60,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    dakdekker = Referentiedata(
+    dakdekker = OnderhoudspecialismeReferentiedata(
         code="DAK",
         naam="Dakdekker",
     )
@@ -68,7 +71,7 @@ class Onderhoudspecialisme(Enum):
     weersinvloeden
     """
 
-    specialist_domotica = Referentiedata(
+    specialist_domotica = OnderhoudspecialismeReferentiedata(
         code="DOM",
         naam="Specialist Domotica",
     )
@@ -76,7 +79,7 @@ class Onderhoudspecialisme(Enum):
     Specialist op het gebied van installatie en onderhoud van domotica-systemen
     """
 
-    elektricien_allrounder = Referentiedata(
+    elektricien_allrounder = OnderhoudspecialismeReferentiedata(
         code="ELA",
         naam="Elektriciën allrounder",
     )
@@ -85,7 +88,7 @@ class Onderhoudspecialisme(Enum):
     Ketenstandaard: competentiecode ELE - Electra
     """
 
-    elektricien = Referentiedata(
+    elektricien = OnderhoudspecialismeReferentiedata(
         code="ELE",
         naam="Elektriciën",
     )
@@ -93,7 +96,7 @@ class Onderhoudspecialisme(Enum):
     Een volwaardige elektriciënRelatie met Ketenstandaard: competentiecode ELE - Electra
     """
 
-    specialist_elektrische_toegangsdeuren = Referentiedata(
+    specialist_elektrische_toegangsdeuren = OnderhoudspecialismeReferentiedata(
         code="ELT",
         naam="Specialist Elektrische Toegangsdeuren",
     )
@@ -102,7 +105,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    specialist_geiser = Referentiedata(
+    specialist_geiser = OnderhoudspecialismeReferentiedata(
         code="GEI",
         naam="Specialist Geiser",
     )
@@ -111,7 +114,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    glaszetter = Referentiedata(
+    glaszetter = OnderhoudspecialismeReferentiedata(
         code="GLA",
         naam="Glaszetter",
     )
@@ -120,7 +123,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    hovenier = Referentiedata(
+    hovenier = OnderhoudspecialismeReferentiedata(
         code="HOV",
         naam="Hovenier",
     )
@@ -129,7 +132,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    specialist_hydrofoor = Referentiedata(
+    specialist_hydrofoor = OnderhoudspecialismeReferentiedata(
         code="HYD",
         naam="Specialist Hydrofoor",
     )
@@ -138,7 +141,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    inspecteur = Referentiedata(
+    inspecteur = OnderhoudspecialismeReferentiedata(
         code="INS",
         naam="Inspecteur",
     )
@@ -149,7 +152,7 @@ class Onderhoudspecialisme(Enum):
     codering voor beschikbaar
     """
 
-    specialist_lift = Referentiedata(
+    specialist_lift = OnderhoudspecialismeReferentiedata(
         code="LIF",
         naam="Specialist Lift",
     )
@@ -158,7 +161,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    loodgieter_allrounder = Referentiedata(
+    loodgieter_allrounder = OnderhoudspecialismeReferentiedata(
         code="LOA",
         naam="Loodgieter allrounder",
     )
@@ -167,7 +170,7 @@ class Onderhoudspecialisme(Enum):
     Ketenstandaard: competentiecode LOO  - Loodgieter
     """
 
-    loodgieter = Referentiedata(
+    loodgieter = OnderhoudspecialismeReferentiedata(
         code="LOO",
         naam="Loodgieter",
     )
@@ -176,7 +179,7 @@ class Onderhoudspecialisme(Enum):
     Loodgieter
     """
 
-    ongediertebestrijder = Referentiedata(
+    ongediertebestrijder = OnderhoudspecialismeReferentiedata(
         code="ONG",
         naam="Ongediertebestrijder",
     )
@@ -185,7 +188,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    ontstopper = Referentiedata(
+    ontstopper = OnderhoudspecialismeReferentiedata(
         code="ONT",
         naam="Ontstopper",
     )
@@ -194,7 +197,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    overig = Referentiedata(
+    overig = OnderhoudspecialismeReferentiedata(
         code="OVE",
         naam="Overig",
     )
@@ -202,7 +205,7 @@ class Onderhoudspecialisme(Enum):
     Overige specialismen die niet onder één van de andere onderhoudspecialismen vallen
     """
 
-    schilder = Referentiedata(
+    schilder = OnderhoudspecialismeReferentiedata(
         code="SCH",
         naam="Schilder",
     )
@@ -210,7 +213,7 @@ class Onderhoudspecialisme(Enum):
     Een volwaardige schilder
     """
 
-    schoonmaker = Referentiedata(
+    schoonmaker = OnderhoudspecialismeReferentiedata(
         code="SCM",
         naam="Schoonmaker",
     )
@@ -219,7 +222,7 @@ class Onderhoudspecialisme(Enum):
     dakgoot schoonmaken en graffiti verwijderen
     """
 
-    stucadoor = Referentiedata(
+    stucadoor = OnderhoudspecialismeReferentiedata(
         code="STU",
         naam="Stucadoor",
     )
@@ -227,7 +230,7 @@ class Onderhoudspecialisme(Enum):
     Een volwaardige stucadoor. Relatie met Ketenstandaard: competentiecode STU - Stucen
     """
 
-    timmerman_allrounder = Referentiedata(
+    timmerman_allrounder = OnderhoudspecialismeReferentiedata(
         code="TAL",
         naam="Timmerman allrounder",
     )
@@ -236,7 +239,7 @@ class Onderhoudspecialisme(Enum):
     Ketenstandaard: competentiecode TIM - Timmerman
     """
 
-    tegelzetter = Referentiedata(
+    tegelzetter = OnderhoudspecialismeReferentiedata(
         code="TEG",
         naam="Tegelzetter",
     )
@@ -245,7 +248,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    timmerman = Referentiedata(
+    timmerman = OnderhoudspecialismeReferentiedata(
         code="TIM",
         naam="Timmerman",
     )
@@ -253,7 +256,7 @@ class Onderhoudspecialisme(Enum):
     Een volwaardige timmermanRelatie met Ketenstandaard: competentiecode TIM - Timmerman
     """
 
-    specialist_vochtwering = Referentiedata(
+    specialist_vochtwering = OnderhoudspecialismeReferentiedata(
         code="VOC",
         naam="Specialist Vochtwering",
     )
@@ -261,7 +264,7 @@ class Onderhoudspecialisme(Enum):
     Specialist voor schimmel en vocht bestrijding
     """
 
-    specialist_witgoed = Referentiedata(
+    specialist_witgoed = OnderhoudspecialismeReferentiedata(
         code="WIT",
         naam="Specialist Witgoed",
     )
@@ -270,7 +273,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    specialist_mv_en_of_wtw = Referentiedata(
+    specialist_mv_en_of_wtw = OnderhoudspecialismeReferentiedata(
         code="WTW",
         naam="Specialist MV/WTW",
     )
@@ -279,7 +282,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    specialist_zonnepanelen = Referentiedata(
+    specialist_zonnepanelen = OnderhoudspecialismeReferentiedata(
         code="ZON",
         naam="Specialist Zonnepanelen",
     )
@@ -288,7 +291,7 @@ class Onderhoudspecialisme(Enum):
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
 
-    specialist_zonwering = Referentiedata(
+    specialist_zonwering = OnderhoudspecialismeReferentiedata(
         code="ZWE",
         naam="Specialist Zonwering",
     )
@@ -296,17 +299,3 @@ class Onderhoudspecialisme(Enum):
     Binnen Ketenstandaard is hier op dit moment geen specifieke codering voor,
     vooralsnog gebruik maken van competentiecode OVE - Overige
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

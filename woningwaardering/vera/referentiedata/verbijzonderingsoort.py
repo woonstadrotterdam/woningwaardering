@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Verbijzonderingsoort(Enum):
-    cluster = Referentiedata(
+class VerbijzonderingsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Verbijzonderingsoort(Referentiedatasoort):
+    cluster = VerbijzonderingsoortReferentiedata(
         code="CLS",
         naam="Cluster",
     )
@@ -13,7 +16,7 @@ class Verbijzonderingsoort(Enum):
     verbijzonderen
     """
 
-    soort_huurdebiteur = Referentiedata(
+    soort_huurdebiteur = VerbijzonderingsoortReferentiedata(
         code="DEB",
         naam="Soort huurdebiteur",
     )
@@ -22,7 +25,7 @@ class Verbijzonderingsoort(Enum):
     kunnen verbijzonderen
     """
 
-    dimensie = Referentiedata(
+    dimensie = VerbijzonderingsoortReferentiedata(
         code="DIM",
         naam="Dimensie",
     )
@@ -32,7 +35,7 @@ class Verbijzonderingsoort(Enum):
     dimensie nader te duiden (dimensiesoort)
     """
 
-    divisie = Referentiedata(
+    divisie = VerbijzonderingsoortReferentiedata(
         code="DIV",
         naam="Divisie",
     )
@@ -41,7 +44,7 @@ class Verbijzonderingsoort(Enum):
     verbijzonderen.
     """
 
-    kostenplaats = Referentiedata(
+    kostenplaats = VerbijzonderingsoortReferentiedata(
         code="KPL",
         naam="Kostenplaats",
     )
@@ -50,7 +53,7 @@ class Verbijzonderingsoort(Enum):
     verbijzonderen. Vaak is een kostenplaats een afdeling
     """
 
-    kostensoort = Referentiedata(
+    kostensoort = VerbijzonderingsoortReferentiedata(
         code="KST",
         naam="Kostensoort",
     )
@@ -59,7 +62,7 @@ class Verbijzonderingsoort(Enum):
     verbijzonderen
     """
 
-    soort_leverancier = Referentiedata(
+    soort_leverancier = VerbijzonderingsoortReferentiedata(
         code="LEV",
         naam="Soort leverancier",
     )
@@ -68,7 +71,7 @@ class Verbijzonderingsoort(Enum):
     kunnen verbijzonderen
     """
 
-    maatschappelijk_label = Referentiedata(
+    maatschappelijk_label = VerbijzonderingsoortReferentiedata(
         code="MAA",
         naam="Maatschappelijk label",
     )
@@ -77,7 +80,7 @@ class Verbijzonderingsoort(Enum):
     (DAEB/niet-DAEB) om een financieel feit nader te kunnen te kunnen verbijzonderen
     """
 
-    medewerker = Referentiedata(
+    medewerker = VerbijzonderingsoortReferentiedata(
         code="MED",
         naam="Medewerker",
     )
@@ -86,7 +89,7 @@ class Verbijzonderingsoort(Enum):
     verbijzonderen
     """
 
-    project = Referentiedata(
+    project = VerbijzonderingsoortReferentiedata(
         code="PRO",
         naam="Project",
     )
@@ -95,7 +98,7 @@ class Verbijzonderingsoort(Enum):
     verbijzonderen
     """
 
-    vastgoedeenheid = Referentiedata(
+    vastgoedeenheid = VerbijzonderingsoortReferentiedata(
         code="VGE",
         naam="Vastgoedeenheid",
     )
@@ -103,17 +106,3 @@ class Verbijzonderingsoort(Enum):
     Optionele verwijzing naar een vastgoedeenheid om een financieel feit nader te kunnen
     verbijzonderen
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

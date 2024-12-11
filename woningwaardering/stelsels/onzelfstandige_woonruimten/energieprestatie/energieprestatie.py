@@ -25,14 +25,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Energieprestatiesoort,
+    Meeteenheid,
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.energieprestatiesoort import (
-    Energieprestatiesoort,
-)
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/onzelfstandige_woonruimten/energieprestatie/lookup_tabellen"
@@ -72,8 +70,8 @@ class Energieprestatie(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -107,7 +105,7 @@ class Energieprestatie(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Energieprestatievergoeding",
-                    meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
             )
             woningwaardering.aantal = float(
@@ -172,7 +170,6 @@ class Energieprestatie(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaardering:
         if (
             not energieprestatie.soort
-            or not energieprestatie.soort.code
             or not energieprestatie.label
             or not energieprestatie.label.code
             or not energieprestatie.registratiedatum
@@ -188,7 +185,7 @@ class Energieprestatie(Stelselgroep):
         if (
             energieprestatie.registratiedatum >= datetime(2015, 1, 1).astimezone()
             and energieprestatie.registratiedatum < datetime(2021, 1, 1).astimezone()
-            and energieprestatie.soort.code == Energieprestatiesoort.energie_index.code
+            and energieprestatie.soort == Energieprestatiesoort.energie_index
         ):
             if energieprestatie.waarde is not None:
                 energie_index = float(energieprestatie.waarde)
@@ -222,7 +219,7 @@ class Energieprestatie(Stelselgroep):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
-                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
             )
         )
 
@@ -276,7 +273,7 @@ class Energieprestatie(Stelselgroep):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
-                meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
             )
         )
 

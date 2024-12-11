@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Accountstatus(Enum):
-    beeindigd = Referentiedata(
+class AccountstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Accountstatus(Referentiedatasoort):
+    beeindigd = AccountstatusReferentiedata(
         code="BEE",
         naam="Beëindigd",
     )
@@ -12,7 +15,7 @@ class Accountstatus(Enum):
     Het account is beeïndigd.
     """
 
-    geactiveerd = Referentiedata(
+    geactiveerd = AccountstatusReferentiedata(
         code="GEA",
         naam="Geactiveerd",
     )
@@ -20,7 +23,7 @@ class Accountstatus(Enum):
     Het account is geactiveerd.
     """
 
-    geblokkeerd = Referentiedata(
+    geblokkeerd = AccountstatusReferentiedata(
         code="GEB",
         naam="Geblokkeerd",
     )
@@ -29,24 +32,10 @@ class Accountstatus(Enum):
     wachtwoord.
     """
 
-    geregistreerd = Referentiedata(
+    geregistreerd = AccountstatusReferentiedata(
         code="GER",
         naam="Geregistreerd",
     )
     """
     Het account is aangevraagd.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent
