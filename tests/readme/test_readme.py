@@ -73,6 +73,7 @@ def test_readme_python_voorbeeld():
             )
         ],
         gebruiksoppervlakte=187,
+        monumenten=[],
         ruimten=[
             EenhedenRuimte(
                 id="Space_108014589",
