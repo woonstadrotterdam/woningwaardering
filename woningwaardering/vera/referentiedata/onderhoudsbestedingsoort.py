@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Onderhoudsbestedingsoort(Enum):
-    materiaal = Referentiedata(
+class OnderhoudsbestedingsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Onderhoudsbestedingsoort(Referentiedatasoort):
+    materiaal = OnderhoudsbestedingsoortReferentiedata(
         code="MAT",
         naam="Materiaal",
     )
@@ -13,7 +16,7 @@ class Onderhoudsbestedingsoort(Enum):
     verbruikte materiaal door te belasten
     """
 
-    onderbroken_tijd = Referentiedata(
+    onderbroken_tijd = OnderhoudsbestedingsoortReferentiedata(
         code="OND",
         naam="Onderbroken tijd",
     )
@@ -22,7 +25,7 @@ class Onderhoudsbestedingsoort(Enum):
     voor het ophalen van materiaal) kan deze bestedingssoort gebruikt worden.
     """
 
-    overige_kosten = Referentiedata(
+    overige_kosten = OnderhoudsbestedingsoortReferentiedata(
         code="OVE",
         naam="Overige kosten",
     )
@@ -30,7 +33,7 @@ class Onderhoudsbestedingsoort(Enum):
     Overige bestedingen die niet onder één van de andere bestedingssoorten vallen
     """
 
-    pakbonkosten = Referentiedata(
+    pakbonkosten = OnderhoudsbestedingsoortReferentiedata(
         code="PAK",
         naam="Pakbonkosten",
     )
@@ -38,7 +41,7 @@ class Onderhoudsbestedingsoort(Enum):
     Pakbonkosten
     """
 
-    reistijd = Referentiedata(
+    reistijd = OnderhoudsbestedingsoortReferentiedata(
         code="REI",
         naam="Reistijd",
     )
@@ -46,7 +49,7 @@ class Onderhoudsbestedingsoort(Enum):
     Reistijd van de uitvoerende
     """
 
-    uitwerktijd = Referentiedata(
+    uitwerktijd = OnderhoudsbestedingsoortReferentiedata(
         code="UIT",
         naam="Uitwerktijd",
     )
@@ -56,7 +59,7 @@ class Onderhoudsbestedingsoort(Enum):
     de uitvoerende beschikbaar is voor een vervolgtaak
     """
 
-    vaste_taakprijs = Referentiedata(
+    vaste_taakprijs = OnderhoudsbestedingsoortReferentiedata(
         code="VAS",
         naam="Vaste taakprijs",
     )
@@ -66,7 +69,7 @@ class Onderhoudsbestedingsoort(Enum):
     deze soort om de verschillende taakprijzen op te voeren.
     """
 
-    werktijd = Referentiedata(
+    werktijd = OnderhoudsbestedingsoortReferentiedata(
         code="WER",
         naam="Werktijd",
     )
@@ -74,17 +77,3 @@ class Onderhoudsbestedingsoort(Enum):
     Werktijd van de uitvoerende. Met name gebruikt bij afrekenwijze Nacalculatie om
     gewerkte uren door te belasten
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,1223 +1,1214 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.materiaalsoort import Materiaalsoort
+from woningwaardering.vera.referentiedata.materiaalsoort import (
+    Materiaalsoort,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Materiaaldetailsoort(Enum):
-    ntb = Referentiedata(
+class MateriaaldetailsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Materiaaldetailsoort(Referentiedatasoort):
+    ntb = MateriaaldetailsoortReferentiedata(
         code="NTB",
         naam="Ntb",
     )
 
-    generiek = Referentiedata(
+    generiek = MateriaaldetailsoortReferentiedata(
         code="GEN",
         naam="Generiek",
     )
 
-    gasbeton = Referentiedata(
+    gasbeton = MateriaaldetailsoortReferentiedata(
         code="GAS",
         naam="Gasbeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    bimsbeton = Referentiedata(
+    bimsbeton = MateriaaldetailsoortReferentiedata(
         code="BIM",
         naam="Bimsbeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    isolatiebeton = Referentiedata(
+    isolatiebeton = MateriaaldetailsoortReferentiedata(
         code="ISO",
         naam="Isolatiebeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    lichtbeton = Referentiedata(
+    lichtbeton = MateriaaldetailsoortReferentiedata(
         code="LIC",
         naam="Lichtbeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    slakkenbeton = Referentiedata(
+    slakkenbeton = MateriaaldetailsoortReferentiedata(
         code="SLA",
         naam="Slakkenbeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    voorgespannen = Referentiedata(
+    voorgespannen = MateriaaldetailsoortReferentiedata(
         code="VOO",
         naam="Voorgespannen",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    cellenbeton = Referentiedata(
+    cellenbeton = MateriaaldetailsoortReferentiedata(
         code="CEL",
         naam="Cellenbeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    gewapend = Referentiedata(
+    gewapend = MateriaaldetailsoortReferentiedata(
         code="GEW",
         naam="Gewapend",
     )
 
-    grindbeton = Referentiedata(
+    grindbeton = MateriaaldetailsoortReferentiedata(
         code="GBE",
         naam="Grindbeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    schuimbeton = Referentiedata(
+    schuimbeton = MateriaaldetailsoortReferentiedata(
         code="SBE",
         naam="Schuimbeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    spuitbeton = Referentiedata(
+    spuitbeton = MateriaaldetailsoortReferentiedata(
         code="SBT",
         naam="Spuitbeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    staalvezelbeton = Referentiedata(
+    staalvezelbeton = MateriaaldetailsoortReferentiedata(
         code="SVE",
         naam="Staalvezelbeton",
-        parent=Materiaalsoort.beton.value,
+        parent=Materiaalsoort.beton,
     )
 
-    asfalt = Referentiedata(
+    asfalt = MateriaaldetailsoortReferentiedata(
         code="ASF",
         naam="Asfalt",
-        parent=Materiaalsoort.bitumen.value,
+        parent=Materiaalsoort.bitumen,
     )
 
-    teer = Referentiedata(
+    teer = MateriaaldetailsoortReferentiedata(
         code="TEE",
         naam="Teer",
-        parent=Materiaalsoort.bitumen.value,
+        parent=Materiaalsoort.bitumen,
     )
 
-    asbestcement = Referentiedata(
+    asbestcement = MateriaaldetailsoortReferentiedata(
         code="ACE",
         naam="Asbestcement",
-        parent=Materiaalsoort.bitumen.value,
+        parent=Materiaalsoort.bitumen,
     )
 
-    cementstuc = Referentiedata(
+    cementstuc = MateriaaldetailsoortReferentiedata(
         code="CEM",
         naam="Cementstuc",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    grout = Referentiedata(
+    grout = MateriaaldetailsoortReferentiedata(
         code="GRO",
         naam="Grout",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    metselspecie = Referentiedata(
+    metselspecie = MateriaaldetailsoortReferentiedata(
         code="MET",
         naam="Metselspecie",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    mortel = Referentiedata(
+    mortel = MateriaaldetailsoortReferentiedata(
         code="MOR",
         naam="Mortel",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    terrazzo = Referentiedata(
+    terrazzo = MateriaaldetailsoortReferentiedata(
         code="TER",
         naam="Terrazzo",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    vezelcement = Referentiedata(
+    vezelcement = MateriaaldetailsoortReferentiedata(
         code="VEZ",
         naam="Vezelcement",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    houtvezelcement = Referentiedata(
+    houtvezelcement = MateriaaldetailsoortReferentiedata(
         code="HVC",
         naam="Houtvezelcement",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    houtwolcement = Referentiedata(
+    houtwolcement = MateriaaldetailsoortReferentiedata(
         code="HWC",
         naam="Houtwolcement",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    spuitmortel = Referentiedata(
+    spuitmortel = MateriaaldetailsoortReferentiedata(
         code="SMO",
         naam="Spuitmortel",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    zandcement = Referentiedata(
+    zandcement = MateriaaldetailsoortReferentiedata(
         code="ZCE",
         naam="Zandcement",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    zandcement_vezel = Referentiedata(
+    zandcement_vezel = MateriaaldetailsoortReferentiedata(
         code="ZCV",
         naam="Zandcement-Vezel",
-        parent=Materiaalsoort.cement.value,
+        parent=Materiaalsoort.cement,
     )
 
-    anhydriet = Referentiedata(
+    anhydriet = MateriaaldetailsoortReferentiedata(
         code="ANH",
         naam="Anhydriet",
-        parent=Materiaalsoort.gips.value,
+        parent=Materiaalsoort.gips,
     )
 
-    gipskarton = Referentiedata(
+    gipskarton = MateriaaldetailsoortReferentiedata(
         code="GIP",
         naam="Gipskarton",
-        parent=Materiaalsoort.gips.value,
+        parent=Materiaalsoort.gips,
     )
 
-    stuc = Referentiedata(
+    stuc = MateriaaldetailsoortReferentiedata(
         code="STU",
         naam="Stuc",
-        parent=Materiaalsoort.gips.value,
+        parent=Materiaalsoort.gips,
     )
 
-    spuitstuc = Referentiedata(
+    spuitstuc = MateriaaldetailsoortReferentiedata(
         code="SST",
         naam="Spuitstuc",
-        parent=Materiaalsoort.gips.value,
+        parent=Materiaalsoort.gips,
     )
 
-    cellulairglas = Referentiedata(
+    cellulairglas = MateriaaldetailsoortReferentiedata(
         code="CGL",
         naam="Cellulairglas",
-        parent=Materiaalsoort.gips.value,
+        parent=Materiaalsoort.gips,
     )
 
-    gehard = Referentiedata(
+    gehard = MateriaaldetailsoortReferentiedata(
         code="GEH",
         naam="Gehard",
-        parent=Materiaalsoort.glas.value,
+        parent=Materiaalsoort.glas,
     )
 
-    helder = Referentiedata(
+    helder = MateriaaldetailsoortReferentiedata(
         code="HEL",
         naam="Helder",
-        parent=Materiaalsoort.glas.value,
+        parent=Materiaalsoort.glas,
     )
 
-    opaal = Referentiedata(
+    opaal = MateriaaldetailsoortReferentiedata(
         code="OPA",
         naam="Opaal",
-        parent=Materiaalsoort.glas.value,
+        parent=Materiaalsoort.glas,
     )
 
-    spiegelend = Referentiedata(
+    spiegelend = MateriaaldetailsoortReferentiedata(
         code="SPI",
         naam="Spiegelend",
-        parent=Materiaalsoort.glas.value,
+        parent=Materiaalsoort.glas,
     )
 
-    kwartsglas = Referentiedata(
+    kwartsglas = MateriaaldetailsoortReferentiedata(
         code="KWA",
         naam="Kwartsglas",
-        parent=Materiaalsoort.glas.value,
+        parent=Materiaalsoort.glas,
     )
 
-    bimszand = Referentiedata(
+    bimszand = MateriaaldetailsoortReferentiedata(
         code="BZA",
         naam="Bimszand",
-        parent=Materiaalsoort.glas.value,
+        parent=Materiaalsoort.glas,
     )
 
-    grind = Referentiedata(
+    grind = MateriaaldetailsoortReferentiedata(
         code="GRI",
         naam="Grind",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    aarde = Referentiedata(
+    aarde = MateriaaldetailsoortReferentiedata(
         code="AAR",
         naam="Aarde",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    klei = Referentiedata(
+    klei = MateriaaldetailsoortReferentiedata(
         code="KLE",
         naam="Klei",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    lucht = Referentiedata(
+    lucht = MateriaaldetailsoortReferentiedata(
         code="LUC",
         naam="Lucht",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    split = Referentiedata(
+    split = MateriaaldetailsoortReferentiedata(
         code="SPL",
         naam="Split",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    turf = Referentiedata(
+    turf = MateriaaldetailsoortReferentiedata(
         code="TUR",
         naam="Turf",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    water = Referentiedata(
+    water = MateriaaldetailsoortReferentiedata(
         code="WAT",
         naam="Water",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    kalk = Referentiedata(
+    kalk = MateriaaldetailsoortReferentiedata(
         code="KAL",
         naam="Kalk",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    leem = Referentiedata(
+    leem = MateriaaldetailsoortReferentiedata(
         code="LEE",
         naam="Leem",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    silt = Referentiedata(
+    silt = MateriaaldetailsoortReferentiedata(
         code="SIL",
         naam="Silt",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    zand = Referentiedata(
+    zand = MateriaaldetailsoortReferentiedata(
         code="ZAN",
         naam="Zand",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    hardboard = Referentiedata(
+    hardboard = MateriaaldetailsoortReferentiedata(
         code="HBO",
         naam="Hardboard",
-        parent=Materiaalsoort.grondstof.value,
+        parent=Materiaalsoort.grondstof,
     )
 
-    hardhout = Referentiedata(
+    hardhout = MateriaaldetailsoortReferentiedata(
         code="HHO",
         naam="Hardhout",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    houtspaan = Referentiedata(
+    houtspaan = MateriaaldetailsoortReferentiedata(
         code="HSP",
         naam="Houtspaan",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    accoya = Referentiedata(
+    accoya = MateriaaldetailsoortReferentiedata(
         code="ACC",
         naam="Accoya",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    azobe = Referentiedata(
+    azobe = MateriaaldetailsoortReferentiedata(
         code="AZO",
         naam="Azobe",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    balsa = Referentiedata(
+    balsa = MateriaaldetailsoortReferentiedata(
         code="BAL",
         naam="Balsa",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    bangkirai = Referentiedata(
+    bangkirai = MateriaaldetailsoortReferentiedata(
         code="BAN",
         naam="Bangkirai",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    berken = Referentiedata(
+    berken = MateriaaldetailsoortReferentiedata(
         code="BER",
         naam="Berken",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    beuken = Referentiedata(
+    beuken = MateriaaldetailsoortReferentiedata(
         code="BEU",
         naam="Beuken",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    bilinga = Referentiedata(
+    bilinga = MateriaaldetailsoortReferentiedata(
         code="BIL",
         naam="Bilinga",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    board = Referentiedata(
+    board = MateriaaldetailsoortReferentiedata(
         code="BOA",
         naam="Board",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    clt = Referentiedata(
+    clt = MateriaaldetailsoortReferentiedata(
         code="CLT",
         naam="Clt",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    douglas = Referentiedata(
+    douglas = MateriaaldetailsoortReferentiedata(
         code="DOU",
         naam="Douglas",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    ebben = Referentiedata(
+    ebben = MateriaaldetailsoortReferentiedata(
         code="EBB",
         naam="Ebben",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    eiken = Referentiedata(
+    eiken = MateriaaldetailsoortReferentiedata(
         code="EIK",
         naam="Eiken",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    esdoorn = Referentiedata(
+    esdoorn = MateriaaldetailsoortReferentiedata(
         code="ESD",
         naam="Esdoorn",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    essen = Referentiedata(
+    essen = MateriaaldetailsoortReferentiedata(
         code="ESS",
         naam="Essen",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    gemodificeerd = Referentiedata(
+    gemodificeerd = MateriaaldetailsoortReferentiedata(
         code="GEM",
         naam="Gemodificeerd",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    grenen = Referentiedata(
+    grenen = MateriaaldetailsoortReferentiedata(
         code="GRE",
         naam="Grenen",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    houtvezel = Referentiedata(
+    houtvezel = MateriaaldetailsoortReferentiedata(
         code="HVE",
         naam="Houtvezel",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    houtwol = Referentiedata(
+    houtwol = MateriaaldetailsoortReferentiedata(
         code="HWO",
         naam="Houtwol",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    kersen = Referentiedata(
+    kersen = MateriaaldetailsoortReferentiedata(
         code="KER",
         naam="Kersen",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    lariks = Referentiedata(
+    lariks = MateriaaldetailsoortReferentiedata(
         code="LAR",
         naam="Lariks",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    mahonie = Referentiedata(
+    mahonie = MateriaaldetailsoortReferentiedata(
         code="MAH",
         naam="Mahonie",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    masonite = Referentiedata(
+    masonite = MateriaaldetailsoortReferentiedata(
         code="MAS",
         naam="Masonite",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    mdf = Referentiedata(
+    mdf = MateriaaldetailsoortReferentiedata(
         code="MDF",
         naam="Mdf",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    multiplex = Referentiedata(
+    multiplex = MateriaaldetailsoortReferentiedata(
         code="MUL",
         naam="Multiplex",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    noten = Referentiedata(
+    noten = MateriaaldetailsoortReferentiedata(
         code="NOT",
         naam="Noten",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    okoume = Referentiedata(
+    okoume = MateriaaldetailsoortReferentiedata(
         code="OKO",
         naam="Okoume",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    osb = Referentiedata(
+    osb = MateriaaldetailsoortReferentiedata(
         code="OSB",
         naam="Osb",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    populieren = Referentiedata(
+    populieren = MateriaaldetailsoortReferentiedata(
         code="POP",
         naam="Populieren",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    spaanplaat = Referentiedata(
+    spaanplaat = MateriaaldetailsoortReferentiedata(
         code="SPA",
         naam="Spaanplaat",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    triplex = Referentiedata(
+    triplex = MateriaaldetailsoortReferentiedata(
         code="TRI",
         naam="Triplex",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    vuren = Referentiedata(
+    vuren = MateriaaldetailsoortReferentiedata(
         code="VUR",
         naam="Vuren",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    wenge = Referentiedata(
+    wenge = MateriaaldetailsoortReferentiedata(
         code="WEN",
         naam="Wenge",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    ceder = Referentiedata(
+    ceder = MateriaaldetailsoortReferentiedata(
         code="CED",
         naam="Ceder",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    zaagsel = Referentiedata(
+    zaagsel = MateriaaldetailsoortReferentiedata(
         code="ZAA",
         naam="Zaagsel",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    meranti = Referentiedata(
+    meranti = MateriaaldetailsoortReferentiedata(
         code="MER",
         naam="Meranti",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    merbau = Referentiedata(
+    merbau = MateriaaldetailsoortReferentiedata(
         code="MBA",
         naam="Merbau",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    zachtboard = Referentiedata(
+    zachtboard = MateriaaldetailsoortReferentiedata(
         code="ZBO",
         naam="Zachtboard",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    zachthout = Referentiedata(
+    zachthout = MateriaaldetailsoortReferentiedata(
         code="ZHO",
         naam="Zachthout",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    geexpandeerd_perliet = Referentiedata(
+    geexpandeerd_perliet = MateriaaldetailsoortReferentiedata(
         code="GEP",
         naam="Geexpandeerd-Perliet",
-        parent=Materiaalsoort.hout.value,
+        parent=Materiaalsoort.hout,
     )
 
-    hardschuim = Referentiedata(
+    hardschuim = MateriaaldetailsoortReferentiedata(
         code="HSC",
         naam="Hardschuim",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    eps = Referentiedata(
+    eps = MateriaaldetailsoortReferentiedata(
         code="EPS",
         naam="Eps",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    fenolhars = Referentiedata(
+    fenolhars = MateriaaldetailsoortReferentiedata(
         code="FEN",
         naam="Fenolhars",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    glaswol = Referentiedata(
+    glaswol = MateriaaldetailsoortReferentiedata(
         code="GLA",
         naam="Glaswol",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    resolschuim = Referentiedata(
+    resolschuim = MateriaaldetailsoortReferentiedata(
         code="RES",
         naam="Resolschuim",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    pir = Referentiedata(
+    pir = MateriaaldetailsoortReferentiedata(
         code="PIR",
         naam="Pir",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    pur = Referentiedata(
+    pur = MateriaaldetailsoortReferentiedata(
         code="PUR",
         naam="Pur",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    mineralewol = Referentiedata(
+    mineralewol = MateriaaldetailsoortReferentiedata(
         code="MNE",
         naam="Mineralewol",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    steenwol = Referentiedata(
+    steenwol = MateriaaldetailsoortReferentiedata(
         code="STE",
         naam="Steenwol",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    xps = Referentiedata(
+    xps = MateriaaldetailsoortReferentiedata(
         code="XPS",
         naam="Xps",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    mineraal = Referentiedata(
+    mineraal = MateriaaldetailsoortReferentiedata(
         code="MIN",
         naam="Mineraal",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    siliperliet = Referentiedata(
+    siliperliet = MateriaaldetailsoortReferentiedata(
         code="SLI",
         naam="Siliperliet",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    solperlite = Referentiedata(
+    solperlite = MateriaaldetailsoortReferentiedata(
         code="SOL",
         naam="Solperlite",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    hard_kunststof = Referentiedata(
+    hard_kunststof = MateriaaldetailsoortReferentiedata(
         code="HKU",
         naam="Hard-Kunststof",
-        parent=Materiaalsoort.isolatie.value,
+        parent=Materiaalsoort.isolatie,
     )
 
-    loodvervanger = Referentiedata(
+    loodvervanger = MateriaaldetailsoortReferentiedata(
         code="LVE",
         naam="Loodvervanger",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    abs = Referentiedata(
+    abs = MateriaaldetailsoortReferentiedata(
         code="ABS",
         naam="Abs",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    aeryl = Referentiedata(
+    aeryl = MateriaaldetailsoortReferentiedata(
         code="AER",
         naam="Aeryl",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    dpc = Referentiedata(
+    dpc = MateriaaldetailsoortReferentiedata(
         code="DPC",
         naam="Dpc",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    elastomere_foam = Referentiedata(
+    elastomere_foam = MateriaaldetailsoortReferentiedata(
         code="ELA",
         naam="Elastomere-Foam",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    ep = Referentiedata(
+    ep = MateriaaldetailsoortReferentiedata(
         code="EP",
         naam="Ep",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    epoxyhars = Referentiedata(
+    epoxyhars = MateriaaldetailsoortReferentiedata(
         code="EPO",
         naam="Epoxyhars",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    hdpe = Referentiedata(
+    hdpe = MateriaaldetailsoortReferentiedata(
         code="HDP",
         naam="Hdpe",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    hmpe = Referentiedata(
+    hmpe = MateriaaldetailsoortReferentiedata(
         code="HMP",
         naam="Hmpe",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    hpl = Referentiedata(
+    hpl = MateriaaldetailsoortReferentiedata(
         code="HPL",
         naam="Hpl",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    ldpe = Referentiedata(
+    ldpe = MateriaaldetailsoortReferentiedata(
         code="LDP",
         naam="Ldpe",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    pe = Referentiedata(
+    pe = MateriaaldetailsoortReferentiedata(
         code="PE",
         naam="Pe",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    pmma = Referentiedata(
+    pmma = MateriaaldetailsoortReferentiedata(
         code="PMM",
         naam="Pmma",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    pvac = Referentiedata(
+    pvac = MateriaaldetailsoortReferentiedata(
         code="PVA",
         naam="Pvac",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    pa = Referentiedata(
+    pa = MateriaaldetailsoortReferentiedata(
         code="PA",
         naam="Pa",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    pc = Referentiedata(
+    pc = MateriaaldetailsoortReferentiedata(
         code="PC",
         naam="Pc",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    pctfe = Referentiedata(
+    pctfe = MateriaaldetailsoortReferentiedata(
         code="PCT",
         naam="Pctfe",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    plexiglas = Referentiedata(
+    plexiglas = MateriaaldetailsoortReferentiedata(
         code="PLE",
         naam="Plexiglas",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    polyesterhars = Referentiedata(
+    polyesterhars = MateriaaldetailsoortReferentiedata(
         code="PLY",
         naam="Polyesterhars",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    pp = Referentiedata(
+    pp = MateriaaldetailsoortReferentiedata(
         code="PP",
         naam="Pp",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    ps = Referentiedata(
+    ps = MateriaaldetailsoortReferentiedata(
         code="PS",
         naam="Ps",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    ptfe = Referentiedata(
+    ptfe = MateriaaldetailsoortReferentiedata(
         code="PTF",
         naam="Ptfe",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    pu = Referentiedata(
+    pu = MateriaaldetailsoortReferentiedata(
         code="PU",
         naam="Pu",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    pvc = Referentiedata(
+    pvc = MateriaaldetailsoortReferentiedata(
         code="PVC",
         naam="Pvc",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    polyester = Referentiedata(
+    polyester = MateriaaldetailsoortReferentiedata(
         code="POL",
         naam="Polyester",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    silicagel = Referentiedata(
+    silicagel = MateriaaldetailsoortReferentiedata(
         code="SLG",
         naam="Silicagel",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    siliconen = Referentiedata(
+    siliconen = MateriaaldetailsoortReferentiedata(
         code="SLC",
         naam="Siliconen",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    zacht_kunststof = Referentiedata(
+    zacht_kunststof = MateriaaldetailsoortReferentiedata(
         code="ZKU",
         naam="Zacht-Kunststof",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    lood = Referentiedata(
+    lood = MateriaaldetailsoortReferentiedata(
         code="LOO",
         naam="Lood",
-        parent=Materiaalsoort.kunststof.value,
+        parent=Materiaalsoort.kunststof,
     )
 
-    platina = Referentiedata(
+    platina = MateriaaldetailsoortReferentiedata(
         code="PLA",
         naam="Platina",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    aluminium = Referentiedata(
+    aluminium = MateriaaldetailsoortReferentiedata(
         code="ALU",
         naam="Aluminium",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    brons = Referentiedata(
+    brons = MateriaaldetailsoortReferentiedata(
         code="BRO",
         naam="Brons",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    chroom = Referentiedata(
+    chroom = MateriaaldetailsoortReferentiedata(
         code="CHR",
         naam="Chroom",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    gietijzer = Referentiedata(
+    gietijzer = MateriaaldetailsoortReferentiedata(
         code="GIE",
         naam="Gietijzer",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    goud = Referentiedata(
+    goud = MateriaaldetailsoortReferentiedata(
         code="GOU",
         naam="Goud",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    ijzer = Referentiedata(
+    ijzer = MateriaaldetailsoortReferentiedata(
         code="IJZ",
         naam="Ijzer",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    koper = Referentiedata(
+    koper = MateriaaldetailsoortReferentiedata(
         code="KOP",
         naam="Koper",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    messing = Referentiedata(
+    messing = MateriaaldetailsoortReferentiedata(
         code="MES",
         naam="Messing",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    rvs = Referentiedata(
+    rvs = MateriaaldetailsoortReferentiedata(
         code="RVS",
         naam="Rvs",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    tin = Referentiedata(
+    tin = MateriaaldetailsoortReferentiedata(
         code="TIN",
         naam="Tin",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    titanium = Referentiedata(
+    titanium = MateriaaldetailsoortReferentiedata(
         code="TIT",
         naam="Titanium",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    zilver = Referentiedata(
+    zilver = MateriaaldetailsoortReferentiedata(
         code="ZIL",
         naam="Zilver",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    zink = Referentiedata(
+    zink = MateriaaldetailsoortReferentiedata(
         code="ZIN",
         naam="Zink",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    soldeersel = Referentiedata(
+    soldeersel = MateriaaldetailsoortReferentiedata(
         code="SDE",
         naam="Soldeersel",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    staal = Referentiedata(
+    staal = MateriaaldetailsoortReferentiedata(
         code="STA",
         naam="Staal",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    asbest = Referentiedata(
+    asbest = MateriaaldetailsoortReferentiedata(
         code="ASB",
         naam="Asbest",
-        parent=Materiaalsoort.metaal.value,
+        parent=Materiaalsoort.metaal,
     )
 
-    graniet = Referentiedata(
+    graniet = MateriaaldetailsoortReferentiedata(
         code="GRA",
         naam="Graniet",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    gravel = Referentiedata(
+    gravel = MateriaaldetailsoortReferentiedata(
         code="GVE",
         naam="Gravel",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    hardsteen = Referentiedata(
+    hardsteen = MateriaaldetailsoortReferentiedata(
         code="HST",
         naam="Hardsteen",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    kwartsiet = Referentiedata(
+    kwartsiet = MateriaaldetailsoortReferentiedata(
         code="KSI",
         naam="Kwartsiet",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    poreus_gesteente = Referentiedata(
+    poreus_gesteente = MateriaaldetailsoortReferentiedata(
         code="PGE",
         naam="Poreus-Gesteente",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    basalt = Referentiedata(
+    basalt = MateriaaldetailsoortReferentiedata(
         code="BAS",
         naam="Basalt",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    gneiss = Referentiedata(
+    gneiss = MateriaaldetailsoortReferentiedata(
         code="GNE",
         naam="Gneiss",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    kristallijn_gesteente = Referentiedata(
+    kristallijn_gesteente = MateriaaldetailsoortReferentiedata(
         code="KRI",
         naam="Kristallijn-Gesteente",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    lei = Referentiedata(
+    lei = MateriaaldetailsoortReferentiedata(
         code="LEI",
         naam="Lei",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    marmer = Referentiedata(
+    marmer = MateriaaldetailsoortReferentiedata(
         code="MAR",
         naam="Marmer",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    puimsteen = Referentiedata(
+    puimsteen = MateriaaldetailsoortReferentiedata(
         code="PUI",
         naam="Puimsteen",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    sedimentgesteente = Referentiedata(
+    sedimentgesteente = MateriaaldetailsoortReferentiedata(
         code="SED",
         naam="Sedimentgesteente",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    trachiet = Referentiedata(
+    trachiet = MateriaaldetailsoortReferentiedata(
         code="TRA",
         naam="Trachiet",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    zandsteen = Referentiedata(
+    zandsteen = MateriaaldetailsoortReferentiedata(
         code="ZST",
         naam="Zandsteen",
-        parent=Materiaalsoort.natuursteen.value,
+        parent=Materiaalsoort.natuursteen,
     )
 
-    leer = Referentiedata(
+    leer = MateriaaldetailsoortReferentiedata(
         code="LER",
         naam="Leer",
-        parent=Materiaalsoort.ntb.value,
+        parent=Materiaalsoort.ntb,
     )
 
-    plantaardige_vezel = Referentiedata(
+    plantaardige_vezel = MateriaaldetailsoortReferentiedata(
         code="PTA",
         naam="Plantaardige-Vezel",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    bamboe = Referentiedata(
+    bamboe = MateriaaldetailsoortReferentiedata(
         code="BAM",
         naam="Bamboe",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    hennep = Referentiedata(
+    hennep = MateriaaldetailsoortReferentiedata(
         code="HEN",
         naam="Hennep",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    jute = Referentiedata(
+    jute = MateriaaldetailsoortReferentiedata(
         code="JUT",
         naam="Jute",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    katoen = Referentiedata(
+    katoen = MateriaaldetailsoortReferentiedata(
         code="KAT",
         naam="Katoen",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    kurk = Referentiedata(
+    kurk = MateriaaldetailsoortReferentiedata(
         code="KUR",
         naam="Kurk",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    mais = Referentiedata(
+    mais = MateriaaldetailsoortReferentiedata(
         code="MAI",
         naam="Mais",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    papier = Referentiedata(
+    papier = MateriaaldetailsoortReferentiedata(
         code="PAP",
         naam="Papier",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    riet = Referentiedata(
+    riet = MateriaaldetailsoortReferentiedata(
         code="RIE",
         naam="Riet",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    stro = Referentiedata(
+    stro = MateriaaldetailsoortReferentiedata(
         code="STR",
         naam="Stro",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    vegetatie = Referentiedata(
+    vegetatie = MateriaaldetailsoortReferentiedata(
         code="VEG",
         naam="Vegetatie",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    vilt = Referentiedata(
+    vilt = MateriaaldetailsoortReferentiedata(
         code="VIL",
         naam="Vilt",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    vlas = Referentiedata(
+    vlas = MateriaaldetailsoortReferentiedata(
         code="VLA",
         naam="Vlas",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    wol = Referentiedata(
+    wol = MateriaaldetailsoortReferentiedata(
         code="WOL",
         naam="Wol",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    hard_rubber = Referentiedata(
+    hard_rubber = MateriaaldetailsoortReferentiedata(
         code="HRU",
         naam="Hard-Rubber",
-        parent=Materiaalsoort.organisch.value,
+        parent=Materiaalsoort.organisch,
     )
 
-    polysulfide = Referentiedata(
+    polysulfide = MateriaaldetailsoortReferentiedata(
         code="PLS",
         naam="Polysulfide",
-        parent=Materiaalsoort.rubber.value,
+        parent=Materiaalsoort.rubber,
     )
 
-    schuimrubber = Referentiedata(
+    schuimrubber = MateriaaldetailsoortReferentiedata(
         code="SRU",
         naam="Schuimrubber",
-        parent=Materiaalsoort.rubber.value,
+        parent=Materiaalsoort.rubber,
     )
 
-    butyl = Referentiedata(
+    butyl = MateriaaldetailsoortReferentiedata(
         code="BUT",
         naam="Butyl",
-        parent=Materiaalsoort.rubber.value,
+        parent=Materiaalsoort.rubber,
     )
 
-    epdm = Referentiedata(
+    epdm = MateriaaldetailsoortReferentiedata(
         code="EPD",
         naam="Epdm",
-        parent=Materiaalsoort.rubber.value,
+        parent=Materiaalsoort.rubber,
     )
 
-    linoleum = Referentiedata(
+    linoleum = MateriaaldetailsoortReferentiedata(
         code="LIN",
         naam="Linoleum",
-        parent=Materiaalsoort.rubber.value,
+        parent=Materiaalsoort.rubber,
     )
 
-    natuurrubber = Referentiedata(
+    natuurrubber = MateriaaldetailsoortReferentiedata(
         code="NAT",
         naam="Natuurrubber",
-        parent=Materiaalsoort.rubber.value,
+        parent=Materiaalsoort.rubber,
     )
 
-    neopreen = Referentiedata(
+    neopreen = MateriaaldetailsoortReferentiedata(
         code="NEO",
         naam="Neopreen",
-        parent=Materiaalsoort.rubber.value,
+        parent=Materiaalsoort.rubber,
     )
 
-    tpve = Referentiedata(
+    tpve = MateriaaldetailsoortReferentiedata(
         code="TPV",
         naam="Tpve",
-        parent=Materiaalsoort.rubber.value,
+        parent=Materiaalsoort.rubber,
     )
 
-    element = Referentiedata(
+    element = MateriaaldetailsoortReferentiedata(
         code="ELE",
         naam="Element",
-        parent=Materiaalsoort.rubber.value,
+        parent=Materiaalsoort.rubber,
     )
 
-    product = Referentiedata(
+    product = MateriaaldetailsoortReferentiedata(
         code="PRO",
         naam="Product",
-        parent=Materiaalsoort.samengesteld.value,
+        parent=Materiaalsoort.samengesteld,
     )
 
-    geexpandeerde_klei = Referentiedata(
+    geexpandeerde_klei = MateriaaldetailsoortReferentiedata(
         code="GEK",
         naam="Geexpandeerde-Klei",
-        parent=Materiaalsoort.samengesteld.value,
+        parent=Materiaalsoort.samengesteld,
     )
 
-    kalksteen = Referentiedata(
+    kalksteen = MateriaaldetailsoortReferentiedata(
         code="KST",
         naam="Kalksteen",
-        parent=Materiaalsoort.steenachtig.value,
+        parent=Materiaalsoort.steenachtig,
     )
 
-    kalkzandsteen = Referentiedata(
+    kalkzandsteen = MateriaaldetailsoortReferentiedata(
         code="KZS",
         naam="Kalkzandsteen",
-        parent=Materiaalsoort.steenachtig.value,
+        parent=Materiaalsoort.steenachtig,
     )
 
-    keramisch = Referentiedata(
+    keramisch = MateriaaldetailsoortReferentiedata(
         code="KRA",
         naam="Keramisch",
-        parent=Materiaalsoort.steenachtig.value,
+        parent=Materiaalsoort.steenachtig,
     )
 
-    porisosteen = Referentiedata(
+    porisosteen = MateriaaldetailsoortReferentiedata(
         code="PRI",
         naam="Porisosteen",
-        parent=Materiaalsoort.steenachtig.value,
+        parent=Materiaalsoort.steenachtig,
     )
 
-    porselein = Referentiedata(
+    porselein = MateriaaldetailsoortReferentiedata(
         code="PSE",
         naam="Porselein",
-        parent=Materiaalsoort.steenachtig.value,
+        parent=Materiaalsoort.steenachtig,
     )
 
-    baksteen = Referentiedata(
+    baksteen = MateriaaldetailsoortReferentiedata(
         code="BAK",
         naam="Baksteen",
-        parent=Materiaalsoort.steenachtig.value,
+        parent=Materiaalsoort.steenachtig,
     )
 
-    calciumsilicaat = Referentiedata(
+    calciumsilicaat = MateriaaldetailsoortReferentiedata(
         code="CAL",
         naam="Calciumsilicaat",
-        parent=Materiaalsoort.steenachtig.value,
+        parent=Materiaalsoort.steenachtig,
     )
 
-    kunststeen = Referentiedata(
+    kunststeen = MateriaaldetailsoortReferentiedata(
         code="KUN",
         naam="Kunststeen",
-        parent=Materiaalsoort.steenachtig.value,
+        parent=Materiaalsoort.steenachtig,
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

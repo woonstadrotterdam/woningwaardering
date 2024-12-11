@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Voorzieningsoort(Enum):
-    aanbelfunctie_met_video_en_audioverbinding = Referentiedata(
+class VoorzieningsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Voorzieningsoort(Referentiedatasoort):
+    aanbelfunctie_met_video_en_audioverbinding = VoorzieningsoortReferentiedata(
         code="ABF",
         naam="Aanbelfunctie met video- en audioverbinding",
     )
@@ -18,7 +21,7 @@ class Voorzieningsoort(Enum):
     geeft tot het complex waarvan de woning onderdeel uitmaakt.
     """
 
-    inbouw_afzuiginstallatie = Referentiedata(
+    inbouw_afzuiginstallatie = VoorzieningsoortReferentiedata(
         code="IAF",
         naam="Inbouw afzuiginstallatie",
     )
@@ -29,7 +32,7 @@ class Voorzieningsoort(Enum):
     kookinstallatie zijn, als een in het aanrecht geïntegreerd afzuigsysteem.
     """
 
-    inbouw_kookplaat_inductie = Referentiedata(
+    inbouw_kookplaat_inductie = VoorzieningsoortReferentiedata(
         code="IKI",
         naam="Inbouw kookplaat inductie",
     )
@@ -40,7 +43,7 @@ class Voorzieningsoort(Enum):
     energie-efficiëntie in vergelijking met traditionele kookplaten.
     """
 
-    inbouw_kookplaat_keramisch = Referentiedata(
+    inbouw_kookplaat_keramisch = VoorzieningsoortReferentiedata(
         code="IKK",
         naam="Inbouw kookplaat keramisch",
     )
@@ -51,7 +54,7 @@ class Voorzieningsoort(Enum):
     schoon te maken is, maar trager opwarmt dan inductie.
     """
 
-    inbouw_kookplaat_gas = Referentiedata(
+    inbouw_kookplaat_gas = VoorzieningsoortReferentiedata(
         code="IKG",
         naam="Inbouw kookplaat gas",
     )
@@ -62,7 +65,7 @@ class Voorzieningsoort(Enum):
     kookgerei, maar vereist gasaanvoer en ventilatie.
     """
 
-    inbouw_koelkast = Referentiedata(
+    inbouw_koelkast = VoorzieningsoortReferentiedata(
         code="IKO",
         naam="Inbouw koelkast",
     )
@@ -73,7 +76,7 @@ class Voorzieningsoort(Enum):
     uitstraling in de keuken.
     """
 
-    inbouw_vrieskast = Referentiedata(
+    inbouw_vrieskast = VoorzieningsoortReferentiedata(
         code="IVR",
         naam="Inbouw vrieskast",
     )
@@ -84,7 +87,7 @@ class Voorzieningsoort(Enum):
     uniforme uitstraling in de keuken.
     """
 
-    inbouw_oven_elektrisch = Referentiedata(
+    inbouw_oven_elektrisch = VoorzieningsoortReferentiedata(
         code="IOE",
         naam="Inbouw oven elektrisch",
     )
@@ -95,7 +98,7 @@ class Voorzieningsoort(Enum):
     programma's voor diverse kookmethoden.
     """
 
-    inbouw_oven_gas = Referentiedata(
+    inbouw_oven_gas = VoorzieningsoortReferentiedata(
         code="IOG",
         naam="Inbouw oven gas",
     )
@@ -106,7 +109,7 @@ class Voorzieningsoort(Enum):
     vereist gasaanvoer.
     """
 
-    inbouw_magnetron = Referentiedata(
+    inbouw_magnetron = VoorzieningsoortReferentiedata(
         code="IMA",
         naam="Inbouw magnetron",
     )
@@ -117,7 +120,7 @@ class Voorzieningsoort(Enum):
     uitstraling in de keuken.
     """
 
-    inbouw_vaatwasmachine = Referentiedata(
+    inbouw_vaatwasmachine = VoorzieningsoortReferentiedata(
         code="IVA",
         naam="Inbouw vaatwasmachine",
     )
@@ -128,7 +131,7 @@ class Voorzieningsoort(Enum):
     uitstraling van de keuken.
     """
 
-    extra_keukenkastruimte_boven_het_minimum = Referentiedata(
+    extra_keukenkastruimte_boven_het_minimum = VoorzieningsoortReferentiedata(
         code="EKA",
         naam="Extra keukenkastruimte boven het minimum",
     )
@@ -136,7 +139,7 @@ class Voorzieningsoort(Enum):
     per 60 cm breedte, met een minimum van 60 cm hoogte
     """
 
-    eenhandsmengkraan = Referentiedata(
+    eenhandsmengkraan = VoorzieningsoortReferentiedata(
         code="EHM",
         naam="Éénhandsmengkraan",
     )
@@ -147,7 +150,7 @@ class Voorzieningsoort(Enum):
     elke keuken of badkamer.
     """
 
-    thermostatische_mengkraan = Referentiedata(
+    thermostatische_mengkraan = VoorzieningsoortReferentiedata(
         code="TME",
         naam="Thermostatische mengkraan",
     )
@@ -158,7 +161,7 @@ class Voorzieningsoort(Enum):
     of keuken.
     """
 
-    kokend_waterfunctie = Referentiedata(
+    kokend_waterfunctie = VoorzieningsoortReferentiedata(
         code="KWA",
         naam="Kokend waterfunctie",
     )
@@ -169,7 +172,7 @@ class Voorzieningsoort(Enum):
     apart of in aanvulling op de kraan
     """
 
-    staand_toilet = Referentiedata(
+    staand_toilet = VoorzieningsoortReferentiedata(
         code="STO",
         naam="Staand Toilet",
     )
@@ -182,7 +185,7 @@ class Voorzieningsoort(Enum):
     niet in aanmerking voor waardering.
     """
 
-    hangend_toilet = Referentiedata(
+    hangend_toilet = VoorzieningsoortReferentiedata(
         code="HTO",
         naam="Hangend toilet",
     )
@@ -195,7 +198,7 @@ class Voorzieningsoort(Enum):
     toiletruimten en badkamers komen niet in aanmerking voor waardering.
     """
 
-    wastafel = Referentiedata(
+    wastafel = VoorzieningsoortReferentiedata(
         code="WAS",
         naam="Wastafel",
     )
@@ -211,7 +214,7 @@ class Voorzieningsoort(Enum):
     keer per vertrek of overige ruimte, m.u.v. de badkamer.
     """
 
-    meerpersoonswastafel = Referentiedata(
+    meerpersoonswastafel = VoorzieningsoortReferentiedata(
         code="MPW",
         naam="Meerpersoonswastafel",
     )
@@ -225,7 +228,7 @@ class Voorzieningsoort(Enum):
     afzonderlijk gewaardeerd.
     """
 
-    douche = Referentiedata(
+    douche = VoorzieningsoortReferentiedata(
         code="DOU",
         naam="Douche",
     )
@@ -242,7 +245,7 @@ class Voorzieningsoort(Enum):
     douchecabine ingenomen oppervlakte.
     """
 
-    bad = Referentiedata(
+    bad = VoorzieningsoortReferentiedata(
         code="BAD",
         naam="Bad",
     )
@@ -256,7 +259,7 @@ class Voorzieningsoort(Enum):
     douchegarnituur niet afzonderlijk geteld.
     """
 
-    bad_en_douche = Referentiedata(
+    bad_en_douche = VoorzieningsoortReferentiedata(
         code="BDO",
         naam="Bad en douche",
     )
@@ -265,7 +268,7 @@ class Voorzieningsoort(Enum):
     aangebracht, geldt een afwijkende waardering.
     """
 
-    bubbelfunctie_van_het_bad = Referentiedata(
+    bubbelfunctie_van_het_bad = VoorzieningsoortReferentiedata(
         code="BUB",
         naam="Bubbelfunctie van het bad",
     )
@@ -276,7 +279,7 @@ class Voorzieningsoort(Enum):
     bieden.
     """
 
-    douchewand = Referentiedata(
+    douchewand = VoorzieningsoortReferentiedata(
         code="DOW",
         naam="Douchewand",
     )
@@ -289,7 +292,7 @@ class Voorzieningsoort(Enum):
     worden) niet.
     """
 
-    handdoekenradiator = Referentiedata(
+    handdoekenradiator = VoorzieningsoortReferentiedata(
         code="HRA",
         naam="Handdoekenradiator",
     )
@@ -300,7 +303,7 @@ class Voorzieningsoort(Enum):
     voor een aangename temperatuur.
     """
 
-    ingebouwd_kastje_met_in_of_opgebouwde_wastafel = Referentiedata(
+    ingebouwd_kastje_met_in_of_opgebouwde_wastafel = VoorzieningsoortReferentiedata(
         code="IKW",
         naam="Ingebouwd kastje met in- of opgebouwde wastafel",
     )
@@ -310,7 +313,7 @@ class Voorzieningsoort(Enum):
     een gestroomlijnde uitstraling en praktische opslag in badkamers of keukens.
     """
 
-    kastruimte = Referentiedata(
+    kastruimte = VoorzieningsoortReferentiedata(
         code="KAS",
         naam="Kastruimte",
     )
@@ -318,7 +321,7 @@ class Voorzieningsoort(Enum):
     Kastruimte met een minimale breedte van 40cm, en minimale hoogte van 40cm.
     """
 
-    stopcontact_bij_wastafel = Referentiedata(
+    stopcontact_bij_wastafel = VoorzieningsoortReferentiedata(
         code="STW",
         naam="Stopcontact bij wastafel",
     )
@@ -326,17 +329,3 @@ class Voorzieningsoort(Enum):
     Stopcontact bij de wastafel. Maximaal twee per wastafel worden meegeteld in de
     waardering.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

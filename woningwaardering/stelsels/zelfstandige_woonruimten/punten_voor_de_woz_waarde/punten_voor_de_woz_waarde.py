@@ -62,8 +62,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
 
@@ -401,12 +401,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if vastgestelde_waarde < minimum_woz_waarde:
             logger.info(
-                f"WOZ-waarde {vastgestelde_waarde:.0f} is kleiner dan minimum {minimum_woz_waarde:.0f}, minimum wordt gebruikt"
+                f"WOZ-waarde €{vastgestelde_waarde:.0f} is kleiner dan minimum €{minimum_woz_waarde:.0f}, minimum wordt gebruikt"
             )
             return minimum_woz_waarde
 
         logger.debug(
-            f"WOZ-waarde €{vastgestelde_waarde:.0f} is groter dan minimum {minimum_woz_waarde:.0f}, minimum wordt niet gebruikt"
+            f"WOZ-waarde €{vastgestelde_waarde:.0f} is groter dan minimum €{minimum_woz_waarde:.0f}, minimum wordt niet gebruikt"
         )
 
         return vastgestelde_waarde
@@ -429,12 +429,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             for groep in (woningwaardering_resultaat.groepen or [])
             if (
                 groep.criterium_groep is not None
-                and groep.criterium_groep.stelselgroep is not None
-                and groep.criterium_groep.stelselgroep.code
-                in [
-                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,
-                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,
-                ]
+                and groep.criterium_groep.stelselgroep
+                in (
+                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+                )
             )
         ]
 
@@ -490,21 +489,19 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 if groep.punten
                 and groep.criterium_groep
                 and groep.criterium_groep.stelselgroep
-                and groep.criterium_groep.stelselgroep.code
-                and groep.criterium_groep.stelselgroep.code
-                in [
-                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.code,  # 1
-                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.code,  # 2
-                    Woningwaarderingstelselgroep.verkoeling_en_verwarming.code,  # 3
-                    Woningwaarderingstelselgroep.energieprestatie.code,  # 4
-                    Woningwaarderingstelselgroep.keuken.code,  # 5
-                    Woningwaarderingstelselgroep.sanitair.code,  # 6
-                    Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten.code,  # 7
-                    Woningwaarderingstelselgroep.buitenruimten.code,  # 8
-                    Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.code,  # 9
-                    Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.code,  # 10
-                    Woningwaarderingstelselgroep.bijzondere_voorzieningen.code,  # 12
-                ]
+                in (
+                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,  # 1
+                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,  # 2
+                    Woningwaarderingstelselgroep.verkoeling_en_verwarming,  # 3
+                    Woningwaarderingstelselgroep.energieprestatie,  # 4
+                    Woningwaarderingstelselgroep.keuken,  # 5
+                    Woningwaarderingstelselgroep.sanitair,  # 6
+                    Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten,  # 7
+                    Woningwaarderingstelselgroep.buitenruimten,  # 8
+                    Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen,  # 9
+                    Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,  # 10
+                    Woningwaarderingstelselgroep.bijzondere_voorzieningen,  # 12
+                )
             )
             logger.debug(
                 f"Eenheid ({eenheid.id}): nieuwbouw of hoogniveau renovatie in de jaren 2015-2019. Punten voor de stelselgroepen 1 t/m 10 en 12: {punten_critische_stelselgroepen}"

@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Projectbudgetregelsoort(Enum):
-    budget = Referentiedata(
+class ProjectbudgetregelsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Projectbudgetregelsoort(Referentiedatasoort):
+    budget = ProjectbudgetregelsoortReferentiedata(
         code="BUD",
         naam="Budget",
     )
@@ -12,24 +15,10 @@ class Projectbudgetregelsoort(Enum):
     Projectbudgetregel betreft een budgetbedrag
     """
 
-    prognose = Referentiedata(
+    prognose = ProjectbudgetregelsoortReferentiedata(
         code="PRO",
         naam="Prognose",
     )
     """
     Projectbudgetregel betreft een prognose-bedrag
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

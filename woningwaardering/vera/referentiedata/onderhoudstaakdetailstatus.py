@@ -1,76 +1,65 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
 from woningwaardering.vera.referentiedata.onderhoudstaakstatus import (
     Onderhoudstaakstatus,
 )
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Onderhoudstaakdetailstatus(Enum):
-    klant_niet_aanwezig = Referentiedata(
+class OnderhoudstaakdetailstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Onderhoudstaakdetailstatus(Referentiedatasoort):
+    klant_niet_aanwezig = OnderhoudstaakdetailstatusReferentiedata(
         code="AFW",
         naam="Klant niet aanwezig",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat de klant niet aanwezig is
     """
 
-    niet_de_juiste_discipline = Referentiedata(
+    niet_de_juiste_discipline = OnderhoudstaakdetailstatusReferentiedata(
         code="DIS",
         naam="Niet de juiste discipline",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat de vakman niet de juiste discipline heeft
     """
 
-    inspectie_en_of_beoordeling_vereist = Referentiedata(
+    inspectie_en_of_beoordeling_vereist = OnderhoudstaakdetailstatusReferentiedata(
         code="INS",
         naam="Inspectie/beoordeling vereist",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat inspectie/beoordeling door inspecteur noodzakelijk is
     """
 
-    materiaal_bestellen = Referentiedata(
+    materiaal_bestellen = OnderhoudstaakdetailstatusReferentiedata(
         code="MAT",
         naam="Materiaal bestellen",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat materiaal besteld moet worden
     """
 
-    offerte_benodigd = Referentiedata(
+    offerte_benodigd = OnderhoudstaakdetailstatusReferentiedata(
         code="OFF",
         naam="Offerte benodigd",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat een offerte nodig is
     """
 
-    onvoldoende_tijd = Referentiedata(
+    onvoldoende_tijd = OnderhoudstaakdetailstatusReferentiedata(
         code="ONV",
         naam="Onvoldoende tijd",
-        parent=Onderhoudstaakstatus.onderbroken.value,
+        parent=Onderhoudstaakstatus.onderbroken,
     )
     """
     De taak is onderbroken omdat er onvoldoende tijd voor de vakman is
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

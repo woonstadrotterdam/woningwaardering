@@ -1,15 +1,18 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Zaakrol(Enum):
-    adviseur = Referentiedata(
+class ZaakrolReferentiedata(Referentiedata):
+    pass
+
+
+class Zaakrol(Referentiedatasoort):
+    adviseur = ZaakrolReferentiedata(
         code="ADV",
         naam="Adviseur",
     )
 
-    behandelaar = Referentiedata(
+    behandelaar = ZaakrolReferentiedata(
         code="BEH",
         naam="Behandelaar",
     )
@@ -17,7 +20,7 @@ class Zaakrol(Enum):
     De medewerker die de zaak in behandeling heeft
     """
 
-    beklaagde = Referentiedata(
+    beklaagde = ZaakrolReferentiedata(
         code="BEK",
         naam="Beklaagde",
     )
@@ -25,27 +28,27 @@ class Zaakrol(Enum):
     De betrokkene binnen de zaak waarover geklaagd wordt bij een (sociale) klacht
     """
 
-    belanghebbende = Referentiedata(
+    belanghebbende = ZaakrolReferentiedata(
         code="BEL",
         naam="Belanghebbende",
     )
 
-    beslisser = Referentiedata(
+    beslisser = ZaakrolReferentiedata(
         code="BES",
         naam="Beslisser",
     )
 
-    initiator = Referentiedata(
+    initiator = ZaakrolReferentiedata(
         code="INI",
         naam="Initiator",
     )
 
-    klantcontacter = Referentiedata(
+    klantcontacter = ZaakrolReferentiedata(
         code="KLA",
         naam="Klantcontacter",
     )
 
-    klager = Referentiedata(
+    klager = ZaakrolReferentiedata(
         code="KLG",
         naam="Klager",
     )
@@ -53,7 +56,7 @@ class Zaakrol(Enum):
     De betrokkene binnen de zaak die een klacht heeft ingediend
     """
 
-    melder = Referentiedata(
+    melder = ZaakrolReferentiedata(
         code="MEL",
         naam="Melder",
     )
@@ -61,7 +64,7 @@ class Zaakrol(Enum):
     De melder van de zaak
     """
 
-    overige_betrokkene = Referentiedata(
+    overige_betrokkene = ZaakrolReferentiedata(
         code="OVE",
         naam="Overige betrokkene",
     )
@@ -70,21 +73,7 @@ class Zaakrol(Enum):
     gemeente, sociale dienst, etc.
     """
 
-    zaakcoordinator = Referentiedata(
+    zaakcoordinator = ZaakrolReferentiedata(
         code="ZAA",
         naam="Zaakcoördinator",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

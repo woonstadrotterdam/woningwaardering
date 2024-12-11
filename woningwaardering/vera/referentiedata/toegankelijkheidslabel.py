@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Toegankelijkheidslabel(Enum):
-    gelijkvloerse_woning = Referentiedata(
+class ToegankelijkheidslabelReferentiedata(Referentiedata):
+    pass
+
+
+class Toegankelijkheidslabel(Referentiedatasoort):
+    gelijkvloerse_woning = ToegankelijkheidslabelReferentiedata(
         code="GEL",
         naam="Gelijkvloerse woning",
     )
@@ -18,7 +21,7 @@ class Toegankelijkheidslabel(Enum):
     ook extern toegankelijk moet zijn voor minder validen.
     """
 
-    rollatorwoning = Referentiedata(
+    rollatorwoning = ToegankelijkheidslabelReferentiedata(
         code="ROA",
         naam="Rollatorwoning",
     )
@@ -29,7 +32,7 @@ class Toegankelijkheidslabel(Enum):
     bijvoorbeeld drempels aanwezig kunnen zijn.
     """
 
-    rolstoelwoning = Referentiedata(
+    rolstoelwoning = ToegankelijkheidslabelReferentiedata(
         code="ROL",
         naam="Rolstoelwoning",
     )
@@ -40,7 +43,7 @@ class Toegankelijkheidslabel(Enum):
     Rollatorwoning, maar is niet per definitie ook een 'extra ruime rolstoelwoning'.
     """
 
-    extra_ruime_rolstoelwoning = Referentiedata(
+    extra_ruime_rolstoelwoning = ToegankelijkheidslabelReferentiedata(
         code="RUI",
         naam="Extra ruime rolstoelwoning",
     )
@@ -51,21 +54,7 @@ class Toegankelijkheidslabel(Enum):
     definitie ook aan het label Rolstoelwoning.
     """
 
-    woning_zonder_bijzondere_toegankelijkheid = Referentiedata(
+    woning_zonder_bijzondere_toegankelijkheid = ToegankelijkheidslabelReferentiedata(
         code="ZON",
         naam="Woning zonder bijzondere toegankelijkheid",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,39 +1,28 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Kwaliteitsniveau(Enum):
-    eenvoudig = Referentiedata(
+class KwaliteitsniveauReferentiedata(Referentiedata):
+    pass
+
+
+class Kwaliteitsniveau(Referentiedatasoort):
+    eenvoudig = KwaliteitsniveauReferentiedata(
         code="EEN",
         naam="Eenvoudig",
     )
 
-    hoogwaardig = Referentiedata(
+    hoogwaardig = KwaliteitsniveauReferentiedata(
         code="HOO",
         naam="Hoogwaardig",
     )
 
-    luxe = Referentiedata(
+    luxe = KwaliteitsniveauReferentiedata(
         code="LUX",
         naam="Luxe",
     )
 
-    standaard = Referentiedata(
+    standaard = KwaliteitsniveauReferentiedata(
         code="STA",
         naam="Standaard",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

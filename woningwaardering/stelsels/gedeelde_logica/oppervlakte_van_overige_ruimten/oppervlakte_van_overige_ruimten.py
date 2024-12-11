@@ -15,14 +15,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
+    Meeteenheid,
+    Ruimtedetailsoort,
+    Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
-    Bouwkundigelementdetailsoort,
-)
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.ruimtesoort import Ruimtesoort
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
@@ -43,7 +41,7 @@ def waardeer_oppervlakte_van_overige_ruimte(
 
     woningwaardering = WoningwaarderingResultatenWoningwaardering()
     woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-        meeteenheid=Meeteenheid.vierkante_meter_m2.value,
+        meeteenheid=Meeteenheid.vierkante_meter_m2,
         naam=criterium_naam,
     )
 
@@ -51,11 +49,7 @@ def waardeer_oppervlakte_van_overige_ruimte(
 
     yield woningwaardering
 
-    if (
-        ruimte.detail_soort
-        and ruimte.detail_soort.code
-        and ruimte.detail_soort.code == Ruimtedetailsoort.zolder.code
-    ):
+    if ruimte.detail_soort == Ruimtedetailsoort.zolder:
         # Corrigeer met -5 punten als de zolder niet bereikbaar is met een vaste trap
         # Note: Op dit moment kan de zolder alleen een
         # Bouwkundigelementdetailsoort.trap (vast) of Bouwkundigelementdetailsoort.vlizotrap (niet vast)

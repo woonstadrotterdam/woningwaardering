@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Huurgeschilsoort(Enum):
-    bezwaarschrift = Referentiedata(
+class HuurgeschilsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Huurgeschilsoort(Referentiedatasoort):
+    bezwaarschrift = HuurgeschilsoortReferentiedata(
         code="BEZ",
         naam="Bezwaarschrift",
     )
@@ -12,7 +15,7 @@ class Huurgeschilsoort(Enum):
     Huurgeschil met als aanleiding een (niet nader gespecificeerd) bezwaarschrift
     """
 
-    inkomen = Referentiedata(
+    inkomen = HuurgeschilsoortReferentiedata(
         code="INK",
         naam="Inkomen",
     )
@@ -20,7 +23,7 @@ class Huurgeschilsoort(Enum):
     Huurgeschil met als aanleiding een dispuut over het inkomen van de huurder
     """
 
-    onderhoud = Referentiedata(
+    onderhoud = HuurgeschilsoortReferentiedata(
         code="OND",
         naam="Onderhoud",
     )
@@ -29,7 +32,7 @@ class Huurgeschilsoort(Enum):
     over kosten die voortvloeien uit uitgevoerd onderhoud
     """
 
-    verzoekschrift = Referentiedata(
+    verzoekschrift = HuurgeschilsoortReferentiedata(
         code="VER",
         naam="Verzoekschrift",
     )
@@ -37,24 +40,10 @@ class Huurgeschilsoort(Enum):
     Huurgeschil met als aanleiding een (niet nader gespecificeerd) verzoekschrift
     """
 
-    woningwaardering = Referentiedata(
+    woningwaardering = HuurgeschilsoortReferentiedata(
         code="WON",
         naam="Woningwaardering",
     )
     """
     Huurgeschil met als aanleiding een dispuut over het woningwaarderingsresultaat
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

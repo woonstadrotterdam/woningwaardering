@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Relatiestatus(Enum):
-    actief = Referentiedata(
+class RelatiestatusReferentiedata(Referentiedata):
+    pass
+
+
+class Relatiestatus(Referentiedatasoort):
+    actief = RelatiestatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
@@ -12,7 +15,7 @@ class Relatiestatus(Enum):
     De relatie is een actieve relatie
     """
 
-    inactief = Referentiedata(
+    inactief = RelatiestatusReferentiedata(
         code="INA",
         naam="Inactief",
     )
@@ -20,24 +23,10 @@ class Relatiestatus(Enum):
     De relatie is niet (meer) actief
     """
 
-    slapend = Referentiedata(
+    slapend = RelatiestatusReferentiedata(
         code="SLA",
         naam="Slapend",
     )
     """
     De relatie betreft een VvE (rechtspersoon) die een slapende status heeft
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,114 +1,105 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
-from woningwaardering.vera.referentiedata.tijdsbestedingsoort import Tijdsbestedingsoort
+from woningwaardering.vera.referentiedata.tijdsbestedingsoort import (
+    Tijdsbestedingsoort,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Tijdsbestedingdetailsoort(Enum):
-    verlof_regulier = Referentiedata(
+class TijdsbestedingdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Tijdsbestedingdetailsoort(Referentiedatasoort):
+    verlof_regulier = TijdsbestedingdetailsoortReferentiedata(
         code="VER",
         naam="Verlof (regulier)",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
     """
     Regulier verlof
     """
 
-    ziek = Referentiedata(
+    ziek = TijdsbestedingdetailsoortReferentiedata(
         code="ZIE",
         naam="Ziek",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
     """
     Afwezig wegens ziekte
     """
 
-    bijzonder_verlof = Referentiedata(
+    bijzonder_verlof = TijdsbestedingdetailsoortReferentiedata(
         code="BIJ",
         naam="Bijzonder verlof",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
     """
     Bijzonder of  buitengewoon verlof. Denk bijvoorbeeld aan een examen, ondertrouw, een
     huwelijk en tandartsbezoek.
     """
 
-    onbetaald_verlof = Referentiedata(
+    onbetaald_verlof = TijdsbestedingdetailsoortReferentiedata(
         code="ONB",
         naam="Onbetaald verlof",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
     """
     Onbetaald verlof
     """
 
-    zwangerschapsverlof = Referentiedata(
+    zwangerschapsverlof = TijdsbestedingdetailsoortReferentiedata(
         code="ZWA",
         naam="Zwangerschapsverlof",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
     """
     Zwangersschapsverlof of bevallingsverlof
     """
 
-    ouderschapsverlof = Referentiedata(
+    ouderschapsverlof = TijdsbestedingdetailsoortReferentiedata(
         code="OUD",
         naam="Ouderschapsverlof",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
     """
     Ouderschapsverlof
     """
 
-    zorgverlof = Referentiedata(
+    zorgverlof = TijdsbestedingdetailsoortReferentiedata(
         code="ZOR",
         naam="Zorgverlof",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
     """
     Zorgverlof kortdurend of langdurend
     """
 
-    calamiteitenverlof = Referentiedata(
+    calamiteitenverlof = TijdsbestedingdetailsoortReferentiedata(
         code="CAL",
         naam="Calamiteitenverlof",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
     """
     Calamiteitenverlof of kort verzuimverlof
     """
 
-    non_actief = Referentiedata(
+    non_actief = TijdsbestedingdetailsoortReferentiedata(
         code="NON",
         naam="Non-actief",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
 
-    adoptieverlof = Referentiedata(
+    adoptieverlof = TijdsbestedingdetailsoortReferentiedata(
         code="ADO",
         naam="Adoptieverlof",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
     """
     Adoptie of pleegzorgverlof
     """
 
-    geschorst = Referentiedata(
+    geschorst = TijdsbestedingdetailsoortReferentiedata(
         code="GES",
         naam="Geschorst",
-        parent=Tijdsbestedingsoort.afwezig.value,
+        parent=Tijdsbestedingsoort.afwezig,
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

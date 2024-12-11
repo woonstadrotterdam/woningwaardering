@@ -1,39 +1,28 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Bouwkundigelementsoort(Enum):
-    overig = Referentiedata(
+class BouwkundigelementsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Bouwkundigelementsoort(Referentiedatasoort):
+    overig = BouwkundigelementsoortReferentiedata(
         code="OVE",
         naam="Overig",
     )
 
-    verwarming = Referentiedata(
+    verwarming = BouwkundigelementsoortReferentiedata(
         code="VER",
         naam="Verwarming",
     )
 
-    voorziening = Referentiedata(
+    voorziening = BouwkundigelementsoortReferentiedata(
         code="VOO",
         naam="Voorziening",
     )
 
-    warmwater = Referentiedata(
+    warmwater = BouwkundigelementsoortReferentiedata(
         code="WAT",
         naam="Warmwater",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Boekingsoort(Enum):
-    belastingen_en_premies_sv = Referentiedata(
+class BoekingsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Boekingsoort(Referentiedatasoort):
+    belastingen_en_premies_sv = BoekingsoortReferentiedata(
         code="BEP",
         naam="Belastingen en premies SV",
     )
@@ -14,7 +17,7 @@ class Boekingsoort(Enum):
     onderhoudsfacturen.
     """
 
-    budget = Referentiedata(
+    budget = BoekingsoortReferentiedata(
         code="BUD",
         naam="Budget",
     )
@@ -22,7 +25,7 @@ class Boekingsoort(Enum):
     Boeking voor opvoer of wijziging van een budget of budgetregel
     """
 
-    memoriaal = Referentiedata(
+    memoriaal = BoekingsoortReferentiedata(
         code="MEM",
         naam="Memoriaal",
     )
@@ -31,7 +34,7 @@ class Boekingsoort(Enum):
     boekingen, meestal van soort VOR.
     """
 
-    onderhoud = Referentiedata(
+    onderhoud = BoekingsoortReferentiedata(
         code="OHD",
         naam="Onderhoud",
     )
@@ -39,7 +42,7 @@ class Boekingsoort(Enum):
     Boeking ten behoeve van of voortkomend uit de onderhoudsadministratie.
     """
 
-    ontvangst = Referentiedata(
+    ontvangst = BoekingsoortReferentiedata(
         code="ONT",
         naam="Ontvangst",
     )
@@ -49,7 +52,7 @@ class Boekingsoort(Enum):
     eindafrekening.
     """
 
-    projecten = Referentiedata(
+    projecten = BoekingsoortReferentiedata(
         code="PRJ",
         naam="Projecten",
     )
@@ -57,7 +60,7 @@ class Boekingsoort(Enum):
     Boeking ten behoeve van of voortkomend uit de projectadministratie.
     """
 
-    salaris = Referentiedata(
+    salaris = BoekingsoortReferentiedata(
         code="SAL",
         naam="Salaris",
     )
@@ -65,7 +68,7 @@ class Boekingsoort(Enum):
     Boeking ten behoeve van of voortkomend uit de salarisadministratie.
     """
 
-    servicekosten = Referentiedata(
+    servicekosten = BoekingsoortReferentiedata(
         code="SKS",
         naam="Servicekosten",
     )
@@ -73,7 +76,7 @@ class Boekingsoort(Enum):
     Boeking ten behoeve van of voortkomend uit de servicekostenadministratie.
     """
 
-    uitbetaling = Referentiedata(
+    uitbetaling = BoekingsoortReferentiedata(
         code="UIT",
         naam="Uitbetaling",
     )
@@ -82,24 +85,10 @@ class Boekingsoort(Enum):
     boekingen, zoals een vordering, borg of eindafrekening.
     """
 
-    vordering = Referentiedata(
+    vordering = BoekingsoortReferentiedata(
         code="VOR",
         naam="Vordering",
     )
     """
     Boeking van een te vorderen bedrag op een huurder of derde.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

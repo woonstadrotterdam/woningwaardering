@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Betaalwijzedeelsoort(Enum):
-    maximaal_bedrag = Referentiedata(
+class BetaalwijzedeelsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Betaalwijzedeelsoort(Referentiedatasoort):
+    maximaal_bedrag = BetaalwijzedeelsoortReferentiedata(
         code="MAX",
         naam="Maximaal bedrag",
     )
@@ -13,7 +16,7 @@ class Betaalwijzedeelsoort(Enum):
     de ouders van de student dragen maximaal EUR 300 bij aan de huur.
     """
 
-    percentage = Referentiedata(
+    percentage = BetaalwijzedeelsoortReferentiedata(
         code="PER",
         naam="Percentage",
     )
@@ -22,7 +25,7 @@ class Betaalwijzedeelsoort(Enum):
     stel waarbij beiden de helft van de huur betalen.
     """
 
-    restant_bedrag = Referentiedata(
+    restant_bedrag = BetaalwijzedeelsoortReferentiedata(
         code="RES",
         naam="Restant bedrag",
     )
@@ -31,17 +34,3 @@ class Betaalwijzedeelsoort(Enum):
     Bijvoorbeeld de student die het restant van de huur betaalt na aftrek van de
     bijdrage van zijn/haar ouders.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

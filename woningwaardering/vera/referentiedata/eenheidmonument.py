@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidmonument(Enum):
-    beschermd_dorpsgezicht = Referentiedata(
+class EenheidmonumentReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheidmonument(Referentiedatasoort):
+    beschermd_dorpsgezicht = EenheidmonumentReferentiedata(
         code="DOR",
         naam="Beschermd dorpsgezicht",
     )
@@ -17,7 +20,7 @@ class Eenheidmonument(Enum):
     vergunning nodig.
     """
 
-    gemeentelijk_monument = Referentiedata(
+    gemeentelijk_monument = EenheidmonumentReferentiedata(
         code="GEM",
         naam="Gemeentelijk monument",
     )
@@ -27,7 +30,7 @@ class Eenheidmonument(Enum):
     plaatselijk of regionaal belang is.
     """
 
-    provinciaal_monument = Referentiedata(
+    provinciaal_monument = EenheidmonumentReferentiedata(
         code="PRO",
         naam="Provinciaal monument",
     )
@@ -41,7 +44,7 @@ class Eenheidmonument(Enum):
     hebben aangewezen.
     """
 
-    rijksmonument = Referentiedata(
+    rijksmonument = EenheidmonumentReferentiedata(
         code="RIJ",
         naam="Rijksmonument",
     )
@@ -51,7 +54,7 @@ class Eenheidmonument(Enum):
     monument.
     """
 
-    beschermd_stadsgezicht = Referentiedata(
+    beschermd_stadsgezicht = EenheidmonumentReferentiedata(
         code="STA",
         naam="Beschermd stadsgezicht",
     )
@@ -64,7 +67,7 @@ class Eenheidmonument(Enum):
     vergunning nodig.
     """
 
-    werelderfgoed = Referentiedata(
+    werelderfgoed = EenheidmonumentReferentiedata(
         code="WER",
         naam="Werelderfgoed",
     )
@@ -73,17 +76,3 @@ class Eenheidmonument(Enum):
     uitzonderlijk en onvervangbaar zijn. Alleen als een monument is ingeschreven op
     de Werelderfgoedlijst van UNESCO mag het de titel Werelderfgoed dragen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

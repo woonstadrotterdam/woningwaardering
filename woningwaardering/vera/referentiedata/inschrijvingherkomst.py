@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Inschrijvingherkomst(Enum):
-    heropend = Referentiedata(
+class InschrijvingherkomstReferentiedata(Referentiedata):
+    pass
+
+
+class Inschrijvingherkomst(Referentiedatasoort):
+    heropend = InschrijvingherkomstReferentiedata(
         code="HER",
         naam="Heropend",
     )
@@ -13,7 +16,7 @@ class Inschrijvingherkomst(Enum):
     inschrijving.
     """
 
-    medewerker = Referentiedata(
+    medewerker = InschrijvingherkomstReferentiedata(
         code="MED",
         naam="Medewerker",
     )
@@ -21,7 +24,7 @@ class Inschrijvingherkomst(Enum):
     De inschrijving is aangemaakt door een medewerker.
     """
 
-    migratie = Referentiedata(
+    migratie = InschrijvingherkomstReferentiedata(
         code="MIG",
         naam="Migratie",
     )
@@ -29,7 +32,7 @@ class Inschrijvingherkomst(Enum):
     De inschrijving is aangemaakt tijdens een migratie van gegevens.
     """
 
-    gesplitst = Referentiedata(
+    gesplitst = InschrijvingherkomstReferentiedata(
         code="SPL",
         naam="Gesplitst",
     )
@@ -38,7 +41,7 @@ class Inschrijvingherkomst(Enum):
     inschrijving waarbij de hoofd- en medeaanvrager een eigen inschrijving krijgen.
     """
 
-    urgentie = Referentiedata(
+    urgentie = InschrijvingherkomstReferentiedata(
         code="URG",
         naam="Urgentie",
     )
@@ -46,24 +49,10 @@ class Inschrijvingherkomst(Enum):
     De inschrijving is aangemaakt naar aanleiding van het toekennen van een urgentie.
     """
 
-    woningzoekende = Referentiedata(
+    woningzoekende = InschrijvingherkomstReferentiedata(
         code="WOO",
         naam="Woningzoekende",
     )
     """
     De inschrijving is aangemaakt door de woningzoekende.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

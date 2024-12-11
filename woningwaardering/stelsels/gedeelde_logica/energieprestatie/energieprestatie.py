@@ -8,11 +8,9 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
-from woningwaardering.vera.referentiedata.eenheidmonument import Eenheidmonument
-from woningwaardering.vera.referentiedata.prijscomponentdetailsoort import (
+from woningwaardering.vera.referentiedata import (
+    Eenheidmonument,
     Prijscomponentdetailsoort,
-)
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     Woningwaarderingstelselgroep,
 )
 
@@ -36,11 +34,11 @@ def monument_correctie(
     if (
         eenheid.monumenten
         and any(
-            monument.code
+            monument
             in [
-                Eenheidmonument.rijksmonument.code,
-                Eenheidmonument.gemeentelijk_monument.code,
-                Eenheidmonument.provinciaal_monument.code,
+                Eenheidmonument.rijksmonument,
+                Eenheidmonument.gemeentelijk_monument,
+                Eenheidmonument.provinciaal_monument,
             ]
             for monument in eenheid.monumenten or []
         )
@@ -77,9 +75,8 @@ def get_energieprestatievergoeding(
         (
             prijscomponent
             for prijscomponent in eenheid.prijscomponenten or []
-            if prijscomponent.detail_soort is not None
-            and prijscomponent.detail_soort.code
-            == Prijscomponentdetailsoort.energieprestatievergoeding.code
+            if prijscomponent.detail_soort
+            == Prijscomponentdetailsoort.energieprestatievergoeding
             and (
                 prijscomponent.begindatum is None
                 or prijscomponent.begindatum <= peildatum

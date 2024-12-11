@@ -11,27 +11,25 @@ from woningwaardering.stelsels.utils import (
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
-from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
+from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-)
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoort
-from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Meeteenheid,
+    Ruimtedetailsoort,
+    Voorzieningsoort,
     Woningwaarderingstelsel,
-)
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     Woningwaarderingstelselgroep,
+    WoningwaarderingstelselReferentiedata,
 )
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
 def waardeer_keuken(
     ruimte: EenhedenRuimte,
-    stelsel: Woningwaarderingstelsel,
+    stelsel: WoningwaarderingstelselReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     if not _is_keuken(ruimte):
         logger.debug(
@@ -71,16 +69,9 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
         )
         return False
 
-    if not ruimte.detail_soort.code:
-        warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.code",
-            UserWarning,
-        )
-        return False
-
-    if ruimte.detail_soort.code in [
-        Ruimtedetailsoort.keuken.code,
-        Ruimtedetailsoort.woonkamer_en_of_keuken.code,
+    if ruimte.detail_soort in [
+        Ruimtedetailsoort.keuken,
+        Ruimtedetailsoort.woonkamer_en_of_keuken,
     ]:
         if aanrecht_aantal == 0:
             warnings.warn(
@@ -89,10 +80,10 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
             )
             return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
         return True  # ruimte is een keuken met een valide aanrecht
-    if ruimte.detail_soort.code not in [
-        Ruimtedetailsoort.woonkamer.code,
-        Ruimtedetailsoort.woon_en_of_slaapkamer.code,
-        Ruimtedetailsoort.slaapkamer.code,
+    if ruimte.detail_soort not in [
+        Ruimtedetailsoort.woonkamer,
+        Ruimtedetailsoort.woon_en_of_slaapkamer,
+        Ruimtedetailsoort.slaapkamer,
     ]:
         return False  # ruimte is geen ruimte dat een keuken zou kunnen zijn met een aanrecht erin
 
@@ -104,26 +95,26 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
 
 def _waardeer_aanrecht(
     ruimte: EenhedenRuimte,
-    stelsel: Woningwaarderingstelsel,
+    stelsel: WoningwaarderingstelselReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     """
     Waardeert de aanrechten van een keuken.
 
     Args:
         ruimte (EenhedenRuimte): De keuken waarvan de aanrechten gewaardeerd worden.
-        stelsel (Woningwaarderingstelsel): Het stelsel waarvoor de aanrechten gewaardeerd worden.
+        stelsel (WoningwaarderingstelselReferentiedata): Het stelsel waarvoor de aanrechten gewaardeerd worden.
 
     Yields:
         WoningwaarderingResultatenWoningwaardering: De gewaardeerde aanrechten.
     """
     for element in ruimte.bouwkundige_elementen or []:
-        if not element.detail_soort or not element.detail_soort.code:
+        if not element.detail_soort:
             warnings.warn(
-                f"Bouwkundig element {element.id} heeft geen detailsoort.code en kan daardoor niet gewaardeerd worden.",
+                f"Bouwkundig element {element.id} heeft geen detailsoort en kan daardoor niet gewaardeerd worden.",
                 UserWarning,
             )
             continue
-        if element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code:
+        if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht:
             if not element.lengte:
                 warnings.warn(
                     f"{Bouwkundigelementdetailsoort.aanrecht.naam} {element.id} heeft geen lengte en kan daardoor niet gewaardeerd worden.",
@@ -165,7 +156,7 @@ def _waardeer_aanrecht(
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"{ruimte.naam}: Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
-                    meeteenheid=Meeteenheid.millimeter.value,
+                    meeteenheid=Meeteenheid.millimeter,
                 ),
                 punten=aanrecht_punten,
                 aantal=element.lengte,
@@ -187,24 +178,24 @@ def _waardeer_extra_voorzieningen(
     totaal_lengte_aanrechten = sum(
         Decimal(str(element.lengte or "0"))
         for element in ruimte.bouwkundige_elementen or []
-        if element.detail_soort
-        and element.detail_soort.code == Bouwkundigelementdetailsoort.aanrecht.code
+        if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
     )
-    punten_per_installatie = {
-        Voorzieningsoort.inbouw_afzuiginstallatie.value: 0.75,
-        Voorzieningsoort.inbouw_kookplaat_inductie.value: 1.75,
-        Voorzieningsoort.inbouw_kookplaat_keramisch.value: 1.0,
-        Voorzieningsoort.inbouw_kookplaat_gas.value: 0.5,
-        Voorzieningsoort.inbouw_koelkast.value: 1.0,
-        Voorzieningsoort.inbouw_vrieskast.value: 0.75,
-        Voorzieningsoort.inbouw_oven_elektrisch.value: 1.0,
-        Voorzieningsoort.inbouw_oven_gas.value: 0.5,
-        Voorzieningsoort.inbouw_magnetron.value: 1.0,
-        Voorzieningsoort.inbouw_vaatwasmachine.value: 1.5,
-        Voorzieningsoort.extra_keukenkastruimte_boven_het_minimum.value: 0.75,
-        Voorzieningsoort.eenhandsmengkraan.value: 0.25,
-        Voorzieningsoort.thermostatische_mengkraan.value: 0.5,
-        Voorzieningsoort.kokend_waterfunctie.value: 0.5,
+
+    punten_per_installatie: dict[Referentiedata, float] = {
+        Voorzieningsoort.inbouw_afzuiginstallatie: 0.75,
+        Voorzieningsoort.inbouw_kookplaat_inductie: 1.75,
+        Voorzieningsoort.inbouw_kookplaat_keramisch: 1.0,
+        Voorzieningsoort.inbouw_kookplaat_gas: 0.5,
+        Voorzieningsoort.inbouw_koelkast: 1.0,
+        Voorzieningsoort.inbouw_vrieskast: 0.75,
+        Voorzieningsoort.inbouw_oven_elektrisch: 1.0,
+        Voorzieningsoort.inbouw_oven_gas: 0.5,
+        Voorzieningsoort.inbouw_magnetron: 1.0,
+        Voorzieningsoort.inbouw_vaatwasmachine: 1.5,
+        Voorzieningsoort.extra_keukenkastruimte_boven_het_minimum: 0.75,
+        Voorzieningsoort.eenhandsmengkraan: 0.25,
+        Voorzieningsoort.thermostatische_mengkraan: 0.5,
+        Voorzieningsoort.kokend_waterfunctie: 0.5,
     }
 
     voorziening_counts = Counter(
@@ -223,7 +214,7 @@ def _waardeer_extra_voorzieningen(
             decimalen=2,
         )
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {count}x een '{voorziening.naam}' en telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {count}x een '{voorziening.naam}' voor {Woningwaarderingstelselgroep.keuken.naam}."
         )
         yield (
             WoningwaarderingResultatenWoningwaardering(

@@ -19,10 +19,8 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Woningwaarderingstelsel,
-)
-from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
-    Woningwaarderingstelselgroep,
+    WoningwaarderingstelselgroepReferentiedata,
+    WoningwaarderingstelselReferentiedata,
 )
 
 
@@ -30,7 +28,7 @@ class Stelsel:
     """Initialiseert een Stelsel object.
 
     Parameters:
-        stelsel (Woningwaarderingstelsel): Het stelsel dat wordt berekend.
+        stelsel (WoningwaarderingstelselReferentiedata): Het stelsel dat wordt berekend.
         begindatum (date): De begindatum van de geldigheid van het stelsel.
         einddatum (date, optional): De einddatum van de geldigheid van het stelsel.
         peildatum (date, optional): De peildatum voor de waardering.
@@ -43,17 +41,17 @@ class Stelsel:
 
     def __init__(
         self,
-        stelsel: Woningwaarderingstelsel,
+        stelsel: WoningwaarderingstelselReferentiedata,
         begindatum: date,
         einddatum: date = date.max,
         peildatum: date = date.today(),
         stelselgroepen: list[type[Stelselgroep]] | None = None,
     ) -> None:
         self.stelsel = stelsel
-        logger.info(f"Stelsel {stelsel.value.naam} wordt gebruikt.")
+        logger.info(f"Stelsel {stelsel.naam} wordt gebruikt.")
         if not is_geldig(begindatum, einddatum, peildatum):
             raise ValueError(
-                f"Stelsel {stelsel.value.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
+                f"Stelsel {stelsel.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
             )
 
         self.peildatum = peildatum
@@ -70,13 +68,13 @@ class Stelsel:
         self,
         eenheid: EenhedenEenheid,
         *,
-        negeer_stelselgroep: Woningwaarderingstelselgroep | None = None,
+        negeer_stelselgroep: WoningwaarderingstelselgroepReferentiedata | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """Berekent de woningwaardering voor een stelsel.
 
         Parameters:
             eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
-            negeer_stelselgroep (Woningwaarderingstelselgroep | None, optional): Een stelselgroep die moet worden overgeslagen.
+            negeer_stelselgroep (WoningwaarderingstelselgroepReferentiedata | None, optional): Een stelselgroep die moet worden overgeslagen.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
@@ -85,7 +83,7 @@ class Stelsel:
         normaliseer_ruimte_namen(eenheid)
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-        resultaat.stelsel = self.stelsel.value
+        resultaat.stelsel = self.stelsel
 
         resultaat.groepen = []
 

@@ -1,10 +1,13 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidsoort(Enum):
-    bedrijfsruimte = Referentiedata(
+class EenheidsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheidsoort(Referentiedatasoort):
+    bedrijfsruimte = EenheidsoortReferentiedata(
         code="BED",
         naam="Bedrijfsruimte",
     )
@@ -12,7 +15,7 @@ class Eenheidsoort(Enum):
     Bedrijfsruimte en winkels
     """
 
-    intramuraal_zorgvastgoed = Referentiedata(
+    intramuraal_zorgvastgoed = EenheidsoortReferentiedata(
         code="INT",
         naam="Intramuraal zorgvastgoed",
     )
@@ -25,7 +28,7 @@ class Eenheidsoort(Enum):
     gehandicapten of instelling voor cliënten met langdurige psychische problemen.
     """
 
-    maatschappelijk_vastgoed = Referentiedata(
+    maatschappelijk_vastgoed = EenheidsoortReferentiedata(
         code="MOG",
         naam="Maatschappelijk vastgoed",
     )
@@ -35,7 +38,7 @@ class Eenheidsoort(Enum):
     buurtcentra, scholen en bibliotheken.
     """
 
-    overig = Referentiedata(
+    overig = EenheidsoortReferentiedata(
         code="OVE",
         naam="Overig",
     )
@@ -43,7 +46,7 @@ class Eenheidsoort(Enum):
     Restcategorie voor ligplaatsen, bergingen, bouwkavels, plantsoenen etc.
     """
 
-    parkeergelegenheid = Referentiedata(
+    parkeergelegenheid = EenheidsoortReferentiedata(
         code="PAR",
         naam="Parkeergelegenheid",
     )
@@ -51,7 +54,7 @@ class Eenheidsoort(Enum):
     Parkeergelegenheden, Garage, parkeerplaatsen individueel of collectief
     """
 
-    recreatiebestemming = Referentiedata(
+    recreatiebestemming = EenheidsoortReferentiedata(
         code="REC",
         naam="Recreatiebestemming",
     )
@@ -59,24 +62,10 @@ class Eenheidsoort(Enum):
     Vastgoed voor recreatief gebruik (lokale regelgeving) zoals Recreatiewoningen
     """
 
-    woonruimte = Referentiedata(
+    woonruimte = EenheidsoortReferentiedata(
         code="WOO",
         naam="Woonruimte",
     )
     """
     Synoniemen zijn onder andere: wooneenheden,  woongelegenheden (Handboek MVS)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

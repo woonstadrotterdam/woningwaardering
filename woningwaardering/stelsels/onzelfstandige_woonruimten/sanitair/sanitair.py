@@ -20,11 +20,12 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Ruimtedetailsoort,
+    Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
+    WoningwaarderingstelselgroepReferentiedata,
 )
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
-from woningwaardering.vera.referentiedata.voorzieningsoort import Voorzieningsoort
 
 
 class Sanitair(Stelselgroep):
@@ -49,8 +50,8 @@ class Sanitair(Stelselgroep):
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
         woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel.value,
-                stelselgroep=self.stelselgroep.value,
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
             )
         )
         woningwaardering_groep.woningwaarderingen = []
@@ -89,7 +90,7 @@ class Sanitair(Stelselgroep):
     @staticmethod
     def genereer_woningwaarderingen(
         ruimten: list[EenhedenRuimte],
-        stelselgroep: Woningwaarderingstelselgroep,
+        stelselgroep: WoningwaarderingstelselgroepReferentiedata,
     ) -> Iterator[
         tuple[EenhedenRuimte, list[WoningwaarderingResultatenWoningwaardering]]
     ]:
@@ -114,9 +115,9 @@ class Sanitair(Stelselgroep):
             )
             # zoek het maximum aantal wastafels in een ruimte m.u.v. badkamer
             if ruimte.detail_soort not in [
-                Ruimtedetailsoort.badkamer.value,
-                Ruimtedetailsoort.badkamer_met_toilet.value,
-                Ruimtedetailsoort.doucheruimte.value,
+                Ruimtedetailsoort.badkamer,
+                Ruimtedetailsoort.badkamer_met_toilet,
+                Ruimtedetailsoort.doucheruimte,
             ]:
                 aantal_wastafels = sum(
                     [
@@ -220,7 +221,7 @@ class Sanitair(Stelselgroep):
                         and woningwaardering.aantal > 1
                     ):
                         logger.info(
-                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {woningwaardering.aantal} meerpersoonswastafels. Maximaal 1,5 punt voor meerpersoonswastafels."
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {woningwaardering.aantal} meerpersoonswastafels. Maximaal 1.5 punt voor meerpersoonswastafels."
                         )
                         woningwaarderingen.insert(
                             index + 1,

@@ -50,7 +50,7 @@ questions = [
     ),
     inquirer.Text(
         "begindatum",
-        message=lambda answers: f"Vanaf welke datum is het {Woningwaarderingstelsel[answers.get('stelsel')].naam} stelsel geldig?",
+        message=lambda answers: f"Vanaf welke datum is het {getattr(Woningwaarderingstelsel, answers.get('stelsel').naam)} stelsel geldig?",
         default=date(date.today().year, 7, 1),
         validate=validate_date,
     ),
@@ -60,10 +60,10 @@ questions = [
         choices=lambda answers: [
             (stelselgroep.naam, stelselgroep.name)
             for stelselgroep in Woningwaarderingstelselgroep
-            if stelselgroep.value.parent is None
-            or stelselgroep.value.parent is not None
-            and stelselgroep.value.parent.code
-            == Woningwaarderingstelsel[answers.get("stelsel")].code
+            if stelselgroep.parent is None
+            or stelselgroep.parent is not None
+            and stelselgroep.parent
+            == getattr(Woningwaarderingstelsel, answers.get("stelsel"))
         ],
     ),
 ]
@@ -73,10 +73,10 @@ answers = inquirer.prompt(questions)
 stelsel = str(answers.get("stelsel"))
 begindatum = str(answers.get("begindatum"))
 stelselgroep = str(answers.get("stelselgroep"))
-woningwaarderingstelsel = Woningwaarderingstelsel[stelsel]
-woningwaarderingstelselgroep = Woningwaarderingstelselgroep[stelselgroep]
+woningwaarderingstelsel = getattr(Woningwaarderingstelsel, stelsel)
+woningwaarderingstelselgroep = getattr(Woningwaarderingstelselgroep, stelselgroep)
 
-if woningwaarderingstelselgroep.value.naam is None:
+if woningwaarderingstelselgroep.naam is None:
     raise TypeError(f"{woningwaarderingstelselgroep} heeft geen naam")
 
 stelselgroep_class_naam = string.capwords(
@@ -111,7 +111,7 @@ if check_write(stelselgroep_file_path):
 stelselgroep_directories = [
     f
     for f in stelsel_folder.iterdir()
-    if f.is_dir() and f.name in Woningwaarderingstelselgroep.__members__
+    if f.is_dir() and hasattr(Woningwaarderingstelselgroep, f.name)
 ]
 
 stelselgroepen = sorted(

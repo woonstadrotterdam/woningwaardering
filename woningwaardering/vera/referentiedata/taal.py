@@ -1,49 +1,38 @@
-from enum import Enum
-
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Taal(Enum):
-    duits = Referentiedata(
+class TaalReferentiedata(Referentiedata):
+    pass
+
+
+class Taal(Referentiedatasoort):
+    duits = TaalReferentiedata(
         code="DUI",
         naam="Duits",
     )
 
-    engels = Referentiedata(
+    engels = TaalReferentiedata(
         code="ENG",
         naam="Engels",
     )
 
-    frans = Referentiedata(
+    frans = TaalReferentiedata(
         code="FRA",
         naam="Frans",
     )
 
-    nederlands = Referentiedata(
+    nederlands = TaalReferentiedata(
         code="NLD",
         naam="Nederlands",
     )
 
-    spaans = Referentiedata(
+    spaans = TaalReferentiedata(
         code="SPA",
         naam="Spaans",
     )
 
-    turks = Referentiedata(
+    turks = TaalReferentiedata(
         code="TUR",
         naam="Turks",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent
