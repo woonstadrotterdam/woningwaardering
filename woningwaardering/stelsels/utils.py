@@ -151,7 +151,7 @@ def naar_tabel(
         "Naam": 75,
         "Aantal": 12,
         "Meeteenheid": 19,
-        "Punten": 7,
+        "Punten": 8,
         "Opslag": 7,
     }
 
@@ -216,7 +216,7 @@ def naar_tabel(
                     stelselgroep_naam,
                     woningwaardering,
                     woningwaarderingen,
-                    indent=0,
+                    indent=1,
                     aantal_waarderingen=aantal_waarderingen,
                 )
 
