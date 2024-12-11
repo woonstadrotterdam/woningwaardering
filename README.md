@@ -6,7 +6,7 @@
 
 # Woningwaardering
 
-> ⚠️ Release v2.x.x kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van juli 2024 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [README](https://github.com/woonstadrotterdam/woningwaardering/tree/${VERSION}#), [de toelichting op de implementatie van het beleidsboek](https://github.com/woonstadrotterdam/woningwaardering/tree/${VERSION}/docs/implementatietoelichting-beleidsboeken) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
+> ⚠️ Release v2.x.x kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van juli 2024 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [README](https://github.com/woonstadrotterdam/woningwaardering/tree/v3.0.0-beta10#), [de toelichting op de implementatie van het beleidsboek](https://github.com/woonstadrotterdam/woningwaardering/tree/v3.0.0-beta10/docs/implementatietoelichting-beleidsboeken) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
 
 📊 **Status**
 
@@ -25,14 +25,14 @@ Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ont
 
 ---
 
-![werking-package](https://raw.githubusercontent.com/woonstadrotterdam/woningwaardering/${VERSION}/docs/afbeeldingen/diagram.png)
+![werking-package](https://raw.githubusercontent.com/woonstadrotterdam/woningwaardering/v3.0.0-beta10/docs/afbeeldingen/diagram.png)
 _Voorbeeld van hoe wij de woningwaardering package gebruiken bij Woonstad Rotterdam_.
 
 ---
 
 Momenteel wordt er gewerkt aan de implementatie van de woningwaardering van onzelfstandige woonruimten volgens het gepubliceerde beleidsboek van de huurcommissie in juli 2024.
-Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van juli 2024 voor zelfstandige woonruimten verwijzen wij naar de [documentatie](https://github.com/woonstadrotterdam/woningwaardering/blob/${VERSION}/docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md) over de implementatie van dit beleidsboek.
-Voor meer informatie over hoe documentatie van het beleidsboek is gemaakt, verwijzen wij naar het hoofdstuk [Implementatie beleidsboek huurcommissie](https://github.com/woonstadrotterdam/woningwaardering/tree/${VERSION}#implementatie-beleidsboek-huurcommissie) in deze `README`.
+Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van juli 2024 voor zelfstandige woonruimten verwijzen wij naar de [documentatie](https://github.com/woonstadrotterdam/woningwaardering/blob/v3.0.0-beta10/docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md) over de implementatie van dit beleidsboek.
+Voor meer informatie over hoe documentatie van het beleidsboek is gemaakt, verwijzen wij naar het hoofdstuk [Implementatie beleidsboek huurcommissie](https://github.com/woonstadrotterdam/woningwaardering/tree/v3.0.0-beta10#implementatie-beleidsboek-huurcommissie) in deze `README`.
 
 Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team Microservices [Tomer Gabay](mailto:tomer.gabay@woonstadrotterdam.nl) of één van de andere maintainers van deze repo.
 
@@ -92,7 +92,7 @@ De stelselgroepen waarop gescoord wordt, zijn vastgelegd in het [woningwaarderin
 Deze worden aangehouden in de opzet van de `woningwaardering`-package.
 Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
 
-De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de Nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpretatie. Daarnaast kan het voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens het beleidsboek tot op de letter nauwkeurig te implementeren. In [implementatietoelichting-beleidsboeken](https://github.com/woonstadrotterdam/woningwaardering/tree/${VERSION}/docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elke stelselgroep is geïmplementeerd en welke keuzes daarin gemaakt zijn.  
+De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de Nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpretatie. Daarnaast kan het voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens het beleidsboek tot op de letter nauwkeurig te implementeren. In [implementatietoelichting-beleidsboeken](https://github.com/woonstadrotterdam/woningwaardering/tree/v3.0.0-beta10/docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elke stelselgroep is geïmplementeerd en welke keuzes daarin gemaakt zijn.  
 In deze documenten wordt bijgehouden welke onderdelen van het beleidsboek wel en niet zijn geïmplementeerd per stelselgroep. De gepubliceerde tekst uit het beleidsboek wordt gekopieerd en wanneer een onderdeel niet in de code van de package is geïmplementeerd zal dit worden aangegeven met ~~doorgestreepte tekst~~.  
 De reden van het niet implementeren van een regelonderdeel is vrijwel altijd dat het technisch niet mogelijk is op basis van het inputmodel van de VERA-standaard. Een voorbeeld hiervan is dat voor oppervlakte van vertrekken in 2024 de minimale breedte van een vertrek over de volledige lengte 1,5m moet zijn. Omdat wij de data van de minimale breedte over de volledige lengte niet binnenkrijgen via het inputmodel kunnen wij dit onderdeel van de regel niet implementeren. **Dit betekent dat het aan de gebruiker is om met deze regelonderdelen rekening te houden bij het eenheid-inputmodel.** Een deel van de deze regelonderdelen wordt al afgevangen indien het eenheid-inputmodel voldoet aan de NEN-norm.
 Regels die wel zijn geimplementeerd zijn niet doorgestreept.
@@ -1261,7 +1261,7 @@ Dit script stelt je een aantal vragen, waarna de code voor het stelsel en de ste
 
 #### Stelsels
 
-De namen voor de stelsels zijn te vinden in de `Woningwaarderingstelsel` Enum. Bijvoorbeeld: het stelsel voor zelfstandige woonruimten wordt aangeduid als `Woningwaarderingstelsel.zelfstandige_woonruimten`. De implementatie van dit `Stelsel` bevindt zich in [woningwaardering/stelsels/zelfstandige_woonruimten/zelfstandige_woonruimten.py](https://github.com/woonstadrotterdam/woningwaardering/blob/${VERSION}/woningwaardering/stelsels/zelfstandige_woonruimten/zelfstandige_woonruimten.py).
+De namen voor de stelsels zijn te vinden in de `Woningwaarderingstelsel` Enum. Bijvoorbeeld: het stelsel voor zelfstandige woonruimten wordt aangeduid als `Woningwaarderingstelsel.zelfstandige_woonruimten`. De implementatie van dit `Stelsel` bevindt zich in [woningwaardering/stelsels/zelfstandige_woonruimten/zelfstandige_woonruimten.py](https://github.com/woonstadrotterdam/woningwaardering/blob/v3.0.0-beta10/woningwaardering/stelsels/zelfstandige_woonruimten/zelfstandige_woonruimten.py).
 De geldigheid van een stelsel wordt bepaald door de begin- en einddatum, die in de constructor van de corresponderende klasse worden vastgelegd.
 
 #### Stelselgroepen
@@ -1389,7 +1389,7 @@ Vervolgens kan je met dit commando de modellen in deze repository bijwerken:
 task genereer-vera-bvg-modellen
 ```
 
-De classes voor deze modellen worden gegeneerd in [woningwaardering/vera/bvg/generated.py](https://github.com/woonstadrotterdam/woningwaardering/blob/${VERSION}/woningwaardering/vera/bvg/generated.py)
+De classes voor deze modellen worden gegeneerd in [woningwaardering/vera/bvg/generated.py](https://github.com/woonstadrotterdam/woningwaardering/blob/v3.0.0-beta10/woningwaardering/vera/bvg/generated.py)
 
 #### Datamodellen uitbreiden
 
@@ -1397,7 +1397,7 @@ Wanneer de VERA modellen niet toereikend zijn om de woningwaardering te berekene
 
 Maak hiervoor altijd eerst een issue aan in de [VERA OpenApi repository](https://github.com/Aedes-datastandaarden/vera-openapi).
 
-Maak vervolgens in de map [woningwaardering/vera/bvg/model_uitbreidingen](https://github.com/woonstadrotterdam/woningwaardering/blob/${VERSION}/woningwaardering/vera/bvg/model_uitbreidingen) een class aan met de missende attributen. De naamgeving voor deze classes is: `_{classNaam}`.
+Maak vervolgens in de map [woningwaardering/vera/bvg/model_uitbreidingen](https://github.com/woonstadrotterdam/woningwaardering/blob/v3.0.0-beta10/woningwaardering/vera/bvg/model_uitbreidingen) een class aan met de missende attributen. De naamgeving voor deze classes is: `_{classNaam}`.
 
 Zet in de class bij het toegevoegde attribuut een comment met een link naar het issue in de VERA OpenApi repository zodat duidelijk is waar de toevoeging voor dient, en we kunnen volgen of de aanpassing is doorgevoerd in de VERA modellen.
 
@@ -1440,7 +1440,7 @@ De referentiedata wordt gegenereerd in `woningwaardering/vera/referentiedata`
 ### Woonplaatsen en COROP-gebieden
 
 Om te bepalen in welk COROP-gebied een woonplaats ligt, maken we gebruik van de CBS datasets "Woonplaatsen in Nederland" en "Gebieden in Nederland".
-Het CBS publiceert eens per jaar nieuwe datasets, daarom hebben we een script gemaakt dat een extract van deze data als resource in de package opslaat in [woningwaardering/data/corop/corop.generated.csv](https://github.com/woonstadrotterdam/woningwaardering/blob/${VERSION}/woningwaardering/data/corop/corop.generated.csv).
+Het CBS publiceert eens per jaar nieuwe datasets, daarom hebben we een script gemaakt dat een extract van deze data als resource in de package opslaat in [woningwaardering/data/corop/corop.generated.csv](https://github.com/woonstadrotterdam/woningwaardering/blob/v3.0.0-beta10/woningwaardering/data/corop/corop.generated.csv).
 
 Wanneer je deze data bij wilt werken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) is geïnstalleerd.
 
@@ -1452,4 +1452,4 @@ task genereer-corop-data
 
 ### Gemiddelde WOZ-waarden per vierkante meter per COROP-gebied
 
-Bij het beleidsboek wordt een bijlage gepubliceerd met de gemiddelde WOZ-waarden per vierkante meter per COROP-gebied. Na publicatie van een nieuwe bijlage dient het bestand [woningwaardering/stelsels/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen/corop_gebied_gemiddelde_woz_waarde_per_m2.csv](https://github.com/woonstadrotterdam/woningwaardering/blob/${VERSION}/woningwaardering/stelsels/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen/corop_gebied_gemiddelde_woz_waarde_per_m2.csv) bijgewerkt te worden, door een kolom toe te voegen met als kolomnaam het jaar van de waardepeildatum waarvoor de nieuwe gemiddelde waarden gelden.
+Bij het beleidsboek wordt een bijlage gepubliceerd met de gemiddelde WOZ-waarden per vierkante meter per COROP-gebied. Na publicatie van een nieuwe bijlage dient het bestand [woningwaardering/stelsels/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen/corop_gebied_gemiddelde_woz_waarde_per_m2.csv](https://github.com/woonstadrotterdam/woningwaardering/blob/v3.0.0-beta10/woningwaardering/stelsels/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen/corop_gebied_gemiddelde_woz_waarde_per_m2.csv) bijgewerkt te worden, door een kolom toe te voegen met als kolomnaam het jaar van de waardepeildatum waarvoor de nieuwe gemiddelde waarden gelden.
