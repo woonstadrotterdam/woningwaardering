@@ -73,10 +73,14 @@ jobs:
       - name: Create and push release branch
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: |
+        run:
+          | # rm --cached .github/workflows/*  is nodig omdat deze workflow geen 'nieuwe' workflows mag aanmaken
           # Remove 'v' prefix from tag name to create branch name
           BRANCH_NAME="release/${GITHUB_REF_NAME}"
           git checkout -b "$BRANCH_NAME"
+          git rm --cached .github/workflows/*
+          git commit -m "Exclude workflows from release branch"
+
           git push origin "$BRANCH_NAME"
 
   publish-to-pypi:
