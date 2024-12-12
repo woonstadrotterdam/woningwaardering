@@ -128,13 +128,17 @@ class VerkoelingEnVerwarming(Stelselgroep):
                         naam=criterium_id.capitalize().replace("_", " "),
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
+                            if aantal_onz > 1
+                            else f"{self.stelselgroep.name}_prive",
                         ),
                     ),
                     punten=float(punten),
                 )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten",
+                    id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
+                    if aantal_onz > 1
+                    else f"{self.stelselgroep.name}_prive",
                     naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
                     if aantal_onz > 1
                     else "Totaal (privé)",

@@ -81,7 +81,7 @@
             "id": "verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming_gedeeld_met_1_onzelfstandige_woonruimten"
+              "id": "verkoeling_en_verwarming_prive"
             }
           },
           "punten": 8.0
@@ -91,14 +91,14 @@
             "id": "open_keuken",
             "naam": "Open keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming_gedeeld_met_1_onzelfstandige_woonruimten"
+              "id": "verkoeling_en_verwarming_prive"
             }
           },
           "punten": 6.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming_gedeeld_met_1_onzelfstandige_woonruimten",
+            "id": "verkoeling_en_verwarming_prive",
             "naam": "Totaal (privé)"
           },
           "punten": 14.0

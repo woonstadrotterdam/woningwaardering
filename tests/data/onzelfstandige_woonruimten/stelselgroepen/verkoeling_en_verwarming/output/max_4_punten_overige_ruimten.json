@@ -72,14 +72,14 @@
             "id": "verwarmde_overige_en_verkeersruimten",
             "naam": "Verwarmde overige en verkeersruimten",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming_gedeeld_met_1_onzelfstandige_woonruimten"
+              "id": "verkoeling_en_verwarming_prive"
             }
           },
           "punten": 4.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming_gedeeld_met_1_onzelfstandige_woonruimten",
+            "id": "verkoeling_en_verwarming_prive",
             "naam": "Totaal (privé)"
           },
           "punten": 4.0
