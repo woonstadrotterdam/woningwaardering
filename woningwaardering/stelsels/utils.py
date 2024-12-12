@@ -471,9 +471,7 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
 CULTUREELERFGOED_SPARQL_ENDPOINT = (
     "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
 )
-KADASTER_SPARQL_ENDPOINT = (
-    "https://api.labs.kadaster.nl/datasets/dst/kkg/services/default/sparql"
-)
+KADASTER_SPARQL_ENDPOINT = "https://api.labs.kadaster.nl/datasets/kadaster/kkg/sparql"
 
 RIJKSMONUMENTEN_QUERY_TEMPLATE = """
 PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
