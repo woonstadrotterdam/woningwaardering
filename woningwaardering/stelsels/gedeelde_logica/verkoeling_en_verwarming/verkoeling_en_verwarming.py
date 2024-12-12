@@ -16,6 +16,7 @@ from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
     Ruimtesoort,
+    Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
@@ -51,7 +52,7 @@ def _waardeer_verwarmde_overige_ruimte(
             Ruimtesoort.verkeersruimte,
         ):
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde overige- of verkeersruimte en krijgt 1 punt"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde overige- of verkeersruimte mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
             )
             yield (
                 ruimte,
@@ -107,7 +108,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                 totaal_punten_verkoeld_en_verwarmd += 1
                 punten += 1  # 1 punt extra per vertrek wanneer verwarmd en verkoeld
                 logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verkoeld en verwarmd vertrek en krijgt {punten} punten"
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verkoeld en verwarmd vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
                 )
                 yield (
                     ruimte,
@@ -139,7 +140,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                     )
             else:
                 logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek en krijgt {punten} punten"
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
                 )
                 yield (
                     ruimte,
@@ -183,7 +184,7 @@ def _waardeer_open_keuken(
             )
         ):
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als open keuken en krijgt 2 punten"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
             )
             yield (
                 ruimte,

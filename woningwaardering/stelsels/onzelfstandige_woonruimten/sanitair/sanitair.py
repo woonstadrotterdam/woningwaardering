@@ -221,7 +221,7 @@ class Sanitair(Stelselgroep):
                         and woningwaardering.aantal > 1
                     ):
                         logger.info(
-                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {woningwaardering.aantal} meerpersoonswastafels. Maximaal 1,5 punt voor meerpersoonswastafels."
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {woningwaardering.aantal} meerpersoonswastafels. Maximaal 1.5 punt voor meerpersoonswastafels."
                         )
                         woningwaarderingen.insert(
                             index + 1,
