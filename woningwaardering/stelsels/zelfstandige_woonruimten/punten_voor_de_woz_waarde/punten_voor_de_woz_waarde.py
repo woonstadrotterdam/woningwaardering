@@ -14,7 +14,6 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
     EenhedenWozEenheid,
-    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -25,7 +24,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/zelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen"
@@ -142,30 +140,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="WOZ-waarde",
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_I",
-                    ),
-                ),
-                aantal=int(woz_waarde),
-            )
-        )
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Factor I",
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_I",
-                    ),
-                ),
-                aantal=factor_onderdeel_I,
-            )
-        )
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Onderdeel I",
-                    id=f"{self.stelselgroep.naam}_onderdeel_I",
+                    naam="Onderdeel I"
                 ),
                 punten=punten_onderdeel_I,
             )
@@ -192,44 +167,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="WOZ-waarde",
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_II",
-                    ),
-                ),
-                aantal=woz_waarde,
-            )
-        )
-
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Oppervlakte van vertrekken en overige ruimten",
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_II",
-                    ),
-                    meeteenheid=Meeteenheid.vierkante_meter_m2,
-                ),
-                aantal=oppervlakte,
-            )
-        )
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Factor II",
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_II",
-                    ),
-                ),
-                aantal=factor_onderdeel_II,
-            )
-        )
-
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Onderdeel II",
-                    id=f"{self.stelselgroep.naam}_onderdeel_II",
+                    naam="Onderdeel II"
                 ),
                 punten=float(punten_onderdeel_II),
             )
