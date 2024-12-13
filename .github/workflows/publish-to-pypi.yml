@@ -70,12 +70,16 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all history for all branches and tags
 
+      - name: Configure Git identity
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
       - name: Create and push release branch
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run:
           | # rm --cached .github/workflows/*  is nodig omdat deze workflow geen 'nieuwe' workflows mag aanmaken
-          # Remove 'v' prefix from tag name to create branch name
           BRANCH_NAME="release/${GITHUB_REF_NAME}"
           git checkout -b "$BRANCH_NAME"
           git rm --cached .github/workflows/*
