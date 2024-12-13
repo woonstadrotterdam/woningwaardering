@@ -328,13 +328,64 @@
       "punten": 42.0,
       "woningwaarderingen": [
         {
+          "aantal": 298000.0,
           "criterium": {
+            "naam": "WOZ-waarde",
+            "bovenliggendeCriterium": {
+              "id": "Punten voor de WOZ-waarde_onderdeel_I"
+            }
+          }
+        },
+        {
+          "aantal": 14543.0,
+          "criterium": {
+            "naam": "Factor I",
+            "bovenliggendeCriterium": {
+              "id": "Punten voor de WOZ-waarde_onderdeel_I"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "Punten voor de WOZ-waarde_onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 20.49
         },
         {
+          "aantal": 298000.0,
           "criterium": {
+            "naam": "WOZ-waarde",
+            "bovenliggendeCriterium": {
+              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+            }
+          }
+        },
+        {
+          "aantal": 59.54,
+          "criterium": {
+            "naam": "Oppervlakte van vertrekken en overige ruimten",
+            "bovenliggendeCriterium": {
+              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 229.0,
+          "criterium": {
+            "naam": "Factor II",
+            "bovenliggendeCriterium": {
+              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "Punten voor de WOZ-waarde_onderdeel_II",
             "naam": "Onderdeel II"
           },
           "punten": 21.86
