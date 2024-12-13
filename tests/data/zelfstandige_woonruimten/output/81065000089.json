@@ -326,7 +326,7 @@
           "criterium": {
             "naam": "WOZ-waarde",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_I"
+              "id": "Punten voor de WOZ-waarde Onderdeel I"
             }
           }
         },
@@ -335,13 +335,13 @@
           "criterium": {
             "naam": "Factor I",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_I"
+              "id": "Punten voor de WOZ-waarde Onderdeel I"
             }
           }
         },
         {
           "criterium": {
-            "id": "Punten voor de WOZ-waarde_onderdeel_I",
+            "id": "Punten voor de WOZ-waarde Onderdeel I",
             "naam": "Onderdeel I"
           },
           "punten": 15.54
@@ -351,7 +351,7 @@
           "criterium": {
             "naam": "WOZ-waarde",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+              "id": "Punten voor de WOZ-waarde Onderdeel II"
             }
           }
         },
@@ -360,7 +360,7 @@
           "criterium": {
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+              "id": "Punten voor de WOZ-waarde Onderdeel II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -373,13 +373,13 @@
           "criterium": {
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+              "id": "Punten voor de WOZ-waarde Onderdeel II"
             }
           }
         },
         {
           "criterium": {
-            "id": "Punten voor de WOZ-waarde_onderdeel_II",
+            "id": "Punten voor de WOZ-waarde Onderdeel II",
             "naam": "Onderdeel II"
           },
           "punten": 13.87
