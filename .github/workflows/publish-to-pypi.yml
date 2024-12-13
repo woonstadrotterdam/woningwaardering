@@ -60,6 +60,7 @@ jobs:
           BRANCH_NAME="release/${GITHUB_REF_NAME}"
           git checkout -b "$BRANCH_NAME"
           git rm --cached .github/workflows/*
+          # Replace `/tree/main/` or `/blob/main/` with `/tree/{REF}/` or `/blob/{REF}/`
           sed -i -E "s|(https://github.com/woonstadrotterdam/woningwaardering/)(tree|blob)/main/|\1\2/${GITHUB_REF_NAME}/|g" README.md
           git add README.md
           git commit -m "Exclude workflows from release branch and update README links"
