@@ -134,12 +134,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
         )
 
+        id_onderdeel_I = f"{self.stelselgroep.naam} Onderdeel I"
+        id_onderdeel_II = f"{self.stelselgroep.naam} Onderdeel II"
+
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="WOZ-waarde",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_I",
+                        id=id_onderdeel_I,
                     ),
                 ),
                 aantal=int(woz_waarde),
@@ -150,7 +153,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Factor I",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_I",
+                        id=id_onderdeel_I,
                     ),
                 ),
                 aantal=factor_onderdeel_I,
@@ -160,7 +163,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel I",
-                    id=f"{self.stelselgroep.naam}_onderdeel_I",
+                    id=id_onderdeel_I,
                 ),
                 punten=punten_onderdeel_I,
             )
@@ -189,7 +192,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="WOZ-waarde",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_II",
+                        id=id_onderdeel_II,
                     ),
                 ),
                 aantal=woz_waarde,
@@ -201,7 +204,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Oppervlakte van vertrekken en overige ruimten",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_II",
+                        id=id_onderdeel_II,
                     ),
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 ),
@@ -213,7 +216,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Factor II",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.naam}_onderdeel_II",
+                        id=id_onderdeel_II,
                     ),
                 ),
                 aantal=factor_onderdeel_II,
@@ -224,7 +227,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Onderdeel II",
-                    id=f"{self.stelselgroep.naam}_onderdeel_II",
+                    id=id_onderdeel_II,
                 ),
                 punten=float(punten_onderdeel_II),
             )
