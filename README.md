@@ -625,7 +625,7 @@ with open(
           "criterium": {
             "naam": "WOZ-waarde",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_I"
+              "id": "Punten voor de WOZ-waarde Onderdeel I"
             }
           }
         },
@@ -634,13 +634,13 @@ with open(
           "criterium": {
             "naam": "Factor I",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_I"
+              "id": "Punten voor de WOZ-waarde Onderdeel I"
             }
           }
         },
         {
           "criterium": {
-            "id": "Punten voor de WOZ-waarde_onderdeel_I",
+            "id": "Punten voor de WOZ-waarde Onderdeel I",
             "naam": "Onderdeel I"
           },
           "punten": 44.21
@@ -650,7 +650,7 @@ with open(
           "criterium": {
             "naam": "WOZ-waarde",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+              "id": "Punten voor de WOZ-waarde Onderdeel II"
             }
           }
         },
@@ -659,7 +659,7 @@ with open(
           "criterium": {
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+              "id": "Punten voor de WOZ-waarde Onderdeel II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -672,13 +672,13 @@ with open(
           "criterium": {
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+              "id": "Punten voor de WOZ-waarde Onderdeel II"
             }
           }
         },
         {
           "criterium": {
-            "id": "Punten voor de WOZ-waarde_onderdeel_II",
+            "id": "Punten voor de WOZ-waarde Onderdeel II",
             "naam": "Onderdeel II"
           },
           "punten": 19.03
@@ -1140,7 +1140,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "criterium": {
             "naam": "WOZ-waarde",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_I"
+              "id": "Punten voor de WOZ-waarde Onderdeel I"
             }
           }
         },
@@ -1149,13 +1149,13 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "criterium": {
             "naam": "Factor I",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_I"
+              "id": "Punten voor de WOZ-waarde Onderdeel I"
             }
           }
         },
         {
           "criterium": {
-            "id": "Punten voor de WOZ-waarde_onderdeel_I",
+            "id": "Punten voor de WOZ-waarde Onderdeel I",
             "naam": "Onderdeel I"
           },
           "punten": 44.21
@@ -1165,7 +1165,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "criterium": {
             "naam": "WOZ-waarde",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+              "id": "Punten voor de WOZ-waarde Onderdeel II"
             }
           }
         },
@@ -1174,7 +1174,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "criterium": {
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+              "id": "Punten voor de WOZ-waarde Onderdeel II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -1187,13 +1187,13 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "criterium": {
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "Punten voor de WOZ-waarde_onderdeel_II"
+              "id": "Punten voor de WOZ-waarde Onderdeel II"
             }
           }
         },
         {
           "criterium": {
-            "id": "Punten voor de WOZ-waarde_onderdeel_II",
+            "id": "Punten voor de WOZ-waarde Onderdeel II",
             "naam": "Onderdeel II"
           },
           "punten": 67.79
