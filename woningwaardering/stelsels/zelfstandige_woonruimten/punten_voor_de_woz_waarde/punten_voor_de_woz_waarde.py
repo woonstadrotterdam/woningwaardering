@@ -86,11 +86,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 negeer_stelselgroep=Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
             )
 
-        if not eenheid.bouwjaar:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): geen bouwjaar gevonden", UserWarning
-            )
-            return woningwaardering_groep
         woz_eenheid = self.bepaal_woz_eenheid(eenheid)
 
         if woz_eenheid is None:
@@ -530,6 +525,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         """
 
         minimum_punten = Decimal("0")
+        if not eenheid.bouwjaar:
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): geen bouwjaar gevonden. Kan niet bepalen of woning onder nieuwbouw valt.",
+                UserWarning,
+            )
 
         bouwjaar = eenheid.bouwjaar
 
