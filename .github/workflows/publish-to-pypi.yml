@@ -14,8 +14,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Update README links
         run: |
-          # Replace /tree/main/ and /blob/main/ with /tree/{VERSION}/ and /blob/{VERSION}/ respectively
-          sed -i -E 's|(@https://github.com/woonstadrotterdam/woningwaardering/)([^/]+/)?main/|\\1\\2'"${{ github.ref_name }}"'/|g' README.md
+          sed -i -E "s|(https://github.com/woonstadrotterdam/woningwaardering/)(tree|blob)/main/|\1\2/${GITHUB_REF_NAME}/|g" README.md
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -34,33 +34,10 @@ jobs:
           name: python-package-distributions
           path: dist/
 
-  publish-to-testpypi:
-    name: Publish to TestPyPI
-    needs:
-      - build
-    runs-on: ubuntu-latest
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/woningwaardering
-    permissions:
-      id-token: write # IMPORTANT: mandatory for trusted publishing
-
-    steps:
-      - name: Download all the dists
-        uses: actions/download-artifact@v4
-        with:
-          name: python-package-distributions
-          path: dist/
-      - name: Publish distribution 📦 to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
-          skip-existing: true
-
   create-release-branch:
     name: Create release branch
     needs:
-      - publish-to-testpypi
+      - build
     runs-on: ubuntu-latest
     permissions:
       contents: write # Required for pushing branches
@@ -83,9 +60,34 @@ jobs:
           BRANCH_NAME="release/${GITHUB_REF_NAME}"
           git checkout -b "$BRANCH_NAME"
           git rm --cached .github/workflows/*
-          git commit -m "Exclude workflows from release branch"
-
+          sed -i -E "s|(https://github.com/woonstadrotterdam/woningwaardering/)(tree|blob)/main/|\1\2/${GITHUB_REF_NAME}/|g" README.md
+          git add README.md
+          git commit -m "Exclude workflows from release branch and update README links"
           git push origin "$BRANCH_NAME"
+
+  publish-to-testpypi:
+    name: Publish to TestPyPI
+    needs:
+      - build
+      - create-release-branch
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/woningwaardering
+    permissions:
+      id-token: write # IMPORTANT: mandatory for trusted publishing
+
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Publish distribution 📦 to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
 
   publish-to-pypi:
     name: Publish to PyPI
