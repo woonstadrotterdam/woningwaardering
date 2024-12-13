@@ -134,8 +134,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
         )
 
-        id_onderdeel_I = f"{self.stelselgroep.naam} Onderdeel I"
-        id_onderdeel_II = f"{self.stelselgroep.naam} Onderdeel II"
+        id_onderdeel_I = f"{self.stelselgroep.name}_onderdeel_I"
+        id_onderdeel_II = f"{self.stelselgroep.name}_onderdeel_II"
 
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
