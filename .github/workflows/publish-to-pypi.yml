@@ -74,7 +74,6 @@ jobs:
     name: Publish to TestPyPI
     needs:
       - build
-      - create-release-branch
     runs-on: ubuntu-latest
     environment:
       name: testpypi
@@ -99,6 +98,7 @@ jobs:
     needs:
       - build
       - publish-to-testpypi
+      - create-release-branch
     runs-on: ubuntu-latest
     environment:
       name: pypi
