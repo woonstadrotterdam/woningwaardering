@@ -16,6 +16,8 @@ jobs:
         run: |
           # Replace /tree/main/ and /blob/main/ with /tree/{VERSION}/ and /blob/{VERSION}/ respectively
           sed -i -E "s@(https://github.com/woonstadrotterdam/woningwaardering/)(tree|blob)/main/@\\1\\2/${GITHUB_REF_NAME}/@g" README.md
+      - name: Show modified README
+        run: cat README.md
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
