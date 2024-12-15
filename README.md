@@ -6,7 +6,7 @@
 
 # Woningwaardering
 
-> ⚠️ Release v2.x.x kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van juli 2024 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [README](https://github.com/woonstadrotterdam/woningwaardering/tree/main/#), [de toelichting op de implementatie van het beleidsboek](https://github.com/woonstadrotterdam/woningwaardering/tree/main/docs/implementatietoelichting-beleidsboeken) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
+> ⚠️ Release v2.x.x kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van juli 2024 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [README](https://github.com/woonstadrotterdam/woningwaardering/tree/v3.0.0-beta21/#), [de toelichting op de implementatie van het beleidsboek](https://github.com/woonstadrotterdam/woningwaardering/tree/v3.0.0-beta21/docs/implementatietoelichting-beleidsboeken) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
 
 📊 **Status**
 
@@ -31,7 +31,7 @@ _Voorbeeld van hoe wij de woningwaardering package gebruiken bij Woonstad Rotter
 ---
 
 Momenteel wordt er gewerkt aan de implementatie van de woningwaardering van onzelfstandige woonruimten volgens het gepubliceerde beleidsboek van de huurcommissie in juli 2024.
-Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van juli 2024 voor zelfstandige woonruimten verwijzen wij naar de [documentatie](https://github.com/woonstadrotterdam/woningwaardering/blob/main/docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md) over de implementatie van dit beleidsboek.
+Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van juli 2024 voor zelfstandige woonruimten verwijzen wij naar de [documentatie](https://github.com/woonstadrotterdam/woningwaardering/blob/v3.0.0-beta21/docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md) over de implementatie van dit beleidsboek.
 Voor meer informatie over hoe documentatie van het beleidsboek is gemaakt, verwijzen wij naar het hoofdstuk [Implementatie beleidsboek huurcommissie](https://github.com/woonstadrotterdam/woningwaardering?tab=readme-ov-file#implementatie-beleidsboek-huurcommissie) in deze `README`.
 
 Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team Microservices [Tomer Gabay](mailto:tomer.gabay@woonstadrotterdam.nl) of één van de andere maintainers van deze repo.
