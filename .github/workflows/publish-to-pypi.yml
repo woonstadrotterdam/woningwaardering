@@ -28,39 +28,18 @@ jobs:
           --user
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
+      - name: Check distribution with twine
+        id: twine-check
+        run: pip install twine && twine check dist/*
       - name: Store the distribution packages
+        if: success() && steps.twine-check.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: python-package-distributions
           path: dist/
 
-  publish-to-testpypi:
-    name: Publish to TestPyPI
-    needs:
-      - build
-    runs-on: ubuntu-latest
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/woningwaardering
-    permissions:
-      id-token: write # IMPORTANT: mandatory for trusted publishing
-
-    steps:
-      - name: Download all the dists
-        uses: actions/download-artifact@v4
-        with:
-          name: python-package-distributions
-          path: dist/
-      - name: Publish distribution 📦 to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
-          skip-existing: true
-
   create-release-branch:
     name: Create release branch
-    needs:
-      - publish-to-testpypi
     runs-on: ubuntu-latest
     permissions:
       contents: write # Required for pushing branches
@@ -87,6 +66,30 @@ jobs:
           git add README.md
           git commit -m "Exclude workflows from release branch and update README links"
           git push origin "$BRANCH_NAME"
+
+  publish-to-testpypi:
+    name: Publish to TestPyPI
+    needs:
+      - build
+      - create-release-branch
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/woningwaardering
+    permissions:
+      id-token: write # IMPORTANT: mandatory for trusted publishing
+
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Publish distribution 📦 to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
 
   publish-to-pypi:
     name: Publish to PyPI
