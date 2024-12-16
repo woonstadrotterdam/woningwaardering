@@ -14,6 +14,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
     EenhedenWozEenheid,
+    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -24,10 +25,13 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/zelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen"
 )
+
+DATUM_FORMAT = "%d-%m-%Y"
 
 
 class PuntenVoorDeWozWaarde(Stelselgroep):
@@ -84,11 +88,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 negeer_stelselgroep=Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
             )
 
-        if not eenheid.bouwjaar:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): geen bouwjaar gevonden", UserWarning
-            )
-            return woningwaardering_groep
         woz_eenheid = self.bepaal_woz_eenheid(eenheid)
 
         if woz_eenheid is None:
@@ -137,10 +136,46 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
         )
 
+        id_onderdeel_I = f"{self.stelselgroep.name}_onderdeel_I"
+        id_onderdeel_II = f"{self.stelselgroep.name}_onderdeel_II"
+
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Onderdeel I"
+                    naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
+                ),
+                aantal=int(woz_eenheid.vastgestelde_waarde),
+            )
+        )
+        # indien de woz-waarde niet gelijk is aan de vastgestelde waarde, is de minimale woz-waarde van toepassing
+        if woz_waarde != woz_eenheid.vastgestelde_waarde:
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Minimum WOZ-waarde gebruikt voor berekening",
+                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                            id=id_onderdeel_I,
+                        ),
+                    ),
+                    aantal=int(woz_waarde),
+                )
+            )
+        woningwaardering_groep.woningwaarderingen.append(
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Factor I",
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=id_onderdeel_I,
+                    ),
+                ),
+                aantal=factor_onderdeel_I,
+            )
+        )
+        woningwaardering_groep.woningwaarderingen.append(
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Onderdeel I",
+                    id=id_onderdeel_I,
                 ),
                 punten=punten_onderdeel_I,
             )
@@ -164,10 +199,49 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
         )
 
+        # indien de woz-waarde niet gelijk is aan de vastgestelde waarde, is de minimale woz-waarde van toepassing
+        if woz_waarde != woz_eenheid.vastgestelde_waarde:
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Minimum WOZ-waarde gebruikt voor berekening",
+                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                            id=id_onderdeel_II,
+                        ),
+                    ),
+                    aantal=int(woz_waarde),
+                )
+            )
+
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Onderdeel II"
+                    naam="Oppervlakte van vertrekken en overige ruimten",
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=id_onderdeel_II,
+                    ),
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
+                ),
+                aantal=oppervlakte,
+            )
+        )
+        woningwaardering_groep.woningwaarderingen.append(
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Factor II",
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=id_onderdeel_II,
+                    ),
+                ),
+                aantal=factor_onderdeel_II,
+            )
+        )
+
+        woningwaardering_groep.woningwaarderingen.append(
+            WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Onderdeel II",
+                    id=id_onderdeel_II,
                 ),
                 punten=float(punten_onderdeel_II),
             )
@@ -468,6 +542,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         """
 
         minimum_punten = Decimal("0")
+        if not eenheid.bouwjaar:
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): geen bouwjaar gevonden. Kan niet bepalen of woning onder nieuwbouw valt.",
+                UserWarning,
+            )
 
         bouwjaar = eenheid.bouwjaar
 
