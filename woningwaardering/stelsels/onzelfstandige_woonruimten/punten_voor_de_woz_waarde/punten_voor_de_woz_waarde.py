@@ -118,9 +118,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # peildatum 1 januari 2023 bedraagt € 73.607. Zie de tabel hieronder voor de
         # minimumwaarde van de afgelopen jaren.
 
-        minimum_woz_waarde = self._minimum_woz_waarde(woz_waardepeildatum)
+        minimum_woz_waarde = self._minimum_woz_waarde(woz_waardepeildatum) or Decimal(
+            str("0")
+        )
 
-        if minimum_woz_waarde is None:
+        if minimum_woz_waarde == 0:
             warnings.warn(
                 f"Eenheid {eenheid.id}: geen minimum WOZ-waarde gevonden voor waardepeildatum {woz_waardepeildatum.strftime(DATUM_FORMAT)}",
                 UserWarning,
@@ -355,19 +357,22 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             files("woningwaardering")
             .joinpath(LOOKUP_TABEL_FOLDER)
             .joinpath("minimum_woz_waarde.csv"),
-            dtype={"peildatum": date},
+            parse_dates=["Peildatum"],
         )
+
+        df_minimum_woz_waarde["Peildatum"] = df_minimum_woz_waarde["Peildatum"].dt.date
+
         minimum_woz_waarde_mask = (
-            df_minimum_woz_waarde["peildatum"] == woz_waardepeildatum
+            df_minimum_woz_waarde["Peildatum"] == woz_waardepeildatum
         )
         if not minimum_woz_waarde_mask.any():
             return None
 
         minimum_woz_waarde = df_minimum_woz_waarde.loc[
-            minimum_woz_waarde_mask, "minimum_woz_waarde"
+            minimum_woz_waarde_mask, "Minimumwaarde"
         ].values[0]
 
-        return Decimal(minimum_woz_waarde)
+        return Decimal(str(minimum_woz_waarde))
 
 
 if __name__ == "__main__":  # pragma: no cover
