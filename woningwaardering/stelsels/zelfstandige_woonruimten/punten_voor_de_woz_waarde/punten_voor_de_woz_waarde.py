@@ -31,6 +31,8 @@ LOOKUP_TABEL_FOLDER = (
     "stelsels/zelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen"
 )
 
+DATUM_FORMAT = "%d-%m-%Y"
+
 
 class PuntenVoorDeWozWaarde(Stelselgroep):
     def __init__(
@@ -140,14 +142,27 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="WOZ-waarde",
+                    naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                         id=id_onderdeel_I,
                     ),
                 ),
-                aantal=int(woz_waarde),
+                aantal=int(woz_eenheid.vastgestelde_waarde),
             )
         )
+        # indien de woz-waarde niet gelijk is aan de vastgestelde waarde, is de minimale woz-waarde van toepassing
+        if woz_waarde != woz_eenheid.vastgestelde_waarde:
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Minimum WOZ-waarde gebruikt voor berekening",
+                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                            id=id_onderdeel_I,
+                        ),
+                    ),
+                    aantal=int(woz_waarde),
+                )
+            )
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -190,14 +205,27 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="WOZ-waarde",
+                    naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                         id=id_onderdeel_II,
                     ),
                 ),
-                aantal=woz_waarde,
+                aantal=int(woz_eenheid.vastgestelde_waarde),
             )
         )
+        # indien de woz-waarde niet gelijk is aan de vastgestelde waarde, is de minimale woz-waarde van toepassing
+        if woz_waarde != woz_eenheid.vastgestelde_waarde:
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam="Minimum WOZ-waarde gebruikt voor berekening",
+                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                            id=id_onderdeel_II,
+                        ),
+                    ),
+                    aantal=int(woz_waarde),
+                )
+            )
 
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
