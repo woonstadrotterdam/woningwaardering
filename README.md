@@ -621,13 +621,52 @@ with open(
       "punten": 63.0,
       "woningwaarderingen": [
         {
+          "aantal": 643000.0,
           "criterium": {
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+          }
+        },
+        {
+          "aantal": 14543.0,
+          "criterium": {
+            "naam": "Factor I",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_I"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde_onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 44.21
         },
         {
+          "aantal": 147.52,
           "criterium": {
+            "naam": "Oppervlakte van vertrekken en overige ruimten",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 229.0,
+          "criterium": {
+            "naam": "Factor II",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde_onderdeel_II",
             "naam": "Onderdeel II"
           },
           "punten": 19.03
@@ -733,8 +772,12 @@ with open(
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Sanitair                          | Totaal                                                                      |              |                     |   15.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2023                                    |   [643000.0] |                     |         |         |
 | Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |   44.21 |         |
+| Punten voor de WOZ-waarde         |  - Factor I                                                                 |    [14543.0] |                     |         |         |
 | Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |   19.03 |         |
+| Punten voor de WOZ-waarde         |  - Oppervlakte van vertrekken en overige ruimten                            |     [147.52] | Vierkante meter, m2 |         |         |
+| Punten voor de WOZ-waarde         |  - Factor II                                                                |      [229.0] |                     |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |   63.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
@@ -1015,7 +1058,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
         {
           "aantal": 2700.0,
           "criterium": {
-            "naam": "Keuken - Lengte aanrecht",
+            "naam": "Keuken: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -1081,13 +1124,52 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
       "punten": 112.0,
       "woningwaarderingen": [
         {
+          "aantal": 643000.0,
           "criterium": {
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+          }
+        },
+        {
+          "aantal": 14543.0,
+          "criterium": {
+            "naam": "Factor I",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_I"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde_onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 44.21
         },
         {
+          "aantal": 41.42,
           "criterium": {
+            "naam": "Oppervlakte van vertrekken en overige ruimten",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 229.0,
+          "criterium": {
+            "naam": "Factor II",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde_onderdeel_II",
             "naam": "Onderdeel II"
           },
           "punten": 67.79
@@ -1141,37 +1223,41 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
 <summary>Voorbeeld output in tabel</summary>
 
 ```text
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Groep                             | Naam                                               |  Aantal | Meeteenheid         |  Punten |  Opslag |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Oppervlakte van vertrekken        | Slaapkamer                                         |   21.05 | Vierkante meter, m2 |         |         |
-| Oppervlakte van vertrekken        | Keuken                                             |   20.37 | Vierkante meter, m2 |         |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Oppervlakte van vertrekken        | Totaal                                             |   41.42 | Vierkante meter, m2 |   41.00 |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Verkoeling en verwarming          | Verwarmde vertrekken                               |         |                     |     4.0 |         |
-| Verkoeling en verwarming          |  - Slaapkamer                                      |         |                     |   [2.0] |         |
-| Verkoeling en verwarming          |  - Keuken                                          |         |                     |   [2.0] |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Verkoeling en verwarming          | Totaal                                             |         |                     |    4.00 |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Buitenruimten                     | Geen buitenruimten                                 |         |                     |    -5.0 |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Energieprestatie                  | C (Energie-index)                                  |         |                     |    22.0 |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Keuken                            | Keuken - Lengte aanrecht                           |  2700.0 | Millimeter          |     7.0 |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Keuken                            | Totaal                                             | 2700.00 | Millimeter          |    7.00 |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Punten voor de WOZ-waarde         | Onderdeel I                                        |         |                     |   44.21 |         |
-| Punten voor de WOZ-waarde         | Onderdeel II                                       |         |                     |   67.79 |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Punten voor de WOZ-waarde         | Totaal                                             |         |                     |  112.00 |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-| Zelfstandige woonruimten          | Afgerond totaal                                    |         |                     |  181.00 |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
-|                                   | Maximale huur                                      | 1125.60 | EUR                 |         |         |
-+-----------------------------------+----------------------------------------------------+---------+---------------------+---------+---------+
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Groep                             | Naam                                                                        |       Aantal | Meeteenheid         |  Punten |  Opslag |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Oppervlakte van vertrekken        | Slaapkamer                                                                  |        21.05 | Vierkante meter, m2 |         |         |
+| Oppervlakte van vertrekken        | Keuken                                                                      |        20.37 | Vierkante meter, m2 |         |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Oppervlakte van vertrekken        | Totaal                                                                      |        41.42 | Vierkante meter, m2 |   41.00 |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Verkoeling en verwarming          | Verwarmde vertrekken                                                        |              |                     |    4.00 |         |
+| Verkoeling en verwarming          |  - Slaapkamer                                                               |              |                     |  [2.00] |         |
+| Verkoeling en verwarming          |  - Keuken                                                                   |              |                     |  [2.00] |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Verkoeling en verwarming          | Totaal                                                                      |              |                     |    4.00 |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Buitenruimten                     | Geen buitenruimten                                                          |              |                     |   -5.00 |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Energieprestatie                  | C (Energie-index)                                                           |              |                     |   22.00 |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Keuken                            | Keuken: Lengte aanrecht                                                     |      2700.00 | Millimeter          |    7.00 |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Keuken                            | Totaal                                                                      |      2700.00 | Millimeter          |    7.00 |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2023                                    |   [643000.0] |                     |         |         |
+| Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |   44.21 |         |
+| Punten voor de WOZ-waarde         |  - Factor I                                                                 |    [14543.0] |                     |         |         |
+| Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |   67.79 |         |
+| Punten voor de WOZ-waarde         |  - Oppervlakte van vertrekken en overige ruimten                            |      [41.42] | Vierkante meter, m2 |         |         |
+| Punten voor de WOZ-waarde         |  - Factor II                                                                |      [229.0] |                     |         |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |  112.00 |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |  181.00 |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+|                                   | Maximale huur                                                               |      1125.60 | EUR                 |         |         |
++-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 ```
 
 </details>

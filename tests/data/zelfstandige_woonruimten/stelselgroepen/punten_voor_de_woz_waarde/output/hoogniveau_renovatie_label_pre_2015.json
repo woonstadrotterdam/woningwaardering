@@ -14,13 +14,52 @@
       "punten": 34.0,
       "woningwaarderingen": [
         {
+          "aantal": 239999.0,
           "criterium": {
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+          }
+        },
+        {
+          "aantal": 14543.0,
+          "criterium": {
+            "naam": "Factor I",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_I"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde_onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 16.5
         },
         {
+          "aantal": 60.05,
           "criterium": {
+            "naam": "Oppervlakte van vertrekken en overige ruimten",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 229.0,
+          "criterium": {
+            "naam": "Factor II",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde_onderdeel_II",
             "naam": "Onderdeel II"
           },
           "punten": 17.45
