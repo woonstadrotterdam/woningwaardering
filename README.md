@@ -623,10 +623,7 @@ with open(
         {
           "aantal": 643000.0,
           "criterium": {
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_I"
-            }
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
           }
         },
         {
@@ -644,15 +641,6 @@ with open(
             "naam": "Onderdeel I"
           },
           "punten": 44.21
-        },
-        {
-          "aantal": 643000.0,
-          "criterium": {
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
-            }
-          }
         },
         {
           "aantal": 147.52,
@@ -784,11 +772,10 @@ with open(
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Sanitair                          | Totaal                                                                      |              |                     |   15.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2023                                    |   [643000.0] |                     |         |         |
 | Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |   44.21 |         |
-| Punten voor de WOZ-waarde         |  - WOZ-waarde op waardepeildatum 01-01-2023                                 |   [643000.0] |                     |         |         |
 | Punten voor de WOZ-waarde         |  - Factor I                                                                 |    [14543.0] |                     |         |         |
 | Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |   19.03 |         |
-| Punten voor de WOZ-waarde         |  - WOZ-waarde op waardepeildatum 01-01-2023                                 |   [643000.0] |                     |         |         |
 | Punten voor de WOZ-waarde         |  - Oppervlakte van vertrekken en overige ruimten                            |     [147.52] | Vierkante meter, m2 |         |         |
 | Punten voor de WOZ-waarde         |  - Factor II                                                                |      [229.0] |                     |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
@@ -1138,10 +1125,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
         {
           "aantal": 643000.0,
           "criterium": {
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_I"
-            }
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
           }
         },
         {
@@ -1159,15 +1143,6 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
             "naam": "Onderdeel I"
           },
           "punten": 44.21
-        },
-        {
-          "aantal": 643000.0,
-          "criterium": {
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
-            }
-          }
         },
         {
           "aantal": 41.42,
@@ -1269,11 +1244,10 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Keuken                            | Totaal                                                                      |      2700.00 | Millimeter          |    7.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
+| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2023                                    |   [643000.0] |                     |         |         |
 | Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |   44.21 |         |
-| Punten voor de WOZ-waarde         |  - WOZ-waarde op waardepeildatum 01-01-2023                                 |   [643000.0] |                     |         |         |
 | Punten voor de WOZ-waarde         |  - Factor I                                                                 |    [14543.0] |                     |         |         |
 | Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |   67.79 |         |
-| Punten voor de WOZ-waarde         |  - WOZ-waarde op waardepeildatum 01-01-2023                                 |   [643000.0] |                     |         |         |
 | Punten voor de WOZ-waarde         |  - Oppervlakte van vertrekken en overige ruimten                            |      [41.42] | Vierkante meter, m2 |         |         |
 | Punten voor de WOZ-waarde         |  - Factor II                                                                |      [229.0] |                     |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+

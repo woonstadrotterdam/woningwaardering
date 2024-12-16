@@ -143,9 +143,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=id_onderdeel_I,
-                    ),
                 ),
                 aantal=int(woz_eenheid.vastgestelde_waarde),
             )
@@ -202,17 +199,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
         )
 
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=id_onderdeel_II,
-                    ),
-                ),
-                aantal=int(woz_eenheid.vastgestelde_waarde),
-            )
-        )
         # indien de woz-waarde niet gelijk is aan de vastgestelde waarde, is de minimale woz-waarde van toepassing
         if woz_waarde != woz_eenheid.vastgestelde_waarde:
             woningwaardering_groep.woningwaarderingen.append(

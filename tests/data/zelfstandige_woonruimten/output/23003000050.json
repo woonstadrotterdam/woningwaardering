@@ -363,10 +363,7 @@
         {
           "aantal": 272000.0,
           "criterium": {
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_I"
-            }
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
           }
         },
         {
@@ -384,15 +381,6 @@
             "naam": "Onderdeel I"
           },
           "punten": 18.7
-        },
-        {
-          "aantal": 272000.0,
-          "criterium": {
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
-            }
-          }
         },
         {
           "aantal": 65.03,
