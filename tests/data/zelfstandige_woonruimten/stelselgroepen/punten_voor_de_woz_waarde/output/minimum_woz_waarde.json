@@ -14,9 +14,18 @@
       "punten": 16.0,
       "woningwaarderingen": [
         {
+          "aantal": 69999.0,
+          "criterium": {
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_I"
+            }
+          }
+        },
+        {
           "aantal": 73607.0,
           "criterium": {
-            "naam": "WOZ-waarde",
+            "naam": "Minimum WOZ-waarde gebruikt voor berekening",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde_onderdeel_I"
             }
@@ -39,9 +48,18 @@
           "punten": 5.06
         },
         {
+          "aantal": 69999.0,
+          "criterium": {
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+            }
+          }
+        },
+        {
           "aantal": 73607.0,
           "criterium": {
-            "naam": "WOZ-waarde",
+            "naam": "Minimum WOZ-waarde gebruikt voor berekening",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde_onderdeel_II"
             }
