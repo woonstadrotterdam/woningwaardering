@@ -1,3 +1,4 @@
+import asyncio
 import warnings
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
@@ -9,8 +10,8 @@ import pandas as pd
 import requests
 from dateutil.relativedelta import relativedelta
 from loguru import logger
+from monumenten import MonumentenClient
 from prettytable import PrettyTable
-from SPARQLWrapper import SPARQLWrapper2
 
 from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
@@ -25,16 +26,20 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-    Eenheidmonument,
     Energieprestatiesoort,
     Energieprestatiestatus,
     Ruimtedetailsoort,
     Ruimtesoort,
     RuimtesoortReferentiedata,
 )
+from woningwaardering.vera.referentiedata.eenheidmonument import (
+    EenheidmonumentReferentiedata,
+)
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 index: int = 0  # nodig voor mypy voor de global index voor de tabel
+
+KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
 
 def is_geldig(
@@ -468,147 +473,60 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
     ) * kwart
 
 
-CULTUREELERFGOED_SPARQL_ENDPOINT = (
-    "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/cho/sparql"
-)
-KADASTER_SPARQL_ENDPOINT = "https://api.labs.kadaster.nl/datasets/kadaster/kkg/sparql"
-
-RIJKSMONUMENTEN_QUERY_TEMPLATE = """
-PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
-PREFIX bag:<http://bag.basisregistraties.overheid.nl/bag/id/>
-
-ASK
-WHERE {{
-    ?monument a ceo:Rijksmonument .
-    ?monument ceo:heeftBasisregistratieRelatie ?basisregistratieRelatie .
-    ?basisregistratieRelatie ceo:heeftBAGRelatie ?bagRelatie .
-    ?bagRelatie ceo:verblijfsobjectIdentificatie "{verblijfsobject_identificatie}" .
-}}
-"""
-
-BESCHERMD_GEZICHT_QUERY_TEMPLATE = """
-PREFIX sor: <https://data.kkg.kadaster.nl/sor/model/def/>
-PREFIX nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
-PREFIX ceo:<https://linkeddata.cultureelerfgoed.nl/def/ceo#>
-PREFIX rn:<https://data.cultureelerfgoed.nl/term/id/rn/>
-PREFIX geo: <http://www.opengis.net/ont/geosparql#>
-PREFIX geof:<http://www.opengis.net/def/function/geosparql/>
-ASK
-WHERE {{
-  SERVICE <{endpoint_kadaster}> {{
-      ?verblijfsobject sor:geregistreerdMet/nen3610:identificatie "{verblijfsobject_identificatie}".
-      ?verblijfsobject geo:hasGeometry/geo:asWKT ?verblijfsobjectWkt.
-  }}
-  ?gezicht a ceo:Gezicht ;
-      ceo:heeftGeometrie ?gezichtGeometrie ;
-      ceo:heeftGezichtsstatus rn:fd968529-bf70-4afa-8564-7c6c2fcfcc54;
-      ceo:heeftNaam/ceo:naam ?naam.
-  ?gezichtGeometrie geo:asWKT ?gezichtWkt.
-  filter(geof:sfWithin(?verblijfsobjectWkt, ?gezichtWkt))
-}}
-"""
-
-
-def is_rijksmonument(verblijfsobject_identificatie: str) -> bool | None:
-    """
-    Controleert of een verblijfsobject een rijksmonument is.
-
-    Args:
-        verblijfsobject_identificatie (str): De identificatie van het verblijfsobject.
-
-    Returns:
-        bool | None: True als het verblijfsobject een rijksmonument is, False anders, of None bij een fout.
-
-    Raises:
-        ValueError: Als verblijfsobject_identificatie niet numeriek is.
-    """
-    if not verblijfsobject_identificatie.isnumeric():
-        raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
-
-    rijksmonumenten_query = RIJKSMONUMENTEN_QUERY_TEMPLATE.format(
-        verblijfsobject_identificatie=verblijfsobject_identificatie,
-    )
-
-    sparql = SPARQLWrapper2(CULTUREELERFGOED_SPARQL_ENDPOINT)
-    sparql.setQuery(rijksmonumenten_query)
-    result = sparql.queryAndConvert()
-
-    if isinstance(result, dict):
-        rijksmonument = result.get("boolean")
-        if isinstance(rijksmonument, bool):
-            return rijksmonument
-
-    logger.warning(
-        f"Onverwacht resultaat bij ophalen rijksmonument voor verblijfsobject identificatie {verblijfsobject_identificatie}"
-    )
-    return None
-
-
-def is_beschermd_gezicht(verblijfsobject_identificatie: str) -> bool | None:
-    """
-    Controleert of een verblijfsobject tot een beschermd gezicht behoort.
-
-    Args:
-        verblijfsobject_identificatie (str): De identificatie van het verblijfsobject.
-
-    Returns:
-        bool | None: True als het verblijfsobject tot een beschermd gezicht behoort, False anders, of None bij een fout.
-
-    Raises:
-        ValueError: Als verblijfsobject_identificatie niet numeriek is.
-    """
-    if not verblijfsobject_identificatie.isnumeric():
-        raise ValueError("verblijfsobject_identificatie moet numeriek zijn")
-
-    beschermd_gezicht_query = BESCHERMD_GEZICHT_QUERY_TEMPLATE.format(
-        endpoint_kadaster=KADASTER_SPARQL_ENDPOINT,
-        verblijfsobject_identificatie=verblijfsobject_identificatie,
-    )
-
-    sparql = SPARQLWrapper2(CULTUREELERFGOED_SPARQL_ENDPOINT)
-    sparql.setQuery(beschermd_gezicht_query)
-    result = sparql.queryAndConvert()
-
-    if isinstance(result, dict):
-        rijksmonument = result.get("boolean")
-        if isinstance(rijksmonument, bool):
-            return rijksmonument
-
-    logger.warning(
-        f"Onverwacht resultaat bij ophalen beschermd gezicht voor verblijfsobject identificatie {verblijfsobject_identificatie}"
-    )
-    return None
-
-
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
+    """
+    Updates the monuments for an eenheid synchronously.
+
+    Args:
+        eenheid (EenhedenEenheid): The eenheid to update
+
+    Returns:
+        EenhedenEenheid: The updated eenheid with monuments
+    """
     eenheid.monumenten = eenheid.monumenten or []
+    logger.debug(
+        f"Eenheid ({eenheid.id}): Monumentale statussen worden opgehaald voor eenheid met bag_identificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie}"
+    )
+    try:
+        if (
+            eenheid.adresseerbaar_object_basisregistratie is not None
+            and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+            is not None
+        ):
+            bag_verblijfsobject_ids = [
+                eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+            ]
 
-    if (
-        eenheid.adresseerbaar_object_basisregistratie is not None
-        and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie is not None
-    ):
-        rijksmonument = is_rijksmonument(
-            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
-        )
+            async def _get_monuments():
+                async with MonumentenClient() as client:
+                    return await client.process_from_list(
+                        bag_verblijfsobject_ids,
+                        to_vera=True,
+                    )
 
-        if rijksmonument is not None:
-            logger.info(
-                f"Eenheid ({eenheid.id}) is {'een' if rijksmonument else 'geen'} rijksmonument volgens de api van cultureelerfgoed."
+            # Voer de async context manager uit in een synchrone context
+            monumenten = asyncio.run(_get_monuments()).get(
+                eenheid.adresseerbaar_object_basisregistratie.bag_identificatie, []
             )
-            if rijksmonument:
-                eenheid.monumenten.append(Eenheidmonument.rijksmonument)
 
-        beschermd_gezicht = is_beschermd_gezicht(
-            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+            if monumenten:
+                logger.info(
+                    f"Eenheid ({eenheid.id}): Monumentale statussen gevonden: {', '.join(monument['naam'] for monument in monumenten)}"
+                )
+                eenheid.monumenten = [
+                    EenheidmonumentReferentiedata(
+                        code=monument["code"], naam=monument["naam"]
+                    )
+                    for monument in monumenten
+                ]
+            else:
+                logger.debug(
+                    f"Eenheid ({eenheid.id}): Geen monumentale statussen gevonden"
+                )
+    except Exception as e:
+        logger.warning(
+            f"Monumentale statussen konden niet worden opgehaald m.b.v. API: {e}"
         )
-
-        if beschermd_gezicht is not None:
-            logger.info(
-                f"Eenheid ({eenheid.id}) {'behoort' if beschermd_gezicht else 'behoort niet'} tot een beschermd stads- of dorpsgezicht volgens de api van cultureelerfgoed."
-            )
-            if beschermd_gezicht:
-                eenheid.monumenten.append(Eenheidmonument.beschermd_stadsgezicht)
-
     return eenheid
 
 
