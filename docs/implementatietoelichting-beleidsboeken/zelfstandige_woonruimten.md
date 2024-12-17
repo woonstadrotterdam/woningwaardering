@@ -352,6 +352,8 @@ _Koelsystemen_
 
 Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten. ~~Onder een open keuken wordt hier verstaan een keuken die in open verbinding staat met een ander vertrek, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur.~~ Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek individueel gewaardeerd met punten indien deze verwarmd zijn.
 
+> In tegenstelling tot wat in versie juli 2024 stond, telt een ruimte met een aanrecht niet meer per se als open keuken. Om een open keuken apart gewaardeerd te krijgen van de ruimte waar die mee verbonden is is het vereist om deze keuken als aparte ruimte mee te geven.
+
 ## Rubriek 4 Energieprestatie
 
 Een (groot) deel van het totale puntenaantal wordt bepaald door de energieprestatie van de woonruimte. Sinds 2011 speelt het energielabel een rol in het puntenstelsel, waarbij een energielabel of energie-index maximaal 10 jaar geldig is. De energieprestatie kan sinds 1 januari 2021 op drie manieren zijn vastgesteld:
