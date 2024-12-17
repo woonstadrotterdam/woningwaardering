@@ -40,7 +40,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         peildatum: date = date.today(),
     ) -> None:
         super().__init__(
-            begindatum=date(2024, 7, 1),
+            begindatum=date(2025, 1, 1),
             einddatum=date.max,
             peildatum=peildatum,
         )

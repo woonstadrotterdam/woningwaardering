@@ -163,7 +163,7 @@ from woningwaardering.stelsels.utils import naar_tabel
 warnings.simplefilter("default", UserWarning)
 
 wws = Woningwaardering(
-    peildatum=date(2024, 7, 1)  # bij niet meegeven wordt de huidige dag gebruikt.
+    peildatum=date(2025, 1, 1)  # bij niet meegeven wordt de huidige dag gebruikt.
 )
 with open(
     "tests/data/generiek/input/37101000032.json",
@@ -819,7 +819,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
 
-wws = Woningwaardering(peildatum=date(2024, 7, 1))
+wws = Woningwaardering(peildatum=date(2025, 1, 1))
 
 eenheid = EenhedenEenheid(
     id="<id>",
