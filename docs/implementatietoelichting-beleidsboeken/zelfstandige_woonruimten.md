@@ -963,7 +963,7 @@ Om de bouw van huurwoningen in de middensector te bevorderen heeft de wetgever b
 
 Indien de bouwkundige oplevering of hoogniveau renovatie van de woning heeft plaatsgevonden in de jaren 2015-2019 en die woning voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingsstelsel minimaal 110 punten heeft behaald dan worden, voor het aantal punten voor de WOZ-waarde, minimaal 40 punten toegekend. Dit garandeert een minimaal puntenaantal.
 
-> In de versie januari 2025 van het beleidsboek staat nergens meer gedefinieerd wat hoogniveau renovatie is. Hierom passen we deze regeling niet toe.
+> In de versie januari 2025 van het beleidsboek staat nergens meer gedefinieerd wat hoogniveau renovatie is. Hierom passen we deze regeling niet specifiek toe voor 'hoogniveau renovatie'.
 
 Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2019 en/of de woning behaalt niet de 110 punten op basis van de overige onderdelen van het puntenstelsel dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.
 
