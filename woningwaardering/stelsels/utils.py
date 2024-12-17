@@ -4,7 +4,7 @@ from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
 from functools import wraps
 from importlib.resources import files
-from typing import Callable, Counter, Iterator, List, Tuple
+from typing import Any, Callable, Counter, Iterator, List, Tuple
 
 import pandas as pd
 import requests
@@ -484,45 +484,45 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         EenhedenEenheid: The updated eenheid with monuments
     """
     eenheid.monumenten = eenheid.monumenten or []
-    logger.debug(
-        f"Eenheid ({eenheid.id}): Monumentale statussen worden opgehaald voor eenheid met bag_identificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie}"
-    )
     try:
         if (
-            eenheid.adresseerbaar_object_basisregistratie is not None
-            and eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
-            is not None
+            eenheid.adresseerbaar_object_basisregistratie is None
+            or eenheid.adresseerbaar_object_basisregistratie.bag_identificatie is None
         ):
-            bag_verblijfsobject_ids = [
-                eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
-            ]
+            logger.warning(f"Eenheid ({eenheid.id}): Geen bag_identificatie gevonden")
+            return eenheid
 
-            async def _get_monuments():
-                async with MonumentenClient() as client:
-                    return await client.process_from_list(
-                        bag_verblijfsobject_ids,
-                        to_vera=True,
-                    )
+        logger.debug(
+            f"Eenheid ({eenheid.id}): Monumentale statussen worden opgehaald voor eenheid met bag_identificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie}"
+        )
+        bag_verblijfsobject_ids = [
+            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+        ]
 
-            # Voer de async context manager uit in een synchrone context
-            monumenten = asyncio.run(_get_monuments()).get(
-                eenheid.adresseerbaar_object_basisregistratie.bag_identificatie, []
+        async def _get_monuments() -> Any:
+            async with MonumentenClient() as client:
+                return await client.process_from_list(
+                    bag_verblijfsobject_ids,
+                    to_vera=True,
+                )
+
+        # Voer de async context manager uit in een synchrone context
+        monumenten = asyncio.run(_get_monuments()).get(
+            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie, []
+        )
+
+        if monumenten:
+            logger.info(
+                f"Eenheid ({eenheid.id}): Monumentale statussen gevonden: {', '.join(monument['naam'] for monument in monumenten)}"
             )
-
-            if monumenten:
-                logger.info(
-                    f"Eenheid ({eenheid.id}): Monumentale statussen gevonden: {', '.join(monument['naam'] for monument in monumenten)}"
+            eenheid.monumenten = [
+                EenheidmonumentReferentiedata(
+                    code=monument["code"], naam=monument["naam"]
                 )
-                eenheid.monumenten = [
-                    EenheidmonumentReferentiedata(
-                        code=monument["code"], naam=monument["naam"]
-                    )
-                    for monument in monumenten
-                ]
-            else:
-                logger.debug(
-                    f"Eenheid ({eenheid.id}): Geen monumentale statussen gevonden"
-                )
+                for monument in monumenten
+            ]
+        else:
+            logger.debug(f"Eenheid ({eenheid.id}): Geen monumentale statussen gevonden")
     except Exception as e:
         logger.warning(
             f"Monumentale statussen konden niet worden opgehaald m.b.v. API: {e}"
