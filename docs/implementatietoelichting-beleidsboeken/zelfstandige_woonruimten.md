@@ -564,3 +564,84 @@ _\* ~~Bij een afzuiginstallatie gaat het om een luchtafvoer met afzuiging naar b
 > Omdat kasten zelden op deze manier gemodelleerd worden hanteren wij de basisniveau-criteria van hierboven niet.
 
 Wanneer een object twee voorzieningen heeft, bijvoorbeeld een ingebouwde combi magnetron/oven of een gecombineerde koel- en vrieskast, worden beide voorzieningen in dit object gewaardeerd conform bovenstaande lijst. ~~Voor de meting van keukenkasten wordt uitgegaan van de buitenmaat.~~
+
+## Rubriek 6 Sanitair
+
+### 6.1 Puntentoekenning sanitaire basisvoorzieningen
+
+Het woningwaarderingsstelsel geeft punten aan sanitaire basisvoorzieningen:
+
+Puntentoekenning sanitaire basisvoorzieningen
+
+|     |     |
+| --- | --- |
+| toilet in een aparte ruimte | 3 punten |
+| toilet in een badkamer | 2 punten |
+| hangend toilet in aparte ruimte | 3,75 punten |
+| hangend toilet in badkamer | 2,75 |
+| wastafel\* | 1 punt |
+| meerpersoonswastafel | 1,5 punten |
+| douche | 4 punten |
+| bad | 6 punten |
+| bad en douche | 7 punten |
+
+_\* tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer._
+
+**_Toilet_**
+
+Punten worden toegekend aan een toilet met waterspoeling als het toilet is geplaatst in een daartoe bestemde ruimte ~~en als het toilet binnen het woongebouw is gelegen. Wanneer sprake is van een toilet dat buiten de woning maar binnen het woongebouw is gelegen, dan geldt dat het toilet in de waardering wordt meegenomen als het gebruik van het toilet door derden is uit te sluiten~~. Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor waardering.
+
+**_Wastafel_**
+
+~~Als wastafels worden alle bakken geteld voor wassen en spoelen die op de waterleiding én op het huisriool zijn aangesloten. Een dergelijke bak wordt niet als wastafel gewaardeerd indien boven de bak een douche is aangebracht. Een bad of spoelbakken in een keukenaanrecht, bidet of lavet wordt niet als wastafel, douche of bad gewaardeerd.~~ Wastafels worden gewaardeerd tot een maximum van 1 punt per vertrek of overige ruimte, m.u.v. de badkamer.
+
+Van een meerpersoonswastafel is sprake bij een wastafel ~~met een minimale breedte van 70 cm, voorzien van twee kranen~~. Deze wastafels worden tot maximaal 1,5 punt per vertrek of overige ruimte, m.u.v. de badkamer, gewaardeerd. De kranen worden afzonderlijk gewaardeerd.
+
+Zoals genoemd in paragraaf 5.2 waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter is dan één meter, als wastafel. In alle andere gevallen wordt een spoelbak in de keuken dus niet als wastafel gewaardeerd.
+
+**_Bad en douche_**
+
+Als douche wordt meegeteld iedere door de verhuurder aangebrachte installatie voor het nemen van een stortbad. Hieronder valt eveneens een zogenaamde douchecabine, die voldoet aan bovengenoemde voorwaarden, als de douchcabine in een vertrek (anders dan bad- of doucheruimte) of overige ruimte is geplaatst. De oppervlakte van dat vertrek of van die overige ruimte wordt in dat geval niet verminderd met de door de douchecabine ingenomen oppervlakte.
+
+Aan baden worden 6 punten toegekend, ongeacht de lengte van het bad, ~~als een volwassen persoon er in een normale zithouding in kan plaatsnemen. Indien een bad is voorzien van een (hand)douche, dan wordt het douchegarnituur niet afzonderlijk geteld~~.
+
+Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangebracht, geldt een waardering van 7 punten.
+
+~~Als het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of respectievelijk bad.~~
+
+### 6.2 Puntentoekenning extra voorzieningen
+
+Het woningwaarderingsstelsel geeft voor het onderdeel sanitair extra punten voor voorzieningen in de bad- of doucheruimte. Hiervoor geldt een maximum tot het aantal punten dat reeds voor douche, bad en/of bad/douche is verkregen. Anders gezegd: maximaal een verdubbeling van de toegekende punten voor douche, bad en/of bad/douche.
+
+**_Eisen bad-of doucheruimte_**
+
+Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden in een bad- of doucheruimte. Bad- of doucheruimten moeten voldoen aan de volgende eisen:
+
+* ~~Een waterdichte vloerafwerking~~\*.
+* ~~De ruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,00 m. (gemeten vanaf de vloer tot het zichtbare plafond).~~
+* ~~Waterdichte afwerking tot 1,50 m hoogte voor badruimte en 1,80 m voor doucheruimte;~~
+* Een wastafel ~~inclusief (tweehands-)mengkraan en een spiegel.~~
+* Een douche of bad ~~met aansluitpunten voor warm en koud water (niet zijnde een warmwater apparaat) en voorzien van een warm- en koudwaterkraan of een mengkraan.~~
+
+\* Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien.
+
+**_Lijst voorzieningen_**
+
+Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
+
+Voorzieningen in de bad- of doucheruimte
+
+|     |     |
+| --- | --- |
+| Bubbelfunctie van het bad | 1,5 punten |
+| Gemonteerde volledige afscheiding van de douche\* | 1,25 punten |
+| Handdoekenradiator | 0,75 punt |
+| Ingebouwd kastje met in- of opgebouwde wastafel | 1 punt |
+| Kastruimte (minimale breedte van 40cm, en minimale hoogte van 40cm) | 0,75 punt (tot een maximum van 0,75) |
+| Stopcontact (maximaal twee per wastafel) | 0,25 punt |
+| Éénhandsmengkraan | 0,25 punt |
+| Thermostatische mengkraan | 0,5 punt |
+
+_\* ~~In het geval van een gemonteerde volledige afscheiding van de douche vindt de waardering van 1,25 punten plaats wanneer de doucheruimte beschikt over een onroerend aanhorige afscheiding met een waterdichte afwerking aan alle zijden van de douche. Ter illustratie: glazen deuren vallen hier wel onder, maar een douchegordijn (dat snel weggenomen kan worden) niet.~~_
+
+> Voor een ingebouwde kast met wastafel moet de wastafel als aparte voorziening worden meegegeven.
