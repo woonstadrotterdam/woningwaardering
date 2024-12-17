@@ -12,7 +12,7 @@ Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij zorg
 
 **N.B. Alle punten worden bij elkaar opgeteld inclusief de punten voor de gemeenschappelijke ruimten en voorzieningen, waarna wordt afgerond. De toeslag van 35% bij zorgwoningen wordt toegepast op het puntentotaal van de onderdelen 1 t/m 11 en pas daarna afgerond.**
 
-_Meer dan 250 punten:_
+_Meer dan 250 punten_
 
 In geval van een woonruimte met méér dan 250 punten wordt de maximale huurprijs als volgt berekend: elk punt boven de 250 wordt vermenigvuldigd met het verschil tussen de bedragen, genoemd in de huurprijstabel (zie [bijlage 5](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html/waarderingsstelsel-zelfstandige-woonruimte/bijlage-5)) bij 249 en 250 punten. Het verkregen bedrag wordt vervolgens opgeteld bij de maximale huurprijs die volgens de huurprijstabel behoort bij 250 punten.
 
@@ -22,9 +22,9 @@ Een zelfstandige woning wordt beoordeeld met 255 punten. Bij een puntenaantal va
 
 ## 2.8 Prijsopslag monumenten en nieuwbouw
 
-De punten die worden berekend op basis van het woningwaarderingsstelsel resulteren in een maximale huurprijs. Het waarderingsstelsel kent de mogelijkheid van een opslag bovenop deze maximale huurprijs voor monumenten en voor nieuwbouw. Als meerdere opslagen van toepassing zijn, worden deze percentages bij elkaar opgeteld alvorens daarmee de huurprijs wordt vermeerderd.
+De punten die worden berekend op basis van het woningwaarderingsstelsel resulteren in een maximale huurprijs. Het waarderingsstelsel kent de mogelijkheid van een opslag bovenop deze maximale huurprijs voor monumenten en voor nieuwbouw. Als meerdere opslagen van toepassing zijn, worden deze percentages bij elkaar opgeteld alvorens daarmee de huurprijs wordt vermeerderd.4
 
-Deze opslagen blijven buiten beschouwing voor het antwoord op de vraag tot welke sector (sociale huursector, middenhuursector of vrijehuursector) behoort.
+Deze opslagen blijven buiten beschouwing voor het antwoord op de vraag tot welke sector (sociale sector, middensector of vrijehuursector) de woonruimte behoort.
 
 ### 2.8.1 Rijksmonument
 
@@ -50,23 +50,23 @@ Indien een woonruimte een gemeentelijk of provinciaal monument is of daarvan dee
 
 De Huurcommissie hanteert passief beleid. De partijen moeten aantonen dat een woning bestaat of deel uitmaakt van een gemeentelijk of provinciaal monument.
 
-### 2.8.3 Beschermd stad- of dorpsgezicht
+### 2.8.3 Beschermd stads- of dorpsgezicht
 
 De maximale huurprijs wordt met 5% vermeerderd als:
 
 *   a. de woonruimte behoort tot een rijksbeschermd stads- of dorpsgezicht als bedoeld in artikel 2.34. vierde lid, van de Omgevingswet;
 *   b. de woonruimte behoort tot een woning die is gebouwd voor 1965; en
-*   c. de woonruimte niet bestaat uit of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet of van een door het college van burgemeester en wethouders aangewezen gemeentelijk monument of een door gedeputeerde staten aangewezen provinciaal monument.
+*   c. de woonruimte niet bestaat uit of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet of van een door het college van burgemeester en wethouders aangewezen gemeentelijk monument of een door gedeputeerde staten aangewezen provinciaal monument.
 
 De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief beleid. Dit betekent dat het aan de verhuurder is om aan te tonen dat de woonruimte aan de voorwaarden voor deze prijsopslag voldoet.
 
 ### 2.8.4 Nieuwbouwopslag
 
-De maximale huurprijs die hoort bij de kwaliteit van een huurwoning uit het middensegement (zie paragraaf 2.2), wordt met 10% vermeerderd als:
+De maximale huurprijs die hoort bij de kwaliteit van een huurwoning uit de middensector (zie paragraaf 2.2), wordt met 10% vermeerderd als:
 
-*   de woning voor het eerst in gebruik wordt genomen na 1 juli 2024, en;
+*   de woning voor het eerst in gebruik wordt genomen na 1 juli 2024, en
 *   de start van de nieuwbouw, transformatie of bijbouw van de woning plaatsvindt vóór 1 januari 2028.
-    
+
 > In tegenstelling tot de VERA-definitie van `inExploitatiedatum` gebruiken wij voor ons inputmodel `inExploitatiedatum` als de datum van de _eerste_ ingebruikname. Zie: https://github.com/woonstadrotterdam/woningwaardering/issues/105
 
 Hieronder wordt nadere uitleg gegeven over de begrippen nieuwbouw, transformatie en bijbouw:
@@ -82,6 +82,12 @@ De nieuwbouwopslag geldt ook na bewonerswissel.
 In geval van opsplitsen van woningen (woningvormen) wordt geen opslag gerekend. In dat geval wordt namelijk geen woonruimte (m2) toegevoegd.
 
 De nieuwbouwopslag geldt alleen voor woningen die op basis van de punten van het woningwaarderingsstelsel in de middensector horen. Geldt bijvoorbeeld voor een woning met 147 kwaliteitspunten een maximum huurprijs van € 905,50, dan kan de verhuurder een huurprijs vragen tot maximaal € 996,05. Door de nieuwbouwopslag kan een middeldure huurwoning echter nooit in de vrije sector terecht komen. De kwalificatie van de woning als een woning behorend tot het middensector verandert daardoor dus niet. Een woning van 186 punten of minder met een nieuwbouwopslag blijft dus een gereguleerde huurwoning uit het middensector. De opslag geldt voor het bedrag en niet voor de hoeveelheid punten.
+
+_Cumulatie van opslagen_
+
+De samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht niet tegelijkertijd voor dezelfde woonruimte worden toegekend (zie art. 8 lid 5 onder c Besluit huurprijzen woonruimte).
+
+Wel mogelijk is het cumulatief toekennen van de monumentenopslag of de opslag voor beschermd stad- of dorpsgezicht met de nieuwbouwopslag. Vereist is dan wel dat aan alle vereisten van de beide opslagen – dus ieder voor zich -  is voldaan. Naar verwachting komt deze situatie in de praktijk dan ook niet vaak voor.
 
 **Bewijsstukken**
 
