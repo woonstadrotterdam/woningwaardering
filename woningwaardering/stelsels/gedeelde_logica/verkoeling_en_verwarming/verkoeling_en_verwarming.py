@@ -13,12 +13,9 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 def waardeer_verkoeling_en_verwarming(
@@ -26,7 +23,6 @@ def waardeer_verkoeling_en_verwarming(
 ) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
     yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(ruimten)
     yield from _waardeer_verwarmde_overige_ruimte(ruimten)
-    yield from _waardeer_open_keuken(ruimten)
 
 
 def _waardeer_verwarmde_overige_ruimte(
@@ -154,47 +150,3 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                         punten=punten,
                     ),
                 )
-
-
-def _waardeer_open_keuken(
-    ruimten: list[EenhedenRuimte],
-) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
-    """
-    Open keuken tellen voor 2 punten per verwarmd vertrek.
-
-    Args:
-        ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-
-    Yields:
-        tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]: Tuple van ruimte en waardering voor open keuken
-    """
-    for ruimte in ruimten:
-        if ruimte.verwarmd and (
-            ruimte.detail_soort == Ruimtedetailsoort.woonkamer_en_of_keuken
-            or (
-                ruimte.detail_soort
-                in [
-                    Ruimtedetailsoort.woonkamer,
-                    Ruimtedetailsoort.woon_en_of_slaapkamer,
-                    Ruimtedetailsoort.slaapkamer,
-                ]
-                and heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.aanrecht
-                )
-            )
-        ):
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
-            )
-            yield (
-                ruimte,
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=ruimte.naam,
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id=CriteriumSleutels.open_keuken.value.id,
-                        ),
-                    ),
-                    punten=2.0,
-                ),
-            )
