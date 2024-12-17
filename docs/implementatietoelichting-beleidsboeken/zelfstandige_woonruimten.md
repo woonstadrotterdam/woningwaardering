@@ -715,12 +715,10 @@ Hieronder wordt ook verstaan een gebruiksrecht dat toekomt aan een collectief va
 
 ~~Balkons, dakterrassen en loggia’s moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze zijn:~~
 
-~~*   voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;~~
-    
-~~*   rondom voorzien van een afscheiding die tevens dient als valbeveiliging; en~~
-    
-~~*   via een deur\* of schuifpui toegankelijk zijn.~~
-    
+* ~~voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;~~
+* ~~rondom voorzien van een afscheiding die tevens dient als valbeveiliging; en~~
+* ~~via een deur\* of schuifpui toegankelijk zijn.~~
+
 
 \* _~~Indien het balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als toegang tot de buitenruimte te worden gebruikt, dan wordt het balkon of het terras met punten gewaardeerd.~~_
 
@@ -742,9 +740,9 @@ In totaal kan maximaal 15 punten worden toegekend.
 
 ### 9.1 Puntentoekenning
 
-*   Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
-*   Een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
-*   Voorzieningen (verkoeling en verwarming, keuken, sanitair~~, gehandicaptenvoorziening~~) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel, gedeeld door het aantal adressen.
+* Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
+* Een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
+* Voorzieningen (verkoeling en verwarming, keuken, sanitair~~, gehandicaptenvoorziening~~) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel, gedeeld door het aantal adressen.
 
 > Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_eenheden`, waarbij de eenheid zelf meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
 
@@ -766,9 +764,9 @@ Gemeenschappelijke vertrekken en overige ruimten zijn tot het woongebouw behoren
 
 Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
 
-*  ~~zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
-*   ~~de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
-*   de oppervlakte, na deling door het aantal adressen, per woning minstens 2m2 bedraagt.
+* ~~zij binnen het woongebouw liggen of tot de onroerende aanhorigheden behoren;~~
+* ~~de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
+* de oppervlakte, na deling door het aantal adressen, per woning minstens 2m2 bedraagt.
 
 De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte, afronden in m2, delen door het aantal adressen en waarderen als “overige ruimte”. Kasten worden meegeteld, mits zij voldoen aan de voorwaarden als genoemd in paragraaf 2.2. Dat betekent dat kasten uitkomend in een verkeersruimte worden niet meegeteld.
 
@@ -812,9 +810,10 @@ Voor verschillende typen gemeenschappelijke parkeerplekken, afhankelijk van afde
 2 extra punten worden toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft, als de parkeerplek beschikt over een laadpaal voor elektrisch rijden, en exclusief is voor gebruik door bewoners.
 
 > Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:
-> - Type I: `Ruimtedetailsoort.parkeervak_auto_binnen` met code `VAI`
-> - Type II: `Ruimtedetailsoort.carport` met code `CAR`
-> - Type III: `Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt` met code `VAU`
+>
+> * Type I: `Ruimtedetailsoort.parkeervak_auto_binnen` met code `VAI`
+> * Type II: `Ruimtedetailsoort.carport` met code `CAR`
+> * Type III: `Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt` met code `VAU`
 
 ### 10.2 Definitie gemeenschappelijke parkeerruimte
 
