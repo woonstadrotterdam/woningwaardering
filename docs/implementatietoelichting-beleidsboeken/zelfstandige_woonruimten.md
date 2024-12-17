@@ -486,3 +486,82 @@ Voor de puntentoekenningen in de tabellen wordt onderscheid gemaakt tussen eenge
 * Meergezinswoningen of duplexwoningen zijn alle woningen die geen eengezinswoning zijn.
 
 > Let op: deze definitie is anders dan vaak gehanteerd wordt zie: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/154
+
+
+## Rubriek 5 Keuken
+
+### 5.1 Eisen keuken
+
+Punten worden alleen aan het onderdeel ‘keuken’ toegekend als de ruimte voldoet aan het volgende basisniveau:
+
+*   ~~aan- en afvoer van water en ten minste één vast aansluitpunt voor koken op gas of elektriciteit;~~
+*   een aanrechtblad met een aan een gesloten lengte van minimaal 1 m (lengte incl. spoelbak, incl. kookplaat);
+*   ~~twee inbouwkasten met een breedte van minimaal 50 cm;~~
+*   ~~waterdichte afwerking boven het waterdichte aanrechtblad en in de kookhoek vanaf de vloer tot een hoogte van minimaal 1,50 m.~~
+
+Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, ook niet voor de extra voorzieningen als bedoeld in paragraaf 5.4 hierna. Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als ‘wastafel’.
+
+> Zorg ervoor dat alleen aanrechten met een spoelbak worden meegegeven en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
+
+### 5.2 Puntentoekenning lengte aanrecht
+
+*   Bij een aanrechtlengte minder dan 1 m, worden 0 punten toegekend.
+*   Bij een aanrechtlengte tussen de 1 en 2 m, worden 4 punten toegekend.
+*   Bij een aanrechtlengte van 2 m of langer, worden 7 punten toegekend.
+
+De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van het aanrecht, ~~waarbij sprake moet zijn van een waterdicht keukenblad~~
+
+Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel.  
+~~Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.~~
+
+### 5.3 Meetinstructies lengte aanrechtblad
+
+De aanrechtlengte wordt over het midden van het bovenblad gemeten, inclusief ingebouwde spoelbakken en kookplaten.
+
+De lengte van een niet direct aan het aanrecht aansluitend werkblad of van een blad dat is samengesteld uit een ander materiaal wordt bij de lengte meegeteld.
+
+Indien een aanrechtblad langer is dan de aanwezige onderkasten met de bedoeling dat er onder het langere gedeelte van het aanrechtblad een losstaande koelkast, vaatwasser, wasmachine e.d., kan worden geplaatst, dan wordt dit gedeelte van het aanrechtblad mee gemeten mits er onder het blad aansluitmogelijkheden aanwezig zijn voor genoemde apparatuur.
+
+Van een (standaard)aanrechtblad dat gedeeltelijk is ingemetseld of waar de wandbetegeling op het blad is aangebracht, wordt uitsluitend het bruikbare c.q. zichtbare gedeelte gemeten.
+
+Indien er sprake is van een hoekaanrecht wordt de lengte van het aanrecht bepaald door (zie figuur):
+
+1.  De lange zijde van het langere aanrechtdeel te meten (zie horizontale blauwe lijn).
+2.  Vervolgens die lengte te salderen met de lange zijde van het kortere aanrechtdeel (zie verticale blauwe lijn).
+
+De lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.
+
+> Zorg ervoor dat de lengte die wordt meegegeven in het inputmodel volgens deze regels zijn gemeten. De package doet geen aanpassingen aan de lengte.
+
+### 5.4 Puntentoekenning extra voorzieningen
+
+Het woningwaarderingsstelsel geeft voor het onderdeel keuken extra punten voor voorzieningen in de keuken. Hiervoor geldt een maximum tot het aantal punten dat voor de aanrechtlengte is bepaald. Een keuken met een aanrechtlengte tussen de 1 en 2 m kan tot maximaal 4 extra punten krijgen voor voorzieningen. Een keuken met een aanrechtlengte van 2 of meer meter kan tot maximaal 7 punten extra krijgen voor voorzieningen. 
+
+Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
+
+Punten toekenning extra voorzieningen
+
+|     |     |
+| --- | --- |
+| Inbouw afzuiginstallatie\* | 0,75 punt |
+| Inbouw kookplaat inductie | 1,75 punten |
+| Inbouw kookplaat keramisch | 1 punt |
+| Inbouw kookplaat gas | 0,5 punt |
+| Inbouw koelkast | 1 punt |
+| Inbouw vrieskast | 0,75 punt |
+| Inbouw oven elektrisch | 1 punt |
+| Inbouw oven gas | 0,5 punt |
+| Inbouw magnetron | 1 punt |
+| Inbouw vaatwasmachine | 1,5 punten |
+| Extra kastruimte boven het minimum (per 60 cm breedte, met een minimum van 60 cm hoogte) | 0,75 punt |
+| Éénhandsmengkraan | 0,25 punt |
+| Thermostatische mengkraan | 0,5 punt |
+| Kokend waterfunctie (al dan niet apart of in aanvulling op de kraan) | \+ 0,5 punt |
+
+_\* ~~Bij een afzuiginstallatie gaat het om een luchtafvoer met afzuiging naar buiten de woning of op basis van recirculatie met actieve koolstof- en vetfilters. Een afzuiginstallatie kan zowel een afzuig- of recirculatiekap boven de kookinstallatie zijn, als een in het aanrecht geïntegreerd afzuigsysteem.~~_
+
+~~** Om aan het basisniveau voor de kwalificatie als keuken te voldoen, moeten twee inbouwkasten met een breedte van minimaal 50 cm (per stuk) aanwezig zijn. De totale minimumbreedte bedraagt dus 1 meter. Per 60 cm breedte extra kastruimte kan vervolgens, als ook aan de andere eisen wordt voldaan, 0,75 punt extra worden toegekend.~~
+
+> Omdat kasten zelden op deze manier gemodelleerd worden hanteren wij de basisniveau-criteria van hierboven niet.
+
+Wanneer een object twee voorzieningen heeft, bijvoorbeeld een ingebouwde combi magnetron/oven of een gecombineerde koel- en vrieskast, worden beide voorzieningen in dit object gewaardeerd conform bovenstaande lijst. ~~Voor de meting van keukenkasten wordt uitgegaan van de buitenmaat.~~
