@@ -376,12 +376,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 499.55,
+  "maximaleHuur": 511.14,
   "punten": 52.0,
   "stelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 499.55
+  "maximaleHuurInclusiefOpslag": 511.14
 }
