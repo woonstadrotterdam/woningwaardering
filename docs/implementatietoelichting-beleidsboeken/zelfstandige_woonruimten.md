@@ -146,7 +146,7 @@ Voor zolderruimten gelden, naast bovengenoemde eisen, nog twee eisen om als vert
 
 In de toelichting op het woningwaarderingsstelsel is een aantal meetinstructies meegegeven:
 
-#### 1 Binnenmaatse meting
+#### 1\. Binnenmaatse meting
 
 ~~Meting van de oppervlakte van vertrekken vindt plaats van muur tot muur, op een hoogte van 1,50 m boven de vloer, inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten. Deze meethoogte geldt ook als de oppervlakte afwijkt van die op vloerniveau.~~
 
@@ -162,19 +162,19 @@ De Huurcommissie leest de zinsnede uit de toelichting 'alle tot de woning behore
 * een kast, waarvan de deur uitkomt op een verkeersruimte, wordt niet gewaardeerd;
 * ~~losse kasten zijn niet van belang bij het meten. De oppervlakte van het vertrek wordt bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast.~~
 
-#### ~~2 Hellend of verlaagd plafond~~
+#### ~~2\. Hellend of verlaagd plafond~~
 
 ~~Als oppervlakte van een vertrek met een (ten dele) hellend of verlaagd plafond geldt dat alleen het gedeelte van de ruimte waarboven het plafond ten minste 1,50 m hoog is, wordt meegeteld bij de berekening van de oppervlakte.~~
 
 ~~De Huurcommissie eist in geval van een (ten dele) hellend plafond dat de 1,50 m hoogte loopt tot het dakbeschot of tot het zichtbare dakvlak of plafond. Met gordingen en balken wordt bij de meting geen rekening gehouden.~~
 
-#### 3 ~~Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en installaties~~
+#### ~~3\. Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en installaties~~
 
 ~~De vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak, moederhaard, cv-ketel, boilerinstallatie en radiatoren wordt meegeteld.~~
 
 ~~Indien zich in een vertrek, of in een kast in een vertrek, een gas- en/of elektrameter bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek van 30 x 60 cm (minimale afmeting meterkast bestaande bouw).~~
 
-#### 4 ~~Oppervlakte kanalen of leidingen~~
+#### ~~4\. Oppervlakte kanalen of leidingen~~
 
 ~~De oppervlakte die wordt ingenomen door verticale koven, schoorsteenkanalen, ventilatiekanalen of stand- of grondleidingen (tenzij horizontale leidingen, zie hierna) wordt niet meegeteld.~~
 
@@ -182,7 +182,7 @@ De Huurcommissie leest de zinsnede uit de toelichting 'alle tot de woning behore
 
 ~~Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50m-hoogte bepalend.~~
 
-#### 5 ~~Oppervlakte onder een open of gesloten vaste trap~~
+#### ~~5\. Oppervlakte onder een open of gesloten vaste trap~~
 
 ~~Van de oppervlakte onder een open dan wel gesloten vaste trap telt mee dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is.~~
 
