@@ -185,7 +185,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=PrijsopslagMonumentenEnNieuwbouw(),
+        instance=PrijsopslagMonumentenEnNieuwbouw(peildatum=date(2025, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

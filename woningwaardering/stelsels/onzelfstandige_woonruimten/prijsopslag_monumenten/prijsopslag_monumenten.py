@@ -111,7 +111,7 @@ class PrijsopslagMonumenten(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=PrijsopslagMonumenten(),
+        instance=PrijsopslagMonumenten(peildatum=date(2025, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
