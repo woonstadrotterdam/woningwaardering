@@ -192,8 +192,116 @@ De Huurcommissie bepaalt eerst de oppervlakte per vertrek afgerond op twee decim
 
 _Voorbeeld:_
 
-kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²  
-keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²  
-Totaal : 26,73 m² Afronding op hele m² : 27 m².
+_kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²_  
+_keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²_  
+_Totaal : 26,73 m² Afronding op hele m² : 27 m²._
 
-Dit vertaalt zich dan naar 27 \* 1 punt (per m2) = 27 punten
+_Dit vertaalt zich dan naar 27 \* 1 punt (per m2) = 27 punten_
+
+## Rubriek 2 Oppervlakte van overige ruimten
+
+### 2.1 Puntentoekenning
+
+Overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter.
+
+### 2.2 Wat zijn overige ruimten?
+
+> De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte met `Ruimtesoort` `overige ruimte` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minimaal 2 m² is. Een ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is.
+>
+> Een ruimte dient alleen als overige ruimte gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
+
+Een ruimte wordt als overige ruimte gewaardeerd als deze voldoet aan de volgende eisen:
+
+* ~~de vloer moet begaanbaar zijn;~~
+* de ruimte dient een oppervlakte te hebben van minimaal 2 m2;
+* de ruimte voldoet niet aan de eisen voor een vertrek (zie paragraaf 1.2) of een verkeersruimte zijnde;
+  * een ruimte die dient voor het bereiken van een andere ruimte;
+  * ~~geen ruimte om duurzaam in te verblijven.~~
+
+Voorbeelden van overige ruimten zijn bijkeukens, bergingen, wasruimten, schuren, garages, zolders en kelders, op voorwaarde dat aan bovenstaande eisen wordt voldaan. Parkeerruimte die exclusief tot één adres behoort (privé-garage), kan worden gewaardeerd als overige ruimte. Gemeenschappelijke garages met daarin parkeerplek(ken) worden gewaardeerd onder rubriek 10 (gemeenschappelijke parkeerruimten).
+
+Van de minimumoppervlakte zoals hiervoor genoemd kan niet worden afgeweken. Heeft de ruimte bijvoorbeeld een oppervlakte van 1,95 m2, dan wordt niet aan de gestelde eis van minimaal 2 m2 voldaan. De oppervlakte mag niet naar boven worden afgerond waardoor invulling aan de eis zou zijn gegeven.
+
+_Verkeersruimten_
+
+Verkeersruimten zoals hallen, gangen, en overlopen worden sowieso niet afzonderlijk gewaardeerd, dus krijgen geen punten op basis van dit onderdeel van het woningwaarderingsstelsel.
+
+_Zolderruimte_
+
+Indien een zolderruimte niet als vertrek wordt gewaardeerd (zie paragraaf 1.2), dan kan deze mogelijk wel in aanmerking komen voor een waardering als overige ruimte. Dan moet de zolderruimte naast bovenstaande eisen aan nog twee eisen voldoen. De zolderruimte moet namelijk bereikbaar zijn via een tot de woning behorende trap en het dak moet beschoten zijn. Voldoet de zolderruimte niet aan de eisen van paragraaf 1.2 en niet aan de voornoemde eisen, dan wordt de zolderruimte niet gewaardeerd.
+
+> Zolderruimte groter dan 2m2 met het `Bouwkundigelement` `vlizotrap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
+> Zolderruimte groter dan 2m2 maar kleiner dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
+> Zolderruimte groter dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van vertrekken`, mits deze wordt ingeschoten met `ruimtesoort` `vertrek`.
+
+_Toiletruimte_
+
+Een toiletruimte kan als overige ruimte worden gewaardeerd als aan de eisen van overige ruimte wordt voldaan.
+
+### 2.3 Meetinstructies
+
+> De woningwaardering package gaat er vanuit dat de gebruiker zich houdt aan onderstaande meetinstructies voor oveirge ruimten. Met uizondering van _kasten_ kunnen de meetinstructies niet getoets of berekend worden op basis van het VERA model.
+
+De wetgever heeft een aantal meetinstructies meegegeven:
+
+~~Meting van de oppervlakte van overige ruimten vindt plaats van muur tot muur, op een hoogte van 1,50 m boven de vloer, inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten.~~
+
+~~De Huurcommissie berekent de hoogte van 1,50 m door te meten tot het dakbeschot, het zichtbare dakvlak of plafond (gordingen en balken blijven buiten de meting).~~
+
+_~~Pui, erker en entresol~~_
+
+~~Als er sprake is van een pui wordt de binnenzijde van die pui (het kozijn) genomen. Een erker wordt meegerekend indien deze inwendig een vrije hoogte heeft van ten minste 1,50 m. Indien er sprake is van een zgn. entresol (tussenverdieping) dan dient de oppervlakte onder en/of boven deze entresol te worden meegerekend, indien de vrije hoogte ten minste 1,50m bedraagt.~~
+
+_Kasten_
+
+De oppervlakte van alle tot de woning behorende losse en vaste kasten wordt meegerekend.
+
+* Van vaste kasten die uitkomen in een wel gewaardeerde overige ruimte wordt de netto oppervlakte bepaald en bij de oppervlakte opgeteld
+* Een kast, waarvan de deur uitkomt op een verkeersruimte, wordt niet gewaardeerd.
+* ~~Losse kasten zijn niet van belang bij het meten. De oppervlakte van de overige ruimte wordt bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast.~~
+
+### ~~2\. Oppervlakte trap(gat)~~
+
+~~Van de oppervlakte onder een open dan wel gesloten vaste trap telt dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is. De oppervlakte die door een in ingeschoven toestand liggende inschuifbare of opvouwbare trap wordt ingenomen, wordt niet meegeteld.~~
+
+~~De oppervlakte van een trapgat wordt in mindering gebracht.~~
+
+#### ~~3\. Vloeroppervlakte moederhaard, cv-ketel, boilerinstallatie en radiatoren~~
+
+~~De vloeroppervlakte onder moederhaard, cv-ketel, boilerinstallatie en radiatoren wordt meegeteld.~~
+
+~~Als zich in een overige ruimte, of een kast in een overige ruimte, een gas- en/of elektrameter bevindt, dan wordt de oppervlakte gewaardeerd onder aftrek van 30 x 60 cm (minimale afmeting meterkast bestaande bouw).~~
+
+#### ~~4\. Oppervlakte kanalen of leidingen~~
+
+~~De oppervlakte die wordt ingenomen door schoorsteenkanalen, ventilatiekanalen of stand- of grondleidingen (tenzij horizontale leidingen, zie hierna) wordt niet meegeteld.~~
+
+~~De oppervlakte die wordt ingenomen door standleidingen (verticale leidingen) wordt niet meegeteld. De oppervlakte die wordt ingenomen door grondleidingen (horizontale leidingen), wordt wel meegeteld.~~
+
+~~Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50m-hoogte bepalend.~~
+
+#### 5\. Zolderruimte
+
+Als geen _vaste_ trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de zolderruimte met 5 punten verminderd, maar niet met meer punten dan voor de oppervlakte van de zolderruimten wordt gegeven.
+
+~~Is er op de zolderverdieping ook nog een vertrek aanwezig dat alleen bereikbaar is via het zoldergedeelte dan wordt de oppervlakte van het zoldergedeelte verminderd met de loopruimte om het vertrek te bereiken. De dan resterende zolderoppervlakte dient minimaal 2 m2 te bedragen en wordt dan gewaardeerd als overige ruimte.~~
+
+#### ~~6\. Overloop~~
+
+~~Een overloop is een verkeersruimte en wordt niet gewaardeerd. Als er met aftrek van de verkeersruimte en trap voldoende ruimte overblijft en deze (zolder)overloop kennelijk ook bedoeld is als bergruimte, dan wordt deze ruimte wel gewaardeerd (als overige ruimte).~~
+
+#### 7\. Parkeerruimte
+
+Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens deze rubriek. Een voorbeeld is een garagebox behorende tot de woning.
+
+> De `Ruimtedetailsoort` `garage` wordt tot op heden alleen gewaardeerd als overige ruimte wanneer deze voldoet aan de voorwaarden.
+
+De oppervlakte per overige ruimte wordt afgerond op 2 decimalen. De afronding van de oppervlakte van alle overige ruimte samen vindt plaats op hele vierkante meters na saldering van de oppervlakte van de afzonderlijke overige ruimten; bij 0,5 m2 of meer wordt naar boven afgerond, bij minder dan 0,5 m2 naar beneden. Waardering in punten vindt na saldering en afronding plaats.
+
+_Voorbeeld:_
+
+_Garage : lengte 3,16m x breedte 6,12m = 19,3392 m², afgerond : 19,34 m²_  
+_Bijkeuken: lengte 2,11m x breedte 2,87m = 6,0557 m², afgerond : 6,06 m²_
+_Totaal : 25,40 m² Afronding op hele m² : 25 m²._
+
+_Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten._
