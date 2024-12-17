@@ -176,6 +176,10 @@ def opslag_beschermd_stads_of_dorpsgezicht(
                 logger.info(
                     f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
                 )
+        else:
+            logger.info(
+                f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht, maar is een rijks-, gemeentelijk of provinciaal monument. Er wordt geen opslagpercentage voor beschermd stads- of dorpsgezicht toegepast."
+            )
     else:
         logger.debug(
             f"Eenheid ({eenheid.id}) behoort niet tot een beschermd stads- of dorpsgezicht."
