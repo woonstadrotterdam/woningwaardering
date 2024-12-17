@@ -796,3 +796,113 @@ Voorbeeld
 6. _Afronden geschiedt op een kwart punt per adres, in dit geval dus op 9,50._
 
 > Voor ons is het niet helemaal duidelijk op basis van de tekst en de voorbeeldrekening hoe het zit met de maximering op punten. Wij zijn er vanuit gegaan dat ook de maximering van de hoeveelheid punten gedeeeld moet worden door het aantal adressen. Bijvoorbeeld maximaal 0.75 punten voor kastruimte in de badruimte wordt met toegang van twee adressen ~0.38.
+
+## Rubriek 10 Gemeenschappelijke parkeerruimten
+
+### 10.1 Puntentoekenning
+
+> Bij het rekenvoorbeeld aan het einde van deze rubriek wordt uitgelegd hoe de woningwaardering package te gebruiken is om een eenheid te waarderen op de rubriek gemeenschappelijke parkeerruimten.
+
+Voor verschillende typen gemeenschappelijke parkeerplekken, afhankelijk van afdekking van de buitenlucht, worden punten toegekend:
+
+* Type I: parkeerplek in afgesloten parkeergarage behorende tot het complex krijgt 9 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
+* Type II: parkeerplek buiten behorende tot het complex of de woning met dak krijgt 6 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft. Hieronder wordt ook begrepen een carport.
+* Type III: parkeerplek buiten behorende tot het complex of de woning zonder dak krijgt 4 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
+
+2 extra punten worden toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft, als de parkeerplek beschikt over een laadpaal voor elektrisch rijden, en exclusief is voor gebruik door bewoners.
+
+> Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:
+> - Type I: `Ruimtedetailsoort.parkeervak_auto_binnen` met code `VAI`
+> - Type II: `Ruimtedetailsoort.carport` met code `CAR`
+> - Type III: `Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt` met code `VAU`
+
+### 10.2 Definitie gemeenschappelijke parkeerruimte
+
+Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewoners van tenminste twee adressen die daar exclusief gebruiksrecht op hebben, waarin zich tenminste één parkeerplek bevindt (zoals een gemeenschappelijke parkeergarage onder een wooncomplex of een gemeenschappelijke parkeerplaats buiten met één of meerdere parkeerplekken). De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een complex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
+
+Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2,  (bijvoorbeeld een garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief behorende tot de woning).
+
+Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12m2 waarin een gangbare personenauto in zijn geheel past. Een afgebakend vak betekent dat het kenbaar moet zijn waar zich een parkeerplek bevindt. Dit kan bijvoorbeeld door een bord, al dan niet in combinatie met lijnmarkeringen op de grond of een bepaald type of kleur tegel om het vak af te kaderen.
+
+### 10.3 Onroerende aanhorigheid
+
+Punten voor een parkeervoorziening worden alleen toegekend als deze als onroerende aanhorigheid gekwalificeerd wordt. Hiervan is sprake als de parkeervoorziening naar haar aard onlosmakelijk verbonden is met de woonruimte (bijvoorbeeld wanneer de parkeerplek direct in verbinding staat met de woonruimte of tot het adres of complex behoort, zoals bij een gemeenschappelijke oprit of gemeenschappelijke garage) of omdat de parkeervoorziening volgens verkeersopvatting onderdeel of krachtens de huurovereenkomst deel uitmaakt van de gehuurde woning.
+
+Hiervan is sprake als  in de huurovereenkomst is afgesproken dat de parkeervoorziening tot de onroerende zaak behoort en de woonruimte en parkeerplaats verhuurd moeten zijn zonder dat ze van elkaar contractueel te scheiden zijn. Als de parkeerplek geen onroerende aanhorigheid betreft, heeft de verhuurder de mogelijkheid dit als los goed te verhuren volgens artikel 7:201 BW.
+
+### 10.4 Rekenmethode en voorbeeldberekening
+
+_Rekenmethode_
+
+1. Bepaal tot welk type de parkeerplek behoort (dus type I, II of III, zie hierboven).
+2. Als er sprake is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee punten extra per parkeerplek met laadpaal.
+3. Bij meerdere parkeerplekken worden de punten bij elkaar opgeteld.
+4. Daarna wordt dit puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de parkeerplek(ken). Indien sprake is van een privé parkeerplek voor één adres, wordt gedeeld door 1.
+
+_Voorbeeldberekening_
+
+Tien adressen delen vijf type II-parkeerplekken met laadpaal en twee type III-parkeerplekken zonder laadpaal.
+
+1. Vijf parkeerplekken type II (zes punten) + elke een laadpaal (twee punten) en twee parkeerplekken type III (4 punten) = 5 x (6+2)+ 2 x 4 = 48.
+2. 48 / 10 adressen = 4,8 per adres.
+3. Afronden geschiedt op een kwart punt per adres, in dit voorbeeld dus op 4,75.
+
+> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken bovenstaande berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven hoeveel van bovenstaande parkertypes de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden. Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt (in JSON-formaat) meegegeven worden.
+
+```json
+{
+  "id": "12006000004",
+  "ruimten": [
+    {
+      "id": "1",
+      "gedeeld_met_aantal_eenheden": 10,
+      "aantal": 5,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "gedeeld_met_aantal_eenheden": 10,
+      "aantal": 2,
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "VAU",
+        "naam": "Parkeervak auto (buiten, niet overdekt)"
+      },
+      "naam": "Parkeervak buiten",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4
+    }
+  ]
+}
+```
+
+> Let op: in bovenstaand voorbeeld, wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte ook keer het `Eenhedenruimte.aantal` meegeteld voor het berekenen van de punten. In bovenstaand voorbeeld wordt de laadpaal dus vijf (5) keer meegeteld.
