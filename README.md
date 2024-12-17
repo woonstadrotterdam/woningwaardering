@@ -703,14 +703,14 @@ with open(
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1779.24,
+  "maximaleHuur": 1820.52,
   "punten": 282.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1779.24
+  "maximaleHuurInclusiefOpslag": 1820.52
 }
 ```
 
@@ -783,7 +783,7 @@ with open(
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |  282.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-|                                   | Maximale huur                                                               |      1779.24 | EUR                 |         |         |
+|                                   | Maximale huur                                                               |      1820.52 | EUR                 |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 ```
 
@@ -1205,14 +1205,14 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1125.6,
+  "maximaleHuur": 1151.72,
   "punten": 181.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1125.6
+  "maximaleHuurInclusiefOpslag": 1151.72
 }
 ```
 
@@ -1255,7 +1255,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |  181.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-|                                   | Maximale huur                                                               |      1125.60 | EUR                 |         |         |
+|                                   | Maximale huur                                                               |      1151.72 | EUR                 |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 ```
 
