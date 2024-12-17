@@ -12,7 +12,6 @@ from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenEnergieprestatie,
     EenhedenWozEenheid,
     WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
@@ -580,18 +579,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         bouwjaar = eenheid.bouwjaar
 
-        hoogniveau_renovatie = PuntenVoorDeWozWaarde.hoogniveau_renovatie(
-            eenheid, self.peildatum
-        )
-        if hoogniveau_renovatie:
-            logger.info(f"Eenheid ({eenheid.id}): hoogniveau renovatie geconstateerd.")
-
         # Indien de bouwkundige oplevering of hoogniveau renovatie van de woning heeft
         # plaatsgevonden in de jaren 2015-2019 en die woning voor de onderdelen
         # 1 t/m 10 en 12 van het woningwaarderingsstelsel minimaal 110 punten heeft
         # behaald dan worden, voor het aantal punten voor de WOZ-waarde,
         # minimaal 40 punten toegekend.
-        if (bouwjaar and 2015 <= bouwjaar <= 2019) or hoogniveau_renovatie:
+        if bouwjaar and 2015 <= bouwjaar <= 2019:
             punten_critische_stelselgroepen = sum(
                 groep.punten or 0.0
                 for groep in woningwaardering_resultaat.groepen or []
@@ -648,85 +641,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woz_waarde = next(iter(woz_eenheden), None)
 
         return woz_waarde
-
-    @staticmethod
-    def hoogniveau_renovatie(eenheid: EenhedenEenheid, peildatum: date) -> bool:
-        """
-        Bepaalt of de eenheid een hoogniveau renovatie heeft gehad.
-
-        Args:
-            eenheid (EenhedenEenheid): De eenheid.
-            peildatum (date): De peildatum van de Woningwaardering.
-
-        Returns:
-            bool: True als de eenheid een hoogniveau renovatie heeft gehad, anders False.
-        """
-
-        if not eenheid.renovatie:
-            return False
-
-        if not eenheid.renovatie.datum:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): renovatie zonder renovatiedatum gevonden."
-            )
-            return False
-
-        # De specifieke berekeningsmethodiek, die geldt voor nieuwbouwwoningen (2015-2019) (...)  is ook van toepassing
-        # indien in de eerdergenoemde kalenderjaren sprake is van hoogniveau renovatie. (...) Hieruit volgt dat sprake is
-        # van hoogniveau renovatie indien voor de woning een energielabel A+++ of A++++ is afgegeven (na 1 januari 2021).
-
-        if eenheid.renovatie.datum.year < 2015:
-            return False
-
-        energieprestatie: EenhedenEnergieprestatie | None = (
-            utils.energieprestatie_met_geldig_label(peildatum, eenheid)
-        )
-
-        if not energieprestatie:
-            return False
-
-        if not energieprestatie.begindatum:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): energieprestatie zonder begindatum gevonden",
-                UserWarning,
-            )
-            return False
-
-        if not energieprestatie.label:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): energieprestatie zonder label gevonden",
-                UserWarning,
-            )
-            return False
-
-        if eenheid.renovatie.datum.year <= 2019:
-            if (
-                energieprestatie.begindatum >= date(2021, 1, 1)
-                and energieprestatie.label.naam
-                and energieprestatie.label.naam in (["A+++", "A++++"])
-            ):
-                return True
-
-        # Indien sprake is van verbouw in de jaren 2015-2021 dan is sprake van
-        # hoogniveau renovatie als het Energie-Index van de woning lager is dan 0,4.
-        if eenheid.renovatie.datum.year <= 2021:
-            if not energieprestatie.waarde:
-                warnings.warn(
-                    f"Eenheid ({eenheid.id}): energieprestatie zonder waarde (Energie-Index) gevonden bij een renovatie in de jaren 2015-2021.",
-                    UserWarning,
-                )
-                return False
-            try:
-                energieprestatie_waarde = Decimal(energieprestatie.waarde)
-                if energieprestatie_waarde < 0.4:
-                    return True
-            except ValueError:
-                warnings.warn(
-                    f"Eenheid ({eenheid.id}): energieprestatie met een waarde (Energie-Index) dat niet kan worden omgezet in een getal ({energieprestatie.waarde}) gevonden bij een renovatie in de jaren 2015-2021"
-                )
-                return False
-
-        return False
 
 
 if __name__ == "__main__":  # pragma: no cover
