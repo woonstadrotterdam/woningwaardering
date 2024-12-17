@@ -22,7 +22,7 @@ Een zelfstandige woning wordt beoordeeld met 255 punten. Bij een puntenaantal va
 
 ## 2.8 Prijsopslag monumenten en nieuwbouw
 
-De punten die worden berekend op basis van het woningwaarderingsstelsel resulteren in een maximale huurprijs. Het waarderingsstelsel kent de mogelijkheid van een opslag bovenop deze maximale huurprijs voor monumenten en voor nieuwbouw. Als meerdere opslagen van toepassing zijn, worden deze percentages bij elkaar opgeteld alvorens daarmee de huurprijs wordt vermeerderd.4
+De punten die worden berekend op basis van het woningwaarderingsstelsel resulteren in een maximale huurprijs. Het waarderingsstelsel kent de mogelijkheid van een opslag bovenop deze maximale huurprijs voor monumenten en voor nieuwbouw. Als meerdere opslagen van toepassing zijn, worden deze percentages bij elkaar opgeteld alvorens daarmee de huurprijs wordt vermeerderd.
 
 Deze opslagen blijven buiten beschouwing voor het antwoord op de vraag tot welke sector (sociale sector, middensector of vrijehuursector) de woonruimte behoort.
 
@@ -125,7 +125,7 @@ Een ruimte wordt als vertrek gewaardeerd als deze voldoet aan de volgende eisen:
 * ~~de vloer moet begaanbaar zijn;~~
 * ~~de muren/wanden dienen uit 'vast' materiaal te bestaan;~~
 * ~~de ruimte dient over tenminste 80% van de lengte (de langste zijde) ten minste 1,50 m breed te zijn;~~
-* ~~de ruimte dient een oppervlakte te hebben van minimaal 4 m2;~~
+* de ruimte dient een oppervlakte te hebben van minimaal 4 m2;
 * ~~de ruimte dient over ten minste 50% van de oppervlakte of over een oppervlakte van 11 m2 een vrije hoogte te hebben van ten minste 2,10 m (gemeten vanaf de vloer tot het zichtbare plafond (onder het zichtbare plafond aanwezige balken blijven buiten de meting);~~
 * ~~de ruimte dient te zijn voorzien van minimaal 0,5 m2 aan de buitenlucht grenzend transparant oppervlak (bijvoorbeeld een raam of deur met vensters);~~
 * ~~de ruimte dient te beschikken over direct met de buitenlucht verbonden ventilatie;~~
