@@ -8,6 +8,13 @@
 
 > ⚠️ Release v3.x.x kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van januari 2025 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [README](https://github.com/woonstadrotterdam/woningwaardering#), [de toelichting op de implementatie van het beleidsboek](https://github.com/woonstadrotterdam/woningwaardering/tree/main/docs/implementatietoelichting-beleidsboeken) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
 
+<!--
+De file-link hieronder moet aangepast worden naar een github-link zodra de branch is gemerged naar main
+-->
+
+![voorbeeld-output](docs/afbeeldingen/voorbeeld_output.jpg)
+_Visueel voorbeeld van de output van de package voor een zelfstandige woonruimte._
+
 📊 **Status**
 
 ![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jan_2025&width=120)  
