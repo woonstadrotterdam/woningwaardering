@@ -244,6 +244,8 @@ Een toiletruimte kan als overige ruimte worden gewaardeerd als aan de eisen van 
 
 De wetgever heeft een aantal meetinstructies meegegeven:
 
+#### 1\. Binnenmaatse meting
+
 ~~Meting van de oppervlakte van overige ruimten vindt plaats van muur tot muur, op een hoogte van 1,50 m boven de vloer, inclusief de oppervlakte van alle tot de woning behorende losse en vaste kasten.~~
 
 ~~De Huurcommissie berekent de hoogte van 1,50 m door te meten tot het dakbeschot, het zichtbare dakvlak of plafond (gordingen en balken blijven buiten de meting).~~
@@ -260,7 +262,7 @@ De oppervlakte van alle tot de woning behorende losse en vaste kasten wordt meeg
 * Een kast, waarvan de deur uitkomt op een verkeersruimte, wordt niet gewaardeerd.
 * ~~Losse kasten zijn niet van belang bij het meten. De oppervlakte van de overige ruimte wordt bepaald, incl. de oppervlakte die wordt ingenomen door een losse kast.~~
 
-### ~~2\. Oppervlakte trap(gat)~~
+#### ~~2\. Oppervlakte trap(gat)~~
 
 ~~Van de oppervlakte onder een open dan wel gesloten vaste trap telt dat gedeelte waar de ruimte tussen vloer en onderkant trap ten minste 1,50m hoog is. De oppervlakte die door een in ingeschoven toestand liggende inschuifbare of opvouwbare trap wordt ingenomen, wordt niet meegeteld.~~
 
@@ -295,6 +297,8 @@ Als geen _vaste_ trap aanwezig is, wordt het aantal punten van de vloeroppervlak
 Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens deze rubriek. Een voorbeeld is een garagebox behorende tot de woning.
 
 > De `Ruimtedetailsoort` `garage` wordt tot op heden alleen gewaardeerd als overige ruimte wanneer deze voldoet aan de voorwaarden.
+
+### 2.4 Afronding oppervlakte op hele m2
 
 De oppervlakte per overige ruimte wordt afgerond op 2 decimalen. De afronding van de oppervlakte van alle overige ruimte samen vindt plaats op hele vierkante meters na saldering van de oppervlakte van de afzonderlijke overige ruimten; bij 0,5 m2 of meer wordt naar boven afgerond, bij minder dan 0,5 m2 naar beneden. Waardering in punten vindt na saldering en afronding plaats.
 
