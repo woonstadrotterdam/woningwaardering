@@ -487,17 +487,16 @@ Voor de puntentoekenningen in de tabellen wordt onderscheid gemaakt tussen eenge
 
 > Let op: deze definitie is anders dan vaak gehanteerd wordt zie: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/154
 
-
 ## Rubriek 5 Keuken
 
 ### 5.1 Eisen keuken
 
 Punten worden alleen aan het onderdeel ‘keuken’ toegekend als de ruimte voldoet aan het volgende basisniveau:
 
-*   ~~aan- en afvoer van water en ten minste één vast aansluitpunt voor koken op gas of elektriciteit;~~
-*   een aanrechtblad met een aan een gesloten lengte van minimaal 1 m (lengte incl. spoelbak, incl. kookplaat);
-*   ~~twee inbouwkasten met een breedte van minimaal 50 cm;~~
-*   ~~waterdichte afwerking boven het waterdichte aanrechtblad en in de kookhoek vanaf de vloer tot een hoogte van minimaal 1,50 m.~~
+* ~~aan- en afvoer van water en ten minste één vast aansluitpunt voor koken op gas of elektriciteit;~~
+* een aanrechtblad met een aan een gesloten lengte van minimaal 1 m (lengte incl. spoelbak, incl. kookplaat);
+* ~~twee inbouwkasten met een breedte van minimaal 50 cm;~~
+* ~~waterdichte afwerking boven het waterdichte aanrechtblad en in de kookhoek vanaf de vloer tot een hoogte van minimaal 1,50 m.~~
 
 Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, ook niet voor de extra voorzieningen als bedoeld in paragraaf 5.4 hierna. Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als ‘wastafel’.
 
@@ -505,9 +504,9 @@ Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, oo
 
 ### 5.2 Puntentoekenning lengte aanrecht
 
-*   Bij een aanrechtlengte minder dan 1 m, worden 0 punten toegekend.
-*   Bij een aanrechtlengte tussen de 1 en 2 m, worden 4 punten toegekend.
-*   Bij een aanrechtlengte van 2 m of langer, worden 7 punten toegekend.
+* Bij een aanrechtlengte minder dan 1 m, worden 0 punten toegekend.
+* Bij een aanrechtlengte tussen de 1 en 2 m, worden 4 punten toegekend.
+* Bij een aanrechtlengte van 2 m of langer, worden 7 punten toegekend.
 
 De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van het aanrecht, ~~waarbij sprake moet zijn van een waterdicht keukenblad~~
 
@@ -526,8 +525,8 @@ Van een (standaard)aanrechtblad dat gedeeltelijk is ingemetseld of waar de wandb
 
 Indien er sprake is van een hoekaanrecht wordt de lengte van het aanrecht bepaald door (zie figuur):
 
-1.  De lange zijde van het langere aanrechtdeel te meten (zie horizontale blauwe lijn).
-2.  Vervolgens die lengte te salderen met de lange zijde van het kortere aanrechtdeel (zie verticale blauwe lijn).
+1. De lange zijde van het langere aanrechtdeel te meten (zie horizontale blauwe lijn).
+2. Vervolgens die lengte te salderen met de lange zijde van het kortere aanrechtdeel (zie verticale blauwe lijn).
 
 De lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.
 
