@@ -631,7 +631,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 woz_eenheid
                 for woz_eenheid in (eenheid.woz_eenheden or [])
                 if woz_eenheid.waardepeildatum is not None
-                and woz_eenheid.waardepeildatum.year in [2023, 2022]
+                and woz_eenheid.waardepeildatum.year
+                in [self.peildatum.year - 1, self.peildatum.year - 2]
             ),
             key=lambda x: x.waardepeildatum or date.min,
             reverse=True,
