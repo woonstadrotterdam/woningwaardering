@@ -80,7 +80,7 @@ def waardeer_sanitair(
 def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:
     ruimte.installaties = ruimte.installaties or []
     # Backwards compatibiliteit voor bouwkundige elementen
-    for bouwkundige_element_detail_soort, voorziening_soort in {
+    for bouwkundigelementdetailsoort, voorzieningsoort in {
         Bouwkundigelementdetailsoort.wastafel: Voorzieningsoort.wastafel,
         Bouwkundigelementdetailsoort.douche: Voorzieningsoort.douche,
         Bouwkundigelementdetailsoort.bad: Voorzieningsoort.bad,
@@ -89,17 +89,17 @@ def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:
         Bouwkundigelementdetailsoort.fontein: Voorzieningsoort.wastafel,
     }.items():
         bouwkundige_elementen = list(
-            get_bouwkundige_elementen(ruimte, bouwkundige_element_detail_soort)
+            get_bouwkundige_elementen(ruimte, bouwkundigelementdetailsoort)
         )
         if bouwkundige_elementen:
             warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {bouwkundige_element_detail_soort.naam} als bouwkundig element. Dit dient als `Voorzieningsoort` '{voorziening_soort}' op de ruimte onder `installaties` gespecificeerd te worden."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {bouwkundigelementdetailsoort.naam} als bouwkundig element. Dit dient als `Voorzieningsoort` '{voorzieningsoort}' op de ruimte onder `installaties` gespecificeerd te worden."
             )
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {bouwkundige_element_detail_soort.naam} wordt als {voorziening_soort.naam} toegevoegd aan installaties"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {bouwkundigelementdetailsoort.naam} wordt als {voorzieningsoort.naam} toegevoegd aan installaties"
             )
             ruimte.installaties.extend(
-                [voorziening_soort for _ in bouwkundige_elementen]
+                [voorzieningsoort for _ in bouwkundige_elementen]
             )
 
 
