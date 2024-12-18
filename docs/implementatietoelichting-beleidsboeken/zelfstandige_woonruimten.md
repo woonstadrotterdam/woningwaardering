@@ -312,6 +312,8 @@ _Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten._
 
 ## Rubriek 3 Verkoeling en verwarming
 
+> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100. Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
+
 ### 3.1 Puntentoekenning
 
 * Verwarmde vertrekken worden gewaardeerd met 2 punten.
