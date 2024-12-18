@@ -561,8 +561,6 @@ _\* ~~Bij een afzuiginstallatie gaat het om een luchtafvoer met afzuiging naar b
 
 ~~** Om aan het basisniveau voor de kwalificatie als keuken te voldoen, moeten twee inbouwkasten met een breedte van minimaal 50 cm (per stuk) aanwezig zijn. De totale minimumbreedte bedraagt dus 1 meter. Per 60 cm breedte extra kastruimte kan vervolgens, als ook aan de andere eisen wordt voldaan, 0,75 punt extra worden toegekend.~~
 
-> Omdat kasten zelden op deze manier gemodelleerd worden hanteren wij de basisniveau-criteria van hierboven niet.
-
 Wanneer een object twee voorzieningen heeft, bijvoorbeeld een ingebouwde combi magnetron/oven of een gecombineerde koel- en vrieskast, worden beide voorzieningen in dit object gewaardeerd conform bovenstaande lijst. ~~Voor de meting van keukenkasten wordt uitgegaan van de buitenmaat.~~
 
 ## Rubriek 6 Sanitair
