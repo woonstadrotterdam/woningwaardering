@@ -352,7 +352,7 @@ _Koelsystemen_
 
 Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten. ~~Onder een open keuken wordt hier verstaan een keuken die in open verbinding staat met een ander vertrek, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur.~~ Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek individueel gewaardeerd met punten indien deze verwarmd zijn.
 
-> In tegenstelling tot wat in versie juli 2024 stond, telt een ruimte met een aanrecht niet meer per se als open keuken. Om een open keuken apart gewaardeerd te krijgen van de ruimte waar die mee verbonden is is het vereist om deze keuken als aparte ruimte mee te geven.
+> In tegenstelling tot wat in versie juli 2024 stond, telt een ruimte met een aanrecht niet meer per se als open keuken. Om een open keuken apart gewaardeerd te krijgen van de ruimte waar die mee verbonden is, is het vereist om deze keuken als aparte ruimte mee te geven.
 
 ## Rubriek 4 Energieprestatie
 
@@ -693,7 +693,7 @@ _\*~~Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of
     _Voorbeeld: een woongebouw met een gemeenschappelijk dakterras van 30 m2 waartoe drie adressen toegang hebben, wordt gewaardeerd met: (0,75 x 30) / 3 = 7,5._
 * Een aftrek van 5 punten wordt toegepast als de woning in het geheel geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft.
 
-> Hoewel uit deze zin het lijkt alsof de loggia niet valt onder privé-buitenruimte of gemeenschappelijke buitenruimte, gaan wij er vanuit dat de loggia wel onder één van beide categorieën valt en dat loggia in deze zin op een ongelukkige manier is toegevoegd om te benadrukken dat een loggia een buitenruimte is.
+> Hoewel deze zin suggereert dat de loggia niet valt onder privé-buitenruimte of gemeenschappelijke buitenruimte, gaan wij er vanuit dat de loggia wel onder één van beide categorieën valt en dat loggia in deze zin op een ongelukkige manier is toegevoegd om te benadrukken dat een loggia een buitenruimte is.
 
 * Maximaal 15 punten worden toegekend voor buitenruimten.
 
