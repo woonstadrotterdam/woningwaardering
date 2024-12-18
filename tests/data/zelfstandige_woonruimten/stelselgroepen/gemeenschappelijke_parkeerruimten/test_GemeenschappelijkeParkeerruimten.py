@@ -45,14 +45,14 @@ def test_GemeenschappelijkeParkeerruimten_specifiek_output(
 warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/warning_geen_oppervlakte.json",
-        peildatum=date(2024, 7, 1),
+        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "oppervlakte",
         },
     ),
     WarningConfig(
         file=f"{current_file_path}/input/warning_gedeeld_met_aantal_eenheden.json",
-        peildatum=date(2024, 7, 1),
+        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "gedeeld_met_aantal_eenheden",
         },

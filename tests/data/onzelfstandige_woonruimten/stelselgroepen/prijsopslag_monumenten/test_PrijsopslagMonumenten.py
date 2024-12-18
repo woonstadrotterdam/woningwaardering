@@ -46,21 +46,21 @@ def test_PrijsopslagMonumentenEnNieuwbouw_specifiek_output(
 warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/beschermd_stadsgezicht_zonder_bouwjaar.json",
-        peildatum=date(2024, 7, 1),
+        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "geen bouwjaar",
         },
     ),
     WarningConfig(
         file=f"{current_file_path}/input/monumenten_none.json",
-        peildatum=date(2024, 7, 1),
+        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
         },
     ),
     WarningConfig(
         file=f"{current_file_path}/input/rijksmonument_zonder_datum_afsluiting_huurovereenkomst.json",
-        peildatum=date(2024, 7, 1),
+        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.",
         },

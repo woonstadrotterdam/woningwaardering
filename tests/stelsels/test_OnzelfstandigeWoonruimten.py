@@ -10,7 +10,7 @@ from woningwaardering.vera.bvg.generated import (
 
 
 def test_OnzelfstandigeWoonruimten(onzelfstandige_woonruimten_inputmodel):
-    onzelfstandige_woonruimten = OnzelfstandigeWoonruimten(peildatum=date(2024, 7, 1))
+    onzelfstandige_woonruimten = OnzelfstandigeWoonruimten(peildatum=date(2025, 1, 1))
     resultaat = onzelfstandige_woonruimten.waardeer(
         onzelfstandige_woonruimten_inputmodel
     )
