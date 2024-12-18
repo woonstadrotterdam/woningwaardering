@@ -392,8 +392,6 @@ _\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte 
 
 LET OP: DEZE UITZONDERING KOMT PER 1 JANUARI 2025 TE VERVALLEN.
 
-> Deze uitzondering is per 1 januari 2025 vervallen en wordt daardoor niet meer ondersteund door de woningwaardering package.
-
 Indien de energieprestatie is bepaald met de van toepassing zijnde NTA 8800 (nieuw energielabel) in de periode 1 januari 2021 - 1 juli 2024, geldt tot 1 januari 2025 een afwijkende waardering indien de gebruikersoppervlakte gelijk of minder is dan 40m2. Voor de oppervlakte wordt uitgegaan van de gebruikersoppervlakte van de woning die wordt bepaald bij de verstrekking van een energielabel met toepassing van NTA 8800.
 
 Deze waardering bedraagt:
