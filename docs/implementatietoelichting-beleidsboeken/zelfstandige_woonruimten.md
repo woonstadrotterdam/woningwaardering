@@ -352,7 +352,7 @@ _Koelsystemen_
 
 Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten. ~~Onder een open keuken wordt hier verstaan een keuken die in open verbinding staat met een ander vertrek, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur.~~ Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek individueel gewaardeerd met punten indien deze verwarmd zijn.
 
-> In tegenstelling tot wat in versie juli 2024 stond, telt een ruimte met een aanrecht niet meer per se als open keuken. Om een open keuken apart gewaardeerd te krijgen van de ruimte waar die mee verbonden is, is het vereist om deze keuken als aparte ruimte mee te geven.
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat elke ruimte, dat van zichzelf geen keuken is, met een aanrecht langer dan 1 meter als open keuken wordt gewaardeerd voor verkoeling en verwarming
 
 ## Rubriek 4 Energieprestatie
 
