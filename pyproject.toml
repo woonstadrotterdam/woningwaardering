@@ -30,7 +30,7 @@ dependencies = [
     "prettytable==3.*",
     "pandas==2.*",
     "requests==2.*",
-    "SPARQLWrapper==2.*",
+    "monumenten==0.2.*",
 ]
 
 [project.urls]
