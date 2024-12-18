@@ -138,7 +138,7 @@ In afwijking van bovengenoemde eisen is een ruimte die uitsluitend als keuken, b
 Van de minimumoppervlakte zoals hiervoor genoemd kan niet worden afgeweken. Heeft de ruimte bijvoorbeeld een oppervlakte van 3,5 of 3,85 m2, dan wordt niet aan de gestelde eis van minimaal 4 m2 voldaan. De oppervlakte mag niet naar boven worden afgerond waardoor invulling aan de eis zou zijn gegeven.
 
 _Zolderruimte_
-Voor zolderruimten gelden, naast bovengenoemde eisen, nog twee eisen om als vertrek gewaardeerd te worden. De zolderruimte moet namelijk bereikbaar zijn via een vaste trap en ~~het dak moet beschoten zijn~~.
+Voor zolderruimten gelden, naast bovengenoemde eisen, nog twee eisen om als vertrek gewaardeerd te worden. De zolderruimte moet namelijk bereikbaar zijn via een vaste trap ~~en het dak moet beschoten zijn~~.
 
 ### 1.3 Meetinstructies
 
