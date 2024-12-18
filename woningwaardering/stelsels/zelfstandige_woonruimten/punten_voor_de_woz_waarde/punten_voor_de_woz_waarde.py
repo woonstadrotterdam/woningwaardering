@@ -491,7 +491,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> Decimal:
         """
-        Geeft de totale oppervlakte van de stelselgroepen oppervlakte van vertrekken en oppervlakte van overige ruimten plus 12x het aantal parkeerplekken Type I uit Rubriek 10
+        Geeft de totale oppervlakte van de stelselgroepen oppervlakte van vertrekken, oppervlakte van overige ruimten
+        en de som van de oppervlakte van parkeerplekken Type I uit Rubriek 10 / het aantal adressen waar iedere parkeerplek Type I mee gedeeld wordt.
 
         Args:
             eenheid (EenhedenEenheid): De eenheid.
