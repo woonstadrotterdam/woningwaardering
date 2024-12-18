@@ -524,8 +524,9 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         else:
             logger.debug(f"Eenheid ({eenheid.id}): Geen monumentale statussen gevonden")
     except Exception as e:
-        logger.warning(
-            f"Monumentale statussen konden niet worden opgehaald m.b.v. API: {e}"
+        warnings.warn(
+            f"Monumentale statussen konden niet worden opgehaald m.b.v. API: {e}",
+            UserWarning,
         )
     return eenheid
 
