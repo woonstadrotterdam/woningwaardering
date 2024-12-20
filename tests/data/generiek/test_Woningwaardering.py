@@ -11,7 +11,7 @@ from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
 def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte(
     onzelfstandige_woonruimten_inputmodel,
 ):
-    woningwaardering = Woningwaardering(peildatum=date(2024, 7, 1))
+    woningwaardering = Woningwaardering(peildatum=date(2025, 1, 1))
     resultaat = woningwaardering.waardeer(onzelfstandige_woonruimten_inputmodel)
 
     assert isinstance(
@@ -38,7 +38,7 @@ def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte_output(
 def test_WoningwaarderingGeneriekZelfstandigeWoonruimte(
     zelfstandige_woonruimten_inputmodel,
 ):
-    woningwaardering = Woningwaardering(peildatum=date(2024, 7, 1))
+    woningwaardering = Woningwaardering(peildatum=date(2025, 1, 1))
     resultaat = woningwaardering.waardeer(zelfstandige_woonruimten_inputmodel)
 
     assert isinstance(

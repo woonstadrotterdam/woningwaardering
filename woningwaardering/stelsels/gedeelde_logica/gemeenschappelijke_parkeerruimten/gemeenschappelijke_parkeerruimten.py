@@ -81,9 +81,9 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         return
 
     if ruimte.detail_soort not in [
-        Ruimtedetailsoort.parkeervak_auto_binnen,
-        Ruimtedetailsoort.carport,
-        Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt,
+        Ruimtedetailsoort.parkeervak_auto_binnen,  # Type I
+        Ruimtedetailsoort.carport,  # Type II
+        Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt,  # Type III
     ]:
         return
 

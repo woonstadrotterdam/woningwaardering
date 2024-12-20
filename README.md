@@ -6,13 +6,19 @@
 
 # Woningwaardering
 
-> ⚠️ Release v2.x.x kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van juli 2024 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [README](https://github.com/woonstadrotterdam/woningwaardering#), [de toelichting op de implementatie van het beleidsboek](https://github.com/woonstadrotterdam/woningwaardering/tree/main/docs/implementatietoelichting-beleidsboeken) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
+> ⚠️ Release v3.x.x kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van januari 2025 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [README](https://github.com/woonstadrotterdam/woningwaardering#), [de toelichting op de implementatie van het beleidsboek](https://github.com/woonstadrotterdam/woningwaardering/tree/main/docs/implementatietoelichting-beleidsboeken) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
+
+<!--
+De file-link hieronder moet aangepast worden naar een github-link zodra de branch is gemerged naar main
+-->
+
+![voorbeeld-output](docs/afbeeldingen/voorbeeld_output.jpg)
+_Visueel voorbeeld van de output van de package voor een zelfstandige woonruimte._
 
 📊 **Status**
 
-![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jan_2024&width=120)  
-![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jul_2024&width=120)  
-![](https://progress-bar.xyz/95/?title=onzelfstandige_woonruimten_jul_2024&width=108)
+![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jan_2025&width=120)  
+![](https://progress-bar.xyz/95/?title=onzelfstandige_woonruimten_jan_2025&width=108)
 
 Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk wordt om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) [[referentiedata v4.1.241004](https://github.com/Aedes-datastandaarden/vera-referentiedata), [openapi v4.1.5](https://github.com/Aedes-datastandaarden/vera-openapi)] van de corporatiesector voor de in- en output van de package. Dit project heeft drie hoofddoelen:
 
@@ -30,8 +36,7 @@ _Voorbeeld van hoe wij de woningwaardering package gebruiken bij Woonstad Rotter
 
 ---
 
-Momenteel wordt er gewerkt aan de implementatie van de woningwaardering van onzelfstandige woonruimten volgens het gepubliceerde beleidsboek van de huurcommissie in juli 2024.
-Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van juli 2024 voor zelfstandige woonruimten verwijzen wij naar de [documentatie](https://github.com/woonstadrotterdam/woningwaardering/blob/main/docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md) over de implementatie van dit beleidsboek.
+Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van januari 2025 voor zelfstandige woonruimten verwijzen wij naar de [documentatie](https://github.com/woonstadrotterdam/woningwaardering/blob/main/docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md) over de implementatie van dit beleidsboek.
 Voor meer informatie over hoe documentatie van het beleidsboek is gemaakt, verwijzen wij naar het hoofdstuk [Implementatie beleidsboek huurcommissie](https://github.com/woonstadrotterdam/woningwaardering?tab=readme-ov-file#implementatie-beleidsboek-huurcommissie) in deze `README`.
 
 Voor vragen kunt u contact opnemen met Product Owner en mede-developer van Team Microservices [Tomer Gabay](mailto:tomer.gabay@woonstadrotterdam.nl) of één van de andere maintainers van deze repo.
@@ -94,7 +99,7 @@ Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die ov
 
 De woningwaardering package volgt de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) en daarmee de Nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpretatie. Daarnaast kan het voorkomen dat dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep voglens het beleidsboek tot op de letter nauwkeurig te implementeren. In [implementatietoelichting-beleidsboeken](docs/implementatietoelichting-beleidsboeken) onderbouwen wij hoe elke stelselgroep is geïmplementeerd en welke keuzes daarin gemaakt zijn.  
 In deze documenten wordt bijgehouden welke onderdelen van het beleidsboek wel en niet zijn geïmplementeerd per stelselgroep. De gepubliceerde tekst uit het beleidsboek wordt gekopieerd en wanneer een onderdeel niet in de code van de package is geïmplementeerd zal dit worden aangegeven met ~~doorgestreepte tekst~~.  
-De reden van het niet implementeren van een regelonderdeel is vrijwel altijd dat het technisch niet mogelijk is op basis van het inputmodel van de VERA-standaard. Een voorbeeld hiervan is dat voor oppervlakte van vertrekken in 2024 de minimale breedte van een vertrek over de volledige lengte 1,5m moet zijn. Omdat wij de data van de minimale breedte over de volledige lengte niet binnenkrijgen via het inputmodel kunnen wij dit onderdeel van de regel niet implementeren. **Dit betekent dat het aan de gebruiker is om met deze regelonderdelen rekening te houden bij het eenheid-inputmodel.** Een deel van de deze regelonderdelen wordt al afgevangen indien het eenheid-inputmodel voldoet aan de NEN-norm.
+De reden van het niet implementeren van een regelonderdeel is vrijwel altijd dat het technisch niet mogelijk is op basis van het inputmodel van de VERA-standaard. Een voorbeeld hiervan is dat voor oppervlakte van vertrekken de minimale breedte van een vertrek over de volledige lengte 1,5m moet zijn. Omdat wij de data van de minimale breedte over de volledige lengte niet binnenkrijgen via het inputmodel kunnen wij dit onderdeel van de regel niet implementeren. **Dit betekent dat het aan de gebruiker is om met deze regelonderdelen rekening te houden bij het eenheid-inputmodel.** Een deel van de deze regelonderdelen wordt al afgevangen indien het eenheid-inputmodel voldoet aan de NEN-norm.
 Regels die wel zijn geimplementeerd zijn niet doorgestreept.
 Keuzes die zijn gemaakt en of interpretaties die zijn gedaan, worden in een gemarkeerd blok weergegeven zoals hieronder is gedaan.
 
@@ -163,7 +168,7 @@ from woningwaardering.stelsels.utils import naar_tabel
 warnings.simplefilter("default", UserWarning)
 
 wws = Woningwaardering(
-    peildatum=date(2024, 7, 1)  # bij niet meegeven wordt de huidige dag gebruikt.
+    peildatum=date(2025, 1, 1)  # bij niet meegeven wordt de huidige dag gebruikt.
 )
 with open(
     "tests/data/generiek/input/37101000032.json",
@@ -703,14 +708,14 @@ with open(
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1779.24,
+  "maximaleHuur": 1820.52,
   "punten": 282.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1779.24
+  "maximaleHuurInclusiefOpslag": 1820.52
 }
 ```
 
@@ -783,7 +788,7 @@ with open(
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |  282.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-|                                   | Maximale huur                                                               |      1779.24 | EUR                 |         |         |
+|                                   | Maximale huur                                                               |      1820.52 | EUR                 |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 ```
 
@@ -819,7 +824,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
 
-wws = Woningwaardering(peildatum=date(2024, 7, 1))
+wws = Woningwaardering(peildatum=date(2025, 1, 1))
 
 eenheid = EenhedenEenheid(
     id="<id>",
@@ -1205,14 +1210,14 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1125.6,
+  "maximaleHuur": 1151.72,
   "punten": 181.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1125.6
+  "maximaleHuurInclusiefOpslag": 1151.72
 }
 ```
 
@@ -1255,7 +1260,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |  181.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-|                                   | Maximale huur                                                               |      1125.60 | EUR                 |         |         |
+|                                   | Maximale huur                                                               |      1151.72 | EUR                 |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 ```
 

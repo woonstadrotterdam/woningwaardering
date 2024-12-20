@@ -40,7 +40,7 @@ def test_Sanitair_specifiek_output(specifieke_input_en_output_model, peildatum):
 warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/ingebouwd_kastje_met_wastafel_zonder_wastafel.json",
-        peildatum=date(2024, 7, 1),
+        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "wastafel",
         },

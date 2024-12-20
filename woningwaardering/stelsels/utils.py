@@ -232,7 +232,7 @@ def naar_tabel(
         subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
 
         if (
-            (subtotaal is not None or aantal_waarderingen > 1)
+            (subtotaal is not None or aantal_waarderingen >= 1)
             and woningwaardering_groep.criterium_groep
             and woningwaardering_groep.criterium_groep.stelselgroep
         ):
