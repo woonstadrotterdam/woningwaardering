@@ -515,6 +515,8 @@ De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van 
 Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel.  
 ~~Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.~~
 
+Een waterdichte afwerking wordt in beginsel verondersteld aanwezig te zijn, maar kan pas worden meegenomen als deze aan te merken valt als onroerende aanhorigheid. Dat betekent dat een keuken met bijvoorbeeld een tegelwand of aangebrachte, waterdichte verf wel voldoet aan de eis van een waterdichte afwerking, maar als er slecht een plastic zeil voor een wand is gehangen niet.
+
 ### 5.3 Meetinstructies lengte aanrechtblad
 
 De aanrechtlengte wordt over het midden van het bovenblad gemeten, inclusief ingebouwde spoelbakken en kookplaten.
