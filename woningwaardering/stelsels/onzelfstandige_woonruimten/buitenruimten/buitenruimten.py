@@ -89,7 +89,10 @@ class Buitenruimten(Stelselgroep):
                 ) and not gedeeld_met_eenheden(ruimte):
                     woningwaardering.criterium.bovenliggende_criterium = (
                         WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_prive"
+                            id=f"""{CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                criterium="prive",
+                            )}"""
                         )
                     )
                     if woningwaardering.punten is not None:

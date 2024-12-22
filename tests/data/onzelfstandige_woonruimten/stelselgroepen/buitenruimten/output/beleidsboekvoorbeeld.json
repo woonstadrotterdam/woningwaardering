@@ -19,7 +19,7 @@
             "id": "buitenruimten__Space_108017427",
             "naam": "Klein balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",

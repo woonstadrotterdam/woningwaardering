@@ -314,13 +314,17 @@ class Sanitair(Stelselgroep):
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal_onz, punten in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
-                if aantal_onz > 1
-                else "Totaal (privé)",
-                id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
-                if aantal_onz > 1
-                else f"{self.stelselgroep.name}_prive",
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
+                    if aantal_onz > 1
+                    else "Totaal (privé)",
+                    id=f"""{CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=aantal_onz,
+                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                )}""",
+                )
             )
             woningwaardering.punten = float(utils.rond_af_op_kwart(punten))
             yield woningwaardering
