@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_960249__hangend_toilet",
             "naam": "Badkamer - Hangend toilet"
           },
           "punten": 2.75
@@ -23,6 +24,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_960249__staand_toilet",
             "naam": "Badkamer - Staand Toilet"
           },
           "punten": 2.0

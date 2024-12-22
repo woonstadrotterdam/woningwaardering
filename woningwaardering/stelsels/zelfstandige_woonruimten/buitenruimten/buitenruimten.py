@@ -9,6 +9,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import (
+    CriteriumId,
+    GedeeldMetSoort,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -155,6 +159,10 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Maximaal 15 punten",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="maximering",
+                    )}""",
                 )
             )
             woningwaardering.punten = float(aftrek)
@@ -216,12 +224,24 @@ class Buitenruimten(Stelselgroep):
                         decimalen=2,
                     )
                 )
-                woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                    meeteenheid=Meeteenheid.vierkante_meter_m2,
-                    naam=ruimte.naam,
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_eenheden}_eenheden",
-                    ),
+                woningwaardering.criterium = (
+                    WoningwaarderingResultatenWoningwaarderingCriterium(
+                        meeteenheid=Meeteenheid.vierkante_meter_m2,
+                        id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        ruimte_id=ruimte.id,
+                        gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
+                        gedeeld_met_soort=GedeeldMetSoort.adressen,
+                    )}""",
+                        naam=ruimte.naam,
+                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                            id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
+                            gedeeld_met_soort=GedeeldMetSoort.adressen,
+                        )}""",
+                        ),
+                    )
                 )
             else:  # privé buitenruimte
                 logger.info(
@@ -231,8 +251,14 @@ class Buitenruimten(Stelselgroep):
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
                         naam=ruimte.naam,
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            ruimte_id=ruimte.id,
+                        )}""",
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_prive",
+                            id=f"""{CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                            )}""",
                         ),
                     )
                 )
@@ -262,6 +288,10 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Geen buitenruimten",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="geen_buitenruimten",
+                    )}""",
                 )
             )
             woningwaardering.punten = -5.0
@@ -280,8 +310,16 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Buitenruimten aanwezig",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="aanwezig",
+                        gedeeld_met_aantal=1,
+                    )}""",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.name}_prive",
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            gedeeld_met_aantal=1,
+                        )}""",
                     ),
                 )
             )

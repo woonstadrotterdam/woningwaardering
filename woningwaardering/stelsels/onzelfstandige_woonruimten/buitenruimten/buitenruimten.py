@@ -8,6 +8,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -70,8 +71,14 @@ class Buitenruimten(Stelselgroep):
                     continue
 
                 if gedeeld_met_onzelfstandige_woonruimten(ruimte):
-                    woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
+                    woningwaardering.criterium.bovenliggende_criterium = (
+                        WoningwaarderingCriteriumSleutels(
+                            id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                        )}""",
+                        )
                     )
                     if woningwaardering.punten is not None:
                         gedeeld_met_counter[
@@ -111,13 +118,17 @@ class Buitenruimten(Stelselgroep):
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal, punten in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"Totaal (gedeeld met {aantal} onzelfstandige woonruimten)"
-                if aantal > 1
-                else "Totaal (privé)",
-                id=f"{self.stelselgroep.name}_gedeeld_met_{aantal}_onzelfstandige_woonruimten"
-                if aantal > 1
-                else f"{self.stelselgroep.name}_prive",
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=f"Totaal (gedeeld met {aantal} onzelfstandige woonruimten)"
+                    if aantal > 1
+                    else "Totaal (privé)",
+                    id=f"""{CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=aantal,
+                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                )}""",
+                )
             )
             woningwaardering.punten = float(punten)
             woningwaardering.criterium.meeteenheid = Meeteenheid.vierkante_meter_m2
@@ -178,6 +189,10 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Maximaal 15 punten",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="maximering",
+                    )}""",
                 )
             )
             woningwaardering.punten = float(aftrek)
@@ -255,6 +270,10 @@ class Buitenruimten(Stelselgroep):
                 naam=ruimte.naam
                 if not gedeeld_met_eenheden(ruimte)
                 else f"{ruimte.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)",
+                id=f"""{CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    ruimte_id=ruimte.id,
+                )}""",
             )
             woningwaardering.aantal = float(
                 utils.rond_af(ruimte.oppervlakte, decimalen=2)
@@ -305,8 +324,16 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Privé buitenruimten aanwezig",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="aanwezig",
+                        gedeeld_met_aantal=1,
+                    )}""",
                     bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.name}_prive"
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            gedeeld_met_aantal=1,
+                        )}""",
                     ),
                 )
             )

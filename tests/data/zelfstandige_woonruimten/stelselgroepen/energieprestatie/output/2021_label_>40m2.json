@@ -16,6 +16,7 @@
         {
           "aantal": 82.77,
           "criterium": {
+            "id": "energieprestatie__totaal__label",
             "naam": "F"
           },
           "punten": -9.0

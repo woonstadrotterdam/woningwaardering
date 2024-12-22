@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "buitenruimten__Space_108017427",
             "naam": "Klein balkon",
             "bovenliggendeCriterium": {
               "id": "buitenruimten_prive"
@@ -30,9 +31,10 @@
         {
           "aantal": 4.5,
           "criterium": {
+            "id": "buitenruimten__Space_108017429",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
+              "id": "buitenruimten__totaal__gedeeld_met__4__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -44,9 +46,10 @@
         {
           "aantal": 52.0,
           "criterium": {
+            "id": "buitenruimten__Space_108017427",
             "naam": "Dakterras (gedeeld met 5 adressen)",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
+              "id": "buitenruimten__totaal__gedeeld_met__4__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -57,9 +60,10 @@
         },
         {
           "criterium": {
+            "id": "buitenruimten__totaal__aanwezig__prive",
             "naam": "Privé buitenruimten aanwezig",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             }
           },
           "punten": 2.0
@@ -67,7 +71,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "buitenruimten_prive",
+            "id": "buitenruimten__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",
@@ -79,7 +83,7 @@
         {
           "aantal": 56.5,
           "criterium": {
-            "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten",
+            "id": "buitenruimten__totaal__gedeeld_met__4__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 4 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",

@@ -7,6 +7,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
@@ -113,7 +114,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
 
             # (sub)totaal waarderingen
             for (
-                aantal_onzelfstandifge_woonruimten,
+                aantal_onzelfstandige_woonruimten,
                 punten_per_aantal_adressen,
             ) in gedeeld_met_punten.items():
                 onz_punten = Decimal("0")
@@ -122,16 +123,24 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     woningwaardering_groep.woningwaarderingen.append(
                         self._maak_woningwaardering(
                             punten=punten,
-                            id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_adressen}_adressen",
+                            id=f"""{CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=aantal_adressen,
+                                gedeeld_met_soort=GedeeldMetSoort.adressen
+                            )}""",
                             criterium=f"Totaal (gedeeld met {aantal_adressen} adressen)",
-                            bovenliggende_criterium_id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandifge_woonruimten}_onzelfstandige_woonruimten",
+                            bovenliggende_criterium_id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten",
                         )
                     )
                 woningwaardering_groep.woningwaarderingen.append(
                     self._maak_woningwaardering(
                         punten=onz_punten,
-                        id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_onzelfstandifge_woonruimten}_onzelfstandige_woonruimten",
-                        criterium=f"Totaal (gedeeld met {aantal_onzelfstandifge_woonruimten} onzelfstandige {'woonruimten' if aantal_onzelfstandifge_woonruimten > 1 else 'woonruimte'})",
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
+                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten
+                        )}""",
+                        criterium=f"Totaal (gedeeld met {aantal_onzelfstandige_woonruimten} onzelfstandige {'woonruimten' if aantal_onzelfstandige_woonruimten > 1 else 'woonruimte'})",
                     )
                 )
 
@@ -175,6 +184,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             return WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Zorgwoning",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="zorgwoning",
+                    )}""",
                 ),
                 punten=3.0,
             )
@@ -261,6 +274,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         bovenliggende_criterium_id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen",
                         aantal=oppervlakte_resultaat.aantal,
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            ruimte_id=ruimte.id,
+                        )}""",
                     )
                 )
 
@@ -314,6 +331,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     meeteenheid=resultaat.criterium.meeteenheid
                     if resultaat.criterium
                     else None,
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        ruimte_id=ruimte.id,
+                    )}""",
                 )
             )
 
@@ -368,6 +389,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         bovenliggende_criterium_id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen",
                         aantal=None,
                         meeteenheid=None,
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            ruimte_id=ruimte.id,
+                        )}""",
                     )
                 )
 
@@ -425,6 +450,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         bovenliggende_criterium_id=f"gemeenschappelijke_binnenruimten_gedeeld_met_{aantal_eenheden}_adressen",
                         aantal=waardering.aantal,
                         meeteenheid=waardering.criterium.meeteenheid,
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            ruimte_id=ruimte.id,
+                        )}""",
                     )
                 )
         return gedeeld_met_punten, woningwaarderingen

@@ -16,6 +16,7 @@
         {
           "aantal": 3.67,
           "criterium": {
+            "id": "energieprestatie__totaal__label",
             "naam": "A -> C (Energie-index)",
             "meeteenheid": {
               "code": "M2",

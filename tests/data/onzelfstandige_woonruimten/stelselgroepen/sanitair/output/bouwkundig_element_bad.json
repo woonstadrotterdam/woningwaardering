@@ -16,9 +16,10 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_460717__bad",
             "naam": "Badkamer - Bad",
             "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
+              "id": "sanitair__totaal__prive"
             }
           },
           "punten": 5.0

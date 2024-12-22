@@ -16,9 +16,10 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_146137__douche",
             "naam": "Doucheruimte - Douche",
             "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
+              "id": "sanitair__totaal__prive"
             }
           },
           "punten": 3.0

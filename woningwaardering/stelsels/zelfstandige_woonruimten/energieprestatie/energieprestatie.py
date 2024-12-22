@@ -7,6 +7,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
     get_energieprestatievergoeding,
     monument_correctie,
@@ -107,6 +108,12 @@ class Energieprestatie(Stelselgroep):
 
         label = energieprestatie.label.naam
         woningwaardering.criterium.naam = f"{label}"
+
+        woningwaardering.criterium.id = f"""{CriteriumId(
+            stelselgroep=self.stelselgroep,
+            criterium="label",
+        )}"""
+
         lookup_key = "label_ei"
 
         if (
@@ -242,7 +249,13 @@ class Energieprestatie(Stelselgroep):
             )
 
         woningwaardering.criterium = (
-            WoningwaarderingResultatenWoningwaarderingCriterium(naam=criterium_naam)
+            WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam=criterium_naam,
+                id=f"""{CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    criterium="bouwjaar",
+                )}""",
+            )
         )
         woningwaardering.punten = float(filtered_df[pandsoort.naam].values[0])
 
@@ -319,7 +332,11 @@ class Energieprestatie(Stelselgroep):
             logger.info(f"Eenheid ({eenheid.id}): energieprestatievergoeding gevonden.")
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"Energieprestatievergoeding {pandsoort.naam}"
+                    naam=f"Energieprestatievergoeding {pandsoort.naam}",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="energieprestatievergoeding",
+                    )}""",
                 )
             )
             woningwaardering.punten = float(

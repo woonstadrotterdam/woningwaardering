@@ -16,9 +16,10 @@
         {
           "aantal": 1000.0,
           "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -30,9 +31,10 @@
         {
           "aantal": 4.0,
           "criterium": {
+            "id": "keuken__keuken__extra_voorziening",
             "naam": "Inbouw koelkast (in zelfde ruimte)",
             "bovenliggendeCriterium": {
-              "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 2.0
@@ -40,25 +42,27 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "keuken__keuken__extra_voorziening",
             "naam": "Inbouw oven elektrisch",
             "bovenliggendeCriterium": {
-              "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 0.5
         },
         {
           "criterium": {
+            "id": "keuken__keuken__maximering_extra_voorzieningen",
             "naam": "Max. 4 punten voor voorzieningen in een (open) keuken met een aanrechtlengte van 1000.0mm",
             "bovenliggendeCriterium": {
-              "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": -0.5
         },
         {
           "criterium": {
-            "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten",
+            "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 2)"
           },
           "punten": 4.0

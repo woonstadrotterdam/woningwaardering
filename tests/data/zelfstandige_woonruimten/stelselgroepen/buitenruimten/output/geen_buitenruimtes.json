@@ -15,6 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "buitenruimten__totaal__geen_buitenruimten",
             "naam": "Geen buitenruimten"
           },
           "punten": -5.0
