@@ -1,6 +1,7 @@
 {
   "ruimten": [
     {
+      "id": "Space_967640",
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"
@@ -19,6 +20,7 @@
       "gedeeldMetAantalEenheden": 2
     },
     {
+      "id": "Space_341398",
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"
@@ -37,6 +39,7 @@
       "gedeeldMetAantalEenheden": 2
     },
     {
+      "id": "Space_627588",
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"

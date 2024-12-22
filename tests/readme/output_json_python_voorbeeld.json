@@ -16,6 +16,7 @@
         {
           "aantal": 21.05,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_108014589",
             "naam": "Slaapkamer",
             "meeteenheid": {
               "code": "M2",
@@ -26,6 +27,7 @@
         {
           "aantal": 20.37,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_108006229",
             "naam": "Keuken",
             "meeteenheid": {
               "code": "M2",
@@ -64,6 +66,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Space_108014589",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
               "id": "verwarmde_vertrekken"
@@ -73,6 +76,7 @@
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Space_108006229",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
               "id": "verwarmde_vertrekken"
@@ -104,6 +108,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "buitenruimten__totaal__geen_buitenruimten",
             "naam": "Geen buitenruimten"
           },
           "punten": -5.0
@@ -125,6 +130,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "energieprestatie__totaal__label",
             "naam": "C (Energie-index)"
           },
           "punten": 22.0
@@ -147,6 +153,7 @@
         {
           "aantal": 2700.0,
           "criterium": {
+            "id": "keuken__Space_108006229__lengte_aanrecht_Aanrecht_108006231",
             "naam": "Keuken: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
@@ -215,12 +222,14 @@
         {
           "aantal": 643000.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
           }
         },
         {
           "aantal": 14543.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde_onderdeel_I"
@@ -237,6 +246,7 @@
         {
           "aantal": 41.42,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde_onderdeel_II"
@@ -250,6 +260,7 @@
         {
           "aantal": 229.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde_onderdeel_II"

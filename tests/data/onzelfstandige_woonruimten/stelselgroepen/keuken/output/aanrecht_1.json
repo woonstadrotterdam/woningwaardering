@@ -16,9 +16,10 @@
         {
           "aantal": 1000.0,
           "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken_prive"
+              "id": "keuken__totaal__prive"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -29,7 +30,7 @@
         },
         {
           "criterium": {
-            "id": "keuken_prive",
+            "id": "keuken__totaal__prive",
             "naam": "Totaal (privé)"
           },
           "punten": 4.0

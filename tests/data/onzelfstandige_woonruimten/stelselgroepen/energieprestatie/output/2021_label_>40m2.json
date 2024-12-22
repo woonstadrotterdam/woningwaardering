@@ -16,6 +16,7 @@
         {
           "aantal": 9.0,
           "criterium": {
+            "id": "energieprestatie__totaal__label",
             "naam": "F",
             "meeteenheid": {
               "code": "M2",

@@ -4,6 +4,7 @@ from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import gedeeld_met_eenheden, rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -154,6 +155,10 @@ def _opslag_zorgwoning(
     return WoningwaarderingResultatenWoningwaardering(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Zorgwoning 35% puntenverhoging",
+            id=f"""{CriteriumId(
+                stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
+                criterium="zorgwoning_puntenverhoging",
+            )}""",
         ),
         punten=float(verhoging),
     )
@@ -190,6 +195,10 @@ def _aanbelfunctie_met_video_en_audioverbinding(
     return WoningwaarderingResultatenWoningwaardering(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Aanbelfunctie met video- en audioverbinding",
+            id=f"""{CriteriumId(
+                stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
+                criterium="aanbelfunctie_met_video_en_audioverbinding",
+            )}""",
         ),
         punten=0.25,
     )
@@ -226,6 +235,10 @@ def _prive_laadpaal(
     return WoningwaarderingResultatenWoningwaardering(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Laadpalen",
+            id=f"""{CriteriumId(
+                stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
+                criterium="laadpalen",
+            )}""",
         ),
         aantal=aantal_laadpalen,
         punten=punten_laadpalen,

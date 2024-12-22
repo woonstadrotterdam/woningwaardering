@@ -1,6 +1,7 @@
 {
   "ruimten": [
     {
+      "id": "Space_509797",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -33,6 +34,7 @@
       ]
     },
     {
+      "id": "Space_237598",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -74,6 +76,7 @@
       ]
     },
     {
+      "id": "Space_483568",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"

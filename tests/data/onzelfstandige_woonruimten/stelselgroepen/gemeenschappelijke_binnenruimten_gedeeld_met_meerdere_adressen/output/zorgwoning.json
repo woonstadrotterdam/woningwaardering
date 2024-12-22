@@ -15,6 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__zorgwoning",
             "naam": "Zorgwoning"
           },
           "punten": 3.0

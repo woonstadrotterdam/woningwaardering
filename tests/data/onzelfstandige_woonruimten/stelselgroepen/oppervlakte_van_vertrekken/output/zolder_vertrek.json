@@ -16,9 +16,10 @@
         {
           "aantal": 10.0,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_1",
             "naam": "Zolder vertrek met trap",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken_prive"
+              "id": "oppervlakte_van_vertrekken__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,7 +30,7 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken_prive",
+            "id": "oppervlakte_van_vertrekken__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",

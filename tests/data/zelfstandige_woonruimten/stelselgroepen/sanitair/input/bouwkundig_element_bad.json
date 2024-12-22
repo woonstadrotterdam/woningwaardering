@@ -1,6 +1,7 @@
 {
   "ruimten": [
     {
+      "id": "Space_132266",
       "naam": "Badkamer",
       "detailSoort": {
         "code": "BAD",

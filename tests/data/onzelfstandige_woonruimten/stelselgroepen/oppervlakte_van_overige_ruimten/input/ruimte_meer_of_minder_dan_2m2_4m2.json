@@ -2,6 +2,7 @@
   "bouwjaar": 1924,
   "ruimten": [
     {
+      "id": "Space_491177",
       "soort": {
         "code": "OVR",
         "naam": "Vertrek"
@@ -17,6 +18,7 @@
       "gemeenschappelijk": false
     },
     {
+      "id": "Space_862208",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimte"
@@ -32,6 +34,7 @@
       "gemeenschappelijk": false
     },
     {
+      "id": "Space_585655",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimte"

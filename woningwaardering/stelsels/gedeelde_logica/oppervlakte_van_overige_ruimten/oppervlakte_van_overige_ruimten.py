@@ -3,6 +3,7 @@ from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     rond_af,
@@ -43,6 +44,10 @@ def waardeer_oppervlakte_van_overige_ruimte(
     woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
         meeteenheid=Meeteenheid.vierkante_meter_m2,
         naam=criterium_naam,
+        id=f"""{CriteriumId(
+            stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+            ruimte_id=ruimte.id,
+        )}""",
     )
 
     woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
@@ -62,6 +67,11 @@ def waardeer_oppervlakte_van_overige_ruimte(
             woningwaardering_correctie.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Correctie: zolder zonder vaste trap",
+                    id=f"""{CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+                        ruimte_id=ruimte.id,
+                        criterium="correctie_zolder_zonder_vaste_trap",
+                    )}""",
                 )
             )
 

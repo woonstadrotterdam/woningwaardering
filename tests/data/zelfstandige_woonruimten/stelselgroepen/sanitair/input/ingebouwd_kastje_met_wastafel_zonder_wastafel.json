@@ -2,6 +2,7 @@
   "id": "ingebouwd_kastje_met_wastafel_zonder_wastafel",
   "ruimten": [
     {
+      "id": "Space_169764",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"

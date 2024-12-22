@@ -16,16 +16,17 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_779531__bad_en_douche",
             "naam": "Badkamer - Bad en douche",
             "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
+              "id": "sanitair__totaal__prive"
             }
           },
           "punten": 6.0
         },
         {
           "criterium": {
-            "id": "sanitair_prive",
+            "id": "sanitair__totaal__prive",
             "naam": "Totaal (privé)"
           },
           "punten": 6.0

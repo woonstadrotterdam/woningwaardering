@@ -7,6 +7,7 @@
   ],
   "ruimten": [
     {
+      "id": "Space_976173",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -37,6 +38,7 @@
       ]
     },
     {
+      "id": "Space_483653",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -67,6 +69,7 @@
       ]
     },
     {
+      "id": "Space_795235",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -97,6 +100,7 @@
       ]
     },
     {
+      "id": "Space_727114",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -112,6 +116,7 @@
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     },
     {
+      "id": "Space_895715",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -142,6 +147,7 @@
       ]
     },
     {
+      "id": "Space_434883",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -172,6 +178,7 @@
       ]
     },
     {
+      "id": "Space_565555",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -202,6 +209,7 @@
       ]
     },
     {
+      "id": "Space_998949",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"

@@ -6,6 +6,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_overige_ruimte,
 )
@@ -72,8 +73,14 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         ] += utils.rond_af(woningwaardering.aantal, decimalen=2)
-                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
+                        woningwaardering.criterium.bovenliggende_criterium = (
+                            WoningwaarderingCriteriumSleutels(
+                                id=f"""{CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                            )}""",
+                            )
                         )
                     elif woningwaardering.aantal is not None:
                         gedeeld_met_counter[1] += utils.rond_af(
@@ -81,7 +88,10 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         )
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
-                                id=f"{self.stelselgroep.name}_prive"
+                                id=f"""{CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=1,
+                                )}""",
                             )
                         )
                     elif (
@@ -107,14 +117,18 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal_onz, oppervlakte in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                meeteenheid=Meeteenheid.vierkante_meter_m2,
-                naam=f"Totaal (gedeeld met {aantal_onz})"
-                if aantal_onz > 1
-                else "Totaal (privé)",
-                id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
-                if aantal_onz > 1
-                else f"{self.stelselgroep.name}_prive",
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
+                    naam=f"Totaal (gedeeld met {aantal_onz})"
+                    if aantal_onz > 1
+                    else "Totaal (privé)",
+                    id=f"""{CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=aantal_onz,
+                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                )}""",
+                )
             )
             woningwaardering.punten = float(
                 utils.rond_af_op_kwart(

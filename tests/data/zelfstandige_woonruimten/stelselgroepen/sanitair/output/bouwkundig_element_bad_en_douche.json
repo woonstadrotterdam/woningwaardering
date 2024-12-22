@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_175353__bad_en_douche",
             "naam": "Badkamer - Bad en douche"
           },
           "punten": 7.0

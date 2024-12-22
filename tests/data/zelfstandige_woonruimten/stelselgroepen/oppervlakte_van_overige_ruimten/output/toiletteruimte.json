@@ -16,6 +16,7 @@
         {
           "aantal": 2.1,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_2",
             "naam": "Toiletruimte",
             "meeteenheid": {
               "code": "M2",

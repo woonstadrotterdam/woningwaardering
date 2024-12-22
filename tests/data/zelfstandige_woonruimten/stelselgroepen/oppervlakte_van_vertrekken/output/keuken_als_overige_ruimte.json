@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Keuken_1",
             "naam": "keuken als overige ruimte",
             "meeteenheid": {
               "code": "M2",

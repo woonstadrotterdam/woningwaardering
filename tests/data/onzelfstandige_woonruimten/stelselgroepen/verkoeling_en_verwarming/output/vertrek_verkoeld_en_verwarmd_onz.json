@@ -15,6 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Slaapkamer",
             "naam": "Slaapkamer (gedeeld met 2)",
             "bovenliggendeCriterium": {
               "id": "verkoelde_en_verwarmde_vertrekken"

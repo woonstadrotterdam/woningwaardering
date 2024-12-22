@@ -16,6 +16,7 @@
         {
           "aantal": 15.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_259220",
             "naam": "Garagebox",
             "meeteenheid": {
               "code": "M2",
@@ -26,6 +27,7 @@
         {
           "aantal": 15.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_281469",
             "naam": "Garagebox",
             "meeteenheid": {
               "code": "M2",

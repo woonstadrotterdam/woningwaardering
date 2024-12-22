@@ -16,6 +16,7 @@
         {
           "aantal": 20.0,
           "criterium": {
+            "id": "energieprestatie__totaal__label",
             "naam": "F <25m2"
           },
           "punten": -9.0

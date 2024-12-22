@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_873314__wastafel",
             "naam": "Badruimte - Wastafel"
           },
           "punten": 1.0
@@ -23,6 +24,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_873314__bad",
             "naam": "Badruimte - Bad"
           },
           "punten": 6.0
@@ -30,6 +32,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_873314",
             "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad"
           },
           "punten": 1.5
@@ -37,6 +40,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_873314",
             "naam": "Badruimte - Voorzieningen: Douchewand"
           },
           "punten": 1.25
@@ -44,6 +48,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_873314",
             "naam": "Badruimte - Voorzieningen: Handdoekenradiator"
           },
           "punten": 0.75
@@ -51,6 +56,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_873314",
             "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel"
           },
           "punten": 1.0
@@ -58,12 +64,14 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "sanitair__Space_873314",
             "naam": "Badruimte - Voorzieningen: Kastruimte"
           },
           "punten": 1.5
         },
         {
           "criterium": {
+            "id": "sanitair__Space_873314__max_punten",
             "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte"
           },
           "punten": -0.75
@@ -71,6 +79,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_873314",
             "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel"
           },
           "punten": 0.25
@@ -78,6 +87,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_873314",
             "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan"
           },
           "punten": 0.25
@@ -85,12 +95,14 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_873314",
             "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan"
           },
           "punten": 0.5
         },
         {
           "criterium": {
+            "id": "sanitair__Space_873314__maximering_punten_voorzieningen",
             "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche"
           },
           "punten": -0.25

@@ -16,6 +16,7 @@
         {
           "aantal": 3.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_108014589",
             "naam": "Slaapkamer",
             "meeteenheid": {
               "code": "M2",

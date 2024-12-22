@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_734075__douche",
             "naam": "Slaapkamer - Douche"
           },
           "punten": 4.0

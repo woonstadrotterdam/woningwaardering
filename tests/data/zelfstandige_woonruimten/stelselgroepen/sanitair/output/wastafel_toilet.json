@@ -16,12 +16,14 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "sanitair__Space_246794__wastafel",
             "naam": "Toiletruimte - Wastafel"
           },
           "punten": 2.0
         },
         {
           "criterium": {
+            "id": "sanitair__Space_246794__max_punten_wastafel",
             "naam": "Toiletruimte - Max 1.0 punt voor Wastafel"
           },
           "punten": -1.0
@@ -29,12 +31,14 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "sanitair__Space_246794__meerpersoonswastafel",
             "naam": "Toiletruimte - Meerpersoonswastafel"
           },
           "punten": 3.0
         },
         {
           "criterium": {
+            "id": "sanitair__Space_246794__max_punten_meerpersoonswastafel",
             "naam": "Toiletruimte - Max 1.5 punt voor Meerpersoonswastafel"
           },
           "punten": -1.5

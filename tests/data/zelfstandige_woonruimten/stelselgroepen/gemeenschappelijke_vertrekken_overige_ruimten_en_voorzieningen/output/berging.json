@@ -16,6 +16,7 @@
         {
           "aantal": 10.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_1",
             "naam": "Berging (gedeeld met 5)",
             "meeteenheid": {
               "code": "M2",

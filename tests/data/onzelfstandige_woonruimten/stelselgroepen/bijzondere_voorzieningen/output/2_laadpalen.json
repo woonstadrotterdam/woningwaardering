@@ -16,6 +16,7 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "bijzondere_voorzieningen__totaal__laadpalen",
             "naam": "Laadpalen"
           },
           "punten": 4.0

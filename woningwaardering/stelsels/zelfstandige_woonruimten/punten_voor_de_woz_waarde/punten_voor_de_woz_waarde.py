@@ -9,6 +9,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -143,6 +144,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="woz_waarde",
+                    )}""",
                 ),
                 aantal=int(woz_eenheid.vastgestelde_waarde),
             )
@@ -153,6 +158,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Minimum WOZ-waarde gebruikt voor berekening",
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="minimum_woz_waarde",
+                        )}""",
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                             id=id_onderdeel_I,
                         ),
@@ -164,6 +173,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Factor I",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="factor_I",
+                    )}""",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                         id=id_onderdeel_I,
                     ),
@@ -205,6 +218,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Minimum WOZ-waarde gebruikt voor berekening",
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="minimum_woz_waarde",
+                        )}""",
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                             id=id_onderdeel_II,
                         ),
@@ -217,6 +234,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Oppervlakte van vertrekken en overige ruimten",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="oppervlakte_vertrekken_en_overige_ruimten",
+                    )}""",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                         id=id_onderdeel_II,
                     ),
@@ -229,6 +250,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Factor II",
+                    id=f"""{CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="factor_II",
+                    )}""",
                     bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                         id=id_onderdeel_II,
                     ),
@@ -295,7 +320,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"Nieuwbouw: min. {minimum_woz_punten} punten"
+                        naam=f"Nieuwbouw: min. {minimum_woz_punten} punten",
+                        id=f"""{CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="nieuwbouw_minimum_punten",
+                        )}""",
                     ),
                     punten=float(minimum_woz_punten - woz_punten),
                 )
@@ -337,7 +366,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 woningwaardering_groep.woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Maximering WOZ-punten tot 186 punten totaal"
+                            naam="Maximering WOZ-punten tot 186 punten totaal",
+                            id=f"""{CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                criterium="maximering_woz_punten",
+                            )}""",
                         ),
                         punten=utils.rond_af(correctie_punten, 2),
                     )
@@ -349,7 +382,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 woningwaardering_groep.woningwaarderingen.append(
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Maximering WOZ-punten tot 33% van totaal"
+                            naam="Maximering WOZ-punten tot 33% van totaal",
+                            id=f"""{CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                criterium="maximering_woz_punten",
+                            )}""",
                         ),
                         punten=utils.rond_af(correctie_punten, 2),
                     )

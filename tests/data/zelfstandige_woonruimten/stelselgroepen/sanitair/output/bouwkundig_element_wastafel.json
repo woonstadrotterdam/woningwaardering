@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_565837__wastafel",
             "naam": "Badkamer - Wastafel"
           },
           "punten": 1.0
