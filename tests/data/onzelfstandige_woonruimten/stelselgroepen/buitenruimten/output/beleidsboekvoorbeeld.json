@@ -44,9 +44,9 @@
         {
           "aantal": 52.0,
           "criterium": {
-            "naam": "Dakterras (gedeeld met 5 adressen)",
+            "naam": "Dakterras",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
+              "id": "buitenruimten_gedeeld_met_5_adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -75,6 +75,21 @@
             }
           },
           "punten": 2.35
+        },
+        {
+          "aantal": 52.0,
+          "criterium": {
+            "id": "buitenruimten_gedeeld_met_5_adressen",
+            "naam": "Totaal (gedeeld met 5 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.95
         },
         {
           "aantal": 56.5,

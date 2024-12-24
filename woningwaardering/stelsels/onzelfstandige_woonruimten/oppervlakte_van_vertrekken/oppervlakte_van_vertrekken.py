@@ -93,7 +93,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
-                naam=f"Totaal (gedeeld met {aantal_onz})"
+                naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
                 if aantal_onz > 1
                 else "Totaal (privé)",
                 id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
