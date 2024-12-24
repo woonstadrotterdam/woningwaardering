@@ -27,11 +27,6 @@ class CriteriumId:
         self.gedeeld_met_aantal = gedeeld_met_aantal
         self.gedeeld_met_soort = gedeeld_met_soort
 
-    def __new__(cls, *args, **kwargs) -> str:
-        instance = super().__new__(cls)
-        instance.__init__(*args, **kwargs)
-        return instance.__str__()
-
     def __str__(self) -> str:
         """Genereert de criterium id string."""
         onderdelen = [self.stelselgroep.name]
