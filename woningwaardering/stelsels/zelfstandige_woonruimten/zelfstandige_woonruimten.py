@@ -51,4 +51,4 @@ if __name__ == "__main__":  # pragma: no cover
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
-        context.waardeer("tests/data/generiek/input/37101000032.json")
+        context.waardeer("tests/data/zelfstandige_woonruimten/input/77795000000.json")
