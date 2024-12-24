@@ -481,7 +481,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         eenheid (EenhedenEenheid): De eenheid waarvoor de monumentale status wordt opgehaald
 
     Returns:
-        EenhedenEenheid: The updated eenheid with monuments
+        EenhedenEenheid: De met monumentale statussen bijgewerkte eenheid
     """
     eenheid.monumenten = eenheid.monumenten or []
     try:
