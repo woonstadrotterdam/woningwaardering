@@ -12,7 +12,6 @@ from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenEnergieprestatie,
     EenhedenWozEenheid,
     WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
@@ -26,6 +25,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
+from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/zelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen"
@@ -40,7 +40,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         peildatum: date = date.today(),
     ) -> None:
         super().__init__(
-            begindatum=date(2024, 7, 1),
+            begindatum=date(2025, 1, 1),
             einddatum=date.max,
             peildatum=peildatum,
         )
@@ -181,7 +181,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
         )
 
-        oppervlakte = self.bepaal_oppervlakte(woningwaardering_resultaat)
+        oppervlakte = self.bepaal_oppervlakte(eenheid, woningwaardering_resultaat)
 
         if oppervlakte == 0:
             warnings.warn(
@@ -487,12 +487,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def bepaal_oppervlakte(
         self,
+        eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> Decimal:
         """
-        Geeft de totale oppervlakte van de stelselgroepen oppervlakte van vertrekken en oppervlakte van overige ruimten.
+        Geeft de totale oppervlakte van de stelselgroepen oppervlakte van vertrekken, oppervlakte van overige ruimten
+        en de som van de oppervlakte van parkeerplekken Type I uit Rubriek 10 / het aantal adressen waar iedere parkeerplek Type I mee gedeeld wordt.
 
         Args:
+            eenheid (EenhedenEenheid): De eenheid.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten object.
 
         Returns:
@@ -522,8 +525,35 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             ),
             start=Decimal("0"),
         )
+        logger.info(
+            f"Eenheid ({eenheid.id}): Oppervlakte stelselgroepen van {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} plus {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} is {oppervlakte}m2"
+        )
 
-        return oppervlakte
+        # In dit onderdeel van de berekening dient ook het aantal m2 van parkeerplekken uit rubriek 10,
+        # voor zover het een parkeerplek type I (een parkeerplek in een afgesloten parkeergarage behorende tot het complex) betreft, te worden meegenomen.
+        # Hiervoor kan de standaard maatvoering van 12 m2 per plaats gehanteerd worden.
+        parkeerplekken_oppervlakte = sum(
+            [
+                Decimal(str(ruimte.oppervlakte))
+                * Decimal(str(ruimte.aantal or 1))
+                / (Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 2)))
+                for ruimte in (eenheid.ruimten or [])
+                if ruimte.detail_soort
+                in [Ruimtedetailsoort.parkeervak_auto_binnen]  # Type I
+                and utils.gedeeld_met_eenheden(
+                    ruimte
+                )  # valt anders niet onder rubriek 10
+                and ruimte.oppervlakte
+                and Decimal(str(ruimte.oppervlakte))
+                >= 12  # valt anders niet onder rubriek 10
+            ]
+        )
+        if parkeerplekken_oppervlakte > 0:
+            logger.info(
+                f"Eenheid ({eenheid.id}): Oppervlakte parkeerplekken Type I van {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam} is {parkeerplekken_oppervlakte}m2"
+            )
+
+        return oppervlakte + Decimal(str(parkeerplekken_oppervlakte))
 
     def _bereken_minimum_punten_nieuwbouw(
         self,
@@ -550,18 +580,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         bouwjaar = eenheid.bouwjaar
 
-        hoogniveau_renovatie = PuntenVoorDeWozWaarde.hoogniveau_renovatie(
-            eenheid, self.peildatum
-        )
-        if hoogniveau_renovatie:
-            logger.info(f"Eenheid ({eenheid.id}): hoogniveau renovatie geconstateerd.")
-
         # Indien de bouwkundige oplevering of hoogniveau renovatie van de woning heeft
         # plaatsgevonden in de jaren 2015-2019 en die woning voor de onderdelen
         # 1 t/m 10 en 12 van het woningwaarderingsstelsel minimaal 110 punten heeft
         # behaald dan worden, voor het aantal punten voor de WOZ-waarde,
         # minimaal 40 punten toegekend.
-        if (bouwjaar and 2015 <= bouwjaar <= 2019) or hoogniveau_renovatie:
+        if bouwjaar and 2015 <= bouwjaar <= 2019:
             punten_critische_stelselgroepen = sum(
                 groep.punten or 0.0
                 for groep in woningwaardering_resultaat.groepen or []
@@ -608,7 +632,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 woz_eenheid
                 for woz_eenheid in (eenheid.woz_eenheden or [])
                 if woz_eenheid.waardepeildatum is not None
-                and woz_eenheid.waardepeildatum.year in [2023, 2022]
+                and woz_eenheid.waardepeildatum.year
+                in [self.peildatum.year - 1, self.peildatum.year - 2]
             ),
             key=lambda x: x.waardepeildatum or date.min,
             reverse=True,
@@ -619,89 +644,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         return woz_waarde
 
-    @staticmethod
-    def hoogniveau_renovatie(eenheid: EenhedenEenheid, peildatum: date) -> bool:
-        """
-        Bepaalt of de eenheid een hoogniveau renovatie heeft gehad.
-
-        Args:
-            eenheid (EenhedenEenheid): De eenheid.
-            peildatum (date): De peildatum van de Woningwaardering.
-
-        Returns:
-            bool: True als de eenheid een hoogniveau renovatie heeft gehad, anders False.
-        """
-
-        if not eenheid.renovatie:
-            return False
-
-        if not eenheid.renovatie.datum:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): renovatie zonder renovatiedatum gevonden."
-            )
-            return False
-
-        # De specifieke berekeningsmethodiek, die geldt voor nieuwbouwwoningen (2015-2019) (...)  is ook van toepassing
-        # indien in de eerdergenoemde kalenderjaren sprake is van hoogniveau renovatie. (...) Hieruit volgt dat sprake is
-        # van hoogniveau renovatie indien voor de woning een energielabel A+++ of A++++ is afgegeven (na 1 januari 2021).
-
-        if eenheid.renovatie.datum.year < 2015:
-            return False
-
-        energieprestatie: EenhedenEnergieprestatie | None = (
-            utils.energieprestatie_met_geldig_label(peildatum, eenheid)
-        )
-
-        if not energieprestatie:
-            return False
-
-        if not energieprestatie.begindatum:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): energieprestatie zonder begindatum gevonden",
-                UserWarning,
-            )
-            return False
-
-        if not energieprestatie.label:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): energieprestatie zonder label gevonden",
-                UserWarning,
-            )
-            return False
-
-        if eenheid.renovatie.datum.year <= 2019:
-            if (
-                energieprestatie.begindatum >= date(2021, 1, 1)
-                and energieprestatie.label.naam
-                and energieprestatie.label.naam in (["A+++", "A++++"])
-            ):
-                return True
-
-        # Indien sprake is van verbouw in de jaren 2015-2021 dan is sprake van
-        # hoogniveau renovatie als het Energie-Index van de woning lager is dan 0,4.
-        if eenheid.renovatie.datum.year <= 2021:
-            if not energieprestatie.waarde:
-                warnings.warn(
-                    f"Eenheid ({eenheid.id}): energieprestatie zonder waarde (Energie-Index) gevonden bij een renovatie in de jaren 2015-2021.",
-                    UserWarning,
-                )
-                return False
-            try:
-                energieprestatie_waarde = Decimal(energieprestatie.waarde)
-                if energieprestatie_waarde < 0.4:
-                    return True
-            except ValueError:
-                warnings.warn(
-                    f"Eenheid ({eenheid.id}): energieprestatie met een waarde (Energie-Index) dat niet kan worden omgezet in een getal ({energieprestatie.waarde}) gevonden bij een renovatie in de jaren 2015-2021"
-                )
-                return False
-
-        return False
-
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=PuntenVoorDeWozWaarde(),
+        instance=PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
