@@ -478,7 +478,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
     Voegt monumentale statussen toe aan een eenheid d.m.v. aanroepen API's.
 
     Args:
-        eenheid (EenhedenEenheid): The eenheid to update
+        eenheid (EenhedenEenheid): De eenheid waarvoor de monumentale status wordt opgehaald
 
     Returns:
         EenhedenEenheid: The updated eenheid with monuments
