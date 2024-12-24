@@ -70,7 +70,7 @@
         {
           "aantal": 9.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken_gedeeld_met_2_onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",
@@ -194,7 +194,7 @@
         },
         {
           "criterium": {
-            "id": "keuken_gedeeld_met_2_onzelfstandige_woonruimten",
+            "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
           },
           "punten": 3.5
@@ -303,6 +303,7 @@
         {
           "aantal": 184000.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
             "bovenliggendeCriterium": {
               "id": "punten_waardering"

@@ -252,6 +252,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "energieprestatie__totaal__label",
             "naam": "A"
           },
           "punten": 37.0

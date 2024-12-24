@@ -70,7 +70,7 @@
         {
           "aantal": 25.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten_gedeeld_met_3_onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 3 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",

@@ -320,6 +320,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_74227663__wastafel",
             "naam": "Toiletruimte - Wastafel"
           },
           "punten": 1.0
@@ -327,6 +328,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_74235849__staand_toilet",
             "naam": "Badruimte - Staand Toilet"
           },
           "punten": 2.0

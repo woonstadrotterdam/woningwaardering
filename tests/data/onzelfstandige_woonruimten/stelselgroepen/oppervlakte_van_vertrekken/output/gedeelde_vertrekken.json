@@ -44,7 +44,7 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken_gedeeld_met_5_onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__5__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 5 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",
@@ -56,7 +56,7 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken_gedeeld_met_6_onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__6__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 6 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",

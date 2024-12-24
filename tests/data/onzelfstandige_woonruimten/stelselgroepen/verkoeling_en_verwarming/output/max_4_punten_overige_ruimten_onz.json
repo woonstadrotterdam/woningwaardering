@@ -15,6 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Berging1",
             "naam": "Berging",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
@@ -24,6 +25,7 @@
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Berging2",
             "naam": "Berging2",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
@@ -33,6 +35,7 @@
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Berging3",
             "naam": "Berging3",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
@@ -42,6 +45,7 @@
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Berging4",
             "naam": "Berging4",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
@@ -51,6 +55,7 @@
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Berging5",
             "naam": "Berging5",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
@@ -60,6 +65,7 @@
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Berging5__max_aantal_punten",
             "naam": "Berging5: Maximaal 4 punten",
             "bovenliggendeCriterium": {
               "id": "verwarmde_overige_en_verkeersruimten"
