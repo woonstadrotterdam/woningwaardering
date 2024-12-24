@@ -14,7 +14,7 @@ DATA_DIR = BASE_DIR / "tests/data"
 
 @pytest.fixture()
 def peildatum():
-    return date(2024, 7, 1)
+    return date(2025, 1, 1)
 
 
 @pytest.fixture(

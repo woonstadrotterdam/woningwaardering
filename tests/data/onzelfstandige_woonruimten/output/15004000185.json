@@ -280,12 +280,12 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 10.0,
+      "punten": 12.0,
       "woningwaarderingen": [
         {
-          "aantal": 148000.0,
+          "aantal": 184000.0,
           "criterium": {
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2022",
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
             "bovenliggendeCriterium": {
               "id": "punten_waardering"
             }
@@ -305,7 +305,7 @@
           }
         },
         {
-          "aantal": 2551.72414,
+          "aantal": 3172.41379,
           "criterium": {
             "naam": "WOZ-waarde per m²",
             "bovenliggendeCriterium": {
@@ -314,7 +314,7 @@
           }
         },
         {
-          "aantal": 3255.0,
+          "aantal": 3414.0,
           "criterium": {
             "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond",
             "bovenliggendeCriterium": {
@@ -323,12 +323,12 @@
           }
         },
         {
-          "aantal": -21.6060172,
+          "aantal": -7.0763389,
           "criterium": {
             "id": "punten_waardering",
             "naam": "Percentage verschil"
           },
-          "punten": 10.0
+          "punten": 12.0
         }
       ]
     },
@@ -376,12 +376,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 499.55,
-  "punten": 52.0,
+  "maximaleHuur": 530.81,
+  "punten": 54.0,
   "stelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 499.55
+  "maximaleHuurInclusiefOpslag": 530.81
 }
