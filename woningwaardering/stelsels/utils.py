@@ -475,7 +475,7 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
     """
-    Updates the monuments for an eenheid synchronously.
+    Voegt monumentale statussen toe aan een eenheid d.m.v. aanroepen API's.
 
     Args:
         eenheid (EenhedenEenheid): The eenheid to update
