@@ -27,7 +27,7 @@ Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ont
 
 ---
 
-![werking-package](https://raw.githubusercontent.com/woonstadrotterdam/woningwaardering/v1.0.1/docs/afbeeldingen/diagram.png)
+![werking-package](https://raw.githubusercontent.com/woonstadrotterdam/woningwaardering/main/docs/afbeeldingen/diagram.png)
 _Voorbeeld van hoe wij de woningwaardering package gebruiken bij Woonstad Rotterdam_.
 
 ---
