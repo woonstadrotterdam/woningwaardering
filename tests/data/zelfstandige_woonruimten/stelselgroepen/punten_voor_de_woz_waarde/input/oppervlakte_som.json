@@ -1,0 +1,84 @@
+{
+  "id": "1",
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 100000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 100000
+    }
+  ],
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "oppervlakte": 10
+    },
+    {
+      "id": "Space_2",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "oppervlakte": 1.9
+    },
+    {
+      "id": "Space_3",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "oppervlakte": 10
+    },
+    {
+      "id": "Space_4",
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "VAI",
+        "naam": "Parkeervak auto (binnen)"
+      },
+      "naam": "Parkeervak auto (binnen)",
+      "oppervlakte": 20,
+      "aantal": 2,
+      "gedeeld_met_aantal_eenheden": 4
+    },
+    {
+      "id": "Space_5",
+      "soort": {
+        "code": "PAR",
+        "naam": "Parkeergelegenheid"
+      },
+      "detailSoort": {
+        "code": "VAI",
+        "naam": "Parkeervak auto (binnen)"
+      },
+      "naam": "Parkeervak auto (binnen)",
+      "oppervlakte": 10,
+      "aantal": 2,
+      "gedeeld_met_aantal_eenheden": 2
+    }
+  ]
+}
