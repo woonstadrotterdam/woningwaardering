@@ -245,6 +245,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_90696929__wastafel",
             "naam": "Toiletruimte - Wastafel"
           },
           "punten": 1.0

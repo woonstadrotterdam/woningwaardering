@@ -120,7 +120,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
-                    naam=f"Totaal (gedeeld met {aantal_onz})"
+                    naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
                     if aantal_onz > 1
                     else "Totaal (privé)",
                     id=f"""{CriteriumId(

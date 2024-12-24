@@ -202,7 +202,7 @@
             "id": "buitenruimten__Space_74235998",
             "naam": "Terras",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -224,18 +224,6 @@
         {
           "aantal": 3.21,
           "criterium": {
-            "id": "buitenruimten__totaal",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 1.12
-        },
-        {
-          "aantal": 0.0,
-          "criterium": {
             "id": "buitenruimten__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
@@ -243,7 +231,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 2.0
+          "punten": 3.12
         }
       ]
     },
@@ -320,6 +308,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_74227663__wastafel",
             "naam": "Toiletruimte - Wastafel"
           },
           "punten": 1.0

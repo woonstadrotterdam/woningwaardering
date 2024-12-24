@@ -229,7 +229,7 @@
             "id": "buitenruimten__Space_108014713",
             "naam": "Balkon 1",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -244,7 +244,7 @@
             "id": "buitenruimten__Space_108010812",
             "naam": "Balkon 2",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -259,7 +259,7 @@
             "id": "buitenruimten__Space_108006357",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -274,7 +274,7 @@
             "id": "buitenruimten__Space_108006467",
             "naam": "Dakterras",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -296,18 +296,6 @@
         {
           "aantal": 71.32,
           "criterium": {
-            "id": "buitenruimten__totaal",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 24.96
-        },
-        {
-          "aantal": 0.0,
-          "criterium": {
             "id": "buitenruimten__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
@@ -315,7 +303,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 2.0
+          "punten": 26.96
         },
         {
           "criterium": {

@@ -258,6 +258,8 @@ class Buitenruimten(Stelselgroep):
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                             id=f"""{CriteriumId(
                                 stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=1,
+                                gedeeld_met_soort=GedeeldMetSoort.adressen,
                             )}""",
                         ),
                     )

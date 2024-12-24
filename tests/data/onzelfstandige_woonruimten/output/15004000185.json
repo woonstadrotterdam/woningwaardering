@@ -71,7 +71,7 @@
           "aantal": 9.0,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2)",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -121,7 +121,17 @@
         {
           "criterium": {
             "id": "verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
+            "naam": "Verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming_prive"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming_prive",
+            "naam": "Totaal (privé)"
           },
           "punten": 2.0
         }
@@ -185,7 +195,7 @@
         {
           "criterium": {
             "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2)"
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
           },
           "punten": 3.5
         }

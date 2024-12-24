@@ -204,7 +204,7 @@
             "id": "buitenruimten__Space_29446514",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -226,18 +226,6 @@
         {
           "aantal": 4.62,
           "criterium": {
-            "id": "buitenruimten__totaal",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 1.62
-        },
-        {
-          "aantal": 0.0,
-          "criterium": {
             "id": "buitenruimten__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
@@ -245,7 +233,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 2.0
+          "punten": 3.62
         }
       ]
     },
