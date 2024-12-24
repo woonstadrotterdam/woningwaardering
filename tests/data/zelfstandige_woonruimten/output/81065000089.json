@@ -239,7 +239,6 @@
       "punten": 34.0,
       "woningwaarderingen": [
         {
-          "aantal": 78.84,
           "criterium": {
             "id": "energieprestatie__totaal__label",
             "naam": "B"
@@ -426,12 +425,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 879.58,
+  "maximaleHuur": 900.07,
   "punten": 143.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 879.58
+  "maximaleHuurInclusiefOpslag": 900.07
 }
