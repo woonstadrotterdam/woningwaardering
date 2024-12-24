@@ -24,7 +24,6 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Energieprestatiesoort,
-    Oppervlaktesoort,
     Pandsoort,
     PandsoortReferentiedata,
     Woningwaarderingstelsel,
@@ -38,16 +37,6 @@ LOOKUP_TABEL_FOLDER = (
 
 class Energieprestatie(Stelselgroep):
     lookup_mapping = {
-        "overgangsrecht_0-25": pd.read_csv(
-            files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/overgangsrecht_0-25m2.csv"
-            )
-        ),
-        "overgangsrecht_25-40": pd.read_csv(
-            files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/overgangsrecht_25-40m2.csv"
-            )
-        ),
         "energieprestatievergoeding": pd.read_csv(
             files("woningwaardering").joinpath(
                 f"{LOOKUP_TABEL_FOLDER}/energieprestatievergoeding.csv"
@@ -68,7 +57,7 @@ class Energieprestatie(Stelselgroep):
         peildatum: date = date.today(),
     ) -> None:
         super().__init__(
-            begindatum=date(2024, 7, 1),
+            begindatum=date(2025, 1, 1),
             einddatum=date.max,
             peildatum=peildatum,
         )
@@ -115,55 +104,6 @@ class Energieprestatie(Stelselgroep):
         )}"""
 
         lookup_key = "label_ei"
-
-        if (
-            energieprestatie.soort
-            == Energieprestatiesoort.primair_energieverbruik_woningbouw
-            and energieprestatie.registratiedatum >= datetime(2021, 1, 1).astimezone()
-            and energieprestatie.registratiedatum < datetime(2024, 7, 1).astimezone()
-            and self.peildatum
-            < date(2025, 1, 1)  # Overgangsrecht kleine woningen < 40 m2 vervalt in 2025
-        ):
-            gebruiksoppervlakte_thermische_zone = next(
-                (
-                    float(oppervlakte.waarde)
-                    for oppervlakte in eenheid.oppervlakten or []
-                    if oppervlakte.soort
-                    == Oppervlaktesoort.gebruiksoppervlakte_thermische_zone
-                    and oppervlakte.waarde is not None
-                ),
-                None,
-            )
-
-            if gebruiksoppervlakte_thermische_zone is None:
-                warnings.warn(
-                    f"Eenheid ({eenheid.id}): voor de berekening van de energieprestatie met een nieuw energielabel dient de gebruiksoppervlakte van de thermische zone bekend te zijn",
-                    UserWarning,
-                )
-                return woningwaardering
-
-            woningwaardering.criterium.naam = label
-
-            woningwaardering.aantal = gebruiksoppervlakte_thermische_zone
-
-            if gebruiksoppervlakte_thermische_zone < 25.0:
-                logger.info(
-                    f"Eenheid ({eenheid.id}) heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone:.2f}m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen < 25m2.'"
-                )
-                lookup_key = "overgangsrecht_0-25"
-                woningwaardering.criterium.naam += " <25m2"
-
-            elif 25.0 <= gebruiksoppervlakte_thermische_zone < 40.0:
-                logger.info(
-                    f"Eenheid ({eenheid.id}) heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone:.2f}m2: wordt gewaardeerd volgens het 'Overgangsrecht kleine woningen ≥ 25m2 en < 40m2.'"
-                )
-                lookup_key = "overgangsrecht_25-40"
-                woningwaardering.criterium.naam += " 25-40m2"
-
-            else:
-                logger.info(
-                    f"Eenheid ({eenheid.id}) heeft een gebruiksoppervlakte thermische zone van {gebruiksoppervlakte_thermische_zone:.2f}m2: wordt gewaardeerd volgens de puntentelling van 'Oud en Nieuw' energielabel."
-                )
 
         df = Energieprestatie.lookup_mapping[lookup_key]
 
@@ -384,7 +324,7 @@ class Energieprestatie(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=Energieprestatie(),
+        instance=Energieprestatie(peildatum=date(2025, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

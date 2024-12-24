@@ -145,7 +145,8 @@ def opslag_beschermd_stads_of_dorpsgezicht(
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
     """
-    if any(
+    # check of de eenheid een beschermd stads- of dorpsgezicht is
+    if not any(
         monument
         in (
             Eenheidmonument.beschermd_dorpsgezicht,
@@ -153,47 +154,58 @@ def opslag_beschermd_stads_of_dorpsgezicht(
         )
         for monument in eenheid.monumenten or []
     ):
-        logger.info(
-            f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht."
-        )
-        if not any(
-            monument
-            in (
-                Eenheidmonument.rijksmonument,
-                Eenheidmonument.gemeentelijk_monument,
-                Eenheidmonument.provinciaal_monument,
-            )
-            for monument in eenheid.monumenten or []
-        ):
-            if eenheid.bouwjaar is None:
-                warnings.warn(
-                    f"Eenheid ({eenheid.id}): geen bouwjaar gevonden",
-                    UserWarning,
-                )
-            elif eenheid.bouwjaar < 1965:
-                logger.info(
-                    f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht en krijgt 5% opslag op de maximale huurprijs voor {stelselgroep.naam}."
-                )
-                return WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Beschermd stads- of dorpsgezicht",
-                        id=f"""{CriteriumId(
-                            stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
-                            criterium="beschermd_stads_of_dorpsgezicht",
-                        )}""",
-                    ),
-                    opslagpercentage=0.05,
-                )
-
-            else:
-                logger.info(
-                    f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
-                )
-    else:
         logger.debug(
             f"Eenheid ({eenheid.id}) behoort niet tot een beschermd stads- of dorpsgezicht."
         )
-    return None
+        return None
+
+    logger.info(
+        f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht."
+    )
+
+    # check of de eenheid geen rijks-, gemeentelijk of provinciaal monument is
+    if any(
+        monument
+        in (
+            Eenheidmonument.rijksmonument,
+            Eenheidmonument.gemeentelijk_monument,
+            Eenheidmonument.provinciaal_monument,
+        )
+        for monument in eenheid.monumenten or []
+    ):
+        logger.info(
+            f"Eenheid ({eenheid.id}) is een rijks-, gemeentelijk of provinciaal monument. Er wordt geen opslagpercentage voor beschermd stads- of dorpsgezicht toegepast."
+        )
+        return None
+
+    # check of de eenheid een bouwjaar heeft
+    if eenheid.bouwjaar is None:
+        warnings.warn(
+            f"Eenheid ({eenheid.id}): geen bouwjaar gevonden",
+            UserWarning,
+        )
+        return None
+
+    # check of de eenheid gebouwd is voor 1965
+    if eenheid.bouwjaar >= 1965:
+        logger.info(
+            f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht, maar is niet gebouwd voor 1965. Er wordt geen opslagpercentage toegepast."
+        )
+        return None
+
+    logger.info(
+        f"Eenheid ({eenheid.id}) behoort tot een beschermd stads- of dorpsgezicht en krijgt 5% opslag op de maximale huurprijs voor {stelselgroep.naam}."
+    )
+    return WoningwaarderingResultatenWoningwaardering(
+        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+            naam="Beschermd stads- of dorpsgezicht",
+            id=f"""{CriteriumId(
+                            stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+                            criterium="beschermd_stads_of_dorpsgezicht",
+                        )}""",
+        ),
+        opslagpercentage=0.05,
+    )
 
 
 def check_monumenten_attribuut(eenheid: EenhedenEenheid) -> None:

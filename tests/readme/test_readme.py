@@ -30,7 +30,7 @@ from woningwaardering.vera.referentiedata import (
 
 def test_readme_python_voorbeeld():
     # Dit is voorbeeld 2 uit de readme met als input een Python object.
-    wws = Woningwaardering(peildatum=date(2024, 7, 1))
+    wws = Woningwaardering(peildatum=date(2025, 1, 1))
 
     eenheid = EenhedenEenheid(
         id="37101000032",
@@ -71,6 +71,7 @@ def test_readme_python_voorbeeld():
             )
         ],
         gebruiksoppervlakte=187,
+        monumenten=[],
         ruimten=[
             EenhedenRuimte(
                 id="Space_108014589",
@@ -118,7 +119,7 @@ def test_readme_python_voorbeeld():
 
 def test_readme_json_voorbeeld():
     # Dit is voorbeeld 1 uit de readme met als input een JSON bestand.
-    wws = Woningwaardering(peildatum=date(2024, 7, 1))
+    wws = Woningwaardering(peildatum=date(2025, 1, 1))
     with open(
         "tests/data/generiek/input/37101000032.json",
         "r+",

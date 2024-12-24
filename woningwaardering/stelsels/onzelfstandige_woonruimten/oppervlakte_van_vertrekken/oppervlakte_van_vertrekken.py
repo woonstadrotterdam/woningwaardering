@@ -104,7 +104,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
-                    naam=f"Totaal (gedeeld met {aantal_onz})"
+                    naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
                     if aantal_onz > 1
                     else "Totaal (privé)",
                     id=f"""{CriteriumId(
@@ -142,7 +142,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=OppervlakteVanVertrekken(),
+        instance=OppervlakteVanVertrekken(peildatum=date(2025, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

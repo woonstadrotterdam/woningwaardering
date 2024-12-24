@@ -307,7 +307,7 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 10.0,
+      "punten": 11.0,
       "woningwaarderingen": [
         {
           "aantal": 1.0,
@@ -320,7 +320,13 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_74235849__staand_toilet",
+            "naam": "Toiletruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
             "naam": "Badruimte - Staand Toilet"
           },
           "punten": 2.0
@@ -479,12 +485,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1229.14,
-  "punten": 197.0,
+  "maximaleHuur": 1264.31,
+  "punten": 198.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1229.14
+  "maximaleHuurInclusiefOpslag": 1264.31
 }

@@ -78,7 +78,7 @@ class Woningwaardering:
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=Woningwaardering(),  # type: ignore
+        instance=Woningwaardering(peildatum=date(2025, 1, 1)),  # type: ignore
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

@@ -86,22 +86,27 @@ def waardeer_sanitair(
 def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:
     ruimte.installaties = ruimte.installaties or []
     # Backwards compatibiliteit voor bouwkundige elementen
-    for mapping in {
+    for bouwkundigelementdetailsoort, voorzieningsoort in {
         Bouwkundigelementdetailsoort.wastafel: Voorzieningsoort.wastafel,
         Bouwkundigelementdetailsoort.douche: Voorzieningsoort.douche,
         Bouwkundigelementdetailsoort.bad: Voorzieningsoort.bad,
         Bouwkundigelementdetailsoort.kast: Voorzieningsoort.kastruimte,
         Bouwkundigelementdetailsoort.closetcombinatie: Voorzieningsoort.staand_toilet,
+        Bouwkundigelementdetailsoort.fontein: Voorzieningsoort.wastafel,
     }.items():
-        bouwkundige_elementen = list(get_bouwkundige_elementen(ruimte, mapping[0]))
+        bouwkundige_elementen = list(
+            get_bouwkundige_elementen(ruimte, bouwkundigelementdetailsoort)
+        )
         if bouwkundige_elementen:
             warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {mapping[0].naam} als bouwkundig element. Dit dient als `Voorzieningsoort` op de ruimte onder `installaties` gespecificeerd te worden."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {bouwkundigelementdetailsoort.naam} als bouwkundig element. Dit dient als `Voorzieningsoort` '{voorzieningsoort}' op de ruimte onder `installaties` gespecificeerd te worden."
             )
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {mapping[0].naam} wordt als {mapping[1].naam} toegevoegd aan installaties"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {bouwkundigelementdetailsoort.naam} wordt als {voorzieningsoort.naam} toegevoegd aan installaties"
             )
-            ruimte.installaties.extend([mapping[1] for _ in bouwkundige_elementen])
+            ruimte.installaties.extend(
+                [voorzieningsoort for _ in bouwkundige_elementen]
+            )
 
 
 def _waardeer_toiletten(

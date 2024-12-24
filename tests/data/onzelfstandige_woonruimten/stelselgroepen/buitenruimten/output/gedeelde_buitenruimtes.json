@@ -16,8 +16,10 @@
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017427",
-            "naam": "Tuin (gedeeld met 2 adressen)",
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_2_adressen"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -28,8 +30,34 @@
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017428",
-            "naam": "Tuin (gedeeld met 3 adressen)",
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_3_adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 0.7
+        },
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "buitenruimten_gedeeld_met_2_adressen",
+            "naam": "Totaal (gedeeld met 2 adressen)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.05
+        },
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "buitenruimten_gedeeld_met_3_adressen",
+            "naam": "Totaal (gedeeld met 3 adressen)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
