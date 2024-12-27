@@ -1,0 +1,74 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_2_adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.125
+        },
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "naam": "Balkon",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_2_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.25
+        },
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "buitenruimten_gedeeld_met_2_adressen",
+            "naam": "Totaal (gedeeld met 2 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_gedeeld_met_2_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.125
+        },
+        {
+          "aantal": 12.0,
+          "criterium": {
+            "id": "buitenruimten_gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.375
+        }
+      ]
+    }
+  ]
+}

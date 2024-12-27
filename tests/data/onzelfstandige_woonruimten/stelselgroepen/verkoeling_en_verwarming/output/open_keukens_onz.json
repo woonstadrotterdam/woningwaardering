@@ -15,7 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Verwarmde woonkamer (gedeeld met 2)",
+            "naam": "Verwarmde woonkamer",
             "bovenliggendeCriterium": {
               "id": "verwarmde_vertrekken"
             }
@@ -24,7 +24,7 @@
         },
         {
           "criterium": {
-            "naam": "Verwarmde keuken (gedeeld met 2)",
+            "naam": "Verwarmde keuken",
             "bovenliggendeCriterium": {
               "id": "verwarmde_vertrekken"
             }
@@ -33,7 +33,7 @@
         },
         {
           "criterium": {
-            "naam": "Verwarmde slaapkamer (gedeeld met 2)",
+            "naam": "Verwarmde slaapkamer",
             "bovenliggendeCriterium": {
               "id": "verwarmde_vertrekken"
             }
@@ -42,7 +42,7 @@
         },
         {
           "criterium": {
-            "naam": "Verwarmde woonkamer/keuken (gedeeld met 2)",
+            "naam": "Verwarmde woonkamer/keuken",
             "bovenliggendeCriterium": {
               "id": "verwarmde_vertrekken"
             }
@@ -51,7 +51,7 @@
         },
         {
           "criterium": {
-            "naam": "Verwarmde woonkamer (gedeeld met 2)",
+            "naam": "Verwarmde woonkamer",
             "bovenliggendeCriterium": {
               "id": "open_keuken"
             }
@@ -60,7 +60,7 @@
         },
         {
           "criterium": {
-            "naam": "Verwarmde slaapkamer (gedeeld met 2)",
+            "naam": "Verwarmde slaapkamer",
             "bovenliggendeCriterium": {
               "id": "open_keuken"
             }
@@ -69,7 +69,7 @@
         },
         {
           "criterium": {
-            "naam": "Verwarmde woonkamer/keuken (gedeeld met 2)",
+            "naam": "Verwarmde woonkamer/keuken",
             "bovenliggendeCriterium": {
               "id": "open_keuken"
             }
@@ -79,16 +79,29 @@
         {
           "criterium": {
             "id": "verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
+            "naam": "Verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming_gedeeld_met_2_onzelfstandige_woonruimten"
+            }
           },
           "punten": 4.0
         },
         {
           "criterium": {
             "id": "open_keuken",
-            "naam": "Open keuken"
+            "naam": "Open keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming_gedeeld_met_2_onzelfstandige_woonruimten"
+            }
           },
           "punten": 3.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming_gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+          },
+          "punten": 7.0
         }
       ]
     }

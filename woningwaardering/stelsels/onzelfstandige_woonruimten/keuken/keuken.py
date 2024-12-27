@@ -56,7 +56,13 @@ class Keuken(Stelselgroep):
 
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
-        for ruimte in eenheid.ruimten or []:
+        ruimten = [
+            ruimte
+            for ruimte in eenheid.ruimten or []
+            if not utils.gedeeld_met_eenheden(ruimte)
+        ]
+
+        for ruimte in ruimten or []:
             woningwaarderingen = list(waardeer_keuken(ruimte, self.stelsel))
 
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
@@ -99,7 +105,7 @@ class Keuken(Stelselgroep):
         for aantal, punten in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"Totaal (gedeeld met {aantal})"
+                naam=f"Totaal (gedeeld met {aantal} onzelfstandige woonruimten)"
                 if aantal > 1
                 else "Totaal (privé)",
                 id=f"{self.stelselgroep.name}_gedeeld_met_{aantal}_onzelfstandige_woonruimten"
@@ -129,7 +135,7 @@ class Keuken(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=Keuken(),
+        instance=Keuken(peildatum=date(2025, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

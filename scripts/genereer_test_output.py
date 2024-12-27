@@ -1,7 +1,7 @@
 import string
 import sys
 import warnings
-from datetime import date, datetime
+from datetime import date
 from importlib import import_module
 from pathlib import Path
 
@@ -22,8 +22,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 logger.remove()
 stdout_id = logger.add(sys.stdout, level="INFO")
 
-jaar = datetime.now().year
-PEILDATUM = date(year=jaar, month=7, day=1)
+PEILDATUM = date(2025, 1, 1)
 
 DATA_DIR = Path("tests/data")
 
