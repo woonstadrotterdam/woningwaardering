@@ -178,6 +178,7 @@ class Buitenruimten(Stelselgroep):
             )
             woningwaardering.punten = -5.0
             return woningwaardering
+        return None
 
     def _maximering(
         self,
