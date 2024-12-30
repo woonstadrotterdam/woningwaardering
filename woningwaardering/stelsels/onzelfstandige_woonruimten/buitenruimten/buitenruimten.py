@@ -179,9 +179,17 @@ class Buitenruimten(Stelselgroep):
             )
         )
 
+        if geen_buitenruimten := self._geen_buitenruimten(woningwaardering_groep):
+            logger.info(
+                f"Eenheid ({eenheid.id}): geen buitenruimten aanwezig, {geen_buitenruimten.punten} punten voor {self.stelselgroep.naam}."
+            )
+            woningwaardering_groep.woningwaarderingen.append(geen_buitenruimten)
+            woningwaardering_groep.punten += float(
+                Decimal(str(geen_buitenruimten.punten))
+            )
+
         # maximaal 15 punten
-        maximering = self._maximering(eenheid, woningwaardering_groep)
-        if maximering:
+        elif maximering := self._maximering(eenheid, woningwaardering_groep):
             woningwaardering_groep.woningwaarderingen.append(maximering)
             woningwaardering_groep.punten += float(Decimal(str(maximering.punten)))
 
@@ -194,6 +202,28 @@ class Buitenruimten(Stelselgroep):
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
+
+    def _geen_buitenruimten(
+        self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
+    ) -> WoningwaarderingResultatenWoningwaardering | None:
+        """Een aftrek van 5 punten wordt toegepast als de woning in het geheel geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft.
+
+        Args:
+            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): Woningwaardering groep van buitenruimten.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaardering | None: Woningwaardering met -5 punten als er geen buitenruimten aanwezig zijn.
+        """
+        if not woningwaardering_groep.woningwaarderingen:
+            woningwaardering = WoningwaarderingResultatenWoningwaardering()
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Geen buitenruimten",
+                )
+            )
+            woningwaardering.punten = -5.0
+            return woningwaardering
+        return None
 
     def _maximering(
         self,
