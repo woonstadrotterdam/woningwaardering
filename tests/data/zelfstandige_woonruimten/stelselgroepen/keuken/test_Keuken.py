@@ -53,6 +53,20 @@ warning_configs = [
             UserWarning: "geen aanrecht",
         },
     ),
+    WarningConfig(
+        file=f"{current_file_path}/input/2_aanrechten_waarvan_1_geen_lengte.json",
+        peildatum=date(2025, 1, 1),
+        warnings={
+            UserWarning: "geen lengte",
+        },
+    ),
+    WarningConfig(
+        file=f"{current_file_path}/input/2_aanrechten_waarvan_1_geen_detailsoort.json",
+        peildatum=date(2025, 1, 1),
+        warnings={
+            UserWarning: "geen detailsoort",
+        },
+    ),
 ]
 
 
