@@ -1,0 +1,74 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 15.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 30.0,
+          "criterium": {
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 10.5
+        },
+        {
+          "aantal": 15.0,
+          "criterium": {
+            "naam": "Balkon",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 5.25
+        },
+        {
+          "criterium": {
+            "naam": "Buitenruimten aanwezig",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten_prive"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 45.0,
+          "criterium": {
+            "id": "buitenruimten_prive",
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 17.75
+        },
+        {
+          "criterium": {
+            "naam": "Maximaal 15 punten"
+          },
+          "punten": -2.75
+        }
+      ]
+    }
+  ]
+}
