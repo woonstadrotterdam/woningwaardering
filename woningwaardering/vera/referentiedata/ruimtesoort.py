@@ -57,11 +57,11 @@ class Ruimtesoort(Referentiedatasoort):
         naam="Parkeergelegenheid",
     )
     """
-    Een locatie die speciaal is ingericht voor het parkeren van voertuigen. Dit kan
-    variëren van een eenvoudige parkeerplaats op straat tot uitgebreide faciliteiten
-    zoals parkeerterreinen en parkeergarages. Parkeergelegenheden bieden gemarkeerde
-    plaatsen waar voertuigen veilig kunnen worden geparkeerd, en ze kunnen openbaar
-    of privé zijn. De term "parkeergelegenheid" omvat alle vormen van
-    parkeerinfrastructuur die zijn ontworpen om voertuigen tijdelijk of langdurig te
-    stallen.
+    (UITBREIDING) Een locatie die speciaal is ingericht voor het parkeren van
+    voertuigen. Dit kan variëren van een eenvoudige parkeerplaats op straat tot
+    uitgebreide faciliteiten zoals parkeerterreinen en parkeergarages.
+    Parkeergelegenheden bieden gemarkeerde plaatsen waar voertuigen veilig kunnen
+    worden geparkeerd, en ze kunnen openbaar of privé zijn. De term
+    "parkeergelegenheid" omvat alle vormen van parkeerinfrastructuur die zijn
+    ontworpen om voertuigen tijdelijk of langdurig te stallen.
     """
