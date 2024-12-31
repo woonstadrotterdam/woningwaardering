@@ -1305,7 +1305,7 @@ Voor een correcte waardering van rijksmonumenten dient de afsluitings datum van 
 
 ### Installaties
 
-Installaties zouden toegevoegd moeten worden aan het VERA model `EenhedenRuimte`. Het attribuut `installaties` bestaat al in de wiki, maar nog niet in de `vera-openapi` repository versie 4.1.5: https://github.com/Aedes-datastandaarden/vera-openapi/issues/70. VERA is hierin vrij verwarrend m.b.t. bouwkundige elementen / installaties / [voorzieningen](https://www.coraveraonline.nl/index.php/Referentiedata:VOORZIENINGSOORT) Op dit moment gebruiken wij `installaties` als attribuut op ruimte met als type `Optional[list[Voorzieningsoort]]`.
+Installaties zouden toegevoegd moeten worden aan het VERA model `EenhedenRuimte`. Het attribuut `installaties` bestaat al in de wiki, maar nog niet in de `vera-openapi` repository versie 4.1.5: https://github.com/Aedes-datastandaarden/vera-openapi/issues/70. VERA is hierin vrij verwarrend m.b.t. bouwkundige elementen / installaties / [voorzieningen](https://www.coraveraonline.nl/index.php/Referentiedata:VOORZIENINGSOORT). Op dit moment gebruiken wij `installaties` als attribuut op ruimte met als type `Optional[list[Voorzieningsoort]]`.
 
 ### Aantal
 
