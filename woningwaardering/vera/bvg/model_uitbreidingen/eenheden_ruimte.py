@@ -46,7 +46,7 @@ class _EenhedenRuimte(BaseModel):
         default=None, alias="installaties"
     )
     """
-    Het soort installaties van de ruimte. Bijvoorbeeld Hangend toilet, Wastafel, Inbouw koelkast, warmkokend water functie etc. Deze installaties zijn van belang voor de woningwaardering. Referentiedatasoort INSTALLATIESOORT.
+    De voorzieningen (installaties) van de ruimte. Bijvoorbeeld Hangend toilet, Wastafel, Inbouw koelkast, warmkokend water functie etc. Deze voorzieningen zijn van belang voor de woningwaardering. Referentiedatasoort VOORZIENINGSOORT.
     """
     aantal: Optional[int] = Field(default=1, alias="aantal", ge=0)
     """

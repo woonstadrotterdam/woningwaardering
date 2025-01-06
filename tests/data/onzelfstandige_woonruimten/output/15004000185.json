@@ -256,8 +256,15 @@
           "naam": "Buitenruimten"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": []
+      "punten": -5.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "naam": "Geen buitenruimten"
+          },
+          "punten": -5.0
+        }
+      ]
     },
     {
       "criteriumGroep": {
@@ -398,12 +405,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 530.81,
-  "punten": 54.0,
+  "maximaleHuur": 481.68,
+  "punten": 49.0,
   "stelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 530.81
+  "maximaleHuurInclusiefOpslag": 481.68
 }

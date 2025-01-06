@@ -480,7 +480,7 @@ class Woningwaarderingstelselgroep(Referentiedatasoort):
         parent=Woningwaarderingstelsel.onzelfstandige_woonruimten,
     )
     """
-    Prijsopslagen voor monumenten, waarbij extra percentages worden toegevoegd aan de
-    maximale huurprijs voor rijks-, gemeentelijke of provinciaal aangewezen
-    monumentenn.
+    (UITBREIDING) Prijsopslagen voor monumenten, waarbij extra percentages worden
+    toegevoegd aan de maximale huurprijs voor rijks-, gemeentelijke of provinciaal
+    aangewezen monumentenn.
     """

@@ -1,0 +1,42 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin",
+      "inhoud": 14.4272,
+      "oppervlakte": 30,
+      "lengte": 6,
+      "breedte": 5,
+      "verwarmd": false,
+      "gemeenschappelijk": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    },
+    {
+      "id": "Space_5",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "inhoud": 14.4272,
+      "oppervlakte": 15,
+      "verwarmd": false,
+      "gemeenschappelijk": true,
+      "lengte": 5,
+      "breedte": 3,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    }
+  ]
+}
