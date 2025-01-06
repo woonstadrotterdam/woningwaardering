@@ -157,11 +157,13 @@ def _waardeer_aanrecht(
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"{ruimte.naam}: Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
-                    id=f"""{CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.keuken,
-                        ruimte_id=ruimte.id,
-                        criterium=f"lengte_aanrecht_{element.id}",
-                    )}""",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=Woningwaarderingstelselgroep.keuken,
+                            ruimte_id=ruimte.id,
+                            criterium=f"lengte_aanrecht_{element.id}",
+                        )
+                    ),
                     meeteenheid=Meeteenheid.millimeter,
                 ),
                 punten=aanrecht_punten,
@@ -228,11 +230,13 @@ def _waardeer_extra_voorzieningen(
                     naam=f"{voorziening.naam} (in zelfde ruimte)"
                     if count > 1
                     else voorziening.naam,
-                    id=f"""{CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.keuken,
-                        ruimte_id=ruimte.id,
-                        criterium=f"extra_voorziening_{voorziening.name}",
-                )}""",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=Woningwaarderingstelselgroep.keuken,
+                            ruimte_id=ruimte.id,
+                            criterium=f"extra_voorziening_{voorziening.name}",
+                        )
+                    ),
                 ),
                 punten=float(punten),
                 aantal=count,
@@ -251,11 +255,13 @@ def _waardeer_extra_voorzieningen(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"Max. {max_punten_voorzieningen} punten voor voorzieningen in een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
-                    id=f"""{CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.keuken,
-                        ruimte_id=ruimte.id,
-                        criterium="maximering_extra_voorzieningen",
-                    )}""",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=Woningwaarderingstelselgroep.keuken,
+                            ruimte_id=ruimte.id,
+                            criterium="maximering_extra_voorzieningen",
+                        )
+                    ),
                 ),
                 punten=float(aftrek),
             )

@@ -106,10 +106,12 @@ class Energieprestatie(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Energieprestatievergoeding",
-                    id=f"""{CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="energieprestatievergoeding",
-                    )}""",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="energieprestatievergoeding",
+                        )
+                    ),
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
             )
@@ -224,10 +226,12 @@ class Energieprestatie(Stelselgroep):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
-                id=f"""{CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    criterium="label",
-                )}""",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="label",
+                    )
+                ),
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
             )
         )
@@ -282,10 +286,12 @@ class Energieprestatie(Stelselgroep):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
-                id=f"""{CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    criterium="bouwjaar",
-                )}""",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="bouwjaar",
+                    )
+                ),
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
             )
         )

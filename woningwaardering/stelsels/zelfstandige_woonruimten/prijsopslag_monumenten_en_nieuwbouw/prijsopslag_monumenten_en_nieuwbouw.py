@@ -171,10 +171,12 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 return WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Nieuwbouw",
-                        id=f"""{CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="nieuwbouw",
-                        )}""",
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                criterium="nieuwbouw",
+                            )
+                        ),
                     ),
                     opslagpercentage=0.1,
                 )

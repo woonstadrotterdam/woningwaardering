@@ -47,10 +47,12 @@ def waardeer_oppervlakte_van_vertrek(
     woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
         meeteenheid=Meeteenheid.vierkante_meter_m2,
         naam=criterium_naam,
-        id=f"""{CriteriumId(
-            stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
-            ruimte_id=ruimte.id,
-        )}""",
+        id=str(
+            CriteriumId(
+                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+                ruimte_id=ruimte.id,
+            )
+        ),
     )
     woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
 

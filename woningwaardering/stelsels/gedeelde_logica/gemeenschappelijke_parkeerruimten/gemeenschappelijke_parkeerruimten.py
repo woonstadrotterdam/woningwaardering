@@ -132,10 +132,12 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         yield WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium,
-                id=f"""{CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
-                    ruimte_id=ruimte.id,
-                )}""",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
+                        ruimte_id=ruimte.id,
+                    )
+                ),
             ),
             aantal=ruimte.aantal,
             punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),

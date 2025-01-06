@@ -80,10 +80,12 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Zorgwoning",
-                        id=f"""{CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="zorgwoning",
-                        )}""",
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                criterium="zorgwoning",
+                            )
+                        ),
                     ),
                     punten=3.0,
                 )

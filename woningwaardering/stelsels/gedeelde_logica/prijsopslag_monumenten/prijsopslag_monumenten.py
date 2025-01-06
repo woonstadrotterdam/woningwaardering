@@ -52,10 +52,12 @@ def opslag_rijksmonument(
         woningwaardering = WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam="Rijksmonument",
-                id=f"""{CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten,
-                    criterium="rijksmonument",
-                )}""",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten,
+                        criterium="rijksmonument",
+                    )
+                ),
             ),
         )
 
@@ -114,10 +116,12 @@ def opslag_gemeentelijk_of_provinciaal_monument(
         return WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam="Gemeentelijk of provinciaal monument",
-                id=f"""{CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
-                    criterium="gemeentelijk_of_provinciaal_monument",
-                )}""",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+                        criterium="gemeentelijk_of_provinciaal_monument",
+                    )
+                ),
             ),
             opslagpercentage=0.15,
         )
@@ -199,10 +203,12 @@ def opslag_beschermd_stads_of_dorpsgezicht(
     return WoningwaarderingResultatenWoningwaardering(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Beschermd stads- of dorpsgezicht",
-            id=f"""{CriteriumId(
-                            stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
-                            criterium="beschermd_stads_of_dorpsgezicht",
-                        )}""",
+            id=str(
+                CriteriumId(
+                    stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+                    criterium="beschermd_stads_of_dorpsgezicht",
+                )
+            ),
         ),
         opslagpercentage=0.05,
     )

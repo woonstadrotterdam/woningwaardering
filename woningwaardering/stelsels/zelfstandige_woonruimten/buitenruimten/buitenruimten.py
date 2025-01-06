@@ -159,10 +159,12 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Maximaal 15 punten",
-                    id=f"""{CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="maximering",
-                    )}""",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="maximering",
+                        )
+                    ),
                 )
             )
             woningwaardering.punten = float(aftrek)
@@ -224,24 +226,26 @@ class Buitenruimten(Stelselgroep):
                         decimalen=2,
                     )
                 )
-                woningwaardering.criterium = (
-                    WoningwaarderingResultatenWoningwaarderingCriterium(
-                        meeteenheid=Meeteenheid.vierkante_meter_m2,
-                        id=f"""{CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        ruimte_id=ruimte.id,
-                        gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
-                        gedeeld_met_soort=GedeeldMetSoort.adressen,
-                    )}""",
-                        naam=ruimte.naam,
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id=f"""{CriteriumId(
+                woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
+                    id=str(
+                        CriteriumId(
                             stelselgroep=self.stelselgroep,
+                            ruimte_id=ruimte.id,
                             gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
                             gedeeld_met_soort=GedeeldMetSoort.adressen,
-                        )}""",
+                        )
+                    ),
+                    naam=ruimte.naam,
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
+                                gedeeld_met_soort=GedeeldMetSoort.adressen,
+                            )
                         ),
-                    )
+                    ),
                 )
             else:  # privé buitenruimte
                 logger.info(
@@ -251,16 +255,20 @@ class Buitenruimten(Stelselgroep):
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
                         naam=ruimte.naam,
-                        id=f"""{CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            ruimte_id=ruimte.id,
-                        )}""",
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id=f"""{CriteriumId(
+                        id=str(
+                            CriteriumId(
                                 stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=1,
-                                gedeeld_met_soort=GedeeldMetSoort.adressen,
-                            )}""",
+                                ruimte_id=ruimte.id,
+                            )
+                        ),
+                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=1,
+                                    gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                )
+                            ),
                         ),
                     )
                 )
@@ -290,10 +298,12 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Geen buitenruimten",
-                    id=f"""{CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="geen_buitenruimten",
-                    )}""",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="geen_buitenruimten",
+                        )
+                    ),
                 )
             )
             woningwaardering.punten = -5.0
@@ -312,16 +322,20 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Buitenruimten aanwezig",
-                    id=f"""{CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="aanwezig",
-                        gedeeld_met_aantal=1,
-                    )}""",
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"""{CriteriumId(
+                    id=str(
+                        CriteriumId(
                             stelselgroep=self.stelselgroep,
+                            criterium="aanwezig",
                             gedeeld_met_aantal=1,
-                        )}""",
+                        )
+                    ),
+                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=1,
+                            )
+                        ),
                     ),
                 )
             )

@@ -52,10 +52,12 @@ def monument_correctie(
         return WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam="Correctie monument",
-                id=f"""{CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.energieprestatie,
-                    criterium="correctie_monument",
-                )}""",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.energieprestatie,
+                        criterium="correctie_monument",
+                    )
+                ),
             ),
             punten=woningwaardering.punten * -1.0,
         )

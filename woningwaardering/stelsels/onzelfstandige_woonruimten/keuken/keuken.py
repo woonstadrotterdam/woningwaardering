@@ -78,14 +78,14 @@ class Keuken(Stelselgroep):
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         ] += Decimal(str(woningwaardering.punten))
-                        woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=f"""{CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                            )}""",
-                            )
+                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                )
+                            ),
                         )
                         woningwaardering.punten = float(
                             utils.rond_af(
@@ -102,10 +102,12 @@ class Keuken(Stelselgroep):
                         gedeeld_met_counter[1] += Decimal(str(woningwaardering.punten))
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
-                                id=f"""{CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=1,
-                                )}""",
+                                id=str(
+                                    CriteriumId(
+                                        stelselgroep=self.stelselgroep,
+                                        gedeeld_met_aantal=1,
+                                    )
+                                ),
                             )
                         )
 
@@ -114,17 +116,17 @@ class Keuken(Stelselgroep):
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal, punten in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = (
-                WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"Totaal (gedeeld met {aantal} onzelfstandige woonruimten)"
-                    if aantal > 1
-                    else "Totaal (privé)",
-                    id=f"""{CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    gedeeld_met_aantal=aantal,
-                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                )}""",
-                )
+            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam=f"Totaal (gedeeld met {aantal} onzelfstandige woonruimten)"
+                if aantal > 1
+                else "Totaal (privé)",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        gedeeld_met_aantal=aantal,
+                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                    )
+                ),
             )
             woningwaardering.punten = float(
                 utils.rond_af_op_kwart(punten / Decimal(str(aantal)))

@@ -101,14 +101,14 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                         )
                     )
                     if waardering.criterium is not None:
-                        waardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=f"""{CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                            )}""",
-                            )
+                        waardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                )
+                            ),
                         )
                         woningwaardering_groep.woningwaarderingen.append(waardering)
 
@@ -119,11 +119,13 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        id=f"""{CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
-                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                        )}""",
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                            )
+                        ),
                         naam=f"Totaal gedeeld met {gedeeld_met_aantal_onzelfstandige_woonruimten} onzelfstandige woonruimten",
                     ),
                     aantal=float(count["aantal"]),

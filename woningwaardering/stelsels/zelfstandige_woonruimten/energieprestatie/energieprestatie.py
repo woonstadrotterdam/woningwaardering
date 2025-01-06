@@ -98,10 +98,12 @@ class Energieprestatie(Stelselgroep):
         label = energieprestatie.label.naam
         woningwaardering.criterium.naam = f"{label}"
 
-        woningwaardering.criterium.id = f"""{CriteriumId(
-            stelselgroep=self.stelselgroep,
-            criterium="label",
-        )}"""
+        woningwaardering.criterium.id = str(
+            CriteriumId(
+                stelselgroep=self.stelselgroep,
+                criterium="label",
+            )
+        )
 
         lookup_key = "label_ei"
 
@@ -191,10 +193,12 @@ class Energieprestatie(Stelselgroep):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
-                id=f"""{CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    criterium="bouwjaar",
-                )}""",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="bouwjaar",
+                    )
+                ),
             )
         )
         woningwaardering.punten = float(filtered_df[pandsoort.naam].values[0])
@@ -273,10 +277,12 @@ class Energieprestatie(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"Energieprestatievergoeding {pandsoort.naam}",
-                    id=f"""{CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="energieprestatievergoeding",
-                    )}""",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="energieprestatievergoeding",
+                        )
+                    ),
                 )
             )
             woningwaardering.punten = float(
