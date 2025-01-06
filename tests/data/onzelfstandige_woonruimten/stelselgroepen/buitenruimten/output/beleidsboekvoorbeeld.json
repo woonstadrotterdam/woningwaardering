@@ -47,9 +47,9 @@
           "aantal": 52.0,
           "criterium": {
             "id": "buitenruimten__Space_108017427",
-            "naam": "Dakterras (gedeeld met 5 adressen)",
+            "naam": "Dakterras",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__gedeeld_met__4__onzelfstandige_woonruimten"
+              "id": "buitenruimten__totaal__gedeeld_met__5__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -60,7 +60,6 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__totaal__aanwezig__prive",
             "naam": "Privé buitenruimten aanwezig",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__totaal__prive"
@@ -79,6 +78,21 @@
             }
           },
           "punten": 2.35
+        },
+        {
+          "aantal": 52.0,
+          "criterium": {
+            "id": "buitenruimten__totaal__gedeeld_met__5__adressen",
+            "naam": "Totaal (gedeeld met 5 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__gedeeld_met__4__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.95
         },
         {
           "aantal": 56.5,
