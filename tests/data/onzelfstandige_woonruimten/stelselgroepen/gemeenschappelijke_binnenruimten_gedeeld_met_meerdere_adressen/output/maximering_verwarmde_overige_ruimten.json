@@ -19,7 +19,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__E",
             "naam": "Berging: Overige ruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -34,7 +34,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__C",
             "naam": "Berging: Overige Ruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -49,7 +49,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__D",
             "naam": "Berging: Overige Ruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -64,7 +64,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__F",
             "naam": "Berging: Overige Ruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -79,7 +79,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__G",
             "naam": "Berging: Overige Ruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_3_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__3__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -93,7 +93,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__E",
             "naam": "Berging: Verwarmde overige en verkeersruimten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
             }
           },
           "punten": 0.25
@@ -103,7 +103,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__C",
             "naam": "Berging: Verwarmde overige en verkeersruimten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
             }
           },
           "punten": 0.25
@@ -113,7 +113,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__D",
             "naam": "Berging: Verwarmde overige en verkeersruimten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
             }
           },
           "punten": 0.25
@@ -123,7 +123,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__F",
             "naam": "Berging: Verwarmde overige en verkeersruimten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
             }
           },
           "punten": 0.25
@@ -133,7 +133,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__G",
             "naam": "Berging: Verwarmde overige en verkeersruimten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_3_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__3__adressen"
             }
           },
           "punten": 0.166666667
@@ -143,7 +143,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__G",
             "naam": "Berging: Maximaal 4 punten voor verwarmde overige en verkeersruimten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_3_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__3__adressen"
             }
           },
           "punten": -0.166666667
@@ -153,7 +153,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen",
             "naam": "Totaal (gedeeld met 2 adressen)",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 16.0
@@ -163,7 +163,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__3__adressen",
             "naam": "Totaal (gedeeld met 3 adressen)",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 2.5

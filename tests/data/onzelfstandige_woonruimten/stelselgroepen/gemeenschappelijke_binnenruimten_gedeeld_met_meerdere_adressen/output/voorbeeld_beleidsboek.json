@@ -19,7 +19,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
             "naam": "Keuken: Vertrek",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -34,7 +34,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Toilet: Overige Ruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -48,7 +48,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
             "naam": "Keuken: Verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen"
             }
           },
           "punten": 0.125
@@ -59,7 +59,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -74,7 +74,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
             "naam": "Keuken: Inbouw magnetron",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen"
             }
           },
           "punten": 0.0625
@@ -85,7 +85,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
             "naam": "Keuken: Inbouw koelkast",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen"
             }
           },
           "punten": 0.0625
@@ -96,7 +96,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
             "naam": "Keuken: Inbouw oven elektrisch",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen"
             }
           },
           "punten": 0.0625
@@ -106,7 +106,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Toilet: Hangend toilet",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen"
             }
           },
           "punten": 0.234375
@@ -116,7 +116,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Toilet: Wastafel",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen"
             }
           },
           "punten": 0.0625
@@ -126,7 +126,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen",
             "naam": "Totaal (gedeeld met 4 adressen)",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_4_onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__onzelfstandige_woonruimten"
             }
           },
           "punten": 2.390625
