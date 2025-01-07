@@ -18,7 +18,7 @@
             "id": "verkoeling_en_verwarming__Berging1",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 1.0
@@ -28,7 +28,7 @@
             "id": "verkoeling_en_verwarming__Berging2",
             "naam": "Berging2",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 1.0
@@ -38,7 +38,7 @@
             "id": "verkoeling_en_verwarming__Berging3",
             "naam": "Berging3",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 1.0
@@ -48,7 +48,7 @@
             "id": "verkoeling_en_verwarming__Berging4",
             "naam": "Berging4",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 1.0
@@ -58,7 +58,7 @@
             "id": "verkoeling_en_verwarming__Berging5",
             "naam": "Berging5",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 1.0
@@ -68,14 +68,14 @@
             "id": "verkoeling_en_verwarming__Berging5__max_aantal_punten",
             "naam": "Berging5: Maximaal 4 punten",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": -1.0
         },
         {
           "criterium": {
-            "id": "verwarmde_overige_en_verkeersruimten",
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten",
             "naam": "Verwarmde overige- en verkeersruimten"
           },
           "punten": 4.0

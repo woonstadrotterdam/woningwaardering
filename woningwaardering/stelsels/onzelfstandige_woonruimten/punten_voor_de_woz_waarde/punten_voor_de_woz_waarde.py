@@ -90,7 +90,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woningwaarderingen = list[WoningwaarderingResultatenWoningwaardering]()
 
         puntenwaardering_sleutel = WoningwaarderingCriteriumSleutels(
-            id="punten_waardering"
+            id=str(
+                CriteriumId(
+                    stelselgroep=self.stelselgroep, criterium="percentage_verschil"
+                )
+            )
         )
 
         woningwaarderingen.append(

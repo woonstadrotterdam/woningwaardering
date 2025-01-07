@@ -69,7 +69,7 @@
             "id": "verkoeling_en_verwarming__Space_108014589",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
@@ -79,14 +79,14 @@
             "id": "verkoeling_en_verwarming__Space_108006229",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken"
           },
           "punten": 4.0

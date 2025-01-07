@@ -109,6 +109,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, defaultdict[str, Decimal]] = defaultdict(
             lambda: defaultdict(Decimal)
         )
+
         # {bovenliggend_criterium: {onzelfstandige_woonruimten: punten}}
         for ruimte, woningwaardering in waarderingen:
             gedeeld_met_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
@@ -125,7 +126,9 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         id=criterium_id,
-                        naam=criterium_id.capitalize().replace("_", " "),
+                        naam=criterium_id.split("__")[-1]
+                        .capitalize()
+                        .replace("_", " "),
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
                             id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
                             if aantal_onz > 1

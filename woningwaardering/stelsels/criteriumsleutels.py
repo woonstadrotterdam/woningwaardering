@@ -1,30 +1,56 @@
 from enum import Enum
 
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingCriterium,
+)
+from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
+    Woningwaarderingstelselgroep,
 )
 
 
 class CriteriumSleutels(Enum):
-    """De naam van de enum moet gelijk zijn aan het id van de criterium."""
-
-    verwarmde_overige_en_verkeersruimten = (
+    verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten = (
         WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Verwarmde overige- en verkeersruimten",
-            id="verwarmde_overige_en_verkeersruimten",
+            id=str(
+                CriteriumId(
+                    stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                    criterium="verwarmde_overige_en_verkeersruimten",
+                )
+            ),
         )
     )
-    verkoelde_en_verwarmde_vertrekken = (
+    verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken = (
         WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Verkoelde en verwarmde vertrekken",
-            id="verkoelde_en_verwarmde_vertrekken",
+            id=str(
+                CriteriumId(
+                    stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                    criterium="verkoelde_en_verwarmde_vertrekken",
+                )
+            ),
         )
     )
-    open_keuken = WoningwaarderingResultatenWoningwaarderingCriterium(
-        naam="Open keuken",
-        id="open_keuken",
+    verkoeling_en_verwarming__totaal__open_keuken = (
+        WoningwaarderingResultatenWoningwaarderingCriterium(
+            naam="Open keuken",
+            id=str(
+                CriteriumId(
+                    stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                    criterium="open_keuken",
+                )
+            ),
+        )
     )
-    verwarmde_vertrekken = WoningwaarderingResultatenWoningwaarderingCriterium(
-        naam="Verwarmde vertrekken",
-        id="verwarmde_vertrekken",
+    verkoeling_en_verwarming__totaal__verwarmde_vertrekken = (
+        WoningwaarderingResultatenWoningwaarderingCriterium(
+            naam="Verwarmde vertrekken",
+            id=str(
+                CriteriumId(
+                    stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                    criterium="verwarmde_vertrekken",
+                )
+            ),
+        )
     )

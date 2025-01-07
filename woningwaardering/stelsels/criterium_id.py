@@ -11,8 +11,6 @@ class GedeeldMetSoort(Enum):
 
 
 class CriteriumId:
-    """Genereert een criterium id met het format:"""
-
     def __init__(
         self,
         stelselgroep: WoningwaarderingstelselgroepReferentiedata,

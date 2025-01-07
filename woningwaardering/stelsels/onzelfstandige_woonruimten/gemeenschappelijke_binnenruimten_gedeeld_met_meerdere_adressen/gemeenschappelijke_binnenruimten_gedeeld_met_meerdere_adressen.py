@@ -326,9 +326,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 continue
 
             if resultaat.punten and resultaat.punten < 0:
-                criterium_naam = f"{criterium.naam.rstrip(':') if criterium.naam else ''} voor {criterium.bovenliggende_criterium.id.lower().replace('_', ' ') if criterium.bovenliggende_criterium and criterium.bovenliggende_criterium.id else ''}"
+                criterium_naam = f"{criterium.naam.rstrip(':') if criterium.naam else ''} voor {criterium.bovenliggende_criterium.id.split('__')[-1].lower().replace('_', ' ') if criterium.bovenliggende_criterium and criterium.bovenliggende_criterium.id else ''}"
             else:
-                criterium_naam = f"{criterium.naam}: {criterium.bovenliggende_criterium.id.capitalize().replace('_', ' ') if criterium.bovenliggende_criterium and criterium.bovenliggende_criterium.id else ''}"
+                criterium_naam = f"{criterium.naam}: {criterium.bovenliggende_criterium.id.split('__')[-1].capitalize().replace('_', ' ') if criterium.bovenliggende_criterium and criterium.bovenliggende_criterium.id else ''}"
 
             waarderingen.append(
                 self._maak_woningwaardering(
