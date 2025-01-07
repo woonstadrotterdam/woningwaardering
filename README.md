@@ -632,13 +632,13 @@ with open(
           "criterium": {
             "naam": "Factor I",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_I"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde_onderdeel_I",
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 44.21
@@ -648,7 +648,7 @@ with open(
           "criterium": {
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -661,13 +661,13 @@ with open(
           "criterium": {
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde_onderdeel_II",
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
           "punten": 19.03
@@ -1135,13 +1135,13 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "criterium": {
             "naam": "Factor I",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_I"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde_onderdeel_I",
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 44.21
@@ -1151,7 +1151,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "criterium": {
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -1164,13 +1164,13 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
           "criterium": {
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde_onderdeel_II",
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
           "punten": 67.79
