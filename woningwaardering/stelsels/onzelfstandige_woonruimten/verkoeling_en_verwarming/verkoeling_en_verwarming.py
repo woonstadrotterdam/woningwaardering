@@ -7,6 +7,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_verkoeling_en_verwarming,
 )
@@ -130,18 +131,26 @@ class VerkoelingEnVerwarming(Stelselgroep):
                         .capitalize()
                         .replace("_", " "),
                         bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
-                            if aantal_onz > 1
-                            else f"{self.stelselgroep.name}_prive",
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=aantal_onz,
+                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                )
+                            )
                         ),
                     ),
                     punten=float(punten),
                 )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
-                    if aantal_onz > 1
-                    else f"{self.stelselgroep.name}_prive",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            gedeeld_met_aantal=aantal_onz,
+                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                        )
+                    ),
                     naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
                     if aantal_onz > 1
                     else "Totaal (privé)",

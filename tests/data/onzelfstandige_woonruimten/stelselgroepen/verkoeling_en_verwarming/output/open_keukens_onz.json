@@ -88,7 +88,7 @@
             "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming_gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 4.0
@@ -98,14 +98,14 @@
             "id": "verkoeling_en_verwarming__totaal__open_keuken",
             "naam": "Open keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming_gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 3.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming_gedeeld_met_2_onzelfstandige_woonruimten",
+            "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
           },
           "punten": 7.0

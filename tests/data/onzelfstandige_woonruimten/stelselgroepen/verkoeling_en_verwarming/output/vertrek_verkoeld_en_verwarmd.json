@@ -28,14 +28,14 @@
             "id": "verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken",
             "naam": "Verkoelde en verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming_prive"
+              "id": "verkoeling_en_verwarming__totaal__prive"
             }
           },
           "punten": 3.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming_prive",
+            "id": "verkoeling_en_verwarming__totaal__prive",
             "naam": "Totaal (privé)"
           },
           "punten": 3.0

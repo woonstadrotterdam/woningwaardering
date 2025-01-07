@@ -78,14 +78,14 @@
             "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten",
             "naam": "Verwarmde overige en verkeersruimten",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming_gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming_gedeeld_met_2_onzelfstandige_woonruimten",
+            "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
           },
           "punten": 2.0
