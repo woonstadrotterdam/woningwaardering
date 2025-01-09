@@ -10,7 +10,6 @@ import pandas as pd
 import requests
 from dateutil.relativedelta import relativedelta
 from loguru import logger
-from monumenten import MonumentenClient
 from prettytable import PrettyTable
 
 from woningwaardering.stelsels import utils
@@ -483,6 +482,22 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
     Returns:
         EenhedenEenheid: De met monumentale statussen bijgewerkte eenheid
     """
+    try:
+        import monumenten
+
+        has_monumenten = True
+    except ImportError:
+        has_monumenten = False
+        warnings.warn(
+            "Package 'monumenten' is niet geïnstalleerd. Monumentale status wordt niet automatisch bijgewerkt. "
+            "Installeer met: pip install woningwaardering[monumenten]",
+            UserWarning,
+        )
+        return eenheid
+
+    if not has_monumenten:
+        return eenheid
+
     eenheid.monumenten = eenheid.monumenten or []
     try:
         if (
@@ -500,7 +515,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         ]
 
         async def _get_monuments() -> Any:
-            async with MonumentenClient() as client:
+            async with monumenten.MonumentenClient() as client:
                 return await client.process_from_list(
                     bag_verblijfsobject_ids,
                     to_vera=True,

@@ -30,7 +30,6 @@ dependencies = [
     "prettytable==3.*",
     "pandas==2.*",
     "requests==2.*",
-    "monumenten==0.2.*",
 ]
 
 [project.urls]
@@ -75,4 +74,7 @@ dev = [
     "libcst==1.*",
     "requests==2.31.*",
     "inquirer==3.*",
+]
+monumenten = [
+    "monumenten==0.2.*"
 ]
