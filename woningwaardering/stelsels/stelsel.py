@@ -59,8 +59,10 @@ class Stelsel:
             stelselgroep(peildatum) for stelselgroep in stelselgroepen or []
         ]
         self.df_maximale_huur = pd.read_csv(
-            files("woningwaardering").joinpath(
-                f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"
+            str(
+                files("woningwaardering").joinpath(
+                    f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"
+                )
             )
         )
 

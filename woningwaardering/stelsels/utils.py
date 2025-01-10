@@ -1007,7 +1007,7 @@ def get_corop_voor_woonplaats(woonplaats_code: str) -> dict[str, str] | None:
                                of None als de gegevens niet gevonden kunnen worden.
     """
     data = pd.read_csv(
-        files("woningwaardering").joinpath("data/corop/corop.generated.csv"),
+        str(files("woningwaardering").joinpath("data/corop/corop.generated.csv")),
         dtype={"Woonplaatscode": str, "Gemeentecode": str, "COROP-gebiedcode": str},
     )
 
