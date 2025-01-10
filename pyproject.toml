@@ -30,7 +30,6 @@ dependencies = [
     "prettytable==3.*",
     "pandas==2.*",
     "requests==2.*",
-    "monumenten==0.2.*",
 ]
 
 [project.urls]
@@ -47,6 +46,7 @@ include = ["woningwaardering*"]
 version_file = "woningwaardering/_version.py"
 
 [tool.pytest.ini_options]
+testpaths = ["tests"]
 addopts = "--cov=woningwaardering --cov-report term --cov-report lcov:lcov.info"
 
 [tool.coverage.run]
@@ -67,6 +67,7 @@ test = [
 ]
 dev = [
     "woningwaardering[test]",
+    "woningwaardering[monumenten]",
     "datamodel-code-generator[http]==0.25.6",
     "unidecode==1.*",
     "jinja2==3.*",
@@ -75,4 +76,7 @@ dev = [
     "libcst==1.*",
     "requests==2.31.*",
     "inquirer==3.*",
+]
+monumenten = [
+    "monumenten==0.2.*"
 ]
