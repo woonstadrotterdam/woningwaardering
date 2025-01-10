@@ -833,7 +833,6 @@ wws = Woningwaardering(peildatum=date(2025, 1, 1))
 eenheid = EenhedenEenheid(
     id="<id>",
     bouwjaar=1924,
-    monumenten=[],
     woningwaarderingstelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
     adres=EenhedenAdresBasis(
         straatnaam="<straatnaam>",
