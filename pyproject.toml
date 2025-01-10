@@ -46,6 +46,7 @@ include = ["woningwaardering*"]
 version_file = "woningwaardering/_version.py"
 
 [tool.pytest.ini_options]
+testpaths = ["tests"]
 addopts = "--cov=woningwaardering --cov-report term --cov-report lcov:lcov.info"
 
 [tool.coverage.run]
