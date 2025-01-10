@@ -1,6 +1,7 @@
-import sys
+from __future__ import annotations
+
 import warnings
-from typing import Any, TextIO
+from typing import TextIO
 
 from loguru import logger
 
@@ -33,20 +34,3 @@ def verkort_path(name: str, regel: int, dev: bool = False) -> str:
     if dev:
         path = path.replace("woningwaardering.", "")
     return f"{path}:{regel}"
-
-
-def custom_filter(record: dict[str, Any]) -> bool:
-    record["extra"]["formatted_name_with_line"] = verkort_path(
-        record["name"], record["line"]
-    )
-    return True
-
-
-format = "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <7}</level> | <cyan>{extra[formatted_name_with_line]}</cyan> | <level>{message}</level>"
-logger.remove()
-logger.add(
-    sys.stderr,
-    format=format,
-    level="DEBUG",
-    filter=custom_filter,
-)
