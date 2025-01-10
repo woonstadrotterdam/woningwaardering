@@ -483,7 +483,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         EenhedenEenheid: De met monumentale statussen bijgewerkte eenheid
     """
     try:
-        import monumenten
+        from monumenten import MonumentenClient
 
         has_monumenten = True
     except ImportError:
@@ -515,7 +515,7 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         ]
 
         async def _get_monuments() -> Any:
-            async with monumenten.MonumentenClient() as client:
+            async with MonumentenClient() as client:
                 return await client.process_from_list(
                     bag_verblijfsobject_ids,
                     to_vera=True,
