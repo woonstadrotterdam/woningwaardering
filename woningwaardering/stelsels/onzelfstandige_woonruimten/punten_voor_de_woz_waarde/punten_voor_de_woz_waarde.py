@@ -337,9 +337,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self, corop_gebied: dict[str, str], jaar: int
     ) -> Decimal | None:
         df_woz = pd.read_csv(
-            files("woningwaardering")
-            .joinpath(LOOKUP_TABEL_FOLDER)
-            .joinpath("corop_gebied_gemiddelde_woz_waarde_per_m2.csv"),
+            str(
+                files("woningwaardering")
+                .joinpath(LOOKUP_TABEL_FOLDER)
+                .joinpath("corop_gebied_gemiddelde_woz_waarde_per_m2.csv")
+            ),
             dtype={"COROP-gebiedcode": str, str(jaar): str},
         )
 
@@ -354,9 +356,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def _minimum_woz_waarde(self, woz_waardepeildatum: date) -> Decimal | None:
         df_minimum_woz_waarde = pd.read_csv(
-            files("woningwaardering")
-            .joinpath(LOOKUP_TABEL_FOLDER)
-            .joinpath("minimum_woz_waarde.csv"),
+            str(
+                files("woningwaardering")
+                .joinpath(LOOKUP_TABEL_FOLDER)
+                .joinpath("minimum_woz_waarde.csv")
+            ),
             parse_dates=["Peildatum"],
         )
 
