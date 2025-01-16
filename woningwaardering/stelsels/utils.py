@@ -10,7 +10,6 @@ import pandas as pd
 import requests
 from dateutil.relativedelta import relativedelta
 from loguru import logger
-from monumenten import MonumentenClient
 from prettytable import PrettyTable
 
 from woningwaardering.stelsels import utils
@@ -483,6 +482,22 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
     Returns:
         EenhedenEenheid: De met monumentale statussen bijgewerkte eenheid
     """
+    try:
+        from monumenten import MonumentenClient
+
+        has_monumenten = True
+    except ImportError:
+        has_monumenten = False
+        warnings.warn(
+            "Package 'monumenten' is niet geïnstalleerd. Monumentale status wordt niet automatisch bijgewerkt. "
+            "Installeer met: pip install woningwaardering[monumenten]",
+            UserWarning,
+        )
+        return eenheid
+
+    if not has_monumenten:
+        return eenheid
+
     eenheid.monumenten = eenheid.monumenten or []
     try:
         if (
@@ -992,7 +1007,7 @@ def get_corop_voor_woonplaats(woonplaats_code: str) -> dict[str, str] | None:
                                of None als de gegevens niet gevonden kunnen worden.
     """
     data = pd.read_csv(
-        files("woningwaardering").joinpath("data/corop/corop.generated.csv"),
+        str(files("woningwaardering").joinpath("data/corop/corop.generated.csv")),
         dtype={"Woonplaatscode": str, "Gemeentecode": str, "COROP-gebiedcode": str},
     )
 
