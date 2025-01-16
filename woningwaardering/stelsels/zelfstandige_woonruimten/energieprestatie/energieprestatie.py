@@ -244,7 +244,7 @@ class Energieprestatie(Stelselgroep):
 
         if not (energieprestatie or eenheid.bouwjaar):
             warnings.warn(
-                f"Eenheid ({eenheid.id}) heeft geen energieprestatie of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}.",
+                f"Eenheid ({eenheid.id}) heeft geen bruikbare energieprestatie of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}.",
                 UserWarning,
             )
             return woningwaardering_groep
