@@ -21,7 +21,6 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Meeteenheid,
-    Oppervlaktesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -146,21 +145,20 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             woz_waarde_voor_waardering = minimum_woz_waarde
 
-        gebruiksoppervlakte = next(
-            (
-                Decimal(oppervlakte.waarde)
-                for oppervlakte in eenheid.oppervlakten or []
-                if oppervlakte.soort == Oppervlaktesoort.gebruiksoppervlakte
-                and oppervlakte.waarde is not None
-            ),
-            Decimal(eenheid.gebruiksoppervlakte)
-            if eenheid.gebruiksoppervlakte is not None
-            else None,
+        # Onder gebruiksoppervlakte in deze rubriek wordt verstaan: de oppervlakte van een verblijfsobject in gehele vierkante meters als bedoeld onder “kenmerken”, te vinden per woning op de officiële site van het WOZ-waardeloket. Het gaat hierbij op de gebruiksoppervlakte van de gehele woning (het adres) waarvan de onzelfstandige woonruimten onderdeel uitmaken.
+        gebruiksoppervlakte = (
+            Decimal(
+                eenheid.adresseerbaar_object_basisregistratie.bag_oppervlakte_verblijfsobject
+            )
+            if eenheid.adresseerbaar_object_basisregistratie is not None
+            and eenheid.adresseerbaar_object_basisregistratie.bag_oppervlakte_verblijfsobject
+            is not None
+            else None
         )
 
         if gebruiksoppervlakte is None:
             warnings.warn(
-                f"Eenheid {eenheid.id}: geen gebruiksoppervlakte gevonden. Kan punten voor de WOZ-waarde niet bepalen.",
+                f"Eenheid {eenheid.id}: geen gebruiksoppervlakte gevonden van het bag verblijfsobject. Kan punten voor de WOZ-waarde niet bepalen. Het gaat hierbij op de gebruiksoppervlakte van de gehele woning (het adres) waarvan de onzelfstandige woonruimten onderdeel uitmaken. Dit dient gespecificeerd te worden in het attribuut adresseerbaar_object_basisregistratie.bag_oppervlakte_verblijfsobject",
                 UserWarning,
             )
             return woningwaardering_groep
