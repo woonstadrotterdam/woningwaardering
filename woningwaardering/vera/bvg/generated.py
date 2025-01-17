@@ -5,7 +5,6 @@
 
 from __future__ import annotations
 
-import warnings
 from datetime import date
 from typing import Optional, Union
 
@@ -16,7 +15,7 @@ from pydantic import (
     ConfigDict,
     Field,
     RootModel,
-    validator,
+    field_validator,
 )
 
 
@@ -64,21 +63,22 @@ class Referentiedata(BaseModel):
     """
     De te tonen waarde van het referentiedata item. Bijvoorbeeld Nederlandse.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/53
     parent: Optional[Referentiedata] = Field(None, exclude=True)
     """
     De bovenliggende referentiedata in het geval er sprake is van een hierarchische relatie tussen referentiedata.
     """
-
     _name: str = ""
 
     @property
     def name(self) -> str:
         return self._name
 
-    @validator("code", always=True)
+    @field_validator("code", mode="after")
+    @classmethod
     def niet_optioneel(cls, value: str) -> str:
         if value is None or value.strip() == "":
-            warnings.warn("code moet een waarde hebben", UserWarning)
+            raise ValueError("de code van een Referentiedata object mag niet leeg zijn")
         return value
 
     def __eq__(self, other: object) -> bool:

@@ -1,7 +1,6 @@
-import warnings
 from typing import Optional
 
-from pydantic import Field, validator
+from pydantic import Field, field_validator
 
 from woningwaardering.vera.bvg.generated import Referentiedata
 
@@ -18,10 +17,11 @@ class _Referentiedata(Referentiedata):
     def name(self) -> str:
         return self._name
 
-    @validator("code", always=True)
+    @field_validator("code", mode="after")
+    @classmethod
     def niet_optioneel(cls, value: str) -> str:
         if value is None or value.strip() == "":
-            warnings.warn("code moet een waarde hebben", UserWarning)
+            raise ValueError("de code van een Referentiedata object mag niet leeg zijn")
         return value
 
     def __eq__(self, other: object) -> bool:
