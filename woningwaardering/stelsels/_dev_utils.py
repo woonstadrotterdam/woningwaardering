@@ -80,7 +80,9 @@ class DevelopmentContext:
             file: Optional[Any] = None,
             line: Optional[str] = None,
         ) -> None:
-            logger.warning(f"{category.__name__}: {message}")
+            logger.opt(depth=2).warning(
+                f"{category.__name__}: {message}",
+            )
 
         if not self.strict:
             warnings.filterwarnings("default", category=UserWarning)
