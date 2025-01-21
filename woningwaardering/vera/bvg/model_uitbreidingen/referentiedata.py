@@ -21,7 +21,9 @@ class _Referentiedata(Referentiedata):
     @classmethod
     def niet_optioneel(cls, value: str) -> str:
         if value is None or value.strip() == "":
-            raise ValueError("de code van een Referentiedata object mag niet leeg zijn")
+            raise ValueError(
+                "de code van een Referentiedata object mag niet leeg zijn."
+            )
         return value
 
     def __eq__(self, other: object) -> bool:

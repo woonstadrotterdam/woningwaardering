@@ -5,8 +5,11 @@
 
 from __future__ import annotations
 
+import warnings
 from datetime import date
-from typing import Optional, Union
+from functools import reduce
+from operator import getitem
+from typing import Any, Optional, Union
 
 from pydantic import (
     AnyUrl,
@@ -15,6 +18,9 @@ from pydantic import (
     ConfigDict,
     Field,
     RootModel,
+    ValidationError,
+    ValidationInfo,
+    ValidatorFunctionWrapHandler,
     field_validator,
 )
 
@@ -78,7 +84,9 @@ class Referentiedata(BaseModel):
     @classmethod
     def niet_optioneel(cls, value: str) -> str:
         if value is None or value.strip() == "":
-            raise ValueError("de code van een Referentiedata object mag niet leeg zijn")
+            raise ValueError(
+                "de code van een Referentiedata object mag niet leeg zijn."
+            )
         return value
 
     def __eq__(self, other: object) -> bool:
@@ -3393,6 +3401,46 @@ class EenhedenEenheid(BaseModel):
     """
     De datum waarop de huurovereenkomst is afgesloten.
     """
+
+    @field_validator("*", mode="wrap")
+    @classmethod
+    def warning_bij_validatiefout(
+        cls, value: Any, handler: ValidatorFunctionWrapHandler, info: ValidationInfo
+    ):
+        try:
+            return handler(value)
+        except ValidationError as err:
+            errors: list[str] = []
+
+            # Loop door alle fouten in de ValidationError
+            for error in err.errors():
+                # Haal het pad naar het veld op waar de fout optrad
+                locs = tuple(error.get("loc", []))
+                # Maak een leesbaar pad door veldnamen met punten te verbinden
+                field_path = ".".join(str(loc) for loc in (info.field_name,) + locs)
+                # Haal de foutmelding op, of gebruik 'Onbekende fout' als er geen melding is
+                error_msg = error.get("msg", "Onbekende fout")
+
+                readable_error = (
+                    f"Validatiefout in attribuut '{field_path}'. {error_msg}"
+                )
+                errors.append(readable_error)
+
+            # Geef alle fouten als één waarschuwing
+            warnings.warn(" ".join(errors), UserWarning)
+
+            # Verwijder het veld met de fout
+            for error in err.errors():
+                locs = tuple(error.get("loc", []))
+                parent_object = reduce(getitem, locs[:-1], value)
+
+                if isinstance(parent_object, dict):
+                    del parent_object[locs[-1]]
+                else:
+                    delattr(parent_object, str(locs[-1]))
+
+            # Probeer de waarde opnieuw te valideren
+            return handler(value)
 
 
 class WoningwaarderingResultatenWoningwaarderingResultaatbericht(
