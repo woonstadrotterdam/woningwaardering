@@ -6,7 +6,7 @@ tasks:
     cmds:
       - |
         datamodel-codegen \
-          --url https://raw.githubusercontent.com/Aedes-datastandaarden/vera-openapi/main/docs/Ketenprocessen/BVG.yaml \
+          --url https://raw.githubusercontent.com/Aedes-datastandaarden/vera-openapi/refs/tags/v4.1.5/docs/Ketenprocessen/BVG.yaml \
           --input-file-type openapi \
           --output woningwaardering/vera/bvg/generated.py \
           --output-model-type pydantic_v2.BaseModel \
