@@ -5,9 +5,9 @@ from tests.utils import assert_output_model
 from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
-    EenhedenAdresBasis,
     EenhedenAdresseerbaarObjectBasisregistratie,
     EenhedenEenheid,
+    EenhedenEenheidadres,
     EenhedenEnergieprestatie,
     EenhedenPand,
     EenhedenRuimte,
@@ -36,15 +36,15 @@ def test_readme_python_voorbeeld():
         id="37101000032",
         bouwjaar=1924,
         woningwaarderingstelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
-        adres=EenhedenAdresBasis(
+        adres=EenhedenEenheidadres(
             straatnaam="Nieuwe Boezemstraat",
             huisnummer="27",
             huisnummer_toevoeging="",
             postcode="3034PH",
             woonplaats=EenhedenWoonplaats(naam="ROTTERDAM"),
         ),
-        adresseerbaarObjectBasisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-            id="0599010000485697", bagIdentificatie="0599010000485697"
+        adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
+            id="0599010000485697", bag_identificatie="0599010000485697"
         ),
         panden=[
             EenhedenPand(
@@ -53,10 +53,10 @@ def test_readme_python_voorbeeld():
         ],
         woz_eenheden=[
             EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgesteldeWaarde=618000
+                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=618000
             ),
             EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgesteldeWaarde=643000
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=643000
             ),
         ],
         energieprestaties=[
@@ -76,30 +76,27 @@ def test_readme_python_voorbeeld():
             EenhedenRuimte(
                 id="Space_108014589",
                 soort=Ruimtesoort.vertrek,
-                detailSoort=Ruimtedetailsoort.slaapkamer,
+                detail_soort=Ruimtedetailsoort.slaapkamer,
                 naam="Slaapkamer",
                 inhoud=60.4048,
                 oppervlakte=21.047,
                 verwarmd=True,
-                gemeenschappelijk=True,
             ),
             EenhedenRuimte(
                 id="Space_108006229",
                 soort=Ruimtesoort.vertrek,
-                detailSoort=Ruimtedetailsoort.keuken,
+                detail_soort=Ruimtedetailsoort.keuken,
                 naam="Keuken",
                 inhoud=57.4359,
                 oppervlakte=20.3673,
                 verwarmd=True,
-                gemeenschappelijk=True,
-                bouwkundigeElementen=[
+                bouwkundige_elementen=[
                     BouwkundigElementenBouwkundigElement(
                         id="Aanrecht_108006231",
-                        id_bimmodel="3ZBiDoTKz0JfnjhzfVcYcF",
                         naam="Aanrecht",
                         omschrijving="Aanrecht in Keuken",
                         soort=Bouwkundigelementsoort.voorziening,
-                        detailSoort=Bouwkundigelementdetailsoort.aanrecht,
+                        detail_soort=Bouwkundigelementdetailsoort.aanrecht,
                         lengte=2700,
                     )
                 ],
