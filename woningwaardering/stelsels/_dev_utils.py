@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 import sys
 import warnings
 from typing import Any, Optional
 
+import loguru
 from loguru import logger
 
 from woningwaardering._logging import verkort_path
@@ -56,9 +59,9 @@ class DevelopmentContext:
         pass
 
     def _setup_logging(self) -> None:
-        def custom_dev_filter(record: dict[str, Any]) -> bool:
+        def custom_dev_filter(record: loguru.Record) -> bool:
             record["extra"]["formatted_name_with_line"] = verkort_path(
-                record["name"], record["line"], dev=True
+                str(record["name"]), record["line"], dev=True
             )
             return True
 
