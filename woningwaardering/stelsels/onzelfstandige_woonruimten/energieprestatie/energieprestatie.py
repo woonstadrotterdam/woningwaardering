@@ -40,12 +40,18 @@ LOOKUP_TABEL_FOLDER = (
 class Energieprestatie(Stelselgroep):
     lookup_mapping = {
         "label_ei": pd.read_csv(
-            files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/label_en_energie-index.csv"
+            str(
+                files("woningwaardering").joinpath(
+                    f"{LOOKUP_TABEL_FOLDER}/label_en_energie-index.csv"
+                )
             )
         ),
         "bouwjaar": pd.read_csv(
-            files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/bouwjaar.csv")
+            str(
+                files("woningwaardering").joinpath(
+                    f"{LOOKUP_TABEL_FOLDER}/bouwjaar.csv"
+                )
+            )
         ),
     }
 
