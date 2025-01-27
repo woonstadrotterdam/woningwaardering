@@ -16,7 +16,7 @@ from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
+    EenhedenEenheidbericht,
     EenhedenEnergieprestatie,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
@@ -69,7 +69,7 @@ class Energieprestatie(Stelselgroep):
 
     def waardeer(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
@@ -169,7 +169,7 @@ class Energieprestatie(Stelselgroep):
 
     def _bereken_punten_met_label(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         oppervlakte: float,
         energieprestatie: EenhedenEnergieprestatie,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
@@ -244,7 +244,7 @@ class Energieprestatie(Stelselgroep):
 
     def _bereken_punten_met_bouwjaar(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         oppervlakte: float,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
@@ -252,7 +252,7 @@ class Energieprestatie(Stelselgroep):
         Berekent de punten voor Energieprestatie op basis van het bouwjaar.
 
         Args:
-            eenheid (EenhedenEenheid): Eenheid
+            eenheid (EenhedenEenheidbericht): Eenheid
             oppervlakte (float): Oppervlakte
             woningwaardering (WoningwaarderingResultatenWoningwaardering): De waardering voor Energieprestatie tot zover.
 
@@ -296,12 +296,12 @@ class Energieprestatie(Stelselgroep):
 
         return woningwaardering
 
-    def _oppervlakte_vertrekken(self, eenheid: EenhedenEenheid) -> float:
+    def _oppervlakte_vertrekken(self, eenheid: EenhedenEenheidbericht) -> float:
         """
         Berekent de oppervlakte van de vertrekken in de eenheid.
 
         Args:
-            eenheid (EenhedenEenheid): Eenheid
+            eenheid (EenhedenEenheidbericht): Eenheid
 
         Returns:
             float: Oppervlakte van de vertrekken.

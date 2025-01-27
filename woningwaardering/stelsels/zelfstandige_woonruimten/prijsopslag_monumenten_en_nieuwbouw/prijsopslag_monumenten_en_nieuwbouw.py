@@ -15,7 +15,7 @@ from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
+    EenhedenEenheidbericht,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -45,7 +45,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
     def waardeer(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
@@ -97,7 +97,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
     def _genereer_woningwaarderingen(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None,
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
@@ -110,7 +110,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
     def _opslag_nieuwbouw(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
@@ -124,7 +124,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         - Het puntentotaal tussen 144 en 186 punten ligt
 
         Args:
-            eenheid (EenhedenEenheid): De te waarderen eenheid
+            eenheid (EenhedenEenheidbericht): De te waarderen eenheid
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None, optional):
                 Bestaand waarderingsresultaat. Defaults to None.
 

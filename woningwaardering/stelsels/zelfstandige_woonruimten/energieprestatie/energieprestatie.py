@@ -13,7 +13,7 @@ from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
+    EenhedenEenheidbericht,
     EenhedenEnergieprestatie,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
@@ -65,7 +65,7 @@ class Energieprestatie(Stelselgroep):
 
     def _bereken_punten_met_label(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         energieprestatie: EenhedenEnergieprestatie,
         pandsoort: PandsoortReferentiedata,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
@@ -146,7 +146,7 @@ class Energieprestatie(Stelselgroep):
 
     def _bereken_punten_met_bouwjaar(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         pandsoort: PandsoortReferentiedata,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> WoningwaarderingResultatenWoningwaardering:
@@ -154,7 +154,7 @@ class Energieprestatie(Stelselgroep):
         Berekent de punten voor Energieprestatie op basis van het bouwjaar.
 
         Args:
-            eenheid (EenhedenEenheid): Eenheid
+            eenheid (EenhedenEenheidbericht): Eenheid
             pandsoort (PandsoortReferentiedata): Pandsoort
             woningwaardering (WoningwaarderingResultatenWoningwaardering): De waardering voor Energieprestatie tot zover.
 
@@ -190,7 +190,7 @@ class Energieprestatie(Stelselgroep):
 
     def waardeer(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,

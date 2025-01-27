@@ -6,7 +6,7 @@ from loguru import logger
 
 from woningwaardering.stelsels.utils import gedeeld_met_eenheden, rond_af
 from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
+    EenhedenEenheidbericht,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -25,7 +25,7 @@ from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 
 def waardeer_bijzondere_voorzieningen(
     peildatum: date,
-    eenheid: EenhedenEenheid,
+    eenheid: EenhedenEenheidbericht,
     stelselgroepen_zonder_opslag: list[WoningwaarderingstelselgroepReferentiedata],
     stelsel: WoningwaarderingstelselReferentiedata,
     woningwaardering_resultaat: (
@@ -36,7 +36,7 @@ def waardeer_bijzondere_voorzieningen(
 
     Args:
         peildatum (date): De peildatum.
-        eenheid (EenhedenEenheid): De eenheid.
+        eenheid (EenhedenEenheidbericht): De eenheid.
         stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]): De stelselgroepen die niet moeten worden opgehoogd met zorgwoning opslag.
         stelsel (WoningwaarderingstelselReferentiedata): Het woningwaarderingsstelsel.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het woningwaardering resultaat.
@@ -63,7 +63,7 @@ def waardeer_bijzondere_voorzieningen(
 
 def _opslag_zorgwoning(
     peildatum: date,
-    eenheid: EenhedenEenheid,
+    eenheid: EenhedenEenheidbericht,
     stelselgroepen_zonder_opslag: list[WoningwaarderingstelselgroepReferentiedata],
     stelsel: WoningwaarderingstelselReferentiedata,
     woningwaardering_resultaat: (
@@ -76,7 +76,7 @@ def _opslag_zorgwoning(
 
     Args:
         peildatum (date): De peildatum voor de berekening.
-        eenheid (EenhedenEenheid): De eenheid die wordt gewaardeerd.
+        eenheid (EenhedenEenheidbericht): De eenheid die wordt gewaardeerd.
         stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]): Lijst van stelselgroepen die niet worden meegenomen in de opslag.
         stelsel (WoningwaarderingstelselReferentiedata): Het type woningwaarderingsstelsel.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het bestaande waarderingsresultaat, indien aanwezig.
@@ -160,14 +160,14 @@ def _opslag_zorgwoning(
 
 
 def _aanbelfunctie_met_video_en_audioverbinding(
-    eenheid: EenhedenEenheid,
+    eenheid: EenhedenEenheidbericht,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Een aanbelfunctie met video- en audioverbinding waarbij de voordeur
     automatisch kan worden geopend vanuit de woning wordt gewaardeerd
     met 0,25 punt.
 
     Args:
-        eenheid (EenhedenEenheid): De eenheid waarvoor de opslag berekend wordt.
+        eenheid (EenhedenEenheidbericht): De eenheid waarvoor de opslag berekend wordt.
 
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De woningwaardering met 0,25 punt
@@ -196,13 +196,13 @@ def _aanbelfunctie_met_video_en_audioverbinding(
 
 
 def _prive_laadpaal(
-    eenheid: EenhedenEenheid,
+    eenheid: EenhedenEenheidbericht,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik
     door de bewoners wordt gewaardeerd met 2 punten.
 
     Args:
-        eenheid (EenhedenEenheid): De eenheid waarvoor de waardering berekend wordt.
+        eenheid (EenhedenEenheidbericht): De eenheid waarvoor de waardering berekend wordt.
     Returns:
         WoningwaarderingResultatenWoningwaardering | None: De woningwaardering met 2 punten
         als de eenheid een laadpaal heeft, anders None.

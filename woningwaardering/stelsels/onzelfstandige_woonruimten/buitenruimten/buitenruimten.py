@@ -15,7 +15,7 @@ from woningwaardering.stelsels.utils import (
     gedeeld_met_onzelfstandige_woonruimten,
 )
 from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
+    EenhedenEenheidbericht,
     EenhedenRuimte,
     WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
@@ -48,7 +48,7 @@ class Buitenruimten(Stelselgroep):
 
     def waardeer(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
@@ -227,14 +227,14 @@ class Buitenruimten(Stelselgroep):
 
     def _maximering(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
     ) -> WoningwaarderingResultatenWoningwaardering | None:
         """Berekent de maximering voor Buitenruimten. Maximaal 15 punten toegestaan.
 
 
         Args:
-            eenheid (EenhedenEenheid): Eenheid waarvoor de maximering berekend wordt.
+            eenheid (EenhedenEenheidbericht): Eenheid waarvoor de maximering berekend wordt.
             woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): Woningwaardering groep van buitenruimten.
 
         Returns:
@@ -359,13 +359,13 @@ class Buitenruimten(Stelselgroep):
 
     def _prive_buitenruimten_aanwezig(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
     ) -> WoningwaarderingResultatenWoningwaardering | None:
         """Kent 2 punten toe bij de aanwezigheid van privé buitenruimten.
 
         Args:
-            eenheid (EenhedenEenheid): Eenheid waarvoor de punten berekend worden.
+            eenheid (EenhedenEenheidbericht): Eenheid waarvoor de punten berekend worden.
             woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): Woningwaardering groep van buitenruimten.
 
         Returns:

@@ -3,7 +3,7 @@ from datetime import date
 from loguru import logger
 
 from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
+    EenhedenEenheidbericht,
     EenhedenPrijscomponent,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
@@ -16,7 +16,7 @@ from woningwaardering.vera.referentiedata import (
 
 
 def monument_correctie(
-    eenheid: EenhedenEenheid,
+    eenheid: EenhedenEenheidbericht,
     woningwaardering: WoningwaarderingResultatenWoningwaardering,
 ) -> WoningwaarderingResultatenWoningwaardering | None:
     """
@@ -24,7 +24,7 @@ def monument_correctie(
     Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
 
     Args:
-        eenheid (EenhedenEenheid): Eenheid
+        eenheid (EenhedenEenheidbericht): Eenheid
         woningwaardering (WoningwaarderingResultatenWoningwaardering): De waardering voor Energieprestatie tot zover.
 
     Returns:
@@ -59,14 +59,14 @@ def monument_correctie(
 
 def get_energieprestatievergoeding(
     peildatum: date,
-    eenheid: EenhedenEenheid,
+    eenheid: EenhedenEenheidbericht,
 ) -> EenhedenPrijscomponent | None:
     """
     Geeft de eerst gevonden geldige energieprestatievergoeding voor de eenheid.
 
     Args:
         peildatum (date): Peildatum
-        eenheid (EenhedenEenheid): Eenheid
+        eenheid (EenhedenEenheidbericht): Eenheid
 
     Returns:
         EenhedenPrijscomponent | None: Energieprestatievergoeding of None indien niet gevonden.

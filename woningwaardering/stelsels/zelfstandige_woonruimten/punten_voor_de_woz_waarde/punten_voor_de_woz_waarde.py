@@ -11,7 +11,7 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
+    EenhedenEenheidbericht,
     EenhedenWozEenheid,
     WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
@@ -59,7 +59,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def waardeer(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
@@ -263,7 +263,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def _corrigeer_woz_punten(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
@@ -274,7 +274,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             - De punten voor WOZ-waarde meer dan 33.33% van het totaal aantal punten bedraagt en geen nieuwbouwwoning is.
 
         Args:
-            eenheid (EenhedenEenheid): De eenheid.
+            eenheid (EenhedenEenheidbericht): De eenheid.
             woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): De woningwaardering groep.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
@@ -487,7 +487,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def bepaal_oppervlakte(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> Decimal:
         """
@@ -495,7 +495,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         en de som van de oppervlakte van parkeerplekken Type I uit Rubriek 10 / het aantal adressen waar iedere parkeerplek Type I mee gedeeld wordt.
 
         Args:
-            eenheid (EenhedenEenheid): De eenheid.
+            eenheid (EenhedenEenheidbericht): De eenheid.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten object.
 
         Returns:
@@ -557,14 +557,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def _bereken_minimum_punten_nieuwbouw(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> Decimal:
         """
         Berekent de minimum punten voor steselgroep WOZ-waarde bij nieuwbouw of hoogniveau renovatie.
 
         Args:
-            eenheid (EenhedenEenheid): De eenheid.
+            eenheid (EenhedenEenheidbericht): De eenheid.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
@@ -617,12 +617,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         return minimum_punten
 
-    def bepaal_woz_eenheid(self, eenheid: EenhedenEenheid) -> EenhedenWozEenheid | None:
+    def bepaal_woz_eenheid(
+        self, eenheid: EenhedenEenheidbericht
+    ) -> EenhedenWozEenheid | None:
         """
         bepaalt de WOZ-waarde voor de eenheid.
 
         Args:
-            eenheid (EenhedenEenheid): de eenheid waarvoor de WOZ-waarde wordt bepaald.
+            eenheid (EenhedenEenheidbericht): de eenheid waarvoor de WOZ-waarde wordt bepaald.
 
         Returns:
             EenhedenWozEenheid | None: de WOZ-waarde.

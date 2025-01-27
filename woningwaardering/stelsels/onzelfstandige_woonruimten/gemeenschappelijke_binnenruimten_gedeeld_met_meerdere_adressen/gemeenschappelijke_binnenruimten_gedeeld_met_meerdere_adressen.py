@@ -18,7 +18,7 @@ from woningwaardering.stelsels.onzelfstandige_woonruimten.sanitair import (
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
+    EenhedenEenheidbericht,
     EenhedenRuimte,
     Referentiedata,
     WoningwaarderingCriteriumSleutels,
@@ -51,7 +51,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
 
     def waardeer(
         self,
-        eenheid: EenhedenEenheid,
+        eenheid: EenhedenEenheidbericht,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
@@ -153,7 +153,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         return woningwaardering_groep
 
     def _zorgwoning(
-        self, eenheid: EenhedenEenheid
+        self, eenheid: EenhedenEenheidbericht
     ) -> WoningwaarderingResultatenWoningwaardering | None:
         """
         Beleidsboek: De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en
@@ -163,7 +163,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         van 3 punten per woning.
 
         Args:
-            eenheid (EenhedenEenheid): Eenheid
+            eenheid (EenhedenEenheidbericht): Eenheid
 
         Returns:
             WoningwaarderingResultatenWoningwaardering | None: Woningwaardering van 3 punten voor een zorgwoning of None als de eenheid geen zorgwoning is
