@@ -295,6 +295,7 @@ class Sanitair(Stelselgroep):
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
                                     gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                    is_totaal=True,
                                 )
                             )
                         )
@@ -309,6 +310,7 @@ class Sanitair(Stelselgroep):
                                     CriteriumId(
                                         stelselgroep=self.stelselgroep,
                                         gedeeld_met_aantal=1,
+                                        is_totaal=True,
                                     )
                                 )
                             )
@@ -329,6 +331,7 @@ class Sanitair(Stelselgroep):
                         stelselgroep=self.stelselgroep,
                         gedeeld_met_aantal=aantal_onz,
                         gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                        is_totaal=True,
                     )
                 ),
             )

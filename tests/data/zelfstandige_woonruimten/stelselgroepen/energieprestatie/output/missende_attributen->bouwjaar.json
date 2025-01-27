@@ -15,7 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "energieprestatie__totaal__bouwjaar",
+            "id": "energieprestatie__bouwjaar",
             "naam": "Bouwjaar 1921"
           },
           "punten": -15.0

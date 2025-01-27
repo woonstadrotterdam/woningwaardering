@@ -15,7 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "prijsopslag_monumenten_en_nieuwbouw__totaal__nieuwbouw",
+            "id": "prijsopslag_monumenten_en_nieuwbouw__nieuwbouw",
             "naam": "Nieuwbouw"
           },
           "opslagpercentage": 0.1

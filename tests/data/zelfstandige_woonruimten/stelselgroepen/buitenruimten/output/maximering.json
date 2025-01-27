@@ -45,7 +45,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__totaal__aanwezig__prive",
+            "id": "buitenruimten__aanwezig__prive",
             "naam": "Buitenruimten aanwezig",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__totaal__prive"
@@ -67,7 +67,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__totaal__maximering",
+            "id": "buitenruimten__maximering",
             "naam": "Maximaal 15 punten"
           },
           "punten": -2.75

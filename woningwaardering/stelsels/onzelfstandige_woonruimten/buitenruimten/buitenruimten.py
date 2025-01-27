@@ -89,7 +89,9 @@ class Buitenruimten(Stelselgroep):
                         WoningwaarderingCriteriumSleutels(
                             id=str(
                                 CriteriumId(
-                                    stelselgroep=self.stelselgroep, gedeeld_met_aantal=1
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=1,
+                                    is_totaal=True,
                                 )
                             )
                         )
@@ -101,6 +103,7 @@ class Buitenruimten(Stelselgroep):
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
                                 gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                is_totaal=True,
                             )
                         )
                     )
@@ -111,6 +114,7 @@ class Buitenruimten(Stelselgroep):
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
                                 gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                is_totaal=True,
                             )
                         )
                     )
@@ -162,6 +166,7 @@ class Buitenruimten(Stelselgroep):
                                 CriteriumId(
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=1,
+                                    is_totaal=True,
                                 )
                             ),
                         )
@@ -180,6 +185,7 @@ class Buitenruimten(Stelselgroep):
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=aantal_adressen,
                                     gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                    is_totaal=True,
                                 )
                             ),
                         )
@@ -194,6 +200,7 @@ class Buitenruimten(Stelselgroep):
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=aantal_onz,
                                     gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                    is_totaal=True,
                                 )
                             )
                         )
@@ -212,6 +219,7 @@ class Buitenruimten(Stelselgroep):
                             stelselgroep=self.stelselgroep,
                             gedeeld_met_aantal=aantal_onz,
                             gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                            is_totaal=True,
                         )
                     ),
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -268,6 +276,12 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Geen buitenruimten",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="geen_buitenruimten",
+                        )
+                    ),
                 )
             )
             woningwaardering.punten = -5.0
@@ -301,6 +315,12 @@ class Buitenruimten(Stelselgroep):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="maximaal_15_punten",
+                        )
+                    ),
                     naam="Maximaal 15 punten",
                 )
             )
@@ -380,6 +400,14 @@ class Buitenruimten(Stelselgroep):
                     naam=ruimte.naam
                     if not gedeeld_met_eenheden(ruimte)
                     else f"{ruimte.naam}",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            ruimte_id=ruimte.id,
+                            gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
+                            gedeeld_met_soort=GedeeldMetSoort.adressen,
+                        )
+                    ),
                 )
             )
             woningwaardering.aantal = float(
@@ -436,6 +464,7 @@ class Buitenruimten(Stelselgroep):
                             CriteriumId(
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=1,
+                                is_totaal=True,
                             )
                         )
                     ),

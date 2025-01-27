@@ -15,7 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "prijsopslag_monumenten_en_nieuwbouw__totaal__beschermd_stads_of_dorpsgezicht",
+            "id": "prijsopslag_monumenten_en_nieuwbouw__beschermd_stads_of_dorpsgezicht",
             "naam": "Beschermd stads- of dorpsgezicht"
           },
           "opslagpercentage": 0.05

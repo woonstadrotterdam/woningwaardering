@@ -153,7 +153,7 @@
         {
           "aantal": 24.5,
           "criterium": {
-            "id": "energieprestatie__totaal__bouwjaar",
+            "id": "energieprestatie__bouwjaar",
             "naam": "Bouwjaar 1998",
             "meeteenheid": {
               "code": "M2",
@@ -260,6 +260,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "buitenruimten__geen_buitenruimten",
             "naam": "Geen buitenruimten"
           },
           "punten": -5.0
@@ -310,7 +311,7 @@
         {
           "aantal": 184000.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__woz_waarde",
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
@@ -320,7 +321,7 @@
         {
           "aantal": 58.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__gebruiksoppervlakte",
+            "id": "punten_voor_de_woz_waarde__gebruiksoppervlakte",
             "naam": "Gebruiksoppervlakte",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
@@ -334,7 +335,7 @@
         {
           "aantal": 3172.41379,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__woz_waarde_per_m2",
+            "id": "punten_voor_de_woz_waarde__woz_waarde_per_m2",
             "naam": "WOZ-waarde per m²",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
@@ -344,7 +345,7 @@
         {
           "aantal": 3414.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__gemiddelde_woz_waarde_per_m2",
+            "id": "punten_voor_de_woz_waarde__gemiddelde_woz_waarde_per_m2",
             "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"

@@ -16,14 +16,14 @@
         {
           "aantal": 239999.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__woz_waarde",
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
           }
         },
         {
           "aantal": 14543.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__factor_I",
+            "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
@@ -40,7 +40,7 @@
         {
           "aantal": 60.05,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__oppervlakte_vertrekken_en_overige_ruimten",
+            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
@@ -54,7 +54,7 @@
         {
           "aantal": 229.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__factor_II",
+            "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"

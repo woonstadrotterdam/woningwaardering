@@ -15,7 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "prijsopslag_monumenten_en_nieuwbouw__totaal__gemeentelijk_of_provinciaal_monument",
+            "id": "prijsopslag_monumenten_en_nieuwbouw__gemeentelijk_of_provinciaal_monument",
             "naam": "Gemeentelijk of provinciaal monument"
           },
           "opslagpercentage": 0.15

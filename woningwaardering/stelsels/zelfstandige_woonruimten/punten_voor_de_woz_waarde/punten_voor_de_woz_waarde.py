@@ -138,10 +138,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         id_onderdeel_I = str(
-            CriteriumId(stelselgroep=self.stelselgroep, criterium="onderdeel_I")
+            CriteriumId(
+                stelselgroep=self.stelselgroep, criterium="onderdeel_I", is_totaal=True
+            )
         )
         id_onderdeel_II = str(
-            CriteriumId(stelselgroep=self.stelselgroep, criterium="onderdeel_II")
+            CriteriumId(
+                stelselgroep=self.stelselgroep, criterium="onderdeel_II", is_totaal=True
+            )
         )
 
         woningwaardering_groep.woningwaarderingen.append(
@@ -170,7 +174,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                                 criterium="minimum_woz_waarde",
                             )
                         ),
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                             id=id_onderdeel_I,
                         ),
                     ),
@@ -187,7 +191,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                             criterium="factor_I",
                         )
                     ),
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                         id=id_onderdeel_I,
                     ),
                 ),
@@ -234,7 +238,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                                 criterium="minimum_woz_waarde",
                             )
                         ),
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                             id=id_onderdeel_II,
                         ),
                     ),
@@ -252,7 +256,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                             criterium="oppervlakte_vertrekken_en_overige_ruimten",
                         )
                     ),
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                         id=id_onderdeel_II,
                     ),
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -270,7 +274,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                             criterium="factor_II",
                         )
                     ),
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                         id=id_onderdeel_II,
                     ),
                 ),

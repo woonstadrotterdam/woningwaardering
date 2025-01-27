@@ -92,7 +92,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         puntenwaardering_sleutel = WoningwaarderingCriteriumSleutels(
             id=str(
                 CriteriumId(
-                    stelselgroep=self.stelselgroep, criterium="percentage_verschil"
+                    stelselgroep=self.stelselgroep,
+                    criterium="percentage_verschil",
+                    is_totaal=True,
                 )
             )
         )
@@ -107,7 +109,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                             criterium="woz_waarde",
                         )
                     ),
-                    bovenliggendeCriterium=puntenwaardering_sleutel,
+                    bovenliggende_criterium=puntenwaardering_sleutel,
                 ),
                 aantal=woz_waarde,
             )
@@ -156,7 +158,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                                 criterium="minimum_woz_waarde",
                             )
                         ),
-                        bovenliggendeCriterium=puntenwaardering_sleutel,
+                        bovenliggende_criterium=puntenwaardering_sleutel,
                     ),
                     aantal=minimum_woz_waarde,
                 )
@@ -193,7 +195,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                         )
                     ),
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
-                    bovenliggendeCriterium=puntenwaardering_sleutel,
+                    bovenliggende_criterium=puntenwaardering_sleutel,
                 ),
                 aantal=gebruiksoppervlakte,
             )
@@ -211,7 +213,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                             criterium="woz_waarde_per_m2",
                         )
                     ),
-                    bovenliggendeCriterium=puntenwaardering_sleutel,
+                    bovenliggende_criterium=puntenwaardering_sleutel,
                 ),
                 aantal=woz_waarde_per_m2,
             )
@@ -265,7 +267,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                             criterium="gemiddelde_woz_waarde_per_m2",
                         )
                     ),
-                    bovenliggendeCriterium=puntenwaardering_sleutel,
+                    bovenliggende_criterium=puntenwaardering_sleutel,
                 ),
                 aantal=gemiddelde_woz_waarde_per_m2,
             )
@@ -315,6 +317,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                         CriteriumId(
                             stelselgroep=self.stelselgroep,
                             criterium="percentage_verschil",
+                            is_totaal=True,
                         )
                     ),
                 ),

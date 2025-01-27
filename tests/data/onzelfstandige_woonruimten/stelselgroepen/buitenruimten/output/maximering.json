@@ -57,6 +57,7 @@
         },
         {
           "criterium": {
+            "id": "buitenruimten__maximaal_15_punten",
             "naam": "Maximaal 15 punten"
           },
           "punten": -1.875

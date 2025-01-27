@@ -14,29 +14,32 @@ class CriteriumId:
     def __init__(
         self,
         stelselgroep: WoningwaarderingstelselgroepReferentiedata,
-        ruimte_id: str | None = "totaal",
+        ruimte_id: str | None = None,
         criterium: str = "",
         gedeeld_met_aantal: int | None = None,
         gedeeld_met_soort: GedeeldMetSoort | None = None,
+        is_totaal: bool = False,
     ):
         self.stelselgroep = stelselgroep
         self.ruimte_id = ruimte_id
         self.criterium = criterium
         self.gedeeld_met_aantal = gedeeld_met_aantal
         self.gedeeld_met_soort = gedeeld_met_soort
+        self.is_totaal = is_totaal
 
     def __str__(self) -> str:
         """Genereert de criterium id string."""
         onderdelen = [self.stelselgroep.name]
 
-        # Voeg ruimte_id toe als deze bestaat, anders een lege string
-        onderdelen.append(self.ruimte_id or "")
+        if self.ruimte_id is not None:
+            onderdelen.append(self.ruimte_id)
 
-        # Controleer of criterium bestaat en voeg deze toe
+        if self.is_totaal:
+            onderdelen.append("totaal")
+
         if self.criterium:
             onderdelen.append(self.criterium)
 
-        # Voeg gedeeld met aantal en soort toe
         if self.gedeeld_met_aantal:
             if self.gedeeld_met_aantal <= 1:
                 onderdelen.append("prive")
@@ -45,5 +48,4 @@ class CriteriumId:
                 if self.gedeeld_met_soort:
                     onderdelen.append(self.gedeeld_met_soort.value)
 
-        # Combineer alle onderdelen met dubbele underscores
         return "__".join(onderdelen).strip("__")

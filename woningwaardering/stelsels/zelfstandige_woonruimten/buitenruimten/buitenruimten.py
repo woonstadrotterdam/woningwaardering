@@ -237,12 +237,13 @@ class Buitenruimten(Stelselgroep):
                         )
                     ),
                     naam=ruimte.naam,
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                         id=str(
                             CriteriumId(
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
                                 gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                is_totaal=True,
                             )
                         ),
                     ),
@@ -261,12 +262,13 @@ class Buitenruimten(Stelselgroep):
                                 ruimte_id=ruimte.id,
                             )
                         ),
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                             id=str(
                                 CriteriumId(
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=1,
                                     gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                    is_totaal=True,
                                 )
                             ),
                         ),
@@ -329,11 +331,12 @@ class Buitenruimten(Stelselgroep):
                             gedeeld_met_aantal=1,
                         )
                     ),
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
+                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                         id=str(
                             CriteriumId(
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=1,
+                                is_totaal=True,
                             )
                         ),
                     ),

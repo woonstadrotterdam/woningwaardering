@@ -15,7 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "bijzondere_voorzieningen__totaal__zorgwoning_puntenverhoging",
+            "id": "bijzondere_voorzieningen__zorgwoning_puntenverhoging",
             "naam": "Zorgwoning 35% puntenverhoging"
           },
           "punten": 34.3
