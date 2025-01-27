@@ -143,6 +143,29 @@ Mocht door de gebruiker logging worden uitgezet, dan zullen de UserWarnings alti
 Er wordt doorgaans in de stelgroepversies gebruik gemaakt van `warnings.warn()` in plaats van het raisen van een exception.
 Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroepen waarvoor de data wel compleet genoeg is, mits de `warnings.simplefilter` naar `default` is gezet.
 
+#### Criterium ID's
+
+De `CriteriumId` class wordt gebruikt om ID's te genereren voor criteria in de woningwaardering. Deze ID's worden opgebouwd uit verschillende onderdelen die worden samengevoegd met dubbele underscores (`__`).
+
+De opbouw van een criterium ID kan de volgende onderdelen bevatten:
+
+- Stelselgroep (verplicht, bijvoorbeeld 'buitenruimten' of 'energieprestatie')
+- Ruimte ID (optioneel, bijvoorbeeld 'Space_108014713')
+- Criterium (optioneel, bijvoorbeeld 'factor_II' of 'woz_waarde')
+- Gedeeld met aantal (optioneel, voor gedeelde voorzieningen)
+- Gedeeld met soort (optioneel, 'adressen' of 'onzelfstandige_woonruimten')
+- Totaal indicator (optioneel)
+
+Voorbeelden van gegenereerde ID's:
+
+- `buitenruimten__Space_108014713` (voor een specifieke ruimte)
+- `buitenruimten__totaal__prive` (voor een privé totaal)
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen` (voor gedeelde voorzieningen)
+
+Bij gedeelde voorzieningen wordt automatisch 'prive' toegevoegd als het aantal 1 of minder is, en anders wordt het aantal en soort toegevoegd (bijvoorbeeld `gedeeld_met__4__adressen`).
+
+Met deze ID's kan gerefereerd worden aan specifieke criteria in de output van de woningwaardering.
+
 #### Criteriumsleutels
 
 Bij sommige stelselgroepen heb je een aantal criteria die een gemeenschappelijke groep vormen. Bijvoorbeeld bij _verkoeling en verwarming_ mag je maximaal 2 extra punten krijgen voor vertrekken die verkoeld én verwarmd zijn. Daarnaast mag je ook maximaal 4 punten krijgen voor het aantal verwarmde overige- en verkeersruimten. Om te kunnen berekenen wat de som is van een subgroep en bijvoorbeeld maximering toe te passen maken wij gebruik van zogenoemde `criteriumSleutels`. Indien een waardering onderdeel is van een subgroep, dan wordt aan deze waardering in het veld `bovenliggendCriterium` de `id` toegevoegd van de waardering die hoort bij de subgroep. In het voorbeeld hieronder is bijvoorbeeld de subgroep `Verwarmde vertrekken` binnen `verkoeling en verwarming` duidelijk te zien in de output-tabel. Voorgedefinieerde criteriumsleutels vind je in `woningwaardering/stelsels/criteriumsleutels.py`. Momenteel ondersteunen wij nog geen meerdere niveau's van subgroepen. Een criterium dat voor een ander criterium een bovenliggend criterium is, mag zelf geen bovenliggend criterium hebben.
