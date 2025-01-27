@@ -483,7 +483,7 @@ with open(
         },
         {
           "criterium": {
-            "id": "buitenruimten__totaal__aanwezig__prive",
+            "id": "buitenruimten__aanwezig__prive",
             "naam": "Buitenruimten aanwezig",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__totaal__prive"
@@ -505,7 +505,7 @@ with open(
         },
         {
           "criterium": {
-            "id": "buitenruimten__totaal__maximering",
+            "id": "buitenruimten__maximering",
             "naam": "Maximaal 15 punten"
           },
           "punten": -11.96
@@ -527,7 +527,7 @@ with open(
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "energieprestatie__totaal__label",
+            "id": "energieprestatie__label",
             "naam": "C (Energie-index)"
           },
           "punten": 22.0
@@ -660,14 +660,14 @@ with open(
         {
           "aantal": 643000.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__woz_waarde",
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
           }
         },
         {
           "aantal": 14543.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__factor_I",
+            "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
@@ -684,7 +684,7 @@ with open(
         {
           "aantal": 147.52,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__oppervlakte_vertrekken_en_overige_ruimten",
+            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
@@ -698,7 +698,7 @@ with open(
         {
           "aantal": 229.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__factor_II",
+            "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
@@ -1061,7 +1061,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "buitenruimten__totaal__geen_buitenruimten",
+            "id": "buitenruimten__geen_buitenruimten",
             "naam": "Geen buitenruimten"
           },
           "punten": -5.0
@@ -1083,7 +1083,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "energieprestatie__totaal__label",
+            "id": "energieprestatie__label",
             "naam": "C (Energie-index)"
           },
           "punten": 22.0
@@ -1175,14 +1175,14 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
         {
           "aantal": 643000.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__woz_waarde",
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
           }
         },
         {
           "aantal": 14543.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__factor_I",
+            "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
@@ -1199,7 +1199,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
         {
           "aantal": 41.42,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__oppervlakte_vertrekken_en_overige_ruimten",
+            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
@@ -1213,7 +1213,7 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
         {
           "aantal": 229.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__factor_II",
+            "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
