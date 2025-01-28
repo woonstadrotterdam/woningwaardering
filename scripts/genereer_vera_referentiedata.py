@@ -22,7 +22,6 @@ time.tzset()
 
 output_folder = os.path.join("woningwaardering", "vera", "referentiedata")
 
-
 # url = "https://vera-service.azurewebsites.net/api/referentiedata?Version=latest"
 # response = requests.get(url)
 # source_data = json.load(loads(response.text)
@@ -320,3 +319,19 @@ for domein, soorten in domein_to_soorten.items():
         os.makedirs(domein_folder)
     with open(os.path.join(domein_folder, "__init__.py"), "w") as file:
         file.write(rendered_code)
+
+
+# Update README.md with the new version
+readme_path = "README.md"
+
+if os.path.exists(readme_path):
+    with open(readme_path, "r") as readme_file:
+        readme_content = readme_file.read()
+
+    # Update the version using regex
+    updated_content = re.sub(
+        r"(\[referentiedata )v[\d\.]+(\])", f"\\1{version}\\2", readme_content
+    )
+
+    with open(readme_path, "w") as readme_file:
+        readme_file.write(updated_content)
