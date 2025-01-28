@@ -1,3 +1,5 @@
+import os
+import re
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -46,6 +48,21 @@ def generate_models() -> None:
         field_include_all_keys=True,
         collapse_root_models=True,
     )
+
+    # Update README.md with the new version
+    readme_path = "README.md"
+
+    if os.path.exists(readme_path):
+        with open(readme_path, "r") as f:
+            readme_content = f.read()
+
+        # Update the version using regex
+        updated_content = re.sub(
+            r"(\[openapi )v[\d\.]+(\])", f"\\1{version}\\2", readme_content
+        )
+
+        with open(readme_path, "w") as f:
+            f.write(updated_content)
 
 
 if __name__ == "__main__":
