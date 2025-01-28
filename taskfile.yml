@@ -4,24 +4,9 @@ tasks:
   genereer-vera-bvg-modellen:
     desc: Genereer VERA BVG modellen
     cmds:
-      - |
-        datamodel-codegen \
-          --url https://raw.githubusercontent.com/Aedes-datastandaarden/vera-openapi/refs/tags/v4.1.5/docs/Ketenprocessen/BVG.yaml \
-          --input-file-type openapi \
-          --output woningwaardering/vera/bvg/generated.py \
-          --output-model-type pydantic_v2.BaseModel \
-          --use-standard-collections \
-          --use-default-kwarg \
-          --target-python-version 3.10 \
-          --use-field-description \
-          --snake-case-field \
-          --disable-timestamp \
-          --use-double-quotes \
-          --allow-population-by-field-name \
-          --use-title-as-name \
-          --field-include-all-keys \
-          --collapse-root-models \
+      - python scripts/genereer_vera_bvg_modellen.py
       - python scripts/uitbreiden_vera_modellen.py
+      - pre-commit run --files woningwaardering/vera/bvg/generated.py --hook-stage commit || true
   genereer-vera-referentiedata:
     desc: Genereer VERA referentiedata
     cmds:
