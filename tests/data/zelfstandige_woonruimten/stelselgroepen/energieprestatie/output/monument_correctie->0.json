@@ -15,12 +15,14 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "energieprestatie__bouwjaar",
             "naam": "Bouwjaar 1921"
           },
           "punten": -15.0
         },
         {
           "criterium": {
+            "id": "energieprestatie__correctie_monument",
             "naam": "Correctie monument"
           },
           "punten": 15.0

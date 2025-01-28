@@ -16,9 +16,10 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_992985__hangend_toilet",
             "naam": "Toiletruimte - Hangend toilet",
             "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
+              "id": "sanitair__totaal__prive"
             }
           },
           "punten": 3.75
@@ -26,16 +27,17 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_992985__staand_toilet",
             "naam": "Toiletruimte - Staand Toilet",
             "bovenliggendeCriterium": {
-              "id": "sanitair_prive"
+              "id": "sanitair__totaal__prive"
             }
           },
           "punten": 3.0
         },
         {
           "criterium": {
-            "id": "sanitair_prive",
+            "id": "sanitair__totaal__prive",
             "naam": "Totaal (privé)"
           },
           "punten": 6.75

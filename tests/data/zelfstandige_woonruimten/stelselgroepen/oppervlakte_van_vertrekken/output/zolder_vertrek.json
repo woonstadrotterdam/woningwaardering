@@ -16,6 +16,7 @@
         {
           "aantal": 10.0,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_1",
             "naam": "Zolder vertrek met trap",
             "meeteenheid": {
               "code": "M2",

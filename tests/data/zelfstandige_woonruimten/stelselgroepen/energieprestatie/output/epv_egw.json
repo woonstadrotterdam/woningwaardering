@@ -15,6 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "energieprestatie__energieprestatievergoeding",
             "naam": "Energieprestatievergoeding Eengezinswoning"
           },
           "punten": 32.0

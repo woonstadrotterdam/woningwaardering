@@ -16,9 +16,10 @@
         {
           "aantal": 3.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_491177",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten_prive"
+              "id": "oppervlakte_van_overige_ruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,9 +30,10 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_862208",
             "naam": "Bijkeuken",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten_prive"
+              "id": "oppervlakte_van_overige_ruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -42,7 +44,7 @@
         {
           "aantal": 5.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten_prive",
+            "id": "oppervlakte_van_overige_ruimten__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",

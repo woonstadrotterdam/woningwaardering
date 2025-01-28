@@ -15,6 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "energieprestatie__label",
             "naam": "A -> C (Energie-index)"
           },
           "punten": 22.0
