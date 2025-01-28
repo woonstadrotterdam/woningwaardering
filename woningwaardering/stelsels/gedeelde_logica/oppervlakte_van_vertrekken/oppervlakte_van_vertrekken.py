@@ -3,6 +3,7 @@ from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     rond_af,
@@ -46,6 +47,12 @@ def waardeer_oppervlakte_van_vertrek(
     woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
         meeteenheid=Meeteenheid.vierkante_meter_m2,
         naam=criterium_naam,
+        id=str(
+            CriteriumId(
+                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+                ruimte_id=ruimte.id,
+            )
+        ),
     )
     woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
 

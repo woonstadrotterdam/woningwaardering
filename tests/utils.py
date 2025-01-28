@@ -71,9 +71,25 @@ def assert_output_model(
     if colored_diff != "":
         fail(reason=f"Output komt niet overeen\n{colored_diff}", pytrace=False)
 
-    assert (
-        verwacht_resultaat == resultaat
-    ), "Output-model verschilt van verwacht resultaat"
+    difflines_json = list(
+        difflib.unified_diff(
+            fromfile="verwacht",
+            tofile="testresultaat",
+            a=verwacht_resultaat.model_dump_json(indent=2, exclude_none=True).split(
+                "\n"
+            ),
+            b=resultaat.model_dump_json(indent=2, exclude_none=True).split("\n"),
+            lineterm="",
+            n=3,
+        )
+    )
+
+    colored_diff_json = "\n".join(kleur_diff(difflines_json, use_loguru_colors=True))
+
+    if colored_diff_json != "":
+        fail(
+            reason=f"Json output komt niet overeen\n{colored_diff_json}", pytrace=False
+        )
 
     assert_som_bovenliggend_criterium(resultaat)
 

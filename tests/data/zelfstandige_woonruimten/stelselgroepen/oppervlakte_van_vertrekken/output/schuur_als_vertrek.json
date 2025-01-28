@@ -16,6 +16,7 @@
         {
           "aantal": 6.0,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Schuur_1",
             "naam": "Schuur als vertrek",
             "meeteenheid": {
               "code": "M2",

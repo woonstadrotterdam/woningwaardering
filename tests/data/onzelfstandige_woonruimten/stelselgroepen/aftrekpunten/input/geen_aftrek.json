@@ -1,6 +1,7 @@
 {
   "ruimten": [
     {
+      "id": "Space_920643",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"

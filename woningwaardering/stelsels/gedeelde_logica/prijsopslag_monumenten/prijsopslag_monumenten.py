@@ -3,6 +3,7 @@ from datetime import date
 
 from loguru import logger
 
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import update_eenheid_monumenten
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheidbericht,
@@ -74,6 +75,12 @@ def opslag_rijksmonument(
         woningwaardering = WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam="Rijksmonument",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten,
+                        criterium="rijksmonument",
+                    )
+                ),
             ),
         )
 
@@ -133,6 +140,12 @@ def opslag_gemeentelijk_of_provinciaal_monument(
         return WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam="Gemeentelijk of provinciaal monument",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+                        criterium="gemeentelijk_of_provinciaal_monument",
+                    )
+                ),
             ),
             opslagpercentage=0.15,
         )
@@ -215,6 +228,12 @@ def opslag_beschermd_stads_of_dorpsgezicht(
     return WoningwaarderingResultatenWoningwaardering(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Beschermd stads- of dorpsgezicht",
+            id=str(
+                CriteriumId(
+                    stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+                    criterium="beschermd_stads_of_dorpsgezicht",
+                )
+            ),
         ),
         opslagpercentage=0.05,
     )

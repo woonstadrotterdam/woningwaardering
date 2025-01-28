@@ -6,6 +6,7 @@ from dateutil.relativedelta import relativedelta
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
     check_monumenten_attribuut,
     opslag_beschermd_stads_of_dorpsgezicht,
@@ -170,6 +171,12 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 return WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Nieuwbouw",
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                criterium="nieuwbouw",
+                            )
+                        ),
                     ),
                     opslagpercentage=0.1,
                 )

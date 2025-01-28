@@ -6,6 +6,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
@@ -79,6 +80,12 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Zorgwoning",
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                criterium="zorgwoning",
+                            )
+                        ),
                     ),
                     punten=3.0,
                 )

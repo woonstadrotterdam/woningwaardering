@@ -16,21 +16,23 @@
         {
           "aantal": 553900.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
           }
         },
         {
           "aantal": 14543.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_I"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde_onderdeel_I",
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 38.09
@@ -38,9 +40,10 @@
         {
           "aantal": 60.05,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -51,21 +54,23 @@
         {
           "aantal": 229.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde_onderdeel_II",
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
           "punten": 40.28
         },
         {
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__maximering_woz_punten",
             "naam": "Maximering WOZ-punten tot 33% van totaal"
           },
           "punten": -12.37

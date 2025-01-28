@@ -16,6 +16,7 @@
         {
           "aantal": 10.0,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__keuken",
             "naam": "Keuken (gedeeld met 5)",
             "meeteenheid": {
               "code": "M2",
@@ -27,6 +28,7 @@
         {
           "aantal": 1000.0,
           "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
             "naam": "Keuken: Lengte aanrecht (gedeeld met 5)",
             "meeteenheid": {
               "code": "MIL",
@@ -38,15 +40,17 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "keuken__keuken__extra_voorziening",
             "naam": "Inbouw koelkast (in zelfde ruimte) (gedeeld met 5)"
           },
           "punten": 0.4
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__keuken",
             "naam": "Keuken (gedeeld met 5)",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
             }
           },
           "punten": 0.4

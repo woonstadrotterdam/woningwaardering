@@ -7,6 +7,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_verkoeling_en_verwarming,
 )
@@ -109,6 +110,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, defaultdict[str, Decimal]] = defaultdict(
             lambda: defaultdict(Decimal)
         )
+
         # {bovenliggend_criterium: {onzelfstandige_woonruimten: punten}}
         for ruimte, woningwaardering in waarderingen:
             gedeeld_met_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
@@ -125,20 +127,32 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         id=criterium_id,
-                        naam=criterium_id.capitalize().replace("_", " "),
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
-                            if aantal_onz > 1
-                            else f"{self.stelselgroep.name}_prive",
+                        naam=criterium_id.split("__")[-1]
+                        .capitalize()
+                        .replace("_", " "),
+                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=aantal_onz,
+                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                    is_totaal=True,
+                                )
+                            )
                         ),
                     ),
                     punten=float(punten),
                 )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
-                    if aantal_onz > 1
-                    else f"{self.stelselgroep.name}_prive",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            gedeeld_met_aantal=aantal_onz,
+                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                            is_totaal=True,
+                        )
+                    ),
                     naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
                     if aantal_onz > 1
                     else "Totaal (privé)",

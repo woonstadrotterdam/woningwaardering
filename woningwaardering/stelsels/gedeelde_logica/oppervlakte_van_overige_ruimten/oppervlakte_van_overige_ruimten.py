@@ -3,6 +3,7 @@ from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     rond_af,
@@ -43,6 +44,12 @@ def waardeer_oppervlakte_van_overige_ruimte(
     woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
         meeteenheid=Meeteenheid.vierkante_meter_m2,
         naam=criterium_naam,
+        id=str(
+            CriteriumId(
+                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+                ruimte_id=ruimte.id,
+            )
+        ),
     )
 
     woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
@@ -59,10 +66,15 @@ def waardeer_oppervlakte_van_overige_ruimte(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): maximaal correctie van -5 punten: zolder is niet bereikbaar via een vaste trap."
             )
             woningwaardering_correctie = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering_correctie.criterium = (
-                WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Correctie: zolder zonder vaste trap",
-                )
+            woningwaardering_correctie.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam="Correctie: zolder zonder vaste trap",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+                        ruimte_id=ruimte.id,
+                        criterium="correctie_zolder_zonder_vaste_trap",
+                    )
+                ),
             )
 
             # corrigeeer niet met meer punten dan de oppervlakte voor stelselgroep overige ruimten zou opleveren

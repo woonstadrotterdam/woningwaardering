@@ -9,6 +9,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import (
+    CriteriumId,
+    GedeeldMetSoort,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -155,6 +159,12 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Maximaal 15 punten",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="maximering",
+                        )
+                    ),
                 )
             )
             woningwaardering.punten = float(aftrek)
@@ -218,9 +228,24 @@ class Buitenruimten(Stelselgroep):
                 )
                 woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            ruimte_id=ruimte.id,
+                            gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
+                            gedeeld_met_soort=GedeeldMetSoort.adressen,
+                        )
+                    ),
                     naam=ruimte.naam,
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_eenheden}_eenheden",
+                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
+                                gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                is_totaal=True,
+                            )
+                        ),
                     ),
                 )
             else:  # privé buitenruimte
@@ -231,8 +256,21 @@ class Buitenruimten(Stelselgroep):
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
                         naam=ruimte.naam,
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_prive",
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                ruimte_id=ruimte.id,
+                            )
+                        ),
+                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=1,
+                                    gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                    is_totaal=True,
+                                )
+                            ),
                         ),
                     )
                 )
@@ -262,6 +300,12 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Geen buitenruimten",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="geen_buitenruimten",
+                        )
+                    ),
                 )
             )
             woningwaardering.punten = -5.0
@@ -280,8 +324,21 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Buitenruimten aanwezig",
-                    bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                        id=f"{self.stelselgroep.name}_prive",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="aanwezig",
+                            gedeeld_met_aantal=1,
+                        )
+                    ),
+                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=1,
+                                is_totaal=True,
+                            )
+                        ),
                     ),
                 )
             )

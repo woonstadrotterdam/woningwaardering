@@ -16,9 +16,10 @@
         {
           "aantal": 12.0,
           "criterium": {
+            "id": "buitenruimten__Space_108017427",
             "naam": "Parkeerplaats",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -31,7 +32,7 @@
           "criterium": {
             "naam": "Privé buitenruimten aanwezig",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             }
           },
           "punten": 2.0
@@ -39,7 +40,7 @@
         {
           "aantal": 12.0,
           "criterium": {
-            "id": "buitenruimten_prive",
+            "id": "buitenruimten__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",

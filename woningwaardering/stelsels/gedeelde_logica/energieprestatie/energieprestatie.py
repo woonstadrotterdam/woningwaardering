@@ -2,6 +2,7 @@ from datetime import date
 
 from loguru import logger
 
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheidbericht,
     EenhedenPrijscomponent,
@@ -50,7 +51,13 @@ def monument_correctie(
         )
         return WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="Correctie monument"
+                naam="Correctie monument",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.energieprestatie,
+                        criterium="correctie_monument",
+                    )
+                ),
             ),
             punten=woningwaardering.punten * -1.0,
         )

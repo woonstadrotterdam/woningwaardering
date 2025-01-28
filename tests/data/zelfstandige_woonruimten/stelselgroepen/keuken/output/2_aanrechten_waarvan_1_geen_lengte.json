@@ -16,6 +16,7 @@
         {
           "aantal": 2000.0,
           "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht_1",
             "naam": "Keuken: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",

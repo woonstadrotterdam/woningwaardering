@@ -16,9 +16,10 @@
         {
           "aantal": 1000.0,
           "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken_prive"
+              "id": "keuken__totaal__prive"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -30,16 +31,17 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "keuken__keuken__extra_voorziening",
             "naam": "Inbouw koelkast (in zelfde ruimte)",
             "bovenliggendeCriterium": {
-              "id": "keuken_prive"
+              "id": "keuken__totaal__prive"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "keuken_prive",
+            "id": "keuken__totaal__prive",
             "naam": "Totaal (privé)"
           },
           "punten": 6.0

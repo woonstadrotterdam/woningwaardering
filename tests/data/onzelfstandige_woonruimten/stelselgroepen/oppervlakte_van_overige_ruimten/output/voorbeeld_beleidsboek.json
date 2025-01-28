@@ -16,9 +16,10 @@
         {
           "aantal": 4.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_1",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten_prive"
+              "id": "oppervlakte_van_overige_ruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,9 +30,10 @@
         {
           "aantal": 19.34,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_2",
             "naam": "Garage",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten_gedeeld_met_3_onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -42,9 +44,10 @@
         {
           "aantal": 6.06,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_3",
             "naam": "Bijkeuken",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten_gedeeld_met_3_onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -55,7 +58,7 @@
         {
           "aantal": 4.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten_prive",
+            "id": "oppervlakte_van_overige_ruimten__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",
@@ -67,7 +70,7 @@
         {
           "aantal": 25.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten_gedeeld_met_3_onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 3 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",

@@ -6,6 +6,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
 )
@@ -78,7 +79,14 @@ class Keuken(Stelselgroep):
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         ] += Decimal(str(woningwaardering.punten))
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                    is_totaal=True,
+                                )
+                            ),
                         )
                         woningwaardering.punten = float(
                             utils.rond_af(
@@ -95,7 +103,13 @@ class Keuken(Stelselgroep):
                         gedeeld_met_counter[1] += Decimal(str(woningwaardering.punten))
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
-                                id=f"{self.stelselgroep.name}_prive"
+                                id=str(
+                                    CriteriumId(
+                                        stelselgroep=self.stelselgroep,
+                                        gedeeld_met_aantal=1,
+                                        is_totaal=True,
+                                    )
+                                ),
                             )
                         )
 
@@ -108,9 +122,14 @@ class Keuken(Stelselgroep):
                 naam=f"Totaal (gedeeld met {aantal} onzelfstandige woonruimten)"
                 if aantal > 1
                 else "Totaal (privé)",
-                id=f"{self.stelselgroep.name}_gedeeld_met_{aantal}_onzelfstandige_woonruimten"
-                if aantal > 1
-                else f"{self.stelselgroep.name}_prive",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        gedeeld_met_aantal=aantal,
+                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                        is_totaal=True,
+                    )
+                ),
             )
             woningwaardering.punten = float(
                 utils.rond_af_op_kwart(punten / Decimal(str(aantal)))
