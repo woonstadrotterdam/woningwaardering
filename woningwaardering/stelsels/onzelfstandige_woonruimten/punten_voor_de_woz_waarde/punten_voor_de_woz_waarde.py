@@ -22,7 +22,6 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Meeteenheid,
-    Oppervlaktesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -165,21 +164,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             woz_waarde_voor_waardering = minimum_woz_waarde
 
-        gebruiksoppervlakte = next(
-            (
-                Decimal(oppervlakte.waarde)
-                for oppervlakte in eenheid.oppervlakten or []
-                if oppervlakte.soort == Oppervlaktesoort.gebruiksoppervlakte
-                and oppervlakte.waarde is not None
-            ),
-            Decimal(eenheid.gebruiksoppervlakte)
-            if eenheid.gebruiksoppervlakte is not None
-            else None,
+        gebruiksoppervlakte = (
+            eenheid.adresseerbaar_object_basisregistratie.bag_gebruikers_oppervlakte
+            if eenheid.adresseerbaar_object_basisregistratie
+            else None
         )
 
         if gebruiksoppervlakte is None:
             warnings.warn(
-                f"Eenheid {eenheid.id}: geen gebruiksoppervlakte gevonden. Kan punten voor de WOZ-waarde niet bepalen.",
+                f"Eenheid {eenheid.id}: geen gebruiksoppervlakte van het verblijfsobject gevonden. Dit dient gespecificeerd te worden in het attribuut 'adresseerbaar_object_basisregistratie.bag_gebruikers_oppervlakte' op de eenheid. Kan punten voor de WOZ-waarde niet bepalen.",
                 UserWarning,
             )
             return woningwaardering_groep
