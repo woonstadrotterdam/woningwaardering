@@ -219,13 +219,9 @@ soort_template = environment.from_string(
 {%- set parent_classes = items | map(attribute='parent.soort') | unique | select('string') -%}
 {%- if parent_classes -%}
 {%- for parentClass in parent_classes %}
-{%- if parentClass | length > 6 %}
 from woningwaardering.vera.referentiedata.{{ parentClass | remove_accents | lower }} import (
     {{ parentClass | remove_accents | title }},
 )
-{%- else %}
-from woningwaardering.vera.referentiedata.{{ parentClass | remove_accents | lower }} import {{ parentClass | remove_accents | title }}
-{%- endif %}
 {%- endfor %}
 {%- endif %}
 from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
