@@ -2,6 +2,7 @@ from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.criteriumsleutels import (
     CriteriumSleutels,
 )
@@ -59,8 +60,14 @@ def _waardeer_verwarmde_overige_ruimte(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=ruimte.naam,
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id=CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id,
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                                ruimte_id=ruimte.id,
+                            )
+                        ),
+                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                            id=CriteriumSleutels.verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten.value.id,
                         ),
                     ),
                     punten=1.0,
@@ -73,8 +80,15 @@ def _waardeer_verwarmde_overige_ruimte(
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                             naam=f"{ruimte.naam}: Maximaal 4 punten",
-                            bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                                id=CriteriumSleutels.verwarmde_overige_en_verkeersruimten.value.id,
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                                    ruimte_id=ruimte.id,
+                                    criterium="max_aantal_punten",
+                                )
+                            ),
+                            bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                                id=CriteriumSleutels.verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten.value.id,
                             ),
                         ),
                         punten=-1,
@@ -115,8 +129,14 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                             naam=ruimte.naam,
-                            bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                                id=CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id,
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                                    ruimte_id=ruimte.id,
+                                )
+                            ),
+                            bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                                id=CriteriumSleutels.verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken.value.id,
                             ),
                         ),
                         punten=punten,
@@ -131,8 +151,15 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                         WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                                 naam=f"{ruimte.naam}: Maximaal 2 extra punten",
-                                bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                                    id=CriteriumSleutels.verkoelde_en_verwarmde_vertrekken.value.id,
+                                id=str(
+                                    CriteriumId(
+                                        stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                                        ruimte_id=ruimte.id,
+                                        criterium="max_aantal_extra_punten",
+                                    )
+                                ),
+                                bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                                    id=CriteriumSleutels.verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken.value.id,
                                 ),
                             ),
                             punten=-1,
@@ -147,8 +174,14 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                     WoningwaarderingResultatenWoningwaardering(
                         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                             naam=ruimte.naam,
-                            bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                                id=CriteriumSleutels.verwarmde_vertrekken.value.id,
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                                    ruimte_id=ruimte.id,
+                                )
+                            ),
+                            bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                                id=CriteriumSleutels.verkoeling_en_verwarming__totaal__verwarmde_vertrekken.value.id,
                             ),
                         ),
                         punten=punten,
@@ -191,8 +224,14 @@ def _waardeer_open_keuken(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=ruimte.naam,
-                        bovenliggendeCriterium=WoningwaarderingCriteriumSleutels(
-                            id=CriteriumSleutels.open_keuken.value.id,
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
+                                ruimte_id=ruimte.id,
+                            )
+                        ),
+                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                            id=CriteriumSleutels.verkoeling_en_verwarming__totaal__open_keuken.value.id,
                         ),
                     ),
                     punten=2.0,

@@ -16,9 +16,10 @@
         {
           "aantal": 3001.0,
           "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken_gedeeld_met_8_onzelfstandige_woonruimten"
+              "id": "keuken__totaal__gedeeld_met__8__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -29,7 +30,7 @@
         },
         {
           "criterium": {
-            "id": "keuken_gedeeld_met_8_onzelfstandige_woonruimten",
+            "id": "keuken__totaal__gedeeld_met__8__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 8 onzelfstandige woonruimten)"
           },
           "punten": 1.75

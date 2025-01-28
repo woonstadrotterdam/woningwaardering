@@ -1,6 +1,7 @@
 {
   "ruimten": [
     {
+      "id": "Space_259220",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -16,6 +17,7 @@
       "hoogte": 3.17
     },
     {
+      "id": "Space_281469",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"

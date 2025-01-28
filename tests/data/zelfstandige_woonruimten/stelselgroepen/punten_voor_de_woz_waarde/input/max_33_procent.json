@@ -65,6 +65,7 @@
   "monumenten": [],
   "ruimten": [
     {
+      "id": "Space_138870",
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"
@@ -86,6 +87,7 @@
       }
     },
     {
+      "id": "Space_337706",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -135,6 +137,7 @@
       }
     },
     {
+      "id": "Space_611468",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -230,6 +233,7 @@
       }
     },
     {
+      "id": "Space_475346",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -270,6 +274,7 @@
       ]
     },
     {
+      "id": "Space_390560",
       "soort": {
         "code": "VRK",
         "naam": "Verkeersruimte"
@@ -329,6 +334,7 @@
       ]
     },
     {
+      "id": "Space_318877",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -348,6 +354,7 @@
       }
     },
     {
+      "id": "Space_450554",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -367,6 +374,7 @@
       }
     },
     {
+      "id": "Space_168254",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -386,6 +394,7 @@
       }
     },
     {
+      "id": "Space_464234",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -405,6 +414,7 @@
       }
     },
     {
+      "id": "Space_815615",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -453,6 +463,7 @@
       }
     },
     {
+      "id": "Space_404961",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -472,6 +483,7 @@
       }
     },
     {
+      "id": "Space_792296",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -491,6 +503,7 @@
       }
     },
     {
+      "id": "Space_382455",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"

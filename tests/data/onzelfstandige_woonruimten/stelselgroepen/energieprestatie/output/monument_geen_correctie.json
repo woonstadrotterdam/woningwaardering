@@ -16,6 +16,7 @@
         {
           "aantal": 3.67,
           "criterium": {
+            "id": "energieprestatie__energieprestatievergoeding",
             "naam": "Energieprestatievergoeding",
             "meeteenheid": {
               "code": "M2",

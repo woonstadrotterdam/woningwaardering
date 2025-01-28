@@ -16,6 +16,7 @@
         {
           "aantal": 1.89,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_23762465",
             "naam": "Badruimte",
             "meeteenheid": {
               "code": "M2",
@@ -26,6 +27,7 @@
         {
           "aantal": 18.79,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_23762408",
             "naam": "Woonkamer (+1 kast)",
             "meeteenheid": {
               "code": "M2",
@@ -36,6 +38,7 @@
         {
           "aantal": 5.94,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_23762425",
             "naam": "Slaapkamer 1 (+1 kast)",
             "meeteenheid": {
               "code": "M2",
@@ -46,6 +49,7 @@
         {
           "aantal": 12.74,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_23762420",
             "naam": "Slaapkamer 2 (+1 kast)",
             "meeteenheid": {
               "code": "M2",
@@ -56,6 +60,7 @@
         {
           "aantal": 5.39,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_23762481",
             "naam": "Keuken (+2 kasten)",
             "meeteenheid": {
               "code": "M2",
@@ -66,6 +71,7 @@
         {
           "aantal": 8.56,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_23762434",
             "naam": "Slaapkamer 3 (+2 kasten)",
             "meeteenheid": {
               "code": "M2",
@@ -91,6 +97,7 @@
         {
           "aantal": 7.78,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_23758614",
             "naam": "Berging 1",
             "meeteenheid": {
               "code": "M2",
@@ -101,6 +108,7 @@
         {
           "aantal": 4.03,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_23758661",
             "naam": "Berging 2",
             "meeteenheid": {
               "code": "M2",
@@ -125,61 +133,67 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Space_23762465",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Space_23762408",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Space_23762425",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Space_23762420",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Space_23762481",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__Space_23762434",
             "naam": "Slaapkamer 3",
             "bovenliggendeCriterium": {
-              "id": "verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken"
           },
           "punten": 12.0
@@ -202,9 +216,10 @@
         {
           "aantal": 2.81,
           "criterium": {
+            "id": "buitenruimten__Space_23762970",
             "naam": "Balkon 1",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -216,9 +231,10 @@
         {
           "aantal": 5.2,
           "criterium": {
+            "id": "buitenruimten__Space_23762931",
             "naam": "Balkon 2",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -229,9 +245,10 @@
         },
         {
           "criterium": {
+            "id": "buitenruimten__aanwezig__prive",
             "naam": "Buitenruimten aanwezig",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             }
           },
           "punten": 2.0
@@ -239,7 +256,7 @@
         {
           "aantal": 8.01,
           "criterium": {
-            "id": "buitenruimten_prive",
+            "id": "buitenruimten__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",
@@ -265,6 +282,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "energieprestatie__label",
             "naam": "C (Energie-index)"
           },
           "punten": 15.0
@@ -287,6 +305,7 @@
         {
           "aantal": 2010.0,
           "criterium": {
+            "id": "keuken__Space_23762481__lengte_aanrecht_Aanrecht_23762483",
             "naam": "Keuken: Lengte aanrecht",
             "meeteenheid": {
               "code": "MIL",
@@ -313,6 +332,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_23762465__wastafel",
             "naam": "Badruimte - Wastafel"
           },
           "punten": 1.0
@@ -320,6 +340,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_23762465__douche",
             "naam": "Badruimte - Douche"
           },
           "punten": 4.0
@@ -327,6 +348,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_23762476__staand_toilet",
             "naam": "Toiletruimte - Staand Toilet"
           },
           "punten": 3.0
@@ -334,6 +356,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_23762476__wastafel",
             "naam": "Toiletruimte - Wastafel"
           },
           "punten": 1.0
@@ -384,21 +407,23 @@
         {
           "aantal": 282000.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
           }
         },
         {
           "aantal": 14543.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_I"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde_onderdeel_I",
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 19.39
@@ -406,9 +431,10 @@
         {
           "aantal": 65.12,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -419,15 +445,16 @@
         {
           "aantal": 229.0,
           "criterium": {
+            "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde_onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde_onderdeel_II",
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
           "punten": 18.91

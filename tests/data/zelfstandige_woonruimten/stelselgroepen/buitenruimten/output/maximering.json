@@ -16,9 +16,10 @@
         {
           "aantal": 30.0,
           "criterium": {
+            "id": "buitenruimten__Space_1",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -30,9 +31,10 @@
         {
           "aantal": 15.0,
           "criterium": {
+            "id": "buitenruimten__Space_5",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -43,9 +45,10 @@
         },
         {
           "criterium": {
+            "id": "buitenruimten__aanwezig__prive",
             "naam": "Buitenruimten aanwezig",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten_prive"
+              "id": "buitenruimten__totaal__prive"
             }
           },
           "punten": 2.0
@@ -53,7 +56,7 @@
         {
           "aantal": 45.0,
           "criterium": {
-            "id": "buitenruimten_prive",
+            "id": "buitenruimten__totaal__prive",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",
@@ -64,6 +67,7 @@
         },
         {
           "criterium": {
+            "id": "buitenruimten__maximering",
             "naam": "Maximaal 15 punten"
           },
           "punten": -2.75

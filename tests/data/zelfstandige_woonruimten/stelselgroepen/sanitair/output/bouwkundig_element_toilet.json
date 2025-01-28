@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_869333__staand_toilet",
             "naam": "Toilet - Staand Toilet"
           },
           "punten": 3.0

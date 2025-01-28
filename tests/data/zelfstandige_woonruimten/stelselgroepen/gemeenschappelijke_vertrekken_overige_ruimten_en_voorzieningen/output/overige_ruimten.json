@@ -16,6 +16,7 @@
         {
           "aantal": 10.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_1",
             "naam": "Toiletruimte (gedeeld met 5)",
             "meeteenheid": {
               "code": "M2",
@@ -27,6 +28,7 @@
         {
           "aantal": 10.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_2",
             "naam": "Toiletruimte (gedeeld met 6)",
             "meeteenheid": {
               "code": "M2",

@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__1",
             "naam": "Type II + laadpaal (privé)"
           },
           "punten": 8.0

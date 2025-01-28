@@ -7,6 +7,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import waardeer_sanitair
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -194,6 +195,13 @@ class Sanitair(Stelselgroep):
                                 WoningwaarderingResultatenWoningwaardering(
                                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                                         naam=f"{ruimte.naam} - Max 1 punt voor {Voorzieningsoort.wastafel.naam}",
+                                        id=str(
+                                            CriteriumId(
+                                                stelselgroep=stelselgroep,
+                                                ruimte_id=ruimte.id,
+                                                criterium=f"max_punten_{Voorzieningsoort.wastafel.name}",
+                                            )
+                                        ),
                                     ),
                                     punten=float(
                                         utils.rond_af(
@@ -228,6 +236,13 @@ class Sanitair(Stelselgroep):
                             WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                                     naam=f"{ruimte.naam} - Max 1.5 punt voor {Voorzieningsoort.meerpersoonswastafel.naam}",
+                                    id=str(
+                                        CriteriumId(
+                                            stelselgroep=stelselgroep,
+                                            ruimte_id=ruimte.id,
+                                            criterium=f"max_punten_{Voorzieningsoort.meerpersoonswastafel.name}",
+                                        )
+                                    ),
                                 ),
                                 punten=float(
                                     utils.rond_af(
@@ -275,7 +290,14 @@ class Sanitair(Stelselgroep):
                 ):
                     if woningwaardering.criterium:
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=f"{self.stelselgroep.name}_gedeeld_met_{ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten}_onzelfstandige_woonruimten"
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                    is_totaal=True,
+                                )
+                            )
                         )
                     gedeeld_met_counter[
                         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
@@ -284,7 +306,13 @@ class Sanitair(Stelselgroep):
                     if woningwaardering.criterium:
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
-                                id=f"{self.stelselgroep.name}_prive"
+                                id=str(
+                                    CriteriumId(
+                                        stelselgroep=self.stelselgroep,
+                                        gedeeld_met_aantal=1,
+                                        is_totaal=True,
+                                    )
+                                )
                             )
                         )
                     gedeeld_met_counter[1] += Decimal(str(woningwaardering.punten or 0))
@@ -298,9 +326,14 @@ class Sanitair(Stelselgroep):
                 naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
                 if aantal_onz > 1
                 else "Totaal (privé)",
-                id=f"{self.stelselgroep.name}_gedeeld_met_{aantal_onz}_onzelfstandige_woonruimten"
-                if aantal_onz > 1
-                else f"{self.stelselgroep.name}_prive",
+                id=str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        gedeeld_met_aantal=aantal_onz,
+                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                        is_totaal=True,
+                    )
+                ),
             )
             woningwaardering.punten = float(utils.rond_af_op_kwart(punten))
             yield woningwaardering

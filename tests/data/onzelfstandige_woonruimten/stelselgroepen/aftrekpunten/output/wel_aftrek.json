@@ -16,6 +16,7 @@
         {
           "aantal": 7.0,
           "criterium": {
+            "id": "aftrekpunten__oppervlakte_van_vertrekken_minder_dan_8m2",
             "naam": "Totale oppervlakte in Rubriek 'Oppervlakte van vertrekken' is minder dan 8m2",
             "meeteenheid": {
               "code": "M2",

@@ -9,6 +9,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
     get_energieprestatievergoeding,
     monument_correctie,
@@ -111,6 +112,12 @@ class Energieprestatie(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Energieprestatievergoeding",
+                    id=str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            criterium="energieprestatievergoeding",
+                        )
+                    ),
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
             )
@@ -225,6 +232,12 @@ class Energieprestatie(Stelselgroep):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
+                id=str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="label",
+                    )
+                ),
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
             )
         )
@@ -279,6 +292,12 @@ class Energieprestatie(Stelselgroep):
         woningwaardering.criterium = (
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
+                id=str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        criterium="bouwjaar",
+                    )
+                ),
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
             )
         )

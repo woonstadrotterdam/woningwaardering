@@ -5,6 +5,7 @@ from typing import Generator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -131,6 +132,12 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         yield WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium,
+                id=str(
+                    CriteriumId(
+                        stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
+                        ruimte_id=ruimte.id,
+                    )
+                ),
             ),
             aantal=ruimte.aantal,
             punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),

@@ -16,6 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__Space_842550__wastafel",
             "naam": "Woonkamer - Wastafel (spoelbak in aanrecht < 1m)"
           },
           "punten": 1.0
@@ -23,12 +24,14 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "sanitair__Space_842550__wastafel",
             "naam": "Woonkamer - Wastafel"
           },
           "punten": 2.0
         },
         {
           "criterium": {
+            "id": "sanitair__Space_842550__max_punten_wastafel",
             "naam": "Woonkamer - Max 1.0 punt voor Wastafel"
           },
           "punten": -2.0
@@ -36,12 +39,14 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "sanitair__Space_842550__meerpersoonswastafel",
             "naam": "Woonkamer - Meerpersoonswastafel"
           },
           "punten": 3.0
         },
         {
           "criterium": {
+            "id": "sanitair__Space_842550__max_punten_meerpersoonswastafel",
             "naam": "Woonkamer - Max 1.5 punt voor Meerpersoonswastafel"
           },
           "punten": -1.5
