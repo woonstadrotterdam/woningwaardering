@@ -1548,6 +1548,8 @@ Wanneer je deze modellen wilt bijwerken, zorg er dan voor dat [Task](https://tas
 pip install -e ".[dev]"
 ```
 
+Update het versienummer van de VERA OpenAPI-specificatie in `pyproject.toml`
+
 Vervolgens kan je met dit commando de modellen in deze repository bijwerken:
 
 ```
