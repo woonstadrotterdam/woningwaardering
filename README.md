@@ -1594,6 +1594,7 @@ We maken gebruik van de [VERA Referentiedata](https://github.com/Aedes-datastand
 
 Wanneer je de referentiedata wilt bijwerken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) is geïnstalleerd
 
+Update het versienummer van de referentiedata in `pyproject.toml`
 Vervolgens kan je met dit commando de referentiedata in deze repository bijwerken:
 
 ```
