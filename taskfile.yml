@@ -26,7 +26,7 @@ tasks:
     desc: Genereer VERA referentiedata
     cmds:
       - python scripts/genereer_vera_referentiedata.py
-      - pre-commit run --all-files --hook-stage commit || true
+      - pre-commit run --files woningwaardering/vera/referentiedata/* --hook-stage commit || true
     ignore_errors: yes
   genereer-opzet-woningwaarderinggroep:
     desc: Genereer de opzet voor de code van een woningwaarderinggroep
