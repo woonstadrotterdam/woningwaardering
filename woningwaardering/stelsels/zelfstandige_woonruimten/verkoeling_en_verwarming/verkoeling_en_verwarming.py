@@ -1,5 +1,7 @@
+from collections import defaultdict
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from loguru import logger
 
@@ -11,6 +13,8 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    WoningwaarderingResultatenWoningwaardering,
+    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -61,7 +65,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         )
 
         woningwaardering_groep.woningwaarderingen.extend(
-            self.criteriumsleutel_resultaten(woningwaardering_groep)
+            self._maak_totalen(woningwaardering_groep)
         )
 
         punten = utils.rond_af_op_kwart(
@@ -84,6 +88,33 @@ class VerkoelingEnVerwarming(Stelselgroep):
         )
 
         return woningwaardering_groep
+
+    def _maak_totalen(
+        self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        criteriumsleutelpunten: dict[str, float] = defaultdict(float)
+        for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
+            if (
+                woningwaardering.criterium
+                and woningwaardering.criterium.bovenliggende_criterium
+                and woningwaardering.criterium.bovenliggende_criterium.id
+                and isinstance(woningwaardering.punten, float)
+            ):
+                criteriumsleutelpunten[
+                    woningwaardering.criterium.bovenliggende_criterium.id
+                ] += woningwaardering.punten
+
+        for id, punten in criteriumsleutelpunten.items():
+            onderdelen = id.split("__")
+            naam = onderdelen[-1].capitalize().replace("_", " ")
+            criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam=naam,
+                id=id,
+            )
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=criterium,
+                punten=punten,
+            )
 
 
 if __name__ == "__main__":  # pragma: no cover
