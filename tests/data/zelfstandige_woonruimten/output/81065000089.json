@@ -197,7 +197,7 @@
         {
           "criterium": {
             "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten",
-            "naam": "Verwarmde overige- en verkeersruimten"
+            "naam": "Verwarmde overige en verkeersruimten"
           },
           "punten": 1.0
         }
