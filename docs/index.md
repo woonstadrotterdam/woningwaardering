@@ -5,7 +5,7 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 ## Content
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 4
 
 ../README.md
 implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md
