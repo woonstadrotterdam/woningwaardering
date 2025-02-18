@@ -7,9 +7,7 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 ```{toctree}
 :maxdepth: 3
 
-../README.md
-implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md
-implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten.md
+../README
+implementatietoelichting-beleidsboeken/zelfstandige_woonruimten
+implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```
-
----
