@@ -1,13 +1,16 @@
-# Woningwaardering
+# Woningwaardering Documentatie
 
-```{include} ../README.md
-:parser: myst_parser.sphinx_
-```
+Welkom bij de documentatie van de **Woningwaardering** package!
+
+## Content
 
 ```{toctree}
-:maxdepth: 4
-:caption: Contents
+:maxdepth: 2
 
-my_package.main_page
-installation
+../README.md
+imlpementatie-beleidesboeken/zelfstandige_woonruimten.md
+imlpementatie-beleidesboeken/onzelfstandige_woonruimten.md
+
 ```
+
+---
