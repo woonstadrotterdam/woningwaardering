@@ -6,6 +6,7 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 
 ```{toctree}
 :maxdepth: 3
+README_link
 voorbeelden
 contribute
 datamodel_uitbreidingen
