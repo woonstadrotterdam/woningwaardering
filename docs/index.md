@@ -2,15 +2,14 @@
 
 Welkom bij de documentatie van de **Woningwaardering** package!
 
-## Content
+## Inhoudsopgave
 
 ```{toctree}
 :maxdepth: 4
 
-../README.md
-implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md
-implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten.md
-
+Woningwaardering <../README.md>
+Implementatietoelichting zelfstandige woonruimten <implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md>
+Implementatietoelichting onzelfstandige woonruimten <implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten.md>
 ```
 
 ---
