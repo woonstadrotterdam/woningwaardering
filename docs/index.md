@@ -8,8 +8,8 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 :maxdepth: 2
 
 ../README.md
-imlpementatie-beleidesboeken/zelfstandige_woonruimten.md
-imlpementatie-beleidesboeken/onzelfstandige_woonruimten.md
+implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md
+implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten.md
 
 ```
 
