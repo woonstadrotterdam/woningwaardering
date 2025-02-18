@@ -1,4 +1,4 @@
-# Implementatietoelichting Beleidsboek Onzelfstandige Woonruimten
+# Onzelfstandige Woonruimten: Implementatietoelichting Beleidsboek 
 
 ## Hoofdstuk 2 - Algemene toelichting
 
