@@ -56,7 +56,9 @@ Indien een woonruimte een rijksmonument is of daar deel van uitmaakt, als bedoel
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de Rijksmonumenten: http://monumentenregister.cultureelerfgoed.nl/.
 
-> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
+:::{note}
+De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
+:::
 
 #### 2.7.2 Gemeentelijk of provinciaal monument
 

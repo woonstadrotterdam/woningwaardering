@@ -26,6 +26,8 @@ myst_enable_extensions = [
     'amsmath'
 ]
 
+suppress_warnings = ["myst.header"] # to enble strikethrough, see: https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#strikethrough
+
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
     'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
