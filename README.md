@@ -6,7 +6,7 @@
 
 # Woningwaardering
 
-## 📊 Status
+## Status
 
 ![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jan_2025&width=120)  
 ![](https://progress-bar.xyz/100/?title=onzelfstandige_woonruimten_jan_2025&width=108)
@@ -39,9 +39,9 @@ Voor vragen kunt u contact opnemen met Team Microservices via [Tomer Gabay](mail
 ![voorbeeld-output](https://raw.githubusercontent.com/woonstadrotterdam/woningwaardering/main/docs/afbeeldingen/voorbeeld_output.jpg)
 _Visueel voorbeeld van de output van de package voor een zelfstandige woonruimte._
 
-## Opzet woningwaardering package
+# Opzet woningwaardering package
 
-### Implementatie beleidsboek huurcommissie
+## Implementatie beleidsboek huurcommissie
 
 Voor het berekenen van een woningwaardering worden de [beleidsboeken van de Nederlandse Huurcommissie](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken) voor de waarderingstelsels voor zelfstandige en onzelfstandige woningen gevolgd.
 De beleidsboeken van de Huurcommissie Nederland volgen Nederlandse wet- en regelgeving zoals beschreven in [Artikel 14 van het "Besluit huurprijzen woonruimte"](https://wetten.overheid.nl/BWBR0003237/2024-01-01#Artikel14).
@@ -60,22 +60,22 @@ Keuzes die zijn gemaakt en of interpretaties die zijn gedaan, worden in een gema
 
 > Dit is een tekstblok waarmee commentaar van een developer wordt aangegeven in het beleidsboek.
 
-### Repository-structuur
+## Repository-structuur
 
 De repository-structuur is ingedeeld volgens de [referentiedata van stelselgroepen van de VERA-standaard](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP); eerst de stelsels (bijvoorbeeld _zelfstandig_, _onzelfstandig_) en vervolgens de stelselgroepen (bijvoorbeeld _Energieprestatie_, _Wasgelegenheid_).
 In de folders van de stelselgroepen bevindt zich de code voor het berekenen van de punten per stelselgroep. Indien bepaalde logica voor zowel zelfstandige als onzelfstandige woningen gelden, dan bevinden deze regels zich in de folder _gedeelde_logcia_.
 
-### Design
+## Design
 
 Het design van de `woningwaardering`-package is zo gekozen dat stelselgroep-objecten en bijbehorende regels modulair zijn.
 
-### Lookup tabellen
+## Lookup tabellen
 
 In lookup tabellen worden constanten en variabelen opgeslagen die nodig zijn bij het berekenen van de punten voor een stelselgroep.
 In de `woningwaardering` package wordt CSV gebruikt als bestandstype voor het opslaan van een lookup tabel.
 De keuze is op CSV gevallen omdat lookup data soms bestaat uit meerdere datarijen waardoor dit vaak minder leesbaar wordt wanneer dit bijvoorbeeld in json of yaml wordt opgeslagen.
 
-### Warnings
+## Warnings
 
 In de `woningwaardering` package worden `UserWarnings` gegenereerd wanneer de inputdata niet volledig of correct wordt aangeleverd.
 Deze waarschuwingen worden gegeven met een warning bericht en een type warning, bijvoorbeeld:
@@ -95,12 +95,12 @@ warnings.simplefilter("default", UserWarning)
 Alle waarschuwingen die worden gegenereerd met `warnings.warn()`, worden standaard gelogd met `logger.warning()` en weergegeven in het standaardfout bestand.
 Mocht door de gebruiker logging worden uitgezet, dan zullen de UserWarnings altijd te zien zijn voor de gebruiker in de output van de _stderr_.
 
-#### Warning vs Exception
+### Warning vs Exception
 
 Er wordt doorgaans in de stelgroepversies gebruik gemaakt van `warnings.warn()` in plaats van het raisen van een exception.
 Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroepen waarvoor de data wel compleet genoeg is, mits de `warnings.simplefilter` naar `default` is gezet.
 
-### Criterium ID's
+## Criterium ID's
 
 De `CriteriumId` class wordt gebruikt om ID's te genereren voor criteria in de woningwaardering. Deze ID's worden opgebouwd uit verschillende onderdelen die worden samengevoegd met dubbele underscores (`__`).
 
@@ -123,21 +123,21 @@ Bij gedeelde voorzieningen wordt automatisch 'prive' toegevoegd als het aantal 1
 
 Met deze ID's kan gerefereerd worden aan specifieke criteria in de output van de woningwaardering.
 
-#### Criteriumsleutels
+### Criteriumsleutels
 
 Bij sommige stelselgroepen heb je een aantal criteria die een gemeenschappelijke groep vormen. Bijvoorbeeld bij _verkoeling en verwarming_ mag je maximaal 2 extra punten krijgen voor vertrekken die verkoeld én verwarmd zijn. Daarnaast mag je ook maximaal 4 punten krijgen voor het aantal verwarmde overige- en verkeersruimten. Om te kunnen berekenen wat de som is van een subgroep en bijvoorbeeld maximering toe te passen maken wij gebruik van zogenoemde `criteriumSleutels`. Indien een waardering onderdeel is van een subgroep, dan wordt aan deze waardering in het veld `bovenliggendCriterium` de `id` toegevoegd van de waardering die hoort bij de subgroep. In het voorbeeld hieronder is bijvoorbeeld de subgroep `Verwarmde vertrekken` binnen `verkoeling en verwarming` duidelijk te zien in de output-tabel. Voorgedefinieerde criteriumsleutels vind je in `woningwaardering/stelsels/criteriumsleutels.py`. Momenteel ondersteunen wij nog geen meerdere niveau's van subgroepen. Een criterium dat voor een ander criterium een bovenliggend criterium is, mag zelf geen bovenliggend criterium hebben.
 
-## Installatie
+# Installatie
 
 Gebruikers kunnen de woningwaardering package installaren met `pip install woningwaardering`. Vervolgens kun je de package importeren en gebruiken op verschillende manieren.
 
-### Monumenten
+## Monumenten
 
 De woningwaardering package kan op basis van data van het Kadaster en Cultureel Erfgoed de monumentale status van een woning bepalen. Deze functionaliteit is optioneel en kan worden geïnstalleerd met `pip install woningwaardering[monumenten]`.
 
-## Gebruik
+# Gebruik
 
-### Optie 1; bijvoorbeeld via JSON bestand
+## Optie 1; bijvoorbeeld via JSON bestand
 
 ```python
 import warnings
@@ -810,7 +810,7 @@ with open(
 
 </details>
 
-### Optie 2; via Python
+## Optie 2; via Python
 
 ```python
 from datetime import date

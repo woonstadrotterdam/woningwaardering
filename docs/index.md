@@ -35,7 +35,7 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 
 ```{toctree}
 :maxdepth: 2
-:caption: Status & Introductie
+:caption:Introductie
 README_link
 ```
 
@@ -46,15 +46,15 @@ gebruik
 ```
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :caption: Developers
 contribute
 datamodel_uitbreidingen
 ```
 
 ```{toctree}
-:maxdepth: 2
-:caption: Implementatietoelichtingen:
+:maxdepth: 1
+:caption: Implementatietoelichtingen Beleidsboek
 implementatietoelichting-beleidsboeken/zelfstandige_woonruimten
 implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```

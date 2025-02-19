@@ -1,5 +1,3 @@
-# Gebruik
-
 ```{inlcude} ../README.md
-:start-from: ## Installatie
+:start-from: # Installatie
 ```

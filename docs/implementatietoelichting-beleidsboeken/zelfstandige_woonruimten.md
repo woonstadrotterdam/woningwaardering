@@ -1,4 +1,4 @@
-# Zelfstandige Woonruimten: Implementatietoelichting Beleidsboek 
+# Zelfstandige Woonruimten
 
 ## Algemene toelichting (Hoofdstuk 2)
 
