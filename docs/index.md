@@ -20,7 +20,8 @@ implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```{include} README_link
 :start-after: ## Opzet woningwaardering package
 ``` -->
-```{include} README_link
+```{include}
+README_link
 :end-before: "# Woningwaardering"
 ```
 # Woningwaardering Documentatie
@@ -37,12 +38,11 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 ```{toctree}
 :maxdepth: 1
 :caption: 🤝 Introductie
-README_link
-:end-before: "# Installatie"
+introductie
 ```
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :caption: 🚀 Get Started
 gebruik
 ```
@@ -56,7 +56,7 @@ datamodel_uitbreidingen
 
 ```{toctree}
 :maxdepth: 1
-:caption: 📚 Implementatietoelichtingen Beleidsboek
+:caption: 📚 Implementatietoelichtingen
 implementatietoelichting-beleidsboeken/zelfstandige_woonruimten
 implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```

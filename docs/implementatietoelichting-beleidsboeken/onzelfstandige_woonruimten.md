@@ -1,4 +1,6 @@
-# Onzelfstandige Woonruimten
+# Beleidsboek Onzelfstandige Woonruimten
+
+Hier zij toelichtingen van developers te vinden op het Beleidsboek Onzelfstandige Woonruimten (januari 2025)
 
 ## Algemene toelichting (Hoofdstuk 2)
 

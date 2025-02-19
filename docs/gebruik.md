@@ -1,5 +1,5 @@
 ```{include} ../README.md
-:start-from: "# Installatie"
+:start-line: 130
 ```
 
 # Voorbeeld per Stelselgroep
