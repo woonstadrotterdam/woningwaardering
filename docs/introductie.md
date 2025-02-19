@@ -1,5 +1,5 @@
 ```{include} ../README.md
-:end-line: 41
+end-before: # Opzet woningwaardering package
 :relative-docs: ..
 :relative-images:
 ```
