@@ -35,7 +35,7 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 
 ```{toctree}
 :maxdepth: 2
-:caption:Introductie
+:caption: Introductie
 README_link
 ```
 
