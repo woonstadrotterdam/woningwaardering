@@ -27,10 +27,11 @@ implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 
 Welkom bij de documentatie van de **Woningwaardering** package!
 
-## Extra Bronnen
+## 🔗 Quick links
 
 * [GitHub Repository](https://github.com/woonstadrotterdam/woningwaardering)
 * [Bug Reports](https://github.com/woonstadrotterdam/woningwaardering/issues)
+* [Woningwaardering Status](https://woningwaardering.readthedocs.io/nl/latest/README_link.html)
 * [Changelog](./changelog)
 
 ```{toctree}
@@ -48,7 +49,7 @@ gebruik
 
 ```{toctree}
 :maxdepth: 1
-:caption: 👹 Developers
+:caption: 🧑‍🚀 Developers
 contribute
 datamodel_uitbreidingen
 ```
