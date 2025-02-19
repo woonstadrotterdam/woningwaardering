@@ -34,9 +34,10 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 * [Changelog](./changelog)
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :caption: Introductie
 README_link
+:end-before: # Installatie
 ```
 
 ```{toctree}
