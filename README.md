@@ -129,7 +129,7 @@ Bij sommige stelselgroepen heb je een aantal criteria die een gemeenschappelijke
 
 ## Installatie
 
-Installeer de package met `pip install woningwaardering`. Vervolgens kun je de package importeren en gebruiken op verschillende manieren.
+Gebruikers kunnen de woningwaardering package installaren met `pip install woningwaardering`. Vervolgens kun je de package importeren en gebruiken op verschillende manieren.
 
 ### Monumenten
 

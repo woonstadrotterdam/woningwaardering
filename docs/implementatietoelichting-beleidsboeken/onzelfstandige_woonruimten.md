@@ -1,6 +1,6 @@
 # Onzelfstandige Woonruimten: Implementatietoelichting Beleidsboek 
 
-## Hoofdstuk 2 - Algemene toelichting
+## Algemene toelichting (Hoofdstuk 2)
 
 ### 2.6 Evenredige verdeling, afronding punten en eindsaldering
 
@@ -75,7 +75,7 @@ _Cumulatie van opslagen_
 
 De samenloop van verschillende opslagen is in het woningwaarderingstelsel voor onzelfstandige woonruimte niet mogelijk. De monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stad- of dorpsgezicht kunnen niet tegelijkertijd voor dezelfde woonruimte worden toegekend (zie art. 8 lid 5 onder c Besluit huurprijzen woonruimte).
 
-## Hoofdstuk 3 - De rubrieken van het woningwaarderingsstelsel onzelfstandige woonruimte
+## De rubrieken van het woningwaarderingsstelsel onzelfstandige woonruimte (Hoofdstuk 3)
 
 ### Rubriek 1 - Oppervlakte van vertrekken
 

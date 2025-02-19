@@ -1,6 +1,6 @@
 # Zelfstandige Woonruimten: Implementatietoelichting Beleidsboek 
 
-## Hoofdstuk 2 - Algemene toelichting
+## Algemene toelichting (Hoofdstuk 2)
 
 ### 2.7 Afronding punten, eindsaldering
 
@@ -95,7 +95,7 @@ Wel mogelijk is het cumulatief toekennen van de monumentenopslag of de opslag vo
 
 De verhuurder moet aantonen dat de woning voldoet aan de voorwaarden van de nieuwbouwopslag. De verhuurder dient hierbij, indien mogelijk, gebruik te maken van de gegevens die geregistreerd staan in de registratie in de BAG. Zo wordt bij nieuwbouw in de BAG ‘bouw gestart’ en de praktische ingebruikname per pand geregistreerd. Deze datum kan gebruikt worden om bij de nieuwbouwwoning aan te tonen dat de start van de bouw van de woonruimte voor 1 januari 2028 lag. Indien de BAG ontoereikend is, moet de verhuurder andere bewijsstukken aanleveren waaruit blijkt dat de woning voldoet aan bovenstaande voorwaarden. In een geval van een transformatie wordt de gemeente hierover geïnformeerd en kan de verhuurder bijvoorbeeld de benodigde informatie over de transformatie bij de gemeente opvragen.
 
-## Hoofdstuk 3 - De rubrieken van het woningwaarderingsstelsel zelfstandige woning
+## De rubrieken van het woningwaarderingsstelsel zelfstandige woning (Hoofdstuk 3)
 
 Het woningwaarderingsstelsel zelfstandige woning kent punten toe aan een aantal hierna te bespreken aspecten, die we hierna verder ‘rubrieken’ noemen. De totaaltelling van die punten leidt tot een waardering van de woning, de maximale huurprijs. Over deze maximale huurprijs kan, indien aan de daarvoor geldende voorwaarden is voldaan, een opslag worden berekend om tot de huurprijs te komen. Deze rubrieken komen in dit hoofdstuk aan de orde.
 

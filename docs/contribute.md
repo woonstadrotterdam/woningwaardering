@@ -1,6 +1,6 @@
 # Contribute
 
-## Setup
+## Installatie (developers)
 
 Om de woningwaardering-package en de daarbij behorende developer dependencies te installeren, run onderstaand command:
 

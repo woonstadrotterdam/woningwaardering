@@ -35,32 +35,26 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 
 ```{toctree}
 :maxdepth: 2
-:caption: Woningwaardering
+:caption: Status & Introductie
 README_link
 ```
 
 ```{toctree}
 :maxdepth: 2
-:caption: Gebruik
+:caption: Get Started
 gebruik
 ```
 
 ```{toctree}
 :maxdepth: 2
-:caption: Contribute
+:caption: Developers
 contribute
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: Datamodel Uitbreidingen
 datamodel_uitbreidingen
 ```
 
 ```{toctree}
 :maxdepth: 2
 :caption: Implementatietoelichtingen:
-
 implementatietoelichting-beleidsboeken/zelfstandige_woonruimten
 implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```
