@@ -13,6 +13,7 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 :maxdepth: 1
 :caption: 🤝 Introductie
 introductie
+opzet_woningwaardering
 ```
 
 ```{toctree}
