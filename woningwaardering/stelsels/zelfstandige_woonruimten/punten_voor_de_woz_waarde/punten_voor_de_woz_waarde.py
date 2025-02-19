@@ -48,12 +48,18 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
         self.pd_woz_factor = pd.read_csv(
-            files("woningwaardering").joinpath(f"{LOOKUP_TABEL_FOLDER}/woz_factor.csv"),
+            str(
+                files("woningwaardering").joinpath(
+                    f"{LOOKUP_TABEL_FOLDER}/woz_factor.csv"
+                )
+            ),
             parse_dates=["Peildatum"],
         )
         self.pd_minimum_woz_waarde = pd.read_csv(
-            files("woningwaardering").joinpath(
-                f"{LOOKUP_TABEL_FOLDER}/minimum_woz_waarde.csv"
+            str(
+                files("woningwaardering").joinpath(
+                    f"{LOOKUP_TABEL_FOLDER}/minimum_woz_waarde.csv"
+                )
             ),
             parse_dates=["Peildatum"],
         )

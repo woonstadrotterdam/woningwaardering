@@ -3,7 +3,7 @@ import string
 from datetime import date
 from pathlib import Path
 
-import inquirer  # noqa
+import inquirer  # type: ignore
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from woningwaardering.vera.referentiedata import (

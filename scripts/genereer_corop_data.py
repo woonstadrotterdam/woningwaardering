@@ -16,7 +16,7 @@ from typing import Any, Dict, List
 from urllib.parse import urlparse
 
 import aiohttp
-import inquirer
+import inquirer  # type: ignore
 import pandas as pd
 from loguru import logger
 
@@ -105,8 +105,8 @@ async def get_woonplaats_data(session: aiohttp.ClientSession) -> pd.DataFrame:
     df_pivot = df_observations.pivot(
         index="Woonplaatsen", columns="Measure", values="StringValue"
     )
-    df_pivot.columns = ["Gemeentecode"]
     df_pivot = df_pivot.reset_index()
+    df_pivot = df_pivot.rename(columns={"GM000B": "Gemeentecode"})
 
     return pd.merge(
         df_pivot, df_woonplaatsen, left_on="Woonplaatsen", right_on="Identifier"
@@ -133,10 +133,16 @@ async def get_gemeente_corop_data(session: aiohttp.ClientSession) -> pd.DataFram
 
     df_pivot = df_observations.pivot(
         index="RegioS", columns="Measure", values="StringValue"
-    )
-    df_pivot = df_pivot.reset_index(names=["Gemeentecode"])
+    ).reset_index()
 
-    df_pivot.columns = ["Gemeentecode", "COROP-gebiedcode", "COROP-gebied", "Gemeente"]
+    df_pivot = df_pivot.rename(
+        columns={
+            "RegioS": "Gemeentecode",
+            "CR0001": "COROP-gebiedcode",
+            "CR0002": "COROP-gebied",
+            "GM000C_1": "Gemeente",
+        }
+    )
 
     return df_pivot[["Gemeentecode", "Gemeente", "COROP-gebiedcode", "COROP-gebied"]]
 
