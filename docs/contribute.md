@@ -12,7 +12,7 @@ pip install -e ".[dev]"
 
 ## Naamgeving van classes
 
-Voor de naamgeving van de classes in de woningwaardering module volgen we de VERA referentiedata. Deze referentiedata is gedefinieerd in de referentiedata enums, te vinden onder [/woningwaardering/vera/referentiedata](../woningwaardering/vera/referentiedata/).
+Voor de naamgeving van de classes in de woningwaardering module volgen we de VERA referentiedata. Deze referentiedata is gedefinieerd in de referentiedata enums, te vinden onder [/woningwaardering/vera/referentiedata](../woningwaardering/vera/referentiedata).
 
 ### Genereren opzet woningwaarderingstelsels en -groepen
 
