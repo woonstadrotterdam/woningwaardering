@@ -18,7 +18,12 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
     'myst_parser',
-    'sphinx_design'
+    'sphinx_design',
+]
+
+myst_enable_extensions = [
+    'strikethrough',
+    'amsmath'
 ]
 
 intersphinx_mapping = {
