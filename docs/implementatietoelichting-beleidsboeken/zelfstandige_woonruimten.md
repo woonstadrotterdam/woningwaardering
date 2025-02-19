@@ -1,4 +1,4 @@
-# Beleidsboek Zelfstandige Woonruimten (2025)
+# Beleidsboek Zelfstandige Woonruimten
 
 Hier zij toelichtingen van developers te vinden op het Beleidsboek Zelfstandige Woonruimten (januari 2025)
 

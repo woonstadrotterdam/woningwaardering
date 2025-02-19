@@ -1,5 +1,4 @@
-```{include}
-introductie
+```{include} introductie.md
 :end-line: 7
 ```
 # Woningwaardering Documentatie
@@ -39,7 +38,6 @@ implementatietoelichting-beleidsboeken/zelfstandige_woonruimten
 implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```
 
-```{include}
-introductie
+```{include} introductie.md
 :start-line: 6
 ```
