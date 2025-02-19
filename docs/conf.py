@@ -22,8 +22,8 @@ extensions = [
 ]
 
 suppress_warnings = [
-    'myst.header',
-    'strikethrough'] # to enble strikethrough, see: https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#strikethrough
+    'myst.strikethrough' # to enble strikethrough, see: https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#strikethrough
+    ]
 
 myst_enable_extensions = [
     'strikethrough',
