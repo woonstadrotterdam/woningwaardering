@@ -1,5 +1,5 @@
 ```{include} ../README.md
-:start-after: mag zelf geen bovenliggend criterium hebben.
+:start-after: de repository structuur worden besproken.
 :relative-docs: ..
 :relative-images:
 ```

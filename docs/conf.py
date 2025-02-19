@@ -23,12 +23,12 @@ extensions = [
 
 suppress_warnings = [
     'myst.strikethrough', # to enble strikethrough, see: https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#strikethrough
-    'colon_fence',
     ]
 
 myst_enable_extensions = [
     'strikethrough',
-    'amsmath'
+    'amsmath',
+    'colon_fence'
 ]
 
 intersphinx_mapping = {
