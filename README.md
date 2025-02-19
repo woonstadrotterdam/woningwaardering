@@ -125,17 +125,17 @@ Met deze ID's kan gerefereerd worden aan specifieke criteria in de output van de
 
 Bij sommige stelselgroepen heb je een aantal criteria die een gemeenschappelijke groep vormen. Bijvoorbeeld bij _verkoeling en verwarming_ mag je maximaal 2 extra punten krijgen voor vertrekken die verkoeld én verwarmd zijn. Daarnaast mag je ook maximaal 4 punten krijgen voor het aantal verwarmde overige- en verkeersruimten. Om te kunnen berekenen wat de som is van een subgroep en bijvoorbeeld maximering toe te passen maken wij gebruik van zogenoemde `criteriumSleutels`. Indien een waardering onderdeel is van een subgroep, dan wordt aan deze waardering in het veld `bovenliggendCriterium` de `id` toegevoegd van de waardering die hoort bij de subgroep. In het voorbeeld hieronder is bijvoorbeeld de subgroep `Verwarmde vertrekken` binnen `verkoeling en verwarming` duidelijk te zien in de output-tabel. Voorgedefinieerde criteriumsleutels vind je in `woningwaardering/stelsels/criteriumsleutels.py`. Momenteel ondersteunen wij nog geen meerdere niveau's van subgroepen. Een criterium dat voor een ander criterium een bovenliggend criterium is, mag zelf geen bovenliggend criterium hebben.
 
-### Installatie
+## Installatie
 
 Installeer de package met `pip install woningwaardering`. Vervolgens kun je de package importeren en gebruiken op verschillende manieren.
 
-#### Monumenten
+### Monumenten
 
 De woningwaardering package kan op basis van data van het Kadaster en Cultureel Erfgoed de monumentale status van een woning bepalen. Deze functionaliteit is optioneel en kan worden geïnstalleerd met `pip install woningwaardering[monumenten]`.
 
-### Gebruik
+## Gebruik
 
-#### Optie 1; bijvoorbeeld via JSON bestand
+### Optie 1; bijvoorbeeld via JSON bestand
 
 ```python
 import warnings
