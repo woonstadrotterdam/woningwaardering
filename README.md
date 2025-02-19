@@ -730,7 +730,7 @@ with open(
 
 </details>
 
-## Optie 2; via Python
+## Optie 2: via Python
 
 ```python
 from datetime import date

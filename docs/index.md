@@ -32,8 +32,7 @@ datamodel_uitbreidingen
 ```{toctree}
 :maxdepth: 1
 :caption: 📚 Implementatietoelichtingen
-implementatietoelichting-beleidsboeken/zelfstandige_woonruimten
-implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
+implementatietoelichtingen
 ```
 
 ```{include} introductie.md
