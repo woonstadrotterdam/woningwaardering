@@ -1,5 +1,5 @@
 ```{include} ../README.md
-:end-line: 42
+:end-line: 41
 :relative-docs: ..
 :relative-images:
 ```

@@ -1,6 +1,6 @@
 # Datamodel Uitbreidingen
 
-Tijdens de ontwikkeling van de woningwaardering-package komt het voor dat de VERA modellen niet toereikend zijn om de punten voor een stelselgroep te berekenen. Daarom kunnen er indien nodig uitbreidingen gemaakt worden op de VERA modellen. In deze sectie onderbouwen en documenteren wij deze uitbreidingen. In de sectie Referentiedata wordt uitgelegd hoe [uitbreidingen toe te voegen](#datamodellen-uitbreiden) als contributor van dit project.
+Tijdens de ontwikkeling van de woningwaardering-package komt het voor dat de VERA modellen niet toereikend zijn om de punten voor een stelselgroep te berekenen. Daarom kunnen er indien nodig uitbreidingen gemaakt worden op de VERA modellen. In deze sectie onderbouwen en documenteren wij deze uitbreidingen. In de [documentatie over Referentiedata](https://woningwaardering.readthedocs.io/nl/latest/contribute.html#datamodellen) wordt uitgelegd hoe uitbreidingen toegevoegd moeten worden als contributor van dit project.
 
 ## Ruimtedetailsoort kast
 

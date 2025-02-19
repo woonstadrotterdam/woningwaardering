@@ -1,6 +1,6 @@
 ```{include} ../README.md
 :start-line: 41
-:end-line: 130
+:end-line: 129
 :relative-docs: ..
 :relative-images:
 ```
