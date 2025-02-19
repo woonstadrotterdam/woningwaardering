@@ -1,6 +1,3 @@
-```{include} introductie.md
-:end-line: 7
-```
 # Woningwaardering Documentatie
 
 Welkom bij de documentatie van de **Woningwaardering** package!
@@ -39,5 +36,4 @@ implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```
 
 ```{include} introductie.md
-:start-line: 6
 ```
