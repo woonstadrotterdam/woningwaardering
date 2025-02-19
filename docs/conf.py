@@ -21,7 +21,9 @@ extensions = [
     'sphinx_design',
 ]
 
-suppress_warnings = ['myst.header'] # to enble strikethrough, see: https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#strikethrough
+suppress_warnings = [
+    'myst.header',
+    'strikethrough'] # to enble strikethrough, see: https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#strikethrough
 
 myst_enable_extensions = [
     'strikethrough',
