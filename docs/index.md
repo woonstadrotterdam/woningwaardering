@@ -20,7 +20,9 @@ implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```{include} README_link
 :start-after: ## Opzet woningwaardering package
 ``` -->
-
+```{include} README_link
+:end-before: #Woningwaardering
+```
 # Woningwaardering Documentatie
 
 Welkom bij de documentatie van de **Woningwaardering** package!
@@ -31,15 +33,27 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 * [Bug Reports](https://github.com/woonstadrotterdam/woningwaardering/issues)
 * [Changelog](./changelog)
 
-## Inhoudsopgave
+```{toctree}
+:maxdepth: 2
+:caption: Woningwaardering
+README_link
+```
 
 ```{toctree}
 :maxdepth: 2
-:caption: Inhoudsopgave:
-
-README_link
+:caption: Gebruik
 gebruik
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Contribute
 contribute
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Datamodel Uitbreidingen
 datamodel_uitbreidingen
 ```
 
@@ -52,10 +66,5 @@ implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```
 
 ```{include} README_link
+:start-after: #Woningwaardering
 ```
-
-## Zoeken
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
