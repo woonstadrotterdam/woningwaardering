@@ -5,9 +5,9 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 ## 🔗 Quick links
 
 * [GitHub Repository](https://github.com/woonstadrotterdam/woningwaardering)
+* [Releases](https://github.com/woonstadrotterdam/woningwaardering/releases)
 * [Bug Reports](https://github.com/woonstadrotterdam/woningwaardering/issues)
 * [Woningwaardering Status](https://woningwaardering.readthedocs.io/nl/latest/README_link.html)
-* [Changelog](./changelog)
 
 ```{toctree}
 :maxdepth: 1
