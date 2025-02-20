@@ -43,21 +43,20 @@ _Visueel voorbeeld van de output van de package voor een zelfstandige woonruimte
 
 # Opzet woningwaardering package
 
-Voor de opzet van de Woningwaarderingpackage verwijzen we graag naar de [Read The Docs documentatie](https://woningwaardering.readthedocs.io/nl/latest/opzet_woningwaardering.html). Hier zal onder andere worden ingegaan op de implemenatie van de Beleidsboeken van de huurcommissie in de woningwaardering package en de repository structuur worden besproken.
+Voor de opzet van de Woningwaarderingpackage verwijzen we graag naar de [Read The Docs documentatie](https://woningwaardering.readthedocs.io/nl/latest/opzet_woningwaardering.html). Hier zal onder andere worden ingegaan op de implemenatie van de Beleidsboeken van de huurcommissie en de repository structuur worden besproken.
 
 # Installatie
 
 Gebruikers kunnen de woningwaardering package installaren met `pip install woningwaardering`. Vervolgens kun je de package importeren en gebruiken op verschillende manieren.
 
-## Monumenten
-
+**_Monumenten_**
 De woningwaardering package kan op basis van data van het Kadaster en Cultureel Erfgoed de monumentale status van een woning bepalen. Deze functionaliteit is optioneel en kan worden geïnstalleerd met `pip install woningwaardering[monumenten]`.
 
 # Gebruik
 
 Ga voor meer voorbeelden van het gebruik van de woningwaardering package naar de [documentatie in Read The Docs](https://woningwaardering.readthedocs.io/nl/latest/gebruik.html#voorbeeld-per-stelselgroep).
 
-## Optie 1: JSON bestand
+## JSON
 
 ```python
 import warnings
@@ -730,7 +729,7 @@ with open(
 
 </details>
 
-## Optie 2: via Python
+## Python
 
 ```python
 from datetime import date
