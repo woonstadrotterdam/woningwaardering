@@ -18,14 +18,12 @@ implementatietoelichting-beleidsboeken/zelfstandige_woonruimten
 implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```
 
-# Datamodel Uitbreidingen
-
-Tijdens de ontwikkeling van de woningwaardering-package komt het voor dat de VERA modellen niet toereikend zijn om de punten voor een stelselgroep te berekenen.
-Daarom kunnen er indien nodig uitbreidingen gemaakt worden op de VERA modellen. In deze sectie onderbouwen en documenteren wij deze uitbreidingen.
-In de [documentatie over datamodellen (VERA)](https://woningwaardering.readthedocs.io/nl/latest/contribute.html#datamodellen) wordt uitgelegd hoe uitbreidingen toegevoegd kunnen worden als contributor van dit project.
+```{include} datamodel_uitbreidingen.md
+:end-before: "## Ruimtedetailsoort kast"
+```
 
 ```{toctree}
-:maxdepth: 1
+:maxdepth: 2
 datamodel_uitbreidingen
 ```
 

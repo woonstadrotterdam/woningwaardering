@@ -26,7 +26,6 @@ gebruik
 :maxdepth: 1
 :caption: 🧑‍🚀 Developers
 contribute
-datamodel_uitbreidingen
 ```
 
 ```{toctree}
