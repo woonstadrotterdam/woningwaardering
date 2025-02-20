@@ -8,15 +8,11 @@ De reden van het niet implementeren van een regelonderdeel is vrijwel altijd dat
 Regels die wel zijn geïmplementeerd zijn niet doorgestreept.
 Keuzes die zijn gemaakt en of interpretaties die zijn gedaan, worden in een gemarkeerd blok weergegeven zoals hieronder is gedaan.
 
-:::{note}
-it is een notitieblok waarmee commentaar van een developer wordt aangegeven in het beleidsboek.
-:::
+!!! note
+    it is een notitieblok waarmee commentaar van een developer wordt aangegeven in het beleidsboek.
 
-```{toctree}
-:maxdepth: 1
-implementatietoelichting-beleidsboeken/zelfstandige_woonruimten
-implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
-```
+- [Zelfstandige woonruimten](implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md)
+- [Onzelfstandige woonruimten](implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten.md)
 
 # Datamodel Uitbreidingen
 
@@ -24,8 +20,5 @@ Tijdens de ontwikkeling van de woningwaardering-package komt het voor dat de VER
 Daarom kunnen er indien nodig uitbreidingen gemaakt worden op de VERA modellen. In deze sectie onderbouwen en documenteren wij deze uitbreidingen.
 In de [documentatie over datamodellen (VERA)](https://woningwaardering.readthedocs.io/nl/latest/contribute.html#datamodellen) wordt uitgelegd hoe uitbreidingen toegevoegd kunnen worden als contributor van dit project.
 
-```{toctree}
-:maxdepth: 2
-datamodel_uitbreidingen
-```
+- [Datamodel Uitbreidingen](datamodel_uitbreidingen.md)
 

@@ -1,8 +1,2 @@
-```{include} ../../README.md
-:start-after: de repository structuur worden besproken.
-:relative-docs: ..
-:relative-images:
-```
-
-```{include} voorbeeld_per_stelselgroep.md
-```
+{% include "../../README.md" start="de repository structuur worden besproken." &}
+{% include "voorbeeld_per_stelselgroep.md" %}

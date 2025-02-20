@@ -1,2 +1,1 @@
-```{include} contribute.md
-```
+{% include "developers/contribute.md" %}
