@@ -1,3 +1,9 @@
+```{include} ../README.md
+:end-before: "# Woningwaardering"
+:relative-docs: ..
+:relative-images:
+```
+
 # Woningwaardering Documentatie
 
 Welkom bij de documentatie van de **Woningwaardering** package!
@@ -7,32 +13,34 @@ Welkom bij de documentatie van de **Woningwaardering** package!
 * [GitHub Repository](https://github.com/woonstadrotterdam/woningwaardering)
 * [Releases](https://github.com/woonstadrotterdam/woningwaardering/releases)
 * [Bug Reports](https://github.com/woonstadrotterdam/woningwaardering/issues)
-* [Woningwaardering Status](https://woningwaardering.readthedocs.io/nl/latest/README_link.html)
+
+```{include} ../README.md
+:start-after: "[Read The Docs](https://woningwaardering.readthedocs.io/nl/latest/)."
+:end-before: "# Opzet woningwaardering package"
+:relative-docs: ..
+:relative-images:
+```
 
 ```{toctree}
 :maxdepth: 1
 :caption: 🤝 Introductie
-introductie
-opzet_woningwaardering
+introductie/main
 ```
 
 ```{toctree}
 :maxdepth: 1
 :caption: 🚀 Get Started
-gebruik
-```
-
-```{toctree}
-:maxdepth: 1
-:caption: 🧑‍🚀 Developers
-contribute
+get_started/main
 ```
 
 ```{toctree}
 :maxdepth: 1
 :caption: 📚 Implementatietoelichtingen
-implementatietoelichtingen
+implementatietoelichtingen/main
 ```
 
-```{include} introductie.md
+```{toctree}
+:maxdepth: 1
+:caption: 🧑‍🚀 Developers
+developers/main
 ```

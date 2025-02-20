@@ -1,6 +1,6 @@
 # Beleidsboeken
 
-Onderstaande pagina's bevatten ontwikkelaarsnotities over de implementatie van elke stelselgroep en de gemaakte keuzes.
+Onderstaande beleidsboeken bevatten ontwikkelaarsnotities over de implementatie van elke stelselgroep en de gemaakte keuzes.
 De tekst is gekopieerd uit het officiële beleidsboek van de Huurcommissie, waarna ontwikkelaars aanvullende keuzes en notities hebben toegevoegd.
 
 In deze documenten wordt bijgehouden welke onderdelen van het beleidsboek wel en niet zijn geïmplementeerd per stelselgroep. De gepubliceerde tekst uit het beleidsboek wordt gekopieerd en wanneer een onderdeel niet in de code van de package is geïmplementeerd zal dit worden aangegeven met ~~doorgestreepte tekst~~.  
@@ -18,9 +18,11 @@ implementatietoelichting-beleidsboeken/zelfstandige_woonruimten
 implementatietoelichting-beleidsboeken/onzelfstandige_woonruimten
 ```
 
-```{include} datamodel_uitbreidingen.md
-:end-before: "## Ruimtedetailsoort kast"
-```
+# Datamodel Uitbreidingen
+
+Tijdens de ontwikkeling van de woningwaardering-package komt het voor dat de VERA modellen niet toereikend zijn om de punten voor een stelselgroep te berekenen.
+Daarom kunnen er indien nodig uitbreidingen gemaakt worden op de VERA modellen. In deze sectie onderbouwen en documenteren wij deze uitbreidingen.
+In de [documentatie over datamodellen (VERA)](https://woningwaardering.readthedocs.io/nl/latest/contribute.html#datamodellen) wordt uitgelegd hoe uitbreidingen toegevoegd kunnen worden als contributor van dit project.
 
 ```{toctree}
 :maxdepth: 2
