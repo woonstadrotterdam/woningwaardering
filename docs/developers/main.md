@@ -1,1 +1,0 @@
-{% include "developers/contribute.md" %}

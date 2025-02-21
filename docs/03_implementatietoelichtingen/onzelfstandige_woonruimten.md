@@ -102,7 +102,7 @@ De samenloop van verschillende opslagen is in het woningwaarderingstelsel voor o
 Een ruimte wordt als vertrek gewaardeerd als deze voldoet aan de volgende eisen:
 
 - ~~de vloer moet begaanbaar zijn;~~
-- ~~de muren/wanden dienen uit “vast” materiaal te bestaan;~~
+- ~~de muren/wanden dienen uit "vast" materiaal te bestaan;~~
 - ~~de ruimte dient over tenminste 80% van de lengte (de langste zijde) ten minste 1,50 m breed te zijn;~~
 - de ruimte dient een oppervlakte te hebben van minimaal 4 m2;
 - ~~de ruimte dient over ten minste 50% van de oppervlakte of over een oppervlakte van 11 m2 een vrije hoogte te hebben van ten minste 2,10 m (gemeten vanaf de vloer tot het zichtbare plafond (onder het zichtbare plafond aanwezige balken blijven buiten de meting);~~
@@ -248,7 +248,7 @@ In totaal is voor de woonruimte in dit voorbeeld een puntenaantal van 3 plus 6,2
 
 - Voorzieningen met zowel een verwarmingsfunctie als verkoelingsfunctie worden per privé vertrek gewaardeerd met 1 punt tot een maximum van 2 punten (bij meerdere vertrekken met een verkoelingsfunctie).
 - Voorzieningen met zowel een verwarmingsfunctie als verkoelingsfunctie worden per gemeenschappelijk vertrek gewaardeerd met 1 punt tot een maximum van 2 punten. Dit puntenaantal wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
-- ~~Woningen die zonder koeling voldoende koel kunnen blijven, worden per vertrek gewaardeerd met 1 extra punt tot een maximum van twee punten. Of sprake is van zo’n woning, dient te worden bepaald met de NTA 8800 en blijkt uit een actueel NTA-energielabel waarin de koelfunctie is meegenomen en het risico voor oververhitting als ‘laag’ is afgegeven.~~
+- ~~Woningen die zonder koeling voldoende koel kunnen blijven, worden per vertrek gewaardeerd met 1 extra punt tot een maximum van twee punten. Of sprake is van zo'n woning, dient te worden bepaald met de NTA 8800 en blijkt uit een actueel NTA-energielabel waarin de koelfunctie is meegenomen en het risico voor oververhitting als 'laag' is afgegeven.~~
 
 #### 3.2 Onroerende zaak en onroerende aanhorigheden
 
@@ -359,7 +359,7 @@ De hierboven vermelde tabellen met de puntentoekenning voor de labelklasse gaan 
 
 ~~Als een huurder twijfelt aan de juistheid van het toepasselijke energielabel, dan heeft de Huurcommissie de bevoegdheid om een 'eigen oordeel' uit te spreken bij gerede twijfel van het energielabel. Een Huurcommissie Eigen Oordeel (HEO) kan worden uitgesproken indien de huurder aantoont dat er sprake is van gerede twijfel over de juistheid van het energielabel/energie-index en dat het gewijzigde energielabel/energie-index van invloed zal zijn op de maximaal redelijke huurprijs.~~
 
-~~Bij ‘gerede twijfel’ wordt beoordeeld of de huurder voldoende heeft aangetoond dat een verkeerd woningkenmerk is gebruikt bij het vaststellen van het energielabel, waardoor de juistheid van de labelklasse voor de woning in het geding is. Voorbeelden van foutieve kenmerken zijn:~~
+~~Bij 'gerede twijfel' wordt beoordeeld of de huurder voldoende heeft aangetoond dat een verkeerd woningkenmerk is gebruikt bij het vaststellen van het energielabel, waardoor de juistheid van de labelklasse voor de woning in het geding is. Voorbeelden van foutieve kenmerken zijn:~~
 
 ~~- Verkeerd soort glas, bijvoorbeeld enkel in plaats van dubbel glas.~~
 ~~- Verkeerd type woning, zoals een hoekwoning in plaats van een tussenwoning.~~
@@ -379,7 +379,7 @@ Om te voorkomen dat in gevallen waarin een energieprestatievergoeding is overeen
 
 #### 5.1 Eisen keuken
 
-Punten worden alleen aan het onderdeel ‘keuken’ toegekend als de keuken voldoet aan het volgende basisniveau:
+Punten worden alleen aan het onderdeel 'keuken' toegekend als de keuken voldoet aan het volgende basisniveau:
 
 - ~~aan- en afvoer van water en ten minste één vast aansluitpunt voor koken op gas of elektriciteit;~~
 - een aanrechtblad met een aan een gesloten lengte van minimaal 1 m ~~(lengte incl. spoelbak, incl. kookplaat);~~
@@ -390,7 +390,7 @@ Punten worden alleen aan het onderdeel ‘keuken’ toegekend als de keuken vold
 > Zorg ervoor dat alleen aanrechten met een spoelbak worden meegegeven en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
 
 
-Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend. Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als ‘wastafel’.
+Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend. Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als 'wastafel'.
 
 Een waterdichte afwerking wordt in beginsel verondersteld aanwezig te zijn, maar kan pas worden meegenomen als deze aan te merken valt als onroerende aanhorigheid. Dat betekent dat een keuken met bijvoorbeeld een tegelwand of aangebrachte, waterdichte verf wel voldoet aan de eis van een waterdichte afwerking, maar als er slecht een plastic zeil voor een wand is gehangen niet.
 
@@ -589,13 +589,13 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkam
 
 - ~~de ingreep moet hebben plaatsgevonden op of ná 01-04-1994;~~
 - ~~de ingreep moet voor een deel zijn gesubsidieerd;~~
-- ~~de ingreep dient voor “de gehandicapte”* te zijn aangebracht.~~
+- ~~de ingreep dient voor "de gehandicapte"* te zijn aangebracht.~~
 
 ~~*Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt.~~
 
 ~~Buiten de waardering blijven voorzieningen ten behoeve van een gehandicapte, waarvoor subsidie is verstrekt waarmee de volledige kosten worden gedekt. Extra vloeroppervlakte (als bedoeld in de subsidieregelingen) wordt aangemerkt als gesubsidieerde voorziening.~~
 
-~~Het komt voor dat een voorziening slechts ten dele werd beschouwd als een specifieke aanpassing voor een gehandicapte en daarom slechts ten dele is gesubsidieerd. In zo’n geval worden alleen die onderdelen van de voorziening gewaardeerd, die ook in een vergelijkbare woning als standaardvoorziening voorkomen.~~
+~~Het komt voor dat een voorziening slechts ten dele werd beschouwd als een specifieke aanpassing voor een gehandicapte en daarom slechts ten dele is gesubsidieerd. In zo'n geval worden alleen die onderdelen van de voorziening gewaardeerd, die ook in een vergelijkbare woning als standaardvoorziening voorkomen.~~
 
 ~~Indien de huurovereenkomst met de gehandicapte is beëindigd dan vervalt de toepassing van deze rubriek, tenzij de nieuwe huurder tevens gehandicapt is.~~
 
@@ -645,16 +645,16 @@ Een fietsenberging wordt gewaardeerd als gemeenschappelijke buitenruimte. Onder 
 > `Stalling extern` en `Stalling intern` worden gewaardeerd als gemeenschappelijke buitenruimte.
 
 
-#### 8.4 Balkons, dakterrassen en loggia’s
+#### 8.4 Balkons, dakterrassen en loggia's
 
-Balkons, dakterrassen en loggia’s moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze zijn:
+Balkons, dakterrassen en loggia's moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze zijn:
 
 - voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d.;
 - rondom voorzien van een afscheiding die tevens dient als valbeveiliging; en
 - via een deur* of schuifpui toegankelijk zijn.
 
 > [!NOTE]
-> Er wordt vanuitgegaan dat balkons, dakterrassen en loggia’s alleen worden meegegeven als ze aan de hierboven beschreven eisen voldoen.
+> Er wordt vanuitgegaan dat balkons, dakterrassen en loggia's alleen worden meegegeven als ze aan de hierboven beschreven eisen voldoen.
 
 
 \* Indien het balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als buitenruimte te worden gebruikt, dan worden deze met punten gewaardeerd.
@@ -724,7 +724,7 @@ Gemeenschappelijke vertrekken en overige ruimten zijn tot het woongebouw behoren
 - ~~de vergoeding daarvoor in de huurprijs van de woning is begrepen;~~
 - de oppervlakte, na deling door het aantal adressen, per woning minstens 2m2 bedraagt.
 
-De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte, afronden in m2, delen door het aantal adressen en waarderen als “overige ruimte”. Dat betekent dat kasten uitkomend in een verkeersruimte niet worden meegeteld.
+De toekenning van punten bij een gemeenschappelijke berging is als volgt: totale oppervlakte, afronden in m2, delen door het aantal adressen en waarderen als "overige ruimte". Dat betekent dat kasten uitkomend in een verkeersruimte niet worden meegeteld.
 
 Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aangesloten bij de definities en meetinstructies zoals toegelicht in paragraaf 1.3 en 2.3 van dit hoofdstuk.
 
@@ -880,7 +880,7 @@ Punten worden bepaald aan de hand van de gemiddelde WOZ-waarde per m2 gebruiksop
 > Het COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats waarin de eenheid zich bevindt. Hiervoor dient de BAG-woonplaatscode in het attribuut `code` van de woonplaats op het adres van de eenheid gespecificeerd te zijn. Indien dit attribuut niet gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en huisnummertoevoeging bepaald in welke woonplaats een eenheid zich bevindt. Hierbij is het van belang dat deze waarden overeenkomen met de BAG-registratie.
 
 
-Onder gebruiksoppervlakte in deze rubriek wordt verstaan: de oppervlakte van een verblijfsobject in gehele vierkante meters als bedoeld onder “kenmerken”, te vinden per woning op de officiële site van het WOZ-waardeloket. Het gaat hierbij op de gebruiksoppervlakte van de gehele woning (het adres) waarvan de onzelfstandige woonruimten onderdeel uitmaken.
+Onder gebruiksoppervlakte in deze rubriek wordt verstaan: de oppervlakte van een verblijfsobject in gehele vierkante meters als bedoeld onder "kenmerken", te vinden per woning op de officiële site van het WOZ-waardeloket. Het gaat hierbij op de gebruiksoppervlakte van de gehele woning (het adres) waarvan de onzelfstandige woonruimten onderdeel uitmaken.
 
 > [!NOTE]
 > Deze waarde dient gespecificeerd te worden in het attribuut `adresseerbaar_object_basisregistratie.bag_gebruikers_oppervlakte` op de eenheid.
@@ -901,7 +901,7 @@ _De gemeente Amsterdam ligt in het COROP-gebied Groot-Amsterdam dat € 5.596 al
 
 **Minimumwaarde**
 
-De minimum WOZ-waarde wordt ook gebruikt voor specifieke woningen van specifieke verhuurders, zoals ‘containerwoningen’ die zijn bestemd voor studentenhuisvesting. In die gevallen wordt een minimum WOZ-waarde gehanteerd indien de WOZ-waarde lager is dan deze minimumwaarde. Deze waarde met peildatum 1 januari 2023 bedraagt € 73.607. Zie de tabel hieronder voor de minimumwaarde van de afgelopen jaren.
+De minimum WOZ-waarde wordt ook gebruikt voor specifieke woningen van specifieke verhuurders, zoals 'containerwoningen' die zijn bestemd voor studentenhuisvesting. In die gevallen wordt een minimum WOZ-waarde gehanteerd indien de WOZ-waarde lager is dan deze minimumwaarde. Deze waarde met peildatum 1 januari 2023 bedraagt € 73.607. Zie de tabel hieronder voor de minimumwaarde van de afgelopen jaren.
 
 Tabel 1
 | Peildatum | Minimumwaarde |
@@ -919,11 +919,11 @@ Tabel 1
 
 #### ~~11.3 Gebouwd eigendom in aanbouw~~
 
-~~Indien de WOZ-waarde betrekking heeft op een ‘gebouwd eigendom in aanbouw’, als bedoeld in artikel 17 lid 4 Wet WOZ, dan wordt voor de puntentoekenning uitgegaan van de waarde van de woning als ware de bouw voltooid. De WOZ-beschikking zal het voortgangspercentage vermelden. De Huurcommissie heeft dan tot taak de WOZ-waarde gerelateerd aan de voortgang van de aanbouw om te rekenen naar de waarde “als ware de bouw voltooid”, dus naar 100%.~~
+~~Indien de WOZ-waarde betrekking heeft op een 'gebouwd eigendom in aanbouw', als bedoeld in artikel 17 lid 4 Wet WOZ, dan wordt voor de puntentoekenning uitgegaan van de waarde van de woning als ware de bouw voltooid. De WOZ-beschikking zal het voortgangspercentage vermelden. De Huurcommissie heeft dan tot taak de WOZ-waarde gerelateerd aan de voortgang van de aanbouw om te rekenen naar de waarde "als ware de bouw voltooid", dus naar 100%.~~
 
-~~Onder een ‘gebouwd eigendom in aanbouw’ wordt verstaan een onroerende zaak of gedeelte daarvan waarvoor een omgevingsvergunning is verleend en die door bouw nog niet geschikt is voor gebruik overeenkomstig haar beoogde bestemming. Het gaat hier om de situatie waarbij nieuwbouw/verbouw is begonnen na 1 januari van een lopend jaar en die niet is afgerond voor 1 januari van het daaropvolgende jaar.~~
+~~Onder een 'gebouwd eigendom in aanbouw' wordt verstaan een onroerende zaak of gedeelte daarvan waarvoor een omgevingsvergunning is verleend en die door bouw nog niet geschikt is voor gebruik overeenkomstig haar beoogde bestemming. Het gaat hier om de situatie waarbij nieuwbouw/verbouw is begonnen na 1 januari van een lopend jaar en die niet is afgerond voor 1 januari van het daaropvolgende jaar.~~
 
-~~Hiervan is bijvoorbeeld sprake als, in het kader van de WOZ-beschikking 2023 dat als peildatum 1 januari 2022 heeft, de werkzaamheden aan het gehuurde zijn aangevangen na 1 januari 2022 en zijn voltooid ná 1 januari 2023. De WOZ-beschikking 2024, dat als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven “als ware de bouw voltooid”. In dat geval kan de woning worden aangemerkt als ‘een gebouwd eigendom in aanbouw’ als bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.~~
+~~Hiervan is bijvoorbeeld sprake als, in het kader van de WOZ-beschikking 2023 dat als peildatum 1 januari 2022 heeft, de werkzaamheden aan het gehuurde zijn aangevangen na 1 januari 2022 en zijn voltooid ná 1 januari 2023. De WOZ-beschikking 2024, dat als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven "als ware de bouw voltooid". In dat geval kan de woning worden aangemerkt als 'een gebouwd eigendom in aanbouw' als bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.~~
 
 > [!NOTE]
 > De omrekening naar 100% voortgangspercentage dient als WOZ-waarde opgegeven te worden.

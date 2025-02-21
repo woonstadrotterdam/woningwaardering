@@ -4,27 +4,24 @@ copyright: "2025, Woonstad Rotterdam"
 
 theme:
   name: readthedocs
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - toc.integrate
-    - search.suggest
-    - search.highlight
-    - content.code.copy
+  titles_only: false
+  collapse_navigation: false
+  include_homepage_in_sidebar: false
 
 markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.superfences
-  - pymdownx.details
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - attr_list
-  - md_in_html
-  - admonition
+  - markdown.extensions.codehilite
+  - markdown.extensions.extra
+  - markdown.extensions.toc:
+      permalink: true
   - github-callouts
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.snippets:
+      base_path: .
+  - pymdownx.blocks.tab:
+      alternate_style: true
+  - pymdownx.tilde
 
 plugins:
   - search
@@ -34,8 +31,22 @@ plugins:
           options:
             show_source: true
   - include-markdown
+  - autorefs
 
 nav:
-  - Home: index.md
+  - 🏠 Home: index.md
+  - 📖 Introductie:
+    - Overzicht: 01_introductie/overzicht.md
+    - Opzet Woningwaardering: 01_introductie/opzet.md
+  - 🚀 Aan de slag:
+    - Installatie: 02_aan_de_slag/installatie.md
+    - Gebruik: 02_aan_de_slag/gebruik.md
+    - Voorbeelden: 02_aan_de_slag/voorbeelden.md
+  - 📚 Implementatietoelichtingen:
+    - Zelfstandige woonruimten: 03_implementatietoelichtingen/zelfstandige_woonruimten.md
+    - Onzelfstandige woonruimten: 03_implementatietoelichtingen/onzelfstandige_woonruimten.md
+    - Datamodel Uitbreidingen: 03_implementatietoelichtingen/datamodel_uitbreidingen.md
+  - 👩‍💻 Voor Ontwikkelaars:
+    - Bijdragen: 04_voor_ontwikkelaars/index.md
   
  
