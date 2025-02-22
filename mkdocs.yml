@@ -36,17 +36,17 @@ plugins:
 nav:
   - 🏠 Home: index.md
   - 📖 Introductie:
-    - Overzicht: 01_introductie/overzicht.md
-    - Opzet Woningwaardering: 01_introductie/opzet.md
+    - Overzicht: introductie/overzicht.md
+    - Opzet Woningwaardering: introductie/opzet.md
   - 🚀 Aan de slag:
-    - Installatie: 02_aan_de_slag/installatie.md
-    - Gebruik: 02_aan_de_slag/gebruik.md
-    - Voorbeelden: 02_aan_de_slag/voorbeelden.md
+    - Installatie: aan-de-slag/installatie.md
+    - Gebruik: aan-de-slag/gebruik.md
+    - Voorbeelden: aan-de-slag/voorbeelden.md
   - 📚 Implementatietoelichtingen:
-    - Zelfstandige woonruimten: 03_implementatietoelichtingen/zelfstandige_woonruimten.md
-    - Onzelfstandige woonruimten: 03_implementatietoelichtingen/onzelfstandige_woonruimten.md
-    - Datamodel Uitbreidingen: 03_implementatietoelichtingen/datamodel_uitbreidingen.md
+    - Zelfstandige woonruimten: implementatietoelichtingen/zelfstandige-woonruimten.md
+    - Onzelfstandige woonruimten: implementatietoelichtingen/onzelfstandige-woonruimten.md
+    - Datamodel Uitbreidingen: implementatietoelichtingen/datamodel-uitbreidingen.md
   - 👩‍💻 Voor Ontwikkelaars:
-    - Bijdragen: 04_voor_ontwikkelaars/index.md
+    - Bijdragen: voor-ontwikkelaars/index.md
   
  
