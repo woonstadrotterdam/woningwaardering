@@ -2,6 +2,24 @@
 
 Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Onzelfstandige Woonruimten (januari 2025)
 
+> [!NOTE]
+> Om een woonruimte als zelfstandige woning te waarderen, dient dit aangegeven te worden in het attribuut `woningwaarderingstelsel`:
+> /// tab | JSON
+> ```json
+> {
+>   "woningwaarderingstelsel": {
+>     "code": "ONZ",
+>     "naam": "Onzelfstandige woonruimten"
+>   }
+> }
+> ```
+> ///
+> /// tab | Python
+> ```python
+> eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
+> ```
+> ///
+
 ## Algemene toelichting (Hoofdstuk 2)
 
 ### 2.6 Evenredige verdeling, afronding punten en eindsaldering

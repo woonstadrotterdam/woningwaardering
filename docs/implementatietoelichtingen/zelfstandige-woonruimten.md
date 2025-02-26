@@ -5,6 +5,7 @@ Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Zelfs
 > [!NOTE]
 > Om een woonruimte als zelfstandige woning te waarderen, dient dit aangegeven te worden in het attribuut `woningwaarderingstelsel`:
 >
+> /// tab | JSON
 > ```json
 > {
 >   "woningwaarderingstelsel": {
@@ -13,10 +14,12 @@ Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Zelfs
 >   }
 > }
 > ```
->
+> ///
+> /// tab | Python
 > ```python
 > eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
 > ```
+> ///
 
 ## Algemene toelichting (Hoofdstuk 2)
 

@@ -1,9 +1,6 @@
 # Gebruik
 
-<!-- Gebruik -->
-
-
-## Output Formaten
+## Output formaten
 
 De woningwaardering package ondersteunt verschillende output formaten:
 

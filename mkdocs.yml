@@ -1,26 +1,35 @@
 site_name: Woningwaardering
 site_author: Tomer Gabay, Ben Verhees, Tiddo Loos
 copyright: "2025, Woonstad Rotterdam"
+repo_url: https://github.com/woonstadrotterdam/woningwaardering
 
 theme:
-  name: readthedocs
+  name: material
   titles_only: false
-  collapse_navigation: false
-  include_homepage_in_sidebar: false
+  collapse_navigation: true
+  language: nl
+  features:
+  - content.code.copy
+  - navigation.expand
+  - navigation.instant
+  - navigation.sections
+  - navigation.tabs
+  - navigation.tabs.scrollable
+  - navigation.tabs.sticky
+  - navigation.top
+
 
 markdown_extensions:
+  - github-callouts
   - markdown.extensions.codehilite
   - markdown.extensions.extra
   - markdown.extensions.toc:
       permalink: true
-  - github-callouts
-  - pymdownx.superfences
-  - pymdownx.highlight:
-      use_pygments: true
-  - pymdownx.snippets:
-      base_path: .
   - pymdownx.blocks.tab:
       alternate_style: true
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
   - pymdownx.tilde
 
 plugins:
@@ -34,19 +43,23 @@ plugins:
   - autorefs
 
 nav:
-  - 🏠 Home: index.md
-  - 📖 Introductie:
-    - Overzicht: introductie/overzicht.md
-    - Opzet Woningwaardering: introductie/opzet.md
-  - 🚀 Aan de slag:
-    - Installatie: aan-de-slag/installatie.md
+  - Introductie:
+    - Overzicht: index.md
+    - Opzet: introductie/opzet.md
+  - Aan de slag:
+    - Installatie: aan-de-slag/index.md
     - Gebruik: aan-de-slag/gebruik.md
     - Voorbeelden: aan-de-slag/voorbeelden.md
-  - 📚 Implementatietoelichtingen:
+  - Implementatietoelichtingen:
+    - Overzicht: implementatietoelichtingen/index.md
     - Zelfstandige woonruimten: implementatietoelichtingen/zelfstandige-woonruimten.md
     - Onzelfstandige woonruimten: implementatietoelichtingen/onzelfstandige-woonruimten.md
     - Datamodel Uitbreidingen: implementatietoelichtingen/datamodel-uitbreidingen.md
-  - 👩‍💻 Voor Ontwikkelaars:
-    - Bijdragen: voor-ontwikkelaars/index.md
-  
+  - Voor ontwikkelaars:
+    - Installatie: voor-ontwikkelaars/index.md
+    - Naamgeving: voor-ontwikkelaars/naamgeving.md
+    - Releasemanagement: voor-ontwikkelaars/releases.md
+    - Testing: voor-ontwikkelaars/testing.md
+    - Logger guidelines: voor-ontwikkelaars/logging.md
+    - Data: voor-ontwikkelaars/data.md
  
