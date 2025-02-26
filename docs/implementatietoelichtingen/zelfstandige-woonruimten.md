@@ -4,7 +4,6 @@ Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Zelfs
 
 > [!NOTE]
 > Om een woonruimte als zelfstandige woning te waarderen, dient dit aangegeven te worden in het attribuut `woningwaarderingstelsel`:
->
 > /// tab | JSON
 > ```json
 > {
@@ -407,6 +406,108 @@ Een (groot) deel van het totale puntenaantal wordt bepaald door de energiepresta
 3. Het energielabel op basis van de NTA 8800: registratie op of na 1 januari 2021.
 
 In EP-online is te vinden wat de energieprestatie van een woning is.
+
+> [!NOTE]
+> Hieronder staat een voorbeeld van een meergezinswoning met een energieprestatievergoeding (EPV). De woning heeft een energie-index van 1.48 wat overeenkomt met energielabel C. De energie-index is geldig van 23 februari 2017 tot 23 februari 2027.
+> /// tab | JSON
+```json
+{
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2017-02-23",
+      "einddatum": "2027-02-23",
+      "registratiedatum": "2017-02-23T09:55:37+01:00",
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "1.48"
+    }
+  ],
+  "monumenten": [],
+  "prijscomponenten": [
+    {
+      "detailSoort": {
+        "code": "EPV",
+        "naam": "Energieprestatievergoeding"
+      }
+    }
+  ]
+}
+```
+> ///
+> /// tab | Python
+```python
+from datetime import date, datetime
+import warnings
+from woningwaardering.vera.bvg.generated import (
+    EenhedenEenheid,
+    EenhedenPand, 
+    EenhedenEnergieprestatie,
+    EenhedenPrijscomponent
+)
+from woningwaardering.vera.referentiedata import (
+    Pandsoort,
+    Energieprestatiesoort,
+    Energieprestatiestatus,
+    Energielabel,
+    Prijscomponentdetailsoort
+)
+from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
+from woningwaardering.stelsels import ZelfstandigeWoonruimten
+
+eenheid = EenhedenEenheid()
+eenheid.bouwjaar = 1921
+eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+
+eenheid.panden = [
+    EenhedenPand(soort=Pandsoort.meergezinswoning)
+]
+
+eenheid.energieprestaties = [EenhedenEnergieprestatie(
+    soort=Energieprestatiesoort.energie_index,
+    status=Energieprestatiestatus.definitief,
+    begindatum=date(2017, 2, 23),
+    einddatum=date(2027, 2, 23),
+    registratiedatum=datetime.fromisoformat("2017-02-23T09:55:37+01:00"),
+    label=Energielabel.c,
+    waarde="1.48"
+)]
+
+eenheid.monumenten = []
+
+eenheid.prijscomponenten = [
+    EenhedenPrijscomponent(detail_soort=Prijscomponentdetailsoort.energieprestatievergoeding)
+]
+
+stelsel = ZelfstandigeWoonruimten()
+
+warnings.filterwarnings("ignore")
+woningwaardering = stelsel.waardeer(eenheid)
+
+print(woningwaardering.model_dump_json(indent=2, exclude_none=True))
+```
+> ///
 
 #### 4.1 Puntentoekenning
 
