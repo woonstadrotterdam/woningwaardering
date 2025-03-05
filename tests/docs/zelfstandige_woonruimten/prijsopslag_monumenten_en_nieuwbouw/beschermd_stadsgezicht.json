@@ -1,0 +1,13 @@
+{
+    "bouwjaar": 1952,
+    "monumenten": [
+        {
+            "code": "SGR",
+            "naam": "Rijksbeschermd stadsgezicht"
+        }
+    ],
+    "woningwaarderingstelsel": {
+        "code": "ZEL",
+        "naam": "Zelfstandige woonruimten"
+    }
+}

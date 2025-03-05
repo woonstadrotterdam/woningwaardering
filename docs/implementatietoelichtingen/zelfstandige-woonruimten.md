@@ -2,22 +2,21 @@
 
 Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Zelfstandige Woonruimten (januari 2025)
 
-> [!NOTE]
+> [!TIP]
 > Om een woonruimte als zelfstandige woning te waarderen, dient dit aangegeven te worden in het attribuut `woningwaarderingstelsel`:
 > /// tab | JSON
-> ```json
-> {
->   "woningwaarderingstelsel": {
->     "code": "ZEL",
->     "naam": "Zelfstandige woonruimten"
->   }
-> }
-> ```
+```json
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/woningwaarderingstelsel.json"
+%}
+```
 > ///
 > /// tab | Python
-> ```python
-> eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-> ```
+```python
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/test_woningwaarderingstelsel.py"
+%}
+```
 > ///
 
 ## Algemene toelichting (Hoofdstuk 2)
@@ -50,6 +49,27 @@ Deze opslagen blijven buiten beschouwing voor het antwoord op de vraag tot welke
 
 #### 2.8.1 Rijksmonument
 
+> [!NOTE]
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie [https://github.com/Aedes-datastandaarden/vera-openapi/issues/69]()
+
+> [!TIP]
+>  Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een zelfstandige woonruimte de status van rijksmonument heeft.
+> De datum van afsluiten van de huurovereenkomst is van belang omdat vanaf 1 juli 2024 de nieuwe wetgeving (Wet betaalbare huur) van kracht is, waardoor rijksmonumenten een procentuele opslag van 35% krijgen op de maximale huurprijs in plaats van de eerdere puntentoeslag van 50 punten.
+> /// tab | JSON
+```json
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/rijksmonument.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/rijksmonument.py"
+%}
+```
+> ///
+
 _Huurovereenkomst afgesloten op of na 1 juli 2024_
 
 Indien een woonruimte bestaat uit of deel uitmaakt van een rijksmonument, als bedoeld in artikel 1.1 Erfgoedwet, dan wordt de maximale huurprijs vermeerderd met 35%. Hiermee worden rijksmonumenten bedoeld die zijn geregistreerd in het monumentenregister van de Rijksdienst voor het Cultureel Erfgoed.
@@ -64,17 +84,47 @@ Indien een woonruimte een rijksmonument is of daar deel van uitmaakt, als bedoel
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de rijksmonumenten: [http://monumentenregister.cultureelerfgoed.nl](http://monumentenregister.cultureelerfgoed.nl/).
 
-> [!NOTE]
-> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie [https://github.com/Aedes-datastandaarden/vera-openapi/issues/69]()
-
-
 #### 2.8.2 Gemeentelijk of provinciaal monument
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een zelfstandige woonruimte de status van gemeentelijk monument heeft.
+> /// tab | JSON
+```json
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/gemeentelijk_monument.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/gemeentelijk_monument.py"
+%}
+```
+> ///
 
 Indien een woonruimte een gemeentelijk of provinciaal monument is of daarvan deel uitmaakt, dan wordt de maximale huurprijs vermeerderd met 15%. Het gemeentelijk monument moet zijn aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door de gedeputeerde staten.
 
 De Huurcommissie hanteert passief beleid. De partijen moeten aantonen dat een woning bestaat of deel uitmaakt van een gemeentelijk of provinciaal monument.
 
 #### 2.8.3 Beschermd stads- of dorpsgezicht
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een zelfstandige woonruimte deel uitmaakt van een rijksbeschermd stadsgezicht. Het bouwjaar is van belang omdat alleen woningen gebouwd vóór 1965 in aanmerking komen voor de opslag van 5%.
+> /// tab | JSON
+```json
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/beschermd_stadsgezicht.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/beschermd_stadsgezicht.py"
+%}
+```
+> ///
 
 De maximale huurprijs wordt met 5% vermeerderd als:
 
@@ -86,13 +136,32 @@ De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief b
 
 #### 2.8.4 Nieuwbouwopslag
 
+> [!NOTE]
+> In tegenstelling tot de VERA-definitie van `inExploitatiedatum` gebruiken wij voor ons inputmodel `inExploitatiedatum` als de datum van de _eerste_ ingebruikname. Zie: [https://github.com/woonstadrotterdam/woningwaardering/issues/105]()
+
+> [!TIP]
+> Hieronder wordt een voorbeeld gegeven voor de minimale gegevens voor de aanduiding dat een zelfstandige woonruimte recht geeft op de nieuwbouwopslag van 10%.
+> 
+> Voor deze opslag is het belangrijk dat de woning na 1 juli 2024 voor het eerst in gebruik wordt genomen en dat de bouw vóór 1 januari 2028 is gestart. In het voorbeeld is dit aangegeven met een `begin_bouwdatum` van 1 juni 2024 en een `in_exploitatiedatum` van 1 september 2024. Het voorbeeld bevat ook andere velden zoals energieprestaties, ruimten, panden en WOZ-waarde omdat deze nodig zijn voor de volledige woningwaardering — de nieuwbouwopslag wordt namelijk alleen toegepast wanneer de woning op basis van de punten van het woningwaarderingsstelsel in de middensector valt, wat berekend wordt op basis van deze gegevens.
+> /// tab | JSON
+```json
+{%
+  include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/nieuwbouw.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+  include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/nieuwbouw.py"
+%}
+```
+> ///
+
 De maximale huurprijs die hoort bij de kwaliteit van een huurwoning uit de middensector (zie paragraaf 2.2), wordt met 10% vermeerderd als:
 
 *   de woning voor het eerst in gebruik wordt genomen na 1 juli 2024, en
 *   de start van de nieuwbouw, transformatie of bijbouw van de woning plaatsvindt vóór 1 januari 2028.
-
-> [!NOTE]
-> In tegenstelling tot de VERA-definitie van `inExploitatiedatum` gebruiken wij voor ons inputmodel `inExploitatiedatum` als de datum van de _eerste_ ingebruikname. Zie: [https://github.com/woonstadrotterdam/woningwaardering/issues/105]()
 
 
 Hieronder wordt nadere uitleg gegeven over de begrippen nieuwbouw, transformatie en bijbouw:
@@ -399,6 +468,23 @@ Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vert
 
 ### Rubriek 4 Energieprestatie
 
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor de waardering van de energieprestatie van een woning met een energieprestatievergoeding. De monumentale status is van belang omdat die invloed heeft op de waardering van de energieprestatie.  
+> /// tab | JSON
+```json
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/energieprestatie/energieprestatie.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "../../tests/docs/zelfstandige_woonruimten/energieprestatie/energieprestatie.py"
+%}  
+```
+> ///
+
 Een (groot) deel van het totale puntenaantal wordt bepaald door de energieprestatie van de woonruimte. Sinds 2011 speelt het energielabel een rol in het puntenstelsel, waarbij een energielabel of energie-index maximaal 10 jaar geldig is. De energieprestatie kan sinds 1 januari 2021 op drie manieren zijn vastgesteld:
 
 1. Een oud energielabel: registratie heeft plaatsgevonden vóór 1 januari 2015. In 2021 en later liepen en lopen veel sinds 1 juli 2011 verstrekte energielabels af, want de geldigheidsduur is tien jaar.
@@ -406,108 +492,6 @@ Een (groot) deel van het totale puntenaantal wordt bepaald door de energiepresta
 3. Het energielabel op basis van de NTA 8800: registratie op of na 1 januari 2021.
 
 In EP-online is te vinden wat de energieprestatie van een woning is.
-
-> [!NOTE]
-> Hieronder staat een voorbeeld van een meergezinswoning met een energieprestatievergoeding (EPV). De woning heeft een energie-index van 1.48 wat overeenkomt met energielabel C. De energie-index is geldig van 23 februari 2017 tot 23 februari 2027.
-> /// tab | JSON
-```json
-{
-  "woningwaarderingstelsel": {
-    "code": "ZEL",
-    "naam": "Zelfstandige woonruimten"
-  },
-  "panden": [
-    {
-      "soort": {
-        "code": "MGW",
-        "naam": "Meergezinswoning"
-      }
-    }
-  ],
-  "energieprestaties": [
-    {
-      "soort": {
-        "code": "EI",
-        "naam": "Energie-index"
-      },
-      "status": {
-        "code": "DEF",
-        "naam": "Definitief"
-      },
-      "begindatum": "2017-02-23",
-      "einddatum": "2027-02-23",
-      "registratiedatum": "2017-02-23T09:55:37+01:00",
-      "label": {
-        "code": "C",
-        "naam": "C"
-      },
-      "waarde": "1.48"
-    }
-  ],
-  "monumenten": [],
-  "prijscomponenten": [
-    {
-      "detailSoort": {
-        "code": "EPV",
-        "naam": "Energieprestatievergoeding"
-      }
-    }
-  ]
-}
-```
-> ///
-> /// tab | Python
-```python
-from datetime import date, datetime
-import warnings
-from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
-    EenhedenPand, 
-    EenhedenEnergieprestatie,
-    EenhedenPrijscomponent
-)
-from woningwaardering.vera.referentiedata import (
-    Pandsoort,
-    Energieprestatiesoort,
-    Energieprestatiestatus,
-    Energielabel,
-    Prijscomponentdetailsoort
-)
-from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
-from woningwaardering.stelsels import ZelfstandigeWoonruimten
-
-eenheid = EenhedenEenheid()
-eenheid.bouwjaar = 1921
-eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-
-eenheid.panden = [
-    EenhedenPand(soort=Pandsoort.meergezinswoning)
-]
-
-eenheid.energieprestaties = [EenhedenEnergieprestatie(
-    soort=Energieprestatiesoort.energie_index,
-    status=Energieprestatiestatus.definitief,
-    begindatum=date(2017, 2, 23),
-    einddatum=date(2027, 2, 23),
-    registratiedatum=datetime.fromisoformat("2017-02-23T09:55:37+01:00"),
-    label=Energielabel.c,
-    waarde="1.48"
-)]
-
-eenheid.monumenten = []
-
-eenheid.prijscomponenten = [
-    EenhedenPrijscomponent(detail_soort=Prijscomponentdetailsoort.energieprestatievergoeding)
-]
-
-stelsel = ZelfstandigeWoonruimten()
-
-warnings.filterwarnings("ignore")
-woningwaardering = stelsel.waardeer(eenheid)
-
-print(woningwaardering.model_dump_json(indent=2, exclude_none=True))
-```
-> ///
 
 #### 4.1 Puntentoekenning
 
