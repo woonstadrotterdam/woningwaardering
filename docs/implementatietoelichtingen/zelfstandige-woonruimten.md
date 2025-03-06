@@ -201,6 +201,25 @@ Twee andere rubrieken zijn de WOZ-waarde van de woonruimte en de energieprestati
 
 De overige rubrieken van het woningwaarderingsstelsel zijn woonvoorzieningen voor gehandicapten, buitenruimte, gemeenschappelijke ruimten en voorzieningen, parkeerruimte en bijzondere voorzieningen.
 
+### Rubriek 1 - Oppervlakte van vertrekken
+
+> [!TIP]
+> Dit voorbeeld toont hoe de oppervlakte van verschillende vertrekken in een zelfstandige woonruimte wordt gebruikt voor de waardering.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/oppervlakte_van_vertrekken/woonkamer.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/oppervlakte_van_vertrekken/woonkamer.py"
+%}
+```
+> ///
+
 #### 1.1 Puntentoekenning
 
 Vertrekken worden gewaardeerd met 1 punt per vierkante meter.
