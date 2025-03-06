@@ -140,7 +140,7 @@ De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief b
 > In tegenstelling tot de VERA-definitie van `inExploitatiedatum` gebruiken wij voor ons inputmodel `inExploitatiedatum` als de datum van de _eerste_ ingebruikname. Zie: [https://github.com/woonstadrotterdam/woningwaardering/issues/105]()
 
 > [!TIP]
-> Hieronder wordt een voorbeeld gegeven voor de minimale gegevens voor de aanduiding dat een zelfstandige woonruimte recht geeft op de nieuwbouwopslag van 10%.
+> Dit voorbeeld toont de minimale gegevens voor de aanduiding dat een zelfstandige woonruimte recht geeft op de nieuwbouwopslag van 10%.
 > 
 > Voor deze opslag is het belangrijk dat de woning na 1 juli 2024 voor het eerst in gebruik wordt genomen en dat de bouw vóór 1 januari 2028 is gestart. In het voorbeeld is dit aangegeven met een `begin_bouwdatum` van 1 juni 2024 en een `in_exploitatiedatum` van 1 september 2024. Het voorbeeld bevat ook andere velden zoals energieprestaties, ruimten, panden en WOZ-waarde omdat deze nodig zijn voor de volledige woningwaardering — de nieuwbouwopslag wordt namelijk alleen toegepast wanneer de woning op basis van de punten van het woningwaarderingsstelsel in de middensector valt, wat berekend wordt op basis van deze gegevens.
 > /// tab | JSON
@@ -204,7 +204,7 @@ De overige rubrieken van het woningwaarderingsstelsel zijn woonvoorzieningen voo
 ### Rubriek 1 - Oppervlakte van vertrekken
 
 > [!TIP]
-> Dit voorbeeld toont hoe de oppervlakte van verschillende vertrekken in een zelfstandige woonruimte wordt gebruikt voor de waardering.
+> Dit voorbeeld toont de minimale gegevens voor waardering van de oppervlakte van vertrekken
 > /// tab | JSON
 ```json
 {%
@@ -313,6 +313,23 @@ _Totaal : 26,73 m² Afronding op hele m² : 27 m²._
 _Dit vertaalt zich dan naar 27 \* 1 punt (per m2) = 27 punten_
 
 ### Rubriek 2 Oppervlakte van overige ruimten
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor waardering van de oppervlakte van overige ruimten
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/oppervlakte_van_overige_ruimten/badkamer_met_toilet.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/oppervlakte_van_overige_ruimten/badkamer_met_toilet.py"
+%}
+```
+> ///
 
 #### 2.1 Puntentoekenning
 

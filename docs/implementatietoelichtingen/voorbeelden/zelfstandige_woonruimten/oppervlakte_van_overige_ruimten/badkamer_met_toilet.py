@@ -6,18 +6,26 @@ from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
 )
-from woningwaardering.vera.referentiedata import Eenheidmonument
-from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
+from woningwaardering.vera.referentiedata import (
+    Woningwaarderingstelsel,
+    Ruimtesoort,
+    Ruimtedetailsoort,
+)
 
 
 def get_eenheid():
     eenheid = EenhedenEenheid()
-
-    # Geef aan dat het om een gemeentelijk monument gaat
-    eenheid.monumenten = [Eenheidmonument.gemeentelijk_monument]
-
     eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+
+    eenheid.ruimten = [
+        EenhedenRuimte(
+            soort=Ruimtesoort.overige_ruimten,
+            detail_soort=Ruimtedetailsoort.badkamer_met_toilet,
+            oppervlakte=8,
+        )
+    ]
 
     return eenheid
 

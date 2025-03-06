@@ -11,7 +11,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenPand,
     EenhedenRuimte,
     BouwkundigElementenBouwkundigElement,
-    EenhedenWozEenheid
+    EenhedenWozEenheid,
 )
 from woningwaardering.vera.referentiedata import (
     Energieprestatiesoort,
@@ -24,6 +24,7 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
 
+
 def get_eenheid():
     eenheid = EenhedenEenheid()
 
@@ -33,14 +34,16 @@ def get_eenheid():
 
     eenheid.monumenten = []
 
-    eenheid.energieprestaties = [EenhedenEnergieprestatie(
-        soort=Energieprestatiesoort.primair_energieverbruik_woningbouw,
-        status=Energieprestatiestatus.definitief,
-        begindatum=date(2022, 2, 23),
-        einddatum=date(2032, 2, 23),
-        registratiedatum=datetime.fromisoformat("2022-02-23T09:55:37+01:00"),
-        label=Energielabel.ap4,
-    )]
+    eenheid.energieprestaties = [
+        EenhedenEnergieprestatie(
+            soort=Energieprestatiesoort.primair_energieverbruik_woningbouw,
+            status=Energieprestatiestatus.definitief,
+            begindatum=date(2022, 2, 23),
+            einddatum=date(2032, 2, 23),
+            registratiedatum=datetime.fromisoformat("2022-02-23T09:55:37+01:00"),
+            label=Energielabel.ap4,
+        )
+    ]
 
     eenheid.ruimten = [
         EenhedenRuimte(
@@ -49,10 +52,9 @@ def get_eenheid():
             oppervlakte=10,
             bouwkundige_elementen=[
                 BouwkundigElementenBouwkundigElement(
-                    detail_soort=Bouwkundigelementdetailsoort.aanrecht,
-                    lengte=3000
+                    detail_soort=Bouwkundigelementdetailsoort.aanrecht, lengte=3000
                 )
-            ]
+            ],
         )
     ]
 
@@ -73,6 +75,7 @@ def get_eenheid():
 
     return eenheid
 
+
 def main():
     logger.enable("woningwaardering")
     warnings.filterwarnings("default")
@@ -80,5 +83,6 @@ def main():
     woningwaardering = Woningwaardering().waardeer(eenheid)
     print(naar_tabel(woningwaardering))
 
+
 if __name__ == "__main__":
-    main() 
+    main()
