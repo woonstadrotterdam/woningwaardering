@@ -454,6 +454,22 @@ _Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten._
 > [!NOTE]
 > Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100](). Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
 
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor waardering van de oppervlakte van overige ruimten
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/verkoeling_en_verwarming/woonkamer_verkoeld_en_verwarmd.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/verkoeling_en_verwarming/woonkamer_verkoeld_en_verwarmd.py"
+%}
+```
+> ///
 
 #### 3.1 Puntentoekenning
 
@@ -673,6 +689,23 @@ Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, oo
 
 #### 5.2 Puntentoekenning lengte aanrecht
 
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor de waardering van een keuken met een aanrecht. De lengte van het aanrecht (3000 mm) bepaalt de puntenwaardering.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/keuken/aanrecht.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/keuken/aanrecht.py"
+%}
+```
+> ///
+
 * Bij een aanrechtlengte minder dan 1 m, worden 0 punten toegekend.
 * Bij een aanrechtlengte tussen de 1 en 2 m, worden 4 punten toegekend.
 * Bij een aanrechtlengte van 2 m of langer, worden 7 punten toegekend.
@@ -706,6 +739,23 @@ De lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.
 
 
 #### 5.4 Puntentoekenning extra voorzieningen
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor de waardering van voorzieningen in een keuken. De lengte van het aanrecht is van belang om tot waardering van de voorzieningen te komen.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/keuken/voorzieningen.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/keuken/voorzieningen.py"
+%}
+```
+> ///
 
 Het woningwaarderingsstelsel geeft voor het onderdeel keuken extra punten voor voorzieningen in de keuken. Hiervoor geldt een maximum tot het aantal punten dat voor de aanrechtlengte is bepaald. Een keuken met een aanrechtlengte tussen de 1 en 2 m kan tot maximaal 4 extra punten krijgen voor voorzieningen. Een keuken met een aanrechtlengte van 2 of meer meter kan tot maximaal 7 punten extra krijgen voor voorzieningen. 
 
