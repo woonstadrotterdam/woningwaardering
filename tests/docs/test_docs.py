@@ -1,4 +1,5 @@
 import difflib
+import importlib
 import warnings
 from loguru import logger
 import pytest
@@ -7,7 +8,7 @@ from woningwaardering.vera.bvg.generated import EenhedenEenheid
 
 def get_test_cases():
     """Scan for test case folders containing pairs of .py and .json files"""
-    base_path = Path(__file__).parent
+    base_path = Path("docs/implementatietoelichtingen/voorbeelden")
     test_cases = []
     
     # Iterate through housing type directories
@@ -48,10 +49,9 @@ def get_test_cases():
 # Helper functions to reduce code duplication
 def get_pydantic_instance(test_case):
     """Get the Pydantic instance from the Python file"""
-    stelsel = test_case['stelsel']
-    python_module_name = test_case['python_file'].stem
-    import_path = f"tests.docs.{stelsel}.{test_case['folder'].name}.{python_module_name}"
-    module = __import__(import_path, fromlist=['get_eenheid'])
+    spec = importlib.util.spec_from_file_location(test_case['python_file'].stem, test_case['python_file'])
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
     return module.get_eenheid()
 
 def get_json_instance(test_case):

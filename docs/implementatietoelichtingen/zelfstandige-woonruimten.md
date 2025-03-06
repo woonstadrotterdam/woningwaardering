@@ -7,14 +7,14 @@ Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Zelfs
 > /// tab | JSON
 ```json
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/woningwaarderingstelsel.json"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/woningwaarderingstelsel.json"
 %}
 ```
 > ///
 > /// tab | Python
 ```python
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/test_woningwaarderingstelsel.py"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/test_woningwaarderingstelsel.py"
 %}
 ```
 > ///
@@ -58,14 +58,14 @@ Deze opslagen blijven buiten beschouwing voor het antwoord op de vraag tot welke
 > /// tab | JSON
 ```json
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/rijksmonument.json"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/rijksmonument.json"
 %}
 ```
 > ///
 > /// tab | Python
 ```python
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/rijksmonument.py"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/rijksmonument.py"
 %}
 ```
 > ///
@@ -91,14 +91,14 @@ Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register 
 > /// tab | JSON
 ```json
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/gemeentelijk_monument.json"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/gemeentelijk_monument.json"
 %}
 ```
 > ///
 > /// tab | Python
 ```python
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/gemeentelijk_monument.py"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/gemeentelijk_monument.py"
 %}
 ```
 > ///
@@ -114,14 +114,14 @@ De Huurcommissie hanteert passief beleid. De partijen moeten aantonen dat een wo
 > /// tab | JSON
 ```json
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/beschermd_stadsgezicht.json"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/beschermd_stadsgezicht.json"
 %}
 ```
 > ///
 > /// tab | Python
 ```python
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/beschermd_stadsgezicht.py"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/beschermd_stadsgezicht.py"
 %}
 ```
 > ///
@@ -146,14 +146,14 @@ De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief b
 > /// tab | JSON
 ```json
 {%
-  include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/nieuwbouw.json"
+  include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/nieuwbouw.json"
 %}
 ```
 > ///
 > /// tab | Python
 ```python
 {%
-  include-markdown "../../tests/docs/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/nieuwbouw.py"
+  include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/prijsopslag_monumenten_en_nieuwbouw/nieuwbouw.py"
 %}
 ```
 > ///
@@ -473,14 +473,14 @@ Voor deze rubriek wordt een verwarmde open keuken als afzonderlijk verwarmd vert
 > /// tab | JSON
 ```json
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/energieprestatie/energieprestatie.json"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/energieprestatie/energieprestatie.json"
 %}
 ```
 > /// 
 > /// tab | Python
 ```python
 {%
-    include-markdown "../../tests/docs/zelfstandige_woonruimten/energieprestatie/energieprestatie.py"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/energieprestatie/energieprestatie.py"
 %}  
 ```
 > ///
