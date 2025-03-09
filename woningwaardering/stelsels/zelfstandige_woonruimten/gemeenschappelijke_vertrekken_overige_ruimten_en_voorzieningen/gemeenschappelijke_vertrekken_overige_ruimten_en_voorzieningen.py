@@ -114,6 +114,9 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
                 if oppervlakte_berekening is not None:
                     oppervlakte_waarderingen = list(oppervlakte_berekening(ruimte))
+                else:
+                    oppervlakte_waarderingen = []
+
                 # Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
                 #
                 # […]
