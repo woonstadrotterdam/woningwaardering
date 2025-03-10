@@ -14,7 +14,7 @@ Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Zelfs
 > /// tab | Python
 ```python
 {%
-    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/test_woningwaarderingstelsel.py"
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/woningwaarderingstelsel.py"
 %}
 ```
 > ///
