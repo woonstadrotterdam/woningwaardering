@@ -1014,6 +1014,25 @@ In totaal kan maximaal 15 punten worden toegekend.
 
 ### Rubriek 9 Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
 
+> [!TIP]
+> Dit voorbeeld toont de waardering van twee typen buitenruimten:
+> - Een privé achtertuin van 50 m².
+> - Een dakterras van 25 m² dat wordt gedeeld met één andere woonruimte en daarom voor 50% meetelt.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen/voorbeeld.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen/voorbeeld.py"
+%}
+```
+> ///
+
 #### 9.1 Puntentoekenning
 
 * Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
@@ -1023,7 +1042,6 @@ In totaal kan maximaal 15 punten worden toegekend.
 > [!NOTE]
 > Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_eenheden`, waarbij de eenheid zelf meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
 
-
 **Warme maaltijden**
 
 Indien het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
@@ -1031,8 +1049,24 @@ Indien het verstrekken van warme maaltijden onderdeel vormt van de huurovereenko
 > [!NOTE]
 > Indien dit zo is, geef bijvoorbeeld een `keuken` mee met `gedeeld_met_aantal_eenheden`.
 
-
 **Gemeenschappelijke ruimten en voorzieningen in een zorgwoning**
+
+> [!TIP]
+> Dit voorbeeld toont hoe een zorgwoning wordt aangegeven door de doelgroep op 'zorg' te zetten. Voor een zorgwoning hoeven de gemeenschappelijke ruimten en voorzieningen niet verder gespecificeerd te worden.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen/zorgwoning.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen/zorgwoning.py"
+%}
+```
+> ///
 
 De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en voorzieningen in een zorgwoning of woon/zorgcomplex de waardering per woning veelal uitkomt op een totaal van ongeveer 3 punten. Om arbeidsintensief meetwerk te voorkomen waardeert de Huurcommissie in dat geval een waardering van 3 punten per woning.
 
@@ -1075,7 +1109,6 @@ Voorbeeld
 
 > [!NOTE]
 > Voor ons is het niet helemaal duidelijk op basis van de tekst en de voorbeeldrekening hoe het zit met de maximering op punten. Wij zijn er vanuit gegaan dat ook de maximering van de hoeveelheid punten gedeeeld moet worden door het aantal adressen. Bijvoorbeeld maximaal 0.75 punten voor kastruimte in de badruimte wordt met toegang van twee adressen ~0.38.
-
 
 ### Rubriek 10 Gemeenschappelijke parkeerruimten
 
