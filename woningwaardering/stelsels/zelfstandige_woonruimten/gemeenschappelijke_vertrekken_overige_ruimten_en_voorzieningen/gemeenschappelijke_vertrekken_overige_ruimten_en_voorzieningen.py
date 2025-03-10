@@ -175,6 +175,11 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             )
 
             for ruimte, waardering in verkoeling_en_verwarming_waarderingen:
+                # Hier zetten we de bovenliggende criterium op None omdat deze
+                # anders niet in de tabel wordt getoond doordat het bovenliggende
+                # criterium zelf niet in de waarderingen voorkomt.
+                if waardering.criterium:
+                    waardering.criterium.bovenliggende_criterium = None
                 woningwaardering_groep.woningwaarderingen.extend(
                     self._deel_woningwaarderingen_door_aantal_eenheden(
                         ruimte, [waardering]
@@ -217,6 +222,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 and woningwaardering.criterium.naam is not None
             ):
                 woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
+
             yield woningwaardering
 
 
