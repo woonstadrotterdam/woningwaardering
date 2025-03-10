@@ -8,6 +8,7 @@ theme:
   language: nl
   features:
     - content.code.copy
+    - content.tabs.link
     - navigation.expand
     - navigation.indexes
     - navigation.instant
@@ -50,6 +51,9 @@ markdown_extensions:
       permalink: true
   - pymdownx.blocks.tab:
       alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   - pymdownx.highlight:
       use_pygments: true
       pygments_lang_class: true
