@@ -1,0 +1,69 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Ruimte A",
+      "oppervlakte": 20.0,
+      "gedeeldMetAantalEenheden": 4,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 3150.0
+        }
+      ],
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "IKI",
+          "naam": "Inbouw kookplaat inductie"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        }
+      ]
+    },
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Ruimte B",
+      "oppervlakte": 2.0,
+      "gedeeldMetAantalEenheden": 4,
+      "verwarmd": false,
+      "installaties": [
+        {
+          "code": "HTO",
+          "naam": "Hangend toilet"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        }
+      ]
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
+}

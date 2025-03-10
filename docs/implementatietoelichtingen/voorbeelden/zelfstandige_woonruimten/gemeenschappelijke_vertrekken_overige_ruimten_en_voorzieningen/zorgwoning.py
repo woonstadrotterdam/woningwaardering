@@ -6,34 +6,27 @@ from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenRuimte,
-    BouwkundigElementenBouwkundigElement,
 )
 from woningwaardering.vera.referentiedata import (
-    Ruimtesoort,
-    Ruimtedetailsoort,
-    Bouwkundigelementdetailsoort,
+    Doelgroep,
+    Woningwaarderingstelsel,
 )
-from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
 
 
 def get_eenheid():
     eenheid = EenhedenEenheid()
-
-    eenheid.ruimten = [
-        EenhedenRuimte(
-            soort=Ruimtesoort.vertrek,
-            detail_soort=Ruimtedetailsoort.keuken,
-            oppervlakte=10,
-            bouwkundige_elementen=[
-                BouwkundigElementenBouwkundigElement(
-                    detail_soort=Bouwkundigelementdetailsoort.aanrecht, lengte=3150
-                )
-            ],
-        )   
-    ]
-
     eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+
+    eenheid.doelgroep = Doelgroep.zorg
+
+    print(
+        eenheid.model_dump_json(
+            indent=2,
+            exclude_none=True,
+            by_alias=True,
+            exclude_defaults=True,
+        )
+    )
 
     return eenheid
 
