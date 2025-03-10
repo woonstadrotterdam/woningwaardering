@@ -21,9 +21,6 @@ from woningwaardering.vera.referentiedata import (
 def get_eenheid():
     eenheid = EenhedenEenheid()
     eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-    # Verwarming in gedeelde ruimten wordt niet meegerekend
-    # Installaties in gedeelde ruimten worden dubbel meegerekend
-    # ? Afronding is niet correct, in voorbeeld wordt afgerond naar 10, moet 9,5 zijn
     eenheid.ruimten = [
         EenhedenRuimte(
             naam="Ruimte A",
