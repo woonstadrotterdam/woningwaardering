@@ -426,110 +426,115 @@ def _waardeer_installaties(
         Ruimtedetailsoort.badkamer_met_toilet,
         Ruimtedetailsoort.doucheruimte,
     ]:
-        # Geen waardering voor extra voorzieningen indien er geen wastafel in de ruimte is
-        if totaal_aantal_wastafels == 0:
-            warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): geen wastafel aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
-            )
-        # Geen waardering voor extra voorzieningen indien er geen douche of bad in de ruimte is
-        elif not bad_en_of_douche_aanwezig:
-            warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): geen bad of douche aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
-            )
-        elif totaal_aantal_wastafels > 0 and bad_en_of_douche_aanwezig:
-            for installatie, aantal in installaties.items():
-                if installatie not in (
-                    set(punten_voorzieningen)
-                    | {
-                        Voorzieningsoort.wastafel,
-                        Voorzieningsoort.meerpersoonswastafel,
-                        Voorzieningsoort.bad_en_douche,
-                        Voorzieningsoort.douche,
-                        Voorzieningsoort.bad,
-                    }
-                    | {
-                        Voorzieningsoort.hangend_toilet,
-                        Voorzieningsoort.staand_toilet,
-                    }
-                ):
-                    logger.debug(
-                        f"Installatie {installatie.naam} komt niet in aanmerking voor waardering"
-                    )
-                    continue
+        heeft_extra_voorzieningen = any(
+            installatie in punten_voorzieningen for installatie in installaties
+        )
 
-                if installatie in punten_voorzieningen:
-                    punten = rond_af(
-                        Decimal(str(aantal))
-                        * Decimal(str(punten_voorzieningen[installatie])),
-                        decimalen=2,
-                    )
-
-                    totaal_punten_voorzieningen += punten
-
-                    logger.info(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatie.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
-                    )
-                    yield (
-                        WoningwaarderingResultatenWoningwaardering(
-                            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam=f"{ruimte.naam} - Voorzieningen: {installatie.naam}",
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=Woningwaarderingstelselgroep.sanitair,
-                                        ruimte_id=ruimte.id,
-                                        criterium=installatie.name,
-                                    )
-                                ),
-                            ),
-                            punten=float(punten),
-                            aantal=aantal,
+        if heeft_extra_voorzieningen:
+            # Geen waardering voor extra voorzieningen indien er geen wastafel in de ruimte is
+            if totaal_aantal_wastafels == 0:
+                warnings.warn(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): geen wastafel aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
+                )
+            # Geen waardering voor extra voorzieningen indien er geen douche of bad in de ruimte is
+            elif not bad_en_of_douche_aanwezig:
+                warnings.warn(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): geen bad of douche aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
+                )
+            elif totaal_aantal_wastafels > 0 and bad_en_of_douche_aanwezig:
+                for installatie, aantal in installaties.items():
+                    if installatie not in (
+                        set(punten_voorzieningen)
+                        | {
+                            Voorzieningsoort.wastafel,
+                            Voorzieningsoort.meerpersoonswastafel,
+                            Voorzieningsoort.bad_en_douche,
+                            Voorzieningsoort.douche,
+                            Voorzieningsoort.bad,
+                        }
+                        | {
+                            Voorzieningsoort.hangend_toilet,
+                            Voorzieningsoort.staand_toilet,
+                        }
+                    ):
+                        logger.debug(
+                            f"Installatie {installatie.naam} komt niet in aanmerking voor waardering"
                         )
-                    )
+                        continue
 
-                    if installatie == Voorzieningsoort.kastruimte:
-                        maximum = Decimal("0.75")
-                        correctie = min(maximum - punten, Decimal("0"))
-                        if correctie < 0:
-                            totaal_punten_voorzieningen += correctie
-                            logger.info(
-                                f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten in {Woningwaarderingstelselgroep.sanitair.naam}."
-                            )
-                            yield WoningwaarderingResultatenWoningwaardering(
+                    if installatie in punten_voorzieningen:
+                        punten = rond_af(
+                            Decimal(str(aantal))
+                            * Decimal(str(punten_voorzieningen[installatie])),
+                            decimalen=2,
+                        )
+
+                        totaal_punten_voorzieningen += punten
+
+                        logger.info(
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatie.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
+                        )
+                        yield (
+                            WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                    naam=f"{ruimte.naam} - Voorzieningen: Max {maximum} punten voor {installatie.naam}",
+                                    naam=f"{ruimte.naam} - Voorzieningen: {installatie.naam}",
                                     id=str(
                                         CriteriumId(
                                             stelselgroep=Woningwaarderingstelselgroep.sanitair,
                                             ruimte_id=ruimte.id,
-                                            criterium=f"max_punten_{installatie.name}",
+                                            criterium=installatie.name,
                                         )
                                     ),
                                 ),
-                                punten=float(correctie),
+                                punten=float(punten),
+                                aantal=aantal,
                             )
-
-                    if installatie == Voorzieningsoort.stopcontact_bij_wastafel:
-                        correctie_aantal = (totaal_aantal_wastafels * 2) - aantal
-                        correctie = min(
-                            Decimal(str(correctie_aantal))
-                            * Decimal(punten_voorzieningen[installatie]),
-                            Decimal("0"),
                         )
-                        if correctie < 0:
-                            totaal_punten_voorzieningen += correctie
-                            logger.info(
-                                f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten want er zijn meer dan 2x zoveel stopcontacten ({aantal}) als wastafels ({totaal_aantal_wastafels})."
-                            )
-                            yield WoningwaarderingResultatenWoningwaardering(
-                                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                    naam=f"{ruimte.naam} - Voorzieningen: Max 2 stopcontacten per wastafel",
-                                    id=str(
-                                        CriteriumId(
-                                            stelselgroep=Woningwaarderingstelselgroep.sanitair,
-                                            ruimte_id=ruimte.id,
-                                            criterium=f"max_{Voorzieningsoort.stopcontact_bij_wastafel.name}",
-                                        )
+
+                        if installatie == Voorzieningsoort.kastruimte:
+                            maximum = Decimal("0.75")
+                            correctie = min(maximum - punten, Decimal("0"))
+                            if correctie < 0:
+                                totaal_punten_voorzieningen += correctie
+                                logger.info(
+                                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten in {Woningwaarderingstelselgroep.sanitair.naam}."
+                                )
+                                yield WoningwaarderingResultatenWoningwaardering(
+                                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                                        naam=f"{ruimte.naam} - Voorzieningen: Max {maximum} punten voor {installatie.naam}",
+                                        id=str(
+                                            CriteriumId(
+                                                stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                                ruimte_id=ruimte.id,
+                                                criterium=f"max_punten_{installatie.name}",
+                                            )
+                                        ),
                                     ),
-                                ),
-                                punten=float(correctie),
+                                    punten=float(correctie),
+                                )
+
+                        if installatie == Voorzieningsoort.stopcontact_bij_wastafel:
+                            correctie_aantal = (totaal_aantal_wastafels * 2) - aantal
+                            correctie = min(
+                                Decimal(str(correctie_aantal))
+                                * Decimal(punten_voorzieningen[installatie]),
+                                Decimal("0"),
                             )
+                            if correctie < 0:
+                                totaal_punten_voorzieningen += correctie
+                                logger.info(
+                                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatie.naam} van {correctie} punten want er zijn meer dan 2x zoveel stopcontacten ({aantal}) als wastafels ({totaal_aantal_wastafels})."
+                                )
+                                yield WoningwaarderingResultatenWoningwaardering(
+                                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                                        naam=f"{ruimte.naam} - Voorzieningen: Max 2 stopcontacten per wastafel",
+                                        id=str(
+                                            CriteriumId(
+                                                stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                                ruimte_id=ruimte.id,
+                                                criterium=f"max_{Voorzieningsoort.stopcontact_bij_wastafel.name}",
+                                            )
+                                        ),
+                                    ),
+                                    punten=float(correctie),
+                                )
