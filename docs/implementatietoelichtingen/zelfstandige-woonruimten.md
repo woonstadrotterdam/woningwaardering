@@ -790,6 +790,23 @@ Wanneer een object twee voorzieningen heeft, bijvoorbeeld een ingebouwde combi m
 
 #### 6.1 Puntentoekenning sanitaire basisvoorzieningen
 
+> [!TIP]
+> Dit voorbeeld toont de gegevens voor de waardering van sanitaire basisvoorzieningen.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/sanitair/basisvoorzieningen.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/sanitair/basisvoorzieningen.py"
+%}
+```
+> ///
+
 Het woningwaarderingsstelsel geeft punten aan sanitaire basisvoorzieningen:
 
 Puntentoekenning sanitaire basisvoorzieningen
@@ -831,6 +848,23 @@ Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangeb
 ~~Als het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebruik van zowel een wastafel als de naastgelegen douche of bad (bijvoorbeeld door middel van een zogenaamde zwenkarm), dan wordt uitsluitend de douche of het bad gewaardeerd. Dus niet én 1 punt voor wastafel én 4 of 6 punten voor douche of respectievelijk bad.~~
 
 #### 6.2 Puntentoekenning extra voorzieningen
+
+> [!TIP]
+> Dit voorbeeld toont de gegevens voor de waardering van sanitaire extra voorzieningen. Voor de waardering van extra voorzieningen dient in de ruimte ook een bad of douche aanwezig te zijn.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/sanitair/extra_voorzieningen.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/sanitair/extra_voorzieningen.py"
+%}
+```
+> ///
 
 Het woningwaarderingsstelsel geeft voor het onderdeel sanitair extra punten voor voorzieningen in de bad- of doucheruimte. Hiervoor geldt een maximum tot het aantal punten dat reeds voor douche, bad en/of bad/douche is verkregen. Anders gezegd: maximaal een verdubbeling van de toegekende punten voor douche, bad en/of bad/douche.
 
@@ -902,6 +936,25 @@ _\*~~Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of
 ~~Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder) wordt één punt toegekend. Voorwaarde is wel dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit. De wetgever gaat ervan uit dat met deze puntenwaardering de verhuurder een redelijke rendementswaarborg heeft voor het door hem geïnvesteerde vermogen (te weten de kosten van de ingrepen, verminderd met de eigen bijdrage van de huurder en de financiële tegemoetkoming van gemeente of (bij dure woonvoorzieningen) enige instantie die ingevolge een wettelijke regeling die tegemoetkoming verleent.~~
 
 ### Rubriek 8 Buitenruimten
+
+> [!TIP]
+> Dit voorbeeld toont de waardering van twee typen buitenruimten:
+> - Een privé achtertuin van 50 m².
+> - Een dakterras van 25 m² dat wordt gedeeld met één andere woonruimte en daarom voor 50% meetelt.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/buitenruimten/buitenruimten.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/buitenruimten/buitenruimten.py"
+%}
+```
+> ///
 
 #### 8.1 Puntentoekenning
 
