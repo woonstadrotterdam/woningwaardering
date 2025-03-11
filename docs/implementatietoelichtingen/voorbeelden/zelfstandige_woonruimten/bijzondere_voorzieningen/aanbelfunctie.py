@@ -6,9 +6,12 @@ from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Doelgroep,
+    Installatiesoort,
+    Ruimtedetailsoort,
+    Ruimtesoort,
     Woningwaarderingstelsel,
 )
 
@@ -17,7 +20,15 @@ def get_eenheid():
     eenheid = EenhedenEenheid()
     eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
 
-    eenheid.doelgroep = Doelgroep.zorg
+    eenheid.ruimten = [
+        EenhedenRuimte(
+            soort=Ruimtesoort.vertrek,
+            detail_soort=Ruimtedetailsoort.woonkamer,
+            installaties=[
+                Installatiesoort.aanbelfunctie_met_video_en_audioverbinding,
+            ],
+        )
+    ]
 
     print(
         eenheid.model_dump_json(
@@ -27,7 +38,7 @@ def get_eenheid():
             exclude_defaults=True,
         )
     )
-    
+
     return eenheid
 
 

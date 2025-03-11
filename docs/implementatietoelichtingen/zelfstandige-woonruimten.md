@@ -1392,6 +1392,23 @@ Voor de toepassing van de WOZ-waarde geldt een cohortensystematiek. Dit betekent
 
 #### 12.1 Zorgwoning
 
+> [!TIP]
+> Dit voorbeeld toont hoe een zorgwoning wordt aangegeven door de doelgroep op 'zorg' te zetten. De extra attributen in het model (zoals de WOZ-waarde, energielabel, ruimtegegevens, etc.) zijn van belang omdat de 35% opslag voor zorgwoningen wordt berekend over het totale puntenaantal van de rubrieken 1 t/m 11.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/bijzondere_voorzieningen/zorgwoning.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/bijzondere_voorzieningen/zorgwoning.py"
+%}
+```
+> ///
+
 Als sprake is van een zorgwoning, dan wordt het puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel met 35% verhoogd. Dit resulteert in een hogere maximale huurprijs. Dit resulteert in een hogere maximale huurprijs en telt daarom mee in het bepalen van de sector waarin de woonruimte valt. 
 
 > [!NOTE]
@@ -1426,11 +1443,44 @@ Als sprake is van een zorgwoning, dan wordt het puntentotaal van de rubrieken 1 
 
 #### 12.2 Aanbelfunctie met video- en audioverbinding
 
+> [!TIP]
+> Dit voorbeeld toont hoe een woning met aanbelfunctie wordt aangegeven.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/bijzondere_voorzieningen/aanbelfunctie.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/bijzondere_voorzieningen/aanbelfunctie.py"
+%}
+```
+> ///
+
 Een aanbelfunctie met video- en audioverbinding waarbij de voordeur automatisch kan worden geopend vanuit de woning wordt gewaardeerd met 0,25 punt.
 
 Hieronder wordt een systeem verstaan dat tweewegcommunicatie mogelijk maakt met beeld en geluid tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er tevens sprake te zijn van de mogelijkheid tot het openen van de (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang geeft tot het complex waarvan de woning onderdeel uitmaakt.
 
 #### 12.3 Laadpalen
+> [!TIP]
+> Dit voorbeeld toont hoe een carport met een laadpaal wordt aangegeven.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/bijzondere_voorzieningen/laadpaal.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/bijzondere_voorzieningen/laadpaal.py"
+%}
+```
+> ///
 
 Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik door de bewoners, wordt gewaardeerd met 2 punten. Dit geldt alleen als de laadpaal bestemd is voor het elektrisch opladen van een gemotoriseerd voertuig, niet zijnde een bromfiets, fiets met trapondersteuning of gehandicaptenvoertuig.
 
