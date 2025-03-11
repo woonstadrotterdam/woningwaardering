@@ -1,18 +1,5 @@
 {
-  "woningwaarderingstelsel": {
-    "code": "ONZ",
-    "naam": "Onzelfstandige woonruimten"
-  },
   "bouwjaar": 1921,
-  "monumenten": [],
-  "panden": [
-    {
-      "soort": {
-        "code": "EGW",
-        "naam": "Eengezinswoning"
-      }
-    }
-  ],
   "energieprestaties": [
     {
       "soort": {
@@ -33,9 +20,9 @@
       "waarde": "1.48"
     }
   ],
+  "monumenten": [],
   "ruimten": [
     {
-      "id": "Space_1",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -44,12 +31,10 @@
         "code": "SLA",
         "naam": "Slaapkamer"
       },
-      "naam": "Slaapkamer",
       "oppervlakte": 10.0,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
     },
     {
-      "id": "Space_2",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -58,9 +43,12 @@
         "code": "WOO",
         "naam": "Woonkamer"
       },
-      "naam": "Woonkamer",
       "oppervlakte": 10.0,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
     }
-  ]
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
 }

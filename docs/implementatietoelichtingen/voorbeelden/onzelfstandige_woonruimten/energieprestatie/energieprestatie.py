@@ -25,8 +25,6 @@ def get_eenheid():
     eenheid.bouwjaar = 1921
     eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
-    eenheid.panden = [EenhedenPand(soort=Pandsoort.eengezinswoning)]
-
     eenheid.energieprestaties = [
         EenhedenEnergieprestatie(
             soort=Energieprestatiesoort.energie_index,
@@ -43,18 +41,14 @@ def get_eenheid():
 
     eenheid.ruimten = [
         EenhedenRuimte(
-            id="Space_1",
             soort=Ruimtesoort.vertrek,
             detail_soort=Ruimtedetailsoort.slaapkamer,
-            naam="Slaapkamer",
             oppervlakte=10.0,
             gedeeld_met_aantal_onzelfstandige_woonruimten=5,
         ),
         EenhedenRuimte(
-            id="Space_2",
             soort=Ruimtesoort.vertrek,
             detail_soort=Ruimtedetailsoort.woonkamer,
-            naam="Woonkamer",
             oppervlakte=10.0,
             gedeeld_met_aantal_onzelfstandige_woonruimten=6,
         ),
