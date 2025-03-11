@@ -304,7 +304,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         punten = self._som_woz_punten(woningwaardering_groep)
 
-        woningwaardering_groep.punten = float(utils.rond_af(punten, decimalen=0))
+        woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
