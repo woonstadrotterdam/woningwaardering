@@ -67,23 +67,36 @@ def _voeg_onderliggende_woningwaarderingen_toe(
     woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
     aantal_waarderingen: int,
     indent: int = 0,
-) -> None:
+    index: int = 0,
+) -> int:
     """
     Voeg de onderliggende woningwaarderingen toe aan de tabel.
+
+    Args:
+        table (PrettyTable): De tabel om de onderliggende woningwaarderingen aan toe te voegen.
+        stelselgroep_naam (str): De naam van de stelselgroep.
+        woningwaardering (WoningwaarderingResultatenWoningwaardering): De woningwaardering om de onderliggende waarderingen van te vinden.
+        woningwaarderingen (list[WoningwaarderingResultatenWoningwaardering]): Lijst met alle woningwaarderingen.
+        aantal_waarderingen (int): Het totale aantal woningwaarderingen.
+        indent (int, optional): De inspringing voor de onderliggende waarderingen. Standaard is 0.
+        index (int, optional): De huidige index voor het bepalen van dividers. Standaard is 0.
+
+    Returns:
+        int: De bijgewerkte index na het toevoegen van onderliggende waarderingen.
     """
-
-    global index
-
     if not woningwaardering.criterium or not woningwaardering.criterium.id:
-        return
+        return index
 
     onderliggende_woningwaarderingen = [
         onderliggende_woningwaardering
         for onderliggende_woningwaardering in woningwaarderingen
-        if onderliggende_woningwaardering.criterium is not None
-        and onderliggende_woningwaardering.criterium.bovenliggende_criterium is not None
-        and onderliggende_woningwaardering.criterium.bovenliggende_criterium.id
-        == woningwaardering.criterium.id
+        if (
+            onderliggende_woningwaardering.criterium is not None
+            and onderliggende_woningwaardering.criterium.bovenliggende_criterium
+            is not None
+            and onderliggende_woningwaardering.criterium.bovenliggende_criterium.id
+            == woningwaardering.criterium.id
+        )
     ]
 
     for onderliggende_woningwaardering in onderliggende_woningwaarderingen:
@@ -109,14 +122,17 @@ def _voeg_onderliggende_woningwaarderingen_toe(
                 divider=index == aantal_waarderingen,
             )
 
-        _voeg_onderliggende_woningwaarderingen_toe(
-            table,
-            stelselgroep_naam,
-            onderliggende_woningwaardering,
-            woningwaarderingen,
-            aantal_waarderingen=aantal_waarderingen,
-            indent=indent + 1,
-        )
+            index = _voeg_onderliggende_woningwaarderingen_toe(
+                table,
+                stelselgroep_naam,
+                onderliggende_woningwaardering,
+                woningwaarderingen,
+                aantal_waarderingen=aantal_waarderingen,
+                indent=indent + 1,
+                index=index,
+            )
+
+    return index
 
 
 def naar_tabel(
@@ -134,6 +150,27 @@ def naar_tabel(
     Returns:
         PrettyTable: Een tabel met de gegevens van het woningwaarderingresultaat
     """
+    # Initialiseer de tabel
+    table = _initialiseer_tabel()
+
+    # Bepaal de groepen om te verwerken
+    groepen = _bepaal_groepen(woningwaardering_resultaat)
+
+    # Verwerk elke groep
+    for woningwaardering_groep in groepen:
+        _verwerk_woningwaardering_groep(table, woningwaardering_groep)
+
+    # Voeg totalen toe indien van toepassing
+    if isinstance(
+        woningwaardering_resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
+    ):
+        _voeg_totalen_toe(table, woningwaardering_resultaat)
+
+    return table
+
+
+def _initialiseer_tabel() -> PrettyTable:
+    """Initialiseer een nieuwe PrettyTable met de juiste kolommen en opmaak."""
     table = PrettyTable()
     table.field_names = [
         "Groep",
@@ -143,6 +180,8 @@ def naar_tabel(
         "Punten",
         "Opslag",
     ]
+
+    # Stel uitlijning in
     table.align["Groep"] = "l"
     table.align["Naam"] = "l"
     table.align["Aantal"] = "r"
@@ -151,7 +190,8 @@ def naar_tabel(
     table.align["Opslag"] = "r"
     table.float_format = ".2"
 
-    table._min_width = {
+    # Stel kolombreedtes in
+    min_widths = {
         "Groep": 33,
         "Naam": 75,
         "Aantal": 12,
@@ -159,180 +199,226 @@ def naar_tabel(
         "Punten": 8,
         "Opslag": 7,
     }
+    table._min_width = min_widths
+    table._max_width = min_widths
 
-    table._max_width = table._min_width
+    return table
 
-    for woningwaardering_groep in (
-        woningwaardering_resultaat.groepen or []
-        if isinstance(
-            woningwaardering_resultaat,
-            WoningwaarderingResultatenWoningwaarderingResultaat,
-        )
-        else [woningwaardering_resultaat]
+
+def _bepaal_groepen(
+    woningwaardering_resultaat: (
+        WoningwaarderingResultatenWoningwaarderingResultaat
+        | WoningwaarderingResultatenWoningwaarderingGroep
+    ),
+) -> list[WoningwaarderingResultatenWoningwaarderingGroep]:
+    """Bepaal de groepen om te verwerken op basis van het resultaattype."""
+    if isinstance(
+        woningwaardering_resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
     ):
-        stelselgroep_naam = (
-            woningwaardering_groep.criterium_groep
-            and woningwaardering_groep.criterium_groep.stelselgroep
-            and woningwaardering_groep.criterium_groep.stelselgroep.naam
-            or ""
-        )
-        stelselgroep_naam = (
-            (stelselgroep_naam[:30] + "...")
-            if len(stelselgroep_naam) > 33
-            else stelselgroep_naam
-        )
-        woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
-        aantal_waarderingen = len(woningwaarderingen)
-        global index
-        index = 0
+        return woningwaardering_resultaat.groepen or []
+    else:
+        return [woningwaardering_resultaat]
 
-        for woningwaardering in [
-            woningwaardering
-            for woningwaardering in woningwaarderingen
-            if woningwaardering.criterium is not None
-            and woningwaardering.criterium.bovenliggende_criterium is None
-        ]:
-            if (
-                woningwaardering_groep.criterium_groep
-                and woningwaardering_groep.criterium_groep.stelselgroep
-                and woningwaardering.criterium
-            ):
-                index += 1
-                table.add_row(
-                    [
-                        stelselgroep_naam,
-                        woningwaardering.criterium.naam,
-                        woningwaardering.aantal or "",
-                        woningwaardering.criterium.meeteenheid.naam
-                        if woningwaardering.criterium.meeteenheid is not None
-                        else "",
-                        rond_af(woningwaardering.punten, decimalen=2)
-                        if woningwaardering.punten is not None
-                        else "",
-                        f"{woningwaardering.opslagpercentage:.0%}"
-                        if woningwaardering.opslagpercentage is not None
-                        else "",
-                    ],
-                    divider=index == aantal_waarderingen,
-                )
 
-                _voeg_onderliggende_woningwaarderingen_toe(
-                    table,
-                    stelselgroep_naam,
-                    woningwaardering,
-                    woningwaarderingen,
-                    indent=1,
-                    aantal_waarderingen=aantal_waarderingen,
-                )
+def _verwerk_woningwaardering_groep(
+    table: PrettyTable,
+    woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> None:
+    """Verwerk een woningwaardering groep en voeg deze toe aan de tabel."""
+    # Controleer of de groep een criterium_groep heeft
+    if (
+        not woningwaardering_groep.criterium_groep
+        or not woningwaardering_groep.criterium_groep.stelselgroep
+    ):
+        return
 
-        aantallen = [
-            Decimal(woningwaardering.aantal)
-            for woningwaardering in woningwaarderingen
-            if woningwaardering.aantal is not None
-            and woningwaardering.criterium is not None
-            and woningwaardering.criterium.bovenliggende_criterium is None
-        ]
+    # Haal de stelselgroep naam op en verkort indien nodig
+    stelselgroep_naam = woningwaardering_groep.criterium_groep.stelselgroep.naam or ""
+    if len(stelselgroep_naam) > 33:
+        stelselgroep_naam = stelselgroep_naam[:30] + "..."
 
-        subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
+    # Verwerk de woningwaarderingen
+    woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
+    aantal_waarderingen = len(woningwaarderingen)
 
-        if (
-            (subtotaal is not None or aantal_waarderingen >= 1)
-            and woningwaardering_groep.criterium_groep
-            and woningwaardering_groep.criterium_groep.stelselgroep
-        ):
-            # stukje hieronder is om subtotaal en meeteenheid te bepalen.
-            # indien er meerdere meeteenheden zijn, dan wordt het subtotaal en de meeteenheid leeg bij subtotalen
-            meeteenheden_zonder_nones = [
-                woningwaardering.criterium.meeteenheid.naam or ""
-                for woningwaardering in woningwaarderingen
-                if woningwaardering.criterium is not None
-                and woningwaardering.criterium.meeteenheid is not None
-            ]
-            critera = [
-                woningwaardering.criterium or ""
-                for woningwaardering in woningwaarderingen
-                if woningwaardering.criterium is not None
-            ]
-            verschillende_meeteenheden = len(set(meeteenheden_zonder_nones)) > 1 or len(
-                critera
-            ) != len(meeteenheden_zonder_nones)
+    # Filter op bovenliggende criteria
+    bovenliggende_waarderingen: list[WoningwaarderingResultatenWoningwaardering] = [
+        w
+        for w in woningwaarderingen
+        if w.criterium is not None and w.criterium.bovenliggende_criterium is None
+    ]
 
-            if verschillende_meeteenheden:
-                meeteenheid = ""
-            else:
-                meeteenheid = meeteenheden_zonder_nones[0]
-
+    # Verwerk elke bovenliggende waardering
+    index = 0
+    for woningwaardering in bovenliggende_waarderingen:
+        if woningwaardering.criterium:
+            index += 1
             table.add_row(
                 [
-                    woningwaardering_groep.criterium_groep.stelselgroep.naam,
-                    "Totaal",
-                    (subtotaal or "") if not verschillende_meeteenheden else "",
-                    meeteenheid if not verschillende_meeteenheden else "",
-                    rond_af(woningwaardering_groep.punten, decimalen=2) or "",
-                    f"{woningwaardering_groep.opslagpercentage:.0%}"
-                    if woningwaardering_groep.opslagpercentage is not None
+                    stelselgroep_naam,
+                    woningwaardering.criterium.naam,
+                    woningwaardering.aantal or "",
+                    woningwaardering.criterium.meeteenheid.naam
+                    if woningwaardering.criterium.meeteenheid is not None
+                    else "",
+                    rond_af(woningwaardering.punten, decimalen=2)
+                    if woningwaardering.punten is not None
+                    else "",
+                    f"{woningwaardering.opslagpercentage:.0%}"
+                    if woningwaardering.opslagpercentage is not None
                     else "",
                 ],
-                divider=True,
+                divider=index == aantal_waarderingen,
             )
+
+            # Voeg onderliggende waarderingen toe
+            index = _voeg_onderliggende_woningwaarderingen_toe(
+                table,
+                stelselgroep_naam,
+                woningwaardering,
+                woningwaarderingen,
+                aantal_waarderingen=aantal_waarderingen,
+                indent=1,
+                index=index,
+            )
+
+    # Voeg subtotaal toe
+    _voeg_subtotaal_toe(table, woningwaardering_groep, woningwaarderingen)
+
+
+def _voeg_subtotaal_toe(
+    table: PrettyTable,
+    woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+    woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> None:
+    """Voeg een subtotaal toe aan de tabel voor een woningwaardering groep."""
+    # Controleer of er een criterium_groep en stelselgroep is
     if (
-        isinstance(
-            woningwaardering_resultaat,
-            WoningwaarderingResultatenWoningwaarderingResultaat,
-        )
-        and woningwaardering_resultaat.stelsel
+        not woningwaardering_groep.criterium_groep
+        or not woningwaardering_groep.criterium_groep.stelselgroep
     ):
+        return
+
+    # Bereken subtotaal
+    aantallen: list[Decimal] = [
+        Decimal(w.aantal)
+        for w in woningwaarderingen
+        if w.aantal is not None
+        and w.criterium is not None
+        and w.criterium.bovenliggende_criterium is None
+    ]
+
+    subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
+
+    # Controleer of er een subtotaal moet worden toegevoegd
+    if subtotaal is None and len(woningwaarderingen) < 1:
+        return
+
+    # Bepaal meeteenheid
+    meeteenheid = _bepaal_meeteenheid(woningwaarderingen)
+
+    # Voeg subtotaal toe
+    table.add_row(
+        [
+            woningwaardering_groep.criterium_groep.stelselgroep.naam,
+            "Totaal",
+            subtotaal or "" if meeteenheid else "",
+            meeteenheid,
+            rond_af(woningwaardering_groep.punten, decimalen=2) or "",
+            f"{woningwaardering_groep.opslagpercentage:.0%}"
+            if woningwaardering_groep.opslagpercentage is not None
+            else "",
+        ],
+        divider=True,
+    )
+
+
+def _bepaal_meeteenheid(
+    woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> str:
+    """Bepaal de meeteenheid voor een lijst van woningwaarderingen."""
+    meeteenheden_zonder_nones: list[str] = [
+        w.criterium.meeteenheid.naam or ""
+        for w in woningwaarderingen
+        if w.criterium is not None and w.criterium.meeteenheid is not None
+    ]
+
+    criteria: list[Any] = [
+        w.criterium or "" for w in woningwaarderingen if w.criterium is not None
+    ]
+
+    verschillende_meeteenheden = len(set(meeteenheden_zonder_nones)) > 1 or len(
+        criteria
+    ) != len(meeteenheden_zonder_nones)
+
+    if verschillende_meeteenheden or not meeteenheden_zonder_nones:
+        return ""
+
+    return meeteenheden_zonder_nones[0]
+
+
+def _voeg_totalen_toe(
+    table: PrettyTable,
+    woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> None:
+    """Voeg totalen toe aan de tabel voor een woningwaardering resultaat."""
+    if not woningwaardering_resultaat.stelsel:
+        return
+
+    # Voeg afgerond totaal toe
+    table.add_row(
+        [
+            woningwaardering_resultaat.stelsel.naam,
+            "Afgerond totaal",
+            "",
+            "",
+            woningwaardering_resultaat.punten,
+            f"{woningwaardering_resultaat.opslagpercentage:.0%}"
+            if woningwaardering_resultaat.opslagpercentage is not None
+            else "",
+        ],
+        divider=True,
+    )
+
+    # Controleer of er een maximale huur is
+    if woningwaardering_resultaat.maximale_huur is None:
+        return
+
+    # Voeg maximale huur toe
+    table.add_row(
+        [
+            "",
+            "Maximale huur",
+            woningwaardering_resultaat.maximale_huur,
+            "EUR",
+            "",
+            "",
+        ],
+    )
+
+    # Voeg huurprijsopslag toe indien van toepassing
+    if woningwaardering_resultaat.opslagpercentage is not None:
         table.add_row(
             [
-                woningwaardering_resultaat.stelsel.naam,
-                "Afgerond totaal",
+                "",
+                f"Huurprijsopslag {woningwaardering_resultaat.opslagpercentage:.0%}",
+                woningwaardering_resultaat.huurprijsopslag,
+                "EUR",
                 "",
                 "",
-                woningwaardering_resultaat.punten,
-                f"{woningwaardering_resultaat.opslagpercentage:.0%}"
-                if woningwaardering_resultaat.opslagpercentage is not None
-                else "",
             ],
             divider=True,
         )
-
-        if woningwaardering_resultaat.maximale_huur is None:
-            return table
-
         table.add_row(
             [
                 "",
-                "Maximale huur",
-                woningwaardering_resultaat.maximale_huur,
+                "Maximale huur inclusief opslag",
+                woningwaardering_resultaat.maximale_huur_inclusief_opslag,
                 "EUR",
                 "",
                 "",
             ],
         )
-        if woningwaardering_resultaat.opslagpercentage is not None:
-            table.add_row(
-                [
-                    "",
-                    f"Huurprijsopslag {woningwaardering_resultaat.opslagpercentage:.0%}",
-                    woningwaardering_resultaat.huurprijsopslag,
-                    "EUR",
-                    "",
-                    "",
-                ],
-                divider=True,
-            )
-            table.add_row(
-                [
-                    "",
-                    "Maximale huur inclusief opslag",
-                    woningwaardering_resultaat.maximale_huur_inclusief_opslag,
-                    "EUR",
-                    "",
-                    "",
-                ],
-            )
-
-    return table
 
 
 def energieprestatie_met_geldig_label(
