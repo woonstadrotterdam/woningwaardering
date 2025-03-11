@@ -92,6 +92,7 @@ def assert_output_model(
         )
 
     assert_som_bovenliggend_criterium(resultaat)
+    assert_punten_afgerond_op_kwarten(resultaat)
 
 
 def laad_specifiek_input_en_output_model(
@@ -301,3 +302,18 @@ def assert_som_bovenliggend_criterium(
                     f"Som van onderliggende punten ({punten_onderliggend[bovenliggend_id]}) "
                     f"!= Punten bovenliggend criterium ({verwachte_punten})"
                 )
+
+
+def assert_punten_afgerond_op_kwarten(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+):
+    """
+    Controleert of alle punten in het resultaat zijn afgerond op kwarten (0.25).
+    """
+    for groep in resultaat.groepen or []:
+        # Check groepstotaal
+        if groep.punten is not None:
+            remainder = round((groep.punten % 0.25) * 100) / 100
+            assert (
+                remainder == 0.0
+            ), f"Groep '{groep.criterium_groep.naam}' heeft punten {groep.punten} die niet zijn afgerond op kwarten"
