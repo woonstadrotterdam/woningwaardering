@@ -255,7 +255,7 @@ Voor zolderruimten gelden, naast bovengenoemde eisen, nog twee eisen om als vert
 #### 1.3 Meetinstructies
 
 > [!NOTE]
-> De woningwaardering package gaat er vanuit dat de gebruiker zich houdt aan onderstaande meetinstructies voor vertrekken. Met uitzondering van _Kasten_ kunnen de meetinstructies niet getoets of berekend worden op basis van het VERA model.
+> De woningwaardering package gaat er vanuit dat de gebruiker zich houdt aan onderstaande meetinstructies voor vertrekken. Met uitzondering van _Kasten_ kunnen de meetinstructies niet getoetst of berekend worden op basis van het VERA model.
 
 
 In de toelichting op het woningwaarderingsstelsel is een aantal meetinstructies meegegeven:
