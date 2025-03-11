@@ -49,6 +49,7 @@ markdown_extensions:
   - markdown.extensions.extra
   - markdown.extensions.toc:
       permalink: true
+      toc_depth: 3
   - pymdownx.blocks.tab:
       alternate_style: true
       slugify: !!python/object/apply:pymdownx.slugs.slugify
