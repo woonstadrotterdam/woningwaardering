@@ -77,9 +77,7 @@ nav:
     - Overzicht: index.md
     - Opzet: introductie/opzet.md
   - Aan de slag:
-    - Installatie: aan-de-slag/index.md
-    - Gebruik: aan-de-slag/gebruik.md
-    - Voorbeelden: aan-de-slag/voorbeelden.md
+    - Aan de slag: aan-de-slag/index.md
   - Implementatietoelichtingen:
     - Overzicht: implementatietoelichtingen/index.md
     - Zelfstandige woonruimten: implementatietoelichtingen/zelfstandige-woonruimten.md
