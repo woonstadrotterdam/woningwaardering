@@ -376,7 +376,7 @@ Een toiletruimte kan als overige ruimte worden gewaardeerd als aan de eisen van 
 #### 2.3 Meetinstructies
 
 > [!NOTE]
-> De woningwaardering package gaat er vanuit dat de gebruiker zich houdt aan onderstaande meetinstructies voor oveirge ruimten. Met uizondering van _kasten_ kunnen de meetinstructies niet getoets of berekend worden op basis van het VERA model.
+> De woningwaardering package gaat er vanuit dat de gebruiker zich houdt aan onderstaande meetinstructies voor oveirge ruimten. Met uizondering van _kasten_ kunnen de meetinstructies niet getoetst of berekend worden op basis van het VERA model.
 
 
 De wetgever heeft een aantal meetinstructies meegegeven:
