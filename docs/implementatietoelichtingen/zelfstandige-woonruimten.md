@@ -1018,9 +1018,7 @@ In totaal kan maximaal 15 punten worden toegekend.
 ### Rubriek 9 Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
 
 > [!TIP]
-> Dit voorbeeld toont de waardering van twee typen buitenruimten:
-> - Een privé achtertuin van 50 m².
-> - Een dakterras van 25 m² dat wordt gedeeld met één andere woonruimte en daarom voor 50% meetelt.
+> Dit voorbeeld toont de waardering de voorbeeldberekening onder [9.3 Rekenmethode en voorbeeldberekening](#93-rekenmethode-en-voorbeeldberekening)
 > /// tab | JSON
 ```json
 {%
