@@ -121,6 +121,22 @@ class Eenheidklimaatbeheersing(Referentiedatasoort):
         naam="Onverwarmd",
     )
 
+    verwarmd = EenheidklimaatbeheersingReferentiedata(
+        code="VER",
+        naam="Verwarmd",
+    )
+    """
+    Mogelijkheid om de ruimte of eenheid te verwarmen
+    """
+
+    gekoeld = EenheidklimaatbeheersingReferentiedata(
+        code="GEK",
+        naam="Gekoeld",
+    )
+    """
+    Mogelijkheid om de ruimte of eenheid te verkoelen
+    """
+
     vloerverwarming = EenheidklimaatbeheersingReferentiedata(
         code="VLV",
         naam="Vloerverwarming",

@@ -261,7 +261,12 @@ class Onderhoudspecialisme(Referentiedatasoort):
         naam="Specialist Vochtwering",
     )
     """
-    Specialist voor schimmel en vocht bestrijding
+    Een specialist in vochtwering is een professional die zich richt op het onderzoeken,
+    identificeren, behandelen en voorkomen van vochtproblemen in gebouwen. Deze
+    experts kunnen helpen bij problemen zoals optrekkend vocht, condensatie,
+    lekkages en schimmelvorming. Ze gebruiken verschillende technieken en materialen
+    om vocht buiten te houden en de structurele integriteit van een gebouw te
+    behouden.
     """
 
     specialist_witgoed = OnderhoudspecialismeReferentiedata(

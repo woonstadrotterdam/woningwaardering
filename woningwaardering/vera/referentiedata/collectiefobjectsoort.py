@@ -239,33 +239,37 @@ class Collectiefobjectsoort(Referentiedatasoort):
     hobbykamer, studeerkamer etc.
     """
 
-    parkeerplek_type_1 = CollectiefobjectsoortReferentiedata(
-        code="PP1",
-        naam="Parkeerplek type 1",
-        parent=Ruimtesoort.overige_ruimten,
+    inpandige_afgesloten_parkeergarage = CollectiefobjectsoortReferentiedata(
+        code="IAP",
+        naam="Inpandige afgesloten parkeergarage",
+        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
-    Parkeerplek Type I: parkeerplek in afgesloten parkeergarage behorende tot het
-    complex.
+    Inpandige en afgesloten parkeergarage behorend tot het complex met niet specifiek
+    toegewezen parkeerplekken. Binnen de WWD vallen deze parkeerplekken onder het
+    type Parkeerplek type I
     """
 
-    parkeerplek_type_2 = CollectiefobjectsoortReferentiedata(
-        code="PP2",
-        naam="Parkeerplek type 2",
-        parent=Ruimtesoort.buitenruimte,
+    uitpandige_afgesloten_parkeergarage = CollectiefobjectsoortReferentiedata(
+        code="UAP",
+        naam="Uitpandige afgesloten parkeergarage",
+        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
-    Parkeerplek Type II: parkeerplek buiten behorende tot het complex met dak.
+    Uitpandige en afgesloten parkeergarage met behorend tot het complex met niet
+    specifiek toegewezen parkeerplekken. Binnen de WWD vallen deze parkeerplekken
+    onder het type Parkeerplek Type II
     """
 
-    parkeerplek_type_3 = CollectiefobjectsoortReferentiedata(
-        code="PP3",
-        naam="Parkeerplek type 3",
-        parent=Ruimtesoort.buitenruimte,
+    parkeerterrein_behorend_bij_complex = CollectiefobjectsoortReferentiedata(
+        code="PCO",
+        naam="Parkeerterrein behorend bij complex",
+        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
-    Parkeerplek Type III: parkeerplek buiten behorende tot het complex of de woning
-    zonder dak.
+    Parkeerterrein behorend bij een complex met niet specifiek toegewezen
+    parkeerplekken. Binnen de WWD vallen deze parkeerplekken onder het type
+    Parkeerplek Type III
     """
 
     recreatie_en_of_ontmoetingsruimte = CollectiefobjectsoortReferentiedata(

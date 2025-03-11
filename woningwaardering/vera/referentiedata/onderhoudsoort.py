@@ -71,3 +71,11 @@ class Onderhoudsoort(Referentiedatasoort):
     Bij aanpassing op verzoek van de huurder voor verbetering van het woongenot.
     Voorbeeld is het voortijdig vervangen van de wc-pot door een luxe uiitvoering
     """
+
+    leefbaarheid = OnderhoudsoortReferentiedata(
+        code="LEE",
+        naam="Leefbaarheid",
+    )
+    """
+    Bij benodigde aanpassing van de woning om de leefbaarheid te verhogen
+    """

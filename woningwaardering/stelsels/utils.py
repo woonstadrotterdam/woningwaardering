@@ -619,7 +619,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek,
         Ruimtedetailsoort.open_parkeergarage_specifieke_plek,
         Ruimtedetailsoort.parkeergarage_niet_specifieke_plek,
-        Ruimtedetailsoort.parkeergarage_specifieke_plek,
+        Ruimtedetailsoort.specifieke_parkeerplek_in_parkeergarage,
     ]:
         warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort} en kan daardoor niet geclassificeerd worden. Gebruik voor parkeerplaatsen: {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt} of {Ruimtedetailsoort.parkeervak_auto_binnen}"
         warnings.warn(warning_msg, UserWarning)
