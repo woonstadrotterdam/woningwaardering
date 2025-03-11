@@ -1131,10 +1131,12 @@ Voor verschillende typen gemeenschappelijke parkeerplekken, afhankelijk van afde
 
 > [!NOTE]
 > Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:
-> * Type I: `Ruimtedetailsoort.parkeervak_auto_binnen` met code `VAI`
-> * Type II: `Ruimtedetailsoort.carport` met code `CAR`
-> * Type III: `Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt` met code `VAU`
-
+>
+> | Type | Ruimtedetailsoort | Code |
+> | --- | --- | --- |
+> | Type I | `Ruimtedetailsoort.parkeervak_auto_binnen` | `VAI` |
+> | Type II | `Ruimtedetailsoort.carport` | `CAR` |
+> | Type III | `Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt` | `VAU` |
 
 #### 10.2 Definitie gemeenschappelijke parkeerruimte
 
