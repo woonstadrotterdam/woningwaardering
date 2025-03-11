@@ -309,7 +309,7 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 25.0,
+      "punten": 24.5,
       "woningwaarderingen": [
         {
           "aantal": 170000.0,
@@ -398,12 +398,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 489.35,
-  "punten": 81.0,
+  "maximaleHuur": 482.76,
+  "punten": 80.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 489.35
+  "maximaleHuurInclusiefOpslag": 482.76
 }
