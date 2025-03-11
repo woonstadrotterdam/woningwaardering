@@ -1,0 +1,50 @@
+{
+    "ruimten": [
+      {
+        "soort": {
+          "code": "PAR",
+          "naam": "Parkeergelegenheid"
+        },
+        "detailSoort": {
+          "code": "CAR",
+          "naam": "Carport"
+        },
+        "breedte": 3.0,
+        "lengte": 4.0,
+        "oppervlakte": 12.0,
+        "gedeeldMetAantalEenheden": 10,
+        "bouwkundigeElementen": [
+          {
+            "soort": {
+              "code": "VOO",
+              "naam": "Voorziening"
+            },
+            "detailSoort": {
+              "code": "LAA",
+              "naam": "Laadpaal"
+            }
+          }
+        ],
+        "aantal": 5
+      },
+      {
+        "soort": {
+          "code": "PAR",
+          "naam": "Parkeergelegenheid"
+        },
+        "detailSoort": {
+          "code": "VAU",
+          "naam": "Parkeervak auto (buiten, niet overdekt)"
+        },
+        "breedte": 3.0,
+        "lengte": 4.0,
+        "oppervlakte": 12.0,
+        "gedeeldMetAantalEenheden": 10,
+        "aantal": 2
+      }
+    ],
+    "Woningwaarderingstelsel": {
+      "code": "ZEL",
+      "naam": "Zelfstandige woonruimten"
+    }
+  }

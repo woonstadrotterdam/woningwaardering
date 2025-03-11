@@ -1165,68 +1165,24 @@ Tien adressen delen vijf type II-parkeerplekken met laadpaal en twee type III-pa
 3. Afronden geschiedt op een kwart punt per adres, in dit voorbeeld dus op 4,75.
 
 > [!NOTE]
-> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken bovenstaande berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven hoeveel van bovenstaande parkertypes de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden. Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt (in JSON-formaat) meegegeven worden.
+> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken bovenstaande berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven hoeveel van bovenstaande parkertypes de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte ook keer het `Eenhedenruimte.aantal` meegeteld voor het berekenen van de punten. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden.
 
-
+> [!TIP]
+> Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt meegegeven worden. 
+> /// tab | JSON
 ```json
-{
-  "id": "12006000004",
-  "ruimten": [
-    {
-      "id": "1",
-      "gedeeld_met_aantal_eenheden": 10,
-      "aantal": 5,
-      "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
-      },
-      "detailSoort": {
-        "code": "CAR",
-        "naam": "Carport"
-      },
-      "naam": "Carport",
-      "oppervlakte": 12,
-      "breedte": 3,
-      "lengte": 4,
-      "bouwkundigeElementen": [
-        {
-          "id": "laadpaal_1",
-          "naam": "Laadpaal",
-          "soort": {
-            "code": "Voo",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "LAA",
-            "naam": "Laadpaal"
-          }
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "gedeeld_met_aantal_eenheden": 10,
-      "aantal": 2,
-      "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
-      },
-      "detailSoort": {
-        "code": "VAU",
-        "naam": "Parkeervak auto (buiten, niet overdekt)"
-      },
-      "naam": "Parkeervak buiten",
-      "oppervlakte": 12,
-      "breedte": 3,
-      "lengte": 4
-    }
-  ]
-}
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/gemeenschappelijke_parkeerruimten/voorbeeld.json"
+%}
 ```
-
-> [!NOTE]
-> Let op: in bovenstaand voorbeeld, wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte ook keer het `Eenhedenruimte.aantal` meegeteld voor het berekenen van de punten. In bovenstaand voorbeeld wordt de laadpaal dus vijf (5) keer meegeteld.
-
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/gemeenschappelijke_parkeerruimten/voorbeeld.py"
+%}
+```
+> ///
 
 ### Rubriek 11 Punten voor de WOZ-waarde
 
