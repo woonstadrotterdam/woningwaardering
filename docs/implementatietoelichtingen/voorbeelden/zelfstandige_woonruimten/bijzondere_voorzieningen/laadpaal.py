@@ -35,15 +35,6 @@ def get_eenheid():
         ),
     ]
 
-    print(
-        eenheid.model_dump_json(
-            indent=2,
-            exclude_none=True,
-            by_alias=True,
-            exclude_defaults=True,
-        )
-    )
-
     return eenheid
 
 
