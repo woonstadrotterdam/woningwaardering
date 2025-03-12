@@ -79,5 +79,5 @@ dev = [
     "tomli>=2.2",
 ]
 monumenten = [
-    "monumenten>=0.2"
+    "monumenten>=0.3"
 ]
