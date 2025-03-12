@@ -5,7 +5,7 @@
         "code": "VTK",
         "naam": "Vertrek"
       },
-      "detail_soort": {
+      "detailSoort": {
         "code": "WOO",
         "naam": "Woonkamer"
       },
@@ -14,7 +14,7 @@
       "verkoeld": true
     }
   ],
-  "woningwaarderingstelsel": {
+  "Woningwaarderingstelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   }

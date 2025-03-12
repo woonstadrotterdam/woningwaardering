@@ -1,28 +1,28 @@
 {
-    "ruimten": [
-      {
-        "soort": {
-          "code": "VTK",
-          "naam": "Vertrek"
-        },
-        "detailSoort": {
-          "code": "KEU",
-          "naam": "Keuken"
-        },
-        "oppervlakte": 10.0,
-        "bouwkundigeElementen": [
-          {
-            "detailSoort": {
-              "code": "AAN",
-              "naam": "Aanrecht"
-            },
-            "lengte": 3150.0
-          }
-        ]
-      }
-    ],
-    "Woningwaarderingstelsel": {
-      "code": "ZEL",
-      "naam": "Zelfstandige woonruimten"
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 3150.0
+        }
+      ]
     }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
   }
+}

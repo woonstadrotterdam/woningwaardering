@@ -5,14 +5,14 @@
         "code": "VTK",
         "naam": "Vertrek"
       },
-      "detail_soort": {
+      "detailSoort": {
         "code": "WOO",
         "naam": "Woonkamer"
       },
       "oppervlakte": 50.0
     }
   ],
-  "woningwaarderingstelsel": {
+  "Woningwaarderingstelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   }

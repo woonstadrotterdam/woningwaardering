@@ -1,7 +1,7 @@
 {
-  "begin_bouwdatum": "2024-06-01",
+  "beginBouwdatum": "2024-06-01",
   "bouwjaar": 2024,
-  "in_exploitatiedatum": "2024-09-01",
+  "inExploitatiedatum": "2024-09-01",
   "energieprestaties": [
     {
       "soort": {
@@ -36,14 +36,14 @@
         "code": "VTK",
         "naam": "Vertrek"
       },
-      "detail_soort": {
+      "detailSoort": {
         "code": "KEU",
         "naam": "Keuken"
       },
       "oppervlakte": 10.0,
-      "bouwkundige_elementen": [
+      "bouwkundigeElementen": [
         {
-          "detail_soort": {
+          "detailSoort": {
             "code": "AAN",
             "naam": "Aanrecht"
           },
@@ -52,13 +52,13 @@
       ]
     }
   ],
-  "woningwaarderingstelsel": {
+  "Woningwaarderingstelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "woz_eenheden": [
+  "wozEenheden": [
     {
-      "vastgestelde_waarde": 270000.0,
+      "vastgesteldeWaarde": 270000.0,
       "waardepeildatum": "2024-01-01"
     }
   ]

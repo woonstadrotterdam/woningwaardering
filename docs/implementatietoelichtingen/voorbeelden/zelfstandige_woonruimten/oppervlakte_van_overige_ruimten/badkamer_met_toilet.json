@@ -5,14 +5,14 @@
         "code": "OVR",
         "naam": "Overige ruimten"
       },
-      "detail_soort": {
+      "detailSoort": {
         "code": "BAT",
         "naam": "Badkamer met toilet"
       },
       "oppervlakte": 8.0
     }
   ],
-  "woningwaarderingstelsel": {
+  "Woningwaarderingstelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   }

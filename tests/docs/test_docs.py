@@ -10,10 +10,11 @@ def get_test_cases():
     """Scan for test case folders containing pairs of .py and .json files"""
     base_path = Path("docs/implementatietoelichtingen/voorbeelden")
     test_cases = []
-    
+    created_json_files = []
+
     # Iterate through housing type directories
     for stelsel_dir in base_path.iterdir():
-        if not stelsel_dir.is_dir():
+        if not stelsel_dir.is_dir() or stelsel_dir.name != "zelfstandige_woonruimten":
             continue
             
         stelsel = stelsel_dir.name  # e.g., "zelfstandige_woonruimten"
@@ -30,20 +31,37 @@ def get_test_cases():
             stelselgroep_class_name = stelselgroep_dir.name.replace('_', ' ').title().replace(' ', '')
             
             for python_file in python_files:
-                # For each Python file, check if there's a matching JSON file
+                # For each Python file, get a matching JSON file path
                 base_name = python_file.stem
                 json_file = stelselgroep_dir / f"{base_name}.json"
+
+                test_case = {
+                    'stelsel': stelsel,
+                    'folder': stelselgroep_dir,
+                    'python_file': python_file,
+                    'json_file': json_file,
+                    'class_name': stelselgroep_class_name,
+                    'id': f"{stelsel}/{stelselgroep_dir.name}/{base_name}"
+                }
+
+                if not json_file.exists():
+                    with open(json_file, "w") as f:
+                        f.write(get_pydantic_instance(test_case).model_dump_json(indent=2, exclude_none=True, by_alias=True, exclude_defaults=True))
+                        created_json_files.append(json_file)
                 
-                if json_file.exists():
-                    test_cases.append({
-                        'stelsel': stelsel,
-                        'folder': stelselgroep_dir,
-                        'python_file': python_file,
-                        'json_file': json_file,
-                        'class_name': stelselgroep_class_name,
-                        'id': f"{stelsel}/{stelselgroep_dir.name}/{base_name}"
-                    })
+                test_cases.append(test_case)
     
+        if created_json_files:
+            message = (
+                "\n\n"
+                "🔧 JSON files gegenereerd 🔧\n"
+                "De volgende files bestonden nog niet en zijn aangemaakt:\n"
+                f"{'\n'.join(str(f) for f in created_json_files)}\n\n"
+                "Review de files en run de tests opnieuw.\n"
+            )
+            
+            pytest.exit(message)
+
     return test_cases
 
 # Helper functions to reduce code duplication
