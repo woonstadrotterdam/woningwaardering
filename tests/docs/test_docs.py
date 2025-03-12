@@ -52,11 +52,12 @@ def get_test_cases():
                 test_cases.append(test_case)
     
         if created_json_files:
+            filestring = "\n".join(str(f) for f in created_json_files)
             message = (
                 "\n\n"
                 "🔧 JSON files gegenereerd 🔧\n"
                 "De volgende files bestonden nog niet en zijn aangemaakt:\n"
-                f"{'\n'.join(str(f) for f in created_json_files)}\n\n"
+                f"{filestring}\n\n"
                 "Review de files en run de tests opnieuw.\n"
             )
             
