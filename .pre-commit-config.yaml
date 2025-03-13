@@ -57,7 +57,7 @@ repos:
           - "jinja2>=3.1"
           - "libcst>=1.5"
           - "loguru>=0.7"
-          - "monumenten>=0.2"
+          - "monumenten>=0.3"
           - "pandas-stubs>=2.0"
           - "prettytable>=3.12"
           - "pydantic>=2.10"
