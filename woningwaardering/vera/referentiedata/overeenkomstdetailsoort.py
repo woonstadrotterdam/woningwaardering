@@ -71,6 +71,18 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     gewenst.
     """
 
+    midstay = OvereenkomstdetailsoortReferentiedata(
+        code="MID",
+        naam="Midstay",
+        parent=Overeenkomstsoort.huurovereenkomst,
+    )
+    """
+    Midstay betreft tijdelijke huur voor een middellange periode, doorgaans tussen zes
+    maanden en drie jaar. In tegenstelling tot een regulier Tijdelijk contract (TIJ)
+    kent Midstay specifieke contractvoorwaarden die afhangen van wet- en regelgeving
+    of gemeentelijk beleid.
+    """
+
     mge_constructie = OvereenkomstdetailsoortReferentiedata(
         code="MGE",
         naam="MGE constructie",

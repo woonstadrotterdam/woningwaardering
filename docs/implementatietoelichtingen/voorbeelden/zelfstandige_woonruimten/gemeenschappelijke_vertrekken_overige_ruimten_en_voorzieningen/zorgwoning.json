@@ -1,0 +1,10 @@
+{
+  "doelgroep": {
+    "code": "ZOR",
+    "naam": "Zorg"
+  },
+  "Woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
+}

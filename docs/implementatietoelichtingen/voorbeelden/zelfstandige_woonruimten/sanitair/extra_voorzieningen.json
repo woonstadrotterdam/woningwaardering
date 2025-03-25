@@ -1,0 +1,65 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "oppervlakte": 10.0,
+      "installaties": [
+        {
+          "code": "BAD",
+          "naam": "Bad"
+        },
+        {
+          "code": "TME",
+          "naam": "Thermostatische mengkraan"
+        },
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        },
+        {
+          "code": "TME",
+          "naam": "Thermostatische mengkraan"
+        },
+        {
+          "code": "DOW",
+          "naam": "Douchewand"
+        },
+        {
+          "code": "HTO",
+          "naam": "Hangend toilet"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "IKW",
+          "naam": "Ingebouwd kastje met in- of opgebouwde wastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "STW",
+          "naam": "Stopcontact bij wastafel"
+        }
+      ]
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
+}

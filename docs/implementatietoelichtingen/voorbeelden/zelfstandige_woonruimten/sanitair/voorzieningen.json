@@ -1,0 +1,46 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 3150.0
+        }
+      ],
+      "installaties": [
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "IKI",
+          "naam": "Inbouw kookplaat inductie"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IVA",
+          "naam": "Inbouw vaatwasmachine"
+        }
+      ]
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
+}

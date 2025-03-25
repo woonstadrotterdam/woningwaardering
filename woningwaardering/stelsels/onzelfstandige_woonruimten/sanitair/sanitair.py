@@ -21,8 +21,8 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Installatiesoort,
     Ruimtedetailsoort,
-    Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselgroepReferentiedata,
@@ -128,13 +128,13 @@ class Sanitair(Stelselgroep):
                             woningwaardering.criterium
                             and woningwaardering.criterium.naam
                             and isinstance(woningwaardering.criterium.naam, str)
-                            and f"{ruimte.naam} - {Voorzieningsoort.wastafel.naam}"
+                            and f"{ruimte.naam} - {Installatiesoort.wastafel.naam}"
                             in woningwaardering.criterium.naam
                             and woningwaardering.aantal is not None
                             and isinstance(
-                                Voorzieningsoort.meerpersoonswastafel.naam, str
+                                Installatiesoort.meerpersoonswastafel.naam, str
                             )
-                            and Voorzieningsoort.meerpersoonswastafel.naam
+                            and Installatiesoort.meerpersoonswastafel.naam
                             not in woningwaardering.criterium.naam
                         )
                     ]
@@ -150,7 +150,7 @@ class Sanitair(Stelselgroep):
                             woningwaardering.criterium
                             and woningwaardering.criterium.naam
                             and isinstance(woningwaardering.criterium.naam, str)
-                            and f"{ruimte.naam} - {Voorzieningsoort.meerpersoonswastafel.naam}"
+                            and f"{ruimte.naam} - {Installatiesoort.meerpersoonswastafel.naam}"
                             in woningwaardering.criterium.naam
                         )
                     ]
@@ -177,11 +177,11 @@ class Sanitair(Stelselgroep):
                         woningwaardering.criterium
                         and woningwaardering.criterium.naam
                         and isinstance(woningwaardering.criterium.naam, str)
-                        and isinstance(Voorzieningsoort.wastafel.naam, str)
-                        and isinstance(Voorzieningsoort.meerpersoonswastafel.naam, str)
-                        and f"{ruimte.naam} - {Voorzieningsoort.wastafel.naam}"
+                        and isinstance(Installatiesoort.wastafel.naam, str)
+                        and isinstance(Installatiesoort.meerpersoonswastafel.naam, str)
+                        and f"{ruimte.naam} - {Installatiesoort.wastafel.naam}"
                         in woningwaardering.criterium.naam
-                        and Voorzieningsoort.meerpersoonswastafel.naam
+                        and Installatiesoort.meerpersoonswastafel.naam
                         not in woningwaardering.criterium.naam
                         and woningwaardering.aantal is not None
                         and woningwaardering.aantal > 1
@@ -194,12 +194,12 @@ class Sanitair(Stelselgroep):
                             (
                                 WoningwaarderingResultatenWoningwaardering(
                                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                        naam=f"{ruimte.naam} - Max 1 punt voor {Voorzieningsoort.wastafel.naam}",
+                                        naam=f"{ruimte.naam} - Max 1 punt voor {Installatiesoort.wastafel.naam}",
                                         id=str(
                                             CriteriumId(
                                                 stelselgroep=stelselgroep,
                                                 ruimte_id=ruimte.id,
-                                                criterium=f"max_punten_{Voorzieningsoort.wastafel.name}",
+                                                criterium=f"max_punten_{Installatiesoort.wastafel.name}",
                                             )
                                         ),
                                     ),
@@ -222,8 +222,8 @@ class Sanitair(Stelselgroep):
                         woningwaardering.criterium
                         and woningwaardering.criterium.naam
                         and isinstance(woningwaardering.criterium.naam, str)
-                        and isinstance(Voorzieningsoort.meerpersoonswastafel.naam, str)
-                        and f"{ruimte.naam} - {Voorzieningsoort.meerpersoonswastafel.naam}"
+                        and isinstance(Installatiesoort.meerpersoonswastafel.naam, str)
+                        and f"{ruimte.naam} - {Installatiesoort.meerpersoonswastafel.naam}"
                         in woningwaardering.criterium.naam
                         and woningwaardering.aantal is not None
                         and woningwaardering.aantal > 1
@@ -235,12 +235,12 @@ class Sanitair(Stelselgroep):
                             index + 1,
                             WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                    naam=f"{ruimte.naam} - Max 1.5 punt voor {Voorzieningsoort.meerpersoonswastafel.naam}",
+                                    naam=f"{ruimte.naam} - Max 1.5 punt voor {Installatiesoort.meerpersoonswastafel.naam}",
                                     id=str(
                                         CriteriumId(
                                             stelselgroep=stelselgroep,
                                             ruimte_id=ruimte.id,
-                                            criterium=f"max_punten_{Voorzieningsoort.meerpersoonswastafel.name}",
+                                            criterium=f"max_punten_{Installatiesoort.meerpersoonswastafel.name}",
                                         )
                                     ),
                                 ),

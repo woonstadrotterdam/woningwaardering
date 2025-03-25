@@ -23,6 +23,7 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Energielabel,
     Energieprestatiesoort,
     Pandsoort,
     PandsoortReferentiedata,
@@ -98,12 +99,14 @@ class Energieprestatie(Stelselgroep):
         if (
             not energieprestatie.soort
             or not energieprestatie.label
-            or not energieprestatie.label.naam
+            or not energieprestatie.label.code
             or not energieprestatie.registratiedatum
         ):
             return woningwaardering
 
-        label = energieprestatie.label.naam
+        label = getattr(
+            Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
+        ).naam
         woningwaardering.criterium.naam = f"{label}"
 
         woningwaardering.criterium.id = str(

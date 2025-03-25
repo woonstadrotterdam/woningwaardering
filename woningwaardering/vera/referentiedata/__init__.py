@@ -432,7 +432,6 @@ from .verrekeningsoort import Verrekeningsoort, VerrekeningsoortReferentiedata
 from .vertrouwelijkheid import Vertrouwelijkheid, VertrouwelijkheidReferentiedata
 from .voorrangdetailsoort import Voorrangdetailsoort, VoorrangdetailsoortReferentiedata
 from .voorrangsoort import Voorrangsoort, VoorrangsoortReferentiedata
-from .voorzieningsoort import Voorzieningsoort, VoorzieningsoortReferentiedata
 from .vragenlijstregelherkomst import (
     Vragenlijstregelherkomst,
     VragenlijstregelherkomstReferentiedata,
@@ -862,8 +861,6 @@ __all__ = [
     "VoorrangdetailsoortReferentiedata",
     "Voorrangsoort",
     "VoorrangsoortReferentiedata",
-    "Voorzieningsoort",
-    "VoorzieningsoortReferentiedata",
     "Vragenlijstregelherkomst",
     "VragenlijstregelherkomstReferentiedata",
     "Vragenlijstregelonderwerpsoort",

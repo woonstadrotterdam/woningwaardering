@@ -170,7 +170,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
     Buitenruimte: een tot het complex behorende open parkeergarage (een open ruimte, dus
     geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen)
-    zonder een specifiek toegewezen parkeerplaats.
+    zonder een specifiek toegewezen parkeerplaats. Geldig voor Woningwaardering tot
+    Juli 2024
     """
 
     open_parkeergarage_specifieke_plek = RuimtedetailsoortReferentiedata(
@@ -181,7 +182,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
     Buitenruimte: een tot het complex behorende open parkeergarage (een open ruimte, dus
     geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen) met
-    voor elke woning een specifiek toegewezen parkeerplaats.
+    voor elke woning een specifiek toegewezen parkeerplaats. Geldig voor
+    Woningwaardering tot Juli 2024
     """
 
     overig_vertrek = RuimtedetailsoortReferentiedata(
@@ -191,7 +193,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
     )
     """
     Vertrek dat niet nader gespecifeerd is als ruimtedetailsoort. Bijvoorbeeld eetkamer,
-    hobbykamer, studeerkamer etc.
+    hobbykamer, studeerkamer etc. Dit vertrek wordt beschouwd als 'kamer' en telt
+    mee in het aantal kamers.
     """
 
     parkeerplaats = RuimtedetailsoortReferentiedata(
@@ -211,12 +214,12 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
     Overige ruimte: een gesloten parkeergarage met voor elke woning een, al dan niet
     afgebakende, parkeerplaats (alle betrokken huurders moeten  op elk moment van de
-    dag kunnen parkeren).
+    dag kunnen parkeren). Geldig voor Woningwaardering tot Juli 2024
     """
 
-    parkeergarage_specifieke_plek = RuimtedetailsoortReferentiedata(
+    specifieke_parkeerplek_in_parkeergarage = RuimtedetailsoortReferentiedata(
         code="PSP",
-        naam="Parkeergarage specifieke plek",
+        naam="Specifieke parkeerplek in parkeergarage",
         parent=Ruimtesoort.overige_ruimten,
     )
     """
@@ -262,7 +265,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
         parent=Ruimtesoort.vertrek,
     )
     """
-    Vertrek: glazen veranda verbonden aan een woning.
+    Vertrek: glazen veranda verbonden aan een woning. Dit vertrek wordt beschouwd als
+    'kamer' en telt mee in het aantal kamers.
     """
 
     slaapkamer = RuimtedetailsoortReferentiedata(
@@ -271,7 +275,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
         parent=Ruimtesoort.vertrek,
     )
     """
-    Vertrek: ruimte in een woning waarin men kan slapen.
+    Vertrek: ruimte in een woning waarin men kan slapen. Dit vertrek wordt beschouwd als
+    'kamer' en telt mee in het aantal kamers.
     """
 
     terras = RuimtedetailsoortReferentiedata(
@@ -309,7 +314,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
         parent=Ruimtesoort.vertrek,
     )
     """
-    Vertrek: ruimte gelegen tussen en verbonden met twee andere kamers.
+    Vertrek: ruimte gelegen tussen en verbonden met twee andere kamers. Dit vertrek
+    wordt beschouwd als 'kamer' en telt mee in het aantal kamers.
     """
 
     vliering = RuimtedetailsoortReferentiedata(
@@ -349,7 +355,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
         parent=Ruimtesoort.vertrek,
     )
     """
-    Vertrek: ruimte met een gecombineerde functie van keuken en woonkamer
+    Vertrek: ruimte met een gecombineerde functie van keuken en woonkamer. Dit vertrek
+    wordt beschouwd als 'kamer' en telt mee in het aantal kamers.
     """
 
     woonkamer = RuimtedetailsoortReferentiedata(
@@ -360,7 +367,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
     Vertrek: de kamer in een huis waar het dagelijkse gezinsleven zich afspeelt. Het is
     een van de grootste vertrekken en bevindt zich meestal op de begane grond, voor
-    zover het niet gaat om een appartement in een flat.
+    zover het niet gaat om een appartement in een flat. Dit vertrek wordt beschouwd
+    als 'kamer' en telt mee in het aantal kamers.
     """
 
     woon_en_of_slaapkamer = RuimtedetailsoortReferentiedata(
@@ -369,7 +377,20 @@ class Ruimtedetailsoort(Referentiedatasoort):
         parent=Ruimtesoort.vertrek,
     )
     """
-    Vertrek: ruimte met een gecombineerde functie van woonkamer en slaapkamer.
+    Vertrek: ruimte met een gecombineerde functie van woonkamer en slaapkamer. Dit
+    vertrek wordt beschouwd als 'kamer' en telt mee in het aantal kamers.
+    """
+
+    woon_en_of_slaapkamer_en_of_keuken = RuimtedetailsoortReferentiedata(
+        code="WSK",
+        naam="Woon-/slaapkamer/keuken",
+        parent=Ruimtesoort.vertrek,
+    )
+    """
+    Vertrek: een ruimte waarin de functies van woonkamer, slaapkamer en keuken
+    gecombineerd worden. Deze ruimte biedt voorzieningen voor koken, slapen en
+    dagelijkse activiteiten. Dit vertrek wordt beschouwd als 'kamer' en telt mee in
+    het aantal kamers.
     """
 
     zijtuin = RuimtedetailsoortReferentiedata(
@@ -409,7 +430,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
     )
     """
     Vertrek: ruimte onder het dak, die zowel qua oppervlakte en stahoogte als afwerking
-    geschikt is om als vertrek te worden gekwalificeerd
+    geschikt is om als vertrek te worden gekwalificeerd. Dit vertrek wordt beschouwd
+    als 'kamer' en telt mee in het aantal kamers.
     """
 
     overloop = RuimtedetailsoortReferentiedata(

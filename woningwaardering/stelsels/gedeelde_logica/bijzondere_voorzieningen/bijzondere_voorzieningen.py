@@ -15,7 +15,7 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Doelgroep,
-    Voorzieningsoort,
+    Installatiesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselgroepReferentiedata,
@@ -181,7 +181,7 @@ def _aanbelfunctie_met_video_en_audioverbinding(
         als de eenheid een aanbelfunctie met video en audio heeft, anders None.
     """
     if not any(
-        installatie == Voorzieningsoort.aanbelfunctie_met_video_en_audioverbinding
+        installatie == Installatiesoort.aanbelfunctie_met_video_en_audioverbinding
         for ruimte in (eenheid.ruimten or [])
         for installatie in (ruimte.installaties or [])
     ):

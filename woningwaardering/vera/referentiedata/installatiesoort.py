@@ -7,6 +7,44 @@ class InstallatiesoortReferentiedata(Referentiedata):
 
 
 class Installatiesoort(Referentiedatasoort):
+    aanbelfunctie_met_video_en_audioverbinding = InstallatiesoortReferentiedata(
+        code="ABF",
+        naam="Aanbelfunctie met video- en audioverbinding",
+    )
+    """
+    Een aanbelfunctie met video- en audioverbinding waarbij de voordeur automatisch kan
+    worden geopend vanuit de woning wordt gewaardeerd met 0,25 punt. Hieronder wordt
+    een systeem verstaan dat tweewegcommunicatie mogelijk maakt met beeld en geluid
+    tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er
+    tevens sprake te zijn van de mogelijkheid tot het openen van de
+    (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang
+    geeft tot het complex waarvan de woning onderdeel uitmaakt.
+    """
+
+    elektrische_gordijnen = InstallatiesoortReferentiedata(
+        code="EGV",
+        naam="Elektrische gordijnen",
+    )
+    """
+    Installatie van domotica voor elektrische gordijnen.
+    """
+
+    spraakgestuurde_apparaten = InstallatiesoortReferentiedata(
+        code="SPR",
+        naam="Spraakgestuurde apparaten",
+    )
+    """
+    Installatie van domotica voor spraakgestuurde apparaten (licht,verwarming,deuren).
+    """
+
+    noodoproepsysteem = InstallatiesoortReferentiedata(
+        code="NPS",
+        naam="Noodoproepsysteem",
+    )
+    """
+    Installatie voor noodoproepen
+    """
+
     inbouw_afzuiginstallatie = InstallatiesoortReferentiedata(
         code="IAF",
         naam="Inbouw afzuiginstallatie",
@@ -51,6 +89,25 @@ class Installatiesoort(Referentiedatasoort):
     kookgerei, maar vereist gasaanvoer en ventilatie.
     """
 
+    onderrijdbare_kookplaat = InstallatiesoortReferentiedata(
+        code="ORK",
+        naam="Onderrijdbare kookplaat",
+    )
+    """
+    Type kookplaat dat voldoende vrije ruimte onder het kookgedeelte biedt, zodat een
+    gebruiker met een rolstoel er eenvouding onder kan rijden.
+    """
+
+    oplaadpunt = InstallatiesoortReferentiedata(
+        code="OPL",
+        naam="Oplaadpunt",
+    )
+    """
+    Oplaadpunt waar een auto aan gekoppeld kan worden om te op te laden. Het betreft
+    hier niet de laadpaal maar het oplaadpunt (er kunnen meerdere oplaadpunten
+    beschikbaar zijn op een laadpaal
+    """
+
     inbouw_koelkast = InstallatiesoortReferentiedata(
         code="IKO",
         naam="Inbouw koelkast",
@@ -71,6 +128,17 @@ class Installatiesoort(Referentiedatasoort):
     geïntegreerd. Het wordt achter een keukenkastdeur geplaatst, biedt
     vriescapaciteit voor langdurige voedselopslag, en behoudt een gestroomlijnde,
     uniforme uitstraling in de keuken.
+    """
+
+    inbouw_koelvriescombinatie = InstallatiesoortReferentiedata(
+        code="IKV",
+        naam="Inbouw koelvriescombinatie",
+    )
+    """
+    Een inbouw koelvriescombinatie is een keukenapparaat dat zowel een koelkast als een
+    vriesgedeelte combineert. Het wordt achter een keukenkastdeur geplaatst, zorgt
+    voor efficiënte voedselkoeling en -opslag en biedt een gestroomlijnde, uniforme
+    uitstraling in de keuken.
     """
 
     inbouw_oven_elektrisch = InstallatiesoortReferentiedata(
@@ -106,6 +174,17 @@ class Installatiesoort(Referentiedatasoort):
     uitstraling in de keuken.
     """
 
+    inbouw_combi_magnetron_en_of_oven = InstallatiesoortReferentiedata(
+        code="ICM",
+        naam="Inbouw combi magnetron/oven",
+    )
+    """
+    Een inbouw combimagnetron/oven is een keukenapparaat dat zowel magnetron- als
+    ovenfuncties combineert. Het is ontworpen om naadloos in een keukenkast te
+    worden geïntegreerd en biedt veelzijdigheid voor bakken, braden, grillen en snel
+    opwarmen. Dit bespaart ruimte en biedt flexibiliteit in de keuken.
+    """
+
     inbouw_vaatwasmachine = InstallatiesoortReferentiedata(
         code="IVA",
         naam="Inbouw vaatwasmachine",
@@ -122,7 +201,42 @@ class Installatiesoort(Referentiedatasoort):
         naam="Extra keukenkastruimte boven het minimum",
     )
     """
-    per 60 cm breedte, met een minimum van 60 cm hoogte
+    per 60 cm breedte, met een minimum van 60 cm hoogte.
+    """
+
+    verlaagde_keuken = InstallatiesoortReferentiedata(
+        code="VKE",
+        naam="Verlaagde keuken",
+    )
+    """
+    Een keuken met werkbladen en kastjes op een hoogte van 85 cm voor
+    rolstoelgebruikers.
+    """
+
+    verhoogde_keuken = InstallatiesoortReferentiedata(
+        code="VHK",
+        naam="Verhoogde keuken",
+    )
+    """
+    Keuken waarvan het werkblad en/of de keukenkasten hoger zijn geplaatst dan de
+    standaardhoogte De werkbladen en kastjes zijn hoger dan 95 cm.
+    """
+
+    onderrijdbare_spoelbak = InstallatiesoortReferentiedata(
+        code="KSP",
+        naam="Onderrijdbare spoelbak",
+    )
+    """
+    Type spoelbak dat voldoende vrije ruimte onder de spoelbak biedt, waardoor een
+    gebruiker met een rolstoel of ander hulpmiddel er gemakkelijjk onder kan rijden.
+    """
+
+    uitschuifbare_of_kantelbare_keukenkastjes = InstallatiesoortReferentiedata(
+        code="UKK",
+        naam="Uitschuifbare of kantelbare keukenkastjes",
+    )
+    """
+    Uitschuifbare of kantelbare keukenkastjes t.b.v. rolstoelgebruikers.
     """
 
     eenhandsmengkraan = InstallatiesoortReferentiedata(
@@ -155,7 +269,7 @@ class Installatiesoort(Referentiedatasoort):
     De kokend waterfunctie levert direct kokend water uit een kraan, zonder koken op het
     fornuis. Het biedt gemak en tijdsbesparing voor het bereiden van thee, koffie,
     en andere warme dranken, en verhoogt de efficiëntie in de keuken. Al dan niet
-    apart of in aanvulling op de kraan
+    apart of in aanvulling op de kraan.
     """
 
     staand_toilet = InstallatiesoortReferentiedata(
@@ -182,6 +296,16 @@ class Installatiesoort(Referentiedatasoort):
     gelegen, dan geldt dat het toilet in de waardering wordt meegenomen als het
     gebruik van het toilet door derden is uit te sluiten. Toiletten buiten
     toiletruimten en badkamers komen niet in aanmerking voor waardering.
+    """
+
+    verhoogd_toilet = InstallatiesoortReferentiedata(
+        code="VTI",
+        naam="Verhoogd toilet",
+    )
+    """
+    Een toilet dat hoger is geplaatst dan de standaardtoiletten. Dit maakt het zitten en
+    opstaan gemakkelijker, vooral voor ouderen, lange mensen, mensen met beperkte
+    mobiliteit or lichamelijke beperking.
     """
 
     wastafel = InstallatiesoortReferentiedata(
@@ -263,6 +387,24 @@ class Installatiesoort(Referentiedatasoort):
     pompen, wat zorgt voor een ontspannende en masserende werking. Het verhoogt het
     comfort en de ontspanning tijdens het baden door een verfrissend bubbeleffect te
     bieden.
+    """
+
+    steunbeugels_voor_sanitaire_ruimtes = InstallatiesoortReferentiedata(
+        code="SSR",
+        naam="Steunbeugels voor sanitaire ruimtes",
+    )
+    """
+    Steunbeugels die in sanitaire ruimtes, zoals badkamers en toiletten, zijn
+    geïnstalleerd om extra ondersteuning te bieden voor mensen met een beperking of
+    mobiliteitsproblemen.
+    """
+
+    drempelloze_inrijdouche = InstallatiesoortReferentiedata(
+        code="DRD",
+        naam="Drempelloze inrijdouche",
+    )
+    """
+    Een drempelloze, ruime inrijdouche t.b.v. rolstoelgebruikers.
     """
 
     douchewand = InstallatiesoortReferentiedata(

@@ -40,20 +40,14 @@
         {
           "criterium": {
             "id": "verkoeling_en_verwarming__Space_1",
-            "naam": "Slaapkamer (gedeeld met 5)",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
+            "naam": "Slaapkamer (gedeeld met 5)"
           },
           "punten": 0.4
         },
         {
           "criterium": {
             "id": "verkoeling_en_verwarming__Space_2",
-            "naam": "Woonkamer (gedeeld met 6)",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
+            "naam": "Woonkamer (gedeeld met 6)"
           },
           "punten": 0.33
         }

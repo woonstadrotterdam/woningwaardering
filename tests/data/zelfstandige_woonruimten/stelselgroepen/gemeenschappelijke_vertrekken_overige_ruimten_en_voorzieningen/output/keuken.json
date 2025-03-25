@@ -48,10 +48,7 @@
         {
           "criterium": {
             "id": "verkoeling_en_verwarming__keuken",
-            "naam": "Keuken (gedeeld met 5)",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
+            "naam": "Keuken (gedeeld met 5)"
           },
           "punten": 0.4
         }

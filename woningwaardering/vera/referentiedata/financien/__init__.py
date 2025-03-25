@@ -1,4 +1,5 @@
 from woningwaardering.vera.referentiedata import (
+    Afletterstatus,
     Bedrijfsoort,
     Begrotingversie,
     Betaalwijzedeelsoort,
@@ -40,6 +41,7 @@ from woningwaardering.vera.referentiedata import (
 )
 
 __all__ = [
+    "Afletterstatus",
     "Bedrijfsoort",
     "Begrotingversie",
     "Betaalwijzedeelsoort",

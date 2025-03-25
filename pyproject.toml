@@ -37,7 +37,7 @@ Homepage = "https://github.com/woonstadrotterdam/woningwaardering"
 Issues = "https://github.com/woonstadrotterdam/woningwaardering/issues"
 
 [tool.woningwaardering.datasources]
-referentiedata = "v4.2.250117"
+referentiedata = "v4.2.250307"
 vera-openapi = "v4.1.5"
 
 [tool.setuptools.packages.find]

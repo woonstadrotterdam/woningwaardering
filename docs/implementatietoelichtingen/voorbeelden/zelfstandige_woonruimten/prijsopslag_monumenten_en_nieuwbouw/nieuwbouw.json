@@ -1,0 +1,65 @@
+{
+  "beginBouwdatum": "2024-06-01",
+  "bouwjaar": 2024,
+  "inExploitatiedatum": "2024-09-01",
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EP2",
+        "naam": "Primair energieverbruik - woningbouw"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2022-02-23",
+      "einddatum": "2032-02-23",
+      "registratiedatum": "2022-02-23T09:55:37+01:00",
+      "label": {
+        "code": "AP4",
+        "naam": "A++++"
+      }
+    }
+  ],
+  "monumenten": [],
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 3000.0
+        }
+      ]
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
+  "wozEenheden": [
+    {
+      "vastgesteldeWaarde": 270000.0,
+      "waardepeildatum": "2024-01-01"
+    }
+  ]
+}
