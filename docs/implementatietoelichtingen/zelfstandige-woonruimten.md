@@ -943,7 +943,7 @@ _\*~~Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of
 > Dit voorbeeld toont de waardering van twee typen buitenruimten:
 >
 > - Een privé achtertuin van 50 m².
-> - Een dakterras van 25 m² dat wordt gedeeld met één andere woonruimte en daarom voor 50% meetelt.
+> - Een dakterras van 25 m² dat wordt gedeeld met één ander adres en daarom voor 50% meetelt.
 >
 > Voor de waardering van gedeelde buitenruimten zijn de lengte en breedte (naast oppervlakte) van belang.
 > /// tab | JSON

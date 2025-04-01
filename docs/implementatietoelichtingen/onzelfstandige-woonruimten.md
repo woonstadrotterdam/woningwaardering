@@ -813,6 +813,28 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkam
 
 ### Rubriek 8 - Buitenruimten
 
+> [!TIP]
+> Dit voorbeeld toont de waardering van twee typen buitenruimten:
+>
+> - Een achtertuin van 50 m2 dat alleen met huisgenoten wordt gedeeld.
+> - Een dakterras van 25 m² dat wordt gedeeld met één ander adres en met één andere huisgenoot.
+>
+> Voor de waardering van gedeelde buitenruimten zijn de lengte en breedte (naast oppervlakte) van belang.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/buitenruimten/buitenruimten.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/buitenruimten/buitenruimten.py"
+%}
+```
+> ///
+
 #### 8.1 Puntentoekenning
 
 - Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,35 punt.  
