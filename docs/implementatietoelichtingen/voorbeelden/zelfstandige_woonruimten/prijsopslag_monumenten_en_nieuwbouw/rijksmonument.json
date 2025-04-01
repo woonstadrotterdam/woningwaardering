@@ -1,0 +1,13 @@
+{
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
+  "datumAfsluitenHuurovereenkomst": "2024-07-01"
+}

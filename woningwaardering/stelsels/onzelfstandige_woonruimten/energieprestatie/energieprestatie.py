@@ -26,6 +26,7 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Energielabel,
     Energieprestatiesoort,
     Meeteenheid,
     Ruimtesoort,
@@ -189,7 +190,9 @@ class Energieprestatie(Stelselgroep):
         ):
             return woningwaardering
 
-        label = energieprestatie.label.code
+        label = getattr(
+            Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
+        ).naam
         criterium_naam = f"{label}"
         df = Energieprestatie.lookup_mapping["label_ei"]
 

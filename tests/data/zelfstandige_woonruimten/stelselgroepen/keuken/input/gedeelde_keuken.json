@@ -1,0 +1,44 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "oppervlakte": 20.0,
+      "gedeeldMetAantalEenheden": 4,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 3150.0
+        }
+      ],
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "IKI",
+          "naam": "Inbouw kookplaat inductie"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        }
+      ]
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
+}

@@ -53,6 +53,7 @@ class Keuken(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.extend(
             woningwaardering
             for ruimte in eenheid.ruimten or []
+            if not utils.gedeeld_met_eenheden(ruimte)
             for woningwaardering in waardeer_keuken(ruimte, self.stelsel)
         )
 

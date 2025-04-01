@@ -1,0 +1,33 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "ATU",
+        "naam": "Achtertuin"
+      },
+      "oppervlakte": 50.0
+    },
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "DAK",
+        "naam": "Dakterras"
+      },
+      "breedte": 5.0,
+      "lengte": 5.0,
+      "oppervlakte": 25.0,
+      "gedeeldMetAantalEenheden": 2
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  }
+}
