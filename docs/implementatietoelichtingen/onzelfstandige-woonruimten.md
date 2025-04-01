@@ -152,6 +152,23 @@ De samenloop van verschillende opslagen is in het woningwaarderingstelsel voor o
 
 ### Rubriek 1 - Oppervlakte van vertrekken
 
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor waardering van de oppervlakte van vertrekken
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/oppervlakte_van_vertrekken/woonkamer.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/oppervlakte_van_vertrekken/woonkamer.py"
+%}
+```
+> ///
+
 #### 1.1 Puntentoekenning
 
 - Privévertrekken worden gewaardeerd met 1 punt per vierkante meter.
@@ -162,6 +179,7 @@ De samenloop van verschillende opslagen is in het woningwaarderingstelsel voor o
 
 
 #### 1.2 Wat zijn vertrekken?
+
 > [!NOTE]
 > * De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'.
 > * Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
