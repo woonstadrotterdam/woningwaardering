@@ -40,7 +40,7 @@ def get_eenheid():
         )
     ]
 
-    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
     return eenheid
 

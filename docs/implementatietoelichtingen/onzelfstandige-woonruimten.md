@@ -403,8 +403,24 @@ In totaal is voor de woonruimte in dit voorbeeld een puntenaantal van 3 plus 6,2
 > [!NOTE]
 > Deze package gaat er vanuit dat een aanrecht in een woon- of slaapvertrek een open keuken is.
 
-
 ### Rubriek 4 - Energieprestatie
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor de waardering van de energieprestatie van een woning met een energieprestatievergoeding. De monumentale status is van belang omdat die invloed heeft op de waardering van de energieprestatie.  
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/energieprestatie/energieprestatie.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/energieprestatie/energieprestatie.py"
+%}  
+```
+> ///
 
 De energieprestatie van een woning kan sinds 1 januari 2021 op drie manieren zijn vastgesteld:
 

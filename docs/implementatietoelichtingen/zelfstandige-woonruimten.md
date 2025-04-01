@@ -689,7 +689,6 @@ Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, oo
 > [!NOTE]
 > Zorg ervoor dat alleen aanrechten met een spoelbak worden meegegeven en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
 
-
 #### 5.2 Puntentoekenning lengte aanrecht
 
 > [!TIP]

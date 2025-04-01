@@ -6,11 +6,9 @@ from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
-    EenhedenPand,
     EenhedenEnergieprestatie,
 )
 from woningwaardering.vera.referentiedata import (
-    Pandsoort,
     Ruimtesoort,
     Ruimtedetailsoort,
     Energieprestatiesoort,

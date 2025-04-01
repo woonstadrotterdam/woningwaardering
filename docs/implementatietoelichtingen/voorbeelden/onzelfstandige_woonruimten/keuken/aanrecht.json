@@ -1,0 +1,29 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 3000
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
+}
