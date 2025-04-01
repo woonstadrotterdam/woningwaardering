@@ -11,26 +11,12 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 6.0,
+      "punten": 19.0,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
+          "aantal": 15.49,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_901101",
-            "naam": "Keuken",
-            "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__prive"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 4.0,
-          "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_539495",
+            "id": "oppervlakte_van_vertrekken__Space_1",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_vertrekken__totaal__prive"
@@ -42,10 +28,35 @@
           }
         },
         {
-          "aantal": 6.0,
+          "aantal": 11.24,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_2",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__3__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 15.49,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__prive",
             "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 3.74666667,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 3 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
