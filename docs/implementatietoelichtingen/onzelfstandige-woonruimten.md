@@ -586,6 +586,23 @@ Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet du
 
 #### 5.4 Puntentoekenning extra voorzieningen
 
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor de waardering van voorzieningen in een keuken. De lengte van het aanrecht is van belang om tot waardering van de voorzieningen te komen.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/keuken/voorzieningen.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/keuken/voorzieningen.py"
+%}
+```
+> ///
+
 Het woningwaarderingsstelsel geeft voor het onderdeel keuken extra punten voor voorzieningen in de keuken. Hiervoor geldt een maximum tot het aantal punten dat voor de aanrechtlengte is bepaald. Een keuken met een aanrechtlengte tussen de 1 en 2 m kan bijvoorbeeld tot maximaal 4 extra punten krijgen voor voorzieningen en een keuken met een aanrechtlengte van 2 of meer meter kan tot maximaal 7 punten extra krijgen voor voorzieningen. 
 
 Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
@@ -626,6 +643,23 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één keuken
 ### Rubriek 6 - Sanitair
 
 #### 6.1 Puntentoekenning sanitaire basisvoorzieningen
+
+> [!TIP]
+> Dit voorbeeld toont de gegevens voor de waardering van sanitaire basisvoorzieningen.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/sanitair/basisvoorzieningen.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/sanitair/basisvoorzieningen.py"
+%}
+```
+> ///
 
 Het woningwaarderingsstelsel geeft punten aan sanitaire basisvoorzieningen:
 
@@ -679,9 +713,26 @@ Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangeb
 
 #### 6.2 Puntentoekenning extra voorzieningen
 
+> [!TIP]
+> Dit voorbeeld toont de gegevens voor de waardering van sanitaire extra voorzieningen. Voor de waardering van extra voorzieningen dient in de ruimte ook een bad of douche aanwezig te zijn.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/sanitair/extra_voorzieningen.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/sanitair/extra_voorzieningen.py"
+%}
+```
+> ///
+
 Het woningwaarderingsstelsel geeft voor het onderdeel sanitair extra punten voor voorzieningen in de bad- of doucheruimte. Hiervoor geldt een maximum tot het aantal punten dat reeds voor douche, bad en/of bad/douche is verkregen. Anders gezegd: maximaal een verdubbeling van de toegekende punten voor douche, bad en/of bad/douche.
 
-**Eisen bad-of doucheruimte**
+**_Eisen bad-of doucheruimte_**
 
 Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden in een bad- of doucheruimte. Bad- of doucheruimten moeten voldoen aan de volgende eisen:
 
@@ -693,7 +744,7 @@ Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden
 
 \* Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien.
 
-**Lijst voorzieningen**
+**_Lijst voorzieningen_**
 
 Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
 
