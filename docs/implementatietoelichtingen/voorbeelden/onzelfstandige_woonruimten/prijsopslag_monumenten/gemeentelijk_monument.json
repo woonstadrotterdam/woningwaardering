@@ -1,0 +1,12 @@
+{
+  "monumenten": [
+    {
+      "code": "GEM",
+      "naam": "Gemeentelijk monument"
+    }
+  ],
+  "woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
+} 

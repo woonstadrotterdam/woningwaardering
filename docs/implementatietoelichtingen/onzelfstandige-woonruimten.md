@@ -2,22 +2,21 @@
 
 Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Onzelfstandige Woonruimten (januari 2025)
 
-> [!NOTE]
-> Om een woonruimte als zelfstandige woning te waarderen, dient dit aangegeven te worden in het attribuut `woningwaarderingstelsel`:
+> [!TIP]
+> Om een woonruimte als onzelfstandige woning te waarderen, dient dit aangegeven te worden in het attribuut `woningwaarderingstelsel`:
 > /// tab | JSON
-> ```json
-> {
->   "woningwaarderingstelsel": {
->     "code": "ONZ",
->     "naam": "Onzelfstandige woonruimten"
->   }
-> }
-> ```
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/woningwaarderingstelsel.json"
+%}
+```
 > ///
 > /// tab | Python
-> ```python
-> eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
-> ```
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/woningwaarderingstelsel.py"
+%}
+```
 > ///
 
 ## Algemene toelichting (Hoofdstuk 2)
@@ -61,6 +60,27 @@ De punten die worden gehaald op basis van het woningwaarderingsstelsel resultere
 
 #### 2.7.1 Rijksmonument
 
+> [!NOTE]
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
+
+> [!TIP]
+>  Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een zelfstandige woonruimte de status van rijksmonument heeft.
+> De datum van afsluiten van de huurovereenkomst is van belang omdat vanaf 1 juli 2024 de nieuwe wetgeving (Wet betaalbare huur) van kracht is, waardoor rijksmonumenten een procentuele opslag van 35% krijgen op de maximale huurprijs in plaats van de eerdere puntentoeslag van 50 punten.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/rijksmonument.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/rijksmonument.py"
+%}
+```
+> ///
+
 **Huurovereenkomst afgesloten op of na 1 juli 2024**
 
 Indien een woonruimte bestaat uit of deel uitmaakt van een rijksmonument, als bedoeld in artikel 1.1 Erfgoedwet, dan wordt de maximale huurprijs vermeerderd met 35%. Hiermee worden rijksmonumenten bedoeld die zijn geregistreerd in het monumentenregister van de Rijksdienst voor het Cultureel Erfgoed.
@@ -75,16 +95,47 @@ Indien een woonruimte een rijksmonument is of daar deel van uitmaakt, als bedoel
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de Rijksmonumenten: http://monumentenregister.cultureelerfgoed.nl/.
 
-> [!NOTE]
-> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
-
 #### 2.7.2 Gemeentelijk of provinciaal monument
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een onzelfstandige woonruimte de status van gemeentelijk monument heeft.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/gemeentelijk_monument.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/gemeentelijk_monument.py"
+%}
+```
+> ///
 
 Indien een woonruimte een gemeentelijk of provinciaal monument is of daarvan deel uitmaakt, dan wordt de maximale huurprijs vermeerderd met 15%. Het gemeentelijk monument moet zijn aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door de gedeputeerde staten.
 
 De Huurcommissie hanteert passief beleid. De partijen moeten aantonen dat een woning bestaat of deel uitmaakt van een gemeentelijk of provinciaal monument.
 
 #### 2.7.3 Beschermd stad- of dorpsgezicht
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een onzelfstandige woonruimte deel uitmaakt van een rijksbeschermd stadsgezicht. Het bouwjaar is van belang omdat alleen woningen gebouwd vóór 1965 in aanmerking komen voor de opslag van 5%.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/beschermd_stadsgezicht.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/beschermd_stadsgezicht.py"
+%}
+```
+> ///
 
 De maximale huurprijs wordt met 5% vermeerderd als:
 

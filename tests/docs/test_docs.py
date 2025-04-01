@@ -14,7 +14,7 @@ def get_test_cases():
 
     # Iterate through housing type directories
     for stelsel_dir in base_path.iterdir():
-        if not stelsel_dir.is_dir() or stelsel_dir.name != "zelfstandige_woonruimten":
+        if not stelsel_dir.is_dir():
             continue
             
         stelsel = stelsel_dir.name  # e.g., "zelfstandige_woonruimten"
