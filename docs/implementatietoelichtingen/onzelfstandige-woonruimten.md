@@ -1009,7 +1009,7 @@ Voorbeeld: (A) een gemeenschappelijke binnenruimte met keuken van 20 vierkante m
 Afronden geschiedt op een kwart punt per onzelfstandige woonruimte, in dit geval dus op 2,50.
 ```
 
-### Rubriek 10 - Gemeenschappelijke parkeerruimten 
+### Rubriek 10 - Gemeenschappelijke parkeerruimten
 
 #### 10.1 Puntentoekenning
 
@@ -1075,7 +1075,22 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
 > [!NOTE]
 > Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken bovenstaande berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model niet mogelijk. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van bovenstaande parkertypes de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` en `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek meegegeven te worden wanneer het een onzelfstandige woonruimte betreft. Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt (in JSON-formaat) meegegeven worden.
 
-
+> [!TIP]
+> Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt meegegeven worden. 
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/gemeenschappelijke_parkeerruimten/voorbeeld.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/gemeenschappelijke_parkeerruimten/voorbeeld.py"
+%}
+```
+> ///
 
 ```json
 {
