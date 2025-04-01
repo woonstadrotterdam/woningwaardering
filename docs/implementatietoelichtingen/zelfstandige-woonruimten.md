@@ -1262,6 +1262,9 @@ _Het totale puntenaantal is 20,63 + 21,83 = 42,46. Na afronding is het puntenaan
 
 #### 11.2 Nieuwbouwwoningen en woningen gelegen in COROP-gebied Amsterdam of Utrecht
 
+> [!WARNING]
+> Momenteel is de logica voor COROP-gebied Amsterdam of Utrecht nog niet geïmplementeerd. Zie: [dit issue](https://github.com/woonstadrotterdam/woningwaardering/issues/103)
+
 Om de bouw van huurwoningen in de middensector te bevorderen heeft de wetgever bepaald dat voor nieuwbouwwoningen opgeleverd in kalenderjaar 2015-2019 en kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht een andere berekening geldt. Deze berekening leidt tot een hoger aantal punten voor het onderdeel WOZ-waarde.
 
 **Nieuwbouwwoningen 2015-2019**
