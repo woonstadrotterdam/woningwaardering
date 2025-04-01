@@ -37,10 +37,11 @@ def get_eenheid():
                 Installatiesoort.eenhandsmengkraan,
                 Installatiesoort.stopcontact_bij_wastafel,
             ],
+            gedeeldMetAantalOnzelfstandigeWoonruimten=2,
         )
     ]
 
-    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
     return eenheid
 

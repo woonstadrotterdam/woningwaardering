@@ -29,10 +29,11 @@ def get_eenheid():
                 Installatiesoort.douche,
                 Installatiesoort.hangend_toilet,
             ],
-        )
+            gedeeldMetAantalOnzelfstandigeWoonruimten=2,
+        ),
     ]
 
-    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
     return eenheid
 

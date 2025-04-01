@@ -924,6 +924,23 @@ Voor huurder A resulteert dit in 2,35 punt + 0,84375 punt + 1,95 punt = 5,14375 
 
 ### Rubriek 9 - Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
 
+> [!TIP]
+> Dit voorbeeld toont de waardering de voorbeeldberekening onder [9.3 Rekenmethode en voorbeeldberekening](#93-rekenmethode-en-voorbeeldberekening)
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/voorbeeld.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/voorbeeld.py"
+%}
+```
+> ///
+
 #### 9.1 Puntentoekenning
 
 - Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter.  
