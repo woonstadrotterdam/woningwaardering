@@ -668,7 +668,9 @@ Voor de puntentoekenningen in de tabellen wordt onderscheid gemaakt tussen eenge
 * Meergezinswoningen of duplexwoningen zijn alle woningen die geen eengezinswoning zijn.
 
 > [!NOTE]
-> Let op: deze definitie is anders dan vaak gehanteerd wordt zie: [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/154]()
+> Let op: deze definitie is anders dan vaak gehanteerd wordt zie: [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/154](). Echter, na gesprekken met experts zijn wij tot de conclusie gekomen dat hoewel de definitie anders is opgeschreven, het dezelfde intentie heeft als de gebruikelijke definitie:
+> - één verblijfsobject in een pand, met als functie wonen -> `Eengezinswoning`
+> - meerdere verblijfsobjecten in een pand waarvan minstens één met functie wonen -> `Meergezinswoning`
 
 
 ### Rubriek 5 Keuken
