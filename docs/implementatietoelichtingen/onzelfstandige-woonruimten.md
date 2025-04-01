@@ -520,6 +520,23 @@ Een waterdichte afwerking wordt in beginsel verondersteld aanwezig te zijn, maar
 
 #### 5.2 Puntentoekenning lengte aanrecht
 
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor de waardering van een keuken met een aanrecht. De lengte van het aanrecht (3000 mm) bepaalt de puntenwaardering.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/keuken/aanrecht.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/keuken/aanrecht.py"
+%}
+```
+> ///
+
 De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van het aanrecht. ~~Hierbij worden alleen punten toegekend als het aanrechtblad waterdicht is.~~
 
 - Bij een aanrechtlengte minder dan 1 meter worden 0 punten toegekend.
