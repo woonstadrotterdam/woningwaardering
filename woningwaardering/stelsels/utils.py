@@ -92,14 +92,14 @@ def _voeg_onderliggende_woningwaarderingen_toe(
             table.add_row(
                 [
                     stelselgroep_naam,
-                    f"{' '*indent} - {onderliggende_woningwaardering.criterium.naam}",
-                    f"{'['*indent}{onderliggende_woningwaardering.aantal}{']'*indent}"
+                    f"{' ' * indent} - {onderliggende_woningwaardering.criterium.naam}",
+                    f"{'[' * indent}{onderliggende_woningwaardering.aantal}{']' * indent}"
                     if onderliggende_woningwaardering.aantal is not None
                     else "",
                     onderliggende_woningwaardering.criterium.meeteenheid.naam
                     if onderliggende_woningwaardering.criterium.meeteenheid is not None
                     else "",
-                    f"{'['*indent}{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}{']'*indent}"
+                    f"{'[' * indent}{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}{']' * indent}"
                     if onderliggende_woningwaardering.punten is not None
                     else "",
                     f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
@@ -259,8 +259,10 @@ def naar_tabel(
 
             if verschillende_meeteenheden:
                 meeteenheid = ""
-            else:
+            elif meeteenheden_zonder_nones:
                 meeteenheid = meeteenheden_zonder_nones[0]
+            else:
+                meeteenheid = ""
 
             table.add_row(
                 [

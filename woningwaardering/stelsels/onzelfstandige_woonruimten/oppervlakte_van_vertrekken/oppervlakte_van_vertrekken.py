@@ -59,6 +59,8 @@ class OppervlakteVanVertrekken(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
         for ruimte in eenheid.ruimten or []:
+            if ruimte.gedeeld_met_aantal_eenheden:
+                continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
             woningwaarderingen = list(waardeer_oppervlakte_van_vertrek(ruimte))
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for woningwaardering in woningwaarderingen:
