@@ -241,6 +241,23 @@ Dit vertaalt zich naar 15 (15*1) + 3.75* (11 * 1 gedeeld door 3 kamers) = 18.75 
 
 ### Rubriek 2 - Oppervlakte van overige ruimten
 
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor waardering van de oppervlakte van overige ruimten
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/oppervlakte_van_overige_ruimten/badkamer_met_toilet.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/oppervlakte_van_overige_ruimten/badkamer_met_toilet.py"
+%}
+```
+> ///
+
 #### 2.1 Puntentoekenning
 
 Privé overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter.
