@@ -66,7 +66,6 @@ def main():
     logger.enable("woningwaardering")
     warnings.filterwarnings("default")
     eenheid = get_eenheid()
-    print(eenheid.model_dump_json(indent=2, exclude_none=True, exclude_defaults=True))
     woningwaardering = Woningwaardering().waardeer(eenheid)
     print(naar_tabel(woningwaardering))
 
