@@ -1468,6 +1468,7 @@ Een aanbelfunctie met video- en audioverbinding waarbij de voordeur automatisch 
 Hieronder wordt een systeem verstaan dat tweewegcommunicatie mogelijk maakt met beeld en geluid tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er tevens sprake te zijn van de mogelijkheid tot het openen van de (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang geeft tot het complex waarvan de woning onderdeel uitmaakt.
 
 #### 12.3 Laadpalen
+
 > [!TIP]
 > Dit voorbeeld toont hoe een carport met een laadpaal wordt aangegeven.
 > /// tab | JSON
