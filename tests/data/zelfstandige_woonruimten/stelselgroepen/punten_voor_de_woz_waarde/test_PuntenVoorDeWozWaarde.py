@@ -43,7 +43,7 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(
 warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/geen_woz.json",
-        peildatum=date(2024, 1, 1),
+        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "geen WOZ-waarde",
         },

@@ -1192,7 +1192,7 @@ Tien adressen delen vijf type II-parkeerplekken met laadpaal en twee type III-pa
 ### Rubriek 11 Punten voor de WOZ-waarde
 
 > [!TIP]
-> Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt meegegeven worden. 
+> Hieronder vindt u een voorbeeld hoe punten voor de WOZ-waarde berekend kunnen worden.
 > /// tab | JSON
 ```json
 {%

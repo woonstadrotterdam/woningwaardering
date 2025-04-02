@@ -1,0 +1,21 @@
+{
+  "adres": {
+    "woonplaats": {
+      "code": "3086",
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaar_object_basisregistratie": {
+    "bag_gebruikers_oppervlakte": 58
+  },
+  "woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  },
+  "woz_eenheden": [
+    {
+      "vastgestelde_waarde": 300000.0,
+      "waardepeildatum": "2023-01-01"
+    }
+  ]
+}

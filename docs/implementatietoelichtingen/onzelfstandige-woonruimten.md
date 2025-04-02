@@ -1120,6 +1120,23 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
 
 ### Rubriek 11 Punten voor de WOZ-waarde
 
+> [!TIP]
+> Hieronder vindt u een voorbeeld hoe punten voor de WOZ-waarde berekend kunnen worden.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/voorbeeld.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/voorbeeld.py"
+%}
+```
+> ///
+
 Punten worden toegekend op basis van de WOZ-waarde van het adres waar de onzelfstandige woonruimte onderdeel van is. WOZ staat voor Wet waardering onroerende zaken. De WOZ-waarde geeft de geschatte marktwaarde van de woning weer zoals volgt uit de Wet waardering onroerende zaken. Deze waarde wordt in principe ieder kalenderjaar door de gemeente vastgesteld, die in de WOZ-beschikking van de desbetreffende woning wordt weergegeven.
 
 De waardepeildatum van de WOZ-waarde ligt op 1 januari van twee kalenderjaren voorafgaand. Ter illustratie: de WOZ-waarde in de WOZ-beschikking van 2024 heeft een waardepeildatum van 1 januari 2022.
@@ -1166,6 +1183,7 @@ _De gemeente Amsterdam ligt in het COROP-gebied Groot-Amsterdam dat € 5.596 al
 De minimum WOZ-waarde wordt ook gebruikt voor specifieke woningen van specifieke verhuurders, zoals 'containerwoningen' die zijn bestemd voor studentenhuisvesting. In die gevallen wordt een minimum WOZ-waarde gehanteerd indien de WOZ-waarde lager is dan deze minimumwaarde. Deze waarde met peildatum 1 januari 2023 bedraagt € 73.607. Zie de tabel hieronder voor de minimumwaarde van de afgelopen jaren.
 
 Tabel 1
+
 | Peildatum | Minimumwaarde |
 | ------------------ | -------- |
 | Per 1 januari 2021 | € 61.198 |
