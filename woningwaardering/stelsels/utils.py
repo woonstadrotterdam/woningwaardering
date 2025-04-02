@@ -892,36 +892,37 @@ def gedeeld_met_onzelfstandige_woonruimten(
 
 
 WOONPLAATS_QUERY_TEMPLATE = """
+prefix imxgeo: <http://modellen.geostandaarden.nl/def/imx-geo#>
 prefix sor: <https://data.kkg.kadaster.nl/sor/model/def/>
-prefix nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
+prefix nen3610: <http://modellen.geostandaarden.nl/def/nen3610#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
-select ?identificatie ?naam
+select DISTINCT ?identificatie ?naam
 where {{
   values ?postcode {{ "{postcode}" }}
   values ?huisnummer {{ {huisnummer} }}
   values ?huisnummertoevoeging {{ "{huisnummertoevoeging}" }}
   values ?huisletter {{ "{huisletter}" }}
 
-  ?adres a sor:Nummeraanduiding;
-         sor:postcode ?postcode;
-         sor:ligtAan/sor:ligtIn ?woonplaats;
-         sor:huisnummer ?adresHuisnummer.
-
-  ?woonplaats sor:geregistreerdMet/nen3610:identificatie ?identificatie;
-              skos:prefLabel ?naam.
-
+  ?adres a imxgeo:Adres;
+         imxgeo:postcode ?postcode;
+         imxgeo:huisnummer ?adresHuisnummer;
+         imxgeo:plaatsnaam ?naam;
+         imxgeo:isAdresVanGebouw/imxgeo:bevindtZichOpPerceel/imxgeo:ligtInRegistratieveRuimte ?registratieveRuimte.
+  ?registratieveRuimte a imxgeo:Woonplaats;
+         imxgeo:status "Woonplaats aangewezen";
+         nen3610:identificatie ?identificatie
   optional
   {{
-    ?adres sor:huisnummer ?adresHuisnummer.
+    ?adres imxgeo:huisnummer ?adresHuisnummer.
   }}
   optional
   {{
-    ?adres sor:huisnummertoevoeging ?adresHuisnummertoevoeging.
+    ?adres imxgeo:huisnummertoevoeging ?adresHuisnummertoevoeging.
   }}
   optional
   {{
-    ?adres sor:huisletter ?adresHuisletter.
+    ?adres imxgeo:huisletter ?adresHuisletter.
   }}
   FILTER(
     (!BOUND(?adresHuisnummer) && ?huisnummer = "") ||
