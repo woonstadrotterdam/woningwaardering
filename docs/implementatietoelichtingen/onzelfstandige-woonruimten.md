@@ -1317,3 +1317,20 @@ Het waarderingsstelsel voor onzelfstandige woonruimten kent een rubriek voor aft
 - ~~Wanneer het laagste raamkozijn van het (hoofd)woonvertrek meer dan 1,60 m boven de vloer is.~~
 
 ~~Bij de bepaling van de ruitoppervlakte van het (hoofd) woonvertrek is de oppervlakte van het zichtbare glas bepalend. Dit betekent dat het glas dat zich in de sponning bevindt niet bijdraagt aan het bepalen van de ruitoppervlakte.~~
+
+> [!TIP]
+> Dit voorbeeld toont hoe aftrekpunten worden toegepast voor een woning met minder dan 8 m2 oppervlakte voor Rubriek 1.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/aftrekpunten/oppervlakte_van_vertrekken.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/aftrekpunten/oppervlakte_van_vertrekken.py"
+%}
+```
+> ///
