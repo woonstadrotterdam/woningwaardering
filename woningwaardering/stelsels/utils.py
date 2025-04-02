@@ -953,17 +953,15 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
     """
     if (
         adres.woonplaats is not None
-        and adres.woonplaats is not None
-        and adres.woonplaats.naam is not None
+        and adres.woonplaats.code is not None
+        and (not adres.postcode or not adres.huisnummer)
     ):
         return adres.woonplaats
 
     if not adres.postcode or not adres.huisnummer:
         return None
 
-    logger.info(
-        f"Adres {adres} bevat geen woonplaats met woonplaatscode. Woonplaats wordt opgehaald via het Kadaster"
-    )
+    logger.info("Woonplaats wordt opgehaald via het Kadaster")
 
     if not adres.huisnummer.isnumeric():
         warnings.warn(
@@ -984,9 +982,19 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
         result = response.json()
 
         if isinstance(result, list) and len(result) == 1:
-            adres.woonplaats = EenhedenWoonplaats(
+            woonplaats_kadaster = EenhedenWoonplaats(
                 code=result[0]["identificatie"], naam=result[0]["naam"]
             )
+            if (
+                adres.woonplaats
+                and adres.woonplaats.code
+                and woonplaats_kadaster.code != adres.woonplaats.code
+            ):
+                warnings.warn(
+                    f"Woonplaats {woonplaats_kadaster.naam} ({woonplaats_kadaster.code}) is gevonden voor adres {adres.postcode} {adres.huisnummer} {adres.huisletter if adres.huisletter else ''} {adres.huisnummer_toevoeging if adres.huisnummer_toevoeging else ''}, terwijl woonplaats {adres.woonplaats.naam} ({adres.woonplaats.code}) is opgegeven. {adres.woonplaats.naam} wordt gebruikt voor de waardering."
+                )
+                return adres.woonplaats
+            adres.woonplaats = woonplaats_kadaster
             return adres.woonplaats
         return None
     except requests.RequestException as e:
