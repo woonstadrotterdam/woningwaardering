@@ -1020,7 +1020,7 @@ In totaal kan maximaal 15 punten worden toegekend.
 ### Rubriek 9 Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
 
 > [!TIP]
-> Dit voorbeeld toont de waardering de voorbeeldberekening onder [9.3 Rekenmethode en voorbeeldberekening](#93-rekenmethode-en-voorbeeldberekening)
+> Dit voorbeeld toont de waardering van het rekenvoorbeeld uit [9.3 Rekenmethode en voorbeeldberekening](#93-rekenmethode-en-voorbeeldberekening).
 > /// tab | JSON
 ```json
 {%

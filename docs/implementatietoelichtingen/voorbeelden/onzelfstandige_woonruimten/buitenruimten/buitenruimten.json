@@ -5,30 +5,45 @@
         "code": "BTR",
         "naam": "Buitenruimte"
       },
-      "detailSoort": {
+      "detail_soort": {
         "code": "ATU",
         "naam": "Achtertuin"
       },
-      "oppervlakte": 50.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+      "breedte": 0.5,
+      "lengte": 2.0,
+      "oppervlakte": 1.0
     },
     {
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"
       },
-      "detailSoort": {
+      "detail_soort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "breedte": 1.5,
+      "lengte": 3.0,
+      "oppervlakte": 4.5,
+      "gedeeld_met_aantal_onzelfstandige_woonruimten": 4
+    },
+    {
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detail_soort": {
         "code": "DAK",
         "naam": "Dakterras"
       },
-      "breedte": 5.0,
-      "lengte": 5.0,
-      "oppervlakte": 25.0,
-      "gedeeldMetAantalEenheden": 2,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+      "breedte": 6.5,
+      "lengte": 8.0,
+      "oppervlakte": 52.0,
+      "gedeeld_met_aantal_eenheden": 5,
+      "gedeeld_met_aantal_onzelfstandige_woonruimten": 4
     }
   ],
-  "Woningwaarderingstelsel": {
+  "woningwaarderingstelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   }

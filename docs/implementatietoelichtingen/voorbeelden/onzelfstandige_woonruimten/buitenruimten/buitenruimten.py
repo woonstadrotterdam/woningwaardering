@@ -23,17 +23,26 @@ def get_eenheid():
         EenhedenRuimte(
             soort=Ruimtesoort.buitenruimte,
             detail_soort=Ruimtedetailsoort.achtertuin,
-            oppervlakte=50,
-            gedeeld_met_aantal_onzelfstandige_woonruimten=2,
+            oppervlakte=1,
+            breedte=0.5,
+            lengte=2,
+        ),
+        EenhedenRuimte(
+            soort=Ruimtesoort.buitenruimte,
+            detail_soort=Ruimtedetailsoort.balkon,
+            oppervlakte=4.5,
+            breedte=1.5,
+            lengte=3,
+            gedeeld_met_aantal_onzelfstandige_woonruimten=4,
         ),
         EenhedenRuimte(
             soort=Ruimtesoort.buitenruimte,
             detail_soort=Ruimtedetailsoort.dakterras,
-            oppervlakte=25,
-            breedte=5,
-            lengte=5,
-            gedeeld_met_aantal_eenheden=2,
-            gedeeld_met_aantal_onzelfstandige_woonruimten=2,
+            oppervlakte=52,
+            breedte=6.5,
+            lengte=8,
+            gedeeld_met_aantal_onzelfstandige_woonruimten=4,
+            gedeeld_met_aantal_eenheden=5,
         ),
     ]
 

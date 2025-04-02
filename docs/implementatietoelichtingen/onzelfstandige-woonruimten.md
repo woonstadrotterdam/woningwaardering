@@ -814,23 +814,18 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkam
 ### Rubriek 8 - Buitenruimten
 
 > [!TIP]
-> Dit voorbeeld toont de waardering van twee typen buitenruimten:
->
-> - Een achtertuin van 50 m2 dat alleen met huisgenoten wordt gedeeld.
-> - Een dakterras van 25 m² dat wordt gedeeld met één ander adres en met één andere huisgenoot.
->
-> Voor de waardering van gedeelde buitenruimten zijn de lengte en breedte (naast oppervlakte) van belang.
+> Dit voorbeeld toont de waardering van het rekenvoorbeeld uit [8.6 Puntenberekening en saldering](#86-puntenberekening-en-saldering).
 > /// tab | JSON
 ```json
 {%
-    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/buitenruimten/buitenruimten.json"
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/buitenruimten/buitenruimten.json"
 %}
 ```
 > /// 
 > /// tab | Python
 ```python
 {%
-    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/buitenruimten/buitenruimten.py"
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/buitenruimten/buitenruimten.py"
 %}
 ```
 > ///
@@ -925,7 +920,7 @@ Voor huurder A resulteert dit in 2,35 punt + 0,84375 punt + 1,95 punt = 5,14375 
 ### Rubriek 9 - Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
 
 > [!TIP]
-> Dit voorbeeld toont de waardering de voorbeeldberekening onder [9.3 Rekenmethode en voorbeeldberekening](#93-rekenmethode-en-voorbeeldberekening)
+> Dit voorbeeld toont de waardering van het rekenvoorbeeld uit [9.3 Rekenmethode en voorbeeldberekening](#93-rekenmethode-en-voorbeeldberekening).
 > /// tab | JSON
 ```json
 {%
