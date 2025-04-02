@@ -18,9 +18,9 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
+    Installatiesoort,
     Meeteenheid,
     Ruimtedetailsoort,
-    Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselReferentiedata,
@@ -190,20 +190,21 @@ def _waardeer_extra_voorzieningen(
     )
 
     punten_per_installatie: dict[Referentiedata, float] = {
-        Voorzieningsoort.inbouw_afzuiginstallatie: 0.75,
-        Voorzieningsoort.inbouw_kookplaat_inductie: 1.75,
-        Voorzieningsoort.inbouw_kookplaat_keramisch: 1.0,
-        Voorzieningsoort.inbouw_kookplaat_gas: 0.5,
-        Voorzieningsoort.inbouw_koelkast: 1.0,
-        Voorzieningsoort.inbouw_vrieskast: 0.75,
-        Voorzieningsoort.inbouw_oven_elektrisch: 1.0,
-        Voorzieningsoort.inbouw_oven_gas: 0.5,
-        Voorzieningsoort.inbouw_magnetron: 1.0,
-        Voorzieningsoort.inbouw_vaatwasmachine: 1.5,
-        Voorzieningsoort.extra_keukenkastruimte_boven_het_minimum: 0.75,
-        Voorzieningsoort.eenhandsmengkraan: 0.25,
-        Voorzieningsoort.thermostatische_mengkraan: 0.5,
-        Voorzieningsoort.kokend_waterfunctie: 0.5,
+        Installatiesoort.inbouw_afzuiginstallatie: 0.75,
+        Installatiesoort.inbouw_kookplaat_inductie: 1.75,
+        Installatiesoort.inbouw_kookplaat_keramisch: 1.0,
+        Installatiesoort.inbouw_kookplaat_gas: 0.5,
+        Installatiesoort.inbouw_koelkast: 1.0,
+        Installatiesoort.inbouw_vrieskast: 0.75,
+        Installatiesoort.inbouw_oven_elektrisch: 1.0,
+        Installatiesoort.inbouw_oven_gas: 0.5,
+        Installatiesoort.inbouw_magnetron: 1.0,
+        Installatiesoort.inbouw_combi_magnetron_en_of_oven: 2,
+        Installatiesoort.inbouw_vaatwasmachine: 1.5,
+        Installatiesoort.extra_keukenkastruimte_boven_het_minimum: 0.75,
+        Installatiesoort.eenhandsmengkraan: 0.25,
+        Installatiesoort.thermostatische_mengkraan: 0.5,
+        Installatiesoort.kokend_waterfunctie: 0.5,
     }
 
     voorziening_counts = Counter(
