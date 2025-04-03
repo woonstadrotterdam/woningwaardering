@@ -1288,7 +1288,7 @@ Deze regeling komt te vervallen per 2039.
 
 ~~Deze regeling komt te vervallen per 2042.~~
 
-~~[^5]: Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.~~
+[^5]: Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.
  
 
 _~~Rekenvoorbeeld:~~_
@@ -1353,11 +1353,11 @@ Wanneer een woning zonder de cap op de WOZ een waardering heeft van meer dan 186
 
 **Uitzonderingen**
 
-Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 187 punten~~ en voor kleine nieuwbouwwoningen 8 (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022~~.
+Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 187 punten~~ en voor kleine nieuwbouwwoningen[^7] (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022~~.
 
 Daarnaast wordt in nog twee andere gevallen de cap op de WOZ niet toegepast. In het geval dat de minimumwaarde is toegepast vindt namelijk ook geen aftopping plaats aangezien de WOZ-waarde niet meer dan 33% zal bedragen. Het tweede geval gaat het om nieuwbouwwoningen gebouwd in de jaren 2015-2019 waarvoor minimaal 110 punten zijn behaald voor de onderdelen 1 tot en met 10 en 12 van het woningwaarderingsstelsel. Ook in dat geval wordt de cap op de WOZ niet toegepast. In deze situatie wordt minimaal 40 punten voor het onderdeel WOZ-waarde toegekend en dit komt overeen met 26,6%, waardoor geen aftopping plaatsvindt. Deze gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde rekenkundig, in deze gevallen, nooit meer dan 33% kan bedragen. Daarom zijn ze niet opgenomen in onderstaand schema.
 
-8 Hieronder vallen ook gerenoveerde woningen waarbij de energieprestatie voldoet aan de eisen van artikel 5.2 van het Bouwbesluit 2012 die gelden voor nieuwbouwwoningen. 
+[^7]: Hieronder vallen ook gerenoveerde woningen waarbij de energieprestatie voldoet aan de eisen van artikel 5.2 van het Bouwbesluit 2012 die gelden voor nieuwbouwwoningen. 
 
 _Rekenvoorbeelden_
 
