@@ -105,6 +105,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
+        oppervlakte_totaal_na_delen = Decimal(str("0"))
         for aantal_onz, oppervlakte in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -121,24 +122,14 @@ class OppervlakteVanVertrekken(Stelselgroep):
                     )
                 ),
             )
-            woningwaardering.punten = float(
-                utils.rond_af_op_kwart(
-                    utils.rond_af(oppervlakte, decimalen=0) / Decimal(str(aantal_onz)),
-                )
+            oppervlakte_na_delen = utils.rond_af(oppervlakte, decimalen=2) / Decimal(
+                str(aantal_onz)
             )
-            woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=0))
+            oppervlakte_totaal_na_delen += oppervlakte_na_delen
+            woningwaardering.aantal = float(oppervlakte_na_delen)
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = float(
-            utils.rond_af_op_kwart(
-                sum(
-                    Decimal(str(woningwaardering.punten))
-                    for woningwaardering in woningwaardering_groep.woningwaarderingen
-                    or []
-                    if woningwaardering.punten is not None
-                )
-            )
-        )
+        punten = float(utils.rond_af(oppervlakte_totaal_na_delen, decimalen=0))
         woningwaardering_groep.punten = punten
 
         logger.info(

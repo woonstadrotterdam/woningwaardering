@@ -83,13 +83,42 @@ async def get_odata_url(datasetnaam: str, session: aiohttp.ClientSession) -> str
 async def get_woonplaats_data(session: aiohttp.ClientSession) -> pd.DataFrame:
     odata_url = await get_odata_url(DATASETNAAM_WOONPLAATSEN, session)
 
-    woonplaatsen_task = fetch_data(f"{odata_url}/WoonplaatsenCodes", session)
+    dataset = await fetch_data(odata_url, session)
+
+    # Bepaal de dataset structuur door beschikbare entiteitenverzamelingen te controleren
+    dataset_entiteiten = {item["name"]: item["url"] for item in dataset}
+
+    # Gebruik de eerste gevonden regio-entiteit
+    regio_entiteit_naam = next(
+        iter(
+            [
+                naam
+                for naam in dataset_entiteiten.keys()
+                if naam in ["WoonplaatsenCodes", "RegioSCodes"]
+            ]
+        ),
+        None,
+    )
+
+    if regio_entiteit_naam is None:
+        raise ValueError("Geen regio-entiteiten gevonden in de lijst")
+
+    dataset_url = dataset_entiteiten[regio_entiteit_naam]
+
+    # Haal de regiokolomnaam op door 'Codes' te verwijderen uit de entiteitnaam
+    regio_kolom = regio_entiteit_naam.replace("Codes", "")
+
+    logger.debug(
+        f"Gebruik {regio_entiteit_naam} dataset structuur met kolom {regio_kolom}"
+    )
+
+    woonplaatsen_task = fetch_data(f"{odata_url}/{dataset_url}", session)
     observations_task = fetch_data(
         f"{odata_url}/Observations",
         session,
         {
             "$filter": "Measure eq 'GM000B'",
-            "$select": "Woonplaatsen,Measure,StringValue",
+            "$select": f"{regio_kolom},Measure,StringValue",
             "$format": "json",
         },
     )
@@ -103,14 +132,14 @@ async def get_woonplaats_data(session: aiohttp.ClientSession) -> pd.DataFrame:
     df_observations["StringValue"] = df_observations["StringValue"].str.strip()
 
     df_pivot = df_observations.pivot(
-        index="Woonplaatsen", columns="Measure", values="StringValue"
+        index=regio_kolom, columns="Measure", values="StringValue"
     )
     df_pivot = df_pivot.reset_index()
     df_pivot = df_pivot.rename(columns={"GM000B": "Gemeentecode"})
 
     return pd.merge(
-        df_pivot, df_woonplaatsen, left_on="Woonplaatsen", right_on="Identifier"
-    ).rename(columns={"Woonplaatsen": "Woonplaatscode"})[
+        df_pivot, df_woonplaatsen, left_on=regio_kolom, right_on="Identifier"
+    ).rename(columns={regio_kolom: "Woonplaatscode"})[
         ["Woonplaatscode", "Woonplaats", "Gemeentecode"]
     ]
 
