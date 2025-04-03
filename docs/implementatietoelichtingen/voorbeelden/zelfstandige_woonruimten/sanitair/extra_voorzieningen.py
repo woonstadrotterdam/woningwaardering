@@ -1,5 +1,4 @@
 import warnings
-from datetime import date, datetime
 
 from loguru import logger
 
@@ -10,11 +9,11 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Ruimtesoort,
-    Ruimtedetailsoort,
     Installatiesoort,
+    Ruimtedetailsoort,
+    Ruimtesoort,
+    Woningwaarderingstelsel,
 )
-from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
 
 
 def get_eenheid():

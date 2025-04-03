@@ -16,7 +16,7 @@
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 3150.0
+          "lengte": 3000.0
         }
       ],
       "installaties": [
@@ -40,7 +40,7 @@
     }
   ],
   "Woningwaarderingstelsel": {
-    "code": "ZEL",
-    "naam": "Zelfstandige woonruimten"
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
   }
 }

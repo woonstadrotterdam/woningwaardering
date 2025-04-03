@@ -5,12 +5,10 @@ from loguru import logger
 from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
-    BouwkundigElementenBouwkundigElement,
     EenhedenEenheid,
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
@@ -19,21 +17,20 @@ from woningwaardering.vera.referentiedata import (
 
 def get_eenheid():
     eenheid = EenhedenEenheid()
+    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
     eenheid.ruimten = [
         EenhedenRuimte(
-            soort=Ruimtesoort.vertrek,
-            detail_soort=Ruimtedetailsoort.keuken,
-            oppervlakte=10,
-            bouwkundige_elementen=[
-                BouwkundigElementenBouwkundigElement(
-                    detail_soort=Bouwkundigelementdetailsoort.aanrecht, lengte=3000
-                )
-            ],
-        )
+            soort=Ruimtesoort.parkeergelegenheid,
+            detail_soort=Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt,
+            oppervlakte=12,
+            breedte=3,
+            lengte=4,
+            aantal=5,
+            gedeeld_met_aantal_eenheden=10,
+            gedeeldMetAantalOnzelfstandigeWoonruimten=4,
+        ),
     ]
-
-    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
 
     return eenheid
 

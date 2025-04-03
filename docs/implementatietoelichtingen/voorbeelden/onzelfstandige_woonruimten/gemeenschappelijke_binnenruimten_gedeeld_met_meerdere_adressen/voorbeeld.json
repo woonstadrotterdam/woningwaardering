@@ -1,0 +1,68 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "oppervlakte": 20.0,
+      "gedeeldMetAantalEenheden": 4,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 3001.0
+        }
+      ],
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "IOE",
+          "naam": "Inbouw oven elektrisch"
+        },
+        {
+          "code": "IMA",
+          "naam": "Inbouw magnetron"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    },
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "oppervlakte": 2.0,
+      "gedeeldMetAantalEenheden": 4,
+      "installaties": [
+        {
+          "code": "HTO",
+          "naam": "Hangend toilet"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
+}

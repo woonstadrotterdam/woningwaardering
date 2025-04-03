@@ -19,28 +19,11 @@
           "lengte": 3000.0
         }
       ],
-      "installaties": [
-        {
-          "code": "EHM",
-          "naam": "Éénhandsmengkraan"
-        },
-        {
-          "code": "IKI",
-          "naam": "Inbouw kookplaat inductie"
-        },
-        {
-          "code": "IKO",
-          "naam": "Inbouw koelkast"
-        },
-        {
-          "code": "IVA",
-          "naam": "Inbouw vaatwasmachine"
-        }
-      ]
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     }
   ],
   "Woningwaarderingstelsel": {
-    "code": "ZEL",
-    "naam": "Zelfstandige woonruimten"
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
   }
 }

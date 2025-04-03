@@ -11,6 +11,7 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
+    Installatiesoort,
     Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
@@ -30,10 +31,16 @@ def get_eenheid():
                     detail_soort=Bouwkundigelementdetailsoort.aanrecht, lengte=3000
                 )
             ],
+            installaties=[
+                Installatiesoort.eenhandsmengkraan,
+                Installatiesoort.inbouw_kookplaat_inductie,
+                Installatiesoort.inbouw_koelkast,
+                Installatiesoort.inbouw_vaatwasmachine,
+            ],
         )
     ]
 
-    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
     return eenheid
 

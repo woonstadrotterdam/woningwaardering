@@ -455,7 +455,7 @@ _Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten._
 > Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100](). Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
 
 > [!TIP]
-> Dit voorbeeld toont de minimale gegevens voor waardering van de oppervlakte van overige ruimten.
+> Dit voorbeeld toont de minimale gegevens voor waardering van verkoeling en verwarming.
 > /// tab | JSON
 ```json
 {%
@@ -688,7 +688,6 @@ Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend, oo
 
 > [!NOTE]
 > Zorg ervoor dat alleen aanrechten met een spoelbak worden meegegeven en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
-
 
 #### 5.2 Puntentoekenning lengte aanrecht
 
@@ -944,7 +943,7 @@ _\*~~Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of
 > Dit voorbeeld toont de waardering van twee typen buitenruimten:
 >
 > - Een privé achtertuin van 50 m².
-> - Een dakterras van 25 m² dat wordt gedeeld met één andere woonruimte en daarom voor 50% meetelt.
+> - Een dakterras van 25 m² dat wordt gedeeld met één ander adres en daarom voor 50% meetelt.
 >
 > Voor de waardering van gedeelde buitenruimten zijn de lengte en breedte (naast oppervlakte) van belang.
 > /// tab | JSON
@@ -1021,7 +1020,7 @@ In totaal kan maximaal 15 punten worden toegekend.
 ### Rubriek 9 Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
 
 > [!TIP]
-> Dit voorbeeld toont de waardering de voorbeeldberekening onder [9.3 Rekenmethode en voorbeeldberekening](#93-rekenmethode-en-voorbeeldberekening)
+> Dit voorbeeld toont de waardering van het rekenvoorbeeld uit [9.3 Rekenmethode en voorbeeldberekening](#93-rekenmethode-en-voorbeeldberekening).
 > /// tab | JSON
 ```json
 {%
@@ -1193,7 +1192,7 @@ Tien adressen delen vijf type II-parkeerplekken met laadpaal en twee type III-pa
 ### Rubriek 11 Punten voor de WOZ-waarde
 
 > [!TIP]
-> Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt meegegeven worden. 
+> Dit voorbeeld toont hoe punten voor de WOZ-waarde berekend kunnen worden.
 > /// tab | JSON
 ```json
 {%
@@ -1281,7 +1280,7 @@ Deze regeling komt te vervallen per 2039.
 
 **~~Woningen gelegen in COROP-gebied (2018-2022)~~**
 
-~~Indien de bouwkundige oplevering of hoogniveau renovatie van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de Corop-gebieden[^7] Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 229 (peildatum 1 januari 2023). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 229 gebruikt maar € 97 bij de peildatum 1 januari 2023. Bij de peildatum 1 januari 2022 wordt niet het bedrag van € 222 gebruikt, maar € 94.~~
+~~Indien de bouwkundige oplevering van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de COROP-gebieden[^5] Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 242 (peildatum 1 januari 2024). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 242 gebruikt maar € 103 bij de peildatum 1 januari 2024. Bij de peildatum 1 januari 2023 wordt niet het bedrag van € 229 gebruikt, maar € 97.~~
 
 ~~Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2022 of de woning is groter dan 40 m2 of de woning is niet gelegen in de COROP-gebieden Amsterdam en Utrecht, dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.~~
 
@@ -1289,7 +1288,7 @@ Deze regeling komt te vervallen per 2039.
 
 ~~Deze regeling komt te vervallen per 2042.~~
 
-~~[^7]: Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.~~
+[^5]: Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.
  
 
 _~~Rekenvoorbeeld:~~_
@@ -1354,11 +1353,11 @@ Wanneer een woning zonder de cap op de WOZ een waardering heeft van meer dan 186
 
 **Uitzonderingen**
 
-Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 187 punten~~ en voor kleine nieuwbouwwoningen 8 (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022~~.
+Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 187 punten~~ en voor kleine nieuwbouwwoningen[^7] (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022~~.
 
 Daarnaast wordt in nog twee andere gevallen de cap op de WOZ niet toegepast. In het geval dat de minimumwaarde is toegepast vindt namelijk ook geen aftopping plaats aangezien de WOZ-waarde niet meer dan 33% zal bedragen. Het tweede geval gaat het om nieuwbouwwoningen gebouwd in de jaren 2015-2019 waarvoor minimaal 110 punten zijn behaald voor de onderdelen 1 tot en met 10 en 12 van het woningwaarderingsstelsel. Ook in dat geval wordt de cap op de WOZ niet toegepast. In deze situatie wordt minimaal 40 punten voor het onderdeel WOZ-waarde toegekend en dit komt overeen met 26,6%, waardoor geen aftopping plaatsvindt. Deze gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde rekenkundig, in deze gevallen, nooit meer dan 33% kan bedragen. Daarom zijn ze niet opgenomen in onderstaand schema.
 
-8 Hieronder vallen ook gerenoveerde woningen waarbij de energieprestatie voldoet aan de eisen van artikel 5.2 van het Bouwbesluit 2012 die gelden voor nieuwbouwwoningen. 
+[^7]: Hieronder vallen ook gerenoveerde woningen waarbij de energieprestatie voldoet aan de eisen van artikel 5.2 van het Bouwbesluit 2012 die gelden voor nieuwbouwwoningen. 
 
 _Rekenvoorbeelden_
 
@@ -1469,6 +1468,7 @@ Een aanbelfunctie met video- en audioverbinding waarbij de voordeur automatisch 
 Hieronder wordt een systeem verstaan dat tweewegcommunicatie mogelijk maakt met beeld en geluid tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er tevens sprake te zijn van de mogelijkheid tot het openen van de (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang geeft tot het complex waarvan de woning onderdeel uitmaakt.
 
 #### 12.3 Laadpalen
+
 > [!TIP]
 > Dit voorbeeld toont hoe een carport met een laadpaal wordt aangegeven.
 > /// tab | JSON

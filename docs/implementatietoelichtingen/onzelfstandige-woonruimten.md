@@ -2,22 +2,21 @@
 
 Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Onzelfstandige Woonruimten (januari 2025)
 
-> [!NOTE]
-> Om een woonruimte als zelfstandige woning te waarderen, dient dit aangegeven te worden in het attribuut `woningwaarderingstelsel`:
+> [!TIP]
+> Om een woonruimte als onzelfstandige woning te waarderen, dient dit aangegeven te worden in het attribuut `woningwaarderingstelsel`:
 > /// tab | JSON
-> ```json
-> {
->   "woningwaarderingstelsel": {
->     "code": "ONZ",
->     "naam": "Onzelfstandige woonruimten"
->   }
-> }
-> ```
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/woningwaarderingstelsel.json"
+%}
+```
 > ///
 > /// tab | Python
-> ```python
-> eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
-> ```
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/woningwaarderingstelsel.py"
+%}
+```
 > ///
 
 ## Algemene toelichting (Hoofdstuk 2)
@@ -61,6 +60,27 @@ De punten die worden gehaald op basis van het woningwaarderingsstelsel resultere
 
 #### 2.7.1 Rijksmonument
 
+> [!NOTE]
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
+
+> [!TIP]
+>  Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een zelfstandige woonruimte de status van rijksmonument heeft.
+> De datum van afsluiten van de huurovereenkomst is van belang omdat vanaf 1 juli 2024 de nieuwe wetgeving (Wet betaalbare huur) van kracht is, waardoor rijksmonumenten een procentuele opslag van 35% krijgen op de maximale huurprijs in plaats van de eerdere puntentoeslag van 50 punten.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/rijksmonument.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/rijksmonument.py"
+%}
+```
+> ///
+
 **Huurovereenkomst afgesloten op of na 1 juli 2024**
 
 Indien een woonruimte bestaat uit of deel uitmaakt van een rijksmonument, als bedoeld in artikel 1.1 Erfgoedwet, dan wordt de maximale huurprijs vermeerderd met 35%. Hiermee worden rijksmonumenten bedoeld die zijn geregistreerd in het monumentenregister van de Rijksdienst voor het Cultureel Erfgoed.
@@ -75,16 +95,47 @@ Indien een woonruimte een rijksmonument is of daar deel van uitmaakt, als bedoel
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de Rijksmonumenten: http://monumentenregister.cultureelerfgoed.nl/.
 
-> [!NOTE]
-> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
-
 #### 2.7.2 Gemeentelijk of provinciaal monument
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een onzelfstandige woonruimte de status van gemeentelijk monument heeft.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/gemeentelijk_monument.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/gemeentelijk_monument.py"
+%}
+```
+> ///
 
 Indien een woonruimte een gemeentelijk of provinciaal monument is of daarvan deel uitmaakt, dan wordt de maximale huurprijs vermeerderd met 15%. Het gemeentelijk monument moet zijn aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door de gedeputeerde staten.
 
 De Huurcommissie hanteert passief beleid. De partijen moeten aantonen dat een woning bestaat of deel uitmaakt van een gemeentelijk of provinciaal monument.
 
 #### 2.7.3 Beschermd stad- of dorpsgezicht
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een onzelfstandige woonruimte deel uitmaakt van een rijksbeschermd stadsgezicht. Het bouwjaar is van belang omdat alleen woningen gebouwd vóór 1965 in aanmerking komen voor de opslag van 5%.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/beschermd_stadsgezicht.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/prijsopslag_monumenten/beschermd_stadsgezicht.py"
+%}
+```
+> ///
 
 De maximale huurprijs wordt met 5% vermeerderd als:
 
@@ -101,6 +152,23 @@ De samenloop van verschillende opslagen is in het woningwaarderingstelsel voor o
 
 ### Rubriek 1 - Oppervlakte van vertrekken
 
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor waardering van de oppervlakte van vertrekken
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/oppervlakte_van_vertrekken/woonkamer.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/oppervlakte_van_vertrekken/woonkamer.py"
+%}
+```
+> ///
+
 #### 1.1 Puntentoekenning
 
 - Privévertrekken worden gewaardeerd met 1 punt per vierkante meter.
@@ -111,6 +179,7 @@ De samenloop van verschillende opslagen is in het woningwaarderingstelsel voor o
 
 
 #### 1.2 Wat zijn vertrekken?
+
 > [!NOTE]
 > * De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'.
 > * Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
@@ -170,6 +239,23 @@ Omslaan naar 1 punt per m2 = 19 punten
 ```
 
 ### Rubriek 2 - Oppervlakte van overige ruimten
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor waardering van de oppervlakte van overige ruimten
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/oppervlakte_van_overige_ruimten/badkamer_met_toilet.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/oppervlakte_van_overige_ruimten/badkamer_met_toilet.py"
+%}
+```
+> ///
 
 #### 2.1 Puntentoekenning
 
@@ -249,6 +335,26 @@ In totaal is voor de woonruimte in dit voorbeeld een puntenaantal van 3 plus 6,2
 
 ### Rubriek 3 - Verkoeling en verwarming
 
+> [!NOTE]
+> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100](). Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor waardering van de verkoeling en verwarming van ruimten.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/verkoeling_en_verwarming/woonkamer_verkoeld_en_verwarmd.json"
+%}
+```
+> ///
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/verkoeling_en_verwarming/woonkamer_verkoeld_en_verwarmd.py"
+%}
+```
+> ///
+
 #### 3.1 Puntentoekenning
 
 **Vertrekken**
@@ -296,8 +402,24 @@ In totaal is voor de woonruimte in dit voorbeeld een puntenaantal van 3 plus 6,2
 > [!NOTE]
 > Deze package gaat er vanuit dat een aanrecht in een woon- of slaapvertrek een open keuken is.
 
-
 ### Rubriek 4 - Energieprestatie
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor de waardering van de energieprestatie van een woning met een energieprestatievergoeding. De monumentale status is van belang omdat die invloed heeft op de waardering van de energieprestatie.  
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/energieprestatie/energieprestatie.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/energieprestatie/energieprestatie.py"
+%}  
+```
+> ///
 
 De energieprestatie van een woning kan sinds 1 januari 2021 op drie manieren zijn vastgesteld:
 
@@ -413,6 +535,23 @@ Een waterdichte afwerking wordt in beginsel verondersteld aanwezig te zijn, maar
 
 #### 5.2 Puntentoekenning lengte aanrecht
 
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor de waardering van een keuken met een aanrecht. De lengte van het aanrecht (3000 mm) bepaalt de puntenwaardering.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/keuken/aanrecht.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/keuken/aanrecht.py"
+%}
+```
+> ///
+
 De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van het aanrecht. ~~Hierbij worden alleen punten toegekend als het aanrechtblad waterdicht is.~~
 
 - Bij een aanrechtlengte minder dan 1 meter worden 0 punten toegekend.
@@ -445,6 +584,23 @@ Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet du
 ~~De lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.~~
 
 #### 5.4 Puntentoekenning extra voorzieningen
+
+> [!TIP]
+> Dit voorbeeld toont de minimale gegevens voor de waardering van voorzieningen in een keuken. De lengte van het aanrecht is van belang om tot waardering van de voorzieningen te komen.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/keuken/voorzieningen.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/keuken/voorzieningen.py"
+%}
+```
+> ///
 
 Het woningwaarderingsstelsel geeft voor het onderdeel keuken extra punten voor voorzieningen in de keuken. Hiervoor geldt een maximum tot het aantal punten dat voor de aanrechtlengte is bepaald. Een keuken met een aanrechtlengte tussen de 1 en 2 m kan bijvoorbeeld tot maximaal 4 extra punten krijgen voor voorzieningen en een aanrechtlengte tussen de 2 en 3 meter kan tot maximaal 7 punten extra krijgen voor voorzieningen. 
 
@@ -486,6 +642,23 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één keuken
 ### Rubriek 6 - Sanitair
 
 #### 6.1 Puntentoekenning sanitaire basisvoorzieningen
+
+> [!TIP]
+> Dit voorbeeld toont de gegevens voor de waardering van sanitaire basisvoorzieningen.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/sanitair/basisvoorzieningen.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/sanitair/basisvoorzieningen.py"
+%}
+```
+> ///
 
 Het woningwaarderingsstelsel geeft punten aan sanitaire basisvoorzieningen:
 
@@ -539,9 +712,26 @@ Indien in de badruimte behalve het bad tevens een afzonderlijke douche is aangeb
 
 #### 6.2 Puntentoekenning extra voorzieningen
 
+> [!TIP]
+> Dit voorbeeld toont de gegevens voor de waardering van sanitaire extra voorzieningen. Voor de waardering van extra voorzieningen dient in de ruimte ook een bad of douche aanwezig te zijn.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/sanitair/extra_voorzieningen.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/sanitair/extra_voorzieningen.py"
+%}
+```
+> ///
+
 Het woningwaarderingsstelsel geeft voor het onderdeel sanitair extra punten voor voorzieningen in de bad- of doucheruimte. Hiervoor geldt een maximum tot het aantal punten dat reeds voor douche, bad en/of bad/douche is verkregen. Anders gezegd: maximaal een verdubbeling van de toegekende punten voor douche, bad en/of bad/douche.
 
-**Eisen bad-of doucheruimte**
+**_Eisen bad-of doucheruimte_**
 
 Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden in een bad- of doucheruimte. Bad- of doucheruimten moeten voldoen aan de volgende eisen:
 
@@ -553,7 +743,7 @@ Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden
 
 \* Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien.
 
-**Lijst voorzieningen**
+**_Lijst voorzieningen_**
 
 Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
 
@@ -621,6 +811,23 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkam
 ~~Per € 332,00 netto-investering door de verhuurder (dus het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder) wordt één punt toegekend. Voorwaarde is wel dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit. De wetgever gaat ervan uit dat met deze puntenwaardering de verhuurder een redelijke rendementswaarborg heeft voor het door hem geïnvesteerde vermogen (te weten de kosten van de ingrepen, verminderd met de eigen bijdrage van de huurder en de financiële tegemoetkoming van gemeente of (bij dure woonvoorzieningen) enige instantie die ingevolge een wettelijke regeling die tegemoetkoming verleent.~~
 
 ### Rubriek 8 - Buitenruimten
+
+> [!TIP]
+> Dit voorbeeld toont de waardering van het rekenvoorbeeld uit [8.6 Puntenberekening en saldering](#86-puntenberekening-en-saldering).
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/buitenruimten/buitenruimten.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/buitenruimten/buitenruimten.py"
+%}
+```
+> ///
 
 #### 8.1 Puntentoekenning
 
@@ -711,6 +918,23 @@ Voor huurder A resulteert dit in 2,35 punt + 0,84375 punt + 1,95 punt = 5,14375 
 
 ### Rubriek 9 - Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
 
+> [!TIP]
+> Dit voorbeeld toont de waardering van het rekenvoorbeeld uit [9.3 Rekenmethode en voorbeeldberekening](#93-rekenmethode-en-voorbeeldberekening).
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/voorbeeld.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/voorbeeld.py"
+%}
+```
+> ///
+
 #### 9.1 Puntentoekenning
 
 - Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter.  
@@ -779,7 +1003,7 @@ Voorbeeld: (A) een gemeenschappelijke binnenruimte met keuken van 20 vierkante m
 Afronden geschiedt op een kwart punt per onzelfstandige woonruimte, in dit geval dus op 2,50.
 ```
 
-### Rubriek 10 - Gemeenschappelijke parkeerruimten 
+### Rubriek 10 - Gemeenschappelijke parkeerruimten
 
 #### 10.1 Puntentoekenning
 
@@ -845,7 +1069,22 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
 > [!NOTE]
 > Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken bovenstaande berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model niet mogelijk. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van bovenstaande parkertypes de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` en `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek meegegeven te worden wanneer het een onzelfstandige woonruimte betreft. Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt (in JSON-formaat) meegegeven worden.
 
-
+> [!TIP]
+> Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt meegegeven worden. 
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/gemeenschappelijke_parkeerruimten/voorbeeld.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/gemeenschappelijke_parkeerruimten/voorbeeld.py"
+%}
+```
+> ///
 
 ```json
 {
@@ -874,6 +1113,23 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
 ```
 
 ### Rubriek 11 Punten voor de WOZ-waarde
+
+> [!TIP]
+> Hieronder vindt u een voorbeeld hoe punten voor de WOZ-waarde berekend kunnen worden.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/voorbeeld.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/punten_voor_de_woz_waarde/voorbeeld.py"
+%}
+```
+> ///
 
 Punten worden toegekend op basis van de WOZ-waarde van het adres waar de onzelfstandige woonruimte onderdeel van is. WOZ staat voor Wet waardering onroerende zaken. De WOZ-waarde geeft de geschatte marktwaarde van de woning weer zoals volgt uit de Wet waardering onroerende zaken. Deze waarde wordt in principe ieder kalenderjaar door de gemeente vastgesteld, die in de WOZ-beschikking van de desbetreffende woning wordt weergegeven.
 
@@ -918,6 +1174,7 @@ _De gemeente Amsterdam ligt in het COROP-gebied Groot-Amsterdam dat € 5.596 al
 De minimum WOZ-waarde wordt ook gebruikt voor specifieke woningen van specifieke verhuurders, zoals 'containerwoningen' die zijn bestemd voor studentenhuisvesting. In die gevallen wordt een minimum WOZ-waarde gehanteerd indien de WOZ-waarde lager is dan deze minimumwaarde. Deze waarde met peildatum 1 januari 2023 bedraagt € 73.607. Zie de tabel hieronder voor de minimumwaarde van de afgelopen jaren.
 
 Tabel 1
+
 | Peildatum | Minimumwaarde |
 | ------------------ | -------- |
 | Per 1 januari 2021 | € 61.198 |
@@ -942,16 +1199,31 @@ Tabel 1
 > [!NOTE]
 > De omrekening naar 100% voortgangspercentage dient als WOZ-waarde opgegeven te worden.
 
-
 ### Rubriek 12 - Bijzondere voorzieningen: zorgwoning
 
 #### 12.1 Zorgwoning
+
+> [!TIP]
+> Dit voorbeeld toont hoe een zorgwoning wordt aangegeven door de doelgroep op 'zorg' te zetten. De extra attributen in het model (zoals de WOZ-waarde, energielabel, ruimtegegevens, etc.) zijn van belang omdat de 35% opslag voor zorgwoningen wordt berekend over het totale puntenaantal van de rubrieken 1 t/m 11.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/bijzondere_voorzieningen/zorgwoning.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/bijzondere_voorzieningen/zorgwoning.py"
+%}
+```
+> ///
 
 Als sprake is van een zorgwoning, dan wordt het puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel met 35% verhoogd. Dit resulteert in een hogere maximale huurprijs.
 
 > [!NOTE]
 > De onderstaande doorgehaalde voorwaarden worden niet gecontroleerd door de woningwaardering package. Wanneer een eenheid de doelgroep Zorg heeft, wordt de woning automatisch als zorgwoning gewaardeerd.
-
 
 **~~Voorwaarden zorgwoning~~**
 
@@ -982,11 +1254,45 @@ Als sprake is van een zorgwoning, dan wordt het puntentotaal van de rubrieken 1 
 
 #### 12.2 Aanbelfunctie met video- en audioverbinding
 
+> [!TIP]
+> Dit voorbeeld toont hoe een woning met aanbelfunctie wordt aangegeven.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/bijzondere_voorzieningen/aanbelfunctie.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/bijzondere_voorzieningen/aanbelfunctie.py"
+%}
+```
+> ///
+
 Een aanbelfunctie met video- en audioverbinding waarbij de voordeur automatisch kan worden geopend vanuit de woning wordt gewaardeerd met 0,25 punt.
 
 Hieronder wordt een systeem verstaan dat tweewegcommunicatie mogelijk maakt met beeld en geluid tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er tevens sprake te zijn van de mogelijkheid tot het openen van de (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang geeft tot het complex waarvan de woning onderdeel uitmaakt.
 
 #### 12.3 Laadpalen
+
+> [!TIP]
+> Dit voorbeeld toont hoe een carport met een laadpaal wordt aangegeven.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/bijzondere_voorzieningen/laadpaal.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/bijzondere_voorzieningen/laadpaal.py"
+%}
+```
+> ///
 
 Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik door de bewoners, wordt gewaardeerd met 2 punten. Dit geldt alleen als de laadpaal bestemd is voor het elektrisch opladen van een gemotoriseerd voertuig, niet zijnde een bromfiets, fiets met trapondersteuning of gehandicaptenvoertuig.
 
@@ -1002,3 +1308,20 @@ Het waarderingsstelsel voor onzelfstandige woonruimten kent een rubriek voor aft
 - ~~Wanneer het laagste raamkozijn van het (hoofd)woonvertrek meer dan 1,60 m boven de vloer is.~~
 
 ~~Bij de bepaling van de ruitoppervlakte van het (hoofd) woonvertrek is de oppervlakte van het zichtbare glas bepalend. Dit betekent dat het glas dat zich in de sponning bevindt niet bijdraagt aan het bepalen van de ruitoppervlakte.~~
+
+> [!TIP]
+> Dit voorbeeld toont hoe aftrekpunten worden toegepast voor een woning met minder dan 8 m2 oppervlakte voor Rubriek 1.
+> /// tab | JSON
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/aftrekpunten/oppervlakte_van_vertrekken.json"
+%}
+```
+> /// 
+> /// tab | Python
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/onzelfstandige_woonruimten/aftrekpunten/oppervlakte_van_vertrekken.py"
+%}
+```
+> ///

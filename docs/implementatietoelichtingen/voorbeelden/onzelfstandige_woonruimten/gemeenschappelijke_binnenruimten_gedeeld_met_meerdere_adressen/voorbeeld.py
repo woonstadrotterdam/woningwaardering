@@ -10,37 +10,54 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
-    Installatiesoort,
     Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
+)
+from woningwaardering.vera.referentiedata.bouwkundigelementdetailsoort import (
+    Bouwkundigelementdetailsoort,
+)
+from woningwaardering.vera.referentiedata.installatiesoort import (
+    Installatiesoort,
 )
 
 
 def get_eenheid():
     eenheid = EenhedenEenheid()
+    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
     eenheid.ruimten = [
         EenhedenRuimte(
             soort=Ruimtesoort.vertrek,
             detail_soort=Ruimtedetailsoort.keuken,
-            oppervlakte=10,
+            oppervlakte=20,
+            gedeeldMetAantalEenheden=4,
+            gedeeldMetAantalOnzelfstandigeWoonruimten=4,
             bouwkundige_elementen=[
                 BouwkundigElementenBouwkundigElement(
-                    detail_soort=Bouwkundigelementdetailsoort.aanrecht, lengte=3000
+                    detail_soort=Bouwkundigelementdetailsoort.aanrecht,
+                    lengte=3001,
                 )
             ],
             installaties=[
-                Installatiesoort.eenhandsmengkraan,
-                Installatiesoort.inbouw_kookplaat_inductie,
+                Installatiesoort.inbouw_oven_elektrisch,
+                Installatiesoort.inbouw_magnetron,
                 Installatiesoort.inbouw_koelkast,
-                Installatiesoort.inbouw_vaatwasmachine,
             ],
-        )
+            verwarmd=True,
+        ),
+        EenhedenRuimte(
+            soort=Ruimtesoort.overige_ruimten,
+            detailSoort=Ruimtedetailsoort.toiletruimte,
+            oppervlakte=2,
+            gedeeldMetAantalEenheden=4,
+            gedeeldMetAantalOnzelfstandigeWoonruimten=4,
+            installaties=[
+                Installatiesoort.hangend_toilet,
+                Installatiesoort.wastafel,
+            ],
+        ),
     ]
-
-    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
 
     return eenheid
 

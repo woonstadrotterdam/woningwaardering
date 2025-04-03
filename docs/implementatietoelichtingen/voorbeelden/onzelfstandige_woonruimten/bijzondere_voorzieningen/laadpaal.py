@@ -11,6 +11,7 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
+    Bouwkundigelementsoort,
     Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
@@ -19,21 +20,20 @@ from woningwaardering.vera.referentiedata import (
 
 def get_eenheid():
     eenheid = EenhedenEenheid()
+    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
     eenheid.ruimten = [
         EenhedenRuimte(
-            soort=Ruimtesoort.vertrek,
-            detail_soort=Ruimtedetailsoort.keuken,
-            oppervlakte=10,
+            soort=Ruimtesoort.parkeergelegenheid,
+            detail_soort=Ruimtedetailsoort.carport,
             bouwkundige_elementen=[
                 BouwkundigElementenBouwkundigElement(
-                    detail_soort=Bouwkundigelementdetailsoort.aanrecht, lengte=3000
+                    soort=Bouwkundigelementsoort.voorziening,
+                    detail_soort=Bouwkundigelementdetailsoort.laadpaal,
                 )
             ],
-        )
+        ),
     ]
-
-    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
 
     return eenheid
 

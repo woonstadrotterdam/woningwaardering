@@ -92,14 +92,14 @@ def _voeg_onderliggende_woningwaarderingen_toe(
             table.add_row(
                 [
                     stelselgroep_naam,
-                    f"{' '*indent} - {onderliggende_woningwaardering.criterium.naam}",
-                    f"{'['*indent}{onderliggende_woningwaardering.aantal}{']'*indent}"
+                    f"{' ' * indent} - {onderliggende_woningwaardering.criterium.naam}",
+                    f"{'[' * indent}{onderliggende_woningwaardering.aantal}{']' * indent}"
                     if onderliggende_woningwaardering.aantal is not None
                     else "",
                     onderliggende_woningwaardering.criterium.meeteenheid.naam
                     if onderliggende_woningwaardering.criterium.meeteenheid is not None
                     else "",
-                    f"{'['*indent}{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}{']'*indent}"
+                    f"{'[' * indent}{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}{']' * indent}"
                     if onderliggende_woningwaardering.punten is not None
                     else "",
                     f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
@@ -259,8 +259,10 @@ def naar_tabel(
 
             if verschillende_meeteenheden:
                 meeteenheid = ""
-            else:
+            elif meeteenheden_zonder_nones:
                 meeteenheid = meeteenheden_zonder_nones[0]
+            else:
+                meeteenheid = ""
 
             table.add_row(
                 [
@@ -890,36 +892,37 @@ def gedeeld_met_onzelfstandige_woonruimten(
 
 
 WOONPLAATS_QUERY_TEMPLATE = """
+prefix imxgeo: <http://modellen.geostandaarden.nl/def/imx-geo#>
 prefix sor: <https://data.kkg.kadaster.nl/sor/model/def/>
-prefix nen3610: <https://data.kkg.kadaster.nl/nen3610/model/def/>
+prefix nen3610: <http://modellen.geostandaarden.nl/def/nen3610#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
-select ?identificatie ?naam
+select DISTINCT ?identificatie ?naam
 where {{
   values ?postcode {{ "{postcode}" }}
   values ?huisnummer {{ {huisnummer} }}
   values ?huisnummertoevoeging {{ "{huisnummertoevoeging}" }}
   values ?huisletter {{ "{huisletter}" }}
 
-  ?adres a sor:Nummeraanduiding;
-         sor:postcode ?postcode;
-         sor:ligtAan/sor:ligtIn ?woonplaats;
-         sor:huisnummer ?adresHuisnummer.
-
-  ?woonplaats sor:geregistreerdMet/nen3610:identificatie ?identificatie;
-              skos:prefLabel ?naam.
-
+  ?adres a imxgeo:Adres;
+         imxgeo:postcode ?postcode;
+         imxgeo:huisnummer ?adresHuisnummer;
+         imxgeo:plaatsnaam ?naam;
+         imxgeo:isAdresVanGebouw/imxgeo:bevindtZichOpPerceel/imxgeo:ligtInRegistratieveRuimte ?registratieveRuimte.
+  ?registratieveRuimte a imxgeo:Woonplaats;
+         imxgeo:status "Woonplaats aangewezen";
+         nen3610:identificatie ?identificatie
   optional
   {{
-    ?adres sor:huisnummer ?adresHuisnummer.
+    ?adres imxgeo:huisnummer ?adresHuisnummer.
   }}
   optional
   {{
-    ?adres sor:huisnummertoevoeging ?adresHuisnummertoevoeging.
+    ?adres imxgeo:huisnummertoevoeging ?adresHuisnummertoevoeging.
   }}
   optional
   {{
-    ?adres sor:huisletter ?adresHuisletter.
+    ?adres imxgeo:huisletter ?adresHuisletter.
   }}
   FILTER(
     (!BOUND(?adresHuisnummer) && ?huisnummer = "") ||
@@ -950,17 +953,15 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
     """
     if (
         adres.woonplaats is not None
-        and adres.woonplaats is not None
-        and adres.woonplaats.naam is not None
+        and adres.woonplaats.code is not None
+        and (not adres.postcode or not adres.huisnummer)
     ):
         return adres.woonplaats
 
     if not adres.postcode or not adres.huisnummer:
         return None
 
-    logger.info(
-        f"Adres {adres} bevat geen woonplaats met woonplaatscode. Woonplaats wordt opgehaald via het Kadaster"
-    )
+    logger.info("Woonplaats wordt opgehaald via het Kadaster")
 
     if not adres.huisnummer.isnumeric():
         warnings.warn(
@@ -981,9 +982,19 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
         result = response.json()
 
         if isinstance(result, list) and len(result) == 1:
-            adres.woonplaats = EenhedenWoonplaats(
+            woonplaats_kadaster = EenhedenWoonplaats(
                 code=result[0]["identificatie"], naam=result[0]["naam"]
             )
+            if (
+                adres.woonplaats
+                and adres.woonplaats.code
+                and woonplaats_kadaster.code != adres.woonplaats.code
+            ):
+                warnings.warn(
+                    f"Woonplaats {woonplaats_kadaster.naam} ({woonplaats_kadaster.code}) is gevonden voor adres {adres.postcode} {adres.huisnummer} {adres.huisletter if adres.huisletter else ''} {adres.huisnummer_toevoeging if adres.huisnummer_toevoeging else ''}, terwijl woonplaats {adres.woonplaats.naam} ({adres.woonplaats.code}) is opgegeven. {adres.woonplaats.naam} wordt gebruikt voor de waardering."
+                )
+                return adres.woonplaats
+            adres.woonplaats = woonplaats_kadaster
             return adres.woonplaats
         return None
     except requests.RequestException as e:

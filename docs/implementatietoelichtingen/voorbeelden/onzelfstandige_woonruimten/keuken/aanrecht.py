@@ -1,5 +1,4 @@
 import warnings
-from datetime import date, datetime
 
 from loguru import logger
 
@@ -7,18 +6,10 @@ from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenEnergieprestatie,
-    EenhedenPand,
     EenhedenRuimte,
     BouwkundigElementenBouwkundigElement,
-    EenhedenWozEenheid,
 )
 from woningwaardering.vera.referentiedata import (
-    Energieprestatiesoort,
-    Energieprestatiestatus,
-    Energielabel,
-    Installatiesoort,
-    Pandsoort,
     Ruimtesoort,
     Ruimtedetailsoort,
     Bouwkundigelementdetailsoort,
@@ -36,19 +27,14 @@ def get_eenheid():
             oppervlakte=10,
             bouwkundige_elementen=[
                 BouwkundigElementenBouwkundigElement(
-                    detail_soort=Bouwkundigelementdetailsoort.aanrecht, lengte=3150
+                    detail_soort=Bouwkundigelementdetailsoort.aanrecht, lengte=3000
                 )
             ],
-            installaties=[
-                Installatiesoort.eenhandsmengkraan,
-                Installatiesoort.inbouw_kookplaat_inductie,
-                Installatiesoort.inbouw_koelkast,
-                Installatiesoort.inbouw_vaatwasmachine,
-            ],
-        )
+            gedeeld_met_aantal_onzelfstandige_woonruimten=2,
+        )   
     ]
 
-    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
     return eenheid
 

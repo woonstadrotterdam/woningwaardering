@@ -5,12 +5,10 @@ from loguru import logger
 from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
-    BouwkundigElementenBouwkundigElement,
     EenhedenEenheid,
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     Installatiesoort,
     Ruimtedetailsoort,
     Ruimtesoort,
@@ -24,23 +22,26 @@ def get_eenheid():
     eenheid.ruimten = [
         EenhedenRuimte(
             soort=Ruimtesoort.vertrek,
-            detail_soort=Ruimtedetailsoort.keuken,
+            detail_soort=Ruimtedetailsoort.badkamer,
             oppervlakte=10,
-            bouwkundige_elementen=[
-                BouwkundigElementenBouwkundigElement(
-                    detail_soort=Bouwkundigelementdetailsoort.aanrecht, lengte=3000
-                )
-            ],
             installaties=[
+                Installatiesoort.bad,
+                Installatiesoort.thermostatische_mengkraan,
+                Installatiesoort.douche,
+                Installatiesoort.thermostatische_mengkraan,
+                Installatiesoort.douchewand,
+                Installatiesoort.hangend_toilet,
+                Installatiesoort.handdoekenradiator,
+                Installatiesoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel,
+                Installatiesoort.meerpersoonswastafel,
                 Installatiesoort.eenhandsmengkraan,
-                Installatiesoort.inbouw_kookplaat_inductie,
-                Installatiesoort.inbouw_koelkast,
-                Installatiesoort.inbouw_vaatwasmachine,
+                Installatiesoort.stopcontact_bij_wastafel,
             ],
+            gedeeldMetAantalOnzelfstandigeWoonruimten=2,
         )
     ]
 
-    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+    eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
 
     return eenheid
 
