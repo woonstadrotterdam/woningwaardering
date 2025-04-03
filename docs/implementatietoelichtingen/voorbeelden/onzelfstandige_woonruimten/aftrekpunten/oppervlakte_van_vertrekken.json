@@ -9,7 +9,7 @@
         "code": "WOO",
         "naam": "Woonkamer"
       },
-      "oppervlakte": 6,
+      "oppervlakte": 6.0,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     }
   ],

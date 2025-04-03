@@ -5,9 +5,9 @@
       "naam": "Rijksmonument"
     }
   ],
-  "datumAfsluitenHuurovereenkomst": "2024-07-01",
-  "woningwaarderingstelsel": {
+  "Woningwaarderingstelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
-  }
+  },
+  "datumAfsluitenHuurovereenkomst": "2024-07-01"
 }

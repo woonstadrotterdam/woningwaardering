@@ -1,17 +1,17 @@
 {
+  "bouwjaar": 1975,
   "adres": {
     "woonplaats": {
       "code": "3086",
       "naam": "ROTTERDAM"
     }
   },
-  "bouwjaar": 1975,
+  "adresseerbaarObjectBasisregistratie": {
+    "bagGebruikersOppervlakte": 58
+  },
   "doelgroep": {
     "code": "ZOR",
     "naam": "Zorg"
-  },
-  "adresseerbaar_object_basisregistratie": {
-    "bag_gebruikers_oppervlakte": 58
   },
   "energieprestaties": [
     {

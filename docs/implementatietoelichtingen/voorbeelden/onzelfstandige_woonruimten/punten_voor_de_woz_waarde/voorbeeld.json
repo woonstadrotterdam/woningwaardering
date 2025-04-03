@@ -5,16 +5,16 @@
       "naam": "ROTTERDAM"
     }
   },
-  "adresseerbaar_object_basisregistratie": {
-    "bag_gebruikers_oppervlakte": 58
+  "adresseerbaarObjectBasisregistratie": {
+    "bagGebruikersOppervlakte": 58
   },
-  "woningwaarderingstelsel": {
+  "Woningwaarderingstelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   },
-  "woz_eenheden": [
+  "wozEenheden": [
     {
-      "vastgestelde_waarde": 300000.0,
+      "vastgesteldeWaarde": 300000.0,
       "waardepeildatum": "2023-01-01"
     }
   ]

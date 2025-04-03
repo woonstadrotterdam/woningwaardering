@@ -9,7 +9,6 @@
         "code": "BAD",
         "naam": "Badkamer"
       },
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "oppervlakte": 10.0,
       "installaties": [
         {
@@ -24,7 +23,8 @@
           "code": "HTO",
           "naam": "Hangend toilet"
         }
-      ]
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     }
   ],
   "Woningwaarderingstelsel": {

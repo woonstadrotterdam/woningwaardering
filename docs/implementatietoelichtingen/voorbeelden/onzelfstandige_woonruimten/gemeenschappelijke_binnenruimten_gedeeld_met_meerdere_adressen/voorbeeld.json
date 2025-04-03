@@ -5,15 +5,15 @@
         "code": "VTK",
         "naam": "Vertrek"
       },
-      "detail_soort": {
+      "detailSoort": {
         "code": "KEU",
         "naam": "Keuken"
       },
       "oppervlakte": 20.0,
-      "gedeeld_met_aantal_eenheden": 4,
-      "bouwkundige_elementen": [
+      "gedeeldMetAantalEenheden": 4,
+      "bouwkundigeElementen": [
         {
-          "detail_soort": {
+          "detailSoort": {
             "code": "AAN",
             "naam": "Aanrecht"
           },
@@ -35,19 +35,19 @@
           "naam": "Inbouw koelkast"
         }
       ],
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 4
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     },
     {
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimten"
       },
-      "detail_soort": {
+      "detailSoort": {
         "code": "TOI",
         "naam": "Toiletruimte"
       },
       "oppervlakte": 2.0,
-      "gedeeld_met_aantal_eenheden": 4,
+      "gedeeldMetAantalEenheden": 4,
       "installaties": [
         {
           "code": "HTO",
@@ -58,10 +58,10 @@
           "naam": "Wastafel"
         }
       ],
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 4
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }
   ],
-  "woningwaarderingstelsel": {
+  "Woningwaarderingstelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   }

@@ -79,6 +79,12 @@ def get_json_instance(test_case):
         json_data = f.read()
         return EenhedenEenheid.model_validate_json(json_data)
 
+def get_json(test_case):
+    """Get the JSON-parsed instance"""
+    with open(test_case['json_file'], "r") as f:
+        json_data = f.read()
+        return json_data
+
 def get_stelselgroep(test_case):
     """Get the appropriate validator class"""
     stelsel = test_case['stelsel']
@@ -126,10 +132,9 @@ def test_json(test_case):
 def test_pydantic_equals_json(test_case):
     """Test that the Pydantic and JSON instances are equivalent"""
     pydantic_instance = get_pydantic_instance(test_case)
-    json_instance = get_json_instance(test_case)
-    
-    py_json = pydantic_instance.model_dump_json(indent=2, exclude_none=True)
-    js_json = json_instance.model_dump_json(indent=2, exclude_none=True)
+
+    py_json = pydantic_instance.model_dump_json(indent=2, exclude_none=True, exclude_defaults=True, by_alias=True, exclude_unset=True)
+    js_json = get_json(test_case)
         
     if py_json != js_json:        
         # Get dictionaries from both instances for detailed comparison

@@ -9,7 +9,6 @@
         "code": "BAD",
         "naam": "Badkamer"
       },
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "oppervlakte": 10.0,
       "installaties": [
         {
@@ -56,7 +55,8 @@
           "code": "STW",
           "naam": "Stopcontact bij wastafel"
         }
-      ]
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     }
   ],
   "Woningwaarderingstelsel": {
