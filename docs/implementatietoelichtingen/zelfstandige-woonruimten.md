@@ -1280,7 +1280,7 @@ Deze regeling komt te vervallen per 2039.
 
 **~~Woningen gelegen in COROP-gebied (2018-2022)~~**
 
-~~Indien de bouwkundige oplevering van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de COROP-gebieden5 Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 242 (peildatum 1 januari 2024). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 242 gebruikt maar € 103 bij de peildatum 1 januari 2024. Bij de peildatum 1 januari 2023 wordt niet het bedrag van € 229 gebruikt, maar € 97.~~
+~~Indien de bouwkundige oplevering van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de COROP-gebieden[^5] Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 242 (peildatum 1 januari 2024). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 242 gebruikt maar € 103 bij de peildatum 1 januari 2024. Bij de peildatum 1 januari 2023 wordt niet het bedrag van € 229 gebruikt, maar € 97.~~
 
 ~~Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2022 of de woning is groter dan 40 m2 of de woning is niet gelegen in de COROP-gebieden Amsterdam en Utrecht, dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.~~
 
@@ -1288,7 +1288,7 @@ Deze regeling komt te vervallen per 2039.
 
 ~~Deze regeling komt te vervallen per 2042.~~
 
-~~[^7]: Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.~~
+~~[^5]: Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.~~
  
 
 _~~Rekenvoorbeeld:~~_
