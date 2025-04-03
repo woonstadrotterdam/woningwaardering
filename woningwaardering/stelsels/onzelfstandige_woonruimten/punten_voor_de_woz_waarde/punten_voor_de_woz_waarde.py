@@ -123,12 +123,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # geen taxatierapport heeft aangeleverd dan geldt de minimum WOZ-waarde.
         #
         # Minimumwaarde
-        # De minimum WOZ-waarde wordt ook gebruikt voor specifieke woningen van
-        # specifieke verhuurders, zoals ‘containerwoningen’ die zijn bestemd voor
-        # studentenhuisvesting. In die gevallen wordt een minimum WOZ-waarde gehanteerd
-        # indien de WOZ-waarde lager is dan deze minimumwaarde. Deze waarde met
-        # peildatum 1 januari 2023 bedraagt € 73.607. Zie de tabel hieronder voor de
-        # minimumwaarde van de afgelopen jaren.
+        # De minimum WOZ-waarde komt pas aan bod als voor een woonruimte geen WOZ-
+        # beschikking aanwezig is en verhuurder geen taxatierapport als hiervoor bedoeld heeft
+        # ingediend. De hoogte van de minimumwaarde is in het Besluit vastgesteld en bedraagt
+        # het volgende:
+        #
+        # ...
 
         minimum_woz_waarde = self._minimum_woz_waarde(woz_waardepeildatum) or Decimal(
             str("0")
@@ -330,12 +330,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
     def _meest_recente_woz_eenheid(
         self, eenheid: EenhedenEenheid
     ) -> tuple[Decimal | None, date | None]:
-        """
-        De waardepeildatum van de WOZ-waarde ligt op 1 januari van twee kalenderjaren voorafgaand.
-        """
         relevante_waardepeildatums = [
-            date(self.peildatum.year - 2, 1, 1)  # T-2
-            # date(self.peildatum.year - 1, 1, 1),  # T-1 Tabellen voor peildatum 1-1-2023 zijn nog niet gepubliceerd
+            date(self.peildatum.year - 2, 1, 1),  # T-2
+            date(self.peildatum.year - 1, 1, 1),  # T-1
         ]
 
         woz_eenheden = [
@@ -407,7 +404,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             df_minimum_woz_waarde["Peildatum"] == woz_waardepeildatum
         )
         if not minimum_woz_waarde_mask.any():
-            return None
+            minimum_woz_waarde_mask = df_minimum_woz_waarde["Peildatum"] == max(
+                df_minimum_woz_waarde["Peildatum"]
+            )
 
         minimum_woz_waarde = df_minimum_woz_waarde.loc[
             minimum_woz_waarde_mask, "Minimumwaarde"

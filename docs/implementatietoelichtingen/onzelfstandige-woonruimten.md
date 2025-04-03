@@ -163,11 +163,10 @@ Gemeenschappelijke vertrekken voor drie kamers
 
 Gedeelde keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²
 
-Totaal: 15 m2 privévetrekken en 11 m2 gemeenschappelijk vertrekken
+Totaal per onzelfstandige woonruimte: 15,49 m2 + (11,24m2 / 3) = 19,24 m2
+Na salderen afronden op hele m2: 19 m2
 
-Dit vertaalt zich naar 15 (15*1) + 3.75* (11 * 1 gedeeld door 3 kamers) = 18.75 punt
-
-*11 punten gedeeld door 3 (kamers) = 3,67. Er wordt afgerond op 0,25 punt, waarbij een achtste punt naar boven wordt afgerond, waardoor de uitkomst 3,75 punt is.
+Omslaan naar 1 punt per m2 = 19 punten
 ```
 
 ### Rubriek 2 - Oppervlakte van overige ruimten
@@ -447,7 +446,7 @@ Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet du
 
 #### 5.4 Puntentoekenning extra voorzieningen
 
-Het woningwaarderingsstelsel geeft voor het onderdeel keuken extra punten voor voorzieningen in de keuken. Hiervoor geldt een maximum tot het aantal punten dat voor de aanrechtlengte is bepaald. Een keuken met een aanrechtlengte tussen de 1 en 2 m kan bijvoorbeeld tot maximaal 4 extra punten krijgen voor voorzieningen en een keuken met een aanrechtlengte van 2 of meer meter kan tot maximaal 7 punten extra krijgen voor voorzieningen. 
+Het woningwaarderingsstelsel geeft voor het onderdeel keuken extra punten voor voorzieningen in de keuken. Hiervoor geldt een maximum tot het aantal punten dat voor de aanrechtlengte is bepaald. Een keuken met een aanrechtlengte tussen de 1 en 2 m kan bijvoorbeeld tot maximaal 4 extra punten krijgen voor voorzieningen en een aanrechtlengte tussen de 2 en 3 meter kan tot maximaal 7 punten extra krijgen voor voorzieningen. 
 
 Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
 
@@ -878,10 +877,7 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
 
 Punten worden toegekend op basis van de WOZ-waarde van het adres waar de onzelfstandige woonruimte onderdeel van is. WOZ staat voor Wet waardering onroerende zaken. De WOZ-waarde geeft de geschatte marktwaarde van de woning weer zoals volgt uit de Wet waardering onroerende zaken. Deze waarde wordt in principe ieder kalenderjaar door de gemeente vastgesteld, die in de WOZ-beschikking van de desbetreffende woning wordt weergegeven.
 
-De waardepeildatum van de WOZ-waarde ligt op 1 januari van twee kalenderjaren voorafgaand. Ter illustratie: de WOZ-waarde in de WOZ-beschikking van 2024 heeft een waardepeildatum van 1 januari 2022.
-
-> [!NOTE]
-> Hier staat een fout in het beleidsboek. Dit moet zijn: Ter illustratie: de WOZ-waarde in de WOZ-beschikking van **2023** heeft een waardepeildatum van 1 januari 2022.
+De meest recente WOZ-waarde moet worden gebruikt. Als begin 2025 alleen de WOZ-beschikking van peildatum 1-1-2023 binnen is (en dus getiteld WOZ voor 2023), moet die gecombineerd worden met de kolom met dezelfde peildatum om de WOZ-waarde te bepalen. In dat geval ligt waardepeildatum van de WOZ-waarde dus op 1 januari van twee kalenderjaren voorafgaand. Als bijvoorbeeld echter eind februari 2025 de WOZ-beschikking van 1 januari 2024 binnenkomt (en dus getiteld WOZ voor 2024), dan moet die waarde worden aangehouden met de kolom met dezelfde peildatum (1 januari 2024). In deze situatie ligt de waardepeildatum van de WOZ-waarde dus op 1 januari één kalenderjaar voorafgaand aan de peildatum in de procedure.
 
 
 #### 11.1 Puntentoekenning

@@ -11,7 +11,7 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 24.5,
+      "punten": 25.0,
       "woningwaarderingen": [
         {
           "aantal": 20.04,
@@ -56,7 +56,7 @@
           }
         },
         {
-          "aantal": 20.0,
+          "aantal": 20.04,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__prive",
             "naam": "Totaal (privé)",
@@ -64,11 +64,10 @@
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 20.0
+          }
         },
         {
-          "aantal": 9.0,
+          "aantal": 4.6,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
@@ -76,8 +75,7 @@
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 4.5
+          }
         }
       ]
     },

@@ -1,0 +1,32 @@
+{
+  "id": "1",
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 15.4912
+    },
+    {
+      "id": "Space_2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 3,
+      "oppervlakte": 11.2395
+    }
+  ]
+}
