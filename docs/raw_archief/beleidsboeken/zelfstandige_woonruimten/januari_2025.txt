@@ -30,7 +30,6 @@ vrije sector: aanvangshuurprijs boven de vrijesectorgrens.
 
 Overgangsrecht
 Huurcontracten afgesloten voor 1 juli 2024
-
 Voor huurcontracten die zijn afgesloten voor 1 juli 2024 is de huurberscherming die volgt uit de Wet betaalbare huur van toepassing als sprake is van een sociale huurwoning (aanvangshuurprijs onder de liberalisatiegrens). De huurbescherming geldt ook bij bestaande contracten op een vrije sectorwoning (aanvangshuurprijs boven de liberalisatiegrens), waarbij het puntenaantal van de woning in de sociale sector valt (minder dan 143 punten op peildatum 1 juli 2024). In die gevallen geldt een overgangstermijn van één jaar.
 
 Voorbeeld I: Een zelfstandige woning wordt sinds 1 januari 2023 verhuurd met een aanvangshuurprijs van € 900,00. Er is sprake van een vrijesectorwoning. De aanvangshuurprijs ligt immers boven de toen geldende liberalisatiegrens van € 808,00. De huurder stapt naar de Huurcommissie op 1 augustus 2024 om de huur te verlagen op grond van punten. Het verzoek wordt niet-ontvankelijk verklaard, aangezien het overgangsrecht bepaalt dat pas op of na 1 juli 2025 dit soort verzoeken kunnen worden ingediend bij de Huurcommissie.
@@ -39,7 +38,6 @@ Voorbeeld II: Een zelfstandige woning wordt sinds 1 januari 2023 verhuurd met ee
 In voorbeeld II stelt de Huurcommissie het puntenaantal van de woning op 142 punten. De maximale huurprijs van deze woning bedraagt € 873,11. De woning valt op basis van het aantal punten in de sociale sector, waardoor het waarderingsstelsel van toepassing is ondanks het feit dat sprake is van een geliberaliseerde huurprijs (huurcontract afgesloten voor 1 juli 2024). De huurprijs wordt verlaagd naar € 873,11.
 
 Huurcontracten afgesloten op of na 1 juli 2024
-
 De huurbescherming die volgt uit de Wet betaalbare huur geldt met de inwerkingtreding van deze wet op 1 juli 2024 voor woningen in de sociale sector en de middensector. De huurbescherming geldt niet voor woningen in de vrije sector2.
 
 2 De toetsing door de Huurcommissie kan leiden tot de vaststelling dat een woning qua waardering in de vrije sector valt. Die conclusie is een gevolg van de toets door de Huurcommissie, maar maakt niet dat het de huurbescherming (vervolgens) geldt voor woningen in de vrije sector. De Huurcommissie kan na voornoemde vaststelling bijvoorbeeld niet de huurprijs aanpassen.
@@ -108,17 +106,14 @@ Het woningwaarderingsstelsel is een gedetailleerd en dwingend stelsel. Dit betek
 
 2.7 Afronding punten, eindsaldering
 Afronding per rubriek
-
 De waardering in punten wordt per rubriek na saldering afgerond op 0,25 punt waarbij een achtste (1/8) punt naar boven wordt afgerond. Dat wil zeggen dat 0,125 wordt afgerond naar 0,25. Een kwartpunt is de kleinst werkbare waardering binnen het woningwaarderingsstelsel voor een afzonderlijke rubriek. Voor een voorbeeld zie paragraaf 9.3.
 
 Eindsaldering
-
 Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij zorgwoningen geldende toeslag) afgerond op hele punten. Bij 0,5 punten of meer wordt afgerond naar boven op hele punten, bij minder dan 0,5 punten wordt afgerond naar beneden op hele punten. In de eindsaldering zitten ook de punten voor eventuele gemeenschappelijke ruimten en voorzieningen.
 
 N.B. Alle punten worden bij elkaar opgeteld inclusief de punten voor de gemeenschappelijke ruimten en voorzieningen, waarna wordt afgerond. De toeslag van 35% bij zorgwoningen wordt toegepast op het puntentotaal van de onderdelen 1 t/m 11 en pas daarna afgerond.
 
 Meer dan 250 punten
-
 In geval van een woonruimte met méér dan 250 punten wordt de maximale huurprijs als volgt berekend: elk punt boven de 250 wordt vermenigvuldigd met het verschil tussen de bedragen, genoemd in de huurprijstabel (zie bijlage 5) bij 249 en 250 punten. Het verkregen bedrag wordt vervolgens opgeteld bij de maximale huurprijs die volgens de huurprijstabel behoort bij 250 punten.
 
 Voorbeeld:  Een zelfstandige woning wordt beoordeeld met 255 punten. Bij een puntenaantal van 250 hoort een maximale huurprijs van € 1.572,20 (prijspeil 1 juli 2024). Het puntenaantal voor de woning ligt echter vijf punten hoger. Dit verschil van vijf punten dient te worden vermenigvuldigd met het verschil tussen de bedragen die correspondeerden met 249 en 250 punten. Dat verschil bedraagt (€ 1.572,20 - € 1.565,73 =) € 6,47. De verhoging op de maximale huurprijs is in dit geval € 32,35 (€ 6,47 x 5). De maximale huurprijs bedraagt dus € 1.604,55 (€ 1.572,20 + € 32,35).
@@ -129,7 +124,6 @@ De punten die worden berekend op basis van het woningwaarderingsstelsel resulter
 
 2.8.1 Rijksmonument
 Huurovereenkomst afgesloten op of na 1 juli 2024
-
 Indien een woonruimte bestaat uit of deel uitmaakt van een rijksmonument, als bedoeld in artikel 1.1 Erfgoedwet, dan wordt de maximale huurprijs vermeerderd met 35%. Hiermee worden rijksmonumenten bedoeld die zijn geregistreerd in het monumentenregister van de Rijksdienst voor het Cultureel Erfgoed.
 
 Deze prijsopslag geldt alleen voor huurovereenkomsten die zijn afgesloten op of na het tijdstip van inwerkingtreding van de Wet betaalbare huur: vanaf 1 juli 2024. Als de huurovereenkomst is afgesloten vóór 1 juli 2024 dan geldt onderstaande waardering.
@@ -137,7 +131,6 @@ Deze prijsopslag geldt alleen voor huurovereenkomsten die zijn afgesloten op of 
 De Huurcommissie hanteert passief beleid. De verhuurder moet aantonen dat een woning bestaat of deel uitmaakt van een rijksmonument.
 
 Huurovereenkomst afgesloten vóór 1 juli 2024
-
 Indien een woonruimte een rijksmonument is of daar deel van uitmaakt, als bedoeld in artikel 1.1 Erfgoedwet, dan worden 50 punten extra toegekend. Hiermee worden rijksmonumenten, en dus niet gemeentelijke of provinciale monumenten, bedoeld die zijn geregistreerd in het monumentenregister van de Rijksdienst voor het Cultureel Erfgoed. Alleen deze monumenten krijgen een toeslag van 50 punten.
 
 Het Rijksmonumentenregister kan door eenieder worden geraadpleegd. Het register bevat gegevens over de inschrijving en ter identificatie van de rijksmonumenten: http://monumentenregister.cultureelerfgoed.nl.
@@ -174,13 +167,11 @@ In geval van opsplitsen van woningen (woningvormen) wordt geen opslag gerekend. 
 De nieuwbouwopslag geldt alleen voor woningen die op basis van de punten van het woningwaarderingsstelsel in de middensector horen. Geldt bijvoorbeeld voor een woning met 147 kwaliteitspunten een maximum huurprijs van € 905,50, dan kan de verhuurder een huurprijs vragen tot maximaal € 996,05. Door de nieuwbouwopslag kan een middeldure huurwoning echter nooit in de vrije sector terecht komen. De kwalificatie van de woning als een woning behorend tot het middensector verandert daardoor dus niet. Een woning van 186 punten of minder met een nieuwbouwopslag blijft dus een gereguleerde huurwoning uit het middensector. De opslag geldt voor het bedrag en niet voor de hoeveelheid punten.
 
 Cumulatie van opslagen
-
 De samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht niet tegelijkertijd voor dezelfde woonruimte worden toegekend (zie art. 8 lid 5 onder c Besluit huurprijzen woonruimte).
 
 Wel mogelijk is het cumulatief toekennen van de monumentenopslag of de opslag voor beschermd stad- of dorpsgezicht met de nieuwbouwopslag. Vereist is dan wel dat aan alle vereisten van de beide opslagen – dus ieder voor zich -  is voldaan. Naar verwachting komt deze situatie in de praktijk dan ook niet vaak voor.
 
 Bewijsstukken
-
 De verhuurder moet aantonen dat de woning voldoet aan de voorwaarden van de nieuwbouwopslag. De verhuurder dient hierbij, indien mogelijk, gebruik te maken van de gegevens die geregistreerd staan in de registratie in de BAG. Zo wordt bij nieuwbouw in de BAG ‘bouw gestart’ en de praktische ingebruikname per pand geregistreerd. Deze datum kan gebruikt worden om bij de nieuwbouwwoning aan te tonen dat de start van de bouw van de woonruimte voor 1 januari 2028 lag. Indien de BAG ontoereikend is, moet de verhuurder andere bewijsstukken aanleveren waaruit blijkt dat de woning voldoet aan bovenstaande voorwaarden. In een geval van een transformatie wordt de gemeente hierover geïnformeerd en kan de verhuurder bijvoorbeeld de benodigde informatie over de transformatie bij de gemeente opvragen.
 
 Hoofdstuk 3 - De rubrieken van het woningwaarderingsstelsel zelfstandige woning
@@ -242,9 +233,6 @@ In de toelichting op het woningwaarderingsstelsel is een aantal meetinstructies 
 
 
 
-
-
-
 2 Hellend of verlaagd plafond
 
 
@@ -288,15 +276,12 @@ Voorbeelden van overige ruimten zijn bijkeukens, bergingen, wasruimten, schuren,
 Van de minimumoppervlakte zoals hiervoor genoemd kan niet worden afgeweken. Heeft de ruimte bijvoorbeeld een oppervlakte van 1,95 m2, dan wordt niet aan de gestelde eis van minimaal 2 m2 voldaan. De oppervlakte mag niet naar boven worden afgerond waardoor invulling aan de eis zou zijn gegeven.
 
 Verkeersruimten
-
 Verkeersruimten zoals hallen, gangen, en overlopen worden sowieso niet afzonderlijk gewaardeerd, dus krijgen geen punten op basis van dit onderdeel van het woningwaarderingsstelsel.
 
 Zolderruimte
-
 Indien een zolderruimte niet als vertrek wordt gewaardeerd (zie paragraaf 1.2), dan kan deze mogelijk wel in aanmerking komen voor een waardering als overige ruimte. Dan moet de zolderruimte naast bovenstaande eisen aan nog twee eisen voldoen. De zolderruimte moet namelijk bereikbaar zijn via een tot de woning behorende trap en het dak moet beschoten zijn. Voldoet de zolderruimte niet aan de eisen van paragraaf 1.2 en niet aan de voornoemde eisen, dan wordt de zolderruimte niet gewaardeerd.
 
 Toiletruimte
-
 Een toiletruimte kan als overige ruimte worden gewaardeerd als aan de eisen van overige ruimte wordt voldaan.
 
 2.3 Meetinstructies
@@ -304,8 +289,6 @@ De wetgever heeft een aantal meetinstructies meegegeven:
 
 
 1. Binnenmaatse meting
-
-
 
 
 
@@ -350,7 +333,6 @@ Verwarmde vertrekken worden gewaardeerd met 2 punten.
 Verwarmde overige ruimten en verkeersruimten worden gewaardeerd met 1 punt met een maximum van 4 punten voor alle overige ruimtes en verkeersruimten (samen).
 
 Extra voorziening
-
 Voorzieningen met zowel een verwarmingsfunctie als verkoelingsfunctie worden per vertrek gewaardeerd met 1 extra punt tot een maximum van 2 punten (bij meerdere vertrekken met een verkoelingsfunctie).
 
 Woningen die zonder koeling voldoende koel kunnen blijven, worden per vertrek gewaardeerd met 1 extra punt tot een maximum van 2 punten. Of sprake is van zo’n woning, dient te worden bepaald met de NTA 8800 en blijkt uit een actueel NTA-energielabel waarin de koelfunctie is meegenomen en het risico voor oververhitting als ‘laag’ is afgegeven.
@@ -361,7 +343,6 @@ Punten voor verwarming en verkoeling worden alleen toegekend als de verwarming o
 Dit is bij een radiator het geval als deze is bevestigd aan de muur of in de grond. Een mobiele elektrische radiator of een mobiele airco behoort niet tot de onroerende zaak. Hetzelfde geldt voor gevelkachels en gashaarden. Een verdikte buis, pijp of moederhaard wordt wél gerekend tot de onroerende zaak, indien deze als zodanig bedoeld of herkenbaar is.
 
 Koelsystemen
-
 Centrale koelsystemen, zoals omkeerbare warmtepompen, passieve koeling door een bodemlus of een WKO-systeem moeten voorzien zijn van vloerkoeling, lagetemperatuur-radiatoren of radiatorconvectoren. Voor andere onroerend aanhorige koelsystemen, zoals een vaste airco, geldt dat deze een productgebonden energielabel moet hebben van minimaal A+ (bepaald volgens de Europese Ecodesign-richtlijn), en een minimaal vermogen moet kunnen leveren van 100 W/m2 bij een werkingstemperatuur tot 35 graden Celsius.
 
 3.3 Aangrenzende ruimten met open doorgang
@@ -555,11 +536,9 @@ bad en douche 	7 punten
 * tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer.
 
 Toilet
-
 Punten worden toegekend aan een toilet met waterspoeling als het toilet is geplaatst in een daartoe bestemde ruimte en als het toilet binnen het woongebouw is gelegen. Wanneer sprake is van een toilet dat buiten de woning maar binnen het woongebouw is gelegen, dan geldt dat het toilet in de waardering wordt meegenomen als het gebruik van het toilet door derden is uit te sluiten. Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor waardering.
 
 Wastafel
-
 Als wastafels worden alle bakken geteld voor wassen en spoelen die op de waterleiding én op het huisriool zijn aangesloten. Een dergelijke bak wordt niet als wastafel gewaardeerd indien boven de bak een douche is aangebracht. Een bad of spoelbakken in een keukenaanrecht, bidet of lavet wordt niet als wastafel, douche of bad gewaardeerd. Wastafels worden gewaardeerd tot een maximum van 1 punt per vertrek of overige ruimte, m.u.v. de badkamer.
 
 Van een meerpersoonswastafel is sprake bij een wastafel met een minimale breedte van 70 cm, voorzien van twee kranen. Deze wastafels worden tot maximaal 1,5 punt per vertrek of overige ruimte, m.u.v. de badkamer, gewaardeerd. De kranen worden afzonderlijk gewaardeerd.
@@ -567,7 +546,6 @@ Van een meerpersoonswastafel is sprake bij een wastafel met een minimale breedte
 Zoals genoemd in paragraaf 5.2 waardeert de Huurcommissie een fonteintje en een aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter is dan één meter, als wastafel. In alle andere gevallen wordt een spoelbak in de keuken dus niet als wastafel gewaardeerd.
 
 Bad en douche
-
 Als douche wordt meegeteld iedere door de verhuurder aangebrachte installatie voor het nemen van een stortbad. Hieronder valt eveneens een zogenaamde douchecabine, die voldoet aan bovengenoemde voorwaarden, als de douchecabine in een vertrek (anders dan bad- of doucheruimte) of overige ruimte is geplaatst. De oppervlakte van dat vertrek of van die overige ruimte wordt in dat geval niet verminderd met de door de douchecabine ingenomen oppervlakte.
 
 Aan baden worden 6 punten toegekend, ongeacht de lengte van het bad, als een volwassen persoon er in een normale zithouding in kan plaatsnemen. Indien een bad is voorzien van een (hand)douche, dan wordt het douchegarnituur niet afzonderlijk geteld.
@@ -580,7 +558,6 @@ Als het aansluitpunt voor warm en koud water bedoeld is voor gecombineerd gebrui
 Het woningwaarderingsstelsel geeft voor het onderdeel sanitair extra punten voor voorzieningen in de bad- of doucheruimte. Hiervoor geldt een maximum tot het aantal punten dat reeds voor douche, bad en/of bad/douche is verkregen. Anders gezegd: maximaal een verdubbeling van de toegekende punten voor douche, bad en/of bad/douche.
 
 Eisen bad-of doucheruimte
-
 Punten voor extra voorzieningen worden enkel toegekend indien deze zich bevinden in een bad- of doucheruimte. Bad- of doucheruimten moeten voldoen aan de volgende eisen:
 
 Een waterdichte vloerafwerking*.
@@ -591,7 +568,6 @@ Een douche of bad met aansluitpunten voor warm en koud water (niet zijnde een wa
 * Een bad in een vertrek met een niet-waterdichte vloer wordt door de Huurcommissie wel gewaardeerd, omdat het bad zelf als een waterdichte afwerking wordt gezien.
 
 Lijst voorzieningen
-
 Zie hieronder de limitatieve lijst met voorzieningen waarvoor extra punten worden toegekend.
 
 Voorzieningen in de bad- of doucheruimte
@@ -620,6 +596,7 @@ Extra punten worden voor deze woonvoorzieningen, woningaanpassingen of ingrepen 
 de ingreep moet hebben plaatsgevonden op of ná 01-04-1994;
 de ingreep moet voor een deel zijn gesubsidieerd;
 de ingreep dient voor 'de gehandicapte'* te zijn aangebracht.
+ 
 *Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt.
 
 Buiten de waardering blijven voorzieningen ten behoeve van een gehandicapte, waarvoor subsidie is verstrekt waarmee de volledige kosten worden gedekt. Extra vloeroppervlakte (als bedoeld in de subsidieregelingen) wordt aangemerkt als gesubsidieerde voorziening.
@@ -685,11 +662,9 @@ Een gemeenschappelijk vertrek wordt gewaardeerd met 1 punt per vierkante meter, 
 Een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 Voorzieningen (verkoeling en verwarming, keuken, sanitair, gehandicaptenvoorziening) die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd conform het woningwaarderingsstelsel, gedeeld door het aantal adressen.
 Warme maaltijden
-
 Indien het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
 Gemeenschappelijke ruimten en voorzieningen in een zorgwoning
-
 De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en voorzieningen in een zorgwoning of woon/zorgcomplex de waardering per woning veelal uitkomt op een totaal van ongeveer 3 punten. Om arbeidsintensief meetwerk te voorkomen waardeert de Huurcommissie in dat geval een waardering van 3 punten per woning.
 
 9.2 Definitie gemeenschappelijke vertrekken en overige ruimten
@@ -718,6 +693,7 @@ Saldeer de punten uit de hierboven genoemde stappen.
 Deel het aantal punten door het aantal adressen dat toegang heeft tot de gemeenschappelijke binnenruimten.
 Voorbeeld
 Voorbeeld: (A) een gemeenschappelijke binnenruimte met keuken van 20 vierkante meter, en daarnaast (B) een gedeelde toiletruimte van 2 vierkante meter. Tot beide ruimtes hebben 4 adressen toegang. 
+
 Ruimte A voldoet aan de eisen van een vertrek en wordt gewaardeerd met 20 x 1 punt (oppervlakte) conform rubriek ‘vertrek’. Ruimte B voldoet aan de eisen van een overige ruimte en wordt gewaardeerd met 1,5 (2 x 0,75) punt conform rubriek ‘overige ruimte’.
 Vertrek A is verwarmd middels een radiator en krijgt daarvoor 2 punten conform rubriek ‘verkoeling en verwarming’. De toiletruimte is onverwarmd en ontvangt daarvoor geen punten.
 In vertrek A wordt voldaan aan de minimumeisen van een keuken conform rubriek ‘keuken’. Voor deze rubriek wordt 10 punten toegekend (7 voor het aanrecht, en 3 voor de extra voorzieningen). De toiletruimte B krijgt 4,75 punt (3,75 voor het hangend toilet en 1 voor de wastafel).
@@ -806,7 +782,6 @@ Het totale puntenaantal is 20,63 + 21,83 = 42,46. Na afronding is het puntenaant
 Om de bouw van huurwoningen in de middensector te bevorderen heeft de wetgever bepaald dat voor nieuwbouwwoningen opgeleverd in kalenderjaar 2015-2019 en kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht een andere berekening geldt. Deze berekening leidt tot een hoger aantal punten voor het onderdeel WOZ-waarde.
 
 Nieuwbouwwoningen 2015-2019
-
 Indien de bouwkundige oplevering of hoogniveau renovatie van de woning heeft plaatsgevonden in de jaren 2015-2019 en die woning voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingsstelsel minimaal 110 punten heeft behaald dan worden, voor het aantal punten voor de WOZ-waarde, minimaal 40 punten toegekend. Dit garandeert een minimaal puntenaantal.
 
 Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2019 en/of de woning behaalt niet de 110 punten op basis van de overige onderdelen van het puntenstelsel dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.
@@ -814,8 +789,7 @@ Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2019 en/of de 
 Deze regeling komt te vervallen per 2039.
 
 Woningen gelegen in COROP-gebied (2018-2022)
-
-Indien de bouwkundige oplevering van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de COROP-gebieden5 Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 242 (peildatum 1 januari 2023). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 242 gebruikt maar € 103 bij de peildatum 1 januari 2024. Bij de peildatum 1 januari 2022 wordt niet het bedrag van € 229 gebruikt, maar € 97.
+Indien de bouwkundige oplevering van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de COROP-gebieden5 Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 242 (peildatum 1 januari 2024). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 242 gebruikt maar € 103 bij de peildatum 1 januari 2024. Bij de peildatum 1 januari 2023 wordt niet het bedrag van € 229 gebruikt, maar € 97.
 
 Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2022 of de woning is groter dan 40 m2 of de woning is niet gelegen in de COROP-gebieden Amsterdam en Utrecht, dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.
 
@@ -848,7 +822,6 @@ Per 1 januari 2024	€ 15.329	€ 242	€ 103
 Als geen relevante WOZ-waarde bekend is, kan als alternatief 85% van de taxatiewaarde van de woning worden gebruikt volgend uit een door een Register-Taxateur opgesteld (hybride)taxatierapport. De verhuurder draagt de verantwoordelijkheid voor het opstellen van dit rapport. De taxatiewaarde geldt totdat een WOZ-waarde is vastgesteld en vervalt voor toepassing van deze rubriek. Als de verhuurder geen taxatierapport heeft aangeleverd dan wordt met de minimum WOZ-waarde gerekend.
 
 Minimumwaarde
-
 De minimum WOZ-waarde komt pas aan bod als voor een woonruimte geen WOZ-beschikking aanwezig is en verhuurder geen taxatierapport als hiervoor bedoeld heeft ingediend. De hoogte van de minimumwaarde is in het Besluit vastgesteld en bedraagt het volgende:
 
 tabel 2
@@ -858,7 +831,6 @@ Per 1 januari 2022	€ 71.602
 Per 1 januari 2023	€ 73.607
 Per 1 januari 2024	€ 77.582
 Tijdelijke woning
-
 In geval van een tijdelijke woning hanteert de Register Taxateur de objectafbakeningsvoorschriften en waarderingsvoorschriften van hoofdstuk III van de Wet WOZ met uitzondering van de voorschriften op grond van artikel 17, vierde lid, en artikel 18, eerste en tweede lid, van de Wet WOZ. In plaats van de voorschriften van artikel 18, eerste en tweede lid, gaat de Register Taxateur uit van de staat van de woning na oplevering.
 
 Onder tijdelijke woning wordt voor deze rubriek een woning verstaan die voor een bepaalde tijd op een tijdelijke locatie (met toegelaten functie wonen of tijdelijke afwijking Omgevingsplan) mogen worden gebouwd. Dit zijn woningen die voldoen aan de eisen die gelden voor nieuwbouw óf die getoetst zijn aan tijdelijke woningen zoals gedefinieerd in het Besluit bouwwerken leefomgeving (termijn van ten hoogste 15 jaar).
@@ -876,7 +848,6 @@ Het aandeel van de WOZ-waarde in de puntenwaardering is gemaximeerd. Hierbij gel
 Wanneer een woning zonder de cap op de WOZ een waardering heeft van meer dan 186 punten en door deze beperking een waardering krijgt die lager is dan 187 punten, geldt een waardering van 186 punten voor de woning.
 
 Uitzonderingen
-
 Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 187 punten en voor kleine nieuwbouwwoningen 7 (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022.
 
 Daarnaast wordt in nog twee andere gevallen de cap op de WOZ niet toegepast. In het geval dat de minimumwaarde is toegepast vindt namelijk ook geen aftopping plaats aangezien de WOZ-waarde niet meer dan 33% zal bedragen. Het tweede geval gaat het om nieuwbouwwoningen gebouwd in de jaren 2015-2019 waarvoor minimaal 110 punten zijn behaald voor de onderdelen 1 tot en met 10 en 12 van het woningwaarderingsstelsel. Ook in dat geval wordt de cap op de WOZ niet toegepast. In deze situatie wordt minimaal 40 punten voor het onderdeel WOZ-waarde toegekend en dit komt overeen met 26,6%, waardoor geen aftopping plaatsvindt. Deze gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde rekenkundig, in deze gevallen, nooit meer dan 33% kan bedragen. Daarom zijn ze niet opgenomen in onderstaand schema.
@@ -931,7 +902,6 @@ Rubriek 12 Bijzondere voorzieningen: zorgwoning en aanbelfunctie
 Als sprake is van een zorgwoning, dan wordt het puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel met 35% verhoogd. Dit resulteert in een hogere maximale huurprijs en telt daarom mee in het bepalen van de sector waarin de woonruimte valt. 
 
 Voorwaarden zorgwoning
-
 Er is sprake van een zorgwoning als aan de volgende vijf voorwaarden is voldaan.
 
 De zorgwoning betreft een zelfstandige woning
