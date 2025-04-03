@@ -1192,7 +1192,7 @@ Tien adressen delen vijf type II-parkeerplekken met laadpaal en twee type III-pa
 ### Rubriek 11 Punten voor de WOZ-waarde
 
 > [!TIP]
-> Hieronder vindt u een voorbeeld hoe punten voor de WOZ-waarde berekend kunnen worden.
+> Dit voorbeeld toont hoe punten voor de WOZ-waarde berekend kunnen worden.
 > /// tab | JSON
 ```json
 {%
