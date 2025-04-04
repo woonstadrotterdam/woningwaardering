@@ -37,9 +37,11 @@ _Meer dan 250 punten_
 
 In geval van een woonruimte met méér dan 250 punten wordt de maximale huurprijs als volgt berekend: elk punt boven de 250 wordt vermenigvuldigd met het verschil tussen de bedragen, genoemd in de huurprijstabel (zie [bijlage 5](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html/waarderingsstelsel-zelfstandige-woonruimte/bijlage-5)) bij 249 en 250 punten. Het verkregen bedrag wordt vervolgens opgeteld bij de maximale huurprijs die volgens de huurprijstabel behoort bij 250 punten.
 
-**Voorbeeld:**
+{==
 
-Een zelfstandige woning wordt beoordeeld met 255 punten. Bij een puntenaantal van 250 hoort een maximale huurprijs van € 1.572,20 (prijspeil 1 juli 2024). Het puntenaantal voor de woning ligt echter vijf punten hoger. Dit verschil van vijf punten dient te worden vermenigvuldigd met het verschil tussen de bedragen die correspondeerden met 249 en 250 punten. Dat verschil bedraagt (€ 1.572,20 - € 1.565,73 =) € 6,47. De verhoging op de maximale huurprijs is in dit geval € 32,35 (€ 6,47 x 5). De maximale huurprijs bedraagt dus € 1.604,55 (€ 1.572,20 + € 32,35).
+_Voorbeeld:_ Een zelfstandige woning wordt beoordeeld met 255 punten. Bij een puntenaantal van 250 hoort een maximale huurprijs van € 1.572,20 (prijspeil 1 juli 2024). Het puntenaantal voor de woning ligt echter vijf punten hoger. Dit verschil van vijf punten dient te worden vermenigvuldigd met het verschil tussen de bedragen die correspondeerden met 249 en 250 punten. Dat verschil bedraagt (€ 1.572,20 - € 1.565,73 =) € 6,47. De verhoging op de maximale huurprijs is in dit geval € 32,35 (€ 6,47 x 5). De maximale huurprijs bedraagt dus € 1.604,55 (€ 1.572,20 + € 32,35).
+
+==}
 
 ### 2.8 Prijsopslag monumenten en nieuwbouw
 
@@ -304,13 +306,17 @@ De Huurcommissie leest de zinsnede uit de toelichting 'alle tot de woning behore
 
 De Huurcommissie bepaalt eerst de oppervlakte per vertrek afgerond op twee decimalen. Daarna wordt de oppervlakte van alle vertrekken gesaldeerd en vindt afronding plaats op hele vierkante meters. Bij 0,5m² of meer wordt afgerond naar boven, bij minder dan 0,5m² naar beneden. Als laatste wordt vervolgens een waardering in punten toegekend.
 
+{==
+
 _Voorbeeld:_
 
-_kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²_  
-_keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²_  
-_Totaal : 26,73 m² Afronding op hele m² : 27 m²._
+kamer : lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²  
+keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²  
+Totaal : 26,73 m² Afronding op hele m² : 27 m².
 
-_Dit vertaalt zich dan naar 27 \* 1 punt (per m2) = 27 punten_
+Dit vertaalt zich dan naar 27 \* 1 punt (per m2) = 27 punten
+
+==}
 
 ### Rubriek 2 Oppervlakte van overige ruimten
 
@@ -441,13 +447,17 @@ Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenko
 
 De oppervlakte per overige ruimte wordt afgerond op 2 decimalen. De afronding van de oppervlakte van alle overige ruimte samen vindt plaats op hele vierkante meters na saldering van de oppervlakte van de afzonderlijke overige ruimten; bij 0,5 m2 of meer wordt naar boven afgerond, bij minder dan 0,5 m2 naar beneden. Waardering in punten vindt na saldering en afronding plaats.
 
+{==
+
 _Voorbeeld:_
 
 _Garage : lengte 3,16m x breedte 6,12m = 19,3392 m², afgerond : 19,34 m²_  
 _Bijkeuken: lengte 2,11m x breedte 2,87m = 6,0557 m², afgerond : 6,06 m²_
 _Totaal : 25,40 m² Afronding op hele m² : 25 m²._
 
-_Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten._
+Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten.
+
+==}
 
 ### Rubriek 3 Verkoeling en verwarming
 
@@ -486,7 +496,7 @@ _Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten._
 > * trappenhuis (onze eigen uitbreiding op de referentiedata)
 
 
-_Extra voorziening_
+**Extra voorziening**
 
 Voorzieningen met zowel een verwarmingsfunctie als verkoelingsfunctie worden per vertrek gewaardeerd met 1 extra punt tot een maximum van 2 punten (bij meerdere vertrekken met een verkoelingsfunctie).
 
@@ -502,7 +512,7 @@ Voorzieningen met zowel een verwarmingsfunctie als verkoelingsfunctie worden per
 
 ~~Dit is bij een radiator het geval als deze is bevestigd aan de muur of in de grond. Een mobiele elektrische radiator of een mobiele airco behoort niet tot de onroerende zaak. Hetzelfde geldt voor gevelkachels en gashaarden. Een verdikte buis, pijp of moederhaard wordt wél gerekend tot de onroerende zaak, indien deze als zodanig bedoeld of herkenbaar is.~~
 
-_Koelsystemen_
+**Koelsystemen**
 
 ~~Centrale koelsystemen, zoals omkeerbare warmtepompen, passieve koeling door een bodemlus of een WKO-systeem moeten voorzien zijn van vloerkoeling, lagetemperatuur-radiatoren of radiatorconvectoren. Voor andere onroerend aanhorige koelsystemen, zoals een vaste airco, geldt dat deze een productgebonden energielabel moet hebben van minimaal A+ (bepaald volgens de Europese Ecodesign-richtlijn), en een minimaal vermogen moet kunnen leveren van 100 W/m2 bij een werkingstemperatuur tot 35 graden Celsius.~~
 
@@ -567,7 +577,7 @@ NTA 8800
 | F   | 2,4 < EI ≤ 2,7 | \-9 | \-9 |
 | G   | EI > 2,7 | \-15 | \-15 |
 
-_\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Besluit huurprijzen woonruimte een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Besluit huurprijzen woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4._
+\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Besluit huurprijzen woonruimte een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Besluit huurprijzen woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4.
 
 #### 4.2 Overgangsrecht kleine woningen ≤ 40 m2
 
@@ -596,7 +606,7 @@ Woningen met een gebruikersoppervlakte < 25m2
 | F   | \-9 | \-9 |
 | G   | \-15 | \-15 |
 
-_\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Besluit huurprijzen woonruimte een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Besluit huurprijzen woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4._
+\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Besluit huurprijzen woonruimte een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Besluit huurprijzen woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4.
 
 _Voor woningen met een oppervlakte ≥ 25m2 en < 40 m2 geldt het volgende puntenaantal:_
 
@@ -616,7 +626,7 @@ Woningen met een gebruikersoppervlakte ≥ 25m2 en < 40 m2
 | F   | \-9 | \-9 |
 | G   | \-15 | \-15 |
 
-_\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Besluit huurprijzen woonruimte een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Besluit huurprijzen woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4._
+\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Besluit huurprijzen woonruimte een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Besluit huurprijzen woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4.
 
 #### 4.3 Bouwjaar bepalend bij ontbreken geldig energielabel of energie-index
 
@@ -636,7 +646,7 @@ Energie-index
 | 1977 t/m 1978 | \-9 | \-9 |
 | 1976 of ouder | \-15 | \-15 |
 
-_\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Besluit huurprijzen woonruimte een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Besluit huurprijzen woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4._
+\* Artikel 10d (energieprestatie) van de Uitvoeringswet huurprijzen woonruimte (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Besluit huurprijzen woonruimte een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Besluit huurprijzen woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4.
 
 #### 4.4 Monumenten
 
@@ -717,28 +727,27 @@ De waardering van de keukeninstallatie wordt bepaald op basis van de lengte van 
 Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel.  
 ~~Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.~~
 
-Een waterdichte afwerking wordt in beginsel verondersteld aanwezig te zijn, maar kan pas worden meegenomen als deze aan te merken valt als onroerende aanhorigheid. Dat betekent dat een keuken met bijvoorbeeld een tegelwand of aangebrachte, waterdichte verf wel voldoet aan de eis van een waterdichte afwerking, maar als er slecht een plastic zeil voor een wand is gehangen niet.
+~~Een waterdichte afwerking wordt in beginsel verondersteld aanwezig te zijn, maar kan pas worden meegenomen als deze aan te merken valt als onroerende aanhorigheid. Dat betekent dat een keuken met bijvoorbeeld een tegelwand of aangebrachte, waterdichte verf wel voldoet aan de eis van een waterdichte afwerking, maar als er slecht een plastic zeil voor een wand is gehangen niet.~~
 
-#### 5.3 Meetinstructies lengte aanrechtblad
-
-De aanrechtlengte wordt over het midden van het bovenblad gemeten, inclusief ingebouwde spoelbakken en kookplaten.
-
-De lengte van een niet direct aan het aanrecht aansluitend werkblad of van een blad dat is samengesteld uit een ander materiaal wordt bij de lengte meegeteld.
-
-Indien een aanrechtblad langer is dan de aanwezige onderkasten met de bedoeling dat er onder het langere gedeelte van het aanrechtblad een losstaande koelkast, vaatwasser, wasmachine e.d., kan worden geplaatst, dan wordt dit gedeelte van het aanrechtblad mee gemeten mits er onder het blad aansluitmogelijkheden aanwezig zijn voor genoemde apparatuur.
-
-Van een (standaard)aanrechtblad dat gedeeltelijk is ingemetseld of waar de wandbetegeling op het blad is aangebracht, wordt uitsluitend het bruikbare c.q. zichtbare gedeelte gemeten.
-
-Indien er sprake is van een hoekaanrecht wordt de lengte van het aanrecht bepaald door (zie figuur):
-
-1. De lange zijde van het langere aanrechtdeel te meten (zie horizontale blauwe lijn).
-2. Vervolgens die lengte te salderen met de lange zijde van het kortere aanrechtdeel (zie verticale blauwe lijn).
-
-De lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.
+#### ~~5.3 Meetinstructies lengte aanrechtblad~~
 
 > [!NOTE]
-> Zorg ervoor dat de lengte die wordt meegegeven in het inputmodel volgens deze regels zijn gemeten. De package doet geen aanpassingen aan de lengte.
+> De woningwaarderingpackage gaat ervanuit dat lengten van aanrechten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
 
+~~De aanrechtlengte wordt over het midden van het bovenblad gemeten, inclusief ingebouwde spoelbakken en kookplaten.~~
+
+~~De lengte van een niet direct aan het aanrecht aansluitend werkblad of van een blad dat is samengesteld uit een ander materiaal wordt bij de lengte meegeteld.~~
+
+~~Indien een aanrechtblad langer is dan de aanwezige onderkasten met de bedoeling dat er onder het langere gedeelte van het aanrechtblad een losstaande koelkast, vaatwasser, wasmachine e.d., kan worden geplaatst, dan wordt dit gedeelte van het aanrechtblad mee gemeten mits er onder het blad aansluitmogelijkheden aanwezig zijn voor genoemde apparatuur.~~
+
+~~Van een (standaard)aanrechtblad dat gedeeltelijk is ingemetseld of waar de wandbetegeling op het blad is aangebracht, wordt uitsluitend het bruikbare c.q. zichtbare gedeelte gemeten.~~
+
+~~Indien er sprake is van een hoekaanrecht wordt de lengte van het aanrecht bepaald door (zie figuur):~~
+
+1. ~~De lange zijde van het langere aanrechtdeel te meten (zie horizontale blauwe lijn).~~
+2. ~~Vervolgens die lengte te salderen met de lange zijde van het kortere aanrechtdeel (zie verticale blauwe lijn).~~
+
+~~De lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.~~
 
 #### 5.4 Puntentoekenning extra voorzieningen
 
@@ -925,7 +934,7 @@ _\* ~~In het geval van een gemonteerde volledige afscheiding van de douche vindt
 * ~~de ingreep moet voor een deel zijn gesubsidieerd;~~
 * ~~de ingreep dient voor “de gehandicapte”\* te zijn aangebracht.~~
 
-_\*~~Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt.~~_
+\*~~Onder gehandicapte wordt verstaan een persoon die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt.~~
 
 ~~Buiten de waardering blijven voorzieningen ten behoeve van een gehandicapte, waarvoor subsidie is verstrekt waarmee de volledige kosten worden gedekt. Extra vloeroppervlakte (als bedoeld in de subsidieregelingen) wordt aangemerkt als gesubsidieerde voorziening.~~
 
@@ -1101,17 +1110,23 @@ _Rekenmethode_
 4. Saldeer de punten uit de hierboven genoemde stappen.
 5. Deel het aantal punten door het aantal adressen dat toegang heeft tot de gemeenschappelijke binnenruimten.
 
-Voorbeeld
+**Voorbeeld**
 
-1. _Ruimte A voldoet aan de eisen van een vertrek en wordt gewaardeerd met 20 x 1 punt (oppervlakte) conform rubriek ‘vertrek’. Ruimte B voldoet aan de eisen van een overige ruimte en wordt gewaardeerd met 1,5 (2 x 0,75) punt conform rubriek ‘overige ruimte’._
-2. _Vertrek A is verwarmd middels een radiator en krijgt daarvoor 2 punten conform rubriek ‘verkoeling en verwarming’. De toiletruimte is onverwarmd en ontvangt daarvoor geen punten._
-3. _In vertrek A wordt voldaan aan de minimumeisen van een keuken conform rubriek ‘keuken’. Voor deze rubriek wordt 10 punten toegekend (7 voor het aanrecht, en 3 voor de extra voorzieningen). De toiletruimte B krijgt 4,75 punt (3,75 voor het hangend toilet en 1 voor de wastafel)._
-4. _Saldering levert op: 20 + 1,5 + 2 + 10 + 4,75 = 38,25._
-5. _Delen door het aantal adressen levert op: 38,25 punten / 4 = 9.5625 per adres._
-6. _Afronden geschiedt op een kwart punt per adres, in dit geval dus op 9,50._
+Voorbeeld: (A) een gemeenschappelijke binnenruimte met keuken van 20 vierkante meter, en daarnaast (B) een gedeelde toiletruimte van 2 vierkante meter. Tot beide ruimtes hebben 4 adressen toegang. 
+
+{==
+
+1. Ruimte A voldoet aan de eisen van een vertrek en wordt gewaardeerd met 20 x 1 punt (oppervlakte) conform rubriek ‘vertrek’. Ruimte B voldoet aan de eisen van een overige ruimte en wordt gewaardeerd met 1,5 (2 x 0,75) punt conform rubriek ‘overige ruimte’.
+2. Vertrek A is verwarmd middels een radiator en krijgt daarvoor 2 punten conform rubriek ‘verkoeling en verwarming’. De toiletruimte is onverwarmd en ontvangt daarvoor geen punten.
+3. In vertrek A wordt voldaan aan de minimumeisen van een keuken conform rubriek ‘keuken’. Voor deze rubriek wordt 10 punten toegekend (7 voor het aanrecht, en 3 voor de extra voorzieningen). De toiletruimte B krijgt 4,75 punt (3,75 voor het hangend toilet en 1 voor de wastafel).
+4. Saldering levert op: 20 + 1,5 + 2 + 10 + 4,75 = 38,25.
+5. Delen door het aantal adressen levert op: 38,25 punten / 4 = 9.5625 per adres.
+6. Afronden geschiedt op een kwart punt per adres, in dit geval dus op 9,50.
+
+==}
 
 > [!NOTE]
-> Voor ons is het niet helemaal duidelijk op basis van de tekst en de voorbeeldrekening hoe het zit met de maximering op punten. Wij zijn er vanuit gegaan dat ook de maximering van de hoeveelheid punten gedeeeld moet worden door het aantal adressen. Bijvoorbeeld maximaal 0.75 punten voor kastruimte in de badruimte wordt met toegang van twee adressen ~0.38.
+> Voor ons is het niet helemaal duidelijk op basis van de tekst en de voorbeeldrekening hoe het zit met de maximering op punten. Wij zijn er vanuit gegaan dat ook de maximering van de hoeveelheid punten gedeeld moet worden door het aantal adressen. Bijvoorbeeld maximaal 0.75 punten voor kastruimte in de badruimte wordt met toegang van twee adressen ~0.38.
 
 ### Rubriek 10 Gemeenschappelijke parkeerruimten
 
@@ -1119,7 +1134,6 @@ Voorbeeld
 
 > [!NOTE]
 > Bij het rekenvoorbeeld aan het einde van deze rubriek wordt uitgelegd hoe de woningwaardering package te gebruiken is om een eenheid te waarderen op de rubriek gemeenschappelijke parkeerruimten.
-
 
 Voor verschillende typen gemeenschappelijke parkeerplekken, afhankelijk van afdekking van de buitenlucht, worden punten toegekend:
 
