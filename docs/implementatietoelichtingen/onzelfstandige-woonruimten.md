@@ -340,7 +340,7 @@ In totaal is voor de woonruimte in dit voorbeeld een puntenaantal van 3 plus 6,2
 ### Rubriek 3 - Verkoeling en verwarming
 
 > [!NOTE]
-> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100](). Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
+> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100). Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
 
 > [!TIP]
 > Dit voorbeeld toont de minimale gegevens voor waardering van de verkoeling en verwarming van ruimten.

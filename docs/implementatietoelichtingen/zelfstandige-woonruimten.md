@@ -52,7 +52,7 @@ Deze opslagen blijven buiten beschouwing voor het antwoord op de vraag tot welke
 #### 2.8.1 Rijksmonument
 
 > [!NOTE]
-> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie [https://github.com/Aedes-datastandaarden/vera-openapi/issues/69]()
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie [https://github.com/Aedes-datastandaarden/vera-openapi/issues/69](https://github.com/Aedes-datastandaarden/vera-openapi/issues/69)
 
 > [!TIP]
 >  Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een zelfstandige woonruimte de status van rijksmonument heeft.
@@ -139,7 +139,7 @@ De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een passief b
 #### 2.8.4 Nieuwbouwopslag
 
 > [!NOTE]
-> In tegenstelling tot de VERA-definitie van `inExploitatiedatum` gebruiken wij voor ons inputmodel `inExploitatiedatum` als de datum van de _eerste_ ingebruikname. Zie: [https://github.com/woonstadrotterdam/woningwaardering/issues/105]()
+> In tegenstelling tot de VERA-definitie van `inExploitatiedatum` gebruiken wij voor ons inputmodel `inExploitatiedatum` als de datum van de _eerste_ ingebruikname. Zie: [https://github.com/woonstadrotterdam/woningwaardering/issues/105](https://github.com/woonstadrotterdam/woningwaardering/issues/105)
 
 > [!TIP]
 > Dit voorbeeld toont de minimale gegevens voor de aanduiding dat een zelfstandige woonruimte recht geeft op de nieuwbouwopslag van 10%.
@@ -462,7 +462,7 @@ Dit vertaalt zich dan naar 25 \* 0,75 punt (per m2) = 18.75 punten.
 ### Rubriek 3 Verkoeling en verwarming
 
 > [!NOTE]
-> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100](). Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
+> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100). Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
 
 > [!TIP]
 > Dit voorbeeld toont de minimale gegevens voor waardering van verkoeling en verwarming.
@@ -678,7 +678,7 @@ Voor de puntentoekenningen in de tabellen wordt onderscheid gemaakt tussen eenge
 * Meergezinswoningen of duplexwoningen zijn alle woningen die geen eengezinswoning zijn.
 
 > [!NOTE]
-> Let op: deze definitie is anders dan vaak gehanteerd wordt zie: [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/154](). Echter, na gesprekken met experts zijn wij tot de conclusie gekomen dat hoewel de definitie anders is opgeschreven, het dezelfde intentie heeft als de gebruikelijke definitie:
+> Let op: deze definitie is anders dan vaak gehanteerd wordt zie: [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/154](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/154). Echter, na gesprekken met experts zijn wij tot de conclusie gekomen dat hoewel de definitie anders is opgeschreven, het dezelfde intentie heeft als de gebruikelijke definitie:
 > - één verblijfsobject in een pand, met als functie wonen -> `Eengezinswoning`
 > - meerdere verblijfsobjecten in een pand waarvan minstens één met functie wonen -> `Meergezinswoning`
 
