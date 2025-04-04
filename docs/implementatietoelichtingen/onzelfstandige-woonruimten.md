@@ -40,9 +40,7 @@ De waardering in punten wordt per rubriek na saldering afgerond op 0,25 punt waa
 
 Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij zorgwoningen geldende toeslag) afgerond op hele punten. Bij 0,5 punten of meer wordt afgerond naar boven op hele punten, bij minder dan 0,5 punten wordt afgerond naar beneden op hele punten.
 
-```text
-NB: Alle punten worden bij elkaar opgeteld inclusief de punten voor de gemeenschappelijke ruimten en voorzieningen waarna wordt afgerond. De toeslag van 35 % bij zorgwoningen wordt toegepast op het puntentotaal van de onderdelen 1 t/m 11 en pas daarna wordt afgerond.
-```
+> NB: Alle punten worden bij elkaar opgeteld inclusief de punten voor de gemeenschappelijke ruimten en voorzieningen waarna wordt afgerond. De toeslag van 35 % bij zorgwoningen wordt toegepast op het puntentotaal van de onderdelen 1 t/m 11 en pas daarna wordt afgerond.
 
 **Meer dan 250 punten**
 
@@ -50,9 +48,11 @@ In geval van een woonruimte met méér dan 250 punten wordt de maximale huurprij
 
 Voorbeeld
 
-```text
-Voorbeeld:  Een zelfstandige woning wordt beoordeeld met 255 punten. Bij een puntenaantal van 250 hoort een maximale huurprijs van € 1.521,50 (prijspeil 1 juli 2024). Het puntenaantal voor de woning ligt echter vijf punten hoger. Dit verschil van vijf punten dient te worden vermenigvuldigd met het verschil tussen de bedragen die correspondeerden met 249 en 250 punten. Dat verschil bedraagt (€ 1.521,50 - € 1516,53 =) € 4,97. De verhoging op de maximale huurprijs is in dit geval € 24,85 (€ 4,97 x 5). De maximale huurprijs bedraagt dus € 1.546,35 (€ 1.521,50 + € 24,85).
-```
+{==
+
+_Voorbeeld:  Een zelfstandige woning wordt beoordeeld met 255 punten. Bij een puntenaantal van 250 hoort een maximale huurprijs van € 1.521,50 (prijspeil 1 juli 2024). Het puntenaantal voor de woning ligt echter vijf punten hoger. Dit verschil van vijf punten dient te worden vermenigvuldigd met het verschil tussen de bedragen die correspondeerden met 249 en 250 punten. Dat verschil bedraagt (€ 1.521,50 - € 1516,53 =) € 4,97. De verhoging op de maximale huurprijs is in dit geval € 24,85 (€ 4,97 x 5). De maximale huurprijs bedraagt dus € 1.546,35 (€ 1.521,50 + € 24,85)._
+
+==}
 
 ### 2.7 Prijsopslag monumenten
 
@@ -223,20 +223,22 @@ De Huurcommissie bepaalt eerst de oppervlakte per vertrek afgerond op twee decim
 
 Voorbeeld Puntenberekening en saldering
 
-```text
-Privévertrekken
+{==
 
-Privékamer: lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²
+**Privévertrekken**
 
-Gemeenschappelijke vertrekken voor drie kamers
+_Privékamer: lengte 3,76m x breedte 4,12m = 15,4912 m², afgerond : 15,49 m²_
 
-Gedeelde keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²
+_Gemeenschappelijke vertrekken voor drie kamers_
 
-Totaal per onzelfstandige woonruimte: 15,49 m2 + (11,24m2 / 3) = 19,24 m2
-Na salderen afronden op hele m2: 19 m2
+_Gedeelde keuken: lengte 2,95m x breedte 3,81m = 11,2395 m², afgerond : 11,24 m²_
 
-Omslaan naar 1 punt per m2 = 19 punten
-```
+_Totaal per onzelfstandige woonruimte: 15,49 m2 + (11,24m2 / 3) = 19,24 m2
+Na salderen afronden op hele m2: 19 m2_
+
+_Omslaan naar 1 punt per m2 = 19 punten_
+
+==}
 
 ### Rubriek 2 - Oppervlakte van overige ruimten
 
@@ -315,28 +317,30 @@ Voor gemeenschappelijke overige ruimtes betekent dit ook dat de oppervlakte van 
 
 De oppervlakte per overige ruimte wordt afgerond op 2 decimalen. De afronding van de oppervlakte van alle overige ruimte samen vindt plaats op hele vierkante meters na saldering van de oppervlakte van de afzonderlijke overige ruimten; bij 0,5 m2 of meer wordt naar boven afgerond, bij minder dan 0,5 m2 naar beneden. Waardering in punten vindt na saldering en afronding plaats.
 
-```text
-Voorbeeld:
+{==
 
-Privé overige ruimten
+**Voorbeeld:**
+
+_Privé overige ruimten_
 
 Er is sprake van één privé overige ruimte van 4 m2. Er worden 3 punten toegekend (4 x 0,75).
 
-Gemeenschappelijke overige ruimten voor drie kamers
+_Gemeenschappelijke overige ruimten voor drie kamers_
 
-Garage: lengte 3,16m x breedte 6,12m = 19,3392 m², afgerond : 19,34 m²
-Bijkeuken: lengte 2,11m x breedte 2,87m = 6,0557 m², afgerond : 6,06 m²
-Totaal : 25,40 m² Afronding op hele m² : 25 m².
+Garage: lengte 3,16m x breedte 6,12m = 19,3392 m², afgerond : 19,34 m²  
+Bijkeuken: lengte 2,11m x breedte 2,87m = 6,0557 m², afgerond : 6,06 m²  
+Totaal : 25,40 m² Afronding op hele m² : 25 m².  
 
 Dit vertaalt zich dan naar 25 * 0,75 punt (per m2) = 18.75 punten. Dit puntenaantal wordt gedeeld door 3 (kamers) en de uitkomst is 6,25 punt.
 
 In totaal is voor de woonruimte in dit voorbeeld een puntenaantal van 3 plus 6,25 punten, dus 9.25 punten voor overige ruimte.
-```
+
+==}
 
 ### Rubriek 3 - Verkoeling en verwarming
 
 > [!NOTE]
-> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100](). Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
+> Op het moment is het met de VERA-standaard niet mogelijk om op ruimte-niveau aan te geven of een ruimte verwarmd en/of verkoeld is. Zie [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100). Daarom hebben wij `verwarmd` en `verkoeld` als boolean-kenmerken van een `EenhedenRuimte` toegevoegd.
 
 > [!TIP]
 > Dit voorbeeld toont de minimale gegevens voor waardering van de verkoeling en verwarming van ruimten.
@@ -453,12 +457,15 @@ Zie hieronder de puntentoekenning van de energieprestatie bij een geldig energie
 
 Zoals aangegeven in de tabel hierboven, worden voor de waardering van energieprestatie de punten per m² die volgens rubriek 1 (oppervlakte van vertrekken) zijn toe te rekenen aan de onzelfstandige woonruimte gebruikt om de punten voor energieprestatie te berekenen.
 
-##### Voorbeeld Puntentoekenning
+##### Puntentoekenning
 
-Huurder A huurt één onzelfstandige woonruimte. Het totale privévertrek beslaat 10 m². Daarnaast is het totale oppervlakte van de aanwezige gemeenschappelijke vertrek op het adres 40 m². Huurder A deelt dit met drie andere huurders van onzelfstandige woonruimten op dit adres.
+{==
 
-Het aantal m² dat volgens rubriek 1 aan de huurder is toe te rekenen is 10 m² + 10 m² (40 m² / 4) = 20 m². Het energielabel van de woning is A. Dit maakt het aantal punten in deze rubriek:  
-20 m² x 0,65 punt = **13 punten**.
+_Voorbeeld: huurder A huurt één onzelfstandige woonruimte. Het totale privévertrek beslaat 10 m2. Daarnaast is het totale oppervlakte van de aanwezige gemeenschappelijke vertrek op het adres 40 m2. Huurder A deelt dit met drie andere huurders van onzelfstandige woonruimten op dit adres._
+
+_Het aantal m2 dat volgens rubriek 1 aan de huurder is toe te rekenen is 10 m2 + 10 m2 (40 m2 /4) = 20 m2. Het energielabel van de woning is A. Dit maakt het aantal punten in deze rubriek 20 x 0,65 = 13 punten._
+
+==}
 
 #### 4.2 Bouwjaar bepalend bij ontbreken geldig energielabel of energie-index
 
@@ -531,7 +538,7 @@ Punten worden alleen aan het onderdeel 'keuken' toegekend als de keuken voldoet 
 
 Als de keuken niet voldoet aan het basisniveau, worden geen punten toegekend. Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt alleen de waardering voor de rubriek keuken en niet ook nog als 'wastafel'.
 
-Een waterdichte afwerking wordt in beginsel verondersteld aanwezig te zijn, maar kan pas worden meegenomen als deze aan te merken valt als onroerende aanhorigheid. Dat betekent dat een keuken met bijvoorbeeld een tegelwand of aangebrachte, waterdichte verf wel voldoet aan de eis van een waterdichte afwerking, maar als er slecht een plastic zeil voor een wand is gehangen niet.
+~~Een waterdichte afwerking wordt in beginsel verondersteld aanwezig te zijn, maar kan pas worden meegenomen als deze aan te merken valt als onroerende aanhorigheid. Dat betekent dat een keuken met bijvoorbeeld een tegelwand of aangebrachte, waterdichte verf wel voldoet aan de eis van een waterdichte afwerking, maar als er slecht een plastic zeil voor een wand is gehangen niet.~~
 
 #### 5.2 Puntentoekenning lengte aanrecht
 
@@ -563,11 +570,10 @@ De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat 
 
 Een aanrecht met spoelbak, waarvan de lengte minder bedraagt dan 1 m, voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd, maar als wastafel. ~~Een aanrecht zonder onderkasten wordt ook gewaardeerd als wastafel.~~
 
-~~#### 5.3 Meetinstructies lengte aanrechtblad~~
+#### ~~5.3 Meetinstructies lengte aanrechtblad~~
 
 > [!NOTE]
 > De woningwaarderingpackage gaat ervanuit dat lengten van aanrechten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
-
 
 ~~De aanrechtlengte wordt over het midden van het bovenblad gemeten, inclusief ingebouwde spoelbakken en kookplaten.~~
 
@@ -635,9 +641,11 @@ De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat 
 
 Voorbeeld
 
-```text
-Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één keuken, met een aanrechtlengte tussen 2 m en 3 m. Hiervoor worden 7 punten toegekend. Daarnaast worden 3 punten toegekend voor voorzieningen (bijv. een inbouwkoelkast, inbouw keramische kookplaat en inbouw magnetron). Omdat de keuken wordt gedeeld door vier onzelfstandige woonruimten, geldt 10/4 = 2,5 punt per onzelfstandige woonruimte.
-```
+{==
+
+_Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één keuken, met een aanrechtlengte tussen 2 m en 3 m. Hiervoor worden 7 punten toegekend. Daarnaast worden 3 punten toegekend voor voorzieningen (bijv. een inbouwkoelkast, inbouw keramische kookplaat en inbouw magnetron). Omdat de keuken wordt gedeeld door vier onzelfstandige woonruimten, geldt 10/4 = 2,5 punt per onzelfstandige woonruimte._
+
+==}
 
 ### Rubriek 6 - Sanitair
 
@@ -772,9 +780,11 @@ De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat 
 
 Voorbeeld
 
-```text
-Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkamer met een douche (3 punten), met gemonteerde afscheiding (1,25 punt) en handdoekradiator (0,75 punt). Daarnaast beschikt elke huurder over een eigen toilet (3 punten) in de onzelfstandige woonruimte. De badkamer levert in totaal 5 punten op (3 + 1,25 + 0,75). De badkamer wordt gedeeld door vier onzelfstandige woonruimten, dus 5/4 = 1,25 punt per onzelfstandige woonruimte. De vier onzelfstandige woonruimten hebben elk hun eigen toilet, dus dit puntenaantal hoeft niet nader gedeeld te worden. In dit voorbeeld geldt daarom dat elke huurder 1,25 + 3 = 4,25 punten krijgt voor de rubriek sanitair.
-```
+{==
+
+_Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkamer met een douche (3 punten), met gemonteerde afscheiding (1,25 punt) en handdoekradiator (0,75 punt). Daarnaast beschikt elke huurder over een eigen toilet (3 punten) in de onzelfstandige woonruimte. De badkamer levert in totaal 5 punten op (3 + 1,25 + 0,75). De badkamer wordt gedeeld door vier onzelfstandige woonruimten, dus 5/4 = 1,25 punt per onzelfstandige woonruimte. De vier onzelfstandige woonruimten hebben elk hun eigen toilet, dus dit puntenaantal hoeft niet nader gedeeld te worden. In dit voorbeeld geldt daarom dat elke huurder 1,25 + 3 = 4,25 punten krijgt voor de rubriek sanitair._
+
+==}
 
 ### ~~Rubriek 7 - Woonvoorzieningen voor gehandicapten~~
 
@@ -832,7 +842,7 @@ Voorbeeld: op een adres zijn vier onzelfstandige woonruimten. Er is één badkam
 #### 8.1 Puntentoekenning
 
 - Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,35 punt.  
-*Voorbeeld: 10 vierkante meter privé-buitenruimte levert 5,5 punt op (2 + 10 x 0,35).*  
+_Voorbeeld: 10 vierkante meter privé-buitenruimte levert 5,5 punt op (2 + 10 x 0,35)._  
 
 - Voor gemeenschappelijk buitenruimten op hetzelfde adres worden 0,75 per vierkante meter toegekend, gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
 - Voor gemeenschappelijk buitenruimten gedeeld met meerdere adressen, worden 0,75 per vierkante meter toegekend. Dit puntenaantal wordt gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft en vervolgens gedeeld door het aantal onzelfstandige woonruimten op dat adres.
@@ -899,21 +909,24 @@ De oppervlakten voor privé en gemeenschappelijke buitenruimten worden afzonderl
 
 De punten voor privé en gemeenschappelijke buitenruimten worden vervolgens gesaldeerd. In totaal kan maximaal 15 punten worden toegekend.
 
-Puntenberekening en saldering
-```text
-Voorbeeld: in een woongebouw bevinden zich vijf adressen. Op één van deze adressen bevinden zich vier onzelfstandige woonruimten. Huurder A huurt één van deze onzelfstandige woonruimten, bestaande uit een kamer met een klein balkon (lengte 2m en breedte 0,5m). Daarnaast is er een balkon (lengte 3m en breedte 1,5m), dat huurder A deelt met de drie andere huurders van onzelfstandige woonruimten op dit adres. Tot slot beschikt het woongebouw over een gemeenschappelijk dakterras (lengte 8m en breedte 6,5m).
-```
+**Puntenberekening en saldering**
 
-*Privé-buitenruimte*  
+{==
+
+_Voorbeeld: in een woongebouw bevinden zich vijf adressen. Op één van deze adressen bevinden zich vier onzelfstandige woonruimten. Huurder A huurt één van deze onzelfstandige woonruimten, bestaande uit een kamer met een klein balkon (lengte 2m en breedte 0,5m). Daarnaast is er een balkon (lengte 3m en breedte 1,5m), dat huurder A deelt met de drie andere huurders van onzelfstandige woonruimten op dit adres. Tot slot beschikt het woongebouw over een gemeenschappelijk dakterras (lengte 8m en breedte 6,5m)._
+
+==}
+
+**Privé-buitenruimte**  
 De woning van A beschikt over een privé-buitenruimte van 2m x 0,5m = 1m2. Dit resulteert in 2 punten + 0,35 punt x 1m2 = 2,35 punten.
 
-*Gemeenschappelijke ruimte op hetzelfde adres*  
+**Gemeenschappelijke ruimte op hetzelfde adres**  
 Op het adres van huurder A is een balkon van 3m x 1,5m = 4,5m2. Dit resulteert in 0,75 punt x 4,5m2 = 3,375 punt. Het balkon wordt gedeeld door vier onzelfstandige woonruimten op hetzelfde adres, dus 3,375 punt/4 = 0,84375 punt..
 
-*Gemeenschappelijke ruimte gedeeld met meerdere adressen*  
+**Gemeenschappelijke ruimte gedeeld met meerdere adressen**  
 Tot slot is er een dakterras van 8m x 6,5m = 52m2. Dit resulteert in 0,75 punt x 52m2 = 39 punten. Het dakterras wordt gedeeld door 5 adressen, dus 39 punten/5 = 7,8 punt. Op het adres van huurder A zijn vier onzelfstandige woonruimten, dus 7,8 punt/4 = 1,95 punt.
 
-*Totaal*  
+**Totaal**  
 Voor huurder A resulteert dit in 2,35 punt + 0,84375 punt + 1,95 punt = 5,14375 punten, afgerond 5,25 punten.
 
 ### Rubriek 9 - Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
@@ -989,19 +1002,20 @@ Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aang
 
 **Voorbeeld** 
 
-```text
-Voorbeeld: (A) een gemeenschappelijke binnenruimte met keuken van 20 vierkante meter, en daarnaast (B) een gedeeld toilet van 2 vierkante meter. Tot beiden hebben 4 adressen toegang. Op één van deze adressen zijn vier onzelfstandige woonruimten.
+{==
+
+**Voorbeeld: (A) een gemeenschappelijke binnenruimte met keuken van 20 vierkante meter, en daarnaast (B) een gedeeld toilet van 2 vierkante meter. Tot beiden hebben 4 adressen toegang. Op één van deze adressen zijn vier onzelfstandige woonruimten.**
 
 1. Vertrek A voldoet aan de eisen van een vertrek en wordt gewaardeerd met 20 x 1 punt (oppervlakte) conform rubriek 1. Ruimte B voldoet aan de eisen van een overige ruimte en wordt gewaardeerd met 1,5 (2 x 0,75) punt conform rubriek 2.  
 2. Vertrek A is verwarmd middels een radiator en krijgt daarvoor 2 punten conform rubriek 3. Het toilet is onverwarmd en ontvangt daarvoor geen punten.  
 3. In vertrek A wordt voldaan aan de minimumeisen van een keuken conform rubriek 5. Voor deze rubriek wordt 10 punten toegekend (7 voor het aanrecht, en 3 voor de voorzieningen). De toiletruimte B krijgt 4,75 punt (3,75 voor het hangend toilet en 1 voor de wastafel).  
-
 4. Saldering levert op: 20 + 1,5 + 2 + 10 + 4,75 = 38,25  
 5. Delen door het aantal adressen levert op: 38,25 punten/4 = 9.5625 per adres.  
 6.Vervolgens wordt gedeeld door het aantal onzelfstandige woonruimten op het adres, dus 9,5625/4 = 2,390625 punten per onzelfstandige woonruimte.  
 
 Afronden geschiedt op een kwart punt per onzelfstandige woonruimte, in dit geval dus op 2,50.
-```
+
+==}
 
 ### Rubriek 10 - Gemeenschappelijke parkeerruimten
 
@@ -1055,8 +1069,12 @@ Dit geldt als in de huurovereenkomst is afgesproken dat de parkeervoorziening to
 4. Daarna wordt dit puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de parkeerplek(ken). Indien sprake is van een privéparkeerplek voor één adres, wordt gedeeld door 1.
 5. Tot slot wordt dit puntentotaal gedeeld door het aantal onzelfstandige woonruimten op het adres.
 
-**Voorbeeldberekening**
-```text
+**Voorbeeld**
+
+{==
+
+_**Voorbeeldberekening**_
+
 In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn vier onzelfstandige woonruimten. Huurder A huurt één van deze onzelfstandige woonruimten. Bij het woongebouw horen vijf Type-III parkeerplaatsen.
 
 1. De vijf parkeerplekken behoren tot Type III.
@@ -1064,7 +1082,8 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
 3. De vijf parkeerplaatsen leveren 5 × 4 = 20 punten op.
 4. De parkeerplaatsen worden gedeeld door tien adressen, dus 20 / 10 = 2 punten per adres.
 5. Op het adres van A zijn vier onzelfstandige woonruimten, dus voor A resulteert dit in 2 / 4 = 0,50 punt in de rubriek parkeerruimte.
-```
+
+==}
 
 > [!NOTE]
 > Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken bovenstaande berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model niet mogelijk. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van bovenstaande parkertypes de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` en `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek meegegeven te worden wanneer het een onzelfstandige woonruimte betreft. Om bovenstaand rekenvoorbeeld door de woningwaardering package te laten berekenen, kunnen de gemeenschappelijke parkeerplekken als volgt (in JSON-formaat) meegegeven worden.
