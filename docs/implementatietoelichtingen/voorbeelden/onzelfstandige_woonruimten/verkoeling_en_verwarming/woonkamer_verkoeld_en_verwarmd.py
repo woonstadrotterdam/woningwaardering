@@ -26,7 +26,7 @@ def get_eenheid():
             oppervlakte=50,
             verwarmd=True,
             verkoeld=True,
-            gedeeldMetAantalOnzelfstandigeWoonruimten=2,
+            gedeeld_met_aantal_onzelfstandige_woonruimten=2,
         )
     ]
 
