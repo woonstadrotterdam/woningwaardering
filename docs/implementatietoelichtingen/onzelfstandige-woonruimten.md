@@ -1119,10 +1119,10 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
         "naam": "Parkeergelegenheid"
       },
       "detailSoort": {
-        "code": "VAU",
-        "naam": "Parkeervak auto (buiten, niet overdekt)"
+        "code": "PCO",
+        "naam": "Parkeerplek buiten behorend bij complex"
       },
-      "naam": "Parkeervak buiten",
+      "naam": "Parkeerplek buiten",
       "oppervlakte": 12,
       "breedte": 3,
       "lengte": 4

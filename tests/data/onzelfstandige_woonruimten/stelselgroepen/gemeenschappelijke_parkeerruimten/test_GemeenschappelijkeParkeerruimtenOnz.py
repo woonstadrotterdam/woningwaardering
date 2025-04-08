@@ -44,6 +44,13 @@ def test_GemeenschappelijkeParkeerruimten_specifiek_output(
 
 warning_configs = [
     WarningConfig(
+        file=f"{current_file_path}/input/warning_oude_parkeergarage.json",
+        peildatum=date(2025, 1, 1),
+        warnings={
+            UserWarning: "Gebruik",
+        },
+    ),
+    WarningConfig(
         file=f"{current_file_path}/input/warning_geen_oppervlakte.json",
         peildatum=date(2025, 1, 1),
         warnings={

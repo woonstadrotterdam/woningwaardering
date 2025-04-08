@@ -53,14 +53,14 @@
     {
       "id": "Space_4",
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "VAI",
-        "naam": "Parkeervak auto (binnen)"
+        "code": "IAP",
+        "naam": "Inpandige afgesloten parkeerplek"
       },
-      "naam": "Parkeervak auto (binnen)",
+      "naam": "Inpandige afgesloten parkeerplek",
       "oppervlakte": 20,
       "aantal": 2,
       "gedeeld_met_aantal_eenheden": 4

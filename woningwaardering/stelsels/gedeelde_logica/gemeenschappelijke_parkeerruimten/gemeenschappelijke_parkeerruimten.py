@@ -20,9 +20,10 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
-    Ruimtedetailsoort.parkeervak_auto_binnen: {"Type I": Decimal("9.0")},
+    Ruimtedetailsoort.inpandige_afgesloten_parkeerplek: {"Type I": Decimal("9.0")},
+    Ruimtedetailsoort.uitpandige_afgesloten_parkeerplek: {"Type II": Decimal("6.0")},
     Ruimtedetailsoort.carport: {"Type II": Decimal("6.0")},
-    Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt: {
+    Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex: {
         "Type III": Decimal("4.0")
     },
 }
@@ -37,9 +38,9 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         ruimte (EenhedenRuimte): De te waarderen ruimte
 
     De waardering wordt bepaald op basis van het type parkeerruimte:
-    - Type I (parkeervak auto binnen): 9 punten
-    - Type II (carport): 6 punten
-    - Type III (parkeervak auto buiten niet overdekt): 4 punten
+    - Type I (inpandige afgesloten parkeerplek): 9 punten
+    - Type II (uitpandige afgesloten parkeerplek of carport): 6 punten
+    - Type III (parkeerplek buiten behorend bij een complex): 4 punten
 
     Extra punten:
     - +2 punten bij aanwezigheid van een laadpaal
@@ -48,9 +49,10 @@ def waardeer_gemeenschappelijke_parkeerruimte(
     - De oppervlakte moet minimaal 12m² zijn
     - Het aantal punten wordt gedeeld door het aantal eenheden waarmee de ruimte gedeeld is
     - De ruimte moet van één van de volgende detailsoorten zijn:
-        - parkeervak auto binnen
+        - inpandige afgesloten parkeerplek
+        - uitpandige afgesloten parkeerplek
         - carport
-        - parkeervak auto buiten niet overdekt
+        - parkeerplek buiten behorend bij een complex
 
     Yields:
         WoningwaarderingResultatenWoningwaardering: Waardering voor een specifiek parkeertype
@@ -60,32 +62,27 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         return
 
     if ruimte.detail_soort in [
-        Ruimtedetailsoort.parkeervak_motorfiets_binnen,
-        Ruimtedetailsoort.parkeervak_scootmobiel_binnen,
-        Ruimtedetailsoort.stalling_extern,
-        Ruimtedetailsoort.stalling_intern,
-        Ruimtedetailsoort.parkeervak_motorfiets_buiten_niet_overdekt,
-        Ruimtedetailsoort.parkeervak_scootmobiel_buiten,
+        # onderstaande parkeergelegenden worden vervangen: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
+        Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek,
+        Ruimtedetailsoort.open_parkeergarage_specifieke_plek,
+        Ruimtedetailsoort.parkeergarage_niet_specifieke_plek,
+        Ruimtedetailsoort.specifieke_parkeerplek_in_parkeergarage,
     ]:
-        logger.debug(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) met ruimtedetailsoort {ruimte.detail_soort} is een parkeerplek die niet gewaardeerd wordt voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
+        warnings.warn(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort}. Gebruik {Ruimtedetailsoort.inpandige_afgesloten_parkeerplek}, {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.uitpandige_afgesloten_parkeerplek} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex} als detailsoort om in aanmerking te komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}.",
+            UserWarning,
         )
-        return
-
-    if ruimte.detail_soort in [
-        Ruimtedetailsoort.parkeerterrein,
-        Ruimtedetailsoort.parkeergarage,
-    ]:
-        logger.warning(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een {Ruimtedetailsoort.parkeerterrein.naam if ruimte.detail_soort==Ruimtedetailsoort.parkeerterrein else Ruimtedetailsoort.parkeergarage.naam} en kan momenteel niet gewaardeerd worden in de woningwaardering package. Voeg een parkeerplek los toe aan de eenheden om deze in aanmerking te laten komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}. Raadpleeg docs/implementatietoelichting-beleidsboeken/zelfstandige_woonruimten.md voor meer informatie."
-        )
-        return
+        return None
 
     if ruimte.detail_soort not in [
-        Ruimtedetailsoort.parkeervak_auto_binnen,  # Type I
+        Ruimtedetailsoort.inpandige_afgesloten_parkeerplek,  # Type I
+        Ruimtedetailsoort.uitpandige_afgesloten_parkeerplek,  # Type II
         Ruimtedetailsoort.carport,  # Type II
-        Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt,  # Type III
+        Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,  # Type III
     ]:
+        logger.debug(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft detailsoort {ruimte.detail_soort} en wordt niet gewaardeerd voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
+        )
         return
 
     if ruimte.oppervlakte is None:

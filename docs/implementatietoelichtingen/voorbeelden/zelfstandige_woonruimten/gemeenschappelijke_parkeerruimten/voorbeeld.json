@@ -2,8 +2,8 @@
   "ruimten": [
     {
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "BTR",
+        "naam": "Buitenruimte"
       },
       "detailSoort": {
         "code": "CAR",
@@ -29,12 +29,12 @@
     },
     {
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "VAU",
-        "naam": "Parkeervak auto (buiten, niet overdekt)"
+        "code": "PCO",
+        "naam": "Parkeerplek buiten behorend bij complex"
       },
       "breedte": 3.0,
       "lengte": 4.0,

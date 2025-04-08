@@ -608,7 +608,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 / (Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 2)))
                 for ruimte in (eenheid.ruimten or [])
                 if ruimte.detail_soort
-                in [Ruimtedetailsoort.parkeervak_auto_binnen]  # Type I
+                in [Ruimtedetailsoort.inpandige_afgesloten_parkeerplek]  # Type I
                 and utils.gedeeld_met_eenheden(
                     ruimte
                 )  # valt anders niet onder rubriek 10

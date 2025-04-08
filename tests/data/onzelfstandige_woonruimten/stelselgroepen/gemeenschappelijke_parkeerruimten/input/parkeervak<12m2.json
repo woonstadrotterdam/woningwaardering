@@ -7,14 +7,14 @@
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
       "aantal": 2,
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "VAU",
-        "naam": "Parkeervak auto (buiten, niet overdekt)"
+        "code": "PCO",
+        "naam": "Parkeerplek buiten behorend bij complex"
       },
-      "naam": "Parkeervak buiten",
+      "naam": "Parkeerplek buiten",
       "oppervlakte": 11,
       "breedte": 3,
       "lengte": 4

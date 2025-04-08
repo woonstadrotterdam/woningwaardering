@@ -86,6 +86,12 @@ class Ruimtedetailsoort(Referentiedatasoort):
     maar ook voor het opbergen en bewaren van (etens)voorraden en schoonmaakspullen.
     """
 
+    carport = RuimtedetailsoortReferentiedata(
+        code="CAR",
+        naam="Carport",
+        parent=Ruimtesoort.buitenruimte,
+    )
+
     dakterras = RuimtedetailsoortReferentiedata(
         code="DAK",
         naam="Dakterras",
@@ -113,6 +119,15 @@ class Ruimtedetailsoort(Referentiedatasoort):
     Verkeersruimte : is een betrekkelijk smalle en lange ruimte omgeven door muren en
     afgedekt door een plafond of zoldering, in een gebouw, als verbinding van
     vertrekken waarvan de deuren erop uitkomen.
+    """
+
+    garage = RuimtedetailsoortReferentiedata(
+        code="GAR",
+        naam="Garage",
+        parent=Ruimtesoort.overige_ruimten,
+    )
+    """
+    Overige ruimte: een overdekte en afsluitbare ruimte om voertuigen in te stallen.
     """
 
     hal = RuimtedetailsoortReferentiedata(
@@ -470,181 +485,35 @@ class Ruimtedetailsoort(Referentiedatasoort):
     Verkeersruimte: (UITBREIDING) Verkeersruimte waarin een trap ligt
     """
 
-    carport = RuimtedetailsoortReferentiedata(
-        code="CAR",
-        naam="Carport",
-        parent=Ruimtesoort.parkeergelegenheid,
+    inpandige_afgesloten_parkeerplek = RuimtedetailsoortReferentiedata(
+        code="IAP",
+        naam="Inpandige afgesloten parkeerplek",
+        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
-    (UITBREIDING) Parkeergelegenheid: een overdekte, open parkeerruimte voor een of meer
-    auto's. In tegenstelling tot een garage heeft een carport meestal geen muren of
-    deuren. Carports kunnen vrijstaand zijn of aan een gebouw bevestigd worden.
-    Onder carport vallen ook ander soortige overdekte (buiten) parkeervakken, zoals
-    die in de plint (begane grond) van een appartementencomplex.
+    Parkeerplek in inpandige en afgesloten parkeergarage behorend tot het complex met
+    niet specifiek toegewezen parkeerplekken. Binnen de WWD vallen deze
+    parkeerplekken onder het type Parkeerplek type I
     """
 
-    garage_inpandig = RuimtedetailsoortReferentiedata(
-        code="GAI",
-        naam="Garage inpandig",
-        parent=Ruimtesoort.parkeergelegenheid,
+    uitpandige_afgesloten_parkeerplek = RuimtedetailsoortReferentiedata(
+        code="UAP",
+        naam="Uitpandige afgesloten parkeerplek",
+        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
-    (UITBREIDING) Parkeergelegenheid: een garage die deel uitmaakt van de hoofdbebouwing
-    van een huis of ander gebouw. Deze ruimte is meestal direct toegankelijk vanuit
-    het interieur van het gebouw, bijvoorbeeld via een deur die leidt naar een gang,
-    keuken, of bijkeuken. De garage is voorzien van een garagedeur die naar buiten
-    opent.
+    Parpeerkplek in uitpandige en afgesloten parkeergarage behorend tot het complex met
+    niet specifiek toegewezen parkeerplekken. Binnen de WWD vallen deze
+    parkeerplekken onder het type Parkeerplek Type II
     """
 
-    garage_uitpandig = RuimtedetailsoortReferentiedata(
-        code="GAU",
-        naam="Garage uitpandig",
-        parent=Ruimtesoort.parkeergelegenheid,
+    parkeerplek_buiten_behorend_bij_complex = RuimtedetailsoortReferentiedata(
+        code="PCO",
+        naam="Parkeerplek buiten behorend bij complex",
+        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
-    (UITBREIDING) Een uitpandige garage is een garage die geen deel uitmaakt van de
-    hoofdbebouwing van een huis of ander gebouw. Deze ruimte is niet direct
-    toegankelijk vanuit het interieur van het gebouw. De uitpandige garage is via de
-    oprijlaan van de woonruimte te bereiken en daarom betreft het een aanhorigheid
-    van de woonruimte. De garage is voorzien van een garagedeur die naar buiten
-    opent.
-    """
-
-    garagebox = RuimtedetailsoortReferentiedata(
-        code="GAR",
-        naam="Garagebox",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een garagebox is een afgesloten, individuele ruimte bedoeld voor het
-    stallen van een voertuig of het opslaan van goederen. Garageboxen zijn voorzien
-    van een garagedeur die op slot kan, vaak een kanteldeur of een roldeur. Deze
-    boxen kunnen losstaand zijn of deel uitmaken van een groter complex met meerdere
-    garageboxen. Een garagebox is een afzonderlijk object van een woonruimte als het
-    een vrijstaande garagebox is die middels een afzonderlijk terrein bereikbaar is
-    of als het een garagebox is die in de plint (begane grond) van een
-    appartementencomplex zit.
-    """
-
-    parkeergarage = RuimtedetailsoortReferentiedata(
-        code="PAG",
-        naam="Parkeergarage",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een parkeergarage is een gebouwde parkeervoorziening met meerdere
-    parkeerplaatsen, soms verdeeld over meerdere verdiepingen en kan zowel
-    bovengronds als ondergronds (parkeerkelder) zijn.
-    """
-
-    parkeerterrein = RuimtedetailsoortReferentiedata(
-        code="PAT",
-        naam="Parkeerterrein",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een parkeerterrein is een open, meestal verharde locatie die speciaal
-    is ingericht voor het parkeren van voertuigen.
-    """
-
-    parkeervak_auto_binnen = RuimtedetailsoortReferentiedata(
-        code="VAI",
-        naam="Parkeervak auto (binnen)",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een parkeervak auto (binnen) is een specifieke, afgebakende ruimte
-    binnen een gebouw, zoals een parkeergarage waarin een voertuig kan worden
-    geparkeerd. Deze parkeervakken zijn genummerd of gemarkeerd om een
-    georganiseerde indeling te waarborgen. Ze zijn bedoeld voor motorvoertuigen met
-    meer dan twee wielen, zoals auto's.
-    """
-
-    parkeervak_auto_buiten_niet_overdekt = RuimtedetailsoortReferentiedata(
-        code="VAU",
-        naam="Parkeervak auto (buiten, niet overdekt)",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een parkeervak auto (buiten, niet overdekt) is een specifieke,
-    afgebakende ruimte buiten een gebouw, zoals een parkeerterrein waar een voertuig
-    kan worden geparkeerd. Deze parkeervakken zijn genummerd of gemarkeerd om een
-    georganiseerde indeling te waarborgen. Ze zijn bedoeld voor motorvoertuigen met
-    meer dan twee wielen, zoals auto's.
-    """
-
-    parkeervak_motorfiets_binnen = RuimtedetailsoortReferentiedata(
-        code="VMI",
-        naam="Parkeervak motorfiets (binnen)",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een parkeervak motorfiets (binnen) is een specifieke, afgebakende
-    ruimte binnen een gebouw, zoals een parkeergarage waarin een motorfiets kan
-    worden geparkeerd. Deze parkeerplaatsen zijn genummerd of gemarkeerd om een
-    georganiseerde indeling te waarborgen. Ze zijn bedoeld voor motorfietsen met
-    twee wielen. Deze parkeerplaatsen zijn meestal kleiner dan gewone
-    parkeerplaatsen voor auto's.
-    """
-
-    parkeervak_motorfiets_buiten_niet_overdekt = RuimtedetailsoortReferentiedata(
-        code="VMU",
-        naam="Parkeervak motorfiets (buiten, niet overdekt)",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een parkeervak motorfiets (buiten, niet overdekt) is een specifieke,
-    afgebakende ruimte buiten een gebouw, zoals een parkeerterrein waar een
-    motorfiets kan worden geparkeerd. Deze parkeerplaatsen zijn genummerd of
-    gemarkeerd om een georganiseerde indeling te waarborgen. Ze zijn bedoeld voor
-    motorfietsen met twee wielen. Deze parkeerplaatsen zijn meestal kleiner dan
-    gewone parkeerplaatsen voor auto's.
-    """
-
-    parkeervak_scootmobiel_binnen = RuimtedetailsoortReferentiedata(
-        code="VSI",
-        naam="Parkeervak scootmobiel (binnen)",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een parkeervak scootmobiel (binnen) is een specifieke, afgebakende
-    ruimte binnen een gebouw, waarin een scootmobiel kan worden geparkeerd. Deze
-    parkeerplaatsen zijn genummerd of gemarkeerd om een georganiseerde indeling te
-    waarborgen. Ze zijn uitsluitend bedoeld voor het stallen van scootmobiels en
-    bijvoorbeeld dus niet voor elektrische fietsen.
-    """
-
-    parkeervak_scootmobiel_buiten = RuimtedetailsoortReferentiedata(
-        code="VSU",
-        naam="Parkeervak scootmobiel (buiten)",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een parkeervak scootmobiel (buiten) is een specifieke, afgebakende
-    ruimte buiten een gebouw, waarin een scootmobiel kan worden geparkeerd. Deze
-    parkeerplaatsen zijn genummerd of gemarkeerd om een georganiseerde indeling te
-    waarborgen. Ze zijn uitsluitend bedoeld voor het stallen van scootmobiels en
-    bijvoorbeeld dus niet voor elektrische fietsen.
-    """
-
-    stalling_extern = RuimtedetailsoortReferentiedata(
-        code="STE",
-        naam="Stalling extern",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een stalling extern is een al dan niet overdekte of afgesloten ruimte
-    buiten het hoofdgebouw die bedoeld is voor het parkeren of opslaan van fietsen
-    of scootmobielen.
-    """
-
-    stalling_intern = RuimtedetailsoortReferentiedata(
-        code="STI",
-        naam="Stalling intern",
-        parent=Ruimtesoort.parkeergelegenheid,
-    )
-    """
-    (UITBREIDING) Een stalling intern is een overdekte en afgesloten ruimte binnen het
-    hoofdgebouw die bedoeld is voor het parkeren of opslaan van fietsen of
-    scootmobielen.
+    Paarkeerplek op een parkeerterrein behorend bij een complex met niet specifiek
+    toegewezen parkeerplekken. Binnen de WWD vallen deze parkeerplekken onder het
+    type Parkeerplek Type III
     """
