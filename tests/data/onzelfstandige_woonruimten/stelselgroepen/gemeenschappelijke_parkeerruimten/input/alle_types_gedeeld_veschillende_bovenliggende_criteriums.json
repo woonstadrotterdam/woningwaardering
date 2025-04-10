@@ -12,9 +12,9 @@
       },
       "detailSoort": {
         "code": "IAP",
-        "naam": "Inpandige afgesloten parkeerplek"
+        "naam": "Parkeerplek in inpandige afgesloten parkeergarage"
       },
-      "naam": "Parkeerplek binnen",
+      "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
       "oppervlakte": 12,
       "breedte": 3,
       "lengte": 4

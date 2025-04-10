@@ -20,8 +20,12 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
-    Ruimtedetailsoort.inpandige_afgesloten_parkeerplek: {"Type I": Decimal("9.0")},
-    Ruimtedetailsoort.uitpandige_afgesloten_parkeerplek: {"Type II": Decimal("6.0")},
+    Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage: {
+        "Type I": Decimal("9.0")
+    },
+    Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage: {
+        "Type II": Decimal("6.0")
+    },
     Ruimtedetailsoort.carport: {"Type II": Decimal("6.0")},
     Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex: {
         "Type III": Decimal("4.0")
@@ -69,14 +73,14 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         Ruimtedetailsoort.specifieke_parkeerplek_in_parkeergarage,
     ]:
         warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort}. Gebruik {Ruimtedetailsoort.inpandige_afgesloten_parkeerplek}, {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.uitpandige_afgesloten_parkeerplek} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex} als detailsoort om in aanmerking te komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}.",
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort}. Gebruik {Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex} als detailsoort om in aanmerking te komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}.",
             UserWarning,
         )
         return None
 
     if ruimte.detail_soort not in [
-        Ruimtedetailsoort.inpandige_afgesloten_parkeerplek,  # Type I
-        Ruimtedetailsoort.uitpandige_afgesloten_parkeerplek,  # Type II
+        Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,  # Type I
+        Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,  # Type II
         Ruimtedetailsoort.carport,  # Type II
         Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,  # Type III
     ]:

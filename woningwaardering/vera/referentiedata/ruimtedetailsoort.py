@@ -485,9 +485,9 @@ class Ruimtedetailsoort(Referentiedatasoort):
     Verkeersruimte: (UITBREIDING) Verkeersruimte waarin een trap ligt
     """
 
-    inpandige_afgesloten_parkeerplek = RuimtedetailsoortReferentiedata(
+    parkeerplek_in_inpandige_afgesloten_parkeergarage = RuimtedetailsoortReferentiedata(
         code="IAP",
-        naam="Inpandige afgesloten parkeerplek",
+        naam="Parkeerplek in inpandige afgesloten parkeergarage",
         parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
@@ -496,10 +496,12 @@ class Ruimtedetailsoort(Referentiedatasoort):
     parkeerplekken onder het type Parkeerplek type I
     """
 
-    uitpandige_afgesloten_parkeerplek = RuimtedetailsoortReferentiedata(
-        code="UAP",
-        naam="Uitpandige afgesloten parkeerplek",
-        parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
+    parkeerplek_in_uitpandige_afgesloten_parkeergarage = (
+        RuimtedetailsoortReferentiedata(
+            code="UAP",
+            naam="Parkeerplek in uitpandige afgesloten parkeergarage",
+            parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
+        )
     )
     """
     Parpeerkplek in uitpandige en afgesloten parkeergarage behorend tot het complex met
