@@ -64,21 +64,6 @@
       "oppervlakte": 20,
       "aantal": 2,
       "gedeeld_met_aantal_eenheden": 4
-    },
-    {
-      "id": "Space_5",
-      "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
-      },
-      "detailSoort": {
-        "code": "VAI",
-        "naam": "Parkeervak auto (binnen)"
-      },
-      "naam": "Parkeervak auto (binnen)",
-      "oppervlakte": 10,
-      "aantal": 2,
-      "gedeeld_met_aantal_eenheden": 2
     }
   ]
 }
