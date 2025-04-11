@@ -486,7 +486,7 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
 
     parkeerplek_in_inpandige_afgesloten_parkeergarage = RuimtedetailsoortReferentiedata(
-        code="IAP",
+        code="PIP",
         naam="Parkeerplek in inpandige afgesloten parkeergarage",
         parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
@@ -498,7 +498,7 @@ class Ruimtedetailsoort(Referentiedatasoort):
 
     parkeerplek_in_uitpandige_afgesloten_parkeergarage = (
         RuimtedetailsoortReferentiedata(
-            code="UAP",
+            code="PUP",
             naam="Parkeerplek in uitpandige afgesloten parkeergarage",
             parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
         )
@@ -510,7 +510,7 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
 
     parkeerplek_buiten_behorend_bij_complex = RuimtedetailsoortReferentiedata(
-        code="PCO",
+        code="PBC",
         naam="Parkeerplek buiten behorend bij complex",
         parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
