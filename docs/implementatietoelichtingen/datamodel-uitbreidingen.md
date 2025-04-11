@@ -46,4 +46,4 @@ Het attribuut `Eenhedenruimte.aantal` is als uitbreiding op het VERA-model toege
 
 ## Parkeergelegenheden
 
-Als uitbreiding op de referentiedata is de `Ruimtesoort.Parkeergelegenheid` toegevoegd. Daarnaast zijn er verschillende parkerruimten (`Ruimtedetailsoort`) toegevoegd. Deze uitbreidingen zijn overgenomen vanuit github issue [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110).
+Als uitbreiding op de referentiedata zijn er verschillende parkeerruimten (`Ruimtedetailsoort`) toegevoegd, die overeenkomen met Type I, II en III parkeergelegenheden vanuit het WWS-beleidsboek.
