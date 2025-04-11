@@ -634,7 +634,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             ruimte.detail_soort
             in [
                 Ruimtedetailsoort.carport,
-                Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
             ]
             and not gedeeld_met_eenheden(ruimte)
         )
