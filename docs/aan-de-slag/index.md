@@ -7,12 +7,13 @@
 
 ## Gebruik
 
-### Output formaten
+De input voor de woningwaardering-package is een Eenheid object in het formaat van de VERA-standaard. Dit object is definieerbaar in JSON of m.b.v. Python classes.
+Voor een voorbeeld hoe de input in JSON en respectievelijk Python eruit ziet, zie de onderstaande voorbeelden.
 
-De woningwaardering package ondersteunt verschillende output formaten:
+> [!TIP]
+> Zie de [implementatietoelichtingen](../implementatietoelichtingen/index.md) voor voorbeeld-inputs per stelselgroep.  
+> In de codebase op [Github](https://github.com/woonstadrotterdam/woningwaardering) in [tests/data/](https://github.com/woonstadrotterdam/woningwaardering/tree/main/tests/data) staan allerlei voorbeeld-inputs en -outputs van de woningwaardering-package.
 
-1. **JSON Output**: Gedetailleerde output in JSON formaat met alle berekende punten en criteria
-2. **Tabel Output**: Een overzichtelijke tabel met de belangrijkste resultaten
 
 ### JSON
 
@@ -802,7 +803,14 @@ tabel = naar_tabel(woningwaardering_resultaat)
 print(tabel)
 ```
 
-De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan vervolgens worden omgezet naar een tabel zoals hierboven is gedaan.
+De output daarvan is een VERA woningwaarderingstelsel object.
+
+### Output formaten
+
+De woningwaardering package ondersteunt verschillende output formaten:
+
+1. **JSON Output**: Gedetailleerde output in JSON formaat met alle berekende punten en criteria
+2. **Tabel Output**: Een overzichtelijke tabel met de belangrijkste resultaten
 
 <details>
 <summary>Voorbeeld output in JSON</summary>
@@ -1171,6 +1179,3 @@ De output daarvan is een VERA woningwaarderingstelsel object. Dit object kan ver
 ```
 
 </details>
-
-
-Voor meer specifieke voorbeelden per stelselgroep, zie de [Voorbeelden](voorbeelden.md) sectie. 
