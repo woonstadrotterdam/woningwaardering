@@ -11,7 +11,7 @@
         "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "IAP",
+        "code": "PIP",
         "naam": "Parkeerplek in inpandige afgesloten parkeergarage"
       },
       "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
@@ -47,7 +47,7 @@
         "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "PCO",
+        "code": "PBC",
         "naam": "Parkeerplek buiten behorend bij complex"
       },
       "naam": "Parkeerplek buiten",
