@@ -1029,9 +1029,9 @@ Voor verschillende typen gemeenschappelijke parkeerplekken, afhankelijk van afde
 
 > [!NOTE]
 > Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:
-> - Type I: `Ruimtedetailsoort.parkeervak_auto_binnen` met code `VAI`
-> - Type II: `Ruimtedetailsoort.carport` met code `CAR`
-> - Type III: `Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt` met code `VAU`
+> - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` met code `PIP`
+> - Type II: `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` met code `PUP` en `Ruimtedetailsoort.carport` met code `CAR`
+> - Type III: `Ruimtedetailsoort.Parkeerplek_buiten_behorend_bij_complex` met code `PBC`
 
 
 2 extra punten worden toegekend als de parkeerplek beschikt over een laadpaal voor elektrische rijden, exclusief voor gebruik door bewoners.
@@ -1104,32 +1104,6 @@ In een woongebouw bevinden zich tien adressen. Op één van deze adressen zijn v
 %}
 ```
 > ///
-
-```json
-{
-  "id": "A",
-  "ruimten": [
-    {
-      "id": "1",
-      "aantal": 5,
-      "gedeeld_met_aantal_eenheden": 10,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 4,
-      "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
-      },
-      "detailSoort": {
-        "code": "PCO",
-        "naam": "Parkeerplek buiten behorend bij complex"
-      },
-      "naam": "Parkeerplek buiten",
-      "oppervlakte": 12,
-      "breedte": 3,
-      "lengte": 4
-    }
-  ]
-}
-```
 
 ### Rubriek 11 Punten voor de WOZ-waarde
 
