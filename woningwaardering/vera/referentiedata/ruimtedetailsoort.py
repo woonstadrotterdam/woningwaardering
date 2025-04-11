@@ -504,7 +504,7 @@ class Ruimtedetailsoort(Referentiedatasoort):
         )
     )
     """
-    Parpeerkplek in uitpandige en afgesloten parkeergarage behorend tot het complex met
+    Parkeerplek in uitpandige en afgesloten parkeergarage behorend tot het complex met
     niet specifiek toegewezen parkeerplekken. Binnen de WWD vallen deze
     parkeerplekken onder het type Parkeerplek Type II
     """
@@ -515,7 +515,7 @@ class Ruimtedetailsoort(Referentiedatasoort):
         parent=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
     )
     """
-    Paarkeerplek op een parkeerterrein behorend bij een complex met niet specifiek
+    Parkeerplek op een parkeerterrein behorend bij een complex met niet specifiek
     toegewezen parkeerplekken. Binnen de WWD vallen deze parkeerplekken onder het
     type Parkeerplek Type III
     """
