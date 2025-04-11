@@ -350,13 +350,7 @@ class Buitenruimten(Stelselgroep):
         Yields:
             WoningwaarderingResultatenWoningwaardering: Punten voor de buitenruimte.
         """
-        if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte or (
-            ruimte.detail_soort
-            in [
-                Ruimtedetailsoort.stalling_extern,
-                Ruimtedetailsoort.stalling_intern,
-            ]
-        ):
+        if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte:
             if not ruimte.oppervlakte:
                 warnings.warn(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte",

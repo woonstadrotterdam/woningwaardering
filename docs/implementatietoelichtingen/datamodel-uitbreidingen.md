@@ -43,7 +43,3 @@ Installaties zouden toegevoegd moeten worden aan het VERA model `EenhedenRuimte`
 ## Aantal
 
 Het attribuut `Eenhedenruimte.aantal` is als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven hoeveel van deze specifieke ruimte er zijn. Dit attribuut wordt uitsluitend gebruikt in het berekenen van de punten voor Gemeenschappelijke Parkeerruimten. Hier door is het niet nodig om elk parkeervak van een parkeergarage of parkeerterrein mee te geven aan een eenheid.
-
-## Parkeergelegenheden
-
-Als uitbreiding op de referentiedata is de `Ruimtesoort.Parkeergelegenheid` toegevoegd. Daarnaast zijn er verschillende parkerruimten (`Ruimtedetailsoort`) toegevoegd. Deze uitbreidingen zijn overgenomen vanuit github issue [https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110](https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110).

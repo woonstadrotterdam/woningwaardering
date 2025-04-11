@@ -2,8 +2,8 @@
   "ruimten": [
     {
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "BTR",
+        "naam": "Buitenruimte"
       },
       "detailSoort": {
         "code": "CAR",

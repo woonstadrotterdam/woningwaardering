@@ -7,8 +7,8 @@
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
       "aantal": 1,
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "BTR",
+        "naam": "Buitenruimte"
       },
       "detailSoort": {
         "code": "CAR",

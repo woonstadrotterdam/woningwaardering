@@ -38,7 +38,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__2",
+            "id": "gemeenschappelijke_parkeerruimten__3",
             "naam": "Type III (gedeeld met 10 adressen)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
