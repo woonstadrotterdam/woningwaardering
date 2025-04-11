@@ -64,6 +64,21 @@
       "oppervlakte": 20,
       "aantal": 2,
       "gedeeld_met_aantal_eenheden": 4
+    },
+    {
+      "id": "Space_5",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "PIP",
+        "naam": "Parkeerplek in inpandige afgesloten parkeergarage"
+      },
+      "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
+      "oppervlakte": 10,
+      "aantal": 2,
+      "gedeeld_met_aantal_eenheden": 4
     }
   ]
 }
