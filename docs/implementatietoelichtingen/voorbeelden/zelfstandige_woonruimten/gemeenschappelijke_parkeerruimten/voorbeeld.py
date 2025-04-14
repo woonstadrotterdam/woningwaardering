@@ -24,7 +24,7 @@ def get_eenheid():
 
     eenheid.ruimten = [
         EenhedenRuimte(
-            soort=Ruimtesoort.parkeergelegenheid,
+            soort=Ruimtesoort.buitenruimte,
             detail_soort=Ruimtedetailsoort.carport,
             oppervlakte=12,
             breedte=3,
@@ -39,8 +39,8 @@ def get_eenheid():
             ],
         ),
         EenhedenRuimte(
-            soort=Ruimtesoort.parkeergelegenheid,
-            detail_soort=Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt,
+            soort=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
+            detail_soort=Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
             oppervlakte=12,
             breedte=3,
             lengte=4,

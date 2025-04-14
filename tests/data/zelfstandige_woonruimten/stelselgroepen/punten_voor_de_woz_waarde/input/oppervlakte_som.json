@@ -53,14 +53,14 @@
     {
       "id": "Space_4",
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "VAI",
-        "naam": "Parkeervak auto (binnen)"
+        "code": "PIP",
+        "naam": "Parkeerplek in inpandige afgesloten parkeergarage"
       },
-      "naam": "Parkeervak auto (binnen)",
+      "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
       "oppervlakte": 20,
       "aantal": 2,
       "gedeeld_met_aantal_eenheden": 4
@@ -68,17 +68,17 @@
     {
       "id": "Space_5",
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "VAI",
-        "naam": "Parkeervak auto (binnen)"
+        "code": "PIP",
+        "naam": "Parkeerplek in inpandige afgesloten parkeergarage"
       },
-      "naam": "Parkeervak auto (binnen)",
+      "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
       "oppervlakte": 10,
       "aantal": 2,
-      "gedeeld_met_aantal_eenheden": 2
+      "gedeeld_met_aantal_eenheden": 4
     }
   ]
 }

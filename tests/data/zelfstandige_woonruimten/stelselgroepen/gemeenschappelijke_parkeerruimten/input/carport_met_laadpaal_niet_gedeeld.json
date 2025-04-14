@@ -6,8 +6,8 @@
       "gedeeld_met_aantal_eenheden": 1,
       "aantal": 1,
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "BTR",
+        "naam": "Buitenruimte"
       },
       "detailSoort": {
         "code": "CAR",
