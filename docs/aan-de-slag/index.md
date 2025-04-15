@@ -8,7 +8,7 @@
 ## Gebruik
 
 De input voor de woningwaardering-package is een Eenheid object in het formaat van de VERA-standaard. Dit object is definieerbaar in JSON of m.b.v. Python classes.
-Voor een voorbeeld hoe de input in JSON en respectievelijk Python eruit ziet, zie de onderstaande voorbeelden.
+Zie onderstaande voorbeelden voor de de input in JSON en Python.
 
 > [!TIP]
 > Zie de [implementatietoelichtingen](../implementatietoelichtingen/index.md) voor voorbeeld-inputs per stelselgroep.  
