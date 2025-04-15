@@ -7,14 +7,14 @@
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
       "aantal": 1,
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "VAI",
-        "naam": "Parkeervak auto (binnen)"
+        "code": "PIP",
+        "naam": "Parkeerplek in inpandige afgesloten parkeergarage"
       },
-      "naam": "Parkeervak auto (binnen)",
+      "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
       "oppervlakte": 12,
       "breedte": 3,
       "lengte": 4
@@ -25,8 +25,8 @@
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 3,
       "aantal": 1,
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "BTR",
+        "naam": "Buitenruimte"
       },
       "detailSoort": {
         "code": "CAR",
@@ -43,14 +43,14 @@
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 3,
       "aantal": 1,
       "soort": {
-        "code": "PAR",
-        "naam": "Parkeergelegenheid"
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "VAU",
-        "naam": "Parkeervak auto (buiten, niet overdekt)"
+        "code": "PBC",
+        "naam": "Parkeerplek buiten behorend bij complex"
       },
-      "naam": "Parkeervak buiten",
+      "naam": "Parkeerplek buiten",
       "oppervlakte": 12,
       "breedte": 3,
       "lengte": 4

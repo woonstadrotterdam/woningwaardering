@@ -1137,20 +1137,17 @@ Voorbeeld: (A) een gemeenschappelijke binnenruimte met keuken van 20 vierkante m
 
 Voor verschillende typen gemeenschappelijke parkeerplekken, afhankelijk van afdekking van de buitenlucht, worden punten toegekend:
 
-* Type I: parkeerplek in afgesloten parkeergarage behorende tot het complex krijgt 9 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
-* Type II: parkeerplek buiten behorende tot het complex of de woning met dak krijgt 6 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft. Hieronder wordt ook begrepen een carport.
-* Type III: parkeerplek buiten behorende tot het complex of de woning zonder dak krijgt 4 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
+* **Type I**: parkeerplek in afgesloten parkeergarage behorende tot het complex krijgt 9 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
+* **Type II**: parkeerplek buiten behorende tot het complex of de woning met dak krijgt 6 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft. Hieronder wordt ook begrepen een carport.
+* **Type III**: parkeerplek buiten behorende tot het complex of de woning zonder dak krijgt 4 punten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
 2 extra punten worden toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft, als de parkeerplek beschikt over een laadpaal voor elektrisch rijden, en exclusief is voor gebruik door bewoners.
 
 > [!NOTE]
 > Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:
->
-> | Type | Ruimtedetailsoort | Code |
-> | --- | --- | --- |
-> | Type I | `Ruimtedetailsoort.parkeervak_auto_binnen` | `VAI` |
-> | Type II | `Ruimtedetailsoort.carport` | `CAR` |
-> | Type III | `Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt` | `VAU` |
+> - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` met code `PIP`
+> - Type II: `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` met code `PUP` en `Ruimtedetailsoort.carport` met code `CAR`
+> - Type III: `Ruimtedetailsoort.Parkeerplek_buiten_behorend_bij_complex` met code `PBC`
 
 #### 10.2 Definitie gemeenschappelijke parkeerruimte
 

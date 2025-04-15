@@ -136,7 +136,7 @@ def test_pydantic_equals_json(test_case):
     py_json = pydantic_instance.model_dump_json(indent=2, exclude_none=True, exclude_defaults=True, by_alias=True, exclude_unset=True)
     js_json = get_json(test_case)
         
-    if py_json != js_json:        
+    if py_json.strip() != js_json.strip():
         # Get dictionaries from both instances for detailed comparison
         difflines = list(
             difflib.unified_diff(

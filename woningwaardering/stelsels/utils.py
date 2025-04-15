@@ -616,17 +616,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     if ruimte.soort == Ruimtesoort.verkeersruimte:
         return Ruimtesoort.verkeersruimte
 
-    if ruimte.detail_soort in [
-        # onderstaande parkeergelegenden worden binnenkort vervangen: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
-        Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek,
-        Ruimtedetailsoort.open_parkeergarage_specifieke_plek,
-        Ruimtedetailsoort.parkeergarage_niet_specifieke_plek,
-        Ruimtedetailsoort.specifieke_parkeerplek_in_parkeergarage,
-    ]:
-        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort} en kan daardoor niet geclassificeerd worden. Gebruik voor parkeerplaatsen: {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt} of {Ruimtedetailsoort.parkeervak_auto_binnen}"
-        warnings.warn(warning_msg, UserWarning)
-        return None
-
     if (
         ruimte.detail_soort
         in [  # deze ruimten zijn sowieso buitenruimten
@@ -645,7 +634,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             ruimte.detail_soort
             in [
                 Ruimtedetailsoort.carport,
-                Ruimtedetailsoort.parkeervak_auto_buiten_niet_overdekt,
             ]
             and not gedeeld_met_eenheden(ruimte)
         )
@@ -708,13 +696,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             return Ruimtesoort.overige_ruimten
 
     if (
-        ruimte.detail_soort
-        in [
-            Ruimtedetailsoort.garage_inpandig,
-            Ruimtedetailsoort.garage_uitpandig,
-            Ruimtedetailsoort.garagebox,
-            Ruimtedetailsoort.parkeervak_auto_binnen,
-        ]
+        ruimte.detail_soort in [Ruimtedetailsoort.garage]
         and not gedeeld_met_eenheden(
             ruimte
         )  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
