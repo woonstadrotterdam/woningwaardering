@@ -6,17 +6,12 @@
 
 # Woningwaardering
 
-Ga voor uitgebreide documentatie over de **woningwaardering** package naar [Read The Docs](https://woningwaardering.readthedocs.io/nl/latest/).
-
-## Status
-
-![](https://progress-bar.xyz/100/?title=zelfstandige_woonruimten_jan_2025&width=120)  
-![](https://progress-bar.xyz/100/?title=onzelfstandige_woonruimten_jan_2025&width=108)
+Ga voor uitgebreide documentatie over de **woningwaardering** package naar [Read The Docs](https://woningwaardering.readthedocs.io/stable/).
 
 <!--tip-start-->
 
 > [!TIP]
-> Release v3.x.x kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van januari 2025 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [documentatie](https://woningwaardering.readthedocs.io/nl/latest/), [de toelichting op de implementatie van het beleidsboek](https://woningwaardering.readthedocs.io/nl/latest/implementatietoelichtingen/) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
+> Release v3.x.x kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van januari 2025 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [documentatie](https://woningwaardering.readthedocs.io/stable/), [de toelichting op de implementatie van het beleidsboek](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
 
 <!--tip-end-->
 
@@ -43,13 +38,13 @@ _Visueel voorbeeld van de output van de package voor een zelfstandige woonruimte
 
 <!--overzicht-end-->
 
-Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van januari 2025 verwijzen wij naar de [documentatie](https://woningwaardering.readthedocs.io/nl/latest/implementatietoelichtingen.html) over de implementatie van dit beleidsboek.
+Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van januari 2025 verwijzen wij naar de [documentatie](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) over de implementatie van dit beleidsboek.
 
-Voor meer informatie over hoe de documentatie van het beleidsboek is gemaakt, verwijzen wij naar het hoofdstuk [Implementatie beleidsboek huurcommissie](https://woningwaardering.readthedocs.io/nl/latest/opzet_woningwaardering.html#implementatie-beleidsboek-huurcommissie).
+Voor meer informatie over hoe de documentatie van het beleidsboek is gemaakt, verwijzen wij naar het hoofdstuk [Implementatie beleidsboek huurcommissie](https://woningwaardering.readthedocs.io/stable/introductie/opzet/#implementatie-beleidsboek-huurcommissie).
 
 # Opzet woningwaardering package
 
-Voor de opzet van de Woningwaarderingpackage verwijzen we graag naar de [documentatie](https://woningwaardering.readthedocs.io/nl/latest/opzet_woningwaardering.html). Hier zal onder andere worden ingegaan op de implemenatie van de Beleidsboeken van de huurcommissie en de repository structuur worden besproken.
+Voor de opzet van de Woningwaarderingpackage verwijzen we graag naar de [documentatie](https://woningwaardering.readthedocs.io/stable/introductie/opzet/). Hier zal onder andere worden ingegaan op de implemenatie van de Beleidsboeken van de huurcommissie en de repository structuur worden besproken.
 
 <!--installatie-start-->
 
@@ -73,4 +68,4 @@ pip install woningwaardering[monumenten]
 
 # Gebruik
 
-Ga voor voorbeelden van het gebruik van de woningwaardering package naar de [documentatie](https://woningwaardering.readthedocs.io/nl/latest/gebruik.html#voorbeeld-per-stelselgroep).
+Ga voor voorbeelden van het gebruik van de woningwaardering package naar de [documentatie](https://woningwaardering.readthedocs.io/stable/aan-de-slag/#gebruik).
