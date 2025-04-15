@@ -12,7 +12,6 @@ Zie onderstaande voorbeelden voor de de input in JSON en Python.
 
 > [!TIP]
 > Zie de [implementatietoelichtingen](../implementatietoelichtingen/index.md) voor voorbeeld-inputs per stelselgroep.  
-> In de codebase op [Github](https://github.com/woonstadrotterdam/woningwaardering) in [tests/data/](https://github.com/woonstadrotterdam/woningwaardering/tree/main/tests/data) staan allerlei voorbeeld-inputs en -outputs van de woningwaardering-package.
 
 
 ### JSON
