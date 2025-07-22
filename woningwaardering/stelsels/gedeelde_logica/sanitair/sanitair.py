@@ -100,15 +100,34 @@ def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:
             get_bouwkundige_elementen(ruimte, bouwkundigelementdetailsoort)
         )
         if bouwkundige_elementen:
+            aantal_bouwkundige_elementen = len(bouwkundige_elementen)
             warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {bouwkundigelementdetailsoort.naam} als bouwkundig element. Dit dient als `Installatiesoort` '{installatiesoort}' op de ruimte onder `installaties` gespecificeerd te worden."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {aantal_bouwkundige_elementen}x {bouwkundigelementdetailsoort.naam} als bouwkundig element. Dit dient als `Installatiesoort` '{installatiesoort}' op de ruimte onder `installaties` gespecificeerd te worden."
             )
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {bouwkundigelementdetailsoort.naam} wordt als {installatiesoort.naam} toegevoegd aan installaties"
+
+            # Tel hoeveel van deze installatiesoort al aanwezig zijn
+            bestaande_installaties = (
+                ruimte.installaties.count(installatiesoort)
+                if ruimte.installaties
+                else 0
             )
-            ruimte.installaties.extend(
-                [installatiesoort for _ in bouwkundige_elementen]
+
+            # Voeg alleen toe wat nog niet als installatie gespecificeerd is
+            aantal_toe_te_voegen = max(
+                0, aantal_bouwkundige_elementen - bestaande_installaties
             )
+
+            if aantal_toe_te_voegen > 0:
+                logger.info(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_toe_te_voegen}x {bouwkundigelementdetailsoort.naam} wordt als {installatiesoort.naam} toegevoegd aan installaties"
+                )
+                ruimte.installaties.extend(
+                    [installatiesoort for _ in range(aantal_toe_te_voegen)]
+                )
+            elif bestaande_installaties >= aantal_bouwkundige_elementen:
+                logger.info(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_bouwkundige_elementen}x {bouwkundigelementdetailsoort.naam} als bouwkundig element is al gespecificeerd onder installaties als {installatiesoort.naam}"
+                )
 
 
 def _waardeer_toiletten(
