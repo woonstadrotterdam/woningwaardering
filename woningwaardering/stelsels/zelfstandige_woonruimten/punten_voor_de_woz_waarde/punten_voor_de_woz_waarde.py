@@ -13,6 +13,7 @@ from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenEenheidadres,
     EenhedenWozEenheid,
     WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
@@ -812,6 +813,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             return False
 
         adres = eenheid.adres
+
+        if not isinstance(adres, EenhedenEenheidadres):
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): adres is niet van het juiste type voor COROP-gebied bepaling",
+                UserWarning,
+            )
+            return False
+
         woonplaats = utils.get_woonplaats(adres)
 
         if woonplaats is None or woonplaats.code is None:
