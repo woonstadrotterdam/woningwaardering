@@ -1,0 +1,176 @@
+{
+  "bouwjaar": 2023,
+  "klimaatbeheersing": [
+    {
+      "code": "IND",
+      "naam": "Individueel"
+    }
+  ],
+  "adres": {
+    "straatnaam": "Damrak",
+    "huisnummer": "2",
+    "huisnummer_toevoeging": "",
+    "postcode": "1012LG",
+    "woonplaats": {
+      "code": "3594",
+      "naam": "Amsterdam"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "id": "0363010000000002",
+    "bagIdentificatie": "0363010000000002"
+  },
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgestelde_waarde": 300000
+    }
+  ],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "energie_index",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "1.2",
+      "begindatum": "2023-01-01T00:00:00+01:00",
+      "einddatum": "2033-01-01T00:00:00+01:00",
+      "registratiedatum": "2023-01-15T00:00:00+01:00"
+    }
+  ],
+  "gebruiksoppervlakte": 35,
+  "monumenten": [],
+  "ruimten": [
+    {
+      "id": "Space_01",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "oppervlakte": 20.0,
+      "verwarmd": true,
+      "afsluitbaar": true
+    },
+    {
+      "id": "Space_02",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "oppervlakte": 8.0,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "Aanrecht_01",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1800
+        }
+      ]
+    },
+    {
+      "id": "Space_03",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "oppervlakte": 4.0,
+      "verwarmd": true,
+      "afsluitbaar": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "Douche_01",
+          "naam": "Douche",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "DOU",
+            "naam": "Douche"
+          }
+        },
+        {
+          "id": "Wastafel_01",
+          "naam": "Wastafel",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "WAS",
+            "naam": "Wastafel/Fontein"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Space_04",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toiletruimte"
+      },
+      "naam": "Toiletruimte",
+      "oppervlakte": 3.0,
+      "verwarmd": false,
+      "afsluitbaar": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "Closet_01",
+          "naam": "Toilet",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "CLO",
+            "naam": "Toilet"
+          }
+        }
+      ]
+    }
+  ]
+}

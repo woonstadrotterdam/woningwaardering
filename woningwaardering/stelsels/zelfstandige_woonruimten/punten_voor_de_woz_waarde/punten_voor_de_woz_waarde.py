@@ -223,6 +223,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return woningwaardering_groep
 
+        # Bepaal de juiste factor voor onderdeel II (kan speciale COROP factor zijn)
+        factor_onderdeel_II = self._bepaal_factor_onderdeel_II(
+            eenheid, factoren, woningwaardering_resultaat, oppervlakte
+        )
+
         punten_onderdeel_II = utils.rond_af(
             woz_waarde / oppervlakte / factor_onderdeel_II,
             decimalen=2,
@@ -370,7 +375,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         totaal_punten_zonder_cap = overige_punten + utils.rond_af(woz_punten, 0)
-        correctie_punten = self._cap_punten(woz_punten, overige_punten)
+        correctie_punten = self._cap_punten(
+            eenheid, woz_punten, overige_punten, woningwaardering_resultaat
+        )
 
         if (
             correctie_punten is not None
@@ -428,17 +435,25 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def _cap_punten(
         self,
+        eenheid: EenhedenEenheid,
         woz_punten: Decimal,
         overige_punten: Decimal,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> Decimal | None:
         """
         Berekent de cap op de WOZ. Maximaal 33% van het
         totale puntenaantal van een woning mag bepaald worden door de WOZ-waarde
         van de woning.
 
+        Uitzonderingen:
+        - Woningen met minder dan 187 punten totaal
+        - Kleine nieuwbouwwoningen (<40m²) in COROP-regio's Amsterdam en Utrecht (2018-2022)
+
         Args:
+            eenheid (EenhedenEenheid): De eenheid.
             woz_punten (Decimal): Het aantal punten voor de stelselgroep WOZ-waarde.
             overige_punten (Decimal): Het totaal aantal punten van alle groepen behalve de stelselgroep WOZ-waarde.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
             Decimal | None: De correctiepunten voor de stelselgroep WOZ-waarde.
@@ -450,6 +465,16 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if totaal_punten_zonder_cap < drempel_cap_woz:
             logger.info(
                 f"Cap op op de WOZ wordt niet toegepast omdat het totaal aantal punten minder is dan {drempel_cap_woz}."
+            )
+            return None
+
+        # Check voor COROP-uitzondering: kleine nieuwbouwwoningen (<40m²) in Amsterdam/Utrecht (2018-2022)
+        oppervlakte = self.bepaal_oppervlakte(eenheid, woningwaardering_resultaat)
+        if self._is_corop_regel_van_toepassing(
+            eenheid, woningwaardering_resultaat, oppervlakte
+        ):
+            logger.info(
+                f"Eenheid ({eenheid.id}): Cap op de WOZ wordt niet toegepast vanwege COROP-uitzondering voor kleine nieuwbouwwoningen in Amsterdam/Utrecht (2018-2022)"
             )
             return None
 
@@ -714,6 +739,106 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woz_waarde = next(iter(woz_eenheden), None)
 
         return woz_waarde
+
+    def _bepaal_factor_onderdeel_II(
+        self,
+        eenheid: EenhedenEenheid,
+        factoren: pd.DataFrame,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        oppervlakte: Decimal,
+    ) -> Decimal:
+        """
+        Bepaalt de juiste factor voor onderdeel II, rekening houdend met speciale regels
+        voor kleine nieuwbouwwoningen (<40m²) in COROP-gebieden Amsterdam en Utrecht (2018-2022).
+
+        Args:
+            eenheid (EenhedenEenheid): De eenheid.
+            factoren (pd.DataFrame): De factoren uit de lookup tabel.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
+            oppervlakte (Decimal): De oppervlakte van de eenheid.
+
+        Returns:
+            Decimal: De factor voor onderdeel II.
+        """
+        # Standaard factor
+        factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
+
+        # Check of speciale COROP-regels van toepassing zijn
+        if self._is_corop_regel_van_toepassing(
+            eenheid, woningwaardering_resultaat, oppervlakte
+        ):
+            factor_onderdeel_II_corop = Decimal(
+                str(factoren["Onderdeel II Nieuwbouw/COROP"].values[0])
+            )
+            logger.info(
+                f"Eenheid ({eenheid.id}): Speciale COROP-regels van toepassing. Factor onderdeel II is {factor_onderdeel_II_corop} in plaats van {factor_onderdeel_II}"
+            )
+            return factor_onderdeel_II_corop
+
+        return factor_onderdeel_II
+
+    def _is_corop_regel_van_toepassing(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        oppervlakte: Decimal,
+    ) -> bool:
+        """
+        Controleert of de speciale COROP-regels van toepassing zijn voor kleine nieuwbouwwoningen
+        (<40m²) gelegen in COROP-gebieden Amsterdam en Utrecht (2018-2022).
+
+        Args:
+            eenheid (EenhedenEenheid): De eenheid.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
+            oppervlakte (Decimal): De oppervlakte van de eenheid.
+
+        Returns:
+            bool: True als de COROP-regels van toepassing zijn, anders False.
+        """
+        # Check bouwjaar: moet tussen 2018-2022 zijn
+        if not eenheid.bouwjaar or not (2018 <= eenheid.bouwjaar <= 2022):
+            return False
+
+        # Check oppervlakte: moet kleiner dan 40m² zijn
+        if oppervlakte >= 40:
+            return False
+
+        # Check COROP-gebied: moet Amsterdam (23) of Utrecht (17) zijn
+        if not eenheid.adres:
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): geen adres gevonden voor COROP-gebied bepaling",
+                UserWarning,
+            )
+            return False
+
+        adres = eenheid.adres
+        woonplaats = utils.get_woonplaats(adres)
+
+        if woonplaats is None or woonplaats.code is None:
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): geen woonplaats gevonden voor COROP-gebied bepaling",
+                UserWarning,
+            )
+            return False
+
+        corop_gebied = utils.get_corop_voor_woonplaats(woonplaats.code)
+
+        if corop_gebied is None:
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): geen COROP-gebied gevonden voor woonplaats {woonplaats.code}",
+                UserWarning,
+            )
+            return False
+
+        # COROP codes: Amsterdam = "23" (Groot-Amsterdam), Utrecht = "17" (Utrecht)
+        is_amsterdam_of_utrecht = corop_gebied["code"] in ["23", "17"]
+
+        if is_amsterdam_of_utrecht:
+            logger.info(
+                f"Eenheid ({eenheid.id}): COROP-regels van toepassing - Bouwjaar: {eenheid.bouwjaar}, Oppervlakte: {oppervlakte}m², COROP-gebied: {corop_gebied['naam']} ({corop_gebied['code']})"
+            )
+
+        return is_amsterdam_of_utrecht
 
 
 if __name__ == "__main__":  # pragma: no cover
