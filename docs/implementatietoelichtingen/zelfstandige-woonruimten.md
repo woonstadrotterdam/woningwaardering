@@ -1274,6 +1274,9 @@ _Het totale puntenaantal is 20,63 + 21,83 = 42,46. Na afronding is het puntenaan
 
 Om de bouw van huurwoningen in de middensector te bevorderen heeft de wetgever bepaald dat voor nieuwbouwwoningen opgeleverd in kalenderjaar 2015-2019 en kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht een andere berekening geldt. Deze berekening leidt tot een hoger aantal punten voor het onderdeel WOZ-waarde.
 
+> [!NOTE]
+> Wij gaan er vanuit dat de 40m2 verwijst naar de gebruiksoppervlakte van de woning.
+
 **Nieuwbouwwoningen 2015-2019**
 
 Indien de bouwkundige oplevering of hoogniveau renovatie van de woning heeft plaatsgevonden in de jaren 2015-2019 en die woning voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingsstelsel minimaal 110 punten heeft behaald dan worden, voor het aantal punten voor de WOZ-waarde, minimaal 40 punten toegekend. Dit garandeert een minimaal puntenaantal.
