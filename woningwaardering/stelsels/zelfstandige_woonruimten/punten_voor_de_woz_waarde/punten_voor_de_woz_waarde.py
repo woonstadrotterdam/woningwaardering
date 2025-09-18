@@ -791,6 +791,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if not eenheid.bouwjaar or not (2018 <= eenheid.bouwjaar <= 2022):
             return False
 
+        if eenheid.gebruiksoppervlakte and eenheid.gebruiksoppervlakte >= 40:
+            return False
+
         # Check COROP-gebied: moet Amsterdam (23) of Utrecht (17) zijn
         if not eenheid.adres:
             warnings.warn(
@@ -835,9 +838,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid ({eenheid.id}): geen gebruiksoppervlakte gevonden voor eenheid in COROP-gebied Amsterdam/Utrecht.",
                 UserWarning,
             )
-            return False
-
-        if eenheid.gebruiksoppervlakte >= 40:
             return False
 
         logger.info(
