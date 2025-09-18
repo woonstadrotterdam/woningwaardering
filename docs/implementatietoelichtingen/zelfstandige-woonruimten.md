@@ -1302,12 +1302,12 @@ Deze regeling komt te vervallen per 2042.
 [^5]: Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.
  
 
-_Rekenvoorbeeld:~~_
+_Rekenvoorbeeld:_
 
 _De WOZ-waarde van een woning in Amsterdam is voor het kalenderjaar 2024, met peildatum 1 januari 2023, vastgesteld op € 300.000 en de oppervlakte van de vertrekken en overige ruimten van de woning is 35 m2.
 
-*   _Onderdeel I: € 300.000 / € 14.453 = 20,76 punten~~_
-*   _Onderdeel II: € 300.000 / 35 (m2) / € 97 = 88,37 punten~~_
+*   _Onderdeel I: € 300.000 / € 14.453 = 20,76 punten_
+*   _Onderdeel II: € 300.000 / 35 (m2) / € 97 = 88,37 punten_
 
 _Het totale puntenaantal is 20,76 + 88,37 = 109,13. Na afronding is het puntenaantal 109 punten. In dit rekenvoorbeeld zijn de kengetallen gebruikt met peildatum 1 januari 2023, zie tabel 1 hieronder.
 
