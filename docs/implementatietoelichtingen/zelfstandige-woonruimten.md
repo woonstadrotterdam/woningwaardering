@@ -1272,10 +1272,10 @@ _Het totale puntenaantal is 20,63 + 21,83 = 42,46. Na afronding is het puntenaan
 
 #### 11.2 Nieuwbouwwoningen en woningen gelegen in COROP-gebied Amsterdam of Utrecht
 
-> [!WARNING]
-> Momenteel is de logica voor COROP-gebied Amsterdam of Utrecht nog niet geïmplementeerd. Zie: [dit issue](https://github.com/woonstadrotterdam/woningwaardering/issues/103)
-
 Om de bouw van huurwoningen in de middensector te bevorderen heeft de wetgever bepaald dat voor nieuwbouwwoningen opgeleverd in kalenderjaar 2015-2019 en kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht een andere berekening geldt. Deze berekening leidt tot een hoger aantal punten voor het onderdeel WOZ-waarde.
+
+> [!NOTE]
+> Wij gaan er vanuit dat de 40m2 verwijst naar de gebruiksoppervlakte van de woning.
 
 **Nieuwbouwwoningen 2015-2019**
 
@@ -1289,27 +1289,27 @@ Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2019 en/of de 
 
 Deze regeling komt te vervallen per 2039.
 
-**~~Woningen gelegen in COROP-gebied (2018-2022)~~**
+**Woningen gelegen in COROP-gebied (2018-2022)**
 
-~~Indien de bouwkundige oplevering van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de COROP-gebieden[^5] Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 242 (peildatum 1 januari 2024). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 242 gebruikt maar € 103 bij de peildatum 1 januari 2024. Bij de peildatum 1 januari 2023 wordt niet het bedrag van € 229 gebruikt, maar € 97.~~
+Indien de bouwkundige oplevering van een woning, die kleiner is dan 40 m2, heeft plaatsgevonden in de jaren 2018-2022 en de woning is gelegen in de COROP-gebieden[^5] Amsterdam en Utrecht, dan wordt het puntenaantal voor de WOZ-waarde berekend op basis van een ander kengetal dan wat in de paragraaf hierboven is weergegeven. In het tweede onderdeel van de berekening wordt de WOZ-waarde gedeeld door het aantal m2 van de oppervlaktes van de woning, gedeeld door het kengetal € 242 (peildatum 1 januari 2024). Bij kleine nieuwbouwwoningen (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht wordt dan niet het kengetal € 242 gebruikt maar € 103 bij de peildatum 1 januari 2024. Bij de peildatum 1 januari 2023 wordt niet het bedrag van € 229 gebruikt, maar € 97.
 
-~~Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2022 of de woning is groter dan 40 m2 of de woning is niet gelegen in de COROP-gebieden Amsterdam en Utrecht, dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.~~
+Indien de bouwkundige oplevering plaatsvindt ná het kalenderjaar 2022 of de woning is groter dan 40 m2 of de woning is niet gelegen in de COROP-gebieden Amsterdam en Utrecht, dan geldt de ‘gewone’ berekening die in de paragraaf hierboven is weergegeven.
 
-~~In bijlage 3 van dit beleidsboek staan de gemeenten opgesomd die zijn gelegen in de COROP-gebieden Amsterdam en Utrecht.~~
+In bijlage 3 van dit beleidsboek staan de gemeenten opgesomd die zijn gelegen in de COROP-gebieden Amsterdam en Utrecht.
 
-~~Deze regeling komt te vervallen per 2042.~~
+Deze regeling komt te vervallen per 2042.
 
 [^5]: Corop-gebied is een statistische eenheid ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma. Dit gebied betreft een cluster van één of meer aangrenzende gemeenten in dezelfde provincie, ontworpen voor regionaal onderzoek.
  
 
-_~~Rekenvoorbeeld:~~_
+_Rekenvoorbeeld:_
 
-_~~De WOZ-waarde van een woning in Amsterdam is voor het kalenderjaar 2024, met peildatum 1 januari 2023, vastgesteld op € 300.000 en de oppervlakte van de vertrekken en overige ruimten van de woning is 35 m2.~~_
+_De WOZ-waarde van een woning in Amsterdam is voor het kalenderjaar 2024, met peildatum 1 januari 2023, vastgesteld op € 300.000 en de oppervlakte van de vertrekken en overige ruimten van de woning is 35 m2.
 
-*   _~~Onderdeel I: € 300.000 / € 14.453 = 20,76 punten~~_
-*   _~~Onderdeel II: € 300.000 / 35 (m2) / € 97 = 88,37 punten~~_
+*   _Onderdeel I: € 300.000 / € 14.453 = 20,76 punten_
+*   _Onderdeel II: € 300.000 / 35 (m2) / € 97 = 88,37 punten_
 
-_~~Het totale puntenaantal is 20,76 + 88,37 = 109,13. Na afronding is het puntenaantal 109 punten. In dit rekenvoorbeeld zijn de kengetallen gebruikt met peildatum 1 januari 2023, zie tabel 1 hieronder.~~_
+_Het totale puntenaantal is 20,76 + 88,37 = 109,13. Na afronding is het puntenaantal 109 punten. In dit rekenvoorbeeld zijn de kengetallen gebruikt met peildatum 1 januari 2023, zie tabel 1 hieronder.
 
 _Tabel 1 Kengetallen WOZ_
 
@@ -1364,7 +1364,7 @@ Wanneer een woning zonder de cap op de WOZ een waardering heeft van meer dan 186
 
 **Uitzonderingen**
 
-Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 187 punten~~ en voor kleine nieuwbouwwoningen[^7] (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022~~.
+Deze beperking geldt echter niet voor woningen waarvan de waardering zonder die beperking lager is dan 187 punten en voor kleine nieuwbouwwoningen[^7] (<40 m2) gelegen in COROP-regio’s Amsterdam en Utrecht die zijn opgeleverd in de jaren 2018-2022.
 
 Daarnaast wordt in nog twee andere gevallen de cap op de WOZ niet toegepast. In het geval dat de minimumwaarde is toegepast vindt namelijk ook geen aftopping plaats aangezien de WOZ-waarde niet meer dan 33% zal bedragen. Het tweede geval gaat het om nieuwbouwwoningen gebouwd in de jaren 2015-2019 waarvoor minimaal 110 punten zijn behaald voor de onderdelen 1 tot en met 10 en 12 van het woningwaarderingsstelsel. Ook in dat geval wordt de cap op de WOZ niet toegepast. In deze situatie wordt minimaal 40 punten voor het onderdeel WOZ-waarde toegekend en dit komt overeen met 26,6%, waardoor geen aftopping plaatsvindt. Deze gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde rekenkundig, in deze gevallen, nooit meer dan 33% kan bedragen. Daarom zijn ze niet opgenomen in onderstaand schema.
 
