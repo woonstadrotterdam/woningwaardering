@@ -664,10 +664,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.berging,
         Ruimtedetailsoort.wasruimte,
         Ruimtedetailsoort.kelder,
-        # Ruimtedetailsoort.schuur,
-    ] or (
-        Ruimtedetailsoort.schuur.naam == ruimte.detail_soort.naam
-    ):  # Schacht en schuur hebben dezelfde code
+        Ruimtedetailsoort.serre,
+        Ruimtedetailsoort.schuur,
+    ]:
         if (
             ruimte.detail_soort == Ruimtedetailsoort.berging
             and Ruimtesoort.overige_ruimten
@@ -709,7 +708,10 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         if ruimte.oppervlakte >= 2.0:
             return Ruimtesoort.overige_ruimten
 
-    if ruimte.detail_soort == Ruimtedetailsoort.zolder:
+    if (
+        ruimte.detail_soort == Ruimtedetailsoort.zolder
+        or ruimte.detail_soort == Ruimtedetailsoort.zoldervertrek
+    ):
         if ruimte.soort == Ruimtesoort.vertrek:
             if (
                 heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
