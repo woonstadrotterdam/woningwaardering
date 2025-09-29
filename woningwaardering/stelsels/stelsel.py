@@ -5,6 +5,9 @@ from importlib.resources import files
 import pandas as pd
 from loguru import logger
 
+from woningwaardering.stelsels.gedeelde_logica.voorzieningen_correctie import (
+    corrigeer_voorzieningen_eenheid,
+)
 from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
 )
@@ -71,18 +74,24 @@ class Stelsel:
         eenheid: EenhedenEenheid,
         *,
         negeer_stelselgroep: WoningwaarderingstelselgroepReferentiedata | None = None,
+        corrigeer_voorzieningen: bool = False,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """Berekent de woningwaardering voor een stelsel.
 
         Parameters:
             eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
             negeer_stelselgroep (WoningwaarderingstelselgroepReferentiedata | None, optional): Een stelselgroep die moet worden overgeslagen.
+            corrigeer_voorzieningen (bool, optional): Of missende voorzieningen automatisch toegevoegd moeten worden vóór waardering. Standaard True.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
         """
 
         normaliseer_ruimte_namen(eenheid)
+
+        # Corrigeer voorzieningen vóór waardering
+        if corrigeer_voorzieningen:
+            corrigeer_voorzieningen_eenheid(eenheid)
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
         resultaat.stelsel = self.stelsel
