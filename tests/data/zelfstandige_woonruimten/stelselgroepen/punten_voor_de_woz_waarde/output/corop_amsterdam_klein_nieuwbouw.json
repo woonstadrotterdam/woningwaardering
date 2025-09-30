@@ -1,0 +1,74 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "punten": 109.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 300000.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+          }
+        },
+        {
+          "aantal": 14543.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__factor_I",
+            "naam": "Factor I",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
+            "naam": "Onderdeel I"
+          },
+          "punten": 20.63
+        },
+        {
+          "aantal": 35.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
+            "naam": "Oppervlakte van vertrekken en overige ruimten",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 97.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__factor_II",
+            "naam": "Factor II",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
+            "naam": "Onderdeel II"
+          },
+          "punten": 88.37
+        }
+      ]
+    }
+  ]
+}
