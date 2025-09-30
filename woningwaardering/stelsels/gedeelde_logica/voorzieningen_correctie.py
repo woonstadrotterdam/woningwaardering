@@ -16,11 +16,11 @@ from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
     EenhedenEenheid,
     EenhedenRuimte,
-    Referentiedata,
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Installatiesoort,
+    InstallatiesoortReferentiedata,
     Ruimtedetailsoort,
 )
 from woningwaardering.vera.utils import get_bouwkundige_elementen
@@ -32,10 +32,10 @@ def _heeft_toilet(ruimte: EenhedenRuimte) -> bool:
     Controleert of een ruimte al een toilet heeft (als installatie of bouwkundig element).
 
     Args:
-        ruimte: De ruimte om te controleren
+        ruimte (EenhedenRuimte): De ruimte om te controleren
 
     Returns:
-        True als de ruimte een toilet heeft, anders False
+        bool: True als de ruimte een toilet heeft, anders False
     """
     # Check installaties
     if ruimte.installaties:
@@ -66,10 +66,10 @@ def _heeft_aanrecht(ruimte: EenhedenRuimte) -> bool:
     Controleert of een ruimte al een aanrecht heeft.
 
     Args:
-        ruimte: De ruimte om te controleren
+        ruimte (EenhedenRuimte): De ruimte om te controleren
 
     Returns:
-        True als de ruimte een aanrecht heeft, anders False
+        bool: True als de ruimte een aanrecht heeft, anders False
     """
     if not ruimte.bouwkundige_elementen:
         return False
@@ -86,10 +86,10 @@ def _heeft_wastafel(ruimte: EenhedenRuimte) -> bool:
     Controleert of een ruimte al een wastafel heeft (als installatie of bouwkundig element).
 
     Args:
-        ruimte: De ruimte om te controleren
+        ruimte (EenhedenRuimte): De ruimte om te controleren
 
     Returns:
-        True als de ruimte een wastafel heeft, anders False
+        bool: True als de ruimte een wastafel heeft, anders False
     """
     # Check installaties
     if ruimte.installaties:
@@ -122,10 +122,10 @@ def _heeft_douche_of_bad(ruimte: EenhedenRuimte) -> bool:
     Controleert of een ruimte al een douche of bad heeft.
 
     Args:
-        ruimte: De ruimte om te controleren
+        ruimte (EenhedenRuimte): De ruimte om te controleren
 
     Returns:
-        True als de ruimte een douche of bad heeft, anders False
+        bool: True als de ruimte een douche of bad heeft, anders False
     """
     # Check installaties
     if ruimte.installaties:
@@ -156,13 +156,15 @@ def _heeft_douche_of_bad(ruimte: EenhedenRuimte) -> bool:
     return False
 
 
-def _corrigeer_toilet(ruimte: EenhedenRuimte, toilet_type: Referentiedata) -> None:
+def _corrigeer_toilet(
+    ruimte: EenhedenRuimte, toilet_type: InstallatiesoortReferentiedata
+) -> None:
     """
     Zorgt ervoor dat een toiletruimte een toilet heeft.
 
     Args:
-        ruimte: De toiletruimte om te controleren
-        toilet_type: Het type toilet om toe te voegen
+        ruimte (EenhedenRuimte): De toiletruimte om te controleren
+        toilet_type (InstallatiesoortReferentiedata): Het type toilet om toe te voegen
     """
     if _heeft_toilet(ruimte):
         return
@@ -185,8 +187,8 @@ def _corrigeer_aanrecht(ruimte: EenhedenRuimte, standaard_lengte: int) -> None:
     Zorgt ervoor dat een keuken een aanrecht heeft.
 
     Args:
-        ruimte: De keuken om te controleren
-        standaard_lengte: Lengte van het aanrecht in mm
+        ruimte (EenhedenRuimte): De keuken om te controleren
+        standaard_lengte (int): Lengte van het aanrecht in mm
     """
     if _heeft_aanrecht(ruimte):
         return
@@ -217,8 +219,8 @@ def _corrigeer_aanrecht_lengte(ruimte: EenhedenRuimte, standaard_lengte: int) ->
     Zorgt ervoor dat aanrechten een lengte hebben.
 
     Args:
-        ruimte: De ruimte om te controleren
-        standaard_lengte: Standaard lengte in mm
+        ruimte (EenhedenRuimte): De ruimte om te controleren
+        standaard_lengte (int): Standaard lengte in mm
     """
     if not ruimte.bouwkundige_elementen:
         return
@@ -241,7 +243,7 @@ def _corrigeer_wastafel(ruimte: EenhedenRuimte) -> None:
     Zorgt ervoor dat een badkamer een wastafel heeft.
 
     Args:
-        ruimte: De badkamer om te controleren
+        ruimte (EenhedenRuimte): De badkamer om te controleren
     """
     if _heeft_wastafel(ruimte):
         return
@@ -264,7 +266,7 @@ def _corrigeer_douche(ruimte: EenhedenRuimte) -> None:
     Zorgt ervoor dat een badkamer een douche heeft indien geen douche of bad aanwezig.
 
     Args:
-        ruimte: De badkamer om te controleren
+        ruimte (EenhedenRuimte): De badkamer om te controleren
     """
     if _heeft_douche_of_bad(ruimte):
         return
@@ -287,7 +289,7 @@ def corrigeer_voorzieningen_eenheid(
     eenheid: EenhedenEenheid,
     *,
     standaard_aanrecht_lengte: int = 1000,
-    standaard_toilet_type: Referentiedata = Installatiesoort.staand_toilet,
+    standaard_toilet_type: InstallatiesoortReferentiedata = Installatiesoort.staand_toilet,
 ) -> None:
     """
     Voegt automatisch missende essentiële voorzieningen toe aan een eenheid.
@@ -295,7 +297,7 @@ def corrigeer_voorzieningen_eenheid(
     Args:
         eenheid (EenhedenEenheid): De eenheid om te controleren en aan te vullen
         standaard_aanrecht_lengte (int): Standaard lengte in mm voor aanrechten zonder lengte
-        standaard_toilet_type (Referentiedata): Type toilet om toe te voegen in toiletruimtes
+        standaard_toilet_type (InstallatiesoortReferentiedata): Type toilet om toe te voegen in toiletruimtes
     """
 
     if not eenheid.ruimten:
