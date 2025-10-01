@@ -81,7 +81,7 @@ class Stelsel:
         Parameters:
             eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
             negeer_stelselgroep (WoningwaarderingstelselgroepReferentiedata | None, optional): Een stelselgroep die moet worden overgeslagen.
-            corrigeer_voorzieningen (bool, optional): Of missende voorzieningen automatisch toegevoegd moeten worden vóór waardering. Standaard True.
+            corrigeer_voorzieningen (bool, optional): Of missende voorzieningen automatisch toegevoegd moeten worden vóór waardering. Standaard False.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
