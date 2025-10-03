@@ -8,6 +8,9 @@ from pathlib import Path
 from loguru import logger
 from pydantic import ValidationError
 
+from woningwaardering.stelsels.gedeelde_logica import (
+    bouwkundige_elementen_naar_installaties,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -53,6 +56,8 @@ for stelsel_naam in stelsels:
                 logger.remove(stdout_id)
 
                 if input_file_path.parent.parent.parent.name == "stelselgroepen":
+                    bouwkundige_elementen_naar_installaties(eenheid_input)
+
                     stelselgroep_naam = input_file_path.parent.parent.name
                     stelselgroep_class = import_module(
                         f"woningwaardering.stelsels.{stelsel_naam}." + stelselgroep_naam

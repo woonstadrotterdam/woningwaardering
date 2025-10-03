@@ -8,6 +8,7 @@ from loguru import logger
 from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
+    EenhedenEenheid,
     EenhedenRuimte,
     Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
@@ -33,8 +34,6 @@ def waardeer_sanitair(
     if ruimte.detail_soort is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.")
         return
-
-    _bouwkundige_elementen_naar_installaties(ruimte)
 
     yield from _waardeer_toiletten(ruimte)
 
@@ -85,30 +84,70 @@ def waardeer_sanitair(
         )
 
 
-def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:
-    ruimte.installaties = ruimte.installaties or []
-    # Backwards compatibiliteit voor bouwkundige elementen
-    for bouwkundigelementdetailsoort, installatiesoort in {
-        Bouwkundigelementdetailsoort.wastafel: Installatiesoort.wastafel,
-        Bouwkundigelementdetailsoort.douche: Installatiesoort.douche,
-        Bouwkundigelementdetailsoort.bad: Installatiesoort.bad,
-        Bouwkundigelementdetailsoort.kast: Installatiesoort.kastruimte,
-        Bouwkundigelementdetailsoort.closetcombinatie: Installatiesoort.staand_toilet,
-        Bouwkundigelementdetailsoort.fontein: Installatiesoort.wastafel,
-    }.items():
-        bouwkundige_elementen = list(
-            get_bouwkundige_elementen(ruimte, bouwkundigelementdetailsoort)
-        )
-        if bouwkundige_elementen:
-            warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een {bouwkundigelementdetailsoort.naam} als bouwkundig element. Dit dient als `Installatiesoort` '{installatiesoort}' op de ruimte onder `installaties` gespecificeerd te worden."
+def bouwkundige_elementen_naar_installaties(
+    eenheid: EenhedenEenheid, voorkom_duplicaten: bool = False
+) -> None:
+    """Converteer bouwkundige elementen naar installaties voor alle ruimten in een eenheid."""
+    for ruimte in eenheid.ruimten or []:
+        ruimte.installaties = ruimte.installaties or []
+        # Backwards compatibiliteit voor bouwkundige elementen
+        for bouwkundigelementdetailsoort, installatiesoort in {
+            Bouwkundigelementdetailsoort.wastafel: Installatiesoort.wastafel,
+            Bouwkundigelementdetailsoort.douche: Installatiesoort.douche,
+            Bouwkundigelementdetailsoort.bad: Installatiesoort.bad,
+            Bouwkundigelementdetailsoort.kast: Installatiesoort.kastruimte,
+            Bouwkundigelementdetailsoort.closetcombinatie: Installatiesoort.staand_toilet,
+            Bouwkundigelementdetailsoort.fontein: Installatiesoort.wastafel,
+        }.items():
+            bouwkundige_elementen = list(
+                get_bouwkundige_elementen(ruimte, bouwkundigelementdetailsoort)
             )
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {bouwkundigelementdetailsoort.naam} wordt als {installatiesoort.naam} toegevoegd aan installaties"
-            )
-            ruimte.installaties.extend(
-                [installatiesoort for _ in bouwkundige_elementen]
-            )
+            if bouwkundige_elementen:
+                aantal_bouwkundige_elementen = len(bouwkundige_elementen)
+                warnings.warn(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {aantal_bouwkundige_elementen}x {bouwkundigelementdetailsoort.naam} als bouwkundig element. Dit dient als `Installatiesoort` '{installatiesoort}' op de ruimte onder `installaties` gespecificeerd te worden."
+                )
+
+                if voorkom_duplicaten:
+                    # Tel hoeveel van deze installatiesoort al aanwezig zijn
+                    bestaande_installaties = (
+                        ruimte.installaties.count(installatiesoort)
+                        if ruimte.installaties
+                        else 0
+                    )
+
+                    # Voeg alleen toe wat nog niet als installatie gespecificeerd is
+                    aantal_toe_te_voegen = max(
+                        0, aantal_bouwkundige_elementen - bestaande_installaties
+                    )
+
+                    if aantal_toe_te_voegen > 0:
+                        logger.info(
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_toe_te_voegen}x {bouwkundigelementdetailsoort.naam} wordt als {installatiesoort.naam} toegevoegd aan installaties"
+                        )
+                        ruimte.installaties.extend(
+                            [installatiesoort for _ in range(aantal_toe_te_voegen)]
+                        )
+                    elif bestaande_installaties >= aantal_bouwkundige_elementen:
+                        logger.info(
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_bouwkundige_elementen}x {bouwkundigelementdetailsoort.naam} als bouwkundig element is al gespecificeerd onder installaties als {installatiesoort.naam}"
+                        )
+                else:
+                    # Voeg alle bouwkundige elementen toe als installaties zonder rekening te houden met bestaande installaties
+                    logger.info(
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_bouwkundige_elementen}x {bouwkundigelementdetailsoort.naam} wordt als {installatiesoort.naam} toegevoegd aan installaties"
+                    )
+                    ruimte.installaties.extend(
+                        [installatiesoort for _ in range(aantal_bouwkundige_elementen)]
+                    )
+
+                # Verwijder de oorspronkelijke bouwkundige elementen
+                if ruimte.bouwkundige_elementen:
+                    ruimte.bouwkundige_elementen = [
+                        element
+                        for element in ruimte.bouwkundige_elementen
+                        if element.detail_soort != bouwkundigelementdetailsoort
+                    ]
 
 
 def _waardeer_toiletten(
