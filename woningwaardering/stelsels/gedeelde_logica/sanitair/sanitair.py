@@ -141,6 +141,14 @@ def bouwkundige_elementen_naar_installaties(
                         [installatiesoort for _ in range(aantal_bouwkundige_elementen)]
                     )
 
+                # Verwijder de oorspronkelijke bouwkundige elementen
+                if ruimte.bouwkundige_elementen:
+                    ruimte.bouwkundige_elementen = [
+                        element
+                        for element in ruimte.bouwkundige_elementen
+                        if element.detail_soort != bouwkundigelementdetailsoort
+                    ]
+
 
 def _waardeer_toiletten(
     ruimte: EenhedenRuimte,
