@@ -9,6 +9,9 @@ import pytest
 from pytest import fail
 
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.gedeelde_logica import (
+    bouwkundige_elementen_naar_installaties,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import naar_tabel, normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
@@ -176,6 +179,7 @@ def assert_stelselgroep_output(
 ):
     eenheid_input, eenheid_output = input_en_output_model
     normaliseer_ruimte_namen(eenheid_input)
+    bouwkundige_elementen_naar_installaties(eenheid_input)
 
     stelselgroep = stelselgroep_class(peildatum=peildatum)
 
@@ -210,6 +214,8 @@ def assert_stelselgroep_specifiek_output(
         stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
     """
     eenheid_input, eenheid_output = specifieke_input_en_output_model
+    bouwkundige_elementen_naar_installaties(eenheid_input)
+
     stelselgroep = stelselgroep_class(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
