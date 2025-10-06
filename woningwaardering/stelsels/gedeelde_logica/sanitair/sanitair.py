@@ -328,10 +328,16 @@ def _waardeer_baden_en_douches(
         Installatiesoort.wastafel: 1.0,
         Installatiesoort.meerpersoonswastafel: 1.5,
         Installatiesoort.douche: 4.0 if zelfstandige_woonruimte else 3.0,
+        Installatiesoort.drempelloze_inrijdouche: 4.0
+        if zelfstandige_woonruimte
+        else 3.0,
         Installatiesoort.bad: 6.0 if zelfstandige_woonruimte else 5.0,
         Installatiesoort.bad_en_douche: 7.0 if zelfstandige_woonruimte else 6.0,
     }
-    aantal_douches = installaties[Installatiesoort.douche]
+    aantal_douches = (
+        installaties[Installatiesoort.douche]
+        + installaties[Installatiesoort.drempelloze_inrijdouche]
+    )
     aantal_baden = installaties[Installatiesoort.bad]
 
     aantal_bad_en_douches = min(aantal_douches, aantal_baden)
@@ -365,6 +371,7 @@ def _waardeer_baden_en_douches(
     for installatiesoort in [
         Installatiesoort.bad,
         Installatiesoort.douche,
+        Installatiesoort.drempelloze_inrijdouche,
     ]:
         aantal = installaties[installatiesoort] - aantal_bad_en_douches
         if aantal > 0:
