@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Huuropzeggingstatus(Enum):
-    aangemaakt = Referentiedata(
+class HuuropzeggingstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Huuropzeggingstatus(Referentiedatasoort):
+    aangemaakt = HuuropzeggingstatusReferentiedata(
         code="AAN",
         naam="Aangemaakt",
     )
@@ -12,7 +16,7 @@ class Huuropzeggingstatus(Enum):
     niet in behandeling genomen.
     """
 
-    afgewezen = Referentiedata(
+    afgewezen = HuuropzeggingstatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -20,7 +24,7 @@ class Huuropzeggingstatus(Enum):
     De huuropzegging voldoet niet aan de voorwaarden en is afgewezen.
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = HuuropzeggingstatusReferentiedata(
         code="GEA",
         naam="Geannuleerd",
     )
@@ -28,7 +32,7 @@ class Huuropzeggingstatus(Enum):
     De huuropzegging is geannuleerd, voordat de beoordeling heeft plaatsgevonden.
     """
 
-    goedgekeurd = Referentiedata(
+    goedgekeurd = HuuropzeggingstatusReferentiedata(
         code="GOE",
         naam="Goedgekeurd",
     )
@@ -36,7 +40,7 @@ class Huuropzeggingstatus(Enum):
     De huuropzegging voldoet aan de voorwaarden en is goedgekeurd.
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = HuuropzeggingstatusReferentiedata(
         code="INB",
         naam="In behandeling",
     )
@@ -44,17 +48,3 @@ class Huuropzeggingstatus(Enum):
     De huuropzegging is geregistreerd en in behandeling genomen, maar nog niet
     beoordeeld.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

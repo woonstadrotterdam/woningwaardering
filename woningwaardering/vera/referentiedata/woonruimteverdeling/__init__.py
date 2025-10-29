@@ -27,7 +27,6 @@ from woningwaardering.vera.referentiedata import (
     Woonsituatiesoort,
 )
 
-
 __all__ = [
     "Aanbiedingdetailstatus",
     "Aanbiedingstatus",

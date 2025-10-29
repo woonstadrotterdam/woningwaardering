@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Onderhoudsverzoekstatus(Enum):
-    afgehandeld = Referentiedata(
+class OnderhoudsverzoekstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Onderhoudsverzoekstatus(Referentiedatasoort):
+    afgehandeld = OnderhoudsverzoekstatusReferentiedata(
         code="AFG",
         naam="Afgehandeld",
     )
@@ -11,7 +15,7 @@ class Onderhoudsverzoekstatus(Enum):
     Het onderhoudsverzoek is volledig afgehandeld
     """
 
-    ter_beoordeling = Referentiedata(
+    ter_beoordeling = OnderhoudsverzoekstatusReferentiedata(
         code="BEO",
         naam="Ter beoordeling",
     )
@@ -21,7 +25,7 @@ class Onderhoudsverzoekstatus(Enum):
     Onderhouden eenheden)
     """
 
-    financieel_afwikkelen = Referentiedata(
+    financieel_afwikkelen = OnderhoudsverzoekstatusReferentiedata(
         code="FIN",
         naam="Financieel afwikkelen",
     )
@@ -30,7 +34,7 @@ class Onderhoudsverzoekstatus(Enum):
     in rekening gebracht worden bij huurders of derden (bijv. verzekering)
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = OnderhoudsverzoekstatusReferentiedata(
         code="GEA",
         naam="Geannuleerd",
     )
@@ -39,7 +43,7 @@ class Onderhoudsverzoekstatus(Enum):
     uitgevoerd.
     """
 
-    in_behandeling = Referentiedata(
+    in_behandeling = OnderhoudsverzoekstatusReferentiedata(
         code="INB",
         naam="In behandeling",
     )
@@ -48,7 +52,7 @@ class Onderhoudsverzoekstatus(Enum):
     afgerond
     """
 
-    geregistreerd = Referentiedata(
+    geregistreerd = OnderhoudsverzoekstatusReferentiedata(
         code="REG",
         naam="Geregistreerd",
     )
@@ -56,7 +60,7 @@ class Onderhoudsverzoekstatus(Enum):
     Het onderzhoudsverzoek is geregistreerd maar nog niet in behandeling genomen.
     """
 
-    technisch_gereed = Referentiedata(
+    technisch_gereed = OnderhoudsverzoekstatusReferentiedata(
         code="TEC",
         naam="Technisch gereed",
     )
@@ -64,17 +68,3 @@ class Onderhoudsverzoekstatus(Enum):
     Het onderhoudsverzoek is technisch afgehandeld en de uitvoering hiervan kan
     beoordeeld worden. Is het onderhoudsverzoek naar tevredenheid uitgevoerd?
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,0 +1,12 @@
+Label,Ondergrens (exclusief),Bovengrens (inclusief),PuntenPerM2
+A++++,None,None,1.0
+A+++,None,None,0.95
+A++,-inf,0.6,0.85
+A+,0.6,0.8,0.75
+A,0.8,1.2,0.65
+B,1.2,1.4,0.50
+C,1.4,1.8,0.35
+D,1.8,2.1,0.20
+E,2.1,2.4,-0.05
+F,2.4,2.7,-0.10
+G,2.7,inf,-0.15

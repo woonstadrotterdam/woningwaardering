@@ -1,0 +1,125 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GVR",
+          "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
+        }
+      },
+      "punten": 11.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_190033",
+            "naam": "Badruimte (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 5.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_190033__wastafel",
+            "naam": "Badruimte - Wastafel (gedeeld met 2)"
+          },
+          "punten": 0.5
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_190033__bad",
+            "naam": "Badruimte - Bad (gedeeld met 2)"
+          },
+          "punten": 3.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad (gedeeld met 2)"
+          },
+          "punten": 0.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Douchewand (gedeeld met 2)"
+          },
+          "punten": 0.63
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Handdoekenradiator (gedeeld met 2)"
+          },
+          "punten": 0.38
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel (gedeeld met 2)"
+          },
+          "punten": 0.5
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "sanitair__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Kastruimte (gedeeld met 2)"
+          },
+          "punten": 0.75
+        },
+        {
+          "criterium": {
+            "id": "sanitair__Space_190033__max_punten",
+            "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte (gedeeld met 2)"
+          },
+          "punten": -0.38
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel (gedeeld met 2)"
+          },
+          "punten": 0.13
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan (gedeeld met 2)"
+          },
+          "punten": 0.13
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan (gedeeld met 2)"
+          },
+          "punten": 0.25
+        },
+        {
+          "criterium": {
+            "id": "sanitair__Space_190033__maximering_punten_voorzieningen",
+            "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche (gedeeld met 2)"
+          },
+          "punten": -0.13
+        }
+      ]
+    }
+  ]
+}

@@ -1,18 +1,22 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.signaleringsoort import (
+    Signaleringsoort,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Signaleringdetailsoort(Enum):
-    agressie = Referentiedata(
+class SignaleringdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Signaleringdetailsoort(Referentiedatasoort):
+    agressie = SignaleringdetailsoortReferentiedata(
         code="AGS",
         naam="Agressie",
-        parent=Referentiedata(
-            code="AGR",
-            naam="Agressie",
-        ),
+        parent=Signaleringsoort.agressie,
     )
 
-    ambulante_begeleiding = Referentiedata(
+    ambulante_begeleiding = SignaleringdetailsoortReferentiedata(
         code="AMB",
         naam="Ambulante begeleiding",
     )
@@ -21,115 +25,68 @@ class Signaleringdetailsoort(Enum):
     blijven functioneren.
     """
 
-    betalingsachterstand = Referentiedata(
+    betalingsachterstand = SignaleringdetailsoortReferentiedata(
         code="BET",
         naam="Betalingsachterstand",
-        parent=Referentiedata(
-            code="SCH",
-            naam="Huurschuld",
-        ),
+        parent=Signaleringsoort.huurschuld,
     )
 
-    bewindvoerder = Referentiedata(
+    bewindvoerder = SignaleringdetailsoortReferentiedata(
         code="BEW",
         naam="Bewindvoerder",
-        parent=Referentiedata(
-            code="SCH",
-            naam="Huurschuld",
-        ),
+        parent=Signaleringsoort.huurschuld,
     )
 
-    brandstichting = Referentiedata(
+    brandstichting = SignaleringdetailsoortReferentiedata(
         code="BRA",
         naam="Brandstichting",
-        parent=Referentiedata(
-            code="AGR",
-            naam="Agressie",
-        ),
+        parent=Signaleringsoort.agressie,
     )
 
-    deurwaarder = Referentiedata(
+    deurwaarder = SignaleringdetailsoortReferentiedata(
         code="DEU",
         naam="Deurwaarder",
-        parent=Referentiedata(
-            code="SCH",
-            naam="Huurschuld",
-        ),
+        parent=Signaleringsoort.huurschuld,
     )
 
-    drugshandel = Referentiedata(
+    drugshandel = SignaleringdetailsoortReferentiedata(
         code="DRU",
         naam="Drugshandel",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
 
-    geluidsoverlast = Referentiedata(
+    geluidsoverlast = SignaleringdetailsoortReferentiedata(
         code="GEL",
         naam="Geluidsoverlast",
-        parent=Referentiedata(
-            code="OVE",
-            naam="Overlast",
-        ),
+        parent=Signaleringsoort.overlast,
     )
 
-    hennepkwekerij = Referentiedata(
+    hennepkwekerij = SignaleringdetailsoortReferentiedata(
         code="HEN",
         naam="Hennepkwekerij",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
 
-    mutatieschade = Referentiedata(
+    mutatieschade = SignaleringdetailsoortReferentiedata(
         code="MUT",
         naam="Mutatieschade",
-        parent=Referentiedata(
-            code="SCH",
-            naam="Huurschuld",
-        ),
+        parent=Signaleringsoort.huurschuld,
     )
 
-    onderverhuur = Referentiedata(
+    onderverhuur = SignaleringdetailsoortReferentiedata(
         code="OND",
         naam="Onderverhuur",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
 
-    prostitutie = Referentiedata(
+    prostitutie = SignaleringdetailsoortReferentiedata(
         code="PRO",
         naam="Prostitutie",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
 
-    vervuiling = Referentiedata(
+    vervuiling = SignaleringdetailsoortReferentiedata(
         code="VER",
         naam="Vervuiling",
-        parent=Referentiedata(
-            code="ONE",
-            naam="Oneigenlijk gebruik woning",
-        ),
+        parent=Signaleringsoort.oneigenlijk_gebruik_woning,
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

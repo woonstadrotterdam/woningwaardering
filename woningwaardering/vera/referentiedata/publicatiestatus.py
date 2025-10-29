@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Publicatiestatus(Enum):
-    in_aanbieding = Referentiedata(
+class PublicatiestatusReferentiedata(Referentiedata):
+    pass
+
+
+class Publicatiestatus(Referentiedatasoort):
+    in_aanbieding = PublicatiestatusReferentiedata(
         code="AAN",
         naam="In aanbieding",
     )
@@ -11,7 +15,7 @@ class Publicatiestatus(Enum):
     Het gepubliceerde vastgoed is in aanbieding.
     """
 
-    afgerond = Referentiedata(
+    afgerond = PublicatiestatusReferentiedata(
         code="AFG",
         naam="Afgerond",
     )
@@ -19,7 +23,7 @@ class Publicatiestatus(Enum):
     De publicatie van het vastgoed is afgerond.
     """
 
-    gepubliceerd = Referentiedata(
+    gepubliceerd = PublicatiestatusReferentiedata(
         code="GEP",
         naam="Gepubliceerd",
     )
@@ -27,7 +31,7 @@ class Publicatiestatus(Enum):
     Het beschikbaar vastgoed is gepubliceerd.
     """
 
-    gereed_voor_publicatie = Referentiedata(
+    gereed_voor_publicatie = PublicatiestatusReferentiedata(
         code="GER",
         naam="Gereed voor publicatie",
     )
@@ -35,7 +39,7 @@ class Publicatiestatus(Enum):
     De publicatie van beschikbaar vastgoed is gereed voor publicatie.
     """
 
-    ingetrokken = Referentiedata(
+    ingetrokken = PublicatiestatusReferentiedata(
         code="ING",
         naam="Ingetrokken",
     )
@@ -43,24 +47,10 @@ class Publicatiestatus(Enum):
     De publicatie van het vastgoed is ingetrokken.
     """
 
-    in_voorbereiding = Referentiedata(
+    in_voorbereiding = PublicatiestatusReferentiedata(
         code="VOO",
         naam="In voorbereiding",
     )
     """
     De publicatie van beschikbaar vastgoed is in voorbereiding.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

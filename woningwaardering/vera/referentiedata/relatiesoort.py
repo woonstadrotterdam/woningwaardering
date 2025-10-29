@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Relatiesoort(Enum):
-    relatiegroep = Referentiedata(
+class RelatiesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Relatiesoort(Referentiedatasoort):
+    relatiegroep = RelatiesoortReferentiedata(
         code="GRO",
         naam="Relatiegroep",
     )
@@ -11,7 +15,7 @@ class Relatiesoort(Enum):
     Een verzameling relaties (bijvoorbeeld een huishouden)
     """
 
-    natuurlijke_persoon = Referentiedata(
+    natuurlijke_persoon = RelatiesoortReferentiedata(
         code="NAT",
         naam="Natuurlijke persoon",
     )
@@ -20,7 +24,7 @@ class Relatiesoort(Enum):
     plichten heeft.
     """
 
-    rechtspersoon = Referentiedata(
+    rechtspersoon = RelatiesoortReferentiedata(
         code="REC",
         naam="Rechtspersoon",
     )
@@ -30,17 +34,3 @@ class Relatiesoort(Enum):
     rechtsverkeer behept met rechten en plichten zoals een natuurlijk persoon dat
     kan doen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

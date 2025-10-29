@@ -1,271 +1,201 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.voorrangsoort import (
+    Voorrangsoort,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Voorrangdetailsoort(Enum):
-    beroep = Referentiedata(
+class VoorrangdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Voorrangdetailsoort(Referentiedatasoort):
+    beroep = VoorrangdetailsoortReferentiedata(
         code="BER",
         naam="Beroep",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Ugrentie wegens een bijzonder beroep in de regio onderwijs, zorg of politie
     """
 
-    dakloos = Referentiedata(
+    dakloos = VoorrangdetailsoortReferentiedata(
         code="DAK",
         naam="(Bijna) dakloos",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     dakloos / calamiteit /brand onbewoonbaar / uitzetting / terugkeer uit buitenland
     """
 
-    gedupeerd = Referentiedata(
+    gedupeerd = VoorrangdetailsoortReferentiedata(
         code="DUP",
         naam="Gedupeerd",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens dupering van woningzoekende bij woningaanbieding
     """
 
-    economisch = Referentiedata(
+    economisch = VoorrangdetailsoortReferentiedata(
         code="ECO",
         naam="Economisch",
-        parent=Referentiedata(
-            code="BIN",
-            naam="Binding",
-        ),
+        parent=Voorrangsoort.binding,
     )
     """
     Economische binding
     """
 
-    ex_gedetineerd = Referentiedata(
+    ex_gedetineerd = VoorrangdetailsoortReferentiedata(
         code="EXD",
         naam="ex-gedetineerd",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens het vrijkomen uit detentie
     """
 
-    financieel = Referentiedata(
+    financieel = VoorrangdetailsoortReferentiedata(
         code="FIN",
         naam="Financieel",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens financiele problemen
     """
 
-    gelijkvloers = Referentiedata(
+    gelijkvloers = VoorrangdetailsoortReferentiedata(
         code="GEL",
         naam="Gelijkvloers",
-        parent=Referentiedata(
-            code="IND",
-            naam="Indicatie",
-        ),
+        parent=Voorrangsoort.indicatie,
     )
     """
     Indicatie voor een gelijkvloerse woning
     """
 
-    geweld_bedreiging_en_of_overlast = Referentiedata(
+    geweld_bedreiging_en_of_overlast = VoorrangdetailsoortReferentiedata(
         code="GEW",
         naam="Geweld bedreiging / overlast",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens overlast uit de omgeving of bedreiging.
     """
 
-    herhuisvesting = Referentiedata(
+    herhuisvesting = VoorrangdetailsoortReferentiedata(
         code="HUI",
         naam="Herhuisvesting",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens (langdurige) renovatie, nieuwbouw of sloop
     """
 
-    kern = Referentiedata(
+    kern = VoorrangdetailsoortReferentiedata(
         code="KRN",
         naam="Kern",
-        parent=Referentiedata(
-            code="BIN",
-            naam="Binding",
-        ),
+        parent=Voorrangsoort.binding,
     )
     """
     Kernbinding
     """
 
-    maatschappelijk = Referentiedata(
+    maatschappelijk = VoorrangdetailsoortReferentiedata(
         code="MAA",
         naam="Maatschappelijk",
-        parent=Referentiedata(
-            code="BIN",
-            naam="Binding",
-        ),
+        parent=Voorrangsoort.binding,
     )
     """
     Maatschappelijke binding
     """
 
-    mantelzorg = Referentiedata(
+    mantelzorg = VoorrangdetailsoortReferentiedata(
         code="MAN",
         naam="Mantelzorg",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens het ontvangen of geven van mantelzorg
     """
 
-    medisch = Referentiedata(
+    medisch = VoorrangdetailsoortReferentiedata(
         code="MED",
         naam="Medisch",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie voor een aangepaste woning op medische gronden
     """
 
-    regio = Referentiedata(
+    regio = VoorrangdetailsoortReferentiedata(
         code="REG",
         naam="Regio",
-        parent=Referentiedata(
-            code="BIN",
-            naam="Binding",
-        ),
+        parent=Voorrangsoort.binding,
     )
     """
     Regionale of regio binding
     """
 
-    relationeel = Referentiedata(
+    relationeel = VoorrangdetailsoortReferentiedata(
         code="REL",
         naam="Relationeel",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Echtscheiding / verbroken relatie / gezinsproblemen /zwangerschap
     """
 
-    rollatorgeschikt = Referentiedata(
+    rollatorgeschikt = VoorrangdetailsoortReferentiedata(
         code="ROL",
         naam="Rollatorgeschikt",
-        parent=Referentiedata(
-            code="IND",
-            naam="Indicatie",
-        ),
+        parent=Voorrangsoort.indicatie,
     )
     """
     Indicatie voor een rollatorgeschikte woning
     """
 
-    rolstoelgeschikt = Referentiedata(
+    rolstoelgeschikt = VoorrangdetailsoortReferentiedata(
         code="RST",
         naam="Rolstoelgeschikt",
-        parent=Referentiedata(
-            code="IND",
-            naam="Indicatie",
-        ),
+        parent=Voorrangsoort.indicatie,
     )
     """
     Indicatie voor een rolstoelgeschikte woning
     """
 
-    servicewoning = Referentiedata(
+    servicewoning = VoorrangdetailsoortReferentiedata(
         code="SER",
         naam="Servicewoning",
-        parent=Referentiedata(
-            code="IND",
-            naam="Indicatie",
-        ),
+        parent=Voorrangsoort.indicatie,
     )
     """
     Woningen bij een zorginstelling of verpleegcentrum.
     """
 
-    sociaal = Referentiedata(
+    sociaal = VoorrangdetailsoortReferentiedata(
         code="SOC",
         naam="Sociaal",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     De woonsituatie is levensontwrichtend of levensbedreigend voor een of meer
     gezinsleden.
     """
 
-    statushouder = Referentiedata(
+    statushouder = VoorrangdetailsoortReferentiedata(
         code="STA",
         naam="Statushouder",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens het verkrijgen van een verblijfsstatus
     """
 
-    uitstroom_maatschappelijke_instelling = Referentiedata(
+    uitstroom_maatschappelijke_instelling = VoorrangdetailsoortReferentiedata(
         code="UIT",
         naam="uitstroom maatschappelijke instelling",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Voorrangsoort.urgentie,
     )
     """
     Urgentie wegens het uitstromen bij een maatschappelijke instelling
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

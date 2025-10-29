@@ -1,38 +1,28 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Debiteurstatus(Enum):
-    actief = Referentiedata(
+class DebiteurstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Debiteurstatus(Referentiedatasoort):
+    actief = DebiteurstatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
 
-    alleen_voor_betalen = Referentiedata(
+    alleen_voor_betalen = DebiteurstatusReferentiedata(
         code="BET",
         naam="Alleen voor betalen",
     )
 
-    geblokkeerd = Referentiedata(
+    geblokkeerd = DebiteurstatusReferentiedata(
         code="GEB",
         naam="Geblokkeerd",
     )
 
-    voorlopig = Referentiedata(
+    voorlopig = DebiteurstatusReferentiedata(
         code="VRL",
         naam="Voorlopig",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

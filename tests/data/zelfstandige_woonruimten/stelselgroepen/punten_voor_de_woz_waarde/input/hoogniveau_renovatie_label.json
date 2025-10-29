@@ -370,8 +370,8 @@
     {
       "id": "Space_82123455",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",
@@ -516,7 +516,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",

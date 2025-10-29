@@ -1,0 +1,94 @@
+site_name: Woningwaardering
+site_author: Tomer Gabay, Ben Verhees, Tiddo Loos
+copyright: "2025, Woonstad Rotterdam"
+repo_url: https://github.com/woonstadrotterdam/woningwaardering
+
+theme:
+  name: material
+  language: nl
+  features:
+    - content.code.copy
+    - content.tabs.link
+    - navigation.expand
+    - navigation.indexes
+    - navigation.instant
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.scrollable
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.share
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/theme-light-dark
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+
+markdown_extensions:
+  - footnotes
+  - github-callouts
+  - markdown.extensions.codehilite
+  - markdown.extensions.extra
+  - markdown.extensions.toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.blocks.tab:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.critic
+  - pymdownx.highlight:
+      use_pygments: true
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tilde
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+  - include-markdown
+  - autorefs
+
+nav:
+  - Introductie:
+    - Overzicht: index.md
+    - Opzet: introductie/opzet.md
+  - Aan de slag:
+    - Aan de slag: aan-de-slag/index.md
+  - Implementatietoelichtingen:
+    - Overzicht: implementatietoelichtingen/index.md
+    - Zelfstandige woonruimten: implementatietoelichtingen/zelfstandige-woonruimten.md
+    - Onzelfstandige woonruimten: implementatietoelichtingen/onzelfstandige-woonruimten.md
+    - Datamodel Uitbreidingen: implementatietoelichtingen/datamodel-uitbreidingen.md
+  - Voor ontwikkelaars:
+    - Installatie: voor-ontwikkelaars/index.md
+    - Naamgeving: voor-ontwikkelaars/naamgeving.md
+    - Releasemanagement: voor-ontwikkelaars/releases.md
+    - Testing: voor-ontwikkelaars/testing.md
+    - Logger guidelines: voor-ontwikkelaars/logging.md
+    - Data: voor-ontwikkelaars/data.md
+ 

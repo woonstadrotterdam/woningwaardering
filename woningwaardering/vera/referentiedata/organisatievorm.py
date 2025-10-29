@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Organisatievorm(Enum):
-    buitenlandse_rechtsvorm = Referentiedata(
+class OrganisatievormReferentiedata(Referentiedata):
+    pass
+
+
+class Organisatievorm(Referentiedatasoort):
+    buitenlandse_rechtsvorm = OrganisatievormReferentiedata(
         code="BUI",
         naam="Buitenlandse rechtsvorm",
     )
@@ -11,16 +15,18 @@ class Organisatievorm(Enum):
     Buitenlandse rechtsvorm  (Handelsregisterwet: art 5,d)
     """
 
-    besloten_vennootschap_met_beperkte_aansprakelijkheid = Referentiedata(
-        code="BV",
-        naam="Besloten vennootschap met beperkte aansprakelijkheid",
+    besloten_vennootschap_met_beperkte_aansprakelijkheid = (
+        OrganisatievormReferentiedata(
+            code="BV",
+            naam="Besloten vennootschap met beperkte aansprakelijkheid",
+        )
     )
     """
     Besloten vennootschap met beperkte aansprakelijkheid (BV)  (Handelsregisterwet: art
     5,a)
     """
 
-    cooperatie = Referentiedata(
+    cooperatie = OrganisatievormReferentiedata(
         code="COO",
         naam="Coöperatie",
     )
@@ -28,7 +34,7 @@ class Organisatievorm(Enum):
     Coöperatie  (Handelsregisterwet: art 5,a)
     """
 
-    commanditaire_vennootschap = Referentiedata(
+    commanditaire_vennootschap = OrganisatievormReferentiedata(
         code="CV",
         naam="Commanditaire vennootschap",
     )
@@ -36,7 +42,7 @@ class Organisatievorm(Enum):
     Commanditaire vennootschap (cv)  (Handelsregisterwet: art 5,a)
     """
 
-    europees_economisch_samenwerkingsverband = Referentiedata(
+    europees_economisch_samenwerkingsverband = OrganisatievormReferentiedata(
         code="EES",
         naam="Europees Economisch Samenwerkingsverband",
     )
@@ -44,7 +50,7 @@ class Organisatievorm(Enum):
     Europees Economisch Samenwerkingsverband  (Handelsregisterwet: art 5,c)
     """
 
-    eenmanszaak = Referentiedata(
+    eenmanszaak = OrganisatievormReferentiedata(
         code="EZ",
         naam="Eenmanszaak",
     )
@@ -52,7 +58,7 @@ class Organisatievorm(Enum):
     Eenmanszaak  (Handelsregisterwet: art 5,b)
     """
 
-    kerkgenootschap = Referentiedata(
+    kerkgenootschap = OrganisatievormReferentiedata(
         code="KERK",
         naam="Kerkgenootschap",
     )
@@ -60,7 +66,7 @@ class Organisatievorm(Enum):
     Kerkgenootschap (Handelsregisterwet: art 1, e)
     """
 
-    maatschap = Referentiedata(
+    maatschap = OrganisatievormReferentiedata(
         code="MTS",
         naam="Maatschap",
     )
@@ -68,7 +74,7 @@ class Organisatievorm(Enum):
     Maatschap  (Handelsregisterwet: art 5,a)
     """
 
-    naamloze_vennootschap = Referentiedata(
+    naamloze_vennootschap = OrganisatievormReferentiedata(
         code="NV",
         naam="Naamloze vennootschap",
     )
@@ -76,7 +82,7 @@ class Organisatievorm(Enum):
     Naamloze vennootschap (NV) (Handelsregisterwet: art 5,a)
     """
 
-    overige_rechtsvorm = Referentiedata(
+    overige_rechtsvorm = OrganisatievormReferentiedata(
         code="OVE",
         naam="Overige rechtsvorm",
     )
@@ -84,7 +90,7 @@ class Organisatievorm(Enum):
     Conform  (Handelsregisterwet: art 5,e)
     """
 
-    onderlinge_waarborgmaatschappij = Referentiedata(
+    onderlinge_waarborgmaatschappij = OrganisatievormReferentiedata(
         code="OW",
         naam="Onderlinge waarborgmaatschappij",
     )
@@ -92,7 +98,7 @@ class Organisatievorm(Enum):
     Onderlinge waarborgmaatschappij  (Handelsregisterwet: art 5,a)
     """
 
-    publiekrechterlijke_rechtspersoon = Referentiedata(
+    publiekrechterlijke_rechtspersoon = OrganisatievormReferentiedata(
         code="PUB",
         naam="Publiekrechterlijke rechtspersoon",
     )
@@ -100,7 +106,7 @@ class Organisatievorm(Enum):
     Publiekrechterlijke rechtspersoon (Handelsregisterwet: art 1, d)
     """
 
-    rederij = Referentiedata(
+    rederij = OrganisatievormReferentiedata(
         code="RED",
         naam="Rederij",
     )
@@ -108,7 +114,7 @@ class Organisatievorm(Enum):
     Rederij  (Handelsregisterwet: art 5,a)
     """
 
-    europese_cooperatieve_vennootschap = Referentiedata(
+    europese_cooperatieve_vennootschap = OrganisatievormReferentiedata(
         code="SCE",
         naam="Europese coöperatieve vennootschap",
     )
@@ -116,7 +122,7 @@ class Organisatievorm(Enum):
     Europese coöperatieve vennootschap (SCE) (Handelsregisterwet: art 5,c)
     """
 
-    europese_naamloze_vennootschap = Referentiedata(
+    europese_naamloze_vennootschap = OrganisatievormReferentiedata(
         code="SE",
         naam="Europese naamloze vennootschap",
     )
@@ -124,7 +130,7 @@ class Organisatievorm(Enum):
     Europese naamloze vennootschap (SE)  (Handelsregisterwet: art 5,c)
     """
 
-    stichting = Referentiedata(
+    stichting = OrganisatievormReferentiedata(
         code="STI",
         naam="Stichting",
     )
@@ -132,7 +138,7 @@ class Organisatievorm(Enum):
     Stichting (Handelsregisterwet: art 5,a)
     """
 
-    vereniging = Referentiedata(
+    vereniging = OrganisatievormReferentiedata(
         code="VER",
         naam="Vereniging",
     )
@@ -140,7 +146,7 @@ class Organisatievorm(Enum):
     Vereniging  (Handelsregisterwet: art 5,a)
     """
 
-    vennootschap_onder_firma = Referentiedata(
+    vennootschap_onder_firma = OrganisatievormReferentiedata(
         code="VOF",
         naam="Vennootschap onder firma",
     )
@@ -148,24 +154,10 @@ class Organisatievorm(Enum):
     Vennootschap onder firma (vof) (Handelsregisterwet: art 5,a)
     """
 
-    vereniging_van_eigenaars = Referentiedata(
+    vereniging_van_eigenaars = OrganisatievormReferentiedata(
         code="VVE",
         naam="Vereniging van eigenaars",
     )
     """
     Vereniging van eigenaars (Handelsregisterwet: art 6, 1, b)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,0 +1,24 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "PBC",
+        "naam": "Parkeerplek buiten behorend bij complex"
+      },
+      "breedte": 3.0,
+      "lengte": 4.0,
+      "oppervlakte": 12.0,
+      "gedeeldMetAantalEenheden": 10,
+      "aantal": 5,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
+}

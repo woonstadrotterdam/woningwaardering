@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Onderhoudsoort(Enum):
-    inspectie = Referentiedata(
+class OnderhoudsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Onderhoudsoort(Referentiedatasoort):
+    inspectie = OnderhoudsoortReferentiedata(
         code="INS",
         naam="Inspectie",
     )
@@ -14,7 +18,7 @@ class Onderhoudsoort(Enum):
     naar aanleiding van een verhuurmutatie.
     """
 
-    mutatie = Referentiedata(
+    mutatie = OnderhoudsoortReferentiedata(
         code="MUT",
         naam="Mutatie",
     )
@@ -23,7 +27,7 @@ class Onderhoudsoort(Enum):
     verhuurmutatie.
     """
 
-    planmatig = Referentiedata(
+    planmatig = OnderhoudsoortReferentiedata(
         code="PLN",
         naam="Planmatig",
     )
@@ -32,7 +36,7 @@ class Onderhoudsoort(Enum):
     goedgekeurd MJO-budget
     """
 
-    projectmatig = Referentiedata(
+    projectmatig = OnderhoudsoortReferentiedata(
         code="PRJ",
         naam="Projectmatig",
     )
@@ -41,7 +45,7 @@ class Onderhoudsoort(Enum):
     investeringsproject zoals verduurzaming, renovatie, etc.
     """
 
-    reparatie = Referentiedata(
+    reparatie = OnderhoudsoortReferentiedata(
         code="REP",
         naam="Reparatie",
     )
@@ -50,7 +54,7 @@ class Onderhoudsoort(Enum):
     geconstateerd defect
     """
 
-    wmo_aanpassing = Referentiedata(
+    wmo_aanpassing = OnderhoudsoortReferentiedata(
         code="WMO",
         naam="WMO Aanpassing",
     )
@@ -59,7 +63,7 @@ class Onderhoudsoort(Enum):
     invaliditeit aanbrengen van WMO-aanpassing)
     """
 
-    woningverbetering = Referentiedata(
+    woningverbetering = OnderhoudsoortReferentiedata(
         code="WOV",
         naam="Woningverbetering",
     )
@@ -68,16 +72,10 @@ class Onderhoudsoort(Enum):
     Voorbeeld is het voortijdig vervangen van de wc-pot door een luxe uiitvoering
     """
 
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent
+    leefbaarheid = OnderhoudsoortReferentiedata(
+        code="LEE",
+        naam="Leefbaarheid",
+    )
+    """
+    Bij benodigde aanpassing van de woning om de leefbaarheid te verhogen
+    """

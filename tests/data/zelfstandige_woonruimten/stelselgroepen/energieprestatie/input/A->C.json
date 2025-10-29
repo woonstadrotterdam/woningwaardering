@@ -1,0 +1,42 @@
+{
+  "id": "123_correctie",
+  "bouwjaar": 1921,
+  "monumenten": [],
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "72.0"
+    }
+  ],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2020-08-01",
+      "einddatum": "2030-08-01",
+      "registratiedatum": "2020-08-01T09:55:37+01:00",
+      "label": {
+        "code": "A",
+        "naam": "A"
+      },
+      "waarde": "1.48"
+    }
+  ]
+}

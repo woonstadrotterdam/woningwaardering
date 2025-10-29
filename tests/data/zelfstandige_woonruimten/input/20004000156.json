@@ -1,15 +1,19 @@
 {
   "id": "20004000156",
   "bouwjaar": 1993,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "adres": {
-    "huisnummer": "379",
+    "huisnummer": "",
     "huisnummerToevoeging": "",
-    "postcode": "3024EB",
-    "straatnaam": "Puntegaalstraat"
+    "postcode": "",
+    "straatnaam": ""
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000360260",
-    "bagIdentificatie": "0599010000360260"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "energieprestaties": [
     {
@@ -34,13 +38,20 @@
   "oppervlakten": [],
   "panden": [
     {
-      "idExtern": "0599100000665539",
+      "idExtern": "",
       "soort": {
         "code": "MGW",
         "naam": "Meergezinswoning"
       }
     }
   ],
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    }
+  ],
+  "datum_afsluiten_huurovereenkomst": "2024-05-29",
   "ruimten": [
     {
       "id": "Space_88554482",
@@ -142,8 +153,8 @@
     {
       "id": "Space_88554489",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "ENT",
@@ -320,8 +331,8 @@
     {
       "id": "Space_88559339",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",

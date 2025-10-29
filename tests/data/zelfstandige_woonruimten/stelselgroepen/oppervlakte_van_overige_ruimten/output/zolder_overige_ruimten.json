@@ -16,6 +16,7 @@
         {
           "aantal": 10.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_1",
             "naam": "Zolder overige ruimte met trap",
             "meeteenheid": {
               "code": "M2",
@@ -26,6 +27,7 @@
         {
           "aantal": 10.0,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_3",
             "naam": "Zolder overige ruimte met vlizo trap",
             "meeteenheid": {
               "code": "M2",
@@ -35,18 +37,12 @@
         },
         {
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_3__correctie_zolder_zonder_vaste_trap",
             "naam": "Correctie: zolder zonder vaste trap"
           },
           "punten": -5.0
         }
       ]
     }
-  ],
-  "maximaleHuur": 228.86,
-  "punten": 10.0,
-  "stelsel": {
-    "code": "ZEL",
-    "naam": "Zelfstandige woonruimten"
-  },
-  "maximaleHuurInclusiefOpslag": 228.86
+  ]
 }

@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidprijsconditie(Enum):
-    exclusief_servicekosten = Referentiedata(
+class EenheidprijsconditieReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheidprijsconditie(Referentiedatasoort):
+    exclusief_servicekosten = EenheidprijsconditieReferentiedata(
         code="ESE",
         naam="Exclusief servicekosten",
     )
@@ -11,7 +15,7 @@ class Eenheidprijsconditie(Enum):
     De vraagprijs is exclusief servicekosten.
     """
 
-    inclusief_servicekosten = Referentiedata(
+    inclusief_servicekosten = EenheidprijsconditieReferentiedata(
         code="ISE",
         naam="Inclusief servicekosten",
     )
@@ -19,7 +23,7 @@ class Eenheidprijsconditie(Enum):
     De vraagprijs is inclusief servicekosten.
     """
 
-    inclusief_stookkosten = Referentiedata(
+    inclusief_stookkosten = EenheidprijsconditieReferentiedata(
         code="IST",
         naam="Inclusief stookkosten",
     )
@@ -27,7 +31,7 @@ class Eenheidprijsconditie(Enum):
     De vraagprijs is inclusief kosten (voorschot) voor de verwarming van het vastgoed.
     """
 
-    kosten_koper = Referentiedata(
+    kosten_koper = EenheidprijsconditieReferentiedata(
         code="KKO",
         naam="Kosten Koper",
     )
@@ -36,7 +40,7 @@ class Eenheidprijsconditie(Enum):
     onroerend goed overdracht zijn voor de koper.
     """
 
-    vrij_op_naam = Referentiedata(
+    vrij_op_naam = EenheidprijsconditieReferentiedata(
         code="VON",
         naam="Vrij op naam",
     )
@@ -45,17 +49,3 @@ class Eenheidprijsconditie(Enum):
     betreft hier de BTW of overdrachtsbelasting, de kadastrale kosten en de
     notariskosten voor de transportakte.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

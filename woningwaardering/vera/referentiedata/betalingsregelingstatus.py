@@ -1,59 +1,56 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Betalingsregelingstatus(Enum):
-    aangevraagd = Referentiedata(
+class BetalingsregelingstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Betalingsregelingstatus(Referentiedatasoort):
+    aangevraagd = BetalingsregelingstatusReferentiedata(
         code="AAN",
         naam="Aangevraagd",
     )
     """
-    Ook wel aangemaakt.
+    Aangemaakt, maar nog niet toegekend of in werking getreden.
     """
 
-    actief = Referentiedata(
+    actief = BetalingsregelingstatusReferentiedata(
         code="ACT",
         naam="Actief",
     )
     """
-    Toegekende betalingsregeling die loopt.
+    Toegekend en momenteel lopend.
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = BetalingsregelingstatusReferentiedata(
         code="ANN",
         naam="Geannuleerd",
     )
     """
-    Tussentijds gestopte regeling.
+    Tussentijds gestopt voordat deze volledig was afgerond.
     """
 
-    beeindigd = Referentiedata(
+    beeindigd = BetalingsregelingstatusReferentiedata(
         code="BEE",
         naam="Beëindigd",
     )
     """
-    Ook wel afgerond. Alle betalingsverplichtingen zijn voldaan.
+    Volledig afgerond, alle betalingsverplichtingen zijn voldaan.
     """
 
-    bevroren = Referentiedata(
+    bevroren = BetalingsregelingstatusReferentiedata(
         code="BEV",
         naam="Bevroren",
     )
     """
-    Tussentijds bevroren betalingsregeling omdat het niet mogelijk is om te voldoen aan
-    de regeling.
+    Tijdelijk opgeschort vanwege onmogelijkheid om aan de verplichtingen te voldoen.
     """
 
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent
+    verwijderd = BetalingsregelingstatusReferentiedata(
+        code="VER",
+        naam="Verwijderd",
+    )
+    """
+    Verwijderd omdat deze niet was toegekend of verkeerd of onterecht was vastgelegd.
+    """

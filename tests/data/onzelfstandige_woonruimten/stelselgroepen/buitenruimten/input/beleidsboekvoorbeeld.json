@@ -1,0 +1,60 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_108017427",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Klein balkon",
+      "inhoud": 14.4272,
+      "oppervlakte": 1,
+      "lengte": 2,
+      "breedte": 0.5,
+      "verwarmd": false
+    },
+    {
+      "id": "Space_108017429",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "inhoud": 14.4272,
+      "oppervlakte": 4.5,
+      "verwarmd": false,
+      "gemeenschappelijk": true,
+      "lengte": 3,
+      "breedte": 1.5,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    },
+    {
+      "id": "Space_108017427",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "DAK",
+        "naam": "Dakterras"
+      },
+      "naam": "Dakterras",
+      "inhoud": 14.4272,
+      "oppervlakte": 52,
+      "verwarmd": false,
+      "gemeenschappelijk": true,
+      "lengte": 8,
+      "breedte": 6.5,
+      "gedeeldMetAantalEenheden": 5,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    }
+  ]
+}

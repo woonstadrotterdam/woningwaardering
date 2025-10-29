@@ -1,0 +1,27 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 4.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "bijzondere_voorzieningen__laadpalen",
+            "naam": "Laadpalen"
+          },
+          "punten": 4.0
+        }
+      ]
+    }
+  ]
+}

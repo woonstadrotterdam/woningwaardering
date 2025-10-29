@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Huurklasse(Enum):
-    betaalbaar = Referentiedata(
+class HuurklasseReferentiedata(Referentiedata):
+    pass
+
+
+class Huurklasse(Referentiedatasoort):
+    betaalbaar = HuurklasseReferentiedata(
         code="BET",
         naam="Betaalbaar",
     )
@@ -12,7 +16,7 @@ class Huurklasse(Enum):
     kwaliteitskortingsgrens en onder de aftoppingsgrens (hoog) ligt.
     """
 
-    boven_huurtoeslaggrens = Referentiedata(
+    boven_huurtoeslaggrens = HuurklasseReferentiedata(
         code="BOV",
         naam="Boven huurtoeslaggrens",
     )
@@ -21,7 +25,7 @@ class Huurklasse(Enum):
     (liberalisatiegrens) ligt.
     """
 
-    duur = Referentiedata(
+    duur = HuurklasseReferentiedata(
         code="DUU",
         naam="Duur",
     )
@@ -30,7 +34,7 @@ class Huurklasse(Enum):
     (hoog) en onder de huurtoeslaggrens ligt.
     """
 
-    goedkoop = Referentiedata(
+    goedkoop = HuurklasseReferentiedata(
         code="GOE",
         naam="Goedkoop",
     )
@@ -38,17 +42,3 @@ class Huurklasse(Enum):
     Eenheid waarvan de netto huur (kale huur) per maand onder de kwaliteitskortingsgrens
     ligt.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

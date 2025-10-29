@@ -16,7 +16,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Bad"
+            "id": "sanitair__Space_171081__bad",
+            "naam": "Badkamer - Bad"
           },
           "punten": 6.0
         }

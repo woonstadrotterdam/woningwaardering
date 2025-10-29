@@ -1,18 +1,22 @@
 {
   "id": "81065000089",
   "bouwjaar": 1921,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "adres": {
-    "straatnaam": "Oostendamstraat",
-    "huisnummer": "145",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3073NE",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000310211",
-    "bagIdentificatie": "0599010000310211"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "klimaatbeheersing": [
     {
@@ -92,8 +96,8 @@
     {
       "id": "Space_29474431",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",
@@ -162,8 +166,8 @@
     {
       "id": "Space_29489753",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -185,7 +189,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",
@@ -238,8 +242,8 @@
     {
       "id": "Space_29489754",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",
@@ -257,8 +261,8 @@
     {
       "id": "Space_29474435",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "ENT",
@@ -313,8 +317,8 @@
     {
       "id": "Space_29474432",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",

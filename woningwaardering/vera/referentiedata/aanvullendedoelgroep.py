@@ -1,22 +1,26 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.doelgroep import (
+    Doelgroep,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Aanvullendedoelgroep(Enum):
-    buitenlandse_studenten = Referentiedata(
+class AanvullendedoelgroepReferentiedata(Referentiedata):
+    pass
+
+
+class Aanvullendedoelgroep(Referentiedatasoort):
+    buitenlandse_studenten = AanvullendedoelgroepReferentiedata(
         code="BSTU",
         naam="Buitenlandse studenten",
-        parent=Referentiedata(
-            code="STU",
-            naam="Studenten",
-        ),
+        parent=Doelgroep.studenten,
     )
     """
     Woonruimte is bestemd voor en/of huurder is een uit het buitenland afkomstige
     student aan een instelling voor hoger of wetenschappelijk onderwijs
     """
 
-    ex_dak_en_thuislozen = Referentiedata(
+    ex_dak_en_thuislozen = AanvullendedoelgroepReferentiedata(
         code="DAK",
         naam="ex-dak- en thuislozen",
     )
@@ -25,16 +29,18 @@ class Aanvullendedoelgroep(Enum):
     (behoefte aan) begeleiding.
     """
 
-    personen_met_een_geringe_ergonomische_beperking = Referentiedata(
-        code="GEB",
-        naam="Personen met een Geringe Ergonomische Beperking",
+    personen_met_een_geringe_ergonomische_beperking = (
+        AanvullendedoelgroepReferentiedata(
+            code="GEB",
+            naam="Personen met een Geringe Ergonomische Beperking",
+        )
     )
     """
     Woonruimte is bestemd voor mensen met een geringe ergonomische beperking. Ook wel
     GEB-woningen genoemd.
     """
 
-    ex_gedetineerden = Referentiedata(
+    ex_gedetineerden = AanvullendedoelgroepReferentiedata(
         code="GED",
         naam="ex-gedetineerden",
     )
@@ -43,7 +49,7 @@ class Aanvullendedoelgroep(Enum):
     (behoefte aan) begeleiding.
     """
 
-    ggz_patienten = Referentiedata(
+    ggz_patienten = AanvullendedoelgroepReferentiedata(
         code="GGZ",
         naam="GGZ-Patiënten",
     )
@@ -52,7 +58,7 @@ class Aanvullendedoelgroep(Enum):
     bij en/of begeleid door een GGZ instelling.
     """
 
-    kunstenaars = Referentiedata(
+    kunstenaars = AanvullendedoelgroepReferentiedata(
         code="KUN",
         naam="Kunstenaars",
     )
@@ -62,7 +68,7 @@ class Aanvullendedoelgroep(Enum):
     beschikbaar).
     """
 
-    lichamelijk_beperkten = Referentiedata(
+    lichamelijk_beperkten = AanvullendedoelgroepReferentiedata(
         code="LIC",
         naam="Lichamelijk beperkten",
     )
@@ -71,7 +77,7 @@ class Aanvullendedoelgroep(Enum):
     (motorisch, zintuigelijk en/of chronisch fysiologisch van aard).
     """
 
-    psychiatrische_patienten = Referentiedata(
+    psychiatrische_patienten = AanvullendedoelgroepReferentiedata(
         code="PSY",
         naam="(ex-) psychiatrische patiënten",
     )
@@ -80,7 +86,7 @@ class Aanvullendedoelgroep(Enum):
     eventueel met (behoefte aan) begeleiding.
     """
 
-    skaeve_huse = Referentiedata(
+    skaeve_huse = AanvullendedoelgroepReferentiedata(
         code="SKA",
         naam="Skaeve Huse",
     )
@@ -89,7 +95,7 @@ class Aanvullendedoelgroep(Enum):
     Dit zijn bijvoorbeeld moeilijk te huisvesten drank- of drugsverslaafden.
     """
 
-    statushouders = Referentiedata(
+    statushouders = AanvullendedoelgroepReferentiedata(
         code="STH",
         naam="Statushouders",
     )
@@ -98,7 +104,7 @@ class Aanvullendedoelgroep(Enum):
     (statushouder of vergunninghouder)
     """
 
-    verstandelijk_beperkten = Referentiedata(
+    verstandelijk_beperkten = AanvullendedoelgroepReferentiedata(
         code="VBE",
         naam="Verstandelijk beperkten",
     )
@@ -106,7 +112,7 @@ class Aanvullendedoelgroep(Enum):
     Woonuimte is bestemd voor en/of huurder heeft een verstandelijke beperking.
     """
 
-    verslaafden = Referentiedata(
+    verslaafden = AanvullendedoelgroepReferentiedata(
         code="VER",
         naam="(ex)-verslaafden",
     )
@@ -115,24 +121,10 @@ class Aanvullendedoelgroep(Enum):
     (behoefte aan) begeleiding.
     """
 
-    zorgindicatie = Referentiedata(
+    zorgindicatie = AanvullendedoelgroepReferentiedata(
         code="ZIN",
         naam="Zorgindicatie",
     )
     """
     Woonruimte is bestemd voor en/of huurder heeft een zorgindicatie.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

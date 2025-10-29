@@ -1,0 +1,85 @@
+{
+  "id": "1",
+  "ruimten": [
+    {
+      "id": "E",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true
+    },
+    {
+      "id": "C",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige Ruimte"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true
+    },
+    {
+      "id": "D",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige Ruimte"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true
+    },
+    {
+      "id": "F",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige Ruimte"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true
+    },
+    {
+      "id": "G",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige Ruimte"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 3,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true
+    }
+  ]
+}

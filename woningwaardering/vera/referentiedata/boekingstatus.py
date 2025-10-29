@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Boekingstatus(Enum):
-    gefiatteerd = Referentiedata(
+class BoekingstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Boekingstatus(Referentiedatasoort):
+    gefiatteerd = BoekingstatusReferentiedata(
         code="FIA",
         naam="Gefiatteerd",
     )
@@ -11,7 +15,7 @@ class Boekingstatus(Enum):
     Boeking is definitief en niet meer wijzigbaar.
     """
 
-    historisch = Referentiedata(
+    historisch = BoekingstatusReferentiedata(
         code="HIS",
         naam="Historisch",
     )
@@ -19,24 +23,10 @@ class Boekingstatus(Enum):
     Boeking is onderdeel van een afgesloten administratieve periode of boekjaar.
     """
 
-    voorlopig = Referentiedata(
+    voorlopig = BoekingstatusReferentiedata(
         code="VRL",
         naam="Voorlopig",
     )
     """
     Boeking is niet definitief en kan worden gewijzigd of verwijderd.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

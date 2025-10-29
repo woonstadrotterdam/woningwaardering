@@ -1,6 +1,10 @@
 {
   "id": "23109000031",
   "bouwjaar": 1922,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "COL",
@@ -8,10 +12,10 @@
     }
   ],
   "adres": {
-    "straatnaam": "Justus van Effenstraat",
-    "huisnummer": "122",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3027TM",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
@@ -57,8 +61,8 @@
     ]
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000318897",
-    "bagIdentificatie": "0599010000318897"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "wozEenheden": [
     {
@@ -72,6 +76,7 @@
       "naam": "Rijksmonument"
     }
   ],
+  "datum_afsluiten_huurovereenkomst": "2019-11-18",
   "ruimten": [
     {
       "id": "Space_74227409",
@@ -90,7 +95,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "02",
-        "omschrijving": "tweede verdieping"
+        "omschrijving": "Tweede verdieping"
       }
     },
     {
@@ -110,14 +115,14 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "02",
-        "omschrijving": "tweede verdieping"
+        "omschrijving": "Tweede verdieping"
       }
     },
     {
       "id": "Space_74227558",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "ENT",
@@ -130,7 +135,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "02",
-        "omschrijving": "tweede verdieping"
+        "omschrijving": "Tweede verdieping"
       }
     },
     {
@@ -149,8 +154,8 @@
       "verwarmd": true,
       "bouwkundigeElementen": [
         {
-          "id": "Closetcombinatie_120545798",
-          "id_bimmodel": "3YEo1INuzC2BEoDDa0V2nj",
+          "id": "Closetcombinatie_139398918",
+          "id_bimmodel": "3YEo1INuzC2BEoDDa0V2mJ",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -165,25 +170,25 @@
           }
         },
         {
-          "id": "Aanrecht_120545799",
-          "id_bimmodel": "3YEo1INuzC2BEoDDa0V2mJ",
-          "naam": "Aanrecht",
+          "id": "Fontein_139398919",
+          "id_bimmodel": "3YEo1INuzC2BEoDDa0V2nj",
+          "naam": "Fontein",
           "soort": {
-            "code": "KEU",
-            "naam": "Keuken voorziening"
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
           },
           "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
+            "code": "FON",
+            "naam": "Fontein"
           },
           "extraAttributen": {
-            "ifcSoort": "IfcFurniture"
+            "ifcSoort": "IfcSanitaryTerminal"
           }
         }
       ],
       "bouwlaag": {
         "nummer": "02",
-        "omschrijving": "tweede verdieping"
+        "omschrijving": "Tweede verdieping"
       }
     },
     {
@@ -203,7 +208,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "02",
-        "omschrijving": "tweede verdieping"
+        "omschrijving": "Tweede verdieping"
       }
     },
     {
@@ -223,7 +228,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "02",
-        "omschrijving": "tweede verdieping"
+        "omschrijving": "Tweede verdieping"
       }
     },
     {
@@ -258,41 +263,41 @@
           }
         },
         {
-          "id": "Wastafel_120546271",
+          "id": "Douche_139399416",
           "id_bimmodel": "0RKQxtlv90RvJesGGu10Pq",
-          "naam": "Wastafel",
+          "naam": "Douche",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
           },
           "detailSoort": {
-            "code": "WAS",
-            "naam": "Wastafel"
+            "code": "DOU",
+            "naam": "Douche"
           },
           "extraAttributen": {
             "ifcSoort": "IfcSanitaryTerminal"
           }
         },
         {
-          "id": "Aanrecht_120546272",
+          "id": "Closetcombinatie_139399417",
           "id_bimmodel": "0RKQxtlv90RvJesGGu10Pp",
-          "naam": "Aanrecht",
+          "naam": "Closetcombinatie",
           "soort": {
-            "code": "KEU",
-            "naam": "Keuken voorziening"
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
           },
           "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
+            "code": "CLO",
+            "naam": "Closetcombinatie (Toilet)"
           },
           "extraAttributen": {
-            "ifcSoort": "IfcFurniture"
+            "ifcSoort": "IfcSanitaryTerminal"
           }
         }
       ],
       "bouwlaag": {
         "nummer": "03",
-        "omschrijving": "derde verdieping"
+        "omschrijving": "Derde verdieping"
       }
     },
     {
@@ -314,7 +319,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "03",
-        "omschrijving": "derde verdieping"
+        "omschrijving": "Derde verdieping"
       }
     },
     {
@@ -334,7 +339,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "03",
-        "omschrijving": "derde verdieping"
+        "omschrijving": "Derde verdieping"
       }
     },
     {
@@ -354,7 +359,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "03",
-        "omschrijving": "derde verdieping"
+        "omschrijving": "Derde verdieping"
       }
     },
     {
@@ -374,14 +379,14 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "03",
-        "omschrijving": "derde verdieping"
+        "omschrijving": "Derde verdieping"
       }
     },
     {
       "id": "Space_74236196",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",
@@ -394,7 +399,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "03",
-        "omschrijving": "derde verdieping"
+        "omschrijving": "Derde verdieping"
       }
     },
     {
@@ -414,7 +419,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "03",
-        "omschrijving": "derde verdieping"
+        "omschrijving": "Derde verdieping"
       }
     },
     {
@@ -434,7 +439,7 @@
       "bouwkundigeElementen": [],
       "bouwlaag": {
         "nummer": "03",
-        "omschrijving": "derde verdieping"
+        "omschrijving": "Derde verdieping"
       }
     },
     {
@@ -453,25 +458,27 @@
       "verwarmd": true,
       "bouwkundigeElementen": [
         {
-          "id": "Douche_120546757",
+          "id": "Aanrecht_139399905",
           "id_bimmodel": "2y8ddfDbb5f8tpBj7Tnoqx",
-          "naam": "Douche",
+          "naam": "Aanrecht",
           "soort": {
-            "code": "SAN",
-            "naam": "Sanitaire voorziening"
+            "code": "KEU",
+            "naam": "Keuken voorziening"
           },
           "detailSoort": {
-            "code": "DOU",
-            "naam": "Douche"
+            "code": "AAN",
+            "naam": "Aanrecht"
           },
+          "lengte": 1500,
           "extraAttributen": {
-            "ifcSoort": "IfcSanitaryTerminal"
+            "lengteAanrecht": 1500,
+            "ifcSoort": "IfcFurniture"
           }
         }
       ],
       "bouwlaag": {
         "nummer": "03",
-        "omschrijving": "derde verdieping"
+        "omschrijving": "Derde verdieping"
       }
     }
   ],

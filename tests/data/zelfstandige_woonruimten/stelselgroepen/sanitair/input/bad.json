@@ -1,17 +1,23 @@
 {
   "ruimten": [
     {
-      "bouwkundigeElementen": [
+      "id": "Space_171081",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "installaties": [
         {
-          "naam": "Bad",
-          "soort": {
-            "code": "SAN",
-            "naam": "Sanitaire voorziening"
-          },
-          "detailSoort": {
-            "code": "BAD",
-            "naam": "Bad"
-          }
+          "code": "BAD",
+          "naam": "Bad"
         }
       ]
     }

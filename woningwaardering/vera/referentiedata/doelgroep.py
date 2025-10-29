@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Doelgroep(Enum):
-    persoon = Referentiedata(
+class DoelgroepReferentiedata(Referentiedata):
+    pass
+
+
+class Doelgroep(Referentiedatasoort):
+    persoon = DoelgroepReferentiedata(
         code="EEN",
         naam="Persoon",
     )
@@ -11,7 +15,7 @@ class Doelgroep(Enum):
     Woonruimte is bestemd voor en/of huurder vormt een eenpersoonshuishouden
     """
 
-    gezin = Referentiedata(
+    gezin = DoelgroepReferentiedata(
         code="GEZ",
         naam="Gezin",
     )
@@ -20,7 +24,7 @@ class Doelgroep(Enum):
     verzorging en opvoeding van één of meer kinderen.
     """
 
-    huishouden_zonder_kinderen = Referentiedata(
+    huishouden_zonder_kinderen = DoelgroepReferentiedata(
         code="HZO",
         naam="Huishouden zonder kinderen",
     )
@@ -30,7 +34,7 @@ class Doelgroep(Enum):
     verzorgen.
     """
 
-    jongeren = Referentiedata(
+    jongeren = DoelgroepReferentiedata(
         code="JON",
         naam="Jongeren",
     )
@@ -39,7 +43,7 @@ class Doelgroep(Enum):
     specifieke maximum leeftijd
     """
 
-    senioren = Referentiedata(
+    senioren = DoelgroepReferentiedata(
         code="SEN",
         naam="Senioren",
     )
@@ -48,7 +52,7 @@ class Doelgroep(Enum):
     specifieke minimum leeftijd
     """
 
-    starter = Referentiedata(
+    starter = DoelgroepReferentiedata(
         code="STA",
         naam="Starter",
     )
@@ -56,7 +60,7 @@ class Doelgroep(Enum):
     Woonruimte is bestemd voor en/of huurder betreft een starter op de woningmarkt
     """
 
-    studenten = Referentiedata(
+    studenten = DoelgroepReferentiedata(
         code="STU",
         naam="Studenten",
     )
@@ -65,7 +69,7 @@ class Doelgroep(Enum):
     studiefinanciering, studeert voltijds of gaat promoveren).
     """
 
-    zorg = Referentiedata(
+    zorg = DoelgroepReferentiedata(
         code="ZOR",
         naam="Zorg",
     )
@@ -76,16 +80,11 @@ class Doelgroep(Enum):
     serviceflats.
     """
 
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent
+    zorgdragers = DoelgroepReferentiedata(
+        code="ZDR",
+        naam="Zorgdragers",
+    )
+    """
+    Woonruimte is bestemd voor iemand die is geselecteerd op maatschappelijke motivatie/
+    goede buur.
+    """

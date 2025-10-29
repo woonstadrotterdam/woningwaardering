@@ -16,7 +16,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "naam": "Bad en Douche in zelfde ruimte"
+            "id": "sanitair__Space_658265__bad_en_douche",
+            "naam": "Badkamer - Bad en douche"
           },
           "punten": 7.0
         }

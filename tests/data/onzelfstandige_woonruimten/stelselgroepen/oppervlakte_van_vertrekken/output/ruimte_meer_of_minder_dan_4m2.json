@@ -1,0 +1,58 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
+        }
+      },
+      "punten": 6.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_901101",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 4.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_539495",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__totaal__prive",
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

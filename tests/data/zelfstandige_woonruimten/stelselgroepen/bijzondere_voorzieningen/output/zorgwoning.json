@@ -1,0 +1,26 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 6.75,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "bijzondere_voorzieningen__zorgwoning_puntenverhoging",
+            "naam": "Zorgwoning 35% puntenverhoging"
+          },
+          "punten": 6.65
+        }
+      ]
+    }
+  ]
+}

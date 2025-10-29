@@ -11,7 +11,9 @@
     "huisnummer": "44",
     "huisnummer_toevoeging": "",
     "postcode": "3012CJ",
-    "woonplaats": { "naam": "ROTTERDAM" }
+    "woonplaats": {
+      "naam": "ROTTERDAM"
+    }
   },
   "adresseerbaarObjectBasisregistratie": {
     "id": "0599010000320510",
@@ -335,8 +337,8 @@
     {
       "id": "Space_82123455",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",
@@ -481,7 +483,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",

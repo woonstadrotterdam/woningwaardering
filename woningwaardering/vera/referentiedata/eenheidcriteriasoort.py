@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidcriteriasoort(Enum):
-    selectie = Referentiedata(
+class EenheidcriteriasoortReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheidcriteriasoort(Referentiedatasoort):
+    selectie = EenheidcriteriasoortReferentiedata(
         code="SEL",
         naam="Selectie",
     )
@@ -12,7 +16,7 @@ class Eenheidcriteriasoort(Enum):
     de eenheid te bepalen.
     """
 
-    sortering = Referentiedata(
+    sortering = EenheidcriteriasoortReferentiedata(
         code="SOR",
         naam="Sortering",
     )
@@ -20,17 +24,3 @@ class Eenheidcriteriasoort(Enum):
     Sorteercriteria die worden gebruikt om de positie van een woningzoekende voor de
     eenheid te bepalen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

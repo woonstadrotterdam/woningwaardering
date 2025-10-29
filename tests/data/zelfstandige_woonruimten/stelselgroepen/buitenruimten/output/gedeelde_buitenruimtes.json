@@ -1,0 +1,73 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 3.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "id": "buitenruimten__Space_108017427__gedeeld_met__2__adressen",
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__gedeeld_met__2__adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.25
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "buitenruimten__Space_108017428__gedeeld_met__3__adressen",
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__gedeeld_met__3__adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "id": "buitenruimten__totaal__gedeeld_met__2__adressen",
+            "naam": "Totaal (gedeeld met 2 eenheden)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.25
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "buitenruimten__totaal__gedeeld_met__3__adressen",
+            "naam": "Totaal (gedeeld met 3 eenheden)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.5
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Betaalgegevensoort(Enum):
-    bankrekening = Referentiedata(
+class BetaalgegevensoortReferentiedata(Referentiedata):
+    pass
+
+
+class Betaalgegevensoort(Referentiedatasoort):
+    bankrekening = BetaalgegevensoortReferentiedata(
         code="BAN",
         naam="Bankrekening",
     )
@@ -12,7 +16,7 @@ class Betaalgegevensoort(Enum):
     bankrekening.
     """
 
-    creditcard = Referentiedata(
+    creditcard = BetaalgegevensoortReferentiedata(
         code="CRE",
         naam="Creditcard",
     )
@@ -21,7 +25,7 @@ class Betaalgegevensoort(Enum):
     card.
     """
 
-    paypal_account = Referentiedata(
+    paypal_account = BetaalgegevensoortReferentiedata(
         code="PAY",
         naam="Paypal account",
     )
@@ -30,7 +34,7 @@ class Betaalgegevensoort(Enum):
     account.
     """
 
-    transfermate = Referentiedata(
+    transfermate = BetaalgegevensoortReferentiedata(
         code="TRA",
         naam="TransferMate",
     )
@@ -38,17 +42,3 @@ class Betaalgegevensoort(Enum):
     Het betaalgegeven van een relatie, behorende bij een overeenkomst,  is een
     TransferMate account.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

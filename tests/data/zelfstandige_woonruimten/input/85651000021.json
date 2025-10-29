@@ -1,6 +1,10 @@
 {
   "id": "85651000021",
   "bouwjaar": 1897,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "IND",
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Atjehstraat",
-    "huisnummer": "47",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "d",
-    "postcode": "3072ZB",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000078889",
-    "bagIdentificatie": "0599010000078889"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -238,8 +242,8 @@
     {
       "id": "Space_91559671",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "GAN",
@@ -262,7 +266,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",

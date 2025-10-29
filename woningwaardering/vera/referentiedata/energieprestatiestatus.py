@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Energieprestatiestatus(Enum):
-    definitief = Referentiedata(
+class EnergieprestatiestatusReferentiedata(Referentiedata):
+    pass
+
+
+class Energieprestatiestatus(Referentiedatasoort):
+    definitief = EnergieprestatiestatusReferentiedata(
         code="DEF",
         naam="Definitief",
     )
@@ -12,25 +16,11 @@ class Energieprestatiestatus(Enum):
     energieprestatie, wat leidt tot een officieel geldig label.
     """
 
-    voorlopig = Referentiedata(
+    voorlopig = EnergieprestatiestatusReferentiedata(
         code="VOO",
         naam="Voorlopig",
     )
     """
-    Een voorlopige energieprestatie wordt ook wel &#39;pré-label&#39; genoemd en is een op basis
+    Een voorlopige energieprestatie wordt ook wel 'pré-label' genoemd en is een op basis
     van woningkenmerken afgeleide (theoretische) prestatie
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

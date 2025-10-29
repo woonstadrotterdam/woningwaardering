@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Zaaktypesoort(Enum):
-    leefbaarheid = Referentiedata(
+class ZaaktypesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Zaaktypesoort(Referentiedatasoort):
+    leefbaarheid = ZaaktypesoortReferentiedata(
         code="LEE",
         naam="Leefbaarheid",
     )
@@ -11,7 +15,7 @@ class Zaaktypesoort(Enum):
     Op initiatief van de corporatie verbeteren van de buurt
     """
 
-    omgevingsoverlast = Referentiedata(
+    omgevingsoverlast = ZaaktypesoortReferentiedata(
         code="OMG",
         naam="Omgevingsoverlast",
     )
@@ -19,7 +23,7 @@ class Zaaktypesoort(Enum):
     Overlast in de omgeving
     """
 
-    klacht_over_organisatie = Referentiedata(
+    klacht_over_organisatie = ZaaktypesoortReferentiedata(
         code="ORG",
         naam="Klacht over organisatie",
     )
@@ -27,7 +31,7 @@ class Zaaktypesoort(Enum):
     Klachten over de corporatie als organisatie
     """
 
-    sociale_melding = Referentiedata(
+    sociale_melding = ZaaktypesoortReferentiedata(
         code="SOC",
         naam="Sociale melding",
     )
@@ -35,24 +39,10 @@ class Zaaktypesoort(Enum):
     Overige sociale gerelateerde meldingen
     """
 
-    woonfraude = Referentiedata(
+    woonfraude = ZaaktypesoortReferentiedata(
         code="WOO",
         naam="Woonfraude",
     )
     """
     Fraude door bewoner
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

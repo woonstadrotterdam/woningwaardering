@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Verantwoordingregime(Enum):
-    administratieve_scheiding = Referentiedata(
+class VerantwoordingregimeReferentiedata(Referentiedata):
+    pass
+
+
+class Verantwoordingregime(Referentiedatasoort):
+    administratieve_scheiding = VerantwoordingregimeReferentiedata(
         code="ADM",
         naam="Administratieve scheiding",
     )
@@ -12,7 +16,7 @@ class Verantwoordingregime(Enum):
     gescheiden
     """
 
-    hybride = Referentiedata(
+    hybride = VerantwoordingregimeReferentiedata(
         code="HYB",
         naam="Hybride",
     )
@@ -21,7 +25,7 @@ class Verantwoordingregime(Enum):
     dochtervennootschap, terwijl ook niet-DAEB bezit achterblijft in de TI.
     """
 
-    juridische_scheiding = Referentiedata(
+    juridische_scheiding = VerantwoordingregimeReferentiedata(
         code="JUR",
         naam="Juridische scheiding",
     )
@@ -30,7 +34,7 @@ class Verantwoordingregime(Enum):
     entiteiten ondergebracht, elk met een eigen financiële administratie
     """
 
-    verlicht_regime = Referentiedata(
+    verlicht_regime = VerantwoordingregimeReferentiedata(
         code="VER",
         naam="Verlicht regime",
     )
@@ -38,17 +42,3 @@ class Verantwoordingregime(Enum):
     De corporatie voldoet aan de voorwaarden waaronder geen gescheiden administraties
     voor DAEB- en niet-DAEB activiteiten gevoerd hoeven te worden.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

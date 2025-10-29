@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Brandwerendheidscore(Enum):
-    brandwerendheidscore_15_minuten = Referentiedata(
+class BrandwerendheidscoreReferentiedata(Referentiedata):
+    pass
+
+
+class Brandwerendheidscore(Referentiedatasoort):
+    brandwerendheidscore_15_minuten = BrandwerendheidscoreReferentiedata(
         code="15",
         naam="15 minuten",
     )
@@ -11,7 +15,7 @@ class Brandwerendheidscore(Enum):
     15 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_20_minuten = Referentiedata(
+    brandwerendheidscore_20_minuten = BrandwerendheidscoreReferentiedata(
         code="20",
         naam="20 minuten",
     )
@@ -19,7 +23,7 @@ class Brandwerendheidscore(Enum):
     20 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_30_minuten = Referentiedata(
+    brandwerendheidscore_30_minuten = BrandwerendheidscoreReferentiedata(
         code="30",
         naam="30 minuten",
     )
@@ -27,7 +31,7 @@ class Brandwerendheidscore(Enum):
     30 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_45_minuten = Referentiedata(
+    brandwerendheidscore_45_minuten = BrandwerendheidscoreReferentiedata(
         code="45",
         naam="45 minuten",
     )
@@ -35,7 +39,7 @@ class Brandwerendheidscore(Enum):
     45 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_60_minuten = Referentiedata(
+    brandwerendheidscore_60_minuten = BrandwerendheidscoreReferentiedata(
         code="60",
         naam="60 minuten",
     )
@@ -43,7 +47,7 @@ class Brandwerendheidscore(Enum):
     60 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_90_minuten = Referentiedata(
+    brandwerendheidscore_90_minuten = BrandwerendheidscoreReferentiedata(
         code="90",
         naam="90 minuten",
     )
@@ -51,7 +55,7 @@ class Brandwerendheidscore(Enum):
     90 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_120_minuten = Referentiedata(
+    brandwerendheidscore_120_minuten = BrandwerendheidscoreReferentiedata(
         code="120",
         naam="120 minuten",
     )
@@ -59,7 +63,7 @@ class Brandwerendheidscore(Enum):
     120 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_180_minuten = Referentiedata(
+    brandwerendheidscore_180_minuten = BrandwerendheidscoreReferentiedata(
         code="180",
         naam="180 minuten",
     )
@@ -67,7 +71,7 @@ class Brandwerendheidscore(Enum):
     180 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_240_minuten = Referentiedata(
+    brandwerendheidscore_240_minuten = BrandwerendheidscoreReferentiedata(
         code="240",
         naam="240 minuten",
     )
@@ -75,24 +79,10 @@ class Brandwerendheidscore(Enum):
     240 minuten brandwerendheid (Aedes ILS)
     """
 
-    brandwerendheidscore_360_minuten = Referentiedata(
+    brandwerendheidscore_360_minuten = BrandwerendheidscoreReferentiedata(
         code="360",
         naam="360 minuten",
     )
     """
     360 minuten brandwerendheid (Aedes ILS)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

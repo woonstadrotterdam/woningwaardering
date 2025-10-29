@@ -39,6 +39,7 @@ from woningwaardering.vera.referentiedata import (
     Pandsoort,
     Prestatieafspraak,
     Provincie,
+    Rechtvanopstal,
     Ruimtedetailsoort,
     Ruimteligging,
     Ruimtesoort,
@@ -49,7 +50,6 @@ from woningwaardering.vera.referentiedata import (
     Woonvorm,
     Zekerheidverpandingsoort,
 )
-
 
 __all__ = [
     "Aanvullendedoelgroep",
@@ -92,6 +92,7 @@ __all__ = [
     "Pandsoort",
     "Prestatieafspraak",
     "Provincie",
+    "Rechtvanopstal",
     "Ruimtedetailsoort",
     "Ruimteligging",
     "Ruimtesoort",

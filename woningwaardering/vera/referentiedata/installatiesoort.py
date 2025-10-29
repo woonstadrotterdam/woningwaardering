@@ -1,9 +1,51 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Installatiesoort(Enum):
-    inbouw_afzuiginstallatie = Referentiedata(
+class InstallatiesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Installatiesoort(Referentiedatasoort):
+    aanbelfunctie_met_video_en_audioverbinding = InstallatiesoortReferentiedata(
+        code="ABF",
+        naam="Aanbelfunctie met video- en audioverbinding",
+    )
+    """
+    Een aanbelfunctie met video- en audioverbinding waarbij de voordeur automatisch kan
+    worden geopend vanuit de woning wordt gewaardeerd met 0,25 punt. Hieronder wordt
+    een systeem verstaan dat tweewegcommunicatie mogelijk maakt met beeld en geluid
+    tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er
+    tevens sprake te zijn van de mogelijkheid tot het openen van de
+    (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang
+    geeft tot het complex waarvan de woning onderdeel uitmaakt.
+    """
+
+    elektrische_gordijnen = InstallatiesoortReferentiedata(
+        code="EGV",
+        naam="Elektrische gordijnen",
+    )
+    """
+    Installatie van domotica voor elektrische gordijnen.
+    """
+
+    spraakgestuurde_apparaten = InstallatiesoortReferentiedata(
+        code="SPR",
+        naam="Spraakgestuurde apparaten",
+    )
+    """
+    Installatie van domotica voor spraakgestuurde apparaten (licht,verwarming,deuren).
+    """
+
+    noodoproepsysteem = InstallatiesoortReferentiedata(
+        code="NPS",
+        naam="Noodoproepsysteem",
+    )
+    """
+    Installatie voor noodoproepen
+    """
+
+    inbouw_afzuiginstallatie = InstallatiesoortReferentiedata(
         code="IAF",
         naam="Inbouw afzuiginstallatie",
     )
@@ -14,7 +56,7 @@ class Installatiesoort(Enum):
     kookinstallatie zijn, als een in het aanrecht geïntegreerd afzuigsysteem.
     """
 
-    inbouw_kookplaat_inductie = Referentiedata(
+    inbouw_kookplaat_inductie = InstallatiesoortReferentiedata(
         code="IKI",
         naam="Inbouw kookplaat inductie",
     )
@@ -25,7 +67,7 @@ class Installatiesoort(Enum):
     energie-efficiëntie in vergelijking met traditionele kookplaten.
     """
 
-    inbouw_kookplaat_keramisch = Referentiedata(
+    inbouw_kookplaat_keramisch = InstallatiesoortReferentiedata(
         code="IKK",
         naam="Inbouw kookplaat keramisch",
     )
@@ -36,7 +78,7 @@ class Installatiesoort(Enum):
     schoon te maken is, maar trager opwarmt dan inductie.
     """
 
-    inbouw_kookplaat_gas = Referentiedata(
+    inbouw_kookplaat_gas = InstallatiesoortReferentiedata(
         code="IKG",
         naam="Inbouw kookplaat gas",
     )
@@ -47,7 +89,26 @@ class Installatiesoort(Enum):
     kookgerei, maar vereist gasaanvoer en ventilatie.
     """
 
-    inbouw_koelkast = Referentiedata(
+    onderrijdbare_kookplaat = InstallatiesoortReferentiedata(
+        code="ORK",
+        naam="Onderrijdbare kookplaat",
+    )
+    """
+    Type kookplaat dat voldoende vrije ruimte onder het kookgedeelte biedt, zodat een
+    gebruiker met een rolstoel er eenvouding onder kan rijden.
+    """
+
+    oplaadpunt = InstallatiesoortReferentiedata(
+        code="OPL",
+        naam="Oplaadpunt",
+    )
+    """
+    Oplaadpunt waar een auto aan gekoppeld kan worden om te op te laden. Het betreft
+    hier niet de laadpaal maar het oplaadpunt (er kunnen meerdere oplaadpunten
+    beschikbaar zijn op een laadpaal
+    """
+
+    inbouw_koelkast = InstallatiesoortReferentiedata(
         code="IKO",
         naam="Inbouw koelkast",
     )
@@ -58,7 +119,7 @@ class Installatiesoort(Enum):
     uitstraling in de keuken.
     """
 
-    inbouw_vrieskast = Referentiedata(
+    inbouw_vrieskast = InstallatiesoortReferentiedata(
         code="IVR",
         naam="Inbouw vrieskast",
     )
@@ -69,7 +130,18 @@ class Installatiesoort(Enum):
     uniforme uitstraling in de keuken.
     """
 
-    inbouw_oven_elektrisch = Referentiedata(
+    inbouw_koelvriescombinatie = InstallatiesoortReferentiedata(
+        code="IKV",
+        naam="Inbouw koelvriescombinatie",
+    )
+    """
+    Een inbouw koelvriescombinatie is een keukenapparaat dat zowel een koelkast als een
+    vriesgedeelte combineert. Het wordt achter een keukenkastdeur geplaatst, zorgt
+    voor efficiënte voedselkoeling en -opslag en biedt een gestroomlijnde, uniforme
+    uitstraling in de keuken.
+    """
+
+    inbouw_oven_elektrisch = InstallatiesoortReferentiedata(
         code="IOE",
         naam="Inbouw oven elektrisch",
     )
@@ -77,10 +149,10 @@ class Installatiesoort(Enum):
     Een inbouw elektrische oven is een keukenapparaat dat naadloos in een keukenkast
     wordt geïntegreerd. Het gebruikt elektriciteit om gerechten gelijkmatig te
     bakken en braden, biedt nauwkeurige temperatuurregeling, en heeft verschillende
-    programma&#39;s voor diverse kookmethoden.
+    programma's voor diverse kookmethoden.
     """
 
-    inbouw_oven_gas = Referentiedata(
+    inbouw_oven_gas = InstallatiesoortReferentiedata(
         code="IOG",
         naam="Inbouw oven gas",
     )
@@ -91,7 +163,7 @@ class Installatiesoort(Enum):
     vereist gasaanvoer.
     """
 
-    inbouw_magnetron = Referentiedata(
+    inbouw_magnetron = InstallatiesoortReferentiedata(
         code="IMA",
         naam="Inbouw magnetron",
     )
@@ -102,7 +174,18 @@ class Installatiesoort(Enum):
     uitstraling in de keuken.
     """
 
-    inbouw_vaatwasmachine = Referentiedata(
+    inbouw_combi_magnetron_en_of_oven = InstallatiesoortReferentiedata(
+        code="ICM",
+        naam="Inbouw combi magnetron/oven",
+    )
+    """
+    Een inbouw combimagnetron/oven is een keukenapparaat dat zowel magnetron- als
+    ovenfuncties combineert. Het is ontworpen om naadloos in een keukenkast te
+    worden geïntegreerd en biedt veelzijdigheid voor bakken, braden, grillen en snel
+    opwarmen. Dit bespaart ruimte en biedt flexibiliteit in de keuken.
+    """
+
+    inbouw_vaatwasmachine = InstallatiesoortReferentiedata(
         code="IVA",
         naam="Inbouw vaatwasmachine",
     )
@@ -113,15 +196,50 @@ class Installatiesoort(Enum):
     uitstraling van de keuken.
     """
 
-    extra_keukenkastruimte_boven_het_minimum = Referentiedata(
+    extra_keukenkastruimte_boven_het_minimum = InstallatiesoortReferentiedata(
         code="EKA",
         naam="Extra keukenkastruimte boven het minimum",
     )
     """
-    per 60 cm breedte, met een minimum van 60 cm hoogte
+    per 60 cm breedte, met een minimum van 60 cm hoogte.
     """
 
-    eenhandsmengkraan = Referentiedata(
+    verlaagde_keuken = InstallatiesoortReferentiedata(
+        code="VKE",
+        naam="Verlaagde keuken",
+    )
+    """
+    Een keuken met werkbladen en kastjes op een hoogte van 85 cm voor
+    rolstoelgebruikers.
+    """
+
+    verhoogde_keuken = InstallatiesoortReferentiedata(
+        code="VHK",
+        naam="Verhoogde keuken",
+    )
+    """
+    Keuken waarvan het werkblad en/of de keukenkasten hoger zijn geplaatst dan de
+    standaardhoogte De werkbladen en kastjes zijn hoger dan 95 cm.
+    """
+
+    onderrijdbare_spoelbak = InstallatiesoortReferentiedata(
+        code="KSP",
+        naam="Onderrijdbare spoelbak",
+    )
+    """
+    Type spoelbak dat voldoende vrije ruimte onder de spoelbak biedt, waardoor een
+    gebruiker met een rolstoel of ander hulpmiddel er gemakkelijjk onder kan rijden.
+    """
+
+    uitschuifbare_of_kantelbare_keukenkastjes = InstallatiesoortReferentiedata(
+        code="UKK",
+        naam="Uitschuifbare of kantelbare keukenkastjes",
+    )
+    """
+    Uitschuifbare of kantelbare keukenkastjes t.b.v. rolstoelgebruikers.
+    """
+
+    eenhandsmengkraan = InstallatiesoortReferentiedata(
         code="EHM",
         naam="Éénhandsmengkraan",
     )
@@ -132,7 +250,7 @@ class Installatiesoort(Enum):
     elke keuken of badkamer.
     """
 
-    thermostatische_mengkraan = Referentiedata(
+    thermostatische_mengkraan = InstallatiesoortReferentiedata(
         code="TME",
         naam="Thermostatische mengkraan",
     )
@@ -143,7 +261,7 @@ class Installatiesoort(Enum):
     of keuken.
     """
 
-    kokend_waterfunctie = Referentiedata(
+    kokend_waterfunctie = InstallatiesoortReferentiedata(
         code="KWA",
         naam="Kokend waterfunctie",
     )
@@ -151,10 +269,10 @@ class Installatiesoort(Enum):
     De kokend waterfunctie levert direct kokend water uit een kraan, zonder koken op het
     fornuis. Het biedt gemak en tijdsbesparing voor het bereiden van thee, koffie,
     en andere warme dranken, en verhoogt de efficiëntie in de keuken. Al dan niet
-    apart of in aanvulling op de kraan
+    apart of in aanvulling op de kraan.
     """
 
-    staand_toilet = Referentiedata(
+    staand_toilet = InstallatiesoortReferentiedata(
         code="STO",
         naam="Staand Toilet",
     )
@@ -167,7 +285,7 @@ class Installatiesoort(Enum):
     niet in aanmerking voor waardering.
     """
 
-    hangend_toilet = Referentiedata(
+    hangend_toilet = InstallatiesoortReferentiedata(
         code="HTO",
         naam="Hangend toilet",
     )
@@ -180,7 +298,17 @@ class Installatiesoort(Enum):
     toiletruimten en badkamers komen niet in aanmerking voor waardering.
     """
 
-    wastafel = Referentiedata(
+    verhoogd_toilet = InstallatiesoortReferentiedata(
+        code="VTI",
+        naam="Verhoogd toilet",
+    )
+    """
+    Een toilet dat hoger is geplaatst dan de standaardtoiletten. Dit maakt het zitten en
+    opstaan gemakkelijker, vooral voor ouderen, lange mensen, mensen met beperkte
+    mobiliteit or lichamelijke beperking.
+    """
+
+    wastafel = InstallatiesoortReferentiedata(
         code="WAS",
         naam="Wastafel",
     )
@@ -196,7 +324,7 @@ class Installatiesoort(Enum):
     keer per vertrek of overige ruimte, m.u.v. de badkamer.
     """
 
-    meerpersoonswastafel = Referentiedata(
+    meerpersoonswastafel = InstallatiesoortReferentiedata(
         code="MPW",
         naam="Meerpersoonswastafel",
     )
@@ -210,7 +338,7 @@ class Installatiesoort(Enum):
     afzonderlijk gewaardeerd.
     """
 
-    douche = Referentiedata(
+    douche = InstallatiesoortReferentiedata(
         code="DOU",
         naam="Douche",
     )
@@ -227,7 +355,7 @@ class Installatiesoort(Enum):
     douchecabine ingenomen oppervlakte.
     """
 
-    bad = Referentiedata(
+    bad = InstallatiesoortReferentiedata(
         code="BAD",
         naam="Bad",
     )
@@ -241,7 +369,7 @@ class Installatiesoort(Enum):
     douchegarnituur niet afzonderlijk geteld.
     """
 
-    bad_en_douche = Referentiedata(
+    bad_en_douche = InstallatiesoortReferentiedata(
         code="BDO",
         naam="Bad en douche",
     )
@@ -250,7 +378,7 @@ class Installatiesoort(Enum):
     aangebracht, geldt een afwijkende waardering.
     """
 
-    bubbelfunctie_van_het_bad = Referentiedata(
+    bubbelfunctie_van_het_bad = InstallatiesoortReferentiedata(
         code="BUB",
         naam="Bubbelfunctie van het bad",
     )
@@ -261,7 +389,25 @@ class Installatiesoort(Enum):
     bieden.
     """
 
-    douchewand = Referentiedata(
+    steunbeugels_voor_sanitaire_ruimtes = InstallatiesoortReferentiedata(
+        code="SSR",
+        naam="Steunbeugels voor sanitaire ruimtes",
+    )
+    """
+    Steunbeugels die in sanitaire ruimtes, zoals badkamers en toiletten, zijn
+    geïnstalleerd om extra ondersteuning te bieden voor mensen met een beperking of
+    mobiliteitsproblemen.
+    """
+
+    drempelloze_inrijdouche = InstallatiesoortReferentiedata(
+        code="DRD",
+        naam="Drempelloze inrijdouche",
+    )
+    """
+    Een drempelloze, ruime inrijdouche t.b.v. rolstoelgebruikers.
+    """
+
+    douchewand = InstallatiesoortReferentiedata(
         code="DOW",
         naam="Douchewand",
     )
@@ -274,7 +420,7 @@ class Installatiesoort(Enum):
     worden) niet.
     """
 
-    handdoekenradiator = Referentiedata(
+    handdoekenradiator = InstallatiesoortReferentiedata(
         code="HRA",
         naam="Handdoekenradiator",
     )
@@ -285,7 +431,7 @@ class Installatiesoort(Enum):
     voor een aangename temperatuur.
     """
 
-    ingebouwd_kastje_met_in_of_opgebouwde_wastafel = Referentiedata(
+    ingebouwd_kastje_met_in_of_opgebouwde_wastafel = InstallatiesoortReferentiedata(
         code="IKW",
         naam="Ingebouwd kastje met in- of opgebouwde wastafel",
     )
@@ -295,7 +441,7 @@ class Installatiesoort(Enum):
     een gestroomlijnde uitstraling en praktische opslag in badkamers of keukens.
     """
 
-    kastruimte = Referentiedata(
+    kastruimte = InstallatiesoortReferentiedata(
         code="KAS",
         naam="Kastruimte",
     )
@@ -303,7 +449,7 @@ class Installatiesoort(Enum):
     Kastruimte met een minimale breedte van 40cm, en minimale hoogte van 40cm.
     """
 
-    stopcontact_bij_wastafel = Referentiedata(
+    stopcontact_bij_wastafel = InstallatiesoortReferentiedata(
         code="STW",
         naam="Stopcontact bij wastafel",
     )
@@ -311,17 +457,3 @@ class Installatiesoort(Enum):
     Stopcontact bij de wastafel. Maximaal twee per wastafel worden meegeteld in de
     waardering.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

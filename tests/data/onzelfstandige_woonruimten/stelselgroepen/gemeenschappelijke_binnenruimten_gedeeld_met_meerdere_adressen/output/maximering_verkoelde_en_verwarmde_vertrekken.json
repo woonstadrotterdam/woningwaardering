@@ -1,0 +1,151 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GBA",
+          "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
+        }
+      },
+      "punten": 22.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 20.0,
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
+            "naam": "Woonkamer: Vertrek",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 5.0
+        },
+        {
+          "aantal": 20.0,
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
+            "naam": "Keuken: Vertrek",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 5.0
+        },
+        {
+          "aantal": 20.0,
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
+            "naam": "Keuken: Vertrek",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 5.0
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
+            "naam": "Woonkamer: Verkoelde en verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+            }
+          },
+          "punten": 0.75
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
+            "naam": "Keuken: Verkoelde en verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+            }
+          },
+          "punten": 0.75
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
+            "naam": "Keuken: Verkoelde en verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+            }
+          },
+          "punten": 0.75
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
+            "naam": "Keuken: Maximaal 2 extra punten voor verkoelde en verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+            }
+          },
+          "punten": -0.25
+        },
+        {
+          "aantal": 3001.0,
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
+            "naam": "Keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 2.5
+        },
+        {
+          "aantal": 3001.0,
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
+            "naam": "Keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 2.5
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen",
+            "naam": "Totaal (gedeeld met 2 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 22.0
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+          },
+          "punten": 22.0
+        }
+      ]
+    }
+  ]
+}

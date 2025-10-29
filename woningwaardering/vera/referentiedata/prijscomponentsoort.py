@@ -1,18 +1,22 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Prijscomponentsoort(Enum):
-    dienstencomponent = Referentiedata(
+class PrijscomponentsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Prijscomponentsoort(Referentiedatasoort):
+    dienstencomponent = PrijscomponentsoortReferentiedata(
         code="DIE",
         naam="Dienstencomponent",
     )
     """
-    Let op: niet te verwarren met prijscomponentdetailsoort &#39;Dienst- en
-    recreatieruimten&#39;. Die laatste is een (subsidiabele) Servicekosten component.
+    Let op: niet te verwarren met prijscomponentdetailsoort 'Dienst- en
+    recreatieruimten'. Die laatste is een (subsidiabele) Servicekosten component.
     """
 
-    eenmalig = Referentiedata(
+    eenmalig = PrijscomponentsoortReferentiedata(
         code="EEN",
         naam="Eenmalig",
     )
@@ -20,7 +24,7 @@ class Prijscomponentsoort(Enum):
     Eenmalige kosten, bijv. administratiekosten afsluiten huurovereenkomst
     """
 
-    huuraanpassing = Referentiedata(
+    huuraanpassing = PrijscomponentsoortReferentiedata(
         code="HUA",
         naam="Huuraanpassing",
     )
@@ -28,7 +32,7 @@ class Prijscomponentsoort(Enum):
     Aanpassingen zoals, korting, compensatie, opslag, etc.
     """
 
-    aankoopprijs = Referentiedata(
+    aankoopprijs = PrijscomponentsoortReferentiedata(
         code="KOO",
         naam="Aankoopprijs",
     )
@@ -36,7 +40,7 @@ class Prijscomponentsoort(Enum):
     Prijs van de aankoop
     """
 
-    netto_huur = Referentiedata(
+    netto_huur = PrijscomponentsoortReferentiedata(
         code="NET",
         naam="Netto Huur",
     )
@@ -45,7 +49,7 @@ class Prijscomponentsoort(Enum):
     prijscomponentdetailsoorten) die tot de netto huur wordt gerekend.
     """
 
-    parkeren = Referentiedata(
+    parkeren = PrijscomponentsoortReferentiedata(
         code="PAR",
         naam="Parkeren",
     )
@@ -56,7 +60,7 @@ class Prijscomponentsoort(Enum):
     Netto Huur in combinatie met een prijscomponentdetailsoort.
     """
 
-    service = Referentiedata(
+    service = PrijscomponentsoortReferentiedata(
         code="SER",
         naam="Service",
     )
@@ -64,29 +68,15 @@ class Prijscomponentsoort(Enum):
     Aanvullende kosten zoals: huismeester, glasfonds, rioolreiniging, etc.
     """
 
-    starterslening = Referentiedata(
+    starterslening = PrijscomponentsoortReferentiedata(
         code="STA",
         naam="Starterslening",
     )
 
-    verbruik = Referentiedata(
+    verbruik = PrijscomponentsoortReferentiedata(
         code="VER",
         naam="Verbruik",
     )
     """
     Water, Warmte, Electriciteit, etc.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

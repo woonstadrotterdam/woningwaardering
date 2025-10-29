@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Maatschappelijklabel(Enum):
-    daeb = Referentiedata(
+class MaatschappelijklabelReferentiedata(Referentiedata):
+    pass
+
+
+class Maatschappelijklabel(Referentiedatasoort):
+    daeb = MaatschappelijklabelReferentiedata(
         code="DAE",
         naam="DAEB",
     )
@@ -15,7 +19,7 @@ class Maatschappelijklabel(Enum):
     als DAEB verantwoord worden.
     """
 
-    geconsolideerde_niet_daeb_verbinding = Referentiedata(
+    geconsolideerde_niet_daeb_verbinding = MaatschappelijklabelReferentiedata(
         code="GNDV",
         naam="Geconsolideerde NIET-DAEB verbinding",
     )
@@ -24,7 +28,7 @@ class Maatschappelijklabel(Enum):
     consolidatiebedrijf is, waarbinnen NIET-DAEB activiteiten worden verricht.
     """
 
-    niet_daeb = Referentiedata(
+    niet_daeb = MaatschappelijklabelReferentiedata(
         code="NDA",
         naam="NIET-DAEB",
     )
@@ -35,17 +39,3 @@ class Maatschappelijklabel(Enum):
     huurovereenkomst. Als attribuut van de klasse FinancieelBedrijf: Geeft aan of de
     bedrijfsactiviteiten als NIET-DAEB verantwoord worden.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

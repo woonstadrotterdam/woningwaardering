@@ -1,0 +1,46 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 1.5,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__Slaapkamer",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken",
+            "naam": "Verkoelde en verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+          },
+          "punten": 1.5
+        }
+      ]
+    }
+  ]
+}

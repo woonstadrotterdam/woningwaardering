@@ -1,29 +1,33 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidinterieur(Enum):
-    gemeubileerd = Referentiedata(
+class EenheidinterieurReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheidinterieur(Referentiedatasoort):
+    gemeubileerd = EenheidinterieurReferentiedata(
         code="GEM",
         naam="Gemeubileerd",
     )
 
-    gestoffeerd = Referentiedata(
+    gestoffeerd = EenheidinterieurReferentiedata(
         code="GES",
         naam="Gestoffeerd",
     )
 
-    houten_vloer = Referentiedata(
+    houten_vloer = EenheidinterieurReferentiedata(
         code="HOU",
         naam="Houten vloer",
     )
 
-    laminaat = Referentiedata(
+    laminaat = EenheidinterieurReferentiedata(
         code="LAM",
         naam="Laminaat",
     )
 
-    plavuizen = Referentiedata(
+    plavuizen = EenheidinterieurReferentiedata(
         code="PLA",
         naam="Plavuizen",
     )
@@ -31,26 +35,22 @@ class Eenheidinterieur(Enum):
     Plavuizen of tegels
     """
 
-    vloerbedekking = Referentiedata(
+    pvc_vloer = EenheidinterieurReferentiedata(
+        code="PVC",
+        naam="Pvc vloer",
+    )
+    """
+    Een PVC-vloer is een vloerbedekking gemaakt van polyvinylchloride (PVC), een
+    synthetisch materiaal dat bekend staat om zijn duurzaamheid, waterbestendigheid
+    en veelzijdigheid.
+    """
+
+    vloerbedekking = EenheidinterieurReferentiedata(
         code="VLB",
         naam="Vloerbedekking",
     )
 
-    zelf_inrichten = Referentiedata(
+    zelf_inrichten = EenheidinterieurReferentiedata(
         code="ZEL",
         naam="Zelf inrichten",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

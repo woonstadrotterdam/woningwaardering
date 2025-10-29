@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Afletterstatus(Enum):
-    deels_afgeletterd = Referentiedata(
+class AfletterstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Afletterstatus(Referentiedatasoort):
+    deels_afgeletterd = AfletterstatusReferentiedata(
         code="DEE",
         naam="Deels afgeletterd",
     )
@@ -15,7 +19,7 @@ class Afletterstatus(Enum):
     worden.
     """
 
-    niet_afgeletterd = Referentiedata(
+    niet_afgeletterd = AfletterstatusReferentiedata(
         code="NIE",
         naam="Niet afgeletterd",
     )
@@ -25,7 +29,7 @@ class Afletterstatus(Enum):
     niet gekoppeld is aan een vordering.
     """
 
-    volledig_afgeletterd = Referentiedata(
+    volledig_afgeletterd = AfletterstatusReferentiedata(
         code="VOL",
         naam="Volledig afgeletterd",
     )
@@ -34,17 +38,3 @@ class Afletterstatus(Enum):
     in dat er geen openstaand saldo meer is. Voor ontvangsten betekent dit dat de
     ontvangst volledig is afgeletterd tegen vordering(en).
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

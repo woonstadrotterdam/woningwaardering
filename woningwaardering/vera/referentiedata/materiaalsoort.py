@@ -1,98 +1,88 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Materiaalsoort(Enum):
-    beton = Referentiedata(
+class MateriaalsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Materiaalsoort(Referentiedatasoort):
+    beton = MateriaalsoortReferentiedata(
         code="BET",
         naam="Beton",
     )
 
-    bitumen = Referentiedata(
+    bitumen = MateriaalsoortReferentiedata(
         code="BIT",
         naam="Bitumen",
     )
 
-    cement = Referentiedata(
+    cement = MateriaalsoortReferentiedata(
         code="CEM",
         naam="Cement",
     )
 
-    gips = Referentiedata(
+    gips = MateriaalsoortReferentiedata(
         code="GIP",
         naam="Gips",
     )
 
-    glas = Referentiedata(
+    glas = MateriaalsoortReferentiedata(
         code="GLA",
         naam="Glas",
     )
 
-    grondstof = Referentiedata(
+    grondstof = MateriaalsoortReferentiedata(
         code="GRO",
         naam="Grondstof",
     )
 
-    hout = Referentiedata(
+    hout = MateriaalsoortReferentiedata(
         code="HOU",
         naam="Hout",
     )
 
-    isolatie = Referentiedata(
+    isolatie = MateriaalsoortReferentiedata(
         code="ISO",
         naam="Isolatie",
     )
 
-    kunststof = Referentiedata(
+    kunststof = MateriaalsoortReferentiedata(
         code="KUN",
         naam="Kunststof",
     )
 
-    metaal = Referentiedata(
+    metaal = MateriaalsoortReferentiedata(
         code="MET",
         naam="Metaal",
     )
 
-    natuursteen = Referentiedata(
+    natuursteen = MateriaalsoortReferentiedata(
         code="NAT",
         naam="Natuursteen",
     )
 
-    ntb = Referentiedata(
+    ntb = MateriaalsoortReferentiedata(
         code="NTB",
         naam="Ntb",
     )
 
-    organisch = Referentiedata(
+    organisch = MateriaalsoortReferentiedata(
         code="ORG",
         naam="Organisch",
     )
 
-    rubber = Referentiedata(
+    rubber = MateriaalsoortReferentiedata(
         code="RUB",
         naam="Rubber",
     )
 
-    samengesteld = Referentiedata(
+    samengesteld = MateriaalsoortReferentiedata(
         code="SAM",
         naam="Samengesteld",
     )
 
-    steenachtig = Referentiedata(
+    steenachtig = MateriaalsoortReferentiedata(
         code="STE",
         naam="Steenachtig",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

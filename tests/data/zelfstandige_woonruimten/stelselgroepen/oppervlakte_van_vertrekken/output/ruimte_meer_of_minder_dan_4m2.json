@@ -16,6 +16,7 @@
         {
           "aantal": 2.0,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_409143",
             "naam": "Keuken",
             "meeteenheid": {
               "code": "M2",
@@ -26,6 +27,7 @@
         {
           "aantal": 4.0,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_746699",
             "naam": "Slaapkamer",
             "meeteenheid": {
               "code": "M2",
@@ -35,12 +37,5 @@
         }
       ]
     }
-  ],
-  "maximaleHuur": 228.86,
-  "punten": 6.0,
-  "stelsel": {
-    "code": "ZEL",
-    "naam": "Zelfstandige woonruimten"
-  },
-  "maximaleHuurInclusiefOpslag": 228.86
+  ]
 }

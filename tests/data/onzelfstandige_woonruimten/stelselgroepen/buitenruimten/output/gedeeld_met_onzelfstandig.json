@@ -1,0 +1,76 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "buitenruimten__Space_108017427",
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__gedeeld_met__2__adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.125
+        },
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "buitenruimten__Space_108017428",
+            "naam": "Balkon",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.25
+        },
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "buitenruimten__totaal__gedeeld_met__2__adressen",
+            "naam": "Totaal (gedeeld met 2 adressen)",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.125
+        },
+        {
+          "aantal": 12.0,
+          "criterium": {
+            "id": "buitenruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 3.375
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "warning_geen_oppervlakte",
+  "ruimten": [
+    {
+      "id": "warning_2",
+      "gedeeld_met_aantal_eenheden": 10,
+      "aantal": 2,
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "PBC",
+        "naam": "Parkeerplek buiten behorend bij complex"
+      },
+      "naam": "Parkeerplek buiten behorend bij complex",
+      "breedte": 3,
+      "lengte": 4
+    }
+  ]
+}

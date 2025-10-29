@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Afrekenwijzesoort(Enum):
-    afkoop = Referentiedata(
+class AfrekenwijzesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Afrekenwijzesoort(Referentiedatasoort):
+    afkoop = AfrekenwijzesoortReferentiedata(
         code="AFK",
         naam="Afkoop",
     )
@@ -12,7 +16,7 @@ class Afrekenwijzesoort(Enum):
     totaalniveau.
     """
 
-    garantie = Referentiedata(
+    garantie = AfrekenwijzesoortReferentiedata(
         code="GAR",
         naam="Garantie",
     )
@@ -21,7 +25,7 @@ class Afrekenwijzesoort(Enum):
     vallen
     """
 
-    nacalculatie_eenheidsprijzen = Referentiedata(
+    nacalculatie_eenheidsprijzen = AfrekenwijzesoortReferentiedata(
         code="NCE",
         naam="Nacalculatie eenheidsprijzen",
     )
@@ -30,7 +34,7 @@ class Afrekenwijzesoort(Enum):
     Bij bestedingsoort kan hier gebruik gemaakt worden van de soort Vaste taakprijs
     """
 
-    nacalculatie_regie = Referentiedata(
+    nacalculatie_regie = AfrekenwijzesoortReferentiedata(
         code="NCR",
         naam="Nacalculatie regie",
     )
@@ -39,24 +43,10 @@ class Afrekenwijzesoort(Enum):
     (arbeidstijd, reistijd, materiaal)
     """
 
-    vaste_prijs = Referentiedata(
+    vaste_prijs = AfrekenwijzesoortReferentiedata(
         code="VPR",
         naam="Vaste prijs",
     )
     """
     De onderhoudsorder wordt afgerekend op basis van een vaste (totaal-)prijs
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

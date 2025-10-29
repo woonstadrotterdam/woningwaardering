@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Regiesoort(Enum):
-    bouwteam = Referentiedata(
+class RegiesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Regiesoort(Referentiedatasoort):
+    bouwteam = RegiesoortReferentiedata(
         code="BOU",
         naam="Bouwteam",
     )
@@ -17,7 +21,7 @@ class Regiesoort(Enum):
     een realisatiefase.
     """
 
-    traditioneel = Referentiedata(
+    traditioneel = RegiesoortReferentiedata(
         code="TRA",
         naam="Traditioneel",
     )
@@ -29,7 +33,7 @@ class Regiesoort(Enum):
     https://www.igg.nl/diensten/bouworganisatievormen/)
     """
 
-    turnkey = Referentiedata(
+    turnkey = RegiesoortReferentiedata(
         code="TUR",
         naam="Turnkey",
     )
@@ -40,17 +44,3 @@ class Regiesoort(Enum):
     en zorgt dat alles conform de wensen van de opdrachtgever wordt opgeleverd
     (bron: https://www.igg.nl/diensten/bouworganisatievormen/).
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

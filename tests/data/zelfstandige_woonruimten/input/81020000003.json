@@ -1,6 +1,10 @@
 {
   "id": "81020000003",
   "bouwjaar": 1923,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "COL",
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Putsebocht",
-    "huisnummer": "18",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "b",
-    "postcode": "3073HK",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010400029477",
-    "bagIdentificatie": "0599010400029477"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -64,8 +68,8 @@
     {
       "id": "Space_57363513",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -171,8 +175,8 @@
     {
       "id": "Space_57358401",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -254,7 +258,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",
@@ -395,8 +399,8 @@
     {
       "id": "Space_57363512",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",
@@ -493,8 +497,8 @@
     {
       "id": "Space_57349834",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",
@@ -531,8 +535,8 @@
     {
       "id": "Space_57358403",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "GAN",
@@ -588,8 +592,8 @@
     {
       "id": "Space_57349811",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",

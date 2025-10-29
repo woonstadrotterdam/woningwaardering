@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Publicatiemodel(Enum):
-    aanbodmodel = Referentiedata(
+class PublicatiemodelReferentiedata(Referentiedata):
+    pass
+
+
+class Publicatiemodel(Referentiedatasoort):
+    aanbodmodel = PublicatiemodelReferentiedata(
         code="AAN",
         naam="Aanbodmodel",
     )
@@ -13,7 +17,7 @@ class Publicatiemodel(Enum):
     krijgt de woningzoekende met de hoogste positie de eenheid aangeboden.
     """
 
-    distributiemodel = Referentiedata(
+    distributiemodel = PublicatiemodelReferentiedata(
         code="DIS",
         naam="Distributiemodel",
     )
@@ -23,7 +27,7 @@ class Publicatiemodel(Enum):
     rechtspersoon zijn, die namens een woningzoekende acteert.)
     """
 
-    eerste_reageerder = Referentiedata(
+    eerste_reageerder = PublicatiemodelReferentiedata(
         code="EER",
         naam="Eerste reageerder",
     )
@@ -32,16 +36,16 @@ class Publicatiemodel(Enum):
     staat bovenaan de lijst.
     """
 
-    lotingmodel = Referentiedata(
+    lotingmodel = PublicatiemodelReferentiedata(
         code="LOT",
         naam="Lotingmodel",
     )
     """
     Vastgoed wordt verloot onder geïnteresseerde woningzoekenden. Hierbij kan ook sprake
-    zijn van &#39;gewogen&#39; loting of andere combinaties van spelregels.
+    zijn van 'gewogen' loting of andere combinaties van spelregels.
     """
 
-    optiemodel = Referentiedata(
+    optiemodel = PublicatiemodelReferentiedata(
         code="OPT",
         naam="Optiemodel",
     )
@@ -51,7 +55,7 @@ class Publicatiemodel(Enum):
     positie de eenheid aangeboden.
     """
 
-    vrijesectormodel = Referentiedata(
+    vrijesectormodel = PublicatiemodelReferentiedata(
         code="VRI",
         naam="Vrijesectormodel",
     )
@@ -61,24 +65,10 @@ class Publicatiemodel(Enum):
     kunnen overigens wel degelijk eisen gesteld worden (bijv. minimaal inkomen.)
     """
 
-    woningruilmodel = Referentiedata(
+    woningruilmodel = PublicatiemodelReferentiedata(
         code="WON",
         naam="Woningruilmodel",
     )
     """
     Woningzoekenden kunnen onderling eenheden ruilen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

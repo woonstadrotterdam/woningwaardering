@@ -1,0 +1,34 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "oppervlakte": 10.0,
+      "installaties": [
+        {
+          "code": "BAD",
+          "naam": "Bad"
+        },
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        },
+        {
+          "code": "HTO",
+          "naam": "Hangend toilet"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
+}

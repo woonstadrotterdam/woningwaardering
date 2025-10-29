@@ -1,0 +1,41 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 2000.0,
+          "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
+            "naam": "Keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 3.5
+        },
+        {
+          "criterium": {
+            "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+          },
+          "punten": 3.5
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Betalingsregelingeindereden(Enum):
-    afbetaald = Referentiedata(
+class BetalingsregelingeinderedenReferentiedata(Referentiedata):
+    pass
+
+
+class Betalingsregelingeindereden(Referentiedatasoort):
+    afbetaald = BetalingsregelingeinderedenReferentiedata(
         code="AFB",
         naam="Afbetaald",
     )
@@ -11,7 +15,7 @@ class Betalingsregelingeindereden(Enum):
     De betalingsregeling is beëindigd omdat deze is afbetaald.
     """
 
-    oninbaar = Referentiedata(
+    oninbaar = BetalingsregelingeinderedenReferentiedata(
         code="ONI",
         naam="Oninbaar",
     )
@@ -19,7 +23,7 @@ class Betalingsregelingeindereden(Enum):
     De betalingsregeling is beëindigd omdat deze oninbaar is gebleken.
     """
 
-    restschuld_gesaneerd = Referentiedata(
+    restschuld_gesaneerd = BetalingsregelingeinderedenReferentiedata(
         code="SAN",
         naam="Restschuld gesaneerd",
     )
@@ -27,7 +31,7 @@ class Betalingsregelingeindereden(Enum):
     De betalingsregeling is beëindigd omdat de restschuld is gesaneerd.
     """
 
-    regeling_voldoet_niet = Referentiedata(
+    regeling_voldoet_niet = BetalingsregelingeinderedenReferentiedata(
         code="VOL",
         naam="Regeling voldoet niet",
     )
@@ -35,17 +39,3 @@ class Betalingsregelingeindereden(Enum):
     De betalingsregeling is (voortijdig) beëindigd omdat de regeling niet voldoet in de
     specifieke situatie.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

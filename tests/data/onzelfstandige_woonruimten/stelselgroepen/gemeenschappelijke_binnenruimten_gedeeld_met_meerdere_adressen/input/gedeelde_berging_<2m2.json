@@ -1,0 +1,21 @@
+{
+  "id": "1",
+  "ruimten": [
+    {
+      "id": "E",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 19.0,
+      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true
+    }
+  ]
+}

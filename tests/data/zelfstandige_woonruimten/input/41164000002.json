@@ -1,6 +1,10 @@
 {
   "id": "41164000002",
   "bouwjaar": 1904,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "IND",
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Aegidiusstraat",
-    "huisnummer": "122",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3061XR",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000316161",
-    "bagIdentificatie": "0599010000316161"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -87,7 +91,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",
@@ -175,8 +179,8 @@
     {
       "id": "Space_72310934",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "ENT",
@@ -294,8 +298,8 @@
     {
       "id": "Space_72315446",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",
@@ -349,8 +353,8 @@
     {
       "id": "Space_72314015",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",
@@ -387,8 +391,8 @@
     {
       "id": "Space_72310944",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -448,7 +452,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",

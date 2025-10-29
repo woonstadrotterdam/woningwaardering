@@ -5,16 +5,17 @@ from pydantic import BaseModel, Field
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
     EenhedenRuimte,
+    Referentiedata,
 )
 
 
 class _EenhedenRuimte(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
     gedeeld_met_aantal_eenheden: Optional[int] = Field(
-        default=None, alias="gedeeldMetAantalEenheden"
+        default=None, alias="gedeeldMetAantalEenheden", ge=0
     )
     """
-    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging.
+    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_eenheden groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
     bouwkundige_elementen: Optional[list[BouwkundigElementenBouwkundigElement]] = Field(
@@ -39,4 +40,22 @@ class _EenhedenRuimte(BaseModel):
     verkoeld: Optional[bool] = Field(default=None, alias="verkoeld")
     """
     Geeft aan of de ruimte verkoeld wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/70
+    installaties: Optional[list[Referentiedata]] = Field(
+        default=None, alias="installaties"
+    )
+    """
+    Het soort installaties van de ruimte. Bijvoorbeeld Hangend toilet, Wastafel, Inbouw koelkast, warmkokend water functie etc. Deze installaties zijn van belang voor de woningwaardering. Referentiedatasoort INSTALLATIESOORT.
+    """
+    aantal: Optional[int] = Field(default=1, alias="aantal", ge=0)
+    """
+    Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aangemaakt om de rubriek 'Gemeenschappelijke Parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat alle gedeelde parkeervakken van een parkeerruimten apart meegegeven dienen te worden. Dit attribuut wordt uitsluitend gebruikt in het berekenen van de punten voor 'Gemeenschappelijke Parkeerruimten'.
+    """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+    gedeeld_met_aantal_onzelfstandige_woonruimten: Optional[int] = Field(
+        default=None, alias="gedeeldMetAantalOnzelfstandigeWoonruimten", ge=0
+    )
+    """
+    Het aantal onzelfstandige woningen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_onzelfstandige_woonruimten groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
     """

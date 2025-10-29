@@ -1,18 +1,22 @@
 {
   "id": "23003000050",
   "bouwjaar": 1921,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "adres": {
-    "straatnaam": "Vosmaerstraat",
-    "huisnummer": "54",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3027KM",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000090716",
-    "bagIdentificatie": "0599010000090716"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -83,8 +87,8 @@
     {
       "id": "Space_81977075",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "GAN",
@@ -130,7 +134,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",

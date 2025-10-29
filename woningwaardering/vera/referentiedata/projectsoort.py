@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Projectsoort(Enum):
-    grondexploitatie = Referentiedata(
+class ProjectsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Projectsoort(Referentiedatasoort):
+    grondexploitatie = ProjectsoortReferentiedata(
         code="GRX",
         naam="Grondexploitatie",
     )
@@ -18,7 +22,7 @@ class Projectsoort(Enum):
     stellen. (Bron: vrij naar Wikipedia)
     """
 
-    modulaire_bouw = Referentiedata(
+    modulaire_bouw = ProjectsoortReferentiedata(
         code="MOD",
         naam="Modulaire bouw",
     )
@@ -29,7 +33,7 @@ class Projectsoort(Enum):
     geïnstalleerd en aangesloten (Bron: Portakabin)
     """
 
-    nieuwbouw = Referentiedata(
+    nieuwbouw = ProjectsoortReferentiedata(
         code="NIU",
         naam="Nieuwbouw",
     )
@@ -39,7 +43,7 @@ class Projectsoort(Enum):
     eenheden zijn gesloopt
     """
 
-    renovatie_bewoond = Referentiedata(
+    renovatie_bewoond = ProjectsoortReferentiedata(
         code="REB",
         naam="Renovatie bewoond",
     )
@@ -54,7 +58,7 @@ class Projectsoort(Enum):
     bestaande situatie niet het geval was (Bron: SBR-Wonen).
     """
 
-    renovatie_onbewoond = Referentiedata(
+    renovatie_onbewoond = ProjectsoortReferentiedata(
         code="REO",
         naam="Renovatie onbewoond",
     )
@@ -69,7 +73,7 @@ class Projectsoort(Enum):
     bestaande situatie niet het geval was (Bron: SBR-Wonen).
     """
 
-    sloop_en_nieuwbouw = Referentiedata(
+    sloop_en_nieuwbouw = ProjectsoortReferentiedata(
         code="SLN",
         naam="Sloop- en Nieuwbouw",
     )
@@ -79,7 +83,7 @@ class Projectsoort(Enum):
     nieuwbouw op het(/de)zelde perce(e)l(en)
     """
 
-    sloop = Referentiedata(
+    sloop = ProjectsoortReferentiedata(
         code="SLO",
         naam="Sloop",
     )
@@ -88,7 +92,7 @@ class Projectsoort(Enum):
     zonder dat daar nieuwbouw op het(/de)zelde perce(e)l(en) tegenover staat
     """
 
-    transformatie = Referentiedata(
+    transformatie = ProjectsoortReferentiedata(
         code="TRA",
         naam="Transformatie",
     )
@@ -99,17 +103,3 @@ class Projectsoort(Enum):
     valt niet onder deze definitie, om dat er geen herbestemming van de functie van
     het pand plaatsvindt.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

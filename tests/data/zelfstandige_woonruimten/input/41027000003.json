@@ -1,6 +1,10 @@
 {
   "id": "41027000003",
   "bouwjaar": 1948,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "IND",
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Frits Ruysstraat",
-    "huisnummer": "16",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "d",
-    "postcode": "3061ME",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000302054",
-    "bagIdentificatie": "0599010000302054"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -177,8 +181,8 @@
     {
       "id": "Space_82952526",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",
@@ -485,7 +489,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",

@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Passendheiddetailsoort(Enum):
-    bijzondere_gezinssituatie = Referentiedata(
+class PassendheiddetailsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Passendheiddetailsoort(Referentiedatasoort):
+    bijzondere_gezinssituatie = PassendheiddetailsoortReferentiedata(
         code="BIJ",
         naam="Bijzondere gezinssituatie",
     )
@@ -13,7 +17,7 @@ class Passendheiddetailsoort(Enum):
     een zeer groot gezin of een bijzondere gezinssamenstelling.
     """
 
-    herstructurering = Referentiedata(
+    herstructurering = PassendheiddetailsoortReferentiedata(
         code="HER",
         naam="Herstructurering",
     )
@@ -21,26 +25,12 @@ class Passendheiddetailsoort(Enum):
     Niet-passende toewijzing, noodzakelijk geacht i.v.m. herstructurering
     """
 
-    herhuisvesting = Referentiedata(
+    herhuisvesting = PassendheiddetailsoortReferentiedata(
         code="HHV",
         naam="Herhuisvesting",
     )
     """
     Niet-passende toewijzing, noodzakelijk geacht i.v.m. calamiteit of andere dringende
     oorzaak. Let op: voor herhuisvesting in verband met herstructurering gebruik
-    passenheiddetailsoort &#39;Herstructurering&#39;
+    passenheiddetailsoort 'Herstructurering'
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

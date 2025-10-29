@@ -1,0 +1,25 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_132266",
+      "naam": "Badkamer",
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "bouwkundigeElementen": [
+        {
+          "naam": "Bad",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "BAD",
+            "naam": "Bad"
+          }
+        }
+      ]
+    }
+  ]
+}

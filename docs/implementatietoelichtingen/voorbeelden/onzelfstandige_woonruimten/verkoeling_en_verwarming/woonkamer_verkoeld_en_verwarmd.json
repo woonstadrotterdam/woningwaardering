@@ -1,0 +1,22 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "oppervlakte": 50.0,
+      "verwarmd": true,
+      "verkoeld": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
+}

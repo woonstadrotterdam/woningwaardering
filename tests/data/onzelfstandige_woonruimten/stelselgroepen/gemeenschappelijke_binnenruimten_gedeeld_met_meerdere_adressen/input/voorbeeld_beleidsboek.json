@@ -1,0 +1,87 @@
+{
+  "id": "1",
+  "ruimten": [
+    {
+      "id": "A",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 4,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "IMA",
+          "naam": "Inbouw magnetron"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IOE",
+          "naam": "Inbouw oven elektrisch"
+        }
+      ],
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in woonkamer",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2999
+        },
+        {
+          "id": "Radiator_29424408",
+          "naam": "Radiator",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening algemeen"
+          },
+          "detailSoort": {
+            "code": "RAD",
+            "naam": "Radiator"
+          }
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige Ruimte"
+      },
+      "detailSoort": {
+        "code": "TOI",
+        "naam": "Toilet"
+      },
+      "naam": "Toilet",
+      "oppervlakte": 2.0,
+      "gedeeld_met_aantal_eenheden": 4,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel/Fontein"
+        },
+        {
+          "code": "HTO",
+          "naam": "Hangend Toilet"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,10 @@
 {
   "id": "28018000044",
   "bouwjaar": 1992,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "IND",
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Baardsestraat",
-    "huisnummer": "14",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3028RC",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000094913",
-    "bagIdentificatie": "0599010000094913"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -166,8 +170,8 @@
     {
       "id": "Space_20268170",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -190,7 +194,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",
@@ -411,8 +415,8 @@
     {
       "id": "Space_20256213",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -431,8 +435,8 @@
     {
       "id": "Space_20268165",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",
@@ -474,8 +478,8 @@
     {
       "id": "Space_20256211",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",

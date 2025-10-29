@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Afspraakstatus(Enum):
-    aangevraagd = Referentiedata(
+class AfspraakstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Afspraakstatus(Referentiedatasoort):
+    aangevraagd = AfspraakstatusReferentiedata(
         code="AAN",
         naam="Aangevraagd",
     )
@@ -12,7 +16,7 @@ class Afspraakstatus(Enum):
     voorkeur bloktijd zijn opgegeven.
     """
 
-    afgerond = Referentiedata(
+    afgerond = AfspraakstatusReferentiedata(
         code="AFG",
         naam="Afgerond",
     )
@@ -20,7 +24,7 @@ class Afspraakstatus(Enum):
     De afspraak heeft plaatsgevonden.
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = AfspraakstatusReferentiedata(
         code="ANN",
         naam="Geannuleerd",
     )
@@ -28,24 +32,10 @@ class Afspraakstatus(Enum):
     De afspraak is geannuleerd.
     """
 
-    gepland = Referentiedata(
+    gepland = AfspraakstatusReferentiedata(
         code="GEP",
         naam="Gepland",
     )
     """
     De afspraak is gepland. Hierbij zal doorgaans ook een medewerker zijn toegewezen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

@@ -1,42 +1,38 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Adressoort(Enum):
-    buitenlands_adres = Referentiedata(
+class AdressoortReferentiedata(Referentiedata):
+    pass
+
+
+class Adressoort(Referentiedatasoort):
+    buitenlands_adres = AdressoortReferentiedata(
         code="BUI",
         naam="Buitenlands adres",
     )
     """
-    Een buitenlands adres.
+    Een adres dat zicht bevindt buiten de landsgrenzen van Nederland. Dit type adres
+    wordt gebruikt voor buitenlandse relaties of locaties.
     """
 
-    eenheid_adres = Referentiedata(
+    eenheid_adres = AdressoortReferentiedata(
         code="EEN",
         naam="Eenheid adres",
     )
     """
-    De adresgegevens van een eenheid, ook wel woonadres
+    De adresgegevens die gekoppeld zijn aan een specifieke eenheid, zoals een woning
+    appartement of bedrijfsruimte. Dit type adres omvat de volledige locatiegegevens
+    die nodig zijn voor identificatie.
     """
 
-    postadres = Referentiedata(
+    postadres = AdressoortReferentiedata(
         code="POS",
         naam="Postadres",
     )
     """
-    Het postadres
+    Een adres dat speciaal bedoeld is voor het ontvangen van post, zoals een
+    postbusnummer of een antwoordnummer. Dit type adres is uitsluitend van
+    toepassing op Nederlandse locaties en mag geen fysieke locatie aanduiden.
+    Buitenlandse postadressen moeten worden geregistreerd als een buitenlands adres.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

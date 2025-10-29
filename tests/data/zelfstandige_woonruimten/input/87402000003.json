@@ -1,6 +1,10 @@
 {
   "id": "87402000003",
   "bouwjaar": 1898,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "IND",
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Oranjeboomstraat",
-    "huisnummer": "355",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "c",
-    "postcode": "3071SV",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000040514",
-    "bagIdentificatie": "0599010000040514"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -49,7 +53,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",
@@ -124,8 +128,8 @@
     {
       "id": "Space_29509927",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",

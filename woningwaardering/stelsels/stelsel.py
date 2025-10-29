@@ -3,20 +3,24 @@ from decimal import Decimal
 from importlib.resources import files
 
 import pandas as pd
+from loguru import logger
 
 from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
 )
 from woningwaardering.stelsels.utils import (
     is_geldig,
+    normaliseer_ruimte_namen,
     rond_af,
+    rond_af_op_kwart,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Woningwaarderingstelsel,
+    WoningwaarderingstelselgroepReferentiedata,
+    WoningwaarderingstelselReferentiedata,
 )
 
 
@@ -24,7 +28,7 @@ class Stelsel:
     """Initialiseert een Stelsel object.
 
     Parameters:
-        stelsel (Woningwaarderingstelsel): Het stelsel dat wordt berekend.
+        stelsel (WoningwaarderingstelselReferentiedata): Het stelsel dat wordt berekend.
         begindatum (date): De begindatum van de geldigheid van het stelsel.
         einddatum (date, optional): De einddatum van de geldigheid van het stelsel.
         peildatum (date, optional): De peildatum voor de waardering.
@@ -37,56 +41,64 @@ class Stelsel:
 
     def __init__(
         self,
-        stelsel: Woningwaarderingstelsel,
+        stelsel: WoningwaarderingstelselReferentiedata,
         begindatum: date,
         einddatum: date = date.max,
         peildatum: date = date.today(),
         stelselgroepen: list[type[Stelselgroep]] | None = None,
     ) -> None:
         self.stelsel = stelsel
+        logger.info(f"Stelsel {stelsel.naam} wordt gebruikt.")
         if not is_geldig(begindatum, einddatum, peildatum):
             raise ValueError(
-                f"Stelsel {stelsel.value.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
+                f"Stelsel {stelsel.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
             )
+
         self.peildatum = peildatum
-        self.stelselgroepen = (
+        self.stelselgroepen = [
             stelselgroep(peildatum) for stelselgroep in stelselgroepen or []
-        )
+        ]
         self.df_maximale_huur = pd.read_csv(
-            files("woningwaardering").joinpath(
-                f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"
+            str(
+                files("woningwaardering").joinpath(
+                    f"stelsels/{stelsel.name}/maximale_huurprijzen.csv"
+                )
             )
         )
 
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
+        *,
+        negeer_stelselgroep: WoningwaarderingstelselgroepReferentiedata | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """Berekent de woningwaardering voor een stelsel.
 
         Parameters:
             eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
+            negeer_stelselgroep (WoningwaarderingstelselgroepReferentiedata | None, optional): Een stelselgroep die moet worden overgeslagen.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het bijgewerkte resultaat van de woningwaardering.
         """
 
+        normaliseer_ruimte_namen(eenheid)
+
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-        resultaat.stelsel = self.stelsel.value
+        resultaat.stelsel = self.stelsel
 
         resultaat.groepen = []
 
         for stelselgroep in self.stelselgroepen:
-            resultaat.groepen.append(stelselgroep.bereken(eenheid, resultaat))
+            if (
+                negeer_stelselgroep is not None
+                and stelselgroep.stelselgroep == negeer_stelselgroep
+            ):
+                continue
 
-        # Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij
-        # zorgwoningen geldende toeslag) afgerond op hele punten. Bij 0,5 punten of
-        # meer wordt afgerond naar boven op hele punten, bij minder dan 0,5 punten
-        # wordt afgerond naar beneden op hele punten.
-        #
-        # https://wetten.overheid.nl/BWBR0003237/2024-01-01#BijlageI_DivisieA_Divisie_Divisie15
+            resultaat.groepen.append(stelselgroep.waardeer(eenheid, resultaat))
 
-        resultaat.punten = Stelsel.bereken_puntentotaal(resultaat)
+        resultaat.punten = float(Stelsel.bereken_puntentotaal(resultaat))
 
         resultaat.opslagpercentage = (
             sum(
@@ -101,16 +113,15 @@ class Stelsel:
 
         resultaat.maximale_huur = float(maximale_huur)
 
-        if resultaat.opslagpercentage is not None:
-            resultaat.huurprijsopslag = float(
-                rond_af(
-                    maximale_huur * Decimal(str(resultaat.opslagpercentage)),
-                    decimalen=2,
-                )
-            )
+        huurprijsopslag = rond_af(
+            maximale_huur * Decimal(str(resultaat.opslagpercentage or 0)),
+            decimalen=2,
+        )
+
+        resultaat.huurprijsopslag = float(huurprijsopslag)
 
         resultaat.maximale_huur_inclusief_opslag = float(
-            maximale_huur + Decimal(str(resultaat.huurprijsopslag or 0))
+            maximale_huur + huurprijsopslag
         )
 
         return resultaat
@@ -118,16 +129,25 @@ class Stelsel:
     @staticmethod
     def bereken_puntentotaal(
         resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    ) -> float:
-        return float(
-            rond_af(
-                sum(
-                    woningwaardering_groep.punten
-                    for woningwaardering_groep in resultaat.groepen or []
-                    if woningwaardering_groep.punten is not None
-                ),
-                decimalen=0,
+    ) -> Decimal:
+        # Het puntentotaal per woning wordt na eindsaldering (met inbegrip van de bij
+        # zorgwoningen geldende toeslag) afgerond op hele punten.
+        # Bij 0,5 punten of meer wordt afgerond naar boven op hele punten, bij minder
+        # dan 0,5 punten wordt afgerond naar beneden op hele punten. In de
+        # eindsaldering zitten ook de punten voor eventuele gemeenschappelijke ruimten
+        # en voorzieningen.
+        return rond_af(
+            sum(
+                # De waardering in punten wordt per rubriek na saldering afgerond op
+                # 0,25 punt waarbij een achtste (1/8) punt naar boven wordt afgerond.
+                # Dat wil zeggen dat 0,125 wordt afgerond naar 0,25. Een kwartpunt is
+                # de kleinst werkbare waardering binnen het woningwaarderingsstelsel
+                # voor een afzonderlijke rubriek.
+                rond_af_op_kwart(woningwaardering_groep.punten)
+                for woningwaardering_groep in resultaat.groepen or []
+                if woningwaardering_groep.punten is not None
             ),
+            decimalen=0,
         )
 
     def bereken_maximale_huur(
@@ -148,6 +168,11 @@ class Stelsel:
             ].item()
         )
 
+        # In geval van een woonruimte met méér dan 250 punten wordt de maximale
+        # huurprijs als volgt berekend: elk punt boven de 250 wordt vermenigvuldigd met
+        # het verschil tussen de bedragen, genoemd in de huurprijstabel (zie bijlage 5)
+        # bij 249 en 250 punten. Het verkregen bedrag wordt vervolgens opgeteld bij de
+        # maximale huurprijs die volgens de huurprijstabel behoort bij 250 punten.
         hoogste_twee = df_maximale_huur.nlargest(2, "Punten")
         hoogste_punten = Decimal(hoogste_twee.iloc[0]["Punten"])
         hoogste_bedrag = Decimal(hoogste_twee.iloc[0]["Bedrag"])

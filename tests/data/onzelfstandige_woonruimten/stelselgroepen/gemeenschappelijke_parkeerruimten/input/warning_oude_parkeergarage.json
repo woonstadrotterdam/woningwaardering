@@ -1,0 +1,20 @@
+{
+  "id": "12006000004",
+  "ruimten": [
+    {
+      "id": "1",
+      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "OPN",
+        "naam": "Open parkeergarage niet specifieke plek"
+      },
+      "naam": "Open parkeergarage niet specifieke plek",
+      "oppervlakte": 100
+    }
+  ]
+}

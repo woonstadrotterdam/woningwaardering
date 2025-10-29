@@ -1,0 +1,27 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "prijsopslag_monumenten_en_nieuwbouw__rijksbeschermd_stads_of_dorpsgezicht",
+            "naam": "Rijksbeschermd stads- of dorpsgezicht"
+          },
+          "opslagpercentage": 0.05
+        }
+      ],
+      "opslagpercentage": 0.05
+    }
+  ]
+}

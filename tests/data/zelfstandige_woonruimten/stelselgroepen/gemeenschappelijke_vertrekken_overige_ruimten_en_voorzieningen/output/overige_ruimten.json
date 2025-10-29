@@ -1,0 +1,43 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GVR",
+          "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
+        }
+      },
+      "punten": 2.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_1",
+            "naam": "Toiletruimte (gedeeld met 5)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_2",
+            "naam": "Toiletruimte (gedeeld met 6)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.25
+        }
+      ]
+    }
+  ]
+}

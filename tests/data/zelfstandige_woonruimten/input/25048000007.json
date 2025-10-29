@@ -1,5 +1,9 @@
 {
   "id": "25048000007",
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "bouwjaar": 1997,
   "klimaatbeheersing": [
     {
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Rochussenstraat",
-    "huisnummer": "251",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "c",
-    "postcode": "3021NW",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000349626",
-    "bagIdentificatie": "0599010000349626"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -126,8 +130,8 @@
     {
       "id": "Space_29446509",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "ENT",
@@ -270,7 +274,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",

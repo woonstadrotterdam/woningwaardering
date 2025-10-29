@@ -1,67 +1,48 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.publicatiemodel import (
+    Publicatiemodel,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Publicatieintakevorm(Enum):
-    cooptatie = Referentiedata(
+class PublicatieintakevormReferentiedata(Referentiedata):
+    pass
+
+
+class Publicatieintakevorm(Referentiedatasoort):
+    cooptatie = PublicatieintakevormReferentiedata(
         code="COO",
         naam="Coöptatie",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel,
     )
     """
     Medebewoners bepalen welke woningzoekende de eenheid krijgt.
     """
 
-    intakegesprek = Referentiedata(
+    intakegesprek = PublicatieintakevormReferentiedata(
         code="INT",
         naam="Intakegesprek",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel,
     )
     """
     Er vindt een intake gesprek plaats met de eigenaar van de woning.
     """
 
-    motivatie = Referentiedata(
+    motivatie = PublicatieintakevormReferentiedata(
         code="MOT",
         naam="Motivatie",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel,
     )
     """
     Toewijzing vindt plaats op basis van de beoordeling van een motivatiebrief of
     -gesprek.
     """
 
-    sociale_spelregels = Referentiedata(
+    sociale_spelregels = PublicatieintakevormReferentiedata(
         code="SOC",
         naam="Sociale spelregels",
-        parent=Referentiedata(
-            code="AAN",
-            naam="Aanbodmodel",
-        ),
+        parent=Publicatiemodel.aanbodmodel,
     )
     """
     Sociale spelregels bepalen welke woningzoekende de eenheid krijgt.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

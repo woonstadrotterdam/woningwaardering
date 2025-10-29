@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Vragenlijstregelherkomst(Enum):
-    aedes_benchmark = Referentiedata(
+class VragenlijstregelherkomstReferentiedata(Referentiedata):
+    pass
+
+
+class Vragenlijstregelherkomst(Referentiedatasoort):
+    aedes_benchmark = VragenlijstregelherkomstReferentiedata(
         code="AED",
         naam="Aedes-benchmark",
     )
@@ -11,7 +15,7 @@ class Vragenlijstregelherkomst(Enum):
     De herkomst van de vraag is van de Aedes benchmark.
     """
 
-    kwh_keurmerk = Referentiedata(
+    kwh_keurmerk = VragenlijstregelherkomstReferentiedata(
         code="KWH",
         naam="KWH Keurmerk",
     )
@@ -19,24 +23,10 @@ class Vragenlijstregelherkomst(Enum):
     De herkomst van de vraag is van KWH in het kader van het eigen keurmerk.
     """
 
-    eigen_vraag = Referentiedata(
+    eigen_vraag = VragenlijstregelherkomstReferentiedata(
         code="EIG",
         naam="Eigen vraag",
     )
     """
     De kwaliteitsmetingsvraag is door de eigen organisatie opgesteld
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

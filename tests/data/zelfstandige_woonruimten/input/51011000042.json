@@ -1,6 +1,10 @@
 {
   "id": "51011000042",
   "bouwjaar": 1952,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "IND",
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Eskampstraat",
-    "huisnummer": "1",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "b",
-    "postcode": "3042SJ",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000312130",
-    "bagIdentificatie": "0599010000312130"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -316,7 +320,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",
@@ -385,8 +389,8 @@
     {
       "id": "Space_82666162",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",

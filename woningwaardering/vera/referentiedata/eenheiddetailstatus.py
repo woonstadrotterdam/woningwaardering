@@ -1,64 +1,56 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.eenheidstatus import (
+    Eenheidstatus,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheiddetailstatus(Enum):
-    verhuurd_antikraak = Referentiedata(
+class EenheiddetailstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheiddetailstatus(Referentiedatasoort):
+    verhuurd_antikraak = EenheiddetailstatusReferentiedata(
         code="ANT",
         naam="Verhuurd antikraak",
-        parent=Referentiedata(
-            code="VEH",
-            naam="Verhuurd",
-        ),
+        parent=Eenheidstatus.verhuurd,
     )
     """
     De eenheid wordt verhuurd onder de voorwaarden van anti-kraak
     """
 
-    bouwplannen = Referentiedata(
+    bouwplannen = EenheiddetailstatusReferentiedata(
         code="BOU",
         naam="Bouwplannen",
-        parent=Referentiedata(
-            code="ONT",
-            naam="In ontwikkeling",
-        ),
+        parent=Eenheidstatus.in_ontwikkeling,
     )
     """
     Eenheid is in ontwikkeling, nog in de planfase
     """
 
-    bruikleen = Referentiedata(
+    bruikleen = EenheiddetailstatusReferentiedata(
         code="BRU",
         naam="Bruikleen",
-        parent=Referentiedata(
-            code="VEH",
-            naam="Verhuurd",
-        ),
+        parent=Eenheidstatus.verhuurd,
     )
     """
     De eenheid wordt verhuurd onder een bruikleen constructie
     """
 
-    wacht_op_energie_prestatie_advies = Referentiedata(
+    wacht_op_energie_prestatie_advies = EenheiddetailstatusReferentiedata(
         code="EPA",
         naam="Wacht op Energie Prestatie Advies",
-        parent=Referentiedata(
-            code="LEE",
-            naam="Leegstand",
-        ),
+        parent=Eenheidstatus.leegstand,
     )
     """
     Frictieleegstand, ontstaan doordat er nog gewacht wordt op de afgifte van een EPA
     label
     """
 
-    mutatie = Referentiedata(
+    mutatie = EenheiddetailstatusReferentiedata(
         code="MUT",
         naam="Mutatie",
-        parent=Referentiedata(
-            code="LEE",
-            naam="Leegstand",
-        ),
+        parent=Eenheidstatus.leegstand,
     )
     """
     Frictieleegstand wegens mutatieonderhoud. De eenheid is in exploitatie, maar niet
@@ -66,13 +58,10 @@ class Eenheiddetailstatus(Enum):
     woning plaatsvindt.
     """
 
-    wacht_op_nieuwe_huurder_niet_regulier = Referentiedata(
+    wacht_op_nieuwe_huurder_niet_regulier = EenheiddetailstatusReferentiedata(
         code="NIB",
         naam="Wacht op nieuwe huurder - niet-regulier",
-        parent=Referentiedata(
-            code="LEE",
-            naam="Leegstand",
-        ),
+        parent=Eenheidstatus.leegstand,
     )
     """
     Frictieleegstand, ontstaan doordat er nog geen nieuwe huurder is gevonden, waarbij
@@ -82,25 +71,19 @@ class Eenheiddetailstatus(Enum):
     totdat de overeenkomst met een nieuwe, niet-reguliere, huurder ingaat.
     """
 
-    nieuwbouw = Referentiedata(
+    nieuwbouw = EenheiddetailstatusReferentiedata(
         code="NIE",
         naam="Nieuwbouw",
-        parent=Referentiedata(
-            code="ONT",
-            naam="In ontwikkeling",
-        ),
+        parent=Eenheidstatus.in_ontwikkeling,
     )
     """
     Eenheid is in ontwikkeling, realisatie-/bouwfase is gestart
     """
 
-    wacht_op_nieuwe_huurder_regulier = Referentiedata(
+    wacht_op_nieuwe_huurder_regulier = EenheiddetailstatusReferentiedata(
         code="NIH",
         naam="Wacht op nieuwe huurder - regulier",
-        parent=Referentiedata(
-            code="LEE",
-            naam="Leegstand",
-        ),
+        parent=Eenheidstatus.leegstand,
     )
     """
     Frictieleegstand, ontstaan doordat er nog geen nieuwe huurder is gevonden, zonder
@@ -110,104 +93,69 @@ class Eenheiddetailstatus(Enum):
     overeenkomst met een nieuwe huurder ingaat.
     """
 
-    oplevering = Referentiedata(
+    oplevering = EenheiddetailstatusReferentiedata(
         code="OPL",
         naam="Oplevering",
-        parent=Referentiedata(
-            code="ONT",
-            naam="In ontwikkeling",
-        ),
+        parent=Eenheidstatus.in_ontwikkeling,
     )
     """
     Eenheid is in ontwikkeling, klaar voor oplevering
     """
 
-    verhuurd_permanent = Referentiedata(
+    verhuurd_permanent = EenheiddetailstatusReferentiedata(
         code="PER",
         naam="Verhuurd permanent",
-        parent=Referentiedata(
-            code="VEH",
-            naam="Verhuurd",
-        ),
+        parent=Eenheidstatus.verhuurd,
     )
     """
     Doorlopend contract of voor onbepaalde tijd.
     """
 
-    projectleegstand = Referentiedata(
+    projectleegstand = EenheiddetailstatusReferentiedata(
         code="PRO",
         naam="Projectleegstand",
-        parent=Referentiedata(
-            code="LEE",
-            naam="Leegstand",
-        ),
+        parent=Eenheidstatus.leegstand,
     )
     """
     Leegstand doordat de eenheid deel uitmaakt van een onderhouds- of renovatieproject,
     waarbij de eenheid niet uit exploitatie wordt genomen
     """
 
-    structurele_leegstand = Referentiedata(
+    structurele_leegstand = EenheiddetailstatusReferentiedata(
         code="STR",
         naam="Structurele leegstand",
-        parent=Referentiedata(
-            code="LEE",
-            naam="Leegstand",
-        ),
+        parent=Eenheidstatus.leegstand,
     )
     """
     (Verwachte) Langdurige frictieleegstand, doordat vraag en aanbod niet op elkaar
     aansluiten
     """
 
-    verhuurd_tijdelijk = Referentiedata(
+    verhuurd_tijdelijk = EenheiddetailstatusReferentiedata(
         code="TIJD",
         naam="Verhuurd tijdelijk",
-        parent=Referentiedata(
-            code="VEH",
-            naam="Verhuurd",
-        ),
+        parent=Eenheidstatus.verhuurd,
     )
     """
     Huurcontract met beperkte looptijd (anders dan anti-kraak of onder een bruikleen
     constructie)
     """
 
-    verkoop = Referentiedata(
+    verkoop = EenheiddetailstatusReferentiedata(
         code="VEK",
         naam="Verkoop",
-        parent=Referentiedata(
-            code="LEE",
-            naam="Leegstand",
-        ),
+        parent=Eenheidstatus.leegstand,
     )
     """
     Leegstand omdat de eenheid op korte termijn verkocht zal worden, maar nog wel in
     exploitatie is.
     """
 
-    vergunning_verleend = Referentiedata(
+    vergunning_verleend = EenheiddetailstatusReferentiedata(
         code="VER",
         naam="Vergunning verleend",
-        parent=Referentiedata(
-            code="ONT",
-            naam="In ontwikkeling",
-        ),
+        parent=Eenheidstatus.in_ontwikkeling,
     )
     """
     Eenheid is in ontwikkeling, bouwvergunning is verleend
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

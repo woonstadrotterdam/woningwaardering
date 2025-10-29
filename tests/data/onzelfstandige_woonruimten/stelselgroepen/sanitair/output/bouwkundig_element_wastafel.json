@@ -1,0 +1,37 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 1.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_472199__wastafel",
+            "naam": "Badkamer - Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__totaal__prive"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__totaal__prive",
+            "naam": "Totaal (privé)"
+          },
+          "punten": 1.0
+        }
+      ]
+    }
+  ]
+}

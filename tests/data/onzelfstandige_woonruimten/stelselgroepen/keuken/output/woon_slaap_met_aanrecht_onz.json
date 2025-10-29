@@ -1,0 +1,93 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 8.25,
+      "woningwaarderingen": [
+        {
+          "aantal": 2000.0,
+          "criterium": {
+            "id": "keuken__WOK__lengte_aanrecht_aanrecht",
+            "naam": "Woonkamer/keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 3.5
+        },
+        {
+          "aantal": 1000.0,
+          "criterium": {
+            "id": "keuken__Woonkamer__lengte_aanrecht_aanrecht",
+            "naam": "Woonkamer: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 2000.0,
+          "criterium": {
+            "id": "keuken__Woon-/slaapkamer__lengte_aanrecht_aanrecht",
+            "naam": "Woon-/slaapkamer: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__totaal__gedeeld_met__4__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 1.75
+        },
+        {
+          "aantal": 1000.0,
+          "criterium": {
+            "id": "keuken__Slaapkamer__lengte_aanrecht_aanrecht",
+            "naam": "Slaapkamer: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__totaal__gedeeld_met__4__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+          },
+          "punten": 5.5
+        },
+        {
+          "criterium": {
+            "id": "keuken__totaal__gedeeld_met__4__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 4 onzelfstandige woonruimten)"
+          },
+          "punten": 2.75
+        }
+      ]
+    }
+  ]
+}

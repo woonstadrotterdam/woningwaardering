@@ -1,0 +1,25 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_146137",
+      "naam": "Doucheruimte",
+      "detailSoort": {
+        "code": "DOU",
+        "naam": "Doucheruimte"
+      },
+      "bouwkundigeElementen": [
+        {
+          "naam": "Douche",
+          "soort": {
+            "code": "SAN",
+            "naam": "Sanitaire voorziening"
+          },
+          "detailSoort": {
+            "code": "DOU",
+            "naam": "Douche"
+          }
+        }
+      ]
+    }
+  ]
+}

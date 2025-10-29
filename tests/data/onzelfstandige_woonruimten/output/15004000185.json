@@ -1,0 +1,415 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
+        }
+      },
+      "punten": 25.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 20.04,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_29425491",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 7.5,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_29425492",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 1.7,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_29425496",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 20.04,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__totaal__prive",
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 4.6,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 2.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__Space_29425491",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__prive"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__totaal__prive",
+            "naam": "Totaal (privé)"
+          },
+          "punten": 2.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 8.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 24.5,
+          "criterium": {
+            "id": "energieprestatie__bouwjaar",
+            "naam": "Bouwjaar 1998",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 8.58
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 2220.0,
+          "criterium": {
+            "id": "keuken__Space_29425492__lengte_aanrecht_Aanrecht_29424502",
+            "naam": "Keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 3.5
+        },
+        {
+          "criterium": {
+            "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+          },
+          "punten": 3.5
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 3.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_29425495__staand_toilet",
+            "naam": "Toilet - Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_29425496__douche",
+            "naam": "Badruimte - Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "id": "sanitair__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+          },
+          "punten": 3.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": -5.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "buitenruimten__geen_buitenruimten",
+            "naam": "Geen buitenruimten"
+          },
+          "punten": -5.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GBA",
+          "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GPA",
+          "naam": "Gemeenschappelijke parkeerruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "punten": 12.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 184000.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
+            }
+          }
+        },
+        {
+          "aantal": 58.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__gebruiksoppervlakte",
+            "naam": "Gebruiksoppervlakte",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 3172.41379,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__woz_waarde_per_m2",
+            "naam": "WOZ-waarde per m²",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
+            }
+          }
+        },
+        {
+          "aantal": 3414.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__gemiddelde_woz_waarde_per_m2",
+            "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
+            }
+          }
+        },
+        {
+          "aantal": -7.0763389,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil",
+            "naam": "Percentage verschil"
+          },
+          "punten": 12.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "AFT",
+          "naam": "Aftrekpunten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMO",
+          "naam": "Prijsopslag monumenten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
+    }
+  ],
+  "maximaleHuur": 481.68,
+  "punten": 49.0,
+  "stelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  },
+  "huurprijsopslag": 0.0,
+  "maximaleHuurInclusiefOpslag": 481.68
+}

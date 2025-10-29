@@ -7,6 +7,7 @@ from woningwaardering.vera.referentiedata import (
     Burgerlijkestaat,
     Communicatiekanaal,
     Communicatierichting,
+    Communicatievoorkeursoort,
     Contactgegevendetailsoort,
     Contactgegevensoort,
     Contactgegevenstatus,
@@ -28,7 +29,6 @@ from woningwaardering.vera.referentiedata import (
     Signaleringstatus,
 )
 
-
 __all__ = [
     "Accountstatus",
     "Adressoort",
@@ -38,6 +38,7 @@ __all__ = [
     "Burgerlijkestaat",
     "Communicatiekanaal",
     "Communicatierichting",
+    "Communicatievoorkeursoort",
     "Contactgegevendetailsoort",
     "Contactgegevensoort",
     "Contactgegevenstatus",

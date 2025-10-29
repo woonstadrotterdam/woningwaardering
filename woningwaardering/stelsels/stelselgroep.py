@@ -7,9 +7,29 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
+from woningwaardering.vera.referentiedata import (
+    WoningwaarderingstelselgroepReferentiedata,
+    WoningwaarderingstelselReferentiedata,
+)
 
 
 class Stelselgroep(ABC):
+    @property
+    def stelsel(self) -> WoningwaarderingstelselReferentiedata:
+        return self._stelsel
+
+    @stelsel.setter
+    def stelsel(self, value: WoningwaarderingstelselReferentiedata) -> None:
+        self._stelsel = value
+
+    @property
+    def stelselgroep(self) -> WoningwaarderingstelselgroepReferentiedata:
+        return self._stelselgroep
+
+    @stelselgroep.setter
+    def stelselgroep(self, value: WoningwaarderingstelselgroepReferentiedata) -> None:
+        self._stelselgroep = value
+
     """Initialiseert een Stelselgroep.
 
     Args:
@@ -34,7 +54,7 @@ class Stelselgroep(ABC):
             )
 
     @abstractmethod
-    def bereken(
+    def waardeer(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (

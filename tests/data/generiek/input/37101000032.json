@@ -1,6 +1,10 @@
 {
   "id": "37101000032",
   "bouwjaar": 1924,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimten"
+  },
   "klimaatbeheersing": [
     {
       "code": "IND",
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Nieuwe Boezemstraat",
-    "huisnummer": "27",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3034PH",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000485697",
-    "bagIdentificatie": "0599010000485697"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -63,8 +67,8 @@
     {
       "id": "Space_108014554",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "GAN",
@@ -95,8 +99,8 @@
     {
       "id": "Space_108006259",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -181,8 +185,8 @@
     {
       "id": "Space_108006247",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "GAN",
@@ -262,8 +266,8 @@
     {
       "id": "Space_108006213",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "ENT",
@@ -296,8 +300,8 @@
     {
       "id": "Space_108010631",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",
@@ -312,8 +316,8 @@
     {
       "id": "Space_108017426",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "GAN",
@@ -458,8 +462,8 @@
     {
       "id": "Space_108017420",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -506,8 +510,8 @@
     {
       "id": "Space_108006211",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -522,8 +526,8 @@
     {
       "id": "Space_108010629",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -590,7 +594,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",
@@ -635,8 +639,8 @@
     {
       "id": "Space_108014551",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -685,8 +689,8 @@
     {
       "id": "Space_108006244",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -748,5 +752,6 @@
       "verwarmd": false,
       "gemeenschappelijk": true
     }
-  ]
+  ],
+  "monumenten": []
 }

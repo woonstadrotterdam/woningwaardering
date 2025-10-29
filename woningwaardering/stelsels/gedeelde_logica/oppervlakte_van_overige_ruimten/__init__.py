@@ -1,0 +1,3 @@
+from .oppervlakte_van_overige_ruimten import waardeer_oppervlakte_van_overige_ruimte
+
+__all__ = ["waardeer_oppervlakte_van_overige_ruimte"]

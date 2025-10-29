@@ -1,0 +1,19 @@
+{
+  "id": "geen_gebruiksoppervlakte",
+  "adres": {
+    "woonplaats": {
+      "code": "3086",
+      "naam": "ROTTERDAM"
+    }
+  },
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 148000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 184000
+    }
+  ]
+}

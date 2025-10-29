@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Vertrouwelijkheid(Enum):
-    geheim = Referentiedata(
+class VertrouwelijkheidReferentiedata(Referentiedata):
+    pass
+
+
+class Vertrouwelijkheid(Referentiedatasoort):
+    geheim = VertrouwelijkheidReferentiedata(
         code="GEH",
         naam="Geheim",
     )
@@ -12,7 +16,7 @@ class Vertrouwelijkheid(Enum):
     strafrechtelijke informatie)
     """
 
-    intern = Referentiedata(
+    intern = VertrouwelijkheidReferentiedata(
         code="INT",
         naam="Intern",
     )
@@ -20,7 +24,7 @@ class Vertrouwelijkheid(Enum):
     Informatie is toegankelijk voor alle medewerkers van de organisatie (bv: intranet)
     """
 
-    openbaar = Referentiedata(
+    openbaar = VertrouwelijkheidReferentiedata(
         code="OPE",
         naam="Openbaar",
     )
@@ -28,7 +32,7 @@ class Vertrouwelijkheid(Enum):
     Informatie mag door iedereen worden ingezien (bv: algemene informatie op de website)
     """
 
-    vertrouwelijk = Referentiedata(
+    vertrouwelijk = VertrouwelijkheidReferentiedata(
         code="VER",
         naam="Vertrouwelijk",
     )
@@ -36,17 +40,3 @@ class Vertrouwelijkheid(Enum):
     Informatie is alleen toegankelijk voor een beperkte groep gebruikers  (bv:
     persoonsgegevens, financiële gegevens)
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

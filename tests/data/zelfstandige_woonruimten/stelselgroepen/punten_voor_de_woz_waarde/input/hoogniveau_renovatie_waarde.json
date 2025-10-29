@@ -3,7 +3,7 @@
   "bouwjaar": 2016,
   "renovatie": {
     "omschrijving": "hoogniveau renovatie",
-    "datum": "2019-01-01",
+    "datum": "2021-01-01",
     "bedragInvestering": 10000
   },
   "klimaatbeheersing": [
@@ -65,8 +65,8 @@
       "einddatum": "2027-02-23",
       "registratiedatum": "2021-02-23T09:55:37+01:00",
       "label": {
-        "code": "B",
-        "naam": "B"
+        "code": "A++",
+        "naam": "A++"
       },
       "waarde": "0.3"
     }
@@ -370,8 +370,8 @@
     {
       "id": "Space_82123455",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "HAL",
@@ -516,7 +516,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",

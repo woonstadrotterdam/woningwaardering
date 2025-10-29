@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Sanctiestatus(Enum):
-    aangemaakt = Referentiedata(
+class SanctiestatusReferentiedata(Referentiedata):
+    pass
+
+
+class Sanctiestatus(Referentiedatasoort):
+    aangemaakt = SanctiestatusReferentiedata(
         code="AAN",
         naam="Aangemaakt",
     )
@@ -11,7 +15,7 @@ class Sanctiestatus(Enum):
     Aangemaakt
     """
 
-    definitief = Referentiedata(
+    definitief = SanctiestatusReferentiedata(
         code="DEF",
         naam="Definitief",
     )
@@ -19,24 +23,10 @@ class Sanctiestatus(Enum):
     Definitief (na 1e van de volgende kalendermaand)
     """
 
-    ingetrokken = Referentiedata(
+    ingetrokken = SanctiestatusReferentiedata(
         code="ING",
         naam="Ingetrokken",
     )
     """
     Ingetrokken
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

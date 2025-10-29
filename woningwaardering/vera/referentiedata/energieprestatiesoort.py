@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Energieprestatiesoort(Enum):
-    compactheid = Referentiedata(
+class EnergieprestatiesoortReferentiedata(Referentiedata):
+    pass
+
+
+class Energieprestatiesoort(Referentiedatasoort):
+    compactheid = EnergieprestatiesoortReferentiedata(
         code="COM",
         naam="Compactheid",
     )
@@ -15,7 +19,7 @@ class Energieprestatiesoort(Enum):
     ls-gebouwen/standaard-streefwaarden-woningisolatie)
     """
 
-    energie_index = Referentiedata(
+    energie_index = EnergieprestatiesoortReferentiedata(
         code="EI",
         naam="Energie-index",
     )
@@ -26,7 +30,7 @@ class Energieprestatiesoort(Enum):
     afgeleid op basis van een tabel met bandbreedtes voor de energie-index.
     """
 
-    primair_energieverbruik_woningbouw = Referentiedata(
+    primair_energieverbruik_woningbouw = EnergieprestatiesoortReferentiedata(
         code="EP2",
         naam="Primair energieverbruik - woningbouw",
     )
@@ -41,7 +45,7 @@ class Energieprestatiesoort(Enum):
     (EPV).
     """
 
-    opgewekte_duurzame_elektriciteit = Referentiedata(
+    opgewekte_duurzame_elektriciteit = EnergieprestatiesoortReferentiedata(
         code="OPG",
         naam="Opgewekte duurzame elektriciteit",
     )
@@ -50,21 +54,33 @@ class Energieprestatiesoort(Enum):
     zonnepanelen in kWh/jaar die beschikbaar is voor huishoudelijk gebruik,
     uitgedrukt in kWh elektrische energie per jaar (kWh_e/jr). Dit is één van de
     indicatoren die benodigd zijn voor het bepalen van de maximale
-    energieprestatievergoeding (EPV).
+    energieprestatievergoeding (EPV). Belangrijk om te vermelden is dat het hier
+    gaat om wat contractueel aan de huurder is beloofd. Dit is niet een uitkomst van
+    de energielabelberekening. Er zit wel een berekening aan ten grondslag, maar die
+    is niet genormeerd. Als het geen EPV woning betreft zal hier dus "0" moeten
+    staan, ook al liggen er PV-panelen op het dak.
     """
 
-    voorlopig_energielabel = Referentiedata(
+    voorlopig_energielabel = EnergieprestatiesoortReferentiedata(
         code="VEL",
         naam="Voorlopig energielabel",
     )
     """
-    Het tot 1-1-2015 door de overheid afgegeven &#39;Oude&#39; energielabel. Dit is geen
+    Het tot 1-1-2015 door de overheid afgegeven 'Oude' energielabel. Dit is geen
     officieel energieprestatiecertificaat. Als er een voorlopig energielabel is
     toegekend zal er geen energie-index of andere waarde bij de energieprestatie
     horen.
     """
 
-    warmtebehoefte_ruimteverwarming = Referentiedata(
+    netto_warmtevraag = EnergieprestatiesoortReferentiedata(
+        code="NEW",
+        naam="Netto warmtevraag",
+    )
+    """
+    De volgende de NEN7120 berekende netto warmtevraag.
+    """
+
+    warmtebehoefte_ruimteverwarming = EnergieprestatiesoortReferentiedata(
         code="WAR",
         naam="Warmtebehoefte ruimteverwarming",
     )
@@ -74,17 +90,3 @@ class Energieprestatiesoort(Enum):
     per jaar (kWh_th/m2/jr). Dit is één van de indicatoren die benodigd zijn voor
     het bepalen van de maximale energieprestatievergoeding (EPV).
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

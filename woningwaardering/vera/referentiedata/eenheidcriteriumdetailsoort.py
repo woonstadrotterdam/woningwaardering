@@ -1,283 +1,210 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.eenheidcriteriumsoort import (
+    Eenheidcriteriumsoort,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidcriteriumdetailsoort(Enum):
-    beroep = Referentiedata(
+class EenheidcriteriumdetailsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheidcriteriumdetailsoort(Referentiedatasoort):
+    beroep = EenheidcriteriumdetailsoortReferentiedata(
         code="BER",
         naam="Beroep",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie wegens een bijzonder beroep in de regio onderwijs, zorg of politie
     """
 
-    dakloos = Referentiedata(
+    dakloos = EenheidcriteriumdetailsoortReferentiedata(
         code="DAK",
         naam="(Bijna) dakloos",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     dakloos / calamiteit /brand onbewoonbaar / uitzetting / terugkeer uit buitenland
     """
 
-    doelgroep = Referentiedata(
+    doelgroep = EenheidcriteriumdetailsoortReferentiedata(
         code="DOE",
         naam="Doelgroep",
-        parent=Referentiedata(
-            code="GRO",
-            naam="Groep",
-        ),
+        parent=Eenheidcriteriumsoort.groep,
     )
     """
     Behoren tot een doelgroep. Bijv. gezin, student, senioren etc.
     """
 
-    gedupeerd = Referentiedata(
+    gedupeerd = EenheidcriteriumdetailsoortReferentiedata(
         code="DUP",
         naam="Gedupeerd",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie wegens dupering van woningzoekende bij woningaanbieding
     """
 
-    economisch = Referentiedata(
+    economisch = EenheidcriteriumdetailsoortReferentiedata(
         code="ECO",
         naam="Economisch",
-        parent=Referentiedata(
-            code="BIN",
-            naam="Binding",
-        ),
+        parent=Eenheidcriteriumsoort.binding,
     )
     """
     Economische binding
     """
 
-    ex_gedetineerd = Referentiedata(
+    ex_gedetineerd = EenheidcriteriumdetailsoortReferentiedata(
         code="EXD",
         naam="ex-gedetineerd",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie wegens het vrijkomen uit detentie
     """
 
-    financieel = Referentiedata(
+    financieel = EenheidcriteriumdetailsoortReferentiedata(
         code="FIN",
         naam="Financieel",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie wegens financiele problemen
     """
 
-    gelijkvloers = Referentiedata(
+    gelijkvloers = EenheidcriteriumdetailsoortReferentiedata(
         code="GEL",
         naam="Gelijkvloers",
-        parent=Referentiedata(
-            code="IND",
-            naam="Indicatie",
-        ),
+        parent=Eenheidcriteriumsoort.indicatie,
     )
     """
     Indicatie voor een gelijkvloerse woning
     """
 
-    geweld_bedreiging_en_of_overlast = Referentiedata(
+    geweld_bedreiging_en_of_overlast = EenheidcriteriumdetailsoortReferentiedata(
         code="GEW",
         naam="Geweld bedreiging / overlast",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie wegens overlast uit de omgeving of bedreiging.
     """
 
-    herhuisvesting = Referentiedata(
+    herhuisvesting = EenheidcriteriumdetailsoortReferentiedata(
         code="HUI",
         naam="Herhuisvesting",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie wegens (langdurige) renovatie, nieuwbouw of sloop
     """
 
-    kern = Referentiedata(
+    kern = EenheidcriteriumdetailsoortReferentiedata(
         code="KRN",
         naam="Kern",
-        parent=Referentiedata(
-            code="BIN",
-            naam="Binding",
-        ),
+        parent=Eenheidcriteriumsoort.binding,
     )
     """
     Kernbinding
     """
 
-    maatschappelijk = Referentiedata(
+    maatschappelijk = EenheidcriteriumdetailsoortReferentiedata(
         code="MAA",
         naam="Maatschappelijk",
-        parent=Referentiedata(
-            code="BIN",
-            naam="Binding",
-        ),
+        parent=Eenheidcriteriumsoort.binding,
     )
     """
     Maatschappelijke binding
     """
 
-    mantelzorg = Referentiedata(
+    mantelzorg = EenheidcriteriumdetailsoortReferentiedata(
         code="MAN",
         naam="Mantelzorg",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie wegens het ontvangen of geven van mantelzorg
     """
 
-    medisch = Referentiedata(
+    medisch = EenheidcriteriumdetailsoortReferentiedata(
         code="MED",
         naam="Medisch",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie voor een aangepaste woning op medische gronden
     """
 
-    regio = Referentiedata(
+    regio = EenheidcriteriumdetailsoortReferentiedata(
         code="REG",
         naam="Regio",
-        parent=Referentiedata(
-            code="BIN",
-            naam="Binding",
-        ),
+        parent=Eenheidcriteriumsoort.binding,
     )
     """
     Regionale of regio binding
     """
 
-    relationeel = Referentiedata(
+    relationeel = EenheidcriteriumdetailsoortReferentiedata(
         code="REL",
         naam="Relationeel",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Echtscheiding / verbroken relatie / gezinsproblemen /zwangerschap
     """
 
-    rollatorgeschikt = Referentiedata(
+    rollatorgeschikt = EenheidcriteriumdetailsoortReferentiedata(
         code="ROL",
         naam="Rollatorgeschikt",
-        parent=Referentiedata(
-            code="IND",
-            naam="Indicatie",
-        ),
+        parent=Eenheidcriteriumsoort.indicatie,
     )
     """
     Indicatie voor een rollatorgeschikte woning
     """
 
-    rolstoelgeschikt = Referentiedata(
+    rolstoelgeschikt = EenheidcriteriumdetailsoortReferentiedata(
         code="RST",
         naam="Rolstoelgeschikt",
-        parent=Referentiedata(
-            code="IND",
-            naam="Indicatie",
-        ),
+        parent=Eenheidcriteriumsoort.indicatie,
     )
     """
     Indicatie voor een rolstoelgeschikte woning
     """
 
-    servicewoning = Referentiedata(
+    servicewoning = EenheidcriteriumdetailsoortReferentiedata(
         code="SER",
         naam="Servicewoning",
-        parent=Referentiedata(
-            code="IND",
-            naam="Indicatie",
-        ),
+        parent=Eenheidcriteriumsoort.indicatie,
     )
     """
     Woningen bij een zorginstelling of verpleegcentrum.
     """
 
-    sociaal = Referentiedata(
+    sociaal = EenheidcriteriumdetailsoortReferentiedata(
         code="SOC",
         naam="Sociaal",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     De woonsituatie is levensontwrichtend of levensbedreigend voor een of meer
     gezinsleden.
     """
 
-    statushouder = Referentiedata(
+    statushouder = EenheidcriteriumdetailsoortReferentiedata(
         code="STA",
         naam="Statushouder",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie wegens het verkrijgen van een verblijfsstatus
     """
 
-    uitstroom_maatschappelijke_instelling = Referentiedata(
+    uitstroom_maatschappelijke_instelling = EenheidcriteriumdetailsoortReferentiedata(
         code="UIT",
         naam="Uitstroom maatschappelijke instelling",
-        parent=Referentiedata(
-            code="URG",
-            naam="Urgentie",
-        ),
+        parent=Eenheidcriteriumsoort.urgentie,
     )
     """
     Urgentie wegens het uitstromen bij een maatschappelijke instelling
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

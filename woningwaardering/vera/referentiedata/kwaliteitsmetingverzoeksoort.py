@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Kwaliteitsmetingverzoeksoort(Enum):
-    algemene_dienstverlening = Referentiedata(
+class KwaliteitsmetingverzoeksoortReferentiedata(Referentiedata):
+    pass
+
+
+class Kwaliteitsmetingverzoeksoort(Referentiedatasoort):
+    algemene_dienstverlening = KwaliteitsmetingverzoeksoortReferentiedata(
         code="ALG",
         naam="Algemene dienstverlening",
     )
@@ -11,7 +15,7 @@ class Kwaliteitsmetingverzoeksoort(Enum):
     Kwaliteitsmetingverzoek betreffende algemene dienstverlening
     """
 
-    nieuwe_huurders = Referentiedata(
+    nieuwe_huurders = KwaliteitsmetingverzoeksoortReferentiedata(
         code="HUN",
         naam="Nieuwe huurders",
     )
@@ -19,7 +23,7 @@ class Kwaliteitsmetingverzoeksoort(Enum):
     Kwaliteitsmetingverzoek betreffende nieuwe huurders
     """
 
-    vertrokken_huurders = Referentiedata(
+    vertrokken_huurders = KwaliteitsmetingverzoeksoortReferentiedata(
         code="HUV",
         naam="Vertrokken huurders",
     )
@@ -27,7 +31,7 @@ class Kwaliteitsmetingverzoeksoort(Enum):
     Kwaliteitsmetingverzoek betreffende vertrokken huurders
     """
 
-    onderhoud = Referentiedata(
+    onderhoud = KwaliteitsmetingverzoeksoortReferentiedata(
         code="OND",
         naam="Onderhoud",
     )
@@ -35,7 +39,7 @@ class Kwaliteitsmetingverzoeksoort(Enum):
     Kwaliteitsmetingverzoek betreffende onderhoud
     """
 
-    overig = Referentiedata(
+    overig = KwaliteitsmetingverzoeksoortReferentiedata(
         code="OVR",
         naam="Overig",
     )
@@ -43,7 +47,7 @@ class Kwaliteitsmetingverzoeksoort(Enum):
     Kwaliteitsmetingverzoek betreffende overige onderwerpen
     """
 
-    reparaties = Referentiedata(
+    reparaties = KwaliteitsmetingverzoeksoortReferentiedata(
         code="REP",
         naam="Reparaties",
     )
@@ -51,24 +55,10 @@ class Kwaliteitsmetingverzoeksoort(Enum):
     Kwaliteitsmetingverzoek betreffende reparaties
     """
 
-    woonomgeving = Referentiedata(
+    woonomgeving = KwaliteitsmetingverzoeksoortReferentiedata(
         code="WOO",
         naam="Woonomgeving",
     )
     """
     Kwaliteitsmetingverzoek betreffende woonomgeving
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

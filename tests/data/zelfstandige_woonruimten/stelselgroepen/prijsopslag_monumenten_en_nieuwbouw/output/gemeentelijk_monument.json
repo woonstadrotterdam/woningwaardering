@@ -1,0 +1,27 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "prijsopslag_monumenten_en_nieuwbouw__gemeentelijk_of_provinciaal_monument",
+            "naam": "Gemeentelijk of provinciaal monument"
+          },
+          "opslagpercentage": 0.15
+        }
+      ],
+      "opslagpercentage": 0.15
+    }
+  ]
+}

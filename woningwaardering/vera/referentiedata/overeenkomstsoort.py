@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Overeenkomstsoort(Enum):
-    arbeid = Referentiedata(
+class OvereenkomstsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Overeenkomstsoort(Referentiedatasoort):
+    arbeid = OvereenkomstsoortReferentiedata(
         code="ARB",
         naam="Arbeid",
     )
@@ -11,7 +15,7 @@ class Overeenkomstsoort(Enum):
     Arbeidsovereenkomst
     """
 
-    betalerovereenkomst = Referentiedata(
+    betalerovereenkomst = OvereenkomstsoortReferentiedata(
         code="BET",
         naam="Betalerovereenkomst",
     )
@@ -20,7 +24,7 @@ class Overeenkomstsoort(Enum):
     andere (huur-)overeenkomst
     """
 
-    huurovereenkomst = Referentiedata(
+    huurovereenkomst = OvereenkomstsoortReferentiedata(
         code="HUU",
         naam="Huurovereenkomst",
     )
@@ -28,7 +32,7 @@ class Overeenkomstsoort(Enum):
     Overeenkomst met betrekking tot het huren van roerend of onroerend goed.
     """
 
-    inhuur = Referentiedata(
+    inhuur = OvereenkomstsoortReferentiedata(
         code="INH",
         naam="Inhuur",
     )
@@ -36,7 +40,7 @@ class Overeenkomstsoort(Enum):
     Inhuurovereenkomst
     """
 
-    inschrijving = Referentiedata(
+    inschrijving = OvereenkomstsoortReferentiedata(
         code="INS",
         naam="Inschrijving",
     )
@@ -45,7 +49,7 @@ class Overeenkomstsoort(Enum):
     woonruimteverdeel gebied.
     """
 
-    koopovereenkomst = Referentiedata(
+    koopovereenkomst = OvereenkomstsoortReferentiedata(
         code="KOO",
         naam="Koopovereenkomst",
     )
@@ -53,7 +57,7 @@ class Overeenkomstsoort(Enum):
     Overeenkomst met betrekking tot het kopen van roerend of onroerend goed.
     """
 
-    lease = Referentiedata(
+    lease = OvereenkomstsoortReferentiedata(
         code="LEA",
         naam="Lease",
     )
@@ -61,7 +65,15 @@ class Overeenkomstsoort(Enum):
     Leaseovereenkomst
     """
 
-    onderhoudsovereenkomst = Referentiedata(
+    monitoringovereenkomst = OvereenkomstsoortReferentiedata(
+        code="MON",
+        naam="Monitoringovereenkomst",
+    )
+    """
+    Overeenkomst voor het monitoren van de energieprestaties en gebruik van een eenheid.
+    """
+
+    onderhoudsovereenkomst = OvereenkomstsoortReferentiedata(
         code="OND",
         naam="Onderhoudsovereenkomst",
     )
@@ -70,7 +82,7 @@ class Overeenkomstsoort(Enum):
     goed.
     """
 
-    serviceovereenkomst = Referentiedata(
+    serviceovereenkomst = OvereenkomstsoortReferentiedata(
         code="SER",
         naam="Serviceovereenkomst",
     )
@@ -79,17 +91,3 @@ class Overeenkomstsoort(Enum):
     reparaties, groenverzorging. Ook de verschillende vormen van inschrijvingen of
     abonnementen vallen onder de soort Service overeenkomst.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

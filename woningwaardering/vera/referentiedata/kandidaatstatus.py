@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Kandidaatstatus(Enum):
-    aangeboden = Referentiedata(
+class KandidaatstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Kandidaatstatus(Referentiedatasoort):
+    aangeboden = KandidaatstatusReferentiedata(
         code="AAN",
         naam="Aangeboden",
     )
@@ -11,7 +15,7 @@ class Kandidaatstatus(Enum):
     Kandidaat zit  in aanbiedingsproces.
     """
 
-    afgewezen = Referentiedata(
+    afgewezen = KandidaatstatusReferentiedata(
         code="AFG",
         naam="Afgewezen",
     )
@@ -19,7 +23,7 @@ class Kandidaatstatus(Enum):
     Kandidaat is afgewezen door de aanbieder, corporatie, medebewoners etc.
     """
 
-    geweigerd = Referentiedata(
+    geweigerd = KandidaatstatusReferentiedata(
         code="GEW",
         naam="Geweigerd",
     )
@@ -27,7 +31,7 @@ class Kandidaatstatus(Enum):
     Kandidaat heeft de aanbieiding geweigerd.
     """
 
-    potentiele_kandidaat = Referentiedata(
+    potentiele_kandidaat = KandidaatstatusReferentiedata(
         code="POT",
         naam="Potentiele kandidaat",
     )
@@ -35,7 +39,7 @@ class Kandidaatstatus(Enum):
     Kandidaat voldoet aan de spelregels van de publicatie.
     """
 
-    gereageerd = Referentiedata(
+    gereageerd = KandidaatstatusReferentiedata(
         code="REA",
         naam="Gereageerd",
     )
@@ -43,7 +47,7 @@ class Kandidaatstatus(Enum):
     Kandidaat heeft gereageerd op de publicatie.
     """
 
-    geselecteerd = Referentiedata(
+    geselecteerd = KandidaatstatusReferentiedata(
         code="SEL",
         naam="Geselecteerd",
     )
@@ -51,24 +55,10 @@ class Kandidaatstatus(Enum):
     Kandidaat staat op vrijgegeven kandidatenlijst.
     """
 
-    toegewezen = Referentiedata(
+    toegewezen = KandidaatstatusReferentiedata(
         code="TOE",
         naam="Toegewezen",
     )
     """
     Kandidaat is de toegewezen gebruiker van de eenheid.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

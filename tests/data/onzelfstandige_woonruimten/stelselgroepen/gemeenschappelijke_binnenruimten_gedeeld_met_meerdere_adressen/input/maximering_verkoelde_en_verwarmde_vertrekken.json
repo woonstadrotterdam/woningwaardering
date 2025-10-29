@@ -1,0 +1,118 @@
+{
+  "id": "1",
+  "ruimten": [
+    {
+      "id": "A",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true,
+      "verkoeld": true
+    },
+    {
+      "id": "B",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true,
+      "verkoeld": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in woonkamer",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 3001
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "oppervlakte": 20.0,
+      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true,
+      "verkoeld": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in woonkamer",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 3001
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 10.0,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true,
+      "verkoeld": true
+    },
+    {
+      "id": "D",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 10.0,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "verwarmd": true,
+      "verkoeld": true
+    }
+  ]
+}

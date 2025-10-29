@@ -1,11 +1,15 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidmonument(Enum):
-    beschermd_dorpsgezicht = Referentiedata(
-        code="DOR",
-        naam="Beschermd dorpsgezicht",
+class EenheidmonumentReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheidmonument(Referentiedatasoort):
+    gemeentelijk_beschermd_dorpsgezicht = EenheidmonumentReferentiedata(
+        code="DGG",
+        naam="Gemeentelijk beschermd dorpsgezicht",
     )
     """
     Bij ontwikkelingen binnen een stads- of dorpsgezicht moet rekening gehouden met de
@@ -13,10 +17,25 @@ class Eenheidmonument(Enum):
     bestemmingsplan. Vergeleken met een gewoon bestemmingsplan is het
     gedetailleerder en gelden er strengere regels, zowel voor de bebouwde als voor
     de onbebouwde ruimte. Bovendien is voor een aantal bouwactiviteiten een
-    vergunning nodig.
+    vergunning nodig. Het gebied is door de gemeente aangewezen als beschermd
+    dorpsgezicht.
     """
 
-    gemeentelijk_monument = Referentiedata(
+    rijksbeschermd_dorpsgezicht = EenheidmonumentReferentiedata(
+        code="DGR",
+        naam="Rijksbeschermd dorpsgezicht",
+    )
+    """
+    Bij ontwikkelingen binnen een stads- of dorpsgezicht moet rekening gehouden met de
+    cultuurhistorische waarde. Elk beschermd gebied heeft hiervoor een eigen
+    bestemmingsplan. Vergeleken met een gewoon bestemmingsplan is het
+    gedetailleerder en gelden er strengere regels, zowel voor de bebouwde als voor
+    de onbebouwde ruimte. Bovendien is voor een aantal bouwactiviteiten een
+    vergunning nodig. Het gebied is door de rijksoverheid aangewezen als beschermd
+    dorpsgezicht.
+    """
+
+    gemeentelijk_monument = EenheidmonumentReferentiedata(
         code="GEM",
         naam="Gemeentelijk monument",
     )
@@ -26,7 +45,7 @@ class Eenheidmonument(Enum):
     plaatselijk of regionaal belang is.
     """
 
-    provinciaal_monument = Referentiedata(
+    provinciaal_monument = EenheidmonumentReferentiedata(
         code="PRO",
         naam="Provinciaal monument",
     )
@@ -40,7 +59,7 @@ class Eenheidmonument(Enum):
     hebben aangewezen.
     """
 
-    rijksmonument = Referentiedata(
+    rijksmonument = EenheidmonumentReferentiedata(
         code="RIJ",
         naam="Rijksmonument",
     )
@@ -50,9 +69,9 @@ class Eenheidmonument(Enum):
     monument.
     """
 
-    beschermd_stadsgezicht = Referentiedata(
-        code="STA",
-        naam="Beschermd stadsgezicht",
+    gemeentelijk_beschermd_stadsgezicht = EenheidmonumentReferentiedata(
+        code="SGG",
+        naam="Gemeentelijk beschermd stadsgezicht",
     )
     """
     Bij ontwikkelingen binnen een stads- of dorpsgezicht moet rekening gehouden met de
@@ -60,10 +79,25 @@ class Eenheidmonument(Enum):
     bestemmingsplan. Vergeleken met een gewoon bestemmingsplan is het
     gedetailleerder en gelden er strengere regels, zowel voor de bebouwde als voor
     de onbebouwde ruimte. Bovendien is voor een aantal bouwactiviteiten een
-    vergunning nodig.
+    vergunning nodig. Het gebied is door de gemeente aangewezen als beschermd
+    stadsgezicht.
     """
 
-    werelderfgoed = Referentiedata(
+    rijksbeschermd_stadsgezicht = EenheidmonumentReferentiedata(
+        code="SGR",
+        naam="Rijksbeschermd stadsgezicht",
+    )
+    """
+    Bij ontwikkelingen binnen een stads- of dorpsgezicht moet rekening gehouden met de
+    cultuurhistorische waarde. Elk beschermd gebied heeft hiervoor een eigen
+    bestemmingsplan. Vergeleken met een gewoon bestemmingsplan is het
+    gedetailleerder en gelden er strengere regels, zowel voor de bebouwde als voor
+    de onbebouwde ruimte. Bovendien is voor een aantal bouwactiviteiten een
+    vergunning nodig. Het gebied is door de rijksoverheid aangewezen als beschermd
+    stadsgezicht.
+    """
+
+    werelderfgoed = EenheidmonumentReferentiedata(
         code="WER",
         naam="Werelderfgoed",
     )
@@ -72,17 +106,3 @@ class Eenheidmonument(Enum):
     uitzonderlijk en onvervangbaar zijn. Alleen als een monument is ingeschreven op
     de Werelderfgoedlijst van UNESCO mag het de titel Werelderfgoed dragen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

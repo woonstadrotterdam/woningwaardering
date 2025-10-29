@@ -1,9 +1,16 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedata.eenheidklimaatbeheersingsoort import (
+    Eenheidklimaatbeheersingsoort,
+)
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Eenheidklimaatbeheersing(Enum):
-    airco = Referentiedata(
+class EenheidklimaatbeheersingReferentiedata(Referentiedata):
+    pass
+
+
+class Eenheidklimaatbeheersing(Referentiedatasoort):
+    airco = EenheidklimaatbeheersingReferentiedata(
         code="AIR",
         naam="Airco",
     )
@@ -15,13 +22,10 @@ class Eenheidklimaatbeheersing(Enum):
     handhaven. Dit kan zowel individueel als collectief georganiseerd zijn.
     """
 
-    blokverwarming = Referentiedata(
+    blokverwarming = EenheidklimaatbeheersingReferentiedata(
         code="BLO",
         naam="Blokverwarming",
-        parent=Referentiedata(
-            code="COL",
-            naam="Collectief",
-        ),
+        parent=Eenheidklimaatbeheersingsoort.collectief,
     )
     """
     Blokverwarming is een centraal verwarmingssysteem dat wordt gebruikt in gebouwen met
@@ -31,26 +35,23 @@ class Eenheidklimaatbeheersing(Enum):
     verwarmen.
     """
 
-    centrale_verwarming = Referentiedata(
+    centrale_verwarming = EenheidklimaatbeheersingReferentiedata(
         code="CEV",
         naam="Centrale verwarming",
+        parent=Eenheidklimaatbeheersingsoort.individueel,
     )
     """
-    Centrale verwarming is een systeem waarbij warmte wordt geproduceerd op één centrale
-    locatie, meestal een ketel, en vervolgens via leidingen naar verschillende
-    ruimten in een gebouw wordt verspreid. Dit wordt vaak gedaan door radiatoren,
-    vloerverwarming of convectoren, waardoor een gelijkmatige warmteverdeling door
-    het hele gebouw wordt bereikt. Dit kan zowel individueel als collectief
-    georganiseerd zijn.
+    Een verwarmingssysteem dat specifiek is ontworpen om één enkele eenheid te
+    verwarmen. De warmte wordt centraal opgewekt en vervolgens naar verschillende
+    ruimtes in de woning of eenheid getransporteerd. Dit in tegenstelling tot
+    centrale verwarmingssystemen die meerdere eenheden of gebouwen kunnen bedienen
+    (zoals stadsverwarming of blokverwarming).
     """
 
-    gaskachels = Referentiedata(
+    gaskachels = EenheidklimaatbeheersingReferentiedata(
         code="GAS",
         naam="Gaskachels",
-        parent=Referentiedata(
-            code="IND",
-            naam="Individueel",
-        ),
+        parent=Eenheidklimaatbeheersingsoort.individueel,
     )
     """
     Een gaskachel is een verwarmingstoestel dat werkt op aardgas of propaan. Het bevat
@@ -58,13 +59,10 @@ class Eenheidklimaatbeheersing(Enum):
     omgevingstemperatuur wordt verhoogd voor comfort in een ruimte.
     """
 
-    houtkachel = Referentiedata(
+    houtkachel = EenheidklimaatbeheersingReferentiedata(
         code="HKA",
         naam="Houtkachel",
-        parent=Referentiedata(
-            code="IND",
-            naam="Individueel",
-        ),
+        parent=Eenheidklimaatbeheersingsoort.individueel,
     )
     """
     Een houtkachel is een verwarmingstoestel dat brandt op hout als brandstof. Het heeft
@@ -72,13 +70,10 @@ class Eenheidklimaatbeheersing(Enum):
     ruimte wordt verwarmd voor comfort.
     """
 
-    muurverwarming = Referentiedata(
+    muurverwarming = EenheidklimaatbeheersingReferentiedata(
         code="MUU",
         naam="Muurverwarming",
-        parent=Referentiedata(
-            code="IND",
-            naam="Individueel",
-        ),
+        parent=Eenheidklimaatbeheersingsoort.individueel,
     )
     """
     Muurverwarming is een verwarmingssysteem waarbij warmte wordt gegenereerd door
@@ -86,7 +81,7 @@ class Eenheidklimaatbeheersing(Enum):
     waardoor de muren warmte afgeven en de ruimte gelijkmatig verwarmen.
     """
 
-    mechanische_ventilatie = Referentiedata(
+    mechanische_ventilatie = EenheidklimaatbeheersingReferentiedata(
         code="MVE",
         naam="Mechanische ventilatie",
     )
@@ -97,13 +92,10 @@ class Eenheidklimaatbeheersing(Enum):
     kan zowel individueel als collectief georganiseerd zijn.
     """
 
-    open_haard = Referentiedata(
+    open_haard = EenheidklimaatbeheersingReferentiedata(
         code="OHA",
         naam="Open haard",
-        parent=Referentiedata(
-            code="IND",
-            naam="Individueel",
-        ),
+        parent=Eenheidklimaatbeheersingsoort.individueel,
     )
     """
     Een open haard is een vuurplaats in een huis met een opening waarin hout of andere
@@ -111,13 +103,10 @@ class Eenheidklimaatbeheersing(Enum):
     kookmogelijkheden.
     """
 
-    stadsverwarming = Referentiedata(
+    stadsverwarming = EenheidklimaatbeheersingReferentiedata(
         code="STV",
         naam="Stadsverwarming",
-        parent=Referentiedata(
-            code="COL",
-            naam="Collectief",
-        ),
+        parent=Eenheidklimaatbeheersingsoort.collectief,
     )
     """
     Stadsverwarming is een systeem waarbij warmte wordt geproduceerd op één centrale
@@ -127,18 +116,31 @@ class Eenheidklimaatbeheersing(Enum):
     industriële processen, wat bijdraagt aan energie-efficiëntie.
     """
 
-    onverwarmd = Referentiedata(
+    onverwarmd = EenheidklimaatbeheersingReferentiedata(
         code="ONV",
         naam="Onverwarmd",
     )
 
-    vloerverwarming = Referentiedata(
+    verwarmd = EenheidklimaatbeheersingReferentiedata(
+        code="VER",
+        naam="Verwarmd",
+    )
+    """
+    Mogelijkheid om de ruimte of eenheid te verwarmen
+    """
+
+    gekoeld = EenheidklimaatbeheersingReferentiedata(
+        code="GEK",
+        naam="Gekoeld",
+    )
+    """
+    Mogelijkheid om de ruimte of eenheid te verkoelen
+    """
+
+    vloerverwarming = EenheidklimaatbeheersingReferentiedata(
         code="VLV",
         naam="Vloerverwarming",
-        parent=Referentiedata(
-            code="IND",
-            naam="Individueel",
-        ),
+        parent=Eenheidklimaatbeheersingsoort.individueel,
     )
     """
     Vloerverwarming is een verwarmingssysteem waarbij warmte wordt afgegeven via
@@ -146,19 +148,16 @@ class Eenheidklimaatbeheersing(Enum):
     vloer wordt verwarmd en de warmte gelijkmatig wordt verspreid in de ruimte.
     """
 
-    volledig_elektrisch = Referentiedata(
+    volledig_elektrisch = EenheidklimaatbeheersingReferentiedata(
         code="VOL",
         naam="Volledig Elektrisch",
-        parent=Referentiedata(
-            code="IND",
-            naam="Individueel",
-        ),
+        parent=Eenheidklimaatbeheersingsoort.individueel,
     )
     """
     Volledig elektrische klimaatbeheersing
     """
 
-    warmtepomp_cv = Referentiedata(
+    warmtepomp_cv = EenheidklimaatbeheersingReferentiedata(
         code="WAC",
         naam="Warmtepomp CV",
     )
@@ -167,7 +166,7 @@ class Eenheidklimaatbeheersing(Enum):
     waterpomp genoemd. Dit kan zowel individueel als collectief georganiseerd zijn.
     """
 
-    warmtepomp = Referentiedata(
+    warmtepomp = EenheidklimaatbeheersingReferentiedata(
         code="WAR",
         naam="Warmtepomp",
     )
@@ -176,7 +175,7 @@ class Eenheidklimaatbeheersing(Enum):
     individueel als collectief georganiseerd zijn.
     """
 
-    warmte_koudeopslaginstallatie = Referentiedata(
+    warmte_koudeopslaginstallatie = EenheidklimaatbeheersingReferentiedata(
         code="WKO",
         naam="Warmte- koudeopslaginstallatie",
     )
@@ -187,7 +186,7 @@ class Eenheidklimaatbeheersing(Enum):
     (bodem-)waterpomp Dit kan zowel individueel als collectief georganiseerd zijn.
     """
 
-    warmteterugwinsysteem = Referentiedata(
+    warmteterugwinsysteem = EenheidklimaatbeheersingReferentiedata(
         code="WTW",
         naam="Warmteterugwinsysteem",
     )
@@ -197,17 +196,3 @@ class Eenheidklimaatbeheersing(Enum):
     waardoor energie wordt bespaard en het binnenklimaat wordt verbeterd. Dit kan
     zowel individueel als collectief georganiseerd zijn.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

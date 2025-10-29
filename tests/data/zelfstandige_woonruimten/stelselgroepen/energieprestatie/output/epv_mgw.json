@@ -1,0 +1,26 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 28.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "energieprestatie__energieprestatievergoeding",
+            "naam": "Energieprestatievergoeding Meergezinswoning"
+          },
+          "punten": 28.0
+        }
+      ]
+    }
+  ]
+}

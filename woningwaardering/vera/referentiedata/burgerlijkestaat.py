@@ -1,24 +1,28 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Burgerlijkestaat(Enum):
-    achtergebleven_partner = Referentiedata(
+class BurgerlijkestaatReferentiedata(Referentiedata):
+    pass
+
+
+class Burgerlijkestaat(Referentiedatasoort):
+    achtergebleven_partner = BurgerlijkestaatReferentiedata(
         code="ACH",
         naam="Achtergebleven partner",
     )
 
-    gehuwd = Referentiedata(
+    gehuwd = BurgerlijkestaatReferentiedata(
         code="GEH",
         naam="Gehuwd",
     )
 
-    gescheiden = Referentiedata(
+    gescheiden = BurgerlijkestaatReferentiedata(
         code="GES",
         naam="Gescheiden",
     )
 
-    ongehuwd = Referentiedata(
+    ongehuwd = BurgerlijkestaatReferentiedata(
         code="ONG",
         naam="Ongehuwd",
     )
@@ -26,12 +30,12 @@ class Burgerlijkestaat(Enum):
     En nooit gehuwd of partnerschap
     """
 
-    partnerschap_beeindigd = Referentiedata(
+    partnerschap_beeindigd = BurgerlijkestaatReferentiedata(
         code="PAB",
         naam="Partnerschap beëindigd",
     )
 
-    partnerschap = Referentiedata(
+    partnerschap = BurgerlijkestaatReferentiedata(
         code="PAR",
         naam="Partnerschap",
     )
@@ -39,7 +43,7 @@ class Burgerlijkestaat(Enum):
     Geregistreerd partnerschap
     """
 
-    samenwonend = Referentiedata(
+    samenwonend = BurgerlijkestaatReferentiedata(
         code="SAM",
         naam="Samenwonend",
     )
@@ -47,21 +51,7 @@ class Burgerlijkestaat(Enum):
     Langdurig huishouden voerend
     """
 
-    weduwe_en_of_weduwnaar = Referentiedata(
+    weduwe_en_of_weduwnaar = BurgerlijkestaatReferentiedata(
         code="WED",
         naam="Weduwe/weduwnaar",
     )
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

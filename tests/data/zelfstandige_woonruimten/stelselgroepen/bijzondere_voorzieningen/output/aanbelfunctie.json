@@ -1,0 +1,26 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 0.25,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "bijzondere_voorzieningen__aanbelfunctie_met_video_en_audioverbinding",
+            "naam": "Aanbelfunctie met video- en audioverbinding"
+          },
+          "punten": 0.25
+        }
+      ]
+    }
+  ]
+}

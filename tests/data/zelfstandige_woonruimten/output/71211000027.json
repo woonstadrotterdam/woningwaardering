@@ -16,7 +16,8 @@
         {
           "aantal": 15.89,
           "criterium": {
-            "naam": "Woonkamer + 1 kast",
+            "id": "oppervlakte_van_vertrekken__Space_57375640",
+            "naam": "Woonkamer (+1 kast)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -26,6 +27,7 @@
         {
           "aantal": 10.63,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_57375630",
             "naam": "Keuken",
             "meeteenheid": {
               "code": "M2",
@@ -36,7 +38,8 @@
         {
           "aantal": 9.08,
           "criterium": {
-            "naam": "Slaapkamer",
+            "id": "oppervlakte_van_vertrekken__Space_57380265",
+            "naam": "Slaapkamer 1",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -46,7 +49,8 @@
         {
           "aantal": 4.73,
           "criterium": {
-            "naam": "Slaapkamer",
+            "id": "oppervlakte_van_vertrekken__Space_57381083",
+            "naam": "Slaapkamer 2",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -56,7 +60,8 @@
         {
           "aantal": 8.72,
           "criterium": {
-            "naam": "Slaapkamer",
+            "id": "oppervlakte_van_vertrekken__Space_57381076",
+            "naam": "Slaapkamer 3",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -66,6 +71,7 @@
         {
           "aantal": 4.94,
           "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_57380179",
             "naam": "Badruimte",
             "meeteenheid": {
               "code": "M2",
@@ -91,6 +97,7 @@
         {
           "aantal": 11.07,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_57385287",
             "naam": "Zolder",
             "meeteenheid": {
               "code": "M2",
@@ -100,6 +107,7 @@
         },
         {
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_57385287__correctie_zolder_zonder_vaste_trap",
             "naam": "Correctie: zolder zonder vaste trap"
           },
           "punten": -5.0
@@ -107,6 +115,7 @@
         {
           "aantal": 5.05,
           "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_57376103",
             "naam": "Berging",
             "meeteenheid": {
               "code": "M2",
@@ -131,48 +140,377 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "naam": "Woonkamer"
+            "id": "verkoeling_en_verwarming__Space_57375640",
+            "naam": "Woonkamer",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Keuken"
+            "id": "verkoeling_en_verwarming__Space_57375630",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer"
+            "id": "verkoeling_en_verwarming__Space_57380265",
+            "naam": "Slaapkamer 1",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer"
+            "id": "verkoeling_en_verwarming__Space_57381083",
+            "naam": "Slaapkamer 2",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Slaapkamer"
+            "id": "verkoeling_en_verwarming__Space_57381076",
+            "naam": "Slaapkamer 3",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "naam": "Badruimte"
+            "id": "verkoeling_en_verwarming__Space_57380179",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          },
+          "punten": 12.0
         }
       ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 15.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 4.62,
+          "criterium": {
+            "id": "buitenruimten__Space_57375636",
+            "naam": "Tuin 1",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.62
+        },
+        {
+          "aantal": 34.41,
+          "criterium": {
+            "id": "buitenruimten__Space_57375635",
+            "naam": "Tuin 2",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 12.04
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__aanwezig__prive",
+            "naam": "Buitenruimten aanwezig",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__prive"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 39.03,
+          "criterium": {
+            "id": "buitenruimten__totaal__prive",
+            "naam": "Totaal (privé)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 15.66
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__maximering",
+            "naam": "Maximaal 15 punten"
+          },
+          "punten": -0.66
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 14.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "energieprestatie__label",
+            "naam": "D (Energie-index)"
+          },
+          "punten": 14.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 3000.0,
+          "criterium": {
+            "id": "keuken__Space_57375630__lengte_aanrecht_Aanrecht_57375632",
+            "naam": "Keuken: Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 7.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 9.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_57376368__staand_toilet",
+            "naam": "Toiletruimte - Staand Toilet"
+          },
+          "punten": 3.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_57376368__wastafel",
+            "naam": "Toiletruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_57380179__wastafel",
+            "naam": "Badruimte - Wastafel"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_57380179__douche",
+            "naam": "Badruimte - Douche"
+          },
+          "punten": 4.0
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GPA",
+          "naam": "Gemeenschappelijke parkeerruimten"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GVR",
+          "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "WOZ",
+          "naam": "Punten voor de WOZ-waarde"
+        }
+      },
+      "punten": 22.25,
+      "woningwaarderingen": [
+        {
+          "aantal": 169000.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+          }
+        },
+        {
+          "aantal": 14543.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__factor_I",
+            "naam": "Factor I",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
+            "naam": "Onderdeel I"
+          },
+          "punten": 11.62
+        },
+        {
+          "aantal": 70.11,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
+            "naam": "Oppervlakte van vertrekken en overige ruimten",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 229.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__factor_II",
+            "naam": "Factor II",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
+            "naam": "Onderdeel II"
+          },
+          "punten": 10.53
+        }
+      ]
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": []
+    },
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "PMN",
+          "naam": "Prijsopslag monumenten en nieuwbouw"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [],
+      "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 417.55,
-  "punten": 73.0,
+  "maximaleHuur": 880.13,
+  "punten": 140.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
-  "maximaleHuurInclusiefOpslag": 417.55
+  "huurprijsopslag": 0.0,
+  "maximaleHuurInclusiefOpslag": 880.13
 }

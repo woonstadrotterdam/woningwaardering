@@ -1,0 +1,27 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_175353__bad_en_douche",
+            "naam": "Badkamer - Bad en douche"
+          },
+          "punten": 7.0
+        }
+      ]
+    }
+  ]
+}

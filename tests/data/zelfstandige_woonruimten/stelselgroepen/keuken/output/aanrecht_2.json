@@ -16,9 +16,10 @@
         {
           "aantal": 2000.0,
           "criterium": {
-            "naam": "Lengte aanrecht",
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
+            "naam": "Keuken: Lengte aanrecht",
             "meeteenheid": {
-              "code": "MLM",
+              "code": "MIL",
               "naam": "Millimeter"
             }
           },

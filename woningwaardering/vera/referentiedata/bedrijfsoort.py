@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Bedrijfsoort(Enum):
-    bouwbedrijf = Referentiedata(
+class BedrijfsoortReferentiedata(Referentiedata):
+    pass
+
+
+class Bedrijfsoort(Referentiedatasoort):
+    bouwbedrijf = BedrijfsoortReferentiedata(
         code="BOU",
         naam="Bouwbedrijf",
     )
@@ -11,7 +15,7 @@ class Bedrijfsoort(Enum):
     Financieel bedrijf dat zich bezighoudt met bouwactiviteiten.
     """
 
-    monumenten = Referentiedata(
+    monumenten = BedrijfsoortReferentiedata(
         code="MON",
         naam="Monumenten",
     )
@@ -20,7 +24,7 @@ class Bedrijfsoort(Enum):
     monumenten status.
     """
 
-    onderhoudsbedrijf = Referentiedata(
+    onderhoudsbedrijf = BedrijfsoortReferentiedata(
         code="OND",
         naam="Onderhoudsbedrijf",
     )
@@ -28,7 +32,7 @@ class Bedrijfsoort(Enum):
     Financieel bedrijf dat zich bezighoudt met onderhoudsactiviteiten.
     """
 
-    projectontwikkeling = Referentiedata(
+    projectontwikkeling = BedrijfsoortReferentiedata(
         code="PRO",
         naam="Projectontwikkeling",
     )
@@ -36,7 +40,7 @@ class Bedrijfsoort(Enum):
     Financieel bedrijf dat zich bezighoudt met projectontwikkeling.
     """
 
-    servicebedrijf = Referentiedata(
+    servicebedrijf = BedrijfsoortReferentiedata(
         code="SER",
         naam="Servicebedrijf",
     )
@@ -44,7 +48,7 @@ class Bedrijfsoort(Enum):
     Financieel bedrijf dat zich bezighoudt met het verlenen van diensten.
     """
 
-    toegelaten_instelling = Referentiedata(
+    toegelaten_instelling = BedrijfsoortReferentiedata(
         code="TI",
         naam="Toegelaten instelling",
     )
@@ -53,7 +57,7 @@ class Bedrijfsoort(Enum):
     toegelaten instelling volgens de Woningwet.
     """
 
-    vereniging_van_eigenaren = Referentiedata(
+    vereniging_van_eigenaren = BedrijfsoortReferentiedata(
         code="VVE",
         naam="Vereniging van Eigenaren",
     )
@@ -63,7 +67,7 @@ class Bedrijfsoort(Enum):
     cluster heeft verkocht.
     """
 
-    wijkontwikkelingsmaatschappij = Referentiedata(
+    wijkontwikkelingsmaatschappij = BedrijfsoortReferentiedata(
         code="WOM",
         naam="Wijkontwikkelingsmaatschappij",
     )
@@ -73,7 +77,7 @@ class Bedrijfsoort(Enum):
     groot is voor één partij (bijvoorbeeld een woningcorporatie).
     """
 
-    woonwagenzaken = Referentiedata(
+    woonwagenzaken = BedrijfsoortReferentiedata(
         code="WWA",
         naam="Woonwagenzaken",
     )
@@ -81,17 +85,3 @@ class Bedrijfsoort(Enum):
     Financieel bedrijf dat zich bezighoudt met beheeractiviteiten van woonwagens en
     standplaatsen.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

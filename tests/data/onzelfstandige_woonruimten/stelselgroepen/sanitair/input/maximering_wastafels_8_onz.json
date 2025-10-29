@@ -1,0 +1,113 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_383020",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        }
+      ]
+    },
+    {
+      "id": "Space_993828",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "gedeeld_met_aantal_onzelfstandige_woonruimten": 8,
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        }
+      ]
+    },
+    {
+      "id": "Space_340444",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "WoonkamerMetMax",
+      "inhoud": 21.5125,
+      "oppervlakte": 7.49563,
+      "verwarmd": true,
+      "gedeeld_met_aantal_onzelfstandige_woonruimten": 8,
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        }
+      ]
+    }
+  ]
+}

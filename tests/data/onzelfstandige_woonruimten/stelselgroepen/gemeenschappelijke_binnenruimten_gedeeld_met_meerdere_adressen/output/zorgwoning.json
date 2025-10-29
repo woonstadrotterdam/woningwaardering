@@ -1,0 +1,26 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GBA",
+          "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
+        }
+      },
+      "punten": 3.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__zorgwoning",
+            "naam": "Zorgwoning"
+          },
+          "punten": 3.0
+        }
+      ]
+    }
+  ]
+}

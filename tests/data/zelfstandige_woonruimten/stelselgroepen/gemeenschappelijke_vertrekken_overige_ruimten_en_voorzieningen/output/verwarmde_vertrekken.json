@@ -1,0 +1,57 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GVR",
+          "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
+        }
+      },
+      "punten": 4.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_1",
+            "naam": "Slaapkamer (gedeeld met 5)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_2",
+            "naam": "Woonkamer (gedeeld met 6)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.67
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__Space_1",
+            "naam": "Slaapkamer (gedeeld met 5)"
+          },
+          "punten": 0.4
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__Space_2",
+            "naam": "Woonkamer (gedeeld met 6)"
+          },
+          "punten": 0.33
+        }
+      ]
+    }
+  ]
+}

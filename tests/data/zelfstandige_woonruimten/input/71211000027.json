@@ -1,6 +1,10 @@
 {
   "id": "71211000027",
   "bouwjaar": 1919,
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "klimaatbeheersing": [
     {
       "code": "IND",
@@ -8,17 +12,17 @@
     }
   ],
   "adres": {
-    "straatnaam": "Polslandstraat",
-    "huisnummer": "37",
+    "straatnaam": "",
+    "huisnummer": "",
     "huisnummer_toevoeging": "",
-    "postcode": "3081TK",
+    "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
   },
   "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000307252",
-    "bagIdentificatie": "0599010000307252"
+    "id": "",
+    "bagIdentificatie": ""
   },
   "panden": [
     {
@@ -64,8 +68,8 @@
     {
       "id": "Space_57380186",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -185,8 +189,8 @@
     {
       "id": "Space_57380176",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "OVL",
@@ -205,8 +209,8 @@
     {
       "id": "Space_57376296",
       "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "TRH",
@@ -229,7 +233,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "CLO",
+        "code": "TOI",
         "naam": "Toiletruimte"
       },
       "naam": "Toiletruimte",
@@ -436,8 +440,8 @@
     {
       "id": "Space_57375639",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
+        "code": "VRK",
+        "naam": "Verkeersruimte"
       },
       "detailSoort": {
         "code": "ENT",

@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Onderhoudstaakstatus(Enum):
-    concept_en_of_aangemaakt = Referentiedata(
+class OnderhoudstaakstatusReferentiedata(Referentiedata):
+    pass
+
+
+class Onderhoudstaakstatus(Referentiedatasoort):
+    concept_en_of_aangemaakt = OnderhoudstaakstatusReferentiedata(
         code="CON",
         naam="Concept  / aangemaakt",
     )
@@ -11,7 +15,7 @@ class Onderhoudstaakstatus(Enum):
     De taak in concept / aangemaakt
     """
 
-    gepland = Referentiedata(
+    gepland = OnderhoudstaakstatusReferentiedata(
         code="GEP",
         naam="Gepland",
     )
@@ -19,7 +23,7 @@ class Onderhoudstaakstatus(Enum):
     Voor de taak is een afspraak gepland
     """
 
-    gereed = Referentiedata(
+    gereed = OnderhoudstaakstatusReferentiedata(
         code="GER",
         naam="Gereed",
     )
@@ -27,7 +31,7 @@ class Onderhoudstaakstatus(Enum):
     De taak is gereed gemeld door de vakman
     """
 
-    gesloten = Referentiedata(
+    gesloten = OnderhoudstaakstatusReferentiedata(
         code="GES",
         naam="Gesloten",
     )
@@ -35,7 +39,7 @@ class Onderhoudstaakstatus(Enum):
     De taak is administratief afgesloten
     """
 
-    onderbroken = Referentiedata(
+    onderbroken = OnderhoudstaakstatusReferentiedata(
         code="OND",
         naam="Onderbroken",
     )
@@ -45,7 +49,7 @@ class Onderhoudstaakstatus(Enum):
     materiaal besteld moet worden
     """
 
-    gepauzeerd = Referentiedata(
+    gepauzeerd = OnderhoudstaakstatusReferentiedata(
         code="PAU",
         naam="Gepauzeerd",
     )
@@ -54,7 +58,7 @@ class Onderhoudstaakstatus(Enum):
     voor een lunchbreak
     """
 
-    onderweg = Referentiedata(
+    onderweg = OnderhoudstaakstatusReferentiedata(
         code="REI",
         naam="Onderweg",
     )
@@ -62,7 +66,7 @@ class Onderhoudstaakstatus(Enum):
     De vakman is onderweg naar de onderhoudslocatie voor de uitvoering van de taak
     """
 
-    in_uitvoering = Referentiedata(
+    in_uitvoering = OnderhoudstaakstatusReferentiedata(
         code="UIT",
         naam="In uitvoering",
     )
@@ -70,7 +74,7 @@ class Onderhoudstaakstatus(Enum):
     De vakman is bezig met de uitvoering van de taak.
     """
 
-    uitwerktijd = Referentiedata(
+    uitwerktijd = OnderhoudstaakstatusReferentiedata(
         code="UWT",
         naam="Uitwerktijd",
     )
@@ -79,17 +83,3 @@ class Onderhoudstaakstatus(Enum):
     gebruikt bij bijvoorbeeld het opruimen van het gereedschap in de bus na de
     werkzaamheden.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent

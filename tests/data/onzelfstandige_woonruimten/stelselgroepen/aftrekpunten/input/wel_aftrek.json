@@ -1,0 +1,20 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_153283",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 10,
+      "oppervlakte": 7,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "monumenten": [
+    {
+      "code": "RIJ",
+      "naam": "Rijksmonument"
+    }
+  ],
+  "Woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  },
+  "datumAfsluitenHuurovereenkomst": "2024-07-01"
+}

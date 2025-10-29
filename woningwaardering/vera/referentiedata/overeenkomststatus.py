@@ -1,9 +1,13 @@
-from enum import Enum
 from woningwaardering.vera.bvg.generated import Referentiedata
+from woningwaardering.vera.referentiedatasoort import Referentiedatasoort
 
 
-class Overeenkomststatus(Enum):
-    beeindigd = Referentiedata(
+class OvereenkomststatusReferentiedata(Referentiedata):
+    pass
+
+
+class Overeenkomststatus(Referentiedatasoort):
+    beeindigd = OvereenkomststatusReferentiedata(
         code="BEE",
         naam="Beeindigd",
     )
@@ -11,7 +15,7 @@ class Overeenkomststatus(Enum):
     De einddatum van de overeenkomst is verstreken en deze is daadwerkelijk beeindigd.
     """
 
-    geannuleerd = Referentiedata(
+    geannuleerd = OvereenkomststatusReferentiedata(
         code="GEA",
         naam="Geannuleerd",
     )
@@ -22,7 +26,7 @@ class Overeenkomststatus(Enum):
     opgezegd, ontbonden of vernietigd moeten worden.
     """
 
-    goedgekeurd = Referentiedata(
+    goedgekeurd = OvereenkomststatusReferentiedata(
         code="GOE",
         naam="Goedgekeurd",
     )
@@ -31,7 +35,7 @@ class Overeenkomststatus(Enum):
     de huurder.
     """
 
-    lopend = Referentiedata(
+    lopend = OvereenkomststatusReferentiedata(
         code="LOP",
         naam="Lopend",
     )
@@ -40,7 +44,7 @@ class Overeenkomststatus(Enum):
     specifieke voorwaarden van de overeenkomst
     """
 
-    ontbonden = Referentiedata(
+    ontbonden = OvereenkomststatusReferentiedata(
         code="ONT",
         naam="Ontbonden",
     )
@@ -49,7 +53,7 @@ class Overeenkomststatus(Enum):
     natuurlijke weg is beëindigd. Ontbonden vanwege contractbreuk, -fraude.
     """
 
-    opgezegd = Referentiedata(
+    opgezegd = OvereenkomststatusReferentiedata(
         code="OPG",
         naam="Opgezegd",
     )
@@ -58,7 +62,7 @@ class Overeenkomststatus(Enum):
     vastgelegd.
     """
 
-    vernietigd = Referentiedata(
+    vernietigd = OvereenkomststatusReferentiedata(
         code="VER",
         naam="Vernietigd",
     )
@@ -68,7 +72,7 @@ class Overeenkomststatus(Enum):
     nietig verklaard vanwege handelsonbevoegdheid of –onbekwaamheid.
     """
 
-    voorlopig = Referentiedata(
+    voorlopig = OvereenkomststatusReferentiedata(
         code="VOO",
         naam="Voorlopig",
     )
@@ -78,7 +82,7 @@ class Overeenkomststatus(Enum):
     bijvoorbeeld nog bewijsstukken aangeleverd worden.
     """
 
-    voorlopig_opgezegd = Referentiedata(
+    voorlopig_opgezegd = OvereenkomststatusReferentiedata(
         code="VOP",
         naam="Voorlopig opgezegd",
     )
@@ -86,17 +90,3 @@ class Overeenkomststatus(Enum):
     De overeenkomst is opgezegd door de huurder maar is nog wel actief en de opzegging
     is ook nog niet definitief gemaakt.
     """
-
-    @property
-    def code(self) -> str:
-        if self.value.code is None:
-            raise TypeError("de code van een Referentiedata object mag niet None zijn")
-        return self.value.code
-
-    @property
-    def naam(self) -> str | None:
-        return self.value.naam
-
-    @property
-    def parent(self) -> Referentiedata | None:
-        return self.value.parent
