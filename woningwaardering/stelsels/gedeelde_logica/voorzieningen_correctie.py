@@ -302,15 +302,9 @@ def corrigeer_eenheid_zonder_toilet(
         return
 
     # Controleer of er ergens in de eenheid een toilet is
-    eenheid_heeft_toilet = False
     for ruimte in eenheid.ruimten:
         if _heeft_toilet(ruimte):
-            eenheid_heeft_toilet = True
-            break
-
-    # Als er al een toilet is, hoef je niets te doen
-    if eenheid_heeft_toilet:
-        return
+            return
 
     # Zoek een badkamer om het toilet aan toe te voegen
     for ruimte in eenheid.ruimten:
@@ -337,15 +331,9 @@ def corrigeer_eenheid_zonder_aanrecht(
         return
 
     # Controleer of er ergens in de eenheid een aanrecht is
-    eenheid_heeft_aanrecht = False
     for ruimte in eenheid.ruimten:
         if _heeft_aanrecht(ruimte):
-            eenheid_heeft_aanrecht = True
-            break
-
-    # Als er al een aanrecht is, hoef je niets te doen
-    if eenheid_heeft_aanrecht:
-        return
+            return
 
     # Zoek een woonkamer om het aanrecht aan toe te voegen
     for ruimte in eenheid.ruimten:
