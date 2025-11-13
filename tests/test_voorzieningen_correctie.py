@@ -10,6 +10,8 @@ from woningwaardering.stelsels.gedeelde_logica.voorzieningen_correctie import (
     _corrigeer_wastafel,
     _heeft_douche_of_bad,
     _heeft_wastafel,
+    corrigeer_eenheid_zonder_aanrecht,
+    corrigeer_eenheid_zonder_toilet,
     corrigeer_voorzieningen_eenheid,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -278,3 +280,105 @@ class TestVoorzieningenCorrectie:
         assert badkamer1.installaties.count(Installatiesoort.douche) == 1
         assert woonkamer.installaties.count(Installatiesoort.wastafel) == 0
         assert woonkamer.installaties.count(Installatiesoort.douche) == 0
+
+    # Tests voor corrigeer_eenheid_zonder_toilet
+    def test_corrigeer_eenheid_zonder_toilet_voegt_toe_aan_badkamer(self):
+        """Test dat corrigeer_eenheid_zonder_toilet staand_toilet toevoegt aan badkamer wanneer eenheid geen toilet heeft."""
+        badkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.badkamer, installaties=[]
+        )
+        woonkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.woonkamer, installaties=[]
+        )
+        eenheid = self._maak_eenheid([badkamer, woonkamer])
+
+        corrigeer_eenheid_zonder_toilet(eenheid, Installatiesoort.staand_toilet)
+
+        assert Installatiesoort.staand_toilet in badkamer.installaties
+        assert badkamer.installaties.count(Installatiesoort.staand_toilet) == 1
+
+    def test_corrigeer_eenheid_zonder_toilet_voegt_geen_toilet_toe_wanneer_al_aanwezig(
+        self,
+    ):
+        """Test dat corrigeer_eenheid_zonder_toilet geen toilet toevoegt wanneer er al een toilet in een andere ruimte is."""
+        badkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.badkamer, installaties=[]
+        )
+        toiletruimte = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.toiletruimte,
+            installaties=[Installatiesoort.staand_toilet],
+        )
+        eenheid = self._maak_eenheid([badkamer, toiletruimte])
+
+        corrigeer_eenheid_zonder_toilet(eenheid, Installatiesoort.staand_toilet)
+
+        assert Installatiesoort.staand_toilet not in badkamer.installaties
+        assert len(badkamer.installaties) == 0
+
+    def test_corrigeer_eenheid_zonder_toilet_voegt_geen_toilet_toe_zonder_badkamer(
+        self,
+    ):
+        """Test dat corrigeer_eenheid_zonder_toilet geen toilet toevoegt wanneer er geen badkamer is."""
+        woonkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.woonkamer, installaties=[]
+        )
+        eenheid = self._maak_eenheid([woonkamer])
+
+        corrigeer_eenheid_zonder_toilet(eenheid, Installatiesoort.staand_toilet)
+
+        assert len(woonkamer.installaties) == 0
+
+    # Tests voor corrigeer_eenheid_zonder_aanrecht
+    def test_corrigeer_eenheid_zonder_aanrecht_voegt_toe_aan_woonkamer(self):
+        """Test dat corrigeer_eenheid_zonder_aanrecht aanrecht toevoegt aan woonkamer wanneer eenheid geen aanrecht heeft."""
+        woonkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.woonkamer, bouwkundige_elementen=[]
+        )
+        badkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.badkamer, bouwkundige_elementen=[]
+        )
+        eenheid = self._maak_eenheid([woonkamer, badkamer])
+
+        corrigeer_eenheid_zonder_aanrecht(eenheid, 1000)
+
+        assert len(woonkamer.bouwkundige_elementen) == 1
+        aanrecht = woonkamer.bouwkundige_elementen[0]
+        assert aanrecht.detail_soort == Bouwkundigelementdetailsoort.aanrecht
+        assert aanrecht.lengte == 1000
+
+    def test_corrigeer_eenheid_zonder_aanrecht_voegt_geen_aanrecht_toe_wanneer_al_aanwezig(
+        self,
+    ):
+        """Test dat corrigeer_eenheid_zonder_aanrecht geen aanrecht toevoegt wanneer er al een aanrecht in een andere ruimte is."""
+        woonkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.woonkamer, bouwkundige_elementen=[]
+        )
+        keuken = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.keuken,
+            bouwkundige_elementen=[
+                BouwkundigElementenBouwkundigElement(
+                    id="aanrecht_1",
+                    naam="Aanrecht",
+                    detail_soort=Bouwkundigelementdetailsoort.aanrecht,
+                    lengte=1200,
+                )
+            ],
+        )
+        eenheid = self._maak_eenheid([woonkamer, keuken])
+
+        corrigeer_eenheid_zonder_aanrecht(eenheid, 1000)
+
+        assert len(woonkamer.bouwkundige_elementen) == 0
+
+    def test_corrigeer_eenheid_zonder_aanrecht_voegt_geen_aanrecht_toe_zonder_woonkamer(
+        self,
+    ):
+        """Test dat corrigeer_eenheid_zonder_aanrecht geen aanrecht toevoegt wanneer er geen woonkamer is."""
+        badkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.badkamer, bouwkundige_elementen=[]
+        )
+        eenheid = self._maak_eenheid([badkamer])
+
+        corrigeer_eenheid_zonder_aanrecht(eenheid, 1000)
+
+        assert len(badkamer.bouwkundige_elementen) == 0
