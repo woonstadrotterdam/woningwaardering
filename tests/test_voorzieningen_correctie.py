@@ -10,8 +10,8 @@ from woningwaardering.stelsels.gedeelde_logica.voorzieningen_correctie import (
     _corrigeer_wastafel,
     _heeft_douche_of_bad,
     _heeft_wastafel,
-    corrigeer_eenheid_zonder_aanrecht,
-    corrigeer_eenheid_zonder_toilet,
+    corrigeer_afwezigheid_aanrecht,
+    corrigeer_afwezigheid_toilet,
     corrigeer_voorzieningen_eenheid,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -297,7 +297,7 @@ class TestVoorzieningenCorrectie:
         )
         eenheid = self._maak_eenheid([badkamer, woonkamer])
 
-        corrigeer_eenheid_zonder_toilet(eenheid, Installatiesoort.staand_toilet)
+        corrigeer_afwezigheid_toilet(eenheid, Installatiesoort.staand_toilet)
 
         assert Installatiesoort.staand_toilet in badkamer.installaties
         assert badkamer.installaties.count(Installatiesoort.staand_toilet) == 1
@@ -315,7 +315,7 @@ class TestVoorzieningenCorrectie:
         )
         eenheid = self._maak_eenheid([badkamer, toiletruimte])
 
-        corrigeer_eenheid_zonder_toilet(eenheid, Installatiesoort.staand_toilet)
+        corrigeer_afwezigheid_toilet(eenheid, Installatiesoort.staand_toilet)
 
         assert Installatiesoort.staand_toilet not in badkamer.installaties
         assert len(badkamer.installaties) == 0
@@ -329,7 +329,7 @@ class TestVoorzieningenCorrectie:
         )
         eenheid = self._maak_eenheid([woonkamer])
 
-        corrigeer_eenheid_zonder_toilet(eenheid, Installatiesoort.staand_toilet)
+        corrigeer_afwezigheid_toilet(eenheid, Installatiesoort.staand_toilet)
 
         assert len(woonkamer.installaties) == 0
 
@@ -344,7 +344,7 @@ class TestVoorzieningenCorrectie:
         )
         eenheid = self._maak_eenheid([woonkamer, badkamer])
 
-        corrigeer_eenheid_zonder_aanrecht(eenheid, 1000)
+        corrigeer_afwezigheid_aanrecht(eenheid, 1000)
 
         assert len(woonkamer.bouwkundige_elementen) == 1
         aanrecht = woonkamer.bouwkundige_elementen[0]
@@ -371,7 +371,7 @@ class TestVoorzieningenCorrectie:
         )
         eenheid = self._maak_eenheid([woonkamer, keuken])
 
-        corrigeer_eenheid_zonder_aanrecht(eenheid, 1000)
+        corrigeer_afwezigheid_aanrecht(eenheid, 1000)
 
         assert len(woonkamer.bouwkundige_elementen) == 0
 
@@ -384,6 +384,6 @@ class TestVoorzieningenCorrectie:
         )
         eenheid = self._maak_eenheid([badkamer])
 
-        corrigeer_eenheid_zonder_aanrecht(eenheid, 1000)
+        corrigeer_afwezigheid_aanrecht(eenheid, 1000)
 
         assert len(badkamer.bouwkundige_elementen) == 0
