@@ -180,7 +180,11 @@ class TestVoorzieningenCorrectie:
     ):
         """Test dat corrigeer_voorzieningen_eenheid geen duplicaten toevoegt aan badkamer met bestaande voorzieningen."""
         badkamer = self._maak_ruimte(
-            installaties=[Installatiesoort.wastafel, Installatiesoort.douche]
+            installaties=[
+                Installatiesoort.wastafel,
+                Installatiesoort.douche,
+                Installatiesoort.staand_toilet,
+            ]
         )
         eenheid = self._maak_eenheid([badkamer])
 
@@ -190,6 +194,7 @@ class TestVoorzieningenCorrectie:
         assert len(badkamer.installaties) == oorspronkelijk_aantal
         assert badkamer.installaties.count(Installatiesoort.wastafel) == 1
         assert badkamer.installaties.count(Installatiesoort.douche) == 1
+        assert badkamer.installaties.count(Installatiesoort.staand_toilet) == 1
 
     def test_corrigeer_voorzieningen_eenheid_geen_badkamer_ruimten(self):
         """Test dat corrigeer_voorzieningen_eenheid geen voorzieningen toevoegt aan andere ruimten."""
