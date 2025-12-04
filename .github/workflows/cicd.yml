@@ -2,7 +2,6 @@ name: CICD
 
 permissions:
   contents: read
-  pull-requests: write
 
 on:
   workflow_dispatch:
@@ -48,16 +47,22 @@ jobs:
       - name: Run pre-push hooks
         run: pre-commit run --all-files --hook-stage pre-push
 
-      - name: Run pytest
-        run: python -m pytest --junitxml=pytest-report.xml --cov=woningwaardering --cov-report xml:coverage.xml
+      - name: Run pytest with coverage and summary
+        run: |
+          python -m pytest \
+            --junitxml=pytest-report.xml \
+            --cov=woningwaardering \
+            --cov-report=term-missing > pytest-coverage.txt
 
-      - name: Pytest coverage comment
-        uses: MishaKav/pytest-coverage-comment@main
-        with:
-          pytest-xml-coverage-path: coverage.xml
-          junitxml-path: pytest-report.xml
-          create-new-comment: true
-        if: always()
+          cat pytest-coverage.txt
+
+          {
+            echo '## Pytest coverage';
+            echo;
+            echo '```';
+            cat pytest-coverage.txt;
+            echo '```';
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Produce test summary
         uses: test-summary/action@v2
