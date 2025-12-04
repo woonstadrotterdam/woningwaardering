@@ -149,7 +149,10 @@ def naar_tabel(
     table.align["Meeteenheid"] = "l"
     table.align["Punten"] = "r"
     table.align["Opslag"] = "r"
-    table.float_format = ".2"
+    # prettytable accepteert hier zowel een string als een dict; de type hints in
+    # sommige omgevingen verwachten echter een dict[str, str], daarom construeren we
+    # expliciet een dict om mypy tevreden te houden.
+    table.float_format = {field: ".2" for field in table.field_names}
 
     table._min_width = {
         "Groep": 33,
