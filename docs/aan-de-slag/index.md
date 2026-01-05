@@ -512,17 +512,17 @@ with open(
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 63.0,
+      "punten": 64.75,
       "woningwaarderingen": [
         {
-          "aantal": 643000.0,
+          "aantal": 694000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
           }
         },
         {
-          "aantal": 14543.0,
+          "aantal": 15329.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
@@ -536,7 +536,7 @@ with open(
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 44.21
+          "punten": 45.27
         },
         {
           "aantal": 147.52,
@@ -553,7 +553,7 @@ with open(
           }
         },
         {
-          "aantal": 229.0,
+          "aantal": 242.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
@@ -567,7 +567,7 @@ with open(
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 19.03
+          "punten": 19.44
         }
       ]
     },
@@ -670,18 +670,18 @@ with open(
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Sanitair                          | Totaal                                                                      |              |                     |   15.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2023                                    |   [643000.0] |                     |         |         |
-| Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |   44.21 |         |
-| Punten voor de WOZ-waarde         |  - Factor I                                                                 |    [14543.0] |                     |         |         |
-| Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |   19.03 |         |
+| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2024                                    |   [694000.0] |                     |         |         |
+| Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |   45.27 |         |
+| Punten voor de WOZ-waarde         |  - Factor I                                                                 |    [15329.0] |                     |         |         |
+| Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |   19.44 |         |
 | Punten voor de WOZ-waarde         |  - Oppervlakte van vertrekken en overige ruimten                            |     [147.52] | Vierkante meter, m2 |         |         |
-| Punten voor de WOZ-waarde         |  - Factor II                                                                |      [229.0] |                     |         |         |
+| Punten voor de WOZ-waarde         |  - Factor II                                                                |      [242.0] |                     |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-| Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |   63.00 |         |
+| Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |   64.75 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-| Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |  282.00 |         |
+| Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |  284.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-|                                   | Maximale huur                                                               |      1820.52 | EUR                 |         |         |
+|                                   | Maximale huur                                                               |      1900.64 | EUR                 |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 ```
 
@@ -744,6 +744,9 @@ eenheid = EenhedenEenheid(
         ),
         EenhedenWozEenheid(
             waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=643000
+        ),
+        EenhedenWozEenheid(
+            waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=694000
         ),
     ],
     energieprestaties=[
@@ -1034,17 +1037,17 @@ De woningwaardering package ondersteunt verschillende output formaten:
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 112.0,
+      "punten": 114.5,
       "woningwaarderingen": [
         {
-          "aantal": 643000.0,
+          "aantal": 694000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
           }
         },
         {
-          "aantal": 14543.0,
+          "aantal": 15329.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
@@ -1058,7 +1061,7 @@ De woningwaardering package ondersteunt verschillende output formaten:
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 44.21
+          "punten": 45.27
         },
         {
           "aantal": 41.42,
@@ -1075,7 +1078,7 @@ De woningwaardering package ondersteunt verschillende output formaten:
           }
         },
         {
-          "aantal": 229.0,
+          "aantal": 242.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
@@ -1089,7 +1092,7 @@ De woningwaardering package ondersteunt verschillende output formaten:
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 67.79
+          "punten": 69.24
         }
       ]
     },
@@ -1162,18 +1165,18 @@ De woningwaardering package ondersteunt verschillende output formaten:
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Keuken                            | Totaal                                                                      |      2700.00 | Millimeter          |    7.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2023                                    |   [643000.0] |                     |         |         |
-| Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |   44.21 |         |
-| Punten voor de WOZ-waarde         |  - Factor I                                                                 |    [14543.0] |                     |         |         |
-| Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |   67.79 |         |
+| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2024                                    |   [694000.0] |                     |         |         |
+| Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |   45.27 |         |
+| Punten voor de WOZ-waarde         |  - Factor I                                                                 |    [15329.0] |                     |         |         |
+| Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |   69.24 |         |
 | Punten voor de WOZ-waarde         |  - Oppervlakte van vertrekken en overige ruimten                            |      [41.42] | Vierkante meter, m2 |         |         |
-| Punten voor de WOZ-waarde         |  - Factor II                                                                |      [229.0] |                     |         |         |
+| Punten voor de WOZ-waarde         |  - Factor II                                                                |      [242.0] |                     |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-| Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |  112.00 |         |
+| Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |  114.50 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-| Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |  181.00 |         |
+| Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |  184.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-|                                   | Maximale huur                                                               |      1151.72 | EUR                 |         |         |
+|                                   | Maximale huur                                                               |      1214.31 | EUR                 |         |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 ```
 
