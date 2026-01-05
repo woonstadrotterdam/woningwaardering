@@ -32,16 +32,6 @@
       }
     }
   ],
-  "woz_eenheden": [
-    {
-      "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 282000
-    },
-    {
-      "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 298000
-    }
-  ],
   "energieprestaties": [],
   "gebruiksoppervlakte": 72,
   "monumenten": [],
@@ -369,6 +359,20 @@
         "nummer": "03",
         "omschrijving": "derde verdieping"
       }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 282000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 298000
+    },
+    {
+      "vastgesteldeWaarde": 289000,
+      "waardepeildatum": "2024-01-01"
     }
   ]
 }

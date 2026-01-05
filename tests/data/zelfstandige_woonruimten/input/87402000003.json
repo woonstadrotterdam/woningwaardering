@@ -32,16 +32,6 @@
       }
     }
   ],
-  "woz_eenheden": [
-    {
-      "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 170000
-    },
-    {
-      "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 170000
-    }
-  ],
   "energieprestaties": [],
   "gebruiksoppervlakte": 50,
   "monumenten": [],
@@ -287,6 +277,20 @@
         "nummer": "02",
         "omschrijving": "tweede verdieping"
       }
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 170000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 170000
+    },
+    {
+      "vastgesteldeWaarde": 220000,
+      "waardepeildatum": "2024-01-01"
     }
   ]
 }

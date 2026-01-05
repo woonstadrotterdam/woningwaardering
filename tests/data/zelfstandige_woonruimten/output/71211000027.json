@@ -416,17 +416,17 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 22.25,
+      "punten": 24.25,
       "woningwaarderingen": [
         {
-          "aantal": 169000.0,
+          "aantal": 195000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
           }
         },
         {
-          "aantal": 14543.0,
+          "aantal": 15329.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
@@ -440,7 +440,7 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 11.62
+          "punten": 12.72
         },
         {
           "aantal": 70.11,
@@ -457,7 +457,7 @@
           }
         },
         {
-          "aantal": 229.0,
+          "aantal": 242.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
@@ -471,7 +471,7 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 10.53
+          "punten": 11.49
         }
       ]
     },
@@ -505,12 +505,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 912.26,
-  "punten": 140.0,
+  "maximaleHuur": 925.98,
+  "punten": 142.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 912.26
+  "maximaleHuurInclusiefOpslag": 925.98
 }

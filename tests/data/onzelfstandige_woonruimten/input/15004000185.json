@@ -29,6 +29,10 @@
     {
       "waardepeildatum": "2023-01-01",
       "vastgesteldeWaarde": 184000
+    },
+    {
+      "vastgesteldeWaarde": 205000,
+      "waardepeildatum": "2024-01-01"
     }
   ],
   "panden": [

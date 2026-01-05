@@ -68,6 +68,10 @@
     {
       "waardepeildatum": "2023-01-01",
       "vastgesteldeWaarde": 237000
+    },
+    {
+      "vastgesteldeWaarde": 238000,
+      "waardepeildatum": "2024-01-01"
     }
   ],
   "monumenten": [

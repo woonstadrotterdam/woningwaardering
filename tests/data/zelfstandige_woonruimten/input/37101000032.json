@@ -32,16 +32,6 @@
       }
     }
   ],
-  "woz_eenheden": [
-    {
-      "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 618000
-    },
-    {
-      "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 643000
-    }
-  ],
   "energieprestaties": [
     {
       "soort": {
@@ -752,6 +742,20 @@
       "oppervlakte": 0.27936,
       "verwarmd": false,
       "gemeenschappelijk": true
+    }
+  ],
+  "woz_eenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 618000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 643000
+    },
+    {
+      "vastgesteldeWaarde": 694000,
+      "waardepeildatum": "2024-01-01"
     }
   ]
 }
