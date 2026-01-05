@@ -32,7 +32,39 @@
       }
     }
   ],
-  "woz_eenheden": [
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2014-01-01",
+      "vastgesteldeWaarde": 111000
+    },
+    {
+      "waardepeildatum": "2015-01-01",
+      "vastgesteldeWaarde": 113000
+    },
+    {
+      "waardepeildatum": "2016-01-01",
+      "vastgesteldeWaarde": 120000
+    },
+    {
+      "waardepeildatum": "2017-01-01",
+      "vastgesteldeWaarde": 135000
+    },
+    {
+      "waardepeildatum": "2018-01-01",
+      "vastgesteldeWaarde": 167000
+    },
+    {
+      "waardepeildatum": "2019-01-01",
+      "vastgesteldeWaarde": 200000
+    },
+    {
+      "waardepeildatum": "2020-01-01",
+      "vastgesteldeWaarde": 233000
+    },
+    {
+      "waardepeildatum": "2021-01-01",
+      "vastgesteldeWaarde": 266000
+    },
     {
       "waardepeildatum": "2022-01-01",
       "vastgesteldeWaarde": 297000
@@ -40,6 +72,10 @@
     {
       "waardepeildatum": "2023-01-01",
       "vastgesteldeWaarde": 309000
+    },
+    {
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 318000
     }
   ],
   "energieprestaties": [
