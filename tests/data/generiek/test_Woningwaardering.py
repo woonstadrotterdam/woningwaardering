@@ -1,5 +1,3 @@
-from datetime import date
-
 from tests.utils import assert_output_model, assert_som_bovenliggend_criterium
 from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
@@ -9,9 +7,9 @@ from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
 
 
 def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte(
-    onzelfstandige_woonruimten_inputmodel,
+    onzelfstandige_woonruimten_inputmodel, peildatum
 ):
-    woningwaardering = Woningwaardering(peildatum=date(2025, 1, 1))
+    woningwaardering = Woningwaardering(peildatum=peildatum)
     resultaat = woningwaardering.waardeer(onzelfstandige_woonruimten_inputmodel)
 
     assert isinstance(
@@ -36,9 +34,9 @@ def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte_output(
 
 
 def test_WoningwaarderingGeneriekZelfstandigeWoonruimte(
-    zelfstandige_woonruimten_inputmodel,
+    zelfstandige_woonruimten_inputmodel, peildatum
 ):
-    woningwaardering = Woningwaardering(peildatum=date(2025, 1, 1))
+    woningwaardering = Woningwaardering(peildatum=peildatum)
     resultaat = woningwaardering.waardeer(zelfstandige_woonruimten_inputmodel)
 
     assert isinstance(

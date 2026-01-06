@@ -183,7 +183,7 @@ def test_pydantic_equals_json(test_case):
         # Fail with detailed message
         pytest.fail(diff)
         
-def test_docs_voorbeelden_json():
+def test_docs_voorbeelden_json(peildatum):
     """
     Test JSON voorbeeld uit de documentatie (voorbeeld 1).
     
@@ -192,7 +192,7 @@ def test_docs_voorbeelden_json():
     - De JSON input zoals getoond in de documentatie correct wordt verwerkt
     - De output overeenkomt met de verwachte waarden in output_json_json_voorbeeld.json
     """
-    wws = Woningwaardering(peildatum=date(2025, 1, 1))
+    wws = Woningwaardering(peildatum=peildatum)
     with open(
         "tests/data/generiek/input/37101000032.json",
         "r+",
@@ -208,7 +208,7 @@ def test_docs_voorbeelden_json():
             assert_output_model(woningwaardering_resultaat, expected_result)
 
 
-def test_docs_voorbeelden_python():
+def test_docs_voorbeelden_python(peildatum):
     """
     Test Python voorbeeld uit de documentatie (voorbeeld 2).
     
@@ -217,7 +217,7 @@ def test_docs_voorbeelden_python():
     - De Python code zoals getoond in de documentatie correct werkt
     - De output overeenkomt met de verwachte waarden in output_json_python_voorbeeld.json
     """
-    wws = Woningwaardering(peildatum=date(2025, 1, 1))
+    wws = Woningwaardering(peildatum=peildatum)
 
     eenheid = EenhedenEenheid(
         id="37101000032",
