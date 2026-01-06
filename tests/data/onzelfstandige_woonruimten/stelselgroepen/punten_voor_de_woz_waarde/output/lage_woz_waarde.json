@@ -24,16 +24,6 @@
           }
         },
         {
-          "aantal": 73607.0,
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__minimum_woz_waarde",
-            "naam": "Minimum WOZ-waarde gebruikt voor berekening",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
-            }
-          }
-        },
-        {
           "aantal": 58.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__gebruiksoppervlakte",
@@ -48,7 +38,7 @@
           }
         },
         {
-          "aantal": 1269.08621,
+          "aantal": 1172.41379,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde_per_m2",
             "naam": "WOZ-waarde per m²",
@@ -68,7 +58,7 @@
           }
         },
         {
-          "aantal": -62.8270003,
+          "aantal": -65.658647,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil",
             "naam": "Percentage verschil"
