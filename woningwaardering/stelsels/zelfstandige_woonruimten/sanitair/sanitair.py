@@ -26,13 +26,13 @@ class Sanitair(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.sanitair
         super().__init__(
             begindatum=date(2025, 1, 1),
             einddatum=date.max,
             peildatum=peildatum,
         )
-        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.sanitair
 
     def waardeer(
         self,

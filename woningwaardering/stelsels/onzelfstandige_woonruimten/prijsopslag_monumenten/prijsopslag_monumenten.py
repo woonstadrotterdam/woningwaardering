@@ -30,13 +30,13 @@ class PrijsopslagMonumenten(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        self.stelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten
         super().__init__(
             begindatum=date(2025, 1, 1),
             einddatum=date.max,
             peildatum=peildatum,
         )
-        self.stelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten
 
     def waardeer(
         self,
