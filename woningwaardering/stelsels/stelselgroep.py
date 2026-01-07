@@ -50,7 +50,7 @@ class Stelselgroep(ABC):
         self.peildatum = peildatum
         if not is_geldig(begindatum, einddatum, peildatum):
             raise ValueError(
-                f"Stelselgroep ({begindatum} - {einddatum}) is niet geldig op peildatum ({peildatum})."
+                f"Stelselgroep {self._stelselgroep.naam} ({begindatum} - {einddatum}) is niet geldig op peildatum ({peildatum})."
             )
 
     @abstractmethod
