@@ -246,14 +246,21 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": 34.0,
+      "punten": 0.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "energieprestatie__label",
-            "naam": "B (Energie-index)"
+            "id": "energieprestatie__bouwjaar",
+            "naam": "Bouwjaar 1922"
           },
-          "punten": 34.0
+          "punten": -15.0
+        },
+        {
+          "criterium": {
+            "id": "energieprestatie__correctie_monument",
+            "naam": "Correctie monument"
+          },
+          "punten": 15.0
         }
       ]
     },
@@ -475,12 +482,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1303.57,
-  "punten": 197.0,
+  "maximaleHuur": 1070.14,
+  "punten": 163.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1303.57
+  "maximaleHuurInclusiefOpslag": 1070.14
 }

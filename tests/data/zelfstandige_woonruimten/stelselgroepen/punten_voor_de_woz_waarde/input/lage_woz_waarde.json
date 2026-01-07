@@ -22,6 +22,10 @@
     {
       "waardepeildatum": "2023-01-01",
       "vastgesteldeWaarde": 69999
+    },
+    {
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 79999
     }
   ],
   "energieprestaties": [
