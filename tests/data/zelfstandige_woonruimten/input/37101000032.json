@@ -744,7 +744,7 @@
       "gemeenschappelijk": true
     }
   ],
-  "woz_eenheden": [
+  "wozEenheden": [
     {
       "waardepeildatum": "2022-01-01",
       "vastgesteldeWaarde": 618000

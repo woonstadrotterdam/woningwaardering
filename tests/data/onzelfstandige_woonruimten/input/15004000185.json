@@ -21,7 +21,7 @@
     "bag_gebruikers_oppervlakte": 58.0
   },
   "energieprestaties": [],
-  "woz_eenheden": [
+  "wozEenheden": [
     {
       "waardepeildatum": "2024-01-01",
       "vastgesteldeWaarde": 205000
