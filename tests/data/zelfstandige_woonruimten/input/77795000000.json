@@ -32,16 +32,6 @@
       }
     }
   ],
-  "woz_eenheden": [
-    {
-      "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 339000
-    },
-    {
-      "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 365000
-    }
-  ],
   "energieprestaties": [
     {
       "soort": {
@@ -486,6 +476,20 @@
         "nummer": "00",
         "omschrijving": "begane grond"
       }
+    }
+  ],
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 339000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 365000
+    },
+    {
+      "vastgesteldeWaarde": 336000,
+      "waardepeildatum": "2024-01-01"
     }
   ]
 }

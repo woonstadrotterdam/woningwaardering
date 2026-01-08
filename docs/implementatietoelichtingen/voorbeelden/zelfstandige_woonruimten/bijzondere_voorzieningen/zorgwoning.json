@@ -63,6 +63,10 @@
     {
       "vastgesteldeWaarde": 300000.0,
       "waardepeildatum": "2023-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 310000.0,
+      "waardepeildatum": "2024-01-01"
     }
   ]
 }

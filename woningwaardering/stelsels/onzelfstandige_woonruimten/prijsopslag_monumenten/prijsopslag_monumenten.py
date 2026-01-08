@@ -30,13 +30,13 @@ class PrijsopslagMonumenten(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        self.stelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten
         super().__init__(
             begindatum=date(2025, 1, 1),
             einddatum=date.max,
             peildatum=peildatum,
         )
-        self.stelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten
 
     def waardeer(
         self,
@@ -111,7 +111,7 @@ class PrijsopslagMonumenten(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=PrijsopslagMonumenten(peildatum=date(2025, 1, 1)),
+        instance=PrijsopslagMonumenten(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

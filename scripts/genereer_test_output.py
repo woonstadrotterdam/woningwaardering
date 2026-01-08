@@ -22,7 +22,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 logger.remove()
 stdout_id = logger.add(sys.stdout, level="INFO")
 
-PEILDATUM = date(2025, 1, 1)
+PEILDATUM = date(2026, 1, 1)
 
 DATA_DIR = Path("tests/data")
 

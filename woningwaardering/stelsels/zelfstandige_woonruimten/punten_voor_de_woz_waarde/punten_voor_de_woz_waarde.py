@@ -41,13 +41,13 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self,
         peildatum: date = date.today(),
     ) -> None:
+        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
+        self.stelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
         super().__init__(
-            begindatum=date(2025, 1, 1),
+            begindatum=date(2026, 1, 1),
             einddatum=date.max,
             peildatum=peildatum,
         )
-        self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
-        self.stelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
         self.pd_woz_factor = pd.read_csv(
             str(
                 files("woningwaardering").joinpath(
@@ -97,41 +97,42 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
 
         woz_eenheid = self.bepaal_woz_eenheid(eenheid)
+        gebruikt_minimum_waarde = False
 
-        if woz_eenheid is None:
+        # Gebruik de minimum WOZ-waarde als er geen relevante WOZ-waarde is
+        if woz_eenheid is None or woz_eenheid.vastgestelde_waarde is None:
             warnings.warn(
-                f"Eenheid ({eenheid.id}): geen WOZ-waarde gevonden", UserWarning
+                f"Eenheid ({eenheid.id}): geen WOZ-waarde gevonden, gebruik minimum WOZ-waarde",
+                UserWarning,
             )
-            return woningwaardering_groep
-
-        if woz_eenheid.vastgestelde_waarde is None:
-            warnings.warn("Vastgestelde WOZ-waarde in WOZ-eenheid is None")
-            return woningwaardering_groep
+            woz_eenheid = self._haal_minimum_woz_waarde_op()
+            gebruikt_minimum_waarde = True
+        else:
+            # Als er een relevante WOZ-waarde is, gebruik die
+            logger.info(
+                f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is €{woz_eenheid.vastgestelde_waarde:.0f}"
+            )
 
         if woz_eenheid.waardepeildatum is None:
-            warnings.warn("Waardepeildatum in WOZ-eenheid is None")
-            return woningwaardering_groep
-
-        logger.info(
-            f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is €{woz_eenheid.vastgestelde_waarde:.0f}"
-        )
-
-        woz_waarde = self.minimum_woz_waarde(woz_eenheid)
-
-        if woz_waarde is None:
             warnings.warn(
-                f"Eenheid ({eenheid.id}): geen minimum WOZ-waarde gevonden", UserWarning
+                f"Eenheid ({eenheid.id}): WOZ-eenheid heeft geen waardepeildatum",
+                UserWarning,
             )
             return woningwaardering_groep
 
-        factoren = self.pd_woz_factor[
-            self.pd_woz_factor["Peildatum"]
-            == pd.to_datetime(woz_eenheid.waardepeildatum)
+        woz_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
+        waardepeildatum = pd.to_datetime(woz_eenheid.waardepeildatum)
+
+        # De WOZ-factor wordt bepaald op basis van de waardepeildatum van de WOZ-waarde.
+        filtered = self.pd_woz_factor[
+            self.pd_woz_factor["Peildatum"] <= waardepeildatum
         ]
-        if len(factoren) != 1:
+        if len(filtered) == 0:
             raise ValueError(
-                f"Eenheid ({eenheid.id}): lookup-table gefaald voor peildatum {woz_eenheid.waardepeildatum} voor {self.stelselgroep.naam}."
+                f"Eenheid ({eenheid.id}): lookup-table gefaald voor peildatum {waardepeildatum} voor {self.stelselgroep.naam}."
             )
+        # Neem de meest recente datum die kleiner of gelijk is aan de waardepeildatum
+        factoren = filtered.nlargest(1, "Peildatum")
 
         factor_onderdeel_I = Decimal(str(factoren["Onderdeel I"].values[0]))
         factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
@@ -155,10 +156,18 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
         )
 
+        # Toon de WOZ-waarde of minimumwaarde in de resultaten
+        if gebruikt_minimum_waarde:
+            naam_woz_waarde = (
+                "Minimum WOZ-waarde (geen relevante WOZ-waarde beschikbaar)"
+            )
+        else:
+            naam_woz_waarde = f"WOZ-waarde op waardepeildatum {waardepeildatum.strftime(DATUM_FORMAT)}"
+
         woningwaardering_groep.woningwaarderingen.append(
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
+                    naam=naam_woz_waarde,
                     id=str(
                         CriteriumId(
                             stelselgroep=self.stelselgroep,
@@ -166,11 +175,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                         )
                     ),
                 ),
-                aantal=int(woz_eenheid.vastgestelde_waarde),
+                aantal=int(woz_waarde),
             )
         )
-        # indien de woz-waarde niet gelijk is aan de vastgestelde waarde, is de minimale woz-waarde van toepassing
-        if woz_waarde != woz_eenheid.vastgestelde_waarde:
+        # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
+        if gebruikt_minimum_waarde:
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -238,8 +247,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
         )
 
-        # indien de woz-waarde niet gelijk is aan de vastgestelde waarde, is de minimale woz-waarde van toepassing
-        if woz_waarde != woz_eenheid.vastgestelde_waarde:
+        # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
+        if gebruikt_minimum_waarde:
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -532,50 +541,47 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
         )
 
-    def minimum_woz_waarde(self, woz_eenheid: EenhedenWozEenheid) -> Decimal | None:
+    def _haal_minimum_woz_waarde_op(self) -> EenhedenWozEenheid:
         """
-        Bepaalt de minimum WOZ-waarde.
-
-        Args:
-            woz_eenheid (EenhedenWozEenheid): De WOZ-eenheid.
+        Haalt de minimum WOZ-waarde op op basis van de peildatum waarop de
+        woningwaardering wordt berekend en retourneert deze als EenhedenWozEenheid.
 
         Returns:
-            Decimal | None: De minimum WOZ-waarde, of None indien er geen minimum vastgesteld kan worden.
+            EenhedenWozEenheid: Een EenhedenWozEenheid met de minimum WOZ-waarde
+                en de waardepeildatum (1 januari van het jaar voor de datum van de
+                opgehaalde minimumwaarde)
 
         Raises:
             ValueError: Als er iets onverwachts fout gaat bij het gebruiken van een lookup-tabel.
         """
-        if woz_eenheid.vastgestelde_waarde is None:
-            warnings.warn("Vastgestelde WOZ-waarde in WOZ-eenheid is None")
-            return None
-
-        if woz_eenheid.waardepeildatum is None:
-            warnings.warn("Waardepeildatum in WOZ-eenheid is None")
-            return None
-
-        vastgestelde_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
-
+        # De minimum WOZ-waarde wordt bepaald op basis van de peildatum waarop de
+        # woningwaardering wordt berekend (self.peildatum), niet de waardepeildatum van
+        # de WOZ-waarde.
+        peildatum = pd.to_datetime(self.peildatum)
         filtered_df = self.pd_minimum_woz_waarde[
-            self.pd_minimum_woz_waarde["Peildatum"]
-            == pd.to_datetime(woz_eenheid.waardepeildatum)
+            self.pd_minimum_woz_waarde["Peildatum"] <= peildatum
         ]
-        if len(filtered_df) != 1:
+        if len(filtered_df) == 0:
             raise ValueError(
-                f"Eenheid ({woz_eenheid.id}): lookup-table gefaald voor peildatum {woz_eenheid.waardepeildatum} voor {self.stelselgroep.naam}."
+                f"Lookup-table gefaald voor peildatum {self.peildatum} voor {self.stelselgroep.naam}."
             )
+        # Neem de hoogste datum die kleiner of gelijk is aan de peildatum
+        filtered_df = filtered_df.sort_values("Peildatum", ascending=False).head(1)
         minimum_woz_waarde = Decimal(str(filtered_df["Minimumwaarde"].values[0]))
+        minimum_woz_waarde_datum = pd.to_datetime(filtered_df["Peildatum"].values[0])
 
-        if vastgestelde_waarde < minimum_woz_waarde:
-            logger.info(
-                f"WOZ-waarde €{vastgestelde_waarde:.0f} is kleiner dan minimum €{minimum_woz_waarde:.0f}, minimum wordt gebruikt"
-            )
-            return minimum_woz_waarde
+        # Bij gebruik van de minimumwaarde moet de waardepeildatum 1 januari zijn van
+        # het jaar voor de datum van de opgehaalde minimum WOZ-waarde
+        waardepeildatum = date(minimum_woz_waarde_datum.year - 1, 1, 1)
 
-        logger.debug(
-            f"WOZ-waarde €{vastgestelde_waarde:.0f} is groter dan minimum €{minimum_woz_waarde:.0f}, minimum wordt niet gebruikt"
+        logger.info(
+            f"Minimum WOZ-waarde voor peildatum {self.peildatum} is €{minimum_woz_waarde:.0f} (waardepeildatum: {waardepeildatum})"
         )
 
-        return vastgestelde_waarde
+        return EenhedenWozEenheid(
+            vastgestelde_waarde=float(minimum_woz_waarde),
+            waardepeildatum=waardepeildatum,
+        )
 
     def bepaal_oppervlakte(
         self,
@@ -849,7 +855,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1)),
+        instance=PuntenVoorDeWozWaarde(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

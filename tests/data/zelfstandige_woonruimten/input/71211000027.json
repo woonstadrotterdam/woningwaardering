@@ -32,16 +32,6 @@
       }
     }
   ],
-  "woz_eenheden": [
-    {
-      "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 159000
-    },
-    {
-      "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 169000
-    }
-  ],
   "energieprestaties": [
     {
       "soort": {
@@ -590,6 +580,20 @@
         "nummer": "02",
         "omschrijving": "tweede verdieping"
       }
+    }
+  ],
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 159000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 169000
+    },
+    {
+      "vastgesteldeWaarde": 195000,
+      "waardepeildatum": "2024-01-01"
     }
   ]
 }
