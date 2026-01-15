@@ -118,7 +118,7 @@ De verdeling gaat gelijk (evenredig): iedereen krijgt hetzelfde aantal punten. H
 
 Als _niet_ alle bewoners toegang en gebruiksrecht hebben tot een bepaalde ruimte (bijvoorbeeld een extra badkamer waar alleen sommige kamerwoningen gebruik van mogen maken), dan worden de punten alleen verdeeld over de bewoners die daar volgens het huurcontract toegang en gebruiksrecht toe hebben.
 
-[^3]: Huurders moeten exclusieve toegang en gebruiksrecht hebben volgens de huurovereenkomst. Dit is toegelicht in paragraaf 2.1.3.
+[^3]: Huurders moeten exclusieve toegang en gebruiksrecht hebben volgens de huurovereenkomst. Dit is toegelicht in [paragraaf 2.1.4](#214-toegang-en-gebruiksrecht).
 
 #### 2.1.6 Algemene rekenregel: afronding per rubriek
 
