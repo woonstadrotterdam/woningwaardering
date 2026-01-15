@@ -10,8 +10,7 @@ Dit hoofdstuk begint met algemene uitleg over het woningwaarderingsstelsel (para
 
 ### 1.1 Het woningwaarderingsstelsel
 
-De waardering van een onzelfstandige woonruimte gebeurd volgens het
-woningwaarderingsstelsel. De wettelijke basis voor dit stelsel ligt in de Uitvoeringswet huurprijzen woonruimte (hierna: Uhw) en het Besluit huurprijzen woonruimte (hierna: Bhw). De waardering van de kwaliteit van een woonruimte vindt plaats volgens het stelsel dat opgenomen is in Bijlage I van het Bhw. [^1]
+De waardering van een onzelfstandige woonruimte gebeurd volgens het woningwaarderingsstelsel. De wettelijke basis voor dit stelsel ligt in de Uitvoeringswet huurprijzen woonruimte (hierna: Uhw) en het Besluit huurprijzen woonruimte (hierna: Bhw). De waardering van de kwaliteit van een woonruimte vindt plaats volgens het stelsel dat opgenomen is in Bijlage I van het Bhw. [^1]
 
 _Dwingend stelsel_
 Het woningwaarderingsstelsel is een **dwingend stelsel**. Dat betekent dat het verplicht toegepast moet worden. Voor de Huurcommissie heeft de wetgever wel een uitzondering gemaakt. De wetgever biedt de Huurcommissie namelijk de mogelijkheid om van het woningwaarderingsstelsel af te wijken. De Huurcommissie heeft dus een **afwijkingsbevoegdheid**. De Huurcommissie is bevoegd om af te wijken als de aard van de woonruimte daar aanleiding toe geeft. De Huurcommissie gaat hier terughoudend mee om.
@@ -75,8 +74,7 @@ De waardering vindt plaats per thema of categorie, de zogenoemde rubrieken. Er z
 
 Bij de woningwaardering geldt de algemene regel dat alleen de (gemeenschappelijke) vertrekken, overige ruimten en voorzieningen die tot de onroerende zaak behoren met punten worden gewaardeerd. Een onroerende zaak is een gebouw of constructie die duurzaam met de grond is verbonden. Een kamerwoning is dus een voorbeeld van een onroerende zaak.
 
-Daarnaast komt in dit beleidsboek het begrip ‘onroerende aanhorigheden voor’. Een onroerende aanhorigheid komt voor waardering in aanmerking omdat het onderdeel is van de woning (als onroerende zaak). Van onroerende aanhorigheden is sprake als het gaat om
-voorzieningen die:
+Daarnaast komt in dit beleidsboek het begrip ‘onroerende aanhorigheden voor’. Een onroerende aanhorigheid komt voor waardering in aanmerking omdat het onderdeel is van de woning (als onroerende zaak). Van onroerende aanhorigheden is sprake als het gaat om voorzieningen die:
 
 - naar hun aard onlosmakelijk met de gehuurde woning zijn verbonden, of;
 - volgens de huurovereenkomst deel uitmaakt van de woning.
@@ -145,8 +143,7 @@ Binnen het woningwaarderingsstelsel is sprake van drie soorten binnenruimten, na
 {==
 
 1 punt per m² per privévertrek  
-1 punt per m² per gemeenschappelijke ruimte / onzelfstandige woonruimten met
-toegang en gebruiksrecht  
+1 punt per m² per gemeenschappelijke ruimte / onzelfstandige woonruimten met toegang en gebruiksrecht  
 
 ==}
 
@@ -222,9 +219,7 @@ Een zolderruimte kan worden gewaardeerd als een vertrek of een overige ruimte. O
 > [!NOTE]
 > Wanneer twee aangrenzende ruimten volgens onderstaane regels als één ruimte gewaardeerd moeten worden, dan dienen deze ook als één ruimte opgevoerd worden. 
 
-Het kan voorkomen dat twee vertrekken (of overige ruimten) die met elkaar in verbinding
-staan, als één vertrek (of overige ruimte) gewaardeerd moeten worden. Dat is het geval als
-tussen de twee vertrekken (of overige ruimten) er een niet afsluitbare opening is die:
+Het kan voorkomen dat twee vertrekken (of overige ruimten) die met elkaar in verbinding staan, als één vertrek (of overige ruimte) gewaardeerd moeten worden. Dat is het geval als tussen de twee vertrekken (of overige ruimten) er een niet afsluitbare opening is die:
 
 - ~~breder is dan 50% van de muur waarin die opening zit en~~
 - ~~minimaal 0,85 meter breed en 2 meter hoog is.~~
@@ -284,16 +279,14 @@ In dit hoofdstuk staat hoe het aantal vierkante meters per overige ruimte moet w
 
 ##### 2.2.2.1 Rekenregels vertrekken
 
-De oppervlakten voor privé- en gemeenschappelijke overige ruimten worden afzonderlijk
-berekend. De rekenmethode is als volgt:
+De oppervlakten voor privé- en gemeenschappelijke overige ruimten worden afzonderlijk berekend. De rekenmethode is als volgt:
 
 - Bepaal de oppervlakte per overige ruimte afgerond op twee decimalen.
 - Tel de oppervlakte van alle privé overige ruimtes bij elkaar op en rond af:  
   Bij een getal dat eindigt op 0,50 m² wordt afgerond omhoog. Bijvoorbeeld: 28,51 m² wordt 29 m²  
   Als het getal eindigt op 0,49 m² of lager wordt naar beneden afgerond. Bijvoorbeeld: 15,43 m² wordt 15 m².  
 - Doe hetzelfde voor de gemeenschappelijke overige ruimtes.
-- Tel de m² van beide soorten vertrekken bij elkaar op en rond af op hele vierkante
-meters, volgens de bovenstaande afrondingsmethode.
+- Tel de m² van beide soorten vertrekken bij elkaar op en rond af op hele vierkante meters, volgens de bovenstaande afrondingsmethode.
 - Bepaal het puntenaantal voor de overige ruimtes op basis van de m².
 
 ##### 2.2.2.2 De voorwaarden van een overige ruimte
@@ -415,19 +408,16 @@ _~~Oppervlakte onder een open of gesloten vaste trap~~_
 {==
 
 2 punten per verwarmd gemeenschappelijk vertrek / onzelfstandige wooneenheden met toegang  
-1 punt per verwarmde gemeenschappelijke overige ruimte of gemeenschappelijke verkeersruimte (tot maximaal 4 punten) / onzelfstandige wooneenheden met toegang en
-gebruiksrecht  
+1 punt per verwarmde gemeenschappelijke overige ruimte of gemeenschappelijke verkeersruimte (tot maximaal 4 punten) / onzelfstandige wooneenheden met toegang en gebruiksrecht  
 1 punt extra per verwarmd én verkoeld gemeenschappelijk vertrek (tot maximaal 2 punten) / onzelfstandige wooneenheden met toegang en gebruiksrecht  
 
 ==}
 
-Vertrekken, overige ruimtes én verkeersruimtes kunnen punten krijgen als deze zijn verwarmd, namelijk 2 punten per verwarmd vertrek en 1 punt voor overige ruimtes en
-verkeersruimten. Voor de laatste twee soorten binnenruimten geldt een maximum van 4 punten. Daarnaast kan een vertrek ook punten krijgen als deze is verkoeld kan worden. Hiervoor geldt ook een maximum aantal van 2 punten. Voor de waardering gelden nadere regels die hieronder worden uitgelegd.
+Vertrekken, overige ruimtes én verkeersruimtes kunnen punten krijgen als deze zijn verwarmd, namelijk 2 punten per verwarmd vertrek en 1 punt voor overige ruimtes en verkeersruimten. Voor de laatste twee soorten binnenruimten geldt een maximum van 4 punten. Daarnaast kan een vertrek ook punten krijgen als deze is verkoeld kan worden. Hiervoor geldt ook een maximum aantal van 2 punten. Voor de waardering gelden nadere regels die hieronder worden uitgelegd.
 
 #### 2.3.1 Punten voor verwarmde ruimtes
 
-~~Punten voor verwarming en verkoeling in een vertrek, overige ruimte of verkeersruimte worden alleen toegekend als de verwarming (of de voorziening met zowel een
-verwarmingsfunctie als verkoelingsfunctie) tot de woning behoort (de onroerende zaak of als onroerende aanhorigheid, zie hiervoor [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak) Dit is het geval bij radiatoren als deze zijn bevestigd aan de muur of in de grond. Een mobiele elektrische radiator of een mobiele airco behoort niet tot de onroerende zaak. Gevelkachels en gashaarden behoren ook niet tot de onroerende zaak. Een verdikte buis, pijp of moederhaard wordt wél gerekend tot de onroerende zaak, indien deze als zodanig bedoeld of herkenbaar is.~~
+~~Punten voor verwarming en verkoeling in een vertrek, overige ruimte of verkeersruimte worden alleen toegekend als de verwarming (of de voorziening met zowel een verwarmingsfunctie als verkoelingsfunctie) tot de woning behoort (de onroerende zaak of als onroerende aanhorigheid, zie hiervoor [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak) Dit is het geval bij radiatoren als deze zijn bevestigd aan de muur of in de grond. Een mobiele elektrische radiator of een mobiele airco behoort niet tot de onroerende zaak. Gevelkachels en gashaarden behoren ook niet tot de onroerende zaak. Een verdikte buis, pijp of moederhaard wordt wél gerekend tot de onroerende zaak, indien deze als zodanig bedoeld of herkenbaar is.~~
 
 > [!NOTE]
 > De properties `verkoeld` en `verwarmd` mogen alleen gebruikt worden voor ruimten die verkoeld dan wel verwarmd worden door onroerende zaken die tot de onroerende aanhorigheid behoren.
@@ -436,8 +426,7 @@ verwarmingsfunctie als verkoelingsfunctie) tot de woning behoort (de onroerende 
 
 ~~Vertrekken of overige ruimten die met elkaar in verbinding staan, worden in een bepaald geval als één verwarmd vertrek of overige ruimte gewaardeerd. Dit is het geval als zich tussen die twee verwarmde vertrekken of overige ruimten een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt. Het moet hierbij gaan om een niet afsluitbare opening, die over een breedte van minimaal 0,85 meter een minimumhoogte heeft van 2,00 meter. Het voorbeeld in [paragraaf 2.2.1.4](#2214-aangrenzende-ruimten-met-een-open-doorgang) geeft dit visueel weer.~~
 
-Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgeweken. Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding
-bestaat, wordt voor deze rubriek namelijk individueel gewaardeerd met punten indien deze verwarmd zijn. ~~Onder een open keuken wordt hier dus verstaan een keuken die in open verbinding staat met een ander vertrek of overige ruimte, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur [paragraaf 2.2.1.4](#2214-aangrenzende-ruimten-met-een-open-doorgang).~~ Een privé verwarmde woonkamer met open keuken wordt dus gewaardeerd met 4 punten.
+Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgeweken. Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek namelijk individueel gewaardeerd met punten indien deze verwarmd zijn. ~~Onder een open keuken wordt hier dus verstaan een keuken die in open verbinding staat met een ander vertrek of overige ruimte, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur [paragraaf 2.2.1.4](#2214-aangrenzende-ruimten-met-een-open-doorgang).~~ Een privé verwarmde woonkamer met open keuken wordt dus gewaardeerd met 4 punten.
 
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
@@ -487,16 +476,14 @@ De energieprestatie van de woning telt mee in de woningwaardering. De energiepre
 
 #### 2.4.1 Vindplaats energieprestatie woning
 
-De energieprestatie is van een woonruimte is op te zoeken via de website van [EP-online](https://www.ep-online.nl/). Door te zoeken op een postcode en huisnummer kan de energieprestatie van
-de woonruimte worden gevonden. De energieprestatie blijkt (ook) uit het energielabelafschrift dat wordt uitgegeven nadat een energielabel of energie-index is opgenomen in de woonruimte.
+De energieprestatie is van een woonruimte is op te zoeken via de website van [EP-online](https://www.ep-online.nl/). Door te zoeken op een postcode en huisnummer kan de energieprestatie van de woonruimte worden gevonden. De energieprestatie blijkt (ook) uit het energielabelafschrift dat wordt uitgegeven nadat een energielabel of energie-index is opgenomen in de woonruimte.
 
 #### 2.4.2 Energieprestaties die geldig zijn voor de woningwaardering
 
 De woonruimte krijgt punten voor de energieprestatie als de woning een geldend energielabel of energie-index heeft. Aan een woonruimte zonder geldig energielabel of energie-index worden punten toegekend op basis van het bouwjaar van de woning. De volgende energielabels of -indexen zijn geldig:
 
 - een energielabel dat is opgenomen vóór 1 januari 2015;
-- een energie-index die is opgenomen op of na 1 januari 2015 tot 1 januari 2021 (én als op www.EP-online.nl staat aangegeven dat deze energie-index geldig is voor de
-toepassing van het woningwaarderingsstelsel);
+- een energie-index die is opgenomen op of na 1 januari 2015 tot 1 januari 2021 (én als op www.EP-online.nl staat aangegeven dat deze energie-index geldig is voor de toepassing van het woningwaarderingsstelsel);
 - een energielabel dat is opgenomen op of na 1 januari 2021 (op basis van de opnamemethode NTA 8800).
 
 #### 2.4.3 Energieprestaties die _niet_ geldig zijn voor de woningwaardering
@@ -516,8 +503,7 @@ Het puntenaantal voor de energieprestatie voor de onzelfstandige woning wordt ge
 {==
 
 VOORBEELD  
-Huurder heeft een privé slaapkamer van 20 m² in een pand met energielabel A. Naast de privé slaapkamer heeft huurder toegang tot een gemeenschappelijke woonkamer
-van 40 m².
+Huurder heeft een privé slaapkamer van 20 m² in een pand met energielabel A. Naast de privé slaapkamer heeft huurder toegang tot een gemeenschappelijke woonkamer van 40 m².
 
 Huurder deelt de woonkamer met drie andere huurders van onzelfstandige woonruimten op het adres. Het aantal m2 gemeenschappelijk vertrek dat aan de huurder is toe te rekenen is dus 40 m²/4 = 10 m².
 
@@ -631,8 +617,7 @@ Om punten te krijgen in de rubriek ‘keuken’ moet er in de ruimte een aantal 
 ```
 > ///
 
-~~Als een keuken over alle basisvoorzieningen beschikt, worden hiervoor punten toegekend.~~ Het aantal punten hangt af van de lengte van het waterdichte aanrechtblad, volgens de
-onderstaande tabel. De punten moeten worden gedeeld door het aantal onzelfstandige woonruimten die toegang en gebruiksrecht hebben tot de keuken.
+~~Als een keuken over alle basisvoorzieningen beschikt, worden hiervoor punten toegekend.~~ Het aantal punten hangt af van de lengte van het waterdichte aanrechtblad, volgens de onderstaande tabel. De punten moeten worden gedeeld door het aantal onzelfstandige woonruimten die toegang en gebruiksrecht hebben tot de keuken.
 
 | Lengte aanrecht           | Punten |
 |---------------------------|-------:|
@@ -1068,13 +1053,11 @@ De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomple
 
 #### 2.10.3 Punten per soort parkeerplek
 
-Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waarin een gangbare personenauto in zijn geheel past. Een afgebakend vak betekent dat
-het kenbaar moet zijn waar zich een parkeerplek bevindt. Dit kan bijvoorbeeld door een bord, al dan niet in combinatie met lijnmarkeringen op de grond of een bepaald type of kleur tegel om het vak af te kaderen. Het woningwaarderingsstelsel maakt onderscheid tussen drie soorten gemeenschappelijke parkeerplekken. Deze staan in de tabel hieronder beschreven.
+Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waarin een gangbare personenauto in zijn geheel past. Een afgebakend vak betekent dat het kenbaar moet zijn waar zich een parkeerplek bevindt. Dit kan bijvoorbeeld door een bord, al dan niet in combinatie met lijnmarkeringen op de grond of een bepaald type of kleur tegel om het vak af te kaderen. Het woningwaarderingsstelsel maakt onderscheid tussen drie soorten gemeenschappelijke parkeerplekken. Deze staan in de tabel hieronder beschreven.
 
 #### 2.10.4 Rekenmethode
 
-Het puntenaantal moet worden berekend door het puntenaantal per gemeenschappelijke parkeerplek te delen door aantal adressen dat toegang heeft tot de parkeerplek. Dit getal
-moet daarna worden gedeeld door het aantal onzelfstandige woonruimten op het eigen woonadres, om tot het puntenaantal voor de onzelfstandige woonruimte te komen.
+Het puntenaantal moet worden berekend door het puntenaantal per gemeenschappelijke parkeerplek te delen door aantal adressen dat toegang heeft tot de parkeerplek. Dit getal moet daarna worden gedeeld door het aantal onzelfstandige woonruimten op het eigen woonadres, om tot het puntenaantal voor de onzelfstandige woonruimte te komen.
 
 #### 2.10.5 Laadpalen
 
@@ -1284,20 +1267,15 @@ Het waarderingsstelsel voor onzelfstandige woonruimten kent een rubriek voor aft
 
 ### 2.14 Rubriek 14: Opslagen
 
-De punten die aan de hand van de rubrieken worden toegekend aan een woonruimte leiden tot een totaal aantal punten met daarbij behorende maximale huurprijs. Maar het
-woningwaarderingsstelsel maakt het ook mogelijkheid om bovenop de maximale huurprijs op basis van punten nog een opslag te rekenen in bepaalde situaties. Er mag dan een
-hogere maximale huurprijs worden gevraagd. De soorten opslagen worden in deze paragraaf uitgelegd.
+De punten die aan de hand van de rubrieken worden toegekend aan een woonruimte leiden tot een totaal aantal punten met daarbij behorende maximale huurprijs. Maar het woningwaarderingsstelsel maakt het ook mogelijkheid om bovenop de maximale huurprijs op basis van punten nog een opslag te rekenen in bepaalde situaties. Er mag dan een hogere maximale huurprijs worden gevraagd. De soorten opslagen worden in deze paragraaf uitgelegd.
 
 #### 2.14.1 Cumulatie van opslagen beperkt mogelijk
 
-Als meerdere toeslagen van toepassing zijn, dan worden de percentages eerst bij elkaar opgeteld en daarna wordt met het totale percentage de huurprijs vermeerderd. Maar de
-samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht _niet_ tegelijkertijd voor dezelfde woonruimte worden toegekend (dit staat in artikel 8, vijfde lid, onder c van het Bhw).
+Als meerdere toeslagen van toepassing zijn, dan worden de percentages eerst bij elkaar opgeteld en daarna wordt met het totale percentage de huurprijs vermeerderd. Maar de samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht _niet_ tegelijkertijd voor dezelfde woonruimte worden toegekend (dit staat in artikel 8, vijfde lid, onder c van het Bhw).
 
 #### 2.14.2 Opslag heeft geen invloed op huursector op basis van punten
 
-De opslagen die in deze paragraaf aan de orde komen, hebben geen invloed op de huursector waar de woning invalt. Met andere woorden: door een opslag valt een
-onzelfstandige woning niet ineens in de middensector. Een onzelfstandige woonruimte is namelijk altijd een socialesectorwoning. Wel mag de verhuurder die hogere huurprijs
-vragen.
+De opslagen die in deze paragraaf aan de orde komen, hebben geen invloed op de huursector waar de woning invalt. Met andere woorden: door een opslag valt een onzelfstandige woning niet ineens in de middensector. Een onzelfstandige woonruimte is namelijk altijd een socialesectorwoning. Wel mag de verhuurder die hogere huurprijs vragen.
 
 #### 2.14.3 Rijksmonumenten
 
@@ -1328,14 +1306,11 @@ vragen.
 ```
 > ///
 
-Sommige woningen zijn geheel of ten dele onderdeel van een Rijksmonument. Deze moeten voor de woningwaardering zijn geregistreerd in het Rijksmonumentenregister van
-de Rijksdienst voor het Cultureel Erfgoed (zoals bedoeld in artikel 1.1 Erfgoedwet). Het Rijksmonumentenregister kan door iedereen worden geraadpleegd via het
-[Monumentenregister](https://monumentenregister.cultureelerfgoed.nl/). De Huurcommissie hanteert **passief beleid**. Dat betekent dat in dit geval de verhuurder moet aantonen dat een woning aangewezen is als, of deel uitmaakt van, een Rijksmonument. Het is dus onvoldoende om alleen te vermelden dat de woning een Rijksmonument is.
+Sommige woningen zijn geheel of ten dele onderdeel van een Rijksmonument. Deze moeten voor de woningwaardering zijn geregistreerd in het Rijksmonumentenregister van de Rijksdienst voor het Cultureel Erfgoed (zoals bedoeld in artikel 1.1 Erfgoedwet). Het Rijksmonumentenregister kan door iedereen worden geraadpleegd via het [Monumentenregister](https://monumentenregister.cultureelerfgoed.nl/). De Huurcommissie hanteert **passief beleid**. Dat betekent dat in dit geval de verhuurder moet aantonen dat een woning aangewezen is als, of deel uitmaakt van, een Rijksmonument. Het is dus onvoldoende om alleen te vermelden dat de woning een Rijksmonument is.
 
 De opslag is hierna afhankelijk van wanneer de huurovereenkomst is gesloten. Er zijn twee situaties mogelijk, namelijk:
 
-- als de huurovereenkomst is afgesloten op of na het tijdstip van inwerkingtreding van de Wet betaalbare huur (vanaf 1 juli 2024) dan wordt de maximale huurprijs
-vermeerderd met 35%.  
+- als de huurovereenkomst is afgesloten op of na het tijdstip van inwerkingtreding van de Wet betaalbare huur (vanaf 1 juli 2024) dan wordt de maximale huurprijs vermeerderd met 35%.  
 - als de huurovereenkomst is afgesloten vóór 1 juli 2024 dan worden 10 punten extra toegekend.  
 
 #### 2.13.4 Gemeentelijke en provinciale monumenten
@@ -1363,9 +1338,7 @@ vermeerderd met 35%.
 ```
 > ///
 
-Sommige woningen zijn geheel of ten dele onderdeel van een gemeentelijk of provinciaal monument. Om hiervoor een opslag te krijgen dient het gemeentelijk monument te zijn
-aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door Gedeputeerde Staten. De Huurcommissie hanteert **passief
-beleid**. De verhuurder moet in dit geval aantonen dat een woning aangewezen is als of deel uitmaakt van een gemeentelijk of provinciaal monument. Het is dus onvoldoende om alleen te vermelden dat de woning een monument is. Indien aan de bovenstaande voorwaarden wordt voldaan dan wordt de maximale huurprijs vermeerderd met 15%.
+Sommige woningen zijn geheel of ten dele onderdeel van een gemeentelijk of provinciaal monument. Om hiervoor een opslag te krijgen dient het gemeentelijk monument te zijn aangewezen door het college van burgemeester en wethouders. Een provinciaal monument moet zijn aangewezen door Gedeputeerde Staten. De Huurcommissie hanteert **passief beleid**. De verhuurder moet in dit geval aantonen dat een woning aangewezen is als of deel uitmaakt van een gemeentelijk of provinciaal monument. Het is dus onvoldoende om alleen te vermelden dat de woning een monument is. Indien aan de bovenstaande voorwaarden wordt voldaan dan wordt de maximale huurprijs vermeerderd met 15%.
 
 #### 2.13.5 Beschermd dorps- en stadsgezicht
 
@@ -1392,8 +1365,7 @@ beleid**. De verhuurder moet in dit geval aantonen dat een woning aangewezen is 
 ```
 > ///
 
-Sommige woningen zijn aangewezen als beschermd stads- of dorpsgezicht en kunnen hiervoor gewaardeerd worden. De Huurcommissie hanteert voor beschermde stads- en
-dorpsgezichten een **passief beleid**. Dit betekent dat het in dit geval aan de verhuurder is om aan te tonen dat de woonruimte aan de voorwaarden voor deze prijsopslag voldoet. Het is dus onvoldoende om alleen te vermelden dat de woning onderdeel is van beschermd stads- of dorpsgezicht.
+Sommige woningen zijn aangewezen als beschermd stads- of dorpsgezicht en kunnen hiervoor gewaardeerd worden. De Huurcommissie hanteert voor beschermde stads- en dorpsgezichten een **passief beleid**. Dit betekent dat het in dit geval aan de verhuurder is om aan te tonen dat de woonruimte aan de voorwaarden voor deze prijsopslag voldoet. Het is dus onvoldoende om alleen te vermelden dat de woning onderdeel is van beschermd stads- of dorpsgezicht.
 
 Niet alle beschermde stads-of dorpsgezichten komen voor de opslag in aanmerking. Voor de waardering moet namelijk aan de volgende voorwaarden worden voldaan:
 
