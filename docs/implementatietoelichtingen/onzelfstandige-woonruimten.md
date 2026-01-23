@@ -1,4 +1,4 @@
-# Onzelfstandige Woonruimten
+# Beleidsboek Waarderingsstelsel onzelfstandige woonruimte
 
 Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Waarderingsstelsel onzelfstandige woonruimte (januari 2026)
 
@@ -12,7 +12,7 @@ Dit hoofdstuk begint met algemene uitleg over het woningwaarderingsstelsel (para
 
 De waardering van een onzelfstandige woonruimte gebeurd volgens het woningwaarderingsstelsel. De wettelijke basis voor dit stelsel ligt in de Uitvoeringswet huurprijzen woonruimte (hierna: Uhw) en het Besluit huurprijzen woonruimte (hierna: Bhw). De waardering van de kwaliteit van een woonruimte vindt plaats volgens het stelsel dat opgenomen is in Bijlage I van het Bhw. [^1]
 
-_Dwingend stelsel_
+_Dwingend stelsel_  
 Het woningwaarderingsstelsel is een **dwingend stelsel**. Dat betekent dat het verplicht toegepast moet worden. Voor de Huurcommissie heeft de wetgever wel een uitzondering gemaakt. De wetgever biedt de Huurcommissie namelijk de mogelijkheid om van het woningwaarderingsstelsel af te wijken. De Huurcommissie heeft dus een **afwijkingsbevoegdheid**. De Huurcommissie is bevoegd om af te wijken als de aard van de woonruimte daar aanleiding toe geeft. De Huurcommissie gaat hier terughoudend mee om.
 
 ### 1.2 Onzelfstandige woonruimte heeft altijd huurprijsbescherming
@@ -29,7 +29,7 @@ Voor meer informatie over de verschillende huursectoren wordt verwezen naar para
 
 Met de regels van dit beleidsboek bepaalt de Huurcommissie wat de maximale huurprijs is voor een onzelfstandige woonruimte. Het puntenaantal van de woonruimte bepaalt (samen met de eventuele prijsopslagen) de maximale huurprijs. De maximale huurprijs per puntenaantal staat vastgelegd in de wet en wordt elk jaar opnieuw vastgesteld.
 
-### 1.4  Zelfstandige woonruimte of onzelfstandige woonruimte
+### 1.4 Zelfstandige woonruimte of onzelfstandige woonruimte
 
 Voor het waarderen van de woonruimte is het belangrijk om vast te stellen of er sprake is van een zelfstandige woonruimte of een onzelfstandige woonruimte. De wetgever heeft alleen een definitie gegeven van een zelfstandige woonruimte. Deze definitie is:
 
@@ -103,7 +103,7 @@ De algemene regel is dat alleen de voorzieningen die de verhuurder heeft aangebr
 
 Voor de waardering volgens het woningwaarderingsstelsel is noodzakelijk dat de voorzieningen zijn ingebouwd en door de verhuurder zijn aangebracht, zoals in de paragraven hierboven toegelicht. Het functioneren van de voorziening is bij de woningwaardering niet relevant. Wel kan er dan mogelijk sprake zijn van een ernstig onderhoudsgebrek.
 
-#### 2.1.4 Toegang én gebruiksrecht
+#### 2.1.4 Toegang en gebruiksrecht
 
 Bij een onzelfstandige woonruimte (bijvoorbeeld een kamer in een studentenhuis) zijn er vaak gedeelde ruimtes of voorzieningen, zoals een gedeelde keuken, badkamer, wc of een gemeenschappelijke tuin. In het woningwaarderingsstelsel worden de punten voor deze gedeelde ruimtes en voorzieningen gedeeld door het aantal onzelfstandige woonruimten waarvan de bewoner(s) volgens hun huurovereenkomst toegang én gebruiksrecht hebben. Waar nodig wordt dit per rubriek nader toegelicht.
 

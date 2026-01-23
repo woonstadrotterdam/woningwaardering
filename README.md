@@ -11,7 +11,7 @@ Ga voor uitgebreide documentatie over de **woningwaardering** package naar [Read
 <!--tip-start-->
 
 > [!TIP]
-> Deze versie kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van januari 2025 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [documentatie](https://woningwaardering.readthedocs.io/stable/), [de toelichting op de implementatie van het beleidsboek](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
+> Deze versie kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van januari 2026 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [documentatie](https://woningwaardering.readthedocs.io/stable/), [de toelichting op de implementatie van het beleidsboek](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
 
 <!--tip-end-->
 
@@ -38,7 +38,7 @@ _Visueel voorbeeld van de output van de package voor een zelfstandige woonruimte
 
 <!--overzicht-end-->
 
-Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van januari 2025 verwijzen wij naar de [documentatie](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) over de implementatie van dit beleidsboek.
+Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van januari 2026 verwijzen wij naar de [documentatie](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) over de implementatie van dit beleidsboek.
 
 Voor meer informatie over hoe de documentatie van het beleidsboek is gemaakt, verwijzen wij naar het hoofdstuk [Implementatie beleidsboek huurcommissie](https://woningwaardering.readthedocs.io/stable/introductie/opzet/#implementatie-beleidsboek-huurcommissie).
 
