@@ -54,7 +54,7 @@ def opslag_rijksmonument(
                 naam="Rijksmonument",
                 id=str(
                     CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten,
+                        stelselgroep=stelselgroep,
                         criterium="rijksmonument",
                     )
                 ),
@@ -118,7 +118,7 @@ def opslag_gemeentelijk_of_provinciaal_monument(
                 naam="Gemeentelijk of provinciaal monument",
                 id=str(
                     CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+                        stelselgroep=stelselgroep,
                         criterium="gemeentelijk_of_provinciaal_monument",
                     )
                 ),
@@ -205,7 +205,7 @@ def opslag_beschermd_stads_of_dorpsgezicht(
             naam="Rijksbeschermd stads- of dorpsgezicht",
             id=str(
                 CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw,
+                    stelselgroep=stelselgroep,
                     criterium="rijksbeschermd_stads_of_dorpsgezicht",
                 )
             ),
