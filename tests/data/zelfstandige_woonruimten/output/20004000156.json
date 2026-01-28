@@ -426,7 +426,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "prijsopslag_monumenten__rijksmonument",
+            "id": "prijsopslag_monumenten_en_nieuwbouw__rijksmonument",
             "naam": "Rijksmonument"
           },
           "punten": 50.0
