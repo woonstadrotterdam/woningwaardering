@@ -20,7 +20,7 @@ Het woningwaarderingsstelsel is een **dwingend stelsel**. Dat betekent dat het v
 
 ### 1.2 De vaststelling van de maximale huurprijs
 
-Met de regels van dit beleidsboek bepaalt de Huurcommissie wat de maximale huurprijs is voor een zelfstandige woonruimte. Het puntenantal van de woonruimte bepaalt (samen met de eventuele prijsopslagen) de maximale huurprijs. De maximale huurprijs per puntenantal wordt elk jaar opnieuw vastgesteld door de Minister van Volkshuisvesting en Ruimtelijke Ordening.
+Met de regels van dit beleidsboek bepaalt de Huurcommissie wat de maximale huurprijs is voor een zelfstandige woonruimte. Het puntenaantal van de woonruimte bepaalt (samen met de eventuele prijsopslagen) de maximale huurprijs. De maximale huurprijs per puntenaantal wordt elk jaar opnieuw vastgesteld door de Minister van Volkshuisvesting en Ruimtelijke Ordening.
 
 De maximale huurprijs is de hoogste huurprijs die voor de woonruimte gevraagd mag worden door een verhuurder. Dit noemen wij huurprijsbescherming. Hoe meer punten een woonruimte heeft, hoe hoger die huurprijs mag zijn.
 
@@ -199,7 +199,7 @@ Een huurder kan in principe niet eenzijdg zorgen voor een andere classificatie v
 
 ### 1.5 Jaarlijkse indexatie huurprijsgrenzen en maximale huurprijzen
 
-In de voorgaande paragrafen wordt gesproken over de maximale huurprijzen en verschillende huurprijsgrenzen. De hieraan gekoppelde bedragen en de kengetallen die gebruikt worden bij de berekening van het puntenantal voor de WOZ-waarde worden jaarlijks geïndxeerd.
+In de voorgaande paragrafen wordt gesproken over de maximale huurprijzen en verschillende huurprijsgrenzen. De hieraan gekoppelde bedragen en de kengetallen die gebruikt worden bij de berekening van het puntenaantal voor de WOZ-waarde worden jaarlijks geïndxeerd.
 
 #### 1.5.1 De liberalisatiegrens
 
@@ -215,7 +215,7 @@ De maximale huurprijzen worden elk jaar per 1 januari geïndxeerd, zodat deze ge
 
 [^5]: Vóór 1 juli 2024 werden de maximale huurprijzen jaarlijks per 1 juli van elk kalenderjaar geïndxeerd.
 
-## Hoofdstuk 2 - Het woningwaarderingstelsel voor een zelfstandige woning
+## Hoofdstuk 2 - Het woningwaarderingsstelsel voor een zelfstandige woning
 
 In dit hoofdstuk wordt toegelicht waarvoor een zelfstandige woning punten kan krijgen, wanneer er een prijsopslag van toepassing is en hoe de Huurcommissie in de praktijk met de regels omgaat. Zo wordt duidelijk welke voorwaarden gelden en hoe de maximale huurprijs uiteindelijk wordt berekend.
 
@@ -245,22 +245,22 @@ De algemene regel is dat alleen de voorzieningen die de verhuurder heeft aangebr
 
 #### 2.1.3 Algemene regel: waardering van voorzieningen niet afhankelijk van functioneren
 
-Voor de waardering volgens het woningwaarderingstelsel is noodzakelijk dat de voorzieningen zijn ingebouwd en door de verhuurder zijn aangebracht, zoals in de paragraven hierboven toegelicht. Het functioneren van de voorziening is bij de woningwaardering niet relevant. Wel kan er dan mogelijk sprake zijn van een ernstig onderhoudsgebrek.
+Voor de waardering volgens het woningwaarderingsstelsel is noodzakelijk dat de voorzieningen zijn ingebouwd en door de verhuurder zijn aangebracht, zoals in de paragraven hierboven toegelicht. Het functioneren van de voorziening is bij de woningwaardering niet relevant. Wel kan er dan mogelijk sprake zijn van een ernstig onderhoudsgebrek.
 
 #### 2.1.4 Algemene rekenregel: afronding per rubriek
 
-Het totaal aantal punten wordt per rubriek afgerond op 0,25 punt, waarbij vanaf een achtste (1/8) punt naar boven wordt afgerond. Dat wil zeggen dat 0,125 wordt afgerond naar 0,25. Een kwartpunt is de kleinst werkbare waardering binnen het woningwaarderingstelsel voor een afzonderlijke rubriek.
+Het totaal aantal punten wordt per rubriek afgerond op 0,25 punt, waarbij vanaf een achtste (1/8) punt naar boven wordt afgerond. Dat wil zeggen dat 0,125 wordt afgerond naar 0,25. Een kwartpunt is de kleinst werkbare waardering binnen het woningwaarderingsstelsel voor een afzonderlijke rubriek.
 
 #### 2.1.5 Algemene rekenregel: eindsaldering op hele punten
 
-Het totale puntenantal voor de woonruimte wordt berekend door eerst alle punten per rubriek bij elkaar op te tellen (inclusief de punten voor de gemeenschappelijke ruimten en voorzieningen). Het totaal moet daarna worden afgerond op hele punten. Bij 0,5 punten of meer wordt afgerond naar boven op hele punten, bij minder dan 0,5 punten wordt afgerond naar beneden op hele punten.
+Het totale puntenaantal voor de woonruimte wordt berekend door eerst alle punten per rubriek bij elkaar op te tellen (inclusief de punten voor de gemeenschappelijke ruimten en voorzieningen). Het totaal moet daarna worden afgerond op hele punten. Bij 0,5 punten of meer wordt afgerond naar boven op hele punten, bij minder dan 0,5 punten wordt afgerond naar beneden op hele punten.
 
 De toeslag van 35% bij zorgworingen wordt toegepast op het puntentotaal van de rubrieken 1 t/m 11.1 van het Bhw en pas daarna afgerond.
 
 {==
 
 **VOORBEELD**  
-Een woning krijgt in rubriek 8 een puntenantaal van 4,81. In dit geval wordt afgerond op 4,75 punten en niet 5,00 punten. De reden is dat tussen 4,81 en 4,75 geen verschil zit van 0,125 punt - ofwel 1/8 punt. Er is dus geen afronding op een 0,25 punt naar boven. Er wordt daarom afgerond op 0,25 punt naar beneden.
+Een woning krijgt in rubriek 8 een puntenaantal van 4,81. In dit geval wordt afgerond op 4,75 punten en niet 5,00 punten. De reden is dat tussen 4,81 en 4,75 geen verschil zit van 0,125 punt - ofwel 1/8 punt. Er is dus geen afronding op een 0,25 punt naar boven. Er wordt daarom afgerond op 0,25 punt naar beneden.
 
 ==}
 
@@ -277,7 +277,7 @@ Een zelfstandige woning wordt gewaardeerd met 255 punten. Bij een puntenaantal v
 
 ### 2.2 Rubriek 1 en 2: vertrekken en overige ruimten
 
-Binnen het woningwaarderingstelsel is sprake van drie soorten binnenruimten, namelijk vertrekken, overige ruimten en verkeersruimten. Dit onderscheid is belangrijk omdat de waardering per soort ruimte verschilt. Vertrekken en overige ruimten worden gewaardeerd onder [rubriek 1 en 2](#22-rubriek-1-en-2-vertrekken-en-overige-ruimten). Gemeenschappelijke ruimten worden gewaardeerd onder [rubriek 9](#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen).
+Binnen het woningwaarderingsstelsel is sprake van drie soorten binnenruimten, namelijk vertrekken, overige ruimten en verkeersruimten. Dit onderscheid is belangrijk omdat de waardering per soort ruimte verschilt. Vertrekken en overige ruimten worden gewaardeerd onder [rubriek 1 en 2](#22-rubriek-1-en-2-vertrekken-en-overige-ruimten). Gemeenschappelijke ruimten worden gewaardeerd onder [rubriek 9](#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen).
 
 _Buiten de woning, maar in het woongebouw_  
 Er kan sprake zijn van vertrekken, overige ruimten (en bijbehorende voorzieningen, zoals verwarming, keuken en sanitair) die buiten de woning, maar wel binnen het woongebouw liggen. Als derden deze ruimte of voorziening niet kunnen gebruiken, bijvoorbeeld omdat de ruimte is afgesloten met een slot, dan worden deze meegeteld in de waardering.
@@ -290,8 +290,7 @@ Er kan sprake zijn van vertrekken, overige ruimten (en bijbehorende voorzieninge
 
 ==}
 
-Voorbeelden van vertrekken zijn een woonkamer, hobby- en/of studeerkamer, staapkamer en eetkamer die voldoen aan de gestelde eisen. Daarnaast geldt dat een ruimte die uitsluitend als keuken, badkamer of douchehumte is bestemd <u>altijd</u> een vertrek is. Een vertrek wordt gewaardeerd met 1 punt per vierkante meter in rubriek 1.
-
+Voorbeelden van vertrekken zijn een woonkamer, hobby- en/of studeerkamer, slaapkamer en eetkamer die voldoen aan de gestelde eisen. Daarnaast geldt dat een ruimte die uitsluitend als keuken, badkamer of doucheruimte is bestemd <u>altijd</u> een vertrek is. Een vertrek wordt gewaardeerd met 1 punt per vierkante meter in rubriek 1.
 In deze paragraaf staat hoe het aantal vierkante meters per vertrek moet worden bepaald en aan welke eisen een vertrek moet voldoen.
 
 ##### 2.1.1.1 Afronden op hele m²
@@ -300,12 +299,12 @@ De waardering van vertrekken wordt gebaseerd op hele vierkante meters. Om tot di
 
 - Meet elk vertrek apart.
 - Noteer de uitkomst op 2 decimalen (bijv. 12,38 m²).
-- Tel de uitkomsten van alle vertrekken samen bij elkaar op. Bij een getal dat eindigt op 0,50 m² wordt afgerond omhoog. Bijvoorbeeld: 28,51 m² wordt 29 m² Als het getal eindigt op 0,49 m² of lager wordt naar beneden afgerond. Bijvoorbeeld: 15,43 m² wordt 15 m².
+- Tel de uitkomsten van alle vertrekken samen bij elkaar op. Bij een getal dat eindigt op 0,50 m² wordt afgerond omhoog. Bijvoorbeeld: 28,51 m² wordt 29 m². Als het getal eindigt op 0,49 m² of lager wordt naar beneden afgerond. Bijvoorbeeld: 15,43 m² wordt 15 m².
 
 {==
 
 **VOORBEELD**  
-Een woonruimte heeft een kamer van 3,75 meter lang en 4,12 meter breed. Daarnaast is een keuken aanwezig van 2,95 meter bij 3,81 meter. Het berekenen van het puntenantal gaat dan als volgt:
+Een woonruimte heeft een kamer van 3,75 meter lang en 4,12 meter breed. Daarnaast is een keuken aanwezig van 2,95 meter bij 3,81 meter. Het berekenen van het puntenaantal gaat dan als volgt:
 
 Kamer: 3,75 x 4,12 = 15,4912 m², afgerond op 2 decimalen: 15,49 m²  
 Keuken: 2,95 x 3,81 = 11,2395 m², afgerond op 2 decimalen: 11,24 m²
@@ -438,7 +437,7 @@ Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden aang
 
 ##### 2.2.2.5 Privé parkeerruimte
 
-Een binnenruimte die bedbeeld is als parkeerruimte en waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben (privé parkeerruimte), wordt gewaardeerd als overige ruimte. Een voorbeeld is een garagebox die hoort tot de woning. Is er sprake van een privé-parkeerruimte in een buitenruimte, dan wordt de ruimte gewaardeerd in rubriek 8 ('Buitenruimte').
+Een binnenruimte die bedoeld is als parkeerruimte en waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben (privé parkeerruimte), wordt gewaardeerd als overige ruimte. Een voorbeeld is een garagebox die hoort tot de woning. Is er sprake van een privé-parkeerruimte in een buitenruimte, dan wordt de ruimte gewaardeerd in rubriek 8 ('Buitenruimte').
 
 > [!NOTE]
 > De `Ruimtedetailsoort` `garage` wordt tot op heden alleen gewaardeerd als overige ruimte wanneer deze voldoet aan de voorwaarden.
@@ -474,7 +473,7 @@ In de toelichting op het woningwaarderingsstelsel geeft het Bhw een aantal meeti
 ~~_**De volgende regels gaan over welke delen van een ruimte juist wel of niet moeten worden meegeteld bij het bepalen van de netto vloeroppervlakte van een ruimte.**_~~  
 
 _Kasten_  
-De wetgever spreekt in de toelichting van het Bhw dat alle tot de woning behorende losse en vaste kasten moeten worden meegenomen in de berekening van de oppervlakte. Voor de praktijk van de Huurcommissie betekent dit dat alle tot de verreken behorende kasten moeten worden meegerekend.
+De wetgever spreekt in de toelichting van het Bhw dat alle tot de woning behorende losse en vaste kasten moeten worden meegenomen in de berekening van de oppervlakte. Voor de praktijk van de Huurcommissie betekent dit dat alle tot de vertrekken behorende kasten moeten worden meegerekend.
 
 Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> uitkomt, telt mee bij de oppervlakte van dat vertrek. Hoe groot of klein de kast is heeft hier geen invloed op. De plek van de deur van de kast bepaalt bij welke ruimte een kast hoor. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
 
@@ -520,7 +519,7 @@ Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> 
 
 ==}
 
-Vertrekken, overige ruimtes én verkeersruimtes kunnen punten krijgen als deze zijn verwarmd, namelijk 2 punten per verwarmd vertrek en 1 punt voor overige ruimtes en verkeersruimten. Voor de laatste twee soorten binnenruimten geldt een maximum van 4 punten. Daarnaast kan een vertrek ook punten krijgen als deze is verkoeld kan worden. Hiervoor geldt ook een maximum aantal van 2 punten. Voor de w ahardering gelden nadere regels die hieronder worden uitgelegd.
+Vertrekken, overige ruimtes én verkeersruimtes kunnen punten krijgen als deze zijn verwarmd, namelijk 2 punten per verwarmd vertrek en 1 punt voor overige ruimtes en verkeersruimten. Voor de laatste twee soorten binnenruimten geldt een maximum van 4 punten. Daarnaast kan een vertrek ook punten krijgen als deze verkoeld kan worden. Hiervoor geldt ook een maximum aantal van 2 punten. Voor de waardering gelden nadere regels die hieronder worden uitgelegd.
 
 #### 2.3.1 Punten voor verwarmde ruimtes
 
@@ -528,7 +527,7 @@ Punten voor verwarming en verkoeling in een vertrek, overige ruimte of verkeersr
 
 #### 2.3.2 Open keuken in een vertrek of overige ruimte
 
-Vertrekken of overige ruimten die met elkaar in verbinding staan, vorden in een bepaald geval als één verwarmd vertrek of overige ruimte gewaardeerd. Dit is het geval als zich tussen die twee verwarmde vertrekken of overige ruimten een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt. Het moet hierbij gaan om een niet afsluitbare opening, die over een breedte van minimaal 0,85 meter een minimumhoogte heeft van 2,00 meter. Het voorbeeld in [paragraaf 2.2.1.4](#2214-aangrenzende-ruimten-met-een-open-doorgang) geeft dit visueel weer.
+Vertrekken of overige ruimten die met elkaar in verbinding staan, worden in een bepaald geval als één verwarmd vertrek of overige ruimte gewaardeerd. Dit is het geval als zich tussen die twee verwarmde vertrekken of overige ruimten een opening bevindt, die breder is dan 50% van de muur, waarin deze opening zich bevindt. Het moet hierbij gaan om een niet afsluitbare opening, die over een breedte van minimaal 0,85 meter een minimumhoogte heeft van 2,00 meter. Het voorbeeld in [paragraaf 2.2.1.4](#2214-aangrenzende-ruimten-met-een-open-doorgang) geeft dit visueel weer.
 
 Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgeweken. Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek namelijk individueel gewaardeerd met punten indien deze verwarmd zijn. Onder een open keuken wordt hier dus verstaan een keuken die in open verbinding staat met een ander vertrek of overige ruimte, terwijl zich tussen de keuken en het andere vertrek een opening bevindt, die breder is dan 50% van de tussenmuur [paragraaf 2.2.1.4](#2214-aangrenzende-ruimten-met-een-open-doorgang). Een verwarmde woonkamer met open keuken wordt dus gewaardeerd met 4 punten.
 
@@ -604,7 +603,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 3. Vervallen energielabel of energie-index  
     Een energielabel of energie-index is maximaal 10 jaar geldig. Dat betekent dat een energielabel, opgenomen op bijvoorbeeld 1 oktober 2014 vervalt per 1 oktober 2024. Aan een vervallen energielabel of energie-index wordt geen waardering toegekend.
 4. Energielabel afgegeven in de periode 1 januari 2015 tot 1 januari 2021  
-    Een energielabel dat is afgegeven in de periode van 1 januari 2015 tot 1 januari 2021 krijgt geen punten in het woningwaarderingsstelsel. Dit zijn namelijk de zogenaamde 'vereenvoudigde energielabels', die slechts een meer globale inscha ting van de energieprestatie van een woonruimte geven. Alleen energieindexen die in de genoemde periode zijn afgegeven komen in aanmerking voor waardering.
+    Een energielabel dat is afgegeven in de periode van 1 januari 2015 tot 1 januari 2021 krijgt geen punten in het woningwaarderingsstelsel. Dit zijn namelijk de zogenaamde 'vereenvoudigde energielabels', die slechts een meer globale inschatting van de energieprestatie van een woonruimte geven. Alleen energieindexen die in de genoemde periode zijn afgegeven komen in aanmerking voor waardering.
 5. Energieprestatie niet afgegeven voor de individuele woonruimte  
     Het kan voorkomen dat een wooncomplex of ander gebouw bestaat uit meerdere (zelfstandige) woonruimten. Om voor waardering in aanmerking te kunnen komen, moet voor de individuele zelfstandige woonruimte geldige energieprestatie zijn afgegeven. Een energielabel voor het hele complex/gebouw wordt niet in de waardering meegenomen.
 
@@ -612,7 +611,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 
 Bij de puntentoekening voor de energieprestatie wordt onderscheid gemaakt tussen eengezinswoningen en meergezinswoningen (ook wel: duplexwoningen). Het verschil tussen deze woningen is dat bij een eengezinswoning geen andere woningen aanwezig zijn boven of onder de woning. Een eengezinswoning is dus bijvoorbeeld om een rijtjeshuis, twee-onder-een-kapwoning of vrijstaande woning. Alle woningen die geen eengezinswoning zijn, zijn meergezinswoningen.
 
-De labelklasse (A++++ t/m G) bepaalt het aantal punten voor de energieprestatie. Bij een energie-index wordt het puntenantal bepaald door het relevante cijfer. In de onderstaande tabellen is dit nader ingevuld.
+De labelklasse (A++++ t/m G) bepaalt het aantal punten voor de energieprestatie. Bij een energie-index wordt het puntenaantal bepaald door het relevante cijfer. In de onderstaande tabellen is dit nader ingevuld.
 
 Labelklasse energieprestatie
 
@@ -723,9 +722,9 @@ Voor woningen die (gedeeltelijk) zelf in hun energieverbruik voorzien, bijvoorbe
 
 ### 2.5 Rubriek 5: Keuken
 
-Een keuken komt voor waardering in aanmerking als deze aan bepaalde basisiseisen voldoet. Ook de ingebouwde apparatuur en voorzieningen in de keuken tellen onder voorwaarden mee in de woningwaardering.
+Een keuken komt voor waardering in aanmerking als deze aan bepaalde basiseisen voldoet. Ook de ingebouwde apparatuur en voorzieningen in de keuken tellen onder voorwaarden mee in de woningwaardering.
 
-#### 2.5.1 De basisiseisen voor een keuken
+#### 2.5.1 De basiseisen voor een keuken
 
 Om punten te krijgen in de rubriek 'keuken' moet er in de ruimte een aantal basisvoorzieningen aanwezig zijn. Die basisvoorzieningen zijn:
 
@@ -875,7 +874,7 @@ Sanitair in de woonruimte komt voor waardering in aanmerking. De waardering van 
 >
 > ///
 
-Het woningwaarderingstelsel geeft punten aan de hieronder beschreven sanitaire basisvoorzieningen:
+Het woningwaarderingsstelsel geeft punten aan de hieronder beschreven sanitaire basisvoorzieningen:
 
 _Toilet_  
 Een toilet met waterspoeling krijgt punten als deze geplaatst is in een daartoe bestemde ruimte én binnen de woonruimte ligt. Een toilet dat buiten de woonruimte, maar binnen het woongebouw ligt wordt alleen gewaardeerd als het gebruik door derden is uit te sluiten. Toiletten die buiten toiletruimten en badkamers zijn aangebracht worden niet gewaardeerd.
@@ -941,7 +940,7 @@ Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zitho
 
 Een bad- of doucheruimte kan punten krijgen voor extra voorzieningen als de ruimte voldoet aan alle van de volgende eisen:
 
-- ~~een waterdichte vloerafwerking~~ (inclusief een bad in een vertrek met een nietwaterdichte vloer, omdat een bad zelf als waterdichte afwerking wordt gezien);
+- ~~een waterdichte vloerafwerking~~ (inclusief een bad in een vertrek met een niet-waterdichte vloer, omdat een bad zelf als waterdichte afwerking wordt gezien);
 - ~~de ruimte heeft over ten minste 50% van de oppervlakte een vrije hoogte van 2,00 meter (gemeten vanaf de vloer tot het zichtbare plafond);~~
 - ~~een waterdichte wandafwerking tot 1,50 meter hoogte voor de badruimte en 1,80 meter voor de doucheruimte;~~
 - een wastafel ~~inclusief (tweehands)mengkraan en spiegel~~;
@@ -970,7 +969,7 @@ Het aantal punten voor extra voorzieningen kan niet meer zijn dan het totaalaant
 {==
 
 **VOORBEELD**  
-Een badruimte in een woning heeft een 1 bad/douchecombinatie (7 punten). Daarnaast is er in de slaapkamer nog een douche aanwezig (4 punten). Voor de sanitaire basisvoorzieningen worden dus in totaal 11 punten toegekend (7 + 4). De badruimte voldoet aan de eisen voor de waardering van extra sanitaire voorzieningen. De badruimte heeft een bubbelfunctie voor het bad (1,50 punt), een gemonteerde volledige afscheiding van de douche (1,25 punt), 2 handdoekenradiatoren (2 x 0,75 punt), 2 stopcontacten (2 x 0,25), 1 thermostatische mengkraan (0,5 punt) en 2 eenhandsmengkranen (2 x 0,25 punt). De extra sanitaire voorzieningen worden gewaardeerd met 5,75 punten in totaal. De punten worden voor de extra sanitaire voorzieningen (5,75 punten) worden niet afgetopt, omdat het puntenantal lager is dan het totaal aantal punten voor de douche en bad/douchecombinatie (11 punten).
+Een badruimte in een woning heeft een 1 bad/douchecombinatie (7 punten). Daarnaast is er in de slaapkamer nog een douche aanwezig (4 punten). Voor de sanitaire basisvoorzieningen worden dus in totaal 11 punten toegekend (7 + 4). De badruimte voldoet aan de eisen voor de waardering van extra sanitaire voorzieningen. De badruimte heeft een bubbelfunctie voor het bad (1,50 punt), een gemonteerde volledige afscheiding van de douche (1,25 punt), 2 handdoekenradiatoren (2 x 0,75 punt), 2 stopcontacten (2 x 0,25), 1 thermostatische mengkraan (0,5 punt) en 2 eenhandsmengkranen (2 x 0,25 punt). De extra sanitaire voorzieningen worden gewaardeerd met 5,75 punten in totaal. De punten worden voor de extra sanitaire voorzieningen (5,75 punten) worden niet afgetopt, omdat het puntenaantal lager is dan het totaal aantal punten voor de douche en bad/douchecombinatie (11 punten).
 
 ==}
 
@@ -982,7 +981,7 @@ Een badruimte in een woning heeft een 1 bad/douchecombinatie (7 punten). Daarnaa
 
 ==}
 
-~~Het woningwaarderingstelsel kent punten toe voor woonvoorzieningen voor personen met een handicap. Daaronder wordt in deze rubriek verstaan: een person die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt.~~
+~~Het woningwaarderingsstelsel kent punten toe voor woonvoorzieningen voor personen met een handicap. Daaronder wordt in deze rubriek verstaan: een person die ten gevolge van ziekte of gebrek aantoonbare beperkingen ondervindt.~~
 
 ~~Er wordt 1 punt toegekend per € 332,00 netto-investering door de verhuurder. De nettoinvestering is het bedrag dat overblijft na aftrek van subsidie en eigen bijdrage van de huurder. Daarbij geldt de voorwaarde dat de kosten in een redelijke verhouding staan tot de geboden kwaliteit~~
 
@@ -1110,9 +1109,6 @@ Zeembalkons worden, ~~zolang zij voldoen aan de hiervoor aangegeven eisen van ee
 
 Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft, dan geldt een aftrek van 5 punten.
 
-> [!NOTE]
-> Hoewel deze zin suggereert dat de loggia niet valt onder privé-buitenruimte of gemeenschappelijke buitenruimte, gaan wij er vanuit dat de loggia wel onder één van beide categorieën valt en dat loggia in deze zin op een ongelukkige manier is toegevoegd om te benadrukken dat een loggia een buitenruimte is.
-
 #### 2.8.7 Meetinstructies buitenruimten
 
 ~~Van de buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor-, achter- of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terugliggende deel van de gevel.~~
@@ -1152,7 +1148,7 @@ De oppervlakten voor gemeenschappelijke en privé-buitenruimten worden afzonderl
 >
 > ///
 
-Gemeenschappelijke vertrekken en overige ruimtes worden gewaardeerd volgens het woningwaarderingsstel. Een vertrek krijgt 1 punt per vierkante meter en een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter. Voor beide type ruimtes geldt dat het puntaenantal per ruimte moet worden gedeeld door het aantal adressen dat exclusieve toegang en gebruiksrecht heeft. Deze voorwaarde wordt hieronder nader toegelicht.
+Gemeenschappelijke vertrekken en overige ruimtes worden gewaardeerd volgens het woningwaarderingsstelsel. Een vertrek krijgt 1 punt per vierkante meter en een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter. Voor beide type ruimtes geldt dat het puntenaantal per ruimte moet worden gedeeld door het aantal adressen dat exclusieve toegang en gebruiksrecht heeft. Deze voorwaarde wordt hieronder nader toegelicht.
 
 #### 2.9.1 Basisvoorwaarden waardering gemeenschappelijke vertrekken en overige ruimtes
 
@@ -1163,7 +1159,7 @@ Gemeenschappelijke vertrekken en overige ruimtes die tot het woongebouw behorend
 
 #### 2.9.2 Punten voor voorzieningen in gemeenschappelijke ruimten
 
-Punten voor voorzieningen, zoals verkoeling en verwarming, keuken en sanitair, die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd volgens het woningwaarderingstelsel. Het puntenaantal moet vervolgens per rubriek worden gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft tot de ruimte.
+Punten voor voorzieningen, zoals verkoeling en verwarming, keuken en sanitair, die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd volgens het woningwaarderingsstelsel. Het puntenaantal moet vervolgens per rubriek worden gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft tot de ruimte.
 
 > [!NOTE]
 > Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_eenheden`, waarbij de eenheid zelf meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
@@ -1217,7 +1213,7 @@ Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aang
 5. Deel het totaal aantal punten door het aantal adressen dat toegang en gebruiksrecht heeft tot de gemeenschappelijke binnenruimten;
 6. Rond af op een kwart punt (zie [paragraaf 1.2.4](#214-algemene-rekenregel-afronding-per-rubriek)).
 
-### 2.10 Gemeenschappelijk parkeerruimten
+### 2.10 Gemeenschappelijke parkeerruimten
 
 {==
 
@@ -1225,7 +1221,7 @@ Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aang
 
 ==}
 
-Het woningwaarderingstelsel kent punten toe aan verschillende typen gemeenschappelijke parkeerplekken. De waardering is afhankelijk van de afdekking van de buitenlucht.
+Het woningwaarderingsstelsel kent punten toe aan verschillende typen gemeenschappelijke parkeerplekken. De waardering is afhankelijk van de afdekking van de buitenlucht.
 
 #### 2.10.1 Basisvoorwaarden waardering gemeenschappelijk parkeerruimte
 
@@ -1269,7 +1265,7 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 Het puntenaantal moet worden berekend door het puntenaantal per gemeenschappelijke parkeerplek te delen door aantal adressen dat toegang en gebruiksrecht heeft.
 
 > [!NOTE]
-> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van elk parkeerplektype de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte meegeteld voor de berekening van de punten, waarbij het aantal wordt bepaald door `Eenhedenruimte.aantal`. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden.
+> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingsstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van elk parkeerplektype de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte meegeteld voor de berekening van de punten, waarbij het aantal wordt bepaald door `Eenhedenruimte.aantal`. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden.
 
 #### 2.10.5 Laadpalen
 
@@ -1346,11 +1342,11 @@ De minimum WOZ-waarde komt pas aan bod als er voor een woonruimte geen relevante
 | Per 1 juli 2023       | € 71.602             |
 
 _Geen andere berekeningen mogelijk_  
-Het Bhw staat geen andere manier van berekenen van het puntenaantal voor de WOZwaarde toe dan hierboven opgesomd. Het is **nadrukkelijk** niet meer mogelijk om tot een benadering van de van de WOZ-waarde te komen. Bijvoorbeeld door te vergelijken met andere woningen en daar een puntenantal aan te hangen voor de woningwaardering.
+Het Bhw staat geen andere manier van berekenen van het puntenaantal voor de WOZwaarde toe dan hierboven opgesomd. Het is **nadrukkelijk** niet meer mogelijk om tot een benadering van de van de WOZ-waarde te komen. Bijvoorbeeld door te vergelijken met andere woningen en daar een puntenaantal aan te hangen voor de woningwaardering.
 
 #### 2.11.2 Punten voor de WOZ-waarde, taxatiewaarde of minimum WOZ-waarde
 
-De hoofdregel is dat er een berekening plaatsvindt voor het puntenaantal op basis van de laatst vastgestelde WOZ-waarde voor de zelfstandige woonruimte. Bij de berekening van het puntenantal worden ook kengetallen gebruikt. Deze getallen worden ieder jaar opnieuw vastgesteld door de minister.[^7] De kengetallen van de afgelopen jaren staan verderop in deze paragraaf.
+De hoofdregel is dat er een berekening plaatsvindt voor het puntenaantal op basis van de laatst vastgestelde WOZ-waarde voor de zelfstandige woonruimte. Bij de berekening van het puntenaantal worden ook kengetallen gebruikt. Deze getallen worden ieder jaar opnieuw vastgesteld door de minister.[^7] De kengetallen van de afgelopen jaren staan verderop in deze paragraaf.
 
 _Maximale waardering van de WOZ-waarde is 33% van het totale puntenaantal_  
 Het aandeel van de WOZ-waarde in de puntenwaardering is gemaximeerd. Dat betekent dat maximaal 33% van het totale puntenaantal van een woning bepaald mag worden door de WOZ-waarde van de woning. Dit wordt ook wel de 'cap op de WOZ' genoemd. Als 'de cap' wordt toegepast wordt het aantal punten voor de WOZ-waarde afgerond naar beneden op hele punten. Er zijn een aantal uitzonderingen op deze regel. Deze uitzonderingen staan uitgelegd in [paragraaf 2.11.7](#2117-de-uitzonderingen-op-de-woz-cap).
@@ -1377,7 +1373,7 @@ Onderdeel II:
 
 - Bereken eerst het aantal m² van de vertrekken (rubriek 1), overige ruimtes (rubriek 2) en parkeerplekken type I (rubriek 10). In deze rubriek tellen uitsluitend parkeerplekken van type I mee. Hierbij kan worden gerekend met de standaard maatvoering van 12 m² per parkeerplaats;
 - Rond hierna de oppervlakte af op hele vierkante meters. Bij 0,5 m² of meer wordt afgerond naar boven, bij minder dan 0,5 m² wordt afgerond naar beneden;
-- Deel de WOZ-waarde door het aantal berekende m² en vervolgens door € 268 (bij een WOZ-waarde met **waardepeildatum 1 januari 2025**, 85% van de taxatiewaarde of minimum WOZ-waarde). Dit geeft het puntenaantal voor onderdeel II. Rond dit puntenantaal <u>niet</u> af.
+- Deel de WOZ-waarde door het aantal berekende m² en vervolgens door € 268 (bij een WOZ-waarde met **waardepeildatum 1 januari 2025**, 85% van de taxatiewaarde of minimum WOZ-waarde). Dit geeft het puntenaantal voor onderdeel II. Rond dit puntenaantal <u>niet</u> af.
 - Tel de punten van de twee onderdelen bij elkaar op en rond volgens de instructie van [paragraaf 2.1.4](#214-algemene-rekenregel-afronding-per-rubriek) af op een kwart punt. Dit is het puntenaantal voor de WOZwaarde.
 
 > [!NOTE]
@@ -1419,10 +1415,10 @@ De definitie van een tijdelijke woning is voor de Huurcommissie: een woning die 
 
 Als aan alle van de volgende eisen wordt voldaan geldt een minimale waardering van 40 punten voor de WOZ-waarde:
 
-- er is sprake van een bouwkundige oplevering of gereedheid van een nieuwbouwwoing, **of**
+- er is sprake van een bouwkundige oplevering of gereedheid van een nieuwbouwwoning, **of**
 - er is sprake van verbouw waarna de woning voldoet aan de op dat moment geldende energieprestatie-eisen voor nieuwbouwwoningen. [^9]
 - de nieuwbouw of verbouw heeft plaatsgevonden in de jaren 2015-2019;
-- de woning heeft voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingstelsel minimaal 110 punten behaald.
+- de woning heeft voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingsstelsel minimaal 110 punten behaald.
 
 > [!NOTE]
 > We deze regeling niet specifiek toe voor 'hoogniveau renovatie', maar voor bouwjaar 2015-2019.
@@ -1460,7 +1456,7 @@ Alleen als de bovenstaande eisen wordt voldaan aan al deze eisen dient bij de be
 
 #### 2.11.7 De uitzonderingen op de WOZ-cap
 
-Het aandeel van de WOZ-waarde in de puntenwaardering is gemaximeerd. Dat betekent dat maximaal 33% van het totale puntenantal van een woning bepaald mag worden door de WOZ-waarde van de woning. Maar de WOZ-cap geldt _niet_ in de volgende situatie:
+Het aandeel van de WOZ-waarde in de puntenwaardering is gemaximeerd. Dat betekent dat maximaal 33% van het totale puntenaantal van een woning bepaald mag worden door de WOZ-waarde van de woning. Maar de WOZ-cap geldt _niet_ in de volgende situatie:
 
 - wanneer een woning zonder de 'cap op de WOZ' 187 of meer punten krijgt en door 'de cap op de WOZ' minder dan 187 punten krijgt: dan geldt een minimale waardering van 186 punten voor de woning.
 
@@ -1474,26 +1470,26 @@ Maar op de bovenstaande regel gelden weer twee uitzonderingen. De bovengenoemde 
 Daarnaast wordt in nog twee andere gevallen de 'cap op de WOZ' niet toegepast, namelijk:
 
 - als de minimum WOZ-waarde is toegepast, aangezien de WOZ-waarde in dat geval niet meer dan 33% zal bedragen, of
-- als het gaat om een nieuwbouwwoning gebouwd in de jaren 2015-2019 waarvoor minimaal 110 punten zijn behaald voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingstelsel.[^12] In deze situatie wordt minimaal 40 punten voor het onderdeel WOZ-waarde toegekend. Dit komt overeen met 26,6%, waardoor geen aftopping plaatsvindt.
+- als het gaat om een nieuwbouwwoning gebouwd in de jaren 2015-2019 waarvoor minimaal 110 punten zijn behaald voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingsstelsel.[^12] In deze situatie wordt minimaal 40 punten voor het onderdeel WOZ-waarde toegekend. Dit komt overeen met 26,6%, waardoor geen aftopping plaatsvindt.
 
-Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenantal voor de WOZ-waarde in deze gevallen rekenkundig nooit meer dan 33% kan bedragen.
+Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde in deze gevallen rekenkundig nooit meer dan 33% kan bedragen.
 
-**Rekenvoorbeeld 1:** _door toepassing van de cap op de WOZ wordt het aantal punten in rubriek WOZ-waarde verlaagd van 134 naar 66. Het totale puntenantal blijft boven de 187 punten._
+**Rekenvoorbeeld 1:** _door toepassing van de cap op de WOZ wordt het aantal punten in rubriek WOZ-waarde verlaagd van 134 naar 66. Het totale puntenaantal blijft boven de 187 punten._
 
-|                                      | WOZ-  punten   | Punten in de  overige  rubrieken   | Totaal  puntenantaal   | Vrije sector?   |
+|                                      | WOZ-  punten   | Punten in de  overige  rubrieken   | Totaal  puntenaantal   | Vrije sector?   |
 |--------------------------------------|----------------|------------------------------------|------------------------|-----------------|
 | Zonder toepassing  cap op de WOZ     | 134 (= 50%)    | 134 (= 50%)                        | 268 (=100%)            | Ja              |
 | Met toepassing van  de cap op de WOZ | 66 (= 33%)     | 134 (= 67%)                        | 200 (= 100%)           | Ja              |
 
-**Rekenvoorbeeld 2:** _de cap op de WOZ wordt niet toegepast, omdat het puntenantal lager is dan 187 (namelijk 160). De WOZ-punten mogen een groter aandeel hebben dan 33% van het totale puntenantal._
+**Rekenvoorbeeld 2:** _de cap op de WOZ wordt niet toegepast, omdat het puntenaantal lager is dan 187 (namelijk 160). De WOZ-punten mogen een groter aandeel hebben dan 33% van het totale puntenaantal._
 
-| WOZ-  punten   | Punten in de  overige  rubrieken   | Totaal  puntenantaal   | Vrije sector?   |
+| WOZ-  punten   | Punten in de  overige  rubrieken   | Totaal  puntenaantal   | Vrije sector?   |
 |----------------|------------------------------------|------------------------|-----------------|
 | 80 (= 50%)     | 80 (= 50%)                         | 160 (=100%)            | Nee             |
 
-**Rekenvoorbeeld 3:** _door toepassing van de cap op de WOZ krijgt de woning een puntenantaal lager dan 187 punten (namelijk 162 punten). Wanneer een woning zonder die beperking een waardering heeft van meer dan 186 punten en door deze beperking een waardering krijgt die lager is dan 187 punten, daarom geldt een waardering van 186 punten voor de woning._
+**Rekenvoorbeeld 3:** _door toepassing van de cap op de WOZ krijgt de woning een puntenaantal lager dan 187 punten (namelijk 162 punten). Wanneer een woning zonder die beperking een waardering heeft van meer dan 186 punten en door deze beperking een waardering krijgt die lager is dan 187 punten, daarom geldt een waardering van 186 punten voor de woning._
 
-|                                      | WOZ-  punten                 | Punten in de  overige  rubrieken   | Totaal  puntenantaal       | Vrije sector?   |
+|                                      | WOZ-  punten                 | Punten in de  overige  rubrieken   | Totaal  puntenaantal       | Vrije sector?   |
 |--------------------------------------|------------------------------|------------------------------------|----------------------------|-----------------|
 | Zonder toepassing  cap op de WOZ     | 109 (= 50%)                  | 109 (= 50%)                        | 218 (=100%)                | Ja              |
 | Met toepassing van  de cap op de WOZ | 53,7 (=  33%),  afg onder 53 | 109 (= 67%)                        | 162 (= 100%)  -  wordt 186 | Nee             |
@@ -1529,7 +1525,7 @@ Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het
 >
 > ///
 
-Als sprake is van een zorgwoning, dan wordt het puntentotaal die de woning krijgt op basis van de rubrieken 1 t/m 11.1 van het Bhw met 35% verhoogd.[^13] Dit heeft een hoger puntenantaal als gevolg en telt daarom mee in het bepalen van de huursector waarin de woonruimte valt.
+Als sprake is van een zorgwoning, dan wordt het puntentotaal die de woning krijgt op basis van de rubrieken 1 t/m 11.1 van het Bhw met 35% verhoogd.[^13] Dit heeft een hoger puntenaantal als gevolg en telt daarom mee in het bepalen van de huursector waarin de woonruimte valt.
 
 [^13]: Dit betekent dat punten die eventueel worden toegekend op basis van rubriek 11.2 (paragraaf 2.11.5 van dit hoofdstuk) niet worden meegenomen in de berekening.
 
@@ -1637,7 +1633,7 @@ Het toekennen van de monumentenopslag of de opslag voor beschermd stad- of dorps
 
 #### 2.13.2 Opslag maakt van een gereguleerde woning geen vrijesectorwoning
 
-In hoofdstuk 1 is toegelicht dat huurders van zelfstandige woonruilte met een maximale huurprijs tot en met 186 punten huurprijsbescherming toekomt. Daarbij is bepalend wat het puntenantal en/of de bijbehorende maximale huurprijs is. De opslagen die in deze paragraaf aan de orde komen, hebben daar geen involed op. Met andere woorden: door een opslag valt een woning die op basis van het puntenantal in de mindensector valt niet ineens in de vrije sector. Wel mag de verhuurder die hogere huurprijs vragen.
+In hoofdstuk 1 is toegelicht dat huurders van zelfstandige woonruimte met een maximale huurprijs tot en met 186 punten huurprijsbescherming toekomt. Daarbij is bepalend wat het puntenaantal en/of de bijbehorende maximale huurprijs is. De opslagen die in deze paragraaf aan de orde komen, hebben daar geen involed op. Met andere woorden: door een opslag valt een woning die op basis van het puntenaantal in de mindensector valt niet ineens in de vrije sector. Wel mag de verhuurder die hogere huurprijs vragen.
 
 #### 2.13.3 Rijksmonumenten
 
@@ -1676,7 +1672,7 @@ De opslag is hierna afhankelijk van wanneer de huurovereenkomst is gesloten. Er 
 - als de huurovereenkomst is afgesloten op of na het tijdstip van inwerkingtreding van de Wet betaalbare huur (vanaf 1 juli 2024) dan wordt de maximale huurprijs vermeerderd met 35%.
 - als de huurovereenkomst is afgesloten vóór 1 juli 2024 dan worden 50 punten extra toegekend.
 
-Omdat deze laatste regel effect heeft op het puntenantal in plaats van de maximale huurprijs kan de toepassing van deze regel tot gevolg hebben dat de woning in de vrije sector valt.
+Omdat deze laatste regel effect heeft op het puntenaantal in plaats van de maximale huurprijs kan de toepassing van deze regel tot gevolg hebben dat de woning in de vrije sector valt.
 
 > [!NOTE]
 > De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie [https://github.com/Aedes-datastandaarden/vera-openapi/issues/69](https://github.com/Aedes-datastandaarden/vera-openapi/issues/69)
@@ -1786,7 +1782,7 @@ Niet alle woningen die in beschermde stads-of dorpsgezichten liggen komen voor d
 Sommige woonruimten die in de middensector vallen, komen binnen het woningwaarderingsstelsel in aanmerking voor een nieuwbouwopslag. Hieronder volgen daarom een eerst aantal definities:
 
 - _nieuwbouw_: nieuwbouw houdt in dat een volledig nieuw pand met nieuwe woonruimten neergezet wordt.
-- _bijbouw_: bijbouw betekent dat al sprake is van bebouwing waarbij geheel nieuwe woningen worden bijgebouwd. Bijvoorbeeld door nieuwe woningen tegen de bestaande bebouwing aan te bouwen of door optoppen (duus bovenop de bestaande woning).
+- _bijbouw_: bijbouw betekent dat al sprake is van bebouwing waarbij geheel nieuwe woningen worden bijgebouwd. Bijvoorbeeld door nieuwe woningen tegen de bestaande bebouwing aan te bouwen of door optoppen (dus bovenop de bestaande woning).
 - _transformatie_: transformatie betekent dat een nieuwe woonruimte ontstaat door een functiewijziging van een bestaand verblijfsobject. Een voorbeeld is een transformatie van een winkelruimte of kantoorruimte naar een woonruimte.
 
 ##### 2.13.6.1 Voorwaarden voor de nieuwbouwopslag
