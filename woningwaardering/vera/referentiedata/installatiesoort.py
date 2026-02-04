@@ -261,6 +261,16 @@ class Installatiesoort(Referentiedatasoort):
     of keuken.
     """
 
+    tweehandsmengkraan = InstallatiesoortReferentiedata(
+        code="THM",
+        naam="Tweehandsmengkraan",
+    )
+    """
+    Een tweehandsmengkraan heeft twee aparte knoppen of grepen voor warm en koud water.
+    De gebruiker mengt handmatig de gewenste temperatuur. Deze traditionele kraan
+    biedt een klassieke uitstraling en nauwkeurige temperatuurregeling.
+    """
+
     kokend_waterfunctie = InstallatiesoortReferentiedata(
         code="KWA",
         naam="Kokend waterfunctie",

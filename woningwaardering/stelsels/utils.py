@@ -386,6 +386,7 @@ def energieprestatie_met_geldig_label(
 
         if energieprestatie.soort not in (
             Energieprestatiesoort.energie_index,
+            Energieprestatiesoort.energielabel_conform_nta8800,
             Energieprestatiesoort.primair_energieverbruik_woningbouw,
             Energieprestatiesoort.voorlopig_energielabel,
         ):
@@ -665,13 +666,15 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.overig_vertrek,
         Ruimtedetailsoort.bijkeuken,
         Ruimtedetailsoort.berging,
+        Ruimtedetailsoort.bergruimte,
         Ruimtedetailsoort.wasruimte,
         Ruimtedetailsoort.kelder,
         Ruimtedetailsoort.serre,
         Ruimtedetailsoort.schuur,
     ]:
         if (
-            ruimte.detail_soort == Ruimtedetailsoort.berging
+            ruimte.detail_soort
+            in [Ruimtedetailsoort.berging, Ruimtedetailsoort.bergruimte]
             and Ruimtesoort.overige_ruimten
         ):
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1

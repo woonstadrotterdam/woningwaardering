@@ -25,6 +25,24 @@ class Boekingsoort(Referentiedatasoort):
     Boeking voor opvoer of wijziging van een budget of budgetregel
     """
 
+    ontvangsten_van_crediteuren = BoekingsoortReferentiedata(
+        code="CON",
+        naam="Ontvangsten van crediteuren",
+    )
+    """
+    Boeking van een ontvangen bedrag van een crediteur zonder gekoppelde inkoopfactuur,
+    zoals een restitutie, creditnota of terugbetaling.
+    """
+
+    vordering_op_crediteuren = BoekingsoortReferentiedata(
+        code="CVO",
+        naam="Vordering op crediteuren",
+    )
+    """
+    Boeking van een te vorderen bedrag op een crediteur zonder gekoppelde inkoopfactuur,
+    zoals een terugvordering van een te veel betaalde factuur of een correctie.
+    """
+
     memoriaal = BoekingsoortReferentiedata(
         code="MEM",
         naam="Memoriaal",

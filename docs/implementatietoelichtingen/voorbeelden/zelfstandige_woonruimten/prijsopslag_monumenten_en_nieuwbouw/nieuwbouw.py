@@ -36,7 +36,7 @@ def get_eenheid():
 
     eenheid.energieprestaties = [
         EenhedenEnergieprestatie(
-            soort=Energieprestatiesoort.primair_energieverbruik_woningbouw,
+            soort=Energieprestatiesoort.energielabel_conform_nta8800,
             status=Energieprestatiestatus.definitief,
             begindatum=date(2022, 2, 23),
             einddatum=date(2032, 2, 23),

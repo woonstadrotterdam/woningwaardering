@@ -51,9 +51,20 @@ class Toegankelijkheidslabel(Referentiedatasoort):
     )
     """
     Label dat aangeeft dat de woning zowel intern als extern toegankelijk is met een
-    rollator. De woning voldoet hiermee automatisch aan het criterium
-    'nultredenwoning', maar is niet per definitie ook een 'rolstoelwoning' omdat er
-    bijvoorbeeld drempels aanwezig kunnen zijn.
+    rollator en is ontworpen of aangepast om veilig en zelfstandig gebruik met een
+    rollator mogelijk te maken. Dit label voldoet tevens aan de eisen van een
+    nultredenwoning.
+    """
+
+    rollatorwoning_geen_nultredenwoning = ToegankelijkheidslabelReferentiedata(
+        code="ROG",
+        naam="Rollatorwoning (geen nultredenwoning)",
+    )
+    """
+    Label dat aangeeft dat de woning zowel intern als extern toegankelijk is met een
+    rollator en is ontworpen of aangepast om veilig en zelfstandig gebruik met een
+    rollator mogelijk te maken. In tegenstelling tot de definitie bij ROA voldoet
+    deze rollatorwoning NIET aan de eisen van een nultredenwoning.
     """
 
     rolstoelwoning = ToegankelijkheidslabelReferentiedata(

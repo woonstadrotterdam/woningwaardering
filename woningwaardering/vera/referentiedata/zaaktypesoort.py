@@ -7,6 +7,15 @@ class ZaaktypesoortReferentiedata(Referentiedata):
 
 
 class Zaaktypesoort(Referentiedatasoort):
+    financiele_problematiek = ZaaktypesoortReferentiedata(
+        code="FIN",
+        naam="Financiële problematiek",
+    )
+    """
+    Zaken met betrekking tot financiële achterstanden, betalingsproblemen of
+    gerelateerde problematiek
+    """
+
     leefbaarheid = ZaaktypesoortReferentiedata(
         code="LEE",
         naam="Leefbaarheid",
