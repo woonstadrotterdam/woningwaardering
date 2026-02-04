@@ -1,0 +1,41 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
+        }
+      },
+      "punten": 27.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 15.49,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__kamer",
+            "naam": "Kamer",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 11.24,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__keuken",
+            "naam": "Keuken",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
