@@ -33,8 +33,6 @@ class PrijsopslagMonumenten(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.prijsopslag_monumenten
         super().__init__(
-            begindatum=date(2025, 1, 1),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 

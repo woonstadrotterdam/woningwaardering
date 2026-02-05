@@ -33,8 +33,6 @@ class VerkoelingEnVerwarming(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.verkoeling_en_verwarming
         super().__init__(
-            begindatum=date.fromisoformat("2024-07-01"),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 
