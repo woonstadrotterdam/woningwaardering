@@ -1,0 +1,35 @@
+{
+  "bouwjaar": 2000,
+  "ruimten": [
+    {
+      "id": "kamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Kamer",
+      "oppervlakte": 15.49,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    },
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "oppervlakte": 11.24,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    }
+  ]
+}

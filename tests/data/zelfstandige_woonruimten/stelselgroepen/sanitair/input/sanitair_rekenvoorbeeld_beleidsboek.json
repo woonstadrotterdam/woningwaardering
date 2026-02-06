@@ -1,0 +1,90 @@
+{
+  "ruimten": [
+    {
+      "id": "badruimte",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badruimte"
+      },
+      "naam": "Badruimte",
+      "inhoud": 21,
+      "oppervlakte": 8,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "BAD",
+          "naam": "Bad"
+        },
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "BUB",
+          "naam": "Bubbelfunctie van het bad"
+        },
+        {
+          "code": "DOW",
+          "naam": "Douchewand"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "STW",
+          "naam": "Stopcontact bij wastafel"
+        },
+        {
+          "code": "STW",
+          "naam": "Stopcontact bij wastafel"
+        },
+        {
+          "code": "TME",
+          "naam": "Thermostatische mengkraan"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        }
+      ]
+    },
+    {
+      "id": "slaapkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 21,
+      "oppervlakte": 8,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        }
+      ]
+    }
+  ]
+}
