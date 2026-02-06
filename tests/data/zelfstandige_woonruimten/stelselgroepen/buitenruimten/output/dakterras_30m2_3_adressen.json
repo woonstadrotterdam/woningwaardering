@@ -1,0 +1,46 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 7.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "buitenruimten__dakterras__gedeeld_met__3__adressen",
+            "naam": "Dakterras",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__totaal__gedeeld_met__3__adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 7.5
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "buitenruimten__totaal__gedeeld_met__3__adressen",
+            "naam": "Totaal (gedeeld met 3 eenheden)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 7.5
+        }
+      ]
+    }
+  ]
+}

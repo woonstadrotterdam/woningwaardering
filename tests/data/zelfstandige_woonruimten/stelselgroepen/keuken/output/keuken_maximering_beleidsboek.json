@@ -1,0 +1,70 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 8.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1600.0,
+          "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
+            "naam": "Keuken: Lengte aanrecht",
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "keuken__keuken__extra_voorziening",
+            "naam": "Inbouw kookplaat inductie"
+          },
+          "punten": 1.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "keuken__keuken__extra_voorziening",
+            "naam": "Inbouw afzuiginstallatie"
+          },
+          "punten": 0.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "keuken__keuken__extra_voorziening",
+            "naam": "Inbouw oven elektrisch"
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "keuken__keuken__extra_voorziening",
+            "naam": "Inbouw koelkast"
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "keuken__keuken__maximering_extra_voorzieningen",
+            "naam": "Max. 4 punten voor voorzieningen in een (open) keuken met een aanrechtlengte van 1600.0mm"
+          },
+          "punten": -0.5
+        }
+      ]
+    }
+  ]
+}

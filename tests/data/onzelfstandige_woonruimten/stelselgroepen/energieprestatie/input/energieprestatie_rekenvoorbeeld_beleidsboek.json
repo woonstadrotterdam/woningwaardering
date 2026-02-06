@@ -1,0 +1,55 @@
+{
+  "id": "rekenvoorbeeld_energieprestatie",
+  "bouwjaar": 1990,
+  "monumenten": [],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EP2",
+        "naam": "Primair energieverbruik - woningbouw"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2021-01-01",
+      "einddatum": "2031-01-01",
+      "registratiedatum": "2021-01-15T00:00:00+01:00",
+      "label": {
+        "code": "A",
+        "naam": "A"
+      },
+      "waarde": "0.9"
+    }
+  ],
+  "ruimten": [
+    {
+      "id": "slaapkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 20,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 1
+    },
+    {
+      "id": "woonkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "oppervlakte": 40,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    }
+  ]
+}
