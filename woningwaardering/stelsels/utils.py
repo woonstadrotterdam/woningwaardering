@@ -41,25 +41,6 @@ index: int = 0  # nodig voor mypy voor de global index voor de tabel
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
 
-def is_geldig(
-    begindatum: date = date.min,
-    einddatum: date = date.max,
-    peildatum: date = date.today(),
-) -> bool:
-    """
-    Controleert of de peildatum valt tussen de begindatum en einddatum.
-
-    Parameters:
-        begindatum (date): De begindatum.
-        einddatum (date): De einddatum.
-        peildatum (date): De peildatum.
-
-    Returns:
-        bool: True als de peildatum tussen de begindatum en einddatum valt, anders False.
-    """
-    return begindatum <= peildatum <= einddatum
-
-
 def _voeg_onderliggende_woningwaarderingen_toe(
     table: PrettyTable,
     stelselgroep_naam: str,

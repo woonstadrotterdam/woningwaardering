@@ -44,8 +44,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen
         super().__init__(
-            begindatum=date.fromisoformat("2024-07-01"),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 

@@ -68,8 +68,6 @@ class Energieprestatie(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.energieprestatie
         super().__init__(
-            begindatum=date(2025, 1, 1),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 
