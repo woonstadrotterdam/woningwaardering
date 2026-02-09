@@ -633,6 +633,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             Ruimtedetailsoort.tuin,
             Ruimtedetailsoort.tuin_rondom,
             Ruimtedetailsoort.loggia,
+            Ruimtedetailsoort.overige_buitenruimte,
         ]
         or (  # privé parkeerplaatsen buiten zijn privé buitenruimten
             ruimte.detail_soort
@@ -653,6 +654,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     if ruimte.detail_soort in [
         Ruimtedetailsoort.keuken,
         Ruimtedetailsoort.badkamer,
+        Ruimtedetailsoort.badkamer_met_toilet,
         Ruimtedetailsoort.doucheruimte,
     ]:
         return Ruimtesoort.vertrek
@@ -661,8 +663,8 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.woonkamer,
         Ruimtedetailsoort.woon_en_of_slaapkamer,
         Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
         Ruimtedetailsoort.slaapkamer,
-        Ruimtedetailsoort.badkamer_met_toilet,
         Ruimtedetailsoort.overig_vertrek,
         Ruimtedetailsoort.bijkeuken,
         Ruimtedetailsoort.berging,
@@ -671,6 +673,10 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.kelder,
         Ruimtedetailsoort.serre,
         Ruimtedetailsoort.schuur,
+        Ruimtedetailsoort.tussenkamer,
+        Ruimtedetailsoort.containerruimte,
+        Ruimtedetailsoort.recreatieruimte,
+        Ruimtedetailsoort.overige_ruimte,
     ]:
         if (
             ruimte.detail_soort
