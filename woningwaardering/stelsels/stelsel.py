@@ -9,7 +9,6 @@ from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
 )
 from woningwaardering.stelsels.utils import (
-    is_geldig,
     normaliseer_ruimte_namen,
     rond_af,
     rond_af_op_kwart,
@@ -29,31 +28,19 @@ class Stelsel:
 
     Parameters:
         stelsel (WoningwaarderingstelselReferentiedata): Het stelsel dat wordt berekend.
-        begindatum (date): De begindatum van de geldigheid van het stelsel.
-        einddatum (date, optional): De einddatum van de geldigheid van het stelsel.
         peildatum (date, optional): De peildatum voor de waardering.
             Standaard is de huidige datum.
         stelselgroepen (list[type[Stelselgroep]] | None, optional): De stelselgroepen die worden berekend.
-
-    Raises:
-        ValueError: Als het stelsel niet geldig is op de peildatum.
     """
 
     def __init__(
         self,
         stelsel: WoningwaarderingstelselReferentiedata,
-        begindatum: date,
-        einddatum: date = date.max,
         peildatum: date = date.today(),
         stelselgroepen: list[type[Stelselgroep]] | None = None,
     ) -> None:
         self.stelsel = stelsel
         logger.info(f"Stelsel {stelsel.naam} wordt gebruikt.")
-        if not is_geldig(begindatum, einddatum, peildatum):
-            raise ValueError(
-                f"Stelsel {stelsel.naam} met begindatum {begindatum} en einddatum {einddatum} is niet geldig op peildatum {peildatum}."
-            )
-
         self.peildatum = peildatum
         self.stelselgroepen = [
             stelselgroep(peildatum) for stelselgroep in stelselgroepen or []

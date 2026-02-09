@@ -44,8 +44,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
         super().__init__(
-            begindatum=date(2026, 1, 1),
-            einddatum=date.max,
             peildatum=peildatum,
         )
         self.pd_woz_factor = pd.read_csv(

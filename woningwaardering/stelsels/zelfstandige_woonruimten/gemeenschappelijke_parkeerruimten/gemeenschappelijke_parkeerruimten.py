@@ -32,8 +32,6 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten
         )
         super().__init__(
-            begindatum=date.fromisoformat("2024-07-01"),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 

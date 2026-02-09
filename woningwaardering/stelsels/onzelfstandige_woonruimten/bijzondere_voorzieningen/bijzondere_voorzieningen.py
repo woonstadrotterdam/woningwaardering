@@ -29,8 +29,6 @@ class BijzondereVoorzieningen(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.bijzondere_voorzieningen
         super().__init__(
-            begindatum=date.fromisoformat("2024-07-01"),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 
