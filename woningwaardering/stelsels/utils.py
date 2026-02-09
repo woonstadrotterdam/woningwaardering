@@ -679,8 +679,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.overige_ruimte,
     ]:
         if (
-            ruimte.detail_soort
-            in [Ruimtedetailsoort.berging, Ruimtedetailsoort.bergruimte]
+            ruimte.detail_soort == Ruimtedetailsoort.berging
             and ruimte.soort == Ruimtesoort.overige_ruimten
         ):
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
