@@ -18,8 +18,8 @@
   "energieprestaties": [
     {
       "soort": {
-        "code": "EP2",
-        "naam": "Primair energieverbruik - woningbouw"
+        "code": "NTA",
+        "naam": "Energielabel conform NTA8800"
       },
       "status": {
         "code": "DEF",

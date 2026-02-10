@@ -50,6 +50,17 @@ class Overeenkomstdetailsoort(Referentiedatasoort):
     7:271 lid 4 BW).
     """
 
+    friends_contract = OvereenkomstdetailsoortReferentiedata(
+        code="FRI",
+        naam="Friends-contract",
+        parent=Overeenkomstsoort.huurovereenkomst,
+    )
+    """
+    Huurovereenkomst waarbij twee of meer vrienden samen een woning huren onder één
+    contract. Ze zijn gezamenlijk verantwoordelijk voor de huur en mogen bij vertrek
+    van een huisgenoot samen een vervanger aandragen.
+    """
+
     jongerencontract = OvereenkomstdetailsoortReferentiedata(
         code="JON",
         naam="Jongerencontract",

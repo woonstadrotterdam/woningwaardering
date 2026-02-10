@@ -1,6 +1,8 @@
 from woningwaardering.vera.referentiedata import (
+    Aangemerkthuurtoeslag,
     Aanvullendedoelgroep,
     Aktesoort,
+    Batscore,
     Bestemming,
     Bouwkundigelementdetailsoort,
     Bouwkundigelementplaatsing,
@@ -43,8 +45,10 @@ from woningwaardering.vera.referentiedata import (
     Ruimtedetailsoort,
     Ruimteligging,
     Ruimtesoort,
+    Ruimtetoegang,
     Toegankelijkheidslabel,
     Uitexploitatiereden,
+    Voorzieningsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
     Woonvorm,
@@ -52,8 +56,10 @@ from woningwaardering.vera.referentiedata import (
 )
 
 __all__ = [
+    "Aangemerkthuurtoeslag",
     "Aanvullendedoelgroep",
     "Aktesoort",
+    "Batscore",
     "Bestemming",
     "Bouwkundigelementdetailsoort",
     "Bouwkundigelementplaatsing",
@@ -96,8 +102,10 @@ __all__ = [
     "Ruimtedetailsoort",
     "Ruimteligging",
     "Ruimtesoort",
+    "Ruimtetoegang",
     "Toegankelijkheidslabel",
     "Uitexploitatiereden",
+    "Voorzieningsoort",
     "Woningwaarderingstelsel",
     "Woningwaarderingstelselgroep",
     "Woonvorm",

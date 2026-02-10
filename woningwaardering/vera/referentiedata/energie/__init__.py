@@ -3,6 +3,7 @@ from woningwaardering.vera.referentiedata import (
     Energieprestatiestatus,
     Energieprestatievergoedingsoort,
     Monitorinterval,
+    Monitorlogregelsoort,
     Monitorwaardesoort,
 )
 
@@ -11,5 +12,6 @@ __all__ = [
     "Energieprestatiestatus",
     "Energieprestatievergoedingsoort",
     "Monitorinterval",
+    "Monitorlogregelsoort",
     "Monitorwaardesoort",
 ]

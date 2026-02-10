@@ -7,6 +7,22 @@ class AuthentiekgegevenbronReferentiedata(Referentiedata):
 
 
 class Authentiekgegevenbron(Referentiedatasoort):
+    basisregistratie_personen = AuthentiekgegevenbronReferentiedata(
+        code="BRP",
+        naam="Basisregistratie Personen",
+    )
+    """
+    Gegevens zijn afkomstig van de BRP (Basisregistratie Personen).
+    """
+
+    centraal_orgaan_opvang_asielzoekers = AuthentiekgegevenbronReferentiedata(
+        code="COA",
+        naam="Centraal Orgaan opvang Asielzoekers",
+    )
+    """
+    Gegevens zijn afkomstig van het COA (Centraal Orgaan opvang Asielzoekers).
+    """
+
     klantcontact = AuthentiekgegevenbronReferentiedata(
         code="KLA",
         naam="Klantcontact",
@@ -20,7 +36,7 @@ class Authentiekgegevenbron(Referentiedatasoort):
         naam="BvBSN",
     )
     """
-    Gegevens zijn gedeeld vanuit de basisvoorziening burgerservicenummer
+    Gegevens zijn gedeeld vanuit de basisvoorziening burgerservicenummer.
     """
 
     dienst_uitvoering_onderwijs = AuthentiekgegevenbronReferentiedata(

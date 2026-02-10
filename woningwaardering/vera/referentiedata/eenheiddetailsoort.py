@@ -767,7 +767,7 @@ class Eenheiddetailsoort(Referentiedatasoort):
     woonwagenstandplaats = EenheiddetailsoortReferentiedata(
         code="WWP",
         naam="Woonwagenstandplaats",
-        parent=Eenheidsoort.overig,
+        parent=Eenheidsoort.woonruimte,
     )
     """
     Een standplaats is een formeel door de gemeente als zodanig aangewezen terrein of

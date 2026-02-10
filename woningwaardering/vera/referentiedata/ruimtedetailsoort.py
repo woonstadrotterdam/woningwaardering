@@ -66,6 +66,17 @@ class Ruimtedetailsoort(Referentiedatasoort):
     Gecombineerde badkamer/toilet
     """
 
+    bergruimte = RuimtedetailsoortReferentiedata(
+        code="BEG",
+        naam="Bergruimte",
+        parent=Ruimtesoort.overige_ruimten,
+    )
+    """
+    Een ruimte binnen de schil van een woning en/of met toegang vanuit de woning. Vaak
+    gebruikt voor het opslaan van goederen, gereedschappen, of andere items, vaak
+    voorzien van planken, rekken of kasten voor organisatie.
+    """
+
     berging = RuimtedetailsoortReferentiedata(
         code="BER",
         naam="Berging",
@@ -91,6 +102,21 @@ class Ruimtedetailsoort(Referentiedatasoort):
         naam="Carport",
         parent=Ruimtesoort.buitenruimte,
     )
+    """
+    Overdekte, open stallingsruimte voor één of meerdere voertuigen, meestal grenzend
+    aan of nabij de woning, zonder volledig afsluitbare wanden.
+    """
+
+    containerruimte = RuimtedetailsoortReferentiedata(
+        code="CON",
+        naam="Containerruimte",
+        parent=Ruimtesoort.overige_ruimten,
+    )
+    """
+    Een speciaal ingerichte ruimte voor het tijdelijk opslaan van afval- of
+    opslagcontainers, vaak voorzien van ventilatie, brandveiligheid en gemakkelijke
+    toegang voor lediging en transport.
+    """
 
     dakterras = RuimtedetailsoortReferentiedata(
         code="DAK",
@@ -121,6 +147,17 @@ class Ruimtedetailsoort(Referentiedatasoort):
     vertrekken waarvan de deuren erop uitkomen.
     """
 
+    galerij = RuimtedetailsoortReferentiedata(
+        code="GAL",
+        naam="Galerij",
+        parent=Ruimtesoort.verkeersruimte,
+    )
+    """
+    Een aan de buitenkant van een gebouw hangende open gang, gebruikt als
+    verbindingsroute tussen verschillende delen van het gebouw. Deze verschaft
+    toegang tot afzonderlijke gebruiksfuncties.
+    """
+
     garage = RuimtedetailsoortReferentiedata(
         code="GAR",
         naam="Garage",
@@ -137,6 +174,16 @@ class Ruimtedetailsoort(Referentiedatasoort):
     )
     """
     Verkeersruimte bijv. entree, Hal, overloop, speelhal etc.
+    """
+
+    kast = RuimtedetailsoortReferentiedata(
+        code="KAS",
+        naam="Kast",
+        parent=Ruimtesoort.overige_ruimten,
+    )
+    """
+    Een opbergruimte, behorende tot de aangrenzende ruimte, onderdeel uitmakend van de
+    bouwconstructie.
     """
 
     kelder = RuimtedetailsoortReferentiedata(
@@ -156,6 +203,26 @@ class Ruimtedetailsoort(Referentiedatasoort):
     )
     """
     Vertrek of plaats in een gebouw waarin mensen hun voedsel bereiden of laten bereiden
+    """
+
+    liftschacht = RuimtedetailsoortReferentiedata(
+        code="LIF",
+        naam="Liftschacht",
+        parent=Ruimtesoort.verkeersruimte,
+    )
+    """
+    De ruimte in een bouwkundige liftschacht
+    """
+
+    meterruimte = RuimtedetailsoortReferentiedata(
+        code="MET",
+        naam="Meterruimte",
+        parent=Ruimtesoort.overige_ruimten,
+    )
+    """
+    Een ruimte binnen een gebouw waar meters voor gas, elektriciteit, water, of andere
+    nutsvoorzieningen worden geïnstalleerd en onderhouden, meestal toegankelijk voor
+    nutsbedrijven voor het aflezen en onderhouden van de meters.
     """
 
     overige_buitenruimte = RuimtedetailsoortReferentiedata(
@@ -199,6 +266,16 @@ class Ruimtedetailsoort(Referentiedatasoort):
     geen wanden maar wel een dak, bijvoorbeeld onder een complex appartementen) met
     voor elke woning een specifiek toegewezen parkeerplaats. Geldig voor
     Woningwaardering tot Juli 2024
+    """
+
+    overloop = RuimtedetailsoortReferentiedata(
+        code="OVE",
+        naam="Overloop",
+        parent=Ruimtesoort.verkeersruimte,
+    )
+    """
+    Een overgangsgebied die ruimtes met een trap verbindt. Niet gelegen op de onderste
+    bouwlaag van een adres.
     """
 
     overig_vertrek = RuimtedetailsoortReferentiedata(
@@ -263,6 +340,17 @@ class Ruimtedetailsoort(Referentiedatasoort):
     de woningwaardering indien deze duiding van tuin bekend is.
     """
 
+    schacht = RuimtedetailsoortReferentiedata(
+        code="SCA",
+        naam="Schacht",
+        parent=Ruimtesoort.overige_ruimten,
+    )
+    """
+    Een verticale doorgang of ruimte binnen een gebouw, gebruikt voor ventilatie,
+    bekabeling of leidingen vaak voorzien van brandwerende materialen en
+    afsluitingen.
+    """
+
     schuur = RuimtedetailsoortReferentiedata(
         code="SCH",
         naam="Schuur",
@@ -292,6 +380,18 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
     Vertrek: ruimte in een woning waarin men kan slapen. Dit vertrek wordt beschouwd als
     'kamer' en telt mee in het aantal kamers.
+    """
+
+    technische_ruimte = RuimtedetailsoortReferentiedata(
+        code="TEC",
+        naam="Technische ruimte",
+        parent=Ruimtesoort.overige_ruimten,
+    )
+    """
+    Een ruimte binnen een gebouw waar technische installaties worden geplaatst en
+    onderhouden, zoals  Verwarmingsinstallaties, ventilatie- of
+    airconditioningsystemen, datacenters, of telecomapparatuur. Niet te gebruiken
+    als meterruimte of liftmachineruimte.
     """
 
     terras = RuimtedetailsoortReferentiedata(
@@ -449,15 +549,6 @@ class Ruimtedetailsoort(Referentiedatasoort):
     als 'kamer' en telt mee in het aantal kamers.
     """
 
-    overloop = RuimtedetailsoortReferentiedata(
-        code="OVL",
-        naam="Overloop",
-        parent=Ruimtesoort.verkeersruimte,
-    )
-    """
-    Verkeersruimte: (UITBREIDING) Gang op een bovenverdieping.
-    """
-
     entree = RuimtedetailsoortReferentiedata(
         code="ENT",
         naam="Entree",
@@ -465,15 +556,6 @@ class Ruimtedetailsoort(Referentiedatasoort):
     )
     """
     Verkeersruimte: (UITBREIDING) Ingang van een gebouw.
-    """
-
-    kast = RuimtedetailsoortReferentiedata(
-        code="KAS",
-        naam="Kast",
-        parent=Ruimtesoort.overige_ruimten,
-    )
-    """
-    Overige ruimte: (UITBREIDING)
     """
 
     trappenhuis = RuimtedetailsoortReferentiedata(

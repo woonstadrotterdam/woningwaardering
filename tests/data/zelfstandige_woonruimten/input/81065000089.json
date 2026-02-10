@@ -49,8 +49,8 @@
   "energieprestaties": [
     {
       "soort": {
-        "code": "EP2",
-        "naam": "Primair energieverbruik - woningbouw"
+        "code": "NTA",
+        "naam": "Energielabel conform NTA8800"
       },
       "status": {
         "code": "DEF",
@@ -250,7 +250,7 @@
         "naam": "Verkeersruimte"
       },
       "detailSoort": {
-        "code": "OVL",
+        "code": "OVE",
         "naam": "Overloop"
       },
       "naam": "Overloop",

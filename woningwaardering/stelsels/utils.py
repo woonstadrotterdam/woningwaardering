@@ -367,6 +367,7 @@ def energieprestatie_met_geldig_label(
 
         if energieprestatie.soort not in (
             Energieprestatiesoort.energie_index,
+            Energieprestatiesoort.energielabel_conform_nta8800,
             Energieprestatiesoort.primair_energieverbruik_woningbouw,
             Energieprestatiesoort.voorlopig_energielabel,
         ):
@@ -613,6 +614,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             Ruimtedetailsoort.tuin,
             Ruimtedetailsoort.tuin_rondom,
             Ruimtedetailsoort.loggia,
+            Ruimtedetailsoort.overige_buitenruimte,
         ]
         or (  # privé parkeerplaatsen buiten zijn privé buitenruimten
             ruimte.detail_soort
@@ -633,6 +635,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     if ruimte.detail_soort in [
         Ruimtedetailsoort.keuken,
         Ruimtedetailsoort.badkamer,
+        Ruimtedetailsoort.badkamer_met_toilet,
         Ruimtedetailsoort.doucheruimte,
     ]:
         return Ruimtesoort.vertrek
@@ -641,19 +644,24 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.woonkamer,
         Ruimtedetailsoort.woon_en_of_slaapkamer,
         Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
         Ruimtedetailsoort.slaapkamer,
-        Ruimtedetailsoort.badkamer_met_toilet,
         Ruimtedetailsoort.overig_vertrek,
         Ruimtedetailsoort.bijkeuken,
         Ruimtedetailsoort.berging,
+        Ruimtedetailsoort.bergruimte,
         Ruimtedetailsoort.wasruimte,
         Ruimtedetailsoort.kelder,
         Ruimtedetailsoort.serre,
         Ruimtedetailsoort.schuur,
+        Ruimtedetailsoort.tussenkamer,
+        Ruimtedetailsoort.containerruimte,
+        Ruimtedetailsoort.recreatieruimte,
+        Ruimtedetailsoort.overige_ruimte,
     ]:
         if (
             ruimte.detail_soort == Ruimtedetailsoort.berging
-            and Ruimtesoort.overige_ruimten
+            and ruimte.soort == Ruimtesoort.overige_ruimten
         ):
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
             if (

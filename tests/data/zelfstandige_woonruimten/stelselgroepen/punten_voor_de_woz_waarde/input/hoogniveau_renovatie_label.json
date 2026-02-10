@@ -59,7 +59,8 @@
   "energieprestaties": [
     {
       "soort": {
-        "code": "EP2"
+        "code": "NTA",
+        "naam": "Energielabel conform NTA8800"
       },
       "status": {
         "code": "DEF",
