@@ -284,6 +284,92 @@ def _corrigeer_douche(ruimte: EenhedenRuimte) -> None:
     )
 
 
+def corrigeer_afwezigheid_toilet(
+    eenheid: EenhedenEenheid,
+    standaard_toilet_type: InstallatiesoortReferentiedata,
+) -> None:
+    """
+    Zorgt ervoor dat een eenheid ten minste één toilet heeft.
+
+    - Voegt toilet toe aan toiletruimte of badkamer_met_toilet indien ontbrekend.
+    - Als geen toilet gevonden, voegt toe aan badkamer (fallback).
+
+    Args:
+        eenheid (EenhedenEenheid): De eenheid om te controleren en eventueel aan te vullen
+        standaard_toilet_type (InstallatiesoortReferentiedata): Het type toilet om toe te voegen
+    """
+    if not eenheid.ruimten:
+        return
+
+    heeft_toilet = False
+
+    # Voeg toilet toe aan ruimten die een toilet zouden moeten hebben indien geen toilet aanwezig is
+    for ruimte in eenheid.ruimten:
+        if _heeft_toilet(ruimte):
+            heeft_toilet = True
+            continue
+
+        if ruimte.detail_soort in [
+            Ruimtedetailsoort.toiletruimte,
+            Ruimtedetailsoort.badkamer_met_toilet,
+        ]:
+            _corrigeer_toilet(ruimte, standaard_toilet_type)
+            heeft_toilet = True
+
+    if heeft_toilet:
+        return
+
+    # Eenheid heeft geen specifieke ruimte voor een toilet, dus zoek een badkamer om het toilet aan toe te voegen
+    for ruimte in eenheid.ruimten:
+        if ruimte.detail_soort == Ruimtedetailsoort.badkamer:
+            _corrigeer_toilet(ruimte, standaard_toilet_type)
+            return
+
+
+def corrigeer_afwezigheid_aanrecht(
+    eenheid: EenhedenEenheid,
+    standaard_aanrecht_lengte: int,
+) -> None:
+    """
+    Zorgt ervoor dat een eenheid ten minste één aanrecht heeft.
+
+    - Voegt aanrecht toe aan keuken, woonkamer_en_of_keuken, of
+    woon_en_of_slaapkamer_en_of_keuken indien ontbrekend.
+    - Als geen aanrecht gevonden, voegt toe aan woonkamer (fallback).
+
+    Args:
+        eenheid (EenhedenEenheid): De eenheid om te controleren en eventueel aan te vullen
+        standaard_aanrecht_lengte (int): Lengte van het aanrecht in millimeters
+    """
+    if not eenheid.ruimten:
+        return
+
+    heeft_aanrecht = False
+
+    # Voeg aanrecht toe aan ruimten die een aanrecht zouden moeten hebben indien geen aanrecht aanwezig is
+    for ruimte in eenheid.ruimten:
+        if _heeft_aanrecht(ruimte):
+            heeft_aanrecht = True
+            continue
+
+        if ruimte.detail_soort in [
+            Ruimtedetailsoort.keuken,
+            Ruimtedetailsoort.woonkamer_en_of_keuken,
+            Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+        ]:
+            _corrigeer_aanrecht(ruimte, standaard_aanrecht_lengte)
+            heeft_aanrecht = True
+
+    if heeft_aanrecht:
+        return
+
+    # Eenheid heeft geen specifieke ruimte voor een aanrecht, dus zoek een woonkamer om het aanrecht aan toe te voegen
+    for ruimte in eenheid.ruimten:
+        if ruimte.detail_soort == Ruimtedetailsoort.woonkamer:
+            _corrigeer_aanrecht(ruimte, standaard_aanrecht_lengte)
+            return
+
+
 # Hoofdfunctie
 def corrigeer_voorzieningen_eenheid(
     eenheid: EenhedenEenheid,
@@ -310,21 +396,6 @@ def corrigeer_voorzieningen_eenheid(
         if not ruimte.detail_soort:
             continue
 
-        # Zorg voor toilet in toiletruimte
-        if ruimte.detail_soort in [
-            Ruimtedetailsoort.toiletruimte,
-            Ruimtedetailsoort.badkamer_met_toilet,
-        ]:
-            _corrigeer_toilet(ruimte, standaard_toilet_type)
-
-        # Zorg voor aanrecht in keuken
-        if ruimte.detail_soort in [
-            Ruimtedetailsoort.keuken,
-            Ruimtedetailsoort.woonkamer_en_of_keuken,
-            Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-        ]:
-            _corrigeer_aanrecht(ruimte, standaard_aanrecht_lengte)
-
         # Zorg voor wastafel en douche in badkamer
         if ruimte.detail_soort in [
             Ruimtedetailsoort.badkamer,
@@ -336,3 +407,6 @@ def corrigeer_voorzieningen_eenheid(
         # Zorg voor aanrecht lengte.
         # Geen check op ruimte detailsoort omdat een aanrecht in verschillende soorten ruimten kan voorkomen.
         _corrigeer_aanrecht_lengte(ruimte, standaard_aanrecht_lengte)
+
+    corrigeer_afwezigheid_toilet(eenheid, standaard_toilet_type)
+    corrigeer_afwezigheid_aanrecht(eenheid, standaard_aanrecht_lengte)
