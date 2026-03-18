@@ -3,6 +3,10 @@ from .aanbiedingdetailstatus import (
     AanbiedingdetailstatusReferentiedata,
 )
 from .aanbiedingstatus import Aanbiedingstatus, AanbiedingstatusReferentiedata
+from .aangemerkthuurtoeslag import (
+    Aangemerkthuurtoeslag,
+    AangemerkthuurtoeslagReferentiedata,
+)
 from .aanvullendedoelgroep import (
     Aanvullendedoelgroep,
     AanvullendedoelgroepReferentiedata,
@@ -30,6 +34,7 @@ from .authentiekgegevenstatus import (
     Authentiekgegevenstatus,
     AuthentiekgegevenstatusReferentiedata,
 )
+from .batscore import Batscore, BatscoreReferentiedata
 from .bedrijfsoort import Bedrijfsoort, BedrijfsoortReferentiedata
 from .begrotingversie import Begrotingversie, BegrotingversieReferentiedata
 from .bestemming import Bestemming, BestemmingReferentiedata
@@ -47,6 +52,7 @@ from .betalingsregelingstatus import (
     Betalingsregelingstatus,
     BetalingsregelingstatusReferentiedata,
 )
+from .bewakingsstatus import Bewakingsstatus, BewakingsstatusReferentiedata
 from .boekingdetailsoort import Boekingdetailsoort, BoekingdetailsoortReferentiedata
 from .boekingsoort import Boekingsoort, BoekingsoortReferentiedata
 from .boekingstatus import Boekingstatus, BoekingstatusReferentiedata
@@ -197,6 +203,10 @@ from .grootboekrekeningstatus import (
 from .huurgeschilsoort import Huurgeschilsoort, HuurgeschilsoortReferentiedata
 from .huurgeschilstatus import Huurgeschilstatus, HuurgeschilstatusReferentiedata
 from .huurklasse import Huurklasse, HuurklasseReferentiedata
+from .huuropzegginghuurdersafspraak import (
+    Huuropzegginghuurdersafspraak,
+    HuuropzegginghuurdersafspraakReferentiedata,
+)
 from .huuropzeggingstatus import Huuropzeggingstatus, HuuropzeggingstatusReferentiedata
 from .incassomoment import Incassomoment, IncassomomentReferentiedata
 from .inexploitatiereden import Inexploitatiereden, InexploitatieredenReferentiedata
@@ -263,6 +273,10 @@ from .medewerkerrol import Medewerkerrol, MedewerkerrolReferentiedata
 from .medewerkersoort import Medewerkersoort, MedewerkersoortReferentiedata
 from .meeteenheid import Meeteenheid, MeeteenheidReferentiedata
 from .monitorinterval import Monitorinterval, MonitorintervalReferentiedata
+from .monitorlogregelsoort import (
+    Monitorlogregelsoort,
+    MonitorlogregelsoortReferentiedata,
+)
 from .monitorwaardesoort import Monitorwaardesoort, MonitorwaardesoortReferentiedata
 from .onderhoudsbestedingsoort import (
     Onderhoudsbestedingsoort,
@@ -308,6 +322,10 @@ from .overeenkomstkoppelingstatus import (
 )
 from .overeenkomstsoort import Overeenkomstsoort, OvereenkomstsoortReferentiedata
 from .overeenkomststatus import Overeenkomststatus, OvereenkomststatusReferentiedata
+from .overeenkomstversturenstatus import (
+    Overeenkomstversturenstatus,
+    OvereenkomstversturenstatusReferentiedata,
+)
 from .pandsoort import Pandsoort, PandsoortReferentiedata
 from .passendheiddetailsoort import (
     Passendheiddetailsoort,
@@ -352,6 +370,11 @@ from .projectfasebesluitstatus import (
     Projectfasebesluitstatus,
     ProjectfasebesluitstatusReferentiedata,
 )
+from .projectroldetailsoort import (
+    Projectroldetailsoort,
+    ProjectroldetailsoortReferentiedata,
+)
+from .projectrolsoort import Projectrolsoort, ProjectrolsoortReferentiedata
 from .projectsoort import Projectsoort, ProjectsoortReferentiedata
 from .projectstatus import Projectstatus, ProjectstatusReferentiedata
 from .provincie import Provincie, ProvincieReferentiedata
@@ -390,6 +413,7 @@ from .rentesoort import Rentesoort, RentesoortReferentiedata
 from .ruimtedetailsoort import Ruimtedetailsoort, RuimtedetailsoortReferentiedata
 from .ruimteligging import Ruimteligging, RuimteliggingReferentiedata
 from .ruimtesoort import Ruimtesoort, RuimtesoortReferentiedata
+from .ruimtetoegang import Ruimtetoegang, RuimtetoegangReferentiedata
 from .sanctiesoort import Sanctiesoort, SanctiesoortReferentiedata
 from .sanctiestatus import Sanctiestatus, SanctiestatusReferentiedata
 from .signaleringdetailsoort import (
@@ -432,6 +456,7 @@ from .verrekeningsoort import Verrekeningsoort, VerrekeningsoortReferentiedata
 from .vertrouwelijkheid import Vertrouwelijkheid, VertrouwelijkheidReferentiedata
 from .voorrangdetailsoort import Voorrangdetailsoort, VoorrangdetailsoortReferentiedata
 from .voorrangsoort import Voorrangsoort, VoorrangsoortReferentiedata
+from .voorzieningsoort import Voorzieningsoort, VoorzieningsoortReferentiedata
 from .vragenlijstregelherkomst import (
     Vragenlijstregelherkomst,
     VragenlijstregelherkomstReferentiedata,
@@ -465,6 +490,8 @@ __all__ = [
     "AanbiedingdetailstatusReferentiedata",
     "Aanbiedingstatus",
     "AanbiedingstatusReferentiedata",
+    "Aangemerkthuurtoeslag",
+    "AangemerkthuurtoeslagReferentiedata",
     "Aanvullendedoelgroep",
     "AanvullendedoelgroepReferentiedata",
     "Accountstatus",
@@ -489,6 +516,8 @@ __all__ = [
     "AuthentiekgegevensoortReferentiedata",
     "Authentiekgegevenstatus",
     "AuthentiekgegevenstatusReferentiedata",
+    "Batscore",
+    "BatscoreReferentiedata",
     "Bedrijfsoort",
     "BedrijfsoortReferentiedata",
     "Begrotingversie",
@@ -505,6 +534,8 @@ __all__ = [
     "BetalingsregelingeinderedenReferentiedata",
     "Betalingsregelingstatus",
     "BetalingsregelingstatusReferentiedata",
+    "Bewakingsstatus",
+    "BewakingsstatusReferentiedata",
     "Boekingdetailsoort",
     "BoekingdetailsoortReferentiedata",
     "Boekingsoort",
@@ -643,6 +674,8 @@ __all__ = [
     "HuurgeschilstatusReferentiedata",
     "Huurklasse",
     "HuurklasseReferentiedata",
+    "Huuropzegginghuurdersafspraak",
+    "HuuropzegginghuurdersafspraakReferentiedata",
     "Huuropzeggingstatus",
     "HuuropzeggingstatusReferentiedata",
     "Incassomoment",
@@ -703,6 +736,8 @@ __all__ = [
     "MeeteenheidReferentiedata",
     "Monitorinterval",
     "MonitorintervalReferentiedata",
+    "Monitorlogregelsoort",
+    "MonitorlogregelsoortReferentiedata",
     "Monitorwaardesoort",
     "MonitorwaardesoortReferentiedata",
     "Onderhoudsbestedingsoort",
@@ -739,6 +774,8 @@ __all__ = [
     "OvereenkomstsoortReferentiedata",
     "Overeenkomststatus",
     "OvereenkomststatusReferentiedata",
+    "Overeenkomstversturenstatus",
+    "OvereenkomstversturenstatusReferentiedata",
     "Pandsoort",
     "PandsoortReferentiedata",
     "Passendheiddetailsoort",
@@ -767,6 +804,10 @@ __all__ = [
     "ProjectbudgetregelstatusReferentiedata",
     "Projectfasebesluitstatus",
     "ProjectfasebesluitstatusReferentiedata",
+    "Projectroldetailsoort",
+    "ProjectroldetailsoortReferentiedata",
+    "Projectrolsoort",
+    "ProjectrolsoortReferentiedata",
     "Projectsoort",
     "ProjectsoortReferentiedata",
     "Projectstatus",
@@ -819,6 +860,8 @@ __all__ = [
     "RuimteliggingReferentiedata",
     "Ruimtesoort",
     "RuimtesoortReferentiedata",
+    "Ruimtetoegang",
+    "RuimtetoegangReferentiedata",
     "Sanctiesoort",
     "SanctiesoortReferentiedata",
     "Sanctiestatus",
@@ -861,6 +904,8 @@ __all__ = [
     "VoorrangdetailsoortReferentiedata",
     "Voorrangsoort",
     "VoorrangsoortReferentiedata",
+    "Voorzieningsoort",
+    "VoorzieningsoortReferentiedata",
     "Vragenlijstregelherkomst",
     "VragenlijstregelherkomstReferentiedata",
     "Vragenlijstregelonderwerpsoort",

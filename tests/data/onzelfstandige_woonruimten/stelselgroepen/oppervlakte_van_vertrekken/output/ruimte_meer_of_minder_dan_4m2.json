@@ -11,7 +11,7 @@
           "naam": "Oppervlakte van vertrekken"
         }
       },
-      "punten": 6.0,
+      "punten": 8.0,
       "woningwaarderingen": [
         {
           "aantal": 2.0,
@@ -42,7 +42,21 @@
           }
         },
         {
-          "aantal": 6.0,
+          "aantal": 2.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Space_185859",
+            "naam": "Badkamer/toilet",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 8.0,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__prive",
             "naam": "Totaal (privé)",

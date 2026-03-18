@@ -35,8 +35,6 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten  # verkeerde parent, zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
         super().__init__(
-            begindatum=date.fromisoformat("2024-07-01"),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 
@@ -165,7 +163,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=GemeenschappelijkeParkeerruimten(peildatum=date(2025, 1, 1)),
+        instance=GemeenschappelijkeParkeerruimten(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

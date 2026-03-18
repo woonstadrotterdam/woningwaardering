@@ -1,0 +1,20 @@
+{
+  "ruimten": [
+    {
+      "id": "dakterras",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "DAK",
+        "naam": "Dakterras"
+      },
+      "naam": "Dakterras",
+      "oppervlakte": 30,
+      "verwarmd": false,
+      "gemeenschappelijk": true,
+      "gedeeldMetAantalEenheden": 3
+    }
+  ]
+}

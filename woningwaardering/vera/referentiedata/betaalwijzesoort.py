@@ -7,13 +7,12 @@ class BetaalwijzesoortReferentiedata(Referentiedata):
 
 
 class Betaalwijzesoort(Referentiedatasoort):
-    handmatige_overboeking = BetaalwijzesoortReferentiedata(
-        code="HND",
-        naam="Handmatige overboeking",
+    contant = BetaalwijzesoortReferentiedata(
+        code="CON",
+        naam="Contant",
     )
     """
-    Een door de betaler geïnitieerde betaling, via een bankoverboeking , een voldaan
-    betaalverzoek of via een PIN-betaling.
+    Een door de betaler geïniteerde betaling, via contante betaling.
     """
 
     incasso = BetaalwijzesoortReferentiedata(
@@ -23,4 +22,37 @@ class Betaalwijzesoort(Referentiedatasoort):
     """
     Een door de ontvanger geïnitieerde incasso, er moet een Incassomachtiging aan ten
     grondslag liggen.
+    """
+
+    e_mail = BetaalwijzesoortReferentiedata(
+        code="MAI",
+        naam="E-mail",
+    )
+    """
+    Een door de betaler geïniteerde betaling, door middel van een betaallink via e-mail.
+    """
+
+    online = BetaalwijzesoortReferentiedata(
+        code="ONL",
+        naam="Online",
+    )
+    """
+    Een door de betaler geïniteerde betaling, door online betaling. Bijvoorbeeld door
+    middel van iDEAL.
+    """
+
+    overboeking = BetaalwijzesoortReferentiedata(
+        code="OVB",
+        naam="Overboeking",
+    )
+    """
+    Een door de betaler geïniteerde betaling, door (periodieke) overboeking.
+    """
+
+    pin_betaling = BetaalwijzesoortReferentiedata(
+        code="PIN",
+        naam="Pin-betaling",
+    )
+    """
+    Een door de betaler geïniteerde betaling, via PIN-betaling
     """

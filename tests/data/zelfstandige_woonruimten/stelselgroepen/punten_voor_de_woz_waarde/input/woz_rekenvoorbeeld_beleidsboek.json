@@ -1,0 +1,26 @@
+{
+  "bouwjaar": 1990,
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2025-01-01",
+      "vastgesteldeWaarde": 300000
+    }
+  ],
+  "ruimten": [
+    {
+      "id": "woonkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "oppervlakte": 60,
+      "verwarmd": true,
+      "gemeenschappelijk": false
+    }
+  ]
+}

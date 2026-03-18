@@ -26,7 +26,7 @@ dependencies = [
     "pydantic>=2.10",
     "loguru>=0.7",
     "PyYAML>=6.0",
-    "prettytable>=3.12",
+    "prettytable>=3.17.0",
     "pandas>=2.2",
     "requests>=2.31",
     "types-pyyaml>=6.0",
@@ -37,7 +37,7 @@ Homepage = "https://github.com/woonstadrotterdam/woningwaardering"
 Issues = "https://github.com/woonstadrotterdam/woningwaardering/issues"
 
 [tool.woningwaardering.datasources]
-referentiedata = "v4.2.250307"
+referentiedata = "v4.3.260116"
 vera-openapi = "v4.1.5"
 
 [tool.setuptools.packages.find]

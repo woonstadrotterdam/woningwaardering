@@ -41,7 +41,7 @@
       }
     }
   ],
-  "woz_eenheden": [
+  "wozEenheden": [
     {
       "waardepeildatum": "2022-01-01",
       "vastgesteldeWaarde": 219999
@@ -49,12 +49,17 @@
     {
       "waardepeildatum": "2023-01-01",
       "vastgesteldeWaarde": 239999
+    },
+    {
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 259999
     }
   ],
   "energieprestaties": [
     {
       "soort": {
-        "code": "EP2"
+        "code": "NTA",
+        "naam": "Energielabel conform NTA8800"
       },
       "status": {
         "code": "DEF",

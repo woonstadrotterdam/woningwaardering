@@ -33,8 +33,6 @@ class Aftrekpunten(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.aftrekpunten
         super().__init__(
-            begindatum=date.fromisoformat("2024-07-01"),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 
@@ -162,7 +160,7 @@ class Aftrekpunten(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=Aftrekpunten(peildatum=date(2025, 1, 1)),
+        instance=Aftrekpunten(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

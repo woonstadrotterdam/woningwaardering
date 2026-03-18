@@ -41,25 +41,6 @@ index: int = 0  # nodig voor mypy voor de global index voor de tabel
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
 
-def is_geldig(
-    begindatum: date = date.min,
-    einddatum: date = date.max,
-    peildatum: date = date.today(),
-) -> bool:
-    """
-    Controleert of de peildatum valt tussen de begindatum en einddatum.
-
-    Parameters:
-        begindatum (date): De begindatum.
-        einddatum (date): De einddatum.
-        peildatum (date): De peildatum.
-
-    Returns:
-        bool: True als de peildatum tussen de begindatum en einddatum valt, anders False.
-    """
-    return begindatum <= peildatum <= einddatum
-
-
 def _voeg_onderliggende_woningwaarderingen_toe(
     table: PrettyTable,
     stelselgroep_naam: str,
@@ -149,7 +130,10 @@ def naar_tabel(
     table.align["Meeteenheid"] = "l"
     table.align["Punten"] = "r"
     table.align["Opslag"] = "r"
-    table.float_format = ".2"
+    # prettytable accepteert hier zowel een string als een dict; de type hints in
+    # sommige omgevingen verwachten echter een dict[str, str], daarom construeren we
+    # expliciet een dict om mypy tevreden te houden.
+    table.float_format = {field: ".2" for field in table.field_names}
 
     table._min_width = {
         "Groep": 33,
@@ -383,6 +367,7 @@ def energieprestatie_met_geldig_label(
 
         if energieprestatie.soort not in (
             Energieprestatiesoort.energie_index,
+            Energieprestatiesoort.energielabel_conform_nta8800,
             Energieprestatiesoort.primair_energieverbruik_woningbouw,
             Energieprestatiesoort.voorlopig_energielabel,
         ):
@@ -629,6 +614,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             Ruimtedetailsoort.tuin,
             Ruimtedetailsoort.tuin_rondom,
             Ruimtedetailsoort.loggia,
+            Ruimtedetailsoort.overige_buitenruimte,
         ]
         or (  # privé parkeerplaatsen buiten zijn privé buitenruimten
             ruimte.detail_soort
@@ -649,6 +635,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     if ruimte.detail_soort in [
         Ruimtedetailsoort.keuken,
         Ruimtedetailsoort.badkamer,
+        Ruimtedetailsoort.badkamer_met_toilet,
         Ruimtedetailsoort.doucheruimte,
     ]:
         return Ruimtesoort.vertrek
@@ -657,19 +644,24 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.woonkamer,
         Ruimtedetailsoort.woon_en_of_slaapkamer,
         Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
         Ruimtedetailsoort.slaapkamer,
-        Ruimtedetailsoort.badkamer_met_toilet,
         Ruimtedetailsoort.overig_vertrek,
         Ruimtedetailsoort.bijkeuken,
         Ruimtedetailsoort.berging,
+        Ruimtedetailsoort.bergruimte,
         Ruimtedetailsoort.wasruimte,
         Ruimtedetailsoort.kelder,
         Ruimtedetailsoort.serre,
         Ruimtedetailsoort.schuur,
+        Ruimtedetailsoort.tussenkamer,
+        Ruimtedetailsoort.containerruimte,
+        Ruimtedetailsoort.recreatieruimte,
+        Ruimtedetailsoort.overige_ruimte,
     ]:
         if (
             ruimte.detail_soort == Ruimtedetailsoort.berging
-            and Ruimtesoort.overige_ruimten
+            and ruimte.soort == Ruimtesoort.overige_ruimten
         ):
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
             if (

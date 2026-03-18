@@ -44,6 +44,10 @@ def get_eenheid():
         EenhedenWozEenheid(
             waardepeildatum=date(2023, 1, 1),
             vastgestelde_waarde=300000.0,
+        ),
+        EenhedenWozEenheid(
+            waardepeildatum=date(2024, 1, 1),
+            vastgestelde_waarde=310000.0,
         )
     ]
 

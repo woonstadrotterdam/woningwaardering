@@ -32,16 +32,6 @@
       }
     }
   ],
-  "woz_eenheden": [
-    {
-      "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 250000
-    },
-    {
-      "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 260000
-    }
-  ],
   "energieprestaties": [],
   "gebruiksoppervlakte": 87,
   "monumenten": [],
@@ -439,7 +429,7 @@
         "naam": "Verkeersruimte"
       },
       "detailSoort": {
-        "code": "OVL",
+        "code": "OVE",
         "naam": "Overloop"
       },
       "naam": "Overloop",
@@ -514,6 +504,20 @@
         "nummer": "01",
         "omschrijving": "eerste verdieping"
       }
+    }
+  ],
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 250000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 260000
+    },
+    {
+      "vastgesteldeWaarde": 258000,
+      "waardepeildatum": "2024-01-01"
     }
   ]
 }

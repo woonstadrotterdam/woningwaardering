@@ -9,7 +9,7 @@
       "naam": "Individueel"
     }
   ],
-  "woz_eenheden": [
+  "wozEenheden": [
     {
       "waardepeildatum": "2022-01-01",
       "vastgesteldeWaarde": 238000
@@ -163,7 +163,7 @@
         "naam": "Overige ruimtes"
       },
       "detailSoort": {
-        "code": "OVL",
+        "code": "OVE",
         "naam": "Overloop"
       },
       "naam": "Overloop",

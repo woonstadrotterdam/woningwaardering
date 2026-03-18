@@ -44,8 +44,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen
         super().__init__(
-            begindatum=date.fromisoformat("2024-07-01"),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 
@@ -122,14 +120,17 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # […]
                 # * de oppervlakte, na deling door het aantal adressen, per woning minstens
                 #   2m2 bedraagt.
-                if ruimte.detail_soort == Ruimtedetailsoort.berging:
+                if ruimte.detail_soort in [
+                    Ruimtedetailsoort.berging,
+                    Ruimtedetailsoort.bergruimte,
+                ]:
                     if ruimte.oppervlakte and ruimte.gedeeld_met_aantal_eenheden:
                         gedeelde_oppervlakte = (
                             ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
                         )
                         if gedeelde_oppervlakte < Decimal("2.0"):
                             logger.info(
-                                f"Eenheid ({eenheid.id}): {Ruimtedetailsoort.berging.naam} ({ruimte.id}) heeft, na deling door het aantal adressen, een oppervlakte van minder dan 2 m2 en wordt daarom niet gewaardeerd onder {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
+                                f"Eenheid ({eenheid.id}): {ruimte.naam} ({ruimte.id}) heeft, na deling door het aantal adressen, een oppervlakte van minder dan 2 m2 en wordt daarom niet gewaardeerd onder {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
                             )
                             oppervlakte_waarderingen = []
 
@@ -229,7 +230,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
         instance=GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(
-            peildatum=date(2025, 1, 1)
+            peildatum=date(2026, 1, 1)
         ),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR

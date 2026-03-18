@@ -246,14 +246,21 @@
           "naam": "Energieprestatie"
         }
       },
-      "punten": 34.0,
+      "punten": 0.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "energieprestatie__label",
-            "naam": "B (Energie-index)"
+            "id": "energieprestatie__bouwjaar",
+            "naam": "Bouwjaar 1922"
           },
-          "punten": 34.0
+          "punten": -15.0
+        },
+        {
+          "criterium": {
+            "id": "energieprestatie__correctie_monument",
+            "naam": "Correctie monument"
+          },
+          "punten": 15.0
         }
       ]
     },
@@ -378,17 +385,17 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 39.25,
+      "punten": 37.5,
       "woningwaarderingen": [
         {
-          "aantal": 237000.0,
+          "aantal": 238000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
           }
         },
         {
-          "aantal": 14543.0,
+          "aantal": 15329.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
@@ -402,7 +409,7 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 16.3
+          "punten": 15.53
         },
         {
           "aantal": 45.02,
@@ -419,7 +426,7 @@
           }
         },
         {
-          "aantal": 229.0,
+          "aantal": 242.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
@@ -433,7 +440,7 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 22.99
+          "punten": 21.85
         }
       ]
     },
@@ -466,7 +473,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "prijsopslag_monumenten__rijksmonument",
+            "id": "prijsopslag_monumenten_en_nieuwbouw__rijksmonument",
             "naam": "Rijksmonument"
           },
           "punten": 50.0
@@ -475,12 +482,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1264.31,
-  "punten": 198.0,
+  "maximaleHuur": 1070.14,
+  "punten": 163.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1264.31
+  "maximaleHuurInclusiefOpslag": 1070.14
 }

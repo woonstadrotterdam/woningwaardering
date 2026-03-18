@@ -10,6 +10,16 @@ class PrijscomponentdetailsoortReferentiedata(Referentiedata):
 
 
 class Prijscomponentdetailsoort(Referentiedatasoort):
+    afvalstoffenheffing = PrijscomponentdetailsoortReferentiedata(
+        code="AFV",
+        naam="Afvalstoffenheffing",
+        parent=Prijscomponentsoort.netto_huur,
+    )
+    """
+    Periodieke kosten voor de gemeentelijke belasting inzake inzameling en verwerking
+    van huishoudelijk afval.
+    """
+
     administratiekosten = PrijscomponentdetailsoortReferentiedata(
         code="AKO",
         naam="Administratiekosten",
@@ -28,7 +38,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het alarm en de bewaking van de woning
+    Periodieke kosten voor het alarm en de bewaking van de woning
     """
 
     servicekosten_bedrijfsruimten = PrijscomponentdetailsoortReferentiedata(
@@ -37,7 +47,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor services m.b.t. bedrijfsruimten
+    Periodieke kosten voor services m.b.t. bedrijfsruimten
     """
 
     beheerders = PrijscomponentdetailsoortReferentiedata(
@@ -46,7 +56,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor de beheerder(s) van de eenheid en/of het complex
+    Periodieke kosten voor de beheerder(s) van de eenheid en/of het complex
     """
 
     borg = PrijscomponentdetailsoortReferentiedata(
@@ -54,6 +64,9 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         naam="Borg",
         parent=Prijscomponentsoort.eenmalig,
     )
+    """
+    Een door de huurder betaalde waarborgsom die dient als zekerheid voor de verhuurder.
+    """
 
     dienst_en_recreatieruimten = PrijscomponentdetailsoortReferentiedata(
         code="DIE",
@@ -61,7 +74,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    De maandelijkse kosten voor reparaties en groot onderhoud aan dienstruimten en
+    De periodieke kosten voor reparaties en groot onderhoud aan dienstruimten en
     recreatieruimten. Deze kosten komen meestal voor bij senioren- of
     bejaardenwoningen. Het gaat niet om de inventaris, het schoonmaken van de
     ruimten of onderhoud aan de tuin.
@@ -85,7 +98,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van elektrische installaties
+    Periodieke kosten voor het gebruik van elektrische installaties
     """
 
     elektra_oplaadpunt = PrijscomponentdetailsoortReferentiedata(
@@ -94,7 +107,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van een oplaadpunt voor andere elektrische
+    Periodieke kosten voor het gebruik van een oplaadpunt voor andere elektrische
     apparaten dan een elektrische auto (b.v. scootmobiel)
     """
 
@@ -104,7 +117,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Dit zijn bijvoorbeeld de maandelijkse kosten voor elektriciteit voor bijvoorbeeld:
+    Dit zijn bijvoorbeeld de periodieke kosten voor elektriciteit voor bijvoorbeeld:
     lift, verlichting, ventilatie, alarminstallatie. Alleen voor gemeenschappelijke
     ruimten.
     """
@@ -134,7 +147,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het repareren van defecten aan gemeenschappelijke ruimten
+    Periodieke kosten voor het repareren van defecten aan gemeenschappelijke ruimten
     """
 
     gladheidsbestrijding = PrijscomponentdetailsoortReferentiedata(
@@ -143,7 +156,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het bestrijden van gladheid rondom de eenheid
+    Periodieke kosten voor het bestrijden van gladheid rondom de eenheid
     """
 
     glasbewassing = PrijscomponentdetailsoortReferentiedata(
@@ -152,7 +165,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het wassen van glas van ramen en deuren van de eenheid
+    Periodieke kosten voor het wassen van glas van ramen en deuren van de eenheid
     """
 
     glasfonds = PrijscomponentdetailsoortReferentiedata(
@@ -161,7 +174,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor de voorziening voor repareren van glasschade
+    Periodieke kosten voor de voorziening voor repareren van glasschade
     """
 
     groenvoorziening = PrijscomponentdetailsoortReferentiedata(
@@ -170,7 +183,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het onderhouden van de groenvoorziening rondom de eenheid
+    Periodieke kosten voor het onderhouden van de groenvoorziening rondom de eenheid
     """
 
     huismeester = PrijscomponentdetailsoortReferentiedata(
@@ -179,7 +192,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    De maandelijkse kosten voor de diensten die de huismeester, flatwacht, wijkbeheerder
+    De periodieke kosten voor de diensten die de huismeester, flatwacht, wijkbeheerder
     of conciërge levert.
     """
 
@@ -189,7 +202,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het verwerken van huisvuil
+    Periodieke kosten voor de inzameling, afvoer en verwerking van huishoudelijk afval.
     """
 
     individuele_garage = PrijscomponentdetailsoortReferentiedata(
@@ -207,7 +220,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van andere installaties dan elektrische
+    Periodieke kosten voor het gebruik van andere installaties dan elektrische
     installaties
     """
 
@@ -217,7 +230,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van inventaris
+    Periodieke kosten voor het gebruik van inventaris
     """
 
     kale_huur = PrijscomponentdetailsoortReferentiedata(
@@ -235,7 +248,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van een laadpaal voor elektrische auto
+    Periodieke kosten voor het gebruik van een laadpaal voor elektrische auto
     """
 
     liftkosten = PrijscomponentdetailsoortReferentiedata(
@@ -244,7 +257,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van de lift(en)
+    Periodieke kosten voor het gebruik van de lift(en)
     """
 
     linnenpakket = PrijscomponentdetailsoortReferentiedata(
@@ -253,7 +266,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van linnen
+    Periodieke kosten voor het gebruik van linnen
     """
 
     matiging_huurtoeslag = PrijscomponentdetailsoortReferentiedata(
@@ -273,7 +286,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van de mechanische ventilatie
+    Periodieke kosten voor het gebruik van de mechanische ventilatie
     """
 
     overnamekosten = PrijscomponentdetailsoortReferentiedata(
@@ -294,7 +307,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor onderhoudsabonnement. De huurder is zelf verantwoordelijk
+    Periodieke kosten voor onderhoudsabonnement. De huurder is zelf verantwoordelijk
     voor het klein onderhoud aan de woning. Als de huurder een onderhoudsabonnement
     afsluit, dan regelt de corporatie het klein onderhoud voor de huurder.
     """
@@ -316,7 +329,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor overige kosten voor gemeenschappelijke ruimten (naast
+    Periodieke kosten voor overige kosten voor gemeenschappelijke ruimten (naast
     schoonmaak, energie en reparatie)
     """
 
@@ -338,14 +351,24 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
     Inpandige parkeerplek collectief
     """
 
+    rioolheffing = PrijscomponentdetailsoortReferentiedata(
+        code="RIH",
+        naam="Rioolheffing",
+        parent=Prijscomponentsoort.netto_huur,
+    )
+    """
+    Periodieke kosten voor de gemeentelijke belasting inzake afvoer en verwerking van
+    afvalwater en hemelwater, en het onderhoud van de riolering.
+    """
+
     rioolfonds = PrijscomponentdetailsoortReferentiedata(
         code="RIO",
         naam="Rioolfonds",
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor de voorziening voor het repareren van problemen aan het
-    riool
+    Periodieke kosten voor deelname aan een voorziening of fonds dat de kosten voor
+    rioolontstoppingen en kleine rioolreparaties dekt.
     """
 
     schoonmaak_eenheid = PrijscomponentdetailsoortReferentiedata(
@@ -354,7 +377,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor schoonmaak van de eenheid
+    Periodieke kosten voor schoonmaak van de eenheid
     """
 
     schoonmaak_van_gemeenschappelijke_ruimten = PrijscomponentdetailsoortReferentiedata(
@@ -363,7 +386,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    De maandelijkse schoonmaakkosten voor de lift en andere gemeenschappelijke ruimten,
+    De periodieke schoonmaakkosten voor de lift en andere gemeenschappelijke ruimten,
     zoals een galerij, trappenhuis of recreatieruimte
     """
 
@@ -373,7 +396,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor signaallevering (o.a. CAI)
+    Periodieke kosten voor signaallevering (o.a. CAI)
     """
 
     schoorsteenvegen = PrijscomponentdetailsoortReferentiedata(
@@ -382,7 +405,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het vegen van de schoorsteen
+    Periodieke kosten voor het vegen van de schoorsteen
     """
 
     verenigingskosten = PrijscomponentdetailsoortReferentiedata(
@@ -391,7 +414,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor lidmaatschap van  verenigingen
+    Periodieke kosten voor lidmaatschap van  verenigingen
     """
 
     volkstuin = PrijscomponentdetailsoortReferentiedata(
@@ -400,7 +423,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van een volkstuin
+    Periodieke kosten voor het gebruik van een volkstuin
     """
 
     vve_kosten = PrijscomponentdetailsoortReferentiedata(
@@ -409,7 +432,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor VVE-lidmaatschap
+    Periodieke kosten voor VVE-lidmaatschap
     """
 
     verzekeringskosten = PrijscomponentdetailsoortReferentiedata(
@@ -418,7 +441,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor verzekeringen
+    Periodieke kosten voor verzekeringen
     """
 
     warmte_installaties = PrijscomponentdetailsoortReferentiedata(
@@ -427,7 +450,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van installaties voor verwarming van de
+    Periodieke kosten voor het gebruik van installaties voor verwarming van de
     vertrekken van de eenheid
     """
 
@@ -438,6 +461,16 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
     )
     """
     Centrale verwarming, Stadsverwarming, etc.
+    """
+
+    waterschapsbelasting = PrijscomponentdetailsoortReferentiedata(
+        code="WAS",
+        naam="Waterschapsbelasting",
+        parent=Prijscomponentsoort.netto_huur,
+    )
+    """
+    Periodieke kosten voor de belasting van het waterschap, o.a. voor waterbeheer,
+    onderhoud van dijken en zuivering van afvalwater.
     """
 
     water = PrijscomponentdetailsoortReferentiedata(
@@ -455,7 +488,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van witgoed (bijvoorbeeld wasmachine of droger)
+    Periodieke kosten voor het gebruik van witgoed (bijvoorbeeld wasmachine of droger)
     """
 
     warmwaterinstallaties = PrijscomponentdetailsoortReferentiedata(
@@ -464,7 +497,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van installaties voor warm water
+    Periodieke kosten voor het gebruik van installaties voor warm water
     """
 
     zonnepanelen = PrijscomponentdetailsoortReferentiedata(
@@ -473,7 +506,7 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van zonnepanelen
+    Periodieke kosten voor het gebruik van zonnepanelen
     """
 
     zonwering = PrijscomponentdetailsoortReferentiedata(
@@ -482,5 +515,5 @@ class Prijscomponentdetailsoort(Referentiedatasoort):
         parent=Prijscomponentsoort.service,
     )
     """
-    Maandelijkse kosten voor het gebruik van zonwering
+    Periodieke kosten voor het gebruik van zonwering
     """

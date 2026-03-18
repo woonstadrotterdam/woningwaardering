@@ -32,16 +32,6 @@
       }
     }
   ],
-  "woz_eenheden": [
-    {
-      "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 273000
-    },
-    {
-      "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 282000
-    }
-  ],
   "energieprestaties": [
     {
       "soort": {
@@ -769,6 +759,20 @@
         "nummer": "03",
         "omschrijving": "derde verdieping"
       }
+    }
+  ],
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 273000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 282000
+    },
+    {
+      "vastgesteldeWaarde": 295000,
+      "waardepeildatum": "2024-01-01"
     }
   ]
 }
