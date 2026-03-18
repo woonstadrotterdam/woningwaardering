@@ -11,27 +11,17 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 16.5,
+      "punten": 36.25,
       "woningwaarderingen": [
         {
-          "aantal": 69999.0,
+          "aantal": 300000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2025"
           }
         },
         {
-          "aantal": 73607.0,
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__minimum_woz_waarde",
-            "naam": "Minimum WOZ-waarde gebruikt voor berekening",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
-            }
-          }
-        },
-        {
-          "aantal": 14543.0,
+          "aantal": 16954.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
@@ -45,20 +35,10 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 5.06
+          "punten": 17.69
         },
         {
-          "aantal": 73607.0,
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__minimum_woz_waarde",
-            "naam": "Minimum WOZ-waarde gebruikt voor berekening",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
-            }
-          }
-        },
-        {
-          "aantal": 28.16,
+          "aantal": 60.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -72,7 +52,7 @@
           }
         },
         {
-          "aantal": 229.0,
+          "aantal": 268.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
@@ -86,7 +66,7 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 11.41
+          "punten": 18.66
         }
       ]
     }

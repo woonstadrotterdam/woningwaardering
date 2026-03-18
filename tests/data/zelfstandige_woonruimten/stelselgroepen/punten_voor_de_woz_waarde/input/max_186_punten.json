@@ -23,7 +23,7 @@
       }
     }
   ],
-  "woz_eenheden": [
+  "wozEenheden": [
     {
       "waardepeildatum": "2022-01-01",
       "vastgesteldeWaarde": 597000
@@ -31,13 +31,17 @@
     {
       "waardepeildatum": "2023-01-01",
       "vastgesteldeWaarde": 653900
+    },
+    {
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 713900
     }
   ],
   "energieprestaties": [
     {
       "soort": {
-        "code": "EP2",
-        "naam": "Primair energieverbruik - woningbouw"
+        "code": "NTA",
+        "naam": "Energielabel conform NTA8800"
       },
       "status": {
         "code": "DEF",

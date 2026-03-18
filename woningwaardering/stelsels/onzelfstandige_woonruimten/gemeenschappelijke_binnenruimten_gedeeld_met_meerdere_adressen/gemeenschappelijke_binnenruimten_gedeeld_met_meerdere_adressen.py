@@ -45,8 +45,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         self.stelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
         self.stelselgroep = Woningwaarderingstelselgroep.gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen
         super().__init__(
-            begindatum=date.fromisoformat("2024-07-01"),
-            einddatum=date.max,
             peildatum=peildatum,
         )
 
@@ -510,7 +508,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
         instance=GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(
-            peildatum=date(2025, 1, 1)
+            peildatum=date(2026, 1, 1)
         ),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR

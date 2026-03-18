@@ -31,8 +31,6 @@ class OppervlakteVanVertrekken(Stelselgroep):
         peildatum: date = date.today(),
     ) -> None:
         super().__init__(
-            begindatum=date(2025, 1, 1),
-            einddatum=date.max,
             peildatum=peildatum,
         )
         self.stelsel = Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -89,7 +87,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=OppervlakteVanVertrekken(peildatum=date(2025, 1, 1)),
+        instance=OppervlakteVanVertrekken(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

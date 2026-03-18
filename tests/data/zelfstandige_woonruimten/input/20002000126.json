@@ -18,8 +18,8 @@
   "energieprestaties": [
     {
       "soort": {
-        "code": "EP2",
-        "naam": "Primair energieverbruik - woningbouw"
+        "code": "NTA",
+        "naam": "Energielabel conform NTA8800"
       },
       "status": {
         "code": "DEF",
@@ -245,44 +245,48 @@
   ],
   "wozEenheden": [
     {
-      "vastgesteldeWaarde": 261000.0,
-      "waardepeildatum": "2023-01-01"
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 264000
     },
     {
-      "vastgesteldeWaarde": 250000.0,
-      "waardepeildatum": "2022-01-01"
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 261000
     },
     {
-      "vastgesteldeWaarde": 205000.0,
-      "waardepeildatum": "2021-01-01"
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 250000
     },
     {
-      "vastgesteldeWaarde": 166000.0,
-      "waardepeildatum": "2020-01-01"
+      "waardepeildatum": "2021-01-01",
+      "vastgesteldeWaarde": 205000
     },
     {
-      "vastgesteldeWaarde": 142000.0,
-      "waardepeildatum": "2019-01-01"
+      "waardepeildatum": "2020-01-01",
+      "vastgesteldeWaarde": 166000
     },
     {
-      "vastgesteldeWaarde": 137000.0,
-      "waardepeildatum": "2018-01-01"
+      "waardepeildatum": "2019-01-01",
+      "vastgesteldeWaarde": 142000
     },
     {
-      "vastgesteldeWaarde": 128000.0,
-      "waardepeildatum": "2017-01-01"
+      "waardepeildatum": "2018-01-01",
+      "vastgesteldeWaarde": 137000
     },
     {
-      "vastgesteldeWaarde": 61000.0,
-      "waardepeildatum": "2016-01-01"
+      "waardepeildatum": "2017-01-01",
+      "vastgesteldeWaarde": 128000
     },
     {
-      "vastgesteldeWaarde": 59000.0,
-      "waardepeildatum": "2015-01-01"
+      "waardepeildatum": "2016-01-01",
+      "vastgesteldeWaarde": 61000
     },
     {
-      "vastgesteldeWaarde": 59000.0,
-      "waardepeildatum": "2014-01-01"
+      "waardepeildatum": "2015-01-01",
+      "vastgesteldeWaarde": 59000
+    },
+    {
+      "waardepeildatum": "2014-01-01",
+      "vastgesteldeWaarde": 59000
     }
   ],
   "monumenten": []

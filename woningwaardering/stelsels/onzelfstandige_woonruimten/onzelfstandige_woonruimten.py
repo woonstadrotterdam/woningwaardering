@@ -26,8 +26,6 @@ class OnzelfstandigeWoonruimten(Stelsel):
     def __init__(self, peildatum: date = date.today()) -> None:
         super().__init__(
             stelsel=Woningwaarderingstelsel.onzelfstandige_woonruimten,
-            begindatum=date.fromisoformat("2024-07-01"),
-            einddatum=date.max,
             peildatum=peildatum,
             stelselgroepen=[
                 OppervlakteVanVertrekken,
@@ -49,7 +47,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=OnzelfstandigeWoonruimten(peildatum=date(2025, 1, 1)),
+        instance=OnzelfstandigeWoonruimten(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

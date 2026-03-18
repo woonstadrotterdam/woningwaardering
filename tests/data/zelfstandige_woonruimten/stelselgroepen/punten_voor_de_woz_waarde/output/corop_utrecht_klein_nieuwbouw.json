@@ -11,6 +11,7 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
+<<<<<<< feature/TMS-350-corrigeren-voorzieningen
       "punten": 51.5,
       "woningwaarderingen": [
         {
@@ -22,6 +23,19 @@
         },
         {
           "aantal": 14543.0,
+=======
+      "punten": 50.5,
+      "woningwaarderingen": [
+        {
+          "aantal": 290000.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__woz_waarde",
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
+          }
+        },
+        {
+          "aantal": 15329.0,
+>>>>>>> main
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
@@ -35,7 +49,11 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
             "naam": "Onderdeel I"
           },
+<<<<<<< feature/TMS-350-corrigeren-voorzieningen
           "punten": 19.25
+=======
+          "punten": 18.92
+>>>>>>> main
         },
         {
           "aantal": 38.0,
@@ -52,7 +70,11 @@
           }
         },
         {
+<<<<<<< feature/TMS-350-corrigeren-voorzieningen
           "aantal": 229.0,
+=======
+          "aantal": 242.0,
+>>>>>>> main
           "criterium": {
             "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
@@ -66,7 +88,11 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
+<<<<<<< feature/TMS-350-corrigeren-voorzieningen
           "punten": 32.18
+=======
+          "punten": 31.54
+>>>>>>> main
         }
       ]
     }

@@ -49,3 +49,11 @@ class Publicatiedetailmodel(Referentiedatasoort):
     Eenheden voor huishoudens die snel een woning nodig hebben en daar geen eisen aan
     stellen.
     """
+
+    tweehurenbeleid = PublicatiedetailmodelReferentiedata(
+        code="TWE",
+        naam="Tweehurenbeleid",
+    )
+    """
+    De eenheid valt onder tweehurenbeleid.
+    """

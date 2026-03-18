@@ -14,20 +14,10 @@
       "punten": 10.0,
       "woningwaarderingen": [
         {
-          "aantal": 68000.0,
+          "aantal": 78000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2023",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
-            }
-          }
-        },
-        {
-          "aantal": 73607.0,
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__minimum_woz_waarde",
-            "naam": "Minimum WOZ-waarde gebruikt voor berekening",
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
             }
@@ -48,7 +38,7 @@
           }
         },
         {
-          "aantal": 1269.08621,
+          "aantal": 1344.82759,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde_per_m2",
             "naam": "WOZ-waarde per m²",
@@ -58,7 +48,7 @@
           }
         },
         {
-          "aantal": 3414.0,
+          "aantal": 3537.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__gemiddelde_woz_waarde_per_m2",
             "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond",
@@ -68,7 +58,7 @@
           }
         },
         {
-          "aantal": -62.8270003,
+          "aantal": -61.9782983,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil",
             "naam": "Percentage verschil"

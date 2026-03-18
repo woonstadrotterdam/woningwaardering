@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import date
 
-from woningwaardering.stelsels.utils import is_geldig
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -33,25 +32,14 @@ class Stelselgroep(ABC):
     """Initialiseert een Stelselgroep.
 
     Args:
-        begindatum (date): De begindatum van de geldigheid van de stelselgroep.
-        einddatum (date, optional): De einddatum (t/m) van de geldigheid van de stelselgroep.
-        peildatum (date, optional): De peildatum voor de waardering".
-
-    Raises:
-        ValueError: Als de stelselgroep niet geldig is op de peildatum.
+        peildatum (date, optional): De peildatum voor de waardering.
     """
 
     def __init__(
         self,
-        begindatum: date,
-        einddatum: date = date.max,
         peildatum: date = date.today(),
     ) -> None:
         self.peildatum = peildatum
-        if not is_geldig(begindatum, einddatum, peildatum):
-            raise ValueError(
-                f"Stelselgroep ({begindatum} - {einddatum}) is niet geldig op peildatum ({peildatum})."
-            )
 
     @abstractmethod
     def waardeer(

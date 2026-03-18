@@ -1,5 +1,3 @@
-from datetime import date
-
 from tests.utils import assert_output_model
 from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (
     OnzelfstandigeWoonruimten,
@@ -9,8 +7,8 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 
-def test_OnzelfstandigeWoonruimten(onzelfstandige_woonruimten_inputmodel):
-    onzelfstandige_woonruimten = OnzelfstandigeWoonruimten(peildatum=date(2025, 1, 1))
+def test_OnzelfstandigeWoonruimten(onzelfstandige_woonruimten_inputmodel, peildatum):
+    onzelfstandige_woonruimten = OnzelfstandigeWoonruimten(peildatum=peildatum)
     resultaat = onzelfstandige_woonruimten.waardeer(
         onzelfstandige_woonruimten_inputmodel
     )

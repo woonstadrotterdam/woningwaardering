@@ -335,7 +335,7 @@
         "naam": "Verkeersruimte"
       },
       "detailSoort": {
-        "code": "OVL",
+        "code": "OVE",
         "naam": "Overloop"
       },
       "naam": "Overloop",
@@ -347,44 +347,48 @@
   ],
   "wozEenheden": [
     {
-      "vastgesteldeWaarde": 301000.0,
-      "waardepeildatum": "2023-01-01"
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 302000
     },
     {
-      "vastgesteldeWaarde": 277000.0,
-      "waardepeildatum": "2022-01-01"
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 301000
     },
     {
-      "vastgesteldeWaarde": 248000.0,
-      "waardepeildatum": "2021-01-01"
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 277000
     },
     {
-      "vastgesteldeWaarde": 195000.0,
-      "waardepeildatum": "2020-01-01"
+      "waardepeildatum": "2021-01-01",
+      "vastgesteldeWaarde": 248000
     },
     {
-      "vastgesteldeWaarde": 166000.0,
-      "waardepeildatum": "2019-01-01"
+      "waardepeildatum": "2020-01-01",
+      "vastgesteldeWaarde": 195000
     },
     {
-      "vastgesteldeWaarde": 151000.0,
-      "waardepeildatum": "2018-01-01"
+      "waardepeildatum": "2019-01-01",
+      "vastgesteldeWaarde": 166000
     },
     {
-      "vastgesteldeWaarde": 139000.0,
-      "waardepeildatum": "2017-01-01"
+      "waardepeildatum": "2018-01-01",
+      "vastgesteldeWaarde": 151000
     },
     {
-      "vastgesteldeWaarde": 133000.0,
-      "waardepeildatum": "2016-01-01"
+      "waardepeildatum": "2017-01-01",
+      "vastgesteldeWaarde": 139000
     },
     {
-      "vastgesteldeWaarde": 130000.0,
-      "waardepeildatum": "2015-01-01"
+      "waardepeildatum": "2016-01-01",
+      "vastgesteldeWaarde": 133000
     },
     {
-      "vastgesteldeWaarde": 130000.0,
-      "waardepeildatum": "2014-01-01"
+      "waardepeildatum": "2015-01-01",
+      "vastgesteldeWaarde": 130000
+    },
+    {
+      "waardepeildatum": "2014-01-01",
+      "vastgesteldeWaarde": 130000
     }
   ]
 }

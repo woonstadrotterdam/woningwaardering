@@ -11,7 +11,7 @@
   "adresseerbaar_object_basisregistratie": {
     "bag_gebruikers_oppervlakte": 58.0
   },
-  "woz_eenheden": [
+  "wozEenheden": [
     {
       "waardepeildatum": "2022-01-01",
       "vastgesteldeWaarde": 178000
@@ -19,6 +19,10 @@
     {
       "waardepeildatum": "2023-01-01",
       "vastgesteldeWaarde": 194000
+    },
+    {
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 205000
     }
   ]
 }

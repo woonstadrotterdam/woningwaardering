@@ -11,7 +11,7 @@ Ga voor uitgebreide documentatie over de **woningwaardering** package naar [Read
 <!--tip-start-->
 
 > [!TIP]
-> Deze versie kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van januari 2025 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [documentatie](https://woningwaardering.readthedocs.io/stable/), [de toelichting op de implementatie van het beleidsboek](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
+> Deze versie kan gebruikt worden voor het berekenen van de woningwaardering volgens het woningwaarderingsstelsel voor zelfstandige woonruimten volgens [het beleidsboek van de huurcommissie van januari 2026 (Wet Betaalbare Huur)](https://www.huurcommissie.nl/huurcommissie-helpt/beleidsboeken_html). Aan de berekeningen en output van deze package kunnen geen rechten worden ontleend. Raadpleeg de [documentatie](https://woningwaardering.readthedocs.io/stable/), [de toelichting op de implementatie van het beleidsboek](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) en [de openstaande issues](https://github.com/woonstadrotterdam/woningwaardering/issues) aandachtig om de package op een constructieve manier te gebruiken en de resultaten correct te interpreteren.
 
 <!--tip-end-->
 
@@ -19,7 +19,7 @@ Ga voor uitgebreide documentatie over de **woningwaardering** package naar [Read
 
 <!--overzicht-start-->
 
-Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk wordt om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) [referentiedata v4.2.250307](https://github.com/Aedes-datastandaarden/vera-referentiedata) & [openapi v4.1.5](https://github.com/Aedes-datastandaarden/vera-openapi) van de corporatiesector voor de in- en output van de package. De reden van het maken van deze package is het volgende:
+Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ontwikkelen met een open-source Python-package waarmee het mogelijk wordt om het puntensysteem van het [woningwaarderingsstelsel](https://aedes.nl/huurbeleid-en-betaalbaarheid/woningwaarderingsstelsel-wws) toe te passen. We gaan hierbij uit van de [VERA-standaard](https://www.coraveraonline.nl/index.php/VERA-standaard) [referentiedata v4.3.260116](https://github.com/Aedes-datastandaarden/vera-referentiedata) & [openapi v4.1.5](https://github.com/Aedes-datastandaarden/vera-openapi) van de corporatiesector voor de in- en output van de package. De reden van het maken van deze package is het volgende:
 
 De package maakt het mogelijk om de woningwaardering te berekenen op basis van een digitale representatie van een woning. Steeds meer woningcorporaties en bedrijven digitaliseren hun woningbestand, vaak met behulp van een bouwwerkinformatiemodel (BIM). Met behulp van deze package worden bulkberekeningen van woningwaarderingen mogelijk. Bovendien kan de woningwaardering door deze package als API te gebruiken in een webapplicatie worden geïntegreerd. Onze berekening biedt een completere en inzichtelijkere berekening van het woningwaarderingsstelsel dan de momenteel beschikbare tools, zoals die van de [huurcommissie](https://www.huurcommissie.nl/huurders/sociale-huurwoning/maximale-huurprijs-berekenen). Omdat onze package volledig open-source is zijn alle geïmplementeerde regels transparent en traceerbaar. Het helpt ook woningcorporaties en bedrijven te voldoen aan de wetgeving zoals de [Wet Betaalbare Huur](https://www.volkshuisvestingnederland.nl/onderwerpen/wet-betaalbare-huur).
 
@@ -38,7 +38,7 @@ _Visueel voorbeeld van de output van de package voor een zelfstandige woonruimte
 
 <!--overzicht-end-->
 
-Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van januari 2025 verwijzen wij naar de [documentatie](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) over de implementatie van dit beleidsboek.
+Voor meer details over wat er precies is geïmplementeerd van het beleidsboek van januari 2026 verwijzen wij naar de [documentatie](https://woningwaardering.readthedocs.io/stable/implementatietoelichtingen/) over de implementatie van dit beleidsboek.
 
 Voor meer informatie over hoe de documentatie van het beleidsboek is gemaakt, verwijzen wij naar het hoofdstuk [Implementatie beleidsboek huurcommissie](https://woningwaardering.readthedocs.io/stable/introductie/opzet/#implementatie-beleidsboek-huurcommissie).
 

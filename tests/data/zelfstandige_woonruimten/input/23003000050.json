@@ -32,14 +32,50 @@
       "naam": "Individueel"
     }
   ],
-  "woz_eenheden": [
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 266000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 272000
+    },
     {
       "waardepeildatum": "2022-01-01",
       "vastgesteldeWaarde": 245000
     },
     {
-      "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 272000
+      "waardepeildatum": "2021-01-01",
+      "vastgesteldeWaarde": 243000
+    },
+    {
+      "waardepeildatum": "2020-01-01",
+      "vastgesteldeWaarde": 230000
+    },
+    {
+      "waardepeildatum": "2019-01-01",
+      "vastgesteldeWaarde": 128000
+    },
+    {
+      "waardepeildatum": "2018-01-01",
+      "vastgesteldeWaarde": 104000
+    },
+    {
+      "waardepeildatum": "2017-01-01",
+      "vastgesteldeWaarde": 91000
+    },
+    {
+      "waardepeildatum": "2016-01-01",
+      "vastgesteldeWaarde": 87000
+    },
+    {
+      "waardepeildatum": "2015-01-01",
+      "vastgesteldeWaarde": 87000
+    },
+    {
+      "waardepeildatum": "2014-01-01",
+      "vastgesteldeWaarde": 86000
     }
   ],
   "energieprestaties": [

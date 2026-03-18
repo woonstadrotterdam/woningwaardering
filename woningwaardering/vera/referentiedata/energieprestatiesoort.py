@@ -45,6 +45,14 @@ class Energieprestatiesoort(Referentiedatasoort):
     (EPV).
     """
 
+    energielabel_conform_nta8800 = EnergieprestatiesoortReferentiedata(
+        code="NTA",
+        naam="Energielabel conform NTA8800",
+    )
+    """
+    Het label op basis van rekenmethode NTA 8800
+    """
+
     opgewekte_duurzame_elektriciteit = EnergieprestatiesoortReferentiedata(
         code="OPG",
         naam="Opgewekte duurzame elektriciteit",

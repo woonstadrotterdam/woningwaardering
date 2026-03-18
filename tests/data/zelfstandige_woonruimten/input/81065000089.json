@@ -32,7 +32,7 @@
       }
     }
   ],
-  "woz_eenheden": [
+  "wozEenheden": [
     {
       "waardepeildatum": "2022-01-01",
       "vastgesteldeWaarde": 216000
@@ -40,13 +40,17 @@
     {
       "waardepeildatum": "2023-01-01",
       "vastgesteldeWaarde": 226000
+    },
+    {
+      "vastgesteldeWaarde": 245000,
+      "waardepeildatum": "2024-01-01"
     }
   ],
   "energieprestaties": [
     {
       "soort": {
-        "code": "EP2",
-        "naam": "Primair energieverbruik - woningbouw"
+        "code": "NTA",
+        "naam": "Energielabel conform NTA8800"
       },
       "status": {
         "code": "DEF",
@@ -246,7 +250,7 @@
         "naam": "Verkeersruimte"
       },
       "detailSoort": {
-        "code": "OVL",
+        "code": "OVE",
         "naam": "Overloop"
       },
       "naam": "Overloop",

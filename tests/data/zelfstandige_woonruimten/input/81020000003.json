@@ -32,16 +32,6 @@
       }
     }
   ],
-  "woz_eenheden": [
-    {
-      "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 347000
-    },
-    {
-      "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 349000
-    }
-  ],
   "energieprestaties": [
     {
       "soort": {
@@ -403,7 +393,7 @@
         "naam": "Verkeersruimte"
       },
       "detailSoort": {
-        "code": "OVL",
+        "code": "OVE",
         "naam": "Overloop"
       },
       "naam": "Overloop",
@@ -607,6 +597,20 @@
         "nummer": "00",
         "omschrijving": "begane grond"
       }
+    }
+  ],
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2022-01-01",
+      "vastgesteldeWaarde": 347000
+    },
+    {
+      "waardepeildatum": "2023-01-01",
+      "vastgesteldeWaarde": 349000
+    },
+    {
+      "vastgesteldeWaarde": 367000,
+      "waardepeildatum": "2024-01-01"
     }
   ]
 }
