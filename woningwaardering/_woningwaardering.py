@@ -40,11 +40,13 @@ class Woningwaardering:
     def waardeer(
         self,
         eenheid: EenhedenEenheid,
+        voorkom_duplicaten: bool = False,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """Berekent de woningwaardering voor een eenheid door automatisch het juiste stelsel te detecteren.
 
         Parameters:
             eenheid (EenhedenEenheid): De eenheid waarvoor de woningwaardering wordt berekend.
+            voorkom_duplicaten (bool, optional): Of er rekening gehouden moet worden met bestaande installaties om duplicaten te voorkomen.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het resultaat van de woningwaardering.
@@ -79,9 +81,7 @@ class Woningwaardering:
         ):
             stelsel = OnzelfstandigeWoonruimten(peildatum=self.peildatum)
 
-        return stelsel.waardeer(
-            eenheid, corrigeer_voorzieningen=self.corrigeer_voorzieningen
-        )
+        return stelsel.waardeer(eenheid)
 
 
 if __name__ == "__main__":  # pragma: no cover
