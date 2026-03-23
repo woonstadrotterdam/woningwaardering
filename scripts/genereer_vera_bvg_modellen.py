@@ -4,12 +4,9 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import tomli
-from datamodel_code_generator import (
-    DataModelType,
-    InputFileType,
-    PythonVersion,
-    generate,
-)
+from datamodel_code_generator import generate
+from datamodel_code_generator.enums import DataModelType, InputFileType
+from datamodel_code_generator.format import PythonVersion
 
 
 def generate_models() -> None:
