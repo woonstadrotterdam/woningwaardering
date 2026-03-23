@@ -370,6 +370,42 @@ def corrigeer_afwezigheid_aanrecht(
             return
 
 
+def corrigeer_afwezigheid_verwarming(eenheid: EenhedenEenheid) -> None:
+    """
+    Zorgt ervoor dat, indien geen enkele ruimte verwarmd is, woon- en slaapkamers en
+    keukens als verwarmd worden gemarkeerd.
+
+    Args:
+        eenheid (EenhedenEenheid): De eenheid om te controleren en eventueel aan te vullen
+    """
+    if not eenheid.ruimten:
+        return
+
+    # Als er al een verwarmde ruimte is, niets doen
+    if any(ruimte.verwarmd for ruimte in eenheid.ruimten if ruimte is not None):
+        return
+
+    woon_slaapkamer_keuken_soorten = {
+        Ruimtedetailsoort.woonkamer,
+        Ruimtedetailsoort.slaapkamer,
+        Ruimtedetailsoort.woon_en_of_slaapkamer,
+        Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+        Ruimtedetailsoort.keuken,
+    }
+
+    for ruimte in eenheid.ruimten:
+        if ruimte is None or ruimte.detail_soort is None:
+            continue
+
+        if ruimte.detail_soort in woon_slaapkamer_keuken_soorten:
+            ruimte.verwarmd = True
+            logger.info(
+                f"Automatisch als verwarmd gemarkeerd: ruimte '{ruimte.naam}' ({ruimte.id}) "
+                f"met detailsoort {ruimte.detail_soort.name}"
+            )
+
+
 # Hoofdfunctie
 def corrigeer_voorzieningen_eenheid(
     eenheid: EenhedenEenheid,
@@ -391,6 +427,10 @@ def corrigeer_voorzieningen_eenheid(
             f"Eenheid {eenheid.id} heeft geen ruimten, overslaan auto-toevoegen voorzieningen"
         )
         return
+
+    # Verwarming corrigeren vóór verdere voorzieningen, zodat stelsels die verwarming nodig hebben
+    # betrouwbare data krijgen.
+    corrigeer_afwezigheid_verwarming(eenheid)
 
     for ruimte in eenheid.ruimten:
         if not ruimte.detail_soort:

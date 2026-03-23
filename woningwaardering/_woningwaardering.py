@@ -81,7 +81,11 @@ class Woningwaardering:
         ):
             stelsel = OnzelfstandigeWoonruimten(peildatum=self.peildatum)
 
-        return stelsel.waardeer(eenheid)
+        return stelsel.waardeer(
+            eenheid,
+            corrigeer_voorzieningen=self.corrigeer_voorzieningen,
+            voorkom_duplicaten=voorkom_duplicaten,
+        )
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -12,6 +12,7 @@ from woningwaardering.stelsels.gedeelde_logica.voorzieningen_correctie import (
     _heeft_wastafel,
     corrigeer_afwezigheid_aanrecht,
     corrigeer_afwezigheid_toilet,
+    corrigeer_afwezigheid_verwarming,
     corrigeer_voorzieningen_eenheid,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -34,6 +35,7 @@ class TestVoorzieningenCorrectie:
         detail_soort=Ruimtedetailsoort.badkamer,
         installaties=None,
         bouwkundige_elementen=None,
+        verwarmd=None,
     ):
         return EenhedenRuimte(
             id="test_ruimte",
@@ -41,6 +43,7 @@ class TestVoorzieningenCorrectie:
             detail_soort=detail_soort,
             installaties=installaties or [],
             bouwkundige_elementen=bouwkundige_elementen or [],
+            verwarmd=verwarmd,
         )
 
     def _maak_eenheid(self, ruimten):
@@ -387,3 +390,108 @@ class TestVoorzieningenCorrectie:
         corrigeer_afwezigheid_aanrecht(eenheid, 1000)
 
         assert len(badkamer.bouwkundige_elementen) == 0
+
+    # Tests voor corrigeer_afwezigheid_verwarming
+    def test_corrigeer_afwezigheid_verwarming_zet_woon_en_slaapkamers_op_verwarmd(self):
+        """Als geen enkele ruimte verwarmd is, worden woon- en slaapkamers (en keukens) als verwarmd gemarkeerd."""
+        woonkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.woonkamer, verwarmd=False
+        )
+        slaapkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.slaapkamer, verwarmd=False
+        )
+        eenheid = self._maak_eenheid([woonkamer, slaapkamer])
+
+        corrigeer_afwezigheid_verwarming(eenheid)
+
+        assert woonkamer.verwarmd is True
+        assert slaapkamer.verwarmd is True
+
+    @pytest.mark.parametrize(
+        "detail_soort",
+        [
+            Ruimtedetailsoort.woonkamer,
+            Ruimtedetailsoort.slaapkamer,
+            Ruimtedetailsoort.woon_en_of_slaapkamer,
+            Ruimtedetailsoort.woonkamer_en_of_keuken,
+            Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+            Ruimtedetailsoort.keuken,
+        ],
+    )
+    def test_corrigeer_afwezigheid_verwarming_alle_relevante_types(self, detail_soort):
+        """Elk relevant woon-/slaapkamer- of keukentype wordt als verwarmd gemarkeerd wanneer eenheid geen verwarmde ruimte heeft."""
+        ruimte = self._maak_ruimte(detail_soort=detail_soort, verwarmd=False)
+        eenheid = self._maak_eenheid([ruimte])
+
+        corrigeer_afwezigheid_verwarming(eenheid)
+
+        assert ruimte.verwarmd is True
+
+    def test_corrigeer_afwezigheid_verwarming_niets_als_een_ruimte_al_verwarmd_is(
+        self,
+    ):
+        """Als minstens één ruimte al verwarmd is, worden geen kamers aangepast."""
+        woonkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.woonkamer, verwarmd=False
+        )
+        slaapkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.slaapkamer, verwarmd=True
+        )
+        eenheid = self._maak_eenheid([woonkamer, slaapkamer])
+
+        corrigeer_afwezigheid_verwarming(eenheid)
+
+        assert woonkamer.verwarmd is False
+        assert slaapkamer.verwarmd is True
+
+    def test_corrigeer_afwezigheid_verwarming_badkamer_blijft_onverwarmd(self):
+        """Badkamers en andere niet-woon/slaapkamer/keuken-ruimten worden niet als verwarmd gemarkeerd."""
+        badkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.badkamer, verwarmd=False
+        )
+        woonkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.woonkamer, verwarmd=False
+        )
+        eenheid = self._maak_eenheid([badkamer, woonkamer])
+
+        corrigeer_afwezigheid_verwarming(eenheid)
+
+        assert badkamer.verwarmd is False
+        assert woonkamer.verwarmd is True
+
+    def test_corrigeer_afwezigheid_verwarming_keuken_verwarmd_badkamer_niet(self):
+        """Keuken wordt als verwarmd gemarkeerd; badkamer blijft onverwarmd."""
+        keuken = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.keuken, verwarmd=False
+        )
+        badkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.badkamer, verwarmd=False
+        )
+        eenheid = self._maak_eenheid([keuken, badkamer])
+
+        corrigeer_afwezigheid_verwarming(eenheid)
+
+        assert keuken.verwarmd is True
+        assert badkamer.verwarmd is False
+
+    def test_corrigeer_afwezigheid_verwarming_lege_ruimten_lijst(self):
+        """Eenheid zonder ruimten: geen fout."""
+        eenheid = self._maak_eenheid([])
+        corrigeer_afwezigheid_verwarming(eenheid)
+
+    def test_corrigeer_voorzieningen_eenheid_zet_woonkamers_verwarmd_indien_geen_verwarmd(
+        self,
+    ):
+        """corrigeer_voorzieningen_eenheid markeert woon-/slaapkamers en keukens als verwarmd als geen enkele ruimte verwarmd is."""
+        woonkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.woonkamer, verwarmd=False
+        )
+        badkamer = self._maak_ruimte(
+            detail_soort=Ruimtedetailsoort.badkamer, verwarmd=False
+        )
+        eenheid = self._maak_eenheid([woonkamer, badkamer])
+
+        corrigeer_voorzieningen_eenheid(eenheid)
+
+        assert woonkamer.verwarmd is True
+        assert badkamer.verwarmd is False
