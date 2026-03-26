@@ -81,3 +81,6 @@ dev = [
 monumenten = [
     "monumenten>=2.0.1"
 ]
+
+[tool.uv]
+exclude-newer = "1 week"
