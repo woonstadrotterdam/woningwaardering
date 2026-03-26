@@ -81,3 +81,6 @@ dev = [
 monumenten = [
     "monumenten>=0.3"
 ]
+
+[tool.uv]
+exclude-newer = "1 week"
