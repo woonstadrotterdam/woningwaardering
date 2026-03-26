@@ -32,6 +32,7 @@ from woningwaardering.vera.referentiedata import (
     RuimtesoortReferentiedata,
 )
 from woningwaardering.vera.referentiedata.eenheidmonument import (
+    Eenheidmonument,
     EenheidmonumentReferentiedata,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
@@ -522,6 +523,8 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
                     code=monument["code"], naam=monument["naam"]
                 )
                 for monument in monumenten
+                if monument["code"] != Eenheidmonument.rijksmonument.code
+                or "RCE" in (monument.get("bron") or [])
             ]
         else:
             logger.debug(f"Eenheid ({eenheid.id}): Geen monumentale statussen gevonden")
