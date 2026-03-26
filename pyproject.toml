@@ -21,7 +21,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 readme = {file = "README.md", content-type = "text/markdown"}
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "pydantic>=2.10",
     "loguru>=0.7",
@@ -79,5 +79,5 @@ dev = [
     "tomli>=2.2",
 ]
 monumenten = [
-    "monumenten>=0.3"
+    "monumenten>=2.0.1"
 ]

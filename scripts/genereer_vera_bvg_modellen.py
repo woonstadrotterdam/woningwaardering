@@ -5,11 +5,11 @@ from urllib.parse import urlparse
 
 import tomli
 from datamodel_code_generator import (
-    DataModelType,
     InputFileType,
     PythonVersion,
     generate,
 )
+from datamodel_code_generator.enums import DataModelType
 
 
 def generate_models() -> None:
