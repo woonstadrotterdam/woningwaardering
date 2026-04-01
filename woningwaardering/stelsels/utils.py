@@ -32,6 +32,7 @@ from woningwaardering.vera.referentiedata import (
     RuimtesoortReferentiedata,
 )
 from woningwaardering.vera.referentiedata.eenheidmonument import (
+    Eenheidmonument,
     EenheidmonumentReferentiedata,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
@@ -254,7 +255,9 @@ def naar_tabel(
                     "Totaal",
                     (subtotaal or "") if not verschillende_meeteenheden else "",
                     meeteenheid if not verschillende_meeteenheden else "",
-                    rond_af(woningwaardering_groep.punten, decimalen=2) or "",
+                    rond_af(woningwaardering_groep.punten, decimalen=2)
+                    if woningwaardering_groep.punten is not None
+                    else "",
                     f"{woningwaardering_groep.opslagpercentage:.0%}"
                     if woningwaardering_groep.opslagpercentage is not None
                     else "",
@@ -522,6 +525,8 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
                     code=monument["code"], naam=monument["naam"]
                 )
                 for monument in monumenten
+                if monument["code"] != Eenheidmonument.rijksmonument.code
+                or "RCE" in (monument.get("bron") or [])
             ]
         else:
             logger.debug(f"Eenheid ({eenheid.id}): Geen monumentale statussen gevonden")

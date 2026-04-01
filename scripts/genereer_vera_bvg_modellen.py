@@ -4,9 +4,12 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import tomli
-from datamodel_code_generator import generate
-from datamodel_code_generator.enums import DataModelType, InputFileType
-from datamodel_code_generator.format import PythonVersion
+from datamodel_code_generator import (
+    InputFileType,
+    PythonVersion,
+    generate,
+)
+from datamodel_code_generator.enums import DataModelType
 
 
 def generate_models() -> None:
@@ -33,7 +36,7 @@ def generate_models() -> None:
         input_file_type=InputFileType.OpenAPI,
         output=output,
         output_model_type=DataModelType.PydanticV2BaseModel,
-        target_python_version=PythonVersion.PY_310,
+        target_python_version=PythonVersion.PY_311,
         use_standard_collections=True,
         use_default_kwarg=True,
         use_field_description=True,
