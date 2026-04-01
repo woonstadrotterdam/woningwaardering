@@ -255,7 +255,9 @@ def naar_tabel(
                     "Totaal",
                     (subtotaal or "") if not verschillende_meeteenheden else "",
                     meeteenheid if not verschillende_meeteenheden else "",
-                    rond_af(woningwaardering_groep.punten, decimalen=2) or "",
+                    rond_af(woningwaardering_groep.punten, decimalen=2)
+                    if woningwaardering_groep.punten is not None
+                    else "",
                     f"{woningwaardering_groep.opslagpercentage:.0%}"
                     if woningwaardering_groep.opslagpercentage is not None
                     else "",
