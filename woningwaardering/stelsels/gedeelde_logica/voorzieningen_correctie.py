@@ -216,7 +216,7 @@ def _corrigeer_aanrecht(ruimte: EenhedenRuimte, standaard_lengte: int) -> None:
 
 def _corrigeer_aanrecht_lengte(ruimte: EenhedenRuimte, standaard_lengte: int) -> None:
     """
-    Zorgt ervoor dat aanrechten een lengte hebben.
+    Zorgt ervoor dat aanrechten een minimum lengte hebben.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte om te controleren
@@ -226,9 +226,8 @@ def _corrigeer_aanrecht_lengte(ruimte: EenhedenRuimte, standaard_lengte: int) ->
         return
 
     for element in ruimte.bouwkundige_elementen:
-        if (
-            element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
-            and element.lengte is None
+        if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht and (
+            element.lengte is None or element.lengte < standaard_lengte
         ):
             element.lengte = standaard_lengte
 
