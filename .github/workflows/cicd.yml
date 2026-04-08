@@ -47,8 +47,24 @@ jobs:
       - name: Run pre-push hooks
         run: pre-commit run --all-files --hook-stage pre-push
 
-      - name: Run pytest
-        run: python -m pytest --junitxml=pytest-report.xml
+      - name: Run pytest with coverage
+        run: |
+          python -m pytest \
+            --junitxml=pytest-report.xml \
+            --cov=woningwaardering \
+            --cov-report=
+
+      - name: Add coverage report to job summary
+        run: |
+          python -m coverage report -m > pytest-coverage.txt
+
+          {
+            echo '## Pytest coverage';
+            echo;
+            echo '```';
+            cat pytest-coverage.txt;
+            echo '```';
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Produce test summary
         uses: test-summary/action@v2
