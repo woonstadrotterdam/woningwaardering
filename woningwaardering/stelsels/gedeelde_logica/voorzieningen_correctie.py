@@ -371,17 +371,13 @@ def corrigeer_afwezigheid_aanrecht(
 
 def corrigeer_afwezigheid_verwarming(eenheid: EenhedenEenheid) -> None:
     """
-    Zorgt ervoor dat, indien geen enkele ruimte verwarmd is, woon- en slaapkamers en
+    Zorgt ervoor dat woon- en slaapkamers en
     keukens als verwarmd worden gemarkeerd.
 
     Args:
         eenheid (EenhedenEenheid): De eenheid om te controleren en eventueel aan te vullen
     """
     if not eenheid.ruimten:
-        return
-
-    # Als er al een verwarmde ruimte is, niets doen
-    if any(ruimte.verwarmd for ruimte in eenheid.ruimten if ruimte is not None):
         return
 
     woon_slaapkamer_keuken_soorten = {
