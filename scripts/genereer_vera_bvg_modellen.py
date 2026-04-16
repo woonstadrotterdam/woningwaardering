@@ -36,7 +36,7 @@ def generate_models() -> None:
         input_file_type=InputFileType.OpenAPI,
         output=output,
         output_model_type=DataModelType.PydanticV2BaseModel,
-        target_python_version=PythonVersion.PY_310,
+        target_python_version=PythonVersion.PY_311,
         use_standard_collections=True,
         use_default_kwarg=True,
         use_field_description=True,
