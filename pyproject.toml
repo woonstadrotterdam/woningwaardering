@@ -21,7 +21,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 readme = {file = "README.md", content-type = "text/markdown"}
-requires-python = ">=3.11"
+requires-python = ">=3.11, <3.14.4"
 dependencies = [
     "pydantic>=2.10",
     "loguru>=0.7",
@@ -67,7 +67,7 @@ test = [
     "types-python-dateutil>=2.9",
 ]
 dev = [
-    "aiohttp>=3.11",
+    "aiohttp>=3.13.5",
     "woningwaardering[test]",
     "woningwaardering[monumenten]",
     "datamodel-code-generator[http]>=0.25.6",
