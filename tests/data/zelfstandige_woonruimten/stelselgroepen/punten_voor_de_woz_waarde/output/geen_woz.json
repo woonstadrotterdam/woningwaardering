@@ -58,7 +58,7 @@
           }
         },
         {
-          "aantal": 60.05,
+          "aantal": 60.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -86,14 +86,14 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 5.33
+          "punten": 5.34
         },
         {
           "criterium": {
             "id": "punten_voor_de_woz_waarde__nieuwbouw_minimum_punten",
             "naam": "Nieuwbouw: min. 40 punten"
           },
-          "punten": 29.61
+          "punten": 29.6
         }
       ]
     }

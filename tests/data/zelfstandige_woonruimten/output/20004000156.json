@@ -365,7 +365,7 @@
           "punten": 19.7
         },
         {
-          "aantal": 79.78,
+          "aantal": 80.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -393,7 +393,7 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 15.64
+          "punten": 15.6
         }
       ]
     },
