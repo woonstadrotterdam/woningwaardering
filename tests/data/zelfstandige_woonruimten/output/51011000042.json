@@ -402,7 +402,7 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 30.5,
+      "punten": 30.75,
       "woningwaarderingen": [
         {
           "aantal": 229000.0,
@@ -429,7 +429,7 @@
           "punten": 14.94
         },
         {
-          "aantal": 60.4,
+          "aantal": 60.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -457,7 +457,7 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 15.67
+          "punten": 15.77
         }
       ]
     },
@@ -491,12 +491,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1035.81,
-  "punten": 158.0,
+  "maximaleHuur": 1042.73,
+  "punten": 159.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1035.81
+  "maximaleHuurInclusiefOpslag": 1042.73
 }

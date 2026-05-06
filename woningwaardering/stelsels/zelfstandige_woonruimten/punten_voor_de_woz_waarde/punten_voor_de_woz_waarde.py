@@ -595,7 +595,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten object.
 
         Returns:
-            Decimal: De totale oppervlakte van de stelselgroepen oppervlakte van vertrekken en oppervlakte van overige ruimten.
+            Decimal: De totale oppervlakte (rubriek 1 + 2 + parkeerplekken type I uit rubriek 10),
+                afgerond op hele m² (0,5 m² of meer naar boven), conform beleid onderdeel II.
         """
         oppervlakte_stelsel_groepen = [
             groep
@@ -651,7 +652,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid ({eenheid.id}): Oppervlakte parkeerplekken Type I van {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam} is {parkeerplekken_oppervlakte}m2"
             )
 
-        return oppervlakte + Decimal(str(parkeerplekken_oppervlakte))
+        totaal = oppervlakte + Decimal(str(parkeerplekken_oppervlakte))
+        return utils.rond_af(totaal, decimalen=0)
 
     def _bereken_minimum_punten_nieuwbouw(
         self,

@@ -343,7 +343,7 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 39.0,
+      "punten": 38.75,
       "woningwaarderingen": [
         {
           "aantal": 289000.0,
@@ -370,7 +370,7 @@
           "punten": 18.85
         },
         {
-          "aantal": 59.54,
+          "aantal": 60.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -398,7 +398,7 @@
             "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 20.06
+          "punten": 19.9
         }
       ]
     },
