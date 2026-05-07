@@ -340,7 +340,13 @@ def _waardeer_baden_en_douches(
     )
     aantal_baden = installaties[Installatiesoort.bad]
 
-    aantal_bad_en_douches = min(aantal_douches, aantal_baden)
+    # Gekoppelde bad+douche: losse BAD met DOU/DRD op dezelfde ruimte
+    aantal_bad_en_douches_gekoppeld = min(aantal_douches, aantal_baden)
+    # Expliciete referentie BDO (bad en douche als één installatie)
+    aantal_bad_en_douche_expliciet = installaties[Installatiesoort.bad_en_douche]
+    aantal_bad_en_douches = (
+        aantal_bad_en_douches_gekoppeld + aantal_bad_en_douche_expliciet
+    )
 
     if aantal_bad_en_douches > 0:
         punten = rond_af(
