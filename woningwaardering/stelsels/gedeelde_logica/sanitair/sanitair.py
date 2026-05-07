@@ -379,7 +379,7 @@ def _waardeer_baden_en_douches(
         Installatiesoort.douche,
         Installatiesoort.drempelloze_inrijdouche,
     ]:
-        aantal = installaties[installatiesoort] - aantal_bad_en_douches_gekoppeld
+        aantal = installaties[installatiesoort] - aantal_bad_en_douches
         if aantal > 0:
             punten = rond_af(
                 Decimal(str(aantal)) * Decimal(str(punten_sanitair[installatiesoort])),
