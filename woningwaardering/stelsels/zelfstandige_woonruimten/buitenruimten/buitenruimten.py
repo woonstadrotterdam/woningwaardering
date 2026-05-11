@@ -1,4 +1,3 @@
-import re
 import warnings
 from collections import defaultdict
 from datetime import date
@@ -63,16 +62,18 @@ class Buitenruimten(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
+        totaal_criteria: dict[str, CriteriumId] = {}
+
         # punten per buitenruimte
         for ruimte in eenheid.ruimten or []:
-            woningwaarderingen = self._punten_voor_buitenruimte(ruimte)
+            woningwaarderingen = self._punten_voor_buitenruimte(ruimte, totaal_criteria)
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
         # minimaal 2 punten bij aanwezigheid van privé buitenruimten
         # 5 aftrekpunten bij geen buitenruimten
         if (
             result := self._prive_buitenruimten_aanwezig(
-                eenheid, woningwaardering_groep
+                eenheid, woningwaardering_groep, totaal_criteria
             )
         ) is not None:
             woningwaardering_groep.woningwaarderingen.append(result)
@@ -93,18 +94,16 @@ class Buitenruimten(Stelselgroep):
                     current_aantal + (Decimal(str(woningwaardering.aantal or "0"))),
                 )
 
-        for id, (punten, aantal) in som.items():
-            match = re.search(
-                r"\d+", id
-            )  # in criterium id staat gedeeld_met_<aantal> of prive
-            gedeeld_met = int(match.group()) if match else 1
+        for totaal_id, (punten, aantal) in som.items():
+            totaal_criterium = totaal_criteria[totaal_id]
+            gedeeld_met = totaal_criterium.gedeeld_met_aantal or 1
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"Totaal (gedeeld met {gedeeld_met} eenheden)"
                     if gedeeld_met > 1
                     else "Totaal (privé)",
-                    id=id,
+                    id=totaal_id,
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
             )
@@ -171,7 +170,9 @@ class Buitenruimten(Stelselgroep):
         return None
 
     def _punten_voor_buitenruimte(
-        self, ruimte: EenhedenRuimte
+        self,
+        ruimte: EenhedenRuimte,
+        totaal_criteria: dict[str, CriteriumId],
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         if classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte:
             if not ruimte.oppervlakte:
@@ -224,32 +225,41 @@ class Buitenruimten(Stelselgroep):
                         decimalen=2,
                     )
                 )
-                woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                    meeteenheid=Meeteenheid.vierkante_meter_m2,
-                    id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            ruimte_id=ruimte.id,
-                            gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
-                            gedeeld_met_soort=GedeeldMetSoort.adressen,
-                        )
-                    ),
-                    naam=ruimte.naam,
-                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                totaal_criterium = CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
+                    gedeeld_met_soort=GedeeldMetSoort.adressen,
+                    is_totaal=True,
+                )
+                totaal_criteria[str(totaal_criterium)] = totaal_criterium
+                woningwaardering.criterium = (
+                    WoningwaarderingResultatenWoningwaarderingCriterium(
+                        meeteenheid=Meeteenheid.vierkante_meter_m2,
                         id=str(
                             CriteriumId(
                                 stelselgroep=self.stelselgroep,
+                                ruimte_id=ruimte.id,
                                 gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
                                 gedeeld_met_soort=GedeeldMetSoort.adressen,
-                                is_totaal=True,
                             )
                         ),
-                    ),
+                        naam=ruimte.naam,
+                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                            id=str(totaal_criterium),
+                        ),
+                    )
                 )
             else:  # privé buitenruimte
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een privé-buitenruimte van {ruimte.oppervlakte}m2 en telt mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
                 )
+                totaal_criterium = CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=1,
+                    gedeeld_met_soort=GedeeldMetSoort.adressen,
+                    is_totaal=True,
+                )
+                totaal_criteria[str(totaal_criterium)] = totaal_criterium
                 woningwaardering.criterium = (
                     WoningwaarderingResultatenWoningwaarderingCriterium(
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -261,14 +271,7 @@ class Buitenruimten(Stelselgroep):
                             )
                         ),
                         bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=1,
-                                    gedeeld_met_soort=GedeeldMetSoort.adressen,
-                                    is_totaal=True,
-                                )
-                            ),
+                            id=str(totaal_criterium),
                         ),
                     )
                 )
@@ -286,6 +289,7 @@ class Buitenruimten(Stelselgroep):
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+        totaal_criteria: dict[str, CriteriumId],
     ) -> WoningwaarderingResultatenWoningwaardering | None:
         if not any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
@@ -318,6 +322,13 @@ class Buitenruimten(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
             )
+            totaal_criterium = CriteriumId(
+                stelselgroep=self.stelselgroep,
+                gedeeld_met_aantal=1,
+                gedeeld_met_soort=GedeeldMetSoort.adressen,
+                is_totaal=True,
+            )
+            totaal_criteria[str(totaal_criterium)] = totaal_criterium
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
@@ -330,13 +341,7 @@ class Buitenruimten(Stelselgroep):
                         )
                     ),
                     bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=1,
-                                is_totaal=True,
-                            )
-                        ),
+                        id=str(totaal_criterium),
                     ),
                 )
             )
