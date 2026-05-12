@@ -932,11 +932,7 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
         EenhedenWoonplaats | None: de woonplaats,
                                of None als de gegevens niet gevonden kunnen worden.
     """
-    if (
-        adres.woonplaats is not None
-        and adres.woonplaats.code is not None
-        and (not adres.postcode or not adres.huisnummer)
-    ):
+    if adres.woonplaats is not None and adres.woonplaats.code is not None:
         return adres.woonplaats
 
     if not adres.postcode or not adres.huisnummer:
