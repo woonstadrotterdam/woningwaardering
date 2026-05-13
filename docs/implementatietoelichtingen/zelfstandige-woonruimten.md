@@ -1119,6 +1119,9 @@ Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk buitenruimte
 
 De oppervlakten voor gemeenschappelijke en privé-buitenruimten worden afzonderlijk berekend. Als sprake is van meerdere buitenruimten die tot dezelfde categorie behoren (privé of gemeenschappelijk) dan wordt per categorie de oppervlakte van die meerdere buitenruimtes opgeteld en afgerond op twee decimalen. Daarna wordt de oppervlakte van beide categorieën bij elkaar opgeteld. In totaal kan maximaal 15 punten worden toegekend.
 
+> [!NOTE]
+> De oppervlakte van beide categorieën kan niet bij elkaar opgeteld worden, omdat er voor privébuitenruimten een ander aantal punten per m2 wordt berekend dan voor gemeenschappelijke buitenruimten. We volgen hierin de rekenmethode uit de wet, waarin staat: Voor afronden wordt gebruik gemaakt van dezelfde methodiek als beschreven bij [rubriek 1 en 2](#2111-afronden-op-hele-m²).
+
 ### 2.9 Rubriek 9: Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
 
 {==
