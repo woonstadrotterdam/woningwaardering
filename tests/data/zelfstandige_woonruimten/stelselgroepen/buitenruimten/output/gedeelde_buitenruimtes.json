@@ -14,7 +14,7 @@
       "punten": 3.75,
       "woningwaarderingen": [
         {
-          "aantal": 3.0,
+          "aantal": 6.0,
           "criterium": {
             "id": "buitenruimten__Space_108017427__gedeeld_met__2__adressen",
             "naam": "Tuin",
@@ -28,7 +28,7 @@
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 6.0,
           "criterium": {
             "id": "buitenruimten__Space_108017428__gedeeld_met__3__adressen",
             "naam": "Tuin",
@@ -42,7 +42,7 @@
           }
         },
         {
-          "aantal": 3.0,
+          "aantal": 6.0,
           "criterium": {
             "id": "buitenruimten__totaal__gedeeld_met__2__adressen",
             "naam": "Totaal (gedeeld met 2 eenheden)",
@@ -54,7 +54,7 @@
           "punten": 2.25
         },
         {
-          "aantal": 2.0,
+          "aantal": 6.0,
           "criterium": {
             "id": "buitenruimten__totaal__gedeeld_met__3__adressen",
             "naam": "Totaal (gedeeld met 3 eenheden)",

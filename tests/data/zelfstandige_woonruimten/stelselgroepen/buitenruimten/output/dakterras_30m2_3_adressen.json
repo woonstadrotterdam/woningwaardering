@@ -14,7 +14,7 @@
       "punten": 7.5,
       "woningwaarderingen": [
         {
-          "aantal": 10.0,
+          "aantal": 30.0,
           "criterium": {
             "id": "buitenruimten__dakterras__gedeeld_met__3__adressen",
             "naam": "Dakterras",
@@ -28,7 +28,7 @@
           }
         },
         {
-          "aantal": 10.0,
+          "aantal": 30.0,
           "criterium": {
             "id": "buitenruimten__totaal__gedeeld_met__3__adressen",
             "naam": "Totaal (gedeeld met 3 eenheden)",
