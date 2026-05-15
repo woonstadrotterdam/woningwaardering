@@ -93,7 +93,7 @@ class Buitenruimten(Stelselgroep):
             gedeeld_met = totaal_criterium.gedeeld_met_aantal or 1
             factor = Decimal("0.35") if gedeeld_met == 1 else Decimal("0.75")
             m2_afgerond = utils.rond_af(aantal_som, decimalen=0)
-            punten_uit_m2 = m2_afgerond * factor / totaal_criterium.gedeeld_met_aantal
+            punten_uit_m2 = m2_afgerond * factor / gedeeld_met
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
