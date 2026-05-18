@@ -4,8 +4,9 @@ from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.criterium_id import CriteriumId
-from woningwaardering.stelsels.utils import gedeeld_met_eenheden, rond_af
+from woningwaardering.stelsels.utils import gedeeld_met_eenheden
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -128,25 +129,21 @@ def _opslag_zorgwoning(
                 f"Invalid stelsel {stelsel}. Bijzondere voorzieningen zijn alleen gedefinieerd voor {Woningwaarderingstelsel.zelfstandige_woonruimten.naam} en {Woningwaarderingstelsel.onzelfstandige_woonruimten.naam}"
             )
 
-    puntentotaal = rond_af(
-        sum(
-            Decimal(str(groep.punten or "0")) or Decimal()
-            for groep in woningwaardering_resultaat.groepen or []
-            if (
-                groep.punten
-                and groep.criterium_groep
-                and groep.criterium_groep.stelselgroep
-                not in stelselgroepen_zonder_opslag
-            )
-        ),
-        0,
+    puntentotaal = sum(
+        Decimal(str(groep.punten or "0")) or Decimal()
+        for groep in woningwaardering_resultaat.groepen or []
+        if (
+            groep.punten
+            and groep.criterium_groep
+            and groep.criterium_groep.stelselgroep not in stelselgroepen_zonder_opslag
+        )
     )
 
     logger.info(
         f"Eenheid ({eenheid.id}): Puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel is {puntentotaal}"
     )
 
-    verhoging = puntentotaal * Decimal("0.35")
+    verhoging = utils.rond_af_op_kwart(puntentotaal * Decimal("0.35"))
 
     logger.info(
         f"Eenheid ({eenheid.id}) is een zorgwoning: {verhoging} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
