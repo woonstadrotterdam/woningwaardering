@@ -22,14 +22,20 @@ class Woningwaardering:
     Parameters:
         peildatum (date, optional): De peildatum voor de waardering.
             Standaard is de huidige datum.
+        corrigeer_voorzieningen (bool, optional): Of missende voorzieningen automatisch
+            toegevoegd moeten worden vóór waardering. Standaard False.
 
     Attributes:
         peildatum (date): De peildatum voor de waardering.
+        corrigeer_voorzieningen (bool): Of voorzieningen automatisch toegevoegd worden.
         stelsels (dict): Dictionary met alle beschikbare stelsels.
     """
 
-    def __init__(self, peildatum: date = date.today()) -> None:
+    def __init__(
+        self, peildatum: date = date.today(), corrigeer_voorzieningen: bool = False
+    ) -> None:
         self.peildatum = peildatum
+        self.corrigeer_voorzieningen = corrigeer_voorzieningen
 
     def waardeer(
         self,
@@ -73,7 +79,9 @@ class Woningwaardering:
         ):
             stelsel = OnzelfstandigeWoonruimten(peildatum=self.peildatum)
 
-        return stelsel.waardeer(eenheid)
+        return stelsel.waardeer(
+            eenheid, corrigeer_voorzieningen=self.corrigeer_voorzieningen
+        )
 
 
 if __name__ == "__main__":  # pragma: no cover
