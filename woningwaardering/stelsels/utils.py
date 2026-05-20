@@ -921,9 +921,36 @@ where {{
 """
 
 
+def _normaliseer_woonplaatsnaam(naam: str) -> str:
+    return naam.strip().casefold()
+
+
+def _formatteer_adresomschrijving(adres: EenhedenEenheidadres) -> str:
+    return " ".join(
+        filter(
+            None,
+            [
+                adres.postcode,
+                adres.huisnummer,
+                adres.huisletter,
+                adres.huisnummer_toevoeging,
+            ],
+        )
+    )
+
+
+def _woonplaatsnamen_komen_overeen(naam1: str, naam2: str) -> bool:
+    return _normaliseer_woonplaatsnaam(naam1) == _normaliseer_woonplaatsnaam(naam2)
+
+
 def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
     """
     Haalt de woonplaats op voor een gegeven adres.
+
+    Als de BAG-woonplaatscode is opgegeven, wordt die gebruikt. Anders wordt de
+    woonplaats bij het Kadaster opgehaald op basis van postcode, huisnummer,
+    huisletter en huisnummertoevoeging. Is alleen een woonplaatsnaam opgegeven en
+    die wijkt af van het Kadaster, dan wordt None teruggegeven met een waarschuwing.
 
     Args:
         adres (EenhedenEenheidadres): Adres met woonplaats met woonplaatscode of postcode, huisnummer en optioneel huisletter en huisnummertoevoeging.
@@ -932,11 +959,7 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
         EenhedenWoonplaats | None: de woonplaats,
                                of None als de gegevens niet gevonden kunnen worden.
     """
-    if (
-        adres.woonplaats is not None
-        and adres.woonplaats.code is not None
-        and (not adres.postcode or not adres.huisnummer)
-    ):
+    if adres.woonplaats is not None and adres.woonplaats.code is not None:
         return adres.woonplaats
 
     if not adres.postcode or not adres.huisnummer:
@@ -968,18 +991,24 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
             )
             if (
                 adres.woonplaats
-                and adres.woonplaats.code
-                and woonplaats_kadaster.code != adres.woonplaats.code
+                and adres.woonplaats.naam
+                and woonplaats_kadaster.naam
+                and not _woonplaatsnamen_komen_overeen(
+                    adres.woonplaats.naam, woonplaats_kadaster.naam
+                )
             ):
                 warnings.warn(
-                    f"Woonplaats {woonplaats_kadaster.naam} ({woonplaats_kadaster.code}) is gevonden voor adres {adres.postcode} {adres.huisnummer} {adres.huisletter if adres.huisletter else ''} {adres.huisnummer_toevoeging if adres.huisnummer_toevoeging else ''}, terwijl woonplaats {adres.woonplaats.naam} ({adres.woonplaats.code}) is opgegeven. {adres.woonplaats.naam} wordt gebruikt voor de waardering."
+                    f"Woonplaats {woonplaats_kadaster.naam} is gevonden voor adres "
+                    f"{_formatteer_adresomschrijving(adres)}, terwijl woonplaats "
+                    f"{adres.woonplaats.naam} is opgegeven. Kan geen woonplaats "
+                    f"bepalen voor de waardering.",
+                    UserWarning,
                 )
-                return adres.woonplaats
-            adres.woonplaats = woonplaats_kadaster
-            return adres.woonplaats
+                return None
+            return woonplaats_kadaster
         return None
     except requests.RequestException as e:
-        warnings.warn(f"Fout bij het ophalen van woonplaatsdata: {e}, UserWarning")
+        warnings.warn(f"Fout bij het ophalen van woonplaatsdata: {e}", UserWarning)
         return None
 
 

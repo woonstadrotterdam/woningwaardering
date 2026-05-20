@@ -232,8 +232,7 @@
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 1.62
+          }
         },
         {
           "aantal": 34.41,
@@ -247,21 +246,17 @@
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 12.04
+          }
         },
         {
           "criterium": {
             "id": "buitenruimten__aanwezig__prive",
-            "naam": "Buitenruimten aanwezig",
-            "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
-            }
+            "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0
         },
         {
-          "aantal": 39.03,
+          "aantal": 39.0,
           "criterium": {
             "id": "buitenruimten__totaal__prive",
             "naam": "Totaal (privé)",
@@ -270,14 +265,14 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 15.66
+          "punten": 13.65
         },
         {
           "criterium": {
             "id": "buitenruimten__maximering",
             "naam": "Maximaal 15 punten"
           },
-          "punten": -0.66
+          "punten": -0.65
         }
       ]
     },

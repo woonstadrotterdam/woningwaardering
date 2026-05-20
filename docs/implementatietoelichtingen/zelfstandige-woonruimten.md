@@ -1119,6 +1119,9 @@ Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk buitenruimte
 
 De oppervlakten voor gemeenschappelijke en privé-buitenruimten worden afzonderlijk berekend. Als sprake is van meerdere buitenruimten die tot dezelfde categorie behoren (privé of gemeenschappelijk) dan wordt per categorie de oppervlakte van die meerdere buitenruimtes opgeteld en afgerond op twee decimalen. Daarna wordt de oppervlakte van beide categorieën bij elkaar opgeteld. In totaal kan maximaal 15 punten worden toegekend.
 
+> [!NOTE]
+> De oppervlakte van beide categorieën kan niet bij elkaar opgeteld worden, omdat er voor privébuitenruimten een ander aantal punten per m2 wordt berekend dan voor gemeenschappelijke buitenruimten. We volgen hierin de rekenmethode uit de wet, waarin staat: Voor afronden wordt gebruik gemaakt van dezelfde methodiek als beschreven bij [rubriek 1 en 2](#2111-afronden-op-hele-m²).
+
 ### 2.9 Rubriek 9: Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
 
 {==
@@ -1440,6 +1443,8 @@ Voor het toepassen van deze aparte berekeningsmethode moet de woning voldoen aan
 
 > [!NOTE]
 > Wij gaan er vanuit dat de 40m2 verwijst naar de gebruiksoppervlakte van de woning.
+>
+> Het COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats waarin de eenheid zich bevindt. Hiervoor dient de BAG-woonplaatscode in het attribuut `code` van de woonplaats op het adres van de eenheid gespecificeerd te zijn. Indien dit attribuut niet gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en huisnummertoevoeging bij het Kadaster opgevraagd in welke woonplaats een eenheid zich bevindt. Hierbij is het van belang dat deze waarden overeenkomen met de BAG-registratie.
 
 Alleen als de bovenstaande eisen wordt voldaan aan al deze eisen dient bij de berekening van de WOZ-waarde gerekend te worden met de volgende kengetallen:
 

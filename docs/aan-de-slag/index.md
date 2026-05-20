@@ -290,8 +290,7 @@ with open(
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 1.1
+          }
         },
         {
           "aantal": 3.14,
@@ -305,8 +304,7 @@ with open(
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 1.1
+          }
         },
         {
           "aantal": 49.11,
@@ -320,8 +318,7 @@ with open(
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 17.19
+          }
         },
         {
           "aantal": 15.93,
@@ -335,21 +332,17 @@ with open(
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 5.57
+          }
         },
         {
           "criterium": {
             "id": "buitenruimten__aanwezig__prive",
-            "naam": "Buitenruimten aanwezig",
-            "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
-            }
+            "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0
         },
         {
-          "aantal": 71.32,
+          "aantal": 71.0,
           "criterium": {
             "id": "buitenruimten__totaal__prive",
             "naam": "Totaal (privé)",
@@ -358,14 +351,14 @@ with open(
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 26.96
+          "punten": 24.85
         },
         {
           "criterium": {
             "id": "buitenruimten__maximering",
             "naam": "Maximaal 15 punten"
           },
-          "punten": -11.96
+          "punten": -11.85
         }
       ]
     },
@@ -646,13 +639,13 @@ with open(
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Verkoeling en verwarming          | Totaal                                                                      |              |                     |   14.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
-| Buitenruimten                     | Totaal (privé)                                                              |        71.32 | Vierkante meter, m2 |   26.96 |         |
-| Buitenruimten                     |  - Balkon 1                                                                 |       [3.14] | Vierkante meter, m2 |  [1.10] |         |
-| Buitenruimten                     |  - Balkon 2                                                                 |       [3.14] | Vierkante meter, m2 |  [1.10] |         |
-| Buitenruimten                     |  - Tuin                                                                     |      [49.11] | Vierkante meter, m2 | [17.19] |         |
-| Buitenruimten                     |  - Dakterras                                                                |      [15.93] | Vierkante meter, m2 |  [5.57] |         |
-| Buitenruimten                     |  - Buitenruimten aanwezig                                                   |              |                     |  [2.00] |         |
-| Buitenruimten                     | Maximaal 15 punten                                                          |              |                     |  -11.96 |         |
+| Buitenruimten                     | Privé buitenruimten aanwezig                                                |              |                     |    2.00 |         |
+| Buitenruimten                     | Totaal (privé)                                                              |        71.00 | Vierkante meter, m2 |   24.85 |         |
+| Buitenruimten                     |  - Balkon 1                                                                 |       [3.14] | Vierkante meter, m2 |         |         |
+| Buitenruimten                     |  - Balkon 2                                                                 |       [3.14] | Vierkante meter, m2 |         |         |
+| Buitenruimten                     |  - Tuin                                                                     |      [49.11] | Vierkante meter, m2 |         |         |
+| Buitenruimten                     |  - Dakterras                                                                |      [15.93] | Vierkante meter, m2 |         |         |
+| Buitenruimten                     | Maximaal 15 punten                                                          |              |                     |  -11.85 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
 | Buitenruimten                     | Totaal                                                                      |              |                     |   15.00 |         |
 +-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+---------+---------+
