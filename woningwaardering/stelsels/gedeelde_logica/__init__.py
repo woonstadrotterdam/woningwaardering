@@ -5,12 +5,13 @@ from .gemeenschappelijke_parkeerruimten import (
 from .keuken import waardeer_keuken
 from .oppervlakte_van_overige_ruimten import waardeer_oppervlakte_van_overige_ruimte
 from .oppervlakte_van_vertrekken import waardeer_oppervlakte_van_vertrek
-from .sanitair import waardeer_sanitair
+from .sanitair import bouwkundige_elementen_naar_installaties, waardeer_sanitair
 from .verkoeling_en_verwarming import (
     waardeer_verkoeling_en_verwarming,
 )
 
 __all__ = [
+    "bouwkundige_elementen_naar_installaties",
     "waardeer_bijzondere_voorzieningen",
     "waardeer_oppervlakte_van_vertrek",
     "waardeer_oppervlakte_van_overige_ruimte",
