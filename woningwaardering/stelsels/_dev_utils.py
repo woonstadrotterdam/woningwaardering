@@ -9,6 +9,9 @@ from loguru import logger
 
 from woningwaardering._logging import verkort_path
 from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
+    bouwkundige_elementen_naar_installaties,
+)
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -98,18 +101,24 @@ class DevelopmentContext:
         return eenheid_input
 
     def waardeer(
-        self, eenheid_input: EenhedenEenheid | str
+        self,
+        eenheid_input: EenhedenEenheid | str,
+        voorkom_duplicaten: bool = False,
     ) -> WoningwaarderingResultatenWoningwaarderingResultaat:
         """
         Berekent de punten voor een stelselgroep of stelsel voor een eenheid en print het resultaat
 
         Args:
             eenheid_input (EenhedenEenheid | str): Het eenheid object of het pad naar het eenheid object in een json bestand.
+            voorkom_duplicaten (bool): Of duplicaten voorkomen moeten worden. Standaard is False.
 
         Returns:
             WoningwaarderingResultatenWoningwaarderingResultaat: Het resultaat van de berekening.
         """
         eenheid = self._load_eenheid(eenheid_input)
+
+        bouwkundige_elementen_naar_installaties(eenheid, voorkom_duplicaten)
+
         resultaat = self.instance.waardeer(eenheid)
 
         if isinstance(resultaat, WoningwaarderingResultatenWoningwaarderingGroep):
