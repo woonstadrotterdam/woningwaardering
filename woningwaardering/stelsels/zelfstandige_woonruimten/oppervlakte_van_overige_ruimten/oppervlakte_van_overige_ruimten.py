@@ -9,6 +9,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_overige_ruimte,
 )
 from woningwaardering.stelsels.utils import (
+    classificeer_ruimte,
     gedeeld_met_eenheden,
     rond_af,
     rond_af_op_kwart,
@@ -20,9 +21,13 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
+    Ruimtedetailsoort,
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class OppervlakteVanOverigeRuimten(Stelselgroep):
@@ -58,8 +63,45 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             if not gedeeld_met_eenheden(ruimte)
         ]
 
+        totaal_oppervlakte = sum(
+            (
+                rond_af(ruimte.oppervlakte, decimalen=2)
+                for ruimte in ruimten
+                if ruimte.oppervlakte is not None
+                and classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
+            ),
+            start=Decimal("0"),
+        )
+
         for ruimte in ruimten:
-            woningwaarderingen = waardeer_oppervlakte_van_overige_ruimte(ruimte)
+            woningwaarderingen = list(waardeer_oppervlakte_van_overige_ruimte(ruimte))
+
+            if (
+                ruimte.detail_soort == Ruimtedetailsoort.zolder
+                and heeft_bouwkundig_element(
+                    ruimte, Bouwkundigelementdetailsoort.vlizotrap
+                )
+                and classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
+            ):
+                zolder_opp = rond_af(ruimte.oppervlakte, decimalen=2)
+                correctie = min(
+                    Decimal("5"),
+                    (
+                        rond_af(totaal_oppervlakte, decimalen=0)
+                        - rond_af(totaal_oppervlakte - zolder_opp, decimalen=0)
+                    )
+                    * Decimal("0.75"),
+                )
+                for woningwaardering in woningwaarderingen:
+                    if (
+                        woningwaardering.criterium is not None
+                        and woningwaardering.criterium.id is not None
+                        and woningwaardering.criterium.id.endswith(
+                            "__correctie_zolder_zonder_vaste_trap"
+                        )
+                    ):
+                        woningwaardering.punten = float(correctie * Decimal("-1"))
+                        break
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
