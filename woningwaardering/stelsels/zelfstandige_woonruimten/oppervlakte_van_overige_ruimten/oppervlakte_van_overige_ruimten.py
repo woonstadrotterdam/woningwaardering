@@ -76,6 +76,11 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         for ruimte in ruimten:
             woningwaarderingen = list(waardeer_oppervlakte_van_overige_ruimte(ruimte))
 
+            # 2.2.2.3 Zolderruimte zonder vaste trap
+            # Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden aangemerkt en er is geen vaste trap naar de zolder, 
+            # dan worden er 5 punten afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend.
+            # Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is. 
+            # Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
             if (
                 ruimte.detail_soort == Ruimtedetailsoort.zolder
                 and heeft_bouwkundig_element(
