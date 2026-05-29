@@ -246,18 +246,18 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
 
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
 
-            oppervlakte_vertrekken = list(waardeer_oppervlakte_van_vertrek(ruimte))
+            waarderingen_vertrek = list(waardeer_oppervlakte_van_vertrek(ruimte))
 
-            oppervlakte_van_overige_ruimten = list(
+            waarderingen_overige_ruimten = list(
                 waardeer_oppervlakte_van_overige_ruimte(ruimte)
             )
 
-            if oppervlakte_vertrekken or oppervlakte_van_overige_ruimten:
-                if oppervlakte_vertrekken:
-                    oppervlakte_resultaat = oppervlakte_vertrekken[0]
+            if waarderingen_vertrek or waarderingen_overige_ruimten:
+                if waarderingen_vertrek:
+                    oppervlakte_resultaat = waarderingen_vertrek[0]
                     punten_per_m2 = Decimal("1.0")
                 else:
-                    oppervlakte_resultaat = oppervlakte_van_overige_ruimten[0]
+                    oppervlakte_resultaat = waarderingen_overige_ruimten[0]
                     punten_per_m2 = Decimal("0.75")
 
                 punten = (
@@ -302,8 +302,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     )
                 )
 
-                if not oppervlakte_vertrekken:
-                    for waardering in oppervlakte_van_overige_ruimten:
+                if not waarderingen_vertrek:
+                    for waardering in waarderingen_overige_ruimten:
                         if (
                             waardering.criterium is None
                             or waardering.criterium.id is None
