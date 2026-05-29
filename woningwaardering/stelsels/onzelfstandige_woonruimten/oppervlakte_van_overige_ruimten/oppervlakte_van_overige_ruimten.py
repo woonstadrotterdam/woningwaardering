@@ -73,10 +73,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
-        # bereken vooraf het totale (op 2 decimalen afgeronde) oppervlak van de overige
-        # ruimten per gedeeld-met-groep. Dit is nodig om de correctie voor een zolder
-        # zonder vaste trap te baseren op het verschil dat de zolder maakt in het op hele
-        # m² afgeronde groepstotaal, zodat het rondingsresidu van ±0,25 punt verdwijnt.
+        # Bereken vooraf het totale (op 2 decimalen afgeronde) oppervlak van de overige
+        # ruimten per gedeeld-met-groep. De zoldercorrectie (vlizotrap) gebruikt het
+        # verschil in het op hele m² afgeronde groepstotaal met en zonder zolder.
         totaal_oppervlakte_per_groep: defaultdict[int, Decimal] = defaultdict(Decimal)
         for ruimte in eenheid.ruimten or []:
             if ruimte.gedeeld_met_aantal_eenheden:
@@ -96,11 +95,10 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             woningwaarderingen = list(waardeer_oppervlakte_van_overige_ruimte(ruimte))
 
             # 2.2.2.3 Zolderruimte zonder vaste trap
-            # De correctie wordt gebaseerd op het verschil dat de zolder maakt in het op
-            # hele m² afgeronde groepstotaal, in plaats van op de losse afgeronde
-            # zolderoppervlakte. Daarmee verdwijnt het rondingsresidu van ±0,25 punt
-            # (zelfde formule als bij de zelfstandige variant). Bij gedeelde correcties
-            # blijft de bestaande deling door gedeeld_met_aantal_onzelfstandige_woonruimten
+            # Correctie op basis van het verschil dat de zolder maakt in het op hele m²
+            # afgeronde groepstotaal (niet op de los afgeronde zolderoppervlakte).
+            # Zelfde formule als bij de zelfstandige variant. Bij gedeelde correcties
+            # blijft de deling door gedeeld_met_aantal_onzelfstandige_woonruimten
             # van toepassing.
             if (
                 ruimte.detail_soort == Ruimtedetailsoort.zolder
