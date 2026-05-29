@@ -1,0 +1,1 @@
+Gedeelde berging 6 m² + gedeelde zolder 6,33 m² (vlizotrap), 2 adressen. Correctie vóór deling: min(5, rond_af_op_kwart(6,33 × 0,75)) = **−4,75** (hoogste kwart onder de cap van 5; niet door min(5, …) begrensd). In GBA: correctieregel **−2,375** per adres (−4,75 / 2).
