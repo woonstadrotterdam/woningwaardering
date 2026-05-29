@@ -45,8 +45,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
     @staticmethod
     def _gedeeld_met_groep(ruimte: EenhedenRuimte) -> int:
-        """Bepaalt de gedeeld-met-groep van een ruimte: het aantal onzelfstandige
-        woonruimten waarmee de ruimte gedeeld wordt, of 1 voor een privéruimte."""
+        """Bepaalt gedeeld_met_aantal van een ruimte: het aantal onzelfstandige
+        woonruimten waarmee de ruimte gedeeld wordt; sleutel 1 = privé."""
         if (
             utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
             and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
@@ -74,9 +74,12 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
         # Bereken vooraf het totale (op 2 decimalen afgeronde) oppervlak van de overige
-        # ruimten per gedeeld-met-groep. De zoldercorrectie (vlizotrap) gebruikt het
-        # verschil in het op hele m² afgeronde groepstotaal met en zonder zolder.
-        totaal_oppervlakte_per_groep: defaultdict[int, Decimal] = defaultdict(Decimal)
+        # ruimten per gedeeld_met_aantal (sleutel 1 = privé). De zoldercorrectie
+        # (vlizotrap) gebruikt het verschil in het op hele m² afgeronde totaal per
+        # gedeeld_met_aantal met en zonder zolder.
+        totaal_oppervlakte_per_gedeeld_met_aantal: defaultdict[int, Decimal] = (
+            defaultdict(Decimal)
+        )
         for ruimte in eenheid.ruimten or []:
             if ruimte.gedeeld_met_aantal_eenheden:
                 continue
@@ -84,9 +87,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 ruimte.oppervlakte is not None
                 and utils.classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
             ):
-                groep = self._gedeeld_met_groep(ruimte)
-                totaal_oppervlakte_per_groep[groep] += utils.rond_af(
-                    ruimte.oppervlakte, decimalen=2
+                gedeeld_met_aantal = self._gedeeld_met_groep(ruimte)
+                totaal_oppervlakte_per_gedeeld_met_aantal[gedeeld_met_aantal] += (
+                    utils.rond_af(ruimte.oppervlakte, decimalen=2)
                 )
 
         for ruimte in eenheid.ruimten or []:
@@ -96,7 +99,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
             # 2.2.2.3 Zolderruimte zonder vaste trap
             # Correctie op basis van het verschil dat de zolder maakt in het op hele m²
-            # afgeronde groepstotaal (niet op de los afgeronde zolderoppervlakte).
+            # afgeronde totaal per gedeeld_met_aantal (niet op de los afgeronde
+            # zolderoppervlakte).
             # Zelfde formule als bij de zelfstandige variant. Bij gedeelde correcties
             # blijft de deling door gedeeld_met_aantal_onzelfstandige_woonruimten
             # van toepassing.
@@ -108,7 +112,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 )
                 and utils.classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
             ):
-                totaal_oppervlakte = totaal_oppervlakte_per_groep[
+                totaal_oppervlakte = totaal_oppervlakte_per_gedeeld_met_aantal[
                     self._gedeeld_met_groep(ruimte)
                 ]
                 zolder_opp = utils.rond_af(ruimte.oppervlakte, decimalen=2)
