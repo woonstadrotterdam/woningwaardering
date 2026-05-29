@@ -246,18 +246,18 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
 
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
 
-            oppervlakte_vertrekken = list(waardeer_oppervlakte_van_vertrek(ruimte))
+            waarderingen_vertrek = list(waardeer_oppervlakte_van_vertrek(ruimte))
 
-            oppervlakte_van_overige_ruimten = list(
+            waarderingen_overige_ruimten = list(
                 waardeer_oppervlakte_van_overige_ruimte(ruimte)
             )
 
-            if oppervlakte_vertrekken or oppervlakte_van_overige_ruimten:
-                if oppervlakte_vertrekken:
-                    oppervlakte_resultaat = oppervlakte_vertrekken[0]
+            if waarderingen_vertrek or waarderingen_overige_ruimten:
+                if waarderingen_vertrek:
+                    oppervlakte_resultaat = waarderingen_vertrek[0]
                     punten_per_m2 = Decimal("1.0")
                 else:
-                    oppervlakte_resultaat = oppervlakte_van_overige_ruimten[0]
+                    oppervlakte_resultaat = waarderingen_overige_ruimten[0]
                     punten_per_m2 = Decimal("0.75")
 
                 punten = (
@@ -277,18 +277,20 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
                     continue
 
+                bovenliggende_criterium_id = str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        gedeeld_met_aantal=aantal_eenheden,
+                        gedeeld_met_soort=GedeeldMetSoort.adressen,
+                        is_totaal=True,
+                    )
+                )
+
                 waarderigen.append(
                     self._maak_woningwaardering(
                         punten=punten,
                         criterium=f"{oppervlakte_resultaat.criterium.naam}: {ruimte.soort.naam}",
-                        bovenliggende_criterium_id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=aantal_eenheden,
-                                gedeeld_met_soort=GedeeldMetSoort.adressen,
-                                is_totaal=True,
-                            )
-                        ),
+                        bovenliggende_criterium_id=bovenliggende_criterium_id,
                         aantal=oppervlakte_resultaat.aantal,
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
                         id=str(
@@ -299,6 +301,44 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         ),
                     )
                 )
+
+                if not waarderingen_vertrek:
+                    for waardering in waarderingen_overige_ruimten:
+                        if (
+                            waardering.criterium is None
+                            or waardering.criterium.id is None
+                            or not waardering.criterium.id.endswith(
+                                "__correctie_zolder_zonder_vaste_trap"
+                            )
+                            or waardering.punten is None
+                            or waardering.criterium.naam is None
+                        ):
+                            continue
+
+                        correctie_punten = (
+                            Decimal(str(waardering.punten))
+                            / Decimal(str(aantal_eenheden))
+                            / Decimal(str(aantal_onzelfstandige_woonruimten))
+                        )
+                        gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
+                            aantal_eenheden
+                        ] += correctie_punten
+
+                        waarderigen.append(
+                            self._maak_woningwaardering(
+                                punten=correctie_punten,
+                                criterium=waardering.criterium.naam,
+                                bovenliggende_criterium_id=bovenliggende_criterium_id,
+                                id=str(
+                                    CriteriumId(
+                                        stelselgroep=self.stelselgroep,
+                                        ruimte_id=ruimte.id,
+                                        criterium="correctie_zolder_zonder_vaste_trap",
+                                    )
+                                ),
+                            )
+                        )
+                        break
 
         return gedeeld_met_punten, waarderigen
 
