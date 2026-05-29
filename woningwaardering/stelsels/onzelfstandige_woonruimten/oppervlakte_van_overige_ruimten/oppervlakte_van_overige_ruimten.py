@@ -44,9 +44,11 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         )
 
     @staticmethod
-    def _gedeeld_met_groep(ruimte: EenhedenRuimte) -> int:
-        """Bepaalt gedeeld_met_aantal van een ruimte: het aantal onzelfstandige
-        woonruimten waarmee de ruimte gedeeld wordt; sleutel 1 = privé."""
+    def _gedeeld_met_aantal(ruimte: EenhedenRuimte) -> int:
+        """Bepaalt gedeeld_met_aantal van een ruimte.
+
+        Sleutel 1 = privé; anders ``gedeeld_met_aantal_onzelfstandige_woonruimten``.
+        """
         if (
             utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
             and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
@@ -87,7 +89,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 ruimte.oppervlakte is not None
                 and utils.classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
             ):
-                gedeeld_met_aantal = self._gedeeld_met_groep(ruimte)
+                gedeeld_met_aantal = self._gedeeld_met_aantal(ruimte)
                 totaal_oppervlakte_per_gedeeld_met_aantal[gedeeld_met_aantal] += (
                     utils.rond_af(ruimte.oppervlakte, decimalen=2)
                 )
@@ -113,7 +115,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 and utils.classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
             ):
                 totaal_oppervlakte = totaal_oppervlakte_per_gedeeld_met_aantal[
-                    self._gedeeld_met_groep(ruimte)
+                    self._gedeeld_met_aantal(ruimte)
                 ]
                 zolder_opp = utils.rond_af(ruimte.oppervlakte, decimalen=2)
                 correctie = min(
