@@ -10,10 +10,11 @@ De primaire context is de publieke `woningwaardering`-package. Lokale of organis
 - `pyproject.toml` bevat de package-metadata, Python-versie en vastgelegde VERA-databronnen.
 - `docs/introductie/opzet.md` beschrijft de repository-opzet, waarschuwingen, lookup-tabellen en criterium-id's.
 - `docs/implementatietoelichtingen/` legt per stelselgroep vast welke beleidsboekregels wel of niet zijn geïmplementeerd en waarom.
+- Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Vanaf deze pagina's klik je door naar de algemene toelichting en de stelselgroepen.
 - `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, naamgeving, tests, data, logging en releases.
-- https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6
+- [Wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6) (Artikel 6, Besluit huurprijzen woonruimte)
 
-Controleer deze bronnen bij wijzigingen in domeinlogica. Dit bestand vat de gedeelde taal samen; het vervangt de bestaande documentatie niet.
+Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen is de volgorde van autoriteit: **wettekst > online beleidsboek > implementatietoelichting**. De implementatietoelichting is een kopie van het online beleidsboek en kan achterlopen; bij twijfel of tegenstrijdigheid gaat de hoger geplaatste bron voor, maar tegenstrijdigheden dienen altijd vermeld te worden. Zie de definities _Beleidsboek_ en _Implementatietoelichting_ hieronder voor hun relatie.
 
 ## Projectgrenzen
 
@@ -55,11 +56,11 @@ De datum waarop de waardering wordt bepaald. De peildatum bepaalt onder meer of 
 
 ### Beleidsboek
 
-De door de Huurcommissie gepubliceerde uitleg van de [wet van het WWS](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6). Beleidsboektekst is de inhoudelijke basis voor de implementatie, maar kan interpretatieruimte of technische beperkingen bevatten.
+De door de Huurcommissie gepubliceerde uitleg van de [wet van het WWS](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6). Het online beleidsboek is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Beleidsboektekst is de inhoudelijke basis voor de implementatie, maar kan interpretatieruimte of technische beperkingen bevatten.
 
 ### Implementatietoelichting
 
-Een document waarin per stelselgroep staat hoe beleidsboekregels zijn vertaald naar code. Niet-geïmplementeerde passages worden doorgestreept; keuzes of interpretaties staan in toelichtende blokken. Deze staan in `docs/implementatietoelichtingen/`.
+Een markdown-kopie van het online beleidsboek met onze interpretaties en doorhalingen. Per stelselgroep staat hoe beleidsboekregels zijn vertaald naar code. Niet-geïmplementeerde passages worden doorgestreept; keuzes of interpretaties staan in toelichtende blokken. Deze staan in `docs/implementatietoelichtingen/`. De kopie kan achterlopen op het online beleidsboek; raadpleeg daarom bij puntberekeningen zowel de implementatietoelichting als het actuele online beleidsboek, naast de wettekst. Wijkt het online beleidsboek af, dan is dat leidend en is de afwijking een signaal dat onze toelichting bijgewerkt moet worden.
 
 ### VERA
 

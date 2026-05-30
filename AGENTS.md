@@ -7,7 +7,7 @@ Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen
 - Lees `CONTEXT.md` voor de gedeelde domeintaal.
 - Lees `README.md` voor doel, disclaimer en actuele beleidsboek- en VERA-ankers.
 - Lees `docs/introductie/opzet.md` voor repository-opzet, warnings, lookup-tabellen en criterium-id's.
-- Lees bij wijzigingen in stelselgroepen de relevante pagina's in `docs/implementatietoelichtingen/` en zoek regels in de wettekst: https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6
+- Lees bij wijzigingen in domeinlogica eerst de relevante pagina's in `docs/implementatietoelichtingen/`, check tegen het online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) en de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6), en pas daarna code aan. Zie `CONTEXT.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
 - Lees bij ontwikkelwerk de relevante pagina in `docs/voor-ontwikkelaars/`, vooral `testing.md`, `naamgeving.md`, `data.md` en `logging.md`.
 
 ## Omgeving En Commands
@@ -77,7 +77,7 @@ Gebruik [`.cursor/skills/grill-me-with-docs/SKILL.md`](.cursor/skills/grill-me-w
 - nieuwe features, gedragswijzigingen, waarschuwingen of onduidelijke requirements
 - terminologie, projectgrenzen of documentatie die moet worden aangescherpt
 
-Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, implementatietoelichtingen en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
+Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, implementatietoelichtingen, online beleidsboek/wettekst en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
 
 ## Documentatie
 
@@ -89,7 +89,7 @@ Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, im
 
 ## Domeinregels
 
-- Behandel het beleidsboek, de implementatietoelichtingen en de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6) als leidend voor de interpretatie van puntberekeningen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
+- Behandel [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6), online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) en implementatietoelichtingen als leidend voor puntberekeningen, in die volgorde van autoriteit (zie `CONTEXT.md`). Check zowel onze implementatietoelichting als het actuele online beleidsboek, omdat onze kopie kan achterlopen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
