@@ -1,6 +1,6 @@
 import asyncio
 import warnings
-from datetime import date, datetime, time
+from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 from functools import wraps
 from importlib.resources import files
@@ -347,7 +347,6 @@ def energieprestatie_met_geldig_label(
     vereiste_attributen: List[
         Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]
     ] = [
-        ("registratiedatum", lambda ep: ep.registratiedatum is not None),
         ("soort", lambda ep: ep.soort is not None),
         ("status", lambda ep: ep.status is not None),
         ("begindatum", lambda ep: ep.begindatum is not None),
@@ -393,15 +392,9 @@ def energieprestatie_met_geldig_label(
             )
             continue
 
-        if energieprestatie.registratiedatum and (
-            energieprestatie.registratiedatum
-            <= (
-                datetime.combine(peildatum, time.min).astimezone()
-                - relativedelta(years=10)
-            )
-        ):
+        if energieprestatie.begindatum <= (peildatum - relativedelta(years=10)):
             logger.debug(
-                f"Eenheid ({eenheid.id}): registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
+                f"Eenheid ({eenheid.id}): opname van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
             )
             continue
 
