@@ -67,6 +67,17 @@ uv run pre-commit run --all-files --hook-stage pre-push
 
 - Gebruik de PR-template in [`.github/pull_request_template.md`](.github/pull_request_template.md).
 
+## Skills
+
+Gebruik [`.cursor/skills/grill-me-with-docs/SKILL.md`](.cursor/skills/grill-me-with-docs/SKILL.md) **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale wijziging. Triggers (niet exhaustief):
+
+- plannen, ontwerpen, architectuur of refactor-voorstellen
+- domeinlogica, stelselgroepen, beleidsregel-interpretatie of VERA-modellering
+- nieuwe features, gedragswijzigingen, waarschuwingen of onduidelijke requirements
+- terminologie, projectgrenzen of documentatie die moet worden aangescherpt
+
+Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, implementatietoelichtingen en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
+
 ## Documentatie
 
 - Controleer bij elke gedrags-, beleids- of datamodelwijziging of documentatie moet worden bijgewerkt.
@@ -85,6 +96,6 @@ uv run pre-commit run --all-files --hook-stage pre-push
 ## Git En Veiligheid
 
 - Revert geen bestaande wijzigingen die je niet zelf hebt gemaakt.
-- Commit of push alleen wanneer de gebruiker daar expliciet om vraagt.
+- Commit of push alleen wanneer de gebruiker daar expliciet om vraagt; volg dan [`.cursor/skills/managing-commits/SKILL.md`](.cursor/skills/managing-commits/SKILL.md).
 - Voeg geen lokale, niet-gecommitte of organisatie-interne datastromen toe aan de publieke projectcontext.
 - Commit geen secrets, credentials of lokale configuratiebestanden.
