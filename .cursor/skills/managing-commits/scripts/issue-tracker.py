@@ -22,8 +22,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-# Cache file location (in .claude for project-specific storage)
-CACHE_DIR = ".claude/github-workflows"
+# Cache file location (in .cursor for project-specific storage)
+CACHE_DIR = ".cursor/github-workflows"
 CACHE_FILE = "active-issues.json"
 
 

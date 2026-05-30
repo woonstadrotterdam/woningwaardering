@@ -16,8 +16,8 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-# Environment file location (in .claude for project-specific storage)
-ENV_DIR = ".claude/github-workflows"
+# Environment file location (in .cursor for project-specific storage)
+ENV_DIR = ".cursor/github-workflows"
 ENV_FILE = "env.json"
 
 
@@ -268,7 +268,7 @@ def get_suggested_scopes():
         "build",
         "coverage",
         ".git",
-        ".claude",
+        ".cursor",
         "__pycache__",
         ".venv",
         "venv",
@@ -336,7 +336,7 @@ def get_label_stocktake():
 
 def get_issue_cache_info():
     """Get information about the issue cache."""
-    cache_path = Path(".claude/github-workflows") / "active-issues.json"
+    cache_path = Path(ENV_DIR) / "active-issues.json"
 
     if not cache_path.exists():
         return None

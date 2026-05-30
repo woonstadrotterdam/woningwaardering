@@ -208,7 +208,7 @@ python .cursor/skills/managing-commits/scripts/commit-analyzer.py report
 
 **Automatic issue detection and referencing**:
 
-The skill integrates with the issue tracking cache (`.claude/github-workflows/active-issues.json`) to automatically detect and suggest issue references.
+The skill integrates with the issue tracking cache (`.cursor/github-workflows/active-issues.json`) to automatically detect and suggest issue references.
 
 **Issue detection methods**:
 
