@@ -392,7 +392,9 @@ def energieprestatie_met_geldig_label(
             )
             continue
 
-        if energieprestatie.begindatum <= (peildatum - relativedelta(years=10)):
+        if energieprestatie.begindatum and energieprestatie.begindatum <= (
+            peildatum - relativedelta(years=10)
+        ):
             logger.debug(
                 f"Eenheid ({eenheid.id}): opname van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
             )
@@ -404,7 +406,7 @@ def energieprestatie_met_geldig_label(
             f" status={energieprestatie.status.naam if energieprestatie.status else None}"
             f" label={energieprestatie.label.naam if energieprestatie.label else None}"
             f" waarde={energieprestatie.waarde} begindatum={energieprestatie.begindatum}"
-            f" einddatum={energieprestatie.einddatum} registratiedatum={energieprestatie.registratiedatum.date() if energieprestatie.registratiedatum else None}"
+            f" einddatum={energieprestatie.einddatum}"
         )
         return energieprestatie
 

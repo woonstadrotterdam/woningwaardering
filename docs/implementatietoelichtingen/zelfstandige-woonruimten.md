@@ -607,6 +607,8 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 5. Energieprestatie niet afgegeven voor de individuele woonruimte  
     Het kan voorkomen dat een wooncomplex of ander gebouw bestaat uit meerdere (zelfstandige) woonruimten. Om voor waardering in aanmerking te kunnen komen, moet voor de individuele zelfstandige woonruimte geldige energieprestatie zijn afgegeven. Een energielabel voor het hele complex/gebouw wordt niet in de waardering meegenomen.
 
+> Voor de periode 2015–2021 (2.4.2) en de 10-jaarsgeldigheid (2.4.3 #3) gebruiken wij de **opnamedatum**, niet de registratiedatum bij RVO. In VERA is dat `EenhedenEnergieprestatie.begindatum`. Beleidsboek 2.4.3 #4 spreekt over "afgegeven" labels in 2015–2021; wij volgen "opgenomen" uit 2.4.2 en 2.4.3 #3, omdat het beleidsboek daarbij uitgaat van de opnamemethode.
+
 #### 2.4.4 Punten voor geldige energieprestaties
 
 Bij de puntentoekening voor de energieprestatie wordt onderscheid gemaakt tussen eengezinswoningen en meergezinswoningen (ook wel: duplexwoningen). Het verschil tussen deze woningen is dat bij een eengezinswoning geen andere woningen aanwezig zijn boven of onder de woning. Een eengezinswoning is dus bijvoorbeeld om een rijtjeshuis, twee-onder-een-kapwoning of vrijstaande woning. Alle woningen die geen eengezinswoning zijn, zijn meergezinswoningen.
