@@ -1,23 +1,24 @@
 ## Samenvatting
 
 <!-- Wat verandert en waarom? -->
+<!-- Vink opties aan met ☑ (niet met - [x]; GitHub telt dat als PR-tasks). -->
 
 ## Gerelateerde issue(s)
 
 <!-- Kies één optie. Gebruik Closes/Fixes/Resolves #123 als het issue met deze PR wordt opgelost. -->
 
-- [ ] Gerelateerde issue: <!-- bijv. Closes #123 of #456 -->
-- [ ] Geen gerelateerde issue — waarom is deze PR nodig?
+- ☐ Gerelateerde issue: <!-- bijv. Closes #123 of #456 -->
+- ☐ Geen gerelateerde issue — waarom is deze PR nodig?
 
 <!-- Indien geen issue: leg hier kort uit waarom deze wijziging nodig is. -->
 
 ## Soort wijziging
 
-- [ ] Domeinlogica / puntberekening (vul **Bronverwijzing** hieronder in)
-- [ ] Documentatie
-- [ ] Stijl / refactor (geen gedragswijziging)
-- [ ] CI / tooling / build
-- [ ] Overig
+- ☐ Domeinlogica / puntberekening (vul **Bronverwijzing** hieronder in)
+- ☐ Documentatie
+- ☐ Stijl / refactor (geen gedragswijziging)
+- ☐ CI / tooling / build
+- ☐ Overig
 
 ## Bronverwijzing
 
@@ -30,8 +31,8 @@
 
 **Bron:**
 
-- [ ] Beleidsboek Huurcommissie
-- [ ] Wettekst ([wetten.overheid.nl](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6))
+- ☐ Beleidsboek Huurcommissie
+- ☐ Wettekst ([wetten.overheid.nl](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6))
 
 **Quote:**
 
@@ -43,7 +44,7 @@
 
 <!-- Handmatige follow-ups die CI niet afdwingt. -->
 
-- [ ] Bronverwijzing ingevuld (bij domeinlogica)
-- [ ] Tests toegevoegd/aangepast (bij gewijzigde domeinlogica)
-- [ ] Waarschuwings- of errorlogica bewust gecontroleerd (indien van toepassing)
-- [ ] Documentatie geüpdatet
+- ☐ Bronverwijzing ingevuld (bij domeinlogica)
+- ☐ Tests toegevoegd/aangepast (bij gewijzigde domeinlogica)
+- ☐ Waarschuwings- of errorlogica bewust gecontroleerd (indien van toepassing)
+- ☐ Documentatie geüpdatet
