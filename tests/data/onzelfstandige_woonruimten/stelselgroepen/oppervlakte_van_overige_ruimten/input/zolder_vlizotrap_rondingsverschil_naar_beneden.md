@@ -1,0 +1,1 @@
+Privé berging 6,00 m² + privé zolder 4,40 m² (vlizotrap). Totaal 10,40 m² → afgerond 10 m² → 7,50 punten. Zonder zolder: 6,00 → 6 m² → 4,50 punten. Zoldercorrectie volgt het verschil in het afgeronde groepstotaal; stelselgroep moet 4,50 punten zijn (niet 4,25).

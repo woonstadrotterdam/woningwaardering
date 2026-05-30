@@ -1,0 +1,1 @@
+Berging 6,85 m² + zolder 2,67 m² (vlizotrap). Totaal 9,52 m² → afgerond 10 m² → 7,50 punten. Zonder zolder: 6,85 → 7 m² → 5,25 punten. Zoldercorrectie volgt het verschil in het afgeronde groepstotaal; stelselgroep moet 5,25 punten zijn (niet 5,50).
