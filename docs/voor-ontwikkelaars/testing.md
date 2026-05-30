@@ -1,6 +1,19 @@
 # Testing
 
-Voor het testen van code wordt het [pytest framework](https://docs.pytest.org/en/8.0.x/index.html) gebruikt. Meer informatie is te vinden over het framework.
+Voor het testen van code wordt het [pytest framework](https://docs.pytest.org/en/8.0.x/index.html) gebruikt.
+
+## Tests uitvoeren
+
+Zorg dat de dev dependencies geïnstalleerd zijn (zie [Installatie](index.md)), en run:
+
+```bash
+uv run python -m pytest
+```
+
+Met geactiveerde `.venv` mag je ook `python -m pytest` gebruiken. Coverage wordt automatisch meegenomen via de pytest-configuratie in `pyproject.toml`.
+
+Na wijzigingen in code of tests draai je ook de pre-commit hooks (dezelfde set als CI); zie [Tests en checks](index.md#tests-en-checks).
+
 Passende tests worden altijd met de nieuw geschreven code opgeleverd.
 Er zijn verschillende "test-scopes" te bedenken, zoals het testen van details en specifieke functies.
 Daarnaast is het testen van een hele keten of stelselgroep-object ook vereist.
@@ -17,7 +30,7 @@ Tests worden toegevoegd aan de `tests`-folder in de root van de repository.
 Voor de structuur in de `tests`-folder wordt dezelfde structuur aangehouden als die in de `woningwaardering`-folder.
 De naam van het bestand waarin de tests staan geschreven is `test_<file_name>.py`.
 Elke testfunctie begint met `test_`, gevolgd door de naam van de functie of class die getest wordt, bijvoorbeeld `def test_<functie_naam>()` of `def test_<ClassNaam>()`.
-Hierin wordt de naam de van de functie of class exact gevolgd.
+Hierin wordt de naam van de functie of class exact gevolgd.
 Voor pytest is `test_` een indicator om de functie te herkennen als een testfunctie.
 
 Stel dat de functionaliteiten van `woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py` getest moeten worden, dan is het pad naar het bijbehorende testbestand `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/test_oppervlakte_van_vertrekken.py`.
@@ -32,10 +45,10 @@ def test_losse_functie() -> None:
 Als er een class getest wordt, bijvoorbeeld `OppervlakteVanVertrekken`, dan is de testfunctie opzet als volgt:
 
 ```python
-def test_OppervlakteVanVertrekken():
+def test_OppervlakteVanVertrekken() -> None:
     opp_v_v = OppervlakteVanVertrekken()
-    assert self.opp_v_v.functie_een() == 1
-    assert self.opp_v_v.functie_twee() == 2
+    assert opp_v_v.functie_een() == 1
+    assert opp_v_v.functie_twee() == 2
 ```
 
 ## Test modellen

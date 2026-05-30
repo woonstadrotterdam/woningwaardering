@@ -12,36 +12,14 @@ Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen
 
 ## Omgeving En Commands
 
+Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [testing.md](docs/voor-ontwikkelaars/testing.md) voor installatie, tests en pre-commit. Kort:
+
 - Gebruik een Python-versie die voldoet aan `requires-python` in `pyproject.toml`.
-- Gebruik [uv](https://docs.astral.sh/uv/) voor dependency management; installeer ontwikkelaarsdependencies met:
-
-```bash
-uv sync --extra dev
-```
-
-- Activeer `.venv` voordat je Python-code, tests of scripts draait (of gebruik `uv run`):
-
-```bash
-source .venv/bin/activate
-```
-
-- Run tests met:
-
-```bash
-uv run python -m pytest
-```
-
-- Run commit-checks met:
-
-```bash
-uv run pre-commit run --all-files
-```
-
-- Run strengere pre-push checks (zelfde set als CI vóór push):
-
-```bash
-uv run pre-commit run --all-files --hook-stage pre-push
-```
+- Gebruik [uv](https://docs.astral.sh/uv/) voor dependency management; installeer ontwikkelaarsdependencies met `uv sync --extra dev`.
+- Activeer `.venv` voordat je Python-code, tests of scripts draait (of gebruik `uv run`).
+- Run tests: `uv run python -m pytest`
+- Run commit-checks: `uv run pre-commit run --all-files`
+- Run pre-push checks: `uv run pre-commit run --all-files --hook-stage pre-push`
 
 ## Codeconventies
 

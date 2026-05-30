@@ -6,11 +6,7 @@ Dit onderdeel bevat informatie over de verschillende datastructuren die gebruikt
 
 De datamodellen in de `woningwaardering` package zijn gebaseerd op de OpenAPI-specificatie van het [VERA BVG domein](https://aedes-datastandaarden.github.io/vera-openapi/Ketenprocessen/BVG.html).
 
-Wanneer je deze modellen wilt bijwerken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) en de dev dependencies zijn geïnstalleerd:
-
-```bash
-pip install -e ".[dev]"
-```
+Wanneer je deze modellen wilt bijwerken, zorg er dan voor dat [Task](https://taskfile.dev/installation/) en de dev dependencies zijn geïnstalleerd (zie [Installatie](index.md)).
 
 Update het versienummer van de VERA OpenAPI-specificatie in `pyproject.toml`
 

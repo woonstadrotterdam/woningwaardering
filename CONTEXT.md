@@ -89,9 +89,9 @@ Een samengestelde identifier voor een criterium in de output. Onderdelen worden 
 
 Een sleutel waarmee criteria logisch gegroepeerd kunnen worden, bijvoorbeeld om submaxima of subtellingen binnen een stelselgroep te berekenen.
 
-### bovenliggendCriterium
+### bovenliggendeCriterium
 
-Een verwijzing van een criterium naar het bovenliggende criterium binnen een criteriumgroep. Het project ondersteunt momenteel geen meerdere niveaus van bovenliggende criteria.
+Een verwijzing van een criterium naar het bovenliggende criterium binnen een criteriumgroep (JSON-veldnaam: `bovenliggendeCriterium`). Het project ondersteunt momenteel geen meerdere niveaus van bovenliggende criteria.
 
 ### UserWarning
 
