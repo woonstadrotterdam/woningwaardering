@@ -63,6 +63,10 @@ uv run pre-commit run --all-files --hook-stage pre-push
 - Denk bij stelselgroepwijzigingen aan zowel detailtests voor specifieke regels als ketentests voor de hele stelselgroep wanneer dat waarde toevoegt.
 - Test geen gegenereerde VERA-code alleen om coverage te verhogen.
 
+## Pull Requests
+
+- Gebruik de PR-template in [`.github/pull_request_template.md`](.github/pull_request_template.md).
+
 ## Documentatie
 
 - Controleer bij elke gedrags-, beleids- of datamodelwijziging of documentatie moet worden bijgewerkt.
@@ -75,7 +79,7 @@ uv run pre-commit run --all-files --hook-stage pre-push
 
 - Behandel het beleidsboek, de implementatietoelichtingen en de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6) als leidend voor de interpretatie van puntberekeningen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
-- Verander waarschuwing- of foutgedrag niet stilzwijgend; dit is onderdeel van het gebruikerscontract.
+- Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
 
 ## Git En Veiligheid
