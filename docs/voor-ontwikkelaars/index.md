@@ -59,4 +59,4 @@ Na code- of testwijzigingen horen pytest en beide pre-commit-stappen (inclusief 
 
 ## Pull requests
 
-Gebruik de PR-template in [`.github/pull_request_template.md`](../../.github/pull_request_template.md). Verwijs naar een gerelateerd issue (`Closes #123` als het issue wordt opgelost) of leg uit waarom er geen issue is. Kies daarna het soort wijziging. Bij domeinlogica lees je eerst de relevante implementatietoelichting en vul je **Bronverwijzing** in: checkbox(es) voor implementatietoelichting, online beleidsboek Huurcommissie en/of wettekst, een quote van de relevante tekst en eventueel een opmerking. Zie `CONTEXT.md` voor de relatie tussen deze bronnen. Bij documentatie, stijl/refactor, CI/tooling of overig sla je Bronverwijzing over. Werk [implementatietoelichtingen](../implementatietoelichtingen/) bij als implementatiestatus of interpretatie verandert.
+Gebruik de PR-template in [`.github/pull_request_template.md`](../../.github/pull_request_template.md). Verwijs naar een gerelateerd issue (`Closes #123` als het issue wordt opgelost) of leg uit welke verbetering je probeert toe te voegen met je PR.
