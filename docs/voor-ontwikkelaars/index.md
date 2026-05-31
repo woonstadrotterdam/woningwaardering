@@ -23,7 +23,21 @@ Voor interactief werk in de shell:
 source .venv/bin/activate
 ```
 
+## Pre-commit
+
+`uv sync --extra dev` installeert het `pre-commit`-programma in `.venv`, maar **registreert geen git-hooks**. Doe dat eenmalig per clone (of nieuwe werkmap):
+
+```bash
+uv run pre-commit install
+```
+
+Hiermee worden hooks voor `git commit` en `git push` geïnstalleerd (zoals in [`.pre-commit-config.yaml`](../../.pre-commit-config.yaml)). Zonder deze stap draaien er bij commit of push geen lokale checks; dezelfde checks draaien dan pas in CI.
+
+Na wijzigingen in `.pre-commit-config.yaml` volstaat meestal opnieuw committen of pushen; bij twijfel `uv run pre-commit install` opnieuw uitvoeren.
+
 ## Tests en checks
+
+Met geïnstalleerde pre-commit-hooks draaien commit- en push-checks automatisch.
 
 Met geactiveerde virtualenv:
 
