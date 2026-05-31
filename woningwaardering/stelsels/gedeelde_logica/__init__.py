@@ -3,7 +3,11 @@ from .gemeenschappelijke_parkeerruimten import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
 from .keuken import waardeer_keuken
-from .oppervlakte_van_overige_ruimten import waardeer_oppervlakte_van_overige_ruimte
+from .oppervlakte_van_overige_ruimten import (
+    bereken_zolder_correctie_zonder_vaste_trap,
+    oppervlaktepunten_overige_ruimte_per_ruimte,
+    waardeer_oppervlakte_van_overige_ruimte,
+)
 from .oppervlakte_van_vertrekken import waardeer_oppervlakte_van_vertrek
 from .sanitair import waardeer_sanitair
 from .verkoeling_en_verwarming import (
@@ -13,6 +17,8 @@ from .verkoeling_en_verwarming import (
 __all__ = [
     "waardeer_bijzondere_voorzieningen",
     "waardeer_oppervlakte_van_vertrek",
+    "bereken_zolder_correctie_zonder_vaste_trap",
+    "oppervlaktepunten_overige_ruimte_per_ruimte",
     "waardeer_oppervlakte_van_overige_ruimte",
     "waardeer_keuken",
     "waardeer_sanitair",

@@ -22,14 +22,11 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     Meeteenheid,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class OppervlakteVanOverigeRuimten(Stelselgroep):
@@ -97,45 +94,14 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         for ruimte in eenheid.ruimten or []:
             if ruimte.gedeeld_met_aantal_eenheden:
                 continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
-            woningwaarderingen = list(waardeer_oppervlakte_van_overige_ruimte(ruimte))
-
-            # 2.2.2.3 Zolderruimte zonder vaste trap
-            # Correctie op basis van het verschil dat de zolder maakt in het op hele m²
-            # afgeronde totaal per gedeeld_met_aantal (niet op de los afgeronde
-            # zolderoppervlakte).
-            # Zelfde formule als bij de zelfstandige variant. Bij gedeelde correcties
-            # blijft de deling door gedeeld_met_aantal_onzelfstandige_woonruimten
-            # van toepassing.
-            if (
-                ruimte.detail_soort == Ruimtedetailsoort.zolder
-                and ruimte.oppervlakte is not None
-                and heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.vlizotrap
+            woningwaarderingen = list(
+                waardeer_oppervlakte_van_overige_ruimte(
+                    ruimte,
+                    totaal_oppervlakte_groep=totaal_oppervlakte_per_gedeeld_met_aantal[
+                        self._gedeeld_met_aantal(ruimte)
+                    ],
                 )
-                and utils.classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
-            ):
-                totaal_oppervlakte = totaal_oppervlakte_per_gedeeld_met_aantal[
-                    self._gedeeld_met_aantal(ruimte)
-                ]
-                zolder_opp = utils.rond_af(ruimte.oppervlakte, decimalen=2)
-                correctie = min(
-                    Decimal("5"),
-                    (
-                        utils.rond_af(totaal_oppervlakte, decimalen=0)
-                        - utils.rond_af(totaal_oppervlakte - zolder_opp, decimalen=0)
-                    )
-                    * Decimal("0.75"),
-                )
-                for woningwaardering in woningwaarderingen:
-                    if (
-                        woningwaardering.criterium is not None
-                        and woningwaardering.criterium.id is not None
-                        and woningwaardering.criterium.id.endswith(
-                            "__correctie_zolder_zonder_vaste_trap"
-                        )
-                    ):
-                        woningwaardering.punten = float(correctie * Decimal("-1"))
-                        break
+            )
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for idx, woningwaardering in enumerate(woningwaarderingen):
                 if woningwaardering.criterium is not None:

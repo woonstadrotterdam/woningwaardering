@@ -1216,6 +1216,12 @@ Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aang
 5. Deel het totaal aantal punten door het aantal adressen dat toegang en gebruiksrecht heeft tot de gemeenschappelijke binnenruimten;
 6. Rond af op een kwart punt (zie [paragraaf 1.2.4](#214-algemene-rekenregel-afronding-per-rubriek)).
 
+> [!NOTE]
+>
+> - Gemeenschappelijke overige ruimten in rubriek 9 worden per ruimte op hele m² afgerond vóór vermenigvuldiging met 0,75 (2.9.7 → 2.2.2.1) en daarna gedeeld door het aantal adressen.
+> - De correctie voor een zolder zonder vaste trap (2.2.2.3) is per ruimte gelijk aan het negatief van de toegekende zolderpunten (max. −5), gecentraliseerd in `gedeelde_logica`. Omdat oppervlakte en correctie dezelfde per-ruimte basis delen, is de netto zolderwaarde onder de cap 0. Kwart afronden gebeurt op het rubriektotaal, niet op de correctieregel.
+> - Anders dan rubriek 2 (waar overige ruimten eerst worden gesommeerd en het groepstotaal de diff-formule uit #237 gebruikt) wordt in rubriek 9 elke ruimte afzonderlijk door het aantal adressen gedeeld; daarom is de per-ruimte basis hier de juiste.
+
 ### 2.10 Gemeenschappelijke parkeerruimten
 
 {==

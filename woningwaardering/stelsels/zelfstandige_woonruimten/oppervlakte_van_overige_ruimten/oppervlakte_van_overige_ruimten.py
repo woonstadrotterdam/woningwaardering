@@ -21,13 +21,10 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class OppervlakteVanOverigeRuimten(Stelselgroep):
@@ -74,39 +71,11 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         )
 
         for ruimte in ruimten:
-            woningwaarderingen = list(waardeer_oppervlakte_van_overige_ruimte(ruimte))
-
-            # 2.2.2.3 Zolderruimte zonder vaste trap
-            # Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden aangemerkt en er is geen vaste trap naar de zolder,
-            # dan worden er 5 punten afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend.
-            # Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is.
-            # Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
-            if (
-                ruimte.detail_soort == Ruimtedetailsoort.zolder
-                and heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.vlizotrap
+            woningwaarderingen = list(
+                waardeer_oppervlakte_van_overige_ruimte(
+                    ruimte, totaal_oppervlakte_groep=totaal_oppervlakte
                 )
-                and classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
-            ):
-                zolder_opp = rond_af(ruimte.oppervlakte, decimalen=2)
-                correctie = min(
-                    Decimal("5"),
-                    (
-                        rond_af(totaal_oppervlakte, decimalen=0)
-                        - rond_af(totaal_oppervlakte - zolder_opp, decimalen=0)
-                    )
-                    * Decimal("0.75"),
-                )
-                for woningwaardering in woningwaarderingen:
-                    if (
-                        woningwaardering.criterium is not None
-                        and woningwaardering.criterium.id is not None
-                        and woningwaardering.criterium.id.endswith(
-                            "__correctie_zolder_zonder_vaste_trap"
-                        )
-                    ):
-                        woningwaardering.punten = float(correctie * Decimal("-1"))
-                        break
+            )
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 

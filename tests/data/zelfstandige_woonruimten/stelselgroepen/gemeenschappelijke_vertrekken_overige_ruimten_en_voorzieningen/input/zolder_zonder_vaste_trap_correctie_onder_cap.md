@@ -1,0 +1,1 @@
+Gedeelde berging 6 m² + gedeelde zolder 6,33 m² (vlizotrap), 2 adressen. Groep 12,33 m² → 12 m²; zonder zolder 6 m²; diff 6 m² × 0,75 = **4,50** correctie vóór deling. Per adres: berging **2,25**, zolder **2,25**, correctie **−2,25**; rubriektotaal **2,25**.

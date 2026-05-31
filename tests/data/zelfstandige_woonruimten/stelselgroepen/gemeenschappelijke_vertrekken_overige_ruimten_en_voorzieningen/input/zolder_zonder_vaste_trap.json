@@ -1,0 +1,31 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_zolder",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder",
+      "oppervlakte": 16.0,
+      "gedeeldMetAantalEenheden": 2,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Vlizotrap",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ]
+    }
+  ]
+}

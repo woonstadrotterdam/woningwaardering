@@ -8,6 +8,7 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.gedeelde_logica import (
+    oppervlaktepunten_overige_ruimte_per_ruimte,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
     waardeer_oppervlakte_van_vertrek,
@@ -95,11 +96,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 if utils.gedeeld_met_eenheden(ruimte)
             ]
 
-            oppervlakte_berekeningen = {
-                Ruimtesoort.vertrek: waardeer_oppervlakte_van_vertrek,
-                Ruimtesoort.overige_ruimten: waardeer_oppervlakte_van_overige_ruimte,
-            }
-
             for ruimte in gedeelde_ruimten:
                 if ruimte.detail_soort is None:
                     continue
@@ -108,10 +104,18 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 if ruimtesoort is None:
                     continue
 
-                oppervlakte_berekening = oppervlakte_berekeningen.get(ruimtesoort, None)
-
-                if oppervlakte_berekening is not None:
-                    oppervlakte_waarderingen = list(oppervlakte_berekening(ruimte))
+                # 2.9.7 → 2.2.2.1: gemeenschappelijke overige ruimten worden per
+                # ruimte op hele m² afgerond vóór × 0,75 en daarna door het aantal
+                # adressen gedeeld. De zoldercorrectie (2.2.2.3) gebruikt dezelfde
+                # per-ruimte basis, zodat netto onder de cap van 5 punten 0 is.
+                if ruimtesoort == Ruimtesoort.vertrek:
+                    oppervlakte_waarderingen = list(
+                        waardeer_oppervlakte_van_vertrek(ruimte)
+                    )
+                elif ruimtesoort == Ruimtesoort.overige_ruimten:
+                    oppervlakte_waarderingen = list(
+                        waardeer_oppervlakte_van_overige_ruimte(ruimte)
+                    )
                 else:
                     oppervlakte_waarderingen = []
 
@@ -137,14 +141,16 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # waarderingen voor de oppervlakten van gedeelde ruimten
                 for oppervlakte_waardering in oppervlakte_waarderingen:
                     if oppervlakte_waardering.punten is None:
-                        oppervlakte_waardering.punten = float(
-                            Decimal(str(oppervlakte_waardering.aantal))
-                            * (
-                                Decimal("1.0")
-                                if ruimtesoort == Ruimtesoort.vertrek
-                                else Decimal("0.75")
+                        if ruimtesoort == Ruimtesoort.vertrek:
+                            oppervlakte_waardering.punten = float(
+                                Decimal(str(oppervlakte_waardering.aantal))
                             )
-                        )
+                        else:
+                            oppervlakte_waardering.punten = float(
+                                oppervlaktepunten_overige_ruimte_per_ruimte(
+                                    Decimal(str(oppervlakte_waardering.aantal))
+                                )
+                            )
 
                 woningwaardering_groep.woningwaarderingen.extend(
                     self._deel_woningwaarderingen_door_aantal_eenheden(
