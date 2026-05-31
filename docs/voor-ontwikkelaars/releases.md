@@ -23,7 +23,7 @@ Bijvoorbeeld: stel dat de huidige versie `0.1.3-alpha` is.
 
 ## Releaseproces
 
-Om een nieuwe release te starten, moet er een Git tag aangemaak worden volgens het format `v<versienummer>`. De prefix `v` geeft aan dat de tag een versiepunt markeert.
+Om een nieuwe release te starten, moet er een Git tag aangemaakt worden volgens het format `v<versienummer>`. De prefix `v` geeft aan dat de tag een versiepunt markeert.
 
 Bijvoorbeeld:
 
@@ -32,7 +32,7 @@ $ git tag v0.2.3-alpha
 $ git push --tags
 ```
 
-Hiermee start het releaseproces, gedefinieerd in een GitHub workflow: [.github/workflows/publish-to-pypi.ymls](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.github/workflows/publish-to-pypi.yml)
+Hiermee start het releaseproces, gedefinieerd in een GitHub workflow: [.github/workflows/publish-to-pypi.yml](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.github/workflows/publish-to-pypi.yml)
 
 In dit proces wordt een package aangemaakt met een [Python versienummer](https://packaging.python.org/en/latest/discussions/versioning/), afgeleid van het SemVer nummer in de tag. Bijvoorbeeld: `0.2.3-alpha` wordt `0.2.3a0`
 
