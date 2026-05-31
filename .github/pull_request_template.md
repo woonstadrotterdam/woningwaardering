@@ -33,7 +33,7 @@
 **Bron:**
 
 - ☐ Beleidsboek Huurcommissie (online, actueel)
-- ☐ Wettekst ([wetten.overheid.nl](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6))
+- ☐ Wettekst ([wetten.overheid.nl](https://wetten.overheid.nl/BWBR0003237/2026-01-01))
 
 **Quote:**
 

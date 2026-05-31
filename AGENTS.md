@@ -7,7 +7,7 @@ Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen
 - Lees `CONTEXT.md` voor de gedeelde domeintaal.
 - Lees `README.md` voor doel, disclaimer en actuele beleidsboek- en VERA-ankers.
 - Lees `docs/introductie/opzet.md` voor repository-opzet, warnings, lookup-tabellen en criterium-id's.
-- Lees bij wijzigingen in domeinlogica eerst de relevante pagina's in `docs/implementatietoelichtingen/`, check tegen het online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) en de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6), en pas daarna code aan. Zie `CONTEXT.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
+- Lees bij wijzigingen in domeinlogica eerst de relevante pagina's in `docs/implementatietoelichtingen/`, check tegen het online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) en de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), en pas daarna code aan. Zie `CONTEXT.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
 - Lees bij ontwikkelwerk de relevante pagina in `docs/voor-ontwikkelaars/`, vooral `testing.md`, `naamgeving.md`, `data.md` en `logging.md`.
 
 ## Omgeving En Commands
@@ -31,7 +31,7 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [tes
 - Houd imports bovenaan het bestand; voeg geen inline imports toe.
 - Gebruik `warnings.warn(..., UserWarning)` voor gebruikersgerichte waarschuwingen over incomplete of onjuiste input, volgens de bestaande warning-semantiek.
 - Gebruik `loguru` voor logging volgens `docs/voor-ontwikkelaars/logging.md`.
-- Gebruik comments vooral om beleidsregels herleidbaar te maken: neem waar mogelijk de relevante tekst uit het beleidsboek, de implementatietoelichting of de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6) letterlijk op bij de bijbehorende code, met vermelding van het regelnummer/artikel.
+- Gebruik comments vooral om beleidsregels herleidbaar te maken: neem waar mogelijk de relevante tekst uit het beleidsboek, de implementatietoelichting of de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) letterlijk op bij de bijbehorende code, met vermelding van het regelnummer/artikel.
 
 ```python
 # 2.2.2.3 Zolderruimte zonder vaste trap
@@ -89,7 +89,7 @@ Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, im
 
 ## Domeinregels
 
-- Behandel [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6), online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) en implementatietoelichtingen als leidend voor puntberekeningen, in die volgorde van autoriteit (zie `CONTEXT.md`). Check zowel onze implementatietoelichting als het actuele online beleidsboek, omdat onze kopie kan achterlopen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
+- Behandel [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) en implementatietoelichtingen als leidend voor puntberekeningen, in die volgorde van autoriteit (zie `CONTEXT.md`). Check zowel onze implementatietoelichting als het actuele online beleidsboek, omdat onze kopie kan achterlopen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.

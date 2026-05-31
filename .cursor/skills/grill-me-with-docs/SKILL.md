@@ -32,7 +32,7 @@ During codebase exploration, also look for existing documentation. In this repo,
 - `docs/implementatietoelichtingen/` — welke beleidsboekregels wel/niet geïmplementeerd zijn en waarom
 - `docs/voor-ontwikkelaars/` — ontwikkelaarsafspraken
 - `AGENTS.md` — agent-instructies en conventies
-- https://wetten.overheid.nl/BWBR0003237/2026-01-01#Artikel6 — wettekst als leidende bron bij domeinlogica
+- https://wetten.overheid.nl/BWBR0003237/2026-01-01 — wettekst als leidende bron bij domeinlogica
 
 ### File structure
 
