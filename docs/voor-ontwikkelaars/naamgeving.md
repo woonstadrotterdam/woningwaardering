@@ -6,11 +6,7 @@ Voor de naamgeving van de classes in de woningwaardering module volgen we de VER
 
 Om alle onderstaande naamgevingen correct en consequent door te voeren, is er een task beschikbaar die de opzet van een woningwaarderingstelsel en -groep volgens deze regels voor je kan aanmaken.
 
-Zorg er voor dat [Task](https://taskfile.dev/installation/) en de dev dependencies zijn geïnstalleerd:
-
-```bash
-pip install -e ".[dev]"
-```
+Zorg er voor dat [Task](https://taskfile.dev/installation/) en de dev dependencies zijn geïnstalleerd (zie [Installatie](index.md)).
 
 Vervolgens voer je onderstaand command uit:
 
