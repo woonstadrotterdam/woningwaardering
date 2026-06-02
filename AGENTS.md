@@ -17,6 +17,7 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [tes
 - Gebruik een Python-versie die voldoet aan `requires-python` in `pyproject.toml`.
 - Gebruik [uv](https://docs.astral.sh/uv/) voor dependency management; installeer ontwikkelaarsdependencies met `uv sync --extra dev`.
 - Activeer `.venv` voordat je Python-code, tests of scripts draait (of gebruik `uv run`).
+- Tasks: zie `taskfile.yml`
 - Run tests: `uv run python -m pytest`
 - Run commit-checks: `uv run pre-commit run --all-files`
 - Run pre-push checks: `uv run pre-commit run --all-files --hook-stage pre-push`

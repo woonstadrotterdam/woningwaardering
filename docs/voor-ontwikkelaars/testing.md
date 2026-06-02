@@ -27,6 +27,11 @@ Gebruik de Task targets (zie `taskfile.yml`):
 
 ```bash
 task regen-outputs
+```
+
+Of specifieker:
+
+```bash
 task regen-outputs-stelselgroepen
 task regen-outputs-units
 task regen-outputs-docs
