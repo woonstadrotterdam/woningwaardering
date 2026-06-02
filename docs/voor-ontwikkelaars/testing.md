@@ -19,27 +19,27 @@ Er zijn verschillende "test-scopes" te bedenken, zoals het testen van details en
 Daarnaast is het testen van een hele keten of stelselgroep-object ook vereist.
 Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
-## Expected outputs regenereren
+## Expected test outputs genereren
 
 Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json` en `tests/docs/output_json_*.json` opnieuw gegenereerd worden.
 
 Gebruik de Task targets (zie `taskfile.yml`):
 
 ```bash
-task regen-outputs
+task genereer-test-output
 ```
 
 Of specifieker:
 
 ```bash
-task regen-outputs-stelselgroepen
-task regen-outputs-units
-task regen-outputs-docs
+task genereer-test-output-stelselgroepen
+task genereer-test-output-units
+task genereer-test-output-docs
 ```
 
-Onder water gebruikt dit `scripts/genereer_test_output.py --force`, zodat bestaande output-bestanden ook overschreven worden. Zonder `--force` worden bestaande output-jsons niet geüpdatet.
+Onder water gebruikt dit `scripts/genereer_test_output.py --force`, zodat bestaande output-bestanden ook overschreven worden. Zonder `--force` worden bestaande output-jsons niet geüpdatet; daarvoor is `task genereer-test-output-ontbrekend`.
 
-Let op: `regen-outputs-docs` schrijft alleen naar `tests/docs/output_json_{json,python}_voorbeeld.json` en overschrijft geen JSON-input onder `docs/implementatietoelichtingen/voorbeelden/**`.
+Let op: `genereer-test-output-docs` schrijft alleen naar `tests/docs/output_json_{json,python}_voorbeeld.json` en overschrijft geen JSON-input onder `docs/implementatietoelichtingen/voorbeelden/**`.
 
 Let ook op: `docs/aan-de-slag/index.md` bevat inline voorbeeld-output (JSON en tabel). Als output, namen of criterium-id’s wijzigen, moet je die voorbeelden handmatig nalopen/bijwerken zodat de docs niet stilzwijgend verouderen.
 

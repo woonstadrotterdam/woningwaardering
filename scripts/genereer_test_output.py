@@ -57,12 +57,12 @@ def _output_path_for_input(input_file_path: Path) -> Path:
 
 
 def _skip_by_scope(scope: str, input_file_path: Path) -> bool:
-    if scope == "all":
-        return False
+    if scope == "units":
+        return _is_stelselgroep_input(input_file_path)
     if scope == "stelselgroepen":
         return not _is_stelselgroep_input(input_file_path)
-    # default scope is "units"
-    return _is_stelselgroep_input(input_file_path)
+    # default scope is "all"
+    return False
 
 
 def _skip_by_only_stelselgroep(
