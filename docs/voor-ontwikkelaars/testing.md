@@ -19,6 +19,25 @@ Er zijn verschillende "test-scopes" te bedenken, zoals het testen van details en
 Daarnaast is het testen van een hele keten of stelselgroep-object ook vereist.
 Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
+## Expected outputs regenereren
+
+Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json` en `tests/docs/output_json_*.json` opnieuw gegenereerd worden.
+
+Gebruik de Task targets (zie `taskfile.yml`):
+
+```bash
+task regen-outputs
+task regen-outputs-stelselgroepen
+task regen-outputs-units
+task regen-outputs-docs
+```
+
+Onder water gebruikt dit `scripts/genereer_test_output.py --force`, zodat bestaande output-bestanden ook overschreven worden. Zonder `--force` worden bestaande output-jsons niet geüpdatet.
+
+Let op: `regen-outputs-docs` schrijft alleen naar `tests/docs/output_json_{json,python}_voorbeeld.json` en overschrijft geen JSON-input onder `docs/implementatietoelichtingen/voorbeelden/**`.
+
+Let ook op: `docs/aan-de-slag/index.md` bevat inline voorbeeld-output (JSON en tabel). Als output, namen of criterium-id’s wijzigen, moet je die voorbeelden handmatig nalopen/bijwerken zodat de docs niet stilzwijgend verouderen.
+
 ## Test coverage rapport
 
 Na het uitvoeren van `pytest` wordt er een code coverage report getoond. Hierin is per file te zien welk percentage van de code in de files getest is.
