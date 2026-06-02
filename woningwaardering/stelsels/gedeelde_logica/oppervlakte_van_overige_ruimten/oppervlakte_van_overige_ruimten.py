@@ -21,35 +21,35 @@ from woningwaardering.vera.referentiedata import (
     Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelselgroep,
+    WoningwaarderingstelselgroepReferentiedata,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 def waardeer_oppervlakte_van_overige_ruimte(
     ruimte: EenhedenRuimte,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata | None = None,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    stelselgroep = (
+        stelselgroep or Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten
+    )
     if classificeer_ruimte(ruimte) != Ruimtesoort.overige_ruimten:
         logger.debug(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {stelselgroep.naam}"
         )
         return
 
     criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
 
     logger.info(
-        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte:.2f}m2 telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte:.2f}m2 telt mee voor {stelselgroep.naam}"
     )
 
     woningwaardering = WoningwaarderingResultatenWoningwaardering()
     woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
         meeteenheid=Meeteenheid.vierkante_meter_m2,
         naam=criterium_naam,
-        id=str(
-            CriteriumId(
-                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
-                ruimte_id=ruimte.id,
-            )
-        ),
+        id=str(CriteriumId.blad_ruimte(stelselgroep, ruimte.id)),
     )
 
     woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
@@ -66,15 +66,17 @@ def waardeer_oppervlakte_van_overige_ruimte(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): maximaal correctie van -5 punten: zolder is niet bereikbaar via een vaste trap."
             )
             woningwaardering_correctie = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering_correctie.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="Correctie: zolder zonder vaste trap",
-                id=str(
-                    CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
-                        ruimte_id=ruimte.id,
-                        criterium="correctie_zolder_zonder_vaste_trap",
-                    )
-                ),
+            woningwaardering_correctie.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam="Correctie: zolder zonder vaste trap",
+                    id=str(
+                        CriteriumId.blad_criterium(
+                            stelselgroep,
+                            "correctie_zolder_zonder_vaste_trap",
+                            ruimte_id=ruimte.id,
+                        )
+                    ),
+                )
             )
 
             # corrigeeer niet met meer punten dan de oppervlakte voor stelselgroep overige ruimten zou opleveren

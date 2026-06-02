@@ -7,6 +7,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import naam_uit_subgroep_criterium_id
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_verkoeling_en_verwarming,
 )
@@ -59,7 +60,10 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ]
 
         woningwaardering_groep.woningwaarderingen.extend(
-            waardering for _, waardering in waardeer_verkoeling_en_verwarming(ruimten)
+            waardering
+            for _, waardering in waardeer_verkoeling_en_verwarming(
+                ruimten, self.stelselgroep, self.stelsel
+            )
         )
 
         woningwaardering_groep.woningwaarderingen.extend(
@@ -103,10 +107,8 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 ] += woningwaardering.punten
 
         for id, punten in criteriumsleutelpunten.items():
-            onderdelen = id.split("__")
-            naam = onderdelen[-1].capitalize().replace("_", " ")
             criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=naam,
+                naam=naam_uit_subgroep_criterium_id(id),
                 id=id,
             )
             yield WoningwaarderingResultatenWoningwaardering(

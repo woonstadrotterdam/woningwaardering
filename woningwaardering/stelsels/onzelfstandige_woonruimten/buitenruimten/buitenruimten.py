@@ -414,14 +414,14 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Privé buitenruimten aanwezig",
-                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=1,
-                                is_totaal=True,
-                            )
+                    id=str(
+                        CriteriumId.blad_criterium(
+                            self.stelselgroep,
+                            "prive_buitenruimten_aanwezig",
                         )
+                    ),
+                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                        id=str(CriteriumId.totaal_deel(self.stelselgroep, 1))
                     ),
                 )
             )

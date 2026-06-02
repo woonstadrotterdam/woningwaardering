@@ -7,7 +7,11 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.criterium_id import (
+    CriteriumId,
+    GedeeldMetSoort,
+    naam_uit_subgroep_criterium_id,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
@@ -336,10 +340,26 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
                 continue
 
+            parent_id = (
+                criterium.bovenliggende_criterium.id
+                if criterium.bovenliggende_criterium
+                and criterium.bovenliggende_criterium.id
+                else ""
+            )
+            subgroep_label = (
+                naam_uit_subgroep_criterium_id(parent_id).lower() if parent_id else ""
+            )
             if resultaat.punten and resultaat.punten < 0:
-                criterium_naam = f"{criterium.naam.rstrip(':') if criterium.naam else ''} voor {criterium.bovenliggende_criterium.id.split('__')[-1].lower().replace('_', ' ') if criterium.bovenliggende_criterium and criterium.bovenliggende_criterium.id else ''}"
+                criterium_naam = (
+                    f"{criterium.naam.rstrip(':') if criterium.naam else ''}"
+                    f" voor {subgroep_label}"
+                )
             else:
-                criterium_naam = f"{criterium.naam}: {criterium.bovenliggende_criterium.id.split('__')[-1].capitalize().replace('_', ' ') if criterium.bovenliggende_criterium and criterium.bovenliggende_criterium.id else ''}"
+                criterium_naam = (
+                    f"{criterium.naam}: {subgroep_label.capitalize()}"
+                    if subgroep_label
+                    else (criterium.naam or "")
+                )
 
             waarderingen.append(
                 self._maak_woningwaardering(
