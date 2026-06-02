@@ -21,6 +21,25 @@ tasks:
     desc: Genereer test output
     cmds:
       - python scripts/genereer_test_output.py
+  regen-outputs-stelselgroepen:
+    desc: Regenereer expected stelselgroep-outputs (overschrijven)
+    cmds:
+      - python scripts/genereer_test_output.py --force --scope stelselgroepen
+  regen-outputs-units:
+    desc: Regenereer expected unit-outputs (overschrijven)
+    cmds:
+      - python scripts/genereer_test_output.py --force --scope units
+  regen-outputs-docs:
+    desc: Regenereer expected outputs voor docs-tests onder tests/docs/
+    cmds:
+      - python scripts/regen_docs_expected.py
+  regen-outputs:
+    desc: Regenereer alle expected outputs (stelselgroepen, units, docs)
+    cmds:
+      - task: regen-outputs-stelselgroepen
+      - task: regen-outputs-units
+      - task: regen-outputs-docs
+
   genereer-corop-data:
     desc: Genereer COROP data
     cmds:
