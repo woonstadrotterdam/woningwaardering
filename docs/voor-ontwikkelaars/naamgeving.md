@@ -24,4 +24,12 @@ De geldigheid van een stelsel wordt bepaald door de begin- en einddatum, die in 
 ## Stelselgroepen
 
 De namen voor de stelselgroepen zijn te vinden in de `Woningwaarderingstelselgroep` Enum. Bijvoorbeeld: de stelselgroep voor oppervlakte van vertrekken wordt aangeduid als `Woningwaarderingstelselgroep.oppervlakte_van_vertrekken`. De implementatie van deze `Stelselgroep` bevindt zich in [woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py](https://github.com/woonstadrotterdam/woningwaardering/blob/main/woningwaardering/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/oppervlakte_van_vertrekken.py).
-De geldigheid van een stelselgroep wordt bepaald door de begin- en einddatum, die in de constructor van de corresponderende klasse worden vastgelegd. 
+De geldigheid van een stelselgroep wordt bepaald door de begin- en einddatum, die in de constructor van de corresponderende klasse worden vastgelegd.
+
+## Criterium-id's
+
+- Bouw id's uitsluitend via `CriteriumId` in [`woningwaardering/stelsels/criterium_id.py`](../../woningwaardering/stelsels/criterium_id.py) (factory's `blad_ruimte`, `blad_criterium`, `totaal_deel`, `totaal_subgroep`).
+- Het eerste segment is altijd `self.stelselgroep.name` van de **uitvoerende** stelselgroep, ook wanneer gedeelde logica (`waardeer_*`) wordt aangeroepen — geef `stelselgroep=self.stelselgroep` door.
+- Gedeelde `waardeer_*`-functies accepteren een optionele `stelselgroep`; de default is de canonieke rubriek (bv. `keuken` voor `waardeer_keuken`).
+- Zie [Criterium ID's in de introductie](../introductie/opzet.md#criterium-ids) voor segmentvolgorde, `totaal`-semantiek en `bovenliggendeCriterium`.
+- Bij **zelfstandig**: geef `stelsel=Woningwaarderingstelsel.zelfstandige_woonruimten` mee op `CriteriumId` waar `gedeeld_met_aantal` gezet wordt — dan wordt segment `prive` weggelaten (impliciet privé). **Onzelfstandig** laat `prive` staan (default zonder `stelsel` of expliciet onzelfstandig).

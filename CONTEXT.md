@@ -84,15 +84,19 @@ Een CSV-bestand met constanten of tabulaire regeldata die nodig zijn voor puntbe
 
 ### CriteriumId
 
-Een samengestelde identifier voor een criterium in de output. Onderdelen worden met dubbele underscores (`__`) samengevoegd, bijvoorbeeld stelselgroep, ruimte-id, criterium of gedeeld-met-informatie.
+Een samengestelde, input-stabiele identifier voor een criterium in de output (`criterium.id`). Onderdelen worden met `__` samengevoegd in vaste volgorde: stelselgroep, optioneel ruimte-id, optioneel `totaal` (alleen op aggregaatregels), optioneel criterium-segment, optioneel bucket (`prive` of `gedeeld_met__…`). Zie `docs/introductie/opzet.md` en `woningwaardering/stelsels/criterium_id.py`.
 
-### criteriumSleutel
+### Criteriumsleutel
 
-Een sleutel waarmee criteria logisch gegroepeerd kunnen worden, bijvoorbeeld om submaxima of subtellingen binnen een stelselgroep te berekenen.
+Een logische groepering van criteria voor subtotalen of submaxima binnen een stelselgroep. In de VERA-output wordt dit geïmplementeerd als `bovenliggendeCriterium.id`, niet als apart veld.
 
 ### bovenliggendeCriterium
 
-Een verwijzing van een criterium naar het bovenliggende criterium binnen een criteriumgroep (JSON-veldnaam: `bovenliggendeCriterium`). Het project ondersteunt momenteel geen meerdere niveaus van bovenliggende criteria.
+Een verwijzing van een waarderingsregel naar het aggregaat-criterium waaronder die regel valt (JSON-veldnaam: `bovenliggendeCriterium`). De keten mag meerdere niveaus hebben; elk `id` blijft uniek binnen één stelselgroep-output.
+
+### Criteriumnaam (aggregaat vs blad)
+
+Het veld `criterium.naam` is bedoeld als leesbaar label. Bij gedeelde waardering staat de deel-dimensie (aantal adressen of onzelfstandige woonruimten) in `criterium.id`, niet als `(gedeeld met …)` achter de naam van een bladregel. Aggregaatregels mogen wel een totaallabel dragen, bijvoorbeeld `Totaal (gedeeld met 4 eenheden)`.
 
 ### UserWarning
 

@@ -55,27 +55,54 @@ Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroe
 
 ## Criterium ID's
 
-De `CriteriumId` class wordt gebruikt om ID's te genereren voor criteria in de woningwaardering. Deze ID's worden opgebouwd uit verschillende onderdelen die worden samengevoegd met dubbele underscores (`__`).
+De `CriteriumId` class (in `woningwaardering/stelsels/criterium_id.py`) genereert alle `criterium.id`-waarden in de output. Segmenten worden samengevoegd met dubbele underscores (`__`).
 
-De opbouw van een criterium ID kan de volgende onderdelen bevatten:
+### Vaste segmentvolgorde
 
-- Stelselgroep (verplicht, bijvoorbeeld 'buitenruimten' of 'energieprestatie')
-- Ruimte ID (optioneel, bijvoorbeeld 'Space_108014713')
-- Criterium (optioneel, bijvoorbeeld 'factor_II' of 'woz_waarde')
-- Gedeeld met aantal (optioneel, voor gedeelde voorzieningen)
-- Gedeeld met soort (optioneel, 'adressen' of 'onzelfstandige_woonruimten')
-- Totaal indicator (optioneel)
+```text
+{stelselgroep}__[{ruimte_id}?]__[totaal?]__[{criterium_segment}?]__[bucket?]
+```
 
-Voorbeelden van gegenereerde ID's:
+| Segment | Wanneer | Voorbeeld |
+|---------|---------|-----------|
+| `stelselgroep` | Altijd; gelijk aan de uitvoerende stelselgroep in `criteriumGroep` | `keuken` |
+| `ruimte_id` | Bladregel per ruimte | `Space_108014713` |
+| `totaal` | Alleen aggregaat-/subtotaalregels in de output | … |
+| `criterium_segment` | Subgroep of criteriumdeel (niet de ruimte zelf) | `verwarmde_vertrekken`, `label` |
+| `bucket` | Deel-dimensie (privé / gedeeld) | `prive`, `gedeeld_met__4__adressen` |
 
-- `buitenruimten__Space_108014713` (voor een specifieke ruimte)
-- `buitenruimten__totaal__prive` (voor een privé totaal)
-- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen` (voor gedeelde voorzieningen)
+**Regels:**
 
-Bij gedeelde voorzieningen wordt automatisch 'prive' toegevoegd als het aantal 1 of minder is, en anders wordt het aantal en soort toegevoegd (bijvoorbeeld `gedeeld_met__4__adressen`).
+- Bladregels (ruimte, factor, label, correcties) bevatten **geen** `totaal`.
+- Het stelsel (`ZEL`/`ONZ`) staat niet in `criterium.id`; dat staat in `criteriumGroep.stelsel`.
+- Zelfde VERA-input levert dezelfde id's op (contract voor tests en diffs).
+- `criterium.naam` op **bladregels** bevat geen `(gedeeld met …)`; de deel-dimensie staat in `criterium.id` (bucket) en/of in het label van een **totaal**-regel (`Totaal (gedeeld met N …)`).
+- `groep.punten` is de som van regels zonder `bovenliggendeCriterium` (roots), na kwart-afronding per stelselgroep waar van toepassing.
+- Bij subtotalen: `criterium_segment` = **subgroep** (`totaal_subgroep`, bv. `verwarmde_vertrekken`).
+- Bij bladregels zonder `ruimte_id`: `criterium_segment` = **criteriumdeel** (`blad_criterium`, bv. `label`, WOZ-onderdeel).
 
-Met deze ID's kan gerefereerd worden aan specifieke criteria in de output van de woningwaardering.
+**Voorbeelden:**
 
-### Criteriumsleutels
+- `buitenruimten__Space_108014713` — blad
+- `buitenruimten__totaal__prive` — totaal privé (onzelfstandig); zelfstandig: `buitenruimten__totaal`
+- `verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive` — subgroep-totaal (onz.); zelfstandig zonder `__prive`
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen`
+- `gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__4__adressen` — adressen-bucket (ZEL gemeenschappelijk)
+- `gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__verwarmde_vertrekken__gedeeld_met__4__adressen` — verkoeling-subgroep (ZEL gemeenschappelijk)
+- `energieprestatie__label` — eenheidsniveau zonder `totaal`
 
-Bij sommige stelselgroepen heb je een aantal criteria die een gemeenschappelijke groep vormen. Bijvoorbeeld bij _verkoeling en verwarming_ mag je maximaal 2 extra punten krijgen voor vertrekken die verkoeld én verwarmd zijn. Daarnaast mag je ook maximaal 4 punten krijgen voor het aantal verwarmde overige- en verkeersruimten. Om te kunnen berekenen wat de som is van een subgroep en bijvoorbeeld maximering toe te passen maken wij gebruik van zogenoemde `criteriumSleutels`. Indien een waardering onderdeel is van een subgroep, dan wordt aan deze waardering in het veld `bovenliggendeCriterium` de `id` toegevoegd van de waardering die hoort bij de subgroep. In het voorbeeld hieronder is bijvoorbeeld de subgroep `Verwarmde vertrekken` binnen `verkoeling en verwarming` duidelijk te zien in de output-tabel. Voorgedefinieerde criteriumsleutels vind je in `woningwaardering/stelsels/criteriumsleutels.py`. Momenteel ondersteunen wij nog geen meerdere niveau's van subgroepen. Een criterium dat voor een ander criterium een bovenliggend criterium is, mag zelf geen bovenliggend criterium hebben.
+Bij gedeelde voorzieningen: `prive` als het aantal ≤ 1 is **en** het stelsel onzelfstandig is (of `stelsel` niet op `CriteriumId` is gezet); bij zelfstandig weglaten zolang er geen `gedeeld_met__N__…` nodig is. Anders `gedeeld_met__{N}__{adressen|onzelfstandige_woonruimten}`.
+
+Factory-methodes op `CriteriumId`: `blad_ruimte`, `blad_criterium`, `totaal_deel`, `totaal_subgroep`.
+
+### Groepering via `bovenliggendeCriterium`
+
+Voor subtotalen en subgroepen verwijst een bladregel via JSON-veld `bovenliggendeCriterium` naar het `id` van de aggregaatregel. De hiërarchie kan meerdere niveaus hebben (bijv. blad → subgroep-totaal → onz-bucket-totaal bij onzelfstandige verkoeling, of blad → adressen-totaal → onz-totaal bij 2D-deel).
+
+**Invarianten** (gecontroleerd in tests via `validate_criterium_ids_in_groep`):
+
+- Elk `id` is uniek binnen één stelselgroep-output.
+- Geen cycli in `bovenliggendeCriterium`.
+- Elke parent-`id` komt voor als output-regel in dezelfde stelselgroep.
+
+Het begrip _criteriumsleutel_ in de domeintaal verwijst naar deze logische groepering; in VERA-json heet het veld `bovenliggendeCriterium`.

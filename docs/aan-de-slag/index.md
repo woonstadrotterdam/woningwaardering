@@ -191,7 +191,7 @@ with open(
             "id": "verkoeling_en_verwarming__Space_108014589",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
@@ -201,7 +201,7 @@ with open(
             "id": "verkoeling_en_verwarming__Space_108010632",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
@@ -211,7 +211,7 @@ with open(
             "id": "verkoeling_en_verwarming__Space_108006229",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
@@ -221,7 +221,7 @@ with open(
             "id": "verkoeling_en_verwarming__Space_108014563",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
@@ -231,7 +231,7 @@ with open(
             "id": "verkoeling_en_verwarming__Space_108017433",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
@@ -241,7 +241,7 @@ with open(
             "id": "verkoeling_en_verwarming__Space_108017431",
             "naam": "Slaapkamer 3",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
@@ -251,14 +251,14 @@ with open(
             "id": "verkoeling_en_verwarming__Space_108014593",
             "naam": "Slaapkamer 4",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive",
             "naam": "Verwarmde vertrekken"
           },
           "punten": 14.0
@@ -884,7 +884,7 @@ De woningwaardering package ondersteunt verschillende output formaten:
             "id": "verkoeling_en_verwarming__Space_108014589",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
@@ -894,14 +894,14 @@ De woningwaardering package ondersteunt verschillende output formaten:
             "id": "verkoeling_en_verwarming__Space_108006229",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive",
             "naam": "Verwarmde vertrekken"
           },
           "punten": 4.0
