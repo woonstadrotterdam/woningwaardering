@@ -18,14 +18,14 @@
             "id": "verkoeling_en_verwarming__Slaapkamer",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken__prive"
             }
           },
           "punten": 3.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__totaal__verkoelde_en_verwarmde_vertrekken__prive",
             "naam": "Verkoelde en verwarmde vertrekken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__prive"

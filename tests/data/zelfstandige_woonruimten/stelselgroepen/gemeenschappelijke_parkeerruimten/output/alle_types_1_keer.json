@@ -16,24 +16,24 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__1",
-            "naam": "Type I (gedeeld met 10 adressen)"
+            "id": "gemeenschappelijke_parkeerruimten__1__gedeeld_met__10__adressen",
+            "naam": "Type I"
           },
           "punten": 0.9
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__2",
-            "naam": "Type II (gedeeld met 10 adressen)"
+            "id": "gemeenschappelijke_parkeerruimten__2__gedeeld_met__10__adressen",
+            "naam": "Type II"
           },
           "punten": 0.6
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__3",
-            "naam": "Type III (gedeeld met 10 adressen)"
+            "id": "gemeenschappelijke_parkeerruimten__3__gedeeld_met__10__adressen",
+            "naam": "Type III"
           },
           "punten": 0.4
         }

@@ -104,21 +104,31 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 2.0,
+      "punten": 3.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_29425491",
+            "id": "verkoeling_en_verwarming__Space_29425491__verwarmd_vertrek",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__Space_29425492__verwarmd_vertrek",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__gedeeld_met__2__onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__prive",
             "naam": "Verwarmde vertrekken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__prive"
@@ -132,6 +142,23 @@
             "naam": "Totaal (privé)"
           },
           "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+          },
+          "punten": 1.0
         }
       ]
     },
@@ -396,12 +423,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 550.19,
-  "punten": 54.0,
+  "maximaleHuur": 560.36,
+  "punten": 55.0,
   "stelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 550.19
+  "maximaleHuurInclusiefOpslag": 560.36
 }

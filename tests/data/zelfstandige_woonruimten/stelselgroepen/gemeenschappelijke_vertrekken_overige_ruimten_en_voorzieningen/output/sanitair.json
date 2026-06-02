@@ -16,8 +16,11 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_190033",
-            "naam": "Badruimte (gedeeld met 2)",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -28,96 +31,139 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033__wastafel",
-            "naam": "Badruimte - Wastafel (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033__wastafel",
+            "naam": "Badruimte - Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 0.5
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033__bad",
-            "naam": "Badruimte - Bad (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033__bad",
+            "naam": "Badruimte - Bad",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 3.0
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 0.75
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Douchewand (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Douchewand",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 0.63
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Handdoekenradiator (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Handdoekenradiator",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 0.38
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 0.5
         },
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Kastruimte (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Kastruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 0.75
         },
         {
           "criterium": {
-            "id": "sanitair__Space_190033__max_punten",
-            "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033__max_punten",
+            "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": -0.38
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 0.13
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 0.13
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033",
+            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": 0.25
         },
         {
           "criterium": {
-            "id": "sanitair__Space_190033__maximering_punten_voorzieningen",
-            "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche (gedeeld met 2)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_190033__maximering_punten_voorzieningen",
+            "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen"
+            }
           },
           "punten": -0.13
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__2__adressen",
+            "naam": "Totaal (gedeeld met 2 eenheden)"
+          },
+          "punten": 11.51
         }
       ]
     }

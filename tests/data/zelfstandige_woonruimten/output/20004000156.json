@@ -99,7 +99,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_88554482",
+            "id": "verkoeling_en_verwarming__Space_88554482__verwarmd_vertrek",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -109,7 +109,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_88559335",
+            "id": "verkoeling_en_verwarming__Space_88559335__verwarmd_vertrek",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -145,7 +145,7 @@
             "id": "buitenruimten__Space_88554490",
             "naam": "Balkon 1",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__totaal"
             },
             "meeteenheid": {
               "code": "M2",
@@ -159,7 +159,7 @@
             "id": "buitenruimten__Space_88559327",
             "naam": "Balkon 2",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__totaal"
             },
             "meeteenheid": {
               "code": "M2",
@@ -173,7 +173,7 @@
             "id": "buitenruimten__Space_88559328",
             "naam": "Balkon 3",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__totaal"
             },
             "meeteenheid": {
               "code": "M2",
@@ -183,7 +183,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__aanwezig__prive",
+            "id": "buitenruimten__aanwezig",
             "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0
@@ -191,7 +191,7 @@
         {
           "aantal": 28.0,
           "criterium": {
-            "id": "buitenruimten__totaal__prive",
+            "id": "buitenruimten__totaal",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",

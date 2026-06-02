@@ -99,7 +99,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559685",
+            "id": "verkoeling_en_verwarming__Space_91559685__verwarmd_vertrek",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -109,7 +109,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559694",
+            "id": "verkoeling_en_verwarming__Space_91559694__verwarmd_vertrek",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -119,7 +119,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559691",
+            "id": "verkoeling_en_verwarming__Space_91559691__verwarmd_vertrek",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -129,7 +129,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559673",
+            "id": "verkoeling_en_verwarming__Space_91559673__verwarmd_vertrek",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -139,7 +139,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559677",
+            "id": "verkoeling_en_verwarming__Space_91559677__verwarmd_vertrek",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -175,7 +175,7 @@
             "id": "buitenruimten__Space_91559747",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__totaal"
             },
             "meeteenheid": {
               "code": "M2",
@@ -185,7 +185,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__aanwezig__prive",
+            "id": "buitenruimten__aanwezig",
             "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0
@@ -193,7 +193,7 @@
         {
           "aantal": 5.0,
           "criterium": {
-            "id": "buitenruimten__totaal__prive",
+            "id": "buitenruimten__totaal",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",
