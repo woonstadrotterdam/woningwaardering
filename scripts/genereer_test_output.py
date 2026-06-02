@@ -32,7 +32,7 @@ def _parse_args() -> argparse.Namespace:
         "--stelsel",
         choices=["zelfstandige_woonruimten", "onzelfstandige_woonruimten"],
         action="append",
-        help="Beperk tot één of meer stelsels (kan meerdere keren).",
+        help="Beperk tot één of meer stelsels",
     )
     parser.add_argument(
         "--scope",
@@ -43,7 +43,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--only-stelselgroep",
         action="append",
-        help="Alleen deze stelselgroep(en) onder tests/data/<stelsel>/stelselgroepen/ (kan meerdere keren).",
+        help="Alleen deze stelselgroep(en) onder tests/data/<stelsel>/stelselgroepen/.",
     )
     return parser.parse_args()
 
@@ -61,7 +61,7 @@ def _skip_by_scope(scope: str, input_file_path: Path) -> bool:
         return False
     if scope == "stelselgroepen":
         return not _is_stelselgroep_input(input_file_path)
-    # scope == "units"
+    # default scope is "units"
     return _is_stelselgroep_input(input_file_path)
 
 
