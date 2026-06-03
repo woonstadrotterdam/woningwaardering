@@ -1,4 +1,3 @@
-import json
 import string
 import sys
 import warnings
@@ -20,6 +19,14 @@ from woningwaardering.vera.bvg.generated import (
 STELSELS = ("zelfstandige_woonruimten", "onzelfstandige_woonruimten")
 
 
+def _write_text_if_changed(path: Path, content: str) -> bool:
+    if path.exists() and path.read_text() == content:
+        return False
+
+    path.write_text(content)
+    return True
+
+
 def _is_stelselgroep_input(input_file_path: Path) -> bool:
     return input_file_path.parent.parent.parent.name == "stelselgroepen"
 
@@ -39,24 +46,28 @@ def _genereer_docs_outputs(peildatum: date) -> int:
     eenheid = EenhedenEenheid.model_validate_json(
         voorbeeld1_json_input_path().read_text()
     )
-    json_output.write_text(
+    updated = 0
+
+    json_content = (
         wws.waardeer(eenheid).model_dump_json(
             by_alias=True, indent=2, exclude_none=True
         )
         + "\n"
     )
+    if _write_text_if_changed(json_output, json_content):
+        updated += 1
 
     python_output = Path("tests/docs/output_json_python_voorbeeld.json")
-    python_output.write_text(
+    python_content = (
         wws.waardeer(voorbeeld2_python_eenheid()).model_dump_json(
             by_alias=True, indent=2, exclude_none=True
         )
         + "\n"
     )
+    if _write_text_if_changed(python_output, python_content):
+        updated += 1
 
-    json.loads(json_output.read_text())
-    json.loads(python_output.read_text())
-    return 2
+    return updated
 
 
 def main() -> int:
@@ -135,24 +146,26 @@ def main() -> int:
                 stdout_id = logger.add(sys.stdout, level="INFO")
                 logger.remove(handler_id)
 
-            with open(output_file_path, "w+") as f:
-                logger.info(
-                    f"Resultaat voor {input_file_path.name} is opgenomen in {output_file_path}, inclusief logs in {output_file_path.with_suffix('.log')}"
+            logger.info(
+                f"Resultaat voor {input_file_path.name} is opgenomen in {output_file_path}, inclusief logs in {output_file_path.with_suffix('.log')}"
+            )
+            output_content = (
+                woningwaardering_resultaat.model_dump_json(
+                    by_alias=True, indent=2, exclude_none=True
                 )
-                f.write(
-                    woningwaardering_resultaat.model_dump_json(
-                        by_alias=True, indent=2, exclude_none=True
-                    )
-                )
-                f.write("\n")
+                + "\n"
+            )
+            input_updated = _write_text_if_changed(output_file_path, output_content)
 
             if not _is_stelselgroep_input(input_file_path):
                 txt_path = output_file_path.with_suffix(".txt")
-                txt_path.write_text(
-                    naar_tabel(woningwaardering_resultaat).get_string() + "\n"
+                txt_content = naar_tabel(woningwaardering_resultaat).get_string() + "\n"
+                input_updated = (
+                    _write_text_if_changed(txt_path, txt_content) or input_updated
                 )
 
-            updated += 1
+            if input_updated:
+                updated += 1
 
     updated += _genereer_docs_outputs(peildatum)
 
