@@ -1,44 +1,60 @@
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Groep                             | Naam                                                                        |       Aantal | Meeteenheid         |   Punten |  Opslag |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van vertrekken        | Totaal (privé)                                                              |        20.04 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        |   - Slaapkamer                                                              |      [20.04] | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Totaal (gedeeld met 2 onzelfstandige woonruimten)                           |         4.60 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        |   - Keuken                                                                  |        [7.5] | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        |   - Badruimte                                                               |        [1.7] | Vierkante meter, m2 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van vertrekken        | Totaal                                                                      |        24.64 | Vierkante meter, m2 |    25.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Verkoeling en verwarming          | Totaal (privé)                                                              |              |                     |     2.00 |         |
-| Verkoeling en verwarming          |   - Verwarmde vertrekken                                                    |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |    - Slaapkamer                                                             |              |                     | [[2.00]] |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Verkoeling en verwarming          | Totaal                                                                      |              |                     |     2.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Energieprestatie                  | Bouwjaar 1998                                                               |        24.50 | Vierkante meter, m2 |     8.58 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Energieprestatie                  | Totaal                                                                      |        24.50 | Vierkante meter, m2 |     8.50 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Keuken                            | Totaal (gedeeld met 2 onzelfstandige woonruimten)                           |              |                     |     3.50 |         |
-| Keuken                            |   - Keuken: Lengte aanrecht                                                 |     [2220.0] | Millimeter          |   [3.50] |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Keuken                            | Totaal                                                                      |              |                     |     3.50 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Sanitair                          | Totaal (gedeeld met 2 onzelfstandige woonruimten)                           |              |                     |     3.00 |         |
-| Sanitair                          |   - Toilet - Staand Toilet                                                  |        [1.0] |                     |   [1.50] |         |
-| Sanitair                          |   - Badruimte - Douche                                                      |        [1.0] |                     |   [1.50] |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Sanitair                          | Totaal                                                                      |              |                     |     3.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Punten voor de WOZ-waarde         | Percentage verschil                                                         |        -0.07 |                     |    12.00 |         |
-| Punten voor de WOZ-waarde         |   - WOZ-waarde op waardepeildatum 01-01-2024                                |   [205000.0] |                     |          |         |
-| Punten voor de WOZ-waarde         |   - Gebruiksoppervlakte                                                     |       [58.0] | Vierkante meter, m2 |          |         |
-| Punten voor de WOZ-waarde         |   - WOZ-waarde per m²                                                       | [3534.48276] |                     |          |         |
-| Punten voor de WOZ-waarde         |   - Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond                        |     [3537.0] |                     |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |    12.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Onzelfstandige woonruimten        | Afgerond totaal                                                             |              |                     |    54.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-|                                   | Maximale huur                                                               |       550.19 | EUR                 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
+Oppervlakte van vertrekken                                          25.00 pt
+Oppervlakte van overige ruimten
+Verkoeling en verwarming                                             2.00 pt
+Energieprestatie                                                     8.50 pt
+Keuken                                                               3.50 pt
+Sanitair                                                             3.00 pt
+Buitenruimten
+Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
+Gemeenschappelijke parkeerruimten
+Punten voor de WOZ-waarde                                           12.00 pt
+Bijzondere voorzieningen
+Aftrekpunten
+Prijsopslag monumenten
+                                                                    --------
+TOTAAL                                                              54.00 pt
+Opslag                                                              0.00 EUR
+Maximaal redelijke huur                                           550.19 EUR
+
+OPPERVLAKTE VAN VERTREKKEN
+  Totaal (privé)                                            20.04 m²
+    - Slaapkamer                                            20.04 m²
+  Totaal (gedeeld met 2 onzelfstandige woonruimten)          4.60 m²
+    - Keuken                                                 7.50 m²
+    - Badruimte                                              1.70 m²
+                                                            --------  --------
+  Totaal                                                    24.64 m²  25.00 pt
+
+VERKOELING EN VERWARMING
+  Totaal (privé)                                                       2.00 pt
+    - Verwarmde vertrekken                                                         2.00 pt
+      - Slaapkamer                                                                               2.00 pt
+                                                                      --------
+  Totaal                                                               2.00 pt
+
+ENERGIEPRESTATIE
+  Bouwjaar 1998                                             24.50 m²   8.58 pt
+                                                            --------  --------
+  Totaal                                                    24.50 m²   8.50 pt
+
+KEUKEN
+  Totaal (gedeeld met 2 onzelfstandige woonruimten)                    3.50 pt
+    - Keuken: Lengte aanrecht                             2220.00 mm               3.50 pt
+                                                                      --------
+  Totaal                                                               3.50 pt
+
+SANITAIR
+  Totaal (gedeeld met 2 onzelfstandige woonruimten)                    3.00 pt
+    - Toilet - Staand Toilet                                 1.00 st               1.50 pt
+    - Badruimte - Douche                                     1.00 st               1.50 pt
+                                                                      --------
+  Totaal                                                               3.00 pt
+
+PUNTEN VOOR DE WOZ-WAARDE
+  Percentage verschil                                          -0.07  12.00 pt
+    - WOZ-waarde op waardepeildatum 01-01-2024         205000.00 EUR
+    - Gebruiksoppervlakte                                   58.00 m²
+    - WOZ-waarde per m²                                      3534.48
+    - Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond         3537.00
+                                                                      --------
+  Totaal                                                              12.00 pt

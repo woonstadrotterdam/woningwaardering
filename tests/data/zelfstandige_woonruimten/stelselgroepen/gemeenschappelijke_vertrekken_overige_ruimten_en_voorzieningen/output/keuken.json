@@ -41,7 +41,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "keuken__keuken__extra_voorziening",
-            "naam": "Inbouw koelkast (in zelfde ruimte) (gedeeld met 5)"
+            "naam": "Inbouw koelkast (in zelfde ruimte) (gedeeld met 5)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.4
         },

@@ -255,7 +255,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88554482__staand_toilet",
-            "naam": "Badruimte - Staand Toilet"
+            "naam": "Badruimte - Staand Toilet",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
@@ -263,7 +267,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88554482__wastafel",
-            "naam": "Badruimte - Wastafel"
+            "naam": "Badruimte - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -271,7 +279,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88554482__douche",
-            "naam": "Badruimte - Douche"
+            "naam": "Badruimte - Douche",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         },
@@ -279,7 +291,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88559336__staand_toilet",
-            "naam": "Toiletruimte - Staand Toilet"
+            "naam": "Toiletruimte - Staand Toilet",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         },
@@ -287,7 +303,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88559336__wastafel",
-            "naam": "Toiletruimte - Wastafel"
+            "naam": "Toiletruimte - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         }
@@ -338,7 +358,11 @@
           "aantal": 302000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
+            }
           }
         },
         {

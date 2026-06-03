@@ -328,7 +328,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72314041__wastafel",
-            "naam": "Toiletruimte 1 - Wastafel"
+            "naam": "Toiletruimte 1 - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -336,7 +340,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72314048__wastafel",
-            "naam": "Badruimte - Wastafel"
+            "naam": "Badruimte - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -344,7 +352,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72310936__wastafel",
-            "naam": "Keuken - Wastafel (spoelbak in aanrecht < 1m)"
+            "naam": "Keuken - Wastafel (spoelbak in aanrecht < 1m)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -352,7 +364,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72310920__staand_toilet",
-            "naam": "Toiletruimte 2 - Staand Toilet"
+            "naam": "Toiletruimte 2 - Staand Toilet",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         },
@@ -360,7 +376,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72310920__wastafel",
-            "naam": "Toiletruimte 2 - Wastafel"
+            "naam": "Toiletruimte 2 - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -368,7 +388,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72315437__wastafel",
-            "naam": "Wasruimte - Wastafel"
+            "naam": "Wasruimte - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         }
@@ -419,7 +443,11 @@
           "aantal": 565000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
+            }
           }
         },
         {

@@ -445,7 +445,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23703087__wastafel",
-            "naam": "Badruimte 1 - Wastafel"
+            "naam": "Badruimte 1 - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -453,7 +457,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23703087__douche",
-            "naam": "Badruimte 1 - Douche"
+            "naam": "Badruimte 1 - Douche",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         },
@@ -461,7 +469,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702799__staand_toilet",
-            "naam": "Badruimte 2 - Staand Toilet"
+            "naam": "Badruimte 2 - Staand Toilet",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
@@ -469,7 +481,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702799__douche",
-            "naam": "Badruimte 2 - Douche"
+            "naam": "Badruimte 2 - Douche",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         },
@@ -477,7 +493,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702339__staand_toilet",
-            "naam": "Badruimte 3 - Staand Toilet"
+            "naam": "Badruimte 3 - Staand Toilet",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
@@ -485,7 +505,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702339__wastafel",
-            "naam": "Badruimte 3 - Wastafel"
+            "naam": "Badruimte 3 - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -493,7 +517,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702339__douche",
-            "naam": "Badruimte 3 - Douche"
+            "naam": "Badruimte 3 - Douche",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         }
@@ -544,7 +572,11 @@
           "aantal": 759000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
+            }
           }
         },
         {

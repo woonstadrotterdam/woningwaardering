@@ -329,7 +329,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_82666487__staand_toilet",
-            "naam": "Toiletruimte - Staand Toilet"
+            "naam": "Toiletruimte - Staand Toilet",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         },
@@ -337,7 +341,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_82666487__wastafel",
-            "naam": "Toiletruimte - Wastafel"
+            "naam": "Toiletruimte - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -345,7 +353,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_82667823__wastafel",
-            "naam": "Badruimte - Wastafel"
+            "naam": "Badruimte - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -353,7 +365,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_82667823__douche",
-            "naam": "Badruimte - Douche"
+            "naam": "Badruimte - Douche",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         }
@@ -404,7 +420,11 @@
           "aantal": 229000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
+            }
           }
         },
         {
