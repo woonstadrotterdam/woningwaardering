@@ -18,9 +18,10 @@ tasks:
     cmds:
       - python scripts/genereer_opzet_woningwaarderinggroep.py
   genereer-test-output:
-    desc: Genereer test output
+    desc: Genereer alle expected test outputs (overschrijven)
     cmds:
       - python scripts/genereer_test_output.py
+
   genereer-corop-data:
     desc: Genereer COROP data
     cmds:
