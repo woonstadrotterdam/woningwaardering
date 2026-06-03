@@ -22,6 +22,7 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Meeteenheid,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -127,6 +128,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                             )
                         ),
                         naam=f"Totaal gedeeld met {gedeeld_met_aantal_onzelfstandige_woonruimten} onzelfstandige woonruimten",
+                        meeteenheid=Meeteenheid.stuks,
                     ),
                     aantal=float(count["aantal"]),
                     punten=float(

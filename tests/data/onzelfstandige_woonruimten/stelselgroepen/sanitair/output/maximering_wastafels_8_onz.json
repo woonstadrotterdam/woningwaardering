@@ -20,6 +20,10 @@
             "naam": "Badkamer - Wastafel",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 2.0
@@ -31,6 +35,10 @@
             "naam": "Badkamer - Meerpersoonswastafel",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 3.0
@@ -42,6 +50,10 @@
             "naam": "Woonkamer - Wastafel",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__gedeeld_met__8__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.38
@@ -53,6 +65,10 @@
             "naam": "Woonkamer - Meerpersoonswastafel",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__gedeeld_met__8__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.56
@@ -64,6 +80,10 @@
             "naam": "WoonkamerMetMax - Wastafel",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__gedeeld_met__8__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.25
@@ -85,6 +105,10 @@
             "naam": "WoonkamerMetMax - Meerpersoonswastafel",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__gedeeld_met__8__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.38

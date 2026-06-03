@@ -20,6 +20,10 @@
             "naam": "Type III (gedeeld met 10 adressen)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__4__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.5
@@ -28,7 +32,11 @@
           "aantal": 5.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__4__onzelfstandige_woonruimten",
-            "naam": "Totaal gedeeld met 4 onzelfstandige woonruimten"
+            "naam": "Totaal gedeeld met 4 onzelfstandige woonruimten",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.5
         }

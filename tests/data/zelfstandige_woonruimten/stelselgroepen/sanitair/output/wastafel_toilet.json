@@ -17,7 +17,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_246794__wastafel",
-            "naam": "Toiletruimte - Wastafel"
+            "naam": "Toiletruimte - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
@@ -32,7 +36,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_246794__meerpersoonswastafel",
-            "naam": "Toiletruimte - Meerpersoonswastafel"
+            "naam": "Toiletruimte - Meerpersoonswastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         },

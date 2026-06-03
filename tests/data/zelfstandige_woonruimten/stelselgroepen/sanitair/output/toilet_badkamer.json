@@ -17,7 +17,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_960249__hangend_toilet",
-            "naam": "Badkamer - Hangend toilet"
+            "naam": "Badkamer - Hangend toilet",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.75
         },
@@ -25,7 +29,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_960249__staand_toilet",
-            "naam": "Badkamer - Staand Toilet"
+            "naam": "Badkamer - Staand Toilet",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         }

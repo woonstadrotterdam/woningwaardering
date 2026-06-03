@@ -35,6 +35,10 @@
             "naam": "Inbouw koelkast (in zelfde ruimte)",
             "bovenliggendeCriterium": {
               "id": "keuken__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 2.0

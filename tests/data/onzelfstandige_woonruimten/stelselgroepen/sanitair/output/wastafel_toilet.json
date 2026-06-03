@@ -20,6 +20,10 @@
             "naam": "Toiletruimte - Wastafel",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 2.0
@@ -41,6 +45,10 @@
             "naam": "Toiletruimte - Meerpersoonswastafel",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 3.0

@@ -238,6 +238,7 @@ def _waardeer_extra_voorzieningen(
                             criterium=f"extra_voorziening_{voorziening.name}",
                         )
                     ),
+                    meeteenheid=Meeteenheid.stuks,
                 ),
                 punten=float(punten),
                 aantal=count,

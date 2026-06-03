@@ -17,6 +17,7 @@ from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Doelgroep,
     Installatiesoort,
+    Meeteenheid,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselgroepReferentiedata,
@@ -242,6 +243,7 @@ def _prive_laadpaal(
                     criterium="laadpalen",
                 )
             ),
+            meeteenheid=Meeteenheid.stuks,
         ),
         aantal=aantal_laadpalen,
         punten=punten_laadpalen,

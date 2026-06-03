@@ -29,7 +29,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "keuken__keuken__extra_voorziening",
-            "naam": "Inbouw koelkast (in zelfde ruimte)"
+            "naam": "Inbouw koelkast (in zelfde ruimte)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         }

@@ -16,6 +16,7 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Installatiesoort,
+    Meeteenheid,
     Ruimtedetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -157,6 +158,7 @@ def _waardeer_toiletten(
                                 criterium=toiletsoort.name,
                             )
                         ),
+                        meeteenheid=Meeteenheid.stuks,
                     ),
                     punten=float(
                         rond_af(
@@ -221,6 +223,7 @@ def _waardeer_wastafels(
                                         criterium=wastafelsoort.name,
                                     )
                                 ),
+                                meeteenheid=Meeteenheid.stuks,
                             ),
                             punten=float(punten_sanitair[wastafelsoort]),
                             aantal=1,
@@ -251,6 +254,7 @@ def _waardeer_wastafels(
                                 criterium=wastafelsoort.name,
                             )
                         ),
+                        meeteenheid=Meeteenheid.stuks,
                     ),
                     punten=float(
                         rond_af(
@@ -368,6 +372,7 @@ def _waardeer_baden_en_douches(
                             criterium=Installatiesoort.bad_en_douche.name,
                         )
                     ),
+                    meeteenheid=Meeteenheid.stuks,
                 ),
                 punten=float(punten),
                 aantal=aantal_bad_en_douches,
@@ -399,6 +404,7 @@ def _waardeer_baden_en_douches(
                                 criterium=installatiesoort.name,
                             )
                         ),
+                        meeteenheid=Meeteenheid.stuks,
                     ),
                     punten=float(punten),
                     aantal=aantal,
@@ -498,6 +504,7 @@ def _waardeer_installaties(
                                             criterium=installatie.name,
                                         )
                                     ),
+                                    meeteenheid=Meeteenheid.stuks,
                                 ),
                                 punten=float(punten),
                                 aantal=aantal,

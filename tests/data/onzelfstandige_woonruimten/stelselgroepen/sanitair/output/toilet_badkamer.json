@@ -20,6 +20,10 @@
             "naam": "Badkamer - Hangend toilet",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 2.75
@@ -31,6 +35,10 @@
             "naam": "Badkamer - Staand Toilet",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 2.0

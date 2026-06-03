@@ -35,6 +35,10 @@
             "naam": "Inbouw koelkast (in zelfde ruimte)",
             "bovenliggendeCriterium": {
               "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 2.0
@@ -46,6 +50,10 @@
             "naam": "Inbouw oven elektrisch",
             "bovenliggendeCriterium": {
               "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.5

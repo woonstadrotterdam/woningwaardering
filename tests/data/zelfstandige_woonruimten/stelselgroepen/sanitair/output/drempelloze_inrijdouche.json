@@ -17,7 +17,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_334160__drempelloze_inrijdouche",
-            "naam": "Badkamer - Drempelloze inrijdouche"
+            "naam": "Badkamer - Drempelloze inrijdouche",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         }

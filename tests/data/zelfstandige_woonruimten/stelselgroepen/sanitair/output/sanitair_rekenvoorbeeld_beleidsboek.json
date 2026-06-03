@@ -17,7 +17,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__badruimte__wastafel",
-            "naam": "Badruimte - Wastafel"
+            "naam": "Badruimte - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -25,7 +29,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__badruimte__bad_en_douche",
-            "naam": "Badruimte - Bad en douche"
+            "naam": "Badruimte - Bad en douche",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 7.0
         },
@@ -33,7 +41,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad"
+            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.5
         },
@@ -41,7 +53,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Douchewand"
+            "naam": "Badruimte - Voorzieningen: Douchewand",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.25
         },
@@ -49,7 +65,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Handdoekenradiator"
+            "naam": "Badruimte - Voorzieningen: Handdoekenradiator",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.5
         },
@@ -57,7 +77,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel"
+            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.5
         },
@@ -65,7 +89,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan"
+            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.5
         },
@@ -73,7 +101,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan"
+            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.5
         },
@@ -81,7 +113,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__slaapkamer__douche",
-            "naam": "Slaapkamer - Douche"
+            "naam": "Slaapkamer - Douche",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         }

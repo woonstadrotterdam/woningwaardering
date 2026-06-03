@@ -17,7 +17,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_869333__staand_toilet",
-            "naam": "Toilet - Staand Toilet"
+            "naam": "Toilet - Staand Toilet",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         }

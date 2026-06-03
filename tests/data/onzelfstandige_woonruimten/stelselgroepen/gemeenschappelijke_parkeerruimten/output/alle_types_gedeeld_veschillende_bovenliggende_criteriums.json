@@ -20,6 +20,10 @@
             "naam": "Type I (gedeeld met 3 adressen)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 1.5
@@ -31,6 +35,10 @@
             "naam": "Type II (gedeeld met 4 adressen)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.5
@@ -42,6 +50,10 @@
             "naam": "Type III (gedeeld met 5 adressen)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.27
@@ -50,7 +62,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal gedeeld met 2 onzelfstandige woonruimten"
+            "naam": "Totaal gedeeld met 2 onzelfstandige woonruimten",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.5
         },
@@ -58,7 +74,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
-            "naam": "Totaal gedeeld met 3 onzelfstandige woonruimten"
+            "naam": "Totaal gedeeld met 3 onzelfstandige woonruimten",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.77
         }

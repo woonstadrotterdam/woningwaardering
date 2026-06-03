@@ -14,6 +14,7 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
+    Meeteenheid,
     Ruimtedetailsoort,
     Woningwaarderingstelselgroep,
 )
@@ -139,6 +140,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
                         ruimte_id=ruimte.id,
                     )
                 ),
+                meeteenheid=Meeteenheid.stuks,
             ),
             aantal=ruimte.aantal,
             punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),

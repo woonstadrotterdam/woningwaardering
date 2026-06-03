@@ -20,6 +20,10 @@
             "naam": "Badkamer - Drempelloze inrijdouche",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 3.0

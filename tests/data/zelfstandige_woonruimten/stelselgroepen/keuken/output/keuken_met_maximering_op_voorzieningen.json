@@ -29,7 +29,11 @@
           "aantal": 4.0,
           "criterium": {
             "id": "keuken__keuken__extra_voorziening",
-            "naam": "Inbouw koelkast (in zelfde ruimte)"
+            "naam": "Inbouw koelkast (in zelfde ruimte)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         },
@@ -37,7 +41,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "keuken__keuken__extra_voorziening",
-            "naam": "Inbouw oven elektrisch"
+            "naam": "Inbouw oven elektrisch",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },

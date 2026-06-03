@@ -17,7 +17,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_842550__wastafel",
-            "naam": "Woonkamer - Wastafel (spoelbak in aanrecht < 1m)"
+            "naam": "Woonkamer - Wastafel (spoelbak in aanrecht < 1m)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -25,7 +29,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_842550__wastafel",
-            "naam": "Woonkamer - Wastafel"
+            "naam": "Woonkamer - Wastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
@@ -40,7 +48,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_842550__meerpersoonswastafel",
-            "naam": "Woonkamer - Meerpersoonswastafel"
+            "naam": "Woonkamer - Meerpersoonswastafel",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         },

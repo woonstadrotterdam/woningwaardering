@@ -29,7 +29,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_190033__wastafel",
-            "naam": "Badruimte - Wastafel (gedeeld met 2)"
+            "naam": "Badruimte - Wastafel (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.5
         },
@@ -37,7 +41,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_190033__bad",
-            "naam": "Badruimte - Bad (gedeeld met 2)"
+            "naam": "Badruimte - Bad (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         },
@@ -45,7 +53,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad (gedeeld met 2)"
+            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.75
         },
@@ -53,7 +65,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Douchewand (gedeeld met 2)"
+            "naam": "Badruimte - Voorzieningen: Douchewand (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.63
         },
@@ -61,7 +77,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Handdoekenradiator (gedeeld met 2)"
+            "naam": "Badruimte - Voorzieningen: Handdoekenradiator (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.38
         },
@@ -69,7 +89,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel (gedeeld met 2)"
+            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.5
         },
@@ -77,7 +101,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Kastruimte (gedeeld met 2)"
+            "naam": "Badruimte - Voorzieningen: Kastruimte (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.75
         },
@@ -92,7 +120,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel (gedeeld met 2)"
+            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.13
         },
@@ -100,7 +132,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan (gedeeld met 2)"
+            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.13
         },
@@ -108,7 +144,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan (gedeeld met 2)"
+            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan (gedeeld met 2)",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.25
         },

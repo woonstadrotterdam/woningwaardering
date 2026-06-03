@@ -20,6 +20,10 @@
             "naam": "Badkamer - Bad en douche",
             "bovenliggendeCriterium": {
               "id": "sanitair__totaal__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 12.0

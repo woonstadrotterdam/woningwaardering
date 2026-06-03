@@ -17,7 +17,11 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_171081__bad",
-            "naam": "Badkamer - Bad"
+            "naam": "Badkamer - Bad",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 6.0
         }
