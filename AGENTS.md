@@ -17,6 +17,7 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [tes
 - Gebruik een Python-versie die voldoet aan `requires-python` in `pyproject.toml`.
 - Gebruik [uv](https://docs.astral.sh/uv/) voor dependency management; installeer ontwikkelaarsdependencies met `uv sync --extra dev`.
 - Activeer `.venv` voordat je Python-code, tests of scripts draait (of gebruik `uv run`).
+- Tasks: zie `taskfile.yml`
 - Run tests: `uv run python -m pytest`
 - Run commit-checks: `uv run pre-commit run --all-files`
 - Run pre-push checks: `uv run pre-commit run --all-files --hook-stage pre-push`
@@ -82,6 +83,7 @@ Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, im
 ## Documentatie
 
 - Controleer bij elke gedrags-, beleids- of datamodelwijziging of documentatie moet worden bijgewerkt.
+- Let bij output-wijzigingen (punten, criteria, naming, ID-structuur) op `docs/aan-de-slag/index.md`: die bevat inline voorbeeld-output (JSON en tabel) en wordt niet automatisch meegenomen bij wijzigingen.
 - Leg implementatiekeuzes rond beleidsboekregels vast in `docs/implementatietoelichtingen/`.
 - Leg ontwikkelaarsafspraken vast in `docs/voor-ontwikkelaars/`.
 - Houd documentatie kort en verwijs naar bestaande bronnen in plaats van dezelfde uitleg op meerdere plekken te dupliceren.
