@@ -1,4 +1,4 @@
-import argparse
+import json
 import string
 import sys
 import warnings
@@ -9,6 +9,7 @@ from pathlib import Path
 from loguru import logger
 from pydantic import ValidationError
 
+from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import naar_tabel
 from woningwaardering.vera.bvg.generated import (
@@ -16,36 +17,7 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 
-
-def _parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Genereer expected outputs onder tests/data/**/output/."
-    )
-    parser.add_argument(
-        "--force",
-        "--overwrite",
-        dest="force",
-        action="store_true",
-        help="Overschrijf bestaande output-bestanden.",
-    )
-    parser.add_argument(
-        "--stelsel",
-        choices=["zelfstandige_woonruimten", "onzelfstandige_woonruimten"],
-        action="append",
-        help="Beperk tot één of meer stelsels",
-    )
-    parser.add_argument(
-        "--scope",
-        choices=["stelselgroepen", "units", "all"],
-        default="all",
-        help="Welke outputs te genereren.",
-    )
-    parser.add_argument(
-        "--only-stelselgroep",
-        action="append",
-        help="Alleen deze stelselgroep(en) onder tests/data/<stelsel>/stelselgroepen/.",
-    )
-    return parser.parse_args()
+STELSELS = ("zelfstandige_woonruimten", "onzelfstandige_woonruimten")
 
 
 def _is_stelselgroep_input(input_file_path: Path) -> bool:
@@ -56,63 +28,60 @@ def _output_path_for_input(input_file_path: Path) -> Path:
     return Path(str(input_file_path).replace("/input/", "/output/"))
 
 
-def _skip_by_scope(scope: str, input_file_path: Path) -> bool:
-    if scope == "units":
-        return _is_stelselgroep_input(input_file_path)
-    if scope == "stelselgroepen":
-        return not _is_stelselgroep_input(input_file_path)
-    # default scope is "all"
-    return False
+def _genereer_docs_outputs(peildatum: date) -> int:
+    from tests.docs._examples import (
+        voorbeeld1_json_input_path,
+        voorbeeld2_python_eenheid,
+    )
 
+    wws = Woningwaardering(peildatum=peildatum)
+    json_output = Path("tests/docs/output_json_json_voorbeeld.json")
+    eenheid = EenhedenEenheid.model_validate_json(
+        voorbeeld1_json_input_path().read_text()
+    )
+    json_output.write_text(
+        wws.waardeer(eenheid).model_dump_json(
+            by_alias=True, indent=2, exclude_none=True
+        )
+        + "\n"
+    )
 
-def _skip_by_only_stelselgroep(
-    only_stelselgroepen: list[str] | None, input_file_path: Path
-) -> bool:
-    if not only_stelselgroepen:
-        return False
-    if not _is_stelselgroep_input(input_file_path):
-        return True
-    return input_file_path.parent.parent.name not in set(only_stelselgroepen)
+    python_output = Path("tests/docs/output_json_python_voorbeeld.json")
+    python_output.write_text(
+        wws.waardeer(voorbeeld2_python_eenheid()).model_dump_json(
+            by_alias=True, indent=2, exclude_none=True
+        )
+        + "\n"
+    )
+
+    json.loads(json_output.read_text())
+    json.loads(python_output.read_text())
+    return 2
 
 
 def main() -> int:
-    args = _parse_args()
+    root = Path(__file__).resolve().parent.parent
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
 
     logger.enable("woningwaardering")
     warnings.simplefilter("default", UserWarning)
     warnings.filterwarnings("ignore", category=UserWarning)
 
-    # Set logger level to INFO
     logger.remove()
     stdout_id = logger.add(sys.stdout, level="INFO")
 
     peildatum = date(2026, 1, 1)
     data_dir = Path("tests/data")
-    stelsels = args.stelsel or [
-        "zelfstandige_woonruimten",
-        "onzelfstandige_woonruimten",
-    ]
 
     updated = 0
-    skipped_existing = 0
-    skipped_filtered = 0
     errors = 0
 
-    for stelsel_naam in stelsels:
+    for stelsel_naam in STELSELS:
         input_file_paths = (data_dir / stelsel_naam).rglob("**/input/*.json")
         for input_file_path in input_file_paths:
-            if _skip_by_scope(
-                args.scope, input_file_path
-            ) or _skip_by_only_stelselgroep(args.only_stelselgroep, input_file_path):
-                skipped_filtered += 1
-                continue
-
             output_file_path = _output_path_for_input(input_file_path)
             output_file_path.parent.mkdir(parents=True, exist_ok=True)
-
-            if output_file_path.exists() and not args.force:
-                skipped_existing += 1
-                continue
 
             with open(input_file_path, "r+") as f:
                 try:
@@ -182,17 +151,10 @@ def main() -> int:
 
             updated += 1
 
-    logger.info(
-        "Samenvatting: "
-        f"updated={updated}, "
-        f"skipped_existing={skipped_existing}, "
-        f"skipped_filtered={skipped_filtered}, "
-        f"errors={errors}"
-    )
+    updated += _genereer_docs_outputs(peildatum)
 
-    if args.force and updated == 0 and errors == 0:
-        logger.error("Niets bijgewerkt (force=True). Check filters/scope.")
-        return 2
+    logger.info(f"Samenvatting: updated={updated}, errors={errors}")
+
     return 1 if errors else 0
 
 

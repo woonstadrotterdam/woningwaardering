@@ -17,28 +17,10 @@ tasks:
     desc: Genereer de opzet voor de code van een woningwaarderinggroep
     cmds:
       - python scripts/genereer_opzet_woningwaarderinggroep.py
-  genereer-test-output-ontbrekend:
-    desc: Genereer alleen ontbrekende test outputs (overschrijft bestaande niet)
+  genereer-test-output:
+    desc: Genereer alle expected test outputs (overschrijven)
     cmds:
       - python scripts/genereer_test_output.py
-  genereer-test-output-stelselgroepen:
-    desc: Genereer expected stelselgroep-outputs (overschrijven)
-    cmds:
-      - python scripts/genereer_test_output.py --force --scope stelselgroepen
-  genereer-test-output-units:
-    desc: Genereer expected unit-outputs (overschrijven)
-    cmds:
-      - python scripts/genereer_test_output.py --force --scope units
-  genereer-test-output-docs:
-    desc: Genereer expected outputs voor docs-tests onder tests/docs/
-    cmds:
-      - python scripts/regen_docs_expected.py
-  genereer-test-output:
-    desc: Genereer alle expected test outputs (stelselgroepen, units, docs; overschrijven)
-    cmds:
-      - task: genereer-test-output-stelselgroepen
-      - task: genereer-test-output-units
-      - task: genereer-test-output-docs
 
   genereer-corop-data:
     desc: Genereer COROP data

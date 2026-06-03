@@ -21,25 +21,19 @@ Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
 ## Expected test outputs genereren
 
-Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json` en `tests/docs/output_json_*.json` opnieuw gegenereerd worden.
+Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json` (en voor unit-tests ook `*.txt`), en `tests/docs/output_json_*.json` opnieuw gegenereerd worden.
 
-Gebruik de Task targets (zie `taskfile.yml`):
+> ⚠️ Let op: als je de expected output-jsons opnieuw genereerd na code-changes zullen alle tests slagen. Het is dus belangrijk om te analyseren welke expected outputs hoe veranderen na de code-changes die je hebt doorgevoerd om te begrijpen of je code-changes wel het gewenste effect hebben gehad en niet ook nog ongewenste neveneffecten.
+
+Gebruik het Task target (zie `taskfile.yml`):
 
 ```bash
 task genereer-test-output
 ```
 
-Of specifieker:
+Dit draait `scripts/genereer_test_output.py` en overschrijft alle expected outputs onder `tests/data/**/output/` en `tests/docs/output_json_*.json`.
 
-```bash
-task genereer-test-output-stelselgroepen
-task genereer-test-output-units
-task genereer-test-output-docs
-```
-
-Onder water gebruikt dit `scripts/genereer_test_output.py --force`, zodat bestaande output-bestanden ook overschreven worden. Zonder `--force` worden bestaande output-jsons niet geüpdatet; daarvoor is `task genereer-test-output-ontbrekend`.
-
-Let op: `genereer-test-output-docs` schrijft alleen naar `tests/docs/output_json_{json,python}_voorbeeld.json` en overschrijft geen JSON-input onder `docs/implementatietoelichtingen/voorbeelden/**`.
+Voor unit-inputs onder `tests/data/<stelsel>/input/` (niet voor `stelselgroepen/`) schrijft het script naast JSON ook een `*.txt` met de woningwaardering in leesbaar tabelformaat. Die bestanden zijn bedoeld om output-wijzigingen in PRs te reviewen; pytest vergelijkt alleen de JSONs.
 
 Let ook op: `docs/aan-de-slag/index.md` bevat inline voorbeeld-output (JSON en tabel). Als output, namen of criterium-id’s wijzigen, moet je die voorbeelden handmatig nalopen/bijwerken zodat de docs niet stilzwijgend verouderen.
 
