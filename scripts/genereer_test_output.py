@@ -64,6 +64,10 @@ def main() -> int:
     if str(root) not in sys.path:
         sys.path.insert(0, str(root))
 
+    from tests.peildatum import REFERENTIE_PEILDATUM
+
+    peildatum = REFERENTIE_PEILDATUM
+
     logger.enable("woningwaardering")
     warnings.simplefilter("default", UserWarning)
     warnings.filterwarnings("ignore", category=UserWarning)
@@ -71,7 +75,6 @@ def main() -> int:
     logger.remove()
     stdout_id = logger.add(sys.stdout, level="INFO")
 
-    peildatum = date(2026, 1, 1)
     data_dir = Path("tests/data")
 
     updated = 0

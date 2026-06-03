@@ -1,8 +1,8 @@
-from datetime import date
 from pathlib import Path
 
 import pytest
 
+from tests.peildatum import REFERENTIE_PEILDATUM
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -14,7 +14,7 @@ DATA_DIR = BASE_DIR / "tests/data"
 
 @pytest.fixture()
 def peildatum():
-    return date(2026, 1, 1)
+    return REFERENTIE_PEILDATUM
 
 
 @pytest.fixture(
