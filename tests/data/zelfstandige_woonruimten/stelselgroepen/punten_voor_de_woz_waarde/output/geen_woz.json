@@ -17,7 +17,11 @@
           "aantal": 85806.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "Minimum WOZ-waarde (geen relevante WOZ-waarde beschikbaar)"
+            "naam": "Minimum WOZ-waarde (geen relevante WOZ-waarde beschikbaar)",
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
+            }
           }
         },
         {
@@ -27,6 +31,10 @@
             "naam": "Minimum WOZ-waarde gebruikt voor berekening",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
@@ -54,6 +62,10 @@
             "naam": "Minimum WOZ-waarde gebruikt voor berekening",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },

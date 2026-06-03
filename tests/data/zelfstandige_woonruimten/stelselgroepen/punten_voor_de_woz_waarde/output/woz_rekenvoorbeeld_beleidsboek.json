@@ -17,7 +17,11 @@
           "aantal": 300000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2025"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2025",
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
+            }
           }
         },
         {

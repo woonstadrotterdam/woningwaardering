@@ -132,6 +132,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                             )
                         ),
                         bovenliggende_criterium=puntenwaardering_sleutel,
+                        meeteenheid=Meeteenheid.euro,
                     ),
                     aantal=woz_eenheid.vastgestelde_waarde,
                 )

@@ -172,6 +172,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                             criterium="woz_waarde",
                         )
                     ),
+                    meeteenheid=Meeteenheid.euro,
                 ),
                 aantal=int(woz_waarde),
             )
@@ -191,6 +192,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                         bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                             id=id_onderdeel_I,
                         ),
+                        meeteenheid=Meeteenheid.euro,
                     ),
                     aantal=int(woz_waarde),
                 )
@@ -260,6 +262,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                         bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                             id=id_onderdeel_II,
                         ),
+                        meeteenheid=Meeteenheid.euro,
                     ),
                     aantal=int(woz_waarde),
                 )
