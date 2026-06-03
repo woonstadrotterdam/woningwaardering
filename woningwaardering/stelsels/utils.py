@@ -377,7 +377,7 @@ def energieprestatie_met_geldig_label(
             )
             continue
 
-        # 2.4.3 #3 Vervallen energielabel: maximaal 10 jaar geldig (beleidsboek).
+        # 2.4.3 Geldigheid energieprestatie op peildatum (beleidsboek).
         # Wij berekenen de 10-jaarsgeldigheid niet zelf; wij gaan uit van de geldigheid van het energielabel.
         # In EP-online is dat de 'Geldig tot'-datum; in VERA is dat einddatum. Peildatum moet vóór einddatum liggen.
         begindatum = energieprestatie.begindatum
