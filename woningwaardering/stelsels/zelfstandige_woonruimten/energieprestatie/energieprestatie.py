@@ -1,5 +1,5 @@
 import warnings
-from datetime import date, datetime
+from datetime import date
 from importlib.resources import files
 
 import pandas as pd
@@ -98,7 +98,7 @@ class Energieprestatie(Stelselgroep):
             not energieprestatie.soort
             or not energieprestatie.label
             or not energieprestatie.label.code
-            or not energieprestatie.registratiedatum
+            or not energieprestatie.begindatum
         ):
             return woningwaardering
 
@@ -122,8 +122,8 @@ class Energieprestatie(Stelselgroep):
 
         if (
             lookup_key == "label_ei"
-            and energieprestatie.registratiedatum >= datetime(2015, 1, 1).astimezone()
-            and energieprestatie.registratiedatum < datetime(2021, 1, 1).astimezone()
+            and energieprestatie.begindatum >= date(2015, 1, 1)
+            and energieprestatie.begindatum < date(2021, 1, 1)
             and energieprestatie.soort == Energieprestatiesoort.energie_index
         ):
             if energieprestatie.waarde is not None:

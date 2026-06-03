@@ -1,6 +1,6 @@
 import asyncio
 import warnings
-from datetime import date, datetime, time
+from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 from functools import wraps
 from importlib.resources import files
@@ -8,7 +8,6 @@ from typing import Any, Callable, Counter, Iterator, List, Tuple
 
 import pandas as pd
 import requests
-from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
 
@@ -347,7 +346,6 @@ def energieprestatie_met_geldig_label(
     vereiste_attributen: List[
         Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]
     ] = [
-        ("registratiedatum", lambda ep: ep.registratiedatum is not None),
         ("soort", lambda ep: ep.soort is not None),
         ("status", lambda ep: ep.status is not None),
         ("begindatum", lambda ep: ep.begindatum is not None),
@@ -379,9 +377,14 @@ def energieprestatie_met_geldig_label(
             )
             continue
 
-        if (energieprestatie.begindatum and energieprestatie.einddatum) and not (
-            energieprestatie.begindatum <= peildatum < energieprestatie.einddatum
-        ):
+        # 2.4.3 Geldigheid energieprestatie op peildatum (beleidsboek).
+        # Wij berekenen de 10-jaarsgeldigheid niet zelf; wij gaan uit van de geldigheid van het energielabel.
+        # In EP-online is dat de 'Geldig tot'-datum; in VERA is dat einddatum. Peildatum moet vóór einddatum liggen.
+        begindatum = energieprestatie.begindatum
+        einddatum = energieprestatie.einddatum
+        if begindatum is None or einddatum is None:
+            continue
+        if not (begindatum <= peildatum < einddatum):
             logger.debug(
                 f"Eenheid ({eenheid.id}): peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
             )
@@ -393,25 +396,13 @@ def energieprestatie_met_geldig_label(
             )
             continue
 
-        if energieprestatie.registratiedatum and (
-            energieprestatie.registratiedatum
-            <= (
-                datetime.combine(peildatum, time.min).astimezone()
-                - relativedelta(years=10)
-            )
-        ):
-            logger.debug(
-                f"Eenheid ({eenheid.id}): registratie van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
-            )
-            continue
-
         logger.info(f"Eenheid ({eenheid.id}): geldige energieprestatie gevonden.")
         logger.debug(
             f"Energieprestatie: id={energieprestatie.id} soort={energieprestatie.soort.naam if energieprestatie.soort else None}"
             f" status={energieprestatie.status.naam if energieprestatie.status else None}"
             f" label={energieprestatie.label.naam if energieprestatie.label else None}"
             f" waarde={energieprestatie.waarde} begindatum={energieprestatie.begindatum}"
-            f" einddatum={energieprestatie.einddatum} registratiedatum={energieprestatie.registratiedatum.date() if energieprestatie.registratiedatum else None}"
+            f" einddatum={energieprestatie.einddatum}"
         )
         return energieprestatie
 
