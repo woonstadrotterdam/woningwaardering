@@ -522,7 +522,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 4. _Energielabel afgegeven in de periode 1 januari 2015 tot 1 januari 2021_  
    Een energielabel dat is afgegeven in de periode van 1 januari 2015 tot 1 januari 2021 krijgt geen punten in het woningwaarderingsstelsel. Dit zijn namelijk de zogenaamde ‘vereenvoudigde energielabels’, die slechts een meer globale inschatting van de energieprestatie van een woonruimte geven. Alleen energie-indexen die in de genoemde periode zijn afgegeven komen in aanmerking voor waardering.
 
-> Voor de periode 2015–2021 (2.4.2) en de 10-jaarsgeldigheid (2.4.3 #3) gebruiken wij de **opnamedatum**, niet de registratiedatum bij RVO. In VERA is dat `EenhedenEnergieprestatie.begindatum`. Beleidsboek 2.4.3 #4 spreekt over "afgegeven" labels in 2015–2021; wij volgen "opgenomen" uit 2.4.2 en 2.4.3 #3, omdat het beleidsboek daarbij uitgaat van de opnamemethode.
+> Voor het bepalen van de geldigheid van energielabels (2.4.3 #3) is `EenhedenEnergieprestatie.begindatum` en `EenhedenEnergieprestatie.einddatum` noodzakelijk (EP-online ‘Opnamedatum’ en ‘Geldig tot’). De peildatum moet vallen tussen begindatum en einddatum.
 
 #### 2.4.4 Punten voor geldige energieprestaties
 

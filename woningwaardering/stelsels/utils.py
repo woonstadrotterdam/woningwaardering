@@ -8,7 +8,6 @@ from typing import Any, Callable, Counter, Iterator, List, Tuple
 
 import pandas as pd
 import requests
-from dateutil.relativedelta import relativedelta
 from loguru import logger
 from prettytable import PrettyTable
 
@@ -378,9 +377,14 @@ def energieprestatie_met_geldig_label(
             )
             continue
 
-        if (energieprestatie.begindatum and energieprestatie.einddatum) and not (
-            energieprestatie.begindatum <= peildatum < energieprestatie.einddatum
-        ):
+        # 2.4.3 #3 Vervallen energielabel: maximaal 10 jaar geldig (beleidsboek).
+        # Wij berekenen de 10-jaarsgeldigheid niet zelf; wij gaan uit van de geldigheid van het energielabel.
+        # In EP-online is dat de 'Geldig tot'-datum; in VERA is dat einddatum. Peildatum moet vóór einddatum liggen.
+        begindatum = energieprestatie.begindatum
+        einddatum = energieprestatie.einddatum
+        if begindatum is None or einddatum is None:
+            continue
+        if not (begindatum <= peildatum < einddatum):
             logger.debug(
                 f"Eenheid ({eenheid.id}): peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
             )
@@ -389,14 +393,6 @@ def energieprestatie_met_geldig_label(
         if energieprestatie.status != Energieprestatiestatus.definitief:
             logger.debug(
                 f"Eenheid ({eenheid.id}): energieprestatie status is niet definitief."
-            )
-            continue
-
-        if energieprestatie.begindatum and energieprestatie.begindatum <= (
-            peildatum - relativedelta(years=10)
-        ):
-            logger.debug(
-                f"Eenheid ({eenheid.id}): opname van de energieprestatie is ouder dan 10 jaar op peildatum {peildatum}."
             )
             continue
 
