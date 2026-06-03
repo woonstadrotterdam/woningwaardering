@@ -23,7 +23,7 @@ Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
 Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json` (en voor unit-tests ook `*.txt`), en `tests/docs/output_json_*.json` opnieuw gegenereerd worden.
 
-> ⚠️ Let op: als je de expected output-jsons opnieuw genereerd na code-changes zullen alle tests slagen. Het is dus belangrijk om te analyseren welke expected outputs hoe veranderen na de code-changes die je hebt doorgevoerd om te begrijpen of je code-changes wel het gewenste effect hebben gehad en niet ook nog ongewenste neveneffecten.
+> ⚠️ Let op: als je de expected output-jsons opnieuw genereert na code-changes zullen alle tests slagen. Het is dus belangrijk om te analyseren welke expected outputs hoe veranderen na de code-changes die je hebt doorgevoerd om te begrijpen of je code-changes wel het gewenste effect hebben gehad en niet ook nog ongewenste neveneffecten.
 
 Gebruik het Task target (zie `taskfile.yml`):
 
