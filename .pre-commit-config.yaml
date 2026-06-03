@@ -59,7 +59,6 @@ repos:
           - "loguru>=0.7"
           - "monumenten>=2.0.1"
           - "pandas-stubs>=2.0"
-          - "prettytable>=3.12"
           - "pydantic>=2.10"
           - "rdflib>=7.0"
           - "tomli>=2.2"
