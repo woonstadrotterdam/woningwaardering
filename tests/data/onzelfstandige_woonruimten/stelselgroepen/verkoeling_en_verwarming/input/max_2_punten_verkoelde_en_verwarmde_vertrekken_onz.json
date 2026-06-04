@@ -17,7 +17,6 @@
       "oppervlakte": 19.1488,
       "verwarmd": true,
       "verkoeld": true,
-      "gemeenschappelijk": true,
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 2
     },
     {
@@ -35,7 +34,6 @@
       "oppervlakte": 19.1488,
       "verwarmd": true,
       "verkoeld": true,
-      "gemeenschappelijk": true,
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 2
     },
     {
@@ -53,7 +51,6 @@
       "oppervlakte": 19.1488,
       "verwarmd": true,
       "verkoeld": true,
-      "gemeenschappelijk": true,
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 2
     }
   ]

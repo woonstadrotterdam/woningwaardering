@@ -31,7 +31,6 @@
       "inhoud": 14.4272,
       "oppervlakte": 4.5,
       "verwarmd": false,
-      "gemeenschappelijk": true,
       "lengte": 3,
       "breedte": 1.5,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
@@ -50,7 +49,6 @@
       "inhoud": 14.4272,
       "oppervlakte": 52,
       "verwarmd": false,
-      "gemeenschappelijk": true,
       "lengte": 8,
       "breedte": 6.5,
       "gedeeldMetAantalEenheden": 5,
