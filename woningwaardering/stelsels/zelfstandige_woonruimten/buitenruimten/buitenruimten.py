@@ -97,9 +97,10 @@ class Buitenruimten(Stelselgroep):
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = (
                 WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"Totaal (gedeeld met {gedeeld_met} eenheden)"
-                    if gedeeld_met > 1
-                    else "Totaal (privé)",
+                    naam=utils.naam_gedeeld_met_groep(
+                        gedeeld_met,
+                        soort=GedeeldMetSoort.adressen,
+                    ),
                     id=totaal_id,
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
@@ -108,14 +109,8 @@ class Buitenruimten(Stelselgroep):
             woningwaardering.aantal = float(m2_afgerond)
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        woningwaardering_groep.punten = float(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-                and woningwaardering.criterium is not None
-                and woningwaardering.criterium.bovenliggende_criterium is None
-            )
+        woningwaardering_groep.punten = utils.som_punten_waarderingen(
+            woningwaardering_groep.woningwaarderingen
         )
 
         # maximaal 15 punten

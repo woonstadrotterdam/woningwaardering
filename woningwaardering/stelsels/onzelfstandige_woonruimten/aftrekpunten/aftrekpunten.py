@@ -61,17 +61,9 @@ class Aftrekpunten(Stelselgroep):
                 aftrekpunten_oppervlakte_vertrekken
             )
 
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-                and woningwaardering.criterium is not None
-                and woningwaardering.criterium.bovenliggende_criterium is None
-            )
+        woningwaardering_groep.punten = utils.som_punten_waarderingen(
+            woningwaardering_groep.woningwaarderingen
         )
-
-        woningwaardering_groep.punten = float(punten)
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -118,14 +110,8 @@ class Aftrekpunten(Stelselgroep):
             ).waardeer(eenheid)
 
         if oppervlakte_resultaat.woningwaarderingen:
-            totale_oppervlakte_vertrekken = sum(
-                Decimal(str(woningwaardering.aantal))
-                for woningwaardering in oppervlakte_resultaat.woningwaarderingen
-                if (
-                    woningwaardering.criterium
-                    and woningwaardering.criterium.bovenliggende_criterium is None
-                    and woningwaardering.aantal is not None
-                )
+            totale_oppervlakte_vertrekken = utils.som_effectieve_aantal_waarderingen(
+                oppervlakte_resultaat.woningwaarderingen
             )
 
             # 4 punten aftrek als de totale oppervlakte van de vertrekken minder is dan 8 m2

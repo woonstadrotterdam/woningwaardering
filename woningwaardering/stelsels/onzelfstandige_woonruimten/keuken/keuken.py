@@ -1,4 +1,3 @@
-from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 
@@ -53,7 +52,7 @@ class Keuken(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
+        gedeeld_met_aantallen: dict[int, None] = {}
 
         ruimten = [
             ruimte
@@ -73,9 +72,9 @@ class Keuken(Stelselgroep):
                         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         is not None
                     ):
-                        gedeeld_met_counter[
+                        gedeeld_met_aantallen[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ] += Decimal(str(woningwaardering.punten))
+                        ] = None
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                             id=str(
                                 CriteriumId(
@@ -98,7 +97,7 @@ class Keuken(Stelselgroep):
                             )
                         )
                     elif woningwaardering.punten:
-                        gedeeld_met_counter[1] += Decimal(str(woningwaardering.punten))
+                        gedeeld_met_aantallen[1] = None
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
                                 id=str(
@@ -114,12 +113,13 @@ class Keuken(Stelselgroep):
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
-        for aantal, punten in gedeeld_met_counter.items():
+        for aantal in gedeeld_met_aantallen:
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"Totaal (gedeeld met {aantal} onzelfstandige woonruimten)"
-                if aantal > 1
-                else "Totaal (privé)",
+                naam=utils.naam_gedeeld_met_groep(
+                    aantal,
+                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                ),
                 id=str(
                     CriteriumId(
                         stelselgroep=self.stelselgroep,
@@ -129,19 +129,10 @@ class Keuken(Stelselgroep):
                     )
                 ),
             )
-            woningwaardering.punten = float(
-                utils.rond_af_op_kwart(punten / Decimal(str(aantal)))
-            )
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        woningwaardering_groep.punten = float(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-                and woningwaardering.criterium is not None
-                and woningwaardering.criterium.bovenliggende_criterium is None
-            )
+        woningwaardering_groep.punten = utils.som_punten_waarderingen(
+            woningwaardering_groep.woningwaarderingen
         )
 
         logger.info(

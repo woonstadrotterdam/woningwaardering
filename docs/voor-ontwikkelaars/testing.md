@@ -21,7 +21,7 @@ Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
 ## Expected test outputs genereren
 
-Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json`, `tests/docs/output_json_*.json` en de output-txts opnieuw gegenereerd worden. Gebruik hiervoor:
+Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json`, `tests/docs/output_json_*.json` en de gerelateerde output-txt bestanden opnieuw gegenereerd worden. Gebruik hiervoor:
 
 ```bash
 task genereer-test-output

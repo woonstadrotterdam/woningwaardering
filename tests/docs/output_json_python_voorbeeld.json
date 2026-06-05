@@ -88,8 +88,7 @@
           "criterium": {
             "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken"
-          },
-          "punten": 4.0
+          }
         }
       ]
     },

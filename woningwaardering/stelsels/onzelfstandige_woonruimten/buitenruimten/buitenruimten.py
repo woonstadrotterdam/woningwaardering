@@ -149,17 +149,12 @@ class Buitenruimten(Stelselgroep):
         # maak (sub)totalen
         for aantal_onz, aantal_adressen_punten in gedeeld_met_counter.items():
             for aantal_adressen, punten in aantal_adressen_punten.items():
-                woningwaardering = WoningwaarderingResultatenWoningwaardering(
-                    punten=float(punten),
-                    aantal=float(gedeeld_met_m2_som[aantal_onz][aantal_adressen])
-                    if gedeeld_met_m2_som[aantal_onz][aantal_adressen] > 0
-                    else None,
-                )
+                woningwaardering = WoningwaarderingResultatenWoningwaardering()
 
                 if aantal_onz == 1 and aantal_adressen == 1:
                     woningwaardering.criterium = (
                         WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Totaal (privé)",
+                            naam=utils.naam_gedeeld_met_groep(1),
                             id=str(
                                 CriteriumId(
                                     stelselgroep=self.stelselgroep,
@@ -169,15 +164,15 @@ class Buitenruimten(Stelselgroep):
                             ),
                         )
                     )
-                    woningwaardering.criterium.meeteenheid = (
-                        Meeteenheid.vierkante_meter_m2
-                    )
                     woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
                 elif aantal_adressen > 1:
                     woningwaardering.criterium = (
                         WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=f"Totaal (gedeeld met {aantal_adressen} adressen)",
+                            naam=utils.naam_gedeeld_met_groep(
+                                aantal_adressen,
+                                soort=GedeeldMetSoort.adressen,
+                            ),
                             id=str(
                                 CriteriumId(
                                     stelselgroep=self.stelselgroep,
@@ -187,9 +182,6 @@ class Buitenruimten(Stelselgroep):
                                 )
                             ),
                         )
-                    )
-                    woningwaardering.criterium.meeteenheid = (
-                        Meeteenheid.vierkante_meter_m2
                     )
                     if aantal_onz > 1:
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
@@ -206,12 +198,12 @@ class Buitenruimten(Stelselgroep):
                     woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
             if aantal_onz > 1:
-                woningwaardering = WoningwaarderingResultatenWoningwaardering(
-                    punten=float(sum(aantal_adressen_punten.values())),
-                    aantal=float(sum(gedeeld_met_m2_som[aantal_onz].values())),
-                )
+                woningwaardering = WoningwaarderingResultatenWoningwaardering()
                 woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)",
+                    naam=utils.naam_gedeeld_met_groep(
+                        aantal_onz,
+                        soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                    ),
                     id=str(
                         CriteriumId(
                             stelselgroep=self.stelselgroep,
@@ -220,18 +212,11 @@ class Buitenruimten(Stelselgroep):
                             is_totaal=True,
                         )
                     ),
-                    meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
                 woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        woningwaardering_groep.punten = float(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-                and woningwaardering.criterium is not None
-                and woningwaardering.criterium.bovenliggende_criterium is None
-            )
+        woningwaardering_groep.punten = utils.som_punten_waarderingen(
+            woningwaardering_groep.woningwaarderingen
         )
 
         # maximaal 15 punten

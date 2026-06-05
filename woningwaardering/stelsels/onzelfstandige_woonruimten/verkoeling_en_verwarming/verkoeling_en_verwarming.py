@@ -1,6 +1,5 @@
 from collections import defaultdict
 from datetime import date
-from decimal import Decimal
 from typing import Iterator
 
 from loguru import logger
@@ -82,17 +81,9 @@ class VerkoelingEnVerwarming(Stelselgroep):
             list(self._maak_totalen(woningwaarderingen_totaal))
         )
 
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-                and woningwaardering.criterium
-                and woningwaardering.criterium.bovenliggende_criterium is None
-            ),
+        woningwaardering_groep.punten = utils.som_punten_waarderingen(
+            woningwaardering_groep.woningwaarderingen
         )
-
-        woningwaardering_groep.punten = float(punten)
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -105,23 +96,29 @@ class VerkoelingEnVerwarming(Stelselgroep):
             tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]
         ],
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        gedeeld_met_counter: defaultdict[int, defaultdict[str, Decimal]] = defaultdict(
-            lambda: defaultdict(Decimal)
-        )
+        gedeeld_met_criterium_ids: defaultdict[int, dict[str, None]] = defaultdict(dict)
 
         # {bovenliggend_criterium: {onzelfstandige_woonruimten: punten}}
         for ruimte, woningwaardering in waarderingen:
             gedeeld_met_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            gedeeld_met_counter[gedeeld_met_onz][
+            gedeeld_met_criterium_ids[gedeeld_met_onz][
                 woningwaardering.criterium.bovenliggende_criterium.id
                 if woningwaardering.criterium
                 and woningwaardering.criterium.bovenliggende_criterium
                 and woningwaardering.criterium.bovenliggende_criterium.id
                 else "verkoeling_en_verwarming_default"
-            ] += Decimal(str(woningwaardering.punten))
+            ] = None
 
-        for aantal_onz, bovenliggend_criterium_punten in gedeeld_met_counter.items():
-            for criterium_id, punten in bovenliggend_criterium_punten.items():
+        for aantal_onz, bovenliggend_criterium_ids in gedeeld_met_criterium_ids.items():
+            gedeeld_met_groep_id = str(
+                CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=aantal_onz,
+                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                    is_totaal=True,
+                )
+            )
+            for criterium_id in bovenliggend_criterium_ids:
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         id=criterium_id,
@@ -129,34 +126,17 @@ class VerkoelingEnVerwarming(Stelselgroep):
                         .capitalize()
                         .replace("_", " "),
                         bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=aantal_onz,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                    is_totaal=True,
-                                )
-                            )
+                            id=gedeeld_met_groep_id
                         ),
                     ),
-                    punten=float(punten),
                 )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            gedeeld_met_aantal=aantal_onz,
-                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                            is_totaal=True,
-                        )
+                    id=gedeeld_met_groep_id,
+                    naam=utils.naam_gedeeld_met_groep(
+                        aantal_onz,
+                        soort=GedeeldMetSoort.onzelfstandige_woonruimten,
                     ),
-                    naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
-                    if aantal_onz > 1
-                    else "Totaal (privé)",
-                ),
-                punten=float(
-                    utils.rond_af_op_kwart(sum(bovenliggend_criterium_punten.values()))
                 ),
             )
 

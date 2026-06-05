@@ -22,7 +22,6 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Meeteenheid,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -127,35 +126,17 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                                 is_totaal=True,
                             )
                         ),
-                        naam=f"Totaal gedeeld met {gedeeld_met_aantal_onzelfstandige_woonruimten} onzelfstandige woonruimten",
-                        meeteenheid=Meeteenheid.stuks,
-                    ),
-                    aantal=float(count["aantal"]),
-                    punten=float(
-                        utils.rond_af(
-                            Decimal(str(count["punten"]))
-                            / Decimal(
-                                str(gedeeld_met_aantal_onzelfstandige_woonruimten)
-                            ),
-                            decimalen=2,
-                        )
+                        naam=utils.naam_gedeeld_met_groep(
+                            gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                        ),
                     ),
                 )
             )
 
-        totaal_punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if (
-                    woningwaardering.punten is not None
-                    and woningwaardering.criterium
-                    and woningwaardering.criterium.bovenliggende_criterium is None
-                )
-            )
+        woningwaardering_groep.punten = utils.som_punten_waarderingen(
+            woningwaardering_groep.woningwaarderingen
         )
-
-        woningwaardering_groep.punten = float(totaal_punten)
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

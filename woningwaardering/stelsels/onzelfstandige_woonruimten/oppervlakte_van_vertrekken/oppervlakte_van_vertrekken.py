@@ -21,7 +21,6 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Meeteenheid,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -107,10 +106,10 @@ class OppervlakteVanVertrekken(Stelselgroep):
         for aantal_onz, oppervlakte in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                meeteenheid=Meeteenheid.vierkante_meter_m2,
-                naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
-                if aantal_onz > 1
-                else "Totaal (privé)",
+                naam=utils.naam_gedeeld_met_groep(
+                    aantal_onz,
+                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                ),
                 id=str(
                     CriteriumId(
                         stelselgroep=self.stelselgroep,
@@ -124,7 +123,6 @@ class OppervlakteVanVertrekken(Stelselgroep):
                 str(aantal_onz)
             )
             oppervlakte_totaal_na_delen += oppervlakte_na_delen
-            woningwaardering.aantal = float(oppervlakte_na_delen)
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         punten = float(utils.rond_af(oppervlakte_totaal_na_delen, decimalen=0))

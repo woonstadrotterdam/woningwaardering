@@ -1,6 +1,4 @@
-from collections import defaultdict
 from datetime import date
-from decimal import Decimal
 from typing import Iterator
 
 from loguru import logger
@@ -66,20 +64,9 @@ class VerkoelingEnVerwarming(Stelselgroep):
             self._maak_totalen(woningwaardering_groep)
         )
 
-        punten = utils.rond_af_op_kwart(
-            Decimal(
-                sum(
-                    Decimal(str(woningwaardering.punten))
-                    for woningwaardering in woningwaardering_groep.woningwaarderingen
-                    or []
-                    if woningwaardering.punten is not None
-                    and woningwaardering.criterium is not None
-                    and woningwaardering.criterium.bovenliggende_criterium is None
-                )
-            )
+        woningwaardering_groep.punten = utils.som_punten_waarderingen(
+            woningwaardering_groep.woningwaarderingen
         )
-
-        woningwaardering_groep.punten = float(punten)
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -90,7 +77,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
     def _maak_totalen(
         self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        criteriumsleutelpunten: dict[str, float] = defaultdict(float)
+        criteriumsleutel_ids: dict[str, None] = {}
         for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
             if (
                 woningwaardering.criterium
@@ -98,21 +85,18 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 and woningwaardering.criterium.bovenliggende_criterium.id
                 and isinstance(woningwaardering.punten, float)
             ):
-                criteriumsleutelpunten[
+                criteriumsleutel_ids[
                     woningwaardering.criterium.bovenliggende_criterium.id
-                ] += woningwaardering.punten
+                ] = None
 
-        for id, punten in criteriumsleutelpunten.items():
-            onderdelen = id.split("__")
+        for criterium_id in criteriumsleutel_ids:
+            onderdelen = criterium_id.split("__")
             naam = onderdelen[-1].capitalize().replace("_", " ")
             criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=naam,
-                id=id,
+                id=criterium_id,
             )
-            yield WoningwaarderingResultatenWoningwaardering(
-                criterium=criterium,
-                punten=punten,
-            )
+            yield WoningwaarderingResultatenWoningwaardering(criterium=criterium)
 
 
 if __name__ == "__main__":  # pragma: no cover

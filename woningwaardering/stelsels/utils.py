@@ -10,7 +10,7 @@ import pandas as pd
 import requests
 from loguru import logger
 
-from woningwaardering.stelsels import utils
+from woningwaardering.stelsels.criterium_id import GedeeldMetSoort
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
@@ -34,7 +34,20 @@ from woningwaardering.vera.referentiedata.eenheidmonument import (
     Eenheidmonument,
     EenheidmonumentReferentiedata,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Woningwaarderingstelsel,
+)
+from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
+    Woningwaarderingstelselgroep,
+)
 from woningwaardering.vera.utils import heeft_bouwkundig_element
+
+_STELSELGROEPEN_MET_SUBTOTAAL_AANTAL = frozenset(
+    {
+        Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+        Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+    }
+)
 
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
@@ -312,16 +325,8 @@ def _groep_toon_opslag_kolom(
 def _groep_punten_kolom_dieptes(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
 ) -> list[int]:
-    waarderingen = groep.woningwaarderingen or []
-    met_punten: set[int] = set()
-    for waardering in waarderingen:
-        if waardering.punten is not None:
-            met_punten.add(_criterium_hierarchie_diepte(waardering, waarderingen))
-    if groep.punten is not None:
-        met_punten.add(0)
-    if not met_punten:
-        return [0]
-    return list(range(max(met_punten) + 1))
+    """Eén puntenkolom (index 2); hiërarchie alleen via inspringing in de naamkolom."""
+    return [0]
 
 
 def _waardering_meeteenheid(
@@ -334,12 +339,10 @@ def _waardering_meeteenheid(
 
 def _waardering_punten_kolommen(
     waardering: WoningwaarderingResultatenWoningwaardering,
-    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
 ) -> dict[int, str]:
     if waardering.punten is None:
         return {}
-    diepte = _criterium_hierarchie_diepte(waardering, waarderingen)
-    return {diepte: _format_punten_cel(_tabel_fmt_num(waardering.punten))}
+    return {0: _format_punten_cel(_tabel_fmt_num(waardering.punten))}
 
 
 def _onderliggende_waarderingen(
@@ -380,7 +383,7 @@ def _render_waardering_pre_order(
             punten_kolom_dieptes=punten_kolom_dieptes,
             toon_opslag_kolom=toon_opslag_kolom,
             aantal=aantal,
-            punten_per_diepte=_waardering_punten_kolommen(waardering, waarderingen),
+            punten_per_diepte=_waardering_punten_kolommen(waardering),
             opslag=_waardering_opslag(waardering) if toon_opslag_kolom else "",
         )
     )
@@ -396,40 +399,128 @@ def _render_waardering_pre_order(
         )
 
 
+def _gedeeld_met_divisor(criterium_id: str | None) -> Decimal:
+    if criterium_id is None or "gedeeld_met__" not in criterium_id:
+        return Decimal("1")
+    parts = criterium_id.split("__")
+    try:
+        idx = parts.index("gedeeld_met")
+        return Decimal(parts[idx + 1])
+    except (ValueError, IndexError):
+        return Decimal("1")
+
+
+def _waardering_voor_criterium_id(
+    criterium_id: str | None,
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> WoningwaarderingResultatenWoningwaardering | None:
+    if criterium_id is None:
+        return None
+    return next(
+        (
+            w
+            for w in waarderingen
+            if w.criterium is not None and w.criterium.id == criterium_id
+        ),
+        None,
+    )
+
+
+def _effectieve_aantal_bijdrage(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> Decimal | None:
+    if waardering.aantal is None or waardering.criterium is None:
+        return None
+
+    bovenliggend = waardering.criterium.bovenliggende_criterium
+    if bovenliggend is not None and bovenliggend.id is not None:
+        parent = _waardering_voor_criterium_id(bovenliggend.id, waarderingen)
+        if parent is not None and parent.aantal is not None:
+            return None
+        divisor = _gedeeld_met_divisor(bovenliggend.id)
+        return rond_af(Decimal(str(waardering.aantal)) / divisor, decimalen=2)
+
+    criterium_id = waardering.criterium.id or ""
+    if "__totaal__" in criterium_id:
+        if waardering.punten is not None:
+            return rond_af(Decimal(str(waardering.aantal)), decimalen=2)
+        return None
+
+    return rond_af(Decimal(str(waardering.aantal)), decimalen=2)
+
+
+def som_effectieve_aantal_waarderingen(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> Decimal:
+    """Som van effectieve hoeveelheden (o.a. gedeelde m² / gedeeld_met), zonder dubbele kop+kind."""
+    bijdragen = [
+        b
+        for w in waarderingen or []
+        if (b := _effectieve_aantal_bijdrage(w, waarderingen or [])) is not None
+    ]
+    if not bijdragen:
+        return Decimal("0")
+    return rond_af(sum(bijdragen), decimalen=2)
+
+
+def groep_toont_subtotaal_aantal(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> bool:
+    """Of de stelselgroep-`Totaal`-regel in tabellen een hoeveelheid mag tonen."""
+    criterium_groep = groep.criterium_groep
+    if (
+        criterium_groep is None
+        or criterium_groep.stelsel is None
+        or criterium_groep.stelselgroep is None
+    ):
+        return False
+    if criterium_groep.stelsel != Woningwaarderingstelsel.zelfstandige_woonruimten:
+        return False
+    return criterium_groep.stelselgroep in _STELSELGROEPEN_MET_SUBTOTAAL_AANTAL
+
+
 def _groep_subtotaal_aantal_kolom(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
 ) -> str:
+    if not groep_toont_subtotaal_aantal(groep):
+        return ""
+
     waarderingen = groep.woningwaarderingen or []
-    tops = [
+    top_met_aantal = [
         w
         for w in waarderingen
-        if w.criterium is not None and w.criterium.bovenliggende_criterium is None
+        if w.aantal is not None
+        and w.criterium is not None
+        and w.criterium.bovenliggende_criterium is None
     ]
-    aantallen = [
-        Decimal(str(w.aantal))
-        for w in tops
-        if w.aantal is not None and w.criterium is not None
-    ]
+    if not top_met_aantal:
+        return ""
+
+    totaal = rond_af(
+        sum(Decimal(str(w.aantal)) for w in top_met_aantal),
+        decimalen=2,
+    )
+    if totaal == Decimal("0"):
+        return ""
+
     meeteenheid_codes = [
         w.criterium.meeteenheid.code or ""
-        for w in waarderingen
+        for w in top_met_aantal
         if w.criterium is not None and w.criterium.meeteenheid is not None
     ]
-    criteria = [w.criterium for w in waarderingen if w.criterium is not None]
-    verschillende_meeteenheden = len(set(meeteenheid_codes)) > 1 or len(
-        meeteenheid_codes
-    ) != len(criteria)
-    if verschillende_meeteenheden or not aantallen:
+    if len(set(meeteenheid_codes)) > 1:
         return ""
+
     meeteenheid = next(
         (
             w.criterium.meeteenheid
-            for w in tops
+            for w in top_met_aantal
             if w.criterium is not None and w.criterium.meeteenheid is not None
         ),
         None,
     )
-    return _format_aantal_kolom(float(rond_af(sum(aantallen), 2)), meeteenheid)
+    return _format_aantal_kolom(float(totaal), meeteenheid)
 
 
 def _render_detail_groep(
@@ -745,6 +836,62 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
     return (Decimal(getal) / kwart).quantize(
         Decimal("1"), rounding=ROUND_HALF_UP
     ) * kwart
+
+
+def parent_ids_met_onderliggende_punten(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> set[str]:
+    ids: set[str] = set()
+    for waardering in waarderingen or []:
+        if waardering.punten is None or waardering.criterium is None:
+            continue
+        bovenliggend = waardering.criterium.bovenliggende_criterium
+        if bovenliggend is not None and bovenliggend.id is not None:
+            ids.add(bovenliggend.id)
+    return ids
+
+
+def parent_ids_met_onderliggende_aantal(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> set[str]:
+    ids: set[str] = set()
+    for waardering in waarderingen or []:
+        if waardering.aantal is None or waardering.criterium is None:
+            continue
+        bovenliggend = waardering.criterium.bovenliggende_criterium
+        if bovenliggend is not None and bovenliggend.id is not None:
+            ids.add(bovenliggend.id)
+    return ids
+
+
+def naam_gedeeld_met_groep(
+    aantal: int,
+    *,
+    soort: GedeeldMetSoort | None = None,
+) -> str:
+    """Weergavenaam voor een gedeeld-met-groep (zonder prefix 'Totaal')."""
+    if aantal <= 1:
+        return "Privé"
+    if soort == GedeeldMetSoort.adressen:
+        return f"Gedeeld met {aantal} adressen"
+    if soort == GedeeldMetSoort.onzelfstandige_woonruimten:
+        return f"Gedeeld met {aantal} onzelfstandige woonruimten"
+    raise ValueError(
+        f"soort is verplicht bij gedeeld met aantal {aantal} (verwacht adressen of onzelfstandige_woonruimten)"
+    )
+
+
+def som_punten_waarderingen(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> float:
+    """Som van punten op alle waarderingen in een groep (afgerond op kwart).
+
+    Returnwaarde is bedoeld voor VERA-velden (``punten``).
+    """
+    if not waarderingen:
+        return 0.0
+    totaal = sum(Decimal(str(w.punten)) for w in waarderingen if w.punten is not None)
+    return float(rond_af_op_kwart(totaal))
 
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
@@ -1130,8 +1277,8 @@ def deel_punten_door_aantal_onzelfstandige_woonruimten(
                 woningwaardering.criterium.naam += f" (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
 
             woningwaardering.punten = float(
-                utils.rond_af(
-                    utils.rond_af(woningwaardering.punten, decimalen=2)
+                rond_af(
+                    rond_af(woningwaardering.punten, decimalen=2)
                     / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
                     decimalen=2,
                 )

@@ -1,7 +1,6 @@
 import difflib
 from dataclasses import dataclass
 from datetime import date
-from decimal import Decimal
 from pathlib import Path
 from typing import Iterator
 
@@ -246,62 +245,81 @@ def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fix
     return specifieke_input_en_output_model
 
 
+def assert_geen_dubbele_aantal_in_hierarchie(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> None:
+    """Geen structurele ouder met aantal wanneer onderliggende waarderingen ook aantal hebben."""
+    for groep in resultaat.groepen or []:
+        waarderingen = groep.woningwaarderingen or []
+        parent_ids = utils.parent_ids_met_onderliggende_aantal(waarderingen)
+        for waardering in waarderingen:
+            if (
+                waardering.aantal is None
+                or waardering.criterium is None
+                or waardering.criterium.id is None
+            ):
+                continue
+            if waardering.criterium.id not in parent_ids:
+                continue
+            if waardering.punten is not None:
+                continue
+            assert False, (
+                f"Waardering {waardering.criterium.id} heeft aantal terwijl onderliggende "
+                f"waarderingen ook aantal hebben "
+                f"(groep "
+                f"{groep.criterium_groep and groep.criterium_groep.stelselgroep and groep.criterium_groep.stelselgroep.naam})"
+            )
+
+
+def assert_geen_dubbele_punten_in_hierarchie(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> None:
+    """Geen ouder met punten wanneer een onderliggende waardering ook punten heeft."""
+    for groep in resultaat.groepen or []:
+        waarderingen = groep.woningwaarderingen or []
+        parent_ids = utils.parent_ids_met_onderliggende_punten(waarderingen)
+        for waardering in waarderingen:
+            if (
+                waardering.punten is None
+                or waardering.criterium is None
+                or waardering.criterium.id is None
+            ):
+                continue
+            assert waardering.criterium.id not in parent_ids, (
+                f"Waardering {waardering.criterium.id} heeft punten terwijl onderliggende "
+                f"waarderingen ook punten hebben "
+                f"(groep "
+                f"{groep.criterium_groep and groep.criterium_groep.stelselgroep and groep.criterium_groep.stelselgroep.naam})"
+            )
+
+
+def assert_groep_punten_is_som_van_waarderingen(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> None:
+    """groep.punten is de som van punten op waarderingen (indien die punten hebben)."""
+    for groep in resultaat.groepen or []:
+        waarderingen = groep.woningwaarderingen or []
+        if groep.punten is None:
+            continue
+        if not any(w.punten is not None for w in waarderingen):
+            continue
+        # Oppervlakte-stelselgroepen: groep.punten uit som aantal×factor + aparte puntenregels
+        if any(w.aantal is not None and w.punten is None for w in waarderingen):
+            continue
+        verwacht = utils.som_punten_waarderingen(waarderingen)
+        assert groep.punten == verwacht, (
+            f"groep.punten ({groep.punten}) != som waarderingen ({verwacht}) "
+            f"in groep "
+            f"{groep.criterium_groep and groep.criterium_groep.stelselgroep and groep.criterium_groep.stelselgroep.naam}"
+        )
+
+
 def assert_som_bovenliggend_criterium(
     resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-):
-    """
-    Controleert of de som van de punten van woningwaarderingen met een bovenliggend criterium
-    overeenkomt met de punten van de woningwaardering van het bovenliggende criterium
-    """
-    for groep in resultaat.groepen or []:
-        # Dictionaries voor punten van bovenliggende en onderliggende criteria
-        punten_bovenliggend: dict[str, Decimal] = {}
-        punten_onderliggend: dict[str, Decimal] = {}
-
-        for waardering in groep.woningwaarderingen or []:
-            # Sla waarderingen zonder punten over
-            if waardering.punten is None:
-                continue
-
-            # Als er een bovenliggend criterium is, tel de punten op bij onderliggende punten
-            if waardering.criterium and waardering.criterium.bovenliggende_criterium:
-                bovenliggend_id = waardering.criterium.bovenliggende_criterium.id
-                if bovenliggend_id is None:
-                    continue
-
-                punten_onderliggend[bovenliggend_id] = punten_onderliggend.get(
-                    bovenliggend_id, Decimal("0")
-                ) + Decimal(str(waardering.punten))
-
-            # Als dit een bovenliggend criterium is, sla de punten op
-            if (
-                waardering.criterium
-                and waardering.criterium.id
-                and any(
-                    woningwaardering.criterium
-                    and woningwaardering.criterium.bovenliggende_criterium
-                    and woningwaardering.criterium.bovenliggende_criterium.id
-                    == waardering.criterium.id
-                    for woningwaardering in groep.woningwaarderingen or []
-                )
-            ):
-                punten_bovenliggend[waardering.criterium.id] = Decimal(
-                    str(waardering.punten)
-                )
-
-        # Vergelijk de sommen voor elk bovenliggend criterium
-        for bovenliggend_id, verwachte_punten in punten_bovenliggend.items():
-            if bovenliggend_id in punten_onderliggend:
-                assert (
-                    punten_onderliggend[bovenliggend_id] == verwachte_punten
-                    or utils.rond_af_op_kwart(punten_onderliggend[bovenliggend_id])
-                    == verwachte_punten
-                ), (
-                    f"Punten komen niet overeen voor {bovenliggend_id} "
-                    f"in groep {groep.criterium_groep and groep.criterium_groep.stelselgroep and groep.criterium_groep.stelselgroep.naam}: "
-                    f"Som van onderliggende punten ({punten_onderliggend[bovenliggend_id]}) "
-                    f"!= Punten bovenliggend criterium ({verwachte_punten})"
-                )
+) -> None:
+    assert_geen_dubbele_punten_in_hierarchie(resultaat)
+    assert_geen_dubbele_aantal_in_hierarchie(resultaat)
+    assert_groep_punten_is_som_van_waarderingen(resultaat)
 
 
 def assert_punten_afgerond_op_kwarten(

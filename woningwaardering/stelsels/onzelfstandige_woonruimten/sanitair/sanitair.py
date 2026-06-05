@@ -1,4 +1,4 @@
-from collections import defaultdict, namedtuple
+from collections import namedtuple
 from datetime import date
 from decimal import Decimal
 from typing import Iterator
@@ -70,14 +70,8 @@ class Sanitair(Stelselgroep):
         woningwaardering_groep.woningwaarderingen.extend(waarderingen_met_totalen)
 
         # er is hier al op kwart afgerond
-        woningwaardering_groep.punten = float(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-                and woningwaardering.criterium is not None
-                and woningwaardering.criterium.bovenliggende_criterium is None
-            )
+        woningwaardering_groep.punten = utils.som_punten_waarderingen(
+            woningwaardering_groep.woningwaarderingen
         )
 
         logger.info(
@@ -265,7 +259,7 @@ class Sanitair(Stelselgroep):
             ]
         ],
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
+        gedeeld_met_aantallen: dict[int, None] = {}
         for ruimte, woningwaarderingen in ruimte_met_waarderingen:
             for woningwaardering in woningwaarderingen:
                 woningwaardering.punten = float(
@@ -297,9 +291,9 @@ class Sanitair(Stelselgroep):
                                 )
                             )
                         )
-                    gedeeld_met_counter[
+                    gedeeld_met_aantallen[
                         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                    ] += Decimal(str(woningwaardering.punten or 0))
+                    ] = None
                 else:
                     if woningwaardering.criterium:
                         woningwaardering.criterium.bovenliggende_criterium = (
@@ -313,17 +307,18 @@ class Sanitair(Stelselgroep):
                                 )
                             )
                         )
-                    gedeeld_met_counter[1] += Decimal(str(woningwaardering.punten or 0))
+                    gedeeld_met_aantallen[1] = None
 
                 yield woningwaardering
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
-        for aantal_onz, punten in gedeeld_met_counter.items():
+        for aantal_onz in gedeeld_met_aantallen:
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
             woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"Totaal (gedeeld met {aantal_onz} onzelfstandige woonruimten)"
-                if aantal_onz > 1
-                else "Totaal (privé)",
+                naam=utils.naam_gedeeld_met_groep(
+                    aantal_onz,
+                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                ),
                 id=str(
                     CriteriumId(
                         stelselgroep=self.stelselgroep,
@@ -333,7 +328,6 @@ class Sanitair(Stelselgroep):
                     )
                 ),
             )
-            woningwaardering.punten = float(utils.rond_af_op_kwart(punten))
             yield woningwaardering
 
 
