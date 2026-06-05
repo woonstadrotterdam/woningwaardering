@@ -60,6 +60,8 @@ W_OPSLAG = 7
 _GAP = "  "
 _INDENT = "  "
 _BULLET = "- "
+# Zelfde visuele inschuif als detailrijen (" " + eerste-celspatie in _format_plain_row).
+_TABEL_RIJ_INSCHUIF = "  "
 _PUNTEN_SCHEIDING = "--------"
 
 
@@ -246,9 +248,10 @@ def _detail_cellen(
 def _samenvatting_regel_met_waarde(
     label: str, waarde: str, max_hierarchie_diepte: int
 ) -> str:
+    label = _TABEL_RIJ_INSCHUIF + label
     if not waarde:
         return label
-    eind = _punten_kolom_einde(max_hierarchie_diepte)
+    eind = _punten_kolom_einde(max_hierarchie_diepte) + len(_TABEL_RIJ_INSCHUIF)
     padding = max(1, eind - len(label) - len(waarde))
     return f"{label}{' ' * padding}{waarde}"
 
@@ -611,7 +614,7 @@ def _render_samenvatting(
             )
         )
 
-    punten_einde = _punten_kolom_einde(max_hierarchie_diepte)
+    punten_einde = _punten_kolom_einde(max_hierarchie_diepte) + len(_TABEL_RIJ_INSCHUIF)
     lines.append(f"{' ' * (punten_einde - len(_PUNTEN_SCHEIDING))}{_PUNTEN_SCHEIDING}")
 
     if resultaat.punten is not None:

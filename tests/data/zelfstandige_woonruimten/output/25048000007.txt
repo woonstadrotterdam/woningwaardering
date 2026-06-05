@@ -1,19 +1,19 @@
-Oppervlakte van vertrekken                                          61.00 pt
-Oppervlakte van overige ruimten                                      3.75 pt
-Verkoeling en verwarming                                            11.00 pt
-Buitenruimten                                                        3.75 pt
-Energieprestatie                                                    30.00 pt
-Keuken
-Sanitair
-Gemeenschappelijke parkeerruimten
-Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-Punten voor de WOZ-waarde                                           39.75 pt
-Bijzondere voorzieningen
-Prijsopslag monumenten en nieuwbouw
-                                                                    --------
-TOTAAL                                                             149.00 pt
-Opslag                                                              0.00 EUR
-Maximaal redelijke huur                                           974.05 EUR
+  Oppervlakte van vertrekken                                          61.00 pt
+  Oppervlakte van overige ruimten                                      3.75 pt
+  Verkoeling en verwarming                                            11.00 pt
+  Buitenruimten                                                        3.75 pt
+  Energieprestatie                                                    30.00 pt
+  Keuken
+  Sanitair
+  Gemeenschappelijke parkeerruimten
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
+  Punten voor de WOZ-waarde                                           39.75 pt
+  Bijzondere voorzieningen
+  Prijsopslag monumenten en nieuwbouw
+                                                                      --------
+  TOTAAL                                                             149.00 pt
+  Opslag                                                              0.00 EUR
+  Maximaal redelijke huur                                           974.05 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
   Woonkamer                                                 30.12 m²

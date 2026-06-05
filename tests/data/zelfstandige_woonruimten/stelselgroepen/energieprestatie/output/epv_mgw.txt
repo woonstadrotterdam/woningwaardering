@@ -1,5 +1,5 @@
-Energieprestatie                                                    28.00 pt
-                                                                    --------
+  Energieprestatie                                                    28.00 pt
+                                                                      --------
 
 ENERGIEPRESTATIE
   Energieprestatievergoeding Meergezinswoning                         28.00 pt

@@ -1,5 +1,5 @@
-Punten voor de WOZ-waarde                                           36.25 pt
-                                                                    --------
+  Punten voor de WOZ-waarde                                           36.25 pt
+                                                                      --------
 
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2025             300000.00 EUR

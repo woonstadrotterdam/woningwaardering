@@ -1,20 +1,20 @@
-Oppervlakte van vertrekken                                          25.00 pt
-Oppervlakte van overige ruimten
-Verkoeling en verwarming                                             2.00 pt
-Energieprestatie                                                     8.50 pt
-Keuken                                                               3.50 pt
-Sanitair                                                             3.00 pt
-Buitenruimten
-Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
-Gemeenschappelijke parkeerruimten
-Punten voor de WOZ-waarde                                           12.00 pt
-Bijzondere voorzieningen
-Aftrekpunten
-Prijsopslag monumenten
-                                                                    --------
-TOTAAL                                                              54.00 pt
-Opslag                                                              0.00 EUR
-Maximaal redelijke huur                                           550.19 EUR
+  Oppervlakte van vertrekken                                          25.00 pt
+  Oppervlakte van overige ruimten
+  Verkoeling en verwarming                                             2.00 pt
+  Energieprestatie                                                     8.50 pt
+  Keuken                                                               3.50 pt
+  Sanitair                                                             3.00 pt
+  Buitenruimten
+  Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
+  Gemeenschappelijke parkeerruimten
+  Punten voor de WOZ-waarde                                           12.00 pt
+  Bijzondere voorzieningen
+  Aftrekpunten
+  Prijsopslag monumenten
+                                                                      --------
+  TOTAAL                                                              54.00 pt
+  Opslag                                                              0.00 EUR
+  Maximaal redelijke huur                                           550.19 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
   Privé

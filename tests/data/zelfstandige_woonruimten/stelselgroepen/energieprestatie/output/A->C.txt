@@ -1,5 +1,5 @@
-Energieprestatie                                                    22.00 pt
-                                                                    --------
+  Energieprestatie                                                    22.00 pt
+                                                                      --------
 
 ENERGIEPRESTATIE
   A -> C (Energie-index)                                              22.00 pt

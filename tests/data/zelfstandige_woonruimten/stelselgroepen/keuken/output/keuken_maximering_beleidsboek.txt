@@ -1,5 +1,5 @@
-Keuken                                                               8.00 pt
-                                                                    --------
+  Keuken                                                               8.00 pt
+                                                                      --------
 
 KEUKEN
   Keuken: Lengte aanrecht                                 1600.00 mm   4.00 pt

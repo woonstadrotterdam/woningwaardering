@@ -1,5 +1,5 @@
-Energieprestatie                                                    37.00 pt
-                                                                    --------
+  Energieprestatie                                                    37.00 pt
+                                                                      --------
 
 ENERGIEPRESTATIE
   A                                                                   37.00 pt

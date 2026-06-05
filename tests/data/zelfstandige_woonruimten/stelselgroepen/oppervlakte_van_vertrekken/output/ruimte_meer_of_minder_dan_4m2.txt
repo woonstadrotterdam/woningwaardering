@@ -1,5 +1,5 @@
-Oppervlakte van vertrekken                                           8.00 pt
-                                                                    --------
+  Oppervlakte van vertrekken                                           8.00 pt
+                                                                      --------
 
 OPPERVLAKTE VAN VERTREKKEN
   Keuken                                                     2.00 m²

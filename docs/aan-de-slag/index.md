@@ -611,22 +611,22 @@ with open(
 <summary>Voorbeeld output in tabel</summary>
 
 ```text
-Oppervlakte van vertrekken                                          41.00 pt
-Oppervlakte van overige ruimten
-Verkoeling en verwarming                                             4.00 pt
-Buitenruimten                                                       -5.00 pt
-Energieprestatie                                                    22.00 pt
-Keuken                                                               7.00 pt
-Sanitair
-Gemeenschappelijke parkeerruimten
-Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-Punten voor de WOZ-waarde                                          115.25 pt
-Bijzondere voorzieningen
-Prijsopslag monumenten en nieuwbouw
-                                                                    --------
-TOTAAL                                                             184.00 pt
-Opslag                                                              0.00 EUR
-Maximaal redelijke huur                                          1214.31 EUR
+  Oppervlakte van vertrekken                                          41.00 pt
+  Oppervlakte van overige ruimten
+  Verkoeling en verwarming                                             4.00 pt
+  Buitenruimten                                                       -5.00 pt
+  Energieprestatie                                                    22.00 pt
+  Keuken                                                               7.00 pt
+  Sanitair
+  Gemeenschappelijke parkeerruimten
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
+  Punten voor de WOZ-waarde                                          115.25 pt
+  Bijzondere voorzieningen
+  Prijsopslag monumenten en nieuwbouw
+                                                                      --------
+  TOTAAL                                                             184.00 pt
+  Opslag                                                              0.00 EUR
+  Maximaal redelijke huur                                          1214.31 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
   Slaapkamer                                                21.05 m²

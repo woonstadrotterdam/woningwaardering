@@ -1,19 +1,19 @@
-Oppervlakte van vertrekken                                          43.00 pt
-Oppervlakte van overige ruimten
-Verkoeling en verwarming                                            10.00 pt
-Buitenruimten                                                        3.50 pt
-Energieprestatie                                                    -4.00 pt
-Keuken                                                               4.00 pt
-Sanitair                                                             9.00 pt
-Gemeenschappelijke parkeerruimten
-Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-Punten voor de WOZ-waarde                                           41.50 pt
-Bijzondere voorzieningen
-Prijsopslag monumenten en nieuwbouw
-                                                                    --------
-TOTAAL                                                             107.00 pt
-Opslag                                                              0.00 EUR
-Maximaal redelijke huur                                           685.70 EUR
+  Oppervlakte van vertrekken                                          43.00 pt
+  Oppervlakte van overige ruimten
+  Verkoeling en verwarming                                            10.00 pt
+  Buitenruimten                                                        3.50 pt
+  Energieprestatie                                                    -4.00 pt
+  Keuken                                                               4.00 pt
+  Sanitair                                                             9.00 pt
+  Gemeenschappelijke parkeerruimten
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
+  Punten voor de WOZ-waarde                                           41.50 pt
+  Bijzondere voorzieningen
+  Prijsopslag monumenten en nieuwbouw
+                                                                      --------
+  TOTAAL                                                             107.00 pt
+  Opslag                                                              0.00 EUR
+  Maximaal redelijke huur                                           685.70 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
   Badruimte                                                  2.18 m²
