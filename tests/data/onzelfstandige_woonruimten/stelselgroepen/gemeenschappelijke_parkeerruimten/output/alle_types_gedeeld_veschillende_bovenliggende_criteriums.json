@@ -59,28 +59,16 @@
           "punten": 0.27
         },
         {
-          "aantal": 1.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal gedeeld met 2 onzelfstandige woonruimten",
-            "meeteenheid": {
-              "code": "STU",
-              "naam": "Stuks"
-            }
-          },
-          "punten": 1.5
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
         },
         {
-          "aantal": 2.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
-            "naam": "Totaal gedeeld met 3 onzelfstandige woonruimten",
-            "meeteenheid": {
-              "code": "STU",
-              "naam": "Stuks"
-            }
-          },
-          "punten": 0.77
+            "naam": "Gedeeld met 3 onzelfstandige woonruimten"
+          }
         }
       ]
     }

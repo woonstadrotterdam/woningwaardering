@@ -31,9 +31,8 @@
         {
           "criterium": {
             "id": "sanitair__totaal__prive",
-            "naam": "Totaal (privé)"
-          },
-          "punten": 5.0
+            "naam": "Privé"
+          }
         }
       ]
     }

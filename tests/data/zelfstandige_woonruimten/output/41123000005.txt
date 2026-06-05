@@ -37,24 +37,24 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
   Totaal                                                    11.15 m²   8.25 pt
 
 VERKOELING EN VERWARMING
-  Verwarmde vertrekken                                                22.00 pt
-    - Woonkamer 1                                                                  2.00 pt
-    - Slaapkamer 1                                                                 2.00 pt
-    - Slaapkamer 2                                                                 2.00 pt
-    - Badruimte 1                                                                  2.00 pt
-    - Slaapkamer 3                                                                 2.00 pt
-    - Keuken 1                                                                     2.00 pt
-    - Keuken 2                                                                     2.00 pt
-    - Badruimte 2                                                                  2.00 pt
-    - Woonkamer 2                                                                  2.00 pt
-    - Badruimte 3                                                                  2.00 pt
-    - Slaapkamer 4                                                                 2.00 pt
+  Verwarmde vertrekken
+    - Woonkamer 1                                                      2.00 pt
+    - Slaapkamer 1                                                     2.00 pt
+    - Slaapkamer 2                                                     2.00 pt
+    - Badruimte 1                                                      2.00 pt
+    - Slaapkamer 3                                                     2.00 pt
+    - Keuken 1                                                         2.00 pt
+    - Keuken 2                                                         2.00 pt
+    - Badruimte 2                                                      2.00 pt
+    - Woonkamer 2                                                      2.00 pt
+    - Badruimte 3                                                      2.00 pt
+    - Slaapkamer 4                                                     2.00 pt
                                                                       --------
   Totaal                                                              22.00 pt
 
 BUITENRUIMTEN
   Privé buitenruimten aanwezig                                         2.00 pt
-  Totaal (privé)                                            35.00 m²  12.25 pt
+  Privé                                                     35.00 m²  12.25 pt
     - Dakterras                                              4.46 m²
     - Tuin                                                  30.65 m²
                                                                       --------
@@ -68,8 +68,8 @@ ENERGIEPRESTATIE
 KEUKEN
   Keuken 1: Lengte aanrecht                               1875.00 mm   4.00 pt
   Keuken 2: Lengte aanrecht                               1920.00 mm   4.00 pt
-                                                            --------  --------
-  Totaal                                                  3795.00 mm   8.00 pt
+                                                                      --------
+  Totaal                                                               8.00 pt
 
 SANITAIR
   Badruimte 1 - Wastafel                                     1.00 st   1.00 pt
@@ -79,8 +79,8 @@ SANITAIR
   Badruimte 3 - Staand Toilet                                1.00 st   2.00 pt
   Badruimte 3 - Wastafel                                     1.00 st   1.00 pt
   Badruimte 3 - Douche                                       1.00 st   4.00 pt
-                                                            --------  --------
-  Totaal                                                     7.00 st  18.00 pt
+                                                                      --------
+  Totaal                                                              18.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             759000.00 EUR

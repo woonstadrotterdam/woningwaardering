@@ -29,26 +29,26 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
   Zolder                                                    11.07 m²
   Correctie: zolder zonder vaste trap                                 -5.00 pt
   Berging                                                    5.05 m²
-                                                                      --------
-  Totaal                                                               7.00 pt
+                                                            --------  --------
+  Totaal                                                    16.12 m²   7.00 pt
 
 VERKOELING EN VERWARMING
-  Verwarmde vertrekken                                                12.00 pt
-    - Woonkamer                                                                    2.00 pt
-    - Keuken                                                                       2.00 pt
-    - Slaapkamer 1                                                                 2.00 pt
-    - Slaapkamer 2                                                                 2.00 pt
-    - Slaapkamer 3                                                                 2.00 pt
-    - Badruimte                                                                    2.00 pt
+  Verwarmde vertrekken
+    - Woonkamer                                                        2.00 pt
+    - Keuken                                                           2.00 pt
+    - Slaapkamer 1                                                     2.00 pt
+    - Slaapkamer 2                                                     2.00 pt
+    - Slaapkamer 3                                                     2.00 pt
+    - Badruimte                                                        2.00 pt
                                                                       --------
   Totaal                                                              12.00 pt
 
 BUITENRUIMTEN
   Privé buitenruimten aanwezig                                         2.00 pt
-  Totaal (privé)                                            39.00 m²  13.65 pt
+  Privé                                                     39.00 m²  13.65 pt
     - Tuin 1                                                 4.62 m²
     - Tuin 2                                                34.41 m²
-  Maximaal 15 punten                                                  -0.65 pt
+  Maximaal 15 punten                                                  -0.75 pt
                                                                       --------
   Totaal                                                              15.00 pt
 
@@ -59,16 +59,16 @@ ENERGIEPRESTATIE
 
 KEUKEN
   Keuken: Lengte aanrecht                                 3000.00 mm   7.00 pt
-                                                            --------  --------
-  Totaal                                                  3000.00 mm   7.00 pt
+                                                                      --------
+  Totaal                                                               7.00 pt
 
 SANITAIR
   Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
   Toiletruimte - Wastafel                                    1.00 st   1.00 pt
   Badruimte - Wastafel                                       1.00 st   1.00 pt
   Badruimte - Douche                                         1.00 st   4.00 pt
-                                                            --------  --------
-  Totaal                                                     4.00 st   9.00 pt
+                                                                      --------
+  Totaal                                                               9.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             195000.00 EUR

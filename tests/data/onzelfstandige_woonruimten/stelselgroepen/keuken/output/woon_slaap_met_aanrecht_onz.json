@@ -76,16 +76,14 @@
         {
           "criterium": {
             "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
-          },
-          "punten": 5.5
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
         },
         {
           "criterium": {
             "id": "keuken__totaal__gedeeld_met__4__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 4 onzelfstandige woonruimten)"
-          },
-          "punten": 2.75
+            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
+          }
         }
       ]
     }

@@ -163,8 +163,7 @@
           "criterium": {
             "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken"
-          },
-          "punten": 10.0
+          }
         }
       ]
     },
@@ -206,7 +205,7 @@
           "aantal": 6.0,
           "criterium": {
             "id": "buitenruimten__totaal__prive",
-            "naam": "Totaal (privé)",
+            "naam": "Privé",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"

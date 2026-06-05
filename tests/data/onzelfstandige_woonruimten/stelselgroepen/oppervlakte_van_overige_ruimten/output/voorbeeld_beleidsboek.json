@@ -56,26 +56,16 @@
           }
         },
         {
-          "aantal": 4.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__totaal__prive",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "Privé"
           },
           "punten": 3.0
         },
         {
-          "aantal": 25.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 3 onzelfstandige woonruimten)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "Gedeeld met 3 onzelfstandige woonruimten"
           },
           "punten": 6.25
         }

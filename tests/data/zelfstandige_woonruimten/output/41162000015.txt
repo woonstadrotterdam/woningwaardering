@@ -32,19 +32,19 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
   Totaal                                                    11.81 m²   9.00 pt
 
 VERKOELING EN VERWARMING
-  Verwarmde vertrekken                                                12.00 pt
-    - Badruimte                                                                    2.00 pt
-    - Woonkamer                                                                    2.00 pt
-    - Slaapkamer 1                                                                 2.00 pt
-    - Slaapkamer 2                                                                 2.00 pt
-    - Keuken                                                                       2.00 pt
-    - Slaapkamer 3                                                                 2.00 pt
+  Verwarmde vertrekken
+    - Badruimte                                                        2.00 pt
+    - Woonkamer                                                        2.00 pt
+    - Slaapkamer 1                                                     2.00 pt
+    - Slaapkamer 2                                                     2.00 pt
+    - Keuken                                                           2.00 pt
+    - Slaapkamer 3                                                     2.00 pt
                                                                       --------
   Totaal                                                              12.00 pt
 
 BUITENRUIMTEN
   Privé buitenruimten aanwezig                                         2.00 pt
-  Totaal (privé)                                             8.00 m²   2.80 pt
+  Privé                                                      8.00 m²   2.80 pt
     - Balkon 1                                               2.81 m²
     - Balkon 2                                               5.20 m²
                                                                       --------
@@ -57,16 +57,16 @@ ENERGIEPRESTATIE
 
 KEUKEN
   Keuken: Lengte aanrecht                                 2010.00 mm   7.00 pt
-                                                            --------  --------
-  Totaal                                                  2010.00 mm   7.00 pt
+                                                                      --------
+  Totaal                                                               7.00 pt
 
 SANITAIR
   Badruimte - Wastafel                                       1.00 st   1.00 pt
   Badruimte - Douche                                         1.00 st   4.00 pt
   Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
   Toiletruimte - Wastafel                                    1.00 st   1.00 pt
-                                                            --------  --------
-  Totaal                                                     4.00 st   9.00 pt
+                                                                      --------
+  Totaal                                                               9.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             295000.00 EUR

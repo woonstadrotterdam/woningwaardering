@@ -52,7 +52,7 @@
           "aantal": 45.0,
           "criterium": {
             "id": "buitenruimten__totaal__prive",
-            "naam": "Totaal (privé)",
+            "naam": "Privé",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"

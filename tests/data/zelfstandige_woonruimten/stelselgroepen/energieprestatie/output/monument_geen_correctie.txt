@@ -1,5 +1,5 @@
-  Energieprestatie                                                    32.00 pt
-                                                                      --------
+Energieprestatie                                                    32.00 pt
+                                                                    --------
 
 ENERGIEPRESTATIE
   Energieprestatievergoeding Eengezinswoning                          32.00 pt

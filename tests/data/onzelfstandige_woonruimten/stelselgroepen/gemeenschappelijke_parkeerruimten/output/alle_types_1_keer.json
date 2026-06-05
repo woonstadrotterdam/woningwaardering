@@ -59,16 +59,10 @@
           "punten": 0.2
         },
         {
-          "aantal": 3.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal gedeeld met 2 onzelfstandige woonruimten",
-            "meeteenheid": {
-              "code": "STU",
-              "naam": "Stuks"
-            }
-          },
-          "punten": 0.95
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
         }
       ]
     }

@@ -87,15 +87,13 @@
           "criterium": {
             "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken"
-          },
-          "punten": 8.0
+          }
         },
         {
           "criterium": {
             "id": "verkoeling_en_verwarming__totaal__open_keuken",
             "naam": "Open keuken"
-          },
-          "punten": 6.0
+          }
         }
       ]
     }

@@ -49,14 +49,9 @@
           "punten": -2.25
         },
         {
-          "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__totaal__prive",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "Privé"
           },
           "punten": 7.5
         }

@@ -131,19 +131,17 @@
         {
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen",
-            "naam": "Totaal (gedeeld met 2 adressen)",
+            "naam": "Gedeeld met 2 adressen",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
             }
-          },
-          "punten": 22.0
+          }
         },
         {
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
-          },
-          "punten": 22.0
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
         }
       ]
     }

@@ -61,9 +61,8 @@
         {
           "criterium": {
             "id": "keuken__totaal__prive",
-            "naam": "Totaal (privé)"
-          },
-          "punten": 7.0
+            "naam": "Privé"
+          }
         }
       ]
     }

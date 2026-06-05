@@ -44,28 +44,16 @@
           "punten": 0.7
         },
         {
-          "aantal": 6.0,
           "criterium": {
             "id": "buitenruimten__totaal__gedeeld_met__2__adressen",
-            "naam": "Totaal (gedeeld met 2 adressen)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 1.05
+            "naam": "Gedeeld met 2 adressen"
+          }
         },
         {
-          "aantal": 6.0,
           "criterium": {
             "id": "buitenruimten__totaal__gedeeld_met__3__adressen",
-            "naam": "Totaal (gedeeld met 3 adressen)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 0.7
+            "naam": "Gedeeld met 3 adressen"
+          }
         }
       ]
     }

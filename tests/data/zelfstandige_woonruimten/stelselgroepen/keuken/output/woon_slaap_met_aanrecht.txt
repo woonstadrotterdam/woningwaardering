@@ -1,5 +1,5 @@
-  Keuken                                                              22.00 pt
-                                                                      --------
+Keuken                                                              22.00 pt
+                                                                    --------
 
 KEUKEN
   Woonkamer/keuken: Lengte aanrecht                       2000.00 mm   7.00 pt

@@ -56,14 +56,9 @@
           }
         },
         {
-          "aantal": 8.0,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__prive",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "Privé"
           }
         }
       ]

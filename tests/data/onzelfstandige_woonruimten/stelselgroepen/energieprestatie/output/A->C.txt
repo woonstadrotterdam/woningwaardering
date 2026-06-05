@@ -1,5 +1,5 @@
-  Energieprestatie                                                     1.25 pt
-                                                                      --------
+Energieprestatie                                                     1.25 pt
+                                                                    --------
 
 ENERGIEPRESTATIE
   A -> C (Energie-index)                                     3.67 m²   1.28 pt

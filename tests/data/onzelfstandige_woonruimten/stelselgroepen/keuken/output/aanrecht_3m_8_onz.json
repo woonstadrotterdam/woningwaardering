@@ -31,9 +31,8 @@
         {
           "criterium": {
             "id": "keuken__totaal__gedeeld_met__8__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 8 onzelfstandige woonruimten)"
-          },
-          "punten": 1.75
+            "naam": "Gedeeld met 8 onzelfstandige woonruimten"
+          }
         }
       ]
     }

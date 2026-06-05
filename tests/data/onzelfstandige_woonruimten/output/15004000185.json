@@ -56,25 +56,15 @@
           }
         },
         {
-          "aantal": 20.04,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__prive",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "Privé"
           }
         },
         {
-          "aantal": 4.6,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
           }
         }
       ]
@@ -123,15 +113,13 @@
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__prive"
             }
-          },
-          "punten": 2.0
+          }
         },
         {
           "criterium": {
             "id": "verkoeling_en_verwarming__totaal__prive",
-            "naam": "Totaal (privé)"
-          },
-          "punten": 2.0
+            "naam": "Privé"
+          }
         }
       ]
     },
@@ -193,9 +181,8 @@
         {
           "criterium": {
             "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
-          },
-          "punten": 3.5
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
         }
       ]
     },
@@ -245,9 +232,8 @@
         {
           "criterium": {
             "id": "sanitair__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
-          },
-          "punten": 3.0
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
         }
       ]
     },

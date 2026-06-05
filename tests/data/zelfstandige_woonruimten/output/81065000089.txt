@@ -28,18 +28,18 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
   Zolder                                                    10.23 m²
   Correctie: zolder zonder vaste trap                                 -5.00 pt
   Wasruimte                                                  2.86 m²
-                                                                      --------
-  Totaal                                                               4.75 pt
+                                                            --------  --------
+  Totaal                                                    13.09 m²   4.75 pt
 
 VERKOELING EN VERWARMING
-  Verwarmde vertrekken                                                10.00 pt
-    - Slaapkamer 1                                                                 2.00 pt
-    - Slaapkamer 2                                                                 2.00 pt
-    - Woonkamer                                                                    2.00 pt
-    - Keuken                                                                       2.00 pt
-    - Slaapkamer 3                                                                 2.00 pt
-  Verwarmde overige en verkeersruimten                                 1.00 pt
-    - Wasruimte                                                                    1.00 pt
+  Verwarmde vertrekken
+    - Slaapkamer 1                                                     2.00 pt
+    - Slaapkamer 2                                                     2.00 pt
+    - Woonkamer                                                        2.00 pt
+    - Keuken                                                           2.00 pt
+    - Slaapkamer 3                                                     2.00 pt
+  Verwarmde overige en verkeersruimten
+    - Wasruimte                                                        1.00 pt
                                                                       --------
   Totaal                                                              11.00 pt
 
@@ -55,13 +55,13 @@ ENERGIEPRESTATIE
 
 KEUKEN
   Keuken: Lengte aanrecht                                 2507.00 mm   7.00 pt
-                                                            --------  --------
-  Totaal                                                  2507.00 mm   7.00 pt
+                                                                      --------
+  Totaal                                                               7.00 pt
 
 SANITAIR
   Wasruimte - Douche                                         1.00 st   4.00 pt
-                                                            --------  --------
-  Totaal                                                     1.00 st   4.00 pt
+                                                                      --------
+  Totaal                                                               4.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             245000.00 EUR

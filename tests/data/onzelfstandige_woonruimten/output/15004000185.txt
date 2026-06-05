@@ -17,36 +17,36 @@ Opslag                                                              0.00 EUR
 Maximaal redelijke huur                                           550.19 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
-  Totaal (privé)                                            20.04 m²
+  Privé
     - Slaapkamer                                            20.04 m²
-  Totaal (gedeeld met 2 onzelfstandige woonruimten)          4.60 m²
+  Gedeeld met 2 onzelfstandige woonruimten
     - Keuken                                                 7.50 m²
     - Badruimte                                              1.70 m²
-                                                            --------  --------
-  Totaal                                                    24.64 m²  25.00 pt
+                                                                      --------
+  Totaal                                                              25.00 pt
 
 VERKOELING EN VERWARMING
-  Totaal (privé)                                                       2.00 pt
-    - Verwarmde vertrekken                                                         2.00 pt
-      - Slaapkamer                                                                               2.00 pt
+  Privé
+    - Verwarmde vertrekken
+      - Slaapkamer                                                     2.00 pt
                                                                       --------
   Totaal                                                               2.00 pt
 
 ENERGIEPRESTATIE
   Bouwjaar 1998                                             24.50 m²   8.58 pt
-                                                            --------  --------
-  Totaal                                                    24.50 m²   8.50 pt
+                                                                      --------
+  Totaal                                                               8.50 pt
 
 KEUKEN
-  Totaal (gedeeld met 2 onzelfstandige woonruimten)                    3.50 pt
-    - Keuken: Lengte aanrecht                             2220.00 mm               3.50 pt
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Keuken: Lengte aanrecht                             2220.00 mm   3.50 pt
                                                                       --------
   Totaal                                                               3.50 pt
 
 SANITAIR
-  Totaal (gedeeld met 2 onzelfstandige woonruimten)                    3.00 pt
-    - Toilet - Staand Toilet                                 1.00 st               1.50 pt
-    - Badruimte - Douche                                     1.00 st               1.50 pt
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Toilet - Staand Toilet                                 1.00 st   1.50 pt
+    - Badruimte - Douche                                     1.00 st   1.50 pt
                                                                       --------
   Totaal                                                               3.00 pt
 

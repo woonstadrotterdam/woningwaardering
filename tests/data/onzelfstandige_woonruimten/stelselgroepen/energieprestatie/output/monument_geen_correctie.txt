@@ -1,5 +1,5 @@
-  Energieprestatie                                                     1.75 pt
-                                                                      --------
+Energieprestatie                                                     1.75 pt
+                                                                    --------
 
 ENERGIEPRESTATIE
   Energieprestatievergoeding                                 3.67 m²   1.84 pt

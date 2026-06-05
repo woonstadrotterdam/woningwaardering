@@ -126,16 +126,14 @@
         {
           "criterium": {
             "id": "sanitair__totaal__prive",
-            "naam": "Totaal (privé)"
-          },
-          "punten": 5.0
+            "naam": "Privé"
+          }
         },
         {
           "criterium": {
             "id": "sanitair__totaal__gedeeld_met__8__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 8 onzelfstandige woonruimten)"
-          },
-          "punten": 1.25
+            "naam": "Gedeeld met 8 onzelfstandige woonruimten"
+          }
         }
       ]
     }

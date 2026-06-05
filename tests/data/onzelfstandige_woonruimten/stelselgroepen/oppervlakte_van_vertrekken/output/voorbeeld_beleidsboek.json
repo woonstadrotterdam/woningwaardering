@@ -42,25 +42,15 @@
           }
         },
         {
-          "aantal": 15.49,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__prive",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "Privé"
           }
         },
         {
-          "aantal": 3.74666667,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 3 onzelfstandige woonruimten)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "Gedeeld met 3 onzelfstandige woonruimten"
           }
         }
       ]

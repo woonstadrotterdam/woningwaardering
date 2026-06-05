@@ -28,10 +28,10 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
   Totaal                                                    19.67 m²  15.00 pt
 
 VERKOELING EN VERWARMING
-  Verwarmde vertrekken                                                 6.00 pt
-    - Keuken                                                                       2.00 pt
-    - Slaapkamer                                                                   2.00 pt
-    - Badruimte                                                                    2.00 pt
+  Verwarmde vertrekken
+    - Keuken                                                           2.00 pt
+    - Slaapkamer                                                       2.00 pt
+    - Badruimte                                                        2.00 pt
                                                                       --------
   Totaal                                                               6.00 pt
 
@@ -47,8 +47,8 @@ ENERGIEPRESTATIE
 
 KEUKEN
   Keuken: Lengte aanrecht                                 2100.00 mm   7.00 pt
-                                                            --------  --------
-  Totaal                                                  2100.00 mm   7.00 pt
+                                                                      --------
+  Totaal                                                               7.00 pt
 
 SANITAIR
   Keuken - Wastafel                                          1.00 st   1.00 pt
@@ -56,8 +56,8 @@ SANITAIR
   Badruimte - Douche                                         1.00 st   4.00 pt
   Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
   Toiletruimte - Wastafel                                    1.00 st   1.00 pt
-                                                            --------  --------
-  Totaal                                                     5.00 st  10.00 pt
+                                                                      --------
+  Totaal                                                              10.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             264000.00 EUR

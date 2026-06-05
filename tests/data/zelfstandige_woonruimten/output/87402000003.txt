@@ -30,18 +30,18 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
   Totaal                                                     5.25 m²   3.75 pt
 
 VERKOELING EN VERWARMING
-  Verwarmde vertrekken                                                10.00 pt
-    - Slaapkamer 1                                                                 2.00 pt
-    - Badruimte                                                                    2.00 pt
-    - Keuken                                                                       2.00 pt
-    - Woonkamer                                                                    2.00 pt
-    - Slaapkamer 2                                                                 2.00 pt
+  Verwarmde vertrekken
+    - Slaapkamer 1                                                     2.00 pt
+    - Badruimte                                                        2.00 pt
+    - Keuken                                                           2.00 pt
+    - Woonkamer                                                        2.00 pt
+    - Slaapkamer 2                                                     2.00 pt
                                                                       --------
   Totaal                                                              10.00 pt
 
 BUITENRUIMTEN
   Privé buitenruimten aanwezig                                         2.00 pt
-  Totaal (privé)                                             6.00 m²   2.10 pt
+  Privé                                                      6.00 m²   2.10 pt
     - Balkon                                                 5.60 m²
                                                                       --------
   Totaal                                                               4.00 pt

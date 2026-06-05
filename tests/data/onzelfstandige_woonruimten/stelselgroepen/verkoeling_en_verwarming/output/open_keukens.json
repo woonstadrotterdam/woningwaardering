@@ -90,8 +90,7 @@
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__prive"
             }
-          },
-          "punten": 8.0
+          }
         },
         {
           "criterium": {
@@ -100,15 +99,13 @@
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__prive"
             }
-          },
-          "punten": 6.0
+          }
         },
         {
           "criterium": {
             "id": "verkoeling_en_verwarming__totaal__prive",
-            "naam": "Totaal (privé)"
-          },
-          "punten": 14.0
+            "naam": "Privé"
+          }
         }
       ]
     }

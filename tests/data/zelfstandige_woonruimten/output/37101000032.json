@@ -205,8 +205,7 @@
           "criterium": {
             "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken"
-          },
-          "punten": 14.0
+          }
         }
       ]
     },
@@ -254,10 +253,10 @@
         {
           "aantal": 49.11,
           "criterium": {
-            "id": "buitenruimten__Space_108006357",
+            "id": "buitenruimten__Space_108006357__gedeeld_met__2__adressen",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__totaal__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -287,23 +286,35 @@
           "punten": 2.0
         },
         {
-          "aantal": 71.0,
+          "aantal": 22.0,
           "criterium": {
             "id": "buitenruimten__totaal__prive",
-            "naam": "Totaal (privé)",
+            "naam": "Privé",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 24.85
+          "punten": 7.7
+        },
+        {
+          "aantal": 49.0,
+          "criterium": {
+            "id": "buitenruimten__totaal__gedeeld_met__2__adressen",
+            "naam": "Gedeeld met 2 adressen",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 18.375
         },
         {
           "criterium": {
             "id": "buitenruimten__maximering",
             "naam": "Maximaal 15 punten"
           },
-          "punten": -11.85
+          "punten": -13.0
         }
       ]
     },
