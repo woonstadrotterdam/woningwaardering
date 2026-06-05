@@ -1,0 +1,19 @@
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen                  11.50 pt
+                                                                      --------
+
+GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
+  Badruimte (gedeeld met 2)                                 10.00 m²   5.00 pt
+  Badruimte - Wastafel (gedeeld met 2)                       1.00 st   0.50 pt
+  Badruimte - Bad (gedeeld met 2)                            1.00 st   3.00 pt
+  Badruimte - Voorzieningen: Bubbelfunctie van het bad (gedeeld met 2)         1.00 st   0.75 pt
+  Badruimte - Voorzieningen: Douchewand (gedeeld met 2)         1.00 st   0.63 pt
+  Badruimte - Voorzieningen: Handdoekenradiator (gedeeld met 2)         1.00 st   0.38 pt
+  Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel (gedeeld met 2)         1.00 st   0.50 pt
+  Badruimte - Voorzieningen: Kastruimte (gedeeld met 2)         2.00 st   0.75 pt
+  Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte (gedeeld met 2)                  -0.38 pt
+  Badruimte - Voorzieningen: Stopcontact bij wastafel (gedeeld met 2)         1.00 st   0.13 pt
+  Badruimte - Voorzieningen: Éénhandsmengkraan (gedeeld met 2)         1.00 st   0.13 pt
+  Badruimte - Voorzieningen: Thermostatische mengkraan (gedeeld met 2)         1.00 st   0.25 pt
+  Badruimte - Voorzieningen: Max verdubbeling punten bad en douche (gedeeld met 2)                  -0.13 pt
+                                                                      --------
+  Totaal                                                              11.50 pt

@@ -1,0 +1,9 @@
+  Gemeenschappelijke parkeerruimten                                    2.00 pt
+                                                                      --------
+
+GEMEENSCHAPPELIJKE PARKEERRUIMTEN
+  Type I (gedeeld met 10 adressen)                           1.00 st   0.90 pt
+  Type II (gedeeld met 10 adressen)                          1.00 st   0.60 pt
+  Type III (gedeeld met 10 adressen)                         1.00 st   0.40 pt
+                                                                      --------
+  Totaal                                                               2.00 pt

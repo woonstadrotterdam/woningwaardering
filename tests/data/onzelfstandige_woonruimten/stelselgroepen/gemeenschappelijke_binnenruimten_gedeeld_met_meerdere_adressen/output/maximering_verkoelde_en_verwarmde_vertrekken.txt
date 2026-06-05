@@ -1,0 +1,17 @@
+  Gemeenschappelijke binnenruimten gedeeld met meerdere adressen                  22.00 pt
+                                                                      --------
+
+GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Gedeeld met 2 adressen
+      - Woonkamer: Vertrek                                  20.00 m²   5.00 pt
+      - Keuken: Vertrek                                     20.00 m²   5.00 pt
+      - Keuken: Vertrek                                     20.00 m²   5.00 pt
+      - Woonkamer: Verkoelde en verwarmde vertrekken                   0.75 pt
+      - Keuken: Verkoelde en verwarmde vertrekken                      0.75 pt
+      - Keuken: Verkoelde en verwarmde vertrekken                      0.75 pt
+      - Keuken: Maximaal 2 extra punten voor verkoelde en verwarmde vertrekken                  -0.25 pt
+      - Keuken: Lengte aanrecht                           3001.00 mm   2.50 pt
+      - Keuken: Lengte aanrecht                           3001.00 mm   2.50 pt
+                                                                      --------
+  Totaal                                                              22.00 pt

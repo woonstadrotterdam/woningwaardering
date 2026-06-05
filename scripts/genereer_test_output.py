@@ -157,12 +157,12 @@ def main() -> int:
             )
             input_updated = _write_text_if_changed(output_file_path, output_content)
 
-            if not _is_stelselgroep_input(input_file_path):
-                txt_path = output_file_path.with_suffix(".txt")
-                txt_content = naar_tabel(woningwaardering_resultaat).get_string() + "\n"
-                input_updated = (
-                    _write_text_if_changed(txt_path, txt_content) or input_updated
-                )
+            txt_path = output_file_path.with_suffix(".txt")
+            txt_content = naar_tabel(woningwaardering_resultaat).get_string() + "\n"
+            # Altijd synchroniseren: JSON kan ongewijzigd zijn terwijl .txt verouderd is
+            # (bijv. na handmatige restore of oude PrettyTable-fixtures).
+            if _write_text_if_changed(txt_path, txt_content):
+                input_updated = True
 
             if input_updated:
                 updated += 1

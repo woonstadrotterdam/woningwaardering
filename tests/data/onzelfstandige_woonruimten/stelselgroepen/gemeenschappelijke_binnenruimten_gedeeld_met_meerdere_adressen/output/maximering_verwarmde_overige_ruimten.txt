@@ -1,0 +1,20 @@
+  Gemeenschappelijke binnenruimten gedeeld met meerdere adressen                  18.50 pt
+                                                                      --------
+
+GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Gedeeld met 2 adressen
+      - Berging: Overige ruimte                             20.00 m²   3.75 pt
+      - Berging: Overige Ruimte                             20.00 m²   3.75 pt
+      - Berging: Overige Ruimte                             20.00 m²   3.75 pt
+      - Berging: Overige Ruimte                             20.00 m²   3.75 pt
+      - Berging: Verwarmde overige en verkeersruimten                   0.25 pt
+      - Berging: Verwarmde overige en verkeersruimten                   0.25 pt
+      - Berging: Verwarmde overige en verkeersruimten                   0.25 pt
+      - Berging: Verwarmde overige en verkeersruimten                   0.25 pt
+    - Gedeeld met 3 adressen
+      - Berging: Overige Ruimte                             20.00 m²   2.50 pt
+      - Berging: Verwarmde overige en verkeersruimten                   0.17 pt
+      - Berging: Maximaal 4 punten voor verwarmde overige en verkeersruimten                  -0.17 pt
+                                                                      --------
+  Totaal                                                              18.50 pt

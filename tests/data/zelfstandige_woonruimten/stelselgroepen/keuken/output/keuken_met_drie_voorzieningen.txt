@@ -1,0 +1,9 @@
+  Keuken                                                               7.00 pt
+                                                                      --------
+
+KEUKEN
+  Keuken: Lengte aanrecht                                 1000.00 mm   4.00 pt
+  Inbouw koelkast (in zelfde ruimte)                         2.00 st   2.00 pt
+  Inbouw oven elektrisch                                     1.00 st   1.00 pt
+                                                                      --------
+  Totaal                                                               7.00 pt
