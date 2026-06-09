@@ -75,8 +75,8 @@ Voorbeelden van gegenereerde ID's:
 
 - `buitenruimten__Space_108014713` (ruimteregel)
 - `buitenruimten__prive` (gedeeld-met aggregaat, privé)
-- `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumnaam-regel)
 - `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen` (gedeeld-met aggregaat)
+- `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumnaam-regel)
 
 Bij gedeelde voorzieningen wordt automatisch 'prive' toegevoegd als het aantal 1 of minder is, en anders wordt het aantal en soort toegevoegd (bijvoorbeeld `gedeeld_met__4__adressen`).
 
