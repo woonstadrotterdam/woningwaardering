@@ -144,14 +144,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         id_onderdeel_I = str(
-            CriteriumId(
-                stelselgroep=self.stelselgroep, criterium="onderdeel_I", is_totaal=True
-            )
+            CriteriumId(stelselgroep=self.stelselgroep, criterium="onderdeel_I")
         )
         id_onderdeel_II = str(
-            CriteriumId(
-                stelselgroep=self.stelselgroep, criterium="onderdeel_II", is_totaal=True
-            )
+            CriteriumId(stelselgroep=self.stelselgroep, criterium="onderdeel_II")
         )
 
         # Toon de WOZ-waarde of minimumwaarde in de resultaten

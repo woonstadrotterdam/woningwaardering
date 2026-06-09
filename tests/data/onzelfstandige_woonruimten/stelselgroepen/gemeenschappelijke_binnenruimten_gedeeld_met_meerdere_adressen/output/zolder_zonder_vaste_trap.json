@@ -19,7 +19,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__Space_berging",
             "naam": "Berging: Overige ruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -34,7 +34,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__Space_zolder",
             "naam": "Zolder: Overige ruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -48,23 +48,23 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__Space_zolder__correctie_zolder_zonder_vaste_trap",
             "naam": "Correctie: zolder zonder vaste trap",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
             }
           },
           "punten": -2.5
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__2__adressen",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen",
             "naam": "Gedeeld met 2 adressen",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__prive"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__prive"
             }
           }
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__prive",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__prive",
             "naam": "Privé"
           }
         }

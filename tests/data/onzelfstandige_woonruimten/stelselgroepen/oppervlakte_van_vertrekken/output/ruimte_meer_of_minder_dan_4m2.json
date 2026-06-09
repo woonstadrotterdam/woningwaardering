@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_vertrekken__Space_901101",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__prive"
+              "id": "oppervlakte_van_vertrekken__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -33,7 +33,7 @@
             "id": "oppervlakte_van_vertrekken__Space_539495",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__prive"
+              "id": "oppervlakte_van_vertrekken__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -47,7 +47,7 @@
             "id": "oppervlakte_van_vertrekken__Space_185859",
             "naam": "Badkamer/toilet",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__prive"
+              "id": "oppervlakte_van_vertrekken__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -57,7 +57,7 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__totaal__prive",
+            "id": "oppervlakte_van_vertrekken__prive",
             "naam": "Privé"
           }
         }

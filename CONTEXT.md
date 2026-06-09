@@ -92,7 +92,7 @@ Een sleutel waarmee criteria logisch gegroepeerd kunnen worden, bijvoorbeeld om 
 
 ### bovenliggendeCriterium
 
-Verwijzing van een waardering naar een bovenliggend criterium binnen dezelfde stelselgroep-groep (JSON: `bovenliggendeCriterium`). Subgroepen worden in code vaak in het bovenliggendcriterium-id (`__totaal__`) gemarkeerd.
+Verwijzing van een waardering naar een bovenliggend criterium binnen dezelfde stelselgroep-groep (JSON: `bovenliggendeCriterium`). Criteriumsleutels volgen de id-families in `docs/introductie/opzet.md` (ruimteregel, gedeeld-met aggregaat, criteriumnaam-regel).
 
 ### UserWarning
 

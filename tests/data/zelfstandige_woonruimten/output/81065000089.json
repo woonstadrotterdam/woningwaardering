@@ -132,7 +132,7 @@
             "id": "verkoeling_en_verwarming__Space_29489751",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
@@ -142,7 +142,7 @@
             "id": "verkoeling_en_verwarming__Space_29489749",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
@@ -152,7 +152,7 @@
             "id": "verkoeling_en_verwarming__Space_29474434",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
@@ -162,7 +162,7 @@
             "id": "verkoeling_en_verwarming__Space_29474430",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
@@ -172,7 +172,7 @@
             "id": "verkoeling_en_verwarming__Space_29489750",
             "naam": "Slaapkamer 3",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
@@ -182,20 +182,20 @@
             "id": "verkoeling_en_verwarming__Space_29489752",
             "naam": "Wasruimte",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken"
           }
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_overige_en_verkeersruimten",
+            "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
             "naam": "Verwarmde overige en verkeersruimten"
           }
         }
@@ -357,13 +357,13 @@
             "id": "punten_voor_de_woz_waarde__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
+              "id": "punten_voor_de_woz_waarde__onderdeel_I"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
+            "id": "punten_voor_de_woz_waarde__onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 15.98
@@ -374,7 +374,7 @@
             "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__onderdeel_II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -388,13 +388,13 @@
             "id": "punten_voor_de_woz_waarde__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__onderdeel_II"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
           "punten": 14.26

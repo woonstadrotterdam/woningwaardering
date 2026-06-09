@@ -19,7 +19,7 @@
             "id": "buitenruimten__Space_108017427",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__gedeeld_met__2__adressen"
+              "id": "buitenruimten__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -34,7 +34,7 @@
             "id": "buitenruimten__Space_108017428",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__gedeeld_met__3__adressen"
+              "id": "buitenruimten__gedeeld_met__3__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -45,22 +45,22 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__totaal__gedeeld_met__2__adressen",
+            "id": "buitenruimten__gedeeld_met__2__adressen",
             "naam": "Gedeeld met 2 adressen"
           }
         },
         {
           "criterium": {
-            "id": "buitenruimten__totaal__gedeeld_met__3__adressen",
+            "id": "buitenruimten__gedeeld_met__3__adressen",
             "naam": "Gedeeld met 3 adressen",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           }
         },
         {
           "criterium": {
-            "id": "buitenruimten__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Gedeeld met 2 onzelfstandige woonruimten"
           }
         }

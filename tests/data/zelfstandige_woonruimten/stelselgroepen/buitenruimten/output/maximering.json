@@ -19,7 +19,7 @@
             "id": "buitenruimten__Space_1",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -33,7 +33,7 @@
             "id": "buitenruimten__Space_5",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -51,7 +51,7 @@
         {
           "aantal": 45.0,
           "criterium": {
-            "id": "buitenruimten__totaal__prive",
+            "id": "buitenruimten__prive",
             "naam": "Privé",
             "meeteenheid": {
               "code": "M2",

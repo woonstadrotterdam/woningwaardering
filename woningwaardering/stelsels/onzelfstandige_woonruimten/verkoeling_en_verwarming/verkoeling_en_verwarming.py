@@ -115,7 +115,6 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     stelselgroep=self.stelselgroep,
                     gedeeld_met_aantal=aantal_onz,
                     gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                    is_totaal=True,
                 )
             )
             for criterium_id in bovenliggend_criterium_ids:

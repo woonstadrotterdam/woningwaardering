@@ -61,21 +61,58 @@ De opbouw van een criterium ID kan de volgende onderdelen bevatten:
 
 - Stelselgroep (verplicht, bijvoorbeeld 'buitenruimten' of 'energieprestatie')
 - Ruimte ID (optioneel, bijvoorbeeld 'Space_108014713')
-- Criterium (optioneel, bijvoorbeeld 'factor_II' of 'woz_waarde')
-- Gedeeld met aantal (optioneel, voor gedeelde voorzieningen)
-- Gedeeld met soort (optioneel, 'adressen' of 'onzelfstandige_woonruimten')
-- Totaal indicator (optioneel)
+- Criteriumnaam (optioneel, bijvoorbeeld 'factor_II' of 'verwarmde_vertrekken')
+- Optioneel: Aantal waarmee iets gedeeld is
+- Indien `Aantal` > 1: Waarmee het aantal gedeeld is ( 'adressen' of 'onzelfstandige_woonruimten')
+
+Er zijn drie id-families:
+
+- **Ruimteregel:** `{stelselgroep}__{ruimte_id}__{criteriumnaam?}` — per ruimte of element
+- **Gedeeld-met aggregaat:** `{stelselgroep}__prive` of `{stelselgroep}__gedeeld_met__{n}__{soort}` — som per privé of gedeelde groep
+- **Criteriumnaam-regel:** `{stelselgroep}__{criteriumnaam}` — subgroepen, maxima of resultaatregels (bijv. WOZ-onderdelen)
 
 Voorbeelden van gegenereerde ID's:
 
-- `buitenruimten__Space_108014713` (voor een specifieke ruimte)
-- `buitenruimten__totaal__prive` (voor een privé totaal)
-- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__totaal__gedeeld_met__4__adressen` (voor gedeelde voorzieningen)
+- `buitenruimten__Space_108014713` (ruimteregel)
+- `buitenruimten__prive` (gedeeld-met aggregaat, privé)
+- `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumnaam-regel)
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen` (gedeeld-met aggregaat)
 
 Bij gedeelde voorzieningen wordt automatisch 'prive' toegevoegd als het aantal 1 of minder is, en anders wordt het aantal en soort toegevoegd (bijvoorbeeld `gedeeld_met__4__adressen`).
+
+Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat.
 
 Met deze ID's kan gerefereerd worden aan specifieke criteria in de output van de woningwaardering.
 
 ### Criteriumsleutels
 
-Bij sommige stelselgroepen heb je een aantal criteria die een gemeenschappelijke groep vormen. Bijvoorbeeld bij _verkoeling en verwarming_ mag je maximaal 2 extra punten krijgen voor vertrekken die verkoeld én verwarmd zijn. Daarnaast mag je ook maximaal 4 punten krijgen voor het aantal verwarmde overige- en verkeersruimten. Om te kunnen berekenen wat de som is van een subgroep en bijvoorbeeld maximering toe te passen maken wij gebruik van zogenoemde `criteriumSleutels`. Indien een waardering onderdeel is van een subgroep, dan wordt aan deze waardering in het veld `bovenliggendeCriterium` de `id` toegevoegd van de waardering die hoort bij de subgroep. In het voorbeeld hieronder is bijvoorbeeld de subgroep `Verwarmde vertrekken` binnen `verkoeling en verwarming` duidelijk te zien in de output-tabel. Voorgedefinieerde criteriumsleutels vind je in `woningwaardering/stelsels/criteriumsleutels.py`. Momenteel ondersteunen wij nog geen meerdere niveau's van subgroepen. Een criterium dat voor een ander criterium een bovenliggend criterium is, mag zelf geen bovenliggend criterium hebben.
+Bij sommige stelselgroepen horen meerdere detailwaarderingen bij dezelfde subgroep. Bijvoorbeeld bij _verkoeling en verwarming_ geldt een maximum van 2 extra punten voor vertrekken die verkoeld én verwarmd zijn, en een maximum van 4 punten voor verwarmde overige- en verkeersruimten. De maximering wordt in de stelselgroep-logica berekend; in de output groeperen we de bijbehorende detailregels met **criteriumsleutels**.
+
+Een criteriumsleutel is een id volgens de **criteriumnaam-regel** (`{stelselgroep}__{criteriumnaam}`):
+
+```text
+verkoeling_en_verwarming__verwarmde_vertrekken
+└──── stelselgroep ────┘  └── criteriumnaam ─┘
+```
+
+Detailregels (ruimteregels) verwijzen naar die sleutel via `bovenliggendeCriterium`: een VERA-object met daarin de `id` van de subgroep. Vervolgens wordt per unieke sleutel een aparte aggregaatregel aangemaakt met diezelfde `id` en een leesbare naam (bijv. _Verwarmde vertrekken_). Die aggregaatregel heeft geen eigen punten; de punten staan op de onderliggende detailregels.
+
+```text
+Verkoeling en verwarming
+└── Verwarmde vertrekken                         ← criteriumsleutel (aggregaatregel)
+    ├── Slaapkamer 1                             ← detailregel (punten)
+    └── Woonkamer                                ← detailregel (punten)
+```
+
+Zie [aan de slag](../aan-de-slag/index.md) voor een volledig voorbeeld in JSON-output en output-tabel.
+
+**Beperkingen en afspraken**
+
+- Subgroepen zijn op hetzelfde niveau, niet genest. We ondersteunen geen geneste criteriumnaam-subgroepen (`criteriumsleutel → criteriumsleutel`).
+- Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat (zie hierboven).
+- Een aggregaatregel met een criteriumsleutel-id mag wél een `bovenliggendeCriterium` hebben als dat een **gedeeld-met aggregaat** is (andere id-familie). Dat komt voor bij onzelfstandige woningen:
+
+```text
+verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten
+└──── stelselgroep ────┘└ gedeeld_met 2 ┘└ onzelfstandige_woonruimten ┘
+```

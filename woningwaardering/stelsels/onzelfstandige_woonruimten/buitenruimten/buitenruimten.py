@@ -89,7 +89,6 @@ class Buitenruimten(Stelselgroep):
                                 CriteriumId(
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=1,
-                                    is_totaal=True,
                                 )
                             )
                         )
@@ -101,7 +100,6 @@ class Buitenruimten(Stelselgroep):
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
                                 gedeeld_met_soort=GedeeldMetSoort.adressen,
-                                is_totaal=True,
                             )
                         )
                     )
@@ -112,7 +110,6 @@ class Buitenruimten(Stelselgroep):
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
                                 gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                is_totaal=True,
                             )
                         )
                     )
@@ -159,7 +156,6 @@ class Buitenruimten(Stelselgroep):
                                 CriteriumId(
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=1,
-                                    is_totaal=True,
                                 )
                             ),
                         )
@@ -178,7 +174,6 @@ class Buitenruimten(Stelselgroep):
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=aantal_adressen,
                                     gedeeld_met_soort=GedeeldMetSoort.adressen,
-                                    is_totaal=True,
                                 )
                             ),
                         )
@@ -190,7 +185,6 @@ class Buitenruimten(Stelselgroep):
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=aantal_onz,
                                     gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                    is_totaal=True,
                                 )
                             )
                         )
@@ -209,7 +203,6 @@ class Buitenruimten(Stelselgroep):
                             stelselgroep=self.stelselgroep,
                             gedeeld_met_aantal=aantal_onz,
                             gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                            is_totaal=True,
                         )
                     ),
                 )
@@ -404,7 +397,6 @@ class Buitenruimten(Stelselgroep):
                             CriteriumId(
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=1,
-                                is_totaal=True,
                             )
                         )
                     ),

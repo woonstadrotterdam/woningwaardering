@@ -445,7 +445,7 @@ def _effectieve_aantal_bijdrage(
         return rond_af(Decimal(str(waardering.aantal)) / divisor, decimalen=2)
 
     criterium_id = waardering.criterium.id or ""
-    if "__totaal__" in criterium_id:
+    if criterium_id in criteriumsleutel_ids(waarderingen):
         if waardering.punten is not None:
             return rond_af(Decimal(str(waardering.aantal)), decimalen=2)
         return None
@@ -865,6 +865,15 @@ def parent_ids_met_onderliggende_aantal(
         if bovenliggend is not None and bovenliggend.id is not None:
             ids.add(bovenliggend.id)
     return ids
+
+
+def criteriumsleutel_ids(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> set[str]:
+    """Ids die als bovenliggende criteriumsleutel in de waarderingen-graaf voorkomen."""
+    return parent_ids_met_onderliggende_punten(
+        waarderingen
+    ) | parent_ids_met_onderliggende_aantal(waarderingen)
 
 
 def naam_gedeeld_met_groep(

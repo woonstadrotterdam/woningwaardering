@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_vertrekken__Space_1",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__5__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_vertrekken__gedeeld_met__5__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -33,7 +33,7 @@
             "id": "oppervlakte_van_vertrekken__Space_2",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__6__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_vertrekken__gedeeld_met__6__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -43,13 +43,13 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__5__onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_vertrekken__gedeeld_met__5__onzelfstandige_woonruimten",
             "naam": "Gedeeld met 5 onzelfstandige woonruimten"
           }
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__6__onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_vertrekken__gedeeld_met__6__onzelfstandige_woonruimten",
             "naam": "Gedeeld met 6 onzelfstandige woonruimten"
           }
         }

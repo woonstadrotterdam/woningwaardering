@@ -120,7 +120,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         stelselgroep=self.stelselgroep,
                         gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
                         gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                        is_totaal=True,
                     )
                 )
 
@@ -132,7 +131,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=aantal_adressen,
                                     gedeeld_met_soort=GedeeldMetSoort.adressen,
-                                    is_totaal=True,
                                 )
                             ),
                             criterium=utils.naam_gedeeld_met_groep(
@@ -276,7 +274,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         stelselgroep=self.stelselgroep,
                         gedeeld_met_aantal=aantal_eenheden,
                         gedeeld_met_soort=GedeeldMetSoort.adressen,
-                        is_totaal=True,
                     )
                 )
 
@@ -392,7 +389,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                             stelselgroep=self.stelselgroep,
                             gedeeld_met_aantal=aantal_eenheden,
                             gedeeld_met_soort=GedeeldMetSoort.adressen,
-                            is_totaal=True,
                         )
                     ),
                     aantal=resultaat.aantal,
@@ -461,7 +457,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=aantal_eenheden,
                                 gedeeld_met_soort=GedeeldMetSoort.adressen,
-                                is_totaal=True,
                             )
                         ),
                         aantal=None,
@@ -531,7 +526,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=aantal_eenheden,
                                 gedeeld_met_soort=GedeeldMetSoort.adressen,
-                                is_totaal=True,
                             )
                         ),
                         aantal=waardering.aantal,

@@ -214,7 +214,6 @@ class Buitenruimten(Stelselgroep):
                     stelselgroep=self.stelselgroep,
                     gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
                     gedeeld_met_soort=GedeeldMetSoort.adressen,
-                    is_totaal=True,
                 )
                 totaal_criteria[str(totaal_criterium_id)] = totaal_criterium_id
                 woningwaardering.criterium = (
@@ -242,7 +241,6 @@ class Buitenruimten(Stelselgroep):
                     stelselgroep=self.stelselgroep,
                     gedeeld_met_aantal=1,
                     gedeeld_met_soort=GedeeldMetSoort.adressen,
-                    is_totaal=True,
                 )
                 totaal_criteria[str(totaal_criterium_id)] = totaal_criterium_id
                 woningwaardering.criterium = (

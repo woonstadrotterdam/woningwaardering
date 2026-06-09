@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_overige_ruimten__Space_1",
             "naam": "Zolder vertrek met trap",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__totaal__prive"
+              "id": "oppervlakte_van_overige_ruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -33,7 +33,7 @@
             "id": "oppervlakte_van_overige_ruimten__Space_3",
             "naam": "Zolder vertrek met vlizo trap",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met__3__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -43,14 +43,14 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__totaal__prive",
+            "id": "oppervlakte_van_overige_ruimten__prive",
             "naam": "Privé"
           },
           "punten": 7.5
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met__3__onzelfstandige_woonruimten",
             "naam": "Gedeeld met 3 onzelfstandige woonruimten"
           },
           "punten": 2.5

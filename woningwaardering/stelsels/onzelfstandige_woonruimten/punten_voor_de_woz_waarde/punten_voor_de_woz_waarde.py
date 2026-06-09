@@ -116,7 +116,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     CriteriumId(
                         stelselgroep=self.stelselgroep,
                         criterium="percentage_verschil",
-                        is_totaal=True,
                     )
                 )
             )
@@ -286,7 +285,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                             CriteriumId(
                                 stelselgroep=self.stelselgroep,
                                 criterium="percentage_verschil",
-                                is_totaal=True,
                             )
                         ),
                     ),

@@ -19,7 +19,7 @@
             "id": "keuken__keuken__lengte_aanrecht_aanrecht",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
+              "id": "keuken__prive"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -34,7 +34,7 @@
             "id": "keuken__keuken__extra_voorziening",
             "naam": "Inbouw koelkast (in zelfde ruimte)",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
+              "id": "keuken__prive"
             },
             "meeteenheid": {
               "code": "STU",
@@ -49,7 +49,7 @@
             "id": "keuken__keuken__extra_voorziening",
             "naam": "Inbouw oven elektrisch",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
+              "id": "keuken__prive"
             },
             "meeteenheid": {
               "code": "STU",
@@ -60,7 +60,7 @@
         },
         {
           "criterium": {
-            "id": "keuken__totaal__prive",
+            "id": "keuken__prive",
             "naam": "Privé"
           }
         }

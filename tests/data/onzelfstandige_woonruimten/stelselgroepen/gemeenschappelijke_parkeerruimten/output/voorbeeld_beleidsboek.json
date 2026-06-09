@@ -19,7 +19,7 @@
             "id": "gemeenschappelijke_parkeerruimten__1",
             "naam": "Type III (gedeeld met 10 adressen)",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__4__onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__4__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "STU",
@@ -30,7 +30,7 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__totaal__gedeeld_met__4__onzelfstandige_woonruimten",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__4__onzelfstandige_woonruimten",
             "naam": "Gedeeld met 4 onzelfstandige woonruimten"
           }
         }

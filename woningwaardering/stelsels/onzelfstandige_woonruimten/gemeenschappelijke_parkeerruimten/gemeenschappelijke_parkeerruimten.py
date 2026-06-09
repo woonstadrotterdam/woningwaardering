@@ -105,7 +105,6 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                                     stelselgroep=self.stelselgroep,
                                     gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
                                     gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                    is_totaal=True,
                                 )
                             ),
                         )
@@ -123,7 +122,6 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
                                 gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                is_totaal=True,
                             )
                         ),
                         naam=utils.naam_gedeeld_met_groep(

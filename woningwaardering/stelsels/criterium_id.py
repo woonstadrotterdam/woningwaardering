@@ -11,6 +11,14 @@ class GedeeldMetSoort(Enum):
 
 
 class CriteriumId:
+    """Genereert criterium-id strings voor woningwaardering-output.
+
+    Drie id-families (zie docs/introductie/opzet.md):
+    - Ruimteregel: {stelselgroep}__{ruimte_id}__{criterium?}
+    - Gedeeld-met aggregaat: {stelselgroep}__prive of __gedeeld_met__{n}__{soort}
+    - Criteriumnaam-regel: {stelselgroep}__{criteriumnaam}
+    """
+
     def __init__(
         self,
         stelselgroep: WoningwaarderingstelselgroepReferentiedata,
@@ -18,14 +26,12 @@ class CriteriumId:
         criterium: str = "",
         gedeeld_met_aantal: int | None = None,
         gedeeld_met_soort: GedeeldMetSoort | None = None,
-        is_totaal: bool = False,
     ):
         self.stelselgroep = stelselgroep
         self.ruimte_id = ruimte_id
         self.criterium = criterium
         self.gedeeld_met_aantal = gedeeld_met_aantal
         self.gedeeld_met_soort = gedeeld_met_soort
-        self.is_totaal = is_totaal
 
     def __str__(self) -> str:
         """Genereert de criterium id string."""
@@ -33,9 +39,6 @@ class CriteriumId:
 
         if self.ruimte_id is not None:
             onderdelen.append(self.ruimte_id)
-
-        if self.is_totaal:
-            onderdelen.append("totaal")
 
         if self.criterium:
             onderdelen.append(self.criterium)

@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_vertrekken__Keuken_1",
             "naam": "keuken als overige ruimte",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__prive"
+              "id": "oppervlakte_van_vertrekken__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,7 +29,7 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__totaal__prive",
+            "id": "oppervlakte_van_vertrekken__prive",
             "naam": "Privé"
           }
         }

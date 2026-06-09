@@ -19,7 +19,7 @@
             "id": "sanitair__Space_460717__bad",
             "naam": "Badkamer - Bad",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__prive"
+              "id": "sanitair__prive"
             },
             "meeteenheid": {
               "code": "STU",
@@ -30,7 +30,7 @@
         },
         {
           "criterium": {
-            "id": "sanitair__totaal__prive",
+            "id": "sanitair__prive",
             "naam": "Privé"
           }
         }

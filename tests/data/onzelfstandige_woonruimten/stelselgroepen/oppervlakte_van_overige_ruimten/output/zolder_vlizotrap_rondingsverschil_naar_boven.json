@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_overige_ruimten__Space_berging",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__totaal__prive"
+              "id": "oppervlakte_van_overige_ruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -33,7 +33,7 @@
             "id": "oppervlakte_van_overige_ruimten__Space_zolder",
             "naam": "Zolder",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__totaal__prive"
+              "id": "oppervlakte_van_overige_ruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -50,7 +50,7 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__totaal__prive",
+            "id": "oppervlakte_van_overige_ruimten__prive",
             "naam": "Privé"
           },
           "punten": 7.5

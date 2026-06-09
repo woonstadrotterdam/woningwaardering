@@ -19,7 +19,7 @@
             "id": "sanitair__Space_992985__hangend_toilet",
             "naam": "Toiletruimte - Hangend toilet",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__prive"
+              "id": "sanitair__prive"
             },
             "meeteenheid": {
               "code": "STU",
@@ -34,7 +34,7 @@
             "id": "sanitair__Space_992985__staand_toilet",
             "naam": "Toiletruimte - Staand Toilet",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__prive"
+              "id": "sanitair__prive"
             },
             "meeteenheid": {
               "code": "STU",
@@ -45,7 +45,7 @@
         },
         {
           "criterium": {
-            "id": "sanitair__totaal__prive",
+            "id": "sanitair__prive",
             "naam": "Privé"
           }
         }

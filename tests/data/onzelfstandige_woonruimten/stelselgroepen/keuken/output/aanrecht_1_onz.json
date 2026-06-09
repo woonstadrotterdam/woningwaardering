@@ -19,7 +19,7 @@
             "id": "keuken__keuken__lengte_aanrecht_aanrecht",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "keuken__gedeeld_met__2__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -30,7 +30,7 @@
         },
         {
           "criterium": {
-            "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
+            "id": "keuken__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Gedeeld met 2 onzelfstandige woonruimten"
           }
         }

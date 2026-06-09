@@ -68,7 +68,6 @@ def _waardeer_verwarmde_overige_ruimte(
                                 CriteriumId(
                                     stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
                                     criterium="verwarmde_overige_en_verkeersruimten",
-                                    is_totaal=True,
                                 )
                             ),
                         ),
@@ -95,7 +94,6 @@ def _waardeer_verwarmde_overige_ruimte(
                                     CriteriumId(
                                         stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
                                         criterium="verwarmde_overige_en_verkeersruimten",
-                                        is_totaal=True,
                                     )
                                 ),
                             ),
@@ -149,7 +147,6 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                                     CriteriumId(
                                         stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
                                         criterium="verkoelde_en_verwarmde_vertrekken",
-                                        is_totaal=True,
                                     )
                                 ),
                             ),
@@ -178,7 +175,6 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                                         CriteriumId(
                                             stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
                                             criterium="verkoelde_en_verwarmde_vertrekken",
-                                            is_totaal=True,
                                         )
                                     ),
                                 ),
@@ -206,7 +202,6 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                                     CriteriumId(
                                         stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
                                         criterium="verwarmde_vertrekken",
-                                        is_totaal=True,
                                     )
                                 ),
                             ),
@@ -262,7 +257,6 @@ def _waardeer_open_keuken(
                                 CriteriumId(
                                     stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
                                     criterium="open_keuken",
-                                    is_totaal=True,
                                 )
                             ),
                         ),

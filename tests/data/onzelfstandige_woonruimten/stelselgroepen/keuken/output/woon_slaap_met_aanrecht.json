@@ -19,7 +19,7 @@
             "id": "keuken__WOK__lengte_aanrecht_aanrecht",
             "naam": "Woonkamer/keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
+              "id": "keuken__prive"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -34,7 +34,7 @@
             "id": "keuken__Woonkamer__lengte_aanrecht_aanrecht",
             "naam": "Woonkamer: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
+              "id": "keuken__prive"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -49,7 +49,7 @@
             "id": "keuken__Woon-/slaapkamer__lengte_aanrecht_aanrecht",
             "naam": "Woon-/slaapkamer: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
+              "id": "keuken__prive"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -64,7 +64,7 @@
             "id": "keuken__Slaapkamer__lengte_aanrecht_aanrecht",
             "naam": "Slaapkamer: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
+              "id": "keuken__prive"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -75,7 +75,7 @@
         },
         {
           "criterium": {
-            "id": "keuken__totaal__prive",
+            "id": "keuken__prive",
             "naam": "Privé"
           }
         }

@@ -19,7 +19,7 @@
             "id": "buitenruimten__dakterras__gedeeld_met__3__adressen",
             "naam": "Dakterras",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__gedeeld_met__3__adressen"
+              "id": "buitenruimten__gedeeld_met__3__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -30,7 +30,7 @@
         {
           "aantal": 30.0,
           "criterium": {
-            "id": "buitenruimten__totaal__gedeeld_met__3__adressen",
+            "id": "buitenruimten__gedeeld_met__3__adressen",
             "naam": "Gedeeld met 3 adressen",
             "meeteenheid": {
               "code": "M2",

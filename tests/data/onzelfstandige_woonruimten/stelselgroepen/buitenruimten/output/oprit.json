@@ -19,7 +19,7 @@
             "id": "buitenruimten__Space_108017427",
             "naam": "Parkeerplaats",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -32,14 +32,14 @@
           "criterium": {
             "naam": "Privé buitenruimten aanwezig",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__prive"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "buitenruimten__totaal__prive",
+            "id": "buitenruimten__prive",
             "naam": "Privé"
           }
         }

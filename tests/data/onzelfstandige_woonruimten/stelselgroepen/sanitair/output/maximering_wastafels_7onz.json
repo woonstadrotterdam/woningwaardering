@@ -19,7 +19,7 @@
             "id": "sanitair__Space_509797__wastafel",
             "naam": "Badkamer - Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__prive"
+              "id": "sanitair__prive"
             },
             "meeteenheid": {
               "code": "STU",
@@ -34,7 +34,7 @@
             "id": "sanitair__Space_509797__meerpersoonswastafel",
             "naam": "Badkamer - Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__prive"
+              "id": "sanitair__prive"
             },
             "meeteenheid": {
               "code": "STU",
@@ -49,7 +49,7 @@
             "id": "sanitair__Space_237598__wastafel",
             "naam": "Woonkamer - Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__7__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met__7__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "STU",
@@ -63,7 +63,7 @@
             "id": "sanitair__Space_237598__max_punten_wastafel",
             "naam": "Woonkamer - Max 1.0 punt voor Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__7__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met__7__onzelfstandige_woonruimten"
             }
           },
           "punten": -0.29
@@ -74,7 +74,7 @@
             "id": "sanitair__Space_237598__meerpersoonswastafel",
             "naam": "Woonkamer - Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__7__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met__7__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "STU",
@@ -88,7 +88,7 @@
             "id": "sanitair__Space_237598__max_punten_meerpersoonswastafel",
             "naam": "Woonkamer - Max 1.5 punt voor Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__7__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met__7__onzelfstandige_woonruimten"
             }
           },
           "punten": -0.43
@@ -99,7 +99,7 @@
             "id": "sanitair__Space_483568__wastafel",
             "naam": "WoonkamerMetMax - Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__7__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met__7__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "STU",
@@ -113,7 +113,7 @@
             "id": "sanitair__Space_483568__max_punten_wastafel",
             "naam": "WoonkamerMetMax - Max 1.0 punt voor Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__7__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met__7__onzelfstandige_woonruimten"
             }
           },
           "punten": -0.14
@@ -124,7 +124,7 @@
             "id": "sanitair__Space_483568__meerpersoonswastafel",
             "naam": "WoonkamerMetMax - Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__7__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met__7__onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "STU",
@@ -138,20 +138,20 @@
             "id": "sanitair__Space_483568__max_punten_meerpersoonswastafel",
             "naam": "WoonkamerMetMax - Max 1.5 punt voor Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__7__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met__7__onzelfstandige_woonruimten"
             }
           },
           "punten": -0.21
         },
         {
           "criterium": {
-            "id": "sanitair__totaal__prive",
+            "id": "sanitair__prive",
             "naam": "Privé"
           }
         },
         {
           "criterium": {
-            "id": "sanitair__totaal__gedeeld_met__7__onzelfstandige_woonruimten",
+            "id": "sanitair__gedeeld_met__7__onzelfstandige_woonruimten",
             "naam": "Gedeeld met 7 onzelfstandige woonruimten"
           }
         }
