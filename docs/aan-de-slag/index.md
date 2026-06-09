@@ -626,7 +626,6 @@ SAMENVATTING 37101000032
   Prijsopslag monumenten en nieuwbouw
                                                                       --------
   TOTAAL                                                             284.00 pt
-  Opslag                                                              0.00 EUR
   Maximaal redelijke huur                                          1900.64 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
@@ -1170,7 +1169,6 @@ SAMENVATTING 37101000032
   Prijsopslag monumenten en nieuwbouw
                                                                       --------
   TOTAAL                                                             184.00 pt
-  Opslag                                                              0.00 EUR
   Maximaal redelijke huur                                          1214.31 EUR
 
 OPPERVLAKTE VAN VERTREKKEN

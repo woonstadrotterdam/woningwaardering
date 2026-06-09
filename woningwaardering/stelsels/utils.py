@@ -627,9 +627,9 @@ def _render_samenvatting(
         )
 
     opslag_delen: list[str] = []
-    if resultaat.opslagpercentage is not None:
+    if resultaat.opslagpercentage is not None and resultaat.opslagpercentage > 0:
         opslag_delen.append(f"{resultaat.opslagpercentage:.0%}")
-    if resultaat.huurprijsopslag is not None:
+    if resultaat.huurprijsopslag is not None and resultaat.huurprijsopslag > 0:
         opslag_delen.append(f"{_tabel_fmt_num(resultaat.huurprijsopslag)} EUR")
     if opslag_delen:
         lines.append(
