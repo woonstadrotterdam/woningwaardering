@@ -1,3 +1,4 @@
+SAMENVATTING 81020000003
   Oppervlakte van vertrekken                                          80.00 pt
   Oppervlakte van overige ruimten                                      3.75 pt
   Verkoeling en verwarming                                            13.00 pt

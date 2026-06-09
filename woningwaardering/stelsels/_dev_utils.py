@@ -117,12 +117,14 @@ class DevelopmentContext:
                 groepen=[resultaat]
             )
 
-        self._print_resultaat(resultaat)
+        self._print_resultaat(resultaat, eenheid.id)
         return resultaat
 
     def _print_resultaat(
-        self, resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
+        self,
+        resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        eenheid_id: str | None = None,
     ) -> None:
         print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-        tabel = utils.naar_tabel(resultaat)
+        tabel = utils.naar_tabel(resultaat, eenheid_id=eenheid_id)
         print(tabel)

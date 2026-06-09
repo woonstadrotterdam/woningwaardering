@@ -44,7 +44,7 @@ with open(
             by_alias=True, indent=2, exclude_none=True
         )
     )
-    tabel = naar_tabel(woningwaardering_resultaat)
+    tabel = naar_tabel(woningwaardering_resultaat, eenheid_id=eenheid.id)
 
     print(tabel)
 ```
@@ -611,6 +611,7 @@ with open(
 <summary>Voorbeeld output in tabel</summary>
 
 ```text
+SAMENVATTING 37101000032
   Oppervlakte van vertrekken                                         141.00 pt
   Oppervlakte van overige ruimten                                      5.25 pt
   Verkoeling en verwarming                                            14.00 pt
@@ -815,7 +816,7 @@ print(
         by_alias=True, indent=2, exclude_none=True
     )
 )
-tabel = naar_tabel(woningwaardering_resultaat)
+tabel = naar_tabel(woningwaardering_resultaat, eenheid_id=eenheid.id)
 
 print(tabel)
 ```
@@ -1154,6 +1155,7 @@ De output daarvan is een VERA woningwaarderingstelsel object.
 <summary>Voorbeeld output in tabel</summary>
 
 ```text
+SAMENVATTING 37101000032
   Oppervlakte van vertrekken                                          41.00 pt
   Oppervlakte van overige ruimten
   Verkoeling en verwarming                                             4.00 pt

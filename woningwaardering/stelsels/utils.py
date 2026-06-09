@@ -668,12 +668,15 @@ def naar_tabel(
         WoningwaarderingResultatenWoningwaarderingResultaat
         | WoningwaarderingResultatenWoningwaarderingGroep
     ),
+    *,
+    eenheid_id: str | None = None,
 ) -> WoningwaarderingTabel:
     """
     Genereer een tabel met de details van een woningwaarderingresultaat.
 
     Args:
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | WoningwaarderingResultatenWoningwaarderingGroep): Het object om de gegevens uit te halen.
+        eenheid_id (str | None): Optioneel eenheid-id voor de samenvattingskop.
 
     Returns:
         WoningwaarderingTabel: Samenvatting (volledig resultaat) en detailsecties.
@@ -695,6 +698,10 @@ def naar_tabel(
 
     lines: list[str] = []
     if toon_samenvatting and volledig_resultaat is not None:
+        titel = "SAMENVATTING"
+        if eenheid_id:
+            titel = f"{titel} {eenheid_id}"
+        lines.append(titel)
         lines.extend(_render_samenvatting(volledig_resultaat, max_hierarchie_diepte))
         lines.append("")
 
