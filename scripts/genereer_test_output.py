@@ -164,8 +164,8 @@ def main() -> int:
                 ).get_string()
                 + "\n"
             )
-            # Altijd synchroniseren: JSON kan ongewijzigd zijn terwijl .txt verouderd is
-            # (bijv. na handmatige restore of oude PrettyTable-fixtures).
+            # Altijd synchroniseren zodat eventuele opmaakwijzigingen van .txt outputs doorgevoerd
+            # worden, ook als JSON output ongewijzigd blijft.
             if _write_text_if_changed(txt_path, txt_content):
                 input_updated = True
 
