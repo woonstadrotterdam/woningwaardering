@@ -4,25 +4,25 @@ tasks:
   genereer-vera-bvg-modellen:
     desc: Genereer VERA BVG modellen
     cmds:
-      - python scripts/genereer_vera_bvg_modellen.py
-      - python scripts/uitbreiden_vera_modellen.py
-      - pre-commit run --files woningwaardering/vera/bvg/generated.py --hook-stage commit || true
+      - uv run python scripts/genereer_vera_bvg_modellen.py
+      - uv run python scripts/uitbreiden_vera_modellen.py
+      - uv run pre-commit run --files woningwaardering/vera/bvg/generated.py --hook-stage commit || true
   genereer-vera-referentiedata:
     desc: Genereer VERA referentiedata
     cmds:
-      - python scripts/genereer_vera_referentiedata.py
-      - pre-commit run --files woningwaardering/vera/referentiedata/* --hook-stage commit || true
+      - uv run python scripts/genereer_vera_referentiedata.py
+      - uv run pre-commit run --files woningwaardering/vera/referentiedata/* --hook-stage commit || true
     ignore_errors: yes
   genereer-opzet-woningwaarderinggroep:
     desc: Genereer de opzet voor de code van een woningwaarderinggroep
     cmds:
-      - python scripts/genereer_opzet_woningwaarderinggroep.py
+      - uv run python scripts/genereer_opzet_woningwaarderinggroep.py
   genereer-test-output:
     desc: Genereer alle expected test outputs (overschrijven)
     cmds:
-      - python scripts/genereer_test_output.py
+      - uv run python scripts/genereer_test_output.py
 
   genereer-corop-data:
     desc: Genereer COROP data
     cmds:
-      - python scripts/genereer_corop_data.py
+      - uv run python scripts/genereer_corop_data.py
