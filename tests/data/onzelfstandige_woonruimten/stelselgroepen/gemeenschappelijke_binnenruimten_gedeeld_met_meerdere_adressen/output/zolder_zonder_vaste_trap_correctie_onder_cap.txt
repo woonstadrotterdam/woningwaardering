@@ -5,9 +5,9 @@ SAMENVATTING
 GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
   Privé
     - Gedeeld met 2 adressen
-      - Berging: Overige ruimte                              6.00 m²
-      - Zolder: Overige ruimte                               6.33 m²
       - Correctie: zolder zonder vaste trap                           -2.25 pt
-      - Overige ruimten (gedeeld met 2)                                4.50 pt
+      - Overige ruimten                                                4.50 pt
+        - Berging                                            6.00 m²
+        - Zolder                                             6.33 m²
                                                                       --------
   Totaal                                                               2.25 pt

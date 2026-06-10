@@ -321,9 +321,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 )
             )
             groep_naam = (
-                f"Vertrekken (gedeeld met {aantal_eenheden})"
+                "Vertrekken"
                 if ruimtesoort == Ruimtesoort.vertrek
-                else f"Overige ruimten (gedeeld met {aantal_eenheden})"
+                else "Overige ruimten"
             )
 
             for ruimte in groep_ruimten:
@@ -339,14 +339,17 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     oppervlakte_resultaat = next(
                         waardeer_oppervlakte_van_overige_ruimte(ruimte)
                     )
-                if oppervlakte_resultaat.criterium is None:
+                if (
+                    oppervlakte_resultaat.criterium is None
+                    or oppervlakte_resultaat.criterium.naam is None
+                ):
                     warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
                     continue
 
                 waarderingen.append(
                     self._maak_woningwaardering(
-                        criterium=f"{oppervlakte_resultaat.criterium.naam}: {ruimte.soort.naam}",
-                        bovenliggende_criterium_id=bovenliggende_criterium_id,
+                        criterium=oppervlakte_resultaat.criterium.naam,
+                        bovenliggende_criterium_id=oppervlaktegroep_id,
                         aantal=oppervlakte_resultaat.aantal,
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
                         id=str(

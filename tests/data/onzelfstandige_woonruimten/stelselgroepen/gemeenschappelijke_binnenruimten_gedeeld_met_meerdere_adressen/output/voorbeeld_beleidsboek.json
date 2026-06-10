@@ -17,9 +17,9 @@
           "aantal": 2.0,
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
-            "naam": "Toilet: Overige Ruimte",
+            "naam": "Toilet",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__4__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -30,7 +30,7 @@
         {
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__4__adressen",
-            "naam": "Overige ruimten (gedeeld met 4)",
+            "naam": "Overige ruimten",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen"
             }
@@ -41,9 +41,9 @@
           "aantal": 20.0,
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
-            "naam": "Keuken: Vertrek",
+            "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__vertrekken__gedeeld_met__4__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -54,7 +54,7 @@
         {
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__vertrekken__gedeeld_met__4__adressen",
-            "naam": "Vertrekken (gedeeld met 4)",
+            "naam": "Vertrekken",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen"
             }
