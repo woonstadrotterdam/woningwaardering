@@ -1,0 +1,61 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GVR",
+          "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
+        }
+      },
+      "punten": 5.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_berging",
+            "naam": "Berging (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__2__adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 16.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_zolder",
+            "naam": "Zolder (gedeeld met 2)",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__2__adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_zolder__correctie_zolder_zonder_vaste_trap",
+            "naam": "Correctie: zolder zonder vaste trap"
+          },
+          "punten": -2.5
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__2__adressen",
+            "naam": "Overige ruimten (gedeeld met 2)"
+          },
+          "punten": 8.25
+        }
+      ]
+    }
+  ]
+}

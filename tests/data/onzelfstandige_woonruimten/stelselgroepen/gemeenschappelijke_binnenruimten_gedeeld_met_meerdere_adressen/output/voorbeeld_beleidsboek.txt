@@ -5,8 +5,10 @@ SAMENVATTING 1
 GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
   Gedeeld met 4 onzelfstandige woonruimten
     - Gedeeld met 4 adressen
-      - Keuken: Vertrek                                     20.00 m²   1.25 pt
-      - Toilet: Overige Ruimte                               2.00 m²   0.09 pt
+      - Toilet: Overige Ruimte                               2.00 m²
+      - Overige ruimten (gedeeld met 4)                                0.09 pt
+      - Keuken: Vertrek                                     20.00 m²
+      - Vertrekken (gedeeld met 4)                                     1.25 pt
       - Keuken: Verwarmde vertrekken                                   0.13 pt
       - Keuken: Lengte aanrecht                           2999.00 mm   0.44 pt
       - Keuken: Inbouw magnetron                             1.00 st   0.06 pt
