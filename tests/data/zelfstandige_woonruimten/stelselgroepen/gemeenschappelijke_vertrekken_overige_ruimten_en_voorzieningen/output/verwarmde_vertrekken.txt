@@ -4,9 +4,9 @@ SAMENVATTING 1
 
 GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
   Vertrekken (gedeeld met 5)                                           2.00 pt
-    - Slaapkamer (gedeeld met 5)                            10.00 m²
+    - Slaapkamer                                            10.00 m²
   Vertrekken (gedeeld met 6)                                           1.67 pt
-    - Woonkamer (gedeeld met 6)                             10.00 m²
+    - Woonkamer                                             10.00 m²
   Slaapkamer (gedeeld met 5)                                           0.40 pt
   Woonkamer (gedeeld met 6)                                            0.33 pt
                                                                       --------

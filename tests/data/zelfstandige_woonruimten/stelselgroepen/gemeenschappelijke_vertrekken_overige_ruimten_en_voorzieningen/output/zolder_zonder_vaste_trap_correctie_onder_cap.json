@@ -17,7 +17,7 @@
           "aantal": 6.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__Space_berging",
-            "naam": "Berging (gedeeld met 2)",
+            "naam": "Berging",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__2__adressen"
             },
@@ -31,7 +31,7 @@
           "aantal": 6.33,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__Space_zolder",
-            "naam": "Zolder (gedeeld met 2)",
+            "naam": "Zolder",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__2__adressen"
             },

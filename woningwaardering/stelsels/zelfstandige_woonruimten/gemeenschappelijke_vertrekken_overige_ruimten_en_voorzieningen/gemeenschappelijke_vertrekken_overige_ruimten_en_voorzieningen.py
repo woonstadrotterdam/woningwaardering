@@ -260,8 +260,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     oppervlakte_waardering.criterium.bovenliggende_criterium = (
                         groep_criterium_sleutel
                     )
-                    if oppervlakte_waardering.criterium.naam is not None:
-                        oppervlakte_waardering.criterium.naam = f"{oppervlakte_waardering.criterium.naam} (gedeeld met {aantal_eenheden})"
                 oppervlakte_waardering.punten = None
                 waarderingen.append(oppervlakte_waardering)
 
