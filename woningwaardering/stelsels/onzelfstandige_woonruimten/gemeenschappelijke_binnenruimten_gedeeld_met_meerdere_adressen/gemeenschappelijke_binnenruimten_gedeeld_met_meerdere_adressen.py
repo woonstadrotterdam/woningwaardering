@@ -9,6 +9,9 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import (
+    bereken_oppervlakte_punten,
+    bereken_zolder_correctie,
+    is_zolder_zonder_vaste_trap,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
     waardeer_oppervlakte_van_vertrek,
@@ -32,6 +35,8 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Doelgroep,
     Meeteenheid,
+    Ruimtesoort,
+    RuimtesoortReferentiedata,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -230,58 +235,121 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         defaultdict[int, defaultdict[int, Decimal]],
         list[WoningwaarderingResultatenWoningwaardering],
     ]:
-        waarderigen = []
+        # 2.9.7 -> 2.2: ruimten worden gegroepeerd per combinatie van aantal adressen,
+        # aantal onzelfstandige woonruimten en ruimtesoort. Per oppervlaktegroep wordt op
+        # hele m² afgerond (op het totaal) en daarna door beide aantallen gedeeld.
+        oppervlaktegroepen: defaultdict[
+            tuple[int, int, RuimtesoortReferentiedata], list[EenhedenRuimte]
+        ] = defaultdict(list)
+
         for ruimte in ruimten:
+            if ruimte.gedeeld_met_aantal_eenheden is None:
+                continue
+            ruimtesoort = utils.classificeer_ruimte(ruimte)
+            if ruimtesoort not in (Ruimtesoort.vertrek, Ruimtesoort.overige_ruimten):
+                continue
             aantal_onzelfstandige_woonruimten = (
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             )
+            oppervlaktegroepen[
+                (
+                    ruimte.gedeeld_met_aantal_eenheden,
+                    aantal_onzelfstandige_woonruimten,
+                    ruimtesoort,
+                )
+            ].append(ruimte)
 
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+        waarderingen: list[WoningwaarderingResultatenWoningwaardering] = []
 
-            waarderingen_vertrek = list(waardeer_oppervlakte_van_vertrek(ruimte))
+        def sorteer_oppervlaktegroepen(
+            oppervlaktegroep: tuple[
+                tuple[int, int, RuimtesoortReferentiedata], list[EenhedenRuimte]
+            ],
+        ) -> tuple[int, int, str]:
+            (
+                (
+                    aantal_eenheden,
+                    aantal_onzelfstandige_woonruimten,
+                    ruimtesoort,
+                ),
+                _,
+            ) = oppervlaktegroep
+            return aantal_eenheden, aantal_onzelfstandige_woonruimten, str(ruimtesoort)
 
-            waarderingen_overige_ruimten = list(
-                waardeer_oppervlakte_van_overige_ruimte(ruimte)
+        for groepssleutel, groep_ruimten in sorted(
+            oppervlaktegroepen.items(), key=sorteer_oppervlaktegroepen
+        ):
+            aantal_eenheden, aantal_onzelfstandige_woonruimten, ruimtesoort = (
+                groepssleutel
+            )
+            totaal_oppervlakte = sum(
+                (
+                    utils.rond_af(ruimte.oppervlakte, decimalen=2)
+                    for ruimte in groep_ruimten
+                    if ruimte.oppervlakte is not None
+                ),
+                start=Decimal("0"),
+            )
+            punten_per_m2 = (
+                Decimal("1.0")
+                if ruimtesoort == Ruimtesoort.vertrek
+                else Decimal("0.75")
+            )
+            oppervlaktepunten = (
+                bereken_oppervlakte_punten(totaal_oppervlakte, punten_per_m2)
+                / Decimal(str(aantal_eenheden))
+                / Decimal(str(aantal_onzelfstandige_woonruimten))
             )
 
-            if waarderingen_vertrek or waarderingen_overige_ruimten:
-                if waarderingen_vertrek:
-                    oppervlakte_resultaat = waarderingen_vertrek[0]
-                    punten_per_m2 = Decimal("1.0")
-                else:
-                    oppervlakte_resultaat = waarderingen_overige_ruimten[0]
-                    punten_per_m2 = Decimal("0.75")
-
-                punten = (
-                    Decimal(str(oppervlakte_resultaat.aantal))
-                    * punten_per_m2
-                    / Decimal(str(aantal_eenheden))
-                    / Decimal(str(aantal_onzelfstandige_woonruimten))
+            bovenliggende_criterium_id = str(
+                CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=aantal_eenheden,
+                    gedeeld_met_soort=GedeeldMetSoort.adressen,
                 )
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
-                    aantal_eenheden
-                ] += punten
+            )
+            oppervlaktegroep_id = str(
+                CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=aantal_eenheden,
+                    gedeeld_met_soort=GedeeldMetSoort.adressen,
+                    criterium=(
+                        "vertrekken"
+                        if ruimtesoort == Ruimtesoort.vertrek
+                        else "overige_ruimten"
+                    ),
+                )
+            )
+            groep_naam = (
+                "Vertrekken"
+                if ruimtesoort == Ruimtesoort.vertrek
+                else "Overige ruimten"
+            )
 
+            for ruimte in groep_ruimten:
                 if ruimte.soort is None:
                     warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
                     continue
-                if oppervlakte_resultaat.criterium is None:
+
+                if ruimtesoort == Ruimtesoort.vertrek:
+                    oppervlakte_resultaat = next(
+                        waardeer_oppervlakte_van_vertrek(ruimte)
+                    )
+                else:
+                    oppervlakte_resultaat = next(
+                        waardeer_oppervlakte_van_overige_ruimte(ruimte)
+                    )
+                if (
+                    oppervlakte_resultaat.criterium is None
+                    or oppervlakte_resultaat.criterium.naam is None
+                ):
                     warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
                     continue
 
-                bovenliggende_criterium_id = str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_eenheden,
-                        gedeeld_met_soort=GedeeldMetSoort.adressen,
-                    )
-                )
-
-                waarderigen.append(
+                waarderingen.append(
                     self._maak_woningwaardering(
-                        punten=punten,
-                        criterium=f"{oppervlakte_resultaat.criterium.naam}: {ruimte.soort.naam}",
-                        bovenliggende_criterium_id=bovenliggende_criterium_id,
+                        criterium=oppervlakte_resultaat.criterium.naam,
+                        bovenliggende_criterium_id=oppervlaktegroep_id,
                         aantal=oppervlakte_resultaat.aantal,
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
                         id=str(
@@ -293,53 +361,47 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     )
                 )
 
-                # 2.2.2.3 Zolderruimte zonder vaste trap
-                # Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden
-                # aangemerkt en er is geen vaste trap naar de zolder, dan worden er 5 punten
-                # afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend. Maar:
-                # er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten
-                # dat de zolderruimte zelf waard is. Met andere woorden: de waarde van de
-                # zolder kan door deze aftrek niet negatief worden.
-                if not waarderingen_vertrek:
-                    for waardering in waarderingen_overige_ruimten:
-                        ...
-                        if (
-                            waardering.criterium is None
-                            or waardering.criterium.id is None
-                            or not waardering.criterium.id.endswith(
-                                "__correctie_zolder_zonder_vaste_trap"
-                            )
-                            or waardering.punten is None
-                            or waardering.criterium.naam is None
-                        ):
-                            continue
-
-                        correctie_punten = (
-                            Decimal(str(waardering.punten))
-                            / Decimal(str(aantal_eenheden))
-                            / Decimal(str(aantal_onzelfstandige_woonruimten))
+            correctie_totaal = Decimal("0")
+            if ruimtesoort == Ruimtesoort.overige_ruimten:
+                for ruimte in groep_ruimten:
+                    if not is_zolder_zonder_vaste_trap(ruimte):
+                        continue
+                    zolder_oppervlakte = utils.rond_af(ruimte.oppervlakte, decimalen=2)
+                    correctie_punten = (
+                        bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
+                        / Decimal(str(aantal_eenheden))
+                        / Decimal(str(aantal_onzelfstandige_woonruimten))
+                    )
+                    correctie_totaal += correctie_punten
+                    waarderingen.append(
+                        self._maak_woningwaardering(
+                            punten=correctie_punten,
+                            criterium="Correctie: zolder zonder vaste trap",
+                            bovenliggende_criterium_id=bovenliggende_criterium_id,
+                            id=str(
+                                CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    ruimte_id=ruimte.id,
+                                    criterium="correctie_zolder_zonder_vaste_trap",
+                                )
+                            ),
                         )
-                        gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
-                            aantal_eenheden
-                        ] += correctie_punten
+                    )
 
-                        waarderigen.append(
-                            self._maak_woningwaardering(
-                                punten=correctie_punten,
-                                criterium=waardering.criterium.naam,
-                                bovenliggende_criterium_id=bovenliggende_criterium_id,
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        ruimte_id=ruimte.id,
-                                        criterium="correctie_zolder_zonder_vaste_trap",
-                                    )
-                                ),
-                            )
-                        )
-                        break
+            gedeeld_met_punten[aantal_onzelfstandige_woonruimten][aantal_eenheden] += (
+                oppervlaktepunten + correctie_totaal
+            )
 
-        return gedeeld_met_punten, waarderigen
+            waarderingen.append(
+                self._maak_woningwaardering(
+                    punten=oppervlaktepunten,
+                    criterium=groep_naam,
+                    bovenliggende_criterium_id=bovenliggende_criterium_id,
+                    id=oppervlaktegroep_id,
+                )
+            )
+
+        return gedeeld_met_punten, waarderingen
 
     def _verkoeling_en_verwarming_waarderingen(
         self,

@@ -5,9 +5,10 @@ SAMENVATTING 1
 GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
   Gedeeld met 2 onzelfstandige woonruimten
     - Gedeeld met 2 adressen
-      - Woonkamer: Vertrek                                  20.00 m²   5.00 pt
-      - Keuken: Vertrek                                     20.00 m²   5.00 pt
-      - Keuken: Vertrek                                     20.00 m²   5.00 pt
+      - Vertrekken                                                    15.00 pt
+        - Woonkamer                                         20.00 m²
+        - Keuken                                            20.00 m²
+        - Keuken                                            20.00 m²
       - Woonkamer: Verkoelde en verwarmde vertrekken                   0.75 pt
       - Keuken: Verkoelde en verwarmde vertrekken                      0.75 pt
       - Keuken: Verkoelde en verwarmde vertrekken                      0.75 pt

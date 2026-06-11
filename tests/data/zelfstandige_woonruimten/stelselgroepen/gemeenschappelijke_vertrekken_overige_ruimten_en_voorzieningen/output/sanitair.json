@@ -17,11 +17,20 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__Space_190033",
-            "naam": "Badruimte (gedeeld met 2)",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__2__adressen"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__2__adressen",
+            "naam": "Vertrekken (gedeeld met 2)"
           },
           "punten": 5.0
         },

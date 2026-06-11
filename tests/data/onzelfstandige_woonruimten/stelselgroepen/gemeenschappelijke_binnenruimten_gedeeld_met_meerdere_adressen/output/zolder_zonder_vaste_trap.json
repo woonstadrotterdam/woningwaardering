@@ -17,31 +17,29 @@
           "aantal": 6.0,
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__Space_berging",
-            "naam": "Berging: Overige ruimte",
+            "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 2.25
+          }
         },
         {
           "aantal": 16.0,
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__Space_zolder",
-            "naam": "Zolder: Overige ruimte",
+            "naam": "Zolder",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__2__adressen"
             },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
-          },
-          "punten": 6.0
+          }
         },
         {
           "criterium": {
@@ -52,6 +50,16 @@
             }
           },
           "punten": -2.5
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__2__adressen",
+            "naam": "Overige ruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+            }
+          },
+          "punten": 8.25
         },
         {
           "criterium": {

@@ -8,6 +8,8 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import (
+    is_zolder_zonder_vaste_trap,
+    maak_zolder_correctie_waardering,
     waardeer_oppervlakte_van_overige_ruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -22,13 +24,10 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 class OppervlakteVanOverigeRuimten(Stelselgroep):
@@ -105,36 +104,15 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             # Zelfde formule als bij de zelfstandige variant. Bij gedeelde correcties
             # blijft de deling door gedeeld_met_aantal_onzelfstandige_woonruimten
             # van toepassing.
-            if (
-                ruimte.detail_soort == Ruimtedetailsoort.zolder
-                and ruimte.oppervlakte is not None
-                and heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.vlizotrap
-                )
-                and utils.classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
-            ):
+            if is_zolder_zonder_vaste_trap(ruimte):
                 totaal_oppervlakte = totaal_oppervlakte_per_gedeeld_met_aantal[
                     self._gedeeld_met_aantal(ruimte)
                 ]
-                zolder_opp = utils.rond_af(ruimte.oppervlakte, decimalen=2)
-                correctie = min(
-                    Decimal("5"),
-                    (
-                        utils.rond_af(totaal_oppervlakte, decimalen=0)
-                        - utils.rond_af(totaal_oppervlakte - zolder_opp, decimalen=0)
+                woningwaarderingen.append(
+                    maak_zolder_correctie_waardering(
+                        ruimte, totaal_oppervlakte, self.stelselgroep
                     )
-                    * Decimal("0.75"),
                 )
-                for woningwaardering in woningwaarderingen:
-                    if (
-                        woningwaardering.criterium is not None
-                        and woningwaardering.criterium.id is not None
-                        and woningwaardering.criterium.id.endswith(
-                            "__correctie_zolder_zonder_vaste_trap"
-                        )
-                    ):
-                        woningwaardering.punten = float(correctie * Decimal("-1"))
-                        break
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for idx, woningwaardering in enumerate(woningwaarderingen):
                 if woningwaardering.criterium is not None:

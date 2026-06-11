@@ -17,11 +17,20 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__Space_1",
-            "naam": "Toiletruimte (gedeeld met 5)",
+            "naam": "Toiletruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__5__adressen"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__5__adressen",
+            "naam": "Overige ruimten (gedeeld met 5)"
           },
           "punten": 1.5
         },
@@ -29,11 +38,20 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__Space_2",
-            "naam": "Toiletruimte (gedeeld met 6)",
+            "naam": "Toiletruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__6__adressen"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__6__adressen",
+            "naam": "Overige ruimten (gedeeld met 6)"
           },
           "punten": 1.25
         }
