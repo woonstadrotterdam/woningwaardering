@@ -695,6 +695,8 @@ def naar_tabel(
         toon_samenvatting = True
 
     max_hierarchie_diepte = _max_hierarchie_diepte_resultaat(groepen)
+    detail_secties = [_render_detail_groep(groep) for groep in groepen]
+    heeft_detail_secties = any(detail_secties)
 
     lines: list[str] = []
     if toon_samenvatting and volledig_resultaat is not None:
@@ -703,11 +705,11 @@ def naar_tabel(
             titel = f"{titel} {eenheid_id}"
         lines.append(titel)
         lines.extend(_render_samenvatting(volledig_resultaat, max_hierarchie_diepte))
-        lines.append("")
+        if heeft_detail_secties:
+            lines.append("")
 
     eerste_detail = True
-    for groep in groepen:
-        detail = _render_detail_groep(groep)
+    for detail in detail_secties:
         if not detail:
             continue
         if not eerste_detail:
