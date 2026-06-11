@@ -157,7 +157,7 @@ def structureer_subtotaal_bij_correcties(
             id=subtotaal_id,
             meeteenheid=Meeteenheid.vierkante_meter_m2,
         ),
-        aantal=float(rond_af(totaal_oppervlakte, decimalen=0)),
+        aantal=float(rond_af(totaal_oppervlakte, decimalen=2)),
         punten=float(
             rond_af_op_kwart(bereken_oppervlakte_punten(totaal_oppervlakte, factor))
         ),

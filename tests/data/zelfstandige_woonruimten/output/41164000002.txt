@@ -24,12 +24,12 @@ OPPERVLAKTE VAN VERTREKKEN
   Woonkamer                                                 32.95 m²
   Slaapkamer 4 (+1 kast)                                    20.45 m²
                                                             --------  --------
-  Totaal                                                   138.00 m²  138.00 pt
+  Totaal                                                   138.15 m²  138.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Wasruimte                                                  4.31 m²
                                                             --------  --------
-  Totaal                                                     4.00 m²   3.00 pt
+  Totaal                                                     4.31 m²   3.00 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken

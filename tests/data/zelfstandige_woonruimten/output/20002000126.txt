@@ -20,12 +20,12 @@ OPPERVLAKTE VAN VERTREKKEN
   Slaapkamer                                                39.82 m²
   Badruimte                                                  1.77 m²
                                                             --------  --------
-  Totaal                                                    57.00 m²  57.00 pt
+  Totaal                                                    57.33 m²  57.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Berging                                                   19.67 m²
                                                             --------  --------
-  Totaal                                                    20.00 m²  15.00 pt
+  Totaal                                                    19.67 m²  15.00 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken

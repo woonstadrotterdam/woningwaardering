@@ -23,13 +23,13 @@ OPPERVLAKTE VAN VERTREKKEN
   Woonkamer                                                 21.84 m²
   Slaapkamer 3                                               6.06 m²
                                                             --------  --------
-  Totaal                                                    66.00 m²  66.00 pt
+  Totaal                                                    65.99 m²  66.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Buitenberging                                              6.54 m²
   Zolder                                                    26.96 m²
                                                             --------  --------
-  Totaal                                                    34.00 m²  25.50 pt
+  Totaal                                                    33.50 m²  25.50 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken

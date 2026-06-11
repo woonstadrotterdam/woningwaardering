@@ -22,15 +22,15 @@ OPPERVLAKTE VAN VERTREKKEN
   Keuken                                                    12.72 m²
   Slaapkamer 3                                               8.34 m²
                                                             --------  --------
-  Totaal                                                    58.00 m²  58.00 pt
+  Totaal                                                    58.08 m²  58.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Subtotaal                                                 13.00 m²   9.75 pt
+  Subtotaal                                                 13.09 m²   9.75 pt
     - Zolder                                                10.23 m²
     - Wasruimte                                              2.86 m²
   Correctie: zolder zonder vaste trap                                 -5.00 pt
                                                             --------  --------
-  Totaal                                                    13.00 m²   4.75 pt
+  Totaal                                                    13.09 m²   4.75 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken

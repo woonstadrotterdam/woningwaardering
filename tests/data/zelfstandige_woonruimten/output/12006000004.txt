@@ -22,7 +22,7 @@ OPPERVLAKTE VAN VERTREKKEN
   Slaapkamer 1                                               6.49 m²
   Slaapkamer 2                                              12.98 m²
                                                             --------  --------
-  Totaal                                                    60.00 m²  60.00 pt
+  Totaal                                                    60.05 m²  60.00 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken

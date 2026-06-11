@@ -22,7 +22,7 @@ OPPERVLAKTE VAN VERTREKKEN
   Keuken (+1 kast)                                           4.84 m²
   Slaapkamer 2 (+2 kasten)                                   6.84 m²
                                                             --------  --------
-  Totaal                                                    43.00 m²  43.00 pt
+  Totaal                                                    42.61 m²  43.00 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken

@@ -500,7 +500,7 @@ def _groep_subtotaal_aantal_kolom(
     if not met_aantal:
         return ""
 
-    totaal = rond_af(som_effectieve_aantal_waarderingen(waarderingen), decimalen=0)
+    totaal = som_effectieve_aantal_waarderingen(waarderingen)
     if totaal == Decimal("0"):
         return ""
 

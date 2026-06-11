@@ -22,12 +22,12 @@ OPPERVLAKTE VAN VERTREKKEN
   Slaapkamer 2                                               9.21 m²
   Keuken                                                     5.76 m²
                                                             --------  --------
-  Totaal                                                    61.00 m²  61.00 pt
+  Totaal                                                    61.45 m²  61.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Berging 1                                                  5.10 m²
                                                             --------  --------
-  Totaal                                                     5.00 m²   3.75 pt
+  Totaal                                                     5.10 m²   3.75 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken

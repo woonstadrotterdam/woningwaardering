@@ -28,13 +28,13 @@ OPPERVLAKTE VAN VERTREKKEN
   Badruimte 3                                                1.89 m²
   Slaapkamer 4 (+1 kast)                                     9.16 m²
                                                             --------  --------
-  Totaal                                                   113.00 m²  113.00 pt
+  Totaal                                                   112.80 m²  113.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Zolder                                                     8.71 m²
   Berging                                                    2.44 m²
                                                             --------  --------
-  Totaal                                                    11.00 m²   8.25 pt
+  Totaal                                                    11.15 m²   8.25 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
