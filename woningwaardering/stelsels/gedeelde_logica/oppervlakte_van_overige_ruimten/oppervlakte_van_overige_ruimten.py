@@ -7,10 +7,12 @@ from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     rond_af,
+    rond_af_op_kwart,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
+    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
@@ -111,3 +113,61 @@ def waardeer_oppervlakte_van_overige_ruimte(
     woningwaardering.aantal = float(rond_af(ruimte.oppervlakte, decimalen=2))
 
     yield woningwaardering
+
+
+def _is_top_level_ruimteregel_met_aantal(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+) -> bool:
+    if waardering.aantal is None or waardering.punten is not None:
+        return False
+    if waardering.criterium is None:
+        return False
+    return waardering.criterium.bovenliggende_criterium is None
+
+
+def structureer_subtotaal_bij_correcties(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+    *,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
+    factor: Decimal,
+) -> list[WoningwaarderingResultatenWoningwaardering]:
+    """Voeg een Subtotaal-waardering toe wanneer er een punten-correctie voor een zolderruimte plaatsvindt.
+
+    Oppervlakte van overige ruimten berekent punten op basis van de afgeronde som van de oppervlakte van de ruimten.
+    Bij zoldercorrecties moet er een subtotaalregel worden toegevoegd zodat de som van detailpunten gelijk is aan de som van de punten van destelselgroep.
+    """
+    heeft_ruimte_aantal = any(
+        _is_top_level_ruimteregel_met_aantal(w) for w in waarderingen
+    )
+    heeft_puntenregel = any(w.punten is not None for w in waarderingen)
+    if not (heeft_ruimte_aantal and heeft_puntenregel):
+        return waarderingen
+
+    ruimteregels = [w for w in waarderingen if _is_top_level_ruimteregel_met_aantal(w)]
+    overige = [w for w in waarderingen if w not in ruimteregels]
+
+    totaal_oppervlakte = sum(
+        (Decimal(str(w.aantal)) for w in ruimteregels),
+        start=Decimal("0"),
+    )
+    subtotaal_id = str(CriteriumId(stelselgroep=stelselgroep, criterium="subtotaal"))
+    subtotaal = WoningwaarderingResultatenWoningwaardering(
+        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+            naam="Subtotaal",
+            id=subtotaal_id,
+            meeteenheid=Meeteenheid.vierkante_meter_m2,
+        ),
+        aantal=float(rond_af(totaal_oppervlakte, decimalen=0)),
+        punten=float(
+            rond_af_op_kwart(bereken_oppervlakte_punten(totaal_oppervlakte, factor))
+        ),
+    )
+
+    for waardering in ruimteregels:
+        if waardering.criterium is None:
+            continue
+        waardering.criterium.bovenliggende_criterium = (
+            WoningwaarderingCriteriumSleutels(id=subtotaal_id)
+        )
+
+    return [subtotaal, *ruimteregels, *overige]

@@ -8,6 +8,7 @@ from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.gedeelde_logica import (
     is_zolder_zonder_vaste_trap,
     maak_zolder_correctie_waardering,
+    structureer_subtotaal_bij_correcties,
     waardeer_oppervlakte_van_overige_ruimte,
 )
 from woningwaardering.stelsels.utils import (
@@ -15,6 +16,7 @@ from woningwaardering.stelsels.utils import (
     gedeeld_met_eenheden,
     rond_af,
     rond_af_op_kwart,
+    som_punten_waarderingen,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -89,28 +91,30 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
-        punten = rond_af_op_kwart(
-            (
+        woningwaardering_groep.woningwaarderingen = (
+            structureer_subtotaal_bij_correcties(
+                woningwaardering_groep.woningwaarderingen or [],
+                stelselgroep=self.stelselgroep,
+                factor=Decimal("0.75"),
+            )
+        )
+
+        waarderingen = woningwaardering_groep.woningwaarderingen or []
+        if any(w.punten is not None for w in waarderingen):
+            woningwaardering_groep.punten = som_punten_waarderingen(waarderingen)
+        else:
+            punten = rond_af_op_kwart(
                 rond_af(
                     sum(
-                        Decimal(str(woningwaardering.aantal))
-                        for woningwaardering in woningwaardering_groep.woningwaarderingen
-                        or []
-                        if woningwaardering.aantal is not None
+                        Decimal(str(w.aantal))
+                        for w in waarderingen
+                        if w.aantal is not None
                     ),
                     decimalen=0,
                 )
                 * Decimal("0.75")
             )
-            # de maximering is altijd in punten en daarom wordt de som van de punten hier gebruikt om de maximering toe te passsen
-            + sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            )
-        )
-
-        woningwaardering_groep.punten = float(punten)
+            woningwaardering_groep.punten = float(punten)
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

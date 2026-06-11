@@ -23,12 +23,12 @@ OPPERVLAKTE VAN VERTREKKEN
   Woonkamer (+1 kast)                                       26.54 m²
   Slaapkamer 3                                              12.23 m²
                                                             --------  --------
-  Totaal                                                    80.38 m²  80.00 pt
+  Totaal                                                    80.00 m²  80.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Berging                                                    5.19 m²
                                                             --------  --------
-  Totaal                                                     5.19 m²   3.75 pt
+  Totaal                                                     5.00 m²   3.75 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken

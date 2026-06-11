@@ -24,12 +24,12 @@ OPPERVLAKTE VAN VERTREKKEN
   Slaapkamer 3                                              19.15 m²
   Slaapkamer 4                                              15.82 m²
                                                             --------  --------
-  Totaal                                                   140.87 m²  141.00 pt
+  Totaal                                                   141.00 m²  141.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Berging                                                    6.65 m²
                                                             --------  --------
-  Totaal                                                     6.65 m²   5.25 pt
+  Totaal                                                     7.00 m²   5.25 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken

@@ -3,8 +3,9 @@ SAMENVATTING
                                                                       --------
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Zolder overige ruimte met trap                            10.00 m²
-  Zolder overige ruimte met vlizo trap                      10.00 m²
+  Subtotaal                                                 20.00 m²  15.00 pt
+    - Zolder overige ruimte met trap                        10.00 m²
+    - Zolder overige ruimte met vlizo trap                  10.00 m²
   Correctie: zolder zonder vaste trap                                 -5.00 pt
                                                             --------  --------
   Totaal                                                    20.00 m²  10.00 pt
