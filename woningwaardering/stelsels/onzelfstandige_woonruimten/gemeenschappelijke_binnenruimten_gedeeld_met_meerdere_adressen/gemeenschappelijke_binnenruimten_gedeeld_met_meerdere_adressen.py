@@ -120,15 +120,21 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 aantal_onzelfstandige_woonruimten,
                 punten_per_aantal_adressen,
             ) in gedeeld_met_punten.items():
-                bovenliggende_criterium_id = str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                bovenliggende_criterium_id = (
+                    str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
+                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                        )
                     )
+                    if aantal_onzelfstandige_woonruimten > 1
+                    else None
                 )
 
                 for aantal_adressen in punten_per_aantal_adressen:
+                    if aantal_adressen <= 1:
+                        continue
                     woningwaardering_groep.woningwaarderingen.append(
                         self._maak_woningwaardering(
                             id=str(
@@ -146,15 +152,16 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         )
                     )
 
-                woningwaardering_groep.woningwaarderingen.append(
-                    self._maak_woningwaardering(
-                        id=bovenliggende_criterium_id,
-                        criterium=utils.naam_gedeeld_met_groep(
-                            aantal_onzelfstandige_woonruimten,
-                            soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                        ),
+                if aantal_onzelfstandige_woonruimten > 1:
+                    woningwaardering_groep.woningwaarderingen.append(
+                        self._maak_woningwaardering(
+                            id=bovenliggende_criterium_id,
+                            criterium=utils.naam_gedeeld_met_groep(
+                                aantal_onzelfstandige_woonruimten,
+                                soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                            ),
+                        )
                     )
-                )
 
         woningwaardering_groep.punten = utils.som_punten_waarderingen(
             woningwaardering_groep.woningwaarderingen

@@ -64,16 +64,7 @@
         {
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen",
-            "naam": "Gedeeld met 2 adressen",
-            "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__prive"
-            }
-          }
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__prive",
-            "naam": "Privé"
+            "naam": "Gedeeld met 2 adressen"
           }
         }
       ]
