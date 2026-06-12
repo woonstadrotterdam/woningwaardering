@@ -2,7 +2,6 @@ import warnings
 from datetime import date
 from decimal import ROUND_DOWN, Decimal
 from importlib.resources import files
-from itertools import chain
 
 import pandas as pd
 from loguru import logger
@@ -612,12 +611,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         oppervlakte = sum(
             (
-                Decimal(str(waardering.aantal))
-                for waardering in chain.from_iterable(
-                    groep.woningwaarderingen or []
-                    for groep in oppervlakte_stelsel_groepen
-                )
-                if waardering.aantal is not None
+                utils.som_effectieve_aantal_waarderingen(groep.woningwaarderingen)
+                for groep in oppervlakte_stelsel_groepen
             ),
             start=Decimal("0"),
         )

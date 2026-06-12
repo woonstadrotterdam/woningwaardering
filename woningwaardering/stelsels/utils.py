@@ -490,26 +490,23 @@ def _groep_subtotaal_aantal_kolom(
         return ""
 
     waarderingen = groep.woningwaarderingen or []
-    top_met_aantal = [
+    met_aantal = [
         w
         for w in waarderingen
         if w.aantal is not None
         and w.criterium is not None
-        and w.criterium.bovenliggende_criterium is None
+        and w.criterium.meeteenheid is not None
     ]
-    if not top_met_aantal:
+    if not met_aantal:
         return ""
 
-    totaal = rond_af(
-        sum(Decimal(str(w.aantal)) for w in top_met_aantal),
-        decimalen=2,
-    )
+    totaal = som_effectieve_aantal_waarderingen(waarderingen)
     if totaal == Decimal("0"):
         return ""
 
     meeteenheid_codes = [
         w.criterium.meeteenheid.code or ""
-        for w in top_met_aantal
+        for w in met_aantal
         if w.criterium is not None and w.criterium.meeteenheid is not None
     ]
     if len(set(meeteenheid_codes)) > 1:
@@ -518,7 +515,7 @@ def _groep_subtotaal_aantal_kolom(
     meeteenheid = next(
         (
             w.criterium.meeteenheid
-            for w in top_met_aantal
+            for w in met_aantal
             if w.criterium is not None and w.criterium.meeteenheid is not None
         ),
         None,

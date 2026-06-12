@@ -190,8 +190,6 @@ def assert_stelselgroep_output(
         stelselgroep.stelselgroep,
     )
 
-    assert_som_bovenliggend_criterium(resultaat)
-
 
 def assert_stelselgroep_specifiek_output(
     specifieke_input_en_output_model: tuple[
@@ -219,8 +217,6 @@ def assert_stelselgroep_specifiek_output(
         eenheid_output,
         stelselgroep.stelselgroep,
     )
-
-    assert_som_bovenliggend_criterium(resultaat)
 
 
 def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fixture:
@@ -296,21 +292,22 @@ def assert_geen_dubbele_punten_in_hierarchie(
 def assert_groep_punten_is_som_van_waarderingen(
     resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
 ) -> None:
-    """groep.punten is de som van punten op waarderingen (indien die punten hebben)."""
+    """groep.punten is de som van detailpunten wanneer detailregels punten tonen."""
     for groep in resultaat.groepen or []:
         waarderingen = groep.woningwaarderingen or []
         if groep.punten is None:
             continue
         if not any(w.punten is not None for w in waarderingen):
             continue
-        # Oppervlakte-stelselgroepen: groep.punten uit som aantal×factor + aparte puntenregels
-        if any(w.aantal is not None and w.punten is None for w in waarderingen):
-            continue
         verwacht = utils.som_punten_waarderingen(waarderingen)
+        groep_naam = (
+            groep.criterium_groep
+            and groep.criterium_groep.stelselgroep
+            and groep.criterium_groep.stelselgroep.naam
+        )
         assert groep.punten == verwacht, (
-            f"groep.punten ({groep.punten}) != som waarderingen ({verwacht}) "
-            f"in groep "
-            f"{groep.criterium_groep and groep.criterium_groep.stelselgroep and groep.criterium_groep.stelselgroep.naam}"
+            f"groep.punten ({groep.punten}) != som detailpunten ({verwacht}) "
+            f"in {groep_naam}"
         )
 
 

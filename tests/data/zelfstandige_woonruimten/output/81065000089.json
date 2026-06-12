@@ -84,10 +84,39 @@
       "punten": 4.75,
       "woningwaarderingen": [
         {
+          "aantal": 13.09,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal",
+            "naam": "Subtotaal",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 9.75
+        },
+        {
           "aantal": 10.23,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__Space_31299076",
             "naam": "Zolder",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 2.86,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_29489752",
+            "naam": "Wasruimte",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -100,17 +129,6 @@
             "naam": "Correctie: zolder zonder vaste trap"
           },
           "punten": -5.0
-        },
-        {
-          "aantal": 2.86,
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_29489752",
-            "naam": "Wasruimte",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
         }
       ]
     },
