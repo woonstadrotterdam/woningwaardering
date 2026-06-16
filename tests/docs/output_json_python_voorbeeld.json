@@ -66,7 +66,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108014589",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108014589",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -76,7 +76,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108006229",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108006229",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"

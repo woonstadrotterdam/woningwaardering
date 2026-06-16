@@ -16,7 +16,7 @@
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017427__gedeeld_met__2__adressen",
+            "id": "buitenruimten__gedeeld_met__2__adressen__Space_108017427",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__gedeeld_met__2__adressen"
@@ -30,7 +30,7 @@
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017428__gedeeld_met__3__adressen",
+            "id": "buitenruimten__gedeeld_met__3__adressen__Space_108017428",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__gedeeld_met__3__adressen"

@@ -1,5 +1,5 @@
+import re
 import warnings
-from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 
@@ -7,7 +7,11 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.criterium_id import (
+    CriteriumId,
+    GedeeldMetSoort,
+    nest_onder,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
@@ -58,37 +62,29 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
         woningwaardering_groep.woningwaarderingen = []
 
-        gedeeld_met_counter: defaultdict[int, defaultdict[str, Decimal]] = defaultdict(
-            lambda: defaultdict(Decimal)
-        )
+        gedeeld_met_combos: set[tuple[int, int]] = set()
 
         for ruimte in eenheid.ruimten:
             waarderingen_zelfstandig = waardeer_gemeenschappelijke_parkeerruimte(ruimte)
-            if waarderingen_zelfstandig is not None:
-                for waardering in list(waarderingen_zelfstandig):
-                    if waardering is None:
-                        continue
+            if waarderingen_zelfstandig is None:
+                continue
 
-                    # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2,  (bijvoorbeeld een garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief behorende tot de woning).
-                    if not utils.gedeeld_met_eenheden(ruimte):
-                        logger.debug(
-                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is niet gedeeld met andere eenheden en telt daarom niet voor {self.stelselgroep.naam}."
-                        )
-                        continue
-
-                    gedeeld_met_aantal_onzelfstandige_woonruimten = (
-                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            for waardering in waarderingen_zelfstandig:
+                if not utils.gedeeld_met_eenheden(ruimte):
+                    logger.debug(
+                        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is niet gedeeld met andere eenheden en telt daarom niet voor {self.stelselgroep.naam}."
                     )
+                    continue
 
-                    if waardering.aantal is not None:
-                        gedeeld_met_counter[
-                            gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ]["aantal"] += Decimal(str(waardering.aantal))
-                    if waardering.punten is not None:
-                        gedeeld_met_counter[
-                            gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ]["punten"] += Decimal(str(waardering.punten))
+                gedeeld_met_aantal_onzelfstandige_woonruimten = (
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                )
+                aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+                gedeeld_met_combos.add(
+                    (gedeeld_met_aantal_onzelfstandige_woonruimten, aantal_eenheden)
+                )
 
+                if waardering.punten is not None:
                     waardering.punten = float(
                         utils.rond_af(
                             Decimal(str(waardering.punten))
@@ -98,34 +94,98 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                             decimalen=2,
                         )
                     )
-                    if waardering.criterium is not None:
-                        waardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
-                            ),
-                        )
-                        woningwaardering_groep.woningwaarderingen.append(waardering)
 
-        for (
-            gedeeld_met_aantal_onzelfstandige_woonruimten,
-            count,
-        ) in gedeeld_met_counter.items():
+                if (
+                    waardering.criterium is not None
+                    and waardering.criterium.id is not None
+                ):
+                    onz_id = (
+                        str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                            )
+                        )
+                        if gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+                        else None
+                    )
+                    adressen_id = str(
+                        CriteriumId(
+                            stelselgroep=self.stelselgroep,
+                            gedeeld_met_aantal=aantal_eenheden,
+                            gedeeld_met_soort=GedeeldMetSoort.adressen,
+                            bovenliggende=onz_id,
+                        )
+                    )
+                    waardering.criterium.id = nest_onder(
+                        adressen_id, waardering.criterium.id
+                    )
+                    if waardering.criterium.naam is not None:
+                        waardering.criterium.naam = re.sub(
+                            r" \(gedeeld met \d+ adressen\)$",
+                            "",
+                            waardering.criterium.naam,
+                        )
+                    waardering.criterium.bovenliggende_criterium = (
+                        WoningwaarderingCriteriumSleutels(id=adressen_id)
+                    )
+
+                woningwaardering_groep.woningwaarderingen.append(waardering)
+
+        for aantal_onz, aantal_eenheden in sorted(gedeeld_met_combos):
+            onz_id = (
+                str(
+                    CriteriumId(
+                        stelselgroep=self.stelselgroep,
+                        gedeeld_met_aantal=aantal_onz,
+                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                    )
+                )
+                if aantal_onz > 1
+                else None
+            )
+            adressen_id = str(
+                CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=aantal_eenheden,
+                    gedeeld_met_soort=GedeeldMetSoort.adressen,
+                    bovenliggende=onz_id,
+                )
+            )
+            woningwaardering_groep.woningwaarderingen.append(
+                WoningwaarderingResultatenWoningwaardering(
+                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                        id=adressen_id,
+                        naam=utils.naam_gedeeld_met_groep(
+                            aantal_eenheden,
+                            soort=GedeeldMetSoort.adressen,
+                        ),
+                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
+                            id=onz_id
+                        )
+                        if onz_id is not None
+                        else None,
+                    ),
+                )
+            )
+
+        onz_aantallen = {
+            aantal_onz for aantal_onz, _ in gedeeld_met_combos if aantal_onz > 1
+        }
+        for aantal_onz in sorted(onz_aantallen):
             woningwaardering_groep.woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         id=str(
                             CriteriumId(
                                 stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                gedeeld_met_aantal=aantal_onz,
                                 gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
                             )
                         ),
                         naam=utils.naam_gedeeld_met_groep(
-                            gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            aantal_onz,
                             soort=GedeeldMetSoort.onzelfstandige_woonruimten,
                         ),
                     ),

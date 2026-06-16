@@ -256,7 +256,7 @@ def _waardeer_extra_voorzieningen(
         yield (
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"Max. {max_punten_voorzieningen} punten voor voorzieningen in een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
+                    naam=f"Maximaal {max_punten_voorzieningen} punten voor voorzieningen",
                     id=str(
                         CriteriumId(
                             stelselgroep=Woningwaarderingstelselgroep.keuken,

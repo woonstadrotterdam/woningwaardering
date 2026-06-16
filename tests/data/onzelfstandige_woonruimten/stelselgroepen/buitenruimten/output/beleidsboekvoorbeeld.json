@@ -49,7 +49,7 @@
             "id": "buitenruimten__Space_108017427",
             "naam": "Dakterras",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__5__adressen"
+              "id": "buitenruimten__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__5__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -75,7 +75,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__gedeeld_met__5__adressen",
+            "id": "buitenruimten__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__5__adressen",
             "naam": "Gedeeld met 5 adressen",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__gedeeld_met__4__onzelfstandige_woonruimten"

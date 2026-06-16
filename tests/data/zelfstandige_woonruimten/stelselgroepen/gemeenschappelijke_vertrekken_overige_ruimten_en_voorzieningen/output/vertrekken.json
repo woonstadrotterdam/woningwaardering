@@ -16,10 +16,10 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_1",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen__oppervlakte_van_vertrekken__Space_1",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__5__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen__oppervlakte_van_vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,18 +29,21 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__5__adressen",
-            "naam": "Vertrekken (gedeeld met 5)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen__oppervlakte_van_vertrekken",
+            "naam": "Oppervlakte van vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen"
+            }
           },
           "punten": 2.0
         },
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_2",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen__oppervlakte_van_vertrekken__Space_2",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__6__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen__oppervlakte_van_vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -50,10 +53,25 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__6__adressen",
-            "naam": "Vertrekken (gedeeld met 6)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen__oppervlakte_van_vertrekken",
+            "naam": "Oppervlakte van vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen"
+            }
           },
           "punten": 1.66666667
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen",
+            "naam": "Gedeeld met 5 adressen"
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen",
+            "naam": "Gedeeld met 6 adressen"
+          }
         }
       ]
     }

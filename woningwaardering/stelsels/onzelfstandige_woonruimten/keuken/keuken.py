@@ -5,7 +5,11 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.criterium_id import (
+    CriteriumId,
+    GedeeldMetSoort,
+    nest_onder,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
 )
@@ -75,14 +79,18 @@ class Keuken(Stelselgroep):
                         gedeeld_met_aantallen[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         ] = None
-                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
-                            ),
+                        bovenliggende_id = str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                            )
+                        )
+                        woningwaardering.criterium.bovenliggende_criterium = (
+                            WoningwaarderingCriteriumSleutels(id=bovenliggende_id)
+                        )
+                        woningwaardering.criterium.id = nest_onder(
+                            bovenliggende_id, woningwaardering.criterium.id or ""
                         )
                         woningwaardering.punten = float(
                             utils.rond_af(
@@ -97,15 +105,17 @@ class Keuken(Stelselgroep):
                         )
                     elif woningwaardering.punten:
                         gedeeld_met_aantallen[1] = None
-                        woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        gedeeld_met_aantal=1,
-                                    )
-                                ),
+                        bovenliggende_id = str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=1,
                             )
+                        )
+                        woningwaardering.criterium.bovenliggende_criterium = (
+                            WoningwaarderingCriteriumSleutels(id=bovenliggende_id)
+                        )
+                        woningwaardering.criterium.id = nest_onder(
+                            bovenliggende_id, woningwaardering.criterium.id or ""
                         )
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)

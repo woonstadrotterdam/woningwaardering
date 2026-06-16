@@ -52,7 +52,7 @@
         {
           "criterium": {
             "id": "keuken__keuken__maximering_extra_voorzieningen",
-            "naam": "Max. 4 punten voor voorzieningen in een (open) keuken met een aanrechtlengte van 1000.0mm"
+            "naam": "Maximaal 4 punten voor voorzieningen"
           },
           "punten": -1.0
         }

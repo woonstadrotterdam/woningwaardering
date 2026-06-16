@@ -16,8 +16,11 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__1",
-            "naam": "Type I (gedeeld met 10 adressen)",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen__1",
+            "naam": "Type I",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -28,8 +31,11 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__2",
-            "naam": "Type II (gedeeld met 10 adressen)",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen__2",
+            "naam": "Type II",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -40,14 +46,23 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__3",
-            "naam": "Type III (gedeeld met 10 adressen)",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen__3",
+            "naam": "Type III",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
             }
           },
           "punten": 0.4
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen",
+            "naam": "Gedeeld met 10 adressen"
+          }
         }
       ]
     }

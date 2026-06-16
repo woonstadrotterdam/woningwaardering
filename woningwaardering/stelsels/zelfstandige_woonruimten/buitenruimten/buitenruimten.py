@@ -307,8 +307,7 @@ class Buitenruimten(Stelselgroep):
                     id=str(
                         CriteriumId(
                             stelselgroep=self.stelselgroep,
-                            criterium="aanwezig",
-                            gedeeld_met_aantal=1,
+                            criterium="prive_buitenruimten_aanwezig",
                         )
                     ),
                 )

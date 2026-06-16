@@ -11,8 +11,185 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": []
+      "punten": 13.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_885432__wastafel",
+            "naam": "Badruimte - Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_885432__bad_en_douche",
+            "naam": "Badruimte - Bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 6.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_885432",
+            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_885432",
+            "naam": "Badruimte - Voorzieningen: Douchewand",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.25
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_885432",
+            "naam": "Badruimte - Voorzieningen: Handdoekenradiator",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_885432",
+            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "sanitair__Space_885432",
+            "naam": "Badruimte - Voorzieningen: Kastruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "id": "sanitair__Space_885432__max_punten",
+            "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          },
+          "punten": -0.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_885432",
+            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.25
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_885432",
+            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.25
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_885432",
+            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "id": "sanitair__Space_885432__maximering_punten_voorzieningen",
+            "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          },
+          "punten": -0.25
+        },
+        {
+          "criterium": {
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
+        }
+      ]
     }
   ]
 }

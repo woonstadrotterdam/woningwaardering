@@ -6,7 +6,11 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.criterium_id import (
+    CriteriumId,
+    GedeeldMetSoort,
+    nest_onder,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_verkoeling_en_verwarming,
 )
@@ -74,6 +78,28 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     ruimte, [woningwaardering], update_criterium_naam=False
                 )
             )[0]  # er is altijd maar een woningwaardering
+
+            # nestel de subgroep en detailregel onder het gedeeld-met aggregaat
+            gedeeld_met_groep_id = str(
+                CriteriumId(
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                    or 1,
+                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                )
+            )
+            criterium = waardering_gedeeld.criterium
+            if criterium is not None:
+                if criterium.id:
+                    criterium.id = nest_onder(gedeeld_met_groep_id, criterium.id)
+                if (
+                    criterium.bovenliggende_criterium
+                    and criterium.bovenliggende_criterium.id
+                ):
+                    criterium.bovenliggende_criterium.id = nest_onder(
+                        gedeeld_met_groep_id, criterium.bovenliggende_criterium.id
+                    )
+
             woningwaarderingen_totaal.append((ruimte, waardering_gedeeld))
             woningwaardering_groep.woningwaarderingen.append(waardering_gedeeld)
 

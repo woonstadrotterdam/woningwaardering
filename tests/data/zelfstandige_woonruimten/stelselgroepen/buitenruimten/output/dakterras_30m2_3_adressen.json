@@ -16,7 +16,7 @@
         {
           "aantal": 30.0,
           "criterium": {
-            "id": "buitenruimten__dakterras__gedeeld_met__3__adressen",
+            "id": "buitenruimten__gedeeld_met__3__adressen__dakterras",
             "naam": "Dakterras",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__gedeeld_met__3__adressen"

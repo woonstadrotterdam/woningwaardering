@@ -147,7 +147,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_29489751",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_29489751",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -157,7 +157,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_29489749",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_29489749",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -167,7 +167,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_29474434",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_29474434",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -177,7 +177,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_29474430",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_29474430",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -187,7 +187,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_29489750",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_29489750",
             "naam": "Slaapkamer 3",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -197,7 +197,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_29489752",
+            "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__Space_29489752",
             "naam": "Wasruimte",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"

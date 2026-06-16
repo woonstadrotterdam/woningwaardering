@@ -16,10 +16,10 @@
         {
           "aantal": 20.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__E",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__oppervlakte_van_overige_ruimten__E",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__oppervlakte_van_overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -30,10 +30,10 @@
         {
           "aantal": 20.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__C",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__oppervlakte_van_overige_ruimten__C",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__oppervlakte_van_overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -44,10 +44,10 @@
         {
           "aantal": 20.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__D",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__oppervlakte_van_overige_ruimten__D",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__oppervlakte_van_overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -58,10 +58,10 @@
         {
           "aantal": 20.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__F",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__oppervlakte_van_overige_ruimten__F",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__oppervlakte_van_overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -71,10 +71,10 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__2__adressen",
-            "naam": "Overige ruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__oppervlakte_van_overige_ruimten",
+            "naam": "Oppervlakte van overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen"
             }
           },
           "punten": 15.0
@@ -82,10 +82,10 @@
         {
           "aantal": 20.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__G",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__oppervlakte_van_overige_ruimten__G",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__3__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__oppervlakte_van_overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -95,77 +95,113 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__overige_ruimten__gedeeld_met__3__adressen",
-            "naam": "Overige ruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__oppervlakte_van_overige_ruimten",
+            "naam": "Oppervlakte van overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__3__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen"
             }
           },
           "punten": 2.5
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__E",
-            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__verwarmde_overige_en_verkeersruimten__E",
+            "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.25
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__C",
-            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__verwarmde_overige_en_verkeersruimten__C",
+            "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.25
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__D",
-            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__verwarmde_overige_en_verkeersruimten__D",
+            "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.25
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__F",
-            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__verwarmde_overige_en_verkeersruimten__F",
+            "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.25
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__G",
-            "naam": "Berging: Verwarmde overige en verkeersruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__verwarmde_overige_en_verkeersruimten__G",
+            "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__3__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.166666667
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__G",
-            "naam": "Berging: Maximaal 4 punten voor verwarmde overige en verkeersruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__max_aantal_punten",
+            "naam": "Maximaal 4 punten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__3__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": -0.166666667
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__verkoeling_en_verwarming"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen__verkoeling_en_verwarming",
+            "naam": "Verkoeling en verwarming",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen__verkoeling_en_verwarming",
+            "naam": "Verkoeling en verwarming",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__2__adressen",
             "naam": "Gedeeld met 2 adressen",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten"
@@ -174,7 +210,7 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__3__adressen",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen",
             "naam": "Gedeeld met 3 adressen",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten"

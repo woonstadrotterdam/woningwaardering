@@ -3,7 +3,8 @@ SAMENVATTING 12006000004
                                                                       --------
 
 GEMEENSCHAPPELIJKE PARKEERRUIMTEN
-  Type II + laadpaal (gedeeld met 10 adressen)               5.00 st   4.00 pt
-  Type III (gedeeld met 10 adressen)                         2.00 st   0.80 pt
+  Gedeeld met 10 adressen
+    - Type II + laadpaal                                     5.00 st   4.00 pt
+    - Type III                                               2.00 st   0.80 pt
                                                                       --------
   Totaal                                                               4.75 pt

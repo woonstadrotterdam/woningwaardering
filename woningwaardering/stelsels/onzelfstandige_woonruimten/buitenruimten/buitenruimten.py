@@ -100,6 +100,17 @@ class Buitenruimten(Stelselgroep):
                                 stelselgroep=self.stelselgroep,
                                 gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
                                 gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                bovenliggende=CriteriumId(
+                                    stelselgroep=self.stelselgroep,
+                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                                )
+                                if (
+                                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                                    or 1
+                                )
+                                > 1
+                                else None,
                             )
                         )
                     )
@@ -163,20 +174,25 @@ class Buitenruimten(Stelselgroep):
                     woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
                 elif aantal_adressen > 1:
-                    woningwaardering.criterium = (
-                        WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=utils.naam_gedeeld_met_groep(
-                                aantal_adressen,
-                                soort=GedeeldMetSoort.adressen,
-                            ),
-                            id=str(
-                                CriteriumId(
+                    woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
+                        naam=utils.naam_gedeeld_met_groep(
+                            aantal_adressen,
+                            soort=GedeeldMetSoort.adressen,
+                        ),
+                        id=str(
+                            CriteriumId(
+                                stelselgroep=self.stelselgroep,
+                                gedeeld_met_aantal=aantal_adressen,
+                                gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                bovenliggende=CriteriumId(
                                     stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=aantal_adressen,
-                                    gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                    gedeeld_met_aantal=aantal_onz,
+                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
                                 )
-                            ),
-                        )
+                                if aantal_onz > 1
+                                else None,
+                            )
+                        ),
                     )
                     if aantal_onz > 1:
                         woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(

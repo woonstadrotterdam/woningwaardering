@@ -98,17 +98,17 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_29425491",
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Space_29425491",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__prive"
@@ -166,7 +166,7 @@
         {
           "aantal": 2220.0,
           "criterium": {
-            "id": "keuken__Space_29425492__lengte_aanrecht_Aanrecht_29424502",
+            "id": "keuken__gedeeld_met__2__onzelfstandige_woonruimten__Space_29425492__lengte_aanrecht_Aanrecht_29424502",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
               "id": "keuken__gedeeld_met__2__onzelfstandige_woonruimten"

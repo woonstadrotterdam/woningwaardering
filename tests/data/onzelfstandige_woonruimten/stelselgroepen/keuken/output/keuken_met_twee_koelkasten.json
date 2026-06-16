@@ -16,7 +16,7 @@
         {
           "aantal": 1000.0,
           "criterium": {
-            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
+            "id": "keuken__prive__keuken__lengte_aanrecht_aanrecht",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
               "id": "keuken__prive"
@@ -31,7 +31,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "keuken__keuken__extra_voorziening",
+            "id": "keuken__prive__keuken__extra_voorziening",
             "naam": "Inbouw koelkast (in zelfde ruimte)",
             "bovenliggendeCriterium": {
               "id": "keuken__prive"

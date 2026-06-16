@@ -11,8 +11,30 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 0.0,
-      "woningwaarderingen": []
+      "punten": 3.75,
+      "woningwaarderingen": [
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__Space_966250__hangend_toilet",
+            "naam": "Toiletruimte - Hangend toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 3.75
+        },
+        {
+          "criterium": {
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
+        }
+      ]
     }
   ]
 }

@@ -34,7 +34,7 @@
             "id": "buitenruimten__Space_108017428",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__3__adressen"
+              "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -51,7 +51,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__gedeeld_met__3__adressen",
+            "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen",
             "naam": "Gedeeld met 3 adressen",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten"

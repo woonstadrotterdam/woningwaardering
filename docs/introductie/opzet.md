@@ -57,28 +57,31 @@ Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroe
 
 De `CriteriumId` class wordt gebruikt om ID's te genereren voor criteria in de woningwaardering. Deze ID's worden opgebouwd uit verschillende onderdelen die worden samengevoegd met dubbele underscores (`__`).
 
-De opbouw van een criterium ID kan de volgende onderdelen bevatten:
+De opbouw van een criterium ID kan de volgende onderdelen bevatten (in deze volgorde):
 
 - Stelselgroep (verplicht, bijvoorbeeld 'buitenruimten' of 'energieprestatie')
+- Gedeeld-met segment (optioneel): `prive` of `gedeeld_met__{n}__{soort}` — direct na de stelselgroep
 - Ruimte ID (optioneel, bijvoorbeeld 'Space_108014713')
 - Criteriumnaam (optioneel, bijvoorbeeld 'factor_II' of 'verwarmde_vertrekken')
-- Optioneel: Aantal waarmee iets gedeeld is
-- Indien `Aantal` > 1: Waarmee het aantal gedeeld is ( 'adressen' of 'onzelfstandige_woonruimten')
 
 Er zijn drie id-families:
 
-- **Ruimteregel:** `{stelselgroep}__{ruimte_id}__{criteriumnaam?}` — per ruimte of element
+- **Ruimteregel:** `{stelselgroep}__{gedeeld_met?}__{ruimte_id}__{criteriumnaam?}` — per ruimte of element
 - **Gedeeld-met aggregaat:** `{stelselgroep}__prive` of `{stelselgroep}__gedeeld_met__{n}__{soort}` — som per privé of gedeelde groep
-- **Criteriumnaam-regel:** `{stelselgroep}__{criteriumnaam}` — subgroepen, maxima of resultaatregels (bijv. WOZ-onderdelen)
+- **Criteriumnaam-regel:** `{stelselgroep}__{gedeeld_met?}__{criteriumnaam}` — subgroepen, maxima of resultaatregels (bijv. WOZ-onderdelen)
+
+Detailregels en aggregaten kunnen hierarchisch genest worden via `bovenliggendeCriterium`. De volledige id van een kind is dan `{bovenliggende_id}__{eigen onderdelen}` (zonder herhaling van de stelselgroep-prefix). Gebruik `CriteriumId(..., bovenliggende=...)` of `nest_onder(bovenliggende_id, criterium_id)` in code.
 
 Voorbeelden van gegenereerde ID's:
 
-- `buitenruimten__Space_108014713` (ruimteregel)
+- `buitenruimten__Space_108014713` (ruimteregel, privé)
+- `buitenruimten__gedeeld_met__2__adressen__Space_108006357` (ruimteregel, gedeeld)
 - `buitenruimten__prive` (gedeeld-met aggregaat, privé)
 - `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen` (gedeeld-met aggregaat)
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen__keuken` (categorie onder gedeeld-met aggregaat)
 - `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumnaam-regel)
 
-Bij gedeelde voorzieningen wordt automatisch 'prive' toegevoegd als het aantal 1 of minder is, en anders wordt het aantal en soort toegevoegd (bijvoorbeeld `gedeeld_met__4__adressen`).
+Bij gedeelde voorzieningen wordt automatisch `prive` toegevoegd als het aantal 1 of minder is, en anders wordt het aantal en soort toegevoegd (bijvoorbeeld `gedeeld_met__4__adressen`).
 
 Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat.
 

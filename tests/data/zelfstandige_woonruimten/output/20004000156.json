@@ -99,7 +99,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_88554482",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_88554482",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -109,7 +109,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_88559335",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_88559335",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -182,7 +182,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__aanwezig__prive",
+            "id": "buitenruimten__prive_buitenruimten_aanwezig",
             "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0

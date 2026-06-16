@@ -4,9 +4,12 @@ SAMENVATTING 12006000004
 
 GEMEENSCHAPPELIJKE PARKEERRUIMTEN
   Gedeeld met 2 onzelfstandige woonruimten
-    - Type I (gedeeld met 3 adressen)                        1.00 st   1.50 pt
+    - Gedeeld met 3 adressen
+      - Type I                                               1.00 st   1.50 pt
   Gedeeld met 3 onzelfstandige woonruimten
-    - Type II (gedeeld met 4 adressen)                       1.00 st   0.50 pt
-    - Type III (gedeeld met 5 adressen)                      1.00 st   0.27 pt
+    - Gedeeld met 4 adressen
+      - Type II                                              1.00 st   0.50 pt
+    - Gedeeld met 5 adressen
+      - Type III                                             1.00 st   0.27 pt
                                                                       --------
   Totaal                                                               2.25 pt
