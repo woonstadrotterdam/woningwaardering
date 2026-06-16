@@ -11,7 +11,7 @@
           "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
         }
       },
-      "punten": 18.75,
+      "punten": 18.5,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -154,12 +154,6 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
-          }
-        },
-        {
-          "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen",
             "naam": "Gedeeld met 3 adressen",
             "bovenliggendeCriterium": {
@@ -218,6 +212,16 @@
             }
           },
           "punten": 0.17
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__G__max_aantal_punten",
+            "naam": "Berging: Maximaal 4 punten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": -0.17
         }
       ]
     }

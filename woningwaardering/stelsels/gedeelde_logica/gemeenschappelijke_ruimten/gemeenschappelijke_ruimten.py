@@ -50,10 +50,12 @@ from woningwaardering.stelsels.gedeelde_logica.verkoeling_en_verwarming.verkoeli
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
+    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
+    Meeteenheid,
     Ruimtesoort,
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselgroepReferentiedata,
@@ -73,6 +75,10 @@ class _Deelgroep(NamedTuple):
 SanitairVoorRuimten = Callable[
     [list[EenhedenRuimte]],
     Iterable[tuple[EenhedenRuimte, list[WoningwaarderingResultatenWoningwaardering]]],
+]
+
+VerkoelingEnVerwarmingResultaat = tuple[
+    EenhedenRuimte, WoningwaarderingResultatenWoningwaardering
 ]
 
 
@@ -106,6 +112,12 @@ def waardeer_gemeenschappelijke_ruimten(
     deelgroepen = _groepeer_deelgroepen(ruimten)
     waarderingen: list[WoningwaarderingResultatenWoningwaardering] = []
     stelselgroep_id = CriteriumId.voor_stelselgroep(stelselgroep)
+    # Maximering (bijv. max 4 pt verwarmde overige ruimten) telt over alle gedeelde
+    # ruimten; niet per deelgroep apart.
+    verkoeling_resultaten: list[VerkoelingEnVerwarmingResultaat] = list(
+        waardeer_verkoeling_en_verwarming(ruimten)
+    )
+    geëmitte_onz_koppen: set[str] = set()
 
     for deelgroep, groep_ruimten in sorted(
         deelgroepen.items(),
@@ -144,9 +156,18 @@ def waardeer_gemeenschappelijke_ruimten(
                 groep_ruimten, adressen_id, deelgroep.factor
             )
         )
+        groep_ruimte_ids = {
+            ruimte.id for ruimte in groep_ruimten if ruimte.id is not None
+        }
         sectie_waarderingen.extend(
             _bouw_verkoeling_en_verwarming_sectie(
-                groep_ruimten, adressen_id, deelgroep.factor
+                [
+                    (ruimte, bron)
+                    for ruimte, bron in verkoeling_resultaten
+                    if ruimte.id in groep_ruimte_ids
+                ],
+                adressen_id,
+                deelgroep.factor,
             )
         )
         sectie_waarderingen.extend(
@@ -164,7 +185,7 @@ def waardeer_gemeenschappelijke_ruimten(
         if not sectie_waarderingen:
             continue
 
-        if onz_id is not None:
+        if onz_id is not None and str(onz_id) not in geëmitte_onz_koppen:
             waarderingen.append(
                 _maak_kop(
                     onz_id,
@@ -174,6 +195,7 @@ def waardeer_gemeenschappelijke_ruimten(
                     ),
                 )
             )
+            geëmitte_onz_koppen.add(str(onz_id))
 
         waarderingen.append(
             _maak_kop(
@@ -408,38 +430,58 @@ def _bouw_oppervlakte_van_overige_ruimten_sectie(
         correctie_punten = (
             bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte) / factor
         )
-        correctie_id = adressen_id.met_onderliggend(ruimte.id).met_onderliggend(
+        correctie_id = sectie.met_onderliggend(ruimte.id).met_onderliggend(
             "correctie_zolder_zonder_vaste_trap"
         )
-        correcties.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=correctie_id.met_criterium(
-                    "Correctie: zolder zonder vaste trap"
-                ),
-                punten=float(correctie_punten),
-            )
+        correctie = WoningwaarderingResultatenWoningwaardering(
+            criterium=correctie_id.met_criterium("Correctie: zolder zonder vaste trap"),
+            punten=float(correctie_punten),
         )
+        if correctie.criterium is not None:
+            correctie.criterium.bovenliggende_criterium = (
+                sectie.naar_criterium_sleutels()
+            )
+        correcties.append(correctie)
 
     if not details and not correcties:
         return []
 
-    resultaat: list[WoningwaarderingResultatenWoningwaardering] = []
-    if details:
-        resultaat.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=sectie.met_criterium(
-                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam
-                ),
-                punten=float(sectie_punten),
-            )
+    sectie_naam = Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam
+    if correcties:
+        sectie_kop = WoningwaarderingResultatenWoningwaardering(
+            criterium=sectie.met_criterium(sectie_naam),
         )
-        resultaat.extend(details)
-    resultaat.extend(correcties)
-    return resultaat
+        subtotaal_id = sectie.met_onderliggend("subtotaal")
+        subtotaal = WoningwaarderingResultatenWoningwaardering(
+            criterium=subtotaal_id.met_criterium(
+                "Subtotaal",
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
+            ),
+            aantal=float(utils.rond_af(totaal_oppervlakte, decimalen=2)),
+            punten=float(sectie_punten),
+        )
+        sectie_prefix = f"{sectie}__"
+        for detail in details:
+            if detail.criterium is None or not detail.criterium.id:
+                continue
+            ruimte_suffix = detail.criterium.id.removeprefix(sectie_prefix)
+            detail.criterium.id = str(subtotaal_id.met_onderliggend(ruimte_suffix))
+            detail.criterium.bovenliggende_criterium = (
+                WoningwaarderingCriteriumSleutels(id=str(subtotaal_id))
+            )
+        return [sectie_kop, subtotaal, *details, *correcties]
+
+    return [
+        WoningwaarderingResultatenWoningwaardering(
+            criterium=sectie.met_criterium(sectie_naam),
+            punten=float(sectie_punten),
+        ),
+        *details,
+    ]
 
 
 def _bouw_verkoeling_en_verwarming_sectie(
-    ruimten: list[EenhedenRuimte],
+    verkoeling_resultaten: list[VerkoelingEnVerwarmingResultaat],
     adressen_id: CriteriumId,
     factor: Decimal,
 ) -> list[WoningwaarderingResultatenWoningwaardering]:
@@ -450,7 +492,7 @@ def _bouw_verkoeling_en_verwarming_sectie(
     groeperingen: dict[str, WoningwaarderingResultatenWoningwaardering] = {}
     private_naam = Woningwaarderingstelselgroep.verkoeling_en_verwarming.name
 
-    for _ruimte, bron in waardeer_verkoeling_en_verwarming(ruimten):
+    for _ruimte, bron in verkoeling_resultaten:
         if bron.criterium is None or bron.criterium.id is None:
             continue
         suffix = _suffix_na_stelselgroep(bron.criterium.id, private_naam)
