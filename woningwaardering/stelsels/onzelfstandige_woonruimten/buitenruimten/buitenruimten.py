@@ -74,13 +74,17 @@ class Buitenruimten(Stelselgroep):
                     continue
 
                 stelselgroep_id = CriteriumId.voor_stelselgroep(self.stelselgroep)
-                if (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1) < 2 and (
-                    ruimte.gedeeld_met_aantal_eenheden or 1
-                ) < 2:
+                aantal_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                aantal_adressen = ruimte.gedeeld_met_aantal_eenheden or 1
+                if aantal_onz < 2 and aantal_adressen < 2:
                     aggregaat = stelselgroep_id.gedeeld_met_criterium(1)
-                elif (ruimte.gedeeld_met_aantal_eenheden or 1) > 1:
+                elif aantal_onz > 1 and aantal_adressen > 1:
                     aggregaat = stelselgroep_id.gedeeld_met_criterium(
-                        ruimte.gedeeld_met_aantal_eenheden, GedeeldMetSoort.adressen
+                        aantal_onz, GedeeldMetSoort.onzelfstandige_woonruimten
+                    ).gedeeld_met_criterium(aantal_adressen, GedeeldMetSoort.adressen)
+                elif aantal_adressen > 1:
+                    aggregaat = stelselgroep_id.gedeeld_met_criterium(
+                        aantal_adressen, GedeeldMetSoort.adressen
                     )
                 else:
                     onz_aantal = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
@@ -146,33 +150,33 @@ class Buitenruimten(Stelselgroep):
                     woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
                 elif aantal_adressen > 1:
+                    stelselgroep_id = CriteriumId.voor_stelselgroep(self.stelselgroep)
+                    if aantal_onz > 1:
+                        adressen_id = stelselgroep_id.gedeeld_met_criterium(
+                            aantal_onz, GedeeldMetSoort.onzelfstandige_woonruimten
+                        ).gedeeld_met_criterium(
+                            aantal_adressen, GedeeldMetSoort.adressen
+                        )
+                        onz_id = stelselgroep_id.gedeeld_met_criterium(
+                            aantal_onz, GedeeldMetSoort.onzelfstandige_woonruimten
+                        )
+                    else:
+                        adressen_id = stelselgroep_id.gedeeld_met_criterium(
+                            aantal_adressen, GedeeldMetSoort.adressen
+                        )
+                        onz_id = None
                     woningwaardering.criterium = (
                         WoningwaarderingResultatenWoningwaarderingCriterium(
                             naam=utils.naam_gedeeld_met_groep(
                                 aantal_adressen,
                                 soort=GedeeldMetSoort.adressen,
                             ),
-                            id=str(
-                                CriteriumId.voor_stelselgroep(
-                                    self.stelselgroep
-                                ).gedeeld_met_criterium(
-                                    aantal_adressen, GedeeldMetSoort.adressen
-                                )
-                            ),
+                            id=str(adressen_id),
                         )
                     )
-                    if aantal_onz > 1:
+                    if onz_id is not None:
                         woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=str(
-                                    CriteriumId.voor_stelselgroep(
-                                        self.stelselgroep
-                                    ).gedeeld_met_criterium(
-                                        aantal_onz,
-                                        GedeeldMetSoort.onzelfstandige_woonruimten,
-                                    )
-                                )
-                            )
+                            WoningwaarderingCriteriumSleutels(id=str(onz_id))
                         )
 
                     woningwaardering_groep.woningwaarderingen.append(woningwaardering)

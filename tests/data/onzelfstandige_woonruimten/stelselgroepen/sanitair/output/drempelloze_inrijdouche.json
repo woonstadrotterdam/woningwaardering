@@ -14,12 +14,21 @@
       "punten": 3.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__prive__Space_334160",
+            "naam": "Badkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__prive__Space_334160__drempelloze_inrijdouche",
-            "naam": "Badkamer - Drempelloze inrijdouche",
+            "naam": "Drempelloze inrijdouche",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_334160"
             },
             "meeteenheid": {
               "code": "STU",

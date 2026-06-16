@@ -14,12 +14,21 @@
       "punten": 3.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__prive__Space_789463",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__prive__Space_789463__douche",
-            "naam": "Slaapkamer - Douche",
+            "naam": "Douche",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_789463"
             },
             "meeteenheid": {
               "code": "STU",

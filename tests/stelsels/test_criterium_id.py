@@ -1,5 +1,4 @@
 import json
-import re
 from decimal import Decimal
 from pathlib import Path
 
@@ -77,6 +76,10 @@ def test_criterium_id_equality() -> None:
     ("criterium_id", "verwacht"),
     [
         ("buitenruimten__gedeeld_met_3_adressen__ruimte_1", Decimal("3")),
+        (
+            "buitenruimten__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_3_adressen__ruimte_1",
+            Decimal("3"),
+        ),
         ("sanitair__gedeeld_met_8_onzelfstandige_woonruimten", Decimal("8")),
         ("keuken__prive__ruimte_1", Decimal("1")),
         ("keuken__ruimte_1", Decimal("1")),
@@ -89,24 +92,6 @@ def test_gedeeld_met_divisor(criterium_id: str | None, verwacht: Decimal) -> Non
     assert utils._gedeeld_met_divisor(criterium_id) == verwacht
 
 
-# Stelselgroepen die in Fase 1 nog de oude structuur houden en in Fase 2 door de
-# gedeelde gemeenschappelijke-ruimten-module worden vervangen. Hun output voldoet
-# bewust nog niet aan de criteriumid-padregel.
-FASE_2_STELSELGROEPEN = (
-    Woningwaarderingstelselgroep.gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen.name,
-    Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.name,
-)
-
-# Genest gedeeld-met-aggregaat in buitenruimten (gedeeld_met_N_adressen onder
-# gedeeld_met_M_onzelfstandige_woonruimten). Nesten van dit id zou via de
-# _gedeeld_met_divisor-regex het verkeerde deeltal kiezen; aparte beslissing nodig.
-_BUITENRUIMTEN_AGGREGAAT_BOVEN = re.compile(
-    r"^buitenruimten__gedeeld_met_\d+_onzelfstandige_woonruimten$"
-)
-_BUITENRUIMTEN_AGGREGAAT_ONDER = re.compile(
-    r"^buitenruimten__gedeeld_met_\d+_adressen$"
-)
-
 _DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 _OUTPUT_FIXTURES = sorted(p for p in _DATA_DIR.rglob("*.json") if "output" in p.parts)
 
@@ -114,12 +99,7 @@ _OUTPUT_FIXTURES = sorted(p for p in _DATA_DIR.rglob("*.json") if "output" in p.
 def _is_uitgezonderd(
     bovenliggendcriterium_id: str, onderliggendcriterium_id: str
 ) -> bool:
-    if bovenliggendcriterium_id.split("__", 1)[0] in FASE_2_STELSELGROEPEN:
-        return True
-    return bool(
-        _BUITENRUIMTEN_AGGREGAAT_BOVEN.match(bovenliggendcriterium_id)
-        and _BUITENRUIMTEN_AGGREGAAT_ONDER.match(onderliggendcriterium_id)
-    )
+    return False
 
 
 def _criteriumid_paren(node: object) -> list[tuple[str, str]]:
@@ -151,10 +131,7 @@ def _criteriumid_paren(node: object) -> list[tuple[str, str]]:
 def test_onderliggendcriteriumid_begint_met_bovenliggendcriteriumid(
     fixture: Path,
 ) -> None:
-    """Elk onderliggendcriteriumid begint met bovenliggendcriteriumid + '__'.
-
-    Uitzonderingen zijn de Fase 2-stelselgroepen en het geneste buitenruimten-aggregaat.
-    """
+    """Elk onderliggendcriteriumid begint met bovenliggendcriteriumid + '__'."""
     schendingen = [
         (bovenliggend, onderliggend)
         for bovenliggend, onderliggend in _criteriumid_paren(

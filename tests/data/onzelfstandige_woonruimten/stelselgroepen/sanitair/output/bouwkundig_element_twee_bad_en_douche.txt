@@ -4,6 +4,7 @@ SAMENVATTING
 
 SANITAIR
   Privé
-    - Badkamer - Bad en douche                               2.00 st  12.00 pt
+    - Badkamer
+      - Bad en douche                                        2.00 st  12.00 pt
                                                                       --------
   Totaal                                                              12.00 pt

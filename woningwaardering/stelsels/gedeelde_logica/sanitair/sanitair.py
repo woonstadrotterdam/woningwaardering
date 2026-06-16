@@ -6,7 +6,7 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels.criterium_id import CriteriumId
-from woningwaardering.stelsels.utils import rond_af
+from woningwaardering.stelsels.utils import installatie_id_deel, rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -73,7 +73,7 @@ def waardeer_sanitair(
 
         yield WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=f"{ruimte.naam} - Voorzieningen: Max verdubbeling punten bad en douche",
+                naam="Max verdubbeling punten bad en douche",
                 id=str(
                     CriteriumId.voor_stelselgroep(Woningwaarderingstelselgroep.sanitair)
                     .met_onderliggend(ruimte.id)
@@ -148,13 +148,13 @@ def _waardeer_toiletten(
                 )
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"{ruimte.naam} - {toiletsoort.naam}",
+                        naam=toiletsoort.naam,
                         id=str(
                             CriteriumId.voor_stelselgroep(
                                 Woningwaarderingstelselgroep.sanitair
                             )
                             .met_onderliggend(ruimte.id)
-                            .met_onderliggend(toiletsoort.name)
+                            .met_onderliggend(installatie_id_deel(toiletsoort))
                         ),
                         meeteenheid=Meeteenheid.stuks,
                     ),
@@ -213,13 +213,15 @@ def _waardeer_wastafels(
                         )
                         yield WoningwaarderingResultatenWoningwaardering(
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam=f"{ruimte.naam} - {wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
+                                naam=f"{wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
                                 id=str(
                                     CriteriumId.voor_stelselgroep(
                                         Woningwaarderingstelselgroep.sanitair
                                     )
                                     .met_onderliggend(ruimte.id)
-                                    .met_onderliggend(wastafelsoort.name)
+                                    .met_onderliggend(
+                                        f"{installatie_id_deel(wastafelsoort)}_spoelbak"
+                                    )
                                 ),
                                 meeteenheid=Meeteenheid.stuks,
                             ),
@@ -244,13 +246,13 @@ def _waardeer_wastafels(
             yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"{ruimte.naam} - {wastafelsoort.naam}",
+                        naam=wastafelsoort.naam,
                         id=str(
                             CriteriumId.voor_stelselgroep(
                                 Woningwaarderingstelselgroep.sanitair
                             )
                             .met_onderliggend(ruimte.id)
-                            .met_onderliggend(wastafelsoort.name)
+                            .met_onderliggend(installatie_id_deel(wastafelsoort))
                         ),
                         meeteenheid=Meeteenheid.stuks,
                     ),
@@ -293,13 +295,15 @@ def _waardeer_wastafels(
                 )
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"{ruimte.naam} - Max {punten_per_wastafel} punt voor {wastafelsoort.naam}",
+                        naam=f"Max {punten_per_wastafel} punt voor {wastafelsoort.naam}",
                         id=str(
                             CriteriumId.voor_stelselgroep(
                                 Woningwaarderingstelselgroep.sanitair
                             )
                             .met_onderliggend(ruimte.id)
-                            .met_onderliggend(f"max_punten_{wastafelsoort.name}")
+                            .met_onderliggend(
+                                f"max_punten_{installatie_id_deel(wastafelsoort)}"
+                            )
                         ),
                     ),
                     punten=rond_af(
@@ -362,13 +366,15 @@ def _waardeer_baden_en_douches(
         yield (
             WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"{ruimte.naam} - {Installatiesoort.bad_en_douche.naam}",
+                    naam=Installatiesoort.bad_en_douche.naam,
                     id=str(
                         CriteriumId.voor_stelselgroep(
                             Woningwaarderingstelselgroep.sanitair
                         )
                         .met_onderliggend(ruimte.id)
-                        .met_onderliggend(Installatiesoort.bad_en_douche.name)
+                        .met_onderliggend(
+                            installatie_id_deel(Installatiesoort.bad_en_douche)
+                        )
                     ),
                     meeteenheid=Meeteenheid.stuks,
                 ),
@@ -394,13 +400,13 @@ def _waardeer_baden_en_douches(
             yield (
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"{ruimte.naam} - {installatiesoort.naam}",
+                        naam=installatiesoort.naam,
                         id=str(
                             CriteriumId.voor_stelselgroep(
                                 Woningwaarderingstelselgroep.sanitair
                             )
                             .met_onderliggend(ruimte.id)
-                            .met_onderliggend(installatiesoort.name)
+                            .met_onderliggend(installatie_id_deel(installatiesoort))
                         ),
                         meeteenheid=Meeteenheid.stuks,
                     ),
@@ -494,13 +500,15 @@ def _waardeer_installaties(
                         yield (
                             WoningwaarderingResultatenWoningwaardering(
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                    naam=f"{ruimte.naam} - Voorzieningen: {installatie.naam}",
+                                    naam=installatie.naam,
                                     id=str(
                                         CriteriumId.voor_stelselgroep(
                                             Woningwaarderingstelselgroep.sanitair
                                         )
                                         .met_onderliggend(ruimte.id)
-                                        .met_onderliggend(installatie.name)
+                                        .met_onderliggend(
+                                            installatie_id_deel(installatie)
+                                        )
                                     ),
                                     meeteenheid=Meeteenheid.stuks,
                                 ),
@@ -519,14 +527,14 @@ def _waardeer_installaties(
                                 )
                                 yield WoningwaarderingResultatenWoningwaardering(
                                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                        naam=f"{ruimte.naam} - Voorzieningen: Max {maximum} punten voor {installatie.naam}",
+                                        naam=f"Max {maximum} punten voor {installatie.naam}",
                                         id=str(
                                             CriteriumId.voor_stelselgroep(
                                                 Woningwaarderingstelselgroep.sanitair
                                             )
                                             .met_onderliggend(ruimte.id)
                                             .met_onderliggend(
-                                                f"max_punten_{installatie.name}"
+                                                f"max_punten_{installatie_id_deel(installatie)}"
                                             )
                                         ),
                                     ),
@@ -547,14 +555,14 @@ def _waardeer_installaties(
                                 )
                                 yield WoningwaarderingResultatenWoningwaardering(
                                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                        naam=f"{ruimte.naam} - Voorzieningen: Max 2 stopcontacten per wastafel",
+                                        naam="Max 2 stopcontacten per wastafel",
                                         id=str(
                                             CriteriumId.voor_stelselgroep(
                                                 Woningwaarderingstelselgroep.sanitair
                                             )
                                             .met_onderliggend(ruimte.id)
                                             .met_onderliggend(
-                                                f"max_{Installatiesoort.stopcontact_bij_wastafel.name}"
+                                                f"max_{installatie_id_deel(Installatiesoort.stopcontact_bij_wastafel)}"
                                             )
                                         ),
                                     ),

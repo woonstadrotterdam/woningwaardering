@@ -11,7 +11,7 @@ import pandas as pd
 import requests
 from loguru import logger
 
-from woningwaardering.stelsels.criterium_id import GedeeldMetSoort
+from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
@@ -40,6 +40,7 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
 )
 from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     Woningwaarderingstelselgroep,
+    WoningwaarderingstelselgroepReferentiedata,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
@@ -365,6 +366,21 @@ def _onderliggende_waarderingen(
     ]
 
 
+def _is_top_level_waardering(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> bool:
+    if waardering.criterium is None:
+        return False
+    if waardering.criterium.bovenliggende_criterium is None:
+        return True
+    parent_id = waardering.criterium.bovenliggende_criterium.id
+    return not any(
+        other.criterium is not None and other.criterium.id == parent_id
+        for other in waarderingen
+    )
+
+
 def _render_waardering_pre_order(
     waardering: WoningwaarderingResultatenWoningwaardering,
     waarderingen: list[WoningwaarderingResultatenWoningwaardering],
@@ -409,8 +425,8 @@ _GEDEELD_MET = re.compile(r"(?:^|__)gedeeld_met_(\d+)(?:_|$)")
 def _gedeeld_met_divisor(criterium_id: str | None) -> Decimal:
     if criterium_id is None:
         return Decimal("1")
-    match = _GEDEELD_MET.search(criterium_id)
-    return Decimal(match.group(1)) if match else Decimal("1")
+    matches = _GEDEELD_MET.findall(criterium_id)
+    return Decimal(matches[-1]) if matches else Decimal("1")
 
 
 def _waardering_voor_criterium_id(
@@ -546,11 +562,7 @@ def _render_detail_groep(
     )
     body: list[list[str]] = []
 
-    tops = [
-        w
-        for w in waarderingen
-        if w.criterium is not None and w.criterium.bovenliggende_criterium is None
-    ]
+    tops = [w for w in waarderingen if _is_top_level_waardering(w, waarderingen)]
     for waardering in tops:
         _render_waardering_pre_order(
             waardering,
@@ -986,6 +998,102 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
             UserWarning,
         )
     return eenheid
+
+
+def ruimte_weergavenaam(ruimte: EenhedenRuimte) -> str:
+    """Weergavenaam voor een ruimte-criterium."""
+    if ruimte.naam:
+        return ruimte.naam
+    if ruimte.detail_soort is not None and ruimte.detail_soort.naam:
+        return ruimte.detail_soort.naam
+    return "Ruimte"
+
+
+def installatie_id_deel(referentiedata: Referentiedata) -> str:
+    """Uniek id-deel voor een installatie; voorkomt lege ``Referentiedata.name``."""
+    if referentiedata.name:
+        return referentiedata.name
+    if referentiedata.naam:
+        return referentiedata.naam.lower().replace(" ", "_")
+    return "onbekend"
+
+
+def nest_waarderingen_onder_ruimte(
+    ruimte: EenhedenRuimte,
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+    *,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
+) -> list[WoningwaarderingResultatenWoningwaardering]:
+    """Voegt een ruimte-criterium toe en nest installatiecriteria eronder."""
+    if not waarderingen or ruimte.id is None:
+        return waarderingen
+
+    stelselgroep_id = CriteriumId.voor_stelselgroep(stelselgroep)
+    ruimte_criterium_id = stelselgroep_id.met_onderliggend(ruimte.id)
+    resultaat: list[WoningwaarderingResultatenWoningwaardering] = [
+        WoningwaarderingResultatenWoningwaardering(
+            criterium=ruimte_criterium_id.met_criterium(ruimte_weergavenaam(ruimte)),
+            punten=None,
+        )
+    ]
+
+    prefix = f"{stelselgroep.name}__"
+    for waardering in waarderingen:
+        if waardering.criterium is None or not waardering.criterium.id:
+            resultaat.append(waardering)
+            continue
+        criterium_id = waardering.criterium.id
+        if not criterium_id.startswith(prefix):
+            resultaat.append(waardering)
+            continue
+        suffix = criterium_id[len(prefix) :]
+        if suffix.startswith(f"{ruimte.id}__"):
+            installatie_deel = suffix[len(ruimte.id) + 2 :]
+            waardering.criterium.id = str(
+                ruimte_criterium_id.met_onderliggend(installatie_deel)
+            )
+            waardering.criterium.bovenliggende_criterium = (
+                ruimte_criterium_id.naar_criterium_sleutels()
+            )
+        resultaat.append(waardering)
+
+    return resultaat
+
+
+def verplaats_waardering_onder_gedeeld_met(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+    *,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
+    gedeeld_met_id: CriteriumId,
+) -> None:
+    """Verplaatst een waardering onder een gedeeld-met-criterium met behoud van nesting."""
+    if waardering.criterium is None or not waardering.criterium.id:
+        return
+
+    prefix = f"{stelselgroep.name}__"
+    criterium_id = waardering.criterium.id
+    if not criterium_id.startswith(prefix):
+        return
+
+    suffix = criterium_id[len(prefix) :]
+    nieuw_id = gedeeld_met_id.met_onderliggend(suffix)
+    waardering.criterium.id = str(nieuw_id)
+
+    parent_id: str | None = None
+    if waardering.criterium.bovenliggende_criterium is not None:
+        parent_id = waardering.criterium.bovenliggende_criterium.id
+
+    if parent_id is None or parent_id == stelselgroep.name:
+        nieuwe_parent = gedeeld_met_id
+    elif parent_id.startswith(prefix):
+        parent_suffix = parent_id[len(prefix) :]
+        nieuwe_parent = gedeeld_met_id.met_onderliggend(parent_suffix)
+    else:
+        return
+
+    waardering.criterium.bovenliggende_criterium = (
+        nieuwe_parent.naar_criterium_sleutels()
+    )
 
 
 def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:

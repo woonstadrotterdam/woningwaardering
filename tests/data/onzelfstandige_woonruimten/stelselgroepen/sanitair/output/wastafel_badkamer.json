@@ -14,12 +14,21 @@
       "punten": 5.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__prive__Space_379131",
+            "naam": "Badkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          }
+        },
+        {
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__prive__Space_379131__wastafel",
-            "naam": "Badkamer - Wastafel",
+            "naam": "Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_379131"
             },
             "meeteenheid": {
               "code": "STU",
@@ -32,9 +41,9 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__prive__Space_379131__meerpersoonswastafel",
-            "naam": "Badkamer - Meerpersoonswastafel",
+            "naam": "Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_379131"
             },
             "meeteenheid": {
               "code": "STU",

@@ -323,22 +323,46 @@
       "punten": 8.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_72314041",
+            "naam": "Toiletruimte 1",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72314041__wastafel",
-            "naam": "Toiletruimte 1 - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_72314041"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
             }
           },
           "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__Space_72314048",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
         },
         {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72314048__wastafel",
-            "naam": "Badruimte - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_72314048"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -347,22 +371,46 @@
           "punten": 1.0
         },
         {
+          "criterium": {
+            "id": "sanitair__Space_72310936",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_72310936__wastafel",
-            "naam": "Keuken - Wastafel (spoelbak in aanrecht < 1m)",
+            "id": "sanitair__Space_72310936__wastafel_spoelbak",
+            "naam": "Wastafel (spoelbak in aanrecht < 1m)",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_72310936"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
             }
           },
           "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__Space_72310920",
+            "naam": "Toiletruimte 2",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
         },
         {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72310920__staand_toilet",
-            "naam": "Toiletruimte 2 - Staand Toilet",
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_72310920"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -374,7 +422,10 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72310920__wastafel",
-            "naam": "Toiletruimte 2 - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_72310920"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -383,10 +434,22 @@
           "punten": 1.0
         },
         {
+          "criterium": {
+            "id": "sanitair__Space_72315437",
+            "naam": "Wasruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_72315437__wastafel",
-            "naam": "Wasruimte - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_72315437"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"

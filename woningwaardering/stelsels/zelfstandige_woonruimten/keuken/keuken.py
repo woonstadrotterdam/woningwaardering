@@ -48,12 +48,15 @@ class Keuken(Stelselgroep):
         )
         woningwaardering_groep.woningwaarderingen = []
 
-        woningwaardering_groep.woningwaarderingen.extend(
-            woningwaardering
-            for ruimte in eenheid.ruimten or []
-            if not utils.gedeeld_met_eenheden(ruimte)
-            for woningwaardering in waardeer_keuken(ruimte, self.stelsel)
-        )
+        for ruimte in eenheid.ruimten or []:
+            if utils.gedeeld_met_eenheden(ruimte):
+                continue
+            waarderingen = list(waardeer_keuken(ruimte, self.stelsel))
+            woningwaardering_groep.woningwaarderingen.extend(
+                utils.nest_waarderingen_onder_ruimte(
+                    ruimte, waarderingen, stelselgroep=self.stelselgroep
+                )
+            )
 
         if not woningwaardering_groep.woningwaarderingen:
             warnings.warn(

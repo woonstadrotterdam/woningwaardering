@@ -14,10 +14,22 @@
       "punten": 1.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_565837",
+            "naam": "Badkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_565837__wastafel",
-            "naam": "Badkamer - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_565837"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"

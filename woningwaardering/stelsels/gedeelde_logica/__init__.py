@@ -2,6 +2,7 @@ from .bijzondere_voorzieningen import waardeer_bijzondere_voorzieningen
 from .gemeenschappelijke_parkeerruimten import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
+from .gemeenschappelijke_ruimten import waardeer_gemeenschappelijke_ruimten
 from .keuken import waardeer_keuken
 from .oppervlakte_van_overige_ruimten import (
     bereken_oppervlakte_punten,
@@ -30,4 +31,5 @@ __all__ = [
     "waardeer_sanitair",
     "waardeer_verkoeling_en_verwarming",
     "waardeer_gemeenschappelijke_parkeerruimte",
+    "waardeer_gemeenschappelijke_ruimten",
 ]

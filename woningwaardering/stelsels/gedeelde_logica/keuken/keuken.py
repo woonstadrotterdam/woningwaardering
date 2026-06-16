@@ -8,6 +8,7 @@ from loguru import logger
 from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import (
     gedeeld_met_onzelfstandige_woonruimten,
+    installatie_id_deel,
     rond_af,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -154,15 +155,16 @@ def _waardeer_aanrecht(
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(element.lengte)}mm telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
             )
+            element_id_deel = element.id or "aanrecht"
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=f"{ruimte.naam}: Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
+                    naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                     id=str(
                         CriteriumId.voor_stelselgroep(
                             Woningwaarderingstelselgroep.keuken
                         )
                         .met_onderliggend(ruimte.id)
-                        .met_onderliggend(f"lengte_aanrecht_{element.id}")
+                        .met_onderliggend(f"lengte_aanrecht_{element_id_deel}")
                     ),
                     meeteenheid=Meeteenheid.millimeter,
                 ),
@@ -236,7 +238,9 @@ def _waardeer_extra_voorzieningen(
                             Woningwaarderingstelselgroep.keuken
                         )
                         .met_onderliggend(ruimte.id)
-                        .met_onderliggend(f"extra_voorziening_{voorziening.name}")
+                        .met_onderliggend(
+                            f"extra_voorziening_{installatie_id_deel(voorziening)}"
+                        )
                     ),
                     meeteenheid=Meeteenheid.stuks,
                 ),

@@ -251,10 +251,22 @@
       "punten": 11.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_88554482",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88554482__staand_toilet",
-            "naam": "Badruimte - Staand Toilet",
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_88554482"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -266,7 +278,10 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88554482__wastafel",
-            "naam": "Badruimte - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_88554482"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -278,7 +293,10 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88554482__douche",
-            "naam": "Badruimte - Douche",
+            "naam": "Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_88554482"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -287,10 +305,22 @@
           "punten": 4.0
         },
         {
+          "criterium": {
+            "id": "sanitair__Space_88559336",
+            "naam": "Toiletruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88559336__staand_toilet",
-            "naam": "Toiletruimte - Staand Toilet",
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_88559336"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -302,7 +332,10 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_88559336__wastafel",
-            "naam": "Toiletruimte - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_88559336"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"

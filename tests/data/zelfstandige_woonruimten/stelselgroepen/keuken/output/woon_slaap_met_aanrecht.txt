@@ -3,9 +3,13 @@ SAMENVATTING woon_slaap_met_aanrecht
                                                                       --------
 
 KEUKEN
-  Woonkamer/keuken: Lengte aanrecht                       2000.00 mm   7.00 pt
-  Woonkamer: Lengte aanrecht                              1000.00 mm   4.00 pt
-  Woon-/slaapkamer: Lengte aanrecht                       2000.00 mm   7.00 pt
-  Slaapkamer: Lengte aanrecht                             1000.00 mm   4.00 pt
+  Woonkamer/keuken
+    - Lengte aanrecht                                     2000.00 mm   7.00 pt
+  Woonkamer
+    - Lengte aanrecht                                     1000.00 mm   4.00 pt
+  Woon-/slaapkamer
+    - Lengte aanrecht                                     2000.00 mm   7.00 pt
+  Slaapkamer
+    - Lengte aanrecht                                     1000.00 mm   4.00 pt
                                                                       --------
   Totaal                                                              22.00 pt

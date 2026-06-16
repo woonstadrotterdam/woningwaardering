@@ -14,12 +14,21 @@
       "punten": 4.75,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__prive__Space_653279",
+            "naam": "Badkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__prive__Space_653279__hangend_toilet",
-            "naam": "Badkamer - Hangend toilet",
+            "naam": "Hangend toilet",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_653279"
             },
             "meeteenheid": {
               "code": "STU",
@@ -32,9 +41,9 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__prive__Space_653279__staand_toilet",
-            "naam": "Badkamer - Staand Toilet",
+            "naam": "Staand Toilet",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_653279"
             },
             "meeteenheid": {
               "code": "STU",

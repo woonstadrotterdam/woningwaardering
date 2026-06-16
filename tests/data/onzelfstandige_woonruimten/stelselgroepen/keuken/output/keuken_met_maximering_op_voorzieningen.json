@@ -14,12 +14,21 @@
       "punten": 8.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__prive__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken__prive"
+            }
+          }
+        },
+        {
           "aantal": 1000.0,
           "criterium": {
             "id": "keuken__prive__keuken__lengte_aanrecht_aanrecht",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__prive"
+              "id": "keuken__prive__keuken"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -31,10 +40,10 @@
         {
           "aantal": 4.0,
           "criterium": {
-            "id": "keuken__prive__keuken__extra_voorziening_",
+            "id": "keuken__prive__keuken__extra_voorziening_inbouw_koelkast",
             "naam": "Inbouw koelkast (in zelfde ruimte)",
             "bovenliggendeCriterium": {
-              "id": "keuken__prive"
+              "id": "keuken__prive__keuken"
             },
             "meeteenheid": {
               "code": "STU",
@@ -46,10 +55,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "keuken__prive__keuken__extra_voorziening_",
+            "id": "keuken__prive__keuken__extra_voorziening_inbouw_oven_elektrisch",
             "naam": "Inbouw oven elektrisch",
             "bovenliggendeCriterium": {
-              "id": "keuken__prive"
+              "id": "keuken__prive__keuken"
             },
             "meeteenheid": {
               "code": "STU",
@@ -63,7 +72,7 @@
             "id": "keuken__prive__keuken__maximering_extra_voorzieningen",
             "naam": "Max. 4 punten voor voorzieningen in een (open) keuken met een aanrechtlengte van 1000.0mm",
             "bovenliggendeCriterium": {
-              "id": "keuken__prive"
+              "id": "keuken__prive__keuken"
             }
           },
           "punten": -1.0

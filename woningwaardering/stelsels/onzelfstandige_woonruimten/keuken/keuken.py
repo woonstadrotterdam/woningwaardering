@@ -12,7 +12,6 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -61,66 +60,51 @@ class Keuken(Stelselgroep):
         ]
 
         for ruimte in ruimten or []:
-            woningwaarderingen = list(waardeer_keuken(ruimte, self.stelsel))
+            woningwaarderingen = utils.nest_waarderingen_onder_ruimte(
+                ruimte,
+                list(waardeer_keuken(ruimte, self.stelsel)),
+                stelselgroep=self.stelselgroep,
+            )
+            if not woningwaarderingen:
+                continue
 
-            # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
+            onz_aantal = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            if (
+                utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
+                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
+                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
+            ):
+                gedeeld_met_id = CriteriumId.voor_stelselgroep(
+                    self.stelselgroep
+                ).gedeeld_met_criterium(
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                    GedeeldMetSoort.onzelfstandige_woonruimten,
+                )
+                gedeeld_met_aantallen[
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                ] = None
+            else:
+                gedeeld_met_id = CriteriumId.voor_stelselgroep(
+                    self.stelselgroep
+                ).gedeeld_met_criterium(1)
+                gedeeld_met_aantallen[1] = None
+
             for woningwaardering in woningwaarderingen:
-                if woningwaardering.criterium is not None:
-                    if (
-                        woningwaardering.punten
-                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        is not None
-                    ):
-                        gedeeld_met_aantallen[
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ] = None
-                        gedeeld_met_criterium = CriteriumId.voor_stelselgroep(
-                            self.stelselgroep
-                        ).gedeeld_met_criterium(
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                            GedeeldMetSoort.onzelfstandige_woonruimten,
+                if woningwaardering.criterium is None:
+                    continue
+                if onz_aantal > 1 and woningwaardering.punten is not None:
+                    woningwaardering.punten = float(
+                        utils.rond_af(
+                            Decimal(str(woningwaardering.punten))
+                            / Decimal(str(onz_aantal)),
+                            decimalen=2,
                         )
-                        criterium_id = woningwaardering.criterium.id
-                        if not criterium_id:
-                            continue
-                        suffix = criterium_id.split("__", 1)[1]
-                        woningwaardering.criterium.id = str(
-                            gedeeld_met_criterium.met_onderliggend(suffix)
-                        )
-                        woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=str(gedeeld_met_criterium)
-                            )
-                        )
-                        woningwaardering.punten = float(
-                            utils.rond_af(
-                                Decimal(str(woningwaardering.punten))
-                                / Decimal(
-                                    str(
-                                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                                    )
-                                ),
-                                decimalen=2,
-                            )
-                        )
-                    elif woningwaardering.punten:
-                        gedeeld_met_aantallen[1] = None
-                        gedeeld_met_criterium = CriteriumId.voor_stelselgroep(
-                            self.stelselgroep
-                        ).gedeeld_met_criterium(1)
-                        criterium_id = woningwaardering.criterium.id
-                        if not criterium_id:
-                            continue
-                        suffix = criterium_id.split("__", 1)[1]
-                        woningwaardering.criterium.id = str(
-                            gedeeld_met_criterium.met_onderliggend(suffix)
-                        )
-                        woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=str(gedeeld_met_criterium)
-                            )
-                        )
+                    )
+                utils.verplaats_waardering_onder_gedeeld_met(
+                    woningwaardering,
+                    stelselgroep=self.stelselgroep,
+                    gedeeld_met_id=gedeeld_met_id,
+                )
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 

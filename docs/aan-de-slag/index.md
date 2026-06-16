@@ -398,10 +398,22 @@ with open(
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__Space_108006229",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 2700.0,
           "criterium": {
             "id": "keuken__Space_108006229__lengte_aanrecht_Aanrecht_108006231",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_108006229"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -425,10 +437,26 @@ with open(
       "punten": 15.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_108014563",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108014563__staand_toilet",
-            "naam": "Badruimte - Staand Toilet"
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108014563"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
@@ -436,7 +464,14 @@ with open(
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_108014563__wastafel",
-            "naam": "Badruimte - Wastafel"
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108014563"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
@@ -444,15 +479,38 @@ with open(
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108014563__bad_en_douche",
-            "naam": "Badruimte - Bad en douche"
+            "naam": "Bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108014563"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 7.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__Space_108006223",
+            "naam": "Toiletruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
         },
         {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108006223__staand_toilet",
-            "naam": "Toiletruimte - Staand Toilet"
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108006223"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         },
@@ -460,7 +518,14 @@ with open(
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108006223__wastafel",
-            "naam": "Toiletruimte - Wastafel"
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108006223"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         }
@@ -673,16 +738,19 @@ ENERGIEPRESTATIE
   Totaal                                                              22.00 pt
 
 KEUKEN
-  Keuken: Lengte aanrecht                                 2700.00 mm   7.00 pt
+  Keuken
+    - Lengte aanrecht                                     2700.00 mm   7.00 pt
                                                                       --------
   Totaal                                                               7.00 pt
 
 SANITAIR
-  Badruimte - Staand Toilet                                  1.00 st   2.00 pt
-  Badruimte - Wastafel                                       2.00 st   2.00 pt
-  Badruimte - Bad en douche                                  1.00 st   7.00 pt
-  Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
-  Toiletruimte - Wastafel                                    1.00 st   1.00 pt
+  Badruimte
+    - Staand Toilet                                          1.00 st   2.00 pt
+    - Wastafel                                               2.00 st   2.00 pt
+    - Bad en douche                                          1.00 st   7.00 pt
+  Toiletruimte
+    - Staand Toilet                                          1.00 st   3.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
                                                                       --------
   Totaal                                                              15.00 pt
 
@@ -978,10 +1046,22 @@ De output daarvan is een VERA woningwaarderingstelsel object.
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__Space_108006229",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 2700.0,
           "criterium": {
             "id": "keuken__Space_108006229__lengte_aanrecht_Aanrecht_108006231",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_108006229"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -1195,7 +1275,8 @@ ENERGIEPRESTATIE
   Totaal                                                              22.00 pt
 
 KEUKEN
-  Keuken: Lengte aanrecht                                 2700.00 mm   7.00 pt
+  Keuken
+    - Lengte aanrecht                                     2700.00 mm   7.00 pt
                                                                       --------
   Totaal                                                               7.00 pt
 

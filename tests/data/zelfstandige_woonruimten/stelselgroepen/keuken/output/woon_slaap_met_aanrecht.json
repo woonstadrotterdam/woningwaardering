@@ -14,10 +14,22 @@
       "punten": 22.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__WOK",
+            "naam": "Woonkamer/keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 2000.0,
           "criterium": {
             "id": "keuken__WOK__lengte_aanrecht_aanrecht",
-            "naam": "Woonkamer/keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__WOK"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -26,10 +38,22 @@
           "punten": 7.0
         },
         {
+          "criterium": {
+            "id": "keuken__Woonkamer",
+            "naam": "Woonkamer",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 1000.0,
           "criterium": {
             "id": "keuken__Woonkamer__lengte_aanrecht_aanrecht",
-            "naam": "Woonkamer: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Woonkamer"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -38,10 +62,22 @@
           "punten": 4.0
         },
         {
+          "criterium": {
+            "id": "keuken__Woon-/slaapkamer",
+            "naam": "Woon-/slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 2000.0,
           "criterium": {
             "id": "keuken__Woon-/slaapkamer__lengte_aanrecht_aanrecht",
-            "naam": "Woon-/slaapkamer: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Woon-/slaapkamer"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -50,10 +86,22 @@
           "punten": 7.0
         },
         {
+          "criterium": {
+            "id": "keuken__Slaapkamer",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 1000.0,
           "criterium": {
             "id": "keuken__Slaapkamer__lengte_aanrecht_aanrecht",
-            "naam": "Slaapkamer: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Slaapkamer"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"

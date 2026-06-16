@@ -277,10 +277,22 @@
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__Space_29474430",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 2507.0,
           "criterium": {
             "id": "keuken__Space_29474430__lengte_aanrecht_Aanrecht_29467536",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_29474430"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -304,10 +316,22 @@
       "punten": 4.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_29489752",
+            "naam": "Wasruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_29489752__douche",
-            "naam": "Wasruimte - Douche",
+            "naam": "Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_29489752"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"

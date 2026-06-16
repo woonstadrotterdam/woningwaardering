@@ -59,16 +59,19 @@ ENERGIEPRESTATIE
   Totaal                                                              41.00 pt
 
 KEUKEN
-  Keuken: Lengte aanrecht                                 3600.00 mm   7.00 pt
+  Keuken
+    - Lengte aanrecht                                     3600.00 mm   7.00 pt
                                                                       --------
   Totaal                                                               7.00 pt
 
 SANITAIR
-  Badruimte - Staand Toilet                                  1.00 st   2.00 pt
-  Badruimte - Wastafel                                       1.00 st   1.00 pt
-  Badruimte - Douche                                         1.00 st   4.00 pt
-  Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
-  Toiletruimte - Wastafel                                    1.00 st   1.00 pt
+  Badruimte
+    - Staand Toilet                                          1.00 st   2.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
+    - Douche                                                 1.00 st   4.00 pt
+  Toiletruimte
+    - Staand Toilet                                          1.00 st   3.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
                                                                       --------
   Totaal                                                              11.00 pt
 

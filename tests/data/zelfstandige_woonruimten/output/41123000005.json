@@ -402,10 +402,22 @@
       "punten": 8.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__Space_23702760",
+            "naam": "Keuken 1",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 1875.0,
           "criterium": {
             "id": "keuken__Space_23702760__lengte_aanrecht_Aanrecht_72739118",
-            "naam": "Keuken 1: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_23702760"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -414,10 +426,22 @@
           "punten": 4.0
         },
         {
+          "criterium": {
+            "id": "keuken__Space_23702332",
+            "naam": "Keuken 2",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 1920.0,
           "criterium": {
             "id": "keuken__Space_23702332__lengte_aanrecht_Aanrecht_72738742",
-            "naam": "Keuken 2: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_23702332"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -441,10 +465,22 @@
       "punten": 18.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_23703087",
+            "naam": "Badruimte 1",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23703087__wastafel",
-            "naam": "Badruimte 1 - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_23703087"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -456,7 +492,10 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23703087__douche",
-            "naam": "Badruimte 1 - Douche",
+            "naam": "Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_23703087"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -465,10 +504,22 @@
           "punten": 4.0
         },
         {
+          "criterium": {
+            "id": "sanitair__Space_23702799",
+            "naam": "Badruimte 2",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702799__staand_toilet",
-            "naam": "Badruimte 2 - Staand Toilet",
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_23702799"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -480,7 +531,10 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702799__douche",
-            "naam": "Badruimte 2 - Douche",
+            "naam": "Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_23702799"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -489,10 +543,22 @@
           "punten": 4.0
         },
         {
+          "criterium": {
+            "id": "sanitair__Space_23702339",
+            "naam": "Badruimte 3",
+            "bovenliggendeCriterium": {
+              "id": "sanitair"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702339__staand_toilet",
-            "naam": "Badruimte 3 - Staand Toilet",
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_23702339"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -504,7 +570,10 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702339__wastafel",
-            "naam": "Badruimte 3 - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_23702339"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -516,7 +585,10 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_23702339__douche",
-            "naam": "Badruimte 3 - Douche",
+            "naam": "Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_23702339"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"

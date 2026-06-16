@@ -14,12 +14,21 @@
       "punten": 1.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__prive__Space_472199",
+            "naam": "Badkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__prive__Space_472199__wastafel",
-            "naam": "Badkamer - Wastafel",
+            "naam": "Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_472199"
             },
             "meeteenheid": {
               "code": "STU",

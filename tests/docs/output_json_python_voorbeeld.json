@@ -150,10 +150,22 @@
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__Space_108006229",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken"
+            }
+          }
+        },
+        {
           "aantal": 2700.0,
           "criterium": {
             "id": "keuken__Space_108006229__lengte_aanrecht_Aanrecht_108006231",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_108006229"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"

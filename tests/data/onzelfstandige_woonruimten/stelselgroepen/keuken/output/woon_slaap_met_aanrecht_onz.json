@@ -14,12 +14,21 @@
       "punten": 8.25,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__WOK",
+            "naam": "Woonkamer/keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 2000.0,
           "criterium": {
             "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__WOK__lengte_aanrecht_aanrecht",
-            "naam": "Woonkamer/keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__WOK"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -29,12 +38,21 @@
           "punten": 3.5
         },
         {
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__Woonkamer",
+            "naam": "Woonkamer",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 1000.0,
           "criterium": {
             "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__Woonkamer__lengte_aanrecht_aanrecht",
-            "naam": "Woonkamer: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten"
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__Woonkamer"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -44,12 +62,21 @@
           "punten": 2.0
         },
         {
+          "criterium": {
+            "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__Woon-/slaapkamer",
+            "naam": "Woon-/slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 2000.0,
           "criterium": {
             "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__Woon-/slaapkamer__lengte_aanrecht_aanrecht",
-            "naam": "Woon-/slaapkamer: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten"
+              "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__Woon-/slaapkamer"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -59,12 +86,21 @@
           "punten": 1.75
         },
         {
+          "criterium": {
+            "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__Slaapkamer",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 1000.0,
           "criterium": {
             "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__Slaapkamer__lengte_aanrecht_aanrecht",
-            "naam": "Slaapkamer: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten"
+              "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__Slaapkamer"
             },
             "meeteenheid": {
               "code": "MIL",

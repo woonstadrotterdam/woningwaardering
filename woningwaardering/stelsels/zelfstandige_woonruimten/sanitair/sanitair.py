@@ -54,8 +54,13 @@ class Sanitair(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaardering_groep.woningwaarderingen.extend(
+            waarderingen = list(
                 waardeer_sanitair(ruimte, self.stelselgroep, self.stelsel)
+            )
+            woningwaardering_groep.woningwaarderingen.extend(
+                utils.nest_waarderingen_onder_ruimte(
+                    ruimte, waarderingen, stelselgroep=self.stelselgroep
+                )
             )
 
         totaal_punten = utils.rond_af_op_kwart(
