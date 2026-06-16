@@ -6,7 +6,12 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.criterium_id import (
+    CriteriumId,
+    GedeeldMetSoort,
+    laatste_criteriumid_toevoeging,
+    weergavenaam_voor,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_verkoeling_en_verwarming,
 )
@@ -74,6 +79,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     ruimte, [woningwaardering], update_criterium_naam=False
                 )
             )[0]  # er is altijd maar een woningwaardering
+            self._nest_onder_gedeeld_met(ruimte, waardering_gedeeld)
             woningwaarderingen_totaal.append((ruimte, waardering_gedeeld))
             woningwaardering_groep.woningwaarderingen.append(waardering_gedeeld)
 
@@ -90,6 +96,39 @@ class VerkoelingEnVerwarming(Stelselgroep):
         )
         return woningwaardering_groep
 
+    def _nest_onder_gedeeld_met(
+        self,
+        ruimte: EenhedenRuimte,
+        woningwaardering: WoningwaarderingResultatenWoningwaardering,
+    ) -> None:
+        if woningwaardering.criterium is None or not woningwaardering.criterium.id:
+            return
+
+        onz_aantal = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+        gedeeld_met_groep = CriteriumId.voor_stelselgroep(
+            self.stelselgroep
+        ).gedeeld_met_criterium(onz_aantal, GedeeldMetSoort.onzelfstandige_woonruimten)
+
+        criterium_id = woningwaardering.criterium.id
+        suffix = criterium_id.split("__", 1)[1]
+        woningwaardering.criterium.id = str(gedeeld_met_groep.met_onderliggend(suffix))
+
+        if (
+            woningwaardering.criterium.bovenliggende_criterium
+            and woningwaardering.criterium.bovenliggende_criterium.id
+        ):
+            bovenliggend_id = woningwaardering.criterium.bovenliggende_criterium.id
+            if "__" in bovenliggend_id:
+                groepering_suffix = bovenliggend_id.split("__", 1)[1]
+                nieuwe_bovenliggend_id = str(
+                    gedeeld_met_groep.met_onderliggend(groepering_suffix)
+                )
+            else:
+                nieuwe_bovenliggend_id = str(gedeeld_met_groep)
+            woningwaardering.criterium.bovenliggende_criterium = (
+                WoningwaarderingCriteriumSleutels(id=nieuwe_bovenliggend_id)
+            )
+
     def _maak_totalen(
         self,
         waarderingen: list[
@@ -101,29 +140,44 @@ class VerkoelingEnVerwarming(Stelselgroep):
         # {bovenliggend_criterium: {onzelfstandige_woonruimten: punten}}
         for ruimte, woningwaardering in waarderingen:
             gedeeld_met_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            gedeeld_met_criterium_ids[gedeeld_met_onz][
-                woningwaardering.criterium.bovenliggende_criterium.id
-                if woningwaardering.criterium
-                and woningwaardering.criterium.bovenliggende_criterium
-                and woningwaardering.criterium.bovenliggende_criterium.id
-                else "verkoeling_en_verwarming_default"
-            ] = None
+            groeperings_id: str | None = None
+            if woningwaardering.criterium and woningwaardering.criterium.id:
+                if (
+                    woningwaardering.criterium.bovenliggende_criterium
+                    and woningwaardering.criterium.bovenliggende_criterium.id
+                    and "__" in woningwaardering.criterium.bovenliggende_criterium.id
+                ):
+                    groeperings_id = (
+                        woningwaardering.criterium.bovenliggende_criterium.id
+                    )
+                elif "__" in woningwaardering.criterium.id:
+                    groeperings_id = woningwaardering.criterium.id
+            if groeperings_id is not None:
+                gedeeld_met_criterium_ids[gedeeld_met_onz][groeperings_id] = None
 
         for aantal_onz, bovenliggend_criterium_ids in gedeeld_met_criterium_ids.items():
-            gedeeld_met_groep_id = str(
-                CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    gedeeld_met_aantal=aantal_onz,
-                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                )
+            gedeeld_met_groep = CriteriumId.voor_stelselgroep(
+                self.stelselgroep
+            ).gedeeld_met_criterium(
+                aantal_onz, GedeeldMetSoort.onzelfstandige_woonruimten
             )
+            gedeeld_met_groep_id = str(gedeeld_met_groep)
             for criterium_id in bovenliggend_criterium_ids:
+                if criterium_id == gedeeld_met_groep_id:
+                    continue
+                if criterium_id.startswith(f"{gedeeld_met_groep_id}__"):
+                    groepering_id = criterium_id
+                elif "__" not in criterium_id:
+                    continue
+                else:
+                    suffix = criterium_id.split("__", 1)[1]
+                    groepering_id = str(gedeeld_met_groep.met_onderliggend(suffix))
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        id=criterium_id,
-                        naam=criterium_id.split("__")[-1]
-                        .capitalize()
-                        .replace("_", " "),
+                        id=groepering_id,
+                        naam=weergavenaam_voor(
+                            laatste_criteriumid_toevoeging(criterium_id)
+                        ),
                         bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                             id=gedeeld_met_groep_id
                         ),

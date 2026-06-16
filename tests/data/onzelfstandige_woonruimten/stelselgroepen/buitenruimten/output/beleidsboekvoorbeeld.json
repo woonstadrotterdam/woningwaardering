@@ -16,7 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017427",
+            "id": "buitenruimten__prive__Space_108017427",
             "naam": "Klein balkon",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"
@@ -31,10 +31,10 @@
         {
           "aantal": 4.5,
           "criterium": {
-            "id": "buitenruimten__Space_108017429",
+            "id": "buitenruimten__gedeeld_met_4_onzelfstandige_woonruimten__Space_108017429",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__4__onzelfstandige_woonruimten"
+              "id": "buitenruimten__gedeeld_met_4_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -46,10 +46,10 @@
         {
           "aantal": 52.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017427",
+            "id": "buitenruimten__gedeeld_met_5_adressen__Space_108017427",
             "naam": "Dakterras",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__5__adressen"
+              "id": "buitenruimten__gedeeld_met_5_adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -75,16 +75,16 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__gedeeld_met__5__adressen",
+            "id": "buitenruimten__gedeeld_met_5_adressen",
             "naam": "Gedeeld met 5 adressen",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__4__onzelfstandige_woonruimten"
+              "id": "buitenruimten__gedeeld_met_4_onzelfstandige_woonruimten"
             }
           }
         },
         {
           "criterium": {
-            "id": "buitenruimten__gedeeld_met__4__onzelfstandige_woonruimten",
+            "id": "buitenruimten__gedeeld_met_4_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 4 onzelfstandige woonruimten"
           }
         }

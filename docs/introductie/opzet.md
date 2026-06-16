@@ -55,64 +55,55 @@ Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroe
 
 ## Criterium ID's
 
-De `CriteriumId` class wordt gebruikt om ID's te genereren voor criteria in de woningwaardering. Deze ID's worden opgebouwd uit verschillende onderdelen die worden samengevoegd met dubbele underscores (`__`).
+De `CriteriumId`-class bouwt criteriumids als een **pad** van bovenliggendcriteriumids. Elk output-element is een criterium met een criteriumid; `punten` en `aantal` zijn optioneel.
 
-De opbouw van een criterium ID kan de volgende onderdelen bevatten:
-
-- Stelselgroep (verplicht, bijvoorbeeld 'buitenruimten' of 'energieprestatie')
-- Ruimte ID (optioneel, bijvoorbeeld 'Space_108014713')
-- Criteriumnaam (optioneel, bijvoorbeeld 'factor_II' of 'verwarmde_vertrekken')
-- Optioneel: Aantal waarmee iets gedeeld is
-- Indien `Aantal` > 1: Waarmee het aantal gedeeld is ( 'adressen' of 'onzelfstandige_woonruimten')
-
-Er zijn drie id-families:
-
-- **Ruimteregel:** `{stelselgroep}__{ruimte_id}__{criteriumnaam?}` — per ruimte of element
-- **Gedeeld-met aggregaat:** `{stelselgroep}__prive` of `{stelselgroep}__gedeeld_met__{n}__{soort}` — som per privé of gedeelde groep
-- **Criteriumnaam-regel:** `{stelselgroep}__{criteriumnaam}` — subgroepen, maxima of resultaatregels (bijv. WOZ-onderdelen)
-
-Voorbeelden van gegenereerde ID's:
-
-- `buitenruimten__Space_108014713` (ruimteregel)
-- `buitenruimten__prive` (gedeeld-met aggregaat, privé)
-- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen` (gedeeld-met aggregaat)
-- `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumnaam-regel)
-
-Bij gedeelde voorzieningen wordt automatisch 'prive' toegevoegd als het aantal 1 of minder is, en anders wordt het aantal en soort toegevoegd (bijvoorbeeld `gedeeld_met__4__adressen`).
-
-Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat.
-
-Met deze ID's kan gerefereerd worden aan specifieke criteria in de output van de woningwaardering.
-
-### Criteriumsleutels
-
-Bij sommige stelselgroepen horen meerdere detailwaarderingen bij dezelfde subgroep. Bijvoorbeeld bij _verkoeling en verwarming_ geldt een maximum van 2 extra punten voor vertrekken die verkoeld én verwarmd zijn, en een maximum van 4 punten voor verwarmde overige- en verkeersruimten. De maximering wordt in de stelselgroep-logica berekend; in de output groeperen we de bijbehorende detailregels met **criteriumsleutels**.
-
-Een criteriumsleutel is een id volgens de **criteriumnaam-regel** (`{stelselgroep}__{criteriumnaam}`):
+### Padregel
 
 ```text
+onderliggendcriteriumid == bovenliggendcriteriumid + "__" + criteriumid_toevoeging
+```
+
+- `__` scheidt **criteria** in het pad.
+- `_` komt **binnen** één `criteriumid_toevoeging` voor (bijv. `gedeeld_met_4_adressen`).
+
+### Terminologie
+
+| Term | Betekenis |
+|---|---|
+| **stelselgroepcriterium** | Wortel van het pad: alleen de stelselgroepnaam (bijv. `keuken`) |
+| **bovenliggendcriteriumid** | Id van het directe bovenliggende criterium (`bovenliggendeCriterium.id`) |
+| **onderliggendcriteriumid** | Id van een criterium onder een bovenliggendcriterium |
+| **criteriumid_toevoeging** | Segment dat aan het bovenliggendcriteriumid wordt geplakt |
+
+### Gedeeld-met
+
+Gedeeld-met aggregaten gebruiken één `criteriumid_toevoeging`:
+
+- `prive` (aantal ≤ 1)
+- `gedeeld_met_{n}_{soort}` (bijv. `gedeeld_met_4_adressen`, `gedeeld_met_8_onzelfstandige_woonruimten`)
+
+### Voorbeelden
+
+```text
+# stelselgroepcriterium
+keuken
+
+# groeperingscriterium (bovenliggend, geen punten)
 verkoeling_en_verwarming__verwarmde_vertrekken
-└──── stelselgroep ────┘  └── criteriumnaam ─┘
+
+# onderliggend ruimtecriterium (genest onder groepering)
+verkoeling_en_verwarming__verwarmde_vertrekken__Space_108014713
+
+# gedeeld-met aggregaat
+sanitair__gedeeld_met_8_onzelfstandige_woonruimten
+
+# onderliggend onder gedeeld-met aggregaat
+buitenruimten__gedeeld_met_3_adressen__Space_108014713
+
+# genest onder een berekeningsonderdeel (WOZ)
+punten_voor_de_woz_waarde__onderdeel_II__factor_II
 ```
 
-Detailregels (ruimteregels) verwijzen naar die sleutel via `bovenliggendeCriterium`: een VERA-object met daarin de `id` van de subgroep. Vervolgens wordt per unieke sleutel een aparte aggregaatregel aangemaakt met diezelfde `id` en een leesbare naam (bijv. _Verwarmde vertrekken_). Die aggregaatregel heeft geen eigen punten; de punten staan op de onderliggende detailregels.
-
-```text
-Verkoeling en verwarming
-└── Verwarmde vertrekken                         ← criteriumsleutel (aggregaatregel)
-    ├── Slaapkamer 1                             ← detailregel (punten)
-    └── Woonkamer                                ← detailregel (punten)
-```
+Geneste bovenliggendcriteria zijn toegestaan. Detailregels verwijzen via `bovenliggendeCriterium` naar het directe bovenliggende criterium.
 
 Zie [aan de slag](../aan-de-slag/index.md) voor een volledig voorbeeld in JSON-output en output-tabel.
-
-**Beperkingen en afspraken**
-
-- Subgroepen zijn op hetzelfde niveau, niet genest. We ondersteunen geen geneste criteriumnaam-subgroepen (`criteriumsleutel → criteriumsleutel`).
-- Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat (zie hierboven).
-- Een aggregaatregel met een criteriumsleutel-id mag wél een `bovenliggendeCriterium` hebben als dat een **gedeeld-met aggregaat** is (andere id-familie). Dat komt voor bij onzelfstandige woningen:
-
-```text
-verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten
-└──── stelselgroep ────┘└ gedeeld_met 2 ┘└ onzelfstandige_woonruimten ┘
-```

@@ -16,10 +16,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__1",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__1",
             "naam": "Type I (gedeeld met 3 adressen)",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "STU",
@@ -31,10 +31,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__2",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten__2",
             "naam": "Type II (gedeeld met 4 adressen)",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__3__onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "STU",
@@ -46,10 +46,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__3",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten__3",
             "naam": "Type III (gedeeld met 5 adressen)",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__3__onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "STU",
@@ -60,13 +60,13 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__2__onzelfstandige_woonruimten",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 2 onzelfstandige woonruimten"
           }
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__3__onzelfstandige_woonruimten",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 3 onzelfstandige woonruimten"
           }
         }

@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_vertrekken__keuken",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__5__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,7 +29,7 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__5__adressen",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__vertrekken",
             "naam": "Vertrekken (gedeeld met 5)"
           },
           "punten": 2.0
@@ -49,7 +49,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "keuken__keuken__extra_voorziening",
+            "id": "keuken__keuken__extra_voorziening_",
             "naam": "Inbouw koelkast (in zelfde ruimte) (gedeeld met 5)",
             "meeteenheid": {
               "code": "STU",
@@ -60,7 +60,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__keuken",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__keuken",
             "naam": "Keuken (gedeeld met 5)"
           },
           "punten": 0.4

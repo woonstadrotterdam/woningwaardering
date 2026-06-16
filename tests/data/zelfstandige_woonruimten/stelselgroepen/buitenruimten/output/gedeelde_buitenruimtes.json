@@ -16,10 +16,10 @@
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017427__gedeeld_met__2__adressen",
+            "id": "buitenruimten__gedeeld_met_2_adressen__Space_108017427",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__2__adressen"
+              "id": "buitenruimten__gedeeld_met_2_adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -30,10 +30,10 @@
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017428__gedeeld_met__3__adressen",
+            "id": "buitenruimten__gedeeld_met_3_adressen__Space_108017428",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__3__adressen"
+              "id": "buitenruimten__gedeeld_met_3_adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -44,7 +44,7 @@
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__gedeeld_met__2__adressen",
+            "id": "buitenruimten__gedeeld_met_2_adressen",
             "naam": "Gedeeld met 2 adressen",
             "meeteenheid": {
               "code": "M2",
@@ -56,7 +56,7 @@
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__gedeeld_met__3__adressen",
+            "id": "buitenruimten__gedeeld_met_3_adressen",
             "naam": "Gedeeld met 3 adressen",
             "meeteenheid": {
               "code": "M2",

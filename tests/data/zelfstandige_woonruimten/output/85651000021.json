@@ -99,7 +99,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559685",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_91559685",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -109,7 +109,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559694",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_91559694",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -119,7 +119,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559691",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_91559691",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -129,7 +129,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559673",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_91559673",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -139,7 +139,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_91559677",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_91559677",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
@@ -171,7 +171,7 @@
         {
           "aantal": 4.97,
           "criterium": {
-            "id": "buitenruimten__Space_91559747",
+            "id": "buitenruimten__prive__Space_91559747",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"
@@ -184,7 +184,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__aanwezig__prive",
+            "id": "buitenruimten__prive__aanwezig",
             "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0
@@ -370,7 +370,7 @@
         {
           "aantal": 15329.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_I",
+            "id": "punten_voor_de_woz_waarde__onderdeel_I__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_I"
@@ -387,7 +387,7 @@
         {
           "aantal": 60.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
@@ -401,7 +401,7 @@
         {
           "aantal": 242.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_II",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_II"

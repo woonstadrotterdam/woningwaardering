@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_vertrekken__Space_190033",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,7 +29,7 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__2__adressen",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__vertrekken",
             "naam": "Vertrekken (gedeeld met 2)"
           },
           "punten": 5.0
@@ -61,7 +61,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
+            "id": "sanitair__Space_190033__",
             "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad (gedeeld met 2)",
             "meeteenheid": {
               "code": "STU",
@@ -73,7 +73,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
+            "id": "sanitair__Space_190033__",
             "naam": "Badruimte - Voorzieningen: Douchewand (gedeeld met 2)",
             "meeteenheid": {
               "code": "STU",
@@ -85,7 +85,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
+            "id": "sanitair__Space_190033__",
             "naam": "Badruimte - Voorzieningen: Handdoekenradiator (gedeeld met 2)",
             "meeteenheid": {
               "code": "STU",
@@ -97,7 +97,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
+            "id": "sanitair__Space_190033__",
             "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel (gedeeld met 2)",
             "meeteenheid": {
               "code": "STU",
@@ -109,7 +109,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
+            "id": "sanitair__Space_190033__",
             "naam": "Badruimte - Voorzieningen: Kastruimte (gedeeld met 2)",
             "meeteenheid": {
               "code": "STU",
@@ -120,7 +120,7 @@
         },
         {
           "criterium": {
-            "id": "sanitair__Space_190033__max_punten",
+            "id": "sanitair__Space_190033__max_punten_",
             "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte (gedeeld met 2)"
           },
           "punten": -0.38
@@ -128,7 +128,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
+            "id": "sanitair__Space_190033__",
             "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel (gedeeld met 2)",
             "meeteenheid": {
               "code": "STU",
@@ -140,7 +140,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
+            "id": "sanitair__Space_190033__",
             "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan (gedeeld met 2)",
             "meeteenheid": {
               "code": "STU",
@@ -152,7 +152,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_190033",
+            "id": "sanitair__Space_190033__",
             "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan (gedeeld met 2)",
             "meeteenheid": {
               "code": "STU",

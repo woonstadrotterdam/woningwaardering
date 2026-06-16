@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_overige_ruimten__Space_1",
             "naam": "Toiletruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__5__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,7 +29,7 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__5__adressen",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__overige_ruimten",
             "naam": "Overige ruimten (gedeeld met 5)"
           },
           "punten": 1.5
@@ -40,7 +40,7 @@
             "id": "oppervlakte_van_overige_ruimten__Space_2",
             "naam": "Toiletruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__6__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -50,7 +50,7 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__6__adressen",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__overige_ruimten",
             "naam": "Overige ruimten (gedeeld met 6)"
           },
           "punten": 1.25

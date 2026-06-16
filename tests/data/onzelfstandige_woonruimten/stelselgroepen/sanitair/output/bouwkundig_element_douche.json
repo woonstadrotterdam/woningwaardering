@@ -16,7 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_146137__douche",
+            "id": "sanitair__prive__Space_146137__douche",
             "naam": "Doucheruimte - Douche",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive"

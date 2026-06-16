@@ -112,10 +112,9 @@ class Energieprestatie(Stelselgroep):
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Energieprestatievergoeding",
                     id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="energieprestatievergoeding",
-                        )
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).met_onderliggend("energieprestatievergoeding")
                     ),
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
@@ -234,9 +233,8 @@ class Energieprestatie(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
                 id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="label",
+                    CriteriumId.voor_stelselgroep(self.stelselgroep).met_onderliggend(
+                        "label"
                     )
                 ),
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -294,9 +292,8 @@ class Energieprestatie(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
                 id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="bouwjaar",
+                    CriteriumId.voor_stelselgroep(self.stelselgroep).met_onderliggend(
+                        "bouwjaar"
                     )
                 ),
                 meeteenheid=Meeteenheid.vierkante_meter_m2,

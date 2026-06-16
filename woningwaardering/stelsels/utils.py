@@ -1,4 +1,5 @@
 import asyncio
+import re
 import warnings
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
@@ -402,15 +403,14 @@ def _render_waardering_pre_order(
         )
 
 
+_GEDEELD_MET = re.compile(r"(?:^|__)gedeeld_met_(\d+)(?:_|$)")
+
+
 def _gedeeld_met_divisor(criterium_id: str | None) -> Decimal:
-    if criterium_id is None or "gedeeld_met__" not in criterium_id:
+    if criterium_id is None:
         return Decimal("1")
-    parts = criterium_id.split("__")
-    try:
-        idx = parts.index("gedeeld_met")
-        return Decimal(parts[idx + 1])
-    except (ValueError, IndexError):
-        return Decimal("1")
+    match = _GEDEELD_MET.search(criterium_id)
+    return Decimal(match.group(1)) if match else Decimal("1")
 
 
 def _waardering_voor_criterium_id(

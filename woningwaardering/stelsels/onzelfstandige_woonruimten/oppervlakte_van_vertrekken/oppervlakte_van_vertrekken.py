@@ -13,7 +13,6 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -72,30 +71,28 @@ class OppervlakteVanVertrekken(Stelselgroep):
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         ] += utils.rond_af(woningwaardering.aantal, decimalen=2)
-                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
-                            ),
+                        aggregaat = CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            GedeeldMetSoort.onzelfstandige_woonruimten,
                         )
                     else:
                         gedeeld_met_counter[1] += utils.rond_af(
                             woningwaardering.aantal, decimalen=2
                         )
+                        aggregaat = CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(1)
 
-                        woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        gedeeld_met_aantal=1,
-                                    )
-                                ),
-                            )
+                    bron_deel = (woningwaardering.criterium.id or "").split("__", 1)
+                    if len(bron_deel) == 2:
+                        woningwaardering.criterium.id = str(
+                            aggregaat.met_onderliggend(bron_deel[1])
                         )
+                    woningwaardering.criterium.bovenliggende_criterium = (
+                        aggregaat.naar_criterium_sleutels()
+                    )
 
             woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
 
@@ -103,18 +100,20 @@ class OppervlakteVanVertrekken(Stelselgroep):
         oppervlakte_totaal_na_delen = Decimal(str("0"))
         for aantal_onz, oppervlakte in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=utils.naam_gedeeld_met_groep(
-                    aantal_onz,
-                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                ),
-                id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_onz,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                    )
-                ),
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=utils.naam_gedeeld_met_groep(
+                        aantal_onz,
+                        soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                    ),
+                    id=str(
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            aantal_onz, GedeeldMetSoort.onzelfstandige_woonruimten
+                        )
+                    ),
+                )
             )
             oppervlakte_na_delen = utils.rond_af(oppervlakte, decimalen=2) / Decimal(
                 str(aantal_onz)

@@ -188,10 +188,10 @@ class Sanitair(Stelselgroep):
                                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                                         naam=f"{ruimte.naam} - Max 1 punt voor {Installatiesoort.wastafel.naam}",
                                         id=str(
-                                            CriteriumId(
-                                                stelselgroep=stelselgroep,
-                                                ruimte_id=ruimte.id,
-                                                criterium=f"max_punten_{Installatiesoort.wastafel.name}",
+                                            CriteriumId.voor_stelselgroep(stelselgroep)
+                                            .met_onderliggend(ruimte.id)
+                                            .met_onderliggend(
+                                                f"max_punten_{Installatiesoort.wastafel.name}"
                                             )
                                         ),
                                     ),
@@ -229,10 +229,10 @@ class Sanitair(Stelselgroep):
                                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                                     naam=f"{ruimte.naam} - Max 1.5 punt voor {Installatiesoort.meerpersoonswastafel.naam}",
                                     id=str(
-                                        CriteriumId(
-                                            stelselgroep=stelselgroep,
-                                            ruimte_id=ruimte.id,
-                                            criterium=f"max_punten_{Installatiesoort.meerpersoonswastafel.name}",
+                                        CriteriumId.voor_stelselgroep(stelselgroep)
+                                        .met_onderliggend(ruimte.id)
+                                        .met_onderliggend(
+                                            f"max_punten_{Installatiesoort.meerpersoonswastafel.name}"
                                         )
                                     ),
                                 ),
@@ -281,13 +281,22 @@ class Sanitair(Stelselgroep):
                     and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten > 1
                 ):
                     if woningwaardering.criterium:
-                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
+                        gedeeld_met_criterium = CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            GedeeldMetSoort.onzelfstandige_woonruimten,
+                        )
+                        criterium_id = woningwaardering.criterium.id
+                        if not criterium_id:
+                            continue
+                        suffix = criterium_id.split("__", 1)[1]
+                        woningwaardering.criterium.id = str(
+                            gedeeld_met_criterium.met_onderliggend(suffix)
+                        )
+                        woningwaardering.criterium.bovenliggende_criterium = (
+                            WoningwaarderingCriteriumSleutels(
+                                id=str(gedeeld_met_criterium)
                             )
                         )
                     gedeeld_met_aantallen[
@@ -295,14 +304,19 @@ class Sanitair(Stelselgroep):
                     ] = None
                 else:
                     if woningwaardering.criterium:
+                        gedeeld_met_criterium = CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(1)
+                        criterium_id = woningwaardering.criterium.id
+                        if not criterium_id:
+                            continue
+                        suffix = criterium_id.split("__", 1)[1]
+                        woningwaardering.criterium.id = str(
+                            gedeeld_met_criterium.met_onderliggend(suffix)
+                        )
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        gedeeld_met_aantal=1,
-                                    )
-                                )
+                                id=str(gedeeld_met_criterium)
                             )
                         )
                     gedeeld_met_aantallen[1] = None
@@ -312,18 +326,20 @@ class Sanitair(Stelselgroep):
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal_onz in gedeeld_met_aantallen:
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=utils.naam_gedeeld_met_groep(
-                    aantal_onz,
-                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                ),
-                id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_onz,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                    )
-                ),
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=utils.naam_gedeeld_met_groep(
+                        aantal_onz,
+                        soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                    ),
+                    id=str(
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            aantal_onz, GedeeldMetSoort.onzelfstandige_woonruimten
+                        )
+                    ),
+                )
             )
             yield woningwaardering
 

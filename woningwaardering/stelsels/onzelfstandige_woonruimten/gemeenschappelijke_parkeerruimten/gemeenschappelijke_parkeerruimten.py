@@ -14,7 +14,6 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -99,14 +98,19 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                         )
                     )
                     if waardering.criterium is not None:
-                        waardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
-                            ),
+                        aggregaat = CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            GedeeldMetSoort.onzelfstandige_woonruimten,
+                        )
+                        bron_deel = (waardering.criterium.id or "").split("__", 1)
+                        if len(bron_deel) == 2:
+                            waardering.criterium.id = str(
+                                aggregaat.met_onderliggend(bron_deel[1])
+                            )
+                        waardering.criterium.bovenliggende_criterium = (
+                            aggregaat.naar_criterium_sleutels()
                         )
                         woningwaardering_groep.woningwaarderingen.append(waardering)
 
@@ -118,10 +122,11 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                            CriteriumId.voor_stelselgroep(
+                                self.stelselgroep
+                            ).gedeeld_met_criterium(
+                                gedeeld_met_aantal_onzelfstandige_woonruimten,
+                                GedeeldMetSoort.onzelfstandige_woonruimten,
                             )
                         ),
                         naam=utils.naam_gedeeld_met_groep(

@@ -135,10 +135,9 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium,
                 id=str(
-                    CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
-                        ruimte_id=ruimte.id,
-                    )
+                    CriteriumId.voor_stelselgroep(
+                        Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten
+                    ).met_onderliggend(ruimte.id)
                 ),
                 meeteenheid=Meeteenheid.stuks,
             ),

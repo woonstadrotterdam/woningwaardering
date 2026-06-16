@@ -16,7 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_461237__bad_en_douche",
+            "id": "sanitair__prive__Space_461237__bad_en_douche",
             "naam": "Badkamer - Bad en douche",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive"

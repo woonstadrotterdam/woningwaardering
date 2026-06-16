@@ -16,7 +16,6 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
-    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -125,28 +124,34 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         ] += utils.rond_af(woningwaardering.aantal, decimalen=2)
-                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
-                            ),
+                        aggregaat = CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            GedeeldMetSoort.onzelfstandige_woonruimten,
+                        )
+                        bron_deel = (woningwaardering.criterium.id or "").split("__", 1)
+                        if len(bron_deel) == 2:
+                            woningwaardering.criterium.id = str(
+                                aggregaat.met_onderliggend(bron_deel[1])
+                            )
+                        woningwaardering.criterium.bovenliggende_criterium = (
+                            aggregaat.naar_criterium_sleutels()
                         )
                     elif woningwaardering.aantal is not None:
                         gedeeld_met_counter[1] += utils.rond_af(
                             woningwaardering.aantal, decimalen=2
                         )
-                        woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        gedeeld_met_aantal=1,
-                                    )
-                                ),
+                        aggregaat = CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(1)
+                        bron_deel = (woningwaardering.criterium.id or "").split("__", 1)
+                        if len(bron_deel) == 2:
+                            woningwaardering.criterium.id = str(
+                                aggregaat.met_onderliggend(bron_deel[1])
                             )
+                        woningwaardering.criterium.bovenliggende_criterium = (
+                            aggregaat.naar_criterium_sleutels()
                         )
                     elif (
                         woningwaardering.punten
@@ -171,18 +176,20 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal_onz, oppervlakte in gedeeld_met_counter.items():
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=utils.naam_gedeeld_met_groep(
-                    aantal_onz,
-                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                ),
-                id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_onz,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                    )
-                ),
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=utils.naam_gedeeld_met_groep(
+                        aantal_onz,
+                        soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                    ),
+                    id=str(
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            aantal_onz, GedeeldMetSoort.onzelfstandige_woonruimten
+                        )
+                    ),
+                )
             )
             woningwaardering.punten = float(
                 utils.rond_af_op_kwart(

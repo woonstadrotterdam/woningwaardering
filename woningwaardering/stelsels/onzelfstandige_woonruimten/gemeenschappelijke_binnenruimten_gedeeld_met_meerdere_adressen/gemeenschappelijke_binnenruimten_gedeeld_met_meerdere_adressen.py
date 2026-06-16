@@ -122,10 +122,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             ) in gedeeld_met_punten.items():
                 bovenliggende_criterium_id = (
                     str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
-                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            aantal_onzelfstandige_woonruimten,
+                            GedeeldMetSoort.onzelfstandige_woonruimten,
                         )
                     )
                     if aantal_onzelfstandige_woonruimten > 1
@@ -138,10 +139,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     woningwaardering_groep.woningwaarderingen.append(
                         self._maak_woningwaardering(
                             id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=aantal_adressen,
-                                    gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                CriteriumId.voor_stelselgroep(
+                                    self.stelselgroep
+                                ).gedeeld_met_criterium(
+                                    aantal_adressen, GedeeldMetSoort.adressen
                                 )
                             ),
                             criterium=utils.naam_gedeeld_met_groep(
@@ -196,10 +197,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam="Zorgwoning",
                     id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="zorgwoning",
-                        )
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).met_onderliggend("zorgwoning")
                     ),
                 ),
                 punten=3.0,
@@ -309,22 +309,17 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             )
 
             bovenliggende_criterium_id = str(
-                CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    gedeeld_met_aantal=aantal_eenheden,
-                    gedeeld_met_soort=GedeeldMetSoort.adressen,
+                CriteriumId.voor_stelselgroep(self.stelselgroep).gedeeld_met_criterium(
+                    aantal_eenheden, GedeeldMetSoort.adressen
                 )
             )
             oppervlaktegroep_id = str(
-                CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    gedeeld_met_aantal=aantal_eenheden,
-                    gedeeld_met_soort=GedeeldMetSoort.adressen,
-                    criterium=(
-                        "vertrekken"
-                        if ruimtesoort == Ruimtesoort.vertrek
-                        else "overige_ruimten"
-                    ),
+                CriteriumId.voor_stelselgroep(self.stelselgroep)
+                .gedeeld_met_criterium(aantal_eenheden, GedeeldMetSoort.adressen)
+                .met_onderliggend(
+                    "vertrekken"
+                    if ruimtesoort == Ruimtesoort.vertrek
+                    else "overige_ruimten"
                 )
             )
             groep_naam = (
@@ -360,10 +355,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         aantal=oppervlakte_resultaat.aantal,
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                ruimte_id=ruimte.id,
-                            )
+                            CriteriumId.voor_stelselgroep(
+                                self.stelselgroep
+                            ).met_onderliggend(ruimte.id)
                         ),
                     )
                 )
@@ -386,11 +380,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                             criterium="Correctie: zolder zonder vaste trap",
                             bovenliggende_criterium_id=bovenliggende_criterium_id,
                             id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    ruimte_id=ruimte.id,
-                                    criterium="correctie_zolder_zonder_vaste_trap",
-                                )
+                                CriteriumId.voor_stelselgroep(self.stelselgroep)
+                                .met_onderliggend(ruimte.id)
+                                .met_onderliggend("correctie_zolder_zonder_vaste_trap")
                             ),
                         )
                     )
@@ -454,10 +446,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     punten=punten,
                     criterium=criterium_naam,
                     bovenliggende_criterium_id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            gedeeld_met_aantal=aantal_eenheden,
-                            gedeeld_met_soort=GedeeldMetSoort.adressen,
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            aantal_eenheden, GedeeldMetSoort.adressen
                         )
                     ),
                     aantal=resultaat.aantal,
@@ -465,10 +457,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     if resultaat.criterium
                     else None,
                     id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            ruimte_id=ruimte.id,
-                        )
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).met_onderliggend(ruimte.id)
                     ),
                 )
             )
@@ -522,19 +513,18 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         punten=punten,
                         criterium=f"{waardering.criterium.naam.replace(':', '').replace(' -', ':')}",
                         bovenliggende_criterium_id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=aantal_eenheden,
-                                gedeeld_met_soort=GedeeldMetSoort.adressen,
+                            CriteriumId.voor_stelselgroep(
+                                self.stelselgroep
+                            ).gedeeld_met_criterium(
+                                aantal_eenheden, GedeeldMetSoort.adressen
                             )
                         ),
                         aantal=None,
                         meeteenheid=None,
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                ruimte_id=ruimte.id,
-                            )
+                            CriteriumId.voor_stelselgroep(
+                                self.stelselgroep
+                            ).met_onderliggend(ruimte.id)
                         ),
                     )
                 )
@@ -591,19 +581,18 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         punten=punten,
                         criterium=criterium,
                         bovenliggende_criterium_id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                gedeeld_met_aantal=aantal_eenheden,
-                                gedeeld_met_soort=GedeeldMetSoort.adressen,
+                            CriteriumId.voor_stelselgroep(
+                                self.stelselgroep
+                            ).gedeeld_met_criterium(
+                                aantal_eenheden, GedeeldMetSoort.adressen
                             )
                         ),
                         aantal=waardering.aantal,
                         meeteenheid=waardering.criterium.meeteenheid,
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                ruimte_id=ruimte.id,
-                            )
+                            CriteriumId.voor_stelselgroep(
+                                self.stelselgroep
+                            ).met_onderliggend(ruimte.id)
                         ),
                     )
                 )

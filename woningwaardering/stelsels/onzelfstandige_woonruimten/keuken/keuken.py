@@ -75,14 +75,23 @@ class Keuken(Stelselgroep):
                         gedeeld_met_aantallen[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         ] = None
-                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
-                            ),
+                        gedeeld_met_criterium = CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
+                            GedeeldMetSoort.onzelfstandige_woonruimten,
+                        )
+                        criterium_id = woningwaardering.criterium.id
+                        if not criterium_id:
+                            continue
+                        suffix = criterium_id.split("__", 1)[1]
+                        woningwaardering.criterium.id = str(
+                            gedeeld_met_criterium.met_onderliggend(suffix)
+                        )
+                        woningwaardering.criterium.bovenliggende_criterium = (
+                            WoningwaarderingCriteriumSleutels(
+                                id=str(gedeeld_met_criterium)
+                            )
                         )
                         woningwaardering.punten = float(
                             utils.rond_af(
@@ -97,14 +106,19 @@ class Keuken(Stelselgroep):
                         )
                     elif woningwaardering.punten:
                         gedeeld_met_aantallen[1] = None
+                        gedeeld_met_criterium = CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(1)
+                        criterium_id = woningwaardering.criterium.id
+                        if not criterium_id:
+                            continue
+                        suffix = criterium_id.split("__", 1)[1]
+                        woningwaardering.criterium.id = str(
+                            gedeeld_met_criterium.met_onderliggend(suffix)
+                        )
                         woningwaardering.criterium.bovenliggende_criterium = (
                             WoningwaarderingCriteriumSleutels(
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        gedeeld_met_aantal=1,
-                                    )
-                                ),
+                                id=str(gedeeld_met_criterium)
                             )
                         )
 
@@ -113,18 +127,20 @@ class Keuken(Stelselgroep):
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for aantal in gedeeld_met_aantallen:
             woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=utils.naam_gedeeld_met_groep(
-                    aantal,
-                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                ),
-                id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                    )
-                ),
+            woningwaardering.criterium = (
+                WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=utils.naam_gedeeld_met_groep(
+                        aantal,
+                        soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                    ),
+                    id=str(
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).gedeeld_met_criterium(
+                            aantal, GedeeldMetSoort.onzelfstandige_woonruimten
+                        )
+                    ),
+                )
             )
             woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 

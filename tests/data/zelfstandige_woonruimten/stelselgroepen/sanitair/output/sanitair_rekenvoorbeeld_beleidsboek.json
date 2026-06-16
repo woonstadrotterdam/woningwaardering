@@ -40,7 +40,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__badruimte",
+            "id": "sanitair__badruimte__",
             "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad",
             "meeteenheid": {
               "code": "STU",
@@ -52,7 +52,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__badruimte",
+            "id": "sanitair__badruimte__",
             "naam": "Badruimte - Voorzieningen: Douchewand",
             "meeteenheid": {
               "code": "STU",
@@ -64,7 +64,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__badruimte",
+            "id": "sanitair__badruimte__",
             "naam": "Badruimte - Voorzieningen: Handdoekenradiator",
             "meeteenheid": {
               "code": "STU",
@@ -76,7 +76,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__badruimte",
+            "id": "sanitair__badruimte__",
             "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel",
             "meeteenheid": {
               "code": "STU",
@@ -88,7 +88,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__badruimte",
+            "id": "sanitair__badruimte__",
             "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan",
             "meeteenheid": {
               "code": "STU",
@@ -100,7 +100,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__badruimte",
+            "id": "sanitair__badruimte__",
             "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan",
             "meeteenheid": {
               "code": "STU",

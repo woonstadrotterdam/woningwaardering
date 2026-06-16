@@ -84,15 +84,11 @@ Een CSV-bestand met constanten of tabulaire regeldata die nodig zijn voor puntbe
 
 ### CriteriumId
 
-Een samengestelde identifier voor een criterium in de output. Onderdelen worden met dubbele underscores (`__`) samengevoegd, bijvoorbeeld stelselgroep, ruimte-id, criterium of gedeeld-met-informatie.
-
-### criteriumSleutel
-
-Een sleutel waarmee criteria logisch gegroepeerd kunnen worden, bijvoorbeeld om submaxima of subtellingen binnen een stelselgroep te berekenen.
+Een criteriumid als pad van bovenliggendcriteriumids. Regel: `onderliggendcriteriumid == bovenliggendcriteriumid + "__" + criteriumid_toevoeging`. Gedeeld-met gebruikt één toevoeging, bijv. `gedeeld_met_4_adressen`. Zie `docs/introductie/opzet.md`.
 
 ### bovenliggendeCriterium
 
-Verwijzing van een waardering naar een bovenliggend criterium binnen dezelfde stelselgroep-groep (JSON: `bovenliggendeCriterium`). Criteriumsleutels volgen de id-families in `docs/introductie/opzet.md` (ruimteregel, gedeeld-met aggregaat, criteriumnaam-regel).
+Verwijzing van een waardering naar het directe bovenliggende criterium binnen dezelfde stelselgroep-groep (JSON: `bovenliggendeCriterium`). Geneste bovenliggendcriteria zijn toegestaan.
 
 ### UserWarning
 

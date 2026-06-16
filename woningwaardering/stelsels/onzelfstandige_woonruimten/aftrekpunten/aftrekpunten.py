@@ -124,9 +124,10 @@ class Aftrekpunten(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=f"Totale oppervlakte in Rubriek '{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}' is minder dan 8m2",
                         id=str(
-                            CriteriumId(
-                                stelselgroep=Woningwaarderingstelselgroep.aftrekpunten,
-                                criterium=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name}_minder_dan_8m2",
+                            CriteriumId.voor_stelselgroep(
+                                Woningwaarderingstelselgroep.aftrekpunten
+                            ).met_onderliggend(
+                                f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name}_minder_dan_8m2"
                             )
                         ),
                         meeteenheid=Meeteenheid.vierkante_meter_m2,

@@ -158,11 +158,11 @@ def _waardeer_aanrecht(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"{ruimte.naam}: Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                     id=str(
-                        CriteriumId(
-                            stelselgroep=Woningwaarderingstelselgroep.keuken,
-                            ruimte_id=ruimte.id,
-                            criterium=f"lengte_aanrecht_{element.id}",
+                        CriteriumId.voor_stelselgroep(
+                            Woningwaarderingstelselgroep.keuken
                         )
+                        .met_onderliggend(ruimte.id)
+                        .met_onderliggend(f"lengte_aanrecht_{element.id}")
                     ),
                     meeteenheid=Meeteenheid.millimeter,
                 ),
@@ -232,11 +232,11 @@ def _waardeer_extra_voorzieningen(
                     if count > 1
                     else voorziening.naam,
                     id=str(
-                        CriteriumId(
-                            stelselgroep=Woningwaarderingstelselgroep.keuken,
-                            ruimte_id=ruimte.id,
-                            criterium=f"extra_voorziening_{voorziening.name}",
+                        CriteriumId.voor_stelselgroep(
+                            Woningwaarderingstelselgroep.keuken
                         )
+                        .met_onderliggend(ruimte.id)
+                        .met_onderliggend(f"extra_voorziening_{voorziening.name}")
                     ),
                     meeteenheid=Meeteenheid.stuks,
                 ),
@@ -258,11 +258,11 @@ def _waardeer_extra_voorzieningen(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"Max. {max_punten_voorzieningen} punten voor voorzieningen in een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
                     id=str(
-                        CriteriumId(
-                            stelselgroep=Woningwaarderingstelselgroep.keuken,
-                            ruimte_id=ruimte.id,
-                            criterium="maximering_extra_voorzieningen",
+                        CriteriumId.voor_stelselgroep(
+                            Woningwaarderingstelselgroep.keuken
                         )
+                        .met_onderliggend(ruimte.id)
+                        .met_onderliggend("maximering_extra_voorzieningen")
                     ),
                 ),
                 punten=float(aftrek),

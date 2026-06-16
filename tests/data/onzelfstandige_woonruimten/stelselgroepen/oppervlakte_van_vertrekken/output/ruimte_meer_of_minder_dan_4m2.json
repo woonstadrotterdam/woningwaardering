@@ -16,7 +16,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_901101",
+            "id": "oppervlakte_van_vertrekken__prive__Space_901101",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_vertrekken__prive"
@@ -30,7 +30,7 @@
         {
           "aantal": 4.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_539495",
+            "id": "oppervlakte_van_vertrekken__prive__Space_539495",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_vertrekken__prive"
@@ -44,7 +44,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_185859",
+            "id": "oppervlakte_van_vertrekken__prive__Space_185859",
             "naam": "Badkamer/toilet",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_vertrekken__prive"

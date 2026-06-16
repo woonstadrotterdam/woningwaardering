@@ -154,10 +154,9 @@ def _opslag_zorgwoning(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Zorgwoning 35% puntenverhoging",
             id=str(
-                CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
-                    criterium="zorgwoning_puntenverhoging",
-                )
+                CriteriumId.voor_stelselgroep(
+                    Woningwaarderingstelselgroep.bijzondere_voorzieningen
+                ).met_onderliggend("zorgwoning_puntenverhoging")
             ),
         ),
         punten=float(verhoging),
@@ -196,10 +195,9 @@ def _aanbelfunctie_met_video_en_audioverbinding(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Aanbelfunctie met video- en audioverbinding",
             id=str(
-                CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
-                    criterium="aanbelfunctie_met_video_en_audioverbinding",
-                )
+                CriteriumId.voor_stelselgroep(
+                    Woningwaarderingstelselgroep.bijzondere_voorzieningen
+                ).met_onderliggend("aanbelfunctie_met_video_en_audioverbinding")
             ),
         ),
         punten=0.25,
@@ -238,10 +236,9 @@ def _prive_laadpaal(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Laadpalen",
             id=str(
-                CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
-                    criterium="laadpalen",
-                )
+                CriteriumId.voor_stelselgroep(
+                    Woningwaarderingstelselgroep.bijzondere_voorzieningen
+                ).met_onderliggend("laadpalen")
             ),
             meeteenheid=Meeteenheid.stuks,
         ),

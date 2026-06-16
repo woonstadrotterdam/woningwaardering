@@ -16,7 +16,7 @@
         {
           "aantal": 12.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017427",
+            "id": "buitenruimten__prive__Space_108017427",
             "naam": "Parkeerplaats",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"

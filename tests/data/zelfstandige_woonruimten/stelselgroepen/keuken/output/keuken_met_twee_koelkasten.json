@@ -28,7 +28,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "keuken__keuken__extra_voorziening",
+            "id": "keuken__keuken__extra_voorziening_",
             "naam": "Inbouw koelkast (in zelfde ruimte)",
             "meeteenheid": {
               "code": "STU",

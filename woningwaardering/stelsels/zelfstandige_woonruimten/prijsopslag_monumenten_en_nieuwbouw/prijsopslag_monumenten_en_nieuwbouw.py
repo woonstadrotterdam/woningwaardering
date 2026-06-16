@@ -170,10 +170,9 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Nieuwbouw",
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="nieuwbouw",
-                            )
+                            CriteriumId.voor_stelselgroep(
+                                self.stelselgroep
+                            ).met_onderliggend("nieuwbouw")
                         ),
                     ),
                     opslagpercentage=0.1,

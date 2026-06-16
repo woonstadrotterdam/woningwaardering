@@ -28,7 +28,7 @@
         {
           "aantal": 4.0,
           "criterium": {
-            "id": "keuken__keuken__extra_voorziening",
+            "id": "keuken__keuken__extra_voorziening_",
             "naam": "Inbouw koelkast (in zelfde ruimte)",
             "meeteenheid": {
               "code": "STU",
@@ -40,7 +40,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "keuken__keuken__extra_voorziening",
+            "id": "keuken__keuken__extra_voorziening_",
             "naam": "Inbouw oven elektrisch",
             "meeteenheid": {
               "code": "STU",

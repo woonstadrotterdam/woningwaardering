@@ -86,10 +86,9 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Zorgwoning",
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="zorgwoning",
-                            )
+                            CriteriumId.voor_stelselgroep(
+                                self.stelselgroep
+                            ).met_onderliggend("zorgwoning")
                         ),
                     ),
                     punten=3.0,
@@ -232,15 +231,12 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             ) / Decimal(str(aantal_eenheden))
 
             groep_criterium_id = str(
-                CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    gedeeld_met_aantal=aantal_eenheden,
-                    gedeeld_met_soort=GedeeldMetSoort.adressen,
-                    criterium=(
-                        "vertrekken"
-                        if ruimtesoort == Ruimtesoort.vertrek
-                        else "overige_ruimten"
-                    ),
+                CriteriumId.voor_stelselgroep(self.stelselgroep)
+                .gedeeld_met_criterium(aantal_eenheden, GedeeldMetSoort.adressen)
+                .met_onderliggend(
+                    "vertrekken"
+                    if ruimtesoort == Ruimtesoort.vertrek
+                    else "overige_ruimten"
                 )
             )
             groep_criterium_sleutel = WoningwaarderingCriteriumSleutels(
@@ -276,10 +272,10 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                                 naam="Correctie: zolder zonder vaste trap",
                                 id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        ruimte_id=ruimte.id,
-                                        criterium="correctie_zolder_zonder_vaste_trap",
+                                    CriteriumId.voor_stelselgroep(self.stelselgroep)
+                                    .met_onderliggend(ruimte.id)
+                                    .met_onderliggend(
+                                        "correctie_zolder_zonder_vaste_trap"
                                     )
                                 ),
                             ),

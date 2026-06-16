@@ -108,10 +108,7 @@ class Energieprestatie(Stelselgroep):
         woningwaardering.criterium.naam = f"{label}"
 
         woningwaardering.criterium.id = str(
-            CriteriumId(
-                stelselgroep=self.stelselgroep,
-                criterium="label",
-            )
+            CriteriumId.voor_stelselgroep(self.stelselgroep).met_onderliggend("label")
         )
 
         lookup_key = "label_ei"
@@ -203,9 +200,8 @@ class Energieprestatie(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium_naam,
                 id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="bouwjaar",
+                    CriteriumId.voor_stelselgroep(self.stelselgroep).met_onderliggend(
+                        "bouwjaar"
                     )
                 ),
             )
@@ -287,10 +283,9 @@ class Energieprestatie(Stelselgroep):
                 WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"Energieprestatievergoeding {pandsoort.naam}",
                     id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="energieprestatievergoeding",
-                        )
+                        CriteriumId.voor_stelselgroep(
+                            self.stelselgroep
+                        ).met_onderliggend("energieprestatievergoeding")
                     ),
                 )
             )

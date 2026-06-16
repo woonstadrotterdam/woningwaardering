@@ -72,11 +72,9 @@ def maak_zolder_correctie_waardering(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Correctie: zolder zonder vaste trap",
             id=str(
-                CriteriumId(
-                    stelselgroep=stelselgroep,
-                    ruimte_id=ruimte.id,
-                    criterium="correctie_zolder_zonder_vaste_trap",
-                )
+                CriteriumId.voor_stelselgroep(stelselgroep)
+                .met_onderliggend(ruimte.id)
+                .met_onderliggend("correctie_zolder_zonder_vaste_trap")
             ),
         ),
         punten=float(bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)),
@@ -103,10 +101,9 @@ def waardeer_oppervlakte_van_overige_ruimte(
         meeteenheid=Meeteenheid.vierkante_meter_m2,
         naam=criterium_naam,
         id=str(
-            CriteriumId(
-                stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
-                ruimte_id=ruimte.id,
-            )
+            CriteriumId.voor_stelselgroep(
+                Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten
+            ).met_onderliggend(ruimte.id)
         ),
     )
 
@@ -150,7 +147,10 @@ def structureer_subtotaal_bij_correcties(
         (Decimal(str(w.aantal)) for w in ruimteregels),
         start=Decimal("0"),
     )
-    subtotaal_id = str(CriteriumId(stelselgroep=stelselgroep, criterium="subtotaal"))
+    subtotaal_criterium = CriteriumId.voor_stelselgroep(stelselgroep).met_onderliggend(
+        "subtotaal"
+    )
+    subtotaal_id = str(subtotaal_criterium)
     subtotaal = WoningwaarderingResultatenWoningwaardering(
         criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
             naam="Subtotaal",
@@ -164,8 +164,10 @@ def structureer_subtotaal_bij_correcties(
     )
 
     for waardering in ruimteregels:
-        if waardering.criterium is None:
+        if waardering.criterium is None or not waardering.criterium.id:
             continue
+        suffix = waardering.criterium.id.split("__", 1)[1]
+        waardering.criterium.id = str(subtotaal_criterium.met_onderliggend(suffix))
         waardering.criterium.bovenliggende_criterium = (
             WoningwaarderingCriteriumSleutels(id=subtotaal_id)
         )

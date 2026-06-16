@@ -16,7 +16,7 @@
         {
           "aantal": 3.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_491177",
+            "id": "oppervlakte_van_overige_ruimten__prive__Space_491177",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__prive"
@@ -30,7 +30,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_862208",
+            "id": "oppervlakte_van_overige_ruimten__prive__Space_862208",
             "naam": "Bijkeuken",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__prive"

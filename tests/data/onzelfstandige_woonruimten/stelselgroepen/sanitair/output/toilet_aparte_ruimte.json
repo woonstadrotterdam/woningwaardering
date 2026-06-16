@@ -16,7 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_992985__hangend_toilet",
+            "id": "sanitair__prive__Space_992985__hangend_toilet",
             "naam": "Toiletruimte - Hangend toilet",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive"
@@ -31,7 +31,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_992985__staand_toilet",
+            "id": "sanitair__prive__Space_992985__staand_toilet",
             "naam": "Toiletruimte - Staand Toilet",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive"

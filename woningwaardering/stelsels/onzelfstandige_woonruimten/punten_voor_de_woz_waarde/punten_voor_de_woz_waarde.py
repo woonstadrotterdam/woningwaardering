@@ -14,7 +14,6 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
     EenhedenWozEenheid,
-    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -83,10 +82,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Geen WOZ-waarde bekend",
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="geen_woz_waarde_bekend",
-                            )
+                            CriteriumId.voor_stelselgroep(
+                                self.stelselgroep
+                            ).met_onderliggend("geen_woz_waarde_bekend")
                         ),
                     ),
                     punten=punten,
@@ -111,25 +109,16 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 )
                 return woningwaardering_groep
 
-            puntenwaardering_sleutel = WoningwaarderingCriteriumSleutels(
-                id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="percentage_verschil",
-                    )
-                )
-            )
+            percentage_verschil_id = CriteriumId.voor_stelselgroep(
+                self.stelselgroep
+            ).met_onderliggend("percentage_verschil")
+            puntenwaardering_sleutel = percentage_verschil_id.naar_criterium_sleutels()
 
             woningwaarderingen.append(
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="woz_waarde",
-                            )
-                        ),
+                        id=str(percentage_verschil_id.met_onderliggend("woz_waarde")),
                         bovenliggende_criterium=puntenwaardering_sleutel,
                         meeteenheid=Meeteenheid.euro,
                     ),
@@ -155,9 +144,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Gebruiksoppervlakte",
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="gebruiksoppervlakte",
+                            percentage_verschil_id.met_onderliggend(
+                                "gebruiksoppervlakte"
                             )
                         ),
                         meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -174,10 +162,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="WOZ-waarde per m²",
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="woz_waarde_per_m2",
-                            )
+                            percentage_verschil_id.met_onderliggend("woz_waarde_per_m2")
                         ),
                         bovenliggende_criterium=puntenwaardering_sleutel,
                     ),
@@ -230,9 +215,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam=f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}",
                         id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="gemiddelde_woz_waarde_per_m2",
+                            percentage_verschil_id.met_onderliggend(
+                                "gemiddelde_woz_waarde_per_m2"
                             )
                         ),
                         bovenliggende_criterium=puntenwaardering_sleutel,
@@ -281,12 +265,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         naam="Percentage verschil",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="percentage_verschil",
-                            )
-                        ),
+                        id=str(percentage_verschil_id),
                     ),
                     aantal=verschil_percentage,
                     punten=punten,

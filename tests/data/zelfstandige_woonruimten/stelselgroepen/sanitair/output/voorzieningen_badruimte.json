@@ -40,7 +40,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_873314",
+            "id": "sanitair__Space_873314__",
             "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad",
             "meeteenheid": {
               "code": "STU",
@@ -52,7 +52,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_873314",
+            "id": "sanitair__Space_873314__",
             "naam": "Badruimte - Voorzieningen: Douchewand",
             "meeteenheid": {
               "code": "STU",
@@ -64,7 +64,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_873314",
+            "id": "sanitair__Space_873314__",
             "naam": "Badruimte - Voorzieningen: Handdoekenradiator",
             "meeteenheid": {
               "code": "STU",
@@ -76,7 +76,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_873314",
+            "id": "sanitair__Space_873314__",
             "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel",
             "meeteenheid": {
               "code": "STU",
@@ -88,7 +88,7 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__Space_873314",
+            "id": "sanitair__Space_873314__",
             "naam": "Badruimte - Voorzieningen: Kastruimte",
             "meeteenheid": {
               "code": "STU",
@@ -99,7 +99,7 @@
         },
         {
           "criterium": {
-            "id": "sanitair__Space_873314__max_punten",
+            "id": "sanitair__Space_873314__max_punten_",
             "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte"
           },
           "punten": -0.75
@@ -107,7 +107,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_873314",
+            "id": "sanitair__Space_873314__",
             "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel",
             "meeteenheid": {
               "code": "STU",
@@ -119,7 +119,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_873314",
+            "id": "sanitair__Space_873314__",
             "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan",
             "meeteenheid": {
               "code": "STU",
@@ -131,7 +131,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_873314",
+            "id": "sanitair__Space_873314__",
             "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan",
             "meeteenheid": {
               "code": "STU",

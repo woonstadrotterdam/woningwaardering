@@ -19,7 +19,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__vertrekken__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen__vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -33,7 +33,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__vertrekken__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen__vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -47,7 +47,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__vertrekken__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen__vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -57,10 +57,10 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__vertrekken__gedeeld_met__2__adressen",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen__vertrekken",
             "naam": "Vertrekken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen"
             }
           },
           "punten": 15.0
@@ -70,7 +70,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__A",
             "naam": "Woonkamer: Verkoelde en verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen"
             }
           },
           "punten": 0.75
@@ -80,7 +80,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Keuken: Verkoelde en verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen"
             }
           },
           "punten": 0.75
@@ -90,7 +90,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Keuken: Verkoelde en verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen"
             }
           },
           "punten": 0.75
@@ -100,7 +100,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Keuken: Maximaal 2 extra punten voor verkoelde en verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen"
             }
           },
           "punten": -0.25
@@ -111,7 +111,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -126,7 +126,7 @@
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__B",
             "naam": "Keuken: Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -137,16 +137,16 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__adressen",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen",
             "naam": "Gedeeld met 2 adressen",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten"
             }
           }
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__2__onzelfstandige_woonruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 2 onzelfstandige woonruimten"
           }
         }

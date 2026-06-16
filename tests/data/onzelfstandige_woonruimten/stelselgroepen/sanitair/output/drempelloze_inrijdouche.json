@@ -16,7 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_334160__drempelloze_inrijdouche",
+            "id": "sanitair__prive__Space_334160__drempelloze_inrijdouche",
             "naam": "Badkamer - Drempelloze inrijdouche",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive"

@@ -16,10 +16,10 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_1",
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_5_onzelfstandige_woonruimten__Space_1",
             "naam": "Bijkeuken",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__gedeeld_met__5__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_5_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -30,10 +30,10 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Garagebox",
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_6_onzelfstandige_woonruimten__Garagebox",
             "naam": "Garagebox",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__gedeeld_met__6__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_6_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -43,14 +43,14 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__gedeeld_met__5__onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_5_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 5 onzelfstandige woonruimten"
           },
           "punten": 1.5
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__gedeeld_met__6__onzelfstandige_woonruimten",
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_6_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 6 onzelfstandige woonruimten"
           },
           "punten": 1.25

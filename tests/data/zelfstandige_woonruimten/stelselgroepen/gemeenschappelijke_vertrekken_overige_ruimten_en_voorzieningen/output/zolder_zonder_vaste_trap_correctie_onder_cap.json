@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_overige_ruimten__Space_berging",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -33,7 +33,7 @@
             "id": "oppervlakte_van_overige_ruimten__Space_zolder",
             "naam": "Zolder",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -50,7 +50,7 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__overige_ruimten__gedeeld_met__2__adressen",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__overige_ruimten",
             "naam": "Overige ruimten (gedeeld met 2)"
           },
           "punten": 4.5

@@ -16,10 +16,10 @@
         {
           "aantal": 30.0,
           "criterium": {
-            "id": "buitenruimten__Space_1",
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__Space_1",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -31,10 +31,10 @@
         {
           "aantal": 15.0,
           "criterium": {
-            "id": "buitenruimten__Space_5",
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__Space_5",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -45,7 +45,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten",
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 2 onzelfstandige woonruimten"
           }
         },

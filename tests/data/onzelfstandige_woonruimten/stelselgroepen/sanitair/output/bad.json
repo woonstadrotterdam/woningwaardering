@@ -16,7 +16,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_464093__bad",
+            "id": "sanitair__prive__Space_464093__bad",
             "naam": "Badkamer - Bad",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive"

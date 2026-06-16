@@ -19,7 +19,7 @@
             "id": "oppervlakte_van_vertrekken__Space_1",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__5__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,7 +29,7 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__5__adressen",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__vertrekken",
             "naam": "Vertrekken (gedeeld met 5)"
           },
           "punten": 2.0
@@ -40,7 +40,7 @@
             "id": "oppervlakte_van_vertrekken__Space_2",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__6__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -50,21 +50,21 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__vertrekken__gedeeld_met__6__adressen",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__vertrekken",
             "naam": "Vertrekken (gedeeld met 6)"
           },
           "punten": 1.66666667
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_1",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_1",
             "naam": "Slaapkamer (gedeeld met 5)"
           },
           "punten": 0.4
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_2",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_2",
             "naam": "Woonkamer (gedeeld met 6)"
           },
           "punten": 0.33

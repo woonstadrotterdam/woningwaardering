@@ -16,7 +16,7 @@
         {
           "aantal": 30.0,
           "criterium": {
-            "id": "buitenruimten__Space_1",
+            "id": "buitenruimten__prive__Space_1",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"
@@ -30,7 +30,7 @@
         {
           "aantal": 15.0,
           "criterium": {
-            "id": "buitenruimten__Space_5",
+            "id": "buitenruimten__prive__Space_5",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"
@@ -43,7 +43,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__aanwezig__prive",
+            "id": "buitenruimten__prive__aanwezig",
             "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0

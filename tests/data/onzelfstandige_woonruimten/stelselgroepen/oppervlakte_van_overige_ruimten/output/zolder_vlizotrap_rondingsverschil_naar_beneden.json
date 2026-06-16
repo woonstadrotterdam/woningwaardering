@@ -16,7 +16,7 @@
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_berging",
+            "id": "oppervlakte_van_overige_ruimten__prive__Space_berging",
             "naam": "Berging",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__prive"
@@ -30,7 +30,7 @@
         {
           "aantal": 4.4,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_zolder",
+            "id": "oppervlakte_van_overige_ruimten__prive__Space_zolder",
             "naam": "Zolder",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__prive"

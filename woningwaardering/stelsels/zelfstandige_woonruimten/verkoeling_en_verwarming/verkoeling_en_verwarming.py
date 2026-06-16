@@ -5,6 +5,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.criterium_id import (
+    laatste_criteriumid_toevoeging,
+    weergavenaam_voor,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_verkoeling_en_verwarming,
 )
@@ -90,8 +94,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 ] = None
 
         for criterium_id in criteriumsleutel_ids:
-            onderdelen = criterium_id.split("__")
-            naam = onderdelen[-1].capitalize().replace("_", " ")
+            naam = weergavenaam_voor(laatste_criteriumid_toevoeging(criterium_id))
             criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=naam,
                 id=criterium_id,

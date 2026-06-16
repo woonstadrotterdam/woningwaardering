@@ -15,26 +15,26 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Slaapkamer",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verkoelde_en_verwarmde_vertrekken__Slaapkamer",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__verkoelde_en_verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verkoelde_en_verwarmde_vertrekken"
             }
           },
           "punten": 1.5
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__verkoelde_en_verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verkoelde_en_verwarmde_vertrekken",
             "naam": "Verkoelde en verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten"
             }
           }
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 2 onzelfstandige woonruimten"
           }
         }
