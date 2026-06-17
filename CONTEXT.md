@@ -94,6 +94,31 @@ Verwijzing van een waardering naar het directe bovenliggende criterium binnen de
 
 Een waarschuwing voor incomplete of onjuiste inputdata. De package faalt standaard op `UserWarning`, zodat gebruikers ontbrekende invoer bewust moeten behandelen. Gebruikers kunnen het warning-filter aanpassen zodat er sowieso een woningwaarderinguitkomst volgt.
 
+## Outputterminologie
+
+Termen voor de structuur van criteriumids en waarderingsoutput. Padvoorbeelden staan in `docs/introductie/opzet.md`.
+
+### Hiërarchie
+
+1. **stelselgroepcriterium** — bovenste laag van het pad (bijv. `keuken`, GEM-stelselgroep)
+2. **gedeeld_met_criterium** — onder stelselgroepcriterium: `prive` of `gedeeld_met_{n}_{soort}`
+3. **geneste stelselgroep** — VERA-stelselgroep (keuken, sanitair, …) onder een gedeeld-met-criterium in GEM/GBA-output
+4. **groeperingscriterium** — optioneel niveau (bijv. `verwarmde_vertrekken`)
+5. **ruimtecriterium** — per ruimte (bijv. `Space_108014713`)
+6. **detailcriterium** — installatie of detailregel (bijv. `lengte_aanrecht`)
+
+### Geneste stelselgroep
+
+Een geneste stelselgroep is een stelselgroepcriterium (keuken, sanitair, oppervlakte van vertrekken, …) dat in de output **onder een gedeeld-met-criterium** hangt, doordat de bijbehorende stelselgroep-logica binnen GEM/GBA wordt hergebruikt. Groeperings-, ruimte- en detailcriteria zijn dat niet.
+
+### Gedeeld_met_criterium
+
+Output-criterium onder het stelselgroepcriterium met toevoeging `prive` (aantal ≤ 1) of `gedeeld_met_{n}_{soort}` (bijv. `gedeeld_met_4_adressen`). Vaak zonder eigen punten; punten zitten op geneste stelselgroepen of lager.
+
+### Nesten (mechanisme) vs. geneste stelselgroep (domein)
+
+**Nesten**, **verplaatsen** en **herschrijven** zijn implementatiehandelingen: criteriumids verlengen en `bovenliggendeCriterium` aanpassen. Dat geldt op elk niveau (`nest_waarderingen_onder_ruimte`, `verplaats_waardering_onder_gedeeld_met`, …). **Geneste stelselgroep** is alleen het afgebakende domeinniveau hierboven (punt 3). In `opzet.md` betekent “genest” soms algemene padstructuur; alleen “geneste stelselgroep” is het vaste begrip voor niveau 3.
+
 ## Werkafspraak Voor Nieuwe Domeintermen
 
 Voeg alleen termen toe aan dit bestand als ze betekenisvol zijn voor domeinexperts of terugkerend nodig zijn om code en documentatie te begrijpen. Implementatiedetails horen in de ontwikkelaarsdocs of in codecommentaar, niet in deze projectcontext.

@@ -77,29 +77,29 @@ class Buitenruimten(Stelselgroep):
                 aantal_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                 aantal_adressen = ruimte.gedeeld_met_aantal_eenheden or 1
                 if aantal_onz < 2 and aantal_adressen < 2:
-                    aggregaat = stelselgroep_id.gedeeld_met_criterium(1)
+                    gedeeld_met_criterium_id = stelselgroep_id.gedeeld_met_criterium(1)
                 elif aantal_onz > 1 and aantal_adressen > 1:
-                    aggregaat = stelselgroep_id.gedeeld_met_criterium(
+                    gedeeld_met_criterium_id = stelselgroep_id.gedeeld_met_criterium(
                         aantal_onz, GedeeldMetSoort.onzelfstandige_woonruimten
                     ).gedeeld_met_criterium(aantal_adressen, GedeeldMetSoort.adressen)
                 elif aantal_adressen > 1:
-                    aggregaat = stelselgroep_id.gedeeld_met_criterium(
+                    gedeeld_met_criterium_id = stelselgroep_id.gedeeld_met_criterium(
                         aantal_adressen, GedeeldMetSoort.adressen
                     )
                 else:
                     onz_aantal = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                     if onz_aantal is None or onz_aantal < 2:
                         onz_aantal = 2
-                    aggregaat = stelselgroep_id.gedeeld_met_criterium(
+                    gedeeld_met_criterium_id = stelselgroep_id.gedeeld_met_criterium(
                         onz_aantal,
                         GedeeldMetSoort.onzelfstandige_woonruimten,
                     )
 
                 woningwaardering.criterium.id = str(
-                    aggregaat.met_onderliggend(ruimte.id)
+                    gedeeld_met_criterium_id.met_onderliggend(ruimte.id)
                 )
                 woningwaardering.criterium.bovenliggende_criterium = (
-                    aggregaat.naar_criterium_sleutels()
+                    gedeeld_met_criterium_id.naar_criterium_sleutels()
                 )
 
                 if woningwaardering.punten is not None:

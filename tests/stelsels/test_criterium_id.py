@@ -32,12 +32,12 @@ def test_onderliggendcriteriumid_pad() -> None:
 
 
 def test_gedeeld_met_criterium_enkel_token() -> None:
-    aggregaat = CriteriumId.voor_stelselgroep(
+    gedeeld_met_criterium_id = CriteriumId.voor_stelselgroep(
         Woningwaarderingstelselgroep.buitenruimten
     ).gedeeld_met_criterium(4, GedeeldMetSoort.adressen)
 
-    assert str(aggregaat) == "buitenruimten__gedeeld_met_4_adressen"
-    assert "__gedeeld_met__" not in str(aggregaat)
+    assert str(gedeeld_met_criterium_id) == "buitenruimten__gedeeld_met_4_adressen"
+    assert "__gedeeld_met__" not in str(gedeeld_met_criterium_id)
 
 
 def test_gedeeld_met_prive() -> None:

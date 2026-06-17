@@ -67,7 +67,22 @@ WEERGAVENAMEN: dict[str, str] = {
 
 
 def weergavenaam_voor(criteriumid_toevoeging: str) -> str:
-    """Weergavenaam voor een groeperingscriterium op basis van criteriumid_toevoeging."""
+    """Zet een criteriumid-toevoeging om naar een leesbare weergavenaam.
+
+    Outputcriteria hebben machine-id's (bijv. ``verwarmde_vertrekken``); voor
+    tabellen en JSON moet de ``naam`` leesbaar zijn. Bekende toevoegingen staan
+    in ``WEERGAVENAMEN``; onbekende worden afgeleid met spaties en hoofdletter.
+
+    Args:
+        criteriumid_toevoeging (str): Toevoeging aan het criteriumid (bijv. groeperingsdeel).
+
+    Returns:
+        str: Weergavenaam voor het criterium.
+
+    Example:
+        >>> weergavenaam_voor("verwarmde_vertrekken")
+        'Verwarmde vertrekken'
+    """
     return WEERGAVENAMEN.get(
         criteriumid_toevoeging,
         criteriumid_toevoeging.replace("_", " ").capitalize(),
@@ -75,7 +90,23 @@ def weergavenaam_voor(criteriumid_toevoeging: str) -> str:
 
 
 def laatste_criteriumid_toevoeging(criteriumid: str) -> str:
-    """Laatste segment van een criteriumid (na de laatste scheiding `__`)."""
+    """Geeft de laatste ``criteriumid_toevoeging`` van een criteriumid.
+
+    Bij geneste paden is vaak alleen de laatste toevoeging relevant (installatiesoort,
+    groeperingsdeel). Scheiding is ``__`` tussen criteria, ``_`` binnen één toevoeging.
+
+    Args:
+        criteriumid (str): Volledig criteriumid.
+
+    Returns:
+        str: ``criteriumid_toevoeging`` na de laatste ``__``.
+
+    Example:
+        >>> laatste_criteriumid_toevoeging(
+        ...     "keuken__gedeeld_met_2_adressen__Space_1__lengte_aanrecht"
+        ... )
+        'lengte_aanrecht'
+    """
     return criteriumid.rsplit("__", 1)[-1]
 
 
@@ -88,8 +119,8 @@ class CriteriumId:
     Padregel:
         onderliggendcriteriumid == bovenliggendcriteriumid + "__" + criteriumid_toevoeging
 
-    Gedeeld-met aggregaten gebruiken één criteriumid_toevoeging, bijvoorbeeld
-    ``gedeeld_met_4_adressen`` (enkele underscores binnen het segment).
+    Gedeeld-met-criteria gebruiken één criteriumid_toevoeging, bijvoorbeeld
+    ``gedeeld_met_4_adressen`` (enkele underscores binnen de ``criteriumid_toevoeging``).
     """
 
     __slots__ = ("_bovenliggend", "path")
@@ -107,11 +138,44 @@ class CriteriumId:
     def voor_stelselgroep(
         cls, stelselgroep: WoningwaarderingstelselgroepReferentiedata
     ) -> CriteriumId:
-        """Stelselgroepcriterium (de wortel): geen bovenliggendcriterium."""
+        """Maakt het stelselgroepcriterium: de bovenste laag van elk criteriumid-pad.
+
+        Elke stelselgroep-output begint bij de VERA-stelselgroepnaam. Dit is het
+        startpunt om onderliggende criteria (gedeeld-met, geneste stelselgroepen,
+        ruimten) consistent te nesten.
+
+        Args:
+            stelselgroep (WoningwaarderingstelselgroepReferentiedata): VERA-referentiedata van de stelselgroep.
+
+        Returns:
+            CriteriumId: Stelselgroepcriterium-id zonder bovenliggend criterium.
+
+        Example:
+            >>> from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
+            >>> str(CriteriumId.voor_stelselgroep(Woningwaarderingstelselgroep.keuken))
+            'keuken'
+        """
         return cls(path=stelselgroep.name)
 
     def met_onderliggend(self, criteriumid_toevoeging: str | None) -> CriteriumId:
-        """Onderliggendcriterium: str(self) + '__' + criteriumid_toevoeging."""
+        """Voegt een onderliggend criterium toe aan het pad.
+
+        De padregel ``onderliggend == bovenliggend + "__" + toevoeging`` geldt
+        overal in de package; deze methode voorkomt handmatig concateneren en
+        houdt ``bovenliggend`` in sync voor ``bovenliggendeCriterium``.
+
+        Args:
+            criteriumid_toevoeging (str | None): Toevoeging onder dit criterium; ``None`` geeft een kopie.
+
+        Returns:
+            CriteriumId: Nieuw onderliggend criterium.
+
+        Example:
+            >>> from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
+            >>> stelselgroep_id = CriteriumId.voor_stelselgroep(Woningwaarderingstelselgroep.keuken)
+            >>> str(stelselgroep_id.met_onderliggend("gedeeld_met_4_adressen"))
+            'keuken__gedeeld_met_4_adressen'
+        """
         if criteriumid_toevoeging is None:
             return CriteriumId(path=self.path, bovenliggend=self.bovenliggend)
         return CriteriumId(
@@ -124,7 +188,28 @@ class CriteriumId:
         aantal: int | None,
         soort: GedeeldMetSoort | None = None,
     ) -> CriteriumId:
-        """Onderliggend gedeeld-met-criterium: 'prive' of 'gedeeld_met_N_soort'."""
+        """Maakt een gedeeld-met-criterium onder dit criterium.
+
+        Gedeelde ruimten krijgen een vast patroon in het id: ``prive`` bij aantal
+        ≤ 1, anders ``gedeeld_met_{n}_{soort}``. Eén methode dekt privé- en
+        gedeeld-met-takken.
+
+        Args:
+            aantal (int | None): Aantal adressen of onzelfstandige woonruimten.
+            soort (GedeeldMetSoort | None): Verplicht bij aantal > 1 (adressen of onzelfstandige_woonruimten).
+
+        Returns:
+            CriteriumId: Onderliggend gedeeld-met-criterium.
+
+        Raises:
+            ValueError: Als ``aantal`` ``None`` is.
+
+        Example:
+            >>> from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
+            >>> sg = CriteriumId.voor_stelselgroep(Woningwaarderingstelselgroep.sanitair)
+            >>> str(sg.gedeeld_met_criterium(8, GedeeldMetSoort.onzelfstandige_woonruimten))
+            'sanitair__gedeeld_met_8_onzelfstandige_woonruimten'
+        """
         if aantal is None:
             raise ValueError("aantal is vereist voor gedeeld_met_criterium")
         if aantal <= 1:
@@ -136,9 +221,35 @@ class CriteriumId:
 
     @property
     def bovenliggend(self) -> CriteriumId | None:
+        """Direct bovenliggend criterium in het pad, of ``None`` bij het stelselgroepcriterium.
+
+        Nodig om ``bovenliggendeCriterium`` in VERA-output te vullen en om bij
+        herschrijven van ids de juiste bovenliggende laag te behouden.
+
+        Example:
+            >>> from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
+            >>> kind = CriteriumId.voor_stelselgroep(
+            ...     Woningwaarderingstelselgroep.keuken
+            ... ).met_onderliggend("prive")
+            >>> kind.bovenliggend is not None
+            True
+        """
         return self._bovenliggend
 
     def naar_criterium_sleutels(self) -> WoningwaarderingCriteriumSleutels:
+        """Zet dit id om naar een VERA ``WoningwaarderingCriteriumSleutels``.
+
+        Output gebruikt dit type voor het veld ``bovenliggendeCriterium``; deze
+        helper voorkomt herhaaldelijk ``WoningwaarderingCriteriumSleutels(id=...)``.
+
+        Returns:
+            WoningwaarderingCriteriumSleutels: Verwijzing met ``id=str(self)``.
+
+        Example:
+            >>> criterium_sleutels = CriteriumId(path="keuken__prive").naar_criterium_sleutels()
+            >>> criterium_sleutels.id
+            'keuken__prive'
+        """
         return WoningwaarderingCriteriumSleutels(id=str(self))
 
     def met_criterium(
@@ -147,6 +258,26 @@ class CriteriumId:
         *,
         meeteenheid: Referentiedata | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingCriterium:
+        """Bouwt een VERA-criteriumobject met id, naam en optioneel bovenliggend.
+
+        Veel outputregels zijn structuur (naam, meeteenheid) zonder punten; deze
+        methode koppelt het pad automatisch aan ``bovenliggendeCriterium``.
+
+        Args:
+            naam (str | None): Weergavenaam in output.
+            meeteenheid (Referentiedata | None): Optionele VERA-meeteenheid.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaarderingCriterium: Criterium klaar voor een waardering.
+
+        Example:
+            >>> from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
+            >>> c = CriteriumId.voor_stelselgroep(
+            ...     Woningwaarderingstelselgroep.keuken
+            ... ).met_onderliggend("gedeeld_met_2_adressen")
+            >>> c.met_criterium("Gedeeld met 2 adressen").id
+            'keuken__gedeeld_met_2_adressen'
+        """
         criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
             id=str(self),
             naam=naam,
@@ -166,6 +297,28 @@ class CriteriumId:
         aantal: float | None = None,
         meeteenheid: Referentiedata | None = None,
     ) -> WoningwaarderingResultatenWoningwaardering:
+        """Bouwt een volledige waardering (criterium + optionele punten/aantal).
+
+        Combineert ``met_criterium`` met punten en aantal in één stap voor
+        eenvoudige stelselgroep-regels zonder aparte objectbouw.
+
+        Args:
+            naam (str | None): Weergavenaam in output.
+            punten (float | Decimal | None): Punten voor de waardering.
+            aantal (float | None): Optionele hoeveelheid.
+            meeteenheid (Referentiedata | None): Optionele VERA-meeteenheid.
+
+        Returns:
+            WoningwaarderingResultatenWoningwaardering: Waardering met ingevuld criterium.
+
+        Example:
+            >>> from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
+            >>> w = CriteriumId.voor_stelselgroep(
+            ...     Woningwaarderingstelselgroep.keuken
+            ... ).met_onderliggend("ruimte_1").met_waardering("Woonkamer", punten=12.0)
+            >>> w.punten
+            12.0
+        """
         return WoningwaarderingResultatenWoningwaardering(
             criterium=self.met_criterium(naam, meeteenheid=meeteenheid),
             punten=float(punten) if punten is not None else None,

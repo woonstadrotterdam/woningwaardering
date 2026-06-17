@@ -101,6 +101,20 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ruimte: EenhedenRuimte,
         woningwaardering: WoningwaarderingResultatenWoningwaardering,
     ) -> None:
+        """Verplaatst een waardering onder het gedeeld-met-criterium van de ruimte (in-place).
+
+        Mechanisme om criterium-paden te verlengen; geen synoniem voor geneste
+        stelselgroep. Onzelfstandige gedeelde ruimten krijgen ids onder
+        ``{stelselgroep}__gedeeld_met_N_onzelfstandige_woonruimten__...``.
+
+        Args:
+            ruimte (EenhedenRuimte): Ruimte met gedeeld-met-aantallen.
+            woningwaardering (WoningwaarderingResultatenWoningwaardering): Te verplaatsen waardering.
+
+        Example:
+            ``verkoeling_en_verwarming__verwarmde_vertrekken__...`` →
+            ``verkoeling_en_verwarming__gedeeld_met_3_onzelfstandige_woonruimten__verwarmde_vertrekken__...``.
+        """
         if woningwaardering.criterium is None or not woningwaardering.criterium.id:
             return
 

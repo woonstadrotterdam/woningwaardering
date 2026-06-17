@@ -29,6 +29,22 @@ from woningwaardering.vera.referentiedata import (
 
 
 def _criterium_id_eindigt_op(criterium_id: str | None, installatie_deel: str) -> bool:
+    """Controleert of de laatste ``criteriumid_toevoeging`` gelijk is aan ``installatie_deel``.
+
+    Sanitair-totalen groeperen op installatiesoort; de laatste toevoeging na ``__``
+    identificeert douche, bad, etc. zonder het volledige pad te parsen.
+
+    Args:
+        criterium_id (str | None): Te controleren criteriumid.
+        installatie_deel (str): Verwachte ``criteriumid_toevoeging``.
+
+    Returns:
+        bool: Of de laatste toevoeging overeenkomt.
+
+    Example:
+        >>> _criterium_id_eindigt_op("sanitair__Space_1__douche", "douche")
+        True
+    """
     if not criterium_id:
         return False
     return criterium_id.split("__")[-1] == installatie_deel

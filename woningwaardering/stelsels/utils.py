@@ -423,6 +423,21 @@ _GEDEELD_MET = re.compile(r"(?:^|__)gedeeld_met_(\d+)(?:_|$)")
 
 
 def _gedeeld_met_divisor(criterium_id: str | None) -> Decimal:
+    """Leest het delingsgetal uit de laatste ``gedeeld_met_N``-toevoeging in een id.
+
+    Gedeelde hoeveelheden in tabellen moeten per eenheid worden getoond; het
+    aantal in het criteriumid (bijv. ``gedeeld_met_4_adressen``) is de divisor.
+
+    Args:
+        criterium_id (str | None): Criteriumid van bovenliggend of huidig criterium.
+
+    Returns:
+        Decimal: ``N`` uit het laatste ``gedeeld_met_N``, of ``1`` als afwezig.
+
+    Example:
+        >>> _gedeeld_met_divisor("sanitair__gedeeld_met_4_adressen__Space_1")
+        Decimal('4')
+    """
     if criterium_id is None:
         return Decimal("1")
     matches = _GEDEELD_MET.findall(criterium_id)
@@ -433,6 +448,21 @@ def _waardering_voor_criterium_id(
     criterium_id: str | None,
     waarderingen: list[WoningwaarderingResultatenWoningwaardering],
 ) -> WoningwaarderingResultatenWoningwaardering | None:
+    """Zoekt de waardering met een gegeven criteriumid in een platte lijst.
+
+    Bij subtotaal-berekening moet worden gecontroleerd of een bovenliggend
+    criterium zelf een ``aantal`` heeft; daarvoor is lineair zoeken op id nodig.
+
+    Args:
+        criterium_id (str | None): Gezocht criteriumid.
+        waarderingen (list[WoningwaarderingResultatenWoningwaardering]): Platte lijst waarderingen.
+
+    Returns:
+        WoningwaarderingResultatenWoningwaardering | None: De eerste match, of ``None``.
+
+    Example:
+        >>> _waardering_voor_criterium_id("keuken__subtotaal", waarderingen)
+    """
     if criterium_id is None:
         return None
     return next(
@@ -449,6 +479,22 @@ def _effectieve_aantal_bijdrage(
     waardering: WoningwaarderingResultatenWoningwaardering,
     waarderingen: list[WoningwaarderingResultatenWoningwaardering],
 ) -> Decimal | None:
+    """Berekent de bijdrage van één waardering aan een subtotaal-aantal.
+
+    Voorkomt dubbeltelling: als het bovenliggende criterium al een ``aantal``
+    heeft, telt het kind niet mee. Anders wordt gedeeld door ``gedeeld_met_N``
+    wanneer dat in het bovenliggende id staat.
+
+    Args:
+        waardering (WoningwaarderingResultatenWoningwaardering): Waardering om te beoordelen.
+        waarderingen (list[WoningwaarderingResultatenWoningwaardering]): Volledige groep voor context.
+
+    Returns:
+        Decimal | None: Afgeronde bijdrage, of ``None`` als deze regel niet meetelt.
+
+    Example:
+        Detail met ``aantal=20`` onder ``...__gedeeld_met_4_adressen`` → bijdrage ``5``.
+    """
     if waardering.aantal is None or waardering.criterium is None:
         return None
 
@@ -472,7 +518,21 @@ def _effectieve_aantal_bijdrage(
 def som_effectieve_aantal_waarderingen(
     waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
 ) -> Decimal:
-    """Som van effectieve hoeveelheden (o.a. gedeelde m² / gedeeld_met), zonder dubbele kop+kind."""
+    """Telt effectieve hoeveelheden op voor een stelselgroep-subtotaal in tabellen.
+
+    Sommeert alleen onderliggende waarderingen met eigen ``aantal``; slaat regels over wanneer het bovenliggende
+    criterium al een eigen ``aantal`` heeft (geen dubbeltelling). Deelt waar nodig
+    door ``gedeeld_met_N`` uit het pad.
+
+    Args:
+        waarderingen (list[WoningwaarderingResultatenWoningwaardering] | None): Waarderingen in een groep.
+
+    Returns:
+        Decimal: Totaal afgerond op 2 decimalen.
+
+    Example:
+        Twee ruimten à 10 m² onder ``gedeeld_met_2_adressen`` → subtotaal ``10`` m².
+    """
     bijdragen = [
         b
         for w in waarderingen or []
@@ -862,6 +922,20 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
 def parent_ids_met_onderliggende_punten(
     waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
 ) -> set[str]:
+    """Verzamelt ids die bovenliggend zijn aan een waardering met punten.
+
+    Gebruikt om te bepalen welke criteria structuur zijn (alleen nesting) versus
+    onderliggende waarderingen met punten — o.a. voor ``criteriumsleutel_ids``.
+
+    Args:
+        waarderingen (list[WoningwaarderingResultatenWoningwaardering] | None): Waarderingen in een groep.
+
+    Returns:
+        set[str]: Bovenliggende criteriumids.
+
+    Example:
+        Kind met punten onder ``keuken__gedeeld_met_2_adressen`` → die id in de set.
+    """
     ids: set[str] = set()
     for waardering in waarderingen or []:
         if waardering.punten is None or waardering.criterium is None:
@@ -875,6 +949,19 @@ def parent_ids_met_onderliggende_punten(
 def parent_ids_met_onderliggende_aantal(
     waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
 ) -> set[str]:
+    """Verzamelt ids die bovenliggend zijn aan een waardering met ``aantal``.
+
+    Zelfde idee als bij punten, maar voor hoeveelheden (m² in subtotalen).
+
+    Args:
+        waarderingen (list[WoningwaarderingResultatenWoningwaardering] | None): Waarderingen in een groep.
+
+    Returns:
+        set[str]: Bovenliggende criteriumids.
+
+    Example:
+        Ruimtedetail met ``aantal`` onder subtotaal → subtotaal-id in de set.
+    """
     ids: set[str] = set()
     for waardering in waarderingen or []:
         if waardering.aantal is None or waardering.criterium is None:
@@ -888,7 +975,7 @@ def parent_ids_met_onderliggende_aantal(
 def criteriumsleutel_ids(
     waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
 ) -> set[str]:
-    """Ids die als bovenliggende criteriumsleutel in de waarderingen-graaf voorkomen."""
+    """Verzamelt criteriumids die als ``bovenliggendeCriterium`` in de waarderingen-lijst voorkomen."""
     return parent_ids_met_onderliggende_punten(
         waarderingen
     ) | parent_ids_met_onderliggende_aantal(waarderingen)
@@ -1024,7 +1111,23 @@ def nest_waarderingen_onder_ruimte(
     *,
     stelselgroep: WoningwaarderingstelselgroepReferentiedata,
 ) -> list[WoningwaarderingResultatenWoningwaardering]:
-    """Voegt een ruimte-criterium toe en nest installatiecriteria eronder."""
+    """Voegt een ruimtecriterium toe en nest installatiecriteria eronder.
+
+    Mechanisme om criterium-paden te verlengen; geen synoniem voor geneste
+    stelselgroep. Keuken en sanitair krijgen een extra laag per ruimte vóór de
+    installatiedetails.
+
+    Args:
+        ruimte (EenhedenRuimte): Ruimte waarvoor een ruimtecriterium wordt toegevoegd.
+        waarderingen (list[WoningwaarderingResultatenWoningwaardering]): Bestaande waarderingen.
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): Stelselgroep van de bron-waarderingen.
+
+    Returns:
+        list[WoningwaarderingResultatenWoningwaardering]: Waarderingen met ruimte-laag en herschreven ids.
+
+    Example:
+        ``keuken__lengte_aanrecht`` → ``keuken__Space_1__lengte_aanrecht``.
+    """
     if not waarderingen or ruimte.id is None:
         return waarderingen
 
@@ -1066,7 +1169,19 @@ def verplaats_waardering_onder_gedeeld_met(
     stelselgroep: WoningwaarderingstelselgroepReferentiedata,
     gedeeld_met_id: CriteriumId,
 ) -> None:
-    """Verplaatst een waardering onder een gedeeld-met-criterium met behoud van nesting."""
+    """Verplaatst een waardering onder een gedeeld-met-criterium met behoud van nesting.
+
+    Mechanisme om criterium-paden te verlengen; geen synoniem voor geneste
+    stelselgroep. Past id en ``bovenliggendeCriterium`` in-place aan.
+
+    Args:
+        waardering (WoningwaarderingResultatenWoningwaardering): Te verplaatsen waardering.
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): Stelselgroepnaam aan het begin van het bron-criteriumid.
+        gedeeld_met_id (CriteriumId): Doel-gedeeld-met-criterium.
+
+    Example:
+        ``buitenruimten__Space_1`` → ``buitenruimten__gedeeld_met_3_adressen__Space_1``.
+    """
     if waardering.criterium is None or not waardering.criterium.id:
         return
 

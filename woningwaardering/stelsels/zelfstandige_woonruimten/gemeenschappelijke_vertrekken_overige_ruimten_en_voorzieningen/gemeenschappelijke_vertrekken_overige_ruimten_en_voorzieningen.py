@@ -120,6 +120,20 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
     def _filter_gedeelde_ruimten(
         self, ruimten: list[EenhedenRuimte]
     ) -> list[EenhedenRuimte]:
+        """Filtert ruimten die voor GEM in aanmerking komen als gedeeld.
+
+        Alleen ruimten met gedeeld-met-adressen; bergingen onder 2 m² per adres
+        worden uitgesloten volgens beleidsregel (gelogd, niet gewaardeerd).
+
+        Args:
+            ruimten (list[EenhedenRuimte]): Ruimten van de eenheid.
+
+        Returns:
+            list[EenhedenRuimte]: Ruimten voor ``waardeer_gemeenschappelijke_ruimten``.
+
+        Example:
+            Berging 3 m² gedeeld met 4 adressen → 0,75 m²/adres → uitgesloten.
+        """
         gedeelde_ruimten: list[EenhedenRuimte] = []
         for ruimte in ruimten:
             if not utils.gedeeld_met_eenheden(ruimte):

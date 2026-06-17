@@ -98,7 +98,7 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                         )
                     )
                     if waardering.criterium is not None:
-                        aggregaat = CriteriumId.voor_stelselgroep(
+                        gedeeld_met_criterium_id = CriteriumId.voor_stelselgroep(
                             self.stelselgroep
                         ).gedeeld_met_criterium(
                             gedeeld_met_aantal_onzelfstandige_woonruimten,
@@ -107,10 +107,10 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                         bron_deel = (waardering.criterium.id or "").split("__", 1)
                         if len(bron_deel) == 2:
                             waardering.criterium.id = str(
-                                aggregaat.met_onderliggend(bron_deel[1])
+                                gedeeld_met_criterium_id.met_onderliggend(bron_deel[1])
                             )
                         waardering.criterium.bovenliggende_criterium = (
-                            aggregaat.naar_criterium_sleutels()
+                            gedeeld_met_criterium_id.naar_criterium_sleutels()
                         )
                         woningwaardering_groep.woningwaarderingen.append(waardering)
 

@@ -124,7 +124,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         gedeeld_met_counter[
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                         ] += utils.rond_af(woningwaardering.aantal, decimalen=2)
-                        aggregaat = CriteriumId.voor_stelselgroep(
+                        gedeeld_met_criterium_id = CriteriumId.voor_stelselgroep(
                             self.stelselgroep
                         ).gedeeld_met_criterium(
                             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
@@ -133,25 +133,25 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                         bron_deel = (woningwaardering.criterium.id or "").split("__", 1)
                         if len(bron_deel) == 2:
                             woningwaardering.criterium.id = str(
-                                aggregaat.met_onderliggend(bron_deel[1])
+                                gedeeld_met_criterium_id.met_onderliggend(bron_deel[1])
                             )
                         woningwaardering.criterium.bovenliggende_criterium = (
-                            aggregaat.naar_criterium_sleutels()
+                            gedeeld_met_criterium_id.naar_criterium_sleutels()
                         )
                     elif woningwaardering.aantal is not None:
                         gedeeld_met_counter[1] += utils.rond_af(
                             woningwaardering.aantal, decimalen=2
                         )
-                        aggregaat = CriteriumId.voor_stelselgroep(
+                        gedeeld_met_criterium_id = CriteriumId.voor_stelselgroep(
                             self.stelselgroep
                         ).gedeeld_met_criterium(1)
                         bron_deel = (woningwaardering.criterium.id or "").split("__", 1)
                         if len(bron_deel) == 2:
                             woningwaardering.criterium.id = str(
-                                aggregaat.met_onderliggend(bron_deel[1])
+                                gedeeld_met_criterium_id.met_onderliggend(bron_deel[1])
                             )
                         woningwaardering.criterium.bovenliggende_criterium = (
-                            aggregaat.naar_criterium_sleutels()
+                            gedeeld_met_criterium_id.naar_criterium_sleutels()
                         )
                     elif (
                         woningwaardering.punten

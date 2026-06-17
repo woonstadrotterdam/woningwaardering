@@ -70,14 +70,35 @@ onderliggendcriteriumid == bovenliggendcriteriumid + "__" + criteriumid_toevoegi
 
 | Term | Betekenis |
 |---|---|
-| **stelselgroepcriterium** | Wortel van het pad: alleen de stelselgroepnaam (bijv. `keuken`) |
+| **stelselgroepcriterium** | Bovenste laag van het pad: alleen de stelselgroepnaam (bijv. `keuken`) |
+| **gedeeld_met_criterium** | Onder stelselgroepcriterium: `prive` of `gedeeld_met_{n}_{soort}` |
+| **geneste stelselgroep** | Stelselgroepcriterium (keuken, sanitair, …) onder een gedeeld-met-criterium in GEM/GBA-output |
+| **groeperingscriterium** | Optioneel niveau onder geneste stelselgroep (bijv. `verwarmde_vertrekken`) |
+| **ruimtecriterium** | Criterium per ruimte (bijv. `Space_108014713`) |
+| **detailcriterium** | Installatie- of detailregel onder ruimte of groepering |
 | **bovenliggendcriteriumid** | Id van het directe bovenliggende criterium (`bovenliggendeCriterium.id`) |
 | **onderliggendcriteriumid** | Id van een criterium onder een bovenliggendcriterium |
 | **criteriumid_toevoeging** | Segment dat aan het bovenliggendcriteriumid wordt geplakt |
 
+Zie [CONTEXT.md](../../CONTEXT.md) voor definities en vermijden/gebruiken-tabel.
+
+### Hiërarchie (GEM/GBA)
+
+```text
+stelselgroepcriterium
+  └─ gedeeld_met_criterium
+       └─ geneste stelselgroep
+            ├─ groeperingscriterium (optioneel)
+            │    └─ detailcriterium
+            └─ ruimtecriterium
+                 └─ detailcriterium
+```
+
+Lege geneste stelselgroepen worden overgeslagen in de output.
+
 ### Gedeeld-met
 
-Gedeeld-met aggregaten gebruiken één `criteriumid_toevoeging`:
+Gedeeld-met-criteria gebruiken één `criteriumid_toevoeging`:
 
 - `prive` (aantal ≤ 1)
 - `gedeeld_met_{n}_{soort}` (bijv. `gedeeld_met_4_adressen`, `gedeeld_met_8_onzelfstandige_woonruimten`)
@@ -94,10 +115,13 @@ verkoeling_en_verwarming__verwarmde_vertrekken
 # onderliggend ruimtecriterium (genest onder groepering)
 verkoeling_en_verwarming__verwarmde_vertrekken__Space_108014713
 
-# gedeeld-met aggregaat
+# gedeeld-met-criterium (gedeeld met N adressen)
 sanitair__gedeeld_met_8_onzelfstandige_woonruimten
 
-# onderliggend onder gedeeld-met aggregaat
+# geneste stelselgroep onder gedeeld-met-criterium
+gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen__keuken
+
+# ruimtecriterium onder gedeeld-met-criterium
 buitenruimten__gedeeld_met_3_adressen__Space_108014713
 
 # genest onder een berekeningsonderdeel (WOZ)
