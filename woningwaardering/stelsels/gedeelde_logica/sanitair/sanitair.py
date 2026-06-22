@@ -1,12 +1,18 @@
 import warnings
 from collections import Counter
+from collections.abc import Callable, Iterable
 from decimal import Decimal
 from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import installatie_id_deel, rond_af
+from woningwaardering.stelsels.woningwaardering_groep import (
+    Waardering,
+    WoningwaarderingGroep,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -24,6 +30,63 @@ from woningwaardering.vera.referentiedata import (
     WoningwaarderingstelselReferentiedata,
 )
 from woningwaardering.vera.utils import get_bouwkundige_elementen
+
+SanitairVoorRuimten = Callable[
+    [list[EenhedenRuimte]],
+    Iterable[tuple[EenhedenRuimte, list[WoningwaarderingResultatenWoningwaardering]]],
+]
+
+
+def bouw_sanitair(
+    ruimten: list[EenhedenRuimte],
+    sanitair_voor_ruimten: SanitairVoorRuimten,
+    ruimte_parent: Waardering | WoningwaarderingGroep,
+    deler: Decimal = Decimal("1"),
+) -> None:
+    """Re-emit leaf-sanitair onder ``ruimte_parent`` via de fluent keten.
+
+    Args:
+        ruimten (list[EenhedenRuimte]): Te waarderen ruimten.
+        sanitair_voor_ruimten (SanitairVoorRuimten): Sanitair-waardering per deelgroep.
+        ruimte_parent (Waardering | WoningwaarderingGroep): Handle waaronder ruimtecriteria nesten.
+        deler (Decimal): Deler voor punten.
+    """
+    ruimte_criteria: dict[str, Waardering] = {}
+
+    for ruimte, bronnen in sanitair_voor_ruimten(ruimten):
+        if ruimte.id is None:
+            continue
+        for bron in bronnen:
+            if bron.criterium is None or not bron.punten:
+                continue
+            onderliggend_id = utils.criteriumid_onder_stelselgroep(
+                bron.criterium.id, Woningwaarderingstelselgroep.sanitair.name
+            )
+            if onderliggend_id is None:
+                continue
+            ruimte_criterium = ruimte_criteria.get(ruimte.id)
+            if ruimte_criterium is None:
+                ruimte_criterium = ruimte_parent.met_onderliggend(
+                    ruimte.id,
+                    naam=utils.ruimte_weergavenaam(ruimte),
+                )
+                ruimte_criteria[ruimte.id] = ruimte_criterium
+            # bijv. ``Space_1__douche``
+            # installatie = ``douche``
+            installatie = (
+                onderliggend_id[len(ruimte.id) + 2 :]
+                if onderliggend_id.startswith(f"{ruimte.id}__")
+                else onderliggend_id
+            )
+            ruimte_criterium.met_onderliggend(
+                installatie,
+                naam=bron.criterium.naam,
+                meeteenheid=bron.criterium.meeteenheid,
+                aantal=bron.aantal,
+                punten=float(
+                    utils.rond_af(Decimal(str(bron.punten)) / deler, decimalen=2)
+                ),
+            )
 
 
 def waardeer_sanitair(

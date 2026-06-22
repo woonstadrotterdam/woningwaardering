@@ -128,6 +128,8 @@ buitenruimten__gedeeld_met_3_adressen__Space_108014713
 punten_voor_de_woz_waarde__onderdeel_II__factor_II
 ```
 
-Geneste bovenliggendcriteria zijn toegestaan. Detailregels verwijzen via `bovenliggendeCriterium` naar het directe bovenliggende criterium.
+Geneste bovenliggendcriteria zijn toegestaan. Detailregels verwijzen via `bovenliggendeCriterium` naar het directe bovenliggende criterium. Top-level criteria binnen een groep (direct onder het stelselgroepcriterium) hebben geen `bovenliggendeCriterium`; de root staat alleen in `criteriumGroep`.
+
+`met_criterium()` en `met_waardering()` vullen `naam` standaard uit `WEERGAVENAMEN` via het laatste padsegment (`CriteriumId.weergavenaam`). Geef `naam=` alleen bij dynamische of afwijkende teksten (ruimtenaam, datum, beleidssuffix).
 
 Zie [aan de slag](../aan-de-slag/index.md) voor een volledig voorbeeld in JSON-output en output-tabel.

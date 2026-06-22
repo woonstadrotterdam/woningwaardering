@@ -88,7 +88,7 @@ Een criteriumid als pad van bovenliggendcriteriumids. Regel: `onderliggendcriter
 
 ### bovenliggendeCriterium
 
-Verwijzing van een waardering naar het directe bovenliggende criterium binnen dezelfde stelselgroep-groep (JSON: `bovenliggendeCriterium`). Geneste bovenliggendcriteria zijn toegestaan.
+Verwijzing van een waardering naar het directe bovenliggende criterium binnen dezelfde stelselgroep-groep (JSON: `bovenliggendeCriterium`). Geneste bovenliggendcriteria zijn toegestaan. Top-level criteria (direct onder het stelselgroepcriterium) hebben geen `bovenliggendeCriterium`: het stelselgroepcriterium staat in `criteriumGroep` en wordt niet als waarderingsrij uitgegeven.
 
 ### UserWarning
 

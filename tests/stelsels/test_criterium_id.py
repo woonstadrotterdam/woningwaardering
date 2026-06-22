@@ -53,12 +53,68 @@ def test_met_waardering_koppelt_bovenliggend() -> None:
         Woningwaarderingstelselgroep.verkoeling_en_verwarming
     ).met_onderliggend("verwarmde_vertrekken")
     waardering = groepering.met_onderliggend("ruimte_1").met_waardering(
-        "Woonkamer", punten=2.0
+        naam="Woonkamer", punten=2.0
     )
 
     assert waardering.criterium is not None
     assert waardering.criterium.bovenliggende_criterium is not None
     assert waardering.criterium.bovenliggende_criterium.id == str(groepering)
+
+
+def test_top_level_criterium_geen_bovenliggende_naar_root() -> None:
+    """Level-1 criteria onder het stelselgroepcriterium hebben geen bovenliggende."""
+    onderdeel = CriteriumId.voor_stelselgroep(
+        Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
+    ).met_onderliggend("onderdeel_I")
+    criterium = onderdeel.met_criterium("Onderdeel I")
+
+    assert criterium.bovenliggende_criterium is None
+
+
+def test_ruimtecriterium_geen_bovenliggende_naar_stelselgroep_root() -> None:
+    """Ruimtecriteria direct onder de stelselgroep-root verwijzen niet naar de root."""
+    ruimte = CriteriumId.voor_stelselgroep(
+        Woningwaarderingstelselgroep.keuken
+    ).met_onderliggend("keuken")
+    criterium = ruimte.met_criterium("Keuken")
+
+    assert criterium.bovenliggende_criterium is None
+
+
+def test_weergavenaam_property() -> None:
+    factor_id = (
+        CriteriumId.voor_stelselgroep(
+            Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
+        )
+        .met_onderliggend("onderdeel_I")
+        .met_onderliggend("factor_I")
+    )
+    assert factor_id.weergavenaam == "Factor I"
+
+
+def test_met_waardering_default_naam() -> None:
+    waardering = (
+        CriteriumId.voor_stelselgroep(
+            Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
+        )
+        .met_onderliggend("onderdeel_I")
+        .met_onderliggend("factor_I")
+        .met_waardering(aantal=1)
+    )
+    assert waardering.criterium is not None
+    assert waardering.criterium.naam == "Factor I"
+
+
+def test_met_criterium_default_naam() -> None:
+    criterium = (
+        CriteriumId.voor_stelselgroep(
+            Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
+        )
+        .met_onderliggend("onderdeel_I")
+        .met_onderliggend("factor_I")
+        .met_criterium()
+    )
+    assert criterium.naam == "Factor I"
 
 
 def test_weergavenaam_voor_bekende_groepering() -> None:

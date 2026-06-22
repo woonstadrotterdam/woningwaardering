@@ -1,17 +1,21 @@
 from datetime import date
 from decimal import Decimal
+from typing import Iterator
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.gedeelde_logica import (
+    bouw_sanitair,
     waardeer_sanitair,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
+    EenhedenRuimte,
+    WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -39,13 +43,10 @@ class Sanitair(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
-        woningwaardering_groep.woningwaarderingen = []
 
         ruimten = [
             ruimte
@@ -53,15 +54,18 @@ class Sanitair(Stelselgroep):
             if not utils.gedeeld_met_eenheden(ruimte)
         ]
 
-        for ruimte in ruimten:
-            waarderingen = list(
-                waardeer_sanitair(ruimte, self.stelselgroep, self.stelsel)
-            )
-            woningwaardering_groep.woningwaarderingen.extend(
-                utils.nest_waarderingen_onder_ruimte(
-                    ruimte, waarderingen, stelselgroep=self.stelselgroep
+        def sanitair_voor_ruimten(
+            ruimten_batch: list[EenhedenRuimte],
+        ) -> Iterator[
+            tuple[EenhedenRuimte, list[WoningwaarderingResultatenWoningwaardering]]
+        ]:
+            for ruimte in ruimten_batch:
+                yield (
+                    ruimte,
+                    list(waardeer_sanitair(ruimte, self.stelselgroep, self.stelsel)),
                 )
-            )
+
+        bouw_sanitair(ruimten, sanitair_voor_ruimten, woningwaardering_groep)
 
         totaal_punten = utils.rond_af_op_kwart(
             sum(

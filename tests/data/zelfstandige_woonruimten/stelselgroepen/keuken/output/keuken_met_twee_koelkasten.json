@@ -16,10 +16,7 @@
         {
           "criterium": {
             "id": "keuken__keuken",
-            "naam": "Keuken",
-            "bovenliggendeCriterium": {
-              "id": "keuken"
-            }
+            "naam": "Keuken"
           }
         },
         {

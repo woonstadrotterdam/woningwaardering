@@ -16,10 +16,7 @@
         {
           "criterium": {
             "id": "sanitair__Space_658265",
-            "naam": "Badkamer",
-            "bovenliggendeCriterium": {
-              "id": "sanitair"
-            }
+            "naam": "Badkamer"
           }
         },
         {

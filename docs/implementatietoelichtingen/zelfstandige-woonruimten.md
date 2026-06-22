@@ -1327,8 +1327,11 @@ Een groot deel van het totale puntenaantal wordt bepaald door de punten die een 
 Er zijn drie manieren waarop een woonruimte punten kan krijgen. Deze manieren zijn als volgt:
 
 1. De woonruimte krijgt punten voor **de laatst vastgestelde WOZ-waarde**: dit is de standaardregel; of
-2. De woonruimte krijgt punten op basis van **85% van de taxatiewaarde van de woonruimte**: wanneer er geen relevante WOZ-waarde voor de woonruimte bekend is; of
-3. De woonruimte krijgt punten op basis van de geldende **minimale WOZ-waarde**: als er geen relevante WOZ-waarde of taxatiewaarde bekend is.
+**2**. De woonruimte krijgt punten op basis van **85% van de taxatiewaarde van de woonruimte**: wanneer er geen WOZ-waarde voor de woonruimte bekend is; of
+3. De woonruimte krijgt punten op basis van de geldende **minimale WOZ-waarde**: als er geen WOZ-waarde of taxatiewaarde bekend is.
+
+_Laatst vastgestelde WOZ-waarde_  
+Met de laatst vastgestelde WOZ-waarde wordt de meest recent vastgestelde WOZ-waarde op de peildatum van de procedure bedoeld. Sluiten partijen bijvoorbeeld een huurovereenkomst op 1 augustus 2026, dan wordt in de woningwaardering rekening gehouden met de WOZ-waarde welke per 1 januari 2026 is vastgesteld. De waardepeildatum van de WOZ-waarde ligt op 1 januari van het voorafgaande kalenderjaar. De WOZ-waarde in de WOZ-beschikking van 1 januari 2026 heeft dus een waardepeildatum van 1 januari 2025.
 
 _Taxatiewaarde door erkend Register-Taxateur_  
 De taxatiewaarde van de woonruimte moet blijken uit een (hybride)taxatierapport dat door een Register-Taxateur is opgesteld. De verhuurder is verantwoordelijk voor het (laten) opstellen van dit rapport. De taxatiewaarde geldt totdat een WOZ-waarde is vastgesteld. Als er een WOZ-waarde is vastgesteld dan vervalt de taxatiewaarde voor de toepassing van deze rubriek.

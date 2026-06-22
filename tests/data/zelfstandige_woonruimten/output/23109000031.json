@@ -99,6 +99,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          }
+        },
+        {
+          "criterium": {
             "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_74227959",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
@@ -149,6 +155,12 @@
         },
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten"
+          }
+        },
+        {
+          "criterium": {
             "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__Space_74227558",
             "naam": "Entree",
             "bovenliggendeCriterium": {
@@ -166,18 +178,6 @@
             }
           },
           "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
-          }
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
-            "naam": "Verwarmde overige en verkeersruimten"
-          }
         }
       ]
     },
@@ -274,10 +274,7 @@
         {
           "criterium": {
             "id": "keuken__Space_74238526",
-            "naam": "Keuken",
-            "bovenliggendeCriterium": {
-              "id": "keuken"
-            }
+            "naam": "Keuken"
           }
         },
         {
@@ -313,10 +310,7 @@
         {
           "criterium": {
             "id": "sanitair__Space_74227663",
-            "naam": "Toiletruimte",
-            "bovenliggendeCriterium": {
-              "id": "sanitair"
-            }
+            "naam": "Toiletruimte"
           }
         },
         {
@@ -352,10 +346,7 @@
         {
           "criterium": {
             "id": "sanitair__Space_74235849",
-            "naam": "Badruimte",
-            "bovenliggendeCriterium": {
-              "id": "sanitair"
-            }
+            "naam": "Badruimte"
           }
         },
         {
@@ -458,6 +449,13 @@
           }
         },
         {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__onderdeel_I",
+            "naam": "Onderdeel I"
+          },
+          "punten": 15.53
+        },
+        {
           "aantal": 15329.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__onderdeel_I__factor_I",
@@ -469,10 +467,10 @@
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_I",
-            "naam": "Onderdeel I"
+            "id": "punten_voor_de_woz_waarde__onderdeel_II",
+            "naam": "Onderdeel II"
           },
-          "punten": 15.53
+          "punten": 21.85
         },
         {
           "aantal": 45.0,
@@ -497,13 +495,6 @@
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_II",
-            "naam": "Onderdeel II"
-          },
-          "punten": 21.85
         }
       ]
     },

@@ -16,10 +16,7 @@
         {
           "criterium": {
             "id": "keuken__WOK",
-            "naam": "Woonkamer/keuken",
-            "bovenliggendeCriterium": {
-              "id": "keuken"
-            }
+            "naam": "Woonkamer/keuken"
           }
         },
         {
@@ -40,10 +37,7 @@
         {
           "criterium": {
             "id": "keuken__Woonkamer",
-            "naam": "Woonkamer",
-            "bovenliggendeCriterium": {
-              "id": "keuken"
-            }
+            "naam": "Woonkamer"
           }
         },
         {
@@ -64,10 +58,7 @@
         {
           "criterium": {
             "id": "keuken__Woon-/slaapkamer",
-            "naam": "Woon-/slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "keuken"
-            }
+            "naam": "Woon-/slaapkamer"
           }
         },
         {
@@ -88,10 +79,7 @@
         {
           "criterium": {
             "id": "keuken__Slaapkamer",
-            "naam": "Slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "keuken"
-            }
+            "naam": "Slaapkamer"
           }
         },
         {

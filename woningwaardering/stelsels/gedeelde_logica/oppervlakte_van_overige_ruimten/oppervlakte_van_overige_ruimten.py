@@ -166,8 +166,10 @@ def structureer_subtotaal_bij_correcties(
     for waardering in ruimteregels:
         if waardering.criterium is None or not waardering.criterium.id:
             continue
-        suffix = waardering.criterium.id.split("__", 1)[1]
-        waardering.criterium.id = str(subtotaal_criterium.met_onderliggend(suffix))
+        # bijv. ``oppervlakte_van_overige_ruimten__Space_1``
+        # ruimte_id = ``Space_1``
+        ruimte_id = waardering.criterium.id.split("__", 1)[1]
+        waardering.criterium.id = str(subtotaal_criterium.met_onderliggend(ruimte_id))
         waardering.criterium.bovenliggende_criterium = (
             WoningwaarderingCriteriumSleutels(id=subtotaal_id)
         )

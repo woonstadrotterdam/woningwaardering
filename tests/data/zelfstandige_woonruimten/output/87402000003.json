@@ -111,6 +111,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          }
+        },
+        {
+          "criterium": {
             "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_29509924",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
@@ -158,12 +164,6 @@
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
-          }
         }
       ]
     },
@@ -318,6 +318,13 @@
           }
         },
         {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__onderdeel_I",
+            "naam": "Onderdeel I"
+          },
+          "punten": 14.35
+        },
+        {
           "aantal": 15329.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__onderdeel_I__factor_I",
@@ -329,10 +336,10 @@
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_I",
-            "naam": "Onderdeel I"
+            "id": "punten_voor_de_woz_waarde__onderdeel_II",
+            "naam": "Onderdeel II"
           },
-          "punten": 14.35
+          "punten": 15.67
         },
         {
           "aantal": 58.0,
@@ -357,13 +364,6 @@
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_II",
-            "naam": "Onderdeel II"
-          },
-          "punten": 15.67
         }
       ]
     },

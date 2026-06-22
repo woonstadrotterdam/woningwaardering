@@ -1,23 +1,17 @@
 from datetime import date
-from typing import Iterator
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import (
-    laatste_criteriumid_toevoeging,
-    weergavenaam_voor,
-)
 from woningwaardering.stelsels.gedeelde_logica import (
+    bouw_verkoeling_en_verwarming,
     waardeer_verkoeling_en_verwarming,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -45,14 +39,10 @@ class VerkoelingEnVerwarming(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
-
-        woningwaardering_groep.woningwaarderingen = []
 
         ruimten = [
             ruimte
@@ -60,12 +50,9 @@ class VerkoelingEnVerwarming(Stelselgroep):
             if not utils.gedeeld_met_eenheden(ruimte)
         ]
 
-        woningwaardering_groep.woningwaarderingen.extend(
-            waardering for _, waardering in waardeer_verkoeling_en_verwarming(ruimten)
-        )
-
-        woningwaardering_groep.woningwaarderingen.extend(
-            self._maak_totalen(woningwaardering_groep)
+        bouw_verkoeling_en_verwarming(
+            list(waardeer_verkoeling_en_verwarming(ruimten)),
+            woningwaardering_groep,
         )
 
         woningwaardering_groep.punten = utils.som_punten_waarderingen(
@@ -77,29 +64,6 @@ class VerkoelingEnVerwarming(Stelselgroep):
         )
 
         return woningwaardering_groep
-
-    def _maak_totalen(
-        self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
-    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        criteriumsleutel_ids: dict[str, None] = {}
-        for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
-            if (
-                woningwaardering.criterium
-                and woningwaardering.criterium.bovenliggende_criterium
-                and woningwaardering.criterium.bovenliggende_criterium.id
-                and isinstance(woningwaardering.punten, float)
-            ):
-                criteriumsleutel_ids[
-                    woningwaardering.criterium.bovenliggende_criterium.id
-                ] = None
-
-        for criterium_id in criteriumsleutel_ids:
-            naam = weergavenaam_voor(laatste_criteriumid_toevoeging(criterium_id))
-            criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=naam,
-                id=criterium_id,
-            )
-            yield WoningwaarderingResultatenWoningwaardering(criterium=criterium)
 
 
 if __name__ == "__main__":  # pragma: no cover

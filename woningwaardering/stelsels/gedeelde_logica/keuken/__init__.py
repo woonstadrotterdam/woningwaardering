@@ -1,3 +1,3 @@
-from .keuken import waardeer_keuken
+from .keuken import bouw_keuken, waardeer_keuken
 
-__all__ = ["waardeer_keuken"]
+__all__ = ["bouw_keuken", "waardeer_keuken"]

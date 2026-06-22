@@ -13,8 +13,8 @@ SANITAIR
       - Meerpersoonswastafel                                 3.00 st   0.56 pt
     - WoonkamerMetMax
       - Wastafel                                             2.00 st   0.25 pt
+      - Max 1 punt voor Wastafel                                      -0.13 pt
       - Meerpersoonswastafel                                 2.00 st   0.38 pt
-    - Max 1 punt voor Wastafel                                        -0.13 pt
-    - Max 1.5 punt voor Meerpersoonswastafel                          -0.19 pt
+      - Max 1.5 punt voor Meerpersoonswastafel                        -0.19 pt
                                                                       --------
   Totaal                                                               6.25 pt

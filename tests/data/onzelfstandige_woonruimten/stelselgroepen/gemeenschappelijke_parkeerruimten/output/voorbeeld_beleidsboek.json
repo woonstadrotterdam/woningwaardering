@@ -14,6 +14,12 @@
       "punten": 0.5,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
+          }
+        },
+        {
           "aantal": 5.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_onzelfstandige_woonruimten__1",
@@ -27,12 +33,6 @@
             }
           },
           "punten": 0.5
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
-          }
         }
       ]
     }

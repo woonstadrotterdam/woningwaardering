@@ -9,9 +9,9 @@ from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen import (
     waardeer_bijzondere_voorzieningen,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -39,25 +39,22 @@ class BijzondereVoorzieningen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
 
-        woningwaardering_groep.woningwaarderingen = list(
-            waardeer_bijzondere_voorzieningen(
-                peildatum=self.peildatum,
-                eenheid=eenheid,
-                stelselgroepen_zonder_opslag=[
-                    self.stelselgroep,
-                    Woningwaarderingstelselgroep.aftrekpunten,
-                    Woningwaarderingstelselgroep.prijsopslag_monumenten,
-                ],
-                stelsel=self.stelsel,
-                woningwaardering_resultaat=woningwaardering_resultaat,
-            )
+        waardeer_bijzondere_voorzieningen(
+            woningwaardering_groep,
+            peildatum=self.peildatum,
+            eenheid=eenheid,
+            stelselgroepen_zonder_opslag=[
+                self.stelselgroep,
+                Woningwaarderingstelselgroep.aftrekpunten,
+                Woningwaarderingstelselgroep.prijsopslag_monumenten,
+            ],
+            stelsel=self.stelsel,
+            woningwaardering_resultaat=woningwaardering_resultaat,
         )
 
         punten = utils.rond_af_op_kwart(

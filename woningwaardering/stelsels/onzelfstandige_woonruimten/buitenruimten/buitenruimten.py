@@ -15,13 +15,13 @@ from woningwaardering.stelsels.utils import (
     gedeeld_met_eenheden,
     gedeeld_met_onzelfstandige_woonruimten,
 )
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
     WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -51,13 +51,10 @@ class Buitenruimten(Stelselgroep):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
-
         woningwaardering_groep.woningwaarderingen = []
         gedeeld_met_counter: defaultdict[int, defaultdict[int, Decimal]] = defaultdict(
             lambda: defaultdict(Decimal)

@@ -15,6 +15,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "keuken__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
             "id": "keuken__prive__keuken",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
@@ -66,12 +72,6 @@
             }
           },
           "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "keuken__prive",
-            "naam": "Privé"
-          }
         }
       ]
     }

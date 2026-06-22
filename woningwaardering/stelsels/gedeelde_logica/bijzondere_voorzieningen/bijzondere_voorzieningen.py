@@ -1,12 +1,12 @@
 from datetime import date
 from decimal import Decimal
-from typing import Iterator
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import gedeeld_met_eenheden
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
@@ -27,6 +27,8 @@ from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 
 
 def waardeer_bijzondere_voorzieningen(
+    groep: WoningwaarderingGroep,
+    *,
     peildatum: date,
     eenheid: EenhedenEenheid,
     stelselgroepen_zonder_opslag: list[WoningwaarderingstelselgroepReferentiedata],
@@ -34,20 +36,21 @@ def waardeer_bijzondere_voorzieningen(
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
     ) = None,
-) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+) -> None:
     """Genereert de woningwaarderingen voor bijzondere voorzieningen.
 
     Args:
+        groep (WoningwaarderingGroep): Doelgroep; ``woningwaarderingen`` wordt
+            aangevuld via ``met_onderliggend``.
         peildatum (date): De peildatum.
         eenheid (EenhedenEenheid): De eenheid.
-        stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]): De stelselgroepen die niet moeten worden opgehoogd met zorgwoning opslag.
+        stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]):
+            De stelselgroepen die niet moeten worden opgehoogd met zorgwoning opslag.
         stelsel (WoningwaarderingstelselReferentiedata): Het woningwaarderingsstelsel.
-        woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het woningwaardering resultaat.
-
-    Yields:
-        WoningwaarderingResultatenWoningwaardering: De woningwaarderingen.
+        woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None):
+            Het woningwaardering resultaat.
     """
-    woningwaarderingen = [
+    waarderingen = [
         _opslag_zorgwoning(
             peildatum,
             eenheid,
@@ -59,9 +62,24 @@ def waardeer_bijzondere_voorzieningen(
         _prive_laadpaal(eenheid),
     ]
 
-    for waardering in woningwaarderingen:
-        if waardering is not None:
-            yield waardering
+    for waardering in waarderingen:
+        if waardering is None:
+            continue
+        if waardering.criterium is None or waardering.criterium.id is None:
+            continue
+        toevoeging = utils.criteriumid_onder_stelselgroep(
+            waardering.criterium.id,
+            Woningwaarderingstelselgroep.bijzondere_voorzieningen.name,
+        )
+        if toevoeging is None:
+            continue
+        groep.met_onderliggend(
+            toevoeging,
+            naam=waardering.criterium.naam,
+            punten=waardering.punten,
+            aantal=waardering.aantal,
+            meeteenheid=waardering.criterium.meeteenheid,
+        )
 
 
 def _opslag_zorgwoning(

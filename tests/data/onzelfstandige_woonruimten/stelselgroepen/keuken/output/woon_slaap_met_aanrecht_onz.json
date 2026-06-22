@@ -15,6 +15,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
             "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__WOK",
             "naam": "Woonkamer/keuken",
             "bovenliggendeCriterium": {
@@ -63,6 +69,12 @@
         },
         {
           "criterium": {
+            "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
             "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__Woon-/slaapkamer",
             "naam": "Woon-/slaapkamer",
             "bovenliggendeCriterium": {
@@ -108,18 +120,6 @@
             }
           },
           "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
-          }
-        },
-        {
-          "criterium": {
-            "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
-          }
         }
       ]
     }

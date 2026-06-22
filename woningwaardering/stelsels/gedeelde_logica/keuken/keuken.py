@@ -5,11 +5,16 @@ from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import (
     gedeeld_met_onzelfstandige_woonruimten,
     installatie_id_deel,
     rond_af,
+)
+from woningwaardering.stelsels.woningwaardering_groep import (
+    Waardering,
+    WoningwaarderingGroep,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
@@ -42,6 +47,72 @@ def waardeer_keuken(
     yield from _waardeer_aanrecht(ruimte, stelsel)
 
     yield from _waardeer_extra_voorzieningen(ruimte)
+
+
+def bouw_keuken(
+    ruimten: list[EenhedenRuimte],
+    stelsel: WoningwaarderingstelselReferentiedata,
+    ruimte_parent: Waardering | WoningwaarderingGroep,
+    deler: Decimal = Decimal("1"),
+) -> None:
+    """Re-emit leaf-keuken onder ``ruimte_parent`` via de fluent keten.
+
+    Roept ``waardeer_keuken`` per ruimte aan en hangt punten (gedeeld door ``deler``)
+    onder ruimte- en installatiecriteria. De caller bepaalt de parent-handle.
+
+    Args:
+        ruimten (list[EenhedenRuimte]): Te waarderen ruimten.
+        stelsel (WoningwaarderingstelselReferentiedata): Zelfstandig of onzelfstandig stelsel.
+        ruimte_parent (Waardering | WoningwaarderingGroep): Handle waaronder ruimtecriteria nesten.
+        deler (Decimal): Deler voor punten.
+    """
+    ruimte_criteria: dict[str, Waardering] = {}
+
+    for ruimte in ruimten:
+        if ruimte.detail_soort is None:
+            continue
+        for bron in waardeer_keuken(ruimte, stelsel):
+            if bron.criterium is None or not bron.punten:
+                continue
+            onderliggend_id = utils.criteriumid_onder_stelselgroep(
+                bron.criterium.id, Woningwaarderingstelselgroep.keuken.name
+            )
+            if onderliggend_id is None:
+                continue
+            if ruimte.id is None:
+                ruimte_parent.met_onderliggend(
+                    onderliggend_id,
+                    naam=bron.criterium.naam,
+                    meeteenheid=bron.criterium.meeteenheid,
+                    aantal=bron.aantal,
+                    punten=float(
+                        utils.rond_af(Decimal(str(bron.punten)) / deler, decimalen=2)
+                    ),
+                )
+                continue
+            ruimte_criterium = ruimte_criteria.get(ruimte.id)
+            if ruimte_criterium is None:
+                ruimte_criterium = ruimte_parent.met_onderliggend(
+                    ruimte.id,
+                    naam=utils.ruimte_weergavenaam(ruimte),
+                )
+                ruimte_criteria[ruimte.id] = ruimte_criterium
+            # bijv. ``Space_1__lengte_aanrecht_aanrecht``
+            # installatie = ``lengte_aanrecht_aanrecht``
+            installatie = (
+                onderliggend_id[len(ruimte.id) + 2 :]
+                if onderliggend_id.startswith(f"{ruimte.id}__")
+                else onderliggend_id
+            )
+            ruimte_criterium.met_onderliggend(
+                installatie,
+                naam=bron.criterium.naam,
+                meeteenheid=bron.criterium.meeteenheid,
+                aantal=bron.aantal,
+                punten=float(
+                    utils.rond_af(Decimal(str(bron.punten)) / deler, decimalen=2)
+                ),
+            )
 
 
 def _is_keuken(ruimte: EenhedenRuimte) -> bool:

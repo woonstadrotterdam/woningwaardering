@@ -99,6 +99,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          }
+        },
+        {
+          "criterium": {
             "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_88554482",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
@@ -116,12 +122,6 @@
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
-          }
         }
       ]
     },
@@ -253,10 +253,7 @@
         {
           "criterium": {
             "id": "sanitair__Space_88554482",
-            "naam": "Badruimte",
-            "bovenliggendeCriterium": {
-              "id": "sanitair"
-            }
+            "naam": "Badruimte"
           }
         },
         {
@@ -307,10 +304,7 @@
         {
           "criterium": {
             "id": "sanitair__Space_88559336",
-            "naam": "Toiletruimte",
-            "bovenliggendeCriterium": {
-              "id": "sanitair"
-            }
+            "naam": "Toiletruimte"
           }
         },
         {
@@ -398,6 +392,13 @@
           }
         },
         {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__onderdeel_I",
+            "naam": "Onderdeel I"
+          },
+          "punten": 19.7
+        },
+        {
           "aantal": 15329.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__onderdeel_I__factor_I",
@@ -409,10 +410,10 @@
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_I",
-            "naam": "Onderdeel I"
+            "id": "punten_voor_de_woz_waarde__onderdeel_II",
+            "naam": "Onderdeel II"
           },
-          "punten": 19.7
+          "punten": 15.6
         },
         {
           "aantal": 80.0,
@@ -437,13 +438,6 @@
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_II",
-            "naam": "Onderdeel II"
-          },
-          "punten": 15.6
         }
       ]
     },

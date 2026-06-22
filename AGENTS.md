@@ -32,7 +32,25 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [tes
 - Houd imports bovenaan het bestand; voeg geen inline imports toe.
 - Gebruik `warnings.warn(..., UserWarning)` voor gebruikersgerichte waarschuwingen over incomplete of onjuiste input, volgens de bestaande warning-semantiek.
 - Gebruik `loguru` voor logging volgens `docs/voor-ontwikkelaars/logging.md`.
-- Gebruik comments vooral om beleidsregels herleidbaar te maken: neem waar mogelijk de relevante tekst uit het beleidsboek, de implementatietoelichting of de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) letterlijk op bij de bijbehorende code, met vermelding van het regelnummer/artikel.
+
+### Expliciete domeinnaamgeving
+
+- Gebruik domeintermen uit `CONTEXT.md` en `docs/introductie/opzet.md` in variabelen, tuple-velden en comments (bijv. `ruimte_id`, `subgroep`, `ruimte_criterium`, `installatie`, `onderliggend_id`).
+- Vermijd generieke parsing-namen (`suffix`, `bron_deel`, positie-indexen zoals `detail[3]`) wanneer een projectbegrip preciezer is
+- Gebruik `NamedTuple` met benoemde domeinvelden i.p.v. anonieme tuples.
+- Bij elke niet-triviale criteriumid-split: korte voorbeeldcomment in code (2–3 regels met concreet id en variabelenamen):
+
+```python
+# bijv. ``verwarmde_vertrekken__Space_1``
+# subgroep = ``verwarmde_vertrekken``
+# ruimte_criterium = ``Space_1``
+subgroep, ruimte_criterium = onderliggend_id.split("__", 1)
+```
+
+### Comments
+
+- **Beleidsregels:** neem waar mogelijk de relevante tekst uit het beleidsboek, de implementatietoelichting of de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) letterlijk op bij de bijbehorende code, met vermelding van het regelnummer/artikel.
+- **Criteriumid-parsing:** voorbeeldcomment met concreet id en variabelenamen (zie Expliciete domeinnaamgeving).
 
 ```python
 # 2.2.2.3 Zolderruimte zonder vaste trap

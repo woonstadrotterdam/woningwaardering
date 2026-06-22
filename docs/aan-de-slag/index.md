@@ -400,10 +400,7 @@ with open(
         {
           "criterium": {
             "id": "keuken__Space_108006229",
-            "naam": "Keuken",
-            "bovenliggendeCriterium": {
-              "id": "keuken"
-            }
+            "naam": "Keuken"
           }
         },
         {
@@ -439,10 +436,7 @@ with open(
         {
           "criterium": {
             "id": "sanitair__Space_108014563",
-            "naam": "Badruimte",
-            "bovenliggendeCriterium": {
-              "id": "sanitair"
-            }
+            "naam": "Badruimte"
           }
         },
         {
@@ -493,10 +487,7 @@ with open(
         {
           "criterium": {
             "id": "sanitair__Space_108006223",
-            "naam": "Toiletruimte",
-            "bovenliggendeCriterium": {
-              "id": "sanitair"
-            }
+            "naam": "Toiletruimte"
           }
         },
         {
@@ -1048,10 +1039,7 @@ De output daarvan is een VERA woningwaarderingstelsel object.
         {
           "criterium": {
             "id": "keuken__Space_108006229",
-            "naam": "Keuken",
-            "bovenliggendeCriterium": {
-              "id": "keuken"
-            }
+            "naam": "Keuken"
           }
         },
         {

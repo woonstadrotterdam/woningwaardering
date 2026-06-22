@@ -6,6 +6,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.woningwaardering_groep import (
+    Waardering,
+    WoningwaarderingGroep,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -145,3 +149,42 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),
         )
     return
+
+
+def bouw_gemeenschappelijke_parkeerruimte(
+    ruimten: list[EenhedenRuimte],
+    parkeer_parent: Waardering | WoningwaarderingGroep,
+    deler: Decimal = Decimal("1"),
+) -> None:
+    """Re-emit leaf-parkeerruimten onder ``parkeer_parent`` via de fluent keten.
+
+    Args:
+        ruimten (list[EenhedenRuimte]): Te waarderen parkeerruimten.
+        parkeer_parent (Waardering | WoningwaarderingGroep): Handle waaronder parkeerplaats-criteria nesten.
+        deler (Decimal): Extra deler voor punten (``onz_aantal`` onzelfstandig; ``1`` zelfstandig).
+    """
+    naam_key = Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.name
+    for ruimte in ruimten:
+        waarderingen = waardeer_gemeenschappelijke_parkeerruimte(ruimte)
+        if waarderingen is None:
+            continue
+        for bron in waarderingen:
+            if bron.criterium is None or bron.criterium.id is None:
+                continue
+            onderliggend_id = utils.criteriumid_onder_stelselgroep(
+                bron.criterium.id, naam_key
+            )
+            if onderliggend_id is None:
+                continue
+            detail_punten = (
+                float(utils.rond_af(Decimal(str(bron.punten)) / deler, decimalen=2))
+                if bron.punten is not None
+                else None
+            )
+            parkeer_parent.met_onderliggend(
+                onderliggend_id,
+                naam=bron.criterium.naam,
+                meeteenheid=bron.criterium.meeteenheid,
+                aantal=bron.aantal,
+                punten=detail_punten,
+            )

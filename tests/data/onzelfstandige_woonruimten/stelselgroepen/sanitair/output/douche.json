@@ -15,6 +15,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
             "id": "sanitair__prive__Space_895322",
             "naam": "Badkamer",
             "bovenliggendeCriterium": {
@@ -36,12 +42,6 @@
             }
           },
           "punten": 3.0
-        },
-        {
-          "criterium": {
-            "id": "sanitair__prive",
-            "naam": "Privé"
-          }
         }
       ]
     }

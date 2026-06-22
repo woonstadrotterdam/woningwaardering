@@ -4,7 +4,6 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_ruimten import (
     waardeer_gemeenschappelijke_ruimten,
 )
@@ -12,11 +11,9 @@ from woningwaardering.stelsels.onzelfstandige_woonruimten.sanitair import (
     Sanitair as OnzelfstandigeWoonruimtenSanitair,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -45,17 +42,18 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
 
-        woningwaardering_groep.woningwaarderingen = []
-
-        if zorgwoning := self._zorgwoning(eenheid):
-            woningwaardering_groep.woningwaarderingen.append(zorgwoning)
+        if eenheid.doelgroep == Doelgroep.zorg:
+            logger.info(
+                f"Eenheid {eenheid.id} is een zorgwoning en krijgt 3 punten voor {self.stelselgroep.naam}"
+            )
+            woningwaardering_groep.met_onderliggend(
+                "zorgwoning", naam="Zorgwoning", punten=3.0
+            )
         else:
             gedeelde_ruimten = [
                 ruimte
@@ -64,17 +62,14 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 and ruimte.gedeeld_met_aantal_eenheden > 1
             ]
 
-            woningwaardering_groep.woningwaarderingen.extend(
-                waardeer_gemeenschappelijke_ruimten(
-                    stelselgroep=self.stelselgroep,
-                    stelsel=self.stelsel,
-                    ruimten=gedeelde_ruimten,
-                    sanitair_voor_ruimten=lambda ruimten: (
-                        OnzelfstandigeWoonruimtenSanitair.genereer_woningwaarderingen(
-                            ruimten, self.stelselgroep
-                        )
-                    ),
-                )
+            waardeer_gemeenschappelijke_ruimten(
+                groep=woningwaardering_groep,
+                ruimten=gedeelde_ruimten,
+                sanitair_voor_ruimten=lambda ruimten: (
+                    OnzelfstandigeWoonruimtenSanitair.genereer_woningwaarderingen(
+                        ruimten, self.stelselgroep
+                    )
+                ),
             )
 
         woningwaardering_groep.punten = utils.som_punten_waarderingen(
@@ -85,42 +80,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             f"Eenheid {eenheid.id} krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
-
-    def _zorgwoning(
-        self, eenheid: EenhedenEenheid
-    ) -> WoningwaarderingResultatenWoningwaardering | None:
-        """
-        Beleidsboek: De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en
-        voorzieningen in een zorgwoning of woon/zorgcomplex de waardering per woning
-        veelal uitkomt op een totaal van ongeveer 3 punten. Om arbeidsintensief
-        meetwerk te voorkomen waardeert de Huurcommissie in dat geval een waardering
-        van 3 punten per woning.
-
-        Args:
-            eenheid (EenhedenEenheid): Eenheid
-
-        Returns:
-            WoningwaarderingResultatenWoningwaardering | None: Woningwaardering van 3 punten voor een zorgwoning of None als de eenheid geen zorgwoning is
-        """
-        if eenheid.doelgroep == Doelgroep.zorg:
-            logger.info(
-                f"Eenheid {eenheid.id} is een zorgwoning en krijgt 3 punten voor {self.stelselgroep.naam}"
-            )
-            return WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Zorgwoning",
-                    id=str(
-                        CriteriumId.voor_stelselgroep(
-                            self.stelselgroep
-                        ).met_onderliggend("zorgwoning")
-                    ),
-                ),
-                punten=3.0,
-            )
-        logger.debug(
-            f"Eenheid {eenheid.id} is geen zorgwoning en krijgt daarvoor geen punten voor {self.stelselgroep.naam}"
-        )
-        return None
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -98,13 +98,9 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Space_29425491",
-            "naam": "Slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
-            }
-          },
-          "punten": 2.0
+            "id": "verkoeling_en_verwarming__prive",
+            "naam": "Privé"
+          }
         },
         {
           "criterium": {
@@ -117,9 +113,13 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__prive",
-            "naam": "Privé"
-          }
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Space_29425491",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
         }
       ]
     },
@@ -165,6 +165,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
             "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425492",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
@@ -186,12 +192,6 @@
             }
           },
           "punten": 3.5
-        },
-        {
-          "criterium": {
-            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
-          }
         }
       ]
     },
@@ -208,6 +208,12 @@
       },
       "punten": 3.0,
       "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
         {
           "criterium": {
             "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425495",
@@ -255,12 +261,6 @@
             }
           },
           "punten": 1.5
-        },
-        {
-          "criterium": {
-            "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
-          }
         }
       ]
     },

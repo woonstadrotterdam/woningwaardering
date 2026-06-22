@@ -51,7 +51,7 @@ WEERGAVENAMEN: dict[str, str] = {
     "onderdeel_II": "Onderdeel II",
     "open_keuken": "Open keuken",
     "oppervlakte_vertrekken_en_overige_ruimten": (
-        "Oppervlakte vertrekken en overige ruimten"
+        "Oppervlakte van vertrekken en overige ruimten"
     ),
     "percentage_verschil": "Percentage verschil",
     "rijksbeschermd_stads_of_dorpsgezicht": "Rijksbeschermd stads- of dorpsgezicht",
@@ -236,6 +236,22 @@ class CriteriumId:
         """
         return self._bovenliggend
 
+    @property
+    def weergavenaam(self) -> str:
+        """Leesbare weergavenaam afgeleid uit het laatste padsegment.
+
+        Gebruikt ``WEERGAVENAMEN`` voor bekende toevoegingen; onbekende segmenten
+        worden omgezet met spaties en een hoofdletter.
+
+        Example:
+            >>> from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
+            >>> CriteriumId.voor_stelselgroep(
+            ...     Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
+            ... ).met_onderliggend("onderdeel_I").met_onderliggend("factor_I").weergavenaam
+            'Factor I'
+        """
+        return weergavenaam_voor(laatste_criteriumid_toevoeging(self.path))
+
     def naar_criterium_sleutels(self) -> WoningwaarderingCriteriumSleutels:
         """Zet dit id om naar een VERA ``WoningwaarderingCriteriumSleutels``.
 
@@ -254,17 +270,19 @@ class CriteriumId:
 
     def met_criterium(
         self,
-        naam: str | None,
+        naam: str | None = None,
         *,
         meeteenheid: Referentiedata | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingCriterium:
         """Bouwt een VERA-criteriumobject met id, naam en optioneel bovenliggend.
 
         Veel outputregels zijn structuur (naam, meeteenheid) zonder punten; deze
-        methode koppelt het pad automatisch aan ``bovenliggendeCriterium``.
+        methode koppelt het pad automatisch aan ``bovenliggendeCriterium``, behalve
+        wanneer de parent het stelselgroepcriterium is (die wordt niet als rij
+        uitgegeven). Zonder ``naam`` wordt ``self.weergavenaam`` gebruikt.
 
         Args:
-            naam (str | None): Weergavenaam in output.
+            naam (str | None): Weergavenaam in output; default uit ``WEERGAVENAMEN``.
             meeteenheid (Referentiedata | None): Optionele VERA-meeteenheid.
 
         Returns:
@@ -273,17 +291,19 @@ class CriteriumId:
         Example:
             >>> from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
             >>> c = CriteriumId.voor_stelselgroep(
-            ...     Woningwaarderingstelselgroep.keuken
-            ... ).met_onderliggend("gedeeld_met_2_adressen")
-            >>> c.met_criterium("Gedeeld met 2 adressen").id
-            'keuken__gedeeld_met_2_adressen'
+            ...     Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
+            ... ).met_onderliggend("onderdeel_I").met_onderliggend("factor_I")
+            >>> c.met_criterium().naam
+            'Factor I'
         """
         criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
             id=str(self),
-            naam=naam,
+            naam=naam if naam is not None else self.weergavenaam,
             meeteenheid=meeteenheid,
         )
-        if self.bovenliggend is not None:
+        # Het stelselgroepcriterium (root) wordt niet als waardering uitgegeven; een
+        # verwijzing daarnaartoe zou naar een niet-bestaande rij wijzen.
+        if self.bovenliggend is not None and self.bovenliggend.bovenliggend is not None:
             criterium.bovenliggende_criterium = (
                 self.bovenliggend.naar_criterium_sleutels()
             )
@@ -291,21 +311,22 @@ class CriteriumId:
 
     def met_waardering(
         self,
-        naam: str | None,
         *,
+        naam: str | None = None,
         punten: float | Decimal | None = None,
-        aantal: float | None = None,
+        aantal: float | Decimal | None = None,
         meeteenheid: Referentiedata | None = None,
     ) -> WoningwaarderingResultatenWoningwaardering:
         """Bouwt een volledige waardering (criterium + optionele punten/aantal).
 
         Combineert ``met_criterium`` met punten en aantal in één stap voor
-        eenvoudige stelselgroep-regels zonder aparte objectbouw.
+        eenvoudige stelselgroep-regels zonder aparte objectbouw. Zonder ``naam``
+        wordt ``self.weergavenaam`` gebruikt.
 
         Args:
-            naam (str | None): Weergavenaam in output.
+            naam (str | None): Weergavenaam in output; default uit ``WEERGAVENAMEN``.
             punten (float | Decimal | None): Punten voor de waardering.
-            aantal (float | None): Optionele hoeveelheid.
+            aantal (float | Decimal | None): Optionele hoeveelheid.
             meeteenheid (Referentiedata | None): Optionele VERA-meeteenheid.
 
         Returns:
@@ -315,7 +336,7 @@ class CriteriumId:
             >>> from woningwaardering.vera.referentiedata import Woningwaarderingstelselgroep
             >>> w = CriteriumId.voor_stelselgroep(
             ...     Woningwaarderingstelselgroep.keuken
-            ... ).met_onderliggend("ruimte_1").met_waardering("Woonkamer", punten=12.0)
+            ... ).met_onderliggend("ruimte_1").met_waardering(naam="Woonkamer", punten=12.0)
             >>> w.punten
             12.0
         """

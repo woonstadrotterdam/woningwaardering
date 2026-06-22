@@ -6,13 +6,13 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.gedeelde_logica import (
-    waardeer_gemeenschappelijke_parkeerruimte,
+from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten.gemeenschappelijke_parkeerruimten import (
+    bouw_gemeenschappelijke_parkeerruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -41,24 +41,20 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
-        woningwaardering_groep.woningwaarderingen = []
 
         if not eenheid.ruimten:
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
             return woningwaardering_groep
 
-        for ruimte in eenheid.ruimten:
-            woningwaardering = waardeer_gemeenschappelijke_parkeerruimte(ruimte)
-            if woningwaardering is not None:
-                woningwaardering_groep.woningwaarderingen.extend(list(woningwaardering))
+        bouw_gemeenschappelijke_parkeerruimte(
+            eenheid.ruimten, woningwaardering_groep, Decimal("1")
+        )
 
-        punten_totaal = float(
+        woningwaardering_groep.punten = float(
             utils.rond_af_op_kwart(
                 Decimal(
                     str(
@@ -74,10 +70,8 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         )
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {punten_totaal} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
-
-        woningwaardering_groep.punten = punten_totaal
 
         return woningwaardering_groep
 

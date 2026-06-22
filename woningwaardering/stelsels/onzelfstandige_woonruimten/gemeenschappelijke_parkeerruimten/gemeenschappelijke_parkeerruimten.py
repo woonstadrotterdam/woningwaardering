@@ -7,16 +7,16 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
-from woningwaardering.stelsels.gedeelde_logica import (
+from woningwaardering.stelsels.criterium_id import GedeeldMetSoort
+from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten.gemeenschappelijke_parkeerruimten import (
+    bouw_gemeenschappelijke_parkeerruimte,
     waardeer_gemeenschappelijke_parkeerruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
+    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -44,97 +44,40 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
 
         if not eenheid.ruimten:
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
             return woningwaardering_groep
 
-        woningwaardering_groep.woningwaarderingen = []
-
-        gedeeld_met_counter: defaultdict[int, defaultdict[str, Decimal]] = defaultdict(
-            lambda: defaultdict(Decimal)
-        )
-
         for ruimte in eenheid.ruimten:
-            waarderingen_zelfstandig = waardeer_gemeenschappelijke_parkeerruimte(ruimte)
-            if waarderingen_zelfstandig is not None:
-                for waardering in list(waarderingen_zelfstandig):
-                    if waardering is None:
-                        continue
+            list(waardeer_gemeenschappelijke_parkeerruimte(ruimte) or [])
 
-                    # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2,  (bijvoorbeeld een garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief behorende tot de woning).
-                    if not utils.gedeeld_met_eenheden(ruimte):
-                        logger.debug(
-                            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is niet gedeeld met andere eenheden en telt daarom niet voor {self.stelselgroep.naam}."
-                        )
-                        continue
+        # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2,  (bijvoorbeeld een garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief behorende tot de woning).
+        gedeelde_ruimten = [
+            ruimte for ruimte in eenheid.ruimten if utils.gedeeld_met_eenheden(ruimte)
+        ]
 
-                    gedeeld_met_aantal_onzelfstandige_woonruimten = (
-                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                    )
-
-                    if waardering.aantal is not None:
-                        gedeeld_met_counter[
-                            gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ]["aantal"] += Decimal(str(waardering.aantal))
-                    if waardering.punten is not None:
-                        gedeeld_met_counter[
-                            gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ]["punten"] += Decimal(str(waardering.punten))
-
-                    waardering.punten = float(
-                        utils.rond_af(
-                            Decimal(str(waardering.punten))
-                            / Decimal(
-                                str(gedeeld_met_aantal_onzelfstandige_woonruimten)
-                            ),
-                            decimalen=2,
-                        )
-                    )
-                    if waardering.criterium is not None:
-                        gedeeld_met_criterium_id = CriteriumId.voor_stelselgroep(
-                            self.stelselgroep
-                        ).gedeeld_met_criterium(
-                            gedeeld_met_aantal_onzelfstandige_woonruimten,
-                            GedeeldMetSoort.onzelfstandige_woonruimten,
-                        )
-                        bron_deel = (waardering.criterium.id or "").split("__", 1)
-                        if len(bron_deel) == 2:
-                            waardering.criterium.id = str(
-                                gedeeld_met_criterium_id.met_onderliggend(bron_deel[1])
-                            )
-                        waardering.criterium.bovenliggende_criterium = (
-                            gedeeld_met_criterium_id.naar_criterium_sleutels()
-                        )
-                        woningwaardering_groep.woningwaarderingen.append(waardering)
-
-        for (
-            gedeeld_met_aantal_onzelfstandige_woonruimten,
-            count,
-        ) in gedeeld_met_counter.items():
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        id=str(
-                            CriteriumId.voor_stelselgroep(
-                                self.stelselgroep
-                            ).gedeeld_met_criterium(
-                                gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                GedeeldMetSoort.onzelfstandige_woonruimten,
-                            )
-                        ),
-                        naam=utils.naam_gedeeld_met_groep(
-                            gedeeld_met_aantal_onzelfstandige_woonruimten,
-                            soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                        ),
-                    ),
-                )
+        for onz_aantal, groep_ruimten in _groepeer_ruimten_per_onz(
+            gedeelde_ruimten
+        ).items():
+            gedeeld_met_handle = woningwaardering_groep.met_gedeeld_met_criterium(
+                onz_aantal,
+                GedeeldMetSoort.onzelfstandige_woonruimten if onz_aantal > 1 else None,
+                naam=utils.naam_gedeeld_met_groep(
+                    onz_aantal,
+                    soort=GedeeldMetSoort.onzelfstandige_woonruimten
+                    if onz_aantal > 1
+                    else None,
+                ),
+            )
+            bouw_gemeenschappelijke_parkeerruimte(
+                groep_ruimten,
+                gedeeld_met_handle,
+                Decimal(str(onz_aantal)),
             )
 
         woningwaardering_groep.punten = utils.som_punten_waarderingen(
@@ -145,6 +88,16 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
+
+
+def _groepeer_ruimten_per_onz(
+    ruimten: list[EenhedenRuimte],
+) -> dict[int, list[EenhedenRuimte]]:
+    groepen: dict[int, list[EenhedenRuimte]] = defaultdict(list)
+    for ruimte in ruimten:
+        onz_aantal = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+        groepen[onz_aantal].append(ruimte)
+    return groepen
 
 
 if __name__ == "__main__":  # pragma: no cover

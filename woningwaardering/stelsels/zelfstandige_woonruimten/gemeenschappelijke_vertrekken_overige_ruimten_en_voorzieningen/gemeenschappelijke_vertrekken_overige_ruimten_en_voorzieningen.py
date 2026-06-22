@@ -5,18 +5,15 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.gedeelde_logica import waardeer_sanitair
 from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_ruimten import (
     waardeer_gemeenschappelijke_ruimten,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -46,14 +43,10 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
-
-        woningwaardering_groep.woningwaarderingen = []
 
         # Gemeenschappelijke ruimten en voorzieningen in een zorgwoning
         #
@@ -66,40 +59,25 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}) is een zorgwoning en wordt met 3 punten gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
             )
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Zorgwoning",
-                        id=str(
-                            CriteriumId.voor_stelselgroep(
-                                self.stelselgroep
-                            ).met_onderliggend("zorgwoning")
-                        ),
-                    ),
-                    punten=3.0,
-                )
+            woningwaardering_groep.met_onderliggend(
+                "zorgwoning", naam="Zorgwoning", punten=3.0
             )
         else:
             gedeelde_ruimten = self._filter_gedeelde_ruimten(eenheid.ruimten or [])
 
-            woningwaardering_groep.woningwaarderingen.extend(
-                waardeer_gemeenschappelijke_ruimten(
-                    stelselgroep=self.stelselgroep,
-                    stelsel=self.stelsel,
-                    ruimten=gedeelde_ruimten,
-                    sanitair_voor_ruimten=lambda ruimten: (
-                        (
-                            ruimte,
-                            list(
-                                waardeer_sanitair(
-                                    ruimte, self.stelselgroep, self.stelsel
-                                )
-                            ),
-                        )
-                        for ruimte in ruimten
-                        if ruimte.detail_soort is not None
-                    ),
-                )
+            waardeer_gemeenschappelijke_ruimten(
+                groep=woningwaardering_groep,
+                ruimten=gedeelde_ruimten,
+                sanitair_voor_ruimten=lambda ruimten: (
+                    (
+                        ruimte,
+                        list(
+                            waardeer_sanitair(ruimte, self.stelselgroep, self.stelsel)
+                        ),
+                    )
+                    for ruimte in ruimten
+                    if ruimte.detail_soort is not None
+                ),
             )
 
         punten = utils.rond_af_op_kwart(

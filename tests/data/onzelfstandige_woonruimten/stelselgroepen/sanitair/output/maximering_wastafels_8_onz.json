@@ -15,6 +15,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
             "id": "sanitair__prive__Space_383020",
             "naam": "Badkamer",
             "bovenliggendeCriterium": {
@@ -51,6 +57,12 @@
             }
           },
           "punten": 3.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 8 onzelfstandige woonruimten"
+          }
         },
         {
           "criterium": {
@@ -120,7 +132,7 @@
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444__max_punten_wastafel",
             "naam": "Max 1 punt voor Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444"
             }
           },
           "punten": -0.13
@@ -145,22 +157,10 @@
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444__max_punten_meerpersoonswastafel",
             "naam": "Max 1.5 punt voor Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444"
             }
           },
           "punten": -0.19
-        },
-        {
-          "criterium": {
-            "id": "sanitair__prive",
-            "naam": "Privé"
-          }
-        },
-        {
-          "criterium": {
-            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 8 onzelfstandige woonruimten"
-          }
         }
       ]
     }

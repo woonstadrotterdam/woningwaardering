@@ -1,18 +1,17 @@
 import warnings
 from datetime import date
-from decimal import Decimal
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.gedeelde_logica import (
-    waardeer_keuken,
+    bouw_keuken,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -40,23 +39,18 @@ class Keuken(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
-        woningwaardering_groep.woningwaarderingen = []
 
-        for ruimte in eenheid.ruimten or []:
-            if utils.gedeeld_met_eenheden(ruimte):
-                continue
-            waarderingen = list(waardeer_keuken(ruimte, self.stelsel))
-            woningwaardering_groep.woningwaarderingen.extend(
-                utils.nest_waarderingen_onder_ruimte(
-                    ruimte, waarderingen, stelselgroep=self.stelselgroep
-                )
-            )
+        ruimten = [
+            ruimte
+            for ruimte in eenheid.ruimten or []
+            if not utils.gedeeld_met_eenheden(ruimte)
+        ]
+
+        bouw_keuken(ruimten, self.stelsel, woningwaardering_groep)
 
         if not woningwaardering_groep.woningwaarderingen:
             warnings.warn(
@@ -64,14 +58,9 @@ class Keuken(Stelselgroep):
                 UserWarning,
             )
 
-        totaal_punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
+        woningwaardering_groep.punten = utils.som_punten_waarderingen(
+            woningwaardering_groep.woningwaarderingen
         )
-        woningwaardering_groep.punten = float(totaal_punten)
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

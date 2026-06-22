@@ -15,6 +15,21 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
+          "criterium": {
             "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging1",
             "naam": "Berging",
             "bovenliggendeCriterium": {
@@ -72,21 +87,6 @@
             }
           },
           "punten": -0.5
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten",
-            "naam": "Verwarmde overige en verkeersruimten",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten"
-            }
-          }
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
-          }
         }
       ]
     }

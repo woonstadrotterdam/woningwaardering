@@ -11,7 +11,7 @@ import pandas as pd
 import requests
 from loguru import logger
 
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.criterium_id import GedeeldMetSoort
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
@@ -40,7 +40,6 @@ from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
 )
 from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
     Woningwaarderingstelselgroep,
-    WoningwaarderingstelselgroepReferentiedata,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
@@ -1105,110 +1104,60 @@ def installatie_id_deel(referentiedata: Referentiedata) -> str:
     return "onbekend"
 
 
-def nest_waarderingen_onder_ruimte(
-    ruimte: EenhedenRuimte,
-    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
-    *,
-    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
-) -> list[WoningwaarderingResultatenWoningwaardering]:
-    """Voegt een ruimtecriterium toe en nest installatiecriteria eronder.
+def criteriumid_onder_stelselgroep(
+    bron_id: str | None, stelselgroep_name: str
+) -> str | None:
+    """Haalt het onderliggend criteriumid op na ``{stelselgroep}__``.
 
-    Mechanisme om criterium-paden te verlengen; geen synoniem voor geneste
-    stelselgroep. Keuken en sanitair krijgen een extra laag per ruimte vóór de
-    installatiedetails.
+    Bron-waarderingen uit stelselgroep-modules beginnen met ``{stelselgroep}__``;
+    bij nesten onder een geneste stelselgroep via de keten is alleen dat restdeel nodig.
 
     Args:
-        ruimte (EenhedenRuimte): Ruimte waarvoor een ruimtecriterium wordt toegevoegd.
-        waarderingen (list[WoningwaarderingResultatenWoningwaardering]): Bestaande waarderingen.
-        stelselgroep (WoningwaarderingstelselgroepReferentiedata): Stelselgroep van de bron-waarderingen.
+        bron_id (str | None): Bron-criteriumid.
+        stelselgroep_name (str): Naam van de stelselgroep in het criteriumid.
 
     Returns:
-        list[WoningwaarderingResultatenWoningwaardering]: Waarderingen met ruimte-laag en herschreven ids.
+        str | None: Onderliggend id na ``{stelselgroep}__``, of ``None`` bij geen match.
 
     Example:
-        ``keuken__lengte_aanrecht`` → ``keuken__Space_1__lengte_aanrecht``.
+        >>> criteriumid_onder_stelselgroep("keuken__Space_1__lengte_aanrecht", "keuken")
+        'Space_1__lengte_aanrecht'
     """
-    if not waarderingen or ruimte.id is None:
-        return waarderingen
-
-    stelselgroep_id = CriteriumId.voor_stelselgroep(stelselgroep)
-    ruimte_criterium_id = stelselgroep_id.met_onderliggend(ruimte.id)
-    resultaat: list[WoningwaarderingResultatenWoningwaardering] = [
-        WoningwaarderingResultatenWoningwaardering(
-            criterium=ruimte_criterium_id.met_criterium(ruimte_weergavenaam(ruimte)),
-            punten=None,
-        )
-    ]
-
-    prefix = f"{stelselgroep.name}__"
-    for waardering in waarderingen:
-        if waardering.criterium is None or not waardering.criterium.id:
-            resultaat.append(waardering)
-            continue
-        criterium_id = waardering.criterium.id
-        if not criterium_id.startswith(prefix):
-            resultaat.append(waardering)
-            continue
-        suffix = criterium_id[len(prefix) :]
-        if suffix.startswith(f"{ruimte.id}__"):
-            installatie_deel = suffix[len(ruimte.id) + 2 :]
-            waardering.criterium.id = str(
-                ruimte_criterium_id.met_onderliggend(installatie_deel)
-            )
-            waardering.criterium.bovenliggende_criterium = (
-                ruimte_criterium_id.naar_criterium_sleutels()
-            )
-        resultaat.append(waardering)
-
-    return resultaat
+    if not bron_id:
+        return None
+    stelselgroep_prefix = f"{stelselgroep_name}__"
+    if not bron_id.startswith(stelselgroep_prefix):
+        return None
+    return bron_id[len(stelselgroep_prefix) :]
 
 
-def verplaats_waardering_onder_gedeeld_met(
-    waardering: WoningwaarderingResultatenWoningwaardering,
-    *,
-    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
-    gedeeld_met_id: CriteriumId,
-) -> None:
-    """Verplaatst een waardering onder een gedeeld-met-criterium met behoud van nesting.
+def herordenen_fluent_waarderingen(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> list[WoningwaarderingResultatenWoningwaardering]:
+    """Zet detailwaarderingen vóór structurele ouders (fluent API-materialisatie).
 
-    Mechanisme om criterium-paden te verlengen; geen synoniem voor geneste
-    stelselgroep. Past id en ``bovenliggendeCriterium`` in-place aan.
-
-    Args:
-        waardering (WoningwaarderingResultatenWoningwaardering): Te verplaatsen waardering.
-        stelselgroep (WoningwaarderingstelselgroepReferentiedata): Stelselgroepnaam aan het begin van het bron-criteriumid.
-        gedeeld_met_id (CriteriumId): Doel-gedeeld-met-criterium.
-
-    Example:
-        ``buitenruimten__Space_1`` → ``buitenruimten__gedeeld_met_3_adressen__Space_1``.
+    De keten-API materialiseert ouders vóór kinderen; bestaande output verwacht
+    doorgaans ``aantal``-details eerst, daarna ``punten``-totalen en correcties.
     """
-    if waardering.criterium is None or not waardering.criterium.id:
-        return
 
-    prefix = f"{stelselgroep.name}__"
-    criterium_id = waardering.criterium.id
-    if not criterium_id.startswith(prefix):
-        return
+    def _volgorde(
+        waardering: WoningwaarderingResultatenWoningwaardering,
+    ) -> tuple[int, int]:
+        if waardering.aantal is not None:
+            heeft_bovenliggende = (
+                waardering.criterium is not None
+                and waardering.criterium.bovenliggende_criterium is not None
+            )
+            return (0, 1 if heeft_bovenliggende else 0)
+        if waardering.punten is not None:
+            criterium_id = (
+                waardering.criterium.id if waardering.criterium is not None else ""
+            )
+            is_correctie = "correctie" in (criterium_id or "")
+            return (1, 0 if is_correctie else 1)
+        return (2, 0)
 
-    suffix = criterium_id[len(prefix) :]
-    nieuw_id = gedeeld_met_id.met_onderliggend(suffix)
-    waardering.criterium.id = str(nieuw_id)
-
-    parent_id: str | None = None
-    if waardering.criterium.bovenliggende_criterium is not None:
-        parent_id = waardering.criterium.bovenliggende_criterium.id
-
-    if parent_id is None or parent_id == stelselgroep.name:
-        nieuwe_parent = gedeeld_met_id
-    elif parent_id.startswith(prefix):
-        parent_suffix = parent_id[len(prefix) :]
-        nieuwe_parent = gedeeld_met_id.met_onderliggend(parent_suffix)
-    else:
-        return
-
-    waardering.criterium.bovenliggende_criterium = (
-        nieuwe_parent.naar_criterium_sleutels()
-    )
+    return sorted(waarderingen, key=_volgorde)
 
 
 def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:

@@ -16,10 +16,7 @@
         {
           "criterium": {
             "id": "sanitair__badruimte",
-            "naam": "Badruimte",
-            "bovenliggendeCriterium": {
-              "id": "sanitair"
-            }
+            "naam": "Badruimte"
           }
         },
         {
@@ -145,10 +142,7 @@
         {
           "criterium": {
             "id": "sanitair__slaapkamer",
-            "naam": "Slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "sanitair"
-            }
+            "naam": "Slaapkamer"
           }
         },
         {

@@ -15,6 +15,12 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten"
+          }
+        },
+        {
+          "criterium": {
             "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__Berging1",
             "naam": "Berging",
             "bovenliggendeCriterium": {
@@ -72,12 +78,6 @@
             }
           },
           "punten": -1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
-            "naam": "Verwarmde overige en verkeersruimten"
-          }
         }
       ]
     }

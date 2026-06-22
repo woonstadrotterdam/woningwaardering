@@ -1,9 +1,15 @@
+from decimal import Decimal
 from typing import Iterator
 
 from loguru import logger
 
+from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.criterium_id import CriteriumId
 from woningwaardering.stelsels.utils import classificeer_ruimte
+from woningwaardering.stelsels.woningwaardering_groep import (
+    Waardering,
+    WoningwaarderingGroep,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     WoningwaarderingResultatenWoningwaardering,
@@ -30,12 +36,74 @@ _VERWARMDE_VERTREKKEN = _STELSELGROEP_ID.met_onderliggend("verwarmde_vertrekken"
 _OPEN_KEUKEN = _STELSELGROEP_ID.met_onderliggend("open_keuken")
 
 
+VerkoelingEnVerwarmingResultaat = tuple[
+    EenhedenRuimte, WoningwaarderingResultatenWoningwaardering
+]
+
+
 def waardeer_verkoeling_en_verwarming(
     ruimten: list[EenhedenRuimte],
-) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
+) -> Iterator[VerkoelingEnVerwarmingResultaat]:
     yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(ruimten)
     yield from _waardeer_verwarmde_overige_ruimte(ruimten)
     yield from _waardeer_open_keuken(ruimten)
+
+
+def bouw_verkoeling_en_verwarming(
+    verkoeling_resultaten: list[VerkoelingEnVerwarmingResultaat],
+    subgroep_parent: Waardering | WoningwaarderingGroep,
+    deler: Decimal = Decimal("1"),
+) -> None:
+    """Re-emit leaf-verkoeling onder ``subgroep_parent`` via de fluent keten.
+
+    De caller bepaalt de parent-handle: direct onder de stelselgroep-root (standalone
+    zelfstandig), onder ``gedeeld_met_*`` (standalone onzelfstandig), of onder een
+    geneste stelselgroep-laag (GEM/GBA). Leaf-id's worden gestript tot
+    ``subgroep__ruimte_criterium``; punten worden gedeeld door ``deler``.
+
+    Args:
+        verkoeling_resultaten (list[VerkoelingEnVerwarmingResultaat]): Output van ``waardeer_verkoeling_en_verwarming``.
+        subgroep_parent (Waardering | WoningwaarderingGroep): Handle waaronder groeperingscriteria (bijv.
+            ``verwarmde_vertrekken``) nesten.
+        deler (Decimal): Deler voor punten (``1`` zelfstandig, ``onz_aantal`` onzelfstandig,
+            ``onz × adressen`` in GEM).
+    """
+    naam_key = Woningwaarderingstelselgroep.verkoeling_en_verwarming.name
+    subgroepen: dict[str, Waardering] = {}
+
+    for _ruimte, bron in verkoeling_resultaten:
+        if bron.criterium is None or bron.criterium.id is None:
+            continue
+        onderliggend_id = utils.criteriumid_onder_stelselgroep(
+            bron.criterium.id, naam_key
+        )
+        if onderliggend_id is None or "__" not in onderliggend_id:
+            continue
+
+        detail_punten = (
+            float(utils.rond_af(Decimal(str(bron.punten)) / deler, decimalen=2))
+            if bron.punten is not None
+            else None
+        )
+        if detail_punten is None and bron.aantal is None:
+            continue
+
+        # bijv. ``verwarmde_vertrekken__Space_1``
+        # subgroep = ``verwarmde_vertrekken``
+        # ruimte_criterium = ``Space_1``
+        subgroep, ruimte_criterium = onderliggend_id.split("__", 1)
+        subgroep_waardering = subgroepen.get(subgroep)
+        if subgroep_waardering is None:
+            subgroep_waardering = subgroep_parent.met_onderliggend(subgroep)
+            subgroepen[subgroep] = subgroep_waardering
+
+        subgroep_waardering.met_onderliggend(
+            ruimte_criterium,
+            naam=bron.criterium.naam,
+            meeteenheid=bron.criterium.meeteenheid,
+            aantal=bron.aantal,
+            punten=detail_punten,
+        )
 
 
 def _waardeer_verwarmde_overige_ruimte(
@@ -66,7 +134,7 @@ def _waardeer_verwarmde_overige_ruimte(
             yield (
                 ruimte,
                 _VERWARMDE_OVERIGE.met_onderliggend(ruimte.id).met_waardering(
-                    ruimte.naam, punten=1.0
+                    naam=ruimte.naam, punten=1.0
                 ),
             )
             totaal_punten += 1
@@ -119,7 +187,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                 yield (
                     ruimte,
                     _VERKOELDE_EN_VERWARMDE.met_onderliggend(ruimte.id).met_waardering(
-                        ruimte.naam, punten=punten
+                        naam=ruimte.naam, punten=punten
                     ),
                 )
                 if totaal_punten_verkoeld_en_verwarmd > 2:
@@ -148,7 +216,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                 yield (
                     ruimte,
                     _VERWARMDE_VERTREKKEN.met_onderliggend(ruimte.id).met_waardering(
-                        ruimte.naam, punten=punten
+                        naam=ruimte.naam, punten=punten
                     ),
                 )
 
@@ -186,6 +254,6 @@ def _waardeer_open_keuken(
             yield (
                 ruimte,
                 _OPEN_KEUKEN.met_onderliggend(ruimte.id).met_waardering(
-                    ruimte.naam, punten=2.0
+                    naam=ruimte.naam, punten=2.0
                 ),
             )

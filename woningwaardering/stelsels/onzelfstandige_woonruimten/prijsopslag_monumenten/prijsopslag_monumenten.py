@@ -12,10 +12,10 @@ from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
     opslag_rijksmonument,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -43,20 +43,16 @@ class PrijsopslagMonumenten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
 
-        woningwaardering_groep.woningwaarderingen = list(
-            woningwaardering
-            for woningwaardering in self._genereer_woningwaarderingen(
-                self.peildatum, eenheid, woningwaardering_resultaat
-            )
-            if woningwaardering is not None
-        )
+        for woningwaardering in self._genereer_woningwaarderingen(
+            self.peildatum, eenheid, woningwaardering_resultaat
+        ):
+            if woningwaardering is not None:
+                woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
         opslagpercentage = Decimal(
             sum(

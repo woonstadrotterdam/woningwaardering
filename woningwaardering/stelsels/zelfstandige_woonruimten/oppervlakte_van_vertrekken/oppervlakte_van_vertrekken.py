@@ -3,19 +3,15 @@ from decimal import Decimal
 
 from loguru import logger
 
+from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_vertrek,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import (
-    gedeeld_met_eenheden,
-    rond_af,
-    rond_af_op_kwart,
-)
+from woningwaardering.stelsels.woningwaardering_groep import WoningwaarderingGroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -43,28 +39,40 @@ class OppervlakteVanVertrekken(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        woningwaardering_groep = WoningwaarderingGroep(
+            stelsel=self.stelsel,
+            stelselgroep=self.stelselgroep,
         )
-
-        woningwaardering_groep.woningwaarderingen = []
 
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if not gedeeld_met_eenheden(ruimte)
+            if not utils.gedeeld_met_eenheden(ruimte)
         ]
 
         for ruimte in ruimten:
-            woningwaardering_groep.woningwaarderingen.extend(
-                waardeer_oppervlakte_van_vertrek(ruimte)
-            )
+            for bron in waardeer_oppervlakte_van_vertrek(ruimte):
+                if bron.criterium is None:
+                    continue
+                onderliggend_id = utils.criteriumid_onder_stelselgroep(
+                    bron.criterium.id, self.stelselgroep.name
+                )
+                if onderliggend_id is None:
+                    if bron.criterium.id == self.stelselgroep.name:
+                        onderliggend_id = ruimte.id or "ruimte"
+                    else:
+                        continue
+                elif onderliggend_id == "":
+                    onderliggend_id = ruimte.id or "ruimte"
+                woningwaardering_groep.met_onderliggend(
+                    onderliggend_id,
+                    naam=bron.criterium.naam,
+                    aantal=bron.aantal,
+                    meeteenheid=bron.criterium.meeteenheid,
+                )
 
-        punten = rond_af_op_kwart(
-            rond_af(
+        punten = utils.rond_af_op_kwart(
+            utils.rond_af(
                 sum(
                     Decimal(str(woningwaardering.aantal))
                     for woningwaardering in woningwaardering_groep.woningwaarderingen

@@ -10,7 +10,8 @@
           "code": "WOZ",
           "naam": "Punten voor de WOZ-waarde"
         }
-      }
+      },
+      "woningwaarderingen": []
     }
   ]
 }
