@@ -9,6 +9,7 @@ from typing import Any, Callable, Counter, Iterator, List, Tuple
 import pandas as pd
 import requests
 from loguru import logger
+from pydantic import BaseModel
 
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -1016,6 +1017,32 @@ def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:
         if ruimte.naam is not None and naam_counter[ruimte.naam] > 1:
             nummering_counter[ruimte.naam] += 1
             ruimte.naam = f"{ruimte.naam} {nummering_counter[ruimte.naam]}"
+
+
+def waarschuw_dubbele_ids(model: BaseModel) -> None:
+    """
+    Waarschuw bij dubbele, niet-lege id's binnen dezelfde collectie.
+    """
+    for veld in type(model).model_fields:
+        waarde = getattr(model, veld, None)
+        if isinstance(waarde, BaseModel):
+            waarschuw_dubbele_ids(waarde)
+        elif isinstance(waarde, list):
+            items = [item for item in waarde if isinstance(item, BaseModel)]
+            id_counter = Counter(
+                id_waarde
+                for item in items
+                if (id_waarde := getattr(item, "id", None)) is not None
+            )
+            for id_waarde, aantal in id_counter.items():
+                if aantal > 1:
+                    warnings.warn(
+                        f"Id '{id_waarde}' komt {aantal} keer voor in "
+                        f"'{type(model).__name__}.{veld}'.",
+                        UserWarning,
+                    )
+            for item in items:
+                waarschuw_dubbele_ids(item)
 
 
 def _classificeer_ruimte_dec(
