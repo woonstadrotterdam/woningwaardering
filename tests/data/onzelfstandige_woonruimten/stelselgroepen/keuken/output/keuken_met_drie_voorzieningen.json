@@ -14,12 +14,27 @@
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
+            "id": "keuken__prive__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken__prive"
+            }
+          }
+        },
+        {
           "aantal": 1000.0,
           "criterium": {
             "id": "keuken__prive__keuken__lengte_aanrecht_aanrecht",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__prive"
+              "id": "keuken__prive__keuken"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -31,10 +46,10 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "keuken__prive__keuken__extra_voorziening",
-            "naam": "Inbouw koelkast (in zelfde ruimte)",
+            "id": "keuken__prive__keuken__extra_voorziening_inbouw_koelkast",
+            "naam": "Inbouw koelkast",
             "bovenliggendeCriterium": {
-              "id": "keuken__prive"
+              "id": "keuken__prive__keuken"
             },
             "meeteenheid": {
               "code": "STU",
@@ -46,10 +61,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "keuken__prive__keuken__extra_voorziening",
+            "id": "keuken__prive__keuken__extra_voorziening_inbouw_oven_elektrisch",
             "naam": "Inbouw oven elektrisch",
             "bovenliggendeCriterium": {
-              "id": "keuken__prive"
+              "id": "keuken__prive__keuken"
             },
             "meeteenheid": {
               "code": "STU",
@@ -57,12 +72,6 @@
             }
           },
           "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "keuken__prive",
-            "naam": "Privé"
-          }
         }
       ]
     }

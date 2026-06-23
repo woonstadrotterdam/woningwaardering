@@ -14,6 +14,13 @@
       "punten": 5.25,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_zolder__correctie_zolder_zonder_vaste_trap",
+            "naam": "Correctie: zolder zonder vaste trap"
+          },
+          "punten": -2.25
+        },
+        {
           "aantal": 9.52,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal",
@@ -28,7 +35,7 @@
         {
           "aantal": 6.85,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_berging",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_berging",
             "naam": "Berging",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
@@ -42,7 +49,7 @@
         {
           "aantal": 2.67,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_zolder",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_zolder",
             "naam": "Zolder",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
@@ -52,13 +59,6 @@
               "naam": "Vierkante meter, m2"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_zolder__correctie_zolder_zonder_vaste_trap",
-            "naam": "Correctie: zolder zonder vaste trap"
-          },
-          "punten": -2.25
         }
       ]
     }

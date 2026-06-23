@@ -1,17 +1,15 @@
 from datetime import date
-from decimal import Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
 from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen import (
     waardeer_bijzondere_voorzieningen,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -39,36 +37,24 @@ class BijzondereVoorzieningen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+            self.stelsel, self.stelselgroep
         )
 
-        woningwaardering_groep.woningwaarderingen = list(
-            waardeer_bijzondere_voorzieningen(
-                peildatum=self.peildatum,
-                eenheid=eenheid,
-                stelselgroepen_zonder_opslag=[
-                    self.stelselgroep,
-                    Woningwaarderingstelselgroep.aftrekpunten,
-                    Woningwaarderingstelselgroep.prijsopslag_monumenten,
-                ],
-                stelsel=self.stelsel,
-                woningwaardering_resultaat=woningwaardering_resultaat,
-            )
+        waardeer_bijzondere_voorzieningen(
+            peildatum=self.peildatum,
+            eenheid=eenheid,
+            stelselgroepen_zonder_opslag=[
+                self.stelselgroep,
+                Woningwaarderingstelselgroep.aftrekpunten,
+                Woningwaarderingstelselgroep.prijsopslag_monumenten,
+            ],
+            stelsel=self.stelsel,
+            waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+            woningwaardering_resultaat=woningwaardering_resultaat,
         )
 
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-        )
-
-        woningwaardering_groep.punten = float(punten)
+        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -82,7 +68,7 @@ if __name__ == "__main__":  # pragma: no cover
         instance=BijzondereVoorzieningen(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer(
+    ) as waarderingsgroep_bouwer:
+        waarderingsgroep_bouwer.waardeer(
             "tests/data/onzelfstandige_woonruimten/stelselgroepen/bijzondere_voorzieningen/input/zorgwoning.json"
         )

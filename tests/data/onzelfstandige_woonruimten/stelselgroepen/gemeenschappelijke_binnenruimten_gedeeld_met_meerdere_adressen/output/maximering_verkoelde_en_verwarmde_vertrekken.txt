@@ -10,17 +10,21 @@ GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
         - Keuken                                            20.00 m²
         - Keuken                                            20.00 m²
       - Verkoeling en verwarming
+        - Verwarmde vertrekken
+          - Woonkamer                                                  0.50 pt
+          - Keuken                                                     0.50 pt
+          - Keuken                                                     0.50 pt
         - Verkoelde vertrekken
           - Woonkamer                                                  0.25 pt
           - Keuken                                                     0.25 pt
           - Keuken                                                     0.25 pt
           - Maximaal 2 punten                                         -0.25 pt
-        - Verwarmde vertrekken
-          - Woonkamer                                                  0.50 pt
-          - Keuken                                                     0.50 pt
-          - Keuken                                                     0.50 pt
       - Keuken
-        - Keuken: Lengte aanrecht                         3001.00 mm   2.50 pt
-        - Keuken: Lengte aanrecht                         3001.00 mm   2.50 pt
+        - Keuken
+          - Lengte aanrecht                               3001.00 mm   2.50 pt
+          - Lengte aanrecht                               3001.00 mm   2.50 pt
+        - Keuken
+          - Lengte aanrecht                               3001.00 mm   2.50 pt
+          - Lengte aanrecht                               3001.00 mm   2.50 pt
                                                                       --------
   Totaal                                                              22.00 pt

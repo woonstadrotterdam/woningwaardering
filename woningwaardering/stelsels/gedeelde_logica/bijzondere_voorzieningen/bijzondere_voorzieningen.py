@@ -1,16 +1,16 @@
 from datetime import date
 from decimal import Decimal
-from typing import Iterator
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.bouwers import (
+    WaarderingBouwer,
+    WaarderingsgroepBouwer,
+)
 from woningwaardering.stelsels.utils import gedeeld_met_eenheden
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
@@ -31,10 +31,12 @@ def waardeer_bijzondere_voorzieningen(
     eenheid: EenhedenEenheid,
     stelselgroepen_zonder_opslag: list[WoningwaarderingstelselgroepReferentiedata],
     stelsel: WoningwaarderingstelselReferentiedata,
+    *,
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
     ) = None,
-) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+) -> list[WaarderingBouwer]:
     """Genereert de woningwaarderingen voor bijzondere voorzieningen.
 
     Args:
@@ -42,10 +44,11 @@ def waardeer_bijzondere_voorzieningen(
         eenheid (EenhedenEenheid): De eenheid.
         stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]): De stelselgroepen die niet moeten worden opgehoogd met zorgwoning opslag.
         stelsel (WoningwaarderingstelselReferentiedata): Het woningwaarderingsstelsel.
+        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het woningwaardering resultaat.
 
-    Yields:
-        WoningwaarderingResultatenWoningwaardering: De woningwaarderingen.
+    Returns:
+        list[WaarderingBouwer]: De aangemaakte woningwaarderingen.
     """
     woningwaarderingen = [
         _opslag_zorgwoning(
@@ -53,15 +56,14 @@ def waardeer_bijzondere_voorzieningen(
             eenheid,
             stelselgroepen_zonder_opslag,
             stelsel,
+            waarderingsgroep_bouwer,
             woningwaardering_resultaat,
         ),
-        _aanbelfunctie_met_video_en_audioverbinding(eenheid),
-        _prive_laadpaal(eenheid),
+        _aanbelfunctie_met_video_en_audioverbinding(eenheid, waarderingsgroep_bouwer),
+        _prive_laadpaal(eenheid, waarderingsgroep_bouwer),
     ]
 
-    for waardering in woningwaarderingen:
-        if waardering is not None:
-            yield waardering
+    return [waardering for waardering in woningwaarderingen if waardering is not None]
 
 
 def _opslag_zorgwoning(
@@ -69,10 +71,11 @@ def _opslag_zorgwoning(
     eenheid: EenhedenEenheid,
     stelselgroepen_zonder_opslag: list[WoningwaarderingstelselgroepReferentiedata],
     stelsel: WoningwaarderingstelselReferentiedata,
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
     ) = None,
-) -> WoningwaarderingResultatenWoningwaardering | None:
+) -> WaarderingBouwer | None:
     """Als sprake is van een zorgwoning, dan volgt er een opslag van 35% op het puntentotaal van
     de rubrieken 1 tot en met 11 (of 1 tot en met 10 voor onzelfstandige woonruimten) van het
     woningwaarderingsstelsel. Deze opslag wordt gedaan in de rubriek Bijzondere voorzieningen.
@@ -82,10 +85,11 @@ def _opslag_zorgwoning(
         eenheid (EenhedenEenheid): De eenheid die wordt gewaardeerd.
         stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]): Lijst van stelselgroepen die niet worden meegenomen in de opslag.
         stelsel (WoningwaarderingstelselReferentiedata): Het type woningwaarderingsstelsel.
+        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het bestaande waarderingsresultaat, indien aanwezig.
 
     Returns:
-        WoningwaarderingResultatenWoningwaardering | None: De woningwaardering met 35% opslag als het een zorgwoning betreft, anders None.
+        WaarderingBouwer | None: De woningwaardering met 35% opslag als het een zorgwoning betreft, anders None.
 
     Raises:
         ValueError: Als het stelsel niet gelijk is aan zelfstandige woonruimten of onzelfstandige woonruimten.
@@ -150,32 +154,27 @@ def _opslag_zorgwoning(
         f"Eenheid ({eenheid.id}) is een zorgwoning: {verhoging} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
-    return WoningwaarderingResultatenWoningwaardering(
-        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-            naam="Zorgwoning 35% puntenverhoging",
-            id=str(
-                CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
-                    criterium="zorgwoning_puntenverhoging",
-                )
-            ),
-        ),
+    return waarderingsgroep_bouwer.maak_onderliggende(
+        id="zorgwoning_puntenverhoging",
+        naam="Zorgwoning 35% puntenverhoging",
         punten=float(verhoging),
     )
 
 
 def _aanbelfunctie_met_video_en_audioverbinding(
     eenheid: EenhedenEenheid,
-) -> WoningwaarderingResultatenWoningwaardering | None:
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+) -> WaarderingBouwer | None:
     """Een aanbelfunctie met video- en audioverbinding waarbij de voordeur
     automatisch kan worden geopend vanuit de woning wordt gewaardeerd
     met 0,25 punt.
 
     Args:
         eenheid (EenhedenEenheid): De eenheid waarvoor de opslag berekend wordt.
+        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Returns:
-        WoningwaarderingResultatenWoningwaardering | None: De woningwaardering met 0,25 punt
+        WaarderingBouwer | None: De woningwaardering met 0,25 punt
         als de eenheid een aanbelfunctie met video en audio heeft, anders None.
     """
     if not any(
@@ -192,30 +191,25 @@ def _aanbelfunctie_met_video_en_audioverbinding(
         f"Eenheid ({eenheid.id}) heeft een aanbelfunctie met video en audioverbinding: 0.25 punt voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
-    return WoningwaarderingResultatenWoningwaardering(
-        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-            naam="Aanbelfunctie met video- en audioverbinding",
-            id=str(
-                CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
-                    criterium="aanbelfunctie_met_video_en_audioverbinding",
-                )
-            ),
-        ),
+    return waarderingsgroep_bouwer.maak_onderliggende(
+        id="aanbelfunctie_met_video_en_audioverbinding",
+        naam="Aanbelfunctie met video- en audioverbinding",
         punten=0.25,
     )
 
 
 def _prive_laadpaal(
     eenheid: EenhedenEenheid,
-) -> WoningwaarderingResultatenWoningwaardering | None:
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+) -> WaarderingBouwer | None:
     """Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik
     door de bewoners wordt gewaardeerd met 2 punten.
 
     Args:
         eenheid (EenhedenEenheid): De eenheid waarvoor de waardering berekend wordt.
+        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
     Returns:
-        WoningwaarderingResultatenWoningwaardering | None: De woningwaardering met 2 punten
+        WaarderingBouwer | None: De woningwaardering met 2 punten
         als de eenheid een laadpaal heeft, anders None.
     """
     aantal_laadpalen = sum(
@@ -234,17 +228,10 @@ def _prive_laadpaal(
         f"Eenheid ({eenheid.id}) heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'}: {punten_laadpalen} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
-    return WoningwaarderingResultatenWoningwaardering(
-        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-            naam="Laadpalen",
-            id=str(
-                CriteriumId(
-                    stelselgroep=Woningwaarderingstelselgroep.bijzondere_voorzieningen,
-                    criterium="laadpalen",
-                )
-            ),
-            meeteenheid=Meeteenheid.stuks,
-        ),
+    return waarderingsgroep_bouwer.maak_onderliggende(
+        id="laadpalen",
+        naam="Laadpalen",
+        meeteenheid=Meeteenheid.stuks,
         aantal=aantal_laadpalen,
         punten=punten_laadpalen,
     )

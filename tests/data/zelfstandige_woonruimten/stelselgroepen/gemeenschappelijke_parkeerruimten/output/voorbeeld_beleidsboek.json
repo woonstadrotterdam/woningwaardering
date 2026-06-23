@@ -14,12 +14,18 @@
       "punten": 4.75,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen",
+            "naam": "Gedeeld met 10 adressen"
+          }
+        },
+        {
           "aantal": 5.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen__1",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__1",
             "naam": "Type II + laadpaal",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen"
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen"
             },
             "meeteenheid": {
               "code": "STU",
@@ -31,10 +37,10 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen__2",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__2",
             "naam": "Type III",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen"
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen"
             },
             "meeteenheid": {
               "code": "STU",
@@ -42,12 +48,6 @@
             }
           },
           "punten": 0.8
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__10__adressen",
-            "naam": "Gedeeld met 10 adressen"
-          }
         }
       ]
     }

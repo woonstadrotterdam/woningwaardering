@@ -14,12 +14,28 @@
       "punten": 11.5,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen",
+            "naam": "Gedeeld met 2 adressen"
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_vertrekken",
+            "naam": "Oppervlakte van vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen"
+            }
+          },
+          "punten": 5.0
+        },
+        {
           "aantal": 10.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__oppervlakte_van_vertrekken__Space_190033",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_vertrekken__Space_190033",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__oppervlakte_van_vertrekken"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,21 +45,29 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__oppervlakte_van_vertrekken",
-            "naam": "Oppervlakte van vertrekken",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair",
+            "naam": "Sanitair",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen"
             }
-          },
-          "punten": 5.0
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair"
+            }
+          }
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033__wastafel",
-            "naam": "Badruimte - Wastafel",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__wastafel",
+            "naam": "Wastafel",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -55,10 +79,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033__bad",
-            "naam": "Badruimte - Bad",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__bad",
+            "naam": "Bad",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -70,10 +94,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__bubbelfunctie_van_het_bad",
+            "naam": "Voorzieningen: Bubbelfunctie van het bad",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -85,10 +109,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Douchewand",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__douchewand",
+            "naam": "Voorzieningen: Douchewand",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -100,10 +124,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Handdoekenradiator",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__handdoekenradiator",
+            "naam": "Voorzieningen: Handdoekenradiator",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -115,10 +139,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__ingebouwd_kastje_met_in_of_opgebouwde_wastafel",
+            "naam": "Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -130,10 +154,10 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Kastruimte",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__kastruimte",
+            "naam": "Voorzieningen: Kastruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -144,10 +168,10 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033__max_punten",
-            "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__max_punten_kastruimte",
+            "naam": "Voorzieningen: Max 0.75 punten voor Kastruimte",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             }
           },
           "punten": -0.38
@@ -155,10 +179,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__stopcontact_bij_wastafel",
+            "naam": "Voorzieningen: Stopcontact bij wastafel",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -170,10 +194,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__eenhandsmengkraan",
+            "naam": "Voorzieningen: Éénhandsmengkraan",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -185,10 +209,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033",
-            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__thermostatische_mengkraan",
+            "naam": "Voorzieningen: Thermostatische mengkraan",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             },
             "meeteenheid": {
               "code": "STU",
@@ -199,28 +223,13 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair__Space_190033__maximering_punten_voorzieningen",
-            "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__maximering_punten_voorzieningen",
+            "naam": "Voorzieningen: Max verdubbeling punten bad en douche",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033"
             }
           },
           "punten": -0.13
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen__sanitair",
-            "naam": "Sanitair",
-            "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen"
-            }
-          }
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__2__adressen",
-            "naam": "Gedeeld met 2 adressen"
-          }
         }
       ]
     }

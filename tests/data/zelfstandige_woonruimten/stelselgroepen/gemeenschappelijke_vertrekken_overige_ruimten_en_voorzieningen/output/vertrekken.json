@@ -14,25 +14,17 @@
       "punten": 3.75,
       "woningwaarderingen": [
         {
-          "aantal": 10.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen__oppervlakte_van_vertrekken__Space_1",
-            "naam": "Slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen__oppervlakte_van_vertrekken"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen",
+            "naam": "Gedeeld met 5 adressen"
           }
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen__oppervlakte_van_vertrekken",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__oppervlakte_van_vertrekken",
             "naam": "Oppervlakte van vertrekken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen"
             }
           },
           "punten": 2.0
@@ -40,10 +32,10 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen__oppervlakte_van_vertrekken__Space_2",
-            "naam": "Woonkamer",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__oppervlakte_van_vertrekken__Space_1",
+            "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen__oppervlakte_van_vertrekken"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__oppervlakte_van_vertrekken"
             },
             "meeteenheid": {
               "code": "M2",
@@ -53,24 +45,32 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen__oppervlakte_van_vertrekken",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen",
+            "naam": "Gedeeld met 6 adressen"
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__oppervlakte_van_vertrekken",
             "naam": "Oppervlakte van vertrekken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen"
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen"
             }
           },
           "punten": 1.66666667
         },
         {
+          "aantal": 10.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__5__adressen",
-            "naam": "Gedeeld met 5 adressen"
-          }
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met__6__adressen",
-            "naam": "Gedeeld met 6 adressen"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__oppervlakte_van_vertrekken__Space_2",
+            "naam": "Woonkamer",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__oppervlakte_van_vertrekken"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
           }
         }
       ]

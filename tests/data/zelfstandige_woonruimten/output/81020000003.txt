@@ -44,10 +44,10 @@ VERKOELING EN VERWARMING
   Totaal                                                              13.00 pt
 
 BUITENRUIMTEN
-  Privé buitenruimten aanwezig                                         2.00 pt
   Privé                                                     54.00 m²  18.90 pt
     - Tuin                                                  53.58 m²
-  Maximaal 15 punten                                                  -6.00 pt
+  Privé buitenruimten aanwezig                                         2.00 pt
+  Maximaal 15 punten                                                  -5.90 pt
                                                                       --------
   Totaal                                                              15.00 pt
 
@@ -57,16 +57,19 @@ ENERGIEPRESTATIE
   Totaal                                                              52.00 pt
 
 KEUKEN
-  Keuken: Lengte aanrecht                                 1800.00 mm   4.00 pt
+  Keuken
+    - Lengte aanrecht                                     1800.00 mm   4.00 pt
                                                                       --------
   Totaal                                                               4.00 pt
 
 SANITAIR
-  Badruimte - Staand Toilet                                  1.00 st   2.00 pt
-  Badruimte - Wastafel                                       1.00 st   1.00 pt
-  Badruimte - Douche                                         1.00 st   4.00 pt
-  Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
-  Toiletruimte - Wastafel                                    1.00 st   1.00 pt
+  Badruimte
+    - Staand Toilet                                          1.00 st   2.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
+    - Douche                                                 1.00 st   4.00 pt
+  Toiletruimte
+    - Staand Toilet                                          1.00 st   3.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
                                                                       --------
   Totaal                                                              11.00 pt
 

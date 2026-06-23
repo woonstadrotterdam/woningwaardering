@@ -5,6 +5,10 @@ from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroep
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.bouwers import (
+    WaarderingBouwer,
+    WaarderingsgroepBouwer,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     is_zolder_zonder_vaste_trap,
     maak_zolder_correctie_waardering,
@@ -20,7 +24,6 @@ from woningwaardering.stelsels.utils import (
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -49,14 +52,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            ),
+        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+            self.stelsel, self.stelselgroep
         )
-
-        woningwaardering_groep.woningwaarderingen = []
 
         ruimten = [
             ruimte
@@ -74,8 +72,11 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             start=Decimal("0"),
         )
 
+        alle_waarderingen: list[WaarderingBouwer] = []
         for ruimte in ruimten:
-            woningwaarderingen = list(waardeer_oppervlakte_van_overige_ruimte(ruimte))
+            waarderingen = waardeer_oppervlakte_van_overige_ruimte(
+                ruimte, waarderingsgroep_bouwer=waarderingsgroep_bouwer
+            )
 
             # 2.2.2.3 Zolderruimte zonder vaste trap
             # Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden aangemerkt en er is geen vaste trap naar de zolder,
@@ -83,31 +84,32 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             # Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is.
             # Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
             if is_zolder_zonder_vaste_trap(ruimte):
-                woningwaarderingen.append(
+                waarderingen.append(
                     maak_zolder_correctie_waardering(
-                        ruimte, totaal_oppervlakte, self.stelselgroep
+                        ruimte,
+                        totaal_oppervlakte,
+                        waarderingsgroep_bouwer=waarderingsgroep_bouwer,
                     )
                 )
 
-            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
+            alle_waarderingen.extend(waarderingen)
 
-        woningwaardering_groep.woningwaarderingen = (
-            structureer_subtotaal_bij_correcties(
-                woningwaardering_groep.woningwaarderingen or [],
-                stelselgroep=self.stelselgroep,
-                factor=Decimal("0.75"),
-            )
+        structureer_subtotaal_bij_correcties(
+            alle_waarderingen,
+            waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+            factor=Decimal("0.75"),
         )
 
-        waarderingen = woningwaardering_groep.woningwaarderingen or []
-        if any(w.punten is not None for w in waarderingen):
-            woningwaardering_groep.punten = som_punten_waarderingen(waarderingen)
+        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        groep_waarderingen = woningwaardering_groep.woningwaarderingen or []
+        if any(w.punten is not None for w in groep_waarderingen):
+            woningwaardering_groep.punten = som_punten_waarderingen(groep_waarderingen)
         else:
             punten = rond_af_op_kwart(
                 rond_af(
                     sum(
                         Decimal(str(w.aantal))
-                        for w in waarderingen
+                        for w in groep_waarderingen
                         if w.aantal is not None
                     ),
                     decimalen=0,
@@ -128,5 +130,5 @@ if __name__ == "__main__":  # pragma: no cover
         instance=OppervlakteVanOverigeRuimten(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer("tests/data/generiek/input/37101000032.json")
+    ) as waarderingsgroep_bouwer:
+        waarderingsgroep_bouwer.waardeer("tests/data/generiek/input/37101000032.json")

@@ -44,14 +44,14 @@ VERKOELING EN VERWARMING
   Totaal                                                              14.00 pt
 
 BUITENRUIMTEN
-  Privé buitenruimten aanwezig                                         2.00 pt
   Privé                                                     22.00 m²   7.70 pt
     - Balkon 1                                               3.14 m²
     - Balkon 2                                               3.14 m²
     - Dakterras                                             15.93 m²
   Gedeeld met 2 adressen                                    49.00 m²  18.38 pt
     - Tuin                                                  49.11 m²
-  Maximaal 15 punten                                                  -13.00 pt
+  Privé buitenruimten aanwezig                                         2.00 pt
+  Maximaal 15 punten                                                  -13.08 pt
                                                                       --------
   Totaal                                                              15.00 pt
 
@@ -61,16 +61,19 @@ ENERGIEPRESTATIE
   Totaal                                                              22.00 pt
 
 KEUKEN
-  Keuken: Lengte aanrecht                                 2700.00 mm   7.00 pt
+  Keuken
+    - Lengte aanrecht                                     2700.00 mm   7.00 pt
                                                                       --------
   Totaal                                                               7.00 pt
 
 SANITAIR
-  Badruimte - Staand Toilet                                  1.00 st   2.00 pt
-  Badruimte - Wastafel                                       2.00 st   2.00 pt
-  Badruimte - Bad en douche                                  1.00 st   7.00 pt
-  Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
-  Toiletruimte - Wastafel                                    1.00 st   1.00 pt
+  Badruimte
+    - Staand Toilet                                          1.00 st   2.00 pt
+    - Wastafel                                               2.00 st   2.00 pt
+    - Bad en douche                                          1.00 st   7.00 pt
+  Toiletruimte
+    - Staand Toilet                                          1.00 st   3.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
                                                                       --------
   Totaal                                                              15.00 pt
 

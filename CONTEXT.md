@@ -82,9 +82,9 @@ Een lokale uitbreiding op gegenereerde VERA-modellen wanneer de standaard onvold
 
 Een CSV-bestand met constanten of tabulaire regeldata die nodig zijn voor puntberekeningen. CSV wordt gebruikt wanneer tabeldata in code, JSON of YAML minder leesbaar zou zijn.
 
-### CriteriumId
+### Criterium-id
 
-Een samengestelde identifier voor een criterium in de output. Onderdelen worden met dubbele underscores (`__`) samengevoegd, bijvoorbeeld stelselgroep, ruimte-id, criterium of gedeeld-met-informatie.
+Een samengestelde identifier voor een criterium in de output. Id's worden afgeleid via `maak_waardering` / `maak_gedeeld_met`: elk segment wordt met `__` aan de id van de bovenliggende gekoppeld (pad-id). Zie `docs/introductie/opzet.md`.
 
 ### criteriumSleutel
 
@@ -93,6 +93,10 @@ Een sleutel waarmee criteria logisch gegroepeerd kunnen worden, bijvoorbeeld om 
 ### bovenliggendeCriterium
 
 Verwijzing van een waardering naar een bovenliggend criterium binnen dezelfde stelselgroep-groep (JSON: `bovenliggendeCriterium`). Criteriumsleutels volgen de id-families in `docs/introductie/opzet.md` (ruimteregel, gedeeld-met aggregaat, criteriumnaam-regel).
+
+### Structuurterminologie
+
+De samenhang tussen waarderingen in de output is een keten via `bovenliggendeCriterium`: elke regel is een waardering met een `criterium`, en een criterium kan onderliggende criteria hebben. Het onderscheid tussen beide is scherp: een **criterium** draagt de identiteit, naam en plek in de hiërarchie (`id`, `naam`, `bovenliggendeCriterium`, `meeteenheid`) en heeft nooit punten; `punten` en `aantal` zitten op de **waardering**. Een groeperende regel (zoals een gedeeld-met- of categorieregel) is daarom in essentie een criterium zonder punten; een regel met toegekende punten is een waardering. Beschrijf de structuur met deze domeintaal — **waardering**, **criterium** en **bovenliggende** — en niet met informatica-boomjargon als "knoop", "node", "leaf", "wortel", "root", "boom" of "tree". De waardering boven een andere is de _bovenliggende_; een waardering zonder bovenliggende staat _direct onder de groep_.
 
 ### UserWarning
 

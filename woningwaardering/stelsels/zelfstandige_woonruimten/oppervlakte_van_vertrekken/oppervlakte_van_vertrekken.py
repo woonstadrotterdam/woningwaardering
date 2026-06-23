@@ -4,6 +4,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_vertrek,
 )
@@ -15,7 +16,6 @@ from woningwaardering.stelsels.utils import (
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -43,14 +43,9 @@ class OppervlakteVanVertrekken(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+            self.stelsel, self.stelselgroep
         )
-
-        woningwaardering_groep.woningwaarderingen = []
 
         ruimten = [
             ruimte
@@ -59,9 +54,11 @@ class OppervlakteVanVertrekken(Stelselgroep):
         ]
 
         for ruimte in ruimten:
-            woningwaardering_groep.woningwaarderingen.extend(
-                waardeer_oppervlakte_van_vertrek(ruimte)
+            waardeer_oppervlakte_van_vertrek(
+                ruimte, waarderingsgroep_bouwer=waarderingsgroep_bouwer
             )
+
+        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
         punten = rond_af_op_kwart(
             rond_af(
@@ -90,5 +87,5 @@ if __name__ == "__main__":  # pragma: no cover
         instance=OppervlakteVanVertrekken(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer("tests/data/generiek/input/37101000032.json")
+    ) as waarderingsgroep_bouwer:
+        waarderingsgroep_bouwer.waardeer("tests/data/generiek/input/37101000032.json")

@@ -15,6 +15,21 @@
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive"
+            }
+          }
+        },
+        {
+          "criterium": {
             "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__Berging1",
             "naam": "Berging",
             "bovenliggendeCriterium": {
@@ -72,21 +87,6 @@
             }
           },
           "punten": -1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten",
-            "naam": "Verwarmde overige en verkeersruimten",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__prive"
-            }
-          }
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__prive",
-            "naam": "Privé"
-          }
         }
       ]
     }

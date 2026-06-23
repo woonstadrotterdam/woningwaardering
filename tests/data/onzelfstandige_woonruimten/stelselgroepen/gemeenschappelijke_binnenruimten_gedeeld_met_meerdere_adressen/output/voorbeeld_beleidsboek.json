@@ -14,36 +14,37 @@
       "punten": 2.5,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__oppervlakte_van_overige_ruimten__B",
-            "naam": "Toilet",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen",
+            "naam": "Gedeeld met 4 adressen",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__oppervlakte_van_overige_ruimten"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten"
             }
           }
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__oppervlakte_van_overige_ruimten",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__oppervlakte_van_overige_ruimten",
             "naam": "Oppervlakte van overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen"
             }
           },
           "punten": 0.09375
         },
         {
-          "aantal": 20.0,
+          "aantal": 2.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__oppervlakte_van_vertrekken__A",
-            "naam": "Keuken",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__oppervlakte_van_overige_ruimten__B",
+            "naam": "Toilet",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__oppervlakte_van_vertrekken"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__oppervlakte_van_overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -53,49 +54,81 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__oppervlakte_van_vertrekken",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__oppervlakte_van_vertrekken",
             "naam": "Oppervlakte van vertrekken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen"
             }
           },
           "punten": 1.25
         },
         {
+          "aantal": 20.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__verkoeling_en_verwarming__verwarmde_vertrekken__verwarmde_vertrekken__A",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__oppervlakte_van_vertrekken__A",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__verkoeling_en_verwarming__verwarmde_vertrekken"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__oppervlakte_van_vertrekken"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__verkoeling_en_verwarming",
+            "naam": "Verkoeling en verwarming",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__verkoeling_en_verwarming"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__verkoeling_en_verwarming__verwarmde_vertrekken__A",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 0.125
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__verkoeling_en_verwarming__verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken",
+            "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__verkoeling_en_verwarming"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen"
             }
           }
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__verkoeling_en_verwarming",
-            "naam": "Verkoeling en verwarming",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A",
+            "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken"
             }
           }
         },
         {
           "aantal": 2999.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__keuken__A__lengte_aanrecht_None",
-            "naam": "Keuken: Lengte aanrecht",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__lengte_aanrecht_None",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__keuken"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -107,10 +140,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__keuken__A__extra_voorziening",
-            "naam": "Keuken: Inbouw magnetron",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorziening_inbouw_koelkast",
+            "naam": "Inbouw koelkast",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__keuken"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A"
             },
             "meeteenheid": {
               "code": "STU",
@@ -122,10 +155,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__keuken__A__extra_voorziening",
-            "naam": "Keuken: Inbouw koelkast",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorziening_inbouw_oven_elektrisch",
+            "naam": "Inbouw oven elektrisch",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__keuken"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A"
             },
             "meeteenheid": {
               "code": "STU",
@@ -137,10 +170,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__keuken__A__extra_voorziening",
-            "naam": "Keuken: Inbouw oven elektrisch",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorziening_inbouw_magnetron",
+            "naam": "Inbouw magnetron",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__keuken"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A"
             },
             "meeteenheid": {
               "code": "STU",
@@ -151,56 +184,51 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__keuken",
-            "naam": "Keuken",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__sanitair",
+            "naam": "Sanitair",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen"
             }
           }
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__sanitair__B__hangend_toilet",
-            "naam": "Toilet: Hangend toilet",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__sanitair__B",
+            "naam": "Toilet",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__sanitair"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__sanitair"
+            }
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__sanitair__B__hangend_toilet",
+            "naam": "Hangend toilet",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__sanitair__B"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.234375
         },
         {
+          "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__sanitair__B__wastafel",
-            "naam": "Toilet: Wastafel",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__sanitair__B__wastafel",
+            "naam": "Wastafel",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__sanitair"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__sanitair__B"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 0.0625
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen__sanitair",
-            "naam": "Sanitair",
-            "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen"
-            }
-          }
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten__gedeeld_met__4__adressen",
-            "naam": "Gedeeld met 4 adressen",
-            "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten"
-            }
-          }
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
-          }
         }
       ]
     }

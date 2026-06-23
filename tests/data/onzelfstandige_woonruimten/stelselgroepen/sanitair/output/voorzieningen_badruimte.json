@@ -14,12 +14,27 @@
       "punten": 13.0,
       "woningwaarderingen": [
         {
-          "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_885432__wastafel",
-            "naam": "Badruimte - Wastafel",
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
+            "id": "sanitair__prive__Space_885432",
+            "naam": "Badruimte",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive"
+            }
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__prive__Space_885432__wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -31,10 +46,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_885432__bad_en_douche",
-            "naam": "Badruimte - Bad en douche",
+            "id": "sanitair__prive__Space_885432__bad_en_douche",
+            "naam": "Bad en douche",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -46,10 +61,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_885432",
-            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad",
+            "id": "sanitair__prive__Space_885432__bubbelfunctie_van_het_bad",
+            "naam": "Voorzieningen: Bubbelfunctie van het bad",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -61,10 +76,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_885432",
-            "naam": "Badruimte - Voorzieningen: Douchewand",
+            "id": "sanitair__prive__Space_885432__douchewand",
+            "naam": "Voorzieningen: Douchewand",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -76,10 +91,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_885432",
-            "naam": "Badruimte - Voorzieningen: Handdoekenradiator",
+            "id": "sanitair__prive__Space_885432__handdoekenradiator",
+            "naam": "Voorzieningen: Handdoekenradiator",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -91,10 +106,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_885432",
-            "naam": "Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel",
+            "id": "sanitair__prive__Space_885432__ingebouwd_kastje_met_in_of_opgebouwde_wastafel",
+            "naam": "Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -106,10 +121,10 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__Space_885432",
-            "naam": "Badruimte - Voorzieningen: Kastruimte",
+            "id": "sanitair__prive__Space_885432__kastruimte",
+            "naam": "Voorzieningen: Kastruimte",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -120,10 +135,10 @@
         },
         {
           "criterium": {
-            "id": "sanitair__Space_885432__max_punten",
-            "naam": "Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte",
+            "id": "sanitair__prive__Space_885432__max_punten_kastruimte",
+            "naam": "Voorzieningen: Max 0.75 punten voor Kastruimte",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             }
           },
           "punten": -0.75
@@ -131,10 +146,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_885432",
-            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel",
+            "id": "sanitair__prive__Space_885432__stopcontact_bij_wastafel",
+            "naam": "Voorzieningen: Stopcontact bij wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -146,10 +161,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_885432",
-            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan",
+            "id": "sanitair__prive__Space_885432__eenhandsmengkraan",
+            "naam": "Voorzieningen: Éénhandsmengkraan",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -161,10 +176,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_885432",
-            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan",
+            "id": "sanitair__prive__Space_885432__thermostatische_mengkraan",
+            "naam": "Voorzieningen: Thermostatische mengkraan",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             },
             "meeteenheid": {
               "code": "STU",
@@ -175,19 +190,13 @@
         },
         {
           "criterium": {
-            "id": "sanitair__Space_885432__maximering_punten_voorzieningen",
-            "naam": "Badruimte - Voorzieningen: Max verdubbeling punten bad en douche",
+            "id": "sanitair__prive__Space_885432__maximering_punten_voorzieningen",
+            "naam": "Voorzieningen: Max verdubbeling punten bad en douche",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_885432"
             }
           },
           "punten": -0.25
-        },
-        {
-          "criterium": {
-            "id": "sanitair__prive",
-            "naam": "Privé"
-          }
         }
       ]
     }

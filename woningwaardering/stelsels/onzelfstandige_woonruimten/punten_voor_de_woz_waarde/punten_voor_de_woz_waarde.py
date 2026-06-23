@@ -8,16 +8,12 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
     EenhedenWozEenheid,
-    WoningwaarderingCriteriumSleutels,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -52,20 +48,18 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
-            )
+        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+            self.stelsel, self.stelselgroep
         )
+        punten = 0.0
 
-        woningwaarderingen = list[WoningwaarderingResultatenWoningwaardering]()
-
-        # 2.11.1 Waarderingsmethode WOZ-waarde
-        # De WOZ-waarde de woning kan voor de woningwaardering op twee manieren worden vastgesteld. Deze manieren zijn als volgt:
-        # 1. Op basis van de laatst vastgestelde WOZ-waarde: dit is de standaardregel; of
-        # 2. Op basis van 85% van de taxatiewaarde van de woonruimte: wanneer er geen relevante WOZ-waarde voor de woonruimte bekend is.
-        # Wanneer er geen enkele WOZ-waarde of taxatiewaarde bekend is voor het adres van de woning, dan wordt het laagste puntenaantal voor de WOZ-waarde toegepast (10 punten).
+        def _onbepaalbaar() -> WoningwaarderingResultatenWoningwaarderingGroep:
+            # Bij incomplete invoer kan de WOZ-waardering niet bepaald worden. De
+            # groep krijgt dan geen punten (None) en bevat geen waarderingen,
+            # conform het gedrag van vóór de builder-refactor.
+            groep = waarderingsgroep_bouwer.bouw()
+            groep.punten = None
+            return groep
 
         woz_eenheid = self._meest_recente_woz_eenheid(eenheid)
 
@@ -77,20 +71,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             logger.info(
                 f"Eenheid {eenheid.id}: geen WOZ-waarde bekend. Laagste puntenaantal voor de WOZ-waarde wordt toegepast (10 punten)."
             )
-            punten = 10
-            woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Geen WOZ-waarde bekend",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="geen_woz_waarde_bekend",
-                            )
-                        ),
-                    ),
-                    punten=punten,
-                )
+            punten = 10.0
+            waarderingsgroep_bouwer.maak_onderliggende(
+                id="geen_woz_waarde_bekend",
+                naam="Geen WOZ-waarde bekend",
+                punten=punten,
             )
         else:
             woz_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
@@ -109,32 +94,18 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid {eenheid.id}: adres met woonplaatscode of postcode en huisnummer ontbreekt, COROP-gebied kan niet bepaald worden voor gemiddelde WOZ waarde",
                     UserWarning,
                 )
-                return woningwaardering_groep
+                return _onbepaalbaar()
 
-            puntenwaardering_sleutel = WoningwaarderingCriteriumSleutels(
-                id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        criterium="percentage_verschil",
-                    )
-                )
+            puntenwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+                id="percentage_verschil",
+                naam="Percentage verschil",
             )
 
-            woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="woz_waarde",
-                            )
-                        ),
-                        bovenliggende_criterium=puntenwaardering_sleutel,
-                        meeteenheid=Meeteenheid.euro,
-                    ),
-                    aantal=woz_eenheid.vastgestelde_waarde,
-                )
+            puntenwaardering.maak_onderliggende(
+                id="woz_waarde",
+                naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
+                aantal=woz_eenheid.vastgestelde_waarde,
+                meeteenheid=Meeteenheid.euro,
             )
 
             gebruiksoppervlakte = (
@@ -148,41 +119,22 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid {eenheid.id}: geen gebruiksoppervlakte van het verblijfsobject gevonden. Dit dient gespecificeerd te worden in het attribuut 'adresseerbaar_object_basisregistratie.bag_gebruikers_oppervlakte' op de eenheid. Kan punten voor de WOZ-waarde niet bepalen.",
                     UserWarning,
                 )
-                return woningwaardering_groep
+                puntenwaardering.verwijder()
+                return _onbepaalbaar()
 
-            woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Gebruiksoppervlakte",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="gebruiksoppervlakte",
-                            )
-                        ),
-                        meeteenheid=Meeteenheid.vierkante_meter_m2,
-                        bovenliggende_criterium=puntenwaardering_sleutel,
-                    ),
-                    aantal=gebruiksoppervlakte,
-                )
+            puntenwaardering.maak_onderliggende(
+                id="gebruiksoppervlakte",
+                naam="Gebruiksoppervlakte",
+                aantal=gebruiksoppervlakte,
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
             )
 
             woz_waarde_per_m2 = woz_waarde / gebruiksoppervlakte
 
-            woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="WOZ-waarde per m²",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="woz_waarde_per_m2",
-                            )
-                        ),
-                        bovenliggende_criterium=puntenwaardering_sleutel,
-                    ),
-                    aantal=woz_waarde_per_m2,
-                )
+            puntenwaardering.maak_onderliggende(
+                id="woz_waarde_per_m2",
+                naam="WOZ-waarde per m²",
+                aantal=woz_waarde_per_m2,
             )
 
             woonplaats = utils.get_woonplaats(adres)
@@ -192,7 +144,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid {eenheid.id}: Geen woonplaats gevonden voor adres {adres}. Kan punten voor de WOZ-waarde niet bepalen.",
                     UserWarning,
                 )
-                return woningwaardering_groep
+                puntenwaardering.verwijder()
+                return _onbepaalbaar()
 
             corop_gebied = utils.get_corop_voor_woonplaats(woonplaats.code)
 
@@ -201,7 +154,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid {eenheid.id}: Geen COROP-gebied gevonden voor woonplaats {woonplaats.naam} met woonplaatscode {woonplaats.code}. Kan punten voor de WOZ-waarde niet bepalen.",
                     UserWarning,
                 )
-                return woningwaardering_groep
+                puntenwaardering.verwijder()
+                return _onbepaalbaar()
 
             logger.debug(
                 f"Eenheid {eenheid.id} met woonplaats {woonplaats.naam} ligt in COROP-gebied {corop_gebied['naam']}"
@@ -216,7 +170,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid {eenheid.id}: Geen gemiddelde WOZ-waarde gevonden voor COROP-gebied {corop_gebied}. Kan punten voor de WOZ-waarde niet bepalen.",
                     UserWarning,
                 )
-                return woningwaardering_groep
+                puntenwaardering.verwijder()
+                return _onbepaalbaar()
 
             logger.debug(
                 f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}: {gemiddelde_woz_waarde_per_m2}"
@@ -225,20 +180,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid {eenheid.id}: WOZ-waarde per m²: {woz_waarde_per_m2}"
             )
 
-            woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="gemiddelde_woz_waarde_per_m2",
-                            )
-                        ),
-                        bovenliggende_criterium=puntenwaardering_sleutel,
-                    ),
-                    aantal=gemiddelde_woz_waarde_per_m2,
-                )
+            puntenwaardering.maak_onderliggende(
+                id="gemiddelde_woz_waarde_per_m2",
+                naam=f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}",
+                aantal=gemiddelde_woz_waarde_per_m2,
             )
 
             verschil_percentage = (
@@ -249,51 +194,26 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid {eenheid.id}: verschil percentage WOZ-waarde per m² en gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}: {verschil_percentage}%"
             )
 
-            punten = 0
-
-            # De puntentoekenning is als volgt.
             if verschil_percentage > 10:
-                # 14 punten wanneer de WOZ-waarde per m² gebruiksoppervlakte meer dan 10% hoger
-                # is dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte van de woningen
-                # in het COROP-gebied waarbinnen de woning is gelegen.
-                punten = 14
+                punten = 14.0
                 logger.info(
                     f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is meer dan 10% hoger dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
                 )
             elif verschil_percentage >= -10:
-                # 12 punten wanneer de WOZ-waarde per m² gebruiksoppervlakte maximaal 10% hoger
-                # of lager is dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte van de
-                # woningen in het COROP-gebied waarbinnen de woning is gelegen.
-                punten = 12
+                punten = 12.0
                 logger.info(
                     f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is maximaal 10% hoger of lager dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
                 )
             else:
-                # 10 punten wanneer de WOZ-waarde per m² gebruiksoppervlakte meer dan 10% lager
-                # is dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte van de woningen
-                # in het COROP-gebied waarbinnen de woning is gelegen.
-                punten = 10
+                punten = 10.0
                 logger.info(
                     f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is meer dan 10% lager dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
                 )
 
-            woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Percentage verschil",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="percentage_verschil",
-                            )
-                        ),
-                    ),
-                    aantal=verschil_percentage,
-                    punten=punten,
-                )
-            )
+            puntenwaardering.punten = punten
+            puntenwaardering.aantal = float(verschil_percentage)
 
-        woningwaardering_groep.woningwaarderingen = woningwaarderingen
+        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
         woningwaardering_groep.punten = float(punten)
 
         logger.info(
@@ -359,5 +279,7 @@ if __name__ == "__main__":  # pragma: no cover
         instance=PuntenVoorDeWozWaarde(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")
+    ) as waarderingsgroep_bouwer:
+        waarderingsgroep_bouwer.waardeer(
+            "tests/data/onzelfstandige_woonruimten/input/15004000185.json"
+        )

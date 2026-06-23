@@ -3,7 +3,8 @@ SAMENVATTING
                                                                       --------
 
 SANITAIR
-  Badkamer - Douche                                          1.00 st   4.00 pt
-  Badkamer - Drempelloze inrijdouche                         1.00 st   4.00 pt
+  Badkamer
+    - Douche                                                 1.00 st   4.00 pt
+    - Drempelloze inrijdouche                                1.00 st   4.00 pt
                                                                       --------
   Totaal                                                               8.00 pt

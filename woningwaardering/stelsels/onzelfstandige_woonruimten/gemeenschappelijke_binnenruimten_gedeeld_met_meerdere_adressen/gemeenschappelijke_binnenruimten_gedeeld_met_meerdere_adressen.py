@@ -7,10 +7,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import (
-    CriteriumId,
-    GedeeldMetSoort,
-    nest_onder,
+from woningwaardering.stelsels.bouwers import (
+    WaarderingBouwer,
+    WaarderingsgroepBouwer,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
     bereken_oppervlakte_punten,
@@ -28,11 +27,6 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
-    Referentiedata,
-    WoningwaarderingCriteriumSleutels,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -44,6 +38,15 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+
+_SANITAIR_STELSELGROEP_PREFIX = Woningwaarderingstelselgroep.sanitair.name
+
+
+def _lokaal_segment(volledige_id: str, bovenliggende_id: str) -> str:
+    prefix = f"{bovenliggende_id}__"
+    if volledige_id.startswith(prefix):
+        return volledige_id[len(prefix) :]
+    return volledige_id.split("__")[-1]
 
 
 class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
@@ -64,18 +67,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+            self.stelsel, self.stelselgroep
         )
 
-        woningwaardering_groep.woningwaarderingen = []
-
-        if zorgwoning := self._zorgwoning(eenheid):
-            woningwaardering_groep.woningwaarderingen.append(zorgwoning)
-        else:
+        if not self._zorgwoning(waarderingsgroep_bouwer, eenheid):
             gedeelde_ruimten = [
                 ruimte
                 for ruimte in eenheid.ruimten or []
@@ -83,95 +79,14 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 and ruimte.gedeeld_met_aantal_eenheden > 1
             ]
 
-            gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]] = (
-                defaultdict(lambda: defaultdict(Decimal))
-            )  # {onzelfstandige_woonruimten: (aantal_adressen, punten)}
-
-            # oppervlakte waarderingen
-            gedeeld_met_punten, oppervlakte_waarderingen = (
-                self._oppervlakte_waarderingen(gedeelde_ruimten, gedeeld_met_punten)
+            self._oppervlakte_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
+            self._verkoeling_en_verwarming_waarderingen(
+                waarderingsgroep_bouwer, gedeelde_ruimten
             )
-            woningwaardering_groep.woningwaarderingen.extend(
-                list(oppervlakte_waarderingen)
-            )
+            self._keuken_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
+            self._sanitair_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
 
-            # verkoeling en verwarming waarderingen
-            gedeeld_met_punten, verkoeling_en_verwarming_waarderingen = (
-                self._verkoeling_en_verwarming_waarderingen(
-                    gedeelde_ruimten, gedeeld_met_punten
-                )
-            )
-            woningwaardering_groep.woningwaarderingen.extend(
-                list(verkoeling_en_verwarming_waarderingen)
-            )
-
-            # keuken waarderingen
-            gedeeld_met_punten, keuken_waarderingen = self._keuken_waarderingen(
-                gedeelde_ruimten, gedeeld_met_punten
-            )
-            woningwaardering_groep.woningwaarderingen.extend(list(keuken_waarderingen))
-
-            # sanitair waarderingen
-            gedeeld_met_punten, sanitair_waarderingen = self._sanitair_waarderingen(
-                gedeelde_ruimten, gedeeld_met_punten
-            )
-            woningwaardering_groep.woningwaarderingen.extend(
-                list(sanitair_waarderingen)
-            )
-
-            # (sub)totaal waarderingen
-            for (
-                aantal_onzelfstandige_woonruimten,
-                punten_per_aantal_adressen,
-            ) in gedeeld_met_punten.items():
-                onz_id = (
-                    str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
-                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                        )
-                    )
-                    if aantal_onzelfstandige_woonruimten > 1
-                    else None
-                )
-
-                for aantal_adressen in punten_per_aantal_adressen:
-                    if aantal_adressen <= 1:
-                        continue
-                    adressen_id = str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            gedeeld_met_aantal=aantal_adressen,
-                            gedeeld_met_soort=GedeeldMetSoort.adressen,
-                            bovenliggende=onz_id,
-                        )
-                    )
-                    woningwaardering_groep.woningwaarderingen.append(
-                        self._maak_woningwaardering(
-                            id=adressen_id,
-                            criterium=utils.naam_gedeeld_met_groep(
-                                aantal_adressen,
-                                soort=GedeeldMetSoort.adressen,
-                            ),
-                            bovenliggende_criterium_id=onz_id,
-                        )
-                    )
-
-                if aantal_onzelfstandige_woonruimten > 1 and onz_id is not None:
-                    woningwaardering_groep.woningwaarderingen.append(
-                        self._maak_woningwaardering(
-                            id=onz_id,
-                            criterium=utils.naam_gedeeld_met_groep(
-                                aantal_onzelfstandige_woonruimten,
-                                soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                            ),
-                        )
-                    )
-
-        woningwaardering_groep.punten = utils.som_punten_waarderingen(
-            woningwaardering_groep.woningwaarderingen
-        )
+        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
         logger.info(
             f"Eenheid {eenheid.id} krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -179,8 +94,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         return woningwaardering_groep
 
     def _zorgwoning(
-        self, eenheid: EenhedenEenheid
-    ) -> WoningwaarderingResultatenWoningwaardering | None:
+        self, waarderingsgroep_bouwer: WaarderingsgroepBouwer, eenheid: EenhedenEenheid
+    ) -> WaarderingBouwer | None:
         """
         Beleidsboek: De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en
         voorzieningen in een zorgwoning of woon/zorgcomplex de waardering per woning
@@ -189,25 +104,19 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         van 3 punten per woning.
 
         Args:
+            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
             eenheid (EenhedenEenheid): Eenheid
 
         Returns:
-            WoningwaarderingResultatenWoningwaardering | None: Woningwaardering van 3 punten voor een zorgwoning of None als de eenheid geen zorgwoning is
+            WaarderingBouwer | None: Woningwaardering van 3 punten voor een zorgwoning of None als de eenheid geen zorgwoning is
         """
         if eenheid.doelgroep == Doelgroep.zorg:
             logger.info(
                 f"Eenheid {eenheid.id} is een zorgwoning en krijgt 3 punten voor {self.stelselgroep.naam}"
             )
-            return WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Zorgwoning",
-                    id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="zorgwoning",
-                        )
-                    ),
-                ),
+            return waarderingsgroep_bouwer.maak_onderliggende(
+                id="zorgwoning",
+                naam="Zorgwoning",
                 punten=3.0,
             )
         logger.debug(
@@ -215,39 +124,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         )
         return None
 
-    def _maak_woningwaardering(
-        self,
-        criterium: str,
-        *,
-        punten: Decimal | float | None = None,
-        bovenliggende_criterium_id: str | None = None,
-        aantal: float | None = None,
-        meeteenheid: Referentiedata | None = None,
-        id: str | None = None,
-    ) -> WoningwaarderingResultatenWoningwaardering:
-        woningwaardering = WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                id=id,
-                meeteenheid=meeteenheid,
-                naam=criterium,
-            ),
-            aantal=aantal,
-            punten=float(punten) if punten is not None else None,
-        )
-        if bovenliggende_criterium_id and woningwaardering.criterium:
-            woningwaardering.criterium.bovenliggende_criterium = (
-                WoningwaarderingCriteriumSleutels(id=bovenliggende_criterium_id)
-            )
-        return woningwaardering
-
     def _oppervlakte_waarderingen(
         self,
+        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]],
-    ) -> tuple[
-        defaultdict[int, defaultdict[int, Decimal]],
-        list[WoningwaarderingResultatenWoningwaardering],
-    ]:
+    ) -> None:
         # 2.9.7 -> 2.2: ruimten worden gegroepeerd per combinatie van aantal adressen,
         # aantal onzelfstandige woonruimten en ruimtesoort. Per oppervlaktegroep wordt op
         # hele m² afgerond (op het totaal) en daarna door beide aantallen gedeeld.
@@ -271,8 +152,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     ruimtesoort,
                 )
             ].append(ruimte)
-
-        waarderingen: list[WoningwaarderingResultatenWoningwaardering] = []
 
         def sorteer_oppervlaktegroepen(
             oppervlaktegroep: tuple[
@@ -314,48 +193,39 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 / Decimal(str(aantal_onzelfstandige_woonruimten))
             )
 
-            onz_id = (
-                str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                    )
-                )
-                if aantal_onzelfstandige_woonruimten > 1
-                else None
-            )
-            adressen_id = str(
-                CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    gedeeld_met_aantal=aantal_eenheden,
-                    gedeeld_met_soort=GedeeldMetSoort.adressen,
-                    bovenliggende=onz_id,
-                )
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
+                aantal_eenheden=aantal_eenheden,
+                aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
             )
             if ruimtesoort == Ruimtesoort.vertrek:
-                categorie_id = nest_onder(
-                    adressen_id,
-                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name,
+                categorie_lokaal_id = (
+                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name
                 )
                 categorie_naam = "Oppervlakte van vertrekken"
             else:
-                categorie_id = nest_onder(
-                    adressen_id,
-                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.name,
+                categorie_lokaal_id = (
+                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.name
                 )
                 categorie_naam = "Oppervlakte van overige ruimten"
+            categorie = gedeeld_met_laag.maak_onderliggende(
+                id=categorie_lokaal_id,
+                naam=categorie_naam,
+            )
 
             heeft_zolder_zonder_trap = (
                 ruimtesoort == Ruimtesoort.overige_ruimten
                 and any(is_zolder_zonder_vaste_trap(ruimte) for ruimte in groep_ruimten)
             )
-            detail_bovenliggende_id = (
-                nest_onder(categorie_id, "subtotaal")
-                if heeft_zolder_zonder_trap
-                else categorie_id
-            )
-            detail_waarderingen: list[WoningwaarderingResultatenWoningwaardering] = []
+            if heeft_zolder_zonder_trap:
+                detail_bovenliggende = categorie.maak_onderliggende(
+                    id="subtotaal",
+                    naam="Subtotaal",
+                    punten=oppervlaktepunten,
+                    aantal=float(totaal_oppervlakte),
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
+                )
+            else:
+                detail_bovenliggende = categorie
 
             for ruimte in groep_ruimten:
                 if ruimte.soort is None:
@@ -363,37 +233,16 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     continue
 
                 if ruimtesoort == Ruimtesoort.vertrek:
-                    oppervlakte_resultaat = next(
-                        waardeer_oppervlakte_van_vertrek(ruimte)
+                    waardeer_oppervlakte_van_vertrek(
+                        ruimte,
+                        waarderingsgroep_bouwer=detail_bovenliggende,
                     )
                 else:
-                    oppervlakte_resultaat = next(
-                        waardeer_oppervlakte_van_overige_ruimte(ruimte)
+                    waardeer_oppervlakte_van_overige_ruimte(
+                        ruimte,
+                        waarderingsgroep_bouwer=detail_bovenliggende,
                     )
-                if (
-                    oppervlakte_resultaat.criterium is None
-                    or oppervlakte_resultaat.criterium.naam is None
-                    or oppervlakte_resultaat.criterium.id is None
-                ):
-                    warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
-                    continue
 
-                detail_waarderingen.append(
-                    self._maak_woningwaardering(
-                        criterium=oppervlakte_resultaat.criterium.naam,
-                        bovenliggende_criterium_id=detail_bovenliggende_id,
-                        aantal=oppervlakte_resultaat.aantal,
-                        meeteenheid=Meeteenheid.vierkante_meter_m2,
-                        id=nest_onder(
-                            detail_bovenliggende_id, oppervlakte_resultaat.criterium.id
-                        ),
-                    )
-                )
-
-            correctie_waarderingen: list[
-                WoningwaarderingResultatenWoningwaardering
-            ] = []
-            correctie_totaal = Decimal("0")
             if ruimtesoort == Ruimtesoort.overige_ruimten:
                 for ruimte in groep_ruimten:
                     if not is_zolder_zonder_vaste_trap(ruimte):
@@ -404,357 +253,187 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         / Decimal(str(aantal_eenheden))
                         / Decimal(str(aantal_onzelfstandige_woonruimten))
                     )
-                    correctie_totaal += correctie_punten
-                    correctie_waarderingen.append(
-                        self._maak_woningwaardering(
-                            punten=correctie_punten,
-                            criterium="Correctie: zolder zonder vaste trap",
-                            bovenliggende_criterium_id=categorie_id,
-                            id=nest_onder(
-                                categorie_id,
-                                str(
-                                    CriteriumId(
-                                        stelselgroep=Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
-                                        ruimte_id=ruimte.id,
-                                        criterium="correctie_zolder_zonder_vaste_trap",
-                                    )
-                                ),
-                            ),
-                        )
+                    categorie.maak_onderliggende(
+                        id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
+                        naam="Correctie: zolder zonder vaste trap",
+                        punten=correctie_punten,
                     )
 
-            gedeeld_met_punten[aantal_onzelfstandige_woonruimten][aantal_eenheden] += (
-                oppervlaktepunten + correctie_totaal
-            )
-
-            if heeft_zolder_zonder_trap:
-                waarderingen.append(
-                    self._maak_woningwaardering(
-                        punten=oppervlaktepunten,
-                        criterium="Subtotaal",
-                        bovenliggende_criterium_id=categorie_id,
-                        aantal=float(totaal_oppervlakte),
-                        meeteenheid=Meeteenheid.vierkante_meter_m2,
-                        id=detail_bovenliggende_id,
-                    )
-                )
-                waarderingen.extend(detail_waarderingen)
-                waarderingen.extend(correctie_waarderingen)
-                waarderingen.append(
-                    self._maak_woningwaardering(
-                        criterium=categorie_naam,
-                        bovenliggende_criterium_id=adressen_id,
-                        id=categorie_id,
-                    )
-                )
-            else:
-                waarderingen.extend(detail_waarderingen)
-                waarderingen.append(
-                    self._maak_woningwaardering(
-                        punten=oppervlaktepunten,
-                        criterium=categorie_naam,
-                        bovenliggende_criterium_id=adressen_id,
-                        id=categorie_id,
-                    )
-                )
-
-        return gedeeld_met_punten, waarderingen
+            # In het zoldergeval draagt de Subtotaal-waardering de oppervlaktepunten; anders
+            # krijgt de categorie-waardering zelf de punten.
+            if not heeft_zolder_zonder_trap:
+                categorie.punten = oppervlaktepunten
 
     def _verkoeling_en_verwarming_waarderingen(
         self,
+        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]],
-    ) -> tuple[
-        defaultdict[int, defaultdict[int, Decimal]],
-        list[WoningwaarderingResultatenWoningwaardering],
-    ]:
-        waarderingen: list[WoningwaarderingResultatenWoningwaardering] = []
-        verkoeling_subgroepen: dict[str, tuple[str, str]] = {}
-        verkoeling_categorieen: dict[str, str] = {}
+    ) -> None:
+        # De maximering op verwarmde overige ruimten (max. 4 punten) en op verkoelde
+        # vertrekken (max. 2 punten) telt over álle gedeelde ruimten samen, ongeacht
+        # met hoeveel adressen/onzelfstandige woonruimten ze gedeeld worden. We roepen
+        # de helper daarom eenmalig aan op een tijdelijke waarderingsgroep_bouwer (zodat de teller
+        # globaal is) en routeren elk resultaat daarna naar de juiste adressengroep,
+        # waar de punten door het aantal adressen en onzelfstandige woonruimten worden
+        # gedeeld.
+        tijdelijk = WaarderingsgroepBouwer(self.stelsel, self.stelselgroep)
 
-        resultaten = list(waardeer_verkoeling_en_verwarming(ruimten))
-        for ruimte, resultaat in resultaten:
+        verkoeling_per_laag: dict[str, WaarderingBouwer] = {}
+        subgroep_per_id: dict[str, WaarderingBouwer] = {}
+
+        for ruimte, resultaat in waardeer_verkoeling_en_verwarming(
+            ruimten,
+            waarderingsgroep_bouwer=tijdelijk,
+        ):
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
             aantal_onzelfstandige_woonruimten = (
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             )
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            deler = Decimal(str(aantal_eenheden)) * Decimal(
+                str(aantal_onzelfstandige_woonruimten)
+            )
+
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
+                aantal_eenheden=aantal_eenheden,
+                aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+            )
+            laag_id = gedeeld_met_laag.criterium_id
+
+            verkoeling_categorie = verkoeling_per_laag.get(laag_id)
+            if verkoeling_categorie is None:
+                verkoeling_categorie = gedeeld_met_laag.maak_onderliggende(
+                    id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
+                    naam="Verkoeling en verwarming",
+                )
+                verkoeling_per_laag[laag_id] = verkoeling_categorie
+
+            subgroep_segment = (resultaat.bovenliggende_id or "").split("__")[-1]
+            subgroep_id = f"{verkoeling_categorie.criterium_id}__{subgroep_segment}"
+            subgroep = subgroep_per_id.get(subgroep_id)
+            if subgroep is None:
+                subgroep = verkoeling_categorie.maak_onderliggende(
+                    id=subgroep_segment,
+                    naam=subgroep_segment.capitalize().replace("_", " "),
+                )
+                subgroep_per_id[subgroep_id] = subgroep
 
             punten = (
-                Decimal(str(resultaat.punten))
-                / Decimal(str(aantal_eenheden))
-                / Decimal(str(aantal_onzelfstandige_woonruimten))
+                None
+                if resultaat.punten is None
+                else Decimal(str(resultaat.punten)) / deler
             )
-
-            gedeeld_met_punten[aantal_onzelfstandige_woonruimten][aantal_eenheden] += (
-                punten
+            subgroep.maak_onderliggende(
+                id=resultaat.criterium_id.split("__")[-1],
+                naam=resultaat.naam,
+                punten=punten,
+                aantal=resultaat.aantal,
+                meeteenheid=resultaat.meeteenheid,
             )
-            criterium = resultaat.criterium
-            if ruimte.soort is None:
-                warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
-                continue
-            if criterium is None or criterium.id is None:
-                warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
-                continue
-            if (
-                criterium.bovenliggende_criterium is None
-                or criterium.bovenliggende_criterium.id is None
-            ):
-                warnings.warn(
-                    f"Geen bovenliggend criterium gevonden voor ruimte {ruimte.id}"
-                )
-                continue
-
-            onz_id = (
-                str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                    )
-                )
-                if aantal_onzelfstandige_woonruimten > 1
-                else None
-            )
-            adressen_id = str(
-                CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    gedeeld_met_aantal=aantal_eenheden,
-                    gedeeld_met_soort=GedeeldMetSoort.adressen,
-                    bovenliggende=onz_id,
-                )
-            )
-            verkoeling_categorie_id = nest_onder(
-                adressen_id, Woningwaarderingstelselgroep.verkoeling_en_verwarming.name
-            )
-            verkoeling_categorieen[verkoeling_categorie_id] = adressen_id
-
-            subgroep_id = nest_onder(
-                verkoeling_categorie_id, criterium.bovenliggende_criterium.id
-            )
-            subgroep_naam = (
-                criterium.bovenliggende_criterium.id.split("__")[-1]
-                .capitalize()
-                .replace("_", " ")
-            )
-            verkoeling_subgroepen[subgroep_id] = (
-                subgroep_naam,
-                verkoeling_categorie_id,
-            )
-
-            if resultaat.punten and resultaat.punten < 0:
-                criterium_naam = criterium.naam or "Maximaal aantal punten"
-                detail_id = nest_onder(subgroep_id, "max_aantal_punten")
-            else:
-                criterium_naam = ruimte.naam or criterium.naam or ""
-                detail_id = nest_onder(subgroep_id, criterium.id)
-
-            waarderingen.append(
-                self._maak_woningwaardering(
-                    punten=punten,
-                    criterium=criterium_naam,
-                    bovenliggende_criterium_id=subgroep_id,
-                    aantal=resultaat.aantal,
-                    meeteenheid=criterium.meeteenheid,
-                    id=detail_id,
-                )
-            )
-
-        for subgroep_id, (subgroep_naam, verkoeling_categorie_id) in sorted(
-            verkoeling_subgroepen.items()
-        ):
-            waarderingen.append(
-                self._maak_woningwaardering(
-                    criterium=subgroep_naam,
-                    bovenliggende_criterium_id=verkoeling_categorie_id,
-                    id=subgroep_id,
-                )
-            )
-
-        for verkoeling_categorie_id, adressen_id in sorted(
-            verkoeling_categorieen.items()
-        ):
-            waarderingen.append(
-                self._maak_woningwaardering(
-                    criterium="Verkoeling en verwarming",
-                    bovenliggende_criterium_id=adressen_id,
-                    id=verkoeling_categorie_id,
-                )
-            )
-
-        return gedeeld_met_punten, waarderingen
 
     def _sanitair_waarderingen(
         self,
+        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]],
-    ) -> tuple[
-        defaultdict[int, defaultdict[int, Decimal]],
-        list[WoningwaarderingResultatenWoningwaardering],
-    ]:
-        woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering] = []
-        sanitair_categorieen: dict[str, str] = {}
+    ) -> None:
+        sanitair_categorieen: dict[str, WaarderingBouwer] = {}
         woningwaarderingen_met_ruimten = list(
             OnzelfstandigeWoonruimtenSanitair.genereer_woningwaarderingen(
                 ruimten, self.stelselgroep
             )
         )
 
-        if not woningwaarderingen_met_ruimten:
-            return gedeeld_met_punten, woningwaarderingen
-
         for ruimte, waarderingen in woningwaarderingen_met_ruimten:
-            for waardering in waarderingen:
-                aantal_onzelfstandige_woonruimten = (
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                )
-                aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            if ruimte.soort is None:
+                warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
+                continue
 
-                if ruimte.soort is None:
-                    warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
-                    continue
-                if waardering.criterium is None or waardering.criterium.naam is None:
-                    warnings.warn(f"Geen criterium gevonden voor ruimte {ruimte.id}")
-                    continue
-                if waardering.criterium.id is None:
-                    warnings.warn(f"Geen criterium-id gevonden voor ruimte {ruimte.id}")
-                    continue
-
-                punten = (
-                    Decimal(str(waardering.punten))
-                    / Decimal(aantal_eenheden)
-                    / Decimal(str(aantal_onzelfstandige_woonruimten))
-                )
-
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
-                    aantal_eenheden
-                ] += punten
-
-                onz_id = (
-                    str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
-                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                        )
-                    )
-                    if aantal_onzelfstandige_woonruimten > 1
-                    else None
-                )
-                adressen_id = str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_eenheden,
-                        gedeeld_met_soort=GedeeldMetSoort.adressen,
-                        bovenliggende=onz_id,
-                    )
-                )
-                sanitair_categorie_id = nest_onder(adressen_id, "sanitair")
-                sanitair_categorieen[sanitair_categorie_id] = adressen_id
-
-                woningwaarderingen.append(
-                    self._maak_woningwaardering(
-                        punten=punten,
-                        criterium=f"{waardering.criterium.naam.replace(':', '').replace(' -', ':')}",
-                        bovenliggende_criterium_id=sanitair_categorie_id,
-                        id=nest_onder(sanitair_categorie_id, waardering.criterium.id),
-                    )
-                )
-
-        for sanitair_categorie_id, adressen_id in sorted(sanitair_categorieen.items()):
-            woningwaarderingen.append(
-                self._maak_woningwaardering(
-                    criterium="Sanitair",
-                    bovenliggende_criterium_id=adressen_id,
-                    id=sanitair_categorie_id,
-                )
+            aantal_onzelfstandige_woonruimten = (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            )
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            deler = Decimal(str(aantal_eenheden)) * Decimal(
+                str(aantal_onzelfstandige_woonruimten)
             )
 
-        return gedeeld_met_punten, woningwaarderingen
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
+                aantal_eenheden=aantal_eenheden,
+                aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+            )
+            laag_id = gedeeld_met_laag.criterium_id
+            sanitair_categorie = sanitair_categorieen.get(laag_id)
+            if sanitair_categorie is None:
+                sanitair_categorie = gedeeld_met_laag.maak_onderliggende(
+                    id="sanitair",
+                    naam="Sanitair",
+                )
+                sanitair_categorieen[laag_id] = sanitair_categorie
+
+            ruimte_criterium = waarderingen[0]
+            reparented_ruimte = sanitair_categorie.maak_onderliggende(
+                id=_lokaal_segment(
+                    ruimte_criterium.criterium_id, _SANITAIR_STELSELGROEP_PREFIX
+                ),
+                naam=ruimte_criterium.naam,
+            )
+
+            for waardering in waarderingen[1:]:
+                if waardering.punten is None:
+                    continue
+
+                punten = Decimal(str(waardering.punten)) / deler
+                reparented_ruimte.maak_onderliggende(
+                    id=_lokaal_segment(
+                        waardering.criterium_id, ruimte_criterium.criterium_id
+                    ),
+                    naam=waardering.naam,
+                    punten=punten,
+                    aantal=waardering.aantal,
+                    meeteenheid=waardering.meeteenheid,
+                )
 
     def _keuken_waarderingen(
         self,
+        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
-        gedeeld_met_punten: defaultdict[int, defaultdict[int, Decimal]],
-    ) -> tuple[
-        defaultdict[int, defaultdict[int, Decimal]],
-        list[WoningwaarderingResultatenWoningwaardering],
-    ]:
-        woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering] = []
-        keuken_categorieen: dict[str, str] = {}
+    ) -> None:
+        keuken_categorieen: dict[str, WaarderingBouwer] = {}
         for ruimte in ruimten:
             aantal_onzelfstandige_woonruimten = (
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             )
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-
-            waarderingen = list(waardeer_keuken(ruimte, self.stelsel))
-            for waardering in waarderingen:
-                if waardering.criterium is None:
-                    logger.warning(
-                        f"Geen criterium gevonden in waardring voor ruimte {ruimte.id}"
-                    )
-                    continue
-
-                if not waardering.punten or waardering.criterium.id is None:
-                    continue
-
-                punten = (
-                    Decimal(str(waardering.punten))
-                    / Decimal(str(aantal_eenheden))
-                    / Decimal(str(aantal_onzelfstandige_woonruimten))
-                )
-                gedeeld_met_punten[aantal_onzelfstandige_woonruimten][
-                    aantal_eenheden
-                ] += punten
-
-                onz_id = (
-                    str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            gedeeld_met_aantal=aantal_onzelfstandige_woonruimten,
-                            gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                        )
-                    )
-                    if aantal_onzelfstandige_woonruimten > 1
-                    else None
-                )
-                adressen_id = str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_eenheden,
-                        gedeeld_met_soort=GedeeldMetSoort.adressen,
-                        bovenliggende=onz_id,
-                    )
-                )
-                keuken_categorie_id = nest_onder(adressen_id, "keuken")
-                keuken_categorieen[keuken_categorie_id] = adressen_id
-
-                if waardering.criterium.naam is None:
-                    criterium = f"{ruimte.naam}"
-                else:
-                    criterium = f"{ruimte.naam + ': ' if ruimte.naam is not None and ruimte.naam not in waardering.criterium.naam else ''}{waardering.criterium.naam}"
-
-                woningwaarderingen.append(
-                    self._maak_woningwaardering(
-                        punten=punten,
-                        criterium=criterium,
-                        bovenliggende_criterium_id=keuken_categorie_id,
-                        aantal=waardering.aantal,
-                        meeteenheid=waardering.criterium.meeteenheid,
-                        id=nest_onder(keuken_categorie_id, waardering.criterium.id),
-                    )
-                )
-
-        for keuken_categorie_id, adressen_id in sorted(keuken_categorieen.items()):
-            woningwaarderingen.append(
-                self._maak_woningwaardering(
-                    criterium="Keuken",
-                    bovenliggende_criterium_id=adressen_id,
-                    id=keuken_categorie_id,
-                )
+            deler = Decimal(str(aantal_eenheden)) * Decimal(
+                str(aantal_onzelfstandige_woonruimten)
             )
 
-        return gedeeld_met_punten, woningwaarderingen
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
+                aantal_eenheden=aantal_eenheden,
+                aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+            )
+            laag_id = gedeeld_met_laag.criterium_id
+            keuken_categorie = keuken_categorieen.get(laag_id)
+            categorie_is_nieuw = keuken_categorie is None
+            if keuken_categorie is None:
+                keuken_categorie = gedeeld_met_laag.maak_onderliggende(
+                    id="keuken",
+                    naam="Keuken",
+                )
+
+            ruimte_waarderingen = waardeer_keuken(
+                ruimte,
+                self.stelsel,
+                waarderingsgroep_bouwer=keuken_categorie,
+                deler=1,
+            )
+            if not ruimte_waarderingen:
+                if categorie_is_nieuw and keuken_categorie.is_leeg:
+                    keuken_categorie.verwijder()
+                continue
+
+            for waardering in ruimte_waarderingen:
+                if waardering.punten is not None:
+                    waardering.punten = float(Decimal(str(waardering.punten)) / deler)
+            keuken_categorieen[laag_id] = keuken_categorie
 
 
 if __name__ == "__main__":  # pragma: no cover
@@ -764,7 +443,7 @@ if __name__ == "__main__":  # pragma: no cover
         ),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer(
+    ) as waarderingsgroep_bouwer:
+        waarderingsgroep_bouwer.waardeer(
             "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/input/voorbeeld_beleidsboek.json"
         )

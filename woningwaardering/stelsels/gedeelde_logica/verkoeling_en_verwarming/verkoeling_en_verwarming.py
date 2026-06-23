@@ -2,13 +2,13 @@ from typing import Iterator
 
 from loguru import logger
 
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.bouwers import (
+    WaarderingBouwer,
+    WaarderingsgroepBouwer,
+)
 from woningwaardering.stelsels.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
-    WoningwaarderingCriteriumSleutels,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
@@ -19,30 +19,51 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
+def _subgroep_naam(subgroep_id: str) -> str:
+    return subgroep_id.capitalize().replace("_", " ")
+
+
+def _subgroep(
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    subgroepen: dict[str, WaarderingBouwer],
+    subgroep_id: str,
+) -> WaarderingBouwer:
+    if subgroep_id not in subgroepen:
+        subgroepen[subgroep_id] = waarderingsgroep_bouwer.maak_onderliggende(
+            id=subgroep_id,
+            naam=_subgroep_naam(subgroep_id),
+        )
+    return subgroepen[subgroep_id]
+
+
 def waardeer_verkoeling_en_verwarming(
     ruimten: list[EenhedenRuimte],
-) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
-    yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(ruimten)
-    yield from _waardeer_verwarmde_overige_ruimte(ruimten)
-    yield from _waardeer_open_keuken(ruimten)
+    *,
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
+    yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(
+        ruimten, waarderingsgroep_bouwer
+    )
+    yield from _waardeer_verwarmde_overige_ruimte(ruimten, waarderingsgroep_bouwer)
+    yield from _waardeer_open_keuken(ruimten, waarderingsgroep_bouwer)
 
 
 def _waardeer_verwarmde_overige_ruimte(
     ruimten: list[EenhedenRuimte],
-) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
     """
     Verwarmde overige ruimten tellen als 1 punt voor verwarmde overige ruimten tot een maximum van 4 punten.
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
+        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Yields:
-        tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]: Tuple van ruimte en waardering voor verwarmde overige ruimten
+        tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor verwarmde overige ruimten
     """
-    subgroep = CriteriumId(
-        stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-        criterium="verwarmde_overige_en_verkeersruimten",
-    )
+    subgroep_id = "verwarmde_overige_en_verkeersruimten"
+    subgroepen: dict[str, WaarderingBouwer] = {}
     totaal_punten = 0
     for ruimte in ruimten:
         if not ruimte.verwarmd:
@@ -58,20 +79,11 @@ def _waardeer_verwarmde_overige_ruimte(
             )
             yield (
                 ruimte,
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=ruimte.naam,
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-                                ruimte_id=ruimte.id,
-                                bovenliggende=subgroep,
-                            )
-                        ),
-                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                            id=str(subgroep),
-                        ),
-                    ),
+                _subgroep(
+                    waarderingsgroep_bouwer, subgroepen, subgroep_id
+                ).maak_onderliggende(
+                    id=ruimte.id,
+                    naam=ruimte.naam or ruimte.id or "",
                     punten=1.0,
                 ),
             )
@@ -79,20 +91,11 @@ def _waardeer_verwarmde_overige_ruimte(
             if totaal_punten > 4:
                 yield (
                     ruimte,
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Maximaal 4 punten",
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-                                    criterium="max_aantal_punten",
-                                    bovenliggende=subgroep,
-                                )
-                            ),
-                            bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                                id=str(subgroep),
-                            ),
-                        ),
+                    _subgroep(
+                        waarderingsgroep_bouwer, subgroepen, subgroep_id
+                    ).maak_onderliggende(
+                        id="max_aantal_punten",
+                        naam="Maximaal 4 punten",
                         punten=-1,
                     ),
                 )
@@ -100,7 +103,8 @@ def _waardeer_verwarmde_overige_ruimte(
 
 def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     ruimten: list[EenhedenRuimte],
-) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
     """
     Verkoelde en verwarmde vertrekken tellen voor 2 punten per verwarmd vertrek.
     Indien een verwarmd vertrek ook verkoeld is, wordt er 1 punt extra toegekend.
@@ -108,18 +112,12 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
+        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Yields:
-        tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
+        tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
     """
-    verwarmde_subgroep = CriteriumId(
-        stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-        criterium="verwarmde_vertrekken",
-    )
-    verkoelde_subgroep = CriteriumId(
-        stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-        criterium="verkoelde_vertrekken",
-    )
+    subgroepen: dict[str, WaarderingBouwer] = {}
     totaal_punten_verkoeld = 0
     for ruimte in ruimten:
         if not ruimte.verwarmd:
@@ -132,20 +130,11 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
             )
             yield (
                 ruimte,
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=ruimte.naam,
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-                                ruimte_id=ruimte.id,
-                                bovenliggende=verwarmde_subgroep,
-                            )
-                        ),
-                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                            id=str(verwarmde_subgroep),
-                        ),
-                    ),
+                _subgroep(
+                    waarderingsgroep_bouwer, subgroepen, "verwarmde_vertrekken"
+                ).maak_onderliggende(
+                    id=ruimte.id,
+                    naam=ruimte.naam or ruimte.id or "",
                     punten=2,
                 ),
             )
@@ -157,20 +146,11 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                 )
                 yield (
                     ruimte,
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam=ruimte.naam,
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-                                    ruimte_id=ruimte.id,
-                                    bovenliggende=verkoelde_subgroep,
-                                )
-                            ),
-                            bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                                id=str(verkoelde_subgroep),
-                            ),
-                        ),
+                    _subgroep(
+                        waarderingsgroep_bouwer, subgroepen, "verkoelde_vertrekken"
+                    ).maak_onderliggende(
+                        id=ruimte.id,
+                        naam=ruimte.naam or ruimte.id or "",
                         punten=1,
                     ),
                 )
@@ -180,20 +160,11 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                     )
                     yield (
                         ruimte,
-                        WoningwaarderingResultatenWoningwaardering(
-                            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                                naam="Maximaal 2 punten",
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-                                        criterium="max_aantal_punten",
-                                        bovenliggende=verkoelde_subgroep,
-                                    )
-                                ),
-                                bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                                    id=str(verkoelde_subgroep),
-                                ),
-                            ),
+                        _subgroep(
+                            waarderingsgroep_bouwer, subgroepen, "verkoelde_vertrekken"
+                        ).maak_onderliggende(
+                            id="max_aantal_punten",
+                            naam="Maximaal 2 punten",
                             punten=-1,
                         ),
                     )
@@ -201,16 +172,19 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
 def _waardeer_open_keuken(
     ruimten: list[EenhedenRuimte],
-) -> Iterator[tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]]:
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
     """
     Open keuken tellen voor 2 punten per verwarmd vertrek.
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
+        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Yields:
-        tuple[EenhedenRuimte, WoningwaarderingResultatenWoningwaardering]: Tuple van ruimte en waardering voor open keuken
+        tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor open keuken
     """
+    subgroepen: dict[str, WaarderingBouwer] = {}
     for ruimte in ruimten:
         if ruimte.verwarmd and (
             ruimte.detail_soort == Ruimtedetailsoort.woonkamer_en_of_keuken
@@ -229,26 +203,13 @@ def _waardeer_open_keuken(
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
             )
-            subgroep = CriteriumId(
-                stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-                criterium="open_keuken",
-            )
             yield (
                 ruimte,
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=ruimte.naam,
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=Woningwaarderingstelselgroep.verkoeling_en_verwarming,
-                                ruimte_id=ruimte.id,
-                                bovenliggende=subgroep,
-                            )
-                        ),
-                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                            id=str(subgroep),
-                        ),
-                    ),
+                _subgroep(
+                    waarderingsgroep_bouwer, subgroepen, "open_keuken"
+                ).maak_onderliggende(
+                    id=ruimte.id,
+                    naam=ruimte.naam or ruimte.id or "",
                     punten=2.0,
                 ),
             )

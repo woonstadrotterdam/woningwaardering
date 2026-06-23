@@ -187,6 +187,12 @@ with open(
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          }
+        },
+        {
+          "criterium": {
             "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108014589",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
@@ -254,12 +260,6 @@ with open(
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
-          }
         }
       ]
     },
@@ -277,9 +277,21 @@ with open(
       "punten": 15.0,
       "woningwaarderingen": [
         {
+          "aantal": 71.0,
+          "criterium": {
+            "id": "buitenruimten__prive",
+            "naam": "Privé",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 24.85
+        },
+        {
           "aantal": 3.14,
           "criterium": {
-            "id": "buitenruimten__Space_108014713",
+            "id": "buitenruimten__prive__Space_108014713",
             "naam": "Balkon 1",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"
@@ -293,7 +305,7 @@ with open(
         {
           "aantal": 3.14,
           "criterium": {
-            "id": "buitenruimten__Space_108010812",
+            "id": "buitenruimten__prive__Space_108010812",
             "naam": "Balkon 2",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"
@@ -307,7 +319,7 @@ with open(
         {
           "aantal": 49.11,
           "criterium": {
-            "id": "buitenruimten__Space_108006357",
+            "id": "buitenruimten__prive__Space_108006357",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"
@@ -321,7 +333,7 @@ with open(
         {
           "aantal": 15.93,
           "criterium": {
-            "id": "buitenruimten__Space_108006467",
+            "id": "buitenruimten__prive__Space_108006467",
             "naam": "Dakterras",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"
@@ -340,23 +352,11 @@ with open(
           "punten": 2.0
         },
         {
-          "aantal": 71.0,
-          "criterium": {
-            "id": "buitenruimten__prive",
-            "naam": "Privé",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 24.85
-        },
-        {
           "criterium": {
             "id": "buitenruimten__maximering",
             "naam": "Maximaal 15 punten"
           },
-          "punten": -11.75
+          "punten": -11.85
         }
       ]
     },
@@ -396,10 +396,19 @@ with open(
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__Space_108006229",
+            "naam": "Keuken"
+          }
+        },
+        {
           "aantal": 2700.0,
           "criterium": {
             "id": "keuken__Space_108006229__lengte_aanrecht_Aanrecht_108006231",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_108006229"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -423,10 +432,19 @@ with open(
       "punten": 15.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_108014563",
+            "naam": "Badruimte"
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108014563__staand_toilet",
-            "naam": "Badruimte - Staand Toilet",
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108014563"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -438,7 +456,10 @@ with open(
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_108014563__wastafel",
-            "naam": "Badruimte - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108014563"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -450,7 +471,10 @@ with open(
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108014563__bad_en_douche",
-            "naam": "Badruimte - Bad en douche",
+            "naam": "Bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108014563"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -459,10 +483,19 @@ with open(
           "punten": 7.0
         },
         {
+          "criterium": {
+            "id": "sanitair__Space_108006223",
+            "naam": "Toiletruimte"
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108006223__staand_toilet",
-            "naam": "Toiletruimte - Staand Toilet",
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108006223"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -474,7 +507,10 @@ with open(
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108006223__wastafel",
-            "naam": "Toiletruimte - Wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108006223"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
@@ -537,9 +573,16 @@ with open(
           }
         },
         {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__onderdeel_I",
+            "naam": "Onderdeel I"
+          },
+          "punten": 45.27
+        },
+        {
           "aantal": 15329.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_I",
+            "id": "punten_voor_de_woz_waarde__onderdeel_I__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_I"
@@ -548,15 +591,15 @@ with open(
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_I",
-            "naam": "Onderdeel I"
+            "id": "punten_voor_de_woz_waarde__onderdeel_II",
+            "naam": "Onderdeel II"
           },
-          "punten": 45.27
+          "punten": 19.38
         },
         {
           "aantal": 148.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
@@ -570,19 +613,12 @@ with open(
         {
           "aantal": 242.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_II",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_II",
-            "naam": "Onderdeel II"
-          },
-          "punten": 19.38
         }
       ]
     },
@@ -679,13 +715,13 @@ VERKOELING EN VERWARMING
   Totaal                                                              14.00 pt
 
 BUITENRUIMTEN
-  Privé buitenruimten aanwezig                                         2.00 pt
   Privé                                                     71.00 m²  24.85 pt
     - Balkon 1                                               3.14 m²
     - Balkon 2                                               3.14 m²
     - Tuin                                                  49.11 m²
     - Dakterras                                             15.93 m²
-  Maximaal 15 punten                                                  -11.75 pt
+  Privé buitenruimten aanwezig                                         2.00 pt
+  Maximaal 15 punten                                                  -11.85 pt
                                                                       --------
   Totaal                                                              15.00 pt
 
@@ -695,16 +731,19 @@ ENERGIEPRESTATIE
   Totaal                                                              22.00 pt
 
 KEUKEN
-  Keuken: Lengte aanrecht                                 2700.00 mm   7.00 pt
+  Keuken
+    - Lengte aanrecht                                     2700.00 mm   7.00 pt
                                                                       --------
   Totaal                                                               7.00 pt
 
 SANITAIR
-  Badruimte - Staand Toilet                                  1.00 st   2.00 pt
-  Badruimte - Wastafel                                       2.00 st   2.00 pt
-  Badruimte - Bad en douche                                  1.00 st   7.00 pt
-  Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
-  Toiletruimte - Wastafel                                    1.00 st   1.00 pt
+  Badruimte
+    - Staand Toilet                                          1.00 st   2.00 pt
+    - Wastafel                                               2.00 st   2.00 pt
+    - Bad en douche                                          1.00 st   7.00 pt
+  Toiletruimte
+    - Staand Toilet                                          1.00 st   3.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
                                                                       --------
   Totaal                                                              15.00 pt
 
@@ -916,6 +955,12 @@ De output daarvan is een VERA woningwaarderingstelsel object.
       "woningwaarderingen": [
         {
           "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          }
+        },
+        {
+          "criterium": {
             "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108014589",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
@@ -933,12 +978,6 @@ De output daarvan is een VERA woningwaarderingstelsel object.
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
-          }
         }
       ]
     },
@@ -1000,10 +1039,19 @@ De output daarvan is een VERA woningwaarderingstelsel object.
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__Space_108006229",
+            "naam": "Keuken"
+          }
+        },
+        {
           "aantal": 2700.0,
           "criterium": {
             "id": "keuken__Space_108006229__lengte_aanrecht_Aanrecht_108006231",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_108006229"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -1080,9 +1128,16 @@ De output daarvan is een VERA woningwaarderingstelsel object.
           }
         },
         {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__onderdeel_I",
+            "naam": "Onderdeel I"
+          },
+          "punten": 45.27
+        },
+        {
           "aantal": 15329.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_I",
+            "id": "punten_voor_de_woz_waarde__onderdeel_I__factor_I",
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_I"
@@ -1091,15 +1146,15 @@ De output daarvan is een VERA woningwaarderingstelsel object.
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_I",
-            "naam": "Onderdeel I"
+            "id": "punten_voor_de_woz_waarde__onderdeel_II",
+            "naam": "Onderdeel II"
           },
-          "punten": 45.27
+          "punten": 69.95
         },
         {
           "aantal": 41.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
@@ -1113,19 +1168,12 @@ De output daarvan is een VERA woningwaarderingstelsel object.
         {
           "aantal": 242.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_II",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__onderdeel_II",
-            "naam": "Onderdeel II"
-          },
-          "punten": 69.95
         }
       ]
     },
@@ -1217,7 +1265,8 @@ ENERGIEPRESTATIE
   Totaal                                                              22.00 pt
 
 KEUKEN
-  Keuken: Lengte aanrecht                                 2700.00 mm   7.00 pt
+  Keuken
+    - Lengte aanrecht                                     2700.00 mm   7.00 pt
                                                                       --------
   Totaal                                                               7.00 pt
 

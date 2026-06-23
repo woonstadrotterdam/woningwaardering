@@ -15,78 +15,78 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging1",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging1",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.5
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging2",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging2",
             "naam": "Berging2",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.5
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging3",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging3",
             "naam": "Berging3",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.5
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging4",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging4",
             "naam": "Berging4",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.5
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging5",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__Berging5",
             "naam": "Berging5",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": 0.5
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__max_aantal_punten",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__max_aantal_punten",
             "naam": "Maximaal 4 punten",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
             }
           },
           "punten": -0.5
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten",
-            "naam": "Verwarmde overige en verkeersruimten",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten"
-            }
-          }
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
-          }
         }
       ]
     }

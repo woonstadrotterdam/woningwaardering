@@ -38,9 +38,9 @@ VERKOELING EN VERWARMING
   Totaal                                                              12.00 pt
 
 BUITENRUIMTEN
-  Privé buitenruimten aanwezig                                         2.00 pt
   Privé                                                      3.00 m²   1.05 pt
     - Terras                                                 3.21 m²
+  Privé buitenruimten aanwezig                                         2.00 pt
                                                                       --------
   Totaal                                                               3.00 pt
 
@@ -51,16 +51,19 @@ ENERGIEPRESTATIE
   Totaal                                                               0.00 pt
 
 KEUKEN
-  Keuken: Lengte aanrecht                                 1500.00 mm   4.00 pt
+  Keuken
+    - Lengte aanrecht                                     1500.00 mm   4.00 pt
                                                                       --------
   Totaal                                                               4.00 pt
 
 SANITAIR
-  Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
-  Toiletruimte - Wastafel                                    1.00 st   1.00 pt
-  Badruimte - Staand Toilet                                  1.00 st   2.00 pt
-  Badruimte - Wastafel                                       1.00 st   1.00 pt
-  Badruimte - Douche                                         1.00 st   4.00 pt
+  Toiletruimte
+    - Staand Toilet                                          1.00 st   3.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
+  Badruimte
+    - Staand Toilet                                          1.00 st   2.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
+    - Douche                                                 1.00 st   4.00 pt
                                                                       --------
   Totaal                                                              11.00 pt
 

@@ -1,16 +1,16 @@
 import warnings
 from decimal import Decimal
-from typing import Generator
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.bouwers import (
+    WaarderingBouwer,
+    WaarderingsgroepBouwer,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
@@ -36,11 +36,14 @@ parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
 
 def waardeer_gemeenschappelijke_parkeerruimte(
     ruimte: EenhedenRuimte,
-) -> Generator[WoningwaarderingResultatenWoningwaardering, None, None]:
+    *,
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+) -> list[WaarderingBouwer]:
     """Bepaalt de waardering voor gemeenschappelijke parkeerruimten.
 
     Args:
         ruimte (EenhedenRuimte): De te waarderen ruimte
+        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     De waardering wordt bepaald op basis van het type parkeerruimte:
     - Type I (inpandige afgesloten parkeerplek): 9 punten
@@ -59,12 +62,12 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         - carport
         - parkeerplek buiten behorend bij een complex
 
-    Yields:
-        WoningwaarderingResultatenWoningwaardering: Waardering voor een specifiek parkeertype
+    Returns:
+        list[WaarderingBouwer]: Waarderingen voor de parkeertypes
     """
     if ruimte.detail_soort is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort")
-        return
+        return []
 
     if ruimte.detail_soort in [
         # onderstaande parkeergelegenden worden vervangen: https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
@@ -77,7 +80,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort}. Gebruik {Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex} als detailsoort om in aanmerking te komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}.",
             UserWarning,
         )
-        return None
+        return []
 
     if ruimte.detail_soort not in [
         Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,  # Type I
@@ -88,24 +91,25 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         logger.debug(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft detailsoort {ruimte.detail_soort} en wordt niet gewaardeerd voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
         )
-        return
+        return []
 
     if ruimte.oppervlakte is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte")
-        return
+        return []
 
     if ruimte.gedeeld_met_aantal_eenheden is None:
         warnings.warn(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_eenheden'. Zet 'gedeeld_met_aantal_eenheden' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_eenheden' op 0 of 1 wordt beschouwd als niet gedeeld."
         )
-        return
+        return []
 
     if not ruimte.oppervlakte >= 12.0:
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) voldoet niet aan de eis van 12m2 voor een parkeervak."
         )
-        return
+        return []
 
+    waarderingen: list[WaarderingBouwer] = []
     for (
         type_parkeeruimte,
         punten,
@@ -131,18 +135,13 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{criterium}'."
         )
 
-        yield WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+        waarderingen.append(
+            waarderingsgroep_bouwer.maak_onderliggende(
+                id=ruimte.id,
                 naam=criterium,
-                id=str(
-                    CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
-                        ruimte_id=ruimte.id,
-                    )
-                ),
                 meeteenheid=Meeteenheid.stuks,
-            ),
-            aantal=ruimte.aantal,
-            punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),
+                aantal=ruimte.aantal,
+                punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),
+            )
         )
-    return
+    return waarderingen

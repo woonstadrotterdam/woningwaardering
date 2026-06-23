@@ -55,41 +55,34 @@ Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroe
 
 ## Criterium ID's
 
-De `CriteriumId` class wordt gebruikt om ID's te genereren voor criteria in de woningwaardering. Deze ID's worden opgebouwd uit verschillende onderdelen die worden samengevoegd met dubbele underscores (`__`).
+Criterium-id's worden afgeleid uit de **bovenliggende** in de hiërarchie. De builders in `woningwaardering/stelsels/bouwers.py` (`WaarderingsgroepBouwer` en `WaarderingBouwer`) zetten `criterium.id` en `bovenliggendeCriterium` synchroon.
 
-De opbouw van een criterium ID kan de volgende onderdelen bevatten (in deze volgorde):
+- Onder de stelselgroep-groep: `{stelselgroep}__{segment}`
+- Onder een bestaande waardering: `{bovenliggende_id}__{segment}`
 
-- Stelselgroep (verplicht, bijvoorbeeld 'buitenruimten' of 'energieprestatie')
-- Gedeeld-met segment (optioneel): `prive` of `gedeeld_met__{n}__{soort}` — direct na de stelselgroep
-- Ruimte ID (optioneel, bijvoorbeeld 'Space_108014713')
-- Criteriumnaam (optioneel, bijvoorbeeld 'factor_II' of 'verwarmde_vertrekken')
+Segmenten worden met dubbele underscores (`__`) aan elkaar gekoppeld. Een **criterium** draagt identiteit en hiërarchie; **punten** en **aantal** zitten op de waardering.
 
-Er zijn drie id-families:
+Gedeeld-met lagen:
 
-- **Ruimteregel:** `{stelselgroep}__{gedeeld_met?}__{ruimte_id}__{criteriumnaam?}` — per ruimte of element
-- **Gedeeld-met aggregaat:** `{stelselgroep}__prive` of `{stelselgroep}__gedeeld_met__{n}__{soort}` — som per privé of gedeelde groep
-- **Criteriumnaam-regel:** `{stelselgroep}__{gedeeld_met?}__{criteriumnaam}` — subgroepen, maxima of resultaatregels (bijv. WOZ-onderdelen)
+- `prive` bij aantal ≤ 1
+- `gedeeld_met_{n}_{soort}` bij aantal > 1 (enkele underscores rond het aantal en de soort)
 
-Detailregels en aggregaten kunnen hierarchisch genest worden via `bovenliggendeCriterium`. De volledige id van een kind is dan `{bovenliggende_id}__{eigen onderdelen}` (zonder herhaling van de stelselgroep-prefix). Gebruik `CriteriumId(..., bovenliggende=...)` of `nest_onder(bovenliggende_id, criterium_id)` in code.
+Voorbeelden:
 
-Voorbeelden van gegenereerde ID's:
+- `buitenruimten__prive__Space_108014713` (ruimteregel, privé)
+- `buitenruimten__gedeeld_met_2_adressen__Space_108006357` (ruimteregel, gedeeld)
+- `buitenruimten__prive` (gedeeld-met aggregaat)
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen` (gedeeld-met aggregaat)
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen__keuken` (categorie onder gedeeld-met aggregaat)
+- `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumsleutel)
 
-- `buitenruimten__Space_108014713` (ruimteregel, privé)
-- `buitenruimten__gedeeld_met__2__adressen__Space_108006357` (ruimteregel, gedeeld)
-- `buitenruimten__prive` (gedeeld-met aggregaat, privé)
-- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen` (gedeeld-met aggregaat)
-- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met__4__adressen__keuken` (categorie onder gedeeld-met aggregaat)
-- `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumnaam-regel)
-
-Bij gedeelde voorzieningen wordt automatisch `prive` toegevoegd als het aantal 1 of minder is, en anders wordt het aantal en soort toegevoegd (bijvoorbeeld `gedeeld_met__4__adressen`).
+`WaarderingsgroepBouwer` bouwt een stelselgroep-groep op: start met `WaarderingsgroepBouwer(stelsel, stelselgroep)`, hang onderliggende waarderingen aan met `maak_onderliggende(...)`, dedupliceer gedeeld-met-criteria met `gedeeld_met(...)`, en sluit af met `bouw()` (sommeert de punten en levert een kale `WoningwaarderingResultatenWoningwaarderingGroep`). De `waarderingsgroep_bouwer` die stelselgroepen aan gedeelde helpers doorgeven is daarmee een `WaarderingsgroepBouwer` of `WaarderingBouwer`; de helpers hangen hun resultaten daar direct onder.
 
 Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat.
 
 Met deze ID's kan gerefereerd worden aan specifieke criteria in de output van de woningwaardering.
 
 ### Criteriumsleutels
-
-Bij sommige stelselgroepen horen meerdere detailwaarderingen bij dezelfde subgroep. Bijvoorbeeld bij _verkoeling en verwarming_ geldt een maximum van 2 extra punten voor vertrekken die verkoeld én verwarmd zijn, en een maximum van 4 punten voor verwarmde overige- en verkeersruimten. De maximering wordt in de stelselgroep-logica berekend; in de output groeperen we de bijbehorende detailregels met **criteriumsleutels**.
 
 Een criteriumsleutel is een id volgens de **criteriumnaam-regel** (`{stelselgroep}__{criteriumnaam}`):
 
@@ -116,6 +109,6 @@ Zie [aan de slag](../aan-de-slag/index.md) voor een volledig voorbeeld in JSON-o
 - Een aggregaatregel met een criteriumsleutel-id mag wél een `bovenliggendeCriterium` hebben als dat een **gedeeld-met aggregaat** is (andere id-familie). Dat komt voor bij onzelfstandige woningen:
 
 ```text
-verkoeling_en_verwarming__gedeeld_met__2__onzelfstandige_woonruimten
-└──── stelselgroep ────┘└ gedeeld_met 2 ┘└ onzelfstandige_woonruimten ┘
+verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten
+└──── stelselgroep ────┘└ gedeeld_met 2 onzelfstandige woonruimten ┘
 ```

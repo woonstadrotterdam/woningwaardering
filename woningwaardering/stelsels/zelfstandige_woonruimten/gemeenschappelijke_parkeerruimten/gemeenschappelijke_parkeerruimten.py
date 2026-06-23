@@ -7,21 +7,14 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import (
-    CriteriumId,
-    GedeeldMetSoort,
-    nest_onder,
-)
+from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
+from woningwaardering.stelsels.criterium import GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingCriteriumSleutels,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -50,81 +43,54 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+            self.stelsel, self.stelselgroep
         )
-        woningwaardering_groep.woningwaarderingen = []
 
         if not eenheid.ruimten:
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
-            return woningwaardering_groep
+            return waarderingsgroep_bouwer.bouw()
 
-        gedeeld_met_eenheden: set[int] = set()
+        # De gedeelde helper bevat de classificatielogica. We laten die in een
+        # tijdelijke waarderingsgroep_bouwer opbouwen en plaatsen de waarderingen daarna onder het juiste
+        # gedeeld-met-criterium met opgeschoonde naam.
+        tijdelijk = WaarderingsgroepBouwer(self.stelsel, self.stelselgroep)
 
         for ruimte in eenheid.ruimten:
-            waarderingen = waardeer_gemeenschappelijke_parkeerruimte(ruimte)
-            if waarderingen is None:
-                continue
-
-            for waardering in waarderingen:
+            for bron in waardeer_gemeenschappelijke_parkeerruimte(
+                ruimte, waarderingsgroep_bouwer=tijdelijk
+            ):
                 if (
-                    waardering.criterium is not None
-                    and ruimte.gedeeld_met_aantal_eenheden
+                    ruimte.gedeeld_met_aantal_eenheden
                     and ruimte.gedeeld_met_aantal_eenheden >= 2
-                    and waardering.criterium.id is not None
                 ):
-                    aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden
-                    gedeeld_met_eenheden.add(aantal_eenheden)
-                    adressen_id = str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            gedeeld_met_aantal=aantal_eenheden,
-                            gedeeld_met_soort=GedeeldMetSoort.adressen,
-                        )
+                    gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
+                        aantal=ruimte.gedeeld_met_aantal_eenheden,
+                        soort=GedeeldMetSoort.adressen,
                     )
-                    waardering.criterium.id = nest_onder(
-                        adressen_id, waardering.criterium.id
-                    )
-                    if waardering.criterium.naam is not None:
-                        waardering.criterium.naam = re.sub(
-                            r" \(gedeeld met \d+ adressen\)$",
-                            "",
-                            waardering.criterium.naam,
-                        )
-                    waardering.criterium.bovenliggende_criterium = (
-                        WoningwaarderingCriteriumSleutels(id=adressen_id)
-                    )
-                elif waardering.criterium is not None and waardering.criterium.naam:
-                    waardering.criterium.naam = re.sub(
-                        r" \(privé\)$",
+                    naam = re.sub(
+                        r" \(gedeeld met \d+ adressen\)$",
                         "",
-                        waardering.criterium.naam,
+                        bron.naam or "",
+                    )
+                    gedeeld_met.maak_onderliggende(
+                        id=ruimte.id or "ruimte",
+                        naam=naam,
+                        punten=bron.punten,
+                        aantal=bron.aantal,
+                        meeteenheid=bron.meeteenheid,
+                    )
+                elif bron.naam:
+                    naam = re.sub(r" \(privé\)$", "", bron.naam)
+                    waarderingsgroep_bouwer.maak_onderliggende(
+                        id=ruimte.id,
+                        naam=naam,
+                        punten=bron.punten,
+                        aantal=bron.aantal,
+                        meeteenheid=bron.meeteenheid,
                     )
 
-                woningwaardering_groep.woningwaarderingen.append(waardering)
-
-        for aantal_eenheden in sorted(gedeeld_met_eenheden):
-            adressen_id = str(
-                CriteriumId(
-                    stelselgroep=self.stelselgroep,
-                    gedeeld_met_aantal=aantal_eenheden,
-                    gedeeld_met_soort=GedeeldMetSoort.adressen,
-                )
-            )
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        id=adressen_id,
-                        naam=utils.naam_gedeeld_met_groep(
-                            aantal_eenheden,
-                            soort=GedeeldMetSoort.adressen,
-                        ),
-                    ),
-                )
-            )
+        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
         punten_totaal = float(
             utils.rond_af_op_kwart(
@@ -132,8 +98,9 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
                     str(
                         sum(
                             woningwaardering.punten
-                            for woningwaardering in woningwaardering_groep.woningwaarderingen
-                            or []
+                            for woningwaardering in (
+                                woningwaardering_groep.woningwaarderingen or []
+                            )
                             if woningwaardering.punten is not None
                         )
                     )
@@ -155,5 +122,5 @@ if __name__ == "__main__":  # pragma: no cover
         instance=GemeenschappelijkeParkeerruimten(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer("warnings.json")
+    ) as waarderingsgroep_bouwer:
+        waarderingsgroep_bouwer.waardeer("warnings.json")

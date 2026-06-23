@@ -25,10 +25,10 @@ OPPERVLAKTE VAN VERTREKKEN
   Totaal                                                    58.08 m²  58.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
+  Correctie: zolder zonder vaste trap                                 -5.00 pt
   Subtotaal                                                 13.09 m²   9.75 pt
     - Zolder                                                10.23 m²
     - Wasruimte                                              2.86 m²
-  Correctie: zolder zonder vaste trap                                 -5.00 pt
                                                             --------  --------
   Totaal                                                    13.09 m²   4.75 pt
 
@@ -55,12 +55,14 @@ ENERGIEPRESTATIE
   Totaal                                                              34.00 pt
 
 KEUKEN
-  Keuken: Lengte aanrecht                                 2507.00 mm   7.00 pt
+  Keuken
+    - Lengte aanrecht                                     2507.00 mm   7.00 pt
                                                                       --------
   Totaal                                                               7.00 pt
 
 SANITAIR
-  Wasruimte - Douche                                         1.00 st   4.00 pt
+  Wasruimte
+    - Douche                                                 1.00 st   4.00 pt
                                                                       --------
   Totaal                                                               4.00 pt
 

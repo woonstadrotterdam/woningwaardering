@@ -14,12 +14,18 @@
       "punten": 1.75,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "buitenruimten__gedeeld_met_2_adressen",
+            "naam": "Gedeeld met 2 adressen"
+          }
+        },
+        {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017427",
+            "id": "buitenruimten__gedeeld_met_2_adressen__Space_108017427",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__2__adressen"
+              "id": "buitenruimten__gedeeld_met_2_adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,12 +35,27 @@
           "punten": 1.05
         },
         {
+          "criterium": {
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen",
+            "naam": "Gedeeld met 3 adressen",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017428",
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__Space_108017428",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen"
+              "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -42,27 +63,6 @@
             }
           },
           "punten": 0.75
-        },
-        {
-          "criterium": {
-            "id": "buitenruimten__gedeeld_met__2__adressen",
-            "naam": "Gedeeld met 2 adressen"
-          }
-        },
-        {
-          "criterium": {
-            "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten__gedeeld_met__3__adressen",
-            "naam": "Gedeeld met 3 adressen",
-            "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten"
-            }
-          }
-        },
-        {
-          "criterium": {
-            "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
-          }
         }
       ]
     }

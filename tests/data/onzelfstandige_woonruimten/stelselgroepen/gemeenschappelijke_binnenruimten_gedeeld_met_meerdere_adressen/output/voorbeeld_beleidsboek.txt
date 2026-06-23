@@ -13,12 +13,14 @@ GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
         - Verwarmde vertrekken
           - Keuken                                                     0.13 pt
       - Keuken
-        - Keuken: Lengte aanrecht                         2999.00 mm   0.44 pt
-        - Keuken: Inbouw magnetron                           1.00 st   0.06 pt
-        - Keuken: Inbouw koelkast                            1.00 st   0.06 pt
-        - Keuken: Inbouw oven elektrisch                     1.00 st   0.06 pt
+        - Keuken
+          - Lengte aanrecht                               2999.00 mm   0.44 pt
+          - Inbouw koelkast                                  1.00 st   0.06 pt
+          - Inbouw oven elektrisch                           1.00 st   0.06 pt
+          - Inbouw magnetron                                 1.00 st   0.06 pt
       - Sanitair
-        - Toilet: Hangend toilet                                       0.23 pt
-        - Toilet: Wastafel                                             0.06 pt
+        - Toilet
+          - Hangend toilet                                   1.00 st   0.23 pt
+          - Wastafel                                         1.00 st   0.06 pt
                                                                       --------
   Totaal                                                               2.50 pt

@@ -1,7 +1,7 @@
 import asyncio
 import warnings
 from datetime import date
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from functools import wraps
 from importlib.resources import files
 from typing import Any, Callable, Counter, Iterator, List, Tuple
@@ -10,7 +10,6 @@ import pandas as pd
 import requests
 from loguru import logger
 
-from woningwaardering.stelsels.criterium_id import GedeeldMetSoort
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
@@ -402,15 +401,47 @@ def _render_waardering_pre_order(
         )
 
 
-def _gedeeld_met_divisor(criterium_id: str | None) -> Decimal:
-    if criterium_id is None or "gedeeld_met__" not in criterium_id:
+def _divisor_uit_criterium_id(criterium_id: str | None) -> Decimal:
+    """Geef de gedeeld-met-factor uit één criterium-id (1 als geen gedeeld_met)."""
+    if criterium_id is None:
         return Decimal("1")
     parts = criterium_id.split("__")
-    try:
+    # Oud format: het aantal staat als los segment direct na 'gedeeld_met'.
+    if "gedeeld_met" in parts:
         idx = parts.index("gedeeld_met")
-        return Decimal(parts[idx + 1])
-    except (ValueError, IndexError):
-        return Decimal("1")
+        try:
+            return Decimal(parts[idx + 1])
+        except (InvalidOperation, IndexError):
+            return Decimal("1")
+    # Nieuw format: het aantal staat in het segment 'gedeeld_met_{aantal}_{soort}'.
+    for part in parts:
+        if part.startswith("gedeeld_met_"):
+            getal = part[len("gedeeld_met_") :].split("_", 1)[0]
+            try:
+                return Decimal(getal)
+            except InvalidOperation:
+                return Decimal("1")
+    return Decimal("1")
+
+
+def _gedeeld_met_divisor(criterium_id: str | None) -> Decimal:
+    return _divisor_uit_criterium_id(criterium_id)
+
+
+def _gedeeld_met_divisor_keten(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> Decimal:
+    """Vermenigvuldig alle gedeeld-met-factoren langs de bovenliggende-keten."""
+    product = Decimal("1")
+    current: WoningwaarderingResultatenWoningwaardering | None = waardering
+    while current is not None and current.criterium is not None:
+        bovenliggend = current.criterium.bovenliggende_criterium
+        if bovenliggend is None or bovenliggend.id is None:
+            break
+        product *= _divisor_uit_criterium_id(bovenliggend.id)
+        current = _waardering_voor_criterium_id(bovenliggend.id, waarderingen)
+    return product
 
 
 def _waardering_voor_criterium_id(
@@ -441,7 +472,7 @@ def _effectieve_aantal_bijdrage(
         parent = _waardering_voor_criterium_id(bovenliggend.id, waarderingen)
         if parent is not None and parent.aantal is not None:
             return None
-        divisor = _gedeeld_met_divisor(bovenliggend.id)
+        divisor = _gedeeld_met_divisor_keten(waardering, waarderingen)
         return rond_af(Decimal(str(waardering.aantal)) / divisor, decimalen=2)
 
     criterium_id = waardering.criterium.id or ""
@@ -880,23 +911,6 @@ def criteriumsleutel_ids(
     return parent_ids_met_onderliggende_punten(
         waarderingen
     ) | parent_ids_met_onderliggende_aantal(waarderingen)
-
-
-def naam_gedeeld_met_groep(
-    aantal: int,
-    *,
-    soort: GedeeldMetSoort | None = None,
-) -> str:
-    """Weergavenaam voor een gedeeld-met-groep (zonder prefix 'Totaal')."""
-    if aantal <= 1:
-        return "Privé"
-    if soort == GedeeldMetSoort.adressen:
-        return f"Gedeeld met {aantal} adressen"
-    if soort == GedeeldMetSoort.onzelfstandige_woonruimten:
-        return f"Gedeeld met {aantal} onzelfstandige woonruimten"
-    raise ValueError(
-        f"soort is verplicht bij gedeeld met aantal {aantal} (verwacht adressen of onzelfstandige_woonruimten)"
-    )
 
 
 def som_punten_waarderingen(

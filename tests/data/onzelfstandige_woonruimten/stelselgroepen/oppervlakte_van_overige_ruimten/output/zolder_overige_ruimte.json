@@ -14,9 +14,16 @@
       "punten": 8.25,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__prive",
+            "naam": "Privé"
+          },
+          "punten": 7.5
+        },
+        {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_1",
+            "id": "oppervlakte_van_overige_ruimten__prive__Space_1",
             "naam": "Zolder vertrek met trap",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__prive"
@@ -28,39 +35,49 @@
           }
         },
         {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 3 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__Space_3__correctie_zolder_zonder_vaste_trap",
+            "naam": "Correctie: zolder zonder vaste trap",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten"
+            }
+          },
+          "punten": -1.67
+        },
+        {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_3",
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__subtotaal",
+            "naam": "Subtotaal",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.5
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__subtotaal__Space_3",
             "naam": "Zolder vertrek met vlizo trap",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__gedeeld_met__3__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__subtotaal"
             },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive",
-            "naam": "Privé"
-          },
-          "punten": 7.5
-        },
-        {
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__gedeeld_met__3__onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 3 onzelfstandige woonruimten"
-          },
-          "punten": 2.5
-        },
-        {
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_3__correctie_zolder_zonder_vaste_trap",
-            "naam": "Correctie: zolder zonder vaste trap"
-          },
-          "punten": -1.67
         }
       ]
     }

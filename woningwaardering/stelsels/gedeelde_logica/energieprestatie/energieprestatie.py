@@ -2,12 +2,13 @@ from datetime import date
 
 from loguru import logger
 
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.bouwers import (
+    WaarderingBouwer,
+    WaarderingsgroepBouwer,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenPrijscomponent,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
     Eenheidmonument,
@@ -18,18 +19,21 @@ from woningwaardering.vera.referentiedata import (
 
 def monument_correctie(
     eenheid: EenhedenEenheid,
-    woningwaardering: WoningwaarderingResultatenWoningwaardering,
-) -> WoningwaarderingResultatenWoningwaardering | None:
+    woningwaardering: WaarderingBouwer,
+    *,
+    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+) -> WaarderingBouwer | None:
     """
     Berekent de correctie voor monumenten.
     Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
 
     Args:
         eenheid (EenhedenEenheid): Eenheid
-        woningwaardering (WoningwaarderingResultatenWoningwaardering): De waardering voor Energieprestatie tot zover.
+        woningwaardering (WaarderingBouwer): De waardering voor Energieprestatie tot zover.
+        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Returns:
-        WoningwaarderingResultatenWoningwaardering | None: De correctiewaardering indien van toepassing, anders None
+        WaarderingBouwer | None: De correctiewaardering indien van toepassing, anders None
     """
 
     if (
@@ -49,17 +53,10 @@ def monument_correctie(
         logger.info(
             f"Eenheid ({eenheid.id}) is een monument: waardering voor {Woningwaarderingstelselgroep.energieprestatie.naam} is minimaal 0 punten."
         )
-        return WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="Correctie monument",
-                id=str(
-                    CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.energieprestatie,
-                        criterium="correctie_monument",
-                    )
-                ),
-            ),
-            punten=woningwaardering.punten * -1.0,
+        return waarderingsgroep_bouwer.maak_onderliggende(
+            id="correctie_monument",
+            naam="Correctie monument",
+            punten=-woningwaardering.punten,
         )
     return None
 

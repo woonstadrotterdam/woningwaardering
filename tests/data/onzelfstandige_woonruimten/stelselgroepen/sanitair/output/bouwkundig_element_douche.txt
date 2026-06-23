@@ -4,6 +4,7 @@ SAMENVATTING
 
 SANITAIR
   Privé
-    - Doucheruimte - Douche                                  1.00 st   3.00 pt
+    - Doucheruimte
+      - Douche                                               1.00 st   3.00 pt
                                                                       --------
   Totaal                                                               3.00 pt

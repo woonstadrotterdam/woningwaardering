@@ -14,10 +14,19 @@
       "punten": 4.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_626348",
+            "naam": "Doucheruimte"
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_626348__douche",
-            "naam": "Doucheruimte - Douche",
+            "naam": "Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_626348"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"
