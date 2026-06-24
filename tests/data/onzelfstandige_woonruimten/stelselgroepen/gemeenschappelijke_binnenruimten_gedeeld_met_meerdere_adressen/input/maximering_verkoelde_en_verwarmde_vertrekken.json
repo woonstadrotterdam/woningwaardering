@@ -19,7 +19,7 @@
       "verkoeld": true
     },
     {
-      "id": "B",
+      "id": "keuken_1",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -28,7 +28,7 @@
         "code": "KEU",
         "naam": "Keuken"
       },
-      "naam": "Keuken",
+      "naam": "Keuken 1",
       "oppervlakte": 20.0,
       "gedeeld_met_aantal_eenheden": 2,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
@@ -37,7 +37,7 @@
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in woonkamer",
+          "omschrijving": "Aanrecht in keuken",
           "soort": {
             "code": "KEU",
             "naam": "Keuken voorziening"
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "id": "B2",
+      "id": "keuken_2",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -60,7 +60,7 @@
         "code": "KEU",
         "naam": "Keuken"
       },
-      "naam": "Keuken",
+      "naam": "Keuken 2",
       "oppervlakte": 20.0,
       "gedeeld_met_aantal_eenheden": 2,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
@@ -69,7 +69,7 @@
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in woonkamer",
+          "omschrijving": "Aanrecht in keuken",
           "soort": {
             "code": "KEU",
             "naam": "Keuken voorziening"

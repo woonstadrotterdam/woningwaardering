@@ -1,6 +1,7 @@
 from collections import defaultdict
 from datetime import date
 from decimal import Decimal
+from typing import NamedTuple
 
 from loguru import logger
 
@@ -40,6 +41,11 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+
+
+class Oppervlaktegroepsleutel(NamedTuple):
+    aantal_eenheden: int
+    ruimtesoort: RuimtesoortReferentiedata
 
 
 class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
@@ -121,7 +127,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         # en ruimtesoort; per oppervlaktegroep wordt op hele m² afgerond (op het totaal)
         # en daarna door het aantal adressen gedeeld.
         oppervlaktegroepen: defaultdict[
-            tuple[int, RuimtesoortReferentiedata], list[EenhedenRuimte]
+            Oppervlaktegroepsleutel, list[EenhedenRuimte]
         ] = defaultdict(list)
 
         for ruimte in gedeelde_ruimten:
@@ -150,13 +156,24 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                         continue
 
             oppervlaktegroepen[
-                (ruimte.gedeeld_met_aantal_eenheden, ruimtesoort)
+                Oppervlaktegroepsleutel(
+                    ruimte.gedeeld_met_aantal_eenheden,
+                    ruimtesoort,
+                )
             ].append(ruimte)
 
-        for (aantal_eenheden, ruimtesoort), ruimten in sorted(
+        def sorteer_oppervlaktegroepen(
+            oppervlaktegroep: tuple[Oppervlaktegroepsleutel, list[EenhedenRuimte]],
+        ) -> int:
+            sleutel, _ruimten = oppervlaktegroep
+            return sleutel.aantal_eenheden
+
+        for groepssleutel, ruimten in sorted(
             oppervlaktegroepen.items(),
-            key=lambda item: (item[0][0], str(item[0][1])),
+            key=sorteer_oppervlaktegroepen,
         ):
+            aantal_eenheden = groepssleutel.aantal_eenheden
+            ruimtesoort = groepssleutel.ruimtesoort
             totaal_oppervlakte = sum(
                 (
                     rond_af(ruimte.oppervlakte, decimalen=2)

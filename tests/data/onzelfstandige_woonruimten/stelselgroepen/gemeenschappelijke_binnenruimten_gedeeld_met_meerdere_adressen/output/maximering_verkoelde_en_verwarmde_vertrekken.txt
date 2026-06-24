@@ -7,24 +7,22 @@ GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
     - Gedeeld met 2 adressen
       - Oppervlakte van vertrekken                                    15.00 pt
         - Woonkamer                                         20.00 m²
-        - Keuken                                            20.00 m²
-        - Keuken                                            20.00 m²
+        - Keuken 1                                          20.00 m²
+        - Keuken 2                                          20.00 m²
       - Verkoeling en verwarming
         - Verwarmde vertrekken
           - Woonkamer                                                  0.50 pt
-          - Keuken                                                     0.50 pt
-          - Keuken                                                     0.50 pt
+          - Keuken 1                                                   0.50 pt
+          - Keuken 2                                                   0.50 pt
         - Verkoelde vertrekken
           - Woonkamer                                                  0.25 pt
-          - Keuken                                                     0.25 pt
-          - Keuken                                                     0.25 pt
+          - Keuken 1                                                   0.25 pt
+          - Keuken 2                                                   0.25 pt
           - Maximaal 2 punten                                         -0.25 pt
       - Keuken
-        - Keuken
+        - Keuken 1
           - Lengte aanrecht                               3001.00 mm   2.50 pt
-          - Lengte aanrecht                               3001.00 mm   2.50 pt
-        - Keuken
-          - Lengte aanrecht                               3001.00 mm   2.50 pt
+        - Keuken 2
           - Lengte aanrecht                               3001.00 mm   2.50 pt
                                                                       --------
   Totaal                                                              22.00 pt

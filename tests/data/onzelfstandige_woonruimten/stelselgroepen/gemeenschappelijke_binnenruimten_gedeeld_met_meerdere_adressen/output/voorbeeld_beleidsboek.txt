@@ -5,10 +5,10 @@ SAMENVATTING 1
 GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
   Gedeeld met 4 onzelfstandige woonruimten
     - Gedeeld met 4 adressen
-      - Oppervlakte van overige ruimten                                0.09 pt
-        - Toilet                                             2.00 m²
       - Oppervlakte van vertrekken                                     1.25 pt
         - Keuken                                            20.00 m²
+      - Oppervlakte van overige ruimten                                0.09 pt
+        - Toilet                                             2.00 m²
       - Verkoeling en verwarming
         - Verwarmde vertrekken
           - Keuken                                                     0.13 pt
