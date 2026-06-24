@@ -6,12 +6,13 @@ SANITAIR
   Badruimte
     - Wastafel                                               1.00 st   1.00 pt
     - Bad en douche                                          1.00 st   7.00 pt
-    - Voorzieningen: Bubbelfunctie van het bad               1.00 st   1.50 pt
-    - Voorzieningen: Douchewand                              1.00 st   1.25 pt
-    - Voorzieningen: Handdoekenradiator                      2.00 st   1.50 pt
-    - Voorzieningen: Stopcontact bij wastafel                2.00 st   0.50 pt
-    - Voorzieningen: Éénhandsmengkraan                       2.00 st   0.50 pt
-    - Voorzieningen: Thermostatische mengkraan               1.00 st   0.50 pt
+    - Extra voorzieningen
+      - Bubbelfunctie van het bad                            1.00 st   1.50 pt
+      - Douchewand                                           1.00 st   1.25 pt
+      - Handdoekenradiator                                   2.00 st   1.50 pt
+      - Stopcontact bij wastafel                             2.00 st   0.50 pt
+      - Éénhandsmengkraan                                    2.00 st   0.50 pt
+      - Thermostatische mengkraan                            1.00 st   0.50 pt
   Slaapkamer
     - Douche                                                 1.00 st   4.00 pt
                                                                       --------

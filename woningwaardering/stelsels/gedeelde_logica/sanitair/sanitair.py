@@ -64,34 +64,14 @@ def waardeer_sanitair(
     detail_waarderingen.extend(baden_en_douches_waarderingen)
 
     voorziening_waarderingen = list(
-        _waardeer_installaties(ruimte, stelsel, ruimte_criterium)
-    )
-    totaal_punten_voorzieningen = Decimal(
-        sum(
-            Decimal(str(woningwaardering.punten))
-            for woningwaardering in voorziening_waarderingen
-            if woningwaardering.punten is not None
+        _waardeer_installaties(
+            ruimte,
+            stelsel,
+            ruimte_criterium,
+            totaal_punten_bad_en_douche=totaal_punten_bad_en_douche,
         )
     )
     detail_waarderingen.extend(voorziening_waarderingen)
-
-    maximering = min(
-        rond_af(totaal_punten_bad_en_douche - totaal_punten_voorzieningen, 2),
-        Decimal("0"),
-    )
-
-    if maximering < 0:
-        logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximering van {maximering} punten want maximaal evenveel punten voor bad en douche ({totaal_punten_bad_en_douche}) als voor voorzieningen ({totaal_punten_voorzieningen})."
-        )
-
-        detail_waarderingen.append(
-            ruimte_criterium.maak_onderliggende(
-                id="maximering_punten_voorzieningen",
-                naam="Voorzieningen: Max verdubbeling punten bad en douche",
-                punten=maximering,
-            )
-        )
 
     if not detail_waarderingen:
         ruimte_criterium.verwijder()
@@ -387,6 +367,8 @@ def _waardeer_installaties(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    *,
+    totaal_punten_bad_en_douche: Decimal,
 ) -> Iterator[WaarderingBouwer]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     punten_installaties: dict[Referentiedata, float] = {
@@ -434,10 +416,21 @@ def _waardeer_installaties(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}): geen bad of douche aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
                 )
             elif totaal_aantal_wastafels > 0 and bad_en_of_douche_aanwezig:
+                voorzieningen_criterium: WaarderingBouwer | None = None
+
                 for installatiesoort in punten_installaties:
                     aantal = installaties[installatiesoort]
                     if aantal == 0:
                         continue
+
+                    if voorzieningen_criterium is None:
+                        voorzieningen_criterium = (
+                            waarderingsgroep_bouwer.maak_onderliggende(
+                                id="extra_voorzieningen",
+                                naam="Extra voorzieningen",
+                            )
+                        )
+                        yield voorzieningen_criterium
 
                     punten = rond_af(
                         Decimal(str(aantal))
@@ -450,9 +443,9 @@ def _waardeer_installaties(
                     logger.info(
                         f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatiesoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
                     )
-                    yield waarderingsgroep_bouwer.maak_onderliggende(
+                    yield voorzieningen_criterium.maak_onderliggende(
                         id=installatiesoort.name,
-                        naam=f"Voorzieningen: {installatiesoort.naam}",
+                        naam=installatiesoort.naam,
                         meeteenheid=Meeteenheid.stuks,
                         punten=punten,
                         aantal=aantal,
@@ -466,9 +459,9 @@ def _waardeer_installaties(
                             logger.info(
                                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatiesoort.naam} van {correctie} punten in {Woningwaarderingstelselgroep.sanitair.naam}."
                             )
-                            yield waarderingsgroep_bouwer.maak_onderliggende(
+                            yield voorzieningen_criterium.maak_onderliggende(
                                 id=f"max_punten_{installatiesoort.name}",
-                                naam=f"Voorzieningen: Max {maximum} punten voor {installatiesoort.naam}",
+                                naam=f"Max {maximum} punten voor {installatiesoort.naam}",
                                 punten=correctie,
                             )
 
@@ -484,8 +477,28 @@ def _waardeer_installaties(
                             logger.info(
                                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatiesoort.naam} van {correctie} punten want er zijn meer dan 2x zoveel stopcontacten ({aantal}) als wastafels ({totaal_aantal_wastafels})."
                             )
-                            yield waarderingsgroep_bouwer.maak_onderliggende(
+                            yield voorzieningen_criterium.maak_onderliggende(
                                 id=f"max_{Installatiesoort.stopcontact_bij_wastafel.name}",
-                                naam="Voorzieningen: Max 2 stopcontacten per wastafel",
+                                naam="Max 2 stopcontacten per wastafel",
                                 punten=correctie,
                             )
+
+                # De punten voor extra voorzieningen tellen mee tot maximaal het
+                # aantal punten voor bad en douche in dezelfde ruimte.
+                if voorzieningen_criterium is not None:
+                    maximering = min(
+                        rond_af(
+                            totaal_punten_bad_en_douche - totaal_punten_voorzieningen,
+                            2,
+                        ),
+                        Decimal("0"),
+                    )
+                    if maximering < 0:
+                        logger.info(
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximering van {maximering} punten want maximaal evenveel punten voor bad en douche ({totaal_punten_bad_en_douche}) als voor voorzieningen ({totaal_punten_voorzieningen})."
+                        )
+                        yield voorzieningen_criterium.maak_onderliggende(
+                            id="maximering_punten_voorzieningen",
+                            naam="Max verdubbeling punten bad en douche",
+                            punten=maximering,
+                        )

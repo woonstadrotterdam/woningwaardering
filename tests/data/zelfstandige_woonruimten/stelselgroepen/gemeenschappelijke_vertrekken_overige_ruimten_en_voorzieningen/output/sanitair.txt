@@ -10,15 +10,16 @@ GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
       - Badruimte
         - Wastafel                                           1.00 st   0.50 pt
         - Bad                                                1.00 st   3.00 pt
-        - Voorzieningen: Bubbelfunctie van het bad           1.00 st   0.75 pt
-        - Voorzieningen: Douchewand                          1.00 st   0.63 pt
-        - Voorzieningen: Handdoekenradiator                  1.00 st   0.38 pt
-        - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel         1.00 st   0.50 pt
-        - Voorzieningen: Kastruimte                          2.00 st   0.75 pt
-        - Voorzieningen: Max 0.75 punten voor Kastruimte                  -0.38 pt
-        - Voorzieningen: Stopcontact bij wastafel            1.00 st   0.13 pt
-        - Voorzieningen: Éénhandsmengkraan                   1.00 st   0.13 pt
-        - Voorzieningen: Thermostatische mengkraan           1.00 st   0.25 pt
-        - Voorzieningen: Max verdubbeling punten bad en douche                  -0.13 pt
+        - Extra voorzieningen
+          - Bubbelfunctie van het bad                        1.00 st   0.75 pt
+          - Douchewand                                       1.00 st   0.63 pt
+          - Handdoekenradiator                               1.00 st   0.38 pt
+          - Ingebouwd kastje met in- of opgebouwde wastafel         1.00 st   0.50 pt
+          - Kastruimte                                       2.00 st   0.75 pt
+          - Max 0.75 punten voor Kastruimte                           -0.38 pt
+          - Stopcontact bij wastafel                         1.00 st   0.13 pt
+          - Éénhandsmengkraan                                1.00 st   0.13 pt
+          - Thermostatische mengkraan                        1.00 st   0.25 pt
+          - Max verdubbeling punten bad en douche                     -0.13 pt
                                                                       --------
   Totaal                                                              11.50 pt
