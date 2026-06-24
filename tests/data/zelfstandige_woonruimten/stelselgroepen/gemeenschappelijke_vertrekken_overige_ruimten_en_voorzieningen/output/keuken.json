@@ -105,12 +105,21 @@
           "punten": 0.8
         },
         {
-          "aantal": 2.0,
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__keuken__keuken__extra_voorziening_inbouw_koelkast",
-            "naam": "Inbouw koelkast",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__keuken__keuken__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__keuken__keuken"
+            }
+          }
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__keuken__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
+            "naam": "Inbouw koelkast",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__keuken__keuken__extra_voorzieningen"
             },
             "meeteenheid": {
               "code": "STU",

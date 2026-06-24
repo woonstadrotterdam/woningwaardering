@@ -6,8 +6,9 @@ KEUKEN
   Privé
     - Keuken
       - Lengte aanrecht                                   1000.00 mm   4.00 pt
-      - Inbouw koelkast                                      4.00 st   4.00 pt
-      - Inbouw oven elektrisch                               1.00 st   1.00 pt
-      - Maximaal 4 punten voor voorzieningen                          -1.00 pt
+      - Extra voorzieningen
+        - Inbouw koelkast                                    4.00 st   4.00 pt
+        - Inbouw oven elektrisch                             1.00 st   1.00 pt
+        - Maximaal 4 punten voor voorzieningen                        -1.00 pt
                                                                       --------
   Totaal                                                               8.00 pt

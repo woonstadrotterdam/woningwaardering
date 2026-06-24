@@ -15,9 +15,10 @@ GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
       - Keuken
         - Keuken
           - Lengte aanrecht                               2999.00 mm   0.44 pt
-          - Inbouw koelkast                                  1.00 st   0.06 pt
-          - Inbouw oven elektrisch                           1.00 st   0.06 pt
-          - Inbouw magnetron                                 1.00 st   0.06 pt
+          - Extra voorzieningen
+            - Inbouw koelkast                                1.00 st   0.06 pt
+            - Inbouw oven elektrisch                         1.00 st   0.06 pt
+            - Inbouw magnetron                               1.00 st   0.06 pt
       - Sanitair
         - Toilet
           - Hangend toilet                                   1.00 st   0.23 pt

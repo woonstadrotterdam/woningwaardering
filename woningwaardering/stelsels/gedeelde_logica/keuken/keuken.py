@@ -51,7 +51,7 @@ def waardeer_keuken(
 
     detail_waarderingen = [
         *list(_waardeer_aanrecht(ruimte, stelsel, ruimte_criterium)),
-        *list(_waardeer_extra_voorzieningen(ruimte, ruimte_criterium)),
+        *list(_waardeer_extra_voorzieningen(ruimte, ruimte_criterium, deler=deler)),
     ]
     if not detail_waarderingen:
         ruimte_criterium.verwijder()
@@ -197,6 +197,8 @@ def _waardeer_aanrecht(
 def _waardeer_extra_voorzieningen(
     ruimte: EenhedenRuimte,
     waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    *,
+    deler: int = 1,
 ) -> Iterator[WaarderingBouwer]:
     """
     Waardeert de extra voorzieningen van een keuken.
@@ -204,6 +206,7 @@ def _waardeer_extra_voorzieningen(
     Args:
         ruimte (EenhedenRuimte): De keuken waarvan de extra voorzieningen gewaardeerd worden.
         waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
+        deler (int): Deler voor gedeelde ruimten; gebruikt om het getoonde maximum aan basisvoorzieningen-punten te berekenen.
 
     Yields:
         WaarderingBouwer: De gewaardeerde extra voorzieningen.
@@ -240,10 +243,20 @@ def _waardeer_extra_voorzieningen(
         if installaties[installatiesoort] > 0
     )
 
+    extra_voorzieningen_criterium: WaarderingBouwer | None = None
+
     for installatiesoort in punten_per_installatie:
         count = installaties[installatiesoort]
         if count == 0:
             continue
+
+        if extra_voorzieningen_criterium is None:
+            extra_voorzieningen_criterium = waarderingsgroep_bouwer.maak_onderliggende(
+                id="extra_voorzieningen",
+                naam="Extra voorzieningen",
+            )
+            yield extra_voorzieningen_criterium
+
         punten = rond_af(
             Decimal(str(punten_per_installatie[installatiesoort]))
             * Decimal(str(count)),
@@ -252,7 +265,7 @@ def _waardeer_extra_voorzieningen(
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {count}x een '{installatiesoort.naam}' voor {Woningwaarderingstelselgroep.keuken.naam}."
         )
-        yield waarderingsgroep_bouwer.maak_onderliggende(
+        yield extra_voorzieningen_criterium.maak_onderliggende(
             id=f"extra_voorziening_{installatiesoort.name}",
             naam=installatiesoort.naam,
             meeteenheid=Meeteenheid.stuks,
@@ -265,11 +278,20 @@ def _waardeer_extra_voorzieningen(
     )
     if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
         aftrek = max_punten_voorzieningen - punten_voor_extra_voorzieningen
+        max_punten_getoond = rond_af(
+            max_punten_voorzieningen / Decimal(deler), decimalen=2
+        )
+        max_punten_label = (
+            int(max_punten_getoond)
+            if max_punten_getoond == max_punten_getoond.to_integral_value()
+            else max_punten_getoond
+        )
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aftrek} punt(en) i.v.m. te veel punten ({punten_voor_extra_voorzieningen} > {max_punten_voorzieningen}) voor extra keuken voorzieningen"
         )
-        yield waarderingsgroep_bouwer.maak_onderliggende(
-            id="maximering_extra_voorzieningen",
-            naam=f"Maximaal {max_punten_voorzieningen} punten voor voorzieningen",
-            punten=aftrek,
-        )
+        if extra_voorzieningen_criterium is not None:
+            yield extra_voorzieningen_criterium.maak_onderliggende(
+                id="maximering_extra_voorzieningen",
+                naam=f"Maximaal {max_punten_label} punten voor voorzieningen",
+                punten=aftrek,
+            )

@@ -138,12 +138,21 @@
           "punten": 0.4375
         },
         {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorziening_inbouw_koelkast",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
             "naam": "Inbouw koelkast",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorzieningen"
             },
             "meeteenheid": {
               "code": "STU",
@@ -155,10 +164,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorziening_inbouw_oven_elektrisch",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorzieningen__extra_voorziening_inbouw_oven_elektrisch",
             "naam": "Inbouw oven elektrisch",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorzieningen"
             },
             "meeteenheid": {
               "code": "STU",
@@ -170,10 +179,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorziening_inbouw_magnetron",
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorzieningen__extra_voorziening_inbouw_magnetron",
             "naam": "Inbouw magnetron",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A"
+              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__keuken__A__extra_voorzieningen"
             },
             "meeteenheid": {
               "code": "STU",

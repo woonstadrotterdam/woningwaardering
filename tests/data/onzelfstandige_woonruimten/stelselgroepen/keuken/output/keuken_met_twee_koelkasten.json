@@ -44,12 +44,21 @@
           "punten": 4.0
         },
         {
-          "aantal": 2.0,
           "criterium": {
-            "id": "keuken__prive__keuken__extra_voorziening_inbouw_koelkast",
-            "naam": "Inbouw koelkast",
+            "id": "keuken__prive__keuken__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
             "bovenliggendeCriterium": {
               "id": "keuken__prive__keuken"
+            }
+          }
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "keuken__prive__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
+            "naam": "Inbouw koelkast",
+            "bovenliggendeCriterium": {
+              "id": "keuken__prive__keuken__extra_voorzieningen"
             },
             "meeteenheid": {
               "code": "STU",
