@@ -14,10 +14,19 @@
       "punten": 8.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__prive",
+            "naam": "Privé"
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__1",
+            "id": "gemeenschappelijke_parkeerruimten__prive__1",
             "naam": "Type II + laadpaal",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_parkeerruimten__prive"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"

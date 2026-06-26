@@ -1,4 +1,3 @@
-import re
 import warnings
 from datetime import date
 from decimal import Decimal
@@ -8,7 +7,6 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
-from woningwaardering.stelsels.criterium import GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
@@ -51,44 +49,10 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
             return waarderingsgroep_bouwer.bouw()
 
-        # De gedeelde helper bevat de classificatielogica. We laten die in een
-        # tijdelijke waarderingsgroep_bouwer opbouwen en plaatsen de waarderingen daarna onder het juiste
-        # gedeeld-met-criterium met opgeschoonde naam.
-        tijdelijk = WaarderingsgroepBouwer(self.stelsel, self.stelselgroep)
-
         for ruimte in eenheid.ruimten:
-            for bron in waardeer_gemeenschappelijke_parkeerruimte(
-                ruimte, waarderingsgroep_bouwer=tijdelijk
-            ):
-                if (
-                    ruimte.gedeeld_met_aantal_eenheden
-                    and ruimte.gedeeld_met_aantal_eenheden >= 2
-                ):
-                    gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
-                        aantal=ruimte.gedeeld_met_aantal_eenheden,
-                        soort=GedeeldMetSoort.adressen,
-                    )
-                    naam = re.sub(
-                        r" \(gedeeld met \d+ adressen\)$",
-                        "",
-                        bron.naam or "",
-                    )
-                    gedeeld_met.maak_onderliggende(
-                        id=ruimte.id or "ruimte",
-                        naam=naam,
-                        punten=bron.punten,
-                        aantal=bron.aantal,
-                        meeteenheid=bron.meeteenheid,
-                    )
-                elif bron.naam:
-                    naam = re.sub(r" \(privé\)$", "", bron.naam)
-                    waarderingsgroep_bouwer.maak_onderliggende(
-                        id=ruimte.id,
-                        naam=naam,
-                        punten=bron.punten,
-                        aantal=bron.aantal,
-                        meeteenheid=bron.meeteenheid,
-                    )
+            waardeer_gemeenschappelijke_parkeerruimte(
+                ruimte, waarderingsgroep_bouwer=waarderingsgroep_bouwer
+            )
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
