@@ -179,7 +179,5 @@ if __name__ == "__main__":  # pragma: no cover
         instance=OppervlakteVanOverigeRuimten(peildatum=date(2026, 1, 1)),
         strict=False,
         log_level="DEBUG",
-    ) as waarderingsgroep_bouwer:
-        waarderingsgroep_bouwer.waardeer(
-            "tests/data/onzelfstandige_woonruimten/input/15004000185.json"
-        )
+    ) as context:
+        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

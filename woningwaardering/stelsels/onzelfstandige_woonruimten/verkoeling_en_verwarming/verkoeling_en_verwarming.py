@@ -148,7 +148,7 @@ if __name__ == "__main__":  # pragma: no cover
         instance=VerkoelingEnVerwarming(peildatum=date(2026, 1, 1)),
         strict=False,
         log_level="DEBUG",
-    ) as waarderingsgroep_bouwer:
-        waarderingsgroep_bouwer.waardeer(
+    ) as context:
+        context.waardeer(
             "tests/data/onzelfstandige_woonruimten/stelselgroepen/verkoeling_en_verwarming/input/vertrek_verkoeld_en_verwarmd_onz.json"
         )

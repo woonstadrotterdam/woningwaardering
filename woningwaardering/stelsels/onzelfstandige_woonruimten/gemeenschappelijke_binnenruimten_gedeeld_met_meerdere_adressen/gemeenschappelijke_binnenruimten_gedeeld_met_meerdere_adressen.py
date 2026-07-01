@@ -437,7 +437,7 @@ if __name__ == "__main__":  # pragma: no cover
         ),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as waarderingsgroep_bouwer:
-        waarderingsgroep_bouwer.waardeer(
+    ) as context:
+        context.waardeer(
             "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen/input/voorbeeld_beleidsboek.json"
         )

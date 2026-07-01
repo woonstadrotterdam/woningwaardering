@@ -64,7 +64,7 @@ if __name__ == "__main__":  # pragma: no cover
         instance=GemeenschappelijkeParkeerruimten(peildatum=date(2026, 1, 1)),
         strict=False,
         log_level="DEBUG",
-    ) as waarderingsgroep_bouwer:
-        waarderingsgroep_bouwer.waardeer(
+    ) as context:
+        context.waardeer(
             "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_parkeerruimten/input/voorbeeld_beleidsboek.json"
         )

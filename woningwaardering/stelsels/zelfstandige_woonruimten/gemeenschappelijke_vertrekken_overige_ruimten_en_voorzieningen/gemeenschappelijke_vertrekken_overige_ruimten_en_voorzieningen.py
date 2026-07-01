@@ -370,5 +370,5 @@ if __name__ == "__main__":  # pragma: no cover
         ),
         strict=False,
         log_level="DEBUG",
-    ) as waarderingsgroep_bouwer:
-        waarderingsgroep_bouwer.waardeer("tests/data/generiek/input/37101000032.json")
+    ) as context:
+        context.waardeer("tests/data/generiek/input/37101000032.json")

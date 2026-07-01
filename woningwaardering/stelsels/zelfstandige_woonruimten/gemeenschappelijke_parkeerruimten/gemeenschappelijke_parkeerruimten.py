@@ -86,5 +86,5 @@ if __name__ == "__main__":  # pragma: no cover
         instance=GemeenschappelijkeParkeerruimten(peildatum=date(2026, 1, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as waarderingsgroep_bouwer:
-        waarderingsgroep_bouwer.waardeer("warnings.json")
+    ) as context:
+        context.waardeer("warnings.json")
