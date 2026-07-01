@@ -34,34 +34,53 @@ from woningwaardering.vera.bvg.generated import (
 class WaarderingBouwer:
     """Een waardering-in-opbouw die een ``WoningwaarderingResultatenWoningwaardering`` representeert.
 
-    Een waardering kent zijn volledige criterium-id (pad-id), zijn bovenliggende
-    en zijn onderliggende waarderingen. ``punten``, ``aantal``, ``naam`` en
-    ``meeteenheid`` mogen na creatie nog aangepast worden (bijvoorbeeld voor een
-    deler-correctie).
+    Een waardering kent zijn eigen id-segment, zijn bovenliggende en zijn
+    onderliggende waarderingen. De volledige criterium-id (pad-id) en de
+    ``bovenliggende_criterium``-verwijzing worden pas afgeleid uit de
+    bouwer-hiërarchie (via ``criterium_id`` / ``bovenliggende_id``), zodat het
+    verplaatsen van een waardering geen id-herberekening vergt. ``punten``,
+    ``aantal``, ``naam`` en ``meeteenheid`` mogen na creatie nog aangepast worden
+    (bijvoorbeeld voor een deler-correctie).
     """
 
     def __init__(
         self,
         *,
-        criterium_id: str,
+        segment: str,
         naam: str,
-        bovenliggende_id: str | None,
         bovenliggende: "WaarderingBouwer | WaarderingsgroepBouwer",
         punten: float | Decimal | None = None,
         aantal: float | int | Decimal | None = None,
         meeteenheid: Referentiedata | None = None,
         opslagpercentage: float | None = None,
     ) -> None:
-        self.criterium_id = criterium_id
+        self._segment = segment
         self.naam = naam
         self.punten = punten
         self.aantal = aantal
         self.meeteenheid = meeteenheid
         self.opslagpercentage = opslagpercentage
-        self._bovenliggende_id = bovenliggende_id
         self._bovenliggende = bovenliggende
         self._onderliggende: list[WaarderingBouwer] = []
-        self._gedeelde_onderliggende: dict[str, WaarderingBouwer] = {}
+
+    @property
+    def segment(self) -> str:
+        """Het eigen id-segment van deze waardering (het laatste deel van de criterium-id)."""
+        return self._segment
+
+    @property
+    def bovenliggende(self) -> "WaarderingBouwer | WaarderingsgroepBouwer":
+        """De bovenliggende bouwer of groep waaronder deze waardering hangt."""
+        return self._bovenliggende
+
+    @property
+    def criterium_id(self) -> str:
+        """De volledige criterium-id (pad-id), afgeleid uit de bouwer-hiërarchie."""
+        return f"{self._bovenliggende._id_prefix}__{self._segment}"
+
+    @property
+    def _id_prefix(self) -> str:
+        return self.criterium_id
 
     def maak_onderliggende(
         self,
@@ -79,14 +98,26 @@ class WaarderingBouwer:
         """
         return _voeg_onderliggende_toe(
             self,
-            prefix=self.criterium_id,
-            bovenliggende_id=self.criterium_id,
             segment=id or "onbekend",
             naam=naam or "",
             punten=punten,
             aantal=aantal,
             meeteenheid=meeteenheid,
         )
+
+    def verplaats_naar(
+        self, nieuwe_bovenliggende: "WaarderingBouwer | WaarderingsgroepBouwer"
+    ) -> "WaarderingBouwer":
+        """Verplaats deze waardering (met alles eronder) naar onder ``nieuwe_bovenliggende``.
+
+        De waardering wordt losgekoppeld van haar huidige bovenliggende en onder
+        ``nieuwe_bovenliggende`` gehangen; haar criterium-id (en die van alles
+        eronder) verandert vanzelf mee, omdat die uit de hiërarchie wordt afgeleid.
+        """
+        self._loskoppelen()
+        self._bovenliggende = nieuwe_bovenliggende
+        nieuwe_bovenliggende._onderliggende.append(self)
+        return self
 
     def gedeeld_met(
         self,
@@ -97,20 +128,16 @@ class WaarderingBouwer:
         """Geef de (gededupliceerde) gedeeld-met/``prive``-waardering onder deze waardering."""
         return _voeg_gedeeld_met_toe(
             self,
-            prefix=self.criterium_id,
-            bovenliggende_id=self.criterium_id,
             aantal=aantal,
             soort=soort,
         )
 
     def verwijder(self) -> None:
         """Koppel deze waardering (en wat eronder hangt) los van zijn bovenliggende (voor het bouw-dan-weggooien-patroon)."""
+        self._loskoppelen()
+
+    def _loskoppelen(self) -> None:
         self._bovenliggende._onderliggende.remove(self)
-        self._bovenliggende._gedeelde_onderliggende = {
-            sleutel: waardering
-            for sleutel, waardering in self._bovenliggende._gedeelde_onderliggende.items()
-            if waardering is not self
-        }
 
     @property
     def is_leeg(self) -> bool:
@@ -120,7 +147,9 @@ class WaarderingBouwer:
     @property
     def bovenliggende_id(self) -> str | None:
         """De criterium-id van het bovenliggende criterium (``None`` als direct onder de groep)."""
-        return self._bovenliggende_id
+        if isinstance(self._bovenliggende, WaarderingBouwer):
+            return self._bovenliggende.criterium_id
+        return None
 
     def _zelf_en_onderliggende(self) -> Iterator["WaarderingBouwer"]:
         yield self
@@ -131,14 +160,15 @@ class WaarderingBouwer:
         # De hiërarchie tussen waarderingen wordt in VERA vastgelegd via
         # ``bovenliggende_criterium`` (en spiegelt het id-pad). Voor waarderingen
         # direct onder de groep is er geen bovenliggend criterium.
+        bovenliggende_id = self.bovenliggende_id
         criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
             naam=self.naam or "",
             id=self.criterium_id,
             meeteenheid=self.meeteenheid,
         )
-        if self._bovenliggende_id is not None:
+        if bovenliggende_id is not None:
             criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                id=self._bovenliggende_id
+                id=bovenliggende_id
             )
         waardering = WoningwaarderingResultatenWoningwaardering(
             criterium=criterium,
@@ -151,11 +181,12 @@ class WaarderingBouwer:
 
 
 class WaarderingsgroepBouwer:
-    """Bouwt tijdens een ``waardeer()``-aanroep een woningwaarderingsgroep op.
+    """Verzamelt de waarderingen van één stelselgroep en bouwt daar het VERA-resultaat uit.
 
-    Waarderingen toevoegen met :meth:`maak_onderliggende`, gedeeld-met-criteria met
-    :meth:`gedeeld_met` (gededupliceerd), afsluiten met :meth:`bouw`. ``bouw()``
-    geeft een kale ``WoningwaarderingResultatenWoningwaarderingGroep`` terug.
+    Hang waarderingen onder de groep met :meth:`maak_onderliggende` en gedeeld-met-
+    criteria met :meth:`gedeeld_met` (dat een al bestaande laag hergebruikt). Sluit
+    af met :meth:`bouw`, dat de ``WoningwaarderingResultatenWoningwaarderingGroep``
+    oplevert.
     """
 
     def __init__(
@@ -166,7 +197,6 @@ class WaarderingsgroepBouwer:
         self.stelsel = stelsel
         self.stelselgroep = stelselgroep
         self._onderliggende: list[WaarderingBouwer] = []
-        self._gedeelde_onderliggende: dict[str, WaarderingBouwer] = {}
 
     def maak_onderliggende(
         self,
@@ -180,8 +210,6 @@ class WaarderingsgroepBouwer:
         """Maak een waardering direct onder de groep (zonder ``bovenliggende_criterium``)."""
         return _voeg_onderliggende_toe(
             self,
-            prefix=self._prefix,
-            bovenliggende_id=None,
             segment=id or "onbekend",
             naam=naam or "",
             punten=punten,
@@ -198,8 +226,6 @@ class WaarderingsgroepBouwer:
         """Geef de (gededupliceerde) gedeeld-met/``prive``-waardering direct onder de groep."""
         return _voeg_gedeeld_met_toe(
             self,
-            prefix=self._prefix,
-            bovenliggende_id=None,
             aantal=aantal,
             soort=soort,
         )
@@ -248,10 +274,10 @@ class WaarderingsgroepBouwer:
             yield from onderliggende._zelf_en_onderliggende()
 
     def bouw(self) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        """Sluit de opbouw af en geef een kale woningwaarderingsgroep terug.
+        """Bouw de VERA-woningwaarderingsgroep uit de opgebouwde hiërarchie.
 
-        Alle waarderingen worden afgevlakt naar ``woningwaarderingen`` (elke
-        bovenliggende vóór wat eronder hangt) en de punten op de groep worden
+        De boom wordt platgeslagen tot een lijst ``woningwaarderingen`` (elke
+        bovenliggende komt vóór zijn onderliggende) en de groepspunten worden
         gesommeerd.
         """
         from woningwaardering.stelsels.utils import som_punten_waarderingen
@@ -269,7 +295,7 @@ class WaarderingsgroepBouwer:
         return groep
 
     @property
-    def _prefix(self) -> str:
+    def _id_prefix(self) -> str:
         if self.stelselgroep is None or self.stelselgroep.name is None:
             raise ValueError(
                 "De groep heeft geen stelselgroep met naam om de id-prefix uit af te leiden."
@@ -280,8 +306,6 @@ class WaarderingsgroepBouwer:
 def _voeg_onderliggende_toe(
     waarderingsgroep_bouwer: WaarderingBouwer | WaarderingsgroepBouwer,
     *,
-    prefix: str,
-    bovenliggende_id: str | None,
     segment: str,
     naam: str,
     punten: float | Decimal | None,
@@ -289,9 +313,8 @@ def _voeg_onderliggende_toe(
     meeteenheid: Referentiedata | None,
 ) -> WaarderingBouwer:
     onderliggende = WaarderingBouwer(
-        criterium_id=f"{prefix}__{segment}",
+        segment=segment,
         naam=naam,
-        bovenliggende_id=bovenliggende_id,
         bovenliggende=waarderingsgroep_bouwer,
         punten=punten,
         aantal=aantal,
@@ -304,8 +327,6 @@ def _voeg_onderliggende_toe(
 def _voeg_gedeeld_met_toe(
     waarderingsgroep_bouwer: WaarderingBouwer | WaarderingsgroepBouwer,
     *,
-    prefix: str,
-    bovenliggende_id: str | None,
     aantal: int,
     soort: GedeeldMetSoort,
 ) -> WaarderingBouwer:
@@ -316,17 +337,15 @@ def _voeg_gedeeld_met_toe(
         segment = f"gedeeld_met_{aantal}_{soort.value}"
         naam = naam_gedeeld_met_groep(aantal, soort=soort)
 
-    criterium_id = f"{prefix}__{segment}"
-    bestaand = waarderingsgroep_bouwer._gedeelde_onderliggende.get(criterium_id)
-    if bestaand is not None:
-        return bestaand
+    # Hergebruik de gedeeld-met-laag als die er onder deze bovenliggende al is.
+    for bestaand in waarderingsgroep_bouwer._onderliggende:
+        if bestaand._segment == segment:
+            return bestaand
 
     onderliggende = WaarderingBouwer(
-        criterium_id=criterium_id,
+        segment=segment,
         naam=naam,
-        bovenliggende_id=bovenliggende_id,
         bovenliggende=waarderingsgroep_bouwer,
     )
     waarderingsgroep_bouwer._onderliggende.append(onderliggende)
-    waarderingsgroep_bouwer._gedeelde_onderliggende[criterium_id] = onderliggende
     return onderliggende

@@ -54,7 +54,7 @@ class Buitenruimten(Stelselgroep):
             self.stelsel, self.stelselgroep
         )
 
-        totaal_criteria: dict[str, tuple[int, WaarderingBouwer]] = {}
+        totaal_criteria: dict[WaarderingBouwer, int] = {}
 
         for ruimte in eenheid.ruimten or []:
             # De waarderingen worden via de waarderingsgroep_bouwer aangehecht; consumeer de generator.
@@ -65,15 +65,14 @@ class Buitenruimten(Stelselgroep):
 
         self._prive_buitenruimten_aanwezig(waarderingsgroep_bouwer, eenheid)
 
-        som_aantal: dict[str, Decimal] = defaultdict(lambda: Decimal("0"))
+        som_aantal: dict[WaarderingBouwer, Decimal] = defaultdict(lambda: Decimal("0"))
         for waardering in waarderingsgroep_bouwer.alle_waarderingen():
-            if waardering.bovenliggende_id is not None:
-                som_aantal[waardering.bovenliggende_id] += Decimal(
-                    str(waardering.aantal or "0")
-                )
+            gedeeld_met = waardering.bovenliggende
+            if isinstance(gedeeld_met, WaarderingBouwer):
+                som_aantal[gedeeld_met] += Decimal(str(waardering.aantal or "0"))
 
-        for totaal_id, aantal_som in som_aantal.items():
-            gedeeld_met_aantal, gedeeld_met = totaal_criteria[totaal_id]
+        for gedeeld_met, aantal_som in som_aantal.items():
+            gedeeld_met_aantal = totaal_criteria[gedeeld_met]
             factor = Decimal("0.35") if gedeeld_met_aantal == 1 else Decimal("0.75")
             m2_afgerond = utils.rond_af(aantal_som, decimalen=0)
             punten_uit_m2 = m2_afgerond * factor / gedeeld_met_aantal
@@ -125,7 +124,7 @@ class Buitenruimten(Stelselgroep):
         self,
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimte: EenhedenRuimte,
-        totaal_criteria: dict[str, tuple[int, WaarderingBouwer]],
+        totaal_criteria: dict[WaarderingBouwer, int],
     ) -> Iterator[WaarderingBouwer]:
         if classificeer_ruimte(ruimte) != Ruimtesoort.buitenruimte:
             logger.debug(
@@ -181,10 +180,7 @@ class Buitenruimten(Stelselgroep):
                 soort=GedeeldMetSoort.adressen,
             )
 
-        totaal_criteria[gedeeld_met.criterium_id] = (
-            gedeeld_met_aantal,
-            gedeeld_met,
-        )
+        totaal_criteria[gedeeld_met] = gedeeld_met_aantal
 
         waardering = gedeeld_met.maak_onderliggende(
             id=ruimte.id or "ruimte",

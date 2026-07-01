@@ -63,7 +63,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         # juiste gedeeld-met-criterium met door het aantal onzelfstandige woonruimten
         # gedeelde punten.
         tijdelijk = WaarderingsgroepBouwer(self.stelsel, self.stelselgroep)
-        subgroep_cache: dict[tuple[str, str], WaarderingBouwer] = {}
+        subgroep_cache: dict[tuple[WaarderingBouwer, str], WaarderingBouwer] = {}
 
         for ruimte, bron in waardeer_verkoeling_en_verwarming(
             ruimten, waarderingsgroep_bouwer=tijdelijk
@@ -88,7 +88,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         bron: WaarderingBouwer,
         *,
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
-        subgroep_cache: dict[tuple[str, str], WaarderingBouwer],
+        subgroep_cache: dict[tuple[WaarderingBouwer, str], WaarderingBouwer],
     ) -> None:
         """Bouw een kopie van ``bron`` onder het juiste gedeeld-met-criterium.
 
@@ -116,29 +116,26 @@ class VerkoelingEnVerwarming(Stelselgroep):
             soort=GedeeldMetSoort.onzelfstandige_woonruimten,
         )
 
-        bovenliggende_id = bron.bovenliggende_id
-        if bovenliggende_id:
-            _, _, parent_rest = bovenliggende_id.partition("__")
-            subgroep_key = (gedeeld_met.criterium_id, parent_rest)
+        ouder = bron.bovenliggende
+        if isinstance(ouder, WaarderingBouwer):
+            parent_segment = ouder.segment
+            subgroep_key = (gedeeld_met, parent_segment)
             if subgroep_key not in subgroep_cache:
                 subgroep_cache[subgroep_key] = gedeeld_met.maak_onderliggende(
-                    id=parent_rest,
-                    naam=parent_rest.replace("_", " ").capitalize(),
+                    id=parent_segment,
+                    naam=parent_segment.replace("_", " ").capitalize(),
                 )
             subgroep = subgroep_cache[subgroep_key]
-            _, _, rest = bron.criterium_id.partition("__")
-            room_local_id = rest.split("__")[-1]
             subgroep.maak_onderliggende(
-                id=room_local_id,
-                naam=bron.naam or room_local_id,
+                id=bron.segment,
+                naam=bron.naam or bron.segment,
                 punten=punten,
             )
             return
 
-        _, _, rest = bron.criterium_id.partition("__")
         gedeeld_met.maak_onderliggende(
-            id=rest,
-            naam=bron.naam or rest,
+            id=bron.segment,
+            naam=bron.naam or bron.segment,
             punten=punten,
         )
 

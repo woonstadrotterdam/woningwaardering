@@ -297,7 +297,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
     ) -> None:
-        keuken_categorieen: dict[str, WaarderingBouwer] = {}
+        keuken_categorieen: dict[WaarderingBouwer, WaarderingBouwer] = {}
 
         for ruimte in ruimten:
             if ruimte.detail_soort is None:
@@ -306,8 +306,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
                 aantal_eenheden=aantal_eenheden,
             )
-            laag_id = gedeeld_met_laag.criterium_id
-            keuken_categorie = keuken_categorieen.get(laag_id)
+            keuken_categorie = keuken_categorieen.get(gedeeld_met_laag)
             categorie_is_nieuw = keuken_categorie is None
             if keuken_categorie is None:
                 keuken_categorie = gedeeld_met_laag.maak_onderliggende(
@@ -325,14 +324,14 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 if categorie_is_nieuw and keuken_categorie.is_leeg:
                     keuken_categorie.verwijder()
                 continue
-            keuken_categorieen[laag_id] = keuken_categorie
+            keuken_categorieen[gedeeld_met_laag] = keuken_categorie
 
     def _sanitair_waarderingen(
         self,
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
     ) -> None:
-        sanitair_categorieen: dict[str, WaarderingBouwer] = {}
+        sanitair_categorieen: dict[WaarderingBouwer, WaarderingBouwer] = {}
 
         for ruimte in ruimten:
             if ruimte.detail_soort is None:
@@ -341,8 +340,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
                 aantal_eenheden=aantal_eenheden,
             )
-            laag_id = gedeeld_met_laag.criterium_id
-            sanitair_categorie = sanitair_categorieen.get(laag_id)
+            sanitair_categorie = sanitair_categorieen.get(gedeeld_met_laag)
             categorie_is_nieuw = sanitair_categorie is None
             if sanitair_categorie is None:
                 sanitair_categorie = gedeeld_met_laag.maak_onderliggende(
@@ -360,7 +358,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 if categorie_is_nieuw and sanitair_categorie.is_leeg:
                     sanitair_categorie.verwijder()
                 continue
-            sanitair_categorieen[laag_id] = sanitair_categorie
+            sanitair_categorieen[gedeeld_met_laag] = sanitair_categorie
 
 
 if __name__ == "__main__":  # pragma: no cover

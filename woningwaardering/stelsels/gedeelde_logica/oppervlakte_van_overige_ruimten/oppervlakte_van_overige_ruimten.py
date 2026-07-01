@@ -104,14 +104,11 @@ def waardeer_oppervlakte_van_overige_ruimte(
 def _is_ruimteregel_met_aantal(
     waardering: WaarderingBouwer,
     *,
-    onder_criterium_id: str | None = None,
+    onder_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
 ) -> bool:
     if waardering.aantal is None or waardering.punten is not None:
         return False
-    bovenliggend = waardering.bovenliggende_id
-    if onder_criterium_id is None:
-        return bovenliggend is None
-    return bovenliggend == onder_criterium_id
+    return waardering.bovenliggende is onder_bouwer
 
 
 def structureer_subtotaal_bij_correcties(
@@ -119,7 +116,6 @@ def structureer_subtotaal_bij_correcties(
     *,
     waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
     factor: Decimal,
-    onder_criterium_id: str | None = None,
     deler: int = 1,
 ) -> list[WaarderingBouwer]:
     """Voeg een Subtotaal-waardering toe wanneer er een punten-correctie voor een zolderruimte plaatsvindt.
@@ -131,7 +127,7 @@ def structureer_subtotaal_bij_correcties(
     elke andere tussenlaag in het id-pad van de onderliggende waarderingen voorkomt.
     """
     heeft_ruimte_aantal = any(
-        _is_ruimteregel_met_aantal(w, onder_criterium_id=onder_criterium_id)
+        _is_ruimteregel_met_aantal(w, onder_bouwer=waarderingsgroep_bouwer)
         for w in waarderingen
     )
     heeft_puntenregel = any(w.punten is not None for w in waarderingen)
@@ -141,7 +137,7 @@ def structureer_subtotaal_bij_correcties(
     ruimteregels = [
         w
         for w in waarderingen
-        if _is_ruimteregel_met_aantal(w, onder_criterium_id=onder_criterium_id)
+        if _is_ruimteregel_met_aantal(w, onder_bouwer=waarderingsgroep_bouwer)
     ]
     overige = [w for w in waarderingen if w not in ruimteregels]
 
@@ -160,18 +156,9 @@ def structureer_subtotaal_bij_correcties(
         punten=float(rond_af_op_kwart(punten_uit_m2)),
     )
 
-    # Bouw de ruimteregels opnieuw op onder het Subtotaal zodat hun id-pad het
-    # ``subtotaal``-segment bevat, en verwijder de oorspronkelijke (top-niveau) regels.
-    subtotaal_ruimteregels = []
+    # Verplaats de ruimteregels onder het Subtotaal, zodat hun id-pad net als elke
+    # andere tussenlaag het ``subtotaal``-segment bevat.
     for waardering in ruimteregels:
-        subtotaal_ruimteregels.append(
-            subtotaal.maak_onderliggende(
-                id=waardering.criterium_id.split("__")[-1],
-                naam=waardering.naam,
-                meeteenheid=waardering.meeteenheid,
-                aantal=waardering.aantal,
-            )
-        )
-        waardering.verwijder()
+        waardering.verplaats_naar(subtotaal)
 
-    return [subtotaal, *subtotaal_ruimteregels, *overige]
+    return [subtotaal, *ruimteregels, *overige]

@@ -257,13 +257,13 @@ class Sanitair(Stelselgroep):
         ruimte_criterium: WaarderingBouwer,
         soort: Referentiedata,
     ) -> int:
-        criterium_id = f"{ruimte_criterium.criterium_id}__{soort.name}"
         return int(
             sum(
                 int(woningwaardering.aantal or 0)
                 for woningwaardering in waarderingen
                 if (
-                    woningwaardering.criterium_id == criterium_id
+                    woningwaardering.bovenliggende is ruimte_criterium
+                    and woningwaardering.segment == soort.name
                     and woningwaardering.aantal is not None
                 )
             )
@@ -283,10 +283,10 @@ class Sanitair(Stelselgroep):
     ) -> None:
         if not (aantal_onzelfstandige >= 8 and max_count.ruimte != ruimte):
             return
-        criterium_id = f"{ruimte_criterium.criterium_id}__{soort.name}"
         for index, woningwaardering in enumerate(list(waarderingen)):
             if (
-                woningwaardering.criterium_id == criterium_id
+                woningwaardering.bovenliggende is ruimte_criterium
+                and woningwaardering.segment == soort.name
                 and woningwaardering.aantal is not None
                 and woningwaardering.aantal > 1
             ):

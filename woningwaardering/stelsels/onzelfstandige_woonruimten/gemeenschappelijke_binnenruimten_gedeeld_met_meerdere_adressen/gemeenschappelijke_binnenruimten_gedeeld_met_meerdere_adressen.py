@@ -47,13 +47,6 @@ class Oppervlaktegroepsleutel(NamedTuple):
     ruimtesoort: RuimtesoortReferentiedata
 
 
-def _lokaal_segment(volledige_id: str, bovenliggende_id: str) -> str:
-    prefix = f"{bovenliggende_id}__"
-    if volledige_id.startswith(prefix):
-        return volledige_id[len(prefix) :]
-    return volledige_id.split("__")[-1]
-
-
 class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
     def __init__(
         self,
@@ -271,8 +264,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         # gedeeld.
         tijdelijk = WaarderingsgroepBouwer(self.stelsel, self.stelselgroep)
 
-        verkoeling_per_laag: dict[str, WaarderingBouwer] = {}
-        subgroep_per_id: dict[str, WaarderingBouwer] = {}
+        verkoeling_per_laag: dict[WaarderingBouwer, WaarderingBouwer] = {}
+        subgroep_per_id: dict[tuple[WaarderingBouwer, str], WaarderingBouwer] = {}
 
         for ruimte, resultaat in waardeer_verkoeling_en_verwarming(
             ruimten,
@@ -290,25 +283,27 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 aantal_eenheden=aantal_eenheden,
                 aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
             )
-            laag_id = gedeeld_met_laag.criterium_id
 
-            verkoeling_categorie = verkoeling_per_laag.get(laag_id)
+            verkoeling_categorie = verkoeling_per_laag.get(gedeeld_met_laag)
             if verkoeling_categorie is None:
                 verkoeling_categorie = gedeeld_met_laag.maak_onderliggende(
                     id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
                     naam="Verkoeling en verwarming",
                 )
-                verkoeling_per_laag[laag_id] = verkoeling_categorie
+                verkoeling_per_laag[gedeeld_met_laag] = verkoeling_categorie
 
-            subgroep_segment = (resultaat.bovenliggende_id or "").split("__")[-1]
-            subgroep_id = f"{verkoeling_categorie.criterium_id}__{subgroep_segment}"
-            subgroep = subgroep_per_id.get(subgroep_id)
+            ouder = resultaat.bovenliggende
+            subgroep_segment = (
+                ouder.segment if isinstance(ouder, WaarderingBouwer) else ""
+            )
+            subgroep_sleutel = (verkoeling_categorie, subgroep_segment)
+            subgroep = subgroep_per_id.get(subgroep_sleutel)
             if subgroep is None:
                 subgroep = verkoeling_categorie.maak_onderliggende(
                     id=subgroep_segment,
                     naam=subgroep_segment.capitalize().replace("_", " "),
                 )
-                subgroep_per_id[subgroep_id] = subgroep
+                subgroep_per_id[subgroep_sleutel] = subgroep
 
             punten = (
                 None
@@ -316,7 +311,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 else Decimal(str(resultaat.punten)) / deler
             )
             subgroep.maak_onderliggende(
-                id=resultaat.criterium_id.split("__")[-1],
+                id=resultaat.segment,
                 naam=resultaat.naam,
                 punten=punten,
                 aantal=resultaat.aantal,
@@ -328,7 +323,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
     ) -> None:
-        sanitair_categorieen: dict[str, WaarderingBouwer] = {}
+        sanitair_categorieen: dict[WaarderingBouwer, WaarderingBouwer] = {}
         woningwaarderingen_met_ruimten = list(
             OnzelfstandigeWoonruimtenSanitair.genereer_woningwaarderingen(
                 ruimten, self.stelselgroep
@@ -352,21 +347,17 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 aantal_eenheden=aantal_eenheden,
                 aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
             )
-            laag_id = gedeeld_met_laag.criterium_id
-            sanitair_categorie = sanitair_categorieen.get(laag_id)
+            sanitair_categorie = sanitair_categorieen.get(gedeeld_met_laag)
             if sanitair_categorie is None:
                 sanitair_categorie = gedeeld_met_laag.maak_onderliggende(
                     id="sanitair",
                     naam="Sanitair",
                 )
-                sanitair_categorieen[laag_id] = sanitair_categorie
+                sanitair_categorieen[gedeeld_met_laag] = sanitair_categorie
 
             ruimte_criterium = waarderingen[0]
             reparented_ruimte = sanitair_categorie.maak_onderliggende(
-                id=_lokaal_segment(
-                    ruimte_criterium.criterium_id,
-                    Woningwaarderingstelselgroep.sanitair.name,
-                ),
+                id=ruimte_criterium.segment,
                 naam=ruimte_criterium.naam,
             )
 
@@ -376,9 +367,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
 
                 punten = Decimal(str(waardering.punten)) / deler
                 reparented_ruimte.maak_onderliggende(
-                    id=_lokaal_segment(
-                        waardering.criterium_id, ruimte_criterium.criterium_id
-                    ),
+                    id=waardering.segment,
                     naam=waardering.naam,
                     punten=punten,
                     aantal=waardering.aantal,
@@ -390,7 +379,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
     ) -> None:
-        keuken_categorieen: dict[str, WaarderingBouwer] = {}
+        keuken_categorieen: dict[WaarderingBouwer, WaarderingBouwer] = {}
         for ruimte in ruimten:
             aantal_onzelfstandige_woonruimten = (
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
@@ -404,8 +393,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 aantal_eenheden=aantal_eenheden,
                 aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
             )
-            laag_id = gedeeld_met_laag.criterium_id
-            keuken_categorie = keuken_categorieen.get(laag_id)
+            keuken_categorie = keuken_categorieen.get(gedeeld_met_laag)
             categorie_is_nieuw = keuken_categorie is None
             if keuken_categorie is None:
                 keuken_categorie = gedeeld_met_laag.maak_onderliggende(
@@ -427,7 +415,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             for waardering in ruimte_waarderingen:
                 if waardering.punten is not None:
                     waardering.punten = float(Decimal(str(waardering.punten)) / deler)
-            keuken_categorieen[laag_id] = keuken_categorie
+            keuken_categorieen[gedeeld_met_laag] = keuken_categorie
 
 
 if __name__ == "__main__":  # pragma: no cover

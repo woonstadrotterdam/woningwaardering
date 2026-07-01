@@ -136,14 +136,12 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
         for deler, waarderingen in per_deler_waarderingen.items():
             gedeeld_met = gedeeld_met_lagen[deler]
-            gedeeld_met_id = gedeeld_met.criterium_id
             heeft_correctie = any(w.punten is not None for w in waarderingen)
             if heeft_correctie:
                 structureer_subtotaal_bij_correcties(
                     waarderingen,
                     waarderingsgroep_bouwer=gedeeld_met,
                     factor=Decimal("0.75"),
-                    onder_criterium_id=gedeeld_met_id,
                     deler=deler,
                 )
                 continue
