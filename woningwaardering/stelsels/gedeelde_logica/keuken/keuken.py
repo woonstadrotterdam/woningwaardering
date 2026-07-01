@@ -59,7 +59,7 @@ def waardeer_keuken(
 
     # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten
     # waarmee de ruimte gedeeld wordt.
-    if deler != 1:
+    if deler > 1:
         for waardering in detail_waarderingen:
             if waardering.punten is not None:
                 waardering.punten = float(

@@ -79,7 +79,7 @@ def waardeer_sanitair(
 
     # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten
     # waarmee de ruimte gedeeld wordt.
-    if deler != 1:
+    if deler > 1:
         for woningwaardering in detail_waarderingen:
             if woningwaardering.punten is not None:
                 woningwaardering.punten = float(
