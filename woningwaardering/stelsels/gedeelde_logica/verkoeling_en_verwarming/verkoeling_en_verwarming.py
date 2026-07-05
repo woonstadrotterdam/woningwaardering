@@ -1,11 +1,9 @@
+from collections.abc import Callable
 from typing import Iterator
 
 from loguru import logger
 
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
-)
+from woningwaardering.stelsels.bouwers import WaarderingBouwer
 from woningwaardering.stelsels.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
@@ -18,52 +16,48 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
-
-def _subgroep_naam(subgroep_id: str) -> str:
-    return subgroep_id.capitalize().replace("_", " ")
+SUBGROEPEN: dict[str, str] = {
+    "verwarmde_vertrekken": "Verwarmde vertrekken",
+    "verkoelde_vertrekken": "Verkoelde vertrekken",
+    "open_keuken": "Open keuken",
+    "verwarmde_overige_en_verkeersruimten": "Verwarmde overige en verkeersruimten",
+}
 
 
 def _subgroep(
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-    subgroepen: dict[str, WaarderingBouwer],
+    callback: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
+    ruimte: EenhedenRuimte,
     subgroep_id: str,
 ) -> WaarderingBouwer:
-    if subgroep_id not in subgroepen:
-        subgroepen[subgroep_id] = waarderingsgroep_bouwer.maak_onderliggende(
-            id=subgroep_id,
-            naam=_subgroep_naam(subgroep_id),
-        )
-    return subgroepen[subgroep_id]
+    return callback(ruimte, subgroep_id, SUBGROEPEN[subgroep_id])
 
 
 def waardeer_verkoeling_en_verwarming(
     ruimten: list[EenhedenRuimte],
     *,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
 ) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
-    yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(
-        ruimten, waarderingsgroep_bouwer
-    )
-    yield from _waardeer_verwarmde_overige_ruimte(ruimten, waarderingsgroep_bouwer)
-    yield from _waardeer_open_keuken(ruimten, waarderingsgroep_bouwer)
+    """Classificeer ruimten, pas maximering toe en bouw waarderingen onder ``subgroep``."""
+    yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(ruimten, subgroep)
+    yield from _waardeer_verwarmde_overige_ruimte(ruimten, subgroep)
+    yield from _waardeer_open_keuken(ruimten, subgroep)
 
 
 def _waardeer_verwarmde_overige_ruimte(
     ruimten: list[EenhedenRuimte],
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
 ) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
     """
     Verwarmde overige ruimten tellen als 1 punt voor verwarmde overige ruimten tot een maximum van 4 punten.
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
+        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Geeft de subgroep-bouwer per ruimte
 
     Yields:
         tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor verwarmde overige ruimten
     """
     subgroep_id = "verwarmde_overige_en_verkeersruimten"
-    subgroepen: dict[str, WaarderingBouwer] = {}
     totaal_punten = 0
     for ruimte in ruimten:
         if not ruimte.verwarmd:
@@ -79,9 +73,7 @@ def _waardeer_verwarmde_overige_ruimte(
             )
             yield (
                 ruimte,
-                _subgroep(
-                    waarderingsgroep_bouwer, subgroepen, subgroep_id
-                ).maak_onderliggende(
+                _subgroep(subgroep, ruimte, subgroep_id).maak_onderliggende(
                     id=ruimte.id,
                     naam=ruimte.naam or ruimte.id or "",
                     punten=1.0,
@@ -91,9 +83,7 @@ def _waardeer_verwarmde_overige_ruimte(
             if totaal_punten > 4:
                 yield (
                     ruimte,
-                    _subgroep(
-                        waarderingsgroep_bouwer, subgroepen, subgroep_id
-                    ).maak_onderliggende(
+                    _subgroep(subgroep, ruimte, subgroep_id).maak_onderliggende(
                         id="max_aantal_punten",
                         naam="Maximaal 4 punten",
                         punten=-1,
@@ -103,7 +93,7 @@ def _waardeer_verwarmde_overige_ruimte(
 
 def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     ruimten: list[EenhedenRuimte],
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
 ) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
     """
     Verkoelde en verwarmde vertrekken tellen voor 2 punten per verwarmd vertrek.
@@ -112,12 +102,11 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
+        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Geeft de subgroep-bouwer per ruimte
 
     Yields:
         tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
     """
-    subgroepen: dict[str, WaarderingBouwer] = {}
     totaal_punten_verkoeld = 0
     for ruimte in ruimten:
         if not ruimte.verwarmd:
@@ -130,9 +119,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
             )
             yield (
                 ruimte,
-                _subgroep(
-                    waarderingsgroep_bouwer, subgroepen, "verwarmde_vertrekken"
-                ).maak_onderliggende(
+                _subgroep(subgroep, ruimte, "verwarmde_vertrekken").maak_onderliggende(
                     id=ruimte.id,
                     naam=ruimte.naam or ruimte.id or "",
                     punten=2,
@@ -147,7 +134,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                 yield (
                     ruimte,
                     _subgroep(
-                        waarderingsgroep_bouwer, subgroepen, "verkoelde_vertrekken"
+                        subgroep, ruimte, "verkoelde_vertrekken"
                     ).maak_onderliggende(
                         id=ruimte.id,
                         naam=ruimte.naam or ruimte.id or "",
@@ -161,7 +148,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                     yield (
                         ruimte,
                         _subgroep(
-                            waarderingsgroep_bouwer, subgroepen, "verkoelde_vertrekken"
+                            subgroep, ruimte, "verkoelde_vertrekken"
                         ).maak_onderliggende(
                             id="max_aantal_punten",
                             naam="Maximaal 2 punten",
@@ -172,19 +159,18 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
 def _waardeer_open_keuken(
     ruimten: list[EenhedenRuimte],
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
 ) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
     """
     Open keuken tellen voor 2 punten per verwarmd vertrek.
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
+        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Geeft de subgroep-bouwer per ruimte
 
     Yields:
         tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor open keuken
     """
-    subgroepen: dict[str, WaarderingBouwer] = {}
     for ruimte in ruimten:
         if ruimte.verwarmd and (
             ruimte.detail_soort == Ruimtedetailsoort.woonkamer_en_of_keuken
@@ -205,9 +191,7 @@ def _waardeer_open_keuken(
             )
             yield (
                 ruimte,
-                _subgroep(
-                    waarderingsgroep_bouwer, subgroepen, "open_keuken"
-                ).maak_onderliggende(
+                _subgroep(subgroep, ruimte, "open_keuken").maak_onderliggende(
                     id=ruimte.id,
                     naam=ruimte.naam or ruimte.id or "",
                     punten=2.0,

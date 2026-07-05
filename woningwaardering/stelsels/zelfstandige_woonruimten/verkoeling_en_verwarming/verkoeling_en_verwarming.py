@@ -4,13 +4,15 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
-from woningwaardering.stelsels.gedeelde_logica import (
-    waardeer_verkoeling_en_verwarming,
+from woningwaardering.stelsels.bouwers import (
+    WaarderingBouwer,
+    WaarderingsgroepBouwer,
 )
+from woningwaardering.stelsels.gedeelde_logica import waardeer_verkoeling_en_verwarming
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -48,12 +50,22 @@ class VerkoelingEnVerwarming(Stelselgroep):
             if not utils.gedeeld_met_eenheden(ruimte)
         ]
 
-        # De subgroep-waarderingen (bijv. "verwarmde vertrekken") worden door de helper
-        # zelf als bovenliggende waardering opgebouwd; consumeer de generator voor het
-        # bijbehorende neveneffect.
-        for _ in waardeer_verkoeling_en_verwarming(
-            ruimten, waarderingsgroep_bouwer=waarderingsgroep_bouwer
-        ):
+        subgroepen: dict[str, WaarderingBouwer] = {}
+
+        def subgroep(
+            _ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
+        ) -> WaarderingBouwer:
+            bestaand = subgroepen.get(subgroep_id)
+            if bestaand is not None:
+                return bestaand
+            nieuw = waarderingsgroep_bouwer.maak_onderliggende(
+                id=subgroep_id,
+                naam=subgroep_naam,
+            )
+            subgroepen[subgroep_id] = nieuw
+            return nieuw
+
+        for _ in waardeer_verkoeling_en_verwarming(ruimten, subgroep=subgroep):
             pass
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()

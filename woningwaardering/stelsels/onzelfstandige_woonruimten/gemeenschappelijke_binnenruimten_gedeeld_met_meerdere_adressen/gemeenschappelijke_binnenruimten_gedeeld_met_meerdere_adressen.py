@@ -257,33 +257,24 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
     ) -> None:
         # De maximering op verwarmde overige ruimten (max. 4 punten) en op verkoelde
         # vertrekken (max. 2 punten) telt over álle gedeelde ruimten samen, ongeacht
-        # met hoeveel adressen/onzelfstandige woonruimten ze gedeeld worden. We roepen
-        # de helper daarom eenmalig aan op een tijdelijke waarderingsgroep_bouwer (zodat de teller
-        # globaal is) en routeren elk resultaat daarna naar de juiste adressengroep,
-        # waar de punten door het aantal adressen en onzelfstandige woonruimten worden
-        # gedeeld.
-        tijdelijk = WaarderingsgroepBouwer(self.stelsel, self.stelselgroep)
-
+        # met hoeveel adressen/onzelfstandige woonruimten ze gedeeld worden. De helper
+        # wordt daarom eenmalig aangeroepen; elk resultaat wordt daarna onder de juiste
+        # adressengroep gehangen, waar de punten door het aantal adressen en
+        # onzelfstandige woonruimten worden gedeeld.
         verkoeling_per_laag: dict[WaarderingBouwer, WaarderingBouwer] = {}
         subgroep_per_id: dict[tuple[WaarderingBouwer, str], WaarderingBouwer] = {}
 
-        for ruimte, resultaat in waardeer_verkoeling_en_verwarming(
-            ruimten,
-            waarderingsgroep_bouwer=tijdelijk,
-        ):
+        def subgroep(
+            ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
+        ) -> WaarderingBouwer:
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
             aantal_onzelfstandige_woonruimten = (
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             )
-            deler = Decimal(str(aantal_eenheden)) * Decimal(
-                str(aantal_onzelfstandige_woonruimten)
-            )
-
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
                 aantal_eenheden=aantal_eenheden,
                 aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
             )
-
             verkoeling_categorie = verkoeling_per_laag.get(gedeeld_met_laag)
             if verkoeling_categorie is None:
                 verkoeling_categorie = gedeeld_met_laag.maak_onderliggende(
@@ -292,31 +283,30 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 )
                 verkoeling_per_laag[gedeeld_met_laag] = verkoeling_categorie
 
-            ouder = resultaat.bovenliggende
-            subgroep_segment = (
-                ouder.segment if isinstance(ouder, WaarderingBouwer) else ""
+            subgroep_sleutel = (verkoeling_categorie, subgroep_id)
+            bestaand = subgroep_per_id.get(subgroep_sleutel)
+            if bestaand is not None:
+                return bestaand
+            nieuw = verkoeling_categorie.maak_onderliggende(
+                id=subgroep_id,
+                naam=subgroep_naam,
             )
-            subgroep_sleutel = (verkoeling_categorie, subgroep_segment)
-            subgroep = subgroep_per_id.get(subgroep_sleutel)
-            if subgroep is None:
-                subgroep = verkoeling_categorie.maak_onderliggende(
-                    id=subgroep_segment,
-                    naam=subgroep_segment.capitalize().replace("_", " "),
-                )
-                subgroep_per_id[subgroep_sleutel] = subgroep
+            subgroep_per_id[subgroep_sleutel] = nieuw
+            return nieuw
 
-            punten = (
-                None
-                if resultaat.punten is None
-                else Decimal(str(resultaat.punten)) / deler
+        for ruimte, waardering in waardeer_verkoeling_en_verwarming(
+            ruimten, subgroep=subgroep
+        ):
+            if waardering.punten is None:
+                continue
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            aantal_onzelfstandige_woonruimten = (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             )
-            subgroep.maak_onderliggende(
-                id=resultaat.segment,
-                naam=resultaat.naam,
-                punten=punten,
-                aantal=resultaat.aantal,
-                meeteenheid=resultaat.meeteenheid,
+            deler = Decimal(str(aantal_eenheden)) * Decimal(
+                str(aantal_onzelfstandige_woonruimten)
             )
+            waardering.punten = Decimal(str(waardering.punten)) / deler
 
     def _sanitair_waarderingen(
         self,

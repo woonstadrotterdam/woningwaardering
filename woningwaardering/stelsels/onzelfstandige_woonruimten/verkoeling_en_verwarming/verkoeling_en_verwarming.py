@@ -9,9 +9,7 @@ from woningwaardering.stelsels.bouwers import (
     WaarderingsgroepBouwer,
 )
 from woningwaardering.stelsels.criterium import GedeeldMetSoort
-from woningwaardering.stelsels.gedeelde_logica import (
-    waardeer_verkoeling_en_verwarming,
-)
+from woningwaardering.stelsels.gedeelde_logica import waardeer_verkoeling_en_verwarming
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     gedeeld_met_onzelfstandige_woonruimten,
@@ -58,22 +56,44 @@ class VerkoelingEnVerwarming(Stelselgroep):
             or ruimte.gedeeld_met_aantal_eenheden == 1
         ]
 
-        # De gedeelde helper bevat de classificatie- en maximeringslogica. We laten
-        # die in een tijdelijke waarderingsgroep_bouwer opbouwen en hangen de waarderingen daarna onder het
-        # juiste gedeeld-met-criterium met door het aantal onzelfstandige woonruimten
-        # gedeelde punten.
-        tijdelijk = WaarderingsgroepBouwer(self.stelsel, self.stelselgroep)
         subgroep_cache: dict[tuple[WaarderingBouwer, str], WaarderingBouwer] = {}
 
-        for ruimte, bron in waardeer_verkoeling_en_verwarming(
-            ruimten, waarderingsgroep_bouwer=tijdelijk
-        ):
-            self._hang_onder_gedeeld_met(
-                ruimte,
-                bron,
-                waarderingsgroep_bouwer=waarderingsgroep_bouwer,
-                subgroep_cache=subgroep_cache,
+        def subgroep(
+            ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
+        ) -> WaarderingBouwer:
+            deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
+                aantal=deler,
+                soort=GedeeldMetSoort.onzelfstandige_woonruimten,
             )
+            sleutel = (gedeeld_met, subgroep_id)
+            bestaand = subgroep_cache.get(sleutel)
+            if bestaand is not None:
+                return bestaand
+            nieuw = gedeeld_met.maak_onderliggende(
+                id=subgroep_id,
+                naam=subgroep_naam,
+            )
+            subgroep_cache[sleutel] = nieuw
+            return nieuw
+
+        for ruimte, waardering in waardeer_verkoeling_en_verwarming(
+            ruimten, subgroep=subgroep
+        ):
+            if waardering.punten is None:
+                continue
+            if (
+                gedeeld_met_onzelfstandige_woonruimten(ruimte)
+                and waardering.punten
+                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+            ):
+                deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+                waardering.punten = float(
+                    rond_af(
+                        rond_af(Decimal(str(waardering.punten)), decimalen=2) / deler,
+                        decimalen=2,
+                    )
+                )
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
@@ -81,63 +101,6 @@ class VerkoelingEnVerwarming(Stelselgroep):
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
         return woningwaardering_groep
-
-    @staticmethod
-    def _hang_onder_gedeeld_met(
-        ruimte: EenhedenRuimte,
-        bron: WaarderingBouwer,
-        *,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
-        subgroep_cache: dict[tuple[WaarderingBouwer, str], WaarderingBouwer],
-    ) -> None:
-        """Bouw een kopie van ``bron`` onder het juiste gedeeld-met-criterium.
-
-        De punten worden verdeeld over het aantal onzelfstandige woonruimten en de
-        eventuele subgroep (bijv. "verwarmde vertrekken") wordt onder het
-        gedeeld-met-criterium opnieuw opgebouwd (en gededupliceerd).
-        """
-        punten = bron.punten
-        if (
-            gedeeld_met_onzelfstandige_woonruimten(ruimte)
-            and punten
-            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-        ):
-            punten = float(
-                rond_af(
-                    rond_af(Decimal(str(punten)), decimalen=2)
-                    / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                    decimalen=2,
-                )
-            )
-
-        deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-        gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
-            aantal=deler,
-            soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-        )
-
-        ouder = bron.bovenliggende
-        if isinstance(ouder, WaarderingBouwer):
-            parent_segment = ouder.segment
-            subgroep_key = (gedeeld_met, parent_segment)
-            if subgroep_key not in subgroep_cache:
-                subgroep_cache[subgroep_key] = gedeeld_met.maak_onderliggende(
-                    id=parent_segment,
-                    naam=parent_segment.replace("_", " ").capitalize(),
-                )
-            subgroep = subgroep_cache[subgroep_key]
-            subgroep.maak_onderliggende(
-                id=bron.segment,
-                naam=bron.naam or bron.segment,
-                punten=punten,
-            )
-            return
-
-        gedeeld_met.maak_onderliggende(
-            id=bron.segment,
-            naam=bron.naam or bron.segment,
-            punten=punten,
-        )
 
 
 if __name__ == "__main__":  # pragma: no cover

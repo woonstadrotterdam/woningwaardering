@@ -260,35 +260,49 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         gedeelde_ruimten: list[EenhedenRuimte],
     ) -> None:
-        ruimten_per_groep: defaultdict[int, list[EenhedenRuimte]] = defaultdict(list)
-        for ruimte in gedeelde_ruimten:
-            ruimten_per_groep[ruimte.gedeeld_met_aantal_eenheden or 1].append(ruimte)
+        verkoeling_per_laag: dict[WaarderingBouwer, WaarderingBouwer] = {}
+        subgroep_per_id: dict[tuple[WaarderingBouwer, str], WaarderingBouwer] = {}
 
-        for aantal_eenheden, groep_ruimten in sorted(ruimten_per_groep.items()):
+        def subgroep(
+            ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
+        ) -> WaarderingBouwer:
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
                 aantal_eenheden=aantal_eenheden,
             )
-            verkoeling_categorie = gedeeld_met_laag.maak_onderliggende(
-                id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
-                naam="Verkoeling en verwarming",
+            verkoeling_categorie = verkoeling_per_laag.get(gedeeld_met_laag)
+            if verkoeling_categorie is None:
+                verkoeling_categorie = gedeeld_met_laag.maak_onderliggende(
+                    id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
+                    naam="Verkoeling en verwarming",
+                )
+                verkoeling_per_laag[gedeeld_met_laag] = verkoeling_categorie
+
+            subgroep_sleutel = (verkoeling_categorie, subgroep_id)
+            bestaand = subgroep_per_id.get(subgroep_sleutel)
+            if bestaand is not None:
+                return bestaand
+            nieuw = verkoeling_categorie.maak_onderliggende(
+                id=subgroep_id,
+                naam=subgroep_naam,
+            )
+            subgroep_per_id[subgroep_sleutel] = nieuw
+            return nieuw
+
+        for ruimte, waardering in waardeer_verkoeling_en_verwarming(
+            gedeelde_ruimten, subgroep=subgroep
+        ):
+            if waardering.punten is None:
+                continue
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            waardering.punten = float(
+                rond_af(
+                    Decimal(str(waardering.punten)) / Decimal(str(aantal_eenheden)),
+                    decimalen=2,
+                )
             )
 
-            # De helper bouwt subgroepen en detailwaarderingen rechtstreeks onder de
-            # verkoeling-categorie; voor gemeenschappelijke ruimten worden de punten
-            # vervolgens door het aantal adressen gedeeld.
-            for _ruimte, resultaat in waardeer_verkoeling_en_verwarming(
-                groep_ruimten,
-                waarderingsgroep_bouwer=verkoeling_categorie,
-            ):
-                if resultaat.punten is None:
-                    continue
-                resultaat.punten = float(
-                    utils.rond_af(
-                        Decimal(str(resultaat.punten)) / Decimal(str(aantal_eenheden)),
-                        decimalen=2,
-                    )
-                )
-
+        for verkoeling_categorie in verkoeling_per_laag.values():
             if verkoeling_categorie.is_leeg:
                 verkoeling_categorie.verwijder()
 

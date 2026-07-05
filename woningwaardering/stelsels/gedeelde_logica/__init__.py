@@ -13,9 +13,7 @@ from .oppervlakte_van_overige_ruimten import (
 )
 from .oppervlakte_van_vertrekken import waardeer_oppervlakte_van_vertrek
 from .sanitair import waardeer_sanitair
-from .verkoeling_en_verwarming import (
-    waardeer_verkoeling_en_verwarming,
-)
+from .verkoeling_en_verwarming import waardeer_verkoeling_en_verwarming
 
 __all__ = [
     "bereken_oppervlakte_punten",
