@@ -25,11 +25,11 @@ SUBGROEPEN: dict[str, str] = {
 
 
 def _subgroep(
-    callback: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
     ruimte: EenhedenRuimte,
     subgroep_id: str,
 ) -> WaarderingBouwer:
-    return callback(ruimte, subgroep_id, SUBGROEPEN[subgroep_id])
+    return subgroep(ruimte, subgroep_id, SUBGROEPEN[subgroep_id])
 
 
 def waardeer_verkoeling_en_verwarming(
@@ -37,7 +37,17 @@ def waardeer_verkoeling_en_verwarming(
     *,
     subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
 ) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
-    """Classificeer ruimten, pas maximering toe en bouw waarderingen onder ``subgroep``."""
+    """Classificeer ruimten, pas maximering toe en bouw waarderingen op hun plek.
+
+    De maximering (max. 4 punten verwarmde overige ruimten, max. 2 punten
+    verkoelde vertrekken) telt over álle meegegeven ruimten samen en wordt hier in
+    één doorloop met lokale tellers toegepast.
+
+    ``subgroep`` bepaalt per ruimte onder welke bouwer een subgroep (bijv.
+    "verwarmde vertrekken") in de hiërarchie hangt. De helper roept het aan met
+    (ruimte, subgroep_id, subgroep_naam) op het moment dat een waardering wordt
+    aangemaakt, zodat de laag lazy en op de juiste plek ontstaat.
+    """
     yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(ruimten, subgroep)
     yield from _waardeer_verwarmde_overige_ruimte(ruimten, subgroep)
     yield from _waardeer_open_keuken(ruimten, subgroep)
@@ -52,7 +62,7 @@ def _waardeer_verwarmde_overige_ruimte(
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Geeft de subgroep-bouwer per ruimte
+        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Bepaalt per ruimte onder welke bouwer de subgroep hangt
 
     Yields:
         tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor verwarmde overige ruimten
@@ -102,7 +112,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Geeft de subgroep-bouwer per ruimte
+        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Bepaalt per ruimte onder welke bouwer de subgroep hangt
 
     Yields:
         tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
@@ -166,7 +176,7 @@ def _waardeer_open_keuken(
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Geeft de subgroep-bouwer per ruimte
+        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Bepaalt per ruimte onder welke bouwer de subgroep hangt
 
     Yields:
         tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor open keuken

@@ -16,13 +16,12 @@ from woningwaardering.stelsels.gedeelde_logica import (
     bereken_oppervlakte_punten,
     bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
+    maximeer_wastafels,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
     waardeer_oppervlakte_van_vertrek,
+    waardeer_sanitair,
     waardeer_verkoeling_en_verwarming,
-)
-from woningwaardering.stelsels.onzelfstandige_woonruimten.sanitair import (
-    Sanitair as OnzelfstandigeWoonruimtenSanitair,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -314,17 +313,55 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         ruimten: list[EenhedenRuimte],
     ) -> None:
         sanitair_categorieen: dict[WaarderingBouwer, WaarderingBouwer] = {}
-        woningwaarderingen_met_ruimten = list(
-            OnzelfstandigeWoonruimtenSanitair.genereer_woningwaarderingen(
-                ruimten, self.stelselgroep
-            )
-        )
+        ruimte_waarderingen: list[
+            tuple[EenhedenRuimte, WaarderingBouwer, list[WaarderingBouwer]]
+        ] = []
 
-        for ruimte, waarderingen in woningwaarderingen_met_ruimten:
+        for ruimte in ruimten:
             if ruimte.soort is None:
                 warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
                 continue
+            if ruimte.detail_soort is None:
+                continue
 
+            aantal_onzelfstandige_woonruimten = (
+                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            )
+            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
+                aantal_eenheden=aantal_eenheden,
+                aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+            )
+            sanitair_categorie = sanitair_categorieen.get(gedeeld_met_laag)
+            categorie_is_nieuw = sanitair_categorie is None
+            if sanitair_categorie is None:
+                sanitair_categorie = gedeeld_met_laag.maak_onderliggende(
+                    id="sanitair",
+                    naam="Sanitair",
+                )
+
+            waarderingen = waardeer_sanitair(
+                ruimte,
+                self.stelsel,
+                waarderingsgroep_bouwer=sanitair_categorie,
+                deler=1,
+            )
+            if not waarderingen:
+                if categorie_is_nieuw and sanitair_categorie.is_leeg:
+                    sanitair_categorie.verwijder()
+                continue
+
+            ruimte_criterium = waarderingen[0]
+            ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
+            sanitair_categorieen[gedeeld_met_laag] = sanitair_categorie
+
+        maximeer_wastafels(
+            ruimte_waarderingen,
+            deler_per_ruimte=lambda _: 1,
+        )
+
+        for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
             aantal_onzelfstandige_woonruimten = (
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             )
@@ -333,36 +370,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 str(aantal_onzelfstandige_woonruimten)
             )
 
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=aantal_eenheden,
-                aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
-            )
-            sanitair_categorie = sanitair_categorieen.get(gedeeld_met_laag)
-            if sanitair_categorie is None:
-                sanitair_categorie = gedeeld_met_laag.maak_onderliggende(
-                    id="sanitair",
-                    naam="Sanitair",
-                )
-                sanitair_categorieen[gedeeld_met_laag] = sanitair_categorie
-
-            ruimte_criterium = waarderingen[0]
-            reparented_ruimte = sanitair_categorie.maak_onderliggende(
-                id=ruimte_criterium.segment,
-                naam=ruimte_criterium.naam,
-            )
-
             for waardering in waarderingen[1:]:
-                if waardering.punten is None:
-                    continue
-
-                punten = Decimal(str(waardering.punten)) / deler
-                reparented_ruimte.maak_onderliggende(
-                    id=waardering.segment,
-                    naam=waardering.naam,
-                    punten=punten,
-                    aantal=waardering.aantal,
-                    meeteenheid=waardering.meeteenheid,
-                )
+                if waardering.punten is not None:
+                    waardering.punten = float(Decimal(str(waardering.punten)) / deler)
 
     def _keuken_waarderingen(
         self,

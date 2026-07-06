@@ -1,7 +1,4 @@
-from collections import namedtuple
 from datetime import date
-from decimal import Decimal
-from typing import Iterator
 
 from loguru import logger
 
@@ -14,26 +11,21 @@ from woningwaardering.stelsels.bouwers import (
 from woningwaardering.stelsels.criterium import (
     GedeeldMetSoort,
 )
-from woningwaardering.stelsels.gedeelde_logica import waardeer_sanitair
+from woningwaardering.stelsels.gedeelde_logica import (
+    maximeer_wastafels,
+    waardeer_sanitair,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
-    Referentiedata,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Installatiesoort,
-    Ruimtedetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
-    WoningwaarderingstelselgroepReferentiedata,
 )
-
-# De ruimte met de meeste (meerpersoons)wastafels, m.u.v. de badkamer, behoudt
-# bij >= 8 onzelfstandige woonruimten de waardering zonder maximering.
-MaxCount = namedtuple("MaxCount", ["aantal_wastafels", "ruimte"])
 
 
 class Sanitair(Stelselgroep):
@@ -64,8 +56,7 @@ class Sanitair(Stelselgroep):
             if not utils.gedeeld_met_eenheden(ruimte)
         ]
 
-        # Waardeer elke ruimte onder het bijbehorende gedeeld-met-criterium en houd
-        # het maximum aantal (meerpersoons)wastafels per ruimte bij (m.u.v. badkamer).
+        # Waardeer elke ruimte onder het bijbehorende gedeeld-met-criterium.
         ruimte_waarderingen: list[
             tuple[
                 EenhedenRuimte,
@@ -73,8 +64,6 @@ class Sanitair(Stelselgroep):
                 list[WaarderingBouwer],
             ]
         ] = []
-        max_wastafels = MaxCount(0, None)
-        max_meerpersoonswastafels = MaxCount(0, None)
 
         for ruimte in ruimten:
             aantal_gedeeld = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
@@ -101,58 +90,7 @@ class Sanitair(Stelselgroep):
             ruimte_criterium = waarderingen[0]
             ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
 
-            # * tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer.
-            if ruimte.detail_soort not in [
-                Ruimtedetailsoort.badkamer,
-                Ruimtedetailsoort.badkamer_met_toilet,
-                Ruimtedetailsoort.doucheruimte,
-            ]:
-                aantal_wastafels = self._aantal_wastafels(
-                    waarderingen, ruimte_criterium, Installatiesoort.wastafel
-                )
-                if aantal_wastafels > max_wastafels.aantal_wastafels:
-                    max_wastafels = MaxCount(aantal_wastafels, ruimte)
-
-                aantal_meerpersoonswastafels = self._aantal_wastafels(
-                    waarderingen,
-                    ruimte_criterium,
-                    Installatiesoort.meerpersoonswastafel,
-                )
-                if (
-                    aantal_meerpersoonswastafels
-                    > max_meerpersoonswastafels.aantal_wastafels
-                ):
-                    max_meerpersoonswastafels = MaxCount(
-                        aantal_meerpersoonswastafels, ruimte
-                    )
-
-        # Op een adres met minimaal acht of meer onzelfstandige woonruimten geldt
-        # het maximum van 1 punt voor (meerpersoons)wastafels niet voor maximaal
-        # één ruimte, namelijk de ruimte met de meeste (meerpersoons)wastafels.
-        for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
-            aantal_onzelfstandige = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
-            self._pas_wastafel_maximering_toe(
-                ruimte,
-                ruimte_criterium,
-                waarderingen,
-                aantal_onzelfstandige=aantal_onzelfstandige,
-                deler=aantal_onzelfstandige,
-                soort=Installatiesoort.wastafel,
-                max_count=max_wastafels,
-                maximum=Decimal("1"),
-            )
-            self._pas_wastafel_maximering_toe(
-                ruimte,
-                ruimte_criterium,
-                waarderingen,
-                aantal_onzelfstandige=aantal_onzelfstandige,
-                deler=aantal_onzelfstandige,
-                soort=Installatiesoort.meerpersoonswastafel,
-                max_count=max_meerpersoonswastafels,
-                maximum=Decimal("1.5"),
-            )
+        maximeer_wastafels(ruimte_waarderingen)
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
@@ -161,153 +99,6 @@ class Sanitair(Stelselgroep):
         )
 
         return woningwaardering_groep
-
-    @staticmethod
-    def genereer_woningwaarderingen(
-        ruimten: list[EenhedenRuimte],
-        stelselgroep: WoningwaarderingstelselgroepReferentiedata,
-    ) -> Iterator[tuple[EenhedenRuimte, list[WaarderingBouwer]]]:
-        """Genereer sanitair-waarderingen per ruimte voor hergebruik in GBA.
-
-        De waarderingen worden opgebouwd onder een losse ``WaarderingsgroepBouwer``
-        met ``stelselgroep`` ``sanitair`` (niet onder de aanroepende stelselgroep);
-        de aanroeper herparent ze in de GBA-hierarchie. Wastafel-maximering bij
-        >= 8 onzelfstandige woonruimten wordt hier toegepast zonder punten te delen
-        (deling gebeurt in de GBA-wrapper).
-        """
-        del stelselgroep  # behouden voor API-compatibiliteit met GBA
-
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
-            Woningwaarderingstelsel.onzelfstandige_woonruimten,
-            Woningwaarderingstelselgroep.sanitair,
-        )
-        woningwaarderingen_voor_gedeeld: list[
-            tuple[EenhedenRuimte, list[WaarderingBouwer]]
-        ] = []
-        max_wastafels = MaxCount(0, None)
-        max_meerpersoonswastafels = MaxCount(0, None)
-
-        for ruimte in ruimten:
-            waarderingen = waardeer_sanitair(
-                ruimte,
-                Woningwaarderingstelsel.onzelfstandige_woonruimten,
-                waarderingsgroep_bouwer=waarderingsgroep_bouwer,
-                deler=1,
-            )
-            if not waarderingen:
-                continue
-
-            ruimte_criterium = waarderingen[0]
-            if ruimte.detail_soort not in [
-                Ruimtedetailsoort.badkamer,
-                Ruimtedetailsoort.badkamer_met_toilet,
-                Ruimtedetailsoort.doucheruimte,
-            ]:
-                aantal_wastafels = Sanitair._aantal_wastafels(
-                    waarderingen, ruimte_criterium, Installatiesoort.wastafel
-                )
-                if aantal_wastafels > max_wastafels.aantal_wastafels:
-                    max_wastafels = MaxCount(aantal_wastafels, ruimte)
-
-                aantal_meerpersoonswastafels = Sanitair._aantal_wastafels(
-                    waarderingen,
-                    ruimte_criterium,
-                    Installatiesoort.meerpersoonswastafel,
-                )
-                if (
-                    aantal_meerpersoonswastafels
-                    > max_meerpersoonswastafels.aantal_wastafels
-                ):
-                    max_meerpersoonswastafels = MaxCount(
-                        aantal_meerpersoonswastafels, ruimte
-                    )
-
-            woningwaarderingen_voor_gedeeld.append((ruimte, waarderingen))
-
-        for ruimte, waarderingen in woningwaarderingen_voor_gedeeld:
-            ruimte_criterium = waarderingen[0]
-            aantal_onzelfstandige = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
-            Sanitair._pas_wastafel_maximering_toe(
-                ruimte,
-                ruimte_criterium,
-                waarderingen,
-                aantal_onzelfstandige=aantal_onzelfstandige,
-                deler=1,
-                soort=Installatiesoort.wastafel,
-                max_count=max_wastafels,
-                maximum=Decimal("1"),
-            )
-            Sanitair._pas_wastafel_maximering_toe(
-                ruimte,
-                ruimte_criterium,
-                waarderingen,
-                aantal_onzelfstandige=aantal_onzelfstandige,
-                deler=1,
-                soort=Installatiesoort.meerpersoonswastafel,
-                max_count=max_meerpersoonswastafels,
-                maximum=Decimal("1.5"),
-            )
-            yield (ruimte, waarderingen)
-
-    @staticmethod
-    def _aantal_wastafels(
-        waarderingen: list[WaarderingBouwer],
-        ruimte_criterium: WaarderingBouwer,
-        soort: Referentiedata,
-    ) -> int:
-        return int(
-            sum(
-                int(woningwaardering.aantal or 0)
-                for woningwaardering in waarderingen
-                if (
-                    woningwaardering.bovenliggende is ruimte_criterium
-                    and woningwaardering.segment == soort.name
-                    and woningwaardering.aantal is not None
-                )
-            )
-        )
-
-    @staticmethod
-    def _pas_wastafel_maximering_toe(
-        ruimte: EenhedenRuimte,
-        ruimte_criterium: WaarderingBouwer,
-        waarderingen: list[WaarderingBouwer],
-        *,
-        aantal_onzelfstandige: int,
-        deler: int = 1,
-        soort: Referentiedata,
-        max_count: "MaxCount",
-        maximum: Decimal,
-    ) -> None:
-        if not (aantal_onzelfstandige >= 8 and max_count.ruimte != ruimte):
-            return
-        for index, woningwaardering in enumerate(list(waarderingen)):
-            if (
-                woningwaardering.bovenliggende is ruimte_criterium
-                and woningwaardering.segment == soort.name
-                and woningwaardering.aantal is not None
-                and woningwaardering.aantal > 1
-            ):
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {woningwaardering.aantal} {soort.naam}. Maximaal {maximum} punt voor {soort.naam}."
-                )
-                correctie = utils.rond_af(
-                    maximum - Decimal(str(woningwaardering.aantal)) * maximum,
-                    decimalen=2,
-                )
-                correctie_gedeeld = utils.rond_af(
-                    correctie / Decimal(deler), decimalen=2
-                )
-                waarderingen.insert(
-                    index + 1,
-                    ruimte_criterium.maak_onderliggende(
-                        id=f"max_punten_{soort.name}",
-                        naam=f"Max {maximum} punt voor {soort.naam}",
-                        punten=float(correctie_gedeeld),
-                    ),
-                )
 
 
 if __name__ == "__main__":  # pragma: no cover
