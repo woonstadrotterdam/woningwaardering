@@ -269,6 +269,8 @@ Als de lengte van de doorgang (X) breder is dan 50% van de lengte van Y, dan zij
 
 ![VOORBEELD 1](../afbeeldingen/onzelfstandig-2.2.1.4-voorbeeld-1.png)
 
+Als X ≥ 50% van Y, dan is 1 en 2 één vertrek / overige ruimte.
+
 ==}
 
 {==
@@ -278,6 +280,8 @@ VOORBEELD 2
 Als de lengte van de doorgang (X) minder is dan 50% van de lengte van Y, dan zijn ruimten 1 en 2 beiden afzonderlijk een vertrek of overige ruimte. Let op : als zich in de opening een (deur)omlijsting bevindt, dan wordt gesproken van twee (afzonderlijke) ruimten en geldt deze situatie dus niet.
 
 ![VOORBEELD 2](../afbeeldingen/onzelfstandig-2.2.1.4-voorbeeld-2.png)
+
+Als X < 50% van Y, dan zijn 1 en 2 afzonderlijke vertrekken / overige ruimten
 
 ==}
 
@@ -342,7 +346,7 @@ Een overige ruimte krijgt punten voor de oppervlakte als deze voldoet aan alle v
 
 ##### 2.2.2.3 Zolderruimte zonder vaste trap
 
-Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden aangemerkt en er is <u>geen vaste trap</u> naar de zolder, dan worden er <u>5 punten afgetrokken</u> van de waarde die aan het vloeroppervlak wordt toegekend. Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is. Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
+Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘vertrek’, maar wel als overige ruimte kan worden aangemerkt en er is <u>geen vaste trap</u> naar de zolder, dan worden er <u>5 punten afgetrokken</u> van de waarde die aan het vloeroppervlak wordt toegekend. Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is. Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
 
 ##### 2.2.2.4 Toegang ruimte via zolderruimte
 
@@ -727,6 +731,8 @@ Voor het meten van een aanrecht gelden de volgende regels:
 - ~~bij een ingemetseld aanrechtblad of waar de wandbetegeling op het blad is aangebracht, wordt alleen het bruikbare/zichtbare gedeelte gemeten.~~
 - ~~de lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.~~
 
+![Meetinstructies lengte aanrechtblad](../afbeeldingen/onzelfstandig-2.5.2-aanrecht.png)
+
 #### 2.5.3 Punten voor extra voorzieningen keuken
 
 > [!TIP]
@@ -1099,7 +1105,7 @@ De ervaring leert dat bij het waarderen van de gemeenschappelijke ruimten en voo
 
 #### 2.9.6 Meetinstructie gemeenschappelijke ruimten
 
-Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aangesloten bij de definities en meetinstructies zoals toegelicht in [paragraaf 2.1.3](#213-algemene-regel-waardering-van-voorzieningen-niet-afhankelijk-van-functioneren) en [2.2.4](#224-meetinstructies-vertrekken-en-overige-ruimtes).
+Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aangesloten bij de definities en meetinstructies zoals toegelicht in [paragraaf 2.1.5](#215-gelijke-verdeling-van-punten-bij-gedeeld-gebruik-van-ruimtes-en-voorzieningen) en [2.2.4](#224-meetinstructies-vertrekken-en-overige-ruimtes).
 
 ### 2.10 Rubriek 10: Gemeenschappelijke parkeerruimten
 
@@ -1135,7 +1141,7 @@ Het woningwaarderigsstelsel kent punten toe aan verschillende typen gemeenschapp
 #### 2.10.1 Basisvoorwaarden waardering gemeenschappelijk parkeerruimte
 
 > [!NOTE]
-> De woningwaardering package gaat er van uit dat onderstaande eisen, wanneer een parkeeruimte wordt meegegeven in het input model.
+> De woningwaardering package gaat er van uit dat aan onderstaande eisen wordt voldaan wanneer een parkeerruimte wordt meegegeven in het input model.
 
 Punten voor een gemeenschappelijke parkeervoorziening worden alleen toegekend als de parkeervoorziening als een onroerende aanhorigheid gekwalificeerd wordt. Hiervan is sprake:
 
@@ -1274,9 +1280,13 @@ De hoogte van de punten hangt af van hoe de WOZ-waarde per vierkante meter gebru
 
 ~~Als de WOZ-waarde betrekking heeft op een 'gebouwd eigendom in aanbouw', zoals bedoeld in artikel 17 lid 4 Wet WOZ, dan wordt voor de puntentoekenning uitgegaan van de waarde van de woning als ware de bouw voltooid. De WOZ-beschikking zal het voortgangspercentage vermelden. De Huurcommissie moet dan de WOZ-waarde gerelateerd aan de voortgang van de aanbouw omrekenen naar de waarde 'als ware de bouw voltooid', dus naar 100%.~~
 
+~~**Voorbeeld:** De WOZ-waarde van een woning is op 1 januari 2025 vastgesteld op € 100.000. Deze waarde vertegenwoordigde een voortgang van 40% van de bouw. De woning wordt in november 2025 opgeleverd. De bouw is dan 100% afgerond. Huurder en verhuurder sluiten per 1 december 2025 een huurovereenkomst af. De WOZ-waarde 'als ware de bouw voltooid' wordt dan als volgt berekend: (100.000 / 40) x 100 = € 250.000,-~~
+
 ~~De definitie van 'gebouwd eigendom in aanbouw' is voor de Huurcommissie: een onroerende zaak of gedeelte daarvan waarvoor een omgevingsvergunning is verleend en die door bouw nog niet geschikt is voor gebruik overeenkomstig haar beoogde bestemming. Het gaat hier om de situatie waarbij nieuwbouw/verbouw is begonnen na 1 januari van een lopend jaar en die niet is afgerond voor 1 januari van het daaropvolgende jaar.~~
 
 ~~Hiervan is bijvoorbeeld sprake als de werkzaamheden aan het gehuurde zijn gestart na 1 januari 2022 en zijn voltooid ná 1 januari 2023, terwijl de WOZ-beschikking 2023 als peildatum 1 januari 2022 heeft. De WOZ-beschikking 2024, die als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven 'als ware de bouw voltooid'. In dat geval kan de woning worden aangemerkt als 'een gebouwd eigendom in aanbouw', zoals bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.~~
+
+~~Het is aan de verhuurder om te bewijzen welk percentage van de bouw de WOZ-waarde vertegenwoordigt, bijvoorbeeld door middel van de WOZ-beschikking.~~
 
 ### 2.12 Rubriek 12: Bijzondere voorzieningen
 
@@ -1333,7 +1343,7 @@ Een aanbelfunctie met video- en audioverbinding is een systeem dat tweewegcommun
 
 Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik door de bewoners, wordt gewaardeerd met 2 punten. Dit geldt alleen als de laadpaal bestemd is voor het elektrisch opladen van een gemotoriseerd voertuig, dat niet een bromfiets, fiets met trapondersteuning of gehandicaptenvoertuig is.
 
-Als een gemeenschappelijke parkeerruimte een laadpaal heeft, wordt voor de berekeningsmethode aangesloten bij rubriek 10.
+Als een gemeenschappelijke parkeerruimte een laadpaal heeft, wordt voor de berekeningsmethode aangesloten bij [rubriek 10](#210-rubriek-10-gemeenschappelijke-parkeerruimten).
 
 ### 2.13 Rubriek 13: Aftrekpunten
 
@@ -1406,8 +1416,8 @@ Het is onvoldoende om alleen te vermelden dat de woning om een van bovenstaande 
 ==}
 
 > [!TIP]
-> Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een zelfstandige woonruimte de status van rijksmonument heeft.
-> De datum van afsluiten van de huurovereenkomst is van belang omdat vanaf 1 juli 2024 de nieuwe wetgeving (Wet betaalbare huur) van kracht is, waardoor rijksmonumenten een procentuele opslag van 35% krijgen op de maximale huurprijs in plaats van de eerdere puntentoeslag van 50 punten.
+> Dit voorbeeld toont de minimale gegevens die nodig zijn om aan te geven dat een onzelfstandige woonruimte de status van rijksmonument heeft.
+> De datum van afsluiten van de huurovereenkomst is van belang omdat vanaf 1 juli 2024 de nieuwe wetgeving (Wet betaalbare huur) van kracht is, waardoor rijksmonumenten een procentuele opslag van 35% krijgen op de maximale huurprijs in plaats van de eerdere puntentoeslag van 10 punten.
 > /// tab | JSON
 >
 ```json
