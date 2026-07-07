@@ -12,9 +12,8 @@ Dit hoofdstuk begint met algemene uitleg over het woningwaarderingsstelsel (para
 
 De waardering van een zelfstandige woonruimte gebeurt volgens het woningwaarderingsstelsel. De wettelijke basis voor dit stelsel ligt in de Uitvoeringswet huurprijzen woonruimte (hierna: Uhw) en het Besluit huurprijzen woonruimte (hierna: Bhw). De waardering van de kwaliteit van een woonruimte vindt plaats volgens het stelsel dat opgenomen is in Bijlage I van het Bhw.[^1]
 
-#### Dwingend stelsel
-
-Het woningwaarderingsstelsel is een **dwingend stelsel**. Dat betekent dat het verplicht toegepast moet worden. Voor de Huurcommissie heeft de wetgever wel een uitzondering gemaakt. De wetgever biedt de Huurcommissie namelijk de mogelijkheid om van het woningwaarderingsstelsel af te wijken. De Huurcommissie heeft dus een **afwijkingsbevoegdheid.**[^2] De Huurcommissie is bevoegd om af te wijken als de aard van de woonruimte daar aanleiding toe geeft. De Huurcommissie gaat hier terughoudend mee om.
+_Dwingend stelsel_  
+Het woningwaarderingsstelsel is een **dwingend stelsel**. Dat betekent dat het verplicht toegepast moet worden. Voor de Huurcommissie heeft de wetgever wel een uitzondering gemaakt. De wetgever biedt de Huurcommissie namelijk de mogelijkheid om van het woningwaarderingsstelsel af te wijken. De Huurcommissie heeft dus een **afwijkingsbevoegdheid**[^2] . De Huurcommissie is bevoegd om af te wijken als de aard van de woonruimte daar aanleiding toe geeft. De Huurcommissie gaat hier terughoudend mee om.
 
 [^1]: Artikel 5 Bhw.
 [^2]: Zie voetnoot 1.
@@ -29,20 +28,18 @@ De maximale huurprijs is de hoogste huurprijs die voor de woonruimte gevraagd ma
 
 Niet alle zelfstandige woningen hebben recht op huurprijsbescherming. Dit hangt af van de huursector en het huurregime dat van toepassing is.
 
-#### 1.3.1. De verschillende huursectoren
+#### 1.3.1 De verschillende huursectoren
 
-Om te bepalen of de huurprijsbeschermingsregels en welke waarderingsregels van toepassing zijn, moet eerst gekeken worden naar de afsluitdatum van de huurovereenkomst. Het gaat dus niet om de datum waarop het contract is opgesteld of ingaat, maar om de datum waarop de beide handtekeningen (van huurder en verhuurder) zijn gezet.
+Om te bepalen of de huurprijsbeschermingsregels en welke waarderingsregels van toepassing zijn, moet eerst gekeken worden naar de <u>afsluitdatum</u> van de huurovereenkomst. Het gaat dus niet om de datum waarop het contract is opgesteld of ingaat, maar om de datum waarop de beide handtekeningen (van huurder en verhuurder) zijn gezet.
 
 Voor de huurcontracten die zijn ondertekend op of na 1 juli 2024 zijn er 3 huursectoren: de sociale sector, de middensector en de vrije sector. De indeling van de huursectoren is per 1 januari 2026 als volgt:
 
-Indeling huursectoren
-
-| Sector                | Huurprijs                                                         | Bijbehorend puntenaantal                |
-| --------------------- | ----------------------------------------------------------------- | --------------------------------------- |
-| Sociale sector        | Maximaal € 932,93                                                 | Bijbehorend puntenaantal t/m 143 punten |
-| **Sociale huurgrens** |                                                                   |                                         |
-| Middensector          | Hoger dan € 932,93 maar maximaal € 1.228,07 of 144 t/m 186 punten |                                         |
-| Vrije sector          | Hoger dan € 1.228,07                                              | 187 punten en meer                      |
+| Sector            | Huurprijs                                                          | Bijbehorend puntenaantal                |
+|-------------------|--------------------------------------------------------------------|-----------------------------------------|
+| Sociale sector    | Maximaal € 932,93                                                  | Bijbehorend puntenaantal t/m 143 punten |
+| Sociale huurgrens |                                                                    |                                         |
+| Middensector      | Hoger dan € 932,93 maar maximaal € 1.228,07 of 144 t/m 186 punten |                                         |
+| Vrije sector      | Hoger dan € 1.228,07                                               | 187 punten en meer                      |
 
 Deze indeling betekent dat huurders met een maximale huurprijs tot en met 186 punten aanspraak kunnen maken op huurprijsbescherming. Maar, dit geldt niet in alle gevallen. Dit wordt hieronder nader uitgelegd.
 
@@ -52,8 +49,7 @@ Bij huurcontracten die zijn ondertekend vóór 1 juli 2024 wordt de huursector b
 
 Als de huurprijs boven het bedrag van de liberalisatiegrens ligt, dan is de woonruimte onderdeel van de vrije sector. Ligt de huurprijs onder de liberalisatiegrens, dan valt de woonruimte in de sociale sector. Als een woning behoort tot de sociale sector dan kan een huurder aanspraak maken op huurprijsbescherming. Als een woning behoort tot de vrije sector dan kan dit slechts in heel beperkte gevallen.
 
-#### Schema 1.1: beoordeling van de huursector
-
+_Schema 1.1: beoordeling van de huursector_  
 Dat een woonruimte op basis van de aanvangshuurprijs in een bepaalde huursector valt staat los van het feit dat partijen een procedure kunnen starten als omschreven in hoofdstuk 3 en de huursector op basis van die procedures kan veranderen.
 
 #### 1.3.3 Uitzonderingen op de hoofdregel
@@ -61,9 +57,9 @@ Dat een woonruimte op basis van de aanvangshuurprijs in een bepaalde huursector 
 In slechts twee gevallen kan de nieuwe sectorindeling toch van toepassing zijn bij een huurcontract met een afsluitdatum vóór 1 juli 2024, namelijk bij:
 
 1. Een huurcontract dat vóór 1 juli 2024 is afgesloten, maar voor een woonruimte die toen ook al behoorde tot de sociale sector (wat al in de sociale sector viel blijft in de sociale sector) of;
-2. Een huurcontract dat vóór 1 juli 2024 is afgesloten met een geliberaliseerde huurprijs, maar waarbij de woning op basis van het puntenaantal eigenlijk in de sociale sector valt.3 Zie hiervoor hoofdstuk 3.2.
+2. Een huurcontract dat vóór 1 juli 2024 is afgesloten met een geliberaliseerde huurprijs, maar waarbij de woning op basis van het puntenaantal eigenlijk in de sociale sector valt.[^3] Zie hiervoor hoofdstuk 3.2.
 
-3Dit geldt dus niet als sprake is van een vóór 1 juli 2024 afgesloten huurcontract met een geliberaliseerde huurprijs, waarbij het puntenaantal van de woonruimte of op basis van de maximaal redelijke huurprijs in de nieuwe middensector valt.
+[^3]: Dit geldt dus niet als sprake is van een vóór 1 juli 2024 afgesloten huurcontract met een geliberaliseerde huurprijs, waarbij het puntenaantal van de woonruimte of op basis van de maximaal redelijke huurprijs in de nieuwe middensector valt.
 
 #### 1.3.4 Toepassing woningwaarderingsstelsels geldig op de peildatum
 
@@ -75,14 +71,11 @@ De toepassing van het woningwaarderingsstelsel is gekoppeld aan kalenderjaren. D
 
 In 2024 zijn de regels tussentijds gewijzigd met de Wet betaalbare huur. Daarom gelden de volgende aanvullende toepassingsregels:
 
-* ligt de peildatum van de procedure vóór 1 juli 2024, dan geldt het woningwaarderingsstelsel dat gold vóór 1 juli 2024.
-
-ligt de peildatum van de procedure op of na 1 juli 2024, dan geldt het woningwaarderingsstelsel van 1 juli 2024 tot 1 januari 2025. In uitzonderlijke gevallen wordt het nieuwe woningwaarderingsstelsel (van na 1 juli 2024 en verder) toegepast, terwijl de huurovereenkomst is afgesloten (ondertekend) vóór 1 juli 2024. Dit kan bijvoorbeeld voorkomen in de procedure ‘toetsing huurverlaging op grond van punten’ of bij de procedure ‘toetsing van de aanvangshuurprijs’, zoals in het onderstaande voorbeeld toegelicht.
-
-**Voorbeeld**
-
+- ligt de peildatum van de procedure vóór 1 juli 2024, dan geldt het woningwaarderingsstelsel dat gold vóór 1 juli 2024.
+- ligt de peildatum van de procedure op of na 1 juli 2024, dan geldt het woningwaarderingsstelsel van 1 juli 2024 tot 1 januari 2025. In uitzonderlijke gevallen wordt het nieuwe woningwaarderingsstelsel (van na 1 juli 2024 en verder) toegepast, terwijl de huurovereenkomst is afgesloten (ondertekend) vóór 1 juli 2024. Dit kan bijvoorbeeld voorkomen in de procedure 'toetsing huurverlaging op grond van punten' of bij de procedure 'toetsing van de aanvangshuurprijs', zoals in het onderstaande voorbeeld toegelicht.
 {==
 
+**VOORBEELD**  
 Een huurder en verhuurder sloten op 1 mei 2024 een tijdelijke huurovereenkomst van maximaal 2 jaar af, zoals bedoeld in de Wet Doorstroming Huurmarkt. De ingangsdatum van deze huurovereenkomst is 1 juli 2024. De huurder dient vervolgens op tijd een verzoek in tot toetsing van de aanvangshuurprijs. Omdat de ingangsdatum op 1 juli 2024 ligt, moet het nieuwe woningwaarderingsstelsel (geldig vanaf 1 juli 2024) worden toegepast, ondanks dat de huurovereenkomst vóór 1 juli 2024 is afgesloten.
 
 ==}
@@ -91,40 +84,59 @@ Een huurder en verhuurder sloten op 1 mei 2024 een tijdelijke huurovereenkomst v
 
 Voor het waarderen van de woonruimte is het belangrijk om vast te stellen of er sprake is van een zelfstandige woonruimte. Het Bhw heeft een definitie gegeven van een zelfstandige woonruimte. Deze definitie is:
 
-*“Onder een woonruimte welke een zelfstandige woning vormt, wordt een woonruimte verstaan als bedoeld in* [*artikel 7:234 van het Burgerlijk Wetboek*](http://wetten.overheid.nl/jci1.3%3Ac%3ABWBR0005290%26artikel%3D234#_blank)*, welke wordt bewoond door maximaal twee personen of welke wordt bewoond door drie of meer personen die een duurzame gemeenschappelijke huishouding hebben. (…).” 4*
+_"Onder een woonruimte welke een zelfstandige woning vormt, wordt een woonruimte verstaan als bedoeld in artikel 7:234 van het Burgerlijk Wetboek, welke wordt bewoond door maximaal twee personen of welke wordt bewoond door drie of meer personen die een duurzame gemeenschappelijke huishouding hebben. (...)."_[^4]
 
-4Artikel 1 lid 2 Bhw.
+> [!TIP]
+> Om een woonruimte als zelfstandige woning te waarderen, dient dit aangegeven te worden in het attribuut `woningwaarderingstelsel`:
+> /// tab | JSON
+>
+```json
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/woningwaarderingstelsel.json"
+%}
+```
+>
+> ///
+> /// tab | Python
+>
+```python
+{%
+    include-markdown "implementatietoelichtingen/voorbeelden/zelfstandige_woonruimten/woningwaarderingstelsel.py"
+%}
+```
+>
+> ///
 
 #### De toepassing van de definitie van zelfstandige woonruimte
 
 De Huurcommissie toetst drie (hoofd)vragen om te beoordelen of sprake is van een zelfstandige (of onzelfstandige) woonruimte. Die vragen zijn de volgende:
 
-* Voldoet de woonruimte aan de eisen van artikel 234 van boek 7 het BW?
-* Wordt de woonruimte bewoond door maximaal twee personen?
-* Wordt de woonruimte bewoond door drie of meer personen met een duurzame gemeenschappelijke huishouding?
+- Voldoet de woonruimte aan de eisen van artikel 234 van boek 7 het BW?
+- Wordt de woonruimte bewoond door maximaal twee personen?
+- Wordt de woonruimte bewoond door drie of meer personen met een duurzame gemeenschappelijke huishouding?
 
 Het verdient nadrukkelijk aanbeveling de volgorde van deze vragen aan te houden bij het beantwoorden van de vraag of sprake is van zelfstandige of onzelfstandige woonruimte.
 
-1. Voldoet de woonruimte aan de eisen van artikel 7:234 BW?
+##### 1. Voldoet de woonruimte aan de eisen van artikel 7:234 BW?
 
 In dit wetsartikel staat dat sprake is van een zelfstandige woonruimte als de woonruimte voldoet aan een aantal fysieke kenmerken, namelijk **een eigen toegang** en dat de bewoner deze kan gebruiken zonder daarbij afhankelijk te zijn van **wezenlijke voorzieningen** buiten de woning. Dit staat dus los van de vraag door wie de woonruimte wordt bewoond. Die wezenlijke voorzieningen zijn ten minste:
 
 1. één vertrek;
 2. een kookgelegenheid: een aanrecht, aan- en afvoer van water en ten minste één aansluitpunt voor koken op gas of elektriciteit;
-3. een wasgelegenheid, waartoe ook een douchecabine in een vertrek of ‘en suite’ behoort;
+3. een wasgelegenheid, waartoe ook een douchecabine in een vertrek of 'en suite' behoort;
 4. een eigen toilet.
 
-Voldoet een woonruimte aan de bovenstaande eisen? Dan volgt daaruit niet automatisch dat er sprake is van een zelfstandige woonruimte. Er moet namelijk ook een oordeel gevormd worden over de tweede hoofdvraag.
+Voldoet een woonruimte aan de bovenstaande eisen? Dan volgt daaruit <u>niet</u> automatisch dat er sprake is van een zelfstandige woonruimte. Er moet namelijk ook een oordeel gevormd worden over de tweede hoofdvraag.
 
-#### Geen eigen toegang of wezenlijke voorzieningen
+[^4]: Artikel 1 lid 2 Bhw.
 
+_Geen eigen toegang of wezenlijke voorzieningen_  
 Beschikt een woonruimte *niet* over een eigen toegang en/of (één van) deze wezenlijke voorzieningen, dan is geen sprake van een zelfstandige woonruimte. De woonruimte is dan onzelfstandig. Deze woonruimte kan gewaardeerd worden met het [beleidsboek onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte).
 
-#### Onvrije zelfstandige woonruimte
+_Onvrije zelfstandige woonruimte_  
+Beschikt een huurder zelf over de wezenlijke voorzieningen, maar kunnen deze alleen bereikt worden via een gemeenschappelijke verkeersruimte, dan is alsnog aan de eisen van artikel 7:234 BW voldaan. Zulke woonruimtes worden ook wel de 'onvrije zelfstandige woningen' genoemd. Het gaat bijvoorbeeld om een woonruimte waarbij de badkamer (als wezenlijke voorziening) bereikbaar is via een met andere bewoners gedeelde gang (de gemeenschappelijke verkeersruimte), maar waarbij die badkamer enkel voor die ene huurder ter beschikking is gesteld.
 
-Beschikt een huurder zelf over de wezenlijke voorzieningen, maar kunnen deze alleen bereikt worden via een gemeenschappelijke verkeersruimte, dan is alsnog aan de eisen van artikel 7:234 BW voldaan. Zulke woonruimtes worden ook wel de ‘onvrije zelfstandige woningen’ genoemd. Het gaat bijvoorbeeld om een woonruimte waarbij de badkamer (als wezenlijke voorziening) bereikbaar is via een met andere bewoners gedeelde gang (de gemeenschappelijke verkeersruimte), maar waarbij die badkamer enkel voor die ene huurder ter beschikking is gesteld.
-
-2. Wordt de woonruimte bewoond door maximaal twee personen?
+##### 2. Wordt de woonruimte bewoond door maximaal twee personen?
 
 Als de woonruimte, die voldoet aan de eisen van artikel 7:234 BW, wordt bewoond door twee personen, dan is in de regel sprake van een zelfstandige woonruimte. In deze situatie zal de Huurcommissie in principe geen verdere toets doen.
 
@@ -132,15 +144,14 @@ Maar, als partijen het oneens zijn over de vraag of sprake is van een zelfstandi
 
 Wordt de woonruimte door drie of meer personen bewoond? Dan kan nog geen conclusie worden getrokken, maar moet nog een oordeel over de volgende hoofdvraag worden gevormd.
 
-3. Wordt de woonruimte bewoond door drie of meer personen met een duurzame gemeenschappelijke huishouding?
+##### 3. Wordt de woonruimte bewoond door drie of meer personen met een duurzame gemeenschappelijke huishouding?
 
 Als een woning door drie of meer personen wordt bewoond, dan moet sprake zijn van een duurzame gemeenschappelijke huishouding om de woning te waarderen als zelfstandige woonruimte.
 
 Het antwoord op deze derde vraag bestaat dus uit twee delen. Eerst moet beoordeeld worden of sprake is van een duurzame gemeenschappelijke huishouding. Vervolgens kan geconcludeerd worden of de woonruimte een zelfstandige of onzelfstandige woonruimte is.
 Als er sprake blijkt van een duurzame gemeenschappelijke huishouding, dan wordt de woonruimte als zelfstandig aangemerkt. Is er geen sprake van een duurzame gemeenschappelijke huishouding, dan is de woonruimte onzelfstandig.
 
-##### Duurzame gemeenschappelijke huishouding
-
+_Duurzame gemeenschappelijke huishouding_  
 De vraag of sprake is van een duurzame gemeenschappelijke huishouding kan door de commissie op een zitting worden onderzocht. Hierbij worden de volgende scenario’s gehanteerd.
 
 ##### 1. Koppel met een relatie of een gezin
@@ -159,27 +170,26 @@ De Huurcommissie kijkt bij de toets of er sprake is van een duurzame gemeenschap
 
 Vragen die bij de beoordeling een rol kunnen spelen zijn bijvoorbeeld:
 
-* Woonden de huurders al eerder - direct voorafgaand aan het huren van de onderhavige woonruimte - in een andere zelfstandige woning samen als groep?
-* Kenden de huurders elkaar al voorafgaand aan het sluiten van de huurovereenkomst?
-* Zochten de huurders gezamenlijk een woonruimte en wilden zij ook echt één woonruimte delen? Of ligt het initiatief bij verhuurder?
-* Heeft de verhuurder de ruimtes als één geheel of per kamer geadverteerd?
-* Worden in de huurovereenkomst kamernummers vermeld?
-* Zijn de ruimtes voorzien van een eigen (huis)nummer of andere specifieke duiding?
-* Worden ruimtes in het contract of in de praktijk door verhuurder specifiek toegewezen aan een huurder?
-* Kunnen huurders zelf een ruimte kiezen die zij gebruiken of wordt aan een huurder het specifieke gebruiksrecht voor een ruimte door verhuurder toegekend?
-* Kan het gebruik van de ruimtes wisselend plaatsvinden of moeten dan bijvoorbeeld het contract of de feitelijke huurbetaling aangepast worden?
-* Kunnen de toegangsdeuren tot de afzonderlijke ruimtes op slot?
-* Staat in de huurovereenkomst één huurprijs of wordt deze verdeeld over de afzonderlijke ruimtes met voor elke ruimte een eigen bedrag?
-* Verdelen de huurders de huurprijs onderling of heeft verhuurder dat (mede) bepaald?
-* Wordt de huurprijs in één keer door één huurder betaald of betaalt iedere huurder voor zichzelf direct aan verhuurder?
-* Zijn de huurders hoofdelijk aansprakelijk?
-* Als een huurder vertrekt, bepalen dan de achterblijvende huurders wie de nieuwe medebewoner wordt?
-* Hebben de huurders inspraak of een vetorecht als er wegens vertrek van een huurder een nieuwe medebewoner gezocht wordt door de verhuurder?
-* Hebben de huurders een gezamenlijke rekening (voor de huurbetaling)?
-* Doen de huurders boodschappen gezamenlijk, voor elkaar of is het ieder voor zich?
+- Woonden de huurders al eerder - direct voorafgaand aan het huren van de onderhavige woonruimte - in een andere zelfstandige woning samen als groep?
+- Kenden de huurders elkaar al voorafgaand aan het sluiten van de huurovereenkomst?
+- Zochten de huurders gezamenlijk een woonruimte en wilden zij ook echt één woonruimte delen? Of ligt het initiatief bij verhuurder?
+- Heeft de verhuurder de ruimtes als één geheel of per kamer geadverteerd?
+- Worden in de huurovereenkomst kamernummers vermeld?
+- Zijn de ruimtes voorzien van een eigen (huis)nummer of andere specifieke duiding?
+- Worden ruimtes in het contract of in de praktijk door verhuurder specifiek toegewezen aan een huurder?
+- Kunnen huurders zelf een ruimte kiezen die zij gebruiken of wordt aan een huurder het specifieke gebruiksrecht voor een ruimte door verhuurder toegekend?
+- Kan het gebruik van de ruimtes wisselend plaatsvinden of moeten dan bijvoorbeeld het contract of de feitelijke huurbetaling aangepast worden?
+- Kunnen de toegangsdeuren tot de afzonderlijke ruimtes op slot?
+- Staat in de huurovereenkomst één huurprijs of wordt deze verdeeld over de afzonderlijke ruimtes met voor elke ruimte een eigen bedrag?
+- Verdelen de huurders de huurprijs onderling of heeft verhuurder dat (mede) bepaald?
+- Wordt de huurprijs in één keer door één huurder betaald of betaalt iedere huurder voor zichzelf direct aan verhuurder?
+- Zijn de huurders hoofdelijk aansprakelijk?
+- Als een huurder vertrekt, bepalen dan de achterblijvende huurders wie de nieuwe medebewoner wordt?
+- Hebben de huurders inspraak of een vetorecht als er wegens vertrek van een huurder een nieuwe medebewoner gezocht wordt door de verhuurder?
+- Hebben de huurders een gezamenlijke rekening (voor de huurbetaling)?
+- Doen de huurders boodschappen gezamenlijk, voor elkaar of is het ieder voor zich?
 
-##### Conclusie
-
+_Conclusie_  
 Wordt aan de hand van de toets op de criteria na bevraging van partijen tijdens de zitting in een individueel geval vastgesteld dat sprake is van een duurzame gemeenschappelijke huishouding? Dan kan vervolgens geconcludeerd worden dat er sprake is van een zelfstandige woonruimte. Blijkt geen sprake te zijn van een duurzame gemeenschappelijke huishouding? Dan is de conclusie dat voor de toepassing van het woningwaarderingsstelsel sprake is van een onzelfstandige woonruimte.
 
 Een huurder kan in principe niet eenzijdig zorgen voor een andere classificatie van de huurwoning door bijvoorbeeld zonder toestemming van verhuurder de huurwoning onder te verhuren of iemand anders te laten intrekken. Heeft een verhuurder hier echter mee ingestemd, dan kan dit wel een effect hebben op de kwalificatie van de woonruimte en daarmee de toepasselijkheid van het woningwaarderingsstelsel.
@@ -189,9 +199,11 @@ Een huurder kan in principe niet eenzijdig zorgen voor een andere classificatie 
 In de voorgaande paragrafen wordt gesproken over de maximale huurprijzen en verschillende huurprijsgrenzen. De hieraan gekoppelde bedragen en de kengetallen die gebruikt worden bij de berekening van het puntenaantal voor de WOZ-waarde worden jaarlijks geïndexeerd.
 
 #### 1.5.1 De liberalisatiegrens
- van dit beleidsboek.
+
+De liberalisatiegrens werd vanaf 1 januari 2011 jaarlijks per 1 januari opnieuw vastgesteld. Voor 2011 liep een jaargang van 1 juli tot 1 juli. Een overzicht van de liberalisatiegrenzen vanaf 1989 is te vinden in Bijlage 2 van dit beleidsboek.
 
 #### 1.5.2 De socialesectorgrens en vrijesectorgrens
+
 De indexatie van de socialesectorgrens en vrijesectorgrens vindt jaarlijks per 1 januari plaats. Een overzicht van de sociale- en vrijesectorgrenzen zijn te vinden in Bijlage 2 van dit beleidsboek.
 
 #### 1.5.3 De maximale huurprijzen
