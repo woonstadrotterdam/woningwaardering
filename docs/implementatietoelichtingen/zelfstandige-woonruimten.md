@@ -323,7 +323,7 @@ Een ruimte wordt als een vertrek gewaardeerd als deze voldoet aan alle van de vo
 3. de ruimte moet:
     - ~~over ten minste 80% van de langste zijde ten minste 1,50 meter breed zijn~~;
     - minimaal 4,00 m² groot zijn (een oppervlakte van 3,50 m² of 3,95 m² is onvoldoende);
-    - ~~een vrije hoogte hebben van minimaal 2,10 meter (gemeten vanaf de vloer tot het zichtbare plafond, waarbij het eventuele balkon onder het zichtbare plafond buiten beschouwing blijft), over ten minste 50% van de oppervlakte of over een oppervlakte van 11 m²~~;
+    - ~~een vrije hoogte hebben van minimaal 2,10 meter (gemeten vanaf de vloer tot het zichtbare plafond, waarbij de eventuele balken onder het zichtbare plafond buiten beschouwing blijven), over ten minste 50% van de oppervlakte of over een oppervlakte van 11 m²~~;
     - ~~ten minste 0,50 m² aan de buitenlucht grenzend transparent oppervlak te hebben (bijvoorbeeld een raam of deur met vensters)~~;
     - ~~beschikken over ventilatie die direct met de buitenlucht is verbonden (bijvoorbeeld een raam dat open kan of een ventilatierooster)~~;
     - ~~voorzien zijn van ten minste één stopcontact en één lichtpunt~~.
@@ -472,7 +472,7 @@ In de toelichting op het woningwaarderingsstelsel geeft het Bhw een aantal meeti
 _Kasten_  
 De wetgever spreekt in de toelichting van het Bhw dat alle tot de woning behorende losse en vaste kasten moeten worden meegenomen in de berekening van de oppervlakte. Voor de praktijk van de Huurcommissie betekent dit dat alle tot de vertrekken behorende kasten moeten worden meegerekend.
 
-Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> uitkomt, telt mee bij de oppervlakte van dat vertrek. Hoe groot of klein de kast is heeft hier geen invloed op. De plek van de deur van de kast bepaalt bij welke ruimte een kast hoor. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
+Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> uitkomt, telt mee bij de oppervlakte van dat vertrek. Hoe groot of klein de kast is heeft hier geen invloed op. De plek van de deur van de kast bepaalt bij welke ruimte een kast hoort. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
 
 ~~_Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en instalaties_~~  
 ~~Vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak, moederhaard, cv-ketel, boilerinstallatie en radiatoren telt mee bij het bepalen van de totale oppervlakte van de ruimte. De oppervlakte van het vertrek of overige ruimte wordt dus bijvoorbeeld niet verminderd door de oppervlakte van een douchecabine.~~
@@ -814,7 +814,7 @@ Voor het meten van een aanrecht gelden de volgende regels:
 >
 > ///
 
-Een ruimte die beschikt over de basisvoorzieningen voor een keuken kan ook extra punten voor voorzieningen in de keuken krijgen. Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het aantal punten voor de basisvoorzieningen (die aanrechtlengte). Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt.
+Een ruimte die beschikt over de basisvoorzieningen voor een keuken kan ook extra punten voor voorzieningen in de keuken krijgen. Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het aantal punten voor de basisvoorzieningen (de aanrechtlengte). Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt.
 
 {==
 
@@ -1425,7 +1425,7 @@ De WOZ-waarde van een woning is op 1 januari 2025 vastgesteld op € 100.000. De
 > [!NOTE]
 > Wanneer sprake is van gebouwd eigendom in aanbouw, dient de naar 100% omgerekende WOZ-waarde met de juiste waardepeildatum doorgegeven te worden.
 
-#### 2.11.5 Uitzondering waardering nieuwbouwwooningen opgeleverd tussen 2015 - 2019
+#### 2.11.5 Uitzondering waardering nieuwbouwwoningen opgeleverd tussen 2015 - 2019
 
 Als aan alle van de volgende eisen wordt voldaan geldt een minimale waardering van 40 punten voor de WOZ-waarde:
 
@@ -1450,7 +1450,7 @@ Voor het toepassen van deze aparte berekeningsmethode moet de woning voldoen aan
 - de woning is kleiner dan 40 m² en,
 - de woning ligt in de COROP-gebieden Amsterdam of Utrecht[^10]: zie Bijlage 1 en,
 - de bouwkundige oplevering of gereedheid van de nieuwbouwwoning heeft plaatsgevonden in de jaren 2018-2022 of,
-- er is sprake van verbouw in de jaren 2018-2022 waarna de woning na de bouwkundige oplevering voldoet aan de op dat moment geldende energieprestatieisen voor nieuwbouwwoningen. [^11]
+- er is sprake van verbouw in de jaren 2018-2022 waarna de woning na de bouwkundige oplevering voldoet aan de op dat moment geldende energieprestatie-eisen voor nieuwbouwwoningen. [^11]
 
 > [!NOTE]
 > Wij gaan er vanuit dat de 40m2 verwijst naar de gebruiksoppervlakte van de woning.
@@ -1695,7 +1695,7 @@ Ten aanzien van de nieuwbouwopslag geldt het volgende. De verhuurder moet aanton
 >
 > ///
 
-Sommige woningen zijn geheel of ten dele onderdeel van een Rijksmonument. Deze moeten voor de woningwaardering zijn geregistreerd in het [Rijksmonumentenregister](https://monumentenregister.cultureelerfgoed.nl/) van de Rijksdienst voor het Culturele Erfgoed (zoals bedoeld in [artikel 1.1 Erfgoedwet](https://wetten.overheid.nl/BWBR0037521/2024-01-01/#Hoofdstuk1_Artikel1.1). De Huurcommissie hanteert **passief beleid**. Dat betekent dat in dit geval de verhuurder moet aantonen dat een woning aangewezen is als, of deel uitmaakt van, een Rijksmonument. Het is dus onvoldoende om alleen te vermelden dat de woning een Rijksmonument is.
+Sommige woningen zijn geheel of ten dele onderdeel van een Rijksmonument. Deze moeten voor de woningwaardering zijn geregistreerd in het [Rijksmonumentenregister](https://monumentenregister.cultureelerfgoed.nl/) van de Rijksdienst voor het Cultureel Erfgoed (zoals bedoeld in [artikel 1.1 Erfgoedwet](https://wetten.overheid.nl/BWBR0037521/2024-01-01/#Hoofdstuk1_Artikel1.1). De Huurcommissie hanteert **passief beleid**. Dat betekent dat in dit geval de verhuurder moet aantonen dat een woning aangewezen is als, of deel uitmaakt van, een Rijksmonument. Het is dus onvoldoende om alleen te vermelden dat de woning een Rijksmonument is.
 
 De opslag is hierna afhankelijk van wanneer de huurovereenkomst is gesloten. Er zijn twee situaties mogelijk, namelijk:
 
