@@ -487,7 +487,7 @@ De Huurcommissie waardeert 2 soorten situaties wat betreft de verkoeling van de 
 Hierbij moet rekening worden gehouden met de volgende nadere eisen:
 
 - **Alleen vertrekken** komen in aanmerking voor een waardering door een verkoelingsfunctie. Er kan 1 punt worden behaald per vertrek tot een maximum van 2 punten.
-- Of een woning zonder koeling voldoende koel kan blijven wordt bepaald met de bepalingsmethode NTA 8800 (geldig vanaf 1 januari 2021). Dit blijkt uit een NTA energielabel waarin het risico voor oververhitting als «laag» is aangegeven.
+- ~~Of een woning zonder koeling voldoende koel kan blijven wordt bepaald met de bepalingsmethode NTA 8800 (geldig vanaf 1 januari 2021). Dit blijkt uit een NTA energielabel waarin het risico voor oververhitting als «laag» is aangegeven.~~
 - ~~Centrale koelsystemen zoals omkeerbare warmtepompen, passieve koeling door een bodemlus of een WKO systeem moeten zijn voorzien zijn van vloerkoeling, lage temperatuur-radiatoren of radiatorconvectoren.~~
 - ~~Bij een ander koelsysteem (onroerend aanhorig) dan hierboven genoemd, zoals een vaste airco, moet de koelingsvoorziening een productgebonden energielabel hebben van minimaal A+ (bepaald volgens de Europese Ecodesign-richtlijn) en een minimaal vermogen kunnen leveren van 100 W/m2 bij een werkingstemperatuur tot 35 graden Celsius.~~
 
