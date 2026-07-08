@@ -350,9 +350,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if not woz_mask.any():
             return None
 
-        gemiddelde_woz_waarde_per_m2 = df_woz.loc[woz_mask, str(jaar)].values[0]
+        gemiddelde_woz_waarde_per_m2 = df_woz.loc[woz_mask, str(jaar)].item()
 
-        return Decimal(gemiddelde_woz_waarde_per_m2)
+        return Decimal(str(gemiddelde_woz_waarde_per_m2))
 
 
 if __name__ == "__main__":  # pragma: no cover
