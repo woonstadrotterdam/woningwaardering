@@ -39,7 +39,13 @@ Na wijzigingen in `.pre-commit-config.yaml` volstaat meestal opnieuw committen o
 
 Met geïnstalleerde pre-commit-hooks draaien commit- en push-checks automatisch.
 
-Met geactiveerde virtualenv:
+Aanbevolen vóór push (zelfde set als CI):
+
+```bash
+task check
+```
+
+Of handmatig met geactiveerde virtualenv:
 
 ```bash
 python -m pytest
