@@ -58,7 +58,8 @@ repos:
           - "libcst==1.4" # tijdelijk, tot release libcst>1.7.0: https://github.com/Instagram/LibCST/pull/1316
           - "loguru>=0.7"
           - "monumenten>=2.0.1"
-          - "pandas-stubs>=2.0"
+          - "numpy==2.4.6"
+          - "pandas-stubs==3.0.3.260530"
           - "prettytable>=3.12"
           - "pydantic>=2.10"
           - "rdflib>=7.0"

@@ -1,6 +1,13 @@
 version: "3"
 
 tasks:
+  check:
+    desc: Dezelfde checks als CI (pre-commit + pytest)
+    cmds:
+      - uv run pre-commit run --all-files
+      - uv run pre-commit run --all-files --hook-stage pre-push
+      - uv run python -m pytest
+
   genereer-vera-bvg-modellen:
     desc: Genereer VERA BVG modellen
     cmds:

@@ -141,7 +141,7 @@ class Energieprestatie(Stelselgroep):
                         f"Eenheid ({eenheid.id}): lookup-table gefaald voor energie-index {energie_index}."
                     )
 
-                waarderings_label_index = filtered_df["Label"].values[0]
+                waarderings_label_index = str(filtered_df["Label"].item())
 
                 # wanneer de energie-index afwijkt van het label, geef voorkeur aan energie-index want de index is in deze tijd afgegeven
                 if label != waarderings_label_index:
