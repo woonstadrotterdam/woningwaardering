@@ -1124,6 +1124,9 @@ De oppervlakten voor gemeenschappelijke en privé-buitenruimten worden afzonderl
 > [!NOTE]
 > De oppervlakte van beide categorieën kan niet bij elkaar opgeteld worden, omdat er voor privébuitenruimten een ander aantal punten per m² wordt berekend dan voor gemeenschappelijke buitenruimten. Per categorie worden punten berekend en daarna bij elkaar opgeteld, afgerond op een kwart punt.
 
+> [!NOTE]
+> De beleidsboektekst hierboven spreekt over afronding op twee decimalen na optelling per categorie. De [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (bijlage I onder A, rubriek 8) vereist afronding volgens dezelfde methodiek als rubriek 1 en 2: per buitenruimte twee decimalen, de categorie-som daarna op hele m². De implementatie volgt de wettekst. [De huurcomissie rekentool](https://huurprijscheck.huurcommissie.nl/zelfstandige-woonruimte) volgt deze rekenmethodiek van de wettekst ook.
+
 ### 2.9 Rubriek 9: Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
 
 {==
