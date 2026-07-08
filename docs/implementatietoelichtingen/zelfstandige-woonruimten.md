@@ -49,7 +49,10 @@ Bij huurcontracten die zijn ondertekend vóór 1 juli 2024 wordt de huursector b
 
 Als de huurprijs boven het bedrag van de liberalisatiegrens ligt, dan is de woonruimte onderdeel van de vrije sector. Ligt de huurprijs onder de liberalisatiegrens, dan valt de woonruimte in de sociale sector. Als een woning behoort tot de sociale sector dan kan een huurder aanspraak maken op huurprijsbescherming. Als een woning behoort tot de vrije sector dan kan dit slechts in heel beperkte gevallen.
 
-_Schema 1.1: beoordeling van de huursector_  
+_Schema 1.1: beoordeling van de huursector_
+
+![Schema met beoordeling in welke huursector een woning valt op basis van de aanvangshuurprijs](../afbeeldingen/zelfstandig-1.3.2-schema-huursector.png)
+
 Dat een woonruimte op basis van de aanvangshuurprijs in een bepaalde huursector valt staat los van het feit dat partijen een procedure kunnen starten als omschreven in hoofdstuk 3 en de huursector op basis van die procedures kan veranderen.
 
 #### 1.3.3 Uitzonderingen op de hoofdregel
@@ -257,7 +260,7 @@ De toeslag van 35% bij zorgwoningen wordt toegepast op het puntentotaal van de r
 {==
 
 **VOORBEELD**  
-Een woning krijgt in rubriek 8 een puntenaantal van 4,81. In dit geval wordt afgerond op 4,75 punten en niet 5,00 punten. De reden is dat tussen 4,81 en 4,75 geen verschil zit van 0,125 punt - ofwel 1/8 punt. Er is dus geen afronding op een 0,25 punt naar boven. Er wordt daarom afgerond op 0,25 punt naar beneden.
+Een woning krijgt in rubriek 8 een puntenaantal van 4,81. In dit geval wordt afgerond op 4,75 punten en niet 5,00 punten. De reden is dat tussen 4,81 en 4,75 geen verschil zit van 0,125 punt - ofwel 1/8 punt. Er is dus geen afronding op een 0,25 punt naar boven. Er wordt afgerond op 0,25 punt naar beneden.
 
 ==}
 
@@ -1067,7 +1070,7 @@ Voor de aanwezigheid van een privé-buitenruimte(n) worden 2 punten toegekend en
 
 #### 2.8.2 Punten voor een gemeenschappelijke buitenruimte
 
-Gemeenschappelijke buitenruimten zijn ruimtes die door bewoners van twee of meer adressen worden gebruikt. De bewoners delen de ruimtes, bijvoorbeeld een tuin of dakteras. Voor gemeenschappelijk buitenruimten worden 0,75 punten per vierkante meter toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
+Gemeenschappelijke buitenruimten zijn ruimtes die door bewoners van twee of meer adressen worden gebruikt. De bewoners delen de ruimtes, bijvoorbeeld een tuin of dakterras. Voor gemeenschappelijke buitenruimten worden 0,75 punten per vierkante meter toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
 Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan een drietal voorwaarden voldoen, namelijk:
 
@@ -1078,7 +1081,7 @@ Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan een drietal
 {==
 
 **VOORBEELD**  
-Er is een woongebouw met een gemeenschappelijk dakteras van 30 m² waartoe drie adressen exclusief toegang en gebruiksrecht toe hebben volgens hun huurovereenkomst. Het dakteras wordt dan gewaardeerd met: (0,75 x 30) / 3 = 7,5 punten.
+Er is een woongebouw met een gemeenschappelijk dakterras van 30 m² waartoe drie adressen exclusief toegang en gebruiksrecht toe hebben volgens hun huurovereenkomst. Het dakterras wordt dan gewaardeerd met: (0,75 x 30) / 3 = 7,5 punten.
 
 ==}
 
@@ -1086,15 +1089,15 @@ Er is een woongebouw met een gemeenschappelijk dakteras van 30 m² waartoe drie 
 
 Gedeelde buitenruimten die als parkeerplek voor auto's bedoeld zijn, worden gewaardeerd volgens [rubriek 10](#210-gemeenschappelijke-parkeerruimten). Een (gemeenschappelijke) buitenruimte die bestemd is als parkeerplek voor fietsen (fietsenstalling) wordt wél gewaardeerd als buitenruimte.
 
-#### 2.8.4 Eisen aan balkons, dakterassen en loggia's
+#### 2.8.4 Eisen aan balkons, dakterrassen en loggia's
 
-Balkons, dakterassen en loggia's moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze moeten:
+Balkons, dakterrassen en loggia's moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze moeten:
 
 1. ~~zijn voorzien van een beloopbare afwerking, zoals vlonders, tegels e.d. en~~
 2. ~~rondom voorzien van een afscheiding die ook dient als valbeveiliging, en~~
 3. ~~via een deur\* of schuifpui toegankelijk zijn.~~
 
-~~\*Als het balkon of dakteras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als toegang tot de buitenruimte te worden gebruikt, dan wordt het balkon of het terras met punten gewaardeerd.~~
+~~\*Als het balkon of dakterras is voorzien van beweegbare ramen en/of deuren in de gevel, die bestemd zijn om als toegang tot de buitenruimte te worden gebruikt, dan wordt het balkon of het terras met punten gewaardeerd.~~
 
 _Loggia is altijd een buitenruimte_  
 Een loggia wordt gewaardeerd als buitenruimte en dus niet als binnenruimte.
@@ -1213,7 +1216,7 @@ Met vertrekken en overige ruimten wordt onder deze rubriek voor het overige aang
 3. Indien van toepassing, bepaal de extra punten in de rubrieken 5, 6 en/of 7;
 4. Tel de punten uit de hierboven genoemde stappen bij elkaar op;
 5. Deel het totaal aantal punten door het aantal adressen dat toegang en gebruiksrecht heeft tot de gemeenschappelijke binnenruimten;
-6. Rond af op een kwart punt (zie [paragraaf 1.2.4](#214-algemene-rekenregel-afronding-per-rubriek)).
+6. Rond af op een kwart punt (zie [paragraaf 2.1.4](#214-algemene-rekenregel-afronding-per-rubriek)).
 
 ### 2.10 Gemeenschappelijke parkeerruimten
 
