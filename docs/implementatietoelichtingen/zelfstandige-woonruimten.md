@@ -913,7 +913,7 @@ _Niet_ als wastafel worden gewaardeerd:
 _Bad en douche_  
 Als douche wordt iedere, door de verhuurder aangebrachte, installatie voor het nemen van een stortbad geteld. Hieronder valt dus ook een douchecabine die voldoet aan de gestelde voorwaarden, maar geplaatst is in een ander vertrek of overige ruimte dan de bad- of doucheruimte.
 
-~~Een bad wordt gewaardeerd indien een volwassen persoon er in een normale zithouding in kan plaatsnemen. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld.~~
+Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zithouding in kan plaatsnemen. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld~~.
 
 | Voorziening   |   Punten |
 |---------------|----------|
