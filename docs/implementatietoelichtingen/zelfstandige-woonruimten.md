@@ -423,7 +423,7 @@ Een overige ruimte krijgt punten voor de oppervlakte als deze voldoet aan alle v
 
 ##### 2.2.2.3 Zolderruimte zonder vaste trap
 
-Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vertrek', maar wel als overige ruimte kan worden aangemerkt en er is <u>geen vaste trap</u> naar de zolder, dan worden er <u>5 punten afgetrokken</u>, van de waarde die aan het vloeroppervlak wordt toegekend. Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is. Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
+Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vertrek', maar wel als overige ruimte kan worden aangemerkt en er is <u>geen vaste trap</u> naar de zolder, dan worden er <u>5 punten afgetrokken</u> van de waarde die aan het vloeroppervlak wordt toegekend. Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is. Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
 
 > [!NOTE]
 >
@@ -606,7 +606,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 3. Vervallen energielabel of energie-index  
     Een energielabel of energie-index is maximaal 10 jaar geldig. Dat betekent dat een energielabel, opgenomen op bijvoorbeeld 1 oktober 2014 vervalt per 1 oktober 2024. Aan een vervallen energielabel of energie-index wordt geen waardering toegekend.
 4. Energielabel afgegeven in de periode 1 januari 2015 tot 1 januari 2021  
-    Een energielabel dat is afgegeven in de periode van 1 januari 2015 tot 1 januari 2021 krijgt geen punten in het woningwaarderingsstelsel. Dit zijn namelijk de zogenaamde 'vereenvoudigde energielabels', die slechts een meer globale inschatting van de energieprestatie van een woonruimte geven. Alleen energieindexen die in de genoemde periode zijn afgegeven komen in aanmerking voor waardering.
+    Een energielabel dat is afgegeven in de periode van 1 januari 2015 tot 1 januari 2021 krijgt geen punten in het woningwaarderingsstelsel. Dit zijn namelijk de zogenaamde 'vereenvoudigde energielabels', die slechts een meer globale inschatting van de energieprestatie van een woonruimte geven. Alleen energie-indexen die in de genoemde periode zijn afgegeven komen in aanmerking voor waardering.
 5. Energieprestatie niet afgegeven voor de individuele woonruimte  
     Het kan voorkomen dat een wooncomplex of ander gebouw bestaat uit meerdere (zelfstandige) woonruimten. Om voor waardering in aanmerking te kunnen komen, moet voor een individuele zelfstandige woonruimte geldige energieprestatie zijn afgegeven. Een energielabel voor het hele complex/gebouw wordt niet in de waardering meegenomen.
 
@@ -646,7 +646,7 @@ Energie-index en punten per soort woning
 | 1,8 < EI ≤ 2,1                                                     | 14                                 | 11                                  |
 | 2,1 < EI ≤ 2,4                                                     | - 4\*                              | - 4\*                               |
 | 2,4 < EI ≤ 2,7                                                     | - 9                                | - 9                                 |
-| El > 2,7                                                           | - 15                               | - 15                                |
+| EI > 2,7                                                           | - 15                               | - 15                                |
 
 \* Artikel 10d (energieprestatie) van de Uhw (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Bhw een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Bhw woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4.
 
@@ -718,7 +718,7 @@ Voor woningen die (gedeeltelijk) zelf in hun energieverbruik voorzien, bijvoorbe
 > - één verblijfsobject in een pand, met als functie wonen -> `Eengezinswoning`
 > - meerdere verblijfsobjecten in een pand waarvan minstens één met functie wonen -> `Meergezinswoning`
 
-[^6]: Voor meer informatie, zie de website: Energieprestatievergoeding (EPV) | RVO.nl.
+[^6]: Voor meer informatie, zie de website: [Energieprestatievergoeding (EPV) | RVO.nl](https://www.rvo.nl/onderwerpen/energieprestatievergoeding#voorwaarden-om-epv-te-mogen-vragen).
 
 #### 2.4.7 ~~Afwijkingsbevoegdheid Huurcommissie~~
 
@@ -960,7 +960,7 @@ Als aan de bovenstaande eisen wordt voldaan, kunnen alleen voor de volgende onde
 | Gemonteerde volledige afscheiding van de douche\*              | 1,25                            |
 | Handdoekenradiator                                             | 0,75                            |
 | Ingebouwd kastje met in- of opgebouwde wastafel                | 1                               |
-| Kastruimte (mits minimaal 40 centimeter in breedte en hoogte)  | 0,75 (tot een maximum van 0,75) |
+| Kastruimte (mits minimaal 40 centimeter in breedte en hoogte)  | 0,75                            |
 | Stopcontact (maximaal twee per (meerpersoons)wastafel)         | 0,25                            |
 | Éénhandsmengkraan                                              | 0,25                            |
 | Thermostatische mengkraan                                      | 0,50                            |
@@ -1438,7 +1438,7 @@ Als aan alle van de volgende eisen wordt voldaan geldt een minimale waardering v
 - de woning heeft voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingsstelsel minimaal 110 punten behaald.
 
 > [!NOTE]
-> We deze regeling niet specifiek toe voor 'hoogniveau renovatie', maar voor bouwjaar 2015-2019.
+> We passen deze regeling niet specifiek toe voor 'hoogniveau renovatie', maar voor bouwjaar 2015-2019.
 
 Indien aan een van deze eisen niet wordt voldaan geldt de 'gewone' berekening zoals uitgelegd in paragraaf 2.11.2.
 
