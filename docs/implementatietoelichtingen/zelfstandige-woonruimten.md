@@ -152,7 +152,7 @@ Wordt de woonruimte door drie of meer personen bewoond? Dan kan nog geen conclus
 Als een woning door drie of meer personen wordt bewoond, dan moet sprake zijn van een duurzame gemeenschappelijke huishouding om de woning te waarderen als zelfstandige woonruimte.
 
 Het antwoord op deze derde vraag bestaat dus uit twee delen. Eerst moet beoordeeld worden of sprake is van een duurzame gemeenschappelijke huishouding. Vervolgens kan geconcludeerd worden of de woonruimte een zelfstandige of onzelfstandige woonruimte is.
-Als er sprake blijkt van een duurzame gemeenschappelijke huishouding, dan wordt de woonruimte als zelfstandig aangemerkt. Is er geen sprake van een duurzame gemeenschappelijke huishouding, dan is de woonruimte onzelfstandig.
+~~Als er sprake blijkt van een duurzame gemeenschappelijke huishouding, dan wordt de woonruimte als zelfstandig aangemerkt. Is er geen sprake van een duurzame gemeenschappelijke huishouding, dan is de woonruimte onzelfstandig.~~
 
 _Duurzame gemeenschappelijke huishouding_  
 De vraag of sprake is van een duurzame gemeenschappelijke huishouding kan door de commissie op een zitting worden onderzocht. Hierbij worden de volgende scenario’s gehanteerd.
