@@ -566,7 +566,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # Neem de hoogste datum die kleiner of gelijk is aan de peildatum
         filtered_df = filtered_df.sort_values("Peildatum", ascending=False).head(1)
         minimum_woz_waarde = Decimal(str(filtered_df["Minimumwaarde"].values[0]))
-        minimum_woz_waarde_datum = pd.to_datetime(filtered_df["Peildatum"].values[0])
+        minimum_woz_waarde_datum = pd.Timestamp(filtered_df["Peildatum"].item())
 
         # Bij gebruik van de minimumwaarde moet de waardepeildatum 1 januari zijn van
         # het jaar voor de datum van de opgehaalde minimum WOZ-waarde
