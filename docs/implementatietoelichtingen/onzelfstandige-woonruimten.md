@@ -1011,6 +1011,9 @@ Er wordt afgerond op een kwart punt. Het puntenaantal voor één onzelfstandige 
 Gedeelde buitenruimten die als parkeerplek voor auto’s bedoeld zijn, worden gewaardeerd volgens rubriek 10. Een (gemeenschappelijke) buitenruimte die bestemd is als parkeerplek voor fietsen (fietsenstalling) wordt wél gewaardeerd als buitenruimte.
 
 > [!NOTE]
+> Modelleer een gemeenschappelijke buitenfietsenstalling als `Ruimtedetailsoort.overige_buitenruimte`.
+
+> [!NOTE]
 > Ondanks dat het op basis van het woordgebruik van deze rubriek lijkt alsof parkeerplekken met meerdere onzelfstandige woonruimten op hetzelfde adres gewaardeerd horen te worden in rubriek 10, staat in rubriek 10 expliciet vermeld dat parkeerplekken alleen worden gewaardeerd als ze gedeeld zijn met minimaal 2 adressen. Omdat anders parkeerplekken gedeeld met hetzelfde adres nergens gewaardeerd zouden worden, waarderen wij die hier in rubriek 8.
 
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia’s
