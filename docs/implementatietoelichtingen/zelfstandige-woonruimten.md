@@ -487,7 +487,7 @@ Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> 
 - ~~schoorsteen- en ventilatiekanalen~~;
 - ~~stand- of grondleidingen (behalve horizontale leidingen)~~.
 
-~~Bij een schoorsteenmanteel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50 meter hoogte bepalend.~~
+~~Bij een schoorsteenmantel en/of rookkanaal (die naar boven of beneden breed kan uitlopen) is de oppervlakte op 1,50 meter hoogte bepalend.~~
 
 ~~_Pui_~~  
 ~~Bij een pui wordt de binnenzijde (het kozijn) als uitgangspunt gebruikt voor de meting.~~
@@ -499,7 +499,7 @@ Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> 
 ~~Bij een entresol (ook wel een mezzanine of tussenverdieping genoemd) wordt de oppervlakte boven én onder de entresol meegerekend, mits de entresol een vrije hoogte heeft van ten minste 1,50 meter.~~
 
 ~~_Hellend of verlaagd plafond_~~  
-~~Bij een (ten dele) hellend of verlaagd plafond wordt alleen het geedeelte van de ruimte waarboven het plafond ten minste 1,50 meter hoog is meegenomen in de oppervlakteberekening.~~
+~~Bij een (ten dele) hellend of verlaagd plafond wordt alleen het gedeelte van de ruimte waarboven het plafond ten minste 1,50 meter hoog is meegenomen in de oppervlakteberekening.~~
 
 ~~Voor een (ten dele) hellend plafond geldt aanvullend dat de 1,50 meter hoogte loopt tot het dakbeschot, het zichtbare dakvlak of het zichtbare plafond. Met gordingen en balken wordt bij de meting geen rekening gehouden.~~
 
@@ -1505,10 +1505,10 @@ Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het
 
 **Rekenvoorbeeld 3:** _door toepassing van de cap op de WOZ krijgt de woning een puntenaantal lager dan 187 punten (namelijk 162 punten). Wanneer een woning zonder die beperking een waardering heeft van meer dan 186 punten en door deze beperking een waardering krijgt die lager is dan 187 punten, daarom geldt een waardering van 186 punten voor de woning._
 
-|                                      | WOZ-  punten                 | Punten in de  overige  rubrieken   | Totaal  puntenaantal       | Vrije sector?   |
-|--------------------------------------|------------------------------|------------------------------------|----------------------------|-----------------|
-| Zonder toepassing cap op de WOZ     | 109 (= 50%)                  | 109 (= 50%)                        | 218 (=100%)                | Ja              |
-| Met toepassing van  de cap op de WOZ | 53,7 (=  33%),  afg onder 53 | 109 (= 67%)                        | 162 (= 100%)  -  wordt 186 | Nee             |
+|                                      | WOZ-  punten                | Punten in de  overige  rubrieken | Totaal  puntenaantal       | Vrije sector? |
+| ------------------------------------ | --------------------------- | -------------------------------- | -------------------------- | ------------- |
+| Zonder toepassing cap op de WOZ      | 109 (= 50%)                 | 109 (= 50%)                      | 218 (=100%)                | Ja            |
+| Met toepassing van  de cap op de WOZ | 53,7 (=  33%),  afgerond 53 | 109 (= 67%)                      | 162 (= 100%)  -  wordt 186 | Nee           |
 
 [^12]: Hieronder vallen ook gerenoveerde woningen waarbij de energieprestatie voldoet aan de eisen van artikel 5.2 van het Bouwbesluit 2012 die gelden voor nieuwbouwwoningen.
 
