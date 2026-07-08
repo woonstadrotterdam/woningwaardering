@@ -1423,7 +1423,7 @@ De WOZ-waarde van een woning is op 1 januari 2025 vastgesteld op € 100.000. De
 
 ~~Hiervan is bijvoorbeeld sprake als de werkzaamheden aan het gehuurde zijn gestart na 1 januari 2022 en zijn voltooid ná 1 januari 2023, terwijl de WOZ-beschikking 2023 als peildatum 1 januari 2022 heeft. De WOZ-beschikking 2024, die als peildatum 1 januari 2023 heeft, zal in dat geval niet de waarde weergeven 'als ware de bouw voltooid'. In dat geval kan de woning worden aangemerkt als 'een gebouwd eigendom in aanbouw', zoals bedoeld in artikel 17 lid 4 Wet WOZ en moet de Huurcommissie de waarde omrekenen naar 100%.~~
 
-~~Het is aan de verhuurder om te bewijzen welk percentage van de bouw de WOZ-waarde vertegenwoordigd, bijvoorbeeld door middel van de WOZ-beschikking.~~
+Het is aan de verhuurder om te bewijzen welk percentage van de bouw de WOZ-waarde vertegenwoordigd, bijvoorbeeld door middel van de WOZ-beschikking.
 
 > [!NOTE]
 > Wanneer sprake is van gebouwd eigendom in aanbouw, dient de naar 100% omgerekende WOZ-waarde met de juiste waardepeildatum doorgegeven te worden.
