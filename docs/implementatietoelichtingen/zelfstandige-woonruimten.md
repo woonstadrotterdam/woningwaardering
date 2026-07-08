@@ -970,6 +970,9 @@ Als aan de bovenstaande eisen wordt voldaan, kunnen alleen voor de volgende onde
 > [!NOTE]
 > Voor een ingebouwde kast met wastafel moet de wastafel als aparte voorziening worden meegegeven.
 
+> [!NOTE]
+> Het beleidsboek vermeldt bij kastruimte alleen 0,75 punt. In [Bijlage I, onder A, onderdeel 6.2](https://wetten.overheid.nl/BWBR0003237/2026-01-01) van het Bhw staat expliciet «0,75 punt (tot een maximum van 0,75)». Wij passen die cap toe: per bad- of doucheruimte wordt maximaal 0,75 punt toegekend voor kastruimte, ook als er meerdere `Kastruimte`-installaties zijn opgegeven.
+
 Het aantal punten voor extra voorzieningen kan niet meer zijn dan het totaalaantal punten voor de douche, het bad en/of bad/douche gezamenlijk. Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt. Zie het voorbeeld hieronder.
 
 {==
