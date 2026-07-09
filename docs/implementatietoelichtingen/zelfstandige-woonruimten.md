@@ -245,7 +245,7 @@ De algemene regel is dat alleen de voorzieningen die de verhuurder heeft aangebr
 
 #### 2.1.3 Algemene regel: waardering van voorzieningen niet afhankelijk van functioneren
 
-Voor de waardering volgens het woningwaarderingsstelsel is noodzakelijk dat de voorzieningen zijn ingebouwd en door de verhuurder zijn aangebracht, zoals in de paragraven hierboven toegelicht. Het functioneren van de voorziening is bij de woningwaardering niet relevant. Wel kan er dan mogelijk sprake zijn van een ernstig onderhoudsgebrek.
+Voor de waardering volgens het woningwaarderingsstelsel is noodzakelijk dat de voorzieningen zijn ingebouwd en door de verhuurder zijn aangebracht, zoals in de paragrafen hierboven toegelicht. Het functioneren van de voorziening is bij de woningwaardering niet relevant. Wel kan er dan mogelijk sprake zijn van een ernstig onderhoudsgebrek.
 
 #### 2.1.4 Algemene rekenregel: afronding per rubriek
 
@@ -327,7 +327,7 @@ Een ruimte wordt als een vertrek gewaardeerd als deze voldoet aan alle van de vo
     - ~~over ten minste 80% van de langste zijde ten minste 1,50 meter breed zijn~~;
     - minimaal 4,00 m² groot zijn (een oppervlakte van 3,50 m² of 3,95 m² is onvoldoende);
     - ~~een vrije hoogte hebben van minimaal 2,10 meter (gemeten vanaf de vloer tot het zichtbare plafond, waarbij de eventuele balken onder het zichtbare plafond buiten beschouwing blijven), over ten minste 50% van de oppervlakte of over een oppervlakte van 11 m²~~;
-    - ~~ten minste 0,50 m² aan de buitenlucht grenzend transparent oppervlak te hebben (bijvoorbeeld een raam of deur met vensters)~~;
+    - ~~ten minste 0,50 m² aan de buitenlucht grenzend transparant oppervlak te hebben (bijvoorbeeld een raam of deur met vensters)~~;
     - ~~beschikken over ventilatie die direct met de buitenlucht is verbonden (bijvoorbeeld een raam dat open kan of een ventilatierooster)~~;
     - ~~voorzien zijn van ten minste één stopcontact en één lichtpunt~~.
 
@@ -477,7 +477,7 @@ De wetgever spreekt in de toelichting van het Bhw dat alle tot de woning behoren
 
 Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> uitkomt, telt mee bij de oppervlakte van dat vertrek. Hoe groot of klein de kast is heeft hier geen invloed op. De plek van de deur van de kast bepaalt bij welke ruimte een kast hoort. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
 
-~~_Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en instalaties_~~  
+~~_Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en installaties_~~  
 ~~Vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak, moederhaard, cv-ketel, boilerinstallatie en radiatoren telt mee bij het bepalen van de totale oppervlakte van de ruimte. De oppervlakte van het vertrek of overige ruimte wordt dus bijvoorbeeld niet verminderd door de oppervlakte van een douchecabine.~~
 
 ~~_Gas- en/of elektrameter_~~  
@@ -600,7 +600,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 #### 2.4.3 Energieprestaties die _niet_ geldig zijn voor de woningwaardering
 
 1. Energieprestatie opgenomen ná de peildatum  
-    Voor de woningwaardering dient een geldige energieprestatie op tijd te zijn vastgesteld. Voor de Huurcommissie betekent dit dat een geldige energieprestatie moet zijn opgenomen vóór de peildatum van de procedure, bijvoorbeeld de ingangsdatum van de huuroevereenkomst bij de procedure 'toetsing van de aanvangshuurprijs'.
+    Voor de woningwaardering dient een geldige energieprestatie op tijd te zijn vastgesteld. Voor de Huurcommissie betekent dit dat een geldige energieprestatie moet zijn opgenomen vóór de peildatum van de procedure, bijvoorbeeld de ingangsdatum van de huurovereenkomst bij de procedure 'toetsing van de aanvangshuurprijs'.
 2. Energie-index zonder de toevoeging: geldig voor WWS  
     Bij de energie-index is de indeling in letters vervangen door een cijfer. Deze wordt alleen in de puntentelling meegenomen als in EP-online staat aangegeven dat de energie-index geldig is voor de toepassing van het woningwaarderingsstelsel ('geldig voor WWS'). Staat er enkel een energie-index zonder die toevoeging, dan wordt hier geen waardering voor toegekend.
 3. Vervallen energielabel of energie-index  
@@ -614,7 +614,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 
 #### 2.4.4 Punten voor geldige energieprestaties
 
-Bij de puntentoekening voor de energieprestatie wordt onderscheid gemaakt tussen eengezinswoningen en meergezinswoningen (ook wel: duplexwoningen). Het verschil tussen deze woningen is dat bij een eengezinswoning geen andere woningen aanwezig zijn boven of onder de woning. Een eengezinswoning is dus bijvoorbeeld om een rijtjeshuis, twee-onder-een-kapwoning of vrijstaande woning. Alle woningen die geen eengezinswoning zijn, zijn meergezinswoningen.
+Bij de puntentoekenning voor de energieprestatie wordt onderscheid gemaakt tussen eengezinswoningen en meergezinswoningen (ook wel: duplexwoningen). Het verschil tussen deze woningen is dat bij een eengezinswoning geen andere woningen aanwezig zijn boven of onder de woning. Een eengezinswoning is dus bijvoorbeeld om een rijtjeshuis, twee-onder-een-kapwoning of vrijstaande woning. Alle woningen die geen eengezinswoning zijn, zijn meergezinswoningen.
 
 De labelklasse (A++++ t/m G) bepaalt het aantal punten voor de energieprestatie. Bij een energie-index wordt het puntenaantal bepaald door het relevante cijfer. In de onderstaande tabellen is dit nader ingevuld.
 
@@ -787,7 +787,7 @@ Voor het meten van een aanrecht gelden de volgende regels:
 - ~~de aanrechtlengte wordt gemeten over het midden van het bovenblad, waarbij ingebouwde spoelbakken en kookplaten mee gemeten worden.~~
 - ~~de lengte van werkblad dat niet direct aan het aanrecht aansluit wordt meegeteld. Dat geldt ook voor een werkblad dat uit ander materiaal is samengesteld.~~
 - ~~als een aanrechtblad langer is dan de onderkasten (als het ware uitsteekt) dan wordt dat deel van het aanrechtblad mee gemeten als er onder dat langere deel losse apparatuur (bijv. koelkast, vaatwasser of wasmachine) kan worden geplaatst en daaronder aansluitmogelijkheden aanwezig zijn voor die apparatuur.~~
-- ~~bij een ingemetseld aanrechtblad of waar de wandbeteleging op het blad is aangebracht, wordt alleen het bruikbare/zichtbare gedeelte gemeten.~~
+- ~~bij een ingemetseld aanrechtblad of waar de wandbetegeling op het blad is aangebracht, wordt alleen het bruikbare/zichtbare gedeelte gemeten.~~
 - ~~de lengte van een kookeiland wordt bepaald door de lengte van de lange zijde.~~
 - ![Image](../afbeeldingen/zelfstandig-2.5.2-aanrecht.png){ align=right width="50%" } ~~bij een hoekaanrecht wordt de lengte bepaald door de lange zijde van het langere aanrechtdeel te meten (de horizontale blauwe lijn in de tekening) en daarbij de lengte van de lange zijde van het korte aanrechtdeel (de verticale lijn in de tekening) bij elkaar op te tellen.~~
 
@@ -840,14 +840,14 @@ De voorzieningen die voor waardering in aanmerking komen staan in de onderstaand
 | Inbouw oven gas                                                                                      | 0,50     |
 | Inbouw magnetron                                                                                     | 1        |
 | Inbouw vaatwasmachine                                                                                | 1,50     |
-| Extra kastruimte boven het<br>minimum (per 60 cm breedte,<br>met een minimum van 60 cm<br>hoogte)\** | 0,75     |
+| Extra kastruimte boven het<br>minimum (per 60 cm breedte,<br>met een minimum van 60 cm<br>hoogte)\* | 0,75     |
 | Éénhandsmengkraan                                                                                    | 0,25     |
 | Thermostatische mengkraan                                                                            | 0,50     |
 | Kokend waterfunctie (al dan<br>niet apart of in aanvulling op de<br>kraan)                           | + 0,50   |
 
 \* ~~Bij een afzuiginstallatie gaat het om een luchtafvoer met afzuiging naar buiten de woning of op basis van recirculatie met actieve koolstof- en vetfilters. Een afzuiginstallatie kan zowel een afzuig- of recirculatiekap boven de kookinstallatie zijn, als een afzuigsysteem dat in het aanrecht is ingebouwd.~~
 
-\** ~~Om aan het basisniveau voor de kwalificatie als keuken te voldoen, moeten twee inbouwkasten aanwezig zijn met een breedte van minimaal 50 centimeter (per stuk). De totale minimumbreedte bedraagt dus 1 meter. Per 60 centimeter breedte (mits ook 60 cm hoogte) extra kastruimte kan vervolgens, als ook aan de andere eisen wordt voldaan, 0,75 punt extra worden toegekend. Bij de meting wordt uitgegaan van de buitenmaat.~~
+\* ~~Om aan het basisniveau voor de kwalificatie als keuken te voldoen, moeten twee inbouwkasten aanwezig zijn met een breedte van minimaal 50 centimeter (per stuk). De totale minimumbreedte bedraagt dus 1 meter. Per 60 centimeter breedte (mits ook 60 cm hoogte) extra kastruimte kan vervolgens, als ook aan de andere eisen wordt voldaan, 0,75 punt extra worden toegekend. Bij de meting wordt uitgegaan van de buitenmaat.~~
 
 #### 2.5.4 Voorziening met twee functies
 
@@ -973,7 +973,7 @@ Als aan de bovenstaande eisen wordt voldaan, kunnen alleen voor de volgende onde
 > [!NOTE]
 > Het beleidsboek vermeldt bij kastruimte alleen 0,75 punt. In [Bijlage I, onder A, onderdeel 6.2](https://wetten.overheid.nl/BWBR0003237/2026-01-01) van het Bhw staat expliciet «0,75 punt (tot een maximum van 0,75)». Wij passen die cap toe: per bad- of doucheruimte wordt maximaal 0,75 punt toegekend voor kastruimte, ook als er meerdere `Kastruimte`-installaties zijn opgegeven.
 
-Het aantal punten voor extra voorzieningen kan niet meer zijn dan het totaalaantal punten voor de douche, het bad en/of bad/douche gezamenlijk. Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt. Zie het voorbeeld hieronder.
+Het aantal punten voor extra voorzieningen kan niet meer zijn dan het totaal aantal punten voor de douche, het bad en/of bad/douche gezamenlijk. Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt. Zie het voorbeeld hieronder.
 
 {==
 
@@ -1069,11 +1069,11 @@ Buitenruimten komen voor waardering in aanmerking. Het woningwaarderingsstelsel 
 
 Met exclusief gebruiksrecht van privé-buitenruimte wordt bedoeld dat uitsluitend de huurder het recht heeft om te bepalen welk gebruik hij maakt van de privé-buitenruimten die tot de woning behoren.
 
-Voor de aanwezigheid van een privé-buitenruimte(n) worden 2 punten toegekend en vervolgens per vierkante meter 0,35 punt. Voor de privé-buitenruimte geldt géén minimumafmeting. Bijvoorbeeld: 10 m² privé-buitenruimte (totaal) = 5,5 punt (2 + (10 x 0,35)).
+Voor de aanwezigheid van privé-buitenruimte(n) worden 2 punten toegekend en vervolgens per vierkante meter 0,35 punt. Voor de privé-buitenruimte(n) geldt géén minimumafmeting. Bijvoorbeeld: 10 m² privé-buitenruimte (totaal) = 5,5 punt (2 + (10 x 0,35)).
 
 #### 2.8.2 Punten voor een gemeenschappelijke buitenruimte
 
-Gemeenschappelijke buitenruimten zijn ruimtes die door bewoners van twee of meer adressen worden gebruikt. De bewoners delen de ruimtes, bijvoorbeeld een tuin of dakterras. Voor gemeenschappelijke buitenruimten worden 0,75 punten per vierkante meter toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
+Gemeenschappelijke buitenruimten zijn ruimtes die door bewoners van twee of meer adressen worden gebruikt. De bewoners delen de ruimtes, bijvoorbeeld een tuin of dakterras. Voor gemeenschappelijk buitenruimten worden 0,75 punten per vierkante meter toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
 Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan een drietal voorwaarden voldoen, namelijk:
 
@@ -1561,7 +1561,7 @@ Er is sprake van een zorgwoning als aan de volgende voorwaarden is voldaan.
 1. ~~de woning ligt in een woongebouw;~~
 2. ~~de woning en het woongebouw waarin de woning ligt zijn bestemd voor mensen met een fysieke beperking wat minimaal blijkt uit de aanwezigheid van drempelloze toegankelijkheid en doorgankelijkheid;~~
 3. ~~de huurovereenkomst van de woning voorziet op de aanwezigheid van technische voorzieningen in het gebouw die het mogelijk maken dat een individuele persoonsalarmering verbinding kan maken met de noodalarmcentrale in zowel de woning als het complex waarvan de woning deel uitmaakt;~~
-4. ~~de huurovereenkomst van de woning moet zien op het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie;~~
+4. ~~de huurovereenkomst van de woning moet zien op het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie~~
 
 ~~_Drempelloze toegankelijkheid en doorgankelijkheid_~~  
 ~~Deze drempelloze toegankelijkheid en doorgankelijkheid houden ten minste in dat:~~
