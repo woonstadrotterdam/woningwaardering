@@ -1291,6 +1291,9 @@ De hoogte van de punten hangt af van hoe de WOZ-waarde per vierkante meter gebru
 
 ~~Het is aan de verhuurder om te bewijzen welk percentage van de bouw de WOZ-waarde vertegenwoordigt, bijvoorbeeld door middel van de WOZ-beschikking.~~
 
+> [!NOTE]
+> Wanneer sprake is van gebouwd eigendom in aanbouw, dient de naar 100% omgerekende WOZ-waarde met de juiste waardepeildatum doorgegeven te worden.
+
 ### 2.12 Rubriek 12: Bijzondere voorzieningen
 
 Als sprake is van een zorgwoning, dan wordt het puntentotaal die de woning krijgt op basis van de rubrieken 1 t/m 11 met 35% verhoogd. Dit heeft dus een hogere maximale huurprijs als gevolg.
