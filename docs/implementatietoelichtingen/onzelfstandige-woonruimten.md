@@ -650,20 +650,20 @@ Voor woningen die (gedeeltelijk) zelf in hun energieverbruik voorzien, bijvoorbe
 
 ##### ~~2.4.6.4 Gerede twijfel energieprestatie (HEO)~~
 
-~~Soms twijfelt de huurder aan de juistheid van het label dat voor de woonruimte is afgegeven. In zo’n geval heeft de Huurcommissie de mogelijkheid om een Huurcommissie Eigen Oordeel (HEO) uit te spreken. De huurder moet dan wel aantonen dat:~~
+Soms twijfelt de huurder aan de juistheid van het label dat voor de woonruimte is afgegeven. In zo’n geval heeft de Huurcommissie de mogelijkheid om een Huurcommissie Eigen Oordeel (HEO) uit te spreken. De huurder moet dan wel aantonen dat:
 
-1. ~~sprake is van gerede twijfel over de juistheid van de energielabel én~~
-2. ~~dat een gewijzigd energielabel van invloed is op de maximaal redelijke huurprijs.~~
+1. sprake is van gerede twijfel over de juistheid van de energielabel én
+2. dat een gewijzigd energielabel van invloed is op de maximaal redelijke huurprijs.
 
-_~~Gerede twijfel~~_  
-~~Bij ‘gerede twijfel’ wordt beoordeeld of de huurder voldoende heeft aangetoond dat een verkeerd woningkenmerk of verkeerde woningkenmerken is/zijn gebruikt bij het vaststellen van het energielabel, waardoor de juistheid van de labelklasse voor de desbetreffende woning in het geding is. Zo’n fout kenmerk is bijvoorbeeld: het verkeerde soort glas, zoals enkel in plaats van dubbel glas. Of er staat een verkeerd type woning op het label, bijvoorbeeld een hoekwoning in plaats van een tussenwoning. Of de muren zijn slecht geïsoleerd, terwijl het energielabel aangeeft dat het huis juist goed geïsoleerd is.~~
+_Gerede twijfel_  
+Bij ‘gerede twijfel’ wordt beoordeeld of de huurder voldoende heeft aangetoond dat een verkeerd woningkenmerk of verkeerde woningkenmerken is/zijn gebruikt bij het vaststellen van het energielabel, waardoor de juistheid van de labelklasse voor de desbetreffende woning in het geding is. Zo’n fout kenmerk is bijvoorbeeld: het verkeerde soort glas, zoals enkel in plaats van dubbel glas. Of er staat een verkeerd type woning op het label, bijvoorbeeld een hoekwoning in plaats van een tussenwoning. Of de muren zijn slecht geïsoleerd, terwijl het energielabel aangeeft dat het huis juist goed geïsoleerd is.
 
-~~De huurder dient gerede twijfel aan te tonen door middel van het energielabelafschrift en moet onderbouwen waarom een onjuist woningkenmerk is gebruikt. Het energielabelafschrift is te downloaden via Mijnoverheid.~~
+De huurder dient gerede twijfel aan te tonen door middel van het energielabelafschrift en moet onderbouwen waarom een onjuist woningkenmerk is gebruikt. Het energielabelafschrift is te downloaden via Mijnoverheid.
 
-_~~Onderzoek door de Huurcommissie: geen toegang, geen onderzoek~~_  
-~~Indien de Huurcommissie tot een eigen oordeel wil komen dan laat de Huurcommissie onderzoeken wat de energieprestatie van de woning is. De huurder moet hiervoor toegang kunnen verlenen tot het volledige pand waar het energielabel voor is afgegeven en deze toegang schriftelijk kunnen bevestigen voordat het onderzoek gepland kan worden. Alleen toegang tot de eigen onzelfstandige woning is dus onvoldoende. Indien van toepassing moet huurder dus toegang kunnen verschaffen tot woonruimtes van andere huurders. Indien de toegang niet volledig kan worden verschaft kan het onderzoek naar het energielabel niet plaatsvinden.~~
+_Onderzoek door de Huurcommissie: geen toegang, geen onderzoek_
+Indien de Huurcommissie tot een eigen oordeel wil komen dan laat de Huurcommissie onderzoeken wat de energieprestatie van de woning is. De huurder moet hiervoor toegang kunnen verlenen tot het volledige pand waar het energielabel voor is afgegeven en deze toegang schriftelijk kunnen bevestigen voordat het onderzoek gepland kan worden. Alleen toegang tot de eigen onzelfstandige woning is dus onvoldoende. Indien van toepassing moet huurder dus toegang kunnen verschaffen tot woonruimtes van andere huurders. Indien de toegang niet volledig kan worden verschaft kan het onderzoek naar het energielabel niet plaatsvinden.
 
-~~Het eigen oordeel is alleen in de voorliggende zaak van kracht, wordt niet geregistreerd in het register van de Rijksdienst voor Ondernemend Nederland en komt te vervallen na ontbinding van de huurovereenkomst.~~
+Het eigen oordeel is alleen in de voorliggende zaak van kracht, wordt niet geregistreerd in het register van de Rijksdienst voor Ondernemend Nederland en komt te vervallen na ontbinding van de huurovereenkomst.
 
 ### 2.5 Rubriek 5: Keuken
 
