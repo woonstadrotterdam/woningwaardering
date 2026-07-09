@@ -39,20 +39,10 @@ Na wijzigingen in `.pre-commit-config.yaml` volstaat meestal opnieuw committen o
 
 Met geïnstalleerde pre-commit-hooks draaien commit- en push-checks automatisch.
 
-Met geactiveerde virtualenv:
+Of handmatig met geactiveerde virtualenv:
 
 ```bash
-python -m pytest
-pre-commit run --all-files
-pre-commit run --all-files --hook-stage pre-push
-```
-
-Zonder activatie, via `uv run`:
-
-```bash
-uv run python -m pytest
-uv run pre-commit run --all-files
-uv run pre-commit run --all-files --hook-stage pre-push
+task check
 ```
 
 Na code- of testwijzigingen horen pytest en beide pre-commit-stappen (inclusief `--hook-stage pre-push`) te slagen voordat je commit of de taak afrondt. Zie [testing.md](testing.md).
