@@ -108,8 +108,8 @@ def waardeer_gemeenschappelijke_parkeerruimte(
 
     aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden
     aantal_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-    gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-        aantal_eenheden=aantal_eenheden,
+    gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+        aantal_adressen=aantal_eenheden,
         aantal_onzelfstandige_woonruimten=aantal_onz,
     )
 

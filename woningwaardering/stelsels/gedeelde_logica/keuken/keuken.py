@@ -42,7 +42,7 @@ def waardeer_keuken(
         )
         return []
 
-    ruimte_criterium = waarderingsgroep_bouwer.maak_onderliggende(
+    ruimte_criterium = waarderingsgroep_bouwer.categorie(
         id=ruimte.id,
         naam=ruimte.naam
         or ruimte.id
@@ -54,7 +54,6 @@ def waardeer_keuken(
         *list(_waardeer_extra_voorzieningen(ruimte, ruimte_criterium, deler=deler)),
     ]
     if not detail_waarderingen:
-        ruimte_criterium.verwijder()
         return []
 
     # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten

@@ -10,9 +10,6 @@ from woningwaardering.stelsels.bouwers import (
     WaarderingBouwer,
     WaarderingsgroepBouwer,
 )
-from woningwaardering.stelsels.criterium import (
-    GedeeldMetSoort,
-)
 from woningwaardering.stelsels.gedeelde_logica import (
     is_zolder_zonder_vaste_trap,
     maak_zolder_correctie_waardering,
@@ -92,8 +89,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             deler = self._gedeeld_met_aantal(ruimte)
             if deler not in gedeeld_met_lagen:
                 gedeeld_met_lagen[deler] = waarderingsgroep_bouwer.gedeeld_met(
-                    aantal=deler,
-                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                    aantal_onzelfstandige_woonruimten=deler,
                 )
             gedeeld_met = gedeeld_met_lagen[deler]
 
@@ -128,11 +124,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     )
 
                 per_deler_waarderingen[deler].append(waardering)
-
-        # Lege gedeeld-met-lagen (ruimte gaf geen waarderingen) horen niet in de output.
-        for deler, gedeeld_met in gedeeld_met_lagen.items():
-            if not per_deler_waarderingen.get(deler):
-                gedeeld_met.verwijder()
 
         for deler, waarderingen in per_deler_waarderingen.items():
             gedeeld_met = gedeeld_met_lagen[deler]

@@ -1,5 +1,4 @@
 from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
-from woningwaardering.stelsels.criterium import GedeeldMetSoort
 from woningwaardering.vera.referentiedata import (
     Meeteenheid,
     Woningwaarderingstelsel,
@@ -40,17 +39,13 @@ def test_maak_onderliggende_nest_onder_waardering() -> None:
 
 
 def test_gedeeld_met_prive_bij_aantal_een() -> None:
-    criterium = _bouwer().gedeeld_met(
-        aantal=1, soort=GedeeldMetSoort.onzelfstandige_woonruimten
-    )
+    criterium = _bouwer().gedeeld_met()
     assert criterium.criterium_id == f"{STELSELGROEP.name}__prive"
     assert criterium.naam == "Privé"
 
 
 def test_gedeeld_met_gebruikt_enkele_underscores() -> None:
-    criterium = _bouwer().gedeeld_met(
-        aantal=3, soort=GedeeldMetSoort.onzelfstandige_woonruimten
-    )
+    criterium = _bouwer().gedeeld_met(aantal_onzelfstandige_woonruimten=3)
     assert (
         criterium.criterium_id
         == f"{STELSELGROEP.name}__gedeeld_met_3_onzelfstandige_woonruimten"
@@ -61,12 +56,8 @@ def test_gedeeld_met_gebruikt_enkele_underscores() -> None:
 def test_bouwer_dedupliceert_gedeelde_criteria_en_sommeert_punten() -> None:
     waarderingsgroep_bouwer = _bouwer()
 
-    eerste = waarderingsgroep_bouwer.gedeeld_met(
-        aantal=3, soort=GedeeldMetSoort.onzelfstandige_woonruimten
-    )
-    tweede = waarderingsgroep_bouwer.gedeeld_met(
-        aantal=3, soort=GedeeldMetSoort.onzelfstandige_woonruimten
-    )
+    eerste = waarderingsgroep_bouwer.gedeeld_met(aantal_onzelfstandige_woonruimten=3)
+    tweede = waarderingsgroep_bouwer.gedeeld_met(aantal_onzelfstandige_woonruimten=3)
     assert eerste is tweede
 
     eerste.maak_onderliggende(id="Space_1", naam="Badkamer")

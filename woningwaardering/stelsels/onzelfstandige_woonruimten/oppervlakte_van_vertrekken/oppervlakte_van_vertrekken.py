@@ -7,9 +7,6 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
-from woningwaardering.stelsels.criterium import (
-    GedeeldMetSoort,
-)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_vertrek,
 )
@@ -62,17 +59,11 @@ class OppervlakteVanVertrekken(Stelselgroep):
                 deler = 1
 
             gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
-                aantal=deler,
-                soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                aantal_onzelfstandige_woonruimten=deler,
             )
             waarderingen = waardeer_oppervlakte_van_vertrek(
                 ruimte, waarderingsgroep_bouwer=gedeeld_met
             )
-            if not waarderingen:
-                if gedeeld_met.is_leeg:
-                    gedeeld_met.verwijder()
-                continue
-
             for waardering in waarderingen:
                 if waardering.aantal is None:
                     continue

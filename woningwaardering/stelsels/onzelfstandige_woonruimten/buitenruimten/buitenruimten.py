@@ -56,8 +56,8 @@ class Buitenruimten(Stelselgroep):
 
         for ruimte in eenheid.ruimten or []:
             for bron in self._punten_voor_buitenruimte(ruimte):
-                laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                    aantal_eenheden=ruimte.gedeeld_met_aantal_eenheden or 1,
+                laag = waarderingsgroep_bouwer.gedeeld_met(
+                    aantal_adressen=ruimte.gedeeld_met_aantal_eenheden or 1,
                     aantal_onzelfstandige_woonruimten=(
                         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                     ),
@@ -182,10 +182,7 @@ class Buitenruimten(Stelselgroep):
             and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
             for ruimte in eenheid.ruimten or []
         ):
-            prive_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=1,
-                aantal_onzelfstandige_woonruimten=1,
-            )
+            prive_laag = waarderingsgroep_bouwer.gedeeld_met()
             return prive_laag.maak_onderliggende(
                 id="prive_buitenruimten_aanwezig",
                 naam="Privé buitenruimten aanwezig",

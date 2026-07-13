@@ -8,7 +8,6 @@ from woningwaardering.stelsels.bouwers import (
     WaarderingBouwer,
     WaarderingsgroepBouwer,
 )
-from woningwaardering.stelsels.criterium import GedeeldMetSoort
 from woningwaardering.stelsels.gedeelde_logica import waardeer_verkoeling_en_verwarming
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
@@ -56,26 +55,17 @@ class VerkoelingEnVerwarming(Stelselgroep):
             or ruimte.gedeeld_met_aantal_eenheden == 1
         ]
 
-        subgroep_cache: dict[tuple[WaarderingBouwer, str], WaarderingBouwer] = {}
-
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBouwer:
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
-                aantal=deler,
-                soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                aantal_onzelfstandige_woonruimten=deler,
             )
-            sleutel = (gedeeld_met, subgroep_id)
-            bestaand = subgroep_cache.get(sleutel)
-            if bestaand is not None:
-                return bestaand
-            nieuw = gedeeld_met.maak_onderliggende(
+            return gedeeld_met.categorie(
                 id=subgroep_id,
                 naam=subgroep_naam,
             )
-            subgroep_cache[sleutel] = nieuw
-            return nieuw
 
         for ruimte, waardering in waardeer_verkoeling_en_verwarming(
             ruimten, subgroep=subgroep

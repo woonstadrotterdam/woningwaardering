@@ -42,12 +42,6 @@
               "naam": "Vierkante meter, m2"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen",
-            "naam": "Gedeeld met 6 adressen"
-          }
         }
       ]
     }

@@ -8,9 +8,6 @@ from woningwaardering.stelsels.bouwers import (
     WaarderingBouwer,
     WaarderingsgroepBouwer,
 )
-from woningwaardering.stelsels.criterium import (
-    GedeeldMetSoort,
-)
 from woningwaardering.stelsels.gedeelde_logica import (
     maximeer_wastafels,
     waardeer_sanitair,
@@ -72,8 +69,7 @@ class Sanitair(Stelselgroep):
             else:
                 deler = 1
             gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
-                aantal=deler,
-                soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                aantal_onzelfstandige_woonruimten=deler,
             )
 
             waarderingen = waardeer_sanitair(
@@ -83,8 +79,6 @@ class Sanitair(Stelselgroep):
                 deler=deler,
             )
             if not waarderingen:
-                if gedeeld_met.is_leeg:
-                    gedeeld_met.verwijder()
                 continue
 
             ruimte_criterium = waarderingen[0]

@@ -20,6 +20,21 @@
           }
         },
         {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__Space_108017428",
+            "naam": "Balkon",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 2.25
+        },
+        {
           "criterium": {
             "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen",
             "naam": "Gedeeld met 2 adressen",
@@ -42,21 +57,6 @@
             }
           },
           "punten": 1.125
-        },
-        {
-          "aantal": 6.0,
-          "criterium": {
-            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__Space_108017428",
-            "naam": "Balkon",
-            "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 2.25
         }
       ]
     }

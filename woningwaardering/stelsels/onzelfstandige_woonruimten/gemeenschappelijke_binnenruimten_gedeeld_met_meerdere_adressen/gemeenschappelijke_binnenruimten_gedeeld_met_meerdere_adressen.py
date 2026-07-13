@@ -178,8 +178,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 / Decimal(str(sleutel.aantal_onzelfstandige_woonruimten))
             )
 
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=sleutel.aantal_eenheden,
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_adressen=sleutel.aantal_eenheden,
                 aantal_onzelfstandige_woonruimten=sleutel.aantal_onzelfstandige_woonruimten,
             )
             if sleutel.ruimtesoort == Ruimtesoort.vertrek:
@@ -192,7 +192,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.name
                 )
                 categorie_naam = "Oppervlakte van overige ruimten"
-            categorie = gedeeld_met_laag.maak_onderliggende(
+            categorie = gedeeld_met_laag.categorie(
                 id=categorie_lokaal_id,
                 naam=categorie_naam,
             )
@@ -260,9 +260,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         # wordt daarom eenmalig aangeroepen; elk resultaat wordt daarna onder de juiste
         # adressengroep gehangen, waar de punten door het aantal adressen en
         # onzelfstandige woonruimten worden gedeeld.
-        verkoeling_per_laag: dict[WaarderingBouwer, WaarderingBouwer] = {}
-        subgroep_per_id: dict[tuple[WaarderingBouwer, str], WaarderingBouwer] = {}
-
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBouwer:
@@ -270,28 +267,18 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             aantal_onzelfstandige_woonruimten = (
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             )
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=aantal_eenheden,
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_adressen=aantal_eenheden,
                 aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
             )
-            verkoeling_categorie = verkoeling_per_laag.get(gedeeld_met_laag)
-            if verkoeling_categorie is None:
-                verkoeling_categorie = gedeeld_met_laag.maak_onderliggende(
-                    id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
-                    naam="Verkoeling en verwarming",
-                )
-                verkoeling_per_laag[gedeeld_met_laag] = verkoeling_categorie
-
-            subgroep_sleutel = (verkoeling_categorie, subgroep_id)
-            bestaand = subgroep_per_id.get(subgroep_sleutel)
-            if bestaand is not None:
-                return bestaand
-            nieuw = verkoeling_categorie.maak_onderliggende(
+            verkoeling_categorie = gedeeld_met_laag.categorie(
+                id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
+                naam="Verkoeling en verwarming",
+            )
+            return verkoeling_categorie.categorie(
                 id=subgroep_id,
                 naam=subgroep_naam,
             )
-            subgroep_per_id[subgroep_sleutel] = nieuw
-            return nieuw
 
         for ruimte, waardering in waardeer_verkoeling_en_verwarming(
             ruimten, subgroep=subgroep
@@ -312,7 +299,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
     ) -> None:
-        sanitair_categorieen: dict[WaarderingBouwer, WaarderingBouwer] = {}
         ruimte_waarderingen: list[
             tuple[EenhedenRuimte, WaarderingBouwer, list[WaarderingBouwer]]
         ] = []
@@ -329,18 +315,15 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             )
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
 
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=aantal_eenheden,
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_adressen=aantal_eenheden,
                 aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
             )
-            sanitair_categorie = sanitair_categorieen.get(gedeeld_met_laag)
-            categorie_is_nieuw = sanitair_categorie is None
-            if sanitair_categorie is None:
-                sanitair_categorie = gedeeld_met_laag.maak_onderliggende(
-                    id="sanitair",
-                    naam="Sanitair",
-                )
 
+            sanitair_categorie = gedeeld_met_laag.categorie(
+                id="sanitair",
+                naam="Sanitair",
+            )
             waarderingen = waardeer_sanitair(
                 ruimte,
                 self.stelsel,
@@ -348,13 +331,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 deler=1,
             )
             if not waarderingen:
-                if categorie_is_nieuw and sanitair_categorie.is_leeg:
-                    sanitair_categorie.verwijder()
                 continue
 
             ruimte_criterium = waarderingen[0]
             ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
-            sanitair_categorieen[gedeeld_met_laag] = sanitair_categorie
 
         maximeer_wastafels(
             ruimte_waarderingen,
@@ -379,7 +359,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
     ) -> None:
-        keuken_categorieen: dict[WaarderingBouwer, WaarderingBouwer] = {}
         for ruimte in ruimten:
             aantal_onzelfstandige_woonruimten = (
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
@@ -389,18 +368,15 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 str(aantal_onzelfstandige_woonruimten)
             )
 
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=aantal_eenheden,
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_adressen=aantal_eenheden,
                 aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
             )
-            keuken_categorie = keuken_categorieen.get(gedeeld_met_laag)
-            categorie_is_nieuw = keuken_categorie is None
-            if keuken_categorie is None:
-                keuken_categorie = gedeeld_met_laag.maak_onderliggende(
-                    id="keuken",
-                    naam="Keuken",
-                )
 
+            keuken_categorie = gedeeld_met_laag.categorie(
+                id="keuken",
+                naam="Keuken",
+            )
             ruimte_waarderingen = waardeer_keuken(
                 ruimte,
                 self.stelsel,
@@ -408,14 +384,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 deler=1,
             )
             if not ruimte_waarderingen:
-                if categorie_is_nieuw and keuken_categorie.is_leeg:
-                    keuken_categorie.verwijder()
                 continue
 
             for waardering in ruimte_waarderingen:
                 if waardering.punten is not None:
                     waardering.punten = float(Decimal(str(waardering.punten)) / deler)
-            keuken_categorieen[gedeeld_met_laag] = keuken_categorie
 
 
 if __name__ == "__main__":  # pragma: no cover

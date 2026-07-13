@@ -191,8 +191,8 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 totaal_oppervlakte, punten_per_m2
             ) / Decimal(str(aantal_eenheden))
 
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=aantal_eenheden,
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_adressen=aantal_eenheden,
             )
             if ruimtesoort == Ruimtesoort.vertrek:
                 categorie_lokaal_id = (
@@ -204,7 +204,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.name
                 )
                 categorie_naam = "Oppervlakte van overige ruimten"
-            categorie = gedeeld_met_laag.maak_onderliggende(
+            categorie = gedeeld_met_laag.categorie(
                 id=categorie_lokaal_id,
                 naam=categorie_naam,
             )
@@ -260,34 +260,21 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         gedeelde_ruimten: list[EenhedenRuimte],
     ) -> None:
-        verkoeling_per_laag: dict[WaarderingBouwer, WaarderingBouwer] = {}
-        subgroep_per_id: dict[tuple[WaarderingBouwer, str], WaarderingBouwer] = {}
-
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBouwer:
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=aantal_eenheden,
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_adressen=aantal_eenheden,
             )
-            verkoeling_categorie = verkoeling_per_laag.get(gedeeld_met_laag)
-            if verkoeling_categorie is None:
-                verkoeling_categorie = gedeeld_met_laag.maak_onderliggende(
-                    id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
-                    naam="Verkoeling en verwarming",
-                )
-                verkoeling_per_laag[gedeeld_met_laag] = verkoeling_categorie
-
-            subgroep_sleutel = (verkoeling_categorie, subgroep_id)
-            bestaand = subgroep_per_id.get(subgroep_sleutel)
-            if bestaand is not None:
-                return bestaand
-            nieuw = verkoeling_categorie.maak_onderliggende(
+            verkoeling_categorie = gedeeld_met_laag.categorie(
+                id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
+                naam="Verkoeling en verwarming",
+            )
+            return verkoeling_categorie.categorie(
                 id=subgroep_id,
                 naam=subgroep_naam,
             )
-            subgroep_per_id[subgroep_sleutel] = nieuw
-            return nieuw
 
         for ruimte, waardering in waardeer_verkoeling_en_verwarming(
             gedeelde_ruimten, subgroep=subgroep
@@ -302,32 +289,22 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 )
             )
 
-        for verkoeling_categorie in verkoeling_per_laag.values():
-            if verkoeling_categorie.is_leeg:
-                verkoeling_categorie.verwijder()
-
     def _keuken_waarderingen(
         self,
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
     ) -> None:
-        keuken_categorieen: dict[WaarderingBouwer, WaarderingBouwer] = {}
-
         for ruimte in ruimten:
             if ruimte.detail_soort is None:
                 continue
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=aantal_eenheden,
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_adressen=aantal_eenheden,
             )
-            keuken_categorie = keuken_categorieen.get(gedeeld_met_laag)
-            categorie_is_nieuw = keuken_categorie is None
-            if keuken_categorie is None:
-                keuken_categorie = gedeeld_met_laag.maak_onderliggende(
-                    id="keuken",
-                    naam="Keuken",
-                )
-
+            keuken_categorie = gedeeld_met_laag.categorie(
+                id="keuken",
+                naam="Keuken",
+            )
             ruimte_waarderingen = waardeer_keuken(
                 ruimte,
                 self.stelsel,
@@ -335,44 +312,32 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 deler=aantal_eenheden,
             )
             if not ruimte_waarderingen:
-                if categorie_is_nieuw and keuken_categorie.is_leeg:
-                    keuken_categorie.verwijder()
                 continue
-            keuken_categorieen[gedeeld_met_laag] = keuken_categorie
 
     def _sanitair_waarderingen(
         self,
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         ruimten: list[EenhedenRuimte],
     ) -> None:
-        sanitair_categorieen: dict[WaarderingBouwer, WaarderingBouwer] = {}
-
         for ruimte in ruimten:
             if ruimte.detail_soort is None:
                 continue
             aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met_laag(
-                aantal_eenheden=aantal_eenheden,
+            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_adressen=aantal_eenheden,
             )
-            sanitair_categorie = sanitair_categorieen.get(gedeeld_met_laag)
-            categorie_is_nieuw = sanitair_categorie is None
-            if sanitair_categorie is None:
-                sanitair_categorie = gedeeld_met_laag.maak_onderliggende(
-                    id="sanitair",
-                    naam="Sanitair",
-                )
-
-            ruimte_waarderingen = waardeer_sanitair(
+            sanitair_categorie = gedeeld_met_laag.categorie(
+                id="sanitair",
+                naam="Sanitair",
+            )
+            waarderingen = waardeer_sanitair(
                 ruimte,
                 self.stelsel,
                 waarderingsgroep_bouwer=sanitair_categorie,
                 deler=aantal_eenheden,
             )
-            if not ruimte_waarderingen:
-                if categorie_is_nieuw and sanitair_categorie.is_leeg:
-                    sanitair_categorie.verwijder()
+            if not waarderingen:
                 continue
-            sanitair_categorieen[gedeeld_met_laag] = sanitair_categorie
 
 
 if __name__ == "__main__":  # pragma: no cover

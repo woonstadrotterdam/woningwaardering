@@ -12,7 +12,6 @@ from woningwaardering.stelsels.bouwers import (
     WaarderingBouwer,
     WaarderingsgroepBouwer,
 )
-from woningwaardering.stelsels.criterium import GedeeldMetSoort
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -167,18 +166,14 @@ class Buitenruimten(Stelselgroep):
             )
             gedeeld_met_aantal = ruimte.gedeeld_met_aantal_eenheden
             gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
-                aantal=gedeeld_met_aantal,
-                soort=GedeeldMetSoort.adressen,
+                aantal_adressen=gedeeld_met_aantal,
             )
         else:
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een privé-buitenruimte van {ruimte.oppervlakte}m2 en telt mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
             )
             gedeeld_met_aantal = 1
-            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
-                aantal=1,
-                soort=GedeeldMetSoort.adressen,
-            )
+            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met()
 
         totaal_criteria[gedeeld_met] = gedeeld_met_aantal
 

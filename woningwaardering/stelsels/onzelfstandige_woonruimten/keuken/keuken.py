@@ -5,9 +5,6 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
-from woningwaardering.stelsels.criterium import (
-    GedeeldMetSoort,
-)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
 )
@@ -60,8 +57,7 @@ class Keuken(Stelselgroep):
             else:
                 deler = 1
             gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
-                aantal=deler,
-                soort=GedeeldMetSoort.onzelfstandige_woonruimten,
+                aantal_onzelfstandige_woonruimten=deler,
             )
 
             waardeer_keuken(
@@ -70,8 +66,6 @@ class Keuken(Stelselgroep):
                 waarderingsgroep_bouwer=gedeeld_met,
                 deler=deler,
             )
-            if gedeeld_met.is_leeg:
-                gedeeld_met.verwijder()
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
