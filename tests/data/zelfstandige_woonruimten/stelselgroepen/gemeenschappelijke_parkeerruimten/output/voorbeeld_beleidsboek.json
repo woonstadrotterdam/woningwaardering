@@ -23,7 +23,7 @@
           "aantal": 5.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__1",
-            "naam": "Type II + laadpaal",
+            "naam": "Type II",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen"
             },
@@ -32,7 +32,22 @@
               "naam": "Stuks"
             }
           },
-          "punten": 4.0
+          "punten": 3.0
+        },
+        {
+          "aantal": 5.0,
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__1_laadpaal",
+            "naam": "Laadpaal",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.0
         },
         {
           "aantal": 2.0,

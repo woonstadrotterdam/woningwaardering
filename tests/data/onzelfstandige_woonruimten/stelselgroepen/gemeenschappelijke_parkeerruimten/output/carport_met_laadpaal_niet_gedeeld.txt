@@ -4,6 +4,7 @@ SAMENVATTING 12006000004
 
 GEMEENSCHAPPELIJKE PARKEERRUIMTEN
   Gedeeld met 2 onzelfstandige woonruimten
-    - Type II + laadpaal                                     1.00 st   4.00 pt
+    - Type II                                                1.00 st   3.00 pt
+    - Laadpaal                                               1.00 st   1.00 pt
                                                                       --------
   Totaal                                                               4.00 pt

@@ -50,7 +50,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
 
     Extra punten:
     - +2 punten bij aanwezigheid van een laadpaal die exclusief is voor gebruik
-      door bewoners (2.10.5)
+      door bewoners (2.10.5), als aparte regel naast de parkeerplek
 
     Voorwaarden:
     - De oppervlakte moet minimaal 12m² zijn
@@ -113,33 +113,46 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         aantal_onzelfstandige_woonruimten=aantal_onz,
     )
 
+    # 2.10.4 Rekenmethode: delen door aantal adressen; bij privé parkeerplek voor
+    # één adres delen door 1. Onzelfstandig: daarna delen door aantal
+    # onzelfstandige woonruimten op het adres.
+    deler = Decimal(str(max(aantal_eenheden, 1))) * Decimal(str(max(aantal_onz, 1)))
+    heeft_laadpaal = heeft_bouwkundig_element(
+        ruimte, Bouwkundigelementdetailsoort.laadpaal
+    )
+
     for (
         type_parkeeruimte,
         punten,
     ) in parkeertype_punten_mapping[ruimte.detail_soort].items():
-        criterium = f"{type_parkeeruimte}"
-
-        if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.laadpaal):
-            punten += Decimal("2.0")
-            criterium += " + laadpaal"
-
-        # 2.10.4 Rekenmethode: delen door aantal adressen; bij privé parkeerplek voor
-        # één adres delen door 1. Onzelfstandig: daarna delen door aantal
-        # onzelfstandige woonruimten op het adres.
-        totaal_punten_type_parkeeruimte = (
-            punten
-            * Decimal(str(ruimte.aantal))
-            / (Decimal(str(max(aantal_eenheden, 1))) * Decimal(str(max(aantal_onz, 1))))
-        )
+        totaal_punten_type_parkeeruimte = punten * Decimal(str(ruimte.aantal)) / deler
 
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{criterium}'."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{type_parkeeruimte}'."
         )
 
         gedeeld_met_laag.maak_onderliggende(
             id=ruimte.id,
-            naam=criterium,
+            naam=type_parkeeruimte,
             meeteenheid=Meeteenheid.stuks,
             aantal=ruimte.aantal,
             punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),
         )
+
+        # 2.10.5 Laadpalen: 2 extra punten als aparte regel naast de parkeerplek.
+        if heeft_laadpaal:
+            totaal_punten_laadpaal = (
+                Decimal("2.0") * Decimal(str(ruimte.aantal)) / deler
+            )
+
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een laadpaal bij '{type_parkeeruimte}'."
+            )
+
+            gedeeld_met_laag.maak_onderliggende(
+                id=f"{ruimte.id}_laadpaal",
+                naam="Laadpaal",
+                meeteenheid=Meeteenheid.stuks,
+                aantal=ruimte.aantal,
+                punten=utils.rond_af(totaal_punten_laadpaal, decimalen=2),
+            )
