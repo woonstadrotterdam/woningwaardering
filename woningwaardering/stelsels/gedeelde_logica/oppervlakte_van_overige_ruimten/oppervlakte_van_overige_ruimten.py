@@ -161,4 +161,11 @@ def structureer_subtotaal_bij_correcties(
     for waardering in ruimteregels:
         waardering.verplaats_naar(subtotaal)
 
+    # Zet de correctie-waarderingen ná het Subtotaal, consistent met de
+    # gemeenschappelijke oppervlakte-waarderingen. Ze blijven directe kinderen van
+    # dezelfde bovenliggende; alleen de volgorde in de output verandert.
+    for waardering in overige:
+        if waardering.bovenliggende is waarderingsgroep_bouwer:
+            waardering.verplaats_naar(waarderingsgroep_bouwer)
+
     return [subtotaal, *ruimteregels, *overige]
