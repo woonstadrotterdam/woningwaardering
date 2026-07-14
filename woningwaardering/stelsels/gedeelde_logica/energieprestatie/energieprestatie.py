@@ -1,4 +1,5 @@
 from datetime import date
+from decimal import Decimal
 
 from loguru import logger
 
@@ -36,29 +37,34 @@ def monument_correctie(
         WaarderingBouwer | None: De correctiewaardering indien van toepassing, anders None
     """
 
-    if (
-        eenheid.monumenten
-        and any(
-            monument
-            in [
-                Eenheidmonument.rijksmonument,
-                Eenheidmonument.gemeentelijk_monument,
-                Eenheidmonument.provinciaal_monument,
-            ]
-            for monument in eenheid.monumenten or []
-        )
-        and woningwaardering.punten
-        and woningwaardering.punten < 0.0
-    ):
-        logger.info(
-            f"Eenheid ({eenheid.id}) is een monument: waardering voor {Woningwaarderingstelselgroep.energieprestatie.naam} is minimaal 0 punten."
-        )
-        return waarderingsgroep_bouwer.maak_onderliggende(
-            id="correctie_monument",
-            naam="Correctie monument",
-            punten=-woningwaardering.punten,
-        )
-    return None
+    is_rijks_provinciaal_of_gemeentelijk_monument = eenheid.monumenten and any(
+        monument
+        in [
+            Eenheidmonument.rijksmonument,
+            Eenheidmonument.gemeentelijk_monument,
+            Eenheidmonument.provinciaal_monument,
+        ]
+        for monument in eenheid.monumenten or []
+    )
+    if not is_rijks_provinciaal_of_gemeentelijk_monument:
+        return None
+
+    punten = woningwaardering.punten
+    minimum_punten = Decimal("0.0")
+
+    if punten is None or punten >= minimum_punten:
+        return None
+
+    correctie_punten = minimum_punten - Decimal(str(punten))
+
+    logger.info(
+        f"Eenheid ({eenheid.id}) is een monument: waardering voor {Woningwaarderingstelselgroep.energieprestatie.naam} is minimaal {minimum_punten} punten."
+    )
+    return waarderingsgroep_bouwer.maak_onderliggende(
+        id="correctie_monument",
+        naam="Correctie monument",
+        punten=correctie_punten,
+    )
 
 
 def get_energieprestatievergoeding(
