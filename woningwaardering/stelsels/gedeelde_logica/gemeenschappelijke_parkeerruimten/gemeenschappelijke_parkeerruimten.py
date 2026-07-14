@@ -139,7 +139,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),
         )
 
-        # 2.10.5 Laadpalen: 2 extra punten als aparte regel naast de parkeerplek.
+        # 2.10.5 Laadpalen: 2 extra punten.
         if heeft_laadpaal:
             totaal_punten_laadpaal = (
                 Decimal("2.0") * Decimal(str(ruimte.aantal)) / deler
