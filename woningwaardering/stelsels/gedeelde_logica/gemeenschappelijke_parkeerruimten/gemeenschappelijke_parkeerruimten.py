@@ -54,7 +54,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
 
     Voorwaarden:
     - De oppervlakte moet minimaal 12m² zijn
-    - Het aantal punten wordt gedeeld door het aantal adressen en (onzelfstandig)
+    - Het aantal punten wordt gedeeld door het aantal adressen en (bij onzelfstandig)
       het aantal onzelfstandige woonruimten op het adres
     - De ruimte moet van één van de volgende detailsoorten zijn:
         - inpandige afgesloten parkeerplek
