@@ -952,7 +952,9 @@ Er wordt afgerond op een kwart punt. Het puntenaantal voor één onzelfstandige 
 Gedeelde buitenruimten die als parkeerplek voor auto’s bedoeld zijn, worden gewaardeerd volgens rubriek 10.
 
 > [!NOTE]
-> Ondanks dat het op basis van het woordgebruik van deze rubriek lijkt alsof parkeerplekken met meerdere onzelfstandige woonruimten op het hetzelfde adres gewaardeerd horen te worden in rubriek 10, staat in rubriek 10 expliciet vermeld dat parkeerplekken alleen worden gewaardeerd als ze gedeeld zijn met minimaal 2 adressen. Omdat anders parkeerplekken gedeeld met hetzelfde adres nergens gewaardeerd zouden worden, waarderen wij die hier in rubriek 8.
+> Parkeerplekken met een specifieke parkeer-detailsoort (carport, in- of uitpandige parkeergarage, parkeerplek buiten behorend bij een complex) worden altijd in rubriek 10 gewaardeerd, ook wanneer ze privé zijn of alleen met onzelfstandige woonruimten op hetzelfde adres worden gedeeld. Een generieke `Ruimtedetailsoort.parkeerplaats` wordt in deze rubriek (8) als buitenruimte gewaardeerd, tenzij deze met meerdere adressen wordt gedeeld.
+>
+> Let op het randgeval: een `Ruimtedetailsoort.parkeerplaats` die met meerdere adressen wordt gedeeld, telt hier (rubriek 8) niet mee, maar wordt in rubriek 10 ook niet gewaardeerd, omdat rubriek 10 alleen de specifieke hierboven genoemde parkeer-detailsoorten waardeert. Zo'n gedeelde parkeerplek dient daarom met een van die specifieke detailsoorten te worden meegegeven om gewaardeerd te worden.
 
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia’s
 
