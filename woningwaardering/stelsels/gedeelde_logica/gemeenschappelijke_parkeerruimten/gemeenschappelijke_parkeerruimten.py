@@ -50,7 +50,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
 
     Extra punten:
     - +2 punten bij aanwezigheid van een laadpaal die exclusief is voor gebruik
-      door bewoners (2.10.5), als aparte regel naast de parkeerplek
+      door bewoners (2.10.5).
 
     Voorwaarden:
     - De oppervlakte moet minimaal 12m² zijn
