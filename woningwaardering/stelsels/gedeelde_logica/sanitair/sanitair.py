@@ -25,8 +25,8 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
-# De ruimte met de meeste (meerpersoons)wastafels, m.u.v. de badkamer, behoudt
-# bij >= 8 onzelfstandige woonruimten de waardering zonder maximering.
+# Op de ruimte met de meeste (meerpersoons)wastafels, m.u.v. de badkamer, wordt
+# bij >= 8 onzelfstandige woonruimten geen maximering toegepast.
 MaxCount = namedtuple("MaxCount", ["aantal_wastafels", "ruimte"])
 
 _MAX_TELLER_RUIMTES_ZONDER_MAX = (
