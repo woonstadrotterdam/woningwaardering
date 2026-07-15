@@ -49,12 +49,18 @@ def waardeer_keuken(
         or (ruimte.detail_soort.naam if ruimte.detail_soort else ""),
     )
 
-    detail_waarderingen = [
-        *list(_waardeer_aanrecht(ruimte, stelsel, ruimte_criterium)),
-        *list(_waardeer_extra_voorzieningen(ruimte, ruimte_criterium, deler=deler)),
-    ]
+    aanrecht_waarderingen = list(_waardeer_aanrecht(ruimte, stelsel, ruimte_criterium))
+    extra_waarderingen = list(_waardeer_extra_voorzieningen(ruimte, ruimte_criterium))
+    detail_waarderingen = [*aanrecht_waarderingen, *extra_waarderingen]
     if not detail_waarderingen:
         return []
+
+    punten_voor_extra_voorzieningen = sum(
+        Decimal(str(waardering.punten))
+        for waardering in extra_waarderingen
+        if waardering.punten is not None
+    )
+    max_punten_voorzieningen = _max_punten_voorzieningen(ruimte)
 
     # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten
     # waarmee de ruimte gedeeld wordt.
@@ -67,6 +73,25 @@ def waardeer_keuken(
                         decimalen=2,
                     )
                 )
+
+    if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
+        aftrek_ongedeeld = max_punten_voorzieningen - punten_voor_extra_voorzieningen
+        max_punten = rond_af(max_punten_voorzieningen / Decimal(deler), decimalen=2)
+        aftrek = rond_af(aftrek_ongedeeld / Decimal(deler), decimalen=2)
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aftrek_ongedeeld} punt(en) i.v.m. te veel punten ({punten_voor_extra_voorzieningen} > {max_punten_voorzieningen}) voor extra keuken voorzieningen"
+        )
+        extra_voorzieningen_criterium = ruimte_criterium.categorie(
+            id="extra_voorzieningen",
+            naam="Extra voorzieningen",
+        )
+        detail_waarderingen.append(
+            extra_voorzieningen_criterium.maak_onderliggende(
+                id="maximering_extra_voorzieningen",
+                naam=f"Maximaal {max_punten.normalize():f} punten voor voorzieningen",
+                punten=aftrek,
+            )
+        )
 
     return [ruimte_criterium, *detail_waarderingen]
 
@@ -193,11 +218,18 @@ def _waardeer_aanrecht(
             )
 
 
+def _max_punten_voorzieningen(ruimte: EenhedenRuimte) -> Decimal:
+    totaal_lengte_aanrechten = sum(
+        Decimal(str(element.lengte or "0"))
+        for element in ruimte.bouwkundige_elementen or []
+        if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
+    )
+    return Decimal("7") if totaal_lengte_aanrechten >= Decimal("2000") else Decimal("4")
+
+
 def _waardeer_extra_voorzieningen(
     ruimte: EenhedenRuimte,
     waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-    *,
-    deler: int = 1,
 ) -> Iterator[WaarderingBouwer]:
     """
     Waardeert de extra voorzieningen van een keuken.
@@ -205,17 +237,10 @@ def _waardeer_extra_voorzieningen(
     Args:
         ruimte (EenhedenRuimte): De keuken waarvan de extra voorzieningen gewaardeerd worden.
         waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
-        deler (int): Deler voor gedeelde ruimten; gebruikt om het getoonde maximum aan basisvoorzieningen-punten te berekenen.
 
     Yields:
         WaarderingBouwer: De gewaardeerde extra voorzieningen.
     """
-    totaal_lengte_aanrechten = sum(
-        Decimal(str(element.lengte or "0"))
-        for element in ruimte.bouwkundige_elementen or []
-        if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
-    )
-
     punten_per_installatie: dict[Referentiedata, float] = {
         Installatiesoort.inbouw_afzuiginstallatie: 0.75,
         Installatiesoort.inbouw_kookplaat_inductie: 1.75,
@@ -235,26 +260,15 @@ def _waardeer_extra_voorzieningen(
     }
 
     installaties = Counter(ruimte.installaties or [])
-    punten_voor_extra_voorzieningen = sum(
-        Decimal(str(punten_per_installatie[installatiesoort]))
-        * Decimal(str(installaties[installatiesoort]))
-        for installatiesoort in punten_per_installatie
-        if installaties[installatiesoort] > 0
+    extra_voorzieningen_criterium = waarderingsgroep_bouwer.categorie(
+        id="extra_voorzieningen",
+        naam="Extra voorzieningen",
     )
-
-    extra_voorzieningen_criterium: WaarderingBouwer | None = None
 
     for installatiesoort in punten_per_installatie:
         count = installaties[installatiesoort]
         if count == 0:
             continue
-
-        if extra_voorzieningen_criterium is None:
-            extra_voorzieningen_criterium = waarderingsgroep_bouwer.maak_onderliggende(
-                id="extra_voorzieningen",
-                naam="Extra voorzieningen",
-            )
-            yield extra_voorzieningen_criterium
 
         punten = rond_af(
             Decimal(str(punten_per_installatie[installatiesoort]))
@@ -271,26 +285,3 @@ def _waardeer_extra_voorzieningen(
             punten=punten,
             aantal=count,
         )
-
-    max_punten_voorzieningen = (
-        Decimal("7") if totaal_lengte_aanrechten >= Decimal("2000") else Decimal("4")
-    )
-    if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
-        aftrek = max_punten_voorzieningen - punten_voor_extra_voorzieningen
-        max_punten_getoond = rond_af(
-            max_punten_voorzieningen / Decimal(deler), decimalen=2
-        )
-        max_punten_label = (
-            int(max_punten_getoond)
-            if max_punten_getoond == max_punten_getoond.to_integral_value()
-            else max_punten_getoond
-        )
-        logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aftrek} punt(en) i.v.m. te veel punten ({punten_voor_extra_voorzieningen} > {max_punten_voorzieningen}) voor extra keuken voorzieningen"
-        )
-        if extra_voorzieningen_criterium is not None:
-            yield extra_voorzieningen_criterium.maak_onderliggende(
-                id="maximering_extra_voorzieningen",
-                naam=f"Maximaal {max_punten_label} punten voor voorzieningen",
-                punten=aftrek,
-            )
