@@ -49,7 +49,6 @@ class PrijsopslagMonumenten(Stelselgroep):
             self.stelsel, self.stelselgroep
         )
 
-        # De helpers hechten hun waarderingen via de waarderingsgroep_bouwer aan; consumeer de generator.
         for _ in self._genereer_woningwaarderingen(
             self.peildatum,
             eenheid,
