@@ -1,9 +1,5 @@
 from enum import Enum
 
-from woningwaardering.vera.bvg.generated import (
-    WoningwaarderingResultatenWoningwaardering,
-)
-
 
 class GedeeldMetSoort(Enum):
     adressen = "adressen"
@@ -25,12 +21,3 @@ def naam_gedeeld_met_groep(
     raise ValueError(
         f"soort is verplicht bij gedeeld met aantal {aantal} (verwacht adressen of onzelfstandige_woonruimten)"
     )
-
-
-def id_van_criterium(
-    waardering: WoningwaarderingResultatenWoningwaardering,
-) -> str:
-    """Geef ``waardering.criterium.id`` of raise bij ontbrekende id."""
-    if waardering.criterium is None or waardering.criterium.id is None:
-        raise RuntimeError("interne fout: waardering zonder criterium-id")
-    return waardering.criterium.id
