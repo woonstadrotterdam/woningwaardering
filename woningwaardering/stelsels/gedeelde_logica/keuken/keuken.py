@@ -75,8 +75,8 @@ def waardeer_keuken(
                 )
 
     if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
+        # Maximum tot het aantal punten dat voor de aanrechtlengte is bepaald.
         aftrek_ongedeeld = max_punten_voorzieningen - punten_voor_extra_voorzieningen
-        max_punten = rond_af(max_punten_voorzieningen / Decimal(deler), decimalen=2)
         aftrek = rond_af(aftrek_ongedeeld / Decimal(deler), decimalen=2)
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aftrek_ongedeeld} punt(en) i.v.m. te veel punten ({punten_voor_extra_voorzieningen} > {max_punten_voorzieningen}) voor extra keuken voorzieningen"
@@ -88,7 +88,7 @@ def waardeer_keuken(
         detail_waarderingen.append(
             extra_voorzieningen_criterium.maak_onderliggende(
                 id="maximering_extra_voorzieningen",
-                naam=f"Maximaal {max_punten.normalize():f} punten voor voorzieningen",
+                naam="Maximaal evenveel punten als aanrecht",
                 punten=aftrek,
             )
         )

@@ -85,7 +85,7 @@
         {
           "criterium": {
             "id": "keuken__prive__keuken__extra_voorzieningen__maximering_extra_voorzieningen",
-            "naam": "Maximaal 4 punten voor voorzieningen",
+            "naam": "Maximaal evenveel punten als aanrecht",
             "bovenliggendeCriterium": {
               "id": "keuken__prive__keuken__extra_voorzieningen"
             }

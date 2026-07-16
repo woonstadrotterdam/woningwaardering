@@ -336,10 +336,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             ruimte_criterium = waarderingen[0]
             ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
 
-        maximeer_wastafels(
-            ruimte_waarderingen,
-            deler_per_ruimte=lambda _: 1,
-        )
+        maximeer_wastafels(ruimte_waarderingen)
 
         for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
             aantal_onzelfstandige_woonruimten = (

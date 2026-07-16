@@ -1,4 +1,5 @@
 from datetime import date
+from decimal import Decimal
 
 from loguru import logger
 
@@ -76,7 +77,7 @@ class Sanitair(Stelselgroep):
                 ruimte,
                 self.stelsel,
                 waarderingsgroep_bouwer=gedeeld_met,
-                deler=deler,
+                deler=1,
             )
             if not waarderingen:
                 continue
@@ -85,6 +86,19 @@ class Sanitair(Stelselgroep):
             ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
 
         maximeer_wastafels(ruimte_waarderingen)
+
+        for ruimte, _, waarderingen in ruimte_waarderingen:
+            deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            if deler <= 1:
+                continue
+            for waardering in waarderingen[1:]:
+                if waardering.punten is not None:
+                    waardering.punten = float(
+                        utils.rond_af(
+                            Decimal(str(waardering.punten)) / Decimal(deler),
+                            decimalen=2,
+                        )
+                    )
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 

@@ -1,7 +1,7 @@
 import warnings
 from collections import Counter, namedtuple
 from decimal import Decimal
-from typing import Callable, Iterator
+from typing import Iterator
 
 from loguru import logger
 
@@ -565,7 +565,6 @@ def _maximeer_wastafels_in_ruimte(
     waarderingen: list[WaarderingBouwer],
     *,
     aantal_onzelfstandige: int,
-    deler: int = 1,
     soort: Referentiedata,
     max_count: MaxCount,
     maximum: Decimal,
@@ -589,29 +588,20 @@ def _maximeer_wastafels_in_ruimte(
                 maximum - Decimal(str(woningwaardering.aantal)) * maximum,
                 decimalen=2,
             )
-            correctie_gedeeld = rond_af(correctie / Decimal(deler), decimalen=2)
             waarderingen.insert(
                 index + 1,
                 ruimte_criterium.maak_onderliggende(
                     id=f"max_punten_{soort.name}",
                     naam=f"Max {maximum} punt voor {soort.naam}",
-                    punten=float(correctie_gedeeld),
+                    punten=float(correctie),
                 ),
             )
-
-
-def _deler_voor_onzelfstandige_woonruimten(ruimte: EenhedenRuimte) -> int:
-    return ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
 
 
 def maximeer_wastafels(
     ruimte_waarderingen: list[
         tuple[EenhedenRuimte, WaarderingBouwer, list[WaarderingBouwer]]
     ],
-    *,
-    deler_per_ruimte: Callable[
-        [EenhedenRuimte], int
-    ] = _deler_voor_onzelfstandige_woonruimten,
 ) -> None:
     max_wastafels, max_meerpersoonswastafels = _bepaal_wastafel_max_tellers(
         ruimte_waarderingen
@@ -621,13 +611,11 @@ def maximeer_wastafels(
         aantal_onzelfstandige = (
             ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
         )
-        deler = deler_per_ruimte(ruimte)
         _maximeer_wastafels_in_ruimte(
             ruimte,
             ruimte_criterium,
             waarderingen,
             aantal_onzelfstandige=aantal_onzelfstandige,
-            deler=deler,
             soort=Installatiesoort.wastafel,
             max_count=max_wastafels,
             maximum=Decimal("1"),
@@ -637,7 +625,6 @@ def maximeer_wastafels(
             ruimte_criterium,
             waarderingen,
             aantal_onzelfstandige=aantal_onzelfstandige,
-            deler=deler,
             soort=Installatiesoort.meerpersoonswastafel,
             max_count=max_meerpersoonswastafels,
             maximum=Decimal("1.5"),
