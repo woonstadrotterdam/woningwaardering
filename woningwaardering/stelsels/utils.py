@@ -4,7 +4,7 @@ from datetime import date
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from functools import wraps
 from importlib.resources import files
-from typing import Any, Callable, Counter, Iterator, List, Tuple
+from typing import Any, Callable, Counter, List, Tuple
 
 import pandas as pd
 import requests
@@ -423,10 +423,6 @@ def _divisor_uit_criterium_id(criterium_id: str | None) -> Decimal:
             except InvalidOperation:
                 return Decimal("1")
     return Decimal("1")
-
-
-def _gedeeld_met_divisor(criterium_id: str | None) -> Decimal:
-    return _divisor_uit_criterium_id(criterium_id)
 
 
 def _gedeeld_met_divisor_keten(
@@ -1301,48 +1297,6 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
 
             criterium_naam = f"{ruimte.naam} (+{aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'})"
     return criterium_naam
-
-
-def deel_punten_door_aantal_onzelfstandige_woonruimten(
-    ruimte: EenhedenRuimte,
-    woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering]
-    | Iterator[WoningwaarderingResultatenWoningwaardering],
-    update_criterium_naam: bool = True,
-) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-    """
-    Deelt punten door het aantal onzelfstandige woonruimten.
-
-    Deze functie verdeelt de punten voor woningwaarderingen over het aantal onzelfstandige woonruimten dat een ruimte deelt.
-
-    Args:
-        ruimte (EenhedenRuimte): De ruimte waarvoor de punten verdeeld moeten worden.
-        woningwaarderingen (list[WoningwaarderingResultatenWoningwaardering] | Iterator[WoningwaarderingResultatenWoningwaardering]):
-            Een lijst of iterator van woningwaarderingen waarvan de punten verdeeld moeten worden.
-        update_criterium_naam (bool, optional): Een boolean die aangeeft of de naam van het criterium moet worden aangepast. Default is True.
-
-    Yields:
-        WoningwaarderingResultatenWoningwaardering: Woningwaarderingen met verdeelde punten.
-    """
-    gedeelde_ruimte = gedeeld_met_onzelfstandige_woonruimten(ruimte)
-    for woningwaardering in woningwaarderingen:
-        if (
-            gedeelde_ruimte
-            and woningwaardering.criterium
-            and woningwaardering.punten
-            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten  # nodig voor mypy
-        ):
-            woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam}"
-            if update_criterium_naam:
-                woningwaardering.criterium.naam += f" (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
-
-            woningwaardering.punten = float(
-                rond_af(
-                    rond_af(woningwaardering.punten, decimalen=2)
-                    / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                    decimalen=2,
-                )
-            )
-        yield woningwaardering
 
 
 def gedeeld_met_eenheden(ruimte: EenhedenRuimte) -> bool:
