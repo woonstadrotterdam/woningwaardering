@@ -142,6 +142,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
         )
 
+        # Toon de WOZ-waarde of minimumwaarde in de resultaten
         if gebruikt_minimum_waarde:
             naam_woz_waarde = (
                 "Minimum WOZ-waarde (geen relevante WOZ-waarde beschikbaar)"
@@ -161,6 +162,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             id="onderdeel_I", naam="Onderdeel I"
         )
 
+        # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
         if gebruikt_minimum_waarde:
             onderdeel_i.maak_onderliggende(
                 id="minimum_woz_waarde",
@@ -188,6 +190,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             id="onderdeel_II", naam="Onderdeel II"
         )
 
+        # Bepaal de juiste factor voor onderdeel II (kan speciale COROP factor zijn)
         factor_onderdeel_II = self._bepaal_factor_onderdeel_II(
             eenheid, factoren, woningwaardering_resultaat
         )
@@ -201,6 +204,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
         )
 
+        # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
         if gebruikt_minimum_waarde:
             onderdeel_ii.maak_onderliggende(
                 id="minimum_woz_waarde",
@@ -274,6 +278,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return
 
+        # Bereken de overige punten door de punten van alle groepen op te tellen, afgerond op 0 decimalen
         overige_punten = utils.rond_af(
             sum(
                 Decimal(str(groep.punten)) or Decimal("0")
@@ -295,6 +300,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid ({eenheid.id}): Waardering zonder cap: {totaal_punten_zonder_cap} punten. Na toepassing van cap: {totaal_punten_met_cap} punten."
             )
 
+            # Wanneer een woning zonder die beperking een waardering heeft van meer dan
+            # 186 punten en door deze beperking een waardering krijgt die lager is dan
+            # 187 punten, geldt een waardering van 186 punten voor de woning.
             if totaal_punten_zonder_cap > 186 and totaal_punten_met_cap < 187:
                 logger.info(
                     f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor {self.stelselgroep.naam}"

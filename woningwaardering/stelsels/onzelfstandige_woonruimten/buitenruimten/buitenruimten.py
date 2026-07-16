@@ -70,13 +70,16 @@ class Buitenruimten(Stelselgroep):
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
 
+        # twee 2 punten voor de aanwezigheid van privé buitenruimten
         self._prive_buitenruimten_aanwezig(waarderingsgroep_bouwer, eenheid)
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
+        # maximaal 15 punten
         if self._maximering(waarderingsgroep_bouwer, eenheid, woningwaardering_groep):
             woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
+        # rond af op kwarten
         woningwaardering_groep.punten = float(
             utils.rond_af_op_kwart(woningwaardering_groep.punten)
         )
@@ -92,6 +95,16 @@ class Buitenruimten(Stelselgroep):
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
     ) -> WaarderingBouwer | None:
+        """Berekent de maximering voor Buitenruimten. Maximaal 15 punten toegestaan.
+
+        Args:
+            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer waaraan de maximering wordt toegevoegd.
+            eenheid (EenhedenEenheid): Eenheid waarvoor de maximering berekend wordt.
+            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): Woningwaardering groep van buitenruimten.
+
+        Returns:
+            WaarderingBouwer | None: Maximering als er een maximering is.
+        """
         punten = Decimal(str(woningwaardering_groep.punten or "0"))
         max_punten = Decimal("15")
         if punten > max_punten:
@@ -110,6 +123,20 @@ class Buitenruimten(Stelselgroep):
         self,
         ruimte: EenhedenRuimte,
     ) -> Generator[WoningwaarderingResultatenWoningwaardering, None, None]:
+        """Berekent de punten voor een ruimte voor rubriek Buitenruimten.
+
+        0.75 punten per m2 voor gedeelde buitenruimten.
+        0.35 punten per m2 voor privé buitenruimten.
+
+        Ruimte moet minimaal een afmeting hebben van 2 m x 1,5 m x 1,5 m (hoogte, lengte, breedte).
+        Parkeerplaatsen worden niet meegewaardeerd als ze gedeeld zijn met andere eenheden.
+
+        Args:
+            ruimte (EenhedenRuimte): Ruimte waarvoor de punten berekend worden.
+
+        Yields:
+            WoningwaarderingResultatenWoningwaardering: Punten voor de buitenruimte.
+        """
         if classificeer_ruimte(ruimte) != Ruimtesoort.buitenruimte:
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {self.stelselgroep.naam}."
@@ -124,6 +151,7 @@ class Buitenruimten(Stelselgroep):
             return
 
         if gedeeld_met_eenheden(ruimte):
+            # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
             if not (ruimte.lengte and ruimte.breedte):
                 warnings.warn(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
@@ -139,8 +167,10 @@ class Buitenruimten(Stelselgroep):
                 )
                 return
 
+        # Parkeerplaatsen worden alleen gewaardeerd als ze niet gedeeld zijn met andere eenheden
         if (
-            ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
+            ruimte.detail_soort
+            == Ruimtedetailsoort.parkeerplaats  # parkeerplaats heeft als ruimtesoort buitenruimte
             and gedeeld_met_eenheden(ruimte)
         ):
             logger.debug(
@@ -154,6 +184,8 @@ class Buitenruimten(Stelselgroep):
 
         waardering = WoningwaarderingResultatenWoningwaardering()
         waardering.aantal = float(utils.rond_af(ruimte.oppervlakte, decimalen=2))
+        # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,75 punt.
+        # De in ieder geval 2 punten worden verderop toegevoegd.
         if gedeeld_met_onzelfstandige_woonruimten(ruimte):
             waardering.punten = float(
                 Decimal(str(ruimte.oppervlakte))
@@ -176,6 +208,16 @@ class Buitenruimten(Stelselgroep):
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
         eenheid: EenhedenEenheid,
     ) -> WaarderingBouwer | None:
+        """Kent 2 punten toe bij de aanwezigheid van privé buitenruimten.
+
+        Args:
+            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer waaraan de waardering wordt toegevoegd.
+            eenheid (EenhedenEenheid): Eenheid waarvoor de punten berekend worden.
+
+        Returns:
+            WaarderingBouwer | None: Woningwaardering met 2 punten als er privé buitenruimten aanwezig zijn.
+        """
+        # 2 punten bij de aanwezigheid van privé buitenruimten
         if next(waarderingsgroep_bouwer.alle_waarderingen(), None) is not None and any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
             and not gedeeld_met_eenheden(ruimte)
@@ -194,8 +236,8 @@ class Buitenruimten(Stelselgroep):
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
         instance=Buitenruimten(peildatum=date(2026, 1, 1)),
-        strict=False,
-        log_level="DEBUG",
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
         context.waardeer(
             "tests/data/onzelfstandige_woonruimten/stelselgroepen/buitenruimten/input/oprit.json"

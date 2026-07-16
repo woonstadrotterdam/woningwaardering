@@ -67,10 +67,12 @@ class OppervlakteVanVertrekken(Stelselgroep):
             for waardering in waarderingen:
                 if waardering.aantal is None:
                     continue
+                # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
                 gedeeld_met_counter[deler] += utils.rond_af(
                     waardering.aantal, decimalen=2
                 )
 
+        # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         oppervlakte_totaal_na_delen = Decimal("0")
         for aantal_onz, oppervlakte in gedeeld_met_counter.items():
             oppervlakte_na_delen = utils.rond_af(oppervlakte, decimalen=2) / Decimal(

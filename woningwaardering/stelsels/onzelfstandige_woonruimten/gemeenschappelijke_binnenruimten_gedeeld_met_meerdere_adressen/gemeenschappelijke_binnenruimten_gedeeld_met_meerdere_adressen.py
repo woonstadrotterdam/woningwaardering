@@ -76,11 +76,15 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 and ruimte.gedeeld_met_aantal_eenheden > 1
             ]
 
+            # waarderingen voor de oppervlakten van gedeelde ruimten
             self._oppervlakte_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
+            # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
             self._verkoeling_en_verwarming_waarderingen(
                 waarderingsgroep_bouwer, gedeelde_ruimten
             )
+            # waarderingen voor de keuken van gedeelde ruimten
             self._keuken_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
+            # waarderingen voor sanitair van gedeelde ruimten
             self._sanitair_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
@@ -229,6 +233,13 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     )
 
             if sleutel.ruimtesoort == Ruimtesoort.overige_ruimten:
+                # 2.2.2.3 Zolderruimte zonder vaste trap
+                # Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden
+                # aangemerkt en er is geen vaste trap naar de zolder, dan worden er 5 punten
+                # afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend. Maar:
+                # er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten
+                # dat de zolderruimte zelf waard is. Met andere woorden: de waarde van de
+                # zolder kan door deze aftrek niet negatief worden.
                 for ruimte in groep_ruimten:
                     if not is_zolder_zonder_vaste_trap(ruimte):
                         continue

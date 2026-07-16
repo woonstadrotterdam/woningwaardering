@@ -93,11 +93,15 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 if utils.gedeeld_met_eenheden(ruimte)
             ]
 
+            # waarderingen voor de oppervlakten van gedeelde ruimten
             self._oppervlakte_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
+            # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
             self._verkoeling_en_verwarming_waarderingen(
                 waarderingsgroep_bouwer, gedeelde_ruimten
             )
+            # waarderingen voor de keuken van gedeelde ruimten
             self._keuken_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
+            # waarderingen voor sanitair van gedeelde ruimten
             self._sanitair_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
@@ -145,6 +149,11 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 Ruimtedetailsoort.berging,
                 Ruimtedetailsoort.bergruimte,
             ]:
+                # Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
+                #
+                # […]
+                # * de oppervlakte, na deling door het aantal adressen, per woning minstens
+                #   2m2 bedraagt.
                 if ruimte.oppervlakte and ruimte.gedeeld_met_aantal_eenheden:
                     gedeelde_oppervlakte = (
                         ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden

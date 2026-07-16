@@ -61,6 +61,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             groep.punten = None
             return groep
 
+        # 2.11.1 Waarderingsmethode WOZ-waarde
+        # De WOZ-waarde de woning kan voor de woningwaardering op twee manieren worden vastgesteld. Deze manieren zijn als volgt:
+        # 1. Op basis van de laatst vastgestelde WOZ-waarde: dit is de standaardregel; of
+        # 2. Op basis van 85% van de taxatiewaarde van de woonruimte: wanneer er geen relevante WOZ-waarde voor de woonruimte bekend is.
+        # Wanneer er geen enkele WOZ-waarde of taxatiewaarde bekend is voor het adres van de woning, dan wordt het laagste puntenaantal voor de WOZ-waarde toegepast (10 punten).
+
         woz_eenheid = self._meest_recente_woz_eenheid(eenheid)
 
         if (
@@ -194,17 +200,27 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid {eenheid.id}: verschil percentage WOZ-waarde per m² en gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}: {verschil_percentage}%"
             )
 
+            # De puntentoekenning is als volgt.
             if verschil_percentage > 10:
+                # 14 punten wanneer de WOZ-waarde per m² gebruiksoppervlakte meer dan 10% hoger
+                # is dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte van de woningen
+                # in het COROP-gebied waarbinnen de woning is gelegen.
                 punten = 14.0
                 logger.info(
                     f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is meer dan 10% hoger dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
                 )
             elif verschil_percentage >= -10:
+                # 12 punten wanneer de WOZ-waarde per m² gebruiksoppervlakte maximaal 10% hoger
+                # of lager is dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte van de
+                # woningen in het COROP-gebied waarbinnen de woning is gelegen.
                 punten = 12.0
                 logger.info(
                     f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is maximaal 10% hoger of lager dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
                 )
             else:
+                # 10 punten wanneer de WOZ-waarde per m² gebruiksoppervlakte meer dan 10% lager
+                # is dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte van de woningen
+                # in het COROP-gebied waarbinnen de woning is gelegen.
                 punten = 10.0
                 logger.info(
                     f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is meer dan 10% lager dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"

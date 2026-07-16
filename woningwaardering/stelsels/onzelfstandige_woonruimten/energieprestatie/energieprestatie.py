@@ -133,6 +133,7 @@ class Energieprestatie(Stelselgroep):
                 id="onbekend", naam=""
             )
 
+        # Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
         monument_correctie(
             eenheid, woningwaardering, waarderingsgroep_bouwer=waarderingsgroep_bouwer
         )

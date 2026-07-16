@@ -55,13 +55,15 @@ class Buitenruimten(Stelselgroep):
 
         totaal_criteria: dict[WaarderingBouwer, int] = {}
 
+        # punten per buitenruimte
         for ruimte in eenheid.ruimten or []:
-            # De waarderingen worden via de waarderingsgroep_bouwer aangehecht; consumeer de generator.
             for _ in self._punten_voor_buitenruimte(
                 waarderingsgroep_bouwer, ruimte, totaal_criteria
             ):
                 pass
 
+        # minimaal 2 punten bij aanwezigheid van privé buitenruimten
+        # 5 aftrekpunten bij geen buitenruimten
         self._prive_buitenruimten_aanwezig(waarderingsgroep_bouwer, eenheid)
 
         som_aantal: dict[WaarderingBouwer, Decimal] = defaultdict(lambda: Decimal("0"))
@@ -79,9 +81,11 @@ class Buitenruimten(Stelselgroep):
             gedeeld_met.aantal = float(m2_afgerond)
             gedeeld_met.meeteenheid = Meeteenheid.vierkante_meter_m2
 
+        # maximaal 15 punten
         self._maximering(waarderingsgroep_bouwer, eenheid)
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        # rond af op kwarten
         woningwaardering_groep.punten = float(
             utils.rond_af_op_kwart(woningwaardering_groep.punten)
         )
@@ -107,7 +111,7 @@ class Buitenruimten(Stelselgroep):
             )
         )
         max_punten = Decimal("15")
-        if punten > max_punten and waarderingen:
+        if punten > max_punten and waarderingen:  # maximaal 15 punten
             aftrek = max_punten - punten
 
             logger.info(
@@ -141,7 +145,8 @@ class Buitenruimten(Stelselgroep):
         if (
             ruimte.gedeeld_met_aantal_eenheden
             and ruimte.gedeeld_met_aantal_eenheden >= 2
-        ):
+        ):  # gedeelde buitenruimte
+            # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
             if not (ruimte.lengte and ruimte.breedte):
                 warnings.warn(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
@@ -156,6 +161,7 @@ class Buitenruimten(Stelselgroep):
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
                 )
                 return
+            # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
             if ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats:
                 logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde parkeerplaats en telt niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
@@ -222,7 +228,7 @@ class Buitenruimten(Stelselgroep):
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
         instance=Buitenruimten(peildatum=date(2026, 1, 1)),
-        strict=False,
-        log_level="DEBUG",
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
         context.waardeer("tests/data/generiek/input/37101000032.json")

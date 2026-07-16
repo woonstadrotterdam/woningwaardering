@@ -106,6 +106,11 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         )
         return
 
+    # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst
+    # exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2 (bijvoorbeeld een
+    # garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief
+    # behorende tot de woning). Zie ook de implementatietoelichting voor privé-parkeerplekken
+    # die met onzelfstandige woonruimten gedeeld worden.
     aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden
     aantal_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
     gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(

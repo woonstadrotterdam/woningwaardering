@@ -536,7 +536,8 @@ def _bepaal_wastafel_max_tellers(
         tuple[EenhedenRuimte, WaarderingBouwer, list[WaarderingBouwer]]
     ],
 ) -> tuple[MaxCount, MaxCount]:
-    # * tot een maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer.
+    # Bepaal per (meerpersoons)wastafelsoort de ruimte met het hoogste aantal,
+    # m.u.v. badkamer/doucheruimte.
     max_wastafels = MaxCount(0, None)
     max_meerpersoonswastafels = MaxCount(0, None)
 

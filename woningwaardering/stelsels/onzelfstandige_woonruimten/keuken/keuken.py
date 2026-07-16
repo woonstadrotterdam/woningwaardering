@@ -49,6 +49,7 @@ class Keuken(Stelselgroep):
         ]
 
         for ruimte in ruimten or []:
+            # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             if (
                 utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
                 and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
