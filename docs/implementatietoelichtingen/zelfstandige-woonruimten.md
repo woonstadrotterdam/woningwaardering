@@ -600,7 +600,8 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 #### 2.4.3 Energieprestaties die _niet_ geldig zijn voor de woningwaardering
 
 1. Energieprestatie opgenomen ná de peildatum  
-    Voor de woningwaardering dient een geldige energieprestatie op tijd te zijn vastgesteld. Voor de Huurcommissie betekent dit dat een geldige energieprestatie moet zijn opgenomen vóór de peildatum van de procedure, bijvoorbeeld de ingangsdatum van de huurovereenkomst bij de procedure 'toetsing van de aanvangshuurprijs'.
+    Voor de woningwaardering dient een geldige energieprestatie op tijd te zijn vastgesteld. Voor de Huurcommissie betekent dit dat een geldige energieprestatie moet zijn opgenomen vóór de peildatum van de procedure, bijvoorbeeld de ingangsdatum van de huurovereenkomst bij de procedure 'toetsing van de aanvangshuurprijs'.  
+    Bij wijze van uitzondering kan de Huurcommissie in 254-zaken besluiten dat een na de peildatum geregistreerd label wél geldig is voor de woningwaardering indien het label is geregistreerd voordat de Huurcommissie uitspraak doet en voldoende komt vast te staan dat het label overeenkomt met de feitelijke toestand op de peildatum. De bewijslast ter zake ligt in beginsel bij verhuurder.
 2. Energie-index zonder de toevoeging: geldig voor WWS  
     Bij de energie-index is de indeling in letters vervangen door een cijfer. Deze wordt alleen in de puntentelling meegenomen als in EP-online staat aangegeven dat de energie-index geldig is voor de toepassing van het woningwaarderingsstelsel ('geldig voor WWS'). Staat er enkel een energie-index zonder die toevoeging, dan wordt hier geen waardering voor toegekend.
 3. Vervallen energielabel of energie-index  
