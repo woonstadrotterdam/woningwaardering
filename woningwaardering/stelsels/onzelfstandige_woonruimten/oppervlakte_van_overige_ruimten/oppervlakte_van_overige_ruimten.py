@@ -110,6 +110,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     )
                 )
 
+            # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
             for waardering in waarderingen:
                 if waardering.punten and utils.gedeeld_met_onzelfstandige_woonruimten(
                     ruimte
