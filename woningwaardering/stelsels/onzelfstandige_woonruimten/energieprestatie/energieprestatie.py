@@ -99,6 +99,7 @@ class Energieprestatie(Stelselgroep):
             self.peildatum, eenheid
         )
 
+        woningwaardering: WaarderingBouwer | None
         if energieprestatievergoeding:
             logger.info(f"Eenheid ({eenheid.id}): energieprestatievergoeding gevonden.")
             woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
@@ -134,9 +135,12 @@ class Energieprestatie(Stelselgroep):
             )
 
         # Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
-        monument_correctie(
-            eenheid, woningwaardering, waarderingsgroep_bouwer=waarderingsgroep_bouwer
-        )
+        if woningwaardering is not None:
+            monument_correctie(
+                eenheid,
+                woningwaardering,
+                waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+            )
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
         woningwaardering_groep.punten = float(
@@ -155,14 +159,20 @@ class Energieprestatie(Stelselgroep):
         eenheid: EenhedenEenheid,
         oppervlakte: float,
         energieprestatie: EenhedenEnergieprestatie,
-    ) -> WaarderingBouwer:
+    ) -> WaarderingBouwer | None:
         if (
             not energieprestatie.soort
             or not energieprestatie.label
             or not energieprestatie.label.code
             or not energieprestatie.begindatum
         ):
-            return waarderingsgroep_bouwer.maak_onderliggende(id="label", naam="")
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): energieprestatie mist vereiste gegevens "
+                f"(soort, label, label.code of begindatum) en kan daarom niet "
+                f"worden gewaardeerd onder stelselgroep {self.stelselgroep.naam}.",
+                UserWarning,
+            )
+            return None
 
         label = getattr(
             Energielabel, energieprestatie.label.code.lower(), energieprestatie.label

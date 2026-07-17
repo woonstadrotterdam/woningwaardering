@@ -77,7 +77,7 @@ class Energieprestatie(Stelselgroep):
         energieprestatie: EenhedenEnergieprestatie,
         pandsoort: PandsoortReferentiedata,
         waarderingsgroep_bouwer: WaarderingsgroepBouwer,
-    ) -> WaarderingBouwer:
+    ) -> WaarderingBouwer | None:
         """
         Berekent de punten voor Energieprestatie op basis van het energielabel.
 
@@ -88,27 +88,30 @@ class Energieprestatie(Stelselgroep):
             waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
 
         Returns:
-            WaarderingBouwer: De waardering met aangepaste criteriumnaam en punten.
+            WaarderingBouwer | None: De waardering met aangepaste criteriumnaam en punten,
+            of None als vereiste energieprestatiegegevens ontbreken.
 
         Raises:
             ValueError: Als de lookup-tabel geen unieke match oplevert voor label of energie-index.
         """
-        woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
-            id="label", naam=""
-        )
-
         if (
             not energieprestatie.soort
             or not energieprestatie.label
             or not energieprestatie.label.code
             or not energieprestatie.begindatum
         ):
-            return woningwaardering
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): energieprestatie mist vereiste gegevens "
+                f"(soort, label, label.code of begindatum) en kan daarom niet "
+                f"worden gewaardeerd onder stelselgroep {self.stelselgroep.naam}.",
+                UserWarning,
+            )
+            return None
 
         label = getattr(
             Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
         ).naam
-        woningwaardering.naam = f"{label}"
+        criterium_naam = f"{label}"
 
         lookup_key = "label_ei"
 
@@ -141,15 +144,12 @@ class Energieprestatie(Stelselgroep):
 
                 # wanneer de energie-index afwijkt van het label, geef voorkeur aan energie-index want de index is in deze tijd afgegeven
                 if label != waarderings_label_index:
-                    woningwaardering.naam = (
-                        f"{woningwaardering.naam or ''} -> "
-                        f"{waarderings_label_index} (Energie-index)"
+                    criterium_naam = (
+                        f"{criterium_naam} -> {waarderings_label_index} (Energie-index)"
                     )
                     waarderings_label = waarderings_label_index
                 else:
-                    woningwaardering.naam = (
-                        f"{woningwaardering.naam or ''} (Energie-index)"
-                    )
+                    criterium_naam = f"{criterium_naam} (Energie-index)"
 
         filtered_df = df[(df["Label"] == waarderings_label)]
         if len(filtered_df) != 1:
@@ -157,9 +157,11 @@ class Energieprestatie(Stelselgroep):
                 f"Eenheid ({eenheid.id}): lookup-table gefaald voor label {waarderings_label} voor {self.stelselgroep.naam}."
             )
 
-        woningwaardering.punten = float(filtered_df[pandsoort.naam].values[0])
-
-        return woningwaardering
+        return waarderingsgroep_bouwer.maak_onderliggende(
+            id="label",
+            naam=criterium_naam,
+            punten=float(filtered_df[pandsoort.naam].values[0]),
+        )
 
     def _bereken_punten_met_bouwjaar(
         self,
@@ -266,6 +268,7 @@ class Energieprestatie(Stelselgroep):
             self.peildatum, eenheid
         )
 
+        woningwaardering: WaarderingBouwer | None
         if energieprestatievergoeding:
             logger.info(f"Eenheid ({eenheid.id}): energieprestatievergoeding gevonden.")
             woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
@@ -296,9 +299,12 @@ class Energieprestatie(Stelselgroep):
             )
 
         # Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
-        monument_correctie(
-            eenheid, woningwaardering, waarderingsgroep_bouwer=waarderingsgroep_bouwer
-        )
+        if woningwaardering is not None:
+            monument_correctie(
+                eenheid,
+                woningwaardering,
+                waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+            )
 
         woningwaardering_groep = waarderingsgroep_bouwer.bouw()
 
