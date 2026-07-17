@@ -62,8 +62,8 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
         instance=GemeenschappelijkeParkeerruimten(peildatum=date(2026, 1, 1)),
-        strict=False,
-        log_level="DEBUG",
+        strict=False,  # False is log warnings, True is raise warnings
+        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
         context.waardeer(
             "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_parkeerruimten/input/voorbeeld_beleidsboek.json"
