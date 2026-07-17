@@ -193,7 +193,11 @@ class Energieprestatie(Stelselgroep):
         label = getattr(
             Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
         ).naam
-        criterium_naam = f"{label}"
+        woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+            id="label",
+            naam=label,
+            meeteenheid=Meeteenheid.vierkante_meter_m2,
+        )
         df = Energieprestatie.lookup_mapping["label_ei"]
 
         waarderings_label = label
@@ -219,10 +223,12 @@ class Energieprestatie(Stelselgroep):
 
                 # wanneer de energie-index afwijkt van het label, geef voorkeur aan energie-index want de index is in deze tijd afgegeven
                 if label != waarderings_label_index:
-                    criterium_naam += f" -> {waarderings_label_index} (Energie-index)"
+                    woningwaardering.naam += (
+                        f" -> {waarderings_label_index} (Energie-index)"
+                    )
                     waarderings_label = waarderings_label_index
                 else:
-                    criterium_naam += " (Energie-index)"
+                    woningwaardering.naam += " (Energie-index)"
 
         filtered_df = df[(df["Label"] == waarderings_label)]
         if len(filtered_df) != 1:
@@ -232,11 +238,6 @@ class Energieprestatie(Stelselgroep):
 
         punten_per_m2 = filtered_df["PuntenPerM2"].values[0]
 
-        woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
-            id="label",
-            naam=criterium_naam,
-            meeteenheid=Meeteenheid.vierkante_meter_m2,
-        )
         woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=2))
         woningwaardering.punten = float(
             utils.rond_af(

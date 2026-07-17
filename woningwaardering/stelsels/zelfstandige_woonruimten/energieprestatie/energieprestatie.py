@@ -111,7 +111,9 @@ class Energieprestatie(Stelselgroep):
         label = getattr(
             Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
         ).naam
-        criterium_naam = f"{label}"
+        woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+            id="label", naam=label
+        )
 
         lookup_key = "label_ei"
 
@@ -144,12 +146,12 @@ class Energieprestatie(Stelselgroep):
 
                 # wanneer de energie-index afwijkt van het label, geef voorkeur aan energie-index want de index is in deze tijd afgegeven
                 if label != waarderings_label_index:
-                    criterium_naam = (
-                        f"{criterium_naam} -> {waarderings_label_index} (Energie-index)"
+                    woningwaardering.naam += (
+                        f" -> {waarderings_label_index} (Energie-index)"
                     )
                     waarderings_label = waarderings_label_index
                 else:
-                    criterium_naam = f"{criterium_naam} (Energie-index)"
+                    woningwaardering.naam += " (Energie-index)"
 
         filtered_df = df[(df["Label"] == waarderings_label)]
         if len(filtered_df) != 1:
@@ -157,11 +159,8 @@ class Energieprestatie(Stelselgroep):
                 f"Eenheid ({eenheid.id}): lookup-table gefaald voor label {waarderings_label} voor {self.stelselgroep.naam}."
             )
 
-        return waarderingsgroep_bouwer.maak_onderliggende(
-            id="label",
-            naam=criterium_naam,
-            punten=float(filtered_df[pandsoort.naam].values[0]),
-        )
+        woningwaardering.punten = float(filtered_df[pandsoort.naam].values[0])
+        return woningwaardering
 
     def _bereken_punten_met_bouwjaar(
         self,
