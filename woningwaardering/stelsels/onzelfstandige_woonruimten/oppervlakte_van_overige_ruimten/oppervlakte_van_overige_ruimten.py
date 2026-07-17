@@ -55,7 +55,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             list
         )
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
-        gedeeld_met_lagen: dict[int, WaarderingBouwer] = {}
 
         # Bereken vooraf het totale (op 2 decimalen afgeronde) oppervlak van de overige
         # ruimten per gedeeld_met_aantal (sleutel 1 = privé). De zoldercorrectie
@@ -83,11 +82,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
 
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            if deler not in gedeeld_met_lagen:
-                gedeeld_met_lagen[deler] = waarderingsgroep_bouwer.gedeeld_met(
-                    aantal_onzelfstandige_woonruimten=deler,
-                )
-            gedeeld_met = gedeeld_met_lagen[deler]
+            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_onzelfstandige_woonruimten=deler,
+            )
 
             waarderingen = waardeer_oppervlakte_van_overige_ruimte(
                 ruimte, waarderingsgroep_bouwer=gedeeld_met
@@ -131,7 +128,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
         # bereken de som van de woningwaarderingen per aantal gedeelde onzelfstandige woonruimten
         for deler, waarderingen in per_deler_waarderingen.items():
-            gedeeld_met = gedeeld_met_lagen[deler]
+            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
+                aantal_onzelfstandige_woonruimten=deler,
+            )
             heeft_correctie = any(w.punten is not None for w in waarderingen)
             if heeft_correctie:
                 structureer_subtotaal_bij_correcties(

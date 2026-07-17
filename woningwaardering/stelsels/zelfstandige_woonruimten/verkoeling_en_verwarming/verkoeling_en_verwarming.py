@@ -50,20 +50,13 @@ class VerkoelingEnVerwarming(Stelselgroep):
             if not utils.gedeeld_met_eenheden(ruimte)
         ]
 
-        subgroepen: dict[str, WaarderingBouwer] = {}
-
         def subgroep(
             _ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBouwer:
-            bestaand = subgroepen.get(subgroep_id)
-            if bestaand is not None:
-                return bestaand
-            nieuw = waarderingsgroep_bouwer.maak_onderliggende(
+            return waarderingsgroep_bouwer.categorie(
                 id=subgroep_id,
                 naam=subgroep_naam,
             )
-            subgroepen[subgroep_id] = nieuw
-            return nieuw
 
         for _ in waardeer_verkoeling_en_verwarming(ruimten, subgroep=subgroep):
             pass
