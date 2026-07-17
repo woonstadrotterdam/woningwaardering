@@ -160,6 +160,22 @@ class Energieprestatie(Stelselgroep):
         oppervlakte: float,
         energieprestatie: EenhedenEnergieprestatie,
     ) -> WaarderingBouwer | None:
+        """
+        Berekent de punten voor Energieprestatie op basis van het energielabel.
+
+        Args:
+            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
+            eenheid (EenhedenEenheid): Eenheid
+            oppervlakte (float): Oppervlakte
+            energieprestatie (EenhedenEnergieprestatie): Energieprestatie van de eenheid
+
+        Returns:
+            WaarderingBouwer | None: De waardering met aangepaste criteriumnaam en punten,
+            of None als vereiste energieprestatiegegevens ontbreken.
+
+        Raises:
+            ValueError: Als de lookup-tabel geen unieke match oplevert voor label of energie-index.
+        """
         if (
             not energieprestatie.soort
             or not energieprestatie.label
