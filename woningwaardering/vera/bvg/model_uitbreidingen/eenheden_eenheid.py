@@ -2,7 +2,7 @@ import warnings
 from datetime import date
 from functools import reduce
 from operator import getitem
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import (
     BaseModel,
@@ -16,7 +16,7 @@ from pydantic import (
 
 class _EenhedenEenheid(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
-    datum_afsluiten_huurovereenkomst: Optional[date] = Field(
+    datum_afsluiten_huurovereenkomst: date | None = Field(
         default=None, alias="datumAfsluitenHuurovereenkomst"
     )
     """
