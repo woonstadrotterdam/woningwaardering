@@ -1019,7 +1019,10 @@ def waarschuw_dubbele_ids(instance: BaseModel) -> None:
     """
     Waarschuw bij dubbele, niet-lege id's binnen dezelfde lijst in dit Pydantic object.
     """
-    for veld in type(instance).model_fields:
+    for veld, veld_info in type(instance).model_fields.items():
+        # Deprecated velden overslaan: getattr triggert anders een DeprecationWarning.
+        if veld_info.deprecated:
+            continue
         waarde = getattr(instance, veld, None)
         if isinstance(waarde, BaseModel):
             waarschuw_dubbele_ids(waarde)
