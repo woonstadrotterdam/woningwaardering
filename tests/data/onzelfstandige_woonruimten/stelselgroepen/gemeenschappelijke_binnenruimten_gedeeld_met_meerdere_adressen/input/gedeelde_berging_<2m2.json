@@ -13,7 +13,7 @@
       },
       "naam": "Berging",
       "oppervlakte": 19.0,
-      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeldMetAantalAdressen": 10,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "verwarmd": true
     }

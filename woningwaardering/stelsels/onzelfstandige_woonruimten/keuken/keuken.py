@@ -45,7 +45,7 @@ class Keuken(Stelselgroep):
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if not utils.gedeeld_met_eenheden(ruimte)
+            if not utils.gedeeld_met_adressen(ruimte)
         ]
 
         for ruimte in ruimten or []:

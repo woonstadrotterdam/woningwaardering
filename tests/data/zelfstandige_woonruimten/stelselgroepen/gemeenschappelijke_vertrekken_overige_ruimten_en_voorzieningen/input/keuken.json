@@ -16,7 +16,7 @@
       "oppervlakte": 10.0,
       "verwarmd": true,
       "afsluitbaar": true,
-      "gedeeld_met_aantal_eenheden": 5,
+      "gedeeldMetAantalAdressen": 5,
       "bouwkundigeElementen": [
         {
           "id": "aanrecht",

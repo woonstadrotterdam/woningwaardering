@@ -1015,12 +1015,12 @@ def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:
             ruimte.naam = f"{ruimte.naam} {nummering_counter[ruimte.naam]}"
 
 
-def waarschuw_dubbele_ids(model: BaseModel) -> None:
+def waarschuw_dubbele_ids(instance: BaseModel) -> None:
     """
-    Waarschuw bij dubbele, niet-lege id's binnen dezelfde collectie.
+    Waarschuw bij dubbele, niet-lege id's binnen dezelfde lijst in dit Pydantic object.
     """
-    for veld in type(model).model_fields:
-        waarde = getattr(model, veld, None)
+    for veld in type(instance).model_fields:
+        waarde = getattr(instance, veld, None)
         if isinstance(waarde, BaseModel):
             waarschuw_dubbele_ids(waarde)
         elif isinstance(waarde, list):
@@ -1034,7 +1034,7 @@ def waarschuw_dubbele_ids(model: BaseModel) -> None:
                 if aantal > 1:
                     warnings.warn(
                         f"Id '{id_waarde}' komt {aantal} keer voor in "
-                        f"'{type(model).__name__}.{veld}'.",
+                        f"'{type(instance).__name__}.{veld}'.",
                         UserWarning,
                     )
             for item in items:
@@ -1113,12 +1113,12 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             in [
                 Ruimtedetailsoort.carport,
             ]
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
         or (
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.buitenruimte
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
     ):
         return Ruimtesoort.buitenruimte
@@ -1155,9 +1155,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             ruimte.detail_soort == Ruimtedetailsoort.berging
             and ruimte.soort == Ruimtesoort.overige_ruimten
         ):
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             if (
-                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_eenheden))
+                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_adressen))
             ) >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
             else:
@@ -1180,13 +1180,13 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
 
     if (
         ruimte.detail_soort in [Ruimtedetailsoort.garage]
-        and not gedeeld_met_eenheden(
+        and not gedeeld_met_adressen(
             ruimte
         )  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
         or (
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.overige_ruimten
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
     ):
         if ruimte.oppervlakte >= 2.0:
@@ -1299,11 +1299,11 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     return criterium_naam
 
 
-def gedeeld_met_eenheden(ruimte: EenhedenRuimte) -> bool:
-    """Geeft True terug als de ruimte gedeeld is met andere eenheden"""
+def gedeeld_met_adressen(ruimte: EenhedenRuimte) -> bool:
+    """Geeft True terug als de ruimte gedeeld is met andere adressen"""
     return (
-        ruimte.gedeeld_met_aantal_eenheden is not None
-        and ruimte.gedeeld_met_aantal_eenheden >= 2
+        ruimte.gedeeld_met_aantal_adressen is not None
+        and ruimte.gedeeld_met_aantal_adressen >= 2
     )
 
 

@@ -1167,14 +1167,14 @@ Gemeenschappelijke vertrekken en overige ruimtes die tot het woongebouw behorend
 Punten voor voorzieningen, zoals verkoeling en verwarming, keuken en sanitair, die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd volgens het woningwaarderingsstelsel. Het puntenaantal moet vervolgens per rubriek worden gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft tot de ruimte.
 
 > [!NOTE]
-> Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_eenheden`, waarbij de eenheid zelf meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
+> Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_adressen`, waarbij het adres zelf meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
 
 #### 2.9.3 Gemeenschappelijke (spoel)keuken
 
 ~~Als het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan~~ worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
 > [!NOTE]
-> Indien dit zo is, geef bijvoorbeeld een `keuken` mee met `gedeeld_met_aantal_eenheden`.
+> Indien dit zo is, geef bijvoorbeeld een `keuken` mee met `gedeeld_met_aantal_adressen`.
 
 #### 2.9.4 Gemeenschappelijke ruimten en voorzieningen in een zorgwoning
 
@@ -1270,7 +1270,7 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 Het puntenaantal moet worden berekend door het puntenaantal per gemeenschappelijke parkeerplek te delen door aantal adressen dat toegang en gebruiksrecht heeft.
 
 > [!NOTE]
-> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingsstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van elk parkeerplektype de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte meegeteld voor de berekening van de punten, waarbij het aantal wordt bepaald door `Eenhedenruimte.aantal`. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden.
+> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingsstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van elk parkeerplektype de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte meegeteld voor de berekening van de punten, waarbij het aantal wordt bepaald door `Eenhedenruimte.aantal`. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_adressen` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden.
 
 #### 2.10.5 Laadpalen
 

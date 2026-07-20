@@ -94,9 +94,9 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte")
         return
 
-    if ruimte.gedeeld_met_aantal_eenheden is None:
+    if ruimte.gedeeld_met_aantal_adressen is None:
         warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_eenheden'. Zet 'gedeeld_met_aantal_eenheden' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_eenheden' op 0 of 1 wordt beschouwd als niet gedeeld."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_adressen'. Zet 'gedeeld_met_aantal_adressen' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_adressen' op 0 of 1 wordt beschouwd als niet gedeeld."
         )
         return
 
@@ -111,17 +111,19 @@ def waardeer_gemeenschappelijke_parkeerruimte(
     # garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief
     # behorende tot de woning). Zie ook de implementatietoelichting voor privé-parkeerplekken
     # die met onzelfstandige woonruimten gedeeld worden.
-    aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden
-    aantal_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+    aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
+    aantal_onzelfstandige_woonruimten = (
+        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+    )
     gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
-        aantal_adressen=aantal_eenheden,
-        aantal_onzelfstandige_woonruimten=aantal_onz,
+        aantal_adressen=aantal_adressen,
+        aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
     )
 
     # 2.10.4 Rekenmethode: delen door aantal adressen; bij privé parkeerplek voor
     # één adres delen door 1. Onzelfstandig: daarna delen door aantal
     # onzelfstandige woonruimten op het adres.
-    deler = Decimal(str(max(aantal_eenheden, 1))) * Decimal(str(max(aantal_onz, 1)))
+    deler = Decimal(aantal_adressen * aantal_onzelfstandige_woonruimten)
     heeft_laadpaal = heeft_bouwkundig_element(
         ruimte, Bouwkundigelementdetailsoort.laadpaal
     )

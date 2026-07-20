@@ -64,7 +64,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             defaultdict(Decimal)
         )
         for ruimte in eenheid.ruimten or []:
-            if ruimte.gedeeld_met_aantal_eenheden:
+            if ruimte.gedeeld_met_aantal_adressen:
                 continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
             if (
                 ruimte.oppervlakte is not None
@@ -78,7 +78,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 )
 
         for ruimte in eenheid.ruimten or []:
-            if ruimte.gedeeld_met_aantal_eenheden:
+            if ruimte.gedeeld_met_aantal_adressen:
                 continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
 
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1

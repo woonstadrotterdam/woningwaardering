@@ -14,7 +14,7 @@ from woningwaardering.stelsels.bouwers import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
-    gedeeld_met_eenheden,
+    gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -57,7 +57,7 @@ class Buitenruimten(Stelselgroep):
         for ruimte in eenheid.ruimten or []:
             for bron in self._punten_voor_buitenruimte(ruimte):
                 laag = waarderingsgroep_bouwer.gedeeld_met(
-                    aantal_adressen=ruimte.gedeeld_met_aantal_eenheden or 1,
+                    aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
                     aantal_onzelfstandige_woonruimten=(
                         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                     ),
@@ -150,7 +150,7 @@ class Buitenruimten(Stelselgroep):
             )
             return
 
-        if gedeeld_met_eenheden(ruimte):
+        if gedeeld_met_adressen(ruimte):
             # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
             if not (ruimte.lengte and ruimte.breedte):
                 warnings.warn(
@@ -163,7 +163,7 @@ class Buitenruimten(Stelselgroep):
                 or (ruimte.breedte and ruimte.breedte < 1.5)
             ):
                 logger.debug(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_eenheden} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_adressen} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
                 )
                 return
 
@@ -171,7 +171,7 @@ class Buitenruimten(Stelselgroep):
         if (
             ruimte.detail_soort
             == Ruimtedetailsoort.parkeerplaats  # parkeerplaats heeft als ruimtesoort buitenruimte
-            and gedeeld_met_eenheden(ruimte)
+            and gedeeld_met_adressen(ruimte)
         ):
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde parkeerplaats en telt daarom niet mee voor {self.stelselgroep.naam}."
@@ -187,19 +187,18 @@ class Buitenruimten(Stelselgroep):
         # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,75 punt.
         # De in ieder geval 2 punten worden verderop toegevoegd.
         if gedeeld_met_onzelfstandige_woonruimten(ruimte):
+            deler = Decimal(
+                (ruimte.gedeeld_met_aantal_adressen or 1)
+                * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
+            )
             waardering.punten = float(
-                Decimal(str(ruimte.oppervlakte))
-                * Decimal("0.75")
-                / Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 1))
-                / Decimal(
-                    str(ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
-                )
+                Decimal(str(ruimte.oppervlakte)) * Decimal("0.75") / deler
             )
         else:
             waardering.punten = float(
                 Decimal(str(ruimte.oppervlakte))
                 * Decimal("0.35")
-                / Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 1))
+                / Decimal(str(ruimte.gedeeld_met_aantal_adressen or 1))
             )
         yield waardering
 
@@ -220,7 +219,7 @@ class Buitenruimten(Stelselgroep):
         # 2 punten bij de aanwezigheid van privé buitenruimten
         if next(waarderingsgroep_bouwer.alle_waarderingen(), None) is not None and any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
             and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
             for ruimte in eenheid.ruimten or []
         ):

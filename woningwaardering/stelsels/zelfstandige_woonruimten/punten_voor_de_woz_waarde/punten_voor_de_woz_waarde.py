@@ -511,13 +511,13 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             [
                 Decimal(str(ruimte.oppervlakte))
                 * Decimal(str(ruimte.aantal or 1))
-                / (Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 2)))
+                / (Decimal(str(ruimte.gedeeld_met_aantal_adressen or 2)))
                 for ruimte in (eenheid.ruimten or [])
                 if ruimte.detail_soort
                 in [
                     Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage
                 ]  # Type I
-                and utils.gedeeld_met_eenheden(
+                and utils.gedeeld_met_adressen(
                     ruimte
                 )  # valt anders niet onder rubriek 10
                 and ruimte.oppervlakte

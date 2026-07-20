@@ -8,7 +8,7 @@ from woningwaardering.stelsels.bouwers import (
     WaarderingBouwer,
     WaarderingsgroepBouwer,
 )
-from woningwaardering.stelsels.utils import gedeeld_met_eenheden
+from woningwaardering.stelsels.utils import gedeeld_met_adressen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -215,7 +215,7 @@ def _prive_laadpaal(
     aantal_laadpalen = sum(
         aantal_bouwkundige_elementen(ruimte, Bouwkundigelementdetailsoort.laadpaal)
         for ruimte in eenheid.ruimten or []
-        if not gedeeld_met_eenheden(ruimte)
+        if not gedeeld_met_adressen(ruimte)
     )
 
     if aantal_laadpalen == 0:

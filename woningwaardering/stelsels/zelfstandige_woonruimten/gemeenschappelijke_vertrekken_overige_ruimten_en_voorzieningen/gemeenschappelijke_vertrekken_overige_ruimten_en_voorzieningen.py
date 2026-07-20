@@ -1,7 +1,6 @@
 from collections import defaultdict
 from datetime import date
 from decimal import Decimal
-from typing import NamedTuple
 
 from loguru import logger
 
@@ -12,6 +11,7 @@ from woningwaardering.stelsels.bouwers import (
     WaarderingsgroepBouwer,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
+    GedeeldMet,
     bereken_oppervlakte_punten,
     bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
@@ -42,10 +42,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 
-
-class Oppervlaktegroepsleutel(NamedTuple):
-    aantal_eenheden: int
-    ruimtesoort: RuimtesoortReferentiedata
+Oppervlaktegroepsleutel = tuple[GedeeldMet, RuimtesoortReferentiedata]
 
 
 class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
@@ -90,7 +87,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             gedeelde_ruimten = [
                 ruimte
                 for ruimte in eenheid.ruimten or []
-                if utils.gedeeld_met_eenheden(ruimte)
+                if utils.gedeeld_met_adressen(ruimte)
             ]
 
             # waarderingen voor de oppervlakten van gedeelde ruimten
@@ -137,7 +134,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         for ruimte in gedeelde_ruimten:
             if (
                 ruimte.detail_soort is None
-                or ruimte.gedeeld_met_aantal_eenheden is None
+                or ruimte.gedeeld_met_aantal_adressen is None
             ):
                 continue
 
@@ -154,9 +151,9 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # […]
                 # * de oppervlakte, na deling door het aantal adressen, per woning minstens
                 #   2m2 bedraagt.
-                if ruimte.oppervlakte and ruimte.gedeeld_met_aantal_eenheden:
+                if ruimte.oppervlakte and ruimte.gedeeld_met_aantal_adressen:
                     gedeelde_oppervlakte = (
-                        ruimte.oppervlakte / ruimte.gedeeld_met_aantal_eenheden
+                        ruimte.oppervlakte / ruimte.gedeeld_met_aantal_adressen
                     )
                     if gedeelde_oppervlakte < Decimal("2.0"):
                         logger.info(
@@ -165,8 +162,11 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                         continue
 
             oppervlaktegroepen[
-                Oppervlaktegroepsleutel(
-                    ruimte.gedeeld_met_aantal_eenheden,
+                (
+                    GedeeldMet(
+                        ruimte.gedeeld_met_aantal_adressen or 1,
+                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1,
+                    ),
                     ruimtesoort,
                 )
             ].append(ruimte)
@@ -174,15 +174,13 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         def sorteer_oppervlaktegroepen(
             oppervlaktegroep: tuple[Oppervlaktegroepsleutel, list[EenhedenRuimte]],
         ) -> int:
-            sleutel, _ruimten = oppervlaktegroep
-            return sleutel.aantal_eenheden
+            (gedeeld_met, _ruimtesoort), _ruimten = oppervlaktegroep
+            return gedeeld_met.aantal_adressen
 
-        for groepssleutel, ruimten in sorted(
+        for (gedeeld_met, ruimtesoort), ruimten in sorted(
             oppervlaktegroepen.items(),
             key=sorteer_oppervlaktegroepen,
         ):
-            aantal_eenheden = groepssleutel.aantal_eenheden
-            ruimtesoort = groepssleutel.ruimtesoort
             totaal_oppervlakte = sum(
                 (
                     rond_af(ruimte.oppervlakte, decimalen=2)
@@ -196,12 +194,17 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 if ruimtesoort == Ruimtesoort.vertrek
                 else Decimal("0.75")
             )
-            oppervlaktepunten = bereken_oppervlakte_punten(
-                totaal_oppervlakte, punten_per_m2
-            ) / Decimal(str(aantal_eenheden))
+            deler = Decimal(
+                gedeeld_met.aantal_adressen
+                * gedeeld_met.aantal_onzelfstandige_woonruimten
+            )
+            oppervlaktepunten = (
+                bereken_oppervlakte_punten(totaal_oppervlakte, punten_per_m2) / deler
+            )
 
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
-                aantal_adressen=aantal_eenheden,
+                aantal_adressen=gedeeld_met.aantal_adressen,
+                aantal_onzelfstandige_woonruimten=gedeeld_met.aantal_onzelfstandige_woonruimten,
             )
             if ruimtesoort == Ruimtesoort.vertrek:
                 categorie_lokaal_id = (
@@ -250,9 +253,10 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     if not is_zolder_zonder_vaste_trap(ruimte):
                         continue
                     zolder_oppervlakte = rond_af(ruimte.oppervlakte, decimalen=2)
-                    correctie_punten = bereken_zolder_correctie(
-                        totaal_oppervlakte, zolder_oppervlakte
-                    ) / Decimal(str(aantal_eenheden))
+                    correctie_punten = (
+                        bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
+                        / deler
+                    )
                     categorie.maak_onderliggende(
                         id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
                         naam="Correctie: zolder zonder vaste trap",
@@ -272,9 +276,11 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBouwer:
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
-                aantal_adressen=aantal_eenheden,
+                aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
+                aantal_onzelfstandige_woonruimten=(
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                ),
             )
             verkoeling_categorie = gedeeld_met_laag.categorie(
                 id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
@@ -290,10 +296,10 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         ):
             if waardering.punten is None:
                 continue
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             waardering.punten = float(
                 rond_af(
-                    Decimal(str(waardering.punten)) / Decimal(str(aantal_eenheden)),
+                    Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen)),
                     decimalen=2,
                 )
             )
@@ -306,9 +312,9 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         for ruimte in ruimten:
             if ruimte.detail_soort is None:
                 continue
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
-                aantal_adressen=aantal_eenheden,
+                aantal_adressen=aantal_adressen,
             )
             keuken_categorie = gedeeld_met_laag.categorie(
                 id="keuken",
@@ -318,7 +324,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 ruimte,
                 self.stelsel,
                 waarderingsgroep_bouwer=keuken_categorie,
-                deler=aantal_eenheden,
+                deler=aantal_adressen,
             )
             if not ruimte_waarderingen:
                 continue
@@ -331,9 +337,9 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         for ruimte in ruimten:
             if ruimte.detail_soort is None:
                 continue
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
-                aantal_adressen=aantal_eenheden,
+                aantal_adressen=aantal_adressen,
             )
             sanitair_categorie = gedeeld_met_laag.categorie(
                 id="sanitair",
@@ -343,7 +349,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 ruimte,
                 self.stelsel,
                 waarderingsgroep_bouwer=sanitair_categorie,
-                deler=aantal_eenheden,
+                deler=aantal_adressen,
             )
             if not waarderingen:
                 continue

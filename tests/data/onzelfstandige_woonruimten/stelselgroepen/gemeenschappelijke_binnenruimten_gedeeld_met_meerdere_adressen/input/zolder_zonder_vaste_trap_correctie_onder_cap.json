@@ -12,7 +12,7 @@
       },
       "naam": "Berging",
       "oppervlakte": 6.0,
-      "gedeeld_met_aantal_eenheden": 2
+      "gedeeldMetAantalAdressen": 2
     },
     {
       "id": "Space_zolder",
@@ -26,7 +26,7 @@
       },
       "naam": "Zolder",
       "oppervlakte": 6.33,
-      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalAdressen": 2,
       "bouwkundigeElementen": [
         {
           "naam": "Vlizotrap",

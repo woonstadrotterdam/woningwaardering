@@ -42,7 +42,7 @@ def get_eenheid():
             breedte=6.5,
             lengte=8,
             gedeeld_met_aantal_onzelfstandige_woonruimten=4,
-            gedeeld_met_aantal_eenheden=5,
+            gedeeld_met_aantal_adressen=5,
         ),
     ]
 

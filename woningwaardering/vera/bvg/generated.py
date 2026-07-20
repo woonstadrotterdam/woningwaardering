@@ -1396,11 +1396,11 @@ class EenhedenRuimte(BaseModel):
     De oppervlakte van de ruimte
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
-    gedeeld_met_aantal_eenheden: Optional[int] = Field(
-        default=None, alias="gedeeldMetAantalEenheden", ge=0
+    gedeeld_met_aantal_adressen: Optional[int] = Field(
+        default=None, alias="gedeeldMetAantalAdressen", ge=0
     )
     """
-    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_eenheden groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
+    Het aantal adressen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_adressen groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
     bouwkundige_elementen: Optional[list[BouwkundigElementenBouwkundigElement]] = Field(

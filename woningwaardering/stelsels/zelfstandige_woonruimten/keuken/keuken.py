@@ -44,7 +44,7 @@ class Keuken(Stelselgroep):
         )
 
         for ruimte in eenheid.ruimten or []:
-            if utils.gedeeld_met_eenheden(ruimte):
+            if utils.gedeeld_met_adressen(ruimte):
                 continue
             waardeer_keuken(
                 ruimte, self.stelsel, waarderingsgroep_bouwer=waarderingsgroep_bouwer

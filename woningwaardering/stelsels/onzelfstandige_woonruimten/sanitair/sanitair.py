@@ -51,7 +51,7 @@ class Sanitair(Stelselgroep):
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if not utils.gedeeld_met_eenheden(ruimte)
+            if not utils.gedeeld_met_adressen(ruimte)
         ]
 
         # Waardeer elke ruimte onder het bijbehorende gedeeld-met-criterium.

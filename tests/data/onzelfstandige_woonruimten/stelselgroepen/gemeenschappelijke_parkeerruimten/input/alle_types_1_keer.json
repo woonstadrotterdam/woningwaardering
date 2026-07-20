@@ -3,7 +3,7 @@
   "ruimten": [
     {
       "id": "1",
-      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeldMetAantalAdressen": 10,
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
       "aantal": 1,
       "soort": {
@@ -21,7 +21,7 @@
     },
     {
       "id": "2",
-      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeldMetAantalAdressen": 10,
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
       "aantal": 1,
       "soort": {
@@ -39,7 +39,7 @@
     },
     {
       "id": "3",
-      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeldMetAantalAdressen": 10,
       "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
       "aantal": 1,
       "soort": {

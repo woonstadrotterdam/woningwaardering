@@ -51,8 +51,8 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if ruimte.gedeeld_met_aantal_eenheden is None
-            or ruimte.gedeeld_met_aantal_eenheden == 1
+            if ruimte.gedeeld_met_aantal_adressen is None
+            or ruimte.gedeeld_met_aantal_adressen == 1
         ]
 
         def subgroep(

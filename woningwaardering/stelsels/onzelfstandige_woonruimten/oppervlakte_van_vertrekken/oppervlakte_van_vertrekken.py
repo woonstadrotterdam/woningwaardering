@@ -47,7 +47,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
         for ruimte in eenheid.ruimten or []:
-            if ruimte.gedeeld_met_aantal_eenheden:
+            if ruimte.gedeeld_met_aantal_adressen:
                 continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
 
             if (

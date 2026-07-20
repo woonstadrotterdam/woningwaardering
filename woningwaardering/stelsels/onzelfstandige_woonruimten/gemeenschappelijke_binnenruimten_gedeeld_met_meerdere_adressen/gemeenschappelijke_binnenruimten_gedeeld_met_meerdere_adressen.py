@@ -2,7 +2,6 @@ import warnings
 from collections import defaultdict
 from datetime import date
 from decimal import Decimal
-from typing import NamedTuple
 
 from loguru import logger
 
@@ -13,6 +12,7 @@ from woningwaardering.stelsels.bouwers import (
     WaarderingsgroepBouwer,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
+    GedeeldMet,
     bereken_oppervlakte_punten,
     bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
@@ -39,11 +39,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 
-
-class Oppervlaktegroepsleutel(NamedTuple):
-    aantal_eenheden: int
-    aantal_onzelfstandige_woonruimten: int
-    ruimtesoort: RuimtesoortReferentiedata
+Oppervlaktegroepsleutel = tuple[GedeeldMet, RuimtesoortReferentiedata]
 
 
 class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
@@ -72,8 +68,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             gedeelde_ruimten = [
                 ruimte
                 for ruimte in eenheid.ruimten or []
-                if ruimte.gedeeld_met_aantal_eenheden is not None
-                and ruimte.gedeeld_met_aantal_eenheden > 1
+                if utils.gedeeld_met_adressen(ruimte)
             ]
 
             # waarderingen voor de oppervlakten van gedeelde ruimten
@@ -138,18 +133,17 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         ] = defaultdict(list)
 
         for ruimte in ruimten:
-            if ruimte.gedeeld_met_aantal_eenheden is None:
+            if ruimte.gedeeld_met_aantal_adressen is None:
                 continue
             ruimtesoort = utils.classificeer_ruimte(ruimte)
             if ruimtesoort not in (Ruimtesoort.vertrek, Ruimtesoort.overige_ruimten):
                 continue
-            aantal_onzelfstandige_woonruimten = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
             oppervlaktegroepen[
-                Oppervlaktegroepsleutel(
-                    ruimte.gedeeld_met_aantal_eenheden,
-                    aantal_onzelfstandige_woonruimten,
+                (
+                    GedeeldMet(
+                        ruimte.gedeeld_met_aantal_adressen or 1,
+                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1,
+                    ),
                     ruimtesoort,
                 )
             ].append(ruimte)
@@ -157,10 +151,13 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         def sorteer_oppervlaktegroepen(
             oppervlaktegroep: tuple[Oppervlaktegroepsleutel, list[EenhedenRuimte]],
         ) -> tuple[int, int]:
-            sleutel, _ruimten = oppervlaktegroep
-            return sleutel.aantal_eenheden, sleutel.aantal_onzelfstandige_woonruimten
+            (gedeeld_met, _ruimtesoort), _ruimten = oppervlaktegroep
+            return (
+                gedeeld_met.aantal_adressen,
+                gedeeld_met.aantal_onzelfstandige_woonruimten,
+            )
 
-        for sleutel, groep_ruimten in sorted(
+        for (gedeeld_met, ruimtesoort), groep_ruimten in sorted(
             oppervlaktegroepen.items(), key=sorteer_oppervlaktegroepen
         ):
             totaal_oppervlakte = sum(
@@ -173,20 +170,22 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             )
             punten_per_m2 = (
                 Decimal("1.0")
-                if sleutel.ruimtesoort == Ruimtesoort.vertrek
+                if ruimtesoort == Ruimtesoort.vertrek
                 else Decimal("0.75")
             )
+            deler = Decimal(
+                gedeeld_met.aantal_adressen
+                * gedeeld_met.aantal_onzelfstandige_woonruimten
+            )
             oppervlaktepunten = (
-                bereken_oppervlakte_punten(totaal_oppervlakte, punten_per_m2)
-                / Decimal(str(sleutel.aantal_eenheden))
-                / Decimal(str(sleutel.aantal_onzelfstandige_woonruimten))
+                bereken_oppervlakte_punten(totaal_oppervlakte, punten_per_m2) / deler
             )
 
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
-                aantal_adressen=sleutel.aantal_eenheden,
-                aantal_onzelfstandige_woonruimten=sleutel.aantal_onzelfstandige_woonruimten,
+                aantal_adressen=gedeeld_met.aantal_adressen,
+                aantal_onzelfstandige_woonruimten=gedeeld_met.aantal_onzelfstandige_woonruimten,
             )
-            if sleutel.ruimtesoort == Ruimtesoort.vertrek:
+            if ruimtesoort == Ruimtesoort.vertrek:
                 categorie_lokaal_id = (
                     Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name
                 )
@@ -202,7 +201,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             )
 
             heeft_zolder_zonder_trap = (
-                sleutel.ruimtesoort == Ruimtesoort.overige_ruimten
+                ruimtesoort == Ruimtesoort.overige_ruimten
                 and any(is_zolder_zonder_vaste_trap(ruimte) for ruimte in groep_ruimten)
             )
             if heeft_zolder_zonder_trap:
@@ -221,7 +220,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
                     continue
 
-                if sleutel.ruimtesoort == Ruimtesoort.vertrek:
+                if ruimtesoort == Ruimtesoort.vertrek:
                     waardeer_oppervlakte_van_vertrek(
                         ruimte,
                         waarderingsgroep_bouwer=detail_bovenliggende,
@@ -232,7 +231,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                         waarderingsgroep_bouwer=detail_bovenliggende,
                     )
 
-            if sleutel.ruimtesoort == Ruimtesoort.overige_ruimten:
+            if ruimtesoort == Ruimtesoort.overige_ruimten:
                 # 2.2.2.3 Zolderruimte zonder vaste trap
                 # Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden
                 # aangemerkt en er is geen vaste trap naar de zolder, dan worden er 5 punten
@@ -246,8 +245,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                     zolder_oppervlakte = utils.rond_af(ruimte.oppervlakte, decimalen=2)
                     correctie_punten = (
                         bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
-                        / Decimal(str(sleutel.aantal_eenheden))
-                        / Decimal(str(sleutel.aantal_onzelfstandige_woonruimten))
+                        / deler
                     )
                     categorie.maak_onderliggende(
                         id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
@@ -274,13 +272,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBouwer:
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-            aantal_onzelfstandige_woonruimten = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
-                aantal_adressen=aantal_eenheden,
-                aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+                aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
+                aantal_onzelfstandige_woonruimten=(
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                ),
             )
             verkoeling_categorie = gedeeld_met_laag.categorie(
                 id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
@@ -296,12 +292,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         ):
             if waardering.punten is None:
                 continue
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-            aantal_onzelfstandige_woonruimten = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
-            deler = Decimal(str(aantal_eenheden)) * Decimal(
-                str(aantal_onzelfstandige_woonruimten)
+            deler = Decimal(
+                (ruimte.gedeeld_met_aantal_adressen or 1)
+                * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
             )
             waardering.punten = Decimal(str(waardering.punten)) / deler
 
@@ -321,14 +314,11 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             if ruimte.detail_soort is None:
                 continue
 
-            aantal_onzelfstandige_woonruimten = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
-                aantal_adressen=aantal_eenheden,
-                aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+                aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
+                aantal_onzelfstandige_woonruimten=(
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                ),
             )
 
             sanitair_categorie = gedeeld_met_laag.categorie(
@@ -350,12 +340,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         maximeer_wastafels(ruimte_waarderingen)
 
         for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
-            aantal_onzelfstandige_woonruimten = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-            deler = Decimal(str(aantal_eenheden)) * Decimal(
-                str(aantal_onzelfstandige_woonruimten)
+            deler = Decimal(
+                (ruimte.gedeeld_met_aantal_adressen or 1)
+                * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
             )
 
             for waardering in waarderingen[1:]:
@@ -368,19 +355,12 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         ruimten: list[EenhedenRuimte],
     ) -> None:
         for ruimte in ruimten:
-            aantal_onzelfstandige_woonruimten = (
-                ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            )
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
-            deler = Decimal(str(aantal_eenheden)) * Decimal(
-                str(aantal_onzelfstandige_woonruimten)
-            )
-
             gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
-                aantal_adressen=aantal_eenheden,
-                aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+                aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
+                aantal_onzelfstandige_woonruimten=(
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                ),
             )
-
             keuken_categorie = gedeeld_met_laag.categorie(
                 id="keuken",
                 naam="Keuken",
@@ -394,6 +374,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             if not ruimte_waarderingen:
                 continue
 
+            deler = Decimal(
+                (ruimte.gedeeld_met_aantal_adressen or 1)
+                * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
+            )
             for waardering in ruimte_waarderingen:
                 if waardering.punten is not None:
                     waardering.punten = float(Decimal(str(waardering.punten)) / deler)

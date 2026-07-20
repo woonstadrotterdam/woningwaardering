@@ -1,4 +1,5 @@
 from .bijzondere_voorzieningen import waardeer_bijzondere_voorzieningen
+from .gedeeld_met import GedeeldMet
 from .gemeenschappelijke_parkeerruimten import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
@@ -16,6 +17,7 @@ from .sanitair import maximeer_wastafels, waardeer_sanitair
 from .verkoeling_en_verwarming import waardeer_verkoeling_en_verwarming
 
 __all__ = [
+    "GedeeldMet",
     "bereken_oppervlakte_punten",
     "bereken_zolder_correctie",
     "is_zolder_zonder_vaste_trap",
