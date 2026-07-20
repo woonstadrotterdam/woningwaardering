@@ -1,5 +1,5 @@
 from .bijzondere_voorzieningen import waardeer_bijzondere_voorzieningen
-from .gedeeld_met import GedeeldMet
+from .gedeeld_met import GedeeldeRuimtegroepsleutel, GedeeldMet
 from .gemeenschappelijke_parkeerruimten import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
@@ -18,6 +18,7 @@ from .verkoeling_en_verwarming import waardeer_verkoeling_en_verwarming
 
 __all__ = [
     "GedeeldMet",
+    "GedeeldeRuimtegroepsleutel",
     "bereken_oppervlakte_punten",
     "bereken_zolder_correctie",
     "is_zolder_zonder_vaste_trap",

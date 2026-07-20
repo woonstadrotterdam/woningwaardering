@@ -12,6 +12,7 @@ from woningwaardering.stelsels.bouwers import (
     WaarderingsgroepBouwer,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
+    GedeeldeRuimtegroepsleutel,
     GedeeldMet,
     bereken_oppervlakte_punten,
     bereken_zolder_correctie,
@@ -34,12 +35,9 @@ from woningwaardering.vera.referentiedata import (
     Doelgroep,
     Meeteenheid,
     Ruimtesoort,
-    RuimtesoortReferentiedata,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
-
-Oppervlaktegroepsleutel = tuple[GedeeldMet, RuimtesoortReferentiedata]
 
 
 class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
@@ -129,7 +127,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         # aantal onzelfstandige woonruimten en ruimtesoort. Per oppervlaktegroep wordt op
         # hele m² afgerond (op het totaal) en daarna door beide aantallen gedeeld.
         oppervlaktegroepen: defaultdict[
-            Oppervlaktegroepsleutel, list[EenhedenRuimte]
+            GedeeldeRuimtegroepsleutel, list[EenhedenRuimte]
         ] = defaultdict(list)
 
         for ruimte in ruimten:
@@ -149,7 +147,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             ].append(ruimte)
 
         def sorteer_oppervlaktegroepen(
-            oppervlaktegroep: tuple[Oppervlaktegroepsleutel, list[EenhedenRuimte]],
+            oppervlaktegroep: tuple[GedeeldeRuimtegroepsleutel, list[EenhedenRuimte]],
         ) -> tuple[int, int]:
             (gedeeld_met, _ruimtesoort), _ruimten = oppervlaktegroep
             return (
