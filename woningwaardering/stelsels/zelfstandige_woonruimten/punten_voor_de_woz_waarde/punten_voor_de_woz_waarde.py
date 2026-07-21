@@ -69,10 +69,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             self.stelsel, self.stelselgroep
         )
 
-        def _onbepaalbaar() -> WoningwaarderingResultatenWoningwaarderingGroep:
-            # Bij incomplete invoer kan de WOZ-waardering niet (volledig) bepaald
-            # worden. De reeds opgebouwde waarderingen blijven behouden, maar de groep
-            # krijgt geen punten (None).
+        def _niet_waardeerbaar() -> WoningwaarderingResultatenWoningwaarderingGroep:
+            # Incomplete invoer: geen waardering. ``punten = None`` (niet 0) zodat dit
+            # onderscheidbaar is van een berekende nulscore.
             groep = waarderingsgroep_bouwer.bouw()
             groep.punten = None
             return groep
@@ -114,7 +113,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid ({eenheid.id}): WOZ-eenheid heeft geen waardepeildatum",
                 UserWarning,
             )
-            return _onbepaalbaar()
+            return _niet_waardeerbaar()
 
         woz_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
         waardepeildatum = pd.to_datetime(woz_eenheid.waardepeildatum)
@@ -131,14 +130,34 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         factoren = filtered.nlargest(1, "Peildatum")
 
         factor_onderdeel_I = Decimal(str(factoren["Onderdeel I"].values[0]))
-        factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
+
+        oppervlakte = self.bepaal_oppervlakte(eenheid, woningwaardering_resultaat)
+
+        if oppervlakte == 0:
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
+                UserWarning,
+            )
+            return _niet_waardeerbaar()
+
+        # Bepaal de juiste factor voor onderdeel II (kan speciale COROP factor zijn)
+        factor_onderdeel_II = self._bepaal_factor_onderdeel_II(
+            eenheid, factoren, woningwaardering_resultaat
+        )
 
         punten_onderdeel_I = utils.rond_af(
             (woz_waarde / factor_onderdeel_I), decimalen=2
         )
+        punten_onderdeel_II = utils.rond_af(
+            woz_waarde / oppervlakte / factor_onderdeel_II,
+            decimalen=2,
+        )
 
         logger.info(
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
+        )
+        logger.info(
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
         )
 
         # Toon de WOZ-waarde of minimumwaarde in de resultaten
@@ -158,7 +177,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         onderdeel_i = waarderingsgroep_bouwer.maak_onderliggende(
-            id="onderdeel_I", naam="Onderdeel I"
+            id="onderdeel_I", naam="Onderdeel I", punten=float(punten_onderdeel_I)
         )
 
         # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
@@ -174,33 +193,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             naam="Factor I",
             aantal=factor_onderdeel_I,
         )
-        onderdeel_i.punten = float(punten_onderdeel_I)
-
-        oppervlakte = self.bepaal_oppervlakte(eenheid, woningwaardering_resultaat)
-
-        if oppervlakte == 0:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
-                UserWarning,
-            )
-            return _onbepaalbaar()
 
         onderdeel_ii = waarderingsgroep_bouwer.maak_onderliggende(
-            id="onderdeel_II", naam="Onderdeel II"
-        )
-
-        # Bepaal de juiste factor voor onderdeel II (kan speciale COROP factor zijn)
-        factor_onderdeel_II = self._bepaal_factor_onderdeel_II(
-            eenheid, factoren, woningwaardering_resultaat
-        )
-
-        punten_onderdeel_II = utils.rond_af(
-            woz_waarde / oppervlakte / factor_onderdeel_II,
-            decimalen=2,
-        )
-
-        logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
+            id="onderdeel_II", naam="Onderdeel II", punten=float(punten_onderdeel_II)
         )
 
         # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
@@ -223,7 +218,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             naam="Factor II",
             aantal=factor_onderdeel_II,
         )
-        onderdeel_ii.punten = float(punten_onderdeel_II)
 
         self._corrigeer_woz_punten(
             waarderingsgroep_bouwer, eenheid, woningwaardering_resultaat
