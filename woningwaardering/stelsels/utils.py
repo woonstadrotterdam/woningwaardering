@@ -403,19 +403,13 @@ def _render_waardering_pre_order(
 
 
 def _divisor_uit_criterium_id(criterium_id: str | None) -> Decimal:
-    """Geef de gedeeld-met-factor uit één criterium-id (1 als geen gedeeld_met)."""
+    """Geef de gedeeld-met-factor uit één criterium-id (1 als geen gedeeld_met).
+
+    Verwacht segmenten als ``gedeeld_met_{aantal}_{soort}``.
+    """
     if criterium_id is None:
         return Decimal("1")
-    parts = criterium_id.split("__")
-    # Oud format: het aantal staat als los segment direct na 'gedeeld_met'.
-    if "gedeeld_met" in parts:
-        idx = parts.index("gedeeld_met")
-        try:
-            return Decimal(parts[idx + 1])
-        except (InvalidOperation, IndexError):
-            return Decimal("1")
-    # Nieuw format: het aantal staat in het segment 'gedeeld_met_{aantal}_{soort}'.
-    for part in parts:
+    for part in criterium_id.split("__"):
         if part.startswith("gedeeld_met_"):
             getal = part[len("gedeeld_met_") :].split("_", 1)[0]
             try:
