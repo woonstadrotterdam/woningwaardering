@@ -12,6 +12,7 @@ Het attribuut `verbonden_ruimten` bevat de ruimten die in verbinding staan met d
 
 Het attribuut `gedeeld_met_aantal_adressen` geeft het aantal adressen weer waarmee een bepaalde ruimte wordt gedeeld. Dit attribuut wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. `gedeeld_met_aantal_adressen` heeft als type `Optional[int]`. Er staat een github issue open om dit ter discussie te stellen: [https://github.com/Aedes-datastandaarden/vera-openapi/issues/44](https://github.com/Aedes-datastandaarden/vera-openapi/issues/44)
 
+Voorheen gebruikten we hiervoor het attribuut `gedeeld_met_aantal_eenheden`. Dit attribuut blijft als deprecated veld ondersteund voor backwards compatibility: de waarde wordt overgenomen naar `gedeeld_met_aantal_adressen`.
 
 ## Gedeeld met aantal onzelfstandige woonruimten
 

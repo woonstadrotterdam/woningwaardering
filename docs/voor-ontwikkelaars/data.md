@@ -35,20 +35,13 @@ Bijvoorbeeld: voor het uitbreiden van de class `EenhedenRuimte` maak je een clas
 ```python
 from typing import Optional
 
-from pydantic import AliasChoices, BaseModel, Field
+from pydantic import BaseModel, Field
 
 
 class _EenhedenRuimte(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
     gedeeld_met_aantal_adressen: Optional[int] = Field(
-        default=None,
-        validation_alias=AliasChoices(
-            "gedeeldMetAantalAdressen",
-            "gedeeld_met_aantal_adressen",
-            "gedeeldMetAantalEenheden",
-            "gedeeld_met_aantal_eenheden",
-        ),
-        serialization_alias="gedeeldMetAantalAdressen",
+        default=None, alias="gedeeldMetAantalAdressen"
     )
     """
     Het aantal adressen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte.

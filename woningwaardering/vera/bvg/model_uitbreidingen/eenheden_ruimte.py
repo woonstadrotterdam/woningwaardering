@@ -1,7 +1,7 @@
 import warnings
-from typing import Any
+from typing import Self
 
-from pydantic import AliasChoices, BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, model_validator
 
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
@@ -12,36 +12,38 @@ from woningwaardering.vera.bvg.generated import (
 
 class _EenhedenRuimte(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
-    # Oude alias gedeeldMetAantalEenheden/gedeeld_met_aantal_eenheden blijft
-    # geaccepteerd voor backwards compatibility; bij conflict wint de nieuwe naam.
     gedeeld_met_aantal_adressen: int | None = Field(
-        default=None,
-        validation_alias=AliasChoices(
-            "gedeeldMetAantalAdressen",
-            "gedeeld_met_aantal_adressen",
-            "gedeeldMetAantalEenheden",
-            "gedeeld_met_aantal_eenheden",
-        ),
-        serialization_alias="gedeeldMetAantalAdressen",
-        ge=0,
+        default=None, alias="gedeeldMetAantalAdressen", ge=0
     )
     """
     Het aantal adressen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_adressen groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+    # Verouderde naam; blijft ondersteund voor backwards compatibility.
+    # Bij conflict wint gedeeld_met_aantal_adressen.
+    gedeeld_met_aantal_eenheden: int | None = Field(
+        default=None,
+        alias="gedeeldMetAantalEenheden",
+        ge=0,
+        deprecated=True,
+        exclude=True,
+    )
+    """
+    Deprecated: gebruik `gedeeld_met_aantal_adressen`. Het aantal eenheden waarmee deze ruimte wordt gedeeld.
+    """
 
-    @model_validator(mode="before")
-    @classmethod
-    def waarschuw_verouderde_gedeeld_met_aantal_eenheden(cls, data: Any) -> Any:
-        if isinstance(data, dict) and (
-            "gedeeldMetAantalEenheden" in data or "gedeeld_met_aantal_eenheden" in data
-        ):
+    @model_validator(mode="after")
+    def _gedeeld_met_aantal_eenheden(self) -> Self:
+        aantal_eenheden = self.__dict__.get("gedeeld_met_aantal_eenheden")
+        if aantal_eenheden is not None:
             warnings.warn(
                 "`gedeeldMetAantalEenheden`/`gedeeld_met_aantal_eenheden` is deprecated. "
                 "Gebruik `gedeeldMetAantalAdressen`/`gedeeld_met_aantal_adressen`.",
                 DeprecationWarning,
-                stacklevel=1,
             )
-        return data
+            if self.gedeeld_met_aantal_adressen is None:
+                self.gedeeld_met_aantal_adressen = aantal_eenheden
+        return self
 
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
     bouwkundige_elementen: list[BouwkundigElementenBouwkundigElement] | None = Field(
