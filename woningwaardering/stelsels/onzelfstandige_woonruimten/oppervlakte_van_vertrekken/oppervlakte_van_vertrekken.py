@@ -50,13 +50,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
             if ruimte.gedeeld_met_aantal_adressen:
                 continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
 
-            if (
-                utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
-            ):
-                deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-            else:
-                deler = 1
+            deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
 
             gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
                 aantal_onzelfstandige_woonruimten=deler,

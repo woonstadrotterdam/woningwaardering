@@ -64,11 +64,7 @@ class Sanitair(Stelselgroep):
         ] = []
 
         for ruimte in ruimten:
-            aantal_gedeeld = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-            if aantal_gedeeld is not None and aantal_gedeeld > 1:
-                deler = aantal_gedeeld
-            else:
-                deler = 1
+            deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
                 aantal_onzelfstandige_woonruimten=deler,
             )
