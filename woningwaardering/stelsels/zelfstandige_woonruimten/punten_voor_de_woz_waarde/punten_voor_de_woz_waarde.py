@@ -72,8 +72,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         def _onbepaalbaar() -> WoningwaarderingResultatenWoningwaarderingGroep:
             # Bij incomplete invoer kan de WOZ-waardering niet (volledig) bepaald
             # worden. De reeds opgebouwde waarderingen blijven behouden, maar de groep
-            # krijgt geen punten (None), conform het gedrag van vóór de
-            # builder-refactor.
+            # krijgt geen punten (None).
             groep = waarderingsgroep_bouwer.bouw()
             groep.punten = None
             return groep
