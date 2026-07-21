@@ -62,4 +62,11 @@ def initialize() -> None:
     sys.excepthook = handle_unhandled_exception
     warnings.simplefilter("once", UserWarning)  # TODO: bepalen of dit wenselijk is
     warnings.simplefilter("error", UserWarning)
+    # Toon package-DeprecationWarnings (bijv. verouderde input-aliassen) zonder
+    # ze tot error te promoveren — in tegenstelling tot UserWarning.
+    warnings.filterwarnings(
+        "default",
+        category=DeprecationWarning,
+        module=r"woningwaardering(\.|$)",
+    )
     warnings.showwarning = log_userwarning

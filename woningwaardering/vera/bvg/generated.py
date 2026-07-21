@@ -12,6 +12,7 @@ from operator import getitem
 from typing import Any
 
 from pydantic import (
+    AliasChoices,
     AnyUrl,
     AwareDatetime,
     Base64Str,
@@ -23,6 +24,7 @@ from pydantic import (
     ValidationInfo,
     ValidatorFunctionWrapHandler,
     field_validator,
+    model_validator,
 )
 
 
@@ -1335,12 +1337,37 @@ class EenhedenRuimte(BaseModel):
     De oppervlakte van de ruimte
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+    # Oude alias gedeeldMetAantalEenheden/gedeeld_met_aantal_eenheden blijft
+    # geaccepteerd voor backwards compatibility; bij conflict wint de nieuwe naam.
     gedeeld_met_aantal_adressen: int | None = Field(
-        default=None, alias="gedeeldMetAantalAdressen", ge=0
+        default=None,
+        validation_alias=AliasChoices(
+            "gedeeldMetAantalAdressen",
+            "gedeeld_met_aantal_adressen",
+            "gedeeldMetAantalEenheden",
+            "gedeeld_met_aantal_eenheden",
+        ),
+        serialization_alias="gedeeldMetAantalAdressen",
+        ge=0,
     )
     """
     Het aantal adressen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_adressen groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
     """
+
+    @model_validator(mode="before")
+    @classmethod
+    def waarschuw_verouderde_gedeeld_met_aantal_eenheden(cls, data: Any) -> Any:
+        if isinstance(data, dict) and (
+            "gedeeldMetAantalEenheden" in data or "gedeeld_met_aantal_eenheden" in data
+        ):
+            warnings.warn(
+                "`gedeeldMetAantalEenheden`/`gedeeld_met_aantal_eenheden` is deprecated. "
+                "Gebruik `gedeeldMetAantalAdressen`/`gedeeld_met_aantal_adressen`.",
+                DeprecationWarning,
+                stacklevel=1,
+            )
+        return data
+
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
     bouwkundige_elementen: list[BouwkundigElementenBouwkundigElement] | None = Field(
         default=None, alias="bouwkundigeElementen"

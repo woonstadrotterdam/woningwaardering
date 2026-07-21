@@ -102,6 +102,10 @@ De samenhang tussen waarderingen in de output is een keten via `bovenliggendeCri
 
 Een waarschuwing voor incomplete of onjuiste inputdata. De package faalt standaard op `UserWarning`, zodat gebruikers ontbrekende invoer bewust moeten behandelen. Gebruikers kunnen het warning-filter aanpassen zodat er sowieso een woningwaarderinguitkomst volgt.
 
+### DeprecationWarning
+
+Een waarschuwing voor verouderde input die nog wel wordt geaccepteerd. In tegenstelling tot `UserWarning` leidt dit niet tot een error; de waarschuwing wordt wel getoond en gelogd.
+
 ## Werkafspraak Voor Nieuwe Domeintermen
 
 Voeg alleen termen toe aan dit bestand als ze betekenisvol zijn voor domeinexperts of terugkerend nodig zijn om code en documentatie te begrijpen. Implementatiedetails horen in de ontwikkelaarsdocs of in codecommentaar, niet in deze projectcontext.

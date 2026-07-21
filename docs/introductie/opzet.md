@@ -45,8 +45,10 @@ Het is echter ook mogelijk om het warning filter terug te zetten naar de standaa
 warnings.simplefilter("default", UserWarning)
 ```
 
+Voor verouderde input (bijvoorbeeld hernoemde modelattributen) gebruikt de package `DeprecationWarning`. Die blijven werken als warning: ze worden getoond en gelogd, maar leiden niet tot een error.
+
 Alle waarschuwingen die worden gegenereerd met `warnings.warn()`, worden standaard gelogd met `logger.warning()` en weergegeven in het standaardfout bestand.
-Mocht door de gebruiker logging worden uitgezet, dan zullen de UserWarnings altijd te zien zijn voor de gebruiker in de output van de _stderr_.
+Mocht door de gebruiker logging worden uitgezet, dan zullen de warnings altijd te zien zijn voor de gebruiker in de output van de _stderr_.
 
 ### Warning vs Exception
 
