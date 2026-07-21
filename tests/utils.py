@@ -158,7 +158,6 @@ def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterato
 @dataclass
 class WarningConfig:
     file: str
-    peildatum: date
     warnings: dict[type[Warning], str]
 
 
@@ -170,12 +169,9 @@ def assert_stelselgroep_warnings(
 
     Args:
         warning_config (WarningConfig): WarningConfig object met waarschuwing test configuratie
-        peildatum (date): peildatum
+        peildatum (date): peildatum waarop de stelselgroep wordt gewaardeerd
         stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
     """
-    if peildatum < warning_config.peildatum:
-        pytest.skip(f"Warning is niet van toepassing op peildatum: {peildatum}")
-
     with open(warning_config.file, "r+") as f:
         eenheid_input = EenhedenEenheid.model_validate_json(f.read())
 

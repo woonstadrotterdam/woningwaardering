@@ -1,4 +1,3 @@
-from datetime import date
 from pathlib import Path
 
 import pytest
@@ -43,14 +42,12 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(
 warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/geen_geldige_woz_waarde.json",
-        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "geen WOZ-waarde",
         },
     ),
     WarningConfig(
         file=f"{current_file_path}/input/inconsistent_adres.json",
-        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "woonplaats",
         },
