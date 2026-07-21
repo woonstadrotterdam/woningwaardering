@@ -402,36 +402,26 @@ def _render_waardering_pre_order(
         )
 
 
-def _divisor_uit_criterium_id(criterium_id: str | None) -> Decimal:
-    """Geef de gedeeld-met-factor uit één criterium-id (1 als geen gedeeld_met).
+def _gedeeld_met_deler(criterium_id: str | None) -> Decimal:
+    """Bepaal waarmee een bruto ``aantal`` gedeeld moet worden (gedeeld-met-deler).
 
-    Verwacht segmenten als ``gedeeld_met_{aantal}_{soort}``.
+    Output slaat vaak het ongedeelde getal op (bijv. 10 m²) terwijl de
+    gedeeld-met-lagen in de hiërarchie staan. De deler haal je uit de
+    criterium-id: een pad-id met ``__``-segmenten. Elk segment
+    ``gedeeld_met_{n}_…`` (adressen of onzelfstandige woonruimten) levert
+    factor ``n``; meerdere lagen worden vermenigvuldigd (bijv. 4 × 10).
+    Zonder ``gedeeld_met``-segment is de deler 1 (privé).
     """
     if criterium_id is None:
         return Decimal("1")
+    product = Decimal("1")
     for part in criterium_id.split("__"):
         if part.startswith("gedeeld_met_"):
             getal = part[len("gedeeld_met_") :].split("_", 1)[0]
             try:
-                return Decimal(getal)
+                product *= Decimal(getal)
             except InvalidOperation:
-                return Decimal("1")
-    return Decimal("1")
-
-
-def _gedeeld_met_divisor_keten(
-    waardering: WoningwaarderingResultatenWoningwaardering,
-    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
-) -> Decimal:
-    """Vermenigvuldig alle gedeeld-met-factoren langs de bovenliggende-keten."""
-    product = Decimal("1")
-    current: WoningwaarderingResultatenWoningwaardering | None = waardering
-    while current is not None and current.criterium is not None:
-        bovenliggend = current.criterium.bovenliggende_criterium
-        if bovenliggend is None or bovenliggend.id is None:
-            break
-        product *= _divisor_uit_criterium_id(bovenliggend.id)
-        current = _waardering_voor_criterium_id(bovenliggend.id, waarderingen)
+                continue
     return product
 
 
@@ -463,8 +453,8 @@ def _effectieve_aantal_bijdrage(
         parent = _waardering_voor_criterium_id(bovenliggend.id, waarderingen)
         if parent is not None and parent.aantal is not None:
             return None
-        divisor = _gedeeld_met_divisor_keten(waardering, waarderingen)
-        return rond_af(Decimal(str(waardering.aantal)) / divisor, decimalen=2)
+        deler = _gedeeld_met_deler(waardering.criterium.id)
+        return rond_af(Decimal(str(waardering.aantal)) / deler, decimalen=2)
 
     criterium_id = waardering.criterium.id or ""
     if criterium_id in criteriumsleutel_ids(waarderingen):
