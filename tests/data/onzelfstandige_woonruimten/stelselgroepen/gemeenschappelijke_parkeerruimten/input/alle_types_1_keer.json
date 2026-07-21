@@ -4,7 +4,7 @@
     {
       "id": "1",
       "gedeeldMetAantalAdressen": 10,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "aantal": 1,
       "soort": {
         "code": "GEM",
@@ -22,7 +22,7 @@
     {
       "id": "2",
       "gedeeldMetAantalAdressen": 10,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "aantal": 1,
       "soort": {
         "code": "GEM",
@@ -40,7 +40,7 @@
     {
       "id": "3",
       "gedeeldMetAantalAdressen": 10,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "aantal": 1,
       "soort": {
         "code": "GEM",

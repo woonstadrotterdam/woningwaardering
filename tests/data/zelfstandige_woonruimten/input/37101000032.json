@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -228,7 +228,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_108006231",
-          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYcF",
+          "idBimmodel": "3ZBiDoTKz0JfnjhzfVcYcF",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -323,7 +323,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_108014568",
-          "id_bimmodel": "1r9bfeurv43e$egF8LAwX0",
+          "idBimmodel": "1r9bfeurv43e$egF8LAwX0",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -339,7 +339,7 @@
         },
         {
           "id": "Bad_108014569",
-          "id_bimmodel": "1r9bfeurv43e$egF8LAwX1",
+          "idBimmodel": "1r9bfeurv43e$egF8LAwX1",
           "naam": "Bad",
           "soort": {
             "code": "SAN",
@@ -355,7 +355,7 @@
         },
         {
           "id": "Wastafel_108014566",
-          "id_bimmodel": "1r9bfeurv43e$egF8LAwX2",
+          "idBimmodel": "1r9bfeurv43e$egF8LAwX2",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -371,7 +371,7 @@
         },
         {
           "id": "Wastafel_108014567",
-          "id_bimmodel": "1r9bfeurv43e$egF8LAwX3",
+          "idBimmodel": "1r9bfeurv43e$egF8LAwX3",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -387,7 +387,7 @@
         },
         {
           "id": "Closetcombinatie_108014565",
-          "id_bimmodel": "1r9bfeurv43e$egF8LAwX5",
+          "idBimmodel": "1r9bfeurv43e$egF8LAwX5",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -570,7 +570,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Fontein_108006225",
-          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYX0",
+          "idBimmodel": "3ZBiDoTKz0JfnjhzfVcYX0",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
@@ -585,7 +585,7 @@
         },
         {
           "id": "Closetcombinatie_108006224",
-          "id_bimmodel": "3ZBiDoTKz0JfnjhzfVcYaD",
+          "idBimmodel": "3ZBiDoTKz0JfnjhzfVcYaD",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -680,7 +680,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Ketel_108017429",
-          "id_bimmodel": "0pE4trfTv7JhZzTDEAn8o$",
+          "idBimmodel": "0pE4trfTv7JhZzTDEAn8o$",
           "naam": "Ketel",
           "soort": {
             "code": "VER",

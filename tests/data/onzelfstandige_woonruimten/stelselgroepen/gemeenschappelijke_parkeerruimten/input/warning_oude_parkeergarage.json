@@ -4,7 +4,7 @@
     {
       "id": "1",
       "gedeeldMetAantalAdressen": 10,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"

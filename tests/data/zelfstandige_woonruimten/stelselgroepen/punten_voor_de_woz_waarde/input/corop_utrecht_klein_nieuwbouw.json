@@ -9,7 +9,7 @@
   "adres": {
     "straatnaam": "Oudegracht",
     "huisnummer": "100",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "3511AD",
     "woonplaats": {
       "code": "3295",
@@ -31,11 +31,11 @@
   "wozEenheden": [
     {
       "waardepeildatum": "2023-01-01",
-      "vastgestelde_waarde": 280000
+      "vastgesteldeWaarde": 280000
     },
     {
       "waardepeildatum": "2024-01-01",
-      "vastgestelde_waarde": 290000
+      "vastgesteldeWaarde": 290000
     }
   ],
   "energieprestaties": [

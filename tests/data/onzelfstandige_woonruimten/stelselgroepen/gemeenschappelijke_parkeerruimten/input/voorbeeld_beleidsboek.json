@@ -4,7 +4,7 @@
     {
       "id": "1",
       "gedeeldMetAantalAdressen": 10,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 4,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
       "aantal": 5,
       "soort": {
         "code": "GEM",

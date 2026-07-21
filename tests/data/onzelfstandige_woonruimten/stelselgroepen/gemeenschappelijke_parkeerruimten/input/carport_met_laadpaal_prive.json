@@ -1,10 +1,10 @@
 {
-  "id": "12006000004",
+  "id": "12006000005",
   "ruimten": [
     {
       "id": "1",
       "gedeeldMetAantalAdressen": 1,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "aantal": 1,
       "soort": {
         "code": "BTR",

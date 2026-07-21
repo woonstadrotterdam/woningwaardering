@@ -1,0 +1,32 @@
+{
+  "id": "1",
+  "bouwjaar": 1921,
+  "monumenten": [],
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2020-08-01",
+      "einddatum": "2030-08-01",
+      "label": {
+        "naam": "C"
+      },
+      "waarde": "1.48"
+    }
+  ],
+  "prijscomponenten": []
+}
