@@ -1167,7 +1167,7 @@ Gemeenschappelijke vertrekken en overige ruimtes die tot het woongebouw behorend
 Punten voor voorzieningen, zoals verkoeling en verwarming, keuken en sanitair, die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd volgens het woningwaarderingsstelsel. Het puntenaantal moet vervolgens per rubriek worden gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft tot de ruimte.
 
 > [!NOTE]
-> Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_adressen`, waarbij het adres zelf meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
+> Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_adressen`, waarbij ook het adres van de betreffende eenheid meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
 
 #### 2.9.3 Gemeenschappelijke (spoel)keuken
 
