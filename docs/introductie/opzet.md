@@ -79,42 +79,44 @@ Meestal draagt een subgroep zelf geen punten: die staan op de onderliggende deta
 
 De onderstaande bomen tonen een gemeenschappelijke rubriek voor een zelfstandige en een onzelfstandige eenheid. Links staat telkens een herkenbare voorbeeldnaam, rechts de rol die de regel in de structuur speelt.
 
+> Uiteindelijk, door hoe VERA is opgebouwd, is élke regel hieronder technisch gezien een waardering met een criterium.
+
 **Zelfstandig**
 
 ```text
-Gemeenschappelijke vertrekken, overige ruimten en voorzieningen  ← stelselgroep-groep
+Gemeenschappelijke vertrekken, overige ruimten en voorzieningen  ← stelselgroep
 └─ Gedeeld met 5 adressen                                         ← gedeeld-met-criterium
-   ├─ Oppervlakte van vertrekken                                  ← subgroep 
-   │  └─ Keuken                                                   ← ruimteregel (m²; punten op subgroep)
+   ├─ Oppervlakte van vertrekken                                  ← subgroep met punten
+   │  └─ Keuken                                                   ← waardering met aantal (m²); punten op subgroep
    ├─ Verkoeling en verwarming                                    ← subgroep 
    │  └─ Verwarmde vertrekken                                     ← subgroep 
-   │     └─ Keuken                                                ← detailregel (waardering met punten)
+   │     └─ Keuken                                                ← waardering met punten
    └─ Keuken                                                      ← subgroep 
-      └─ Keuken                                                   ← ruimteregel
-         ├─ Lengte aanrecht                                       ← detailregel (waardering met punten)
+      └─ Keuken                                                   ← subgroep (per ruimte)
+         ├─ Lengte aanrecht                                       ← waardering met punten
          └─ Extra voorzieningen                                   ← subgroep 
-            └─ Inbouw koelkast                                    ← detailregel (waardering met punten)
+            └─ Inbouw koelkast                                    ← waardering met punten
 ```
 
 **Onzelfstandig**
 
 ```text
-Gemeenschappelijke binnenruimten gedeeld met meerdere adressen   ← stelselgroep-groep
+Gemeenschappelijke binnenruimten gedeeld met meerdere adressen   ← stelselgroep
 └─ Gedeeld met 4 onzelfstandige woonruimten                       ← gedeeld-met-criterium
    └─ Gedeeld met 4 adressen                                      ← gedeeld-met-criterium
-      ├─ Oppervlakte van vertrekken                               ← subgroep
-      │  └─ Keuken                                                ← ruimteregel (m²; punten op subgroep)
+      ├─ Oppervlakte van vertrekken                               ← subgroep met punten
+      │  └─ Keuken                                                ← waardering met aantal (m²); punten op subgroep
       ├─ Verkoeling en verwarming                                 ← subgroep
       │  └─ Verwarmde vertrekken                                  ← subgroep
-      │     └─ Keuken                                             ← detailregel (waardering met punten)
+      │     └─ Keuken                                             ← waardering met punten
       ├─ Keuken                                                   ← subgroep
-      │  └─ Keuken                                                ← ruimteregel
-      │     ├─ Lengte aanrecht                                    ← detailregel (waardering met punten)
+      │  └─ Keuken                                                ← subgroep (per ruimte)
+      │     ├─ Lengte aanrecht                                    ← waardering met punten
       │     └─ Extra voorzieningen                                ← subgroep
-      │        └─ Inbouw koelkast                                 ← detailregel (waardering met punten)
+      │        └─ Inbouw koelkast                                 ← waardering met punten
       └─ Sanitair                                                 ← subgroep
-         └─ Toilet                                                ← ruimteregel
-            └─ Wastafel                                           ← detailregel (waardering met punten)
+         └─ Toilet                                                ← subgroep (per ruimte)
+            └─ Wastafel                                           ← waardering met punten
 ```
 
 ### Criterium-id's
@@ -125,43 +127,11 @@ Voor de gedeeld-met-lagen gelden vaste segmentnamen: `prive` bij een aantal van 
 
 Een paar voorbeelden:
 
-- `buitenruimten__prive__Space_108014713` (ruimteregel, privé)
-- `buitenruimten__gedeeld_met_2_adressen__Space_108006357` (ruimteregel, gedeeld)
-- `buitenruimten__prive` (gedeeld-met aggregaat)
-- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen` (gedeeld-met aggregaat)
-- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen__keuken` (subgroep onder een gedeeld-met aggregaat)
-- `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumsleutel)
+- `buitenruimten__prive__Space_108014713`
+- `buitenruimten__gedeeld_met_2_adressen__Space_108006357`
+- `buitenruimten__prive`
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen`
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen__keuken`
+- `verkoeling_en_verwarming__verwarmde_vertrekken`
 
-Zo'n stelselgroep-groep bouw je stapsgewijs op: je begint met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hangt inhoudelijke waarderingen aan met `met_onderliggend(...)`, structurele tussenlagen met `met_subgroep(...)` en gedeeld-met-lagen met `gedeeld_met(...)`, en sluit af met `build()`. Die laatste telt de punten op en levert een `WoningwaarderingResultatenWoningwaarderingGroep`. Met `verplaats_naar(...)` verplaats je een waardering met alles wat eronder hangt naar een andere bovenliggende; de id's bewegen dan vanzelf mee, omdat ze uit de hiërarchie worden afgeleid. En met `hergebruik=True` krijg je een bestaande onderliggende met hetzelfde id-segment terug in plaats van een nieuwe. Gedeelde helpers krijgen zo'n `WaarderingsgroepBuilder` of `WaarderingBuilder` mee en hangen hun resultaten daar direct onder.
-
-Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat. Met deze id's kun je in de output naar een specifiek criterium verwijzen.
-
-### Criteriumsleutels
-
-Een criteriumsleutel is een id volgens de **criteriumnaam-regel** (`{stelselgroep}__{criteriumnaam}`):
-
-```text
-verkoeling_en_verwarming__verwarmde_vertrekken
-└──── stelselgroep ────┘  └── criteriumnaam ─┘
-```
-
-Detailregels (ruimteregels) verwijzen naar die sleutel via `bovenliggendeCriterium`: een VERA-object met daarin de `id` van de subgroep. Vervolgens wordt per unieke sleutel een aparte aggregaatregel aangemaakt met diezelfde `id` en een leesbare naam (bijv. _Verwarmde vertrekken_). Die aggregaatregel heeft geen eigen punten; de punten staan op de onderliggende detailregels.
-
-```text
-Verkoeling en verwarming
-└── Verwarmde vertrekken                         ← criteriumsleutel (aggregaatregel)
-    ├── Slaapkamer 1                             ← detailregel (punten)
-    └── Woonkamer                                ← detailregel (punten)
-```
-
-Zie [aan de slag](../aan-de-slag/index.md) voor een volledig voorbeeld in JSON-output en output-tabel.
-
-**Beperkingen en afspraken**
-
-- Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat (zie hierboven).
-- Een aggregaatregel met een criteriumsleutel-id mag wél een `bovenliggendeCriterium` hebben als dat een **gedeeld-met aggregaat** is (andere id-familie). Dat komt voor bij onzelfstandige woningen:
-
-```text
-verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten
-└──── stelselgroep ────┘└ gedeeld_met 2 onzelfstandige woonruimten ┘
-```
+Zo'n stelselgroep-groep bouw je stapsgewijs op: je begint met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hangt inhoudelijke waarderingen aan met `met_onderliggend(...)`, structurele tussenlagen met `met_subgroep(...)` en gedeeld-met-lagen met `gedeeld_met(...)`, en sluit af met `build()`. Die laatste telt de punten op en levert een `WoningwaarderingResultatenWoningwaarderingGroep`.
