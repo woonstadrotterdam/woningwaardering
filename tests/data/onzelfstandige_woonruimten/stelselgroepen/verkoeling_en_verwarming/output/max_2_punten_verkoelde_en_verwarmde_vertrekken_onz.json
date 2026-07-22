@@ -100,7 +100,7 @@
         {
           "criterium": {
             "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verkoelde_vertrekken__max_aantal_punten",
-            "naam": "Maximaal 2 punten",
+            "naam": "Maximering",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verkoelde_vertrekken"
             }

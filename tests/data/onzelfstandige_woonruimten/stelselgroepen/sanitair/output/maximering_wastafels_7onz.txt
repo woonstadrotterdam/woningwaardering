@@ -10,13 +10,13 @@ SANITAIR
   Gedeeld met 7 onzelfstandige woonruimten
     - Woonkamer
       - Wastafel                                             3.00 st   0.43 pt
-      - Max 1.0 punt voor Wastafel                                    -0.29 pt
+      - Maximering voor Wastafel                                      -0.29 pt
       - Meerpersoonswastafel                                 3.00 st   0.64 pt
-      - Max 1.5 punt voor Meerpersoonswastafel                        -0.43 pt
+      - Maximering voor Meerpersoonswastafel                          -0.43 pt
     - WoonkamerMetMax
       - Wastafel                                             2.00 st   0.29 pt
-      - Max 1.0 punt voor Wastafel                                    -0.14 pt
+      - Maximering voor Wastafel                                      -0.14 pt
       - Meerpersoonswastafel                                 2.00 st   0.43 pt
-      - Max 1.5 punt voor Meerpersoonswastafel                        -0.21 pt
+      - Maximering voor Meerpersoonswastafel                          -0.21 pt
                                                                       --------
   Totaal                                                               5.75 pt

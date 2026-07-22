@@ -216,7 +216,7 @@
         {
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__max_aantal_punten",
-            "naam": "Maximaal 4 punten",
+            "naam": "Maximering",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }

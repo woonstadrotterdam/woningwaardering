@@ -178,7 +178,7 @@
         {
           "criterium": {
             "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__extra_voorzieningen__max_punten_kastruimte",
-            "naam": "Max 0.75 punten voor Kastruimte",
+            "naam": "Maximering voor Kastruimte",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__Space_190033__extra_voorzieningen"
             }
