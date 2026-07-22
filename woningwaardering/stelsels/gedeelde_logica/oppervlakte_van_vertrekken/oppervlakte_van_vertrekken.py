@@ -2,9 +2,9 @@ import warnings
 
 from loguru import logger
 
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -24,8 +24,8 @@ from woningwaardering.vera.referentiedata import (
 def waardeer_oppervlakte_van_vertrek(
     ruimte: EenhedenRuimte,
     *,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-) -> list[WaarderingBouwer]:
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> list[WaarderingBuilder]:
     if not classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
         logger.debug(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
@@ -46,7 +46,7 @@ def waardeer_oppervlakte_van_vertrek(
     )
 
     return [
-        waarderingsgroep_bouwer.maak_onderliggende(
+        waarderingsgroep_builder.maak_onderliggende(
             id=ruimte.id,
             naam=criterium_naam,
             meeteenheid=Meeteenheid.vierkante_meter_m2,

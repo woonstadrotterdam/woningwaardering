@@ -8,7 +8,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -48,7 +48,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
         punten = 0.0
@@ -56,7 +56,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         def _niet_waardeerbaar() -> WoningwaarderingResultatenWoningwaarderingGroep:
             # Incomplete invoer: geen waardering. ``punten = None`` (niet 0) zodat dit
             # onderscheidbaar is van een berekende nulscore.
-            groep = waarderingsgroep_bouwer.bouw()
+            groep = waarderingsgroep_builder.bouw()
             groep.punten = None
             return groep
 
@@ -77,7 +77,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid {eenheid.id}: geen WOZ-waarde bekend. Laagste puntenaantal voor de WOZ-waarde wordt toegepast (10 punten)."
             )
             punten = 10.0
-            waarderingsgroep_bouwer.maak_onderliggende(
+            waarderingsgroep_builder.maak_onderliggende(
                 id="geen_woz_waarde_bekend",
                 naam="Geen WOZ-waarde bekend",
                 punten=punten,
@@ -187,7 +187,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is meer dan 10% lager dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
                 )
 
-            puntenwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+            puntenwaardering = waarderingsgroep_builder.maak_onderliggende(
                 id="percentage_verschil",
                 naam="Percentage verschil",
                 punten=punten,
@@ -216,7 +216,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 aantal=gemiddelde_woz_waarde_per_m2,
             )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
         woningwaardering_groep.punten = float(punten)
 
         logger.info(

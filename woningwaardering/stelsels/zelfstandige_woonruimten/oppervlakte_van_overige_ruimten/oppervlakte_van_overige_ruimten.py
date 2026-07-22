@@ -5,9 +5,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import Stelselgroep
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
     is_zolder_zonder_vaste_trap,
@@ -52,7 +52,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
@@ -72,10 +72,10 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             start=Decimal("0"),
         )
 
-        alle_waarderingen: list[WaarderingBouwer] = []
+        alle_waarderingen: list[WaarderingBuilder] = []
         for ruimte in ruimten:
             waarderingen = waardeer_oppervlakte_van_overige_ruimte(
-                ruimte, waarderingsgroep_bouwer=waarderingsgroep_bouwer
+                ruimte, waarderingsgroep_builder=waarderingsgroep_builder
             )
 
             # 2.2.2.3 Zolderruimte zonder vaste trap
@@ -88,7 +88,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     maak_zolder_correctie_waardering(
                         ruimte,
                         totaal_oppervlakte,
-                        waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+                        waarderingsgroep_builder=waarderingsgroep_builder,
                     )
                 )
 
@@ -96,11 +96,11 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
         structureer_subtotaal_bij_correcties(
             alle_waarderingen,
-            waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+            waarderingsgroep_builder=waarderingsgroep_builder,
             factor=Decimal("0.75"),
         )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
         groep_waarderingen = woningwaardering_groep.woningwaarderingen or []
         if any(w.punten is not None for w in groep_waarderingen):
             # de maximering is altijd in punten en daarom wordt de som van de punten hier gebruikt om de maximering toe te passsen

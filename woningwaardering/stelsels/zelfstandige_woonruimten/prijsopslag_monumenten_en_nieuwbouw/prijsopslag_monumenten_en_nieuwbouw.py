@@ -6,9 +6,9 @@ from dateutil.relativedelta import relativedelta
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
     check_monumenten_attribuut,
@@ -49,16 +49,16 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
         for _ in self._genereer_woningwaarderingen(
-            waarderingsgroep_bouwer, eenheid, woningwaardering_resultaat
+            waarderingsgroep_builder, eenheid, woningwaardering_resultaat
         ):
             pass
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         opslagpercentage = float(
             sum(
@@ -92,34 +92,34 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
     def _genereer_woningwaarderingen(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None,
-    ) -> Iterator[WaarderingBouwer | None]:
+    ) -> Iterator[WaarderingBuilder | None]:
         check_monumenten_attribuut(eenheid)
 
         yield opslag_rijksmonument(
-            self.peildatum, eenheid, waarderingsgroep_bouwer=waarderingsgroep_bouwer
+            self.peildatum, eenheid, waarderingsgroep_builder=waarderingsgroep_builder
         )
         yield opslag_gemeentelijk_of_provinciaal_monument(
-            eenheid, waarderingsgroep_bouwer=waarderingsgroep_bouwer
+            eenheid, waarderingsgroep_builder=waarderingsgroep_builder
         )
         yield opslag_beschermd_stads_of_dorpsgezicht(
-            eenheid, waarderingsgroep_bouwer=waarderingsgroep_bouwer
+            eenheid, waarderingsgroep_builder=waarderingsgroep_builder
         )
         yield self._opslag_nieuwbouw(
-            waarderingsgroep_bouwer, eenheid, woningwaardering_resultaat
+            waarderingsgroep_builder, eenheid, woningwaardering_resultaat
         )
 
     def _opslag_nieuwbouw(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
-    ) -> WaarderingBouwer | None:
+    ) -> WaarderingBuilder | None:
         """Bepaalt de prijsopslag voor nieuwbouw.
 
         Een prijsopslag van 10% wordt toegekend als:
@@ -129,13 +129,13 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         - Het puntentotaal tussen 144 en 186 punten ligt
 
         Args:
-            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
             eenheid (EenhedenEenheid): De te waarderen eenheid
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None, optional):
                 Bestaand waarderingsresultaat. Defaults to None.
 
         Returns:
-            WaarderingBouwer | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
+            WaarderingBuilder | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
         """
         if (
             eenheid.begin_bouwdatum is not None
@@ -173,7 +173,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {self.stelselgroep}."
                 )
 
-                waardering = waarderingsgroep_bouwer.maak_onderliggende(
+                waardering = waarderingsgroep_builder.maak_onderliggende(
                     id="nieuwbouw",
                     naam="Nieuwbouw",
                 )

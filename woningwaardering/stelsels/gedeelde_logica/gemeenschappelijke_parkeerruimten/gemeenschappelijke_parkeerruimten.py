@@ -4,7 +4,7 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -34,13 +34,13 @@ parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
 def waardeer_gemeenschappelijke_parkeerruimte(
     ruimte: EenhedenRuimte,
     *,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+    waarderingsgroep_builder: WaarderingsgroepBuilder,
 ) -> None:
     """Bepaalt de waardering voor gemeenschappelijke parkeerruimten.
 
     Args:
         ruimte (EenhedenRuimte): De te waarderen ruimte
-        waarderingsgroep_bouwer (WaarderingsgroepBouwer): waarderingsgroep waarin
+        waarderingsgroep_builder (WaarderingsgroepBuilder): waarderingsgroep waarin
             de hiërarchie wordt opgebouwd.
 
     De waardering wordt bepaald op basis van het type parkeerruimte:
@@ -115,7 +115,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
     aantal_onzelfstandige_woonruimten = (
         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
     )
-    gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+    gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
         aantal_adressen=aantal_adressen,
         aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
     )

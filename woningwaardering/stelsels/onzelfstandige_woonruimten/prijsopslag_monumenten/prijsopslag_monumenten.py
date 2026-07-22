@@ -5,9 +5,9 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
     check_monumenten_attribuut,
@@ -45,18 +45,18 @@ class PrijsopslagMonumenten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
         for _ in self._genereer_woningwaarderingen(
             self.peildatum,
             eenheid,
-            waarderingsgroep_bouwer,
+            waarderingsgroep_builder,
         ):
             pass
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         opslagpercentage = float(
             sum(
@@ -84,22 +84,22 @@ class PrijsopslagMonumenten(Stelselgroep):
     def _genereer_woningwaarderingen(
         peildatum: date,
         eenheid: EenhedenEenheid,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
-    ) -> Iterator[WaarderingBouwer | None]:
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
+    ) -> Iterator[WaarderingBuilder | None]:
         check_monumenten_attribuut(eenheid)
 
         yield opslag_rijksmonument(
             peildatum,
             eenheid,
-            waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+            waarderingsgroep_builder=waarderingsgroep_builder,
         )
         yield opslag_gemeentelijk_of_provinciaal_monument(
             eenheid,
-            waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+            waarderingsgroep_builder=waarderingsgroep_builder,
         )
         yield opslag_beschermd_stads_of_dorpsgezicht(
             eenheid,
-            waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+            waarderingsgroep_builder=waarderingsgroep_builder,
         )
 
 

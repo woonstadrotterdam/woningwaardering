@@ -4,7 +4,7 @@ from datetime import date
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
@@ -38,20 +38,20 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
         if not eenheid.ruimten:
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
-            return waarderingsgroep_bouwer.bouw()
+            return waarderingsgroep_builder.bouw()
 
         for ruimte in eenheid.ruimten:
             waardeer_gemeenschappelijke_parkeerruimte(
-                ruimte, waarderingsgroep_bouwer=waarderingsgroep_bouwer
+                ruimte, waarderingsgroep_builder=waarderingsgroep_builder
             )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

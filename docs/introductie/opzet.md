@@ -57,7 +57,7 @@ Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroe
 
 ## Criterium ID's
 
-Criterium-id's worden afgeleid uit de **bovenliggende** in de hiërarchie. De builders in `woningwaardering/stelsels/bouwers.py` (`WaarderingsgroepBouwer` en `WaarderingBouwer`) zetten `criterium.id` en `bovenliggendeCriterium` synchroon.
+Criterium-id's worden afgeleid uit de **bovenliggende** in de hiërarchie. De builders in `woningwaardering/stelsels/builders.py` (`WaarderingsgroepBuilder` en `WaarderingBuilder`) zetten `criterium.id` en `bovenliggendeCriterium` synchroon.
 
 - Onder de stelselgroep-groep: `{stelselgroep}__{segment}`
 - Onder een bestaande waardering: `{bovenliggende_id}__{segment}`
@@ -78,7 +78,7 @@ Voorbeelden:
 - `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen__keuken` (categorie onder gedeeld-met aggregaat)
 - `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumsleutel)
 
-`WaarderingsgroepBouwer` bouwt een stelselgroep-groep op: start met `WaarderingsgroepBouwer(stelsel, stelselgroep)`, hang onderliggende waarderingen aan met `maak_onderliggende(...)`, dedupliceer gedeeld-met-criteria met `gedeeld_met(...)`, en sluit af met `bouw()` (sommeert de punten en levert een kale `WoningwaarderingResultatenWoningwaarderingGroep`). De `waarderingsgroep_bouwer` die stelselgroepen aan gedeelde helpers doorgeven is daarmee een `WaarderingsgroepBouwer` of `WaarderingBouwer`; de helpers hangen hun resultaten daar direct onder.
+`WaarderingsgroepBuilder` bouwt een stelselgroep-groep op: start met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hang onderliggende waarderingen aan met `maak_onderliggende(...)`, dedupliceer gedeeld-met-criteria met `gedeeld_met(...)`, en sluit af met `bouw()` (sommeert de punten en levert een kale `WoningwaarderingResultatenWoningwaarderingGroep`). De `waarderingsgroep_builder` die stelselgroepen aan gedeelde helpers doorgeven is daarmee een `WaarderingsgroepBuilder` of `WaarderingBuilder`; de helpers hangen hun resultaten daar direct onder.
 
 Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat.
 

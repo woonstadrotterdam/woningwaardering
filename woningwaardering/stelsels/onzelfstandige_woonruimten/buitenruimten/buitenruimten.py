@@ -7,9 +7,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
@@ -50,13 +50,13 @@ class Buitenruimten(Stelselgroep):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
         for ruimte in eenheid.ruimten or []:
             for bron in self._punten_voor_buitenruimte(ruimte):
-                laag = waarderingsgroep_bouwer.gedeeld_met(
+                laag = waarderingsgroep_builder.gedeeld_met(
                     aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
                     aantal_onzelfstandige_woonruimten=(
                         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
@@ -71,13 +71,13 @@ class Buitenruimten(Stelselgroep):
                 )
 
         # twee 2 punten voor de aanwezigheid van privé buitenruimten
-        self._prive_buitenruimten_aanwezig(waarderingsgroep_bouwer, eenheid)
+        self._prive_buitenruimten_aanwezig(waarderingsgroep_builder, eenheid)
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         # maximaal 15 punten
-        if self._maximering(waarderingsgroep_bouwer, eenheid, woningwaardering_groep):
-            woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        if self._maximering(waarderingsgroep_builder, eenheid, woningwaardering_groep):
+            woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         # rond af op kwarten
         woningwaardering_groep.punten = float(
@@ -91,19 +91,19 @@ class Buitenruimten(Stelselgroep):
 
     def _maximering(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
-    ) -> WaarderingBouwer | None:
+    ) -> WaarderingBuilder | None:
         """Berekent de maximering voor Buitenruimten. Maximaal 15 punten toegestaan.
 
         Args:
-            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer waaraan de maximering wordt toegevoegd.
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder waaraan de maximering wordt toegevoegd.
             eenheid (EenhedenEenheid): Eenheid waarvoor de maximering berekend wordt.
             woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): Woningwaardering groep van buitenruimten.
 
         Returns:
-            WaarderingBouwer | None: Maximering als er een maximering is.
+            WaarderingBuilder | None: Maximering als er een maximering is.
         """
         punten = Decimal(str(woningwaardering_groep.punten or "0"))
         max_punten = Decimal("15")
@@ -112,7 +112,7 @@ class Buitenruimten(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}): maximaal aantal punten voor {self.stelselgroep.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
             )
-            return waarderingsgroep_bouwer.maak_onderliggende(
+            return waarderingsgroep_builder.maak_onderliggende(
                 id="maximaal_15_punten",
                 naam="Maximaal 15 punten",
                 punten=float(aftrek),
@@ -204,26 +204,26 @@ class Buitenruimten(Stelselgroep):
 
     def _prive_buitenruimten_aanwezig(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
-    ) -> WaarderingBouwer | None:
+    ) -> WaarderingBuilder | None:
         """Kent 2 punten toe bij de aanwezigheid van privé buitenruimten.
 
         Args:
-            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer waaraan de waardering wordt toegevoegd.
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder waaraan de waardering wordt toegevoegd.
             eenheid (EenhedenEenheid): Eenheid waarvoor de punten berekend worden.
 
         Returns:
-            WaarderingBouwer | None: Woningwaardering met 2 punten als er privé buitenruimten aanwezig zijn.
+            WaarderingBuilder | None: Woningwaardering met 2 punten als er privé buitenruimten aanwezig zijn.
         """
         # 2 punten bij de aanwezigheid van privé buitenruimten
-        if next(waarderingsgroep_bouwer.alle_waarderingen(), None) is not None and any(
+        if next(waarderingsgroep_builder.alle_waarderingen(), None) is not None and any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
             and not gedeeld_met_adressen(ruimte)
             and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
             for ruimte in eenheid.ruimten or []
         ):
-            prive_laag = waarderingsgroep_bouwer.gedeeld_met()
+            prive_laag = waarderingsgroep_builder.gedeeld_met()
             return prive_laag.maak_onderliggende(
                 id="prive_buitenruimten_aanwezig",
                 naam="Privé buitenruimten aanwezig",

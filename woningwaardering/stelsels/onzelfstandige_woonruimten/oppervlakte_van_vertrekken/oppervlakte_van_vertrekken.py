@@ -6,7 +6,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_vertrek,
 )
@@ -40,7 +40,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
@@ -52,11 +52,11 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
 
-            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
+            gedeeld_met = waarderingsgroep_builder.gedeeld_met(
                 aantal_onzelfstandige_woonruimten=deler,
             )
             waarderingen = waardeer_oppervlakte_van_vertrek(
-                ruimte, waarderingsgroep_bouwer=gedeeld_met
+                ruimte, waarderingsgroep_builder=gedeeld_met
             )
             for waardering in waarderingen:
                 if waardering.aantal is None:
@@ -74,7 +74,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
             )
             oppervlakte_totaal_na_delen += oppervlakte_na_delen
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
         woningwaardering_groep.punten = float(
             utils.rond_af(oppervlakte_totaal_na_delen, decimalen=0)
         )

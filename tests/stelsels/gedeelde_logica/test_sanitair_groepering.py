@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
     waardeer_sanitair,
 )
@@ -21,14 +21,14 @@ def test_waardeer_sanitair_groepeert_per_ruimte():
         eenheid = EenhedenEenheid.model_validate_json(f.read())
 
     ruimte = eenheid.ruimten[0]
-    waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+    waarderingsgroep_builder = WaarderingsgroepBuilder(
         Woningwaarderingstelsel.zelfstandige_woonruimten,
         Woningwaarderingstelselgroep.sanitair,
     )
     waarderingen = waardeer_sanitair(
         ruimte,
         Woningwaarderingstelsel.zelfstandige_woonruimten,
-        waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+        waarderingsgroep_builder=waarderingsgroep_builder,
     )
 
     ruimte_ouder_id = f"{Woningwaarderingstelselgroep.sanitair.name}__{ruimte.id}"

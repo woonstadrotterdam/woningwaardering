@@ -1,7 +1,7 @@
 """Builders die tijdens een ``waardeer()``-aanroep een woningwaarderingsgroep opbouwen.
 
 De builders houden de hiërarchie bij met hun bovenliggende- en
-onderliggende-relaties. Pas bij :meth:`WaarderingsgroepBouwer.bouw` ontstaat
+onderliggende-relaties. Pas bij :meth:`WaarderingsgroepBuilder.bouw` ontstaat
 een ``WoningwaarderingResultatenWoningwaarderingGroep`` met een platte lijst
 ``woningwaarderingen``.
 
@@ -35,13 +35,13 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 
-class WaarderingBouwer:
+class WaarderingBuilder:
     """Een waardering-in-opbouw die een ``WoningwaarderingResultatenWoningwaardering`` representeert.
 
     Een waardering kent zijn eigen id-segment, zijn bovenliggende en zijn
     onderliggende waarderingen. De volledige criterium-id (pad-id) en de
     ``bovenliggende_criterium``-verwijzing worden pas afgeleid uit de
-    bouwer-hiërarchie (via ``criterium_id`` / ``bovenliggende_id``), zodat het
+    builder-hiërarchie (via ``criterium_id`` / ``bovenliggende_id``), zodat het
     verplaatsen van een waardering geen id-herberekening vergt. ``punten``,
     ``aantal``, ``naam`` en ``meeteenheid`` mogen na creatie nog aangepast worden
     (bijvoorbeeld voor een deler-correctie).
@@ -53,16 +53,16 @@ class WaarderingBouwer:
     meeteenheid: Referentiedata | None
     opslagpercentage: float | None
     _segment: str
-    _bovenliggende: "WaarderingBouwer | WaarderingsgroepBouwer"
+    _bovenliggende: "WaarderingBuilder | WaarderingsgroepBuilder"
     _actief: bool
-    _onderliggende: list["WaarderingBouwer"]
+    _onderliggende: list["WaarderingBuilder"]
 
     def __init__(
         self,
         *,
         segment: str,
         naam: str,
-        bovenliggende: "WaarderingBouwer | WaarderingsgroepBouwer",
+        bovenliggende: "WaarderingBuilder | WaarderingsgroepBuilder",
         punten: float | Decimal | None = None,
         aantal: float | int | Decimal | None = None,
         meeteenheid: Referentiedata | None = None,
@@ -93,13 +93,13 @@ class WaarderingBouwer:
         return self._segment
 
     @property
-    def bovenliggende(self) -> "WaarderingBouwer | WaarderingsgroepBouwer":
-        """De bovenliggende bouwer of groep waaronder deze waardering hangt."""
+    def bovenliggende(self) -> "WaarderingBuilder | WaarderingsgroepBuilder":
+        """De bovenliggende builder of groep waaronder deze waardering hangt."""
         return self._bovenliggende
 
     @property
     def criterium_id(self) -> str:
-        """De volledige criterium-id (pad-id), afgeleid uit de bouwer-hiërarchie."""
+        """De volledige criterium-id (pad-id), afgeleid uit de builder-hiërarchie."""
         return f"{self._bovenliggende._id_prefix}__{self._segment}"
 
     @property
@@ -107,7 +107,7 @@ class WaarderingBouwer:
         return self.criterium_id
 
     @property
-    def _actieve_onderliggende(self) -> list["WaarderingBouwer"]:
+    def _actieve_onderliggende(self) -> list["WaarderingBuilder"]:
         actief = [
             waardering for waardering in self._onderliggende if waardering._actief
         ]
@@ -128,7 +128,7 @@ class WaarderingBouwer:
         *,
         id: str | None,
         naam: str | None,
-    ) -> "WaarderingBouwer":
+    ) -> "WaarderingBuilder":
         """Geef een (lazy) categorie-onderlaag onder deze waardering.
 
         De categorie wordt pas actief bij de eerste onderliggende of bij het zetten van
@@ -152,7 +152,7 @@ class WaarderingBouwer:
         aantal: float | int | Decimal | None = None,
         meeteenheid: Referentiedata | None = None,
         hergebruik: bool = False,
-    ) -> "WaarderingBouwer":
+    ) -> "WaarderingBuilder":
         """Maak een onderliggende waardering en hang die onder deze waardering.
 
         De volledige criterium-id wordt ``{deze.criterium_id}__{id}`` en
@@ -173,8 +173,8 @@ class WaarderingBouwer:
         )
 
     def verplaats_naar(
-        self, nieuwe_bovenliggende: "WaarderingBouwer | WaarderingsgroepBouwer"
-    ) -> "WaarderingBouwer":
+        self, nieuwe_bovenliggende: "WaarderingBuilder | WaarderingsgroepBuilder"
+    ) -> "WaarderingBuilder":
         """Verplaats deze waardering (met alles eronder) naar onder ``nieuwe_bovenliggende``.
 
         De waardering wordt losgekoppeld van haar huidige bovenliggende en onder
@@ -192,7 +192,7 @@ class WaarderingBouwer:
         *,
         aantal_adressen: int = 1,
         aantal_onzelfstandige_woonruimten: int = 1,
-    ) -> "WaarderingBouwer":
+    ) -> "WaarderingBuilder":
         """Geef de (gededupliceerde) gedeeld-met/``prive``-waardering onder deze waardering.
 
         Bij gedeelde gemeenschappelijke ruimten ontstaat een hiërarchie van
@@ -211,7 +211,7 @@ class WaarderingBouwer:
         bovenliggende = self._bovenliggende
         self._loskoppelen()
         if (
-            isinstance(bovenliggende, WaarderingBouwer)
+            isinstance(bovenliggende, WaarderingBuilder)
             and bovenliggende._actief
             and not bovenliggende._actieve_onderliggende
         ):
@@ -222,7 +222,7 @@ class WaarderingBouwer:
         if self._actief:
             return
         bovenliggende = self._bovenliggende
-        if isinstance(bovenliggende, WaarderingBouwer):
+        if isinstance(bovenliggende, WaarderingBuilder):
             bovenliggende._activeer()
         self._actief = True
 
@@ -235,11 +235,11 @@ class WaarderingBouwer:
     @property
     def bovenliggende_id(self) -> str | None:
         """De criterium-id van het bovenliggende criterium (``None`` als direct onder de groep)."""
-        if isinstance(self._bovenliggende, WaarderingBouwer):
+        if isinstance(self._bovenliggende, WaarderingBuilder):
             return self._bovenliggende.criterium_id
         return None
 
-    def _zelf_en_onderliggende(self) -> Iterator["WaarderingBouwer"]:
+    def _zelf_en_onderliggende(self) -> Iterator["WaarderingBuilder"]:
         yield self
         for onderliggende in self._actieve_onderliggende:
             yield from onderliggende._zelf_en_onderliggende()
@@ -268,7 +268,7 @@ class WaarderingBouwer:
         return waardering
 
 
-class WaarderingsgroepBouwer:
+class WaarderingsgroepBuilder:
     """Verzamelt de waarderingen van één stelselgroep en bouwt daar het VERA-resultaat uit.
 
     Hang inhoudelijke waarderingen onder de groep met :meth:`maak_onderliggende`,
@@ -278,7 +278,7 @@ class WaarderingsgroepBouwer:
 
     stelsel: Referentiedata
     stelselgroep: Referentiedata
-    _onderliggende: list[WaarderingBouwer]
+    _onderliggende: list[WaarderingBuilder]
 
     def __init__(
         self,
@@ -290,7 +290,7 @@ class WaarderingsgroepBouwer:
         self._onderliggende = []
 
     @property
-    def _actieve_onderliggende(self) -> list[WaarderingBouwer]:
+    def _actieve_onderliggende(self) -> list[WaarderingBuilder]:
         return [waardering for waardering in self._onderliggende if waardering._actief]
 
     def categorie(
@@ -298,7 +298,7 @@ class WaarderingsgroepBouwer:
         *,
         id: str | None,
         naam: str | None,
-    ) -> WaarderingBouwer:
+    ) -> WaarderingBuilder:
         """Geef een (lazy) categorie direct onder de groep.
 
         De categorie wordt pas actief bij de eerste onderliggende of bij het zetten van
@@ -322,7 +322,7 @@ class WaarderingsgroepBouwer:
         aantal: float | int | Decimal | None = None,
         meeteenheid: Referentiedata | None = None,
         hergebruik: bool = False,
-    ) -> WaarderingBouwer:
+    ) -> WaarderingBuilder:
         """Maak een waardering direct onder de groep (zonder ``bovenliggende_criterium``).
 
         Met ``hergebruik=True`` wordt een bestaande onderliggende met hetzelfde
@@ -343,7 +343,7 @@ class WaarderingsgroepBouwer:
         *,
         aantal_adressen: int = 1,
         aantal_onzelfstandige_woonruimten: int = 1,
-    ) -> WaarderingBouwer:
+    ) -> WaarderingBuilder:
         """Geef de gedeeld-met/``prive``-waardering direct onder de groep.
 
         Bij gedeelde gemeenschappelijke ruimten ontstaat een hiërarchie van
@@ -357,7 +357,7 @@ class WaarderingsgroepBouwer:
             aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
         )
 
-    def alle_waarderingen(self) -> Iterator[WaarderingBouwer]:
+    def alle_waarderingen(self) -> Iterator[WaarderingBuilder]:
         """Loop door alle tot nu toe opgebouwde waarderingen (elke bovenliggende vóór wat eronder hangt)."""
         for onderliggende in self._actieve_onderliggende:
             yield from onderliggende._zelf_en_onderliggende()
@@ -398,7 +398,7 @@ def _is_gedeeld_met_segment(segment: str) -> bool:
 
 
 def _voeg_onderliggende_toe(
-    waarderingsgroep_bouwer: WaarderingBouwer | WaarderingsgroepBouwer,
+    waarderingsgroep_builder: WaarderingBuilder | WaarderingsgroepBuilder,
     *,
     segment: str,
     naam: str,
@@ -406,34 +406,34 @@ def _voeg_onderliggende_toe(
     aantal: float | int | Decimal | None,
     meeteenheid: Referentiedata | None,
     hergebruik: bool = False,
-) -> WaarderingBouwer:
+) -> WaarderingBuilder:
     if hergebruik:
-        for bestaand in waarderingsgroep_bouwer._onderliggende:
+        for bestaand in waarderingsgroep_builder._onderliggende:
             if bestaand._actief and bestaand._segment == segment:
                 return bestaand
-    onderliggende = WaarderingBouwer(
+    onderliggende = WaarderingBuilder(
         segment=segment,
         naam=naam,
-        bovenliggende=waarderingsgroep_bouwer,
+        bovenliggende=waarderingsgroep_builder,
         punten=punten,
         aantal=aantal,
         meeteenheid=meeteenheid,
     )
     onderliggende._actief = True
-    waarderingsgroep_bouwer._onderliggende.append(onderliggende)
+    waarderingsgroep_builder._onderliggende.append(onderliggende)
     return onderliggende
 
 
 def _voeg_categorie_toe(
-    parent: WaarderingBouwer | WaarderingsgroepBouwer,
+    parent: WaarderingBuilder | WaarderingsgroepBuilder,
     *,
     segment: str,
     naam: str,
-) -> WaarderingBouwer:
+) -> WaarderingBuilder:
     for bestaand in parent._onderliggende:
         if bestaand._segment == segment:
             return bestaand
-    categorie = WaarderingBouwer(
+    categorie = WaarderingBuilder(
         segment=segment,
         naam=naam,
         bovenliggende=parent,
@@ -443,47 +443,47 @@ def _voeg_categorie_toe(
 
 
 def _gedeeld_met_lagen(
-    bouwer: WaarderingBouwer | WaarderingsgroepBouwer,
+    builder: WaarderingBuilder | WaarderingsgroepBuilder,
     *,
     aantal_adressen: int,
     aantal_onzelfstandige_woonruimten: int,
-) -> WaarderingBouwer:
+) -> WaarderingBuilder:
     onz_laag = None
     if aantal_onzelfstandige_woonruimten > 1:
         onz_laag = _voeg_gedeeld_met_toe(
-            bouwer,
+            builder,
             aantal=aantal_onzelfstandige_woonruimten,
             soort=GedeeldMetSoort.onzelfstandige_woonruimten,
         )
 
     if aantal_onzelfstandige_woonruimten < 2 and aantal_adressen < 2:
         return _voeg_gedeeld_met_toe(
-            bouwer,
+            builder,
             aantal=1,
             soort=GedeeldMetSoort.adressen,
         )
     if aantal_adressen > 1:
-        tussen_bouwer: WaarderingsgroepBouwer | WaarderingBouwer = (
-            onz_laag if onz_laag is not None else bouwer
+        tussen_builder: WaarderingsgroepBuilder | WaarderingBuilder = (
+            onz_laag if onz_laag is not None else builder
         )
         return _voeg_gedeeld_met_toe(
-            tussen_bouwer,
+            tussen_builder,
             aantal=aantal_adressen,
             soort=GedeeldMetSoort.adressen,
         )
     return onz_laag or _voeg_gedeeld_met_toe(
-        bouwer,
+        builder,
         aantal=1,
         soort=GedeeldMetSoort.adressen,
     )
 
 
 def _voeg_gedeeld_met_toe(
-    waarderingsgroep_bouwer: WaarderingBouwer | WaarderingsgroepBouwer,
+    waarderingsgroep_builder: WaarderingBuilder | WaarderingsgroepBuilder,
     *,
     aantal: int,
     soort: GedeeldMetSoort,
-) -> WaarderingBouwer:
+) -> WaarderingBuilder:
     if aantal <= 1:
         segment = "prive"
         naam = naam_gedeeld_met_groep(1)
@@ -491,14 +491,14 @@ def _voeg_gedeeld_met_toe(
         segment = f"gedeeld_met_{aantal}_{soort.value}"
         naam = naam_gedeeld_met_groep(aantal, soort=soort)
 
-    for bestaand in waarderingsgroep_bouwer._onderliggende:
+    for bestaand in waarderingsgroep_builder._onderliggende:
         if bestaand._segment == segment:
             return bestaand
 
-    onderliggende = WaarderingBouwer(
+    onderliggende = WaarderingBuilder(
         segment=segment,
         naam=naam,
-        bovenliggende=waarderingsgroep_bouwer,
+        bovenliggende=waarderingsgroep_builder,
     )
-    waarderingsgroep_bouwer._onderliggende.append(onderliggende)
+    waarderingsgroep_builder._onderliggende.append(onderliggende)
     return onderliggende

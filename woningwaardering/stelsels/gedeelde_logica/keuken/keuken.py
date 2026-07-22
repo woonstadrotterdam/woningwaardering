@@ -5,9 +5,9 @@ from typing import Iterator
 
 from loguru import logger
 
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.utils import (
     gedeeld_met_onzelfstandige_woonruimten,
@@ -33,16 +33,16 @@ def waardeer_keuken(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
     *,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     deler: int = 1,
-) -> list[WaarderingBouwer]:
+) -> list[WaarderingBuilder]:
     if not _is_keuken(ruimte):
         logger.debug(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {Woningwaarderingstelselgroep.keuken.naam}"
         )
         return []
 
-    ruimte_criterium = waarderingsgroep_bouwer.categorie(
+    ruimte_criterium = waarderingsgroep_builder.categorie(
         id=ruimte.id,
         naam=ruimte.naam
         or ruimte.id
@@ -150,18 +150,18 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
 def _waardeer_aanrecht(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-) -> Iterator[WaarderingBouwer]:
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> Iterator[WaarderingBuilder]:
     """
     Waardeert de aanrechten van een keuken.
 
     Args:
         ruimte (EenhedenRuimte): De keuken waarvan de aanrechten gewaardeerd worden.
         stelsel (WoningwaarderingstelselReferentiedata): Het stelsel waarvoor de aanrechten gewaardeerd worden.
-        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
+        waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Yields:
-        WaarderingBouwer: De gewaardeerde aanrechten.
+        WaarderingBuilder: De gewaardeerde aanrechten.
     """
     for element in ruimte.bouwkundige_elementen or []:
         if not element.detail_soort:
@@ -209,7 +209,7 @@ def _waardeer_aanrecht(
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(element.lengte)}mm telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
             )
-            yield waarderingsgroep_bouwer.maak_onderliggende(
+            yield waarderingsgroep_builder.maak_onderliggende(
                 id=f"lengte_aanrecht_{element.id}",
                 naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                 meeteenheid=Meeteenheid.millimeter,
@@ -229,17 +229,17 @@ def _max_punten_voorzieningen(ruimte: EenhedenRuimte) -> Decimal:
 
 def _waardeer_extra_voorzieningen(
     ruimte: EenhedenRuimte,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-) -> Iterator[WaarderingBouwer]:
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> Iterator[WaarderingBuilder]:
     """
     Waardeert de extra voorzieningen van een keuken.
 
     Args:
         ruimte (EenhedenRuimte): De keuken waarvan de extra voorzieningen gewaardeerd worden.
-        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
+        waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Yields:
-        WaarderingBouwer: De gewaardeerde extra voorzieningen.
+        WaarderingBuilder: De gewaardeerde extra voorzieningen.
     """
     punten_per_installatie: dict[Referentiedata, float] = {
         Installatiesoort.inbouw_afzuiginstallatie: 0.75,
@@ -260,7 +260,7 @@ def _waardeer_extra_voorzieningen(
     }
 
     installaties = Counter(ruimte.installaties or [])
-    extra_voorzieningen_criterium = waarderingsgroep_bouwer.categorie(
+    extra_voorzieningen_criterium = waarderingsgroep_builder.categorie(
         id="extra_voorzieningen",
         naam="Extra voorzieningen",
     )

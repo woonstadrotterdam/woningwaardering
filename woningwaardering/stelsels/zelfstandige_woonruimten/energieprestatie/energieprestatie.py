@@ -7,9 +7,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
     get_energieprestatievergoeding,
@@ -76,8 +76,8 @@ class Energieprestatie(Stelselgroep):
         eenheid: EenhedenEenheid,
         energieprestatie: EenhedenEnergieprestatie,
         pandsoort: PandsoortReferentiedata,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
-    ) -> WaarderingBouwer | None:
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
+    ) -> WaarderingBuilder | None:
         """
         Berekent de punten voor Energieprestatie op basis van het energielabel.
 
@@ -85,10 +85,10 @@ class Energieprestatie(Stelselgroep):
             eenheid (EenhedenEenheid): Eenheid
             energieprestatie (EenhedenEnergieprestatie): Energieprestatie van de eenheid
             pandsoort (PandsoortReferentiedata): Pandsoort van het pand
-            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
 
         Returns:
-            WaarderingBouwer | None: De waardering met aangepaste criteriumnaam en punten,
+            WaarderingBuilder | None: De waardering met aangepaste criteriumnaam en punten,
             of None als vereiste energieprestatiegegevens ontbreken.
 
         Raises:
@@ -111,7 +111,7 @@ class Energieprestatie(Stelselgroep):
         label = getattr(
             Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
         ).naam
-        woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+        woningwaardering = waarderingsgroep_builder.maak_onderliggende(
             id="label", naam=label
         )
 
@@ -166,18 +166,18 @@ class Energieprestatie(Stelselgroep):
         self,
         eenheid: EenhedenEenheid,
         pandsoort: PandsoortReferentiedata,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
-    ) -> WaarderingBouwer:
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
+    ) -> WaarderingBuilder:
         """
         Berekent de punten voor Energieprestatie op basis van het bouwjaar.
 
         Args:
             eenheid (EenhedenEenheid): Eenheid
             pandsoort (PandsoortReferentiedata): Pandsoort
-            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
 
         Returns:
-            WaarderingBouwer: De waardering met aangepaste criteriumnaam en punten.
+            WaarderingBuilder: De waardering met aangepaste criteriumnaam en punten.
 
         Raises:
             ValueError: Als er iets onverwachts fout gaat bij het gebruiken van een lookup-tabel.
@@ -199,7 +199,7 @@ class Energieprestatie(Stelselgroep):
                 f"Eenheid ({eenheid.id}): lookup-table gefaald voor bouwjaar {eenheid.bouwjaar} voor {self.stelselgroep.naam}."
             )
 
-        woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+        woningwaardering = waarderingsgroep_builder.maak_onderliggende(
             id="bouwjaar",
             naam=criterium_naam,
             punten=float(filtered_df[pandsoort.naam].values[0]),
@@ -214,7 +214,7 @@ class Energieprestatie(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
@@ -247,30 +247,30 @@ class Energieprestatie(Stelselgroep):
                 f"Eenheid ({eenheid.id}) heeft een geldige pandsoort, maar de naam is niet gespecificeerd. Voeg {Pandsoort.eengezinswoning.naam} of {Pandsoort.meergezinswoning.naam} toe aan de naam van het 'pandsoort'-attribuut.",
                 UserWarning,
             )
-            return waarderingsgroep_bouwer.bouw()
+            return waarderingsgroep_builder.bouw()
 
         if not pandsoort:
             warnings.warn(
                 f"Eenheid ({eenheid.id}) heeft geen pandsoort {Pandsoort.eengezinswoning.naam} of {Pandsoort.meergezinswoning.naam} en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}.",
                 UserWarning,
             )
-            return waarderingsgroep_bouwer.bouw()
+            return waarderingsgroep_builder.bouw()
 
         if not (energieprestatie or eenheid.bouwjaar):
             warnings.warn(
                 f"Eenheid ({eenheid.id}) heeft geen bruikbare energieprestatie of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}.",
                 UserWarning,
             )
-            return waarderingsgroep_bouwer.bouw()
+            return waarderingsgroep_builder.bouw()
 
         energieprestatievergoeding = get_energieprestatievergoeding(
             self.peildatum, eenheid
         )
 
-        woningwaardering: WaarderingBouwer | None
+        woningwaardering: WaarderingBuilder | None
         if energieprestatievergoeding:
             logger.info(f"Eenheid ({eenheid.id}): energieprestatievergoeding gevonden.")
-            woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+            woningwaardering = waarderingsgroep_builder.maak_onderliggende(
                 id="energieprestatievergoeding",
                 naam=f"Energieprestatievergoeding {pandsoort.naam}",
                 punten=float(
@@ -285,15 +285,15 @@ class Energieprestatie(Stelselgroep):
                 eenheid,
                 energieprestatie,
                 pandsoort,
-                waarderingsgroep_bouwer,
+                waarderingsgroep_builder,
             )
 
         elif eenheid.bouwjaar and not energieprestatie:
             woningwaardering = self._bereken_punten_met_bouwjaar(
-                eenheid, pandsoort, waarderingsgroep_bouwer
+                eenheid, pandsoort, waarderingsgroep_builder
             )
         else:
-            woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+            woningwaardering = waarderingsgroep_builder.maak_onderliggende(
                 id="onbekend", naam=""
             )
 
@@ -302,10 +302,10 @@ class Energieprestatie(Stelselgroep):
             monument_correctie(
                 eenheid,
                 woningwaardering,
-                waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+                waarderingsgroep_builder=waarderingsgroep_builder,
             )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}."

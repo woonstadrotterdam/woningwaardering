@@ -3,7 +3,7 @@ from typing import Iterator
 
 from loguru import logger
 
-from woningwaardering.stelsels.bouwers import WaarderingBouwer
+from woningwaardering.stelsels.builders import WaarderingBuilder
 from woningwaardering.stelsels.utils import classificeer_ruimte
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
@@ -25,25 +25,25 @@ SUBGROEPEN: dict[str, str] = {
 
 
 def _subgroep(
-    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBuilder],
     ruimte: EenhedenRuimte,
     subgroep_id: str,
-) -> WaarderingBouwer:
+) -> WaarderingBuilder:
     return subgroep(ruimte, subgroep_id, SUBGROEPEN[subgroep_id])
 
 
 def waardeer_verkoeling_en_verwarming(
     ruimten: list[EenhedenRuimte],
     *,
-    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
-) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBuilder],
+) -> Iterator[tuple[EenhedenRuimte, WaarderingBuilder]]:
     """Classificeer ruimten, pas maximering toe en bouw waarderingen op hun plek.
 
     De maximering (max. 4 punten verwarmde overige ruimten, max. 2 punten
     verkoelde vertrekken) telt over álle meegegeven ruimten samen en wordt hier in
     één doorloop met lokale tellers toegepast.
 
-    ``subgroep`` bepaalt per ruimte onder welke bouwer een subgroep (bijv.
+    ``subgroep`` bepaalt per ruimte onder welke builder een subgroep (bijv.
     "verwarmde vertrekken") in de hiërarchie hangt. De helper roept het aan met
     (ruimte, subgroep_id, subgroep_naam) op het moment dat een waardering wordt
     aangemaakt, zodat de laag lazy en op de juiste plek ontstaat.
@@ -55,17 +55,17 @@ def waardeer_verkoeling_en_verwarming(
 
 def _waardeer_verwarmde_overige_ruimte(
     ruimten: list[EenhedenRuimte],
-    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
-) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBuilder],
+) -> Iterator[tuple[EenhedenRuimte, WaarderingBuilder]]:
     """
     Verwarmde overige ruimten tellen als 1 punt voor verwarmde overige ruimten tot een maximum van 4 punten.
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Bepaalt per ruimte onder welke bouwer de subgroep hangt
+        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBuilder]): Bepaalt per ruimte onder welke builder de subgroep hangt
 
     Yields:
-        tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor verwarmde overige ruimten
+        tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verwarmde overige ruimten
     """
     subgroep_id = "verwarmde_overige_en_verkeersruimten"
     totaal_punten = 0
@@ -103,8 +103,8 @@ def _waardeer_verwarmde_overige_ruimte(
 
 def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     ruimten: list[EenhedenRuimte],
-    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
-) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBuilder],
+) -> Iterator[tuple[EenhedenRuimte, WaarderingBuilder]]:
     """
     Verkoelde en verwarmde vertrekken tellen voor 2 punten per verwarmd vertrek.
     Indien een verwarmd vertrek ook verkoeld is, wordt er 1 punt extra toegekend.
@@ -112,10 +112,10 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Bepaalt per ruimte onder welke bouwer de subgroep hangt
+        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBuilder]): Bepaalt per ruimte onder welke builder de subgroep hangt
 
     Yields:
-        tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
+        tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
     """
     totaal_punten_verkoeld = 0
     for ruimte in ruimten:
@@ -169,17 +169,17 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
 def _waardeer_open_keuken(
     ruimten: list[EenhedenRuimte],
-    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBouwer],
-) -> Iterator[tuple[EenhedenRuimte, WaarderingBouwer]]:
+    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBuilder],
+) -> Iterator[tuple[EenhedenRuimte, WaarderingBuilder]]:
     """
     Open keuken tellen voor 2 punten per verwarmd vertrek.
 
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBouwer]): Bepaalt per ruimte onder welke bouwer de subgroep hangt
+        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBuilder]): Bepaalt per ruimte onder welke builder de subgroep hangt
 
     Yields:
-        tuple[EenhedenRuimte, WaarderingBouwer]: Tuple van ruimte en waardering voor open keuken
+        tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor open keuken
     """
     for ruimte in ruimten:
         if ruimte.verwarmd and (

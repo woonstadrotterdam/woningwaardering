@@ -3,7 +3,7 @@ from datetime import date
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen import (
     waardeer_bijzondere_voorzieningen,
 )
@@ -37,7 +37,7 @@ class BijzondereVoorzieningen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
@@ -50,11 +50,11 @@ class BijzondereVoorzieningen(Stelselgroep):
                 Woningwaarderingstelselgroep.prijsopslag_monumenten,
             ],
             stelsel=self.stelsel,
-            waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+            waarderingsgroep_builder=waarderingsgroep_builder,
             woningwaardering_resultaat=woningwaardering_resultaat,
         )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

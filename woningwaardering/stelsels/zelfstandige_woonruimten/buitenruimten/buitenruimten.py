@@ -8,9 +8,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
@@ -49,27 +49,27 @@ class Buitenruimten(Stelselgroep):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
-        totaal_criteria: dict[WaarderingBouwer, int] = {}
+        totaal_criteria: dict[WaarderingBuilder, int] = {}
 
         # punten per buitenruimte
         for ruimte in eenheid.ruimten or []:
             for _ in self._punten_voor_buitenruimte(
-                waarderingsgroep_bouwer, ruimte, totaal_criteria
+                waarderingsgroep_builder, ruimte, totaal_criteria
             ):
                 pass
 
         # minimaal 2 punten bij aanwezigheid van privé buitenruimten
         # 5 aftrekpunten bij geen buitenruimten
-        self._prive_buitenruimten_aanwezig(waarderingsgroep_bouwer, eenheid)
+        self._prive_buitenruimten_aanwezig(waarderingsgroep_builder, eenheid)
 
-        som_aantal: dict[WaarderingBouwer, Decimal] = defaultdict(lambda: Decimal("0"))
-        for waardering in waarderingsgroep_bouwer.alle_waarderingen():
+        som_aantal: dict[WaarderingBuilder, Decimal] = defaultdict(lambda: Decimal("0"))
+        for waardering in waarderingsgroep_builder.alle_waarderingen():
             gedeeld_met = waardering.bovenliggende
-            if isinstance(gedeeld_met, WaarderingBouwer):
+            if isinstance(gedeeld_met, WaarderingBuilder):
                 som_aantal[gedeeld_met] += Decimal(str(waardering.aantal or "0"))
 
         for gedeeld_met, aantal_som in som_aantal.items():
@@ -82,9 +82,9 @@ class Buitenruimten(Stelselgroep):
             gedeeld_met.meeteenheid = Meeteenheid.vierkante_meter_m2
 
         # maximaal 15 punten
-        self._maximering(waarderingsgroep_bouwer, eenheid)
+        self._maximering(waarderingsgroep_builder, eenheid)
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
         # rond af op kwarten
         woningwaardering_groep.punten = float(
             utils.rond_af_op_kwart(woningwaardering_groep.punten)
@@ -97,10 +97,10 @@ class Buitenruimten(Stelselgroep):
 
     def _maximering(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
     ) -> None:
-        waarderingen = list(waarderingsgroep_bouwer.alle_waarderingen())
+        waarderingen = list(waarderingsgroep_builder.alle_waarderingen())
         punten = Decimal(
             str(
                 sum(
@@ -117,7 +117,7 @@ class Buitenruimten(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}): maximaal aantal punten voor {Woningwaarderingstelselgroep.buitenruimten.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
             )
-            waarderingsgroep_bouwer.maak_onderliggende(
+            waarderingsgroep_builder.maak_onderliggende(
                 id="maximering",
                 naam="Maximaal 15 punten",
                 punten=float(aftrek),
@@ -125,10 +125,10 @@ class Buitenruimten(Stelselgroep):
 
     def _punten_voor_buitenruimte(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         ruimte: EenhedenRuimte,
-        totaal_criteria: dict[WaarderingBouwer, int],
-    ) -> Iterator[WaarderingBouwer]:
+        totaal_criteria: dict[WaarderingBuilder, int],
+    ) -> Iterator[WaarderingBuilder]:
         if classificeer_ruimte(ruimte) != Ruimtesoort.buitenruimte:
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}."
@@ -168,14 +168,14 @@ class Buitenruimten(Stelselgroep):
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {aantal_adressen} gedeelde buitenruimte van {ruimte.oppervlakte}m2 en telt mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
             )
-            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
+            gedeeld_met = waarderingsgroep_builder.gedeeld_met(
                 aantal_adressen=aantal_adressen,
             )
         else:
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een privé-buitenruimte van {ruimte.oppervlakte}m2 en telt mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
             )
-            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met()
+            gedeeld_met = waarderingsgroep_builder.gedeeld_met()
 
         totaal_criteria[gedeeld_met] = aantal_adressen
 
@@ -189,7 +189,7 @@ class Buitenruimten(Stelselgroep):
 
     def _prive_buitenruimten_aanwezig(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
     ) -> None:
         if not any(
@@ -199,14 +199,14 @@ class Buitenruimten(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}) heeft geen buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
             )
-            waarderingsgroep_bouwer.maak_onderliggende(
+            waarderingsgroep_builder.maak_onderliggende(
                 id="geen_buitenruimten",
                 naam="Geen buitenruimten",
                 punten=-5.0,
             )
             return
 
-        if any(waarderingsgroep_bouwer.alle_waarderingen()) and any(
+        if any(waarderingsgroep_builder.alle_waarderingen()) and any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
             and not gedeeld_met_adressen(ruimte)
             for ruimte in eenheid.ruimten or []
@@ -214,7 +214,7 @@ class Buitenruimten(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
             )
-            waarderingsgroep_bouwer.maak_onderliggende(
+            waarderingsgroep_builder.maak_onderliggende(
                 id="prive_buitenruimten_aanwezig",
                 naam="Privé buitenruimten aanwezig",
                 punten=2.0,

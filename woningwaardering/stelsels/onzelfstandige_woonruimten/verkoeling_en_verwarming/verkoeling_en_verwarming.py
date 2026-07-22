@@ -4,9 +4,9 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import waardeer_verkoeling_en_verwarming
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -44,7 +44,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
@@ -57,9 +57,9 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
-        ) -> WaarderingBouwer:
+        ) -> WaarderingBuilder:
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
+            gedeeld_met = waarderingsgroep_builder.gedeeld_met(
                 aantal_onzelfstandige_woonruimten=deler,
             )
             return gedeeld_met.categorie(
@@ -85,7 +85,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                     )
                 )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

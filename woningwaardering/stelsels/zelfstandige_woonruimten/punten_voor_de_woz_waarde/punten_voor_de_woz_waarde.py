@@ -8,7 +8,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -65,14 +65,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
         def _niet_waardeerbaar() -> WoningwaarderingResultatenWoningwaarderingGroep:
             # Incomplete invoer: geen waardering. ``punten = None`` (niet 0) zodat dit
             # onderscheidbaar is van een berekende nulscore.
-            groep = waarderingsgroep_bouwer.bouw()
+            groep = waarderingsgroep_builder.bouw()
             groep.punten = None
             return groep
 
@@ -169,14 +169,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             naam_woz_waarde = f"WOZ-waarde op waardepeildatum {waardepeildatum.strftime(DATUM_FORMAT)}"
 
         # De WOZ-waarde staat als eerste waardering onder de stelselgroep.
-        waarderingsgroep_bouwer.maak_onderliggende(
+        waarderingsgroep_builder.maak_onderliggende(
             id="woz_waarde",
             naam=naam_woz_waarde,
             aantal=int(woz_waarde),
             meeteenheid=Meeteenheid.euro,
         )
 
-        onderdeel_i = waarderingsgroep_bouwer.maak_onderliggende(
+        onderdeel_i = waarderingsgroep_builder.maak_onderliggende(
             id="onderdeel_I", naam="Onderdeel I", punten=float(punten_onderdeel_I)
         )
 
@@ -194,7 +194,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             aantal=factor_onderdeel_I,
         )
 
-        onderdeel_ii = waarderingsgroep_bouwer.maak_onderliggende(
+        onderdeel_ii = waarderingsgroep_builder.maak_onderliggende(
             id="onderdeel_II", naam="Onderdeel II", punten=float(punten_onderdeel_II)
         )
 
@@ -220,10 +220,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         self._corrigeer_woz_punten(
-            waarderingsgroep_bouwer, eenheid, woningwaardering_resultaat
+            waarderingsgroep_builder, eenheid, woningwaardering_resultaat
         )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
         punten = self._som_woz_punten(woningwaardering_groep)
         woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
 
@@ -235,7 +235,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def _corrigeer_woz_punten(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> None:
@@ -246,7 +246,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             - De punten voor WOZ-waarde meer dan 33.33% van het totaal aantal punten bedraagt en geen nieuwbouwwoning is.
 
         Args:
-            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
             eenheid (EenhedenEenheid): De eenheid.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
         """
@@ -254,7 +254,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woz_punten = Decimal(
             sum(
                 Decimal(str(waardering.punten))
-                for waardering in waarderingsgroep_bouwer.alle_waarderingen()
+                for waardering in waarderingsgroep_builder.alle_waarderingen()
                 if waardering.punten is not None
             )
         )
@@ -264,7 +264,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         if 0.0 < woz_punten < minimum_woz_punten:
-            waarderingsgroep_bouwer.maak_onderliggende(
+            waarderingsgroep_builder.maak_onderliggende(
                 id="nieuwbouw_minimum_punten",
                 naam=f"Nieuwbouw: min. {minimum_woz_punten} punten",
                 punten=float(minimum_woz_punten - woz_punten),
@@ -301,7 +301,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 correctie_punten = 186 - totaal_punten_zonder_cap
-                waarderingsgroep_bouwer.maak_onderliggende(
+                waarderingsgroep_builder.maak_onderliggende(
                     id="maximering_woz_punten",
                     naam="Maximering WOZ-punten tot 186 punten totaal",
                     punten=utils.rond_af(correctie_punten, 2),
@@ -310,7 +310,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 logger.info(
                     f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
-                waarderingsgroep_bouwer.maak_onderliggende(
+                waarderingsgroep_builder.maak_onderliggende(
                     id="maximering_woz_punten",
                     naam="Maximering WOZ-punten tot 33% van totaal",
                     punten=utils.rond_af(correctie_punten, 2),

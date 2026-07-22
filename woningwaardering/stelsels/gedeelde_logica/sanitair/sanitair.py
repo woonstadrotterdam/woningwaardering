@@ -5,9 +5,9 @@ from typing import Iterator
 
 from loguru import logger
 
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
@@ -40,23 +40,23 @@ def waardeer_sanitair(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
     *,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     deler: int = 1,
-) -> list[WaarderingBouwer]:
+) -> list[WaarderingBuilder]:
     if ruimte.detail_soort is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.")
         return []
 
     _bouwkundige_elementen_naar_installaties(ruimte)
 
-    ruimte_criterium = waarderingsgroep_bouwer.categorie(
+    ruimte_criterium = waarderingsgroep_builder.categorie(
         id=ruimte.id,
         naam=ruimte.naam
         or ruimte.id
         or (ruimte.detail_soort.naam if ruimte.detail_soort else ""),
     )
 
-    detail_waarderingen: list[WaarderingBouwer] = [
+    detail_waarderingen: list[WaarderingBuilder] = [
         *list(_waardeer_toiletten(ruimte, ruimte_criterium)),
         *list(_waardeer_wastafels(ruimte, stelsel, ruimte_criterium)),
     ]
@@ -129,8 +129,8 @@ def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:
 
 def _waardeer_toiletten(
     ruimte: EenhedenRuimte,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-) -> Iterator[WaarderingBouwer]:
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> Iterator[WaarderingBuilder]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     mapping_toilet: dict[Referentiedata, dict[Referentiedata, float]] = {
         Ruimtedetailsoort.toiletruimte: {
@@ -164,7 +164,7 @@ def _waardeer_toiletten(
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_toiletten}x een {toiletsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
                 )
-                yield waarderingsgroep_bouwer.maak_onderliggende(
+                yield waarderingsgroep_builder.maak_onderliggende(
                     id=toiletsoort.name,
                     naam=toiletsoort.naam,
                     meeteenheid=Meeteenheid.stuks,
@@ -180,8 +180,8 @@ def _waardeer_toiletten(
 def _waardeer_wastafels(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-) -> Iterator[WaarderingBouwer]:
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> Iterator[WaarderingBuilder]:
     zelfstandige_woonruimte = (
         stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
     )
@@ -219,7 +219,7 @@ def _waardeer_wastafels(
                         logger.info(
                             f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
                         )
-                        yield waarderingsgroep_bouwer.maak_onderliggende(
+                        yield waarderingsgroep_builder.maak_onderliggende(
                             id=wastafelsoort.name,
                             naam=f"{wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
                             meeteenheid=Meeteenheid.stuks,
@@ -241,7 +241,7 @@ def _waardeer_wastafels(
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_wastafels}x een {wastafelsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
             )
-            yield waarderingsgroep_bouwer.maak_onderliggende(
+            yield waarderingsgroep_builder.maak_onderliggende(
                 id=wastafelsoort.name,
                 naam=wastafelsoort.naam,
                 meeteenheid=Meeteenheid.stuks,
@@ -279,7 +279,7 @@ def _waardeer_wastafels(
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam if ruimte.detail_soort else ruimte.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
                 )
-                yield waarderingsgroep_bouwer.maak_onderliggende(
+                yield waarderingsgroep_builder.maak_onderliggende(
                     id=f"max_punten_{wastafelsoort.name}",
                     naam=f"Max {punten_per_wastafel} punt voor {wastafelsoort.naam}",
                     punten=rond_af(
@@ -302,8 +302,8 @@ def _waardeer_wastafels(
 def _waardeer_baden_en_douches(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-) -> Iterator[WaarderingBouwer]:
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> Iterator[WaarderingBuilder]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     zelfstandige_woonruimte = (
         stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -341,7 +341,7 @@ def _waardeer_baden_en_douches(
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_bad_en_douches}x een {Installatiesoort.bad_en_douche.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
         )
-        yield waarderingsgroep_bouwer.maak_onderliggende(
+        yield waarderingsgroep_builder.maak_onderliggende(
             id=Installatiesoort.bad_en_douche.name,
             naam=Installatiesoort.bad_en_douche.naam,
             meeteenheid=Meeteenheid.stuks,
@@ -363,7 +363,7 @@ def _waardeer_baden_en_douches(
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatiesoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
             )
-            yield waarderingsgroep_bouwer.maak_onderliggende(
+            yield waarderingsgroep_builder.maak_onderliggende(
                 id=installatiesoort.name,
                 naam=installatiesoort.naam,
                 meeteenheid=Meeteenheid.stuks,
@@ -375,10 +375,10 @@ def _waardeer_baden_en_douches(
 def _waardeer_installaties(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     *,
     totaal_punten_bad_en_douche: Decimal,
-) -> Iterator[WaarderingBouwer]:
+) -> Iterator[WaarderingBuilder]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     punten_installaties: dict[Referentiedata, float] = {
         Installatiesoort.bubbelfunctie_van_het_bad: 1.5,
@@ -425,7 +425,7 @@ def _waardeer_installaties(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}): geen bad of douche aanwezig in {ruimte.detail_soort.naam}, extra voorzieningen worden niet gewaardeerd."
                 )
             elif totaal_aantal_wastafels > 0 and bad_en_of_douche_aanwezig:
-                voorzieningen_criterium: WaarderingBouwer | None = None
+                voorzieningen_criterium: WaarderingBuilder | None = None
 
                 for installatiesoort in punten_installaties:
                     aantal = installaties[installatiesoort]
@@ -434,7 +434,7 @@ def _waardeer_installaties(
 
                     if voorzieningen_criterium is None:
                         voorzieningen_criterium = (
-                            waarderingsgroep_bouwer.maak_onderliggende(
+                            waarderingsgroep_builder.maak_onderliggende(
                                 id="extra_voorzieningen",
                                 naam="Extra voorzieningen",
                             )
@@ -514,8 +514,8 @@ def _waardeer_installaties(
 
 
 def _aantal_wastafels(
-    waarderingen: list[WaarderingBouwer],
-    ruimte_criterium: WaarderingBouwer,
+    waarderingen: list[WaarderingBuilder],
+    ruimte_criterium: WaarderingBuilder,
     soort: Referentiedata,
 ) -> int:
     return int(
@@ -533,7 +533,7 @@ def _aantal_wastafels(
 
 def _bepaal_wastafel_max_tellers(
     ruimte_waarderingen: list[
-        tuple[EenhedenRuimte, WaarderingBouwer, list[WaarderingBouwer]]
+        tuple[EenhedenRuimte, WaarderingBuilder, list[WaarderingBuilder]]
     ],
 ) -> tuple[MaxCount, MaxCount]:
     # Bepaal per (meerpersoons)wastafelsoort de ruimte met het hoogste aantal,
@@ -562,8 +562,8 @@ def _bepaal_wastafel_max_tellers(
 
 def _maximeer_wastafels_in_ruimte(
     ruimte: EenhedenRuimte,
-    ruimte_criterium: WaarderingBouwer,
-    waarderingen: list[WaarderingBouwer],
+    ruimte_criterium: WaarderingBuilder,
+    waarderingen: list[WaarderingBuilder],
     *,
     aantal_onzelfstandige: int,
     soort: Referentiedata,
@@ -601,7 +601,7 @@ def _maximeer_wastafels_in_ruimte(
 
 def maximeer_wastafels(
     ruimte_waarderingen: list[
-        tuple[EenhedenRuimte, WaarderingBouwer, list[WaarderingBouwer]]
+        tuple[EenhedenRuimte, WaarderingBuilder, list[WaarderingBuilder]]
     ],
 ) -> None:
     max_wastafels, max_meerpersoonswastafels = _bepaal_wastafel_max_tellers(

@@ -5,9 +5,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
     maximeer_wastafels,
@@ -44,7 +44,7 @@ class Sanitair(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
@@ -58,21 +58,21 @@ class Sanitair(Stelselgroep):
         ruimte_waarderingen: list[
             tuple[
                 EenhedenRuimte,
-                WaarderingBouwer,
-                list[WaarderingBouwer],
+                WaarderingBuilder,
+                list[WaarderingBuilder],
             ]
         ] = []
 
         for ruimte in ruimten:
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-            gedeeld_met = waarderingsgroep_bouwer.gedeeld_met(
+            gedeeld_met = waarderingsgroep_builder.gedeeld_met(
                 aantal_onzelfstandige_woonruimten=deler,
             )
 
             waarderingen = waardeer_sanitair(
                 ruimte,
                 self.stelsel,
-                waarderingsgroep_bouwer=gedeeld_met,
+                waarderingsgroep_builder=gedeeld_met,
                 deler=1,
             )
             if not waarderingen:
@@ -99,7 +99,7 @@ class Sanitair(Stelselgroep):
                         )
                     )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

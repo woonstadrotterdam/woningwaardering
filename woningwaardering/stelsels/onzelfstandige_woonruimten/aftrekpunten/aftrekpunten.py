@@ -5,9 +5,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.onzelfstandige_woonruimten.oppervlakte_van_vertrekken import (
     OppervlakteVanVertrekken,
@@ -43,15 +43,15 @@ class Aftrekpunten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
         self._aftrekpunten_oppervlakte_vertrekken(
-            waarderingsgroep_bouwer, eenheid, woningwaardering_resultaat
+            waarderingsgroep_builder, eenheid, woningwaardering_resultaat
         )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -60,22 +60,22 @@ class Aftrekpunten(Stelselgroep):
 
     def _aftrekpunten_oppervlakte_vertrekken(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
-    ) -> WaarderingBouwer | None:
+    ) -> WaarderingBuilder | None:
         """
         Returned 4 punten aftrek indien de totale oppervlakte van de vertrekken minder is dan 8 m2.
 
         Args:
-            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
             eenheid (EenhedenEenheid): Eenheid om de aftrekpunten voor de oppervlakte van de vertrekken te berekenen
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Woningwaarderingresultaat om de oppervlakte van de vertrekken te berekenen
 
         Returns:
-            WaarderingBouwer | None: Eventuele aftrekpunten voor de oppervlakte van de vertrekken
+            WaarderingBuilder | None: Eventuele aftrekpunten voor de oppervlakte van de vertrekken
         """
 
         # check of de oppervlakte van de vertrekken al berekend is
@@ -110,7 +110,7 @@ class Aftrekpunten(Stelselgroep):
                 logger.info(
                     f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken < 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), {aftrekpunten} punten voor {self.stelselgroep.naam}"
                 )
-                waardering = waarderingsgroep_bouwer.maak_onderliggende(
+                waardering = waarderingsgroep_builder.maak_onderliggende(
                     id=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name}_minder_dan_8m2",
                     naam=f"Totale oppervlakte in Rubriek '{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}' is minder dan 8m2",
                     punten=aftrekpunten,

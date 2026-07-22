@@ -5,7 +5,7 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import WaarderingsgroepBouwer
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
 )
@@ -39,7 +39,7 @@ class Keuken(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
@@ -47,10 +47,10 @@ class Keuken(Stelselgroep):
             if utils.gedeeld_met_adressen(ruimte):
                 continue
             waardeer_keuken(
-                ruimte, self.stelsel, waarderingsgroep_bouwer=waarderingsgroep_bouwer
+                ruimte, self.stelsel, waarderingsgroep_builder=waarderingsgroep_builder
             )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         heeft_keuken_waarderingen = any(
             woningwaardering.punten is not None

@@ -9,9 +9,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
     get_energieprestatievergoeding,
@@ -74,13 +74,13 @@ class Energieprestatie(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
         if not eenheid.ruimten:
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
-            return waarderingsgroep_bouwer.bouw()
+            return waarderingsgroep_builder.bouw()
 
         if eenheid.monumenten is None:
             warnings.warn(
@@ -99,10 +99,10 @@ class Energieprestatie(Stelselgroep):
             self.peildatum, eenheid
         )
 
-        woningwaardering: WaarderingBouwer | None
+        woningwaardering: WaarderingBuilder | None
         if energieprestatievergoeding:
             logger.info(f"Eenheid ({eenheid.id}): energieprestatievergoeding gevonden.")
-            woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+            woningwaardering = waarderingsgroep_builder.maak_onderliggende(
                 id="energieprestatievergoeding",
                 naam="Energieprestatievergoeding",
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -119,7 +119,7 @@ class Energieprestatie(Stelselgroep):
 
         elif energieprestatie:
             woningwaardering = self._bereken_punten_met_label(
-                waarderingsgroep_bouwer,
+                waarderingsgroep_builder,
                 eenheid,
                 oppervlakte_van_vertrekken,
                 energieprestatie,
@@ -127,10 +127,10 @@ class Energieprestatie(Stelselgroep):
 
         elif eenheid.bouwjaar:
             woningwaardering = self._bereken_punten_met_bouwjaar(
-                waarderingsgroep_bouwer, eenheid, oppervlakte_van_vertrekken
+                waarderingsgroep_builder, eenheid, oppervlakte_van_vertrekken
             )
         else:
-            woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+            woningwaardering = waarderingsgroep_builder.maak_onderliggende(
                 id="onbekend", naam=""
             )
 
@@ -139,10 +139,10 @@ class Energieprestatie(Stelselgroep):
             monument_correctie(
                 eenheid,
                 woningwaardering,
-                waarderingsgroep_bouwer=waarderingsgroep_bouwer,
+                waarderingsgroep_builder=waarderingsgroep_builder,
             )
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
         woningwaardering_groep.punten = float(
             utils.rond_af_op_kwart(Decimal(str(woningwaardering_groep.punten or 0)))
         )
@@ -155,22 +155,22 @@ class Energieprestatie(Stelselgroep):
 
     def _bereken_punten_met_label(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         oppervlakte: float,
         energieprestatie: EenhedenEnergieprestatie,
-    ) -> WaarderingBouwer | None:
+    ) -> WaarderingBuilder | None:
         """
         Berekent de punten voor Energieprestatie op basis van het energielabel.
 
         Args:
-            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
             eenheid (EenhedenEenheid): Eenheid
             oppervlakte (float): Oppervlakte
             energieprestatie (EenhedenEnergieprestatie): Energieprestatie van de eenheid
 
         Returns:
-            WaarderingBouwer | None: De waardering met aangepaste criteriumnaam en punten,
+            WaarderingBuilder | None: De waardering met aangepaste criteriumnaam en punten,
             of None als vereiste energieprestatiegegevens ontbreken.
 
         Raises:
@@ -193,7 +193,7 @@ class Energieprestatie(Stelselgroep):
         label = getattr(
             Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
         ).naam
-        woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+        woningwaardering = waarderingsgroep_builder.maak_onderliggende(
             id="label",
             naam=label,
             meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -253,20 +253,20 @@ class Energieprestatie(Stelselgroep):
 
     def _bereken_punten_met_bouwjaar(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         oppervlakte: float,
-    ) -> WaarderingBouwer:
+    ) -> WaarderingBuilder:
         """
         Berekent de punten voor Energieprestatie op basis van het bouwjaar.
 
         Args:
-            waarderingsgroep_bouwer (WaarderingsgroepBouwer): Bouwer voor deze stelselgroep
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
             eenheid (EenhedenEenheid): Eenheid
             oppervlakte (float): Oppervlakte
 
         Returns:
-            WaarderingBouwer: De waardering met aangepaste criteriumnaam en punten.
+            WaarderingBuilder: De waardering met aangepaste criteriumnaam en punten.
 
         Raises:
             ValueError: Als er iets onverwachts fout gaat bij het gebruiken van een lookup-tabel.
@@ -285,7 +285,7 @@ class Energieprestatie(Stelselgroep):
 
         punten_per_m2 = filtered_df["PuntenPerM2"].values[0]
 
-        woningwaardering = waarderingsgroep_bouwer.maak_onderliggende(
+        woningwaardering = waarderingsgroep_builder.maak_onderliggende(
             id="bouwjaar",
             naam=criterium_naam,
             meeteenheid=Meeteenheid.vierkante_meter_m2,

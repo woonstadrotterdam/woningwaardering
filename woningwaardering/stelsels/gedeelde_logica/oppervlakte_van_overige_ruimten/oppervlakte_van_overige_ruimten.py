@@ -2,9 +2,9 @@ from decimal import Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -64,10 +64,10 @@ def maak_zolder_correctie_waardering(
     ruimte: EenhedenRuimte,
     totaal_oppervlakte: Decimal,
     *,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-) -> WaarderingBouwer:
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> WaarderingBuilder:
     zolder_oppervlakte = rond_af(ruimte.oppervlakte, decimalen=2)
-    return waarderingsgroep_bouwer.maak_onderliggende(
+    return waarderingsgroep_builder.maak_onderliggende(
         id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
         naam="Correctie: zolder zonder vaste trap",
         punten=float(bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)),
@@ -77,8 +77,8 @@ def maak_zolder_correctie_waardering(
 def waardeer_oppervlakte_van_overige_ruimte(
     ruimte: EenhedenRuimte,
     *,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-) -> list[WaarderingBouwer]:
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> list[WaarderingBuilder]:
     if classificeer_ruimte(ruimte) != Ruimtesoort.overige_ruimten:
         logger.debug(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
@@ -92,7 +92,7 @@ def waardeer_oppervlakte_van_overige_ruimte(
     )
 
     return [
-        waarderingsgroep_bouwer.maak_onderliggende(
+        waarderingsgroep_builder.maak_onderliggende(
             id=ruimte.id,
             naam=criterium_naam,
             meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -102,22 +102,22 @@ def waardeer_oppervlakte_van_overige_ruimte(
 
 
 def _is_ruimteregel_met_aantal(
-    waardering: WaarderingBouwer,
+    waardering: WaarderingBuilder,
     *,
-    onder_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    onder_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> bool:
     if waardering.aantal is None or waardering.punten is not None:
         return False
-    return waardering.bovenliggende is onder_bouwer
+    return waardering.bovenliggende is onder_builder
 
 
 def structureer_subtotaal_bij_correcties(
-    waarderingen: list[WaarderingBouwer],
+    waarderingen: list[WaarderingBuilder],
     *,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     factor: Decimal,
     deler: int = 1,
-) -> list[WaarderingBouwer]:
+) -> list[WaarderingBuilder]:
     """Voeg een Subtotaal-waardering toe wanneer er een punten-correctie voor een zolderruimte plaatsvindt.
 
     Oppervlakte van overige ruimten berekent punten op basis van de afgeronde som van de oppervlakte van de ruimten.
@@ -127,7 +127,7 @@ def structureer_subtotaal_bij_correcties(
     elke andere tussenlaag in het id-pad van de onderliggende waarderingen voorkomt.
     """
     heeft_ruimte_aantal = any(
-        _is_ruimteregel_met_aantal(w, onder_bouwer=waarderingsgroep_bouwer)
+        _is_ruimteregel_met_aantal(w, onder_builder=waarderingsgroep_builder)
         for w in waarderingen
     )
     heeft_puntenregel = any(w.punten is not None for w in waarderingen)
@@ -137,7 +137,7 @@ def structureer_subtotaal_bij_correcties(
     ruimteregels = [
         w
         for w in waarderingen
-        if _is_ruimteregel_met_aantal(w, onder_bouwer=waarderingsgroep_bouwer)
+        if _is_ruimteregel_met_aantal(w, onder_builder=waarderingsgroep_builder)
     ]
     overige = [w for w in waarderingen if w not in ruimteregels]
 
@@ -148,7 +148,7 @@ def structureer_subtotaal_bij_correcties(
     punten_uit_m2 = bereken_oppervlakte_punten(totaal_oppervlakte, factor)
     if deler > 1:
         punten_uit_m2 /= Decimal(str(deler))
-    subtotaal = waarderingsgroep_bouwer.maak_onderliggende(
+    subtotaal = waarderingsgroep_builder.maak_onderliggende(
         id="subtotaal",
         naam="Subtotaal",
         meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -165,7 +165,7 @@ def structureer_subtotaal_bij_correcties(
     # gemeenschappelijke oppervlakte-waarderingen. Ze blijven direct onderliggend aan
     # dezelfde bovenliggende; alleen de volgorde in de output verandert.
     for waardering in overige:
-        if waardering.bovenliggende is waarderingsgroep_bouwer:
-            waardering.verplaats_naar(waarderingsgroep_bouwer)
+        if waardering.bovenliggende is waarderingsgroep_builder:
+            waardering.verplaats_naar(waarderingsgroep_builder)
 
     return [subtotaal, *ruimteregels, *overige]

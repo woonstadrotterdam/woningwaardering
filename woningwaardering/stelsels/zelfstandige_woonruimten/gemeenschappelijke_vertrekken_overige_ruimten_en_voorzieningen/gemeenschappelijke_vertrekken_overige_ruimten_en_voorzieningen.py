@@ -6,9 +6,9 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
     GedeeldeRuimtegroepsleutel,
@@ -61,7 +61,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        waarderingsgroep_bouwer = WaarderingsgroepBouwer(
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
 
@@ -76,7 +76,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}) is een zorgwoning en wordt met 3 punten gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
             )
-            waarderingsgroep_bouwer.maak_onderliggende(
+            waarderingsgroep_builder.maak_onderliggende(
                 id="zorgwoning",
                 naam="Zorgwoning",
                 punten=3.0,
@@ -89,17 +89,17 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             ]
 
             # waarderingen voor de oppervlakten van gedeelde ruimten
-            self._oppervlakte_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
+            self._oppervlakte_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
             # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
             self._verkoeling_en_verwarming_waarderingen(
-                waarderingsgroep_bouwer, gedeelde_ruimten
+                waarderingsgroep_builder, gedeelde_ruimten
             )
             # waarderingen voor de keuken van gedeelde ruimten
-            self._keuken_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
+            self._keuken_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
             # waarderingen voor sanitair van gedeelde ruimten
-            self._sanitair_waarderingen(waarderingsgroep_bouwer, gedeelde_ruimten)
+            self._sanitair_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
 
-        woningwaardering_groep = waarderingsgroep_bouwer.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.bouw()
 
         punten = utils.rond_af_op_kwart(
             sum(
@@ -118,7 +118,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
     def _oppervlakte_waarderingen(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         gedeelde_ruimten: list[EenhedenRuimte],
     ) -> None:
         # 2.9.7 Rekenmethode gemeenschappelijke ruimten: oppervlaktepunten volgens
@@ -200,7 +200,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 bereken_oppervlakte_punten(totaal_oppervlakte, punten_per_m2) / deler
             )
 
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+            gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
                 aantal_adressen=gedeeld_met.aantal_adressen,
                 aantal_onzelfstandige_woonruimten=gedeeld_met.aantal_onzelfstandige_woonruimten,
             )
@@ -238,12 +238,12 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 if ruimtesoort == Ruimtesoort.vertrek:
                     waardeer_oppervlakte_van_vertrek(
                         ruimte,
-                        waarderingsgroep_bouwer=detail_bovenliggende,
+                        waarderingsgroep_builder=detail_bovenliggende,
                     )
                 else:
                     waardeer_oppervlakte_van_overige_ruimte(
                         ruimte,
-                        waarderingsgroep_bouwer=detail_bovenliggende,
+                        waarderingsgroep_builder=detail_bovenliggende,
                     )
 
             if ruimtesoort == Ruimtesoort.overige_ruimten:
@@ -268,13 +268,13 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
     def _verkoeling_en_verwarming_waarderingen(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         gedeelde_ruimten: list[EenhedenRuimte],
     ) -> None:
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
-        ) -> WaarderingBouwer:
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+        ) -> WaarderingBuilder:
+            gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
                 aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
                 aantal_onzelfstandige_woonruimten=(
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
@@ -304,14 +304,14 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
     def _keuken_waarderingen(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         ruimten: list[EenhedenRuimte],
     ) -> None:
         for ruimte in ruimten:
             if ruimte.detail_soort is None:
                 continue
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+            gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
                 aantal_adressen=aantal_adressen,
             )
             keuken_categorie = gedeeld_met_laag.categorie(
@@ -321,7 +321,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             ruimte_waarderingen = waardeer_keuken(
                 ruimte,
                 self.stelsel,
-                waarderingsgroep_bouwer=keuken_categorie,
+                waarderingsgroep_builder=keuken_categorie,
                 deler=aantal_adressen,
             )
             if not ruimte_waarderingen:
@@ -329,14 +329,14 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
     def _sanitair_waarderingen(
         self,
-        waarderingsgroep_bouwer: WaarderingsgroepBouwer,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         ruimten: list[EenhedenRuimte],
     ) -> None:
         for ruimte in ruimten:
             if ruimte.detail_soort is None:
                 continue
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
-            gedeeld_met_laag = waarderingsgroep_bouwer.gedeeld_met(
+            gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
                 aantal_adressen=aantal_adressen,
             )
             sanitair_categorie = gedeeld_met_laag.categorie(
@@ -346,7 +346,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             waarderingen = waardeer_sanitair(
                 ruimte,
                 self.stelsel,
-                waarderingsgroep_bouwer=sanitair_categorie,
+                waarderingsgroep_builder=sanitair_categorie,
                 deler=aantal_adressen,
             )
             if not waarderingen:

@@ -3,9 +3,9 @@ from decimal import Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels.bouwers import (
-    WaarderingBouwer,
-    WaarderingsgroepBouwer,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -20,21 +20,21 @@ from woningwaardering.vera.referentiedata import (
 
 def monument_correctie(
     eenheid: EenhedenEenheid,
-    woningwaardering: WaarderingBouwer,
+    woningwaardering: WaarderingBuilder,
     *,
-    waarderingsgroep_bouwer: WaarderingsgroepBouwer | WaarderingBouwer,
-) -> WaarderingBouwer | None:
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> WaarderingBuilder | None:
     """
     Berekent de correctie voor monumenten.
     Voor rijks-, provinciale en gemeentelijke monumenten geldt dat de waardering voor energieprestatie minimaal 0 punten is.
 
     Args:
         eenheid (EenhedenEenheid): Eenheid
-        woningwaardering (WaarderingBouwer): De waardering voor Energieprestatie tot zover.
-        waarderingsgroep_bouwer (WaarderingsgroepBouwer | WaarderingBouwer): waarderingsgroep of bestaande waardering in de hiërarchie.
+        woningwaardering (WaarderingBuilder): De waardering voor Energieprestatie tot zover.
+        waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Returns:
-        WaarderingBouwer | None: De correctiewaardering indien van toepassing, anders None
+        WaarderingBuilder | None: De correctiewaardering indien van toepassing, anders None
     """
 
     is_rijks_provinciaal_of_gemeentelijk_monument = eenheid.monumenten and any(
@@ -60,7 +60,7 @@ def monument_correctie(
     logger.info(
         f"Eenheid ({eenheid.id}) is een monument: waardering voor {Woningwaarderingstelselgroep.energieprestatie.naam} is minimaal {minimum_punten} punten."
     )
-    return waarderingsgroep_bouwer.maak_onderliggende(
+    return waarderingsgroep_builder.maak_onderliggende(
         id="correctie_monument",
         naam="Correctie monument",
         punten=correctie_punten,
