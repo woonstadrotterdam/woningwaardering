@@ -18,7 +18,7 @@ GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
           - Woonkamer                                                  0.25 pt
           - Keuken 1                                                   0.25 pt
           - Keuken 2                                                   0.25 pt
-          - Maximaal 2 punten                                         -0.25 pt
+          - Maximering                                                -0.25 pt
       - Keuken
         - Keuken 1
           - Lengte aanrecht                               3001.00 mm   2.50 pt

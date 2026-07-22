@@ -1,4 +1,7 @@
+import pytest
+
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
+from woningwaardering.stelsels.criterium import maximering_naam
 from woningwaardering.vera.referentiedata import (
     Meeteenheid,
     Woningwaarderingstelsel,
@@ -76,4 +79,53 @@ def test_builder_dedupliceert_gedeelde_criteria_en_sommeert_punten() -> None:
             == f"{STELSELGROEP.name}__gedeeld_met_3_onzelfstandige_woonruimten"
         )
         == 1
+    )
+
+
+@pytest.mark.parametrize(
+    ("gedeeld", "met_puntental", "gedeelde_naam", "verwacht"),
+    [
+        (False, "Maximaal 4 punten", "Maximering", "Maximaal 4 punten"),
+        (True, "Maximaal 4 punten", "Maximering", "Maximering"),
+        (False, "Maximaal 2 punten", "Maximering", "Maximaal 2 punten"),
+        (True, "Maximaal 2 punten", "Maximering", "Maximering"),
+        (
+            False,
+            "Max 1 punt voor Wastafel",
+            "Maximering voor Wastafel",
+            "Max 1 punt voor Wastafel",
+        ),
+        (
+            True,
+            "Max 1 punt voor Wastafel",
+            "Maximering voor Wastafel",
+            "Maximering voor Wastafel",
+        ),
+        (
+            True,
+            "Max 0.75 punten voor Kastruimte",
+            "Maximering voor Kastruimte",
+            "Maximering voor Kastruimte",
+        ),
+    ],
+)
+def test_maximering_naam(
+    gedeeld: bool,
+    met_puntental: str,
+    gedeelde_naam: str,
+    verwacht: str,
+) -> None:
+    assert (
+        maximering_naam(
+            gedeeld=gedeeld,
+            met_puntental=met_puntental,
+            gedeelde_naam=gedeelde_naam,
+        )
+        == verwacht
+    )
+
+
+def test_maximering_naam_standaard_gedeelde_naam() -> None:
+    assert (
+        maximering_naam(gedeeld=True, met_puntental="Maximaal 4 punten") == "Maximering"
     )

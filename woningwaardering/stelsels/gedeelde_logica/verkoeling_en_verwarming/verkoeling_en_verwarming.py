@@ -4,7 +4,12 @@ from typing import Iterator
 from loguru import logger
 
 from woningwaardering.stelsels.builders import WaarderingBuilder
-from woningwaardering.stelsels.utils import classificeer_ruimte
+from woningwaardering.stelsels.criterium import maximering_naam
+from woningwaardering.stelsels.utils import (
+    classificeer_ruimte,
+    gedeeld_met_adressen,
+    gedeeld_met_onzelfstandige_woonruimten,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
 )
@@ -30,6 +35,12 @@ def _subgroep(
     subgroep_id: str,
 ) -> WaarderingBuilder:
     return subgroep(ruimte, subgroep_id, SUBGROEPEN[subgroep_id])
+
+
+def _ruimte_gedeeld(ruimte: EenhedenRuimte) -> bool:
+    return gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
+        ruimte
+    )
 
 
 def waardeer_verkoeling_en_verwarming(
@@ -95,7 +106,10 @@ def _waardeer_verwarmde_overige_ruimte(
                     ruimte,
                     _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
                         id="max_aantal_punten",
-                        naam="Maximaal 4 punten",
+                        naam=maximering_naam(
+                            gedeeld=_ruimte_gedeeld(ruimte),
+                            met_puntental="Maximaal 4 punten",
+                        ),
                         punten=-1,
                     ),
                 )
@@ -161,7 +175,10 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                             subgroep, ruimte, "verkoelde_vertrekken"
                         ).met_onderliggend(
                             id="max_aantal_punten",
-                            naam="Maximaal 2 punten",
+                            naam=maximering_naam(
+                                gedeeld=_ruimte_gedeeld(ruimte),
+                                met_puntental="Maximaal 2 punten",
+                            ),
                             punten=-1,
                         ),
                     )
