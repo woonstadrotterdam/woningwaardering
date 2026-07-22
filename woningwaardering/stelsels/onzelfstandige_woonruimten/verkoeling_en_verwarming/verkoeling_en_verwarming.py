@@ -62,7 +62,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             gedeeld_met = waarderingsgroep_builder.gedeeld_met(
                 aantal_onzelfstandige_woonruimten=deler,
             )
-            return gedeeld_met.categorie(
+            return gedeeld_met.met_subgroep(
                 id=subgroep_id,
                 naam=subgroep_naam,
             )

@@ -205,18 +205,18 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 aantal_onzelfstandige_woonruimten=gedeeld_met.aantal_onzelfstandige_woonruimten,
             )
             if ruimtesoort == Ruimtesoort.vertrek:
-                categorie_lokaal_id = (
+                subgroep_lokaal_id = (
                     Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name
                 )
-                categorie_naam = "Oppervlakte van vertrekken"
+                subgroep_naam = "Oppervlakte van vertrekken"
             else:
-                categorie_lokaal_id = (
+                subgroep_lokaal_id = (
                     Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.name
                 )
-                categorie_naam = "Oppervlakte van overige ruimten"
-            categorie = gedeeld_met_laag.categorie(
-                id=categorie_lokaal_id,
-                naam=categorie_naam,
+                subgroep_naam = "Oppervlakte van overige ruimten"
+            subgroep = gedeeld_met_laag.met_subgroep(
+                id=subgroep_lokaal_id,
+                naam=subgroep_naam,
             )
 
             heeft_zolder_zonder_trap = (
@@ -224,7 +224,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 and any(is_zolder_zonder_vaste_trap(ruimte) for ruimte in ruimten)
             )
             if heeft_zolder_zonder_trap:
-                detail_bovenliggende = categorie.met_onderliggend(
+                detail_bovenliggende = subgroep.met_onderliggend(
                     id="subtotaal",
                     naam="Subtotaal",
                     punten=oppervlaktepunten,
@@ -232,7 +232,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
             else:
-                detail_bovenliggende = categorie
+                detail_bovenliggende = subgroep
 
             for ruimte in ruimten:
                 if ruimtesoort == Ruimtesoort.vertrek:
@@ -255,16 +255,16 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                         bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
                         / deler
                     )
-                    categorie.met_onderliggend(
+                    subgroep.met_onderliggend(
                         id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
                         naam="Correctie: zolder zonder vaste trap",
                         punten=correctie_punten,
                     )
 
             # In het zoldergeval draagt de Subtotaal-waardering de oppervlaktepunten; anders
-            # krijgt de categorie-waardering zelf de punten.
+            # krijgt de subgroep-waardering zelf de punten.
             if not heeft_zolder_zonder_trap:
-                categorie.punten = oppervlaktepunten
+                subgroep.punten = oppervlaktepunten
 
     def _verkoeling_en_verwarming_waarderingen(
         self,
@@ -280,11 +280,11 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                 ),
             )
-            verkoeling_categorie = gedeeld_met_laag.categorie(
+            verkoeling_subgroep = gedeeld_met_laag.met_subgroep(
                 id=Woningwaarderingstelselgroep.verkoeling_en_verwarming.name,
                 naam="Verkoeling en verwarming",
             )
-            return verkoeling_categorie.categorie(
+            return verkoeling_subgroep.met_subgroep(
                 id=subgroep_id,
                 naam=subgroep_naam,
             )
@@ -314,14 +314,14 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
                 aantal_adressen=aantal_adressen,
             )
-            keuken_categorie = gedeeld_met_laag.categorie(
+            keuken_subgroep = gedeeld_met_laag.met_subgroep(
                 id="keuken",
                 naam="Keuken",
             )
             ruimte_waarderingen = waardeer_keuken(
                 ruimte,
                 self.stelsel,
-                waarderingsgroep_builder=keuken_categorie,
+                waarderingsgroep_builder=keuken_subgroep,
                 deler=aantal_adressen,
             )
             if not ruimte_waarderingen:
@@ -339,14 +339,14 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
                 aantal_adressen=aantal_adressen,
             )
-            sanitair_categorie = gedeeld_met_laag.categorie(
+            sanitair_subgroep = gedeeld_met_laag.met_subgroep(
                 id="sanitair",
                 naam="Sanitair",
             )
             waarderingen = waardeer_sanitair(
                 ruimte,
                 self.stelsel,
-                waarderingsgroep_builder=sanitair_categorie,
+                waarderingsgroep_builder=sanitair_subgroep,
                 deler=aantal_adressen,
             )
             if not waarderingen:

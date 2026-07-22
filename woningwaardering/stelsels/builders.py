@@ -5,9 +5,9 @@ onderliggende-relaties. Pas bij :meth:`WaarderingsgroepBuilder.build` ontstaat
 een ``WoningwaarderingResultatenWoningwaarderingGroep`` met een platte lijst
 ``woningwaarderingen``.
 
-Gebruik :meth:`gedeeld_met` voor gedeeld-met/``prive``-lagen, :meth:`categorie`
+Gebruik :meth:`gedeeld_met` voor gedeeld-met/``prive``-lagen, :meth:`met_subgroep`
 voor structurele tussenlagen (sanitair, keuken, …) en :meth:`met_onderliggend`
-voor inhoudelijke waarderingen. Gedeeld-met-lagen en categorieën worden pas actief
+voor inhoudelijke waarderingen. Gedeeld-met-lagen en subgroepen worden pas actief
 (in de output) zodra er inhoud of waarde aan wordt toegevoegd.
 
 De hiërarchie tussen waarderingen is in VERA een platte lijst met
@@ -123,21 +123,21 @@ class WaarderingBuilder:
         ]
         return [*eigen, *gedeeld]
 
-    def categorie(
+    def met_subgroep(
         self,
         *,
         id: str | None,
         naam: str | None,
     ) -> "WaarderingBuilder":
-        """Geef een (lazy) categorie-onderlaag onder deze waardering.
+        """Geef een (lazy) subgroep-onderlaag onder deze waardering.
 
-        De categorie wordt pas actief bij de eerste onderliggende of bij het zetten van
+        De subgroep wordt pas actief bij de eerste onderliggende of bij het zetten van
         ``punten``, ``aantal`` of ``opslagpercentage``.
 
-        Een bestaande categorie met hetzelfde id-segment wordt teruggegeven in
+        Een bestaande subgroep met hetzelfde id-segment wordt teruggegeven in
         plaats van een nieuwe aan te maken.
         """
-        return _voeg_categorie_toe(
+        return _voeg_subgroep_toe(
             self,
             segment=id or "onbekend",
             naam=naam or "",
@@ -261,8 +261,8 @@ class WaarderingsgroepBuilder:
     """Verzamelt de waarderingen van één stelselgroep en bouwt daar het VERA-resultaat uit.
 
     Hang inhoudelijke waarderingen onder de groep met :meth:`met_onderliggend`,
-    gedeeld-met-criteria met :meth:`gedeeld_met` en structurele categorieën met
-    :meth:`categorie`. Sluit af met :meth:`build`.
+    gedeeld-met-criteria met :meth:`gedeeld_met` en structurele subgroepen met
+    :meth:`met_subgroep`. Sluit af met :meth:`build`.
     """
 
     stelsel: Referentiedata
@@ -282,21 +282,21 @@ class WaarderingsgroepBuilder:
     def _actieve_onderliggende(self) -> list[WaarderingBuilder]:
         return [waardering for waardering in self._onderliggende if waardering._actief]
 
-    def categorie(
+    def met_subgroep(
         self,
         *,
         id: str | None,
         naam: str | None,
     ) -> WaarderingBuilder:
-        """Geef een (lazy) categorie direct onder de groep.
+        """Geef een (lazy) subgroep direct onder de groep.
 
-        De categorie wordt pas actief bij de eerste onderliggende of bij het zetten van
+        De subgroep wordt pas actief bij de eerste onderliggende of bij het zetten van
         ``punten``, ``aantal`` of ``opslagpercentage``.
 
-        Een bestaande categorie met hetzelfde id-segment wordt teruggegeven in
+        Een bestaande subgroep met hetzelfde id-segment wordt teruggegeven in
         plaats van een nieuwe aan te maken.
         """
-        return _voeg_categorie_toe(
+        return _voeg_subgroep_toe(
             self,
             segment=id or "onbekend",
             naam=naam or "",
@@ -413,7 +413,7 @@ def _voeg_onderliggende_toe(
     return onderliggende
 
 
-def _voeg_categorie_toe(
+def _voeg_subgroep_toe(
     parent: WaarderingBuilder | WaarderingsgroepBuilder,
     *,
     segment: str,
@@ -422,13 +422,13 @@ def _voeg_categorie_toe(
     for bestaand in parent._onderliggende:
         if bestaand._segment == segment:
             return bestaand
-    categorie = WaarderingBuilder(
+    subgroep = WaarderingBuilder(
         segment=segment,
         naam=naam,
         bovenliggende=parent,
     )
-    parent._onderliggende.append(categorie)
-    return categorie
+    parent._onderliggende.append(subgroep)
+    return subgroep
 
 
 def _gedeeld_met_lagen(

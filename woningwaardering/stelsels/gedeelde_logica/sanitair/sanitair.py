@@ -49,7 +49,7 @@ def waardeer_sanitair(
 
     _bouwkundige_elementen_naar_installaties(ruimte)
 
-    ruimte_criterium = waarderingsgroep_builder.categorie(
+    ruimte_criterium = waarderingsgroep_builder.met_subgroep(
         id=ruimte.id,
         naam=ruimte.naam
         or ruimte.id

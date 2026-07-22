@@ -42,7 +42,7 @@ def waardeer_keuken(
         )
         return []
 
-    ruimte_criterium = waarderingsgroep_builder.categorie(
+    ruimte_criterium = waarderingsgroep_builder.met_subgroep(
         id=ruimte.id,
         naam=ruimte.naam
         or ruimte.id
@@ -81,7 +81,7 @@ def waardeer_keuken(
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aftrek_ongedeeld} punt(en) i.v.m. te veel punten ({punten_voor_extra_voorzieningen} > {max_punten_voorzieningen}) voor extra keuken voorzieningen"
         )
-        extra_voorzieningen_criterium = ruimte_criterium.categorie(
+        extra_voorzieningen_criterium = ruimte_criterium.met_subgroep(
             id="extra_voorzieningen",
             naam="Extra voorzieningen",
         )
@@ -260,7 +260,7 @@ def _waardeer_extra_voorzieningen(
     }
 
     installaties = Counter(ruimte.installaties or [])
-    extra_voorzieningen_criterium = waarderingsgroep_builder.categorie(
+    extra_voorzieningen_criterium = waarderingsgroep_builder.met_subgroep(
         id="extra_voorzieningen",
         naam="Extra voorzieningen",
     )

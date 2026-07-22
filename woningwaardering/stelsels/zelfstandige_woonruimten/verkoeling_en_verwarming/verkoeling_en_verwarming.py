@@ -53,7 +53,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         def subgroep(
             _ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBuilder:
-            return waarderingsgroep_builder.categorie(
+            return waarderingsgroep_builder.met_subgroep(
                 id=subgroep_id,
                 naam=subgroep_naam,
             )
