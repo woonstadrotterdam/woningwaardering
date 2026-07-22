@@ -84,15 +84,15 @@ De onderstaande bomen tonen een gemeenschappelijke rubriek voor een zelfstandige
 ```text
 Gemeenschappelijke vertrekken, overige ruimten en voorzieningen  ← stelselgroep-groep
 └─ Gedeeld met 5 adressen                                         ← gedeeld-met-criterium
-   ├─ Oppervlakte van vertrekken                                  ← subgroep (spiegel van stelselgroep)
+   ├─ Oppervlakte van vertrekken                                  ← subgroep (subgroep van 'Gemeenschappelijke vertrekken, ...')
    │  └─ Keuken                                                   ← ruimteregel (m²; punten op subgroep)
-   ├─ Verkoeling en verwarming                                    ← subgroep (spiegel van stelselgroep)
-   │  └─ Verwarmde vertrekken                                     ← subgroep
+   ├─ Verkoeling en verwarming                                    ← subgroep (subgroep van 'Gemeenschappelijke vertrekken, ...')
+   │  └─ Verwarmde vertrekken                                     ← subgroep (subgroep van 'Verkoeling en verwarming')
    │     └─ Keuken                                                ← detailregel (waardering met punten)
-   └─ Keuken                                                      ← subgroep (spiegel van stelselgroep)
+   └─ Keuken                                                      ← subgroep (subgroep van 'Gemeenschappelijke vertrekken, ...')
       └─ Keuken                                                   ← ruimteregel
          ├─ Lengte aanrecht                                       ← detailregel (waardering met punten)
-         └─ Extra voorzieningen                                   ← subgroep
+         └─ Extra voorzieningen                                   ← subgroep (subgroep van ruimteregel 'Keuken')
             └─ Inbouw koelkast                                    ← detailregel (waardering met punten)
 ```
 
@@ -102,17 +102,17 @@ Gemeenschappelijke vertrekken, overige ruimten en voorzieningen  ← stelselgroe
 Gemeenschappelijke binnenruimten gedeeld met meerdere adressen   ← stelselgroep-groep
 └─ Gedeeld met 4 onzelfstandige woonruimten                       ← gedeeld-met-criterium
    └─ Gedeeld met 4 adressen                                      ← gedeeld-met-criterium
-      ├─ Oppervlakte van vertrekken                               ← subgroep (spiegel van stelselgroep)
+      ├─ Oppervlakte van vertrekken                               ← subgroep (subgroep van 'Gemeenschappelijke binnenruimten ...')
       │  └─ Keuken                                                ← ruimteregel (m²; punten op subgroep)
-      ├─ Verkoeling en verwarming                                 ← subgroep (spiegel van stelselgroep)
-      │  └─ Verwarmde vertrekken                                  ← subgroep
+      ├─ Verkoeling en verwarming                                 ← subgroep (subgroep van 'Gemeenschappelijke binnenruimten ...')
+      │  └─ Verwarmde vertrekken                                  ← subgroep (subgroep van 'Verkoeling en verwarming')
       │     └─ Keuken                                             ← detailregel (waardering met punten)
-      ├─ Keuken                                                   ← subgroep (spiegel van stelselgroep)
+      ├─ Keuken                                                   ← subgroep (subgroep van 'Gemeenschappelijke binnenruimten ...')
       │  └─ Keuken                                                ← ruimteregel
       │     ├─ Lengte aanrecht                                    ← detailregel (waardering met punten)
-      │     └─ Extra voorzieningen                                ← subgroep
+      │     └─ Extra voorzieningen                                ← subgroep (subgroep van ruimteregel 'Keuken')
       │        └─ Inbouw koelkast                                 ← detailregel (waardering met punten)
-      └─ Sanitair                                                 ← subgroep (spiegel van stelselgroep)
+      └─ Sanitair                                                 ← subgroep (subgroep van 'Gemeenschappelijke binnenruimten ...')
          └─ Toilet                                                ← ruimteregel
             └─ Wastafel                                           ← detailregel (waardering met punten)
 ```
