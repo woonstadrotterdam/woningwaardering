@@ -77,7 +77,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid {eenheid.id}: geen WOZ-waarde bekend. Laagste puntenaantal voor de WOZ-waarde wordt toegepast (10 punten)."
             )
             punten = 10.0
-            waarderingsgroep_builder.maak_onderliggende(
+            waarderingsgroep_builder.met_onderliggend(
                 id="geen_woz_waarde_bekend",
                 naam="Geen WOZ-waarde bekend",
                 punten=punten,
@@ -187,30 +187,30 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid {eenheid.id}: WOZ-waarde per m² (€{woz_waarde_per_m2:.0f}) is meer dan 10% lager dan gemiddelde WOZ-waarde per m² (€{gemiddelde_woz_waarde_per_m2:.0f}) voor {corop_gebied['naam']}. {punten} punten voor {self.stelselgroep.naam}"
                 )
 
-            puntenwaardering = waarderingsgroep_builder.maak_onderliggende(
+            puntenwaardering = waarderingsgroep_builder.met_onderliggend(
                 id="percentage_verschil",
                 naam="Percentage verschil",
                 punten=punten,
                 aantal=float(verschil_percentage),
             )
-            puntenwaardering.maak_onderliggende(
+            puntenwaardering.met_onderliggend(
                 id="woz_waarde",
                 naam=f"WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum.strftime(DATUM_FORMAT)}",
                 aantal=woz_eenheid.vastgestelde_waarde,
                 meeteenheid=Meeteenheid.euro,
             )
-            puntenwaardering.maak_onderliggende(
+            puntenwaardering.met_onderliggend(
                 id="gebruiksoppervlakte",
                 naam="Gebruiksoppervlakte",
                 aantal=gebruiksoppervlakte,
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
             )
-            puntenwaardering.maak_onderliggende(
+            puntenwaardering.met_onderliggend(
                 id="woz_waarde_per_m2",
                 naam="WOZ-waarde per m²",
                 aantal=woz_waarde_per_m2,
             )
-            puntenwaardering.maak_onderliggende(
+            puntenwaardering.met_onderliggend(
                 id="gemiddelde_woz_waarde_per_m2",
                 naam=f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}",
                 aantal=gemiddelde_woz_waarde_per_m2,

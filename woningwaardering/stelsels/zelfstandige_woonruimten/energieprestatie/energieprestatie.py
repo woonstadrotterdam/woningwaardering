@@ -111,7 +111,7 @@ class Energieprestatie(Stelselgroep):
         label = getattr(
             Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
         ).naam
-        woningwaardering = waarderingsgroep_builder.maak_onderliggende(
+        woningwaardering = waarderingsgroep_builder.met_onderliggend(
             id="label", naam=label
         )
 
@@ -199,7 +199,7 @@ class Energieprestatie(Stelselgroep):
                 f"Eenheid ({eenheid.id}): lookup-table gefaald voor bouwjaar {eenheid.bouwjaar} voor {self.stelselgroep.naam}."
             )
 
-        woningwaardering = waarderingsgroep_builder.maak_onderliggende(
+        woningwaardering = waarderingsgroep_builder.met_onderliggend(
             id="bouwjaar",
             naam=criterium_naam,
             punten=float(filtered_df[pandsoort.naam].values[0]),
@@ -270,7 +270,7 @@ class Energieprestatie(Stelselgroep):
         woningwaardering: WaarderingBuilder | None
         if energieprestatievergoeding:
             logger.info(f"Eenheid ({eenheid.id}): energieprestatievergoeding gevonden.")
-            woningwaardering = waarderingsgroep_builder.maak_onderliggende(
+            woningwaardering = waarderingsgroep_builder.met_onderliggend(
                 id="energieprestatievergoeding",
                 naam=f"Energieprestatievergoeding {pandsoort.naam}",
                 punten=float(
@@ -293,7 +293,7 @@ class Energieprestatie(Stelselgroep):
                 eenheid, pandsoort, waarderingsgroep_builder
             )
         else:
-            woningwaardering = waarderingsgroep_builder.maak_onderliggende(
+            woningwaardering = waarderingsgroep_builder.met_onderliggend(
                 id="onbekend", naam=""
             )
 

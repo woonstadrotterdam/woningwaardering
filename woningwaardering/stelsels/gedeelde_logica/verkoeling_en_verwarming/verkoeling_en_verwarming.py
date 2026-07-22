@@ -83,7 +83,7 @@ def _waardeer_verwarmde_overige_ruimte(
             )
             yield (
                 ruimte,
-                _subgroep(subgroep, ruimte, subgroep_id).maak_onderliggende(
+                _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
                     id=ruimte.id,
                     naam=ruimte.naam or ruimte.id or "",
                     punten=1.0,
@@ -93,7 +93,7 @@ def _waardeer_verwarmde_overige_ruimte(
             if totaal_punten > 4:
                 yield (
                     ruimte,
-                    _subgroep(subgroep, ruimte, subgroep_id).maak_onderliggende(
+                    _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
                         id="max_aantal_punten",
                         naam="Maximaal 4 punten",
                         punten=-1,
@@ -129,7 +129,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
             )
             yield (
                 ruimte,
-                _subgroep(subgroep, ruimte, "verwarmde_vertrekken").maak_onderliggende(
+                _subgroep(subgroep, ruimte, "verwarmde_vertrekken").met_onderliggend(
                     id=ruimte.id,
                     naam=ruimte.naam or ruimte.id or "",
                     punten=2,
@@ -145,7 +145,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                     ruimte,
                     _subgroep(
                         subgroep, ruimte, "verkoelde_vertrekken"
-                    ).maak_onderliggende(
+                    ).met_onderliggend(
                         id=ruimte.id,
                         naam=ruimte.naam or ruimte.id or "",
                         punten=1,
@@ -159,7 +159,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                         ruimte,
                         _subgroep(
                             subgroep, ruimte, "verkoelde_vertrekken"
-                        ).maak_onderliggende(
+                        ).met_onderliggend(
                             id="max_aantal_punten",
                             naam="Maximaal 2 punten",
                             punten=-1,
@@ -201,7 +201,7 @@ def _waardeer_open_keuken(
             )
             yield (
                 ruimte,
-                _subgroep(subgroep, ruimte, "open_keuken").maak_onderliggende(
+                _subgroep(subgroep, ruimte, "open_keuken").met_onderliggend(
                     id=ruimte.id,
                     naam=ruimte.naam or ruimte.id or "",
                     punten=2.0,

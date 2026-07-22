@@ -67,7 +67,7 @@ def maak_zolder_correctie_waardering(
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> WaarderingBuilder:
     zolder_oppervlakte = rond_af(ruimte.oppervlakte, decimalen=2)
-    return waarderingsgroep_builder.maak_onderliggende(
+    return waarderingsgroep_builder.met_onderliggend(
         id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
         naam="Correctie: zolder zonder vaste trap",
         punten=float(bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)),
@@ -92,7 +92,7 @@ def waardeer_oppervlakte_van_overige_ruimte(
     )
 
     return [
-        waarderingsgroep_builder.maak_onderliggende(
+        waarderingsgroep_builder.met_onderliggend(
             id=ruimte.id,
             naam=criterium_naam,
             meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -148,7 +148,7 @@ def structureer_subtotaal_bij_correcties(
     punten_uit_m2 = bereken_oppervlakte_punten(totaal_oppervlakte, factor)
     if deler > 1:
         punten_uit_m2 /= Decimal(str(deler))
-    subtotaal = waarderingsgroep_builder.maak_onderliggende(
+    subtotaal = waarderingsgroep_builder.met_onderliggend(
         id="subtotaal",
         naam="Subtotaal",
         meeteenheid=Meeteenheid.vierkante_meter_m2,

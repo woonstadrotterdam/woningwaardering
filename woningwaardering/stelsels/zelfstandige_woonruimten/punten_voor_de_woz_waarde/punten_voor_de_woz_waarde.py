@@ -169,51 +169,51 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             naam_woz_waarde = f"WOZ-waarde op waardepeildatum {waardepeildatum.strftime(DATUM_FORMAT)}"
 
         # De WOZ-waarde staat als eerste waardering onder de stelselgroep.
-        waarderingsgroep_builder.maak_onderliggende(
+        waarderingsgroep_builder.met_onderliggend(
             id="woz_waarde",
             naam=naam_woz_waarde,
             aantal=int(woz_waarde),
             meeteenheid=Meeteenheid.euro,
         )
 
-        onderdeel_i = waarderingsgroep_builder.maak_onderliggende(
+        onderdeel_i = waarderingsgroep_builder.met_onderliggend(
             id="onderdeel_I", naam="Onderdeel I", punten=float(punten_onderdeel_I)
         )
 
         # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
         if gebruikt_minimum_waarde:
-            onderdeel_i.maak_onderliggende(
+            onderdeel_i.met_onderliggend(
                 id="minimum_woz_waarde",
                 naam="Minimum WOZ-waarde gebruikt voor berekening",
                 aantal=int(woz_waarde),
                 meeteenheid=Meeteenheid.euro,
             )
-        onderdeel_i.maak_onderliggende(
+        onderdeel_i.met_onderliggend(
             id="factor_I",
             naam="Factor I",
             aantal=factor_onderdeel_I,
         )
 
-        onderdeel_ii = waarderingsgroep_builder.maak_onderliggende(
+        onderdeel_ii = waarderingsgroep_builder.met_onderliggend(
             id="onderdeel_II", naam="Onderdeel II", punten=float(punten_onderdeel_II)
         )
 
         # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
         if gebruikt_minimum_waarde:
-            onderdeel_ii.maak_onderliggende(
+            onderdeel_ii.met_onderliggend(
                 id="minimum_woz_waarde",
                 naam="Minimum WOZ-waarde gebruikt voor berekening",
                 aantal=int(woz_waarde),
                 meeteenheid=Meeteenheid.euro,
             )
 
-        onderdeel_ii.maak_onderliggende(
+        onderdeel_ii.met_onderliggend(
             id="oppervlakte_vertrekken_en_overige_ruimten",
             naam="Oppervlakte van vertrekken en overige ruimten",
             aantal=oppervlakte,
             meeteenheid=Meeteenheid.vierkante_meter_m2,
         )
-        onderdeel_ii.maak_onderliggende(
+        onderdeel_ii.met_onderliggend(
             id="factor_II",
             naam="Factor II",
             aantal=factor_onderdeel_II,
@@ -264,7 +264,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         if 0.0 < woz_punten < minimum_woz_punten:
-            waarderingsgroep_builder.maak_onderliggende(
+            waarderingsgroep_builder.met_onderliggend(
                 id="nieuwbouw_minimum_punten",
                 naam=f"Nieuwbouw: min. {minimum_woz_punten} punten",
                 punten=float(minimum_woz_punten - woz_punten),
@@ -301,7 +301,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 correctie_punten = 186 - totaal_punten_zonder_cap
-                waarderingsgroep_builder.maak_onderliggende(
+                waarderingsgroep_builder.met_onderliggend(
                     id="maximering_woz_punten",
                     naam="Maximering WOZ-punten tot 186 punten totaal",
                     punten=utils.rond_af(correctie_punten, 2),
@@ -310,7 +310,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 logger.info(
                     f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
-                waarderingsgroep_builder.maak_onderliggende(
+                waarderingsgroep_builder.met_onderliggend(
                     id="maximering_woz_punten",
                     naam="Maximering WOZ-punten tot 33% van totaal",
                     punten=utils.rond_af(correctie_punten, 2),

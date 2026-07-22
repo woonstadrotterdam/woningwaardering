@@ -117,7 +117,7 @@ class Buitenruimten(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}): maximaal aantal punten voor {Woningwaarderingstelselgroep.buitenruimten.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
             )
-            waarderingsgroep_builder.maak_onderliggende(
+            waarderingsgroep_builder.met_onderliggend(
                 id="maximering",
                 naam="Maximaal 15 punten",
                 punten=float(aftrek),
@@ -179,7 +179,7 @@ class Buitenruimten(Stelselgroep):
 
         totaal_criteria[gedeeld_met] = aantal_adressen
 
-        waardering = gedeeld_met.maak_onderliggende(
+        waardering = gedeeld_met.met_onderliggend(
             id=ruimte.id or "ruimte",
             naam=ruimte.naam or "",
             meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -199,7 +199,7 @@ class Buitenruimten(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}) heeft geen buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
             )
-            waarderingsgroep_builder.maak_onderliggende(
+            waarderingsgroep_builder.met_onderliggend(
                 id="geen_buitenruimten",
                 naam="Geen buitenruimten",
                 punten=-5.0,
@@ -214,7 +214,7 @@ class Buitenruimten(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
             )
-            waarderingsgroep_builder.maak_onderliggende(
+            waarderingsgroep_builder.met_onderliggend(
                 id="prive_buitenruimten_aanwezig",
                 naam="Privé buitenruimten aanwezig",
                 punten=2.0,

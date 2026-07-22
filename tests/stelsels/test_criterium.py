@@ -13,8 +13,8 @@ def _builder() -> WaarderingsgroepBuilder:
     return WaarderingsgroepBuilder(STELSEL, STELSELGROEP)
 
 
-def test_maak_onderliggende_onder_groep_gebruikt_stelselgroep_als_prefix() -> None:
-    waardering = _builder().maak_onderliggende(
+def test_met_onderliggend_onder_groep_gebruikt_stelselgroep_als_prefix() -> None:
+    waardering = _builder().met_onderliggend(
         id="Space_1",
         naam="Badkamer",
     )
@@ -23,9 +23,9 @@ def test_maak_onderliggende_onder_groep_gebruikt_stelselgroep_als_prefix() -> No
     assert waardering.punten is None
 
 
-def test_maak_onderliggende_nest_onder_waardering() -> None:
-    ruimte = _builder().maak_onderliggende(id="Space_1", naam="Badkamer")
-    detail = ruimte.maak_onderliggende(
+def test_met_onderliggend_nest_onder_waardering() -> None:
+    ruimte = _builder().met_onderliggend(id="Space_1", naam="Badkamer")
+    detail = ruimte.met_onderliggend(
         id="bad",
         naam="Bad",
         punten=6,
@@ -60,8 +60,8 @@ def test_builder_dedupliceert_gedeelde_criteria_en_sommeert_punten() -> None:
     tweede = waarderingsgroep_builder.gedeeld_met(aantal_onzelfstandige_woonruimten=3)
     assert eerste is tweede
 
-    eerste.maak_onderliggende(id="Space_1", naam="Badkamer")
-    eerste.maak_onderliggende(id="Space_1__bad", naam="Bad", punten=2)
+    eerste.met_onderliggend(id="Space_1", naam="Badkamer")
+    eerste.met_onderliggend(id="Space_1__bad", naam="Bad", punten=2)
 
     groep = waarderingsgroep_builder.bouw()
 

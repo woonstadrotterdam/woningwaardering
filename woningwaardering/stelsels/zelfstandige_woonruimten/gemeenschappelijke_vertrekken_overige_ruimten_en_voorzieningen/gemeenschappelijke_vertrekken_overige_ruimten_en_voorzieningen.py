@@ -76,7 +76,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}) is een zorgwoning en wordt met 3 punten gewaardeerd voor stelselgroep {Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.naam}"
             )
-            waarderingsgroep_builder.maak_onderliggende(
+            waarderingsgroep_builder.met_onderliggend(
                 id="zorgwoning",
                 naam="Zorgwoning",
                 punten=3.0,
@@ -224,7 +224,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 and any(is_zolder_zonder_vaste_trap(ruimte) for ruimte in ruimten)
             )
             if heeft_zolder_zonder_trap:
-                detail_bovenliggende = categorie.maak_onderliggende(
+                detail_bovenliggende = categorie.met_onderliggend(
                     id="subtotaal",
                     naam="Subtotaal",
                     punten=oppervlaktepunten,
@@ -255,7 +255,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                         bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
                         / deler
                     )
-                    categorie.maak_onderliggende(
+                    categorie.met_onderliggend(
                         id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
                         naam="Correctie: zolder zonder vaste trap",
                         punten=correctie_punten,

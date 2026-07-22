@@ -86,7 +86,7 @@ def waardeer_keuken(
             naam="Extra voorzieningen",
         )
         detail_waarderingen.append(
-            extra_voorzieningen_criterium.maak_onderliggende(
+            extra_voorzieningen_criterium.met_onderliggend(
                 id="maximering_extra_voorzieningen",
                 naam="Maximaal evenveel punten als aanrecht",
                 punten=aftrek,
@@ -209,7 +209,7 @@ def _waardeer_aanrecht(
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(element.lengte)}mm telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
             )
-            yield waarderingsgroep_builder.maak_onderliggende(
+            yield waarderingsgroep_builder.met_onderliggend(
                 id=f"lengte_aanrecht_{element.id}",
                 naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                 meeteenheid=Meeteenheid.millimeter,
@@ -278,7 +278,7 @@ def _waardeer_extra_voorzieningen(
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {count}x een '{installatiesoort.naam}' voor {Woningwaarderingstelselgroep.keuken.naam}."
         )
-        yield extra_voorzieningen_criterium.maak_onderliggende(
+        yield extra_voorzieningen_criterium.met_onderliggend(
             id=f"extra_voorziening_{installatiesoort.name}",
             naam=installatiesoort.naam,
             meeteenheid=Meeteenheid.stuks,

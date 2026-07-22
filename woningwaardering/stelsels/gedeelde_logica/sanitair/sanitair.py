@@ -164,7 +164,7 @@ def _waardeer_toiletten(
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_toiletten}x een {toiletsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
                 )
-                yield waarderingsgroep_builder.maak_onderliggende(
+                yield waarderingsgroep_builder.met_onderliggend(
                     id=toiletsoort.name,
                     naam=toiletsoort.naam,
                     meeteenheid=Meeteenheid.stuks,
@@ -219,7 +219,7 @@ def _waardeer_wastafels(
                         logger.info(
                             f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
                         )
-                        yield waarderingsgroep_builder.maak_onderliggende(
+                        yield waarderingsgroep_builder.met_onderliggend(
                             id=wastafelsoort.name,
                             naam=f"{wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
                             meeteenheid=Meeteenheid.stuks,
@@ -241,7 +241,7 @@ def _waardeer_wastafels(
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_wastafels}x een {wastafelsoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
             )
-            yield waarderingsgroep_builder.maak_onderliggende(
+            yield waarderingsgroep_builder.met_onderliggend(
                 id=wastafelsoort.name,
                 naam=wastafelsoort.naam,
                 meeteenheid=Meeteenheid.stuks,
@@ -279,7 +279,7 @@ def _waardeer_wastafels(
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam if ruimte.detail_soort else ruimte.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
                 )
-                yield waarderingsgroep_builder.maak_onderliggende(
+                yield waarderingsgroep_builder.met_onderliggend(
                     id=f"max_punten_{wastafelsoort.name}",
                     naam=f"Max {punten_per_wastafel} punt voor {wastafelsoort.naam}",
                     punten=rond_af(
@@ -341,7 +341,7 @@ def _waardeer_baden_en_douches(
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_bad_en_douches}x een {Installatiesoort.bad_en_douche.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
         )
-        yield waarderingsgroep_builder.maak_onderliggende(
+        yield waarderingsgroep_builder.met_onderliggend(
             id=Installatiesoort.bad_en_douche.name,
             naam=Installatiesoort.bad_en_douche.naam,
             meeteenheid=Meeteenheid.stuks,
@@ -363,7 +363,7 @@ def _waardeer_baden_en_douches(
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatiesoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
             )
-            yield waarderingsgroep_builder.maak_onderliggende(
+            yield waarderingsgroep_builder.met_onderliggend(
                 id=installatiesoort.name,
                 naam=installatiesoort.naam,
                 meeteenheid=Meeteenheid.stuks,
@@ -434,7 +434,7 @@ def _waardeer_installaties(
 
                     if voorzieningen_criterium is None:
                         voorzieningen_criterium = (
-                            waarderingsgroep_builder.maak_onderliggende(
+                            waarderingsgroep_builder.met_onderliggend(
                                 id="extra_voorzieningen",
                                 naam="Extra voorzieningen",
                             )
@@ -452,7 +452,7 @@ def _waardeer_installaties(
                     logger.info(
                         f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatiesoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}."
                     )
-                    yield voorzieningen_criterium.maak_onderliggende(
+                    yield voorzieningen_criterium.met_onderliggend(
                         id=installatiesoort.name,
                         naam=installatiesoort.naam,
                         meeteenheid=Meeteenheid.stuks,
@@ -468,7 +468,7 @@ def _waardeer_installaties(
                             logger.info(
                                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatiesoort.naam} van {correctie} punten in {Woningwaarderingstelselgroep.sanitair.naam}."
                             )
-                            yield voorzieningen_criterium.maak_onderliggende(
+                            yield voorzieningen_criterium.met_onderliggend(
                                 id=f"max_punten_{installatiesoort.name}",
                                 naam=f"Max {maximum} punten voor {installatiesoort.naam}",
                                 punten=correctie,
@@ -486,7 +486,7 @@ def _waardeer_installaties(
                             logger.info(
                                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) correctie voor {installatiesoort.naam} van {correctie} punten want er zijn meer dan 2x zoveel stopcontacten ({aantal}) als wastafels ({totaal_aantal_wastafels})."
                             )
-                            yield voorzieningen_criterium.maak_onderliggende(
+                            yield voorzieningen_criterium.met_onderliggend(
                                 id=f"max_{Installatiesoort.stopcontact_bij_wastafel.name}",
                                 naam="Max 2 stopcontacten per wastafel",
                                 punten=correctie,
@@ -506,7 +506,7 @@ def _waardeer_installaties(
                         logger.info(
                             f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximering van {maximering} punten want maximaal evenveel punten voor bad en douche ({totaal_punten_bad_en_douche}) als voor voorzieningen ({totaal_punten_voorzieningen})."
                         )
-                        yield voorzieningen_criterium.maak_onderliggende(
+                        yield voorzieningen_criterium.met_onderliggend(
                             id="maximering_punten_voorzieningen",
                             naam="Max verdubbeling punten bad en douche",
                             punten=maximering,
@@ -591,7 +591,7 @@ def _maximeer_wastafels_in_ruimte(
             )
             waarderingen.insert(
                 index + 1,
-                ruimte_criterium.maak_onderliggende(
+                ruimte_criterium.met_onderliggend(
                     id=f"max_punten_{soort.name}",
                     naam=f"Max {maximum} punt voor {soort.naam}",
                     punten=float(correctie),

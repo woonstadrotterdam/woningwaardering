@@ -46,7 +46,7 @@ def waardeer_oppervlakte_van_vertrek(
     )
 
     return [
-        waarderingsgroep_builder.maak_onderliggende(
+        waarderingsgroep_builder.met_onderliggend(
             id=ruimte.id,
             naam=criterium_naam,
             meeteenheid=Meeteenheid.vierkante_meter_m2,

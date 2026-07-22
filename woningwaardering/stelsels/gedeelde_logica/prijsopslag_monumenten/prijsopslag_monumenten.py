@@ -50,7 +50,7 @@ def opslag_rijksmonument(
             )
             datum_afsluiten_huurovereenkomst = peildatum
 
-        woningwaardering = waarderingsgroep_builder.maak_onderliggende(
+        woningwaardering = waarderingsgroep_builder.met_onderliggend(
             id="rijksmonument",
             naam="Rijksmonument",
         )
@@ -110,7 +110,7 @@ def opslag_gemeentelijk_of_provinciaal_monument(
         logger.info(
             f"Eenheid ({eenheid.id}) is gemeentelijk of provinciaal monument en krijgt 15% opslag op de maximale huurprijs."
         )
-        waardering = waarderingsgroep_builder.maak_onderliggende(
+        waardering = waarderingsgroep_builder.met_onderliggend(
             id="gemeentelijk_of_provinciaal_monument",
             naam="Gemeentelijk of provinciaal monument",
         )
@@ -193,7 +193,7 @@ def opslag_beschermd_stads_of_dorpsgezicht(
     logger.info(
         f"Eenheid ({eenheid.id}) behoort tot een rijksbeschermd stads- of dorpsgezicht en krijgt 5% opslag op de maximale huurprijs."
     )
-    waardering = waarderingsgroep_builder.maak_onderliggende(
+    waardering = waarderingsgroep_builder.met_onderliggend(
         id="rijksbeschermd_stads_of_dorpsgezicht",
         naam="Rijksbeschermd stads- of dorpsgezicht",
     )

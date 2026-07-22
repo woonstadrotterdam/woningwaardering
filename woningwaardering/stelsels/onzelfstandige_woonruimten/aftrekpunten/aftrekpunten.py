@@ -110,7 +110,7 @@ class Aftrekpunten(Stelselgroep):
                 logger.info(
                     f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken < 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), {aftrekpunten} punten voor {self.stelselgroep.naam}"
                 )
-                waardering = waarderingsgroep_builder.maak_onderliggende(
+                waardering = waarderingsgroep_builder.met_onderliggend(
                     id=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name}_minder_dan_8m2",
                     naam=f"Totale oppervlakte in Rubriek '{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}' is minder dan 8m2",
                     punten=aftrekpunten,

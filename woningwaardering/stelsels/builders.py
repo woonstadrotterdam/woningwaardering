@@ -6,7 +6,7 @@ een ``WoningwaarderingResultatenWoningwaarderingGroep`` met een platte lijst
 ``woningwaarderingen``.
 
 Gebruik :meth:`gedeeld_met` voor gedeeld-met/``prive``-lagen, :meth:`categorie`
-voor structurele tussenlagen (sanitair, keuken, …) en :meth:`maak_onderliggende`
+voor structurele tussenlagen (sanitair, keuken, …) en :meth:`met_onderliggend`
 voor inhoudelijke waarderingen. Gedeeld-met-lagen en categorieën worden pas actief
 (in de output) zodra er inhoud of waarde aan wordt toegevoegd.
 
@@ -143,7 +143,7 @@ class WaarderingBuilder:
             naam=naam or "",
         )
 
-    def maak_onderliggende(
+    def met_onderliggend(
         self,
         *,
         id: str | None,
@@ -271,7 +271,7 @@ class WaarderingBuilder:
 class WaarderingsgroepBuilder:
     """Verzamelt de waarderingen van één stelselgroep en bouwt daar het VERA-resultaat uit.
 
-    Hang inhoudelijke waarderingen onder de groep met :meth:`maak_onderliggende`,
+    Hang inhoudelijke waarderingen onder de groep met :meth:`met_onderliggend`,
     gedeeld-met-criteria met :meth:`gedeeld_met` en structurele categorieën met
     :meth:`categorie`. Sluit af met :meth:`bouw`.
     """
@@ -313,7 +313,7 @@ class WaarderingsgroepBuilder:
             naam=naam or "",
         )
 
-    def maak_onderliggende(
+    def met_onderliggend(
         self,
         *,
         id: str | None,

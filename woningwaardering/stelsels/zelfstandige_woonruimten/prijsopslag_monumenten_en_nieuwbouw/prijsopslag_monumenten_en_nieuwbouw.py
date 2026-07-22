@@ -173,7 +173,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {self.stelselgroep}."
                 )
 
-                waardering = waarderingsgroep_builder.maak_onderliggende(
+                waardering = waarderingsgroep_builder.met_onderliggend(
                     id="nieuwbouw",
                     naam="Nieuwbouw",
                 )

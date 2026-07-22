@@ -102,7 +102,7 @@ class Energieprestatie(Stelselgroep):
         woningwaardering: WaarderingBuilder | None
         if energieprestatievergoeding:
             logger.info(f"Eenheid ({eenheid.id}): energieprestatievergoeding gevonden.")
-            woningwaardering = waarderingsgroep_builder.maak_onderliggende(
+            woningwaardering = waarderingsgroep_builder.met_onderliggend(
                 id="energieprestatievergoeding",
                 naam="Energieprestatievergoeding",
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -130,7 +130,7 @@ class Energieprestatie(Stelselgroep):
                 waarderingsgroep_builder, eenheid, oppervlakte_van_vertrekken
             )
         else:
-            woningwaardering = waarderingsgroep_builder.maak_onderliggende(
+            woningwaardering = waarderingsgroep_builder.met_onderliggend(
                 id="onbekend", naam=""
             )
 
@@ -193,7 +193,7 @@ class Energieprestatie(Stelselgroep):
         label = getattr(
             Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
         ).naam
-        woningwaardering = waarderingsgroep_builder.maak_onderliggende(
+        woningwaardering = waarderingsgroep_builder.met_onderliggend(
             id="label",
             naam=label,
             meeteenheid=Meeteenheid.vierkante_meter_m2,
@@ -285,7 +285,7 @@ class Energieprestatie(Stelselgroep):
 
         punten_per_m2 = filtered_df["PuntenPerM2"].values[0]
 
-        woningwaardering = waarderingsgroep_builder.maak_onderliggende(
+        woningwaardering = waarderingsgroep_builder.met_onderliggend(
             id="bouwjaar",
             naam=criterium_naam,
             meeteenheid=Meeteenheid.vierkante_meter_m2,

@@ -60,7 +60,7 @@ def monument_correctie(
     logger.info(
         f"Eenheid ({eenheid.id}) is een monument: waardering voor {Woningwaarderingstelselgroep.energieprestatie.naam} is minimaal {minimum_punten} punten."
     )
-    return waarderingsgroep_builder.maak_onderliggende(
+    return waarderingsgroep_builder.met_onderliggend(
         id="correctie_monument",
         naam="Correctie monument",
         punten=correctie_punten,

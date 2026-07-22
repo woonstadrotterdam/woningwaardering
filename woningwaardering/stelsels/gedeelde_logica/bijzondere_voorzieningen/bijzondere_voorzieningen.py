@@ -154,7 +154,7 @@ def _opslag_zorgwoning(
         f"Eenheid ({eenheid.id}) is een zorgwoning: {verhoging} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
-    return waarderingsgroep_builder.maak_onderliggende(
+    return waarderingsgroep_builder.met_onderliggend(
         id="zorgwoning_puntenverhoging",
         naam="Zorgwoning 35% puntenverhoging",
         punten=float(verhoging),
@@ -191,7 +191,7 @@ def _aanbelfunctie_met_video_en_audioverbinding(
         f"Eenheid ({eenheid.id}) heeft een aanbelfunctie met video en audioverbinding: 0.25 punt voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
-    return waarderingsgroep_builder.maak_onderliggende(
+    return waarderingsgroep_builder.met_onderliggend(
         id="aanbelfunctie_met_video_en_audioverbinding",
         naam="Aanbelfunctie met video- en audioverbinding",
         punten=0.25,
@@ -228,7 +228,7 @@ def _prive_laadpaal(
         f"Eenheid ({eenheid.id}) heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'}: {punten_laadpalen} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
-    return waarderingsgroep_builder.maak_onderliggende(
+    return waarderingsgroep_builder.met_onderliggend(
         id="laadpalen",
         naam="Laadpalen",
         meeteenheid=Meeteenheid.stuks,

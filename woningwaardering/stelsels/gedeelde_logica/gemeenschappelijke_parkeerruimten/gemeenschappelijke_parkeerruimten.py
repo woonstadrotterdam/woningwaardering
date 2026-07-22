@@ -138,7 +138,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{type_parkeeruimte}'."
         )
 
-        gedeeld_met_laag.maak_onderliggende(
+        gedeeld_met_laag.met_onderliggend(
             id=ruimte.id,
             naam=type_parkeeruimte,
             meeteenheid=Meeteenheid.stuks,
@@ -156,7 +156,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een laadpaal bij '{type_parkeeruimte}'."
             )
 
-            gedeeld_met_laag.maak_onderliggende(
+            gedeeld_met_laag.met_onderliggend(
                 id=f"{ruimte.id}_laadpaal",
                 naam="Laadpaal",
                 meeteenheid=Meeteenheid.stuks,

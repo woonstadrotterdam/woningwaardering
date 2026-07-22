@@ -62,7 +62,7 @@ class Buitenruimten(Stelselgroep):
                         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                     ),
                 )
-                laag.maak_onderliggende(
+                laag.met_onderliggend(
                     id=ruimte.id or "ruimte",
                     naam=ruimte.naam or "",
                     punten=bron.punten,
@@ -112,7 +112,7 @@ class Buitenruimten(Stelselgroep):
             logger.info(
                 f"Eenheid ({eenheid.id}): maximaal aantal punten voor {self.stelselgroep.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
             )
-            return waarderingsgroep_builder.maak_onderliggende(
+            return waarderingsgroep_builder.met_onderliggend(
                 id="maximaal_15_punten",
                 naam="Maximaal 15 punten",
                 punten=float(aftrek),
@@ -224,7 +224,7 @@ class Buitenruimten(Stelselgroep):
             for ruimte in eenheid.ruimten or []
         ):
             prive_laag = waarderingsgroep_builder.gedeeld_met()
-            return prive_laag.maak_onderliggende(
+            return prive_laag.met_onderliggend(
                 id="prive_buitenruimten_aanwezig",
                 naam="Privé buitenruimten aanwezig",
                 punten=2.0,
