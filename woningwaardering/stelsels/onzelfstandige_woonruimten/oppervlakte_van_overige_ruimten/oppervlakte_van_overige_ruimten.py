@@ -149,7 +149,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 )
             )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
         woningwaardering_groep.punten = float(
             utils.rond_af_op_kwart(
                 sum(

@@ -53,7 +53,7 @@ class Sanitair(Stelselgroep):
                 ruimte, self.stelsel, waarderingsgroep_builder=waarderingsgroep_builder
             )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

@@ -100,7 +100,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             factor=Decimal("0.75"),
         )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
         groep_waarderingen = woningwaardering_groep.woningwaarderingen or []
         if any(w.punten is not None for w in groep_waarderingen):
             # de maximering is altijd in punten en daarom wordt de som van de punten hier gebruikt om de maximering toe te passsen

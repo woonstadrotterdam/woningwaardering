@@ -84,7 +84,7 @@ class Buitenruimten(Stelselgroep):
         # maximaal 15 punten
         self._maximering(waarderingsgroep_builder, eenheid)
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
         # rond af op kwarten
         woningwaardering_groep.punten = float(
             utils.rond_af_op_kwart(woningwaardering_groep.punten)

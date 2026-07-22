@@ -51,7 +51,7 @@ class Aftrekpunten(Stelselgroep):
             waarderingsgroep_builder, eenheid, woningwaardering_resultaat
         )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

@@ -1,7 +1,7 @@
 """Builders die tijdens een ``waardeer()``-aanroep een woningwaarderingsgroep opbouwen.
 
 De builders houden de hiërarchie bij met hun bovenliggende- en
-onderliggende-relaties. Pas bij :meth:`WaarderingsgroepBuilder.bouw` ontstaat
+onderliggende-relaties. Pas bij :meth:`WaarderingsgroepBuilder.build` ontstaat
 een ``WoningwaarderingResultatenWoningwaarderingGroep`` met een platte lijst
 ``woningwaarderingen``.
 
@@ -11,7 +11,7 @@ voor inhoudelijke waarderingen. Gedeeld-met-lagen en categorieën worden pas act
 (in de output) zodra er inhoud of waarde aan wordt toegevoegd.
 
 De hiërarchie tussen waarderingen is in VERA een platte lijst met
-``bovenliggende_criterium``-verwijzingen. ``bouw()`` loopt alle actieve
+``bovenliggende_criterium``-verwijzingen. ``build()`` loopt alle actieve
 waarderingen af (elke bovenliggende vóór wat eronder hangt) en zet die
 verwijzingen.
 """
@@ -273,7 +273,7 @@ class WaarderingsgroepBuilder:
 
     Hang inhoudelijke waarderingen onder de groep met :meth:`met_onderliggend`,
     gedeeld-met-criteria met :meth:`gedeeld_met` en structurele categorieën met
-    :meth:`categorie`. Sluit af met :meth:`bouw`.
+    :meth:`categorie`. Sluit af met :meth:`build`.
     """
 
     stelsel: Referentiedata
@@ -362,7 +362,7 @@ class WaarderingsgroepBuilder:
         for onderliggende in self._actieve_onderliggende:
             yield from onderliggende._zelf_en_onderliggende()
 
-    def bouw(self) -> WoningwaarderingResultatenWoningwaarderingGroep:
+    def build(self) -> WoningwaarderingResultatenWoningwaarderingGroep:
         """Bouw de VERA-woningwaarderingsgroep uit de opgebouwde hiërarchie.
 
         De boom wordt doorlopen (elke bovenliggende vóór zijn onderliggende) en

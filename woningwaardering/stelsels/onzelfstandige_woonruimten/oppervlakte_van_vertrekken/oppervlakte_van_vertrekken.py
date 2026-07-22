@@ -74,7 +74,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
             )
             oppervlakte_totaal_na_delen += oppervlakte_na_delen
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
         woningwaardering_groep.punten = float(
             utils.rond_af(oppervlakte_totaal_na_delen, decimalen=0)
         )

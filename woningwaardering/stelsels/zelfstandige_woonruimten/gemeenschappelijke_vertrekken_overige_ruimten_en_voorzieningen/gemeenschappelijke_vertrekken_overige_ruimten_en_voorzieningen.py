@@ -99,7 +99,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             # waarderingen voor sanitair van gedeelde ruimten
             self._sanitair_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         punten = utils.rond_af_op_kwart(
             sum(

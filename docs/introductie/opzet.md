@@ -78,7 +78,7 @@ Voorbeelden:
 - `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen__keuken` (categorie onder gedeeld-met aggregaat)
 - `verkoeling_en_verwarming__verwarmde_vertrekken` (criteriumsleutel)
 
-`WaarderingsgroepBuilder` bouwt een stelselgroep-groep op: start met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hang onderliggende waarderingen aan met `met_onderliggend(...)`, dedupliceer gedeeld-met-criteria met `gedeeld_met(...)`, en sluit af met `bouw()` (sommeert de punten en levert een kale `WoningwaarderingResultatenWoningwaarderingGroep`). De `waarderingsgroep_builder` die stelselgroepen aan gedeelde helpers doorgeven is daarmee een `WaarderingsgroepBuilder` of `WaarderingBuilder`; de helpers hangen hun resultaten daar direct onder.
+`WaarderingsgroepBuilder` bouwt een stelselgroep-groep op: start met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hang onderliggende waarderingen aan met `met_onderliggend(...)`, dedupliceer gedeeld-met-criteria met `gedeeld_met(...)`, en sluit af met `build()` (sommeert de punten en levert een kale `WoningwaarderingResultatenWoningwaarderingGroep`). De `waarderingsgroep_builder` die stelselgroepen aan gedeelde helpers doorgeven is daarmee een `WaarderingsgroepBuilder` of `WaarderingBuilder`; de helpers hangen hun resultaten daar direct onder.
 
 Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat.
 

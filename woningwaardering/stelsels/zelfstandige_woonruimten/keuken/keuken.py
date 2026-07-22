@@ -50,7 +50,7 @@ class Keuken(Stelselgroep):
                 ruimte, self.stelsel, waarderingsgroep_builder=waarderingsgroep_builder
             )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         heeft_keuken_waarderingen = any(
             woningwaardering.punten is not None

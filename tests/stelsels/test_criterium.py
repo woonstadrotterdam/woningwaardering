@@ -63,7 +63,7 @@ def test_builder_dedupliceert_gedeelde_criteria_en_sommeert_punten() -> None:
     eerste.met_onderliggend(id="Space_1", naam="Badkamer")
     eerste.met_onderliggend(id="Space_1__bad", naam="Bad", punten=2)
 
-    groep = waarderingsgroep_builder.bouw()
+    groep = waarderingsgroep_builder.build()
 
     assert groep.punten == 2.0
     assert groep.woningwaarderingen is not None

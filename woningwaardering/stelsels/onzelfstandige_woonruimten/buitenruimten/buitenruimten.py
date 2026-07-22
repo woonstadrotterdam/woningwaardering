@@ -73,11 +73,11 @@ class Buitenruimten(Stelselgroep):
         # twee 2 punten voor de aanwezigheid van privé buitenruimten
         self._prive_buitenruimten_aanwezig(waarderingsgroep_builder, eenheid)
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         # maximaal 15 punten
         if self._maximering(waarderingsgroep_builder, eenheid, woningwaardering_groep):
-            woningwaardering_groep = waarderingsgroep_builder.bouw()
+            woningwaardering_groep = waarderingsgroep_builder.build()
 
         # rond af op kwarten
         woningwaardering_groep.punten = float(

@@ -247,21 +247,21 @@ class Energieprestatie(Stelselgroep):
                 f"Eenheid ({eenheid.id}) heeft een geldige pandsoort, maar de naam is niet gespecificeerd. Voeg {Pandsoort.eengezinswoning.naam} of {Pandsoort.meergezinswoning.naam} toe aan de naam van het 'pandsoort'-attribuut.",
                 UserWarning,
             )
-            return waarderingsgroep_builder.bouw()
+            return waarderingsgroep_builder.build()
 
         if not pandsoort:
             warnings.warn(
                 f"Eenheid ({eenheid.id}) heeft geen pandsoort {Pandsoort.eengezinswoning.naam} of {Pandsoort.meergezinswoning.naam} en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}.",
                 UserWarning,
             )
-            return waarderingsgroep_builder.bouw()
+            return waarderingsgroep_builder.build()
 
         if not (energieprestatie or eenheid.bouwjaar):
             warnings.warn(
                 f"Eenheid ({eenheid.id}) heeft geen bruikbare energieprestatie of bouwjaar en komt daarom niet in aanmerking voor waardering onder stelselgroep {Woningwaarderingstelselgroep.energieprestatie.naam}.",
                 UserWarning,
             )
-            return waarderingsgroep_builder.bouw()
+            return waarderingsgroep_builder.build()
 
         energieprestatievergoeding = get_energieprestatievergoeding(
             self.peildatum, eenheid
@@ -305,7 +305,7 @@ class Energieprestatie(Stelselgroep):
                 waarderingsgroep_builder=waarderingsgroep_builder,
             )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}."

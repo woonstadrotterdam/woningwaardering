@@ -56,7 +56,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         def _niet_waardeerbaar() -> WoningwaarderingResultatenWoningwaarderingGroep:
             # Incomplete invoer: geen waardering. ``punten = None`` (niet 0) zodat dit
             # onderscheidbaar is van een berekende nulscore.
-            groep = waarderingsgroep_builder.bouw()
+            groep = waarderingsgroep_builder.build()
             groep.punten = None
             return groep
 
@@ -216,7 +216,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 aantal=gemiddelde_woz_waarde_per_m2,
             )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
         woningwaardering_groep.punten = float(punten)
 
         logger.info(

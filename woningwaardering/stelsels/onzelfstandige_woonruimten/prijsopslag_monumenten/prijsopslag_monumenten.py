@@ -56,7 +56,7 @@ class PrijsopslagMonumenten(Stelselgroep):
         ):
             pass
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         opslagpercentage = float(
             sum(

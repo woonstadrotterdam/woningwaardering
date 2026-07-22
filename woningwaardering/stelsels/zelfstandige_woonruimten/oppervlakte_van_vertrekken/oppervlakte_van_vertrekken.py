@@ -58,7 +58,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
                 ruimte, waarderingsgroep_builder=waarderingsgroep_builder
             )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         punten = rond_af_op_kwart(
             rond_af(

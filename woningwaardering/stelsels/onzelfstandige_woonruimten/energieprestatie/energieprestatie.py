@@ -80,7 +80,7 @@ class Energieprestatie(Stelselgroep):
 
         if not eenheid.ruimten:
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
-            return waarderingsgroep_builder.bouw()
+            return waarderingsgroep_builder.build()
 
         if eenheid.monumenten is None:
             warnings.warn(
@@ -142,7 +142,7 @@ class Energieprestatie(Stelselgroep):
                 waarderingsgroep_builder=waarderingsgroep_builder,
             )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
         woningwaardering_groep.punten = float(
             utils.rond_af_op_kwart(Decimal(str(woningwaardering_groep.punten or 0)))
         )

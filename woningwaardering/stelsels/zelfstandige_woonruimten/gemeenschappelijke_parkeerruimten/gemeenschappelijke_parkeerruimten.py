@@ -47,14 +47,14 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
         if not eenheid.ruimten:
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
-            return waarderingsgroep_builder.bouw()
+            return waarderingsgroep_builder.build()
 
         for ruimte in eenheid.ruimten:
             waardeer_gemeenschappelijke_parkeerruimte(
                 ruimte, waarderingsgroep_builder=waarderingsgroep_builder
             )
 
-        woningwaardering_groep = waarderingsgroep_builder.bouw()
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         punten_totaal = float(
             utils.rond_af_op_kwart(
