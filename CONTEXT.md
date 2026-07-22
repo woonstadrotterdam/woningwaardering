@@ -19,7 +19,7 @@ Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen i
 ## Projectgrenzen
 
 - De package berekent woningwaarderingen op basis van een digitale representatie van een woonruimte.
-- De berekening volgt het beleidsboek van de Huurcommissie, met januari 2026 als actuele ankerdatum in de bestaande documentatie.
+- De berekening volgt het beleidsboek van de Huurcommissie, met juli 2026 als actuele ankerdatum in de bestaande documentatie.
 - De input en output volgen de VERA-standaard, met de concrete versies vastgelegd in `pyproject.toml`.
 - Aan berekeningen en output kunnen geen rechten worden ontleend. Gebruikers moeten documentatie, implementatietoelichtingen en openstaande issues raadplegen om resultaten goed te interpreteren.
 - Wanneer VERA of beschikbare inputdata een beleidsregel niet volledig kan dragen, wordt de gekozen interpretatie in de implementatietoelichtingen beschreven.
@@ -93,6 +93,10 @@ Een sleutel waarmee criteria logisch gegroepeerd kunnen worden, bijvoorbeeld om 
 ### bovenliggendeCriterium
 
 Verwijzing van een waardering naar een bovenliggend criterium binnen dezelfde stelselgroep-groep (JSON: `bovenliggendeCriterium`). Criteriumsleutels volgen de id-families in `docs/introductie/opzet.md` (ruimteregel, gedeeld-met aggregaat, criteriumnaam-regel).
+
+### Maximering
+
+Een waardering die een puntencap toepast. Als die waardering zelf gedeeld wordt én de naam een numeriek puntental bevat (bijv. `Maximaal 4 punten`), heet die in de output `Maximering` (of `Maximering voor …` wanneer het onderwerp onderscheidend is). Beschrijvende maximeringen zonder puntental (bijv. `Maximaal evenveel punten als aanrecht`) blijven ongewijzigd. Een maximering die alleen op het al gedeelde totaal geldt (zoals buitenruimten max. 15) behoudt ook het puntental in de naam.
 
 ### Structuurterminologie
 

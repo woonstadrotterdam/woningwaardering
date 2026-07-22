@@ -9,7 +9,12 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
-from woningwaardering.stelsels.utils import rond_af
+from woningwaardering.stelsels.criterium import maximering_naam
+from woningwaardering.stelsels.utils import (
+    gedeeld_met_adressen,
+    gedeeld_met_onzelfstandige_woonruimten,
+    rond_af,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -34,6 +39,12 @@ _MAX_TELLER_RUIMTES_ZONDER_MAX = (
     Ruimtedetailsoort.badkamer_met_toilet,
     Ruimtedetailsoort.doucheruimte,
 )
+
+
+def _ruimte_gedeeld(ruimte: EenhedenRuimte) -> bool:
+    return gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
+        ruimte
+    )
 
 
 def waardeer_sanitair(
@@ -281,7 +292,13 @@ def _waardeer_wastafels(
                 )
                 yield waarderingsgroep_builder.met_onderliggend(
                     id=f"max_punten_{wastafelsoort.name}",
-                    naam=f"Max {punten_per_wastafel} punt voor {wastafelsoort.naam}",
+                    naam=maximering_naam(
+                        gedeeld=_ruimte_gedeeld(ruimte),
+                        met_puntental=(
+                            f"Max {punten_per_wastafel} punt voor {wastafelsoort.naam}"
+                        ),
+                        gedeelde_naam=f"Maximering voor {wastafelsoort.naam}",
+                    ),
                     punten=rond_af(
                         punten_per_wastafel - punten_voor_wastafels,
                         decimalen=2,
@@ -470,7 +487,16 @@ def _waardeer_installaties(
                             )
                             yield voorzieningen_criterium.met_onderliggend(
                                 id=f"max_punten_{installatiesoort.name}",
-                                naam=f"Max {maximum} punten voor {installatiesoort.naam}",
+                                naam=maximering_naam(
+                                    gedeeld=_ruimte_gedeeld(ruimte),
+                                    met_puntental=(
+                                        f"Max {maximum} punten voor"
+                                        f" {installatiesoort.naam}"
+                                    ),
+                                    gedeelde_naam=(
+                                        f"Maximering voor {installatiesoort.naam}"
+                                    ),
+                                ),
                                 punten=correctie,
                             )
 
@@ -593,7 +619,11 @@ def _maximeer_wastafels_in_ruimte(
                 index + 1,
                 ruimte_criterium.met_onderliggend(
                     id=f"max_punten_{soort.name}",
-                    naam=f"Max {maximum} punt voor {soort.naam}",
+                    naam=maximering_naam(
+                        gedeeld=_ruimte_gedeeld(ruimte),
+                        met_puntental=f"Max {maximum} punt voor {soort.naam}",
+                        gedeelde_naam=f"Maximering voor {soort.naam}",
+                    ),
                     punten=float(correctie),
                 ),
             )

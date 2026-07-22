@@ -12,6 +12,6 @@ VERKOELING EN VERWARMING
       - Slaapkamer1                                                    0.50 pt
       - Slaapkamer2                                                    0.50 pt
       - Slaapkamer3                                                    0.50 pt
-      - Maximaal 2 punten                                             -0.50 pt
+      - Maximering                                                    -0.50 pt
                                                                       --------
   Totaal                                                               4.00 pt

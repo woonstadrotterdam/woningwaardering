@@ -21,3 +21,10 @@ def naam_gedeeld_met_groep(
     raise ValueError(
         f"soort is verplicht bij gedeeld met aantal {aantal} (verwacht adressen of onzelfstandige_woonruimten)"
     )
+
+
+def maximering_naam(
+    *, gedeeld: bool, met_puntental: str, gedeelde_naam: str = "Maximering"
+) -> str:
+    """Naam voor een maximering: zonder puntental zodra de waardering gedeeld wordt."""
+    return gedeelde_naam if gedeeld else met_puntental
