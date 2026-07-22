@@ -8,7 +8,7 @@ De primaire context is de publieke `woningwaardering`-package. Lokale of organis
 
 - `README.md` beschrijft het doel, de juridische disclaimer, de actuele beleidsboekreferentie en de gebruikte VERA-versies.
 - `pyproject.toml` bevat de package-metadata, Python-versie en vastgelegde VERA-databronnen.
-- `docs/introductie/opzet.md` beschrijft de repository-opzet, waarschuwingen, lookup-tabellen en criterium-id's.
+- `docs/introductie/opzet.md` beschrijft de repository-opzet, waarschuwingen, lookup-tabellen en de criteriumstrategie.
 - `docs/implementatietoelichtingen/` legt per stelselgroep vast welke beleidsboekregels wel of niet zijn geïmplementeerd en waarom.
 - Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Vanaf deze pagina's klik je door naar de algemene toelichting en de stelselgroepen.
 - `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, naamgeving, tests, data, logging en releases.
@@ -84,7 +84,7 @@ Een CSV-bestand met constanten of tabulaire regeldata die nodig zijn voor puntbe
 
 ### Criterium-id
 
-Een samengestelde identifier voor een criterium in de output. Id's worden afgeleid via `maak_waardering` / `maak_gedeeld_met`: elk segment wordt met `__` aan de id van de bovenliggende gekoppeld (pad-id). Zie `docs/introductie/opzet.md`.
+Een samengestelde identifier voor een criterium in de output. Het is een pad-id: de id wordt afgeleid uit de plek in de hiërarchie, waarbij elk segment met `__` aan de id van het bovenliggende criterium wordt gekoppeld. Zie `docs/introductie/opzet.md` voor de criteriumstrategie en de opbouw van deze id's.
 
 ### criteriumSleutel
 
@@ -100,7 +100,7 @@ Een waardering die een puntencap toepast. Als die waardering zelf gedeeld wordt 
 
 ### Structuurterminologie
 
-De samenhang tussen waarderingen in de output is een keten via `bovenliggendeCriterium`: elke regel is een waardering met een `criterium`, en een criterium kan onderliggende criteria hebben. Het onderscheid tussen beide is scherp: een **criterium** draagt de identiteit, naam en plek in de hiërarchie (`id`, `naam`, `bovenliggendeCriterium`, `meeteenheid`) en heeft nooit punten; `punten` en `aantal` zitten op de **waardering**. Een groeperende regel (zoals een gedeeld-met- of subgroepregel) is daarom in essentie een criterium zonder punten; een regel met toegekende punten is een waardering. Een **subgroep** is een groeperend criterium binnen een stelselgroepwaardering — het is géén stelselgroep. Beschrijf de structuur met deze domeintaal — **waardering**, **criterium**, **subgroep** en **bovenliggende** — en niet met informatica-boomjargon als "knoop", "node", "leaf", "wortel", "root", "boom", "kind", "ouder" of "tree". De waardering boven een andere is de _bovenliggende_; een waardering zonder bovenliggende staat _direct onder de groep_.
+De samenhang tussen waarderingen in de output is een keten via `bovenliggendeCriterium`: elke regel is een waardering met een `criterium`, en een criterium kan onderliggende criteria hebben. Het onderscheid tussen beide is scherp: een **criterium** draagt de identiteit, naam en plek in de hiërarchie (`id`, `naam`, `bovenliggendeCriterium`, `meeteenheid`) en heeft nooit punten; `punten` en `aantal` zitten op de **waardering**. Een groeperende regel (zoals een gedeeld-met- of subgroepregel) is daarom in essentie een criterium zonder punten; een regel met toegekende punten is een waardering. In de regel dragen groeperende regels geen punten, maar bij uitzondering doet een subgroep dat wel — bijvoorbeeld in de oppervlakterubrieken, waar de punten over het afgeronde groepstotaal op de subgroep zelf worden gezet; het criterium-object blijft ook dan puntenloos. Een **subgroep** is een groeperend criterium binnen een stelselgroepwaardering — het is géén stelselgroep, maar kan wel dezelfde naam dragen indien de subgroep in een gemeenschappelijke rubriek wordt gewaardeerd (bijvoorbeeld 'Oppervlakte van vertrekken' binnen 'Gemeenschappelijke vertrekken, overige ruimten en voorzieningen'). Beschrijf de structuur met deze domeintaal — **waardering**, **criterium**, **subgroep**, **bovenliggende** en **onderliggende** — en niet met informatica-boomjargon als "knoop", "node", "leaf", "wortel", "root", "boom", "kind", "ouder" of "tree". De waardering boven een andere is de _bovenliggende_; een waardering zonder bovenliggende staat _direct onder de stelselgroep_.
 
 ### UserWarning
 
