@@ -84,15 +84,15 @@ De onderstaande bomen tonen een gemeenschappelijke rubriek voor een zelfstandige
 ```text
 Gemeenschappelijke vertrekken, overige ruimten en voorzieningen  ← stelselgroep-groep
 └─ Gedeeld met 5 adressen                                         ← gedeeld-met-criterium
-   ├─ Oppervlakte van vertrekken                                  ← subgroep (subgroep van 'Gemeenschappelijke vertrekken, ...')
+   ├─ Oppervlakte van vertrekken                                  ← subgroep 
    │  └─ Keuken                                                   ← ruimteregel (m²; punten op subgroep)
-   ├─ Verkoeling en verwarming                                    ← subgroep (subgroep van 'Gemeenschappelijke vertrekken, ...')
-   │  └─ Verwarmde vertrekken                                     ← subgroep (subgroep van 'Verkoeling en verwarming')
+   ├─ Verkoeling en verwarming                                    ← subgroep 
+   │  └─ Verwarmde vertrekken                                     ← subgroep 
    │     └─ Keuken                                                ← detailregel (waardering met punten)
-   └─ Keuken                                                      ← subgroep (subgroep van 'Gemeenschappelijke vertrekken, ...')
+   └─ Keuken                                                      ← subgroep 
       └─ Keuken                                                   ← ruimteregel
          ├─ Lengte aanrecht                                       ← detailregel (waardering met punten)
-         └─ Extra voorzieningen                                   ← subgroep (subgroep van ruimteregel 'Keuken')
+         └─ Extra voorzieningen                                   ← subgroep 
             └─ Inbouw koelkast                                    ← detailregel (waardering met punten)
 ```
 
@@ -102,17 +102,17 @@ Gemeenschappelijke vertrekken, overige ruimten en voorzieningen  ← stelselgroe
 Gemeenschappelijke binnenruimten gedeeld met meerdere adressen   ← stelselgroep-groep
 └─ Gedeeld met 4 onzelfstandige woonruimten                       ← gedeeld-met-criterium
    └─ Gedeeld met 4 adressen                                      ← gedeeld-met-criterium
-      ├─ Oppervlakte van vertrekken                               ← subgroep (subgroep van 'Gemeenschappelijke binnenruimten ...')
+      ├─ Oppervlakte van vertrekken                               ← subgroep
       │  └─ Keuken                                                ← ruimteregel (m²; punten op subgroep)
-      ├─ Verkoeling en verwarming                                 ← subgroep (subgroep van 'Gemeenschappelijke binnenruimten ...')
-      │  └─ Verwarmde vertrekken                                  ← subgroep (subgroep van 'Verkoeling en verwarming')
+      ├─ Verkoeling en verwarming                                 ← subgroep
+      │  └─ Verwarmde vertrekken                                  ← subgroep
       │     └─ Keuken                                             ← detailregel (waardering met punten)
-      ├─ Keuken                                                   ← subgroep (subgroep van 'Gemeenschappelijke binnenruimten ...')
+      ├─ Keuken                                                   ← subgroep
       │  └─ Keuken                                                ← ruimteregel
       │     ├─ Lengte aanrecht                                    ← detailregel (waardering met punten)
-      │     └─ Extra voorzieningen                                ← subgroep (subgroep van ruimteregel 'Keuken')
+      │     └─ Extra voorzieningen                                ← subgroep
       │        └─ Inbouw koelkast                                 ← detailregel (waardering met punten)
-      └─ Sanitair                                                 ← subgroep (subgroep van 'Gemeenschappelijke binnenruimten ...')
+      └─ Sanitair                                                 ← subgroep
          └─ Toilet                                                ← ruimteregel
             └─ Wastafel                                           ← detailregel (waardering met punten)
 ```
