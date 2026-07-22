@@ -206,17 +206,6 @@ class WaarderingBuilder:
             aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
         )
 
-    def verwijder(self) -> None:
-        """Koppel deze waardering (en wat eronder hangt) los van zijn bovenliggende (voor het bouw-dan-weggooien-patroon)."""
-        bovenliggende = self._bovenliggende
-        self._loskoppelen()
-        if (
-            isinstance(bovenliggende, WaarderingBuilder)
-            and bovenliggende._actief
-            and not bovenliggende._actieve_onderliggende
-        ):
-            bovenliggende.verwijder()
-
     def _activeer(self) -> None:
         """Maak deze lazy waardering actief (en activeer pending bovenliggenden)."""
         if self._actief:
