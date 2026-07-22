@@ -19,7 +19,7 @@ Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen i
 ## Projectgrenzen
 
 - De package berekent woningwaarderingen op basis van een digitale representatie van een woonruimte.
-- De berekening volgt het beleidsboek van de Huurcommissie, met januari 2026 als actuele ankerdatum in de bestaande documentatie.
+- De berekening volgt het beleidsboek van de Huurcommissie, met juli 2026 als actuele ankerdatum in de bestaande documentatie.
 - De input en output volgen de VERA-standaard, met de concrete versies vastgelegd in `pyproject.toml`.
 - Aan berekeningen en output kunnen geen rechten worden ontleend. Gebruikers moeten documentatie, implementatietoelichtingen en openstaande issues raadplegen om resultaten goed te interpreteren.
 - Wanneer VERA of beschikbare inputdata een beleidsregel niet volledig kan dragen, wordt de gekozen interpretatie in de implementatietoelichtingen beschreven.

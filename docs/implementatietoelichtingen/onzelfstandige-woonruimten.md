@@ -1,6 +1,6 @@
 # Beleidsboek Waarderingsstelsel onzelfstandige woonruimte
 
-Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Waarderingsstelsel onzelfstandige woonruimte (januari 2026)
+Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Waarderingsstelsel onzelfstandige woonruimte (juli 2026)
 
 ## Hoofdstuk 1 – Basisinformatie woningwaardering
 
