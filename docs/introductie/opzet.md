@@ -106,7 +106,6 @@ Zie [aan de slag](../aan-de-slag/index.md) voor een volledig voorbeeld in JSON-o
 
 **Beperkingen en afspraken**
 
-- Subgroepen zijn op hetzelfde niveau, niet genest. We ondersteunen geen geneste criteriumnaam-subgroepen (`criteriumsleutel → criteriumsleutel`).
 - Detailregels zonder `ruimte_id` mogen geen criteriumnaam gebruiken die al als criteriumsleutel bestaat (zie hierboven).
 - Een aggregaatregel met een criteriumsleutel-id mag wél een `bovenliggendeCriterium` hebben als dat een **gedeeld-met aggregaat** is (andere id-familie). Dat komt voor bij onzelfstandige woningen:
 
