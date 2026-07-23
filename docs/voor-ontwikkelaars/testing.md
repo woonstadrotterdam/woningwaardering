@@ -27,6 +27,10 @@ Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected 
 task genereer-test-output
 ```
 
+Dit draait `scripts/genereer_test_output.py` en overschrijft alle expected outputs onder `tests/data/**/output/` en `tests/docs/output_json_*.json`.
+
+Voor unit-inputs onder `tests/data/<stelsel>/input/` (niet voor `stelselgroepen/`) schrijft het script naast JSON ook een `*.txt` met de woningwaardering in leesbaar tabelformaat. Die bestanden zijn bedoeld om output-wijzigingen in PRs te reviewen; pytest vergelijkt alleen de JSONs.
+
 > ⚠️ Let op: als je de expected output-jsons opnieuw genereert na code-changes zullen alle tests slagen. Het is dus belangrijk om te analyseren hoe expected outputs veranderd zijn na de code-changes die je hebt doorgevoerd. Zo kun je achterhalen of de code-changes wel het gewenste effect hebben gehad en niet ook nog ongewenste neveneffecten.
 
 Let ook op: `docs/aan-de-slag/index.md` bevat inline voorbeeld-output (JSON en tabel). Als output, namen of criterium-id’s wijzigen, moet je die voorbeelden handmatig nalopen/bijwerken zodat de docs niet stilzwijgend verouderen.

@@ -209,11 +209,13 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 id="woz_waarde_per_m2",
                 naam="WOZ-waarde per m²",
                 aantal=woz_waarde_per_m2,
+                meeteenheid=Meeteenheid.euro,
             )
             puntenwaardering.met_onderliggend(
                 id="gemiddelde_woz_waarde_per_m2",
                 naam=f"Gemiddelde WOZ-waarde per m² voor {corop_gebied['naam']}",
                 aantal=gemiddelde_woz_waarde_per_m2,
+                meeteenheid=Meeteenheid.euro,
             )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
@@ -272,7 +274,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if not woz_mask.any():
             return None
 
-        gemiddelde_woz_waarde_per_m2 = df_woz.loc[woz_mask, str(jaar)].values[0]
+        gemiddelde_woz_waarde_per_m2 = df_woz.loc[woz_mask, str(jaar)].item()
 
         return Decimal(str(gemiddelde_woz_waarde_per_m2))
 

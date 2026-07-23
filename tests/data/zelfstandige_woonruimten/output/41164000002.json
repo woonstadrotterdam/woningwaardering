@@ -510,6 +510,10 @@
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_I"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
@@ -541,6 +545,10 @@
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         }
