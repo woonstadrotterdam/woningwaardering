@@ -322,7 +322,7 @@ def assert_groep_punten_is_som_van_waarderingen(
             continue
         if not any(w.punten is not None for w in waarderingen):
             continue
-        verwacht = utils.som_punten_waarderingen_afgerond(waarderingen)
+        verwacht = utils.som_punten_waarderingen(waarderingen)
         groep_naam = (
             groep.criterium_groep
             and groep.criterium_groep.stelselgroep
