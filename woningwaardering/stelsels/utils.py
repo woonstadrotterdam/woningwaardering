@@ -907,16 +907,16 @@ def som_punten_waarderingen(
     )
 
 
-def voeg_rubriek_afronding_toe(
+def voeg_stelselgroep_afronding_toe(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
     *,
     onafgerond: Decimal,
     afgerond: Decimal,
     stelselgroep: Referentiedata,
 ) -> None:
-    """Voeg een Afronding-op-kwartpunten-waardering toe wanneer de onafgeronde detailsom afwijkt van het rubriektotaal.
+    """Voeg een waardering Afronding op kwartpunten toe wanneer de som van de waarderingen afwijkt van de totaalpunten van de stelselgroep.
 
-    Alleen voor groepen met minstens één puntdragende detailwaardering (geen punt-loze m²-rubrieken).
+    Alleen voor groepen met minstens één puntdragende waardering (geen punt-loze m²-stelselgroepen).
     """
     waarderingen = groep.woningwaarderingen or []
     if not any(w.punten is not None for w in waarderingen):
@@ -950,7 +950,7 @@ def som_punten_waarderingen_afgerond(
     """Som van punten op alle waarderingen in een groep (afgerond op kwart).
 
     Returnwaarde is bedoeld voor VERA-velden (``punten``). Telt alle punten mee,
-    inclusief een eventuele Afronding-op-kwartpunten-sluitpost.
+    inclusief een eventuele waardering Afronding op kwartpunten.
     """
     if not waarderingen:
         return 0.0

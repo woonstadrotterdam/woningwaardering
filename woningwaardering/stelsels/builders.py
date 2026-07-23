@@ -360,7 +360,7 @@ class WaarderingsgroepBuilder:
         from woningwaardering.stelsels.utils import (
             rond_af_op_kwart,
             som_punten_waarderingen,
-            voeg_rubriek_afronding_toe,
+            voeg_stelselgroep_afronding_toe,
         )
 
         groep = WoningwaarderingResultatenWoningwaarderingGroep(
@@ -377,7 +377,7 @@ class WaarderingsgroepBuilder:
         onafgerond = som_punten_waarderingen(groep.woningwaarderingen)
         afgerond = rond_af_op_kwart(onafgerond)
         groep.punten = float(afgerond)
-        voeg_rubriek_afronding_toe(
+        voeg_stelselgroep_afronding_toe(
             groep,
             onafgerond=onafgerond,
             afgerond=afgerond,
