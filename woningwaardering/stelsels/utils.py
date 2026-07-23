@@ -488,7 +488,8 @@ def _render_samenvatting(
     if resultaat.punten is not None:
         lines.append(
             _tabel_regel(
-                "TOTAAL", punten=_format_punten_cel(_tabel_fmt_num(resultaat.punten))
+                "Totaal afgerond op hele punten",
+                punten=_format_punten_cel(_tabel_fmt_num(resultaat.punten)),
             )
         )
 
