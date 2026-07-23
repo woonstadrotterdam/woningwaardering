@@ -73,11 +73,10 @@ class Buitenruimten(Stelselgroep):
         # twee 2 punten voor de aanwezigheid van privé buitenruimten
         self._prive_buitenruimten_aanwezig(waarderingsgroep_builder, eenheid)
 
-        woningwaardering_groep = waarderingsgroep_builder.build()
-
         # maximaal 15 punten
-        if self._maximering(waarderingsgroep_builder, eenheid, woningwaardering_groep):
-            woningwaardering_groep = waarderingsgroep_builder.build()
+        self._maximering(waarderingsgroep_builder, eenheid)
+
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         # rond af op kwarten
         woningwaardering_groep.punten = float(
@@ -93,21 +92,24 @@ class Buitenruimten(Stelselgroep):
         self,
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
-        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
     ) -> WaarderingBuilder | None:
         """Berekent de maximering voor Buitenruimten. Maximaal 15 punten toegestaan.
 
         Args:
             waarderingsgroep_builder (WaarderingsgroepBuilder): Builder waaraan de maximering wordt toegevoegd.
             eenheid (EenhedenEenheid): Eenheid waarvoor de maximering berekend wordt.
-            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): Woningwaardering groep van buitenruimten.
 
         Returns:
             WaarderingBuilder | None: Maximering als er een maximering is.
         """
-        punten = Decimal(str(woningwaardering_groep.punten or "0"))
+        waarderingen = list(waarderingsgroep_builder.alle_waarderingen())
+        punten = sum(
+            Decimal(str(waardering.punten))
+            for waardering in waarderingen
+            if waardering.punten is not None
+        )
         max_punten = Decimal("15")
-        if punten > max_punten:
+        if punten > max_punten and waarderingen:
             aftrek = max_punten - punten
             logger.info(
                 f"Eenheid ({eenheid.id}): maximaal aantal punten voor {self.stelselgroep.naam} overschreden ({punten} > {max_punten}). {aftrek} punt(en) aftrek."
