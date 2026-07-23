@@ -21,5 +21,6 @@ GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
           - Éénhandsmengkraan                                1.00 st   0.13 pt
           - Thermostatische mengkraan                        1.00 st   0.25 pt
           - Max verdubbeling punten bad en douche                     -0.13 pt
+  Afronding                                                           -0.01 pt
                                                                       --------
   Totaal                                                              11.50 pt

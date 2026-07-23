@@ -10,5 +10,6 @@ PUNTEN VOOR DE WOZ-WAARDE
     - Oppervlakte van vertrekken en overige ruimten         60.00 m²
     - Factor II                                           242.00 EUR
   Maximering WOZ-punten tot 186 punten totaal                         -30.00 pt
+  Afronding                                                            0.01 pt
                                                                       --------
   Totaal                                                              65.75 pt

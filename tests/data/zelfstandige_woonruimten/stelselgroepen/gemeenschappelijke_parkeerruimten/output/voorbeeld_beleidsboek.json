@@ -63,6 +63,13 @@
             }
           },
           "punten": 0.8
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__afronding",
+            "naam": "Afronding"
+          },
+          "punten": -0.05
         }
       ]
     }

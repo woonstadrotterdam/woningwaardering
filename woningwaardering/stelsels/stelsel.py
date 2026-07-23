@@ -12,6 +12,7 @@ from woningwaardering.stelsels.utils import (
     normaliseer_ruimte_namen,
     rond_af,
     rond_af_op_kwart,
+    voeg_rubriek_afronding_toe,
     waarschuw_dubbele_ids,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -86,6 +87,9 @@ class Stelsel:
                 continue
 
             resultaat.groepen.append(stelselgroep.waardeer(eenheid, resultaat))
+
+        for groep in resultaat.groepen:
+            voeg_rubriek_afronding_toe(groep)
 
         resultaat.punten = float(Stelsel.bereken_puntentotaal(resultaat))
 

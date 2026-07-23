@@ -181,6 +181,13 @@
             }
           },
           "punten": -0.21
+        },
+        {
+          "criterium": {
+            "id": "sanitair__afronding",
+            "naam": "Afronding"
+          },
+          "punten": 0.03
         }
       ]
     }

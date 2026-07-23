@@ -9,7 +9,11 @@ from pytest import fail
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_tabel, normaliseer_ruimte_namen
+from woningwaardering.stelsels.utils import (
+    naar_tabel,
+    normaliseer_ruimte_namen,
+    voeg_rubriek_afronding_toe,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -205,7 +209,9 @@ def assert_stelselgroep_output(
     assert isinstance(
         resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
     ), "Resultaat is geen WoningwaarderingResultatenWoningwaarderingResultaat"
-    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
+    groep = stelselgroep.waardeer(eenheid_input)
+    voeg_rubriek_afronding_toe(groep)
+    resultaat.groepen = [groep]
 
     assert_output_model(
         resultaat,
@@ -233,7 +239,9 @@ def assert_stelselgroep_specifiek_output(
     stelselgroep = stelselgroep_class(peildatum=peildatum)
 
     resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
+    groep = stelselgroep.waardeer(eenheid_input)
+    voeg_rubriek_afronding_toe(groep)
+    resultaat.groepen = [groep]
 
     assert_output_model(
         resultaat,

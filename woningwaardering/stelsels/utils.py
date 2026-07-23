@@ -19,6 +19,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenWoonplaats,
     Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
+    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -905,6 +906,74 @@ def som_punten_waarderingen(
         return 0.0
     totaal = sum(Decimal(str(w.punten)) for w in waarderingen if w.punten is not None)
     return float(rond_af_op_kwart(totaal))
+
+
+def _is_rubriek_afronding_waardering(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+) -> bool:
+    criterium = waardering.criterium
+    if criterium is None or criterium.id is None:
+        return False
+    return criterium.id.endswith("__afronding") and (
+        criterium.bovenliggende_criterium is None
+    )
+
+
+def voeg_rubriek_afronding_toe(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> None:
+    """Reconcileer de som van waarderingen met ``groep.punten`` via een Afronding-regel.
+
+    Voegt alleen een waardering ``Afronding`` toe wanneer het verschil tussen het
+    gezaghebbende groepstotaal en de exacte som van waarderingspunten ongelijk is
+    aan nul. ``groep.punten`` zelf blijft ongewijzigd.
+
+    Geen Afronding wanneer er geen puntdragende detailwaarderingen zijn (bijvoorbeeld
+    oppervlakterubrieken waar alleen ``aantal`` op de regels staat en de punten
+    uitsluitend op ``groep.punten``).
+    """
+    if groep.punten is None or not groep.woningwaarderingen:
+        return
+
+    stelselgroep = groep.criterium_groep.stelselgroep if groep.criterium_groep else None
+    if stelselgroep is None or stelselgroep.name is None:
+        return
+
+    afronding_id = f"{stelselgroep.name}__afronding"
+    waarderingen_zonder_afronding = [
+        w for w in groep.woningwaarderingen if not _is_rubriek_afronding_waardering(w)
+    ]
+    if not any(w.punten is not None for w in waarderingen_zonder_afronding):
+        # Alleen ``groep.punten``, geen detailpunten om mee te reconcileren.
+        groep.woningwaarderingen = waarderingen_zonder_afronding
+        return
+
+    ruwe_som = sum(
+        Decimal(str(w.punten))
+        for w in waarderingen_zonder_afronding
+        if w.punten is not None
+    )
+    delta = Decimal(str(groep.punten)) - ruwe_som
+
+    # Verwijder een eventuele eerdere Afronding-regel (idempotent bij herhaalde aanroep).
+    groep.woningwaarderingen = waarderingen_zonder_afronding
+
+    if delta == 0:
+        return
+
+    # 2.1.4 / 2.1.6 Algemene rekenregel: afronding per rubriek
+    # Het totaal aantal punten wordt per rubriek afgerond op 0,25 punt. Deze
+    # waardering is de herleidbaarheids-sluitpost zodat de som van alle
+    # waarderingen gelijk is aan het rubriektotaal.
+    groep.woningwaarderingen.append(
+        WoningwaarderingResultatenWoningwaardering(
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                id=afronding_id,
+                naam="Afronding",
+            ),
+            punten=float(delta),
+        )
+    )
 
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:

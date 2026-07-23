@@ -78,6 +78,13 @@
             }
           },
           "punten": -1.67
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__afronding",
+            "naam": "Afronding"
+          },
+          "punten": -0.08
         }
       ]
     }

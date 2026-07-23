@@ -10,7 +10,7 @@ from pydantic import ValidationError
 
 from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_tabel, voeg_rubriek_afronding_toe
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -127,6 +127,8 @@ def main() -> int:
                             groepen=[stelselgroep.waardeer(eenheid_input)]
                         )
                     )
+                    for groep in woningwaardering_resultaat.groepen or []:
+                        voeg_rubriek_afronding_toe(groep)
                 else:
                     stelsel_class = import_module(
                         f"woningwaardering.stelsels.{stelsel_naam}.{stelsel_naam}"
