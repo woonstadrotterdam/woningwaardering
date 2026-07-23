@@ -1,8 +1,8 @@
 SAMENVATTING 82
-  Energieprestatie                                                     -1.00 pt
-                                                                      ---------
+  Energieprestatie                                                                    -1.00 pt
+                                                                                     ---------
 
 ENERGIEPRESTATIE
-  F                                                          9.00 m²   -0.90 pt
-                                                                      ---------
-  Totaal                                                               -1.00 pt
+  F                                                                         9.00 m²   -0.90 pt
+                                                                                     ---------
+  Totaal                                                                              -1.00 pt

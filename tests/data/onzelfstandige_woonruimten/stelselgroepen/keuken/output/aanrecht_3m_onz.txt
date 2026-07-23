@@ -1,10 +1,10 @@
 SAMENVATTING 2000mm
-  Keuken                                                                5.00 pt
-                                                                      ---------
+  Keuken                                                                               5.00 pt
+                                                                                     ---------
 
 KEUKEN
   Gedeeld met 2 onzelfstandige woonruimten
     - Keuken
-      - Lengte aanrecht                                   3001.00 mm    5.00 pt
-                                                                      ---------
-  Totaal                                                                5.00 pt
+      - Lengte aanrecht                                                  3001.00 mm    5.00 pt
+                                                                                     ---------
+  Totaal                                                                               5.00 pt

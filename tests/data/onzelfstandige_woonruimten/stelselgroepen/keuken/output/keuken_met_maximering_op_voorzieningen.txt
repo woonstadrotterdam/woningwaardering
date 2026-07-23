@@ -1,14 +1,14 @@
 SAMENVATTING 1000mm
-  Keuken                                                                8.00 pt
-                                                                      ---------
+  Keuken                                                                               8.00 pt
+                                                                                     ---------
 
 KEUKEN
   Privé
     - Keuken
-      - Lengte aanrecht                                   1000.00 mm    4.00 pt
+      - Lengte aanrecht                                                  1000.00 mm    4.00 pt
       - Extra voorzieningen
-        - Inbouw koelkast                                    4.00 st    4.00 pt
-        - Inbouw oven elektrisch                             1.00 st    1.00 pt
-        - Maximaal evenveel punten als aanrecht                        -1.00 pt
-                                                                      ---------
-  Totaal                                                                8.00 pt
+        - Inbouw koelkast                                                   4.00 st    4.00 pt
+        - Inbouw oven elektrisch                                            1.00 st    1.00 pt
+        - Maximaal evenveel punten als aanrecht                                       -1.00 pt
+                                                                                     ---------
+  Totaal                                                                               8.00 pt

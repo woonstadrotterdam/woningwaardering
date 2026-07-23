@@ -1,9 +1,9 @@
 SAMENVATTING 1
   Energieprestatie
-                                                                      ---------
+                                                                                     ---------
 
 ENERGIEPRESTATIE
-  Bouwjaar 1921                                              3.67 m²   -0.55 pt
-  Correctie monument                                                    0.55 pt
-                                                                      ---------
-  Totaal                                                                0.00 pt
+  Bouwjaar 1921                                                             3.67 m²   -0.55 pt
+  Correctie monument                                                                   0.55 pt
+                                                                                     ---------
+  Totaal                                                                               0.00 pt

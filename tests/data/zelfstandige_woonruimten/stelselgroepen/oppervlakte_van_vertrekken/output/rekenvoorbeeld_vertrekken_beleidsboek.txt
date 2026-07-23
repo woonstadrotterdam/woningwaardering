@@ -1,9 +1,9 @@
 SAMENVATTING
-  Oppervlakte van vertrekken                                           27.00 pt
-                                                                      ---------
+  Oppervlakte van vertrekken                                                          27.00 pt
+                                                                                     ---------
 
 OPPERVLAKTE VAN VERTREKKEN
-  Kamer                                                     15.49 m²
-  Keuken                                                    11.24 m²
-                                                           ---------  ---------
-  Totaal                                                    26.73 m²   27.00 pt
+  Kamer                                                                    15.49 m²
+  Keuken                                                                   11.24 m²
+                                                                          ---------  ---------
+  Totaal                                                                   26.73 m²   27.00 pt

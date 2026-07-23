@@ -1,15 +1,15 @@
 SAMENVATTING max4punten
-  Verkoeling en verwarming                                              2.00 pt
-                                                                      ---------
+  Verkoeling en verwarming                                                             2.00 pt
+                                                                                     ---------
 
 VERKOELING EN VERWARMING
   Gedeeld met 2 onzelfstandige woonruimten
     - Verwarmde overige en verkeersruimten
-      - Berging                                                         0.50 pt
-      - Berging2                                                        0.50 pt
-      - Berging3                                                        0.50 pt
-      - Berging4                                                        0.50 pt
-      - Berging5                                                        0.50 pt
-      - Maximering                                                     -0.50 pt
-                                                                      ---------
-  Totaal                                                                2.00 pt
+      - Berging                                                                        0.50 pt
+      - Berging2                                                                       0.50 pt
+      - Berging3                                                                       0.50 pt
+      - Berging4                                                                       0.50 pt
+      - Berging5                                                                       0.50 pt
+      - Maximering                                                                    -0.50 pt
+                                                                                     ---------
+  Totaal                                                                               2.00 pt

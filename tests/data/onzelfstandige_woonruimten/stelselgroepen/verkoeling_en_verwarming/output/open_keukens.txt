@@ -1,17 +1,17 @@
 SAMENVATTING
-  Verkoeling en verwarming                                             14.00 pt
-                                                                      ---------
+  Verkoeling en verwarming                                                            14.00 pt
+                                                                                     ---------
 
 VERKOELING EN VERWARMING
   Privé
     - Verwarmde vertrekken
-      - Verwarmde woonkamer                                             2.00 pt
-      - Verwarmde keuken                                                2.00 pt
-      - Verwarmde slaapkamer                                            2.00 pt
-      - Verwarmde woonkamer/keuken                                      2.00 pt
+      - Verwarmde woonkamer                                                            2.00 pt
+      - Verwarmde keuken                                                               2.00 pt
+      - Verwarmde slaapkamer                                                           2.00 pt
+      - Verwarmde woonkamer/keuken                                                     2.00 pt
     - Open keuken
-      - Verwarmde woonkamer                                             2.00 pt
-      - Verwarmde slaapkamer                                            2.00 pt
-      - Verwarmde woonkamer/keuken                                      2.00 pt
-                                                                      ---------
-  Totaal                                                               14.00 pt
+      - Verwarmde woonkamer                                                            2.00 pt
+      - Verwarmde slaapkamer                                                           2.00 pt
+      - Verwarmde woonkamer/keuken                                                     2.00 pt
+                                                                                     ---------
+  Totaal                                                                              14.00 pt

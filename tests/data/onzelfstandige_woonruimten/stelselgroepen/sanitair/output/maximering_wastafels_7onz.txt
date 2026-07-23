@@ -1,22 +1,22 @@
 SAMENVATTING
-  Sanitair                                                              5.75 pt
-                                                                      ---------
+  Sanitair                                                                             5.75 pt
+                                                                                     ---------
 
 SANITAIR
   Privé
     - Badkamer
-      - Wastafel                                             2.00 st    2.00 pt
-      - Meerpersoonswastafel                                 2.00 st    3.00 pt
+      - Wastafel                                                            2.00 st    2.00 pt
+      - Meerpersoonswastafel                                                2.00 st    3.00 pt
   Gedeeld met 7 onzelfstandige woonruimten
     - Woonkamer
-      - Wastafel                                             3.00 st    0.43 pt
-      - Maximering voor Wastafel                                       -0.29 pt
-      - Meerpersoonswastafel                                 3.00 st    0.64 pt
-      - Maximering voor Meerpersoonswastafel                           -0.43 pt
+      - Wastafel                                                            3.00 st    0.43 pt
+      - Maximering voor Wastafel                                                      -0.29 pt
+      - Meerpersoonswastafel                                                3.00 st    0.64 pt
+      - Maximering voor Meerpersoonswastafel                                          -0.43 pt
     - WoonkamerMetMax
-      - Wastafel                                             2.00 st    0.29 pt
-      - Maximering voor Wastafel                                       -0.14 pt
-      - Meerpersoonswastafel                                 2.00 st    0.43 pt
-      - Maximering voor Meerpersoonswastafel                           -0.21 pt
-                                                                      ---------
-  Totaal                                                                5.75 pt
+      - Wastafel                                                            2.00 st    0.29 pt
+      - Maximering voor Wastafel                                                      -0.14 pt
+      - Meerpersoonswastafel                                                2.00 st    0.43 pt
+      - Maximering voor Meerpersoonswastafel                                          -0.21 pt
+                                                                                     ---------
+  Totaal                                                                               5.75 pt
