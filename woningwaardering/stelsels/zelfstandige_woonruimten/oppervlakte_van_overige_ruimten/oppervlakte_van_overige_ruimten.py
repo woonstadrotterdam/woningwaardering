@@ -20,7 +20,7 @@ from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
     rond_af,
     rond_af_op_kwart,
-    som_punten_waarderingen,
+    som_punten_waarderingen_afgerond,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -104,7 +104,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         groep_waarderingen = woningwaardering_groep.woningwaarderingen or []
         if any(w.punten is not None for w in groep_waarderingen):
             # de maximering is altijd in punten en daarom wordt de som van de punten hier gebruikt om de maximering toe te passsen
-            woningwaardering_groep.punten = som_punten_waarderingen(groep_waarderingen)
+            woningwaardering_groep.punten = som_punten_waarderingen_afgerond(
+                groep_waarderingen
+            )
         else:
             punten = rond_af_op_kwart(
                 rond_af(

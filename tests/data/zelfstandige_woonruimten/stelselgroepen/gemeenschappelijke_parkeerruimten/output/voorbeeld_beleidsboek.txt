@@ -7,5 +7,6 @@ GEMEENSCHAPPELIJKE PARKEERRUIMTEN
     - Type II                                                5.00 st   3.00 pt
     - Laadpaal                                               5.00 st   1.00 pt
     - Type III                                               2.00 st   0.80 pt
+  Afronding                                                           -0.05 pt
                                                                       --------
   Totaal                                                               4.75 pt

@@ -57,6 +57,13 @@
             }
           },
           "punten": 1.125
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__afronding",
+            "naam": "Afronding"
+          },
+          "punten": 0.125
         }
       ]
     }

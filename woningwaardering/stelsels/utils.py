@@ -19,6 +19,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenWoonplaats,
     Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
+    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -896,15 +897,62 @@ def criteriumsleutel_ids(
 
 def som_punten_waarderingen(
     waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> Decimal:
+    """Som van punten op waarderingen in een groep (zonder kwartafronding)."""
+    if not waarderingen:
+        return Decimal("0")
+    return sum(
+        (Decimal(str(w.punten)) for w in waarderingen if w.punten is not None),
+        Decimal("0"),
+    )
+
+
+def voeg_rubriek_afronding_toe(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+    *,
+    onafgerond: Decimal,
+    afgerond: Decimal,
+    stelselgroep: Referentiedata,
+) -> None:
+    """Voeg een Afronding-waardering toe wanneer de onafgeronde detailsom afwijkt van het rubriektotaal.
+
+    Alleen voor groepen met minstens één puntdragende detailwaardering (geen punt-loze m²-rubrieken).
+    """
+    waarderingen = groep.woningwaarderingen or []
+    if not any(w.punten is not None for w in waarderingen):
+        return
+
+    delta = afgerond - onafgerond
+    if delta == Decimal("0"):
+        return
+
+    if stelselgroep.name is None:
+        raise ValueError("Stelselgroep heeft geen naam voor de Afronding-criterium-id.")
+
+    afronding_id = f"{stelselgroep.name}__afronding"
+    groep.woningwaarderingen = [
+        *waarderingen,
+        WoningwaarderingResultatenWoningwaardering(
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam="Afronding",
+                id=afronding_id,
+            ),
+            punten=float(delta),
+        ),
+    ]
+
+
+def som_punten_waarderingen_afgerond(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
 ) -> float:
     """Som van punten op alle waarderingen in een groep (afgerond op kwart).
 
-    Returnwaarde is bedoeld voor VERA-velden (``punten``).
+    Returnwaarde is bedoeld voor VERA-velden (``punten``). Telt alle punten mee,
+    inclusief een eventuele Afronding-sluitpost.
     """
     if not waarderingen:
         return 0.0
-    totaal = sum(Decimal(str(w.punten)) for w in waarderingen if w.punten is not None)
-    return float(rond_af_op_kwart(totaal))
+    return float(rond_af_op_kwart(som_punten_waarderingen(waarderingen)))
 
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:

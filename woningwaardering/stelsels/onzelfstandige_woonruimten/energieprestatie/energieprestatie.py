@@ -143,9 +143,6 @@ class Energieprestatie(Stelselgroep):
             )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
-        woningwaardering_groep.punten = float(
-            utils.rond_af_op_kwart(Decimal(str(woningwaardering_groep.punten or 0)))
-        )
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

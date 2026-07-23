@@ -86,6 +86,13 @@
             "naam": "Maximering WOZ-punten tot 186 punten totaal"
           },
           "punten": -30.0
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__afronding",
+            "naam": "Afronding"
+          },
+          "punten": 0.01
         }
       ]
     }

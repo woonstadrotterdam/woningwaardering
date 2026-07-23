@@ -4,5 +4,6 @@ SAMENVATTING epv1
 
 ENERGIEPRESTATIE
   Energieprestatievergoeding                                 3.67 m²   1.84 pt
+  Afronding                                                           -0.09 pt
                                                                       --------
   Totaal                                                               1.75 pt

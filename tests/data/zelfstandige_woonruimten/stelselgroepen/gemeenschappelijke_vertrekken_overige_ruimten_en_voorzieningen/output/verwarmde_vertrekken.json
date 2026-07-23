@@ -128,6 +128,13 @@
             }
           },
           "punten": 0.33
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__afronding",
+            "naam": "Afronding"
+          },
+          "punten": 0.10333333
         }
       ]
     }

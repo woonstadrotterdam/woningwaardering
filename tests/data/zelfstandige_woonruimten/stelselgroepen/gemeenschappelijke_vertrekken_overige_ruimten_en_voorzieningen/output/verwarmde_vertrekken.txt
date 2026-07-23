@@ -15,5 +15,6 @@ GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
     - Verkoeling en verwarming
       - Verwarmde vertrekken
         - Woonkamer                                                    0.33 pt
+  Afronding                                                            0.10 pt
                                                                       --------
   Totaal                                                               4.50 pt

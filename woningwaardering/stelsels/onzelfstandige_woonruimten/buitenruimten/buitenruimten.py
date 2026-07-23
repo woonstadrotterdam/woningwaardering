@@ -78,11 +78,6 @@ class Buitenruimten(Stelselgroep):
 
         woningwaardering_groep = waarderingsgroep_builder.build()
 
-        # rond af op kwarten
-        woningwaardering_groep.punten = float(
-            utils.rond_af_op_kwart(woningwaardering_groep.punten)
-        )
-
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )

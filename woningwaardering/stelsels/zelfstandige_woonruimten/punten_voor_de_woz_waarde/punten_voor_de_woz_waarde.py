@@ -226,8 +226,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
-        punten = self._som_woz_punten(woningwaardering_groep)
-        woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -394,27 +392,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             totaal_correctiepunten = correctiepunten + afrondingscorrectie
 
             return totaal_correctiepunten
-
-    def _som_woz_punten(
-        self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
-    ) -> Decimal:
-        """
-        Berekent de som van de punten voor de stelselgroep WOZ-waarde.
-
-        Args:
-            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): De woningwaardering groep voor de stelselgroep WOZ-waarde.
-
-        Returns:
-            Decimal: De som van de punten voor de stelselgroep WOZ-waarde.
-        """
-
-        return Decimal(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            )
-        )
 
     def _haal_minimum_woz_waarde_op(self) -> EenhedenWozEenheid:
         """

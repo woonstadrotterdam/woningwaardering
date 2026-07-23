@@ -42,6 +42,13 @@
             }
           },
           "punten": 1.63
+        },
+        {
+          "criterium": {
+            "id": "keuken__afronding",
+            "naam": "Afronding"
+          },
+          "punten": 0.12
         }
       ]
     }

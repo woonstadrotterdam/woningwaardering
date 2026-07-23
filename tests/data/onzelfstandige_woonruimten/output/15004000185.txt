@@ -34,6 +34,7 @@ VERKOELING EN VERWARMING
 
 ENERGIEPRESTATIE
   Bouwjaar 1998                                             24.50 m²   8.58 pt
+  Afronding                                                           -0.08 pt
                                                                       --------
   Totaal                                                               8.50 pt
 

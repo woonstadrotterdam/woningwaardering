@@ -24,6 +24,13 @@
             }
           },
           "punten": 1.28
+        },
+        {
+          "criterium": {
+            "id": "energieprestatie__afronding",
+            "naam": "Afronding"
+          },
+          "punten": -0.03
         }
       ]
     }
