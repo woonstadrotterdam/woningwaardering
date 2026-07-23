@@ -24,7 +24,6 @@ from woningwaardering.vera.utils import heeft_bouwkundig_element
 SUBGROEPEN: dict[str, str] = {
     "verwarmde_vertrekken": "Verwarmde vertrekken",
     "verkoelde_vertrekken": "Verkoelde vertrekken",
-    "open_keuken": "Open keuken",
     "verwarmde_overige_en_verkeersruimten": "Verwarmde overige en verkeersruimten",
 }
 
@@ -61,7 +60,18 @@ def waardeer_verkoeling_en_verwarming(
     """
     yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(ruimten, subgroep)
     yield from _waardeer_verwarmde_overige_ruimte(ruimten, subgroep)
-    yield from _waardeer_open_keuken(ruimten, subgroep)
+
+
+def _heeft_open_keuken(ruimte: EenhedenRuimte) -> bool:
+    return ruimte.detail_soort == Ruimtedetailsoort.woonkamer_en_of_keuken or (
+        ruimte.detail_soort
+        in [
+            Ruimtedetailsoort.woonkamer,
+            Ruimtedetailsoort.woon_en_of_slaapkamer,
+            Ruimtedetailsoort.slaapkamer,
+        ]
+        and heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.aanrecht)
+    )
 
 
 def _waardeer_verwarmde_overige_ruimte(
@@ -121,6 +131,8 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 ) -> Iterator[tuple[EenhedenRuimte, WaarderingBuilder]]:
     """
     Verkoelde en verwarmde vertrekken tellen voor 2 punten per verwarmd vertrek.
+    Een open keuken telt als afzonderlijk verwarmd vertrek voor 2 extra punten.
+    Deze punten worden in de output samengevoegd met het verwarmde vertrek.
     Indien een verwarmd vertrek ook verkoeld is, wordt er 1 punt extra toegekend.
     Het maximum aantal extra punten voor vertrekken die verkoeld en verwarmd zijn is 2.
 
@@ -138,15 +150,27 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
         ruimtesoort = classificeer_ruimte(ruimte)
         if ruimtesoort == Ruimtesoort.vertrek:
+            heeft_open_keuken = _heeft_open_keuken(ruimte)
+            naam = ruimte.naam or ruimte.id or ""
+            if (
+                heeft_open_keuken
+                and ruimte.detail_soort != Ruimtedetailsoort.woonkamer_en_of_keuken
+            ):
+                naam = f"{naam} met open keuken"
+
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
             )
+            if heeft_open_keuken:
+                logger.info(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt ook als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+                )
             yield (
                 ruimte,
                 _subgroep(subgroep, ruimte, "verwarmde_vertrekken").met_onderliggend(
                     id=ruimte.id,
-                    naam=ruimte.naam or ruimte.id or "",
-                    punten=2,
+                    naam=naam,
+                    punten=4 if heeft_open_keuken else 2,
                 ),
             )
 
@@ -182,45 +206,3 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                             punten=-1,
                         ),
                     )
-
-
-def _waardeer_open_keuken(
-    ruimten: list[EenhedenRuimte],
-    subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBuilder],
-) -> Iterator[tuple[EenhedenRuimte, WaarderingBuilder]]:
-    """
-    Open keuken tellen voor 2 punten per verwarmd vertrek.
-
-    Args:
-        ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
-        subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBuilder]): Bepaalt per ruimte onder welke builder de subgroep hangt
-
-    Yields:
-        tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor open keuken
-    """
-    for ruimte in ruimten:
-        if ruimte.verwarmd and (
-            ruimte.detail_soort == Ruimtedetailsoort.woonkamer_en_of_keuken
-            or (
-                ruimte.detail_soort
-                in [
-                    Ruimtedetailsoort.woonkamer,
-                    Ruimtedetailsoort.woon_en_of_slaapkamer,
-                    Ruimtedetailsoort.slaapkamer,
-                ]
-                and heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.aanrecht
-                )
-            )
-        ):
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
-            )
-            yield (
-                ruimte,
-                _subgroep(subgroep, ruimte, "open_keuken").met_onderliggend(
-                    id=ruimte.id,
-                    naam=ruimte.naam or ruimte.id or "",
-                    punten=2.0,
-                ),
-            )
