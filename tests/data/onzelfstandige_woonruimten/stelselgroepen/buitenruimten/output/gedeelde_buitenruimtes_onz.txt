@@ -1,12 +1,12 @@
 SAMENVATTING
-  Buitenruimten                                                         1.75 pt
-                                                                      ---------
+  Buitenruimten                                                                   1.75 pt
+                                                                                ---------
 
 BUITENRUIMTEN
   Gedeeld met 2 adressen
-    - Tuin                                                   6.00 m²    1.05 pt
+    - Tuin                                                            6.00 m²     1.05 pt
   Gedeeld met 2 onzelfstandige woonruimten
     - Gedeeld met 3 adressen
-      - Tuin                                                 6.00 m²    0.75 pt
-                                                                      ---------
-  Totaal                                                                1.75 pt
+      - Tuin                                                          6.00 m²     0.75 pt
+                                                                                ---------
+  Totaal                                                                          1.75 pt

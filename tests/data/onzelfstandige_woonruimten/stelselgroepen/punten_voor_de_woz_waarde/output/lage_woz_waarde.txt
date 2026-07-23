@@ -1,12 +1,12 @@
 SAMENVATTING minimum_woz_waarde
-  Punten voor de WOZ-waarde                                            10.00 pt
-                                                                      ---------
+  Punten voor de WOZ-waarde                                                      10.00 pt
+                                                                                ---------
 
 PUNTEN VOOR DE WOZ-WAARDE
-  Percentage verschil                                         -61.98   10.00 pt
-    - WOZ-waarde op waardepeildatum 01-01-2024          78000.00 EUR
-    - Gebruiksoppervlakte                                   58.00 m²
-    - WOZ-waarde per m²                                  1344.83 EUR
-    - Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond   3537.00 EUR
-                                                                      ---------
-  Totaal                                                               10.00 pt
+  Percentage verschil                                               -61.98       10.00 pt
+    - WOZ-waarde op waardepeildatum 01-01-2024                    78000.00 EUR
+    - Gebruiksoppervlakte                                            58.00 m²
+    - WOZ-waarde per m²                                            1344.83 EUR
+    - Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond             3537.00 EUR
+                                                                                ---------
+  Totaal                                                                         10.00 pt
