@@ -9,7 +9,7 @@ PUNTEN VOOR DE WOZ-WAARDE
     - Factor I                                                         16954.00 EUR
   Onderdeel II                                                                         5.34 pt
     - Minimum WOZ-waarde gebruikt voor berekening                      85806.00 EUR
-    - Oppervlakte van vertrekken en overige ruimten                        60.00 m²
+    - Oppervlakte van vertrekken en overige ruimten                       60.00 m²
     - Factor II                                                          268.00 EUR
   Nieuwbouw: min. 40 punten                                                           29.60 pt
                                                                                      ---------

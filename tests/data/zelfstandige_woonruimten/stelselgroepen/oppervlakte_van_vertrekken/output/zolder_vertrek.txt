@@ -3,6 +3,6 @@ SAMENVATTING
                                                                                      ---------
 
 OPPERVLAKTE VAN VERTREKKEN
-  Zolder vertrek met trap                                                  10.00 m²
-                                                                          ---------  ---------
-  Totaal                                                                   10.00 m²   10.00 pt
+  Zolder vertrek met trap                                                 10.00 m²
+                                                                     ----------      ---------
+  Totaal                                                                  10.00 m²    10.00 pt

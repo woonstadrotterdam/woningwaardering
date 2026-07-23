@@ -5,10 +5,10 @@ SAMENVATTING
 SANITAIR
   Privé
     - Woonkamer
-      - Wastafel (spoelbak in aanrecht < 1m)                                1.00 st    1.00 pt
-      - Wastafel                                                            2.00 st    2.00 pt
+      - Wastafel (spoelbak in aanrecht < 1m)                               1.00 st     1.00 pt
+      - Wastafel                                                           2.00 st     2.00 pt
       - Max 1.0 punt voor Wastafel                                                    -2.00 pt
-      - Meerpersoonswastafel                                                2.00 st    3.00 pt
+      - Meerpersoonswastafel                                               2.00 st     3.00 pt
       - Max 1.5 punt voor Meerpersoonswastafel                                        -1.50 pt
                                                                                      ---------
   Totaal                                                                               2.50 pt

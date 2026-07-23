@@ -16,19 +16,19 @@ SAMENVATTING 81020000003
   Maximaal redelijke huur                                                          1461.49 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
-  Badruimte                                                                 4.80 m²
-  Slaapkamer 1                                                             15.74 m²
-  Keuken                                                                    5.92 m²
-  Slaapkamer 2                                                             15.15 m²
-  Woonkamer (+1 kast)                                                      26.54 m²
-  Slaapkamer 3                                                             12.23 m²
-                                                                          ---------  ---------
-  Totaal                                                                   80.38 m²   80.00 pt
+  Badruimte                                                                4.80 m²
+  Slaapkamer 1                                                            15.74 m²
+  Keuken                                                                   5.92 m²
+  Slaapkamer 2                                                            15.15 m²
+  Woonkamer (+1 kast)                                                     26.54 m²
+  Slaapkamer 3                                                            12.23 m²
+                                                                     ----------      ---------
+  Totaal                                                                  80.38 m²    80.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Berging                                                                   5.19 m²
-                                                                          ---------  ---------
-  Totaal                                                                    5.19 m²    3.75 pt
+  Berging                                                                  5.19 m²
+                                                                     ----------      ---------
+  Totaal                                                                   5.19 m²     3.75 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
@@ -44,8 +44,8 @@ VERKOELING EN VERWARMING
   Totaal                                                                              13.00 pt
 
 BUITENRUIMTEN
-  Privé                                                                    54.00 m²   18.90 pt
-    - Tuin                                                                 53.58 m²
+  Privé                                                                   54.00 m²    18.90 pt
+    - Tuin                                                                53.58 m²
   Privé buitenruimten aanwezig                                                         2.00 pt
   Maximaal 15 punten                                                                  -5.90 pt
                                                                                      ---------
@@ -58,18 +58,18 @@ ENERGIEPRESTATIE
 
 KEUKEN
   Keuken
-    - Lengte aanrecht                                                    1800.00 mm    4.00 pt
+    - Lengte aanrecht                                                   1800.00 mm     4.00 pt
                                                                                      ---------
   Totaal                                                                               4.00 pt
 
 SANITAIR
   Badruimte
-    - Staand Toilet                                                         1.00 st    2.00 pt
-    - Wastafel                                                              1.00 st    1.00 pt
-    - Douche                                                                1.00 st    4.00 pt
+    - Staand Toilet                                                        1.00 st     2.00 pt
+    - Wastafel                                                             1.00 st     1.00 pt
+    - Douche                                                               1.00 st     4.00 pt
   Toiletruimte
-    - Staand Toilet                                                         1.00 st    3.00 pt
-    - Wastafel                                                              1.00 st    1.00 pt
+    - Staand Toilet                                                        1.00 st     3.00 pt
+    - Wastafel                                                             1.00 st     1.00 pt
                                                                                      ---------
   Totaal                                                                              11.00 pt
 
@@ -78,7 +78,7 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel I                                                                         23.94 pt
     - Factor I                                                         15329.00 EUR
   Onderdeel II                                                                        17.63 pt
-    - Oppervlakte van vertrekken en overige ruimten                        86.00 m²
+    - Oppervlakte van vertrekken en overige ruimten                       86.00 m²
     - Factor II                                                          242.00 EUR
                                                                                      ---------
   Totaal                                                                              41.50 pt

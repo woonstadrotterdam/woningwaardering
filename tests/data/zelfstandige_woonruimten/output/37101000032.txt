@@ -16,20 +16,20 @@ SAMENVATTING 37101000032
   Maximaal redelijke huur                                                          1900.64 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
-  Slaapkamer 1                                                             21.05 m²
-  Woonkamer                                                                41.00 m²
-  Keuken                                                                   20.37 m²
-  Badruimte                                                                 7.50 m²
-  Slaapkamer 2                                                             15.98 m²
-  Slaapkamer 3                                                             19.15 m²
-  Slaapkamer 4                                                             15.82 m²
-                                                                          ---------  ---------
-  Totaal                                                                  140.87 m²  141.00 pt
+  Slaapkamer 1                                                            21.05 m²
+  Woonkamer                                                               41.00 m²
+  Keuken                                                                  20.37 m²
+  Badruimte                                                                7.50 m²
+  Slaapkamer 2                                                            15.98 m²
+  Slaapkamer 3                                                            19.15 m²
+  Slaapkamer 4                                                            15.82 m²
+                                                                     ----------      ---------
+  Totaal                                                                 140.87 m²   141.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Berging                                                                   6.65 m²
-                                                                          ---------  ---------
-  Totaal                                                                    6.65 m²    5.25 pt
+  Berging                                                                  6.65 m²
+                                                                     ----------      ---------
+  Totaal                                                                   6.65 m²     5.25 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
@@ -44,12 +44,12 @@ VERKOELING EN VERWARMING
   Totaal                                                                              14.00 pt
 
 BUITENRUIMTEN
-  Privé                                                                    22.00 m²    7.70 pt
-    - Balkon 1                                                              3.14 m²
-    - Balkon 2                                                              3.14 m²
-    - Dakterras                                                            15.93 m²
-  Gedeeld met 2 adressen                                                   49.00 m²   18.38 pt
-    - Tuin                                                                 49.11 m²
+  Privé                                                                   22.00 m²     7.70 pt
+    - Balkon 1                                                             3.14 m²
+    - Balkon 2                                                             3.14 m²
+    - Dakterras                                                           15.93 m²
+  Gedeeld met 2 adressen                                                  49.00 m²    18.38 pt
+    - Tuin                                                                49.11 m²
   Privé buitenruimten aanwezig                                                         2.00 pt
   Maximaal 15 punten                                                                 -13.08 pt
                                                                                      ---------
@@ -62,18 +62,18 @@ ENERGIEPRESTATIE
 
 KEUKEN
   Keuken
-    - Lengte aanrecht                                                    2700.00 mm    7.00 pt
+    - Lengte aanrecht                                                   2700.00 mm     7.00 pt
                                                                                      ---------
   Totaal                                                                               7.00 pt
 
 SANITAIR
   Badruimte
-    - Staand Toilet                                                         1.00 st    2.00 pt
-    - Wastafel                                                              2.00 st    2.00 pt
-    - Bad en douche                                                         1.00 st    7.00 pt
+    - Staand Toilet                                                        1.00 st     2.00 pt
+    - Wastafel                                                             2.00 st     2.00 pt
+    - Bad en douche                                                        1.00 st     7.00 pt
   Toiletruimte
-    - Staand Toilet                                                         1.00 st    3.00 pt
-    - Wastafel                                                              1.00 st    1.00 pt
+    - Staand Toilet                                                        1.00 st     3.00 pt
+    - Wastafel                                                             1.00 st     1.00 pt
                                                                                      ---------
   Totaal                                                                              15.00 pt
 
@@ -82,7 +82,7 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel I                                                                         45.27 pt
     - Factor I                                                         15329.00 EUR
   Onderdeel II                                                                        19.38 pt
-    - Oppervlakte van vertrekken en overige ruimten                       148.00 m²
+    - Oppervlakte van vertrekken en overige ruimten                      148.00 m²
     - Factor II                                                          242.00 EUR
                                                                                      ---------
   Totaal                                                                              64.75 pt

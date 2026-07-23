@@ -4,6 +4,6 @@ SAMENVATTING keuken1
 
 KEUKEN
   Keuken
-    - Lengte aanrecht                                                    2000.00 mm    7.00 pt
+    - Lengte aanrecht                                                   2000.00 mm     7.00 pt
                                                                                      ---------
   Totaal                                                                               7.00 pt

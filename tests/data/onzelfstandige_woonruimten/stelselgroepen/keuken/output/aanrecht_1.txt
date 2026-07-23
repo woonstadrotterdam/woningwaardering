@@ -5,6 +5,6 @@ SAMENVATTING 1000mm
 KEUKEN
   Privé
     - Keuken
-      - Lengte aanrecht                                                  1000.00 mm    4.00 pt
+      - Lengte aanrecht                                                 1000.00 mm     4.00 pt
                                                                                      ---------
   Totaal                                                                               4.00 pt

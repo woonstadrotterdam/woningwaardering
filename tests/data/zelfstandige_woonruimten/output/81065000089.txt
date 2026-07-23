@@ -16,21 +16,21 @@ SAMENVATTING 81065000089
   Maximaal redelijke huur                                                           939.73 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
-  Slaapkamer 1                                                             11.63 m²
-  Slaapkamer 2                                                              7.62 m²
-  Woonkamer                                                                17.77 m²
-  Keuken                                                                   12.72 m²
-  Slaapkamer 3                                                              8.34 m²
-                                                                          ---------  ---------
-  Totaal                                                                   58.08 m²   58.00 pt
+  Slaapkamer 1                                                            11.63 m²
+  Slaapkamer 2                                                             7.62 m²
+  Woonkamer                                                               17.77 m²
+  Keuken                                                                  12.72 m²
+  Slaapkamer 3                                                             8.34 m²
+                                                                     ----------      ---------
+  Totaal                                                                  58.08 m²    58.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Subtotaal                                                                13.09 m²    9.75 pt
-    - Zolder                                                               10.23 m²
-    - Wasruimte                                                             2.86 m²
+  Subtotaal                                                               13.09 m²     9.75 pt
+    - Zolder                                                              10.23 m²
+    - Wasruimte                                                            2.86 m²
   Correctie: zolder zonder vaste trap                                                 -5.00 pt
-                                                                          ---------  ---------
-  Totaal                                                                   13.09 m²    4.75 pt
+                                                                     ----------      ---------
+  Totaal                                                                  13.09 m²     4.75 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
@@ -56,13 +56,13 @@ ENERGIEPRESTATIE
 
 KEUKEN
   Keuken
-    - Lengte aanrecht                                                    2507.00 mm    7.00 pt
+    - Lengte aanrecht                                                   2507.00 mm     7.00 pt
                                                                                      ---------
   Totaal                                                                               7.00 pt
 
 SANITAIR
   Wasruimte
-    - Douche                                                                1.00 st    4.00 pt
+    - Douche                                                               1.00 st     4.00 pt
                                                                                      ---------
   Totaal                                                                               4.00 pt
 
@@ -71,7 +71,7 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel I                                                                         15.98 pt
     - Factor I                                                         15329.00 EUR
   Onderdeel II                                                                        14.26 pt
-    - Oppervlakte van vertrekken en overige ruimten                        71.00 m²
+    - Oppervlakte van vertrekken en overige ruimten                       71.00 m²
     - Factor II                                                          242.00 EUR
                                                                                      ---------
   Totaal                                                                              30.25 pt

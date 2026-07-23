@@ -5,15 +5,15 @@ SAMENVATTING
 SANITAIR
   Privé
     - Badkamer
-      - Wastafel                                                            2.00 st    2.00 pt
-      - Meerpersoonswastafel                                                2.00 st    3.00 pt
+      - Wastafel                                                           2.00 st     2.00 pt
+      - Meerpersoonswastafel                                               2.00 st     3.00 pt
   Gedeeld met 8 onzelfstandige woonruimten
     - Woonkamer
-      - Wastafel                                                            3.00 st    0.38 pt
-      - Meerpersoonswastafel                                                3.00 st    0.56 pt
+      - Wastafel                                                           3.00 st     0.38 pt
+      - Meerpersoonswastafel                                               3.00 st     0.56 pt
     - WoonkamerMetMax
-      - Wastafel                                                            2.00 st    0.25 pt
-      - Meerpersoonswastafel                                                2.00 st    0.38 pt
+      - Wastafel                                                           2.00 st     0.25 pt
+      - Meerpersoonswastafel                                               2.00 st     0.38 pt
       - Maximering voor Wastafel                                                      -0.13 pt
       - Maximering voor Meerpersoonswastafel                                          -0.19 pt
                                                                                      ---------

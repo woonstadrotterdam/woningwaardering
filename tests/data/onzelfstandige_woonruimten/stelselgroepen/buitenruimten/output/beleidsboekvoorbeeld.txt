@@ -4,11 +4,11 @@ SAMENVATTING
 
 BUITENRUIMTEN
   Privé
-    - Klein balkon                                                          1.00 m²    0.35 pt
+    - Klein balkon                                                         1.00 m²     0.35 pt
     - Privé buitenruimten aanwezig                                                     2.00 pt
   Gedeeld met 4 onzelfstandige woonruimten
-    - Balkon                                                                4.50 m²    0.84 pt
+    - Balkon                                                               4.50 m²     0.84 pt
     - Gedeeld met 5 adressen
-      - Dakterras                                                          52.00 m²    1.95 pt
+      - Dakterras                                                         52.00 m²     1.95 pt
                                                                                      ---------
   Totaal                                                                               5.25 pt

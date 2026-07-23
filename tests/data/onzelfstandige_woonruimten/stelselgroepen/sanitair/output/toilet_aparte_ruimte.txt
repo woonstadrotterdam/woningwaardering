@@ -5,7 +5,7 @@ SAMENVATTING
 SANITAIR
   Privé
     - Toiletruimte
-      - Hangend toilet                                                      1.00 st    3.75 pt
-      - Staand Toilet                                                       1.00 st    3.00 pt
+      - Hangend toilet                                                     1.00 st     3.75 pt
+      - Staand Toilet                                                      1.00 st     3.00 pt
                                                                                      ---------
   Totaal                                                                               6.75 pt

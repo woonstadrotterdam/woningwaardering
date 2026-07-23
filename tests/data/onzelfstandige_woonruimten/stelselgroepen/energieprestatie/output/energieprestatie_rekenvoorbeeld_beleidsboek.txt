@@ -3,6 +3,6 @@ SAMENVATTING rekenvoorbeeld_energieprestatie
                                                                                      ---------
 
 ENERGIEPRESTATIE
-  A                                                                        30.00 m²   19.50 pt
+  A                                                                       30.00 m²    19.50 pt
                                                                                      ---------
   Totaal                                                                              19.50 pt

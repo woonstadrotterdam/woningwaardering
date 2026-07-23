@@ -3,6 +3,6 @@ SAMENVATTING 82
                                                                                      ---------
 
 ENERGIEPRESTATIE
-  F                                                                         9.00 m²   -0.90 pt
+  F                                                                        9.00 m²    -0.90 pt
                                                                                      ---------
   Totaal                                                                              -1.00 pt

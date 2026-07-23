@@ -16,18 +16,18 @@ SAMENVATTING 87402000003
   Maximaal redelijke huur                                                           541.56 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
-  Slaapkamer 1                                                             11.65 m²
-  Badruimte                                                                 3.12 m²
-  Keuken                                                                    6.37 m²
-  Woonkamer                                                                23.10 m²
-  Slaapkamer 2                                                              8.35 m²
-                                                                          ---------  ---------
-  Totaal                                                                   52.59 m²   53.00 pt
+  Slaapkamer 1                                                            11.65 m²
+  Badruimte                                                                3.12 m²
+  Keuken                                                                   6.37 m²
+  Woonkamer                                                               23.10 m²
+  Slaapkamer 2                                                             8.35 m²
+                                                                     ----------      ---------
+  Totaal                                                                  52.59 m²    53.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Berging                                                                   5.25 m²
-                                                                          ---------  ---------
-  Totaal                                                                    5.25 m²    3.75 pt
+  Berging                                                                  5.25 m²
+                                                                     ----------      ---------
+  Totaal                                                                   5.25 m²     3.75 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
@@ -40,8 +40,8 @@ VERKOELING EN VERWARMING
   Totaal                                                                              10.00 pt
 
 BUITENRUIMTEN
-  Privé                                                                     6.00 m²    2.10 pt
-    - Balkon                                                                5.60 m²
+  Privé                                                                    6.00 m²     2.10 pt
+    - Balkon                                                               5.60 m²
   Privé buitenruimten aanwezig                                                         2.00 pt
                                                                                      ---------
   Totaal                                                                               4.00 pt
@@ -56,7 +56,7 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel I                                                                         14.35 pt
     - Factor I                                                         15329.00 EUR
   Onderdeel II                                                                        15.67 pt
-    - Oppervlakte van vertrekken en overige ruimten                        58.00 m²
+    - Oppervlakte van vertrekken en overige ruimten                       58.00 m²
     - Factor II                                                          242.00 EUR
                                                                                      ---------
   Totaal                                                                              30.00 pt

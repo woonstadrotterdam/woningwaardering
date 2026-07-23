@@ -5,6 +5,6 @@ SAMENVATTING 1000mm
 KEUKEN
   Gedeeld met 2 onzelfstandige woonruimten
     - Keuken
-      - Lengte aanrecht                                                  1000.00 mm    2.00 pt
+      - Lengte aanrecht                                                 1000.00 mm     2.00 pt
                                                                                      ---------
   Totaal                                                                               2.00 pt

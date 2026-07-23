@@ -16,16 +16,16 @@ SAMENVATTING 20002000126
   Maximaal redelijke huur                                                           726.95 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
-  Keuken                                                                   15.74 m²
-  Slaapkamer                                                               39.82 m²
-  Badruimte                                                                 1.77 m²
-                                                                          ---------  ---------
-  Totaal                                                                   57.33 m²   57.00 pt
+  Keuken                                                                  15.74 m²
+  Slaapkamer                                                              39.82 m²
+  Badruimte                                                                1.77 m²
+                                                                     ----------      ---------
+  Totaal                                                                  57.33 m²    57.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Berging                                                                  19.67 m²
-                                                                          ---------  ---------
-  Totaal                                                                   19.67 m²   15.00 pt
+  Berging                                                                 19.67 m²
+                                                                     ----------      ---------
+  Totaal                                                                  19.67 m²    15.00 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
@@ -47,19 +47,19 @@ ENERGIEPRESTATIE
 
 KEUKEN
   Keuken
-    - Lengte aanrecht                                                    2100.00 mm    7.00 pt
+    - Lengte aanrecht                                                   2100.00 mm     7.00 pt
                                                                                      ---------
   Totaal                                                                               7.00 pt
 
 SANITAIR
   Keuken
-    - Wastafel                                                              1.00 st    1.00 pt
+    - Wastafel                                                             1.00 st     1.00 pt
   Badruimte
-    - Wastafel                                                              1.00 st    1.00 pt
-    - Douche                                                                1.00 st    4.00 pt
+    - Wastafel                                                             1.00 st     1.00 pt
+    - Douche                                                               1.00 st     4.00 pt
   Toiletruimte
-    - Staand Toilet                                                         1.00 st    3.00 pt
-    - Wastafel                                                              1.00 st    1.00 pt
+    - Staand Toilet                                                        1.00 st     3.00 pt
+    - Wastafel                                                             1.00 st     1.00 pt
                                                                                      ---------
   Totaal                                                                              10.00 pt
 
@@ -68,7 +68,7 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel I                                                                         17.22 pt
     - Factor I                                                         15329.00 EUR
   Onderdeel II                                                                        14.17 pt
-    - Oppervlakte van vertrekken en overige ruimten                        77.00 m²
+    - Oppervlakte van vertrekken en overige ruimten                       77.00 m²
     - Factor II                                                          242.00 EUR
                                                                                      ---------
   Totaal                                                                              31.50 pt

@@ -4,8 +4,8 @@ SAMENVATTING 12006000004
 
 GEMEENSCHAPPELIJKE PARKEERRUIMTEN
   Gedeeld met 10 adressen
-    - Type I                                                                1.00 st    0.90 pt
-    - Type II                                                               1.00 st    0.60 pt
-    - Type III                                                              1.00 st    0.40 pt
+    - Type I                                                               1.00 st     0.90 pt
+    - Type II                                                              1.00 st     0.60 pt
+    - Type III                                                             1.00 st     0.40 pt
                                                                                      ---------
   Totaal                                                                               2.00 pt
