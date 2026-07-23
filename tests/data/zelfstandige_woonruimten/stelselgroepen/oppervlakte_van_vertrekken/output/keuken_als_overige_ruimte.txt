@@ -1,8 +1,8 @@
 SAMENVATTING
-  Oppervlakte van vertrekken                                                           1.00 pt
-                                                                                     ---------
+  Oppervlakte van vertrekken                                                      1.00 pt
+                                                                                ---------
 
 OPPERVLAKTE VAN VERTREKKEN
-  keuken als overige ruimte                                                1.00 m²
-                                                                     ----------      ---------
-  Totaal                                                                   1.00 m²     1.00 pt
+  keuken als overige ruimte                                           1.00 m²
+                                                                ----------      ---------
+  Totaal                                                              1.00 m²     1.00 pt

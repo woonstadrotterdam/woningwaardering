@@ -1,74 +1,74 @@
 SAMENVATTING 20002000126
-  Oppervlakte van vertrekken                                                          57.00 pt
-  Oppervlakte van overige ruimten                                                     15.00 pt
-  Verkoeling en verwarming                                                             6.00 pt
-  Buitenruimten                                                                       -5.00 pt
-  Energieprestatie                                                                    -9.00 pt
-  Keuken                                                                               7.00 pt
-  Sanitair                                                                            10.00 pt
+  Oppervlakte van vertrekken                                                     57.00 pt
+  Oppervlakte van overige ruimten                                                15.00 pt
+  Verkoeling en verwarming                                                        6.00 pt
+  Buitenruimten                                                                  -5.00 pt
+  Energieprestatie                                                               -9.00 pt
+  Keuken                                                                          7.00 pt
+  Sanitair                                                                       10.00 pt
   Gemeenschappelijke parkeerruimten
   Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-  Punten voor de WOZ-waarde                                                           31.50 pt
+  Punten voor de WOZ-waarde                                                      31.50 pt
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw
-                                                                                     ---------
-  TOTAAL                                                                             113.00 pt
-  Maximaal redelijke huur                                                           726.95 EUR
+                                                                                ---------
+  TOTAAL                                                                        113.00 pt
+  Maximaal redelijke huur                                                      726.95 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
-  Keuken                                                                  15.74 m²
-  Slaapkamer                                                              39.82 m²
-  Badruimte                                                                1.77 m²
-                                                                     ----------      ---------
-  Totaal                                                                  57.33 m²    57.00 pt
+  Keuken                                                             15.74 m²
+  Slaapkamer                                                         39.82 m²
+  Badruimte                                                           1.77 m²
+                                                                ----------      ---------
+  Totaal                                                             57.33 m²    57.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Berging                                                                 19.67 m²
-                                                                     ----------      ---------
-  Totaal                                                                  19.67 m²    15.00 pt
+  Berging                                                            19.67 m²
+                                                                ----------      ---------
+  Totaal                                                             19.67 m²    15.00 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
-    - Keuken                                                                           2.00 pt
-    - Slaapkamer                                                                       2.00 pt
-    - Badruimte                                                                        2.00 pt
-                                                                                     ---------
-  Totaal                                                                               6.00 pt
+    - Keuken                                                                      2.00 pt
+    - Slaapkamer                                                                  2.00 pt
+    - Badruimte                                                                   2.00 pt
+                                                                                ---------
+  Totaal                                                                          6.00 pt
 
 BUITENRUIMTEN
-  Geen buitenruimten                                                                  -5.00 pt
-                                                                                     ---------
-  Totaal                                                                              -5.00 pt
+  Geen buitenruimten                                                             -5.00 pt
+                                                                                ---------
+  Totaal                                                                         -5.00 pt
 
 ENERGIEPRESTATIE
-  F                                                                                   -9.00 pt
-                                                                                     ---------
-  Totaal                                                                              -9.00 pt
+  F                                                                              -9.00 pt
+                                                                                ---------
+  Totaal                                                                         -9.00 pt
 
 KEUKEN
   Keuken
-    - Lengte aanrecht                                                   2100.00 mm     7.00 pt
-                                                                                     ---------
-  Totaal                                                                               7.00 pt
+    - Lengte aanrecht                                              2100.00 mm     7.00 pt
+                                                                                ---------
+  Totaal                                                                          7.00 pt
 
 SANITAIR
   Keuken
-    - Wastafel                                                             1.00 st     1.00 pt
+    - Wastafel                                                        1.00 st     1.00 pt
   Badruimte
-    - Wastafel                                                             1.00 st     1.00 pt
-    - Douche                                                               1.00 st     4.00 pt
+    - Wastafel                                                        1.00 st     1.00 pt
+    - Douche                                                          1.00 st     4.00 pt
   Toiletruimte
-    - Staand Toilet                                                        1.00 st     3.00 pt
-    - Wastafel                                                             1.00 st     1.00 pt
-                                                                                     ---------
-  Totaal                                                                              10.00 pt
+    - Staand Toilet                                                   1.00 st     3.00 pt
+    - Wastafel                                                        1.00 st     1.00 pt
+                                                                                ---------
+  Totaal                                                                         10.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
-  WOZ-waarde op waardepeildatum 01-01-2024                            264000.00 EUR
-  Onderdeel I                                                                         17.22 pt
-    - Factor I                                                         15329.00 EUR
-  Onderdeel II                                                                        14.17 pt
-    - Oppervlakte van vertrekken en overige ruimten                       77.00 m²
-    - Factor II                                                          242.00 EUR
-                                                                                     ---------
-  Totaal                                                                              31.50 pt
+  WOZ-waarde op waardepeildatum 01-01-2024                       264000.00 EUR
+  Onderdeel I                                                                    17.22 pt
+    - Factor I                                                    15329.00 EUR
+  Onderdeel II                                                                   14.17 pt
+    - Oppervlakte van vertrekken en overige ruimten                  77.00 m²
+    - Factor II                                                     242.00 EUR
+                                                                                ---------
+  Totaal                                                                         31.50 pt

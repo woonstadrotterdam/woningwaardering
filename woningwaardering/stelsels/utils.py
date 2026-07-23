@@ -52,7 +52,7 @@ _STELSELGROEPEN_MET_SUBTOTAAL_AANTAL = frozenset(
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
 # Kolombreedtes voor tabeloutput (zie docs/voor-ontwikkelaars/testing.md)
-W_NAAM = 65
+W_NAAM = 60
 W_GETAL = 10  # rechts uitgelijnd, bijv. "205000.00"
 W_EENHEID = 3  # links uitgelijnd na het getal, bijv. "EUR" / "m²" / "st"
 W_PUNTEN = 9  # "XXX.00 pt" (drie cijfers voor de komma)

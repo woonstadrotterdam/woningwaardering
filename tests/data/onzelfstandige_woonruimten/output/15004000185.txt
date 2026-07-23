@@ -1,63 +1,63 @@
 SAMENVATTING 15004000185
-  Oppervlakte van vertrekken                                                          25.00 pt
+  Oppervlakte van vertrekken                                                     25.00 pt
   Oppervlakte van overige ruimten
-  Verkoeling en verwarming                                                             2.00 pt
-  Energieprestatie                                                                     8.50 pt
-  Keuken                                                                               3.50 pt
-  Sanitair                                                                             3.00 pt
+  Verkoeling en verwarming                                                        2.00 pt
+  Energieprestatie                                                                8.50 pt
+  Keuken                                                                          3.50 pt
+  Sanitair                                                                        3.00 pt
   Buitenruimten
   Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
   Gemeenschappelijke parkeerruimten
-  Punten voor de WOZ-waarde                                                           12.00 pt
+  Punten voor de WOZ-waarde                                                      12.00 pt
   Bijzondere voorzieningen
   Aftrekpunten
   Prijsopslag monumenten
-                                                                                     ---------
-  TOTAAL                                                                              54.00 pt
-  Maximaal redelijke huur                                                           550.19 EUR
+                                                                                ---------
+  TOTAAL                                                                         54.00 pt
+  Maximaal redelijke huur                                                      550.19 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
   Privé
-    - Slaapkamer                                                          20.04 m²
+    - Slaapkamer                                                     20.04 m²
   Gedeeld met 2 onzelfstandige woonruimten
-    - Keuken                                                               7.50 m²
-    - Badruimte                                                            1.70 m²
-                                                                                     ---------
-  Totaal                                                                              25.00 pt
+    - Keuken                                                          7.50 m²
+    - Badruimte                                                       1.70 m²
+                                                                                ---------
+  Totaal                                                                         25.00 pt
 
 VERKOELING EN VERWARMING
   Privé
     - Verwarmde vertrekken
-      - Slaapkamer                                                                     2.00 pt
-                                                                                     ---------
-  Totaal                                                                               2.00 pt
+      - Slaapkamer                                                                2.00 pt
+                                                                                ---------
+  Totaal                                                                          2.00 pt
 
 ENERGIEPRESTATIE
-  Bouwjaar 1998                                                           24.50 m²     8.58 pt
-                                                                                     ---------
-  Totaal                                                                               8.50 pt
+  Bouwjaar 1998                                                      24.50 m²     8.58 pt
+                                                                                ---------
+  Totaal                                                                          8.50 pt
 
 KEUKEN
   Gedeeld met 2 onzelfstandige woonruimten
     - Keuken
-      - Lengte aanrecht                                                 2220.00 mm     3.50 pt
-                                                                                     ---------
-  Totaal                                                                               3.50 pt
+      - Lengte aanrecht                                            2220.00 mm     3.50 pt
+                                                                                ---------
+  Totaal                                                                          3.50 pt
 
 SANITAIR
   Gedeeld met 2 onzelfstandige woonruimten
     - Toilet
-      - Staand Toilet                                                      1.00 st     1.50 pt
+      - Staand Toilet                                                 1.00 st     1.50 pt
     - Badruimte
-      - Douche                                                             1.00 st     1.50 pt
-                                                                                     ---------
-  Totaal                                                                               3.00 pt
+      - Douche                                                        1.00 st     1.50 pt
+                                                                                ---------
+  Totaal                                                                          3.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
-  Percentage verschil                                                     -0.07       12.00 pt
-    - WOZ-waarde op waardepeildatum 01-01-2024                        205000.00 EUR
-    - Gebruiksoppervlakte                                                 58.00 m²
-    - WOZ-waarde per m²                                                 3534.48 EUR
-    - Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond                  3537.00 EUR
-                                                                                     ---------
-  Totaal                                                                              12.00 pt
+  Percentage verschil                                                -0.07       12.00 pt
+    - WOZ-waarde op waardepeildatum 01-01-2024                   205000.00 EUR
+    - Gebruiksoppervlakte                                            58.00 m²
+    - WOZ-waarde per m²                                            3534.48 EUR
+    - Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond             3537.00 EUR
+                                                                                ---------
+  Totaal                                                                         12.00 pt

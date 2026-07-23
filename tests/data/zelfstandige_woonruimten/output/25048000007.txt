@@ -1,64 +1,64 @@
 SAMENVATTING 25048000007
-  Oppervlakte van vertrekken                                                          61.00 pt
-  Oppervlakte van overige ruimten                                                      3.75 pt
-  Verkoeling en verwarming                                                            11.00 pt
-  Buitenruimten                                                                        3.75 pt
-  Energieprestatie                                                                    30.00 pt
+  Oppervlakte van vertrekken                                                     61.00 pt
+  Oppervlakte van overige ruimten                                                 3.75 pt
+  Verkoeling en verwarming                                                       11.00 pt
+  Buitenruimten                                                                   3.75 pt
+  Energieprestatie                                                               30.00 pt
   Keuken
   Sanitair
   Gemeenschappelijke parkeerruimten
   Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-  Punten voor de WOZ-waarde                                                           39.75 pt
+  Punten voor de WOZ-waarde                                                      39.75 pt
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw
-                                                                                     ---------
-  TOTAAL                                                                             149.00 pt
-  Maximaal redelijke huur                                                           974.05 EUR
+                                                                                ---------
+  TOTAAL                                                                        149.00 pt
+  Maximaal redelijke huur                                                      974.05 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
-  Woonkamer                                                               30.12 m²
-  Slaapkamer 1                                                            11.72 m²
-  Badruimte                                                                4.64 m²
-  Slaapkamer 2                                                             9.21 m²
-  Keuken                                                                   5.76 m²
-                                                                     ----------      ---------
-  Totaal                                                                  61.45 m²    61.00 pt
+  Woonkamer                                                          30.12 m²
+  Slaapkamer 1                                                       11.72 m²
+  Badruimte                                                           4.64 m²
+  Slaapkamer 2                                                        9.21 m²
+  Keuken                                                              5.76 m²
+                                                                ----------      ---------
+  Totaal                                                             61.45 m²    61.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Berging 1                                                                5.10 m²
-                                                                     ----------      ---------
-  Totaal                                                                   5.10 m²     3.75 pt
+  Berging 1                                                           5.10 m²
+                                                                ----------      ---------
+  Totaal                                                              5.10 m²     3.75 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
-    - Woonkamer                                                                        2.00 pt
-    - Slaapkamer 1                                                                     2.00 pt
-    - Badruimte                                                                        2.00 pt
-    - Slaapkamer 2                                                                     2.00 pt
-    - Keuken                                                                           2.00 pt
+    - Woonkamer                                                                   2.00 pt
+    - Slaapkamer 1                                                                2.00 pt
+    - Badruimte                                                                   2.00 pt
+    - Slaapkamer 2                                                                2.00 pt
+    - Keuken                                                                      2.00 pt
   Verwarmde overige en verkeersruimten
-    - Entree                                                                           1.00 pt
-                                                                                     ---------
-  Totaal                                                                              11.00 pt
+    - Entree                                                                      1.00 pt
+                                                                                ---------
+  Totaal                                                                         11.00 pt
 
 BUITENRUIMTEN
-  Privé                                                                    5.00 m²     1.75 pt
-    - Balkon                                                               4.62 m²
-  Privé buitenruimten aanwezig                                                         2.00 pt
-                                                                                     ---------
-  Totaal                                                                               3.75 pt
+  Privé                                                               5.00 m²     1.75 pt
+    - Balkon                                                          4.62 m²
+  Privé buitenruimten aanwezig                                                    2.00 pt
+                                                                                ---------
+  Totaal                                                                          3.75 pt
 
 ENERGIEPRESTATIE
-  B (Energie-index)                                                                   30.00 pt
-                                                                                     ---------
-  Totaal                                                                              30.00 pt
+  B (Energie-index)                                                              30.00 pt
+                                                                                ---------
+  Totaal                                                                         30.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
-  WOZ-waarde op waardepeildatum 01-01-2024                            313000.00 EUR
-  Onderdeel I                                                                         20.42 pt
-    - Factor I                                                         15329.00 EUR
-  Onderdeel II                                                                        19.30 pt
-    - Oppervlakte van vertrekken en overige ruimten                       67.00 m²
-    - Factor II                                                          242.00 EUR
-                                                                                     ---------
-  Totaal                                                                              39.75 pt
+  WOZ-waarde op waardepeildatum 01-01-2024                       313000.00 EUR
+  Onderdeel I                                                                    20.42 pt
+    - Factor I                                                    15329.00 EUR
+  Onderdeel II                                                                   19.30 pt
+    - Oppervlakte van vertrekken en overige ruimten                  67.00 m²
+    - Factor II                                                     242.00 EUR
+                                                                                ---------
+  Totaal                                                                         39.75 pt

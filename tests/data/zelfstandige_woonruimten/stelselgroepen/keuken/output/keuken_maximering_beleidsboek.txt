@@ -1,15 +1,15 @@
 SAMENVATTING keuken_1600mm
-  Keuken                                                                               8.00 pt
-                                                                                     ---------
+  Keuken                                                                          8.00 pt
+                                                                                ---------
 
 KEUKEN
   Keuken
-    - Lengte aanrecht                                                   1600.00 mm     4.00 pt
+    - Lengte aanrecht                                              1600.00 mm     4.00 pt
     - Extra voorzieningen
-      - Inbouw afzuiginstallatie                                           1.00 st     0.75 pt
-      - Inbouw kookplaat inductie                                          1.00 st     1.75 pt
-      - Inbouw koelkast                                                    1.00 st     1.00 pt
-      - Inbouw oven elektrisch                                             1.00 st     1.00 pt
-      - Maximaal evenveel punten als aanrecht                                         -0.50 pt
-                                                                                     ---------
-  Totaal                                                                               8.00 pt
+      - Inbouw afzuiginstallatie                                      1.00 st     0.75 pt
+      - Inbouw kookplaat inductie                                     1.00 st     1.75 pt
+      - Inbouw koelkast                                               1.00 st     1.00 pt
+      - Inbouw oven elektrisch                                        1.00 st     1.00 pt
+      - Maximaal evenveel punten als aanrecht                                    -0.50 pt
+                                                                                ---------
+  Totaal                                                                          8.00 pt

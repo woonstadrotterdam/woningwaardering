@@ -1,10 +1,10 @@
 SAMENVATTING
-  Oppervlakte van overige ruimten                                                      3.75 pt
-                                                                                     ---------
+  Oppervlakte van overige ruimten                                                 3.75 pt
+                                                                                ---------
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Privé                                                                                3.75 pt
-    - Slaapkamer                                                           3.00 m²
-    - Bijkeuken                                                            2.00 m²
-                                                                                     ---------
-  Totaal                                                                               3.75 pt
+  Privé                                                                           3.75 pt
+    - Slaapkamer                                                      3.00 m²
+    - Bijkeuken                                                       2.00 m²
+                                                                                ---------
+  Totaal                                                                          3.75 pt

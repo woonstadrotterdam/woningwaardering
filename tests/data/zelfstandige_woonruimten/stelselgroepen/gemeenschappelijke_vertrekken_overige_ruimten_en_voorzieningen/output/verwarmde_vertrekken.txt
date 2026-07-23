@@ -1,19 +1,19 @@
 SAMENVATTING 1
-  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen                      4.50 pt
-                                                                                     ---------
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen                 4.50 pt
+                                                                                ---------
 
 GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
   Gedeeld met 5 adressen
-    - Oppervlakte van vertrekken                                                       2.00 pt
-      - Slaapkamer                                                        10.00 m²
+    - Oppervlakte van vertrekken                                                  2.00 pt
+      - Slaapkamer                                                   10.00 m²
     - Verkoeling en verwarming
       - Verwarmde vertrekken
-        - Slaapkamer                                                                   0.40 pt
+        - Slaapkamer                                                              0.40 pt
   Gedeeld met 6 adressen
-    - Oppervlakte van vertrekken                                                       1.67 pt
-      - Woonkamer                                                         10.00 m²
+    - Oppervlakte van vertrekken                                                  1.67 pt
+      - Woonkamer                                                    10.00 m²
     - Verkoeling en verwarming
       - Verwarmde vertrekken
-        - Woonkamer                                                                    0.33 pt
-                                                                                     ---------
-  Totaal                                                                               4.50 pt
+        - Woonkamer                                                               0.33 pt
+                                                                                ---------
+  Totaal                                                                          4.50 pt
