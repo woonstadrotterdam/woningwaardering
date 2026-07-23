@@ -184,8 +184,8 @@
         },
         {
           "criterium": {
-            "id": "sanitair__afronding",
-            "naam": "Afronding"
+            "id": "sanitair__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
           "punten": 0.03
         }

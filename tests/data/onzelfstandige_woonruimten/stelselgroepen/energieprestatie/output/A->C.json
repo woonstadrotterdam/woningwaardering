@@ -27,8 +27,8 @@
         },
         {
           "criterium": {
-            "id": "energieprestatie__afronding",
-            "naam": "Afronding"
+            "id": "energieprestatie__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
           "punten": -0.03
         }

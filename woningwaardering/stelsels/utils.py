@@ -914,7 +914,7 @@ def voeg_rubriek_afronding_toe(
     afgerond: Decimal,
     stelselgroep: Referentiedata,
 ) -> None:
-    """Voeg een Afronding-waardering toe wanneer de onafgeronde detailsom afwijkt van het rubriektotaal.
+    """Voeg een Afronding-op-kwartpunten-waardering toe wanneer de onafgeronde detailsom afwijkt van het rubriektotaal.
 
     Alleen voor groepen met minstens één puntdragende detailwaardering (geen punt-loze m²-rubrieken).
     """
@@ -927,14 +927,16 @@ def voeg_rubriek_afronding_toe(
         return
 
     if stelselgroep.name is None:
-        raise ValueError("Stelselgroep heeft geen naam voor de Afronding-criterium-id.")
+        raise ValueError(
+            "Stelselgroep heeft geen naam voor de Afronding-op-kwartpunten-criterium-id."
+        )
 
-    afronding_id = f"{stelselgroep.name}__afronding"
+    afronding_id = f"{stelselgroep.name}__afronding_op_kwartpunten"
     groep.woningwaarderingen = [
         *waarderingen,
         WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="Afronding",
+                naam="Afronding op kwartpunten",
                 id=afronding_id,
             ),
             punten=float(delta),
@@ -948,7 +950,7 @@ def som_punten_waarderingen_afgerond(
     """Som van punten op alle waarderingen in een groep (afgerond op kwart).
 
     Returnwaarde is bedoeld voor VERA-velden (``punten``). Telt alle punten mee,
-    inclusief een eventuele Afronding-sluitpost.
+    inclusief een eventuele Afronding-op-kwartpunten-sluitpost.
     """
     if not waarderingen:
         return 0.0

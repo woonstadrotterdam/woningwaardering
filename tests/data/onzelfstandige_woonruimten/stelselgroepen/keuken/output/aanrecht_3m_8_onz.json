@@ -45,8 +45,8 @@
         },
         {
           "criterium": {
-            "id": "keuken__afronding",
-            "naam": "Afronding"
+            "id": "keuken__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
           "punten": 0.12
         }
