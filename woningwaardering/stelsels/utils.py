@@ -491,19 +491,28 @@ def _render_samenvatting(
             )
         )
 
-    opslag_delen: list[str] = []
+    opslag_percentage = ""
+    opslag_bedrag = ""
     if resultaat.opslagpercentage is not None and resultaat.opslagpercentage > 0:
-        opslag_delen.append(f"{resultaat.opslagpercentage:.0%}")
+        opslag_percentage = f"{resultaat.opslagpercentage:.0%}"
     if resultaat.huurprijsopslag is not None and resultaat.huurprijsopslag > 0:
-        opslag_delen.append(f"{_tabel_fmt_num(resultaat.huurprijsopslag)} EUR")
-    if opslag_delen:
-        lines.append(_tabel_regel("Opslag", punten="    ".join(opslag_delen)))
+        opslag_bedrag = _tabel_fmt_num(resultaat.huurprijsopslag)
+    if opslag_percentage or opslag_bedrag:
+        lines.append(
+            _tabel_regel(
+                "Opslag",
+                aantal=opslag_bedrag,
+                eenheid="EUR" if opslag_bedrag else "",
+                opslag=opslag_percentage,
+            )
+        )
 
     if resultaat.maximale_huur is not None:
         lines.append(
             _tabel_regel(
                 "Maximaal redelijke huur",
-                punten=f"{_tabel_fmt_num(resultaat.maximale_huur)} EUR",
+                aantal=_tabel_fmt_num(resultaat.maximale_huur),
+                eenheid="EUR",
             )
         )
 
@@ -515,7 +524,8 @@ def _render_samenvatting(
         lines.append(
             _tabel_regel(
                 "Maximaal redelijke huur inclusief opslag",
-                punten=f"{_tabel_fmt_num(resultaat.maximale_huur_inclusief_opslag)} EUR",
+                aantal=_tabel_fmt_num(resultaat.maximale_huur_inclusief_opslag),
+                eenheid="EUR",
             )
         )
 
