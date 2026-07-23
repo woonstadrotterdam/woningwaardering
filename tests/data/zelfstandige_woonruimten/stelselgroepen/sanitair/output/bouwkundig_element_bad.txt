@@ -3,6 +3,7 @@ SAMENVATTING
                                                                       --------
 
 SANITAIR
-  Badkamer - Bad                                             1.00 st   6.00 pt
+  Badkamer
+    - Bad                                                    1.00 st   6.00 pt
                                                                       --------
   Totaal                                                               6.00 pt

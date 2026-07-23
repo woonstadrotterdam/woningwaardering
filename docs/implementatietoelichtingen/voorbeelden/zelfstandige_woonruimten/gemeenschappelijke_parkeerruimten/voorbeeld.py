@@ -30,7 +30,7 @@ def get_eenheid():
             breedte=3,
             lengte=4,
             aantal=5,
-            gedeeld_met_aantal_eenheden=10,
+            gedeeld_met_aantal_adressen=10,
             bouwkundige_elementen=[
                 BouwkundigElementenBouwkundigElement(
                     soort=Bouwkundigelementsoort.voorziening,
@@ -45,7 +45,7 @@ def get_eenheid():
             breedte=3,
             lengte=4,
             aantal=2,
-            gedeeld_met_aantal_eenheden=10,
+            gedeeld_met_aantal_adressen=10,
         ),
     ]
 

@@ -14,12 +14,27 @@
       "punten": 1.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen",
+            "naam": "Gedeeld met 10 adressen",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__1",
-            "naam": "Type I (gedeeld met 10 adressen)",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__1",
+            "naam": "Type I",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen"
             },
             "meeteenheid": {
               "code": "STU",
@@ -31,10 +46,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__2",
-            "naam": "Type II (gedeeld met 10 adressen)",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__2",
+            "naam": "Type II",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen"
             },
             "meeteenheid": {
               "code": "STU",
@@ -46,10 +61,10 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__3",
-            "naam": "Type III (gedeeld met 10 adressen)",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__3",
+            "naam": "Type III",
             "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen"
             },
             "meeteenheid": {
               "code": "STU",
@@ -57,12 +72,6 @@
             }
           },
           "punten": 0.2
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
-          }
         }
       ]
     }

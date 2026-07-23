@@ -10,6 +10,6 @@ VERKOELING EN VERWARMING
       - Berging3                                                       0.50 pt
       - Berging4                                                       0.50 pt
       - Berging5                                                       0.50 pt
-      - Berging5: Maximaal 4 punten                                   -0.50 pt
+      - Maximering                                                    -0.50 pt
                                                                       --------
   Totaal                                                               2.00 pt

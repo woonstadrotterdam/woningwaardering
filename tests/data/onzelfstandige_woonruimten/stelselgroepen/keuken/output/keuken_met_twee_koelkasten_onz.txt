@@ -4,7 +4,9 @@ SAMENVATTING 1000mm
 
 KEUKEN
   Gedeeld met 2 onzelfstandige woonruimten
-    - Keuken: Lengte aanrecht                             1000.00 mm   2.00 pt
-    - Inbouw koelkast (in zelfde ruimte)                     2.00 st   1.00 pt
+    - Keuken
+      - Lengte aanrecht                                   1000.00 mm   2.00 pt
+      - Extra voorzieningen
+        - Inbouw koelkast                                    2.00 st   1.00 pt
                                                                       --------
   Totaal                                                               3.00 pt

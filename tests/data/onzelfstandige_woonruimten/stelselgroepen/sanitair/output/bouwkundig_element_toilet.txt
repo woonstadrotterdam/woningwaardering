@@ -4,6 +4,7 @@ SAMENVATTING
 
 SANITAIR
   Privé
-    - Toilet - Staand Toilet                                 1.00 st   3.00 pt
+    - Toilet
+      - Staand Toilet                                        1.00 st   3.00 pt
                                                                       --------
   Totaal                                                               3.00 pt

@@ -14,27 +14,18 @@
       "punten": 3.5,
       "woningwaarderingen": [
         {
-          "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017427",
-            "naam": "Tuin",
-            "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__2__adressen"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 1.125
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
         },
         {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017428",
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__Space_108017428",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -45,18 +36,27 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__gedeeld_met__2__adressen",
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen",
             "naam": "Gedeeld met 2 adressen",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten"
             }
           }
         },
         {
+          "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
-          }
+            "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__Space_108017427",
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.125
         }
       ]
     }

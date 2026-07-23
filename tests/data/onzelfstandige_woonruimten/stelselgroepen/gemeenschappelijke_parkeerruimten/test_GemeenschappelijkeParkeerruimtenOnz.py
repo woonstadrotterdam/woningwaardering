@@ -1,4 +1,3 @@
-from datetime import date
 from pathlib import Path
 
 import pytest
@@ -45,23 +44,20 @@ def test_GemeenschappelijkeParkeerruimten_specifiek_output(
 warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/warning_oude_parkeergarage.json",
-        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "Gebruik",
         },
     ),
     WarningConfig(
         file=f"{current_file_path}/input/warning_geen_oppervlakte.json",
-        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "oppervlakte",
         },
     ),
     WarningConfig(
-        file=f"{current_file_path}/input/warning_gedeeld_met_aantal_eenheden.json",
-        peildatum=date(2025, 1, 1),
+        file=f"{current_file_path}/input/warning_gedeeld_met_aantal_adressen.json",
         warnings={
-            UserWarning: "gedeeld_met_aantal_eenheden",
+            UserWarning: "gedeeld_met_aantal_adressen",
         },
     ),
 ]

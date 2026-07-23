@@ -32,11 +32,11 @@ VERKOELING EN VERWARMING
   Totaal                                                               4.00 pt
 
 BUITENRUIMTEN
-  Privé buitenruimten aanwezig                                         2.00 pt
   Privé                                                     28.00 m²   9.80 pt
     - Balkon 1                                               7.17 m²
     - Balkon 2                                              14.99 m²
     - Balkon 3                                               5.89 m²
+  Privé buitenruimten aanwezig                                         2.00 pt
                                                                       --------
   Totaal                                                              11.75 pt
 
@@ -46,11 +46,13 @@ ENERGIEPRESTATIE
   Totaal                                                              15.00 pt
 
 SANITAIR
-  Badruimte - Staand Toilet                                  1.00 st   2.00 pt
-  Badruimte - Wastafel                                       1.00 st   1.00 pt
-  Badruimte - Douche                                         1.00 st   4.00 pt
-  Toiletruimte - Staand Toilet                               1.00 st   3.00 pt
-  Toiletruimte - Wastafel                                    1.00 st   1.00 pt
+  Badruimte
+    - Staand Toilet                                          1.00 st   2.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
+    - Douche                                                 1.00 st   4.00 pt
+  Toiletruimte
+    - Staand Toilet                                          1.00 st   3.00 pt
+    - Wastafel                                               1.00 st   1.00 pt
                                                                       --------
   Totaal                                                              11.00 pt
 

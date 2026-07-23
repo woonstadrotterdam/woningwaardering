@@ -14,12 +14,33 @@
       "punten": 4.5,
       "woningwaarderingen": [
         {
-          "aantal": 6.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_berging",
-            "naam": "Berging",
+            "id": "oppervlakte_van_overige_ruimten__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "aantal": 10.4,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__prive__subtotaal",
+            "naam": "Subtotaal",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 7.5
+        },
+        {
+          "aantal": 6.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__prive__subtotaal__Space_berging",
+            "naam": "Berging",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__prive__subtotaal"
             },
             "meeteenheid": {
               "code": "M2",
@@ -30,10 +51,10 @@
         {
           "aantal": 4.4,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_zolder",
+            "id": "oppervlakte_van_overige_ruimten__prive__subtotaal__Space_zolder",
             "naam": "Zolder",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__prive"
+              "id": "oppervlakte_van_overige_ruimten__prive__subtotaal"
             },
             "meeteenheid": {
               "code": "M2",
@@ -43,17 +64,13 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_zolder__correctie_zolder_zonder_vaste_trap",
-            "naam": "Correctie: zolder zonder vaste trap"
+            "id": "oppervlakte_van_overige_ruimten__prive__Space_zolder__correctie_zolder_zonder_vaste_trap",
+            "naam": "Correctie: zolder zonder vaste trap",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__prive"
+            }
           },
           "punten": -3.0
-        },
-        {
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive",
-            "naam": "Privé"
-          },
-          "punten": 7.5
         }
       ]
     }

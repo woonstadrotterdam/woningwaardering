@@ -14,12 +14,27 @@
       "punten": 6.25,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__Space_383020__wastafel",
-            "naam": "Badkamer - Wastafel",
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
+            "id": "sanitair__prive__Space_383020",
+            "naam": "Badkamer",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive"
+            }
+          }
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "sanitair__prive__Space_383020__wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__Space_383020"
             },
             "meeteenheid": {
               "code": "STU",
@@ -31,10 +46,10 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__Space_383020__meerpersoonswastafel",
-            "naam": "Badkamer - Meerpersoonswastafel",
+            "id": "sanitair__prive__Space_383020__meerpersoonswastafel",
+            "naam": "Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__prive"
+              "id": "sanitair__prive__Space_383020"
             },
             "meeteenheid": {
               "code": "STU",
@@ -44,12 +59,27 @@
           "punten": 3.0
         },
         {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 8 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_993828",
+            "naam": "Woonkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 3.0,
           "criterium": {
-            "id": "sanitair__Space_993828__wastafel",
-            "naam": "Woonkamer - Wastafel",
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_993828__wastafel",
+            "naam": "Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met__8__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_993828"
             },
             "meeteenheid": {
               "code": "STU",
@@ -61,10 +91,10 @@
         {
           "aantal": 3.0,
           "criterium": {
-            "id": "sanitair__Space_993828__meerpersoonswastafel",
-            "naam": "Woonkamer - Meerpersoonswastafel",
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_993828__meerpersoonswastafel",
+            "naam": "Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met__8__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_993828"
             },
             "meeteenheid": {
               "code": "STU",
@@ -74,12 +104,21 @@
           "punten": 0.56
         },
         {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444",
+            "naam": "WoonkamerMetMax",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__Space_340444__wastafel",
-            "naam": "WoonkamerMetMax - Wastafel",
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444__wastafel",
+            "naam": "Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met__8__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444"
             },
             "meeteenheid": {
               "code": "STU",
@@ -89,22 +128,12 @@
           "punten": 0.25
         },
         {
-          "criterium": {
-            "id": "sanitair__Space_340444__max_punten_wastafel",
-            "naam": "WoonkamerMetMax - Max 1 punt voor Wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met__8__onzelfstandige_woonruimten"
-            }
-          },
-          "punten": -0.13
-        },
-        {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__Space_340444__meerpersoonswastafel",
-            "naam": "WoonkamerMetMax - Meerpersoonswastafel",
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444__meerpersoonswastafel",
+            "naam": "Meerpersoonswastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met__8__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444"
             },
             "meeteenheid": {
               "code": "STU",
@@ -115,25 +144,23 @@
         },
         {
           "criterium": {
-            "id": "sanitair__Space_340444__max_punten_meerpersoonswastafel",
-            "naam": "WoonkamerMetMax - Max 1.5 punt voor Meerpersoonswastafel",
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444__max_punten_wastafel",
+            "naam": "Maximering voor Wastafel",
             "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met__8__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444"
+            }
+          },
+          "punten": -0.13
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444__max_punten_meerpersoonswastafel",
+            "naam": "Maximering voor Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444"
             }
           },
           "punten": -0.19
-        },
-        {
-          "criterium": {
-            "id": "sanitair__prive",
-            "naam": "Privé"
-          }
-        },
-        {
-          "criterium": {
-            "id": "sanitair__gedeeld_met__8__onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 8 onzelfstandige woonruimten"
-          }
         }
       ]
     }

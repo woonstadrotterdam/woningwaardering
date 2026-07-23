@@ -6,17 +6,13 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_vertrek,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingCriteriumSleutels,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -44,86 +40,44 @@ class OppervlakteVanVertrekken(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
-            )
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
         )
-
-        woningwaardering_groep.woningwaarderingen = []
 
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
         for ruimte in eenheid.ruimten or []:
-            if ruimte.gedeeld_met_aantal_eenheden:
+            if ruimte.gedeeld_met_aantal_adressen:
                 continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
-            woningwaarderingen = list(waardeer_oppervlakte_van_vertrek(ruimte))
-            # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
-            for woningwaardering in woningwaarderingen:
-                if woningwaardering.criterium is not None:
-                    if (
-                        woningwaardering.aantal
-                        and woningwaardering.criterium.naam
-                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        is not None
-                    ):
-                        gedeeld_met_counter[
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ] += utils.rond_af(woningwaardering.aantal, decimalen=2)
-                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
-                            ),
-                        )
-                    else:
-                        gedeeld_met_counter[1] += utils.rond_af(
-                            woningwaardering.aantal, decimalen=2
-                        )
 
-                        woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        gedeeld_met_aantal=1,
-                                    )
-                                ),
-                            )
-                        )
+            deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
 
-            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
+            gedeeld_met = waarderingsgroep_builder.gedeeld_met(
+                aantal_onzelfstandige_woonruimten=deler,
+            )
+            waarderingen = waardeer_oppervlakte_van_vertrek(
+                ruimte, waarderingsgroep_builder=gedeeld_met
+            )
+            for waardering in waarderingen:
+                if waardering.aantal is None:
+                    continue
+                # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
+                gedeeld_met_counter[deler] += utils.rond_af(
+                    waardering.aantal, decimalen=2
+                )
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
-        oppervlakte_totaal_na_delen = Decimal(str("0"))
+        oppervlakte_totaal_na_delen = Decimal("0")
         for aantal_onz, oppervlakte in gedeeld_met_counter.items():
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=utils.naam_gedeeld_met_groep(
-                    aantal_onz,
-                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                ),
-                id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_onz,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                    )
-                ),
-            )
             oppervlakte_na_delen = utils.rond_af(oppervlakte, decimalen=2) / Decimal(
                 str(aantal_onz)
             )
             oppervlakte_totaal_na_delen += oppervlakte_na_delen
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        punten = float(utils.rond_af(oppervlakte_totaal_na_delen, decimalen=0))
-        woningwaardering_groep.punten = punten
+        woningwaardering_groep = waarderingsgroep_builder.build()
+        woningwaardering_groep.punten = float(
+            utils.rond_af(oppervlakte_totaal_na_delen, decimalen=0)
+        )
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -133,7 +87,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=OppervlakteVanVertrekken(peildatum=date(2026, 1, 1)),
+        instance=OppervlakteVanVertrekken(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

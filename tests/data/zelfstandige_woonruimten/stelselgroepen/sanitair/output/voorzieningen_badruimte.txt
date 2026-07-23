@@ -3,17 +3,19 @@ SAMENVATTING
                                                                       --------
 
 SANITAIR
-  Badruimte - Wastafel                                       1.00 st   1.00 pt
-  Badruimte - Bad                                            1.00 st   6.00 pt
-  Badruimte - Voorzieningen: Bubbelfunctie van het bad         1.00 st   1.50 pt
-  Badruimte - Voorzieningen: Douchewand                      1.00 st   1.25 pt
-  Badruimte - Voorzieningen: Handdoekenradiator              1.00 st   0.75 pt
-  Badruimte - Voorzieningen: Ingebouwd kastje met in- of opgebouwde wastafel         1.00 st   1.00 pt
-  Badruimte - Voorzieningen: Kastruimte                      2.00 st   1.50 pt
-  Badruimte - Voorzieningen: Max 0.75 punten voor Kastruimte                  -0.75 pt
-  Badruimte - Voorzieningen: Stopcontact bij wastafel         1.00 st   0.25 pt
-  Badruimte - Voorzieningen: Éénhandsmengkraan               1.00 st   0.25 pt
-  Badruimte - Voorzieningen: Thermostatische mengkraan         1.00 st   0.50 pt
-  Badruimte - Voorzieningen: Max verdubbeling punten bad en douche                  -0.25 pt
+  Badruimte
+    - Wastafel                                               1.00 st   1.00 pt
+    - Bad                                                    1.00 st   6.00 pt
+    - Extra voorzieningen
+      - Bubbelfunctie van het bad                            1.00 st   1.50 pt
+      - Douchewand                                           1.00 st   1.25 pt
+      - Handdoekenradiator                                   1.00 st   0.75 pt
+      - Ingebouwd kastje met in- of opgebouwde wastafel         1.00 st   1.00 pt
+      - Kastruimte                                           2.00 st   1.50 pt
+      - Max 0.75 punten voor Kastruimte                               -0.75 pt
+      - Stopcontact bij wastafel                             1.00 st   0.25 pt
+      - Éénhandsmengkraan                                    1.00 st   0.25 pt
+      - Thermostatische mengkraan                            1.00 st   0.50 pt
+      - Max verdubbeling punten bad en douche                         -0.25 pt
                                                                       --------
   Totaal                                                              13.00 pt

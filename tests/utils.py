@@ -38,6 +38,27 @@ def get_stelselgroep_resultaten(
     return resultaten
 
 
+def _gesorteerd_op_criterium_id(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> WoningwaarderingResultatenWoningwaarderingResultaat:
+    """Geef een kopie waarin de waarderingen per groep op criterium-id zijn gesorteerd.
+
+    Hiermee wordt de JSON-vergelijking ongevoelig voor de (functioneel irrelevante)
+    volgorde van waarderingen binnen een groep.
+    """
+    gesorteerd = resultaat.model_copy(deep=True)
+    for groep in gesorteerd.groepen or []:
+        if groep.woningwaarderingen:
+            groep.woningwaarderingen.sort(
+                key=lambda waardering: (
+                    waardering.criterium.id
+                    if waardering.criterium and waardering.criterium.id
+                    else ""
+                )
+            )
+    return gesorteerd
+
+
 def assert_output_model(
     resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     verwacht_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -70,14 +91,20 @@ def assert_output_model(
     if colored_diff != "":
         fail(reason=f"Output komt niet overeen\n{colored_diff}", pytrace=False)
 
+    # De volgorde van waarderingen binnen een groep is functioneel niet relevant
+    # (de hiërarchie ligt vast in ``criterium.id`` en ``bovenliggende_criterium``).
+    # We sorteren daarom op criterium-id voordat we de JSON vergelijken, zodat de
+    # diff aantoont dat enkel de volgorde verschilt en niet de punten/aantallen.
     difflines_json = list(
         difflib.unified_diff(
             fromfile="verwacht",
             tofile="testresultaat",
-            a=verwacht_resultaat.model_dump_json(indent=2, exclude_none=True).split(
-                "\n"
-            ),
-            b=resultaat.model_dump_json(indent=2, exclude_none=True).split("\n"),
+            a=_gesorteerd_op_criterium_id(verwacht_resultaat)
+            .model_dump_json(indent=2, exclude_none=True)
+            .split("\n"),
+            b=_gesorteerd_op_criterium_id(resultaat)
+            .model_dump_json(indent=2, exclude_none=True)
+            .split("\n"),
             lineterm="",
             n=3,
         )
@@ -131,7 +158,6 @@ def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterato
 @dataclass
 class WarningConfig:
     file: str
-    peildatum: date
     warnings: dict[type[Warning], str]
 
 
@@ -143,12 +169,9 @@ def assert_stelselgroep_warnings(
 
     Args:
         warning_config (WarningConfig): WarningConfig object met waarschuwing test configuratie
-        peildatum (date): peildatum
+        peildatum (date): peildatum waarop de stelselgroep wordt gewaardeerd
         stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
     """
-    if peildatum < warning_config.peildatum:
-        pytest.skip(f"Warning is niet van toepassing op peildatum: {peildatum}")
-
     with open(warning_config.file, "r+") as f:
         eenheid_input = EenhedenEenheid.model_validate_json(f.read())
 

@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "c",
+    "huisnummerToevoeging": "c",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -92,7 +92,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_23762467",
-          "id_bimmodel": "2tp9zHhNvEAwT_qXkossZG",
+          "idBimmodel": "2tp9zHhNvEAwT_qXkossZG",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -108,7 +108,7 @@
         },
         {
           "id": "Wastafel_23762468",
-          "id_bimmodel": "2tp9zHhNvEAwT_qXkossZI",
+          "idBimmodel": "2tp9zHhNvEAwT_qXkossZI",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -186,7 +186,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Ketel_23762410",
-          "id_bimmodel": "1J4kch5Y941gX7k7ut8dvs",
+          "idBimmodel": "1J4kch5Y941gX7k7ut8dvs",
           "naam": "Ketel",
           "omschrijving": "Intergas Kombi Kompakt HRE 28/24 CW4",
           "soort": {
@@ -523,7 +523,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_23762483",
-          "id_bimmodel": "2wG8xvnXj0GAUmJci0F2q3",
+          "idBimmodel": "2wG8xvnXj0GAUmJci0F2q3",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -602,7 +602,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Fontein_23762478",
-          "id_bimmodel": "2tp9zHhNvEAwT_qXkossZ8",
+          "idBimmodel": "2tp9zHhNvEAwT_qXkossZ8",
           "omschrijving": null,
           "soort": {
             "code": "SAN",
@@ -618,7 +618,7 @@
         },
         {
           "id": "Closetcombinatie_23762477",
-          "id_bimmodel": "2tp9zHhNvEAwT_qXkossZF",
+          "idBimmodel": "2tp9zHhNvEAwT_qXkossZF",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",

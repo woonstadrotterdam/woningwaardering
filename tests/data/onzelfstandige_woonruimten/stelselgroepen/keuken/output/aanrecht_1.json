@@ -14,12 +14,27 @@
       "punten": 4.0,
       "woningwaarderingen": [
         {
-          "aantal": 1000.0,
           "criterium": {
-            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
-            "naam": "Keuken: Lengte aanrecht",
+            "id": "keuken__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
+            "id": "keuken__prive__keuken",
+            "naam": "Keuken",
             "bovenliggendeCriterium": {
               "id": "keuken__prive"
+            }
+          }
+        },
+        {
+          "aantal": 1000.0,
+          "criterium": {
+            "id": "keuken__prive__keuken__lengte_aanrecht_aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__prive__keuken"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -27,12 +42,6 @@
             }
           },
           "punten": 4.0
-        },
-        {
-          "criterium": {
-            "id": "keuken__prive",
-            "naam": "Privé"
-          }
         }
       ]
     }

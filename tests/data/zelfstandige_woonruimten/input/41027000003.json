@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "d",
+    "huisnummerToevoeging": "d",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -92,7 +92,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_82953001",
-          "id_bimmodel": "01JCZXiA59ggv4UsLEl_8I",
+          "idBimmodel": "01JCZXiA59ggv4UsLEl_8I",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -108,7 +108,7 @@
         },
         {
           "id": "Wastafel_82953002",
-          "id_bimmodel": "0KWYqEbpP1N8qjvXj434fj",
+          "idBimmodel": "0KWYqEbpP1N8qjvXj434fj",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -206,7 +206,7 @@
           "bouwkundigeElementen": [
             {
               "id": "Ketel_82953811",
-              "id_bimmodel": "01JCZXiA59ggv4UsLEl_5s",
+              "idBimmodel": "01JCZXiA59ggv4UsLEl_5s",
               "naam": "Ketel",
               "soort": {
                 "code": "VER",
@@ -308,7 +308,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Ketel_82953811",
-          "id_bimmodel": "01JCZXiA59ggv4UsLEl_5s",
+          "idBimmodel": "01JCZXiA59ggv4UsLEl_5s",
           "naam": "Ketel",
           "soort": {
             "code": "VER",
@@ -490,7 +490,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Fontein_82953005",
-          "id_bimmodel": "01JCZXiA59ggv4UsLEl_8J",
+          "idBimmodel": "01JCZXiA59ggv4UsLEl_8J",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
@@ -505,7 +505,7 @@
         },
         {
           "id": "Closetcombinatie_82953004",
-          "id_bimmodel": "01JCZXiA59ggv4UsLEl_8G",
+          "idBimmodel": "01JCZXiA59ggv4UsLEl_8G",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -543,7 +543,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_82952743",
-          "id_bimmodel": "01JCZXiA59ggv4UsLEl_8N",
+          "idBimmodel": "01JCZXiA59ggv4UsLEl_8N",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {

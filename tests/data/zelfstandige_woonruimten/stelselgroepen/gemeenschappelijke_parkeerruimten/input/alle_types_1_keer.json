@@ -3,7 +3,7 @@
   "ruimten": [
     {
       "id": "1",
-      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeldMetAantalAdressen": 10,
       "aantal": 1,
       "soort": {
         "code": "GEM",
@@ -20,7 +20,7 @@
     },
     {
       "id": "2",
-      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeldMetAantalAdressen": 10,
       "aantal": 1,
       "soort": {
         "code": "BTR",
@@ -37,7 +37,7 @@
     },
     {
       "id": "3",
-      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeldMetAantalAdressen": 10,
       "aantal": 1,
       "soort": {
         "code": "GEM",

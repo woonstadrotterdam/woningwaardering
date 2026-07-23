@@ -3,10 +3,16 @@ SAMENVATTING 1000mm
                                                                       --------
 
 GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
-  Vertrekken (gedeeld met 5)                                           2.00 pt
-    - Keuken                                                10.00 m²
-  Keuken: Lengte aanrecht (gedeeld met 5)                 1000.00 mm   0.80 pt
-  Inbouw koelkast (in zelfde ruimte) (gedeeld met 5)         2.00 st   0.40 pt
-  Keuken (gedeeld met 5)                                               0.40 pt
+  Gedeeld met 5 adressen
+    - Oppervlakte van vertrekken                                       2.00 pt
+      - Keuken                                              10.00 m²
+    - Verkoeling en verwarming
+      - Verwarmde vertrekken
+        - Keuken                                                       0.40 pt
+    - Keuken
+      - Keuken
+        - Lengte aanrecht                                 1000.00 mm   0.80 pt
+        - Extra voorzieningen
+          - Inbouw koelkast                                  2.00 st   0.40 pt
                                                                       --------
   Totaal                                                               3.50 pt

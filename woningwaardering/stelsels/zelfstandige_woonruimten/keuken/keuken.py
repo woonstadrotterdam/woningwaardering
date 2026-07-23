@@ -1,18 +1,17 @@
 import warnings
 from datetime import date
-from decimal import Decimal
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -40,35 +39,28 @@ class Keuken(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
+        )
+
+        for ruimte in eenheid.ruimten or []:
+            if utils.gedeeld_met_adressen(ruimte):
+                continue
+            waardeer_keuken(
+                ruimte, self.stelsel, waarderingsgroep_builder=waarderingsgroep_builder
             )
-        )
-        woningwaardering_groep.woningwaarderingen = []
 
-        woningwaardering_groep.woningwaarderingen.extend(
-            woningwaardering
-            for ruimte in eenheid.ruimten or []
-            if not utils.gedeeld_met_eenheden(ruimte)
-            for woningwaardering in waardeer_keuken(ruimte, self.stelsel)
-        )
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
-        if not woningwaardering_groep.woningwaarderingen:
+        heeft_keuken_waarderingen = any(
+            woningwaardering.punten is not None
+            for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+        )
+        if not heeft_keuken_waarderingen:
             warnings.warn(
                 f"Eenheid ({eenheid.id}) kan niet gewaardeerd worden voor stelselgroep {Woningwaarderingstelselgroep.keuken.naam} omdat er geen keuken is gevonden.",
                 UserWarning,
             )
-
-        totaal_punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-        )
-        woningwaardering_groep.punten = float(totaal_punten)
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -79,7 +71,7 @@ class Keuken(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=Keuken(peildatum=date(2026, 1, 1)),
+        instance=Keuken(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

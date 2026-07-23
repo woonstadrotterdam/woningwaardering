@@ -1,6 +1,6 @@
 # Beleidsboek Waarderingsstelsel onzelfstandige woonruimte
 
-Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Waarderingsstelsel onzelfstandige woonruimte (januari 2026)
+Hier worden toelichtingen gedocumenteerd van developers op het Beleidsboek Waarderingsstelsel onzelfstandige woonruimte (juli 2026)
 
 ## Hoofdstuk 1 – Basisinformatie woningwaardering
 
@@ -952,7 +952,9 @@ Er wordt afgerond op een kwart punt. Het puntenaantal voor één onzelfstandige 
 Gedeelde buitenruimten die als parkeerplek voor auto’s bedoeld zijn, worden gewaardeerd volgens rubriek 10.
 
 > [!NOTE]
-> Ondanks dat het op basis van het woordgebruik van deze rubriek lijkt alsof parkeerplekken met meerdere onzelfstandige woonruimten op het hetzelfde adres gewaardeerd horen te worden in rubriek 10, staat in rubriek 10 expliciet vermeld dat parkeerplekken alleen worden gewaardeerd als ze gedeeld zijn met minimaal 2 adressen. Omdat anders parkeerplekken gedeeld met hetzelfde adres nergens gewaardeerd zouden worden, waarderen wij die hier in rubriek 8.
+> Parkeerplekken met een specifieke parkeer-detailsoort (carport, in- of uitpandige parkeergarage, parkeerplek buiten behorend bij een complex) worden altijd in rubriek 10 gewaardeerd, ook wanneer ze privé zijn of alleen met onzelfstandige woonruimten op hetzelfde adres worden gedeeld. Zie [deze discussie op github](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702). Een generieke `Ruimtedetailsoort.parkeerplaats` wordt in deze rubriek (8) als buitenruimte gewaardeerd, tenzij deze met meerdere adressen wordt gedeeld.
+>
+> Let op het randgeval: een `Ruimtedetailsoort.parkeerplaats` die met meerdere adressen wordt gedeeld, telt hier (rubriek 8) niet mee, maar wordt in rubriek 10 ook niet gewaardeerd, omdat rubriek 10 alleen de specifieke hierboven genoemde parkeer-detailsoorten waardeert. Zo'n gedeelde parkeerplek dient daarom met een van die specifieke detailsoorten te worden meegegeven om gewaardeerd te worden.
 
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia’s
 
@@ -1090,7 +1092,7 @@ Het woningwaarderigsstelsel kent punten toe aan verschillende typen gemeenschapp
 #### 2.10.1 Basisvoorwaarden waardering gemeenschappelijk parkeerruimte
 
 > [!NOTE]
-> De woningwaardering package gaat er van uit dat onderstaande eisen, wanneer een parkeeruimte wordt meegegeven in het input model.
+> De woningwaardering package gaat er van uit dat voldaan wordt aan onderstaande eisen, wanneer een parkeeruimte wordt meegegeven in het input model.
 
 Punten voor een gemeenschappelijke parkeervoorziening worden alleen toegekend als de parkeervoorziening als een onroerende aanhorigheid gekwalificeerd wordt. Hiervan is sprake:
 
@@ -1109,7 +1111,10 @@ Als de parkeerplek geen onroerende aanhorigheid is, heeft de verhuurder de mogel
 Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewoners van **ten minste twee adressen** die daar **exclusief gebruiksrecht** op hebben, waarin zich **ten minste één parkeerplek** bevindt. Zoals bijvoorbeeld een gemeenschappelijke parkeergarage onder een wooncomplex of een gemeenschappelijke parkeerplaats buiten met één of meerdere parkeerplekken.
 
 > [!NOTE]
-> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model niet mogelijk. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van de parkeerruimten de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_eenheden` en `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek meegegeven te worden wanneer het een onzelfstandige woonruimte betreft. Voor een voorbeeld, zie onderaan dit hoofdstuk.
+> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model niet mogelijk. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van de parkeerruimten de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_adressen` en `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek meegegeven te worden wanneer het een onzelfstandige woonruimte betreft. Voor een voorbeeld, zie onderaan dit hoofdstuk.
+
+> [!NOTE]
+> In deze package waarderen we parkeerplekken met een specifieke parkeer-detailsoort (carport, in- of uitpandige parkeergarage, parkeerplek buiten behorend bij complex) altijd in rubriek 10 — ook wanneer ze privé zijn of alleen tussen onzelfstandige woonruimten op hetzelfde adres worden gedeeld. Dit sluit aan bij de huurprijscheck van de Huurcommissie. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek) en [deze discussie op GitHub](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702).
 
 De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomplex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
 

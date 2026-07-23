@@ -1,21 +1,16 @@
 from datetime import date
-from decimal import Decimal
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingCriteriumSleutels,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -43,94 +38,31 @@ class Keuken(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
-            )
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
         )
-
-        woningwaardering_groep.woningwaarderingen = []
-
-        gedeeld_met_aantallen: dict[int, None] = {}
 
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if not utils.gedeeld_met_eenheden(ruimte)
+            if not utils.gedeeld_met_adressen(ruimte)
         ]
 
         for ruimte in ruimten or []:
-            woningwaarderingen = list(waardeer_keuken(ruimte, self.stelsel))
-
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
-            for woningwaardering in woningwaarderingen:
-                if woningwaardering.criterium is not None:
-                    if (
-                        woningwaardering.punten
-                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        is not None
-                    ):
-                        gedeeld_met_aantallen[
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ] = None
-                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
-                            ),
-                        )
-                        woningwaardering.punten = float(
-                            utils.rond_af(
-                                Decimal(str(woningwaardering.punten))
-                                / Decimal(
-                                    str(
-                                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                                    )
-                                ),
-                                decimalen=2,
-                            )
-                        )
-                    elif woningwaardering.punten:
-                        gedeeld_met_aantallen[1] = None
-                        woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        gedeeld_met_aantal=1,
-                                    )
-                                ),
-                            )
-                        )
-
-            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
-
-        # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
-        for aantal in gedeeld_met_aantallen:
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=utils.naam_gedeeld_met_groep(
-                    aantal,
-                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                ),
-                id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                    )
-                ),
+            deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            gedeeld_met = waarderingsgroep_builder.gedeeld_met(
+                aantal_onzelfstandige_woonruimten=deler,
             )
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        woningwaardering_groep.punten = utils.som_punten_waarderingen(
-            woningwaardering_groep.woningwaarderingen
-        )
+            waardeer_keuken(
+                ruimte,
+                self.stelsel,
+                waarderingsgroep_builder=gedeeld_met,
+                deler=deler,
+            )
+
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -140,7 +72,7 @@ class Keuken(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=Keuken(peildatum=date(2026, 1, 1)),
+        instance=Keuken(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

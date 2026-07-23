@@ -16,7 +16,7 @@
       "lengte": 10,
       "breedte": 2,
       "verwarmd": false,
-      "gedeeldMetAantalEenheden": 2
+      "gedeeldMetAantalAdressen": 2
     },
     {
       "id": "Space_108017428",
@@ -34,7 +34,7 @@
       "verwarmd": false,
       "lengte": 10,
       "breedte": 3,
-      "gedeeldMetAantalEenheden": 3
+      "gedeeldMetAantalAdressen": 3
     }
   ]
 }

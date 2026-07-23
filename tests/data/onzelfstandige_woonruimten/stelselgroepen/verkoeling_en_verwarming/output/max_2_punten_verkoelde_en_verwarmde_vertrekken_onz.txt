@@ -4,10 +4,14 @@ SAMENVATTING 37101000032
 
 VERKOELING EN VERWARMING
   Gedeeld met 2 onzelfstandige woonruimten
-    - Verkoelde en verwarmde vertrekken
-      - Slaapkamer1                                                    1.50 pt
-      - Slaapkamer2                                                    1.50 pt
-      - Slaapkamer3                                                    1.50 pt
-      - Slaapkamer3: Maximaal 2 extra punten                          -0.50 pt
+    - Verwarmde vertrekken
+      - Slaapkamer1                                                    1.00 pt
+      - Slaapkamer2                                                    1.00 pt
+      - Slaapkamer3                                                    1.00 pt
+    - Verkoelde vertrekken
+      - Slaapkamer1                                                    0.50 pt
+      - Slaapkamer2                                                    0.50 pt
+      - Slaapkamer3                                                    0.50 pt
+      - Maximering                                                    -0.50 pt
                                                                       --------
   Totaal                                                               4.00 pt

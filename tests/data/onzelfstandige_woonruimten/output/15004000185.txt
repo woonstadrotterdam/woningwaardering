@@ -39,14 +39,17 @@ ENERGIEPRESTATIE
 
 KEUKEN
   Gedeeld met 2 onzelfstandige woonruimten
-    - Keuken: Lengte aanrecht                             2220.00 mm   3.50 pt
+    - Keuken
+      - Lengte aanrecht                                   2220.00 mm   3.50 pt
                                                                       --------
   Totaal                                                               3.50 pt
 
 SANITAIR
   Gedeeld met 2 onzelfstandige woonruimten
-    - Toilet - Staand Toilet                                 1.00 st   1.50 pt
-    - Badruimte - Douche                                     1.00 st   1.50 pt
+    - Toilet
+      - Staand Toilet                                        1.00 st   1.50 pt
+    - Badruimte
+      - Douche                                               1.00 st   1.50 pt
                                                                       --------
   Totaal                                                               3.00 pt
 

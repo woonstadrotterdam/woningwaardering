@@ -8,7 +8,7 @@ De primaire context is de publieke `woningwaardering`-package. Lokale of organis
 
 - `README.md` beschrijft het doel, de juridische disclaimer, de actuele beleidsboekreferentie en de gebruikte VERA-versies.
 - `pyproject.toml` bevat de package-metadata, Python-versie en vastgelegde VERA-databronnen.
-- `docs/introductie/opzet.md` beschrijft de repository-opzet, waarschuwingen, lookup-tabellen en criterium-id's.
+- `docs/introductie/opzet.md` beschrijft de repository-opzet, waarschuwingen, lookup-tabellen en de criteriumstrategie.
 - `docs/implementatietoelichtingen/` legt per stelselgroep vast welke beleidsboekregels wel of niet zijn geïmplementeerd en waarom.
 - Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Vanaf deze pagina's klik je door naar de algemene toelichting en de stelselgroepen.
 - `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, naamgeving, tests, data, logging en releases.
@@ -19,7 +19,7 @@ Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen i
 ## Projectgrenzen
 
 - De package berekent woningwaarderingen op basis van een digitale representatie van een woonruimte.
-- De berekening volgt het beleidsboek van de Huurcommissie, met januari 2026 als actuele ankerdatum in de bestaande documentatie.
+- De berekening volgt het beleidsboek van de Huurcommissie, met juli 2026 als actuele ankerdatum in de bestaande documentatie.
 - De input en output volgen de VERA-standaard, met de concrete versies vastgelegd in `pyproject.toml`.
 - Aan berekeningen en output kunnen geen rechten worden ontleend. Gebruikers moeten documentatie, implementatietoelichtingen en openstaande issues raadplegen om resultaten goed te interpreteren.
 - Wanneer VERA of beschikbare inputdata een beleidsregel niet volledig kan dragen, wordt de gekozen interpretatie in de implementatietoelichtingen beschreven.
@@ -82,9 +82,9 @@ Een lokale uitbreiding op gegenereerde VERA-modellen wanneer de standaard onvold
 
 Een CSV-bestand met constanten of tabulaire regeldata die nodig zijn voor puntberekeningen. CSV wordt gebruikt wanneer tabeldata in code, JSON of YAML minder leesbaar zou zijn.
 
-### CriteriumId
+### Criterium-id
 
-Een samengestelde identifier voor een criterium in de output. Onderdelen worden met dubbele underscores (`__`) samengevoegd, bijvoorbeeld stelselgroep, ruimte-id, criterium of gedeeld-met-informatie.
+Een samengestelde identifier voor een criterium in de output. Het is een pad-id: de id wordt afgeleid uit de plek in de hiërarchie, waarbij elk segment met `__` aan de id van het bovenliggende criterium wordt gekoppeld. Zie `docs/introductie/opzet.md` voor de criteriumstrategie en de opbouw van deze id's.
 
 ### criteriumSleutel
 
@@ -94,9 +94,21 @@ Een sleutel waarmee criteria logisch gegroepeerd kunnen worden, bijvoorbeeld om 
 
 Verwijzing van een waardering naar een bovenliggend criterium binnen dezelfde stelselgroep-groep (JSON: `bovenliggendeCriterium`). Criteriumsleutels volgen de id-families in `docs/introductie/opzet.md` (ruimteregel, gedeeld-met aggregaat, criteriumnaam-regel).
 
+### Maximering
+
+Een waardering die een puntencap toepast. Als die waardering zelf gedeeld wordt én de naam een numeriek puntental bevat (bijv. `Maximaal 4 punten`), heet die in de output `Maximering` (of `Maximering voor …` wanneer het onderwerp onderscheidend is). Beschrijvende maximeringen zonder puntental (bijv. `Maximaal evenveel punten als aanrecht`) blijven ongewijzigd. Een maximering die alleen op het al gedeelde totaal geldt (zoals buitenruimten max. 15) behoudt ook het puntental in de naam.
+
+### Structuurterminologie
+
+De samenhang tussen waarderingen in de output is een keten via `bovenliggendeCriterium`: elke regel is een waardering met een `criterium`, en een criterium kan onderliggende criteria hebben. Het onderscheid tussen beide is scherp: een **criterium** draagt de identiteit, naam en plek in de hiërarchie (`id`, `naam`, `bovenliggendeCriterium`, `meeteenheid`) en heeft nooit punten; `punten` en `aantal` zitten op de **waardering**. Een groeperende regel (zoals een gedeeld-met- of subgroepregel) is daarom in essentie een criterium zonder punten; een regel met toegekende punten is een waardering. In de regel dragen groeperende regels geen punten, maar bij uitzondering doet een subgroep dat wel — bijvoorbeeld in de oppervlakterubrieken, waar de punten over het afgeronde groepstotaal op de subgroep zelf worden gezet; het criterium-object blijft ook dan puntenloos. Een **subgroep** is een groeperend criterium binnen een stelselgroepwaardering — het is géén stelselgroep, maar kan wel dezelfde naam dragen indien de subgroep in een gemeenschappelijke rubriek wordt gewaardeerd (bijvoorbeeld 'Oppervlakte van vertrekken' binnen 'Gemeenschappelijke vertrekken, overige ruimten en voorzieningen'). Beschrijf de structuur met deze domeintaal — **waardering**, **criterium**, **subgroep**, **bovenliggende** en **onderliggende** — en niet met informatica-boomjargon als "knoop", "node", "leaf", "wortel", "root", "boom", "kind", "ouder" of "tree". De waardering boven een andere is de _bovenliggende_; een waardering zonder bovenliggende staat _direct onder de stelselgroep_.
+
 ### UserWarning
 
 Een waarschuwing voor incomplete of onjuiste inputdata. De package faalt standaard op `UserWarning`, zodat gebruikers ontbrekende invoer bewust moeten behandelen. Gebruikers kunnen het warning-filter aanpassen zodat er sowieso een woningwaarderinguitkomst volgt.
+
+### DeprecationWarning
+
+Een waarschuwing voor verouderde input die nog wel wordt geaccepteerd. In tegenstelling tot `UserWarning` leidt dit niet tot een error; de waarschuwing wordt wel getoond en gelogd.
 
 ## Werkafspraak Voor Nieuwe Domeintermen
 

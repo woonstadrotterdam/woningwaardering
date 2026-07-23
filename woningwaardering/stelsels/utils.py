@@ -1,16 +1,16 @@
 import asyncio
 import warnings
 from datetime import date
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from functools import wraps
 from importlib.resources import files
-from typing import Any, Callable, Counter, Iterator, List, Tuple
+from typing import Any, Callable, Counter, List, Tuple
 
 import pandas as pd
 import requests
 from loguru import logger
+from pydantic import BaseModel
 
-from woningwaardering.stelsels.criterium_id import GedeeldMetSoort
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
@@ -402,15 +402,27 @@ def _render_waardering_pre_order(
         )
 
 
-def _gedeeld_met_divisor(criterium_id: str | None) -> Decimal:
-    if criterium_id is None or "gedeeld_met__" not in criterium_id:
+def _gedeeld_met_deler(criterium_id: str | None) -> Decimal:
+    """Bepaal waarmee een bruto ``aantal`` gedeeld moet worden (gedeeld-met-deler).
+
+    Output slaat vaak het ongedeelde getal op (bijv. 10 m²) terwijl de
+    gedeeld-met-lagen in de hiërarchie staan. De deler haal je uit de
+    criterium-id: een pad-id met ``__``-segmenten. Elk segment
+    ``gedeeld_met_{n}_…`` (adressen of onzelfstandige woonruimten) levert
+    factor ``n``; meerdere lagen worden vermenigvuldigd (bijv. 4 × 10).
+    Zonder ``gedeeld_met``-segment is de deler 1 (privé).
+    """
+    if criterium_id is None:
         return Decimal("1")
-    parts = criterium_id.split("__")
-    try:
-        idx = parts.index("gedeeld_met")
-        return Decimal(parts[idx + 1])
-    except (ValueError, IndexError):
-        return Decimal("1")
+    product = Decimal("1")
+    for part in criterium_id.split("__"):
+        if part.startswith("gedeeld_met_"):
+            getal = part[len("gedeeld_met_") :].split("_", 1)[0]
+            try:
+                product *= Decimal(getal)
+            except InvalidOperation:
+                continue
+    return product
 
 
 def _waardering_voor_criterium_id(
@@ -441,8 +453,8 @@ def _effectieve_aantal_bijdrage(
         parent = _waardering_voor_criterium_id(bovenliggend.id, waarderingen)
         if parent is not None and parent.aantal is not None:
             return None
-        divisor = _gedeeld_met_divisor(bovenliggend.id)
-        return rond_af(Decimal(str(waardering.aantal)) / divisor, decimalen=2)
+        deler = _gedeeld_met_deler(waardering.criterium.id)
+        return rond_af(Decimal(str(waardering.aantal)) / deler, decimalen=2)
 
     criterium_id = waardering.criterium.id or ""
     if criterium_id in criteriumsleutel_ids(waarderingen):
@@ -882,23 +894,6 @@ def criteriumsleutel_ids(
     ) | parent_ids_met_onderliggende_aantal(waarderingen)
 
 
-def naam_gedeeld_met_groep(
-    aantal: int,
-    *,
-    soort: GedeeldMetSoort | None = None,
-) -> str:
-    """Weergavenaam voor een gedeeld-met-groep (zonder prefix 'Totaal')."""
-    if aantal <= 1:
-        return "Privé"
-    if soort == GedeeldMetSoort.adressen:
-        return f"Gedeeld met {aantal} adressen"
-    if soort == GedeeldMetSoort.onzelfstandige_woonruimten:
-        return f"Gedeeld met {aantal} onzelfstandige woonruimten"
-    raise ValueError(
-        f"soort is verplicht bij gedeeld met aantal {aantal} (verwacht adressen of onzelfstandige_woonruimten)"
-    )
-
-
 def som_punten_waarderingen(
     waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
 ) -> float:
@@ -1004,6 +999,35 @@ def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:
             ruimte.naam = f"{ruimte.naam} {nummering_counter[ruimte.naam]}"
 
 
+def waarschuw_dubbele_ids(instance: BaseModel) -> None:
+    """
+    Waarschuw bij dubbele, niet-lege id's binnen dezelfde lijst in dit Pydantic object.
+    """
+    for veld, veld_info in type(instance).model_fields.items():
+        # Deprecated velden overslaan: getattr triggert anders een DeprecationWarning.
+        if veld_info.deprecated:
+            continue
+        waarde = getattr(instance, veld, None)
+        if isinstance(waarde, BaseModel):
+            waarschuw_dubbele_ids(waarde)
+        elif isinstance(waarde, list):
+            items = [item for item in waarde if isinstance(item, BaseModel)]
+            id_counter = Counter(
+                id_waarde
+                for item in items
+                if (id_waarde := getattr(item, "id", None)) is not None
+            )
+            for id_waarde, aantal in id_counter.items():
+                if aantal > 1:
+                    warnings.warn(
+                        f"Id '{id_waarde}' komt {aantal} keer voor in "
+                        f"'{type(instance).__name__}.{veld}'.",
+                        UserWarning,
+                    )
+            for item in items:
+                waarschuw_dubbele_ids(item)
+
+
 def _classificeer_ruimte_dec(
     func: Callable[[EenhedenRuimte], Ruimtesoort | None],
 ) -> Callable[[EenhedenRuimte], Ruimtesoort | None]:
@@ -1076,12 +1100,12 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             in [
                 Ruimtedetailsoort.carport,
             ]
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
         or (
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.buitenruimte
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
     ):
         return Ruimtesoort.buitenruimte
@@ -1118,9 +1142,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             ruimte.detail_soort == Ruimtedetailsoort.berging
             and ruimte.soort == Ruimtesoort.overige_ruimten
         ):
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             if (
-                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_eenheden))
+                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_adressen))
             ) >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
             else:
@@ -1143,13 +1167,13 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
 
     if (
         ruimte.detail_soort in [Ruimtedetailsoort.garage]
-        and not gedeeld_met_eenheden(
+        and not gedeeld_met_adressen(
             ruimte
         )  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
         or (
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.overige_ruimten
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
     ):
         if ruimte.oppervlakte >= 2.0:
@@ -1262,53 +1286,11 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     return criterium_naam
 
 
-def deel_punten_door_aantal_onzelfstandige_woonruimten(
-    ruimte: EenhedenRuimte,
-    woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering]
-    | Iterator[WoningwaarderingResultatenWoningwaardering],
-    update_criterium_naam: bool = True,
-) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-    """
-    Deelt punten door het aantal onzelfstandige woonruimten.
-
-    Deze functie verdeelt de punten voor woningwaarderingen over het aantal onzelfstandige woonruimten dat een ruimte deelt.
-
-    Args:
-        ruimte (EenhedenRuimte): De ruimte waarvoor de punten verdeeld moeten worden.
-        woningwaarderingen (list[WoningwaarderingResultatenWoningwaardering] | Iterator[WoningwaarderingResultatenWoningwaardering]):
-            Een lijst of iterator van woningwaarderingen waarvan de punten verdeeld moeten worden.
-        update_criterium_naam (bool, optional): Een boolean die aangeeft of de naam van het criterium moet worden aangepast. Default is True.
-
-    Yields:
-        WoningwaarderingResultatenWoningwaardering: Woningwaarderingen met verdeelde punten.
-    """
-    gedeelde_ruimte = gedeeld_met_onzelfstandige_woonruimten(ruimte)
-    for woningwaardering in woningwaarderingen:
-        if (
-            gedeelde_ruimte
-            and woningwaardering.criterium
-            and woningwaardering.punten
-            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten  # nodig voor mypy
-        ):
-            woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam}"
-            if update_criterium_naam:
-                woningwaardering.criterium.naam += f" (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
-
-            woningwaardering.punten = float(
-                rond_af(
-                    rond_af(woningwaardering.punten, decimalen=2)
-                    / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                    decimalen=2,
-                )
-            )
-        yield woningwaardering
-
-
-def gedeeld_met_eenheden(ruimte: EenhedenRuimte) -> bool:
-    """Geeft True terug als de ruimte gedeeld is met andere eenheden"""
+def gedeeld_met_adressen(ruimte: EenhedenRuimte) -> bool:
+    """Geeft True terug als de ruimte gedeeld is met andere adressen"""
     return (
-        ruimte.gedeeld_met_aantal_eenheden is not None
-        and ruimte.gedeeld_met_aantal_eenheden >= 2
+        ruimte.gedeeld_met_aantal_adressen is not None
+        and ruimte.gedeeld_met_aantal_adressen >= 2
     )
 
 

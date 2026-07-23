@@ -15,48 +15,14 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Slaapkamer1",
-            "naam": "Slaapkamer1",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__verkoelde_en_verwarmde_vertrekken"
-            }
-          },
-          "punten": 3.0
+            "id": "verkoeling_en_verwarming__prive",
+            "naam": "Privé"
+          }
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Slaapkamer2",
-            "naam": "Slaapkamer2",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__verkoelde_en_verwarmde_vertrekken"
-            }
-          },
-          "punten": 3.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Slaapkamer3",
-            "naam": "Slaapkamer3",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__verkoelde_en_verwarmde_vertrekken"
-            }
-          },
-          "punten": 3.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Slaapkamer3__max_aantal_extra_punten",
-            "naam": "Slaapkamer3: Maximaal 2 extra punten",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__verkoelde_en_verwarmde_vertrekken"
-            }
-          },
-          "punten": -1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__verkoelde_en_verwarmde_vertrekken",
-            "naam": "Verkoelde en verwarmde vertrekken",
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__prive"
             }
@@ -64,9 +30,82 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__prive",
-            "naam": "Privé"
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Slaapkamer1",
+            "naam": "Slaapkamer1",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Slaapkamer2",
+            "naam": "Slaapkamer2",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Slaapkamer3",
+            "naam": "Slaapkamer3",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken",
+            "naam": "Verkoelde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive"
+            }
           }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken__Slaapkamer1",
+            "naam": "Slaapkamer1",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken__Slaapkamer2",
+            "naam": "Slaapkamer2",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken__Slaapkamer3",
+            "naam": "Slaapkamer3",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken__max_aantal_punten",
+            "naam": "Maximaal 2 punten",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken"
+            }
+          },
+          "punten": -1.0
         }
       ]
     }

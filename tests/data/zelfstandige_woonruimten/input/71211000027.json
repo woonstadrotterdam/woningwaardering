@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -157,7 +157,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_57375632",
-          "id_bimmodel": "1Nmxe4xF18gQLxAATS$vph",
+          "idBimmodel": "1Nmxe4xF18gQLxAATS$vph",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -234,7 +234,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Fontein_57376370",
-          "id_bimmodel": "1Nmxe4xF18gQLxAATS$vpu",
+          "idBimmodel": "1Nmxe4xF18gQLxAATS$vpu",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
@@ -249,7 +249,7 @@
         },
         {
           "id": "Closetcombinatie_57376369",
-          "id_bimmodel": "1Nmxe4xF18gQLxAATS$vpp",
+          "idBimmodel": "1Nmxe4xF18gQLxAATS$vpp",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -330,7 +330,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Ketel_57384803",
-          "id_bimmodel": "2XtZvzXn58PQOxOSRUkf0b",
+          "idBimmodel": "2XtZvzXn58PQOxOSRUkf0b",
           "naam": "Ketel",
           "omschrijving": "Gashaard",
           "soort": {
@@ -525,7 +525,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_57380183",
-          "id_bimmodel": "1Nmxe4xF18gQLxAATS$voJ",
+          "idBimmodel": "1Nmxe4xF18gQLxAATS$voJ",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -541,7 +541,7 @@
         },
         {
           "id": "Wastafel_57380184",
-          "id_bimmodel": "1Nmxe4xF18gQLxAATS$voI",
+          "idBimmodel": "1Nmxe4xF18gQLxAATS$voI",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",

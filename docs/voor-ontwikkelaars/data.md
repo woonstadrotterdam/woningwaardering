@@ -40,11 +40,11 @@ from pydantic import BaseModel, Field
 
 class _EenhedenRuimte(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
-    gedeeld_met_aantal_eenheden: Optional[int] = Field(
-        default=None, alias="gedeeldMetAantalEenheden"
+    gedeeld_met_aantal_adressen: Optional[int] = Field(
+        default=None, alias="gedeeldMetAantalAdressen"
     )
     """
-    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging.
+    Het aantal adressen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte.
     """
 ```
 

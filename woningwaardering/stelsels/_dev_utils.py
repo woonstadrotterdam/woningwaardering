@@ -87,9 +87,14 @@ class DevelopmentContext:
                 f"{category.__name__}: {message}",
             )
 
+        warnings.filterwarnings(
+            "default",
+            category=DeprecationWarning,
+            module=r"woningwaardering(\.|$)",
+        )
         if not self.strict:
             warnings.filterwarnings("default", category=UserWarning)
-            warnings.showwarning = warning_to_logger
+        warnings.showwarning = warning_to_logger
 
     def _load_eenheid(self, eenheid_input: EenhedenEenheid | str) -> EenhedenEenheid:
         if isinstance(eenheid_input, str):

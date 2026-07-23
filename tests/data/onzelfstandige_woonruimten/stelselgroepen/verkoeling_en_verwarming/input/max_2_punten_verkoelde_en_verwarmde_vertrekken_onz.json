@@ -17,7 +17,7 @@
       "oppervlakte": 19.1488,
       "verwarmd": true,
       "verkoeld": true,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     },
     {
       "id": "Slaapkamer2",
@@ -34,7 +34,7 @@
       "oppervlakte": 19.1488,
       "verwarmd": true,
       "verkoeld": true,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     },
     {
       "id": "Slaapkamer3",
@@ -51,7 +51,7 @@
       "oppervlakte": 19.1488,
       "verwarmd": true,
       "verkoeld": true,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     }
   ]
 }

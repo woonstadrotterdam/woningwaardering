@@ -51,7 +51,7 @@
       "verwarmd": false,
       "lengte": 8,
       "breedte": 6.5,
-      "gedeeldMetAantalEenheden": 5,
+      "gedeeldMetAantalAdressen": 5,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }
   ]

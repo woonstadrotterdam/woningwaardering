@@ -6,20 +6,19 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     is_zolder_zonder_vaste_trap,
     maak_zolder_correctie_waardering,
+    structureer_subtotaal_bij_correcties,
     waardeer_oppervlakte_van_overige_ruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenRuimte,
-    WoningwaarderingCriteriumSleutels,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -41,19 +40,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             peildatum=peildatum,
         )
 
-    @staticmethod
-    def _gedeeld_met_aantal(ruimte: EenhedenRuimte) -> int:
-        """Bepaalt gedeeld_met_aantal van een ruimte.
-
-        Sleutel 1 = privé; anders ``gedeeld_met_aantal_onzelfstandige_woonruimten``.
-        """
-        if (
-            utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
-        ):
-            return ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-        return 1
-
     def waardeer(
         self,
         eenheid: EenhedenEenheid,
@@ -61,16 +47,13 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,  # verkeerde parent zie https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/151
-            )
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
         )
 
-        woningwaardering_groep.woningwaarderingen = []
-        woningwaardering_correcties = []
-
+        per_deler_waarderingen: defaultdict[int, list[WaarderingBuilder]] = defaultdict(
+            list
+        )
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
         # Bereken vooraf het totale (op 2 decimalen afgeronde) oppervlak van de overige
@@ -81,21 +64,31 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             defaultdict(Decimal)
         )
         for ruimte in eenheid.ruimten or []:
-            if ruimte.gedeeld_met_aantal_eenheden:
-                continue
+            if ruimte.gedeeld_met_aantal_adressen:
+                continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
             if (
                 ruimte.oppervlakte is not None
                 and utils.classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
             ):
-                gedeeld_met_aantal = self._gedeeld_met_aantal(ruimte)
+                gedeeld_met_aantal = (
+                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                )
                 totaal_oppervlakte_per_gedeeld_met_aantal[gedeeld_met_aantal] += (
                     utils.rond_af(ruimte.oppervlakte, decimalen=2)
                 )
 
         for ruimte in eenheid.ruimten or []:
-            if ruimte.gedeeld_met_aantal_eenheden:
+            if ruimte.gedeeld_met_aantal_adressen:
                 continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
-            woningwaarderingen = list(waardeer_oppervlakte_van_overige_ruimte(ruimte))
+
+            deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+            gedeeld_met = waarderingsgroep_builder.gedeeld_met(
+                aantal_onzelfstandige_woonruimten=deler,
+            )
+
+            waarderingen = waardeer_oppervlakte_van_overige_ruimte(
+                ruimte, waarderingsgroep_builder=gedeeld_met
+            )
 
             # 2.2.2.3 Zolderruimte zonder vaste trap
             # Correctie op basis van het verschil dat de zolder maakt in het op hele m²
@@ -105,97 +98,59 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             # blijft de deling door gedeeld_met_aantal_onzelfstandige_woonruimten
             # van toepassing.
             if is_zolder_zonder_vaste_trap(ruimte):
-                totaal_oppervlakte = totaal_oppervlakte_per_gedeeld_met_aantal[
-                    self._gedeeld_met_aantal(ruimte)
-                ]
-                woningwaarderingen.append(
+                totaal_oppervlakte = totaal_oppervlakte_per_gedeeld_met_aantal[deler]
+                waarderingen.append(
                     maak_zolder_correctie_waardering(
-                        ruimte, totaal_oppervlakte, self.stelselgroep
+                        ruimte,
+                        totaal_oppervlakte,
+                        waarderingsgroep_builder=gedeeld_met,
                     )
                 )
+
             # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
-            for idx, woningwaardering in enumerate(woningwaarderingen):
-                if woningwaardering.criterium is not None:
-                    if (
-                        woningwaardering.aantal
-                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        is not None
-                    ):
-                        gedeeld_met_counter[
-                            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                        ] += utils.rond_af(woningwaardering.aantal, decimalen=2)
-                        woningwaardering.criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    gedeeld_met_aantal=ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                                    gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                                )
-                            ),
+            for waardering in waarderingen:
+                if waardering.punten and utils.gedeeld_met_onzelfstandige_woonruimten(
+                    ruimte
+                ):
+                    waardering.punten = float(
+                        utils.rond_af(
+                            Decimal(str(waardering.punten)) / Decimal(str(deler)),
+                            decimalen=2,
                         )
-                    elif woningwaardering.aantal is not None:
-                        gedeeld_met_counter[1] += utils.rond_af(
-                            woningwaardering.aantal, decimalen=2
-                        )
-                        woningwaardering.criterium.bovenliggende_criterium = (
-                            WoningwaarderingCriteriumSleutels(
-                                id=str(
-                                    CriteriumId(
-                                        stelselgroep=self.stelselgroep,
-                                        gedeeld_met_aantal=1,
-                                    )
-                                ),
-                            )
-                        )
-                    elif (
-                        woningwaardering.punten
-                        and utils.gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                    ):
-                        woningwaardering.punten = float(
-                            utils.rond_af(
-                                Decimal(str(woningwaardering.punten))
-                                / Decimal(
-                                    str(
-                                        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                                    )
-                                ),
-                                decimalen=2,
-                            )
-                        )
-                        woningwaardering_correcties.append(woningwaardering)
-                        woningwaarderingen.pop(idx)
-
-            woningwaardering_groep.woningwaarderingen.extend(woningwaarderingen)
-
-        # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
-        for aantal_onz, oppervlakte in gedeeld_met_counter.items():
-            woningwaardering = WoningwaarderingResultatenWoningwaardering()
-            woningwaardering.criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=utils.naam_gedeeld_met_groep(
-                    aantal_onz,
-                    soort=GedeeldMetSoort.onzelfstandige_woonruimten,
-                ),
-                id=str(
-                    CriteriumId(
-                        stelselgroep=self.stelselgroep,
-                        gedeeld_met_aantal=aantal_onz,
-                        gedeeld_met_soort=GedeeldMetSoort.onzelfstandige_woonruimten,
                     )
-                ),
+
+                if waardering.aantal is not None:
+                    gedeeld_met_counter[deler] += utils.rond_af(
+                        waardering.aantal, decimalen=2
+                    )
+
+                per_deler_waarderingen[deler].append(waardering)
+
+        # bereken de som van de woningwaarderingen per aantal gedeelde onzelfstandige woonruimten
+        for deler, waarderingen in per_deler_waarderingen.items():
+            gedeeld_met = waarderingsgroep_builder.gedeeld_met(
+                aantal_onzelfstandige_woonruimten=deler,
             )
-            woningwaardering.punten = float(
+            heeft_correctie = any(w.punten is not None for w in waarderingen)
+            if heeft_correctie:
+                structureer_subtotaal_bij_correcties(
+                    waarderingen,
+                    waarderingsgroep_builder=gedeeld_met,
+                    factor=Decimal("0.75"),
+                    deler=deler,
+                )
+                continue
+
+            oppervlakte = gedeeld_met_counter[deler]
+            gedeeld_met.punten = float(
                 utils.rond_af_op_kwart(
                     (utils.rond_af(oppervlakte, decimalen=0) * Decimal("0.75"))
-                    / Decimal(str(aantal_onz))
+                    / Decimal(str(deler))
                 )
             )
-            woningwaardering_groep.woningwaarderingen.append(woningwaardering)
 
-        # voeg de correcties als laatste toe
-        woningwaardering_groep.woningwaarderingen.extend(woningwaardering_correcties)
-
-        punten = float(
+        woningwaardering_groep = waarderingsgroep_builder.build()
+        woningwaardering_groep.punten = float(
             utils.rond_af_op_kwart(
                 sum(
                     Decimal(str(woningwaardering.punten))
@@ -206,8 +161,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             )
         )
 
-        woningwaardering_groep.punten = punten
-
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
@@ -216,7 +169,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=OppervlakteVanOverigeRuimten(peildatum=date(2026, 1, 1)),
+        instance=OppervlakteVanOverigeRuimten(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

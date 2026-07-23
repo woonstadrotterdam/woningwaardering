@@ -27,7 +27,7 @@ def get_eenheid():
             soort=Ruimtesoort.vertrek,
             detail_soort=Ruimtedetailsoort.keuken,
             oppervlakte=20,
-            gedeeld_met_aantal_eenheden=4,
+            gedeeld_met_aantal_adressen=4,
             verwarmd=True,
             bouwkundige_elementen=[
                 BouwkundigElementenBouwkundigElement(
@@ -45,7 +45,7 @@ def get_eenheid():
             soort=Ruimtesoort.overige_ruimten,
             detail_soort=Ruimtedetailsoort.toiletruimte,
             oppervlakte=2,
-            gedeeld_met_aantal_eenheden=4,
+            gedeeld_met_aantal_adressen=4,
             verwarmd=False,
             installaties=[
                 Installatiesoort.hangend_toilet,

@@ -14,9 +14,17 @@
       "punten": 12.0,
       "woningwaarderingen": [
         {
+          "aantal": -0.0711688,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__percentage_verschil",
+            "naam": "Percentage verschil"
+          },
+          "punten": 12.0
+        },
+        {
           "aantal": 205000.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__woz_waarde",
+            "id": "punten_voor_de_woz_waarde__percentage_verschil__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__percentage_verschil"
@@ -30,7 +38,7 @@
         {
           "aantal": 58.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__gebruiksoppervlakte",
+            "id": "punten_voor_de_woz_waarde__percentage_verschil__gebruiksoppervlakte",
             "naam": "Gebruiksoppervlakte",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__percentage_verschil"
@@ -44,7 +52,7 @@
         {
           "aantal": 3534.48276,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__woz_waarde_per_m2",
+            "id": "punten_voor_de_woz_waarde__percentage_verschil__woz_waarde_per_m2",
             "naam": "WOZ-waarde per m²",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__percentage_verschil"
@@ -54,20 +62,12 @@
         {
           "aantal": 3537.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__gemiddelde_woz_waarde_per_m2",
+            "id": "punten_voor_de_woz_waarde__percentage_verschil__gemiddelde_woz_waarde_per_m2",
             "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__percentage_verschil"
             }
           }
-        },
-        {
-          "aantal": -0.0711688,
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__percentage_verschil",
-            "naam": "Percentage verschil"
-          },
-          "punten": 12.0
         }
       ]
     }

@@ -6,7 +6,10 @@ from dateutil.relativedelta import relativedelta
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
+)
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
     check_monumenten_attribuut,
     opslag_beschermd_stads_of_dorpsgezicht,
@@ -17,9 +20,6 @@ from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -49,20 +49,16 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
         )
 
-        woningwaardering_groep.woningwaarderingen = list(
-            woningwaardering
-            for woningwaardering in self._genereer_woningwaarderingen(
-                eenheid, woningwaardering_resultaat
-            )
-            if woningwaardering is not None
-        )
+        for _ in self._genereer_woningwaarderingen(
+            waarderingsgroep_builder, eenheid, woningwaardering_resultaat
+        ):
+            pass
+
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         opslagpercentage = float(
             sum(
@@ -96,24 +92,34 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
     def _genereer_woningwaarderingen(
         self,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None,
-    ) -> Iterator[WoningwaarderingResultatenWoningwaardering | None]:
+    ) -> Iterator[WaarderingBuilder | None]:
         check_monumenten_attribuut(eenheid)
 
-        yield opslag_rijksmonument(self.peildatum, eenheid, self.stelselgroep)
-        yield opslag_gemeentelijk_of_provinciaal_monument(eenheid, self.stelselgroep)
-        yield opslag_beschermd_stads_of_dorpsgezicht(eenheid, self.stelselgroep)
-        yield self._opslag_nieuwbouw(eenheid, woningwaardering_resultaat)
+        yield opslag_rijksmonument(
+            self.peildatum, eenheid, waarderingsgroep_builder=waarderingsgroep_builder
+        )
+        yield opslag_gemeentelijk_of_provinciaal_monument(
+            eenheid, waarderingsgroep_builder=waarderingsgroep_builder
+        )
+        yield opslag_beschermd_stads_of_dorpsgezicht(
+            eenheid, waarderingsgroep_builder=waarderingsgroep_builder
+        )
+        yield self._opslag_nieuwbouw(
+            waarderingsgroep_builder, eenheid, woningwaardering_resultaat
+        )
 
     def _opslag_nieuwbouw(
         self,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
-    ) -> WoningwaarderingResultatenWoningwaardering | None:
+    ) -> WaarderingBuilder | None:
         """Bepaalt de prijsopslag voor nieuwbouw.
 
         Een prijsopslag van 10% wordt toegekend als:
@@ -123,12 +129,13 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         - Het puntentotaal tussen 144 en 186 punten ligt
 
         Args:
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
             eenheid (EenhedenEenheid): De te waarderen eenheid
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None, optional):
                 Bestaand waarderingsresultaat. Defaults to None.
 
         Returns:
-            WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
+            WaarderingBuilder | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
         """
         if (
             eenheid.begin_bouwdatum is not None
@@ -166,18 +173,12 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                     f"Eenheid ({eenheid.id}) is nieuwbouw en krijgt 10% opslag op de maximale huurprijs voor {self.stelselgroep}."
                 )
 
-                return WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Nieuwbouw",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="nieuwbouw",
-                            )
-                        ),
-                    ),
-                    opslagpercentage=0.1,
+                waardering = waarderingsgroep_builder.met_onderliggend(
+                    id="nieuwbouw",
+                    naam="Nieuwbouw",
                 )
+                waardering.opslagpercentage = 0.1
+                return waardering
 
             else:
                 logger.debug(
@@ -190,7 +191,7 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=PrijsopslagMonumentenEnNieuwbouw(peildatum=date(2026, 1, 1)),
+        instance=PrijsopslagMonumentenEnNieuwbouw(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

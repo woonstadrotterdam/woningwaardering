@@ -4,7 +4,9 @@ SAMENVATTING 37101000032
 
 VERKOELING EN VERWARMING
   Privé
-    - Verkoelde en verwarmde vertrekken
-      - Slaapkamer                                                     3.00 pt
+    - Verwarmde vertrekken
+      - Slaapkamer                                                     2.00 pt
+    - Verkoelde vertrekken
+      - Slaapkamer                                                     1.00 pt
                                                                       --------
   Totaal                                                               3.00 pt

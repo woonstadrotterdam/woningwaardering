@@ -3,6 +3,7 @@ SAMENVATTING
                                                                       --------
 
 SANITAIR
-  Badkamer - Wastafel                                        1.00 st   1.00 pt
+  Badkamer
+    - Wastafel                                               1.00 st   1.00 pt
                                                                       --------
   Totaal                                                               1.00 pt
