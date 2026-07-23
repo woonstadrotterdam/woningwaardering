@@ -53,8 +53,9 @@ _STELSELGROEPEN_MET_SUBTOTAAL_AANTAL = frozenset(
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
 # Kolombreedtes voor tabeloutput (zie docs/voor-ontwikkelaars/testing.md)
-W_NAAM = 50
-W_AANTAL = 14
+W_NAAM = 60
+W_GETAL = 10  # rechts uitgelijnd, bijv. "205000.00"
+W_EENHEID = 3  # links uitgelijnd na het getal, bijv. "EUR" / "m²" / "st"
 W_PUNTEN = 9  # "XXX.00 pt" (drie cijfers voor de komma)
 W_OPSLAG = 7
 _GAP = "  "
@@ -62,8 +63,8 @@ _INDENT = "  "
 _BULLET = "- "
 # Inschuif aan het begin van elke tabelregel (naamkolom).
 _TABEL_RIJ_INSCHUIF = "  "
-# Maximale weergavelengte aantal in subtotaalrijen (bijv. "112.80 m²").
-_AANTAL_SUBTOTAAL_WEERGAVE = 9
+# Spatie tussen getal- en eenheidskolom.
+_GETAL_EENHEID_GAP = " "
 
 
 class WoningwaarderingTabel:
@@ -111,24 +112,22 @@ def _meeteenheid_afkorting(meeteenheid: Referentiedata | None) -> str:
     return meeteenheid.naam or ""
 
 
-def _format_aantal_kolom(
+def _format_aantal_delen(
     aantal: float | Decimal | int | None,
     meeteenheid: Referentiedata | None,
-) -> str:
+) -> tuple[str, str]:
+    """Splits aantal in getal- en eenheidstekst voor aparte tabelkolommen."""
     if aantal is None:
-        return ""
-    getal = _tabel_fmt_num(aantal)
-    afkorting = _meeteenheid_afkorting(meeteenheid)
-    if afkorting:
-        return f"{getal} {afkorting}"
-    return getal
+        return "", ""
+    return _tabel_fmt_num(aantal), _meeteenheid_afkorting(meeteenheid)
 
 
 # Vaste eindpositie (karakterindex) van elke waardekolom, inclusief de rij-inschuif.
-# De naamkolom staat links; aantal/punten/opslag worden rechts uitgelijnd op deze posities,
-# zodat samenvatting-, detail- en totaalregels dezelfde opmaak en uitlijning delen.
-_AANTAL_KOLOM_EINDE = len(_TABEL_RIJ_INSCHUIF) + W_NAAM + len(_GAP) + W_AANTAL
-_PUNTEN_KOLOM_EINDE = _AANTAL_KOLOM_EINDE + len(_GAP) + W_PUNTEN
+# De naamkolom staat links; getal/punten/opslag worden rechts uitgelijnd, eenheid
+# links in een vaste kolom na het getal — zodat cijfers verticaal uitlijnen.
+_GETAL_KOLOM_EINDE = len(_TABEL_RIJ_INSCHUIF) + W_NAAM + len(_GAP) + W_GETAL
+_EENHEID_KOLOM_EINDE = _GETAL_KOLOM_EINDE + len(_GETAL_EENHEID_GAP) + W_EENHEID
+_PUNTEN_KOLOM_EINDE = _EENHEID_KOLOM_EINDE + len(_GAP) + W_PUNTEN
 _OPSLAG_KOLOM_EINDE = _PUNTEN_KOLOM_EINDE + len(_GAP) + W_OPSLAG
 
 
@@ -143,31 +142,46 @@ def _plaats_rechts(regel: str, tekst: str, kolom_einde: int) -> str:
     return f"{regel}{' ' * padding}{tekst}"
 
 
+def _plaats_eenheid(regel: str, eenheid: str) -> str:
+    """Plak ``eenheid`` links uitgelijnd in de eenheidskolom (direct na het getal)."""
+    if not eenheid:
+        return regel
+    if len(regel) < _GETAL_KOLOM_EINDE:
+        regel = f"{regel}{' ' * (_GETAL_KOLOM_EINDE - len(regel))}"
+    regel = f"{regel}{_GETAL_EENHEID_GAP}{eenheid}"
+    if len(regel) < _EENHEID_KOLOM_EINDE:
+        regel = f"{regel}{' ' * (_EENHEID_KOLOM_EINDE - len(regel))}"
+    return regel
+
+
 def _tabel_regel(
     naam: str,
     *,
     aantal: str = "",
+    eenheid: str = "",
     punten: str = "",
     opslag: str = "",
 ) -> str:
     """Formatteer één tabelregel met de gedeelde kolomopmaak.
 
     Wordt gebruikt voor de regels in de samenvatting, de detailregels in een
-    stelselgroep en de totaalregels: de naam staat links en de waardekolommen
-    (aantal, punten, opslag) lijnen rechts uit op vaste kolomeinden.
+    stelselgroep en de totaalregels: de naam staat links; getal, punten en opslag
+    lijnen rechts uit op vaste kolomeinden; de eenheid staat in een vaste kolom
+    direct na het getal.
     """
     regel = _TABEL_RIJ_INSCHUIF + naam
-    regel = _plaats_rechts(regel, aantal, _AANTAL_KOLOM_EINDE)
+    regel = _plaats_rechts(regel, aantal, _GETAL_KOLOM_EINDE)
+    regel = _plaats_eenheid(regel, eenheid)
     regel = _plaats_rechts(regel, punten, _PUNTEN_KOLOM_EINDE)
     regel = _plaats_rechts(regel, opslag, _OPSLAG_KOLOM_EINDE)
     return regel.rstrip()
 
 
 def _tabel_scheiding(*, toon_aantal: bool) -> str:
-    """Scheidingsregel boven een totaalregel (onder de aantal- en puntenkolom)."""
+    """Scheidingsregel boven een totaalregel (onder de getal- en puntenkolom)."""
     return _tabel_regel(
         "",
-        aantal="-" * _AANTAL_SUBTOTAAL_WEERGAVE if toon_aantal else "",
+        aantal="-" * W_GETAL if toon_aantal else "",
         punten="-" * W_PUNTEN,
     )
 
@@ -239,12 +253,14 @@ def _render_waardering_pre_order(
         return
 
     prefix = (_INDENT * indent + _BULLET) if indent > 0 else ""
+    getal, eenheid = _format_aantal_delen(
+        waardering.aantal, _waardering_meeteenheid(waardering)
+    )
     regels.append(
         _tabel_regel(
             prefix + (waardering.criterium.naam or ""),
-            aantal=_format_aantal_kolom(
-                waardering.aantal, _waardering_meeteenheid(waardering)
-            ),
+            aantal=getal,
+            eenheid=eenheid,
             punten=_waardering_punten(waardering),
             opslag=_waardering_opslag(waardering) if toon_opslag_kolom else "",
         )
@@ -353,11 +369,11 @@ def groep_toont_subtotaal_aantal(
     return criterium_groep.stelselgroep in _STELSELGROEPEN_MET_SUBTOTAAL_AANTAL
 
 
-def _groep_subtotaal_aantal_kolom(
+def _groep_subtotaal_aantal_delen(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
-) -> str:
+) -> tuple[str, str]:
     if not groep_toont_subtotaal_aantal(groep):
-        return ""
+        return "", ""
 
     waarderingen = groep.woningwaarderingen or []
     met_aantal = [
@@ -368,11 +384,11 @@ def _groep_subtotaal_aantal_kolom(
         and w.criterium.meeteenheid is not None
     ]
     if not met_aantal:
-        return ""
+        return "", ""
 
     totaal = som_effectieve_aantal_waarderingen(waarderingen)
     if totaal == Decimal("0"):
-        return ""
+        return "", ""
 
     meeteenheid_codes = [
         w.criterium.meeteenheid.code or ""
@@ -380,7 +396,7 @@ def _groep_subtotaal_aantal_kolom(
         if w.criterium is not None and w.criterium.meeteenheid is not None
     ]
     if len(set(meeteenheid_codes)) > 1:
-        return ""
+        return "", ""
 
     meeteenheid = next(
         (
@@ -390,7 +406,7 @@ def _groep_subtotaal_aantal_kolom(
         ),
         None,
     )
-    return _format_aantal_kolom(float(totaal), meeteenheid)
+    return _format_aantal_delen(float(totaal), meeteenheid)
 
 
 def _render_detail_groep(
@@ -423,7 +439,7 @@ def _render_detail_groep(
             toon_opslag_kolom=toon_opslag_kolom,
         )
 
-    subtotaal_aantal = _groep_subtotaal_aantal_kolom(groep)
+    subtotaal_aantal, subtotaal_eenheid = _groep_subtotaal_aantal_delen(groep)
     groep_punten = _tabel_fmt_num(groep.punten) if groep.punten is not None else ""
     groep_opslag = (
         f"{groep.opslagpercentage:.0%}"
@@ -436,6 +452,7 @@ def _render_detail_groep(
         _tabel_regel(
             "Totaal",
             aantal=subtotaal_aantal,
+            eenheid=subtotaal_eenheid,
             punten=_format_punten_cel(groep_punten),
             opslag=groep_opslag,
         )
@@ -475,19 +492,28 @@ def _render_samenvatting(
             )
         )
 
-    opslag_delen: list[str] = []
+    opslag_percentage = ""
+    opslag_bedrag = ""
     if resultaat.opslagpercentage is not None and resultaat.opslagpercentage > 0:
-        opslag_delen.append(f"{resultaat.opslagpercentage:.0%}")
+        opslag_percentage = f"{resultaat.opslagpercentage:.0%}"
     if resultaat.huurprijsopslag is not None and resultaat.huurprijsopslag > 0:
-        opslag_delen.append(f"{_tabel_fmt_num(resultaat.huurprijsopslag)} EUR")
-    if opslag_delen:
-        lines.append(_tabel_regel("Opslag", punten="    ".join(opslag_delen)))
+        opslag_bedrag = _tabel_fmt_num(resultaat.huurprijsopslag)
+    if opslag_percentage or opslag_bedrag:
+        lines.append(
+            _tabel_regel(
+                "Opslag",
+                aantal=opslag_bedrag,
+                eenheid="EUR" if opslag_bedrag else "",
+                opslag=opslag_percentage,
+            )
+        )
 
     if resultaat.maximale_huur is not None:
         lines.append(
             _tabel_regel(
                 "Maximaal redelijke huur",
-                punten=f"{_tabel_fmt_num(resultaat.maximale_huur)} EUR",
+                aantal=_tabel_fmt_num(resultaat.maximale_huur),
+                eenheid="EUR",
             )
         )
 
@@ -499,7 +525,8 @@ def _render_samenvatting(
         lines.append(
             _tabel_regel(
                 "Maximaal redelijke huur inclusief opslag",
-                punten=f"{_tabel_fmt_num(resultaat.maximale_huur_inclusief_opslag)} EUR",
+                aantal=_tabel_fmt_num(resultaat.maximale_huur_inclusief_opslag),
+                eenheid="EUR",
             )
         )
 

@@ -1,28 +1,28 @@
 SAMENVATTING 1
-  Gemeenschappelijke binnenruimten gedeeld met meerdere adressen        2.50 pt
-                                                                      ---------
+  Gemeenschappelijke binnenruimten gedeeld met meerdere adressen                  2.50 pt
+                                                                                ---------
 
 GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
   Gedeeld met 4 onzelfstandige woonruimten
     - Gedeeld met 4 adressen
-      - Oppervlakte van vertrekken                                      1.25 pt
-        - Keuken                                            20.00 m²
-      - Oppervlakte van overige ruimten                                 0.09 pt
-        - Toilet                                             2.00 m²
+      - Oppervlakte van vertrekken                                                1.25 pt
+        - Keuken                                                     20.00 m²
+      - Oppervlakte van overige ruimten                                           0.09 pt
+        - Toilet                                                      2.00 m²
       - Verkoeling en verwarming
         - Verwarmde vertrekken
-          - Keuken                                                      0.13 pt
+          - Keuken                                                                0.13 pt
       - Keuken
         - Keuken
-          - Lengte aanrecht                               2999.00 mm    0.44 pt
+          - Lengte aanrecht                                        2999.00 mm     0.44 pt
           - Extra voorzieningen
-            - Inbouw koelkast                                1.00 st    0.06 pt
-            - Inbouw oven elektrisch                         1.00 st    0.06 pt
-            - Inbouw magnetron                               1.00 st    0.06 pt
+            - Inbouw koelkast                                         1.00 st     0.06 pt
+            - Inbouw oven elektrisch                                  1.00 st     0.06 pt
+            - Inbouw magnetron                                        1.00 st     0.06 pt
       - Sanitair
         - Toilet
-          - Hangend toilet                                   1.00 st    0.23 pt
-          - Wastafel                                         1.00 st    0.06 pt
-  Afronding op kwartpunten                                              0.11 pt
-                                                                      ---------
-  Totaal                                                                2.50 pt
+          - Hangend toilet                                            1.00 st     0.23 pt
+          - Wastafel                                                  1.00 st     0.06 pt
+  Afronding op kwartpunten                                                        0.11 pt
+                                                                                ---------
+  Totaal                                                                          2.50 pt

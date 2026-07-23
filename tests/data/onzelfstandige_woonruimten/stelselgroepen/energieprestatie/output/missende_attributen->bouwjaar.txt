@@ -1,9 +1,9 @@
 SAMENVATTING 1
-  Energieprestatie                                                     -0.50 pt
-                                                                      ---------
+  Energieprestatie                                                               -0.50 pt
+                                                                                ---------
 
 ENERGIEPRESTATIE
-  Bouwjaar 1921                                              3.67 m²   -0.55 pt
-  Afronding op kwartpunten                                              0.05 pt
-                                                                      ---------
-  Totaal                                                               -0.50 pt
+  Bouwjaar 1921                                                       3.67 m²    -0.55 pt
+  Afronding op kwartpunten                                                        0.05 pt
+                                                                                ---------
+  Totaal                                                                         -0.50 pt
