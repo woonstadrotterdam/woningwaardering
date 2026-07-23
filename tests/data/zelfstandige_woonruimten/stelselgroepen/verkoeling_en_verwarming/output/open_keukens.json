@@ -15,7 +15,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_272936",
+            "id": "verkoeling_en_verwarming__Space_272936__verwarmd_vertrek",
             "naam": "Verwarmde woonkamer",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -25,7 +25,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_305989",
+            "id": "verkoeling_en_verwarming__Space_305989__verwarmd_vertrek",
             "naam": "Verwarmde keuken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -35,7 +35,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_180374",
+            "id": "verkoeling_en_verwarming__Space_180374__verwarmd_vertrek",
             "naam": "Verwarmde slaapkamer",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -45,7 +45,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_645942",
+            "id": "verkoeling_en_verwarming__Space_645942__verwarmd_vertrek",
             "naam": "Verwarmde woonkamer/keuken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"

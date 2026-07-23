@@ -220,6 +220,7 @@ class Buitenruimten(Stelselgroep):
                     gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
                     gedeeld_met_soort=GedeeldMetSoort.adressen,
                     is_totaal=True,
+                    stelsel=self.stelsel,
                 )
                 totaal_criteria[str(totaal_criterium_id)] = totaal_criterium_id
                 woningwaardering.criterium = (
@@ -231,6 +232,7 @@ class Buitenruimten(Stelselgroep):
                                 ruimte_id=ruimte.id,
                                 gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
                                 gedeeld_met_soort=GedeeldMetSoort.adressen,
+                                stelsel=self.stelsel,
                             )
                         ),
                         naam=ruimte.naam,
@@ -248,6 +250,7 @@ class Buitenruimten(Stelselgroep):
                     gedeeld_met_aantal=1,
                     gedeeld_met_soort=GedeeldMetSoort.adressen,
                     is_totaal=True,
+                    stelsel=self.stelsel,
                 )
                 totaal_criteria[str(totaal_criterium_id)] = totaal_criterium_id
                 woningwaardering.criterium = (
@@ -316,6 +319,7 @@ class Buitenruimten(Stelselgroep):
                             stelselgroep=self.stelselgroep,
                             criterium="aanwezig",
                             gedeeld_met_aantal=1,
+                            stelsel=self.stelsel,
                         )
                     ),
                 )

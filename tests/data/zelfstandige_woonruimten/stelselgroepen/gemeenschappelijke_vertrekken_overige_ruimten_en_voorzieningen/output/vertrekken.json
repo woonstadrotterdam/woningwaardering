@@ -16,8 +16,11 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_1",
-            "naam": "Slaapkamer (gedeeld met 5)",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_1",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__5__adressen"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -28,12 +31,29 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_2",
-            "naam": "Woonkamer (gedeeld met 6)",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__Space_2",
+            "naam": "Woonkamer",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__6__adressen"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
+          },
+          "punten": 1.67
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__5__adressen",
+            "naam": "Totaal (gedeeld met 5 eenheden)"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__6__adressen",
+            "naam": "Totaal (gedeeld met 6 eenheden)"
           },
           "punten": 1.67
         }

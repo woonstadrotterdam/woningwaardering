@@ -16,8 +16,11 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__keuken",
-            "naam": "Keuken (gedeeld met 5)",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__5__adressen"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -28,8 +31,11 @@
         {
           "aantal": 1000.0,
           "criterium": {
-            "id": "keuken__keuken__lengte_aanrecht_aanrecht",
-            "naam": "Keuken: Lengte aanrecht (gedeeld met 5)",
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__keuken__lengte_aanrecht_aanrecht",
+            "naam": "Keuken: Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__5__adressen"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -40,15 +46,35 @@
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "keuken__keuken__extra_voorziening",
-            "naam": "Inbouw koelkast (in zelfde ruimte) (gedeeld met 5)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__keuken__extra_voorziening",
+            "naam": "Inbouw koelkast (in zelfde ruimte)",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__5__adressen"
+            }
           },
           "punten": 0.4
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__keuken",
-            "naam": "Keuken (gedeeld met 5)"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__keuken__verwarmd_vertrek",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__verwarmde_vertrekken__gedeeld_met__5__adressen"
+            }
+          },
+          "punten": 0.4
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__gedeeld_met__5__adressen",
+            "naam": "Totaal (gedeeld met 5 eenheden)"
+          },
+          "punten": 3.2
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__totaal__verwarmde_vertrekken__gedeeld_met__5__adressen",
+            "naam": "Verwarmde vertrekken"
           },
           "punten": 0.4
         }

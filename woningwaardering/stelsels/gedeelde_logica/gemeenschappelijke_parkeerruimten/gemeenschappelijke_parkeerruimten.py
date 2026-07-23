@@ -5,7 +5,7 @@ from typing import Generator
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -116,14 +116,23 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             criterium += " + laadpaal"
 
         if ruimte.gedeeld_met_aantal_eenheden >= 2:
-            criterium += f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
             totaal_punten_type_parkeeruimte = (
                 punten * Decimal(str(ruimte.aantal))
             ) / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
+            criterium_id = CriteriumId(
+                stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
+                ruimte_id=ruimte.id,
+                gedeeld_met_aantal=ruimte.gedeeld_met_aantal_eenheden,
+                gedeeld_met_soort=GedeeldMetSoort.adressen,
+            )
         else:
             criterium += " (privé)"
             totaal_punten_type_parkeeruimte = (
                 punten * Decimal(str(ruimte.aantal)) / Decimal("1")
+            )
+            criterium_id = CriteriumId(
+                stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
+                ruimte_id=ruimte.id,
             )
 
         logger.info(
@@ -133,12 +142,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         yield WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 naam=criterium,
-                id=str(
-                    CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
-                        ruimte_id=ruimte.id,
-                    )
-                ),
+                id=str(criterium_id),
             ),
             aantal=ruimte.aantal,
             punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),

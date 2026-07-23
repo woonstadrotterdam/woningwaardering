@@ -15,40 +15,40 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_976173",
+            "id": "verkoeling_en_verwarming__Space_976173__verwarmd_vertrek",
             "naam": "Verwarmde woonkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_483653",
+            "id": "verkoeling_en_verwarming__Space_483653__verwarmd_vertrek",
             "naam": "Verwarmde keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_795235",
+            "id": "verkoeling_en_verwarming__Space_795235__verwarmd_vertrek",
             "naam": "Verwarmde slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_727114",
+            "id": "verkoeling_en_verwarming__Space_727114__verwarmd_vertrek",
             "naam": "Verwarmde woonkamer/keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 1.0
@@ -58,7 +58,7 @@
             "id": "verkoeling_en_verwarming__Space_976173",
             "naam": "Verwarmde woonkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__open_keuken"
+              "id": "verkoeling_en_verwarming__totaal__open_keuken__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 1.0
@@ -68,7 +68,7 @@
             "id": "verkoeling_en_verwarming__Space_795235",
             "naam": "Verwarmde slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__open_keuken"
+              "id": "verkoeling_en_verwarming__totaal__open_keuken__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 1.0
@@ -78,14 +78,14 @@
             "id": "verkoeling_en_verwarming__Space_727114",
             "naam": "Verwarmde woonkamer/keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__open_keuken"
+              "id": "verkoeling_en_verwarming__totaal__open_keuken__gedeeld_met__2__onzelfstandige_woonruimten"
             }
           },
           "punten": 1.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Verwarmde vertrekken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
@@ -95,7 +95,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__open_keuken",
+            "id": "verkoeling_en_verwarming__totaal__open_keuken__gedeeld_met__2__onzelfstandige_woonruimten",
             "naam": "Open keuken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten"

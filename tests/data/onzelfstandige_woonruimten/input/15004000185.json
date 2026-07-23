@@ -99,7 +99,7 @@
       "naam": "Keuken",
       "inhoud": 18.64,
       "oppervlakte": 7.5,
-      "verwarmd": false,
+      "verwarmd": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "bouwkundigeElementen": [
         {

@@ -23,6 +23,7 @@ from woningwaardering.vera.referentiedata import (
     Ruimtedetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
+    WoningwaarderingstelselgroepReferentiedata,
     WoningwaarderingstelselReferentiedata,
 )
 from woningwaardering.vera.utils import get_bouwkundige_elementen
@@ -31,16 +32,18 @@ from woningwaardering.vera.utils import get_bouwkundige_elementen
 def waardeer_keuken(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata | None = None,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+    stelselgroep = stelselgroep or Woningwaarderingstelselgroep.keuken
     if not _is_keuken(ruimte):
         logger.debug(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {Woningwaarderingstelselgroep.keuken.naam}"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {stelselgroep.naam}"
         )
         return
 
-    yield from _waardeer_aanrecht(ruimte, stelsel)
+    yield from _waardeer_aanrecht(ruimte, stelsel, stelselgroep)
 
-    yield from _waardeer_extra_voorzieningen(ruimte)
+    yield from _waardeer_extra_voorzieningen(ruimte, stelselgroep)
 
 
 def _is_keuken(ruimte: EenhedenRuimte) -> bool:
@@ -97,6 +100,7 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
 def _waardeer_aanrecht(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     """
     Waardeert de aanrechten van een keuken.
@@ -104,6 +108,7 @@ def _waardeer_aanrecht(
     Args:
         ruimte (EenhedenRuimte): De keuken waarvan de aanrechten gewaardeerd worden.
         stelsel (WoningwaarderingstelselReferentiedata): Het stelsel waarvoor de aanrechten gewaardeerd worden.
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): Stelselgroep voor criterium-id's in de output.
 
     Yields:
         WoningwaarderingResultatenWoningwaardering: De gewaardeerde aanrechten.
@@ -152,14 +157,14 @@ def _waardeer_aanrecht(
             else:
                 aanrecht_punten = 4
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(element.lengte)}mm telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(element.lengte)}mm telt mee voor {stelselgroep.naam}"
             )
             yield WoningwaarderingResultatenWoningwaardering(
                 criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                     naam=f"{ruimte.naam}: Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                     id=str(
                         CriteriumId(
-                            stelselgroep=Woningwaarderingstelselgroep.keuken,
+                            stelselgroep=stelselgroep,
                             ruimte_id=ruimte.id,
                             criterium=f"lengte_aanrecht_{element.id}",
                         )
@@ -173,12 +178,14 @@ def _waardeer_aanrecht(
 
 def _waardeer_extra_voorzieningen(
     ruimte: EenhedenRuimte,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     """
     Waardeert de extra voorzieningen van een keuken.
 
     Args:
         ruimte (EenhedenRuimte): De keuken waarvan de extra voorzieningen gewaardeerd worden.
+        stelselgroep (WoningwaarderingstelselgroepReferentiedata): Stelselgroep voor criterium-id's in de output.
 
     Yields:
         WoningwaarderingResultatenWoningwaardering: De gewaardeerde extra voorzieningen.
@@ -223,7 +230,7 @@ def _waardeer_extra_voorzieningen(
             decimalen=2,
         )
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {count}x een '{voorziening.naam}' voor {Woningwaarderingstelselgroep.keuken.naam}."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {count}x een '{voorziening.naam}' voor {stelselgroep.naam}."
         )
         yield (
             WoningwaarderingResultatenWoningwaardering(
@@ -233,7 +240,7 @@ def _waardeer_extra_voorzieningen(
                     else voorziening.naam,
                     id=str(
                         CriteriumId(
-                            stelselgroep=Woningwaarderingstelselgroep.keuken,
+                            stelselgroep=stelselgroep,
                             ruimte_id=ruimte.id,
                             criterium=f"extra_voorziening_{voorziening.name}",
                         )
@@ -258,7 +265,7 @@ def _waardeer_extra_voorzieningen(
                     naam=f"Max. {max_punten_voorzieningen} punten voor voorzieningen in een (open) keuken met een aanrechtlengte van {totaal_lengte_aanrechten}mm",
                     id=str(
                         CriteriumId(
-                            stelselgroep=Woningwaarderingstelselgroep.keuken,
+                            stelselgroep=stelselgroep,
                             ruimte_id=ruimte.id,
                             criterium="maximering_extra_voorzieningen",
                         )

@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 from typing import Iterator
@@ -6,7 +7,11 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.criterium_id import (
+    CriteriumId,
+    GedeeldMetSoort,
+    naam_uit_subgroep_criterium_id,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
@@ -21,6 +26,7 @@ from woningwaardering.stelsels.utils import (
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
+    WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
@@ -95,9 +101,23 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 if utils.gedeeld_met_eenheden(ruimte)
             ]
 
+            totaal_criteria: dict[str, CriteriumId] = {}
+
+            def _oppervlakte_vertrek(
+                ruimte: EenhedenRuimte,
+            ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+                return waardeer_oppervlakte_van_vertrek(ruimte, self.stelselgroep)
+
+            def _oppervlakte_overige(
+                ruimte: EenhedenRuimte,
+            ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+                return waardeer_oppervlakte_van_overige_ruimte(
+                    ruimte, self.stelselgroep
+                )
+
             oppervlakte_berekeningen = {
-                Ruimtesoort.vertrek: waardeer_oppervlakte_van_vertrek,
-                Ruimtesoort.overige_ruimten: waardeer_oppervlakte_van_overige_ruimte,
+                Ruimtesoort.vertrek: _oppervlakte_vertrek,
+                Ruimtesoort.overige_ruimten: _oppervlakte_overige,
             }
 
             for ruimte in gedeelde_ruimten:
@@ -148,15 +168,17 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
                 woningwaardering_groep.woningwaarderingen.extend(
                     self._deel_woningwaarderingen_door_aantal_eenheden(
-                        ruimte, oppervlakte_waarderingen
+                        ruimte, oppervlakte_waarderingen, totaal_criteria
                     )
                 )
 
                 # waarderingen voor de keuken van gedeelde ruimten
-                keuken_waarderingen = list(waardeer_keuken(ruimte, self.stelsel))
+                keuken_waarderingen = list(
+                    waardeer_keuken(ruimte, self.stelsel, self.stelselgroep)
+                )
                 woningwaardering_groep.woningwaarderingen.extend(
                     self._deel_woningwaarderingen_door_aantal_eenheden(
-                        ruimte, keuken_waarderingen
+                        ruimte, keuken_waarderingen, totaal_criteria
                     )
                 )
 
@@ -166,32 +188,43 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 )
                 woningwaardering_groep.woningwaarderingen.extend(
                     self._deel_woningwaarderingen_door_aantal_eenheden(
-                        ruimte, sanitair_waarderingen
+                        ruimte, sanitair_waarderingen, totaal_criteria
                     )
                 )
 
             # waarderingen voor de verkoeling en verwarming van gedeelde ruimten
             verkoeling_en_verwarming_waarderingen = list(
-                waardeer_verkoeling_en_verwarming(gedeelde_ruimten)
+                waardeer_verkoeling_en_verwarming(
+                    gedeelde_ruimten, self.stelselgroep, self.stelsel
+                )
             )
 
             for ruimte, waardering in verkoeling_en_verwarming_waarderingen:
-                # Hier zetten we de bovenliggende criterium op None omdat deze
-                # anders niet in de tabel wordt getoond doordat het bovenliggende
-                # criterium zelf niet in de waarderingen voorkomt.
-                if waardering.criterium:
-                    waardering.criterium.bovenliggende_criterium = None
                 woningwaardering_groep.woningwaarderingen.extend(
                     self._deel_woningwaarderingen_door_aantal_eenheden(
-                        ruimte, [waardering]
+                        ruimte, [waardering], totaal_criteria
                     )
                 )
 
+            woningwaardering_groep.woningwaarderingen.extend(
+                self._maak_adressen_totalen(woningwaardering_groep, totaal_criteria)
+            )
+            woningwaardering_groep.woningwaarderingen.extend(
+                self._maak_verkoeling_subgroep_totalen(
+                    woningwaardering_groep, set(totaal_criteria.keys())
+                )
+            )
+
         punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
+            Decimal(
+                sum(
+                    Decimal(str(woningwaardering.punten))
+                    for woningwaardering in woningwaardering_groep.woningwaarderingen
+                    or []
+                    if woningwaardering.punten is not None
+                    and woningwaardering.criterium is not None
+                    and woningwaardering.criterium.bovenliggende_criterium is None
+                )
             ),
         )
 
@@ -202,10 +235,27 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         )
         return woningwaardering_groep
 
+    def _adressen_totaal_id(
+        self,
+        ruimte: EenhedenRuimte,
+        totaal_criteria: dict[str, CriteriumId],
+    ) -> str:
+        gedeeld_met = ruimte.gedeeld_met_aantal_eenheden or 1
+        totaal_criterium_id = CriteriumId.totaal_deel(
+            self.stelselgroep,
+            gedeeld_met,
+            GedeeldMetSoort.adressen,
+            stelsel=self.stelsel,
+        )
+        totaal_id = str(totaal_criterium_id)
+        totaal_criteria[totaal_id] = totaal_criterium_id
+        return totaal_id
+
     def _deel_woningwaarderingen_door_aantal_eenheden(
         self,
         ruimte: EenhedenRuimte,
         woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
+        totaal_criteria: dict[str, CriteriumId],
     ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
         for woningwaardering in woningwaarderingen or []:
             woningwaardering.punten = float(
@@ -218,13 +268,68 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 )
             )
 
-            if (
-                woningwaardering.criterium is not None
-                and woningwaardering.criterium.naam is not None
+            if woningwaardering.criterium is not None and (
+                woningwaardering.criterium.bovenliggende_criterium is None
             ):
-                woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam} (gedeeld met {ruimte.gedeeld_met_aantal_eenheden})"
+                totaal_id = self._adressen_totaal_id(ruimte, totaal_criteria)
+                woningwaardering.criterium.bovenliggende_criterium = (
+                    WoningwaarderingCriteriumSleutels(id=totaal_id)
+                )
 
             yield woningwaardering
+
+    def _maak_adressen_totalen(
+        self,
+        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+        totaal_criteria: dict[str, CriteriumId],
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        for totaal_id, totaal_criterium in totaal_criteria.items():
+            punten = sum(
+                woningwaardering.punten
+                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
+                if woningwaardering.punten is not None
+                and woningwaardering.criterium is not None
+                and woningwaardering.criterium.bovenliggende_criterium is not None
+                and woningwaardering.criterium.bovenliggende_criterium.id == totaal_id
+                and isinstance(woningwaardering.punten, float)
+            )
+            gedeeld_met = totaal_criterium.gedeeld_met_aantal or 1
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=f"Totaal (gedeeld met {gedeeld_met} eenheden)",
+                    id=totaal_id,
+                ),
+                punten=float(utils.rond_af(punten, decimalen=2)),
+            )
+
+    def _maak_verkoeling_subgroep_totalen(
+        self,
+        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
+        adressen_totaal_ids: set[str],
+    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
+        criteriumsleutelpunten: dict[str, float] = defaultdict(float)
+        for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
+            parent_id = (
+                woningwaardering.criterium.bovenliggende_criterium.id
+                if woningwaardering.criterium
+                and woningwaardering.criterium.bovenliggende_criterium
+                else None
+            )
+            if (
+                parent_id
+                and parent_id not in adressen_totaal_ids
+                and isinstance(woningwaardering.punten, float)
+            ):
+                criteriumsleutelpunten[parent_id] += woningwaardering.punten
+
+        for subgroep_id, punten in criteriumsleutelpunten.items():
+            yield WoningwaarderingResultatenWoningwaardering(
+                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                    naam=naam_uit_subgroep_criterium_id(subgroep_id),
+                    id=subgroep_id,
+                ),
+                punten=float(utils.rond_af(punten, decimalen=2)),
+            )
 
 
 if __name__ == "__main__":  # pragma: no cover

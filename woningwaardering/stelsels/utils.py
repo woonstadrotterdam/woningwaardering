@@ -36,8 +36,6 @@ from woningwaardering.vera.referentiedata.eenheidmonument import (
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
-index: int = 0  # nodig voor mypy voor de global index voor de tabel
-
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
 
@@ -46,14 +44,11 @@ def _voeg_onderliggende_woningwaarderingen_toe(
     stelselgroep_naam: str,
     woningwaardering: WoningwaarderingResultatenWoningwaardering,
     woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
-    aantal_waarderingen: int,
     indent: int = 0,
 ) -> None:
     """
     Voeg de onderliggende woningwaarderingen toe aan de tabel.
     """
-
-    global index
 
     if not woningwaardering.criterium or not woningwaardering.criterium.id:
         return
@@ -69,7 +64,6 @@ def _voeg_onderliggende_woningwaarderingen_toe(
 
     for onderliggende_woningwaardering in onderliggende_woningwaarderingen:
         if onderliggende_woningwaardering.criterium is not None:
-            index += 1
             table.add_row(
                 [
                     stelselgroep_naam,
@@ -87,7 +81,6 @@ def _voeg_onderliggende_woningwaarderingen_toe(
                     if onderliggende_woningwaardering.opslagpercentage is not None
                     else "",
                 ],
-                divider=index == aantal_waarderingen,
             )
 
         _voeg_onderliggende_woningwaarderingen_toe(
@@ -95,7 +88,6 @@ def _voeg_onderliggende_woningwaarderingen_toe(
             stelselgroep_naam,
             onderliggende_woningwaardering,
             woningwaarderingen,
-            aantal_waarderingen=aantal_waarderingen,
             indent=indent + 1,
         )
 
@@ -166,9 +158,6 @@ def naar_tabel(
             else stelselgroep_naam
         )
         woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
-        aantal_waarderingen = len(woningwaarderingen)
-        global index
-        index = 0
 
         for woningwaardering in [
             woningwaardering
@@ -181,7 +170,6 @@ def naar_tabel(
                 and woningwaardering_groep.criterium_groep.stelselgroep
                 and woningwaardering.criterium
             ):
-                index += 1
                 table.add_row(
                     [
                         stelselgroep_naam,
@@ -197,7 +185,6 @@ def naar_tabel(
                         if woningwaardering.opslagpercentage is not None
                         else "",
                     ],
-                    divider=index == aantal_waarderingen,
                 )
 
                 _voeg_onderliggende_woningwaarderingen_toe(
@@ -206,7 +193,6 @@ def naar_tabel(
                     woningwaardering,
                     woningwaarderingen,
                     indent=1,
-                    aantal_waarderingen=aantal_waarderingen,
                 )
 
         aantallen = [
@@ -220,7 +206,7 @@ def naar_tabel(
         subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
 
         if (
-            (subtotaal is not None or aantal_waarderingen >= 1)
+            (subtotaal is not None or len(woningwaarderingen) >= 1)
             and woningwaardering_groep.criterium_groep
             and woningwaardering_groep.criterium_groep.stelselgroep
         ):
@@ -807,7 +793,6 @@ def deel_punten_door_aantal_onzelfstandige_woonruimten(
     ruimte: EenhedenRuimte,
     woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering]
     | Iterator[WoningwaarderingResultatenWoningwaardering],
-    update_criterium_naam: bool = True,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     """
     Deelt punten door het aantal onzelfstandige woonruimten.
@@ -818,8 +803,6 @@ def deel_punten_door_aantal_onzelfstandige_woonruimten(
         ruimte (EenhedenRuimte): De ruimte waarvoor de punten verdeeld moeten worden.
         woningwaarderingen (list[WoningwaarderingResultatenWoningwaardering] | Iterator[WoningwaarderingResultatenWoningwaardering]):
             Een lijst of iterator van woningwaarderingen waarvan de punten verdeeld moeten worden.
-        update_criterium_naam (bool, optional): Een boolean die aangeeft of de naam van het criterium moet worden aangepast. Default is True.
-
     Yields:
         WoningwaarderingResultatenWoningwaardering: Woningwaarderingen met verdeelde punten.
     """
@@ -831,10 +814,6 @@ def deel_punten_door_aantal_onzelfstandige_woonruimten(
             and woningwaardering.punten
             and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten  # nodig voor mypy
         ):
-            woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam}"
-            if update_criterium_naam:
-                woningwaardering.criterium.naam += f" (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
-
             woningwaardering.punten = float(
                 utils.rond_af(
                     utils.rond_af(woningwaardering.punten, decimalen=2)

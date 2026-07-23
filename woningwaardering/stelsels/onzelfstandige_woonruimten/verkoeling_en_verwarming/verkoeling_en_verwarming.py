@@ -7,7 +7,11 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId, GedeeldMetSoort
+from woningwaardering.stelsels.criterium_id import (
+    CriteriumId,
+    GedeeldMetSoort,
+    naam_uit_subgroep_criterium_id,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_verkoeling_en_verwarming,
 )
@@ -72,7 +76,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         for ruimte, woningwaardering in woningwaarderingen:
             waardering_gedeeld = list(
                 deel_punten_door_aantal_onzelfstandige_woonruimten(
-                    ruimte, [woningwaardering], update_criterium_naam=False
+                    ruimte, [woningwaardering]
                 )
             )[0]  # er is altijd maar een woningwaardering
             woningwaarderingen_totaal.append((ruimte, waardering_gedeeld))
@@ -125,9 +129,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
                 yield WoningwaarderingResultatenWoningwaardering(
                     criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                         id=criterium_id,
-                        naam=criterium_id.split("__")[-1]
-                        .capitalize()
-                        .replace("_", " "),
+                        naam=naam_uit_subgroep_criterium_id(criterium_id),
                         bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
                             id=str(
                                 CriteriumId(

@@ -16,16 +16,16 @@
         {
           "aantal": 5.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__1",
-            "naam": "Type II + laadpaal (gedeeld met 10 adressen)"
+            "id": "gemeenschappelijke_parkeerruimten__1__gedeeld_met__10__adressen",
+            "naam": "Type II + laadpaal"
           },
           "punten": 4.0
         },
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__2",
-            "naam": "Type III (gedeeld met 10 adressen)"
+            "id": "gemeenschappelijke_parkeerruimten__2__gedeeld_met__10__adressen",
+            "naam": "Type III"
           },
           "punten": 0.8
         }

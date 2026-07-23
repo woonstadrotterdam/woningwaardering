@@ -60,6 +60,7 @@
         },
         {
           "criterium": {
+            "id": "buitenruimten__prive_buitenruimten_aanwezig",
             "naam": "Privé buitenruimten aanwezig",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__totaal__prive"

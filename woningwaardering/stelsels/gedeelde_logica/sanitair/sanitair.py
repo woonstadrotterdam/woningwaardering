@@ -36,11 +36,13 @@ def waardeer_sanitair(
 
     _bouwkundige_elementen_naar_installaties(ruimte)
 
-    yield from _waardeer_toiletten(ruimte)
+    yield from _waardeer_toiletten(ruimte, stelselgroep)
 
-    yield from _waardeer_wastafels(ruimte, stelsel)
+    yield from _waardeer_wastafels(ruimte, stelsel, stelselgroep)
 
-    baden_en_douches_waarderingen = list(_waardeer_baden_en_douches(ruimte, stelsel))
+    baden_en_douches_waarderingen = list(
+        _waardeer_baden_en_douches(ruimte, stelsel, stelselgroep)
+    )
     totaal_punten_bad_en_douche = Decimal(
         sum(
             Decimal(str(woningwaardering.punten))
@@ -50,7 +52,9 @@ def waardeer_sanitair(
     )
     yield from baden_en_douches_waarderingen
 
-    voorziening_waarderingen = list(_waardeer_installaties(ruimte, stelsel))
+    voorziening_waarderingen = list(
+        _waardeer_installaties(ruimte, stelsel, stelselgroep)
+    )
     totaal_punten_voorzieningen = Decimal(
         sum(
             Decimal(str(woningwaardering.punten))
@@ -75,7 +79,7 @@ def waardeer_sanitair(
                 naam=f"{ruimte.naam} - Voorzieningen: Max verdubbeling punten bad en douche",
                 id=str(
                     CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                        stelselgroep=stelselgroep,
                         ruimte_id=ruimte.id,
                         criterium="maximering_punten_voorzieningen",
                     )
@@ -113,6 +117,7 @@ def _bouwkundige_elementen_naar_installaties(ruimte: EenhedenRuimte) -> None:
 
 def _waardeer_toiletten(
     ruimte: EenhedenRuimte,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     mapping_toilet: dict[Referentiedata, dict[Referentiedata, float]] = {
@@ -152,7 +157,7 @@ def _waardeer_toiletten(
                         naam=f"{ruimte.naam} - {toiletsoort.naam}",
                         id=str(
                             CriteriumId(
-                                stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                stelselgroep=stelselgroep,
                                 ruimte_id=ruimte.id,
                                 criterium=toiletsoort.name,
                             )
@@ -172,7 +177,9 @@ def _waardeer_toiletten(
 
 
 def _waardeer_wastafels(
-    ruimte: EenhedenRuimte, stelsel: WoningwaarderingstelselReferentiedata
+    ruimte: EenhedenRuimte,
+    stelsel: WoningwaarderingstelselReferentiedata,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     zelfstandige_woonruimte = (
         stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
@@ -216,7 +223,7 @@ def _waardeer_wastafels(
                                 naam=f"{ruimte.naam} - {wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
                                 id=str(
                                     CriteriumId(
-                                        stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                        stelselgroep=stelselgroep,
                                         ruimte_id=ruimte.id,
                                         criterium=wastafelsoort.name,
                                     )
@@ -246,7 +253,7 @@ def _waardeer_wastafels(
                         naam=f"{ruimte.naam} - {wastafelsoort.naam}",
                         id=str(
                             CriteriumId(
-                                stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                stelselgroep=stelselgroep,
                                 ruimte_id=ruimte.id,
                                 criterium=wastafelsoort.name,
                             )
@@ -294,7 +301,7 @@ def _waardeer_wastafels(
                         naam=f"{ruimte.naam} - Max {punten_per_wastafel} punt voor {wastafelsoort.naam}",
                         id=str(
                             CriteriumId(
-                                stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                stelselgroep=stelselgroep,
                                 ruimte_id=ruimte.id,
                                 criterium=f"max_punten_{wastafelsoort.name}",
                             )
@@ -318,7 +325,9 @@ def _waardeer_wastafels(
 
 
 def _waardeer_baden_en_douches(
-    ruimte: EenhedenRuimte, stelsel: WoningwaarderingstelselReferentiedata
+    ruimte: EenhedenRuimte,
+    stelsel: WoningwaarderingstelselReferentiedata,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     zelfstandige_woonruimte = (
@@ -363,7 +372,7 @@ def _waardeer_baden_en_douches(
                     naam=f"{ruimte.naam} - {Installatiesoort.bad_en_douche.naam}",
                     id=str(
                         CriteriumId(
-                            stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                            stelselgroep=stelselgroep,
                             ruimte_id=ruimte.id,
                             criterium=Installatiesoort.bad_en_douche.name,
                         )
@@ -394,7 +403,7 @@ def _waardeer_baden_en_douches(
                         naam=f"{ruimte.naam} - {installatiesoort.naam}",
                         id=str(
                             CriteriumId(
-                                stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                stelselgroep=stelselgroep,
                                 ruimte_id=ruimte.id,
                                 criterium=installatiesoort.name,
                             )
@@ -407,7 +416,9 @@ def _waardeer_baden_en_douches(
 
 
 def _waardeer_installaties(
-    ruimte: EenhedenRuimte, stelsel: WoningwaarderingstelselReferentiedata
+    ruimte: EenhedenRuimte,
+    stelsel: WoningwaarderingstelselReferentiedata,
+    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
 ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     punten_installaties: dict[Referentiedata, float] = {
@@ -493,7 +504,7 @@ def _waardeer_installaties(
                                     naam=f"{ruimte.naam} - Voorzieningen: {installatie.naam}",
                                     id=str(
                                         CriteriumId(
-                                            stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                            stelselgroep=stelselgroep,
                                             ruimte_id=ruimte.id,
                                             criterium=installatie.name,
                                         )
@@ -517,7 +528,7 @@ def _waardeer_installaties(
                                         naam=f"{ruimte.naam} - Voorzieningen: Max {maximum} punten voor {installatie.naam}",
                                         id=str(
                                             CriteriumId(
-                                                stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                                stelselgroep=stelselgroep,
                                                 ruimte_id=ruimte.id,
                                                 criterium=f"max_punten_{installatie.name}",
                                             )
@@ -543,7 +554,7 @@ def _waardeer_installaties(
                                         naam=f"{ruimte.naam} - Voorzieningen: Max 2 stopcontacten per wastafel",
                                         id=str(
                                             CriteriumId(
-                                                stelselgroep=Woningwaarderingstelselgroep.sanitair,
+                                                stelselgroep=stelselgroep,
                                                 ruimte_id=ruimte.id,
                                                 criterium=f"max_{Installatiesoort.stopcontact_bij_wastafel.name}",
                                             )

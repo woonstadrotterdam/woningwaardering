@@ -133,7 +133,7 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_72314048",
+            "id": "verkoeling_en_verwarming__Space_72314048__verwarmd_vertrek",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -143,7 +143,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_72314017",
+            "id": "verkoeling_en_verwarming__Space_72314017__verwarmd_vertrek",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -153,7 +153,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_72315436",
+            "id": "verkoeling_en_verwarming__Space_72315436__verwarmd_vertrek",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -163,7 +163,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_72310936",
+            "id": "verkoeling_en_verwarming__Space_72310936__verwarmd_vertrek",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -173,7 +173,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_72315439",
+            "id": "verkoeling_en_verwarming__Space_72315439__verwarmd_vertrek",
             "naam": "Slaapkamer 3",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -183,7 +183,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_72310929",
+            "id": "verkoeling_en_verwarming__Space_72310929__verwarmd_vertrek",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -193,7 +193,7 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_72314030",
+            "id": "verkoeling_en_verwarming__Space_72314030__verwarmd_vertrek",
             "naam": "Slaapkamer 4",
             "bovenliggendeCriterium": {
               "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
@@ -246,7 +246,7 @@
             "id": "buitenruimten__Space_72315619",
             "naam": "Balkon",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__totaal"
             },
             "meeteenheid": {
               "code": "M2",
@@ -256,7 +256,7 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__aanwezig__prive",
+            "id": "buitenruimten__aanwezig",
             "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0
@@ -264,7 +264,7 @@
         {
           "aantal": 8.0,
           "criterium": {
-            "id": "buitenruimten__totaal__prive",
+            "id": "buitenruimten__totaal",
             "naam": "Totaal (privé)",
             "meeteenheid": {
               "code": "M2",
