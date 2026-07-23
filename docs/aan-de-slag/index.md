@@ -586,6 +586,10 @@ with open(
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_I"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
@@ -617,6 +621,10 @@ with open(
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         }
@@ -750,10 +758,10 @@ SANITAIR
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             694000.00 EUR
   Onderdeel I                                                         45.27 pt
-    - Factor I                                              15329.00
+    - Factor I                                          15329.00 EUR
   Onderdeel II                                                        19.38 pt
     - Oppervlakte van vertrekken en overige ruimten        148.00 m²
-    - Factor II                                               242.00
+    - Factor II                                           242.00 EUR
                                                                       --------
   Totaal                                                              64.75 pt
 ```
@@ -1141,6 +1149,10 @@ De output daarvan is een VERA woningwaarderingstelsel object.
             "naam": "Factor I",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_I"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
@@ -1172,6 +1184,10 @@ De output daarvan is een VERA woningwaarderingstelsel object.
             "naam": "Factor II",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         }
@@ -1273,10 +1289,10 @@ KEUKEN
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             694000.00 EUR
   Onderdeel I                                                         45.27 pt
-    - Factor I                                              15329.00
+    - Factor I                                          15329.00 EUR
   Onderdeel II                                                        69.95 pt
     - Oppervlakte van vertrekken en overige ruimten         41.00 m²
-    - Factor II                                               242.00
+    - Factor II                                           242.00 EUR
                                                                       --------
   Totaal                                                              115.25 pt
 ```

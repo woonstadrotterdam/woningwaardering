@@ -362,6 +362,10 @@
             "naam": "WOZ-waarde per m²",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__percentage_verschil"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
@@ -372,6 +376,10 @@
             "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond",
             "bovenliggendeCriterium": {
               "id": "punten_voor_de_woz_waarde__percentage_verschil"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         }

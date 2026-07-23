@@ -54,9 +54,9 @@ ENERGIEPRESTATIE
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             220000.00 EUR
   Onderdeel I                                                         14.35 pt
-    - Factor I                                              15329.00
+    - Factor I                                          15329.00 EUR
   Onderdeel II                                                        15.67 pt
     - Oppervlakte van vertrekken en overige ruimten         58.00 m²
-    - Factor II                                               242.00
+    - Factor II                                           242.00 EUR
                                                                       --------
   Totaal                                                              30.00 pt

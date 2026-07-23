@@ -80,9 +80,9 @@ SANITAIR
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             694000.00 EUR
   Onderdeel I                                                         45.27 pt
-    - Factor I                                              15329.00
+    - Factor I                                          15329.00 EUR
   Onderdeel II                                                        19.38 pt
     - Oppervlakte van vertrekken en overige ruimten        148.00 m²
-    - Factor II                                               242.00
+    - Factor II                                           242.00 EUR
                                                                       --------
   Totaal                                                              64.75 pt

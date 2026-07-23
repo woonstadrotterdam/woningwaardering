@@ -192,6 +192,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             id="factor_I",
             naam="Factor I",
             aantal=factor_onderdeel_I,
+            meeteenheid=Meeteenheid.euro,
         )
 
         onderdeel_ii = waarderingsgroep_builder.met_onderliggend(
@@ -217,6 +218,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             id="factor_II",
             naam="Factor II",
             aantal=factor_onderdeel_II,
+            meeteenheid=Meeteenheid.euro,
         )
 
         self._corrigeer_woz_punten(
