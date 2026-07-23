@@ -55,15 +55,15 @@ KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 # Kolombreedtes voor tabeloutput (zie docs/voor-ontwikkelaars/testing.md)
 W_NAAM = 50
 W_AANTAL = 14
-W_PUNTEN = 8
-W_SUBPUNTEN = 10
+W_PUNTEN = 9  # "XXX.00 pt" (drie cijfers voor de komma)
 W_OPSLAG = 7
 _GAP = "  "
 _INDENT = "  "
 _BULLET = "- "
-# Zelfde visuele inschuif als detailrijen (" " + eerste-celspatie in _format_plain_row).
+# Inschuif aan het begin van elke tabelregel (naamkolom).
 _TABEL_RIJ_INSCHUIF = "  "
-_PUNTEN_SCHEIDING = "--------"
+# Maximale weergavelengte aantal in subtotaalrijen (bijv. "112.80 m²").
+_AANTAL_SUBTOTAAL_WEERGAVE = 9
 
 
 class WoningwaarderingTabel:
@@ -124,189 +124,58 @@ def _format_aantal_kolom(
     return getal
 
 
-def _punt_kolom_breedte(diepte: int) -> int:
-    basis = W_PUNTEN if diepte == 0 else W_SUBPUNTEN
-    return max(basis, len(_punt_kolom_naam(diepte)))
+# Vaste eindpositie (karakterindex) van elke waardekolom, inclusief de rij-inschuif.
+# De naamkolom staat links; aantal/punten/opslag worden rechts uitgelijnd op deze posities,
+# zodat samenvatting-, detail- en totaalregels dezelfde opmaak en uitlijning delen.
+_AANTAL_KOLOM_EINDE = len(_TABEL_RIJ_INSCHUIF) + W_NAAM + len(_GAP) + W_AANTAL
+_PUNTEN_KOLOM_EINDE = _AANTAL_KOLOM_EINDE + len(_GAP) + W_PUNTEN
+_OPSLAG_KOLOM_EINDE = _PUNTEN_KOLOM_EINDE + len(_GAP) + W_OPSLAG
 
 
-def _punt_kolom_naam(diepte: int) -> str:
-    if diepte == 0:
-        return "Punten"
-    if diepte == 1:
-        return "Subpunten"
-    if diepte == 2:
-        return "Subsubpunten"
-    return f"Subpunten {diepte + 1}"
+def _plaats_rechts(regel: str, tekst: str, kolom_einde: int) -> str:
+    """Plak ``tekst`` rechts uitgelijnd achter ``regel`` zodat het op ``kolom_einde`` eindigt.
+
+    Wanneer ``regel`` al te lang is, schuift ``tekst`` naar rechts met minimaal één spatie.
+    """
+    if not tekst:
+        return regel
+    padding = max(1, kolom_einde - len(regel) - len(tekst))
+    return f"{regel}{' ' * padding}{tekst}"
 
 
-def _punten_kolom_einde(max_hierarchie_diepte: int) -> int:
-    """Kolomindex (karakterpositie) waar de Punten-kolom eindigt (rechts uitgelijnd)."""
-    positie = W_NAAM + len(_GAP) + W_AANTAL + len(_GAP) + W_PUNTEN
-    return positie
-
-
-def _detail_kolom_breedtes(
-    punten_kolom_dieptes: list[int], *, toon_opslag_kolom: bool
-) -> list[int]:
-    breedtes = [W_NAAM, W_AANTAL]
-    for diepte in punten_kolom_dieptes:
-        breedtes.append(_punt_kolom_breedte(diepte))
-    if toon_opslag_kolom:
-        breedtes.append(W_OPSLAG)
-    return breedtes
-
-
-def _detail_kolom_links(
-    punten_kolom_dieptes: list[int], *, toon_opslag_kolom: bool
-) -> list[bool]:
-    """True = links uitlijnen, False = rechts uitlijnen."""
-    links = [True, False]
-    links.extend([False] * len(punten_kolom_dieptes))
-    if toon_opslag_kolom:
-        links.append(False)
-    return links
-
-
-def _format_plain_row(
-    cellen: list[str], kolom_breedtes: list[int], links_uitlijnen: list[bool]
+def _tabel_regel(
+    naam: str,
+    *,
+    aantal: str = "",
+    punten: str = "",
+    opslag: str = "",
 ) -> str:
-    delen: list[str] = []
-    for cel, breedte, links in zip(
-        cellen, kolom_breedtes, links_uitlijnen, strict=True
-    ):
-        if links:
-            delen.append(f" {cel:<{breedte}} ")
-        else:
-            delen.append(f" {cel:>{breedte}} ")
-    return "".join(delen)
+    """Formatteer één tabelregel met de gedeelde kolomopmaak.
+
+    Wordt gebruikt voor de regels in de samenvatting, de detailregels in een
+    stelselgroep en de totaalregels: de naam staat links en de waardekolommen
+    (aantal, punten, opslag) lijnen rechts uit op vaste kolomeinden.
+    """
+    regel = _TABEL_RIJ_INSCHUIF + naam
+    regel = _plaats_rechts(regel, aantal, _AANTAL_KOLOM_EINDE)
+    regel = _plaats_rechts(regel, punten, _PUNTEN_KOLOM_EINDE)
+    regel = _plaats_rechts(regel, opslag, _OPSLAG_KOLOM_EINDE)
+    return regel.rstrip()
+
+
+def _tabel_scheiding(*, toon_aantal: bool) -> str:
+    """Scheidingsregel boven een totaalregel (onder de aantal- en puntenkolom)."""
+    return _tabel_regel(
+        "",
+        aantal="-" * _AANTAL_SUBTOTAAL_WEERGAVE if toon_aantal else "",
+        punten="-" * W_PUNTEN,
+    )
 
 
 def _format_punten_cel(waarde: str) -> str:
     if not waarde:
         return ""
     return f"{waarde} pt"
-
-
-def _plain_totaal_scheiding(
-    kolom_breedtes: list[int],
-    links_uitlijnen: list[bool],
-    *,
-    footer_cellen: list[str],
-) -> str:
-    if len(kolom_breedtes) <= 1:
-        return _PUNTEN_SCHEIDING
-    cellen = [""] * len(kolom_breedtes)
-    if len(cellen) > 1 and footer_cellen[1]:
-        cellen[1] = _PUNTEN_SCHEIDING
-    if len(cellen) > 2:
-        cellen[2] = _PUNTEN_SCHEIDING
-    return (" " + _format_plain_row(cellen, kolom_breedtes, links_uitlijnen)).rstrip()
-
-
-def _render_plain_detail_tabel(
-    stelselgroep_naam: str,
-    body: list[list[str]],
-    footer: list[list[str]],
-    kolom_breedtes: list[int],
-    links_uitlijnen: list[bool],
-) -> list[str]:
-    regels: list[str] = [stelselgroep_naam.upper()]
-    for rij in body:
-        regels.append(
-            (" " + _format_plain_row(rij, kolom_breedtes, links_uitlijnen)).rstrip()
-        )
-    if footer:
-        regels.append(
-            _plain_totaal_scheiding(
-                kolom_breedtes, links_uitlijnen, footer_cellen=footer[0]
-            )
-        )
-    for rij in footer:
-        regels.append(
-            (" " + _format_plain_row(rij, kolom_breedtes, links_uitlijnen)).rstrip()
-        )
-    return regels
-
-
-def _detail_cellen(
-    naam: str,
-    *,
-    punten_kolom_dieptes: list[int],
-    toon_opslag_kolom: bool,
-    aantal: str = "",
-    punten_per_diepte: dict[int, str] | None = None,
-    opslag: str = "",
-) -> list[str]:
-    punten_per_diepte = punten_per_diepte or {}
-    cellen = [naam, aantal]
-    for diepte in punten_kolom_dieptes:
-        cellen.append(punten_per_diepte.get(diepte, ""))
-    if toon_opslag_kolom:
-        cellen.append(opslag)
-    return cellen
-
-
-def _samenvatting_regel_met_waarde(
-    label: str, waarde: str, max_hierarchie_diepte: int
-) -> str:
-    label = _TABEL_RIJ_INSCHUIF + label
-    if not waarde:
-        return label
-    eind = _punten_kolom_einde(max_hierarchie_diepte) + len(_TABEL_RIJ_INSCHUIF)
-    padding = max(1, eind - len(label) - len(waarde))
-    return f"{label}{' ' * padding}{waarde}"
-
-
-def _max_hierarchie_diepte(
-    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
-) -> int:
-    return max(
-        (
-            _criterium_hierarchie_diepte(waardering, waarderingen)
-            for waardering in waarderingen
-        ),
-        default=0,
-    )
-
-
-def _max_hierarchie_diepte_resultaat(
-    groepen: list[WoningwaarderingResultatenWoningwaarderingGroep],
-) -> int:
-    return max(
-        (_max_hierarchie_diepte(groep.woningwaarderingen or []) for groep in groepen),
-        default=0,
-    )
-
-
-def _criterium_hierarchie_diepte(
-    waardering: WoningwaarderingResultatenWoningwaardering,
-    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
-) -> int:
-    if (
-        waardering.criterium is None
-        or waardering.criterium.bovenliggende_criterium is None
-    ):
-        return 0
-    diepte = 0
-    huidig = waardering
-    while (
-        huidig.criterium is not None
-        and huidig.criterium.bovenliggende_criterium is not None
-    ):
-        diepte += 1
-        parent_id = huidig.criterium.bovenliggende_criterium.id
-        parent = next(
-            (
-                w
-                for w in waarderingen
-                if w.criterium is not None and w.criterium.id == parent_id
-            ),
-            None,
-        )
-        if parent is None:
-            break
-        huidig = parent
-    return diepte
 
 
 def _waardering_opslag(waardering: WoningwaarderingResultatenWoningwaardering) -> str:
@@ -326,13 +195,6 @@ def _groep_toon_opslag_kolom(
     return False
 
 
-def _groep_punten_kolom_dieptes(
-    groep: WoningwaarderingResultatenWoningwaarderingGroep,
-) -> list[int]:
-    """Eén puntenkolom (index 2); hiërarchie alleen via inspringing in de naamkolom."""
-    return [0]
-
-
 def _waardering_meeteenheid(
     waardering: WoningwaarderingResultatenWoningwaardering,
 ) -> Referentiedata | None:
@@ -341,12 +203,12 @@ def _waardering_meeteenheid(
     return waardering.criterium.meeteenheid
 
 
-def _waardering_punten_kolommen(
+def _waardering_punten(
     waardering: WoningwaarderingResultatenWoningwaardering,
-) -> dict[int, str]:
+) -> str:
     if waardering.punten is None:
-        return {}
-    return {0: _format_punten_cel(_tabel_fmt_num(waardering.punten))}
+        return ""
+    return _format_punten_cel(_tabel_fmt_num(waardering.punten))
 
 
 def _onderliggende_waarderingen(
@@ -368,8 +230,7 @@ def _onderliggende_waarderingen(
 def _render_waardering_pre_order(
     waardering: WoningwaarderingResultatenWoningwaardering,
     waarderingen: list[WoningwaarderingResultatenWoningwaardering],
-    punten_kolom_dieptes: list[int],
-    rijen: list[list[str]],
+    regels: list[str],
     *,
     toon_opslag_kolom: bool,
     indent: int = 0,
@@ -378,16 +239,13 @@ def _render_waardering_pre_order(
         return
 
     prefix = (_INDENT * indent + _BULLET) if indent > 0 else ""
-    aantal = _format_aantal_kolom(
-        waardering.aantal, _waardering_meeteenheid(waardering)
-    )
-    rijen.append(
-        _detail_cellen(
+    regels.append(
+        _tabel_regel(
             prefix + (waardering.criterium.naam or ""),
-            punten_kolom_dieptes=punten_kolom_dieptes,
-            toon_opslag_kolom=toon_opslag_kolom,
-            aantal=aantal,
-            punten_per_diepte=_waardering_punten_kolommen(waardering),
+            aantal=_format_aantal_kolom(
+                waardering.aantal, _waardering_meeteenheid(waardering)
+            ),
+            punten=_waardering_punten(waardering),
             opslag=_waardering_opslag(waardering) if toon_opslag_kolom else "",
         )
     )
@@ -396,8 +254,7 @@ def _render_waardering_pre_order(
         _render_waardering_pre_order(
             kind,
             waarderingen,
-            punten_kolom_dieptes,
-            rijen,
+            regels,
             toon_opslag_kolom=toon_opslag_kolom,
             indent=indent + 1,
         )
@@ -549,15 +406,9 @@ def _render_detail_groep(
         and groep.criterium_groep.stelselgroep.naam
         or ""
     )
-    punten_kolom_dieptes = _groep_punten_kolom_dieptes(groep)
     toon_opslag_kolom = _groep_toon_opslag_kolom(groep)
-    kolom_breedtes = _detail_kolom_breedtes(
-        punten_kolom_dieptes, toon_opslag_kolom=toon_opslag_kolom
-    )
-    links_uitlijnen = _detail_kolom_links(
-        punten_kolom_dieptes, toon_opslag_kolom=toon_opslag_kolom
-    )
-    body: list[list[str]] = []
+
+    regels: list[str] = [stelselgroep_naam.upper()]
 
     tops = [
         w
@@ -568,8 +419,7 @@ def _render_detail_groep(
         _render_waardering_pre_order(
             waardering,
             waarderingen,
-            punten_kolom_dieptes,
-            body,
+            regels,
             toon_opslag_kolom=toon_opslag_kolom,
         )
 
@@ -580,31 +430,21 @@ def _render_detail_groep(
         if toon_opslag_kolom and groep.opslagpercentage is not None
         else ""
     )
-    footer_punten = (
-        {
-            0: _format_punten_cel(groep_punten),
-        }
-        if groep_punten
-        else {}
-    )
-    footer = [
-        _detail_cellen(
+
+    regels.append(_tabel_scheiding(toon_aantal=bool(subtotaal_aantal)))
+    regels.append(
+        _tabel_regel(
             "Totaal",
-            punten_kolom_dieptes=punten_kolom_dieptes,
-            toon_opslag_kolom=toon_opslag_kolom,
             aantal=subtotaal_aantal,
-            punten_per_diepte=footer_punten,
+            punten=_format_punten_cel(groep_punten),
             opslag=groep_opslag,
         )
-    ]
-    return _render_plain_detail_tabel(
-        stelselgroep_naam, body, footer, kolom_breedtes, links_uitlijnen
     )
+    return regels
 
 
 def _render_samenvatting(
     resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    max_hierarchie_diepte: int,
 ) -> list[str]:
     lines: list[str] = []
     for groep in resultaat.groepen or []:
@@ -618,21 +458,20 @@ def _render_samenvatting(
         waarde = ""
         if punten is not None and punten != 0:
             waarde = _format_punten_cel(_tabel_fmt_num(punten))
-        lines.append(
-            _samenvatting_regel_met_waarde(
-                stelselgroep_naam, waarde, max_hierarchie_diepte
-            )
+        toon_opslag_kolom = _groep_toon_opslag_kolom(groep)
+        opslag = (
+            f"{groep.opslagpercentage:.0%}"
+            if toon_opslag_kolom and groep.opslagpercentage is not None
+            else ""
         )
+        lines.append(_tabel_regel(stelselgroep_naam, punten=waarde, opslag=opslag))
 
-    punten_einde = _punten_kolom_einde(max_hierarchie_diepte) + len(_TABEL_RIJ_INSCHUIF)
-    lines.append(f"{' ' * (punten_einde - len(_PUNTEN_SCHEIDING))}{_PUNTEN_SCHEIDING}")
+    lines.append(_tabel_scheiding(toon_aantal=False))
 
     if resultaat.punten is not None:
         lines.append(
-            _samenvatting_regel_met_waarde(
-                "TOTAAL",
-                _format_punten_cel(_tabel_fmt_num(resultaat.punten)),
-                max_hierarchie_diepte,
+            _tabel_regel(
+                "TOTAAL", punten=_format_punten_cel(_tabel_fmt_num(resultaat.punten))
             )
         )
 
@@ -642,18 +481,13 @@ def _render_samenvatting(
     if resultaat.huurprijsopslag is not None and resultaat.huurprijsopslag > 0:
         opslag_delen.append(f"{_tabel_fmt_num(resultaat.huurprijsopslag)} EUR")
     if opslag_delen:
-        lines.append(
-            _samenvatting_regel_met_waarde(
-                "Opslag", "    ".join(opslag_delen), max_hierarchie_diepte
-            )
-        )
+        lines.append(_tabel_regel("Opslag", punten="    ".join(opslag_delen)))
 
     if resultaat.maximale_huur is not None:
         lines.append(
-            _samenvatting_regel_met_waarde(
+            _tabel_regel(
                 "Maximaal redelijke huur",
-                f"{_tabel_fmt_num(resultaat.maximale_huur)} EUR",
-                max_hierarchie_diepte,
+                punten=f"{_tabel_fmt_num(resultaat.maximale_huur)} EUR",
             )
         )
 
@@ -663,10 +497,9 @@ def _render_samenvatting(
         and resultaat.maximale_huur_inclusief_opslag is not None
     ):
         lines.append(
-            _samenvatting_regel_met_waarde(
+            _tabel_regel(
                 "Maximaal redelijke huur inclusief opslag",
-                f"{_tabel_fmt_num(resultaat.maximale_huur_inclusief_opslag)} EUR",
-                max_hierarchie_diepte,
+                punten=f"{_tabel_fmt_num(resultaat.maximale_huur_inclusief_opslag)} EUR",
             )
         )
 
@@ -704,7 +537,6 @@ def naar_tabel(
         groepen = volledig_resultaat.groepen or []
         toon_samenvatting = True
 
-    max_hierarchie_diepte = _max_hierarchie_diepte_resultaat(groepen)
     detail_secties = [_render_detail_groep(groep) for groep in groepen]
     heeft_detail_secties = any(detail_secties)
 
@@ -714,7 +546,7 @@ def naar_tabel(
         if eenheid_id:
             titel = f"{titel} {eenheid_id}"
         lines.append(titel)
-        lines.extend(_render_samenvatting(volledig_resultaat, max_hierarchie_diepte))
+        lines.extend(_render_samenvatting(volledig_resultaat))
         if heeft_detail_secties:
             lines.append("")
 

@@ -1,19 +1,19 @@
 SAMENVATTING 85651000021
-  Oppervlakte van vertrekken                                          60.00 pt
+  Oppervlakte van vertrekken                                           60.00 pt
   Oppervlakte van overige ruimten
-  Verkoeling en verwarming                                            10.00 pt
-  Buitenruimten                                                        3.75 pt
-  Energieprestatie                                                   -15.00 pt
-  Keuken                                                               7.00 pt
-  Sanitair                                                             9.00 pt
+  Verkoeling en verwarming                                             10.00 pt
+  Buitenruimten                                                         3.75 pt
+  Energieprestatie                                                    -15.00 pt
+  Keuken                                                                7.00 pt
+  Sanitair                                                              9.00 pt
   Gemeenschappelijke parkeerruimten
   Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-  Punten voor de WOZ-waarde                                           38.75 pt
+  Punten voor de WOZ-waarde                                            38.75 pt
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw
-                                                                      --------
-  TOTAAL                                                             114.00 pt
-  Maximaal redelijke huur                                           733.79 EUR
+                                                                      ---------
+  TOTAAL                                                              114.00 pt
+  Maximaal redelijke huur                                            733.79 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
   Keuken                                                     8.05 m²
@@ -21,53 +21,53 @@ OPPERVLAKTE VAN VERTREKKEN
   Woonkamer                                                 25.54 m²
   Slaapkamer 1                                              12.06 m²
   Slaapkamer 2                                               8.11 m²
-                                                            --------  --------
-  Totaal                                                    59.54 m²  60.00 pt
+                                                           ---------  ---------
+  Totaal                                                    59.54 m²   60.00 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
-    - Keuken                                                           2.00 pt
-    - Badruimte                                                        2.00 pt
-    - Woonkamer                                                        2.00 pt
-    - Slaapkamer 1                                                     2.00 pt
-    - Slaapkamer 2                                                     2.00 pt
-                                                                      --------
-  Totaal                                                              10.00 pt
+    - Keuken                                                            2.00 pt
+    - Badruimte                                                         2.00 pt
+    - Woonkamer                                                         2.00 pt
+    - Slaapkamer 1                                                      2.00 pt
+    - Slaapkamer 2                                                      2.00 pt
+                                                                      ---------
+  Totaal                                                               10.00 pt
 
 BUITENRUIMTEN
-  Privé                                                      5.00 m²   1.75 pt
+  Privé                                                      5.00 m²    1.75 pt
     - Balkon                                                 4.97 m²
-  Privé buitenruimten aanwezig                                         2.00 pt
-                                                                      --------
-  Totaal                                                               3.75 pt
+  Privé buitenruimten aanwezig                                          2.00 pt
+                                                                      ---------
+  Totaal                                                                3.75 pt
 
 ENERGIEPRESTATIE
   Bouwjaar 1897                                                       -15.00 pt
-                                                                      --------
+                                                                      ---------
   Totaal                                                              -15.00 pt
 
 KEUKEN
   Keuken
-    - Lengte aanrecht                                     2100.00 mm   7.00 pt
-                                                                      --------
-  Totaal                                                               7.00 pt
+    - Lengte aanrecht                                     2100.00 mm    7.00 pt
+                                                                      ---------
+  Totaal                                                                7.00 pt
 
 SANITAIR
   Badruimte
-    - Wastafel                                               1.00 st   1.00 pt
-    - Douche                                                 1.00 st   4.00 pt
+    - Wastafel                                               1.00 st    1.00 pt
+    - Douche                                                 1.00 st    4.00 pt
   Toiletruimte
-    - Staand Toilet                                          1.00 st   3.00 pt
-    - Wastafel                                               1.00 st   1.00 pt
-                                                                      --------
-  Totaal                                                               9.00 pt
+    - Staand Toilet                                          1.00 st    3.00 pt
+    - Wastafel                                               1.00 st    1.00 pt
+                                                                      ---------
+  Totaal                                                                9.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             289000.00 EUR
-  Onderdeel I                                                         18.85 pt
+  Onderdeel I                                                          18.85 pt
     - Factor I                                          15329.00 EUR
-  Onderdeel II                                                        19.90 pt
+  Onderdeel II                                                         19.90 pt
     - Oppervlakte van vertrekken en overige ruimten         60.00 m²
     - Factor II                                           242.00 EUR
-                                                                      --------
-  Totaal                                                              38.75 pt
+                                                                      ---------
+  Totaal                                                               38.75 pt

@@ -71,13 +71,13 @@ Bij gedeelde ruimten kan er op twee niveaus sprake zijn van deling. `gedeeld_met
 
 ### Subgroepen
 
-Een subgroep is een groeperend criterium binnen een stelselgroep; het is nadrukkelijk zelf géén stelselgroep. Wat een subgroep groepeert, verschilt per rubriek. In een gemeenschappelijke rubriek, zoals `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen`, spiegelt de id van een subgroep een stelselgroep-naam (bijvoorbeeld `sanitair`, `verkoeling_en_verwarming` of `oppervlakte_van_vertrekken`), omdat daar de logica van een hele stelselgroep genest wordt hergebruikt; onder zo'n subgroep kan vervolgens nóg een subgroep hangen. In een gewone rubriek is een subgroep juist een inhoudelijk onderdeel van die ene stelselgroep, zoals `verwarmde_vertrekken` of `verkoelde_vertrekken` binnen Verkoeling en verwarming.
+Een subgroep is een groeperend criterium binnen een stelselgroep; het is nadrukkelijk zelf géén stelselgroep. Wat een subgroep groepeert, verschilt per stelselgroep. In een gemeenschappelijke stelselgroep, zoals `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen`, spiegelt de id van een subgroep een stelselgroep-naam (bijvoorbeeld `sanitair`, `verkoeling_en_verwarming` of `oppervlakte_van_vertrekken`), omdat daar de logica van een hele stelselgroep genest wordt hergebruikt; onder zo'n subgroep kan vervolgens nóg een subgroep hangen. In een gewone stelselgroep is een subgroep juist een inhoudelijk onderdeel van die ene stelselgroep, zoals `verwarmde_vertrekken` of `verkoelde_vertrekken` binnen Verkoeling en verwarming.
 
-Meestal draagt een subgroep zelf geen punten: die staan op de onderliggende waarderingen. Op een enkele plek is dat anders. Bij de oppervlakterubrieken (`oppervlakte_van_vertrekken` en `oppervlakte_van_overige_ruimten`) worden de punten berekend over het op hele vierkante meters afgeronde groepstotaal, en daarom op de subgroep zelf gezet. De onderliggende ruimteregels dragen dan alleen het aantal vierkante meters en geen punten.
+Meestal draagt een subgroep zelf geen punten: die staan op de onderliggende detailregels. Op een enkele plek is dat anders. Bij de oppervlakte-stelselgroepen (`oppervlakte_van_vertrekken` en `oppervlakte_van_overige_ruimten`) worden de punten berekend over het op hele vierkante meters afgeronde groepstotaal, en daarom op de subgroep zelf gezet. De onderliggende ruimteregels dragen dan alleen het aantal vierkante meters en geen punten.
 
 ### Voorbeeld van de opbouw
 
-De onderstaande bomen tonen een gemeenschappelijke rubriek voor een zelfstandige en een onzelfstandige eenheid. Links staat telkens een herkenbare voorbeeldnaam, rechts de rol die de regel in de structuur speelt.
+De onderstaande bomen tonen een gemeenschappelijke stelselgroep voor een zelfstandige en een onzelfstandige eenheid. Links staat telkens een herkenbare voorbeeldnaam, rechts de rol die de regel in de structuur speelt.
 
 > Uiteindelijk, door hoe VERA is opgebouwd, is élke regel hieronder technisch gezien een waardering met een criterium.
 
@@ -121,7 +121,7 @@ Gemeenschappelijke binnenruimten gedeeld met meerdere adressen   ← stelselgroe
 
 ### Criterium-id's
 
-Elke waardering heeft een criterium met een eigen id, en dat id is een pad-id: het wordt afgeleid uit de plek in de hiërarchie, waarbij de builders `criterium.id` en `bovenliggendeCriterium` synchroon houden. Een waardering direct onder de stelselgroep-groep krijgt het id `{stelselgroep}__{segment}`; een waardering onder een andere waardering krijgt `{bovenliggende_id}__{segment}`. De segmenten worden steeds met een dubbele underscore (`__`) aan elkaar geplakt. Het id draagt de identiteit en de plek in de hiërarchie, terwijl de punten en het aantal bij de waardering horen en niet bij het criterium.
+Elke waardering heeft een criterium met een eigen id, en dat id is een pad-id: het wordt afgeleid uit de plek in de hiërarchie, waarbij de builders `criterium.id` en `bovenliggendeCriterium` synchroon houden. Een waardering direct onder de stelselgroep krijgt het id `{stelselgroep}__{segment}`; een waardering onder een andere waardering krijgt `{bovenliggende_id}__{segment}`. De segmenten worden steeds met een dubbele underscore (`__`) aan elkaar geplakt. Het id draagt de identiteit en de plek in de hiërarchie, terwijl de punten en het aantal bij de waardering horen en niet bij het criterium.
 
 Voor de gedeeld-met-lagen gelden vaste segmentnamen: `prive` bij een aantal van ten hoogste 1, en `gedeeld_met_{n}_{soort}` bij een aantal groter dan 1 (met enkele underscores rond het aantal en de soort).
 
@@ -134,4 +134,4 @@ Een paar voorbeelden:
 - `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen__keuken`
 - `verkoeling_en_verwarming__verwarmde_vertrekken`
 
-Zo'n stelselgroep-groep bouw je stapsgewijs op: je begint met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hangt inhoudelijke waarderingen aan met `met_onderliggend(...)`, structurele tussenlagen met `met_subgroep(...)` en gedeeld-met-lagen met `gedeeld_met(...)`, en sluit af met `build()`. Die laatste telt de punten op en rondt de totaalpunten van de stelselgroep af op kwartpunten. Indien door afronding op kwartpunten een verschil ontstaat tussen de som van de waarderingen en de totaalpunten van de stelselgroep, wordt dat verschil toegevoegd als waardering **Afronding op kwartpunten**. Dit levert een `WoningwaarderingResultatenWoningwaarderingGroep`.
+Zo'n stelselgroep bouw je stapsgewijs op: je begint met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hangt inhoudelijke waarderingen aan met `met_onderliggend(...)`, structurele tussenlagen met `met_subgroep(...)` en gedeeld-met-lagen met `gedeeld_met(...)`, en sluit af met `build()`. Die laatste telt de punten op en rondt de totaalpunten van de stelselgroep af op kwartpunten. Indien door afronding op kwartpunten een verschil ontstaat tussen de som van de waarderingen en de totaalpunten van de stelselgroep, wordt dat verschil toegevoegd als waardering **Afronding op kwartpunten**. Dit levert een `WoningwaarderingResultatenWoningwaarderingGroep`.
