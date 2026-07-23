@@ -38,7 +38,7 @@ BUITENRUIMTEN
   Privé                                                      4.00 m²   1.40 pt
     - Balkon                                                 3.93 m²
   Privé buitenruimten aanwezig                                         2.00 pt
-  Afronding                                                            0.10 pt
+  Afronding op kwartpunten                                             0.10 pt
                                                                       --------
   Totaal                                                               3.50 pt
 
@@ -70,6 +70,6 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel II                                                        24.79 pt
     - Oppervlakte van vertrekken en overige ruimten         43.00 m²
     - Factor II                                           242.00 EUR
-  Afronding                                                           -0.12 pt
+  Afronding op kwartpunten                                            -0.12 pt
                                                                       --------
   Totaal                                                              41.50 pt

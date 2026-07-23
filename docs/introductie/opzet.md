@@ -136,4 +136,4 @@ Een paar voorbeelden:
 
 Zo'n stelselgroep-groep bouw je stapsgewijs op: je begint met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hangt inhoudelijke waarderingen aan met `met_onderliggend(...)`, structurele tussenlagen met `met_subgroep(...)` en gedeeld-met-lagen met `gedeeld_met(...)`, en sluit af met `build()`. Die laatste telt de punten op en levert een `WoningwaarderingResultatenWoningwaarderingGroep`.
 
-Na het opbouwen van alle stelselgroepen voegt `Stelsel.waardeer()` per groep indien nodig een **Afronding**-waardering toe (`{stelselgroep}__afronding`): een herleidbaarheids-sluitpost zodat de som van alle waarderingspunten gelijk is aan het rubriektotaal na afronding op 0,25 punt. Zie `CONTEXT.md` onder Afronding.
+Na het opbouwen van alle stelselgroepen voegt `Stelsel.waardeer()` per groep indien nodig een **Afronding op kwartpunten**-waardering toe (`{stelselgroep}__afronding_op_kwartpunten`): een herleidbaarheids-sluitpost zodat de som van alle waarderingspunten gelijk is aan het rubriektotaal na afronding op 0,25 punt. Zie `CONTEXT.md` onder Afronding op kwartpunten.

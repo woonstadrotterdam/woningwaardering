@@ -98,9 +98,9 @@ Verwijzing van een waardering naar een bovenliggend criterium binnen dezelfde st
 
 Een waardering die een puntencap toepast. Als die waardering zelf gedeeld wordt én de naam een numeriek puntental bevat (bijv. `Maximaal 4 punten`), heet die in de output `Maximering` (of `Maximering voor …` wanneer het onderwerp onderscheidend is). Beschrijvende maximeringen zonder puntental (bijv. `Maximaal evenveel punten als aanrecht`) blijven ongewijzigd. Een maximering die alleen op het al gedeelde totaal geldt (zoals buitenruimten max. 15) behoudt ook het puntental in de naam.
 
-### Afronding
+### Afronding op kwartpunten
 
-Een correctie-waardering die de som van detailwaarderingen reconcileert met het rubriektotaal (`groep.punten`) na afronding op 0,25 punt (beleidsboek: afronding per rubriek). Alleen aanwezig wanneer er puntdragende detailwaarderingen zijn én hun som afwijkt van het groepstotaal; id `{stelselgroep}__afronding`, direct onder de stelselgroep. Dit is een herleidbaarheids-sluitpost in de VERA-output, geen apart beleidsboek-criterium.
+Een correctie-waardering die de som van detailwaarderingen reconcileert met het rubriektotaal (`groep.punten`) na afronding op 0,25 punt (beleidsboek: afronding per rubriek). Alleen aanwezig wanneer er puntdragende detailwaarderingen zijn én hun som afwijkt van het groepstotaal; naam `Afronding op kwartpunten`, id `{stelselgroep}__afronding_op_kwartpunten`, direct onder de stelselgroep. Dit is een herleidbaarheids-sluitpost in de VERA-output, geen apart beleidsboek-criterium.
 
 ### Structuurterminologie
 

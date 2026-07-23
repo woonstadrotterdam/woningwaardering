@@ -130,8 +130,8 @@
         },
         {
           "criterium": {
-            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__afronding",
-            "naam": "Afronding"
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
           "punten": -0.1
         }

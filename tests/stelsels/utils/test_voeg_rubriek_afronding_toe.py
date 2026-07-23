@@ -61,8 +61,8 @@ def test_voeg_rubriek_afronding_toe_voegt_delta_toe() -> None:
     assert len(groep.woningwaarderingen) == 2
     afronding = groep.woningwaarderingen[-1]
     assert afronding.criterium is not None
-    assert afronding.criterium.id == "energieprestatie__afronding"
-    assert afronding.criterium.naam == "Afronding"
+    assert afronding.criterium.id == "energieprestatie__afronding_op_kwartpunten"
+    assert afronding.criterium.naam == "Afronding op kwartpunten"
     assert afronding.criterium.bovenliggende_criterium is None
     assert afronding.punten == -0.08
 
@@ -148,7 +148,7 @@ def test_voeg_rubriek_afronding_toe_negatieve_groep() -> None:
     assert groep.woningwaarderingen is not None
     afronding = groep.woningwaarderingen[-1]
     assert afronding.criterium is not None
-    assert afronding.criterium.id == "aftrekpunten__afronding"
+    assert afronding.criterium.id == "aftrekpunten__afronding_op_kwartpunten"
     assert afronding.punten == 0.05
 
 
@@ -171,7 +171,8 @@ def test_voeg_rubriek_afronding_toe_idempotent() -> None:
     afrondingen = [
         w
         for w in groep.woningwaarderingen
-        if w.criterium is not None and w.criterium.id == "energieprestatie__afronding"
+        if w.criterium is not None
+        and w.criterium.id == "energieprestatie__afronding_op_kwartpunten"
     ]
     assert len(afrondingen) == 1
     assert afrondingen[0].punten == -0.08

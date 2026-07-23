@@ -4,6 +4,6 @@ SAMENVATTING 2
 
 ENERGIEPRESTATIE
   A                                                          3.67 m²   2.39 pt
-  Afronding                                                            0.11 pt
+  Afronding op kwartpunten                                             0.11 pt
                                                                       --------
   Totaal                                                               2.50 pt

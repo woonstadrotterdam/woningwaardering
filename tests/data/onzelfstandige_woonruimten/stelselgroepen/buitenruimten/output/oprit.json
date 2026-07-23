@@ -46,8 +46,8 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__afronding",
-            "naam": "Afronding"
+            "id": "buitenruimten__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
           "punten": 0.05
         }

@@ -81,8 +81,8 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__afronding",
-            "naam": "Afronding"
+            "id": "oppervlakte_van_overige_ruimten__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
           "punten": -0.08
         }

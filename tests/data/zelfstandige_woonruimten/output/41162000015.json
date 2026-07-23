@@ -261,8 +261,8 @@
         },
         {
           "criterium": {
-            "id": "buitenruimten__afronding",
-            "naam": "Afronding"
+            "id": "buitenruimten__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
           "punten": -0.05
         }
@@ -523,8 +523,8 @@
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__afronding",
-            "naam": "Afronding"
+            "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
           "punten": 0.01
         }

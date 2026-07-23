@@ -914,8 +914,9 @@ def _is_rubriek_afronding_waardering(
     criterium = waardering.criterium
     if criterium is None or criterium.id is None:
         return False
-    return criterium.id.endswith("__afronding") and (
-        criterium.bovenliggende_criterium is None
+    return criterium.bovenliggende_criterium is None and (
+        criterium.id.endswith("__afronding_op_kwartpunten")
+        or criterium.id.endswith("__afronding")
     )
 
 
@@ -924,9 +925,9 @@ def voeg_rubriek_afronding_toe(
 ) -> None:
     """Reconcileer de som van waarderingen met ``groep.punten`` via een Afronding-regel.
 
-    Voegt alleen een waardering ``Afronding`` toe wanneer het verschil tussen het
-    gezaghebbende groepstotaal en de exacte som van waarderingspunten ongelijk is
-    aan nul. ``groep.punten`` zelf blijft ongewijzigd.
+    Voegt alleen een waardering ``Afronding op kwartpunten`` toe wanneer het verschil
+    tussen het gezaghebbende groepstotaal en de exacte som van waarderingspunten
+    ongelijk is aan nul. ``groep.punten`` zelf blijft ongewijzigd.
 
     Geen Afronding wanneer er geen puntdragende detailwaarderingen zijn (bijvoorbeeld
     oppervlakterubrieken waar alleen ``aantal`` op de regels staat en de punten
@@ -939,7 +940,7 @@ def voeg_rubriek_afronding_toe(
     if stelselgroep is None or stelselgroep.name is None:
         return
 
-    afronding_id = f"{stelselgroep.name}__afronding"
+    afronding_id = f"{stelselgroep.name}__afronding_op_kwartpunten"
     waarderingen_zonder_afronding = [
         w for w in groep.woningwaarderingen if not _is_rubriek_afronding_waardering(w)
     ]
@@ -969,7 +970,7 @@ def voeg_rubriek_afronding_toe(
         WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
                 id=afronding_id,
-                naam="Afronding",
+                naam="Afronding op kwartpunten",
             ),
             punten=float(delta),
         )
