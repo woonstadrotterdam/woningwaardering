@@ -1,26 +1,26 @@
 SAMENVATTING
-  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen     11.50 pt
-                                                                      --------
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen      11.50 pt
+                                                                      ---------
 
 GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
   Gedeeld met 2 adressen
-    - Oppervlakte van vertrekken                                       5.00 pt
+    - Oppervlakte van vertrekken                                        5.00 pt
       - Badruimte                                           10.00 m²
     - Sanitair
       - Badruimte
-        - Wastafel                                           1.00 st   0.50 pt
-        - Bad                                                1.00 st   3.00 pt
+        - Wastafel                                           1.00 st    0.50 pt
+        - Bad                                                1.00 st    3.00 pt
         - Extra voorzieningen
-          - Bubbelfunctie van het bad                        1.00 st   0.75 pt
-          - Douchewand                                       1.00 st   0.63 pt
-          - Handdoekenradiator                               1.00 st   0.38 pt
-          - Ingebouwd kastje met in- of opgebouwde wastafel         1.00 st   0.50 pt
-          - Kastruimte                                       2.00 st   0.75 pt
-          - Maximering voor Kastruimte                                -0.38 pt
-          - Stopcontact bij wastafel                         1.00 st   0.13 pt
-          - Éénhandsmengkraan                                1.00 st   0.13 pt
-          - Thermostatische mengkraan                        1.00 st   0.25 pt
-          - Max verdubbeling punten bad en douche                     -0.13 pt
-  Afronding op kwartpunten                                            -0.01 pt
-                                                                      --------
-  Totaal                                                              11.50 pt
+          - Bubbelfunctie van het bad                        1.00 st    0.75 pt
+          - Douchewand                                       1.00 st    0.63 pt
+          - Handdoekenradiator                               1.00 st    0.38 pt
+          - Ingebouwd kastje met in- of opgebouwde wastafel  1.00 st    0.50 pt
+          - Kastruimte                                       2.00 st    0.75 pt
+          - Maximering voor Kastruimte                                 -0.38 pt
+          - Stopcontact bij wastafel                         1.00 st    0.13 pt
+          - Éénhandsmengkraan                                1.00 st    0.13 pt
+          - Thermostatische mengkraan                        1.00 st    0.25 pt
+          - Max verdubbeling punten bad en douche                      -0.13 pt
+  Afronding op kwartpunten                                             -0.01 pt
+                                                                      ---------
+  Totaal                                                               11.50 pt

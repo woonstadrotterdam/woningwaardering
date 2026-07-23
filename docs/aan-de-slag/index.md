@@ -627,6 +627,13 @@ with open(
               "naam": "Euro"
             }
           }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.1
         }
       ]
     },
@@ -762,6 +769,7 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel II                                                         19.38 pt
     - Oppervlakte van vertrekken en overige ruimten        148.00 m²
     - Factor II                                           242.00 EUR
+  Afronding op kwartpunten                                              0.10 pt
                                                                       ---------
   Totaal                                                               64.75 pt
 ```
@@ -1191,6 +1199,13 @@ De output daarvan is een VERA woningwaarderingstelsel object.
               "naam": "Euro"
             }
           }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.03
         }
       ]
     },
@@ -1294,6 +1309,7 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel II                                                         69.95 pt
     - Oppervlakte van vertrekken en overige ruimten         41.00 m²
     - Factor II                                           242.00 EUR
+  Afronding op kwartpunten                                              0.03 pt
                                                                       ---------
   Totaal                                                              115.25 pt
 ```
