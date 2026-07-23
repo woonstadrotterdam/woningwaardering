@@ -219,7 +219,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
-        woningwaardering_groep.punten = float(punten)
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

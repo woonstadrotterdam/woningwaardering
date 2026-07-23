@@ -7,5 +7,6 @@ BUITENRUIMTEN
     - Balkon                                                          6.00 m²     2.25 pt
     - Gedeeld met 2 adressen
       - Tuin                                                          6.00 m²     1.13 pt
+  Afronding op kwartpunten                                                        0.13 pt
                                                                                 ---------
   Totaal                                                                          3.50 pt

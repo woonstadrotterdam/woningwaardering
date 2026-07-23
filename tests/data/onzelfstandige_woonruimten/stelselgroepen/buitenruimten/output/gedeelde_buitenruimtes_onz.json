@@ -63,6 +63,13 @@
             }
           },
           "punten": 0.75
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": -0.05
         }
       ]
     }

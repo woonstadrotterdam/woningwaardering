@@ -198,6 +198,13 @@
             "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": -0.05
         }
       ]
     },
@@ -446,6 +453,13 @@
               "naam": "Euro"
             }
           }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": -0.05
         }
       ]
     },

@@ -11,5 +11,6 @@ GEMEENSCHAPPELIJKE PARKEERRUIMTEN
       - Type II                                                       1.00 st     0.50 pt
     - Gedeeld met 5 adressen
       - Type III                                                      1.00 st     0.27 pt
+  Afronding op kwartpunten                                                       -0.02 pt
                                                                                 ---------
   Totaal                                                                          2.25 pt

@@ -181,6 +181,13 @@
             }
           },
           "punten": -0.21
+        },
+        {
+          "criterium": {
+            "id": "sanitair__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.03
         }
       ]
     }

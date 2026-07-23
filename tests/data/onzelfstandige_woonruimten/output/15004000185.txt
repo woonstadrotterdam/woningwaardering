@@ -13,7 +13,7 @@ SAMENVATTING 15004000185
   Aftrekpunten
   Prijsopslag monumenten
                                                                                 ---------
-  TOTAAL                                                                         54.00 pt
+  Totaal afgerond op hele punten                                                 54.00 pt
   Maximaal redelijke huur                                           550.19 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
@@ -34,6 +34,7 @@ VERKOELING EN VERWARMING
 
 ENERGIEPRESTATIE
   Bouwjaar 1998                                                      24.50 m²     8.58 pt
+  Afronding op kwartpunten                                                       -0.08 pt
                                                                                 ---------
   Totaal                                                                          8.50 pt
 

@@ -357,7 +357,11 @@ class WaarderingsgroepBuilder:
         De boom wordt doorlopen (elke bovenliggende vóór zijn onderliggende) en
         de groepspunten worden gesommeerd.
         """
-        from woningwaardering.stelsels.utils import som_punten_waarderingen
+        from woningwaardering.stelsels.utils import (
+            rond_af_op_kwart,
+            som_punten_waarderingen,
+            voeg_stelselgroep_afronding_toe,
+        )
 
         groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
@@ -370,7 +374,15 @@ class WaarderingsgroepBuilder:
             for onderliggende in self._actieve_onderliggende
             for waardering in onderliggende._zelf_en_onderliggende()
         ]
-        groep.punten = som_punten_waarderingen(groep.woningwaarderingen)
+        onafgerond = som_punten_waarderingen(groep.woningwaarderingen)
+        afgerond = rond_af_op_kwart(onafgerond)
+        groep.punten = float(afgerond)
+        voeg_stelselgroep_afronding_toe(
+            groep,
+            onafgerond=onafgerond,
+            afgerond=afgerond,
+            stelselgroep=self.stelselgroep,
+        )
         return groep
 
     @property

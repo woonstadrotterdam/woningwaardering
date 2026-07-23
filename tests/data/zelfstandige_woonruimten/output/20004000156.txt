@@ -12,7 +12,7 @@ SAMENVATTING 20004000156
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw                                            50.00 pt
                                                                                 ---------
-  TOTAAL                                                                        207.00 pt
+  Totaal afgerond op hele punten                                                207.00 pt
   Maximaal redelijke huur                                          1372.24 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
@@ -37,6 +37,7 @@ BUITENRUIMTEN
     - Balkon 2                                                       14.99 m²
     - Balkon 3                                                        5.89 m²
   Privé buitenruimten aanwezig                                                    2.00 pt
+  Afronding op kwartpunten                                                       -0.05 pt
                                                                                 ---------
   Totaal                                                                         11.75 pt
 
@@ -63,6 +64,7 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel II                                                                   15.60 pt
     - Oppervlakte van vertrekken en overige ruimten                  80.00 m²
     - Factor II                                                     242.00 EUR
+  Afronding op kwartpunten                                                       -0.05 pt
                                                                                 ---------
   Totaal                                                                         35.25 pt
 

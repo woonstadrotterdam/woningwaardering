@@ -12,7 +12,7 @@ SAMENVATTING 12006000004
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw
                                                                                 ---------
-  TOTAAL                                                                        170.00 pt
+  Totaal afgerond op hele punten                                                170.00 pt
   Maximaal redelijke huur                                          1118.23 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
@@ -40,6 +40,7 @@ BUITENRUIMTEN
   Privé                                                               2.00 m²     0.70 pt
     - Balkon                                                          1.82 m²
   Privé buitenruimten aanwezig                                                    2.00 pt
+  Afronding op kwartpunten                                                        0.05 pt
                                                                                 ---------
   Totaal                                                                          2.75 pt
 
@@ -71,5 +72,6 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel II                                                                   21.90 pt
     - Oppervlakte van vertrekken en overige ruimten                  60.00 m²
     - Factor II                                                     242.00 EUR
+  Afronding op kwartpunten                                                        0.11 pt
                                                                                 ---------
   Totaal                                                                         42.75 pt

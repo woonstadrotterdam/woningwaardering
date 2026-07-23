@@ -1,10 +1,8 @@
 import warnings
 from datetime import date
-from decimal import Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
@@ -56,27 +54,9 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
 
         woningwaardering_groep = waarderingsgroep_builder.build()
 
-        punten_totaal = float(
-            utils.rond_af_op_kwart(
-                Decimal(
-                    str(
-                        sum(
-                            woningwaardering.punten
-                            for woningwaardering in (
-                                woningwaardering_groep.woningwaarderingen or []
-                            )
-                            if woningwaardering.punten is not None
-                        )
-                    )
-                )
-            )
-        )
-
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {punten_totaal} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
-
-        woningwaardering_groep.punten = punten_totaal
 
         return woningwaardering_groep
 

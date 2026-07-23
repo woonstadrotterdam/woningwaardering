@@ -238,6 +238,13 @@
             }
           },
           "punten": 0.0625
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.109375
         }
       ]
     }

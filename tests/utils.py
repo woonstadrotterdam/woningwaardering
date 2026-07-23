@@ -315,7 +315,7 @@ def assert_geen_dubbele_punten_in_hierarchie(
 def assert_groep_punten_is_som_van_waarderingen(
     resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
 ) -> None:
-    """groep.punten is de som van detailpunten wanneer detailregels punten tonen."""
+    """groep.punten is de som van de waarderingen wanneer die punten tonen."""
     for groep in resultaat.groepen or []:
         waarderingen = groep.woningwaarderingen or []
         if groep.punten is None:
@@ -329,7 +329,7 @@ def assert_groep_punten_is_som_van_waarderingen(
             and groep.criterium_groep.stelselgroep.naam
         )
         assert groep.punten == verwacht, (
-            f"groep.punten ({groep.punten}) != som detailpunten ({verwacht}) "
+            f"groep.punten ({groep.punten}) != som van de waarderingen ({verwacht}) "
             f"in {groep_naam}"
         )
 

@@ -72,6 +72,13 @@
             }
           },
           "punten": 0.2
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.05
         }
       ]
     }

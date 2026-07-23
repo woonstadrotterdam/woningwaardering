@@ -9,5 +9,6 @@ GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
   Gedeeld met 6 adressen
     - Oppervlakte van vertrekken                                                  1.67 pt
       - Woonkamer                                                    10.00 m²
+  Afronding op kwartpunten                                                        0.08 pt
                                                                                 ---------
   Totaal                                                                          3.75 pt
