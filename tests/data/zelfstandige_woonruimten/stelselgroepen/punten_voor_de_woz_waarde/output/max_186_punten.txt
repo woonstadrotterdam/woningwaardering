@@ -1,14 +1,14 @@
 SAMENVATTING
-  Punten voor de WOZ-waarde                                           65.75 pt
-                                                                      --------
+  Punten voor de WOZ-waarde                                            65.75 pt
+                                                                      ---------
 
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             713900.00 EUR
-  Onderdeel I                                                         46.57 pt
+  Onderdeel I                                                          46.57 pt
     - Factor I                                          15329.00 EUR
-  Onderdeel II                                                        49.17 pt
+  Onderdeel II                                                         49.17 pt
     - Oppervlakte van vertrekken en overige ruimten         60.00 m²
     - Factor II                                           242.00 EUR
   Maximering WOZ-punten tot 186 punten totaal                         -30.00 pt
-                                                                      --------
-  Totaal                                                              65.75 pt
+                                                                      ---------
+  Totaal                                                               65.75 pt
