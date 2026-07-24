@@ -24,7 +24,7 @@ Het Microservices team van Woonstad Rotterdam is in Q1 2024 begonnen met het ont
 De package maakt het mogelijk om de woningwaardering te berekenen op basis van een digitale representatie van een woning. Steeds meer woningcorporaties en bedrijven digitaliseren hun woningbestand, vaak met behulp van een bouwwerkinformatiemodel (BIM). Met behulp van deze package worden bulkberekeningen van woningwaarderingen mogelijk. Bovendien kan de woningwaardering door deze package als API te gebruiken in een webapplicatie worden geïntegreerd. Onze berekening biedt een completere en inzichtelijkere berekening van het woningwaarderingsstelsel dan de momenteel beschikbare tools, zoals die van de [huurcommissie](https://www.huurcommissie.nl/huurders/sociale-huurwoning/maximale-huurprijs-berekenen). Omdat onze package volledig open-source is zijn alle geïmplementeerde regels transparent en traceerbaar. Het helpt ook woningcorporaties en bedrijven te voldoen aan de wetgeving zoals de [Wet Betaalbare Huur](https://www.volkshuisvestingnederland.nl/onderwerpen/wet-betaalbare-huur).
 
 > [!NOTE]
-> Voor vragen kunt u contact opnemen met Team Microservices via [Tomer Gabay](mailto:tomer.gabay@woonstadrotterdam.nl), [Tiddo Loos](mailto:tiddo.loos@woonstadrotterdam.nl) of [Ben Verhees](mailto:ben.verhees@woonstadrotterdam.nl).
+> Voor vragen kunt u contact opnemen met Team Microservices via [Tomer Gabay](mailto:tomer.gabay@woonstadrotterdam.nl) of [Ben Verhees](mailto:ben.verhees@woonstadrotterdam.nl).
 
 ---
 
