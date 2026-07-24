@@ -1,4 +1,4 @@
-# Installatie
+# Voor ontwikkelaars
 
 Dit onderdeel bevat informatie voor ontwikkelaars die willen bijdragen aan de package.
 
