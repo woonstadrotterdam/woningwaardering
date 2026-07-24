@@ -3,7 +3,7 @@
     start="<!--tip-start-->"
     end="<!--tip-end-->"
 %}
-# Overzicht
+## Overzicht
 {%
     include-markdown "../README.md"
     start="<!--overzicht-start-->"

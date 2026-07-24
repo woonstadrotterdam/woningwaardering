@@ -74,8 +74,7 @@ plugins:
   - autorefs
 
 nav:
-  - Introductie:
-    - Overzicht: index.md
+  - Introductie: index.md
   - Aan de slag:
     - Aan de slag: aan-de-slag/index.md
   - Implementatietoelichtingen:
