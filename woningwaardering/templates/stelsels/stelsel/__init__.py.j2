@@ -1,9 +1,0 @@
-{% for stelselgroep, className in stelselgroepen -%}
-from .{{ stelselgroep }} import {{ className }}
-{% endfor %}
-
-__all__ = [
-{%- for stelselgroep, className in stelselgroepen %}
-    "{{ className }}",
-{%- endfor %}
-]
