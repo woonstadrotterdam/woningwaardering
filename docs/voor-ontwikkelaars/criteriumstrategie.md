@@ -64,7 +64,7 @@ Bij gedeelde ruimten kan er op twee niveaus sprake zijn van deling: eerst (waar 
 
 Een subgroep of gedeeld-met-laag verschijnt pas in de output als er inhoud onder hangt, of als er punten, een aantal of een opslagpercentage aan wordt toegekend. Lege groeperende lagen blijven weg.
 
-Meestal draagt een subgroep zelf geen punten: die staan op de onderliggende detailregels. Bij de oppervlakte-stelselgroepen (`oppervlakte_van_vertrekken` en `oppervlakte_van_overige_ruimten`) staan de punten juist op de subgroep (berekend over het afgeronde groepstotaal); de onderliggende ruimteregels dragen dan alleen het aantal vierkante meters.
+Meestal draagt een subgroep zelf geen punten: die staan op de onderliggende waarderingen. Bij de oppervlakte-stelselgroepen (`oppervlakte_van_vertrekken` en `oppervlakte_van_overige_ruimten`) staan de punten juist op de subgroep (berekend over het afgeronde groepstotaal); de onderliggende ruimteregels dragen dan alleen het aantal vierkante meters.
 
 Stapsgewijs: begin met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hang waarderingen en lagen aan, en sluit af met `build()`. Die laatste telt de punten op en rondt de totaalpunten van de stelselgroep af op kwartpunten. Ontstaat door die afronding een verschil tussen de som van de waarderingen en de totaalpunten van de stelselgroep, dan voegen we dat verschil toe als waardering **Afronding op kwartpunten**. Uiteindelijk leveren deze stappen een `WoningwaarderingResultatenWoningwaarderingGroep` op.
 
