@@ -66,7 +66,7 @@ _TABEL_RIJ_INSCHUIF = "  "
 _GETAL_EENHEID_GAP = " "
 
 
-class WoningwaarderingTabel:
+class WoningwaarderingRapport:
     """Tekstuele weergave van een woningwaarderingresultaat (samenvatting + detailsecties)."""
 
     def __init__(self, lines: list[str]) -> None:
@@ -163,7 +163,7 @@ def _tabel_regel(
 ) -> str:
     """Formatteer één tabelregel met de gedeelde kolomopmaak.
 
-    Wordt gebruikt voor de regels in de samenvatting, de detailregels in een
+    Wordt gebruikt voor de regels in de samenvatting, de waarderingen in een
     stelselgroep en de totaalregels: de naam staat links; getal, punten en opslag
     lijnen rechts uit op vaste kolomeinden; de eenheid staat in een vaste kolom
     direct na het getal.
@@ -533,23 +533,23 @@ def _render_samenvatting(
     return lines
 
 
-def naar_tabel(
+def naar_rapport(
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat
         | WoningwaarderingResultatenWoningwaarderingGroep
     ),
     *,
     eenheid_id: str | None = None,
-) -> WoningwaarderingTabel:
+) -> WoningwaarderingRapport:
     """
-    Genereer een tabel met de details van een woningwaarderingresultaat.
+    Genereer een rapport met de details van een woningwaarderingresultaat.
 
     Args:
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | WoningwaarderingResultatenWoningwaarderingGroep): Het object om de gegevens uit te halen.
         eenheid_id (str | None): Optioneel eenheid-id voor de samenvattingskop.
 
     Returns:
-        WoningwaarderingTabel: Samenvatting (volledig resultaat) en detailsecties.
+        WoningwaarderingRapport: Samenvatting (volledig resultaat) en detailsecties.
     """
     if isinstance(
         woningwaardering_resultaat, WoningwaarderingResultatenWoningwaarderingGroep
@@ -586,7 +586,7 @@ def naar_tabel(
         eerste_detail = False
         lines.extend(detail)
 
-    return WoningwaarderingTabel(lines)
+    return WoningwaarderingRapport(lines)
 
 
 def energieprestatie_met_geldig_label(

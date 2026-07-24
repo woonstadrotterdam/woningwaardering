@@ -9,7 +9,7 @@ from pytest import fail
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_tabel, normaliseer_ruimte_namen
+from woningwaardering.stelsels.utils import naar_rapport, normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -79,8 +79,8 @@ def assert_output_model(
         difflib.unified_diff(
             fromfile="verwacht",
             tofile="testresultaat",
-            a=naar_tabel(verwacht_resultaat).get_string().split("\n"),
-            b=naar_tabel(resultaat).get_string().split("\n"),
+            a=naar_rapport(verwacht_resultaat).get_string().split("\n"),
+            b=naar_rapport(resultaat).get_string().split("\n"),
             lineterm="",
             n=3,
         )

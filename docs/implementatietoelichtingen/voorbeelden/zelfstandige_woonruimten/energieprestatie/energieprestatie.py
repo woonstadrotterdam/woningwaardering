@@ -4,21 +4,21 @@ from datetime import date, datetime
 from loguru import logger
 
 from woningwaardering import Woningwaardering
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenPand,
     EenhedenEnergieprestatie,
+    EenhedenPand,
     EenhedenPrijscomponent,
 )
 from woningwaardering.vera.referentiedata import (
-    Pandsoort,
+    Energielabel,
     Energieprestatiesoort,
     Energieprestatiestatus,
-    Energielabel,
+    Pandsoort,
     Prijscomponentdetailsoort,
+    Woningwaarderingstelsel,
 )
-from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
 
 
 def get_eenheid():
@@ -58,7 +58,7 @@ def main():
     warnings.filterwarnings("default")
     eenheid = get_eenheid()
     woningwaardering = Woningwaardering().waardeer(eenheid)
-    print(naar_tabel(woningwaardering))
+    print(naar_rapport(woningwaardering))
 
 
 if __name__ == "__main__":

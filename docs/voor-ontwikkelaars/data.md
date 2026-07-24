@@ -50,6 +50,12 @@ class _EenhedenRuimte(BaseModel):
 
 De task `genereer-vera-bvg-modellen` zal de body van deze classes samenvoegen met de gelijknamige VERA class en zo de toegevoegde attributen beschikbaar maken.
 
+## Lookuptabellen
+
+In lookuptabellen slaan we constanten en variabelen op die nodig zijn om de punten van een stelselgroep te berekenen.
+In de `woningwaardering`-package gebruiken we CSV als bestandsformaat voor lookuptabellen.
+Dat formaat is bewust gekozen: zodra lookuptabeldata uit meerdere rijen bestaat, blijft CSV vaak beter leesbaar dan bijvoorbeeld JSON of YAML.
+
 ## Referentiedata
 
 We maken gebruik van de [VERA Referentiedata](https://github.com/Aedes-datastandaarden/vera-referentiedata).
