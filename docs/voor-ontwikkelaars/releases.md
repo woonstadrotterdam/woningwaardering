@@ -37,14 +37,11 @@ daar expliciet om vraagt.
 
 ### Overgang vanaf versie 5.202607.0
 
-We gebruiken deze versienummering vanaf versie `5.202607.0`. Tot en met versie
-`4.3.4` stond `MINOR` voor compatibele nieuwe functionaliteit en `PATCH` voor
-compatibele bugfixes. Vanaf versie `5.202607.0` identificeert `MINOR` de
-beleidsboekversie als `YYYYMM` en telt `PATCH` de compatibele releases binnen die
-beleidsboekversie.
+Vanaf versie `5.202607.0` gebruiken we een nieuwe manier van versienummering. Tot en met versie `4.3.4` stond `MINOR` voor nieuwe functionaliteit die compatibel was met eerdere versies, en `PATCH` voor compatibele bugfixes.
 
-De verhoging van `MAJOR` naar `5` markeert de incompatibele wijzigingen in de
-publieke outputstructuur van deze release.
+Vanaf versie `5.202607.0` geeft `MINOR` de versie van het beleidsboek aan in het formaat `YYYYMM`. `PATCH` geeft vervolgens het volgnummer van de compatibele releases binnen die beleidsboekversie aan.
+
+De verhoging van `MAJOR` naar `5` markeert een incompatibele wijziging in de outputstructuur van deze release.
 
 ## Releaseproces
 
