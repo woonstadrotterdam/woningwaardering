@@ -10,7 +10,7 @@ from pydantic import ValidationError
 
 from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -159,7 +159,7 @@ def main() -> int:
 
             txt_path = output_file_path.with_suffix(".txt")
             txt_content = (
-                naar_tabel(
+                naar_rapport(
                     woningwaardering_resultaat, eenheid_id=eenheid_input.id
                 ).get_string()
                 + "\n"

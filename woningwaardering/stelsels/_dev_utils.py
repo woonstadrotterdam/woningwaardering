@@ -131,5 +131,5 @@ class DevelopmentContext:
         eenheid_id: str | None = None,
     ) -> None:
         print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-        tabel = utils.naar_tabel(resultaat, eenheid_id=eenheid_id)
-        print(tabel)
+        rapport = utils.naar_rapport(resultaat, eenheid_id=eenheid_id)
+        print(rapport)

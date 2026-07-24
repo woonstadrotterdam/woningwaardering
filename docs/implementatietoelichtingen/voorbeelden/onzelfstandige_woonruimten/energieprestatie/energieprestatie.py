@@ -2,20 +2,20 @@ import warnings
 from datetime import date, datetime
 
 from woningwaardering import Woningwaardering
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenRuimte,
     EenhedenEnergieprestatie,
+    EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Ruimtesoort,
-    Ruimtedetailsoort,
+    Energielabel,
     Energieprestatiesoort,
     Energieprestatiestatus,
-    Energielabel,
+    Ruimtedetailsoort,
+    Ruimtesoort,
+    Woningwaarderingstelsel,
 )
-from woningwaardering.vera.referentiedata import Woningwaarderingstelsel
 
 
 def get_eenheid():
@@ -59,7 +59,7 @@ def main():
     warnings.filterwarnings("ignore")
     eenheid = get_eenheid()
     woningwaardering = Woningwaardering().waardeer(eenheid)
-    print(naar_tabel(woningwaardering))
+    print(naar_rapport(woningwaardering))
 
 
 if __name__ == "__main__":
