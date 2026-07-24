@@ -14,12 +14,12 @@ De primaire context is de publieke `woningwaardering`-package. Lokale of organis
 - `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, naamgeving, tests, data, logging en releases.
 - [Wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Besluit huurprijzen woonruimte)
 
-Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen is de volgorde van autoriteit: **wettekst > online beleidsboek > implementatietoelichting**. De implementatietoelichting is een kopie van het online beleidsboek en kan achterlopen; bij twijfel of tegenstrijdigheid gaat de hoger geplaatste bron voor, maar tegenstrijdigheden dienen altijd vermeld te worden. Zie de definities _Beleidsboek_ en _Implementatietoelichting_ hieronder voor hun relatie.
+Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen geldt de volgende volgorde van autoriteit: **wettekst > online beleidsboek > implementatietoelichting**. De implementatietoelichting is een kopie van het online beleidsboek en kan achterlopen; bij twijfel of tegenstrijdigheid is de hoger geplaatste bron leidend. Tegenstrijdigheden moeten altijd worden vermeld. Zie de definities _Beleidsboek_ en _Implementatietoelichting_ hieronder voor hun relatie.
 
 ## Projectgrenzen
 
 - De package berekent woningwaarderingen op basis van een digitale representatie van een woonruimte.
-- De berekening volgt het beleidsboek van de Huurcommissie, met juli 2026 als actuele ankerdatum in de bestaande documentatie.
+- De berekening volgt het beleidsboek van de Huurcommissie.
 - De input en output volgen de VERA-standaard, met de concrete versies vastgelegd in `pyproject.toml`.
 - Aan berekeningen en output kunnen geen rechten worden ontleend. Gebruikers moeten documentatie, implementatietoelichtingen en openstaande issues raadplegen om resultaten goed te interpreteren.
 - Wanneer VERA of beschikbare inputdata een beleidsregel niet volledig kan dragen, wordt de gekozen interpretatie in de implementatietoelichtingen beschreven.
@@ -36,11 +36,11 @@ Het woningwaarderingsstelsel: het puntensysteem waarmee de kwaliteit van woonrui
 
 ### Woonruimte
 
-De woning of wooneenheid die gewaardeerd wordt. De package onderscheidt stelsels voor zelfstandige en onzelfstandige woonruimten.
+De woning of wooneenheid die we waarderen. De package onderscheidt stelsels voor zelfstandige en onzelfstandige woonruimten.
 
 ### Eenheid
 
-De digitale representatie van een woonruimte in het VERA BVG-model, meestal `EenhedenEenheid`. Een eenheid bevat de gegevens waarop de waardering wordt gebaseerd.
+De digitale representatie van een woonruimte in het VERA BVG-model, meestal `EenhedenEenheid`. Een eenheid bevat de gegevens waarop we de waardering baseren.
 
 ### Stelsel
 
@@ -56,11 +56,11 @@ De datum waarop de waardering wordt bepaald. De peildatum bepaalt onder meer of 
 
 ### Beleidsboek
 
-De door de Huurcommissie gepubliceerde uitleg van de [wet van het WWS](https://wetten.overheid.nl/BWBR0003237/2026-01-01). Het online beleidsboek is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Beleidsboektekst is de inhoudelijke basis voor de implementatie, maar kan interpretatieruimte of technische beperkingen bevatten.
+De door de Huurcommissie gepubliceerde uitleg van de [wet van het WWS](https://wetten.overheid.nl/BWBR0003237/2026-01-01). Het online beleidsboek is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). De tekst van het beleidsboek vormt de inhoudelijke basis voor de implementatie, maar kan ruimte laten voor interpretatie of botsen met technische beperkingen.
 
 ### Implementatietoelichting
 
-Een markdown-kopie van het online beleidsboek met onze interpretaties en doorhalingen. Per stelselgroep staat hoe beleidsboekregels zijn vertaald naar code. Niet-geïmplementeerde passages worden doorgestreept; keuzes of interpretaties staan in toelichtende blokken. Deze staan in `docs/implementatietoelichtingen/`. De kopie kan achterlopen op het online beleidsboek; raadpleeg daarom bij puntberekeningen zowel de implementatietoelichting als het actuele online beleidsboek, naast de wettekst. Wijkt het online beleidsboek af, dan is dat leidend en is de afwijking een signaal dat onze toelichting bijgewerkt moet worden.
+Een markdown-kopie van het online beleidsboek met onze interpretaties en doorhalingen. Per stelselgroep leggen we vast hoe beleidsboekregels zijn vertaald naar code. Niet-geïmplementeerde passages worden doorgestreept; keuzes en interpretaties lichten we toe in aparte blokken. Deze toelichtingen staan in `docs/implementatietoelichtingen/`. De kopie kan achterlopen op het online beleidsboek; raadpleeg daarom bij puntberekeningen altijd ook het actuele online beleidsboek en de wettekst. Wijkt het online beleidsboek af, dan is dat leidend en is de afwijking een signaal dat onze toelichting moet worden bijgewerkt.
 
 ### VERA
 
@@ -88,19 +88,19 @@ Een samengestelde identifier voor een criterium in de output. Het is een pad-id:
 
 ### bovenliggendeCriterium
 
-Verwijzing van een waardering naar het bovenliggende criterium binnen dezelfde stelselgroep (JSON: `bovenliggendeCriterium`). Het veld gebruikt het generieke VERA-"Sleutels"-referentietype (`id`, `idExtern`, `idGegevensbeheerder`), zoals ook `EenheidSleutels` of `AdresSleutels` dat doen voor andere entiteiten. Zie `Structuurterminologie` hieronder voor hoe deze relatie de hiërarchie opbouwt.
+Verwijzing van een waardering naar het bovenliggende criterium binnen dezelfde stelselgroep (JSON: `bovenliggendeCriterium`). Dit veld gebruikt het generieke VERA-"Sleutels"-referentietype (`id`, `idExtern`, `idGegevensbeheerder`), zoals ook `EenheidSleutels` of `AdresSleutels` dat doen voor andere entiteiten. Zie `Structuurterminologie` hieronder voor hoe deze relatie de hiërarchie opbouwt.
 
 ### Maximering
 
-Een waardering die een puntencap toepast. Als die waardering zelf gedeeld wordt én de naam een numeriek puntental bevat (bijv. `Maximaal 4 punten`), heet die in de output `Maximering` (of `Maximering voor …` wanneer het onderwerp onderscheidend is). Beschrijvende maximeringen zonder puntental (bijv. `Maximaal evenveel punten als aanrecht`) blijven ongewijzigd. Een maximering die alleen op het al gedeelde totaal geldt (zoals buitenruimten max. 15) behoudt ook het puntental in de naam.
+Een waardering waarop een maximum van toepassing is. Als die waardering zelf gedeeld wordt én de naam een numeriek puntental bevat (bijv. `Maximaal 4 punten`), heet die in de output `Maximering` (of `Maximering voor …` wanneer het onderwerp onderscheidend is). Beschrijvende maximeringen zonder puntental (bijv. `Maximaal evenveel punten als aanrecht`) blijven ongewijzigd. Een maximering die alleen op het al gedeelde totaal geldt (zoals buitenruimten max. 15) behoudt ook het puntental in de naam.
 
 ### Structuurterminologie
 
-De samenhang tussen waarderingen in de output is een keten via `bovenliggendeCriterium`: elke regel is een waardering met een `criterium`, en een criterium kan onderliggende criteria hebben. Het onderscheid tussen beide is scherp: een **criterium** draagt de identiteit, naam en plek in de hiërarchie (`id`, `naam`, `bovenliggendeCriterium`, `meeteenheid`) en heeft nooit punten; `punten` en `aantal` zitten op de **waardering**. Een groeperende regel (zoals een gedeeld-met- of subgroepregel) is daarom in essentie een criterium zonder punten; een regel met toegekende punten is een waardering. In de regel dragen groeperende regels geen punten, maar bij uitzondering doet een subgroep dat wel — bijvoorbeeld in de oppervlakte-stelselgroepen, waar de punten over het afgeronde groepstotaal op de subgroep zelf worden gezet; het criterium-object blijft ook dan puntenloos. Een **subgroep** is een groeperend criterium binnen een stelselgroep — het is géén stelselgroep, maar kan wel dezelfde naam dragen indien de subgroep in een gemeenschappelijke stelselgroep wordt gewaardeerd (bijvoorbeeld 'Oppervlakte van vertrekken' binnen 'Gemeenschappelijke vertrekken, overige ruimten en voorzieningen'). Beschrijf de structuur met deze domeintaal — **waardering**, **criterium**, **subgroep**, **bovenliggende** en **onderliggende** — en niet met informatica-boomjargon als "knoop", "node", "leaf", "wortel", "root", "boom", "kind", "ouder" of "tree". De waardering boven een andere is de _bovenliggende_; een waardering zonder bovenliggende staat _direct onder de stelselgroep_.
+De samenhang tussen waarderingen in de output loopt via een keten van `bovenliggendeCriterium`-verwijzingen: elke regel is een waardering met een `criterium`, en een criterium kan onderliggende criteria hebben. Het onderscheid tussen beide is scherp: een **criterium** draagt de identiteit, naam en plek in de hiërarchie (`id`, `naam`, `bovenliggendeCriterium`, `meeteenheid`) en heeft nooit punten; `punten` en `aantal` zitten op de **waardering**. Een groeperende regel (zoals een gedeeld-met- of subgroepregel) is daarom in essentie een criterium zonder punten; een regel met toegekende punten is een waardering. In de regel dragen groeperende regels geen punten, maar bij uitzondering doet een subgroep dat wel — bijvoorbeeld in de oppervlakte-stelselgroepen, waar de punten over het afgeronde groepstotaal op de subgroep zelf worden gezet; het criterium-object blijft ook dan puntenloos. Een **subgroep** is een groeperend criterium binnen een stelselgroep — het is géén stelselgroep, maar kan wel dezelfde naam dragen als de subgroep in een gemeenschappelijke stelselgroep wordt gewaardeerd (bijvoorbeeld 'Oppervlakte van vertrekken' binnen 'Gemeenschappelijke vertrekken, overige ruimten en voorzieningen'). Beschrijf de structuur met deze domeintaal — **waardering**, **criterium**, **subgroep**, **bovenliggende** en **onderliggende** — en niet met informatica-boomjargon als "knoop", "node", "leaf", "wortel", "root", "boom", "kind", "ouder" of "tree". De waardering boven een andere is de _bovenliggende_; een waardering zonder bovenliggende staat _direct onder de stelselgroep_.
 
 ### UserWarning
 
-Een waarschuwing voor incomplete of onjuiste inputdata. De package faalt standaard op `UserWarning`, zodat gebruikers ontbrekende invoer bewust moeten behandelen. Gebruikers kunnen het warning-filter aanpassen zodat er sowieso een woningwaarderinguitkomst volgt.
+Een waarschuwing voor incomplete of onjuiste inputdata. De package faalt standaard op `UserWarning`, zodat gebruikers op de hoogte worden gebracht van de incomplete of onjusiste inputdata. Gebruikers kunnen het warningfilter aanpassen zodat er alsnog een woningwaarderingresultaat volgt.
 
 ### DeprecationWarning
 

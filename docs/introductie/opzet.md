@@ -2,64 +2,85 @@
 
 ## Implementatie beleidsboek huurcommissie
 
-Voor het berekenen van een woningwaardering worden de beleidsboeken van de Nederlandse Huurcommissie voor de waarderingsstelsels voor [zelfstandige](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte) woonruimten gevolgd.
-De beleidsboeken van de Huurcommissie Nederland volgen Nederlandse wet- en regelgeving zoals beschreven in het [Besluit huurprijzen woonruimte](https://wetten.overheid.nl/BWBR0003237/2026-01-01).
+Voor het berekenen van een woningwaardering volgen we de beleidsboeken van de Nederlandse Huurcommissie voor de waarderingsstelsels voor [zelfstandige](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte) woonruimten.
+De beleidsboeken van de Huurcommissie sluiten aan op de Nederlandse wet- en regelgeving zoals beschreven in het [Besluit huurprijzen woonruimte](https://wetten.overheid.nl/BWBR0003237/2026-01-01).
 
-Om berekeningen te maken met betrekking tot een woningwaardering wordt het gepubliceerde beleid vertaald naar Python-code.
-Een woningwaardering wordt gemaakt op basis van woningelementen.
-De stelselgroepen waarop gescoord wordt, zijn vastgelegd in het [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP) op www.coraveraonline.nl.
-Deze worden aangehouden in de opzet van de `woningwaardering`-package.
-Voor elke stelselgroep wordt een apart Python-object gemaakt met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
+Om woningwaarderingen te kunnen berekenen, vertalen we het gepubliceerde beleid naar Python-code.
+Een woningwaardering berekenen we op basis van eigenschappen van een woning, zoals oppervlakten van ruimten en energielabel.
+De stelselgroepen waarop punten worden toegekend, zijn vastgelegd in het [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP) op [www.coraveraonline.nl](https://www.coraveraonline.nl/).
+Deze volgen we ook in de opzet van de `woningwaardering`-package.
+Elke stelselgroep heeft een eigen Python-object met een naam die overeenkomt met [woningwaarderingstelselgroep](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP).
 
 De woningwaardering package volgt de beleidsboeken van de Nederlandse Huurcommissie voor [zelfstandige](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte) woonruimten, en daarmee de Nederlandse wet en regelgeving m.b.t. het waarderen van woningen. Tijdens de ontwikkeling van deze package komt het voor dat we inconsistenties in de beleidsboeken vinden of dat er ruimte is voor interpretatie. Daarnaast kan het voorkomen dat de VERA modellen, met eventuele uitbreidingen, niet toereikend zijn om de stelselgroep volgens het beleidsboek tot op de letter nauwkeurig te implementeren. In de [implementatietoelichtingen](../implementatietoelichtingen/index.md) onderbouwen wij hoe elke stelselgroep is geïmplementeerd en welke keuzes daarin gemaakt zijn.  
 
 ## Repository-structuur
 
-De repository-structuur is ingedeeld volgens de [referentiedata van stelselgroepen van de VERA-standaard](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP); eerst de stelsels (bijvoorbeeld _zelfstandig_, _onzelfstandig_) en vervolgens de stelselgroepen (bijvoorbeeld _Energieprestatie_, _Wasgelegenheid_).
-In de folders van de stelselgroepen bevindt zich de code voor het berekenen van de punten per stelselgroep. Indien bepaalde logica voor zowel zelfstandige als onzelfstandige woningen gelden, dan bevinden deze regels zich in de folder _gedeelde_logica_.
+De repository-structuur volgt de [referentiedata van stelselgroepen van de VERA-standaard](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP): eerst de stelsels (bijvoorbeeld _zelfstandig_ en _onzelfstandig_) en daarbinnen de stelselgroepen (bijvoorbeeld _Energieprestatie_ en _Wasgelegenheid_).
+In de folders van de stelselgroepen staat de code voor het berekenen van de punten per stelselgroep. Als bepaalde logica voor zowel zelfstandige als onzelfstandige woningen geldt, staat die in de folder _gedeelde_logica_.
 
 ## Design
 
-Het design van de `woningwaardering`-package is zo gekozen dat stelselgroep-objecten en bijbehorende regels modulair zijn.
+De `woningwaardering`-package is zo opgezet dat stelselgroep-objecten en bijbehorende regels modulair zijn.
 
 ## Lookuptabellen
 
-In lookuptabellen worden constanten en variabelen opgeslagen die nodig zijn bij het berekenen van de punten voor een stelselgroep.
-In de `woningwaardering` package wordt CSV gebruikt als bestandstype voor het opslaan van een lookuptabel.
-De keuze is op CSV gevallen omdat lookuptabeldata soms bestaat uit meerdere datarijen waardoor dit vaak minder leesbaar wordt wanneer dit bijvoorbeeld in json of yaml wordt opgeslagen.
+In lookuptabellen slaan we constanten en variabelen op die nodig zijn om de punten van een stelselgroep te berekenen.
+In de `woningwaardering`-package gebruiken we CSV als bestandsformaat voor lookuptabellen.
+Dat formaat is bewust gekozen: zodra lookuptabeldata uit meerdere rijen bestaat, blijft CSV vaak beter leesbaar dan bijvoorbeeld JSON of YAML.
 
 ## Warnings
 
-In de `woningwaardering` package worden `UserWarnings` gegenereerd wanneer de inputdata niet volledig of correct wordt aangeleverd.
-Deze waarschuwingen worden gegeven met een warning bericht en een type warning, bijvoorbeeld:
+In de `woningwaardering`-package genereren we `UserWarning`s wanneer inputdata onvolledig of onjuist is.
+Deze waarschuwingen geven we mee met een bericht en een warningtype, bijvoorbeeld:
 
 ```python
 warnings.warn("Dit is een warning", UserWarning)
 ```
 
-Standaard genereert de `woningwaardering` package een error wanneer een `UserWarning` wordt gegeven.
-Hoewel de package kan werken met incomplete data, is ervoor gekozen om standaard te falen bij incomplete inputdata, zodat de gebruiker hiervan op de hoogte wordt gebracht.
-Het is echter ook mogelijk om het warning filter terug te zetten naar de standaardinstellingen, waardoor een warning m.b.t. incomplete data niet leidt tot een error, maar slechts een _warning_:
+Standaard leidt een `UserWarning` in de `woningwaardering`-package tot een error.
+Hoewel de package kan werken met incomplete data, kiezen we ervoor om standaard te falen bij incomplete inputdata, zodat gebruikers weten dat invoer ontbreekt of onjuist is.
+Het is echter ook mogelijk om het warningfilter terug te zetten naar de standaardinstellingen. In dat geval leidt een waarschuwing over incomplete of onjuiste data niet tot een error, maar verschijnt die alleen als waarschuwing:
 
 ```python
 warnings.simplefilter("default", UserWarning)
 ```
 
-Voor verouderde input (bijvoorbeeld hernoemde modelattributen) gebruikt de package `DeprecationWarning`. Die blijven werken als warning: ze worden getoond en gelogd, maar leiden niet tot een error.
+Soms ondersteunen we tijdelijk nog even velden die eigenlijk niet meer gebruikt mogen worden, bijvoorbeeld na een wijziging in VERA. In dat geval tonen we een `DeprecationWarning`. Zo'n `DeprecationWarning` tonen we wel en loggen we ook, maar die leidt niet tot een error.
 
-Alle waarschuwingen die worden gegenereerd met `warnings.warn()`, worden standaard gelogd met `logger.warning()` en weergegeven in het standaardfout bestand.
-Mocht door de gebruiker logging worden uitgezet, dan zullen de warnings altijd te zien zijn voor de gebruiker in de output van de _stderr_.
+Alle waarschuwingen die met `warnings.warn()` worden gegenereerd, loggen we via `logger.warning()` (als logging aanstaat) en tonen we via de standaardfoutuitvoer (_stderr_).
+Ook als logging uitstaat, blijven deze waarschuwingen zichtbaar via _stderr_.
 
 ### Warning vs Exception
 
-Er wordt doorgaans in de stelselgroepversies gebruik gemaakt van `warnings.warn()` in plaats van het raisen van een exception.
-Hierdoor bestaat de mogelijkheid om stelselgroepen te berekenen voor stelselgroepen waarvoor de data wel compleet genoeg is, mits de `warnings.simplefilter` naar `default` is gezet.
+In de stelselgroepen gebruiken we doorgaans `warnings.warn()` in plaats van het raisen van een exceptie.
+Daardoor kunnen stelselgroepen waarvoor de data wel compleet genoeg is nog steeds worden berekend, mits `warnings.simplefilter` op `default` staat.
 
 ## Criteriumstrategie
 
-Tijdens een `waardeer()`-aanroep bouwen de builders in `woningwaardering/stelsels/builders.py` de uitkomst van een stelselgroep stap voor stap op. Een `WaarderingsgroepBuilder` verzamelt de waarderingen van één stelselgroep, en een `WaarderingBuilder` staat voor één waardering-in-opbouw. Terwijl de berekening loopt, hang je waarderingen onder elkaar tot een hiërarchie. Pas bij `build()` wordt die hiërarchie omgezet naar het VERA-resultaat: een platte lijst waarderingen waarin de onderlinge samenhang wordt vastgelegd met een verwijzing naar het bovenliggende criterium.
+Tijdens een `waardeer()`-aanroep bouw je de uitkomst van een stelselgroep eerst op als een hiërarchie van waarderingen. Daarvoor gebruiken we de builders in `woningwaardering/stelsels/builders.py`. Een `WaarderingsgroepBuilder` verzamelt de waarderingen binnen één stelselgroep, terwijl een `WaarderingBuilder` één afzonderlijke waardering opbouwt. Pas bij `build()` vertalen we die hiërarchie naar een resultaat in VERA-format: een platte lijst waarderingen waarin de samenhang via `bovenliggendeCriterium` is vastgelegd.
 
 Je bouwt die hiërarchie op met drie methoden. Met `met_onderliggend(...)` voeg je een inhoudelijke waardering toe: een regel die punten en/of een aantal kan dragen. Met `met_subgroep(...)` voeg je een groeperende tussenlaag toe waaronder je meerdere waarderingen kunt bundelen. Met `gedeeld_met(...)` voeg je de laag toe die aangeeft of een ruimte privé is of met hoeveel adressen en onzelfstandige woonruimten hij gedeeld wordt.
+
+### Criterium-id's
+
+Binnen de hiërarchische structuur heeft elke waardering een criterium met een uniek id. Dat id is een pad-id: de builders leiden het af uit de positie van de waardering in de structuur en houden `criterium.id` en `bovenliggendeCriterium` daarbij gerelateerd aan elkaar.
+
+Een waardering direct onder de stelselgroep krijgt het id `{stelselgroep}__{segment}`. Een waardering onder een andere waardering krijgt een id op basis van het bovenliggende criterium: `{bovenliggende_id}__{segment}`. De segmenten worden steeds met een dubbele underscore (`__`) aan elkaar gekoppeld.
+
+Het criterium-id beschrijft daarmee zowel de identiteit van het criterium als de plek ervan in de hiërarchie. De punten en het aantal horen bij de waardering zelf en maken geen onderdeel uit van het criterium.
+
+Voor de gedeeld-met-lagen gelden vaste segmentnamen: `prive` bij een aantal van ten hoogste 1, en `gedeeld_met_{n}_{soort}` bij een aantal groter dan 1 (met enkele underscores rond het aantal en de soort).
+
+Een paar voorbeelden:
+
+- `buitenruimten__prive__Space_108014713`
+- `buitenruimten__gedeeld_met_2_adressen__Space_108006357`
+- `buitenruimten__prive`
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen`
+- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen__keuken`
+- `verkoeling_en_verwarming__verwarmde_vertrekken`
+
+Zo'n stelselgroep bouw je stapsgewijs op: je begint met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hangt inhoudelijke waarderingen aan met `met_onderliggend(...)`, structurele tussenlagen met `met_subgroep(...)` en gedeeld-met-lagen met `gedeeld_met(...)`, en sluit af met `build()`. Die laatste telt de punten op en rondt de totaalpunten van de stelselgroep af op kwartpunten. Ontstaat door die afronding een verschil tussen de som van de waarderingen en de totaalpunten van de stelselgroep, dan voegen we dat verschil toe als waardering **Afronding op kwartpunten**. Uiteindelijk leveren deze stappen een `WoningwaarderingResultatenWoningwaarderingGroep` op.
 
 ### Lazy activatie
 
@@ -67,7 +88,7 @@ Een subgroep of gedeeld-met-laag verschijnt pas in de output zodra er daadwerkel
 
 ### Gelaagd delen met `gedeeld_met`
 
-Bij gedeelde ruimten kan er op twee niveaus sprake zijn van deling. `gedeeld_met(...)` legt daarom eerst, waar van toepassing, de laag voor deling met onzelfstandige woonruimten aan, en daaronder de laag voor deling met adressen. Wordt er op geen van beide niveaus gedeeld, dan ontstaat er één privélaag.
+Bij gedeelde ruimten kan er op twee niveaus sprake zijn van deling. `gedeeld_met(...)` voegt daarom eerst, waar van toepassing, de laag voor deling met onzelfstandige woonruimten toe, en daaronder de laag voor deling met adressen. Als er op geen van beide niveaus wordt gedeeld, ontstaat er één privélaag.
 
 ### Subgroepen
 
@@ -118,20 +139,3 @@ Gemeenschappelijke binnenruimten gedeeld met meerdere adressen   ← stelselgroe
          └─ Toilet                                                ← subgroep (per ruimte)
             └─ Wastafel                                           ← waardering met punten
 ```
-
-### Criterium-id's
-
-Elke waardering heeft een criterium met een eigen id, en dat id is een pad-id: het wordt afgeleid uit de plek in de hiërarchie, waarbij de builders `criterium.id` en `bovenliggendeCriterium` synchroon houden. Een waardering direct onder de stelselgroep krijgt het id `{stelselgroep}__{segment}`; een waardering onder een andere waardering krijgt `{bovenliggende_id}__{segment}`. De segmenten worden steeds met een dubbele underscore (`__`) aan elkaar geplakt. Het id draagt de identiteit en de plek in de hiërarchie, terwijl de punten en het aantal bij de waardering horen en niet bij het criterium.
-
-Voor de gedeeld-met-lagen gelden vaste segmentnamen: `prive` bij een aantal van ten hoogste 1, en `gedeeld_met_{n}_{soort}` bij een aantal groter dan 1 (met enkele underscores rond het aantal en de soort).
-
-Een paar voorbeelden:
-
-- `buitenruimten__prive__Space_108014713`
-- `buitenruimten__gedeeld_met_2_adressen__Space_108006357`
-- `buitenruimten__prive`
-- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen`
-- `gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_adressen__keuken`
-- `verkoeling_en_verwarming__verwarmde_vertrekken`
-
-Zo'n stelselgroep bouw je stapsgewijs op: je begint met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hangt inhoudelijke waarderingen aan met `met_onderliggend(...)`, structurele tussenlagen met `met_subgroep(...)` en gedeeld-met-lagen met `gedeeld_met(...)`, en sluit af met `build()`. Die laatste telt de punten op en rondt de totaalpunten van de stelselgroep af op kwartpunten. Indien door afronding op kwartpunten een verschil ontstaat tussen de som van de waarderingen en de totaalpunten van de stelselgroep, wordt dat verschil toegevoegd als waardering **Afronding op kwartpunten**. Dit levert een `WoningwaarderingResultatenWoningwaarderingGroep`.
