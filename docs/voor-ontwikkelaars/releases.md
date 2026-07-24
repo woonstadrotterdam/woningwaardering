@@ -15,6 +15,10 @@ Voor versienummering gebruiken we
 - `PATCH` wordt verhoogd bij compatibele bugfixes en onderhoudsupdates binnen
   dezelfde beleidsboekversie.
 
+Een verhoging van `MINOR` is compatibel met de publieke Python-API en
+outputstructuur. De berekening en puntuitkomsten kunnen wel wijzigen door de
+implementatie van het nieuwe beleidsboek.
+
 Bij een wijziging van `MAJOR` of `MINOR` wordt `PATCH` teruggezet naar `0`.
 Versie `5.202607.0` bevat bijvoorbeeld een incompatibele wijziging, implementeert
 het beleidsboek dat in juli 2026 ingaat en is de eerste release binnen die
