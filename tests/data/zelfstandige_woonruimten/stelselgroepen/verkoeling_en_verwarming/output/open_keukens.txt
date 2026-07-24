@@ -1,16 +1,13 @@
 SAMENVATTING
-  Verkoeling en verwarming                                                       14.00 pt
+  Verkoeling en verwarming                                                       18.00 pt
                                                                                 ---------
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
-    - Verwarmde woonkamer                                                         2.00 pt
+    - Verwarmde woonkamer met open keuken                                         4.00 pt
     - Verwarmde keuken                                                            2.00 pt
-    - Verwarmde slaapkamer                                                        2.00 pt
-    - Verwarmde woonkamer/keuken                                                  2.00 pt
-  Open keuken
-    - Verwarmde woonkamer                                                         2.00 pt
-    - Verwarmde slaapkamer                                                        2.00 pt
-    - Verwarmde woonkamer/keuken                                                  2.00 pt
+    - Verwarmde slaapkamer met open keuken                                        4.00 pt
+    - Verwarmde woonkamer/keuken                                                  4.00 pt
+    - Verwarmde woon-/slaapkamer met open keuken                                  4.00 pt
                                                                                 ---------
-  Totaal                                                                         14.00 pt
+  Totaal                                                                         18.00 pt
