@@ -16,8 +16,7 @@ Voor versienummering gebruiken we
   dezelfde beleidsboekversie.
 
 Een verhoging van `MINOR` is compatibel met de publieke Python-API en
-outputstructuur. De berekening en puntuitkomsten kunnen wel wijzigen door de
-implementatie van het nieuwe beleidsboek.
+outputstructuur.
 
 Bij een wijziging van `MAJOR` of `MINOR` wordt `PATCH` teruggezet naar `0`.
 Versie `5.202607.0` bevat bijvoorbeeld een incompatibele wijziging, implementeert
