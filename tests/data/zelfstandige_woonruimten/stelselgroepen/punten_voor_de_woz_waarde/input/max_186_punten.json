@@ -9,7 +9,7 @@
   "adres": {
     "straatnaam": "Mauritsstraat",
     "huisnummer": "44",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "3012CJ",
     "woonplaats": {
       "naam": "ROTTERDAM"

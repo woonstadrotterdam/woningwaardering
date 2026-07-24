@@ -14,50 +14,40 @@
       "punten": 8.25,
       "woningwaarderingen": [
         {
-          "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_1",
-            "naam": "Zolder vertrek met trap",
-            "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__totaal__prive"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 10.0,
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_3",
-            "naam": "Zolder vertrek met vlizo trap",
-            "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 10.0,
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__totaal__prive",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "id": "oppervlakte_van_overige_ruimten__prive",
+            "naam": "Privé"
           },
           "punten": 7.5
         },
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 3 onzelfstandige woonruimten)",
+            "id": "oppervlakte_van_overige_ruimten__prive__Space_1",
+            "naam": "Zolder vertrek met trap",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 3 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__subtotaal",
+            "naam": "Subtotaal",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -66,11 +56,35 @@
           "punten": 2.5
         },
         {
+          "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_3__correctie_zolder_zonder_vaste_trap",
-            "naam": "Correctie: zolder zonder vaste trap"
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__subtotaal__Space_3",
+            "naam": "Zolder vertrek met vlizo trap",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__subtotaal"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__Space_3__correctie_zolder_zonder_vaste_trap",
+            "naam": "Correctie: zolder zonder vaste trap",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten"
+            }
           },
           "punten": -1.67
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": -0.08
         }
       ]
     }

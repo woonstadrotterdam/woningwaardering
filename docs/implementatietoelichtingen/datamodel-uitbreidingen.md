@@ -8,9 +8,11 @@ Binnen het woningwaarderingsstelsel mag onder bepaalde voorwaarden de oppervlakt
 
 Het attribuut `verbonden_ruimten` bevat de ruimten die in verbinding staan met de ruimte die het attribuut bezit. `verbonden_ruimten` wordt gebruikt bij het berekenen van de waardering van kasten en verwarming van ruimten. `verbonden_ruimten` heeft type `Optional[list[EenhedenRuimte]]` en is een uitbreiding op `EenhedenRuimte`. Voor deze uitbreiding staat issue [https://github.com/Aedes-datastandaarden/vera-openapi/issues/47](https://github.com/Aedes-datastandaarden/vera-openapi/issues/47) open ter aanvulling op het VERA model.
 
-## Gedeeld met aantal eenheden
+## Gedeeld met aantal adressen
 
-Het attribuut `gedeeld_met_aantal_eenheden` geeft het aantal eenheden (één adres staat gelijk aan één eenheid) weer waarmee een bepaalde ruimte wordt gedeeld. Dit attribuut wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging. `gedeeld_met_aantal_eenheden` heeft als type `Optional[int]`. Er staat een github issue open om dit ter discussie te stellen: [https://github.com/Aedes-datastandaarden/vera-openapi/issues/44](https://github.com/Aedes-datastandaarden/vera-openapi/issues/44)
+Het attribuut `gedeeld_met_aantal_adressen` geeft het aantal adressen weer waarmee een bepaalde ruimte wordt gedeeld. Dit attribuut wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. `gedeeld_met_aantal_adressen` heeft als type `Optional[int]`. Er staat een github issue open om dit ter discussie te stellen: [https://github.com/Aedes-datastandaarden/vera-openapi/issues/44](https://github.com/Aedes-datastandaarden/vera-openapi/issues/44)
+
+Voorheen gebruikten we hiervoor het attribuut `gedeeld_met_aantal_eenheden`. Dit attribuut blijft als deprecated veld ondersteund voor backwards compatibility: de waarde wordt overgenomen naar `gedeeld_met_aantal_adressen`.
 
 ## Gedeeld met aantal onzelfstandige woonruimten
 

@@ -19,7 +19,7 @@
       "bouwkundigeElementen": [
         {
           "id": "aanrecht_1",
-          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "idBimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -34,7 +34,7 @@
         },
         {
           "id": "aanrecht_2",
-          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "idBimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {

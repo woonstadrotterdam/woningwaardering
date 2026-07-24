@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "b",
+    "huisnummerToevoeging": "b",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -91,7 +91,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_57358399",
-          "id_bimmodel": "02Huynkxr6cxvV0_9wJ2Pm",
+          "idBimmodel": "02Huynkxr6cxvV0_9wJ2Pm",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -107,7 +107,7 @@
         },
         {
           "id": "Wastafel_57358397",
-          "id_bimmodel": "02Huynkxr6cxvV0_9wJ2Pn",
+          "idBimmodel": "02Huynkxr6cxvV0_9wJ2Pn",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -123,7 +123,7 @@
         },
         {
           "id": "Closetcombinatie_57358395",
-          "id_bimmodel": "02Huynkxr6cxvV0_9wJ2Po",
+          "idBimmodel": "02Huynkxr6cxvV0_9wJ2Po",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -258,7 +258,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Fontein_57349824",
-          "id_bimmodel": "02Huynkxr6cxvV0_9wJ2Ow",
+          "idBimmodel": "02Huynkxr6cxvV0_9wJ2Ow",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
@@ -273,7 +273,7 @@
         },
         {
           "id": "Closetcombinatie_57349822",
-          "id_bimmodel": "02Huynkxr6cxvV0_9wJ2Ox",
+          "idBimmodel": "02Huynkxr6cxvV0_9wJ2Ox",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -329,7 +329,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_57349829",
-          "id_bimmodel": "02Huynkxr6cxvV0_9wJ2PZ",
+          "idBimmodel": "02Huynkxr6cxvV0_9wJ2PZ",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {

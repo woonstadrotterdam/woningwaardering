@@ -14,20 +14,32 @@
       "punten": 12.0,
       "woningwaarderingen": [
         {
-          "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__Space_223759__bad_en_douche",
-            "naam": "Badkamer - Bad en douche",
-            "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__prive"
-            }
-          },
-          "punten": 12.0
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
         },
         {
           "criterium": {
-            "id": "sanitair__totaal__prive",
-            "naam": "Totaal (privé)"
+            "id": "sanitair__prive__Space_223759",
+            "naam": "Badkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          }
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "sanitair__prive__Space_223759__bad_en_douche",
+            "naam": "Bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__Space_223759"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 12.0
         }

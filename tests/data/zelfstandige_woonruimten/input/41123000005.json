@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -315,7 +315,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_23703090",
-          "id_bimmodel": "2XbBk5LB909fIWTKMldHwu",
+          "idBimmodel": "2XbBk5LB909fIWTKMldHwu",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -331,7 +331,7 @@
         },
         {
           "id": "Wastafel_23703089",
-          "id_bimmodel": "2XbBk5LB909fIWTKMldHzR",
+          "idBimmodel": "2XbBk5LB909fIWTKMldHzR",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -387,7 +387,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_72739118",
-          "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY$F",
+          "idBimmodel": "0ZTYhATwr0BOPGb6sgAY$F",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -423,7 +423,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_72738742",
-          "id_bimmodel": "2gXaYbZirD8B9X_pSRiJ46",
+          "idBimmodel": "2gXaYbZirD8B9X_pSRiJ46",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -484,7 +484,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_72739130",
-          "id_bimmodel": "23xaTPsCDF4hej85l1drBT",
+          "idBimmodel": "23xaTPsCDF4hej85l1drBT",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -500,7 +500,7 @@
         },
         {
           "id": "Closetcombinatie_23702800",
-          "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY$E",
+          "idBimmodel": "0ZTYhATwr0BOPGb6sgAY$E",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -613,7 +613,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_72738747",
-          "id_bimmodel": "10Fc4nJTDFyuvYO2VEp4$R",
+          "idBimmodel": "10Fc4nJTDFyuvYO2VEp4$R",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -629,7 +629,7 @@
         },
         {
           "id": "Wastafel_72738745",
-          "id_bimmodel": "0ZTYhATwr0BOPGb6sgAYLu",
+          "idBimmodel": "0ZTYhATwr0BOPGb6sgAYLu",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -645,7 +645,7 @@
         },
         {
           "id": "Closetcombinatie_23702340",
-          "id_bimmodel": "0ZTYhATwr0BOPGb6sgAY$C",
+          "idBimmodel": "0ZTYhATwr0BOPGb6sgAY$C",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",

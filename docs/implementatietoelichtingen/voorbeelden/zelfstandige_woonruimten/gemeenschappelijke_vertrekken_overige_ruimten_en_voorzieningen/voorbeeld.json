@@ -11,7 +11,7 @@
       },
       "naam": "Ruimte A",
       "oppervlakte": 20.0,
-      "gedeeldMetAantalEenheden": 4,
+      "gedeeldMetAantalAdressen": 4,
       "bouwkundigeElementen": [
         {
           "detailSoort": {
@@ -48,7 +48,7 @@
       },
       "naam": "Ruimte B",
       "oppervlakte": 2.0,
-      "gedeeldMetAantalEenheden": 4,
+      "gedeeldMetAantalAdressen": 4,
       "verwarmd": false,
       "installaties": [
         {

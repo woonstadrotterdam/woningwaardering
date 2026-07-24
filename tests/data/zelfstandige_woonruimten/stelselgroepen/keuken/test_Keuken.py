@@ -1,4 +1,3 @@
-from datetime import date
 from pathlib import Path
 
 import pytest
@@ -41,28 +40,24 @@ def test_Keuken_specifiek_output(specifieke_input_en_output_model, peildatum):
 warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/aanrecht_zonder_lengte.json",
-        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "geen aanrecht",
         },
     ),
     WarningConfig(
         file=f"{current_file_path}/input/keuken_zonder_aanrecht.json",
-        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "geen aanrecht",
         },
     ),
     WarningConfig(
         file=f"{current_file_path}/input/2_aanrechten_waarvan_1_geen_lengte.json",
-        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "geen lengte",
         },
     ),
     WarningConfig(
         file=f"{current_file_path}/input/2_aanrechten_waarvan_1_geen_detailsoort.json",
-        peildatum=date(2025, 1, 1),
         warnings={
             UserWarning: "geen detailsoort",
         },

@@ -11,104 +11,91 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 14.0,
+      "punten": 19.0,
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_115339",
-            "naam": "Verwarmde woonkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
-          },
-          "punten": 2.0
+            "id": "verkoeling_en_verwarming__prive",
+            "naam": "Privé"
+          }
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_154976",
-            "naam": "Verwarmde keuken",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_233885",
-            "naam": "Verwarmde slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_386959",
-            "naam": "Verwarmde woonkamer/keuken",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_115339",
-            "naam": "Verwarmde woonkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__open_keuken"
-            }
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_233885",
-            "naam": "Verwarmde slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__open_keuken"
-            }
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_386959",
-            "naam": "Verwarmde woonkamer/keuken",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__open_keuken"
-            }
-          },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__prive"
+              "id": "verkoeling_en_verwarming__prive"
             }
-          },
-          "punten": 8.0
+          }
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__open_keuken",
-            "naam": "Open keuken",
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Space_115339",
+            "naam": "Woonkamer met open keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__prive"
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
             }
           },
-          "punten": 6.0
+          "punten": 4.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__prive",
-            "naam": "Totaal (privé)"
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Space_154976",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
+            }
           },
-          "punten": 14.0
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Space_233885",
+            "naam": "Slaapkamer met open keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Space_386959",
+            "naam": "Woonkamer/keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Space_581247",
+            "naam": "Woon-/slaapkamer met open keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken",
+            "naam": "Verkoelde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken__Space_115339",
+            "naam": "Woonkamer",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verkoelde_vertrekken"
+            }
+          },
+          "punten": 1.0
         }
       ]
     }

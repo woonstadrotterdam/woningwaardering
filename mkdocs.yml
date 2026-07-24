@@ -74,18 +74,16 @@ plugins:
   - autorefs
 
 nav:
-  - Introductie:
-    - Overzicht: index.md
-    - Opzet: introductie/opzet.md
-  - Aan de slag:
-    - Aan de slag: aan-de-slag/index.md
+  - Introductie: index.md
+  - Aan de slag: aan-de-slag/index.md
   - Implementatietoelichtingen:
-    - Overzicht: implementatietoelichtingen/index.md
+    - Implementatietoelichtingen: implementatietoelichtingen/index.md
     - Zelfstandige woonruimten: implementatietoelichtingen/zelfstandige-woonruimten.md
     - Onzelfstandige woonruimten: implementatietoelichtingen/onzelfstandige-woonruimten.md
     - Datamodel Uitbreidingen: implementatietoelichtingen/datamodel-uitbreidingen.md
   - Voor ontwikkelaars:
-    - Installatie: voor-ontwikkelaars/index.md
+    - Voor ontwikkelaars: voor-ontwikkelaars/index.md
+    - Criteriumstrategie: voor-ontwikkelaars/criteriumstrategie.md
     - Naamgeving: voor-ontwikkelaars/naamgeving.md
     - Releasemanagement: voor-ontwikkelaars/releases.md
     - Testing: voor-ontwikkelaars/testing.md

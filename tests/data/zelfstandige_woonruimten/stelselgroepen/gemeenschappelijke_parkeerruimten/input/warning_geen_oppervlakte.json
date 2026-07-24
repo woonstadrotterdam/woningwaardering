@@ -3,7 +3,7 @@
   "ruimten": [
     {
       "id": "warning_2",
-      "gedeeld_met_aantal_eenheden": 10,
+      "gedeeldMetAantalAdressen": 10,
       "aantal": 2,
       "soort": {
         "code": "GEM",

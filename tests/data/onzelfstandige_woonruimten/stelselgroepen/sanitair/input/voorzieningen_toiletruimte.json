@@ -16,6 +16,10 @@
       "verwarmd": true,
       "installaties": [
         {
+          "code": "HTO",
+          "naam": "Hangend Toilet"
+        },
+        {
           "code": "BUB",
           "naam": "Bubbelfunctie van het bad"
         },

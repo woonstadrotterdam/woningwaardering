@@ -13,7 +13,7 @@
       "naam": "Badruimte",
       "inhoud": 21.5125,
       "oppervlakte": 10,
-      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalAdressen": 2,
       "installaties": [
         {
           "code": "BAD",

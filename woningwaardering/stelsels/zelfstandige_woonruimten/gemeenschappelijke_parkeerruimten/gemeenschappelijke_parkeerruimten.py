@@ -1,18 +1,16 @@
 import warnings
 from datetime import date
-from decimal import Decimal
 
 from loguru import logger
 
-from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_gemeenschappelijke_parkeerruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -41,50 +39,31 @@ class GemeenschappelijkeParkeerruimten(Stelselgroep):
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
         | None = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
         )
-        woningwaardering_groep.woningwaarderingen = []
 
         if not eenheid.ruimten:
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
-            return woningwaardering_groep
+            return waarderingsgroep_builder.build()
 
         for ruimte in eenheid.ruimten:
-            woningwaardering = waardeer_gemeenschappelijke_parkeerruimte(ruimte)
-            if woningwaardering is not None:
-                woningwaardering_groep.woningwaarderingen.extend(list(woningwaardering))
-
-        punten_totaal = float(
-            utils.rond_af_op_kwart(
-                Decimal(
-                    str(
-                        sum(
-                            woningwaardering.punten
-                            for woningwaardering in woningwaardering_groep.woningwaarderingen
-                            or []
-                            if woningwaardering.punten is not None
-                        )
-                    )
-                )
+            waardeer_gemeenschappelijke_parkeerruimte(
+                ruimte, waarderingsgroep_builder=waarderingsgroep_builder
             )
-        )
+
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         logger.info(
-            f"Eenheid ({eenheid.id}) krijgt {punten_totaal} punten voor {self.stelselgroep.naam}"
+            f"Eenheid ({eenheid.id}) krijgt {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
-
-        woningwaardering_groep.punten = punten_totaal
 
         return woningwaardering_groep
 
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=GemeenschappelijkeParkeerruimten(peildatum=date(2026, 1, 1)),
+        instance=GemeenschappelijkeParkeerruimten(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

@@ -14,12 +14,18 @@
       "punten": 1.75,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "buitenruimten__gedeeld_met_2_adressen",
+            "naam": "Gedeeld met 2 adressen"
+          }
+        },
+        {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017427",
+            "id": "buitenruimten__gedeeld_met_2_adressen__Space_108017427",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__gedeeld_met__2__adressen"
+              "id": "buitenruimten__gedeeld_met_2_adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -29,37 +35,19 @@
           "punten": 1.05
         },
         {
+          "criterium": {
+            "id": "buitenruimten__gedeeld_met_3_adressen",
+            "naam": "Gedeeld met 3 adressen"
+          }
+        },
+        {
           "aantal": 6.0,
           "criterium": {
-            "id": "buitenruimten__Space_108017428",
+            "id": "buitenruimten__gedeeld_met_3_adressen__Space_108017428",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__gedeeld_met__3__adressen"
+              "id": "buitenruimten__gedeeld_met_3_adressen"
             },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 0.7
-        },
-        {
-          "aantal": 6.0,
-          "criterium": {
-            "id": "buitenruimten__totaal__gedeeld_met__2__adressen",
-            "naam": "Totaal (gedeeld met 2 adressen)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 1.05
-        },
-        {
-          "aantal": 6.0,
-          "criterium": {
-            "id": "buitenruimten__totaal__gedeeld_met__3__adressen",
-            "naam": "Totaal (gedeeld met 3 adressen)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"

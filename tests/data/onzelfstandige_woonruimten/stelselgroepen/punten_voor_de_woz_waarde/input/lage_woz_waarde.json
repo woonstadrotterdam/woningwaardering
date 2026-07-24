@@ -6,8 +6,8 @@
       "naam": "ROTTERDAM"
     }
   },
-  "adresseerbaar_object_basisregistratie": {
-    "bag_gebruikers_oppervlakte": 58.0
+  "adresseerbaarObjectBasisregistratie": {
+    "bagGebruikersOppervlakte": 58.0
   },
   "wozEenheden": [
     {

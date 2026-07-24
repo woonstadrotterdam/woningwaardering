@@ -2,23 +2,18 @@ import warnings
 from datetime import date
 from decimal import ROUND_DOWN, Decimal
 from importlib.resources import files
-from itertools import chain
 
 import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
     EenhedenWozEenheid,
-    WoningwaarderingCriteriumSleutels,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -70,14 +65,16 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
         )
 
-        woningwaardering_groep.woningwaarderingen = []
+        def _niet_waardeerbaar() -> WoningwaarderingResultatenWoningwaarderingGroep:
+            # Incomplete invoer: geen waardering. ``punten = None`` (niet 0) zodat dit
+            # onderscheidbaar is van een berekende nulscore.
+            groep = waarderingsgroep_builder.build()
+            groep.punten = None
+            return groep
 
         if not woningwaardering_resultaat or not woningwaardering_resultaat.groepen:
             logger.warning(
@@ -116,7 +113,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid ({eenheid.id}): WOZ-eenheid heeft geen waardepeildatum",
                 UserWarning,
             )
-            return woningwaardering_groep
+            return _niet_waardeerbaar()
 
         woz_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
         waardepeildatum = pd.to_datetime(woz_eenheid.waardepeildatum)
@@ -133,25 +130,34 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         factoren = filtered.nlargest(1, "Peildatum")
 
         factor_onderdeel_I = Decimal(str(factoren["Onderdeel I"].values[0]))
-        factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
+
+        oppervlakte = self.bepaal_oppervlakte(eenheid, woningwaardering_resultaat)
+
+        if oppervlakte == 0:
+            warnings.warn(
+                f"Eenheid ({eenheid.id}): kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
+                UserWarning,
+            )
+            return _niet_waardeerbaar()
+
+        # Bepaal de juiste factor voor onderdeel II (kan speciale COROP factor zijn)
+        factor_onderdeel_II = self._bepaal_factor_onderdeel_II(
+            eenheid, factoren, woningwaardering_resultaat
+        )
 
         punten_onderdeel_I = utils.rond_af(
             (woz_waarde / factor_onderdeel_I), decimalen=2
+        )
+        punten_onderdeel_II = utils.rond_af(
+            woz_waarde / oppervlakte / factor_onderdeel_II,
+            decimalen=2,
         )
 
         logger.info(
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
         )
-
-        id_onderdeel_I = str(
-            CriteriumId(
-                stelselgroep=self.stelselgroep, criterium="onderdeel_I", is_totaal=True
-            )
-        )
-        id_onderdeel_II = str(
-            CriteriumId(
-                stelselgroep=self.stelselgroep, criterium="onderdeel_II", is_totaal=True
-            )
+        logger.info(
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
         )
 
         # Toon de WOZ-waarde of minimumwaarde in de resultaten
@@ -162,162 +168,64 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         else:
             naam_woz_waarde = f"WOZ-waarde op waardepeildatum {waardepeildatum.strftime(DATUM_FORMAT)}"
 
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam=naam_woz_waarde,
-                    id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="woz_waarde",
-                        )
-                    ),
-                ),
+        # De WOZ-waarde staat als eerste waardering onder de stelselgroep.
+        waarderingsgroep_builder.met_onderliggend(
+            id="woz_waarde",
+            naam=naam_woz_waarde,
+            aantal=int(woz_waarde),
+            meeteenheid=Meeteenheid.euro,
+        )
+
+        onderdeel_i = waarderingsgroep_builder.met_onderliggend(
+            id="onderdeel_I", naam="Onderdeel I", punten=float(punten_onderdeel_I)
+        )
+
+        # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
+        if gebruikt_minimum_waarde:
+            onderdeel_i.met_onderliggend(
+                id="minimum_woz_waarde",
+                naam="Minimum WOZ-waarde gebruikt voor berekening",
                 aantal=int(woz_waarde),
+                meeteenheid=Meeteenheid.euro,
             )
-        )
-        # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
-        if gebruikt_minimum_waarde:
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Minimum WOZ-waarde gebruikt voor berekening",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="minimum_woz_waarde",
-                            )
-                        ),
-                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                            id=id_onderdeel_I,
-                        ),
-                    ),
-                    aantal=int(woz_waarde),
-                )
-            )
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Factor I",
-                    id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="factor_I",
-                        )
-                    ),
-                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                        id=id_onderdeel_I,
-                    ),
-                ),
-                aantal=factor_onderdeel_I,
-            )
-        )
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Onderdeel I",
-                    id=id_onderdeel_I,
-                ),
-                punten=punten_onderdeel_I,
-            )
+        onderdeel_i.met_onderliggend(
+            id="factor_I",
+            naam="Factor I",
+            aantal=factor_onderdeel_I,
+            meeteenheid=Meeteenheid.euro,
         )
 
-        oppervlakte = self.bepaal_oppervlakte(eenheid, woningwaardering_resultaat)
-
-        if oppervlakte == 0:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): kan geen punten voor de WOZ waarde berekenen omdat het totaal van de oppervlakte van stelselgroepen {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} en {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} 0 is",
-                UserWarning,
-            )
-            return woningwaardering_groep
-
-        # Bepaal de juiste factor voor onderdeel II (kan speciale COROP factor zijn)
-        factor_onderdeel_II = self._bepaal_factor_onderdeel_II(
-            eenheid, factoren, woningwaardering_resultaat
-        )
-
-        punten_onderdeel_II = utils.rond_af(
-            woz_waarde / oppervlakte / factor_onderdeel_II,
-            decimalen=2,
-        )
-
-        logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
+        onderdeel_ii = waarderingsgroep_builder.met_onderliggend(
+            id="onderdeel_II", naam="Onderdeel II", punten=float(punten_onderdeel_II)
         )
 
         # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
         if gebruikt_minimum_waarde:
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam="Minimum WOZ-waarde gebruikt voor berekening",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="minimum_woz_waarde",
-                            )
-                        ),
-                        bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                            id=id_onderdeel_II,
-                        ),
-                    ),
-                    aantal=int(woz_waarde),
-                )
+            onderdeel_ii.met_onderliggend(
+                id="minimum_woz_waarde",
+                naam="Minimum WOZ-waarde gebruikt voor berekening",
+                aantal=int(woz_waarde),
+                meeteenheid=Meeteenheid.euro,
             )
 
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Oppervlakte van vertrekken en overige ruimten",
-                    id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="oppervlakte_vertrekken_en_overige_ruimten",
-                        )
-                    ),
-                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                        id=id_onderdeel_II,
-                    ),
-                    meeteenheid=Meeteenheid.vierkante_meter_m2,
-                ),
-                aantal=oppervlakte,
-            )
+        onderdeel_ii.met_onderliggend(
+            id="oppervlakte_vertrekken_en_overige_ruimten",
+            naam="Oppervlakte van vertrekken en overige ruimten",
+            aantal=oppervlakte,
+            meeteenheid=Meeteenheid.vierkante_meter_m2,
         )
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Factor II",
-                    id=str(
-                        CriteriumId(
-                            stelselgroep=self.stelselgroep,
-                            criterium="factor_II",
-                        )
-                    ),
-                    bovenliggende_criterium=WoningwaarderingCriteriumSleutels(
-                        id=id_onderdeel_II,
-                    ),
-                ),
-                aantal=factor_onderdeel_II,
-            )
+        onderdeel_ii.met_onderliggend(
+            id="factor_II",
+            naam="Factor II",
+            aantal=factor_onderdeel_II,
+            meeteenheid=Meeteenheid.euro,
         )
 
-        woningwaardering_groep.woningwaarderingen.append(
-            WoningwaarderingResultatenWoningwaardering(
-                criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                    naam="Onderdeel II",
-                    id=id_onderdeel_II,
-                ),
-                punten=float(punten_onderdeel_II),
-            )
+        self._corrigeer_woz_punten(
+            waarderingsgroep_builder, eenheid, woningwaardering_resultaat
         )
 
-        woningwaardering_groep = self._corrigeer_woz_punten(
-            eenheid, woningwaardering_groep, woningwaardering_resultaat
-        )
-
-        punten = self._som_woz_punten(woningwaardering_groep)
-
-        woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten))
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -327,10 +235,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def _corrigeer_woz_punten(
         self,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
-        woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-    ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+    ) -> None:
         """
         Controleert of de punten voor de stelselgroep WOZ-waarde voldoen aan de minimum punten en de maximum hoeveelheid punten.
         Een correctie vindt plaats wanneer:
@@ -338,39 +246,30 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             - De punten voor WOZ-waarde meer dan 33.33% van het totaal aantal punten bedraagt en geen nieuwbouwwoning is.
 
         Args:
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
             eenheid (EenhedenEenheid): De eenheid.
-            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): De woningwaardering groep.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
-
-        Returns:
-            WoningwaarderingResultatenWoningwaarderingGroep: De woningwaardering groep met eventuele correcties.
         """
 
-        woz_punten = self._som_woz_punten(woningwaardering_groep)
+        woz_punten = Decimal(
+            sum(
+                Decimal(str(waardering.punten))
+                for waardering in waarderingsgroep_builder.alle_waarderingen()
+                if waardering.punten is not None
+            )
+        )
 
         minimum_woz_punten = self._bereken_minimum_punten_nieuwbouw(
             eenheid, woningwaardering_resultaat
         )
 
-        if (
-            0.0 < woz_punten < minimum_woz_punten
-            and woningwaardering_groep.woningwaarderingen is not None
-        ):
-            woningwaardering_groep.woningwaarderingen.append(
-                WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"Nieuwbouw: min. {minimum_woz_punten} punten",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=self.stelselgroep,
-                                criterium="nieuwbouw_minimum_punten",
-                            )
-                        ),
-                    ),
-                    punten=float(minimum_woz_punten - woz_punten),
-                )
+        if 0.0 < woz_punten < minimum_woz_punten:
+            waarderingsgroep_builder.met_onderliggend(
+                id="nieuwbouw_minimum_punten",
+                naam=f"Nieuwbouw: min. {minimum_woz_punten} punten",
+                punten=float(minimum_woz_punten - woz_punten),
             )
-            return woningwaardering_groep
+            return
 
         # Bereken de overige punten door de punten van alle groepen op te tellen, afgerond op 0 decimalen
         overige_punten = utils.rond_af(
@@ -387,11 +286,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             eenheid, woz_punten, overige_punten, woningwaardering_resultaat
         )
 
-        if (
-            correctie_punten is not None
-            and minimum_woz_punten == 0.0
-            and woningwaardering_groep.woningwaarderingen is not None
-        ):
+        if correctie_punten is not None and minimum_woz_punten == 0.0:
             totaal_punten_met_cap = totaal_punten_zonder_cap + correctie_punten
 
             logger.debug(
@@ -406,40 +301,20 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 correctie_punten = 186 - totaal_punten_zonder_cap
-                woningwaardering_groep.woningwaarderingen.append(
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Maximering WOZ-punten tot 186 punten totaal",
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    criterium="maximering_woz_punten",
-                                )
-                            ),
-                        ),
-                        punten=utils.rond_af(correctie_punten, 2),
-                    )
+                waarderingsgroep_builder.met_onderliggend(
+                    id="maximering_woz_punten",
+                    naam="Maximering WOZ-punten tot 186 punten totaal",
+                    punten=utils.rond_af(correctie_punten, 2),
                 )
             else:
                 logger.info(
                     f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
-                woningwaardering_groep.woningwaarderingen.append(
-                    WoningwaarderingResultatenWoningwaardering(
-                        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                            naam="Maximering WOZ-punten tot 33% van totaal",
-                            id=str(
-                                CriteriumId(
-                                    stelselgroep=self.stelselgroep,
-                                    criterium="maximering_woz_punten",
-                                )
-                            ),
-                        ),
-                        punten=utils.rond_af(correctie_punten, 2),
-                    )
+                waarderingsgroep_builder.met_onderliggend(
+                    id="maximering_woz_punten",
+                    naam="Maximering WOZ-punten tot 33% van totaal",
+                    punten=utils.rond_af(correctie_punten, 2),
                 )
-
-        return woningwaardering_groep
 
     def _cap_punten(
         self,
@@ -518,27 +393,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
             return totaal_correctiepunten
 
-    def _som_woz_punten(
-        self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
-    ) -> Decimal:
-        """
-        Berekent de som van de punten voor de stelselgroep WOZ-waarde.
-
-        Args:
-            woningwaardering_groep (WoningwaarderingResultatenWoningwaarderingGroep): De woningwaardering groep voor de stelselgroep WOZ-waarde.
-
-        Returns:
-            Decimal: De som van de punten voor de stelselgroep WOZ-waarde.
-        """
-
-        return Decimal(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            )
-        )
-
     def _haal_minimum_woz_waarde_op(self) -> EenhedenWozEenheid:
         """
         Haalt de minimum WOZ-waarde op op basis van de peildatum waarop de
@@ -566,7 +420,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # Neem de hoogste datum die kleiner of gelijk is aan de peildatum
         filtered_df = filtered_df.sort_values("Peildatum", ascending=False).head(1)
         minimum_woz_waarde = Decimal(str(filtered_df["Minimumwaarde"].values[0]))
-        minimum_woz_waarde_datum = pd.Timestamp(filtered_df["Peildatum"].item())
+        minimum_woz_waarde_datum = pd.Timestamp(filtered_df["Peildatum"].item()).date()
 
         # Bij gebruik van de minimumwaarde moet de waardepeildatum 1 januari zijn van
         # het jaar voor de datum van de opgehaalde minimum WOZ-waarde
@@ -613,12 +467,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         oppervlakte = sum(
             (
-                Decimal(str(waardering.aantal))
-                for waardering in chain.from_iterable(
-                    groep.woningwaarderingen or []
-                    for groep in oppervlakte_stelsel_groepen
-                )
-                if waardering.aantal is not None
+                utils.som_effectieve_aantal_waarderingen(groep.woningwaarderingen)
+                for groep in oppervlakte_stelsel_groepen
             ),
             start=Decimal("0"),
         )
@@ -633,13 +483,13 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             [
                 Decimal(str(ruimte.oppervlakte))
                 * Decimal(str(ruimte.aantal or 1))
-                / (Decimal(str(ruimte.gedeeld_met_aantal_eenheden or 2)))
+                / (Decimal(str(ruimte.gedeeld_met_aantal_adressen or 2)))
                 for ruimte in (eenheid.ruimten or [])
                 if ruimte.detail_soort
                 in [
                     Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage
                 ]  # Type I
-                and utils.gedeeld_met_eenheden(
+                and utils.gedeeld_met_adressen(
                     ruimte
                 )  # valt anders niet onder rubriek 10
                 and ruimte.oppervlakte
@@ -855,7 +705,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=PuntenVoorDeWozWaarde(peildatum=date(2026, 1, 1)),
+        instance=PuntenVoorDeWozWaarde(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

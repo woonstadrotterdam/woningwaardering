@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -110,7 +110,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_9946614",
-          "id_bimmodel": "1CjCgpyVjFRfJZqbPvo4oB",
+          "idBimmodel": "1CjCgpyVjFRfJZqbPvo4oB",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -126,7 +126,7 @@
         },
         {
           "id": "Wastafel_9946615",
-          "id_bimmodel": "1CjCgpyVjFRfJZqbPvo4oA",
+          "idBimmodel": "1CjCgpyVjFRfJZqbPvo4oA",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -142,7 +142,7 @@
         },
         {
           "id": "Closetcombinatie_9946617",
-          "id_bimmodel": "1CjCgpyVjFRfJZqbPvo4oD",
+          "idBimmodel": "1CjCgpyVjFRfJZqbPvo4oD",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -236,7 +236,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Ketel_50412169",
-          "id_bimmodel": "3w5LVeK1P2ZAgR7Ltbr32$",
+          "idBimmodel": "3w5LVeK1P2ZAgR7Ltbr32$",
           "naam": "Ketel",
           "omschrijving": "Stadsverwarming",
           "soort": {
@@ -288,7 +288,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_9944878",
-          "id_bimmodel": "1CjCgpyVjFRfJZqbPvo4Cz",
+          "idBimmodel": "1CjCgpyVjFRfJZqbPvo4Cz",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -422,7 +422,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Fontein_9944866",
-          "id_bimmodel": "1CjCgpyVjFRfJZqbPvo4Cx",
+          "idBimmodel": "1CjCgpyVjFRfJZqbPvo4Cx",
           "omschrijving": null,
           "soort": {
             "code": "SAN",
@@ -438,7 +438,7 @@
         },
         {
           "id": "Closetcombinatie_9944865",
-          "id_bimmodel": "1CjCgpyVjFRfJZqbPvo4Cu",
+          "idBimmodel": "1CjCgpyVjFRfJZqbPvo4Cu",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",

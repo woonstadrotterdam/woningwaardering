@@ -14,20 +14,32 @@
       "punten": 1.0,
       "woningwaarderingen": [
         {
-          "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_472199__wastafel",
-            "naam": "Badkamer - Wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__prive"
-            }
-          },
-          "punten": 1.0
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
         },
         {
           "criterium": {
-            "id": "sanitair__totaal__prive",
-            "naam": "Totaal (privé)"
+            "id": "sanitair__prive__Space_472199",
+            "naam": "Badkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__prive__Space_472199__wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__Space_472199"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         }

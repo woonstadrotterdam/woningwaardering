@@ -14,10 +14,23 @@
       "punten": 17.75,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__badruimte",
+            "naam": "Badruimte"
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__badruimte__wastafel",
-            "naam": "Badruimte - Wastafel"
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badruimte"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         },
@@ -25,63 +38,134 @@
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__badruimte__bad_en_douche",
-            "naam": "Badruimte - Bad en douche"
+            "naam": "Bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badruimte"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 7.0
         },
         {
+          "criterium": {
+            "id": "sanitair__badruimte__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badruimte"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Bubbelfunctie van het bad"
+            "id": "sanitair__badruimte__extra_voorzieningen__bubbelfunctie_van_het_bad",
+            "naam": "Bubbelfunctie van het bad",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badruimte__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.5
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Douchewand"
+            "id": "sanitair__badruimte__extra_voorzieningen__douchewand",
+            "naam": "Douchewand",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badruimte__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.25
         },
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Handdoekenradiator"
+            "id": "sanitair__badruimte__extra_voorzieningen__handdoekenradiator",
+            "naam": "Handdoekenradiator",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badruimte__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.5
         },
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Stopcontact bij wastafel"
-          },
-          "punten": 0.5
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Thermostatische mengkraan"
+            "id": "sanitair__badruimte__extra_voorzieningen__stopcontact_bij_wastafel",
+            "naam": "Stopcontact bij wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badruimte__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.5
         },
         {
           "aantal": 2.0,
           "criterium": {
-            "id": "sanitair__badruimte",
-            "naam": "Badruimte - Voorzieningen: Éénhandsmengkraan"
+            "id": "sanitair__badruimte__extra_voorzieningen__eenhandsmengkraan",
+            "naam": "Éénhandsmengkraan",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badruimte__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 0.5
         },
         {
           "aantal": 1.0,
           "criterium": {
+            "id": "sanitair__badruimte__extra_voorzieningen__thermostatische_mengkraan",
+            "naam": "Thermostatische mengkraan",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badruimte__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "id": "sanitair__slaapkamer",
+            "naam": "Slaapkamer"
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
             "id": "sanitair__slaapkamer__douche",
-            "naam": "Slaapkamer - Douche"
+            "naam": "Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__slaapkamer"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         }

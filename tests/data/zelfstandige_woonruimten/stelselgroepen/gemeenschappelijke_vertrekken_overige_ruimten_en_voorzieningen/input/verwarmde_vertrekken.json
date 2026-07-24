@@ -13,7 +13,7 @@
       },
       "naam": "Slaapkamer",
       "oppervlakte": 10.0,
-      "gedeeldMetAantalEenheden": 5,
+      "gedeeldMetAantalAdressen": 5,
       "verwarmd": true
     },
     {
@@ -28,7 +28,7 @@
       },
       "naam": "Woonkamer",
       "oppervlakte": 10.0,
-      "gedeeldMetAantalEenheden": 6,
+      "gedeeldMetAantalAdressen": 6,
       "verwarmd": true
     }
   ]

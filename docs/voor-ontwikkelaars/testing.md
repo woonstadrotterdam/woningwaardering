@@ -21,11 +21,7 @@ Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
 ## Expected test outputs genereren
 
-Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json` (en voor unit-tests ook `*.txt`), en `tests/docs/output_json_*.json` opnieuw gegenereerd worden.
-
-> ⚠️ Let op: als je de expected output-jsons opnieuw genereert na code-changes zullen alle tests slagen. Het is dus belangrijk om te analyseren hoe expected outputs veranderd zijn na de code-changes die je hebt doorgevoerd. Zo kun je achterhalen of de code-changes wel het gewenste effect hebben gehad en niet ook nog ongewenste neveneffecten.
-
-Gebruik het Task target (zie `taskfile.yml`):
+Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json`, `tests/docs/output_json_*.json` en de gerelateerde output-txt bestanden opnieuw gegenereerd worden. Gebruik hiervoor:
 
 ```bash
 task genereer-test-output
@@ -35,7 +31,9 @@ Dit draait `scripts/genereer_test_output.py` en overschrijft alle expected outpu
 
 Voor unit-inputs onder `tests/data/<stelsel>/input/` (niet voor `stelselgroepen/`) schrijft het script naast JSON ook een `*.txt` met de woningwaardering in leesbaar tabelformaat. Die bestanden zijn bedoeld om output-wijzigingen in PRs te reviewen; pytest vergelijkt alleen de JSONs.
 
-Let ook op: `docs/aan-de-slag/index.md` bevat inline voorbeeld-output (JSON en tabel). Als output, namen of criterium-id’s wijzigen, moet je die voorbeelden handmatig nalopen/bijwerken zodat de docs niet stilzwijgend verouderen.
+> ⚠️ Let op: als je de expected output-jsons opnieuw genereert na code-changes zullen alle tests slagen. Het is dus belangrijk om te analyseren hoe expected outputs veranderd zijn na de code-changes die je hebt doorgevoerd. Zo kun je achterhalen of de code-changes wel het gewenste effect hebben gehad en niet ook nog ongewenste neveneffecten.
+
+Let ook op: `docs/aan-de-slag/index.md` bevat inline voorbeeld-output (JSON en rapport). Als output, namen of criterium-id’s wijzigen, moet je die voorbeelden handmatig nalopen/bijwerken zodat de docs niet stilzwijgend verouderen.
 
 ## Test coverage rapport
 

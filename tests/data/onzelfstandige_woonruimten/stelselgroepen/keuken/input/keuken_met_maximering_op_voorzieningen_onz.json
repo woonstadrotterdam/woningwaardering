@@ -16,11 +16,11 @@
       "oppervlakte": 9.5565,
       "verwarmd": true,
       "afsluitbaar": true,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "bouwkundigeElementen": [
         {
           "id": "aanrecht",
-          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "idBimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {

@@ -3,8 +3,8 @@
   "ruimten": [
     {
       "id": "1",
-      "gedeeld_met_aantal_eenheden": 3,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
+      "gedeeldMetAantalAdressen": 3,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "aantal": 1,
       "soort": {
         "code": "GEM",
@@ -21,8 +21,8 @@
     },
     {
       "id": "2",
-      "gedeeld_met_aantal_eenheden": 4,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 3,
+      "gedeeldMetAantalAdressen": 4,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 3,
       "aantal": 1,
       "soort": {
         "code": "BTR",
@@ -39,8 +39,8 @@
     },
     {
       "id": "3",
-      "gedeeld_met_aantal_eenheden": 5,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 3,
+      "gedeeldMetAantalAdressen": 5,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 3,
       "aantal": 1,
       "soort": {
         "code": "GEM",

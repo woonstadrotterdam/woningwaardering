@@ -6,7 +6,8 @@ Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen
 
 - Lees `CONTEXT.md` voor de gedeelde domeintaal.
 - Lees `README.md` voor doel, disclaimer en actuele beleidsboek- en VERA-ankers.
-- Lees `docs/introductie/opzet.md` voor repository-opzet, warnings, lookup-tabellen en criterium-id's.
+- Lees `docs/index.md` voor de gebruikersgerichte uitleg van warnings en outputstructuur.
+- Lees `docs/voor-ontwikkelaars/` voor repository-opzet, lookup-tabellen, logging/warnings en de criteriumstrategie.
 - Lees bij wijzigingen in domeinlogica eerst de relevante pagina's in `docs/implementatietoelichtingen/`, check tegen het online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) en de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), en pas daarna code aan. Zie `CONTEXT.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
 - Lees bij ontwikkelwerk de relevante pagina in `docs/voor-ontwikkelaars/`, vooral `testing.md`, `naamgeving.md`, `data.md` en `logging.md`.
 
@@ -27,6 +28,7 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [tes
 - Volg de VERA-referentiedata voor naamgeving van stelsels en stelselgroepen.
 - Plaats stelselgroep-logica in de map van het juiste stelsel onder `woningwaardering/stelsels/`.
 - Plaats logica die door meerdere stelsels gedeeld wordt in `woningwaardering/stelsels/gedeelde_logica/`.
+- Bouw de output van een stelselgroep op met de builders in `woningwaardering/stelsels/builders.py` (`met_onderliggend` / `met_subgroep` / `gedeeld_met`); zie `docs/voor-ontwikkelaars/criteriumstrategie.md` voor de criteriumstrategie.
 - Behandel gegenereerde code onder `woningwaardering/vera/` terughoudend. Wijzig deze alleen via de bestaande scripts of wanneer de taak daar expliciet om vraagt.
 - Gebruik bestaande patronen voor stelsels, stelselgroepen, criterium-id's en lookup-tabellen voordat je nieuwe abstraheringen toevoegt.
 - Houd imports bovenaan het bestand; voeg geen inline imports toe.
@@ -83,7 +85,7 @@ Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, im
 ## Documentatie
 
 - Controleer bij elke gedrags-, beleids- of datamodelwijziging of documentatie moet worden bijgewerkt.
-- Let bij output-wijzigingen (punten, criteria, naming, ID-structuur) op `docs/aan-de-slag/index.md`: die bevat inline voorbeeld-output (JSON en tabel) en wordt niet automatisch meegenomen bij wijzigingen.
+- Let bij output-wijzigingen (punten, criteria, naming, ID-structuur) op `docs/aan-de-slag/index.md`: die bevat inline voorbeeld-output (JSON en rapport) en wordt niet automatisch meegenomen bij wijzigingen.
 - Leg implementatiekeuzes rond beleidsboekregels vast in `docs/implementatietoelichtingen/`.
 - Leg ontwikkelaarsafspraken vast in `docs/voor-ontwikkelaars/`.
 - Houd documentatie kort en verwijs naar bestaande bronnen in plaats van dezelfde uitleg op meerdere plekken te dupliceren.

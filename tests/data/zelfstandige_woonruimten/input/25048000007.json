@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "c",
+    "huisnummerToevoeging": "c",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"

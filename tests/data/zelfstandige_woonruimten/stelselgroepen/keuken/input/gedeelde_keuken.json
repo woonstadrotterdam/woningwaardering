@@ -10,7 +10,7 @@
         "naam": "Keuken"
       },
       "oppervlakte": 20.0,
-      "gedeeldMetAantalEenheden": 4,
+      "gedeeldMetAantalAdressen": 4,
       "bouwkundigeElementen": [
         {
           "detailSoort": {

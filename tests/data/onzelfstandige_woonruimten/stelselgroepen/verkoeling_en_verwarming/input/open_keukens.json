@@ -16,10 +16,11 @@
         "code": "WOO",
         "naam": "Woonkamer"
       },
-      "naam": "Verwarmde woonkamer",
+      "naam": "Woonkamer",
       "inhoud": 111.528,
       "oppervlakte": 41.0028,
       "verwarmd": true,
+      "verkoeld": true,
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
@@ -46,7 +47,7 @@
         "code": "KEU",
         "naam": "Keuken"
       },
-      "naam": "Verwarmde keuken",
+      "naam": "Keuken",
       "inhoud": 57.4359,
       "oppervlakte": 20.3673,
       "verwarmd": true,
@@ -76,7 +77,7 @@
         "code": "SLA",
         "naam": "Slaapkamer"
       },
-      "naam": "Verwarmde slaapkamer",
+      "naam": "Slaapkamer",
       "inhoud": 31.6776,
       "oppervlakte": 15.9766,
       "verwarmd": true,
@@ -106,10 +107,40 @@
         "code": "WOK",
         "naam": "Woonkamer/keuken"
       },
-      "naam": "Verwarmde woonkamer/keuken",
+      "naam": "Woonkamer/keuken",
       "inhoud": 111.528,
       "oppervlakte": 41.0028,
       "verwarmd": true
+    },
+    {
+      "id": "Space_581247",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WSL",
+        "naam": "Woon-/slaapkamer"
+      },
+      "naam": "Woon-/slaapkamer",
+      "inhoud": 31.6776,
+      "oppervlakte": 15.9766,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in woon-/slaapkamer",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2700
+        }
+      ]
     },
     {
       "id": "Space_273269",

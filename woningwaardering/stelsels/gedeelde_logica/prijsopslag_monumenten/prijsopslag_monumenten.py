@@ -3,25 +3,26 @@ from datetime import date
 
 from loguru import logger
 
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
+)
 from woningwaardering.stelsels.utils import update_eenheid_monumenten
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
     Eenheidmonument,
     Woningwaarderingstelselgroep,
-    WoningwaarderingstelselgroepReferentiedata,
 )
 
 
 def opslag_rijksmonument(
     peildatum: date,
     eenheid: EenhedenEenheid,
-    stelselgroep: WoningwaarderingstelselgroepReferentiedata,
-) -> WoningwaarderingResultatenWoningwaardering | None:
+    *,
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> WaarderingBuilder | None:
     """Bepaalt de prijsopslag of puntentoeslag voor een rijksmonument.
 
     Voor huurovereenkomsten vanaf 1 juli 2024 geldt een prijsopslag van 35%.
@@ -32,10 +33,10 @@ def opslag_rijksmonument(
     Args:
         peildatum (date): De datum waarop de waardering wordt uitgevoerd
         eenheid (EenhedenEenheid): De te waarderen eenheid
-        stelselgroep (WoningwaarderingstelselgroepReferentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
+        waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie
 
     Returns:
-        WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag of puntentoeslag, of None als de eenheid geen rijksmonument is
+        WaarderingBuilder | None: De waardering met prijsopslag of puntentoeslag, of None als de eenheid geen rijksmonument is
     """
     if Eenheidmonument.rijksmonument in (eenheid.monumenten or []):
         datum_afsluiten_huurovereenkomst = eenheid.datum_afsluiten_huurovereenkomst
@@ -49,36 +50,30 @@ def opslag_rijksmonument(
             )
             datum_afsluiten_huurovereenkomst = peildatum
 
-        woningwaardering = WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="Rijksmonument",
-                id=str(
-                    CriteriumId(
-                        stelselgroep=stelselgroep,
-                        criterium="rijksmonument",
-                    )
-                ),
-            ),
+        woningwaardering = waarderingsgroep_builder.met_onderliggend(
+            id="rijksmonument",
+            naam="Rijksmonument",
         )
 
         if datum_afsluiten_huurovereenkomst >= date(2024, 7, 1):
             logger.info(
-                f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 35% opslag op de maximale huurprijs voor {stelselgroep.naam}."
+                f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 35% opslag op de maximale huurprijs."
             )
             woningwaardering.opslagpercentage = 0.35
         elif (
-            stelselgroep
+            isinstance(waarderingsgroep_builder, WaarderingsgroepBuilder)
+            and waarderingsgroep_builder.stelselgroep
             == Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw
         ):
             # 50 punten voor zelfstandige woonruimten
             logger.info(
-                f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 50 punten voor {stelselgroep.naam}."
+                f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 50 punten voor {Woningwaarderingstelselgroep.prijsopslag_monumenten_en_nieuwbouw.naam}."
             )
             woningwaardering.punten = 50.0
-        elif stelselgroep == Woningwaarderingstelselgroep.prijsopslag_monumenten:
+        else:
             # 10 punten voor onzelfstandige woonruimten
             logger.info(
-                f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 10 punten voor {stelselgroep.naam}."
+                f"Eenheid ({eenheid.id}) is een rijksmonument en krijgt 10 punten voor {Woningwaarderingstelselgroep.prijsopslag_monumenten.naam}."
             )
             woningwaardering.punten = 10.0
 
@@ -89,18 +84,20 @@ def opslag_rijksmonument(
 
 
 def opslag_gemeentelijk_of_provinciaal_monument(
-    eenheid: EenhedenEenheid, stelselgroep: WoningwaarderingstelselgroepReferentiedata
-) -> WoningwaarderingResultatenWoningwaardering | None:
+    eenheid: EenhedenEenheid,
+    *,
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> WaarderingBuilder | None:
     """Bepaalt de prijsopslag voor een gemeentelijk of provinciaal monument.
 
     Voor gemeentelijke en provinciale monumenten geldt een prijsopslag van 15%.
 
     Args:
         eenheid (EenhedenEenheid): De te waarderen eenheid
-        stelselgroep (WoningwaarderingstelselgroepReferentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
+        waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie
 
     Returns:
-        WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als de eenheid geen gemeentelijk of provinciaal monument is
+        WaarderingBuilder | None: De waardering met prijsopslag, of None als de eenheid geen gemeentelijk of provinciaal monument is
     """
     if any(
         monument
@@ -111,30 +108,26 @@ def opslag_gemeentelijk_of_provinciaal_monument(
         for monument in eenheid.monumenten or []
     ):
         logger.info(
-            f"Eenheid ({eenheid.id}) is gemeentelijk of provinciaal monument en krijgt 15% opslag op de maximale huurprijs voor {stelselgroep.naam}."
+            f"Eenheid ({eenheid.id}) is gemeentelijk of provinciaal monument en krijgt 15% opslag op de maximale huurprijs."
         )
-        return WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="Gemeentelijk of provinciaal monument",
-                id=str(
-                    CriteriumId(
-                        stelselgroep=stelselgroep,
-                        criterium="gemeentelijk_of_provinciaal_monument",
-                    )
-                ),
-            ),
-            opslagpercentage=0.15,
+        waardering = waarderingsgroep_builder.met_onderliggend(
+            id="gemeentelijk_of_provinciaal_monument",
+            naam="Gemeentelijk of provinciaal monument",
         )
-    else:
-        logger.debug(
-            f"Eenheid ({eenheid.id}) behoort niet tot een gemeentelijk of provinciaal monument."
-        )
+        waardering.opslagpercentage = 0.15
+        return waardering
+
+    logger.debug(
+        f"Eenheid ({eenheid.id}) behoort niet tot een gemeentelijk of provinciaal monument."
+    )
     return None
 
 
 def opslag_beschermd_stads_of_dorpsgezicht(
-    eenheid: EenhedenEenheid, stelselgroep: WoningwaarderingstelselgroepReferentiedata
-) -> WoningwaarderingResultatenWoningwaardering | None:
+    eenheid: EenhedenEenheid,
+    *,
+    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+) -> WaarderingBuilder | None:
     """Bepaalt de prijsopslag voor een rijksbeschermd stads- of dorpsgezicht.
 
     Een prijsopslag van 5% wordt toegekend als:
@@ -144,10 +137,10 @@ def opslag_beschermd_stads_of_dorpsgezicht(
 
     Args:
         eenheid (EenhedenEenheid): De te waarderen eenheid
-        stelselgroep (WoningwaarderingstelselgroepReferentiedata): De stelselgroep waarvoor de prijsopslag wordt berekend
+        waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie
 
     Returns:
-        WoningwaarderingResultatenWoningwaardering | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
+        WaarderingBuilder | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
     """
     # check of de eenheid een rijksbeschermd stads- of dorpsgezicht is
     if not any(
@@ -198,20 +191,14 @@ def opslag_beschermd_stads_of_dorpsgezicht(
         return None
 
     logger.info(
-        f"Eenheid ({eenheid.id}) behoort tot een rijksbeschermd stads- of dorpsgezicht en krijgt 5% opslag op de maximale huurprijs voor {stelselgroep.naam}."
+        f"Eenheid ({eenheid.id}) behoort tot een rijksbeschermd stads- of dorpsgezicht en krijgt 5% opslag op de maximale huurprijs."
     )
-    return WoningwaarderingResultatenWoningwaardering(
-        criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-            naam="Rijksbeschermd stads- of dorpsgezicht",
-            id=str(
-                CriteriumId(
-                    stelselgroep=stelselgroep,
-                    criterium="rijksbeschermd_stads_of_dorpsgezicht",
-                )
-            ),
-        ),
-        opslagpercentage=0.05,
+    waardering = waarderingsgroep_builder.met_onderliggend(
+        id="rijksbeschermd_stads_of_dorpsgezicht",
+        naam="Rijksbeschermd stads- of dorpsgezicht",
     )
+    waardering.opslagpercentage = 0.05
+    return waardering
 
 
 def check_monumenten_attribuut(eenheid: EenhedenEenheid) -> None:

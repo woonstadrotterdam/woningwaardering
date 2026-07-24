@@ -39,14 +39,14 @@ def voorbeeld2_python_eenheid() -> EenhedenEenheid:
         bouwjaar=1924,
         woningwaarderingstelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
         adres=EenhedenEenheidadres(
-            straatnaam="Nieuwe Boezemstraat",
-            huisnummer="27",
+            straatnaam="",
+            huisnummer="",
             huisnummer_toevoeging="",
-            postcode="3034PH",
+            postcode="",
             woonplaats=EenhedenWoonplaats(naam="ROTTERDAM"),
         ),
         adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-            id="0599010000485697", bag_identificatie="0599010000485697"
+            id="", bag_identificatie=""
         ),
         panden=[
             EenhedenPand(

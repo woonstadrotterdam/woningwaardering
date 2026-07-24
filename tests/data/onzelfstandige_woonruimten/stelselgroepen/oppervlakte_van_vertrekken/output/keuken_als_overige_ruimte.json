@@ -14,24 +14,19 @@
       "punten": 1.0,
       "woningwaarderingen": [
         {
-          "aantal": 1.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Keuken_1",
-            "naam": "keuken als overige ruimte",
-            "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__prive"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "id": "oppervlakte_van_vertrekken__prive",
+            "naam": "Privé"
           }
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__totaal__prive",
-            "naam": "Totaal (privé)",
+            "id": "oppervlakte_van_vertrekken__prive__Keuken_1",
+            "naam": "keuken als overige ruimte",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_vertrekken__prive"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"

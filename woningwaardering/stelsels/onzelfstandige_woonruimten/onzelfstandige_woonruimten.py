@@ -47,7 +47,7 @@ class OnzelfstandigeWoonruimten(Stelsel):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=OnzelfstandigeWoonruimten(peildatum=date(2026, 1, 1)),
+        instance=OnzelfstandigeWoonruimten(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

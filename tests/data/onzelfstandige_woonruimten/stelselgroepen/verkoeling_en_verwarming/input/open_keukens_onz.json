@@ -16,7 +16,7 @@
         "code": "WOO",
         "naam": "Woonkamer"
       },
-      "naam": "Verwarmde woonkamer",
+      "naam": "Woonkamer",
       "inhoud": 111.528,
       "oppervlakte": 41.0028,
       "verwarmd": true,
@@ -47,7 +47,7 @@
         "code": "KEU",
         "naam": "Keuken"
       },
-      "naam": "Verwarmde keuken",
+      "naam": "Keuken",
       "inhoud": 57.4359,
       "oppervlakte": 20.3673,
       "verwarmd": true,
@@ -78,7 +78,7 @@
         "code": "SLA",
         "naam": "Slaapkamer"
       },
-      "naam": "Verwarmde slaapkamer",
+      "naam": "Slaapkamer",
       "inhoud": 31.6776,
       "oppervlakte": 15.9766,
       "verwarmd": true,
@@ -185,7 +185,7 @@
       },
       "detailSoort": {
         "code": "SLA",
-        "naam": "Onverwarmde slaapkamer"
+        "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
       "inhoud": 31.6776,
@@ -218,7 +218,7 @@
         "code": "WOK",
         "naam": "Woonkamer/keuken"
       },
-      "naam": "Onverwarmde woonkamer/keuken",
+      "naam": "Woonkamer/keuken",
       "inhoud": 111.528,
       "oppervlakte": 41.0028,
       "verwarmd": false,

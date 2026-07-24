@@ -3,7 +3,7 @@ import warnings
 from loguru import logger
 
 from woningwaardering import Woningwaardering
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
     EenhedenEenheid,
@@ -31,7 +31,7 @@ def get_eenheid():
             soort=Ruimtesoort.vertrek,
             detail_soort=Ruimtedetailsoort.keuken,
             oppervlakte=20,
-            gedeeldMetAantalEenheden=4,
+            gedeeldMetAantalAdressen=4,
             gedeeldMetAantalOnzelfstandigeWoonruimten=4,
             bouwkundige_elementen=[
                 BouwkundigElementenBouwkundigElement(
@@ -50,7 +50,7 @@ def get_eenheid():
             soort=Ruimtesoort.overige_ruimten,
             detailSoort=Ruimtedetailsoort.toiletruimte,
             oppervlakte=2,
-            gedeeldMetAantalEenheden=4,
+            gedeeldMetAantalAdressen=4,
             gedeeldMetAantalOnzelfstandigeWoonruimten=4,
             installaties=[
                 Installatiesoort.hangend_toilet,
@@ -67,7 +67,7 @@ def main():
     warnings.filterwarnings("default")
     eenheid = get_eenheid()
     woningwaardering = Woningwaardering().waardeer(eenheid)
-    print(naar_tabel(woningwaardering))
+    print(naar_rapport(woningwaardering))
 
 
 if __name__ == "__main__":

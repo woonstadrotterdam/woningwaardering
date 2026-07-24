@@ -1,19 +1,17 @@
 import warnings
 from decimal import Decimal
-from typing import Generator
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
+    Meeteenheid,
     Ruimtedetailsoort,
     Woningwaarderingstelselgroep,
 )
@@ -35,11 +33,15 @@ parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
 
 def waardeer_gemeenschappelijke_parkeerruimte(
     ruimte: EenhedenRuimte,
-) -> Generator[WoningwaarderingResultatenWoningwaardering, None, None]:
+    *,
+    waarderingsgroep_builder: WaarderingsgroepBuilder,
+) -> None:
     """Bepaalt de waardering voor gemeenschappelijke parkeerruimten.
 
     Args:
         ruimte (EenhedenRuimte): De te waarderen ruimte
+        waarderingsgroep_builder (WaarderingsgroepBuilder): waarderingsgroep waarin
+            de hiërarchie wordt opgebouwd.
 
     De waardering wordt bepaald op basis van het type parkeerruimte:
     - Type I (inpandige afgesloten parkeerplek): 9 punten
@@ -47,19 +49,18 @@ def waardeer_gemeenschappelijke_parkeerruimte(
     - Type III (parkeerplek buiten behorend bij een complex): 4 punten
 
     Extra punten:
-    - +2 punten bij aanwezigheid van een laadpaal
+    - +2 punten bij aanwezigheid van een laadpaal die exclusief is voor gebruik
+      door bewoners (2.10.5).
 
     Voorwaarden:
     - De oppervlakte moet minimaal 12m² zijn
-    - Het aantal punten wordt gedeeld door het aantal eenheden waarmee de ruimte gedeeld is
+    - Het aantal punten wordt gedeeld door het aantal adressen en (bij onzelfstandig)
+      het aantal onzelfstandige woonruimten op het adres
     - De ruimte moet van één van de volgende detailsoorten zijn:
         - inpandige afgesloten parkeerplek
         - uitpandige afgesloten parkeerplek
         - carport
         - parkeerplek buiten behorend bij een complex
-
-    Yields:
-        WoningwaarderingResultatenWoningwaardering: Waardering voor een specifiek parkeertype
     """
     if ruimte.detail_soort is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort")
@@ -76,7 +77,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort}. Gebruik {Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex} als detailsoort om in aanmerking te komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}.",
             UserWarning,
         )
-        return None
+        return
 
     if ruimte.detail_soort not in [
         Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,  # Type I
@@ -93,9 +94,9 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte")
         return
 
-    if ruimte.gedeeld_met_aantal_eenheden is None:
+    if ruimte.gedeeld_met_aantal_adressen is None:
         warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_eenheden'. Zet 'gedeeld_met_aantal_eenheden' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_eenheden' op 0 of 1 wordt beschouwd als niet gedeeld."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_adressen'. Zet 'gedeeld_met_aantal_adressen' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_adressen' op 0 of 1 wordt beschouwd als niet gedeeld."
         )
         return
 
@@ -105,42 +106,60 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         )
         return
 
+    # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst
+    # exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2 (bijvoorbeeld een
+    # garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief
+    # behorende tot de woning). Zie ook de implementatietoelichting voor privé-parkeerplekken
+    # die met onzelfstandige woonruimten gedeeld worden.
+    aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
+    aantal_onzelfstandige_woonruimten = (
+        ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+    )
+    gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
+        aantal_adressen=aantal_adressen,
+        aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+    )
+
+    # 2.10.4 Rekenmethode: delen door aantal adressen; bij privé parkeerplek voor
+    # één adres delen door 1. Onzelfstandig: daarna delen door aantal
+    # onzelfstandige woonruimten op het adres.
+    deler = Decimal(aantal_adressen * aantal_onzelfstandige_woonruimten)
+    heeft_laadpaal = heeft_bouwkundig_element(
+        ruimte, Bouwkundigelementdetailsoort.laadpaal
+    )
+
     for (
         type_parkeeruimte,
         punten,
     ) in parkeertype_punten_mapping[ruimte.detail_soort].items():
-        criterium = f"{type_parkeeruimte}"
-
-        if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.laadpaal):
-            punten += Decimal("2.0")
-            criterium += " + laadpaal"
-
-        if ruimte.gedeeld_met_aantal_eenheden >= 2:
-            criterium += f" (gedeeld met {ruimte.gedeeld_met_aantal_eenheden} adressen)"
-            totaal_punten_type_parkeeruimte = (
-                punten * Decimal(str(ruimte.aantal))
-            ) / Decimal(str(ruimte.gedeeld_met_aantal_eenheden))
-        else:
-            criterium += " (privé)"
-            totaal_punten_type_parkeeruimte = (
-                punten * Decimal(str(ruimte.aantal)) / Decimal("1")
-            )
+        totaal_punten_type_parkeeruimte = punten * Decimal(str(ruimte.aantal)) / deler
 
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{criterium}'."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke parkeerruimte '{type_parkeeruimte}'."
         )
 
-        yield WoningwaarderingResultatenWoningwaardering(
-            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=criterium,
-                id=str(
-                    CriteriumId(
-                        stelselgroep=Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,
-                        ruimte_id=ruimte.id,
-                    )
-                ),
-            ),
+        gedeeld_met_laag.met_onderliggend(
+            id=ruimte.id,
+            naam=type_parkeeruimte,
+            meeteenheid=Meeteenheid.stuks,
             aantal=ruimte.aantal,
             punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),
         )
-    return
+
+        # 2.10.5 Laadpalen: 2 extra punten.
+        if heeft_laadpaal:
+            totaal_punten_laadpaal = (
+                Decimal("2.0") * Decimal(str(ruimte.aantal)) / deler
+            )
+
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een laadpaal bij '{type_parkeeruimte}'."
+            )
+
+            gedeeld_met_laag.met_onderliggend(
+                id=f"{ruimte.id}_laadpaal",
+                naam="Laadpaal",
+                meeteenheid=Meeteenheid.stuks,
+                aantal=ruimte.aantal,
+                punten=utils.rond_af(totaal_punten_laadpaal, decimalen=2),
+            )

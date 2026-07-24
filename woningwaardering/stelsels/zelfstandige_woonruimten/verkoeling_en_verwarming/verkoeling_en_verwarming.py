@@ -1,21 +1,18 @@
-from collections import defaultdict
 from datetime import date
-from decimal import Decimal
-from typing import Iterator
 
 from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.gedeelde_logica import (
-    waardeer_verkoeling_en_verwarming,
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica import waardeer_verkoeling_en_verwarming
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
+    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -43,43 +40,28 @@ class VerkoelingEnVerwarming(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
         )
-
-        woningwaardering_groep.woningwaarderingen = []
 
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if not utils.gedeeld_met_eenheden(ruimte)
+            if not utils.gedeeld_met_adressen(ruimte)
         ]
 
-        woningwaardering_groep.woningwaarderingen.extend(
-            waardering for _, waardering in waardeer_verkoeling_en_verwarming(ruimten)
-        )
-
-        woningwaardering_groep.woningwaarderingen.extend(
-            self._maak_totalen(woningwaardering_groep)
-        )
-
-        punten = utils.rond_af_op_kwart(
-            Decimal(
-                sum(
-                    Decimal(str(woningwaardering.punten))
-                    for woningwaardering in woningwaardering_groep.woningwaarderingen
-                    or []
-                    if woningwaardering.punten is not None
-                    and woningwaardering.criterium is not None
-                    and woningwaardering.criterium.bovenliggende_criterium is None
-                )
+        def subgroep(
+            _ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
+        ) -> WaarderingBuilder:
+            return waarderingsgroep_builder.met_subgroep(
+                id=subgroep_id,
+                naam=subgroep_naam,
             )
-        )
 
-        woningwaardering_groep.punten = float(punten)
+        for _ in waardeer_verkoeling_en_verwarming(ruimten, subgroep=subgroep):
+            pass
+
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -87,37 +69,10 @@ class VerkoelingEnVerwarming(Stelselgroep):
 
         return woningwaardering_groep
 
-    def _maak_totalen(
-        self, woningwaardering_groep: WoningwaarderingResultatenWoningwaarderingGroep
-    ) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-        criteriumsleutelpunten: dict[str, float] = defaultdict(float)
-        for woningwaardering in woningwaardering_groep.woningwaarderingen or []:
-            if (
-                woningwaardering.criterium
-                and woningwaardering.criterium.bovenliggende_criterium
-                and woningwaardering.criterium.bovenliggende_criterium.id
-                and isinstance(woningwaardering.punten, float)
-            ):
-                criteriumsleutelpunten[
-                    woningwaardering.criterium.bovenliggende_criterium.id
-                ] += woningwaardering.punten
-
-        for id, punten in criteriumsleutelpunten.items():
-            onderdelen = id.split("__")
-            naam = onderdelen[-1].capitalize().replace("_", " ")
-            criterium = WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam=naam,
-                id=id,
-            )
-            yield WoningwaarderingResultatenWoningwaardering(
-                criterium=criterium,
-                punten=punten,
-            )
-
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=VerkoelingEnVerwarming(peildatum=date(2026, 1, 1)),
+        instance=VerkoelingEnVerwarming(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

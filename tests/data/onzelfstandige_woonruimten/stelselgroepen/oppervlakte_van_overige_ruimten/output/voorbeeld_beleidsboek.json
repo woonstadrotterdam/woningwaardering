@@ -14,12 +14,19 @@
       "punten": 9.25,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__prive",
+            "naam": "Privé"
+          },
+          "punten": 3.0
+        },
+        {
           "aantal": 4.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_1",
+            "id": "oppervlakte_van_overige_ruimten__prive__Space_1",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__totaal__prive"
+              "id": "oppervlakte_van_overige_ruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -28,12 +35,19 @@
           }
         },
         {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 3 onzelfstandige woonruimten"
+          },
+          "punten": 6.25
+        },
+        {
           "aantal": 19.34,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_2",
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__Space_2",
             "naam": "Garage",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -44,40 +58,16 @@
         {
           "aantal": 6.06,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_3",
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__Space_3",
             "naam": "Bijkeuken",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
           }
-        },
-        {
-          "aantal": 4.0,
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__totaal__prive",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 3.0
-        },
-        {
-          "aantal": 25.0,
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__totaal__gedeeld_met__3__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 3 onzelfstandige woonruimten)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 6.25
         }
       ]
     }

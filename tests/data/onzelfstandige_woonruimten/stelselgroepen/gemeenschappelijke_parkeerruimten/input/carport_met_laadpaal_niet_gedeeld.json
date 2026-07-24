@@ -3,8 +3,8 @@
   "ruimten": [
     {
       "id": "1",
-      "gedeeld_met_aantal_eenheden": 1,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 2,
+      "gedeeldMetAantalAdressen": 1,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "aantal": 1,
       "soort": {
         "code": "BTR",

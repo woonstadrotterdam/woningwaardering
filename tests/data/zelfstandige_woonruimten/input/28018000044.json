@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -53,7 +53,7 @@
       "bouwkundigeElementen": [
         {
           "id": "28018000044",
-          "id_bimmodel": "1xmjfA0hv60PDULXj2MRor",
+          "idBimmodel": "1xmjfA0hv60PDULXj2MRor",
           "naam": "Ketel",
           "omschrijving": "Remeha Avanta 28 C CW4",
           "soort": {
@@ -195,7 +195,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Fontein_20256207",
-          "id_bimmodel": "1xmjfA0hv60PDULXj2MRpw",
+          "idBimmodel": "1xmjfA0hv60PDULXj2MRpw",
           "omschrijving": null,
           "soort": {
             "code": "SAN",
@@ -211,7 +211,7 @@
         },
         {
           "id": "Closetcombinatie_20256206",
-          "id_bimmodel": "1xmjfA0hv60PDULXj2MRpv",
+          "idBimmodel": "1xmjfA0hv60PDULXj2MRpv",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -269,7 +269,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_20256210",
-          "id_bimmodel": "2K$lfEbArFBBKUjCVt_9da",
+          "idBimmodel": "2K$lfEbArFBBKUjCVt_9da",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -346,7 +346,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_20268169",
-          "id_bimmodel": "1xmjfA0hv60PDULXj2MRpq",
+          "idBimmodel": "1xmjfA0hv60PDULXj2MRpq",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -362,7 +362,7 @@
         },
         {
           "id": "Wastafel_20268168",
-          "id_bimmodel": "1xmjfA0hv60PDULXj2MRpx",
+          "idBimmodel": "1xmjfA0hv60PDULXj2MRpx",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",

@@ -62,8 +62,8 @@
       "naam": "Gang",
       "inhoud": 7.85489,
       "oppervlakte": 2.7369,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "soort": {
@@ -77,8 +77,8 @@
       "naam": "Gang",
       "inhoud": 12.3979,
       "oppervlakte": 4.39642,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "soort": {
@@ -92,8 +92,8 @@
       "naam": "Woonkamer",
       "inhoud": 55.528,
       "oppervlakte": 20.0028,
-      "verwarmd": true,
-      "gemeenschappelijk": true
+      "verwarmd": true
+
     },
     {
       "soort": {
@@ -108,7 +108,6 @@
       "inhoud": 27.4359,
       "oppervlakte": 10.3673,
       "verwarmd": true,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
           "naam": "Aanrecht",
@@ -137,8 +136,8 @@
       "naam": "Entree",
       "inhoud": 5.84899,
       "oppervlakte": 1.28832,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "soort": {
@@ -154,8 +153,8 @@
       "oppervlakte": 49.1102,
       "lengte": 10.82,
       "breedte": 5.29,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "soort": {
@@ -169,8 +168,8 @@
       "naam": "Overloop",
       "inhoud": 7.63951,
       "oppervlakte": 2.80864,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "soort": {
@@ -184,8 +183,8 @@
       "naam": "Gang",
       "inhoud": 7.45195,
       "oppervlakte": 3.32162,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "soort": {
@@ -200,7 +199,6 @@
       "inhoud": 21.5125,
       "oppervlakte": 7.49563,
       "verwarmd": true,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
           "naam": "Douche",
@@ -286,8 +284,8 @@
       "naam": "Slaapkamer",
       "inhoud": 31.6776,
       "oppervlakte": 15.9766,
-      "verwarmd": true,
-      "gemeenschappelijk": true
+      "verwarmd": true
+
     },
     {
       "id": "Space_108006207",
@@ -302,8 +300,8 @@
       "naam": "Meterruimte",
       "inhoud": 1.48163,
       "oppervlakte": 0.326351,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "id": "Space_108014579",
@@ -318,8 +316,8 @@
       "naam": "Schacht",
       "inhoud": 0.777043,
       "oppervlakte": 0.270747,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "id": "Space_108006211",
@@ -334,8 +332,8 @@
       "naam": "Trappenhuis",
       "inhoud": 4.76483,
       "oppervlakte": 2.77025,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "id": "Space_108010629",
@@ -350,8 +348,8 @@
       "naam": "Trappenhuis",
       "inhoud": 6.41373,
       "oppervlakte": 2.12375,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "id": "Space_108017431",
@@ -366,8 +364,8 @@
       "naam": "Slaapkamer",
       "inhoud": 38.1247,
       "oppervlakte": 19.1488,
-      "verwarmd": true,
-      "gemeenschappelijk": true
+      "verwarmd": true
+
     },
     {
       "id": "Space_108006238",
@@ -382,8 +380,8 @@
       "naam": "Overige ruimte",
       "inhoud": 15.7891,
       "oppervlakte": 7.11221,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "id": "Space_108014593",
@@ -398,8 +396,8 @@
       "naam": "Slaapkamer",
       "inhoud": 45.3997,
       "oppervlakte": 15.8187,
-      "verwarmd": true,
-      "gemeenschappelijk": true
+      "verwarmd": true
+
     },
     {
       "id": "Space_108006223",
@@ -415,7 +413,6 @@
       "inhoud": 3.78948,
       "oppervlakte": 1.21857,
       "verwarmd": false,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
           "id": "Fontein_108006225",
@@ -463,8 +460,8 @@
       "naam": "Trappenhuis",
       "inhoud": 6.73124,
       "oppervlakte": 2.12851,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "id": "Space_108014580",
@@ -479,8 +476,8 @@
       "naam": "Schacht",
       "inhoud": 0.766847,
       "oppervlakte": 0.267194,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "id": "Space_108006244",
@@ -495,8 +492,8 @@
       "naam": "Trappenhuis",
       "inhoud": 2.919,
       "oppervlakte": 0.949606,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     },
     {
       "id": "Space_108017427",
@@ -512,7 +509,6 @@
       "inhoud": 14.4272,
       "oppervlakte": 6.6504,
       "verwarmd": false,
-      "gemeenschappelijk": true,
       "bouwkundigeElementen": [
         {
           "id": "Ketel_108017429",
@@ -545,8 +541,8 @@
       "naam": "Schacht",
       "inhoud": 0.369015,
       "oppervlakte": 0.27936,
-      "verwarmd": false,
-      "gemeenschappelijk": true
+      "verwarmd": false
+
     }
   ]
 }

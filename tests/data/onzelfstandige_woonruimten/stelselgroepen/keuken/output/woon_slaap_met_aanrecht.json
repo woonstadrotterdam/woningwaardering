@@ -14,12 +14,27 @@
       "punten": 22.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
+            "id": "keuken__prive__WOK",
+            "naam": "Woonkamer/keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken__prive"
+            }
+          }
+        },
+        {
           "aantal": 2000.0,
           "criterium": {
-            "id": "keuken__WOK__lengte_aanrecht_aanrecht",
-            "naam": "Woonkamer/keuken: Lengte aanrecht",
+            "id": "keuken__prive__WOK__lengte_aanrecht_aanrecht",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
+              "id": "keuken__prive__WOK"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -29,42 +44,21 @@
           "punten": 7.0
         },
         {
-          "aantal": 1000.0,
           "criterium": {
-            "id": "keuken__Woonkamer__lengte_aanrecht_aanrecht",
-            "naam": "Woonkamer: Lengte aanrecht",
+            "id": "keuken__prive__Woonkamer",
+            "naam": "Woonkamer",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
-            },
-            "meeteenheid": {
-              "code": "MIL",
-              "naam": "Millimeter"
+              "id": "keuken__prive"
             }
-          },
-          "punten": 4.0
-        },
-        {
-          "aantal": 2000.0,
-          "criterium": {
-            "id": "keuken__Woon-/slaapkamer__lengte_aanrecht_aanrecht",
-            "naam": "Woon-/slaapkamer: Lengte aanrecht",
-            "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
-            },
-            "meeteenheid": {
-              "code": "MIL",
-              "naam": "Millimeter"
-            }
-          },
-          "punten": 7.0
+          }
         },
         {
           "aantal": 1000.0,
           "criterium": {
-            "id": "keuken__Slaapkamer__lengte_aanrecht_aanrecht",
-            "naam": "Slaapkamer: Lengte aanrecht",
+            "id": "keuken__prive__Woonkamer__lengte_aanrecht_aanrecht",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__prive"
+              "id": "keuken__prive__Woonkamer"
             },
             "meeteenheid": {
               "code": "MIL",
@@ -75,10 +69,51 @@
         },
         {
           "criterium": {
-            "id": "keuken__totaal__prive",
-            "naam": "Totaal (privé)"
+            "id": "keuken__prive__Woon-/slaapkamer",
+            "naam": "Woon-/slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "keuken__prive"
+            }
+          }
+        },
+        {
+          "aantal": 2000.0,
+          "criterium": {
+            "id": "keuken__prive__Woon-/slaapkamer__lengte_aanrecht_aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__prive__Woon-/slaapkamer"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
           },
-          "punten": 22.0
+          "punten": 7.0
+        },
+        {
+          "criterium": {
+            "id": "keuken__prive__Slaapkamer",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "keuken__prive"
+            }
+          }
+        },
+        {
+          "aantal": 1000.0,
+          "criterium": {
+            "id": "keuken__prive__Slaapkamer__lengte_aanrecht_aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__prive__Slaapkamer"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 4.0
         }
       ]
     }

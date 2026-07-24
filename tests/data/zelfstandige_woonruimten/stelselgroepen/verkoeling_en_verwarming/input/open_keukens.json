@@ -112,6 +112,36 @@
       "verwarmd": true
     },
     {
+      "id": "Space_418526",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WSL",
+        "naam": "Woon-/slaapkamer"
+      },
+      "naam": "Verwarmde woon-/slaapkamer",
+      "inhoud": 31.6776,
+      "oppervlakte": 15.9766,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in woon-/slaapkamer",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2700
+        }
+      ]
+    },
+    {
       "id": "Space_988530",
       "soort": {
         "code": "VTK",

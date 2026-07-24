@@ -1,3 +1,3 @@
-from .sanitair import waardeer_sanitair
+from .sanitair import maximeer_wastafels, waardeer_sanitair
 
-__all__ = ["waardeer_sanitair"]
+__all__ = ["maximeer_wastafels", "waardeer_sanitair"]
