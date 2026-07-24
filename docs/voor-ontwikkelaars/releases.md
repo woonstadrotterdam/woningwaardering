@@ -2,24 +2,35 @@
 
 ## Versienummering
 
-Voor versienummering maken we gebruik van [SemVer](https://semver.org/lang/nl/):
+Voor versienummering gebruiken we
+[SemVer](https://semver.org/lang/nl/) in de vorm `MAJOR.MINOR.PATCH`. De
+`MINOR`-versie wordt weergegeven als `YYYYMM`:
 
-Bij SemVer wordt een versienummer in de vorm MAJOR.MINOR.PATCH gebruikt, waarbij elk element als volgt wordt verhoogd:
+- `MAJOR` wordt verhoogd bij incompatibele wijzigingen in de publieke
+  Python-API of de outputstructuur.
+- `MINOR` identificeert de geïmplementeerde beleidsboekversie en wordt gevormd
+  door het ingangsjaar en de ingangsmaand daarvan in de vorm `YYYYMM`. Nieuwe
+  functionaliteit wordt uitgebracht als onderdeel van een nieuwe
+  beleidsboekversie en verhoogt daarmee `MINOR`.
+- `PATCH` wordt verhoogd bij compatibele bugfixes en onderhoudsupdates binnen
+  dezelfde beleidsboekversie.
 
-- `MAJOR` wordt verhoogd bij incompatibele API-wijzigingen,
-- `MINOR` wordt verhoogd bij het toevoegen van functionaliteit die compatibel is met de vorige versie, en
-- `PATCH` wordt verhoogd bij compatibele bugfixes.
+Bij een wijziging van `MAJOR` of `MINOR` wordt `PATCH` teruggezet naar `0`.
+Versie `5.202607.0` bevat bijvoorbeeld een incompatibele wijziging, implementeert
+het beleidsboek dat in juli 2026 ingaat en is de eerste release binnen die
+combinatie.
 
-Er zijn aanvullende labels beschikbaar voor pre-release en build-metadata om toe te voegen aan het `MAJOR.MINOR.PATCH`-formaat.
+Pre-releaselabels geven de implementatiestatus van een beleidsboekversie aan:
 
-Bijvoorbeeld: stel dat de huidige versie `0.1.3-alpha` is.
+- `-alpha`: de implementatie is nog niet compleet;
+- `-beta`: de implementatie is compleet, maar de validatie loopt nog;
+- `-rc`: de implementatie en validatie zijn compleet en de versie is kandidaat
+  voor de definitieve release;
+- zonder label: de versie is definitief.
 
-- De suffix `-alpha` wordt gebruikt zolang de software nog niet volledig is, bijvoorbeeld zolang nog niet alle beoogde stelselgroepen geïmplementeerd zijn
-- Wanneer een nieuwe release alleen compatibele bugfixes of updates van dependencies bevat, wordt de nieuwe versie `0.1.4-alpha`
-- Wanneer een nieuwe release ook compatibele nieuwe functionaliteit toevoegt, bijvoorbeeld de implementatie van een nieuwe stelselgroep, dan wordt de nieuwe versie `0.2.0-alpha`.
-- Wanneer alle beoogde stelselgroepen geïmplementeerd zijn, wordt de nieuwe versie `1.0.0-beta`. De publieke api mag vanaf dan enkel nog backwards-compatible wijzigen.
-- Wanneer de software volledig is en in productie genomen wordt, wordt de nieuwe versie `1.0.0`
-- Wanneer er een incompatible wijziging is in de VERA modellen, wordt de nieuwe versie `2.0.0`, eventueel met het `-alpha` of `-beta` label, afhankelijk van de implementatiestatus.
+Zo kan `5.202701.0-alpha` naast compatibele updates zoals `5.202607.1` worden
+gepubliceerd. Installatietools selecteren pre-releases alleen wanneer de gebruiker
+daar expliciet om vraagt.
 
 ## Releaseproces
 
@@ -28,12 +39,14 @@ Om een nieuwe release te starten, moet er een Git tag aangemaakt worden volgens 
 Bijvoorbeeld:
 
 ```bash
-$ git tag v0.2.3-alpha
-$ git push --tags
+git tag v5.202607.0
+git push --tags
 ```
 
 Hiermee start het releaseproces, gedefinieerd in een GitHub workflow: [.github/workflows/publish-to-pypi.yml](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.github/workflows/publish-to-pypi.yml)
 
-In dit proces wordt een package aangemaakt met een [Python versienummer](https://packaging.python.org/en/latest/discussions/versioning/), afgeleid van het SemVer nummer in de tag. Bijvoorbeeld: `0.2.3-alpha` wordt `0.2.3a0`
+In dit proces wordt een package aangemaakt met een Python-versienummer dat is
+afgeleid van de tag. Een pre-releasetag zoals `v5.202701.0-alpha` wordt daarbij
+genormaliseerd naar `5.202701.0a0`.
 
-De package wordt eerst gepubliceerd op [TestPyPi](https://test.pypi.org/project/woningwaardering/). Na goedkeuring wordt de package naar [PyPi](https://pypi.org/project/woningwaardering/) gepubliceerd. Daarna wordt er een release aangemaakt in GitHub, met een changelog met de titel en link naar alle pull requests die deel uitmaken van deze release. 
+De package wordt eerst gepubliceerd op [TestPyPi](https://test.pypi.org/project/woningwaardering/). Na goedkeuring wordt de package naar [PyPi](https://pypi.org/project/woningwaardering/) gepubliceerd. Daarna wordt er een release aangemaakt in GitHub, met een changelog met de titel en link naar alle pull requests die deel uitmaken van deze release.
