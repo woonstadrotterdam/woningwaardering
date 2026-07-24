@@ -32,6 +32,17 @@ Zo kan `5.202701.0-alpha` naast compatibele updates zoals `5.202607.1` worden
 gepubliceerd. Installatietools selecteren pre-releases alleen wanneer de gebruiker
 daar expliciet om vraagt.
 
+### Overgang vanaf versie 5.202607.0
+
+We gebruiken deze versienummering vanaf versie `5.202607.0`. Tot en met versie
+`4.3.4` stond `MINOR` voor compatibele nieuwe functionaliteit en `PATCH` voor
+compatibele bugfixes. Vanaf versie `5.202607.0` identificeert `MINOR` de
+beleidsboekversie als `YYYYMM` en telt `PATCH` de compatibele releases binnen die
+beleidsboekversie.
+
+De verhoging van `MAJOR` naar `5` markeert de incompatibele wijzigingen in de
+publieke outputstructuur van deze release.
+
 ## Releaseproces
 
 Om een nieuwe release te starten, moet er een Git tag aangemaakt worden volgens het format `v<versienummer>`. De prefix `v` geeft aan dat de tag een versiepunt markeert.
