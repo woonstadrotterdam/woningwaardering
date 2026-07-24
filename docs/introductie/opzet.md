@@ -69,7 +69,7 @@ Een waardering direct onder de stelselgroep krijgt het id `{stelselgroep}__{segm
 
 Het criterium-id beschrijft daarmee zowel de identiteit van het criterium als de plek ervan in de hiërarchie. De punten en het aantal horen bij de waardering zelf en maken geen onderdeel uit van het criterium.
 
-Voor de gedeeld-met-lagen gelden vaste segmentnamen: `prive` bij een aantal van ten hoogste 1, en `gedeeld_met_{n}_{soort}` bij een aantal groter dan 1 (met enkele underscores rond het aantal en de soort).
+Voor de gedeeld-met-lagen gelden vaste segmentnamen: `prive` bij een aantal van ten hoogste 1, en `gedeeld_met_{n}_{soort}` bij een aantal groter dan 1.
 
 Een paar voorbeelden:
 
