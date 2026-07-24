@@ -8,7 +8,7 @@ De primaire context is de publieke `woningwaardering`-package. Lokale of organis
 
 - `README.md` beschrijft het doel, de juridische disclaimer, de actuele beleidsboekreferentie en de gebruikte VERA-versies.
 - `pyproject.toml` bevat de package-metadata, Python-versie en vastgelegde VERA-databronnen.
-- `docs/index.md` beschrijft conceptueel de package-opzet voor gebruikers (warnings-gedrag, outputstructuur).
+- `docs/aan-de-slag/index.md` beschrijft gebruik, warnings-gedrag en outputstructuur voor gebruikers.
 - `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, repository-structuur, naamgeving, tests, data, logging, releases en de criteriumstrategie (builders).
 - `docs/implementatietoelichtingen/` legt per stelselgroep vast welke beleidsboekregels wel of niet zijn geïmplementeerd en waarom.
 - Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Vanaf deze pagina's klik je door naar de algemene toelichting en de stelselgroepen.

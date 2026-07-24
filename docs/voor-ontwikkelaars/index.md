@@ -37,7 +37,7 @@ source .venv/bin/activate
 uv run pre-commit install
 ```
 
-Hiermee worden hooks voor `git commit` en `git push` geïnstalleerd (zoals in [`.pre-commit-config.yaml`](../../.pre-commit-config.yaml)). Zonder deze stap draaien er bij commit of push geen lokale checks; dezelfde checks draaien dan pas in CI.
+Hiermee worden hooks voor `git commit` en `git push` geïnstalleerd (zoals in [`.pre-commit-config.yaml`](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.pre-commit-config.yaml)). Zonder deze stap draaien er bij commit of push geen lokale checks; dezelfde checks draaien dan pas in CI.
 
 Na wijzigingen in `.pre-commit-config.yaml` volstaat meestal opnieuw committen of pushen; bij twijfel `uv run pre-commit install` opnieuw uitvoeren.
 
@@ -55,4 +55,4 @@ Na code- of testwijzigingen horen pytest en beide pre-commit-stappen (inclusief 
 
 ## Pull requests
 
-Gebruik de PR-template in [`.github/pull_request_template.md`](../../.github/pull_request_template.md). Verwijs naar een gerelateerd issue (`Closes #123` als het issue wordt opgelost) of leg uit welke verbetering je probeert toe te voegen met je PR.
+Gebruik de PR-template in [`.github/pull_request_template.md`](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.github/pull_request_template.md). Verwijs naar een gerelateerd issue (`Closes #123` als het issue wordt opgelost) of leg uit welke verbetering je probeert toe te voegen met je PR.

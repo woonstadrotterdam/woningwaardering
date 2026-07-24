@@ -1321,7 +1321,7 @@ PUNTEN VOOR DE WOZ-WAARDE
 
 Bij incomplete of onjuiste inputdata genereert de package een `UserWarning`. Standaard leidt dat tot een error, zodat duidelijk is dat invoer ontbreekt of onjuist is.
 
-Met `warnings.simplefilter("default", UserWarning)` blijft de waarschuwing zichtbaar, maar faalt de package niet: je krijgt dan wel een woningwaarderingresultaat. Zie [Aan de slag](aan-de-slag/index.md#gebruik) voor een concreet voorbeeld.
+Met `warnings.simplefilter("default", UserWarning)` blijft de waarschuwing zichtbaar, maar faalt de package niet: je krijgt dan wel een woningwaarderingresultaat. Zie [Gebruik](#gebruik) voor een concreet voorbeeld.
 
 Een `DeprecationWarning` (bijvoorbeeld voor tijdelijk nog ondersteunde, verouderde velden) wordt wel getoond en gelogd, maar leidt niet tot een error.
 
