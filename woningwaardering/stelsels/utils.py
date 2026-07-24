@@ -2,7 +2,6 @@ import asyncio
 import warnings
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
-from functools import wraps
 from importlib.resources import files
 from typing import Any, Callable, Counter, List, Tuple
 
@@ -938,28 +937,6 @@ def waarschuw_dubbele_ids(instance: BaseModel) -> None:
                 waarschuw_dubbele_ids(item)
 
 
-def _classificeer_ruimte_dec(
-    func: Callable[[EenhedenRuimte], Ruimtesoort | None],
-) -> Callable[[EenhedenRuimte], Ruimtesoort | None]:
-    """Logt de classificatie van de ruimte volgens het Woningwaarderingstelsel"""
-
-    @wraps(func)
-    def wrapper(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
-        ruimtesoort = func(ruimte)
-        if ruimtesoort is not None:
-            logger.debug(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geclassificeerd als een {ruimtesoort}"
-            )
-        else:
-            logger.debug(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) kan niet worden geclassificeerd als een ruimtesoort."
-            )
-        return ruimtesoort
-
-    return wrapper
-
-
-# @_classificeer_ruimte_dec
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
