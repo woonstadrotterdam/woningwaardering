@@ -2,6 +2,12 @@
 
 Dit onderdeel bevat informatie voor ontwikkelaars die willen bijdragen aan de package.
 
+## Repository-structuur
+
+De repository-structuur volgt de [referentiedata van stelselgroepen van de VERA-standaard](https://www.coraveraonline.nl/index.php/Referentiedata:WONINGWAARDERINGSTELSELGROEP): eerst de stelsels (bijvoorbeeld _zelfstandig_ en _onzelfstandig_) en daarbinnen de stelselgroepen (bijvoorbeeld _Energieprestatie_ en _Wasgelegenheid_).
+In de folders van de stelselgroepen staat de code voor het berekenen van de punten per stelselgroep. Als bepaalde logica voor zowel zelfstandige als onzelfstandige woningen geldt, staat die in de folder _gedeelde_logica_.
+De `woningwaardering`-package is zo opgezet dat stelselgroep-objecten en bijbehorende regels modulair zijn.
+
 ## Vereisten
 
 - Python-versie volgens `requires-python` in `pyproject.toml`

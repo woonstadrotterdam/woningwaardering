@@ -8,10 +8,10 @@ De primaire context is de publieke `woningwaardering`-package. Lokale of organis
 
 - `README.md` beschrijft het doel, de juridische disclaimer, de actuele beleidsboekreferentie en de gebruikte VERA-versies.
 - `pyproject.toml` bevat de package-metadata, Python-versie en vastgelegde VERA-databronnen.
-- `docs/introductie/opzet.md` beschrijft de repository-opzet, waarschuwingen, lookup-tabellen en de criteriumstrategie.
+- `docs/index.md` beschrijft conceptueel de package-opzet voor gebruikers (warnings-gedrag, outputstructuur).
+- `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, repository-structuur, naamgeving, tests, data, logging, releases en de criteriumstrategie (builders).
 - `docs/implementatietoelichtingen/` legt per stelselgroep vast welke beleidsboekregels wel of niet zijn geïmplementeerd en waarom.
 - Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Vanaf deze pagina's klik je door naar de algemene toelichting en de stelselgroepen.
-- `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, naamgeving, tests, data, logging en releases.
 - [Wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Besluit huurprijzen woonruimte)
 
 Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen geldt de volgende volgorde van autoriteit: **wettekst > online beleidsboek > implementatietoelichting**. De implementatietoelichting is een kopie van het online beleidsboek en kan achterlopen; bij twijfel of tegenstrijdigheid is de hoger geplaatste bron leidend. Tegenstrijdigheden moeten altijd worden vermeld. Zie de definities _Beleidsboek_ en _Implementatietoelichting_ hieronder voor hun relatie.
@@ -84,7 +84,7 @@ Een CSV-bestand met constanten of tabulaire regeldata die nodig zijn voor puntbe
 
 ### Criterium-id
 
-Een samengestelde identifier voor een criterium in de output. Het is een pad-id: de id wordt afgeleid uit de plek in de hiërarchie, waarbij elk segment met `__` aan de id van het bovenliggende criterium wordt gekoppeld. Zie `docs/introductie/opzet.md` voor de criteriumstrategie en de opbouw van deze id's.
+Een samengestelde identifier voor een criterium in de output. Het is een pad-id: de id wordt afgeleid uit de plek in de hiërarchie, waarbij elk segment met `__` aan de id van het bovenliggende criterium wordt gekoppeld. Zie `docs/index.md` voor de gebruikersgerichte uitleg van de outputstructuur en `docs/voor-ontwikkelaars/criteriumstrategie.md` voor de builders.
 
 ### bovenliggendeCriterium
 

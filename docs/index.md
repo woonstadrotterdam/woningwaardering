@@ -9,3 +9,8 @@
     start="<!--overzicht-start-->"
     end="<!--overzicht-end-->"
 %}
+{%
+    include-markdown "../README.md"
+    start="<!--implementatie-beleidsboek-start-->"
+    end="<!--implementatie-beleidsboek-end-->"
+%}
